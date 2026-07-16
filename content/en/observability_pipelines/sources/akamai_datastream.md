@@ -55,7 +55,7 @@ The following are required to send Akamai DataStream logs to Observability Pipel
 
 ## Metrics
 
-The Akamai DataStream source uses the HTTP Server source. For [component metrics][4] and [source buffer metrics][5] emitted by all sources, see the [Pipelines Usage Metrics][6] documentation. To filter or group by HTTP Server source metrics, use the tag `component_type:http_server`.
+For [component metrics][4] and [source buffer metrics][5] emitted by all sources, see the [Pipelines Usage Metrics][6] documentation. Since you use the HTTP server source to send logs from Akamai DataStream to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: https://control.akamai.com/apps/data-stream-ui/#/streams/group/all%20

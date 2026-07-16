@@ -86,7 +86,7 @@ After your Logpush job has been successfully created, you can view your Cloudfla
 
 ## Metrics
 
-For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. The Cloudflare Logpush source uses the HTTP Server source. To filter or group by HTTP Server source metrics, use the tag `component_type:http_server`.
+For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. Since you use the HTTP server source to send logs from Cloudflare Logpush to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 
 [1]: https://www.cloudflare.com/en-in/ips/
 [2]: https://app.datadoghq.com/observability-pipelines
