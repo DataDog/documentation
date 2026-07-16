@@ -129,12 +129,12 @@ To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Se
   1. Click **Edit** to make the field editable so you can make your changes.
   1. Click **Save**.
 - **Situational Context**: Investigation-specific facts that Bits Security Analyst should apply in specific situations. You can search and filter the table of context entries, and choose to view expired entries, to get an overview of existing context.
-  1. Click **Create Context Entry**. A window opens, in which you can enter:
+  1. Click **Create Context Entry**. In the window that opens, enter:
      1. **Title**: A short title for your entry.
      1. **Context description**: The information you want Bits Security Analyst to take into account.
      1. **Status**: Choose to enable this piece of context, or to save it without enabling it.
      1. **Expiration date** (optional): A date for Bits Security Analyst to stop taking this piece of context into account.
-  1. Click **Create Entry**. The window closes.
+  1. Click **Create Entry**. The window closes and your context appears in the table.
 
 ### Get notifications for completed investigations
 
