@@ -102,7 +102,7 @@ To configure the SDK using a JSON file, create `datadog.json` in the instrumente
   On Linux, the names of environment variables are case-sensitive.
 </div>
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 
