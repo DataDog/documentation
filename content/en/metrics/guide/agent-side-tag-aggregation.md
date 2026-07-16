@@ -26,12 +26,6 @@ Agent-side tag aggregation is in Preview.
 
 Agent-side tag aggregation lets you reduce custom metric volume. It filters out unwanted tags and re-aggregates selected custom metrics in the Datadog Agent before those metrics are sent to Datadog.
 
-## How it works
-
-Tag aggregation is performed locally by the Agent, but rules are centrally managed in the Datadog UI. This gives teams a single place to configure, view, and update tag aggregation behavior, while eligible Agents apply those rules before ingestion.
-
-For each custom metric configured for Agent-side tag aggregation, the tags that are retained or removed are determined by that metric's tag configuration. This configuration is resolved from [Tag Indexing rules][1] and any per-metric [Metrics without Limits™][2] tag overrides.
-
 ## Prerequisites
 
 Creating and updating Agent-side tag aggregation rules requires the [`metric_tags_write`][3] RBAC permission. All users can view existing tag aggregation rules.
@@ -111,6 +105,12 @@ data_plane:
 {{% /tab %}}
 {{< /tabs >}}
 
+## How it works
+
+Tag aggregation is performed locally by the Agent, but rules are centrally managed in the Datadog UI. This gives teams a single place to configure, view, and update tag aggregation behavior, while eligible Agents apply those rules before ingestion.
+
+For each custom metric configured for Agent-side tag aggregation, the tags that are retained or removed are determined by that metric's tag configuration. This configuration is resolved from [Tag Indexing rules][1] and any per-metric [Metrics without Limits™][2] tag overrides.
+
 ## How rules are applied
 
 Agent-side tag aggregation rules are applied only by Agents that meet all of the following requirements:
@@ -155,7 +155,7 @@ The initial Preview release has the following limitations:
 - Up to 500 metric names can be configured for Agent-side tag aggregation.
 - Only DogStatsD distribution metrics and DogStatsD count and rate metrics are supported.
 - Windows and macOS are not supported.
-- API support for managing Agent-side tag aggregation rules is planned for a future iteration.
+- Managing Agent-side tag aggregation rules through the API is not supported.
 
 When Agent-side tag aggregation rules are configured, Agent Data Plane resource usage may increase by up to 10% CPU and up to 25% resident set size (RSS). These limits are intended to minimize the resource usage impact on the Agent during the Preview.
 
