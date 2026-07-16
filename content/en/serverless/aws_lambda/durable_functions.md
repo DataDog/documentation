@@ -46,7 +46,7 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
 
         - `Statuses`: a comma-separated list of execution statuses to forward. Valid values are `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`. Leave this empty to forward all statuses.
         - `FunctionArnFilter1` through `FunctionArnFilter5`: up to five unqualified Lambda function ARNs or EventBridge wildcard patterns, such as `arn:aws:lambda:us-east-2:123456789012:function:my-durable-*`. Do not include a version or alias suffix. Leave all five empty to forward events from every function in the region.
-        - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`–`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
+        - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`-`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
 
     5. Click **Create stack** and wait for the stack to finish creating.
     6. If your durable functions run in multiple AWS regions, repeat these steps in each region.
