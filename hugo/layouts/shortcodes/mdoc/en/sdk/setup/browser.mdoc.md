@@ -31,7 +31,7 @@ Create or find the application in the Datadog UI, or from the terminal. The term
 3. On the application's **SDK Configuration** page, copy its `clientToken` and `applicationId`.
 {% /tab %}
 {% tab label="Terminal (API)" %}
-If your connected agent tools cannot list, select, or create RUM applications, use the API. You need a Datadog [API key and application key][16]. The application key must have the `rum_apps_read` permission to inspect and reuse applications, and the `rum_apps_write` permission to create one. Store these privileged keys in terminal environment variables. Do not add them to frontend code or client-side environment files.
+If you prefer the terminal, or your tooling cannot manage RUM applications, use the API. You need a Datadog [API key and application key][16]. The application key must have the `rum_apps_read` permission to inspect and reuse applications, and the `rum_apps_write` permission to create one. Store these privileged keys in terminal environment variables. Do not add them to frontend code or client-side environment files.
 
 Your site's API base URL is {% region-param key="dd_api" /%}. Copy that value into `DD_API_BASE_URL`, then list existing applications before creating one:
 
@@ -313,7 +313,6 @@ datadogRum.init({
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
-   sessionReplaySampleRate: 0,
 });
 
 ```
@@ -345,7 +344,6 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      sessionReplaySampleRate: 0,
     });
   })
 </script>
@@ -365,7 +363,6 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-      sessionReplaySampleRate: 0,
     });
 </script>
 ```
@@ -373,9 +370,9 @@ window.DD_RUM.init({
 {% /tab %}
 {% /tabs %}
 
-The examples disable Session Replay. Set a non-zero `sessionReplaySampleRate` only after you decide to collect replay data and review the [Session Replay privacy options][18].
-
 For single-page applications (SPAs), the Browser SDK automatically tracks URL changes that use the History API and creates a view for each route change. The React integration is not required for basic SPA route tracking. Use React-specific integration when you need capabilities such as route-pattern view names or Error Boundaries.
+
+If your application already initializes RUM, reuse the existing `init` call and application instead of adding a second one.
 
 #### Configure tracking consent (GDPR compliance)
 
@@ -394,9 +391,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
-Available agent tools vary. If the agent cannot identify the target organization or manage RUM applications, use the UI or API workflow in [Create the application][19]. Then provide the browser-safe `applicationId`, `clientToken`, and Datadog site through an ignored local environment file. Do not provide the privileged API key or application key to frontend code.
-
-Before the agent changes the application, ask it to inspect existing packages, SDK initialization, environment files, and RUM applications. It should preserve working configuration, add missing values, and avoid duplicate initialization or applications.
+If the automated setup cannot manage RUM applications for your organization, follow the UI or API steps in [Create the application][19] and pass the resulting `applicationId`, `clientToken`, and site to your app. Keep the API and application keys out of client-side code.
 
 {% /collapse-content %}
 
@@ -461,6 +456,5 @@ Your application appears as pending on the Applications page until Datadog start
 [15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
 [16]: /account_management/api-app-keys/
 [17]: /api/latest/rum/#create-a-new-rum-application
-[18]: /session_replay/browser/privacy_options/
 [19]: #create-the-application
 [20]: https://app.datadoghq.com/rum/sessions
