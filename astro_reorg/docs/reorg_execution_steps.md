@@ -23,6 +23,7 @@ Announce the reorg:
 
 ### 1. Bump the announcement in the #documentation channel
 
+See link you saved above.
 
 ### 2. Remind the docs on-call of the reorg
 
@@ -54,11 +55,15 @@ If you have questions, please reach out in #docs-repo-reorg-support.
 
 ## The day of
 
-NOTE: This file will get deleted from your reorg branch, so don't edit it there. Edit it here instead.
+NOTE: This file will get deleted from your reorg branch, so don't edit it there. You can push what you have, then check it off [here](https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/astro_reorg/docs/reorg_execution_steps.md) instead.
 
 ### 1. Bump the announcement in the #documentation channel
 
+See link you saved above.
+
 ### 2. Bump the detailed message in #docs-backroom
+
+See link you saved above.
 
 ### 3. Declare a code freeze
 
