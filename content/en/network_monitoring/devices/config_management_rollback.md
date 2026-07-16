@@ -14,10 +14,10 @@ further_reading:
 
 Network Configuration Management (NCM) rollbacks let you restore a network device to a previous configuration directly from Datadog. Rollbacks use a [Private Action Runner (PAR)][1] to apply the selected configuration back to the device.
 
-Rollbacks are currently supported for the following vendors and platforms:
+Rollbacks are supported for the following vendors and platforms:
 
 - Cisco IOS
-- Aruba (EOS)
+- Arista (EOS)
 
 ## Prerequisites
 
@@ -72,11 +72,11 @@ Rollbacks are currently supported for the following vendors and platforms:
 ### Private Action Runner
 
 1. [Set up a Private Action Runner][1] on a host that the Agent's IPC port can reach.
-2. Enable the `com.datadoghq.remoteaction.networkconfigmanagement` remote action bundle on the runner.
-3. Register the runner in Datadog and assign it to an execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action (via creating a policy within the execution group).
+2. Add `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` to the `private_action_runner.actions_allowlist` section of `/etc/datadog-agent/datadog.yaml`. See [Change the allowlist of a runner][3] for details.
+3. Register the runner in Datadog and assign it to an execution group. Within that group, create a policy within the execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action.
    - The policy must grant `Editor` access to users with the `NCM Device Config Write` role.
 
-   {{< img src="/network_device_monitoring/config_mgmt/exeuction_group_policy.png" alt="TODO: describe what this screenshot shows" style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/execution_group_policy.png" alt="TODO: Screenshot that shows how to add the NCM Write role to an execution group policy" style="width:100%;" >}}
 
 ### Permissions
 
@@ -87,7 +87,6 @@ Rollbacks use the following NCM permissions:
 | NCM Read | Viewing device configurations |
 | NCM Write | Triggering a rollback |
 
-Users who trigger rollbacks need the NCM Write permission active on their account.
 
 ## Trigger a rollback
 
@@ -95,7 +94,7 @@ Users who trigger rollbacks need the NCM Write permission active on their accoun
 2. Select the configuration version you want to roll back to. The side panel displays a {{< ui >}}Rollback{{< /ui >}} button for that version.
 3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal, and click {{< ui >}}Rollback{{< /ui >}} again to confirm.
 
-   {{< img src="/network_device_monitoring/config_mgmt/rollback_confirm.png" alt="TODO: describe what this screenshot shows" style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/rollback_confirm.png" alt="TODO: Screenshot that shows how to initiate a rollback and what to expect" style="width:100%;" >}}
 
 
 ## Further Reading
@@ -104,3 +103,4 @@ Users who trigger rollbacks need the NCM Write permission active on their accoun
 
 [1]: /actions/private_actions/
 [2]: /network_monitoring/devices/config_management/#viewing-configurations
+[3]: /actions/private_actions/use_private_actions/?tab=linux#change-the-allowlist-of-a-runner
