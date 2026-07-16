@@ -42,8 +42,9 @@ Learn more about the [compatibility requirements][6].
 ### Configure the prompt
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
-   {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The Agent Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
+   {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluation page after selecting Create Evaluation ." style="width:100%;" >}}
 1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle to enable tracing. Evaluation traces will appear under `datadog-evaluations` when this evaluation is run, allowing greater visibility into your evaluations. **Note:** Enabling tracing increases the number of billed spans sent to Datadog. 
+    {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Select the {{< ui >}}Model{{< /ui >}} to configure the model. 
     1. Select the {{< ui >}}Accout{{< /ui>}}  drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
@@ -99,7 +100,7 @@ Span Input: {{span_input}}
    2. Select one of the spans on the right to view its JSON.
    3. Select the {{< ui >}}+{{< /ui >}} to add the JSON into your user prompt
 
-{{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
+{{< img src="llm_observability/evaluations/custom_llm_judge_2-5.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
 ### Define the evaluation output
 
@@ -499,7 +500,7 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluatio
       - `@name:agent.workflow AND env:prod` to filter by span name and tag
    - {{< ui >}}Sampling Rate{{< /ui >}}: (Optional) Apply sampling (for example, 10%) to control evaluation cost.
 
-{{< img src="llm_observability/evaluations/evaluation_scope.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/evaluation_scope_1.png" alt="Configuring the evaluation scope." style="width:100%;" >}}
 
 ### Test and preview
 
