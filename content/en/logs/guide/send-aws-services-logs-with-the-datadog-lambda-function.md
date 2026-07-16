@@ -475,4 +475,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [75]: /integrations/amazon-pcs/
 [76]: /integrations/amazon_glue/
 [77]: /integrations/amazon_glue/#log-collection
-[78]: /integrations/amazon_elasticbeanstalk/
+[78]: /integrations/amazon-elastic-beanstalk/
