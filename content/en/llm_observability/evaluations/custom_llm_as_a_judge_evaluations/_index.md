@@ -33,7 +33,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 ## Create a custom LLM-as-a-judge evaluation
 
-You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can provide an evaluation description to generate an evaluation, use and build on existing [template LLM-as-a-judge evaluations][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations
+You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can provide an evaluation description to generate an evaluation, use and build on existing [template LLM-as-a-judge evaluations][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations.
 
 <div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
 
@@ -43,7 +43,7 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluation page after selecting Create Evaluation ." style="width:100%;" >}}
-1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle to enable tracing. Evaluation traces will appear under `datadog-evaluations` when this evaluation is run, allowing greater visibility into your evaluations. **Note:** Enabling tracing increases the number of billed spans sent to Datadog. 
+1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle to enable tracing. Evaluation traces will appear under `datadog-evaluations` when this evaluation is run, allowing greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog. 
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Select the {{< ui >}}Model{{< /ui >}} to configure the model. 
