@@ -569,7 +569,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             f"This PR replays the commits from #{pr_number} with file paths "
             f"translated to the post-reorg `hugo/` layout. The original commits "
             f"are preserved — same messages and authorship.\n\n"
-            f"If this looks correct, merge this PR and close #{pr_number}.\n\n"
+            f"The original PR (#{pr_number}) has been closed.\n\n"
             f"---\n\n"
             f"**Original PR description:**\n\n{original_body}"
         )
