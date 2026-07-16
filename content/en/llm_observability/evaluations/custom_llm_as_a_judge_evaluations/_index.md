@@ -52,7 +52,7 @@ Learn more about the [compatibility requirements][6].
         - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
     1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model.
 1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by selecting the button to the right of the sampling rate.
-1. In the {{< ui >}}Template{{< /ui >}} section, use the drop-down menu:
+1. In the {{< ui >}}Template{{< /ui >}} section, use the dropdown menu:
    - {{< ui >}}Create from scratch{{< /ui >}}: Use your own custom prompt (defined in the next step).
    - {{< ui >}}Failure to Answer{{< /ui >}}, {{< ui >}}Prompt Injection{{< /ui >}}, {{< ui >}}Sentiment{{< /ui >}}, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
 1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter your custom prompt or modify a prompt template.
