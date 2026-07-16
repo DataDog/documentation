@@ -292,7 +292,7 @@ The Sensitive Data Scanner processor is CPU intensive. Use the following best pr
 
 Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][13] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data and which ones might need to be refined or could be disabled. For example:
 - NEED EXAMPLE of when you'd refine a rule
-- If you don't ingest TKTK logs, disable those rules to prevent them from adding unnecessary CPU overhead.
+- If you don't ingest logs with network and device information, disable those rules to prevent them from adding unnecessary CPU overhead.
 
 1. Navigate to Dashboards > [Observability Pipelines Overview][13].
 1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
