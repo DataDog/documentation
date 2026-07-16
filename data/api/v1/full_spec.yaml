@@ -20565,7 +20565,7 @@ components:
           type: boolean
         ignore_certificate_validation:
           description: |-
-            For SSL tests, whether or not the test should ignore certificate validation.
+            For SSL tests, whether the test should ignore certificate validation.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds) for browser tests.
@@ -20808,6 +20808,10 @@ components:
           type: string
         httpVersion:
           $ref: "#/components/schemas/SyntheticsTestOptionsHTTPVersion"
+        ignore_certificate_validation:
+          description: |-
+            For SSL tests, whether the test should ignore certificate validation.
+          type: boolean
         isMessageBase64Encoded:
           description: Whether the message is base64 encoded.
           type: boolean

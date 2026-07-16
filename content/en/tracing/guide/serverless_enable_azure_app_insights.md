@@ -42,6 +42,7 @@ Before you can use the Azure App Insights Integration, set up the following:
 Datadog enriches converted spans with Azure resource metadata for the following services:
 
 - Azure Functions
+- Azure App Service
 - Azure Storage
 - Azure Cosmos DB
 - Azure API Management
