@@ -105,7 +105,7 @@ For vulnerabilities with available fixes, the {{< ui >}}Findings{{< /ui >}} page
 
 In [{{< ui >}}Container Images{{< /ui >}}][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
 
-For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View container images in Datadog][https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score].
+For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View container images in Datadog][23].
 
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
 
@@ -158,6 +158,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [20]: https://www.datadoghq.com/product-preview/security-automation-pipelines/
 [21]: /security/cloud_security_management/setup/ci_cd
 [22]: /security/cloud_security_management/setup/ci_cd/#link-dockerfile-to-vulnerabilities
+[23]: https://app.datadoghq.com/security/csm/vm?query=-%40risk.is_image_running%3Afalse%20%40status%3Aopen%20%40risk.has_exploit_available%3Atrue%20%40remediation.is_available%3Atrue%20%40severity%3A%28high%20OR%20critical%29%20%40vulnerability.is_inherited_from_base_image%3Atrue&group=none&order=desc&sort=score
 
 ## Further reading
 
