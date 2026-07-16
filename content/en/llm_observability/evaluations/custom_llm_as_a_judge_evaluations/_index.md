@@ -33,7 +33,7 @@ Custom LLM-as-a-judge evaluations use an LLM to judge the performance of another
 
 ## Create a custom LLM-as-a-judge evaluation
 
-You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can start from scratch or use and build on existing [template LLM-as-a-judge evaluations][7] we provide.
+You can create and manage custom evaluations from the [Evaluations page][1] in Agent Observability. You can provide an evaluation description to generate an evaluation, use and build on existing [template LLM-as-a-judge evaluations][7] we provide, or start from scratch. You can enable tracing to see traces from your evaluations
 
 <div class="alert alert-info">If you already have an <code>LLMJudge</code> defined in the SDK, you can publish it directly to Datadog without rebuilding the configuration in the UI. See <a href="/llm_observability/guide/evaluation_developer_guide/#publishing-an-llmjudge-as-a-datadog-managed-evaluation">Publishing an LLMJudge as a Datadog managed evaluation</a>.</div>
 
@@ -43,13 +43,15 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The Agent Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
+1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle so that tracing is enabled. Evaluation traces will now appear under `datadog-evaluations`, allowing you to have greater visibility into your evaluations. Note that enabling tracing will increase the number of billed spans sent to Datadog. 
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
-1. Use the {{< ui >}}Account{{< /ui >}} drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
-    - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
-    - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
-1. Use the {{< ui >}}Model{{< /ui >}} drop-down menu to select a model to use for your LLM judge.
-1. Under {{< ui >}}Evaluation Scope{{< /ui >}}, select the application you want to evaluate.
-1. Under {{< ui >}}Evaluation Prompt{{< /ui >}} section, use the {{< ui >}}Prompt Template{{< /ui >}} drop-down menu:
+1. Select the {{< ui >}}Model{{< /ui >}} to configure the model. 
+    1. Select the {{< ui >}}Accout{{< /ui>}}  drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+        - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
+        - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
+    1. Use the {{< ui >}}Model{{< /ui >}} drop-down menu to select a model to use for your LLM judge.
+1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by clicking the button to the right of sampling.
+1. In the {{< ui >}}Template{{< /ui >}} section, use the drop-down menu:
    - {{< ui >}}Create from scratch{{< /ui >}}: Use your own custom prompt (defined in the next step).
    - {{< ui >}}Failure to Answer{{< /ui >}}, {{< ui >}}Prompt Injection{{< /ui >}}, {{< ui >}}Sentiment{{< /ui >}}, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
 1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter your custom prompt or modify a prompt template.
@@ -90,12 +92,12 @@ Span Input: {{span_input}}
 ```
 {{% /collapse-content %}}
 
-8. In the {{< ui >}}User{{< /ui >}} field, provide your user prompt. Explicitly specify what parts of the span, trace, or session to evaluate. You can reference any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. An autocomplete dropdown appears when you type `{{` to help you select available fields.
+8. In the {{< ui >}}User Prompt{{< /ui >}} field, specify what parts of the span, trace, or session to evaluate by adding variables. You can add any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. To freely edit the user prompt, select the user prompt and edit the text.
 
-   You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Spans in Selected Trace{{< /ui >}} in trace scope) to add span data as a variable:
-   1. Choose an account and an application so that spans/traces show up on the right.
+   You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Filtered Traces{{< /ui >}} in trace scope, {{< ui >}}Filtered Sessions{{< /ui >}} in session scope) to add span data as a variable:
+   1. Choose an account and an application so that spans/traces/sessions show up on the right.
    2. Select one of the spans on the right to view its JSON.
-   3. Use the three-dots menu and select {{< ui >}}Add variable to message{{< /ui >}} to insert the JSON into your prompt.
+   3. Select the {{< ui >}}+{{< /ui >}} to add the JSON into your user prompt.
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
@@ -504,6 +506,8 @@ Under {{< ui >}}Evaluation Scope{{< /ui >}}, define where and how your evaluatio
 The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corresponding to the configured evaluation scope.
 
 Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluation{{< /ui >}} to pre-fill inputs to your evaluation with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
+
+To enable tracing for your evaluation, select the toggle so that Tracing Enabled is on.
 
 ## Viewing and using results
 
