@@ -224,7 +224,7 @@ By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. 
 
 4. Name your pipeline.
 5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][8].
-6. (Optional) Add a [Pipeline Simulation](#pipeline-simulation) to preview the impact of your changes before publishing them.
+6. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before publishing them.
 7. Press {{< ui >}}Create{{< /ui >}}.
 
 An example of a log transformed by a pipeline:
@@ -265,8 +265,8 @@ It's also possible to copy an integration pipeline using the clone button.
 
 1. Navigate to [Pipelines][8] in Datadog.
 2. Hover over a pipeline and click the arrow next to it to expand processors and nested pipelines.
-3. (Optional) Add a [Pipeline Simulation](#pipeline-simulation) to preview the impact of your changes before publishing them.
-4. Select {{< ui >}}Add Processor{{< /ui >}} or {{< ui >}}Add Nested Pipeline{{< /ui >}}.
+3. Select {{< ui >}}Add Processor{{< /ui >}} or {{< ui >}}Add Nested Pipeline{{< /ui >}}.
+4. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before publishing them.
 
 ### Processors
 
@@ -288,17 +288,22 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
 1. Click {{< ui >}}Move{{< /ui >}}.
 
-## Pipeline Simulation
+## Simulate pipeline changes
 
-<!-- lead with action or outcome? -->
+Pipeline Simulation previews how your changes affect logs before you publish them. It uses a live tail of your logs, processed with your proposed changes. Open it while creating or editing a pipeline or processor.
 
-Pipeline Simulation uses a live tail of your logs as they would be processed with the proposed changes. This allows you to preview how your changes will affect logs before you publish them. Open it while creating or editing a pipeline or processor.
+When you add or edit processors, compare each log's before and after state:
 
-When you add or edit processors, you can compare each log's state from before or after the pipeline simulation. **Before** shows the log as processed by the pipeline's current, published configuration, while **After** previews it with the changes you're making with this simulation applied. Both reflect the rest of the pipeline chain, including anything that runs after this step. Narrow the log list further with the query filter, or by impact: **All logs**, **Impacted logs** (changed by your edits in this session), or **Not impacted logs**.
+- **Before** shows the log as processed by the pipeline's current, published configuration.
+- **After** previews the log with the changes you're making in this simulation applied.
 
-<!-- add relative link on how to do this ie see x to use pipeline simulation -->
-<!-- add table describing the scope/impact of each query filter? -->
+**Note**: **Before** reflects the state prior to the specific change you're making, not the raw log before the entire pipeline. Both states reflect the rest of the pipeline chain, including processors that run after this step.
 
+To narrow the log list, use the query filter or filter by impact:
+
+- **All logs**: every log in the live tail.
+- **Impacted logs**: only logs changed by your edits in this session.
+- **Not impacted logs**: only logs your edits leave unchanged.
 
 ## Manage your pipelines
 
