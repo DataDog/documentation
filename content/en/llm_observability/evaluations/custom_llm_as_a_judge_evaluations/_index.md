@@ -43,7 +43,7 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO.png" alt="The Agent Observability Evaluations page with the Create Evaluation side panel opened." style="width:100%;" >}}
-1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle so that tracing is enabled. Evaluation traces will now appear under `datadog-evaluations`, allowing you to have greater visibility into your evaluations. Note that enabling tracing will increase the number of billed spans sent to Datadog. 
+1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle to enable tracing. Evaluation traces will appear under `datadog-evaluations` when this evaluation is run, allowing greater visibility into your evaluations. **Note:** Enabling tracing increases the number of billed spans sent to Datadog. 
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Select the {{< ui >}}Model{{< /ui >}} to configure the model. 
     1. Select the {{< ui >}}Accout{{< /ui>}}  drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
@@ -97,7 +97,7 @@ Span Input: {{span_input}}
    You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Filtered Traces{{< /ui >}} in trace scope, {{< ui >}}Filtered Sessions{{< /ui >}} in session scope) to add span data as a variable:
    1. Choose an account and an application so that spans/traces/sessions show up on the right.
    2. Select one of the spans on the right to view its JSON.
-   3. Select the {{< ui >}}+{{< /ui >}} to add the JSON into your user prompt.
+   3. Select the {{< ui >}}+{{< /ui >}} to add the JSON into your user prompt
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_2-4.png" alt="The menu contents of the JSON view in the custom evaluation configuration right pane, displaying the option to Add variable to message." style="width:40%;" >}}
 
