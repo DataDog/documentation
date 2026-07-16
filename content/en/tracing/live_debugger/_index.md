@@ -76,7 +76,7 @@ For Java, Python, .NET, and Node.js services with a recent SDK version and all o
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
 {{< programming-lang lang="java" >}}
-**Requirement**: [Datadog Java SDK][6] version 1.64.0 or higher, running on JDK 8 or higher.
+**Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Datadog Java SDK</a> version 1.64.0 or higher, running on JDK 8 or higher.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
 
@@ -94,7 +94,7 @@ java \
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-**Requirement**: [Datadog Python SDK (`ddtrace`)][5] version 4.11.0 or higher.
+**Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Datadog Python SDK (<code>ddtrace</code>)</a> version 4.11.0 or higher.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
 
@@ -109,7 +109,7 @@ ddtrace-run python -m myapp.py
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
-**Requirement**: [Datadog .NET SDK][7] version 3.46.0 or higher.
+**Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">Datadog .NET SDK</a> version 3.46.0 or higher.
 
 Start your service with the following environment variables set:
 
@@ -122,7 +122,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
-**Requirement**: [Datadog Node.js SDK (`dd-trace-js`)][8] version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+**Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/">Datadog Node.js SDK (<code>dd-trace-js</code>)</a> version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
 Start your service with the following environment variables set:
 
@@ -139,7 +139,7 @@ Ruby services must be enabled through environment variables. Auto-enablement fro
 
 **Requirements:**
 
-- [Datadog Ruby SDK (`ddtrace`)][9] version 2.35.0 or higher
+- <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Datadog Ruby SDK (<code>ddtrace</code>)</a> version 2.35.0 or higher
 - Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
 - A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
 - `RAILS_ENV` or `RACK_ENV` set to `production`
@@ -159,7 +159,7 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< programming-lang lang="php" >}}
 PHP services must be enabled through environment variables. Auto-enablement from the Settings page is not available for PHP.
 
-**Requirement**: [Datadog PHP SDK (`dd-trace-php`)][10] version 1.21.0 or higher.
+**Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/php">Datadog PHP SDK (<code>dd-trace-php</code>)</a> version 1.21.0 or higher.
 
 Start your service with the following environment variables set:
 
@@ -176,13 +176,13 @@ Go services require enabling Live Debugger in both the Datadog Agent and the app
 
 **Requirements:**
 
-- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
-- [Datadog Go SDK][22] version 2.9.0 or higher (or 1.74.6 or higher on the v1 line)
+- <a href="/agent/">Datadog Agent</a> version 7.73.0 or higher, running on the same host as your application
+- <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go">Datadog Go SDK</a> version 2.9.0 or higher (or 1.74.6 or higher on the v1 line)
 - Linux kernel 5.17 or higher
 
 **Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
 
-- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][29].
+- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see <a href="/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file">Agent configuration files</a>.
 
   ```yaml
   dynamic_instrumentation:
@@ -203,7 +203,7 @@ Go services require enabling Live Debugger in both the Datadog Agent and the app
       enabled: true
   ```
 
-**Configure your service**: After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26], or by starting the service with the following environment variables set:
+**Configure your service**: After the Agent is configured, services on the same host can be enabled from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a>, or by starting the service with the following environment variables set:
 
 ```shell
 DD_SERVICE=<YOUR_SERVICE>
