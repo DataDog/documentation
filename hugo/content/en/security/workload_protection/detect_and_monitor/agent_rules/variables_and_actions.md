@@ -137,7 +137,7 @@ Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal t
 
 In addition to defining `kill` actions in Agent policy files, you can configure process termination from the Datadog app:
 
-- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Active Protection](/security/workload_protection/respond_and_report/active_protection) to set supported out-of-the-box Agent rules to **Blocking** in Agent Configuration.
+- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/automated_response) to set supported out-of-the-box Agent rules to **Blocking** in Agent Configuration.
 - **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
 
 Both approaches require [Remediation](/security/workload_protection/respond_and_report/remediation) to be enabled on the Agent. See [Respond and Report](/security/workload_protection/respond_and_report/) for an overview of enforcement and remediation workflows.

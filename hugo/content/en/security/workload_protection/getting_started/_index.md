@@ -107,9 +107,9 @@ We've put together a testing playground for you to discover Workload Protection 
 
 ## 4) (optional) Request access to enforcement capabilities
 
-<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Active Protection.</div>
+<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
 
-Once you've been granted access to Active Protection, head over to the [Blocking threats proactively][4] page.
+Once you've been granted access to Automated response, head over to the [Automated response][4] page.
 
 ## 5) (optional) Advanced agent configurations
 
@@ -118,5 +118,5 @@ We've put together an [advanced agent configuration page][5] for power users to 
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
 [2]: /security/workload_protection/troubleshooting/threats
 [3]: https://github.com/DataDog/datadog-security-playground
-[4]: /
+[4]: /security/workload_protection/respond_and_report/automated_response
 [5]: /security/workload_protection/getting_started/advanced_configuration

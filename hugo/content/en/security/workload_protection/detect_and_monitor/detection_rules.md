@@ -87,7 +87,7 @@ You can define a matching Agent rule and threat detection rule in one of these w
 [2]: /security/workload_protection/investigate_and_triage/security_signals
 [3]: /security/default_rules/#cat-workload-security
 [4]: https://app.datadoghq.com/security/configuration/rules?product=cws
-[5]: /security/workload_protection/respond_and_report/active_protection
+[5]: /security/workload_protection/respond_and_report/automated_response
 [6]: https://app.datadoghq.com/security/agent-events
 [7]: /security/notifications/rules/
 [8]: /security/notifications/variables/

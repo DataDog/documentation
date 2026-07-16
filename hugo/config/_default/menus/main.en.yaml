@@ -8437,8 +8437,8 @@ menu:
       parent: workload_protection
       identifier: workload_protection_respond_and_report
       weight: 93
-    - name: Active Protection
-      url: security/workload_protection/respond_and_report/active_protection
+    - name: Automated response
+      url: security/workload_protection/respond_and_report/automated_response
       parent: workload_protection_respond_and_report
       identifier: workload_protection_respond_and_report_active_protection
       weight: 10

@@ -16,8 +16,8 @@ When you create an Agent configuration policy it contains the default rules only
 
 Here are some important [role and permissions][11] to use for custom rules RBAC:
 
-- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Active Protection][12] feature. Active Protection enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
-  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Automated response][12] feature. Automated response enables you to proactively block and terminate crypto mining threats identified by the Datadog Agent threat detection rules.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
 - The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 ## Policies
@@ -247,7 +247,7 @@ You can also disable a rule by setting the **Then...** section of a rule to {{< 
 [9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
-[12]: /security/workload_protection/guide/active-protection
+[12]: /security/workload_protection/respond_and_report/automated_response
 [13]: #disable-default-agent-rules
 [14]: #create-the-custom-agent-and-detection-rules-together
 [15]: https://app.datadoghq.com/cost/settings/tags
