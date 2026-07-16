@@ -391,7 +391,7 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 
 Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
 
-If the automated setup cannot manage RUM applications for your organization, follow the UI or API steps in [Create the application][19] and pass the resulting `applicationId`, `clientToken`, and site to your app. Keep the API and application keys out of client-side code.
+If the automated setup can't run in your environment, or can't create or select a RUM application, follow the UI or API steps in [Create the application][19] and pass the resulting `applicationId`, `clientToken`, and site to your app. Keep the API and application keys out of client-side code.
 
 {% /collapse-content %}
 
