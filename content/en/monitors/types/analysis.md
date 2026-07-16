@@ -62,7 +62,7 @@ If you select a published analysis built on an unsupported data source, Datadog 
 
 ## Monitor creation
 
-You can create an Analysis monitor in two ways:
+You can create an Analysis monitor in three ways:
 
 ### From the Monitors page
 
@@ -77,6 +77,14 @@ To create an Analysis monitor directly from a Notebook:
 3. Select {{< ui >}}Monitors{{< /ui >}}.
 
 This allows you to convert your exploratory analysis into an alerting monitor.
+
+### From the DDSQL Editor
+
+To create an Analysis monitor directly from the DDSQL Editor:
+
+1. Open the [DDSQL Editor][4] and select your desired query.
+2. Click the dropdown arrow next to {{< ui >}}Save to dashboard{{< /ui >}}.
+3. Select {{< ui >}}Create monitor{{< /ui >}}.
 
 ## Define the query
 
@@ -103,3 +111,4 @@ For detailed instructions on alert messaging, see [Notifications][3].
 [1]: https://app.datadoghq.com/monitors/create/analysis
 [2]: /monitors/configuration/
 [3]: /monitors/notify/
+[4]: https://app.datadoghq.com/ddsql/editor
