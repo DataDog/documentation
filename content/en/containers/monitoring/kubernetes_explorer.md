@@ -83,7 +83,6 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 
 - OpenTelemetry Collector Contrib [v0.154.0][102] or later.
 - OpenTelemetry Collector [Helm chart][107] v0.156.2 or later.
-- Access enabled on your Datadog instance. Contact your account representative to verify activation.
 
 #### Limitations
 
