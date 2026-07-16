@@ -69,9 +69,7 @@ Live Debugger requires the following minimum Datadog SDK versions:
 
 ### Enabling Live Debugger
 
-<div class="alert alert-info">To use Bits Live Debugger, see the <a href="/tracing/live_debugger/bits-live-debugger/">Bits Live Debugger</a> page for setup instructions.</div>
-
-For Java, Python, .NET, and Node.js services with a recent SDK version and all other requirements met, Live Debugger can be enabled from the [Live Debugger Settings page][26]. For other runtime languages or older SDK versions, see below for the configuration steps required to enable Live Debugger. Disabling Live Debugger for a service and environment can always be done from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
+For Java, Python, .NET, and Node.js services that meet the minimum SDK and setup requirements, enable Live Debugger from the [Live Debugger Settings page][26]. For other runtime languages or older SDK versions, use the configuration steps below. You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
@@ -286,7 +284,7 @@ Live Debugger has two redaction modes:
 - **Strict Mode**: Redacts all values except numbers and Booleans. Bits Live Debugger is not available for service and environment combinations set to Strict Mode.
 - **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, and IPs. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
-These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common pre-production environments like `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
+These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
 #### Identifier-based redaction
 
@@ -309,14 +307,6 @@ Bits Live Debugger is in Preview. Request access to join the waiting list.
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
 **Note**: Bits Live Debugger requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
-
-## Impact on performance and billing
-
-Enabling Live Debugger on a service does not trigger data capture or impact performance. Data capture only occurs when there are active Debug Sessions on that service.
-
-**Performance impact**: Datadog's agent-driven instrumentation ensures minimal impact on application performance; sampling logic, rate limits, and built-in budgets prevent runaway data capture.
-
-**Pricing impact**: Logs captured by Datadog are all billed the same way. This applies whether they are generated from Live Debugger or logger lines in your source code. With Live Debugger, the logpoints automatically expire after the set time period, limiting unnecessary data accumulation and costs. Monitor your [Datadog Plan & Usage page][18] for any unexpected increases after utilizing a new feature.
 
 ## Limitations
 
@@ -348,7 +338,6 @@ The following constraints apply to Live Debugger usage and configuration:
 [15]: /dynamic_instrumentation/expression-language/
 [16]: /dynamic_instrumentation/enabling
 [17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
-[18]: https://app.datadoghq.com/account/billing
 [19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
