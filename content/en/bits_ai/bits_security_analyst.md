@@ -120,6 +120,10 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
    </ol>
    {{< /collapse-content >}}
 
+### Get notifications for completed investigations
+
+You can create security notification rules to get a notification when Bits Security Analyst completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
+
 ## Disable Bits Security Analyst
 
 1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits Security Analyst{{< /ui >}}][3].
@@ -136,3 +140,4 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
 [4]: /actions/connections/
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
+[7]: /security/notifications/rules/#create-notification-rules
