@@ -338,3 +338,6 @@ playwright-report/
 .claude/*local*
 .superpowers/
 data/site_region_usage.json
+
+# Reorg tooling
+test_pr_list.md

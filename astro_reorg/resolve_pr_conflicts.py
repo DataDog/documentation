@@ -5,7 +5,7 @@ Defaults to a dry run where it just reports the changes
 that would be made.
 
 Usage:
-    python3 astro_reorg/resolve_pr_conflicts.py [--no-dry-run] [--live | --base-branch BRANCH] [--pr NUMBER ...] [--limit N]
+    python3 astro_reorg/resolve_pr_conflicts.py --limit N [--no-dry-run] [--live | --base-branch BRANCH] [--pr NUMBER ...]
 
 Flags:
     --no-dry-run          Actually apply fixes and labels instead of just reporting what would be done.
@@ -110,8 +110,9 @@ MOVES_TO_HUGO: set[str] = set(_config.get("moves_to_hugo", []))
 TOP_LEVEL: set[str] = set(_config.get("top_level", []))
 
 # Shared with create_test_prs.py: the mock base branch used for test runs. When
-# invoked with --test, the script treats this branch as the post-reorg base so
-# it operates on the same branch the test PRs were opened against.
+# invoked without --live or --base-branch, the script defaults to this branch
+# as the post-reorg base so it operates on the same branch the test PRs were
+# opened against.
 _TEST_CONFIG = _config.get("test", {})
 TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
@@ -566,6 +567,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
     """
     pr_number = pr["number"]
     head_ref = pr["headRefName"]
+    pr_base = pr["baseRefName"]
     is_fork = pr.get("isCrossRepository", False)
 
     if is_fork:
@@ -579,10 +581,11 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         print(f"  fetch failed: {fetch.stderr.strip()[:120]}", file=sys.stderr)
         return False
 
-    # The merge base is the last common ancestor of the PR branch and
-    # BASE_BRANCH — the point where the PR diverged from master before the
-    # reorg commit landed.
-    merge_base = git("merge-base", f"origin/{BASE_BRANCH}", pr_remote_ref)
+    # The merge base is the last common ancestor of the PR branch and the PR's
+    # actual base branch — the point where the PR diverged from master before
+    # the reorg commit landed. In production pr_base == BASE_BRANCH (master);
+    # in test mode it may be a per-run conflicting-base branch.
+    merge_base = git("merge-base", f"origin/{pr_base}", pr_remote_ref)
     if merge_base.returncode != 0:
         print(f"  could not find merge base: {merge_base.stderr.strip()[:80]}", file=sys.stderr)
         return False
@@ -623,7 +626,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
     fix_branch = f"reorg-fix/pr-{pr_number}"
     tmpdir = tempfile.mkdtemp(prefix=f"reorg_fix_{pr_number}_")
     try:
-        add_wt = git("worktree", "add", "-b", fix_branch, tmpdir, f"origin/{BASE_BRANCH}")
+        add_wt = git("worktree", "add", "-b", fix_branch, tmpdir, f"origin/{pr_base}")
         if add_wt.returncode != 0:
             # Creating the branch failed — most likely a reorg-fix/pr-<N> branch
             # from a prior run already exists.  We do NOT reset and reuse it:
@@ -667,7 +670,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             "pr", "create",
             "--repo", REPO,
             "--head", fix_branch,
-            "--base", BASE_BRANCH,
+            "--base", pr_base,
             "--title", new_pr_title,
             "--body", new_pr_body,
         )
@@ -701,10 +704,10 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 # ---------------------------------------------------------------------------
 
 def analyze_pr(pr: dict, dry_run: bool) -> bool:
-    """Process one PR. Return True if we acted on it (auto-fixed or labeled),
-    False if it needed no action (mergeable, mergeability not yet computed, or
-    no conflicts found locally). The return value drives --limit:
-    only acted-on PRs count toward it.
+    """Process one PR. Return True if we acted on it (auto-fixed or labeled in
+    a way that counts toward --limit), False otherwise (mergeability not yet
+    computed, no conflicts found locally, or MERGEABLE — which gets a label but
+    doesn't consume --limit). The return value drives --limit.
     """
     pr_number = pr["number"]
     title = pr["title"]
@@ -735,9 +738,21 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
         print(f"  fetch failed: {fetch.stderr.strip()[:120]}", file=sys.stderr)
         return False
 
+    # Use the PR's actual base branch for the merge test so the local result
+    # matches what GitHub computes. In production this is always BASE_BRANCH
+    # (master); in test mode the conflicting-base branch may differ because
+    # create_test_prs.py builds a per-run branch with extra base_edits baked in.
+    pr_base = pr["baseRefName"]
+    if pr_base != BASE_BRANCH:
+        fetch_base = git("fetch", "origin", pr_base)
+        if fetch_base.returncode != 0:
+            print(f"  fetch of PR base {pr_base!r} failed: "
+                  f"{fetch_base.stderr.strip()[:120]}", file=sys.stderr)
+            return False
+
     tmpdir = tempfile.mkdtemp(prefix=f"reorg_check_{pr_number}_")
     try:
-        add_wt = git("worktree", "add", "--detach", tmpdir, f"origin/{BASE_BRANCH}")
+        add_wt = git("worktree", "add", "--detach", tmpdir, f"origin/{pr_base}")
         if add_wt.returncode != 0:
             print(f"  worktree add failed: {add_wt.stderr.strip()[:120]}", file=sys.stderr)
             return False
