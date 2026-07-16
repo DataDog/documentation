@@ -20,25 +20,50 @@ The Browser SDK supports all modern desktop and mobile browsers.
 {% stepper level="h4" %}
 
 {% step title="Create the application" %}
-Creating a RUM application generates the `clientToken` and `applicationId` the SDK needs. Create it in the Datadog UI, or from the terminal (useful for AI coding agents and CI).
+Creating a RUM application generates the `clientToken` and `applicationId` the SDK needs. Before you create an application, check whether one already exists for the browser application you want to monitor. Reuse its configuration to avoid duplicate applications.
+
+Create or find the application in the Datadog UI, or from the terminal. The terminal workflow is useful for AI coding agents and CI.
 
 {% tabs %}
 {% tab label="Datadog UI" %}
-1. In Datadog, navigate to [**Digital Experience** > **Add an Application**][5] and select the JavaScript (JS) application type.
-2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
+1. In Datadog, navigate to [**Digital Experience** > **Applications**][5].
+2. Reuse an existing JavaScript (JS) application that represents the browser application you want to monitor. If no matching application exists, click **New Application**, select **JS**, enter a name, and click **Create Application**.
+3. On the application's **SDK Configuration** page, copy its `clientToken` and `applicationId`.
 {% /tab %}
 {% tab label="Terminal (API)" %}
-If you have a Datadog [API key and application key][16] with the `rum_apps_write` permission, create the application without a browser. Your site's API base URL is {% region-param key="dd_api" /%}.
+If your connected agent tools cannot list, select, or create RUM applications, use the API. You need a Datadog [API key and application key][16]. The application key must have the `rum_apps_read` permission to inspect and reuse applications, and the `rum_apps_write` permission to create one. Store these privileged keys in terminal environment variables. Do not add them to frontend code or client-side environment files.
+
+Your site's API base URL is {% region-param key="dd_api" /%}. Copy that value into `DD_API_BASE_URL`, then list existing applications before creating one:
 
 ```shell
-curl -X POST "<DATADOG_API_BASE_URL>/api/v2/rum/applications" \
+export DD_API_BASE_URL="<DATADOG_API_BASE_URL>"
+
+curl -sS "${DD_API_BASE_URL}/api/v2/rum/applications" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+
+If the response contains the browser application you want to monitor, copy its `application_id` and retrieve its configuration:
+
+```shell
+export DD_RUM_APPLICATION_ID="<APPLICATION_ID>"
+
+curl -sS "${DD_API_BASE_URL}/api/v2/rum/applications/${DD_RUM_APPLICATION_ID}" \
+  -H "DD-API-KEY: ${DD_API_KEY}" \
+  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+```
+
+Reuse `data.attributes.application_id` and `data.attributes.client_token` from the response. If no matching application exists, create one:
+
+```shell
+curl -sS -X POST "${DD_API_BASE_URL}/api/v2/rum/applications" \
   -H "DD-API-KEY: ${DD_API_KEY}" \
   -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
   -H "Content-Type: application/json" \
   -d '{"data": {"type": "rum_application_create", "attributes": {"name": "my-web-app", "type": "browser"}}}'
 ```
 
-The response includes `data.attributes.application_id` and `data.attributes.client_token`. See the [Create a new RUM application][17] API reference.
+The response includes `data.attributes.application_id` and `data.attributes.client_token`. See the [RUM application creation endpoint][17].
 {% /tab %}
 {% /tabs %}
 {% /step %}
@@ -288,6 +313,7 @@ datadogRum.init({
   //  service: 'my-web-application',
   //  env: 'production',
   //  version: '1.0.0',
+   sessionReplaySampleRate: 0,
 });
 
 ```
@@ -319,6 +345,7 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
+      sessionReplaySampleRate: 0,
     });
   })
 </script>
@@ -338,13 +365,17 @@ window.DD_RUM.init({
       //  service: 'my-web-application',
       //  env: 'production',
       //  version: '1.0.0',
-
+      sessionReplaySampleRate: 0,
     });
 </script>
 ```
 
 {% /tab %}
 {% /tabs %}
+
+The examples disable Session Replay. Set a non-zero `sessionReplaySampleRate` only after you decide to collect replay data and review the [Session Replay privacy options][18].
+
+For single-page applications (SPAs), the Browser SDK automatically tracks URL changes that use the History API and creates a view for each route change. The React integration is not required for basic SPA route tracking. Use React-specific integration when you need capabilities such as route-pattern view names or Error Boundaries.
 
 #### Configure tracking consent (GDPR compliance)
 
@@ -362,6 +393,10 @@ If you're using the Datadog Content Security Policy (CSP) integration on your si
 {% collapse-content title="Option 2: Agentic Onboarding" level="h3" %}
 
 Use the [Agentic Onboarding][10] page to instrument your browser application using the AI Setup CLI or the Datadog MCP Server.
+
+Available agent tools vary. If the agent cannot identify the target organization or manage RUM applications, use the UI or API workflow in [Create the application][19]. Then provide the browser-safe `applicationId`, `clientToken`, and Datadog site through an ignored local environment file. Do not provide the privileged API key or application key to frontend code.
+
+Before the agent changes the application, ask it to inspect existing packages, SDK initialization, environment files, and RUM applications. It should preserve working configuration, add missing values, and avoid duplicate initialization or applications.
 
 {% /collapse-content %}
 
@@ -403,9 +438,11 @@ To request support for a web server that is not listed here, [fill out this form
 
 ## Start monitoring
 
-Visualize the [data collected][11] in [dashboards][12] or create a search query in the [RUM Explorer][5].
+Run the application and load the routes you want to monitor. Then confirm that a fresh view appears in the [RUM Explorer][20]. A `202` response from the RUM intake confirms that Datadog accepted the request, but it does not confirm that the event is visible in the Explorer. Indexing can take several seconds.
 
-Your application appears as pending on the Applications page until Datadog starts receiving data. If data takes time to appear, see [Troubleshooting Browser SDK Issues][15].
+After data appears, visualize the [data collected][11] in [dashboards][12] or create additional search queries in the RUM Explorer.
+
+Your application appears as pending on the Applications page until Datadog starts receiving data. If a fresh view does not appear after a short delay, verify the `applicationId`, `clientToken`, Datadog site, and sampling configuration. Also check Content Security Policy rules, browser blockers, and requests to the RUM intake. For more information, see [Troubleshooting Browser SDK Issues][15].
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
@@ -424,4 +461,6 @@ Your application appears as pending on the Applications page until Datadog start
 [15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
 [16]: /account_management/api-app-keys/
 [17]: /api/latest/rum/#create-a-new-rum-application
-
+[18]: /session_replay/browser/privacy_options/
+[19]: #create-the-application
+[20]: https://app.datadoghq.com/rum/sessions
