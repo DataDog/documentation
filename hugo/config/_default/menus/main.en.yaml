@@ -8343,21 +8343,16 @@ menu:
       parent: workload_protection_getting_started
       identifier: workload_protection_getting_started_ecs_ec2
       weight: 30
-    - name: Linux (eBPF)
+    - name: Linux
       url: security/workload_protection/getting_started/linux_ebpf
       parent: workload_protection_getting_started
       identifier: workload_protection_getting_started_linux_ebpf
       weight: 40
-    - name: Linux (eBPF-less)
-      url: security/workload_protection/getting_started/linux_ebpfless
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_linux_ebpfless
-      weight: 50
     - name: Fargate
       url: security/workload_protection/getting_started/fargate
       parent: workload_protection_getting_started
       identifier: workload_protection_getting_started_fargate
-      weight: 60
+      weight: 50
     - name: Windows
       url: security/workload_protection/getting_started/windows
       parent: workload_protection_getting_started
