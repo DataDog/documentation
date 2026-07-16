@@ -26,24 +26,25 @@ APM trace enrichment automatically attaches feature flag evaluation data to your
 
 <div class="alert alert-warning">APM trace enrichment is experimental and may change in a future release.</div>
 
+<div class="alert alert-info">APM trace enrichment is available in the following SDKs. Support for additional languages is in progress.</div>
+
+| Language | Status | Minimum version |
+| -------- | ------ | --------------- |
+| Go       | Available | 2.8.0        |
+| Node.js  | Available | 5.105.0      |
+| .NET     | Coming soon | —          |
+| Java     | Coming soon | —          |
+| PHP      | Coming soon | —          |
+| Python   | Coming soon | —          |
+| Ruby     | Coming soon | —          |
+
 ## Prerequisites
 
 Before setting up APM trace enrichment, confirm the following:
 
 - [Server-side feature flags][2] are already configured and flags are evaluating in your application.
 - [APM tracing][3] is enabled and traces are flowing to Datadog.
-- Your server-side tracer meets the minimum version for APM trace enrichment:
-
-<!-- TODO: Update versions when each SDK releases with span enrichment support -->
-| Language | Minimum tracer version |
-| -------- | ---------------------- |
-| .NET     | _TODO_                 |
-| Go       | 2.8.0                  |
-| Java     | _TODO_                 |
-| Node.js  | 5.99.0                 |
-| PHP      | _TODO_                 |
-| Python   | _TODO_                 |
-| Ruby     | _TODO_                 |
+- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set, or the equivalent code-based configuration for your language. See [Server-Side Feature Flags][2] for setup details.
 
 ## How it works
 
@@ -58,14 +59,17 @@ The SDK-side tags are transport-only and are stripped server-side. The tags visi
 
 ## Enable APM trace enrichment
 
-Set the following environment variable in addition to the standard [server-side feature flag configuration][2]:
+Set the following environment variables. The first enables the Datadog Feature Flags provider (if not already set), and the second enables span enrichment:
 
 {{< code-block lang="bash" >}}
+# Required: Enable the Datadog Feature Flags provider (if not already set)
+DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+
 # Enable APM trace enrichment
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
 {{< /code-block >}}
 
-This environment variable is supported by all server-side SDKs. No code changes are required. Enabling the variable activates the enrichment hook automatically when the Datadog OpenFeature provider initializes.
+The enrichment environment variable is supported by all server-side SDKs. No code changes are required. Enabling the variable activates the enrichment hook automatically when the Datadog OpenFeature provider initializes.
 
 ### Language-specific configuration
 
@@ -88,8 +92,6 @@ tracer.init({
   },
 });
 {{< /code-block >}}
-
-<!-- TODO: Confirm minimum version for span enrichment release -->
 
 {{% /tab %}}
 {{% tab "Go" %}}
@@ -115,7 +117,9 @@ func main() {
     if err != nil {
         log.Fatalf("Failed to create provider: %v", err)
     }
-    defer provider.Shutdown()
+    if ddProvider, ok := provider.(*ddopenfeature.DatadogProvider); ok {
+        defer ddProvider.Shutdown()
+    }
 
     if err := openfeature.SetProviderAndWait(provider); err != nil {
         log.Fatalf("Failed to set provider: %v", err)
@@ -125,8 +129,6 @@ func main() {
     // Flag evaluations now enrich APM spans automatically
 }
 {{< /code-block >}}
-
-<!-- TODO: Confirm minimum version for span enrichment release -->
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -144,7 +146,7 @@ Client client = api.getClient("my-app");
 // Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
 
-<!-- TODO: Confirm minimum version and system property name for span enrichment release -->
+<!-- TODO: Confirm system property name for span enrichment release -->
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -164,12 +166,10 @@ client = api.get_client()
 # Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
 
-<!-- TODO: Confirm minimum version for span enrichment release -->
-
 {{% /tab %}}
 {{% tab "Ruby" %}}
 
-You can also enable span enrichment in code:
+You can enable span enrichment with the environment variable or in code. The `Datadog.configure` block is an alternative to setting `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true`:
 
 {{< code-block lang="ruby" filename="app.rb" >}}
 require 'datadog'
@@ -189,8 +189,6 @@ end
 client = OpenFeature::SDK.build_client
 # Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
-
-<!-- TODO: Confirm minimum version and Ruby config option name for span enrichment release -->
 
 {{% /tab %}}
 {{% tab "PHP" %}}
@@ -212,8 +210,6 @@ $client = $api->getClient('my-service');
 // Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
 
-<!-- TODO: Confirm minimum version for span enrichment release -->
-
 {{% /tab %}}
 {{% tab ".NET" %}}
 
@@ -230,8 +226,6 @@ var client = Api.Instance.GetClient("my-service");
 // Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
 
-<!-- TODO: Confirm minimum version for span enrichment release -->
-
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -241,21 +235,37 @@ After deploying with span enrichment enabled:
 
 1. Trigger requests in your application that evaluate feature flags.
 2. Go to [Trace Explorer][1] and search for a recent trace from your service.
-3. Open a trace and look for `@feature_flags.*` attributes on the root span. Each evaluated flag appears as `@feature_flags.<flag_key>` with the returned variant as the value.
+3. Open a trace and look for `@feature_flags.*` attributes on the root span.
+
+After backend processing, the root span contains attributes like the following:
+
+| Attribute | Example value |
+| --------- | ------------- |
+| `@feature_flags.checkout-flow` | `treatment` |
+| `@feature_flags.dark-mode` | `control` |
+
+Each attribute key is `@feature_flags.<flag_key>` and the value is the variant returned by the evaluation.
 
 ### Search and filter by flag variant
 
 Use the `@feature_flags.*` facets to filter traces in Trace Explorer:
 
-{{< code-block lang="text" >}}
-@feature_flags.checkout-flow:treatment
-{{< /code-block >}}
+| Use case | Query |
+| -------- | ----- |
+| Traces for a specific variant | `@feature_flags.checkout-flow:treatment` |
+| Errors under a variant | `@feature_flags.checkout-flow:treatment status:error` |
+| Any trace where a flag was evaluated | `@feature_flags.checkout-flow:*` |
+| Multiple flags on the same request | `@feature_flags.checkout-flow:treatment @feature_flags.new-search:enabled` |
+| Scoped to service and environment | `env:production service:api-gateway @feature_flags.rate-limit-v2:enabled` |
 
-This query returns all traces where the `checkout-flow` flag evaluated to `treatment`. Combine with other facets to narrow results:
+### Use enriched traces across Datadog
 
-{{< code-block lang="text" >}}
-@feature_flags.checkout-flow:treatment service:web-store status:error
-{{< /code-block >}}
+Feature flag attributes on traces are available across Datadog:
+
+- **Monitors**: Alert when the error count for a specific variant exceeds a threshold to catch variant-specific regressions.
+- **Dashboards**: Add a timeseries widget comparing p99 latency across variants using `@feature_flags.<flag_key>` as a group-by dimension.
+- **Notebooks**: Build an investigation notebook comparing control and treatment performance during an experiment.
+- **Visualizations**: Use the Top List view in Trace Explorer to verify that rollout traffic distribution matches your targeting rules.
 
 ## Use with experiments
 
