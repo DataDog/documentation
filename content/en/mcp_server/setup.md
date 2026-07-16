@@ -941,4 +941,3 @@ Local authentication is recommended for Cline and when remote authentication is 
 [67]: /account_management/service-access-tokens/
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
-[70]: /data_observability/jobs_monitoring/
