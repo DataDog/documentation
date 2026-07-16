@@ -11,7 +11,7 @@ As an alternative to the default page, Datadog allows administrators to set a da
 
 Only users with the Datadog Admin Role or the Org Management (`org_management`) permission can set the custom landing page for an organization. Custom landing pages are not available during free trial periods.
 
-Individual users can also set a personal landing page that applies only to their own account. A personal landing page takes precedence over the organization landing page. For more information, see [Set a personal landing page](#set-a-personal-landing-page).
+Individual users can also set a personal landing page that applies only to their own account. A personal landing page takes precedence over the organization landing page.
 
 ## Set an org-wide custom landing page
 
