@@ -172,61 +172,6 @@ To enable Datadog to locate the Cost and Usage Report, complete the fields with 
 
 [Create a policy][205] in AWS to ensure Datadog has permissions to access the CUR and the S3 bucket it is stored in. Use the following JSON:
 
-{{< ui >}}Policy for CUR 2.0{{< /ui >}}:
-
-{{< code-block lang="yaml" collapsible="true" >}}
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DDCloudCostReadBucket",
-      "Effect": "Allow",
-      "Action": [
-        "s3:ListBucket"
-      ],
-      "Resource": "arn:aws:s3:::BUCKETNAME"
-    },
-    {
-      "Sid": "DDCloudCostGetBill",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetObject"
-      ],
-      "Resource": "arn:aws:s3:::BUCKETNAME/REPORT_PREFIX/REPORT_NAME/*"
-    },
-    {
-      "Sid": "DDCloudCostCheckAccuracy",
-      "Effect": "Allow",
-      "Action": [
-        "ce:Get*"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "DDCloudCostListCURs",
-      "Effect": "Allow",
-      "Action": [
-        "cur:DescribeReportDefinitions",
-        "bcm-data-exports:GetExport",
-        "bcm-data-exports:ListExports"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "DDCloudCostListOrganizations",
-      "Effect": "Allow",
-      "Action": [
-        "organizations:Describe*",
-        "organizations:List*"
-      ],
-      "Resource": "*"
-    }
-  ]
-}
-{{< /code-block >}}
-
-{{< ui >}}Policy for Legacy CUR{{< /ui >}}:
-
 {{< code-block lang="yaml" collapsible="true" >}}
 {
   "Version": "2012-10-17",
