@@ -67,7 +67,6 @@ If using an existing Cost and Usage Report 2.0 and bucket:
 
 Otherwise, enter the following details for your Cost and Usage Report:
 
-
 * {{< ui >}}Report Content{{< /ui >}}: The version of your Cost and Usage Report (Legacy CUR or CUR 2.0).
 * {{< ui >}}Bucket Name{{< /ui >}}: The S3 bucket name where the report files are stored.
 * {{< ui >}}Bucket Region{{< /ui >}}: The AWS [region code][100] of the region containing your S3 bucket. For example, `us-east-1`.
