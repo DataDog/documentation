@@ -64,7 +64,7 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 3. With the policy open, in **Actions**, select **Manual rule creator** to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in the app. To use the **Assisted rule creator** wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
 4. Enter a **Name** and **Description** for the rule.
 5. In **Expression**, define the match using [Datadog Security Language (SECL)][16].
-6. For each policy that should include this rule, set the rule status: **Monitoring** or **Disabled**. If the rule supports enforcement, you can choose **Blocking** when [Active Protection][12] is turned on and your user has the `security_monitoring_cws_agent_rules_actions` permission.
+6. For each policy that should include this rule, set the rule status: **Monitoring** or **Disabled**. If the rule supports enforcement, you can choose **Blocking** when [Automated response][12] is turned on and your user has the `security_monitoring_cws_agent_rules_actions` permission.
 7. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][25].
 8. Click **Create Agent Rule**. You are returned to the policy.
 
@@ -144,8 +144,8 @@ Deleting a rule from [Rules configuration][24] removes it from **all policies** 
 
 Here are some important [role and permissions][11] to use for custom rules RBAC:
 
-- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Active Protection][12] feature used to enable the blocking mode in the rules.
-  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Active Protection to this role.
+- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Automated response][12] feature used to enable the blocking mode in the rules.
+  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
 - The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 
@@ -159,7 +159,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
-[12]: /security/workload_protection/respond_and_report/active_protection
+[12]: /security/workload_protection/respond_and_report/automated_response
 [13]: #disable-default-agent-rules
 [14]: #create-a-custom-agent-rule
 [15]: https://app.datadoghq.com/cost/settings/tags
