@@ -508,8 +508,6 @@ The pane on the right shows {{< ui >}}Filtered Spans{{< /ui >}} (or traces) corr
 
 Select a span to show JSON data available for use in an evaluation. Then, click {{< ui >}}Test Evaluation{{< /ui >}} to pre-fill inputs to your evaluation with data from the span, and click {{< ui >}}Run{{< /ui >}} to test.
 
-To enable tracing for your evaluation, select the toggle so that Tracing Enabled is on.
-
 ## Viewing and using results
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluation later.
