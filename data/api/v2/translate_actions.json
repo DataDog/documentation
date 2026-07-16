@@ -1139,6 +1139,16 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "GetCostAccountFilters": {
+    "description": "Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Get account filters"
+  },
+  "UpdateCostAccountFilters": {
+    "description": "Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Update account filters",
+    "request_description": "",
+    "request_schema_description": "Account filters patch request."
+  },
   "ListCostAnomalies": {
     "description": "List detected Cloud Cost Management anomalies for the organization.",
     "summary": "List cost anomalies"
@@ -2177,6 +2187,30 @@
     "summary": "Update an incident user-defined field",
     "request_description": "Incident user-defined field update payload.",
     "request_schema_description": "Request body for updating an incident user-defined field."
+  },
+  "ListIncidentUserDefinedRoles": {
+    "description": "List all user-defined roles for incidents.",
+    "summary": "List incident user-defined roles"
+  },
+  "CreateIncidentUserDefinedRole": {
+    "description": "Create a new user-defined role for incidents.",
+    "summary": "Create an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for creating an incident user-defined role."
+  },
+  "DeleteIncidentUserDefinedRole": {
+    "description": "Delete an existing user-defined role for incidents.",
+    "summary": "Delete an incident user-defined role"
+  },
+  "GetIncidentUserDefinedRole": {
+    "description": "Retrieve a single user-defined role for incidents.",
+    "summary": "Get an incident user-defined role"
+  },
+  "UpdateIncidentUserDefinedRole": {
+    "description": "Update an existing user-defined role for incidents.",
+    "summary": "Update an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for updating an incident user-defined role."
   },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
@@ -4078,6 +4112,10 @@
     "summary": "Update an org group policy override",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroupPolicySuggestions": {
+    "description": "List suggested organization group policies. Requires a filter on org group ID.",
+    "summary": "List org group policy suggestions"
   },
   "ListOrgGroups": {
     "description": "List all organization groups that the requesting organization has access to.",

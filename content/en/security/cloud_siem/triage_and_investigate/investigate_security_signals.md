@@ -13,6 +13,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
     tag: "Blog"
     text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
+  - link: /bits_ai/bits_security_analyst/
+    tag: Documentation
+    text: Bits Security Analyst
 ---
 
 ## Overview
@@ -20,6 +23,8 @@ further_reading:
 A Cloud SIEM security signal is created when Datadog detects a threat while analyzing logs against detection rules. View, search, filter, and correlate security signals in the Signals Explorer without needing to learn a dedicated query language. You can also assign security signals to yourself or another user in the Datadog platform. In addition to the Signals Explorer, you can configure [Notification Rules][1] to send signals to specific individuals or teams to keep them informed of issues.
 
 You must have the `Security Signals Write` permission to modify a security signal, such as change the state and view signal action history in [Audit Trail][2]. See [Role Based Access Control][3] for more information about Datadog's default roles and granular role-based access control permissions available for Datadog Security in the Cloud Security.
+
+If you want to use an autonomous AI agent that investigates Cloud SIEM security signals, see [Bits Security Analyst][14].
 
 ## Signals explorer
 
@@ -262,3 +267,4 @@ You can also launch this query directly from the signal panel:
 [11]: /security/suppressions/#create-a-suppression-rule
 [12]: https://app.datadoghq.com/security/siem/cases
 [13]: https://app.datadoghq.com/security/configuration/siem/case-management
+[14]: /bits_ai/bits_security_analyst/
