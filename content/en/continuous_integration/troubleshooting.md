@@ -48,6 +48,10 @@ Running pipelines support relies on data sent from CI providers indicating execu
 
 A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
 
+## Limitations on running jobs
+
+Jobs that have not started executing yet do not appear as running jobs in CI Visibility until their runner picks them up. This includes jobs in a `Pending`, `Queued`, or `Manual` state. For example, a GitLab manual job that requires a trigger does not show up in CI Visibility until it is triggered and its runner begins execution.
+
 ## Limitations on finished jobs from pipelines
 
 Job data has a three-day limit to be processed after completion. If a pipeline includes jobs that finish more than three days before the pipeline is received, those jobs are not processed and do not appear in CI Visibility.

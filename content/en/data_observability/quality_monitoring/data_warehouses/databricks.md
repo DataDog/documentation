@@ -37,6 +37,8 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
 ### Step 2 - Grant access
 
+In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} to run the following commands. Use the service principal's application (client) ID, not its display name, wherever `<application_id>` appears.
+
 First, grant access to system schemas for lineage:
 ```sql
 GRANT USE CATALOG ON CATALOG system TO `<application_id>`;
