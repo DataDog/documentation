@@ -68,13 +68,12 @@ export DD_SITE={{< region-param key="dd_site" >}}
 
 Create one or more YAML files in your repository. The CLI accepts a file, multiple files, a directory, or multiple directories. When you pass a directory, the CLI recursively discovers YAML files.
 
-The following example defines one warehouse metric source and one simple metric. The `warehouse_connection_id` is the ID of the warehouse connection configured in Datadog under {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Warehouse Connections{{< /ui >}}. Open the connection details and copy the connection ID from the connection metadata. Datadog supports one warehouse connection per organization.
+The following example defines one warehouse metric source and one simple metric. By default, the CLI uses the warehouse connection configured in Datadog under {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} > {{< ui >}}Warehouse Connections{{< /ui >}}. Datadog supports one warehouse connection per organization. If your organization has more than one warehouse connection, set `warehouse_connection_id` in the YAML to choose one explicitly.
 
 ```yaml
 schema_version: 1
 sync_tag: example-checkout
 reference_url: https://github.com/example-org/example-repo
-warehouse_connection_id: 00000000-0000-0000-0000-000000000000
 
 warehouse_metric_sources:
   - sync_id: checkout_events
@@ -204,7 +203,7 @@ Within a `sync_tag`, each warehouse metric source and metric has a stable `sync_
 | `schema_version` | Yes | Must be `1`. |
 | `sync_tag` | Yes | Stable ownership key for this group of metric definitions. All files in a single operation must use the same `sync_tag`.<br>Must start with an alphanumeric character and can contain alphanumeric characters, underscores, dots, colons, and dashes. |
 | `reference_url` | No | URL to the source repository, runbook, or other reference for the synced metrics. |
-| `warehouse_connection_id` | Yes | Warehouse connection ID for the organization. |
+| `warehouse_connection_id` | No | Warehouse connection ID for the organization. If omitted, the CLI uses the organization's configured warehouse connection. |
 | `warehouse_metric_sources` | No | Warehouse SQL models, measures, and properties that metrics use. |
 | `metrics` | No | Experiment metrics to create, update, or manage in future syncs. |
 | `options` | No | Sync options such as certification and upgrade behavior. |
@@ -378,7 +377,7 @@ To reference an existing Datadog measure directly, use `warehouse_metric_measure
 | Error | What to check |
 | ----- | ------------- |
 | The API returns `403`. | Confirm the API/application key has the Product Analytics permissions required to write metrics. If `is_certified` is enabled, confirm the role also has Product Analytics Certified Metrics Write. |
-| A warehouse connection was not found. | Confirm `warehouse_connection_id` belongs to the target Datadog organization. |
+| A warehouse connection was not found. | Confirm the target Datadog organization has a warehouse connection configured. If you set `warehouse_connection_id`, confirm that it belongs to the target organization. |
 | A subject type was not found. | Confirm the `subject_types[].name` value matches an existing Datadog subject type. |
 | The plan or execute result shows no changes. | The YAML already matches Datadog for that `sync_tag`. |
 | A sync is blocked. | Check the result output for objects that cannot be deleted or changed because they are referenced by active or in-flight experiments. |
