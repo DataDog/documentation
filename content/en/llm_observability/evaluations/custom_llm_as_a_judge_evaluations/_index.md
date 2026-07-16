@@ -96,7 +96,7 @@ Span Input: {{span_input}}
 8. In the {{< ui >}}User Prompt{{< /ui >}} field, specify what parts of the span, trace, or session to evaluate by adding variables. You can add any span attribute, such as Span Input (`{{span_input}}`), Output (`{{span_output}}`), or any other span field. For trace-scoped evaluations, use `{{spans...}}` paths to read across spans; for session-scoped evaluations, use `{{traces...}}` paths to read across traces. See [Prompt Templating][15] for the full reference. To freely edit the user prompt, select the user prompt and edit the text.
 
    You may also use the panel on the right ({{< ui >}}Filtered Spans{{< /ui >}} in span scope, {{< ui >}}Filtered Traces{{< /ui >}} in trace scope, {{< ui >}}Filtered Sessions{{< /ui >}} in session scope) to add span data as a variable:
-   1. Choose an account and an application so that spans/traces/sessions show up on the right.
+   1. Choose an account and an application so that spans, traces, or sessions show up on the right.
    2. Select one of the spans on the right to view its JSON.
    3. Select {{< ui >}}+{{< /ui >}} to add the JSON to your user prompt.
 
