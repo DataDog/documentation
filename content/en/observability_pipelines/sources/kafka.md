@@ -117,11 +117,11 @@ For [component metrics][10] and [source buffer metrics][11] emitted by all sourc
 : **Metric type**: gauge
 
 `pipelines.kafka_consumed_messages_total`
-: **Description**: The number of messages the Worker received from Kafka brokers.
+: **Description**: The number of messages the Worker consumed from Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_consumed_messages_bytes_total`
-: **Description**: The number of message bytes the Worker received from Kafka brokers.
+: **Description**: The number of message bytes the Worker consumed from Kafka brokers.
 : **Metric type**: count
 
 `pipelines.kafka_requests_total`
