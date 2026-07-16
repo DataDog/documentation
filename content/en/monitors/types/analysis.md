@@ -73,7 +73,7 @@ To create an [Analysis monitor][1] in Datadog, use the main navigation: {{< ui >
 To create an Analysis monitor directly from a Notebook:
 
 1. Open a Notebook with an Analysis cell containing your desired query.
-2. In the Analysis cell, click the dropdown arrow next to {{< ui >}}Send To{{< /ui >}}.
+2. In the Analysis cell, click {{< ui >}}Send To{{< /ui >}}.
 3. Select {{< ui >}}Monitors{{< /ui >}}.
 
 This allows you to convert your exploratory analysis into an alerting monitor.
