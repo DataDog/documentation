@@ -122,7 +122,7 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
 
 ### Add knowledge sources
 
-You can provide additional context for Bits Security Analyst, such as details about your organization's authorization rules, policies, and environment. With this information, it can produce more accurate investigations, fewer false positives, and require less manual review.
+You can provide additional context for Bits Security Analyst, such as details about your organization's authorization rules, policies, and environment, allowing Bits to produce more accurate investigations tailored to your organization's needs.
 
 To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Knowledge Sources{{< /ui >}}][8]. There, you can add two kinds of knowledge:
 - **General Org Context (Bits.md)**: Organization-level instructions that Bits Security Analyst should apply to all investigations.
