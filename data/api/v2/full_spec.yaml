@@ -9052,6 +9052,7 @@ components:
       enum:
         - server.db.statement
         - server.io.fs.file
+        - server.io.fs.file_write
         - server.io.net.url
         - server.sys.shell.cmd
         - server.request.method
@@ -9065,6 +9066,7 @@ components:
         - server.request.trailers
         - server.request.body
         - server.request.body.filenames
+        - server.request.body.files_content
         - server.response.status
         - server.response.headers.no_cookies
         - server.response.trailers
@@ -9086,6 +9088,7 @@ components:
       x-enum-varnames:
         - SERVER_DB_STATEMENT
         - SERVER_IO_FS_FILE
+        - SERVER_IO_FS_FILE_WRITE
         - SERVER_IO_NET_URL
         - SERVER_SYS_SHELL_CMD
         - SERVER_REQUEST_METHOD
@@ -9099,6 +9102,7 @@ components:
         - SERVER_REQUEST_TRAILERS
         - SERVER_REQUEST_BODY
         - SERVER_REQUEST_BODY_FILENAMES
+        - SERVER_REQUEST_BODY_FILES_CONTENT
         - SERVER_RESPONSE_STATUS
         - SERVER_RESPONSE_HEADERS_NO_COOKIES
         - SERVER_RESPONSE_TRAILERS
