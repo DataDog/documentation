@@ -61,7 +61,7 @@ After you select the Fluent source in the pipeline UI, enter the identifier for 
 
 ## Metrics
 
-For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Fluent source metrics, add the tag `component_type:fluent`.
+For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Fluent source metrics, use the tag `component_type:fluent`.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: https://app.datadoghq.com/observability-pipelines

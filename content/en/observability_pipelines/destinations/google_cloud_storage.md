@@ -89,7 +89,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 
 ## Metrics
 
-For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Google Cloud Storage destination metrics, add the tag `component_type:datadog_archives_gcs`.
+For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Google Cloud Storage destination metrics, use the tag `component_type:datadog_archives_gcs`.
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/

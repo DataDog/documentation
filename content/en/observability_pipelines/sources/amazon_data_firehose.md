@@ -75,7 +75,7 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 ## Metrics
 
-For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon Data Firehose source metrics, add the tag `component_type:aws_kinesis_firehose`.
+For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon Data Firehose source metrics, use the tag `component_type:aws_kinesis_firehose`.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: https://app.datadoghq.com/observability-pipelines

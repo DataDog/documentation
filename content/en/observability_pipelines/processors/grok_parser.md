@@ -104,7 +104,7 @@ You can also add library rules when you create a custom rule. See [Create an AI-
 
 ## Metrics
 
-For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Parse processor metrics, add the tag `component_type:parse`.
+For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns

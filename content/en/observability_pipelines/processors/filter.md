@@ -34,7 +34,7 @@ To set up the filter processor:
 
 ## Metrics
 
-For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Filter processor metrics, add the tag `component_type:opw_filter`.
+For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Filter processor metrics, use the tag `component_type:opw_filter`.
 
 [1]: /observability_pipelines/search_syntax/logs
 [2]: /observability_pipelines/search_syntax/metrics
