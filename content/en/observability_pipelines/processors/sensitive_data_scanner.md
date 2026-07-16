@@ -288,7 +288,7 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 
 The Sensitive Data Scanner processor is CPU intensive. Use the following best practices to optimize performance.
 
-### View scanning rule usage with the out-of-the-box Observability Pipelines dashboard
+### View scanning rule usage with the Observability Pipelines Overview dashboard
 
 Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][13] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data and which ones might need to be refined or could be disabled. For example:
 - NEED EXAMPLE of when you'd refine a rule
@@ -298,9 +298,9 @@ Observability Pipelines includes an out-of-the-box [Observability Pipelines Over
 1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
 1. Use the time selector to scope to a wider time frame.
 
-Use these widgets to evaluate your Sensitive Data Scanners' scanning rule usage:
+Use these widgets to evaluate your Sensitive Data Scanner processors' scanning rule usage:
 
-- **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively protecting data. This is the primary widget to see which rules are in use.
+- **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively matching data. This is the primary widget to see which rules are in use.
 - **Total count of logs containing sensitive data**: Shows the overall volume of matches across all rules, so you can gauge how much sensitive data the processor is matching. Use this widget to confirm the Sensitive Data Scanner processor is working as expected before looking into individual rules.
 - **Logs containing sensitive data by Pipeline**: Breaks matches down by `pipeline_id`, which helps you see whether a rule is used in all pipelines or only in specific pipelines. A rule matching in one pipeline but not others may be a candidate to scope more narrowly.
 - **Logs containing sensitive data per host**: Breaks matches down by Worker host. Use this widget to confirm coverage across your deployment and identify hosts where a rule is or is not matching.
