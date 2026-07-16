@@ -72,10 +72,7 @@ Auto-fix strategy (reorg-only PRs):
          the PR's base and today.
       5. Push as `reorg-fix/pr-<N>`, open a new PR for it, close the original
          PR with a comment pointing to the fix PR, and label the original
-         has-astro-reorg-conflicts.
-
-    A PR that already carries the has-astro-reorg-conflicts label (a fix PR was
-    opened on a prior run) is skipped, so re-running the script is safe.
+         astro-reorg-autofixed.
 
     PRs from forks cannot be auto-fixed (we don't have push access to the fork).
     They receive the astro-reorg-manual-review label.
@@ -121,11 +118,17 @@ TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 REPO = "DataDog/documentation"
 REPO_REORG_README_LINK = "https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/REPO_REORG.md"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
-LABEL_STALE = "has-astro-reorg-conflicts"
+LABEL_STALE = "astro-reorg-stale"
 LABEL_AUTOFIXED = "astro-reorg-autofixed"
 LABEL_AUTO_PR = "astro-reorg-auto-pr"
+LABEL_NO_CONFLICTS = "astro-reorg-no-conflicts"
+# Author-applied on an already-processed PR to request manual intervention. The
+# script does not act on these PRs — they're excluded from the query and left
+# for a person to handle.
 LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
-LABEL_PROCESSED = "astro-reorg-processed"
+# Applied by the script to a work-in-progress PR after it comments once. Excluded
+# from the query so the PR isn't picked up (and re-commented on) on later runs.
+LABEL_SKIP = "astro-reorg-skip"
 LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
@@ -133,6 +136,12 @@ LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
 # PRs with no activity in this many days are treated as stale and receive a
 # comment + label instead of an auto-fix attempt.
 STALE_DAYS = 31  # ~1 calendar month
+
+# A stale-labeled PR is considered reactivated only if its updatedAt is later
+# than when we applied the label by more than this grace window. The label
+# event and the resulting updatedAt bump share a timestamp; the grace absorbs
+# any skew so our own labeling never counts as fresh activity.
+STALE_REACTIVATE_GRACE = timedelta(seconds=60)
 
 # ---------------------------------------------------------------------------
 # Comment builders — one function per user-facing message
@@ -238,14 +247,37 @@ def git(*args: str, cwd: Path | None = None) -> subprocess.CompletedProcess:
 # Staleness helpers
 # ---------------------------------------------------------------------------
 
+def _parse_ts(ts: str) -> datetime:
+    """Parse a GitHub ISO-8601 timestamp (e.g. '2026-07-16T12:00:00Z')."""
+    return datetime.fromisoformat(ts.replace("Z", "+00:00"))
+
+
 def is_pr_stale(pr: dict) -> bool:
     """Return True if the PR has had no activity in the last STALE_DAYS days."""
     updated_at = pr.get("updatedAt")
     if not updated_at:
         return False
-    last_update = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
     cutoff = datetime.now(timezone.utc) - timedelta(days=STALE_DAYS)
-    return last_update < cutoff
+    return _parse_ts(updated_at) < cutoff
+
+
+def stale_labeled_at(pr_number: int) -> datetime | None:
+    """Return when LABEL_STALE was most recently added to the PR, or None if it
+    was never labeled or the timeline can't be read. Reads the issue timeline,
+    which records a 'labeled' event (with the label name and a created_at) for
+    every label addition."""
+    try:
+        events = gh_json("api", "--paginate",
+                         f"repos/{REPO}/issues/{pr_number}/timeline")
+    except RuntimeError as exc:
+        print(f"  Could not read timeline for PR #{pr_number}: {exc}",
+              file=sys.stderr)
+        return None
+    times = [e["created_at"] for e in events  # type: ignore[union-attr]
+             if e.get("event") == "labeled"
+             and e.get("label", {}).get("name") == LABEL_STALE
+             and e.get("created_at")]
+    return max((_parse_ts(t) for t in times), default=None)
 
 
 # ---------------------------------------------------------------------------
@@ -463,6 +495,18 @@ def add_label(pr_number: int, label: str, dry_run: bool) -> None:
     print(f"  Added label {label!r} to PR #{pr_number}")
 
 
+def remove_label(pr_number: int, label: str, dry_run: bool) -> None:
+    if dry_run:
+        print(f"  [dry-run] would remove label {label!r} from PR #{pr_number}")
+        return
+    # Mirror add_label: hit the REST labels endpoint directly to avoid
+    # `gh pr edit`'s deprecated projectCards fetch. DELETE is a no-op (404)
+    # if the label isn't present, so callers can call it unconditionally.
+    gh_run("api", "--method", "DELETE",
+           f"repos/{REPO}/issues/{pr_number}/labels/{label}")
+    print(f"  Removed label {label!r} from PR #{pr_number}")
+
+
 def post_comment(pr_number: int, body: str, dry_run: bool) -> None:
     if dry_run:
         print(f"  [dry-run] would comment on PR #{pr_number}:\n    {body[:120]}...")
@@ -557,7 +601,8 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
         if IS_TEST_MODE:
             print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
-        print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR")
+        print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR, "
+              f"and label it {LABEL_AUTOFIXED!r}")
         return True
 
     fix_branch = f"reorg-fix/pr-{pr_number}"
@@ -568,8 +613,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             # Creating the branch failed — most likely a reorg-fix/pr-<N> branch
             # from a prior run already exists.  We do NOT reset and reuse it:
             # that could clobber a fix that's already in review.  Bail and let
-            # the PR fall back to manual review.  (A fully-applied fix carries
-            # astro-reorg-stale, so that PR would have been skipped earlier.)
+            # the PR fall back to manual review.
             print(f"  could not create fix branch {fix_branch!r} "
                   f"(may already exist) — leaving for manual review: "
                   f"{add_wt.stderr.strip()[:120]}", file=sys.stderr)
@@ -591,8 +635,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             # A reorg-fix/pr-<N> branch from a prior run already exists on
             # origin.  We don't force-push (repo policy), and a fix PR for it
             # most likely already exists, so bail to manual review rather than
-            # clobber it.  (PRs that were fully fixed carry astro-reorg-stale
-            # and are skipped before we ever get here.)
+            # clobber it.
             print(f"  push failed (fix branch may already exist): "
                   f"{push.stderr.strip()[:120]}", file=sys.stderr)
             return False
@@ -630,7 +673,6 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             "--comment", build_autofix_close_comment(new_pr_number),
         )
         print(f"  Closed PR #{pr_number} with comment pointing to fix PR #{new_pr_number}")
-        add_label(pr_number, LABEL_STALE, dry_run)
         add_label(pr_number, LABEL_AUTOFIXED, dry_run)
         return True
 
@@ -645,8 +687,8 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 
 def analyze_pr(pr: dict, dry_run: bool) -> bool:
     """Process one PR. Return True if we acted on it (auto-fixed or labeled),
-    False if it needed no action (mergeable, already fixed, mergeability not yet
-    computed, or no conflicts found locally). The return value drives --limit:
+    False if it needed no action (mergeable, mergeability not yet computed, or
+    no conflicts found locally). The return value drives --limit:
     only acted-on PRs count toward it.
     """
     pr_number = pr["number"]
@@ -656,15 +698,12 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
     print(f"\nPR #{pr_number}: {title}")
     print(f"  mergeable: {mergeable}")
 
-    # Already processed on a prior run — skip regardless of other labels
-    # (including astro-reorg-help-requested). This makes the script safe to
-    # re-run without re-processing or double-commenting.
-    if any(l["name"] == LABEL_PROCESSED for l in pr.get("labels", [])):
-        print(f"  Already processed ({LABEL_PROCESSED}) — skipping.")
-        return False
-
     if mergeable == "MERGEABLE":
-        print("  No conflicts — skipping.")
+        # No conflicts — label so future runs exclude it from the query. This
+        # lets us ignore PRs that land after the reorg reaches master. Labeling
+        # doesn't count as "acting" on the PR, so it never consumes --limit.
+        print(f"  No conflicts — labeling {LABEL_NO_CONFLICTS!r} and skipping.")
+        add_label(pr_number, LABEL_NO_CONFLICTS, dry_run)
         return False
 
     if mergeable == "UNKNOWN":
@@ -734,7 +773,6 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
                 print("  Merge failed but no conflicts could be classified "
                       "— labeling for manual review.")
                 add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-                add_label(pr_number, LABEL_PROCESSED, dry_run)
                 return True
             print("  No conflicts found locally (GitHub mergeability may be stale).")
             return False
@@ -744,41 +782,63 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             # touch it — just label it so a human can resolve it manually.
             print("  Non-reorg conflicts present — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-            add_label(pr_number, LABEL_PROCESSED, dry_run)
             return True
 
         # All conflicts are reorg-caused.  Before attempting an auto-fix, skip
         # PRs that aren't ready: WIP and stale PRs both get a comment pointing
-        # the author to astro-reorg-help-requested when they want help.
-        # Exception: if the author already added `astro-reorg-help-requested`,
-        # they have explicitly opted back in — treat it like a fresh PR.
-        help_requested = any(
-            l["name"] == LABEL_HELP_REQUESTED for l in pr.get("labels", [])
-        )
+        # the author to astro-reorg-help-requested when they want manual help.
         is_wip = any(l["name"] == LABEL_WIP for l in pr.get("labels", []))
-        if is_wip and not help_requested:
-            print("  PR is marked WIP — skipping auto-fix, leaving comment.")
-            add_label(pr_number, LABEL_PROCESSED, dry_run)
+        if is_wip:
+            print("  PR is marked WIP — skipping auto-fix, commenting and labeling.")
+            # Comment once, then apply the skip label. The label is excluded from
+            # the query, so later runs won't pick this PR up and re-comment.
             post_comment(pr_number, build_wip_comment(), dry_run)
+            add_label(pr_number, LABEL_SKIP, dry_run)
             return True
 
-        if is_pr_stale(pr) and not help_requested:
+        # Stale handling. The stale label is both the durable "we deemed this
+        # stale" marker and the guard against re-commenting. We can't use
+        # is_pr_stale() to decide whether a *labeled* PR has been reactivated:
+        # our own label + comment bump updatedAt, so the PR would read as active
+        # on the very next run. Instead we compare updatedAt against when we
+        # applied the label — only activity after that (author pushes, comments,
+        # or removing the label) counts as genuine reactivation.
+        already_stale = any(l["name"] == LABEL_STALE for l in pr.get("labels", []))
+        if already_stale:
+            labeled_at = stale_labeled_at(pr_number)
+            updated_at = _parse_ts(pr["updatedAt"]) if pr.get("updatedAt") else None
+            reactivated = (
+                labeled_at is not None and updated_at is not None
+                and updated_at > labeled_at + STALE_REACTIVATE_GRACE
+            )
+            if not reactivated:
+                print("  Already labeled stale, no activity since — "
+                      "skipping without re-commenting.")
+                return True
+            print("  Reactivated since we labeled it stale — removing stale label.")
+            remove_label(pr_number, LABEL_STALE, dry_run)
+            # Fall through and process the PR normally.
+        elif is_pr_stale(pr):
             print(f"  PR is stale (no activity in >{STALE_DAYS} days) — "
-                  "labeling and commenting without auto-fix.")
-            add_label(pr_number, LABEL_STALE, dry_run)
-            add_label(pr_number, LABEL_PROCESSED, dry_run)
+                  "commenting and labeling without auto-fix.")
+            # Comment first, then label so the label is our last action: the
+            # labeled-event timestamp then matches the PR's updatedAt, giving
+            # the reactivation check on later runs a clean baseline.
             post_comment(pr_number, build_stale_comment(), dry_run)
+            add_label(pr_number, LABEL_STALE, dry_run)
             return True
 
         # All conflicts are reorg-caused.  Attempt the auto-fix.
         print("  All conflicts are reorg-caused — attempting auto-fix.")
         success = attempt_fix(pr, dry_run)
-        if not success:
-            # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
-            print("  Auto-fix failed or not applicable — labeling for manual review.")
-            add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-            post_comment(pr_number, build_manual_review_comment(), dry_run)
-        add_label(pr_number, LABEL_PROCESSED, dry_run)
+        if success:
+            # attempt_fix closed the PR and labeled it LABEL_AUTOFIXED — that's
+            # the only label an autofixed PR carries.
+            return True
+        # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
+        print("  Auto-fix failed or not applicable — labeling for manual review.")
+        add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
+        post_comment(pr_number, build_manual_review_comment(), dry_run)
         return True
 
     finally:
@@ -820,7 +880,8 @@ def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
     return gh_json(  # type: ignore[return-value]
         "pr", "list", "--repo", REPO, "--state", "open",
         "--base", BASE_BRANCH,
-        "--search", f"-label:{LABEL_PROCESSED}",
+        "--search", f"-label:{LABEL_NO_CONFLICTS} -label:{LABEL_MANUAL_REVIEW} "
+                    f"-label:{LABEL_HELP_REQUESTED} -label:{LABEL_SKIP}",
         "--json", fields, "--limit", str(limit),
     )
 
@@ -897,7 +958,8 @@ def main() -> None:
     ensure_label_exists(LABEL_STALE, args.dry_run)
     ensure_label_exists(LABEL_AUTOFIXED, args.dry_run)
     ensure_label_exists(LABEL_AUTO_PR, args.dry_run)
-    ensure_label_exists(LABEL_PROCESSED, args.dry_run)
+    ensure_label_exists(LABEL_NO_CONFLICTS, args.dry_run)
+    ensure_label_exists(LABEL_SKIP, args.dry_run)
 
     existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
@@ -916,8 +978,8 @@ def main() -> None:
             break
         # Isolate failures: one PR raising (e.g. a transient gh/network error)
         # shouldn't abort the whole batch.  A half-finished fix is safe to
-        # retry — a re-run either skips it (astro-reorg-stale) or, if the fix
-        # branch already exists, falls back to manual review.
+        # retry — if the fix branch already exists, the re-run falls back to
+        # manual review rather than clobbering it.
         try:
             if analyze_pr(pr, args.dry_run):
                 acted += 1
