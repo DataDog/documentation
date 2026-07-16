@@ -290,7 +290,7 @@ The Sensitive Data Scanner processor is CPU intensive. Use the following best pr
 
 ### View scanning rule usage with the out-of-the-box Observability Pipelines dashboard
 
-Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][13] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data and which ones might need refining or could be disabled. For example:
+Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][13] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data and which ones might need to be refined or could be disabled. For example:
 - NEED EXAMPLE of when you'd refine a rule
 - If you don't ingest TKTK logs, disable those rules to prevent them from adding unnecessary CPU overhead.
 
