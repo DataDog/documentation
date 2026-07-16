@@ -116,7 +116,8 @@ _TEST_CONFIG = _config.get("test", {})
 TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
 REPO = "DataDog/documentation"
-REPO_REORG_README_LINK = "https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/REPO_REORG.md"
+MASTER_BRANCH_NAME = "jen.gilbert/astro-reorg-scripts"
+REPO_REORG_README_LINK = f"https://github.com/DataDog/documentation/blob/{MASTER_BRANCH_NAME}/REPO_REORG.md"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
 LABEL_STALE = "astro-reorg-stale"
 LABEL_AUTOFIXED = "astro-reorg-autofixed"
@@ -150,30 +151,37 @@ STALE_REACTIVATE_GRACE = timedelta(seconds=60)
 def build_manual_review_comment() -> str:
     """Posted on PRs with non-reorg conflicts, or when auto-fix fails."""
     return (
-        "This PR has merge conflicts from a recent repo reorg that could not be resolved automatically. "
-        "It has been queued for manual review by the Webops-Platform team."
+        f"This PR has merge conflicts from a [recent repo reorg]({REPO_REORG_README_LINK}) that could not be resolved automatically.\n\n"
+        "If you feel comfortable resolving the conflicts yourself:\n\n"
+        "1. Resolve the conflicts. For a full list of repo files and folders and their updated location, "
+        "see [the configuration file for the reorg script]"
+        f"(https://github.com/DataDog/documentation/blob/{MASTER_BRANCH_NAME}/astro_reorg/config.yaml).\n"
+        f"2. When your PR is ready for merge, remove the `{LABEL_WIP}` label.\n"
+        "3. Wait for the standard docs team approval before merging. "
+        "Optionally, you can check the 'ready for merge' checkbox in the PR description "
+        "if you would like the docs team to merge it for you.\n\n"
+        f"If you prefer that we resolve your conflicts, add the label `{LABEL_HELP_REQUESTED}` to your PR. "
+        "This will add it to our support queue, and we will reach out to you as soon as possible."
     )
 
 
 def build_stale_comment() -> str:
     """Posted on PRs with no activity in the last STALE_DAYS days."""
     return (
-        "This PR has conflicts created by the docs repo reorg project. "
-        f"Because this PR is stale (more than {STALE_DAYS} days old), no action was taken. "
-        "If you still intend to use this PR and would like assistance resolving the conflicts, "
-        f"add the label `{LABEL_HELP_REQUESTED}` to your PR to add it to our help queue. "
-        "We will reach out to you as soon as we can."
+        f"This PR has conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
+        f"Because this PR is stale (more than {STALE_DAYS} days old), no attempt was made to auto-resolve the conflicts. "
+        "If you still intend to use this PR, remove the label "
+        f"`{LABEL_STALE}`. Your PR will be processed in the next batch of attempted auto-fixes. "
     )
 
 
 def build_wip_comment() -> str:
     """Posted on PRs carrying the WORK IN PROGRESS label."""
     return (
-        "This PR has merge conflicts created by the docs repo reorg project. "
-        "Because this PR is marked as a work in progress, no action was taken. "
-        "When you're ready and would like assistance resolving the conflicts, "
-        f"add the label `{LABEL_HELP_REQUESTED}` to your PR to add it to our help queue. "
-        "We will reach out to you as soon as we can."
+        f"This PR has merge conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
+        "Because this PR is marked as a work in progress, no attempt was made to auto-resolve the conflicts. "
+        f"When your PR is ready, remove the `{LABEL_WIP}` label and the `{LABEL_SKIP}` label. "
+        "Your PR will be processed in the next batch of attempted auto-fixes."
     )
 
 
@@ -181,7 +189,7 @@ def build_autofix_close_comment(new_pr_number: int | str) -> str:
     """Posted on the original PR when it is closed in favour of a fix PR."""
     return (
         f"🤖 **Reorg conflict auto-fix:**\n\n"
-        f"This PR has merge conflicts caused by the recent docs repo reorg "
+        f"This PR has merge conflicts caused by the [recent docs repo reorg]({REPO_REORG_README_LINK}) "
         f"(files moved from the repo root into `hugo/`). "
         f"A new PR with your commits translated to the correct paths "
         f"has been opened: #{new_pr_number}\n\n"
@@ -197,6 +205,13 @@ def build_autofix_pr_body(original_pr_number: int | str, original_body: str) -> 
         f"translated to the post-reorg `hugo/` layout. The original commits "
         f"are preserved — same messages and authorship.\n\n"
         f"The original PR (#{original_pr_number}) has been closed.\n\n"
+        f"**Next steps:**\n\n"
+        f"1. Verify that this PR looks correct in the browser.\n"
+        f"2. Remove the `{LABEL_WIP}` label from this PR.\n"
+        f"3. Wait for the standard docs team approval before merging. "
+        f"Optionally, you can check the 'ready for merge' checkbox below "
+        f"if you would like the docs team to merge it for you.\n\n"
+        f"- [ ] Ready for merge\n\n"
         f"---\n\n"
         f"**Original PR description:**\n\n{original_body}"
     )
