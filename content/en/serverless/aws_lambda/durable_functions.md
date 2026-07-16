@@ -7,7 +7,7 @@ description: Set up Datadog Serverless Monitoring for AWS Lambda Durable Functio
 
 Datadog provides full visibility into the metrics, logs, and traces for AWS Lambda Durable Function executions. In a single view, you can monitor your AWS Lambda Durable Functions alongside your other serverless compute services to spot bottlenecks and fix errors.
 
-**Supported runtimes:** Python, Node.js
+**Supported runtimes:** Node.js
 
 ## Setup
 
@@ -16,7 +16,6 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
 1. Follow [the steps for instrumenting a Lambda function][1]. Make sure the Datadog Lambda Library is installed and tracing is enabled. Use at least the following versions:
 
     - Datadog Lambda Extension: v98+
-    - Datadog Python Lambda layer: v126+
     - Datadog Node.js Lambda layer: v141+
 
 2. Set the following environment variable on your Lambda function:
@@ -59,7 +58,7 @@ Create a [trace retention filter][6] with the retention query `operation_name:aw
 
 ## Limitations and feedback
 
-Runtimes other than Python and Node.js are not supported. If you encounter an issue with another runtime, open an issue in the [datadog-lambda-extension GitHub repository][7].
+Runtimes other than Node.js are not supported. If you encounter an issue with another runtime, open an issue in the [datadog-lambda-extension GitHub repository][7].
 
 If you encounter an issue with the CloudFormation stack, open an issue in the [cloudformation-template GitHub repository][8].
 
