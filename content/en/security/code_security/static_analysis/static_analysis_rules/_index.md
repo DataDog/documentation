@@ -46,7 +46,7 @@ rulesets:
     description: |
       Rules to enforce code quality for Dart.
   dart-security:
-    title: "Code quality rules for Dart."
+    title: "Security rules for Dart."
     description: |
       Rules to enforce security best practices for Dart.
   docker-best-practices:
