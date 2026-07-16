@@ -434,6 +434,8 @@ To ensure consistency, Datadog normalizes tag keys using underscores and lowerca
 |product/region|us-east-1|product/region:us-east-1|
 |product/usagetype|DataTransfer-Regional-Bytes|product/usagetype:DataTransfer-Regional-Bytes|
 
+Refer to the [AWS CUR 2.0 documentation][33] to learn more about additional columns in the CUR 2.0 export.
+
 ### AWS resource tags
 
 [AWS resource tags][12] are user-defined tags that appear in the AWS console when viewing a particular resource, such as an EC2 instance or S3 bucket.
@@ -596,3 +598,4 @@ After the billing conductor CUR is created, follow the Cloud Cost Management ins
 [30]: /cloud_cost_management/recommendations/
 [31]: https://docs.aws.amazon.com/cost-management/latest/userguide/cost-optimization-hub.html
 [32]: /integrations/amazon_web_services/
+[33]: https://docs.aws.amazon.com/cur/latest/userguide/table-dictionary-cur2.html
