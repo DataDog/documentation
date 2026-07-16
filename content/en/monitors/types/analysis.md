@@ -56,7 +56,7 @@ The following data sources are not supported:
 - Infrastructure Resources
 
 
-If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source, for example:
+If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source. For example:
 
 `Analysis is based on an unsupported datasource for monitoring: Infrastructure Resources`
 
