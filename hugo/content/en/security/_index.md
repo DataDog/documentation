@@ -169,7 +169,7 @@ Datadog [App and API Protection (AAP)][1] provides observability into applicatio
 
 [Workload Protection][26] monitors file, network, and process activity across your environment to detect real-time threats to your infrastructure. As part of the Datadog platform, you can combine the real-time threat detection of Workload Protection with metrics, logs, traces, and other telemetry to see the full context surrounding a potential attack on your workloads.
 
-- Proactively block threats with [Active Protection][31].
+- Proactively block threats with [Automated response][31].
 - Manage out-of-the-box and custom [detection rules][32].
 - Set up real-time [notifications][33].
 - Investigate and remediate [security signals][34].
@@ -214,7 +214,7 @@ After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui
 [28]: /security/code_security/software_composition_analysis/
 [29]: /security/code_security/iast/
 [30]: /security/code_security/secret_scanning/
-[31]: /security/workload_protection/respond_and_report/active_protection
+[31]: /security/workload_protection/respond_and_report/automated_response
 [32]: /security/workload_protection/workload_security_rules
 [33]: /security/notifications/
 [34]: /security/workload_protection/security_signals
