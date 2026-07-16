@@ -11,7 +11,6 @@ further_reading:
 - link: real_user_monitoring/error_tracking/
   tag: Documentation
   text: Learn about Error Tracking
-title: Unity Crash Reporting and Error Tracking
 ---
 
 {{< include-markdown "real_user_monitoring/application_monitoring/unity/error_tracking" >}}

@@ -18,7 +18,7 @@ To test your client's cipher suite compatibility, connect to [tls-config-test.da
 
 ## Accepted cipher suites
 
-{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2,uk1" >}}
 
 Effective September 1, 2026, Datadog will accept only the following cipher suites:
 
@@ -51,7 +51,7 @@ Datadog accepts the following cipher suites for {{< region-param key="dd_site_na
 
 {{< /site-region >}}
 
-{{< site-region region="us,eu,us3,us5,ap1,ap2" >}}
+{{< site-region region="us,eu,us3,us5,ap1,ap2,uk1" >}}
 
 ## Disabled cipher suites
 

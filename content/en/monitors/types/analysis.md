@@ -20,14 +20,45 @@ The Analysis monitor is in Preview. You must have access to the Notebooks advanc
 
 ## Overview
 
-<div class="alert alert-danger">Datasets that include Flex Logs are not supported.</div>
-
 Analysis monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:
 
 - Query multiple data sources
 - Chain data transformations
 - Run complex SQL queries
 - Create sophisticated analysis workflows
+
+## Supported data sources
+
+Analysis monitors support a subset of the data sources available in Notebook Analysis cells. Because monitors evaluate their queries frequently, each data source is enabled only after it's validated to handle monitor-level query load.
+
+The following data sources are supported:
+
+- Audit
+- CI Pipelines
+- CI Tests
+- Events
+- LLM Observability
+- Logs
+- Metrics
+- NetFlow
+- Network
+- Reference Tables
+- RUM
+- Service Checks
+- Spans
+
+Published datasets are supported only when every data source they depend on is also supported.
+
+The following data sources are not supported:
+
+- Dora Metrics
+- Flex Logs
+- Infrastructure Resources
+
+
+If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
+
+`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
 
 ## Monitor creation
 

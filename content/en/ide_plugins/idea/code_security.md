@@ -53,7 +53,7 @@ To see the configuration data in your IDE, run the action **Show Datadog Static 
 
 {{< img src="/ide_plugins/idea/code_security/show-sa-config.png" alt="Action to show the Static Analyzer configuration" style="width:80%;" >}}
 
-You can save a local configuration file (`static-analysis.datadog.yml`) at the root of the repository, and its settings will be merged with the remote configuration. When there is no remote configuration available, the local configuration file is used on its own.
+You can save a local configuration file (`code-security.datadog.yaml`) at the root of the repository, and its settings will be merged with the remote configuration. When there is no remote configuration available, the local configuration file is used on its own.
 
 <div class="alert alert-tip">Using a local configuration file is a great way to try out the feature, and it works even without a Datadog login.</div>
 
