@@ -119,6 +119,7 @@ _TEST_CONFIG = _config.get("test", {})
 TEST_BASE_BRANCH: str | None = _TEST_CONFIG.get("mock_reorged_master_branch")
 
 REPO = "DataDog/documentation"
+REPO_REORG_README_LINK = "https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/REPO_REORG.md"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"
 LABEL_STALE = "has-astro-reorg-conflicts"
 LABEL_AUTOFIXED = "astro-reorg-autofixed"
@@ -133,26 +134,63 @@ LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
 # comment + label instead of an auto-fix attempt.
 STALE_DAYS = 31  # ~1 calendar month
 
-MANUAL_REVIEW_COMMENT = (
-    "This PR has merge conflicts from a recent repo reorg that could not be resolved automatically. "
-    "It has been queued for manual review by the Webops-Platform team."
-)
+# ---------------------------------------------------------------------------
+# Comment builders — one function per user-facing message
+# ---------------------------------------------------------------------------
 
-STALE_COMMENT = (
-    "This PR has conflicts created by the docs repo reorg project. "
-    "Because this PR is stale (more than one month old), no action was taken. "
-    "If you still intend to use this PR and would like assistance resolving the conflicts, "
-    "add the label `astro-reorg-help-requested` to your PR to add it to our help queue. "
-    "We will reach out to you as soon as we can."
-)
+def build_manual_review_comment() -> str:
+    """Posted on PRs with non-reorg conflicts, or when auto-fix fails."""
+    return (
+        "This PR has merge conflicts from a recent repo reorg that could not be resolved automatically. "
+        "It has been queued for manual review by the Webops-Platform team."
+    )
 
-WIP_COMMENT = (
-    "This PR has merge conflicts created by the docs repo reorg project. "
-    "Because this PR is marked as a work in progress, no action was taken. "
-    "When you're ready and would like assistance resolving the conflicts, "
-    "add the label `astro-reorg-help-requested` to your PR to add it to our help queue. "
-    "We will reach out to you as soon as we can."
-)
+
+def build_stale_comment() -> str:
+    """Posted on PRs with no activity in the last STALE_DAYS days."""
+    return (
+        "This PR has conflicts created by the docs repo reorg project. "
+        f"Because this PR is stale (more than {STALE_DAYS} days old), no action was taken. "
+        "If you still intend to use this PR and would like assistance resolving the conflicts, "
+        f"add the label `{LABEL_HELP_REQUESTED}` to your PR to add it to our help queue. "
+        "We will reach out to you as soon as we can."
+    )
+
+
+def build_wip_comment() -> str:
+    """Posted on PRs carrying the WORK IN PROGRESS label."""
+    return (
+        "This PR has merge conflicts created by the docs repo reorg project. "
+        "Because this PR is marked as a work in progress, no action was taken. "
+        "When you're ready and would like assistance resolving the conflicts, "
+        f"add the label `{LABEL_HELP_REQUESTED}` to your PR to add it to our help queue. "
+        "We will reach out to you as soon as we can."
+    )
+
+
+def build_autofix_close_comment(new_pr_number: int | str) -> str:
+    """Posted on the original PR when it is closed in favour of a fix PR."""
+    return (
+        f"🤖 **Reorg conflict auto-fix:**\n\n"
+        f"This PR has merge conflicts caused by the recent docs repo reorg "
+        f"(files moved from the repo root into `hugo/`). "
+        f"A new PR with your commits translated to the correct paths "
+        f"has been opened: #{new_pr_number}\n\n"
+        f"If the new PR looks correct, merge it."
+    )
+
+
+def build_autofix_pr_body(original_pr_number: int | str, original_body: str) -> str:
+    """Body of the auto-generated fix PR."""
+    return (
+        f"🤖 Auto-generated fix for #{original_pr_number}.\n\n"
+        f"This PR replays the commits from #{original_pr_number} with file paths "
+        f"translated to the post-reorg `hugo/` layout. The original commits "
+        f"are preserved — same messages and authorship.\n\n"
+        f"The original PR (#{original_pr_number}) has been closed.\n\n"
+        f"---\n\n"
+        f"**Original PR description:**\n\n{original_body}"
+    )
 
 # Existing repo label applied to auto-created fix PRs in test mode so they stay
 # out of other teams' review queues. Assumed to already exist in the repo.
@@ -564,15 +602,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         # Open a new PR for the fix branch so the author can preview, review,
         # and merge it directly — then close the original conflicting PR.
         original_body = pr.get("body") or ""
-        new_pr_body = (
-            f"🤖 Auto-generated fix for #{pr_number}.\n\n"
-            f"This PR replays the commits from #{pr_number} with file paths "
-            f"translated to the post-reorg `hugo/` layout. The original commits "
-            f"are preserved — same messages and authorship.\n\n"
-            f"The original PR (#{pr_number}) has been closed.\n\n"
-            f"---\n\n"
-            f"**Original PR description:**\n\n{original_body}"
-        )
+        new_pr_body = build_autofix_pr_body(pr_number, original_body)
         # We only reach this point on a real run; dry-run returned earlier.
         new_pr_title = f"[reorg fix] {pr['title']}"
         pr_create = gh_run(
@@ -597,13 +627,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
 
         gh_run(
             "pr", "close", str(pr_number), "--repo", REPO,
-            "--comment",
-            f"🤖 **Reorg conflict auto-fix:**\n\n"
-            f"This PR has merge conflicts caused by the recent docs repo reorg "
-            f"(files moved from the repo root into `hugo/`). "
-            f"A new PR with your commits translated to the correct paths "
-            f"has been opened: #{new_pr_number}\n\n"
-            f"If the new PR looks correct, merge it.",
+            "--comment", build_autofix_close_comment(new_pr_number),
         )
         print(f"  Closed PR #{pr_number} with comment pointing to fix PR #{new_pr_number}")
         add_label(pr_number, LABEL_STALE, dry_run)
@@ -735,7 +759,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
         if is_wip and not help_requested:
             print("  PR is marked WIP — skipping auto-fix, leaving comment.")
             add_label(pr_number, LABEL_PROCESSED, dry_run)
-            post_comment(pr_number, WIP_COMMENT, dry_run)
+            post_comment(pr_number, build_wip_comment(), dry_run)
             return True
 
         if is_pr_stale(pr) and not help_requested:
@@ -743,7 +767,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
                   "labeling and commenting without auto-fix.")
             add_label(pr_number, LABEL_STALE, dry_run)
             add_label(pr_number, LABEL_PROCESSED, dry_run)
-            post_comment(pr_number, STALE_COMMENT, dry_run)
+            post_comment(pr_number, build_stale_comment(), dry_run)
             return True
 
         # All conflicts are reorg-caused.  Attempt the auto-fix.
@@ -753,7 +777,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
             print("  Auto-fix failed or not applicable — labeling for manual review.")
             add_label(pr_number, LABEL_MANUAL_REVIEW, dry_run)
-            post_comment(pr_number, MANUAL_REVIEW_COMMENT, dry_run)
+            post_comment(pr_number, build_manual_review_comment(), dry_run)
         add_label(pr_number, LABEL_PROCESSED, dry_run)
         return True
 

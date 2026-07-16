@@ -30,6 +30,7 @@ top_level:
   - LICENSE
   - CONTRIBUTING.md
   - CLAUDE.md
+  - REPO_REORG.md
 
   # Linting / formatting (shared)
   - .eslintrc
