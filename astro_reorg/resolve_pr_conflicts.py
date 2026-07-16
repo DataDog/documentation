@@ -167,6 +167,12 @@ STALE_DAYS = 31  # ~1 calendar month
 # any skew so our own labeling never counts as fresh activity.
 STALE_REACTIVATE_GRACE = timedelta(seconds=60)
 
+# Appended to every author-facing comment so readers know how to follow up.
+AUTOMATED_COMMENT_FOOTER = (
+    "\n\nThis is an automated comment, but if you have a question, you can mention me in this PR "
+    "(external contributors) or reach out in #docs-repo-reorg-support on Slack (internal contributors)."
+)
+
 # ---------------------------------------------------------------------------
 # Comment builders — one function per user-facing message
 # ---------------------------------------------------------------------------
@@ -185,6 +191,7 @@ def build_manual_review_comment() -> str:
         "if you would like the docs team to merge it for you.\n\n"
         f"If you prefer that we resolve your conflicts, add the label `{LABEL_HELP_REQUESTED}` to your PR. "
         "This will add it to our support queue, and we will reach out to you as soon as possible."
+        + AUTOMATED_COMMENT_FOOTER
     )
 
 
@@ -194,7 +201,8 @@ def build_stale_comment() -> str:
         f"This PR has conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
         f"Because this PR is stale (more than {STALE_DAYS} days old), no attempt was made to auto-resolve the conflicts. "
         "If you still intend to use this PR, remove the label "
-        f"`{LABEL_STALE}`. Your PR will be processed in the next batch of attempted auto-fixes. "
+        f"`{LABEL_STALE}`. Your PR will be processed in the next batch of attempted auto-fixes."
+        + AUTOMATED_COMMENT_FOOTER
     )
 
 
@@ -205,6 +213,7 @@ def build_wip_comment() -> str:
         "Because this PR is marked as a work in progress, no attempt was made to auto-resolve the conflicts. "
         f"When your PR is ready, remove the `{LABEL_WIP}` label and the `{LABEL_SKIP}` label. "
         "Your PR will be processed in the next batch of attempted auto-fixes."
+        + AUTOMATED_COMMENT_FOOTER
     )
 
 
@@ -216,7 +225,8 @@ def build_autofix_close_comment(new_pr_number: int | str) -> str:
         f"(files moved from the repo root into `hugo/`). "
         f"A new PR with your commits translated to the correct paths "
         f"has been opened: #{new_pr_number}\n\n"
-        f"If the new PR looks correct, merge it."
+        f"Please follow the instructions in the PR description."
+        + AUTOMATED_COMMENT_FOOTER
     )
 
 
@@ -233,7 +243,7 @@ def build_autofix_pr_body(
     between, the @mention is the author's only signal that the fix exists.
     """
     mention = (
-        f"@{author_login} — the docs repo reorg created merge conflicts in your "
+        f"@{author_login} — the [docs repo reorg]({REPO_REORG_README_LINK}) created merge conflicts in your "
         f"PR #{original_pr_number}. This is an auto-generated replacement with the "
         f"file paths fixed; please use it instead of the original.\n\n"
         if author_login else ""
