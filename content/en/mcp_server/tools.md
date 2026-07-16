@@ -1636,7 +1636,7 @@ Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppr
 ### `update_datadog_security_findings_automation_rule`
 *Toolset: **security***\
 *Permissions Required: `Security Pipelines Write`*\
-Updates an existing automation rule. Supports partial updates, so only the fields you provide change. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
+Updates an existing automation rule. Supports partial updates, so only the provided fields are changed. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
 
 - Enable the automation rule that mutes staging findings.
 - Change the due-date rule to give critical findings 14 days instead of 30.

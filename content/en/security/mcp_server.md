@@ -148,7 +148,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Pipelines Write`, `Security Monitoring Findings Read`*
 
 `update_datadog_security_findings_automation_rule`
-: Updates an existing automation rule. Supports partial updates, so only the fields you provide change. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
+: Updates an existing automation rule. Supports partial updates, so only the provided fields are changed. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
 : *Permissions required: `Security Pipelines Write`*
 
 `delete_datadog_security_findings_automation_rule`
