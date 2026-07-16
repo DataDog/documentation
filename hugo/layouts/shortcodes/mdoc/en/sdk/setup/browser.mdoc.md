@@ -26,14 +26,14 @@ Create or find the application in the Datadog UI, or from the terminal. The term
 
 {% tabs %}
 {% tab label="Datadog UI" %}
-1. In Datadog, navigate to [**Digital Experience** > **Applications**][5].
+1. In Datadog, navigate to [**Digital Experience** > **Manage Applications**][5].
 2. Reuse an existing JavaScript (JS) application that represents the browser application you want to monitor. If no matching application exists, click **New Application**, select **JS**, enter a name, and click **Create Application**.
 3. On the application's **SDK Configuration** page, copy its `clientToken` and `applicationId`.
 {% /tab %}
 {% tab label="Terminal (API)" %}
 If you prefer the terminal, or your tooling cannot manage RUM applications, use the API. You need a Datadog [API key and application key][16]. The application key must have the `rum_apps_read` permission to inspect and reuse applications, and the `rum_apps_write` permission to create one. Store these privileged keys in terminal environment variables. Do not add them to frontend code or client-side environment files.
 
-Your site's API base URL is {% region-param key="dd_api" /%}. Copy that value into `DD_API_BASE_URL`, then list existing applications before creating one:
+Your site's API base URL is {% region-param key="dd_api" %}. Copy that value into `DD_API_BASE_URL`, then list existing applications before creating one:
 
 ```shell
 export DD_API_BASE_URL="<DATADOG_API_BASE_URL>"
