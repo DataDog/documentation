@@ -75,7 +75,7 @@ If you anticipate creating new monitor groups within the scope of your multi ale
 
 ## Monitor groups and retention
 
-By default, Datadog keeps monitor groups available in the UI for 24 hours, or 48 hours for host monitors, unless the query is changed. This retention period affects how long monitor groups remain visible and continue to be evaluated after they stop reporting data.
+Datadog keeps monitor groups available in the UI for a retention period after they stop reporting, unless the query changes. This retention period affects how long monitor groups remain visible and continue to be evaluated. The retention period depends on the monitor type and configuration. For details, see [Group retention time][23].
 
 For detailed information about monitor group persistence, including how to handle renamed or decommissioned hosts that continue appearing in alerts, see [Monitor settings changes not taking effect][9].
 
@@ -124,3 +124,4 @@ If you are using multiple `@opsgenie-[...]` notifications in your monitor, we se
 [20]: /notebooks
 [21]: /dashboards/functions/rollup/#rollups-in-monitors
 [22]: /monitors/guide/monitor_aggregators/
+[23]: /monitors/configuration/?tab=thresholdalert#group-retention-time
