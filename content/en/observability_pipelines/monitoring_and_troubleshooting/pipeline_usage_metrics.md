@@ -45,7 +45,7 @@ All metrics are tagged with the following:
 : The name of the pipeline when it was last deployed or updated. Available in Worker version 2.18 and later.
 
 **Notes**:
-- Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` that starts with an underscore. To exclude them from your queries, filter with `!component_id:_*`.
+- Every Worker also runs an internal pipeline that collects the Worker's own telemetry (metrics and logs) and sends it to Datadog. The components in this internal pipeline have a `component_id` tag whose value starts with an underscore (`_`). To exclude these metrics from your queries, use `!component_id:_*`.
 - Metrics ending in `_total` report a count for each time interval, so their raw value does not increase monotonically.
 
 ## Estimated usage metric
