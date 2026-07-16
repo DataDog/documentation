@@ -102,3 +102,80 @@ To instead ask a person to step in rather than have the script retry, the author
 ## Limiting a run and dry runs
 - A run can be capped to act on only a set number of PRs. A PR counts against that cap when it's auto-fixed or gets a review/stale label and comment. PRs that need no action — clean PRs, ones GitHub hasn't evaluated, or ones that turn out clean on the trial merge — don't count.
 - By default the script only reports what it *would* do, without changing anything, and runs against a mock base branch for safety. There are flags to apply changes for real and to run against the real `master`.
+
+## State machine diagram
+
+```mermaid
+flowchart TD
+    START([Query open PRs targeting base branch]) --> FILTER
+
+    FILTER{Already has<br/>NO_CONFLICTS label,<br/>MANUAL_REVIEW label,<br/>HELP_REQUESTED label,<br/>or SKIP label?}
+    FILTER -- Yes --> IGNORE([⏭️&nbsp; Ignore — skip permanently])
+    FILTER -- No --> CONFLICT_STATUS
+
+    CONFLICT_STATUS{Conflict<br/>status?}
+    CONFLICT_STATUS -- No conflicts --> CLEAN[Add NO_CONFLICTS label]
+    CONFLICT_STATUS -- Unknown / not yet computed --> SKIP_PENDING([⏭️&nbsp; Skip — no label<br/>reassess next run])
+    CONFLICT_STATUS -- Has conflicts --> TRIAL_MERGE
+
+    CLEAN --> DONE_CLEAN([✅&nbsp; Done — doesn't count against cap])
+
+    TRIAL_MERGE[Trial merge<br/>against post-reorg base]
+    TRIAL_MERGE --> TRIAL_RESULT
+
+    TRIAL_RESULT{Trial merge<br/>result?}
+    TRIAL_RESULT -- "Can't identify conflicting files" --> MANUAL_REVIEW
+    TRIAL_RESULT -- "Trial merge clean<br/>(stale GitHub status)" --> SKIP_STALE_STATUS([⏭️&nbsp; Skip — no label<br/>reassess next run])
+    TRIAL_RESULT -- "Non-reorg conflicts<br/>exist" --> MANUAL_REVIEW
+    TRIAL_RESULT -- "All conflicts are<br/>reorg-caused" --> CHECK_WIP
+
+    CHECK_WIP{PR has<br/>WIP label?}
+    CHECK_WIP -- Yes --> WIP_ACTION["Comment: how to ask for help<br/>Add SKIP label"]
+    CHECK_WIP -- No --> CHECK_STALE
+
+    WIP_ACTION --> DONE_WIP([✅&nbsp; Done — counts against cap])
+
+    CHECK_STALE{Is PR<br/>stale?}
+    CHECK_STALE -- No --> AUTOFIX
+    CHECK_STALE -- "Yes, not yet<br/>labeled stale" --> STALE_LABEL["Comment: PR is stale<br/>Add STALE label"]
+    CHECK_STALE -- "Yes, already<br/>has STALE label" --> CHECK_REACTIVATED
+
+    STALE_LABEL --> DONE_STALE([✅&nbsp; Done — counts against cap])
+
+    CHECK_REACTIVATED{Reactivated since<br/>label was applied?}
+    CHECK_REACTIVATED -- "Can't read<br/>activity history" --> SKIP_STALE([⏭️&nbsp; Skip quietly — no label<br/>no count against cap])
+    CHECK_REACTIVATED -- Not reactivated --> SKIP_STALE
+    CHECK_REACTIVATED -- Reactivated --> REMOVE_STALE["Remove STALE label"]
+
+    REMOVE_STALE --> AUTOFIX
+
+    AUTOFIX{Partial fix<br/>already in progress?}
+    AUTOFIX -- "Fix PR already open" --> REUSE["Reuse fix PR<br/>Re-apply labels"]
+    AUTOFIX -- "Fix branch pushed<br/>but no PR" --> OPEN_PR_FROM_BRANCH["Open fix PR<br/>from existing branch"]
+    AUTOFIX -- "No partial state" --> REPLAY
+
+    REPLAY[Replay commits onto<br/>new fix branch with<br/>updated hugo/ paths]
+    REPLAY -- "Replay fails<br/>(fork, locked branch,<br/>or other error)" --> MANUAL_REVIEW
+    REPLAY -- Success --> PUSH_AND_OPEN["Push fix branch<br/>Open fix PR<br/>(AUTO_PR + WIP labels;<br/>DO_NOT_MERGE label in test runs)<br/>@mention original author"]
+
+    PUSH_AND_OPEN --> CLOSE_ORIGINAL
+    REUSE --> CLOSE_ORIGINAL
+    OPEN_PR_FROM_BRANCH --> CLOSE_ORIGINAL
+
+    CLOSE_ORIGINAL["Close original PR<br/>with link to fix PR<br/>Add AUTOFIXED label to original<br/>Add PROCESSED label to both"]
+    CLOSE_ORIGINAL --> DONE_FIXED([✅&nbsp; Done — counts against cap])
+
+    MANUAL_REVIEW["🔴&nbsp; Add MANUAL_REVIEW + WIP labels<br/>Post comment:<br/>resolve conflicts or add<br/>HELP_REQUESTED label<br/>(excluded from all future runs)"]
+    MANUAL_REVIEW --> DONE_MANUAL([✅&nbsp; Done — counts against cap])
+
+    style MANUAL_REVIEW fill:#fff,stroke:#000,color:#000
+    style DONE_FIXED fill:#fff,stroke:#000,color:#000
+    style DONE_CLEAN fill:#fff,stroke:#000,color:#000
+    style IGNORE fill:#fff,stroke:#000,color:#000
+    style SKIP_PENDING fill:#fff,stroke:#000,color:#000
+    style SKIP_STALE fill:#fff,stroke:#000,color:#000
+    style SKIP_STALE_STATUS fill:#fff,stroke:#000,color:#000
+    style DONE_WIP fill:#fff,stroke:#000,color:#000
+    style DONE_STALE fill:#fff,stroke:#000,color:#000
+    style DONE_MANUAL fill:#fff,stroke:#000,color:#000
+```
