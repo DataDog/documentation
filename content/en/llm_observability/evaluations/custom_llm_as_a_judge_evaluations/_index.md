@@ -46,7 +46,7 @@ Learn more about the [compatibility requirements][6].
 1. To enable tracing for evaluations, select the {{< ui >}} Tracing Disabled {{< /ui >}} button and select the toggle to enable tracing. Evaluation traces will appear under `datadog-evaluations` when this evaluation is run, allowing greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog. 
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
-1. Select the {{< ui >}}Model{{< /ui >}} to configure the model. 
+1. Configure the model:
     1. Select the {{< ui >}}Accout{{< /ui>}}  drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
         - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
