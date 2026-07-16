@@ -7709,26 +7709,31 @@ menu:
       parent: security_platform
       identifier: automation_pipelines
       weight: 4
+    - name: Modify Severity Level
+      url: security/automation_pipelines/modify_severity
+      parent: automation_pipelines
+      identifier: automation_pipelines_modify_severity
+      weight: 10001
     - name: Mute
       url: security/automation_pipelines/mute
       parent: automation_pipelines
       identifier: automation_pipelines_mute
-      weight: 10001
-    - name: Add to Security Inbox
-      url: security/automation_pipelines/security_inbox
-      parent: automation_pipelines
-      identifier: automation_pipelines_inbox
       weight: 10002
     - name: Set Due Date Rules
       url: security/automation_pipelines/set_due_date
       parent: automation_pipelines
       identifier: automation_pipelines_due_date
       weight: 10003
+    - name: Add to Security Inbox
+      url: security/automation_pipelines/security_inbox
+      parent: automation_pipelines
+      identifier: automation_pipelines_inbox
+      weight: 10004
     - name: Create Tickets
       url: security/automation_pipelines/create_ticket
       parent: automation_pipelines
       identifier: automation_pipelines_create_ticket
-      weight: 10004
+      weight: 10005
     - name: Security Inbox
       url: security/security_inbox
       parent: security_platform
@@ -8121,6 +8126,11 @@ menu:
       url: /security/code_security/dev_tool_int/mcp_server/troubleshooting/
       parent: dev_tool_int_mcp_server
       weight: 2
+    - name: SCFW GitHub Action
+      identifier: dev_tool_int_scfw_github_action
+      url: /security/code_security/dev_tool_int/scfw_github_action/
+      parent: dev_tool_int
+      weight: 6
     - name: Troubleshooting
       identifier: sec_code_sec_tshoot
       url: /security/code_security/troubleshooting/
@@ -9946,6 +9956,21 @@ menu:
       parent: product_analytics
       identifier: pa_export_pipelines
       weight: 7
+    - name: Usability
+      url: product_analytics/usability
+      parent: product_analytics
+      identifier: pa_usability
+      weight: 8
+    - name: Guides
+      url: product_analytics/guide/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 9
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 10
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9982,11 +10007,16 @@ menu:
       parent: pa_experiments_concepts
       identifier: pa_experiments_exposure_sql
       weight: 2
+    - name: SQL Template Variables
+      url: experiments/concepts/sql_template_variables
+      parent: pa_experiments_concepts
+      identifier: pa_experiments_sql_template_variables
+      weight: 3
     - name: Cumulative Impact
       url: experiments/concepts/cumulative_impact
       parent: pa_experiments_concepts
       identifier: pa_experiments_cumulative_impact
-      weight: 3
+      weight: 4
     - name: Statistics
       url: experiments/statistics/
       parent: pa_experiments
@@ -10027,16 +10057,6 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_guide
       weight: 12
-    - name: Guides
-      url: product_analytics/guide/
-      parent: product_analytics
-      identifier: pa_guides
-      weight: 6
-    - name: Troubleshooting
-      url: product_analytics/troubleshooting/
-      parent: product_analytics
-      identifier: pa_troubleshooting
-      weight: 7
     - name: Session Replay
       url: session_replay/
       pre: play-circle
