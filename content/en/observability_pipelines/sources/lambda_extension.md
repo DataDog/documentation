@@ -31,7 +31,7 @@ Follow the instructions in [Instrument AWS Lambda applications][2] to set up the
 
 ## Metrics
 
-For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. Since you use the HTTP server source to send logs from Lambda Extension to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
+For [component metrics][3] and [source buffer metrics][4] emitted by all sources, see the [Pipelines Usage Metrics][5] documentation. Since you use the HTTP Server source to send logs from Lambda Extension to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 
 [1]: https://docs.datadoghq.com/serverless/libraries_integrations/extension/
 [2]: https://docs.datadoghq.com/serverless/aws_lambda/instrumentation/
