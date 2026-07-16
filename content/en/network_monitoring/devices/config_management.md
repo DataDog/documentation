@@ -2,6 +2,9 @@
 title: Network Configuration Management
 description: "View and compare device configuration changes in NDM."
 further_reading:
+  - link: "/network_monitoring/devices/config_management_rollback"
+    tag: "Documentation"
+    text: "Network Configuration Management Rollbacks"
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
@@ -15,6 +18,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 - Monitor how device configurations change over time
 - Compare two configuration versions side by side
 - Use AI-generated summaries to understand changes and their potential impact during incidents
+- [Roll back a device to a previous configuration][9]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
@@ -130,6 +134,12 @@ The comparison view shows both configurations side by side with inline diffs tha
 
    {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_3.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
 
+### Roll back to a previous configuration
+
+If a configuration change causes an issue, you can restore a device to a previous configuration directly from Datadog. Rollbacks use a Private Action Runner to apply the selected configuration back to the device.
+
+See [Network Configuration Management Rollbacks][9] for setup and usage instructions.
+
 ## AI summaries
 
 Network Configuration Management includes an AI-powered summary panel that translates configuration changes into natural language explanations.
@@ -170,3 +180,4 @@ For the profile source files, see the [NCM default profiles directory][8] in the
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
 [8]: https://github.com/DataDog/datadog-agent/tree/main/pkg/networkconfigmanagement/profile/default_profiles
+[9]: /network_monitoring/devices/config_management_rollback
