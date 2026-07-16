@@ -61,18 +61,16 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 ##### Supported Cloud environments
 
-| Cloud environments                      | eBPF agent supported | eBPF-less agent supported |
-|-----------------------------------------|----------------------|---------------------------|
-| Amazon Elastic Compute Cloud (EC2)      | ✅                    | ✅                         |
-| Amazon Elastic Kubernetes Service (EKS) | ✅                    | ✅                         |
-| Amazon Elastic Container Service (ECS)  | ✅                    | ✅                         |
-| Amazon Fargate                          | ❌                    | ✅                         |
-| Azure Virtual Machines (Azure VMs)      | ✅                    | ✅                         |
-| Azure Kubernetes Service (AKS)          | ✅                    | ✅                         |
-| Google Compute Engine (GCE)             | ✅                    | ✅                         |
-| Google Kubernetes Engine (GKE)          | ✅                    | ✅                         |
-| Google GKE Autopilot                    | ❌                    | ✅                         |
-| Google Cloud Run                        | ❌                    | ✅                         |
+| Cloud environments                      | Supported | 
+|-----------------------------------------|----------------------|
+| Amazon Elastic Compute Cloud (EC2)      | ✅                    |
+| Amazon Elastic Kubernetes Service (EKS) | ✅                    |
+| Amazon Elastic Container Service (ECS)  | ✅                    |
+| Amazon Fargate                          | ✅ (only using eBPF-less agent)                    |
+| Azure Virtual Machines (Azure VMs)      | ✅                    |
+| Azure Kubernetes Service (AKS)          | ✅                    | 
+| Google Compute Engine (GCE)             | ✅                    |
+| Google Kubernetes Engine (GKE)          | ✅                    | 
 
 **Notes:**
 
