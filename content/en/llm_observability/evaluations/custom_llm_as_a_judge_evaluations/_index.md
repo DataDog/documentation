@@ -51,7 +51,7 @@ Learn more about the [compatibility requirements][6].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
         - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
     1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model.
-1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by clicking the button to the right of sampling.
+1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by selecting the button to the right of the sampling rate.
 1. In the {{< ui >}}Template{{< /ui >}} section, use the drop-down menu:
    - {{< ui >}}Create from scratch{{< /ui >}}: Use your own custom prompt (defined in the next step).
    - {{< ui >}}Failure to Answer{{< /ui >}}, {{< ui >}}Prompt Injection{{< /ui >}}, {{< ui >}}Sentiment{{< /ui >}}, etc.: Populate a pre-existing prompt template. You can use these templates as-is, or modify them to match your specific evaluation logic.
