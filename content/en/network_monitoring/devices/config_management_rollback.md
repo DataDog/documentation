@@ -22,7 +22,7 @@ Rollbacks are currently supported for the following vendors and platforms:
 ## Prerequisites
 
 - [Network Configuration Management][2] must be set up for your devices.
-- <!-- TODO: minimum Agent version for rollback support -->
+- The Datadog Agent must be on version `7.83.0` or later.
 - A [Private Action Runner][1] that the Agent's IPC port (default `5001`) can reach, either on the same host or over the network.
 
 ## Setup
@@ -49,7 +49,21 @@ Rollbacks are currently supported for the following vendors and platforms:
      inventory_report_max_interval: 3600
    ```
 
-3. <!-- TODO: additional configuration required for evictions -->
+3. Optionally, configure the local store that holds configurations eligible for rollback:
+
+   ```yaml
+   init_config:
+     store:
+       ## @param min_configs_per_device - integer - optional - default: 2
+       ## Minimum number of configurations to retain per device, regardless of age.
+       min_configs_per_device: 2
+       ## @param max_configs_per_device - integer - optional - default: 24
+       ## Maximum number of configurations to retain per device before older ones are evicted.
+       max_configs_per_device: 24
+       ## @param max_raw_config_store_bytes - integer - optional - default: 2000000000 (2 GB)
+       ## Maximum size, in bytes, of the local configuration store before older configurations are evicted.
+       max_raw_config_store_bytes: 2000000000
+   ```
 
 4. The Agent process needs write access to the `run_path` directory, where rollback data is stored locally.
 
@@ -59,9 +73,10 @@ Rollbacks are currently supported for the following vendors and platforms:
 
 1. [Set up a Private Action Runner][1] on a host that the Agent's IPC port can reach.
 2. Enable the `com.datadoghq.remoteaction.networkconfigmanagement` remote action bundle on the runner.
-3. Register the runner in Datadog and assign it to an execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action.
+3. Register the runner in Datadog and assign it to an execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action (via creating a policy within the execution group).
+   - The policy must grant `Editor` access to users with the `NCM Device Config Write` role.
 
-   <!-- TODO: screenshot showing where to assign the execution group/action permission -->
+   {{< img src="/network_device_monitoring/config_mgmt/exeuction_group_policy.png" alt="TODO: describe what this screenshot shows" style="width:100%;" >}}
 
 ### Permissions
 
@@ -77,7 +92,11 @@ Users who trigger rollbacks need the NCM Write permission active on their accoun
 ## Trigger a rollback
 
 1. Navigate to the [Configuration tab][2] for a device in the NDM device view.
-2. <!-- TODO: fill in the actual UI steps to select a configuration version and trigger the rollback -->
+2. Select the configuration version you want to roll back to. The side panel displays a {{< ui >}}Rollback{{< /ui >}} button for that version.
+3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal, and click {{< ui >}}Rollback{{< /ui >}} again to confirm.
+
+   {{< img src="/network_device_monitoring/config_mgmt/rollback_confirm.png" alt="TODO: describe what this screenshot shows" style="width:100%;" >}}
+
 
 ## Further Reading
 
