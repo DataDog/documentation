@@ -88,6 +88,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
+`DD_LLMOBS_SAMPLE_RATE`
+: optional - _float_ - **default**: `1.0`
+<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
+
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
@@ -131,15 +135,13 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_SAMPLE_RATE`
 : optional - _float_ - **default**: `1.0`
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). This sampling is independent of in-app controls such as [automation rules][2] and [APM trace sampling][3].
+<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
 
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
-[2]: /llm_observability/monitoring/automation_rules/
-[3]: /tracing/trace_pipeline/ingestion_mechanisms/
 {{% /tab %}}
 {{% tab "Java" %}}
 
@@ -275,7 +277,7 @@ const llmobs = tracer.llmobs;
 
 `sampleRate`
 : optional - _number_
-<br />The fraction of traces to submit to Agent Observability, between `0.0` (drop everything) and `1.0` (submit everything). The sampling decision is made on the root span and inherited by all of its child spans (including downstream services). If unset, this defaults to `DD_LLMOBS_SAMPLE_RATE`, but otherwise takes precedence over the environment variable.
+<br />The fraction of traces retained by Agent Observability. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
 
 **Options for general tracer configuration**:
 
@@ -374,6 +376,54 @@ export const handler = async (event) => {
 
 
 After installing the SDK and running your application you should expect to see some data in Agent Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
+
+## Trace sampling
+
+<div class="alert alert-info">Trace sampling is available in the Python and Node.js SDKs.</div>
+
+Trace sampling sets the fraction of traces that Agent Observability retains. Use it to reduce ingestion volume and cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
+
+This sampling happens client-side. It is independent of in-app controls such as [automation rules](/llm_observability/monitoring/automation_rules/) and [APM trace sampling](/tracing/trace_pipeline/ingestion_mechanisms/), which apply after Datadog ingests your traces.
+
+Configure the sample rate through either of two mechanisms:
+
+- **Environment variable** (`DD_LLMOBS_SAMPLE_RATE`): applies to both [command-line setup](#command-line-setup) and [in-code setup](#in-code-setup).
+- **In-code parameter** (`sampleRate`, Node.js only): passed under `llmobs` when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`.
+
+The sample rate is a float between `0.0` (retain no traces) and `1.0` (retain all traces). The default is `1.0`. Out-of-range values are ignored.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Set the sample rate with the environment variable:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+The Python SDK does not yet support setting the sample rate in code.
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+Set the sample rate with the environment variable:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Or pass `sampleRate` under `llmobs` to `init()`, which takes precedence over the environment variable:
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>",
+    sampleRate: 0.5,
+  },
+});
+
+const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Manual instrumentation
 

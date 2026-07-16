@@ -17,6 +17,10 @@ The ARM template deploys resources from a series of Azure services (storage acco
 
 **Supported Azure environments**: Automated log forwarding supports the Azure commercial (public) cloud only. Azure Government and Azure China are not supported.
 
+## Prerequisites
+
+You must have permission on the management group to deploy automated log forwarding with the ARM template.
+
 ## How to choose between automated and manual setup
 
 Choose the manual setup method if you want to:
@@ -49,12 +53,12 @@ Alternatively, you can deploy automated log forwarding with an [Azure Public ARM
 
 #### Basics
 
-1. Under {{< ui >}}Project details{{< /ui >}}, select the management group. This is needed for the ARM template to grant permissions to the subscriptions you select for automated log forwarding.
+1. Under {{< ui >}}Project details{{< /ui >}}, select a management group. This field is required. The ARM template uses the management group to grant permissions to the subscriptions you select for automated log forwarding.
 2. Under {{< ui >}}Instance details{{< /ui >}}, select values for:
    - {{< ui >}}Region{{< /ui >}}. This is where the control plane is deployed.
    - {{< ui >}}Subscriptions to Forward Logs{{< /ui >}}. These are the subscriptions to be configured for log forwarding.
    - {{< ui >}}Control Plane Subscription{{< /ui >}}. This is the subscription that the control plane is deployed to.
-   - {{< ui >}}Resource Group Name{{< /ui >}}. This is the resource group to be used by the control plane. It is recommended to choose a new, unused resource group name to simplify management of control plane services.
+   - {{< ui >}}Resource Group Name{{< /ui >}}. This is the resource group to be used by the control plane. Datadog recommends you choose a new, unused resource group name to simplify management of control plane services.
 
 {{< img src="logs/guide/azure-automated-log-forwarding/deployment_basics.png" alt="The Basics page of the ARM template for Azure automated log forwarding" popup="true" style="width:100%">}}
 

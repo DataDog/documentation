@@ -124,7 +124,7 @@ The notebook matches the monitor evaluation period time range and includes relat
 
 #### Follow monitor group retention
 
-Datadog keeps monitor groups available in the UI for 24 hours unless the query is changed. Host monitors and service checks that are configured to notify on missing data are available for 48 hours. If a monitor graph displays a dotted line and is marked as non-reporting, it can be for the following reasons:
+Datadog keeps monitor groups available in the UI for a retention period after they stop reporting, unless the query is changed. The retention period depends on the monitor type and configuration. For details, see [Group retention time][33]. If a monitor graph displays a dotted line and is marked as non-reporting, it can be for the following reasons:
 
 - The new group is evaluated some time after the monitor is created. The evaluation graph shows the dotted line from the start of the time period to when the group is first evaluated.
 - The group stops reporting, drops out, and then starts reporting again. The dotted line appears from the time the group dropped out to when the group starts evaluating again.
@@ -191,3 +191,4 @@ You can obtain a JSON export of any monitor from the monitor's status page. Clic
 [30]: /monitors/manage/search/#query
 [31]: /getting_started/tagging/
 [32]: /monitors/types/metric/?tab=threshold#advanced-alert-conditions
+[33]: /monitors/configuration/?tab=thresholdalert#group-retention-time

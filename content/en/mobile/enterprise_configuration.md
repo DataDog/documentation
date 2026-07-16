@@ -40,6 +40,11 @@ The mobile app supports all default MDM capabilities for [iOS][2] and [Android][
 **Default Value**: False <br>
 **Description**: Disable access to homescreen widgets (and instead display "disabled by your organization").
 
+`externalBrowserLoginPolicy`<br>
+: **Type**: String <br>
+**Default Value**: Null <br>
+**Description**: When set to `force`, uses the device's default browser to login to Datadog, instead of an embedded browser.
+
 To learn more about default capabilities, see your Mobile Device Management provider's documentation.
 
 ## Use cases

@@ -53,6 +53,7 @@ Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group i
 | [EC2][15]                          | `-`                                                                                                            | Use the [Datadog Agent][15] to send your logs to Datadog.                                                                    |
 | [ECS][16]                          | `-`                                                                                                            | [Use the Docker Agent to gather your logs][17] or [automatic](#automatically-set-up-triggers) log collection.                                                                              |
 | [EKS][62]                          | [Enable Amazon EKS logs][63]                                                                                   | [Manual][63] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
+| [Elastic Beanstalk][78]            | `-`                                                                                                            | [Automatic](#automatically-set-up-triggers) log collection.                                                  |
 | [Elastic Load Balancing (ELB)][18] | [Enable Amazon ELB logs][19]                                                                                   | [Manual][20] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [Glue][76]                         | [Enable AWS Glue logs][77]                                                                                     | [Manual][77] and [automatic](#automatically-set-up-triggers) log collection.                                                 |
 | [IoT Core][74]                     | [Enable Amazon IoT Core logs][75]                                                                              | [Automatic](#automatically-set-up-triggers) log collection.                                                                  |
@@ -106,6 +107,7 @@ The following sources and locations are supported:
 | ECS Logs                    | CloudWatch     |
 | EKS Control Plane Logs      | CloudWatch     |
 | EKS Container Insights Logs | CloudWatch     |
+| Elastic Beanstalk Logs      | CloudWatch     |
 | Glue Jobs Logs              | CloudWatch     |
 | Lambda Logs                 | CloudWatch     |
 | Lambda@Edge Logs            | Cloudwatch     |
@@ -149,6 +151,7 @@ The following sources and locations are supported:
     "ecs:ListTaskDefinitionFamilies",
     "eks:DescribeCluster",
     "eks:ListClusters",
+    "elasticbeanstalk:DescribeEnvironments",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
     "glue:BatchGetJobs",
@@ -213,6 +216,7 @@ The following sources and locations are supported:
     | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `elasticbeanstalk:DescribeEnvironments`                     | List all Elastic Beanstalk environments.                                     |
     | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
@@ -471,3 +475,4 @@ You can also exclude or send only those logs that match a specific pattern by us
 [75]: /integrations/amazon-pcs/
 [76]: /integrations/amazon_glue/
 [77]: /integrations/amazon_glue/#log-collection
+[78]: /integrations/amazon-elastic-beanstalk/
