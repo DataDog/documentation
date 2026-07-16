@@ -105,9 +105,9 @@ For vulnerabilities with available fixes, the {{< ui >}}Findings{{< /ui >}} page
 
 In [{{< ui >}}Container Images{{< /ui >}}][7], you can trace vulnerabilities found in an image to specific layers, so you can pinpoint and remediate your security risks faster.
 
-For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View container images in Datadog][23].
-
 {{< img src="infrastructure/containerimages/image_layer_vulnerabilities.png" alt="A list of vulnerabilities associated with each layer of an image" width="100%">}}
+
+For non-flattened, single-stage container images built from a public base image, Datadog automatically identifies the base image and distinguishes vulnerabilities inherited from it from packages added by your image. When attribution is available, Datadog displays the base image name and digest, indicating when remediation requires updating that base image instead of changing application code. [View container images in Datadog][23].
 
 ## Trace production vulnerabilities to source code
 
