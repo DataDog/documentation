@@ -70,8 +70,8 @@ Auto-fix strategy (reorg-only PRs):
          `git am --3way`.  --3way falls back to a per-patch 3-way merge when
          context lines have drifted because master made unrelated edits between
          the PR's base and today.
-      5. Push as `reorg-fix/pr-<N>`, open a new PR for it, comment on the
-         original PR pointing to the fix PR, and label the original
+      5. Push as `reorg-fix/pr-<N>`, open a new PR for it, close the original
+         PR with a comment pointing to the fix PR, and label the original
          has-astro-reorg-conflicts.
 
     A PR that already carries the has-astro-reorg-conflicts label (a fix PR was
@@ -131,7 +131,7 @@ LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
 
 # PRs with no activity in this many days are treated as stale and receive a
 # comment + label instead of an auto-fix attempt.
-STALE_DAYS = 62  # ~2 calendar months
+STALE_DAYS = 31  # ~1 calendar month
 
 MANUAL_REVIEW_COMMENT = (
     "This PR has merge conflicts from a recent repo reorg that could not be resolved automatically. "
@@ -140,7 +140,7 @@ MANUAL_REVIEW_COMMENT = (
 
 STALE_COMMENT = (
     "This PR has conflicts created by the docs repo reorg project. "
-    "Because this PR is stale (more than two months old), no action was taken. "
+    "Because this PR is stale (more than one month old), no action was taken. "
     "If you still intend to use this PR and would like assistance resolving the conflicts, "
     "add the label `astro-reorg-help-requested` to your PR to add it to our help queue. "
     "We will reach out to you as soon as we can."
@@ -519,6 +519,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
         if IS_TEST_MODE:
             print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
+        print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR")
         return True
 
     fix_branch = f"reorg-fix/pr-{pr_number}"
@@ -594,16 +595,17 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         if IS_TEST_MODE:
             add_label(int(new_pr_number), DO_NOT_MERGE_LABEL, dry_run=False)
 
-        post_comment(
-            pr_number,
+        gh_run(
+            "pr", "close", str(pr_number), "--repo", REPO,
+            "--comment",
             f"🤖 **Reorg conflict auto-fix:**\n\n"
             f"This PR has merge conflicts caused by the recent docs repo reorg "
             f"(files moved from the repo root into `hugo/`). "
             f"A new PR with your commits translated to the correct paths "
             f"has been opened: #{new_pr_number}\n\n"
-            f"If the new PR looks correct, merge it and close this PR.",
-            dry_run=False,
+            f"If the new PR looks correct, merge it.",
         )
+        print(f"  Closed PR #{pr_number} with comment pointing to fix PR #{new_pr_number}")
         add_label(pr_number, LABEL_STALE, dry_run)
         add_label(pr_number, LABEL_AUTOFIXED, dry_run)
         return True
