@@ -129,6 +129,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 * **Supported dataset tags**: Only the following tags are supported:
   * `@git.repository_url`
   * `@git.repository.id`
+  * `@git.repository.id_v2`
   * `@gitlab.groups`
 
 ### Agent Observability
