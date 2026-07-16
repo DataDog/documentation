@@ -386,15 +386,30 @@ For Docs and Links you can also access a specific item with the following syntax
 If your monitor triggers an alert for each `device_ip` and `device_namespace`, then you can access any attribute of the network device.
 
 Network device metadata variables:
-- Device ID: `{{network_device.device_id}}`
-- Device namespace: `{{network_device.device_namespace}}`
+- Canonical ID: `{{network_device.canonical_id}}`
+- Description: `{{network_device.description}}`
 - Device type: `{{network_device.device_type}}`
-
-The following table contains all available attributes:
-
-| Variable syntax   | First level attributes |
-|-------------------|------------------------|
-| `{{network_device.device_id}}`     | `canonical_id`, `description`, `device_type`, `id_tags`, `integrations`, `ip_address`, `location`, `model`, `name`, `namespace`, `os_hostname`, `os_name`, `os_version`, `ping_status`, `product_name`,  `profile`, `serial_number`, `status`, `subnet`, `sys_object_id`, `tags`, `vendor`, `version`|
+- Device ID: `{{network_device.device_id}}`
+- ID tags: `{{network_device.id_tags}}`
+- Integrations: `{{network_device.integrations}}`
+- IP address: `{{network_device.ip_address}}`
+- location: `{{network_device.location}}`
+- model: `{{network_device.model}}`
+- name: `{{network_device.name}}`
+- namespace: `{{network_device.namespace}}`
+- OS hostname: `{{network_device.os_hostname}}`
+- OS name: `{{network_device.os_name}}`
+- OS version: `{{network_device.os_version}}`
+- Ping status: `{{network_device.ping_status}}`
+- Product name: `{{network_device.product_name}}`
+- Profile: `{{network_device.profile}}`
+- Serial number: `{{network_device.serial_number}}`
+- Status: `{{network_device.status}}`
+- Subnet: `{{network_device.subnet}}`
+- Sys object ID: `{{network_device.sys_object_id}}`
+- Tags: `{{network_device.tags}}`
+- Vendor: `{{network_device.vendor}}`
+- Version: `{{network_device.version}}`
 {{% /collapse-content %}}
 
 ### Matching attribute/tag variables
