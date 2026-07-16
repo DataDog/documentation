@@ -87,7 +87,7 @@ To add a Datadog API key or client token:
 
 **Notes:**
 
-- Your org must have at least one API key and at most 50 API keys. Managed API Keys are not included in the count when calculating the number of existing keys in an org and enforcing the 50-key limit.
+- Your org must have at least one API key and at most 50 API keys. Managed API keys are not included in the count when calculating the number of existing keys in an org and enforcing the 50-key limit.
 - Key names must be unique across your organization.
 
 ## Remove API keys or client tokens
