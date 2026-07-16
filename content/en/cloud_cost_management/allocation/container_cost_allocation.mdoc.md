@@ -282,9 +282,9 @@ Costs are allocated into the following spend types:
 
 ### Aggregated minor pod usage
 
-In rare cases, many pods run on one node. Datadog compresses the lowest-resource pods into an aggregate so container cost allocation can complete reliably. This preserves their combined CPU, memory, and GPU resource-hours and allocated cost. Pod-level tag granularity is reduced for this small portion of spend.
+In rare cases, many pods run on one node. Datadog compresses the lowest-resource pods into an aggregate. This preserves their combined CPU, memory, and GPU resource-hours and allocated cost. Pod-level tag granularity is reduced for this small portion of spend.
 
-Tag values shared by every compressed pod are retained. Individual values for missing or differing tags are replaced by these context values:
+Individual values for missing or differing tags are replaced by these context values:
 
 - `aggregated_pod_kube_cluster_name:<cluster>`
 - `aggregated_pod_kube_node_name:<node>`
