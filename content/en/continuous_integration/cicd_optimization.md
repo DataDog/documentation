@@ -11,11 +11,13 @@ further_reading:
 
 CI/CD Optimization combines Datadog's [CI Visibility][1] and [Test Optimization][2] experiences into one unified interface. It provides a single place to understand, monitor, and improve your entire CI/CD ecosystem, from pipeline executions to individual test runs.
 
-To enable the new experience, click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization. You can switch back to the previous UI at any time by clicking {{< ui >}}Switch Back{{< /ui >}}.
+To enable the new experience, click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization. You can return to the previous UI at any time by clicking {{< ui >}}Switch Back{{< /ui >}}.
+
+This page provides an overview of CI/CD Optimization's key features, some of which retain original functionality of CI Visibility and Test Optimization. Follow the links to legacy documentation for details on using each product within the unified UI.
 
 ## CI/CD Health
 
-Explore key CI reliability and performance metrics in the CI/CD Health page, with widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
+Explore key CI reliability and performance metrics in the CI/CD Health page. The dashboard includes widgets to track their evolution over time, suggestions to improve them, and an overview of your monitors' status.
 
 {{< img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" style="width:100%;" >}}
 
@@ -32,7 +34,7 @@ For details on searching, filtering, and analyzing each type of data, see [CI Vi
 
 ## Flaky Management
 
-Get a high-level view of flakiness across your repositories in the Flaky Management Overview, with trend charts, prioritization suggestions, and tooling to validate your setup.
+Get a high-level view of flakiness across your repositories in the Flaky Management Overview. This page provides trend charts, prioritization suggestions, and tooling to validate your setup.
 
 {{< img src="cicd_optimization/flaky_overview.png" alt="Flaky Management overview with trend charts and prioritization suggestions" style="width:100%;" >}}
 
