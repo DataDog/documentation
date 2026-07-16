@@ -22,8 +22,8 @@ Once the reorg is merged to master, all open PRs are processed. Conflicts are fi
 
 ## PR cases
 
-* **Skipped because it has no conflicts:**: We did not try to autofix the PR because it doesn't have any conflicts.
-* **Skipped as a WIP:**: We did not try to autofix the PR because it has the `WORK IN PROGRESS` label, but left a comment describing how to invoke the autofix.
-* **Autofixed PR:** We fixed the conflicts automatically, closed the PR, and linked a new PR for the author's review. 
-* **Stale PR:** We did not act on the PR, because it appears to be stale. We left a comment describing how to invoke the autofix.
-* **Manual fix required:** We could not resolve the conflicts automatically. We left a comment describing how to ask for help if needed.
+* **Skipped because it has no conflicts:**: We do not try to autofix the PR because it doesn't have any conflicts. We add a label as a guard against further processing.
+* **Skipped as a WIP:**: We do not try to autofix the PR because it has the `WORK IN PROGRESS` label. We leave a comment describing how to queue the PR for autofix processing if desired.
+* **Autofixed PR:** We fix the conflicts automatically, close the PR, and link a new PR for the author's review. 
+* **Stale PR:** We do not act on the PR, because it appears to be stale. We leave a comment describing how to queue the PR for autofix processing if desired.
+* **Manual fix required:** We cannot resolve the conflicts automatically. We leave a comment describing why the conflicts are occurring, and how to ask for help if needed.
