@@ -134,6 +134,11 @@ LABEL_SKIP = "astro-reorg-skip"
 LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
+# Applied to every PR the script acts on, regardless of outcome (auto-fixed,
+# manual review, WIP, stale, ...). Purely a visibility aid so all affected PRs
+# can be found in GitHub with one label filter — it is NOT used for idempotency
+# and is deliberately absent from the get_open_prs query.
+LABEL_PROCESSED = "astro-reorg-processed"
 
 # PRs with no activity in this many days are treated as stale and receive a
 # comment + label instead of an auto-fix attempt.
@@ -862,8 +867,8 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
         print("  All conflicts are reorg-caused — attempting auto-fix.")
         success = attempt_fix(pr, dry_run)
         if success:
-            # attempt_fix closed the PR and labeled it LABEL_AUTOFIXED — that's
-            # the only label an autofixed PR carries.
+            # attempt_fix closed the PR and labeled it LABEL_AUTOFIXED. The
+            # caller adds LABEL_PROCESSED on top for the affected-PR filter.
             return True
         # Auto-fix failed (fork, apply error, etc.) — fall back to labeling.
         print("  Auto-fix failed or not applicable — labeling for manual review.")
@@ -990,6 +995,7 @@ def main() -> None:
     ensure_label_exists(LABEL_AUTO_PR, args.dry_run)
     ensure_label_exists(LABEL_NO_CONFLICTS, args.dry_run)
     ensure_label_exists(LABEL_SKIP, args.dry_run)
+    ensure_label_exists(LABEL_PROCESSED, args.dry_run)
 
     existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
@@ -1012,6 +1018,9 @@ def main() -> None:
         # manual review rather than clobbering it.
         try:
             if analyze_pr(pr, args.dry_run):
+                # Mark every acted-on PR (however it was handled) so all
+                # reorg-affected PRs are findable with one label filter.
+                add_label(pr["number"], LABEL_PROCESSED, args.dry_run)
                 acted += 1
         except Exception as exc:
             print(f"\nERROR processing PR #{pr.get('number', '?')}: {exc}",
