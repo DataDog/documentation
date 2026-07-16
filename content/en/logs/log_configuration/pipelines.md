@@ -65,7 +65,7 @@ For each pipeline, administrators can choose the following edit scopes:
 - **Editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
 - **Processor Editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
-<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
+<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
 You can manage these permissions programmatically through [**API**][14] and **Terraform**.
 
@@ -224,7 +224,8 @@ By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. 
 
 4. Name your pipeline.
 5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][8].
-6. Press {{< ui >}}Create{{< /ui >}}.
+6. (Optional) Preview the impact of your changes before publishing them. See [Pipeline Simulation](#pipeline-simulation).
+7. Press {{< ui >}}Create{{< /ui >}}.
 
 An example of a log transformed by a pipeline:
 
@@ -285,6 +286,17 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 1. Hover over the pipeline you want to move, and click on the {{< ui >}}Move to{{< /ui >}} icon.
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
 1. Click {{< ui >}}Move{{< /ui >}}.
+
+## Pipeline Simulation
+
+<!-- lead with action or outcome? -->
+
+Pipeline Simulation uses a live tail of your logs as they would be processed with the proposed changes. This allows you to preview how your changes will affect logs before you publish them. Open it while creating or editing a pipeline or processor.
+
+Add or edit processors, then compare each log's before and after state: before shows the log as processed by the pipeline's current, published configuration, and after shows it with the changes you're making in this simulation applied. Both already reflect the rest of the pipeline chain, including anything that runs after this step. Narrow the log list further with the query filter, or by impact: All logs, Impacted logs (changed by your edits in this session), or Not impacted logs.
+
+<!-- add relative link on how to do this ie see x to use pipeline simulation -->
+
 
 ## Manage your pipelines
 
