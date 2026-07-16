@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.18.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.19.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,35 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.19.0
+
+To upgrade to Worker version 2.19.0:
+
+- Docker: Run the `docker pull` command for the [2.19.0 image][49].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.19.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.19.0`.
+
+Worker version 2.19.0 gives you access to the following:
+
+#### Enhancements
+
+- A `server_name` TLS option has been added to the BYOC Logs, HTTP Client, Socket, and Syslog destinations, and to the HTTP Client source. It overrides the SNI and certificate hostname used for the TLS handshake, which is applicable when the dialed address does not match the certificate's Common Name or Subject Alternative Name.
+- The Splunk TCP source now supports hot-reloading TLS certificates, so certificate rotations are applied without restarting the Worker.
+- The BYOC Logs destination now supports hot-reloading mTLS files.
+- The Worker now supports a configurable graceful shutdown limit.
+- The Amazon S3 destination now supports SSE-KMS encryption using the `server_side_encryption` and `ssekms_key_id` options.
+
+#### Fixes
+
+- Fixed an issue in the Reduce processor where a timestamp field whose name requires quoting in a path (for example, `"created.at"` or `"event-time"`) had its `_end` companion field silently dropped from the reduced event. The companion field is now placed correctly next to the base field.
+- Fixed a configuration reload issue. If a reload changed a component's type while keeping the same name, such as replacing a source named `X` with a processor named `X`, any downstream processor or destination still reading from `X` now reconnects to the new component.
+- The Syslog source (TCP mode) has been fixed to handle an over-length, length-prefixed message split across multiple reads.
+- The Logstash source has been fixed to only send an acknowledgment when all events of a batch are received instead of sending a partial acknowledgment.
+- The Logstash source now rejects a batch of events that arrives before all events in the current batch has been received, closing the connection with a fatal decode error instead of continuing.
+- Fixed the Syslog codec that was silently ignoring short-form severity keywords (`crit`, `emerg`, `err`, `info`, `warn`) and defaulting to `informational`. Both short-form and full-form severity names are now accepted.
+- Fixed an issue in the Custom Processor functions `parse_key_value`, `parse_cef`, `decode_mime_q`, and `parse_ruby_hash` that had inputs with lines of 65,535 bytes or more.
 
 ## Worker version 2.18.0
 
@@ -30,7 +59,6 @@ Worker version 2.18.0 gives you access to the following:
 - The `run` command now supports a `--log-format` flag, also configurable using the `DD_OP_LOG_FORMAT` environment variable, for selecting the format of the Worker's own `stdout` and `stderr` logs. The default `text` preserves the existing human-readable output, and `json` emits structured JSON logs that can be tailed and parsed directly without additional parsing rules.
 - The Tag Cardinality Limit processor now supports a `tracking_mode` option. `exact_fingerprint` tracks tag values exactly using 64-bit fingerprints, which uses less memory than the previous method of storing raw values, and `probabilistic` uses a bloom filter for even lower memory usage in exchange for an occasional false positive. Probabilistic mode accepts a `false_positive_rate` field, which defaults to `0.001` (0.1%).
 - The WebSocket source is available for ingesting logs from a WebSocket endpoint, with support for `none`, `basic`, `bearer`, and `custom` authentication strategies, as well as TLS.
-- Trace pipelines now support the sample processor.
 - A new `generate_metrics` processor routes metrics to any supported metrics destination. Datadog recommends using it over the existing `generate_datadog_metrics` processor, although use of the latter is not affected.
 
 #### Enhancements
@@ -629,3 +657,4 @@ Worker version 2.7.0 gives you access to the following:
 [46]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.17.0
 [47]: /observability_pipelines/destinations/databricks/
 [48]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.18.0
+[49]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.19.0

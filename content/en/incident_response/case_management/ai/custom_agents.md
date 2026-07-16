@@ -10,6 +10,10 @@ further_reading:
   text: "Action Catalog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">AI features for Case Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 {{< callout url="https://www.datadoghq.com/product-preview/custom-agents-in-case-management/" btn_hidden="false" header="Join the Preview">}} Case Management integration with custom agents is in Preview.{{< /callout >}}
 
 ## Overview
