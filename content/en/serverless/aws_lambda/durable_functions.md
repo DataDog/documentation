@@ -25,30 +25,33 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
     DD_LAMBDA_DURABLE_FUNCTION_LOG_BUFFER_SIZE=5
     ```
 
+    This environment variable makes the Datadog Lambda Extension buffer logs and enrich them with the durable execution context sent by the Datadog Lambda Library. Its value is the maximum number of invocations whose logs are buffered, and must be a non-negative integer. When it is `0` (the default), logs are not enriched and durable executions do not appear in Datadog.
+
 ### Forward durable execution events
 
-Deploy the CloudFormation stack to your AWS account to forward durable execution status change events to Datadog:
+- Deploy the CloudFormation stack to your AWS account to forward durable execution status change events to Datadog:
 
-1. Log in to the AWS account and region where your durable functions run, then click **Launch Stack** to open the stack:
+    1. Log in to the AWS account and region where your durable functions run, then click **Launch Stack** to open the stack:
 
-   [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)][2]
+        [![Launch Stack](https://s3.amazonaws.com/cloudformation-examples/cloudformation-launch-stack.png)][2]
 
-2. Provide your Datadog API key using exactly one of the following parameters:
+    2. Provide your Datadog API key using exactly one of the following parameters:
 
-    - `DdApiKey`: your [Datadog API key][3] in plaintext
-    - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key
-    - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key
+        - `DdApiKey`: your [Datadog API key][3] in plaintext
+        - `DdApiKeySecretArn`: the ARN of an AWS Secrets Manager secret whose value is your Datadog API key
+        - `DdApiKeySsmParameterName`: the name of an AWS Systems Manager Parameter Store `SecureString` parameter that holds your Datadog API key
 
-3. Set `DdSite` to your [Datadog site][4]. The default is `datadoghq.com`.
-4. Optionally, restrict which events are forwarded:
+    3. Set `DdSite` to your [Datadog site][4]. The default is `datadoghq.com`.
+    4. Optionally, restrict which events are forwarded:
 
-    - `Statuses`: a comma-separated list of execution statuses to forward. Valid values are `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`. Leave this empty to forward all statuses.
-    - `FunctionArnFilter1` through `FunctionArnFilter5`: up to five unqualified Lambda function ARNs or EventBridge wildcard patterns, such as `arn:aws:lambda:us-east-2:123456789012:function:my-durable-*`. Do not include a version or alias suffix. Leave all five empty to forward events from every function in the region.
-    - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`-`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
-5. Click **Create stack** and wait for the stack to finish creating.
-6. If your durable functions run in multiple AWS regions, repeat these steps in each region.
+        - `Statuses`: a comma-separated list of execution statuses to forward. Valid values are `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, and `STOPPED`. Leave this empty to forward all statuses.
+        - `FunctionArnFilter1` through `FunctionArnFilter5`: up to five unqualified Lambda function ARNs or EventBridge wildcard patterns, such as `arn:aws:lambda:us-east-2:123456789012:function:my-durable-*`. Do not include a version or alias suffix. Leave all five empty to forward events from every function in the region.
+        - `BufferIntervalSeconds`: the Amazon Data Firehose buffer interval, in seconds (`60`–`900`, default `60`). Higher values reduce the number of outbound requests at the cost of freshness.
 
-Install the [AWS Lambda integration][5] in Datadog. Its out-of-the-box logs pipeline transforms the forwarded events.
+    5. Click **Create stack** and wait for the stack to finish creating.
+    6. If your durable functions run in multiple AWS regions, repeat these steps in each region.
+
+- Install the [AWS Lambda integration][5] in Datadog. Its out-of-the-box logs pipeline transforms the forwarded events.
 
 ### Create a trace retention filter
 
