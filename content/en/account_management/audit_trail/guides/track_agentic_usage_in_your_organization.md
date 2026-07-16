@@ -22,7 +22,7 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 | Agent | Status | Notes |
 | ----- | ------ | ----- |
 | Bits SRE | Tracked | Most actions include `@evt.actor.mode` and `@delegator.*`. Some tool-call and investigation actions do not include these fields yet. |
-| Bits Assistant | Partially tracked | Actions taken through the chat panel run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken through inline invocation (Cmd+I) don't include these fields yet. |
+| Bits Assistant | Partially tracked | Actions taken from the full Bits Assistant page run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (Cmd+I) don't include these fields yet. |
 | Bits Security Analyst | Tracked | Actions run in `autonomous` mode. There is no delegating user, because these actions don't involve a human in the loop. |
 | Bits Dev | Not yet tracked | Actions don't include `@evt.actor.mode` or `@delegator.*` yet. |
 | Bits Agent Builder | Not yet tracked | Same limitation as Bits Dev. |
