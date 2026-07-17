@@ -880,7 +880,7 @@ const getMaybeConstTypeName = (item, discriminant) => {
     return `&lt;${discriminant}=${type.enum[0]}&gt;`;
   }
   return undefined;
-}
+};
 
 /**
  * Auto-detects the best discriminant property across a set of oneOf branches.
@@ -930,7 +930,7 @@ const getBestDiscriminant = (items) => {
   }
 
   return undefined;
-}
+};
 
 /**
  * @param {array} items - oneOf items
@@ -945,7 +945,7 @@ const getOneOfChildData = (items) => {
     [name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`, item]
   );
   return Object.fromEntries(entries);
-}
+};
 
 
 /**
