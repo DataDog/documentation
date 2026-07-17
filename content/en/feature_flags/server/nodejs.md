@@ -40,7 +40,7 @@ Before setting up the Node.js Feature Flags SDK, verify these requirements:
 
 ## Installing and initializing
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable the feature flagging provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and initialize the Datadog OpenFeature provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
@@ -53,9 +53,6 @@ If your application stays on the v5 release line, use `dd-trace@^5.116.0`. On th
 Configure the application process with:
 
 ```shell
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
 # Required for agentless configuration delivery
 DD_API_KEY=<YOUR_API_KEY>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -77,9 +74,11 @@ DD_METRICS_OTEL_ENABLED=true
 DD_SERVICE=<YOUR_SERVICE_NAME>
 ```
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+The provider is enabled by default. Access `tracer.openfeature` and register it with OpenFeature, as shown below, to begin CDN polling. Installing or initializing `dd-trace` alone does not create Feature Flags CDN traffic.
 
-The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests.
+The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests. CDN requests contribute to server Feature Flags billing.
+
+Set `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false` to disable the provider, CDN polling, and the Feature Flags Remote Configuration subscription.
 
 <div class="alert alert-warning">In Node.js 5.116.0 and 6.5.0, agentless mode supports flag evaluation. It does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events.</div>
 
@@ -88,31 +87,35 @@ The SDK polls every 30 seconds by default and evaluates flags locally from the l
 To retain Agent-managed delivery, configure:
 
 ```shell
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 DD_REMOTE_CONFIGURATION_ENABLED=true
 ```
 
 This mode requires Datadog Agent 7.55 or later with Remote Configuration enabled and the API key configured on the Agent.
 
+Explicitly selecting `remote_config` enables the Feature Flags Remote Configuration subscription without requiring application code to access the provider. Remote Configuration requests contribute to server Feature Flags billing.
+
+### Migrate from the legacy setting
+
+`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is deprecated. The removal version and timeline are communicated separately. During the migration window, setting it to `true` without an explicit source keeps Node.js on Remote Configuration.
+
+- To stay on Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`, then remove the legacy setting.
+- To move to agentless delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, move the API key to the application environment, and remove the legacy setting.
+- If you use the legacy setting with `false`, replace it with `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false`.
+
+After the legacy setting is removed, Node.js defaults to agentless delivery unless you explicitly select `remote_config`. See [Migrate from the legacy provider setting][6] for the complete precedence table.
+
 To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
-Or enable the provider in code:
+Initialize the provider in code:
 
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
 
-tracer.init({
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-      // Optional because agentless is the default.
-      configurationSource: 'agentless',
-    }
-  }
-});
+tracer.init();
 
+// Accessing tracer.openfeature activates the default agentless source.
 // setProviderAndWait resolves after the selected source loads, so flags
 // evaluate against real configuration data instead of default values.
 try {
@@ -409,3 +412,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting

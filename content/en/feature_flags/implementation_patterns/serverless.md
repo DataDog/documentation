@@ -39,10 +39,9 @@ Other server SDKs require Agent Remote Configuration for flag delivery. Earlier 
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
 1. Use a Java or Node.js SDK version listed in [Overview](#overview).
-2. Enable the Feature Flags provider and configure the API key, site, and environment in the serverless application:
+2. Configure the API key, site, and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
-   DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
    DD_API_KEY=<DATADOG_API_KEY>
    DD_ENV=<YOUR_ENVIRONMENT>
 
@@ -53,10 +52,12 @@ Use agentless delivery when the serverless runtime can make outbound HTTPS reque
    DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
    {{< /code-block >}}
 
-3. Initialize the OpenFeature provider as described on the [Java][3] or [Node.js][4] setup page.
+3. Initialize or access the Datadog OpenFeature provider as described on the [Java][3] or [Node.js][4] setup page. This starts CDN polling.
 4. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
+
+Tracer installation and initialization alone do not start CDN polling. Requests to the CDN contribute to server Feature Flags billing only after application code activates the provider.
 
 Agentless mode removes the Agent dependency for _flag configuration_. It does not change your APM or serverless telemetry setup. You can continue to use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
 
@@ -66,7 +67,6 @@ Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use the 
 
 {{< code-block lang="bash" >}}
 # Serverless application
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
 DD_TRACE_AGENT_PORT=8126
@@ -82,6 +82,8 @@ DD_SITE=<DATADOG_SITE>
 
 The serverless workload must be able to reach the Agent on a private network, and the Agent must be able to reach Datadog over HTTPS. Do not expose the Agent trace intake publicly.
 
+Explicitly selecting `remote_config` enables the Feature Flags Remote Configuration subscription, even if application code does not initialize the provider. These requests contribute to server Feature Flags billing.
+
 ## Operational considerations
 
 - **Cold starts**: Blocking provider initialization waits for the first configuration and can add cold-start latency. Initialize asynchronously if serving caller-provided default values during startup is acceptable.
@@ -90,8 +92,11 @@ The serverless workload must be able to reach the Agent on a private network, an
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
 - **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Java or Node.js runtime compatible with the tracer. Check the language tracer's compatibility requirements.
+- **Kill switch**: Set `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false` to disable the provider and both configuration delivery paths.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
+
+If your deployment uses `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, see [Migrate from the legacy provider setting][6].
 
 ## Environment notes
 
@@ -137,3 +142,4 @@ Before enabling agentless Feature Flags in production:
 [3]: /feature_flags/server/java/
 [4]: /feature_flags/server/nodejs/
 [5]: /api/latest/feature-flags/
+[6]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting

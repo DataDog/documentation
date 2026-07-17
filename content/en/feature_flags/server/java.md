@@ -19,7 +19,7 @@ further_reading:
   text: "Server SDK Configuration Sources"
 ---
 
-<div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
+<div class="alert alert-info">Java 1.65.0 enables the stable Feature Flags provider by default. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. The legacy <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED</code> setting is deprecated and preserves Remote Configuration behavior during a migration window.</div>
 
 See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
@@ -117,10 +117,6 @@ Java 1.65.0 and later use agentless configuration delivery by default. Configure
 {{< tabs >}}
 {{% tab "Environment Variables" %}}
 {{< code-block lang="bash" >}}
-# Required: Enable the feature flagging provider
-# The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
 # Required for agentless configuration delivery
 export DD_API_KEY=<YOUR_API_KEY>
 export DD_ENV=<YOUR_ENVIRONMENT>
@@ -152,7 +148,6 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 export DD_API_KEY=<YOUR_API_KEY>
 
 java -javaagent:path/to/dd-java-agent.jar \
-  -Ddd.experimental.flagging.provider.enabled=true \
   -Ddd.env=<YOUR_ENVIRONMENT> \
   -Ddd.site=<YOUR_DATADOG_SITE> \
   -Ddd.feature.flags.configuration.source=agentless \
@@ -163,9 +158,11 @@ java -javaagent:path/to/dd-java-agent.jar \
 {{% /tab %}}
 {{< /tabs >}}
 
-The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests.
+The provider is enabled by default. Initialize it as shown in [Initialize the OpenFeature provider](#initialize-the-openfeature-provider) to begin CDN polling. Installing or initializing the Java tracer alone does not create Feature Flags CDN traffic.
 
-<div class="alert alert-danger">Feature flagging requires <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. Without this setting, the feature flagging system does not start and the <code>Provider</code> returns the programmatic default.</div>
+The SDK polls every 30 seconds by default and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests. CDN requests contribute to server Feature Flags billing.
+
+Set `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false` to disable the provider, CDN polling, and the Feature Flags Remote Configuration subscription.
 
 <div class="alert alert-warning">In Java 1.65.0, agentless mode supports flag evaluation but does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events.</div>
 
@@ -174,7 +171,6 @@ The SDK polls every 30 seconds by default and evaluates flags locally from the l
 To retain Agent-managed delivery, set the source to `remote_config`:
 
 {{< code-block lang="bash" >}}
-export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 export DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 export DD_REMOTE_CONFIGURATION_ENABLED=true
 {{< /code-block >}}
@@ -190,12 +186,21 @@ api_key: <YOUR_API_KEY>
 
 Remote Configuration is enabled by default on Agent 7.47.0 and later. Agent 7.55 or later is required for Feature Flags.
 
+Explicitly selecting `remote_config` enables the Feature Flags Remote Configuration subscription without requiring application code to initialize the provider. Remote Configuration requests contribute to server Feature Flags billing.
+
+### Migrate from the legacy setting
+
+`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is deprecated. The removal version and timeline are communicated separately. During the migration window, setting it to `true` without an explicit source keeps Java on Remote Configuration.
+
+- To stay on Agent delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`, then remove the legacy setting.
+- To move to agentless delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, move the API key to the application environment, and remove the legacy setting.
+- If you use the legacy setting with `false`, replace it with `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false`.
+
+After the legacy setting is removed, Java defaults to agentless delivery unless you explicitly select `remote_config`. See [Migrate from the legacy provider setting][10] for the complete precedence table.
+
 ### Add the Java tracer to the JVM
 
 For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
-
-Make sure to include the feature flagging configuration flag:
-- `-Ddd.experimental.flagging.provider.enabled=true`
 
 ## Initialize the OpenFeature provider
 
@@ -593,19 +598,22 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 #### Agentless
 
 1. Confirm both `dd-java-agent` and `dd-openfeature` are version 1.65.0 or later.
-2. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` is unset or set to `agentless`.
-3. Confirm `DD_API_KEY`, `DD_ENV`, and `DD_SITE` are configured in the application process.
-4. Confirm the application can make outbound HTTPS requests to Datadog.
-5. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flagging agentless endpoint.
+2. Confirm `DD_FEATURE_FLAGGING_PROVIDER_ENABLED` is not set to `false`.
+3. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` is set, or that both source and legacy provider settings are absent.
+4. Confirm application code initializes or accesses the Datadog OpenFeature provider.
+5. Confirm `DD_API_KEY`, `DD_ENV`, and `DD_SITE` are configured in the application process.
+6. Confirm the application can make outbound HTTPS requests to Datadog.
+7. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flagging agentless endpoint.
 
 #### Agent remote configuration
 
-1. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set in the application.
-2. Confirm Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
-3. Confirm Remote Configuration is enabled on the Agent. If it has been disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
-4. Confirm `DD_API_KEY` is valid on the Agent and belongs to the target organization.
-5. Confirm `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
-6. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
+1. Confirm `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, legacy `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` with no explicit source also selects Remote Configuration.
+2. Confirm `DD_FEATURE_FLAGGING_PROVIDER_ENABLED` is not set to `false`.
+3. Confirm Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
+4. Confirm Remote Configuration is enabled on the Agent. If it has been disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
+5. Confirm `DD_API_KEY` is valid on the Agent and belongs to the target organization.
+6. Confirm `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
+7. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
 
 ### 3. Verify Java SDK state
 
@@ -618,7 +626,7 @@ All feature flagging startup messages are emitted at DEBUG level. Set `DD_TRACE_
 [dd.trace] Feature Flagging system started
 ```
 
-If these messages are absent, verify `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set and the tracer started correctly.
+If these messages are absent, confirm `DD_FEATURE_FLAGGING_PROVIDER_ENABLED` is not `false` and verify the activation step for the selected source.
 
 #### Monitor provider state changes
 
@@ -705,3 +713,4 @@ When using a delivery path that supports exposures, exposures appear in Datadog 
 [7]: /account_management/api-app-keys/#api-keys
 [8]: /feature_flags/guide/server_flag_evaluation_metrics/
 [9]: /feature_flags/concepts/configuration_sources/
+[10]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting

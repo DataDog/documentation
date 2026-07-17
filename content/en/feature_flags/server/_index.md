@@ -34,6 +34,8 @@ Agentless configuration delivery is the default in server SDK versions that supp
 
 Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use Agent Remote Configuration instead. See [Server SDK Configuration Sources][6] for architecture, security, and operational details.
 
+The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
+
 | SDK | Minimum agentless version |
 |---|---|
 | Java (`dd-java-agent` and `dd-openfeature`) | 1.65.0 |
@@ -80,9 +82,6 @@ Source-specific requirements are:
 For Java 1.65.0 and Node.js 5.116.0 or 6.5.0, configure the application process:
 
 {{< code-block lang="bash" >}}
-# Required: Enable the Feature Flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
 # Required for direct configuration delivery
 DD_API_KEY=<DATADOG_API_KEY>
 DD_ENV=<YOUR_ENVIRONMENT>
@@ -94,14 +93,13 @@ DD_SITE=<DATADOG_SITE>
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 {{< /code-block >}}
 
-See the Java and Node.js pages for dependency versions and language-specific initialization.
+See the Java and Node.js pages for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent remote configuration
 
 Set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 DD_REMOTE_CONFIGURATION_ENABLED=true
 {{< /code-block >}}
@@ -109,6 +107,8 @@ DD_REMOTE_CONFIGURATION_ENABLED=true
 Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
+
+Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote configuration polling interval
 
@@ -129,14 +129,14 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 
-# Required: Enable the feature flagging provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
+# Optional: Disable the provider and both delivery paths
+# DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false
 
 # Optional: Enable flag evaluation metrics
 # See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
-<div class="alert alert-warning">The <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> environment variable is required to enable the feature flagging provider. Java also supports the system property <code>-Ddd.experimental.flagging.provider.enabled=true</code>, and Ruby and Node.js support code-based configuration as an alternative. See the SDK-specific documentation for details.</div>
+<div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGGING_PROVIDER_ENABLED</code> defaults to <code>true</code>. Setting it to <code>false</code> is the global kill switch for the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
 See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
@@ -144,7 +144,7 @@ See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server
 
 Datadog supports these testing approaches:
 
-- **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider end-to-end, including Remote Configuration delivery.
+- **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider and selected configuration source end-to-end.
 - **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
 
 This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
@@ -199,3 +199,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [4]: /tracing/guide/#tutorials-enabling-tracing
 [5]: /feature_flags/implementation_patterns/serverless/
 [6]: /feature_flags/concepts/configuration_sources/
+[7]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting
