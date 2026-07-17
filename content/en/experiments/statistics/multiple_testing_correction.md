@@ -46,7 +46,7 @@ Only add treatment variants and metrics that you intend to evaluate. Additional 
 
 ## How Datadog adjusts confidence intervals
 
-Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's family-wise error rate budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric and splits the rest across the remaining metrics. This helps the experiment retain more power for the primary metric, because adding more metrics beyond the primary metric does not further shrink the alpha budget for the primary metric.
+Datadog uses preferential Bonferroni correction. Like standard Bonferroni correction, it divides the experiment's family-wise error rate budget across comparisons. Unlike standard Bonferroni correction, it reserves a configurable share of that budget for the primary metric and splits the rest across the remaining metrics. This helps the experiment retain more power for the primary metric, because adding more metrics beyond the primary metric does not further shrink its alpha budget.
 
 Start with the experiment's configured confidence level:
 
