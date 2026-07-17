@@ -296,6 +296,7 @@ Pipeline Simulation is in Preview.
 
 Pipeline Simulation previews how your changes affect logs before you apply them. It uses a live tail of your logs, processed with your proposed changes. Open it while creating or editing a pipeline or processor.
 
+<!-- TODO(max): Replace with a cleaner screenshot from Nicolas (demo org, non-redacted synthetic data). Current image is a redacted staging capture. -->
 {{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="The Pipeline Simulation view showing the pipeline's processors on the left and a before-and-after diff of a selected log on the right" >}}
 
 When you add or edit processors, compare each log's before and after state:
