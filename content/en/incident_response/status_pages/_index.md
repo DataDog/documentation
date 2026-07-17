@@ -256,14 +256,16 @@ Templates let you save pre-configured language for degradation notices and maint
 
 1. Click **Save**.
 
+{{< img src="incident_response/status_pages/create_degradation_template.png" alt="Create a degradation template with a title, per-status messages using template variables, and impacted components" style="width:100%;" >}}
+
 ### Insert template variables
 
-Use variables in a template message so Datadog fills in the value automatically when the template is applied to a notice. The **Message Variables** panel next to the message fields lists the available variables:
+Insert a variable into a template message to have Datadog resolve it when the template is applied to a notice, either automatically or by prompting the publisher for a value. The **Message Variables** panel next to the message fields lists the available variables:
 
 | Variable | Description |
 | ---- | ---- |
 | `{{date}}` | Prompts the publisher to select a date and time when the template is applied. |
-| `{{components_impacted}}` | Fills in the list of components selected on the notice. |
+| `{{components_impacted}}` | Automatically fills in the list of components selected on the notice. |
 
 To insert a variable, type `{{` in a message field and select a variable from the list, or click a variable in the **Message Variables** panel to insert it at the cursor.
 
@@ -273,9 +275,7 @@ From the **Publish Notice** modal, select a template from the **Template** dropd
 
 After you apply a template, its fields become read-only, and the notice displays which template is applied. To make changes, edit a pre-filled field directly. A warning appears indicating that the template values were overridden, with a **Reset Values** option to revert to the original template content.
 
-### Edit or delete a template
-
-From the **Templates** tab in status page settings, click **Edit** next to a template to change its fields, or click **Delete** to remove it. Deleting a template does not affect notices that were already published using it.
+{{< img src="incident_response/status_pages/apply_template_to_notice.png" alt="Publish Notice modal with a template applied, pre-filling the notice title, message, and impacted components" style="width:60%;" >}}
 
 ## Email subscriptions
 
