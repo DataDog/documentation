@@ -7623,11 +7623,16 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Releases and Updates
+      url: /byoc-logs/operate/updates
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_updates
+      weight: 604
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 604
+      weight: 605
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
