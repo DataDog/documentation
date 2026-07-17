@@ -9,7 +9,7 @@ A feature flag becomes **dynamic configuration** when you store application sett
 
 1. Navigate to [**Create Feature Flag**][1].
 2. In the **Variants** section, set the variant type to **JSON**.
-3. Optionally add a [JSON Schema][2] to validate variant values. Datadog recommends adding a schema to catch invalid variant values early.
+3. Optionally add a [JSON Schema][2] to validate variant values. Datadog recommends adding a schema to catch invalid values early.
 4. Add variants with values that conform to the schema, and give each a descriptive name.
 
 {{< img src="feature_flags/dynamic_config_json_variants.png" alt="The Variants section of the create flag form showing a JSON schema and two variants: All items price asc and In stock top rated." style="width:100%;" >}}
