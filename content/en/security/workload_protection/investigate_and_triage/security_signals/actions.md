@@ -3,7 +3,7 @@ title: Take action
 disable_toc: false
 ---
 
-After you review a Workload Protection signal, use the **Next Steps** section in the signal side panel to triage, escalate, automate, or remediate the threat.
+After you review a Workload Protection signal, use the **Next Steps** section in the signal side panel to triage, escalate, automate, or respond to the threat.
 
 Workload Protection signals share the same triage and response workflows as other Datadog Security signals. For an overview of security signals across Cloud SIEM, App and API Protection, and Workload Protection, see [Detection rules][1] and the unified [Security Signals Explorer][2].
 
@@ -56,13 +56,13 @@ Alternatively, click the **Workflows** tab in the signal side panel to see which
 
 From the signal side panel, you can terminate a malicious process or container directly. Under **Respond**, click **Kill Containers or Processes** to stop the threat on the affected host.
 
-This action requires [Remediation][8] to be enabled on the Datadog Agent. The Agent terminates the targeted process or all processes in a compromised container depending on the configured scope. See [Remediation][8] for prerequisites, configuration, and action statuses.
+This action requires [Response][8] to be enabled on the Datadog Agent. The Agent terminates the targeted process or all processes in a compromised container depending on the configured scope. See [Response][8] for prerequisites, configuration, and action statuses.
 
 ## Network isolation
 
 From the signal side panel, you can isolate a compromised process or container from the network. Under **Respond**, click **Network isolation** to block network traffic for the affected workload using an eBPF-based filter.
 
-Network isolation requires [Remediation][8] to be enabled with network probes configured on the Agent. See [Remediation][8] for setup instructions and available enforcement options.
+Network isolation requires [Response][8] to be enabled with network probes configured on the Agent. See [Response][8] for setup instructions and available enforcement options.
 
 ## More actions
 
@@ -79,4 +79,4 @@ Click **More actions** in the **Respond** section to access additional response 
 [5]: /incident_response/incident_management/
 [6]: /security/cloud_security_management/workflows
 [7]: /service_management/workflows
-[8]: /security/workload_protection/respond_and_report/remediation
+[8]: /security/workload_protection/respond_and_report/response

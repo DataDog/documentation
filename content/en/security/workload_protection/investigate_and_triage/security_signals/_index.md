@@ -32,13 +32,13 @@ The [Signals Explorer][2] lists Workload Protection security signals generated b
 
 To filter signals by triage state, use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the **Signal State** facet on the facet panel.
 
-Select a signal to open the side panel. From there, you can [investigate the threat][6] using the investigation graph, timeline, context, and Signal JSON, or [take action][7] to triage, escalate, automate, or remediate the signal.
+Select a signal to open the side panel. From there, you can [investigate the threat][6] using the investigation graph, timeline, context, and Signal JSON, or [take action][7] to triage, escalate, automate, or respond to the signal.
 
 ## Next steps
 
 {{< whatsnext desc="Learn how to investigate and respond to Workload Protection signals:" >}}
 {{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/investigate" >}}Investigate signals with the investigation graph, timeline, and Signal JSON{{< /nextlink >}}
-{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Take action on signals: triage, escalate, automate, and remediate{{< /nextlink >}}
+{{< nextlink href="/security/workload_protection/investigate_and_triage/security_signals/actions" >}}Take action on signals: triage, escalate, automate, and respond{{< /nextlink >}}
 {{< /whatsnext >}}
 
 [1]: /security/workload_protection/

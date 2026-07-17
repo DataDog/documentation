@@ -57,9 +57,9 @@ Workload Protection relies on event correlation to surface contextualized and pr
 
 {{< img src="security/workload_protection/workload_protection_signal.jpg" alt="Workload Protection signal with an investigation and a threat timeline" width="100%">}}
 
-### Response, remediation and hardening capabilities
+### Response and hardening capabilities
 
-You can also take action directly from the Datadog App to block malicious behaviors, trigger remediation workflows, or integrate with your existing response pipelines. Whether your goal is to enforce compliance, strengthen your runtime security posture, or address workload hardening use cases, Workload Protection can take action on your behalf to keep your environments secure and resilient.
+You can also take action directly from the Datadog App to block malicious behaviors, trigger workflows, or integrate with your existing response pipelines. Whether your goal is to enforce compliance, strengthen your runtime security posture, or address workload hardening use cases, Workload Protection can take action on your behalf to keep your environments secure and resilient.
 
 ### Beyond threat detection: expanded use cases
 
@@ -85,7 +85,7 @@ Managing and scaling protection across large environments is simplified with pow
 
 Workload Protection is built on top of the Datadog Agent, which continuously collects real-time runtime telemetry from your workloads. Agent rules determine which security-relevant events are streamed to Datadog for centralized analysis. Once ingested, these events are processed by backend detection and finding rules, which analyze the data to generate detailed, prioritized Signals or Findings.
 
-Using Remote Configuration, you can manage agent rule deployments and trigger response or remediation actions directly from the Datadog app. In addition, Workload Protection integrates with the Datadog Terraform provider, allowing you to define, version, and maintain your rules as code outside the app.
+Using Remote Configuration, you can manage agent rule deployments and trigger response actions directly from the Datadog app. In addition, Workload Protection integrates with the Datadog Terraform provider, allowing you to define, version, and maintain your rules as code outside the app.
 
 {{< img src="security/workload_protection/workload_protection_architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
@@ -105,7 +105,7 @@ Visit our Investigate and Triage sections to discover the different explorers an
 
 ### Respond and Report
 
-Head to our Respond and Report pages to learn how to configure Workload Protection for automated remediation and team performance reporting. You’ll find guidance on mitigating threats and tracking metrics like Mean Time to Remediation (MTTR).
+Head to our Respond and Report pages to learn how to configure Workload Protection for automated response and team performance reporting. You’ll find guidance on mitigating threats and tracking metrics like Mean Time to Remediation (MTTR).
 
 ### Coverage
 
