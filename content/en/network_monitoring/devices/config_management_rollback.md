@@ -76,7 +76,7 @@ Rollbacks are supported for the following vendors and platforms:
 3. Register the runner in Datadog and assign it to an execution group. Within that group, create a policy within the execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action.
    - The policy must grant `Editor` access to users with the `NCM Device Config Write` role.
 
-   {{< img src="/network_device_monitoring/config_mgmt/execution_group_policy.png" alt="TODO: Screenshot that shows how to add the NCM Write role to an execution group policy" style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/execution_group_policy.png" alt="Screenshot that shows how to add the NCM Write role to an execution group policy" style="width:100%;" >}}
 
 ### Permissions
 
@@ -94,7 +94,7 @@ Rollbacks use the following NCM permissions:
 2. Select the configuration version you want to roll back to. The side panel displays a {{< ui >}}Rollback{{< /ui >}} button for that version.
 3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal, and click {{< ui >}}Rollback{{< /ui >}} again to confirm.
 
-   {{< img src="/network_device_monitoring/config_mgmt/rollback_confirm.png" alt="TODO: Screenshot that shows how to initiate a rollback and what to expect" style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/rollback.png" alt="Screenshot that shows when a rollback has been initiated and what to expect" style="width:100%;" >}}
 
 
 ## Further Reading
