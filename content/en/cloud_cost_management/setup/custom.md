@@ -41,6 +41,8 @@ Additionally, all dates are transformed into UTC timestamps. For example, "2024-
 
 ## Setup
 
+To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either a cloud provider (AWS, Azure, Google Cloud, or Oracle Cloud) or a SaaS provider, even if your custom costs are not related to any of these cloud providers. This configuration is required to enable the Custom Costs feature.
+
 ### Collect the required fields
 
 | Parameter | Description | Valid example | Invalid example | Additional Requirements |
@@ -287,6 +289,7 @@ You can view custom costs data on the [**Cloud Cost Explorer** page][6], the [Cl
 
 {{< partial name="whats-next/whats-next.html" >}}
 
+[1]: https://docs.datadoghq.com/cloud_cost_management
 [2]: https://focus.finops.org/#specification
 [3]: https://app.datadoghq.com/cost/settings/cost-files
 [4]: https://www.ecma-international.org/publications-and-standards/standards/ecma-404/
