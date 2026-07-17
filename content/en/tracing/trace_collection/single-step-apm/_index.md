@@ -30,21 +30,21 @@ further_reading:
 ---
 ## Overview
 
-Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with no additional configuration required, reducing onboarding time from days to minutes.
+Single Step Instrumentation (SSI) automatically installs the Datadog SDKs into your applications with no code changes or additional configuration required.
 
-To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
+To learn more about how it works, see the [injector guide for Single Step Instrumentation][2].
 
 ## Prerequisites
 
 1. Remove any custom instrumentation code from your application and restart it. SSI is automatically disabled if custom instrumentation is detected.
-1. Confirm environment compatibility by reviewing the [SSI compatibility guide][18] for supported languages, operating systems, and architectures.
+1. Confirm environment compatibility by reviewing the [SSI compatibility guide][5] for supported languages, operating systems, and architectures.
 
 ## Instrument SDKs across applications
 
 When you [install or update the Datadog Agent][1] with {{< ui >}}APM Instrumentation{{< /ui >}} enabled, the Agent instruments your applications by loading the Datadog SDK into supported processes. This enables distributed tracing by capturing and sending trace data from your services without requiring code changes.
 
 After instrumentation, you can optionally:
-- [configure Unified Service Tags (USTs)][14]
+- [configure Unified Service Tags (USTs)][3]
 - enable additional SDK-dependent products and features, such as Continuous Profiler or Application Security Monitoring
 
 Click on one of the following tiles to learn how to set up SSI for your deployment type:
@@ -60,27 +60,14 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
 
 ## Troubleshooting
 
-If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][15].
+If you encounter problems enabling APM with SSI, see the [SSI troubleshooting guide][4].
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest
-[2]: /tracing/metrics/runtime_metrics/
-[3]: /internal_developer_portal/catalog/
-[4]: /tracing/glossary/#instrumentation
-[5]: /containers/cluster_agent/admission_controller/
-[6]: /tracing/trace_collection/single-step-apm/compatibility
-[7]: /tracing/trace_collection/custom_instrumentation/
-[8]: /tracing/guide/injectors
-[9]: /tracing/trace_collection/single-step-apm/kubernetes/?tab=installingwithdatadogoperator#configure-instrumentation-for-namespaces-and-pods
-[10]: /tracing/trace_collection/library_config/
-[11]: /tracing/metrics/runtime_metrics/
-[12]: /internal_developer_portal/catalog/
-[13]: /tracing/glossary/#instrumentation
-[14]: /getting_started/tagging/unified_service_tagging
-[15]: /tracing/trace_collection/single-step-apm/troubleshooting
-[16]: /tracing/trace_collection/custom_instrumentation/
-[17]: /tracing/trace_collection/library_config/application_monitoring_yaml/
-[18]: /tracing/trace_collection/single-step-apm/compatibility/
+[2]: /tracing/guide/injectors
+[3]: /getting_started/tagging/unified_service_tagging
+[4]: /tracing/trace_collection/single-step-apm/troubleshooting
+[5]: /tracing/trace_collection/single-step-apm/compatibility/

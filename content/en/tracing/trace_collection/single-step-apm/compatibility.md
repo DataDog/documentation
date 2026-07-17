@@ -3,7 +3,7 @@ title: Compatibility
 aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 further_reading:
-- link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+- link: /tracing/trace_collection/single-step-apm/
   tag: "Documentation"
   text: "Single Step APM Instrumentation"
 ---
@@ -181,7 +181,7 @@ To mitigate:
 
 [1]: /tracing/trace_collection/compatibility/python
 [2]: https://github.com/DataDog/dd-trace-py/releases
-[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[3]: /tracing/trace_collection/single-step-apm/#instrument-sdks-across-applications
 [4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
