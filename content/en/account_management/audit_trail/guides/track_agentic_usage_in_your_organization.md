@@ -26,7 +26,7 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 | Bits Security Analyst | Tracked | Actions run in `autonomous` mode. There is no delegating user, because these actions don't involve a human in the loop. |
 | Bits Agent Builder | Not yet tracked | Actions don't include `@evt.actor.mode` or `@delegator.*` yet. |
 | Actions taken through the Datadog MCP server | Tracked | See [View actions taken through the Datadog MCP server](#view-actions-taken-through-the-datadog-mcp-server). |
-| Third-party or customer-built agents | Not tracked | Audit Trail doesn't distinguish these from regular API and application key usage. |
+| Third-party or customer-built agents | Not tracked | Audit Trail doesn't distinguish these from regular API and application key or personal access token (PAT) and service account token (SAT) usage. |
 
 **Note**: Even for a tracked agent, some action types haven't onboarded yet. `@evt.actor.mode:*` doesn't return every action for every tracked agent. Datadog is expanding coverage to the remaining agents and action types.
 
