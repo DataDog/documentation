@@ -50,7 +50,7 @@ Set up Bits Code for one of the [supported source code providers][11].
    - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
    - The service account's [personal access token][7] must have the following [scopes][6]: `api`, `write_repository`, and `read_user`. 
 
-   <div class="alert alert-warning">It's not possible to modify the scopes of an existing GitLab personal access token. If you need to create a token that includes the ones above, be sure to add <a href="/integrations/gitlab-source-code/#required-gitlab-scopes">all required scopes</a> needed by other Datadog products using the GitLab Source Code integration.</div>
+   <div class="alert alert-warning">You can't modify the scopes of an existing GitLab personal access token. If you need to create a token that includes the scopes above, add <a href="/integrations/gitlab-source-code/#required-gitlab-scopes">all scopes required</a> by other Datadog products that use the GitLab Source Code integration.</div>
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code
 [2]: /integrations/gitlab-source-code/
@@ -100,6 +100,8 @@ Bits Code ingests custom instruction files from your repository, including:
 - `copilot-instructions.md`
 
 You can also define global custom instructions that apply to all Bits Code sessions in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
+
+A custom instruction file is a good place to mention [custom skills][12] you'd like Bits Code to use.
 
 ## Environment setup
 
@@ -159,3 +161,4 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [7]: /bits_ai/bits_code/#start-a-session
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
+[12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions

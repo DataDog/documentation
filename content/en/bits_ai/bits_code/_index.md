@@ -89,11 +89,11 @@ Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on gen
 
 You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
-### Use of your custom agent skills and instructions
+### Custom agent skills and instructions
 
 Bits Code can use custom skills defined in your repository. It discovers skills formatted like `<skill-name>/SKILL.md` in `.claude/skills/`, `.codex/skills/`, and `.gemini/skills/` directories. Skills should contain YAML `name` and `description` frontmatter keys.
 
-Bits Code automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You also prompt Bits Code to use a certain skill directly.
+Bits Code automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You can also prompt Bits Code to use a certain skill directly.
 
 Bits Code also [ingests custom instructions][33] defined in your repository and Bits Code settings.
 
@@ -101,7 +101,7 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
-- (For GitHub only) Iterate on pull requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
+- Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
