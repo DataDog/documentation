@@ -44,7 +44,7 @@ You may see one of the following messages:
 - Targeting rules above the experiment rule capture traffic before users reach the experiment.
 - The experiment's traffic exposure or rollout percentages do not match the intended split.
 - The application assigns the same subject inconsistently.
-- For warehouse-native experiments, exposure data contains unexpected variant proportions.
+- For warehouse-native experiments, assignment data contains unexpected variant proportions.
 
 ### How to resolve
 
@@ -55,12 +55,12 @@ You may see one of the following messages:
 
 ## Missing assignments
 
-If Datadog has no exposure data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse exposure model returns no rows in the analysis window for the specified experiment key and variant keys.
+If Datadog has no assignment data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified experiment key and variant keys.
 
 ### How to resolve
 
 - For experiments backed by Datadog Feature Flags, confirm that the flag is enabled in the correct environment and that the application is evaluating the flag for the expected subjects. Check the flag's real-time metric overview for exposure events.
-- For warehouse-native experiments, verify that the Exposure SQL Model returns exposure rows for the experiment key, variant keys, subject key, and timestamp range.
+- For warehouse-native experiments, verify that the Exposure SQL Model returns assignment rows for the experiment key, variant keys, subject key, and timestamp range.
 - If the experiment was just launched, wait for the next analysis run or manually run an update.
 
 ## Missing flag evaluations
@@ -76,25 +76,25 @@ For experiments backed by Datadog Feature Flags, Datadog can report **Missing fl
 
 ## Mixed assignments
 
-If the same subject is exposed to more than one variant in the same experiment, Datadog excludes that subject from analysis. A high number of mixed exposures can make results incomplete or unreliable.
+If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. A high number of mixed assignments can make results incomplete or unreliable.
 
 ### How to resolve
 
 - For Feature Flags experiments, confirm that subjects can match only one experiment variant.
 - Review targeting rules, rollout stages, and any application code that changes targeting keys.
-- For warehouse-native experiments, check for duplicate or conflicting variant records in the exposure data.
-- Fix the source of conflicting exposures, then rerun analysis.
+- For warehouse-native experiments, check for duplicate or conflicting variant records in the assignment data.
+- Fix the source of conflicting assignments, then rerun analysis.
 
 ## Dimensional assignment imbalance
 
-Datadog can flag an experiment when the probability of seeing a variant differs significantly across segment values. For example, one country, plan, device, or customer tier might receive variants at a different split than the rest of the experiment. This can make CUPED results unreliable.
+Datadog can flag an experiment when the probability of being assigned to a variant differs significantly across segment values. For example, one country, plan, device, or customer tier might receive variants at a different split than the rest of the experiment. This can make CUPED results unreliable.
 
 ### How to resolve
 
 - Review segment-level results for dimensions that are related to targeting or data collection.
 - Avoid using segment properties that can change during the experiment if the treatment can affect those properties.
-- Confirm that exposure data records the subject's segment consistently at the time of exposure.
-- Fix targeting or exposure data issues, then rerun analysis.
+- Confirm that assignment data records the subject's segment consistently at assignment time.
+- Fix targeting or assignment data issues, then rerun analysis.
 
 ## Missing metric data
 
