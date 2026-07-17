@@ -3,6 +3,9 @@ title: BYOC Logs Release Notes
 description: Per-version changes for the BYOC Logs binary, bundled by the datadog/cloudprem Helm chart.
 disable_toc: false
 further_reading:
+- link: "/byoc-logs/operate/updates/"
+  tag: "Documentation"
+  text: "Plan BYOC Logs updates"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
   text: "Install BYOC Logs"

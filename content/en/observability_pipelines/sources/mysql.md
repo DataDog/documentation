@@ -199,7 +199,14 @@ After you select the MySQL source in the pipeline UI:
 - Database users, roles, and permissions must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
 
+## Metrics
+
+For [component metrics][5] and [source buffer metrics][6] emitted by all sources, see the [Pipelines Usage Metrics][7] documentation. To filter or group by database source metrics, use the tag `component_type:database`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [3]: https://app.datadoghq.com/logs
 [4]: https://dev.mysql.com/doc/refman/9.2/en/create-role.html
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

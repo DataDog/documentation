@@ -254,6 +254,10 @@ curl -X POST \
 1. Click {{< ui >}}Save{{< /ui >}}.
 1. Click {{< ui >}}Publish{{< /ui >}} to publish the workflow. A workflow must be published before you can trigger it with a POST request. Published workflows accrue costs based on workflow executions. For more information, see the [Datadog Pricing page][11].
 
+### Access the API request body
+
+In later steps of your workflow, use `Source.api.requestBody` to reference the payload of the incoming API request. If the request body is JSON, parse it with `JSON.parse()` before accessing individual fields. For example, use `${JSON.parse(Source.api.requestBody).my_field}` instead of `Source.api.requestBody.my_field`.
+
 ## Scheduled triggers
 
 To schedule a workflow run:
