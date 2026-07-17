@@ -37,7 +37,7 @@ Before you create Agent-side tag aggregation rules, complete the steps described
 
 Agent-side tag aggregation is supported on Agent version 7.80.0 and later. Datadog recommends version 7.80.2 or later, which includes additional troubleshooting information in Agent flares.
 
-## Enable Remote Configuration
+### Enable Remote Configuration
 
 Remote Configuration must be enabled for your organization and for the API keys used by your Agents. For more information about the Remote Configuration security model, see the [Remote Configuration security whitepaper][4].
 
@@ -47,7 +47,7 @@ Comprehensive instructions are available in the [Remote Configuration documentat
 2. With the [`api_keys_write`][7] permission, enable the Remote Configuration capability on the API keys used by your Agents.
 3. Restart your Agents after enabling Remote Configuration on the API keys. The API key capability change takes effect only after the Agents restart.
 
-## Enable the Agent Data Plane
+### Enable the Agent Data Plane
 
 Upgrade your Agents to version 7.80.0 or later (7.80.2 or later recommended) and enable the Agent Data Plane. Agent-side tag aggregation requires the Agent Data Plane, a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
 
