@@ -1078,7 +1078,7 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
     return {[name]: {"name": tag.name, "description": tag.description}};
   }).reduce((obj, item) => ({...obj, ...item}) ,{});
 
-  const tagsFilePath = `./data/api/${apiVersion}/translate_tags.json`;
+  const tagsFilePath = `../data/api/${apiVersion}/translate_tags.json`;
   fs.writeFileSync(tagsFilePath, safeJsonStringify(tags, null, 2), 'utf8');
 
   const actions = {};
@@ -1113,14 +1113,14 @@ const createTranslations = (apiYaml, deref, apiVersion) => {
         actions[action.operationId] = item;
       });
     });
-  const actionsFilePath = `./data/api/${apiVersion}/translate_actions.json`;
+  const actionsFilePath = `../data/api/${apiVersion}/translate_actions.json`;
   fs.writeFileSync(actionsFilePath, safeJsonStringify(actions, null, 2), 'utf8');
 };
 
 
 /**
  * Takes an array of spec file paths and processes them
- * @param {array} specs - array of strings with path to spec e.g ['./data/api/v2/full_spec.yaml']
+ * @param {array} specs - array of strings with path to spec e.g ['../data/api/v2/full_spec.yaml']
  */
 const processSpecs = (specs) => {
   specs
@@ -1130,7 +1130,7 @@ const processSpecs = (specs) => {
         .then((deref) => {
           const version = spec.split('/')[3];
           const jsonString = safeJsonStringify(deref, null, 2);
-          const pathToJson = `./data/api/${version}/full_spec_deref.json`;
+          const pathToJson = `../data/api/${version}/full_spec_deref.json`;
           fs.writeFileSync(pathToJson, jsonString, 'utf8');
 
           // create translation ready datafiles
@@ -1174,7 +1174,7 @@ const processSpecs = (specs) => {
 
 
 const init = () => {
-  const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+  const specs = ['../data/api/v1/full_spec.yaml', '../data/api/v2/full_spec.yaml'];
   processSpecs(specs);
 };
 

@@ -23,8 +23,7 @@ content/en/api/**/*.rs
 content/en/api/tsconfig.json
 
 # ignore full spec deref, generate during build instead
-data/api/v1/full_spec_deref.json
-data/api/v2/full_spec_deref.json
+# note: data/api moved to the repo root; see the root .gitignore for its deref entries
 static/resources/json/full_spec_v1.json
 static/resources/json/full_spec_v2.json
 

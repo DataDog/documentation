@@ -142,6 +142,9 @@ module:
         - 'shortcodes/mdoc/*'
     - source: data
       target: data
+    # api data lives at the repo root so non-Hugo consumers (e.g. astro) can read it too
+    - source: ../data/api
+      target: data/api
     - source: static
       target: assets
     - source: assets
