@@ -4048,6 +4048,86 @@ components:
             type: string
           type: array
       type: object
+    AccountFilters:
+      description: The account filters for a cloud account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersAttributes"
+        id:
+          description: The ID of the cloud account.
+          example: "123456789123"
+          type: string
+        type:
+          $ref: "#/components/schemas/AccountFiltersType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersAttributes:
+      description: Attributes for the account filters of a cloud account.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+        account_id:
+          description: The cloud account ID.
+          example: "123456789123"
+          type: string
+        cloud:
+          description: The cloud provider of the account, for example `aws`, `aws_cur2`, or `oci`.
+          example: "aws_cur2"
+          type: string
+      type: object
+    AccountFiltersPatchData:
+      description: Account filters patch data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersPatchRequest:
+      description: Account filters patch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFiltersPatchData"
+      required:
+        - data
+      type: object
+    AccountFiltersPatchRequestAttributes:
+      description: Attributes for an account filters patch request.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+      required:
+        - account_filters
+      type: object
+    AccountFiltersPatchRequestType:
+      default: account_filters_patch_request
+      description: Type of account filters patch request.
+      enum:
+        - account_filters_patch_request
+      example: account_filters_patch_request
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS_PATCH_REQUEST
+    AccountFiltersResponse:
+      description: Response containing the account filters for a cloud account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFilters"
+      type: object
+    AccountFiltersType:
+      default: account_filters
+      description: Type of account filters.
+      enum:
+        - account_filters
+      example: account_filters
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -12544,6 +12624,7 @@ components:
         data:
           attributes:
             compliance_host: false
+            function: true
             vuln_containers_os: true
             vuln_host_os: true
           id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12558,6 +12639,7 @@ components:
         data:
           - attributes:
               compliance_host: false
+              function: true
               vuln_containers_os: true
               vuln_host_os: true
             id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12591,6 +12673,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -12638,6 +12723,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -40934,6 +41022,7 @@ components:
       example:
         data:
           attributes:
+            cloud_function: true
             compliance_host: false
             vuln_containers_os: true
             vuln_host_os: true
@@ -40948,6 +41037,7 @@ components:
       example:
         data:
           - attributes:
+              cloud_function: true
               compliance_host: false
               vuln_containers_os: true
               vuln_host_os: true
@@ -40980,6 +41070,9 @@ components:
     GcpScanOptionsDataAttributes:
       description: Attributes for GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean
@@ -41027,6 +41120,9 @@ components:
     GcpScanOptionsInputUpdateDataAttributes:
       description: Attributes for updating GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean
@@ -74156,6 +74252,86 @@ components:
         - MINUS_ID
         - NAME
         - MINUS_NAME
+    OrgGroupPolicySuggestionAttributes:
+      description: Attributes of an org group policy suggestion.
+      properties:
+        consensus_ratio:
+          description: The ratio of member orgs whose configuration agrees on the recommended value.
+          example: 0.75
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        policy_name:
+          description: The name of the suggested policy.
+          example: "monitor_timezone"
+          type: string
+        recommended_value:
+          description: The recommended value for the policy, based on member org consensus.
+          example: "UTC"
+        status:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionStatus"
+      required:
+        - policy_name
+        - status
+        - consensus_ratio
+        - recommended_value
+      type: object
+    OrgGroupPolicySuggestionData:
+      description: An org group policy suggestion resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionAttributes"
+        id:
+          description: The ID of the org group policy suggestion.
+          example: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OrgGroupPolicySuggestionListResponse:
+      description: Response containing a list of org group policy suggestions.
+      properties:
+        data:
+          description: An array of org group policy suggestions.
+          items:
+            $ref: "#/components/schemas/OrgGroupPolicySuggestionData"
+          type: array
+      required:
+        - data
+      type: object
+    OrgGroupPolicySuggestionRelationships:
+      description: Relationships of an org group policy suggestion.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      type: object
+    OrgGroupPolicySuggestionStatus:
+      description: The status of the policy suggestion.
+      enum:
+        - pending
+        - accepted
+        - dismissed
+      example: pending
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - ACCEPTED
+        - DISMISSED
+    OrgGroupPolicySuggestionType:
+      description: Org group policy suggestions resource type.
+      enum:
+        - org_group_policy_suggestions
+      example: org_group_policy_suggestions
+      type: string
+      x-enum-varnames:
+        - ORG_GROUP_POLICY_SUGGESTIONS
     OrgGroupPolicyType:
       description: Org group policies resource type.
       enum:
@@ -89824,6 +90000,69 @@ components:
             $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
           type: array
       type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes:
+      description: The attributes of a CrowdStrike entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My CrowdStrike Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes:
+      description: Fields to update on a CrowdStrike entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My CrowdStrike Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes:
+      description: The CrowdStrike credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringDatasetAttributesRequest:
       description: The attributes of a dataset create or update request.
       properties:
@@ -90382,6 +90621,61 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringEntraIdIntegrationConfigCreateAttributes:
+      description: The attributes of an Entra ID entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Entra ID Integration
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+      type: object
+    SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Entra ID entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Entra ID Integration (renamed)
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes:
+      description: The Entra ID credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+      required:
+        - integration_type
+        - domain
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -90400,6 +90694,69 @@ components:
       x-enum-varnames:
         - REQUIRE
         - SUPPRESS
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes:
+      description: The attributes of a Google Workspace entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My GWS Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes:
+      description: Fields to update on a Google Workspace entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My GWS Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes:
+      description: The Google Workspace credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringIntegrationActivateAttributes:
       description: Overrides applied when activating the integration. All fields are optional.
       properties:
@@ -90475,26 +90832,20 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigCreateAttributes:
       description: The attributes of the entity context sync configuration to create.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The display name for the entity context sync configuration.
-          example: My GWS Integration
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      required:
-        - integration_type
-        - domain
-        - name
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
     SecurityMonitoringIntegrationConfigCreateData:
       description: The entity context sync configuration to create.
       properties:
@@ -90514,6 +90865,21 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringIntegrationConfigCrowdStrikeSecrets:
+      description: Credentials for a CrowdStrike entity context sync.
+      properties:
+        client_id:
+          description: The CrowdStrike API client ID.
+          example: abcdef0123456789abcdef0123456789
+          type: string
+        client_secret:
+          description: The CrowdStrike API client secret.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789ABCDEF
+          type: string
+      required:
+        - client_id
+        - client_secret
+      type: object
     SecurityMonitoringIntegrationConfigData:
       description: An entity context sync configuration.
       properties:
@@ -90529,6 +90895,54 @@ components:
         - id
         - type
         - attributes
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets:
+      description: Credentials for a Google Workspace entity context sync.
+      properties:
+        admin_email:
+          description: The admin email to impersonate for domain-wide delegation.
+          example: admin@example.com
+          type: string
+        service_account_json:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount"
+      required:
+        - service_account_json
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount:
+      additionalProperties: {}
+      description: The Google Cloud service account JSON used to authenticate against the Google Workspace Admin SDK. Additional keys beyond those documented are preserved.
+      properties:
+        client_email:
+          description: The service account client email.
+          example: svc@my-project.iam.gserviceaccount.com
+          type: string
+        private_key:
+          description: The service account private key.
+          example: "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+          type: string
+        project_id:
+          description: The Google Cloud project ID that owns the service account.
+          example: my-project
+          type: string
+        type:
+          description: The service account type. Must be `service_account`.
+          example: service_account
+          type: string
+      required:
+        - type
+        - project_id
+        - private_key
+        - client_email
+      type: object
+    SecurityMonitoringIntegrationConfigOktaSecrets:
+      description: Credentials for an Okta entity context sync.
+      properties:
+        api_token:
+          description: The Okta API token used to authenticate against the Okta API.
+          example: 00aBcDeFgHiJkLmNoPqRsTuVwXyZ
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigResourceType:
       default: integration_config
@@ -90547,13 +90961,15 @@ components:
       required:
         - data
       type: object
-    SecurityMonitoringIntegrationConfigSecrets:
-      additionalProperties: {}
-      description: |-
-        The secrets used to authenticate against the external entity source. The accepted keys depend on the source type
-        (for example, `admin_email` for Google Workspace). Not required for source types that do not use secrets (for example, `ENTRA_ID`).
-      example:
-        admin_email: test@example.com
+    SecurityMonitoringIntegrationConfigSentinelOneSecrets:
+      description: Credentials for a SentinelOne entity context sync.
+      properties:
+        api_token:
+          description: The SentinelOne API token.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigSettings:
       additionalProperties: {}
@@ -90574,27 +90990,21 @@ components:
         - INVALID
         - INITIALIZING
     SecurityMonitoringIntegrationConfigUpdateAttributes:
-      description: Fields to update on the entity context sync configuration. All fields are optional.
-      properties:
-        domain:
-          description: The new domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        enabled:
-          description: Whether the entity context sync should be enabled.
-          example: true
-          type: boolean
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The new display name for the entity context sync configuration.
-          example: My GWS Integration (renamed)
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      type: object
+      description: Fields to update on the entity context sync configuration. All fields other than the integration type are optional.
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
     SecurityMonitoringIntegrationConfigUpdateData:
       description: The entity context sync configuration fields to update.
       properties:
@@ -90627,19 +91037,20 @@ components:
       type: object
     SecurityMonitoringIntegrationCredentialsValidateAttributes:
       description: The credentials to validate against the external entity source.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-      required:
-        - integration_type
-        - domain
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
     SecurityMonitoringIntegrationCredentialsValidateData:
       description: The credentials to validate.
       properties:
@@ -90665,12 +91076,56 @@ components:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
       example: GOOGLE_WORKSPACE
       type: string
       x-enum-varnames:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
+    SecurityMonitoringIntegrationTypeCrowdStrike:
+      description: The source type for a CrowdStrike entity context sync.
+      enum:
+        - CROWDSTRIKE
+      example: CROWDSTRIKE
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE
+    SecurityMonitoringIntegrationTypeEntraId:
+      description: The source type for an Entra ID entity context sync.
+      enum:
+        - ENTRA_ID
+      example: ENTRA_ID
+      type: string
+      x-enum-varnames:
+        - ENTRA_ID
+    SecurityMonitoringIntegrationTypeGoogleWorkspace:
+      description: The source type for a Google Workspace entity context sync.
+      enum:
+        - GOOGLE_WORKSPACE
+      example: GOOGLE_WORKSPACE
+      type: string
+      x-enum-varnames:
+        - GOOGLE_WORKSPACE
+    SecurityMonitoringIntegrationTypeOkta:
+      description: The source type for an Okta entity context sync.
+      enum:
+        - OKTA
+      example: OKTA
+      type: string
+      x-enum-varnames:
+        - OKTA
+    SecurityMonitoringIntegrationTypeSentinelOne:
+      description: The source type for a SentinelOne entity context sync.
+      enum:
+        - SENTINELONE
+      example: SENTINELONE
+      type: string
+      x-enum-varnames:
+        - SENTINELONE
     SecurityMonitoringListRulesResponse:
       description: List of rules.
       properties:
@@ -90681,6 +91136,69 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/ResponseMetaAttributes"
+      type: object
+    SecurityMonitoringOktaIntegrationConfigCreateAttributes:
+      description: The attributes of an Okta entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Okta Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringOktaIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Okta entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Okta Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringOktaIntegrationCredentialsValidateAttributes:
+      description: The Okta credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringPaginatedSuppressionsResponse:
       description: Response object containing the available suppression rules with pagination metadata.
@@ -91641,6 +92159,69 @@ components:
           description: Time zone of the start date, in the [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format.
           example: America/New_York
           type: string
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes:
+      description: The attributes of a SentinelOne entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My SentinelOne Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes:
+      description: Fields to update on a SentinelOne entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My SentinelOne Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes:
+      description: The SentinelOne credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
@@ -127811,6 +128392,184 @@ paths:
       "x-permission":
         operator: OPEN
         permissions: []
+  /api/v2/cost/account_filters/{cloud_account_id}:
+    get:
+      description: Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: GetCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                include_accounts:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 70
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+    patch:
+      description: Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: UpdateCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Exclude new accounts and include specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        include_new_accounts: false
+                        included_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                    type: account_filters_patch_request
+              exclude_accounts:
+                summary: Include new accounts and exclude specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        excluded_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                        include_new_accounts: true
+                    type: account_filters_patch_request
+            schema:
+              $ref: "#/components/schemas/AccountFiltersPatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                exclude_accounts:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 71
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/anomalies:
     get:
       description: List detected Cloud Cost Management anomalies for the organization.
@@ -166408,6 +167167,65 @@ paths:
         operator: OR
         permissions:
           - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_policy_suggestions:
+    get:
+      description: List suggested organization group policies. Requires a filter on org group ID.
+      operationId: ListOrgGroupPolicySuggestions
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupPolicyFilterOrgGroupId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          consensus_ratio: 0.75
+                          policy_name: "monitor_timezone"
+                          recommended_value: "UTC"
+                          status: "pending"
+                        id: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+                        relationships:
+                          org_group:
+                            data:
+                              id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                              type: org_groups
+                        type: org_group_policy_suggestions
+              schema:
+                $ref: "#/components/schemas/OrgGroupPolicySuggestionListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List org group policy suggestions
+      tags: [Org Groups]
+      x-menu-order: 21
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
