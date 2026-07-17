@@ -1,6 +1,6 @@
 ---
 title: Query BYOC Logs with the Datadog MCP Server
-description: Learn how to query logs stored in BYOC Logs indexes using the Datadog MCP server
+description: Learn how to query logs stored in BYOC Logs indexes with the search_datadog_logs tool on the Datadog MCP server
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
@@ -17,10 +17,11 @@ aliases:
 
 ## Overview
 
-The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Datadog logs, including logs stored in BYOC (Bring Your Own Cloud) Logs indexes, directly through AI-powered tools and integrations. Querying BYOC Logs with the Datadog MCP server unlocks several valuable capabilities, including:
+Use the `search_datadog_logs` tool on the [Datadog MCP (Model Context Protocol) server][1] to query logs stored in BYOC (Bring Your Own Cloud) Logs indexes. You can access the tool through AI-powered tools and integrations.
 
-- **Unified, Context-Aware Troubleshooting**: Query and correlate logs, metrics, and traces from any environment in one place, and pivot across telemetry types to identify root causes faster.
-- **Natural Language Interaction**: Ask plain-language questions, and let AI generate the appropriate log queries without needing to remember syntax.
+**Note**: BYOC Logs indexes are supported only by `search_datadog_logs`. The `analyze_datadog_logs` tool and the `datadog/querying-patterns` skill do not support BYOC Logs indexes.
+
+With `search_datadog_logs`, you can use natural-language prompts to generate and run log queries without needing to remember the query syntax.
 
 ## Prerequisites
 
@@ -30,18 +31,18 @@ The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Da
 
 ## Querying BYOC Logs
 
-To query logs stored in BYOC Logs indexes, specify your BYOC Logs index name in addition to your standard log query:
+To query logs stored in BYOC Logs indexes, use `search_datadog_logs` and specify your BYOC Logs index name in addition to your standard log query:
 
 - (Required) **`indexes`**: The name(s) of your BYOC Logs index(es).
 
-The MCP server identifies BYOC Logs indexes by their names and routes queries to the appropriate storage tier automatically. Without the `indexes` parameter, queries default to searching standard Datadog log indexes instead of BYOC Logs.
+The `search_datadog_logs` tool identifies BYOC Logs indexes by their names and routes queries to the appropriate storage tier automatically. Without the `indexes` parameter, queries default to searching standard Datadog log indexes instead of BYOC Logs.
 
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
 - (Recommended) Query filters (service, status, log content).
 
 ### Query parameters
-The following table describes the key parameters used when querying logs with the MCP server:
+The following table describes the key parameters used with `search_datadog_logs`:
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
@@ -65,7 +66,7 @@ You can also find your index names in the [BYOC Logs console][3] by selecting a 
 
 ## Advanced query examples
 
-When using AI-powered tools with the Datadog MCP server, you can ask questions in natural language. The MCP server will automatically translate these into properly formatted BYOC Logs queries.
+When using AI-powered tools with `search_datadog_logs`, you can ask questions in natural language. The tool translates these into properly formatted BYOC Logs queries.
 
 ### Error logs from a specific service
 **Prompt**:
