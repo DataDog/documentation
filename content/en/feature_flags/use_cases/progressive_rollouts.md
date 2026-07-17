@@ -47,7 +47,7 @@ When the canary detects a statistically significant change in any guardrail metr
 
 ### Configure a canary rollout
 
-1. Create a progressive rollout targeting rule as described above.
+1. Create a progressive rollout targeting rule as described in the [Configure a progressive rollout](#configure-a-progressive-rollout) section.
 2. Add guardrail metrics to the rollout configuration.
 3. Choose whether guardrail failures should pause or stop the rollout.
 
