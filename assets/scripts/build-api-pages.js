@@ -863,7 +863,11 @@ const groupBy = (items, keyFn) => {
 /**
  * Returns "<type=c>" if `item` is an object schema with a const `type` field
  * @param {object} schema
- * @returns "<type=c>" if the schema is a const or 1-value string enum
+ * Returns `<discriminant=c>` when `item.properties[discriminant]` is a
+ * single-value string enum.
+ * @param {object} item - schema object
+ * @param {string} discriminant - property name to inspect
+ * @returns {string|undefined} formatted label, or undefined if not a const
  */
 const getMaybeConstTypeName = (item, discriminant) => {
   const type = item.properties?.[discriminant];
