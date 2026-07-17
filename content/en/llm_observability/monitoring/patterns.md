@@ -49,15 +49,13 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 
 1. Click **+ New Pattern**
 2. Enter a **Pattern Name**
-3. Under **Clustering model**, select your LLM Provider, Account, and Model — these are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic. Supported providers are **OpenAI**, **Azure OpenAI**, and **Amazon Bedrock**. For Azure OpenAI, the deployment ID, resource name, and model version are resolved automatically from the configured [integration account][1] — you only need to provide an account and model name.
+3. Under **Clustering model**, select your LLM Provider, Account, and Model — these are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic. Supported providers are **OpenAI**, **Azure OpenAI**, and **Amazon Bedrock**.
 4. Under **Scope**, configure:
    - **Time window:** The lookback period for interactions to analyze
    - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.
    - **Sampling Rate:** The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
 5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.input.value}} to analyze patterns by user input, or {{meta.span.kind}} to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
 6. Click **Save**
-
-**Note**: For Azure OpenAI, deployment metadata (deployment ID, resource name, and model version) is resolved from the integration account at configuration save time and persisted with the Patterns configuration. If an Azure deployment is renamed after a Patterns configuration is saved, re-save the configuration to pick up the updated deployment details. Amazon Bedrock uses the same behavior — the region is also persisted at save time.
 
 ## Explore your Patterns
 
@@ -107,7 +105,7 @@ From the interactions table inside a topic's detail view, you can act on the int
 
 ## Trigger a new run
 
-To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. Before starting, Patterns validates your configuration end-to-end. For Azure OpenAI, this validation requires a valid account ID to succeed. The pipeline runs in the background and takes 5 to 10 minutes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
+To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. The pipeline runs in the background and takes 5 to 10 minutes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
 
 If a run fails, a modal explains the cause and what action to take. The page continues to display results from the most recent successful run while the failed run is shown in the header.
 
