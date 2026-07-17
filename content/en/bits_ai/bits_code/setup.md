@@ -50,8 +50,7 @@ Set up Bits Code for one of the [supported source code providers][11].
    - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
    - The service account's [personal access token][7] must have the following [scopes][6]: `api`, `write_repository`, and `read_user`. 
 
-   <div class="alert alert-warning">It's not possible to modify the scopes of an existing GitLab personal access token. If you have already set up the GitLab Source Code integration using a personal access token that does not have the scopes above, create an additional one. When doing so, be sure to add all other scopes needed by other Datadog products using the GitLab Source Code integration.</div>
-
+   <div class="alert alert-warning">It's not possible to modify the scopes of an existing GitLab personal access token. If you need to create a token that includes the ones above, be sure to add <a href="/integrations/gitlab-source-code/#required-gitlab-scopes">all required scopes</a> needed by other Datadog products using the GitLab Source Code integration.</div>
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code
 [2]: /integrations/gitlab-source-code/
@@ -60,7 +59,6 @@ Set up Bits Code for one of the [supported source code providers][11].
 [5]: https://docs.gitlab.com/user/permissions/#groups
 [6]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
 [7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
-
 {{% /tab %}}
 
 {{< /tabs >}}
