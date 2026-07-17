@@ -118,5 +118,5 @@ We've put together an [advanced agent configuration page][5] for power users to 
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
 [2]: /security/workload_protection/troubleshooting/threats
 [3]: https://github.com/DataDog/datadog-security-playground
-[4]: /security/workload_protection/respond_and_report/automated_response
+[4]: /security/workload_protection/respond_and_report/#automated_response
 [5]: /security/workload_protection/getting_started/advanced_configuration
