@@ -32,9 +32,9 @@ To enable this, Datadog provides a custom `runc` shim that replaces Docker's def
 In Kubernetes environments, injection is handled by the Datadog Admission Controller, which uses a mutating admission webhook. When a pod is scheduled, the controller:
 
 1. Evaluates whether the pod should be instrumented based on configured selectors (such as namespaces, labels, or specific pod properties).
-1. Mutates the pod spec to mount the injector and SDKs, set environment variables (such as `LD_PRELOAD`), and mount the volumes needed to persist the injected libraries.
+1. Mutates the pod spec to mount the injector and SDKs, set environment variables (such as `LD_PRELOAD`), and attach the volumes needed to persist the injected SDKs.
 
-How the injector and SDK files are delivered depends on the configured [injection mode][2]. By default, SSI uses the Datadog CSI driver: a DaemonSet runs on every node, and when a pod is scheduled, the driver mounts the SDK directly from the node's file system into the container. No init container is created, and nothing needs to run before the application starts. The first time an SDK is used on a node, it is downloaded and cached; every subsequent pod on that node mounts the SDK from the cache. This lowers resource overhead and reduces pod startup time at scale.
+How the injector and SDK files are delivered depends on the configured [injection mode][2]. By default, SSI uses the Datadog CSI driver. A DaemonSet runs on every node. When a pod is scheduled, the driver mounts the SDK directly from the node's file system into the container, so no init container is created and nothing needs to run before the application starts. The first time an SDK is used on a node, it is downloaded and cached. Every subsequent pod on that node mounts the SDK from the cache. This lowers resource overhead and reduces pod startup time at scale.
 
 Alternatively, SSI can deliver the injector and SDK files using init containers. For details on each mode and how to configure it, see [injection modes][2].
 

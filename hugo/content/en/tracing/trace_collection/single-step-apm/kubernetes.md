@@ -169,7 +169,7 @@ SSI supports multiple injection modes, which control how the injector and APM li
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
-| `csi` | **Default.** Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to init container mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.28.0+ |
+| `csi` | **Default.** Mounts injector and APM library files using the [Datadog CSI driver][37]. Reduces pod startup time compared to `init_container` mode. | Agent 7.76.0+, CSI driver 1.2.0+, Helm Chart 3.178.1+ or Datadog Operator 1.28.0+ |
 | `init_container` | Uses init containers to copy injector and APM library files into application containers. Use this mode in environments that don't support the CSI driver. | Agent deployed with Helm Chart or Datadog Operator |
 
 The `csi` mode requires the Datadog CSI driver. If you deploy with Helm, set `datadog.csi.enabled: true` in your `datadog-values.yaml` to install and activate it. See the [CSI driver documentation][37] for installation steps and environment-specific requirements.
