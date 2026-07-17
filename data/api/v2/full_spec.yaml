@@ -90000,6 +90000,69 @@ components:
             $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
           type: array
       type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes:
+      description: The attributes of a CrowdStrike entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My CrowdStrike Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes:
+      description: Fields to update on a CrowdStrike entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My CrowdStrike Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes:
+      description: The CrowdStrike credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringDatasetAttributesRequest:
       description: The attributes of a dataset create or update request.
       properties:
@@ -90558,6 +90621,61 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringEntraIdIntegrationConfigCreateAttributes:
+      description: The attributes of an Entra ID entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Entra ID Integration
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+      type: object
+    SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Entra ID entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Entra ID Integration (renamed)
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes:
+      description: The Entra ID credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+      required:
+        - integration_type
+        - domain
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -90576,6 +90694,69 @@ components:
       x-enum-varnames:
         - REQUIRE
         - SUPPRESS
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes:
+      description: The attributes of a Google Workspace entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My GWS Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes:
+      description: Fields to update on a Google Workspace entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My GWS Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes:
+      description: The Google Workspace credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringIntegrationActivateAttributes:
       description: Overrides applied when activating the integration. All fields are optional.
       properties:
@@ -90651,26 +90832,20 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigCreateAttributes:
       description: The attributes of the entity context sync configuration to create.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The display name for the entity context sync configuration.
-          example: My GWS Integration
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      required:
-        - integration_type
-        - domain
-        - name
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
     SecurityMonitoringIntegrationConfigCreateData:
       description: The entity context sync configuration to create.
       properties:
@@ -90690,6 +90865,21 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringIntegrationConfigCrowdStrikeSecrets:
+      description: Credentials for a CrowdStrike entity context sync.
+      properties:
+        client_id:
+          description: The CrowdStrike API client ID.
+          example: abcdef0123456789abcdef0123456789
+          type: string
+        client_secret:
+          description: The CrowdStrike API client secret.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789ABCDEF
+          type: string
+      required:
+        - client_id
+        - client_secret
+      type: object
     SecurityMonitoringIntegrationConfigData:
       description: An entity context sync configuration.
       properties:
@@ -90705,6 +90895,54 @@ components:
         - id
         - type
         - attributes
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets:
+      description: Credentials for a Google Workspace entity context sync.
+      properties:
+        admin_email:
+          description: The admin email to impersonate for domain-wide delegation.
+          example: admin@example.com
+          type: string
+        service_account_json:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount"
+      required:
+        - service_account_json
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount:
+      additionalProperties: {}
+      description: The Google Cloud service account JSON used to authenticate against the Google Workspace Admin SDK. Additional keys beyond those documented are preserved.
+      properties:
+        client_email:
+          description: The service account client email.
+          example: svc@my-project.iam.gserviceaccount.com
+          type: string
+        private_key:
+          description: The service account private key.
+          example: "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+          type: string
+        project_id:
+          description: The Google Cloud project ID that owns the service account.
+          example: my-project
+          type: string
+        type:
+          description: The service account type. Must be `service_account`.
+          example: service_account
+          type: string
+      required:
+        - type
+        - project_id
+        - private_key
+        - client_email
+      type: object
+    SecurityMonitoringIntegrationConfigOktaSecrets:
+      description: Credentials for an Okta entity context sync.
+      properties:
+        api_token:
+          description: The Okta API token used to authenticate against the Okta API.
+          example: 00aBcDeFgHiJkLmNoPqRsTuVwXyZ
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigResourceType:
       default: integration_config
@@ -90723,13 +90961,15 @@ components:
       required:
         - data
       type: object
-    SecurityMonitoringIntegrationConfigSecrets:
-      additionalProperties: {}
-      description: |-
-        The secrets used to authenticate against the external entity source. The accepted keys depend on the source type
-        (for example, `admin_email` for Google Workspace). Not required for source types that do not use secrets (for example, `ENTRA_ID`).
-      example:
-        admin_email: test@example.com
+    SecurityMonitoringIntegrationConfigSentinelOneSecrets:
+      description: Credentials for a SentinelOne entity context sync.
+      properties:
+        api_token:
+          description: The SentinelOne API token.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigSettings:
       additionalProperties: {}
@@ -90750,27 +90990,21 @@ components:
         - INVALID
         - INITIALIZING
     SecurityMonitoringIntegrationConfigUpdateAttributes:
-      description: Fields to update on the entity context sync configuration. All fields are optional.
-      properties:
-        domain:
-          description: The new domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        enabled:
-          description: Whether the entity context sync should be enabled.
-          example: true
-          type: boolean
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The new display name for the entity context sync configuration.
-          example: My GWS Integration (renamed)
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      type: object
+      description: Fields to update on the entity context sync configuration. All fields other than the integration type are optional.
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
     SecurityMonitoringIntegrationConfigUpdateData:
       description: The entity context sync configuration fields to update.
       properties:
@@ -90803,19 +91037,20 @@ components:
       type: object
     SecurityMonitoringIntegrationCredentialsValidateAttributes:
       description: The credentials to validate against the external entity source.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-      required:
-        - integration_type
-        - domain
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
     SecurityMonitoringIntegrationCredentialsValidateData:
       description: The credentials to validate.
       properties:
@@ -90841,12 +91076,56 @@ components:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
       example: GOOGLE_WORKSPACE
       type: string
       x-enum-varnames:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
+    SecurityMonitoringIntegrationTypeCrowdStrike:
+      description: The source type for a CrowdStrike entity context sync.
+      enum:
+        - CROWDSTRIKE
+      example: CROWDSTRIKE
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE
+    SecurityMonitoringIntegrationTypeEntraId:
+      description: The source type for an Entra ID entity context sync.
+      enum:
+        - ENTRA_ID
+      example: ENTRA_ID
+      type: string
+      x-enum-varnames:
+        - ENTRA_ID
+    SecurityMonitoringIntegrationTypeGoogleWorkspace:
+      description: The source type for a Google Workspace entity context sync.
+      enum:
+        - GOOGLE_WORKSPACE
+      example: GOOGLE_WORKSPACE
+      type: string
+      x-enum-varnames:
+        - GOOGLE_WORKSPACE
+    SecurityMonitoringIntegrationTypeOkta:
+      description: The source type for an Okta entity context sync.
+      enum:
+        - OKTA
+      example: OKTA
+      type: string
+      x-enum-varnames:
+        - OKTA
+    SecurityMonitoringIntegrationTypeSentinelOne:
+      description: The source type for a SentinelOne entity context sync.
+      enum:
+        - SENTINELONE
+      example: SENTINELONE
+      type: string
+      x-enum-varnames:
+        - SENTINELONE
     SecurityMonitoringListRulesResponse:
       description: List of rules.
       properties:
@@ -90857,6 +91136,69 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/ResponseMetaAttributes"
+      type: object
+    SecurityMonitoringOktaIntegrationConfigCreateAttributes:
+      description: The attributes of an Okta entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Okta Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringOktaIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Okta entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Okta Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringOktaIntegrationCredentialsValidateAttributes:
+      description: The Okta credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringPaginatedSuppressionsResponse:
       description: Response object containing the available suppression rules with pagination metadata.
@@ -91817,6 +92159,69 @@ components:
           description: Time zone of the start date, in the [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format.
           example: America/New_York
           type: string
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes:
+      description: The attributes of a SentinelOne entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My SentinelOne Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes:
+      description: Fields to update on a SentinelOne entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My SentinelOne Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes:
+      description: The SentinelOne credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
