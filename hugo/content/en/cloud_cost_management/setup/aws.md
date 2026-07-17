@@ -141,6 +141,7 @@ Select the following content options:
 * {{< ui >}}Include resource IDs{{< /ui >}}
 * {{< ui >}}Split cost allocation data{{< /ui >}} (Enables ECS Cost Allocation. You must also opt in to [AWS Split Cost Allocation][210] in Cost Explorer preferences).
 * {{< ui >}}Refresh automatically{{< /ui >}}
+* Enable {{< ui >}}IAM Principal Allocation Data{{< /ui >}} for granular user-level IAM Principal Bedrock Cost Allocation.
 
 Select the following delivery options:
 
