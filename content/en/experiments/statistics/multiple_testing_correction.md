@@ -81,7 +81,7 @@ Suppose an experiment has:
 - A 95% configured confidence level (`alpha = 0.05`).
 - One control variant and one treatment variant, so each metric has one treatment-control comparison.
 - One primary metric and four remaining metrics.
-- The default primary metric weight, so `gamma = 0.5`.
+- The default primary metric weight (`gamma = 0.5`).
 
 For the primary metric:
 
