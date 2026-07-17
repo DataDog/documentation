@@ -31,11 +31,11 @@ APM trace enrichment automatically attaches feature flag evaluation data to your
 | Language | Status | Minimum version |
 | -------- | ------ | --------------- |
 | Go       | Available | 2.8.0        |
+| Java     | Available | _TODO_       |
 | Node.js  | Available | 5.105.0      |
+| Python   | Available | _TODO_       |
 | .NET     | Coming soon | —          |
-| Java     | Coming soon | —          |
 | PHP      | Coming soon | —          |
-| Python   | Coming soon | —          |
 | Ruby     | Coming soon | —          |
 
 ## Prerequisites
@@ -69,7 +69,7 @@ DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true
 {{< /code-block >}}
 
-The enrichment environment variable is supported by all server-side SDKs. No code changes are required. Enabling the variable activates the enrichment hook automatically when the Datadog OpenFeature provider initializes.
+The enrichment environment variable is supported by all server-side SDKs. No code changes are required. Enabling the variable activates the enrichment hook automatically when the Datadog OpenFeature provider initializes. Node.js and Ruby additionally support code-level configuration as shown in the language tabs below.
 
 ### Language-specific configuration
 
@@ -133,7 +133,7 @@ func main() {
 {{% /tab %}}
 {{% tab "Java" %}}
 
-No additional code configuration is needed. The `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED` environment variable enables span enrichment. You can also use the system property `-Ddd.experimental.flagging.provider.span.enrichment.enabled=true`.
+No additional code configuration is needed. The `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED` environment variable enables span enrichment. Java also supports the system property `-Ddd.experimental.flagging.provider.span.enrichment.enabled=true` as an alternative.
 
 {{< code-block lang="java" filename="Main.java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -145,8 +145,6 @@ api.setProviderAndWait(new Provider());
 Client client = api.getClient("my-app");
 // Flag evaluations now enrich APM spans automatically
 {{< /code-block >}}
-
-<!-- TODO: Confirm system property name for span enrichment release -->
 
 {{% /tab %}}
 {{% tab "Python" %}}
@@ -237,6 +235,8 @@ After deploying with span enrichment enabled:
 2. Go to [Trace Explorer][1] and search for a recent trace from your service.
 3. Open a trace and look for `@feature_flags.*` attributes on the root span.
 
+The SDK writes compact encoded tags (`ffe_flags_enc`, `ffe_subjects_enc`, `ffe_runtime_defaults`) to the root span. The Datadog backend decodes these and produces human-readable `@feature_flags.*` facets. This processing takes a few seconds after the span is ingested.
+
 After backend processing, the root span contains attributes like the following:
 
 | Attribute | Example value |
@@ -245,6 +245,16 @@ After backend processing, the root span contains attributes like the following:
 | `@feature_flags.dark-mode` | `control` |
 
 Each attribute key is `@feature_flags.<flag_key>` and the value is the variant returned by the evaluation.
+
+### Troubleshooting
+
+If `@feature_flags.*` attributes do not appear on your traces:
+
+- Confirm the Datadog OpenFeature provider is active (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`).
+- Confirm span enrichment is enabled (`DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED=true`).
+- Verify that your application is evaluating flags during traced requests. Enrichment only occurs when a flag is evaluated while a trace is active.
+- Wait a few seconds after the span is ingested. The `@feature_flags.*` facets are derived by backend processing and do not appear in raw span metadata.
+- For debugging, inspect raw span metadata for the `ffe_flags_enc` tag. If this tag is present, the SDK is emitting enrichment data and the backend has not processed it yet or the feature flag gate is not enabled for your organization.
 
 ### Search and filter by flag variant
 
