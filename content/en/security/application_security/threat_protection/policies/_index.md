@@ -112,6 +112,6 @@ As important as it is for you to be able to apply protection granularly and redu
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
 [15]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [16]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-responses
-[17]: https://docs.datadoghq.com/service_management/workflows/
+[17]: https://docs.datadoghq.com/actions/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
 [20]: /security/application_security/threat_protection/security_signals/

@@ -15,7 +15,7 @@ further_reading:
 - link: "/integrations/jira/"
   tag: "Documentation"
   text: "Learn more about the Jira integration"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Learn more about Workflow Automation"
 - link: "https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/"

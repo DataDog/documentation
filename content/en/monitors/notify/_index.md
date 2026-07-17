@@ -231,10 +231,10 @@ Message variables auto-populate with a randomly selected group based on the scop
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/
 [6]: /monitors/notify/variables/#conditional-variables
-[8]: /service_management/workflows/
-[9]: /service_management/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
-[10]: /service_management/workflows/trigger/#add-the-workflow-to-your-monitor
-[11]: /service_management/workflows/build/
+[8]: /actions/workflows/
+[9]: /actions/workflows/trigger/#add-a-monitor-trigger-to-your-workflow
+[10]: /actions/workflows/trigger/#add-the-workflow-to-your-monitor
+[11]: /actions/workflows/build/
 [12]: https://app.datadoghq.com/incidents/settings?section=global-settings
 [13]: /incident_response/incident_management/setup_and_configuration/property_fields
 [14]: /incident_response/incident_management/notification

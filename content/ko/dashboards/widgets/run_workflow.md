@@ -18,7 +18,7 @@ widget_type: run_workflow
 1. 대시보드 템플릿 변수를 워크플로우 입력 파라미터 에 매핑합니다. 이렇게 하면 워크플로우를 실행할 때 대시보드 템플릿 변수의 값을 파라미터 입력값에 직접 매핑할 수 있습니다.
 1. 위젯의 이름을 입력하고 **저장**을 클릭합니다.
 
-{{< img src="service_management/workflows/trigger-from-dashboard2.png" alt="워크플로우 실행을 클릭하여 대시보드 위젯에서 워크플로우를 트리거합니다." >}}
+{{< img src="dashboards/widgets/trigger-from-dashboard2.png" alt="워크플로우 실행을 클릭하여 대시보드 위젯에서 워크플로우를 트리거합니다." >}}
 
 워크플로우를 실행하려면 다음에 따릅니다.
 1. 대시보드 위젯에서 **워크플로우 실행**을 클릭합니다.

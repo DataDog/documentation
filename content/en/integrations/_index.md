@@ -18,6 +18,8 @@ aliases:
     - /integrations/coreos/
     - /integrations/ubuntu/
     - /integrations/amazon-opsworks/
+    - /integrations/salesforce_incidents/
+    - /integrations/salesforce-incidents/
 description: Gather data from all of your systems, apps, & services
 algolia:
     tags: ['integration', 'integration setup']

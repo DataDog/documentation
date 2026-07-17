@@ -84,6 +84,7 @@ AI-native SAST uses a two-phase approach:
 | Go         | Available   |
 | C#         | Available   |
 | JavaScript | Available   |
+| TypeScript | Available   |
 
 ### Detected vulnerability types
 

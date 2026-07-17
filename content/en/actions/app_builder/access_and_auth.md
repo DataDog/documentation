@@ -6,6 +6,12 @@ aliases:
     - /actions/app_builder/auth
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 A few tools control access and authentication for apps and their components.
 
 ## App execution identity

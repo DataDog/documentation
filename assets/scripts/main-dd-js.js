@@ -17,8 +17,10 @@ import './components/bootstrap-dropdown-custom';
 import './components/navbar'; // should move this to websites-modules
 import './components/mobile-nav'; // should move this to websites-modules
 import './components/accordion-auto-open';
+import './components/product-section-collapse';
 import './components/signup';
 import './components/conversational-search';
+import './components/home-experiment';
 import './components/stepper';
 
 // Add Bootstrap Tooltip across docs

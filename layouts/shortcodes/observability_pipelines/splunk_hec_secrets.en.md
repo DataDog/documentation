@@ -1,0 +1,7 @@
+- Splunk HEC token identifier:
+	- References the Splunk HEC token for the Splunk indexer.
+	- The default identifier is `DESTINATION_SPLUNK_HEC_TOKEN`.
+- Splunk HEC endpoint URL identifier:
+	- References the Splunk HTTP Event Collector endpoint your Observability Pipelines Worker sends processed data to. For example, `https://hec.splunkcloud.com:8088`.
+	- **Note**: `/services/collector/event` path is automatically appended to the endpoint.
+	- The default identifier is `DESTINATION_SPLUNK_HEC_ENDPOINT_URL`.
