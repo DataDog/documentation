@@ -11,7 +11,6 @@ further_reading:
 - link: "/real_user_monitoring"
   tag: "Documentation"
   text: "Learn how to explore your RUM data"
-site_support_id: rum_cpp
 ---
 
 ## Overview
