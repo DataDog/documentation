@@ -14,7 +14,7 @@ const findSpecFiles = () => {
 
   versions.forEach(version => {
     const assetsPath = `./assets/api/${version}/full_spec.yaml`;
-    const dataPath = `./data/api/${version}/full_spec.yaml`;
+    const dataPath = `../data/api/${version}/full_spec.yaml`;
 
     // Try assets first, fallback to data
     if (fs.existsSync(assetsPath)) {
@@ -62,7 +62,7 @@ const processSpec = async (specPath) => {
     if (jsonString === "null" || jsonString === '""' || jsonString.length < 5) {
       throw new Error(`Aborting write: generated JSON for ${version} is suspiciously small or null.`);
     }
-    const pathToJson = `./data/api/${version}/full_spec_deref.json`;
+    const pathToJson = `../data/api/${version}/full_spec_deref.json`;
     fs.writeFileSync(pathToJson, jsonString, 'utf8');
     console.log(`Written dereferenced spec to: ${pathToJson}`);
 

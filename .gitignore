@@ -8,6 +8,8 @@ tmp
 # Ignore generated examples
 
 # ignore full spec deref, generate during build instead
+data/api/v1/full_spec_deref.json
+data/api/v2/full_spec_deref.json
 
 # Ignoring all automated content
 temp
