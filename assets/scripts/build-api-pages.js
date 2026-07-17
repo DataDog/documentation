@@ -839,12 +839,109 @@ const descColumn = (key, value) => {
 };
 
 /**
+ * Shim for Map.groupBy(), which is only available in Node 21+ (this repo
+ * targets Node 20).
+ *
+ * @param {Iterable} items - items to group
+ * @param {function} keyFn - maps an item to its group key
+ * @returns {Map} map of key to array of items
+ */
+const groupBy = (items, keyFn) => {
+  const map = new Map();
+  items.forEach((item, i) => {
+    const key = keyFn(item, i);
+    const group = map.get(key);
+    if (group) {
+      group.push(item);
+    } else {
+      map.set(key, [item]);
+    }
+  });
+  return map;
+};
+
+/**
+ * Returns "<type=c>" if `item` is an object schema with a const `type` field
+ * @param {object} schema
+ * @returns "<type=c>" if the schema is a const or 1-value string enum
+ */
+const getMaybeConstTypeName = (item, discriminant) => {
+  const type = item.properties?.[discriminant];
+  if (
+    type
+    && type.type === 'string'
+    && type.enum
+    && type.enum.length === 1
+  ) {
+    return `&lt;${discriminant}=${type.enum[0]}&gt;`;
+  }
+  return undefined;
+}
+
+/**
+ * Auto-detects the best discriminant property across a set of oneOf branches.
+ *
+ * A property is a candidate discriminant when every branch either omits it or
+ * defines it as a string enum.
+ *
+ * Preference order:
+ *  1. The first candidate that covers every branch (all-defined + unique).
+ *  2. Otherwise, the candidate covering the most branches, provided it covers
+ *     all-but-one branch or at least 75% of branches.
+ *
+ * @param {array} items - oneOf items
+ * @returns {string|undefined} the discriminant property name, or undefined
+ */
+const getBestDiscriminant = (items) => {
+  const candidates = Array.from(new Set(
+    items.flatMap((item) => Object.keys(item.properties ?? {}))
+  ));
+  const enumCandidates = candidates.filter((d) => items.some((item) => {
+    const prop = item.properties?.[d];
+    return prop && prop.type === 'string' && prop.enum?.length === 1;
+  }));
+  const onlyEnumCandidates = enumCandidates.filter((d) => !items.some((item) => {
+    const prop = item.properties?.[d];
+    return prop && (prop.type !== 'string' || !prop.enum);
+  }));
+
+  const countedCandidates = onlyEnumCandidates.map((d) => {
+    const byName = groupBy(items, (item) => getMaybeConstTypeName(item, d));
+    const nUnique = [...byName].reduce(
+      (acc, [value, arr]) => acc + ((value && arr.length === 1) ? 1 : 0),
+      0,
+    );
+    return { name: d, nUnique };
+  });
+  countedCandidates.sort((a, b) => b.nUnique - a.nUnique);
+
+  const bestCandidate = countedCandidates[0];
+  if (!bestCandidate) {
+    return undefined;
+  }
+
+  const { name, nUnique } = bestCandidate;
+  if (nUnique >= items.length - 1 || (nUnique / items.length) >= 0.75) {
+    return name;
+  }
+
+  return undefined;
+}
+
+/**
  * @param {array} items - oneOf items
  * @returns {object} object keyed by item name
  */
-const getOneOfChildData = (items) => Object.fromEntries(
-  items.map((item, i) => [`Object ${i}`, item])
-);
+const getOneOfChildData = (items) => {
+  const discriminant = getBestDiscriminant(items);
+  const namedEntries = items.map((item) => [discriminant ? getMaybeConstTypeName(item, discriminant) : undefined, item]);
+  const byName = groupBy(namedEntries, ([name]) => name);
+  const entries = namedEntries.map(([name, item], i) =>
+    // if name is unique, use it; otherwise, use "Object 3"
+    [name && byName.get(name)?.length === 1 ? name : `Object ${i}`, item]
+  );
+  return Object.fromEntries(entries);
+}
 
 
 /**
