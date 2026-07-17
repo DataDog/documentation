@@ -69,11 +69,15 @@ Live Debugger requires the following minimum Datadog SDK versions:
 
 ### Enabling Live Debugger
 
-For Java, Python, .NET, and Node.js services that meet the minimum SDK and setup requirements, enable Live Debugger from the [Live Debugger Settings page][26]. For other runtime languages or older SDK versions, use the configuration steps below. You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
+For Java, Python, .NET, and Node.js services that already meet the minimum SDK and setup requirements (including the `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` [UST tags][27]), Live Debugger can be enabled directly in the Datadog platform. You can either enable the service and environment from the [Live Debugger Settings page][26], or just start a new Debug Session and the feature will be enabled automatically.
+
+For other runtime languages or older SDK versions, use the configuration steps below. You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs,ruby,php,go" >}}
 
 {{< programming-lang lang="java" >}}
+<div class="alert alert-info">The recommended way to enable Live Debugger for eligible services is directly in the Datadog platform (see above). Follow the environment variable steps below only if the in-app option isn't available for your setup or you prefer to manage enablement through environment variables.</div>
+
 **Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Datadog Java SDK</a> version 1.64.0 or higher, running on JDK 8 or higher.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
@@ -92,6 +96,8 @@ java \
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
+<div class="alert alert-info">The recommended way to enable Live Debugger for eligible services is directly in the Datadog platform (see above). Follow the environment variable steps below only if the in-app option isn't available for your setup or you prefer to manage enablement through environment variables.</div>
+
 **Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Datadog Python SDK (<code>ddtrace</code>)</a> version 4.11.0 or higher.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
@@ -107,6 +113,8 @@ ddtrace-run python -m myapp.py
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
+<div class="alert alert-info">The recommended way to enable Live Debugger for eligible services is directly in the Datadog platform (see above). Follow the environment variable steps below only if the in-app option isn't available for your setup or you prefer to manage enablement through environment variables.</div>
+
 **Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">Datadog .NET SDK</a> version 3.46.0 or higher.
 
 Start your service with the following environment variables set:
@@ -120,6 +128,8 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
+<div class="alert alert-info">The recommended way to enable Live Debugger for eligible services is directly in the Datadog platform (see above). Follow the environment variable steps below only if the in-app option isn't available for your setup or you prefer to manage enablement through environment variables.</div>
+
 **Requirement**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/">Datadog Node.js SDK (<code>dd-trace-js</code>)</a> version 5.109.0 or higher. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
 Start your service with the following environment variables set:
