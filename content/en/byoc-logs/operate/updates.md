@@ -14,8 +14,6 @@ further_reading:
   text: "Install or upgrade BYOC Logs"
 ---
 
-## Overview
-
 BYOC (Bring Your Own Cloud) Logs includes two customer-deployed components:
 
 - The BYOC Logs engine, distributed through the `datadog/cloudprem` Helm chart
@@ -27,7 +25,7 @@ The components are versioned independently. Each BYOC Logs release is a validate
 
 Datadog publishes at least one BYOC Logs engine release per month. Releases may occur more frequently, and patch releases are published as needed. Each engine release includes a corresponding Helm chart and release notes.
 
-A BYOC Logs release is published when the engine changes or when Datadog adds an OPW update to the validated combination. One component can remain unchanged between releases.
+A BYOC Logs release is published when the engine changes or when Datadog adds an OPW update to the validated pair. One component can remain unchanged between releases.
 
 ## Versioning
 
@@ -63,8 +61,8 @@ You control when updates are deployed and can keep versions pinned during a prod
 
 ## Plan an update
 
-1. Use the validated version combination. Review the release notes for the target version and any versions you skip, including known issues, required intermediate versions, and rollback limitations.
-2. Test representative log traffic, processing rules, ingestion, queries, integrations, and monitoring in a pre-production environment. Verify backup and recovery procedures before the update.
+1. Use the validated version pair. Review the release notes for the target version and any versions you skip, including known issues, required intermediate versions, and rollback limitations.
+2. Test representative log traffic, processing rules, ingestion, queries, integrations, and monitoring in a preproduction environment. Verify backup and recovery procedures before the update.
 3. Follow the release-specific instructions and deploy in stages. Monitor component health, errors, and processing backlogs. Avoid running mixed versions longer than necessary.
 4. Roll back only when the release notes confirm that it is supported. Otherwise, contact [Datadog Support][1].
 
