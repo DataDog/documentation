@@ -30,12 +30,11 @@ The [Datadog MCP (Model Context Protocol) server][1] allows you to query your Da
 
 ## Querying BYOC Logs
 
-To query logs stored in BYOC Logs indexes, you **must** specify two critical parameters in addition to your standard log query:
+To query logs stored in BYOC Logs indexes, specify your BYOC Logs index name in addition to your standard log query:
 
 - (Required) **`indexes`**: The name(s) of your BYOC Logs index(es).
-- (Required) **`storage_tier`**: Must be set to `"cloudprem"`.
 
-Without both parameters, queries will default to searching standard Datadog log indexes instead of BYOC Logs.
+The MCP server identifies BYOC Logs indexes by their names and routes queries to the appropriate storage tier automatically. Without the `indexes` parameter, queries default to searching standard Datadog log indexes instead of BYOC Logs.
 
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
@@ -48,7 +47,6 @@ The following table describes the key parameters used when querying logs with th
 |-----------|-------------|---------|
 | `query` | Log search query using Datadog query syntax | `"*"` (all logs), `"service:web"`, `"status:error"` |
 | `indexes` | Array of BYOC Logs index names to search | `["byoc--dev--main"]` |
-| `storage_tier` | Storage tier to query (must be `"cloudprem"` for BYOC Logs) | `"cloudprem"` |
 | `from` | Start time for the query | `"now-1h"`, `"now-24h"`, `"2024-01-15T00:00:00Z"` |
 | `to` | End time for the query | `"now"`, `"2024-01-15T23:59:59Z"` |
 | `sort` | Sort order for results | `"-timestamp"` (descending), `"timestamp"` (ascending) |
@@ -78,7 +76,6 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 {
   "query": "service:nginx status:error",
   "indexes": ["byoc--dev--main"],
-  "storage_tier": "cloudprem",
   "from": "now-1h",
   "to": "now"
 }
@@ -93,7 +90,6 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 {
   "query": "service:api \"connection timeout\"",
   "indexes": ["byoc--prod--main"],
-  "storage_tier": "cloudprem",
   "from": "now-24h",
   "to": "now"
 }
@@ -108,7 +104,6 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 {
   "query": "status:500",
   "indexes": ["byoc--prod--main"],
-  "storage_tier": "cloudprem",
   "from": "now-1d",
   "to": "now"
 }
@@ -116,8 +111,7 @@ When using AI-powered tools with the Datadog MCP server, you can ask questions i
 
 ## Important notes
 
-- **Both `storage_tier` and `indexes` are required** when querying BYOC Logs. Without these parameters, queries will search standard Datadog indexes instead.
-- `storage_tier` must always be set to `"cloudprem"`.
+- The `indexes` parameter is required when querying BYOC Logs. Without it, queries search standard Datadog indexes instead.
 - The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_name>--<index_name>`).
 - When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
 - BYOC Logs data is queryable in real-time as soon as it is indexed.

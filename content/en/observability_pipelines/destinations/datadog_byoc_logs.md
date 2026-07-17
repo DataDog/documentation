@@ -42,7 +42,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 - BYOC Logs endpoint URL identifier:
 	- References the intake endpoint to which Observability Pipelines sends logs.
 	- In your secrets manager:
-		- Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
+		- Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
 	- The default identifier is `DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
@@ -53,7 +53,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{< img src="observability_pipelines/destinations/cloudprem_env_vars.png" alt="The install page showing the BYOC Logs environment variable field" style="width:75%;" >}}
 
 - BYOC Logs endpoint URL
-	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
+	- Observability Pipelines sends logs to the BYOC Logs intake endpoint. Define the cluster URL, such as `http://byoc-logs.acme.internal:7280`. **Note**: The URL must include the port.
 	- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
   - Stored as the environment variable: `DD_OP_DESTINATION_CLOUDPREM_ENDPOINT_URL`.
 
