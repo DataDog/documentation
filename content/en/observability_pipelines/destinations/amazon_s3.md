@@ -164,6 +164,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------| ----------------| --------------------|
 | None           | 100,000,000     | 900                 |
 
+## Metrics
+
+For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
+
 [1]: /logs/log_configuration/rehydrating/
 [2]: /observability_pipelines/destinations/datadog_archives/
 [3]: https://console.aws.amazon.com/iam/
@@ -175,3 +179,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [9]: /api/latest/observability-pipelines/
 [10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [11]: /observability_pipelines/configuration/set_up_pipelines/
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

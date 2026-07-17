@@ -105,6 +105,59 @@ To view metrics for a specific Datadog organization:
 
 Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination. Then, click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization.
 
+## Metrics
+
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation.
+
+### Datadog Logs metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `datadog_logs` for Datadog Logs destination metrics.
+
+`pipelines.datadog_logs_reserved_attribute_conflicts_total`
+: **Description**: The number of conflicts encountered when relocating fields with semantic meaning to a Datadog [reserved attribute][10]. See the [example](#example-of-relocating-fields-with-semantic-meaning-to-a-datadog-reserved-attribute). Available in Worker version 2.18 and later.
+: **Metric type**: count
+
+#### Example of relocating fields with semantic meaning to a Datadog reserved attribute
+
+The OpenTelemetry source decodes the following event, where `severity_text` semantically maps to the reserved `status` attribute:
+
+```json
+{
+  "message": "GET /api/users returned 404",
+  "severity_text": "WARN",
+  "attributes": {
+    "status": 404,
+    "http.method": "GET"
+  },
+  "timestamp": "..."
+}
+```
+
+A processor then flattens the event, so that `status` and `severity_text` both exist at the top level:
+
+```json
+{
+  "message": "GET /api/users returned 404",
+  "severity_text": "WARN",
+  "status": 404,
+  "http.method": "GET",
+  "timestamp": "..."
+}
+```
+
+Because the reserved `status` attribute already exists, the destination renames it to `_RESERVED_severity` to avoid it being overridden by the conflicting field:
+
+```json
+{
+  "message": "GET /api/users returned 404",
+  "status": "WARN",
+  "_RESERVED_severity": 404,
+  "http.method": "GET",
+  "timestamp": "..."
+}
+```
+
 ## How the destination works
 
 ### Event batching
@@ -152,3 +205,7 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[10]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes

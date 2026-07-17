@@ -40,7 +40,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{% tab "Secrets Management" %}}
 
 - BYOC Logs endpoint URL identifier:
-	- References the intake endpoint to which Observability Pipelines sends logs. 
+	- References the intake endpoint to which Observability Pipelines sends logs.
 	- In your secrets manager:
 		- Define the cluster URL, such as `http://cloudprem.acme.internal:7280`. **Note**: The URL must include the port.
 		- The Worker appends `/api/v2/logs` and `/api/v1/validate` to the endpoint URL, so these endpoints must be allowed if you are using forwarding or firewall rules.
@@ -70,9 +70,16 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
 
+## Metrics
+
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, use the tag `component_type:datadog_logs`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /byoc-logs/install/
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
