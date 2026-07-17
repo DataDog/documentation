@@ -45,7 +45,7 @@ A resource appears in Coverage as soon as its agent loads its ruleset. When a re
 ## Key benefits
 
 * Reduce blind spots by monitoring for unprotected workloads.
-* Shorten detection and response times with direct remediation workflows.
+* Shorten detection and response times with direct response workflows.
 * Maintain continuous compliance and policy alignment.
 * Integrate posture checks into CI/CD and infrastructure reviews.
 
@@ -95,7 +95,7 @@ To understand why a rule is failing, select the resource to open its side panel.
 
 Here are some ways to use Coverage to improve your workload security.
 
-### Detect and remediate policy deployment issues
+### Detect and respond to policy deployment issues
 
 To find and fix resources with rule errors:
 
@@ -133,9 +133,9 @@ You can use Coverage to test and iterate on custom security rules:
 3. Confirm that the agent has loaded the rule successfully.
 4. If errors appear, review the verdict, fix the rule, and redeploy.
 
-## Workload coverage triage and remediation cycle
+## Workload coverage triage and response cycle
 
-As an example of how to use Coverage to triage and remediate coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+As an example of how to use Coverage to triage and respond to coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
 
 1. Do a full environment view to establish baseline coverage status.
 2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.

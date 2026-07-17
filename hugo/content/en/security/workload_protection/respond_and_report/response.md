@@ -1,6 +1,8 @@
 ---
-title: Remediation
+title: Response
 disable_toc: false
+aliases:
+  - /security/workload_protection/respond_and_report/remediation
 further_reading:
 - link: "security/workload_protection/getting_started"
   tag: "Documentation"
@@ -10,21 +12,21 @@ further_reading:
   text: "Workload Protection Agent advanced configuration"
 ---
 
-Remediation in Workload Protection lets the Datadog Agent **enforce** follow-up actions directly from the [Workload Protection Signals][1]
-<div class="alert alert-info">Remediation and agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
+Response in Workload Protection lets the Datadog Agent **enforce** follow-up actions directly from the [Workload Protection Signals][1]
+<div class="alert alert-info">Response and agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
-## Enable the Remediation feature
+## Enable the Response feature
 
 Complete the following once per environment (hosts or containers running the Workload Protection-enabled Agent).
 
 ### 1. Prerequisites
 
-- Datadog **Agent 7.78** or later on the hosts that should execute remediation actions.
-- [**Remote Configuration**][3] is enabled so remediation policies can be delivered to the Agent.
+- Datadog **Agent 7.78** or later on the hosts that should execute response actions.
+- [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
 
 ### 2. Turn on enforcement in `system-probe`
 
-Enforcement is the capability that allows the runtime security module to **kill** processes or containers when a remediation rule matches.
+Enforcement is the capability that allows the runtime security module to **kill** processes or containers when a response rule matches.
 
 1. On Linux hosts, open `/etc/datadog-agent/system-probe.yaml` (or the equivalent path in your image or Helm values).
 2. Under `runtime_security_config`, set **`enforcement.enabled`** to **`true`**.
@@ -50,7 +52,7 @@ runtime_security_config:
 
 ### 3. Enable network probes for network isolation
 
-Network isolation remediation uses eBPF **Traffic Control** classifiers and raw packet programs. Enable the network section of event monitoring in the **same** `system-probe.yaml`:
+Network isolation response uses eBPF **Traffic Control** classifiers and raw packet programs. Enable the network section of event monitoring in the **same** `system-probe.yaml`:
 
 {{< code-block lang="yaml" filename="/etc/datadog-agent/system-probe.yaml (fragment)" disable_copy="false" collapsible="true" >}}
 event_monitoring_config:
@@ -60,7 +62,7 @@ event_monitoring_config:
       enabled: true
 {{< /code-block >}}
 
-If you only use **kill**-based remediation and never network isolation, your organization may still require `event_monitoring_config.network` for other Workload Protection features—see the [advanced configuration reference][4] for defaults and overrides.
+If you only use **kill**-based response and never network isolation, your organization may still require `event_monitoring_config.network` for other Workload Protection features—see the [advanced configuration reference][4] for defaults and overrides.
 
 ### 4. Apply configuration and restart the Agent
 
@@ -71,16 +73,16 @@ On Kubernetes, mirror these keys in your `DatadogAgent` spec or Helm `values.yam
 
 ### 5. Confirm in Datadog
 
-After restarts, confirm that hosts are reporting Workload Protection telemetry as usual. When remediation rules are published for your org, matching hosts execute the configured **kill** or **network_filter** actions and report outcomes (see [Available actions](#available-actions) and [Action statuses](#action-statuses)).
+After restarts, confirm that hosts are reporting Workload Protection telemetry as usual. When response rules are published for your org, matching hosts execute the configured **kill** or **network_filter** actions and report outcomes (see [Available actions](#available-actions) and [Action statuses](#action-statuses)).
 
 ## Available actions
 
-The Agent supports the following **enforcement** action types for remediation workflows:
+The Agent supports the following **enforcement** action types for response workflows:
 
 ### Kill
 
 - **Purpose:** Terminate a malicious process or all processes in a compromised **container** (cgroup), depending on scope.
-- **Typical options:** Signal (for example `SIGKILL`), scope **`process`** vs **`container`**, and optional flags to adjust built-in safety checks for **well-scoped, one-shot** remediation rules.
+- **Typical options:** Signal (for example `SIGKILL`), scope **`process`** vs **`container`**, and optional flags to adjust built-in safety checks for **well-scoped, one-shot** response rules.
 
 ### Network filter (network isolation)
 
@@ -91,11 +93,11 @@ The Agent supports the following **enforcement** action types for remediation wo
 
 - **Purpose:** **Revert** a previous isolation rule when it is removed from the policy that is applied to the host—traffic returns to the prior ruleset. This action is how isolation is undone programmatically.
 
-<div class="alert alert-warning">Misconfigured enforcement rules can disrupt workloads. Test remediation rules in non-production environments, keep expressions tightly scoped (for example to a specific process ID or cgroup), and use the safety mechanisms described in the <a href="/security/workload_protection/getting_started/advanced_configuration">advanced configuration</a> documentation unless Support advises otherwise.</div>
+<div class="alert alert-warning">Misconfigured enforcement rules can disrupt workloads. Test response rules in non-production environments, keep expressions tightly scoped (for example to a specific process ID or cgroup), and use the safety mechanisms described in the <a href="/security/workload_protection/getting_started/advanced_configuration">Workload Protection Agent configuration</a> documentation unless Support advises otherwise.</div>
 
 ## Action statuses
 
-When remediation runs, the Agent reports a **status** for each action. The table below summarizes the main outcomes for each action type.
+When response runs, the Agent reports a **status** for each action. The table below summarizes the main outcomes for each action type.
 
 | Status | Description | Kill | Network isolation | Cancel network isolation |
 | --- | --- | --- | --- | --- |
@@ -103,7 +105,7 @@ When remediation runs, the Agent reports a **status** for each action. The table
 | `partially_performed` | Part of the kill succeeded (for example some processes terminated) but not all targets could be killed. | {{< X >}} | | |
 | `removed` | An isolation rule was **removed** from the current ruleset while it was present before—used when **reverting** network isolation. | | | {{< X >}} |
 
-Additional statuses (such as `error`, `not_triggered`, or disarmer-related values) can appear in action reports or remediation status events depending on the rule and environment. See your signal **Response** details and Agent logs for the exact payload.
+Additional statuses (such as `error`, `not_triggered`, or disarmer-related values) can appear in action reports or response status events depending on the rule and environment. See your signal **Response** details and Agent logs for the exact payload.
 
 ## Further reading
 

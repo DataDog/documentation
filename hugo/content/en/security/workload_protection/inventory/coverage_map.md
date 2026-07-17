@@ -26,7 +26,7 @@ Workload Protection [Coverage][1] provides a real-time view of security coverage
 ## Key benefits
 
 * Reduce blind spots by monitoring for unprotected workloads.
-* Shorten detection and response times with direct remediation workflows.
+* Shorten detection and response times with direct response workflows.
 * Maintain continuous compliance and policy alignment.
 * Integrate posture checks into CI/CD and infrastructure reviews.
 
@@ -51,7 +51,7 @@ Policies are displayed with the following statuses:
 
 Here are some ways to use Coverage to improve your workload security.
 
-### Detect and remediate policy deployment issues
+### Detect and respond to policy deployment issues
 From the {{< ui >}}Incomplete infrastructure coverage{{< /ui >}} status card on the Coverage page, you can address policy deployment issues:
 1. In {{< ui >}}Incomplete infrastructure coverage{{< /ui >}}, click {{< ui >}}Warning{{< /ui >}}, and then select the policies in {{< ui >}}Security coverage needs attention{{< /ui >}}. In the Coverage map, assets with policy deployment problems are displayed as orange hexagons.
 2. Review the list of deployed policies. Policies are highlighted with statuses such as {{< ui >}}Partially Loaded{{< /ui >}}, {{< ui >}}Fully Rejected{{< /ui >}}, and so on.
@@ -98,9 +98,9 @@ You can use Coverage to test and iterate on custom security rules:
 3. Confirm that the agent has loaded the rule successfully.
 4. If errors appear, review the details, fix the rule, and redeploy.
 
-## Workload coverage triage and remediation cycle
+## Workload coverage triage and response cycle
 
-As an example of how to use Coverage to triage and remediate coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+As an example of how to use Coverage to triage and respond to coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
 
 1. Do a full environment view to establish baseline coverage status.
 2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
