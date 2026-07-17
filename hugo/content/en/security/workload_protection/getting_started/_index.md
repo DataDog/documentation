@@ -5,7 +5,7 @@ disable_toc: false
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 
-This page will guide you through the process of enabling Workload Protection in your environment. You’ll start by activating Workload Protection in the Datadog app, then deploy the Datadog Agent to begin collecting runtime telemetry. Once setup is complete, you can explore Workload Protection’s capabilities using our playground scripts. Optionally, you can also request access to enforcement capabilities to take automated remediation actions directly with the Datadog platform.
+This page will guide you through the process of enabling Workload Protection in your environment. You’ll start by activating Workload Protection in the Datadog app, then deploy the Datadog Agent to begin collecting runtime telemetry. Once setup is complete, you can explore Workload Protection’s capabilities using our playground scripts. Optionally, you can also request access to enforcement capabilities to take automated response actions directly with the Datadog platform.
 
 ## 1) Enable Workload Protection from the Datadog app
 
