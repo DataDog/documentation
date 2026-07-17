@@ -1103,12 +1103,17 @@ const processSpecs = (specs) => {
           if(deref.components.schemas && deref.components.schemas.WidgetDefinition && deref.components.schemas.WidgetDefinition.oneOf) {
             const jsonData = {};
             const pageDir = `./content/en/api/${version}/dashboards/`;
-            deref.components.schemas.WidgetDefinition.oneOf.forEach((widget) => {
+            const addWidget = (widget) => {
+              if (widget.oneOf) {
+                widget.oneOf.forEach(addWidget);
+                return;
+              }
               const requestJson = filterExampleJson("request", widget);
               const requestCurlJson = filterExampleJson("curl", widget);
               const html = schemaTable("request", widget);
               jsonData[widget.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
-            });
+            };
+            deref.components.schemas.WidgetDefinition.oneOf.forEach(addWidget);
             fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
           }
 
