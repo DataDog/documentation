@@ -159,7 +159,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/?tab=threshold#set-a-rule-case
 [10]: https://app.datadoghq.com/notebook/list?type=runbook
 [11]: /account_management/rbac/permissions/
-[12]: /security/workload_protection/respond_and_report/automated_response
+[12]: /security/workload_protection/respond_and_report/#automated-response
 [13]: #disable-default-agent-rules
 [14]: #create-a-custom-agent-rule
 [15]: https://app.datadoghq.com/cost/settings/tags

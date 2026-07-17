@@ -75,4 +75,4 @@ Click **More actions** in the **Respond** section to access additional response 
 [5]: /incident_response/incident_management/
 [6]: /security/cloud_security_management/workflows
 [7]: /service_management/workflows
-[8]: /security/workload_protection/respond_and_report/response
+[8]: /security/workload_protection/respond_and_report/#response
