@@ -9,7 +9,7 @@ further_reading:
 
 A **kill switch** is a Boolean feature flag where the default state is **on** (`true`). The feature runs normally until you enact the kill switch by adding a targeting rule that serves `false`.
 
-Use a kill switch when you need to turn off risky or broken functionality in seconds from Datadog, without waiting for a deploy. During incidents, that gives operations and engineering a fast path to stop customer impact while the rest of the application keeps running.
+Use a kill switch when you need to turn off risky or broken functionality by using Datadog, without waiting for a deploy. During incidents, that gives operations and engineering a fast path to stop customer impact while the rest of the application keeps running.
 
 ## Set up a kill switch
 
