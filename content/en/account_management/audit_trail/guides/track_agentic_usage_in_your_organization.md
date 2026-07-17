@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Datadog AI agents, including the Bits fleet (Bits SRE, Bits Assistant, Bits Security Analyst) and Bits Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. Onboarding to this attribution model varies by agent and by action type. This guide walks you through finding agent-driven events, filtering them by agent type, tracing an agent's actions back to the user who delegated them, and checking current agent coverage.
+Datadog AI agents, including the Bits fleet (Bits SRE, Bits Chat, Bits Security Analyst) and Bits Agent Builder, can take actions inside your organization on their own or on behalf of a user. Audit Trail attributes these actions to the agent that performed them and, when applicable, to the user who authorized them. Onboarding to this attribution model varies by agent and by action type. This guide walks you through finding agent-driven events, filtering them by agent type, tracing an agent's actions back to the user who delegated them, and checking current agent coverage.
 
 ## Agent coverage
 
@@ -24,7 +24,7 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 | Agent | Status | Notes |
 | ----- | ------ | ----- |
 | Bits SRE | Tracked | Most actions include `@evt.actor.mode` and `@delegator.*`. Some tool-call and investigation actions do not include these fields yet. |
-| Bits Assistant | Partially tracked | Actions taken from the full Bits Assistant page run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (Cmd+I) don't include these fields yet. |
+| Bits Chat | Partially tracked | Actions taken from the full [Bits Chat page][3] run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (Cmd+I) don't include these fields yet. |
 | Bits Security Analyst | Tracked | Actions run in `autonomous` mode. There is no delegating user, because these actions don't involve a human in the loop. |
 | Bits Agent Builder | Not yet tracked | Actions don't include `@evt.actor.mode` or `@delegator.*` yet. |
 | Actions taken through the Datadog MCP server | Tracked | See [View actions taken through the Datadog MCP server](#view-actions-taken-through-the-datadog-mcp-server). |
@@ -71,7 +71,7 @@ To retrieve a user's complete activity, including delegated agent actions:
 
 ## Distinguish agent events from human events
 
-Agent-driven events are marked with the agent's name and avatar (for example, Bits Assistant) paired with the delegating user, labeled Co-authored by user + agent. This lets you distinguish agent activity from human activity without opening each event.
+Agent-driven events are marked with the agent's name and avatar (for example, Bits Chat) paired with the delegating user, labeled Co-authored by user + agent. This lets you distinguish agent activity from human activity without opening each event.
 
 ## Further reading
 
@@ -79,3 +79,4 @@ Agent-driven events are marked with the agent's name and avatar (for example, Bi
 
 [1]: https://app.datadoghq.com/audit-trail
 [2]: /account_management/audit_trail/#create-a-dashboard-or-a-graph
+[3]: https://app.datadoghq.com/ask
