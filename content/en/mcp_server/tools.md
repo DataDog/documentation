@@ -546,7 +546,7 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 ## Data Observability
 
-Tools for [Data Observability][68], including data catalog search, lineage traversal and ranking, monitor coverage and status, entity tags and descriptions, Spark/Databricks job health, warehouse query history, and cost and performance optimization recommendations.
+Tools for [Data Observability][68], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
 
 ### `search_data_entities`
 *Toolset: **data-observability***\
@@ -577,7 +577,7 @@ Fetches full details and attributes (owner, tags, custom attributes, platform, s
 ### `get_data_entity_hierarchy`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database/schema a table belongs to, or which tables are in a schema.
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database or schema a table belongs to, or which tables are in a schema.
 
 - What database does this table belong to?
 - What columns are in this table?
@@ -605,7 +605,7 @@ Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth d
 *Permissions Required: `Monitors Read` or `APM Read`*\
 Ranks entities by transitive lineage connectivity (upstream, downstream, or both), using a pre-built snapshot.
 
-- What are the most widely-depended-on tables in my warehouse?
+- Which tables in my warehouse have the most dependencies?
 - Which raw ingestion tables have the deepest downstream chains?
 
 ### `get_warehouse_query_history`
@@ -621,7 +621,7 @@ Fetches recent queries that touched specific entities, in reverse chronological 
 ### `get_popular_warehouse_tables_by_query_frequency`
 *Toolset: **data-observability***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `APM Read`*\
-Ranks tables by query activity, broken out by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
+Ranks tables by query activity, grouped by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
 
 - What tables are most queried by BI tools?
 - Which tables get the most human analyst traffic?
@@ -637,7 +637,7 @@ Analyzes a set of entities to find common attributes and naming patterns, and su
 ### `rank_data_observability_monitor_candidates`
 *Toolset: **data-observability***\
 *Permissions Required: `APM Read`*\
-Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. The primary entry point for "what should I monitor?" questions.
+Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. This is the primary entry point for "what should I monitor?" questions.
 
 - What tables should I set up data quality monitors for first?
 
@@ -646,7 +646,7 @@ Ranks tables by monitoring priority, combining lineage impact and query activity
 *Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
 Retrieves data quality metric timeseries for a given monitor ID, including anomaly-detection bounds when enabled.
 
-- Show me the metric history for monitor 12345.
+- Show me the metric history for monitor `12345`.
 - What are the anomaly bounds for this freshness monitor?
 
 ### `get_data_observability_monitor_coverage`
@@ -708,7 +708,6 @@ Lists cost and performance optimization recommendations for data jobs and querie
 Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
 
 - Get the details of recommendation `abc123`.
-
 
 ## Database Monitoring
 
