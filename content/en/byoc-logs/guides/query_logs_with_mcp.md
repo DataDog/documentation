@@ -35,8 +35,6 @@ To query logs stored in BYOC Logs indexes, use `search_datadog_logs` and specify
 
 - (Required) **`indexes`**: The name(s) of your BYOC Logs index(es).
 
-The `search_datadog_logs` tool identifies BYOC Logs indexes by their names and routes queries to the appropriate storage tier automatically. Without the `indexes` parameter, queries default to searching standard Datadog log indexes instead of BYOC Logs.
-
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
 - (Recommended) Query filters (service, status, log content).
@@ -112,7 +110,6 @@ When using AI-powered tools with `search_datadog_logs`, you can ask questions in
 
 ## Important notes
 
-- The `indexes` parameter is required when querying BYOC Logs. Without it, queries search standard Datadog indexes instead.
 - The `indexes` parameter must contain valid BYOC Logs index names (in the format `byoc--<cluster_name>--<index_name>`).
 - When using natural language queries, explicitly mention your BYOC Logs index name in your prompt.
 - BYOC Logs data is queryable in real-time as soon as it is indexed.
