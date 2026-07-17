@@ -26,7 +26,7 @@ further_reading:
 
 ## Overview
 
-When you evaluate several experiment comparisons at once, the family-wise error rate increases. For example, a single 95% confidence interval fails to cover the true underlying effect 5% of the time. If an experiment generates many confidence intervals, the probability that at least one interval fails to cover the true effect is higher than the failure probability for any one interval.
+When you evaluate several experiment comparisons at once, the family-wise error rate increases. For example, a single 95% confidence interval does not include the true effect 5% of the time. If an experiment generates many confidence intervals, the probability that at least one interval does not include its true effect is higher than the failure probability for any one interval.
 
 Multiple testing correction reduces the family-wise error rate by making each individual comparison more conservative. In Datadog Experiments, this means confidence intervals become wider, and a treatment needs stronger evidence before Datadog marks a result as statistically significant.
 
