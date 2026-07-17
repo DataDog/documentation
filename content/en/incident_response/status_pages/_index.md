@@ -237,6 +237,46 @@ From a status page, select the dropdown next to **Publish Notice**, select **Pub
 
 {{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Example publish backfilled notice modal for maintenance windows" style="width:60%;" >}}
 
+## Use notice templates
+
+Templates let you save pre-configured language for degradation notices and maintenance windows that you publish repeatedly, such as a recurring maintenance activity or a known type of service disruption. When you publish a notice, select a template to pre-fill the notice title, per-status messages, and affected components instead of typing them each time.
+
+### Create a template
+
+1. From your status page, click **Settings** and select the **Templates** tab.
+1. In the **Degradation Templates** or **Maintenance Templates** section, click **Add Template**.
+1. Provide the following details:
+
+   | Field | Description |
+   | ---- | ---- |
+   | **Template name** | Internal name used to identify the template when selecting it. Not shown on the published status page. |
+   | **Notice Title** | Default title pre-filled when the template is used. |
+   | **Messages** | A message for each notice status. Degradation templates support **Investigating**, **Identified**, **Monitoring**, and **Resolved**. Maintenance templates support **Scheduled**, **In Progress**, and **Completed**. |
+   | **Components** | Components to pre-select when the template is used. For degradation templates, you can also set an initial status for each component. |
+
+1. Click **Save**.
+
+### Insert template variables
+
+Use variables in a template message so Datadog fills in the value automatically when the template is applied to a notice. The **Message Variables** panel next to the message fields lists the available variables:
+
+| Variable | Description |
+| ---- | ---- |
+| `{{date}}` | Prompts the publisher to select a date and time when the template is applied. |
+| `{{components_impacted}}` | Fills in the list of components selected on the notice. |
+
+To insert a variable, type `{{` in a message field and select a variable from the list, or click a variable in the **Message Variables** panel to insert it at the cursor.
+
+### Apply a template to a notice
+
+From the **Publish Notice** modal, select a template from the **Template** dropdown to pre-fill the notice with its title, messages, and components.
+
+After you apply a template, its fields become read-only, and the notice displays which template is applied. To make changes, edit a pre-filled field directly. A warning appears indicating that the template values were overridden, with a **Reset Values** option to revert to the original template content.
+
+### Edit or delete a template
+
+From the **Templates** tab in status page settings, click **Edit** next to a template to change its fields, or click **Delete** to remove it. Deleting a template does not affect notices that were already published using it.
+
 ## Email subscriptions
 
 Email subscriptions on status pages are **double opt-in**. After entering an email to subscribe, users receive a confirmation email and must click the confirmation link to activate their subscription. During this process, users can choose to receive notifications for the entire status page or select specific components they want to monitor. A preferred timezone can be configured for timestamp formatting within notifications. Users can manage their preferences and update their subscriptions at any time through the subscription management link included in notification emails.
