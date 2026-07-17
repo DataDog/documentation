@@ -1,6 +1,6 @@
 ---
 title: Query BYOC Logs with the Datadog MCP Server
-description: Learn how to query logs stored in BYOC Logs indexes with the search_datadog_logs tool on the Datadog MCP server
+description: Learn how to query logs stored in BYOC Logs indexes using the Datadog MCP server
 further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-remote-mcp-server/"
   tag: "Blog"
