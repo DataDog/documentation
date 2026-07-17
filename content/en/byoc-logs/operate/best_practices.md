@@ -53,6 +53,8 @@ Indexers use a write-ahead log (WAL) to temporarily buffer data before uploading
 **Note**: Local SSDs are not recommended because the WAL is not replicated. Ephemeral disks can result in data loss if the disk fails. Use network-attached storage for built-in redundancy, and always enable persistent volumes for production deployments.
 
 Example Helm values:
+Example Helm values:
+
 ```yaml
 indexer:
   persistentVolume:
