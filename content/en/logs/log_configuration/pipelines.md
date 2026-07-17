@@ -224,7 +224,7 @@ By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. 
 
 4. Name your pipeline.
 5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][8].
-6. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before publishing them.
+6. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before applying them.
 7. Press {{< ui >}}Create{{< /ui >}}.
 
 An example of a log transformed by a pipeline:
@@ -266,7 +266,7 @@ It's also possible to copy an integration pipeline using the clone button.
 1. Navigate to [Pipelines][8] in Datadog.
 2. Hover over a pipeline and click the arrow next to it to expand processors and nested pipelines.
 3. Select {{< ui >}}Add Processor{{< /ui >}} or {{< ui >}}Add Nested Pipeline{{< /ui >}}.
-4. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before publishing them.
+4. (Optional) Add a [Pipeline Simulation](#simulate-pipeline-changes) to preview the impact of your changes before applying them.
 
 ### Processors
 
@@ -290,7 +290,13 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 
 ## Simulate pipeline changes
 
-Pipeline Simulation previews how your changes affect logs before you publish them. It uses a live tail of your logs, processed with your proposed changes. Open it while creating or editing a pipeline or processor.
+{{< beta-callout url="#" btn_hidden="true" >}}
+Pipeline Simulation is in Preview.
+{{< /beta-callout >}}
+
+Pipeline Simulation previews how your changes affect logs before you apply them. It uses a live tail of your logs, processed with your proposed changes. Open it while creating or editing a pipeline or processor.
+
+{{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="The Pipeline Simulation view showing the pipeline's processors on the left and a before-and-after diff of a selected log on the right" >}}
 
 When you add or edit processors, compare each log's before and after state:
 
