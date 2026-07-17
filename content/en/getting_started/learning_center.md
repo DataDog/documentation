@@ -1,6 +1,6 @@
 ---
 title: Datadog Learning Center
-description: Access hands-on courses and tutorials to learn Datadog platform features, best practices, and implementation strategies.
+description: Access hands-on courses and tutorials to learn Datadog platform features, best practices, and deployment strategies.
 aliases:
   - /video-categories/
   - /video-categories/datadog-101/
