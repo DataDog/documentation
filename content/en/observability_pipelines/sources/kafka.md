@@ -103,6 +103,43 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][3] for more information and to ensure your values have the correct type and are within range.
 
+## Metrics
+
+For [component metrics][10] and [source buffer metrics][11] emitted by all sources, see the [Pipelines Usage Metrics][12] documentation.
+
+### Kafka metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `kafka` for these metrics.
+
+`pipelines.kafka_consumer_lag`
+: **Description**: Kafka consumer lag per topic and partition. High values indicate the source is falling behind the incoming message rate.
+: **Metric type**: gauge
+
+`pipelines.kafka_consumed_messages_total`
+: **Description**: The number of messages the Worker consumed from Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_consumed_messages_bytes_total`
+: **Description**: The number of message bytes the Worker consumed from Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_requests_total`
+: **Description**: The number of requests the Worker sent to Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_requests_bytes_total`
+: **Description**: The number of bytes the Worker sent to Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_responses_total`
+: **Description**: The number of responses the Worker received from Kafka brokers after writing to them.
+: **Metric type**: count
+
+`pipelines.kafka_responses_bytes_total`
+: **Description**: The number of bytes the Worker received from Kafka brokers after writing to them.
+: **Metric type**: count
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://github.com/confluentinc/librdkafka/tree/master
 [3]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
@@ -111,3 +148,6 @@ See the [librdkafka documentation][3] for more information and to ensure your va
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

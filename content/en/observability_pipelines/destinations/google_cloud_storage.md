@@ -87,6 +87,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 100               | 900                 |
 
+## Metrics
+
+For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Google Cloud Storage destination metrics, use the tag `component_type:datadog_archives_gcs`.
+
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
 [3]: /integrations/google_cloud_platform/#setup
@@ -99,3 +103,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [10]: https://app.datadoghq.com/observability-pipelines
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
