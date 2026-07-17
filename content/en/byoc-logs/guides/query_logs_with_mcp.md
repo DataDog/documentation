@@ -21,8 +21,6 @@ Use the `search_datadog_logs` tool on the [Datadog MCP (Model Context Protocol) 
 
 **Note**: BYOC Logs indexes are supported only by `search_datadog_logs`. The `analyze_datadog_logs` tool and the `datadog/querying-patterns` skill do not support BYOC Logs indexes.
 
-With `search_datadog_logs`, you can use natural-language prompts to generate and run log queries without needing to remember the query syntax.
-
 ## Prerequisites
 
 - A running BYOC Logs deployment with logs ingested.
