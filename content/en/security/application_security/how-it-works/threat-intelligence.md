@@ -10,6 +10,12 @@ further_reading:
 
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 This topic describes [threat intelligence][1] for App and API Protection (AAP).

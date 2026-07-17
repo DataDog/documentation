@@ -7,6 +7,12 @@ further_reading:
   text: "From discovery to defense: Securing APIs with Datadog App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Use API Posture in [App and API Protection][1] (AAP) to discover your APIs, assess the risks they expose, and track your security posture.
 
 To get started, [set up AAP][2] on your services to discover endpoints from your live traffic. Other data sources, such as Amazon API Gateway and source code, require additional setup; see [API Endpoints][3] for details.
