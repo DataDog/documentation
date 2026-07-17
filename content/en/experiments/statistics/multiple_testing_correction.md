@@ -78,7 +78,7 @@ This Bonferroni-style allocation does not estimate covariance between comparison
 
 Suppose an experiment has:
 
-- A 95% configured confidence level, so `alpha = 0.05`.
+- A 95% configured confidence level (`alpha = 0.05`).
 - One control variant and one treatment variant, so each metric has one treatment-control comparison.
 - One primary metric and four remaining metrics.
 - The default primary metric weight, so `gamma = 0.5`.
