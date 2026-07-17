@@ -17,7 +17,9 @@ Datadog AI agents, including the Bits fleet (Bits SRE, Bits Assistant, Bits Secu
 
 ## Agent coverage
 
-Datadog AI agents onboard to the actor and delegation model individually, so coverage varies by agent and by action type. Use this table to check what you can query today.
+Datadog AI agents onboard to the actor and delegation model individually, so coverage varies by agent and by action type. Use this table to check what you can query.
+
+**As of July 17, 2026**, the following coverage applies:
 
 | Agent | Status | Notes |
 | ----- | ------ | ----- |
