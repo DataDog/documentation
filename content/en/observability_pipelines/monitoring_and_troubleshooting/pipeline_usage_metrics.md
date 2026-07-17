@@ -78,6 +78,10 @@ Disk read/write bytes
 : **Metric**: `pipelines.host.disk_read_bytes_total`, `pipelines.host.disk_written_bytes_total`
 : **Description:** The number of bytes read from and written to all disks on the host.
 
+Host uptime
+: **Metric**: `pipelines.host.uptime`
+: **Description:** The amount of time since the host was started, in seconds.
+
 Load average
 : **Metric**: `pipelines.host.load1`, `pipelines.host.load5`, `pipelines.host.load15`
 : **Description:** The host's system load average over the last 1, 5, and 15 minutes. Load average is the number of processes that are running or waiting to run, and on Linux also includes processes blocked on uninterruptible I/O. Compare the load average value against the `pipelines.host.logical_cpus` value: a load average value near the CPU count indicates full utilization, and a value above it indicates the host is oversubscribed. Not emitted on Workers running in Windows.
@@ -89,10 +93,6 @@ Logical CPUs
 Total memory
 : **Metric**: `pipelines.host.memory_total_bytes`
 : **Description:** The total physical memory (RAM) installed on the host.
-
-Uptime
-: **Metric**: `pipelines.host.uptime`
-: **Description:** The amount of time since the host was started, in seconds.
 
 ## Process metrics
 
