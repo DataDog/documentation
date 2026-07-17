@@ -61,6 +61,12 @@ indexer:
     storageClass: gp3
 ```
 
+## Enable automated backups on your metastore database
+
+BYOC Logs stores metadata in a PostgreSQL database (Amazon RDS, Cloud SQL, or Azure Database for PostgreSQL, depending on your cloud provider). Enable automated backups on this database for disaster recovery.
+
+For example, on AWS, set a nonzero `--backup-retention-period` when you create the RDS instance. See [Create an RDS database][5] for an example command.
+
 ## Monitor disk capacity on indexers
 
 Indexer disk usage grows as the WAL accumulates data and during merge operations. If disk space runs out, indexers stop ingesting logs.
@@ -117,3 +123,4 @@ helm search repo datadog/cloudprem --versions
 [2]: /byoc-logs/operate/monitoring/
 [3]: /byoc-logs/operate/sizing/#helm-chart-sizing-tiers
 [4]: /byoc-logs/configure/lambda/
+[5]: /byoc-logs/install/aws_eks/#create-an-rds-database
