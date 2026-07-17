@@ -21,13 +21,14 @@
             {{ end }}
         {{ end }}
 
-        {{/* Get appropriate translate_actions data file by language */}}
+        {{/* Korean action translations use the legacy `kr` suffix; the site language is `ko`. */}}
+        {{ $translation_lang := cond (eq $lang "ko") "kr" $lang }}
         {{ $api_v1_translate_actions := index $hugo_context.Site.Data.api.v1 "translate_actions" }}
         {{ $api_v2_translate_actions := index $hugo_context.Site.Data.api.v2 "translate_actions" }}
 
         {{ if ne $lang "en" }}
-            {{ $api_v1_translate_actions = index $hugo_context.Site.Data.api.v1 (print "translate_actions." $lang) }}
-            {{ $api_v2_translate_actions = index $hugo_context.Site.Data.api.v2 (print "translate_actions." $lang) }}
+            {{ $api_v1_translate_actions = index $hugo_context.Site.Data.api.v1 (print "translate_actions." $translation_lang) }}
+            {{ $api_v2_translate_actions = index $hugo_context.Site.Data.api.v2 (print "translate_actions." $translation_lang) }}
         {{ end }}
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
@@ -50,8 +51,7 @@
                             "endpoint_data" $action
                             "endpoint_path" $endpoint_path
                             "method" $method
-                            "api_v1_translate_actions" $api_v1_translate_actions
-                            "api_v2_translate_actions" $api_v2_translate_actions
+                            "translate_actions" $api_v1_translate_actions
                         )
                     }}
 
@@ -80,8 +80,7 @@
                             "endpoint_data" $action
                             "endpoint_path" $endpoint_path
                             "method" $method
-                            "api_v1_translate_actions" $api_v1_translate_actions
-                            "api_v2_translate_actions" $api_v2_translate_actions
+                            "translate_actions" $api_v2_translate_actions
                         )
                     }}
 

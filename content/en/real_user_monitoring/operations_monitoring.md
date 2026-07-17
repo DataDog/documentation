@@ -130,7 +130,7 @@ m.global.datadogRumAgent@.startOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+<div class="alert alert-warning">The Operation's name may only contain letters, digits, or the characters <code>- _ . @ $</code>, and cannot contain any whitespaces.</div>
 
 ### Stop an operation with success
 

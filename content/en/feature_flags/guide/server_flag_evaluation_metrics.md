@@ -51,12 +51,68 @@ You only need to enable the protocol your application uses (gRPC on port 4317, o
 
 ## Step 2: Configure your application
 
-Set the following environment variable on your application, in addition to the standard [server-side feature flag configuration][1]:
+For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see the [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) section instead.
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
+
+### Java: Add the OpenTelemetry SDK dependencies
+
+The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the `opentelemetry-sdk-metrics` and `opentelemetry-exporter-otlp` dependencies must be on your application's classpath. Add them alongside your [Java feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
+
+{{< tabs >}}
+{{% tab "Gradle (Groovy)" %}}
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    implementation platform('io.opentelemetry:opentelemetry-bom:1.47.0')
+    implementation 'io.opentelemetry:opentelemetry-sdk-metrics'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Gradle (Kotlin)" %}}
+{{< code-block lang="kotlin" filename="build.gradle.kts" >}}
+dependencies {
+    implementation(platform("io.opentelemetry:opentelemetry-bom:1.47.0"))
+    implementation("io.opentelemetry:opentelemetry-sdk-metrics")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Maven" %}}
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-bom</artifactId>
+            <version>1.47.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+<dependencies>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-sdk-metrics</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-exporter-otlp</artifactId>
+    </dependency>
+</dependencies>
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Java tracer, the provider starts its OTLP metrics exporter automatically when the OpenTelemetry SDK is on the classpath. If the dependencies are missing, no metrics are emitted and the tracer logs `OpenTelemetry SDK is not on the classpath`.
+
+<div class="alert alert-info">In Spring Boot applications, Spring Boot's OpenTelemetry autoconfiguration also creates an <code>OpenTelemetrySdk</code> bean. If the OpenTelemetry SDK version it resolves does not match the OpenTelemetry API version on the classpath, startup fails with a <code>BeanCreationException</code> for the <code>openTelemetry</code> bean and <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>. Importing the <code>opentelemetry-bom</code> as shown above keeps the API and SDK on the same version and resolves the error.</div>
 
 ### Ruby: Add the OpenTelemetry metrics gems
 
@@ -76,7 +132,7 @@ By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on po
 Set an OTLP endpoint explicitly in any of these cases:
 
 - The Agent is not reachable at `DD_AGENT_HOST` on the default OTLP port (for example, a remote Agent or a non-default port).
-- You use the **Java** tracer. The Java tracer does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `localhost:4318`. Set the endpoint whenever the Agent is not on `localhost`.
+- You use the **Java** tracer. Its flag evaluation metrics exporter supports OTLP/HTTP only (gRPC is not supported) on port `4318`. The Java tracer does not derive the endpoint from `DD_AGENT_HOST` and defaults to `http://localhost:4318`. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Agent's HTTP endpoint when the Agent is not on `localhost`.
 - You use the **Python** tracer. The Python tracer defaults to gRPC on port `4317`, not HTTP. Enable the gRPC OTLP receiver on the Agent, or override the protocol to use HTTP instead:
 
 {{< code-block lang="bash" >}}
@@ -164,3 +220,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /dashboards/
+[6]: /feature_flags/server/java/#installation
