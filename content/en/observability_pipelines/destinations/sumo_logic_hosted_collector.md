@@ -43,7 +43,7 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 {{% tab "Secrets Management" %}}
 
 - Sumo Logic HTTP Collector URL identifier:
-	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
+	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:
         - `<ENDPOINT>` is your Sumo collection endpoint.
         - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
 	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
@@ -67,8 +67,15 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
 
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

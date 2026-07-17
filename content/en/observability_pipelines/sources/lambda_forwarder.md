@@ -20,4 +20,11 @@ See [Datadog Forwarder][1] to learn more about it.
 
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
+## Metrics
+
+For [component metrics][2] and [source buffer metrics][3] emitted by all sources, see the [Pipelines Usage Metrics][4] documentation. Since you use the HTTP Server source to send logs from Lambda Forwarder to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
+
 [1]: /logs/guide/forwarder/?tab=cloudformation
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

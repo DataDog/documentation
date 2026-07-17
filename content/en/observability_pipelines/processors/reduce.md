@@ -44,4 +44,20 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
+## Metrics
+
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation.
+
+### Reduce metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `reduce` for these metrics.
+
+`pipelines.stale_events_flushed_total`
+: **Description**: The number of stale events that the processor has flushed.
+: **Metric type**: count
+
 [1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
