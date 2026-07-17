@@ -29,9 +29,7 @@ Use the `search_datadog_logs` tool on the [Datadog MCP (Model Context Protocol) 
 
 ## Querying BYOC Logs
 
-To query logs stored in BYOC Logs indexes, use `search_datadog_logs` and specify your BYOC Logs index name in addition to your standard log query:
-
-- (Required) **`indexes`**: The name(s) of your BYOC Logs index(es).
+To query logs stored in BYOC Logs indexes, use `search_datadog_logs` and specify your BYOC Logs index name in addition to your standard log query.
 
 For best results, your prompt **should also include**:
 - (Recommended) Time range (for example, "in the last hour", "from the last 24 hours").
