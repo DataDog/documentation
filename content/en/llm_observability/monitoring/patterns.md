@@ -49,7 +49,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 
 1. Click **+ New Pattern**
 2. Enter a **Pattern Name**
-3. Under **Clustering model**, select your LLM Provider, Account, and Model — these are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic.
+3. Under **Clustering model**, select your LLM Provider, Account, and Model. These are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic. Supported providers are **OpenAI**, **Azure OpenAI**, and **Amazon Bedrock**.
 4. Under **Scope**, configure:
    - **Time window:** The lookback period for interactions to analyze
    - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.

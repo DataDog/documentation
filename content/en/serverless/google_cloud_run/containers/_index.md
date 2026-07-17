@@ -21,13 +21,35 @@ further_reading:
     text: 'Datadog MCP Server: serverless_onboarding tool'
 ---
 
-## Use the Datadog MCP server
+## Set up with agentic onboarding
 
-Use the [Datadog MCP server][3] to set up monitoring for your Cloud Run containers with AI assistance. After you connect, try a prompt like:
+Use agentic onboarding to set up monitoring for your Cloud Run containers with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+{{< tabs >}}
+{{% tab "AI Setup CLI" %}}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
 
 ```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{{% /tab %}}
+{{% tab "MCP server" %}}
+
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run containers with AI assistance. After you connect, try a prompt like:
+
+```
 Help me monitor my GCP Cloud Run services with Datadog using Terraform.
 ```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Manual instrumentation
 To instrument your Google Cloud Run containers with Datadog, choose one of two options:
