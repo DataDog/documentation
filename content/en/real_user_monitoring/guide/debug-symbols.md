@@ -21,7 +21,7 @@ You can ignore this warning. The stack trace is already readable.
 
 ### No debug symbols uploaded for this version
 
-Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your application. This page is filtered by **type** (JavaScript, Android, iOS, React Native, Flutter). Use the filter to find the debug symbols you are looking for.
+Use the [RUM Debug Symbols page][1] to see if there are debug symbols for your application. This page is filtered by {{< ui >}}type{{< /ui >}} (JavaScript, Android, iOS, React Native, Flutter). Use the filter to find the debug symbols you are looking for.
 
 If there are no debug symbols for your application, [upload them][2].
 

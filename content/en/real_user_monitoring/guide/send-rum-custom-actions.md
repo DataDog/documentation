@@ -81,7 +81,7 @@ All RUM context such as current page view information, geoIP data, and browser i
 
 ## Create facets and measures on attributes
 
-After deploying the code that creates your custom actions, they appear in the **Actions** tab of the [RUM Explorer][3].
+After deploying the code that creates your custom actions, they appear in the {{< ui >}}Actions{{< /ui >}} tab of the [RUM Explorer][3].
 
 To filter on your custom actions, use the `Action Target Name` attribute: `@action.target.name:<ACTION_NAME>`.
 
@@ -89,7 +89,7 @@ The example below uses the following filter: `@action.target.name:checkout`.
 
 {{< img src="real_user_monitoring/guide/send-custom-user-actions/facet-from-user-action.mp4" alt="Create a facet for custom RUM actions" video=true style="width:100%;">}}
 
-After clicking on an action, a side panel with metadata appears. You can find your action attributes in the **Custom Attributes** section and create facets or measures for these attributes by clicking on them.
+After clicking on an action, a side panel with metadata appears. You can find your action attributes in the {{< ui >}}Custom Attributes{{< /ui >}} section and create facets or measures for these attributes by clicking on them.
 
 Use facets for distinctive values (IDs) and measures for quantitative values such as timings and latency. For example, create a facet for the cart items and a measure for the cart value.
 
@@ -97,7 +97,7 @@ Use facets for distinctive values (IDs) and measures for quantitative values suc
 
 You can use action attributes along with facets and measures in the [RUM Explorer][3] to build dashboard widgets, monitors, and advanced queries.
 
-The following example displays the average cart value per country in the last two days. Click the **Export** button to export the search query into a dashboard widget or monitor.
+The following example displays the average cart value per country in the last two days. Click the {{< ui >}}Export{{< /ui >}} button to export the search query into a dashboard widget or monitor.
 
 {{< img src="real_user_monitoring/guide/send-custom-user-actions/custom-action-analytics.png" alt="Use RUM actions in the RUM Explorer" style="width:100%;">}}
 

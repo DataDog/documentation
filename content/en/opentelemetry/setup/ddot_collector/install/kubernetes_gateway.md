@@ -1345,7 +1345,7 @@ The DDOT Collector gateway includes the [Datadog extension][11] by default. This
 
 To view your gateway pods:
 
-1. Navigate to **Integrations > Fleet Automation**.
+1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
 
   {{< img src="opentelemetry/embedded_collector/fleet_automation2.png" alt="Fleet Automation page showing DDOT gateway pods" style="width:100%;" >}}
 

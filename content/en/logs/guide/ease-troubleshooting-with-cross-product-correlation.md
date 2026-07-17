@@ -170,7 +170,7 @@ You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the {{< ui >}}Traces{{< /ui >}} tab. 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 
@@ -199,8 +199,8 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [3]: /tracing/other_telemetry/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 [5]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[6]: /logs/log_configuration/processors/#grok-parser
-[7]: /logs/log_configuration/processors/#trace-remapper
+[6]: /logs/log_configuration/processors/grok_parser/
+[7]: /logs/log_configuration/processors/trace_remapper/
 [8]: /integrations/postgres/?tab=host#log-collection
 [9]: https://www.postgresql.org/docs/13/auto-explain.html
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS

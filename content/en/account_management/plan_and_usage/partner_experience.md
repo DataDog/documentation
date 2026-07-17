@@ -40,7 +40,7 @@ View estimated, historical, and projected cost data for all customer organizatio
 
 View usage data for all customer organizations in one place. Partners can see a total across all customers, or group and filter by customer organization, product, and account. See [Usage Details][3] for full documentation.
 
-{{< img src="account_management/plan_and_usage/partner-usage-details.png" alt="Usage summary page for a partner admin organization showing usage data across customer organizations." >}}
+{{< img src="account_management/plan_and_usage/partner-usage-details-v2.png" alt="Usage summary page for a partner admin organization showing usage data across customer organizations." >}}
 
 ## Feature availability
 

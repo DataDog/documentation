@@ -28,7 +28,7 @@ MaterialApp.router(
 );
 ```
 
-If you are using ShellRoutes, you need to supply a separate observer to each `ShellRoute`, as shown below. See [this bug][3] for more information.
+If you are using `go_router` earlier than version 17 and are using ShellRoutes, you need to supply a separate observer to each `ShellRoute`, as shown below. In version 17 and later, this workaround is no longer needed. See [this bug][3] for more information.
 
 ```dart
 final _router = GoRouter(

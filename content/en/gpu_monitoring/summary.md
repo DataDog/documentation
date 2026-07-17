@@ -35,11 +35,11 @@ The funnel also highlights any performance issues or provisioning inefficiencies
 {{< img src="gpu_monitoring/funnel-3-k8s.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
-- **Total**: Any GPU device that is sending data during the selected time frame
-- **Active**: How many of your GPU devices are actively used for a workload
-- **Effective**: How many GPU devices are used and working more than 50% of their lifespan
+- {{< ui >}}Total{{< /ui >}}: Any GPU device that is sending data during the selected time frame
+- {{< ui >}}Active{{< /ui >}}: How many of your GPU devices are actively used for a workload
+- {{< ui >}}Effective{{< /ui >}}: How many GPU devices are used and working more than 50% of their lifespan
 
-If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are **Allocated** to Kubernetes workloads.
+If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
 ### Understand your GPU spend
 
@@ -69,7 +69,7 @@ If you rely on GPUs deployed through major cloud providers, this widget breaks d
 
 When AI workloads fail, it may be due to the number of available GPU devices rather than code performance. This widget surfaces device availability across all of your GPU device types, and highlights any device type pools that are fully saturated (signaling that additional devices may be required).
 
-To understand if any device type pools need additional provisioning, check this data against the **Unmet GPU requests** widget beneath it.
+To understand if any device type pools need additional provisioning, check this data against the {{< ui >}}Unmet GPU requests{{< /ui >}} widget beneath it.
 
 **Note**: If the number of devices available for any device type is less than 5% of the total number of devices, that device type is highlighted in red.
 
@@ -83,7 +83,7 @@ Use this section to identify the number of unmet GPU requests for your Kubernete
 
 {{< img src="gpu_monitoring/unmet-requests-2.png" alt="Toplist of kubernetes clusters by number of unmet GPU requests." style="width:90%;" >}}
 
-If you have Kubernetes clusters with a large number of unmet GPU requests, you can also look at their **Device Type Breakdown** widget to understand which device type the particular service relies on, and the **Device Allocation over time** widget to track historical demands. This helps you to confirm if these clusters and device types are consistently underprovisioned.
+If you have Kubernetes clusters with a large number of unmet GPU requests, you can also look at their {{< ui >}}Device Type Breakdown{{< /ui >}} widget to understand which device type the particular service relies on, and the {{< ui >}}Device Allocation over time{{< /ui >}} widget to track historical demands. This helps you to confirm if these clusters and device types are consistently underprovisioned.
 
 **Note**: If there are no services or clusters listed, and you are emitting the proper tags, this is indicative that all of your services and clusters have sufficient GPU resources during the selected time frame.
 
@@ -95,7 +95,7 @@ Cost optimization of your GPU workloads is crucial, as GPUs are often the most c
 
 **Note**: This section is only available for Kubernetes users.
 
-This table is sorted by **Total Cost**, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
+This table is sorted by {{< ui >}}Total Cost{{< /ui >}}, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
 
 {{< img src="gpu_monitoring/expensive_clusters.png" alt="Table of the most expensive Kubernetes clusters." style="width:90%;" >}}
 
@@ -109,13 +109,13 @@ For example, if you see a related pod with low core utilization, that pod is ine
 
 **Note**: This section is only available for Kubernetes users. 
 
-To maximize the value of your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by **SM activity** by default.
+To maximize the value of your GPU infrastructure spend, it's important to keep your GPU devices consistently busy. This widget reveals which pods are ineffectively using their associated GPU devices. The table is sorted by {{< ui >}}SM activity{{< /ui >}} by default.
 
 {{< img src="gpu_monitoring/inefficient_pods.png" alt="Table of inefficient pods sorted by SM Engine Activity level." style="width:90%;" >}}
 
-Clicking on any ineffective pod opens a menu with an option to view it on the Kubernetes Explorer page. On the Kubernetes Explorer page, you can access the pod's detail view, and click the **GPU** tab to see its related GPU devices.
+Clicking on any ineffective pod opens a menu with an option to view it on the Kubernetes Explorer page. On the Kubernetes Explorer page, you can access the pod's detail view, and click the {{< ui >}}GPU{{< /ui >}} tab to see its related GPU devices.
 
-For example, you may notice that the SM activity timeseries graph dips lower than 50%. You can then check whether your devices' `Memory Utilization` and `Graphics Activity` values have spiked during that particular time frame; if so, that is the reason for low SM Engine Activity (idle devices). To remediate this, you can contact the pod owner about consolidating the workload to a smaller number of devices, using a smaller GPU, or optimizing your code to get better throughput with the existing GPU.
+For example, you may notice that the SM activity timeseries graph dips lower than 50%. You can then check whether your devices' {{< ui >}}Memory Utilization{{< /ui >}} and {{< ui >}}Graphics Activity{{< /ui >}} values have spiked during that particular time frame; if so, that is the reason for low SM Engine Activity (idle devices). To remediate this, you can contact the pod owner about consolidating the workload to a smaller number of devices, using a smaller GPU, or optimizing your code to get better throughput with the existing GPU.
 
 This widget also helps you to identify "noisy neighbors" (where one or more pods consume a disproportionately large amount of shared resources on a host). For example, another pod can be using all of a given host's CPU, depriving other pods on the host.
 

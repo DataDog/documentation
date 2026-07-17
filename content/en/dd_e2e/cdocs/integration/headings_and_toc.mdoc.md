@@ -1,6 +1,7 @@
 ---
 title: Headings and TOC tests
 draft: true
+private: true
 content_filters:
   - trait_id: database
     option_group_id: dd_e2e_database_options

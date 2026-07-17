@@ -25,8 +25,8 @@ Each item listed in the Error Tracking Explorer is an issue that contains high-l
     -   Number of occurrences in the selected time period
 
 Issue are also tagged as:
-- `New` if the issue was first seen less than two days ago and is in state **FOR REVIEW** (see [Issue States][5])
-- `Regression` if the issue was **RESOLVED** and occurred again in a newer version (see [Regression Detection][6])
+- `New` if the issue was first seen less than two days ago and is in state {{< ui >}}FOR REVIEW{{< /ui >}} (see [Issue States][5])
+- `Regression` if the issue was {{< ui >}}RESOLVED{{< /ui >}} and occurred again in a newer version (see [Regression Detection][6])
 - `Crash` if the application crashed
 - Having a [Suspected Cause][3]
 
@@ -39,10 +39,10 @@ The time range appears on the top right of the Explorer as a timeline. This feat
 ### Sorting
 
 Order issues in the list using one of these options:
--   **Relevance** combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
--   **Count** sorts issues based on the total count of occurrences over the selected time range.
--   **Newest** orders issues by when they were first seen.
--   **Impacted Sessions** sorts issues by the number of impacted [RUM sessions][4].
+-   {{< ui >}}Relevance{{< /ui >}} combines multiple issue features to prioritize code related, recent, or spiking issues. Error Tracking analyzes how old issues are, occurrences over the last day, notable increase over the past hour, or if they triggered an application crash.
+-   {{< ui >}}Count{{< /ui >}} sorts issues based on the total count of occurrences over the selected time range.
+-   {{< ui >}}Newest{{< /ui >}} orders issues by when they were first seen.
+-   {{< ui >}}Impacted Sessions{{< /ui >}} sorts issues by the number of impacted [RUM sessions][4].
 
 ### Facets
 
@@ -70,7 +70,7 @@ In addition to error events, Error Tracking offers issue level filters to refine
 
 #### Sources
 
-Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display **All**, **Browser**, **Mobile**, or **Backend** issues in the explorer.
+Error Tracking consolidates errors from multiple Datadog products (Rum, Logs, APM) into a unified view, allowing you to watch and troubleshoot errors across your entire stack. You can choose to display {{< ui >}}All{{< /ui >}}, {{< ui >}}Browser{{< /ui >}}, {{< ui >}}Mobile{{< /ui >}}, or {{< ui >}}Backend{{< /ui >}} issues in the explorer.
 
 For more granular filtering, you can narrow down issues by specific log sources or by SDK and scope to a programming language.
 

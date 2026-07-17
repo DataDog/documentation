@@ -148,7 +148,7 @@ struct MyTestSuite {
 
 #### Using Xcode Project
 
-To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
+To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in {{< ui >}}Expand variables based on{{< /ui >}} or {{< ui >}}Target for Variable Expansion{{< /ui >}} if you are using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
@@ -366,7 +366,7 @@ When code coverage is available, the Datadog SDK (v2.2.7+) reports it under the 
 
 In Xcode, you can enable gathering of code coverage in your Test Plan or Test Scheme, depending on your project configuration.
 
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+You can see the evolution of the test coverage in the {{< ui >}}Coverage{{< /ui >}} tab of a test session.
 
 ## Using Info.plist for configuration
 

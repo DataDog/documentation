@@ -1,15 +1,19 @@
 ---
-title: Set Up App and API Protection Products without using APM
+title: Set Up App and API Protection Without APM or Infrastructure Monitoring
 disable_toc: false
 ---
 
-Datadog AAP is built on top of [APM][3]. While Datadog recommends using AAP with APM and adopting DevSecOps practices, you can also use these security products without using APM. This configuration is referred to as Standalone App and API Protection. This guide explains how to set up Standalone App and API Protection.
+Datadog App and API Protection (AAP) is built on top of [APM][3] and runs alongside [Infrastructure Monitoring][7] by default. While Datadog recommends using AAP together with APM and Infrastructure Monitoring to adopt DevSecOps practices, you can also run AAP on its own. This configuration is referred to as Standalone App and API Protection.
+
+Running standalone allows to be billed primarily for App and API Protection. Some APM intake is still present to support AAP features (for example, security traces), and is expected to appear on your bill.
+
+This guide explains how to disable APM tracing and infrastructure monitoring.
 
 ## Prerequisites
 
 This guide assumes you have the following:
 
-- **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment.
+- **Datadog Agent:** [Install the Datadog Agent][6] and configure it for your application's operating system, container, cloud, or virtual environment. Disabling Infrastructure Monitoring requires Datadog Agent version 7.77.0 or newer.
 - **Supported SDK:** The Datadog SDK used by your application or service supports App and API Protection. For more details, see the guide for [App and API Protection][4].
 
 ## Compatibility
@@ -19,21 +23,36 @@ Standalone App and API Protection is supported for the following SDK versions:
 | Language | Version |
 | -------- | ------- |
 | .NET     | 3.12.0  |
-| Go       | N/A     |
+| Go       | 1.73.0  |
 | Java     | 1.47.0  |
 | Node.js  | 5.40.0  |
-| PHP      | N/A     |
+| PHP      | 1.8.0   |
 | Python   | 3.2.0   |
 | Ruby     | 2.13.0  |
 
 ## Setup
 
+Standalone App and API Protection requires two pieces of configuration: disabling Infrastructure Monitoring on the Datadog Agent, and disabling APM tracing on the SDK while enabling AAP.
 
-Set up the Datadog Agent using the standard method for APM or App and API Protection setup, but set up the SDK by adding the `DD_APM_TRACING_ENABLED=false` environment variable to the service that runs the SDK.
+### Disable Infrastructure Monitoring on the Datadog Agent
 
-This environment variable will reduce the amount of APM data sent to Datadog to the minimum required by App and API Protection products. The environment variable can then be combined with environment variables to enable App and API Protection.
+Standalone App and API Protection uses the same Datadog Agent installation as APM. For installation steps, see [Install the Datadog Agent][6].
 
-For App and API Protection, add the `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENABLED=true` environment variable.
+To disable Infrastructure Monitoring, set the Datadog Agent infrastructure mode to `none` (requires Datadog Agent 7.77.0 or newer) using either:
+
+- The `DD_INFRASTRUCTURE_MODE=none` environment variable
+- The `infrastructure_mode: none` setting in the `datadog.yaml` configuration file
+
+For more details, see [Datadog Agent infrastructure mode][8].
+
+### Disable APM tracing and enable AAP on the service
+
+On the instrumented service, set the following environment variables:
+
+- `DD_APM_TRACING_ENABLED=false`
+- `DD_APPSEC_ENABLED=true`
+
+`DD_APM_TRACING_ENABLED=false` disabled APM tracing and limits the amount of APM data sent to the minimum required by App and API Protection. This environment variable can be combined with other [App and API Protection configuration options][4].
 
 
 [1]: /security/workload_protection/
@@ -42,3 +61,5 @@ For App and API Protection, add the `DD_APM_TRACING_ENABLED=false DD_APPSEC_ENAB
 [4]: /security/application_security/setup/
 [5]: /security/application_security/code_security/setup/
 [6]: /agent/
+[7]: /infrastructure/
+[8]: /agent/configuration/infrastructure-modes/

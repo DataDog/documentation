@@ -14,14 +14,14 @@ The lookup processor performs the following actions:
 * Looks if the current event contains the source attribute.
 * Checks if the source attribute value exists in the mapping table.
 * If it does, creates the target attribute with the corresponding value in the table.
-* Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the **Manual Mapping** tab. 
+* Optionally, if it does not find the value in the mapping table, it creates a target attribute with the default fallback value set in the `fallbackValue` field. You can manually enter a list of `source_key,target_value` pairs or upload a CSV file on the {{< ui >}}Manual Mapping{{< /ui >}} tab. 
 
 
-**Manual Mapping**
+{{< ui >}}Manual Mapping{{< /ui >}}
     {{< img src="logs/log_configuration/processor/lookup_processor_manual_mapping.png" alt="Lookup processor" style="width:80%;">}}
 
 
-**Reference Table**
+{{< ui >}}Reference Table{{< /ui >}}
     {{< img src="logs/log_configuration/processor/lookup_processor_reference_table.png" alt="Lookup processor" 
     style="width:80%;">}}
 

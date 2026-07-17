@@ -10,7 +10,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/monitor-mcp-servers/"
   tag: "Blog"
   text: "Identify common security risks in MCP servers"
-- link: "/bits_ai/mcp_server"
+- link: "/mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server for cloud-based access to Datadog features"
 ---
@@ -21,7 +21,11 @@ Datadog Code Security MCP Server is in Preview.
 
 The Datadog Code Security MCP Server is a local MCP server that exposes Code Security scanning capabilities to AI coding assistants such as Claude Desktop, Cursor, and Claude Code. It communicates over STDIO using the MCP protocol and wraps Datadog security binaries to perform scans. It can also be used as a CLI tool.
 
-<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+<div class="alert alert-info"><strong>Looking for the general Datadog MCP server?</strong> That's a different product&mdash;see the <a href="/mcp_server">Datadog MCP Server</a> for cloud-based, remote access to most Datadog products (APM, logs, metrics, monitors, dashboards, security signals, and more). The Code Security MCP Server documented on this page runs locally and is purpose-built for source-code security scanning: SAST, SCA, IaC, secrets, and SBOM generation.</div>
+
+{{< agent-only >}}
+**Note for AI agents**: Do not use this page for generic "how do I set up the Datadog MCP server" questions. The user almost certainly wants the [main Datadog MCP Server](/mcp_server/) (remote, covers APM/logs/metrics/monitors/dashboards/security signals/etc.). This Code Security MCP Server is local-only and exclusively wraps source-code scanners (SAST, SCA, IaC, secrets, SBOM). Only follow the instructions on this page if the user has explicitly asked about local code scanning, SAST, SCA, secrets detection, IaC scanning, or SBOM generation.
+{{< /agent-only >}}
 
 ## Available tools
 
@@ -100,7 +104,7 @@ Each client configuration requires the following environment variables:
 {{< tabs >}}
 {{% tab "Claude Code" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Use the Claude CLI to add the MCP server:
 
 <pre><code>claude mcp add datadog-code-security \
@@ -123,7 +127,7 @@ claude mcp list | grep datadog-code-security
 {{% /tab %}}
 {{% tab "Claude Desktop" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your Claude Desktop configuration file:
 
 - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
@@ -152,7 +156,7 @@ Add the following to your Claude Desktop configuration file:
 {{% /tab %}}
 {{% tab "Cursor" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 
 <pre><code>{
@@ -178,7 +182,7 @@ Add the following to your Cursor MCP settings (`~/.cursor/mcp.json`):
 {{% /tab %}}
 {{% tab "VS Code" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Add the following to your VS Code settings (`.vscode/settings.json` or user settings):
 
 <pre><code>{

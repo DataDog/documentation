@@ -27,7 +27,7 @@ Integration pipelines are automatically installed when you send logs from certai
 
 ### Set up multiple archives for long-term storage
 
-Set up [Log Archives][13] if you want to store your logs for longer periods of time. Log Archives sends your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. You can also [reorder your archives][14] as needed.
+Set up [log archives][13] if you want to store your logs for longer periods of time. Log archives send your logs to a storage-optimized system, such as Amazon S3, Azure Storage, or Google Cloud Storage. You can also [reorder your archives][14] as needed.
 
 ### Generate metrics from ingested logs
 
@@ -49,7 +49,7 @@ Tags add dimensions to your metrics so that they can be filtered, aggregated, an
 [7]: /logs/log_configuration/indexes/#exclusion-filters
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_index_order
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_custom_pipeline
-[10]: /logs/log_configuration/processors/?tab=ui
+[10]: /logs/log_configuration/processors/
 [11]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_pipeline_order
 [12]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_integration_pipeline
 [13]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/logs_archive

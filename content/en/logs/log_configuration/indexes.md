@@ -43,7 +43,7 @@ The Log Explorer supports [queries across multiple indexes][7].
 
 ### Add indexes
 
-Use the "New Index" button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
+Use the {{< ui >}}New Index{{< /ui >}} button to create a new index. There is a maximum number of indexes you can create for each account, set to 100 by default.
 
 {{< img src="logs/indexes/add-index.png" alt="Add index" style="width:70%;">}}
 
@@ -55,7 +55,7 @@ Use the "New Index" button to create a new index. There is a maximum number of i
 
 ### Delete indexes
 
-To delete an index from your organization, use the "Delete icon" in the index action tray. Only users with the `Logs delete data` permission can use this option.
+To delete an index from your organization, use the {{< ui >}}Delete{{< /ui >}} icon in the index action tray. Only users with the `Logs delete data` permission can use this option.
 
 {{< img src="logs/indexes/delete-index.png" alt="Delete index" style="width:70%;">}}
 
@@ -85,7 +85,7 @@ To add an exclusion filter:
 
 1. Navigate to [Log Indexes][11].
 2. Expand the index for which you want to add an exclusion filter. 
-3. Click **Add an Exclusion Filter**.
+3. Click {{< ui >}}Add an Exclusion Filter{{< /ui >}}.
 
 Exclusion filters are defined by a query, a sampling rule, and an active/inactive toggle:
 
@@ -190,10 +190,10 @@ See [Monitor log usage][20] on how to monitor and alert on your usage.
 [11]: https://app.datadoghq.com/logs/pipelines/indexes
 [12]: /logs/search_syntax/
 [13]: /api/v1/logs-indexes/#update-an-index
-[14]: /logs/log_configuration/processors/#user-agent-parser
-[15]: /logs/log_configuration/processors/#geoip-parser
+[14]: /logs/log_configuration/processors/user_agent_parser/
+[15]: /logs/log_configuration/processors/geoip_parser/
 [16]: /tracing/other_telemetry/connect_logs_and_traces/
-[17]: /logs/log_configuration/processors/#trace-remapper
+[17]: /logs/log_configuration/processors/trace_remapper/
 [18]: /logs/live_tail/#overview
 [19]: https://www.timeanddate.com/worldclock/converter.html
 [20]: /logs/guide/best-practices-for-log-management/#monitor-log-usage

@@ -30,6 +30,10 @@ By capturing these items as follow-ups, your team can stay focused on incident r
 
 ## AI-suggested follow-up tasks
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">AI-suggested follow-up tasks are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 After an incident is resolved, Incident AI scans the incident channel for follow-up tasks that responders mentioned during the incident. It then prompts you to review and create them with a single click. Tasks saved this way appear as Incident Follow-ups in Datadog Incident Management.
 
 To view AI-suggested follow-up tasks:
@@ -43,6 +47,10 @@ Follow-ups can be created at any point during an incident (even before it's reso
 **From Datadog**: Go to the incident's **Post-Incident** tab to view, create, edit, and track all follow-ups associated with the incident.
 
 **From Slack**: In the incident channel, run `/datadog followup` to create a new follow-up or `/datadog followup list` to view and manage existing follow-ups. For more Slack commands, see [Integrate Slack with Datadog Incident Management][5].
+
+## Follow-ups in postmortem notebooks
+
+You can display follow-ups directly in a postmortem notebook using the `{{incident.follow-ups}}` template variable. When added to a Datadog Notebooks postmortem template, this variable renders a list of follow-up items. From the list view in your notebook, you can set due dates, assign items, or create new follow-up items. For more information, see [Incident Postmortems][6].
 
 ## Export follow-ups
 
@@ -103,3 +111,4 @@ Organizations that need two-way sync should export to a Case Management project 
 [2]: /service_management/case_management
 [4]: /integrations/jira/
 [5]: /service_management/incident_management/integrations/slack/#slack-commands
+[6]: /incident_response/incident_management/post_incident/postmortems

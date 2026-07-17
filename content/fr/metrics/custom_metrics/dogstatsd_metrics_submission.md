@@ -5,36 +5,38 @@ aliases:
 - /fr/developers/faq/dog-statsd-sample-rate-parameter-explained
 - /fr/developers/metrics/dogstatsd_metrics_submission/
 - /fr/metrics/dogstatsd_metrics_submission
-description: Soumettez des métriques personnalisées directement à partir de votre
-  application.
+description: Envoyez des métriques custom directement depuis votre application.
 further_reading:
 - link: /extend/dogstatsd/
   tag: Documentation
-  text: Introduction à DogStatsD
+  text: Présentation de DogStatsD
 - link: /metrics/types/
   tag: Documentation
-  text: Types de métriques de Datadog
-title: 'Soumission de métriques : DogStatsD'
+  text: Types de métrique Datadog
+- link: https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd
+  tag: Centre d'apprentissage
+  text: Créer des métriques personnalisées avec DogStatsD
+title: 'Envoi de métriques : DogStatsD'
 ---
-Alors que StatsD n'accepte que des métriques, DogStatsD accepte les trois principaux types de données Datadog : métriques, événements et vérifications de service. Cette section montre des cas d'utilisation typiques pour les métriques, classés par types de métriques, et introduit [les taux d'échantillonnage](#sample-rates) et [les options d'étiquetage des métriques](#metric-tagging) spécifiques à DogStatsD.
+Alors que StatsD n'accepte que des métriques, DogStatsD accepte les trois principaux types de données Datadog: métriques, événements et vérifications de service. Cette section montre des cas d'utilisation typiques pour les métriques, classés par types de métriques, et introduit [taux d'échantillonnage](#sample-rates) et [options de balisage de métriques](#metric-tagging) spécifiques à DogStatsD.
 
-[COUNT](#count), [GAUGE](#gauge) et [SET](#set) sont des types de métriques familiers aux utilisateurs de StatsD. `TIMER` de StatsD est un sous-ensemble de `HISTOGRAM` dans DogStatsD. De plus, vous pouvez soumettre des types de métriques [HISTOGRAMME](#histogram) et [DISTRIBUTION](#distribution) en utilisant DogStatsD.
+[COUNT](#count), [GAUGE](#gauge) et [SET](#set) sont des types de métriques familiers aux utilisateurs de StatsD. `TIMER` de StatsD est un sous-ensemble de `HISTOGRAM` dans DogStatsD. De plus, vous pouvez soumettre des types de métriques [HISTOGRAM](#histogram) et [DISTRIBUTION](#distribution) en utilisant DogStatsD.
 
-**Remarque** : Selon la méthode de soumission utilisée, le type de métrique réel stocké dans Datadog peut différer du type de métrique soumis. Pour obtenir des métriques de TAUX via DogStatsD, soumettez soit un [COUNT](#count) soit un [HISTOGRAM](#histogram). Les valeurs des métriques COUNT et `<HISTOGRAM>.count` sont des deltas normalisés dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
+**Remarque**: Selon la méthode de soumission utilisée, le type de métrique réel stocké dans Datadog peut différer du type de métrique soumis. Pour obtenir des métriques de RATE via DogStatsD, soumettez soit une métrique [COUNT](#count) soit une métrique [HISTOGRAM](#histogram). Les valeurs des métriques de compte et `<HISTOGRAM>.count` les valeurs sont des deltas normalisés dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
 
-## Fonctions
+## Fonctions {#functions}
 
 Après avoir [installé DogStatsD][1], les fonctions suivantes sont disponibles pour soumettre vos métriques à Datadog en fonction de leur type de métrique. Les fonctions ont les paramètres partagés suivants :
 
 | Paramètre        | Type            | Requis | Description                                                                                                                                                                                    |
 |------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<METRIC_NAME>`  | Chaîne          | Oui      | Nom de la métrique à soumettre.                                                                                                                                                                  |
+| `<METRIC_NAME>`  | String          | Oui      | Nom de la métrique à soumettre.                                                                                                                                                                  |
 | `<METRIC_VALUE>` | Double          | Oui      | Valeur associée à votre métrique.                                                                                                                                                             |
-| `<SAMPLE_RATE>`  | Double          | Non       | Le taux d'échantillonnage à appliquer à la métrique. Prend une valeur entre `0` (tout est échantillonné, donc rien n'est envoyé) et `1` (aucun échantillon). Voir la section [Taux d'échantillonnage](#sample-rates) pour en savoir plus. |
-| `<TAGS>`         | Liste de chaînes | Non       | Une liste d'étiquettes à appliquer à la métrique. Voir la section [Étiquetage des métriques](#metric-tagging) pour en savoir plus.                                                                                       |
-| `<CARDINALITY>`  | Enum            | Non       | La [cardinalité][10] des étiquettes à attribuer à cette métrique.                                                                                                                               |
+| `<SAMPLE_RATE>`  | Double          | Non       | Le taux d'échantillonnage à appliquer à la métrique. Prend une valeur entre `0` (tout est échantillonné, donc rien n'est envoyé) et `1` (aucun échantillon). Voir la section [Taux d'échantillonnage](#sample-rates) pour en savoir plus : |
+| `<TAGS>`         | List of Strings | Non       | Une liste de balises à appliquer à la métrique. Voir la section [Balisage des métriques](#metric-tagging) pour en savoir plus :                                                                                       |
+| `<CARDINALITY>`  | Enum            | Non       | La [cardinalité][10] des balises à attribuer à cette métrique.                                                                                                                               |
 
-### COUNT
+### COUNT {#count}
 
 `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
 : Utilisé pour incrémenter une métrique COUNT. Stocké en tant que type `RATE` dans Datadog. Chaque valeur dans la série temporelle stockée est un delta normalisé dans le temps de la valeur de la métrique sur la période de vidage de StatsD.
@@ -47,9 +49,9 @@ Après avoir [installé DogStatsD][1], les fonctions suivantes sont disponibles 
 
 **Remarque** : Les métriques de type `COUNT` peuvent afficher une valeur décimale dans Datadog car elles sont normalisées sur l'intervalle de vidage pour rapporter des unités par seconde.
 
-#### Exemples de code
+#### Exemples de code {#code-examples}
 
-Émettre une métrique `COUNT` - stockée en tant que métrique `RATE` - vers Datadog. En savoir plus sur le type `COUNT` dans la documentation [types de métriques][2].
+Émettre une métrique `COUNT` stockée en tant que métrique `RATE` vers Datadog. En savoir plus sur le type `COUNT` dans la documentation [types de métriques][2].
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `COUNT` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
@@ -74,7 +76,7 @@ while(1):
   time.sleep(10)
 ```
 
-**Remarque :** `statsd.count` n'est pas pris en charge en Python.
+**Remarque:** `statsd.count` n'est pas pris en charge en Python.
 
 {{< /programming-lang >}}
 
@@ -221,7 +223,7 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
 
 {{< /programming-lang-wrapper >}}
 
-Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
+Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement.png" alt="Incrémenter Décrémenter" >}}
 
@@ -229,18 +231,18 @@ Puisque la valeur est soumise en tant que `COUNT`, elle est stockée en tant que
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="Incrémenter Décrémenter avec Cumsum" >}}
 
-### GAUGE
+### GAUGE {#gauge}
 
 `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Stocké en tant que type `GAUGE` dans Datadog. Chaque valeur dans la série temporelle stockée est la dernière valeur de jauge soumise pour la métrique pendant la période de vidage StatsD.
+: Stocké en tant que type `GAUGE` dans Datadog. Chaque valeur dans la série temporelle stockée est la dernière valeur de jauge soumise pour la métrique pendant la période de vidage de StatsD.
 
-#### Exemples de code
+#### Exemples de code {#code-examples-1}
 
-Émettez une `GAUGE` métrique stockée en tant que `GAUGE` métrique vers Datadog. En savoir plus sur le type `GAUGE` dans la documentation [types de métriques][5].
+Émettre une métrique `GAUGE` stockée en tant que métrique `GAUGE` vers Datadog. En savoir plus sur le type `GAUGE` dans la documentation [types de métriques][5].
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `GAUGE` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
-**Remarque :** Les appels de soumission de métriques sont asynchrones. Si vous souhaitez vous assurer que les métriques sont soumises, appelez `flush` avant la sortie du programme.
+**Remarque&nbsp;:** Les appels de soumission de métriques sont asynchrones. Si vous souhaitez vous assurer que les métriques sont soumises, appelez `flush` avant la sortie du programme.
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -408,18 +410,18 @@ while(true) {
 
 {{< /programming-lang-wrapper >}}
 
-Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
+Une fois le code ci-dessus exécuté, les données de votre métrique peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="GAUGE" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
-### SET
+### SET {#set}
 
 `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Stocké en tant que type `GAUGE` dans Datadog. Chaque valeur dans la série temporelle stockée est le compte des valeurs uniques soumises à StatsD pour une métrique pendant la période de vidage.
+: Stocké en tant que type `GAUGE` dans Datadog. Chaque valeur dans la série temporelle stockée est le nombre de valeurs uniques soumises à StatsD pour une métrique pendant la période de vidage.
 
-#### Exemples de code
+#### Exemples de code {#code-examples-2}
 
-Émettez une `SET` métrique stockée en tant que `GAUGE` métrique vers Datadog.
+Émettre une métrique `SET` stockée en tant que métrique `GAUGE` vers Datadog.
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `SET` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
@@ -575,21 +577,21 @@ while (TRUE) {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
+Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="SET" >}}
 
-### HISTOGRAM
+### HISTOGRAM {#histogram}
 
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-: Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation [type de métrique HISTOGRAMME][6] pour en savoir plus.
+: Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation [type de métrique HISTOGRAM][6] pour en savoir plus.
 
-#### Configuration
+#### Configuration {#configuration}
 
 * Configurez l'agrégation à envoyer à Datadog avec le paramètre `histogram_aggregates` dans votre [fichier de configuration datadog.yaml][7]. Par défaut, seules les agrégations `max`, `median`, `avg` et `count` sont envoyées.
-* Configurez l'agrégation des percentiles à envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre fichier de configuration [datadog.yaml][7]. Par défaut, seul le `95pc` percentile est envoyé.
+* Configurez l'agrégation des percentiles à envoyer à Datadog avec le paramètre `histogram_percentiles` dans votre fichier de configuration [datadog.yaml][7]. Par défaut, seul le percentile `95pc` est envoyé.
 
-#### Exemples de code
+#### Exemples de code {#code-examples-3}
 
 Le type de métrique `HISTOGRAM` est spécifique à DogStatsD. Émettez une métrique `HISTOGRAM`—stockée en tant que métrique `GAUGE` et `RATE`—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation des [types de métriques][6].
 
@@ -741,32 +743,32 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-L'instrumentation ci-dessus produit les métriques suivantes :
+L'instrumentation ci-dessus produit les métriques suivantes :
 
 | Métrique                                  | Description                             |
 |-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | Nombre de fois que cette métrique a été échantillonnée |
 | `example_metric.histogram.avg`          | Moyenne des valeurs échantillonnées           |
-| `example_metric.histogram.median`       | Valeur échantillonnée médiane                    |
-| `example_metric.histogram.max`          | Valeur échantillonnée maximale                   |
+| `example_metric.histogram.median`       | Valeur médiane échantillonnée                    |
+| `example_metric.histogram.max`          | Valeur maximale échantillonnée                   |
 | `example_metric.histogram.95percentile` | Valeur échantillonnée au 95e percentile           |
 
-Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
+Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="HISTOGRAM" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="Histogram" >}}
 
-#### TIMER
+#### TIMER {#timer}
 
-`TIMER` le type de métrique dans DogStatsD est une implémentation du type de métrique `HISTOGRAM` (à ne pas confondre avec les temporisateurs dans le StatsD standard). Il mesure uniquement les données de timing : par exemple, le temps qu'une section de code met à s'exécuter.
+Le type de métrique `TIMER` dans DogStatsD est une implémentation du type de métrique `HISTOGRAM` (à ne pas confondre avec les temporisateurs dans le StatsD standard). Il mesure uniquement les données de timing: par exemple, le temps qu'une section de code met à s'exécuter.
 
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 : Étant donné que plusieurs métriques sont soumises, les types de métriques stockés (`GAUGE`, `RATE`) dépendent de la métrique. Consultez la documentation [type de métrique HISTOGRAM][6] pour en savoir plus.
 
-##### Configuration
+##### Configuration {#configuration-1}
 
-Pour un `TIMER`, les règles de configuration `HISTOGRAM` [ ](#configuration) s'appliquent.
+Pour un `TIMER`, les règles de configuration `HISTOGRAM` [](#configuration) s'appliquent.
 
-##### Exemples de code
+##### Exemples de code {#code-examples-4}
 
 Émettez une métrique `TIMER`—stockée en tant que métrique `GAUGE` et `RATE`—vers Datadog. En savoir plus sur le type `HISTOGRAM` dans la documentation [types de métriques][6]. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
@@ -774,7 +776,7 @@ Pour un `TIMER`, les règles de configuration `HISTOGRAM` [ ](#configuration) s'
 
 {{< programming-lang lang="python" >}}
 
-En Python, les temporisateurs sont créés avec un décorateur.
+Avec Python, les timers sont créés avec un décorateur.
 
 ```python
 from datadog import initialize, statsd
@@ -796,7 +798,7 @@ while(1):
   my_function()
 ```
 
-ou avec un gestionnaire de contexte :
+ou avec un gestionnaire de contexte :
 
 ```python
 from datadog import statsd
@@ -847,28 +849,28 @@ while (TRUE) {
 
 {{< /programming-lang-wrapper >}}
 
-Alors que DogStatsD reçoit les données de métriques de temporisation, il calcule la distribution statistique des temps de rendu et envoie les métriques suivantes à Datadog :
+Lorsque DogStatsD reçoit les données de la métrique timer, il calcule la distribution statistique des temps de rendu, puis envoie les métriques suivantes à Datadog :
 
 | Métrique                              | Description                             |
 |-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | Nombre de fois que cette métrique a été échantillonnée |
 | `example_metric.timer.avg`          | Temps moyen des valeurs échantillonnées      |
-| `example_metric.timer.median`       | Valeur échantillonnée médiane                    |
-| `example_metric.timer.max`          | Valeur échantillonnée maximale                   |
+| `example_metric.timer.median`       | Valeur médiane échantillonnée                    |
+| `example_metric.timer.max`          | Valeur maximale échantillonnée                   |
 | `example_metric.timer.95percentile` | Valeur échantillonnée au 95e percentile           |
 
-DogStatsD traite `TIMER` comme une métrique `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Après avoir exécuté le code ci-dessus, vos données de métriques sont disponibles pour être graphées dans Datadog :
+DogStatsD traite `TIMER` comme une métrique `HISTOGRAM`. Que vous utilisiez le type de métrique `TIMER` ou `HISTOGRAM`, vous envoyez les mêmes données à Datadog. Une fois le code ci-dessus exécuté, les données de vos métriques peuvent être représentées graphiquement dans Datadog :
 
-{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Timer" >}}
+{{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="Chronomètre" >}}
 
-### DISTRIBUTION
+### DISTRIBUTION {#distribution}
 
 `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
-: Stocké en tant que type `DISTRIBUTION` dans Datadog. Consultez la documentation [Distribution documentation][8] pour en savoir plus.
+: Stocké en tant que type `DISTRIBUTION` dans Datadog. Consultez la documentation [Distribution dédiée][8] pour en savoir plus.
 
-#### Exemples de code
+#### Exemples de code {#code-examples-5}
 
-Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Émettez une métrique `DISTRIBUTION`—stockée en tant que métrique `DISTRIBUTION`—vers Datadog. En savoir plus sur le type `DISTRIBUTION` dans la documentation [metric types][9].
+Le type de métrique `DISTRIBUTION` est spécifique à DogStatsD. Émettez une métrique `DISTRIBUTION`—stockée en tant que métrique `DISTRIBUTION`—vers Datadog. En savoir plus sur le type `DISTRIBUTION` dans la documentation [types de métriques][9].
 
 Exécutez le code suivant pour soumettre une métrique DogStatsD `DISTRIBUTION` à Datadog. N'oubliez pas de `flush`/`close` le client lorsqu'il n'est plus nécessaire.
 
@@ -1032,11 +1034,11 @@ while(true) {
 
 L'instrumentation ci-dessus calcule le `sum`, `count`, `average`, `minimum`, `maximum`, `50th percentile` (médiane), `75th percentile`, `90th percentile`, `95th percentile` et `99th percentile`. Les distributions peuvent être utilisées pour mesurer la distribution de *tout* type de valeur, comme la taille des fichiers téléchargés ou les résultats des tests en classe.
 
-## Options de soumission de métriques
+## Options de soumission de métriques {#metric-submission-options}
 
-### Taux d'échantillonnage
+### Taux d'échantillonnage {#sample-rates}
 
-Étant donné que l'envoi de paquets UDP peut entraîner une surcharge excessive sur certains chemins de code sensibles aux performances, les clients DogStatsD prennent en charge l'échantillonnage (n'envoyant des métriques qu'un certain pourcentage du temps). C'est utile si vous échantillonnez de nombreuses métriques et que votre client DogStatsD n'est pas sur le même hôte que le serveur DogStatsD. Le compromis : vous réduisez le trafic mais perdez une certaine précision et granularité.
+Étant donné que le coût d'envoi de paquets UDP peut être trop élevé pour certains chemins de code intensifs en performances, les clients DogStatsD prennent en charge l'échantillonnage (n'envoyant des métriques qu'un pourcentage du temps). C'est utile si vous échantillonnez de nombreuses métriques, et que votre client DogStatsD n'est pas sur le même hôte que le serveur DogStatsD. Le compromis : vous réduisez le trafic mais perdez une certaine précision et granularité.
 
 Un taux d'échantillonnage de `1` envoie des métriques 100% du temps, tandis qu'un taux d'échantillonnage de `0` envoie des métriques 0% du temps.
 
@@ -1047,12 +1049,12 @@ Avant d'envoyer une métrique à Datadog, DogStatsD utilise le `<SAMPLE_RATE>` p
 | `COUNT`        | Les valeurs reçues sont multipliées par (`1/<SAMPLE_RATE>`). Il est raisonnable de supposer que pour un point de données reçu, `1/<SAMPLE_RATE>` ont en réalité été échantillonnés avec la même valeur. |
 | `GAUGE`        | Aucune correction. La valeur reçue est conservée telle quelle.                                                                                                                               |
 | `SET`          | Aucune correction. La valeur reçue est conservée telle quelle.                                                                                                                               |
-| `HISTOGRAM`    | La statistique `histogram.count` est une métrique de comptage et reçoit la correction décrite ci-dessus. D'autres statistiques sont des métriques de jauge et ne sont pas "corrigées".                      |
+| `HISTOGRAM`    | La statistique `histogram.count` est une métrique COUNT et reçoit la correction décrite ci-dessus. D'autres statistiques sont des métriques gauge et ne sont pas "corrigées".                      |
 | `DISTRIBUTION` | Les valeurs reçues sont comptées (`1/<SAMPLE_RATE>`) fois. Il est raisonnable de supposer que pour un point de données reçu, `1/<SAMPLE_RATE>` ont en réalité été échantillonnés avec la même valeur. |
 
-#### Exemples de code
+#### Exemples de code {#code-examples-6}
 
-Le code suivant envoie des points seulement la moitié du temps :
+Le code suivant envoie des points de données 50 % du temps :
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php" >}}
 
@@ -1101,13 +1103,13 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 {{< /programming-lang-wrapper >}}
 
-### Étiquetage des métriques
+### Étiquetage des métriques {#metric-tagging}
 
 Ajoutez des étiquettes à toute métrique que vous envoyez à DogStatsD avec le paramètre `tags`.
 
-#### Exemples de code
+#### Exemples de code {#code-examples-7}
 
-Le code suivant n'ajoute que les étiquettes `environment:dev` et `account:local` à la métrique `example_metric.increment` :
+Le code suivant n'ajoute que les balises `environment:dev` et `account:local` à la métrique `example_metric.increment` :
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -1153,7 +1155,7 @@ L'argument `tags` peut être une chaîne :
 $statsd->increment('example_metric.increment', 1.0, "environment:dev,account:local");
 ```
 
-ou un tableau :
+ou un tableau :
 
 ```php
 <?php
@@ -1170,11 +1172,11 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 
 {{< /programming-lang-wrapper >}}
 
-#### Étiquette d'hôte
+#### Balise hôte {#host-tag}
 
-L'étiquette d'hôte est attribuée automatiquement par l'Agent Datadog qui agrège les métriques. Les métriques soumises avec une étiquette d'hôte ne correspondant pas au nom d'hôte de l'Agent perdent la référence à l'hôte d'origine. L'étiquette d'hôte soumise remplace tout nom d'hôte collecté par ou configuré dans l'Agent.
+La balise hôte est attribuée automatiquement par l'Agent Datadog qui agrège les métriques. Les métriques soumises avec une balise hôte ne correspondant pas au nom d'hôte de l'Agent perdent la référence à l'hôte d'origine. La balise hôte soumise remplace tout nom d'hôte collecté par ou configuré dans l'Agent.
 
-## Lectures complémentaires
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

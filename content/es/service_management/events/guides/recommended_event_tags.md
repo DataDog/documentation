@@ -43,7 +43,7 @@ Puedes añadir los siguientes atributos básicos a tus eventos:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/getting_started/tagging/unified_service_tagging
-[2]: /es/service_management/events/explorer
+[2]: /es/events/explorer
 [3]: /es/api/latest/events/#post-an-event
 [4]: /es/getting_started/monitors/#notify-your-services-and-your-team-members
 [5]: /es/getting_started/tagging/assigning_tags

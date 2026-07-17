@@ -133,6 +133,8 @@ Set your Datadog site to {{< region-param key="dd_site" code="true" >}}. Default
 
 Additional flags, like `--service` and `--env`, can be used to set the service and environment tags. For a full list of options, run `datadog-ci aas instrument --help`.
 
+`datadog-ci aas instrument` only needs to be run once to set up instrumentation. You do not need to re-run it on every code deployment, only re-run it to change your Datadog configuration.
+
 #### Azure Cloud Shell
 
 To use the Datadog CLI in [Azure Cloud Shell][203], open a cloud shell, set your API key and site in the `DD_API_KEY` and `DD_SITE` environment variables, and use `npx` to run the CLI directly:
@@ -358,7 +360,7 @@ See the [Manual tab](?tab=manual#instrumentation) for descriptions of all enviro
 {{% tab "Manual" %}}
 
 1. **Configure environment variables**.
-   In Azure, add the following key-value pairs in **Settings** > **Environment Variables** > **App Settings**:
+   In Azure, add the following key-value pairs in {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Environment Variables{{< /ui >}} > {{< ui >}}App Settings{{< /ui >}}:
 
 `DD_API_KEY`
 : **Value**: Your Datadog API key.<br>
@@ -432,16 +434,16 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
 
 2. **Configure a sidecar container for Datadog**.
 
-   1. In Azure, navigate to **Deployment** > **Deployment Center**. Select the **Containers** tab.
-   1. Click **Add** and select **Custom container**.
-   1. In the **Edit container** form, provide the following:
-      - **Image source**: Other container registries
-      - **Image type**: Public
-      - **Registry server URL**: `index.docker.io`
-      - **Image and tag**: `datadog/serverless-init:latest`
-      - **Port**: 8126
-      - **Environment Variables**: Include all previously configured Datadog environment variables.
-   1. Select **Apply**.
+   1. In Azure, navigate to {{< ui >}}Deployment{{< /ui >}} > {{< ui >}}Deployment Center{{< /ui >}}. Select the {{< ui >}}Containers{{< /ui >}} tab.
+   1. Click {{< ui >}}Add{{< /ui >}} and select {{< ui >}}Custom container{{< /ui >}}.
+   1. In the {{< ui >}}Edit container{{< /ui >}} form, provide the following:
+      - {{< ui >}}Image source{{< /ui >}}: Other container registries
+      - {{< ui >}}Image type{{< /ui >}}: Public
+      - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
+      - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
+      - {{< ui >}}Port{{< /ui >}}: 8126
+      - {{< ui >}}Environment Variables{{< /ui >}}: Include all previously configured Datadog environment variables.
+   1. Select {{< ui >}}Apply{{< /ui >}}.
 
 3. **Restart your application**.
 
@@ -469,17 +471,27 @@ To instrument a [deployment slot][801] instead of the main web app, use one of t
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
 
-Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--env` to set a distinct environment tag for the slot:
+Using the [Datadog CLI][1] (v5.9.0+), add the `--slot` flag. Use `--service`, `--env`, and `--version` to set distinct unified service tagging values for the slot.
+
+To find the names of your deployment slots, run:
+```shell
+az webapp deployment slot list --query '[].name' -o tsv -g <resource-group> -n <web-app>
+```
 
 ```shell
-datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> --slot <slot-name> --env <slot-env>
+datadog-ci aas instrument -s <subscription-id> -g <resource-group-name> -n <app-service-name> \
+  --slot <slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
 
 Alternatively, provide the full slot resource ID with the `--resource-id` flag:
 
 ```shell
-datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> --env <slot-env>
+datadog-ci aas instrument --resource-id /subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Web/sites/<app-name>/slots/<slot-name> \
+  --service <service-name> --env <slot-env> --version <app-version>
 ```
+
+**Note**: When you pass `--env`, the CLI automatically marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
 
 [1]: https://github.com/DataDog/datadog-ci#how-to-install-the-cli
 
@@ -515,6 +527,8 @@ module "my_web_app_slot" {
 
 Run `terraform apply`, and follow any prompts.
 
+**Note**: When `datadog_env` is set on your main web app module, the module marks `DD_ENV` as a sticky setting, so your `env` tag persists across slot swaps.
+
 [1]: https://registry.terraform.io/modules/DataDog/web-app-datadog/azurerm/latest/submodules/linux-slot
 
 {{% /tab %}}
@@ -525,6 +539,9 @@ Update your template to target a deployment slot instead of the main web app:
 ```bicep
 param webAppName string
 param slotName string
+
+@description('Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it.')
+param existingStickyAppSettingNames array = []
 
 resource webApp 'Microsoft.Web/sites@2025-03-01' existing = {
   name: webAppName
@@ -543,6 +560,18 @@ resource slot 'Microsoft.Web/sites/slots@2025-03-01' = {
       ])
     }
   }
+}
+
+// Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+// full slotConfigNames list — existingStickyAppSettingNames must include any settings already
+// marked sticky or they will be de-stickied.
+resource stickySettings 'Microsoft.Web/sites/config@2025-03-01' = {
+  parent: webApp
+  name: 'slotConfigNames'
+  properties: {
+    appSettingNames: union(existingStickyAppSettingNames, ['DD_ENV'])
+  }
+  dependsOn: [slot]
 }
 
 @secure()
@@ -583,6 +612,10 @@ Redeploy your updated template:
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
 
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
+
 {{% /tab %}}
 {{% tab "ARM Template" %}}
 
@@ -602,6 +635,11 @@ Update your template to target a deployment slot instead of the main web app:
     // ...
     "datadogApiKey": {
       "type": "securestring"
+    },
+    "existingStickyAppSettingNames": {
+      "type": "array",
+      "defaultValue": [],
+      "metadata": { "description": "Names of app settings already marked slot-sticky on this web app. Pass [] for a new app with no existing sticky settings. This template does a full replace of slotConfigNames — omitting an existing sticky setting name will de-sticky it." }
     }
   },
   "variables": {
@@ -655,6 +693,20 @@ Update your template to target a deployment slot instead of the main web app:
           }
         }]
       }
+    },
+    // Marks DD_ENV as slot-sticky so your `env` tag persists across slot swaps. Replaces the
+    // full slotConfigNames list — existingStickyAppSettingNames must include any settings
+    // already marked sticky or they will be de-stickied.
+    "stickySettings": {
+      "type": "Microsoft.Web/sites/config",
+      "apiVersion": "2025-03-01",
+      "name": "[concat(parameters('webAppName'), '/slotConfigNames')]",
+      "properties": {
+        "appSettingNames": "[union(parameters('existingStickyAppSettingNames'), createArray('DD_ENV'))]"
+      },
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites/slots', parameters('webAppName'), parameters('slotName'))]"
+      ]
     }
   }
 }
@@ -665,6 +717,10 @@ Redeploy your updated template:
 ```bash
 az deployment group create --resource-group <RESOURCE GROUP> --template-file <TEMPLATE FILE>
 ```
+
+**Note**: Azure app settings swap between slots by default. The `slotConfigNames` resource above marks `DD_ENV` as sticky, so your `env` tag persists across slot swaps.
+
+The `slotConfigNames` resource does a full replace of the sticky-settings list. Pass any settings already marked sticky in `existingStickyAppSettingNames`, or `[]` for a new app. Any name omitted is de-stickied.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -701,11 +757,11 @@ To enable the Continuous Profiler, set the environment variable `DD_PROFILING_EN
 
 If you are not receiving traces or custom metric data as expected, enable agent debug logging by setting `DD_LOG_LEVEL` in the sidecar configuration options. For tracer debugging set `DD_TRACE_DEBUG` to true. This generates logs additional debug logs for the sidecar and SDK.
 
-Be sure to enable **App Service logs** to receive debugging logs.
+Be sure to enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][9].
+Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][9].
 
 ## Further reading
 

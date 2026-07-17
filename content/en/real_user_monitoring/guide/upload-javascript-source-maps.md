@@ -117,7 +117,7 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DD_API_KEY`.
 3. Run the following command once per service in your application:
 
    ```bash
@@ -131,9 +131,9 @@ The best way to upload source maps is to add an extra step in your CI pipeline a
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2" >}}
+{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2,uk1" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DD_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Run the following command once per service in your application:
    ```bash
@@ -161,7 +161,7 @@ Only source maps with the `.js.map` extension work to correctly unminify stack t
 
 <div class="alert alert-info">If you are serving the same JavaScript source files from different subdomains, upload the related source map once and make it work for multiple subdomains by using the absolute prefix path instead of the full URL. For example, specify <code>/static/js</code> instead of <code>https://hostname.com/static/js</code>.</div>
 
-See all uploaded symbols and manage your source maps on the [Explore RUM Debug Symbols][5] page.
+See all uploaded symbols and manage your source maps on the [{{< ui >}}Explore RUM Debug Symbols{{< /ui >}}][5] page.
 
 ### Link stack frames to your source code
 

@@ -43,18 +43,18 @@ Each recommendation includes an explanation and a suggested action.
 
 | Recommendation | Description | Typical example |
 | :---- | :---- | :---- |
-| **Exclude** | Stop indexing logs that add noise and make it harder to focus on critical signals. | Debug-level messages or verbose system output. |
-| **Sample** | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with very little variability (where fields like timestamps or IDs might be the only change) |
-| **Convert to metric** | Replace repeated logs with a metric to track counts or trends over time. | Logs that always show the same message or status. |
+| {{< ui >}}Exclude{{< /ui >}} | Stop indexing logs that add noise and make it harder to focus on critical signals. | Debug-level messages or verbose system output. |
+| {{< ui >}}Sample{{< /ui >}} | Lower the percentage of repetitive logs to reduce noise without losing visibility. | Logs with very little variability (where fields like timestamps or IDs might be the only change) |
+| {{< ui >}}Convert to metric{{< /ui >}} | Replace repeated logs with a metric to track counts or trends over time. | Logs that always show the same message or status. |
 
 ## Review and apply recommendations
 
-Navigate to the [**Log Optimizer**][4] page to view log patterns, sample messages, volume data, and plain-language explanations for each recommendation.
+Navigate to the [{{< ui >}}Log Optimizer{{< /ui >}}][4] page to view log patterns, sample messages, volume data, and plain-language explanations for each recommendation.
 
 To apply a recommendation:
 
 1. Click a recommendation to open the side panel.
-2. Click an action button (**Exclude Logs**, **Sample Logs**, or **Create Metric**).
+2. Click an action button ({{< ui >}}Exclude Logs{{< /ui >}}, {{< ui >}}Sample Logs{{< /ui >}}, or {{< ui >}}Create Metric{{< /ui >}}).
 
 The change takes effect immediately in your configuration. However, the Log Optimizer page does not refresh until the next daily analysis runs, so the recommendation may still appear temporarily.
 
@@ -64,9 +64,9 @@ Additionally, create a ticket to start a review with other teams in your organiz
 
 {{< img src="/logs/log_configuration/log_optimizer/log_recommendation_side_panel.png" alt="Log Optimizer recommendation side panel showing actions and pattern details" style="width:100%;" >}}
 
-When you review the **Log Optimizer** page, you notice a high-volume pattern from the `shopist-support` service. The message "Verifying ticket" appears over 1.3 million times each day across multiple hosts.
+When you review the {{< ui >}}Log Optimizer{{< /ui >}} page, you notice a high-volume pattern from the `shopist-support` service. The message "Verifying ticket" appears over 1.3 million times each day across multiple hosts.
 
-Datadog detects this as a repetitive pattern that doesn't change and recommends converting it to a metric and excluding the log from indexing. You review the recommendation, confirm that these logs are repetitive, and apply the exclusion directly from the **Recommendation** side panel.
+Datadog detects this as a repetitive pattern that doesn't change and recommends converting it to a metric and excluding the log from indexing. You review the recommendation, confirm that these logs are repetitive, and apply the exclusion directly from the {{< ui >}}Recommendation{{< /ui >}} side panel.
 
 Critical error logs from the same service remain visible, allowing you to focus on meaningful signals without losing observability. After the next daily analysis, your updated configuration would show a reduction in indexed volume.
 {{% /collapse-content %}}
@@ -75,8 +75,8 @@ Critical error logs from the same service remain visible, allowing you to focus 
 
 Applying a recommendation creates an exclusion filter or a metric from the log. To see that filter or metric definition, change it, or remove it, go to the corresponding page:
 
-* **Exclusion filters**: [Logs Indexes][5] page
-* **Logs-to-metrics conversions**: [Metrics Configuration][6] page
+* **Exclusion filters**: [{{< ui >}}Logs Indexes{{< /ui >}}][5] page
+* **Logs-to-metrics conversions**: [{{< ui >}}Metrics Configuration{{< /ui >}}][6] page
 
 You can edit or remove these configurations at any time from their respective pages.
 

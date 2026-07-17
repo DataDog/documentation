@@ -1,12 +1,14 @@
 ---
 title: Annotations
 description: Learn how to add, customize, and manage annotations on timeseries widgets in dashboards and notebooks to highlight important events.
-disable_toc: false
 ---
 
 ## Overview
 
-Annotations let you manually place vertical markers with descriptions on timeseries widgets. Adding annotations can be useful to visually call out key events like deploys, incidents, or spikes. Click any point in time and add a note.
+Annotations let you manually place markers with descriptions on timeseries widgets to highlight key events like deploys, incidents, or outages. Two annotation types are available:
+
+- **Point annotation**: Marks a single moment in time with a vertical line.
+- **Timerange annotation**: Highlights a span of time across the widget.
 
 {{< img src="dashboards/annotations-12-2025.png" alt="Timeseries showing a drop-off in availability with a vertical annotation line at the end of the drop-off and a comment that says 'Rollback completed — service availability restored.'" style="width:100%;" >}}
 
@@ -17,7 +19,8 @@ Annotations are available in both dashboards and notebooks. If you export a widg
 1. Create an annotation by:
     - Left-clicking anywhere on a timeseries widget and selecting {{< ui >}}Add annotation{{< /ui >}} from the context menu that appears, or
     - Clicking the x-axis on a timeseries graph
-3. Type your comment, and optionally click the timestamp field to manually adjust to the precise time you want to annotate.
+2. Type your comment. To add a hyperlink, select text in your comment and enter a URL.
+3. (Optional) Click the timestamp field to adjust the time. To annotate a span of time, set both a start and end time.
 4. (Optional) Change the color of the annotation from the dropdown in the bottom left.
 5. Click {{< ui >}}Save{{< /ui >}}.
 

@@ -13,7 +13,7 @@ Datadog Software Composition Analysis (SCA) scans your repositories for open-sou
 
 To get started:
 1. Open [Code Security settings][2].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+2. In {{< ui >}}Activate scanning for your repositories{{< /ui >}}, click {{< ui >}}Manage Repositories{{< /ui >}}.
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
@@ -24,9 +24,11 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 |------------|-------------------|------------------------------------------|
 | C#         | .NET              | `packages.lock.json`, `.csproj` files    |
 | C++        | Conan             | `conan.lock`                             |
+| Dart       | pub               | `pubspec.lock`                           |
 | Go         | mod               | `go.mod`                                 |
 | JVM        | Gradle            | `gradle.lockfile`                        |
 | JVM        | Maven             | `pom.xml`                                |
+| Node.js    | Bun               | `bun.lock`                               |
 | Node.js    | npm               | `package-lock.json`                      |
 | Node.js    | pnpm              | `pnpm-lock.yaml`                         |
 | Node.js    | yarn              | `yarn.lock`                              |
@@ -36,9 +38,27 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 | Python     | poetry            | `poetry.lock`                            |
 | Python     | UV                | `uv.lock`                                |
 | Ruby       | bundler           | `Gemfile.lock`                           |
-| Rust       | Cargo           | `cargo.lock`                               |
+| Rust       | Cargo             | `cargo.lock`                             |
+| Swift      | SwiftPM           | `Package.swift`, `Package.resolved`      |
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
+
+## Lockfile-less scanning
+
+Datadog SCA scans manifest files **only when no supported lockfile is detected**. When a lockfile is present, it takes precedence and the manifest is not scanned.
+
+| Language | Package Manager        | File             |
+|----------|------------------------|------------------|
+| Node.js  | npm, yarn, pnpm, Bun   | `package.json`   |
+| Python   | Poetry, PDM, UV, pip   | `pyproject.toml` |
+
+**Supported sections:**
+- `package.json`: `dependencies`, `devDependencies`, and `optionalDependencies`
+- `pyproject.toml`: PEP 621 `dependencies` and `optional-dependencies`, PEP 735 `dependency-groups`, and Poetry dependency sections
+
+<div class="alert alert-info">
+Because manifests can declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
+</div>
 
 ## Select where to run static SCA scans
 By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI pipelines; CI jobs are supported for `push` events.
@@ -50,7 +70,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
-To get started, navigate to the [**Code Security** page][2].
+To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
@@ -62,7 +82,7 @@ For these cases, scan using CI pipelines.
 Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
 <div class="alert alert-info">
-You must scan your default branch at least once before results appear in <b>Code Security</b>.
+You must scan your default branch at least once before results appear in {{< ui >}}Code Security{{< /ui >}}.
 </div>
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}
@@ -71,6 +91,8 @@ You must scan your default branch at least once before results appear in <b>Code
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/azure_devops" >}}Azure DevOps{{< /nextlink >}}
     {{< nextlink href="security/code_security/software_composition_analysis/setup_static/generic_ci_providers" >}}Generic CI Providers{{< /nextlink >}}
 {{< /whatsnext >}}
+
+If your Java project checks third-party JARs directly into the repository instead of using a Maven or Gradle manifest, see [Scan Java JAR directories][27].
 
 ## Select your source code management provider
 
@@ -156,7 +178,7 @@ This functionality is supported only when using the [Datadog SBOM Generator][1] 
 
 Reachability analysis is available exclusively for Java projects and applies only to a defined set of vetted security advisories. Vulnerabilities not included in this set are excluded from reachability evaluation.
 
-{{% collapse-content title="Supported advisories" level="h4" expanded=true id="id-for-anchoring" %}}
+{{% collapse-content title="Supported advisories" level="h4" expanded=true id="supported-advisories" %}}
 Static reachability analysis is available for the following advisories:
 - [GHSA-h7v4-7xg3-hxcc](https://osv.dev/vulnerability/GHSA-h7v4-7xg3-hxcc)
 - [GHSA-jfh8-c2jp-5v3q](https://osv.dev/vulnerability/GHSA-jfh8-c2jp-5v3q)
@@ -229,7 +251,7 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [12]: /getting_started/site/
 [13]: https://github.com/DataDog/datadog-static-analyzer-github-action
 [14]: https://github.com/DataDog/datadog-ci?tab=readme-ov-file#sbom
-[15]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
+[15]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [16]: https://docs.datadoghq.com/account_management/teams/
 [17]: https://app.datadoghq.com/source-code/repositories
 [18]: https://cyclonedx.org/docs/1.4/json/
@@ -237,10 +259,11 @@ Datadog stores findings in accordance with our [Data Retention Periods](https://
 [20]: https://cyclonedx.org/docs/1.6/json/
 [21]: https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-git-large-file-storage
 [22]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-sbom
-[23]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
-[24]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#migrating-to-v30
+[23]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
+[24]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#migrating-to-v30
 [25]: https://docs.datadoghq.com/data_security/data_retention_periods/
 [26]: https://docs.datadoghq.com/account_management/teams/
-[101]: https://docs.datadoghq.com/software_catalog/service_definitions/v3-0/
-[102]: https://docs.datadoghq.com/internal_developer_portal/software_catalog/entity_model/?tab=v30#codelocations
+[101]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
+[102]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/?tab=v30#codelocations
 [103]: https://docs.datadoghq.com/data_security/data_retention_periods/
+[27]: /security/code_security/troubleshooting/#scan-java-jar-directories

@@ -13,7 +13,13 @@ title: 수집된 데이터베이스 모니터링 데이터
 
 수집된 메트릭에 대한 전체 목록을 보려면 데이터베이스 제품에 대한 통합 **수집된 데이터** 설명서를 참조하세요. 
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 데이터베이스 모니터링 보기에 사용되는 메트릭은 주로 다음과 같습니다.

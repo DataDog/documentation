@@ -188,5 +188,5 @@ If you encounter issues while setting up App and API Protection for your Ruby ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/ruby/compatibility
+[1]: /security/application_security/setup/compatibility/ruby
 [2]: /security/application_security/setup/ruby/troubleshooting

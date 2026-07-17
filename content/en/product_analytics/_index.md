@@ -58,7 +58,7 @@ To set up your application with a coding assistant, see [Agentic onboarding][17]
 
 ### Track server-side events (API)
 
-After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments.
+After you set up client-side collection, you can use the [Product Analytics API][21] to send custom events from your server, such as completed checkouts or processed payments. For more information, see [Track Server-Side Events][22].
 
 <div class="alert alert-warning">Datadog bills server-side events separately. See the <a href="https://www.datadoghq.com/pricing/?product=product-analytics#products">pricing page</a> for details, and contact your Customer Success Manager with additional questions.</div>
 
@@ -66,9 +66,9 @@ After you set up client-side collection, you can use the [Product Analytics API]
 
 For each application you want to monitor user behavior for, enable Product Analytics:
 
-1. In Datadog, go to **Digital Experience** > **Real User Monitoring** > [**Manage Applications**][9]. In the list of applications under **Active**, select the application you want to monitor.
-2. Under PRODUCT SETTINGS, click **Product Analytics**.
-3. Click the **Enable** button.
+1. In Datadog, go to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > [{{< ui >}}Manage Applications{{< /ui >}}][9]. In the list of applications under {{< ui >}}Active{{< /ui >}}, select the application you want to monitor.
+2. Under {{< ui >}}PRODUCT SETTINGS{{< /ui >}}, click {{< ui >}}Product Analytics{{< /ui >}}.
+3. Click the {{< ui >}}Enable{{< /ui >}} button.
 
 {{< img src="product_analytics/enable-product-analytics.png" alt="Enable Product Analytics from the Application Management page.">}}
 
@@ -82,10 +82,10 @@ The Datadog SDK automatically collects three levels of client-side user data: Se
 : A view represents each page or screen a user visits within a session.
 
 **Actions**
-: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by **Actions**.
+: An action is something a user does on a page, such as a click, tap, or scroll. Actions are automatically collected by the RUM SDK. When configuring features like [Funnels][4] and [Segments][6], you can select specific Actions as steps or filters. To see which Actions are available, open the [RUM Explorer][20] and filter by {{< ui >}}Actions{{< /ui >}}.
 
 **Server-side events**
-: A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select **Server Events** to scope your analysis to server-side data.
+: A server-side event is a custom event sent through the [Product Analytics API][21], such as a completed checkout or processed payment. In the event picker, select {{< ui >}}Server Events{{< /ui >}} to scope your analysis to server-side data.
 
 ## Navigate the Product Analytics UI
 Each Product Analytics feature provides context about your users' journeys.
@@ -177,3 +177,4 @@ Use the following features to inform your product change decisions, such as chan
 [19]: /real_user_monitoring/guide/understanding-the-rum-event-hierarchy
 [20]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aaction
 [21]: /api/latest/product-analytics/#send-server-side-events
+[22]: /product_analytics/data_collected/server_side_events/

@@ -21,7 +21,7 @@ For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with `schema-version: v1.0` or `schema-version: v1.1`, followed by a `sast` key containing the analysis configuration. The full structure is as follows:
+The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, or `v1.2`), followed by a `sast` key containing the analysis configuration, structured as shown below:
 
 ```yaml
 schema-version: v1.0
@@ -253,7 +253,11 @@ sast:
 
 #### Ignore for a specific instance
 
-To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code to ignore. This prevents that line from ever producing a violation. For example, in the following Python code snippet, the line `foo = 1` would be ignored by Static Code Analysis scans.
+To ignore a specific instance of a violation, comment `no-dd-sa` above the line of code. Violations suppressed with `no-dd-sa` are shown as **suppressed**, rather than omitted entirely, so you can search and audit them.
+
+On the [Repositories page][1], suppressed violations appear with `is_suppressed: true`. In the [Vulnerabilities explorer][2], they appear with `status: muted` and `workflow.mute.reason: muted_in_code`.
+
+For example, in the following Python code snippet, the line `foo = 1` would be suppressed in Static Code Analysis scans.
 
 ```python
 #no-dd-sa
@@ -261,11 +265,11 @@ foo = 1
 bar = 2
 ```
 
-You can also use `no-dd-sa` to only ignore a particular rule rather than ignoring all rules. To do so, specify the name of the rule you wish to ignore in place of `<rule-name>` using this template:
+You can also use `no-dd-sa` to only suppress a particular rule, rather than suppressing all rules. To do so, specify the name of the rule you wish to suppress in place of `<rule-name>` using this template:
 
 `no-dd-sa:<rule-name>`
 
-For example, in the following JavaScript code snippet, the line `my_foo = 1` is analyzed by all rules except for the `javascript-code-style/assignment-name` rule.
+For example, in the following JavaScript code snippet, the line `my_foo = 1` is suppressed only for the `javascript-code-style/assignment-name` rule, but all other rules still analyze it.
 
 ```javascript
 // no-dd-sa:javascript-code-style/assignment-name
@@ -273,6 +277,8 @@ my_foo = 1
 myBar = 2
 ```
 
+[1]: https://app.datadoghq.com/security/code-security/repositories
+[2]: https://app.datadoghq.com/security/code-security/sca
 [6]: /security/code_security/static_analysis/static_analysis_rules
 [25]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
 [26]: /security/code_security/guides/configuration/

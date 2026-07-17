@@ -114,6 +114,7 @@ If you pay by check, ACH, or wire, invoices are emailed to the billing email add
     {{< nextlink href="account_management/billing/google_cloud/" >}}Google Cloud integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/vsphere/" >}}vSphere integration{{< /nextlink >}}
     {{< nextlink href="account_management/billing/usage_attribution/" >}}Usage attribution{{< /nextlink >}}
+    {{< nextlink href="account_management/billing/ai_credits/" >}}AI Credits{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

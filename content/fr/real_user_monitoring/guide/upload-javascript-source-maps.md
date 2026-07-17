@@ -1,4 +1,6 @@
 ---
+description: Téléchargez les cartes source JavaScript pour améliorer le suivi des
+  erreurs avec des traces de pile lisibles et un meilleur débogage pour le code minifié.
 further_reading:
 - link: /real_user_monitoring/error_tracking
   tag: Documentation
@@ -6,28 +8,26 @@ further_reading:
 - link: /real_user_monitoring/error_tracking/explorer
   tag: Documentation
   text: Visualiser vos données de suivi des erreurs dans l'Explorateur
-
+- link: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
+  tag: Code source
+  text: Référence de commande des cartes sources
+- link: https://learn.datadoghq.com/courses/tracking-errors-rum-javascript
+  tag: Centre d'apprentissage
+  text: Suivi des erreurs avec RUM pour les applications Web JavaScript
 title: Importer des source maps JavaScript
 ---
+## Aperçu {#overview}
 
-## Présentation
+Si votre code source JavaScript côté client est minifié, téléchargez vos cartes sources sur Datadog pour déobfusquer vos différentes traces de pile. Pour chaque erreur donnée, vous pouvez accéder au chemin du fichier, au numéro de ligne et à l'extrait de code pour chaque cadre de la trace de pile associée. Datadog peut également lier les cadres de pile à votre code source dans votre dépôt.
 
-Si votre code source JavaScript frontend est minifié, importez vos source maps dans Datadog pour désobfusquer vos différentes stack traces. Pour une erreur donnée, vous avez accès au chemin du fichier, au numéro de ligne ainsi qu'à un extrait de code pour chaque frame de la stack trace associée. Datadog peut également associer des stack frames à votre code source dans votre référentiel. 
+<div class="alert alert-info"><ul><li>Seules les erreurs collectées par <a href="/error_tracking/">Suivi des Erreurs</a>, <a href="/real_user_monitoring/">Surveillance des Utilisateurs Réels (RUM)</a>, et les journaux de <a href="/logs/log_collection/javascript/">Collecte des Journaux de Navigateur</a> peuvent être déminifiées.</li><li>Pour automatiser les téléchargements de cartes source dans le cadre de votre processus de construction, consultez <a href="/real_user_monitoring/application_monitoring/browser/build_plugins/source_maps">Plugins de Construction : Cartes Source</a>.</li></ul></div>
 
-<div class="alert alert-info">Seules les erreurs recueillies par la solution <a href="/real_user_monitoring/">Real User Monitoring (RUM)</a> et les logs de <a href="/logs/log_collection/javascript/">la collecte de logs à partir des navigateurs
-</a> peuvent être déminifiés.</div>
+## Instrumentez votre code {#instrument-your-code}
 
-## Instrumenter votre code
-
-Configurez votre bundler JavaScript de façon à ce qu'il génère des source maps lorsque vous minifiez votre code source. Ces source maps inclueront directement le code source associé dans l'attribut `sourcesContent`. 
+Configurez votre JavaScript bundler de manière à ce que lors de la minification de votre code source, il génère des cartes sources qui incluent directement le code source associé dans l'attribut `sourcesContent`.
 
 <div class="alert alert-danger">
-{{< site-region region="us,us3,us5,eu" >}}
-Vérifiez que la taille de chaque source map, à laquelle sʼajoute la taille du fichier minifié associé, ne dépasse pas la limite de **300** Mo.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Vérifiez que la taille de chaque source map, à laquelle sʼajoute la taille du fichier minifié associé, ne dépasse pas la limite de **50** Mo.
-{{< /site-region >}}
+Assurez-vous que la taille de chaque carte source augmentée de la taille du fichier minifié associé ne dépasse pas la limite de <b>500 MB</b>.
 </div>
 
 Consultez les configurations suivantes qui reposent sur des bundlers JavaScript populaires.
@@ -37,7 +37,7 @@ Consultez les configurations suivantes qui reposent sur des bundlers JavaScript 
 
 Vous pouvez générer des source maps à l'aide du plug-in webpack intégré [SourceMapDevToolPlugin][1].
 
-Consultez l'exemple de configuration ci-dessous dans votre fichier `webpack.config.js` :
+Voir la configuration d'exemple dans votre fichier `webpack.config.js` :
 
 ```javascript
 // ...
@@ -61,18 +61,39 @@ module.exports = {
 };
 ```
 
-**Remarque** : si vous utilisez le langage TypeScript, définissez `compilerOptions.sourceMap` sur `true` dans votre fichier `tsconfig.json`.
+**Remarque** : Si vous utilisez TypeScript, définissez `compilerOptions.sourceMap` sur `true` dans votre fichier `tsconfig.json`.
 
 [1]: https://webpack.js.org/plugins/source-map-dev-tool-plugin/
 {{% /tab %}}
 {{% tab "ParcelJS" %}}
 
-Parcel génère des source maps par défaut lorsque vous exécutez la commande build `parcel build <fichier d'entrée>`
+Parcel génère des cartes sources par défaut lorsque vous exécutez la commande de construction : `parcel build <entry file>`.
+
+{{% /tab %}}
+{{% tab "Vite" %}}
+
+Vous pouvez générer des cartes sources en configurant l'option `build.sourcemap` dans votre fichier `vite.config.js`.
+
+Voir la configuration d'exemple :
+
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  build: {
+    sourcemap: true, // generates .js.map files
+    minify: 'terser', // or 'esbuild'
+  }
+})
+```
+
+**Remarque** : Si vous utilisez TypeScript, assurez-vous que `compilerOptions.sourceMap` est défini sur `true` dans votre fichier `tsconfig.json`.
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Une fois le build de votre application créé, les bundlers génèrent un répertoire (généralement intitulé `dist`) contenant les fichiers JavaScript minifiés avec leurs source maps correspondantes.
+Après avoir construit votre application, les bundlers génèrent un répertoire (généralement nommé `dist`) avec des fichiers JavaScript minifiés co-localisés avec leurs cartes sources correspondantes.
 
 Vous trouverez un exemple ci-dessous :
 
@@ -86,44 +107,39 @@ Vous trouverez un exemple ci-dessous :
 ```
 
 <div class="alert alert-danger">
-{{< site-region region="us,us3,us5,eu" >}}
-Si le total de la taille du fichier correspondant à <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <b>la limite de **300** Mo</b>, réduisez-le en configurant votre bundler de façon à scinder le code source en plus petites parties. Pour en savoir plus, consultez <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
-{{< /site-region >}}
-{{< site-region region="ap1,gov" >}}
-Si le total de la taille du fichier correspondant à <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse <b>la limite de **50** Mo</b>, réduisez-le en configurant votre bundler de façon à scinder le code source en plus petites parties. Pour en savoir plus, consultez <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting with WebpackJS</a>.
-{{< /site-region >}}
+Si la taille totale des fichiers pour <code>javascript.364758.min.js</code> et <code>javascript.364758.js.map</code> dépasse la limite de <b>500 MB</b>, réduisez-la en configurant votre bundler pour diviser le code source en plusieurs morceaux plus petits. Pour plus d'informations, voir <a href="https://webpack.js.org/guides/code-splitting/">Code Splitting avec WebpackJS</a>.
 </div>
 
-## Importer vos source maps
+## Téléchargez vos cartes sources {#upload-your-source-maps}
 
-Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémentaire dans votre pipeline de CI et d'exécuter la commande dédiée depuis l'[interface de ligne de commande Datadog][1]. Cette commande analyse le répertoire `dist` et ses sous-répertoires pour importer automatiquement les source maps avec leurs fichiers minifiés associés.
+La meilleure façon de télécharger des cartes sources est d'ajouter une étape supplémentaire dans votre pipeline CI et d'exécuter la commande dédiée depuis le [Datadog CLI][1]. Il scanne le répertoire `dist` et les sous-répertoires pour télécharger automatiquement les cartes sources avec les fichiers minifiés pertinents.
 
 {{< site-region region="us" >}}
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
-2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
-3. Exécutez la commande suivante une fois par service dans votre application RUM :
+2. [Créez une clé API Datadog dédiée][1] et exportez-la en tant que variable d'environnement nommée `DATADOG_API_KEY`.
+3. Exécutez la commande suivante une fois par service dans votre application :
 
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 {{< /site-region >}}
 
-{{< site-region region="eu,us3,us5,gov,ap1" >}}
+{{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2" >}}
 1. Ajoutez `@datadog/datadog-ci` à votre fichier `package.json` (assurez-vous d'utiliser la dernière version).
-2. [Créez une clé d'API Datadog dédiée][1] et exportez-la en tant que variable d'environnement `DATADOG_API_KEY`.
-3. Configurez le CLI de façon à importer des fichiers sur le site {{<region-param key="dd_site_name">}} en exportant deux variables dʼenvironnement : `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} et `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
-4. Exécutez la commande suivante une fois par service dans votre application RUM :
+2. [Créez une clé API Datadog dédiée][1] et exportez-la en tant que variable d'environnement nommée `DATADOG_API_KEY`.
+3. Configurez l'outil CLI pour téléverser des fichiers vers le {{<region-param key="dd_site_name">}} site en exportant deux variables d'environnement : `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} et `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
+4. Exécutez la commande suivante une fois par service dans votre application :
    ```bash
    datadog-ci sourcemaps upload /path/to/dist \
-     --service=my-service \
-     --release-version=v35.2395005 \
-     --minified-path-prefix=https://hostname.com/static/js
+     --service my-service \
+     --release-version v35.2395005 \
+     --minified-path-prefix https://hostname.com/static/js
    ```
 
 
@@ -132,41 +148,44 @@ Le meilleur moyen d'importer des source maps est d'ajouter une étape supplémen
 
 Pour minimiser l'impact sur les performances de votre intégration continue, l'interface de ligne de commande est optimisée pour permettre l'importation d'autant de source maps que nécessaires en peu de temps (généralement quelques secondes).
 
-**Remarque** : la réimportation d'une source map ne remplace pas lʼancienne si la version n'a pas changé.
+**Remarque** : Le téléchargement d'une carte source ne remplace pas l'existante si la version n'a pas changé.
 
-Les paramètres `--service` et `--release-version` doivent correspondre aux tags `service` et `version` de vos événements RUM et logs de browser. Pour en savoir plus sur la configuration de ces tags, consultez la [documentation relative à l'initialisation du SDK Browser RUM][2] ou la [documentation relative à la collecte de logs à partir des navigateurs][3].
+Les paramètres `--service` et `--release-version` doivent correspondre aux balises `service` et `version` sur vos événements de suivi d'erreurs, événements RUM et journaux de navigateur. Pour plus d'informations sur la façon de configurer ces balises, consultez la [documentation d'initialisation du SDK de navigateur][2] ou la [documentation de collecte des journaux de navigateur][3].
 
-<div class="alert alert-info">Si vous avez défini plusieurs services dans votre application RUM, exécutez la commande CI autant de fois qu'il y a de services, même si vous n'avez qu'un seul ensemble de sourcemaps pour l'ensemble de l'application RUM.</div>
+<div class="alert alert-info">Si vous avez défini plusieurs services dans votre application, exécutez la commande CI autant de fois qu'il y a de services, même si vous avez un ensemble de cartes sources pour l'ensemble de l'application.</div>
 
-Lorsque vous exécutez la commande sur l'exemple de répertoire `dist`, Datadog s'attend à ce que votre serveur ou CDN fournissent les fichiers JavaScript sur `https://hostname.com/static/js/javascript.364758.min.js` et `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
+En exécutant la commande contre le répertoire exemple `dist`, Datadog s'attend à ce que votre serveur ou CDN livre les fichiers JavaScript à `https://hostname.com/static/js/javascript.364758.min.js` et `https://hostname.com/static/js/subdirectory/javascript.464388.min.js`.
 
-Seules les source maps avec l'extension `.js.map` peuvent déminifier des stack traces. Les sources maps ayant une autre extension (comme `.mjs.map`) sont acceptées, mais ne peuvent pas déminifier de stack traces.
+Seules les cartes sources avec l'extension `.js.map` fonctionnent pour déminifier correctement les traces de pile. Les cartes sources avec d'autres extensions telles que `.mjs.map` sont acceptées mais ne déminifient pas les traces de pile.
 
-<div class="alert alert-info">Si vous distribuez les mêmes fichiers source JavaScript depuis différents sous-domaines, importez la source map associée une seule fois, et utilisez-la pour les différents sous-domaines en spécifiant le chemin du préfixe absolu plutôt que l'URL complète. Par exemple, indiquez <code>/static/js</code> plutôt que <code>https://hostname.com/static/js</code>).</div>
+<div class="alert alert-info">Si vous servez les mêmes fichiers sources JavaScript à partir de différents sous-domaines, téléchargez la carte source associée une fois et faites-la fonctionner pour plusieurs sous-domaines en utilisant le chemin d'accès absolu au lieu de l'URL complète. Par exemple, spécifiez <code>/static/js</code> au lieu de <code>https://hostname.com/static/js</code>.</div>
 
-### Associer des stack frames à votre code source
+Voir tous les symboles téléchargés et gérer vos cartes sources sur la page [Explorer les symboles de débogage RUM][5].
 
-Si vous exécutez la commande `datadog-ci sourcemaps upload` dans un répertoire Git fonctionnel, Datadog recueille des métadonnées sur ce répertoire. La commande `datadog-ci` recueille l'URL du répertoire, le hash du commit actuel ainsi que la liste des chemins de fichier du répertoire qui sont associés à vos source maps. Pour en savoir plus sur la collecte de métadonnées Git, consultez la [documentation datadog-ci][3].
+### Liez les cadres de pile à votre code source {#link-stack-frames-to-your-source-code}
+
+Si vous exécutez `datadog-ci sourcemaps upload` dans un répertoire de travail Git, Datadog collecte les métadonnées du dépôt. La commande `datadog-ci` collecte l'URL du dépôt, le hachage du commit actuel et la liste des chemins de fichiers dans le dépôt qui se rapportent à vos cartes sources. Pour plus de détails sur la collecte des métadonnées Git, consultez la [documentation datadog-ci][4].
 
 Datadog affiche des liens vers votre code source dans des stack frames non minifiés.
 
-## Dépanner les erreurs plus facilement
+## Résolvez les erreurs facilement {#troubleshoot-errors-with-ease}
 
-Sans chemin de fichier ni numéro de ligne, une stack trace minifiée ne permet pas de résoudre les problèmes concernant votre codebase. De plus, l'extrait de code est également minifié (il s'agit donc d'une longue ligne de code transformé), ce qui complexifie encore plus le processus de dépannage.
+Sans accès au chemin de fichier et au numéro de ligne, une trace de pile minifiée n'est pas utile pour le dépannage de votre base de code. De plus, l'extrait de code est minifié (ce qui signifie qu'il y a une longue ligne de code transformé), rendant le processus de dépannage plus difficile.
 
 L'exemple suivant représente une stack trace minifiée :
 
-{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Stack trace minifiée pour le suivi des erreurs" >}}
+{{< img src="real_user_monitoring/error_tracking/minified_stacktrace.png" alt="Suivi des erreurs : trace de pile minifiée" >}}
 
-À l'inverse, une stack trace non minifiée fournit tout le contexte dont vous avez besoin pour corriger rapidement et aisément votre problème. Pour les stack frames associés à votre code source, Datadog génère également un lien direct vers votre référentiel :
+En revanche, une trace de pile non minifiée vous fournit tout le contexte nécessaire pour un dépannage rapide et sans heurts. Pour les cadres de pile qui se rapportent à votre code source, Datadog génère également un lien direct vers votre dépôt :
 
-{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Stack trace non minifiée pour le suivi des erreurs" >}}
+{{< img src="real_user_monitoring/error_tracking/unminified_stacktrace.png" alt="Suivi des erreurs : trace de pile non minifiée" >}}
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps
-[2]: https://docs.datadoghq.com/fr/real_user_monitoring/browser/#initialization-parameters
+[1]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps
+[2]: https://docs.datadoghq.com/fr/real_user_monitoring/application_monitoring/browser/setup/#initialization-parameters
 [3]: https://docs.datadoghq.com/fr/logs/log_collection/javascript/#initialization-parameters
-[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps#link-errors-with-your-source-code
+[4]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/sourcemaps#link-errors-with-your-source-code
+[5]: https://app.datadoghq.com/source-code/setup/rum

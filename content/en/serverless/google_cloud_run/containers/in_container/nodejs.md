@@ -147,7 +147,7 @@ gcloud pubsub subscriptions update \
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" in_container="true" %}}
 
 ## Further reading
 

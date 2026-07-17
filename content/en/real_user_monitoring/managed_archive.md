@@ -33,11 +33,11 @@ Common use cases include:
 
 ## How it works
 
-After you enable Managed Archive, all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated **Managed Archive UI**, separate from the [RUM Explorer][2].
+After you enable Managed Archive, all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated {{< ui >}}Managed Archive{{< /ui >}} UI, separate from the [RUM Explorer][2].
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_ui.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
-All stored sessions, including sessions retained by retention filters or already recovered, are shown in the Managed Archive UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
+All stored sessions, including sessions retained by retention filters or already recovered, are shown in the {{< ui >}}Managed Archive{{< /ui >}} UI. A set of session tags and attributes are available to help you navigate and identify sessions to recover:
 
 | Attribute | Description |
 |---|---|
@@ -51,7 +51,7 @@ All stored sessions, including sessions retained by retention filters or already
 | `service` | Service name |
 | `version` | Application version |
 
-Once a session is recovered, the corresponding row in the Managed Archive UI is visually marked and the session becomes available in the RUM Explorer.
+Once a session is recovered, the corresponding row in the {{< ui >}}Managed Archive{{< /ui >}} UI is visually marked and the session becomes available in the RUM Explorer.
 
 ## Permissions
 
@@ -69,10 +69,10 @@ Access to Managed Archive and Recovery is controlled through role-based access c
 
 To enable session storage for an application:
 
-1. In Datadog, navigate to **Digital Experience > Real User Monitoring > Manage Applications**.
+1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}.
 2. Select your application.
-3. Go to **Routing > Managed Archive**.
-4. Toggle **Enable Managed Archive** on and select the storage period.
+3. Go to {{< ui >}}Routing{{< /ui >}} > {{< ui >}}Managed Archive{{< /ui >}}.
+4. Toggle {{< ui >}}Enable Managed Archive{{< /ui >}} on and select the storage period.
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_setup.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
 
@@ -82,7 +82,7 @@ Configuration is done at the application level, which means you can apply differ
 
 ## Recover sessions
 
-In the Managed Archive UI, click **Recover** on the row of the session you want to recover.
+In the {{< ui >}}Managed Archive{{< /ui >}} UI, click {{< ui >}}Recover{{< /ui >}} on the row of the session you want to recover.
 
 Recovered sessions are available for 30 days with all their events and attributes. Recovered sessions have the same investigation capabilities as sessions retained by a retention filter
 

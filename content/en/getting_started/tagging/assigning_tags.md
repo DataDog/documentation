@@ -276,7 +276,7 @@ The span metadata above is invalid since the value of `key` cannot reference a s
 {{< tabs >}}
 {{% tab "Host Map" %}}
 
-Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply.
+Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (host) to show the host overlay on the bottom of the page. Then, under the {{< ui >}}User{{< /ui >}} section, click the {{< ui >}}Add Tags{{< /ui >}} button. Enter the tags as a comma-separated list, then click {{< ui >}}Save Tags{{< /ui >}}. Changes made to host tags in the UI may take up to five minutes to apply.
 
 {{< img src="tagging/assigning_tags/host_add_tags.png" alt="Host map with an host details opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -285,7 +285,7 @@ Assign host tags in the UI using the [Host Map page][1]. Click on any hexagon (h
 {{% /tab %}}
 {{% tab "Infrastructure List" %}}
 
-Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the *User* section, click the **Add Tags** button. Enter the tags as a comma-separated list, then click **Save Tags**. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
+Assign host tags in the UI using the [Infrastructure List page][1]. Click on any host to show the host overlay on the right of the page. Then, under the {{< ui >}}User{{< /ui >}} section, click the {{< ui >}}Add Tags{{< /ui >}} button. Enter the tags as a comma-separated list, then click {{< ui >}}Save Tags{{< /ui >}}. Changes made to host tags in the UI may take up to five minutes to apply. After you add tags, ensure they are visible in the UI before attempting to add more tags.
 
 {{< img src="tagging/assigning_tags/infrastructure_add_tags.png" alt="Infrastructure List with an Infrastructure details panel opened highlighting Add Tags button" style="width:80%;">}}
 
@@ -294,9 +294,9 @@ Assign host tags in the UI using the [Infrastructure List page][1]. Click on any
 {{% /tab %}}
 {{% tab "Monitors" %}}
 
-From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the **Edit Tags** button. Enter a tag or select one used previously. Then click **Add Tag `tag:name`** or **Apply Changes**. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
+From the [Manage Monitors][1] page, select the checkbox next to each monitor to add tags (select one or multiple monitors). Click the {{< ui >}}Edit Tags{{< /ui >}} button. Enter a tag or select one used previously. Then click {{< ui >}}Add Tag `tag:name`{{< /ui >}} or {{< ui >}}Apply Changes{{< /ui >}}. If tags were added previously, multiple tags can be assigned at once using the tag checkboxes. For more information, see the [Manage Monitors documentation][2].
 
-When creating a monitor, assign monitor tags under step 4 *Say what's happening* or *Notify your Team*:
+When creating a monitor, assign monitor tags under step 4 {{< ui >}}Say what's happening{{< /ui >}} or {{< ui >}}Notify your Team{{< /ui >}}:
 
 {{< img src="monitors/notifications/notifications_add_required_tags.png" alt="View of policy tag configuration. Underneath 'Policy tags' are three example tags, cost_center, product_id, and env, next to a 'Select value' dropdown." style="width:80%;" >}}
 
@@ -325,7 +325,7 @@ The [AWS][1] integration tile allows you to assign additional tags to all metric
 {{% /tab %}}
 {{% tab "Service Level Objectives" %}}
 
-When creating an SLO, assign tags under step 3, **Add name and tags**:
+When creating an SLO, assign tags under step 3, {{< ui >}}Add name and tags{{< /ui >}}:
 
 {{< img src="tagging/assigning_tags/slo_individual_tags.png" alt="Create SLO Tags" style="width:80%;">}}
 

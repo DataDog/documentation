@@ -27,7 +27,7 @@ Datadog [Cloud Network Monitoring][1] (CNM) provides visibility into your networ
 
 ## Monitor creation
 
-To create a CNM monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **Cloud Network**][2]. 
+To create a CNM monitor in Datadog, use the main navigation: [{{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Cloud Network{{< /ui >}}][2]. 
 
 ### Define the search query
 
@@ -100,7 +100,7 @@ The following tables list the different CNM metrics you can create monitors on.
 Configure monitors to trigger if the query value crosses a threshold and customize advanced alert options for recovery thresholds and evaluations delays. For more information, see [Configure Monitors][5].
 
 ### Notifications
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][6] page.
 
 ## Common monitors
 You can start creating monitors on CNM with the following common monitors. These provide a good starting point to track your network and get alerted if your network is experiencing unusual traffic and potentially experiencing unexpected network behavior. 

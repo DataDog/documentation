@@ -1,5 +1,6 @@
 ---
 title: Custom Metrics
+description: "Learn what custom metrics are, how they're identified by name and tags, and how they're billed in Datadog."
 aliases:
   - /guides/metrics/
   - /metrictypes/
@@ -19,6 +20,9 @@ further_reading:
 - link: "/account_management/billing/custom_metrics/?tab=countrate"
   tag: "Documentation"
   text: "Custom Metrics Billing"
+- link: "/account_management/billing/metric_name_pricing/"
+  tag: "Documentation"
+  text: "Metric Name Pricing for Custom Metrics"
 - link: "/metrics/guide/custom_metrics_governance/"
   tag: "Guide"
   text: "Best Practice for Custom Metric Governance"

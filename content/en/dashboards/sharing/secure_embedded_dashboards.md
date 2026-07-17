@@ -254,6 +254,30 @@ HTML template:
 ></iframe>
 ```
 
+## Long-running displays
+
+For dashboards that stay open for extended periods without user interaction, such as office TV displays, kiosks, or NOC walls, your embedding page must periodically replace the iFrame's URL with a freshly signed one. The original signed URL is single-use and cannot be reused after the initial page load.
+
+Embedded dashboards refresh themselves after extended periods of inactivity to keep their state current. Active user input resets this internal timer. Unattended displays must instead supply a fresh signed URL on a regular schedule.
+
+Regenerate the signed URL and update the iFrame `src` **every 30 minutes**.
+
+```html
+<iframe id="dashboard" src=""></iframe>
+<script>
+  const iframe = document.getElementById("dashboard");
+
+  async function refreshEmbed() {
+    const res = await fetch("/api/embed-url");
+    const { iframeUrl } = await res.json();
+    iframe.src = iframeUrl;
+  }
+
+  refreshEmbed();
+  setInterval(refreshEmbed, 30 * 60 * 1000);
+</script>
+```
+
 ## Multi-tenancy
 
 To serve multiple tenants from a single source dashboard, create one secure embed per tenant. Use `selectable_template_vars` to scope each tenant's default template variable values to their own resources. Each tenant gets a unique credential and base URL, which your backend stores and retrieves when generating iFrame URLs.

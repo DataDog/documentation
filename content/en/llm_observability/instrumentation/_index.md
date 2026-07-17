@@ -1,5 +1,6 @@
 ---
-title: LLM Observability Instrumentation
+title: Agent Observability Instrumentation
+description: Overview of instrumentation options for Agent Observability, including SDK-based and API-based approaches for Python, Node.js, and Java.
 further_reading:
     - link: '/llm_observability/auto_instrumentation'
       tag: 'Auto instrumentation'
@@ -9,27 +10,27 @@ further_reading:
       text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
     - link: "https://learn.datadoghq.com/courses/llm-obs-getting-started"
       tag: "Learning Center"
-      text: "Getting Started with LLM Observability"
+      text: "Getting Started with Agent Observability"
 
 ---
 
 
-To get started with Datadog LLM Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
+To get started with Agent Observability, instrument your LLM application or agent(s) by choosing from several approaches based on your programming language and setup. Datadog provides comprehensive instrumentation options designed to capture detailed traces, metrics, and evaluations from your LLM applications and agents with minimal code changes.
 
 ## Instrumentation Options
-You can instrument your application with the Python, Node.js, or Java SDKs, or by using the LLM Observability API.
+You can instrument your application with the Python, Node.js, or Java SDKs, or by using the Agent Observability API.
 
 ### SDK-based instrumentation (Recommended)
-Datadog provides native SDKs that offer the most comprehensive LLM observability features:
+Datadog provides native SDKs that offer the most comprehensive Agent Observability features:
 | Language | SDK Available | Auto-Instrumentation | Custom Instrumentation |
 | -------- | ------------- | -------------------- | ---------------------- |
 | Python | Python 3.7+ | {{< X >}} | {{< X >}} |
 | Node.js | Node.js 16+ | {{< X >}} | {{< X >}} |
-| Java | Java 8+ | | {{< X >}} |
+| Java | Java 8+ | {{< X >}} | {{< X >}} |
 
 
 To instrument an LLM application with the SDK:
-1. Install the LLM Observability SDK
+1. Install the Agent Observability SDK
 2. Configure the SDK by providing [the required environment variables][6] in your application startup command, or programmatically [in-code][7]. Ensure you have configured your Datadog API key, Datadog site, and machine learning (ML) app name.
 
 #### Auto-instrumentation

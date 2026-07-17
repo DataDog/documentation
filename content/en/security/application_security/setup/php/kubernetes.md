@@ -110,7 +110,7 @@ Apply your updated deployment:
 kubectl apply -f your-deployment.yaml
 ```
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -120,5 +120,5 @@ If you encounter issues while setting up App and API Protection for your PHP app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/php/compatibility
+[1]: /security/application_security/setup/compatibility/php
 [2]: /security/application_security/setup/php/troubleshooting

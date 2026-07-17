@@ -64,7 +64,7 @@ Después de hacer los cambios para eliminar las etiquetas sin límites, envía u
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/account_management/billing/custom_metrics/?tab=countrate#effect-of-adding-tags
-[2]: https://docs.datadoghq.com/es/service_management/events/
+[2]: https://docs.datadoghq.com/es/events/
 [3]: https://docs.datadoghq.com/es/monitors/types/event/
 [4]: https://docs.datadoghq.com/es/metrics/guide/custom_metrics_governance/
 [5]: https://docs.datadoghq.com/es/help/

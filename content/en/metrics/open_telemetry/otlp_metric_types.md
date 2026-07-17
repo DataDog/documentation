@@ -1,5 +1,6 @@
 ---
 title: OTLP Metrics Types
+description: "Understand how OTLP metric types (sums, gauges, histograms, summaries) map to Datadog metric types."
 further_reading:
     - link: 'metrics/distributions'
       tag: 'Documentation'

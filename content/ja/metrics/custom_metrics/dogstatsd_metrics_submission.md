@@ -8,35 +8,38 @@ aliases:
 description: アプリケーションから直接カスタムメトリクスを送信
 further_reading:
 - link: /extend/dogstatsd/
-  tag: Documentation
+  tag: よくあるご質問
   text: DogStatsD 入門
 - link: /metrics/types/
-  tag: Documentation
+  tag: よくあるご質問
   text: Datadog メトリクスタイプ
+- link: https://learn.datadoghq.com/courses/create-custom-metrics-dogstatsd
+  tag: ラーニングセンター
+  text: DogStatsD を使用して Custom Metrics を作成する
 title: 'メトリクスの送信: DogStatsD'
 ---
-StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は、Datadog の主要な 3 種類のデータタイプ、すなわちメトリクス、イベント、サービスチェックをすべて受け付けます。ここでは、メトリクスの一般的な使用例をメトリクスタイプ別に分けて説明し、DogStatsD に特有の[サンプリングレート](#samplerates)と[メトリクスのタグ付け](#metrictagging)オプションを紹介します。
+StatsD がメトリクスのみを受け付けるのに対して、DogStatsD は、Datadog の主要な 3 種類のデータタイプ:  すなわちメトリクス、イベント、サービスチェックをすべて受け付けます。このセクションでは、メトリクスタイプ別に分けたメトリクスの代表的なユースケースを示し、DogStatsD に特有の [sampling rates](#sample-rates) と [metric tagging](#metric-tagging) オプションを紹介します。
 
-[COUNT](#count)、[GAUGE](#gauge)、[SET](#set) メトリクスタイプは、StatsD ユーザーにとって馴染みのあるものです。StatsD の `TIMER`は、DogStatsD の `HISTOGRAM` のサブセットです。さらに、DogStatsD を使用して [HISTOGRAM](#histogram) および [DISTRIBUTION](#distribution) メトリクスタイプを送信することができます。
+[COUNT](#count)、[GAUGE](#gauge)、および[SET](#set) メトリクスタイプは、StatsD ユーザーにとって馴染みのあるものです。StatsD からの `TIMER` は、DogStatsD の `HISTOGRAM` のサブセットです。さらに、DogStatsD を使用して [HISTOGRAM](#histogram) および [DISTRIBUTION](#distribution) メトリクスタイプを送信することができます。
 
-**注**: 使用した送信方法により、Datadog 内に保存される実際のメトリクスタイプは送信メトリクスタイプと異なる場合があります。DogStatsD を通じて RATE メトリクスを取得するには、[COUNT](#count) または [HISTOGRAM](#histogram) メトリクスを送信してください。COUNT メトリクスの値と `<HISTOGRAM>.count` の値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
+**注**:  使用した送信方法により、Datadog 内に保存される実際のメトリクスタイプは送信メトリクスタイプと異なる場合があります。DogStatsD を通じて RATE メトリクスを取得するには、[COUNT](#count) または [HISTOGRAM](#histogram) メトリクスを送信してください。COUNT メトリクスの値と `<HISTOGRAM>.count` の値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
 
-##関数
+## 関数{#functions}
 
 [DogStatsD をインストール][1] すると、Datadog へメトリクスを送信する際、メトリクスタイプに応じて次の関数を使用できます。関数には、次の共有パラメーターがあります。
 
-|パラメーター|型|必須|説明|
-|||||
-| `<METRIC_NAME>`  | String          |はい|送信するメトリクスの名前。                                                                                                                                                                 |
-| `<METRIC_VALUE>` |Double          |はい|メトリクスに関連付けられている値。                                                                                                                                                            |
-| `<SAMPLE_RATE>`  | Double          | いいえ       | メトリクスに適用するサンプルレート。`0` (すべてがサンプリングされ、何も送信されない) から `1` (サンプルなし) までの値を取ります。詳細については、[サンプルレートセクション](#samplerates)を参照してください。|
-| `<TAGS>`         | 文字列のリスト | いいえ       | メトリクスに適用するタグのリスト。詳細については、[メトリクスタグ付け](#metrictagging)セクションを参照してください。                                                                                      |
-| `<CARDINALITY>`  | Enum            | いいえ       | このメトリクスに割り当てるタグの[カーディナリティ][10]。                                                                                                                              |
+| パラメーター        | 型            | 必須 | 説明                                                                                                                                                                                    |
+|------------------|-----------------|----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `<METRIC_NAME>`  | String          | はい      | 送信するメトリクスの名前。                                                                                                                                                                 |
+| `<METRIC_VALUE>` | Double          | はい      | メトリクスに関連付けられている値。                                                                                                                                                            |
+| `<SAMPLE_RATE>`  | Double          | いいえ       | メトリクスに適用するサンプルレート。`0` (すべてがサンプリングされ、何も送信されない) から `1` (サンプルなし) までの値を取ります。詳細については、[Sample Rate section](#sample-rates) を参照してください。|
+| `<TAGS>`         | 文字列のリスト | いいえ       | メトリクスに適用するタグのリスト。詳細については、[Metrics Tagging](#metric-tagging) セクションを参照してください。                                                                                      |
+| `<CARDINALITY>`  | Enum            | いいえ       | このメトリクスに割り当てるタグの [カーディナリティ][10]。                                                                                                                              |
 
-### COUNT
+### COUNT {#count}
 
 `increment(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY> )`
-COUNT メトリクスをインクリメントするのに使用。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
+: COUNT メトリクスをインクリメントするのに使用。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
 
 `decrement(<METRIC_NAME>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
 COUNT メトリクスをデクリメントするのに使用。Datadog に `RATE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間全体のメトリクス値の時間正規化された差分です。
@@ -46,11 +49,11 @@ COUNT メトリクスをデクリメントするのに使用。Datadog に `RATE
 
 **注**: `COUNT` タイプのメトリクスは、フラッシュ間隔で正規化され 1 秒あたりの単位数を報告するため、Datadog 内で小数を表示できます。
 
-#### コード例
+#### コード例 {#code-examples}
 
-`COUNT` メトリクスを `RATE` メトリクスとして Datadog に送信します。`COUNT` タイプについては、[メトリクスタイプ][2] ドキュメントを参照してください。
+`RATE` メトリクスとして保存された `COUNT` メトリクスを Datadog に送信します。`COUNT` タイプについては、[メトリクスタイプ][2] ドキュメントを参照してください。
 
-次のコードを実行し、DogStatsD `COUNT` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
+次のコードを実行して、DogStatsD `COUNT` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -228,16 +231,16 @@ tracer.dogstatsd.decrement('example_metric.decrement', 1, { environment: 'dev' }
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/increment_decrement_cumsum.png" alt="累積合計でのインクリメントとデクリメント" >}}
 
-### GAUGE
+### GAUGE {#gauge}
 
 `gauge(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間の間にメトリクスに送信された最後のゲージ値です。
+: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、StatsD フラッシュ期間の間にメトリクスに送信された最後のゲージ値です。
 
-#### コード例
+#### コード例 {#code-examples-1}
 
-`GAUGE` メトリクスを `GAUGE` メトリクスとしてDatadog に送信します。`GAUGE` タイプについては、[メトリクスタイプ][5] ドキュメントを参照してください。
+`GAUGE` メトリクスとして保存された `GAUGE` メトリクスを Datadog に送信します。`GAUGE` タイプについては、[メトリクスタイプ][5] ドキュメントを参照してください。
 
-次のコードを実行し、DogStatsD `GAUGE` メトリクスを Datadog へ送信。クライアントが不要になったら、忘れずに `flush`/`close` してください。
+次のコードを実行して、DogStatsD `GAUGE` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
 **注:** メトリクスの送信呼び出しは非同期です。メトリクスを確実に送信したい場合は、プログラムが終了する前に `flush` を呼び出してください。
 
@@ -411,16 +414,16 @@ while(true) {
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/gauge.png" alt="Gauge" >}}
 
-### SET
+### SET {#set}
 
 `set(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、フラッシュ期間の間に StatsD に送信されたメトリクスの一意の値のカウントです。
+: Datadog に `GAUGE` タイプとして保存されます。時系列に保存される値は、フラッシュ期間の間に StatsD に送信されたメトリクスの一意の値のカウントです。
 
-#### コード例
+#### コード例 {#code-examples-2}
 
-`SET` メトリクスを `GAUGE` メトリクスとして Datadog に送信します。
+`GAUGE` メトリクスとして保存された `SET` メトリクスを Datadog に送信します。
 
-次のコードを実行し、DogStatsD `SET` メトリクスを Datadog へ送信。クライアントが不要になったら、忘れずに `flush`/`close` してください。
+次のコードを実行して、DogStatsD `SET` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -578,22 +581,22 @@ while (TRUE) {
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/set.png" alt="Set" >}}
 
-### HISTOGRAM
+### HISTOGRAM {#histogram}
 
 `histogram(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-複数のメトリクスが送信されるため、保存されるメトリクスタイプ (`GAUGE`、`RATE`) はメトリクスに依存します。詳細については、[HISTOGRAM メトリクスタイプ][6] のドキュメントを参照してください。
+: 複数のメトリクスが送信されるため、保存されるメトリクスタイプ (`GAUGE`、`RATE`) はメトリクスに依存します。詳細については、[HISTOGRAM メトリクスタイプ][6] のドキュメントを参照してください。
 
-#### 構成
+#### 構成{#configuration}
 
-* Datadog に送信する集計を、[datadog.yaml 構成ファイル][7] の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、`count` の各集計のみが送信されます。
+* Datadog に送信する集計を、[datadog.yaml 構成ファイル][7] の `histogram_aggregates` パラメーターで構成します。デフォルトでは、`max`、`median`、`avg`、および `count` の集計だけが送信されます。
 * Datadog に送信するパーセンタイル集計を、[datadog.yaml 構成ファイル][7] の `histogram_percentiles` パラメーターで構成します。デフォルトでは、`95pc` のパーセンタイルのみが送信されます。
 
-#### コード例
+#### コード例 {#code-examples-3}
 
 `HISTOGRAM` メトリクスタイプは DogStatsD に特有です。`GAUGE` および `RATE` メトリクスとして保存された `HISTOGRAM` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスタイプ][6] ドキュメントを参照してください。
 
 
-次のコードを実行し、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信。クライアントが不要になったら、忘れずに `flush`/`close` してください。
+次のコードを実行して、DogStatsD `HISTOGRAM` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,PHP" >}}
 
@@ -743,7 +746,7 @@ while (TRUE) {
 上のインスツルメンテーションは、次のメトリクスを生成します。
 
 | メトリクス                                  | 説明                             |
-|||
+|-----------------------------------------|-----------------------------------------|
 | `example_metric.histogram.count`        | このメトリクスがサンプリングされた回数 |
 | `example_metric.histogram.avg`          | サンプリングされた値の平均           |
 | `example_metric.histogram.median`       | サンプリングされた値の中央値                    |
@@ -754,18 +757,18 @@ while (TRUE) {
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/histogram.png" alt="ヒストグラム" >}}
 
-#### TIMER
+#### TIMER {#timer}
 
-DogStatsD の `TIMER` メトリクスタイプは、`HISTOGRAM` メトリクスタイプの実装です (標準の StatsD のタイマーと混同しないでください)。これは、タイミングデータのみを測定します。たとえば、コードのセクションが実行されるのにかかる時間です。
+`TIMER` DogStatsD のメトリクスタイプは、`HISTOGRAM` メトリクスタイプの実装です (標準の StatsD のタイマーと混同しないでください)。これは、タイミングデータのみを測定します:  たとえば、コードのセクションが実行されるのにかかる時間です。
 
 `timed(<METRIC_NAME>, <METRIC_VALUE>, <SAMPLE_RATE>, <TAGS>, <CARDINALITY>)`
-複数のメトリクスが送信されるため、保存されるメトリクスタイプ (`GAUGE`、`RATE`) はメトリクスに依存します。詳細については、[HISTOGRAM メトリクスタイプ][6] のドキュメントを参照してください。
+: 複数のメトリクスが送信されるため、保存されるメトリクスタイプ (`GAUGE`、`RATE`) はメトリクスに依存します。詳細については、[HISTOGRAM メトリクスタイプ][6] のドキュメントを参照してください。
 
-##### 構成
+##### 構成{#configuration-1}
 
-`TIMER` には、`HISTOGRAM`  [コンフィギュレーション](#configuration)ルールが適用されます。
+`TIMER` の場合、`HISTOGRAM` [構成](#configuration) ルールが適用されます。
 
-##### コード例
+##### コード例 {#code-examples-4}
 
 `GAUGE` および `RATE` メトリクスとして保存された `TIMER` メトリクスを Datadog に送信します。`HISTOGRAM` タイプについては、[メトリクスタイプ][6] ドキュメントを参照してください。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
@@ -849,27 +852,27 @@ while (TRUE) {
 DogStatsD はタイマーメトリクスデータを受け取ると、レンダリング時間の統計的分布を計算し、次のメトリクスを Datadog に送信します。
 
 | メトリクス                              | 説明                             |
-|||
+|-------------------------------------|-----------------------------------------|
 | `example_metric.timer.count`        | このメトリクスがサンプリングされた回数 |
 | `example_metric.timer.avg`          | サンプリングされた値の平均時間      |
 | `example_metric.timer.median`       | サンプリングされた値の中央値                    |
 | `example_metric.timer.max`          | サンプリングされた値の最大値                   |
 | `example_metric.timer.95percentile` | サンプリングされた値の 95 パーセンタイル           |
 
-DogStatsD は、`TIMER` を `HISTOGRAM` メトリクスとして扱います。`TIMER` と `HISTOGRAM` のどちらのメトリクスタイプを使用しても、Datadog に送信されるデータは同じです。上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
+DogStatsD は `TIMER` を `HISTOGRAM` メトリクスとして扱います。`TIMER` と `HISTOGRAM` のどちらのメトリクスタイプを使用しても、Datadog に送信されるデータは同じです。上のコードを実行すると、メトリクスデータを Datadog でグラフ化できます。
 
 {{< img src="metrics/custom_metrics/dogstatsd_metrics_submission/timer.png" alt="タイマー" >}}
 
-### DISTRIBUTION
+### DISTRIBUTION {#distribution}
 
 `distribution(<METRIC_NAME>, <METRIC_VALUE>, <TAGS>, <CARDINALITY>)`
-Datadog で `DISTRIBUTION` タイプとして保存。詳細については、専用の [Distribution に関するドキュメント][8] を参照してください。
+: Datadog に `DISTRIBUTION` タイプとして保存されます。詳細については、専用の [Distribution に関するドキュメント][8] を参照してください。
 
-#### コード例
+#### コード例 {#code-examples-5}
 
 `DISTRIBUTION` メトリクスタイプは DogStatsD に特有です。`DISTRIBUTION` メトリクスとして保存された `DISTRIBUTION` メトリクスを Datadog に送信します。`DISTRIBUTION` タイプについては、[メトリクスタイプ][9] ドキュメントを参照してください。
 
-次のコードを実行し、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信。クライアントが不要になったら、忘れずに `flush`/`close` してください。
+次のコードを実行して、DogStatsD `DISTRIBUTION` メトリクスを Datadog へ送信します。クライアントが不要になったら、忘れずに `flush`/`close` してください。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -1029,11 +1032,11 @@ while(true) {
 
 {{< /programming-lang-wrapper >}}
 
-上記のインスツルメンテーションでは、`sum`、`count`、`average`、`minimum`、`maximum`、`50th percentile` (中央値)、`75th percentile`、`90th percentile`、`95th percentile`、`99th percentile` を計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、*あらゆる*種類の値の分布の測定に使用できます。
+上記のインスツルメンテーションは、`sum`、`count`、`average`、`minimum`、`maximum`、`50th percentile` (中央値)、`75th percentile`、`90th percentile`、`95th percentile`、`99th percentile` を計算します。ディストリビューションは、アップロードされたファイルのサイズ、教室でのテストの得点など、*あらゆる*種類の値の分布の測定に使用できます。
 
-## メトリクスの送信オプション
+## メトリクスの送信オプション {#metric-submission-options}
 
-### サンプリングレート
+### サンプリングレート {#sample-rates}
 
 高パフォーマンスを必要とするコードパスにとっては、UDP パケットを送信する際のオーバーヘッドが大きすぎる可能性があるため、DogStatsD クライアントはサンプリングをサポートしています (メトリクスを一定の割合でのみ送信します)。多くのメトリクスをサンプリングする場合や、DogStatsD クライアントが DogStatsD サーバーと同じホストにない場合に便利です。トラフィックが減少しますが、精度と粒度が失われるという二律背反が生じます。
 
@@ -1042,14 +1045,14 @@ while(true) {
 DogStatsD は Datadog にメトリクスを送信する前に、`<SAMPLE_RATE>` を使用し、メトリクスタイプに応じてメトリクス値を補正します (サンプリングなしで値を推定するため)。
 
 | メトリクスタイプ    | サンプリングレート補正                                                                                                                                                         |
-|||
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `COUNT`        | 受け取った値は (`1/<SAMPLE_RATE>`) 倍として計上されます。受信したデータポイント 1 つに対し、`1/<SAMPLE_RATE>` 値が同じ値で実際にサンプリングされたと考えるのは理にかなっています。|
 | `GAUGE`        | 補正なし。受信した値はそのまま残ります。                                                                                                                              |
 | `SET`          | 補正なし。受信した値はそのまま残ります。                                                                                                                              |
-| `HISTOGRAM`    | `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                     |
-| `DISTRIBUTION` | 受信した値は、`1/<SAMPLE_RATE>` 回としてカウントされます。受信したデータポイント 1 つに対し、`1/<SAMPLE_RATE>` 値が同じ値で実際にサンプリングされたと考えるのは理にかなっています。|
+| `HISTOGRAM`    |  `histogram.count` 統計は COUNT メトリクスであり、上記の補正を受け取ります。他の統計は GAUGE メトリクスなので、「補正」は行われません。                     |
+| `DISTRIBUTION` |  受信した値は、`1/<SAMPLE_RATE>` 回としてカウントされます。受信したデータポイント 1 つに対し、`1/<SAMPLE_RATE>` 値が同じ値で実際にサンプリングされたと考えるのは理にかなっています。|
 
-#### コード例
+#### コード例 {#code-examples-6}
 
 次のコードは、半分の時間だけポイントを送信します。
 
@@ -1100,13 +1103,13 @@ $statsd->increment('example_metric.increment', $sampleRate->0.5);
 
 {{< /programming-lang-wrapper >}}
 
-### メトリクスのタグ付け
+### メトリクスのタグ付け {#metric-tagging}
 
 `tags` パラメーターを使用して、DogStatsD へ送るメトリクスにタグを追加します。
 
-#### コード例
+#### コード例 {#code-examples-7}
 
-次のコードは、`environment:dev` および `account:local` タグのみを `example_metric.increment` メトリクスに追加します。
+以下のコードは、`environment:dev` および `account:local` タグを `example_metric.increment` メトリクスに追加するだけです。
 
 {{< programming-lang-wrapper langs="python,ruby,go,java,.NET,php,nodejs" >}}
 
@@ -1169,21 +1172,21 @@ tracer.dogstatsd.increment('example_metric.increment', 1, { environment: 'dev', 
 
 {{< /programming-lang-wrapper >}}
 
-#### ホストタグ
+#### ホストタグ {#host-tag}
 
 ホストタグは、メトリクスを集約する Datadog Agent によって自動的に割り当てられます。ホストタグが Agent のホスト名と一致しないメトリクスは、元のホストへの参照を失います。送信されたホストタグにより、Agent で収集または設定されたホスト名がオーバーライドされます。
 
-## 参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ja/extend/dogstatsd/
 [2]: /ja/metrics/types/?tab=count#definition
-[3]: /ja/dashboards/functions/arithmetic/#cumulativesum
+[3]: /ja/dashboards/functions/arithmetic/#cumulative-sum
 [4]: /ja/dashboards/functions/arithmetic/#integral
 [5]: /ja/metrics/types/?tab=gauge#definition
 [6]: /ja/metrics/types/?tab=histogram#definition
-[7]: /ja/agent/configuration/agentconfigurationfiles/#agentmainconfigurationfile
+[7]: /ja/agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [8]: /ja/metrics/distributions/
 [9]: /ja/metrics/types/?tab=distribution#definition
 [10]: /ja/containers/kubernetes/tag

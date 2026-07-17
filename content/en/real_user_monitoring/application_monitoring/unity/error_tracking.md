@@ -16,7 +16,7 @@ title: Unity Crash Reporting and Error Tracking
 
 Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -24,7 +24,7 @@ If you have not set up the Datadog Unity SDK for yet, follow the [in-app setup i
 
 ### Forward uncaught exceptions from Unity logs
 
-Unity forwards all uncaught exceptions to its logger using `Debug.LogException`. To report these exceptions to Datadog, check the option in Datadog's project settings labeled "Forward Unity Logs".
+Unity forwards all uncaught exceptions to its logger using `Debug.LogException`. To report these exceptions to Datadog, check the option in Datadog's project settings labeled {{< ui >}}Forward Unity Logs{{< /ui >}}.
 
 ### Native crash reporting
 
@@ -38,7 +38,7 @@ Mapping files are used to deobfuscate and symbolicate stack traces, which helps 
 
 ### File and line mapping with IL2CPP
 
-When using the IL2CPP backend (the default for iOS), C# stack traces from Unity lack any file or line information. This information can be retrieved from the native symbol files and an IL2CPP mapping file, provided the C# stack traces are mapped to native stacks. To enable this, check the "Perform Native Stack Mapping" option in your Unity project settings under the Datadog section and upload your symbol and IL2CPP mapping files as described below.
+When using the IL2CPP backend (the default for iOS), C# stack traces from Unity lack any file or line information. This information can be retrieved from the native symbol files and an IL2CPP mapping file, provided the C# stack traces are mapped to native stacks. To enable this, check the {{< ui >}}Perform Native Stack Mapping{{< /ui >}} option in your Unity project settings under the Datadog section and upload your symbol and IL2CPP mapping files as described below.
 
 **Note**: Even when checked, Native Stack Mapping is only enabled in non-development builds.
 
@@ -78,7 +78,7 @@ For a full list of options, see the `datadog-ci` [Unity Symbols documentation][5
 
 ### List uploaded symbol files
 
-See the [RUM Debug Symbols][6] page to view all uploaded symbols.
+See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][6] page to view all uploaded symbols.
 
 ## Limitations
 
@@ -88,7 +88,7 @@ Mapping files are limited in size to **500 MB** each, while dSYM files can go up
 
 To verify your Unity Crash Reporting and Error Tracking configuration, issue an error in your application and confirm that the error appears in Datadog.
 
-1. Ensure you are not running a development build. Uncheck the "Development Build" box in Unity's build settings.
+1. Ensure you are not running a development build. Uncheck the {{< ui >}}Development Build{{< /ui >}} box in Unity's build settings.
 2. Run your application on a simulator, emulator, or a real device. If you are running on iOS, ensure that the debugger is not attached. Otherwise, Xcode captures the crash before the Datadog SDK does.
 3. Execute code containing an error or crash. For example:
 
@@ -98,8 +98,8 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
    }
    ```
 
-4. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
-5. For crashes, after the crash happens, restart your application and wait for the Unity SDK to upload the crash report in [**Error Tracking**][1].
+4. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+5. For crashes, after the crash happens, restart your application and wait for the Unity SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Further reading
 

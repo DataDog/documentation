@@ -303,7 +303,7 @@ Inspect and troubleshoot your OpenTelemetry Collector configurations in Fleet Au
 [17]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/k8s-chart/daemonset.yaml
 [25]: https://opentelemetry.io/docs/specs/semconv/resource/#service
 [26]: /logs/log_configuration/pipelines/?tab=service#service-attribute
-[27]: /logs/log_configuration/processors/?tab=ui#service-remapper
+[27]: /logs/log_configuration/processors/service_remapper/
 [28]: /opentelemetry/schema_semantics/hostname/
 [29]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/datadogconnector
 [30]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/datadogexporter/examples/ootb-ec2.yaml

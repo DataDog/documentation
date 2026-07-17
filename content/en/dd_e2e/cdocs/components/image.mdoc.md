@@ -1,6 +1,7 @@
 ---
 title: Image
 draft: true
+private: true
 ---
 
 ## Overview

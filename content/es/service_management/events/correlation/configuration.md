@@ -1,9 +1,9 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: Documentación
   text: Aprender a clasificar y notificar los casos
-- link: service_management/events/correlation/analytics
+- link: events/correlation/analytics
   tag: Documentación
   text: Análisis de casos
 title: Configuración

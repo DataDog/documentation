@@ -2,12 +2,12 @@
 title: Code Insights
 type: documentation
 further_reading:
-    - link: '/tracing/error_tracking/'
-      tag: 'Documentation'
-      text: 'Learn more about Error Tracking'
     - link: '/security/code_security/'
       tag: 'Documentation'
       text: 'Learn more about Code Security'
+    - link: '/tracing/error_tracking/'
+      tag: 'Documentation'
+      text: 'Learn more about Error Tracking'
     - link: '/tests/explorer/'
       tag: 'Documentation'
       text: 'Learn more about Test Optimization'
@@ -15,13 +15,9 @@ further_reading:
 
 ## Overview
 
-**Code Insights** keep you informed with Datadog-generated insights that are relevant to your codebase:
+**Code Insights** keep you informed with code and library vulnerabilities reported by [Code Security][2] that are relevant to your codebase.
 
--   Runtime errors collected by [Error Tracking][1]
--   Code and library vulnerabilities reported by [Code Security][2]
--   Flaky tests detected by [Test Optimization][3]
-
-The extension identifies errors and vulnerabilities in the code with colored squiggles; hover over the line for more details.
+The extension identifies vulnerabilities in the code with colored squiggles; hover over the line for more details.
 
 {{< img src="/ide_plugins/vscode/code-insights-inline-hover.mp4" alt="Hovering over inline code insights" style="width:100%" video=true >}}
 
@@ -34,6 +30,13 @@ You can group code insights by kind, file, priority, or service. You can also ig
 For specific insights about the file currently open in the active editor, check the **File Insights** view in the IDE's file explorer. This view also lists issues discovered by [Code Security][4] within the file.
 
 {{< img src="/ide_plugins/vscode/file_insights_view.mp4" alt="File Insights view" style="width:100%" video=true >}}
+
+### Other insight types
+
+The following insight types are in limited support:
+
+- Runtime errors collected by [Error Tracking][1]
+- Flaky tests detected by [Test Optimization][3]
 
 ## Further reading
 

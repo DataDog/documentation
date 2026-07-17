@@ -20,7 +20,7 @@ title: Flutter Crash Reporting and Error Tracking
 
 Enable Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -128,8 +128,8 @@ To verify your Flutter Crash Reporting and Error Tracking configuration, issue a
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][8].
-4. For crashes, after the crash happens, restart your application and wait for the Flutter SDK to upload the crash report in [**Error Tracking**][8].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [{{< ui >}}Error Tracking{{< /ui >}}][8].
+4. For crashes, after the crash happens, restart your application and wait for the Flutter SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][8].
 
 ### Flavors and build numbers
 

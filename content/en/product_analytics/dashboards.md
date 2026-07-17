@@ -17,7 +17,7 @@ This guide gets you started on a path to creating dashboards. These basic dashbo
 
 ## Create a dashboard
 
-To create a dashboard, click **+New Dashboard** on the [Dashboard List][1] page.
+To create a dashboard, click {{< ui >}}+New Dashboard{{< /ui >}} on the [{{< ui >}}Dashboard List{{< /ui >}}][1] page.
 
 {{< img src="product_analytics/dashboard/pana_dashboard_overview.png" alt="Adding a new dashboard" style="width:70%;">}}
 
@@ -26,13 +26,13 @@ Enter a dashboard name and choose a layout option.
 
 {{< img src="dashboards/create-dashboard.png" alt="Adding a new dashboard" style="width:70%;">}}
 
-Dashboards
+{{< ui >}}Dashboards{{< /ui >}}
 : A grid-based layout, which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views which update in real time, and can represent fixed points in the past. They have a maximum width of 12 grid squares and also work well for debugging.
 
-Timeboards
+{{< ui >}}Timeboards{{< /ui >}}
 : Automatic layouts that represent a single point in time—either fixed or real-time—across the entire dashboard. They are commonly used for troubleshooting, correlation, and general data exploration.
 
-Screenboards
+{{< ui >}}Screenboards{{< /ui >}}
 : Dashboards with free-form layouts which can include a variety of objects such as images, graphs, and logs. They are commonly used as status boards or storytelling views that update in real time or represent fixed points in the past.
 
 ## Refresh rate

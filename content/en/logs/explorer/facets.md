@@ -104,7 +104,7 @@ Scope the search query clicking on either value. Clicking on a value toggles the
 Your organization has a whole collection of facets to address its comprehensive set of use cases across all different teams using logs. Most likely, however, only a subset of these facets is valuable to you in a specific troubleshooting context. Hide facets you don't need on a routine basis, to keep only the most relevant facets for your troubleshooting sessions.
 1. In the [Logs Explorer][30], find the facet you want to hide.
 1. Click the cog icon next to the facet.
-1. Select **Hide Facet**.
+1. Select {{< ui >}}Hide Facet{{< /ui >}}.
 
 Hidden facets are still visible in the facet search (see the [Filter Facet](#filter-facets) section) in case you need it. Unhide hidden facets from there.
 
@@ -126,10 +126,10 @@ Facets are grouped into meaningful themes to ease navigation in the facet list. 
 To group facets:
 
 1. Click the cog for the facet.
-2. Select **Edit facet**.
-3. Click the **Advanced options** section to expand it.
-4. In the **Group** field, enter the name of the group that you want the facet to be in.
-5. Click **Update**.
+2. Select {{< ui >}}Edit facet{{< /ui >}}.
+3. Click the {{< ui >}}Advanced options{{< /ui >}} section to expand it.
+4. In the {{< ui >}}Group{{< /ui >}} field, enter the name of the group that you want the facet to be in.
+5. Click {{< ui >}}Update{{< /ui >}}.
 
 ### Filter facets
 
@@ -145,7 +145,7 @@ Some facets may have been aliased (see the [alias facet](#alias-facets) section)
 
 When troubleshooting, it is more likely for you to find content from other teams (alongside content from your team) in the _standard_ facet rather than the _aliased_ facet. This makes correlation on content from diverse origins more straightforward.
 
-If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the **switch to alias** menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
+If you see an aliased facet in your facet list, consider using the _standard_ facet instead by clicking the {{< ui >}}switch to alias{{< /ui >}} menu item. This action hides the aliased facet and unhides the standard facet. If doing so makes you update a saved view, consider saving the saved view so that the aliasing applies to everyone using this saved view.
 
 {{< img src="logs/explorer/facet/switch_facet.png" alt="Switch Facet" style="width:30%;">}}
 
@@ -212,7 +212,7 @@ When aliasing an _aliased_ facet towards a _standard_ facet:
 - Users can use either aliased and standard facets for troubleshooting. You may prefer the standard one, which eases correlation of content flowing from diverse and possibly heterogeneous sources.
 - Users are nudged to use the standard facet in place of the aliased one.
 
-To alias a facet towards a standard one, select the `Alias to...` action item in the facet menu. Pick the destination facets from all the [standard][14] ones existing for your organization.
+To alias a facet towards a standard one, select the {{< ui >}}Alias to...{{< /ui >}} action item in the facet menu. Pick the destination facets from all the [standard][14] ones existing for your organization.
 
 {{< img src="logs/explorer/facet/alias_modal.png" alt="alias modal" style="width:30%;">}}
 
@@ -228,10 +228,10 @@ This is the best option if you onboard logs flowing from new sources. Rather tha
 
 To delete a facet, follow these steps:
 
-- Click **Showing xx of xx** at the top of the facet panel.
+- Click {{< ui >}}Showing xx of xx{{< /ui >}} at the top of the facet panel.
 - Search for your facet.
 - Click the pencil icon for your facet.
-- Click **Delete**.
+- Click {{< ui >}}Delete{{< /ui >}}.
 
 ## Further Reading
 
@@ -253,13 +253,13 @@ To delete a facet, follow these steps:
 [14]: /logs/indexes/#indexes-filters
 [15]: /logs/indexes/#exclusion-filters
 [16]: /integrations/nginx/
-[17]: /logs/log_configuration/processors/#geoip-parser
+[17]: /logs/log_configuration/processors/geoip_parser/
 [18]: /integrations/kong/
 [19]: /getting_started/tagging/assigning_tags/
 [20]: /integrations/varnish/
 [21]: /integrations/ansible/
 [22]: /integrations/python/
-[23]: /logs/log_configuration/processors/#arithmetic-processor
+[23]: /logs/log_configuration/processors/arithmetic_processor/
 [24]: /logs/explorer/saved_views/
 [25]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [26]: /logs/log_configuration/attributes_naming_convention

@@ -195,14 +195,15 @@ config:
 # master = always use tag from sdk version
 # branches = attempt to use an associated branch name on failure fallback to sdk version
 define EXAMPLES_template
-examples/$(1):
-	$(eval TAG := $(or $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
-	@if [[ "$(BRANCH)" = "master" ]]; then \
-		echo "Cloning $(1) at $(TAG)"; \
-		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+examples/$(1): | websites_sources_data
+	@TAG=$$$$(grep -A1 $(1) _vendor/data/sdk_versions.json 2>/dev/null | grep version | cut -f 2 -d ':' | tr -d '" '); \
+	TAG=$$$${TAG:-$(BRANCH)}; \
+	if [[ "$(BRANCH)" = "master" ]]; then \
+		echo "Cloning $(1) at $$$$TAG"; \
+		git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	else \
 		echo "Cloning $(1) at $(BRANCH)"; \
-		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	fi
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
@@ -316,6 +317,13 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
 		exit 1; \
+	fi;
+	@if [ "$(BUILD_SCRIPT_BRANCH)" != "main" ]; then \
+		echo -e "\n\033[0;31m##########################################################################"; \
+		echo -e "# WARNING: BUILD_SCRIPT_BRANCH is set to '$(BUILD_SCRIPT_BRANCH)'"; \
+		echo -e "# You are NOT using the main branch for build scripts."; \
+		echo -e "# If this is unintentional, update BUILD_SCRIPT_BRANCH in Makefile.config"; \
+		echo -e "##########################################################################\033[0m\n"; \
 	fi;
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \

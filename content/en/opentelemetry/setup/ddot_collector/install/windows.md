@@ -9,10 +9,6 @@ further_reading:
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
 
-{{< callout header="false" btn_hidden="true">}}
-  Support for deploying the DDOT Collector on Windows-based bare-metal hosts and virtual machines is currently in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Follow this guide to install the Datadog Distribution of OpenTelemetry (DDOT) Collector on Windows-based bare-metal hosts and virtual machines.
@@ -49,6 +45,11 @@ if ($p.ExitCode -ne 0) {
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
 
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately. Run from an **elevated PowerShell session**:
+```powershell
+& "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" otel install
+```
+
 ### Validation
 
 Run the Agent's [status command][3] to verify installation.
@@ -74,7 +75,7 @@ Agent (v7.x.x)
   Log Level: info
 ```
 
-There will also be an **OTel Agent** status section that includes OpenTelemetry information:
+There will also be an {{< ui >}}OTel Agent{{< /ui >}} status section that includes OpenTelemetry information:
 
 ```text
 ==========

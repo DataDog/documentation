@@ -1,0 +1,71 @@
+{{/*
+Renders a compact per-endpoint summary block for the category landing page:
+H2 anchor, method + URL pattern, link to the full endpoint page. The endpoint's
+own description is usually just the H2 summary restated plus boilerplate, so we
+omit it here.
+Each summary keeps the original H2 id so existing `/api/.../#endpoint-slug`
+deep-links continue to scroll to the matching block.
+
+Required dict keys:
+  dot               — page context
+  menuChild         — menu entry for this endpoint
+  tagSlug           — tag slug (for building the endpoint URL)
+  translate_actions — translated action descriptions (may be empty)
+  d                 — loaded v1 spec
+  d2                — loaded v2 spec
+*/}}
+{{ $dot := .dot }}
+{{ $menuChild := .menuChild }}
+{{ $tagSlug := .tagSlug }}
+{{ $translate_actions := .translate_actions }}
+{{ $d := .d }}
+{{ $d2 := .d2 }}
+
+{{ $anchorStr := $menuChild.Name }}
+{{ $endpointSlug := $anchorStr | anchorize }}
+{{ $versions := $menuChild.Params.versions | default (slice "v2") }}
+{{ $versionCount := len $versions }}
+
+{{/* Pick the version the per-endpoint page treats as the active tab so the summary
+describes the current version. With versions: [v1, v2] and v2 stable, the menu lists
+v1 first but the active tab is v2; mirror that here using endpoint-visibility. */}}
+{{ $primaryVersion := index $versions 0 }}
+{{ range $versionNum := $versions }}
+  {{ $vSpec := cond (eq $versionNum "v1") $d $d2 }}
+  {{ $vRegions := partial "api/regions.html" (dict "servers" $vSpec.servers) }}
+  {{ $vEndpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "version" $versionNum "generalRegions" $vRegions) }}
+  {{ if $vEndpoint }}
+    {{ $vVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuChild "endpoint" $vEndpoint) }}
+    {{ if $vVisibility.isVisibleVersion }}
+      {{ $primaryVersion = $versionNum }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ $adat := cond (eq $primaryVersion "v1") $d $d2 }}
+{{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+{{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $dot.Page.Lang "operationids" $menuChild.Params.operationids "version" $primaryVersion "generalRegions" $generalRegions) }}
+
+{{ if $endpoint }}
+  {{ $isDeprecated := $endpoint.action.deprecated | default false }}
+  {{ $isUnstable := isset $endpoint.action "x-unstable" }}
+
+  <div class="api-endpoint-summary mb-4">
+    <h2 class="mb-2 api-task-description" id="{{ $endpointSlug }}">
+      <a class="js-collapse-trigger" href="{{ $menuChild.URL }}">{{- $anchorStr }} <span class="fs-4" style="vertical-align: 0.05em">&rarr;</span></a>
+      {{ if $isDeprecated }}<span class="badge bg-warning text-dark ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">deprecated</span>{{ end }}
+      {{ if $isUnstable }}<span class="badge bg-info text-white ms-2 fs-5 align-middle px-1" style="padding-top: 0; padding-bottom: 2px">preview</span>{{ end }}
+    </h2>
+    <p class="mb-1 api-url-info">
+      <span style="padding: 3px" class="font-semibold api-method text-api-method text-api-{{ $endpoint.actionType }} bg-bg-api-{{ $endpoint.actionType }}">{{ $endpoint.actionType | upper }}</span>&nbsp;
+      {{- range $region, $url := $endpoint.regions -}}
+        <span class="api-url-pattern d-none" data-region="{{ $region }}">{{ $url }}{{ $endpoint.pathKey }}</span>
+      {{- end -}}
+      {{- range $region, $url := $generalRegions -}}
+        {{- if not (index ($endpoint.regions) $region) -}}
+          <span class="api-url-pattern d-none" data-region="{{ $region }}">Not supported in the {{ upper $region }} region</span>
+        {{- end -}}
+      {{- end -}}
+    </p>
+  </div>
+{{ end }}

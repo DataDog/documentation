@@ -6,10 +6,10 @@ aliases:
 - service_management/workflows/private_actions/use_private_actions
 - service_management/app_builder/private_actions/use_private_actions
 further_reading:
-- link: "service_management/app_builder/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "App Builder Connections"
-- link: "service_management/workflows/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "Workflow Connections"
 - link: "actions/private_actions/"
@@ -184,7 +184,7 @@ Install the Datadog Operator version 1.25.0:
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 helm install datadog-operator datadog/datadog-operator \
-    --set image.repository=datadog/operator \
+    --set image.repository=registry.datadoghq.com/operator \
     --set image.tag=1.25.0
 ```
 
@@ -911,9 +911,9 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 [9]: /actions/private_actions/private_action_credentials
 [10]: https://app.datadoghq.com/workflow/
 [11]: https://app.datadoghq.com/app-builder/
-[12]: /service_management/workflows/build
-[13]: /service_management/app_builder/build
-[14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[12]: /actions/workflows/build
+[13]: /actions/app_builder/build
+[14]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [16]: /actions/private_actions/
 [17]: /account_management/rbac/
 [18]: /account_management/rbac/permissions/#app-builder--workflow-automations

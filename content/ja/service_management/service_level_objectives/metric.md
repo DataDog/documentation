@@ -20,7 +20,7 @@ title: メトリクスベース SLO
 
 メトリクスベースの SLO は、計数ベースのデータストリームでイベントの良し悪しを判断する場合に有用です。メトリクスクエリは良質なイベントの合計を同様の時間軸におけるイベント総数で割り、サービスレベル指標 (SLI) を算出します。SLO の作成には、[APM スパン][1]、[RUM イベント][2]、[ログ][3]から生成されるカスタムメトリクスを含め、あらゆるメトリクスを使用することができます。SLO の構成と計算方法については、[サービスレベル目標][4]のページを参照してください。
 
-{{< img src="service_management/service_level_objectives/metric_slo_side_panel.png" alt="メトリクス ベース SLO の例" >}}
+{{< img src="service_level_objectives/metric/metric_slo_side_panel.png" alt="メトリクス ベース SLO の例" >}}
 
 ## セットアップ
 
@@ -42,11 +42,11 @@ title: メトリクスベース SLO
 
 メトリクス ベース SLI を使用すると、SLI の最も重要な属性にフォーカスできます。エディタで `datacenter`、`env`、`availability-zone`、`resource` などのタグを使って、メトリクス ベース SLI にグループを追加できます:
 
-{{< img src="service_management/service_level_objectives/metric_slo_creation.png" alt="グループ化された メトリクス ベース SLO エディタ" >}}
+{{< img src="service_level_objectives/metric/metric_slo_creation.png" alt="グループ化された メトリクス ベース SLO エディタ" >}}
 
 これらの SLI をグループ化すると、個々のグループのステータス、適切なリクエスト数、残りのエラーバジェットを詳細パネルで視覚化できます。
 
-{{< img src="service_management/service_level_objectives/metric_slo_history_groups.png" alt="メトリクス ベース SLO グループ結果" >}}
+{{< img src="service_level_objectives/metric/metric_slo_history_groups.png" alt="メトリクス ベース SLO グループ結果" >}}
 
 デフォルトで、棒グラフは SLO 全体の正しい/正しくない要求すべての全体数を表示します。テーブルの該当する行をクリックすると、個別のグループの正しい/正しくない要求の棒グラフを詳しく確認できます。さらに、棒グラフの下にある凡例でオプションを選択し、正しいまたは正しくない要求の数を表示/非表示にすることも可能です。
 

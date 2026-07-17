@@ -25,7 +25,7 @@ With linked pull requests, you can:
 
 - Install [the GitHub integration][2] with read permissions for pull requests.
 - Enable [Source Code Integration][3] so that Datadog can process GitHub webhooks and link pull requests to Error Tracking issues.
-- Verify that you have the [**Error Tracking Issue Write** permission][4]. This is required to link your PRs to Error Tracking issues.
+- Verify that you have the [{{< ui >}}Error Tracking Issue Write{{< /ui >}} permission][4]. This is required to link your PRs to Error Tracking issues.
 
 ## Link and manage pull requests
 ### Link a pull request to an issue
@@ -34,7 +34,7 @@ To link a pull request to an Error Tracking issue:
 
 1. Navigate to [Datadog Error Tracking][1].
 1. Select the issue you want to link to open its side panel.
-1. In the top right corner, click the **Actions** dropdown, then select **Link a Pull Request** to copy the issue URL.
+1. In the top right corner, click the {{< ui >}}Actions{{< /ui >}} dropdown, then select {{< ui >}}Link a Pull Request{{< /ui >}} to copy the issue URL.
 1. Open your GitHub pull request and paste the issue URL into the description.
 
 {{< img src="error_tracking/pull-request-add.png" alt="Link a pull request to an Error Tracking issue" style="height:300px;" >}}
@@ -49,7 +49,7 @@ Datadog detects the issue URL and automatically creates the link.
 To view linked pull requests:
 1. Navigate to [Datadog Error Tracking][1].
 1. Select the issue you want to link to open its side panel.
-1. In the top right corner, click the **Actions** dropdown to see the linked PR under **PULL REQUESTS**.
+1. In the top right corner, click the {{< ui >}}Actions{{< /ui >}} dropdown to see the linked PR under {{< ui >}}PULL REQUESTS{{< /ui >}}.
 {{< img src="error_tracking/pull-request-find.png" alt="View pull requests linked to an Error Tracking issue" style="height:300px;" >}}
 
 ### Unlink a pull request
@@ -62,12 +62,12 @@ Linked pull requests trigger automatic issue state transitions:
 
 | Initial state | Action | Resulting state |
 |---|---|---|
-| Issue is `For Review` | A PR is linked to the issue | Issue moves to `Reviewed` |
-| Issue is `Reviewed` | A linked PR is merged | Issue moves to `Resolved` |
-| Issue is `Resolved` | A linked PR is reopened | Issue moves to `Reviewed` |
-| Issue is `Resolved` | A new open PR is linked to the issue | Issue moves to `Reviewed` |
+| Issue is {{< ui >}}For Review{{< /ui >}} | A PR is linked to the issue | Issue moves to {{< ui >}}Reviewed{{< /ui >}} |
+| Issue is {{< ui >}}Reviewed{{< /ui >}} | A linked PR is merged | Issue moves to {{< ui >}}Resolved{{< /ui >}} |
+| Issue is {{< ui >}}Resolved{{< /ui >}} | A linked PR is reopened | Issue moves to {{< ui >}}Reviewed{{< /ui >}} |
+| Issue is {{< ui >}}Resolved{{< /ui >}} | A new open PR is linked to the issue | Issue moves to {{< ui >}}Reviewed{{< /ui >}} |
 
-<div class="alert alert-info">If an issue is linked to multiple pull requests, the issue moves to <code>Resolved</code> only when the last open (non-closed, non-merged) PR is merged. <br><br> Closing a PR without merging does not resolve the issue.</div>
+<div class="alert alert-info">If an issue is linked to multiple pull requests, the issue moves to {{< ui >}}Resolved{{< /ui >}} only when the last open (non-closed, non-merged) PR is merged. <br><br> Closing a PR without merging does not resolve the issue.</div>
 
 ## Further reading
 

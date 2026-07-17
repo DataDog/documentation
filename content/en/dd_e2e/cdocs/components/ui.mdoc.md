@@ -1,6 +1,7 @@
 ---
 title: UI
 draft: true
+private: true
 ---
 
 ## Overview

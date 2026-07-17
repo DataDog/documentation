@@ -96,7 +96,8 @@ Use filters to include only the specific costs you want to allocate, such as by 
   - Add a comparison period to spot cost changes:
     - {{< ui >}}Default comparison{{< /ui >}}: Automatically compares to the immediately preceding period (for example, this week vs. last week).
     - {{< ui >}}Flexible comparison{{< /ui >}}: Select any arbitrary period—like a year ago or a custom date range—to identify seasonal patterns. Both periods must be the same type (for example, week to week, month to month), though the actual number of days may vary when comparing months of different lengths.
-      
+- Show **forecasted costs**:
+  - Toggle {{< ui >}}Show forecast{{< /ui >}} on to overlay predicted costs on your Cost report, alongside historical spend. See [Forecasting in Cloud Cost Management][15] for details on supported forecast periods and rollups.
 
 ### Advanced options (optional)
 
@@ -133,3 +134,4 @@ After you've created and customized your report, you can save and share it from 
 [12]: /cloud_cost_management/oracle/
 [13]: /cloud_cost_management/reporting/explorer
 [14]: /cloud_cost_management/reporting/dashboards
+[15]: /cloud_cost_management/planning/forecasting#view-forecasts-in-reports

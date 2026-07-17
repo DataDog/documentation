@@ -12,12 +12,15 @@ products:
   url: /notebooks/
   icon: notebook
 further_reading:
-- link: "bits_ai/mcp_server"
+- link: "mcp_server"
   tag: "Documentation"
   text: "Datadog MCP Server"
 - link: "/ddsql_editor/"
   tag: "Documentation"
   text: "DDSQL Editor"
+- link: "https://learn.datadoghq.com/courses/getting-started-ddsql-editor"
+  tag: "Learning Center"
+  text: "Getting Started with DDSQL Editor"
 ---
 
 {{< product-availability >}}
@@ -1199,6 +1202,372 @@ FROM aws.ec2_instance
 | akeys(hstore tags)                            | Array of text | Gets the keys of an HSTORE as an array                                                            |
 | avals(hstore tags)                            | Array of text | Gets the values of an HSTORE as an array                                                          |
 
+## Writing efficient queries
+
+Queries that read large amounts of data or run heavy computations can be slow or return resource errors. The patterns below are the most common causes, each with a rewrite that usually resolves the issue.
+
+**Filter early and aggregate early**. Computations in the query filter or a `GROUP BY` summary run against the index. Computations in a `JOIN` or a wide `LIMIT` are held in memory.
+
+### Checklist
+
+Before re-running a slow query, ask the following questions:
+
+- Does the query filter include a selective token (not a wildcard like `service:*` or `env:*`)?
+- Is the time range as small as it can be for the question?
+- Are you selecting only the columns you actually use?
+- If you have a large `LIMIT`, could a `GROUP BY` summary work instead?
+- If you have many `JOIN` clauses, could the query be rewritten as a single scan?
+- When joining across sources, is each side filtered?
+- Is the `JOIN` key high-cardinality (user/ request/trace ID)?
+- Is the same regex being run more than once per row?
+
+### Filtering
+
+#### Filter on the data source
+
+Always include a selective token in your data source query, such as `service:`, `host:`, `env:`, or any `@attribute:value`.
+
+Wildcard filters such as `service:*` or `env:*` match every event, so they don't actually narrow the data. Treat these filters as equivalent to leaving the filter blank.
+
+**Before**
+
+```sql
+-- No filter; scans all logs in the time range
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
+```
+
+**After**
+
+```sql
+-- filter => narrows the scan to matching events before any SQL runs
+SELECT timestamp, service, host, message
+FROM dd.logs(
+    filter         => 'service:checkout-api env:prod',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR,
+    message   VARCHAR
+)
+```
+
+#### Choose a time range that fits the question
+
+Scan time grows with the time range. Consider starting with a window that covers the question (often a few hours or a day) and widening only when the question demands more. For long-term trends, a pre-aggregated metric or a daily-summary query runs faster than re-scanning raw events on every run.
+
+*Goal: understand log volume from the billing service over the last month.*
+
+**Before**
+
+```sql
+-- Scans 31 days of raw events
+SELECT timestamp, message
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp', 'message'],
+    from_timestamp => NOW() - INTERVAL '31 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    message   VARCHAR
+)
+```
+
+**After**
+
+```sql
+-- Aggregate up front for trends; only fetch the timestamp column needed for grouping
+SELECT date_trunc('day', timestamp) AS day, count(*) AS events
+FROM dd.logs(
+    filter         => 'service:billing',
+    columns        => ARRAY['timestamp'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP
+)
+GROUP BY 1
+ORDER BY 1;
+```
+
+### Column selection
+
+#### Project only the columns you use
+
+Each column in your query is fetched from storage. Trim the column list to what you use downstream. Wide attributes like the raw `message` or full HTTP headers can slow down the query significantly.
+
+**Before**
+
+```sql
+-- columns array fetches every field, including the expensive raw message
+SELECT *
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host', 'message', '@http.url', '@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    host        VARCHAR,
+    message     VARCHAR,
+    http_url    VARCHAR,
+    status_code VARCHAR
+)
+```
+
+**After**
+
+```sql
+-- Only declare the columns the analysis actually uses
+SELECT timestamp, service, host
+FROM dd.logs(
+    filter         => 'service:checkout-api',
+    columns        => ARRAY['timestamp', 'service', 'host'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp TIMESTAMP,
+    service   VARCHAR,
+    host      VARCHAR
+)
+```
+
+### Aggregations
+
+#### Return summaries, not raw rows
+
+When your goal is to understand the data (such as top-N, counts per category, or distributions), a `GROUP BY` returns a focused result that is faster to compute and easier to work with than scanning millions of raw rows.
+
+**Before**
+
+```sql
+SELECT *
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['timestamp', 'service', '@http.status_code', 'message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    timestamp   TIMESTAMP,
+    service     VARCHAR,
+    status_code VARCHAR,
+    message     VARCHAR
+)
+LIMIT 5000000;
+```
+
+**After**
+
+```sql
+-- Returns ~10 rows (one per status_code), answers the actual question
+SELECT status_code, count(*) AS hits
+FROM dd.logs(
+    filter         => 'service:orders-api',
+    columns        => ARRAY['@http.status_code'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    status_code VARCHAR
+)
+GROUP BY status_code
+ORDER BY hits DESC
+LIMIT 100;
+```
+
+**Note:** Aggregating in SQL with `GROUP BY` is more efficient than fetching raw rows and aggregating in a downstream step. The engine filters and summarizes data at the source.
+
+#### Narrow the scan before aggregating on a high-cardinality column
+
+When working with high-cardinality columns (such as emails, IPs, or request IDs):
+
+- Use `SELECT DISTINCT` or `GROUP BY` to return one entry per distinct value across workers. Without a tight filter, the result set grows without bound.
+- Narrow the data source filter first so the aggregation runs over fewer rows.
+- For wide cardinalities, pre-aggregate to one row per time bucket and key, then count distinct across buckets.
+
+*Goal: find the distinct user emails in the checkout service's logs over the last 7 days.*
+
+**Before**
+
+```sql
+-- No service filter; unbounded distinct set across all logs
+SELECT DISTINCT user_email
+FROM dd.logs(
+    columns        => ARRAY['@usr.email'],
+    from_timestamp => NOW() - INTERVAL '7 days',
+    to_timestamp   => NOW()
+) AS (
+    user_email VARCHAR
+)
+```
+
+**After**
+
+```sql
+-- Pre-aggregate to one row per (day, email), then count distinct across days
+SELECT count(DISTINCT user_email) AS distinct_emails
+FROM (
+  SELECT date_trunc('day', timestamp) AS day, user_email
+  FROM dd.logs(
+      filter         => 'service:checkout-api',
+      columns        => ARRAY['timestamp', '@usr.email'],
+      from_timestamp => NOW() - INTERVAL '7 days',
+      to_timestamp   => NOW()
+  ) AS (
+      timestamp  TIMESTAMP,
+      user_email VARCHAR
+  )
+  GROUP BY 1, 2
+) daily;
+```
+
+### Joins
+
+#### Combine self-joins into a single scan
+
+Joining one source to itself many times to correlate different events is one of the most common causes of slow queries. Most self-joins can be rewritten as a single scan with `CASE` expressions, window functions, or `GROUP BY ... HAVING`.
+
+**Before: 4 self-joins**
+
+```sql
+WITH a AS (
+    SELECT user_id FROM dd.logs(filter => 'service:checkout-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+b AS (
+    SELECT user_id FROM dd.logs(filter => 'service:payment-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+c AS (
+    SELECT user_id FROM dd.logs(filter => 'service:shipping-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+),
+d AS (
+    SELECT user_id FROM dd.logs(filter => 'service:orders-api',
+        columns => ARRAY['@usr.id'], from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp => NOW()) AS (user_id VARCHAR)
+)
+SELECT user_id
+FROM a JOIN b USING (user_id)
+       JOIN c USING (user_id)
+       JOIN d USING (user_id);
+```
+
+**After: single scan**
+
+```sql
+SELECT user_id
+FROM dd.logs(
+    filter         => 'service:(checkout-api OR payment-api OR shipping-api OR orders-api)',
+    columns        => ARRAY['service', '@usr.id'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (
+    service VARCHAR,
+    user_id VARCHAR
+)
+GROUP BY user_id
+HAVING count(DISTINCT service) = 4;
+```
+
+#### Use a high-cardinality join key
+
+When joining, prefer a high-cardinality key like `user_id`, `request_id`, or `trace_id`. Coarse keys like `service` or `status` can expand a moderate input into billions of intermediate rows. For large datasets, also narrow the data source filter and time range on each side of the join.
+
+#### Filter both sides of a cross-source join
+
+When you `JOIN` across two data sources, apply a selective filter on each side. Examples include logs + RUM, logs + traces, and feed + logs. An unfiltered side becomes a full scan that has to be held in memory for the join. Where possible, pre-aggregate each source separately and join the summaries.
+
+**Before**
+
+```sql
+-- No filter on the logs side; full scan held in memory for the join
+SELECT logs.message, rum.user_id
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
+```
+
+**After**
+
+```sql
+-- Both sides filtered before the join
+SELECT logs.message, rum.user_id
+FROM (
+    SELECT message, trace_id
+    FROM dd.logs(
+        filter         => 'service:checkout-api status:error',
+        columns        => ARRAY['message', 'trace_id'],
+        from_timestamp => NOW() - INTERVAL '1 day',
+        to_timestamp   => NOW()
+    ) AS (message VARCHAR, trace_id VARCHAR)
+) logs
+JOIN rum ON logs.trace_id = rum.trace_id
+WHERE rum.view_name = 'cart';
+```
+
+### Expressions
+
+#### Run regular expressions once per row
+
+If you call `REGEXP_MATCH` once for each output column, the same pattern is evaluated against `message` repeatedly for every row. Run it once into an array, join the captures into a single delimited string, and unpack them with `SPLIT_PART` in a downstream `SELECT`.
+
+**Before**
+
+```sql
+-- Same regex evaluated 3 times per row
+SELECT
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 1) AS user_id,
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 2) AS latency_ms,
+  SPLIT_PART(ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||'), '|||', 3) AS error_code
+FROM dd.logs(
+    columns        => ARRAY['message'],
+    from_timestamp => NOW() - INTERVAL '1 day',
+    to_timestamp   => NOW()
+) AS (message VARCHAR);
+```
+
+**After**
+
+```sql
+-- Regex runs once per row; captures unpacked in the outer SELECT
+SELECT
+  SPLIT_PART(matched, '|||', 1) AS user_id,
+  SPLIT_PART(matched, '|||', 2) AS latency_ms,
+  SPLIT_PART(matched, '|||', 3) AS error_code
+FROM (
+  SELECT ARRAY_TO_STRING(REGEXP_MATCH(message, 'user_id=(\S+) latency_ms=(\d+) error=(\S+)'), '|||') AS matched
+  FROM dd.logs(
+      columns        => ARRAY['message'],
+      from_timestamp => NOW() - INTERVAL '1 day',
+      to_timestamp   => NOW()
+  ) AS (message VARCHAR)
+) sub;
+```
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -1212,4 +1581,4 @@ FROM aws.ec2_instance
 [7]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#set-expressions-character-classes
 [8]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#flag-options
 [9]: https://unicode-org.github.io/icu/userguide/strings/regexp.html#find-and-replace
-[10]: /bits_ai/mcp_server/
+[10]: /mcp_server/

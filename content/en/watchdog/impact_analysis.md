@@ -25,7 +25,7 @@ If Watchdog determines that the end-user experience is impacted, it provides a s
 
 {{< img src="watchdog/watchdog_impact_analysis.mp4" alt="A user hovering over the users and views pills to show more information about the users impacted and the number of views impacted" video=true >}}
 
-This feature is automatically enabled for all APM and RUM users. Whenever Watchdog APM alerts are associated with end-user impacts, affected **users** and **view paths** appear in the **Impacts** section of your Watchdog alerts. Click **users** to view the affected users' contact information if you need to reach out to them. Click **view paths** to access the impacted RUM views for additional information.
+This feature is automatically enabled for all APM and RUM users. Whenever Watchdog APM alerts are associated with end-user impacts, affected {{< ui >}}users{{< /ui >}} and {{< ui >}}view paths{{< /ui >}} appear in the {{< ui >}}Impacts{{< /ui >}} section of your Watchdog alerts. Click {{< ui >}}users{{< /ui >}} to view the affected users' contact information if you need to reach out to them. Click {{< ui >}}view paths{{< /ui >}} to access the impacted RUM views for additional information.
 
 ## Further Reading
 

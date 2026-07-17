@@ -501,7 +501,7 @@ When viewing a [Query Sample][37] in Database Monitoring, if the associated trac
 ### Visualize the downstream database hosts of APM services
 
 On the APM page for a given service, view the direct downstream database dependencies of the service as identified by Database Monitoring, and determine if any hosts have disproportionate load that may be caused by noisy neighbors. To view a service's database dependencies:
-1. Select the service in the [Software Catalog][26] to open a details panel.
+1. Select the service in the [Catalog][26] to open a details panel.
 1. Select {{< ui >}}Service Page{{< /ui >}} in the panel.
 1. On the Service page, select the {{< ui >}}Databases{{< /ui >}} section.
 1. Within the Databases section, select the {{< ui >}}Databases{{< /ui >}} tab.

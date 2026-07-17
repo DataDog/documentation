@@ -20,7 +20,7 @@ further_reading:
 
 {{< img src="observability_pipelines/setup/pipeline_ui.png" alt="The pipelines page with a source going to two processors groups and two destinations" style="width:100%;" >}}
 
-Observability Pipelines lets you collect and process logs and metrics ({{< tooltip glossary="preview" case="title" >}}) within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
+Observability Pipelines lets you collect and process logs and metrics within your own infrastructure, and then route them to different destinations. A pipeline consists of three core components:
 
 - [Source][1]: Receives data from a tool like the Datadog Agent.
 - [Processors][2]: Transform, enrich, or filter data.
@@ -58,9 +58,6 @@ See [Set Up Pipelines][2] for more information on setting up a source, processor
 
 {{% tab "Metrics" %}}
 
-<div class="alert alert-info">
-Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
-
 Use the [Metric Tag Governance][1] template to create a metrics pipeline.
 
 See [Set Up Pipelines][2] for more information on setting up a source, processors and destination.
@@ -81,7 +78,11 @@ Metrics sent to Observability Pipelines include the following:
 - `timestamp`: The date and time the metric is created.
 - `tags`: Includes tags such as `host`.
 
-The `counter` metric type is the only `incremental` metric. `gauge`, `distribution`, and `histogram` metric types are `absolute` metrics.
+Whether a received metric is `incremental` or `absolute` depends on the source. For example, metrics from OpenTelemetry can either be incremental or absolute based on their [temporality][4]. The following table is an example of an OTel counter metric sent with delta versus cumulative temporality.
+
+| Metric Type | Incremental                      | Absolute                               |
+|-------------|----------------------------------|----------------------------------------|
+| Counter     | Sent as deltas: `+2`, `+4`, `+6` | Sent as cumulative sum: `2`, `6`, `10` |
 
 An example of a metric:
 
@@ -105,18 +106,19 @@ An example of a metric:
 
 The available metric types:
 
-| Metric type | Description | Example |
-| ----------- | ----------- | ------- |
-| COUNTER     | Represents the total number of event occurrences in one time interval. This value can be reset to zero, but cannot be decreased. | You want to count the number of logs with `status:error`. |
-| GAUGE       | Represents a snapshot of events in one time interval. | You want to measure the latest CPU utilization per host for all logs in the production environment. |
-| DISTRIBUTION | Represent the global statistical distribution of a set of values calculated across your entire distributed infrastructure in one time interval. | You want to measure the average time it takes for an API call to be made. |
-| HISTOGRAM   | Represents the statistical distribution of a set of values calculated in one time interval. | You want to measure response time distributions for a service or endpoint. |
+| Metric type  | Description                                                                                                                                                       | Example                                                                                       |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| COUNTER      | The total number of event occurrences in one time interval. Can be reset to zero, but cannot be decreased.                                                        | You want to count the number of logs with `status:error`.                                     |
+| GAUGE        | A snapshot of a value at the time it is reported.                                                                                                                 | You want to track the latest CPU utilization for each host.                                   |
+| HISTOGRAM    | Statistical aggregations (`avg`, `min`, `max`, `count`, `median`, percentiles) computed per host by the Datadog Agent in one time interval, then sent to Datadog. | You want per-host request latency aggregations from each web server.                          |
+| DISTRIBUTION | Raw values sent to Datadog so percentile aggregations are computed server-side, globally across every host reporting the metric in one time interval.             | You want the global p95 latency of an API endpoint, calculated across every host serving it.  |
 
 See [Metric Types][3] for more information.
 
 [1]: /observability_pipelines/configuration/explore_templates/?tab=metrics#metric-tag-governance
 [2]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: /metrics/types/?tab=gauge#metric-types
+[4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
 
 {{% /tab %}}
 {{< /tabs >}}

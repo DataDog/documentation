@@ -57,5 +57,5 @@ Redmine 통합은 서비스 점검을 포함하지 않습니다.
 도움이 필요하신가요? [Datadog 지원팀][3]에 문의하세요.
 
 [1]: https://app.datadoghq.com/integrations/redmine
-[2]: https://docs.datadoghq.com/ko/service_management/events/explorer/
+[2]: https://docs.datadoghq.com/ko/events/explorer/
 [3]: https://docs.datadoghq.com/ko/help/

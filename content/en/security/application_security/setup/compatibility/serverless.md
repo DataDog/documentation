@@ -9,7 +9,11 @@ aliases:
 
 App and API Protection provides serverless capability for the following platforms and libraries:
 
-{{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
+{{< card-grid card_width="225px" image_width="200" >}}
+  {{< image-card href="/security/application_security/serverless/#aws-lambda" src="integrations_logos/amazon_lambda.png" alt="AWS Lambda" >}}
+  {{< image-card href="/security/application_security/serverless/#google-cloud-run" src="integrations_logos/google_cloud_run.png" alt="Google Cloud Run" >}}
+  {{< image-card href="/security/application_security/serverless/#azure-app-service" src="integrations_logos/azure_app_services.png" alt="Microsoft Azure App Service" >}}
+{{< /card-grid >}}
 
 ## AWS Lambda
 **Note**: Threat Protection through Remote Configuration is not supported. Use [Workflows][5] to block IPs in your [WAF][6].
@@ -90,5 +94,5 @@ Only *web applications* are supported. Azure Functions are not supported.
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/
 [6]: /security/application_security/policies/inapp_waf_rules/

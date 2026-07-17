@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: /service_management/events/explorer/
+- link: /events/explorer/
   tag: 설명서
   text: 이벤트 탐색기에 대해 자세히 알아보기
 title: 저장된 보기
@@ -46,5 +46,5 @@ title: 저장된 보기
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/event/explorer
-[2]: /ko/service_management/events/explorer/searching
-[3]: /ko/service_management/events/explorer/searching
+[2]: /ko/events/explorer/searching
+[3]: /ko/events/explorer/searching

@@ -66,8 +66,8 @@ Check any number of boxes to find your monitors. The following rules apply:
 * The `AND` operator is applied when checking attributes from different fields, for example: `status:Alert type:Metric` (the lack of an operator between the two search terms implies `AND`).
 * Most of the time, the `OR` operator is applied when checking attributes within the same field, for example: `status:(Alert OR Warn)`. Some exceptions apply, for example checking multiple scopes or service tags uses the `AND` operator.
 * Some attributes do not allow selecting multiple values. For example, when you select a metric or service check, the other options disappear from the list until you remove the selection.
-* The `Triggered` checkbox under the *Status* attribute resolves to `status:(Alert OR Warn OR "No Data")`. Triggered is not a valid monitor status.
-* The name for the *Metric/Check* attribute is always `metric` in the query. For example, selecting the check `http.can_connect` resolves to `metric:http.can_connect`.
+* The `Triggered` checkbox under the {{< ui >}}Status{{< /ui >}} attribute resolves to `status:(Alert OR Warn OR "No Data")`. Triggered is not a valid monitor status.
+* The name for the {{< ui >}}Metric/Check{{< /ui >}} attribute is always `metric` in the query. For example, selecting the check `http.can_connect` resolves to `metric:http.can_connect`.
 
 **Note**: For attributes with a large number of values across your monitors, use the attribute search bar to find the correct value.
 
@@ -92,9 +92,9 @@ You can **temporarily** override your default saved view by completing any actio
 
 From the default view entry in the Views panel:
 
-* **Reload** your default view by clicking on the entry.
-* **Update** your default view with the current parameters.
-* **Reset** your default view to Datadog's defaults for a fresh restart.
+* {{< ui >}}Reload{{< /ui >}} your default view by clicking on the entry.
+* {{< ui >}}Update{{< /ui >}} your default view with the current parameters.
+* {{< ui >}}Reset{{< /ui >}} your default view to Datadog's defaults for a fresh restart.
 
 ## Further reading
 
