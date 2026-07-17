@@ -43,11 +43,11 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluations page after selecting Create Evaluation." style="width:100%;" >}}
-1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{ </ui> }} toggle to enable tracing. When this evaluation runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog. 
+1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluation runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Configure the model:
-    1. Select the {{< ui >}}Accout{{< /ui>}}  drop-down menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
+    1. Select the {{< ui >}}Account{{< /ui >}} dropdown menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
         - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
     1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model.
@@ -58,7 +58,7 @@ Learn more about the [compatibility requirements][6].
 1. In the {{< ui >}}System Prompt{{< /ui >}} field, enter your custom prompt or modify a prompt template.
    For custom prompts, provide clear instructions describing what the evaluator should assess.
    - Focus on a single evaluation goal
-   - Include 2–3 few-shot examples showing input/output pairs, expected results, and reasoning.
+   - Include 2-3 few-shot examples showing input/output pairs, expected results, and reasoning.
 
 {{% collapse-content title="Example custom prompt" level="h4" expanded=false id="custom-prompt-example" %}}
 **System Prompt**
@@ -114,7 +114,7 @@ For AI Gateway, both [Structured Output](#structured-output) and [Keyword Search
 1. Select an evaluation output type:
 
    - {{< ui >}}Boolean{{< /ui >}}: True/false results (for example, "Did the model follow instructions?")
-   - {{< ui >}}Score{{< /ui >}}: Numeric ratings (for example, a 1–5 scale for helpfulness)
+   - {{< ui >}}Score{{< /ui >}}: Numeric ratings (for example, a 1-5 scale for helpfulness)
    - {{< ui >}}Categorical{{< /ui >}}: Discrete labels (for example, "Good", "Bad", "Neutral")
    - {{< ui >}}JSON{{< /ui >}}: JSON allows free form schemas
 
@@ -237,7 +237,7 @@ An example schema for a JSON evaluation:
 
 
 4. Configure {{< ui >}}Assessment Criteria{{< /ui >}}.
-   This flexibility allows you to align evaluation outcomes with your team’s quality bar. Pass/fail mapping also powers automation across Datadog Agent Observability, enabling monitors and dashboards to flag regressions or track overall health.
+   This flexibility allows you to align evaluation outcomes with your team's quality bar. Pass/fail mapping also powers automation across Datadog Agent Observability, enabling monitors and dashboards to flag regressions or track overall health.
 
 {{< tabs >}}
 {{% tab "Boolean" %}}
@@ -582,7 +582,7 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 ## Configure LLM-as-a-judge evaluations from the API
 
-You can use basic CRUD operations to manipluate managed evaluation configs, one you have the `DD_API_KEY` [API key][14] specified in your environment.
+You can use basic CRUD operations to manipulate managed evaluation configs, after you have the `DD_API_KEY` [API key][14] specified in your environment.
 
  - [GET][11] existing evaluation configurations
  - [PUT][12] existing evaluation configurations
