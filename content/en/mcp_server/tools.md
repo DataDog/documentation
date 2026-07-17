@@ -544,6 +544,147 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 - Help me debug why this widget is showing fractional values when it should be a count.
 - How do I configure a timeseries to show both bars and lines?
 
+## Data Observability
+
+Tools for [Data Observability][70], including searching data entities in the catalog, navigating data lineage, monitoring data quality, analyzing Spark and Databricks jobs, and managing entity metadata.
+
+### `search_data_entities`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Searches for data entities in the data catalog. Supports filtering by name (with wildcards), entity type, platform, schema, database, and account. Entity types include tables, columns, schemas, databases, dbt models, BI dashboards, Spark jobs, S3 buckets, and more. Use `get_data_catalog_schema` to discover available platforms and entity types.
+
+- Find tables named `orders` in the Snowflake platform.
+- Search for dbt models starting with `stg_` in the analytics database.
+- List all schemas in the `analytics` Snowflake database.
+
+### `get_data_catalog_schema`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Returns the entity type schema for every platform the organization has data in. Discovers active platforms (Snowflake, BigQuery, Databricks, dbt, and so on), their entity types, the containment hierarchy, the filterable attribute names, and the default metrics available for each entity type (such as `dataset.freshness`). Call this at the start of a data catalog conversation to learn which platforms, entity types, and filters are available.
+
+- What platforms and entity types are in my data catalog?
+- Which attributes can I filter on when searching for Snowflake tables?
+
+### `get_data_entity_details`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches full details and attributes for one or more data entities by their entity IDs. Returns owner, tags, display name, platform, schema, database, account, and all other attributes. Use `search_data_entities` first to find entity IDs.
+
+- Get full details for entity `<entity_id>`.
+- Show me the owner and tags for this Snowflake table.
+
+### `get_data_entity_hierarchy`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities. Use this for containment navigation, such as finding which schema and database a table belongs to, or listing the columns in a table. This tool is for containment, not data lineage (use `get_data_entity_lineage` for lineage).
+
+- What schema and database does this table belong to?
+- List all columns in the `orders` table.
+- What tables are in the `landing` schema?
+
+### `get_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches the live reachable lineage subgraph from one or more anchor entities. Returns upstream or downstream data-flow relationships (nodes and edges) up to a configurable depth. For large or unknown graphs, use `summarize_data_entity_lineage` first.
+
+- Show me what downstream tables depend on the `raw_orders` table.
+- What data sources feed into the `fct_revenue` table?
+- Trace lineage from `stg_orders` downstream with a depth of 3.
+
+### `summarize_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Gets aggregate statistics about the lineage graph reachable from anchor entities, such as counts and breakdowns by node type, depth, and attributes, without returning the full node and edge payload. Use this before `get_data_entity_lineage` when working with large or unknown graphs.
+
+- How many tables does `fct_revenue` depend on upstream?
+- What types of entities are downstream from this Spark job?
+- Give me a summary of the lineage graph from `raw_orders`.
+
+### `rank_data_entities_by_lineage_degree`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Ranks entities by their transitive lineage connectivity using a pre-built snapshot. Returns entities such as tables, dashboards, and jobs ranked by how many other entities they connect to (downstream or upstream). Useful for identifying the most critical or widely consumed tables.
+
+- Which tables have the most downstream consumers?
+- Rank tables by upstream dependency count to find raw ingestion points.
+- Find the most widely consumed entities in the data catalog.
+
+### `get_data_observability_monitor`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read`, `Timeseries`, and `APM Read`*\
+Retrieves data quality metrics timeseries data for a given data observability monitor ID. For anomaly monitors, the response includes upper and lower bounds that define the expected normal range.
+
+- Get the row count timeseries for monitor `12345` on the `orders` table.
+- Show me the anomaly bounds for monitor `67890` over the last 24 hours.
+
+### `get_spark_job_health`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves detailed health metrics for a single Spark or Databricks job run, including duration, CPU time, executor allocation, memory usage, shuffle read, spill, and skew. Accepts either a trace ID or a job name to identify the run.
+
+- Show me the health metrics for the latest run of the `process_orders` Spark job.
+- What were the worst-performing stages in Spark job trace `abc123`?
+- Find Databricks job runs for `nightly_aggregation` in the last 7 days.
+
+### `get_spark_sql_plan`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves the Spark SQL physical execution plan from a `spark.stage` span. Shows node types (Exchange, SortMergeJoin, HashAggregate, and so on), join strategies, shuffle and partitioning information, and child node relationships. Use `get_spark_job_health` to find stage span IDs.
+
+- Show me the SQL execution plan for stage span `def456` in trace `abc123`.
+- What join strategy is used in this Spark stage?
+- Inspect the physical plan for the slowest stage in this job.
+
+### `get_warehouse_query_history`
+*Toolset: **data-observability***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Fetches recent queries that touched one or more data entities, in reverse chronological order. Supports filtering by access type (read or write) and time range. Use `search_data_entities` to find entity IDs first.
+
+- Who has been querying the `orders` table in the last 7 days?
+- Show me write operations on the `fct_revenue` table from yesterday.
+- What SQL queries have touched this entity recently?
+
+### `get_popular_warehouse_tables_by_query_frequency`
+*Toolset: **data-observability***\
+*Permissions Required: `Logs Read Data`, `Logs Read Index Data`, and `APM Read`*\
+Ranks database tables by query activity, broken out by user type (human analysts, BI tools, orchestrators, ETL tools, and internal apps). Useful for identifying business-critical tables and prioritizing monitoring coverage.
+
+- Which tables are most queried by human analysts in Snowflake?
+- What are the top tables powering BI dashboards?
+- Show me the most frequently queried tables by orchestration tools like dbt and Airflow.
+
+### `get_entity_descriptions`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Gets the custom user-defined descriptions for data entities by their IDs. Returns a map of entity ID to description with created and updated timestamps.
+
+- Show me the custom descriptions for these three tables.
+- What description has been set for entity `<entity_id>`?
+
+### `update_entity_description`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Catalog Write`*\
+Sets or updates the custom user-defined description for a data entity.
+
+- Set the description of the `orders` table to "Contains all customer orders."
+- Update the description for entity `<entity_id>`.
+
+### `get_entity_tags`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Gets the custom user-defined tags for data entities. Returns entity IDs with their associated key:value tags. These are custom tags distinct from built-in entity attributes.
+
+- Show me the custom tags on the `orders` table.
+- What tags have been applied to these entities?
+
+### `update_entity_tags`
+*Toolset: **data-observability***\
+*Permissions Required: `Data Observability Catalog Write`*\
+Adds or removes custom user-defined tags on data entities. Tags are key:value strings.
+
+- Add the tag `team:data-eng` to the `orders` table entity.
+- Remove the `env:staging` tag from these entities.
+
 ## Database Monitoring
 
 Tools for interacting with [Database Monitoring][26].
@@ -1044,6 +1185,70 @@ Guides you through onboarding serverless applications to Datadog, including AWS 
 Guides you through uploading source maps for RUM error mapping.
 
 - Help me upload source maps so my RUM errors show original source code.
+
+## Product Analytics
+
+Tools for querying [Product Analytics][68] data, including org vocabulary lookup, semantic search, aggregations, journeys, pathways, and retention.
+
+<div class="alert alert-info">The <code>product-analytics</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
+### `search_product_analytics_events`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Finds Product Analytics views and actions matching a natural-language description using semantic search, including org-curated labeled actions.
+
+- Find the view and action for adding an item to the cart.
+- What's the event for completing checkout?
+
+### `search_product_analytics_org_entities`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Looks up org-specific Product Analytics entities by name or keyword (feature flags, context attribute keys, saved charts, and segments).
+
+- Find the segment for "power users".
+- What feature flags are available to filter Product Analytics data by?
+
+**Note**: Use the segment filter expression returned by this tool verbatim rather than constructing one manually.
+
+### `get_product_analytics_saved_chart`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read` and `Product Analytics Saved Widgets Read`*\
+Retrieves the full definition of a saved Product Analytics chart by ID, including its query parameters, filters, and time interval. Use `search_product_analytics_org_entities` first to find the chart ID.
+
+- Load the saved chart `abc-123-def` and show me its query parameters.
+- Reproduce the "weekly retention" saved chart with an updated time range.
+
+### `aggregate_product_analytics_events`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Aggregates Product Analytics event data as a scalar or timeseries, supporting count, cardinality, average, sum, min, max, and percentile calculations with optional grouping.
+
+- How many sessions did we have today?
+- Show me daily active users over the past 30 days.
+
+### `run_product_analytics_journey`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs funnel, timeseries, scalar, list, and drop-off queries across a multi-step user journey, tracked at the user, session, or account level.
+
+- What's the conversion rate from viewing a product to completing checkout?
+- Show me the users who dropped off between adding to cart and checkout.
+
+### `run_product_analytics_pathway`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs a Sankey (pathway) analysis showing how users navigate between views, starting from a source view or leading to a target view.
+
+- What are the most common paths users take after landing on the home page?
+- Show me the pathways that lead to the checkout page.
+
+### `run_product_analytics_retention`
+*Toolset: **product-analytics***\
+*Permissions Required: `RUM Apps Read`*\
+Runs retention queries on Product Analytics data as a cohort grid, retention curve, timeseries, or scalar value, tracked at the user or account level.
+
+- Show me the weekly retention grid for users who signed up in the last quarter.
+- What's the day-7 retention rate for users who joined in January?
 
 ## Profiling
 Read-only tools for discovering, exploring, and analyzing [Continuous Profiler][62] data across services, runtimes, and traces.
@@ -1551,6 +1756,49 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
 
+### `list_datadog_security_findings_automation_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Read`*\
+Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
+
+- List all mute automation rules for security findings.
+- Show me the ticket-creation rules.
+- What due-date automation rules are configured?
+
+### `create_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write` and `Security Monitoring Findings Read`*\
+Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+
+- Create a rule to automatically mute false-positive misconfiguration findings in staging.
+- Set 30-day remediation due dates for high-severity library vulnerabilities.
+- Auto-create Jira tickets for critical findings in the SECURITY project.
+
+### `update_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Updates an existing automation rule. Supports partial updates, so only the provided fields are changed. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
+
+- Enable the automation rule that mutes staging findings.
+- Change the due-date rule to give critical findings 14 days instead of 30.
+- Update the ticket-creation rule to target a different Jira project.
+
+### `delete_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Permanently deletes a security findings automation rule by ID.
+
+- Delete the severity modifier rule `abc-123-def`.
+- Remove the mute rule that is no longer needed.
+
+### `reorder_datadog_security_findings_automation_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Moves an automation rule up or down in the list. Rules are applied in order, so a rule's position sets its priority.
+
+- Move the mute rule `abc-123-def` to the top of the list.
+- Lower the priority of this due-date rule by two positions.
+
 ### `get_datadog_security_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
@@ -1602,6 +1850,26 @@ Unblocks a previously denylisted entity by setting its expiration in the past.
 
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
+
+## Session Replay
+
+Tools for searching [Session Replay][69] recordings and summarizing session activity.
+
+### `search_replays`
+*Toolset: **session-replay***\
+*Permissions Required: `RUM Apps Read`*\
+Searches Session Replay recordings and returns matching sessions. Supports filtering by user identity, device, error count, or any RUM facet, and journey search for sessions that followed a specific sequence of views or actions.
+
+- Find replays of sessions with more than 2 errors in the last 24 hours.
+- Show me replays of users who followed the checkout journey but didn't complete it.
+
+### `get_replay_summary`
+*Toolset: **session-replay***\
+*Permissions Required: `RUM Apps Read` and `RUM Session Replay Read`*\
+Generates an AI-powered, time-based play-by-play of what a user did during a specific session replay—pages visited, actions taken, and key moments—organized into chapters. Typically called after `search_replays` to dive into a session of interest.
+
+- Summarize what happened in session `abc-123-def`.
+- Give me a play-by-play of the replay for the user who reported a checkout error.
 
 ## Software Delivery
 
@@ -1773,14 +2041,6 @@ Retrieves and visualizes Datadog metrics, traces, logs, and other data as intera
 - Fetch the widget data for widget `2228368921512806` on dashboard `abc-123-def`.
 - Visualize the data from this Datadog share link.
 
-### `get_widget_reference_compressed`
-*Toolset: **widgets***\
-*Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
-Returns compressed TypeScript schemas and building instructions for widget types. Call before generating widget JSON. When building group widgets, include both `group` and any intended child widget types in one call for deduplication.
-
-- Get the compressed schema for a timeseries widget.
-- Show the building instructions for top list and query table widgets.
-
 ### `search_datadog_widgets`
 *Toolset: **widgets***\
 *Permissions Required: `Dashboards Read` or `Dashboards Write` or `Notebooks Read` or `Notebooks Write`*\
@@ -1912,3 +2172,6 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [65]: /code_coverage/
 [66]: /delivery_performance/dora_metrics/
 [67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[68]: /product_analytics/
+[69]: /session_replay/
+[70]: /data_observability/

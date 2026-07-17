@@ -113,6 +113,10 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
    # Optional: uncomment to send spark driver and worker logs to Datadog
    # export DD_EMR_LOGS_ENABLED=true
 
+   # Collect Spark lineage data with OpenLineage, so you can see upstream and downstream
+   # tables of your jobs and visualize entire Spark pipelines. Set to false to disable.
+   export DD_OPENLINEAGE_ENABLED=true
+
    # Download and run the latest init script
    curl -L https://install.datadoghq.com/scripts/install-emr.sh > djm-install-script; bash djm-install-script || true
 
@@ -129,6 +133,7 @@ When you create a new EMR cluster in the [Amazon EMR console][4], add a bootstra
 | DD_ENV                   | Set the `env` environment tag on metrics, traces, and logs from this cluster.   |         |
 | DD_EMR_LOGS_ENABLED      | Send Spark driver and worker logs to Datadog.                                                                                                                  | false   |
 | DD_LOGS_CONFIG_PROCESSING_RULES | Filter the logs collected with processing rules. See [Advanced Log Collection][16] for more details. |         |
+| DD_OPENLINEAGE_ENABLED   | Collect Spark lineage data with OpenLineage to see upstream and downstream tables of your jobs and visualize entire Spark pipelines. Set to `false` to disable. | true    |
 
 [15]: /getting_started/tagging/
 [16]: /agent/logs/advanced_log_collection/?tab=environmentvariable#global-processing-rules
