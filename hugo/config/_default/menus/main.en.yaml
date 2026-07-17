@@ -1,6 +1,6 @@
 menu:
   main:
-    - name: Essentials
+    - name: Essential Features
       identifier: essentials_heading
       weight: 1000000
     - name: In The App
