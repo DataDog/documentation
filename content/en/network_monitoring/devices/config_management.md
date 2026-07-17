@@ -18,7 +18,7 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 - Monitor how device configurations change over time
 - Compare two configuration versions side by side
 - Use AI-generated summaries to understand changes and their potential impact during incidents
-- [Roll back a device to a previous configuration][9]
+- [Roll back a device to a previous configuration][8]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
 
@@ -153,8 +153,6 @@ When you compare two configuration versions, the AI summary automatically:
 
 NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent, matched automatically based on your device's operating system, and updated through Agent releases.
 
-For the profile source files, see the [NCM default profiles directory][8] in the `datadog-agent` repository.
-
 | Vendor | OS | Profile | Min. Agent version | Running | Startup |
 |---|---|---|---|---|---|
 | Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
@@ -179,5 +177,4 @@ For the profile source files, see the [NCM default profiles directory][8] in the
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
-[8]: https://github.com/DataDog/datadog-agent/tree/main/pkg/networkconfigmanagement/profile/default_profiles
-[9]: /network_monitoring/devices/config_management_rollback
+[8]: /network_monitoring/devices/config_management_rollback
