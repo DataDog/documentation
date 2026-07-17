@@ -56,12 +56,12 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 #### Changed
 - Reduces search CPU time for nested date histogram queries by up to 20%, with the largest gains on seven-day windows.
-- Adds a dedicated health check listener on port `7284` for BYOC Logs component liveness and readiness checks.
+- Adds a dedicated health check listener on port `7284` for CloudPrem component liveness and readiness checks.
 
 #### Helm chart changes
-- Adds global `volumes` and `volumeMounts` values that apply to all BYOC Logs components and merge with existing per-component `extraVolumes` and `extraVolumeMounts`.
-- Adds global `topologySpreadConstraints` support, merged with per-component constraints, to spread BYOC Logs workload pods across topology domains.
-- Updates BYOC Logs services and AWS ALB internal ingress health checks to use the dedicated health endpoint.
+- Adds global `volumes` and `volumeMounts` values that apply to all CloudPrem components and merge with existing per-component `extraVolumes` and `extraVolumeMounts`.
+- Adds global `topologySpreadConstraints` support, merged with per-component constraints, to spread CloudPrem workload pods across topology domains.
+- Updates CloudPrem services and AWS ALB internal ingress health checks to use the dedicated health endpoint.
 
 ### v0.1.29 — 2026-06-05
 
