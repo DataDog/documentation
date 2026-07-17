@@ -1,5 +1,6 @@
 ---
 title: Single Step APM Instrumentation on Windows
+description: "Enable Datadog Single Step Instrumentation for .NET applications in IIS or Java and .NET applications across a Windows host."
 code_lang: windows
 type: multi-code-lang
 code_lang_weight: 30
@@ -18,7 +19,7 @@ With Single Step Instrumentation (SSI), you enable APM for your Windows applicat
 - Instrumenting .NET applications on IIS is generally available (Agent v7.67.1+, .NET SDK v3.19.0+).
 - Host-wide instrumentation of Java and .NET applications is in Preview.
 
-<div class="alert alert-info">Before you begin, confirm that your environment is supported in the <a href="/tracing/trace_collection/single-step-apm/compatibility/">SSI compatibility guide</a>.</div>
+Before you begin, confirm that your environment meets the [SSI compatibility requirements][8].
 
 ## Enable APM on Windows
 
@@ -75,7 +76,7 @@ if ($p.ExitCode -ne 0) {
 
 By default, SSI installs the latest supported versions of the Datadog .NET and Java SDKs. To pin specific versions, add the `DD_APM_INSTRUMENTATION_LIBRARIES` property, for example `DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3,java:1"`.
 
-Host-wide SSI instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, or for granular control over which processes are instrumented, [define instrumentation rules](#define-instrumentation-rules).
+Host-wide SSI instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, or for granular control over which processes are instrumented, [define instrumentation rules][9].
 
 {{< collapse-content title="Alternate: install with the in-app wizard" level="h4" >}}
 
@@ -116,7 +117,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. Click {{< ui >}}Next{{< /ui >}}.
 1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
 
-For host-wide instrumentation, you can [define instrumentation rules](#define-instrumentation-rules) to instrument .NET applications running outside of IIS or to control which processes are instrumented.
+For host-wide instrumentation, you can [define instrumentation rules][9] to instrument .NET applications running outside of IIS or to control which processes are instrumented.
 
 ## Verify your first trace
 
@@ -150,11 +151,17 @@ To enable products, [set environment variables][3] in your application configura
 
 ## Remove Single Step APM instrumentation from your Agent
 
-To disable SSI for .NET on your host, run:
+### IIS-only instrumentation
 
-```shell
+To remove the SSI-managed .NET SDK package, run the following command in an elevated PowerShell session, then recycle the affected IIS application pools:
+
+```powershell
 &"C:\Program Files\Datadog\Datadog Agent\bin\datadog-installer.exe" remove datadog-apm-library-dotnet
 ```
+
+### Host-wide instrumentation (Preview)
+
+Removing only the .NET SDK package does not disable the Windows host injector or remove the Java SDK. To remove host-wide instrumentation, roll back the SSI configuration through Fleet Automation or follow the offboarding instructions provided with the Preview, then restart affected applications. Contact the Preview team or [Datadog Support][10] if the rollback control is not available in your account.
 
 ## Advanced configuration
 
@@ -177,7 +184,7 @@ To configure instrumentation rules:
 1. Define instrumentation rules:
    1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
    1. Name your rule.
-   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+   1. Add one or more conditions. See [Define rule conditions][11] to learn more.
 
      {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
 
@@ -246,3 +253,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
 [7]: https://app.datadoghq.com/apm/services
+[8]: /tracing/trace_collection/single-step-apm/compatibility/
+[9]: #define-instrumentation-rules
+[10]: /help/
+[11]: #define-rule-conditions

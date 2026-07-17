@@ -36,7 +36,7 @@ To learn more about how it works, see the [injector guide for Single Step Instru
 
 ## Prerequisites
 
-1. Remove any custom instrumentation code from your application and restart it. SSI is automatically disabled if custom instrumentation is detected.
+1. Check whether the application already loads a tracing SDK. Remove or disable only conflicting tracer initialization before enabling SSI, then restart the application. You can keep custom spans and non-tracing OpenTelemetry dependencies.
 1. Confirm environment compatibility by reviewing the [SSI compatibility guide][5] for supported languages, operating systems, and architectures.
 
 ## Instrument SDKs across applications

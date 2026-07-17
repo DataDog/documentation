@@ -28,25 +28,28 @@ Single Step Instrumentation (SSI) installs the Datadog Agent and instruments you
 ## Prerequisites
 
 - Kubernetes v1.20+
-- [Helm][1] for deploying the Datadog Operator
-- [kubectl][2] for installing the Datadog Agent
+- [Helm][1] for installing the Datadog Agent or Datadog Operator
+- [kubectl][2] for applying manifests and restarting workloads
 - A supported language runtime per the [SSI compatibility guide][3]
 
 ### Check for existing tracer dependencies
 
-SSI disables itself silently if it detects an existing tracer in your application. Before you enable SSI, check your dependency manifests and startup scripts:
+Before you enable SSI, check whether your application already loads a tracing SDK. Search dependency manifests, lock files, Dockerfiles, and startup scripts:
 
 ```shell
-grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
+grep -RniE "ddtrace|dd-trace|dd-java-agent|javaagent|opentelemetry" \
+  --include='requirements*.txt' --include='pyproject.toml' --include='poetry.lock' \
+  --include='package*.json' --include='yarn.lock' --include='pnpm-lock.yaml' \
+  --include='Gemfile*' --include='pom.xml' --include='build.gradle*' \
+  --include='*.csproj' --include='Dockerfile*' .
 ```
 
 For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable.
 
-If any matches are found, remove the tracer dependencies and rebuild your application image before you proceed.
+Review each match before making changes. Remove or disable only conflicting tracer initialization and dependencies, then rebuild the application image. Do not remove OpenTelemetry API, metrics, or logging dependencies solely because they match the search.
 
 ### Compatibility notes
 
-- **Node.js**: SSI requires CommonJS. If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][4] instead.
 - **Ruby**: SSI requires glibc and is not compatible with Alpine or other musl-based images.
 - **All other languages**: Alpine and musl-based images are supported on Kubernetes. SSI injects through the `LD_PRELOAD` environment variable, not `/etc/ld.so.preload`.
 
@@ -54,12 +57,12 @@ If any matches are found, remove the tracer dependencies and rebuild your applic
 
 <div class="alert alert-info">SSI does not instrument applications in the namespace where the Datadog Agent is installed. Install the Agent in a separate namespace.</div>
 
-These steps enable SSI across your entire cluster. To instrument specific namespaces or pods, see [Target specific workloads](#target-specific-workloads).
+These steps enable SSI across your entire cluster. To instrument specific namespaces or pods, see [Target specific workloads][12].
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-If the Datadog Agent is not installed, set `DD_API_KEY` to your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys). Then add the Datadog Helm repository and create a Kubernetes Secret:
+If the Datadog Agent is not installed, set `DD_API_KEY` to your [Datadog API key][10]. Then add the Datadog Helm repository and create a Kubernetes Secret:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -70,7 +73,7 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY 
 
 If you install the Agent in a different namespace, replace `datadog` with your Agent namespace.
 
-If the Agent is already installed, add `apm.instrumentation.enabled: true` to your existing `datadog-values.yaml` and skip to the `helm upgrade` step.
+If the Agent is already installed, add `datadog.apm.instrumentation.enabled: true` to your existing `datadog-values.yaml` and skip to the `helm upgrade` step.
 
 Create a `datadog-values.yaml`:
 
@@ -84,7 +87,7 @@ datadog:
       enabled: true
 ```
 
-Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site](/getting_started/site/).
+Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][11].
 
 Deploy or update the Agent:
 
@@ -92,7 +95,7 @@ Deploy or update the Agent:
 helm upgrade --install datadog-agent -f datadog-values.yaml datadog/datadog -n datadog
 ```
 
-SSI installs the latest SDK for each supported language by default. To pin SDK versions, see [Pin SDK versions](#pin-sdk-versions).
+SSI installs the latest SDK for each supported language by default. To pin SDK versions, see [Pin SDK versions][13].
 
 Restart your application pods:
 
@@ -102,10 +105,12 @@ Restart your application pods:
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
 ```
 
+For a StatefulSet or DaemonSet, replace `deployment/<DEPLOYMENT_NAME>` with the controller type and name.
+
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-If the Datadog Operator and Agent are not installed, set `DD_API_KEY` to your [Datadog API key](https://app.datadoghq.com/organization-settings/api-keys). Then install the Operator and create a Kubernetes Secret:
+If the Datadog Operator and Agent are not installed, set `DD_API_KEY` to your [Datadog API key][10]. Then install the Operator and create a Kubernetes Secret:
 
 ```shell
 helm repo add datadog https://helm.datadoghq.com
@@ -140,7 +145,7 @@ spec:
         enabled: true
 ```
 
-Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site](/getting_started/site/).
+Replace `<CLUSTER_NAME>` with your Kubernetes cluster name and `<DATADOG_SITE>` with your [Datadog site][11].
 
 Apply the manifest:
 
@@ -148,7 +153,7 @@ Apply the manifest:
 kubectl apply -f datadog-agent.yaml
 ```
 
-SSI installs the latest SDK for each supported language by default. To pin SDK versions, see [Pin SDK versions](#pin-sdk-versions).
+SSI installs the latest SDK for each supported language by default. To pin SDK versions, see [Pin SDK versions][13].
 
 Restart your application pods:
 
@@ -158,12 +163,14 @@ Restart your application pods:
 kubectl rollout restart deployment/<DEPLOYMENT_NAME> -n <APP_NAMESPACE>
 ```
 
+For a StatefulSet or DaemonSet, replace `deployment/<DEPLOYMENT_NAME>` with the controller type and name.
+
 {{% /tab %}}
 {{% tab "In-app wizard" %}}
 
 The Datadog in-app wizard generates a configuration file with SSI enabled:
 
-1. Go to the [Install the Datadog Agent on Kubernetes](https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes) page.
+1. Go to the [Install the Datadog Agent on Kubernetes][14] page.
 1. Choose your installation method, select an API key, and set up the Operator or Helm repository.
 1. Under **Configure `datadog-agent.yaml`**, go to **Additional configuration** > **Application Observability** and turn on **APM Instrumentation**.
 
@@ -183,16 +190,27 @@ The Datadog in-app wizard generates a configuration file with SSI enabled:
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable, contact <a href="/help/">Datadog Support</a>.</div>
 
-<div class="alert alert-warning">If your cluster enforces PodSecurity <code>restricted</code> policies, the Datadog init container may be blocked with <code>allowPrivilegeEscalation is false</code> or <code>violates PodSecurity "restricted:latest"</code>. See the <a href="/tracing/trace_collection/single-step-apm/troubleshooting/#environments-with-strict-pod-security-settings">SSI troubleshooting guide</a> for the required security context configuration.</div>
+<div class="alert alert-warning">If your cluster uses init-container injection and enforces PodSecurity <code>restricted</code> policies, the Datadog init container may be blocked with <code>allowPrivilegeEscalation is false</code> or <code>violates PodSecurity "restricted:latest"</code>. See the <a href="/tracing/trace_collection/single-step-apm/troubleshooting/#environments-with-strict-pod-security-settings">SSI troubleshooting guide</a> for the required security context configuration.</div>
 
 ## Verify SSI is working
 
 After you restart your application pods, wait two to three minutes for traces to arrive, then confirm SSI is working:
 
-1. **Check for the init container.** Run this command against one of your application pods. The output should include `datadog-lib-<language>-init`:
-   ```shell
-   kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
-   ```
+1. **Check that the pod was mutated.** The expected evidence depends on the configured [injection mode][15]:
+
+   - For `init_container`, the output of this command includes `datadog-lib-<language>-init`:
+
+     ```shell
+     kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
+     ```
+
+   - For `csi` or `image_volume`, an SDK init container is not expected. Describe the pod and confirm that it has Datadog-injected volumes and mounts, and that its events contain no mount errors:
+
+     ```shell
+     kubectl describe pod <POD_NAME> -n <APP_NAMESPACE>
+     ```
+
+   When `injectionMode` is `auto`, inspect the mutated pod to determine which delivery method the Cluster Agent selected.
 
 2. **Generate traffic.** If your application does not receive traffic automatically, port-forward and send a few requests:
    ```shell
@@ -200,7 +218,7 @@ After you restart your application pods, wait two to three minutes for traces to
    curl http://localhost:8080/
    ```
 
-3. **Find your service.** Go to [**APM** > **Services**][6] and confirm your service appears.
+3. **Find your service.** Go to [**APM** > **Catalog**][6] and confirm your service appears.
 
 4. **Confirm traces.** Go to [**APM** > **Traces**][7] and search for traces from your service.
 
@@ -216,39 +234,70 @@ Automatic label extraction is not compatible with <a href="/remote_configuration
 
 ### Automatic label extraction (recommended)
 
-Map your Kubernetes labels to Datadog service tags with `kubernetesResourcesLabelsAsTags`. Replace `app.kubernetes.io/name` with whatever label contains your service name:
+Map existing Kubernetes labels to the `service`, `env`, and `version` tags with `kubernetesResourcesLabelsAsTags`. Replace the example label keys with the labels used by your workloads.
+
+{{< tabs >}}
+{{% tab "Helm" %}}
 
 ```yaml
 datadog:
   kubernetesResourcesLabelsAsTags:
     pods:
       app.kubernetes.io/name: service
+      app.kubernetes.io/environment: env
+      app.kubernetes.io/version: version
     deployments.apps:
       app.kubernetes.io/name: service
+      app.kubernetes.io/environment: env
+      app.kubernetes.io/version: version
     replicasets.apps:
       app.kubernetes.io/name: service
-  tags:
-    - "env:production"
+      app.kubernetes.io/environment: env
+      app.kubernetes.io/version: version
   apm:
     instrumentation:
       enabled: true
 ```
 
-Requires `datadog-agent` 7.69+, `datadog-operator` 1.16.0+, or `datadog-helm-chart` 3.120.0+.
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+spec:
+  global:
+    kubernetesResourcesLabelsAsTags:
+      pods:
+        app.kubernetes.io/name: service
+        app.kubernetes.io/environment: env
+        app.kubernetes.io/version: version
+      deployments.apps:
+        app.kubernetes.io/name: service
+        app.kubernetes.io/environment: env
+        app.kubernetes.io/version: version
+      replicasets.apps:
+        app.kubernetes.io/name: service
+        app.kubernetes.io/environment: env
+        app.kubernetes.io/version: version
+  features:
+    apm:
+      instrumentation:
+        enabled: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+Automatic label extraction requires Agent v7.69 or later and either Helm chart v3.120.0 or later or Datadog Operator v1.16.0 or later.
 
 {{% collapse-content title="Configure Unified Service Tags with ddTraceConfigs" level="h3" expanded=false %}}
 
 For granular control over specific workloads, use `ddTraceConfigs` to map labels to service configurations:
 
+{{< tabs >}}
+{{% tab "Helm" %}}
+
 ```yaml
 datadog:
-  kubernetesResourcesLabelsAsTags:
-    pods:
-      app.kubernetes.io/name: service
-    deployments.apps:
-      app.kubernetes.io/name: service
-  tags:
-    - "env:production"
   apm:
     instrumentation:
       enabled: true
@@ -262,7 +311,47 @@ datadog:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.labels['app.kubernetes.io/name']
+            - name: DD_ENV
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/environment']
+            - name: DD_VERSION
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.labels['app.kubernetes.io/version']
 ```
+
+{{% /tab %}}
+{{% tab "Datadog Operator" %}}
+
+```yaml
+spec:
+  features:
+    apm:
+      instrumentation:
+        enabled: true
+        targets:
+          - name: frontend-services
+            podSelector:
+              matchLabels:
+                tier: frontend
+            ddTraceConfigs:
+              - name: DD_SERVICE
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['app.kubernetes.io/name']
+              - name: DD_ENV
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['app.kubernetes.io/environment']
+              - name: DD_VERSION
+                valueFrom:
+                  fieldRef:
+                    fieldPath: metadata.labels['app.kubernetes.io/version']
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
@@ -270,7 +359,7 @@ datadog:
 
 If your labels are not suitable for automatic extraction, set USTs directly in your deployment manifests with environment variables. This requires modifying each deployment individually.
 
-For complete instructions, see [setting USTs for Kubernetes services](/getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment).
+For complete instructions, see [setting USTs for Kubernetes services][5].
 
 {{% /collapse-content %}}
 
@@ -282,7 +371,7 @@ After SSI enables distributed tracing, you can activate additional SDK-dependent
 
 To enable products:
 
-- **With workload targeting (recommended):** Add `ddTraceConfigs` entries to your target blocks. See [Target specific workloads](#target-specific-workloads).
+- **With workload targeting (recommended):** Add `ddTraceConfigs` entries to your target blocks. See [Target specific workloads][12].
 - **With environment variables:** Set variables directly in your application configuration. See [Library Configuration][9].
 
 ## Next steps
@@ -300,7 +389,7 @@ After traces are flowing:
 
 ### Remove instrumentation for specific services
 
-Use [workload targeting](#target-specific-workloads) (Agent v7.64+) to exclude specific services.
+Use [workload targeting][12] (Agent v7.64+) to exclude specific services.
 
 Alternatively, add this label to the pod spec to skip Admission Controller mutation:
 
@@ -321,16 +410,16 @@ Apply the change and restart the affected pods.
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Set `instrumentation.enabled: false` in `datadog-values.yaml` and run:
+Set `datadog.apm.instrumentation.enabled: false` in `datadog-values.yaml` and run:
 
 ```shell
-helm upgrade datadog-agent -f datadog-values.yaml datadog/datadog
+helm upgrade <RELEASE_NAME> -f datadog-values.yaml datadog/datadog -n <AGENT_NAMESPACE>
 ```
 
 {{% /tab %}}
 {{% tab "Datadog Operator" %}}
 
-Set `instrumentation.enabled: false` in `datadog-agent.yaml` and apply:
+Set `spec.features.apm.instrumentation.enabled: false` in `datadog-agent.yaml` and apply:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
@@ -367,10 +456,10 @@ Use `targets` to control which workloads are instrumented and what configuration
 | Key                 | Description |
 |---------------------|-------------|
 | `name`              | Target block name (metadata only). |
-| `namespaceSelector` | Namespace(s) to instrument. Use `matchNames`, `matchLabels`, or `matchExpressions`. See the [Kubernetes selector documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements). |
-| `podSelector`       | Pod(s) to instrument. Use `matchLabels` or `matchExpressions`. See the [Kubernetes selector documentation](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements). |
-| `ddTraceVersions`   | [Datadog APM SDK](/tracing/trace_collection/single-step-apm/compatibility/#supported-language-runtimes) version per language. |
-| `ddTraceConfigs`    | SDK configuration: Unified Service Tags, [additional products](#enable-additional-products), and [other APM settings](/tracing/trace_collection/library_config/). |
+| `namespaceSelector` | Namespace(s) to instrument. Use `matchNames`, `matchLabels`, or `matchExpressions`. See the [Kubernetes selector documentation][16]. |
+| `podSelector`       | Pod(s) to instrument. Use `matchLabels` or `matchExpressions`. See the [Kubernetes selector documentation][16]. |
+| `ddTraceVersions`   | [Datadog APM SDK][17] version per language. |
+| `ddTraceConfigs`    | SDK configuration: Unified Service Tags, [additional products][18], and [other APM settings][9]. |
 
 Example - instrument specific namespaces by name and label:
 
@@ -393,7 +482,7 @@ apm:
           matchLabels:
             app: billing-service
         ddTraceVersions:
-          python: "3"
+          python: "4"
 ```
 
 Example - exclude specific pods with `matchExpressions`:
@@ -426,7 +515,7 @@ apm:
             - web-apps
         ddTraceVersions:
           java: "1"
-          python: "3"
+          python: "4"
         ddTraceConfigs:
           - name: DD_APPSEC_ENABLED
             value: "true"
@@ -450,14 +539,14 @@ apm:
       - name: default-target
         ddTraceVersions:
           java:   "1"
-          python: "3"
+          python: "4"
           js:     "5"
           dotnet: "3"
           ruby:   "2"
           php:    "1"
 ```
 
-Specify a major version (for example, `python: "3"`) to receive the latest minor release, or an exact version to pin precisely.
+Specify a major version (for example, `python: "4"`) to receive the latest minor release, or an exact version to pin precisely.
 
 {{% /collapse-content %}}
 
@@ -466,7 +555,7 @@ Specify a major version (for example, `python: "3"`) to receive the latest minor
 | Mode    | Behavior    | When to use |
 | ------- | ----------- | ----------- |
 | Default | All supported processes are instrumented. | Small clusters or prototypes. |
-| Opt-in  | [Workload targeting](#target-specific-workloads) restricts instrumentation to labeled pods. | Production clusters, staged rollouts, cost-sensitive environments. |
+| Opt-in  | [Workload targeting][12] restricts instrumentation to labeled pods. | Production clusters, staged rollouts, cost-sensitive environments. |
 
 Add an opt-in label to your deployment and pod template:
 
@@ -497,10 +586,12 @@ SSI supports multiple injection modes that control how library files are deliver
 
 | Mode | Description | Requirements |
 |------|-------------|--------------|
-| `init_container` | Copies files with an init container. | Agent deployed with Helm or Operator |
-| `csi` | **In Preview.** Mounts files with the [Datadog CSI driver](/containers/kubernetes/csi_driver/). Faster pod startup. | Agent 7.76.0+, CSI driver 1.2.0+, Helm 3.178.1+ or Operator 1.25.0+ |
+| `auto` | Lets the Cluster Agent select the delivery method supported by the cluster. | A Cluster Agent version that supports the selected method |
+| `init_container` | Copies SDK files into the pod with an init container. | Agent deployed with Helm or Operator |
+| `csi` | **Experimental.** Mounts SDK files with the [Datadog CSI driver][19]. | Cluster Agent 7.76.0+ and the Datadog CSI driver |
+| `image_volume` | **Experimental.** Delivers SDK files with Kubernetes image volumes, without an SDK init container. | Cluster Agent 7.77.0+ and a cluster with image-volume support |
 
-For `csi` mode, install and activate the CSI driver first. With Helm, set `datadog.csi.enabled: true`. See the [CSI driver documentation](/containers/kubernetes/csi_driver/).
+For `csi` mode, install and activate the CSI driver first. With Helm, set `datadog.csi.enabled: true`. See the [CSI driver documentation][19].
 
 **Set injection mode globally**
 
@@ -520,7 +611,7 @@ features:
       injectionMode: <mode>
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto`, `init_container`, `csi`, `image_volume`.
 
 **Set injection mode per pod**
 
@@ -531,32 +622,24 @@ metadata:
     admission.datadoghq.com/apm-inject.injection-mode: "<mode>"
 ```
 
-Supported values: `init_container`, `csi`.
+Supported values: `auto`, `init_container`, `csi`, `image_volume`.
 
 {{% /collapse-content %}}
 
 {{% collapse-content title="Change the image registry" level="h3" expanded=false %}}
 
-Datadog publishes SDK images on gcr.io (default), Docker Hub, and Amazon ECR. To use a different registry, set `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` in the Cluster Agent config:
-
-| Registry | Value |
-|----------|-------|
-| gcr.io (default) | `gcr.io/datadoghq` |
-| Docker Hub | `docker.io/datadog` |
-| Amazon ECR | `public.ecr.aws/datadog` |
-
-For detailed instructions, see [Changing Your Container Registry](/containers/guide/changing_container_registry/).
+Datadog publishes SDK images to multiple public registries. The default can vary by Datadog site and cluster environment. For the current registry list and configuration options, see [Changing Your Container Registry][20].
 
 **Use a private container registry**
 
 If your organization cannot pull from public registries, mirror the Datadog images to your private registry:
 
-1. [Mirror the images](/containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane) for the languages you are instrumenting. At minimum, mirror `apm-inject` and the `dd-lib-<language>-init` images you need.
+1. [Mirror the images][21] for the languages you are instrumenting. At minimum, mirror `apm-inject` and the `dd-lib-<language>-init` images required by your configured injection mode.
 
-2. Tag the images to match your configuration. If you set `ddTraceVersions` to `java: "1"` and `python: "3"`, mirror:
+2. Tag the images to match your configuration. If you set `ddTraceVersions` to `java: "1"` and `python: "4"`, mirror:
    - `apm-inject:0`
    - `dd-lib-java-init:1`
-   - `dd-lib-python-init:3`
+   - `dd-lib-python-init:4`
 
 3. Set `DD_ADMISSION_CONTROLLER_AUTO_INSTRUMENTATION_CONTAINER_REGISTRY` to your private registry URL.
 
@@ -584,9 +667,20 @@ If you encounter problems with SSI, see the [SSI troubleshooting guide][8].
 [1]: https://v3.helm.sh/docs/intro/install/
 [2]: https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [3]: /tracing/trace_collection/single-step-apm/compatibility/
-[4]: /tracing/trace_collection/dd_libraries/nodejs/
 [5]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#containerized-environment
 [6]: https://app.datadoghq.com/apm/services
 [7]: https://app.datadoghq.com/apm/traces
 [8]: /tracing/trace_collection/single-step-apm/troubleshooting/
 [9]: /tracing/trace_collection/library_config/
+[10]: https://app.datadoghq.com/organization-settings/api-keys
+[11]: /getting_started/site/
+[12]: #target-specific-workloads
+[13]: #pin-sdk-versions
+[14]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
+[15]: #configure-injection-modes
+[16]: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#resources-that-support-set-based-requirements
+[17]: /tracing/trace_collection/single-step-apm/compatibility/#supported-language-runtimes
+[18]: #enable-additional-products
+[19]: /containers/kubernetes/csi_driver/
+[20]: /containers/guide/changing_container_registry/
+[21]: /containers/guide/sync_container_images/#copy-an-image-to-another-registry-using-crane

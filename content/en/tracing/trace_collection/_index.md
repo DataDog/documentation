@@ -46,7 +46,7 @@ SSI automatically installs and loads Datadog SDKs into your application processe
     {{< nextlink href="/tracing/trace_collection/single-step-apm/kubernetes" >}}Kubernetes{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/single-step-apm/linux" >}}Linux{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/single-step-apm/docker" >}}Docker{{< /nextlink >}}
-    {{< nextlink href="/tracing/trace_collection/single-step-apm/windows" >}}Windows IIS{{< /nextlink >}}
+    {{< nextlink href="/tracing/trace_collection/single-step-apm/windows" >}}Windows{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Need more control?
@@ -68,18 +68,6 @@ After you have APM running, you can add custom spans for visibility into applica
     {{< nextlink href="/tracing/trace_collection/dynamic_instrumentation/" >}}Add custom spans with Dynamic Instrumentation{{< /nextlink >}}
     {{< nextlink href="/tracing/trace_collection/custom_instrumentation/" >}}Add custom spans with code-based instrumentation{{< /nextlink >}}
 {{< /whatsnext >}}
-
-{{< agent-only >}}
-If a user asks to set up APM, tracing, or distributed tracing, start with Single Step Instrumentation (SSI) unless they specifically request manual SDK control.
-
-First, ask what language they're using. If the language is Go, C++, or Rust, SSI is not available — direct them to manually managed SDKs at /tracing/trace_collection/dd_libraries/.
-
-Then ask what platform they're running on:
-- Kubernetes → /tracing/trace_collection/single-step-apm/kubernetes
-- Linux host or VM → /tracing/trace_collection/single-step-apm/linux
-- Docker → /tracing/trace_collection/single-step-apm/docker
-- Windows IIS → /tracing/trace_collection/single-step-apm/windows
-{{< /agent-only >}}
 
 ## Further reading
 

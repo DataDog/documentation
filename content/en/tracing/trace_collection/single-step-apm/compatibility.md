@@ -1,5 +1,6 @@
 ---
 title: Compatibility
+description: "Review the supported operating systems, deployment environments, language runtimes, and limitations for Datadog Single Step Instrumentation."
 aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 further_reading:
@@ -24,13 +25,13 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported operating systems**: See [Linux distributions reference][linux-distributions]
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - Datadog Agent with APM Instrumentation enabled
-- A [supported Linux distribution](#linux-distributions-reference)
+- A [supported Linux distribution][linux-distributions]
 
 ### Limitations
 
@@ -44,13 +45,13 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported operating systems**: See [Linux distributions reference][linux-distributions]
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - Datadog Agent with APM Instrumentation enabled
-- Docker running on a [supported Linux distribution](#linux-distributions-reference)
+- Docker running on a [supported Linux distribution][linux-distributions]
 
 ### Limitations
 
@@ -66,13 +67,13 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported node pools**: Linux nodes only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported node pools**: Linux nodes only (see [Linux distributions reference][linux-distributions])
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - [Datadog Admission Controller][1] enabled
-- Kubernetes nodes running a [supported Linux distribution](#linux-distributions-reference)
+- Kubernetes nodes running a [supported Linux distribution][linux-distributions]
 
 ### Limitations
 
@@ -99,6 +100,28 @@ Select your environment to see compatibility requirements and limitations:
 ### Limitations
 
 - **IIS only**: Only .NET applications running in IIS are supported.
+
+{{% /tab %}}
+
+{{% tab "Windows Host-wide (Preview)" %}}
+
+### Compatibility
+
+- **Status**: Preview; enrollment is required
+- **Supported runtimes**: Java and .NET
+
+### Requirements
+
+- Datadog Agent v7.73 or higher
+- Access to the Windows host-wide instrumentation Preview
+- For .NET applications outside IIS, an instrumentation rule that identifies the process to instrument
+
+### Limitations
+
+- Host-wide instrumentation is available only to Preview participants.
+- Language support is limited to Java and .NET.
+
+For enrollment and setup instructions, see [Windows Single Step Instrumentation][windows-ssi].
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -234,10 +257,6 @@ Supported Node.js versions are available by default only on:
 
 For other distributions, you may need to install Node.js separately.
 
-### Limitations
-
-- **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not supported.
-
 [1]: /tracing/trace_collection/compatibility/nodejs
 
 {{< /programming-lang >}}
@@ -324,3 +343,5 @@ The following Linux distributions and architectures are supported for SSI across
 
 [1]: /containers/cluster_agent/admission_controller/
 [2]: /tracing/guide/injectors/
+[windows-ssi]: /tracing/trace_collection/single-step-apm/windows/
+[linux-distributions]: #linux-distributions-reference

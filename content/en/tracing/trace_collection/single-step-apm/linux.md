@@ -1,5 +1,6 @@
 ---
 title: Single Step APM Instrumentation on Linux
+description: "Enable Datadog Single Step Instrumentation on a Linux host or VM, verify traces, configure SDK versions and instrumentation rules, and remove instrumentation."
 code_lang: linux
 type: multi-code-lang
 code_lang_weight: 0
@@ -38,7 +39,7 @@ To install specific SDK versions instead of the latest, add the `DD_APM_INSTRUME
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_APM_INSTRUMENTATION_ENABLED=host \
-  DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:3,js:5,dotnet:3,ruby:2,php:1" \
+  DD_APM_INSTRUMENTATION_LIBRARIES="java:1,python:4,js:5,dotnet:3,ruby:2,php:1" \
   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
@@ -89,13 +90,13 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 After you enable SSI, confirm that your applications are instrumented and sending traces:
 
 1. Restart your instrumented applications, then send requests to generate traffic.
-1. Confirm that the Datadog libraries are loaded into a running process. Replace `<PID>` with the process ID of an instrumented application:
+1. Confirm that the SSI launcher is loaded into a running process. Replace `<PID>` with the process ID of an instrumented application:
 
    ```shell
    cat /proc/<PID>/maps
    ```
 
-   The output includes both the SSI launcher (`launcher.preload.so`) and a language library (for example, `libdd` or a language-specific tracer path).
+   The output includes `launcher.preload.so`. This confirms that the injector loaded; the tracer itself may be loaded through language-specific arguments or environment variables rather than as a mapped shared library. See [per-runtime instrumentation][17] for those mechanisms.
 
 1. Confirm that the launcher is registered for preloading on the host:
 
@@ -111,7 +112,7 @@ After you enable SSI, confirm that your applications are instrumented and sendin
    datadog-agent status
    ```
 
-1. In Datadog, go to [**APM > Service Catalog**](https://app.datadoghq.com/services) and confirm that your services appear.
+1. In Datadog, go to [**APM > Catalog**][18] and confirm that your services appear.
 
 If your traces don't appear, see the [SSI troubleshooting guide][14].
 
@@ -161,7 +162,7 @@ To configure instrumentation rules:
 1. Define instrumentation rules:
    1. Click {{< ui >}}Add New Rule{{< /ui >}}, then choose {{< ui >}}Allow Rule{{< /ui >}} or {{< ui >}}Block Rule{{< /ui >}} to specify whether matching processes should be instrumented.
    1. Name your rule.
-   1. Add one or more conditions. See [Define rule conditions](#define-rule-conditions) to learn more.
+   1. Add one or more conditions. See [Define rule conditions][19] to learn more.
 
    {{< img src="tracing/trace_collection/define_instrumentation_rule.png" alt="The instrumentation rules UI, showing configuration options for defining a rule" style="width:100%;" >}}
 
@@ -244,8 +245,11 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [9]: https://github.com/DataDog/dd-trace-php/releases
 [10]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
 [11]: https://app.datadoghq.com/fleet/agent-management
-[12]: /getting_started/tagging/unified_service_tagging/?tab=kubernetes#non-containerized-environment
+[12]: /getting_started/tagging/unified_service_tagging/#non-containerized-environment
 [13]: /tracing/trace_collection/library_config/application_monitoring_yaml/
 [14]: /tracing/trace_collection/single-step-apm/troubleshooting/
 [15]: /tracing/trace_collection/library_config/
 [16]: https://app.datadoghq.com/apm/service-setup/workload-selection
+[17]: /tracing/guide/injectors/#per-runtime-instrumentation
+[18]: https://app.datadoghq.com/services
+[19]: #define-rule-conditions

@@ -23,21 +23,26 @@ Understanding the injection mechanism helps you reason about where a failure occ
 **Kubernetes:**
 
 1. An admission webhook (registered by the Cluster Agent) intercepts pod creation.
-2. The webhook mutates the pod spec, adding a `datadog-lib-<language>-init` init container.
-3. The init container copies the tracer library onto a shared volume.
-4. The `LD_PRELOAD` environment variable is set, pointing to the library `.so` file.
-5. The application process loads the library automatically on startup.
+2. The webhook mutates the pod spec to deliver the injector and SDKs. Depending on `injectionMode`, delivery uses init containers, the Datadog CSI driver, or Kubernetes image volumes.
+3. The webhook configures the application container so the injector loads when the application process starts.
+4. The injector detects the runtime and configures the matching tracer SDK.
 
-**Linux hosts and Docker:**
+**Linux hosts:**
 
 1. The installer adds the Datadog launcher to `/etc/ld.so.preload`.
 2. Each newly launched process preloads `launcher.preload.so`.
-3. The launcher detects the runtime and loads the matching tracer library into the process.
+3. The launcher detects the runtime and configures the matching tracer SDK.
+
+**Docker:**
+
+1. The installer configures Docker to use the Datadog `runc` shim.
+2. When a new application container starts, the shim mounts the injector and SDK files and sets `LD_PRELOAD` in the container.
+3. The launcher detects the runtime and configures the matching tracer SDK.
 
 Two vantage points help you locate a failure:
 
-- Cluster or host state (`kubectl`, `/proc/<PID>/maps`, `/etc/ld.so.preload`) shows whether injection was applied.
-- The Datadog UI (**APM** > **Services** and **Traces**) shows what the backend received.
+- Cluster, host, or container state shows whether injection was applied.
+- The Datadog UI (**APM** > **Catalog** and **Traces**) shows what the backend received.
 
 If injection was applied but no traces reach the backend, the problem is post-injection: the tracer isn't reporting, the Agent can't be reached, or existing instrumentation took precedence.
 
@@ -51,32 +56,53 @@ Work through these checks in order for your platform.
 
 1. **Did you restart your application after enabling SSI?** SSI injects at startup. Existing processes and pods are not instrumented until restarted.
 
-2. **Does your application have existing tracer dependencies?** SSI silently disables itself if it detects `ddtrace`, `dd-trace`, an OpenTelemetry SDK, or `-javaagent` in your application. Check your dependency manifests and startup scripts:
+2. **Does your application already load a tracing SDK?** Check dependency manifests, lock files, Dockerfiles, and startup scripts:
    ```shell
-   grep -rn "ddtrace\|dd-trace\|opentelemetry\|dd-java-agent\|javaagent" requirements.txt package.json Gemfile go.mod pom.xml build.gradle 2>/dev/null
+   grep -RniE "ddtrace|dd-trace|dd-java-agent|javaagent|opentelemetry" \
+     --include='requirements*.txt' --include='pyproject.toml' --include='poetry.lock' \
+     --include='package*.json' --include='yarn.lock' --include='pnpm-lock.yaml' \
+     --include='Gemfile*' --include='pom.xml' --include='build.gradle*' \
+     --include='*.csproj' --include='Dockerfile*' .
    ```
-   For Java, also check Dockerfiles and startup scripts for `-javaagent` flags, and check the `JAVA_TOOL_OPTIONS` environment variable. Remove any matches and rebuild your application before proceeding.
+   For Java, also check for `-javaagent` flags and inspect `JAVA_TOOL_OPTIONS`. Review each match: remove or disable only conflicting tracer initialization and dependencies, then rebuild the application. Do not remove OpenTelemetry API, metrics, or logging dependencies solely because they matched the search.
 
 3. **Is the runtime version supported?** Check the [SSI compatibility guide][3].
 
-4. **For Node.js: is your application using ECMAScript Modules (ESM)?** SSI does not support ESM. If your application uses `import` syntax or sets `"type": "module"` in `package.json`, use [manually managed SDKs][4] instead.
-
 ### Kubernetes
 
-First, confirm whether injection happened. Run this against one application pod. The output should include `datadog-lib-<language>-init`:
+First, determine which delivery method the pod uses. Inspect the pod annotation and your Helm or Operator configuration for `injectionMode`:
 
 ```shell
-kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
+kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.metadata.annotations.admission\.datadoghq\.com/apm-inject\.injection-mode}'
 ```
 
-#### No init container (injection never happened)
+If the value is empty or `auto`, inspect the mutated pod to see which method the Cluster Agent selected:
+
+```shell
+kubectl describe pod <POD_NAME> -n <APP_NAMESPACE>
+```
+
+- With `init_container`, the pod has a `datadog-lib-<language>-init` init container.
+- With `csi` or `image_volume`, no SDK init container is expected; look for Datadog-injected volumes and mounts and check pod events for mount errors.
+
+#### Pod was not mutated
 
 Injection was never applied to the pod. Check:
 
 - **Namespace and target configuration:**
+
+  For the Datadog Operator:
+
   ```shell
-  kubectl get datadogagent datadog -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation
+  kubectl get datadogagent -n <AGENT_NAMESPACE> -o yaml | grep -A 15 instrumentation
   ```
+
+  For Helm:
+
+  ```shell
+  helm get values <RELEASE_NAME> -n <AGENT_NAMESPACE> | grep -A 15 instrumentation
+  ```
+
   Confirm your `enabledNamespaces`, `disabledNamespaces`, or `podSelector` targets match your application's namespace and labels.
 - **Opt-out label**: if this returns `false`, the Admission Controller skips the pod:
   ```shell
@@ -96,7 +122,7 @@ Injection was never applied to the pod. Check:
   ```
 - **Agent namespace**: SSI does not instrument pods in the namespace where the Datadog Agent runs.
 
-#### Init container present but no traces (tracer not reporting)
+#### Pod was mutated but no traces arrive
 
 The library was injected but no traces arrive. Check:
 
@@ -109,7 +135,7 @@ The library was injected but no traces arrive. Check:
   ```shell
   kubectl get pod <POD_NAME> -n <APP_NAMESPACE> -o jsonpath='{.spec.nodeName}'
   ```
-- **Wrong service or environment** on the traces you do see indicates a Unified Service Tagging problem. See [Unified Service Tagging][7] and [Injection appears successful but traces are missing](#injection-appears-successful-but-traces-are-missing).
+- **Wrong service or environment** on the traces you do see indicates a Unified Service Tagging problem. See [Unified Service Tagging][7] and [Injection appears successful but traces are missing][16].
 
 #### Runtime version (when compatibility is suspected)
 
@@ -121,13 +147,13 @@ kubectl exec -n <APP_NAMESPACE> <POD_NAME> -- java -version
 
 Compare against the [SSI compatibility guide][3].
 
-### Linux hosts and Docker
+### Linux hosts
 
-1. **Is the launcher loaded into the process?** The authoritative check is the process memory map. A successfully instrumented process shows **both** the launcher (`launcher.preload.so`) and a language library:
+1. **Is the launcher loaded into the process?** Check the process memory map:
    ```shell
-   grep -E "launcher.preload.so|/opt/datadog/apm/library/" /proc/<PID>/maps
+   grep "launcher.preload.so" /proc/<PID>/maps
    ```
-   If both appear, injection succeeded. If the launcher appears but no language library does, the runtime wasn't detected or is unsupported. If neither appears, the preload isn't active for this process; continue with the checks below.
+   A match confirms that the launcher loaded. It does not, by itself, prove that the language tracer loaded; tracers can be configured through runtime arguments or environment variables. Use [injector debug logs][17] or inspect the [language-specific injection setting][18] to confirm that step.
 
 2. **Was the process started after SSI was enabled?** The preload applies only to processes launched after `/etc/ld.so.preload` was written. Compare the process start time against the file's modification time:
    ```shell
@@ -156,9 +182,31 @@ Compare against the [SSI compatibility guide][3].
 
 If none of these apply, continue with the diagnostic methods below.
 
+### Docker
+
+Docker injection uses a custom runtime shim and container-level `LD_PRELOAD`; it does not depend on the host's `/etc/ld.so.preload`.
+
+1. **Was the application container created after Docker SSI was enabled?** Recreate or restart the container so the Datadog runtime shim can inject it.
+2. **Is the Agent container configured for SSI?** Confirm that it has APM enabled, uses `/opt/datadog/apm/inject/run/apm.socket`, and shares `/opt/datadog/apm` with the host.
+3. **Was the injector added to the application process?** Inspect the process environment for `LD_PRELOAD` and the setting used by its language runtime:
+
+   ```shell
+   docker exec <CONTAINER> sh -c 'tr "\0" "\n" < /proc/1/environ | grep -E "LD_PRELOAD|JAVA_TOOL_OPTIONS|NODE_OPTIONS|PYTHONPATH|CORECLR_"'
+   ```
+
+4. **Is the Agent APM receiver up?** Run `agent status` in the Agent container and check the APM section:
+
+   ```shell
+   docker exec <AGENT_CONTAINER> agent status
+   ```
+
+5. **What decision did the injector make?** Enable `DD_APM_INSTRUMENTATION_DEBUG=true` on the application container, recreate it, and inspect `docker logs <CONTAINER>`.
+
+For rootless Docker or custom runtime shims, also review the Docker limitations in the [SSI compatibility guide][3].
+
 ## Troubleshooting methods
 
-You can investigate injection issues in the Datadog UI with Fleet Automation, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs](#injector-debug-logs).
+You can investigate injection issues in the Datadog UI with Fleet Automation, or manually at the container level. For a lower-level view of what the injector decided for each process, see [Injector debug logs][17].
 
 ### Troubleshoot injection in Datadog Fleet Automation
 
@@ -210,21 +258,15 @@ Use cluster-level insights to understand how SSI is configured and functioning a
 
 {{< img src="tracing/trace_collection/k8s-ssi-tab.png" alt="The Single Step Instrumentation tab for a Kubernetes cluster, showing the SSI config yaml and a list of instrumented pods" style="width:100%;" >}}
 
-### Manually verify injection in the application container
+### Manually verify injection
 
-If the Datadog UI does not show any instrumentation issues, or if you're troubleshooting a single service or container, you can manually verify whether injection occurred as expected. This method is helpful when debugging in environments where centralized visibility is limited or when a specific service isn't reporting traces.
+If the Datadog UI does not show any instrumentation issues, manually verify the stages that apply to your environment:
 
-To confirm injection at the container level, check that:
+- **Linux host:** Confirm that `/etc/ld.so.preload` contains `/opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so` and that the injector package directory exists.
+- **Docker:** Confirm that the application process has an `LD_PRELOAD` setting for the Datadog launcher and that the Agent and application containers can access the injected files and APM socket under `/opt/datadog/apm`.
+- **Kubernetes:** Inspect the mutated pod. Init-container mode adds `datadog-lib-<language>-init`; CSI and image-volume modes add Datadog volumes and mounts without that SDK init container.
 
-1. `/etc/ld.so.preload` includes the following entry:
-   ```
-   /opt/datadog-packages/datadog-apm-inject/stable/inject/launcher.preload.so
-   ```
-2. The `LD_PRELOAD` environment variable is set to the same value.
-3. The directory `/opt/datadog-packages/datadog-apm-inject` exists, with `stable` and `$version` subdirectories.
-4. Language-specific directories exist (for example, `/opt/datadog/apm/library/java/` for Java).
-
-For a running process, `/proc/<PID>/maps` is the authoritative confirmation: it shows both `launcher.preload.so` and the loaded language library. See [Linux hosts and Docker](#linux-hosts-and-docker).
+On Linux-based platforms, finding `launcher.preload.so` in `/proc/<PID>/maps` confirms that the injector loaded into that process. Confirm tracer configuration separately by checking the runtime-specific argument or environment variable in the [injector guide][18], or by reviewing injector debug logs.
 
 To enable debug logs during manual verification:
 
@@ -242,7 +284,7 @@ To enable debug logs during manual verification:
 
 ## Injector debug logs
 
-Injector debug logs show what the injector decided for each process: whether injection succeeded, was denied, or was skipped, and why. Enable them when [Fleet Automation](#troubleshoot-injection-in-datadog-fleet-automation) doesn't explain a failure, when you're diagnosing at the host or container level, or when you're collecting information for [Datadog Support][1].
+Injector debug logs show what the injector decided for each process: whether injection succeeded, was denied, or was skipped, and why. Enable them when [Fleet Automation][19] doesn't explain a failure, when you're diagnosing at the host or container level, or when you're collecting information for [Datadog Support][1].
 
 Injector debug logs are separate from tracer debug logs. Use injector logs to diagnose whether and how a tracer was injected; after injection, use [tracer debug logs][6] to diagnose the tracer running inside the process.
 
@@ -421,9 +463,7 @@ Datadog maintains an internal deny list to prevent injection into certain proces
 
 #### Linux instrumentation rules
 
-{{< callout url="https://docs.google.com/forms/d/e/1FAIpQLSdMu6WAsUCD3djkl_oN0Qh7fQmBCiKYyUvuqlYWRyObebAc6Q/viewform" header="Join the Preview!">}}
-Instrumentation rules are available for Linux-based apps through a limited availability preview. To configure allow or deny rules for process injection, sign up for preview access.
-{{< /callout >}}
+Instrumentation rules require Agent v7.73 or later. They let you allow or block Linux processes based on properties such as executable, arguments, working directory, and detected language. See [Define instrumentation rules on Linux][20].
 
 #### Kubernetes instrumentation rules
 
@@ -442,7 +482,7 @@ Datadog adheres to security best practices and works with security vendors to al
 
 ### Environments with strict pod security settings
 
-If pod security rules block the Datadog init container, you may see errors like:
+If pod security rules block the Datadog init container when using `init_container` mode, you may see errors like:
 
 ```
 Privilege escalation container is not allowed or violates PodSecurity "restricted: latest": allowPrivilegeEscalation is false
@@ -469,9 +509,9 @@ Setting `DD_TRACE_ENABLED=false` does not prevent SSI from loading the SDK. The 
 
 #### Host injection does not apply to existing processes
 
-The preload library only injects into newly launched processes. Start a new shell session or log out and log back in to apply instrumentation.
+On a Linux host, the preload library only injects into newly launched processes. Restart the application process; if its environment comes from a login session, start a new shell session or log out and back in first.
 
-**Note**: Docker-based injection does not have this limitation.
+Docker does not depend on the host login session, but application containers still must be recreated or restarted after SSI is enabled.
 
 #### Injection fails on small instance types
 
@@ -627,7 +667,7 @@ Versions <=2.7.5 contain a pre-packaged protobuf dependency that can conflict wi
 
 #### SSI is applied but no .NET traces reach the Agent
 
-If SSI annotations and init containers are present on the pod but no .NET traces arrive, another profiler may have precedence. Check `CORECLR_PROFILER` on the main container. If the value is not `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` (the Datadog .NET tracer CLSID), another profiler is loaded instead of Datadog.
+If the pod shows SSI mutation but no .NET traces arrive, another profiler may have precedence. Check `CORECLR_PROFILER` on the main container. If the value is not `{846F5F1C-F9AE-4B07-969E-05C26BC060D8}` (the Datadog .NET tracer CLSID), another profiler is loaded instead of Datadog.
 
 Remove the conflicting `CORECLR_*` environment variables (and any `LD_PRELOAD` entries that reference the other profiler) from the source that injected them: another vendor's operator, init container, pod template, or Helm values. Then roll the pods. The [.NET CLR Profiling API allows only one subscriber per process][15].
 
@@ -645,7 +685,7 @@ When contacting support about injection issues, collect the following informatio
 
    It should be owned by `root` with `644` permissions (`-rw-r--r--`).
 
-1. Enable injector debug logs and collect the output. For instructions, see [Injector debug logs](#injector-debug-logs).
+1. Enable injector debug logs and collect the output. For instructions, see [Injector debug logs][17].
 
 1. Provide an Agent flare.
 
@@ -653,14 +693,14 @@ When contacting support about injection issues, collect the following informatio
 
 Collect the following details if troubleshooting injection in a Kubernetes environment:
 
-- The method used to deploy the Cluster Agent (for example, Helm, Datadog Operator, or kubectl commands).
+- The method used to deploy the Cluster Agent (for example, Helm or Datadog Operator) and the configured injection mode.
 - Deployment files for the application pod.
 - Flares from both the Node Agent and the Cluster Agent, ideally with `DEBUG` mode enabled.
 - Output of:
   ```
   kubectl describe pod <app pod>
   ```
-- Injector debug logs from the application pod (not the Cluster Agent). For instructions, see [Injector debug logs](#injector-debug-logs).
+- Injector debug logs from the application pod (not the Cluster Agent). For instructions, see [Injector debug logs][17].
 
 ## Further reading
 
@@ -669,15 +709,19 @@ Collect the following details if troubleshooting injection in a Kubernetes envir
 [1]: /help/
 [2]: /tracing/trace_collection/single-step-apm/
 [3]: /tracing/trace_collection/single-step-apm/compatibility/
-[4]: /tracing/trace_collection/dd_libraries/nodejs/
 [5]: https://app.datadoghq.com/fleet
 [6]: /tracing/troubleshooting/tracer_debug_logs/
 [7]: /getting_started/tagging/unified_service_tagging/
 [8]: /tracing/guide/injectors/
 [9]: /tracing/trace_collection/single-step-apm/#instrument-sdks-across-applications
-[10]: /tracing/trace_collection/single-step-apm/kubernetes?tab=agentv764recommended#remove-apm-for-all-services-on-the-infrastructure
+[10]: /tracing/trace_collection/single-step-apm/kubernetes/#remove-instrumentation-for-all-services
 [11]: /tracing/trace_collection/single-step-apm/docker#remove-apm-for-all-services-on-the-infrastructure
 [12]: /tracing/trace_collection/single-step-apm/linux#remove-single-step-apm-instrumentation-from-your-agent
 [13]: /tracing/trace_collection/single-step-apm/windows#remove-single-step-apm-instrumentation-from-your-agent
 [14]: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/#syntax-and-character-set
 [15]: /tracing/trace_collection/dd_libraries/dotnet-core/#installation-and-getting-started
+[16]: #injection-appears-successful-but-traces-are-missing
+[17]: #injector-debug-logs
+[18]: /tracing/guide/injectors/#per-runtime-instrumentation
+[19]: #troubleshoot-injection-in-datadog-fleet-automation
+[20]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
