@@ -938,7 +938,7 @@ const getOneOfChildData = (items) => {
   const byName = groupBy(namedEntries, ([name]) => name);
   const entries = namedEntries.map(([name, item], i) =>
     // if name is unique, use it; otherwise, use "Object 3"
-    [name && byName.get(name)?.length === 1 ? name : `Object ${i}`, item]
+    [name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`, item]
   );
   return Object.fromEntries(entries);
 }
@@ -1258,6 +1258,7 @@ const init = () => {
 
 module.exports = {
   init,
+  getBestDiscriminant,
   isTagMatch,
   isReadOnlyRow,
   descColumn,
