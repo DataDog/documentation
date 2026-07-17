@@ -32,12 +32,11 @@ To enable this, Datadog provides a custom `runc` shim that replaces Docker's def
 In Kubernetes environments, injection is handled by the Datadog Admission Controller, which uses a mutating admission webhook. When a pod is scheduled, the controller:
 
 1. Evaluates whether the pod should be instrumented based on configured selectors (such as namespaces, labels, or specific pod properties).
-1. Mutates the pod spec to:
-   - Use the Datadog CSI driver to mount the injector and SDKs
-   - Set environment variables (such as `LD_PRELOAD`)
-   - Mount volumes to persist injected libraries
+1. Mutates the pod spec to mount the injector and SDKs, set environment variables (such as `LD_PRELOAD`), and mount the volumes needed to persist the injected libraries.
 
-The default delivery method uses init containers, but SSI supports additional [injection modes][2] that may better suit your environment.
+How the injector and SDK files are delivered depends on the configured [injection mode][2]. By default, SSI uses the Datadog CSI driver: a DaemonSet runs on every node, and when a pod is scheduled, the driver mounts the SDK directly from the node's file system into the container. No init container is created, and nothing needs to run before the application starts. The first time an SDK is used on a node, it's downloaded and cached; every subsequent pod on that node mounts the SDK from the cache. This lowers resource overhead and reduces pod startup time at scale.
+
+Alternatively, SSI can deliver the injector and SDK files using init containers. For details on each mode and how to configure it, see [injection modes][2].
 
 ### Windows
 
@@ -83,7 +82,7 @@ SSI instruments applications by loading a tracer or profiler into the applicatio
 
 While the injected code runs inside the application process, some deployment modes update OS or runtime configuration so that the injector loads automatically:
 
-- **Kubernetes admission controller injection**: Mutates pod specs to mount the injector (using an init container or the [Datadog CSI driver][2]) and set environment variables. This is a Kubernetes API action, not a host OS modification.
+- **Kubernetes admission controller injection**: Mutates pod specs to mount the injector (using the [Datadog CSI driver][2] by default, or an init container) and set environment variables. This is a Kubernetes API action, not a host OS modification.
 - **Linux host injection**: Configures the dynamic loader (typically through `/etc/ld.so.preload`) so that every new dynamically linked process loads the injection launcher. This is an OS-level configuration change, but it remains user-space dynamic linking, not kernel code.
 - **Docker runtime injection**: Configures Docker to use a wrapper runtime so that containers start with the tracer mounted and configured (typically by injecting an `LD_PRELOAD` environment variable into the container). This modifies Docker daemon configuration.
 - **Windows injection**: Installs a kernel driver that loads the injector DLL into new processes. The driver runs at the OS level. The injected code that runs inside each application process remains user-space.
@@ -103,7 +102,7 @@ Privilege requirements at install time depend on the deployment mode:
   - Volume mounts used to communicate with the Agent (commonly a `hostPath` mount to a socket directory).
   - Specific `SecurityContext` or SCC allowances.
 
-  You can keep the injected init container and application container locked down (non-root, dropped capabilities, no privilege escalation) as long as your policies permit the required mounts.
+  You can keep the application container (and the init container, if you use `init_container` mode) locked down (non-root, dropped capabilities, no privilege escalation) as long as your policies permit the required mounts.
 
 #### Linux host
 
