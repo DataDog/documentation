@@ -287,6 +287,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
