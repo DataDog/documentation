@@ -3,7 +3,7 @@ title: Use Cases
 description: Common use cases for Datadog Feature Flags.
 ---
 
-Feature flags support distinct rollout and control patterns. Pick the use case that matches your goal: limit release risk with gradual rollouts, stop broken features fast during incidents, or change application settings without a code deployment.
+Feature flags support distinct rollout and control patterns. Pick the use case that matches your goal: limit release risk with gradual rollouts, stop broken features during incidents, or change application settings without a code deployment.
 
 Each page below walks through why teams choose that pattern and how to set it up in Datadog.
 
