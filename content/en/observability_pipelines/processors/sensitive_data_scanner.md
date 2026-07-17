@@ -308,7 +308,7 @@ Use these widgets to evaluate your Sensitive Data Scanner processors' scanning r
 
 After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
 
-**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. Before removing a rule, widen the time frame and confirm the data it scans for is absent, so you do not remove a rule that catches rare but important sensitive data.
+**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. 
 
 ### Only enable rules you need
 
