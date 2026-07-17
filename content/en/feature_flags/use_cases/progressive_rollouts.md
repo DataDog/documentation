@@ -3,7 +3,7 @@ title: Progressive Rollouts and Canaries
 description: Gradually roll out feature flags on a schedule with optional guardrail metrics for canary releases.
 ---
 
-**Progressive rollouts** release new functionality gradually by incrementing the percentage of subjects exposed to the feature over time. **Canaries** are progressive rollouts that monitor guardrail metrics and automatically pause or stop when they detect regressions.
+[**Progressive rollouts**](#progressive-rollouts) release new functionality gradually by incrementing the percentage of subjects exposed to the feature over time. [**Canaries**](#canaries) are progressive rollouts that monitor guardrail metrics and automatically pause or stop when they detect regressions.
 
 ## Progressive rollouts
 
