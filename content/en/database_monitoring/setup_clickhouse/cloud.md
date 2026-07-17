@@ -151,6 +151,10 @@ instances:
 
 `single_endpoint_mode: true` is required for ClickHouse Cloud. It enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint.
 
+When enabled, the Agent queries system-table metrics (from `system.events`, `system.metrics`, `system.asynchronous_metrics`, and `system.errors`) across all nodes behind the endpoint using `clusterAllReplicas()`. Each resulting series is tagged with `clickhouse_node` so you can distinguish per-node data. This per-node collection requires Agent version 7.83.0 or later.
+
+Without this setting, the Agent might reach a different node on each collection cycle. For cumulative per-node counters like `clickhouse.query.failed.count`, that inconsistency produces inaccurate values because the counter isn't read from the same source each time.
+
 ## Customizing the database identifier
 
 The `database_identifier` option controls how the database instance appears in DBM. Datadog recommends using the service name as a custom tag for identification and grouping.
@@ -193,16 +197,16 @@ With `env:production`, `server: xyz.us-east-2.aws.clickhouse.cloud`, and `port: 
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `tls_verify` | boolean | `false` | Enable TLS. Required for ClickHouse Cloud. |
-| `verify` | boolean | `true` | Validate the server's SSL certificate. Setting `false` in production is a security risk. |
+| `tls_verify` | Boolean | `false` | Enable TLS. Required for ClickHouse Cloud. |
+| `verify` | Boolean | `true` | Validate the server's SSL certificate. Setting `false` in production is a security risk. |
 | `tls_ca_cert` | string | - | Path to a custom CA certificate file. Not needed for ClickHouse Cloud, which uses certificates from public CAs. |
 
 ### DBM settings
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `dbm` | boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
-| `single_endpoint_mode` | boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint. |
+| `dbm` | Boolean | `false` | Enable Database Monitoring. Required for query metrics, samples, and completions collection. |
+| `single_endpoint_mode` | Boolean | `false` | Required for ClickHouse Cloud. Enables `clusterAllReplicas()` queries to collect data across all nodes behind a single endpoint. Also collects standard system-table metrics per node (tagged with `clickhouse_node`) so cumulative counters report accurate per-node values. Per-node collection requires Agent version 7.83.0 or later. |
 
 ### Database identifier
 
@@ -216,7 +220,7 @@ Collects aggregated query statistics from `system.query_log`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_metrics.enabled` | boolean | `true` | Enable query metrics collection. Requires `dbm: true`. |
+| `query_metrics.enabled` | Boolean | `true` | Enable query metrics collection. Requires `dbm: true`. |
 | `query_metrics.collection_interval` | number | `10` | Collection interval in seconds. |
 
 ### Query samples
@@ -225,7 +229,7 @@ Collects currently running queries from `system.processes`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_samples.enabled` | boolean | `true` | Enable query samples collection. Requires `dbm: true`. |
+| `query_samples.enabled` | Boolean | `true` | Enable query samples collection. Requires `dbm: true`. |
 | `query_samples.collection_interval` | number | `1` | Collection interval in seconds. |
 | `query_samples.payload_row_limit` | integer | `1000` | Maximum number of active queries per snapshot. |
 
@@ -235,7 +239,7 @@ Collects records of individual completed queries from `system.query_log`.
 
 | Field | Type | Default | Description |
 |-------|------|---------|-------------|
-| `query_completions.enabled` | boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
+| `query_completions.enabled` | Boolean | `true` | Enable query completions collection. Requires `dbm: true`. |
 | `query_completions.collection_interval` | number | `10` | Collection interval in seconds. |
 | `query_completions.samples_per_hour_per_query` | number | `15` | Maximum samples collected per hour per unique query signature. |
 
