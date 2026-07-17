@@ -308,6 +308,7 @@ unsupported_sites:
   application_security: [gov,gov2]
   autocomplete_search: [gov,gov2]
   azure-automated-log-forwarding: [gov,gov2]
+  azure-devops-source-code: [gov, gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2,uk1]
   backstage: [gov,gov2]
   bits_ai: [gov,gov2]
