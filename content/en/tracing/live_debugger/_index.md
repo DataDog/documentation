@@ -255,7 +255,7 @@ If you use [Exclusion filters][11], make sure Live Debugger logs are not filtere
 
 Datadog recommends setting up [Source Code Integration][28] for the best experience with Live Debugger. Source Code Integration is optional when starting a Debug Session manually, but required when using [Bits Live Debugger][23].
 
-After you integrate your source code manager with your Datadog account and link the service and environment to the corresponding repository and git commit SHA, you can view source code files directly in the Datadog UI. You can add new logpoints and see existing ones as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
+After you integrate your source code manager with your Datadog account and link the service and environment to the corresponding repository and git commit SHA, you can view source code files directly in the Datadog UI. You can add new logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
 ## Using Live Debugger
 
