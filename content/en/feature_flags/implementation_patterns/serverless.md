@@ -32,27 +32,23 @@ Agentless configuration delivery is available in:
 
 Other server SDKs require Agent Remote Configuration for flag delivery. Earlier Java and Node.js releases also require it.
 
-<div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial agentless releases load configuration and evaluate flags. They do not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. No-Agent deployments do not send those events.</div>
+<div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial agentless releases load configuration and evaluate flags locally. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
 
 ## Default Agentless architecture
 
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
 1. Use a Java or Node.js SDK version listed in [Overview](#overview).
-2. Configure the API key, site, and environment in the serverless application:
+2. Configure the API key and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
    DD_API_KEY=<DATADOG_API_KEY>
    DD_ENV=<YOUR_ENVIRONMENT>
-
-   # Optional: Defaults to datadoghq.com
-   DD_SITE=<DATADOG_SITE>
-
-   # Optional: Agentless is the default in supported versions
-   DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
    {{< /code-block >}}
 
-3. Initialize or access the Datadog OpenFeature provider as described on the [Java][3] or [Node.js][4] setup page. This starts CDN polling.
+   If your organization is not on the default `datadoghq.com` site, also set `DD_SITE`.
+
+3. Initialize or access the Datadog OpenFeature provider as described on the [Java][3] or [Node.js][4] setup page. This starts CDN polling. No Feature Flags enablement or source setting is required.
 4. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
@@ -92,7 +88,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
 - **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Java or Node.js runtime compatible with the tracer. Check the language tracer's compatibility requirements.
-- **Kill switch**: Set `DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false` to disable the provider and both configuration delivery paths.
+- **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
 
@@ -142,4 +138,4 @@ Before enabling agentless Feature Flags in production:
 [3]: /feature_flags/server/java/
 [4]: /feature_flags/server/nodejs/
 [5]: /api/latest/feature-flags/
-[6]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting
+[6]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup

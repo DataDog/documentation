@@ -32,8 +32,6 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 Agentless configuration delivery is the default in server SDK versions that support it. The SDK fetches UFC directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
 
-Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use Agent Remote Configuration instead. See [Server SDK Configuration Sources][6] for architecture, security, and operational details.
-
 The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
 
 | SDK | Minimum agentless version |
@@ -42,7 +40,7 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-<div class="alert alert-warning">The initial agentless releases support configuration delivery and local flag evaluation. They do not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. No-Agent deployments do not send those events.</div>
+<div class="alert alert-warning">The initial agentless releases support configuration delivery and local flag evaluation only. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
 
 Agentless delivery is available for Java and Node.js in the versions listed. Other server SDKs use Agent Remote Configuration until their language pages list an agentless minimum version.
 
@@ -85,15 +83,9 @@ For Java 1.65.0 and Node.js 5.116.0 or 6.5.0, configure the application process:
 # Required for direct configuration delivery
 DD_API_KEY=<DATADOG_API_KEY>
 DD_ENV=<YOUR_ENVIRONMENT>
-
-# Optional: Defaults to datadoghq.com
-DD_SITE=<DATADOG_SITE>
-
-# Optional: Agentless is the default
-DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 {{< /code-block >}}
 
-See the Java and Node.js pages for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. If your organization is not on the default `datadoghq.com` site, also set `DD_SITE`. See the Java and Node.js pages for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent remote configuration
 
@@ -101,7 +93,6 @@ Set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
-DD_REMOTE_CONFIGURATION_ENABLED=true
 {{< /code-block >}}
 
 Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Agent has Remote Configuration disabled, re-enable it by setting `DD_REMOTE_CONFIGURATION_ENABLED=true` or adding `remote_configuration.enabled: true` to your `datadog.yaml`.
@@ -119,7 +110,7 @@ The Agent polls Datadog for configuration updates at a configurable interval:
 DD_REMOTE_CONFIGURATION_REFRESH_INTERVAL=10s
 {{< /code-block >}}
 
-## Common application configuration
+## Advanced application configuration
 
 Configure your application with the standard Datadog environment variables. These are common across all server-side SDKs:
 
@@ -129,14 +120,14 @@ DD_SERVICE=<YOUR_SERVICE_NAME>
 DD_ENV=<YOUR_ENVIRONMENT>
 DD_VERSION=<YOUR_APP_VERSION>
 
-# Optional: Disable the provider and both delivery paths
-# DD_FEATURE_FLAGGING_PROVIDER_ENABLED=false
+# Optional: Disable Feature Flags and both delivery paths
+# DD_FEATURE_FLAGS_ENABLED=false
 
 # Optional: Enable flag evaluation metrics
 # See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
-<div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGGING_PROVIDER_ENABLED</code> defaults to <code>true</code>. Setting it to <code>false</code> is the global kill switch for the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
+<div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
 See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
@@ -199,4 +190,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [4]: /tracing/guide/#tutorials-enabling-tracing
 [5]: /feature_flags/implementation_patterns/serverless/
 [6]: /feature_flags/concepts/configuration_sources/
-[7]: /feature_flags/concepts/configuration_sources/#migrate-from-the-legacy-provider-setting
+[7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
