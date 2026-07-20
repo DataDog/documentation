@@ -24,7 +24,11 @@ Start with any failed diagnostic check or warning banner before interpreting lif
 
 ## Traffic imbalance
 
-A traffic imbalance, also known as a sample ratio mismatch (SRM), means the observed assignments across variants differ significantly from the expected variant weights used for experiment analysis.
+A traffic imbalance, also known as a sample ratio mismatch (SRM), means the observed assignments across variants differ significantly from the configured assignment weights.
+
+Datadog detects SRM with Pearson's chi-squared goodness-of-fit test. The test compares observed variant counts with counts expected from the configured weights. The diagnostic fails when the p-value is below `0.001`, corresponding to a significance level (alpha) of `0.001`. Datadog does not apply a minimum total sample size or expected-count requirement to this overall check.
+
+This SRM test is a fixed-sample test and is not sequentially valid. Datadog applies the `0.001` threshold separately on each analysis run; repeatedly checking accumulating experiment data can produce a higher experiment-wide false-positive rate than the nominal 0.1%. The conservative threshold reduces this risk but does not eliminate it.
 
 Treat SRM as a blocker for interpreting results. It indicates that the experiment's effective randomization, exposure logging, or analysis population is biased. Until you find and fix the root cause, lift, confidence intervals, and global lift cannot support valid causal inference.
 
@@ -66,7 +70,7 @@ For experiments that use Datadog Feature Flags with warehouse metrics, Datadog c
 
 ## Mixed assignments
 
-If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. The diagnostic passes when no more than 5% of subjects have mixed assignments, warns above 5%, and fails at 20% or more. As the excluded share grows, results become less representative and less reliable.
+If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. Datadog calculates the percentage separately for each assignment source, using unique subjects from that source as the denominator. The diagnostic passes at 5% or less, warns above 5% and below 20%, and fails at 20% or more. As the excluded share grows, results become less representative and less reliable.
 
 ### How to resolve
 
@@ -79,6 +83,10 @@ If the same subject is assigned to more than one variant in the same experiment,
 ## Dimensional assignment imbalance
 
 Datadog can flag an experiment when the probability of being assigned to a variant differs significantly across dimension values. For example, one device type, country, plan, or customer tier might receive variants at a different split than the rest of the experiment.
+
+For each assignment dimension, Datadog runs Pearson's chi-squared test of independence between variant and dimension value. To account for testing multiple dimensions, Datadog applies a Bonferroni correction: a dimension fails when its p-value is below `0.001 / n`, where `n` is the number of eligible dimensions tested. Datadog excludes a dimension value when any expected variant count for that value is below 5, skips dimensions with more than 100 values, and requires at least two remaining dimension values and two variants with positive marginal counts. Skipped dimensions do not contribute to `n`. If no dimension is eligible, the diagnostic passes without running a dimensional test.
+
+Like the overall SRM check, the dimensional test is not sequentially valid across repeated analysis runs. The Bonferroni correction controls for the dimensions tested in one run, not for repeated checks as experiment data accumulates.
 
 This diagnostic is separate from overall traffic imbalance, or sample ratio mismatch (SRM): global imbalance alone does not trigger it. When both diagnostics fail, the affected dimension values can help localize the cause of the overall SRM. For example, dimensional imbalance for device type can point to a device-specific bug in variant delivery, SDK evaluation, redirects, page performance, crashes, or exposure telemetry.
 
@@ -93,9 +101,9 @@ Datadog uses the dimension value from the subject's first assignment record. Lat
 
 ## Missing metric data
 
-Datadog reports **Missing metric data** when assignments exist but experiment analysis finds no usable metric values for any assigned subjects. This does not necessarily mean that the source event never fired. Events can exist but fail the metric's filters, fail to join to experiment assignments, or produce only zero or null metric values.
+Datadog reports **Missing metric data** when assignments exist but experiment analysis finds no metric data that satisfies this diagnostic. For simple and ratio metrics, the check passes when at least one contributing pre-winsorized aggregation contains a non-zero value. If all contributing values are zero or null, the primary metric fails and a secondary or guardrail metric warns. For percentile metrics, any non-null result moment or percentile field, including zero, counts as data. If Datadog cannot determine whether a metric is primary, the check fails closed.
 
-If the primary metric has no data, the diagnostic blocks the experiment decision. If a secondary or guardrail metric has no data, Datadog warns you without blocking analysis for the primary metric.
+This diagnostic does not necessarily mean that the source event never fired. Events can exist but fail the metric's filters, fail to join to experiment assignments, or produce only zero or null metric values.
 
 ### Common causes
 
@@ -117,7 +125,9 @@ If the primary metric has no data, the diagnostic blocks the experiment decision
 
 ## Metric winsorized to zero
 
-Outlier handling caps extreme metric values to reduce variance. If only a small number of subjects perform the metric event, outlier handling can winsorize all values to zero and prevent statistical analysis.
+Outlier handling caps extreme metric values to reduce variance. Datadog warns when every non-dimensional variant has a zero or null post-winsorization aggregation and at least one affected aggregation had non-zero raw values before winsorization. For ratio metrics, Datadog checks the numerator and denominator separately. This diagnostic has no percentage or minimum-sample threshold and does not fail an experiment.
+
+This can happen when only a small number of subjects perform the metric event and outlier handling caps all observed values to zero.
 
 ### How to resolve
 
@@ -128,17 +138,29 @@ Outlier handling caps extreme metric values to reduce variance. If only a small 
 
 ## Pre-experiment metric imbalance
 
-When CUPED is enabled, Datadog uses pre-experiment metric values to reduce variance. If pre-experiment values differ meaningfully across variants, CUPED-adjusted results may be unreliable.
+When CUPED is enabled, Datadog uses pre-experiment metric values to reduce variance. Before exposure, the experiment should behave like an A/A test: treatment cannot affect behavior that occurred before assignment. A detected imbalance can occur by chance, or its root cause can indicate treatment-correlated selection, data leakage, or a randomization problem. Those underlying issues can violate CUPED's assumptions or invalidate more than the CUPED adjustment.
+
+Datadog calculates a two-sided 95% sequential normal-mixture confidence sequence for the treatment-minus-control difference in pre-experiment component means. Simple metrics test the metric mean; ratio metrics test numerator and denominator means independently; and percentile metrics test their internal S and N components. The diagnostic fails when a confidence sequence strictly excludes zero; an interval that touches zero passes. The confidence sequence remains valid as analysis repeats over accumulating data. Datadog tests metrics, treatment variants, and metric components independently without a multiple-testing correction, so the chance of at least one false positive increases when many comparisons are checked. The test requires observations with positive variance but has no explicit minimum sample size.
+
+### Common causes
+
+- Treatment-dependent identity linkage. For example, an experiment randomizes anonymous IDs but analyzes account-level purchases, and an anonymous-to-account mapping is created only after login. If post-exposure login retrospectively includes or rekeys earlier purchase history, a treatment that increases login can make more pre-experiment history appear in treatment.
+- Timestamp truncation or mismatched time granularity. For example, exposure has an event timestamp but metric data is rolled up by day and represented at midnight, making post-exposure events on that day appear to precede exposure.
+- Inconsistent timezone or daylight-saving handling that stores or compares a later event with an earlier timestamp.
+- An assignment rule correlated with pre-treatment outcomes or earlier treatments. For example, bucketing directly on identifier ranges without sufficiently independent hashing can preserve a relationship between assignment and earlier experiment exposure.
+- A randomization, targeting, subject-identity, or data-processing issue that makes pre-experiment data availability differ across variants.
 
 ### How to resolve
 
-- Confirm that pre-experiment data is available and representative for each variant.
-- Check whether the metric definition changed during the pre-experiment window.
-- If the imbalance is expected or cannot be fixed, interpret CUPED-adjusted results carefully or disable CUPED.
+1. Confirm that pre-experiment data is available and representative for each variant, and check whether the metric definition changed during the pre-experiment window.
+2. Compare raw assignment and metric timestamps at their original granularity and in a consistent timezone. Check whether a daily rollup, timestamp conversion, or daylight-saving transition can move post-exposure events into the pre-experiment window.
+3. Audit subject identity mappings. Make sure post-exposure behavior, such as logging in, cannot determine which subjects have pre-experiment history available for analysis.
+4. Verify that assignment is independent of pre-treatment outcomes, subject attributes, and earlier treatments. A stable hash with an experiment-specific salt or key is one common way to avoid correlations from identifier ranges or reused buckets.
+5. Fix the identity, timestamp, randomization, or data-processing issue, then rerun analysis. Disabling CUPED does not make the experiment valid when the imbalance comes from selection bias, post-exposure data leakage, or broken randomization.
 
 ## Implausible prior
 
-For Bayesian analysis, Datadog can warn when the observed lift is outside the range expected from the configured prior. This can happen when the prior is not appropriate for the experiment or when instrumentation produces unusually large or small values.
+For Bayesian analysis, Datadog runs a two-tailed prior-predictive check on relative lift. The check accounts for both the prior's dispersion and the estimate's sampling uncertainty. Datadog warns when the prior-predictive p-value is below `0.01`. Datadog tests each eligible metric-treatment comparison without a multiple-testing correction. The check requires a positive, finite standard error but has no explicit minimum sample size. A warning can occur when the prior is not appropriate for the experiment or when instrumentation produces unusually large or small values.
 
 For example, many conversion rate experiments have true lifts below 5%, so the default Normal prior with mean 0 and standard deviation 0.05 can be a reasonable choice. If an experiment fixes a broken checkout page that prevents most users from converting, a much larger lift may be plausible. In that case, the default prior can be too conservative and shrink the estimated effect too much.
 
@@ -151,7 +173,11 @@ For example, many conversion rate experiments have true lifts below 5%, so the d
 
 ## Segment-level degradation
 
-Datadog can flag results when a specific segment performs significantly worse than the overall experiment direction. This helps you catch cases where the average result hides a degraded experience for a subgroup.
+Datadog warns when a segment's point estimate is opposite the metric's desired change and the segment performs significantly worse than comparable segments. For a metric where an increase is desirable, the segment lift must be below zero. For a metric where a decrease is desirable, the segment lift must be above zero.
+
+For each metric, treatment variant, and dimension, Datadog compares each segment lift with the inverse-variance-weighted average of valid segment lifts in that same combination. This reference is not the global experiment result. A segment warns only when a sequential confidence sequence for its difference from the weighted average lies entirely in the worse direction and its point estimate is opposite the desired change.
+
+Datadog uses a family significance level (alpha) of `0.05`, divided by the number of valid segment comparisons in the analysis run using a Bonferroni correction. The check requires at least two segments with positive variance for the same metric, treatment variant, and dimension. Segment-level degradation produces a warning, not a failed diagnostic.
 
 ### How to resolve
 
@@ -161,7 +187,7 @@ Datadog can flag results when a specific segment performs significantly worse th
 
 ## Analysis pipeline failure
 
-If the experiment analysis pipeline fails, current results cannot be computed. For warehouse-backed analysis, the customer-controlled parts of the pipeline SQL are the assignment and metric SQL definitions; Datadog generates the rest of the pipeline SQL.
+Datadog reports **Analysis pipeline failure** when a root analysis task fails and is linked to a failed customer-warehouse query. Current results cannot be computed. The customer-controlled parts of the pipeline SQL are the assignment and metric SQL definitions; Datadog generates the rest of the pipeline SQL.
 
 ### How to resolve
 
