@@ -96,6 +96,9 @@
               {{- if gt (len $c) 2 -}}
                   {{- /* Anchor for objectID uses the (combined) header so IDs stay stable. */ -}}
                   {{- $id_anchor := $section_header | anchorize -}}
+                  {{- if $section_tab -}}
+                      {{- $id_anchor = print $id_anchor "-" $section_tab -}}
+                  {{- end -}}
                   {{- $hdr := $section_header -}}
                   {{- if $page.Params.exclude_headers_from_search -}}
                       {{- $hdr = "" -}}
