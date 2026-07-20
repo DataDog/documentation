@@ -16,14 +16,9 @@ further_reading:
 
 {{< product-availability >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
- btn_hidden="false" header="Join the Preview!">}}
-Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
-{{< /callout >}}
-
 ## Overview
 
-Use Observability Pipelines' Datadog Agent source to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from the Datadog Agent.
+Use Observability Pipelines' Datadog Agent source to receive logs or metrics from the Datadog Agent.
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 

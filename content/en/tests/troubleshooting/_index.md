@@ -94,6 +94,59 @@ The total time is defined as the sum of the maximum test session durations.
 1. The maximum duration of a test session grouped by the test session fingerprint is calculated.
 2. The maximum test session durations are summed.
 
+## Inconsistent Git information
+
+Datadog native testing libraries populate `git.*` tags from two sources:
+
+- CI provider environment variables, such as [`GITHUB_SHA`][19] in GitHub Actions or [`CI_COMMIT_SHA`][20] in GitLab CI/CD. These values are set when the job starts and do not update even if the job modifies the local checkout later.
+- The local Git repository, through the `git` executable. This provides metadata that CI provider variables might not include, such as commit message, author, and committer details. This metadata reflects the commit checked out when tests run.
+
+Because these sources can describe different commits, reported `git.*` tags can be inconsistent.
+
+In GitHub Actions, [`pull_request`][21] workflows set `GITHUB_SHA` to the merge commit. If the workflow checks out the pull request head commit before running tests, `git.commit.sha` can come from the merge commit while `git.commit.message` comes from the checked-out head commit. In `push` workflows, a custom [`actions/checkout` `ref` input][22] can create the same mismatch.
+
+In GitLab CI/CD jobs, [`GIT_CHECKOUT: "false"`][23] and a manual checkout can cause CI-provided metadata to describe the pipeline commit while local Git metadata describes the manually checked-out commit. Commands such as `git checkout`, `git switch`, `git reset --hard`, `git merge`, `git rebase`, or `git commit` before running tests can also create this mismatch.
+
+The following GitHub Actions workflow can report mismatched Git metadata:
+
+```yaml
+name: test
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # GITHUB_SHA still points to the pull request merge commit.
+          # The local checkout points to the pull request head commit.
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: npm test
+        # git.commit.sha can come from GITHUB_SHA.
+        # git.commit.message can come from the local Git checkout.
+```
+
+The following GitLab CI/CD job can create a similar mismatch:
+
+```yaml
+test:
+  variables:
+    # CI_COMMIT_SHA still points to the commit that created the pipeline.
+    # The runner does not update the working tree automatically.
+    GIT_CHECKOUT: "false"
+  script:
+    - git fetch origin "$CUSTOM_REF"
+    # The local checkout points to CUSTOM_REF before tests run.
+    - git checkout "$CUSTOM_REF"
+    - npm test
+    # git.commit.sha can come from CI_COMMIT_SHA.
+    # Other git.* tags can come from the local Git checkout.
+```
+
+To report consistent metadata, set the relevant [`DD_GIT_*` environment variables](#data-appears-in-test-runs-but-not-test-health) explicitly before running tests. These variables take precedence over CI provider variables and local Git metadata. Set them to the commit metadata that you want Datadog to report, such as the commit that triggered the job or a custom commit checked out during the job.
+
 ## The test status numbers are not what is expected
 
 The test status numbers are calculated based on the unique tests that were collected. The uniqueness of a test is defined not only by its suite and name, but by its test parameters and test configurations as well.
@@ -212,3 +265,8 @@ Because this mode does not initialize `dd-trace` in Vitest workers, the followin
 [16]: /tests/network/
 [17]: https://vitest.dev/config/isolate
 [18]: https://github.com/nodejs/import-in-the-middle
+[19]: https://docs.github.com/en/actions/reference/workflows-and-actions/variables#default-environment-variables
+[20]: https://docs.gitlab.com/ci/variables/predefined_variables/
+[21]: https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#pull_request
+[22]: https://github.com/actions/checkout#usage
+[23]: https://docs.gitlab.com/ci/runners/configure_runners/#git-checkout

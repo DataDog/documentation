@@ -14,6 +14,9 @@ further_reading:
 - link: "/experiments/statistics/minimum_detectable_effect"
   tag: "Documentation"
   text: "Minimum Detectable Effects"
+- link: "/experiments/statistics/cuped"
+  tag: "Documentation"
+  text: "CUPED: Variance Reduction Technique"
 - link: "/experiments/statistics/multiple_testing_correction"
   tag: "Documentation"
   text: "Multiple Testing Correction"
@@ -76,7 +79,7 @@ The prior matters most when sample sizes are small. With enough data, the poster
 
 Analysis methods are only one part of the statistical analysis plan. Datadog Experiments also supports modifying the following [settings][1]:
 
-CUPED
+[CUPED][4]
 : Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
@@ -92,3 +95,4 @@ Confidence level
 [1]: /experiments/plan_and_launch_experiments/#choose-a-statistical-analysis-plan
 [2]: /experiments/statistics/minimum_detectable_effect
 [3]: /experiments/statistics/multiple_testing_correction
+[4]: /experiments/statistics/cuped

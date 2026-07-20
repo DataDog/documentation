@@ -17,7 +17,7 @@ further_reading:
 
 Datadog APM can create **inferred spans** for requests that pass through Azure API Management to your backend services. The spans enable end-to-end traces, service maps, and sampling based on the API Management gateway.
 
-Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), and **Python** only. Other runtimes (for example Go, Java, or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
+Inferred spans for Azure API Management are supported for **.NET**, **JavaScript** (Node.js), **Python**, and **Java** only. Other runtimes (for example Go or PHP) do not emit Azure API Management inferred spans, even if they support inferred spans for other gateways.
 
 ## Prerequisites
 
@@ -31,6 +31,7 @@ Inferred spans for Azure API Management are supported for **.NET**, **JavaScript
 | Node.js | `dd-trace-js` | v5.87.0+ | express, fastify, hapi, koa, microgateway-core, next, paperplane, restify, router, apollo |
 | Python | `dd-trace-py` | v4.6.0+ | aiohttp, asgi, bottle, cherrypy, django, djangorestframework, falcon, fastapi, flask, molten, pyramid, sanic, starlette, tornado, wsgi |
 | .NET | `dd-trace-dotnet` | v3.39.0+ | ASP.NET, ASP.NET Core |
+| Java | `dd-trace-java` | v1.64.0 | Servlet, Spring Web MVC, Spring WebFlux, Netty, Jetty, Tomcat, Undertow, Vert.x Web, Akka HTTP, Play, Ratpack, Grizzly, Liberty, Restlet, Synapse, Spray, Apache CXF, Axway API Gateway, Azure Functions |
 
 ## Setup
 

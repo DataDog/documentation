@@ -33,6 +33,10 @@ The [Ingestion Control page][3] overviews ingestion volumes and configuration se
 
 ## Processing pipelines
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Processing Pipelines are not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
+
 Transform, normalize, and enrich span attributes after ingestion with [Processing Pipelines][7]. Standardize attribute naming across services, consolidate inconsistent keys, and extract structured data from span values, without modifying application code.
 
 {{< img src="tracing/processing_pipelines/manage_pipelines.png" style="width:100%;" alt="Processing Pipelines" >}}
