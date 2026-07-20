@@ -39,7 +39,7 @@ For experiments backed by Datadog Feature Flags, common causes include:
 
 For warehouse-native experiments, common causes include:
 
-- The exposure fraction configured in Datadog does not match the assignment probabilities used by the upstream randomization system.
+- The expected variant weights configured in Datadog do not match the assignment probabilities used by the upstream randomization system.
 - The Exposure SQL Model filters, joins, or aggregates exposure rows in a way that drops subjects from one variant more often than another.
 - The exposure table uses unstable subject IDs, unexpected variant keys, duplicate assignments, or conflicting variant records.
 - The analysis population is filtered by a post-assignment condition, such as a trigger, bot filter, eligibility rule, or event that can be affected by the variant.
@@ -48,13 +48,15 @@ For warehouse-native experiments, common causes include:
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
 2. For Datadog Feature Flags, review the flag environment, targeting rule order, allocation history, variant weights, SDK targeting key, and exposure telemetry path.
-3. For warehouse-native experiments, compare the Datadog exposure fraction with the upstream assignment probabilities, then inspect the Exposure SQL Model, exposure table, joins, filters, and timestamp windows.
+3. For warehouse-native experiments, compare the expected variant weights in Datadog with the upstream assignment probabilities, then inspect the Exposure SQL Model, exposure table, joins, filters, and timestamp windows.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
 
 ## Missing assignments
 
 If Datadog has no assignment data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified experiment key and variant keys.
+
+For experiments that use Datadog Feature Flags with warehouse metrics, Datadog can also warn when the Datadog assignment source has assignments but the warehouse-native assignment source has none. In this case, warehouse metric results are not available until the exposure export job has run.
 
 ### How to resolve
 
@@ -69,8 +71,8 @@ If the same subject is assigned to more than one variant in the same experiment,
 ### How to resolve
 
 - For Feature Flags experiments, check whether the same subject has exposure records from different experiment configurations, such as an allocation or variant-key change, stale client state, or a different SDK evaluation path for the same flag.
-- For warehouse-native experiments, make sure the experiment ID column in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
-- For warehouse-native experiments, check whether the Exposure SQL Model returns flag evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
+- For warehouse-native experiments, make sure the experiment key column in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
+- If the warehouse-native [Exposure SQL Model](/experiments/concepts/exposure_sql/) intentionally reads flag-evaluation logs, filter out evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
 - For warehouse-native experiments, check for duplicate or conflicting variant records in the assignment data.
 - Fix the source of conflicting assignments, then rerun analysis.
 
