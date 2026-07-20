@@ -6,6 +6,10 @@
                 <p class="h4">{{ i18n "datadog_docs" }} &nbsp;&nbsp;<span class="font-semibold">API</span></p>
             </a>
 
+            {{ if .Scratch.Get "isDateVersioned" }}
+                {{ partial "api/global-version-selector.html" (dict "versions" (.Scratch.Get "apiVersionsList") "baseVersion" (.Scratch.Get "baseVersion")) }}
+            {{ end }}
+
             {{ $ContentBaseName := "" }}
             {{ with .File }}
               {{ $ContentBaseName = .ContentBaseName }}
