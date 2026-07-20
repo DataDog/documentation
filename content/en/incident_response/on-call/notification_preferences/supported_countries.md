@@ -124,4 +124,8 @@ If your country isn't listed in the following table, contact <a href="https://do
 
 \*\* Available by request: SMS and phone call notifications for these countries are not enabled by default. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request access.
 
+<div class="alert alert-info">
+Not all countries listed in the table are available during a trial. If you need to test SMS or phone call notifications for a country that isn't available during your trial, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
+</div>
+
 [1]: /incident_response/on-call/notification_preferences/#supported-contact-methods
