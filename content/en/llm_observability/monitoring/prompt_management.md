@@ -48,7 +48,7 @@ This temporary installation procedure will be replaced with a released minimum `
 
 ### Configure prompt retrieval
 
-Configure the Datadog site, credentials, and deployment environment before importing `ddtrace`:
+Provide the Datadog site, credentials, and deployment environment through the configuration and secret-management workflow already used by your application. For example, use the application's environment file, Docker Compose or Kubernetes configuration, deployment platform, or secret manager. At runtime, the following environment variables must be set before importing `ddtrace`:
 
 {{< code-block lang="shell" >}}
 export DD_SITE="<DATADOG_SITE>"
@@ -57,7 +57,9 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Store API and application keys in a secret manager, and do not commit them to source control.
+`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Add references to the API and application keys through the existing configuration workflow; do not add their values to source code, committed configuration, or coding-agent prompts.
+
+When using a coding agent, instruct it to preserve the application's existing configuration and execution conventions. If no convention exists, the agent should ask which configuration and secret-management approach to use instead of introducing one. If the existing workflow does not make credentials available to the agent, it can implement the integration but should report that live prompt resolution and tracking remain unverified. Do not provide credential values through the conversation.
 
 ### Retrieve and format a prompt
 
@@ -111,7 +113,7 @@ Retrieved prompts are cached in memory. After 60 seconds by default, an access r
 
 ### Track prompt usage
 
-To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation. For example:
+To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation through its existing execution workflow. For example, the equivalent shell command is:
 
 {{< code-block lang="shell" >}}
 DD_SITE="<DATADOG_SITE>" \
