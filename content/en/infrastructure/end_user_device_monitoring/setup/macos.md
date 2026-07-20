@@ -118,6 +118,61 @@ You can use other MDMs; however, this page walks through Jamf Pro as an example.
 
     The install script runs as root through Jamf, which provides the permissions needed to install the Agent and create the `ddagent` system user without user interaction.
 
+## Enable Network Path (optional)
+
+To enable scheduled Network Path tests, add the following block to your install script before you create the Jamf policy. This block enables the `traceroute` system-probe module, writes the `network_path` check configuration, and restarts the Agent and system-probe.
+
+Replace the example hostnames with the destinations you want to monitor.
+
+{{< code-block lang="shell" >}}
+# Datadog Agent - Network Path configuration
+
+# 1. Enable the traceroute system-probe module
+SYSTEM_PROBE="/opt/datadog-agent/etc/system-probe.yaml"
+if ! grep -q '^traceroute:' "$SYSTEM_PROBE" 2>/dev/null; then
+  cat >> "$SYSTEM_PROBE" <<'YAML'
+
+traceroute:
+  enabled: true
+YAML
+fi
+
+# 2. Create the network_path check configuration
+NETWORK_PATH_DIR="/opt/datadog-agent/etc/conf.d/network_path.d"
+NETWORK_PATH_CONF="$NETWORK_PATH_DIR/conf.yaml"
+mkdir -p "$NETWORK_PATH_DIR"
+chown _dd-agent:admin "$NETWORK_PATH_DIR"
+cat > "$NETWORK_PATH_CONF" <<'YAML'
+init_config:
+    min_collection_interval: 60
+    timeout: 1000
+
+instances:
+  - hostname: google.com # endpoint hostname or IP
+    protocol: TCP
+    port: 443
+  - hostname: api.datadoghq.com
+    protocol: TCP
+    port: 443
+    min_collection_interval: 120
+YAML
+
+# Remove the .example file if present so it doesn't shadow the active config
+[ -f "$NETWORK_PATH_DIR/conf.yaml.example" ] && rm -f "$NETWORK_PATH_DIR/conf.yaml.example"
+
+# Set ownership and permissions to match Datadog defaults
+chown _dd-agent:admin "$SYSTEM_PROBE" "$NETWORK_PATH_CONF" 2>/dev/null || true
+chmod 640 "$NETWORK_PATH_CONF"
+
+# 3. Restart system-probe and agent to pick up the config changes
+sudo launchctl kickstart -k system/com.datadoghq.sysprobe
+sudo launchctl kickstart -k system/com.datadoghq.agent
+
+echo "Datadog Network Path configuration complete."
+{{< /code-block >}}
+
+For the full list of configuration options, see the [Network Path setup documentation][5].
+
 ### Create the Jamf policy
 
 1. Go to **Computers** > **Policies** and click **New**.
@@ -136,10 +191,6 @@ To confirm that the Agent installed on a device, use one of the following method
 - In the policy detail view, click **Logs** to see which devices ran the policy and whether the script exited with a `0` (success) code.
 - SSH into a target device and run `datadog-agent status`. In the output, confirm that **Status** is `Running` and `infrastructure_mode: end_user_device` is set.
 - In Datadog, go to [**Infrastructure** > **End User Devices**][4]. Enrolled devices appear within 5-10 minutes of the Agent starting.
-
-## Enable Network Path (optional)
-
-<!-- todo, waiting on open questions -->
 
 ## Further reading
 
