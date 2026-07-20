@@ -186,7 +186,7 @@ You can filter and route logs based on `token_value: hec_token_one`.
 
 [Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
 
-When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
+When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20,000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
 
 A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
 
@@ -196,9 +196,9 @@ If an error that causes a log to be sent without enrichment occurs, you can view
 
 Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
-### Metrics
+## Metrics
 
-#### Processor metrics
+### Processor metrics
 
 To see metrics about your Enrichment Table processor, add the tags `component_type=enrichment_table` and  `component_id=<processor_id>` to processor metrics:
 
@@ -209,7 +209,9 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
 : The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string, or not an integer.
 
-#### Buffer metrics (when enabled)
+### Buffer metrics (when using Reference Tables)
+
+The Enrichment Table processor's buffer is only enabled when enriching from a Reference Table.
 
 To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 
@@ -241,12 +243,12 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 : **Description**: Bytes sent downstream by the processor's buffer.
 : **Metric type**: counter
 
-#### Reference Table metrics
+### Reference Table metrics
 
 To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table_id:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
-: This counter is incremented for each processed log that does not have a corresponding row in the table.
+: This counter is incremented for each processed log that does not have a corresponding row in the table. Available in Worker version 2.14 and later.
 
 `pipelines.enrichment_cache_hits_total`
 : Number of cache hits, that is logs that could be enriched without being buffered.

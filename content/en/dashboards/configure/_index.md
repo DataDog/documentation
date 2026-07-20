@@ -67,6 +67,7 @@ Click {{< ui >}}Configure{{< /ui >}} to open a menu of configuration options ava
 | {{< ui >}}Clone dashboard{{< /ui >}} | Copy the entire dashboard to a new dashboard. You are prompted to name the clone. |
 | {{< ui >}}Display UTC time{{< /ui >}} | Toggle between UTC time and your default time zone. |
 | {{< ui >}}Include Flex Logs{{< /ui >}} | Toggle to include [Flex Logs][3] in all Flex-configured widgets. When off, widgets use [Standard Indexed][4] logs instead. This is a user-level preference that persists across sessions for this dashboard. |
+| {{< ui >}}Default timeframe{{< /ui >}} | Select a time range for the dashboard that applies to all users. |
 | {{< ui >}}Increase density{{< /ui >}} | High-density mode displays group widgets in a dashboard side-by-side for increased widget density. This mode turns on by default on large screens for dashboards that use group widgets. |
 | {{< ui >}}Keyboard&nbsp;shortcuts{{< /ui >}} | View a list of available keyboard shortcuts. |
 | {{< ui >}}Pause Auto-Refresh{{< /ui >}} | Pause automatic refresh by default for dashboards with relative time ranges to optimize compute usage and reduce background activity. This setting applies to all users who view the dashboard. |

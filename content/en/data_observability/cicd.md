@@ -70,34 +70,34 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 ##### General settings
 
-| Setting | Description |
-| - | - |
+| Setting                            | Description                                                          |
+| ---------------------------------- | -------------------------------------------------------------------- |
 | `Run on Draft Pull/Merge Requests` | Enable this option to run the check on draft pull or merge requests. |
 
 #### Drift Detection
 
-Drift detection compares the current state of your data to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you _must_ send OpenLineage events from your CI job. See the [OpenLineage setup documentation][6] for more information.
+Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you must send OpenLineage events from your CI job. Datadog uses these events as triggers for drift detection checks. See the [OpenLineage setup documentation][6] for instructions on how to set up OpenLineage.
 
 ##### General settings
 
-| Setting | Description |
-| - | - |
-| `Run on Draft Pull/Merge Requests` | Enable this option to run the check on draft pull or merge requests. |
-| `Threshold` | The threshold for drift detection (for example, `0.1` for 10% drift). If a metric exceeds this threshold, it shows up as a warning in the check results. |
-| `Downstream Checks` | When a dbt model changes, drift detection checks are generated for it and any downstream dbt models. This setting controls how far downstream the checks run. |
+| Setting                            | Description                                                                                                                                                   |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Run on Draft Pull/Merge Requests` | Enable this option to run the check on draft pull or merge requests.                                                                                          |
+| `Threshold`                        | The threshold for drift detection (for example, `0.1` for 10% drift). If a metric exceeds this threshold, it shows up as a warning in the check results.      |
+| `Downstream Checks`                | When a dbt model changes, drift detection checks are generated for it and any downstream dbt models. This setting controls how far downstream the checks run. |
 
 ##### dbt Cloud
 
-| Setting | Description |
-| - | - |
-| `CI Job URL` | The locator for your dbt Cloud CI job. These typically look like `https://cloud.getdbt.com/...`. |
+| Setting      | Description                                                                                                                                                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CI Job URL` | The locator for the dbt Cloud CI job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog. These typically look like `https://cloud.getdbt.com/...`. |
 
 ##### dbt Core
 
-| Setting | Description |
-| - | - |
-| `CI Job Name` | The name of the job that runs whenever you update a pull or merge request and materializes your dbt models. This may be the same as the job you selected earlier, but you must specify it again here. |
-| `CI Job Namespace` | The `OPENLINEAGE_NAMESPACE` variable specified when running the job. See [Set the environment variables][7]. If you don't set this variable when sending OpenLineage events, you don't need to specify it here. |
+| Setting            | Description                                                                                                                                                                                                                                        |
+| ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `CI Job Name`      | The name of the job that's triggered by pull requests, materializes dbt models for CI, and sends OpenLineage events to Datadog.                                                                                                                   |
+| `CI Job Namespace` | The OPENLINEAGE_NAMESPACE variable specified when sending OpenLineage events from the job specified above. See [Set the environment variables][7]. If you don't set this variable when sending OpenLineage events, you don't need to specify it here. |
 
 ## Further reading
 
