@@ -39,7 +39,7 @@ For experiments backed by Datadog Feature Flags, common causes include:
 - The traffic split (the relative percentages assigned to variants) changed after launch, for example from `90/10` to `50/50`, while assignments made under the earlier split remain in the analysis window.
 - Exposure events are lost at different rates by variant after assignment. For example, a variant-specific redirect or crash can prevent buffered exposure events from reaching Datadog.
 
-Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, increasing traffic exposure from 20% to 100% moves each variant from 10% to 50% of eligible subjects while preserving the `50/50` split.
+Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, ramp from `10/10` of eligible subjects to `50/50`, increasing both variants proportionally while keeping their relative split equal.
 
 Changing targeting rules, the targeting key, or traffic exposure does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or causes a different diagnostic, such as missing or mixed assignments.
 
