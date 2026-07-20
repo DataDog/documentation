@@ -16,14 +16,14 @@ config_path = Path(__file__).parent / "config.yaml"
 with config_path.open() as f:
     config = yaml.safe_load(f)
 
-top_level = set(config.get("top_level", []))
-moves_to_hugo = set(config.get("moves_to_hugo", []))
+repo_level_files = set(config.get("top_level", []))
+hugo_level_files = set(config.get("moves_to_hugo", []))
 ignore = set(config.get("ignore", []))
 
 # Sanity-check the config itself for conflicts.
-conflicts = top_level & moves_to_hugo
-if conflicts:
-    for name in sorted(conflicts):
+config_inconsistencies = repo_level_files & hugo_level_files
+if config_inconsistencies:
+    for name in sorted(config_inconsistencies):
         print(f"ERROR: '{name}' appears in both top_level and moves_to_hugo", file=sys.stderr)
     sys.exit(1)
 
@@ -33,9 +33,9 @@ for name in os.listdir(repo_root):
     if name in ignore:
         continue
 
-    if name in top_level:
+    if name in repo_level_files:
         pass  # keep in place
-    elif name in moves_to_hugo:
+    elif name in hugo_level_files:
         pass  # will move below
     else:
         errors.append(name)
@@ -52,7 +52,7 @@ hugo_dir.mkdir(exist_ok=True)
 moved = 0
 deleted = 0
 for name in sorted(os.listdir(repo_root)):
-    if name in ignore or name in top_level or name == "hugo":
+    if name in ignore or name in repo_level_files or name == "hugo":
         continue
     src = repo_root / name
     dst = hugo_dir / name
@@ -99,22 +99,22 @@ def route_gitignore_segment(line):
 
 print("\nSplitting .gitignore between root and hugo/...")
 gitignore = repo_root / ".gitignore"
-gi_lines = gitignore.read_text().splitlines(keepends=True)
+original_gitignore_lines = gitignore.read_text().splitlines(keepends=True)
 
 root_lines = []
 hugo_lines = []
 hugo_only_segments = set()   # routed off root into hugo/ (for the summary)
 both_segments = set()        # in neither config list -> kept in both (surfaced)
 
-for raw in gi_lines:
+for raw in original_gitignore_lines:
     segment = route_gitignore_segment(raw)
     if segment is None:                       # comment / blank -> keep in both
         root_lines.append(raw)
         hugo_lines.append(raw)
-    elif segment in moves_to_hugo:
+    elif segment in hugo_level_files:
         hugo_lines.append(raw)
         hugo_only_segments.add(segment)
-    elif segment in top_level:
+    elif segment in repo_level_files:
         root_lines.append(raw)
     else:
         root_lines.append(raw)
@@ -212,7 +212,7 @@ def route_codeowners_pattern(pattern):
         body = "local" + body[len(".local"):]
         segment = "local"
 
-    if segment not in moves_to_hugo:
+    if segment not in hugo_level_files:
         return segment, None
 
     new_body = "hugo/" + body
@@ -236,7 +236,7 @@ for i, raw in enumerate(lines):
     rest = stripped[len(pattern):]            # original spacing + owners, verbatim
     segment, new_pattern = route_codeowners_pattern(pattern)
     if new_pattern is None:
-        if segment is not None and segment not in top_level:
+        if segment is not None and segment not in repo_level_files:
             left_alone.add(segment)
         continue
     lines[i] = indent + new_pattern + rest + newline

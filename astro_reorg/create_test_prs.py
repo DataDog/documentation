@@ -7,9 +7,6 @@ For each spec in TEST_PRS this script:
   3. commits and pushes the branch,
   4. opens a PR against the base branch (see below).
 
-On completion it opens each new PR in the browser (falling back to printing
-the URLs if a browser can't be launched).
-
 BRANCH_FROM and MOCK_BASE_BRANCH are read from the `test:` section of
 config.yaml (shared with resolve_pr_conflicts.py, which defaults to this same
 mock base branch). Both must already exist on the remote before running.
