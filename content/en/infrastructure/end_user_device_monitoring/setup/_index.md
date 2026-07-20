@@ -34,7 +34,7 @@ Follow the setup instructions for your platform:
 
 - [macOS][14]
 - [Windows][15]
-- [Linux][16]
+<!-- - [Linux][16] -->
 
 ## Explore the App
 
