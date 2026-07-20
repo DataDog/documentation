@@ -1,0 +1,153 @@
+{{ define "api-main" }}
+
+{{ $versions := .Site.Data.api.changelog.versions | default (slice) }}
+{{/* Sort newest-first so the "Recommended" badge (first entry), the timeline order,
+     and the version-range filter don't depend on changelog.yaml being hand-ordered. */}}
+{{ $versions = sort $versions "date" "desc" }}
+
+{{ $typeMeta := dict
+  "breaking"    (dict "label" "Breaking"    "color" "danger")
+  "addition"    (dict "label" "Addition"    "color" "success")
+  "deprecation" (dict "label" "Deprecation" "color" "warning")
+}}
+
+{{/* Flatten all entries once so we can compute counts and the product list. */}}
+{{ $allEntries := slice }}
+{{ range $versions }}
+  {{ range .entries }}
+    {{ $allEntries = $allEntries | append . }}
+  {{ end }}
+{{ end }}
+
+{{ $allTags := slice }}
+{{ range $allEntries }}
+  {{ if not (in $allTags .tag) }}
+    {{ $allTags = $allTags | append .tag }}
+  {{ end }}
+{{ end }}
+{{ $allTags = sort $allTags }}
+
+<div class="col-12 api-changelog py-3">
+
+  <div class="api-intro-header d-flex flex-wrap align-items-start justify-content-between">
+    <h2 id="changelog">
+      <a href="#changelog">{{ .Title }}</a>
+    </h2>
+    {{ partial "api/api-copy-btn.html" . }}
+  </div>
+
+  <p class="api-changelog-intro">
+    The Datadog API uses date-based versioning to manage breaking changes.
+    Specify the API version by sending a <code>DD-API-VERSION</code> header with a version date.
+  </p>
+
+  <div class="api-changelog-note">
+    <strong>Note:</strong> Requests without a <code>DD-API-VERSION</code> header use the default version.
+  </div>
+
+  {{ if not $versions }}
+    <div class="alert alert-info">
+      No versioning information found. Make sure <code>data/api/changelog.yaml</code> is populated.
+    </div>
+  {{ else }}
+
+    <div class="api-changelog-filterbar">
+      <div class="api-changelog-tabs" role="tablist" aria-label="Filter by change type">
+        <button type="button" class="api-changelog-tab is-active" data-changelog-filter="all">All</button>
+        <button type="button" class="api-changelog-tab" data-changelog-filter="breaking">Breaking</button>
+        <button type="button" class="api-changelog-tab" data-changelog-filter="addition">Addition</button>
+        <button type="button" class="api-changelog-tab" data-changelog-filter="deprecation">Deprecation</button>
+      </div>
+      <div class="api-changelog-filter-divider"></div>
+      <div class="api-changelog-filter-group">
+        <label for="api-changelog-product-filter" class="api-changelog-filter-label">Product</label>
+        <select id="api-changelog-product-filter" class="api-changelog-select">
+          <option value="all">All products</option>
+          {{ range $allTags }}
+            <option value="{{ . }}">{{ . }}</option>
+          {{ end }}
+        </select>
+      </div>
+      <div class="api-changelog-filter-group">
+        <label for="api-changelog-version-filter" class="api-changelog-filter-label">Version range</label>
+        <select id="api-changelog-version-filter" class="api-changelog-select">
+          <option value="all">All versions</option>
+          {{ range $versions }}
+            <option value="{{ .date }}">Since {{ .date }}</option>
+          {{ end }}
+        </select>
+      </div>
+    </div>
+
+    <div class="api-changelog-summary">
+      <span>Showing <strong id="api-changelog-shown-count">{{ len $allEntries }}</strong> changes across
+        <strong id="api-changelog-version-count">{{ len $versions }}</strong> versions</span>
+      <div class="api-changelog-summary-actions">
+        <button type="button" id="api-changelog-clear-filters" class="api-changelog-clear d-none">Clear filters</button>
+      </div>
+    </div>
+
+    <div id="api-changelog-versions" class="api-changelog-timeline">
+      {{ range $index, $version := $versions }}
+        {{ $breakingCount := len (where .entries "type" "breaking") }}
+        <section id="{{ .date }}" class="api-changelog-version {{ if .default }}api-changelog-version--default{{ end }}" data-version="{{ .date }}">
+          <div class="api-changelog-version-header">
+            <h2>{{ .date }}</h2>
+            <div class="api-changelog-version-header-badges">
+              {{ if eq $index 0 }}
+                <span class="api-changelog-badge api-changelog-badge--recommended">Recommended</span>
+              {{ end }}
+              {{ if .default }}
+                <span class="api-changelog-badge api-changelog-badge--base">Base</span>
+              {{ end }}
+              {{ if .deprecated }}
+                <span class="api-changelog-badge api-changelog-badge--deprecated">Deprecated</span>
+              {{ end }}
+              {{ if .eol }}
+                <span class="api-changelog-badge api-changelog-badge--eol">EOL {{ .eol }}</span>
+              {{ end }}
+              <span class="api-changelog-badge api-changelog-badge--breaking {{ if eq $breakingCount 0 }}d-none{{ end }}" data-breaking-badge>
+                {{ $breakingCount }} breaking {{ if eq $breakingCount 1 }}change{{ else }}changes{{ end }}
+              </span>
+            </div>
+          </div>
+
+          {{ if .why_upgrade }}
+            <div class="api-changelog-why-upgrade">
+              <strong>Why upgrade.</strong> {{ .why_upgrade | markdownify }}
+            </div>
+          {{ end }}
+
+          <div class="api-changelog-entries">
+            {{ range .entries }}
+              {{/* Fall back to a labeled, neutral pill for any unrecognized/missing type
+                   instead of rendering an empty "bg-" class with no label. */}}
+              {{ $meta := index $typeMeta .type | default (dict "label" (.type | default "Change") "color" "info") }}
+              <article class="api-changelog-entry" data-type="{{ .type }}" data-bucket="{{ .type }}" data-tag="{{ .tag }}">
+                <span class="api-changelog-pill bg-{{ $meta.color }}">{{ $meta.label }}</span>
+                <div class="api-changelog-entry-body">
+                  <div class="api-changelog-entry-meta">
+                    <span class="api-changelog-tag">tag: <strong>{{ .tag }}</strong></span>
+                    <span class="api-changelog-method text-api-{{ .method }} bg-bg-api-{{ .method }}">{{ .method | upper }}</span>
+                    <code>{{ .path }}</code>
+                  </div>
+                  <p>{{ .description | markdownify }}</p>
+                </div>
+              </article>
+            {{ end }}
+          </div>
+        </section>
+      {{ end }}
+    </div>
+
+    <div id="api-changelog-empty-state" class="api-changelog-empty d-none">
+      <p class="api-changelog-empty-title">No changes match your filters</p>
+      <p class="api-changelog-empty-subtitle">Try removing a type or product filter.</p>
+      <button type="button" class="api-changelog-clear" data-changelog-reset>Clear filters</button>
+    </div>
+
+  {{ end }}
+
+</div>
+
+{{ end }}
