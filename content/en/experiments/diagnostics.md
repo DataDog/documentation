@@ -36,10 +36,12 @@ Treat SRM as a blocker for interpreting results. It indicates that the experimen
 
 For experiments backed by Datadog Feature Flags, common causes include:
 
-- The relative variant weights changed after launch while assignments made under the earlier weights remain in the analysis window.
+- The traffic split (the relative percentages assigned to variants) changed after launch, for example from `90/10` to `50/50`, while assignments made under the earlier split remain in the analysis window.
 - Exposure events are lost at different rates by variant after assignment. For example, a variant-specific redirect or crash can prevent buffered exposure events from reaching Datadog.
 
-Changing targeting rules, the targeting key, or the percentage of eligible traffic exposed does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or causes a different diagnostic, such as missing or mixed assignments.
+Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, increasing traffic exposure from 20% to 100% moves each variant from 10% to 50% of eligible subjects while preserving the `50/50` split.
+
+Changing targeting rules, the targeting key, or traffic exposure does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or causes a different diagnostic, such as missing or mixed assignments.
 
 For warehouse-native experiments, common causes include:
 
@@ -51,7 +53,7 @@ For warehouse-native experiments, common causes include:
 ### How to resolve
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
-2. For Datadog Feature Flags, review the relative variant-weight history, mixed assignments, and whether exposure events reach Datadog at the same rate for every variant.
+2. For Datadog Feature Flags, review the traffic split history, mixed assignments, and whether exposure events reach Datadog at the same rate for every variant.
 3. For warehouse-native experiments, compare the expected exposure fraction for each variant in Datadog with the upstream assignment probabilities. Compare raw assignment counts by variant before and after the Exposure SQL Model applies joins, filters, aggregation, and timestamp constraints.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
