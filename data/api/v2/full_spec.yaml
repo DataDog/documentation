@@ -12624,6 +12624,7 @@ components:
         data:
           attributes:
             compliance_host: false
+            function: true
             vuln_containers_os: true
             vuln_host_os: true
           id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12638,6 +12639,7 @@ components:
         data:
           - attributes:
               compliance_host: false
+              function: true
               vuln_containers_os: true
               vuln_host_os: true
             id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12671,6 +12673,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -12718,6 +12723,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -41014,6 +41022,7 @@ components:
       example:
         data:
           attributes:
+            cloud_function: true
             compliance_host: false
             vuln_containers_os: true
             vuln_host_os: true
@@ -41028,6 +41037,7 @@ components:
       example:
         data:
           - attributes:
+              cloud_function: true
               compliance_host: false
               vuln_containers_os: true
               vuln_host_os: true
@@ -41060,6 +41070,9 @@ components:
     GcpScanOptionsDataAttributes:
       description: Attributes for GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean
@@ -41107,6 +41120,9 @@ components:
     GcpScanOptionsInputUpdateDataAttributes:
       description: Attributes for updating GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean

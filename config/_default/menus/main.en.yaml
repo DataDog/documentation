@@ -9948,9 +9948,14 @@ menu:
       identifier: pa_experiments
       weight: 50000
     - name: Create Experiment Metrics
-      url: experiments/defining_metrics
+      url: experiments/defining_metrics/
       parent: pa_experiments
       identifier: pa_experiments_metrics
+      weight: 1
+    - name: Sync Metrics from YAML
+      url: experiments/defining_metrics/metric_sync/
+      parent: pa_experiments_metrics
+      identifier: pa_experiments_metric_sync
       weight: 1
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
