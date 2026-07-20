@@ -535,7 +535,7 @@ def write_pr_list(
             "",
         ]
 
-    output_path = REPO_ROOT / "test_pr_list.md"
+    output_path = REPO_ROOT / "astro_reorg" / "docs" / "test_pr_list.md"
     output_path.write_text("\n".join(lines))
     print(f"\nWrote {output_path}")
 
