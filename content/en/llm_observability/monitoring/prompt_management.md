@@ -61,9 +61,11 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_API_KEY=<DATADOG_API_KEY>
 DD_APP_KEY=<DATADOG_APP_KEY>
 DD_ENV=<DEPLOYMENT_ENVIRONMENT>
+
+Treat the API and application key values as secrets. Do not repeat them in source code, committed configuration, documentation, or your response.
 ```
 
-**Note:** Including the API and application keys in the prompt is optional and is not required for the coding agent to integrate Prompt Management.
+**Note:** Including the API and application keys in the prompt is optional and is not required for the coding agent to integrate Prompt Management. Include them only in a trusted coding-agent session.
 
 ### Configure prompt retrieval
 

@@ -25,6 +25,12 @@ Use the application's existing package manager to install or upgrade the followi
 
 The package source is a flat links page, not a Python package index. With `pip`, use `--find-links`, not `--index-url` or `--extra-index-url`.
 
+Make the installation repeatable from a clean environment. Apply the flat package source to the command that resolves the application's dependencies; do not first run a dependency installation that requires this Preview package without making the source available. For example, a pip project installed from its root can use:
+
+```shell
+pip install --find-links https://dd-trace-py-builds.s3.amazonaws.com/main/index.html -e .
+```
+
 ## Configure the application
 
 Make the following values available before `ddtrace` initializes, using the application's existing configuration and secret-management workflow:
