@@ -1,17 +1,6 @@
 ---
 title: Multiple Testing Correction
 description: Control the family-wise error rate when an experiment compares multiple metrics or treatment variants.
-aliases:
-  - /experiments/multiple_testing_correction
-  - /experiments/multiple_testing_correction/
-  - /experiments/statistics/multiple_testing
-  - /experiments/statistics/multiple_testing/
-  - /experiments/multiple_testing
-  - /experiments/multiple_testing/
-  - /experiments/statistics/multiple_comparisons
-  - /experiments/statistics/multiple_comparisons/
-  - /experiments/multiple_comparisons
-  - /experiments/multiple_comparisons/
 further_reading:
 - link: "/experiments/statistics/analysis_methods"
   tag: "Documentation"
