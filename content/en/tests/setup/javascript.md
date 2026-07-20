@@ -208,6 +208,8 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
 
+{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
 To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][5] under `use` to one of the following values:
 
 - `'on'`: Capture screenshot after each test.
