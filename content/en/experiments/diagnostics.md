@@ -20,38 +20,37 @@ further_reading:
 
 Datadog runs diagnostic checks with experiment analysis to help you identify data quality, randomization, and configuration issues before you make a rollout decision. When a check finds an issue, Datadog surfaces it in the experiment results experience as a warning, metric message, or failed diagnostic check.
 
-For example, you might see:
-
-- A **Failed diagnostic check** banner when results are unreliable.
-- A **Traffic imbalance** diagnostic when traffic is split differently than expected.
-- A **Missing metric data** diagnostic when Datadog has not received events for a metric.
-- A warning icon on a metric when the metric or subject type configuration prevents calculation.
-
 Start with any failed diagnostic check or warning banner before interpreting lift, confidence intervals, or global lift.
 
 ## Traffic imbalance
 
-A traffic imbalance means the observed traffic split across variants is significantly different from the split configured for the experiment. This statistical issue is sometimes called a sample ratio mismatch or exposure imbalance. When this happens, Datadog marks the results as unreliable.
+A traffic imbalance, also known as a sample ratio mismatch (SRM), means the observed traffic split across variants is significantly different from the split configured for the experiment.
 
-You may see one of the following messages:
-
-- **Failed diagnostic check**
-- **Traffic imbalance**
-- "This experiment has a significant exposure imbalance between variants, which makes the results unreliable."
+Treat SRM as a blocker for interpreting results. It indicates that the experiment's effective randomization, exposure logging, or analysis population is biased. Until you find and fix the root cause, lift, confidence intervals, and global lift cannot support valid causal inference.
 
 ### Common causes
 
-- Targeting rules above the experiment rule capture traffic before users reach the experiment.
-- The experiment's traffic exposure or rollout percentages do not match the intended split.
-- The application assigns the same subject inconsistently.
-- For warehouse-native experiments, assignment data contains unexpected variant proportions.
+For experiments backed by Datadog Feature Flags, common causes include:
+
+- A flag rule, targeting condition, or rollout change that sends users around the experiment rule during the experiment.
+- An inconsistent targeting key, subject identifier, or SDK evaluation path that changes which variant a subject can receive.
+- Variant behavior that changes whether exposure telemetry is generated or received, such as redirects, crashes, slower page loads, or conditional flag evaluation.
+- Manual interference, such as pausing a variant, changing allocation mid-run, or forcing users into a variant outside the experiment flow.
+
+For warehouse-native experiments, common causes include:
+
+- The exposure fraction configured in Datadog does not match the assignment probabilities used by the upstream randomization system.
+- The Exposure SQL Model filters, joins, or aggregates exposure rows in a way that drops subjects from one variant more often than another.
+- The exposure table uses unstable subject IDs, unexpected variant keys, duplicate assignments, or conflicting variant records.
+- The analysis population is filtered by a post-assignment condition, such as a trigger, bot filter, eligibility rule, or event that can be affected by the variant.
 
 ### How to resolve
 
-1. Review the experiment's randomization setup.
-2. Confirm the feature flag environment, targeting rule order, filters, and traffic exposure.
-3. For warehouse-native experiments, inspect the Exposure SQL Model and upstream exposure table.
-4. Fix the source of the imbalance, then restart or rerun the experiment analysis.
+1. Pause decision-making for the experiment until you identify the source of the SRM.
+2. For Datadog Feature Flags, review the flag environment, targeting rule order, allocation history, SDK targeting key, and exposure telemetry path.
+3. For warehouse-native experiments, compare the Datadog exposure fraction with the upstream assignment probabilities, then inspect the Exposure SQL Model, exposure table, joins, filters, and timestamp windows.
+4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
+5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
 
 ## Missing assignments
 
