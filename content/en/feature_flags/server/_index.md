@@ -88,7 +88,7 @@ DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 <div class="alert alert-info">Remote Configuration must be available for server-side Feature Flags. It is enabled by default on Agent 7.47.0 and later. Only set SDK-level Remote Configuration variables (such as <code>DD_REMOTE_CONFIG_ENABLED=true</code>) if your tracer has Remote Configuration disabled and you need to override that setting.</div>
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing. See <a href="/feature_flags/guide/apm_trace_enrichment/">Set Up APM Trace Enrichment</a> to attach feature flag evaluation data to APM traces for filtering and experimentation.
 
 ## Testing with in-memory providers
 

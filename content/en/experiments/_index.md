@@ -11,6 +11,9 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
+- link: "/feature_flags/guide/apm_trace_enrichment/"
+  tag: "Guide"
+  text: "Set Up APM Trace Enrichment for Feature Flags"
 ---
 
 ## Overview
