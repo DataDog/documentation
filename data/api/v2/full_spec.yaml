@@ -60967,6 +60967,41 @@ components:
           $ref: "#/components/schemas/MaxSessionDurationUpdateData"
       required: [data]
       type: object
+    McpCrossAppAccessIssuerUrlType:
+      description: Data type of an MCP Cross-App Access issuer URL update.
+      enum: [org_config]
+      example: org_config
+      type: string
+      x-enum-varnames:
+        - ORG_CONFIG
+    McpCrossAppAccessIssuerUrlUpdateAttributes:
+      description: Attributes for the MCP Cross-App Access issuer URL update request.
+      properties:
+        issuer_url:
+          description: |-
+            The Okta OIDC issuer URL for MCP Cross-App Access, for example
+            `https://your-subdomain.okta.com`. Provide an empty string to unset
+            the issuer URL and opt the organization out of MCP Cross-App Access.
+          example: https://your-subdomain.okta.com
+          type: string
+      required: [issuer_url]
+      type: object
+    McpCrossAppAccessIssuerUrlUpdateData:
+      description: The data object for an MCP Cross-App Access issuer URL update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/McpCrossAppAccessIssuerUrlUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/McpCrossAppAccessIssuerUrlType"
+      required: [type, attributes]
+      type: object
+    McpCrossAppAccessIssuerUrlUpdateRequest:
+      description: A request to update the MCP Cross-App Access issuer URL for an organization.
+      properties:
+        data:
+          $ref: "#/components/schemas/McpCrossAppAccessIssuerUrlUpdateData"
+      required: [data]
+      type: object
     McpScanRequest:
       description: The top-level request object for submitting an MCP SCA dependency scan.
       properties:
@@ -155715,6 +155750,53 @@ paths:
         operator: OR
         permissions:
           - org_management
+  /api/v2/login/org_configs/mcp_cross_app_access_issuer_url:
+    put:
+      description: |-
+        Update the Okta OIDC issuer URL used for MCP Cross-App Access (XAA)
+        for the current organization. The URL must be a bare Okta issuer such
+        as `https://your-subdomain.okta.com` (no path, port, query, or fragment).
+        Provide an empty string to unset the issuer URL and opt the organization
+        out of MCP Cross-App Access.
+      operationId: UpdateLoginOrgConfigsMcpCrossAppAccessIssuerUrl
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      issuer_url: https://your-subdomain.okta.com
+                    type: org_config
+            schema:
+              $ref: "#/components/schemas/McpCrossAppAccessIssuerUrlUpdateRequest"
+        required: true
+      responses:
+        "204":
+          description: No Content
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - org_management
+      summary: Update the MCP Cross-App Access issuer URL
+      tags: [Organizations]
+      x-menu-order: 12
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_management
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may change in the future. It is not yet recommended for production use.
   /api/v2/logs:
     post:
       description: |-

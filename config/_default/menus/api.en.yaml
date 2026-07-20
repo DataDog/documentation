@@ -2663,6 +2663,19 @@ menu:
         unstable:
           - v2
         order: 9
+    - name: Update the MCP Cross-App Access issuer URL
+      url: /api/latest/organizations/update-the-mcp-cross-app-access-issuer-url/
+      identifier: organizations-update-the-mcp-cross-app-access-issuer-url
+      parent: organizations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLoginOrgConfigsMcpCrossAppAccessIssuerUrl
+        unstable:
+          - v2
+        order: 12
     - name: Update the maximum session duration
       url: /api/latest/organizations/update-the-maximum-session-duration/
       identifier: organizations-update-the-maximum-session-duration
