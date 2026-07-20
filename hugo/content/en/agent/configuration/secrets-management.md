@@ -1505,12 +1505,9 @@ Set-ItemProperty -Path "HKLM:\SOFTWARE\Datadog\secrets" -Name "api_key" -Value "
 # Restrict read access to ddagentuser and SYSTEM (recommended)
 $acl = Get-Acl "HKLM:\SOFTWARE\Datadog\secrets"
 $acl.SetAccessRuleProtection($true, $false)
-$rules = @(
-    New-Object System.Security.AccessControl.RegistryAccessRule("SYSTEM", "ReadKey", "Allow"),
-    New-Object System.Security.AccessControl.RegistryAccessRule("ddagentuser", "ReadKey", "Allow"),
-    New-Object System.Security.AccessControl.RegistryAccessRule("Administrators", "FullControl", "Allow")
-)
-$rules | ForEach-Object { $acl.SetAccessRule($_) }
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "SYSTEM", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "ddagentuser", "ReadKey", "Allow"))
+$acl.SetAccessRule((New-Object System.Security.AccessControl.RegistryAccessRule -ArgumentList "Administrators", "FullControl", "Allow"))
 Set-Acl "HKLM:\SOFTWARE\Datadog\secrets" $acl
 ```
 
