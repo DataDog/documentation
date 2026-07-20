@@ -32,7 +32,7 @@ The minimum tracer version to get all supported application security capabilitie
 
 ### Supported .NET versions
 
-For a list of supported platforms and operating systems, see [.NET Framework Compatibility][2] and [.NET/.NET Core Compatiblity][1].
+For a list of supported platforms and operating systems, see [.NET Framework Compatibility][2] and [.NET/.NET Core Compatibility][1].
 
 ### Web framework compatibility
 
