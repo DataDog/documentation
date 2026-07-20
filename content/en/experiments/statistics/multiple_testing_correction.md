@@ -42,7 +42,7 @@ For example, an experiment with one control variant, two treatment variants, one
 2 treatment variants x (1 primary metric + 4 remaining metrics) = 10 comparisons
 ```
 
-Only add treatment variants and metrics that you intend to evaluate. Additional treatment variants make correction stricter for all metrics because each treatment adds another comparison against the control. Additional metrics beyond the primary metric make correction stricter for the remaining metric results, but do not reduce the alpha budget reserved for the primary metric.
+Add only the treatment variants and metrics that you intend to evaluate. Additional treatment variants make correction stricter for all metrics because each treatment adds another comparison against the control. Additional metrics beyond the primary metric make correction stricter for the remaining metric results, but they do not reduce the alpha budget reserved for the primary metric.
 
 ## How Datadog adjusts confidence intervals
 
