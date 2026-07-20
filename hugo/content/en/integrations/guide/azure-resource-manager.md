@@ -75,6 +75,7 @@ A form to create a new app registration is displayed:
 
 ## Next steps
 
+- [Migrate this app registration to Secretless Auth][5] to remove the client secret
 - Check out the [Azure Overview dashboard][3] to start getting insights into your Azure environment
 - Check out [Azure monitor templates][4] to start getting alerts for the data that's important to your organization
 
@@ -85,3 +86,4 @@ A form to create a new app registration is displayed:
 [2]: /security/cloud_security_management/
 [3]: https://app.datadoghq.com/dash/integration/71/azure-overview
 [4]: https://app.datadoghq.com/monitors/templates?q=azure
+[5]: /getting_started/integrations/azure/#secretless-migration-setup

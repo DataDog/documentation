@@ -64,9 +64,24 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 ## Setup
 
-Follow the instructions on this page to set up the {{< ui >}}Azure integration{{< /ui >}} through an app registration, available for all Datadog sites.
+Follow the instructions on this page to set up the {{< ui >}}Azure integration{{< /ui >}} through an app registration, available for all Datadog sites. During setup, choose whether the app registration authenticates with Datadog using **Secretless Auth** (recommended) or a **Client Secret**.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Site selector for US3 site" video=true >}}
+
+### Authentication methods
+
+<div class="alert alert-info">Secretless Auth is in Preview.</div>
+
+The Azure integration supports two authentication methods:
+
+| Method | How it works | What you manage |
+|---|---|---|
+| **Secretless Auth** (recommended) | Datadog and Azure establish a trusted identity relationship using an Azure federated credential and OpenID Connect (OIDC) [workload identity federation][54]. The app registration trusts Datadog's OIDC identity instead of a stored secret, and Datadog never stores a secret. | Nothing to rotate or renew, which reduces the risk of ingestion gaps from expired credentials. |
+| **Client Secret** | Datadog stores and authenticates with a client secret from your app registration. | Keep the secret up to date before it expires. |
+
+You select the authentication method when you create or configure an app registration.
+
+{{< img src="/getting_started/integrations/azure/GSwAzure_authenticationMethod.png" alt="The Authentication Method step in the Azure integration setup, showing the recommended Secretless Auth and Client Secret options" style="width:100%;" >}}
 
 {{% collapse-content title="Quickstart (recommended)" level="h4" expanded=false id="quickstart-setup" %}}
 
@@ -82,7 +97,8 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 2. Copy the setup script, and run it in the Azure Cloud shell.
 3. Return to the Datadog UI. You should see {{< ui >}}CONNECTED{{< /ui >}} at the top right corner of the setup script.
 4. Select the subscriptions and management groups to collect data from.
-5. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
+5. Under {{< ui >}}Authentication Method{{< /ui >}}, select {{< ui >}}Secretless Auth{{< /ui >}} (recommended) to authenticate with a federated credential, or {{< ui >}}Client Secret{{< /ui >}} to store and authenticate with a client secret.
+6. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
    - Resource provider
    - Tags
    - Hosts
@@ -91,8 +107,8 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 
 You can also click to enable custom metric collection from [Azure Application Insights][36], and disable the collection of usage metrics.
 
-6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
-7. Enable log collection to set up and configure the services and diagnostic settings needed to forward logs to Datadog:
+7. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
+8. Enable log collection to set up and configure the services and diagnostic settings needed to forward logs to Datadog:
    1. If a log forwarder already exists in the tenant, it is modified to extend its scope. Any changed settings apply to existing as well as newly-selected subscriptions or management groups.
    2. If you're creating a new log forwarder:
       1. Enter a resource group name to store the log forwarder control plane
@@ -103,7 +119,7 @@ You can also click to enable custom metric collection from [Azure Application In
 
    See the [Architecture section][34] of the automated log forwarding guide for more information about this architecture.
 
-8. Click {{< ui >}}Confirm{{< /ui >}} to finish the setup.
+9. Click {{< ui >}}Confirm{{< /ui >}} to finish the setup.
 
 {{% /collapse-content %}}
 
@@ -124,7 +140,8 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
 
 1. In the [Azure integration tile][100], click {{< ui >}}+ Add New App registration{{< /ui >}}, then select {{< ui >}}Terraform{{< /ui >}}.
 2. Select the subscriptions and management groups to collect data from.
-3. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
+3. Under {{< ui >}}Authentication Method{{< /ui >}}, select {{< ui >}}Secretless Auth{{< /ui >}} (recommended) to authenticate with a federated credential, or {{< ui >}}Client Secret{{< /ui >}} to store and authenticate with a client secret.
+4. Optionally, click the metric collection toggle to disable all metric collection from Azure. You can also expand the {{< ui >}}Advanced Configuration{{< /ui >}} dropdown to filter metrics by:
    - Resource provider
    - Tags
    - Hosts
@@ -132,8 +149,8 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
    - Container Apps
 
    You can also click to enable custom metric collection from [Azure Application Insights][101], and disable the collection of usage metrics.
-4. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
-5. Configure log collection:
+5. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
+6. Configure log collection:
    - If a log forwarder already exists in the tenant, extend its scope to include any new subscriptions or management groups.
    - If you're creating a new log forwarder:
      1. Enter a resource group name to store the log forwarder control plane.
@@ -141,7 +158,7 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
      1. Select a region for the control plane.
 
    See the [Architecture section][102] of the automated log forwarding guide for more information about this architecture.
-6. Copy and run the command under {{< ui >}}Initialize and apply the Terraform{{< /ui >}}.
+7. Copy and run the command under {{< ui >}}Initialize and apply the Terraform{{< /ui >}}.
 
 [100]: https://app.datadoghq.com/integrations/azure/
 [101]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
@@ -225,6 +242,25 @@ You can also click to enable custom metric collection from [Azure Application In
 
 6. Optionally, click the resource collection toggle to disable the collection of configuration information from your Azure resources.
 7. Click {{< ui >}}Create Configuration{{< /ui >}}.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Migrate an existing app registration to Secretless Auth" level="h4" expanded=false id="secretless-migration-setup" %}}
+
+If you already connected an app registration using a client secret, you can migrate it to Secretless Auth in place. You don't need to recreate the app registration.
+
+1. In the [Azure integration tile][20], on the {{< ui >}}Configuration{{< /ui >}} tab, select the app registration you want to migrate.
+2. On the {{< ui >}}General{{< /ui >}} tab, under {{< ui >}}Authentication{{< /ui >}}, click {{< ui >}}Set Up Secretless Auth{{< /ui >}}.
+
+   {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessMigration.png" alt="The General tab for an app registration, with a callout recommending Secretless Auth and a Set Up Secretless Auth button" style="width:100%;" >}}
+
+3. In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method: {{< ui >}}Azure CLI{{< /ui >}}, {{< ui >}}Terraform{{< /ui >}}, or {{< ui >}}Azure Portal{{< /ui >}}.
+
+   {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
+
+4. Complete the steps to create a federated credential in Azure for the selected method. For the {{< ui >}}Azure CLI{{< /ui >}} method, run the provided `az ad app federated-credential create` command in a terminal with the Azure CLI configured for the correct tenant, or click {{< ui >}}Open Azure Cloud Shell{{< /ui >}}.
+5. Click {{< ui >}}Verify Credential{{< /ui >}} to test the authentication.
+6. Click {{< ui >}}Confirm{{< /ui >}}. Your client secret is removed when setup succeeds.
 
 {{% /collapse-content %}}
 
@@ -435,3 +471,4 @@ Still need help? Contact [Datadog support][17].
 [51]: https://app.datadoghq.com/logs
 [52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
 [53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings
+[54]: https://learn.microsoft.com/entra/workload-id/workload-identity-federation
