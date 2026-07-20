@@ -28,7 +28,7 @@ A traffic imbalance, also known as a sample ratio mismatch (SRM), means the obse
 
 Datadog detects SRM with Pearson's chi-squared goodness-of-fit test. The test compares observed variant counts with counts expected from the configured weights. The diagnostic fails when the p-value is below `0.001`, corresponding to a significance level (alpha) of `0.001`. Datadog does not apply a minimum total sample size or expected-count requirement to this overall check.
 
-This SRM test is a fixed-sample test and is not sequentially valid. Datadog applies the `0.001` threshold separately on each analysis run; repeatedly checking accumulating experiment data can produce a higher experiment-wide false-positive rate than the nominal 0.1%. The conservative threshold reduces this risk but does not eliminate it.
+We run the test at the more conservative α = 0.001 level because this test is not sequentially valid; the more conservative significance level helps us avoid false positives.
 
 Treat SRM as a blocker for interpreting results. It indicates that the experiment's effective randomization, exposure logging, or analysis population is biased. Until you find and fix the root cause, lift, confidence intervals, and global lift cannot support valid causal inference.
 
