@@ -171,6 +171,101 @@ if (dataVersionToggles.length) {
     });
 }
 
+// API changelog filter bar (/api/changelog)
+const changelogRoot = document.querySelector('.api-changelog');
+
+if (changelogRoot) {
+    const filterTabs = changelogRoot.querySelectorAll('[data-changelog-filter]');
+    const productSelect = document.getElementById('api-changelog-product-filter');
+    const versionSelect = document.getElementById('api-changelog-version-filter');
+    const versionSections = changelogRoot.querySelectorAll('.api-changelog-version');
+    const shownCountEl = document.getElementById('api-changelog-shown-count');
+    const versionCountEl = document.getElementById('api-changelog-version-count');
+    const clearButtons = document.querySelectorAll('#api-changelog-clear-filters, [data-changelog-reset]');
+    const emptyState = document.getElementById('api-changelog-empty-state');
+
+    let activeBucket = 'all';
+    let activeProduct = 'all';
+    let activeVersionFloor = 'all';
+
+    function applyChangelogFilters() {
+        let shownCount = 0;
+        let shownVersionCount = 0;
+
+        versionSections.forEach((section) => {
+            const versionHidden = activeVersionFloor !== 'all' && section.dataset.version < activeVersionFloor;
+            let visibleInSection = 0;
+            let breakingInSection = 0;
+
+            section.querySelectorAll('.api-changelog-entry').forEach((entry) => {
+                const matches = !versionHidden
+                    && (activeBucket === 'all' || entry.dataset.bucket === activeBucket)
+                    && (activeProduct === 'all' || entry.dataset.tag === activeProduct);
+                entry.classList.toggle('d-none', !matches);
+
+                if (matches) {
+                    visibleInSection += 1;
+                    if (entry.dataset.type === 'breaking') breakingInSection += 1;
+                }
+            });
+
+            section.classList.toggle('d-none', visibleInSection === 0);
+
+            const breakingBadge = section.querySelector('[data-breaking-badge]');
+            if (breakingBadge) {
+                breakingBadge.classList.toggle('d-none', breakingInSection === 0);
+                breakingBadge.textContent = `${breakingInSection} breaking ${breakingInSection === 1 ? 'change' : 'changes'}`;
+            }
+
+            if (visibleInSection > 0) shownVersionCount += 1;
+            shownCount += visibleInSection;
+        });
+
+        if (shownCountEl) shownCountEl.textContent = shownCount;
+        if (versionCountEl) versionCountEl.textContent = shownVersionCount;
+        if (emptyState) emptyState.classList.toggle('d-none', shownCount !== 0);
+
+        const isFiltered = activeBucket !== 'all' || activeProduct !== 'all' || activeVersionFloor !== 'all';
+        clearButtons.forEach((button) => {
+            if (button.id === 'api-changelog-clear-filters') button.classList.toggle('d-none', !isFiltered);
+        });
+    }
+
+    filterTabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+            activeBucket = tab.dataset.changelogFilter;
+            filterTabs.forEach((t) => t.classList.toggle('is-active', t === tab));
+            applyChangelogFilters();
+        });
+    });
+
+    if (productSelect) {
+        productSelect.addEventListener('change', () => {
+            activeProduct = productSelect.value;
+            applyChangelogFilters();
+        });
+    }
+
+    if (versionSelect) {
+        versionSelect.addEventListener('change', () => {
+            activeVersionFloor = versionSelect.value;
+            applyChangelogFilters();
+        });
+    }
+
+    clearButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            activeBucket = 'all';
+            activeProduct = 'all';
+            activeVersionFloor = 'all';
+            filterTabs.forEach((t) => t.classList.toggle('is-active', t.dataset.changelogFilter === 'all'));
+            if (productSelect) productSelect.value = 'all';
+            if (versionSelect) versionSelect.value = 'all';
+            applyChangelogFilters();
+        });
+    });
+}
+
 // Scroll the active top level nav item into view below Docs search input
 if (bodyClassContains('api')) {
     setSidenavMaxHeight();

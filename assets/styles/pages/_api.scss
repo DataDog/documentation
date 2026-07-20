@@ -312,3 +312,352 @@ $ddpurple: #632ca6;
         }
     }
 }
+
+// API Changelog (/api/changelog) — POC for the D3 design ask
+.api-changelog {
+    max-width: 900px;
+
+    .api-changelog-intro {
+        max-width: 720px;
+        color: $gray-dark;
+    }
+
+    .api-changelog-note {
+        max-width: 720px;
+        padding: 14px 16px;
+        margin-bottom: 28px;
+        background: #eef6fc;
+        border-left: 3px solid $brand-info;
+        border-radius: 4px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: $gray-dark;
+    }
+
+    .api-changelog-filterbar {
+        z-index: 5;
+        display: flex;
+
+        @include media-breakpoint-up(lg) {
+            position: sticky;
+            // Sits directly under the sticky .api-toolbar (top: 65px, height: 65px)
+            top: 130px;
+        }
+
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        padding: 14px 0;
+        margin-bottom: 8px;
+        background: $white;
+        border-bottom: 1px solid $gray-border;
+    }
+
+    .api-changelog-filter-group {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .api-changelog-filter-label {
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        color: $gray-darkish;
+        margin-right: 2px;
+    }
+
+    .api-changelog-filter-divider {
+        width: 1px;
+        height: 22px;
+        background: $gray-border;
+    }
+
+    .api-changelog-tabs {
+        display: inline-flex;
+        border: 1px solid $gray-border;
+        border-radius: 4px;
+        overflow: hidden;
+    }
+
+    .api-changelog-tab {
+        display: inline-flex;
+        align-items: center;
+        height: 28px;
+        padding: 0 14px;
+        border: none;
+        border-right: 1px solid $gray-border;
+        background: $white;
+        color: $gray-darkish;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all .12s ease;
+
+        &:last-child {
+            border-right: none;
+        }
+
+        &:hover {
+            background: $gray-lightest;
+        }
+
+        &.is-active {
+            background: $ddpurple;
+            color: $white;
+        }
+    }
+
+    .api-changelog-select {
+        height: 28px;
+        padding: 0 8px;
+        border: 1px solid $gray-border;
+        border-radius: 4px;
+        background: $white;
+        color: $gray-dark;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .api-changelog-summary {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 16px 0;
+        font-size: 12px;
+        color: $gray-darkish;
+
+        strong {
+            color: $gray-dark;
+        }
+    }
+
+    .api-changelog-summary-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .api-changelog-clear {
+        display: inline-flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 10px;
+        border: 1px solid $gray-border;
+        border-radius: 4px;
+        background: $white;
+        font-size: 12px;
+        color: $gray-dark;
+        cursor: pointer;
+
+        &:hover {
+            border-color: $gray-light;
+        }
+    }
+
+    .api-changelog-timeline {
+        position: relative;
+    }
+
+    .api-changelog-version {
+        position: relative;
+        padding-left: 26px;
+        padding-bottom: 32px;
+        border-left: 2px solid $gray-border;
+        margin-left: 6px;
+
+        &:last-child {
+            border-left-color: transparent;
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: $white;
+            border: 3px solid $gray-light;
+        }
+
+        &--default::before {
+            border-color: $ddpurple;
+        }
+    }
+
+    .api-changelog-version-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+
+        // Reset the site-wide scroll-anchor offset hack (.main-api h2) — these
+        // headings aren't anchor targets, so the large padding-top just breaks layout.
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0;
+            padding: 0;
+            font-family: monospace;
+            pointer-events: auto;
+            background-clip: border-box;
+        }
+    }
+
+    .api-changelog-version-header-badges {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .api-changelog-badge {
+        display: inline-flex;
+        align-items: center;
+        height: 22px;
+        padding: 0 10px;
+        border-radius: 4px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+
+        // D2 pill vocabulary, reused here for version-level status.
+        &--recommended {
+            background: rgba($brand-success, 0.1);
+            color: $brand-success;
+        }
+
+        &--base {
+            background: $ddpurple;
+            color: $white;
+        }
+
+        &--deprecated,
+        &--eol {
+            background: rgba($brand-warning, 0.15);
+            color: darken($brand-warning, 15%);
+        }
+
+        &--breaking {
+            background: rgba($brand-danger, 0.1);
+            color: $brand-danger;
+        }
+    }
+
+    .api-changelog-why-upgrade {
+        max-width: 720px;
+        padding: 12px 16px;
+        margin-bottom: 14px;
+        background: #f5f0fc;
+        border-left: 3px solid $ddpurple;
+        border-radius: 4px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: $gray-dark;
+
+        strong {
+            color: $ddpurple;
+        }
+    }
+
+    .api-changelog-entries {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .api-changelog-entry {
+        display: flex;
+        gap: 14px;
+        padding: 14px 16px;
+        background: $white;
+        border: 1px solid $gray-border;
+        border-radius: 6px;
+    }
+
+    .api-changelog-pill {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 84px;
+        height: 22px;
+        padding: 0 9px;
+        border-radius: 4px;
+        color: $white;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        white-space: nowrap;
+    }
+
+    .api-changelog-entry-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .api-changelog-entry-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 6px;
+        font-size: 12px;
+
+        code {
+            font-size: 12px;
+        }
+    }
+
+    .api-changelog-tag {
+        color: $gray-darkish;
+
+        strong {
+            color: $gray-dark;
+        }
+    }
+
+    .api-changelog-method {
+        display: inline-flex;
+        align-items: center;
+        height: 18px;
+        padding: 0 6px;
+        border-radius: 3px;
+        font-family: monospace;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .api-changelog-entry p {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.55;
+        color: $gray-dark;
+    }
+
+    .api-changelog-empty {
+        text-align: center;
+        padding: 56px 20px;
+        border: 1px dashed $gray-light;
+        border-radius: 8px;
+        margin-top: 20px;
+
+        .api-changelog-empty-title {
+            margin: 0 0 4px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .api-changelog-empty-subtitle {
+            margin: 0 0 16px;
+            font-size: 13px;
+            color: $gray-darkish;
+        }
+    }
+}
