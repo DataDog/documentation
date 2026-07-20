@@ -52,7 +52,7 @@ Integrate a managed prompt with a coding agent of your choice by pasting in the 
 ```bash
 Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic/prompt_management.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
 
-Prompt type: <PROMPT_TYPE>
+Prompt type: chat
 Prompt variables: <PROMPT_VARIABLES>
 
 When configuring the environment, use the following values:
@@ -69,10 +69,12 @@ Selected Datadog credentials:
 DD_API_KEY=<DATADOG_API_KEY>
 DD_APP_KEY=<DATADOG_APP_KEY>
 
-Treat the API and application key values as secrets. Do not repeat them in source code, committed configuration, documentation, or your response.
+Treat the API and application key values as secrets. Do not repeat them in source code, committed configuration, documentation, commands, logs, or your response. Do not use them as command arguments or search patterns.
 ```
 
 **Note:** Including the API and application keys in the prompt is optional and is not required for the coding agent to integrate Prompt Management. Include them only in a trusted coding-agent session.
+
+After the integration is complete, run your application and trigger the modified LLM flow. Return to the prompt page to view usage; new prompt calls may take a minute to appear.
 
 ### Configure prompt retrieval
 

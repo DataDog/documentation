@@ -15,7 +15,7 @@ Integrate the Datadog managed prompt and environment specified by the user into 
 5. Preserve the application's existing package manager, configuration workflow, startup command, provider, model, and business behavior. Existing ambient environment-variable usage, such as `os.getenv()`, is a configuration convention even when no `.env` or configuration file exists. Extend that convention without asking. If the repository has no applicable convention, ask the user which approach to use and wait for an answer instead of introducing one.
 6. Keep managed-prompt retrieval at the application's existing prompt-construction boundary. Do not move prompt construction into the provider call site or duplicate it there when a helper, library, or other component already owns it.
 7. If the checked-out repository is a library and an unavailable host application owns configuration, secrets, instrumentation, or startup, ask for the host application and wait. Do not modify the library unless the user explicitly authorizes a library-only change.
-8. Treat any API or application key supplied in the user's prompt as a secret. Do not commit it or repeat it in source code, configuration, documentation, logs, or the final response.
+8. Treat any API or application key supplied in the user's prompt as a secret. Do not commit it or repeat it in source code, tracked configuration, documentation, logs, or the final response. Configure supplied credentials through the application's existing non-committed local configuration or secret-management workflow, and do not require the user to enter them again. Never place credential values in command arguments or search patterns. Verify that secrets are untracked using file paths, `git status`, and `git diff`, without searching for literal credential values.
 
 ## Install the Prompt Management SDK
 
@@ -44,6 +44,8 @@ DD_ENV=<DEPLOYMENT_ENVIRONMENT>
 DD_LLMOBS_ENABLED=1
 ```
 
+Preserve the application's existing identity. If `DD_SERVICE` or `DD_LLMOBS_ML_APP` is already configured, keep that value and do not rename the application as part of this integration. If neither is configured, set `DD_SERVICE` to a logical name based on the existing application, service, or project name.
+
 `DD_API_KEY` is required for prompt retrieval. When `DD_ENV` is set, `DD_APP_KEY` is required to resolve the prompt version deployed to that environment. The application key must have the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions.
 
 If the application does not send data through a Datadog Agent, also set:
@@ -55,6 +57,8 @@ DD_LLMOBS_AGENTLESS_ENABLED=1
 If configuration is available before process startup, preserve the existing startup workflow and use `ddtrace-run` if needed for automatic instrumentation. If the application loads configuration in Python, load it before importing `ddtrace.auto`, then run the application's normal Python command. Do not combine application-level configuration loading with `ddtrace-run`.
 
 When documenting a shell-based startup, ensure that configuration reaches the child Python process by exporting the variables, assigning them inline on the launch command, or preserving the application's existing mechanism. Do not present bare, unexported shell assignments as runnable setup.
+
+If the user's prompt includes credentials, add them through the application's existing non-committed local configuration or secret-management workflow. Do not leave placeholders that require the user to supply the same credentials manually.
 
 If the user's prompt does not include credentials, do not ask the user to provide them. Complete the code and configuration references where possible, then report that live prompt resolution and tracking could not be verified.
 
@@ -114,8 +118,9 @@ with LLMObs.annotation_context(
 
 ## Verify the integration
 
-1. Use the application's existing installation and execution workflow.
-2. Exercise the modified provider call.
-3. Confirm that the application retrieved and used the managed prompt rather than its fallback.
-4. Confirm that the resulting prompt usage appears in Agent Observability.
-5. Report any authentication, authorization, retrieval, or tracking failure accurately. Do not claim successful live verification based only on a syntax or import check.
+1. Use the application's existing workflow to perform local checks that do not make external requests.
+2. Do not query Datadog or use SDK span-reading methods to verify prompt tracking.
+3. If verification requires running the application, making a provider request, incurring cost, emitting telemetry, or causing another external side effect, do not finish the task merely by providing the run command. Request approval for that exact command through the coding environment's approval mechanism, or ask the user directly and wait for confirmation. A tool execution approval counts as confirmation.
+4. If the user authorizes the run, use the application's normal execution workflow and exercise the modified provider call. If the user declines, give the user the exact command or action needed to do so.
+5. In the final response, state whether the application was run. Ask the user to trigger the modified LLM flow if necessary, return to the prompt page in Datadog, and allow a short delay for prompt usage to appear.
+6. Report any authentication, authorization, retrieval, or tracking failure accurately. Do not claim that Datadog-side tracking was verified unless the user confirms it.
