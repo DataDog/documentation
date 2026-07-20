@@ -546,144 +546,168 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 
 ## Data Observability
 
-Tools for [Data Observability][70], including searching data entities in the catalog, navigating data lineage, monitoring data quality, analyzing Spark and Databricks jobs, and managing entity metadata.
+Tools for [Data Observability][70], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
 
 ### `search_data_entities`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Searches for data entities in the data catalog. Supports filtering by name (with wildcards), entity type, platform, schema, database, and account. Entity types include tables, columns, schemas, databases, dbt models, BI dashboards, Spark jobs, S3 buckets, and more. Use `get_data_catalog_schema` to discover available platforms and entity types.
+Searches for data entities in the data catalog by name, full-text search, or filters (platform, schema, database, account).
 
-- Find tables named `orders` in the Snowflake platform.
-- Search for dbt models starting with `stg_` in the analytics database.
-- List all schemas in the `analytics` Snowflake database.
+- Find tables named "orders" in Snowflake.
+- List all dbt models starting with `stg_`.
+- What schemas exist in my BigQuery project?
 
 ### `get_data_catalog_schema`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Returns the entity type schema for every platform the organization has data in. Discovers active platforms (Snowflake, BigQuery, Databricks, dbt, and so on), their entity types, the containment hierarchy, the filterable attribute names, and the default metrics available for each entity type (such as `dataset.freshness`). Call this at the start of a data catalog conversation to learn which platforms, entity types, and filters are available.
+Returns the entity type schema for every platform with data in the catalog: entity types, containment hierarchy, filterable attributes, and default metrics.
 
-- What platforms and entity types are in my data catalog?
-- Which attributes can I filter on when searching for Snowflake tables?
+- What platforms are connected to Data Observability?
+- What entity types exist for Databricks?
+- What metrics are available for a table entity?
 
 ### `get_data_entity_details`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Fetches full details and attributes for one or more data entities by their entity IDs. Returns owner, tags, display name, platform, schema, database, account, and all other attributes. Use `search_data_entities` first to find entity IDs.
+Fetches full details and attributes (owner, tags, custom attributes, platform, schema, database, account) for one or more data entities by ID.
 
-- Get full details for entity `<entity_id>`.
-- Show me the owner and tags for this Snowflake table.
+- Get the full attributes for this table entity.
+- Who owns this dataset?
 
 ### `get_data_entity_hierarchy`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Fetches the containment hierarchy (ancestors and descendants) for one or more entities. Use this for containment navigation, such as finding which schema and database a table belongs to, or listing the columns in a table. This tool is for containment, not data lineage (use `get_data_entity_lineage` for lineage).
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database or schema a table belongs to, or which tables are in a schema.
 
-- What schema and database does this table belong to?
-- List all columns in the `orders` table.
-- What tables are in the `landing` schema?
+- What database does this table belong to?
+- What columns are in this table?
+- Show the full hierarchy around this entity.
 
 ### `get_data_entity_lineage`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Fetches the live reachable lineage subgraph from one or more anchor entities. Returns upstream or downstream data-flow relationships (nodes and edges) up to a configurable depth. For large or unknown graphs, use `summarize_data_entity_lineage` first.
+Fetches the live reachable lineage subgraph (nodes and edges) from one or more anchor entities, upstream, downstream, or both.
 
-- Show me what downstream tables depend on the `raw_orders` table.
-- What data sources feed into the `fct_revenue` table?
-- Trace lineage from `stg_orders` downstream with a depth of 3.
+- What's downstream of this table?
+- Show me the upstream lineage for this column.
+- What would break if I dropped this table?
 
 ### `summarize_data_entity_lineage`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Gets aggregate statistics about the lineage graph reachable from anchor entities, such as counts and breakdowns by node type, depth, and attributes, without returning the full node and edge payload. Use this before `get_data_entity_lineage` when working with large or unknown graphs.
+Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth distribution) for a large or unknown lineage graph, without the full payload. Use before `get_data_entity_lineage` on graphs of unknown size.
 
-- How many tables does `fct_revenue` depend on upstream?
-- What types of entities are downstream from this Spark job?
-- Give me a summary of the lineage graph from `raw_orders`.
+- How many things depend on this table, broken down by type?
+- How deep does the lineage go from this table?
 
 ### `rank_data_entities_by_lineage_degree`
 *Toolset: **data-observability***\
 *Permissions Required: `Monitors Read` or `APM Read`*\
-Ranks entities by their transitive lineage connectivity using a pre-built snapshot. Returns entities such as tables, dashboards, and jobs ranked by how many other entities they connect to (downstream or upstream). Useful for identifying the most critical or widely consumed tables.
+Ranks entities by transitive lineage connectivity (upstream, downstream, or both), using a pre-built snapshot.
 
-- Which tables have the most downstream consumers?
-- Rank tables by upstream dependency count to find raw ingestion points.
-- Find the most widely consumed entities in the data catalog.
-
-### `get_data_observability_monitor`
-*Toolset: **data-observability***\
-*Permissions Required: `Monitors Read`, `Timeseries`, and `APM Read`*\
-Retrieves data quality metrics timeseries data for a given data observability monitor ID. For anomaly monitors, the response includes upper and lower bounds that define the expected normal range.
-
-- Get the row count timeseries for monitor `12345` on the `orders` table.
-- Show me the anomaly bounds for monitor `67890` over the last 24 hours.
-
-### `get_spark_job_health`
-*Toolset: **data-observability***\
-*Permissions Required: `APM Read`*\
-Retrieves detailed health metrics for a single Spark or Databricks job run, including duration, CPU time, executor allocation, memory usage, shuffle read, spill, and skew. Accepts either a trace ID or a job name to identify the run.
-
-- Show me the health metrics for the latest run of the `process_orders` Spark job.
-- What were the worst-performing stages in Spark job trace `abc123`?
-- Find Databricks job runs for `nightly_aggregation` in the last 7 days.
-
-### `get_spark_sql_plan`
-*Toolset: **data-observability***\
-*Permissions Required: `APM Read`*\
-Retrieves the Spark SQL physical execution plan from a `spark.stage` span. Shows node types (Exchange, SortMergeJoin, HashAggregate, and so on), join strategies, shuffle and partitioning information, and child node relationships. Use `get_spark_job_health` to find stage span IDs.
-
-- Show me the SQL execution plan for stage span `def456` in trace `abc123`.
-- What join strategy is used in this Spark stage?
-- Inspect the physical plan for the slowest stage in this job.
+- Which tables in my warehouse have the most dependencies?
+- Which raw ingestion tables have the deepest downstream chains?
 
 ### `get_warehouse_query_history`
 *Toolset: **data-observability***\
 *Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
-Fetches recent queries that touched one or more data entities, in reverse chronological order. Supports filtering by access type (read or write) and time range. Use `search_data_entities` to find entity IDs first.
+Fetches recent queries that touched specific entities, in reverse chronological order, including the SQL text, execution state, and query type.
 
-- Who has been querying the `orders` table in the last 7 days?
-- Show me write operations on the `fct_revenue` table from yesterday.
-- What SQL queries have touched this entity recently?
+- Who has been querying this table recently?
+- What writes have happened to this table in the last week?
+
+**Note**: The `sql` field in results is raw, user-authored SQL from the warehouse and should be treated as untrusted data.
 
 ### `get_popular_warehouse_tables_by_query_frequency`
 *Toolset: **data-observability***\
-*Permissions Required: `Logs Read Data`, `Logs Read Index Data`, and `APM Read`*\
-Ranks database tables by query activity, broken out by user type (human analysts, BI tools, orchestrators, ETL tools, and internal apps). Useful for identifying business-critical tables and prioritizing monitoring coverage.
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `APM Read`*\
+Ranks tables by query activity, grouped by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
 
-- Which tables are most queried by human analysts in Snowflake?
-- What are the top tables powering BI dashboards?
-- Show me the most frequently queried tables by orchestration tools like dbt and Airflow.
+- What tables are most queried by BI tools?
+- Which tables get the most human analyst traffic?
 
-### `get_entity_descriptions`
+### `suggest_data_observability_monitor_filters`
 *Toolset: **data-observability***\
-*Permissions Required: `Monitors Read` or `APM Read`*\
-Gets the custom user-defined descriptions for data entities by their IDs. Returns a map of entity ID to description with created and updated timestamps.
+*Permissions Required: `Monitors Read`*\
+Analyzes a set of entities to find common attributes and naming patterns, and suggests monitor filter expressions that group subsets of those entities.
 
-- Show me the custom descriptions for these three tables.
-- What description has been set for entity `<entity_id>`?
+- What do my highest-priority tables have in common?
+- Suggest a filter that covers all my staging tables.
 
-### `update_entity_description`
+### `rank_data_observability_monitor_candidates`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Catalog Write`*\
-Sets or updates the custom user-defined description for a data entity.
+*Permissions Required: `APM Read`*\
+Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. This is the primary entry point for "what should I monitor?" questions.
 
-- Set the description of the `orders` table to "Contains all customer orders."
-- Update the description for entity `<entity_id>`.
+- What tables should I set up data quality monitors for first?
 
-### `get_entity_tags`
+### `get_data_observability_monitor`
 *Toolset: **data-observability***\
-*Permissions Required: `Monitors Read` or `APM Read`*\
-Gets the custom user-defined tags for data entities. Returns entity IDs with their associated key:value tags. These are custom tags distinct from built-in entity attributes.
+*Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
+Retrieves data quality metric timeseries for a given monitor ID, including anomaly-detection bounds when enabled.
 
-- Show me the custom tags on the `orders` table.
-- What tags have been applied to these entities?
+- Show me the metric history for monitor `12345`.
+- What are the anomaly bounds for this freshness monitor?
 
-### `update_entity_tags`
+### `get_data_observability_monitor_coverage`
 *Toolset: **data-observability***\
-*Permissions Required: `Data Observability Catalog Write`*\
-Adds or removes custom user-defined tags on data entities. Tags are key:value strings.
+*Permissions Required: `Monitors Read`*\
+Fetches all data quality monitors for the org and resolves each monitor's filter to the entities it covers. Use this to see which tables have no monitoring at all.
 
-- Add the tag `team:data-eng` to the `orders` table entity.
-- Remove the `env:staging` tag from these entities.
+- Which of my tables aren't covered by any data quality monitor?
+
+### `get_data_observability_monitor_group_statuses`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Queries the current alert and warn state of data quality monitor groups.
+
+- Which tables are currently failing their data quality checks?
+
+### `get_entity_tags` / `update_entity_tags`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
+Gets or sets custom user-defined tags on data entities.
+
+- What tags are on this table?
+- Tag this table with `owner:data-platform-team`.
+
+### `get_entity_descriptions` / `update_entity_description`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
+Gets or sets custom user-defined descriptions on data entities.
+
+- What's the description on this table?
+- Set a description explaining what this table is used for.
+
+### `get_spark_job_health`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, worst stages) for a single Spark or Databricks job run.
+
+- Why did this Spark job run slowly?
+- Show me the worst stages for the most recent run of this job.
+
+### `get_spark_sql_plan`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves the Spark SQL physical execution plan for a stage, including join strategies, shuffle information, and per-node metrics.
+
+- Show me the execution plan for this Spark stage.
+
+### `list_data_observability_recommendations`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Lists cost and performance optimization recommendations for data jobs and queries (Spark, Databricks, Snowflake, BigQuery), with estimated cost and duration savings. Returns lightweight summaries with cursor pagination.
+
+- What cost-saving recommendations do I have for my Databricks jobs?
+- Are there any recommendations for reducing data skew in my Spark jobs?
+
+### `get_data_observability_recommendation`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
+
+- Get the details of recommendation `abc123`.
 
 ## Database Monitoring
 
