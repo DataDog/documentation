@@ -47,7 +47,7 @@ The following data sources are supported:
 - Service Checks
 - Spans
 
-Published datasets are supported only when every data source they depend on is also supported.
+Published analyses are supported only when every data source they depend on is also supported.
 
 The following data sources are not supported:
 
@@ -56,13 +56,13 @@ The following data sources are not supported:
 - Infrastructure Resources
 
 
-If you select a dataset built on an unsupported data source, Datadog displays an error that names the source, for example:
+If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source. For example:
 
-`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
+`Analysis is based on an unsupported datasource for monitoring: Infrastructure Resources`
 
 ## Monitor creation
 
-You can create an Analysis monitor in two ways:
+You can create an Analysis monitor in three ways:
 
 ### From the Monitors page
 
@@ -73,20 +73,28 @@ To create an [Analysis monitor][1] in Datadog, use the main navigation: {{< ui >
 To create an Analysis monitor directly from a Notebook:
 
 1. Open a Notebook with an Analysis cell containing your desired query.
-2. In the Analysis cell, click the dropdown arrow next to {{< ui >}}Save to Dashboard{{< /ui >}}.
-3. Select {{< ui >}}Create monitor{{< /ui >}}.
+2. In the Analysis cell, click {{< ui >}}Send To{{< /ui >}}.
+3. Select {{< ui >}}Monitors{{< /ui >}}.
 
 This allows you to convert your exploratory analysis into an alerting monitor.
+
+### From the DDSQL Editor
+
+To create an Analysis monitor directly from the DDSQL Editor:
+
+1. Open the [DDSQL Editor][4] and select your desired query.
+2. Click the dropdown arrow next to {{< ui >}}Save to dashboard{{< /ui >}}.
+3. Select {{< ui >}}Create monitor{{< /ui >}}.
 
 ## Define the query
 
 Analysis monitors use the same query interface as Notebook Analysis cells.
 
-1. **Select your dataset**: Select from available Notebook Analysis cells.
-2. **Filter your dataset**: Filter your results by column.
+1. **Select your published analysis**: Select from available Notebook Analysis cells.
+2. **Filter your published analysis**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 
-{{< img src="/monitors/monitor_types/dataset/dataset_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/analysis/analysis_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
 
 ## Set alert conditions
 
@@ -100,7 +108,7 @@ For detailed instructions on alert messaging, see [Notifications][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/create/dataset
+[1]: https://app.datadoghq.com/monitors/create/analysis
 [2]: /monitors/configuration/
 [3]: /monitors/notify/
-
+[4]: https://app.datadoghq.com/ddsql/editor

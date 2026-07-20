@@ -83,6 +83,19 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 1                 | 1                   |
 
+## Metrics
+
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
+
+### Splunk HEC metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `splunk_hec_logs` for Splunk HEC metrics.
+
+`pipelines.splunk_pending_acks`
+: **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting a response.
+: **Metric type**: gauge
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
@@ -91,3 +104,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [8]: /observability_pipelines/sources/splunk_hec/
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

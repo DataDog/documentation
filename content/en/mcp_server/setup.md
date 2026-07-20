@@ -13,9 +13,6 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
-- link: "ide_plugins/vscode/?tab=cursor"
-  tag: "Documentation"
-  text: "Datadog Extension for Cursor"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
@@ -677,6 +674,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
+- `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
@@ -939,3 +937,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [66]: /account_management/personal-access-tokens/
 [67]: /account_management/service-access-tokens/
 [68]: /account_management/org_settings/ip_allowlist/
+[69]: /data_observability/

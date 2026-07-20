@@ -32,11 +32,6 @@ Datadog RUM supports profiling for browser, iOS, and Android applications. Use p
 
 <!-- Browser -->
 {% if equals($platform, "browser") %}
-
-{% callout url="https://www.datadoghq.com/product-preview/browser-profiler/" header="Join the Preview!" btn_hidden=false %}
-Browser Profiling is in Preview.
-{% /callout %}
-
 {% img src="real_user_monitoring/browser/optimizing_performance/browser_profiling_tab_in_explorer.png" 
 alt="Browser profiling tab in the Sessions Explorer." 
 style="width:100%;" /%}

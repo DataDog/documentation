@@ -12,7 +12,6 @@ further_reading:
 - link: "/actions/app_builder/queries/"
   tag: "Documentation"
   text: "Queries"
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}
