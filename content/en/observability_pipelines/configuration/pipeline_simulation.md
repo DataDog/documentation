@@ -95,7 +95,7 @@ To run a capture for a specific set of data:
 To import sample data for your pipeline simulation:
 
 1. For an inactive or draft pipeline, if the pipeline does not have saved data, click {{< ui >}}Import Data{{< /ui >}}. Otherwise, click the down arrow next to {{< ui >}}Live Capture{{< /ui >}} and select {{< ui >}}Import Sample Data{{< /ui >}}.
-1. In the modal, drag and drop your sample data files or browse for them, or click the {{< ui >}}Paste{{< /ui >}} tab to paste your sample data. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
+1. In the modal, drag and drop your sample data files or browse for them, or click the {{< ui >}}Paste{{< /ui >}} tab to paste your sample data.<br>**Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
 1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 #### Sample file import specifications
