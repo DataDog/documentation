@@ -127,10 +127,10 @@ Use these insights to understand adoption patterns, identify power users for bes
 ### Web application
 There are multiple ways to open Bits Chat in the Datadog web application:
 - Go to [Bits Chat][11] directly.
-- In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}
-- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
-- Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>
-- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}
+- In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}.
+- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon).
+- Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
+- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}.
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat panel open alongside the Dashboards list" style="width:40%;">}}
 

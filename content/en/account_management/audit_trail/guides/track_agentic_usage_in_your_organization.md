@@ -27,8 +27,8 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 | Bits Chat | Partially tracked | Actions taken from the full [Bits Chat page][3] run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (Cmd+I) don't include these fields yet. |
 | Bits Security Analyst | Tracked | Actions run in `autonomous` mode. There is no delegating user, because these actions don't involve a human in the loop. |
 | Bits Agent Builder | Not yet tracked | Actions don't include `@evt.actor.mode` or `@delegator.*` yet. |
-| Actions taken through the Datadog MCP server | Tracked | See [View actions taken through the Datadog MCP server](#view-actions-taken-through-the-datadog-mcp-server). |
-| Third-party or customer-built agents | Not tracked | Audit Trail doesn't distinguish these from regular API and application key or personal access token (PAT) and service account token (SAT) usage. |
+| Actions taken through the Datadog MCP server | Tracked | See the [View actions taken through the Datadog MCP server](#view-actions-taken-through-the-datadog-mcp-server) section. |
+| Third-party or customer-built agents | Not tracked | Audit Trail doesn't distinguish these from regular usage of API keys, application keys, personal access tokens (PATs), or service account tokens (SATs). |
 
 **Note**: Even for a tracked agent, some action types haven't onboarded yet. `@evt.actor.mode:*` doesn't return every action for every tracked agent. Datadog is expanding coverage to the remaining agents and action types.
 
@@ -37,10 +37,10 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 1. Navigate to [Audit Trail][1].
 2. In the search bar, enter the query: `@evt.actor.mode:*`.
 
-   This query returns events where an onboarded Datadog AI agent is the actor, whether the agent acted `interactive` (a user was present and approved the action) or `autonomous` (the agent acted on a system trigger, with no user involved). See [Agent coverage](#agent-coverage) for which agents and action types this includes.
+   This query returns events where an onboarded Datadog AI agent is the actor, whether the agent acted in `interactive` mode (a user was present and approved the action) or `autonomous` mode (the agent acted on a system trigger, with no user involved). See the [Agent coverage](#agent-coverage) section for which agents and action types this includes.
 3. Click an event to open details and see the full actor breakdown: the delegator (the user, if any), the agent, and the mode.
 
-**Note**: This query only returns activity from agents and action types already onboarded to the actor and delegation model. See [Agent coverage](#agent-coverage) for details.
+**Note**: This query only returns activity from agents and action types already onboarded to the actor and delegation model. See the [Agent coverage](#agent-coverage) section for details.
 
 ## View actions taken through the Datadog MCP server
 
@@ -67,7 +67,7 @@ To retrieve a user's complete activity, including delegated agent actions:
    | All actions attributed to a user, including actions a Datadog AI agent performed on their behalf      | `(@usr.id:<USER_ID> OR @delegator.id:<USER_ID>)`               |
 3. See [Create a dashboard or a graph][2] if you want to put this information into a dashboard or graph.
 
-**Note**: This only surfaces delegated actions from agents and action types already onboarded to the delegation model. See [Agent coverage](#agent-coverage) for details.
+**Note**: This only surfaces delegated actions from agents and action types already onboarded to the delegation model. See the [Agent coverage](#agent-coverage) section for details.
 
 ## Distinguish agent events from human events
 
