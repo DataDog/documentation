@@ -66,7 +66,7 @@ For experiments that use Datadog Feature Flags with warehouse metrics, Datadog c
 
 ## Mixed assignments
 
-If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. A high number of mixed assignments can make results incomplete or unreliable.
+If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. The diagnostic passes when no more than 5% of subjects have mixed assignments, warns above 5%, and fails at 20% or more. As the excluded share grows, results become less representative and less reliable.
 
 ### How to resolve
 
@@ -80,7 +80,7 @@ If the same subject is assigned to more than one variant in the same experiment,
 
 Datadog can flag an experiment when the probability of being assigned to a variant differs significantly across dimension values. For example, one device type, country, plan, or customer tier might receive variants at a different split than the rest of the experiment.
 
-This diagnostic can also help diagnose overall traffic imbalance, or sample ratio mismatch (SRM). If the imbalance is concentrated in one dimension value, the root cause is often localized to that segment. For example, dimensional SRM for device type can point to a device-specific bug in variant delivery, SDK evaluation, redirects, page performance, crashes, or exposure telemetry.
+This diagnostic is separate from overall traffic imbalance, or sample ratio mismatch (SRM): global imbalance alone does not trigger it. When both diagnostics fail, the affected dimension values can help localize the cause of the overall SRM. For example, dimensional imbalance for device type can point to a device-specific bug in variant delivery, SDK evaluation, redirects, page performance, crashes, or exposure telemetry.
 
 Datadog uses the dimension value from the subject's first assignment record. Later changes to the subject's dimension value should not cause this diagnostic.
 
@@ -93,23 +93,27 @@ Datadog uses the dimension value from the subject's first assignment record. Lat
 
 ## Missing metric data
 
-When Datadog has not received event data for a metric, the experiment results page can show **Missing metric data**. The metric cannot contribute to results until events are collected and joined to exposed subjects.
+Datadog reports **Missing metric data** when assignments exist but experiment analysis finds no usable metric values for any assigned subjects. This does not necessarily mean that the source event never fired. Events can exist but fail the metric's filters, fail to join to experiment assignments, or produce only zero or null metric values.
 
 If the primary metric has no data, the diagnostic blocks the experiment decision. If a secondary or guardrail metric has no data, Datadog warns you without blocking analysis for the primary metric.
 
 ### Common causes
 
-- The event used by the metric is not firing.
-- The metric filters exclude the events you expected to count.
-- Events are firing, but not for subjects exposed to the experiment.
-- Events occur before the subject's first exposure, so they are excluded from experiment analysis.
+- The metric definition's event name, aggregation, filters, or data source does not match the data being emitted.
+- The source event is not firing, or it fires only before the subject's first assignment and is therefore excluded from post-assignment attribution.
+- The metric events and experiment assignments identify the same subject differently. This subject identifier mismatch is a common cause of missing metric data:
+  - For Product Analytics or RUM metrics in experiments backed by Datadog Feature Flags, the configured [subject type attribute](/experiments/concepts/subject_types/#product-analytics-and-rum-metrics) must match the SDK `targetingKey`.
+  - For warehouse metrics, the subject column mapped in the [Metric SQL Model](/experiments/concepts/subject_types/#warehouse-metrics) must contain the same values as the assignment subject column. For experiments backed by Datadog Feature Flags, those values must match the SDK `targetingKey`. For warehouse-native experiments, they must match the assignment subject column configured in the [Exposure SQL Model](/experiments/concepts/exposure_sql/).
+- A warehouse Metric SQL Model returns no matching rows in the analysis window or filters out the expected events.
 
 ### How to resolve
 
-1. Open the metric and confirm that the event name, aggregation, filters, and data source are correct.
-2. Check the metric event volume chart for recent data.
-3. For Product Analytics or RUM metrics, inspect sessions for exposed users and confirm that metric events occur after feature flag evaluation.
-4. Continue running the experiment until data is collected, or fix instrumentation and rerun analysis.
+1. Open the metric and confirm that the event name, aggregation, filters, and data source are correct. Check the metric event volume chart for recent matching data.
+2. Compare an assigned subject's identifier with the identifier on its metric events. Confirm that the configured subject type attribute or mapped warehouse column contains the same value as the SDK `targetingKey` or the assignment subject column configured in the Exposure SQL Model.
+3. Confirm that metric events occur after the subject's first assignment and within the experiment analysis window.
+4. For a **Missing metric data** failure on the primary metric, click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) to investigate the experiment and metric definition. If [Source Code Integration](/source_code/) is configured, Bits can also inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
+5. For warehouse metrics, run the Metric SQL Model or query its source table directly. Bits can review the configured SQL but cannot verify that the warehouse currently contains matching rows.
+6. Fix the metric definition, identity mapping, event timing, or instrumentation issue, then rerun experiment analysis.
 
 ## Metric winsorized to zero
 
@@ -136,7 +140,7 @@ When CUPED is enabled, Datadog uses pre-experiment metric values to reduce varia
 
 For Bayesian analysis, Datadog can warn when the observed lift is outside the range expected from the configured prior. This can happen when the prior is not appropriate for the experiment or when instrumentation produces unusually large or small values.
 
-For example, many conversion rate experiments have true lifts below 5%, so the default prior, `N(0, 0.05)`, can be a reasonable choice. If an experiment fixes a broken checkout page that prevents most users from converting, a much larger lift may be plausible. In that case, the default prior can be too conservative and shrink the estimated effect too much.
+For example, many conversion rate experiments have true lifts below 5%, so the default Normal prior with mean 0 and standard deviation 0.05 can be a reasonable choice. If an experiment fixes a broken checkout page that prevents most users from converting, a much larger lift may be plausible. In that case, the default prior can be too conservative and shrink the estimated effect too much.
 
 ### How to resolve
 
