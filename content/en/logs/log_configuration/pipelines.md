@@ -290,10 +290,6 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 
 ## Simulate pipeline changes
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Pipeline Simulation is in Preview.
-{{< /beta-callout >}}
-
 Pipeline Simulation previews how your changes affect logs before you apply them. It uses a live tail of your logs, processed with your proposed changes. Open it while creating or editing a pipeline or processor.
 
 <!-- TODO(max): Replace with a cleaner screenshot from Nicolas (demo org, non-redacted synthetic data). Current image is a redacted staging capture. -->
