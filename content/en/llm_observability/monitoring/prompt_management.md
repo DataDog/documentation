@@ -69,7 +69,7 @@ Selected Datadog credentials:
 DD_API_KEY=<DATADOG_API_KEY>
 DD_APP_KEY=<DATADOG_APP_KEY>
 
-Treat the API and application key values as secrets. Do not repeat them in source code, committed configuration, documentation, commands, logs, or your response. Do not use them as command arguments or search patterns.
+Treat these values as secrets and handle them according to the linked guide. Do not repeat or expose them.
 ```
 
 **Note:** Including the API and application keys in the prompt is optional and is not required for the coding agent to integrate Prompt Management. Include them only in a trusted coding-agent session.
