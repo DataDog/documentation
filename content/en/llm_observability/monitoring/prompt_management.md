@@ -45,6 +45,26 @@ This temporary package version and source will be replaced with the standard rel
 
 ## Use a managed prompt in Python
 
+### Integrate Prompt Management with a coding agent
+
+Integrate a managed prompt with a coding agent of your choice by pasting in the following prompt:
+
+```bash
+Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic/prompt_management.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
+
+Prompt type: <PROMPT_TYPE>
+Prompt variables: <PROMPT_VARIABLES>
+
+When configuring the environment, use the following values:
+
+DD_SITE={{< region-param key="dd_site" code="true" >}}
+DD_API_KEY=<DATADOG_API_KEY>
+DD_APP_KEY=<DATADOG_APP_KEY>
+DD_ENV=<DEPLOYMENT_ENVIRONMENT>
+```
+
+**Note:** Including the API and application keys in the prompt is optional and is not required for the coding agent to integrate Prompt Management.
+
 ### Configure prompt retrieval
 
 Provide the Datadog site, credentials, and deployment environment through the configuration and secret-management workflow already used by your application. For example, use the application's environment file, Docker Compose or Kubernetes configuration, deployment platform, or secret manager. At runtime, the following environment variables must be set before importing `ddtrace`:
@@ -56,11 +76,7 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Add the API and application keys through the existing configuration and secret-management workflow; do not add their values to source code or committed configuration.
-
-When using a coding agent, instruct it to preserve the application's existing configuration and execution conventions. Providing the API and application key values in the copied prompt is optional and is not required for the agent to modify the application. If you include them, paste the prompt only into a trusted coding-agent session. The agent should treat the values as secrets, add them through the application's existing non-committed local configuration or secret-management workflow, and avoid repeating them in source code or documentation.
-
-If the copied prompt does not include credentials, or the existing workflow does not make them available to the agent, the agent can implement the integration but should report that live prompt resolution and tracking remain unverified. If no configuration convention exists, the agent should ask which approach to use instead of introducing one.
+`DD_ENV` selects the environment used to resolve the prompt version and must match an environment where the prompt is deployed.
 
 ### Retrieve and format a prompt
 
@@ -110,8 +126,6 @@ prompt = LLMObs.get_prompt("customer-support-greeting", version=2)
 
 The `version` argument takes precedence over environment resolution.
 
-Retrieved prompts are cached in memory. After 60 seconds by default, an access returns the cached prompt and triggers a background refresh. Set `DD_LLMOBS_PROMPTS_CACHE_TTL` to configure this refresh interval in seconds.
-
 ### Track prompt usage
 
 To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation through its existing execution workflow.
@@ -148,7 +162,22 @@ If the application does not send data through a Datadog Agent, also set `DD_LLMO
 For a [supported automatically instrumented provider][6], pass the value returned by `prompt.format()` directly to the provider call. The following OpenAI example automatically associates the managed prompt with the resulting span:
 
 ```python
+from ddtrace.llmobs import LLMObs
 from openai import OpenAI
+
+default_messages = [
+    {"role": "system", "content": "You are a support agent for {{company}}."},
+    {"role": "user", "content": "{{question}}"},
+]
+
+prompt = LLMObs.get_prompt(
+    "customer-support-greeting",
+    fallback=default_messages,
+)
+messages = prompt.format(
+    company="Acme Inc.",
+    question="How do I reset my password?",
+)
 
 client = OpenAI()
 
@@ -188,9 +217,9 @@ Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI o
 
 ### Create a prompt
 
-#### In the UI from an existing tracked prompt
+#### Promote a tracked prompt
 
-To add a prompt already tracked in Agent Observability, navigate to the Prompt registry, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
+To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the Prompt registry, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
 #### In the UI from scratch
 
