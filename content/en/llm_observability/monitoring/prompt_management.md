@@ -1,6 +1,6 @@
 ---
 title: Prompt Management
-description: Create, version, and retrieve prompts from a centralized registry with Prompt Management, decoupling prompt iteration from your application's deployment cycle.
+description: Create, version, and retrieve managed prompts in Python applications with Prompt Management.
 
 further_reading:
   - link: "/llm_observability/monitoring/prompt_tracking"
@@ -9,7 +9,7 @@ further_reading:
   - link: "/llm_observability/playground"
     tag: "Documentation"
     text: "Playground"
-  - link: "/llm_observability/instrumentation/sdk"
+  - link: "/llm_observability/instrumentation/sdk/?tab=python"
     tag: "Documentation"
     text: "Agent Observability SDK"
 
@@ -19,43 +19,168 @@ further_reading:
 Prompt Management is in Preview.
 {{< /callout >}}
 
-
 ## Overview
 
-Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then fetch them at runtime.
+Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-This decouples prompt changes from your application's deployment cycle and allows non-technical stakeholders (PMs, SMEs) to test ideas without a code deployment.
+Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and prompt tracing are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
-Prompt Management works alongside [Prompt Tracking][1]: prompts fetched from the registry are automatically tagged on the LLM spans that use them, and their version history is visible in the Prompts view.
+Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans.
 
 ## Prerequisites
 
-- A [Datadog API key][2] to fetch the prompts. 
-- An [application key][3] for write operations (creating or updating prompts). 
+- Python 3.9 or later.
+- Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
+- A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment.
+- To manage prompts through the API, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
+
+### Install the Preview SDK build
+
+The released `ddtrace` package does not yet include Prompt Management. During Preview evaluation, install the temporary build in the Python environment used by your application:
+
+{{< code-block lang="shell" >}}
+curl -fsSL https://dd-trace-py-builds.s3.amazonaws.com/main/install.sh | bash
+{{< /code-block >}}
+
+This temporary installation procedure will be replaced with a released minimum `ddtrace` version before Prompt Management becomes generally available.
+
+## Use a managed prompt in Python
+
+### Configure prompt retrieval
+
+Configure the Datadog site, credentials, and deployment environment before importing `ddtrace`:
+
+{{< code-block lang="shell" >}}
+export DD_SITE="<DATADOG_SITE>"
+export DD_API_KEY="<DATADOG_API_KEY>"
+export DD_APP_KEY="<DATADOG_APP_KEY>"
+export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
+{{< /code-block >}}
+
+`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Store API and application keys in a secret manager, and do not commit them to source control.
+
+### Retrieve and format a prompt
+
+Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if registry, environment-resolution, network, or server failures occur.
+
+The following example retrieves and formats a chat prompt:
+
+```python
+from ddtrace.llmobs import LLMObs
+
+default_messages = [
+    {"role": "system", "content": "You are a support agent for {{company}}."},
+    {"role": "user", "content": "{{question}}"},
+]
+
+variables = {
+    "company": "Acme Inc.",
+    "question": "How do I reset my password?",
+}
+
+prompt = LLMObs.get_prompt(
+    "customer-support-greeting",
+    fallback=default_messages,
+)
+messages = prompt.format(**variables)
+```
+
+`prompt.format()` returns a string for a text prompt and a list of messages for a chat prompt. Pass the formatted value to the corresponding text or messages parameter of your LLM provider call.
+
+If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
+
+### Select a version
+
+Without `DD_ENV`, `get_prompt()` retrieves the latest prompt version:
+
+```python
+prompt = LLMObs.get_prompt("customer-support-greeting")
+```
+
+With `DD_ENV`, `get_prompt()` resolves the prompt version for that environment. This requires `DD_APP_KEY` with the read permissions listed in [Prerequisites](#prerequisites).
+
+To retrieve an exact numeric version independently of `DD_ENV`, pass `version`:
+
+```python
+prompt = LLMObs.get_prompt("customer-support-greeting", version=2)
+```
+
+The `version` argument takes precedence over environment resolution.
+
+Retrieved prompts are cached in memory. After 60 seconds by default, an access returns the cached prompt and triggers a background refresh. Set `DD_LLMOBS_PROMPTS_CACHE_TTL` to configure this refresh interval in seconds.
+
+### Track prompt usage
+
+To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation. For example:
+
+{{< code-block lang="shell" >}}
+DD_SITE="<DATADOG_SITE>" \
+DD_API_KEY="<DATADOG_API_KEY>" \
+DD_APP_KEY="<DATADOG_APP_KEY>" \
+DD_ENV="<DEPLOYMENT_ENVIRONMENT>" \
+DD_SERVICE="<SERVICE_NAME>" \
+DD_LLMOBS_ENABLED=1 \
+ddtrace-run python app.py
+{{< /code-block >}}
+
+If the application does not send data through a Datadog Agent, also set `DD_LLMOBS_AGENTLESS_ENABLED=1`.
+
+For a [supported automatically instrumented provider][6], pass the value returned by `prompt.format()` directly to the provider call. The following OpenAI example automatically associates the managed prompt with the resulting span:
+
+```python
+from openai import OpenAI
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=messages,
+)
+```
+
+Copying, rebuilding, or converting the formatted value can discard its prompt-tracking metadata. For example, concatenating a managed system prompt with a user question creates a new string without that metadata. Use `LLMObs.annotation_context()` to associate the managed prompt with the resulting LLM span:
+
+```python
+prompt = LLMObs.get_prompt(
+    "customer-support-system-prompt",
+    fallback="You are a helpful support agent.",
+)
+system_prompt = prompt.format()
+combined_prompt = f"{system_prompt}\n\nUser question: {question}"
+
+with LLMObs.annotation_context(
+    prompt=prompt.to_annotation_dict(),
+):
+    response = client.responses.create(
+        model="gpt-4o",
+        input=combined_prompt,
+    )
+```
+
+`annotation_context()` associates metadata with an LLM span created inside the context; it does not create the span. For providers that are not automatically instrumented, first [manually instrument the LLM call][7] to create an LLM span. An explicit `annotation_context()` takes precedence over automatic prompt tracking. See [Prompt Tracking][1] for more information.
 
 ## Create and manage prompts
 
-Create prompts and publish new versions from the {{< ui >}}Prompts{{< /ui >}} UI, or programmatically through the API.
+Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI or through the API.
 
 ### Create a prompt
 
-#### Via UI: from an existing tracked prompt
+#### In the UI from an existing tracked prompt
 
-To add a prompt that you already track in Agent Observability (see [Prompt Tracking][1]), navigate to the Prompt registry, open that prompt and click {{< ui >}}Register{{< /ui >}} to promote it.
-You can then import start iterating on it from the UI, and fetch it at runtime from Datadog.
+To add a prompt already tracked in Agent Observability, navigate to the Prompt registry, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
-#### Via UI: from scratch
+#### In the UI from scratch
 
-Navigate to the Prompts registry page and click {{< ui >}}+ New Prompt{{< /ui >}} to build a prompt from scratch. 
+Navigate to the Prompt registry and click {{< ui >}}+ New Prompt{{< /ui >}}.
 
 In the Prompt Editor:
 
 1. Add one or more messages and assign each a role: {{< ui >}}System{{< /ui >}}, {{< ui >}}User{{< /ui >}}, or {{< ui >}}Assistant{{< /ui >}}.
 2. Use `{{variable_name}}` syntax in any message to add dynamic content.
-3. (Optional) Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
+3. Optional: Click {{< ui >}}Run{{< /ui >}} to test the prompt with sample values.
 4. Click {{< ui >}}Save Prompt{{< /ui >}} to open the save dialog.
 
-We recommend structuring your prompt so that the user query and context get injected as variable like so:
+Structure the prompt so the user query and context are injected as variables:
 
 {{< img src="llm_observability/monitoring/prompt-creation.png" alt="Creating a Prompt in Agent Observability." style="width:100%;" >}}
 
@@ -63,193 +188,35 @@ In the save dialog:
 
 | Field | Description |
 |-------|-------------|
-| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt (for example, `customer-support-greeting`). Use this ID to fetch the prompt at runtime with `LLMObs.get_prompt()`. |
+| {{< ui >}}Prompt ID{{< /ui >}} | A unique identifier for the prompt, such as `customer-support-greeting`. Use this ID to retrieve the prompt with `LLMObs.get_prompt()`. |
 | {{< ui >}}Description{{< /ui >}} | Optional notes about this version. |
-| {{< ui >}}Deployment{{< /ui >}} | The environment to deploy this version to. |
+| {{< ui >}}Deployment{{< /ui >}} | The environment to which this version is deployed. |
 
 Click {{< ui >}}Create Prompt{{< /ui >}} to save the prompt to the registry.
 
-#### Via API
-
-Create a prompt with the following endpoint:
-
-Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/prompts`
-
-Method
-: `POST`
-
-Headers (required)
-- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
-- `DD-APPLICATION-KEY=<YOUR_DATADOG_APPLICATION_KEY>`
-- `Content-Type="application/json"`
-
-{{< code-block lang="bash" >}}
-curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts" \
--H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
--H "Content-Type: application/json" \
--d '{
-  "prompt_id": "customer-support-greeting",
-  "title": "Customer support greeting",
-  "description": "Initial greeting template used by the support bot",
-  "template": [
-    {"role": "system", "content": "You are a support agent for {{company}}."},
-    {"role": "user", "content": "{{question}}"}
-  ]
-}'
-{{< /code-block >}}
-
-Creating a prompt with a `prompt_id` that already exists in the registry returns a `409` response.
-
 ### Update, list, and delete prompts
 
-#### Via UI
+#### In the UI
 
 Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
-- **Create a new version**: {{< ui >}}Edit{{< /ui >}} the messages in the Prompt Editor to create a new version of an existing prompt.
-- **Deploy a version to a different environment**: select a version and update its {{< ui >}}Deployment{{< /ui >}} target to new environments.
-- **Delete a prompt**: select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
+- **Create a new version**: Click {{< ui >}}Edit{{< /ui >}} and update the messages in the Prompt Editor.
+- **Deploy a version to another environment**: Select a version and update its {{< ui >}}Deployment{{< /ui >}} environments.
+- **Delete a prompt**: Select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
 
-#### Via API
+### Use the API
 
-All endpoints below are relative to `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1`. `GET` endpoints require a `DD-API-KEY`. `POST`, `PATCH`, and `DELETE` endpoints also require a `DD-APPLICATION-KEY`.
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/prompts/{prompt_id}/versions` | Publish a new version of an existing prompt. |
-| `GET` | `/prompts` | List all prompts in the registry. |
-| `GET` | `/prompts/{prompt_id}/versions` | List all versions of a prompt. |
-| `PATCH` | `/prompts/{prompt_id}` | Update a prompt's title or description. |
-| `PATCH` | `/prompts/{prompt_id}/versions/{version}` | Update a version's description or deployed environments. |
-| `DELETE` | `/prompts/{prompt_id}` | Delete a prompt and its version history. |
-
-For example, publish a new version of a prompt:
-
-{{< code-block lang="bash" >}}
-curl -X POST "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions" \
--H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
--H "Content-Type: application/json" \
--d '{
-  "description": "Add politeness instruction",
-  "template": [
-    {"role": "system", "content": "You are a helpful support agent for {{company}}."},
-    {"role": "user", "content": "Please answer: {{question}}"}
-  ]
-}'
-{{< /code-block >}}
-
-For example, deploy a version to a new environment:
-
-{{< code-block lang="bash" >}}
-curl -X PATCH "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions/2" \
--H "DD-API-KEY: <YOUR_DATADOG_API_KEY>" \
--H "DD-APPLICATION-KEY: <YOUR_DATADOG_APPLICATION_KEY>" \
--H "Content-Type: application/json" \
--d '{
-  "environments": ["staging"]
-}'
-{{< /code-block >}}
-
-## Retrieve a prompt
-
-### Via SDK
-
-Fetch a prompt from the registry with `get_prompt`:
-
-```python
-prompt = LLMObs.get_prompt("customer-support-greeting")
-messages = prompt.format(company="Acme Inc.", question="How do I reset my password?")
-```
-
-By default, `get_prompt` returns the latest version of a prompt. Retrieved prompts are cached locally for 60 seconds by default (configurable with `DD_LLMOBS_PROMPTS_CACHE_TTL`), so repeated calls to `get_prompt` don't add a network call on every LLM request.
-
-#### Retrieve a specific version
-
-Set `DD_ENV` to scope which prompt version an application receives at runtime, based on where a version is deployed in the registry (see [Create a prompt](#create-a-prompt)):
-
-```python
-prompt = LLMObs.get_prompt("customer-support-greeting")
-```
-
-<div class="alert alert-warning">The <code>label</code> argument on <code>get_prompt</code> is deprecated in favor of <code>DD_ENV</code>-based scoping.</div>
-
-For advanced serving rules, such as rolling out a new prompt version to a subset of traffic, see [Feature Flags][8].
-
-### Via API
-
-Fetch the latest version of a prompt with the following endpoint:
-
-Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/prompts/{prompt_id}`
-
-Method
-: `GET`
-
-Headers (required)
-- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
-
-{{< code-block lang="bash" >}}
-curl -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting" \
--H "DD-API-KEY: <YOUR_DATADOG_API_KEY>"
-{{< /code-block >}}
-
-The raw HTTP endpoint always returns the latest version of a prompt. `DD_ENV`-based resolution is only available through the SDK's `get_prompt` method.
-
-#### Fetch a specific version
-
-Endpoint
-: `https://api.{{< region-param key="dd_site" code="true" >}}/api/unstable/llm-obs/v1/prompts/{prompt_id}/versions/{version}`
-
-Method
-: `GET`
-
-Headers (required)
-- `DD-API-KEY=<YOUR_DATADOG_API_KEY>`
-
-{{< code-block lang="bash" >}}
-curl -s -X GET "https://api.datadoghq.com/api/unstable/llm-obs/v1/prompts/customer-support-greeting/versions/2" \
--H "DD-API-KEY: <YOUR_DATADOG_API_KEY>"
-{{< /code-block >}}
-
-## Monitor prompt usage
-
-To see prompt metadata on the LLM spans it generates, Agent Observability must be enabled (with `LLMObs.enable()` or the equivalent environment variables).   
-
-For LLM calls made through an auto-instrumented provider integration (OpenAI, Anthropic, and others), passing the output of `prompt.format()` directly into the call tags the resulting span automatically, without extra instrumentation:
-
-```python
-prompt = LLMObs.get_prompt("customer-support-greeting")
-messages = prompt.format(company="Acme Inc.", question="How do I reset my password?")
-
-response = openai_client.chat.completions.create(
-    model="gpt-4o",
-    messages=messages,
-)
-# The resulting LLM span is automatically tagged with the customer-support-greeting prompt.
-```
-
-For LLM calls that aren't auto-instrumented, or when the formatted value is copied or rebuilt before the call (for example, wrapped in a new list), tag the span manually with `LLMObs.annotation_context` and `prompt.to_annotation_dict()`:
-
-```python
-prompt = LLMObs.get_prompt("customer-support-greeting")
-variables = {"company": "Acme Inc.", "question": "How do I reset my password?"}
-
-with LLMObs.annotation_context(prompt=prompt.to_annotation_dict(**variables)):
-    response = your_llm_client.chat(messages=prompt.format(**variables))
-```
-
-See [Prompt Tracking][1] for details.
-
-<div class="alert alert-info">An explicit <code>annotate(prompt=...)</code> or <code>annotation_context(prompt=...)</code> call always takes priority over automatic tagging.</div>
+Use the Prompt Management API to create, retrieve, update, and delete prompts and prompt versions. See the [LLM Observability API reference][8] for endpoint schemas, request media types, and examples.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /llm_observability/monitoring/prompt_tracking
-[2]: /account_management/api-app-keys/#api-keys
-[3]: /account_management/api-app-keys/#application-keys
-[8]: /feature_flags/
+[2]: /getting_started/site/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /account_management/api-app-keys/#application-keys
+[5]: /llm_observability/instrumentation/sdk/?tab=python
+[6]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
+[7]: /llm_observability/instrumentation/sdk/?tab=python#manual-instrumentation
+[8]: /api/latest/llm-observability/

@@ -27,7 +27,7 @@ Prompt Tracking enables you to:
 
 ## Set up Prompt Tracking
 
-Prompts fetched from the [Prompt Management][8] registry with `get_prompt` are tracked automatically, with no manual instrumentation needed. The following setup options apply to prompts defined outside the registry.
+When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in the Prompt Management documentation. The following setup options apply to prompts defined outside the registry.
 
 ### With structured prompt metadata
 To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).
