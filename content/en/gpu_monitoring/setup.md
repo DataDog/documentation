@@ -27,7 +27,7 @@ To begin using Datadog's GPU Monitoring, your environment must meet the followin
 #### Minimum version requirements
 
 - **Datadog Agent**: v7.80
-  - Versions 7.79.x contain a bug that affects the values of certain GPU utilization metrics in Hopper and Blackwell GPUs, Datadog recommendeds to avoid that branch and install a newer version (7.80 or later) or, if upgrades are not possible, install a version previous to 7.79.0 (7.78.0 or earlier).
+  - (preferred version: >v7.80). Datadog advises against using v7.79.x as there is a bug impacting metric values that is not present in other agent versions.
 - **Operating system**: Linux
 - **Linux kernel**: 5.8 and above
 - **NVIDIA driver**: version 450.51
