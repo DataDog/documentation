@@ -113,7 +113,9 @@ Retrieved prompts are cached in memory. After 60 seconds by default, an access r
 
 ### Track prompt usage
 
-To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation through its existing execution workflow. For example, the equivalent shell command is:
+To associate a managed prompt with an LLM span, [enable Agent Observability][5] and run the application with automatic instrumentation through its existing execution workflow.
+
+If the application receives its configuration before the Python process starts, use `ddtrace-run`. For example, the equivalent shell command is:
 
 {{< code-block lang="shell" >}}
 DD_SITE="<DATADOG_SITE>" \
@@ -124,6 +126,21 @@ DD_SERVICE="<SERVICE_NAME>" \
 DD_LLMOBS_ENABLED=1 \
 ddtrace-run python app.py
 {{< /code-block >}}
+
+If the application loads its configuration in Python, load the configuration first, then import `ddtrace.auto` before importing the LLM provider or other application modules:
+
+```python
+from dotenv import load_dotenv
+
+load_dotenv()
+
+import ddtrace.auto
+
+from ddtrace.llmobs import LLMObs
+from openai import OpenAI
+```
+
+Run this setup with the application's normal Python command, such as `python app.py`. Do not also use `ddtrace-run`; it initializes `ddtrace` before the application can load its configuration.
 
 If the application does not send data through a Datadog Agent, also set `DD_LLMOBS_AGENTLESS_ENABLED=1`.
 
