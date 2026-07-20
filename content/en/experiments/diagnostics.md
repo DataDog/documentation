@@ -68,7 +68,7 @@ If the same subject is assigned to more than one variant in the same experiment,
 
 ### How to resolve
 
-- For Feature Flags experiments, check whether the same subject can emit exposure events with different variant keys for the experiment allocation. This can happen if the application uses an unstable targeting key, subject identifier, or evaluation context during the assignment window.
+- For Feature Flags experiments, check whether the same subject has exposure records from different experiment configurations, such as an allocation or variant-key change, stale client state, or a different SDK evaluation path for the same flag.
 - For warehouse-native experiments, make sure the experiment ID column in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
 - For warehouse-native experiments, check whether the Exposure SQL Model returns flag evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
 - For warehouse-native experiments, check for duplicate or conflicting variant records in the assignment data.
@@ -76,14 +76,18 @@ If the same subject is assigned to more than one variant in the same experiment,
 
 ## Dimensional assignment imbalance
 
-Datadog can flag an experiment when the probability of being assigned to a variant differs significantly across segment values. For example, one country, plan, device, or customer tier might receive variants at a different split than the rest of the experiment. This can make CUPED results unreliable.
+Datadog can flag an experiment when the probability of being assigned to a variant differs significantly across dimension values. For example, one device type, country, plan, or customer tier might receive variants at a different split than the rest of the experiment.
+
+This diagnostic can also help diagnose overall traffic imbalance, or sample ratio mismatch (SRM). If the imbalance is concentrated in one dimension value, the root cause is often localized to that segment. For example, dimensional SRM for device type can point to a device-specific bug in variant delivery, SDK evaluation, redirects, page performance, crashes, or exposure telemetry.
+
+Datadog uses the dimension value from the subject's first assignment record. Later changes to the subject's dimension value should not cause this diagnostic.
 
 ### How to resolve
 
-- Review segment-level results for dimensions that are related to targeting or data collection.
-- Avoid using segment properties that can change during the experiment if the treatment can affect those properties.
-- Confirm that assignment data records the subject's segment consistently at assignment time.
-- Fix targeting or assignment data issues, then rerun analysis.
+- Review the affected dimension values and compare them with the overall traffic imbalance diagnostic.
+- Investigate segment-specific differences in flag evaluation, variant delivery, application behavior, and exposure telemetry.
+- For warehouse-native experiments, confirm that the Exposure SQL Model maps the intended assignment-time property columns and does not filter exposures differently by segment.
+- Fix the source of the localized imbalance, then rerun analysis.
 
 ## Missing metric data
 
