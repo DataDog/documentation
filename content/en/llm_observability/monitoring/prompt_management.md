@@ -31,7 +31,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 
 - Python 3.9 or later.
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
-- A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment.
+- A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
 - To manage prompts through the API, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
 
 ### Install the Preview SDK build
@@ -57,9 +57,11 @@ export DD_APP_KEY="<DATADOG_APP_KEY>"
 export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 {{< /code-block >}}
 
-`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Add references to the API and application keys through the existing configuration workflow; do not add their values to source code, committed configuration, or coding-agent prompts.
+`DD_ENV` must match a DD_ENV query configured for an environment to which the prompt is deployed. Add the API and application keys through the existing configuration and secret-management workflow; do not add their values to source code or committed configuration.
 
-When using a coding agent, instruct it to preserve the application's existing configuration and execution conventions. If no convention exists, the agent should ask which configuration and secret-management approach to use instead of introducing one. If the existing workflow does not make credentials available to the agent, it can implement the integration but should report that live prompt resolution and tracking remain unverified. Do not provide credential values through the conversation.
+When using a coding agent, instruct it to preserve the application's existing configuration and execution conventions. Providing the API and application key values in the copied prompt is optional and is not required for the agent to modify the application. If you include them, paste the prompt only into a trusted coding-agent session. The agent should treat the values as secrets, add them through the application's existing non-committed local configuration or secret-management workflow, and avoid repeating them in source code or documentation.
+
+If the copied prompt does not include credentials, or the existing workflow does not make them available to the agent, the agent can implement the integration but should report that live prompt resolution and tracking remain unverified. If no configuration convention exists, the agent should ask which approach to use instead of introducing one.
 
 ### Retrieve and format a prompt
 
