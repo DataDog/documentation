@@ -7,6 +7,12 @@ aliases:
   - /security/application_security/threats/setup/compatibility/envoy
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 The following table lists App and API Protection capabilities for the Envoy integration according to the specified Datadog External Processor image version:
 
 | App and API Protection capability              | Minimum Datadog External Processor image version  |

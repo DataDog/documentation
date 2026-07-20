@@ -7,6 +7,12 @@ aliases:
   - /security/application_security/threats/setup/compatibility/serverless
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 App and API Protection provides serverless capability for the following platforms and libraries:
 
 {{< card-grid card_width="225px" image_width="200" >}}

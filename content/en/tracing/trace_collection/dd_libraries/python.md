@@ -24,6 +24,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
+      tag: "Learning Center"
+      text: "Configure and manage the APM SDK for your applications"
 ---
 ## Compatibility requirements
 For a full list of Datadog's Python version and framework support (including legacy and maintenance versions), read the [Compatibility Requirements][1] page.

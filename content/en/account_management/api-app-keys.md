@@ -87,7 +87,7 @@ To add a Datadog API key or client token:
 
 **Notes:**
 
-- Your org must have at least one API key and at most 50 API keys.
+- Your org must have at least one API key, and up to 50 API keys by default. If you need more, [contact Support][19] to request a higher limit. Managed API keys, marked with a {{< ui >}}Managed{{< /ui >}} label in the Name column, are created and controlled by a Datadog integration or service rather than by you, and don't count toward this limit. You can view that a managed API key exists and revoke it, but you can't see its value or edit its name.
 - Key names must be unique across your organization.
 
 ## Remove API keys or client tokens
@@ -101,11 +101,11 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
 {{< site-region region="ap2,gov,gov2" >}}
-<div class="alert alert-danger">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+<div class="alert alert-danger">Make sure to securely store your application key immediately after creation. The key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 
 {{< site-region region="us,us3,us5,eu,ap1" >}}
-<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation. The key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 
 Because API keys and application keys are long-lived and have no built-in expiration, store them in a secrets manager, such as AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault, instead of in source code or environment files. AWS Secrets Manager supports [managed rotation for Datadog API keys and application keys][24].
