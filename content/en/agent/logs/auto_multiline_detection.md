@@ -21,16 +21,16 @@ For example, the Agent receives the following lines separately:
 ```
 2024-08-13 17:15:17 INFO Starting request handler
 Exception in thread "main" java.lang.NullPointerException
-at com.example.MyClass.doSomething(MyClass.java:42)
-at com.example.MyClass.main(MyClass.java:20)
+    at com.example.MyClass.doSomething(MyClass.java:42)
+    at com.example.MyClass.main(MyClass.java:20)
 2024-08-13 17:15:18 INFO Request handler stopped
 ```
 With Auto multi-line detection enabled, the stack trace is aggregated into a single log:
 ```
 2024-08-13 17:15:17 INFO Starting request handler
 Exception in thread "main" java.lang.NullPointerException
-at com.example.MyClass.doSomething(MyClass.java:42)
-at com.example.MyClass.main(MyClass.java:20)
+    at com.example.MyClass.doSomething(MyClass.java:42)
+    at com.example.MyClass.main(MyClass.java:20)
 2024-08-13 17:15:18 INFO Request handler stopped
 ```
 
