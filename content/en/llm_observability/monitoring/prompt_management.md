@@ -39,7 +39,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 The released `ddtrace` package does not yet include Prompt Management. During Preview evaluation, install the temporary build in the Python environment used by your application using these package coordinates:
 
 - Package: `ddtrace==4.13.0rc1`
-- Package source: `https://dd-trace-py-builds.s3.amazonaws.com/main/index.html`
+- Flat package source (`--find-links` with pip): `https://dd-trace-py-builds.s3.amazonaws.com/main/index.html`
 
 This temporary package version and source will be replaced with the standard released `ddtrace` package before Prompt Management becomes generally available.
 
@@ -163,19 +163,22 @@ Copying, rebuilding, or converting the formatted value can discard its prompt-tr
 ```python
 prompt = LLMObs.get_prompt(
     "customer-support-system-prompt",
-    fallback="You are a helpful support agent.",
+    fallback="You are a helpful support agent writing for a {{audience}} audience.",
 )
-system_prompt = prompt.format()
+variables = {"audience": audience}
+system_prompt = prompt.format(**variables)
 combined_prompt = f"{system_prompt}\n\nUser question: {question}"
 
 with LLMObs.annotation_context(
-    prompt=prompt.to_annotation_dict(),
+    prompt=prompt.to_annotation_dict(**variables),
 ):
     response = client.responses.create(
         model="gpt-4o",
         input=combined_prompt,
     )
 ```
+
+Pass the same variables to `to_annotation_dict()` that you pass to `format()` so that the tracked prompt includes the values used for that call.
 
 `annotation_context()` associates metadata with an LLM span created inside the context; it does not create the span. For providers that are not automatically instrumented, first [manually instrument the LLM call][7] to create an LLM span. An explicit `annotation_context()` takes precedence over automatic prompt tracking. See [Prompt Tracking][1] for more information.
 
