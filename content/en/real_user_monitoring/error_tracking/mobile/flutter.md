@@ -109,7 +109,7 @@ For a full list of options, see the `datadog-ci` [Flutter Symbols documentation]
 
 #### Upload symbol files manually
 
-You can also upload symbol files manually, without the Datadog CLI. This is useful for one-off uploads or CI pipelines that don't use `datadog-ci`. Upload symbol files from the [{{< ui >}}Debug Symbols{{< /ui >}}][10] page in Datadog, or programmatically through the [source maps API][11].
+You can also upload symbol files manually, without the `datadog-ci` CLI. This is useful for one-off uploads or CI pipelines that don't use `datadog-ci`. Upload symbol files from the [{{< ui >}}Debug Symbols{{< /ui >}}][10] page in Datadog, or programmatically through the [Debug Symbols Upload API][11].
 
 ### List uploaded symbol files
 

@@ -124,7 +124,7 @@ See the [RUM Debug Symbols][16] page to view all uploaded symbols.
 
 ### Upload source maps manually
 
-In addition to the build-tool flows described above, you can upload source maps manually from the [RUM Debug Symbols][16] page, or programmatically through the [source maps upload API][18].
+In addition to the build-tool flows described above, you can upload source maps manually from the [RUM Debug Symbols][16] page, or programmatically through the [Debug Symbols Upload API][18].
 
 ## Limitations
 

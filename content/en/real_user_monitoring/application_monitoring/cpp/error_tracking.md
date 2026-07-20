@@ -141,10 +141,8 @@ The C++ SDK supports the following debug symbol formats:
 
 You can upload debug symbols in either of the following ways:
 
-- **Manually from the Datadog UI**: Upload your symbol files on the [Debug Symbols][4] page.
-- **Programmatically through the API**: Use the [Source Maps API][6] to automate uploads, for example from a CI/CD pipeline.
-
-See [RUM Debug Symbols][4] for setup instructions.
+- **Manually from the Datadog UI**: Upload your symbol files on the [RUM Debug Symbols][4] page.
+- **Programmatically through the API**: Use the [Debug Symbols Upload API][6] to automate uploads, for example from a CI/CD pipeline.
 
 ## Test your implementation
 

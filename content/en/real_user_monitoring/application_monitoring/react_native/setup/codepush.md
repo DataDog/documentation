@@ -138,7 +138,7 @@ To run it with Yarn:
 yarn datadog-ci react-native codepush --platform ios --service com.company.app --bundle ./build/CodePush/main.jsbundle --sourcemap ./build/CodePush/main.jsbundle.map --app MyOrganization/MyApplication --deployment MyDeployment
 ```
 
-You can also upload source maps manually from the [RUM Debug Symbols][7] page, or programmatically through the [source maps upload API][8].
+You can also upload source maps manually from the [RUM Debug Symbols][7] page, or programmatically through the [Debug Symbols Upload API][8].
 
 ## Alternatives
 

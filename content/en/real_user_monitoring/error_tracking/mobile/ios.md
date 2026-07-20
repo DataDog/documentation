@@ -372,10 +372,10 @@ Once your application crashes and you restart the application, the iOS SDK uploa
 
 ### Upload your .dSYM file manually
 
-You can also upload `.dSYM` files manually, without the Datadog CLI. This is useful for one-off uploads or for pipelines that don't run `datadog-ci`:
+You can also upload `.dSYM` files manually, without the `datadog-ci` CLI. This is useful for one-off uploads or for pipelines that don't run `datadog-ci`:
 
 - From the [RUM Debug Symbols][20] page in the Datadog UI.
-- Using the [upload API endpoint][21].
+- Using the [Debug Symbols Upload API][21].
 
 ### Use Datadog CI to upload your .dSYM file
 

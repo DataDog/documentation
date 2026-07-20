@@ -26,7 +26,7 @@ At build time, the plugin injects a snippet that writes metadata to `window.DD_S
 
 ## Prerequisites
 
-- Source maps uploaded to Datadog, either through the [Source Maps build plugin][3] or manually. You can upload manually with the [datadog-ci CLI][2], from the [Debug Symbols][5] page in Datadog, or with the [Upload Source Maps API][6].
+- Source maps uploaded to Datadog through the [Source Maps build plugin][3], the [`datadog-ci` CLI][2], the [Debug Symbols][5] page in Datadog, or the [Debug Symbols Upload API][6].
 - The RUM SDK initialized with matching `service` and `version` parameters.
 - The Datadog build plugin installed and registered with your bundler. See [Build Plugins][4] for installation instructions.
 

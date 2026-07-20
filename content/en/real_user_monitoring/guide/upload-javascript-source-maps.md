@@ -118,11 +118,11 @@ If the sum of the file size for <code>javascript.364758.min.js</code> and <code>
 
 You can upload source maps to Datadog in three ways:
 
-- **CI/CD with the Datadog CLI** (recommended for automated builds): add an extra step in your CI pipeline to run the dedicated command described below.
-- **Manual upload from the Datadog UI**: for one-off uploads, upload source maps directly from the [{{< ui >}}Debug Symbols{{< /ui >}}][5] page.
-- **Programmatic upload via the API**: for environments without a CI pipeline or for custom automation, use the [source maps upload API endpoint][6].
+- **CI/CD with the `datadog-ci` CLI** (recommended for automated builds): Add an extra step in your CI pipeline to run the dedicated command described below.
+- **Manual upload from the Datadog UI**: For one-off uploads, upload source maps directly from the [{{< ui >}}Debug Symbols{{< /ui >}}][5] page.
+- **Programmatic upload through the API**: For environments without a CI pipeline or for custom automation, use the [Debug Symbols Upload API][6].
 
-The best way to upload source maps is to add an extra step in your CI pipeline and run the dedicated command from the [Datadog CLI][1]. It scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
+The [`datadog-ci` CLI][1] scans the `dist` directory and subdirectories to automatically upload source maps with relevant minified files.
 
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).

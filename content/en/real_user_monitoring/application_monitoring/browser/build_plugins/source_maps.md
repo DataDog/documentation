@@ -15,7 +15,7 @@ further_reading:
   text: 'Datadog Build Plugins GitHub Repository'
 - link: 'https://docs.datadoghq.com/api/latest/rum/upload-source-maps/'
   tag: 'API'
-  text: 'Upload Source Maps API'
+  text: 'Debug Symbols Upload API'
 ---
 
 ## Overview
@@ -24,7 +24,7 @@ The Source Maps build plugin automatically uploads JavaScript source maps to Dat
 
 The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata.
 
-If a build plugin does not fit your workflow, you can also upload source maps manually: from the [Debug Symbols][6] page in Datadog, or with the [Upload Source Maps API][7].
+If a build plugin does not fit your workflow, you can also upload source maps manually from the [Debug Symbols][6] page in Datadog, or with the [Debug Symbols Upload API][7].
 
 ## Prerequisites
 

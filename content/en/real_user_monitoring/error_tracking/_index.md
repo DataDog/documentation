@@ -50,7 +50,7 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
 
 ### Upload debug symbols
 
-Debug symbols and source maps are uploaded automatically through your CI/CD pipeline. You can also upload them manually from the [Debug Symbols][4] page in Datadog, or programmatically using the [source map upload API][5]. Manual and API-based uploads are useful for backfilling symbols or for pipelines that cannot run the Datadog CLI.
+Debug symbols and source maps are uploaded automatically through your CI/CD pipeline. You can also upload them manually from the [Debug Symbols][4] page in Datadog, or programmatically using the [Debug Symbols Upload API][5]. Manual and API-based uploads are useful for backfilling symbols or for pipelines that cannot run the `datadog-ci` CLI.
 
 ## Further Reading
 

@@ -150,7 +150,7 @@ If you are using EAS to build your Expo application, set `cli.requireCommit` to 
 
 See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page to view all uploaded symbols.
 
-In addition to the `expo-datadog` config plugin, source maps and dSYMs can be uploaded manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page, or programmatically through the [source maps upload API][6].
+In addition to the `expo-datadog` config plugin, source maps and dSYMs can be uploaded manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][4] page, or programmatically through the [Debug Symbols Upload API][6].
 
 ## Limitations
 

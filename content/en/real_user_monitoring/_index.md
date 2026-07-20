@@ -232,7 +232,7 @@ View your [backend traces, logs, and infrastructure metrics][5] down to the exac
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
-To get readable stack traces, upload debug symbols and source maps automatically through CI/CD, manually from the [Debug Symbols][22] page in Datadog, or programmatically using the [source map upload API][23].
+To get readable stack traces, upload debug symbols and source maps automatically through CI/CD, manually from the [Debug Symbols][22] page in Datadog, or programmatically using the [Debug Symbols Upload API][23].
 
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
