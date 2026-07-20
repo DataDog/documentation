@@ -1,12 +1,12 @@
 
-These metrics are specific to processor buffers, located upstream of a processor. Each processor emits its own respective buffer metrics. **Note**: Processor buffers are not configurable, but these metrics can help monitor backpressure as it propagates through your pipeline's processors.
+These metrics are specific to processor buffers, located upstream of a processor. Each processor emits its own respective buffer metrics. Available in Worker version 2.13 and later. **Note**: Processor buffers are not configurable, but these metrics can help monitor backpressure as it propagates through your pipeline's processors.
 
 - Use the `component_id` tag to filter or group by individual components.
 - Use the `component_type` tag to filter or group by the processor type, such as `quota` for the Quota processor.
 
 `pipelines.transform_buffer_utilization`
-: **Description**: Histogram of how many events are buffered in a processor.
-: **Metric type**: histogram
+: **Description**: Event count in a processor's buffer.
+: **Metric type**: distribution
 
 `pipelines.transform_buffer_utilization_level`
 : **Description**: Event count in a processor's buffer.
@@ -18,4 +18,8 @@ These metrics are specific to processor buffers, located upstream of a processor
 
 `pipelines.transform_buffer_max_size_events`
 : **Description**: A processor buffer's maximum event capacity.
+: **Metric type**: gauge
+
+`pipelines.transform_buffer_max_size_bytes`
+: **Description**: A processor buffer's maximum byte capacity.
 : **Metric type**: gauge

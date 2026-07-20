@@ -90,6 +90,8 @@ Start by writing a query to retrieve your data:
 
 {{< img src="/product_analytics/experiment/exp_create_metric_sql_models_writesql_1.png" alt="The Write SQL section of the Create Metric SQL Model page showing a SELECT query for user_id, revenue_timestamp, and amount from a revenue orders table, with a successful query preview below displaying USER_ID, REVENUE_TIMESTAMP, and AMOUNT columns." style="width:80%;" >}}
 
+For large tables, use [SQL template variables][13] to push Datadog's date filters into your query and reduce the amount of data your warehouse scans on each run.
+
 #### Map your warehouse data to Datadog
 
 After previewing your data, map it to Datadog. In the {{< ui >}}Structure your model{{< /ui >}} section:
@@ -130,6 +132,7 @@ After you create your SQL model, use it to create a metric:
 [1]: https://app.datadoghq.com/product-analytics/experimentation-metrics
 [8]: /experiments/guide/connecting_a_data_warehouse/
 [12]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
+[13]: /experiments/concepts/sql_template_variables/
 
 {{% /tab %}}
 {{< /tabs >}}
