@@ -50,7 +50,9 @@ Auto-fixable PRs are closed, manual-intervention PRs are automatically labeled `
 
 Once an author has reviewed an auto-created PR and removed the `WORK IN PROGRESS` label, you can treat it as any other PR.
 
-If you have questions, please reach out in #docs-repo-reorg-support.
+**You are not expected to provide support for any issues arising from the reorg.** I'll be here to help all day, and for longer than that if needed. If someone raises an issue in #documentation, you can just tag me or cross-post it to #docs-repo-reorg-support.
+
+If you have questions, please ask them on this thread or reach out in #docs-repo-reorg-support.
 ```
 
 ## The day of
@@ -104,6 +106,18 @@ gh pr create --base master --title "Create Hugo site folder"
 ```
 
 ### 6. Verify that the GitHub actions etc. are working, and make any necessary fixes
+
+- [ ] Verify that GitHub actions aren't erring out from bad paths.
+- [ ] While the preview is building, run some local checks:
+   - [ ] The Cdocs e2e tests are passing.
+   - [ ] Integrations pages are working correctly.
+   - [ ] API pages are working correctly.
+   - [ ] Single sourced content is working correctly.
+
+### 7. Verify the preview build
+
+- [ ] The GitLab artifacts for the preview build should be similar to those of the last build on `master`: same number of HTML files in `public`, for example.
+- [ ]
 
 ### 7. Merge to master and verify the build
 
