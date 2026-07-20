@@ -1,5 +1,7 @@
 import * as bp from '../build-api-pages';
 import fs from 'fs';
+import yaml from 'js-yaml';
+import $RefParser from '@apidevtools/json-schema-ref-parser';
 
 describe(`updateMenu`, () => {
 
@@ -2807,6 +2809,27 @@ describe(`schemaTable`, () => {
         </div>
       </div>`.trim();
     expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`getBestDiscriminant`, () => {
+
+  let schemas;
+  beforeAll(async () => {
+    const spec = yaml.safeLoad(fs.readFileSync('./data/api/v1/full_spec.yaml', 'utf8'));
+    const deref = await $RefParser.dereference(spec, { resolve: { external: false } });
+    schemas = deref.components.schemas;
+  });
+
+  it('discriminates WidgetDefinition on `type`', () => {
+    expect(bp.getBestDiscriminant(schemas.WidgetDefinition.oneOf)).toEqual('type');
+  });
+
+  it('discriminates timeseries requests[].queries[] on `data_source`', () => {
+    const queries = schemas.TimeseriesWidgetRequest.properties.queries.items;
+    expect(queries).toBe(schemas.FormulaAndFunctionQueryDefinition);
+    expect(bp.getBestDiscriminant(queries.oneOf)).toEqual('data_source');
   });
 
 });

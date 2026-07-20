@@ -105322,8 +105322,29 @@ components:
           $ref: "#/components/schemas/TagIndexingRuleType"
       type: object
     TagIndexingRuleDynamicTags:
-      description: Configuration for including dynamically queried tags.
+      description: |-
+        Options for dynamic tag indexing applied per metric, such as tags filtered by query usage.
+
+        Before a tag key is dropped by this rule, two grace period conditions must be met:
+
+        1. The metric must be submitted for at least as long as the selected window.
+        2. A tag key must have been submitted for at least 15 days.
+
+        Any metric or tag key that does not meet these conditions are excluded from this
+        indexing rule. The `exclude_not_*` fields require `exclude_tags_mode` to be set to `true`.
       properties:
+        exclude_not_queried_window_seconds:
+          description: >-
+            Tags that have not been queried within this window are excluded from indexing. Maximum of `7776000` (90 days).
+          example: 3600
+          format: int64
+          maximum: 7776000
+          type: integer
+        exclude_not_used_in_assets:
+          description: >-
+            Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
+          example: false
+          type: boolean
         queried_tags_window_seconds:
           description: Window in seconds for evaluating queried tags.
           example: 3600

@@ -10,6 +10,12 @@ further_reading:
   text: "Attack Summary"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 The **API Posture** overview page gives you a security-focused view of your API estate. It surfaces how well your endpoints are covered, the open findings affecting them, the endpoints most exposed to risk, and the policies that protect them. The following sections describe each area of the page.
 
 {{< img src="security/application_security/overview/api_posture.png" alt="API Posture overview page" >}}

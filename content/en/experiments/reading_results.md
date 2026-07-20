@@ -28,7 +28,7 @@ The following sections explain the metric scorecard and how to explore results.
 
 ## Experiment diagnostics
 
-Datadog runs [experiment diagnostics][8] with experiment analysis to check exposure data, metric data, randomization, and analysis health. Review diagnostic warnings before interpreting results, especially when a metric is missing, unexpectedly zero, or marked with a warning.
+Datadog runs [experiment diagnostics][9] with experiment analysis to check exposure data, metric data, randomization, and analysis health. Review diagnostic warnings before interpreting results, especially when a metric is missing, unexpectedly zero, or marked with a warning.
 
 ## Metric scorecard
 
@@ -69,6 +69,8 @@ The confidence interval is a range of lift values that are consistent with the o
 - If the **interval crosses zero**, the result is not statistically significant. The result is consistent with a true effect of zero.
 
 Use the interval width as an indicator of precision: a narrower interval means a more precise estimate of lift; a wider interval means more uncertainty, often because the sample is smaller or the metric is noisy.
+
+If [multiple testing correction][8] is enabled, confidence intervals are wider because Datadog controls the family-wise error rate across the experiment's metric and treatment-variant comparisons.
 
 ### Global lift
 
@@ -118,5 +120,6 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
 [6]: /session_replay/
-[7]: /experiments/statistics/global_lift/
-[8]: /experiments/diagnostics/
+[7]: /experiments/global_lift/
+[8]: /experiments/statistics/multiple_testing_correction
+[9]: /experiments/diagnostics/
