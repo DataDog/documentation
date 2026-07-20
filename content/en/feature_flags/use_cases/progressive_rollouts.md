@@ -16,14 +16,14 @@ description: Gradually roll out feature flags on a schedule with optional guardr
    - Change the delay between steps for a slower or faster rollout.
    - Click **Split Traffic** to roll out multiple variants at the same time.
 
-{{< img src="getting_started/feature_flags/create-progressive-rollout.png" alt="Multistep progressive rollout configuration." style="width:100%;" >}}
+{{< img src="feature_flags/create-progressive-rollout.png" alt="Multistep progressive rollout configuration." style="width:100%;" >}}
 
 ### Start and control the rollout
 
 1. **Enable** the flag in the environment so SDKs evaluate your targeting rules.
 2. Click **Start Rollout** to kick off the progressive rollout.
 
-{{< img src="getting_started/feature_flags/start-progressive-rollout.png" alt="Multistep progressive rollout display." style="width:100%;" >}}
+{{< img src="feature_flags/start-progressive-rollout.png" alt="Multistep progressive rollout display." style="width:100%;" >}}
 
 After the rollout starts:
 
@@ -51,7 +51,7 @@ When the canary detects a statistically significant change in any guardrail metr
 2. Add guardrail metrics to the rollout configuration.
 3. Choose whether guardrail failures should pause or stop the rollout.
 
-{{< img src="getting_started/feature_flags/canary-rollout-config.png" alt="Canary rollout configuration showing rollout steps with guardrail metrics and a control variant." style="width:90%;" >}}
+{{< img src="feature_flags/canary-rollout-config.png" alt="Canary rollout configuration showing rollout steps with guardrail metrics and a control variant." style="width:90%;" >}}
 
 ## Best practices
 
