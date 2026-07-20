@@ -82,9 +82,53 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `a`    | Bytes  | 5,000 |
 |  `b`    | Events | 50    |
 
+## Metrics
+
+For [component metrics][7] and [processor buffer metrics][8] emitted by all processors, see the [Pipelines Usage Metrics][9] documentation.
+
+### Quota metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `quota` for these metrics.
+
+`pipelines.quota_reached_events_total`
+: **Description**: The number of events dropped because they were received after the configured quota limit was reached.
+: **Metric type**: count
+
+`pipelines.quota_reached_event_bytes_total`
+: **Description**: The size, in bytes, of events dropped because they were received after the configured quota limit was reached.
+: **Metric type**: count
+
+`pipelines.quota_overflow_destination_sent_events_total`
+: **Description**: The number of events routed to a secondary overflow destination when a quota limit was reached.
+: **Metric type**: count
+
+`pipelines.quota_fill`
+: **Description**: The current fill level of a rate-limiting quota bucket, value ranges from `0` to `100`.
+: **Metric type**: gauge
+
+`pipelines.quotas_usage`
+: **Description**: Aggregate fill level across all quota buckets, value ranges from `0` to `100`.
+: **Metric type**: gauge
+
+`pipelines.quota_limit_events`
+: **Description**: The configured maximum event throughput per interval for a quota rule.
+: **Metric type**: gauge
+
+`pipelines.quota_limit_bytes`
+: **Description**: The configured maximum byte throughput per interval for a quota rule.
+: **Metric type**: gauge
+
+`pipelines.quotas_count`
+: **Description**: The number of active rate-limiting quota buckets currently being tracked.
+: **Metric type**: gauge
+
 [1]: /monitors/types/metric/?tab=threshold
 [2]: /observability_pipelines/destinations/datadog_archives/
 [3]: /observability_pipelines/destinations/azure_storage/
 [4]: /observability_pipelines/destinations/google_cloud_storage/
 [5]: /help/
 [6]: /observability_pipelines/search_syntax/logs/
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
