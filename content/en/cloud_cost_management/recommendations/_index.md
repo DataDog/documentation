@@ -685,15 +685,12 @@ Below are the available cloud cost recommendation categories and their descripti
 
 Each recommendation includes a **Risk** score and a **Level of Effort** score to help you prioritize which recommendations to act on first. Both scores use a scale of {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, and {{< ui >}}High{{< /ui >}}. They appear as the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns in the {{< ui >}}Active Recommendations{{< /ui >}} table and in each recommendation's side panel.
 
-{{< ui >}}Risk{{< /ui >}} reflects how much operational risk is involved in applying a recommendation. Datadog evaluates factors such as whether the action is reversible, whether the resource runs in a production environment, active-usage signals on the resource, and the potential blast radius of the change.
-
 | Risk | Description |
 |--------|-------------|
 | {{< ui >}}Low{{< /ui >}} | Safe and easily undone: no data at stake or fully recoverable, resource trivially recreatable, isolated, no runtime impact. |
 | {{< ui >}}Medium{{< /ui >}} | Recoverable but takes effort: data or resources restorable via snapshot or re-provisioning, impact scoped to one app or workload, only brief disruption. |
 | {{< ui >}}High{{< /ui >}} | Hard to undo or high-impact if wrong: irreversible data loss, a resource that can't be recreated, wide blast radius, or possible downtime to a live workload. |
 
-{{< ui >}}Effort{{< /ui >}} reflects how much work is required to apply a recommendation. Datadog evaluates factors such as the number of implementation steps or whether coordination across teams is required.
 
 | Level of Effort | Description |
 |--------|-------------|
