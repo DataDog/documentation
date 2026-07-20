@@ -153,25 +153,11 @@ These metrics are available for sources, processors, and destinations.
 {{< tabs >}}
 {{% tab "Sources" %}}
 
+### Throughput
+
 Bytes in
 : **Metric**: `pipelines.component_received_bytes_total`
 : **Description**: The number of raw bytes read from the source's input, before any decoding or transformation.
-
-Data dropped intentionally or unintentionally
-: **Metric**: `pipelines.component_discarded_events_total`
-: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
-
-Errors
-: **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
-
-Event bytes in
-: **Metric**: `pipelines.component_received_event_bytes_total`
-: **Description**: The byte size of events received by the component.
-
-Event bytes out
-: **Metric**: `pipelines.component_sent_event_bytes_total`
-: **Description**: The byte size of events the component sends downstream.
 
 Events in
 : **Metric**: `pipelines.component_received_events_total`
@@ -181,17 +167,23 @@ Events out
 : **Metric**: `pipelines.component_sent_events_total`
 : **Description**: The number of events the component sends downstream.
 
-Send batch latency
-: **Metric**: `pipelines.source_send_batch_latency_seconds`
-: **Description**: The time it takes for the source to send a batch, which can contain multiple event chunks, to the next component. Available in Worker version 2.16 and later.
+Event bytes in
+: **Metric**: `pipelines.component_received_event_bytes_total`
+: **Description**: The byte size of events received by the component.
 
-Send latency
-: **Metric**: `pipelines.source_send_latency_seconds`
-: **Description**: The time it takes for the source to send a chunk of events to the next component. Available in Worker version 2.16 and later.
+Event bytes out
+: **Metric**: `pipelines.component_sent_event_bytes_total`
+: **Description**: The byte size of events the component sends downstream.
 
-Source lag time
-: **Metric**: `pipelines.source_lag_time_seconds`
-: **Description**: The difference, in seconds, between an event's own timestamp and when the Worker received it. High values indicate stale or delayed data arriving at the pipeline.
+### Errors, data dropped, and timed outs
+
+Errors
+: **Metric**: `pipelines.component_errors_total`
+: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
+
+Data dropped intentionally or unintentionally
+: **Metric**: `pipelines.component_discarded_events_total`
+: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
 
 Timed out events
 : **Metric**: `pipelines.component_timed_out_events_total`
@@ -203,8 +195,66 @@ Timed out requests
 : **Description**: The number of requests that timed out for sources that send events to the Worker in batches using HTTP requests.
 : **Available for**: HTTP-based sources that have a configured timeout, such as the Datadog Agent.
 
+### Performance
+
+Send latency
+: **Metric**: `pipelines.source_send_latency_seconds`
+: **Description**: The time it takes for the source to send a chunk of events to the next component. Available in Worker version 2.16 and later.
+
+Send batch latency
+: **Metric**: `pipelines.source_send_batch_latency_seconds`
+: **Description**: The time it takes for the source to send a batch, which can contain multiple event chunks, to the next component. Available in Worker version 2.16 and later.
+
+Source lag time
+: **Metric**: `pipelines.source_lag_time_seconds`
+: **Description**: The difference, in seconds, between an event's own timestamp and when the Worker received it. High values indicate stale or delayed data arriving at the pipeline.
+
+### Buffer
+
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
+
+{{% observability_pipelines/metrics/buffer/sources %}}
+
 {{% /tab %}}
 {{% tab "Processors" %}}
+
+### Throughput
+
+Events in
+: **Metric**: `pipelines.component_received_events_total`
+: **Description**: The number of events received by the component.
+
+Events out
+: **Metric**: `pipelines.component_sent_events_total`
+: **Description**: The number of events the component sends downstream.
+
+Event bytes in
+: **Metric**: `pipelines.component_received_event_bytes_total`
+: **Description**: The byte size of events received by the component.
+
+Event bytes out
+: **Metric**: `pipelines.component_sent_event_bytes_total`
+: **Description**: The byte size of events the component sends downstream.
+
+Events included
+: **Metric**: `pipelines.included_events_total`
+: **Description**: The number of events that matched the processor's filter query and were processed. Events that do not match the filter query skip the processor and continue to the next component.
+
+Event bytes included
+: **Metric**: `pipelines.included_event_bytes_total`
+: **Description**: The byte size of events that matched the processor's filter query and were processed.
+
+### Errors and data dropped
+
+Errors
+: **Metric**: `pipelines.component_errors_total`
+: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
+
+Data dropped intentionally or unintentionally
+: **Metric**: `pipelines.component_discarded_events_total`
+: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
+
+### Performance
 
 CPU usage
 : **Metric**: `pipelines.component_cpu_usage_ns_total`
@@ -212,56 +262,32 @@ CPU usage
 : **Available for these log processors**:<br>- Custom Processor<br>- Dedupe<br>- Enrichment Table<br>- Grok Parser<br>- Parse JSON<br>- Parse XML<br>- Reduce<br>- Remap to OCSF<br>- Sensitive Data Scanner<br>- Split Array<br>- Throttle log processors
 : **Available for these metrics processors**:<br>- Aggregate <br>- Tag Cardinality Limit metrics
 
-Data dropped intentionally or unintentionally
-: **Metric**: `pipelines.component_discarded_events_total`
-: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
-
-Errors
-: **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
-
-Event bytes in
-: **Metric**: `pipelines.component_received_event_bytes_total`
-: **Description**: The byte size of events received by the component.
-
-Event bytes included
-: **Metric**: `pipelines.included_event_bytes_total`
-: **Description**: The byte size of events that matched the processor's filter query and were processed.
-
-Event bytes out
-: **Metric**: `pipelines.component_sent_event_bytes_total`
-: **Description**: The byte size of events the component sends downstream.
-
-Events in
-: **Metric**: `pipelines.component_received_events_total`
-: **Description**: The number of events received by the component.
-
-Events included
-: **Metric**: `pipelines.included_events_total`
-: **Description**: The number of events that matched the processor's filter query and were processed. Events that do not match the filter query skip the processor and continue to the next component.
-
-Events out
-: **Metric**: `pipelines.component_sent_events_total`
-: **Description**: The number of events the component sends downstream.
-
 Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value close to `1` indicates a component that is never idle, meaning that the component is likely a bottleneck in the processing topology that is creating backpressure. This might cause events to be dropped.
 
+### Buffer
+
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
+
+{{% observability_pipelines/metrics/buffer/processors %}}
+
 {{% /tab %}}
 {{% tab "Destinations" %}}
+
+### Throughput
 
 Bytes out
 : **Metric**: `pipelines.component_sent_bytes_total`
 : **Description**: The number of raw bytes written to the destination's output, after encoding and transformations.
 
-Data dropped intentionally or unintentionally
-: **Metric**: `pipelines.component_discarded_events_total`
-: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
+Events in
+: **Metric**: `pipelines.component_received_events_total`
+: **Description**: The number of events received by the component.
 
-Errors
-: **Metric**: `pipelines.component_errors_total`
-: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
+Events out
+: **Metric**: `pipelines.component_sent_events_total`
+: **Description**: The number of events the component sends downstream.
 
 Event bytes in
 : **Metric**: `pipelines.component_received_event_bytes_total`
@@ -271,17 +297,31 @@ Event bytes out
 : **Metric**: `pipelines.component_sent_event_bytes_total`
 : **Description**: The byte size of events the component sends downstream.
 
-Events in
-: **Metric**: `pipelines.component_received_events_total`
-: **Description**: The number of events received by the component.
+### Errors and data dropped
 
-Events out
-: **Metric**: `pipelines.component_sent_events_total`
-: **Description**: The number of events the component sends downstream.
+Errors
+: **Metric**: `pipelines.component_errors_total`
+: **Description**: The number of errors encountered by the component. Depending on the component, this metric can include an `error_code`, `error_type`, or `reason` tag that describes the error.
+
+Data dropped intentionally or unintentionally
+: **Metric**: `pipelines.component_discarded_events_total`
+: **Description**: The number of events dropped. **Note**: To break down this metric, use the `intentional:true` tag to filter for events that are intentionally dropped or the `intentional:false` tag for events that are not intentionally dropped.
+
+### Performance
 
 Utilization
 : **Metric**: `pipelines.utilization`
 : **Description**: The component's activity. A value of `0` indicates an idle component that is waiting for input. A value close to `1` indicates a component that is never idle, meaning that the component is likely a bottleneck in the processing topology that is creating backpressure. This might cause events to be dropped.
+
+### Buffer
+
+Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
+
+{{% observability_pipelines/metrics/buffer/destinations %}}
+
+#### Deprecated buffer metrics
+
+{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -388,26 +428,6 @@ These metrics provide information about the adaptive concurrency controller, whi
 `pipelines.adaptive_concurrency_past_rtt_mean`
 : **Description**: The historical mean RTT, in seconds, for HTTP requests to this destination, used as the long-term baseline for adaptive concurrency adjustments.
 : **Metric type**: distribution
-
-## Buffer metrics
-
-Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
-
-### Source buffer metrics
-
-{{% observability_pipelines/metrics/buffer/sources %}}
-
-### Processor buffer metrics
-
-{{% observability_pipelines/metrics/buffer/processors %}}
-
-### Destination buffer metrics
-
-{{% observability_pipelines/metrics/buffer/destinations %}}
-
-### Deprecated buffer metrics
-
-{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
 
 ## Further reading
 
