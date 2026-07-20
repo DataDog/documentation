@@ -174,7 +174,7 @@ Based on the attributes included in your span, the Datadog Agent and Datadog Ope
 
 ### Map OpenTelemetry span attribute to Datadog span type
 
-The following table shows the span type mapping logic that is used if the feature flag `enable_receive_resource_spans_v2` is set in the Datadog Agent or both the Datadog Exporter and Connector, if using the OpenTelemetry Collector. The chart lists mappings in order of precedence.  
+The following table shows the span type mapping logic. The chart lists mappings in order of precedence.  
 | # | Span Attribute | Datadog span.type |
 |---|----------------|-------------------|
 | 1 | `span.type` | `span.type` attribute value |
