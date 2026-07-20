@@ -117,6 +117,22 @@ describe('context', () => {
 })
 ```
 
+The following example is invalid because the docblock appears after code and attempts to mark only one test as unskippable:
+
+```javascript
+it('can sum', () => {
+  expect(1 + 2).to.equal(3)
+})
+
+// THIS IS INVALID: The docblock cannot mark an individual test as unskippable.
+/**
+ * @datadog {"unskippable": true}
+ */
+it('can subtract', () => {
+  expect(3 - 2).to.equal(1)
+})
+```
+
 [1]: https://jestjs.io/docs/configuration#testenvironmentoptions-object
 {{% /tab %}}
 {{% tab "Cucumber" %}}
