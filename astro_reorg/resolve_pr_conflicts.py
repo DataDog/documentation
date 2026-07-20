@@ -27,7 +27,7 @@ Flags:
 Background:
     The reorg moves every entry in `moves_to_hugo` (astro_reorg/config.yaml)
     from the repo root into hugo/. For example, content/ → hugo/content/,
-    layouts/ → hugo/layouts/, etc.  PRs opened before the reorg was merged to
+    layouts/ → hugo/layouts/, etc. PRs opened before the reorg was merged to
     master will have their branches pointing at the old paths.  When github
     tries to compute mergeability, those PRs show as CONFLICTING.
 
@@ -112,8 +112,8 @@ CONFIG_PATH = SCRIPT_DIR / "config.yaml"
 with CONFIG_PATH.open() as f:
     _config = yaml.safe_load(f)
 
-MOVES_TO_HUGO: set[str] = set(_config.get("moves_to_hugo", []))
-TOP_LEVEL: set[str] = set(_config.get("top_level", []))
+HUGO_FOLDER_FILES: set[str] = set(_config.get("moves_to_hugo", []))
+TOP_LEVEL_FILES: set[str] = set(_config.get("top_level", []))
 
 # Shared with create_test_prs.py: the mock base branch used for test runs. When
 # invoked without --live or --base-branch, the script defaults to this branch
@@ -148,7 +148,6 @@ LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
 # Applied by the script to a work-in-progress PR after it comments once. Excluded
 # from the query so the PR isn't picked up (and re-commented on) on later runs.
 LABEL_SKIP = "astro-reorg-skip"
-LABEL_WIP = "WORK IN PROGRESS"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
 # Applied to every PR the script acts on, regardless of outcome (auto-fixed,
@@ -266,9 +265,10 @@ def build_autofix_pr_body(
         f"**Original PR description:**\n\n{original_body}"
     )
 
-# Existing repo label applied to auto-created fix PRs in test mode so they stay
-# out of other teams' review queues. Assumed to already exist in the repo.
-DO_NOT_MERGE_LABEL = "Do Not Merge"
+# Existing repo labels assumed to already exist; the script checks for them but
+# does not create them.
+LABEL_WIP = "WORK IN PROGRESS"
+LABEL_DO_NOT_MERGE = "Do Not Merge"  # test mode only — keeps fix PRs out of review queues
 
 # Set in main() from --base-branch; everything else reads this.
 BASE_BRANCH = "master"
@@ -365,9 +365,9 @@ def is_reorg_path(file_path: str) -> bool:
     parts = Path(file_path).parts
     if not parts:
         return False
-    if parts[0] in MOVES_TO_HUGO:
+    if parts[0] in HUGO_FOLDER_FILES:
         return True
-    if parts[0] == "hugo" and len(parts) > 1 and parts[1] in MOVES_TO_HUGO:
+    if parts[0] == "hugo" and len(parts) > 1 and parts[1] in HUGO_FOLDER_FILES:
         return True
     return False
 
@@ -385,7 +385,7 @@ def to_post_reorg_path(file_path: str) -> str:
         return file_path
     if parts[0] == "hugo":
         return file_path
-    if parts[0] in MOVES_TO_HUGO:
+    if parts[0] in HUGO_FOLDER_FILES:
         return "hugo/" + file_path
     return file_path
 
@@ -398,7 +398,7 @@ def to_pre_reorg_path(file_path: str) -> str | None:
     hugo/content/en/foo.md → content/en/foo.md
     """
     parts = Path(file_path).parts
-    if len(parts) > 1 and parts[0] == "hugo" and parts[1] in MOVES_TO_HUGO:
+    if len(parts) > 1 and parts[0] == "hugo" and parts[1] in HUGO_FOLDER_FILES:
         return "/".join(parts[1:])
     return None
 
@@ -475,7 +475,7 @@ def get_wrong_path_additions(worktree: Path) -> list[str]:
         if len(parts) != 2:
             continue
         path = parts[1].strip()
-        if path_first_segment(path) in MOVES_TO_HUGO:
+        if path_first_segment(path) in HUGO_FOLDER_FILES:
             wrong.append(path)
     return wrong
 
@@ -659,7 +659,7 @@ def finalize_autofix(pr: dict, fix_branch: str, existing_fix_pr: dict | None) ->
     # In test mode, keep the auto-created PR out of other teams' review queues by
     # marking it "Do Not Merge". Never do this on real master.
     if IS_TEST_MODE:
-        add_label(int(new_pr_number), DO_NOT_MERGE_LABEL, dry_run=False)
+        add_label(int(new_pr_number), LABEL_DO_NOT_MERGE, dry_run=False)
 
     gh_run(
         "pr", "close", str(pr_number), "--repo", REPO,
@@ -772,7 +772,7 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
         print(f"  [dry-run] would open PR: {would_be_title!r}")
         print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
         if IS_TEST_MODE:
-            print(f"  [dry-run] would label fix PR {DO_NOT_MERGE_LABEL!r} (test mode)")
+            print(f"  [dry-run] would label fix PR {LABEL_DO_NOT_MERGE!r} (test mode)")
         print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR, "
               f"and label it {LABEL_AUTOFIXED!r}")
         return True
