@@ -68,7 +68,7 @@ Before running a simulation, you need to capture sample log data to test against
 The status of a pipeline determines whether a simulation can be run with live data, imported data, or both.
 
 | Pipeline status | Simulation with imported data | Simulation with saved data | Simulation with live data |
-| --------------- | ----------------------------- | -------------------------- | ------------------------- |
+| --------------- | :---------------------------: | :------------------------: | :-----------------------: |
 | Active          | ✔️                            | ✔️                         | ✔️                        |
 | Inactive        | ✔️                            | ✔️                         |                           |
 | Draft           | ✔️                            | ✔️                         |                           |
