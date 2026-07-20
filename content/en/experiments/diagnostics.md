@@ -36,23 +36,23 @@ Treat SRM as a blocker for interpreting results. It indicates that the experimen
 
 For experiments backed by Datadog Feature Flags, common causes include:
 
-- A flag rule, targeting condition, allocation change, or rollout change that sends users around the experiment rule during the experiment.
-- An inconsistent targeting key, subject identifier, or SDK evaluation path that changes which variant a subject can receive.
-- Variant behavior that changes whether exposure telemetry is generated or received, such as redirects, crashes, slower page loads, or conditional flag evaluation.
-- Manual interference, such as pausing a variant, changing allocation mid-run, or forcing users into a variant outside the experiment flow.
+- The relative variant weights changed after launch while assignments made under the earlier weights remain in the analysis window.
+- Exposure events are lost at different rates by variant after assignment. For example, a variant-specific redirect or crash can prevent buffered exposure events from reaching Datadog.
+
+Changing targeting rules, the targeting key, or the percentage of eligible traffic exposed does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or causes a different diagnostic, such as missing or mixed assignments.
 
 For warehouse-native experiments, common causes include:
 
-- The expected variant weights configured in Datadog do not match the assignment probabilities used by the upstream randomization system.
-- The Exposure SQL Model filters, joins, or aggregates exposure rows in a way that drops subjects from one variant more often than another.
-- The exposure table uses unstable subject IDs, unexpected variant keys, duplicate assignments, or conflicting variant records.
-- The analysis population is filtered by a post-assignment condition, such as a trigger, bot filter, eligibility rule, or event that can be affected by the variant.
+- The expected exposure fraction for each variant configured in Datadog does not match the assignment probability used by the upstream randomization system.
+- The [Exposure SQL Model](/experiments/concepts/exposure_sql/) filters, joins, aggregates, or applies timestamp constraints in a way that drops assignment subjects from one variant more often than another.
+- Upstream assignment logging loses or misrecords assignments at different rates by variant, such as treatment-dependent telemetry loss or mapping one variant to the wrong variant key.
+- The analyzed assignment population depends on a post-assignment condition affected by the variant, such as a trigger, behavioral bot rule, eligibility event, or missing control counterfactual.
 
 ### How to resolve
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
-2. For Datadog Feature Flags, review the flag environment, targeting rule order, allocation history, variant weights, SDK targeting key, and exposure telemetry path.
-3. For warehouse-native experiments, compare the expected variant weights in Datadog with the upstream assignment probabilities, then inspect the Exposure SQL Model, exposure table, joins, filters, and timestamp windows.
+2. For Datadog Feature Flags, review the relative variant-weight history, mixed assignments, and whether exposure events reach Datadog at the same rate for every variant.
+3. For warehouse-native experiments, compare the expected exposure fraction for each variant in Datadog with the upstream assignment probabilities. Compare raw assignment counts by variant before and after the Exposure SQL Model applies joins, filters, aggregation, and timestamp constraints.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
 
