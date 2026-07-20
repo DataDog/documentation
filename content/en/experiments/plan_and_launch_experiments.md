@@ -156,7 +156,7 @@ To modify the statistical analysis plan:
 1. Select a method from the {{< ui >}}Confidence interval method{{< /ui >}} dropdown.
    - If you select {{< ui >}}Bayesian{{< /ui >}}, choose a {{< ui >}}Standard Deviation of Prior{{< /ui >}} from the dropdown.
 1. Select a percentage from the {{< ui >}}Confidence level{{< /ui >}} dropdown.
-1. To disable CUPED, toggle off {{< ui >}}CUPED calculation{{< /ui >}}. CUPED is enabled by default and uses pre-experiment data from each subject to reduce the variance of the metrics and improve experiment sensitivity.
+1. To disable [CUPED][12], toggle off {{< ui >}}CUPED calculation{{< /ui >}}. CUPED is enabled by default and uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity.
 1. To reduce the risk of false positives, toggle on {{< ui >}}Multiple testing correction{{< /ui >}}. This setting adjusts for the increased risk across multiple metric comparisons, producing more conservative results.
    - This setting is not available when you use the {{< ui >}}Bayesian{{< /ui >}} method.
 1. Click {{< ui >}}Reset to Default{{< /ui >}} to restore the default settings. If your organization has configured a company default, Datadog restores those settings instead.
@@ -207,3 +207,4 @@ See [Reading Experiment Results][5] to review your data.
 [9]: /getting_started/feature_flags/#create-your-first-feature-flag
 [10]: https://docs.datadoghq.com/feature_flags/client#context-attribute-requirements
 [11]: /experiments/statistics/analysis_methods
+[12]: /experiments/statistics/cuped
