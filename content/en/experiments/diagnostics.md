@@ -161,14 +161,14 @@ Datadog can flag results when a specific segment performs significantly worse th
 
 ## Analysis pipeline failure
 
-If a customer warehouse query fails during experiment analysis, current results cannot be computed.
+If the experiment analysis pipeline fails, current results cannot be computed. For warehouse-backed analysis, the customer-controlled parts of the pipeline SQL are the assignment and metric SQL definitions; Datadog generates the rest of the pipeline SQL.
 
 ### How to resolve
 
-- Review the details shown in the experiment.
-- Fix configuration or data source issues, such as invalid SQL, missing warehouse permissions, or unavailable warehouse tables.
-- Rerun experiment analysis.
-- If the same failure persists, contact [Datadog support][1] with the experiment URL and details shown in the experiment.
+1. Click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) on the failed diagnostic. Bits reviews the pipeline error, failed warehouse queries, and the experiment's assignment and metric SQL definitions. It identifies which definition, if any, is most likely responsible and suggests a specific fix. If the definitions do not appear responsible, Bits describes other possible causes.
+2. Review the failed query and apply the recommended fix. Depending on the error, you might need to correct an SQL definition, restore warehouse permissions, or make an unavailable source table accessible.
+3. Rerun experiment analysis.
+4. If the same failure persists, contact [Datadog support][1] with the experiment URL and failure details.
 
 ## Further reading
 
