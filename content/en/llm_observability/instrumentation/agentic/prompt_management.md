@@ -10,11 +10,12 @@ Integrate the Datadog managed prompt and environment specified by the user into 
 
 1. Prompt Management runtime retrieval is supported only for Python applications. If the target application is not Python, explain that the integration is unsupported and stop. Do not implement a direct HTTP client or rewrite the application in Python.
 2. Inspect the application before modifying it. Identify its package manager, configuration and secret-management workflow, startup command, existing Datadog instrumentation, LLM provider, prompt construction, and provider call site.
-3. If multiple prompt or provider call sites are plausible, ask the user which one to modify and wait for an answer before editing.
-4. Preserve the application's existing package manager, configuration workflow, startup command, provider, model, and business behavior. If the repository has no applicable configuration or secret-management convention, ask the user which approach to use and wait for an answer instead of introducing one.
-5. Keep managed-prompt retrieval at the application's existing prompt-construction boundary. Do not move prompt construction into the provider call site or duplicate it there when a helper, library, or other component already owns it.
-6. If the checked-out repository is a library and an unavailable host application owns configuration, secrets, instrumentation, or startup, ask for the host application and wait. Do not modify the library unless the user explicitly authorizes a library-only change.
-7. Treat any API or application key supplied in the user's prompt as a secret. Do not commit it or repeat it in source code, documentation, or the final response.
+3. Use the prompt ID, environment, prompt type, and variable names supplied in the user's prompt without asking the user to confirm them.
+4. If multiple prompt or provider call sites are plausible, ask the user which one to modify and wait for an answer before editing.
+5. Preserve the application's existing package manager, configuration workflow, startup command, provider, model, and business behavior. Existing ambient environment-variable usage, such as `os.getenv()`, is a configuration convention even when no `.env` or configuration file exists. Extend that convention without asking. If the repository has no applicable convention, ask the user which approach to use and wait for an answer instead of introducing one.
+6. Keep managed-prompt retrieval at the application's existing prompt-construction boundary. Do not move prompt construction into the provider call site or duplicate it there when a helper, library, or other component already owns it.
+7. If the checked-out repository is a library and an unavailable host application owns configuration, secrets, instrumentation, or startup, ask for the host application and wait. Do not modify the library unless the user explicitly authorizes a library-only change.
+8. Treat any API or application key supplied in the user's prompt as a secret. Do not commit it or repeat it in source code, configuration, documentation, logs, or the final response.
 
 ## Install the Prompt Management SDK
 
@@ -53,11 +54,11 @@ DD_LLMOBS_AGENTLESS_ENABLED=1
 
 If configuration is available before process startup, preserve the existing startup workflow and use `ddtrace-run` if needed for automatic instrumentation. If the application loads configuration in Python, load it before importing `ddtrace.auto`, then run the application's normal Python command. Do not combine application-level configuration loading with `ddtrace-run`.
 
-If the user's prompt does not include credentials, complete the code and configuration references where possible, but report that live prompt resolution and tracking could not be verified.
+If the user's prompt does not include credentials, do not ask the user to provide them. Complete the code and configuration references where possible, then report that live prompt resolution and tracking could not be verified.
 
 ## Retrieve and format the managed prompt
 
-1. Use the prompt type and variable names supplied in the user's prompt. If that metadata is missing, ask the user for it instead of guessing.
+1. Use the prompt ID, prompt type, and variable names supplied in the user's prompt without asking the user to confirm them. If required metadata is missing, ask for it instead of guessing.
 2. Confirm that every managed-prompt variable has a meaningful value available at the selected prompt-construction boundary. If the application cannot supply one, ask the user how to map it and wait for an answer.
 3. Import `LLMObs` from `ddtrace.llmobs` at the existing prompt-construction boundary.
 4. Replace the existing prompt construction there with `LLMObs.get_prompt()` using the prompt ID supplied by the user.

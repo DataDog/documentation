@@ -58,9 +58,16 @@ Prompt variables: <PROMPT_VARIABLES>
 When configuring the environment, use the following values:
 
 DD_SITE={{< region-param key="dd_site" code="true" >}}
+DD_ENV=<DEPLOYMENT_ENVIRONMENT>
+```
+
+If the user chooses to include selected credentials, append the following block to the copied prompt:
+
+```text
+Selected Datadog credentials:
+
 DD_API_KEY=<DATADOG_API_KEY>
 DD_APP_KEY=<DATADOG_APP_KEY>
-DD_ENV=<DEPLOYMENT_ENVIRONMENT>
 
 Treat the API and application key values as secrets. Do not repeat them in source code, committed configuration, documentation, or your response.
 ```
