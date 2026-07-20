@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Datadog runs diagnostic checks with experiment analysis to help you identify data quality, randomization, and configuration issues before you make a rollout decision. When a check finds an issue, Datadog surfaces it in the experiment results experience as a warning, metric message, or failed diagnostic check.
+Datadog runs diagnostic checks with experiment analysis to help you identify data quality, randomization, and configuration issues before you make a rollout decision. When a check finds an issue, Datadog displays it on the experiment results page as a warning, metric message, or failed diagnostic check.
 
 Start with any failed diagnostic check or warning banner before interpreting lift, confidence intervals, or global lift.
 
@@ -39,36 +39,36 @@ For experiments backed by Datadog Feature Flags, common causes include:
 - The traffic split (the relative percentages assigned to variants) changed after launch, for example from `90/10` to `50/50`, while assignments made under the earlier split remain in the analysis window.
 - Exposure events are lost at different rates by variant after assignment. For example, a variant-specific redirect or crash can prevent buffered exposure events from reaching Datadog.
 
-Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, ramp from `10/10` of eligible subjects to `50/50`, increasing both variants proportionally while keeping their relative split equal.
+Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, increase traffic exposure from a `10/10` split to a `50/50` split. This increases both variant percentages proportionally while preserving their relative split.
 
-Changing targeting rules, the targeting key, or traffic exposure does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or causes a different diagnostic, such as missing or mixed assignments.
+Changing targeting rules, the targeting key, or traffic exposure does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or can cause a different diagnostic. For example, an inconsistent SDK `targetingKey` can cause **Missing metric data** when assignments and metric events no longer join to the same subject. It causes **Mixed assignments** only if the same recorded subject receives more than one variant.
 
 For warehouse-native experiments, common causes include:
 
 - The expected exposure fraction for each variant configured in Datadog does not match the assignment probability used by the upstream randomization system.
 - The [Exposure SQL Model](/experiments/concepts/exposure_sql/) filters, joins, aggregates, or applies timestamp constraints in a way that drops assignment subjects from one variant more often than another.
 - Upstream assignment logging loses or misrecords assignments at different rates by variant, such as treatment-dependent telemetry loss or mapping one variant to the wrong variant key.
-- The analyzed assignment population depends on a post-assignment condition affected by the variant, such as a trigger, behavioral bot rule, eligibility event, or missing control counterfactual.
+- The analysis includes subjects based on behavior that occurs after assignment and can be affected by the variant. For example, a treatment-dependent eligibility event or bot filter can exclude one variant at a higher rate.
 
 ### How to resolve
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
-2. For Datadog Feature Flags, review the traffic split history, mixed assignments, and whether exposure events reach Datadog at the same rate for every variant.
+2. For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}](/feature_flags/concepts/flag_history/#individual-flag-history) for traffic split or variant changes, check for mixed assignments, and confirm that exposure events reach Datadog at the same rate for every variant.
 3. For warehouse-native experiments, compare the expected exposure fraction for each variant in Datadog with the upstream assignment probabilities. Compare raw assignment counts by variant before and after the Exposure SQL Model applies joins, filters, aggregation, and timestamp constraints.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
-5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
+5. Fix the source of the imbalance, then rerun experiment analysis.
 
 ## Missing assignments
 
-If Datadog has no assignment data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified experiment key and variant keys.
+If Datadog has no assignment data for an experiment, results cannot be computed. This can happen when a feature flag is not evaluating, traffic does not reach the experiment targeting rule, or a warehouse Exposure SQL Model returns no rows in the analysis window for the specified **Experiment ID** and **Variant ID** values.
 
-For experiments that use Datadog Feature Flags with warehouse metrics, Datadog can also warn when the Datadog assignment source has assignments but the warehouse-native assignment source has none. In this case, warehouse metric results are not available until the exposure export job has run.
+For experiments backed by Datadog Feature Flags that use warehouse metrics, Datadog can record assignments before it has synchronized those exposures to the `g_exposures` table in your warehouse. Warehouse metric results remain unavailable until synchronization completes.
 
 ### How to resolve
 
-- For experiments backed by Datadog Feature Flags, confirm that the flag is enabled in the correct environment and that the application is evaluating the flag for the expected subjects. Check the flag's real-time metric overview for exposure events.
-- For warehouse-native experiments, verify that the Exposure SQL Model returns assignment rows for the experiment key, variant keys, subject key, and timestamp range.
-- If the experiment was just launched, wait for the next analysis run or manually run an update.
+- For experiments backed by Datadog Feature Flags, confirm that the flag is enabled in the correct environment and that the application is evaluating the flag for the expected subjects. Check the flag's {{< ui >}}Real-time metric overview{{< /ui >}} for exposure events.
+- For warehouse-native experiments, verify that the Exposure SQL Model returns rows with the expected **Subject Key**, **Timestamp**, **Experiment ID**, and **Variant ID** values.
+- If the experiment was just launched, wait for the next analysis run or click {{< ui >}}Run an update now{{< /ui >}}.
 
 ## Mixed assignments
 
@@ -76,8 +76,8 @@ If the same subject is assigned to more than one variant in the same experiment,
 
 ### How to resolve
 
-- For Feature Flags experiments, review the flag's [{{< ui >}}Version history{{< /ui >}}](/feature_flags/concepts/flag_history/#individual-flag-history) for unexpected changes after launch, especially changes to the experiment targeting rule, traffic split, or variants.
-- For warehouse-native experiments, make sure the experiment key column in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
+- For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}](/feature_flags/concepts/flag_history/#individual-flag-history) for unexpected changes after launch, especially changes to the experiment targeting rule, traffic split, or variants.
+- For warehouse-native experiments, make sure the column mapped to **Experiment ID** in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
 - If the warehouse-native [Exposure SQL Model](/experiments/concepts/exposure_sql/) intentionally reads flag-evaluation logs, filter out evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
 - For warehouse-native experiments, check for conflicting variant records in the assignment data.
 - Fix the source of conflicting assignments, then rerun analysis.
@@ -103,7 +103,7 @@ Datadog uses the dimension value from the subject's first assignment record. Lat
 
 ## Missing metric data
 
-Datadog reports **Missing metric data** when assignments exist but experiment analysis finds no metric data that satisfies this diagnostic. For simple and ratio metrics, the check passes when at least one contributing pre-winsorized aggregation contains a non-zero value. If all contributing values are zero or null, the primary metric fails and a secondary or guardrail metric warns. For percentile metrics, any non-null result moment or percentile field, including zero, counts as data. If Datadog cannot determine whether a metric is primary, the check fails closed.
+Datadog reports **Missing metric data** when assignments exist but experiment analysis finds no usable metric values. For simple and ratio metrics, at least one contributing value before outlier handling must be non-zero. If all contributing values are zero or null, the diagnostic fails for a primary metric and warns for a secondary or guardrail metric. For percentile metrics, zero is a valid result; only null results count as missing. If Datadog cannot determine whether a metric is primary, it treats missing data as a failure.
 
 This diagnostic does not necessarily mean that the source event never fired. Events can exist but fail the metric's filters, fail to join to experiment assignments, or produce only zero or null metric values.
 
@@ -121,13 +121,13 @@ This diagnostic does not necessarily mean that the source event never fired. Eve
 1. Open the metric and confirm that the event name, aggregation, filters, and data source are correct. Check the metric event volume chart for recent matching data.
 2. Compare an assigned subject's identifier with the identifier on its metric events. Confirm that the configured subject type attribute or mapped warehouse column contains the same value as the SDK `targetingKey` or the assignment subject column configured in the Exposure SQL Model.
 3. Confirm that metric events occur after the subject's first assignment and within the experiment analysis window.
-4. If [Source Code Integration](/source_code/) is configured, click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
+4. For an experiment backed by Datadog Feature Flags, if [Source Code Integration](/source_code/) is configured, click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
 5. For warehouse metrics, run the Metric SQL Model or query its source table directly.
 6. Fix the metric definition, identity mapping, event timing, or instrumentation issue, then rerun experiment analysis.
 
 ## Metric winsorized to zero
 
-Outlier handling caps extreme metric values to reduce variance. Datadog warns when every non-dimensional variant has a zero or null post-winsorization aggregation and at least one affected aggregation had non-zero raw values before winsorization. For ratio metrics, Datadog checks the numerator and denominator separately. This diagnostic has no percentage or minimum-sample threshold and does not fail an experiment.
+Outlier handling caps extreme metric values to reduce variance. Datadog warns when outlier handling leaves every variant's overall result at zero or null even though at least one raw value was non-zero before outlier handling. For ratio metrics, Datadog checks the numerator and denominator separately. This diagnostic has no percentage or minimum-sample threshold and does not fail an experiment.
 
 This can happen when only a small number of subjects perform the metric event and outlier handling caps all observed values to zero. For example, if a metric has a 99th-percentile upper winsorization bound and fewer than 1% of subjects have a non-zero value, the upper bound is zero. Every non-zero value is then treated as an outlier and capped at zero.
 
@@ -136,7 +136,7 @@ For percentile winsorization, Datadog can calculate bounds using all assigned su
 ### How to resolve
 
 1. Open the metric.
-2. Review **Outlier handling** under the metric's experiment settings. For a sparse metric with percentile winsorization, calculate the bounds from non-zero values only.
+2. Review {{< ui >}}Outlier handling{{< /ui >}} under {{< ui >}}Experiment settings{{< /ui >}}. For a sparse metric with percentile winsorization, calculate the bounds from non-zero values only.
 3. It can be tempting to resolve the warning by changing the winsorization percentile or disabling outlier handling. However, metrics that trigger this diagnostic tend to have low statistical power. Use the [sample size calculator](/experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional) to estimate the experiment duration and minimum detectable effect before relying on the metric for a decision.
 4. Rerun experiment analysis after updating the metric.
 
@@ -159,14 +159,14 @@ Datadog calculates two-sided sequential normal-mixture confidence sequences for 
 1. Confirm that pre-experiment data is available and representative for each variant, and check whether the metric definition changed during the pre-experiment window.
 2. Compare raw assignment and metric timestamps at their original granularity and in a consistent timezone. Check whether a daily rollup, timestamp conversion, or daylight-saving transition can move post-exposure events into the pre-experiment window.
 3. Audit subject identity mappings. Make sure post-exposure behavior, such as logging in, cannot determine which subjects have pre-experiment history available for analysis.
-4. Verify that assignment is independent of pre-treatment outcomes, subject attributes, and earlier treatments. Use deterministic bucketing based on both the subject identifier and an experiment-specific salt or key. This keeps a subject in the same variant within an experiment without reusing the same assignment pattern across experiments.
+4. Verify that assignment is independent of pre-treatment outcomes, subject attributes, and earlier treatments. For experiments backed by Datadog Feature Flags, keep the SDK `targetingKey` stable; Datadog uses the flag key and `targetingKey` to keep a subject in the same rollout bucket. For warehouse-native experiments, use a deterministic assignment method that combines the subject identifier with an experiment-specific salt or key. This keeps a subject in the same variant within an experiment without reusing the same assignment pattern across experiments.
 5. Fix the identity, timestamp, randomization, or data-processing issue, then rerun analysis. Disabling CUPED does not make the experiment valid when the imbalance comes from selection bias, post-exposure data leakage, or broken randomization.
 
 ## Implausible prior
 
 For Bayesian analysis, Datadog runs a two-tailed prior-predictive check on relative lift. The check accounts for both the prior's dispersion and the estimate's sampling uncertainty. Datadog warns when, under the prior predictive distribution, there is less than a 1% chance of observing a lift at least as extreme in either direction as the lift estimated in the experiment. Datadog tests each eligible metric-treatment comparison without a multiple-testing correction. The check requires a positive, finite standard error but has no explicit minimum sample size. A warning indicates that the observed effect is surprising under the selected prior.
 
-For example, many conversion rate experiments have true lifts below 5%, so the default Normal prior with mean 0 and standard deviation 0.05 can be a reasonable choice. If an experiment fixes a broken checkout page that prevents most users from converting, a much larger lift may be plausible. In that case, the default prior can be too conservative and shrink the estimated effect too much.
+For example, many conversion rate experiments have true lifts below 5%, so the default normal prior with mean 0 and standard deviation 0.05 can be a reasonable choice. If an experiment fixes a broken checkout page that prevents most users from converting, a much larger lift may be plausible. In that case, the default prior can be too conservative and shrink the estimated effect too much.
 
 ### How to resolve
 
@@ -180,7 +180,7 @@ Datadog warns when a segment's point estimate is opposite the metric's desired c
 
 For each metric, treatment variant, and dimension, Datadog compares each segment lift with the inverse-variance-weighted average of valid segment lifts in that same combination. A segment warns only when a sequential confidence sequence for its difference from the weighted average lies entirely in the worse direction and its point estimate is opposite the desired change.
 
-Datadog uses a family significance level (alpha) of `0.05`, divided by the number of valid segment comparisons in the analysis run using a Bonferroni correction. The check requires at least two segments with positive variance for the same metric, treatment variant, and dimension. Segment-level degradation produces a warning, not a failed diagnostic.
+Datadog applies a Bonferroni correction by dividing the family significance level (alpha) of `0.05` by the number of segment comparisons that pass initial summary-statistics validation. Comparisons skipped during later checks remain in the denominator, making the threshold more conservative. The check requires at least two segments with positive variance for the same metric, treatment variant, and dimension. Segment-level degradation produces a warning, not a failed diagnostic.
 
 ### How to resolve
 
@@ -190,14 +190,17 @@ Datadog uses a family significance level (alpha) of `0.05`, divided by the numbe
 
 ## Analysis pipeline failure
 
-Datadog reports **Analysis pipeline failure** when a root analysis task fails and is linked to a failed customer-warehouse query. Current results cannot be computed. The customer-controlled parts of the pipeline SQL are the assignment and metric SQL definitions; Datadog generates the rest of the pipeline SQL.
+Experiment analysis can use Product Analytics and RUM data in Datadog or warehouse native mode. **Analysis pipeline failure** applies only to experiments that use warehouse metrics. Datadog reports this diagnostic when a customer warehouse query fails, so current warehouse results cannot be computed. Datadog does not report internal Product Analytics or RUM analysis failures with this diagnostic.
+
+The SQL you define depends on how the experiment is randomized. For experiments backed by Datadog Feature Flags, Datadog synchronizes assignments to the `g_exposures` table, and you define Metric SQL Models. For warehouse-native experiments, you define both the Exposure SQL Model and Metric SQL Models. Datadog generates the remaining pipeline SQL.
 
 ### How to resolve
 
-1. Click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) on the failed diagnostic. Bits reviews the pipeline error, failed warehouse queries, and the experiment's assignment and metric SQL definitions. It identifies which definition, if any, is most likely responsible and suggests a specific fix. If the definitions do not appear responsible, Bits describes other possible causes.
-2. Review the failed query and apply the recommended fix. Depending on the error, you might need to correct an SQL definition, restore warehouse permissions, or make an unavailable source table accessible.
-3. Rerun experiment analysis.
-4. If the same failure persists, contact [Datadog support][1] with the experiment URL and failure details.
+1. Click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) on the failed diagnostic. Bits reviews the pipeline error, failed warehouse queries, and any SQL models configured for the experiment. It identifies the most likely cause and suggests a specific fix.
+2. For an experiment backed by Datadog Feature Flags, confirm that exposures have synchronized to `g_exposures`, then review the failed query, Metric SQL Models, warehouse connection and permissions, and source-table availability.
+3. For a warehouse-native experiment, review the failed query, Exposure SQL Model, Metric SQL Models, warehouse connection and permissions, and source-table availability.
+4. Apply the fix, then rerun experiment analysis.
+5. If the same failure persists, contact [Datadog support][1] with the experiment URL and failure details.
 
 ## Further reading
 
