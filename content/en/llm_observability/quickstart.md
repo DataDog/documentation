@@ -70,6 +70,8 @@ Follow the setup instructions in Datadog's [in-app onboarding flow](https://app.
    ddtrace-run <your application command>
    ```
 
+   **Note**: `DD_LLMOBS_ML_APP` is deprecated as of `ddtrace` v2.x. Use `DD_SERVICE` to identify your agent service. `DD_LLMOBS_ML_APP` is still accepted for backward compatibility but will be removed in v5.0.0.
+
 After enabling, the SDK automatically traces calls to [supported Python frameworks][auto-instr-py] such as OpenAI, LangChain, LangGraph, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][sdk] to trace your LLM calls directly.
 
 [auto-instr-py]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
@@ -92,6 +94,8 @@ After enabling, the SDK automatically traces calls to [supported Python framewor
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" <your application command>
    ```
+
+   **Note**: `DD_LLMOBS_ML_APP` is deprecated as of `dd-trace` v5.x. Use `DD_SERVICE` to identify your agent service. `DD_LLMOBS_ML_APP` is still accepted for backward compatibility but will be removed in a future major version.
 
 After enabling, the SDK automatically traces calls to [supported Node.js frameworks][1] such as OpenAI, LangChain, Vercel AI SDK, Bedrock, Anthropic, and more. If your framework is not listed, add [manual instrumentation][2] to trace your LLM calls directly.
 
@@ -193,6 +197,8 @@ See below for a simple application that can be used to begin exploring the Agent
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run app.py
    ```
+
+   **Note**: `DD_LLMOBS_ML_APP` is deprecated as of `ddtrace` v2.x. Use `DD_SERVICE` to identify your agent service. `DD_LLMOBS_ML_APP` is still accepted for backward compatibility but will be removed in v5.0.0.
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -225,6 +231,8 @@ See below for a simple application that can be used to begin exploring the Agent
    DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
    ```
+
+   **Note**: `DD_LLMOBS_ML_APP` is deprecated as of `dd-trace` v5.x. Use `DD_SERVICE` to identify your agent service. `DD_LLMOBS_ML_APP` is still accepted for backward compatibility but will be removed in a future major version.
 
 {{% /tab %}}
 {{< /tabs >}}
