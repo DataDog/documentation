@@ -20,7 +20,7 @@ Automatic multi-line detection allows the Agent to detect and aggregate common m
 
 ## Getting started
 
-Auto multi-line detection is enabled by default. To disable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
+Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
