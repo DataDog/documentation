@@ -62,7 +62,7 @@ If an experiment has `k` treatment variants, `m` total metrics, and primary metr
 
 | Comparison type | Per-comparison alpha |
 | --- | --- |
-| Primary metric, when it is the only metric | `alpha / k` |
+| Primary metric only | `alpha / k` |
 | Primary metric, when there are remaining metrics | `(alpha * gamma) / k` |
 | Each remaining metric | `(alpha * (1 - gamma)) / ((m - 1) * k)` |
 
