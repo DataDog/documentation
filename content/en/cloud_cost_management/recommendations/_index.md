@@ -693,7 +693,7 @@ Each recommendation includes a **Risk** score and a **Level of Effort** score to
 | {{< ui >}}Medium{{< /ui >}} | Recoverable but takes effort: data or resources restorable via snapshot or re-provisioning, impact scoped to one app or workload, only brief disruption. |
 | {{< ui >}}High{{< /ui >}} | Hard to undo or high-impact if wrong: irreversible data loss, a resource that can't be recreated, wide blast radius, or possible downtime to a live workload. |
 
-{{< ui >}}Effort{{< /ui >}} reflects how much work is required to apply a recommendation. Datadog evaluates factors such as whether an automated action or a [Bits Code][14] fix is available, the number of implementation steps, and whether coordination across teams is required.
+{{< ui >}}Effort{{< /ui >}} reflects how much work is required to apply a recommendation. Datadog evaluates factors such as the number of implementation steps or whether coordination across teams is required.
 
 | Level of Effort | Description |
 |--------|-------------|
