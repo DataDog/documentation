@@ -272,6 +272,7 @@ Makefile.config
 # data
 data/permissions.json
 data/agent_config.json
+data/agent_config_reference.json
 data/workflow_bundles.json
 data/python_action_libs.json
 
