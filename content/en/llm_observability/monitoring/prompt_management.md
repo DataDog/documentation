@@ -36,13 +36,12 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 
 ### Install the Preview SDK build
 
-The released `ddtrace` package does not yet include Prompt Management. During Preview evaluation, install the temporary build in the Python environment used by your application:
+The released `ddtrace` package does not yet include Prompt Management. During Preview evaluation, install the temporary build in the Python environment used by your application using these package coordinates:
 
-{{< code-block lang="shell" >}}
-curl -fsSL https://dd-trace-py-builds.s3.amazonaws.com/main/install.sh | bash
-{{< /code-block >}}
+- Package: `ddtrace==4.13.0rc1`
+- Package source: `https://dd-trace-py-builds.s3.amazonaws.com/main/index.html`
 
-This temporary installation procedure will be replaced with a released minimum `ddtrace` version before Prompt Management becomes generally available.
+This temporary package version and source will be replaced with the standard released `ddtrace` package before Prompt Management becomes generally available.
 
 ## Use a managed prompt in Python
 
