@@ -24,7 +24,7 @@ Start with any failed diagnostic check or warning banner before interpreting lif
 
 ## Traffic imbalance
 
-A traffic imbalance, also known as a sample ratio mismatch (SRM), means the observed traffic split across variants is significantly different from the split configured for the experiment.
+A traffic imbalance, also known as a sample ratio mismatch (SRM), means the observed assignments across variants differ significantly from the expected variant weights used for experiment analysis.
 
 Treat SRM as a blocker for interpreting results. It indicates that the experiment's effective randomization, exposure logging, or analysis population is biased. Until you find and fix the root cause, lift, confidence intervals, and global lift cannot support valid causal inference.
 
@@ -32,7 +32,7 @@ Treat SRM as a blocker for interpreting results. It indicates that the experimen
 
 For experiments backed by Datadog Feature Flags, common causes include:
 
-- A flag rule, targeting condition, or rollout change that sends users around the experiment rule during the experiment.
+- A flag rule, targeting condition, allocation change, or rollout change that sends users around the experiment rule during the experiment.
 - An inconsistent targeting key, subject identifier, or SDK evaluation path that changes which variant a subject can receive.
 - Variant behavior that changes whether exposure telemetry is generated or received, such as redirects, crashes, slower page loads, or conditional flag evaluation.
 - Manual interference, such as pausing a variant, changing allocation mid-run, or forcing users into a variant outside the experiment flow.
@@ -47,7 +47,7 @@ For warehouse-native experiments, common causes include:
 ### How to resolve
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
-2. For Datadog Feature Flags, review the flag environment, targeting rule order, allocation history, SDK targeting key, and exposure telemetry path.
+2. For Datadog Feature Flags, review the flag environment, targeting rule order, allocation history, variant weights, SDK targeting key, and exposure telemetry path.
 3. For warehouse-native experiments, compare the Datadog exposure fraction with the upstream assignment probabilities, then inspect the Exposure SQL Model, exposure table, joins, filters, and timestamp windows.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then restart or rerun the experiment analysis.
@@ -62,25 +62,15 @@ If Datadog has no assignment data for an experiment, results cannot be computed.
 - For warehouse-native experiments, verify that the Exposure SQL Model returns assignment rows for the experiment key, variant keys, subject key, and timestamp range.
 - If the experiment was just launched, wait for the next analysis run or manually run an update.
 
-## Missing flag evaluations
-
-For experiments backed by Datadog Feature Flags, Datadog can report **Missing flag evaluations** when no flag evaluations were recorded in the analysis window. This check does not apply to warehouse-native experiments.
-
-### How to resolve
-
-- Confirm that the feature flag is enabled in the correct environment.
-- Confirm that the application initializes the Feature Flags SDK and evaluates the flag for the expected subjects.
-- Check the flag's real-time metric overview for evaluation and exposure activity.
-- Verify that the flag key and experiment configuration match the flag your application evaluates.
-
 ## Mixed assignments
 
 If the same subject is assigned to more than one variant in the same experiment, Datadog excludes that subject from analysis. A high number of mixed assignments can make results incomplete or unreliable.
 
 ### How to resolve
 
-- For Feature Flags experiments, confirm that subjects can match only one experiment variant.
-- Review targeting rules, rollout stages, and any application code that changes targeting keys.
+- For Feature Flags experiments, check whether the same subject can emit exposure events with different variant keys for the experiment allocation. This can happen if the application uses an unstable targeting key, subject identifier, or evaluation context during the assignment window.
+- For warehouse-native experiments, make sure the experiment ID column in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
+- For warehouse-native experiments, check whether the Exposure SQL Model returns flag evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
 - For warehouse-native experiments, check for duplicate or conflicting variant records in the assignment data.
 - Fix the source of conflicting assignments, then rerun analysis.
 
@@ -114,22 +104,6 @@ If the primary metric has no data, the diagnostic blocks the experiment decision
 2. Check the metric event volume chart for recent data.
 3. For Product Analytics or RUM metrics, inspect sessions for exposed users and confirm that metric events occur after feature flag evaluation.
 4. Continue running the experiment until data is collected, or fix instrumentation and rerun analysis.
-
-## Metric configuration warnings
-
-A metric warning icon can appear when Datadog cannot calculate a metric as configured.
-
-Examples include:
-
-- The metric, underlying measure, or property was deleted.
-- The metric's subject type does not match the experiment's analysis subject.
-- Metric configuration was not loaded or is not supported for a specific calculation, such as global lift.
-
-### How to resolve
-
-- Open the metric and confirm that its event, measure, filters, and subject type are still valid.
-- Make sure the metric subject type matches the experiment's analysis subject.
-- Replace deleted measures or properties, then rerun analysis.
 
 ## Metric winsorized to zero
 
@@ -177,12 +151,12 @@ Datadog can flag results when a specific segment performs significantly worse th
 
 ## Analysis pipeline failure
 
-If Datadog cannot complete experiment analysis, current results cannot be computed.
+If a customer warehouse query fails during experiment analysis, current results cannot be computed.
 
 ### How to resolve
 
 - Review the details shown in the experiment.
-- Fix configuration or data source issues, such as invalid SQL, missing warehouse permissions, or unavailable metric sources.
+- Fix configuration or data source issues, such as invalid SQL, missing warehouse permissions, or unavailable warehouse tables.
 - Rerun experiment analysis.
 - If the same failure persists, contact [Datadog support][1] with the experiment URL and details shown in the experiment.
 
