@@ -3,6 +3,12 @@ title: Services
 description: View where API findings, vulnerabilities, and runtime signals converge by service.
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 The [Services][1] explorer aggregates findings, vulnerabilities, and runtime signals by service, so you can assess each service's risk and security coverage.
 
 Review your services for the following:

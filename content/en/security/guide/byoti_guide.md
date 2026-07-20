@@ -1,6 +1,7 @@
 ---
 title: Bring Your Own Threat Intelligence
 disable_toc: false
+site_support_id: byoti
 further_reading:
 - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
   tag: "Blog"
