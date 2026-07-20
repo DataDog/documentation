@@ -861,6 +861,15 @@ components:
       schema:
         example: "00000000-0000-0000-0000-000000000000"
         type: string
+    IncidentUserDefinedRoleIDPathParameter:
+      description: The UUID of the incident user-defined role.
+      in: path
+      name: role_id
+      required: true
+      schema:
+        example: "00000000-0000-0000-0000-000000000002"
+        format: uuid
+        type: string
     Include:
       description: Include relationship data.
       explode: true
@@ -3541,6 +3550,196 @@ components:
       type: string
       x-enum-varnames:
         - LOGS_SERVICES
+    AWSMetricNameFilterPreviewDDName:
+      description: A Datadog metric name and whether it is filtered.
+      properties:
+        filtered:
+          description: Whether this Datadog metric name is filtered out.
+          example: true
+          type: boolean
+        name:
+          description: The Datadog metric name.
+          example: "aws.ec2.network_in"
+          type: string
+      required:
+        - name
+        - filtered
+      type: object
+    AWSMetricNameFilterPreviewFilterMatch:
+      description: A metric name filter pattern and how many metrics it matched.
+      properties:
+        match_count:
+          description: The number of Datadog metric names matched by this pattern.
+          example: 1
+          format: int64
+          type: integer
+        pattern:
+          description: The metric name filter pattern.
+          example: "aws.ec2.network_in"
+          type: string
+      required:
+        - pattern
+        - match_count
+      type: object
+    AWSMetricNameFilterPreviewMetric:
+      description: A CloudWatch metric and the Datadog metric names it produces.
+      properties:
+        cw_name:
+          description: The CloudWatch metric name.
+          example: "NetworkIn"
+          type: string
+        dd_names:
+          description: The Datadog metric names produced from this CloudWatch metric.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilterPreviewDDName"
+          type: array
+      required:
+        - cw_name
+        - dd_names
+      type: object
+    AWSMetricNameFilterPreviewNamespace:
+      description: The metric name filter preview for a single namespace.
+      properties:
+        filters:
+          description: The metric name filter patterns evaluated for this namespace and how many metrics they matched.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilterPreviewFilterMatch"
+          type: array
+        metrics:
+          description: |-
+            The CloudWatch metrics collected for this namespace and whether each resulting
+            Datadog metric is filtered.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilterPreviewMetric"
+          type: array
+        namespace:
+          description: The AWS CloudWatch namespace.
+          example: "AWS/EC2"
+          type: string
+      required:
+        - namespace
+        - filters
+        - metrics
+      type: object
+    AWSMetricNameFilterPreviewRequest:
+      description: AWS metric name filter preview request body.
+      properties:
+        data:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewRequestData"
+      required:
+        - data
+      type: object
+    AWSMetricNameFilterPreviewRequestAttributes:
+      description: AWS metric name filter preview request attributes.
+      properties:
+        metric_name_filters:
+          description: The metric name filters to preview.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilters"
+          type: array
+      required:
+        - metric_name_filters
+      type: object
+    AWSMetricNameFilterPreviewRequestData:
+      description: AWS metric name filter preview request data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewRequestAttributes"
+        type:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewType"
+      required:
+        - type
+        - attributes
+      type: object
+    AWSMetricNameFilterPreviewResponse:
+      description: AWS metric name filter preview response body.
+      properties:
+        data:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewResponseData"
+      required:
+        - data
+      type: object
+    AWSMetricNameFilterPreviewResponseAttributes:
+      description: AWS metric name filter preview response attributes.
+      properties:
+        namespaces:
+          description: The list of namespaces affected by the previewed metric name filters.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilterPreviewNamespace"
+          type: array
+      required:
+        - namespaces
+      type: object
+    AWSMetricNameFilterPreviewResponseData:
+      description: AWS metric name filter preview response data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewResponseAttributes"
+        id:
+          $ref: "#/components/schemas/AWSAccountConfigID"
+        type:
+          $ref: "#/components/schemas/AWSMetricNameFilterPreviewType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    AWSMetricNameFilterPreviewType:
+      default: "metric_name_filter_preview"
+      description: The `AWSMetricNameFilterPreviewResponseData` `type`.
+      enum:
+        - metric_name_filter_preview
+      example: "metric_name_filter_preview"
+      type: string
+      x-enum-varnames:
+        - METRIC_NAME_FILTER_PREVIEW
+    AWSMetricNameFilters:
+      description: |-
+        AWS CloudWatch metric name filter for a single namespace.
+        Exactly one of `include_only` or `exclude_only` must be set.
+      oneOf:
+        - $ref: "#/components/schemas/AWSMetricNameFiltersIncludeOnly"
+        - $ref: "#/components/schemas/AWSMetricNameFiltersExcludeOnly"
+    AWSMetricNameFiltersExcludeOnly:
+      description: Exclude metric names matching one of these patterns for a single namespace.
+      properties:
+        exclude_only:
+          description: Exclude metric names matching one of these patterns.
+          example:
+            - "aws.ec2.network_in"
+          items:
+            description: A metric name pattern to exclude.
+            example: "aws.ec2.network_in"
+            type: string
+          type: array
+        namespace:
+          description: The AWS CloudWatch namespace to which this metric name filter applies.
+          example: "AWS/EC2"
+          type: string
+      required:
+        - namespace
+        - exclude_only
+      type: object
+    AWSMetricNameFiltersIncludeOnly:
+      description: Include only metric names matching one of these patterns for a single namespace.
+      properties:
+        include_only:
+          description: Include only metric names matching one of these patterns.
+          example:
+            - "aws.ec2.network_in"
+          items:
+            description: A metric name pattern to include.
+            example: "aws.ec2.network_in"
+            type: string
+          type: array
+        namespace:
+          description: The AWS CloudWatch namespace to which this metric name filter applies.
+          example: "AWS/EC2"
+          type: string
+      required:
+        - namespace
+        - include_only
+      type: object
     AWSMetricsConfig:
       description: AWS Metrics Collection config.
       properties:
@@ -3560,6 +3759,13 @@ components:
           description: Enable AWS metrics collection. Defaults to `true`.
           example: true
           type: boolean
+        metric_name_filters:
+          description: |-
+            AWS CloudWatch metric name filters. Each filter applies to a single namespace.
+            Exactly one of `include_only` or `exclude_only` must be set on each filter.
+          items:
+            $ref: "#/components/schemas/AWSMetricNameFilters"
+          type: array
         namespace_filters:
           $ref: "#/components/schemas/AWSNamespaceFilters"
         tag_filters:
@@ -3842,6 +4048,86 @@ components:
             type: string
           type: array
       type: object
+    AccountFilters:
+      description: The account filters for a cloud account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersAttributes"
+        id:
+          description: The ID of the cloud account.
+          example: "123456789123"
+          type: string
+        type:
+          $ref: "#/components/schemas/AccountFiltersType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersAttributes:
+      description: Attributes for the account filters of a cloud account.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+        account_id:
+          description: The cloud account ID.
+          example: "123456789123"
+          type: string
+        cloud:
+          description: The cloud provider of the account, for example `aws`, `aws_cur2`, or `oci`.
+          example: "aws_cur2"
+          type: string
+      type: object
+    AccountFiltersPatchData:
+      description: Account filters patch data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/AccountFiltersPatchRequestType"
+      required:
+        - attributes
+        - type
+      type: object
+    AccountFiltersPatchRequest:
+      description: Account filters patch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFiltersPatchData"
+      required:
+        - data
+      type: object
+    AccountFiltersPatchRequestAttributes:
+      description: Attributes for an account filters patch request.
+      properties:
+        account_filters:
+          $ref: "#/components/schemas/AccountFilteringConfig"
+      required:
+        - account_filters
+      type: object
+    AccountFiltersPatchRequestType:
+      default: account_filters_patch_request
+      description: Type of account filters patch request.
+      enum:
+        - account_filters_patch_request
+      example: account_filters_patch_request
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS_PATCH_REQUEST
+    AccountFiltersResponse:
+      description: Response containing the account filters for a cloud account.
+      properties:
+        data:
+          $ref: "#/components/schemas/AccountFilters"
+      type: object
+    AccountFiltersType:
+      default: account_filters
+      description: Type of account filters.
+      enum:
+        - account_filters
+      example: account_filters
+      type: string
+      x-enum-varnames:
+        - ACCOUNT_FILTERS
     ActionConnectionAttributes:
       description: The definition of `ActionConnectionAttributes` object.
       properties:
@@ -12338,6 +12624,7 @@ components:
         data:
           attributes:
             compliance_host: false
+            function: true
             vuln_containers_os: true
             vuln_host_os: true
           id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12352,6 +12639,7 @@ components:
         data:
           - attributes:
               compliance_host: false
+              function: true
               vuln_containers_os: true
               vuln_host_os: true
             id: 12345678-90ab-cdef-1234-567890abcdef
@@ -12385,6 +12673,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -12432,6 +12723,9 @@ components:
       properties:
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
+          type: boolean
+        function:
+          description: Indicates if scanning of Azure Functions is enabled.
           type: boolean
         vuln_containers_os:
           description: Indicates if scanning for vulnerabilities in containers is enabled.
@@ -30105,6 +30399,146 @@ components:
       required:
         - data
       type: object
+    DatasetReportScheduleListResponse:
+      description: Response containing a list of report schedules for a published dataset.
+      properties:
+        data:
+          description: A list of report schedules for the dataset.
+          items:
+            $ref: "#/components/schemas/DatasetReportScheduleResponseData"
+          type: array
+        included:
+          description: Related resources included with the report schedules, such as authors.
+          items:
+            $ref: "#/components/schemas/ReportScheduleIncludedResource"
+          type: array
+      required:
+        - data
+      type: object
+    DatasetReportScheduleResourceType:
+      description: The type of resource targeted by a dataset report schedule.
+      enum:
+        - widget_dataset_list
+      example: widget_dataset_list
+      type: string
+      x-enum-varnames:
+        - WIDGET_DATASET_LIST
+    DatasetReportScheduleResponseAttributes:
+      description: The configuration and derived state of a report schedule for a published dataset.
+      properties:
+        cell_id:
+          description: The identifier of the notebook cell that published the dataset, or `null` if not set.
+          example: "sevhjcis"
+          nullable: true
+          type: string
+        dataset_id:
+          description: The identifier of the dataset, or `null` if not set.
+          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          nullable: true
+          type: string
+        description:
+          description: The description of the report.
+          example: "This is a scheduled notebook dataset report."
+          type: string
+        file_row_limit:
+          description: The maximum number of rows included in the attached CSV file, or `null` if not set.
+          example: 5000
+          format: int64
+          nullable: true
+          type: integer
+        inline_row_limit:
+          description: The maximum number of rows included inline in the email body, or `null` if not set.
+          example: 10
+          format: int64
+          nullable: true
+          type: integer
+        next_recurrence:
+          description: |-
+            The Unix timestamp, in milliseconds, of the next scheduled delivery, or
+            `null` if none is scheduled.
+          example: 1725859200000
+          format: int64
+          nullable: true
+          type: integer
+        notebook_id:
+          description: The identifier of the notebook containing the dataset cell, or `null` if not set.
+          example: 1
+          format: int64
+          nullable: true
+          type: integer
+        recipients:
+          description: |-
+            The recipients of the report (email addresses, Slack channel references, or
+            Microsoft Teams channel references).
+          example:
+            - "test@datadoghq.com"
+          items:
+            description: |-
+              A single recipient (email address, Slack channel reference, or Microsoft
+              Teams channel reference).
+            type: string
+          type: array
+        resource_id:
+          description: The identifier of the widget containing the dataset.
+          example: "aaaabbbb-1111-2222-3333-444455556666"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/DatasetReportScheduleResourceType"
+        rrule:
+          description: The recurrence rule for the schedule, expressed as an iCalendar `RRULE` string.
+          example: "DTSTART;TZID=America/New_York:20240912T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
+          type: string
+        status:
+          $ref: "#/components/schemas/ReportScheduleStatus"
+        timeframe:
+          description: The relative timeframe of data included in the report.
+          example: "calendar_day"
+          type: string
+        timezone:
+          description: The IANA time zone identifier the recurrence rule is evaluated in.
+          example: "America/New_York"
+          type: string
+        title:
+          description: The title of the report.
+          example: "My Cool Dataset Report"
+          type: string
+      required:
+        - status
+        - resource_id
+        - resource_type
+        - recipients
+        - rrule
+        - timezone
+        - title
+        - description
+        - timeframe
+        - file_row_limit
+        - inline_row_limit
+        - next_recurrence
+        - notebook_id
+        - cell_id
+        - dataset_id
+      type: object
+    DatasetReportScheduleResponseData:
+      description: The JSON:API data object representing a dataset report schedule.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DatasetReportScheduleResponseAttributes"
+        id:
+          description: The unique identifier of the dataset report schedule.
+          example: "e1234567-1234-1234-1234-123456789012"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ReportScheduleResponseRelationships"
+        type:
+          $ref: "#/components/schemas/ReportScheduleType"
+      required:
+        - id
+        - type
+        - attributes
+        - relationships
+      type: object
     DatasetRequest:
       description: |-
         **Datasets Object Constraints**
@@ -40588,6 +41022,7 @@ components:
       example:
         data:
           attributes:
+            cloud_function: true
             compliance_host: false
             vuln_containers_os: true
             vuln_host_os: true
@@ -40602,6 +41037,7 @@ components:
       example:
         data:
           - attributes:
+              cloud_function: true
               compliance_host: false
               vuln_containers_os: true
               vuln_host_os: true
@@ -40634,6 +41070,9 @@ components:
     GcpScanOptionsDataAttributes:
       description: Attributes for GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean
@@ -40681,6 +41120,9 @@ components:
     GcpScanOptionsInputUpdateDataAttributes:
       description: Attributes for updating GCP scan options configuration.
       properties:
+        cloud_function:
+          description: Indicates if scanning of Cloud Functions is enabled.
+          type: boolean
         compliance_host:
           description: Indicates whether host compliance scanning is enabled.
           type: boolean
@@ -47718,6 +48160,229 @@ components:
       required:
         - display_name
         - value
+      type: object
+    IncidentUserDefinedRoleDataAttributesRequest:
+      description: Attributes for creating an incident user-defined role.
+      properties:
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      required:
+        - name
+        - policy
+      type: object
+    IncidentUserDefinedRoleDataAttributesResponse:
+      description: Attributes of an incident user-defined role.
+      properties:
+        created:
+          description: Timestamp when the role was created.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        modified:
+          description: Timestamp when the role was last modified.
+          example: "2024-01-01T00:00:00.000Z"
+          format: date-time
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      required:
+        - name
+        - policy
+        - created
+        - modified
+      type: object
+    IncidentUserDefinedRoleDataRequest:
+      description: Data for creating an incident user-defined role.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataAttributesRequest"
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleRelationshipsRequest"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - type
+        - attributes
+        - relationships
+      type: object
+    IncidentUserDefinedRoleDataResponse:
+      description: Data for an incident user-defined role response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataAttributesResponse"
+        id:
+          description: The ID of the user-defined role.
+          example: "00000000-0000-0000-0000-000000000002"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleRelationshipsResponse"
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    IncidentUserDefinedRoleIncidentTypeRelationship:
+      description: Relationship to an incident type for a user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationshipData"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleIncidentTypeRelationshipData:
+      description: Data for the incident type relationship of a user-defined role.
+      properties:
+        id:
+          description: The ID of the incident type.
+          example: "00000000-0000-0000-0000-000000000001"
+          format: uuid
+          type: string
+        type:
+          description: The type of the resource.
+          example: "incident_types"
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    IncidentUserDefinedRoleIncludedItem:
+      description: A single included resource in a user-defined role response.
+      oneOf:
+        - $ref: "#/components/schemas/IncidentUserData"
+        - $ref: "#/components/schemas/IncidentTypeObject"
+    IncidentUserDefinedRoleIncludedResponse:
+      description: Included resources for an incident user-defined role response.
+      items:
+        $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedItem"
+      type: array
+    IncidentUserDefinedRolePatchDataAttributesRequest:
+      description: Attributes for updating an incident user-defined role.
+      properties:
+        description:
+          description: A description of the user-defined role.
+          example: "The technical lead for the incident."
+          nullable: true
+          type: string
+        name:
+          description: The name of the user-defined role.
+          example: "Tech Lead"
+          type: string
+        policy:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
+      type: object
+    IncidentUserDefinedRolePatchDataRequest:
+      description: Data for updating an incident user-defined role.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePatchDataAttributesRequest"
+        id:
+          description: The ID of the user-defined role to update.
+          example: "00000000-0000-0000-0000-000000000002"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleType"
+      required:
+        - id
+        - type
+      type: object
+    IncidentUserDefinedRolePatchRequest:
+      description: Request for updating an incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRolePatchDataRequest"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRolePolicy:
+      description: Policy configuration for a user-defined role.
+      properties:
+        is_single:
+          description: Whether this role can only be assigned to one responder at a time.
+          example: true
+          type: boolean
+      required:
+        - is_single
+      type: object
+    IncidentUserDefinedRoleRelationshipsRequest:
+      description: Relationships for creating a user-defined role.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationship"
+      required:
+        - incident_type
+      type: object
+    IncidentUserDefinedRoleRelationshipsResponse:
+      description: Relationships of a user-defined role response.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+        incident_type:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncidentTypeRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/RelationshipToUser"
+      type: object
+    IncidentUserDefinedRoleRequest:
+      description: Request for creating an incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataRequest"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleResponse:
+      description: Response with a single incident user-defined role.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleDataResponse"
+        included:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedResponse"
+      required:
+        - data
+      type: object
+    IncidentUserDefinedRoleType:
+      description: Incident user-defined role resource type.
+      enum:
+        - incident_user_defined_roles
+      example: incident_user_defined_roles
+      type: string
+      x-enum-varnames:
+        - INCIDENT_USER_DEFINED_ROLES
+    IncidentUserDefinedRolesDataResponse:
+      description: List of incident user-defined role data objects.
+      items:
+        $ref: "#/components/schemas/IncidentUserDefinedRoleDataResponse"
+      type: array
+    IncidentUserDefinedRolesResponse:
+      description: Response with a list of incident user-defined roles.
+      properties:
+        data:
+          $ref: "#/components/schemas/IncidentUserDefinedRolesDataResponse"
+        included:
+          $ref: "#/components/schemas/IncidentUserDefinedRoleIncludedResponse"
+      required:
+        - data
       type: object
     IncidentsResponse:
       description: Response with a list of incidents.
@@ -73587,6 +74252,86 @@ components:
         - MINUS_ID
         - NAME
         - MINUS_NAME
+    OrgGroupPolicySuggestionAttributes:
+      description: Attributes of an org group policy suggestion.
+      properties:
+        consensus_ratio:
+          description: The ratio of member orgs whose configuration agrees on the recommended value.
+          example: 0.75
+          format: double
+          maximum: 1
+          minimum: 0
+          type: number
+        policy_name:
+          description: The name of the suggested policy.
+          example: "monitor_timezone"
+          type: string
+        recommended_value:
+          description: The recommended value for the policy, based on member org consensus.
+          example: "UTC"
+        status:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionStatus"
+      required:
+        - policy_name
+        - status
+        - consensus_ratio
+        - recommended_value
+      type: object
+    OrgGroupPolicySuggestionData:
+      description: An org group policy suggestion resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionAttributes"
+        id:
+          description: The ID of the org group policy suggestion.
+          example: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+          type: string
+        relationships:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionRelationships"
+        type:
+          $ref: "#/components/schemas/OrgGroupPolicySuggestionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OrgGroupPolicySuggestionListResponse:
+      description: Response containing a list of org group policy suggestions.
+      properties:
+        data:
+          description: An array of org group policy suggestions.
+          items:
+            $ref: "#/components/schemas/OrgGroupPolicySuggestionData"
+          type: array
+      required:
+        - data
+      type: object
+    OrgGroupPolicySuggestionRelationships:
+      description: Relationships of an org group policy suggestion.
+      properties:
+        org_group:
+          $ref: "#/components/schemas/OrgGroupRelationshipToOne"
+      type: object
+    OrgGroupPolicySuggestionStatus:
+      description: The status of the policy suggestion.
+      enum:
+        - pending
+        - accepted
+        - dismissed
+      example: pending
+      type: string
+      x-enum-varnames:
+        - PENDING
+        - ACCEPTED
+        - DISMISSED
+    OrgGroupPolicySuggestionType:
+      description: Org group policy suggestions resource type.
+      enum:
+        - org_group_policy_suggestions
+      example: org_group_policy_suggestions
+      type: string
+      x-enum-varnames:
+        - ORG_GROUP_POLICY_SUGGESTIONS
     OrgGroupPolicyType:
       description: Org group policies resource type.
       enum:
@@ -76604,6 +77349,149 @@ components:
       required:
         - type
       type: object
+    PrintReportRequest:
+      description: Request body for initiating a print-only report.
+      properties:
+        data:
+          $ref: "#/components/schemas/PrintReportRequestData"
+      required:
+        - data
+      type: object
+    PrintReportRequestAttributes:
+      description: |-
+        The configuration for a print-only report. Specify exactly one of `timeframe` (for a
+        relative time window) or both `from_ts` and `to_ts` (for an absolute time range).
+      properties:
+        from_ts:
+          description: |-
+            The start of an absolute time range, as a Unix timestamp in milliseconds.
+            Required when `timeframe` is omitted.
+          example: 1780318800000
+          format: int64
+          type: integer
+        resource_id:
+          description: The identifier of the dashboard or integration dashboard to render.
+          example: "abc-def-ghi"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/ReportScheduleResourceType"
+        template_variables:
+          description: The dashboard template variables applied when rendering the report.
+          items:
+            $ref: "#/components/schemas/ReportScheduleTemplateVariable"
+          type: array
+        timeframe:
+          description: |-
+            A relative time window (for example `1w` or `calendar_month`). Mutually
+            exclusive with `from_ts` and `to_ts`.
+          example: "1w"
+          type: string
+        timezone:
+          description: The IANA time zone identifier used to evaluate the time window.
+          example: "America/New_York"
+          type: string
+        to_ts:
+          description: |-
+            The end of an absolute time range, as a Unix timestamp in milliseconds.
+            Required when `timeframe` is omitted.
+          example: 1780923600000
+          format: int64
+          type: integer
+      required:
+        - resource_id
+        - resource_type
+        - timezone
+        - template_variables
+      type: object
+    PrintReportRequestData:
+      description: The JSON:API data object for a print report request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PrintReportRequestAttributes"
+        type:
+          $ref: "#/components/schemas/PrintReportType"
+      required:
+        - type
+        - attributes
+      type: object
+    PrintReportResponse:
+      description: Response containing the initiated print-only report.
+      properties:
+        data:
+          $ref: "#/components/schemas/PrintReportResponseData"
+      required:
+        - data
+      type: object
+    PrintReportResponseAttributes:
+      description: The configuration and download URL for the initiated print-only report.
+      properties:
+        download_url:
+          description: The URL from which the rendered PDF report can be downloaded.
+          example: "https://app.datadoghq.com/..."
+          type: string
+        from_ts:
+          description: The start of the rendered time range, as a Unix timestamp in milliseconds.
+          example: 1780318800000
+          format: int64
+          type: integer
+        resource_id:
+          description: The identifier of the dashboard or integration dashboard.
+          example: "abc-def-ghi"
+          type: string
+        resource_type:
+          $ref: "#/components/schemas/ReportScheduleResourceType"
+        template_variables:
+          description: The dashboard template variables applied when rendering the report.
+          items:
+            $ref: "#/components/schemas/ReportScheduleTemplateVariable"
+          type: array
+        timeframe:
+          description: The relative time window used, if one was specified in the request.
+          example: "1w"
+          type: string
+        timezone:
+          description: The IANA time zone identifier used when rendering the report.
+          example: "America/New_York"
+          type: string
+        to_ts:
+          description: The end of the rendered time range, as a Unix timestamp in milliseconds.
+          example: 1780923600000
+          format: int64
+          type: integer
+      required:
+        - resource_id
+        - resource_type
+        - timezone
+        - template_variables
+        - from_ts
+        - to_ts
+        - download_url
+      type: object
+    PrintReportResponseData:
+      description: The JSON:API data object for a print-only report.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PrintReportResponseAttributes"
+        id:
+          description: The unique identifier of the report.
+          example: "11111111-2222-3333-4444-555555555555"
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/PrintReportType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PrintReportType:
+      description: JSON:API resource type for a print-only report.
+      enum:
+        - report
+      example: report
+      type: string
+      x-enum-varnames:
+        - REPORT
     ProcessDataSource:
       default: process
       description: A data source for process-level infrastructure metrics.
@@ -86387,6 +87275,11 @@ components:
           description: A short name for the schedule.
           example: Primary On-Call
           type: string
+        tags:
+          description: A list of tags associated with the schedule.
+          items:
+            type: string
+          type: array
         time_zone:
           description: The time zone in which this schedule operates.
           example: America/New_York
@@ -86510,6 +87403,231 @@ components:
       type: string
       x-enum-varnames:
         - MEMBERS
+    ScheduleOnCallResponderData:
+      description: Represents one position's (previous, current, or next) group of on-call responder shifts. Positions with no matching shift are omitted entirely from the response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataAttributes"
+        id:
+          description: Unique identifier of this responder group.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationships"
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataType"
+      required:
+        - type
+      type: object
+    ScheduleOnCallResponderDataAttributes:
+      description: Attributes for one position's (previous, current, or next) group of on-call responder shifts.
+      properties:
+        position:
+          $ref: "#/components/schemas/ScheduleTargetPosition"
+      type: object
+    ScheduleOnCallResponderDataRelationships:
+      description: Relationships for a single position's (previous, current, or next) responder group.
+      properties:
+        shifts:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShifts"
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShifts:
+      description: Defines the list of shifts satisfying this responder group's position. Multiple shifts occur when a schedule has multiple concurrent on-call responders at that position.
+      properties:
+        data:
+          description: Array of references to the shifts included in the response.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShiftsDataItems"
+          type: array
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShiftsDataItems:
+      description: Represents a reference to one of the shifts satisfying this responder group's position.
+      properties:
+        id:
+          description: Unique identifier of the shift.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallResponderDataRelationshipsShiftsDataItemsType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallResponderDataRelationshipsShiftsDataItemsType:
+      default: shifts
+      description: "Indicates that the related resource is of type `shifts`."
+      enum:
+        - shifts
+      example: shifts
+      type: string
+      x-enum-varnames:
+        - SHIFTS
+    ScheduleOnCallResponderDataType:
+      default: schedule_oncall_responder
+      description: Represents the resource type for a single position's (previous, current, or next) group of on-call responder shifts.
+      enum:
+        - schedule_oncall_responder
+      example: schedule_oncall_responder
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDER
+    ScheduleOnCallResponders:
+      description: Root object representing a schedule's on-call responders, grouped by position (previous, current, next), for a given point in time.
+      example:
+        data:
+          attributes:
+            scheduled_at: "2024-05-07T02:53:01.000000000Z"
+          id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400"
+          relationships:
+            responders:
+              data:
+                - id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                  type: schedule_oncall_responder
+            schedule:
+              data:
+                id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                type: schedules
+          type: schedule_oncall_responders
+        included:
+          - attributes:
+              position: current
+            id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+            relationships:
+              shifts:
+                data:
+                  - id: 00000000-0000-0000-0000-000000000000
+                    type: shifts
+            type: schedule_oncall_responder
+          - attributes:
+              end: "2024-05-08T02:53:01.000000000Z"
+              start: "2024-05-07T02:53:01.000000000Z"
+            id: 00000000-0000-0000-0000-000000000000
+            relationships:
+              user:
+                data:
+                  id: 00000000-aba1-0000-0000-000000000000
+                  type: users
+            type: shifts
+          - attributes:
+              email: test@test.com
+              name: Test User
+              status: active
+            id: 00000000-aba1-0000-0000-000000000000
+            type: users
+      properties:
+        data:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersData"
+        included:
+          description: Related resources referenced in the responder groups' relationships, such as shifts, schedules, and users.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallRespondersIncluded"
+          type: array
+      type: object
+    ScheduleOnCallRespondersData:
+      description: The main data object representing a schedule's on-call responders lookup, including relationships and metadata.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataAttributes"
+        id:
+          description: Unique identifier of this on-call responders lookup.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationships"
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataType"
+      required:
+        - type
+      type: object
+    ScheduleOnCallRespondersDataAttributes:
+      description: Attributes for a schedule's on-call responders lookup.
+      properties:
+        scheduled_at:
+          description: The timestamp the responders were resolved at.
+          format: date-time
+          type: string
+      type: object
+    ScheduleOnCallRespondersDataRelationships:
+      description: Relationships for a schedule's on-call responders lookup, including the schedule and its responder groups.
+      properties:
+        responders:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsResponders"
+        schedule:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsSchedule"
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsResponders:
+      description: Defines the list of per-position (previous, current, next) responder groups for the schedule.
+      properties:
+        data:
+          description: Array of references to the responder groups included in the response.
+          items:
+            $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsRespondersDataItems"
+          type: array
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsRespondersDataItems:
+      description: Represents a reference to one position's (previous, current, or next) responder group.
+      properties:
+        id:
+          description: Unique identifier of the responder group.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsRespondersDataItemsType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsRespondersDataItemsType:
+      default: schedule_oncall_responder
+      description: Identifies the resource type for a responder group linked to a schedule's on-call responders lookup.
+      enum:
+        - schedule_oncall_responder
+      example: schedule_oncall_responder
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDER
+    ScheduleOnCallRespondersDataRelationshipsSchedule:
+      description: Defines the relationship to the schedule this on-call responders lookup was performed for.
+      properties:
+        data:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsScheduleData"
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsScheduleData:
+      description: Represents a reference to the schedule this on-call responders lookup was performed for.
+      properties:
+        id:
+          description: Unique identifier of the schedule.
+          example: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d"
+          type: string
+        type:
+          $ref: "#/components/schemas/ScheduleOnCallRespondersDataRelationshipsScheduleDataType"
+      required:
+        - type
+        - id
+      type: object
+    ScheduleOnCallRespondersDataRelationshipsScheduleDataType:
+      default: schedules
+      description: Identifies the resource type for the schedule associated with this on-call responders lookup.
+      enum:
+        - schedules
+      example: schedules
+      type: string
+      x-enum-varnames:
+        - SCHEDULES
+    ScheduleOnCallRespondersDataType:
+      default: schedule_oncall_responders
+      description: Represents the resource type for a schedule's grouped on-call responders across the previous, current, and next positions.
+      enum:
+        - schedule_oncall_responders
+      example: schedule_oncall_responders
+      type: string
+      x-enum-varnames:
+        - SCHEDULE_ONCALL_RESPONDERS
+    ScheduleOnCallRespondersIncluded:
+      description: Represents a union of related resources included in the response, such as responder groups, shifts, schedules, and users.
+      oneOf:
+        - $ref: "#/components/schemas/ScheduleOnCallResponderData"
+        - $ref: "#/components/schemas/ShiftData"
+        - $ref: "#/components/schemas/ScheduleData"
+        - $ref: "#/components/schemas/User"
     ScheduleRequestDataAttributesLayersItemsMembersItems:
       description: |-
         Defines a single member within a schedule layer, including the reference to the underlying user.
@@ -88882,6 +90000,69 @@ components:
             $ref: "#/components/schemas/SecurityMonitoringCriticalAsset"
           type: array
       type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes:
+      description: The attributes of a CrowdStrike entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My CrowdStrike Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes:
+      description: Fields to update on a CrowdStrike entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My CrowdStrike Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes:
+      description: The CrowdStrike credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: api.crowdstrike.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeCrowdStrike"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigCrowdStrikeSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringDatasetAttributesRequest:
       description: The attributes of a dataset create or update request.
       properties:
@@ -89440,6 +90621,61 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringEntraIdIntegrationConfigCreateAttributes:
+      description: The attributes of an Entra ID entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Entra ID Integration
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+      type: object
+    SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Entra ID entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Entra ID Integration (renamed)
+          type: string
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes:
+      description: The Entra ID credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeEntraId"
+      required:
+        - integration_type
+        - domain
+      type: object
     SecurityMonitoringFilter:
       description: The rule's suppression filter.
       properties:
@@ -89458,6 +90694,69 @@ components:
       x-enum-varnames:
         - REQUIRE
         - SUPPRESS
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes:
+      description: The attributes of a Google Workspace entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My GWS Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes:
+      description: Fields to update on a Google Workspace entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My GWS Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes:
+      description: The Google Workspace credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeGoogleWorkspace"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
+      type: object
     SecurityMonitoringIntegrationActivateAttributes:
       description: Overrides applied when activating the integration. All fields are optional.
       properties:
@@ -89533,26 +90832,20 @@ components:
       type: object
     SecurityMonitoringIntegrationConfigCreateAttributes:
       description: The attributes of the entity context sync configuration to create.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The display name for the entity context sync configuration.
-          example: My GWS Integration
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      required:
-        - integration_type
-        - domain
-        - name
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigCreateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes"
     SecurityMonitoringIntegrationConfigCreateData:
       description: The entity context sync configuration to create.
       properties:
@@ -89572,6 +90865,21 @@ components:
       required:
         - data
       type: object
+    SecurityMonitoringIntegrationConfigCrowdStrikeSecrets:
+      description: Credentials for a CrowdStrike entity context sync.
+      properties:
+        client_id:
+          description: The CrowdStrike API client ID.
+          example: abcdef0123456789abcdef0123456789
+          type: string
+        client_secret:
+          description: The CrowdStrike API client secret.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789ABCDEF
+          type: string
+      required:
+        - client_id
+        - client_secret
+      type: object
     SecurityMonitoringIntegrationConfigData:
       description: An entity context sync configuration.
       properties:
@@ -89587,6 +90895,54 @@ components:
         - id
         - type
         - attributes
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceSecrets:
+      description: Credentials for a Google Workspace entity context sync.
+      properties:
+        admin_email:
+          description: The admin email to impersonate for domain-wide delegation.
+          example: admin@example.com
+          type: string
+        service_account_json:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount"
+      required:
+        - service_account_json
+      type: object
+    SecurityMonitoringIntegrationConfigGoogleWorkspaceServiceAccount:
+      additionalProperties: {}
+      description: The Google Cloud service account JSON used to authenticate against the Google Workspace Admin SDK. Additional keys beyond those documented are preserved.
+      properties:
+        client_email:
+          description: The service account client email.
+          example: svc@my-project.iam.gserviceaccount.com
+          type: string
+        private_key:
+          description: The service account private key.
+          example: "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
+          type: string
+        project_id:
+          description: The Google Cloud project ID that owns the service account.
+          example: my-project
+          type: string
+        type:
+          description: The service account type. Must be `service_account`.
+          example: service_account
+          type: string
+      required:
+        - type
+        - project_id
+        - private_key
+        - client_email
+      type: object
+    SecurityMonitoringIntegrationConfigOktaSecrets:
+      description: Credentials for an Okta entity context sync.
+      properties:
+        api_token:
+          description: The Okta API token used to authenticate against the Okta API.
+          example: 00aBcDeFgHiJkLmNoPqRsTuVwXyZ
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigResourceType:
       default: integration_config
@@ -89605,13 +90961,15 @@ components:
       required:
         - data
       type: object
-    SecurityMonitoringIntegrationConfigSecrets:
-      additionalProperties: {}
-      description: |-
-        The secrets used to authenticate against the external entity source. The accepted keys depend on the source type
-        (for example, `admin_email` for Google Workspace). Not required for source types that do not use secrets (for example, `ENTRA_ID`).
-      example:
-        admin_email: test@example.com
+    SecurityMonitoringIntegrationConfigSentinelOneSecrets:
+      description: Credentials for a SentinelOne entity context sync.
+      properties:
+        api_token:
+          description: The SentinelOne API token.
+          example: aBcDeFgHiJkLmNoPqRsTuVwXyZ0123456789
+          type: string
+      required:
+        - api_token
       type: object
     SecurityMonitoringIntegrationConfigSettings:
       additionalProperties: {}
@@ -89632,27 +90990,21 @@ components:
         - INVALID
         - INITIALIZING
     SecurityMonitoringIntegrationConfigUpdateAttributes:
-      description: Fields to update on the entity context sync configuration. All fields are optional.
-      properties:
-        domain:
-          description: The new domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        enabled:
-          description: Whether the entity context sync should be enabled.
-          example: true
-          type: boolean
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        name:
-          description: The new display name for the entity context sync configuration.
-          example: My GWS Integration (renamed)
-          type: string
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-        settings:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
-      type: object
+      description: Fields to update on the entity context sync configuration. All fields other than the integration type are optional.
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationConfigUpdateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes"
     SecurityMonitoringIntegrationConfigUpdateData:
       description: The entity context sync configuration fields to update.
       properties:
@@ -89685,19 +91037,20 @@ components:
       type: object
     SecurityMonitoringIntegrationCredentialsValidateAttributes:
       description: The credentials to validate against the external entity source.
-      properties:
-        domain:
-          description: The domain associated with the external entity source.
-          example: siem-test.com
-          type: string
-        integration_type:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationType"
-        secrets:
-          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSecrets"
-      required:
-        - integration_type
-        - domain
-      type: object
+      discriminator:
+        mapping:
+          CROWDSTRIKE: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+          ENTRA_ID: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+          GOOGLE_WORKSPACE: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+          OKTA: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+          SENTINELONE: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
+        propertyName: integration_type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringGoogleWorkspaceIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringOktaIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringEntraIdIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringCrowdStrikeIntegrationCredentialsValidateAttributes"
+        - $ref: "#/components/schemas/SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes"
     SecurityMonitoringIntegrationCredentialsValidateData:
       description: The credentials to validate.
       properties:
@@ -89723,12 +91076,56 @@ components:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
       example: GOOGLE_WORKSPACE
       type: string
       x-enum-varnames:
         - GOOGLE_WORKSPACE
         - OKTA
         - ENTRA_ID
+        - CROWDSTRIKE
+        - SENTINELONE
+    SecurityMonitoringIntegrationTypeCrowdStrike:
+      description: The source type for a CrowdStrike entity context sync.
+      enum:
+        - CROWDSTRIKE
+      example: CROWDSTRIKE
+      type: string
+      x-enum-varnames:
+        - CROWDSTRIKE
+    SecurityMonitoringIntegrationTypeEntraId:
+      description: The source type for an Entra ID entity context sync.
+      enum:
+        - ENTRA_ID
+      example: ENTRA_ID
+      type: string
+      x-enum-varnames:
+        - ENTRA_ID
+    SecurityMonitoringIntegrationTypeGoogleWorkspace:
+      description: The source type for a Google Workspace entity context sync.
+      enum:
+        - GOOGLE_WORKSPACE
+      example: GOOGLE_WORKSPACE
+      type: string
+      x-enum-varnames:
+        - GOOGLE_WORKSPACE
+    SecurityMonitoringIntegrationTypeOkta:
+      description: The source type for an Okta entity context sync.
+      enum:
+        - OKTA
+      example: OKTA
+      type: string
+      x-enum-varnames:
+        - OKTA
+    SecurityMonitoringIntegrationTypeSentinelOne:
+      description: The source type for a SentinelOne entity context sync.
+      enum:
+        - SENTINELONE
+      example: SENTINELONE
+      type: string
+      x-enum-varnames:
+        - SENTINELONE
     SecurityMonitoringListRulesResponse:
       description: List of rules.
       properties:
@@ -89739,6 +91136,69 @@ components:
           type: array
         meta:
           $ref: "#/components/schemas/ResponseMetaAttributes"
+      type: object
+    SecurityMonitoringOktaIntegrationConfigCreateAttributes:
+      description: The attributes of an Okta entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My Okta Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringOktaIntegrationConfigUpdateAttributes:
+      description: Fields to update on an Okta entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My Okta Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringOktaIntegrationCredentialsValidateAttributes:
+      description: The Okta credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: siem-test.com
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeOkta"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigOktaSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringPaginatedSuppressionsResponse:
       description: Response object containing the available suppression rules with pagination metadata.
@@ -90699,6 +92159,69 @@ components:
           description: Time zone of the start date, in the [tz database](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) format.
           example: America/New_York
           type: string
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigCreateAttributes:
+      description: The attributes of a SentinelOne entity context sync configuration to create.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The display name for the entity context sync configuration.
+          example: My SentinelOne Integration
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+        - domain
+        - name
+        - secrets
+      type: object
+    SecurityMonitoringSentinelOneIntegrationConfigUpdateAttributes:
+      description: Fields to update on a SentinelOne entity context sync configuration.
+      properties:
+        domain:
+          description: The new domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        enabled:
+          description: Whether the entity context sync should be enabled.
+          example: true
+          type: boolean
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        name:
+          description: The new display name for the entity context sync configuration.
+          example: My SentinelOne Integration (renamed)
+          type: string
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+        settings:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSettings"
+      required:
+        - integration_type
+      type: object
+    SecurityMonitoringSentinelOneIntegrationCredentialsValidateAttributes:
+      description: The SentinelOne credentials to validate against the external entity source.
+      properties:
+        domain:
+          description: The domain associated with the external entity source.
+          example: acme.sentinelone.net
+          type: string
+        integration_type:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationTypeSentinelOne"
+        secrets:
+          $ref: "#/components/schemas/SecurityMonitoringIntegrationConfigSentinelOneSecrets"
+      required:
+        - integration_type
+        - domain
+        - secrets
       type: object
     SecurityMonitoringSignal:
       description: Object description of a security signal.
@@ -103799,8 +105322,29 @@ components:
           $ref: "#/components/schemas/TagIndexingRuleType"
       type: object
     TagIndexingRuleDynamicTags:
-      description: Configuration for including dynamically queried tags.
+      description: |-
+        Options for dynamic tag indexing applied per metric, such as tags filtered by query usage.
+
+        Before a tag key is dropped by this rule, two grace period conditions must be met:
+
+        1. The metric must be submitted for at least as long as the selected window.
+        2. A tag key must have been submitted for at least 15 days.
+
+        Any metric or tag key that does not meet these conditions are excluded from this
+        indexing rule. The `exclude_not_*` fields require `exclude_tags_mode` to be set to `true`.
       properties:
+        exclude_not_queried_window_seconds:
+          description: >-
+            Tags that have not been queried within this window are excluded from indexing. Maximum of `7776000` (90 days).
+          example: 3600
+          format: int64
+          maximum: 7776000
+          type: integer
+        exclude_not_used_in_assets:
+          description: >-
+            Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
+          example: false
+          type: boolean
         queried_tags_window_seconds:
           description: Window in seconds for evaluating queried tags.
           example: 3600
@@ -126869,6 +128413,184 @@ paths:
       "x-permission":
         operator: OPEN
         permissions: []
+  /api/v2/cost/account_filters/{cloud_account_id}:
+    get:
+      description: Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: GetCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                include_accounts:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_read
+      summary: Get account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 70
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_read
+    patch:
+      description: Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).
+      operationId: UpdateCostAccountFilters
+      parameters:
+        - $ref: "#/components/parameters/CloudAccountID"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                summary: Exclude new accounts and include specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        include_new_accounts: false
+                        included_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                    type: account_filters_patch_request
+              exclude_accounts:
+                summary: Include new accounts and exclude specific accounts
+                value:
+                  data:
+                    attributes:
+                      account_filters:
+                        excluded_accounts:
+                          - "123456789123"
+                          - "123456789143"
+                        include_new_accounts: true
+                    type: account_filters_patch_request
+            schema:
+              $ref: "#/components/schemas/AccountFiltersPatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  summary: Exclude new accounts and include specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          include_new_accounts: false
+                          included_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+                exclude_accounts:
+                  summary: Include new accounts and exclude specific accounts
+                  value:
+                    data:
+                      attributes:
+                        account_filters:
+                          excluded_accounts:
+                            - "123456789123"
+                            - "123456789143"
+                          include_new_accounts: true
+                        account_id: "123456789123"
+                        cloud: aws_cur2
+                      id: "123"
+                      type: account_filters
+              schema:
+                $ref: "#/components/schemas/AccountFiltersResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - cloud_cost_management_write
+      summary: Update account filters
+      tags:
+        - Cloud Cost Management
+      x-menu-order: 71
+      "x-permission":
+        operator: OR
+        permissions:
+          - cloud_cost_management_write
   /api/v2/cost/anomalies:
     get:
       description: List detected Cloud Cost Management anomalies for the organization.
@@ -141438,6 +143160,308 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-roles:
+    get:
+      description: List all user-defined roles for incidents.
+      operationId: ListIncidentUserDefinedRoles
+      parameters:
+        - description: Filter roles by incident type UUID.
+          in: query
+          name: filter[incident-type]
+          required: false
+          schema:
+            example: "00000000-0000-0000-0000-000000000001"
+            format: uuid
+            type: string
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          created: "2024-01-01T00:00:00.000Z"
+                          description: "The technical lead for the incident."
+                          modified: "2024-01-01T00:00:00.000Z"
+                          name: "Tech Lead"
+                          policy:
+                            is_single: true
+                        id: "00000000-0000-0000-0000-000000000002"
+                        type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRolesResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_read
+      summary: List incident user-defined roles
+      tags:
+        - Incidents
+      x-menu-order: 57
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new user-defined role for incidents.
+      operationId: CreateIncidentUserDefinedRole
+      parameters:
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "The technical lead for the incident."
+                      name: "Tech Lead"
+                      policy:
+                        is_single: true
+                    relationships:
+                      incident_type:
+                        data:
+                          id: "00000000-0000-0000-0000-000000000001"
+                          type: incident_types
+                    type: incident_user_defined_roles
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedRoleRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        description: "The technical lead for the incident."
+                        modified: "2024-01-01T00:00:00.000Z"
+                        name: "Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: Created
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Create an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 58
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/incidents/config/user-defined-roles/{role_id}:
+    delete:
+      description: Delete an existing user-defined role for incidents.
+      operationId: DeleteIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Delete an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 61
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Retrieve a single user-defined role for incidents.
+      operationId: GetIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        description: "The technical lead for the incident."
+                        modified: "2024-01-01T00:00:00.000Z"
+                        name: "Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_read
+      summary: Get an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 59
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update an existing user-defined role for incidents.
+      operationId: UpdateIncidentUserDefinedRole
+      parameters:
+        - $ref: "#/components/parameters/IncidentUserDefinedRoleIDPathParameter"
+        - description: Comma-separated list of related resources to include in the response.
+          in: query
+          name: include
+          required: false
+          schema:
+            example: "created_by_user,last_modified_by_user,incident_type"
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      name: "Updated Tech Lead"
+                    id: "00000000-0000-0000-0000-000000000002"
+                    type: incident_user_defined_roles
+            schema:
+              $ref: "#/components/schemas/IncidentUserDefinedRolePatchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created: "2024-01-01T00:00:00.000Z"
+                        modified: "2024-01-02T00:00:00.000Z"
+                        name: "Updated Tech Lead"
+                        policy:
+                          is_single: true
+                      id: "00000000-0000-0000-0000-000000000002"
+                      type: incident_user_defined_roles
+              schema:
+                $ref: "#/components/schemas/IncidentUserDefinedRoleResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - incident_settings_write
+      summary: Update an incident user-defined role
+      tags:
+        - Incidents
+      x-menu-order: 60
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/incidents/import:
     post:
       description: |-
@@ -142839,6 +144863,10 @@ paths:
                         collect_cloudwatch_alarms: false
                         collect_custom_metrics: false
                         enabled: true
+                        metric_name_filters:
+                          - include_only:
+                              - aws.ec2.network_in
+                            namespace: AWS/EC2
                         tag_filters:
                           - namespace: AWS/EC2
                       resources_config:
@@ -142980,6 +145008,10 @@ paths:
                         collect_cloudwatch_alarms: false
                         collect_custom_metrics: false
                         enabled: true
+                        metric_name_filters:
+                          - include_only:
+                              - aws.ec2.network_in
+                            namespace: AWS/EC2
                         tag_filters:
                           - namespace: AWS/EC2
                       resources_config:
@@ -143228,6 +145260,126 @@ paths:
           - aws_configuration_edit
       x-unstable: |-
         **Note**: This endpoint is in preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/integration/aws/accounts/{aws_account_config_id}/metric_name_filter_preview:
+    get:
+      description: |-
+        Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.
+      operationId: GetAWSMetricNameFilterPreview
+      parameters:
+        - $ref: "#/components/parameters/AWSAccountConfigIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        namespaces:
+                          - filters:
+                              - match_count: 1
+                                pattern: "aws.ec2.network_in"
+                            metrics:
+                              - cw_name: "NetworkIn"
+                                dd_names:
+                                  - filtered: true
+                                    name: "aws.ec2.network_in"
+                            namespace: "AWS/EC2"
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: metric_name_filter_preview
+              schema:
+                $ref: "#/components/schemas/AWSMetricNameFilterPreviewResponse"
+          description: AWS metric name filter preview result
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get AWS metric name filter preview
+      tags:
+        - AWS Integration
+      x-menu-order: 19
+      "x-permission":
+        operator: OR
+        permissions:
+          - aws_configuration_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: |-
+        Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.
+        The filters are not persisted.
+      operationId: PreviewAWSMetricNameFilter
+      parameters:
+        - $ref: "#/components/parameters/AWSAccountConfigIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      metric_name_filters:
+                        - exclude_only:
+                            - "aws.ec2.network_in"
+                          namespace: "AWS/EC2"
+                    type: metric_name_filter_preview
+            schema:
+              $ref: "#/components/schemas/AWSMetricNameFilterPreviewRequest"
+        description: The metric name filters to preview.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        namespaces:
+                          - filters:
+                              - match_count: 1
+                                pattern: "aws.ec2.network_in"
+                            metrics:
+                              - cw_name: "NetworkIn"
+                                dd_names:
+                                  - filtered: true
+                                    name: "aws.ec2.network_in"
+                            namespace: "AWS/EC2"
+                      id: "00000000-0000-0000-0000-000000000001"
+                      type: metric_name_filter_preview
+              schema:
+                $ref: "#/components/schemas/AWSMetricNameFilterPreviewResponse"
+          description: AWS metric name filter preview result
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Preview AWS metric name filter
+      tags:
+        - AWS Integration
+      x-codegen-request-body-name: body
+      x-menu-order: 20
+      "x-permission":
+        operator: OR
+        permissions:
+          - aws_configuration_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/integration/aws/available_namespaces:
     get:
@@ -161982,7 +164134,8 @@ paths:
           - on_call_write
   /api/v2/on-call/schedules/{schedule_id}/on-call:
     get:
-      description: "Retrieves the user who is on-call for the specified schedule at a given time."
+      deprecated: true
+      description: "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead."
       operationId: GetScheduleOnCallUser
       parameters:
         - description: "Specifies related resources to include in the response as a comma-separated list. Allowed value: `user`."
@@ -162042,6 +164195,102 @@ paths:
       tags:
         - On-Call
       x-menu-order: 11
+      "x-permission":
+        operator: AND
+        permissions:
+          - on_call_read
+      x-sunset: "2027-02-01"
+  /api/v2/on-call/schedules/{schedule_id}/responders:
+    get:
+      description: "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position."
+      operationId: GetScheduleOnCallResponders
+      parameters:
+        - description: "Comma-separated list of included relationships to be returned. Allowed values: `schedule`, `responders`, `responders.shifts`, `responders.shifts.user`."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: The ID of the schedule.
+          in: path
+          name: schedule_id
+          required: true
+          schema:
+            example: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+            type: string
+        - description: "Comma-separated list of positions to retrieve. Allowed values: `previous`, `current`, `next`. Defaults to `current` if omitted."
+          in: query
+          name: filter[position]
+          schema:
+            example: previous,current,next
+            type: string
+        - description: "Retrieves the on-call responders at the given timestamp in RFC3339 format (for example, `2025-05-07T02:53:01Z` or `2025-05-07T02:53:01+00:00`). When using timezone offsets with `+` or `-`, ensure proper URL encoding (`+` should be encoded as `%2B`). Defaults to the current time if omitted."
+          in: query
+          name: filter[at_ts]
+          schema:
+            example: "2025-05-07T02:53:01Z"
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        scheduled_at: "2024-05-07T02:53:01.000000000Z"
+                      id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400"
+                      relationships:
+                        responders:
+                          data:
+                            - id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                              type: schedule_oncall_responder
+                        schedule:
+                          data:
+                            id: 3653d3c6-0c75-11ea-ad28-fb5701eabc7d
+                            type: schedules
+                      type: schedule_oncall_responders
+                    included:
+                      - attributes:
+                          position: current
+                        id: "3653d3c6-0c75-11ea-ad28-fb5701eabc7d-1715054400-current"
+                        relationships:
+                          shifts:
+                            data:
+                              - id: 00000000-0000-0000-0000-000000000000
+                                type: shifts
+                        type: schedule_oncall_responder
+                      - attributes:
+                          end: "2024-05-08T02:53:01.000000000Z"
+                          start: "2024-05-07T02:53:01.000000000Z"
+                        id: 00000000-0000-0000-0000-000000000000
+                        relationships:
+                          user:
+                            data:
+                              id: 00000000-aba1-0000-0000-000000000000
+                              type: users
+                        type: shifts
+              schema:
+                $ref: "#/components/schemas/ScheduleOnCallResponders"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "401":
+          $ref: "#/components/responses/UnauthorizedResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get on-call responders for a schedule
+      tags:
+        - On-Call
+      x-menu-order: 22
       "x-permission":
         operator: AND
         permissions:
@@ -164939,6 +167188,65 @@ paths:
         operator: OR
         permissions:
           - org_group_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/org_group_policy_suggestions:
+    get:
+      description: List suggested organization group policies. Requires a filter on org group ID.
+      operationId: ListOrgGroupPolicySuggestions
+      parameters:
+        - $ref: "#/components/parameters/OrgGroupPolicyFilterOrgGroupId"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          consensus_ratio: 0.75
+                          policy_name: "monitor_timezone"
+                          recommended_value: "UTC"
+                          status: "pending"
+                        id: "1a2b3c4d-5e6f-7890-abcd-ef0123456789"
+                        relationships:
+                          org_group:
+                            data:
+                              id: "a1b2c3d4-e5f6-7890-abcd-ef0123456789"
+                              type: org_groups
+                        type: org_group_policy_suggestions
+              schema:
+                $ref: "#/components/schemas/OrgGroupPolicySuggestionListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List org group policy suggestions
+      tags: [Org Groups]
+      x-menu-order: 21
+      "x-permission":
+        operator: OR
+        permissions:
+          - org_group_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -167888,6 +170196,14 @@ paths:
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition Failed
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -168004,6 +170320,14 @@ paths:
           $ref: "#/components/responses/ForbiddenResponse"
         "404":
           $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "412":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/APIErrorResponse"
+          description: Precondition Failed
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -169687,6 +172011,169 @@ paths:
       tags:
         - Rum Replay Heatmaps
       x-menu-order: 3
+  /api/v2/reporting/dataset/{dataset_id}/schedules:
+    get:
+      description: |-
+        Retrieve all report schedules for a given published dataset.
+        Returns report schedules belonging to the authenticated user's organization that target the specified dataset.
+        Requires the `generate_log_reports` or `manage_log_reports` permission.
+      operationId: ListDatasetReportSchedules
+      parameters:
+        - description: The identifier of the published dataset to retrieve report schedules for.
+          example: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+          in: path
+          name: dataset_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          cell_id: "sevhjcis"
+                          dataset_id: "MW5vdGVib29rX2NlbGw6ZDI0ZTM2MWMtZDFlNC00NDYwLWIyOWUtNTg3YTczMzA3MDFm"
+                          description: "This is a scheduled notebook dataset report."
+                          file_row_limit: 5000
+                          inline_row_limit: 10
+                          next_recurrence: 1725859200000
+                          notebook_id: 1
+                          recipients:
+                            - "test@datadoghq.com"
+                          resource_id: "aaaabbbb-1111-2222-3333-444455556666"
+                          resource_type: widget_dataset_list
+                          rrule: "DTSTART;TZID=America/New_York:20240912T090000\nRRULE:FREQ=DAILY;BYHOUR=9;BYMINUTE=0"
+                          status: active
+                          timeframe: "calendar_day"
+                          timezone: "America/New_York"
+                          title: "My Cool Dataset Report"
+                        id: "e1234567-1234-1234-1234-123456789012"
+                        relationships:
+                          author:
+                            data:
+                              id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                              type: users
+                        type: schedule
+                    included:
+                      - attributes:
+                          email: "user@example.com"
+                          name: "Example User"
+                        id: "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+                        type: users
+              schema:
+                $ref: "#/components/schemas/DatasetReportScheduleListResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List dataset report schedules
+      tags:
+        - Report Schedules
+      x-menu-order: 8
+  /api/v2/reporting/print:
+    post:
+      description: |-
+        Initiate a one-off, print-only report for a dashboard or integration dashboard.
+        The report is rendered as a PDF and made available for download through the URL returned in the response.
+        Requires a reporting permission appropriate to the targeted resource type.
+      operationId: PrintReport
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      resource_id: "abc-def-ghi"
+                      resource_type: dashboard
+                      template_variables:
+                        - name: "env"
+                          values:
+                            - "prod"
+                      timeframe: "1w"
+                      timezone: "America/New_York"
+                    type: report
+            schema:
+              $ref: "#/components/schemas/PrintReportRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        download_url: "https://app.datadoghq.com/..."
+                        from_ts: 1780318800000
+                        resource_id: "abc-def-ghi"
+                        resource_type: dashboard
+                        template_variables:
+                          - name: "env"
+                            values:
+                              - "prod"
+                        timeframe: "1w"
+                        timezone: "America/New_York"
+                        to_ts: 1780923600000
+                      id: "11111111-2222-3333-4444-555555555555"
+                      type: report
+              schema:
+                $ref: "#/components/schemas/PrintReportResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unprocessable Entity
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Print a report
+      tags:
+        - Report Schedules
+      x-codegen-request-body-name: body
+      x-menu-order: 9
   /api/v2/reporting/schedule:
     post:
       description: |-

@@ -4,7 +4,6 @@ description: Access and authentication for App builder
 aliases:
     - /service_management/app_builder/auth
     - /actions/app_builder/auth
-site_support_id: app-builder
 ---
 
 {{< site-region region="gov" >}}

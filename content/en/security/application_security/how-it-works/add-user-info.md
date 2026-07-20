@@ -6,6 +6,12 @@ aliases:
   - /security/application_security/threats/add-user-info/
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Instrument your services and track user activity to detect and block bad actors.
