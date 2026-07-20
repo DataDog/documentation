@@ -1,0 +1,48 @@
+{{/*
+  Compact "Global API version" control rendered at the top of the API sidebar.
+  Sets the baseline date used to resolve every date-versioned operation on the
+  page, unless a given operation has its own override (see
+  api/date-version-selector.html + assets/scripts/components/api.js).
+
+  Styled after the site's existing language/region picker
+  (layouts/partials/language-region-select.html) — a Bootstrap dropdown
+  button + menu — so it matches Datadog's usual sidebar-control look rather
+  than a bare native <select>.
+
+  Params:
+    versions    - slice of dicts: {date string, isBase bool}, sorted oldest -> newest
+    baseVersion - string, the default version resolved by detect-date-versioning.html
+*/}}
+{{ $versions := .versions }}
+{{ $count    := len $versions }}
+{{ $latest   := "" }}
+{{ range $versions }}{{ $latest = .date }}{{ end }}
+{{/* Use the baseVersion resolved once in detect-date-versioning.html as the single
+     source of truth, so the sidebar default matches the per-operation chip and the
+     server-rendered visible pane. Falling back here to $latest (while detect falls
+     back to the oldest date) would desync the default selection when no version is
+     marked base. */}}
+{{ $selected := .baseVersion | default "" }}
+{{ if eq $selected "" }}{{ range $versions }}{{ if .isBase }}{{ $selected = .date }}{{ end }}{{ end }}{{ end }}
+{{ if and (eq $selected "") (gt $count 0) }}{{ $selected = (index $versions 0).date }}{{ end }}
+
+{{ if gt $count 0 }}
+<div class="api-sidenav-version">
+  <p class="api-sidenav-version-label text-uppercase">Global API version</p>
+  <div class="dropdown bootstrap-dropdown-custom api-sidenav-version-dropdown">
+    <button class="btn d-flex align-items-center justify-content-between js-api-global-version-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-value="{{ $selected }}">
+      <span class="js-api-global-version-current">{{ $selected }}</span>
+      <div class="chevron chevron-down"></div>
+      <div class="chevron chevron-up d-none"></div>
+    </button>
+    <div class="dropdown-menu js-api-global-version-menu" aria-labelledby="api-global-version-select">
+      {{ range $versions }}
+        <a class="dropdown-item js-api-global-version-item {{ if eq .date $selected }}active{{ end }}" data-value="{{ .date }}" href="#">
+          {{- .date -}}
+          {{- if eq .date $latest }} (latest){{ else if .isBase }} (default){{ end -}}
+        </a>
+      {{ end }}
+    </div>
+  </div>
+</div>
+{{ end }}

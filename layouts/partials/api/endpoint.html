@@ -16,6 +16,9 @@ Required dict keys:
   tag                 — tag object (used for x-deprecated check)
   translate_action    — translated action dict (may be empty)
   resourcePage        — page object for the version-specific resource page
+  isDateVersioned     — bool, whether this operation is date-versioned (x-datadog-api-versioning)
+  apiVersionsList     — slice of dicts {date, isBase}, only set when isDateVersioned
+  baseVersion         — string, default selected date version, only set when isDateVersioned
 */}}
 {{ $dot := .dot }}
 {{ $endpoint := .endpoint }}
@@ -28,6 +31,9 @@ Required dict keys:
 {{ $tag := .tag }}
 {{ $translate_action := .translate_action }}
 {{ $resourcePage := .resourcePage }}
+{{ $isDateVersioned := .isDateVersioned | default false }}
+{{ $apiVersionsList := .apiVersionsList | default slice }}
+{{ $baseVersion := .baseVersion | default "" }}
 
 <div class="row endpoint">
     <div class="col-12">
@@ -41,7 +47,7 @@ Required dict keys:
             {{ end }}
 
             <!-- if this is deprecated and we have a higher version link to that -->
-            {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}}}
+            {{ if (and $endpointVisibility.isVisibleVersion (eq $versionNum "v1") (gt $versionCount 1) (eq (index $tag "x-deprecated") true)) }}
               {{ $collapsedAnchorStr := (print $endpoint.action.summary " " (replace $versionNum "1" "2")) }}
               <div class="alert alert-warning">
                 <p class="alert-warning">This endpoint is deprecated use the latest endpoint here <a class="toggle-version-tab" href="#{{ $collapsedAnchorStr | anchorize }}">{{- $collapsedAnchorStr -}}.</a></p>
@@ -78,13 +84,13 @@ Required dict keys:
             {{ partial "api/arguments.html" (dict "context" $dot "endpoint" $endpoint) }}
 
             <!-- request body -->
-            {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+            {{ partial "api/request-body.html" (dict "context" $dot "body" $endpoint.action.requestBody "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
 
             <!-- response -->
-            {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum) }}
+            {{ partial "api/response.html" (dict "responses" $endpoint.action.responses "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "translate_action" $translate_action "version" $versionNum "isDateVersioned" $isDateVersioned "apiVersionsList" $apiVersionsList "baseVersion" $baseVersion) }}
 
             <!-- code example -->
-            {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum) }}
+            {{ partial "api/code-example.html" (dict "context" $dot "resourcePage" $resourcePage "operationid" $endpoint.action.operationId "securitySchemes" $adat.components.securitySchemes "endpoint" $endpoint "version" $versionNum "isDateVersioned" $isDateVersioned "baseVersion" $baseVersion) }}
         </div>
     </div>
 </div>

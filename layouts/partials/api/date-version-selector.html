@@ -1,0 +1,109 @@
+{{/*
+  Renders the per-operation date-version control for a date-versioned operation
+  (x-datadog-api-versioning): a labeled chip (static if there's only one version
+  ever, a Bootstrap dropdown trigger otherwise — same button/menu convention as
+  the sidebar's global selector and the site's language/region picker), a
+  status caption, a "Follow global version" row in the dropdown itself, and a
+  context banner explaining how the shown version was resolved (the "Follow
+  global" action itself lives only in the dropdown row above, to avoid
+  duplicating it here).
+
+  Params:
+    operationId - string, the endpoint's operationId
+    versions    - slice of dicts: {date string, isBase bool}, sorted oldest -> newest
+    baseVersion - string, the date of the default selected version
+*/}}
+{{ $operationId := .operationId }}
+{{ $versions    := .versions }}
+{{ $baseVersion := .baseVersion }}
+{{ $count       := len $versions }}
+{{ $latest      := "" }}
+{{ range $versions }}{{ $latest = .date }}{{ end }}
+{{ $isLatest    := eq $baseVersion $latest }}
+{{ $versionsDesc := $versions | collections.Reverse }}
+{{ $dateCsv     := "" }}
+{{ range $i, $v := $versions }}{{ if $i }}{{ $dateCsv = print $dateCsv "," }}{{ end }}{{ $dateCsv = print $dateCsv $v.date }}{{ end }}
+{{ $versionMeta := dict }}
+{{ range $versions }}{{ $versionMeta = merge $versionMeta (dict .date (dict "deprecated" .deprecated "eol" .eol)) }}{{ end }}
+{{ $baseDeprecated := false }}
+{{ range $versions }}{{ if eq .date $baseVersion }}{{ $baseDeprecated = .deprecated }}{{ end }}{{ end }}
+
+<div class="api-version-block" data-operation-id="{{ $operationId }}" data-base-version="{{ $baseVersion }}" data-latest-version="{{ $latest }}" data-versions="{{ $dateCsv }}" data-version-meta='{{ jsonify $versionMeta }}'>
+  <div class="d-flex justify-content-end">
+    {{ if le $count 1 }}
+      <div class="api-version-selector-col">
+        <span class="api-version-selector-label">API version</span>
+        <span class="btn api-version-chip">
+          <span class="api-version-chip-dot api-version-dot-green"></span>
+          <span class="api-version-chip-date">{{ $baseVersion }}</span>
+        </span>
+      </div>
+    {{ else }}
+      <div class="api-version-selector-col">
+        <span class="api-version-selector-label">API version</span>
+        <div class="dropdown bootstrap-dropdown-custom api-version-dropdown">
+          <button class="btn d-flex align-items-center justify-content-between api-version-chip js-api-version-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="api-version-chip-dot js-api-version-dot {{ if $isLatest }}api-version-dot-green{{ else }}api-version-dot-amber{{ end }}"></span>
+            <span class="api-version-chip-date js-api-version-label">{{ $baseVersion }}</span>
+            <span class="api-version-chip-pill js-api-version-chip-pill {{ if not $baseDeprecated }}d-none{{ end }}">Deprecated</span>
+            <div class="chevron chevron-down"></div>
+            <div class="chevron chevron-up d-none"></div>
+          </button>
+          <div class="dropdown-menu js-api-version-menu" aria-labelledby="{{ $operationId }}-version">
+            <div class="api-version-menu-header">Versions of this operation</div>
+            <div class="api-version-menu-list">
+              {{ range $versionsDesc }}
+                <a href="#"
+                        class="dropdown-item js-api-version-item {{ if eq .date $baseVersion }}active{{ end }}"
+                        data-api-date-version="{{ .date }}"
+                        data-operation-id="{{ $operationId }}">
+                  <span class="api-version-menu-item-dot {{ if eq .date $latest }}api-version-dot-green{{ else }}api-version-dot-amber{{ end }}"></span>
+                  <span class="api-version-menu-item-date">{{ .date }}</span>
+                  {{ if eq .date $latest }}
+                    <span class="api-version-tag api-version-tag-latest">latest</span>
+                  {{ else if .isBase }}
+                    <span class="api-version-tag api-version-tag-default">default</span>
+                  {{ end }}
+                  {{ if .deprecated }}
+                    <span class="api-version-tag api-version-tag-deprecated">deprecated</span>
+                  {{ end }}
+                  <span class="api-version-check js-api-version-check {{ if ne .date $baseVersion }}d-none{{ end }}">
+                    <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                  </span>
+                </a>
+              {{ end }}
+            </div>
+            <div class="dropdown-divider"></div>
+            <a href="#"
+                    class="dropdown-item api-version-menu-follow js-api-version-follow-menu"
+                    data-operation-id="{{ $operationId }}">
+              <span class="api-version-menu-follow-icon">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"></circle><path d="M2 8h12M8 2c1.7 1.6 2.7 3.8 2.7 6S9.7 12.4 8 14M8 2C6.3 3.6 5.3 5.8 5.3 8S6.3 12.4 8 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path></svg>
+              </span>
+              <span>Follow global version</span>
+              <span class="api-version-check js-api-version-follow-check d-none">
+                <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2.5 7.5l3 3 6-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="api-version-status js-api-version-caption">
+          <span class="js-api-version-caption-text">Following global</span>
+        </div>
+
+        {{ if gt $count 1 }}
+          <div class="api-version-context js-api-version-context" data-operation-id="{{ $operationId }}">
+            <span class="api-version-context-icon js-api-version-context-icon-info">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"></circle><path d="M2 8h12M8 2c1.7 1.6 2.7 3.8 2.7 6S9.7 12.4 8 14M8 2C6.3 3.6 5.3 5.8 5.3 8S6.3 12.4 8 14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path></svg>
+            </span>
+            <span class="api-version-context-icon js-api-version-context-icon-warning d-none">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M8 2.2L14.5 13.5H1.5L8 2.2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"></path><path d="M8 6.5v3.2" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"></path><circle cx="8" cy="11.6" r="0.75" fill="currentColor"></circle></svg>
+            </span>
+            <span class="api-version-context-text js-api-version-context-text"></span>
+            <button type="button" class="api-version-context-follow js-api-version-migrate d-none" data-operation-id="{{ $operationId }}">Migrate to {{ $latest }}</button>
+          </div>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+</div>
