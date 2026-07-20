@@ -189,7 +189,7 @@ def build_manual_review_comment() -> str:
         "3. Wait for the standard docs team approval before merging. "
         "Optionally, you can check the 'ready for merge' checkbox in the PR description "
         "if you would like the docs team to merge it for you.\n\n"
-        f"If you prefer that we resolve your conflicts, add the label `{LABEL_HELP_REQUESTED}` to your PR. "
+        f"If you need assistance resolving your conflicts, add the label `{LABEL_HELP_REQUESTED}` to your PR. "
         "This will add it to our support queue, and we will reach out to you as soon as possible."
         + AUTOMATED_COMMENT_FOOTER
     )
@@ -211,14 +211,14 @@ def build_wip_comment() -> str:
     return (
         f"This PR has merge conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
         "Because this PR is marked as a work in progress, no attempt was made to auto-resolve the conflicts. "
-        f"When your PR is ready, remove the `{LABEL_WIP}` label and the `{LABEL_SKIP}` label. "
+        f"When your PR is finished, you can queue your PR for an auto-fix by removing the `{LABEL_WIP}` label and the `{LABEL_SKIP}` label. "
         "Your PR will be processed in the next batch of attempted auto-fixes."
         + AUTOMATED_COMMENT_FOOTER
     )
 
 
 def build_autofix_close_comment(new_pr_number: int | str) -> str:
-    """Posted on the original PR when it is closed in favour of a fix PR."""
+    """Posted on the original PR when it is closed in favor of a fix PR."""
     return (
         f"🤖 **Reorg conflict auto-fix:**\n\n"
         f"This PR has merge conflicts caused by the [recent docs repo reorg]({REPO_REORG_README_LINK}) "
