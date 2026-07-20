@@ -12,11 +12,27 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.x</strong>, Auto multi-line Detection is disabled by default.</div>
+<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, Auto multi-line Detection is disabled by default.</div>
 
 ## Overview
 
 Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically.
+For example, the Agent receives the following lines separately:
+```
+2024-08-13 17:15:17 INFO Starting request handler
+Exception in thread "main" java.lang.NullPointerException
+at com.example.MyClass.doSomething(MyClass.java:42)
+at com.example.MyClass.main(MyClass.java:20)
+2024-08-13 17:15:18 INFO Request handler stopped
+```
+With Auto multi-line detection enabled, the stack trace is aggregated into a single log:
+```
+2024-08-13 17:15:17 INFO Starting request handler
+Exception in thread "main" java.lang.NullPointerException
+at com.example.MyClass.doSomething(MyClass.java:42)
+at com.example.MyClass.main(MyClass.java:20)
+2024-08-13 17:15:18 INFO Request handler stopped
+```
 
 ## Getting started
 
