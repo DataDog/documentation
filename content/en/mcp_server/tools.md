@@ -378,6 +378,35 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
+## Audit Trail
+
+Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
+
+### `search_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Searches for Audit Trail events using Datadog query syntax with support for pagination. Use when you need to find and filter events by specific attributes. Returns Audit Trail events without metadata and previous/new asset values unless requested.
+
+- Who deleted the monitor `abc123`?
+- Have there been any failed Datadog login attempts in the past week?
+- Search Audit Trail to see if there were any API key leak notifications this month.
+
+### `list_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Lists Audit Trail events over a time window with support for pagination and optional queries. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous/new asset values unless requested.
+
+- Show me Audit Trail events for the past hour.
+
+### `build_audit_trail_query`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Translates a natural-language description into an Audit Trail query string. If you are uncertain of query syntax when searching Audit Trail events, use this tool first with a description of the events you would like to retrieve, then pass the returned query and timestamps directly into `search_audit_events`.
+
+- Give me an Audit Trail query to see who created new monitors in the past 2 weeks.
+- Create an Audit Trail query to show when the dashboard `abc123` was deleted.
+- Generate an Audit Trail query to check which actions were executed through the use of an MCP.
+
 ## Cases
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
@@ -2199,3 +2228,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [68]: /product_analytics/
 [69]: /session_replay/
 [70]: /data_observability/
+[71]: /account_management/audit_trail/
