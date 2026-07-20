@@ -15,10 +15,10 @@ further_reading:
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-There are two ways to deploy the Datadog Agent on MacOS devices for End User Device Monitoring. Choose the method that fits your environment:
+There are two ways to deploy the Datadog Agent on macOS devices for End User Device Monitoring. Choose the method that fits your environment:
 
-* **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device manager (MDM).
-* **Mobile device manager (MDM) deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
+- **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
+- **Mobile device management (MDM) deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
 
 Regardless of the method, the installer creates a dedicated system user named `ddagent`. This is expected: it allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
@@ -118,7 +118,7 @@ You can use other MDMs; however, this page walks through Jamf Pro as an example.
 
     The install script runs as root through Jamf, which provides the permissions needed to install the Agent and create the `ddagent` system user without user interaction.
 
-## Enable Network Path (optional)
+### Enable Network Path (optional)
 
 To enable scheduled Network Path tests, add the following block to your install script before you create the Jamf policy. This block enables the `traceroute` system-probe module, writes the `network_path` check configuration, and restarts the Agent and system-probe.
 
