@@ -174,21 +174,26 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
 1. Navigate to [Observability Pipelines][3].
 1. Select your pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
 1. On the pipeline edit page, click {{< ui >}}Edit{{< /ui >}} on a processor group to add or edit processors in your pipeline.
-1. In the {{< ui >}}Processor Group{{< /ui >}} dropdown menu on the left side of the Pipeline Simulation page, select the processor group with the processors you want to update and test.
-1. Add or update your processors, or add another processor group or a [Pack][12]. You can make multiple additions and updates for one simulation.<br>**Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
+1. You can:
+    - Update existing processors in the current group or another group, select the group in the {{< ui >}}Processor Group{{< /ui >}} dropdown menu.
+    - Click {{< ui >}}Add Processor{{< /ui>}} to add a processor.
+    - Click {{< ui >}}+ Group{{< /ui>}} to add a processor group.
+    - Click {{< ui >}}+ Pack{{< /ui >}} to add a [Pack][12].
+    - **Note**: For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
 1. Choose a simulation scenario:
     - **Run a simulation up to a specific processor group**
       1. Keep the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle disabled.
-      1. Click {{< ui >}}Preview{{< /ui >}} to run the simulation.
-      <br>The result you see is the data transformed by all processors in the current processor group and prior processor groups. See [Run a simulation up to a specific processor group](#run-a-simulation-up-to-a-specific-processor-group) for more information.
+      1. Click {{< ui >}}Preview{{< /ui >}} at the bottom right of the processors section to run the simulation.
+      1. In the {{< ui >}}Simulated Changes{{< /ui >}} section, select a result to view the data before and after being transformed by all processors in the current processor group and prior groups. See [Run a simulation up to a specific processor group](#run-a-simulation-up-to-a-specific-processor-group) for more information.
     - **Run a simulation up to a specific processor**
       1. Keep the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle disabled.
-      1. To run a simulation up to a specific processor, select the processor and click **Preview Up to This Processor**.
-      <br>The result you see is the data transformed by processors up to the selected processor, including prior processor groups.
+      1. Click the down arrow on that processor to expand it.
+      1. Click **Preview Up to This Processor**.
+      <br>In the {{< ui >}}Simulated Changes{{< /ui >}} section, select a result to view the data before and after being transformed by processors up to the selected processor and the processors prior to this one, including ones in previous processor groups.
     - **Run a simulation for the entire pipeline**
       1. Enable the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle.
-      1. Click {{< ui >}}Preview{{< /ui >}} to run the simulation.
-      <br>The result you see is the data transformed by all processors and sent to the destination. See [Run a simulation for the entire pipeline](#run-a-pipeline-simulation) for more information.
+      1. Click {{< ui >}}Preview{{< /ui >}} at the bottom right of the processors section to run the simulation.
+      <br>In the {{< ui >}}Simulated Changes{{< /ui >}} section, select a result to view the data before after being transformed by all processors, which is the data sent to the destinations. See [Run a simulation for the entire pipeline](#run-a-pipeline-simulation) for more information.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel." style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the data that the processor received and sent out.
@@ -223,7 +228,7 @@ On the Pipeline Simulation page, you can choose which set of processors you want
 
 #### Run a simulation for the entire pipeline
 
-When you toggle {{< ui >}}Simulate entire pipeline{{< /ui >}} and run a simulation, the entry event shown is the log sent from the source before any processing is done. The exit log is the result after all processors have been applied and sent to the destination. This lets you visualize how a log is transformed after it goes through the entire pipeline.
+When you enable the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle and run a simulation, the entry event shown is the log sent from the source before any processing is done. The exit log is the result after all processors have been applied and sent to the destination. This lets you visualize how a log is transformed after it goes through the entire pipeline.
 
 ## Further reading
 
