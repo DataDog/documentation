@@ -101,7 +101,7 @@ per-comparison alpha = 0.025 / 4 = 0.00625
 adjusted confidence level = 1 - 0.00625 = 99.375%
 ```
 
-The primary metric interval is wider than an uncorrected 95% interval. Each remaining metric interval is wider still because the remaining metrics share the rest of the alpha budget.
+In this example, each remaining metric receives a smaller per-comparison alpha than the primary metric because the remaining metrics split the non-primary alpha budget.
 
 ## Interpreting corrected results
 
