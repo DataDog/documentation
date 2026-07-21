@@ -21,7 +21,7 @@ Datadog Feature Flags provides graphs at two levels: the flags list page gives a
 
 Each summary row shows a total evaluation count and a mini graph, so you can assess activity across your flag inventory without opening each flag.
 
-{{< img src="feature_flags/flag_graphs/flag_list.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
+{{< img src="feature_flags/flag_graphs/flag_list-2.png" alt="Feature flags list page showing evaluation counts and sparklines per flag" style="width:100%;" >}}
 
 Each row shows:
 
@@ -37,7 +37,7 @@ The flag details page includes observability insights to help you identify how a
 
 This shows the total client and server evaluations that fell through to each targeting rule in the given **Real-time metric overview** time range.
 
-{{< img src="feature_flags/flag_graphs/targeting_rule_distribution.png" alt="Targeting rule evaluation count" style="width:100%;" >}}
+{{< img src="feature_flags/flag_graphs/targeting_rule_distribution-2.png" alt="Targeting rule evaluation count" style="width:100%;" >}}
 
 Use this count to confirm that targeting rules are working as expected and to see how traffic is distributed across targeting rules in a given environment, including the percentage of total traffic in the time range.
 
