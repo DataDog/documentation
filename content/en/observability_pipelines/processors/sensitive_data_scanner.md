@@ -296,7 +296,7 @@ Observability Pipelines includes an out-of-the-box [Observability Pipelines Over
 1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
 1. Use the time selector to scope to a wider time frame.
 
-Use these widgets to evaluate your Sensitive Data Scanner processors' scanning rule usage:
+Use the following widgets to evaluate your Sensitive Data Scanner processors' scanning rule usage:
 
 - **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively matching data. This is the primary widget to see which rules are in use.
 - **Total count of logs containing sensitive data**: Shows the total volume of sensitive data matched across all rules.
