@@ -54,6 +54,11 @@ The total monitor count displayed on the **Setup Guidance** tab for a single ser
 
 The Endpoints list is based on APM tracing, so make sure your [services are instrumented][7].
 
+### Definition matches too many services
+
+By default, the Endpoints list matches a definition to all instances that fit the defined path.
+You can scope the definition to a specific service by adding the [service parameter][6] to the API definition.
+
 ### Definition and traffic appear as separate endpoints
 
 Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify the following:
@@ -90,5 +95,6 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 [3]: /tracing/guide/setting_primary_tags_to_scope
 [4]: /help/
 [5]: /tracing/trace_pipeline/ingestion_controls/
+[6]: /api_catalog/add_metadata/
 [7]: /tracing/trace_collection/
 [8]: /internal_developer_portal/catalog/endpoints/#how-openapi-specifications-are-combined-with-traffic
