@@ -60,7 +60,7 @@ To instrument only .NET applications running on IIS:
    if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
    ```
 
-   `dotnet:3` is the current default major version. To install a different version, change it, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
+   To install a different .NET version, change `dotnet:3`, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
 
    **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)

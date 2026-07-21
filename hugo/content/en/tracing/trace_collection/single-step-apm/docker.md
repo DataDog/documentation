@@ -38,8 +38,6 @@ To enable APM in a Docker Linux container:
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-   To pin specific SDK versions instead of installing the latest, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable set to comma-separated `language:major` pairs. See [Set SDK tracer versions](#set-sdk-tracer-versions) for the language identifiers and available versions.
-
    Then, run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]:
 
    ```shell

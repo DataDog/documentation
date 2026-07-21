@@ -108,7 +108,7 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. This command installs or updates the Agent and the SSI packages. To pin specific SDK versions instead of installing the latest, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable set to comma-separated `language:major` pairs. See step 3 above for the language identifiers and available versions.
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. This command installs or updates the Agent and the SSI packages.
 5. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
