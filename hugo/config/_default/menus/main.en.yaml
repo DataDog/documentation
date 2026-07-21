@@ -8408,11 +8408,6 @@ menu:
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_backend_windows
       weight: 70
-    - name: Advanced use cases
-      url: security/workload_protection/detect_and_monitor/agent_rules/advanced_use_cases
-      parent: workload_protection_detect_and_monitor_agent_rules
-      identifier: workload_protection_detect_and_monitor_agent_rules_advanced_use_cases
-      weight: 80
     - name: Detection rules
       url: security/workload_protection/detect_and_monitor/detection_rules
       parent: workload_protection_detect_and_monitor
