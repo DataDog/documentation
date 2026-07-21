@@ -23,7 +23,7 @@ Prompt Management is in Preview.
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
 
-Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and prompt tracing are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
+Runtime retrieval is supported in Python through the `ddtrace` SDK. Prompt retrieval and Prompt Tracking are separate: `LLMObs.get_prompt()` can retrieve a managed prompt without enabling Agent Observability, but Agent Observability must be enabled to create LLM spans and associate prompt metadata with them.
 
 Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability is enabled, managed prompts passed directly to supported, automatically instrumented LLM calls are associated with the resulting spans.
 
@@ -32,7 +32,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 - Python 3.9 or later.
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
-- To manage prompts through the API, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
+- To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
 
 ### Install the Preview SDK build
 
@@ -60,7 +60,7 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<DEPLOYMENT_ENVIRONMENT>
 ```
 
-If the user chooses to include selected credentials, append the following block to the copied prompt:
+Optionally, append selected Datadog credentials so the coding agent can configure and verify the integration in the same session:
 
 ```text
 Selected Datadog credentials:
@@ -88,14 +88,15 @@ export DD_ENV="<DEPLOYMENT_ENVIRONMENT>"
 
 `DD_ENV` selects the environment used to resolve the prompt version and must match an environment where the prompt is deployed.
 
-### Retrieve and format a prompt
+### Retrieve, format, and use a prompt
 
 Preserve the prompt already used by your application as the fallback. The fallback keeps the application working if registry, environment-resolution, network, or server failures occur.
 
-The following example retrieves and formats a chat prompt:
+The following example retrieves and formats a chat prompt, then passes the formatted messages directly to OpenAI:
 
 ```python
 from ddtrace.llmobs import LLMObs
+from openai import OpenAI
 
 default_messages = [
     {"role": "system", "content": "You are a support agent for {{company}}."},
@@ -112,6 +113,13 @@ prompt = LLMObs.get_prompt(
     fallback=default_messages,
 )
 messages = prompt.format(**variables)
+
+client = OpenAI()
+
+response = client.chat.completions.create(
+    model="gpt-4o",
+    messages=messages,
+)
 ```
 
 `prompt.format()` returns a string for a text prompt and a list of messages for a chat prompt. Pass the formatted value to the corresponding text or messages parameter of your LLM provider call.
@@ -169,33 +177,7 @@ Run this setup with the application's normal Python command, such as `python app
 
 If the application does not send data through a Datadog Agent, also set `DD_LLMOBS_AGENTLESS_ENABLED=1`.
 
-For a [supported automatically instrumented provider][6], pass the value returned by `prompt.format()` directly to the provider call. The following OpenAI example automatically associates the managed prompt with the resulting span:
-
-```python
-from ddtrace.llmobs import LLMObs
-from openai import OpenAI
-
-default_messages = [
-    {"role": "system", "content": "You are a support agent for {{company}}."},
-    {"role": "user", "content": "{{question}}"},
-]
-
-prompt = LLMObs.get_prompt(
-    "customer-support-greeting",
-    fallback=default_messages,
-)
-messages = prompt.format(
-    company="Acme Inc.",
-    question="How do I reset my password?",
-)
-
-client = OpenAI()
-
-response = client.chat.completions.create(
-    model="gpt-4o",
-    messages=messages,
-)
-```
+For a [supported automatically instrumented provider][6], pass the value returned by `prompt.format()` directly to the provider call, as shown in [Retrieve, format, and use a prompt](#retrieve-format-and-use-a-prompt). This automatically associates the managed prompt with the resulting span.
 
 Copying, rebuilding, or converting the formatted value can discard its prompt-tracking metadata. For example, concatenating a managed system prompt with a user question creates a new string without that metadata. Use `LLMObs.annotation_context()` to associate the managed prompt with the resulting LLM span:
 
@@ -223,17 +205,17 @@ Pass the same variables to `to_annotation_dict()` that you pass to `format()` so
 
 ## Create and manage prompts
 
-Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI or through the API.
+Create prompts and publish new versions in the {{< ui >}}Prompts{{< /ui >}} UI, through the Python SDK, or through the API.
 
 ### Create a prompt
 
 #### Promote a tracked prompt
 
-To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the Prompt registry, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
+To promote a prompt already tracked in Agent Observability to a managed prompt, navigate to the {{< ui >}}Prompts{{< /ui >}} page, open the prompt, and click {{< ui >}}Register{{< /ui >}}. You can then update the prompt in the UI and retrieve it at runtime.
 
 #### In the UI from scratch
 
-Navigate to the Prompt registry and click {{< ui >}}+ New Prompt{{< /ui >}}.
+Navigate to the {{< ui >}}Prompts{{< /ui >}} page and click {{< ui >}}+ New Prompt{{< /ui >}}.
 
 In the Prompt Editor:
 
@@ -265,6 +247,39 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 - **Create a new version**: Click {{< ui >}}Edit{{< /ui >}} and update the messages in the Prompt Editor.
 - **Deploy a version to another environment**: Select a version and update its {{< ui >}}Deployment{{< /ui >}} environments.
 - **Delete a prompt**: Select {{< ui >}}Delete{{< /ui >}} from the prompt's options menu. This removes the prompt and its version history from the registry.
+
+### Use the Python SDK
+
+Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are Feature Flags environment IDs, which you can obtain from the [List environments API](/api/latest/feature-flags/list-environments/):
+
+```python
+from ddtrace.llmobs import LLMObs
+
+chat_template = [
+    {"role": "system", "content": "You are a support agent for {{company}}."},
+    {"role": "user", "content": "{{question}}"},
+]
+
+created_prompt = LLMObs.create_prompt(
+    "customer-support-greeting",
+    chat_template,
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+To publish and deploy another version, use `LLMObs.create_prompt_version()`:
+
+```python
+created_version = LLMObs.create_prompt_version(
+    "customer-support-greeting",
+    updated_chat_template,
+    env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
+)
+```
+
+These methods require the API and application key permissions listed in [Prerequisites](#prerequisites).
+
+Use `LLMObs.list_prompts()` and `LLMObs.list_prompt_versions()` to inspect managed prompts, `LLMObs.update_prompt()` and `LLMObs.update_prompt_version()` to update metadata or deployments, and `LLMObs.delete_prompt()` to delete a prompt and all of its versions.
 
 ### Use the API
 

@@ -13,7 +13,7 @@ Use an existing Datadog managed prompt or promote an application's local prompt,
 
 ## Guidelines
 
-1. Prompt Management runtime retrieval is supported only for Python applications. If the target application is not Python, explain that the integration is unsupported and stop. Do not implement a direct HTTP client or rewrite the application in Python.
+1. Prompt Management runtime retrieval is supported only for Python applications. If the target application is not Python, do not add runtime retrieval. Return to the main [Agentic Instrumentation guide](/llm_observability/instrumentation/agentic) and instrument the selected prompts with structured Prompt Tracking instead. Do not implement a direct HTTP client or rewrite the application in Python.
 2. Inspect the application before modifying it. Identify its package manager, configuration and secret-management workflow, startup command, existing Datadog instrumentation, LLM provider, prompt construction, and provider call site.
 3. For an existing managed prompt, use the prompt ID, environment, and variable names supplied in the user's prompt without asking the user to confirm them. For a promotion, derive a descriptive prompt ID from the selected prompt's purpose and ask the user to confirm it before creating the prompt.
 4. If multiple prompt or provider call sites are plausible, ask the user which one to modify and wait for an answer before editing.
@@ -96,7 +96,7 @@ If configuration is available before process startup, preserve the existing star
 
 When documenting a shell-based startup, ensure that configuration reaches the child Python process by exporting the variables, assigning them inline on the launch command, or preserving the application's existing mechanism. Do not present bare, unexported shell assignments as runnable setup.
 
-If the user's prompt includes runtime credentials and the checked-out repository owns an applicable configuration workflow, add them through its existing non-committed local configuration or secret-management workflow. Do not leave placeholders that require the user to supply the same credentials manually. Do not add a one-time write-capable application key used for promotion unless the user explicitly selected that same key for runtime use and it also has the required read permissions. Prefer a separate, least-privilege runtime application key. If an unavailable host owns runtime configuration, do not invent a local workflow in the checked-out repository. Continue the repository-owned integration and describe the host's remaining configuration using variable names or placeholders, never the supplied values.
+A write-capable application key used to promote a prompt is a one-time setup credential. Do not add it to the application's runtime configuration unless the user explicitly selected it for runtime use and it also has the required read permissions. Otherwise, use a separate, least-privilege runtime application key.
 
 For an existing managed-prompt integration, if the user's prompt does not include credentials, do not ask the user to provide them. Complete the code and configuration references where possible, then report that live prompt resolution and tracking could not be verified. Promotion is different: it is a user-approved setup operation and requires the write-capable credentials described in [Promote a local prompt](#promote-a-local-prompt).
 

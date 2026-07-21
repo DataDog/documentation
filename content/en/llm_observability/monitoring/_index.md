@@ -75,7 +75,7 @@ Learn how to monitor agentic LLM applications, which use multiple tools or chain
 
 ### Prompt Management
 
-[Prompt Management][7] provides a centralized registry for the prompts used by your LLM applications. Create, version, and retrieve prompts through the Agent Observability SDK, decoupling prompt iteration from your application's deployment cycle. See the [Prompt Management documentation][7] for details.
+[Prompt Management][7] provides a centralized registry for the prompts used by your LLM applications. Create and version prompts in Datadog, through the Python SDK, or through the API, then retrieve them at runtime with the SDK. This decouples prompt iteration from your application's deployment cycle. See the [Prompt Management documentation][7] for details.
 
 ## Further reading
 
