@@ -63,6 +63,8 @@ The confidence interval is a range of lift values that are consistent with the o
 
 Use the interval width as an indicator of precision: a narrower interval means a more precise estimate of lift; a wider interval means more uncertainty, often because the sample is smaller or the metric is noisy.
 
+If [multiple testing correction][8] is enabled, confidence intervals are wider because Datadog controls the family-wise error rate across the experiment's metric and treatment-variant comparisons.
+
 ### Global lift
 
 Experiments typically enroll only a subset of eligible users. Switch to the {{< ui >}}Global lift{{< /ui >}} tab on the metric scorecard to estimate how rolling out the treatment to all eligible users would affect your overall metric totals. See [Global Lift][7] for the full methodology.
@@ -112,3 +114,4 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 [5]: /product_analytics/
 [6]: /session_replay/
 [7]: /experiments/global_lift/
+[8]: /experiments/statistics/multiple_testing_correction

@@ -305,13 +305,13 @@ Widgets are not automatically tracked with the SDK. To send UI interactions from
 You can use the following methods in `Configuration.Builder` when creating the Datadog configuration to initialize the library:
 
 `setFirstPartyHosts()`
-: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
+: Defines hosts that have tracing enabled and have RUM resources categorized as `first-party`. Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`); the wildcard must target a subdomain of a registrable domain, so patterns like `"*.com"` are dropped. **Note**: If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 `useSite(DatadogSite)`
 : Switches target data to EU1, US1, US3, US5, US1_FED, US2_FED, AP1, and AP2 sites.
 
 `setFirstPartyHostsWithHeaderType`
-: Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing.
+: Sets the list of first party hosts and specifies the type of HTTP headers used for distributed tracing. Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`); the wildcard must target a subdomain of a registrable domain, so patterns like `"*.com"` are dropped.
 
 `setBatchSize([SMALL|MEDIUM|LARGE])`
 : Defines the individual batch size for requests sent to Datadog.
