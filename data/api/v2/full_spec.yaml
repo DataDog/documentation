@@ -167055,9 +167055,10 @@ paths:
       description: |-
         Disable the Datadog organization associated with the authenticated user or API key.
         The request body uses JSON:API format. If `org_uuid` is supplied, it must match
-        the authenticated org or the request is rejected. Successful calls disable the org
-        and return the resulting state from the downstream service. Requires the
-        `org_management` permission.
+        the authenticated org or the request is rejected. Only organizations created
+        within the last 10 days are eligible for self-service disable through this
+        endpoint. Successful calls disable the org and return the resulting state
+        from the downstream service. Requires the `org_management` permission.
       operationId: DisableCustomerOrg
       requestBody:
         content:
