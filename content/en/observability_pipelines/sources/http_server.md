@@ -54,7 +54,7 @@ To configure authentication tokens, enable the {{< ui >}}Configure authenticatio
 
 1. Click {{< ui >}}Manage Tokens{{< /ui >}} and then {{< ui >}}Add Token{{< /ui >}}.
 1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered.
-1. (Optional) Enter the field and value.
+1. (Optional) Enter a field and value if you want to add additional information to your logs because this token was used for validation.
 1. Select the path to token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
 	- {{< ui >}}Header{{< /ui >}} for an authorization header (optionally, enter the header name)
 	- {{< ui >}}Address{{< /ui >}} for an IP address
