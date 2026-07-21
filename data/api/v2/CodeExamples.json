@@ -1277,6 +1277,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Create a tag indexing rule returns \"Created\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2435129406",
+      "description": "Create a tag indexing rule with exclude-mode tag usage fields returns \"Created\" response"
     }
   ],
   "ReorderTagIndexingRules": [
@@ -1514,6 +1519,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag indexing rule returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4127399471",
+      "description": "Update a tag indexing rule with exclude-mode tag usage fields returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [

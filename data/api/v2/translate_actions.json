@@ -1620,6 +1620,18 @@
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
   },
+  "ExecuteDdsqlTabularQuery": {
+    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.",
+    "summary": "Execute a tabular DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query execution request."
+  },
+  "FetchDdsqlTabularQuery": {
+    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.",
+    "summary": "Fetch the result of a DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
+  },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
     "summary": "Get all deployment gates"

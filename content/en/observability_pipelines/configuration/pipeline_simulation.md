@@ -29,6 +29,10 @@ When you configure or edit a pipeline in Observability Pipelines, you often have
 
 Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your log data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify your logs as expected. You can test your configuration with live logs sent through the pipeline or import your own sample data.
 
+The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
+
+{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_overview.png" alt="Pipeline Simulation showing an unparsed log in the Entry column and the parsed output in the Exit column." style="width:100%;" >}}
+
 To use Pipeline Simulation:
 
 1. [Capture a snapshot of your data](#capture-data-for-a-pipeline-simulation).
@@ -37,10 +41,6 @@ To use Pipeline Simulation:
 1. After you validate that the processed data is what you expect, deploy the changes to production.
 
 This document goes over each of those steps in detail.
-
-The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
-
-{{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_overview.png" alt="Pipeline Simulation showing an unparsed log in the Entry column and the parsed output in the Exit column." style="width:100%;" >}}
 
 ## Permissions
 
@@ -61,14 +61,14 @@ If you are using a firewall, add these domains to the allowlist:
 Before running a simulation, you need to capture sample log data to test against. Pipeline Simulation lets you capture live data from an active pipeline, reuse previously captured samples, or import your own data.
 
 1. Navigate to [Observability Pipelines][3].
-1. [Set up a pipeline][4] or select a pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
+1. [Set up a new pipeline][4] or select an existing pipeline and click {{< ui >}}Edit Pipeline{{< /ui >}} on the top right side of the page.
 1. On the pipeline's edit page, you can expand a processor in a processor group to view its read-only configuration. To edit any processors, capture data, and run a simulation, click {{< ui >}}Edit{{< /ui >}} on a processor group.
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_edit_processor_group.png" alt="A pipeline's edit page with the Edit button on a processor group highlighted." style="width:100%;" >}}
 
 The status of a pipeline determines whether a simulation can be run with live data, imported data, or both.
 
 | Pipeline status | Simulation with imported data | Simulation with saved data | Simulation with live data |
-| --------------- | ----------------------------- | -------------------------- | ------------------------- |
+| --------------- | :---------------------------: | :------------------------: | :-----------------------: |
 | Active          | ✔️                            | ✔️                         | ✔️                        |
 | Inactive        | ✔️                            | ✔️                         |                           |
 | Draft           | ✔️                            | ✔️                         |                           |
@@ -95,7 +95,7 @@ To run a capture for a specific set of data:
 To import sample data for your pipeline simulation:
 
 1. For an inactive or draft pipeline, if the pipeline does not have saved data, click {{< ui >}}Import Data{{< /ui >}}. Otherwise, click the down arrow next to {{< ui >}}Live Capture{{< /ui >}} and select {{< ui >}}Import Sample Data{{< /ui >}}.
-1. In the modal, drag and drop your sample data files or browse for them, or click the {{< ui >}}Paste{{< /ui >}} tab to paste your sample data. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
+1. In the modal, drag and drop your sample data files or browse for them, or click the {{< ui >}}Paste{{< /ui >}} tab to paste your sample data.<br>**Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
 1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 #### Sample file import specifications
