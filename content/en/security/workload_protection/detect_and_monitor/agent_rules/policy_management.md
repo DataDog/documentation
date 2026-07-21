@@ -79,6 +79,28 @@ You can use **Remote Configuration** in the Datadog UI to automatically deploy t
 ### Remote Configuration {#remote-configuration}
 
 **Remote Configuration** is how Datadog delivers automatically policies to your agents. It uses a secure mechanism to guarantee that only signed and authentified policies are push to your agents. To deploy a policy using remote configuration, you just have to follow the steps detailed in Create a policy.
+
+#### Deployment strategies
+
+To roll out a change to Agent rules or policies with Remote Configuration, you can choose between two strategies: deploy the change instantly to all your hosts, or stagger the deployment in steps using a managed deploy. Monitor deployments from the [Deployments page][26].
+
+##### Deploy instantly
+
+Deploy instantly sends the updated policy to all hosts in scope at the same time, without staged validation. This generally takes a few minutes, and is best when you want the change applied everywhere right away.
+
+Select **Deploy instantly**, then click **Update Policy**. Track the progress from the [Deployments page][26].
+
+##### Managed deployment
+
+A managed deployment rolls out your change in stages so you can validate it on a subset of hosts before it reaches your entire infrastructure.
+
+1. When editing a policy or a rule, select **Start a managed deployment**. If the policy or rule was already rolled out with a managed deploy, select **Start from your last deployment** to reuse the last deployment's parameters. For a rule change, the reused parameters are those of the last deployment of the policy containing the rule.
+2. Under **Customize deployment roll-out plan**, set the scope of the deployment, then configure up to 10 stages to roll out the change gradually. Define each stage **By percentage of hosts in scope** or **By host tags**.
+3. Under **Set up monitoring and delay time**, select one or more monitors to check during the deployment. If a monitor alerts while the deployment is in progress, the rollout pauses. Then set the delay time to wait before continuing to the next stage.
+4. Under **Set deployment window**, set the days, times, and timezone when the deployment can run. If the deployment runs past a window, it pauses and resumes in the next one.
+5. (Optional) Under **Add a description**, add a description for the deployment.
+6. Click **Update Policy** to start the rollout. Track the progress from the [Deployments page][26].
+
 ### Manual deployment
 
 For **manual deployment**, you install a policy file on each Agent yourself. You can build the policy and its rules in the Datadog UI and **download** the generated file. If you already know the policy syntax, author a `.policy` file by hand. Then upload or sync that file to every Agent where the policy should run, as described below.
@@ -171,3 +193,4 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [23]: /security/workload_protection/detect_and_monitor/detection_rules/#create-the-custom-agent-and-detection-rules-together
 [24]: https://app.datadoghq.com/security/workload-protection/agent-rules
 [25]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+[26]: https://app.datadoghq.com/security/workload-protection/deployments
