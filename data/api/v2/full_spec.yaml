@@ -30758,6 +30758,257 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    DdsqlTabularQueryColumn:
+      description: A single column of a DDSQL tabular query result.
+      properties:
+        name:
+          description: Name of the column as projected by the SQL statement.
+          example: service
+          type: string
+        type:
+          description: |-
+            DDSQL data type of the column's values, for example `VARCHAR`, `BIGINT`,
+            `DECIMAL`, `BOOLEAN`, `TIMESTAMP`, `JSON`, or an array variant such as
+            `VARCHAR[]`. See the
+            [DDSQL data-types reference](https://docs.datadoghq.com/ddsql_reference/#data-types)
+            for the full, up-to-date list.
+          example: VARCHAR
+          type: string
+        values:
+          description: |-
+            Column values in row order. The element type matches the column's `type`;
+            for example a `VARCHAR` column carries strings, a `TIMESTAMP` column carries
+            Unix-millisecond integers. `null` is allowed for missing values.
+          example:
+            - web-store
+            - checkout
+          items: {}
+          type: array
+      required:
+        - name
+        - type
+        - values
+      type: object
+    DdsqlTabularQueryColumns:
+      description: |-
+        Column-major result set. Each element carries one column's name, type, and values,
+        with one value per row of the result. Set when `state` is `completed`.
+      items:
+        $ref: "#/components/schemas/DdsqlTabularQueryColumn"
+      type: array
+    DdsqlTabularQueryFetchRequest:
+      description: Wrapper for a DDSQL tabular query fetch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestData"
+      required:
+        - data
+      type: object
+    DdsqlTabularQueryFetchRequestAttributes:
+      description: Attributes describing which previously submitted DDSQL query to fetch.
+      properties:
+        query_id:
+          description: |-
+            Opaque token returned by an earlier execute or fetch response that carried
+            `state: running`. Identifies the query to poll for results.
+          example: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+          type: string
+      required:
+        - query_id
+      type: object
+    DdsqlTabularQueryFetchRequestData:
+      description: JSON:API resource object for a DDSQL tabular query fetch request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryFetchRequestType:
+      default: ddsql_query_fetch_request
+      description: JSON:API resource type for a DDSQL tabular query fetch request.
+      enum:
+        - ddsql_query_fetch_request
+      example: ddsql_query_fetch_request
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_FETCH_REQUEST
+    DdsqlTabularQueryRequest:
+      description: Wrapper for a DDSQL tabular query execution request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestData"
+      required:
+        - data
+      type: object
+    DdsqlTabularQueryRequestAttributes:
+      description: Attributes describing the DDSQL query to execute.
+      properties:
+        query:
+          description: |-
+            The DDSQL statement to execute. DDSQL is Datadog's SQL dialect, which is a subset
+            of PostgreSQL, scoped to Datadog data sources.
+          example: "SELECT cloud_provider, count(*) FROM dd.hosts group by cloud_provider"
+          type: string
+        row_limit:
+          description: |-
+            Cap on the number of rows returned. Defaults to 5,000 when omitted. Must be
+            between 1 and 10,000 inclusive; values outside this range are rejected with 400.
+          example: 1000
+          format: int64
+          maximum: 10000
+          minimum: 1
+          type: integer
+        time:
+          $ref: "#/components/schemas/DdsqlTabularQueryTimeWindow"
+      required:
+        - query
+        - time
+      type: object
+    DdsqlTabularQueryRequestData:
+      description: JSON:API resource object for a DDSQL tabular query execution request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryRequestType:
+      default: ddsql_query_request
+      description: JSON:API resource type for a DDSQL tabular query request.
+      enum:
+        - ddsql_query_request
+      example: ddsql_query_request
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_REQUEST
+    DdsqlTabularQueryResponse:
+      description: |-
+        Response envelope for both the execute and fetch DDSQL tabular query endpoints.
+        Carries the JSON:API primary resource and a top-level `meta` block with
+        request-scoped observability handles.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseData"
+        meta:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    DdsqlTabularQueryResponseAttributes:
+      description: |-
+        Attributes of a DDSQL tabular query response. `query_id` is set when
+        `state` is `running`; `columns` is set when `state` is `completed`.
+      properties:
+        columns:
+          $ref: "#/components/schemas/DdsqlTabularQueryColumns"
+        query_id:
+          description: |-
+            Opaque token to pass to the fetch endpoint to poll for results.
+            Set when `state` is `running` and absent when `state` is `completed`.
+          example: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+          type: string
+        state:
+          $ref: "#/components/schemas/DdsqlTabularQueryState"
+        warnings:
+          $ref: "#/components/schemas/DdsqlTabularQueryWarnings"
+      required:
+        - state
+      type: object
+    DdsqlTabularQueryResponseData:
+      description: JSON:API resource object for a DDSQL tabular query response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseAttributes"
+        id:
+          description: Stable identifier for the query response resource.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryResponseMeta:
+      description: |-
+        Top-level JSON:API meta block accompanying every DDSQL tabular query response.
+        Carries standard observability handles for client-side correlation.
+      properties:
+        elapsed:
+          description: Server-side time spent serving this request, in milliseconds.
+          example: 87
+          format: int64
+          type: integer
+        request_id:
+          description: |-
+            Echo of the `DD-Request-ID` header assigned by Datadog's edge to this request,
+            for support correlation.
+          example: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+          type: string
+      required:
+        - elapsed
+        - request_id
+      type: object
+    DdsqlTabularQueryResponseType:
+      default: ddsql_query_response
+      description: JSON:API resource type for a DDSQL tabular query response.
+      enum:
+        - ddsql_query_response
+      example: ddsql_query_response
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_RESPONSE
+    DdsqlTabularQueryState:
+      description: |-
+        Lifecycle state of a DDSQL tabular query response.
+        `running` means the query is still executing and the client should poll
+        the fetch endpoint with the returned `query_id`. `completed` means the
+        result set is inlined in `columns` and no further polling is required.
+      enum:
+        - running
+        - completed
+      example: completed
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+    DdsqlTabularQueryTimeWindow:
+      description: |-
+        Time window scoping the underlying data sources, expressed in Unix milliseconds
+        since the epoch. Inclusive on `from_timestamp`, exclusive on `to_timestamp`.
+        Results from static tables (for example, `dd.hosts`) are not affected by the
+        time window, but the field must still be provided.
+      properties:
+        from_timestamp:
+          description: Start of the query window (inclusive), in Unix milliseconds since the epoch.
+          example: 1736942400000
+          format: int64
+          type: integer
+        to_timestamp:
+          description: End of the query window (exclusive), in Unix milliseconds since the epoch.
+          example: 1736946000000
+          format: int64
+          type: integer
+      required:
+        - from_timestamp
+        - to_timestamp
+      type: object
+    DdsqlTabularQueryWarnings:
+      description: Non-fatal messages emitted by the query engine while serving this response.
+      items:
+        description: A single non-fatal warning message.
+        example: "Query result was truncated at the configured row_limit."
+        type: string
+      type: array
     DefaultRulesetsPerLanguageData:
       description: The primary data object in the default rulesets per language response.
       properties:
@@ -135251,6 +135502,233 @@ paths:
       x-unstable: |-
         **Note: Data Access is in preview. If you have any feedback,
         contact [Datadog support](https://docs.datadoghq.com/help/).**
+  /api/v2/ddsql/query/tabular:
+    post:
+      description: |-
+        Submit a DDSQL statement and return either a `running` state with an opaque `query_id`
+        for the client to poll, or a `completed` state with the column-major result set inlined
+        when the query finishes quickly enough to be served synchronously.
+      operationId: ExecuteDdsqlTabularQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      query: "SELECT cloud_provider, count(*) FROM dd.hosts group by cloud_provider"
+                      row_limit: 1000
+                      time:
+                        from_timestamp: 1736942400000
+                        to_timestamp: 1736946000000
+                    type: ddsql_query_request
+            schema:
+              $ref: "#/components/schemas/DdsqlTabularQueryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                completed:
+                  summary: Query finished synchronously
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 318
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+                default:
+                  summary: Query finished synchronously
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 318
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+                running:
+                  summary: Query still executing
+                  value:
+                    data:
+                      attributes:
+                        query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                        state: running
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 42
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+              schema:
+                $ref: "#/components/schemas/DdsqlTabularQueryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Execute a tabular DDSQL query
+      tags:
+        - DDSQL
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/ddsql/query/tabular/fetch:
+    post:
+      description: |-
+        Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned
+        by a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that
+        returned `state: running`) and the server returns either a `running` state to poll again
+        or a `completed` state with the column-major result set inlined.
+      operationId: FetchDdsqlTabularQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                    type: ddsql_query_fetch_request
+            schema:
+              $ref: "#/components/schemas/DdsqlTabularQueryFetchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                completed:
+                  summary: Query finished
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 87
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+                default:
+                  summary: Query finished
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 87
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+                running:
+                  summary: Query still executing
+                  value:
+                    data:
+                      attributes:
+                        query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                        state: running
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 12
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+              schema:
+                $ref: "#/components/schemas/DdsqlTabularQueryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Fetch the result of a DDSQL query
+      tags:
+        - DDSQL
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -205153,6 +205631,12 @@ tags:
       Programmatic management of a customer's Datadog organization. Use this API to perform
       self-service organization lifecycle actions such as disabling the authenticated org.
     name: Customer Org
+  - description: |-
+      Execute DDSQL queries against the Datadog data catalog and poll for their results.
+      Queries are dispatched asynchronously: the initial request may return a `running` state with
+      a `query_id`, and clients poll the fetch endpoint until the response transitions to
+      `completed` with a column-major result set.
+    name: DDSQL
   - description: |-
       Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.
 

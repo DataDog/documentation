@@ -11193,6 +11193,36 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: DDSQL
+      url: /api/latest/ddsql/
+      identifier: ddsql
+      generated: true
+    - name: Fetch the result of a DDSQL query
+      url: /api/latest/ddsql/fetch-the-result-of-a-ddsql-query/
+      identifier: ddsql-fetch-the-result-of-a-ddsql-query
+      parent: ddsql
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - FetchDdsqlTabularQuery
+        unstable:
+          - v2
+        order: 2
+    - name: Execute a tabular DDSQL query
+      url: /api/latest/ddsql/execute-a-tabular-ddsql-query/
+      identifier: ddsql-execute-a-tabular-ddsql-query
+      parent: ddsql
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExecuteDdsqlTabularQuery
+        unstable:
+          - v2
+        order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
       identifier: dora-metrics
