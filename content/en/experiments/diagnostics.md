@@ -39,21 +39,21 @@ For experiments backed by Datadog Feature Flags, common causes include:
 - The traffic split (the relative percentages assigned to variants) changed after launch, for example from `90/10` to `50/50`, while assignments made under the earlier split remain in the analysis window.
 - Exposure events are lost at different rates by variant after assignment. For example, a variant-specific redirect or crash can prevent buffered exposure events from reaching Datadog.
 
-Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure](/experiments/plan_and_launch_experiments/#schedule-a-staged-rollout) proportionally for both variants. For example, increase traffic exposure from a `10/10` split to a `50/50` split. This increases both variant percentages proportionally while preserving their relative split.
+Keep the traffic split between variants constant for the duration of the experiment. To ramp an equally split experiment, increase [traffic exposure][1] proportionally for both variants. For example, increase traffic exposure from a `10/10` split to a `50/50` split. This increases both variant percentages proportionally while preserving their relative split.
 
 Changing targeting rules, the targeting key, or traffic exposure does not by itself cause SRM. Such a change causes SRM only if it alters the included assignment population differently by variant. Otherwise, it changes traffic volume or can cause a different diagnostic. For example, an inconsistent SDK `targetingKey` can cause **Missing metric data** when assignments and metric events no longer join to the same subject. It causes **Mixed assignments** only if the same recorded subject receives more than one variant.
 
 For warehouse-native experiments, common causes include:
 
 - The expected exposure fraction for each variant configured in Datadog does not match the assignment probability used by the upstream randomization system.
-- The [Exposure SQL Model](/experiments/concepts/exposure_sql/) filters, joins, aggregates, or applies timestamp constraints in a way that drops assignment subjects from one variant more often than another.
+- The [Exposure SQL Model][2] filters, joins, aggregates, or applies timestamp constraints in a way that drops assignment subjects from one variant more often than another.
 - Upstream assignment logging loses or misrecords assignments at different rates by variant, such as treatment-dependent telemetry loss or mapping one variant to the wrong variant key.
 - The analysis includes subjects based on behavior that occurs after assignment and can be affected by the variant. For example, a treatment-dependent eligibility event or bot filter can exclude one variant at a higher rate.
 
 ### How to resolve
 
 1. Pause decision-making for the experiment until you identify the source of the SRM.
-2. For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}](/feature_flags/concepts/flag_history/#individual-flag-history) for traffic split or variant changes, check for mixed assignments, and confirm that exposure events reach Datadog at the same rate for every variant.
+2. For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}][3] for traffic split or variant changes, check for mixed assignments, and confirm that exposure events reach Datadog at the same rate for every variant.
 3. For warehouse-native experiments, compare the expected exposure fraction for each variant in Datadog with the upstream assignment probabilities. Compare raw assignment counts by variant before and after the Exposure SQL Model applies joins, filters, aggregation, and timestamp constraints.
 4. Check whether the imbalance is localized to specific segments or time windows. A segment-specific or launch-time SRM can help narrow the root cause.
 5. Fix the source of the imbalance, then rerun experiment analysis.
@@ -76,9 +76,9 @@ If the same subject is assigned to more than one variant in the same experiment,
 
 ### How to resolve
 
-- For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}](/feature_flags/concepts/flag_history/#individual-flag-history) for unexpected changes after launch, especially changes to the experiment targeting rule, traffic split, or variants.
-- For warehouse-native experiments, make sure the column mapped to **Experiment ID** in the [Exposure SQL Model](/experiments/concepts/exposure_sql/) identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
-- If the warehouse-native [Exposure SQL Model](/experiments/concepts/exposure_sql/) intentionally reads flag-evaluation logs, filter out evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
+- For experiments backed by Datadog Feature Flags, review the flag's [{{< ui >}}Version history{{< /ui >}}][3] for unexpected changes after launch, especially changes to the experiment targeting rule, traffic split, or variants.
+- For warehouse-native experiments, make sure the column mapped to **Experiment ID** in the [Exposure SQL Model][2] identifies only the experiment exposure, such as a specific experiment or flag-allocation key, not the broader flag key.
+- If the warehouse-native [Exposure SQL Model][2] intentionally reads flag-evaluation logs, filter out evaluations that are not experiment exposures. For example, if the model captures all evaluations for a flag, an exposure ramp can record a subject's pre-experiment control experience before they are eligible for the experiment, then later record a randomized treatment exposure after they become eligible. The pre-experiment flag evaluation is not part of the experiment and should not be captured as an exposure.
 - For warehouse-native experiments, check for conflicting variant records in the assignment data.
 - Fix the source of conflicting assignments, then rerun analysis.
 
@@ -112,8 +112,8 @@ This diagnostic does not necessarily mean that the source event never fired. Eve
 - The metric definition's event name, aggregation, filters, or data source does not match the data being emitted.
 - The source event is not firing, or it fires only before the subject's first assignment and is therefore excluded from post-assignment attribution.
 - The metric events and experiment assignments identify the same subject differently. This subject identifier mismatch is a common cause of missing metric data:
-  - For Product Analytics or RUM metrics in experiments backed by Datadog Feature Flags, the configured [subject type attribute](/experiments/concepts/subject_types/#product-analytics-and-rum-metrics) must match the SDK `targetingKey`.
-  - For warehouse metrics, the subject column mapped in the [Metric SQL Model](/experiments/concepts/subject_types/#warehouse-metrics) must contain the same values as the assignment subject column. For experiments backed by Datadog Feature Flags, those values must match the SDK `targetingKey`. For warehouse-native experiments, they must match the assignment subject column configured in the [Exposure SQL Model](/experiments/concepts/exposure_sql/).
+  - For Product Analytics or RUM metrics in experiments backed by Datadog Feature Flags, the configured [subject type attribute][4] must match the SDK `targetingKey`.
+  - For warehouse metrics, the subject column mapped in the [Metric SQL Model][5] must contain the same values as the assignment subject column. For experiments backed by Datadog Feature Flags, those values must match the SDK `targetingKey`. For warehouse-native experiments, they must match the assignment subject column configured in the [Exposure SQL Model][2].
 - A warehouse Metric SQL Model returns no matching rows in the analysis window or filters out the expected events.
 
 ### How to resolve
@@ -121,7 +121,7 @@ This diagnostic does not necessarily mean that the source event never fired. Eve
 1. Open the metric and confirm that the event name, aggregation, filters, and data source are correct. Check the metric event volume chart for recent matching data.
 2. Compare an assigned subject's identifier with the identifier on its metric events. Confirm that the configured subject type attribute or mapped warehouse column contains the same value as the SDK `targetingKey` or the assignment subject column configured in the Exposure SQL Model.
 3. Confirm that metric events occur after the subject's first assignment and within the experiment analysis window.
-4. For an experiment backed by Datadog Feature Flags, if [Source Code Integration](/source_code/) is configured, click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
+4. For an experiment backed by Datadog Feature Flags, if [Source Code Integration][6] is configured, click [{{< ui >}}Ask Bits{{< /ui >}}][7] for a **Missing metric data** failure on the primary metric. Bits can inspect the source locations where the feature flag is evaluated and help you check nearby metric instrumentation. An empty code search is inconclusive and does not prove that the SDK or flag is missing from the application.
 5. For warehouse metrics, run the Metric SQL Model or query its source table directly.
 6. Fix the metric definition, identity mapping, event timing, or instrumentation issue, then rerun experiment analysis.
 
@@ -137,7 +137,7 @@ For percentile winsorization, Datadog can calculate bounds using all assigned su
 
 1. Open the metric.
 2. Review {{< ui >}}Outlier handling{{< /ui >}} under {{< ui >}}Experiment settings{{< /ui >}}. For a sparse metric with percentile winsorization, calculate the bounds from non-zero values only.
-3. It can be tempting to resolve the warning by changing the winsorization percentile or disabling outlier handling. However, metrics that trigger this diagnostic tend to have low statistical power. Use the [sample size calculator](/experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional) to estimate the experiment duration and minimum detectable effect before relying on the metric for a decision.
+3. It can be tempting to resolve the warning by changing the winsorization percentile or disabling outlier handling. However, metrics that trigger this diagnostic tend to have low statistical power. Use the [sample size calculator][8] to estimate the experiment duration and minimum detectable effect before relying on the metric for a decision.
 4. Rerun experiment analysis after updating the metric.
 
 ## Pre-experiment metric imbalance
@@ -196,14 +196,22 @@ The SQL you define depends on how the experiment is randomized. For experiments 
 
 ### How to resolve
 
-1. Click [{{< ui >}}Ask Bits{{< /ui >}}](/bits_ai/bits_chat/#web-application) on the failed diagnostic. Bits reviews the pipeline error, failed warehouse queries, and any SQL models configured for the experiment. It identifies the most likely cause and suggests a specific fix.
+1. Click [{{< ui >}}Ask Bits{{< /ui >}}][7] on the failed diagnostic. Bits reviews the pipeline error, failed warehouse queries, and any SQL models configured for the experiment. It identifies the most likely cause and suggests a specific fix.
 2. For an experiment backed by Datadog Feature Flags, confirm that exposures have synchronized to `g_exposures`, then review the failed query, Metric SQL Models, warehouse connection and permissions, and source-table availability.
 3. For a warehouse-native experiment, review the failed query, Exposure SQL Model, Metric SQL Models, warehouse connection and permissions, and source-table availability.
 4. Apply the fix, then rerun experiment analysis.
-5. If the same failure persists, contact [Datadog support][1] with the experiment URL and failure details.
+5. If the same failure persists, contact [Datadog support][9] with the experiment URL and failure details.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /help/
+[1]: /experiments/plan_and_launch_experiments/#schedule-a-staged-rollout
+[2]: /experiments/concepts/exposure_sql/
+[3]: /feature_flags/concepts/flag_history/#individual-flag-history
+[4]: /experiments/concepts/subject_types/#product-analytics-and-rum-metrics
+[5]: /experiments/concepts/subject_types/#warehouse-metrics
+[6]: /source_code/
+[7]: /bits_ai/bits_chat/#web-application
+[8]: /experiments/plan_and_launch_experiments/#run-a-sample-size-calculation-optional
+[9]: /help/
