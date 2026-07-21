@@ -87,6 +87,16 @@ Assign automatically detected endpoints to API groups to track usage, define own
 
 Read [Adding Entries][9] for more information.
 
+### How OpenAPI specifications are combined with traffic
+
+When you add an OpenAPI specification to an API entity, Datadog adds each declared HTTP method and path to the Endpoints list, including endpoints for which Datadog has not observed traffic. Datadog then compares recent endpoint telemetry with the specification and combines the data when all of the following values match:
+
+- **Service**: The service from the telemetry matches a service in the API entity's `spec.implementedBy` field. If the telemetry contains a service override, Datadog also checks its [`base_service`][13]. A definition without `spec.implementedBy` can match the same route on any service, so specify this field to avoid broad or ambiguous matches.
+- **HTTP method**: The observed method matches the method declared in the specification.
+- **Path**: Literal path segments match exactly. OpenAPI path parameters, such as `{user_id}`, match a single segment. Datadog first checks the observed URL path, then the normalized `http.route` value.
+
+When these values do not match unambiguously, the endpoint declared by the specification and the endpoint discovered from traffic remain separate entries. For an API entity example that uses `spec.implementedBy`, see [API entities][14].
+
 ### Adding metadata to APIs
 
 Add metadata to APIs through the Datadog UI or API, or use automated pipelines through the GitHub integration or Terraform.
@@ -116,3 +126,5 @@ Read [Adding Metadata to APIs][10] for more information.
 [10]: /internal_developer_portal/catalog/entity_model/
 [11]: /internal_developer_portal/catalog/endpoints/explore_endpoints/
 [12]: https://app.datadoghq.com/services?selectedComponent=endpoint
+[13]: /tracing/guide/base_service/
+[14]: /internal_developer_portal/catalog/entity_model/native_entities/#api

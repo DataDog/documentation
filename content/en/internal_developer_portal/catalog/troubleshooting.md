@@ -54,14 +54,15 @@ The total monitor count displayed on the **Setup Guidance** tab for a single ser
 
 The Endpoints list is based on APM tracing, so make sure your [services are instrumented][7].
 
-### Definition matches too many services
+### Definition and traffic appear as separate endpoints
 
-By default, the Endpoints list matches a definition to all instances that fit the defined path.
-You can scope the definition to a specific service by adding the [service parameter][6] to the API definition.
+Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify that `spec.implementedBy` includes the service from the telemetry, the HTTP methods match, and the paths use compatible literal segments and path parameters. For service overrides, Datadog also checks `base_service`.
+
+A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches. For the complete matching rules, see [How OpenAPI specifications are combined with traffic][8].
 
 ### No telemetry data for OpenAPI file
 
-The Endpoints list is derived from APM tracing, so traffic information is displayed only if traces are available for the endpoint. After uploading an OpenAPI file, deployment data becomes visible after Datadog ingests a span for the endpoint.
+Uploading an OpenAPI file adds its declared endpoints to the Endpoints list even if Datadog has not observed traffic. Traffic and performance information become visible after Datadog ingests matching spans for an endpoint.
 
 ### No data for new monitor
 
@@ -79,5 +80,5 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 [3]: /tracing/guide/setting_primary_tags_to_scope
 [4]: /help/
 [5]: /tracing/trace_pipeline/ingestion_controls/
-[6]: /api_catalog/add_metadata/
 [7]: /tracing/trace_collection/
+[8]: /internal_developer_portal/catalog/endpoints/#how-openapi-specifications-are-combined-with-traffic
