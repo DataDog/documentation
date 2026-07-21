@@ -199,16 +199,14 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
     - See the data that the processor received and sent out.
     - Enter a free-text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
     - Use the {{< ui >}}All events{{< /ui >}} dropdown menu to view events by status:
-        - `Modified only` shows only modified events.
+        - `Modified only` shows modified and created events. Created events include:
+          - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
+          - Logs created by the [Split Array][10] processor.
         - `Unmodified only` shows only unmodified events.
         - `Rerouted only` shows only logs rerouted to an overflow destination by the [Quota processor][8].
-        - `Created only` shows only:
-            - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
-            - Logs created by the [Split Array][10] processor.
         - `Dropped only` shows only dropped events.
     - Use the {{< ui >}}All telemetry{{< /ui >}} dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
-1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes.
-1. Click {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
+1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes, and click {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
 1. To deploy your updates to production, do one of the following:
     - **Deploy updates using the UI**: Click {{< ui >}}Next: Deploy Changes{{< /ui >}} on the pipeline page.
     - **Use the API to deploy changes**: See [Export and Import Configuration][11] for information on exporting pipeline configurations to JSON.
