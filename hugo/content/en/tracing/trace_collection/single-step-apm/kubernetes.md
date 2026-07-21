@@ -139,6 +139,13 @@ To update an existing Helm installation, add the SSI configuration to your `data
 {{% /tab %}}
 {{< /tabs >}}
 
+## Verify APM is working
+
+After you restart your applications and they receive traffic, confirm that Datadog is receiving traces:
+
+1. In Datadog, go to the [APM Services page][42] and check that your services appear.
+1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][35] to diagnose injection issues.
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. You can configure USTs through automatic label extraction (recommended), through explicit configuration with `ddTraceConfigs`, or in deployment manifests.
@@ -983,4 +990,5 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [36]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 [37]: /containers/kubernetes/csi_driver/
 [40]: https://app.datadoghq.com/organization-settings/api-keys
+[42]: https://app.datadoghq.com/apm/services
 [41]: /tracing/guide/injectors/

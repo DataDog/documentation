@@ -134,6 +134,15 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. Click **Next**.
 1. Review your configuration and click {{< ui >}}Deploy Configuration{{< /ui >}}.
 
+Alternatively, re-run the Agent installation command from [New Agent installation](#new-agent-installation) on the host. The command updates the existing Agent and enables SSI.
+
+## Verify APM is working
+
+After you restart your applications and they receive traffic, confirm that Datadog is receiving traces:
+
+1. In Datadog, go to the [APM Services page][23] and check that your services appear.
+1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][19] to diagnose injection issues.
+
 ## Configure Unified Service Tags
 
 Unified Service Tags (USTs) apply consistent tags across traces, metrics, and logs, making it easier to navigate and correlate your observability data. Learn how to [set USTs for Linux services][16].
@@ -267,3 +276,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [20]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [21]: https://app.datadoghq.com/fleet/agent-management
 [22]: https://app.datadoghq.com/organization-settings/api-keys
+[23]: https://app.datadoghq.com/apm/services

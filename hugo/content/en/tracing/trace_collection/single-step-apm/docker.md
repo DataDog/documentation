@@ -28,7 +28,7 @@ To enable APM in a Docker Linux container:
   
    {{< img src="tracing/trace_collection/docker-apm-instrumentation-toggle.png" alt="The 'Customize your agent install command' section of in-app instructions for installing the Datadog Agent on Docker" style="width:100%;" >}}
 
-1. Copy and run the Agent installation command in your Docker container. If the Agent is already running, redeploy the Agent container using the new command.
+1. Copy and run the following commands on your Docker host (not inside an application container). If the Agent is already running, redeploy the Agent container using the new command.
 
    Enabling SSI takes two commands. First, install the Docker instrumentation components without installing a host Agent:
 
@@ -88,6 +88,13 @@ Available versions are listed in source repositories for each language:
 - [.NET][11] (`dotnet`)
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
+
+## Verify APM is working
+
+After you restart your applications and they receive traffic, confirm that Datadog is receiving traces:
+
+1. In Datadog, go to the [APM Services page][18] and check that your services appear.
+1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][17] to diagnose injection issues.
 
 ## Configure Unified Service Tags
 
@@ -150,6 +157,7 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [15]: https://app.datadoghq.com/fleet/install-agent/latest?platform=docker
 [16]: /getting_started/tagging/unified_service_tagging/?tab=docker#containerized-environment
 [17]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
+[18]: https://app.datadoghq.com/apm/services
 
 
 
