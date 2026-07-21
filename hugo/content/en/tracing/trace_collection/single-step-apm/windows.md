@@ -43,12 +43,32 @@ To instrument only .NET applications running on IIS:
    1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
    
-1. Copy and run the provided MSI install command on your Windows host.
+1. Copy and run the provided installation command on your Windows host.
+
+   Run the command from an administrator PowerShell session. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
+
+   The UI provides a PowerShell installer:
+
+   ```powershell
+   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '{{< region-param key="dd_site" >}}'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
+   ```
+
+   Alternatively, install with the MSI:
+
+   ```powershell
+   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /norestart /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DD_API_KEY>" SITE="{{< region-param key="dd_site" >}}" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3"'
+   if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
+   ```
+
+   `dotnet:3` is the current default major version. To install a different version, change it, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
+
+   **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
 
 After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 
@@ -70,7 +90,7 @@ To instrument Java and .NET applications across your entire Windows host:
    1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
 
-1. Copy and run the provided MSI install command on your Windows host.
+1. Copy and run the provided installation command on your Windows host. Datadog generates this command in-app after you are enrolled in the Preview.
 1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
