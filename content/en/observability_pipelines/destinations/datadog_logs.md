@@ -189,6 +189,16 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 
 {{< /site-region >}}
 
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| 1,000          | 4.25              | 5                   |
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/search_syntax/logs/
@@ -199,13 +209,3 @@ To send logs from Observability Pipelines to Datadog using Azure Private Link, s
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [10]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
-
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| 1,000          | 4.25              | 5                   |
