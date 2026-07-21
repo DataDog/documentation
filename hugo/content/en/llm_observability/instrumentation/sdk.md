@@ -211,11 +211,11 @@ LLMObs.enable(
 
 `agent_service`
 : optional - _string_
-<br />The name of your agent service (LLM application), under which all traces and spans are grouped. Takes precedence over `ml_app` and `service`. See [Application naming guidelines](#application-naming-guidelines) for allowed characters. To override this value for a given trace, see [Tracing multiple applications](#tracing-multiple-applications). If not provided, this defaults to the value of `DD_LLMOBS_ML_APP` or `DD_SERVICE`.
+<br />The name of your agent service (LLM application), under which all traces and spans are grouped. This value takes precedence over `ml_app` and `service`. See [Application naming guidelines](#application-naming-guidelines) for allowed characters. To override this value for a specific trace, see [Tracing multiple applications](#tracing-multiple-applications). If omitted, the value defaults to `DD_LLMOBS_ML_APP` or `DD_SERVICE`.
 
 `ml_app`
-: optional - _string_ — **Deprecated.** Use `agent_service` instead. Will be removed in a future major version.
-<br />Previously: the name of your ML application. Use `agent_service` going forward.
+: optional - _string_ — **Deprecated.** Use `agent_service` instead. This option will be removed in a future major version.
+<br />Previously used to specify the name of your ML application.
 
 `integrations_enabled` - **default**: `true`
 : optional - _boolean_
@@ -611,7 +611,7 @@ To trace an LLM call, use the function decorator `ddtrace.llmobs.decorators.llm(
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -756,7 +756,7 @@ To trace a workflow span, use the function decorator `ddtrace.llmobs.decorators.
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -870,7 +870,7 @@ To trace an agent execution, use the function decorator `ddtrace.llmobs.decorato
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 {{% /collapse-content %}}
 
 #### Example
@@ -964,7 +964,7 @@ To trace a tool call, use the function decorator `ddtrace.llmobs.decorators.tool
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -1060,7 +1060,7 @@ To trace a task span, use the function decorator `LLMObs.task()`.
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -1166,7 +1166,7 @@ To trace an embedding operation, use the function decorator `LLMObs.embedding()`
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -1250,7 +1250,7 @@ To trace a retrieval span, use the function decorator `ddtrace.llmobs.decorators
 
 `ml_app`
 : optional - _string_ — **Deprecated.** Use `agent_service` instead.
-<br/>The name of the ML application that the operation belongs to. Use `agent_service` going forward.
+<br/>The name of the ML application that the operation belongs to.
 
 {{% /collapse-content %}}
 
@@ -3063,7 +3063,7 @@ def separate_task(workflow_span):
 
 The SDK supports tracing multiple LLM applications from the same service.
 
-You can configure the `agent_service` argument on `LLMObs.enable()`, or use the `DD_SERVICE` environment variable, to set the agent service name for all generated spans by default.
+You can configure the `agent_service` argument on `LLMObs.enable()` or set the `DD_SERVICE` environment variable to define the default agent service name for all generated spans.
 
 To override this configuration and use a different agent service name for a given root span, pass the `agent_service` argument when starting a root span for a new trace or a span in a new process. The legacy `ml_app` argument is still accepted but deprecated.
 
