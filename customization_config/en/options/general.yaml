@@ -578,4 +578,3 @@ options:
 
 - label: ECS Fargate
   id: ecs_fargate
-  
