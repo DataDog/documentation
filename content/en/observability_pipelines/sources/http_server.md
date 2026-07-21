@@ -46,7 +46,7 @@ After you select the HTTP/S Server source in the pipeline UI:
 
 #### Configure authentication tokens
 
-If you store tokens as credentials in your HTTP request's authorization header, you can configure the Worker to check if incoming HTTP requests has a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
+If you store tokens as credentials in your HTTP request's authorization header, you can configure the Worker to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
 
 **Note**: You cannot configure authentication tokens with the {{< ui >}}Plain{{< /ui >}} authorization strategy.
 
