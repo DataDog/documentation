@@ -41,7 +41,7 @@ To connect Tableau to Datadog:
    - Token name
    - Token value
 
-2. After you've entered these credentials, click **Save**.
+2. After you've entered these credentials, click {{< ui >}}Save{{< /ui >}}.
 
 ## What's next
 

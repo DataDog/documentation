@@ -1,4 +1,5 @@
 ---
+id: role
 title: rol
 ---
 Un rol define los permisos de la cuenta para los usuarios. En Datadog, hay tres roles predeterminados: administrador, estándar y solo lectura.

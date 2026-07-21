@@ -3,6 +3,7 @@ title: Serverless Monitoring for Azure App Service
 aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/
+  - /serverless/azure
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -30,11 +31,11 @@ further_reading:
 
 {{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure App Service selected." style="width:100%;" >}}
 
-In Datadog, use the [Serverless > Azure][4] page to troubleshoot all your Azure resources.
+In Datadog, use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][4] page to troubleshoot all your Azure resources.
 
 ### Azure metrics and logs
 
-Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service. 
+Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service.
 
 Set up [Azure log forwarding][6] to automatically collect and send Azure App Service resource and application logs to Datadog.
 
@@ -69,4 +70,3 @@ Capabilities:
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
 [10]: /extend/dogstatsd/
-

@@ -12,12 +12,12 @@ You can use the Function App component to represent and visualize a group of Azu
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the hosting plan for the function app.
-- **vCPU**: Enter the average number of compute units used by functions.
-- **Memory (GB)**: Enter the average amount of memory in gigabytes used by functions.
-- **Duration (ms)**: Enter the average function duration in milliseconds.
-- **Executions (MM/m)**: Enter the number of function invocations per month in millions.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the hosting plan for the function app.
+- {{< ui >}}vCPU{{< /ui >}}: Enter the average number of compute units used by functions.
+- {{< ui >}}Memory (GB){{< /ui >}}: Enter the average amount of memory in gigabytes used by functions.
+- {{< ui >}}Duration (ms){{< /ui >}}: Enter the average function duration in milliseconds.
+- {{< ui >}}Executions (MM/m){{< /ui >}}: Enter the number of function invocations per month in millions.
 
 ## API
 

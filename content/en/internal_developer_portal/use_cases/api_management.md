@@ -1,5 +1,6 @@
 ---
 title: Simplify API Management
+description: Use Catalog to centralize API discovery, ownership, and governance so developers can find, reuse, and maintain APIs across your organization.
 aliases:
   - /tracing/software_catalog/guides/api_management
   - /software_catalog/guides/api_management
@@ -8,14 +9,14 @@ aliases:
   - /service_catalog/use_cases/api_management
   - /software_catalog/use_cases/api_management
 further_reading:
-  - link: "/tracing/software_catalog/"
+  - link: "/internal_developer_portal/catalog/"
     tag: "Documentation"
-    text: "Datadog Software Catalog"
+    text: "Datadog Catalog"
 ---
 
-Software Catalog simplifies API management by providing a centralized platform for API discovery, ownership, and governance. By ensuring APIs are easy to find, use, and maintain, Software Catalog fosters effective collaboration between developers and managers.
+Catalog simplifies API management by providing a centralized platform for API discovery, ownership, and governance. By ensuring APIs are easy to find, use, and maintain, Catalog fosters effective collaboration between developers and managers.
 
-{{< img src="tracing/software_catalog/api-management-use-case.png" alt="The side panel view of an API in Software Catalog, showing API metadata and an OpenAI preview." >}}
+{{< img src="tracing/software_catalog/api-management-use-case.png" alt="The side panel view of an API in Catalog, showing API metadata and an OpenAI preview." >}}
 
 ## API discovery and usability:
 

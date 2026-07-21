@@ -24,6 +24,10 @@ further_reading:
 - link: '/integrations/content_security_policy_logs'
   tag: 'Documentation'
   text: 'Detect and aggregate CSP violations with Datadog'
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+
 ---
 
 ## Overview
@@ -44,11 +48,44 @@ Mobile Session Replay expands visibility into your mobile applications by visual
 
 Learn more about the [Session Replay for Mobile][6].
 
+## AI-powered summaries and smart chapters
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+
+Summaries and smart chapters give you context about what happened in a session before you watch it.
+
+**Summaries** describe the user's intent, key actions, friction signals, and outcome. Specific moments in the summary are hyperlinked so you can jump directly to that point in the replay. In the session list, hover over a replay to preview the summary, or open the replay directly. If a session has been summarized before, the summary appears instantly when you open the replay.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="AI-powered summary in the Session Replay player, showing user intent, key actions, friction signals, and hyperlinked moments" style="width:100%;" >}}
+
+**Smart chapters** automatically segment the replay timeline into labeled stages of the user journey. For example, in an ecommerce session, chapters might include "Browse lighting", "Shop bedding and chairs", and "Review cart and checkout". Chapters appear when you hover over the timeline and in the dropdown on the player controls, letting you jump directly between them.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Smart chapter dropdown in the Session Replay player showing labeled stages of the user journey" style="width:100%;" >}}
+
+AI summaries and smart chapters are generated for sessions with at least four user actions and a duration of at least 45 seconds.
+
+## Comments
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">This feature is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}). If you require this capability, contact <a href="/help/">Datadog Support</a>.</div>{{< /site-region >}}
+
+Session Replay comments allow your team to collaborate on bugs, usability issues, and other observations directly within a replay.
+
+With comments, you can:
+
+- Add a comment at a specific timestamp on the replay timeline. Comment markers appear on the timeline and the {{< ui >}}Comments{{< /ui >}} tab.
+- @mention a teammate or team in a comment. Tagged users receive an email notification with a link that opens the replay at the commented timestamp.
+- Copy a link to any comment and share it externally. The link opens the replay at the annotated moment with that comment thread open.
+- Reply in-thread to collaborate within a replay, and edit or delete your own comments as needed.
+
+{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Session Replay player with timestamped comments on the timeline and a Comments tab open with threaded replies." style="width:100%;" >}}
+
+To find replays that need your attention, use the {{< ui >}}All mentions to me{{< /ui >}} and {{< ui >}}Commented replays{{< /ui >}} default playlists. See [Session Replay Playlists][7] for details.
+
 ## Extend data retention
 
 By default, Session Replay data is retained for 30 days.
 
-To extend Session Replay data retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+To extend Session Replay data retention to 15 months, you can enable {{< ui >}}Extended Retention{{< /ui >}} on individual session replays. These sessions must be non-active (the user has completed their experience).
 
 To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][7].
 
@@ -70,7 +107,7 @@ You can see who has watched a given session replay by clicking the **watched** c
 
 The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][8] or side panel. Included playbacks also generate an [Audit Trail][9] event. Thumbnail previews are not included in history.
 
-To view your own playback history, check out the [My Watch History][10] playlist.
+To view your own playback history, check out the [{{< ui >}}My Watch History{{< /ui >}}][10] playlist.
 
 ## Playlists
 

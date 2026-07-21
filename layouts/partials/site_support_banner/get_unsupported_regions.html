@@ -1,0 +1,37 @@
+{{/*
+    Returns the list of unsupported regions for this page, or an empty slice.
+
+    Lookup order:
+      1. If the page has a `site_support_id` frontmatter param, use that as the
+         key into Site.Params.unsupported_sites.
+      2. Otherwise, walk the page path segments (stripping any trailing `.md`)
+         and return the first match.
+
+    Callers:
+      - layouts/partials/site_support_banner/site_support_banner.html
+      - layouts/partials/us2_fed_integration_banner/us2_fed_integration_banner.html
+*/}}
+{{ $unsupported_sites := .Site.Params.unsupported_sites }}
+{{ $result := slice }}
+
+{{ $site_support_id := .Page.Params.site_support_id }}
+{{ if $site_support_id }}
+    {{ if index $unsupported_sites $site_support_id }}
+        {{ $result = index $unsupported_sites $site_support_id }}
+    {{ else }}
+        {{ errorf "site_support_id '%s' at '%s' not found in unsupported_sites. If the site_support_id is correct, add it to the params.yaml file." $site_support_id .Page.Path }}
+    {{ end }}
+{{ else }}
+    {{ range (split .Page.Path "/") }}
+        {{ $clean := . }}
+        {{ if hasSuffix $clean ".md" }}
+            {{ $clean = substr $clean 0 -3 }}
+        {{ end }}
+        {{ if index $unsupported_sites $clean }}
+            {{ $result = index $unsupported_sites $clean }}
+            {{ break }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ return $result }}

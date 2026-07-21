@@ -12,14 +12,14 @@ Use the EventBridge Bus component to represent serverless event buses from your 
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Type**. Select the type of your event bus.
-- **Event size**. Enter the size of your event in kilobytes.
-- **Custom evnt./mo**. Enter the number of custom events processed per month in the millions.
-- **Partner evnt./mo**. Enter the number of partner events processed per month in the millions.
-- **Cross-region evnt./mo**. Enter the number of cross-region events processed per month in the millions.
-- **Bus-2-bus evnt./mo**. Enter the number of bus to bus events processed per month in the millions.
-- **Rotate item**. Rotate the component to change its direction.
+- {{< ui >}}Color{{< /ui >}}. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Type{{< /ui >}}. Select the type of your event bus.
+- {{< ui >}}Event size{{< /ui >}}. Enter the size of your event in kilobytes.
+- {{< ui >}}Custom evnt./mo{{< /ui >}}. Enter the number of custom events processed per month in the millions.
+- {{< ui >}}Partner evnt./mo{{< /ui >}}. Enter the number of partner events processed per month in the millions.
+- {{< ui >}}Cross-region evnt./mo{{< /ui >}}. Enter the number of cross-region events processed per month in the millions.
+- {{< ui >}}Bus-2-bus evnt./mo{{< /ui >}}. Enter the number of bus to bus events processed per month in the millions.
+- {{< ui >}}Rotate item{{< /ui >}}. Rotate the component to change its direction.
 
 ## API
 

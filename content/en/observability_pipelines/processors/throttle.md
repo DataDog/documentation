@@ -21,7 +21,7 @@ To set up the processor:
 1. Define a filter query. Only logs that match the specified filter query are processed. All matched logs get throttled. Logs that are sent within the throttle limit and logs that do not match the filter are sent to the next step. Logs sent after the throttle limit has been reached, are dropped. See [Search Syntax][4] for more information.
 1. Set the throttling rate. This is the number of events allowed for a given bucket during the set time window. **Note**: This rate limit is applied on a **per-worker level**. If you scale the number of workers up or down, you may want to adjust the processor rate limit accordingly. You can update the rate limit programmatically using the [Observability Pipelines API][1].
 1. Set the time window.
-1. Optionally, click **Add Field** if you want to group by a field.
+1. Optionally, click {{< ui >}}Add Field{{< /ui >}} if you want to group by a field.
 
 ## How the Throttle processor works
 
@@ -41,7 +41,7 @@ The following table compares the Throttle processor with the Quota processor:
 
 {{< img src="observability_pipelines/processors/throttling_rate.png" alt="The Throttle processor with the throttling rate set to 1000 K" style="width:40%;" >}}
 
-When the Throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured **Throttling Rate**. For example, if the **Throttling Rate** is set to `1000` events over 60 seconds, and 5,000 events arrive the moment the processor is enabled:
+When the Throttle processor is enabled, the number of logs the processor allows through immediately is based on the configured {{< ui >}}Throttling Rate{{< /ui >}}. For example, if the {{< ui >}}Throttling Rate{{< /ui >}} is set to `1000` events over 60 seconds, and 5,000 events arrive the moment the processor is enabled:
 
 - The processor allows an initial capacity of 1,000 events to pass through.
 - The remaining 4,000 events are dropped.

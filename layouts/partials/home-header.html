@@ -22,7 +22,7 @@
                 <div class="home-search-row">
                     {{ partial "search.html" . }}
                     <span class="home-ai-divider">or</span>
-                    <button type="button" class="home-ai-btn" onclick="window.askDocsAI && window.askDocsAI()" title="Ask AI">
+                    <button type="button" class="home-ai-btn" title="Ask AI">
                         <img src='{{ partial "img-resource.html" (dict "context" $dot "src" "images/svg-icons/spark-ai.svg") }}' width="16" height="16" alt="" />
                         <span>Ask AI</span>
                     </button>

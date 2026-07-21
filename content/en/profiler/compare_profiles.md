@@ -46,7 +46,7 @@ You can open different types of comparisons from different places in the UI.
 
 ### Comparing different time periods
 
-Go to **[APM > Profiles > Comparison][1]** and select a service to view its profiles over two distinct time periods.
+Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Profiles{{< /ui >}} > {{< ui >}}Comparison{{< /ui >}}][1] and select a service to view its profiles over two distinct time periods.
 
 {{< img src="profiler/compare_time_period.mp4" alt="Opening the comparison view to compare profile with an aggregation for two time periods." video="true">}}
 
@@ -71,7 +71,7 @@ Hover over methods in the profile to see specific metrics about the methods that
 
 To compare a profile you are viewing against a different time period or a specific profile:
 
-1. From any single profile view, click **⇄ Compare** to open the comparison view.
+1. From any single profile view, click {{< ui >}}⇄ Compare{{< /ui >}} to open the comparison view.
 
 2. The comparison view opens with your selected profile set as Profile B (the comparison target).
 
@@ -84,7 +84,7 @@ To compare a profile you are viewing against a different time period or a specif
 
 ### Comparing recent versions
 
-On the **Explorer** view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click **Compare To** to compare it to the aggregated profile of another version.
+On the {{< ui >}}Explorer{{< /ui >}} view, select a service to see its aggregated profile for a particular metric (for example, wall time) over the selected time frame. Then click {{< ui >}}Compare To{{< /ui >}} to compare it to the aggregated profile of another version.
 
 {{< img src="profiler/compare_version.mp4" alt="Opening the comparison view for two versions." video="true">}}
 

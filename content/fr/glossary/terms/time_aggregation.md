@@ -1,4 +1,5 @@
 ---
+id: time_aggregation
 synonyms:
 - rollup
 title: agrégation temporelle

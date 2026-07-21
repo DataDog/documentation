@@ -1,4 +1,5 @@
 ---
+id: intelligent_retention_filter
 core_product:
 - apm
 title: Filtre de rétention intelligent

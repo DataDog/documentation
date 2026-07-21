@@ -1,0 +1,34 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "interval": 5000,
+      "queries": [
+        {
+          "data_source": "apm_resource_stats",
+          "name": "a",
+          "env": "staging",
+          "service": "azure-bill-import",
+          "stat": "hits",
+          "operation_name": "cassandra.query",
+          "group_by": [
+            "resource_name"
+          ],
+          "primary_tag_name": "datacenter",
+          "primary_tag_value": "*"
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "timeseries_request"
+  }
+}

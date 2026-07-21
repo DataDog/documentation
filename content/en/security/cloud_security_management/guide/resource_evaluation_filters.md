@@ -14,7 +14,7 @@ You can use resource tags to create filters that include or exclude resources fr
 **Notes**:
 
 - Resource evaluation filters can only be used with hosts that are scanned by cloud integrations.
-- Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog. The only exception is for tags added on the integration tiles for AWS and Google Cloud Platform.
+- Tags must be applied directly to the resource. The filters do not take into account user tags added in Datadog.
 
 | Format                       | Value        |
 |------------------------------|--------------|
@@ -47,11 +47,8 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Azure" %}}
 
 1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **Azure** section.
-1. Expand a subscription.
-1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
-1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-1. Click **Save**.
+1. Expand the **Azure** section and click the subscription you want to create resource evaluation filters for. A side panel with configuration options for that subscription opens.
+1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 
@@ -59,11 +56,8 @@ The allowlist enables you to specify tags that must be applied to a resource in 
 {{% tab "Google Cloud" %}}
 
 1. On the [**Cloud Security Setup** page][1], click **Cloud Integrations**.
-1. Expand the **GCP** section.
-1. Expand a project.
-1. Under **Resource Evaluation Filters**, click the **Plus** (+) icon.
-1. Enter a comma-separated list of `key:value` pairs for the tags you want to allowlist or blocklist.
-1. Click **Save**.
+1. Expand the **GCP** section and click the project you want to create resource evaluation filters for. A side panel with configuration options for that project opens.
+1. Under **Evaluation Filters**, click **Limit to Specific Resources**. Then, click **Add Resource Tags**, add `key:value` tags as required, and click **Save**.
 
 [1]: https://app.datadoghq.com/security/configuration/csm/setup
 

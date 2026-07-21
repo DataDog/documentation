@@ -1,0 +1,3 @@
+---
+title: Query aggregated waterfall
+---

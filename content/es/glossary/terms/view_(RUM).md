@@ -1,4 +1,5 @@
 ---
+id: view_rum
 core_product:
 - real user monitoring
 title: view

@@ -4,6 +4,9 @@ aliases:
 - /real_user_monitoring/error_tracking/browser_errors
 - /error_tracking/standalone_frontend/browser
 further_reading:
+- link: "https://learn.datadoghq.com/courses/tracking-errors-rum-javascript"
+  tag: "Learning Center"
+  text: "Tracking errors with RUM for JavaScript Web Applications"
 - link: "https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/sourcemaps"
   tag: "Source Code"
   text: "datadog-ci Source code"
@@ -29,8 +32,8 @@ To start sending Error Tracking data from your browser application to Datadog, f
 
 ### Step 1 - Create the application
 
-1. In Datadog, navigate to the [**Errors > Settings > Browser and Mobile > Add an Application**][6] page and select the JavaScript (JS) application type.
-2. Enter a name for your application, then click **Create Application**. This generates a `clientToken` and an `applicationId` for your application.
+1. In Datadog, navigate to the [{{< ui >}}Errors{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Browser and Mobile{{< /ui >}} > {{< ui >}}Add an Application{{< /ui >}}][6] page and select the JavaScript (JS) application type.
+2. Enter a name for your application, then click {{< ui >}}Create Application{{< /ui >}}. This generates a `clientToken` and an `applicationId` for your application.
 
 ### Step 2 - Choose the right installation method
 
@@ -77,7 +80,7 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
     h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
     d=o.createElement(u);d.async=1;d.src=n;d.crossOrigin=''
     n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
-  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js','DD_RUM')
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js','DD_RUM')
   window.DD_RUM.onReady(function() {
     window.DD_RUM.init({
       clientToken: '<CLIENT_TOKEN>',
@@ -104,7 +107,7 @@ Add the generated code snippet to the head tag (in front of any other script tag
 
 ```javascript
 <script
-    src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+    src="https://www.datadoghq-browser-agent.com/us1/v7/datadog-rum.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -168,7 +171,7 @@ Now that you've completed the basic setup for Browser Error Tracking, your appli
 
 Visualize the [data collected][7] in [dashboards][8] or create a search query in Error Tracking.
 
-Until Datadog starts receiving data, your application appears as `pending` on the **Applications** page.
+Until Datadog starts receiving data, your application appears as `pending` on the {{< ui >}}Applications{{< /ui >}} page.
 
 ### Step 7 - Link errors with your source code (optional)
 

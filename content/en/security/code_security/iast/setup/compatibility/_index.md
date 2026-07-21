@@ -10,7 +10,7 @@ further_reading:
   text: "How App and API Protection Works in Datadog"
 ---
 
-The following capabilities are supported relative to each language's tracing library:
+The following capabilities are supported relative to each language's SDK:
 
 | Capability               | Java    | .NET     | Node.js        | Python        | Go              | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|----------------|---------------|-----------------|---------------|---------------|
@@ -18,5 +18,10 @@ The following capabilities are supported relative to each language's tracing lib
 
 Select your application language for details about framework compatibility and feature support.
 
-{{< partial name="security-platform/appsec-languages-code-security.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+{{< /card-grid >}}
 

@@ -34,7 +34,16 @@ API 테스트 기능이 언제 어디서든 고객님의 가장 중요한 서비
 
 다음 하위 유형을 활용하여 시스템의 다양한 네트워크 레이어에서 요청을 실행하세요.
 
-{{< partial name="synthetics/network-layers.html" >}}
+{{< card-grid image_width="100">}}
+  {{< image-card href="/synthetics/api_tests/http_tests" src="synthetics/api_tests/http-test1.png" alt="HTTP" >}}
+  {{< image-card href="/synthetics/api_tests/ssl_tests" src="synthetics/api_tests/ssl-test1.png" alt="SSL" >}}
+  {{< image-card href="/synthetics/api_tests/dns_tests" src="synthetics/api_tests/dns-test1.png" alt="DNS" >}}
+  {{< image-card href="/synthetics/api_tests/websocket_tests" src="synthetics/api_tests/websocket-test1.png" alt="WebSocket" >}}
+  {{< image-card href="/synthetics/api_tests/tcp_tests" src="synthetics/api_tests/tcp-test1.png" alt="TCP" >}}
+  {{< image-card href="/synthetics/api_tests/udp_tests" src="synthetics/api_tests/udp-test1.png" alt="UDP" >}}
+  {{< image-card href="/synthetics/api_tests/icmp_tests" src="synthetics/api_tests/icmp-test1.png" alt="ICMP" >}}
+  {{< image-card href="/synthetics/api_tests/grpc_tests" src="synthetics/api_tests/grpc-test1.png" alt="gRPC" >}}
+{{< /card-grid >}}
 
 서비스 중 하나가 더 느리게 응답하거나 예상치 못한 방식으로 응답하기 시작하면(예: 예상치 못한 응답 본문 또는 잘못된 레코드), 테스트로 [팀에 알림][1], [CI 파이프라인 차단][2], 또는 [결함 배포 버전 롤백][2]을 실행할 수 있습니다.
 

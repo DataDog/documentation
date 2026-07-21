@@ -26,3 +26,7 @@ further_reading:
 ---
 
 {{< include-markdown "monitors/types/cloud_cost" >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

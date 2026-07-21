@@ -9,7 +9,15 @@ aliases:
   - /security/application_security/setup/threat_detection/php
   - /security/application_security/setup/standalone/php
   - /security/application_security/enabling/compatibility/php
+  - /security/application_security/setup/php/compatibility
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% app_and_api_protection_php_overview showSetup="false" %}}
@@ -45,4 +53,4 @@ aliases:
 ## Additional Resources
 
 - [Troubleshooting Guide](/security/application_security/setup/php/troubleshooting)
-- [Compatibility Information](/security/application_security/setup/php/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/php)

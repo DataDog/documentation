@@ -1,4 +1,4 @@
-The blocked requests feature JSON or HTML content. If the [`Accept` HTTP header][103] is pointing to HTML, like `text/html`, the HTML content is used. Otherwise, the JSON one is used.
+The blocked requests feature provides JSON or HTML content. If the [`Accept` HTTP header][103] is pointing to HTML, like `text/html`, the HTML content is used. Otherwise, the JSON content is used.
 
 Both sets of content are embedded in the Datadog Tracer library package and loaded locally. See examples of the templates for [HTML][101] and [JSON][102] in the Datadog Java tracer source code on GitHub.
 

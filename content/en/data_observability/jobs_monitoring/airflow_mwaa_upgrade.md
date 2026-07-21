@@ -19,6 +19,17 @@ For details about MWAA dependency and constraints behavior, see AWS documentatio
 
 For base setup steps, see [Enable Data Observability: Jobs Monitoring for Apache Airflow][1].
 
+## For other MWAA versions
+
+If your MWAA environment runs an Airflow version that is not listed in this guide, Datadog recommends using the newest `apache-airflow-providers-openlineage` release that is compatible with your Airflow version. Use the [Airflow OpenLineage provider compatibility table][8] to choose that release, then follow the same constraints pattern:
+
+1. Download the MWAA constraints file for your Airflow and Python versions.
+2. Update the OpenLineage provider pin and any required OpenLineage dependency pins in `constraints.txt`.
+3. Pin the same versions in `requirements.txt`.
+4. Upload both files to your MWAA S3 bucket and update the MWAA environment.
+
+Datadog recommends using the newest compatible provider release available for your Airflow version. Review the [OpenLineage provider changelog][9] before updating, because provider releases can change the minimum supported Airflow version or required dependency versions.
+
 ## Requirements
 
 - Access to the Amazon S3 bucket configured for your MWAA environment
@@ -239,3 +250,5 @@ If your team manages package versions through a custom Airflow image, update pac
 [5]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 [6]: /resources/whl/apache_airflow_providers_openlineage-1.14.0-py3-none-any.whl
 [7]: /resources/whl/apache_airflow_providers_common_compat-1.2.2-py3-none-any.whl
+[8]: /data_observability/jobs_monitoring/airflow/#openlineage-provider-compatibility
+[9]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/changelog.html

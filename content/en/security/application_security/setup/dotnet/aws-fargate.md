@@ -15,6 +15,12 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% aap/aap_and_api_protection_dotnet_overview %}}
 
 ## Prerequisites
@@ -23,7 +29,7 @@ further_reading:
 - .NET application containerized with Docker
 - AWS CLI configured with appropriate permissions
 - Your Datadog API key
-- Datadog .NET tracing library (see [version requirements][1])
+- Datadog .NET SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -163,7 +169,7 @@ If you encounter issues while setting up App and API Protection for your .net ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/dotnet/compatibility
+[1]: /security/application_security/setup/compatibility/dotnet
 [2]: /security/application_security/setup/dotnet/troubleshooting
 
 

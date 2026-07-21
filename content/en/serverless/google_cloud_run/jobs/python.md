@@ -17,18 +17,18 @@ further_reading:
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run-jobs/python">available on GitHub</a>.</div>
 <div class="alert alert-info">
 For full visibility and access to all Datadog features in Cloud Run Jobs,
-ensure you’ve <a href="http://localhost:1313/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
+ensure you’ve <a href="/integrations/google_cloud_platform/">installed the Google Cloud integration</a>
 and are using <a href="https://hub.docker.com/r/datadog/serverless-init">serverless-init version 1.9.0 or later</a>.
 </div>
 
-1. **Install the Datadog Python tracer**.
+1. **Install the Datadog Python SDK**.
 
    Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI][1]:
    {{< code-block lang="text" filename="requirements.txt" disable_copy="false" collapsible="true" >}}
 ddtrace==<VERSION>
 {{< /code-block >}}
 
-   Alternatively, you can install the tracer in your Dockerfile:
+   Alternatively, you can install the SDK in your Dockerfile:
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN pip install ddtrace
 {{< /code-block >}}
@@ -81,7 +81,7 @@ logger.info("Hello world!")
 
 4. **Configure your application**.
 
-{{% serverless-init-configure %}}
+{{% serverless-init-configure cloudrun_jobs="true" %}}
 
 5. {{% gcr-service-label %}}
 

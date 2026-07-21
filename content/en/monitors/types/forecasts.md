@@ -26,7 +26,7 @@ Forecasting is an algorithmic feature that allows you to predict where a metric 
 
 ## Monitor creation
 
-To create a [forecast monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Forecast*.
+To create a [forecast monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Forecast{{< /ui >}}.
 
 ### Define the metric
 
@@ -35,8 +35,8 @@ Any metric currently reporting to Datadog is available for monitors. For more in
 After defining the metric, the forecast monitor provides two preview graphs in the editor:
 {{< img src="monitors/monitor_types/forecasts/editor_graphs.png" alt="Editor graphs" style="width:95%;">}}
 
-* The **Historical View** lets you explore the past metric data at different time scales.
-* The **Evaluation Preview** shows a combination of historical and predicted metric data.
+* The {{< ui >}}Historical View{{< /ui >}} lets you explore the past metric data at different time scales.
+* The {{< ui >}}Evaluation Preview{{< /ui >}} shows a combination of historical and predicted metric data.
 
 ### Set alert conditions
 
@@ -49,7 +49,7 @@ After defining the metric, the forecast monitor provides two preview graphs in t
 
 #### Advanced options
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under **Advanced Options**:
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available to edit under {{< ui >}}Advanced Options{{< /ui >}}:
 
 {{< img src="monitors/monitor_types/forecasts/advanced_options.png" alt="Advanced options" style="width:80%;">}}
 
@@ -107,7 +107,7 @@ For detailed instructions on the advanced alert options (no data, evaluation del
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][8] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][8] page.
 
 ## API
 

@@ -38,7 +38,12 @@ Autocomplete and search require the following:
 
 Select your runtime below:
 
-{{< partial name="dynamic_instrumentation/symbol-database-languages.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+{{< /card-grid >}}
 
 ## Explore autocomplete and search
 

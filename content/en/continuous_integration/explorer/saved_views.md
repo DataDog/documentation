@@ -28,13 +28,13 @@ You can also use saved views to share common queries and configurations with you
 
 <div class="alert alert-info">Update, rename, and delete actions are disabled for read-only users.</div>
 
-To access your saved views, expand **> Views** to the left in the [CI Visibility Explorer][1].
+To access your saved views, expand {{< ui >}}> Views{{< /ui >}} to the left in the [CI Visibility Explorer][1].
 
 {{< img src="continuous_integration/saved-view-pipelines-executions.png" alt="Access Saved Views by clicking the tab to the left of CI Visibility" width="50%" >}}
 
 All saved views except for the [default view](#default-views) are shared across the organization, including custom saved views created by users. These are editable by anyone in your organization and display the user's avatar who created the view. 
 
-Click **Save** to create a custom saved view from the current content in the CI Visibility Explorer.
+Click {{< ui >}}Save{{< /ui >}} to create a custom saved view from the current content in the CI Visibility Explorer.
 
 You can:
 
@@ -50,7 +50,7 @@ You can set a saved view to be your default landing page in the [CI Visibility E
 
 Temporarily override your default saved view by completing an action in the UI or opening links in the Explorer that embeds a different configuration.
 
-In the default view entry in the **Views** panel, you can:
+In the default view entry in the {{< ui >}}Views{{< /ui >}} panel, you can:
 
 - Click on the entry to reload your default view
 - Update your default view with the current parameters

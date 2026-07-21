@@ -4,30 +4,32 @@ aliases:
 - /es/getting_started/faq/
 cascade:
   algolia:
-    category: Empezando
+    category: Getting Started
     rank: 50
-description: Introducción a la plataforma de observabilidad de Datadog con guías para
-  la instalación, la configuración y puesta en marcha de las principales funciones.
-disable_sidebar: verdadero
+description: Introducción a la plataforma de observabilidad de Datadog con guías sobre
+  la instalación, la configuración y el inicio de uso de sus características clave.
+disable_sidebar: true
 further_reading:
 - link: https://learn.datadoghq.com/
-  tag: Centro de aprendizaje
-  text: Haz un curso para empezar a utilizar Datadog
+  tag: Centro de Aprendizaje
+  text: Toma un curso para comenzar con Datadog
 - link: https://datadoghq.com/blog/
   tag: Blog
-  text: Obtén información sobre los nuevos productos y funciones de Datadog, integraciones
-    y mucho más
+  text: Conoce los nuevos productos y características de Datadog, integraciones y
+    más
 - link: https://app.datadoghq.com/help/quick_start
-  tag: Aplicación
-  text: Explorar la Guía de inicio rápido
-title: Empezando
+  tag: App
+  text: Explora la Guía de Inicio Rápido
+- link: https://learn.datadoghq.com/courses/introduction-to-observability
+  tag: Centro de Aprendizaje
+  text: Introducción a la Observabilidad
+title: Comenzando
 ---
+## ¿Qué es Datadog? {#what-is-datadog}
 
-## ¿Qué es Datadog?
+Datadog es una plataforma de observabilidad que apoya cada fase del desarrollo de software en cualquier stack. La plataforma consiste en muchos productos que te ayudan a construir, probar, monitorear, depurar, optimizar y proteger tu software. Estos productos pueden ser utilizados individualmente o combinados en una solución personalizada.
 
-Datadog es una plataforma de observabilidad que respalda cada fase del desarrollo de software en cualquier stack tecnológico. La plataforma consta de muchos productos que permiten crear, probar, monitorizar, depurar, optimizar y proteger tu software. Estos productos pueden utilizarse individualmente o combinados en una solución personalizada.
-
-En la tabla siguiente, se enumeran algunos ejemplos de productos de Datadog:
+La tabla siguiente enumera algunos ejemplos de productos de Datadog:
 
 <table>
     <thead>
@@ -38,35 +40,35 @@ En la tabla siguiente, se enumeran algunos ejemplos de productos de Datadog:
         <td><p><strong>Desarrollo</strong></p></td>
         <td>
         <ul>
-        <li>Resalta las vulnerabilidades del código en tu editor de textos o en GitHub con <a href="/security/code_security/">Code Security</a>.</li>
-        <li>Organiza una sesión remota de programación en parejas con <a href="/coscreen/">CoScreen</a>.</li></ul>
+        <li>Destaca las vulnerabilidades de código en tu editor de texto o en GitHub con <a href="/security/code_security/">Code Security</a>.</li>
+        <li>Facilita una sesión de programación en pareja remota con <a href="/coscreen/">CoScreen</a>.</li></ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>Tests</strong></p></td>
+        <td><p><strong>Pruebas</strong></p></td>
         <td>
             <ul>
                 <li>Bloquea el código defectuoso para que no se despliegue en producción con <a href="/pr_gates/">PR Gates</a>.</li>
-                <li>Incentiva a tus usuarios de todo el mundo a probar tu aplicación web, API o aplicación móvil con <a href="/synthetics/">Synthetic Monitoring</a>.</li>
+                <li>Simula usuarios alrededor del mundo para probar tu aplicación web, API o aplicación móvil con <a href="/synthetics/">Synthetic Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>Monitorización</strong></p></td>
+        <td><p><strong>Monitoreo</strong></p></td>
         <td>
             <ul>
-                <li>Ingiere <a href="/logs/">logs</a>, <a href="/metrics/">métricas</a>, <a href="/events/">eventos</a> y <a href="/tracing/glossary/#trace">trazas (traces) de red</a> con un control detallado del procesamiento, la agregación y las <a href="/monitors/">alertas.</a></li>
-                <li>Evalúa el rendimiento del host con <a href="/profiler/">Continuous Profiler</a>.</li>
+                <li>Ingesta <a href="/logs/">registros</a>, <a href="/metrics/">métricas</a>, <a href="/events/">eventos</a> y <a href="/tracing/glossary/#trace">trazas de red</a> con control granular sobre el procesamiento, la agregación y <a href="/monitors/">las alertas.</a></li>
+                <li>Evalúa el rendimiento del servidor con <a href="/profiler/">Continuous Profiler</a>.</li>
                 <li>Evalúa el rendimiento de la aplicación con <a href="/tracing/">Application Performance Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
     <tr>
-        <td><p><strong>Resolución de problemas</strong></p></td>
+        <td><p><strong>Resolución de Problemas</strong></p></td>
         <td>
             <ul>
-                <li>Gestiona <a href="/error_tracking/">errores</a> e <a href="/service_management/incident_management/">incidencias</a>, resumiendo los problemas y recomendando correcciones.</li>
-                <li>Mide el índice de abandono de los usuarios y detecta la frustración de los usuarios con <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
+                <li>Gestione <a href="/error_tracking/">errores</a> e <a href="/incident_response/incident_management/">incidentes</a>, resumiendo problemas y sugiriendo soluciones.</li>
+                <li>Mide la rotación de usuarios y detecta la frustración del usuario con <a href="/real_user_monitoring/">Real User Monitoring</a>.</li>
             </ul>
         </td>
     </tr>
@@ -80,67 +82,69 @@ En la tabla siguiente, se enumeran algunos ejemplos de productos de Datadog:
     </tr>
 </table>
 
-Además, cientos de [integraciones][1] te permiten superponer funciones de Datadog a las tecnologías que ya utilizas. Por ejemplo, la [integración de AWS][2] recopila logs, eventos y métricas de más de 90 servicios de AWS.
+Además, cientos de [integraciones][1] te permiten superponer las características de Datadog sobre las tecnologías que ya utilizas. Por ejemplo, la [integración de AWS][2] recopila registros, eventos y métricas de más de 90 servicios de AWS.
 
-## Más información
+## Aprende más {#learn-more}
 
-{{< learning-center-callout header="Únete a una sesión de webinar de Enablement" hide_image="true" btn_title="Inscríbete" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
-  Esta sesión de capacitación básica ayuda a responder a la pregunta clave: "¿Qué es Datadog y qué puede hacer por mí?". Aprenderás cómo enviar datos a Datadog y qué páginas visitar para comprender mejor el estado de tus diversos entornos, aplicaciones e infraestructura.
+{{< learning-center-callout header="Únete a una sesión de seminario web de habilitación" hide_image="true" btn_title="Regístrate" btn_url="https://www.datadoghq.com/technical-enablement/session/datadog-overview/">}}
+  Esta sesión de habilitación fundamental ayuda a responder la pregunta clave: "¿Qué es Datadog y qué puede hacer por mí?" Aprenderás cómo enviar datos a Datadog y qué páginas visitar para comprender mejor el estado de tus diversos entornos, aplicaciones e infraestructura.
 {{< /learning-center-callout >}}
 
-### Haz un curso
-El Centro de aprendizaje de Datadog ofrece experiencia práctica en la plataforma de Datadog. Los [cursos introductorios][3] abarcan prácticas de observabilidad, conceptos clave de Datadog y mucho más.
+### Toma un curso {#take-a-course}
+El Centro de Aprendizaje de Datadog ofrece experiencia práctica con la plataforma de Datadog. Los [cursos de Introducción][3] cubren prácticas de observabilidad, conceptos clave de Datadog y más.
 
-Para comenzar rápidamente con la navegación por Datadog, prueba el [Curso de inicio rápido][4].
+Para la introducción más rápida a la navegación en Datadog, prueba el [curso de Inicio Rápido][4].
 
-### Conocer más sobre un área de producto
-{{< whatsnext desc="Empíeza con una de las siguientes guías:">}}
-{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Descubre cómo utilizar la interfaz de usuario de Datadog: dashboards, lista de infraestructuras, mapas y mucho más.{{< /nextlink >}}
-{{< nextlink href="/getting_started/site" >}}<u>Sitio Datadog</u>: Selecciona el sitio Datadog adecuado para tu región y tus requisitos de seguridad.{{< /nextlink >}}
-{{< nextlink href="/getting_started/devsecops" >}}<u>Paquetes DevSecOps</u>: Empieza con los paquetes DevSecOps de infraestructura.{{< /nextlink >}}
-{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Envía métricas y eventos de tus hosts a Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/api" >}}<u>API</u>: Empieza a utilizar la API HTTP de Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/integrations" >}}<u>Integraciones</u>: Aprende a recopilar métricas, trazas y logs con las integraciones de Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/search" >}}<u>Búsqueda</u>: Aprende los fundamentos de la búsqueda y el filtrado en productos de Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/tagging" >}}<u>Etiquetas (Tags)</u>: Empieza a etiquetar tus métricas, trazas y logs.{{< /nextlink >}}
-{{< nextlink href="/getting_started/OpenTelemetry" >}}<u>OpenTelemetry</u>: Aprende a enviar métricas, trazas y logs de OpenTelemetry a Datadog. {{< /nextlink >}}
-{{< nextlink href="/getting_started/learning_center" >}}<u>Centro de aprendizaje</u>: Sigue un recorrido de aprendizaje, toma una clase o un laboratorio autoguiado y explora el programa de certificación de Datadog.{{< /nextlink >}}
+### Profundiza en un área de producto {#dive-deeper-into-a-product-area}
+{{< whatsnext desc="Comienza con una de las guías a continuación:">}}
+{{< nextlink href="/getting_started/application" >}}<u>Datadog</u>: Descubre cómo usar la interfaz de usuario de Datadog: Tableros, lista de infraestructura, mapas y más.{{< /nextlink >}}
+{{< nextlink href="/getting_started/site" >}}<u>Sitio de Datadog</u>: Selecciona el sitio de Datadog apropiado para tu región y requisitos de seguridad.{{< /nextlink >}}
+{{< nextlink href="/getting_started/devsecops" >}}<u>DevSecOps Bundles</u>: Comienza con los DevSecOps Bundles de Infrastructure.{{< /nextlink >}}
+{{< nextlink href="/getting_started/agent" >}}<u>Agent</u>: Envía métricas y eventos desde tus servidores a Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/api" >}}<u>API</u>: Comienza con la API HTTP de Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/integrations" >}}<u>Integraciones</u>: Aprende cómo recopilar métricas, trazas y registros con las integraciones de Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/search" >}}<u>Búsqueda</u>: Aprende los fundamentos de la búsqueda y filtrado en los productos de Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/tagging" >}}<u>Etiquetas</u>: Comienza a etiquetar tus métricas, registros y trazas.{{< /nextlink >}}
+{{< nextlink href="/getting_started/opentelemetry" >}}<u>OpenTelemetry</u>: Aprende cómo enviar métricas, trazas y registros de OpenTelemetry a Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/learning_center" >}}<u>Centro de Aprendizaje</u>: Sigue un camino de aprendizaje, toma una clase o laboratorio autodirigido y explora el programa de certificación de Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-{{< whatsnext desc="Servicios de plataforma:">}}
-{{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Crea, comparte y realiza un mantenimiento de aquellos dashboards que responden a las preguntas relacionadas con el trabajo que más te importan.{{< /nextlink >}}
-{{< nextlink href="/getting_started/incident_management" >}}<u>Gestión de incidencias</u>: Comunica y realiza un seguimiento de los problemas en tus sistemas.{{< /nextlink >}}
-{{< nextlink href="/getting_started/monitors" >}}<u>Monitores</u>: Configura alertas y notificaciones para que tu equipo sepa cuándo ocurren cambios críticos.{{< /nextlink >}}
-{{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combina gráficos, métricas, logs y monitores en directo para aislar los problemas y crear guías interactivas.{{< /nextlink >}}
-{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automatiza los procesos de extremo a extremo en respuesta a las alertas y señales de seguridad.{{< /nextlink >}}
+{{< whatsnext desc="Servicios de Plataforma:">}}
+{{< nextlink href="/getting_started/dashboards" >}}<u>Dashboards</u>: Crea, comparte y mantén tableros que respondan a las preguntas laborales que son importantes para ti.{{< /nextlink >}}
+{{< nextlink href="/getting_started/incident_management" >}}<u>Incident Management</u>: Comunica y rastrea problemas en tus sistemas.{{< /nextlink >}}
+{{< nextlink href="/getting_started/monitors" >}}<u>Monitors</u>: Configura alertas y notificaciones para que tu equipo sepa cuándo ocurren cambios críticos.{{< /nextlink >}}
+{{< nextlink href="/getting_started/notebooks" >}}<u>Notebooks</u>: Combina gráficos en vivo, métricas, registros y monitors para aislar problemas y crear guías interactivas.{{< /nextlink >}}
+{{< nextlink href="/getting_started/organization_topology" >}}<u>Topología de Organización</u>: Elige entre implementaciones de Datadog de una sola organización y múltiples organizaciones y gestiona el aislamiento con controles de acceso.{{< /nextlink >}}
+{{< nextlink href="/getting_started/teams" >}}<u>Teams</u>: Construye un modelo de propiedad confiable sincronizando datos de equipo desde proveedores de identidad, GitHub y otras fuentes en Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/workflow_automation" >}}<u>Workflow Automation</u>: Automatiza procesos de extremo a extremo en respuesta a alertas y señales de seguridad.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Producto:">}}
-{{< nextlink href="/getting_started/containers" >}}<u>Contenedores</u>: Aprende a utilizar Agent Autodiscovery y el Datadog Operator.{{< /nextlink >}}
-{{< nextlink href="/getting_started/serverless" >}}<u>Serverless para AWS Lambda</u>: Aprende a recopilar métricas, logs y trazas de tu infraestructura sin servidor.{{< /nextlink >}}
-{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>Portal interno para desarrolladores</u>: Unifica telemetría, metadatos y flujos de trabajo para acelerar la entrega. {{< /nextlink >}}
-{{< nextlink href="/getting_started/tracing" >}}<u>Rastreo</u>: Configura el Agent para rastrear una aplicación pequeña.{{< /nextlink >}}
-{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Utiliza el Continuous Profiler para encontrar y solucionar problemas de rendimiento en tu código.{{< /nextlink >}}
-{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: Visualiza la salud y el rendimiento de las bases de datos, y soluciona rápidamente cualquier problema que surja.{{< /nextlink >}}
-{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Empieza a probar y monitorizar tus endpoints de API y tus experiencias empresariales clave con tests Synthetic.{{< /nextlink >}}
-{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Ejecuta tests Synthetic de extremo a extremo en tus pipelines y tus IDE de CI.{{< /nextlink >}}
-{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Observa en profundidad como interactúan tus usuarios con tu producto con Session Replays.{{< /nextlink >}}
-{{< nextlink href="/getting_started/application_security" >}}<u>App and API Protection</u>: Descubre las prácticas recomendadas para poner a tu equipo en marcha con AAP.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security</u>: Descubre las prácticas recomendadas para poner a tu equipo en marcha con Cloud Security.{{< /nextlink >}}
-{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Descubre las prácticas recomendadas para poner a tu equipo en marcha con Cloud SIEM.{{< /nextlink >}}
-{{< nextlink href="/getting_started/logs" >}}<u>Logs</u>: Envía tus primeros logs y utiliza el procesamiento de logs para enriquecerlos.{{< /nextlink >}}
-{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Recopila datos de pipelines CI configurando integraciones con tus proveedores CI.{{< /nextlink >}}
-{{< nextlink href="/getting_started/feature_flags" >}}<u>Marcadores de funciones</u>: Gestiona la entrega de funciones y personaliza la experiencia del usuario gracias a la observabilidad incorporada.{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Recopila datos de tests CI configurando servicios de test en Datadog.{{< /nextlink >}}
-{{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Test Impact Analysis</u>: Optimiza tu paquete de tests y reduce los costes de CI ejecutando solo los tests pertinentes para tu cambio de código.{{< /nextlink >}}
-{{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analiza tu código y tus bibliotecas de código abierto en tus aplicaciones, desde el desarrollo hasta la ejecución.{{< /nextlink >}}
+{{< nextlink href="/getting_started/containers" >}}<u>Containers</u>: Aprende cómo usar Agent Autodiscovery y el Datadog operator.{{< /nextlink >}}
+{{< nextlink href="/getting_started/serverless" >}}<u>Serverless for AWS Lambda</u>: Aprende cómo recopilar métricas, registros y trazas de tu infraestructura sin servidor.{{< /nextlink >}}
+{{< nextlink href="/getting_started/internal_developer_portal" >}}<u>Internal Developer Portal</u>: Unifica telemetría, metadatos y flujos de trabajo para acelerar la entrega. {{< /nextlink >}}
+{{< nextlink href="/getting_started/tracing" >}}<u>Tracing</u>: Configura el Agent para trazar una pequeña aplicación.{{< /nextlink >}}
+{{< nextlink href="/getting_started/profiler" >}}<u>Profiler</u>: Utiliza Continuous Profiler para encontrar y solucionar problemas de rendimiento en tu código.{{< /nextlink >}}
+{{< nextlink href="/getting_started/database_monitoring" >}}<u>Database Monitoring</u>: Observa la salud y el rendimiento de las bases de datos, y soluciona rápidamente cualquier problema que surja.{{< /nextlink >}}
+{{< nextlink href="/getting_started/synthetics" >}}<u>Synthetic Monitoring</u>: Comienza a probar y monitorear tus puntos de conexión de API y los principales recorridos de negocio con pruebas Synthetic.{{< /nextlink >}}
+{{< nextlink href="/getting_started/continuous_testing" >}}<u>Continuous Testing</u>: Ejecuta pruebas Synthetic de extremo a extremo en tus canalizaciones de CI y en tus IDEs.{{< /nextlink >}}
+{{< nextlink href="/getting_started/session_replay" >}}<u>Session Replay</u>: Obtén una visión detallada de cómo los usuarios interactúan con tu producto mediante la reproducción de sesión.{{< /nextlink >}}
+{{< nextlink href="/getting_started/application_security" >}}<u>App and API Protection</u>: Descubre las mejores prácticas para que tu equipo comience a trabajar con AAP.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_security_management" >}}<u>Cloud Security</u>: Descubre las mejores prácticas para que tu equipo comience a trabajar con Cloud Security.{{< /nextlink >}}
+{{< nextlink href="/getting_started/cloud_siem" >}}<u>Cloud SIEM</u>: Descubre las mejores prácticas para que tu equipo comience a trabajar con Cloud SIEM.{{< /nextlink >}}
+{{< nextlink href="/getting_started/logs" >}}<u>Registros</u>: Envía tus primeros registros y utiliza el procesamiento de registros para enriquecerlos.{{< /nextlink >}}
+{{< nextlink href="/getting_started/ci_visibility" >}}<u>CI Visibility</u>: Recopila datos de canalizaciones de CI configurando integraciones con tus proveedores de CI.{{< /nextlink >}}
+{{< nextlink href="/getting_started/feature_flags" >}}<u>Feature Flags</u>: Gestiona la entrega de funciones y personaliza las experiencias de los usuarios, con observabilidad integrada.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_optimization" >}}<u>Test Optimization</u>: Recopila datos de pruebas de CI configurando servicios de pruebas en Datadog.{{< /nextlink >}}
+{{< nextlink href="/getting_started/test_impact_analysis" >}}<u>Análisis de Impacto de Pruebas</u>: Optimiza tu conjunto de pruebas y reduce los costos de CI ejecutando solo las pruebas que son relevantes para tus cambios de código.{{< /nextlink >}}
+{{< nextlink href="/getting_started/code_security" >}}<u>Code Security</u>: Analiza tu código propio y las bibliotecas de código abierto en tus aplicaciones desde el desarrollo hasta el tiempo de ejecución.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Probar la versión preliminar de un producto o una función
+## Prueba un producto o función de vista previa {#try-a-preview-product-or-feature}
 
-Los equipos de productos Datadog añaden con frecuencia nuevas funciones que pueden ayudarte. Puedes probar algunas de ellas antes de que estén disponibles, para ver si te sirven, y luego darnos tu opinión para mejorarlas. Para ver una lista completa de las versiones preliminares activas, obtener más información e inscribirte para participar, visita el [programa de versiones preliminares de productos Datadog][5].
+Los equipos de producto de Datadog están agregando frecuentemente nuevas funciones que podrían ayudarte. Puedes probar algunas de ellas antes de que estén disponibles en general para ver si te ayudan y para darnos retroalimentación que nos permita mejorarlas. Para ver una lista completa de vistas previas activas, obtener más información y registrarte para participar, visita [Programa de Vista Previa de Productos de Datadog][5].
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

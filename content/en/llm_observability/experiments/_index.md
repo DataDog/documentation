@@ -1,12 +1,12 @@
 ---
 title: Experiments
-description: An overview of Datadog's LLM Observability Experiments feature.
+description: An overview of Agent Observability Experiments feature.
 aliases:
   - /llm_observability/experiments_preview
 further_reading:
   - link: /llm_observability/experiments/setup
     tag: "Documentation"
-    text: Set up and use LLM Observability Experiments
+    text: Set up and use Agent Observability Experiments
   - link: "https://www.datadoghq.com/blog/llm-experiments/"
     tag: "Blog"
     text: "Create and monitor LLM experiments with Datadog"
@@ -21,9 +21,9 @@ further_reading:
     text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
 ---
 
-{{< img src="llm_observability/experiments/filtered_experiments.png" alt="LLM Observability, Experiment view. Heading: 'Comparing 12 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}
 
-LLM Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
+Agent Observability [Experiments][1] supports the entire lifecycle of building LLM applications and agents. It helps you understand how changes to prompts, models, providers, or system architecture affect performance. With this feature, you can:
 
 - Create and version datasets
 - Run and manage experiments

@@ -5,6 +5,9 @@ further_reading:
 - link: "/notebooks/advanced_analysis"
   tag: "Documentation"
   text: "Analysis Features"
+- link: https://learn.datadoghq.com/courses/log-analytics-with-notebooks
+  tag: Learning Center
+  text: Log Analytics with Notebooks
 ---
 
 ## Overview

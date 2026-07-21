@@ -16,11 +16,11 @@ Payment is collected by Datadog near the 10th business day of each month. Datado
 
 ### Update
 
-Update your credit card through the [Plan][1] page by clicking the **Edit** button.
+Update your credit card through the [Plan][1] page by clicking the {{< ui >}}Edit{{< /ui >}} button.
 
 ### Remove
 
-To remove your credit card from Datadog, first downgrade to the **Free** plan. Then use the **Remove Card** button on the [Plan][1] page.
+To remove your credit card from Datadog, first downgrade to the {{< ui >}}Free{{< /ui >}} plan. Then use the {{< ui >}}Remove Card{{< /ui >}} button on the [Plan][1] page.
 
 ## Troubleshooting
 

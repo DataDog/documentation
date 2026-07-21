@@ -1,4 +1,5 @@
 ---
+id: check
 title: Check
 core_product:
   - datadog agent

@@ -19,6 +19,12 @@ further_reading:
   text: "How Application & API Protection Works in Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Learn how to set up App and API Protection (AAP) on your Kubernetes clusters by selecting the Kubernetes integration that suits you best.
 
 <div class="alert alert-info">
@@ -31,6 +37,7 @@ Learn how to set up App and API Protection (AAP) on your Kubernetes clusters by 
   {{< appsec-integration name="Envoy Gateway" avatar="envoy" link="./envoy-gateway" >}}
   {{< appsec-integration name="Gateway API" src="integrations_logos/gateway-api_avatar.svg" link="./gateway-api" >}}
   {{< appsec-integration name="Ingress NGINX Controller" avatar="nginx" link="../nginx/ingress-controller" >}}
+  {{< appsec-integration name="Google Kubernetes Engine (GKE)" src="integrations_logos/google_kubernetes_engine.png" link="./gke" >}}
 {{< /appsec-integrations >}}
 
 ## Further Reading

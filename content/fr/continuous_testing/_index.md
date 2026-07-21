@@ -57,7 +57,15 @@ Pour garantir à vos utilisateurs une expérience optimale, vous pouvez automati
 
 Simplifiez le développement de vos applications grâce à l'utilisation d'une plateforme de testing et de dépannage commune. Sélectionnez l'un des fournisseurs de CI ou des outils de collaboration suivants, par exemple [Slack][18] ou [Jira][19], pour rassembler vos workflows et ne perdre aucune information de contexte.
 
-{{< partial name="continuous_testing/ct-getting-started.html" >}}
+{{< card-grid card_width="115px" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
+{{< /card-grid >}}
 
 </br>
 

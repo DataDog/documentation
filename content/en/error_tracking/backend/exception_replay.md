@@ -58,8 +58,8 @@ below for details.
 | **Minimum Tracer Versions** | [Python][8] ≥ 3.15.0<br>[Java][9] ≥ 1.54.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 3.10.0<br>[Java][9] ≥ 1.48.0<br>[.NET][10] ≥ 3.29.0 | [Python][8] ≥ 1.16.0<br>[Java][9] ≥ 1.47.0<br>[.NET][10] ≥ 2.53.0<br>[PHP][11] ≥ 1.12.1 |
 | **Remote Configuration Required?** | Yes | Yes | No |
 
-To enable Exception Replay in-app, navigate to the Exception Replay **Settings** page in Error Tracking, select the
-desired environment or service, and toggle it to **Enabled**.
+To enable Exception Replay in-app, navigate to the Exception Replay {{< ui >}}Settings{{< /ui >}} page in Error Tracking, select the
+desired environment or service, and toggle it to {{< ui >}}Enabled{{< /ui >}}.
 
 {{< img src="tracing/error_tracking/error_tracking_exception_replay_enablement.mp4" video="true" alt="Enabling Exception Replay through the setting page" style="width:90%" >}}
 
@@ -94,14 +94,14 @@ their captured values.
 ## Sensitive data redaction
 
 Exception Replay applies automatic mode- and identifier-based redaction to ensure sensitive data is protected before
-snapshots becomes available.
+snapshots become available.
 
 ### Mode-based redaction
 
 Exception Replay has two redaction modes:
 
-- **Strict Mode:** Redacts all values except numbers and Booleans.
-- **Targeted Mode:** Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII.
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans.
+- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in snapshots.
 
 These redaction modes cannot be disabled, only switched, and Targeted Mode is applied automatically in common
 pre-production environments like `staging` or `preprod`.
@@ -145,6 +145,28 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.
+
+### BatchUploader WARN messages on GovCloud (Java)
+
+On GovCloud sites (`app.ddog-gov.com`), Java tracers may log periodic WARN messages from `com.datadog.debugger.uploader.BatchUploader` with HTTP 403 and text similar to `This traffic is not permitted on your account`. This is expected when debugger-related uploads are attempted on a site where Exception Replay, Dynamic Instrumentation, and Code Origin for Spans are not supported. Core APM functionality (traces, metrics, profiling, log injection) is not affected.
+
+To stop these log messages, set the following environment variables on the Java application pod and restart the workload:
+
+```bash
+DD_EXCEPTION_REPLAY_ENABLED=false
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=false
+DD_CODE_ORIGIN_FOR_SPANS_ENABLED=false
+```
+
+Alternatively, use JVM system properties:
+
+```bash
+-Ddd.exception.replay.enabled=false
+-Ddd.dynamic.instrumentation.enabled=false
+-Ddd.code.origin.for.spans.enabled=false
+```
+
+To confirm the fix, check the tracer startup JSON (`DATADOG TRACER CONFIGURATION`) and verify that `debugger_exception_enabled`, `debugger_enabled`, and `debugger_span_origin_enabled` are all `false`. WARN messages are rate-limited to approximately once every five minutes, so wait at least that long after restarting before confirming the messages have stopped.
 
 ## Further Reading
 

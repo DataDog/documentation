@@ -30,12 +30,12 @@ Pour commencer, vous devez d'abord créer un pipeline, qui vous permet de filtre
 
 
 
-[1]: /fr/service_management/events/pipelines_and_processors/arithmetic_processor
-[2]: /fr/service_management/events/pipelines_and_processors/date_remapper
-[3]: /fr/service_management/events/pipelines_and_processors/category_processor
-[4]: /fr/service_management/events/pipelines_and_processors/grok_parser
-[5]: /fr/service_management/events/pipelines_and_processors/lookup_processor
-[6]: /fr/service_management/events/pipelines_and_processors/remapper
-[7]: /fr/service_management/events/pipelines_and_processors/service_remapper
-[8]: /fr/service_management/events/pipelines_and_processors/status_remapper
-[9]: /fr/service_management/events/pipelines_and_processors/string_builder_processor
+[1]: /fr/events/pipelines_and_processors/arithmetic_processor
+[2]: /fr/events/pipelines_and_processors/date_remapper
+[3]: /fr/events/pipelines_and_processors/category_processor
+[4]: /fr/events/pipelines_and_processors/grok_parser
+[5]: /fr/events/pipelines_and_processors/lookup_processor
+[6]: /fr/events/pipelines_and_processors/remapper
+[7]: /fr/events/pipelines_and_processors/service_remapper
+[8]: /fr/events/pipelines_and_processors/status_remapper
+[9]: /fr/events/pipelines_and_processors/string_builder_processor

@@ -14,6 +14,13 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% aap/aap_and_api_protection_nodejs_setup_options platform="docker" %}}
 
 {{% aap/aap_and_api_protection_nodejs_overview %}}
@@ -23,7 +30,7 @@ further_reading:
 - Docker installed on your host
 - Node.js application containerized with Docker
 - Your Datadog API key
-- Datadog Node.js tracing library (see [version requirements][1])
+- Datadog Node.js SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -58,7 +65,7 @@ ENV DD_APPSEC_ENABLED=true
 ENV DD_SERVICE=<YOUR_SERVICE_NAME>
 ENV DD_ENV=<YOUR_ENVIRONMENT>
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 
@@ -88,7 +95,7 @@ ENV DD_APM_TRACING_ENABLED=false
 ENV DD_SERVICE=<YOUR_SERVICE_NAME>
 ENV DD_ENV=<YOUR_ENVIRONMENT>
 
-# Start the application with the Datadog tracer
+# Start the application with the Datadog SDK
 CMD ["node", "--require", "dd-trace/init", "app.js"]
 ```
 
@@ -118,5 +125,5 @@ If you encounter issues while setting up App and API Protection for your Node.js
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/nodejs/compatibility
+[1]: /security/application_security/setup/compatibility/nodejs
 [2]: /security/application_security/setup/nodejs/troubleshooting

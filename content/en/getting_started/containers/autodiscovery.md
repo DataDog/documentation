@@ -69,7 +69,9 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the Redis pod. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's `redis` container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+
+The check configuration annotation key follows the format `ad.datadoghq.com/<container-name>.checks`.
 
 `redisdb` is the name of the check to run. `init_config` contains some configuration parameters, such as minimum collection interval, and is optional. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 
@@ -96,7 +98,9 @@ annotations:
   ad.datadoghq.com/redis.logs: '[{"source":"redis"}]'
 ```
 
-In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the Redis pod. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+In the example above, the `tags.datadoghq.com` labels set the `env`, `service`, and even `version` as tags for all logs and metrics emitted for the pod's `redis` container. These standard labels are part of [Unified Service Tagging][1]. As a best practice, Datadog recommends using unified service tagging when configuring tags and environment variables.
+
+The check configuration annotation key follows the format `ad.datadoghq.com/<container-name>.checks`.
 
 `check_names` includes the names of the check to run, and `init_configs` contains some configuration parameters, such as minimum collection interval. Each item in `instances` represents the configuration to run for one instance of a check. **Note**: In this example, `%%host%%` is a template variable that is dynamically populated with your container's IP.
 

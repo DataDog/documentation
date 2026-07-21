@@ -5,9 +5,9 @@ further_reading:
 - link: "https://docs.datadoghq.com/agent/troubleshooting/"
   tag: "Documentation"
   text: "Agent Troubleshooting"
-- link: "/account_management/guide/access-your-support-ticket"
+- link: "/account_management/guide/manage-your-support-tickets"
   tag: "Documentation"
-  text: "Access Your Support Ticket"
+  text: "Manage Your support tickets"
 ---
 
 ## Overview
@@ -32,6 +32,9 @@ For the most efficient resolution of an issue, be ready to provide any of the re
    - If the issue is related to the functioning of the Datadog Agent, an [Agent flare][4]
    - Links to any documentation pages used
 
+To help us resolve your request as quickly as possible, please limit each Support Case to a single issue or question. Support Engineers work one case at a time, and combining multiple unrelated questions in one case can slow down resolution. If you have multiple issues, please open a separate Support Case for each one.
+Example : If you need help troubleshooting an AWS integration error and also want to understand how to configure a monitor threshold, please open two separate cases.
+
 ## Chat or support ticket?
 
 Use the table below to determine whether to open a [support ticket][1] or [reach out on chat](#reaching-out-on-chat).
@@ -43,7 +46,7 @@ Use the table below to determine whether to open a [support ticket][1] or [reach
 | Incidents and outages           | Documentation clarification
 | Complex support troubleshooting across many configuration files, logs, or queries | Minor issues involving a specific configuration file, log, or query
 
-<div class="alert alert-info">You can also use AI assistant to find answers to your questions. To access AI assistant, click the <strong>Support</strong> button in the bottom-left corner of the navigation menu.</div>
+<div class="alert alert-info">You can also use AI assistant to find answers to your questions. To access AI assistant, click the {{< ui >}}Support{{< /ui >}} button in the bottom-left corner of the navigation menu.</div>
 
 If you're not sure which option is best, feel free to use either channel to connect with Datadog support. A support ticket is automatically created whenever a chat is closed, so the issue can continue to be investigated even if it's not resolved in chat.
 
@@ -51,11 +54,11 @@ If you're not sure which option is best, feel free to use either channel to conn
 
 <div class="alert alert-danger">Chat is available any business day between the hours of 10:00 and 19:00 Eastern Time (ET). Chat is not available for HIPAA-enabled accounts.</a></div>
 
-To get started, click **Support** on the bottom-left corner of the navigation menu.
+To get started, click {{< ui >}}Support{{< /ui >}} on the bottom-left corner of the navigation menu.
 
 {{< img src="getting_started/support/support_chat_nav.png" alt="The Support button at the bottom of the app left navigation menu" style="width:40%" >}}
 
-AI assistant appears on your screen. You can ask AI assistant questions or select **Live Chat With Support**.
+AI assistant appears on your screen. You can ask AI assistant questions or select {{< ui >}}Live Chat With Support{{< /ui >}}.
 
 When a new chat is opened, you are asked if you have a **technical** or **sales** question.
    - For technical questions, you are routed to the first available Technical Support Engineer. This is ideal for any questions you have about using or configuring Datadog.

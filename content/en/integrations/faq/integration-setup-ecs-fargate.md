@@ -1,5 +1,6 @@
 ---
 title: Integration Setup for ECS Fargate
+description: "Add Datadog integrations to ECS Fargate clusters using Docker label annotations on task definitions."
 
 further_reading:
 - link: "/integrations/ecs_fargate/"

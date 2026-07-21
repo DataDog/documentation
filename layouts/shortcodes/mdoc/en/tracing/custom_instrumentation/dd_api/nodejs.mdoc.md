@@ -213,10 +213,6 @@ Additionally, traces can be excluded based on their resource name, so that the A
 
 ## dd-trace-api {% #dd-trace-api-nodejs %}
 
-{% alert level="info" %}
-The `dd-trace-api` packages is in Preview and may not include all the API calls you need. If you need more complete functionality, use the API as described in the previous sections.
-{% /alert %}
-
 The [dd-trace-api package][5] provides a stable public API for Datadog APM's custom Node.js instrumentation. This package implements only the API interface, not the underlying functionality that creates and sends spans to Datadog.
 
 This separation between interface (`dd-trace-api`) and implementation (`dd-trace`) offers several benefits:

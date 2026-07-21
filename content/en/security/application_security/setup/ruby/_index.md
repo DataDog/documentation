@@ -10,6 +10,7 @@ aliases:
   - /security/application_security/setup/standalone/ruby
   - /security/application_security/setup/threat_detection/ruby
   - /security/application_security/enabling/ruby
+  - /security/application_security/setup/ruby/compatibility
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -24,6 +25,12 @@ further_reading:
       tag: "Documentation"
       text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 {{% app-and-api-protection-ruby-overview showSetup="false" %}}
 
@@ -64,5 +71,5 @@ further_reading:
 
 ## Additional Resources
 
-- [Compatibility Information](/security/application_security/setup/ruby/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/ruby)
 - [Troubleshooting Guide](/security/application_security/setup/ruby/troubleshooting)

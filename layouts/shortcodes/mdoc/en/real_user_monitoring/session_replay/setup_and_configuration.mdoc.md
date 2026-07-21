@@ -93,7 +93,7 @@ To set up Mobile Session Replay for Kotlin Multiplatform:
 
 Make sure you've [set up and initialized the Datadog Kotlin Multiplatform RUM SDK][11] with views instrumentation enabled.
 
-### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency 
+### Step 2 - Add the `DatadogSessionReplay` iOS library as a link-only dependency
 
 For instructions, see the [guide][12].
 
@@ -124,7 +124,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 SessionReplay.enable(sessionReplayConfig)
 ```
 
-### Step 5 - Set up Material support on Android (Optional) 
+### Step 5 - Set up Material support on Android (Optional)
 
 If your app uses Material on Android, add:
 
@@ -133,6 +133,12 @@ SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport(
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -242,7 +248,7 @@ During this step, you can also configure multiple [privacy levels][17] that appl
 cd ios && pod install
 ```
 
-### Step 5 - Rebuild your app 
+### Step 5 - Rebuild your app
 
 Rebuild your iOS and Android apps
 
@@ -327,6 +333,12 @@ class _MyAppState extends State<MyApp> {
 }
 ```
 
+### Step 5 - Set Strip Style (iOS only)
+
+Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
+
+This setting is under the **Runner** target > **Build Settings** > **Deployment**.
+
 {% /if %}
 <!-- end Flutter -->
 
@@ -367,6 +379,12 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 3. Enable Session Replay for your mobile application (see setup instructions above).
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -424,6 +442,12 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -498,6 +522,12 @@ SessionReplay.stopRecording()
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
+
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 ```typescript {% filename="App.tsx" %}
@@ -513,14 +543,6 @@ SessionReplay.stopRecording();
 ```
 {% /if %}
 <!-- end React Native -->
-
-<!-- Flutter -->
-{% if equals($platform, "flutter") %}
-
-Datadog Session Replay for Flutter does not currently support manual recording.
-
-{% /if %}
-<!-- end Flutter -->
 
 ### Validate whether Session Replay data is being sent
 
@@ -556,6 +578,12 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}

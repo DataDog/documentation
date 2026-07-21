@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on ECS Fargate
 code_lang: ecs_fargate
 type: multi-code-lang
-code_lang_weight: 4
+code_lang_weight: 5
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -66,6 +66,10 @@ Use the following task definition as a starting point:
                 {
                     "name": "DD_OTELCOLLECTOR_ENABLED",
                     "value": "true"
+                },
+                {
+                    "name": "DD_OTELCOLLECTOR_INSTALLATION_METHOD",
+                    "value": "ecs-fargate"
                 },
                 {
                     "name": "DD_SITE",
@@ -138,7 +142,7 @@ Use the following task definition as a starting point:
 Replace the following placeholders:
 - `<TASK_FAMILY>`: A name for your ECS task definition family.
 - `<DD_API_KEY_SECRET_ARN>`: The ARN of the AWS Secrets Manager secret or SSM Parameter Store parameter that contains your Datadog API key. The task execution role must have `secretsmanager:GetSecretValue` (Secrets Manager) or `ssm:GetParameters` (SSM) permission to retrieve the secret.
-- `<DATADOG_SITE>`: Your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+- `<DATADOG_SITE>`: Your [Datadog site][4]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
 - `<AWS_REGION>`: The AWS region where your ECS tasks run (for example, `us-east-1`).
 - `<APP_CONTAINER_NAME>`: The name of your application container.
 - `<APP_IMAGE>`: Your application container image.
@@ -159,6 +163,37 @@ The ECS resource detector automatically populates the following attributes:
 Refer to your language's OpenTelemetry SDK documentation to add the ECS resource detector. For example:
 - **Go**: [go.opentelemetry.io/contrib/detectors/aws/ecs][5]
 - **All languages**: See the [ECS resource detector documentation][6] in the OpenTelemetry Collector contrib repository.
+
+### Use a custom Collector configuration
+
+The default DDOT Collector configuration supports standard OTLP ingestion. To customize the pipeline, for example to add a processor that drops specific metrics, provide your own `otel-config.yaml`.
+
+The DDOT Collector always loads its configuration from a fixed path inside the container: `/etc/datadog-agent/otel-config.yaml`. Because ECS Fargate doesn't support host volumes, build a custom image that includes your configuration at this path:
+
+1. Create your `otel-config.yaml` file with the pipeline you need.
+1. Create a `Dockerfile` that copies your configuration into the Datadog Agent image:
+
+   {{< code-block lang="dockerfile" filename="Dockerfile" collapsible="true" >}}
+FROM public.ecr.aws/datadog/agent:latest-full
+COPY otel-config.yaml /etc/datadog-agent/otel-config.yaml
+{{< /code-block >}}
+
+1. Build the image and push it to a container registry that your ECS task can access, such as Amazon ECR:
+
+   {{< code-block lang="bash" >}}
+docker build -t <YOUR_REGISTRY>/datadog-agent-ddot:<TAG> .
+docker push <YOUR_REGISTRY>/datadog-agent-ddot:<TAG>
+{{< /code-block >}}
+
+1. In your task definition, set the `datadog-agent` container's `image` field to your custom image instead of `public.ecr.aws/datadog/agent:latest-full`.
+
+Repeat this process for each Agent version upgrade to keep the DDOT Collector version compatible with the rest of the image.
+
+<div class="alert alert-info">
+  The Datadog Agent's entrypoint always starts the DDOT Collector with <code>--config /etc/datadog-agent/otel-config.yaml</code>. Passing a configuration through an environment variable, such as an OpenTelemetry Collector <code>env:</code> configuration provider, is not supported on ECS Fargate.
+</div>
+
+To add OpenTelemetry components not included by default, see [Use Custom OpenTelemetry Components][11].
 
 ## Send your telemetry to Datadog
 
@@ -296,3 +331,4 @@ View metrics from the DDOT Collector to monitor the Collector health.
 [8]: https://github.com/DataDog/opentelemetry-examples/tree/main/apps/rest-services/java/calendar
 [9]: https://github.com/DataDog/opentelemetry-examples/blob/main/apps/rest-services/java/calendar/src/main/java/com/otel/service/CalendarService.java#L27-L48
 [10]: /getting_started/tagging/unified_service_tagging
+[11]: /opentelemetry/setup/ddot_collector/custom_components

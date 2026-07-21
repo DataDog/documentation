@@ -1,0 +1,45 @@
+{
+  "data": {
+    "attributes": {
+      "config": {
+        "destinations": [
+          {
+            "id": "datadog-logs-destination",
+            "inputs": [
+              "my-processor-group"
+            ],
+            "type": "datadog_logs"
+          }
+        ],
+        "processor_groups": [
+          {
+            "enabled": true,
+            "id": "my-processor-group",
+            "include": "service:my-service",
+            "inputs": [
+              "amazon-s3-source"
+            ],
+            "processors": [
+              {
+                "enabled": true,
+                "id": "filter-processor",
+                "include": "service:my-service",
+                "type": "filter"
+              }
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "id": "amazon-s3-source",
+            "type": "amazon_s3",
+            "region": "us-east-1",
+            "compression": "gzip"
+          }
+        ]
+      },
+      "name": "Pipeline with S3 Source Compression"
+    },
+    "type": "pipelines"
+  }
+}

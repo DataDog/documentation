@@ -1,4 +1,5 @@
 ---
+id: action_rum
 core_product:
 - real user monitoring
 title: アクション

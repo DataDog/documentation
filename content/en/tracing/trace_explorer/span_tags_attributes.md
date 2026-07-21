@@ -25,7 +25,7 @@ Reserved attributes are a subset of span attributes that are present on every sp
 
 ### Span attributes
 
-Span attributes are the content of your span. These are collected out-of-the-box in tracing libraries using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
+Span attributes are the content of your span. These are collected out-of-the-box in SDKs using automatic instrumentation, manually using custom instrumentation, or remapped in the Datadog backend based on source attributes (see [peer attributes][11], remapped from some source attributes). To search on a specific span attribute, you must prepend an `@` character at the beginning of the attribute key.
 
 For instance, to find spans representing calls to a `users` table from a postgres database, use the following query: `@peer.db.name:users @peer.db.system:postgres`.
 
@@ -74,8 +74,8 @@ The search bar provides the most comprehensive set of interactions to filter and
 
 The search bar and URL automatically reflect your selections from the facet panel.
 
-- **Facets (qualitative)** come with a top list of unique values, and a count of spans matching each of them.
-- **Measures (quantitative)** come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
+- {{< ui >}}Facets (qualitative){{< /ui >}} come with a top list of unique values, and a count of spans matching each of them.
+- {{< ui >}}Measures (quantitative){{< /ui >}} come with a slider indicating minimum and maximum values. Use the slider, or input numerical values, to scope the search query to different bounds.
 
 ### Hiding facets
 
@@ -120,7 +120,7 @@ The easiest way to create a facet is to add it from the trace side panel so that
 
 ### Creating facets from the facet list
 
-If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking **+ Add**.
+If finding a span that has the desired field is not an option, create a facet directly from the facet panel by clicking {{< ui >}}+ Add{{< /ui >}}.
 
 Define the underlying field (key) name for this facet:
 

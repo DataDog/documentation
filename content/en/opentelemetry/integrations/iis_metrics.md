@@ -27,7 +27,7 @@ See the [IIS receiver documentation][1] for detailed configuration options and r
 
 {{< mapping-table resource="iis.csv">}}
 
-See [OpenTelemetry Metrics Mapping][2] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
 ## Further reading
 

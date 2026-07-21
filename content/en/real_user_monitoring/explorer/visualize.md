@@ -102,7 +102,7 @@ To build a funnel, choose your starting view or action and click on the plus ico
 
 ### Suggested next steps
 
-When you have a starting point in mind, but aren't sure what your users did next, click the search input box where it says "Search for View or Action Name" to view suggested next steps. This input box automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
+When you have a starting point in mind, but aren't sure what your users did next, click the search input box where it says {{< ui >}}Search for View or Action Name{{< /ui >}} to view suggested next steps. This input box automatically loads the top most common **views** and **actions** that users typically see and take next. This allows you to build funnels quicker knowing the paths your users are taking in sequence.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-suggested-next-steps-1.png" alt="Build a funnel" style="width:90%;" >}}
 
@@ -110,20 +110,20 @@ When you have a starting point in mind, but aren't sure what your users did next
 
 ### Filtering
 
-When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geo-location, and user) and [session-specific][3] attributes to analyze the data further. Click the **Add Filter** button to view the full list of available attributes.
+When constructing your funnel, you can add [default attributes][2] (core, device, operating system, geolocation, and user) and [session-specific][3] attributes to analyze the data further. Click the {{< ui >}}Add Filter{{< /ui >}} button to view the full list of available attributes.
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-filtering.png" alt="Use attributes to filter information when constructing your funnel" style="width:80%;" >}}
 
 ### Analyze your funnel
 
-After you build a funnel, click on **View Funnel Insights** to open the **Funnel Analysis** panel, which offers correlated data on performance and user behavior trends. This information helps you understand the conversion rate.
+After you build a funnel, click on {{< ui >}}View Funnel Insights{{< /ui >}} to open the {{< ui >}}Funnel Analysis{{< /ui >}} panel, which offers correlated data on performance and user behavior trends. This information helps you understand the conversion rate.
 
 - For high level trends, you can see the end-to-end conversion rate for your entire workflow and also see individual steps to step conversion to dropoff rates. If you want to understand what it looks like for someone who converted versus someone who dropped off, you can watch a [Session Replay][4] for each case.
 
   {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-analyzing-funnel.jpg" alt="Use the Funnel Insights panel to review performance and user behavior trends" style="width:90%;" >}}
 
-- The **Performance** section allows you to understand if poor performance could have affected conversion. You can view a graph with a correlation between the load time of that page and the conversion rate and also see if any issues (detected by [Error Tracking][5]) occurred on that page.
-- The **User Behavior** section allows you to compare the average frustration count (from [frustration signals][6]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
+- The {{< ui >}}Performance{{< /ui >}} section allows you to understand if poor performance could have affected conversion. You can view a graph with a correlation between the load time of that page and the conversion rate and also see if any issues (detected by [Error Tracking][5]) occurred on that page.
+- The {{< ui >}}User Behavior{{< /ui >}} section allows you to compare the average frustration count (from [frustration signals][6]) with the conversion rate, and further analyze the frustration signals detected from individual actions. Next to this section is a chart showing the conversion and drop off rate for specific countries, allowing you to understand if geographic region plays a role in a user converting. 
 
 {{< img src="real_user_monitoring/funnel_analysis/funnel-analysis-user-behavior.jpg" alt="User behavior section within funnel analysis" style="width:90%;" >}}
 
@@ -140,7 +140,7 @@ For all visualizations, select a section of the graph or click on the graph to e
 
 {{< img src="real_user_monitoring/explorer/visualize/related-events-2.png" alt="Related events link available when you click on the graph" width="90%" >}}
 
-For the remaining visualization options, click on the graph and click **View events** to see a list of events that correspond to your selection. 
+For the remaining visualization options, click on the graph and click {{< ui >}}View events{{< /ui >}} to see a list of events that correspond to your selection. 
 
 ## Further Reading
 

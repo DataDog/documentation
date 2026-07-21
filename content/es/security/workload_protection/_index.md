@@ -56,7 +56,7 @@ Por defecto, todas las reglas de detección de amenazas de minería de criptomon
 
 Workload Protection Threats viene con más de 50 reglas de detección predefinidas que son mantenidas por un equipo de expertos en seguridad. Las reglas identifican los riesgos más importantes para que puedas tomar medidas correctivas de inmediato. Las reglas de expresión del Agent definen las actividades de carga de trabajo que deben recopilarse para el análisis, mientras que las reglas de detección de backend analizan las actividades e identifican técnicas de ataque y otros patrones de comportamiento peligrosos.
 
-Configura [Cloud Security][1] con {{< tooltip glossary="Configuración remota" case="title" >}} para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de procesos, redes y archivos, [crea reglas personalizadas][6] y [configura notificaciones en tiempo real](#set-up-real-time-notifications) para nuevas señales.
+Configura [Cloud Security][1] con {{< tooltip glossary="remote_configuration" case="title" >}} para desplegar automáticamente reglas nuevas y actualizadas en el Agent. [Personaliza las reglas][5] definiendo cómo cada regla monitoriza la actividad de procesos, redes y archivos, [crea reglas personalizadas][6] y [configura notificaciones en tiempo real](#set-up-real-time-notifications) para nuevas señales.
 
 <!-- {{< img src="security/cws/threats_detection_rules.png" alt="Reglas de detección de Workload Protection en la aplicación Datadog" width="100%">}} -->
 

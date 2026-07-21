@@ -32,6 +32,7 @@ To get started with RUM for Android, create an application and configure the And
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/advanced_configuration">}}<u>Advanced Configuration</u>: Enrich user sessions, manage events and data, track custom global attributes and widgets, review initialization parameters, modify or drop RUM events, and more.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/mobile_vitals">}}<u>Data Collected</u>: Review data that the Android SDK collects.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/mobile_vitals">}}<u>Mobile Vitals</u>: View mobile vitals, which help compute insights about your mobile application.{{< /nextlink >}}
+  {{< nextlink href="/real_user_monitoring/application_monitoring/android/frustration_signals">}}<u>Frustration Signals</u>: Identify the highest points of user friction in your Android application.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/web_view_tracking">}}<u>Web View Tracking</u>: Monitor web views and eliminate blind spots in your mobile applications.{{< /nextlink >}}
   {{< nextlink href="/real_user_monitoring/application_monitoring/android/integrated_libraries">}}
   <u>Integrated Libraries</u>: Import integrated libraries for your Android and Android TV applications.{{< /nextlink >}}

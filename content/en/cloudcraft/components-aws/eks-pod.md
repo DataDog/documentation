@@ -13,10 +13,10 @@ Use the EKS Pod component to visualize Amazon EKS containers from your Amazon We
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for the symbol. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Compute**: Select the type of worker node. Supported options are Fargate and Node Group.
-- **CPU**: Select the vCPU value for your pod. This option is not available for Node Groups.
-- **Memory (GB)**: Select the amount of memory available for the pod. This option is not available for Node Groups.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for the symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Compute{{< /ui >}}: Select the type of worker node. Supported options are Fargate and Node Group.
+- {{< ui >}}CPU{{< /ui >}}: Select the vCPU value for your pod. This option is not available for Node Groups.
+- {{< ui >}}Memory (GB){{< /ui >}}: Select the amount of memory available for the pod. This option is not available for Node Groups.
 
 ## API
 

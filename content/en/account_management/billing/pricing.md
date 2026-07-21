@@ -7,7 +7,16 @@ further_reading:
   text: "Datadog Pricing"
 ---
 
-Datadog has many pricing plans to fit your needs. For more information, see the [Pricing][1] page. Unless otherwise stated in your order, Datadog calculates fees based on product usage during each calendar month. Here are the most common pricing units:
+Datadog has many pricing plans to fit your needs. For more information, see the [Pricing][1] page. Unless otherwise stated in your order, Datadog calculates fees based on product usage during each calendar month.
+
+## Billing plans
+
+Datadog offers two billing plans for host-based products, such as Infrastructure Monitoring, APM, and Database Monitoring:
+
+- **High watermark plan (HWMP)**: Datadog meters your host count each hour. At the end of the month, Datadog bills you on the maximum count (high-water mark) of the lower 99% of those hourly readings, excluding the top 1% to reduce the impact of short usage spikes on your bill. This plan is well-suited to environments with stable usage throughout the month.
+- **Hybrid monthly/hourly plan (MHP)**: You commit to a monthly minimum, and any host hours above that commitment are billed at an hourly rate. Because usage above the commitment is billed hourly, this plan is well-suited to ephemeral environments, such as autoscaling fleets or short-lived workloads.
+
+The following sections describe the most common pricing units for each product.
 
 ## Infrastructure monitoring
 
@@ -15,7 +24,7 @@ Datadog has many pricing plans to fit your needs. For more information, see the 
   * On a high watermark plan (HWMP), the billable count of hosts is calculated at the end of the month using the maximum count (high-water mark) of the lower 99 percent of usage for those hours. Datadog excludes the top 1 percent to reduce the impact of spikes in usage on your bill.
   * On a hybrid monthly/hourly plan (MHP), Datadog charges your minimum monthly commitment, and for any host hours above that commitment, Datadog charges an hourly rate.
 * A **container** is a self-contained operating environment that includes application software and limited operating system libraries and settings. Once every five minutes, Datadog records the number of unique containers you are monitoring in the Datadog Infrastructure service. Datadog charges monthly based on the fractional hours of monitored containers.
-* A [**custom metric**][2] is a single, unique combination of a metric name, host ID and any tags. Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour.
+* A [**custom metric**][2] is a single, unique combination of a metric name, host ID, and any tags. Under cardinality pricing, Datadog charges based on the monthly average of unique custom metrics submitted to the Datadog Infrastructure service per hour. Datadog also offers [Metric Name pricing][12], which bills based on metric names and datapoint volume instead.
 * A **device** is a physical sensor comprising one or more single-board computers in a frame. Datadog records and charges for the number of devices and hosts you are concurrently monitoring in the Datadog Infrastructure service.
 * An AWS **Fargate task** is a collection of containers setup through AWS's ECS container orchestration platform. Datadog records the number of task instances you are monitoring in the Datadog Infrastructure (or APM) service at five-minute intervals. Datadog aggregates the interval-based measurements at the end of the month and charges you based on the total number of hours your applications were run and monitored.
 
@@ -114,3 +123,4 @@ Contact [Sales][8] or your [Customer Success][9] Manager to discuss hourly prici
 [9]: mailto:success@datadoghq.com
 [10]: /real_user_monitoring/rum_without_limits/
 [11]: https://www.datadoghq.com/pricing/?product=real-user-monitoring#products
+[12]: /account_management/billing/metric_name_pricing/

@@ -1,4 +1,5 @@
 ---
+id: free_text
 core_product:
 - dashboards
 related_terms:

@@ -3,100 +3,145 @@ disable_toc: false
 further_reading:
 - link: logs/processing/pipelines
   tag: Documentación
-  text: Pipelines de procesamiento de logs
+  text: Pipelines de procesamiento de registros
 title: Destinos
 ---
+## Descripción general {#overview}
 
-## Información general
+Utilice el Observability Pipelines Worker para enviar sus registros y métricas procesados ({{< tooltip glossary="vista previa" case="title" >}}) a diferentes destinos. La mayoría de los destinos de Observability Pipelines envían eventos en lotes a la integración descendente. Consulte [Agrupación de eventos](#event-batching) para más información. Algunos destinos de Observability Pipelines también tienen campos que admiten sintaxis de plantillas, por lo que puede establecer estos campos en función de campos específicos. Consulte [Sintaxis de plantillas](#template-syntax) para más información.
 
-Utiliza el worker de pipelines de observabilidad para enviar tus logs procesados a diferentes destinos.
+Seleccione un destino en el menú de navegación de la izquierda para ver más información sobre él.
 
-Selecciona y configura tus destinos cuando [configures un pipeline][1]. Este es el paso 4 del proceso de configuración de pipelines:
+## Destinos {#destinations}
 
-1. Ve a [Pipelines de observabilidad][2].
-1. Selecciona una plantilla.
-1. Selecciona y configura tu fuente.
-1. Selecciona y configura tus destinos.
-1. Configura tus procesadores.
-1. Instala el worker de pipelines de observabilidad.
+Estos son los destinos disponibles:
 
-{{< whatsnext desc="Selecciona un destino para obtener más información:" >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_opensearch" >}}Amazon OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/amazon_s3" >}}Amazon S3{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/azure_storage" >}}Azure Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/datadog_logs" >}}Logs de Datadog{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/elasticsearch" >}}Elasticsearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_chronicle" >}}Google Chronicle{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/google_cloud_storage" >}}Google Cloud Storage{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/new_relic" >}}New Relic{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/microsoft_sentinel" >}}Microsoft Sentinel{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/opensearch" >}}OpenSearch{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/syslog" >}}rsyslog o syslog-ng{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sentinelone" >}} SentinelOne {{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/splunk_hec" >}}HTTP Event Collector (HEC) de Splunk{{< /nextlink >}}
-    {{< nextlink href="observability_pipelines/destinations/sumo_logic_hosted_collector" >}}Sumo Logic Hosted Collector{{< /nextlink >}}
-{{< /whatsnext >}}
+{{< tabs >}}
+{{% tab "Registros" %}}
 
-## Sintaxis de la plantilla
+- [Amazon OpenSearch][1]
+- [Amazon S3][22]
+- [Amazon Security Lake][3]
+- [Azure Storage][4]
+- [CrowdStrike Next-Gen SIEM][6]
+- [Databricks (Zerobus)][23]
+- [Datadog Archives][2]
+- [Datadog BYOC Logs][5]
+- [Datadog Logs][7]
+- [Elasticsearch][8]
+- [Google Cloud Storage][10]
+- [Google Pub/Sub][11]
+- [Google SecOps][9]
+- [HTTP Client][12]
+- [Kafka][13]
+- [Microsoft Sentinel][14]
+- [New Relic][15]
+- [OpenSearch][16]
+- [SentinelOne][17]
+- [Socket][18]
+- [Splunk HTTP Event Collector (HEC)][19]
+- [Sumo Logic Hosted Collector][20]
+- [Syslog][21]
 
-Los logs suelen almacenarse en índices independientes basados en datos de logs, como el servicio o el entorno de los que proceden los logs u otro atributo de log. En Observability Pipelines, puedes utilizar la sintaxis de plantilla para dirigir tus logs a diferentes índices basados en campos de log específicos.
+[1]: /es/observability_pipelines/destinations/amazon_opensearch/
+[2]: /es/observability_pipelines/destinations/datadog_archives/
+[3]: /es/observability_pipelines/destinations/amazon_security_lake/
+[4]: /es/observability_pipelines/destinations/azure_storage/
+[5]: /es/observability_pipelines/destinations/datadog_byoc_logs/
+[6]: /es/observability_pipelines/destinations/crowdstrike_ng_siem/
+[7]: /es/observability_pipelines/destinations/datadog_logs/
+[8]: /es/observability_pipelines/destinations/elasticsearch/
+[9]: /es/observability_pipelines/destinations/google_secops/
+[10]: /es/observability_pipelines/destinations/google_cloud_storage/
+[11]: /es/observability_pipelines/destinations/google_pubsub/
+[12]: /es/observability_pipelines/destinations/http_client/
+[13]: /es/observability_pipelines/destinations/kafka/
+[14]: /es/observability_pipelines/destinations/microsoft_sentinel/
+[15]: /es/observability_pipelines/destinations/new_relic/
+[16]: /es/observability_pipelines/destinations/opensearch/
+[17]: /es/observability_pipelines/destinations/sentinelone/
+[18]: /es/observability_pipelines/destinations/socket/
+[19]: /es/observability_pipelines/destinations/splunk_hec/
+[20]: /es/observability_pipelines/destinations/sumo_logic_hosted_collector/
+[21]: /es/observability_pipelines/destinations/syslog/
+[22]: /es/observability_pipelines/destinations/amazon_s3/
+[23]: /es/observability_pipelines/destinations/databricks/
 
-Cuando el worker de Observability Pipelines no puede resolver el campo con la sintaxis de la plantilla, el worker adopta por defecto un comportamiento especificado para ese destino. Por ejemplo, si estás utilizando la plantilla `{{application_id}}` para el campo **Prefix** (Prefijo) del destino de Amazon S3, pero no hay un campo `application_id` en el log, el worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y publica los logs allí.
+{{% /tab %}}
 
-La siguiente tabla enumera los destinos y campos que admiten la sintaxis de plantilla, y explica qué ocurre cuando el worker no puede resolver el campo:
+{{% tab "Métricas" %}}
 
-| Destino       | Campos compatibles con la sintaxis de plantilla | Comportamiento cuando no se puede resolver el campo                                                                                 |
+- [Datadog Metrics][1]
+- [Elasticsearch][2]
+- [HTTP/S Client][3]
+
+[1]: /es/observability_pipelines/destinations/datadog_metrics/
+[2]: /es/observability_pipelines/destinations/elasticsearch/
+[3]: /es/observability_pipelines/destinations/http_client/
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Sintaxis de plantillas {#template-syntax}
+
+Los registros a menudo se almacenan en índices separados según los datos del registro, como el servicio o el entorno del que provienen los registros o algún otro atributo del registro. En Observability Pipelines, puede usar la sintaxis de plantillas para dirigir sus registros a diferentes índices según campos específicos.
+
+Cuando el Observability Pipelines Worker no puede resolver el campo con la sintaxis de plantillas, el Observability Pipelines Worker utiliza un comportamiento especificado para ese destino. Por ejemplo, si utiliza la plantilla `{{application_id}}` for the Datadog Archives destination's **Prefix** field, but there isn't an `application_id` field in the log, the Worker creates a folder called `OP_UNRESOLVED_TEMPLATE_LOGS/` y publica los registros allí.
+
+La siguiente tabla enumera los destinos y campos que admiten la sintaxis de plantillas, y lo que sucede cuando el Worker no puede resolver el campo:
+
+| Destino       | Campos que admiten la sintaxis de plantillas | Comportamiento cuando el campo no puede ser resuelto                                                                                 |
 |-------------------|-------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
-| Amazon Opensearch | Índice                               | El worker escribe logs en el índice `datadog-op`.                                                                          |
-| Amazon S3         | Prefijo                              | El worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe allí los logs.                                |
-| Azure Blob        | Prefijo                              | El worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe allí los logs.                                |
-| Elasticsearch     | Tipo de fuente                         | El worker escribe logs en el índice `datadog-op`.                                                                          |
-| Google Chronicle  | Tipo de log                            | Por defecto el tipo de log es `DATADOG`.                                                                                            |
-| Google Cloud      | Prefijo                              | El worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe allí los logs.                                |
-| Opensearch        | Índice                               | El worker escribe logs en el índice `datadog-op`.                                                                          |
-| Splunk HEC        | Índice<br>Tipo de fuente                | El worker envía los logs al índice por defecto configurado en Splunk.<br>El worker envía por defecto el tipo de fuente `httpevent`. |
+| Amazon Opensearch | Índice                               | El Worker escribe registros en el índice `datadog-op`.                                                                          |
+| Datadog Archives  | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
+| Azure Blob        | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
+| Elasticsearch     | Índice                               | El Worker escribe registros en el índice `datadog-op`.                                                                          |
+| Google Chronicle  | Tipo de registro                            | Por defecto es el tipo de registro `DATADOG`.                                                                                            |
+| Google Cloud      | Prefijo                              | El Worker crea una carpeta llamada `OP_UNRESOLVED_TEMPLATE_LOGS/` y escribe los registros allí.                                |
+| Opensearch        | Índice                               | El Worker escribe registros en el índice `datadog-op`.                                                                          |
+| Splunk HEC        | Índice<br>Tipo de fuente                | El Worker envía los registros al índice predeterminado configurado en Splunk.<br>El Worker utiliza por defecto el tipo de fuente `httpevent`. |
 
-#### Ejemplo
+#### Ejemplo {#example}
 
-Si deseas enrutar logs según el campo de ID de aplicación del log (por ejemplo, `application_id`) al destino de Amazon S3, utiliza la sintaxis de campos de evento en el campo **Prefix to apply to all object keys** (Prefijo para aplicar a todas las claves de objeto).
+Si desea enrutar registros basados en el campo ID de aplicación del registro (por ejemplo, `application_id`) al destino Datadog Archives, utilice la sintaxis de campos de evento en el **Prefijo para aplicar a todas las claves de objeto** campo.
 
-{{< img src="observability_pipelines/amazon_s3_prefix.png" alt="El destino de Amazon S3 que muestra el campo de prefijo mediante la sintaxis de campos de evento /application_id={{ application_id }}/" style="width:40%;" >}}
+{{< img src="observability_pipelines/amazon_s3_prefix_20250709.png" alt="El destino Datadog Archives mostrando el campo prefijo utilizando la sintaxis de campos de evento /application_id={{ application_id }}/" style="width:40%;" >}}
 
-### Sintaxis
+### Sintaxis {#syntax}
 
-#### Campos de evento
+#### Campos de evento {#event-fields}
 
-Utiliza `{{ <field_name> }}` para acceder a los campos de evento de logs individuales. Por ejemplo:
+Utilice `{{ <field_name> }}` para acceder a campos de eventos de registro individuales. Por ejemplo:
 
 ```
 {{ application_id }}
 ```
 
-#### Especificadores Strftime
+#### Especificadores strftime {#strftime-specifiers}
 
-Utiliza [especificadores strftime][3] para la fecha y la hora. Por ejemplo:
+Utilice [especificadores strftime][3] para la fecha y la hora. Por ejemplo:
 
 ```
 year=%Y/month=%m/day=%d
 ```
 
-#### Caracteres de escape
+#### Caracteres de escape {#escape-characters}
 
-Utiliza un prefijo en un carácter con `\` para escapar del carácter. En este ejemplo, se escapa la sintaxis del campo de evento:
+Anteponga `\` a un carácter para escapar dicho carácter. Este ejemplo escapa la sintaxis de campos de evento:
 
 ```
 \{{ field_name }}
 ```
 
-Este ejemplo escapa de los especificadores strftime:
+Este ejemplo escapa los especificadores de strftime:
 
 ```
 year=\%Y/month=\%m/day=\%d/
 ```
 
-## Colocación de eventos en lotes
+## Agrupación de eventos {#event-batching}
 
-Los destinos de los pipelines de observabilidad envían eventos en lotes a la integración aguas abajo. Un lote de eventos se descarga cuando se cumple uno de los siguientes parámetros:
+Los destinos de Observability Pipelines envían eventos en lotes a la integración descendente. Un lote de eventos se vacía cuando se cumple uno de los siguientes parámetros:
 
 - Número máximo de eventos
 - Número máximo de bytes
@@ -105,15 +150,15 @@ Los destinos de los pipelines de observabilidad envían eventos en lotes a la in
 Por ejemplo, si los parámetros de un destino son:
 
 - Número máximo de eventos = 2
-- Número máximo de bytes = 100.000
+- Número máximo de bytes = 100 000
 - Tiempo de espera (segundos) = 5
 
-Y el destino recibe 1 evento en una ventana de 5 segundos, descarga el lote en el tiempo de espera de 5 segundos.
+Y el destino recibe 1 evento en una ventana de 5 segundos, vacía el lote al tiempo de espera de 5 segundos.
 
-Si el destino recibe 3 eventos en 2 segundos, descarga un lote con 2 eventos y descarga un segundo lote con el evento restante luego de 5 segundos. Si el destino recibe 1 evento que supera los 100.000 bytes, descarga este lote con ese evento.
+Si el destino recibe 3 eventos en 2 segundos, vacía un lote con 2 eventos y luego vacía un segundo lote con el evento restante después de 5 segundos. Si el destino recibe 1 evento que supera los 100 000 bytes, vacía este lote con el 1 evento.
 
 {{% observability_pipelines/destination_batching %}}
 
-[1]: /es/observability_pipelines/set_up_pipelines/
+[1]: /es/observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
 [3]: https://docs.rs/chrono/0.4.19/chrono/format/strftime/index.html#specifiers

@@ -1,4 +1,5 @@
 ---
+id: time_aggregation
 core_product:
 - 메트릭
 synonyms:

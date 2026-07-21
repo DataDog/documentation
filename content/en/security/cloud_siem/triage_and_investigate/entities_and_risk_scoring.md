@@ -6,6 +6,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/risk-prioritization-entity-analytics/"
       tag: Blog
       text: "Accelerate investigations with Datadog Cloud SIEM Risk-based Insights and AWS Entity Analytics"
+    - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+      tag: "Blog"
+      text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+    - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+      tag: "Blog"
+      text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
 ## Overview
@@ -40,42 +46,45 @@ Click an entity in the [Explorer][4] to open the entity side panel.
 
 {{< img src="security/entities/entity-side-panel3.png" alt="The side panel for an entity" style="width:90%;" >}}
 
-The **What Happened** section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
+The {{< ui >}}What Happened{{< /ui >}} section of the panel summarizes the count of signals, misconfigurations, and identity risks and how they have contributed to the risk score, as well as any potential configuration risks.
 
-The **What contributes to the score** section displays the list of fired signals, relevant misconfigurations, and identity risks.
+The {{< ui >}}What contributes to the score{{< /ui >}} section displays the list of fired signals, relevant misconfigurations, and identity risks.
 
 ### Triage and mitigate threats in bulk
 
-The **Next steps** section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks.
+The {{< ui >}}Next steps{{< /ui >}} section of the entity side panel includes the available mitigation steps for SIEM signals, misconfigurations, and identity risks.
 
 {{< img src="security/entities/entities-next-steps2.png" alt="The available next steps for an entity as shown in the entity side panel" style="width:80%;" >}}
 
 ## Configure notifications for Risk Insights
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Notification rules are not supported for the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 You can configure Datadog to send you notifications as soon as it detects new threats that match your criteria.
 
-1. Navigate to the **Create a new Risk Insight notification** page. There are two ways to do this:
-   - In Datadog, go to the [Risk Insights Explorer][4], then click **Create Notification Rule**.
-   - In Datadog, go to **Cloud SIEM** > [**Settings**][7]. Under **Products**, in the **Cloud SIEM** section, click **Risk Insights**; then, under **Notification rules**, click **New notification rule**.
-1. Under **Define entity attributes**, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside **Entities matching**, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
+1. Navigate to the {{< ui >}}Create a new Risk Insight notification{{< /ui >}} page. There are two ways to do this:
+   - In Datadog, go to the [Risk Insights Explorer][4], then click {{< ui >}}Create Notification Rule{{< /ui >}}.
+   - In Datadog, go to {{< ui >}}Cloud SIEM{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}. Under {{< ui >}}Products{{< /ui >}}, in the {{< ui >}}Cloud SIEM{{< /ui >}} section, click [{{< ui >}}Risk Insights{{< /ui >}}][7]; then, under {{< ui >}}Notification rules{{< /ui >}}, click {{< ui >}}New notification rule{{< /ui >}}.
+1. Under {{< ui >}}Define entity attributes{{< /ui >}}, specify the attributes that should trigger notifications when Datadog detects them on an entity. Beside {{< ui >}}Entities matching{{< /ui >}}, start typing entity attributes and values. As you type, the preview table dynamically displays risk insights that match your criteria.
    <div class="alert alert-info">This step is optional, but if you don't enter any attributes, the notification defaults to sending alerts for all entities.</div>
-1. Under **Set notification conditions**, specify the risk score threshold to trigger notifications for.
-1. Under **Configure notification**, enter a name for the notification, and recipients to send it to.
+1. Under {{< ui >}}Set notification conditions{{< /ui >}}, specify the risk score threshold to trigger notifications for.
+1. Under {{< ui >}}Configure notification{{< /ui >}}, enter a name for the notification, add a custom message body, and specify recipients to send it to.
    - Optionally, you can also turn on re-notifications, and specify the period of time that should pass before Datadog re-notifies the recipients that the risk insight still meets the criteria you specified.
-1. To verify your setup, click **Test Notification** to send a test notification to the configured recipients.
-1. Click **Save Notification**.
+1. To verify your setup, click {{< ui >}}Test Notification{{< /ui >}} to send a test notification to the configured recipients.
+1. Click {{< ui >}}Save Notification{{< /ui >}}.
 
 ## Risk scoring
 
-An entity's risk score approximates the entity's risk level over the past 14 days of activity.
+An entity's risk score approximates the entity's risk level over the past 14 days of activity. Datadog calculates the risk score from the characteristics of the entity's associated signals, such as the severity level of the signal, and how many times the signal has fired.
 
-The risk score is calculated from the characteristics of the entity's associated signals, such as the severity level of the signal and how many times the signal has fired.
+### View and customize signal score impacts
 
-### Signal's score impact
+Each signal has a score impact based on its severity. Datadog assigns a default number of points to each signal severity. To view or override the default score impacts for your organization, as well as impacts for misconfigurations and identity risks, go to the [Risk Insights settings page][7].
 
-Each signal has a score impact. You can see a signal's score impact in the entity panel.
+If you change the score impacts, Datadog immediately and retroactively applies them to all existing entity risk scores. You can use the updated scores to assess the impact of your changes on your Risk Insight notifications moving forward, so you can reduce the noise and increase the signal they provide.
 
-**Note**: A signal's score impact lasts for 2 weeks, after which the score drops to `0`.
+<div class="alert alert-info">A signal's score impact lasts for 14 days, after which the score drops to <code>0</code>.</div>
 
 | Signal Severity | Number of points |
 |-----------------|------------------|
@@ -84,17 +93,17 @@ Each signal has a score impact. You can see a signal's score impact in the entit
 | `Medium`        | `5`              |
 | `Low` and `Info`| `0`              |
 
-### Entity's severity threshold
+### Entity severity thresholds
 
 The severity threshold of an entity is calculated by adding up the score impact for all signals associated with the entity.
 
-| Entity's Severity Threshold | Sum of the score impact for all related signals  |
-|-----------------------------| -------------------------------------------------|
-| `Critical`                  | Greater than or equal to `100`.                   |
-| `High`                      | Greater than or equal to `50` and less than `100`.|
-| `Medium`                    | Greater than or equal to `25` and less than `50`. |
-| `Low`                       | Greater than or equal to `10` and less than `25`. |
-| `Info`                      | Less than `10`.                                   |
+| Entity's Severity Threshold | Sum of the score impact for all related signals    |
+|-----------------------------|----------------------------------------------------|
+| `Critical`                  | Greater than or equal to `100`.                    |
+| `High`                      | Greater than or equal to `50` and less than `100`. |
+| `Medium`                    | Greater than or equal to `25` and less than `50`.  |
+| `Low`                       | Greater than or equal to `10` and less than `25`.  |
+| `Info`                      | Less than `10`.                                    |
 
 ## Further reading
 

@@ -1,4 +1,5 @@
 ---
+id: invocation
 core_product:
 - serverless monitoring
 title: 呼び出し

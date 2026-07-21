@@ -20,6 +20,10 @@ L'Agent recueille la télémétrie directement depuis la base de données, en se
 Versions de MySQL prises en charge
 : 5.6, 5.7 et 8.0+
 
+Versions MariaDB prises en charge
+: 10.5, 10.6, 10.11 ou 11.1 <br/><br/>
+Database Monitoring pour MariaDB est pris en charge avec des [limitations connues][13].
+
 Versions de l'Agent prises en charge
 : 7.36.1 et versions ultérieures
 
@@ -27,8 +31,8 @@ Incidence sur les performances
 : La configuration par défaut de l'Agent pour Database Monitoring est relativement souple. Néanmoins, vous pouvez ajuster certains paramètres comme l'intervalle de collecte et le taux d'échantillonnage des requêtes pour mieux répondre à vos besoins. Pour la plupart des workloads, l'Agent monopolise moins d'un pour cent du temps d'exécution des requêtes sur la base de données, et moins d'un pour cent du CPU. <br/><br/>
 La solution Database Monitoring de Datadog fonctionne comme une intégration et vient compléter l'Agent de base ([voir les benchmarks][1]).
 
-Proxies, répartiteurs de charge et outils de regroupement de connexions
-: L'Agent doit se connecter directement au host surveillé. Pour les bases de données auto-hébergées, il est préférable d'utiliser `127.0.0.1` ou le socket. L'Agent ne doit pas se connecter aux bases de données via un proxy, un répartiteur de charge ni un outil de groupement de connexions. Bien qu'il puisse s'agir d'un antipattern pour des applications client, chaque Agent doit connaître le hostname sous-jacent et rester sur un seul host pendant toute sa durée de vie, même en cas de failover. Si l'Agent Datadog se connecte à plusieurs hosts pendant son exécution, les valeurs des métriques seront incorrectes.
+Proxies, répartiteurs de charge et poolers de connexion
+: L'Agent Datadog doit se connecter directement au host surveillé. Pour les bases de données auto-hébergées, `127.0.0.1` ou le socket est préférable. L'Agent ne doit pas se connecter à la base de données via un proxy, un répartiteur de charge ou un pooler de connexion. Si l'Agent se connecte à différents hosts pendant son exécution (comme dans le cas d'un basculement, d'un équilibrage de charge, etc.), il calcule la différence de statistiques entre deux hosts, ce qui produit des métriques inexactes.
 
 Considérations relatives à la sécurité des données
 : Consultez la rubrique [Informations sensibles][2] pour découvrir les données recueillies par l'Agent à partir de vos bases de données et la méthode à suivre pour garantir leur sécurité.
@@ -38,29 +42,28 @@ Considérations relatives à la sécurité des données
 Pour recueillir des métriques de requête, des échantillons et des plans d'exécution, activez le [schéma de performance MySQL][3] et configurez les [options connexes][4] suivantes, que ce soit dans l'interface de ligne de commande ou dans les fichiers de configuration (comme `mysql.conf`) :
 
 {{< tabs >}}
+{{% tab "MySQL ≥ 5.7" %}}
+| Paramètre | Valeur | Description |
+| --- | --- | --- |
+| `performance_schema` | `ON` | Obligatoire. Active le Performance Schema. |
+| `max_digest_length` | `4096` | Obligatoire pour la collecte des requêtes plus longues. Si la valeur par défaut est conservée, les requêtes de plus de `1024` caractères ne seront pas collectées. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à `max_digest_length`. |
+| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Doit correspondre à `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | Obligatoire. Active la surveillance des requêtes en cours d'exécution. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Obligatoire. Active la collecte des événements d'attente. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un plus grand nombre de requêtes récentes sur tous les threads. Si cette option est activée, elle augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi de l'historique des requêtes récentes par thread. Si cette option est activée, elle augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes. |
+{{% /tab %}}
 {{% tab "MySQL 5.6" %}}
 | Paramètre | Valeur | Description |
 | --- | --- | --- |
-| `performance_schema` | `ON` | Requis. Active le schéma de performance. |
-| `max_digest_length` | `4096` | Requis pour la collecte de requêtes volumineuses. Si vous conservez la valeur par défaut, les requêtes comportant plus de `1024` caractères ne sont pas recueilles. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
-| `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
-| `performance-schema-consumer-events-waits-current` | `ON` | Requis. Active la collecte des événements d'attente. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
-{{% /tab %}}
-
-{{% tab "MySQL ≥ 5.7" %}}
-| Paramètre | Valeiur | Description |
-| --- | --- | --- |
-| `performance_schema` | `ON` | Requis. Active le schéma de performance. |
-| `max_digest_length` | `4096` | Requis pour la collecte de requêtes volumineuses. Si vous conservez la valeur par défaut, les requêtes comportant plus de `1024` caractères ne sont pas recueilles. |
-| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
-| <code style="word-break:break-all;">`performance_schema_max_sql_text_length`</code> | `4096` | Doit correspondre à la valeur de `max_digest_length`. |
-| `performance-schema-consumer-events-statements-current` | `ON` | Requis. Active la surveillance des requêtes en cours d'exécution. |
-| `performance-schema-consumer-events-waits-current` | `ON` | Requis. Active la collecte des événements d'attente. |
-| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un grand nombre de requêtes récentes sur l'ensemble des threads. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
-| `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi des requêtes récentes pour un thread spécifique. Si vous activez cette fonctionnalité, cela augmente la probabilité d'enregistrer des détails sur l'exécution de requêtes occasionnelles. |
+| `performance_schema` | `ON` | Obligatoire. Active le Performance Schema. |
+| `max_digest_length` | `4096` | Obligatoire pour la collecte des requêtes plus longues. Si la valeur par défaut est conservée, les requêtes de plus de `1024` caractères ne seront pas collectées. |
+| <code style="word-break:break-all;">`performance_schema_max_digest_length`</code> | `4096` | Must match `max_digest_length`. |
+| `performance-schema-consumer-events-statements-current` | `ON` | RObligatoire. Active la surveillance des requêtes en cours d'exécution. |
+| `performance-schema-consumer-events-waits-current` | `ON` | Obligatoire. Active la collecte des événements d'attente. |
+| `performance-schema-consumer-events-statements-history-long` | `ON` | Recommandé. Active le suivi d'un plus grand nombre de requêtes récentes sur tous les threads. Si cette option est activée, elle augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes. |
+| `performance-schema-consumer-events-statements-history` | `ON` | Facultatif. Active le suivi de l'historique des requêtes récentes par thread. Si cette option est activée, elle augmente la probabilité de capturer les détails d'exécution des requêtes peu fréquentes. |
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -74,7 +77,7 @@ L'Agent Datadog requiert un accès en lecture seule pour la base de données, af
 Les instructions suivantes autorisent l'Agent à se connecter depuis n'importe quel host à l'aide de `datadog@'%'`. Vous pouvez restreindre l'utilisateur `datadog` avec `datadog@'localhost'`, de façon à ce qu'il soit uniquement autorisé à se connecter depuis localhost. Consultez la [documentation MYSQL][5] (en anglais) pour en savoir plus.
 
 {{< tabs >}}
-{{% tab "MySQL ≥ 8.0" %}}
+{{% tab "MySQL ≥ 5.7" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -87,7 +90,7 @@ GRANT SELECT ON performance_schema.* TO datadog@'%';
 ```
 
 {{% /tab %}}
-{{% tab "MySQL 5.6 et 5.7" %}}
+{{% tab "MySQL 5.6" %}}
 
 Créez l'utilisateur `datadog` et accordez-lui des autorisations de base :
 
@@ -106,7 +109,6 @@ Créez le schéma suivant :
 ```sql
 CREATE SCHEMA IF NOT EXISTS datadog;
 GRANT EXECUTE ON datadog.* to datadog@'%';
-GRANT CREATE TEMPORARY TABLES ON datadog.* TO datadog@'%';
 ```
 
 Créez la procédure `explain_statement` afin d'activer la collecte de plans d'exécution par l'Agent :
@@ -140,7 +142,16 @@ DELIMITER ;
 GRANT EXECUTE ON PROCEDURE <VOTRE_SCHÉMA>.explain_statement TO datadog@'%';
 ```
 
-### Exécuter les consommateurs de configuration
+Pour collecter les métriques d'index, accorder à l'utilisateur `datadog` un privilège supplémentaire :
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
+À partir de la version 7.65 de l'Agent, l'Agent Datadog peut collecter des informations de schéma à partir des bases de données MySQL. Consultez la section [Collecte des schémas][14] ci-dessous pour en savoir plus sur la façon d'accorder à l'Agent les autorisations nécessaires à cette collecte.
+
+
+### Exécution des consommateurs de configuration
 Datadog vous conseille de créer la procédure suivante afin d'autoriser l'Agent à activer les consommateurs `performance_schema.events_*` lors de l'exécution.
 
 ```SQL
@@ -154,6 +165,9 @@ END $$
 DELIMITER ;
 GRANT EXECUTE ON PROCEDURE datadog.enable_events_statements_consumers TO datadog@'%';
 ```
+
+### Stocker votre mot de passe de manière sécurisée
+{{% dbm-secret %}}
 
 ## Installer l'Agent
 
@@ -175,10 +189,8 @@ instances:
     host: 127.0.0.1
     port: 3306
     username: datadog
-    password: '<MOT_DE_PASSE_CHOISI>' # Le mot de passé créé auparavant lors de l'étape CREATE USER
+    password: 'ENC[datadog_user_database_password]' # from the CREATE USER step earlier
 ```
-
-**Remarque** : ajoutez des guillemets simples autour de votre mot de passe s'il contient un caractère spécial.
 
 Notez que l'utilisateur `datadog` doit être défini dans la configuration de l'intégration MySQL en tant que `host: 127.0.0.1` au lieu de `localhost`. Vous pouvez également utiliser `sock`.
 
@@ -273,9 +285,9 @@ Pour venir compléter la télémétrie recueillie depuis la base de données par
 
 ## Validation
 
-[Lancez la sous-commande status de l'Agent][10] et cherchez `mysql` dans la section Checks. Vous pouvez également visiter la page [Databases][11] pour commencer à surveiller vos bases de données.
+Exécutez la [sous-commande status de l'Agent][10] et recherchez `mysql` dans la section Checks, ou consultez la page [Databases][11] pour commencer !
 
-## Exemple de configurations de l'Agent
+## Exemples de configuration de l'Agent
 {{% dbm-mysql-agent-config-examples %}}
 
 ## Dépannage
@@ -286,15 +298,17 @@ Si vous avez respecté les instructions d'installation et de configuration des i
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/agent/basic_agent_usage#agent-overhead
+[1]: /fr/database_monitoring/agent_integration_overhead/?tab=mysql
 [2]: /fr/database_monitoring/data_collected/#sensitive-information
 [3]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-quick-start.html
 [4]: https://dev.mysql.com/doc/refman/8.0/en/performance-schema-options.html
 [5]: https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 [6]: https://app.datadoghq.com/account/settings/agent/latest
-[7]: /fr/agent/guide/agent-configuration-files/#agent-configuration-directory
+[7]: /fr/agent/configuration/agent-configuration-files/#agent-configuration-directory
 [8]: https://github.com/DataDog/integrations-core/blob/master/mysql/datadog_checks/mysql/data/conf.yaml.example
-[9]: /fr/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[10]: /fr/agent/guide/agent-commands/#agent-status-and-information
+[9]: /fr/agent/configuration/agent-commands/#start-stop-and-restart-the-agent
+[10]: /fr/agent/configuration/agent-commands/#agent-status-and-information
 [11]: https://app.datadoghq.com/databases
 [12]: /fr/database_monitoring/troubleshooting/?tab=mysql
+[13]: /fr/database_monitoring/setup_mysql/troubleshooting/#mariadb-known-limitations
+[14]: /fr/database_monitoring/setup_mysql/selfhosted?tab=mysql57#collecting-schemas

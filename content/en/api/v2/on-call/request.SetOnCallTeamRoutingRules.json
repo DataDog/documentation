@@ -5,12 +5,12 @@
         {
           "actions": [
             {
-              "channel": "channel",
-              "type": "send_slack_message",
-              "workspace": "workspace"
+              "type": "escalation_policy",
+              "policy_id": "ab000000-0000-0000-0000-000000000000",
+              "urgency": "low"
             }
           ],
-          "query": "tags.service:test",
+          "query": "tags.service:time_restrictions",
           "time_restriction": {
             "time_zone": "Europe/Paris",
             "restrictions": [
@@ -30,9 +30,47 @@
           }
         },
         {
+          "actions": [
+            {
+              "type": "escalation_policy",
+              "policy_id": "ab000000-0000-0000-0000-000000000000",
+              "urgency": "low",
+              "ack_timeout_minutes": 30,
+              "support_hours": {
+                "time_zone": "Europe/Paris",
+                "restrictions": [
+                  {
+                    "end_day": "wednesday",
+                    "end_time": "17:00:00",
+                    "start_day": "wednesday",
+                    "start_time": "09:00:00"
+                  },
+                  {
+                    "end_day": "thursday",
+                    "end_time": "17:00:00",
+                    "start_day": "thursday",
+                    "start_time": "09:00:00"
+                  }
+                ]
+              }
+            }
+          ],
+          "query": "tags.service:support_hours_and_acknowledgment_timeout"
+        },
+        {
           "policy_id": "ab000000-0000-0000-0000-000000000000",
-          "query": "",
+          "query": "tags.service:legacy_policy_definition",
           "urgency": "low"
+        },
+        {
+          "actions": [
+            {
+              "type": "escalation_policy",
+              "policy_id": "ab000000-0000-0000-0000-000000000000",
+              "urgency": "low"
+            }
+          ],
+          "query": ""
         }
       ]
     },

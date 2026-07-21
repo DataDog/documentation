@@ -42,7 +42,7 @@ Selecting a schema from the list displays the throughput of the schema by servic
 
 Use the following steps to view detailed information about a schema:
 1. Navigate to [Data Streams Monitoring][4].
-1. Click the **Schemas** tab.
+1. Click the {{< ui >}}Schemas{{< /ui >}} tab.
 1. Select the time frame.
 1. Use the quick filters to filter for new schemas (first seen within the last 3 hours), schemas with high error rates, or active schemas.
 1. Select a schema. A side panel opens with detailed information for that schema.
@@ -53,9 +53,9 @@ For each service you track in Data Streams Monitoring, you can see information a
 
 To view schema information at the service level:
 1. Navigate to [Data Streams Monitoring][4].
-1. Ensure the **Explore** tab is selected.
+1. Ensure the {{< ui >}}Explore{{< /ui >}} tab is selected.
 1. Click on a service. The service detail side panel appears.
-1. Select the **Schemas** tab.
+1. Select the {{< ui >}}Schemas{{< /ui >}} tab.
 
 On the schemas tab, you can:
 - View input throughput by schema.

@@ -4,7 +4,7 @@ title: Automate Snapshots of Cloud Accounts via the Cloudcraft API
 
 ## Overview
 
-Cloudcraft's **Auto Layout** feature, accessible through the web application, is a powerful tool for automatically generating diagrams of your AWS environment. This functionality can significantly streamline documentation processes and facilitate the onboarding of new team members.
+Cloudcraft's Auto Layout feature, accessible through the web application, is a powerful tool for automatically generating diagrams of your AWS environment. This functionality can significantly streamline documentation processes and facilitate the onboarding of new team members.
 
 This guide provides a step-by-step approach to utilizing this feature via common command-line utilities and the Cloudcraft developer API.
 
@@ -21,7 +21,7 @@ This guide provides a step-by-step approach to utilizing this feature via common
 
 ## Take a snapshot of the account
 
-Start by creating a snapshot of your AWS or Azure account using the [Snapshot AWS account][2] or [Snapshot Azure account][3] endpoints. This process mirrors the functionality of the **Scan Now** button in the Cloudcraft UI and outputs the snapshot in JSON format.
+Start by creating a snapshot of your AWS or Azure account using the [Snapshot AWS account][2] or [Snapshot Azure account][3] endpoints. This process mirrors the functionality of the {{< ui >}}Scan Now{{< /ui >}} button in the Cloudcraft UI and outputs the snapshot in JSON format.
 
 Execute the following command in your terminal:
 
@@ -69,7 +69,7 @@ curl \
 
 Remember to replace `API_KEY` with your actual Cloudcraft API key.
 
-Upon completion, a new blueprint reflecting your cloud infrastructure is created in your Cloudcraft account, replicating the effect of manually using the **Scan Now** and **Auto Layout** buttons.
+Upon completion, a new blueprint reflecting your cloud infrastructure is created in your Cloudcraft account, replicating the effect of manually using the {{< ui >}}Scan Now{{< /ui >}} and {{< ui >}}Auto Layout{{< /ui >}} buttons.
 
 If you have any questions or trouble with the process, [contact Cloudcraft's support team][5].
 

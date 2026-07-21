@@ -151,7 +151,7 @@ Datadog의 기본 및 커스텀 역할에 대해 알아보려면 [역할 기반 
 [9]: /ko/account_management/rbac/
 [10]: /ko/agent/remote_config/?tab=configurationyamlfile#how-it-works
 [11]: /ko/account_management/api-app-keys/#client-tokens
-[12]: /ko/service_management/events/guides/email/
+[12]: /ko/events/guides/email/
 [13]: /ko/synthetics/settings/?tab=specifyvalue#overview
 [14]: /ko/account_management/safety_center
 [15]: /ko/account_management/org_settings/oauth_apps

@@ -23,6 +23,12 @@ The `autosmooth()` function cannot be used in monitors. Being that the span is c
 
 ## Exponentially weighted moving average
 
+### Ewma 1
+
+| Function   | Description                                                         | Example                    |
+| :----      | :-------                                                            | :---------                 |
+| `ewma_1()` | Compute the exponentially weighted moving average over a span of 1. | `ewma_1(<METRIC_NAME>{*})` |
+
 ### Ewma 3
 
 | Function   | Description                                                         | Example                    |
@@ -75,11 +81,14 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 
 ### Ewma 20
 
-| Function    | Description                                                          | Example                     |
-| :----       | :-------                                                             | :---------                  |
+| Function    | Description | Example |
+| :----       | :-------    | :------ |
+| `ewma()`    | Compute the exponentially weighted moving average over the default span of 20. | `ewma(<METRIC_NAME>{*})` |
 | `ewma_20()` | Compute the exponentially weighted moving average over a span of 20. | `ewma_20(<METRIC_NAME>{*})` |
 
-Note: The span value is twice the weighted average age of the series. So `ewma_20()` is comparable to a 20-day rolling average.
+`ewma()` and `ewma_20()` function identically.
+
+Note: The span value is twice the weighted average age of the series. So `ewma()` and `ewma_20()` are comparable to a 20-day rolling average.
 
 Example:
 
@@ -91,11 +100,14 @@ If a metric `10 + x%10 {*}` increments itself by 1 starting from 10 until it dro
 
 ### Median 3
 
-| Function     | Description                      | Example                      |
-| :----        | :-------                         | :---------                   |
+| Function     | Description | Example |
+| :----        | :-------    | :------ |
+| `median()`   | Rolling median with the default span of 3. | `median(<METRIC_NAME>{*})` |
 | `median_3()` | Rolling median with a span of 3. | `median_3(<METRIC_NAME>{*})` |
 
-Note: The span value is the number of data points. So `median_3()` uses the last 3 data points to calculate the median.
+`median()` and `median_3()` function identically.
+
+Note: The span value is the number of data points. So, `median()` and `median_3()` use the last 3 data points to calculate the median.
 
 ### Median 5
 

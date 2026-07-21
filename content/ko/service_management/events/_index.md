@@ -7,7 +7,7 @@ further_reading:
 - link: /api/latest/events/
   tag: 설명서
   text: Datadog Events API
-- link: /service_management/events/guides/recommended_event_tags/
+- link: /events/guides/recommended_event_tags/
   tag: 설명서
   text: Tagging Events에 대한 모범 사례
 - link: https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/
@@ -23,7 +23,7 @@ is_beta: true
 title: Event Management
 ---
 
-{{< img src="service_management/events/correlation/event_management.png" alt="이벤트 관리란?" style="width:100%;" >}}
+{{< img src="events/correlation/event_management.png" alt="이벤트 관리란?" style="width:100%;" >}}
 
 ## 개요
 
@@ -34,11 +34,11 @@ title: Event Management
 ## 구성 요소
 
 {{< whatsnext desc="Event Management 기능:">}}
-    {{< nextlink href="/service_management/events/ingest/" >}}<u>이벤트 수집</u> - Datadog에 이벤트를 보내는 방법 알아보기{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>파이프라인 및 프로세서</u> - 이벤트 강화 및 정규화{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - Datadog으로 들어오는 이벤트의 알림 확인, 검색 및 전송{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>이벤트 사용</u> - 이벤트 분석, 조사 및 모니터링{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/" >}}<u>상호 연관</u> - 알림 피로도 및 수신 티켓/알림 수 조정{{< /nextlink >}}
+    {{< nextlink href="/events/ingest/" >}}<u>이벤트 수집</u> - Datadog에 이벤트를 보내는 방법 알아보기{{< /nextlink >}}
+     {{< nextlink href="/events/pipelines_and_processors/">}}<u>파이프라인 및 프로세서</u> - 이벤트 강화 및 정규화{{< /nextlink >}}
+    {{< nextlink href="/events/explorer/" >}}<u>Events Explorer</u> - Datadog으로 들어오는 이벤트의 알림 확인, 검색 및 전송{{< /nextlink >}}
+    {{< nextlink href="/events/guides/usage/" >}}<u>이벤트 사용</u> - 이벤트 분석, 조사 및 모니터링{{< /nextlink >}}
+    {{< nextlink href="/events/correlation/" >}}<u>상호 연관</u> - 알림 피로도 및 수신 티켓/알림 수 조정{{< /nextlink >}}
 
 {{< /whatsnext >}}
 

@@ -37,9 +37,9 @@ After the Agent is [installed][1] on your Windows host, start the Datadog Agent 
 
 From the Windows start menu:
 
-* Click on the Datadog folder.
-* Right click on Datadog Agent Manager.
-* Choose `Run as Administrator`.
+* Click on the {{< ui >}}Datadog{{< /ui >}} folder.
+* Right click on {{< ui >}}Datadog Agent Manager{{< /ui >}}.
+* Choose {{< ui >}}Run as Administrator{{< /ui >}}.
 
 From an elevated PowerShell prompt:
 ```powershell
@@ -60,16 +60,16 @@ The general status page displays by default when launching the Datadog Agent Man
 
 | Section     | Description                                                                     |
 |-------------|---------------------------------------------------------------------------------|
-| Agent Info  | Provides information on the Agent including version, log level, and file paths. |
-| System Info | Includes information on system time, ntp offset, Go, and Python versions.       |
-| Host Info   | Provides information on the host including OS, platform, procs, and uptime.     |
-| Hostnames   | Displays the hostnames and host tags found by the Agent.                        |
-| JMX Status  | A list of JMX checks with their status.                                         |
-| Forwarder   | Information on the Agent's forwarder including the status of your API key.      |
-| Endpoints   | Endpoints in use by the Agent.                                                  |
-| Logs Agent  | Information on the Logs Agent (if enabled).                                     |
-| Aggregator  | Information on the Agent's data aggregator.                                     |
-| DogStatsD   | Statistics on data sent with DogStatsD.                                         |
+| {{< ui >}}Agent Info{{< /ui >}}  | Provides information on the Agent including version, log level, and file paths. |
+| {{< ui >}}System Info{{< /ui >}} | Includes information on system time, ntp offset, Go, and Python versions.       |
+| {{< ui >}}Host Info{{< /ui >}}   | Provides information on the host including OS, platform, procs, and uptime.     |
+| {{< ui >}}Hostnames{{< /ui >}}   | Displays the hostnames and host tags found by the Agent.                        |
+| {{< ui >}}JMX Status{{< /ui >}}  | A list of JMX checks with their status.                                         |
+| {{< ui >}}Forwarder{{< /ui >}}   | Information on the Agent's forwarder including the status of your API key.      |
+| {{< ui >}}Endpoints{{< /ui >}}   | Endpoints in use by the Agent.                                                  |
+| {{< ui >}}Logs Agent{{< /ui >}}  | Information on the Logs Agent (if enabled).                                     |
+| {{< ui >}}Aggregator{{< /ui >}}  | Information on the Agent's data aggregator.                                     |
+| {{< ui >}}DogStatsD{{< /ui >}}   | Statistics on data sent with DogStatsD.                                         |
 
 #### Collector
 
@@ -113,7 +113,7 @@ The log page displays the Agent logs being output to `agent.log`. Logs can be so
 
 ### Settings
 
-The settings page displays the contents of the Agent's main configuration file `datadog.yaml`. You can edit this file directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
+The settings page displays the contents of the Agent's main configuration file `datadog.yaml`. You can edit this file directly from the Datadog Agent Manager. After making a change, click {{< ui >}}Save{{< /ui >}} in the upper right then [restart the Agent](#restart-agent).
 
 See the [sample config_template.yaml][2] for all available configuration options.
 
@@ -121,9 +121,9 @@ See the [sample config_template.yaml][2] for all available configuration options
 
 #### Manage checks
 
-The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click **Save** in the upper right then [restart the Agent](#restart-agent).
+The manage checks page displays the contents of enabled check configuration files. You can edit these files directly from the Datadog Agent Manager. After making a change, click {{< ui >}}Save{{< /ui >}} in the upper right then [restart the Agent](#restart-agent).
 
-To add a check, select **Add a Check** in the dropdown menu. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
+To add a check, select {{< ui >}}Add a Check{{< /ui >}} in the dropdown menu. This displays a list of available checks to install. Reference the specific check's [integration][3] page for configuration details.
 
 #### Checks summary
 
@@ -131,11 +131,11 @@ The checks summary page displays a list of the checks running, number of instanc
 
 ### Flare
 
-If you are having issues with the Agent, the flare page assists you with troubleshooting with the [Datadog support][4] team. Enter your ticket number (optional) and email address then click **Submit**. This transmits a copy of your Agent logs and config files to Datadog support. More information on flares is available in the [Agent Flare][5] documentation.
+If you are having issues with the Agent, the flare page assists you with troubleshooting with the [Datadog support][4] team. Enter your ticket number (optional) and email address then click {{< ui >}}Submit{{< /ui >}}. This transmits a copy of your Agent logs and config files to Datadog support. More information on flares is available in the [Agent Flare][5] documentation.
 
 ### Restart Agent
 
-Clicking **Restart Agent** from the left navigation bar restarts the Agent immediately. There is no page or confirmation prompt. After restarting the Agent, you are forwarded to the [general status](#general) page.
+Clicking {{< ui >}}Restart Agent{{< /ui >}} from the left navigation bar restarts the Agent immediately. There is no page or confirmation prompt. After restarting the Agent, you are forwarded to the [general status](#general) page.
 
 ## Further Reading
 

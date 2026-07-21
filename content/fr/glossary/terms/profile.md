@@ -1,4 +1,5 @@
 ---
+id: profile
 core_product:
 - continuous profiler
 title: profil

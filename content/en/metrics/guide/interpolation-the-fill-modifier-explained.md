@@ -1,5 +1,6 @@
 ---
 title: Interpolation and the Fill Modifier
+description: "Understand how interpolation and the fill modifier help you aggregate across sources by aligning metric series."
 aliases:
     - /graphing/faq/interpolation-the-fill-modifier-explained
     - /dashboards/faq/interpolation-the-fill-modifier-explained

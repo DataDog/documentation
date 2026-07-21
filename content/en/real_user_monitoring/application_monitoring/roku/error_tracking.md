@@ -24,7 +24,7 @@ Enable Roku Crash Reporting and Error Tracking to get comprehensive crash report
 - Aggregated Roku crash dashboards and attributes
 - Trend analysis with Roku error tracking
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -54,7 +54,7 @@ To test your implementation:
        print x.foo
    ```
 
-3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ### Forward errors to Datadog
 

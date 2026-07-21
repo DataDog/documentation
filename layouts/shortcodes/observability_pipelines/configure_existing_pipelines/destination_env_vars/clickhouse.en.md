@@ -1,0 +1,9 @@
+- ClickHouse HTTP endpoint URL:
+   - The HTTP interface endpoint your Observability Pipelines Worker sends events to. For example, `https://clickhouse.example.com:8443`.
+   - The default environment variable is `DD_OP_DESTINATION_CLICKHOUSE_ENDPOINT_URL`.
+- ClickHouse authentication username (when basic auth is enabled):
+   - The default environment variable is `DD_OP_DESTINATION_CLICKHOUSE_USERNAME`.
+- ClickHouse authentication password (when basic auth is enabled):
+   - The default environment variable is `DD_OP_DESTINATION_CLICKHOUSE_PASSWORD`.
+- ClickHouse TLS passphrase (when TLS is enabled with an encrypted private key):
+   - The default environment variable is `DD_OP_DESTINATION_CLICKHOUSE_KEY_PASS`.

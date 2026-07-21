@@ -1,0 +1,11 @@
+{
+  "data": {
+    "attributes": {
+      "tags": [
+        "team:platform",
+        "service:ops"
+      ]
+    },
+    "type": "tags"
+  }
+}

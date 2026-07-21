@@ -1,4 +1,5 @@
 ---
+id: timeseries
 title: timeseries
 core_product:
   - dashboards

@@ -1,4 +1,5 @@
 ---
+id: mitre_attck
 core_product:
 - seguridad
 title: MITRE Adversarial Tactics, Techniques, and Common Knowledge (ATT&CK)

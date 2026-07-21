@@ -19,7 +19,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
 
 1. Within your Datadog Partner Sandbox Account, create and configure your OAuth client in the [Developer Platform][16].
 
-2. After a user installs your integration, they can click the **Connect Accounts** button to connect their account in the **Configure** tab of the integration tile. 
+2. After a user installs your integration, they can click the {{< ui >}}Connect Accounts{{< /ui >}} button to connect their account in the {{< ui >}}Configure{{< /ui >}} tab of the integration tile. 
 
    {{< img src="extend/authorization/connect-accounts.png" alt="Click the Connect Accounts button" style="width:100%;" >}}
 
@@ -33,7 +33,7 @@ This page provides a step-by-step overview on how to implement the OAuth protoco
    - This parameter is only provided if the user initiates authorization from the Datadog integration tile. See the [Initiate authorization from a third-party location](#Initiate-authorization-from-a-third-party-location) section for more options if the user chooses to initiate authorization externally.  
    - The `site` query parameter provides the [Datadog site][17] that the authorizing user is in, as well as any subdomain they may be using, and is required to construct the URL for this GET request to the Authorize endpoint: `<site>/oauth2/v1/authorize?...`.
 
-4. Once a user clicks **Authorize**, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
+4. Once a user clicks {{< ui >}}Authorize{{< /ui >}}, Datadog makes a POST request to the authorize endpoint. The user is redirected to the `redirect_uri` that you provided when setting up the OAuth Client with the authorization `code` parameter in the query component.
 
 5. From the `redirect_uri`, make a POST request to the [Datadog token endpoint][10] that includes the authorization code from Step 4, the `code_verifier` from Step 3, your OAuth client ID, and client secret.
 
@@ -55,7 +55,7 @@ For more information about OAuth client creation, testing and publishing, see [C
 
 ### Initiate authorization from a third-party location 
 
-Users can start the authorization process in Datadog by clicking **Connect Accounts** in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url` and on redirect to the `redirect_uri`. The user's Datadog site is required to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not provided. 
+Users can start the authorization process in Datadog by clicking {{< ui >}}Connect Accounts{{< /ui >}} in the integration tile. When a user clicks Connect Accounts in Datadog, information regarding their [Datadog site][17] is sent on redirect to the `onboarding_url` and on redirect to the `redirect_uri`. The user's Datadog site is required to make API calls on behalf of the user and receive an authorization code. If a user initiates authorization from the _integration's external website_, the user's site information is not provided. 
 
 Additionally, when users initiate authorization from the Datadog integration tile, they are required to have corresponding permissions for all requested scopes. If authorization is initiated from somewhere other than the integration tile, users without all of the required permissions may complete authorization (but are prompted to re-authorize with proper permissions when they return to the Datadog integration tile). 
 
@@ -72,7 +72,7 @@ While the OAuth2 protocol supports several grant flows, the [authorization code 
 This grant type allows applications to securely obtain a unique authorization code and exchange it for an access token that enables them to make requests to Datadog APIs. The authorization code grant flow consists of three steps:
 
 1. The application [requests authorization from a user][6] to access a set of Datadog scopes.
-2. When a user clicks **Authorize**, the application [obtains a unique authorization code][12].
+2. When a user clicks {{< ui >}}Authorize{{< /ui >}}, the application [obtains a unique authorization code][12].
 3. The application [exchanges the authorization code for an access token][10], which is used to access Datadog APIs.
 
 ### Use the PKCE extension
@@ -85,7 +85,7 @@ To mitigate such attacks, the PKCE extension includes the following parameters t
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Code Verifier         | A dynamically-generated cryptographic random string.                                                                                 |
 | Code Challenge        | A transformation of the code verifier. The `code_challenge` must use a `base64url` encoding.                                           |
-| Code Challenge Method | The method used to derive the `code_challenge` from the `code_verifier`. You must use [SHA-256][16] to compute the `code_challenge`. |
+| Code Challenge Method | The method used to derive the `code_challenge` from the `code_verifier`. You must use SHA-256 to compute the `code_challenge`. |
 
 The [PKCE protocol][11] integrates with the authorization code grant flow by completing the following actions:
 
@@ -114,5 +114,5 @@ The [PKCE protocol][11] integrates with the authorization code grant flow by com
 [13]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.2
 [14]: https://datatracker.ietf.org/doc/html/rfc7636#section-4.3
 [15]: https://datatracker.ietf.org/doc/html/rfc6234#section-4.1
-[16]: https://app.datadoghq.com/apps
+[16]: https://app.datadoghq.com/publishing-platform
 [17]: /getting_started/site/

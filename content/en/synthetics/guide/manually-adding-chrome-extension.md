@@ -19,9 +19,9 @@ If you are unable to download applications directly from the Chrome Web Store be
   
    {{< img src="synthetics/guide/manually_adding_chrome_extension/icon.png" alt="the icon that appears in your browser" style="width:100%;" >}}
 
-3. Create your [browser test][2] by [defining your test configuration][3] (such as the test name, tags, locations, and frequency) and clicking **Save Details & Record Test**. To get started with your recording, first download the [Datadog test recorder extension][4].
+3. Create your [browser test][2] by [defining your test configuration][3] (such as the test name, tags, locations, and frequency) and clicking {{< ui >}}Save Details & Record Test{{< /ui >}}. To get started with your recording, first download the [Datadog test recorder extension][4].
 4. Click the recorder extension icon on the top right hand corner of your browser. The Datadog test recorder extension automatically detects the extension uploaded in your internal application store.
-5. Start [recording your browser test's steps][5] and click **Save Recording** when you're done. 
+5. Start [recording your browser test's steps][5] and click {{< ui >}}Save Recording{{< /ui >}} when you're done. 
   
    {{< img src="synthetics/guide/manually_adding_chrome_extension/record_test.png" alt="record your browser tests" style="width:100%;" >}}
 
