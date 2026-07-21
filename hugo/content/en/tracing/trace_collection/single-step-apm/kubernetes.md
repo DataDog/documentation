@@ -39,24 +39,11 @@ In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to in
 
 <div class="alert alert-info">Single Step Instrumentation does not instrument applications in the namespace where the Datadog Agent is installed. Install the Agent in a separate namespace where you do not run your applications.</div>
 
-Follow these steps to enable Single Step Instrumentation across your entire cluster. This automatically sends traces from all applications written in supported languages.
+Enabling Single Step Instrumentation across your cluster automatically sends traces from all applications written in supported languages.
 
 **Note:** To instrument only specific namespaces or pods, see workload targeting in [Advanced options](#advanced-options).
 
-1. In Datadog, go to the [Install the Datadog Agent on Kubernetes][11] page.
-1. Follow the on-screen instructions to choose your installation method, select an API key, and set up the Operator or Helm repository.
-1. In the {{< ui >}}Configure `datadog-agent.yaml`{{< /ui >}} section, go to {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}, and turn on {{< ui >}}APM Instrumentation{{< /ui >}}.
-
-   {{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernetes through the Datadog app" style="width:100%;" >}}
-
-1. Deploy the Agent using the generated configuration file.
-1. Restart your applications.
-
-<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
-
-### Command-line setup
-
-The following commands provide a minimal command-line setup equivalent to enabling SSI in the UI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
+Use the following commands to enable SSI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -138,6 +125,16 @@ To update an existing Helm installation, add the SSI configuration to your `data
 
 {{% /tab %}}
 {{< /tabs >}}
+
+After you deploy the Agent, restart your applications.
+
+<div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
+
+### Generate the configuration from Datadog
+
+To generate the configuration through the UI, go to the [Install the Datadog Agent on Kubernetes][11] page and follow the on-screen instructions to choose your installation method and API key. In the {{< ui >}}Configure `datadog-agent.yaml`{{< /ui >}} section, go to {{< ui >}}Additional configuration{{< /ui >}} > {{< ui >}}Application Observability{{< /ui >}}, and turn on {{< ui >}}APM Instrumentation{{< /ui >}}. Then deploy the Agent using the generated configuration file.
+
+{{< img src="tracing/trace_collection/k8s-apm-instrumentation-toggle.jpg" alt="The configuration block for installing the Datadog Agent on Kubernetes through the Datadog app" style="width:100%;" >}}
 
 ## Verify the installation
 
