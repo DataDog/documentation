@@ -8926,8 +8926,7 @@ menu:
           - v2
         operationids:
           - UpdateMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 40
     - name: Delete a maintenance window
       url: /api/latest/case-management/delete-a-maintenance-window/
@@ -8939,8 +8938,7 @@ menu:
           - v2
         operationids:
           - DeleteMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 41
     - name: Create a maintenance window
       url: /api/latest/case-management/create-a-maintenance-window/
@@ -8952,8 +8950,7 @@ menu:
           - v2
         operationids:
           - CreateMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 39
     - name: List maintenance windows
       url: /api/latest/case-management/list-maintenance-windows/
@@ -8965,8 +8962,7 @@ menu:
           - v2
         operationids:
           - ListMaintenanceWindows
-        unstable:
-          - v2
+        unstable: []
         order: 38
     - name: Watch a case
       url: /api/latest/case-management/watch-a-case/
@@ -8978,8 +8974,7 @@ menu:
           - v2
         operationids:
           - WatchCase
-        unstable:
-          - v2
+        unstable: []
         order: 65
     - name: Unwatch a case
       url: /api/latest/case-management/unwatch-a-case/
@@ -8991,8 +8986,7 @@ menu:
           - v2
         operationids:
           - UnwatchCase
-        unstable:
-          - v2
+        unstable: []
         order: 66
     - name: List case watchers
       url: /api/latest/case-management/list-case-watchers/
@@ -9004,8 +8998,7 @@ menu:
           - v2
         operationids:
           - ListCaseWatchers
-        unstable:
-          - v2
+        unstable: []
         order: 64
     - name: Unassign case
       url: /api/latest/case-management/unassign-case/
@@ -9053,8 +9046,7 @@ menu:
           - v2
         operationids:
           - ListCaseTimeline
-        unstable:
-          - v2
+        unstable: []
         order: 58
     - name: Update case status
       url: /api/latest/case-management/update-case-status/
@@ -9078,8 +9070,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseResolvedReason
-        unstable:
-          - v2
+        unstable: []
         order: 26
     - name: Create ServiceNow ticket for case
       url: /api/latest/case-management/create-servicenow-ticket-for-case/
@@ -9091,8 +9082,7 @@ menu:
           - v2
         operationids:
           - CreateCaseServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 56
     - name: Update case project
       url: /api/latest/case-management/update-case-project/
@@ -9104,8 +9094,7 @@ menu:
           - v2
         operationids:
           - MoveCaseToProject
-        unstable:
-          - v2
+        unstable: []
         order: 51
     - name: Create investigation notebook for case
       url: /api/latest/case-management/create-investigation-notebook-for-case/
@@ -9117,8 +9106,7 @@ menu:
           - v2
         operationids:
           - CreateCaseNotebook
-        unstable:
-          - v2
+        unstable: []
         order: 57
     - name: Create Jira issue for case
       url: /api/latest/case-management/create-jira-issue-for-case/
@@ -9130,8 +9118,7 @@ menu:
           - v2
         operationids:
           - CreateCaseJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 53
     - name: Link existing Jira issue to case
       url: /api/latest/case-management/link-existing-jira-issue-to-case/
@@ -9143,8 +9130,7 @@ menu:
           - v2
         operationids:
           - LinkJiraIssueToCase
-        unstable:
-          - v2
+        unstable: []
         order: 54
     - name: Remove Jira issue link from case
       url: /api/latest/case-management/remove-jira-issue-link-from-case/
@@ -9156,8 +9142,7 @@ menu:
           - v2
         operationids:
           - UnlinkJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 55
     - name: Link incident to case
       url: /api/latest/case-management/link-incident-to-case/
@@ -9169,8 +9154,7 @@ menu:
           - v2
         operationids:
           - LinkIncident
-        unstable:
-          - v2
+        unstable: []
         order: 52
     - name: Update case priority
       url: /api/latest/case-management/update-case-priority/
@@ -9194,8 +9178,7 @@ menu:
           - v2
         operationids:
           - AddCaseInsights
-        unstable:
-          - v2
+        unstable: []
         order: 33
     - name: Remove insights from a case
       url: /api/latest/case-management/remove-insights-from-a-case/
@@ -9207,8 +9190,7 @@ menu:
           - v2
         operationids:
           - RemoveCaseInsights
-        unstable:
-          - v2
+        unstable: []
         order: 34
     - name: Update case due date
       url: /api/latest/case-management/update-case-due-date/
@@ -9220,8 +9202,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseDueDate
-        unstable:
-          - v2
+        unstable: []
         order: 25
     - name: Update case description
       url: /api/latest/case-management/update-case-description/
@@ -9269,8 +9250,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseComment
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Delete case comment
       url: /api/latest/case-management/delete-case-comment/
@@ -9354,8 +9334,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 62
     - name: Get a case view
       url: /api/latest/case-management/get-a-case-view/
@@ -9367,8 +9346,7 @@ menu:
           - v2
         operationids:
           - GetCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 61
     - name: Delete a case view
       url: /api/latest/case-management/delete-a-case-view/
@@ -9380,8 +9358,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 63
     - name: Create a case view
       url: /api/latest/case-management/create-a-case-view/
@@ -9393,8 +9370,7 @@ menu:
           - v2
         operationids:
           - CreateCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 60
     - name: List case views
       url: /api/latest/case-management/list-case-views/
@@ -9406,8 +9382,7 @@ menu:
           - v2
         operationids:
           - ListCaseViews
-        unstable:
-          - v2
+        unstable: []
         order: 59
     - name: Enable an automation rule
       url: /api/latest/case-management/enable-an-automation-rule/
@@ -9419,8 +9394,7 @@ menu:
           - v2
         operationids:
           - EnableCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Disable an automation rule
       url: /api/latest/case-management/disable-an-automation-rule/
@@ -9432,8 +9406,7 @@ menu:
           - v2
         operationids:
           - DisableCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Update an automation rule
       url: /api/latest/case-management/update-an-automation-rule/
@@ -9445,8 +9418,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Get an automation rule
       url: /api/latest/case-management/get-an-automation-rule/
@@ -9458,8 +9430,7 @@ menu:
           - v2
         operationids:
           - GetCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete an automation rule
       url: /api/latest/case-management/delete-an-automation-rule/
@@ -9471,8 +9442,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create an automation rule
       url: /api/latest/case-management/create-an-automation-rule/
@@ -9484,8 +9454,7 @@ menu:
           - v2
         operationids:
           - CreateCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List automation rules
       url: /api/latest/case-management/list-automation-rules/
@@ -9497,8 +9466,7 @@ menu:
           - v2
         operationids:
           - ListCaseAutomationRules
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Update a notification rule
       url: /api/latest/case-management/update-a-notification-rule/
@@ -9558,8 +9526,7 @@ menu:
           - v2
         operationids:
           - FavoriteCaseProject
-        unstable:
-          - v2
+        unstable: []
         order: 31
     - name: Unfavorite a project
       url: /api/latest/case-management/unfavorite-a-project/
@@ -9571,8 +9538,7 @@ menu:
           - v2
         operationids:
           - UnfavoriteCaseProject
-        unstable:
-          - v2
+        unstable: []
         order: 32
     - name: Update a project
       url: /api/latest/case-management/update-a-project/
@@ -9620,8 +9586,7 @@ menu:
           - v2
         operationids:
           - ListUserCaseProjectFavorites
-        unstable:
-          - v2
+        unstable: []
         order: 30
     - name: Create a project
       url: /api/latest/case-management/create-a-project/
@@ -9657,8 +9622,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseLink
-        unstable:
-          - v2
+        unstable: []
         order: 37
     - name: Create a case link
       url: /api/latest/case-management/create-a-case-link/
@@ -9670,8 +9634,7 @@ menu:
           - v2
         operationids:
           - CreateCaseLink
-        unstable:
-          - v2
+        unstable: []
         order: 36
     - name: List case links
       url: /api/latest/case-management/list-case-links/
@@ -9683,8 +9646,7 @@ menu:
           - v2
         operationids:
           - ListCaseLinks
-        unstable:
-          - v2
+        unstable: []
         order: 35
     - name: Count cases
       url: /api/latest/case-management/count-cases/
@@ -9696,8 +9658,7 @@ menu:
           - v2
         operationids:
           - CountCases
-        unstable:
-          - v2
+        unstable: []
         order: 28
     - name: Bulk update cases
       url: /api/latest/case-management/bulk-update-cases/
@@ -9709,8 +9670,7 @@ menu:
           - v2
         operationids:
           - BulkUpdateCases
-        unstable:
-          - v2
+        unstable: []
         order: 29
     - name: Aggregate cases
       url: /api/latest/case-management/aggregate-cases/
@@ -9722,8 +9682,7 @@ menu:
           - v2
         operationids:
           - AggregateCases
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: Create a case
       url: /api/latest/case-management/create-a-case/
@@ -9763,8 +9722,7 @@ menu:
           - v2
         operationids:
           - UpdateCustomAttributeConfig
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Delete custom attributes config
       url: /api/latest/case-management-attribute/delete-custom-attributes-config/
@@ -9828,8 +9786,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseType
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete a case type
       url: /api/latest/case-management-type/delete-a-case-type/
