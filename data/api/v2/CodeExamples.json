@@ -1100,6 +1100,34 @@
       "description": "Update a personal access token returns \"OK\" response"
     }
   ],
+  "CreateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create a new LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "CreateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update a specific LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
   "AggregateLogs": [
     {
       "group": "logs",

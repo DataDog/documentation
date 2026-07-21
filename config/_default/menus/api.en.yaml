@@ -14248,6 +14248,123 @@ menu:
         unstable:
           - v2
         order: 34
+    - name: Update a specific LLM Observability prompt version
+      url: /api/latest/llm-observability/update-a-specific-llm-observability-prompt-version/
+      identifier: llm-observability-update-a-specific-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 72
+    - name: Get a specific LLM Observability prompt version
+      url: /api/latest/llm-observability/get-a-specific-llm-observability-prompt-version/
+      identifier: llm-observability-get-a-specific-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 71
+    - name: Create a new LLM Observability prompt version
+      url: /api/latest/llm-observability/create-a-new-llm-observability-prompt-version/
+      identifier: llm-observability-create-a-new-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 70
+    - name: List versions of an LLM Observability prompt
+      url: /api/latest/llm-observability/list-versions-of-an-llm-observability-prompt/
+      identifier: llm-observability-list-versions-of-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPromptVersions
+        unstable:
+          - v2
+        order: 69
+    - name: Update an LLM Observability prompt
+      url: /api/latest/llm-observability/update-an-llm-observability-prompt/
+      identifier: llm-observability-update-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPrompt
+        unstable:
+          - v2
+        order: 67
+    - name: Get an LLM Observability prompt
+      url: /api/latest/llm-observability/get-an-llm-observability-prompt/
+      identifier: llm-observability-get-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPrompt
+        unstable:
+          - v2
+        order: 66
+    - name: Delete an LLM Observability prompt
+      url: /api/latest/llm-observability/delete-an-llm-observability-prompt/
+      identifier: llm-observability-delete-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPrompt
+        unstable:
+          - v2
+        order: 68
+    - name: Create an LLM Observability prompt
+      url: /api/latest/llm-observability/create-an-llm-observability-prompt/
+      identifier: llm-observability-create-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPrompt
+        unstable:
+          - v2
+        order: 65
+    - name: List LLM Observability prompts
+      url: /api/latest/llm-observability/list-llm-observability-prompts/
+      identifier: llm-observability-list-llm-observability-prompts
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPrompts
+        unstable:
+          - v2
+        order: 64
     - name: Update an LLM Observability project
       url: /api/latest/llm-observability/update-an-llm-observability-project/
       identifier: llm-observability-update-an-llm-observability-project

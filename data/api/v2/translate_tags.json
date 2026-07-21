@@ -265,7 +265,7 @@
   },
   "llm-observability": {
     "name": "LLM Observability",
-    "description": "Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, and annotations."
+    "description": "Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations."
   },
   "logs": {
     "name": "Logs",
