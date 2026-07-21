@@ -301,7 +301,7 @@ Use these widgets to evaluate your Sensitive Data Scanner processors' scanning r
 - **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively matching data. This is the primary widget to see which rules are in use.
 - **Total count of logs containing sensitive data**: Shows the total volume of sensitive data matched across all rules.
 - **Logs containing sensitive data by Pipeline**: Shows matching logs that contain sensitive data. You can scope matches down by `pipeline_id`, which helps you see whether logs containing sensitive data is found in all pipelines or only in specific pipelines.
-- **Logs containing sensitive data per host**: Breaks  down sensitive data matches by Worker host. Use this widget to confirm coverage across your deployment.
+- **Logs containing sensitive data per host**: Breaks down sensitive data matches by Worker host. Use this widget to confirm coverage across your deployment.
 - **Patterns containing sensitive information** and **List of logs containing sensitive data**: Shows the log patterns and sample events where sensitive data was found.
 
 After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
