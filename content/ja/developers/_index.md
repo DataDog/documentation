@@ -105,7 +105,7 @@ Datadog パートナーになるための詳細は、[Datadog パートナーネ
 
 {{< whatsnext desc="Datadog に送信できるデータのタイプとその送信方法について説明します。" >}}
     {{< nextlink href="/metrics" >}}<u>カスタムメトリクス</u>: Datadog のカスタムメトリクスについて掘り下げて説明します。メトリクスのタイプや、それぞれのタイプが表すもの、送信方法、および Datadog 全体でどのように使用されるかを、このセクションで説明します。{{< /nextlink >}}
-    {{< nextlink href="service_management/events/guides/" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
+    {{< nextlink href="events/guides/" >}}<u>イベント</u>: カスタム Agent チェック、DogStatsD、または Datadog API を使用して、Datadog にイベントを送信する方法について説明します。{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>サービスチェック</u>: 特定のサービスのアップまたはダウンステータスを Datadog に送信する方法について説明します。{{< /nextlink >}}
 {{< /whatsnext >}}
 

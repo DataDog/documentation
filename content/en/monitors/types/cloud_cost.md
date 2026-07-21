@@ -39,9 +39,9 @@ Cloud Cost monitors use a 30-minute evaluation frequency and a 48-hour delayed e
 
 ## Create a monitor
 
-To create a Cloud Cost monitor in Datadog, navigate to [**Cloud Cost > Analyze > Cost Monitors** ][4] and click **+ New Cost Monitor**.
+To create a Cloud Cost monitor in Datadog, navigate to [{{< ui >}}Cloud Cost > Analyze > Cost Monitors{{< /ui >}}][4] and click {{< ui >}}+ New Cost Monitor{{< /ui >}}.
 
-Alternatively, you can set one up from [**Monitors** --> **New Monitor** --> **Cloud Cost**][3], the main navigation, the [Cloud Cost Explorer][5], or through [Terraform][2].
+Alternatively, you can set one up from [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Cloud Cost{{< /ui >}}][3], the main navigation, the [Cloud Cost Explorer][5], or through [Terraform][2].
 
 {{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-create-new.png" alt="The Create Monitor button on the Cost Monitor page" style="width:100%;" >}}
 
@@ -92,15 +92,15 @@ For more information, see the [Cloud Cost Management documentation][1].
 {{< tabs >}}
 {{% tab "Changes" %}}
 
-If you are using the **Cost Changes** monitor type, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a **Percentage Change** or set to **Dollar Amount**.
+If you are using the {{< ui >}}Cost Changes{{< /ui >}} monitor type, you can trigger an alert when the cost `increases` or `decreases` more than the defined threshold. The threshold can be set to either a {{< ui >}}Percentage Change{{< /ui >}} or set to {{< ui >}}Dollar Amount{{< /ui >}}.
 
-If you are using the **Percentage Change**, you can filter out changes that are below a certain dollar threshold. For example, the monitor alerts when there is a cost change above 5% for any change that is above $500.
+If you are using the {{< ui >}}Percentage Change{{< /ui >}}, you can filter out changes that are below a certain dollar threshold. For example, the monitor alerts when there is a cost change above 5% for any change that is above $500.
 
 {{% /tab %}}
 
 {{% tab "Anomalies" %}}
 
-For the **Cost Anomalies** monitor type, you can trigger an alert if the observed cost is `above`, `below`, or `above or below` a threshold compared to historical data.
+For the {{< ui >}}Cost Anomalies{{< /ui >}} monitor type, you can trigger an alert if the observed cost is `above`, `below`, or `above or below` a threshold compared to historical data.
 
 The `agile` [anomaly algorithm][101] is used with two bounds and monthly seasonality.
 
@@ -110,17 +110,17 @@ The `agile` [anomaly algorithm][101] is used with two bounds and monthly seasona
 
 {{% tab "Threshold" %}}
 
-If you are using the **Cost Threshold** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.
+If you are using the {{< ui >}}Cost Threshold{{< /ui >}} monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, or `below or equal to` a threshold.
 
 {{% /tab %}}
 {{% tab "Forecast" %}}
 
-If you are using the **Cost Forecast** monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, `below or equal to`, `equal to`, or `not equal to` a threshold.
+If you are using the {{< ui >}}Cost Forecast{{< /ui >}} monitor type, you can trigger an alert when the cloud cost is `above`, `below`, `above or equal`, `below or equal to`, `equal to`, or `not equal to` a threshold.
 
 {{% /tab %}}
 
 {{% tab "Budget" %}}
-If you are using the **Budget** monitor type, you can trigger an alert when the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
+If you are using the {{< ui >}}Budget{{< /ui >}} monitor type, you can trigger an alert when the actual or the forecasted cloud cost exceeds a percentage of the budget you selected in the previous step.
 
 | Step             | Purpose                                                                           | Values                            |
 | ---------------- | --------------------------------------------------------------------------------- | --------------------------------- |
@@ -129,7 +129,7 @@ If you are using the **Budget** monitor type, you can trigger an alert when the 
 | Threshold        | Percentage of budget that is utilized to trigger the alert.                       | Number between 0 and 100 (%)      |
 | Timeframe        | Evaluation window used to assess if the threshold is breached.                    | `all_months`, `current_month`     |
 
-When you select **is forecasted to reach**, the monitor uses the same [forecasting model][8] as budget cards and the budget status page.
+When you select {{< ui >}}is forecasted to reach{{< /ui >}}, the monitor uses the same [forecasting model][8] as budget cards and the budget status page.
 
 [8]: /cloud_cost_management/planning/forecasting/
 {{% /tab %}}
@@ -139,23 +139,23 @@ When you select **is forecasted to reach**, the monitor uses the same [forecasti
 
 ### Configure notifications and automations
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][6] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][6] page.
 
 ### Define permissions and audit notifications
 
 Choose which teams, roles, users, or service accounts are allowed to **view** or **edit** the monitor. By default, all members of your organization have access.
 
-You can also turn on **Audit Notifications** to alert the monitor creator and recipients whenever the monitor is changed.
+You can also turn on {{< ui >}}Audit Notifications{{< /ui >}} to alert the monitor creator and recipients whenever the monitor is changed.
 
 ## Other actions you can take
 
 {{< img src="/monitors/monitor_types/cloud_cost/cost-monitors-other-actions.png" alt="The actions menu open with options to view the monitor in the Cloud Cost Explorer, as well as options to edit, clone, and delete the monitor." style="width:100%;" >}}
 
--   **View in Monitors** to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
--   **View in Explorer** to open the monitor in the Cloud Cost Explorer for deeper analysis.
--   **Edit** a monitor to update the monitor's settings or configuration.
--   **Clone** a monitor to create a copy of an existing monitor by choosing **Actions > Clone**.
--   **Delete** a monitor to permanently remove a monitor you no longer need.
+-   {{< ui >}}View in Monitors{{< /ui >}} to see your monitor's alert history, adjust visualizations, and review how often it has triggered alerts.
+-   {{< ui >}}View in Explorer{{< /ui >}} to open the monitor in the Cloud Cost Explorer for deeper analysis.
+-   {{< ui >}}Edit{{< /ui >}} a monitor to update the monitor's settings or configuration.
+-   {{< ui >}}Clone{{< /ui >}} a monitor to create a copy of an existing monitor by choosing {{< ui >}}Actions{{< /ui >}} > {{< ui >}}Clone{{< /ui >}}.
+-   {{< ui >}}Delete{{< /ui >}} a monitor to permanently remove a monitor you no longer need.
 
 ## Further Reading
 

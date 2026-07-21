@@ -122,7 +122,7 @@ To create a PR Gate rule, see the [Setup documentation][7].
 
 ## Manage rules
 
-You can manage and update PR Gates rules on the [**PR Gates Rules**][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
+You can manage and update PR Gates rules on the [{{< ui >}}PR Gates Rules{{< /ui >}}][8] page. Improve your security and quality practices based on your project requirements and risk tolerances. 
 
 You can see all of the rules defined by the organization.
 

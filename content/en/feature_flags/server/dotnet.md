@@ -8,6 +8,12 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/dotnet-core/"
   tag: "Documentation"
   text: ".NET Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -42,6 +48,8 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][6]. For more information on available graphing, see [Feature Flag Graphs][7].
+
 ## Installation
 
 Install the Datadog [.NET SDK][3] and [OpenFeature SDK][4] using NuGet:
@@ -57,6 +65,22 @@ Or add them to your `.csproj` file:
 <ItemGroup>
   <PackageReference Include="Datadog.FeatureFlags.OpenFeature" />
   <PackageReference Include="OpenFeature" />
+</ItemGroup>
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+dotnet add package OpenTelemetry
+dotnet add package OpenTelemetry.Exporter.OpenTelemetryProtocol
+{{< /code-block >}}
+
+Or add them to your `.csproj` file:
+
+{{< code-block lang="xml" filename="MyProject.csproj" >}}
+<ItemGroup>
+  <PackageReference Include="OpenTelemetry" />
+  <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" />
 </ItemGroup>
 {{< /code-block >}}
 
@@ -372,6 +396,8 @@ var enabled = client.GetBooleanValueAsync("flag-key", false, context);
 [3]: https://www.nuget.org/packages/Datadog.Trace
 [4]: https://www.nuget.org/packages/Datadog.FeatureFlags.OpenFeature
 [5]: /account_management/api-app-keys/#api-keys
+[6]: /feature_flags/guide/server_flag_evaluation_metrics/
+[7]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 

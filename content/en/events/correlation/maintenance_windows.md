@@ -3,7 +3,7 @@ title: Maintenance Windows
 aliases:
 - /service_management/events/correlation/maintenance_windows/
 further_reading:
-- link: "service_management/events/correlation/"
+- link: "events/correlation/"
   tag: "Documentation"
   text: "Learn about Event Correlation"
 ---

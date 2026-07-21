@@ -16,9 +16,9 @@ Sheets is a spreadsheet tool that you can populate with Datadog data, enabling y
 
 Sheets lets you manipulate, transform, and analyze data from logs, real user monitoring, and cloud cost monitoring in a familiar spreadsheet interface. It can contain the following tabs:
 
-- **[Table](#table)**: Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
-- **[Pivot](#pivot)**: Summarize and aggregate data from a table with custom dimensions and calculations.
-- **[Sheet](#sheet-preview)** (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
+- [{{< ui >}}Table{{< /ui >}}](#table): Query live data from a Datadog data source and enrich it with calculated columns, lookups, and filters.
+- [{{< ui >}}Pivot{{< /ui >}}](#pivot): Summarize and aggregate data from a table with custom dimensions and calculations.
+- [{{< ui >}}Sheet{{< /ui >}}](#sheet-preview) (Preview): A flexible, blank-canvas spreadsheet where you can write formulas referencing data directly from a table to build models, reports, or track operations.
 
 ## Table
 
@@ -28,31 +28,31 @@ Start by creating a table of data, either by building a new query from Sheets or
 
 {{< img src="/sheets/create_table.png" alt="Modal to create a table from Sheets, showing a Logs query with status:error." style="width:90%;" >}}
 
-1. On the [Datadog Sheets page][1], click **New Spreadsheet**.
-1. Click **Add Data**.<br/>
+1. On the [Datadog Sheets page][1], click {{< ui >}}New Spreadsheet{{< /ui >}}.
+1. Click {{< ui >}}Add Data{{< /ui >}}.<br/>
 **Note**: if there is a data source you want that is not available, request it [here][19].
 1. Start building your query by selecting your Data source, and adding filtering parameters.
 1. Select the columns you want to display and preview the resulting table.
-1. Click **Create Table**.
+1. Click {{< ui >}}Create Table{{< /ui >}}.
 
 ### Transfer your query to a spreadsheet
 
 1. On the page of a supported product (such as the [Log Explorer][2]), build the query of data you want to analyze, such as filtering your Logs view to those that have `status:error`.
-1. Click **Open in Sheets**. For a list of product pages you can create a table from, see the [Supported data sources](#supported-data-sources) section.
-1. You can create a **New Spreadsheet** or add this table of data to an **Existing Spreadsheet**.
-1. Click **Save and Open**.
+1. Click {{< ui >}}Open in Sheets{{< /ui >}}. For a list of product pages you can create a table from, see the [Supported data sources](#supported-data-sources) section.
+1. You can create a {{< ui >}}New Spreadsheet{{< /ui >}} or add this table of data to an {{< ui >}}Existing Spreadsheet{{< /ui >}}.
+1. Click {{< ui >}}Save and Open{{< /ui >}}.
 
 ### Calculated columns
 
 You can use a calculated column to add a formula, parse a log message, extract regex, or add business logic to your data. Your calculated columns can be used in the pivot table you'll create later.
 
-From the header of the far right column of your table, click the Plus icon to **Add calculated column**. Enter a function to view the syntax and description of the function. For a full list of supported functions, see the [Functions and Operators][3] documentation.
+From the header of the far right column of your table, click the Plus icon to {{< ui >}}Add calculated column{{< /ui >}}. Enter a function to view the syntax and description of the function. For a full list of supported functions, see the [Functions and Operators][3] documentation.
 
 {{< img src="/sheets/calculated_columns.png" alt="Added calculated column with the Plus icon, and an example IFS function" style="width:90%;" >}}
 
 ### Lookup
 
-Lookup enriches your existing data and adds more context to your table. Click **Add Lookup** at the top of the page to add columns from another table or data source, such as [Reference Tables][4], logs, or RUM data. Lookup is like a left join or a vlookup in Excel or Google Sheets; it matches records on a common column, and returns additional columns of data to enrich your existing Sheets table.
+Lookup enriches your existing data and adds more context to your table. Click {{< ui >}}Add Lookup{{< /ui >}} at the top of the page to add columns from another table or data source, such as [Reference Tables][4], logs, or RUM data. Lookup is like a left join or a vlookup in Excel or Google Sheets; it matches records on a common column, and returns additional columns of data to enrich your existing Sheets table.
 
 {{< img src="/sheets/lookup.png" alt="Example Lookup which adds a user's team metadata sourced from a reference table" style="width:90%;" >}}
 
@@ -61,15 +61,15 @@ For example, you have a table of RUM data with user emails, and you want to know
 ## Pivot
 
 After you add a table of data to a spreadsheet, analyze and add context to your raw data with a pivot table. Use pivot tables to summarize and organize large amounts of data into customized tables. It helps you analyze data to find patterns and trends, and see comparisons. For example, you can have a table with a hundred rows, but with a pivot table you can break down that data into a summary table that counts your data by method or region. To create a pivot table:
-1. From an existing spreadsheet that already has a table of data, click **Add Pivot Table**.
-1. In the **Rows** and **Columns** section, select the dimensions you want to analyze, such as the status of logs.
-1. In the **Calculations** section, select the dimensions you want to use in calculations, including sum, average, count, min, and max.
+1. From an existing spreadsheet that already has a table of data, click {{< ui >}}Add Pivot Table{{< /ui >}}.
+1. In the {{< ui >}}Rows{{< /ui >}} and {{< ui >}}Columns{{< /ui >}} section, select the dimensions you want to analyze, such as the status of logs.
+1. In the {{< ui >}}Calculations{{< /ui >}} section, select the dimensions you want to use in calculations, including sum, average, count, min, and max.
 
 {{< img src="/sheets/example_pivot_table.png" alt="Example pivot table configuration panel" style="width:90%;" >}}
 
 ### Visualizations
 
-After you have your pivot table, you can click **Show Graphs** and add up to six widgets to graph your data. Supported widget types include **Top List**, **Treemap**, and **Pie Chart** widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
+After you have your pivot table, you can click {{< ui >}}Show Graphs{{< /ui >}} and add up to six widgets to graph your data. Supported widget types include {{< ui >}}Top List{{< /ui >}}, {{< ui >}}Treemap{{< /ui >}}, and {{< ui >}}Pie Chart{{< /ui >}} widgets. Hover over the widget title to delete, duplicate, expand, export, and reposition widgets. To edit a widget, click the pencil icon. Editing options allow you to select the widget type, choose which pivot calculation to graph (if there is more than one), and specify the rows, columns, and the number of groupings graphed per row or column.
 
 ## Sheet (Preview)
 
@@ -79,7 +79,7 @@ Create flexible spreadsheets: built to let you start from scratch, build models,
 
 A sheet is a flexible, blank-canvas spreadsheet with a full formula engine. Use it to build financial models, operational trackers, planning templates, or any freeform calculation that doesn't fit a query-based workflow.
 
-To add a sheet, click the **+** tab at the bottom of your spreadsheet and select **Add Sheet**.
+To add a sheet, click the {{< ui >}}+{{< /ui >}} tab at the bottom of your spreadsheet and select {{< ui >}}Add Sheet{{< /ui >}}.
 
 {{< img src="/sheets/flexible_spreadsheet.png" alt="A flexible sheet showing a 2025 cloud spend by provider model, with SUMIFS and VLOOKUP formulas referencing Cloud cost and Currency conversion table tabs" style="width:90%;" >}}
 
@@ -224,19 +224,19 @@ By default, all users have full access to spreadsheets.
 
 Use granular access controls to limit the [roles][10] that may edit a particular spreadsheet:
 1. While viewing a spreadsheet, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. Select {{< ui >}}Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restrict Access{{< /ui >}}. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the spreadsheet.
-2. Click **Add**. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**.
+2. Click {{< ui >}}Add{{< /ui >}}. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note:** To maintain your edit access to the spreadsheet, you must include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted spreadsheet. Complete the following steps:
 1. While viewing the spreadsheet, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. Select {{< ui >}}Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 
 ## Further reading

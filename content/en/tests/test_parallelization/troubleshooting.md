@@ -36,6 +36,7 @@ If `ddtest` selects more or fewer CI nodes than expected, review these settings:
 - `--min-parallelism`: Minimum CI node or worker count considered by `ddtest`.
 - `--max-parallelism`: Maximum CI node or worker count considered by `ddtest`.
 - `--ci-job-overhead`: Estimated overhead for launching an additional CI node.
+- `--target-time`: Target wall time for the selected split.
 
 Increase `--ci-job-overhead` to prefer fewer CI nodes. Decrease it to prefer faster wall-clock time.
 

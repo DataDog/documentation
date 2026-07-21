@@ -55,7 +55,6 @@ After syncing, you can explore your Looker assets and their upstream dependencie
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://cloud.google.com/looker/docs/api-auth
 [2]: https://app.datadoghq.com/integrations/looker
 [3]: https://app.datadoghq.com/data-obs/catalog
 [4]: https://app.datadoghq.com/integrations/github

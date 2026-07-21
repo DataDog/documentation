@@ -3,7 +3,7 @@ title: Pattern-based Correlation
 aliases:
 - /service_management/events/correlation/patterns/
 further_reading:
-- link: "service_management/events/correlation/triage_and_notify"
+- link: "events/correlation/triage_and_notify"
   tag: "Documentation"
   text: "Learn about triaging and notifiying on cases"
 ---
@@ -14,7 +14,7 @@ Pattern-based correlation allows you to control how the events are correlated. D
 
 To get you started, Datadog automatically suggests [pattern-based correlations][1] according to your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
 
-{{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
+{{< img src="events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}}
 
 
 ## Create a pattern
@@ -25,7 +25,7 @@ To create a pattern:
 1. You can adjust a suggested pattern by clicking {{< ui >}}+ Continue With Pattern{{< /ui >}}. This takes you to the pre-populated configuration page for additional tuning. Or, you can choose to create your own pattern by clicking {{< ui >}}+ Personalize From Scratch{{< /ui >}}
 
 First, events are deduplicated to alert based on event aggregation key. Then, alerts are correlated to a case based on configuration. 
-{{< img src="service_management/events/correlation/correlation_helper.mp4" alt="When events matches defined sources, filter, they get deduplicated to alerts. Alerts are correlated based on grouping attributes, and its events are de-duplicated withint the defined time window before the process repeats in a new case. You can modify these configuration in settings" video=true >}}
+{{< img src="events/correlation/correlation_helper.mp4" alt="When events matches defined sources, filter, they get deduplicated to alerts. Alerts are correlated based on grouping attributes, and its events are de-duplicated withint the defined time window before the process repeats in a new case. You can modify these configuration in settings" video=true >}}
 For more information on how to sends events with aggregation key, see [send events to datadog][5]. Events without an aggregation key are deduped to one single alert within the timeframe.
 
 ### Suggested patterns
@@ -69,7 +69,7 @@ Preview the possible patterns and cases your configuration would potentially cre
 
 Use this data to preview the impact of your correlations and understand the expected output of a pattern.
 
-{{< img src="service_management/events/correlation/pattern/preview_pattern_output.png" alt="Configuration for pattern-based correlation highlighting the preview panel; panel shows the number of ingested events that match your configuration, how many of those events alert, how much deduplication would occur, and the number of cases that would result." style="width:100%;" >}}
+{{< img src="events/correlation/pattern/preview_pattern_output.png" alt="Configuration for pattern-based correlation highlighting the preview panel; panel shows the number of ingested events that match your configuration, how many of those events alert, how much deduplication would occur, and the number of cases that would result." style="width:100%;" >}}
 
 **Notes**: the default title in the preview case is the first alert in correlation. After you save a pattern, the event management case title is intelligently generated. 
 

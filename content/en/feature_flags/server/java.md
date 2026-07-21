@@ -8,9 +8,17 @@ further_reading:
 - link: "/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/"
   tag: "Documentation"
   text: "Java APM and Distributed Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 <div class="alert alert-info">Enable Java Feature Flags by setting <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code>. The <code>EXPERIMENTAL_</code> prefix is kept for backwards compatibility; the provider is stable. See the <a href="#configuration">Configuration section</a> for details.</div>
+
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Overview
 
@@ -24,8 +32,9 @@ The Java SDK integrates feature flags directly into the Datadog Java tracer (`dd
 
 The Datadog Feature Flags SDK for Java requires:
 - **Java 11 or higher**
-- **Datadog Java SDK**: Version **1.57.0** or later
-- **OpenFeature SDK**: Version **1.18.2** or later
+- **Datadog Java SDK** (`dd-java-agent`, added with `-javaagent`): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.57.0** or later (**1.62.0** or later for flag evaluation metrics)
+- **OpenFeature SDK**: Version **1.20.1** or later
 - **Datadog Agent**: Version **7.55 or later** with [Remote Configuration][1] enabled
 - **Datadog [API key][7]**: Configured on the Agent (not the application) for Remote Configuration
 
@@ -46,10 +55,10 @@ Add the following dependencies to your `build.gradle`:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.63.0'
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -60,10 +69,10 @@ Add the following dependencies to your `build.gradle.kts`:
 {{< code-block lang="kotlin" filename="build.gradle.kts" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation("dev.openfeature:sdk:1.18.2")
+    implementation("dev.openfeature:sdk:1.20.1")
 
     // Datadog OpenFeature Provider
-    implementation("com.datadoghq:dd-openfeature:1.57.0")
+    implementation("com.datadoghq:dd-openfeature:1.63.0")
 }
 {{< /code-block >}}
 {{% /tab %}}
@@ -77,19 +86,23 @@ Add the following dependencies to your `pom.xml`:
     <dependency>
         <groupId>dev.openfeature</groupId>
         <artifactId>sdk</artifactId>
-        <version>1.18.2</version>
+        <version>1.20.1</version>
     </dependency>
 
     <!-- Datadog OpenFeature Provider -->
     <dependency>
         <groupId>com.datadoghq</groupId>
         <artifactId>dd-openfeature</artifactId>
-        <version>1.57.0</version>
+        <version>1.63.0</version>
     </dependency>
 </dependencies>
 {{< /code-block >}}
 {{% /tab %}}
 {{< /tabs >}}
+
+The Gradle and Maven installation examples pin specific versions of `dd-openfeature` and the OpenFeature SDK. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
+
+To emit flag evaluation metrics (the `feature_flag.evaluations` metric), add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
 ## Configuration
 
@@ -122,7 +135,7 @@ Configure your Java application with the required environment variables or syste
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
 # Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
+# See "Set Up Server-Side Flag Evaluation Metrics" documentation
 
 # Required: Service name
 export DD_SERVICE=<YOUR_SERVICE_NAME>
@@ -142,7 +155,6 @@ java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< code-block lang="bash" >}}
 java -javaagent:path/to/dd-java-agent.jar \
   -Ddd.experimental.flagging.provider.enabled=true \
-  -Ddd.metrics.otel.enabled=true \
   -Ddd.service=<YOUR_SERVICE_NAME> \
   -Ddd.env=<YOUR_ENVIRONMENT> \
   -Ddd.version=<YOUR_APP_VERSION> \
@@ -161,9 +173,8 @@ The Datadog feature flagging system starts automatically when the tracer is init
 
 For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
-Make sure to include the feature flagging configuration flags:
+Make sure to include the feature flagging configuration flag:
 - `-Ddd.experimental.flagging.provider.enabled=true`
-- `-Ddd.metrics.otel.enabled=true` if you want flag evaluation metrics
 
 ## Initialize the OpenFeature provider
 
@@ -660,7 +671,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 #### Flag evaluation metrics
 
-Flag evaluation counts appear in Datadog when `DD_METRICS_OTEL_ENABLED=true` is set on the tracer. Each evaluation emits a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. If this metric does not appear, verify the setting is enabled and the tracer version supports it.
+Flag evaluation counts appear in Datadog as a `feature_flag.evaluations` counter metric tagged with the flag key, result variant, and evaluation reason. See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> for the full setup guide and troubleshooting steps.
 
 #### Experiment exposures
 
@@ -680,3 +691,4 @@ Exposures appear in Datadog only for flags associated with an experiment. Standa
 [5]: https://app.datadoghq.com/feature-flags/settings/environments
 [6]: /agent/configuration/agent-commands/
 [7]: /account_management/api-app-keys/#api-keys
+[8]: /feature_flags/guide/server_flag_evaluation_metrics/

@@ -2,6 +2,9 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/saved_filters"
+  tag: "Documentation"
+  text: "Saved Filters"
 - link: "/feature_flags/concepts/traffic_splitting"
   tag: "Documentation"
   text: "Traffic Splitting and Randomization"
@@ -40,7 +43,7 @@ To configure targeting rules for a flag:
 For each targeting rule, configure the following:
 
 - **Name your targeting rule**: Give your targeting rule a name to describe the group it targets.
-- **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment.
+- **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment. To reuse the same conditions across multiple flags, add a [saved filter][1] instead of redefining them on each flag.
 - **Select variants**: Choose which variants to serve to matching subjects. Click **Split Traffic** to randomize across multiple variants (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 - **Set the traffic exposure** (optional): Serve the variant to a percentage of matching subjects (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 
@@ -140,3 +143,5 @@ Targeting rules are evaluated **in order** from top to bottom:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/concepts/saved_filters/

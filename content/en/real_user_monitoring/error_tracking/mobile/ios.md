@@ -29,7 +29,7 @@ Enable iOS Crash Reporting and Error Tracking to get comprehensive crash reports
 
 In order to symbolicate your stack traces, find and upload your `.dSYM` files to Datadog. Then, verify your configuration by running a test crash and restarting your application. 
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -106,7 +106,7 @@ By default, app hangs reporting is **disabled**, but you can enable it and set y
 
 App hangs are reported through the RUM iOS SDK (not through [Logs][4]).
 
-When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [**Error Tracking**][1]. There are two types of hangs:
+When enabled, any main thread pause that is longer than the specified `appHangThreshold` is considered a "hang" in [{{< ui >}}Error Tracking{{< /ui >}}][1]. There are two types of hangs:
 
 - **Fatal app hang**: How a hang gets reported if it never gets recovered and the app is terminated. Fatal app hangs are marked as a "Crash" in Error Tracking and the RUM explorer.
 
@@ -157,7 +157,7 @@ To compute a similar hang rate on Datadog, make sure:
 2. That the app hang threshold is equal or below 250 ms.
 3. That the `@error.category` and `@freeze.duration` attribute reported on your app hangs errors in RUM are available in your facets (this should be the case by default. If it's not, you can manually [create facets][17]).
 
-If all these prerequisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the JSON tab of your widget, under the "Graph your data" section:
+If all these prerequisites are met, then create a new [Timeseries widget][18] on a Dashboard or a Notebook, and paste the following snippet in the {{< ui >}}JSON{{< /ui >}} tab of your widget, under the {{< ui >}}Graph your data{{< /ui >}} section:
 
 {{< img src="real_user_monitoring/error_tracking/json-tab.png" alt="The modal to edit the configuration of a widget, with the JSON tab open" style="width:60%;" >}}
 
@@ -360,7 +360,7 @@ Crash reports are collected in a raw format and mostly contain memory addresses.
 
 Every iOS application produces `.dSYM` files for each application module. These files minimize an application's binary size and enable faster download speed. Each application version contains a set of `.dSYM` files. 
 
-Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to **DWARF with dSYM File**. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to **DWARF with dSYM File** for the Release project configuration.
+Xcode exports `.dSYM` files to `$DWARF_DSYM_FOLDER_PATH` at the end of your application's build. Ensure that the `DEBUG_INFORMATION_FORMAT` build setting is set to {{< ui >}}DWARF with dSYM File{{< /ui >}}. By default, Xcode projects only set `DEBUG_INFORMATION_FORMAT` to {{< ui >}}DWARF with dSYM File{{< /ui >}} for the Release project configuration.
 
 ### Upload your .dSYM file
 
@@ -460,7 +460,7 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
    }
    ```
 
-3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 **Note:** RUM supports symbolication of system symbol files for iOS v14+ arm64 and arm64e architecture.
 

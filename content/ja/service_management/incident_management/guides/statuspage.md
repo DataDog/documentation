@@ -40,13 +40,13 @@ Statuspage インシデントを追加するには、Incidents Write と Integra
 1. インシデントページ上部で **Add a Statuspage incident** をクリックします。
 1. Select a Statuspage、Incident name、Incident statusなど、必須フィールドをすべて入力します。影響を受ける Statuspage コンポーネントを指定することもできます。 
 
-{{< img src="service_management/incidents/guide/statuspage/add_update_statuspage_form.png" alt="Select a Statuspage、Incident name、Incident statusなどの必須フィールドを持つ、Statuspage インシデントを追加または更新するためのフォーム" style="width:70%;" >}}
+{{< img src="incident_response/incident_management/guides/statuspage/add_update_statuspage_form.png" alt="Select a Statuspage、Incident name、Incident statusなどの必須フィールドを持つ、Statuspage インシデントを追加または更新するためのフォーム" style="width:70%;" >}}
 
 ## ステータスの更新
 
 Statuspage がインシデントに追加された後は、インシデントが解決するまで Statuspage を更新し続けることができます。
 
-{{< img src="service_management/incidents/guide/statuspage/update_status_modal.png" alt="リンクされている statuspage インシデントと Statuspage インシデントの更新オプションがハイライト表示されているインシデントの例" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/guides/statuspage/update_status_modal.png" alt="リンクされている statuspage インシデントと Statuspage インシデントの更新オプションがハイライト表示されているインシデントの例" style="width:80%;" >}}
 
 1. [Incidents ページ][4]で、更新したいインシデントを開きます。
 1. 追加した Statuspage を見つけてボタンをクリックすると、統合モーダルが開きます。Statuspage との統合の解除や影響度の変更、Statuspage の更新が可能です。

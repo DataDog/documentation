@@ -29,7 +29,7 @@ After you select the Sumo Logic source in the pipeline UI, enter the identifier 
 
 ### Optional settings
 
-In the **Decoding** dropdown menu, select whether your input format is raw **Bytes**, **JSON**, Graylog Extended Log Format (**Gelf**), or **Syslog**. If no decoding is selected, the decoding defaults to JSON.
+In the {{< ui >}}Decoding{{< /ui >}} dropdown menu, select whether your input format is raw {{< ui >}}Bytes{{< /ui >}}, {{< ui >}}JSON{{< /ui >}}, Graylog Extended Log Format ({{< ui >}}Gelf{{< /ui >}}), or {{< ui >}}Syslog{{< /ui >}}. If no decoding is selected, the decoding defaults to JSON.
 
 ## Secret defaults
 

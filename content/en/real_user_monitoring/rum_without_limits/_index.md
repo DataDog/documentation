@@ -75,9 +75,9 @@ After:
    sessionReplaySampleRate: 2,
 ```
 
-1. Navigate to [**Digital Experiences > Real User Monitoring > Manage Applications**][4].
+1. Navigate to [{{< ui >}}Digital Experiences{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][4].
 1. Click the application you want to migrate.
-1. Click the **SDK Configuration** tab.
+1. Click the {{< ui >}}SDK Configuration{{< /ui >}} tab.
 1. Ensure `sessionSampleRate` is set to 100%.
 1. Set `sessionReplaySampleRate` to a rate that results in the same number of replays prior to increasing the Session Sample Rate.
 1. Use the generated code snippet to update your source code and redeploy your applications to make sure the new configuration is applied.

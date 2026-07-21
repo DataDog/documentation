@@ -1,5 +1,6 @@
 ---
 title: Manage and Optimize Cloud Costs
+description: Monitor cost anomalies and enforce tagging compliance at the team level by combining Catalog, Scorecards, and Cloud Cost Management.
 aliases:
   - /tracing/software_catalog/guides/cloud_cost_management
   - /software_catalog/guides/cloud_cost_management
@@ -49,4 +50,4 @@ Datadog offers preconfigured [Workflow blueprints][3] to help you build cost man
 [2]: /internal_developer_portal/scorecards/
 [3]: https://app.datadoghq.com/workflow/blueprints?selected_category=SCORECARDS
 [4]: /internal_developer_portal/catalog/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/

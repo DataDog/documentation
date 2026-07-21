@@ -32,37 +32,37 @@ Throughout most of Datadog, Watchdog returns two types of insights:
 The Watchdog Insights carousel sits near the top of the following product pages:
 
 - [Log explorer][1]
-- APM:
-    - [Service Page][3]
-    - [Resource Page][4]
-    - [Database Explorer][5]
-    - [Profile Explorer][6]
 - Infrastructure:
-    - [Processes Explorer][7]
-    - [Serverless Explorer][8]
-    - [Kubernetes Explorer][9]
-    - [Real User Monitoring (RUM) Explorer][10]
-    - [Synthetic Monitoring & Testing Explorer][15]
-    - [Error Tracking issue side panel][13]
+    - [Processes Explorer][3]
+    - [Serverless Explorer][4]
+    - [Kubernetes Explorer][5]
+- APM:
+    - [Service Page][6]
+    - [Resource Page][7]
+    - [Profile Explorer][8]
+- [Database Explorer][9]
+- [Real User Monitoring (RUM) Explorer][10]
+- [Synthetic Monitoring & Testing Explorer][15]
+- [Error Tracking issue side panel][13]
 
 Expand the carousel for an overview. The highest priority insights (based on `Insight type`, `State`, `Status`, `Start time`, `Anomaly type`) appear on the left.
 
 {{< img src="watchdog/log_explorer_watchdog_insights.png" alt="The Watchdog Insights carousel on the Log Explorer, showing three anomalies: new error logs in the web-store service, a spike in error logs in the product-recommendation service, and another spike in error logs in the product-recommendation service" style="width:100%;">}}
 
-Click **View all** to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
+Click {{< ui >}}View all{{< /ui >}} to expand the panel. A side panel opens from the right, containing a vertical list of Watchdog Insights. Each entry shows a detailed view, with more information than the summary card.
 
 Every outlier comes with embedded interactions and a side panel with troubleshooting information. Each Insight's interactions and side panel vary based on the Watchdog Insight type.
 
 ### Filter on Insight query
 
-To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip **Filter on Insight**. The page refreshes to show a list of entries corresponding to the insight.
+To refine your current view to match a Watchdog Insight, hover over the top right corner of an Insight summary card. Two icons appear. Click on the inverted triangle icon with the tooltip {{< ui >}}Filter on Insight{{< /ui >}}. The page refreshes to show a list of entries corresponding to the insight.
 **Note**: Filtering on Watchdog Insights automatically changes the scope you're looking at. As a result, if you select an outlier insight, it is no longer visible, as it is treated as the baseline.
 
 {{< img src="watchdog/filter_on_insight.png" alt="Filtering the explorer on the insight context" style="width:70%;">}}
 
 ### Share an outlier
 
-To share a given outlier, click on it in the insight panel to open the details side panel. Click the **Copy Link** button at the top of the details panel:
+To share a given outlier, click on it in the insight panel to open the details side panel. Click the {{< ui >}}Copy Link{{< /ui >}} button at the top of the details panel:
 
 {{< img src="watchdog/share-outlier.png" alt="Outlier side panel showing how to copy the link" style="width:80%;">}}
 
@@ -270,7 +270,7 @@ When reviewing failed test runs, you can see the number of error outliers on the
 
 {{< img src="watchdog/synthetics_watchdog_outlier.png" alt="An overview of a failed browser test run with test step details and the error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
-To view the error outlier message, click on the outlier. Then, on the test step side panel, click the **Errors & Warnings** tab.
+To view the error outlier message, click on the outlier. Then, on the test step side panel, click the {{< ui >}}Errors & Warnings{{< /ui >}} tab.
 
 {{< img src="watchdog/outlier_step_error_2.png" alt="An error message which was identified as an error outlier for a failing test step by Watchdog" style="width:100%;" >}}
 
@@ -320,17 +320,16 @@ For Kubernetes Explorer, the Watchdog Insight carousel reflects [all the Kuberne
 
 [1]: https://app.datadoghq.com/logs
 [2]: https://app.datadoghq.com/apm/traces
-[3]: /tracing/services/service_page/
-[4]: /tracing/services/resource_page/
-[5]: https://app.datadoghq.com/databases/list
-[6]: https://app.datadoghq.com/profiling/explorer
-[7]: https://app.datadoghq.com/process
-[8]: https://app.datadoghq.com/functions
-[9]: https://app.datadoghq.com/orchestration/overview/pod
+[3]: https://app.datadoghq.com/process
+[4]: https://app.datadoghq.com/functions
+[5]: https://app.datadoghq.com/orchestration/overview/pod
+[6]: /tracing/services/service_page/
+[7]: /tracing/services/resource_page/
+[8]: https://app.datadoghq.com/profiling/explorer
+[9]: https://app.datadoghq.com/databases/list
 [10]: https://app.datadoghq.com/rum/sessions?query=%40type%3Aview
 [11]: /watchdog/#overview
 [12]: https://app.datadoghq.com/watchdog
 [13]: https://app.datadoghq.com/rum/error-tracking
 [14]: /dashboards/graph_insights/watchdog_explains
 [15]: https://app.datadoghq.com/synthetics/explorer
-

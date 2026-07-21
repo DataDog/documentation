@@ -75,9 +75,9 @@ Security and DevOps teams can act on the shared context of observability and sec
 
 Cloud Security leverages both the Datadog Agent and Agentless. It includes a variety of features you can enable to manage different facets of your organization's security:
 
-- [**Misconfigurations**][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
-- [**Identity Risks**][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
-- [**Vulnerabilities**][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
+- [{{< ui >}}Misconfigurations{{< /ui >}}][2]: Tracks the security hygiene and compliance posture of your production environment, automates audit evidence collection, and enables you to remediate misconfigurations that leave your organization vulnerable to attacks.
+- [{{< ui >}}Identity Risks{{< /ui >}}][8]: Provides in-depth visibility into your organization's AWS IAM, Azure, and GCP risks, and enables you to detect and resolve identity risks on an ongoing basis.
+- [{{< ui >}}Vulnerabilities{{< /ui >}}][9]: Continuously detect, prioritize, and remediate exploitable vulnerabilities in your container images, host images, and hosts running in your infrastructure.
 
 Cloud Security also includes access to Datadog Security features, including:
 - [Detection Rules][18]
@@ -97,9 +97,9 @@ Cloud Security also includes access to Datadog Security features, including:
 
 You can customize the dashboards that you can access directly from the Cloud Security homepage, including setting a dashboard to your default homepage view. Use dashboards to prioritize remediation efforts, schedule reports, put security data next to observability and cost data, and embed apps and workflows you can start directly from your reporting view. 
 
-On the [Cloud Security homepage][4], in the **Dashboards** section, you can jump directly to dashboards for Identity Risks, Misconfigurations, or Vulnerabilities. You can also add existing dashboards or create one to keep on your Cloud Security homepage sidebar for convenient access.
+On the [Cloud Security homepage][4], in the {{< ui >}}Dashboards{{< /ui >}} section, you can jump directly to dashboards for Identity Risks, Misconfigurations, or Vulnerabilities. You can also add existing dashboards or create one to keep on your Cloud Security homepage sidebar for convenient access.
 
-Additionally, you can click the **More Options** icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your Cloud Security homepage default view. Click **Cloud Security** in the Datadog nav bar or **Summary** in the Cloud Security nav bar to go directly to your pinned dashboard.
+Additionally, you can click the {{< ui >}}More Options{{< /ui >}} icon {{< img src="icons/kebab.png" inline="true" style="height:1em" >}} to manage your pinned dashboards, including setting one as your Cloud Security homepage default view. Click {{< ui >}}Cloud Security{{< /ui >}} in the Datadog nav bar or {{< ui >}}Summary{{< /ui >}} in the Cloud Security nav bar to go directly to your pinned dashboard.
 
 For more information, see [Dashboards][23].
 
@@ -140,7 +140,7 @@ Use the [Security Research Feed][15] to stay current with the latest security de
 
 ## Next steps
 
-To get started with Cloud Security, navigate to the [**Cloud Security Setup**][3] page in Datadog, which has detailed steps on how to set up and configure Cloud Security. For more information, see [Setting Up Cloud Security][10].
+To get started with Cloud Security, navigate to the [{{< ui >}}Cloud Security Setup{{< /ui >}}][3] page in Datadog, which has detailed steps on how to set up and configure Cloud Security. For more information, see [Setting Up Cloud Security][10].
 
 ## Further reading
 

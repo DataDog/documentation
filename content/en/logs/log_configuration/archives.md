@@ -87,7 +87,7 @@ Set up the [Google Cloud integration][1] for the project that holds your GCS sto
 Go into your [AWS console][1] and [create an S3 bucket][2] to send your archives to.
 
 {{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger"> Datadog Archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
+<div class="alert alert-danger"> Datadog archives do not support bucket names with dots (.) when integrated with an S3 FIPS endpoint which relies on virtual-host style addressing. Learn more from AWS documentation. <a href="https://aws.amazon.com/compliance/fips/">AWS FIPS</a> and <a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">AWS Virtual Hosting</a>.</div>
 {{< /site-region >}}
 
 **Notes:**
@@ -236,23 +236,29 @@ Use this optional configuration step to:
 
 #### Define maximum scan size
 
-Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Rehydration on your Log Archives.
+Use this optional configuration step to define the maximum volume of log data (in GB) that can be scanned for Archive Search or Rehydration on your log archives.
 
-For Archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start a Rehydration. If the estimated scan size is greater than what is permitted for that Archive, users must reduce the time range over which they are requesting the Rehydration. Reducing the time range will reduce the scan size and allow the user to start a Rehydration.
+For archives with a maximum scan size defined, all users need to estimate the scan size before they are allowed to start an Archive Search or Rehydration. If the estimated scan size is greater than what is permitted for that archive, users must reduce the time range of their request. Reducing the time range will reduce the scan size and allow the user to start the Archive Search or Rehydration.
 
-#### Archive Partition Attribute (Preview) {#archive-search-partition-attribute}
+**Note**: To reduce the volume of data scanned during [Archive Search][16], configure [Partition Attributes](#archive-partition-attribute) and [Lookup Attributes](#archive-lookup-attribute) on your archive. Partition attributes narrow the search scope by skipping irrelevant data segments, while lookup attributes accelerate pinpointing specific log entries.
 
-To optimize how your archived logs are physically organized in storage (and accelerate [Archive Search][16]), configure partition attributes in your Datadog Archive.
+#### Archive Partition Attribute {#archive-partition-attribute}
 
-* **Partition Attributes**: Add low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
-* **Benefit**: Logs sharing the same partition attribute values are co-located in storage. When searching, Datadog can skip entire partitions that don't match your query, drastically reducing the volume of data scanned.
+Partition attributes organize archived logs into groups based on common field values. Use them for broad filters to skip irrelevant archive segments and reduce scan volume during [Archive Search][16].
 
-#### Archive Lookup Attribute (Preview)
+You can configure up to **2 partition attributes** per archive.
 
-To accelerate searches and investigations in your archives (with [Archive Search][16]), configure lookup attributes in your Datadog Archive.
+* **Use for**: Low-cardinality attributes such as `service`, `source`, `env`, or `status` that you frequently use as search filters.
+* **How it works**: Logs sharing the same partition attribute values are co-located in storage. Datadog skips entire partitions that don't match your query, drastically reducing the volume of data scanned.
 
-* **Lookup Attributes**: Add high-cardinality attributes such as `trace_id`, `container_id`, or `customer_id`.
-* **Benefit**: This allows you to pinpoint specific logs within your long-term storage much faster, reducing the time and data scanned during ad-hoc investigations.
+#### Archive Lookup Attribute {#archive-lookup-attribute}
+
+Lookup attributes create a fast path to logs with specific values. Use them for high-cardinality identifiers to speed up targeted investigations with [Archive Search][16].
+
+You can configure up to **2 lookup attributes** per archive.
+
+* **Use for**: High-cardinality attributes such as `trace_id`, `container_id`, `user_id`, or `request_id`.
+* **How it works**: Datadog builds an index for these attributes at write time, allowing Archive Search to pinpoint specific logs without scanning the full archive.
 
 **Partition vs. Lookup attributes**
 
@@ -260,8 +266,9 @@ To accelerate searches and investigations in your archives (with [Archive Search
 |---|---|---|
 | **Cardinality** | Low (tens to hundreds of values) | High (millions of values) |
 | **Typical attributes** | `service`, `source`, `env`, `status` | `trace_id`, `container_id`, `user_id`, `transaction_id` |
-| **How it helps** | Prunes entire partitions from scan | Pinpoints individual log entries within your archive |
+| **How it helps** | Skips entire partitions that don't match your query | Pinpoints specific log entries without scanning the full archive |
 | **Best used for** | Broad filtering by environment or service | Ad-hoc investigations on specific identifiers |
+| **Limit** | Up to 2 per archive | Up to 2 per archive |
 
 For maximum search performance, combine both: partition attributes narrow the search scope to the relevant data segments, while lookup attributes let you find specific logs within those segments instantly.
 
@@ -438,7 +445,7 @@ Once your archive settings are successfully configured in your Datadog account, 
 
 However, after creating or updating your archive configurations, it can take several minutes before the next archive upload is attempted. The frequency at which archives are uploaded can vary. **Check back on your storage bucket in 15 minutes** to make sure the archives are successfully being uploaded from your Datadog account.
 
-After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding Log Archive is highlighted in the configuration page.
+After that, if the archive is still in a pending state, check your inclusion filters to make sure the query is valid and matches log events in [Live Tail][14]. When Datadog fails to upload logs to an external archive, due to unintentional changes in settings or permissions, the corresponding log archive is highlighted in the configuration page.
 
 {{< img src="logs/archives/archive_errors_details.png" alt="Check that your archives are properly set up" style="width:100%;">}}
 

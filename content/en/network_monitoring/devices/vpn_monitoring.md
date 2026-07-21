@@ -92,11 +92,11 @@ network_devices:
 
 ## Viewing VPN tunnels
 
-To view VPN tunnels for a device, click the device in the [NDM device list][8] or the [Device Topology Map][7] to open the NDM device view. The **Dependencies** section shows the number of connected devices and VPN tunnels at a glance.
+To view VPN tunnels for a device, click the device in the [NDM device list][8] or the [Device Topology Map][7] to open the NDM device view. The {{< ui >}}Dependencies{{< /ui >}} section shows the number of connected devices and VPN tunnels at a glance.
 
 {{< img src="/network_device_monitoring/vpn_monitoring/dependency_tab.png" alt="The NDM device view showing the Dependencies section with connected devices and a VPN tunnel count." style="width:100%;" >}}
 
-Click **View dependencies** to open the full device page. On the **Dependencies** tab, select the **VPN** filter to see all VPN tunnels for the device. The table displays the local outside IP, remote peer IP, protocol, tunnel interface, destination subnets, bytes in, bytes out, and active time for each tunnel.
+Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, select the {{< ui >}}VPN{{< /ui >}} filter to see all VPN tunnels for the device. The table displays the local outside IP, remote peer IP, protocol, tunnel interface, destination subnets, bytes in, bytes out, and active time for each tunnel.
 
 {{< img src="/network_device_monitoring/vpn_monitoring/vpn_dependency.png" alt="The Dependencies tab on the NDM device page with the VPN filter selected, showing a table of VPN tunnels with connection details." style="width:100%;" >}}
 

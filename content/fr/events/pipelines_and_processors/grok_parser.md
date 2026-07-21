@@ -1,6 +1,6 @@
 ---
 aliases:
-- /fr/service_management/events/pipelines_and_processors/grok_parser/
+- /fr/events/pipelines_and_processors/grok_parser/
 description: Créez des règles grok personnalisées pour analyser le message complet
   ou des attributs spécifiques des événements bruts en données structurées
 title: Parser Grok
@@ -10,7 +10,7 @@ title: Parser Grok
 Créez des règles grok personnalisées pour analyser le message complet ou un attribut spécifique de votre événement brut. En tant que meilleure pratique, il est recommandé d'utiliser au maximum 10 règles d'analyse dans un processeur grok.
 
 
-{{< img src="service_management/events/grok-parser.png" alt="Exemple d'analyse 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="Exemple d'analyse 1" style="width:80%;">}}
 
 
 Cliquez sur **Analyser mes événements** pour démarrer un ensemble de trois règles d'analyse pour les événements circulant dans le pipeline sous-jacent. Affinez la nomination des attributs à partir de là, et ajoutez de nouvelles règles pour d'autres types d'événements si nécessaire. Cette fonctionnalité nécessite que les événements correspondants soient indexés et effectivement en cours de traitement ; vous pouvez temporairement désactiver ou réduire les filtres d'exclusion pour que cela fonctionne pour vous.

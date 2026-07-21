@@ -65,7 +65,7 @@ After making the changes to remove the unbounded tags, submit a request to [Data
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/billing/custom_metrics/?tab=countrate#effect-of-adding-tags
-[2]: https://docs.datadoghq.com/service_management/events/
+[2]: https://docs.datadoghq.com/events/
 [3]: https://docs.datadoghq.com/monitors/types/event/
 [4]: https://docs.datadoghq.com/metrics/guide/custom_metrics_governance/
 [5]: https://docs.datadoghq.com/help/

@@ -1,5 +1,6 @@
 ---
-title: Scanning Rules
+title: Sensitive Data Scanning Rules
+description: Understand how Sensitive Data Scanner uses scanning rules to match sensitive data, including predefined library rules and custom regex rules for telemetry data and cloud storage.
 disable_toc: false
 aliases:
   - /sensitive_data_scanner/scanning_rules
@@ -14,7 +15,7 @@ further_reading:
 
 ## Telemetry Data
 {{< callout url="https://www.datadoghq.com/product-preview/phone-number-physical-address-pii-detection-in-logs-using-machine-learning/" btn_hidden="false" >}}
-Phone number and physical address PII detection in logs using machine learning are in Preview. To enroll, click <b>Request Access</b>.
+Physical address PII detection in logs using machine learning is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
 {{< site-region region="gov,gov2" >}}

@@ -14,6 +14,13 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% app_and_api_protection_python_overview %}}
 
 ## Prerequisites
@@ -75,7 +82,7 @@ ddtrace-run python app.py
 
 Start your Python application with the configured settings.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -85,5 +92,5 @@ If you encounter issues while setting up App and API Protection for your Python 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/python/compatibility
+[1]: /security/application_security/setup/compatibility/python
 [2]: /security/application_security/setup/python/troubleshooting

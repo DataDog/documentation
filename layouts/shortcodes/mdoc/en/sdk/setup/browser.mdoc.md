@@ -123,6 +123,19 @@ Add the generated code snippet to the head tag of every HTML page you want to mo
 ```
 
 {% /site-region %}
+{% site-region region="uk1" %}
+
+```javascript
+<script>
+  (function(h,o,u,n,d) {
+    h=h[d]=h[d]||{q:[],onReady:function(c){h.q.push(c)}}
+    d=o.createElement(u);d.async=1;d.src=n,d.crossOrigin=''
+    n=o.getElementsByTagName(u)[0];n.parentNode.insertBefore(d,n)
+  })(window,document,'script','https://www.datadoghq-browser-agent.com/uk1/v7/datadog-rum.js','DD_RUM')
+</script>
+```
+
+{% /site-region %}
 {% site-region region="gov,gov2" %}
 
 ```javascript
@@ -204,6 +217,17 @@ Add the generated code snippet to the head tag (in front of any other script tag
 ```javascript
 <script
     src="https://www.datadoghq-browser-agent.com/us5/v7/datadog-rum.js"
+    type="text/javascript"
+    crossorigin>
+</script>
+```
+
+{% /site-region %}
+{% site-region region="uk1" %}
+
+```javascript
+<script
+    src="https://www.datadoghq-browser-agent.com/uk1/v7/datadog-rum.js"
     type="text/javascript"
     crossorigin>
 </script>
@@ -362,7 +386,7 @@ To request support for a web server that is not listed here, [fill out this form
 
 Visualize the [data collected][11] in [dashboards][12] or create a search query in the [RUM Explorer][5].
 
-Your application appears as pending on the Applications page until Datadog starts receiving data.
+Your application appears as pending on the Applications page until Datadog starts receiving data. If data takes time to appear, see [Troubleshooting Browser SDK Issues][15].
 
 [1]: /real_user_monitoring/
 [2]: /error_tracking/frontend/browser
@@ -378,4 +402,5 @@ Your application appears as pending on the Applications page until Datadog start
 [12]: /real_user_monitoring/platform/dashboards/
 [13]: /private-beta/rum-sdk-auto-injection/
 [14]: /real_user_monitoring/application_monitoring/browser/setup/client
+[15]: /real_user_monitoring/browser/troubleshooting/#data-to-the-datadog-intake
 

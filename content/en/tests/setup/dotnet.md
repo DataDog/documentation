@@ -212,7 +212,7 @@ If you are using [Coverlet][10] to compute your code coverage, indicate the path
 
 **Note**: When using Test Impact Analysis, the SDK's built-in code coverage is enabled by default.
 
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+You can see the evolution of the test coverage in the {{< ui >}}Coverage{{< /ui >}} tab of a test session.
 
 For more information about exclusion options, see [Code Coverage][11].
 

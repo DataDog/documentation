@@ -3,7 +3,7 @@ title: Rate Limits
 type: api
 ---
 
-{{< h2 >}}Rate Limits{{< /h2 >}}
+{{< h2-with-copy-btn >}}Rate Limits{{< /h2-with-copy-btn >}}
 
 Many API endpoints are rate limited. Once you exceed a certain number of requests in a specific period, Datadog returns an error.
 

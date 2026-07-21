@@ -28,7 +28,7 @@ npm install dd-trace
 
 ### Configure Next.js
 
-Add `dd-trace` and any LLM integration packages to `serverExternalPackages` in your `next.config.ts` (or `next.config.js`). See [the list of supported libraries][2] for a list of supported libraries. This tells Next.js not to bundle these packages, which is required for auto-instrumentation to work:
+Add `dd-trace` and any LLM integration packages to `serverExternalPackages` in your `next.config.ts` (or `next.config.js`). Check [the list of supported libraries][2] for a list of supported libraries before writing to the `serverExternalPackages` array to include all packages that are auto-instrumented by dd-trace. This tells Next.js not to bundle these packages, which is required for auto-instrumentation to work:
 
 ```typescript
 // next.config.ts
@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: [
     'dd-trace',
     'openai',
-    // add any other auto-instrumented packages here
+    // add any other auto-instrumented packages here, refer to the supported autoinstrumentation matrix for specific supported packages
   ],
   experimental: {
     instrumentationHook: true, // required for Next.js versions before 15.x

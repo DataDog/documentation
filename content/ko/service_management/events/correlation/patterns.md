@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: 설명서
   text: 사례 심사 및 알림에 대해 알아보기
 title: 패턴 기반 상관 관계
@@ -12,7 +12,7 @@ title: 패턴 기반 상관 관계
 
 Datadog에서는 시작할 때 내 환경에 따라 자동으로 [패턴 기반 상관 관계][1]를 제안합니다. 추천 항목 중 하나를 클릭하면 추천 패턴의 구성을 열 수 있습니다. 구성 필드가 자동으로 채워져 있습니다.
 
-{{< img src="service_management/events/correlation/pattern/recommended_patterns_preview.png" alt="미리 보기 패널에 패턴 기반 잠재 사례가 표시된 상관 관계 추천 패턴" style="width:100%;" >}}
+{{< img src="events/correlation/pattern/recommended_patterns_preview.png" alt="미리 보기 패널에 패턴 기반 잠재 사례가 표시된 상관 관계 추천 패턴" style="width:100%;" >}}
 
 
 ## 패턴 생성
@@ -23,7 +23,7 @@ Datadog에서는 시작할 때 내 환경에 따라 자동으로 [패턴 기반 
 1. **+ Continue With Pattern**을 클릭해 추천 패턴을 수정할 수 있습니다. 그러면 필드가 미리 채워진 구성 페이지로 이동하고, 여기에서 추가 구성을 할 수 있습니다. 또는 **+ Personalize From Scratch**를 클릭해 나만의 패턴을 생성할 수 있습니다.
 
 먼저 알림을 보내기 위해 이벤트 집계 키에 따라 이벤트가 복제됩니다. 그리고 구성에 따라 알림과 사례의 상관 관계가 수립됩니다. 
-{{< img src="service_management/events/correlation/correlation_helper.mp4" alt="이벤트가 정의된 소스 및 필터와 일치하면 알림으로 복제됩니다. 알림은 그룹화 속성에 따라 상관 관계가 수립되고, 새 사례에서 프로세스가 반복되기 전에 지정한 기간 안에 이벤트 복제가 취소됩니다. 설정에서 이 구성을 수정할 수 있습니다" video=true >}}
+{{< img src="events/correlation/correlation_helper.mp4" alt="이벤트가 정의된 소스 및 필터와 일치하면 알림으로 복제됩니다. 알림은 그룹화 속성에 따라 상관 관계가 수립되고, 새 사례에서 프로세스가 반복되기 전에 지정한 기간 안에 이벤트 복제가 취소됩니다. 설정에서 이 구성을 수정할 수 있습니다" video=true >}}
 집계 키로 이벤트를 전송하는 방법에 관한 자세한 정보는 [Datadog로 이벤트 전송][5]을 참고하세요. 집계 키가 없는 이벤트는 시간대 내에 중복 제거되어 단일 알림이 됩니다.
 
 ### 제안 패턴
@@ -67,7 +67,7 @@ Datadog에서는 시작할 때 내 환경에 따라 자동으로 [패턴 기반 
 
 이 데이터를 이용해 내 상관 관계에 있을 영향을 미리 보고 패턴의 예측 결과를 이해할 수 있습니다.
 
-{{< img src="service_management/events/correlation/pattern/preview_pattern_output.png" alt="미리 보기 패널을 보여주는 패턴 기반 상관 관계. 패널에서 내 구성과 일치하는 수집 이벤트 수, 발생하게 될 중복 해제 수, 발생할 총 사례 수를 볼 수 있음." style="width:100%;" >}}
+{{< img src="events/correlation/pattern/preview_pattern_output.png" alt="미리 보기 패널을 보여주는 패턴 기반 상관 관계. 패널에서 내 구성과 일치하는 수집 이벤트 수, 발생하게 될 중복 해제 수, 발생할 총 사례 수를 볼 수 있음." style="width:100%;" >}}
 
 **참고**: 미리 보기 사례의 기본값 제목은 상관 관계의 첫 알림입니다. 패턴을 저장하면 이벤트 관리 사례 제목이 알아보기 쉽게 생성됩니다.
 
@@ -86,6 +86,6 @@ Datadog에서는 시작할 때 내 환경에 따라 자동으로 [패턴 기반 
 
 [1]: https://app.datadoghq.com/event/correlation
 [2]: https://app.datadoghq.com/event/correlation/rule/new 
-[3]: /ko/service_management/events/explorer/facets/#create-a-facet
-[4]: /ko/service_management/events/explorer/facets
-[5]: /ko/service_management/events/ingest/
+[3]: /ko/events/explorer/facets/#create-a-facet
+[4]: /ko/events/explorer/facets
+[5]: /ko/events/ingest/

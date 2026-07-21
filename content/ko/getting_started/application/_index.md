@@ -146,8 +146,8 @@ Datadog [Cloud SIEM][21](보안 정보 및 이벤트 관리)는 자동으로 애
 [7]: /ko/infrastructure/
 [8]: /ko/getting_started/tagging/
 [9]: /ko/infrastructure/hostmap/
-[10]: /ko/service_management/events/
-[11]: /ko/service_management/events/explorer/analytics
+[10]: /ko/events/
+[11]: /ko/events/explorer/analytics
 [12]: /ko/dashboards/
 [13]: /ko/dashboards/#screenboards
 [14]: /ko/dashboards/functions/arithmetic/

@@ -21,7 +21,7 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 
 *エラーバジェット*を含む SLO に関する主要な用語の説明については、[サービスレベル目標][3]を参照してください。
 
-{{< img src="service_management/service_level_objectives/slo-error-budget-alert-v2.png" alt="エラーバジェットアラート構成">}}
+{{< img src="service_level_objectives/error_budget/slo-error-budget-alert-v2.png" alt="エラーバジェットアラート構成">}}
 
 ## モニターの作成
 
@@ -33,7 +33,7 @@ SLO エラーバジェットアラートは閾値に基づき、SLO のエラー
 4. **Configure notifications and automations** セクションに [通知情報][5]を追加します。
 5. SLO 構成ページで **Create &amp; Set Alert** ボタンをクリックします。
 
-{{< img src="service_management/service_level_objectives/slo_create_set_alert.png" alt="SLO を作成し、エラーバジェットアラートをセットアップする" style="width:80%;">}}
+{{< img src="service_level_objectives/error_budget/slo_create_set_alert.png" alt="SLO を作成し、エラーバジェットアラートをセットアップする" style="width:80%;">}}
 
 ### グループ付き SLO に関するアラート
 

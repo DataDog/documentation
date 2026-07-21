@@ -25,7 +25,7 @@ The first step in a performance investigation is to identify anomalies in resour
 
 This doesn't provide the exact root cause, but you can see anomalous peaks in CPU usage. 
 
-Select the **Show - Avg of** dropdown (highlighted in the previous image) and change the graph to show `CPU Cores for Top Endpoints` instead. This graph shows how different parts of the application contribute to the overall CPU utilization:
+Select the {{< ui >}}Show - Avg of{{< /ui >}} dropdown (highlighted in the previous image) and change the graph to show `CPU Cores for Top Endpoints` instead. This graph shows how different parts of the application contribute to the overall CPU utilization:
 
 {{< img src="profiler/guide-monolithic-outliers/2-outliers-monolith-cpu-top-endpoints-2.png" alt="" style="width:100%;" >}}
 
@@ -39,7 +39,7 @@ The updated graph reveals that there is an intermittent spike in CPU utilization
 
 ## Isolate the impact of endpoints
 
-To determine the cause of increased CPU usage each time `GET /store_history` is called, examine the profiling flame graph for this endpoint during one of the spikes. Select a time range where `GET /store_history` is showing more CPU utilization and scope the profiling page to that time range. Then switch to the **Flame Graph** visualization to see the methods using the CPU at this time:
+To determine the cause of increased CPU usage each time `GET /store_history` is called, examine the profiling flame graph for this endpoint during one of the spikes. Select a time range where `GET /store_history` is showing more CPU utilization and scope the profiling page to that time range. Then switch to the {{< ui >}}Flame Graph{{< /ui >}} visualization to see the methods using the CPU at this time:
 
 {{< img src="profiler/guide-monolithic-outliers/4-outliers-monolith-flame-graph-2.png" alt="Your image description" style="width:100%;" >}}
 
@@ -51,13 +51,13 @@ Because you are investigating resource usage per request, also change the value 
 
 With the graph displaying data for the correct time and endpoint, you should have enough data to determine what is causing the spike in CPU utilization. If you're still uncertain, you can compare the flame graph for the spike with a time when utilization was more acceptable.
 
-To see if there are differences in which methods are using a lot of CPU time between a spike and normal usage, click **Compare** (next to the search field) and select `Previous 15 minutes`. This opens the Comparison view. 
+To see if there are differences in which methods are using a lot of CPU time between a spike and normal usage, click {{< ui >}}Compare{{< /ui >}} (next to the search field) and select `Previous 15 minutes`. This opens the Comparison view. 
 
-The view shows two graphs, labeled **A** and **B**, each representing a time range for CPU utilization per `GET /store_history` call. Adjust the time selector for **A** so that it is scoped to a period with low CPU utilization per call:
+The view shows two graphs, labeled {{< ui >}}A{{< /ui >}} and {{< ui >}}B{{< /ui >}}, each representing a time range for CPU utilization per `GET /store_history` call. Adjust the time selector for {{< ui >}}A{{< /ui >}} so that it is scoped to a period with low CPU utilization per call:
 
 {{< img src="profiler/guide-monolithic-outliers/5-outliers-monolith-compare-flame-graphs-2.png" alt="Your image description" style="width:100%;" >}}
 
-The comparison reveals the different methods causing CPU utilization during the spike (timeframe **B**) that are not used during normal CPU usage (timeframe **A**). As shown in the previous image,`Product.loadAssets(int)`, is causing the spikes.
+The comparison reveals the different methods causing CPU utilization during the spike (timeframe {{< ui >}}B{{< /ui >}}) that are not used during normal CPU usage (timeframe {{< ui >}}A{{< /ui >}}). As shown in the previous image,`Product.loadAssets(int)`, is causing the spikes.
 
 To fix the problem, optimize the method. Looking at the method code, the signature is `Product(int id, String name, boolean shouldLoadAssets)` and you do not need to load assets for the response to the `GET /store_history` endpoint. This implies that there is a bug further up the call stack that improperly instructs the `Product` constructor to load assets.
 
@@ -67,7 +67,7 @@ Fix that bug and verify that the spikes go away, using the timeseries graphs dis
 
 There are other attributes available in the profiler. For example, you can filter and group a flame graph by operation names, rather than by functions or threads. For monolithic applications, this can more clearly identify CPU-intensive resources, even if they are shared between endpoints.
 
-The APM `Trace operation` attribute lets you filter and group a flame graph with the same granularity as the traces for the selected endpoints. This is a good balance between the high granularity of threads or methods, and the low granularity of entire endpoints. To isolate operations, select `Trace Operation` from the **CPU time by** dropdown: 
+The APM `Trace operation` attribute lets you filter and group a flame graph with the same granularity as the traces for the selected endpoints. This is a good balance between the high granularity of threads or methods, and the low granularity of entire endpoints. To isolate operations, select {{< ui >}}Trace Operation{{< /ui >}} from the {{< ui >}}CPU time by{{< /ui >}} dropdown: 
 
 {{< img src="profiler/guide-monolithic-outliers/7-outliers-monolith-trace-operation-2.png" alt="Your image description" style="width:100%;" >}}
 
@@ -97,7 +97,7 @@ To specify which label keys you want to use for filtering, set the `profiling.co
 
 If you have multiple context keys, use a comma-separated string for the configuration (for example,`-Ddd.profiling.context.attributes=customer_name,customer_group`).
 
-Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+Then, open CPU, Exceptions, or Wall Time profiles for your service and select the `customer_name` value you're interested in under the {{< ui >}}CPU time by{{< /ui >}} dropdown.
 
 {{< /programming-lang >}}
 {{< programming-lang lang="go">}}
@@ -119,7 +119,7 @@ profiler.Start(
 )
 ```
 
-Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+Then, open CPU or goroutine profiles for your service and select the `customer_name` value you're interested in under the {{< ui >}}CPU time by{{< /ui >}} dropdown.
 
 [1]: https://pkg.go.dev/runtime/pprof#Do
 [2]: https://pkg.go.dev/gopkg.in/DataDog/dd-trace-go.v1/profiler#WithCustomProfilerLabelKeys
@@ -147,7 +147,7 @@ To specify which label keys you want to use for filtering, call `setCustomLabelK
 tracer.profiling.setCustomLabelKeys(['customer_name'])
 ```
 
-Then, open wall time or CPU time profiles for your service and select the `customer_name` value you're interested in under the `CPU time by` dropdown.
+Then, open wall time or CPU time profiles for your service and select the `customer_name` value you're interested in under the {{< ui >}}CPU time by{{< /ui >}} dropdown.
 
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}

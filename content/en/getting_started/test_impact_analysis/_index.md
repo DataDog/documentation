@@ -54,30 +54,32 @@ To set up Test Impact Analysis, see the following documentation for your program
 
 To enable Test Impact Analysis:
 
-1. Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3]. 
-1. On the {{< ui >}}Test Services{{< /ui >}} tab, click {{< ui >}}Configure{{< /ui >}} in the {{< ui >}}Test Impact Analysis{{< /ui >}} column for a service.
+1. Open [{{< ui >}}CI/CD Optimization{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Repositories{{< /ui >}}][3].
+1. Choose where to apply the setting:
+   - Select the {{< ui >}}Organization{{< /ui >}} tab to enable Test Impact Analysis for every repository by default.
+   - Select the {{< ui >}}Repository-specific{{< /ui >}} tab to enable Test Impact Analysis for a single repository, or to apply an override to one of its test services.
+1. Under {{< ui >}}General{{< /ui >}}, toggle {{< ui >}}Test Impact Analysis{{< /ui >}} on.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration.png" alt="Enable Test Impact Analysis for a test service on the Test Service Settings page" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-configuration-1.png" alt="Enable Test Impact Analysis for a repository on the CI/CD Settings page." style="width:100%" >}}
 
-You must have the `Test Impact Analysis Activation Write` permission. For more information, see the [Datadog Role Permissions documentation][4].
+You must have the `Test Optimization Settings Write` permission. For more information, see the [Datadog Role Permissions documentation][4].
 
 Disabling Test Impact Analysis on critical branches (such as your default branch) ensures comprehensive test coverage, whereas enabling it to run on feature or development branches helps maximize testing efficiency.
 
 ## Configure Test Impact Analysis
 
-You can configure Test Impact Analysis to prevent specific tests from being skipped. These tests are known as *unskippable tests*, and are run regardless of [code coverage data][5]. 
+You can configure Test Impact Analysis to prevent specific tests from being skipped. These tests are known as *unskippable tests*, and are run regardless of [code coverage data][5].
 
 To configure Test Impact Analysis:
 
-1. For the test you want to enable it on, click {{< ui >}}Configure{{< /ui >}}.
-1. Click the {{< ui >}}Status{{< /ui >}} toggle to enable Test Impact Analysis. 
-1. Specify any branches to exclude (typically the default branch of a repository). Test Impact Analysis does not skip tests for these branches.
+1. From the {{< ui >}}Repository-specific{{< /ui >}} tab in [{{< ui >}}CI/CD Repository settings{{< /ui >}}][3], open the repository.
+1. In the {{< ui >}}Test Impact Analysis{{< /ui >}} row, specify any branches to exclude (typically the default branch of a repository). Test Impact Analysis does not skip tests for these branches.
 1. Specify file directories and files to track (for example, `documentation/content/**` or `domains/shopist/apps/api/BUILD.bazel`). Test Impact Analysis runs all CI tests when any of these tracked files change.
-1. Click {{< ui >}}Save Settings{{< /ui >}}.
+1. Save your changes.
 
-{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen" style="width:100%" >}}
+{{< img src="/getting_started/intelligent_test_runner/test-impact-analysis-gs-config-1.png" alt="Enable Test Impact Analysis, provide branches for Test Impact Analysis to exclude, and add files for Test Impact Analysis to track and run tests when any changes happen." style="width:100%" >}}
 
-Once you've configured Test Impact Analysis on a test service, execute a test suite run on your default branch. This establishes a baseline for Test Impact Analysis to accurately skip irrelevant tests in future commits. 
+After you've configured Test Impact Analysis on a test service, execute a test suite run on your default branch. This establishes a baseline for Test Impact Analysis to accurately skip irrelevant tests in future commits. 
 
 ## Use Test Impact Analysis data
 
@@ -162,7 +164,7 @@ Then, click on a test session run and see the amount of time saved by Test Impac
 
 [1]: /tests/test_impact_analysis/
 [2]: /tests/
-[3]: https://app.datadoghq.com/ci/settings/test-service
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /account_management/rbac/permissions/
 [5]: /tests/code_coverage
 [6]: /dashboards/

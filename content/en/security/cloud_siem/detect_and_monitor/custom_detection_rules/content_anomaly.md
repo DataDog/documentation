@@ -22,7 +22,7 @@ When you create a rule with the content anomaly detection method, you can set th
 - **Description**: Time window when values are learned. No signals are generated during this phase. The learning period restarts if the rule is modified.
 - **Default**: `7` days
 - **Range**: `1`-`10` days
-- **How to configure**: When you edit a content anomaly rule, you can set the learning duration in the query's **Learning for** dropdown menu.
+- **How to configure**: When you edit a content anomaly rule, you can set the learning duration in the query's {{< ui >}}Learning for{{< /ui >}} dropdown menu.
 
 #### Forget after
 {{< img src="security/security_monitoring/detection_rules/content_anomaly/forget_duration.png" alt="Content anomaly detection options with the within the last days dropdown menu highlighted" style="width:100%;" >}}
@@ -30,7 +30,7 @@ When you create a rule with the content anomaly detection method, you can set th
 - **Description**: How long learned values are retained before being discarded.
 - **Default**: `7` days
 - **Range**: `1`-`10` days
-- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can set how long learned values are retained in the **within in the last** dropdown menu.
+- **How to configure**: In the {{< ui >}}Content anomaly detection options{{< /ui >}} section of a rule's setting page, you can set how long learned values are retained in the {{< ui >}}within in the last{{< /ui >}} dropdown menu.
 
 #### Similarity percentage threshold
 
@@ -39,7 +39,7 @@ When you create a rule with the content anomaly detection method, you can set th
 - **Description**: Minimum similarity required to consider a log as normal.
 - **Default**: `70%`
 - **Range**: `35`-`100%`
-- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can set the similarity percentage threshold in the **within in the last** dropdown menu.
+- **How to configure**: In the {{< ui >}}Content anomaly detection options{{< /ui >}} section of a rule's setting page, you can set the similarity percentage threshold in the {{< ui >}}within in the last{{< /ui >}} dropdown menu.
 
 #### Similar items threshold
 
@@ -48,14 +48,14 @@ When you create a rule with the content anomaly detection method, you can set th
 - **Description**: Number of matching historical logs required for an incoming value to be considered normal.
 - **Default**: `1`
 - **Range**: `1`-`20`
-- **How to configure**: In the **Content anomaly detection options** section of a rule's setting page, you can enter the similar items threshold in the **with more than** field.
+- **How to configure**: In the {{< ui >}}Content anomaly detection options{{< /ui >}} section of a rule's setting page, you can enter the similar items threshold in the {{< ui >}}with more than{{< /ui >}} field.
 
 #### Evaluation Window
 {{< img src="security/security_monitoring/detection_rules/content_anomaly/evaluation_window.png" alt="Content anomaly detection options with the similar items dropdown menu highlighted" style="width:100%;" >}}
 
 - **Description**: Defines the time frame for counting anomalous logs. Signals are triggered if anomalies exceed the case condition (for example, `a >= 2`).
 - **Range**: `0`-`24` hours
-- **How to configure**: In the **Set conditions** section of a rule's setting page, you can set a conditiions's evaluation window in the **within a window of** dropdown menu.
+- **How to configure**: In the {{< ui >}}Set conditions{{< /ui >}} section of a rule's setting page, you can set a conditiions's evaluation window in the {{< ui >}}within a window of{{< /ui >}} dropdown menu.
 
 ## How logs are determined to be anomalous
 

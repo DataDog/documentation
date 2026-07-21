@@ -22,7 +22,7 @@ Using reference tables, you can accomplish the following:
 ## Setup
 
 1. Create any metric query with [space aggregation][2] (one or more tags are selected to group by).
-2. Click **Modify**, then select **Join**, as shown below:
+2. Click {{< ui >}}Modify{{< /ui >}}, then select {{< ui >}}Join{{< /ui >}}, as shown below:
 
    {{< img src="metrics/nested_queries/reference_table_joins_with_metrics/reference_table_join_04172026.png" alt="The Join with Reference Table option in the Modify menu of a metrics query." style="width:100%" >}}
 

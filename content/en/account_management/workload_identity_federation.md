@@ -28,8 +28,19 @@ Workload Identity Federation lets you authenticate the Datadog Terraform provide
 AWS is the only supported cloud provider.
 
 Workload Identity Federation is available for the following:
-- **Terraform provider**: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.
-- **Datadog Agent**: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.
+
+{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+<li><b>Datadog Agent</b>: Authenticate the Agent using AWS credentials to receive automatically managed and rotated API keys. Available for Enterprise plans only.</li>
+</ul>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<ul>
+<li><b>Terraform provider</b>: Authenticate Terraform operations using AWS credentials mapped to a Datadog user or service account. Available for all customers.</li>
+</ul>
+{{< /site-region >}}
 
 ## How it works: AWS authentication process
 
@@ -80,11 +91,18 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 
 {{< img src="account_management/workload_identity_federation/identity-mappings-list.png" alt="Identity Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns mapped to Datadog users and service accounts" style="width:100%;" >}}
 
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
+<ul>
+<li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
+<li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
+</ul>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
+
 To create an identity mapping:
 
 1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
-3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/terraform-runner/*`).
 4. Search for and select a **Target Identity**. This is the Datadog user or service account this cloud identity authenticates as.
 5. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
@@ -277,11 +295,18 @@ Navigate to [**Organization Settings** > **Workload Identity Federation**][6] an
 
 {{< img src="account_management/workload_identity_federation/intake-mappings-list.png" alt="Intake Mappings tab in the Workload Identity Federation page, showing the Org UUID field and a list of AWS ARN patterns authorized for Agent authentication" style="width:100%;" >}}
 
+<div class="alert alert-warning">Datadog requires the <strong>assumed-role ARN</strong> in the Source Pattern field, not the IAM role ARN. These two formats are different:</div>
+<ul>
+<li><strong>IAM role ARN</strong> (shown in the AWS Console): <code>arn:aws:iam::123456789012:role/my-role</code></li>
+<li><strong>Assumed-role ARN</strong> (required by Datadog): <code>arn:aws:sts::123456789012:assumed-role/my-role/session-name</code></li>
+</ul>
+To find the assumed-role ARN for your workload, run <code>aws sts get-caller-identity</code> from your workload environment and use the value in the <code>Arn</code> field of the response.
+
 To create an intake mapping:
 
 1. Click {{< ui >}}+ New Mapping{{< /ui >}}.
 2. Select a **Cloud Provider**.
-3. Enter a **Source Pattern (ARN)**. Use `*` for wildcard patterns (for example, `role/terraform-*`).
+3. Enter a **Source Pattern (ARN)**. Use the assumed-role ARN format and `*` for wildcard patterns (for example, `arn:aws:sts::123456789012:assumed-role/DatadogAgentRole/*`).
 4. Click {{< ui >}}Create Mapping{{< /ui >}}.
 
 {{< img src="account_management/workload_identity_federation/intake-mapping-create.png" alt="Create Intake Mapping dialog with fields for Cloud Provider and Source Pattern ARN, with helper text describing wildcard pattern support" style="width:70%;" >}}

@@ -107,7 +107,7 @@ Replace the following placeholders:
 - `<APP_IMAGE>`: Your application container image.
 - `<VERSION>`: The version of your service.
 - `<ENV>`: Your deployment environment (for example, `production`).
-- `<DATADOG_SITE>`: Your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+- `<DATADOG_SITE>`: Your [Datadog site][5]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
 
 ### Configure EKS resource detection
 
