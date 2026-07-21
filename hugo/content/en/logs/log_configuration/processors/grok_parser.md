@@ -33,6 +33,9 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
    **Note**: The sample logs are pulled from the five highest-volume log patterns matching your pipeline filter.
 1. {{< ui >}}Log Samples{{< /ui >}}: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
 1. {{< ui >}}Define parsing rules{{< /ui >}}: Click {{< ui >}}Auto parsing{{< /ui >}} to generate rules that match your samples.
+   {{< site-region region="gov,gov2" >}}
+   <div class="alert alert-info">Auto parsing is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+   {{< /site-region >}}
 1. {{< ui >}}Test your rules{{< /ui >}}: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result on the right of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 
