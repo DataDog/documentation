@@ -19,8 +19,6 @@ Datadog AI agents, including the Bits fleet (Bits SRE, Bits Chat, Bits Security 
 
 Datadog AI agents onboard to the actor and delegation model individually, so coverage varies by agent and by action type. Use this table to check what you can query.
 
-**As of July 17, 2026**, the following coverage applies:
-
 | Agent | Status | Notes |
 | ----- | ------ | ----- |
 | Bits SRE | Tracked | Most actions include `@evt.actor.mode` and `@delegator.*`. Some tool-call and investigation actions do not include these fields yet. |
