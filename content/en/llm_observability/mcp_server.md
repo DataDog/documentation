@@ -170,10 +170,14 @@ npx skills add datadog-labs/agent-skills --skill agent-observability --full-dept
 
 The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:
 
-```shell
-claude mcp add --scope user --transport http "datadog-llmo-mcp" \
-  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
-```
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+<pre><code>claude mcp add --scope user --transport http "datadog-llmo-mcp" \
+  '{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core'</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 Restart Claude Code after running both commands for the skills to appear.
 
