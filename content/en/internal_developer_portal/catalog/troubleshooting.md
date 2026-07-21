@@ -56,9 +56,19 @@ The Endpoints list is based on APM tracing, so make sure your [services are inst
 
 ### Definition and traffic appear as separate endpoints
 
-Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify that `spec.implementedBy` includes the service from the telemetry, the HTTP methods match, and the paths use compatible literal segments and path parameters. For service overrides, Datadog also checks `base_service`.
+Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify the following:
+
+- `spec.implementedBy` includes the `service` from the span. For service overrides, Datadog also checks `base_service`.
+- The span's `http.method` matches the method in the definition.
+- The span has `http.route`, and its `http.url_details.path` or `http.route` matches the defined path. A path parameter matches exactly one segment. For example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
 
 A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches. For the complete matching rules, see [How OpenAPI specifications are combined with traffic][8].
+
+### Catch-all definition does not combine with traffic
+
+A catch-all path is a path made entirely of parameters, such as `/{resource}` or `/{resource}/{id}`. To prevent an ambiguous match across services, Datadog does not combine traffic with an unscoped catch-all definition. Add the traffic's service to `spec.implementedBy`.
+
+For example, `GET /{resource}` without `spec.implementedBy` remains separate from traffic with `service:store-api`, `http.method:GET`, and `http.route:/orders`. Adding `service:store-api` to `spec.implementedBy` allows them to combine. Each parameter still matches only one path segment, so `/{resource}` does not match `/orders/123`; use `/{resource}/{id}` for that shape.
 
 ### No telemetry data for OpenAPI file
 
