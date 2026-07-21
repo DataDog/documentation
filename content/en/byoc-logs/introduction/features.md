@@ -17,13 +17,15 @@ The following log features are supported:
 - Full text search on any log attributes
 - List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
 - Group by into Fields and Patterns (except monthly timeshift)
+- Group by sort by, including group by sort by with count unique
+- Flat group queries
 - Facet-based filtering and drill-down
 - Download CSV
+- Pagination
 
 **Dashboards and monitors**
 - Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
-- Bits Investigation
 
 **Index management**
 - Multiple indexes with independent retention periods and routing rules
@@ -34,16 +36,40 @@ The following log features are supported:
 **Correlation**
 - Correlation from a log in BYOC Logs to metrics sent to Datadog SaaS
 - Correlation from a log in BYOC Logs to traces sent to Datadog SaaS
+- Correlation from a log in BYOC Logs to processes sent to Datadog SaaS
+
+**Processing**
+- Configurable processing pipelines through Observability Pipelines
+- Observability Pipeline connection
+
+**AI features**
+- Bits Investigation (Preview)
+- MCP Server (Preview)
+- Notebooks (Preview)
 
 ## Unsupported features
 
 Feature support is actively evolving. The following are not currently supported:
 
-- **SIEM**: Not available for BYOC Logs data.
-- **Watchdog**: Not available for BYOC Logs data.
-- **Notebooks**: Log data from BYOC Logs cannot be used in Notebooks.
-- **Federated search**: Searching across multiple BYOC Logs clusters from a single query is not supported.
-- **LiveTail**: Real-time log streaming is not available for BYOC Logs indexes.
-- **Log context view**: Viewing surrounding logs in context is not yet supported.
+- **SIEM**
+- **Watchdog**
+- **Federated search**
+- **LiveTail**
+- **Log context view**
+
+### Query capabilities not currently supported
+
+The following query capabilities are not supported by ddSQL:
+
+- **CIDR query**
+- **Sorting by text field**
+- **Group by transactions**
+- **Advanced query capabilities**:
+  - Calculated fields
+  - Grok extraction (query-time parsing)
+  - Formula
+  - Join
+  - Filter on reference tables
+  - Filter with subquery
 
 [1]: /api/latest/logs-restriction-queries/
