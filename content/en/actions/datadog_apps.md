@@ -91,6 +91,7 @@ The `skills` CLI supports Claude Code, Codex, Cursor, Gemini CLI, OpenCode, and 
 - `Upload and publish this Datadog App.`
 - `Set up CI/CD for this Datadog App.`
 - `Troubleshoot this Datadog App authentication error.`
+- `Add a table component to this Datadog App using Druids.`
 
 ## Develop your app locally
 
@@ -159,6 +160,26 @@ function App() {
 export default App;
 ```
 {{% /collapse-content %}}
+
+### UI components
+
+Use [`@datadog/druids`][23] to build your app's UI with the same React components used across Datadog products, such as tables, buttons, charts, and forms. Building with Druids helps your app match the look and feel of the rest of Datadog.
+
+Install the library:
+```shell
+npm install @datadog/druids
+```
+
+Import components the same way you import any React component:
+```tsx
+import { Button } from '@datadog/druids';
+```
+
+Druids requires React 18 or 19 as a peer dependency. For the set of available components, see the [package on npm][23].
+
+<div class="alert alert-info">
+Druids components are for use in Datadog Apps and App Builder only. See the package's license for details.
+</div>
 
 ## Build and upload your app
 
@@ -306,3 +327,4 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
 [21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
 [22]: https://github.com/antfu/skills-cli
+[23]: https://www.npmjs.com/package/@datadog/druids
