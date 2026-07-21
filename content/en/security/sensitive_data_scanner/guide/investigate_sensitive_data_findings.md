@@ -28,7 +28,7 @@ Datadog's Sensitive Data Scanner can help prevent sensitive data leaks and limit
 
 The Sensitive Data Scanner's [Findings][1] page categorizes and prioritizes sensitive data findings so that you can investigate, collaborate, and document your findings, and answer those questions.
 
-{{< img src="sensitive_data_scanner/sds_logs_findings_explorer.png" alt="Sensitive Data Scanner Logs Findings explorer grouped by service, with a service expanded to show scanner findings, match counts, and trend charts." style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="Sensitive Data Scanner Findings explorer grouped by rule, with the US Passport Scanner rule expanded to show critical findings, match counts, and weekly trend charts." style="width:100%;" >}}
 
 ## Triage sensitive data findings
 
@@ -37,7 +37,7 @@ Navigate to the [Findings][1] page to see all sensitive data findings within the
 {{< tabs >}}
 {{% tab "Logs" %}}
 
-The Logs Findings explorer is an updated experience for investigating log findings. To access it, click {{< ui >}}Try the new version{{< /ui >}} in the blue banner at the top of the Telemetry tab. APM, RUM, and Events findings are not available in this explorer. To view those findings, click {{< ui >}}Go back{{< /ui >}} in the banner.
+The Logs Findings explorer is an updated experience for investigating log findings. If you have at least one log finding, this explorer opens by default. APM, RUM, and Events findings are not available in this explorer. To view those findings, click {{< ui >}}Go back{{< /ui >}} in the banner at the top of the page.
 
 To investigate a log finding:
 
@@ -46,12 +46,14 @@ To investigate a log finding:
 3. At the top of the panel, check {{< ui >}}First Detected{{< /ui >}} and {{< ui >}}Last Detected{{< /ui >}} to understand how long the exposure has been active.
 4. In the summary section, review {{< ui >}}Match State{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, and {{< ui >}}Total matches{{< /ui >}} to understand the scope of the exposure.
 5. Review the {{< ui >}}Logs Pattern{{< /ui >}} to understand the format of the log line where sensitive data was detected.
-6. In the {{< ui >}}Example Logs{{< /ui >}} section, review representative examples of affected logs. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline.
+6. In the {{< ui >}}Example Logs{{< /ui >}} section, review up to 5 representative examples of affected logs. When an example log expires it is replaced with the next matching event. Click {{< ui >}}Show log{{< /ui >}} to expand an example and inspect its log message, fields, and attributes inline. By default, example logs are stored for 3 days and are accessible to all users with the Data Scanner Read permission. To store these representative logs for a different period, contact [Support][1].
 7. Review {{< ui >}}Matches Trend{{< /ui >}} to see how match volume has changed over the past week. Use {{< ui >}}Related Access and Configuration Events{{< /ui >}} to check whether recent access events or changes to the scanning group or scanning rule line up with changes in match volume.
 
 Additionally, you can:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
+
+[1]: /help
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
