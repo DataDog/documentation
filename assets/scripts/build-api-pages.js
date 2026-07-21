@@ -925,7 +925,7 @@ const extractChildData = (value) => {
  *   Only diffed when the field exists (unchanged presence) in both — a field new
  *   or removed at this level isn't diffed further down.
  * @param {string} versionLabel - the date this variant belongs to, shown in
- *   "New in {versionLabel}" / "Removed in {versionLabel}" markers.
+ *   "Added in {versionLabel}" / "Removed in {versionLabel}" markers.
  * returns html row with nested rows
  */
 const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, parentKey = '', skipAnyKeys = false, prevData = null, versionLabel = '') => {
@@ -986,7 +986,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
 
         const isReadOnly = isReadOnlyRow(value);
         const changeMarkerClass = isRemoved ? "isRemoved" : (isNew ? "isNew" : "");
-        const changeMarkerLabel = isRemoved ? `Removed in ${versionLabel}` : (isNew ? `New in ${versionLabel}` : '');
+        const changeMarkerLabel = isRemoved ? `Removed in ${versionLabel}` : (isNew ? `Added in ${versionLabel}` : '');
         const changeMarkerMarkup = changeMarkerLabel
           ? ` <span class="schema-change-marker ${isRemoved ? "schema-change-marker-removed" : "schema-change-marker-new"}">${changeMarkerLabel}</span>`
           : '';

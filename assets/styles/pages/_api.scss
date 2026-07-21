@@ -389,23 +389,30 @@ $ddpurple: #632ca6;
     }
 }
 
-// Date-based per-operation API version control (chip + dropdown + caption +
-// context banner), matching the "API Version Selector" design mock.
-.api-version-selector-col {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    text-align: right;
+// Operation title actions: keep the version selector and copy-page control on
+// the same row as the title when space allows.
+.api-operation-header {
+    gap: 1rem;
+    margin-bottom: 0.75rem !important;
+
+    .api-copy-btn {
+        flex-shrink: 0;
+        margin-top: 0;
+    }
 }
 
-.api-version-selector-label {
-    margin-bottom: 0.25rem;
-    font-size: 0.6875rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    color: $gray;
+.api-operation-header-actions {
+    gap: 1rem;
+    margin-left: auto;
+}
+
+// Date-based per-operation API version control (compact chip + dropdown).
+.api-version-block {
+    flex: 0 0 auto;
+}
+
+.api-version-selector-col {
+    position: relative;
 }
 
 // Same button+menu convention as .api-sidenav-version-dropdown
@@ -495,20 +502,6 @@ $ddpurple: #632ca6;
     &.is-urgent {
         color: $brand-danger;
         background: rgba($brand-danger, 0.14);
-    }
-}
-
-.api-version-status {
-    margin-top: 0.25rem;
-    font-size: 0.75rem;
-
-    .js-api-version-caption-text {
-        color: $gray;
-
-        &.is-overridden {
-            font-weight: 600;
-            color: $ddpurple;
-        }
     }
 }
 
@@ -630,78 +623,7 @@ $ddpurple: #632ca6;
     color: $gray;
 }
 
-// Context banner explaining how the shown version was resolved — always
-// rendered (not conditional on "older version"), themed by override state.
-.api-version-context {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    width: 320px;
-    max-width: 100%;
-    margin-top: 0.5rem;
-    margin-left: auto;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.8125rem;
-    color: $gray-darker;
-    text-align: left;
-    background: $gray-lighter;
-    border: 1px solid $gray-border;
-    border-radius: 0.375rem;
-
-    &.is-overridden {
-        background: rgba($ddpurple, 0.06);
-        border-color: rgba($ddpurple, 0.3);
-    }
-
-    &.is-deprecated {
-        background: rgba($brand-warning, 0.08);
-        border-color: rgba($brand-warning, 0.35);
-    }
-
-    &.is-deprecated.is-urgent {
-        background: rgba($brand-danger, 0.08);
-        border-color: rgba($brand-danger, 0.35);
-    }
-}
-
-.api-version-context-icon {
-    flex-shrink: 0;
-    display: inline-flex;
-    color: $brand-info;
-
-    .api-version-context.is-overridden & {
-        color: $ddpurple;
-    }
-
-    .api-version-context.is-deprecated & {
-        color: $brand-warning;
-    }
-
-    .api-version-context.is-deprecated.is-urgent & {
-        color: $brand-danger;
-    }
-}
-
-.api-version-context-text {
-    flex: 1;
-}
-
-.api-version-context-follow {
-    flex-shrink: 0;
-    padding: 0.25rem 0.625rem;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: $brand-info;
-    background: #fff;
-    border: 1px solid $gray-border;
-    border-radius: 0.25rem;
-
-    &:hover {
-        border-color: $gray-light;
-    }
-}
-
-// D5: schema table row markers for fields added/removed between date-versioned
+// Schema table row markers for fields added/removed between date-versioned
 // variants (see rowRecursive's prevData diffing in build-api-pages.js). Same
 // pill shape as .api-version-chip-pill; only margin and color are custom.
 .schema-change-marker {

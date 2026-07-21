@@ -16,6 +16,7 @@
     apiVersionsList        - slice of {date string, isBase bool}, sorted oldest -> newest
     baseVersion            - string
     dateVersionOperationId - string
+    apiMajorVersion        - string (for example, "v1")
 */}}
 {{ $dot := .dot }}
 
@@ -50,6 +51,7 @@
 {{ $dvScratch.Set "apiVersionsList" slice }}
 {{ $dvScratch.Set "baseVersion" "" }}
 {{ $dvScratch.Set "dateVersionOperationId" "" }}
+{{ $dvScratch.Set "apiMajorVersion" "" }}
 {{ range $versionNum := $versions }}
   {{ $specData := partial "api/load-specs.html" (dict "version" $versionNum) }}
   {{ if $specData }}
@@ -61,6 +63,7 @@
           {{ if index $content.schema "x-datadog-api-versioned" }}
             {{ $dvScratch.Set "isDateVersioned" true }}
             {{ $dvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+            {{ $dvScratch.Set "apiMajorVersion" $versionNum }}
           {{ end }}
         {{ end }}
       {{ end }}
@@ -69,6 +72,7 @@
           {{ if index $content.schema "x-datadog-api-versioned" }}
             {{ $dvScratch.Set "isDateVersioned" true }}
             {{ $dvScratch.Set "dateVersionOperationId" $ep.action.operationId }}
+            {{ $dvScratch.Set "apiMajorVersion" $versionNum }}
           {{ end }}
         {{ end }}
       {{ end }}
@@ -108,4 +112,5 @@
   "apiVersionsList" ($dvScratch.Get "apiVersionsList")
   "baseVersion" ($dvScratch.Get "baseVersion")
   "dateVersionOperationId" ($dvScratch.Get "dateVersionOperationId")
+  "apiMajorVersion" ($dvScratch.Get "apiMajorVersion")
 }}

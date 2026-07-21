@@ -194,8 +194,7 @@ function daysUntil(dateStr) {
 }
 
 // Reads a version's { deprecated, eol } off the block's data-version-meta
-// JSON blob and derives escalation state: `eolPast`/`eolSoon` (within 90
-// days) combine into `urgent`, which pushes the banner from amber to red.
+// JSON blob and derives escalation state for the lifecycle pill.
 function getVersionLifecycle(block, version) {
     let meta = {};
     try {
@@ -237,9 +236,8 @@ function setGlobalVersionButton(version) {
 }
 
 // Applies `version` as the resolved version for an operation and updates
-// every piece of UI that reflects it: the chip, the dropdown selection, the
-// status caption, the context banner, and the underlying versioned panes /
-// curl header.
+// every piece of UI that reflects it: the chip, dropdown selection, and the
+// underlying versioned panes / curl header.
 function applyApiVersion(operationId, version, isOverride) {
     const block = document.querySelector(`.api-version-block[data-operation-id="${operationId}"]`);
     if (!block) return;
@@ -281,41 +279,6 @@ function applyApiVersion(operationId, version, isOverride) {
         followMenuItem.classList.toggle('active', !isOverride);
         const followCheck = followMenuItem.querySelector('.js-api-version-follow-check');
         if (followCheck) followCheck.classList.toggle('d-none', isOverride);
-    }
-
-    const captionText = block.querySelector('.js-api-version-caption-text');
-    if (captionText) {
-        captionText.textContent = isOverride ? 'Overridden for this operation' : 'Following global';
-        captionText.classList.toggle('is-overridden', isOverride);
-    }
-
-    const context = block.querySelector('.js-api-version-context');
-    if (context) {
-        context.classList.toggle('is-overridden', isOverride && !lifecycle.deprecated);
-        context.classList.toggle('is-deprecated', lifecycle.deprecated);
-        context.classList.toggle('is-urgent', lifecycle.deprecated && lifecycle.urgent);
-        const text = context.querySelector('.js-api-version-context-text');
-        const global = getGlobalVersion() || version;
-        if (text) {
-            if (lifecycle.deprecated) {
-                const eolText = lifecycle.eol ? ` on ${lifecycle.eol}` : '';
-                text.textContent = lifecycle.eolPast
-                    ? `This version reached end-of-life${eolText} and may stop working. Migrate to ${latestVersion} as soon as possible.`
-                    : `This version is deprecated and reaches end-of-life${eolText}. Migrate to ${latestVersion} before then.`;
-            } else if (isOverride && version === global) {
-                text.textContent = `Pinned to the global version (${global}) — does not move if the global version changes.`;
-            } else if (isOverride) {
-                text.textContent = `Pinned to ${version} for this operation.`;
-            } else {
-                text.textContent = `Following global version (${global}).`;
-            }
-        }
-        const migrateButton = context.querySelector('.js-api-version-migrate');
-        if (migrateButton) migrateButton.classList.toggle('d-none', !lifecycle.deprecated || version === latestVersion);
-        const infoIcon = context.querySelector('.js-api-version-context-icon-info');
-        const warningIcon = context.querySelector('.js-api-version-context-icon-warning');
-        if (infoIcon) infoIcon.classList.toggle('d-none', lifecycle.deprecated);
-        if (warningIcon) warningIcon.classList.toggle('d-none', !lifecycle.deprecated);
     }
 
     document.querySelectorAll(`.api-versioned-pane[data-operation-id="${operationId}"]`).forEach((pane) => {
@@ -419,23 +382,6 @@ if (apiVersionBlocks.length || apiGlobalVersionToggle) {
                 window.localStorage.removeItem(apiVersionStorageKey(operationId));
             } catch (err) {
                 // ignore storage errors
-            }
-            return;
-        }
-
-        const migrate = e.target.closest('.js-api-version-migrate');
-        if (migrate) {
-            e.preventDefault();
-            const { operationId } = migrate.dataset;
-            const block = migrate.closest('.api-version-block');
-            const latest = block && block.dataset.latestVersion;
-            if (latest) {
-                applyApiVersion(operationId, latest, true);
-                try {
-                    window.localStorage.setItem(apiVersionStorageKey(operationId), latest);
-                } catch (err) {
-                    // ignore storage errors (e.g. private browsing)
-                }
             }
         }
     });

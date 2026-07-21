@@ -56,21 +56,21 @@
     {{ $topApiVersionsList := $.Scratch.Get "apiVersionsList" }}
     {{ $topBaseVersion := $.Scratch.Get "baseVersion" }}
     {{ $topDateVersionOpId := $.Scratch.Get "dateVersionOperationId" }}
+    {{ $topApiMajorVersion := $.Scratch.Get "apiMajorVersion" }}
 
-    <div class="row align-items-start mb-1">
-      <div class="col-11 col-xl-9">
-          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
-              {{- $anchorStr -}}
-          </h1>
-      </div>
-      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
+    <div class="api-operation-header d-flex flex-wrap align-items-center justify-content-between mb-1">
+      <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
+          {{- $anchorStr -}}
+      </h1>
+      <div class="api-operation-header-actions d-flex align-items-center">
+          {{ if $topIsDateVersioned }}
+            {{ partial "api/date-version-selector.html" (dict "operationId" $topDateVersionOpId "versions" $topApiVersionsList "baseVersion" $topBaseVersion "apiMajorVersion" $topApiMajorVersion) }}
+          {{ end }}
           {{ partial "api/api-copy-btn.html" . }}
       </div>
     </div>
 
-    {{ if $topIsDateVersioned }}
-      {{ partial "api/date-version-selector.html" (dict "operationId" $topDateVersionOpId "versions" $topApiVersionsList "baseVersion" $topBaseVersion) }}
-    {{ else if gt $versionCount 0 }}
+    {{ if and (not $topIsDateVersioned) (gt $versionCount 0) }}
     <ul class="nav nav-tabs border-none response-toggle px-0">
       {{ range $versionIndex, $versionNum := $versions }}
         {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
