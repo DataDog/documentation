@@ -1,16 +1,16 @@
 ---
 title: Create a Custom Rule
 content_filters:
-  - trait_id: cloud_siem_detection_rule_type
-    option_group_id: cloud_siem_detection_rule_type_options
   - trait_id: cloud_siem_detection_rule_search_query
-    option_group_id: cloud_siem_detection_<CLOUD_SIEM_DETECTION_RULE_TYPE>_search_query_options
----
-
-<!-- Trait for query language once conditional filter displays are working
+    option_group_id: cloud_siem_detection_rule_search_query_options
+  - trait_id: cloud_siem_detection_rule_type
+    option_group_id: cloud_siem_detection_<CLOUD_SIEM_DETECTION_RULE_SEARCH_QUERY>_rule_type_options
   - trait_id: cloud_siem_detection_rule_query_language
     option_group_id: cloud_siem_detection_rule_query_language_options
- -->
+    show_if:
+      - cloud_siem_detection_rule_search_query: ["threshold"]
+        cloud_siem_detection_rule_type: ["scheduled_rule", "historical_job"]
+---
 
 ## Overview
 
