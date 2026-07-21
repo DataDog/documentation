@@ -172,19 +172,21 @@ Follow these steps to deploy the Datadog Azure integration through [Terraform][2
 - You already have an app registration configured with the {{< ui >}}Monitoring Reader{{< /ui >}} role for Datadog to monitor the provided scope (subscriptions or management groups), and don't want to create new resources.
 
 1. Configure the [Datadog Terraform provider][200] to interact with the Datadog API through a Terraform configuration.
-2. Set up your Terraform configuration file using the example below as a base template. Ensure to update the following parameters before you apply the changes:
+2. Set up your Terraform configuration file using the example below as a base template. Update the following parameters before you apply the changes:
     * `tenant_name`: Your Azure Active Directory ID.
     * `client_id`: Your Azure application (client) ID.
-    * `client_secret`: Your Azure web application secret key.
+    * `secretless_auth_enabled`: Set to `true` to authenticate with a federated credential instead of a client secret (recommended). To authenticate with a client secret instead, remove this parameter and set `client_secret` to the app registration's secret value.
+
+   Secretless Auth requires a federated credential on the app registration that trusts Datadog's identity. See [Authentication methods](#authentication-methods).
 
    See the [Datadog Azure integration resource][201] page in the Terraform registry for further example usage and the full list of optional parameters, as well as additional Datadog resources.
 
 {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
 resource "datadog_integration_azure" "sandbox" {
-  tenant_name   = "<AZURE_TENANT_NAME>"
-  client_id     = "<AZURE_CLIENT_ID>"
-  client_secret = "<AZURE_CLIENT_SECRET_KEY>"
+  tenant_name             = "<AZURE_TENANT_NAME>"
+  client_id               = "<AZURE_CLIENT_ID>"
+  secretless_auth_enabled = true
 }
 
 {{< /code-block >}}
@@ -254,13 +256,52 @@ If you already connected an app registration using a client secret, you can migr
 
    {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessMigration.png" alt="The General tab for an app registration, with a callout recommending Secretless Auth and a Set Up Secretless Auth button" style="width:100%;" >}}
 
-3. In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method: {{< ui >}}Azure CLI{{< /ui >}}, {{< ui >}}Terraform{{< /ui >}}, or {{< ui >}}Azure Portal{{< /ui >}}.
+3. In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method, then complete the steps for that method.
 
    {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
 
-4. Complete the steps to create a federated credential in Azure for the selected method. For the {{< ui >}}Azure CLI{{< /ui >}} method, run the provided `az ad app federated-credential create` command in a terminal with the Azure CLI configured for the correct tenant, or click {{< ui >}}Open Azure Cloud Shell{{< /ui >}}.
-5. Click {{< ui >}}Verify Credential{{< /ui >}} to test the authentication.
-6. Click {{< ui >}}Confirm{{< /ui >}}. Your client secret is removed when setup succeeds.
+{{< tabs >}}
+{{% tab "Azure CLI" %}}
+
+1. Run the provided `az ad app federated-credential create` command in a terminal with the Azure CLI configured for the correct tenant, or click {{< ui >}}Open Azure Cloud Shell{{< /ui >}}.
+2. Click {{< ui >}}Verify Credential{{< /ui >}} to test the authentication.
+3. Click {{< ui >}}Confirm{{< /ui >}}. Your client secret is removed when setup succeeds.
+
+{{% /tab %}}
+{{% tab "Terraform" %}}
+
+This method requires the `azuread` provider version 3.7.0 or later.
+
+1. Add the federated credential resource shown in the dialog to the same configuration that manages your Datadog Azure integration, then apply it. Copy the `issuer` and `subject` values from the dialog.
+
+   {{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
+resource "azuread_application_federated_identity_credential" "datadog_federated_credential" {
+  # Reference the ID of this app registration
+  application_id = azuread_application.datadog_app.id
+  display_name   = "datadog"
+  description    = "Federated credential that permits Datadog to authenticate without storing a client secret"
+  audiences      = ["api://AzureADTokenExchange"]
+  issuer         = "<ISSUER>"
+  subject        = "<SUBJECT>"
+}
+   {{< /code-block >}}
+
+2. Click {{< ui >}}Verify Credential{{< /ui >}} to test the authentication.
+3. Modify your `datadog_integration_azure` resource to use Secretless Auth:
+   - Add the federated credential resource to the integration's dependency list.
+   - Replace the `client_secret` setting with `secretless_auth_enabled = true`.
+   - Apply the changes.
+
+{{% /tab %}}
+{{% tab "Azure Portal" %}}
+
+1. In the Azure portal, open the app registration and go to {{< ui >}}Certificates & secrets{{< /ui >}} > {{< ui >}}Federated credentials{{< /ui >}} > {{< ui >}}Add credential{{< /ui >}}.
+2. Select {{< ui >}}Other issuer{{< /ui >}}, then enter the {{< ui >}}Issuer{{< /ui >}}, {{< ui >}}Subject{{< /ui >}}, and {{< ui >}}Audience{{< /ui >}} values exactly as shown in the dialog.
+3. Click {{< ui >}}Verify Credential{{< /ui >}} to test the authentication.
+4. Click {{< ui >}}Confirm{{< /ui >}}. Your client secret is removed when setup succeeds.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 {{% /collapse-content %}}
 
