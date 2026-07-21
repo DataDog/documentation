@@ -8,10 +8,10 @@ further_reading:
 ---
 ## Overview
 
-To run any Slack actions, type `/dd` in any workspace with the Datadog App installed to pull up an action tray listing all actions you can take. Alternatively, directly type out the action.
+Slack actions are available in any Slack workspace with the Datadog App installed. Type `/dd` in the workspace to open an action tray listing all available actions. Alternatively, type the full command directly.
 
 ## Incidents
-Use the following keyboard shortcuts for incidents navigation. All commands can utilize `/dd in` as an alias for `/dd incident`. For more details, refer to [Incident documentation][2].
+Use the following commands for incidents navigation. All commands can use `/dd in` as an alias for `/dd incident`. For more details, see [Integrate Slack with Datadog Incident Management][2].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -22,14 +22,14 @@ Use the following keyboard shortcuts for incidents navigation. All commands can 
 | `/dd in summary` | Generate the incident's summary with AI. |
 | `/dd in notify` | Notify @-handles about the incident. |
 | `/dd in list` | List open incidents.|
-| `/dd in private`| Archive the current channel, create a new private channel, and add all existing responders.|
+| `/dd in private`| Archive the current channel, create a private channel, and add all existing responders.|
 | `/dd in public` | Make the incident and its timeline visible to anyone with incident-read permissions. |
 | `/dd followup` | Create a new follow-up.|
 | `/dd followup list`  | List Incident Follow-ups |
 | `/dd shortcuts` | View Incident Actions.|
 
 ## On-Call
-Use the following keyboard shortcuts for On-Call. For more details, refer to [On-Call documentation][3].
+Use the following commands for On-Call. For more details, see [On-Call Pages][3].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -38,7 +38,7 @@ Use the following keyboard shortcuts for On-Call. For more details, refer to [On
 | `/dd override`| Request someone to cover an on-call shift. |
 
 ## Monitors
-Use the following keyboard shortcuts for Monitors. For more details, refer to [Alerting documentation][4].
+Use the following commands for Monitors. For more information on adding Slack to monitors, see [Monitor Notifications][4].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -46,7 +46,7 @@ Use the following keyboard shortcuts for Monitors. For more details, refer to [A
 
 
 ## Dashboard
-Use the following keyboard shortcuts for Dashboards. For more details, refer to [Dashboard documentation][5].
+Use the following commands for [Dashboards][5].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -54,7 +54,7 @@ Use the following keyboard shortcuts for Dashboards. For more details, refer to 
 
 
 ## Workflows
-Use the following keyboard shortcuts for Workflows. For more details, refer to [Workflow Automation documentation][6].
+Use the following commands for Workflows. For more information on using Slack in Workflows, see [Trigger a workflow][6].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -62,7 +62,7 @@ Use the following keyboard shortcuts for Workflows. For more details, refer to [
 
 
 ## Accounts
-Use the following keyboard shortcuts for account management. For more details, refer to [Account Management documentation][7].
+Use the following commands for [account management][7].
 
 | Command | Description|
 | ------------------ | ---------- |
@@ -73,6 +73,6 @@ Use the following keyboard shortcuts for account management. For more details, r
 [2]: /incident_response/incident_management/setup_and_configuration/integrations/slack/#slack-commands
 [3]: /incident_response/on-call/pages/#through-slack
 [4]: /monitors/notify/#notification-recipients
-[5]: /product_analytics/dashboards/
+[5]: /dashboards/
 [6]: /actions/workflows/trigger/#slack-triggers
 [7]: /account_management/
