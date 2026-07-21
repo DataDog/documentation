@@ -7,7 +7,7 @@ further_reading:
   tag: "Documentation"
   text: "Set up Audit Trail"
 aliases:
-- ./track_dashboard_usage/
+- /account_management/audit_trail/guides/track_dashboard_usage/
 ---
 
 ## Overview
@@ -44,7 +44,7 @@ You can use [event queries][7] in Audit Trail to see a list of dashboards that h
 
 1. Navigate to [Audit Trail][2].
 1. In the {{< ui >}}Search for{{< /ui >}} field, paste a query to filter for the kind of changes you want to see. Here are some common examples:
-   
+
    | Audit event                       | Query in audit explorer                                      |
    |-----------------------------------|--------------------------------------------------------------|
    | [Recently created dashboards][4]  | `@evt.name:Dashboard @asset.type:dashboard @action:created`  |
@@ -52,7 +52,7 @@ You can use [event queries][7] in Audit Trail to see a list of dashboards that h
    | [Recently deleted dashboards][6]  | `@evt.name:Dashboard @asset.type:dashboard @action:deleted`  |
 
 1. Optionally, on the facet panel, use filters like {{< ui >}}Asset ID{{< /ui >}} or {{< ui >}}Asset Name{{< /ui >}} to narrow your results down to a specific dashboard.
-1. For each event in the table, you can see the email address of the user who performed the last change, and a summary of what happened. 
+1. For each event in the table, you can see the email address of the user who performed the last change, and a summary of what happened.
 
    To see additional information about a specific change, click the row in the table. Then, click the {{< ui >}}Inspect Changes (Diff){{< /ui >}} tab to see the changes that were made to the dashboard's configuration:
 

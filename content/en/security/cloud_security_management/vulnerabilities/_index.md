@@ -81,14 +81,14 @@ Use these tables to decide which solution to start with:
 | Vulnerability prioritization              | Yes                                           | Yes, with runtime context      |
 | Vulnerability scanning frequency          | 12 hours                                      | Real-time                      |
 
-| Vulnerability detection scope | Agentless                                                                         | Unified Datadog Agent          |
-|-------------------------------|-----------------------------------------------------------------------------------|--------------------------------|
-| Host and host image           | OS packages and app packages, mapped to image                                     | OS packages                    |
-| Container image               | OS packages and app packages, mapped to image                                     | OS packages                    |
-| Cloud provider                | AWS, Azure, GCP                                                                   | AWS, Azure, GCP, on-prem, etc. |
-| Operating system              | Linux, Windows                                                                    | Linux, Windows                 |
-| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only) | Not applicable                 |
-| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only), Azure Container Registry (running container images only) | Not applicable                 |
+| Vulnerability detection scope | Agentless                                                                                                                                                    | Unified Datadog Agent          |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
+| Host and host image           | OS packages and app packages, mapped to image                                                                                                                | OS packages                    |
+| Container image               | OS packages and app packages, mapped to image                                                                                                                | OS packages                    |
+| Cloud provider                | AWS, Azure, GCP                                                                                                                                              | AWS, Azure, GCP, on-prem, etc. |
+| Operating system              | Linux, Windows                                                                                                                                               | Linux, Windows                 |
+| Serverless                    | AWS Lambda, Amazon ECS Fargate, Azure Container Apps, Azure Container Instances, GCP Cloud Run (container deployment only)                                   | Not applicable                 |
+| Container registries          | Amazon ECR (running + at-rest), Google Artifact Registry (running workloads only; in [Preview][8]), Azure Container Registry (running container images only) | Not applicable                 |
 
 For more information on compatibility, see [Cloud Security Vulnerabilities Hosts and Containers Compatibility][13]. If you need any assistance, see the [troubleshooting guide][14], or reach out to support@datadoghq.com.
 
@@ -98,6 +98,8 @@ The [{{< ui >}}Cloud Security Vulnerabilities Findings{{< /ui >}} page][1] helps
 Focus on exploitable vulnerabilities first, using the Datadog Severity Score, combining the base CVSS score with many risk factors, including sensitive data, environment sensitivity, exposure to attacks, exploit availability, or threat intelligence sources.
 
 For vulnerabilities with available fixes, the {{< ui >}}Findings{{< /ui >}} page provides guided remediation steps to assist Dev and Ops teams in resolving issues more quickly and effectively. You can also triage, mute, comment, and assign vulnerabilities to manage their lifecycle.
+
+<div class="alert alert-info">To reuse your explorer settings on the Vulnerabilities Findings page, bookmark the full page URL. Your search query and facet selections are preserved in the URL.</div>
 
 {{< img src="security/vulnerabilities/csm-vm-explorer-actionability-2.png" alt="The Cloud Security Vulnerabilities Findings page displaying a vulnerability and the actions a user can take to remediate it" width="100%">}}
 
@@ -141,6 +143,7 @@ Quickly assess the impact of a critical emerging vulnerability by searching for 
 [5]: /security/code_security/software_composition_analysis/
 [6]: https://www.datadoghq.com/product/infrastructure-monitoring/
 [7]: https://app.datadoghq.com/container-images
+[8]: https://www.datadoghq.com/product-preview/google-artifact-registry-at-rest-scanning/
 [9]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [10]: /security/code_security/iast/
 [11]: /security/cloud_security_management/setup/agentless_scanning/

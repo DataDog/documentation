@@ -52,6 +52,10 @@ In every security signal that a critical asset has modified, an {{< ui >}}Adjust
 On the {{< ui >}}JSON{{< /ui >}} tab of a security signal, you can also find the `critical_assets_data` object, which includes information about the critical assets associated with it, and how they affected the signal's severity.
 <div class="alert alert-info">If a critical asset's severity level was overridden by a higher severity level, it may not appear in the <code>critical_assets_data</code> object.</div>
 
+## Restrict edit permissions
+
+{{% security-products/critical-assets-granular-access %}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

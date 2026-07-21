@@ -46,11 +46,11 @@ As an example, a `web-store` service can have multiple endpoints which are instr
 When there are multiple primary operations defined for a service, the highest request throughput determines the operation automatically selected to be the entry-point for the service. An admin user can set this setting manually:
 
 1. Go to the [APM settings page][2].
-2. Select the **Primary Operation Name** tab.
+2. Select the {{< ui >}}Primary Operation Name{{< /ui >}} tab.
 3. Click on the edit icon for the service that you want to manually set.
-4. Click the **Set Manually** tab.
+4. Click the {{< ui >}}Set Manually{{< /ui >}} tab.
 5. Select the operation that you want reflected as the entry-point to the service.
-6. Click **Save**.
+6. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="tracing/guide/primary_operation/configuring-primary-option.png" alt="APM save" >}}
 

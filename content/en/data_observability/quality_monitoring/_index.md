@@ -13,6 +13,9 @@ further_reading:
   - link: '/data_observability/lineage/'
     tag: 'Documentation'
     text: 'Lineage'
+  - link: '/data_observability/cicd/'
+    tag: 'Documentation'
+    text: 'CI/CD'
 ---
 
 ## Overview

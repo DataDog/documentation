@@ -14,21 +14,21 @@ title: AWS Lambda 애플리케이션 계측
 ---
 ## 개요 {#overview}
 
-Datadog Lambda Extension을 사용하여 AWS Lambda 애플리케이션을 계측하여 트레이스, 향상된 메트릭 및 사용자 정의 메트릭을 수집합니다. Datadog Lambda Extension은 호스트 기반 인프라 및 애플리케이션에 대해 Datadog Agent 및 Datadog SDK를 사용하는 것과 유사합니다.
+Datadog Lambda Extension을 사용하여 AWS Lambda 애플리케이션을 계측하여 트레이스, 향상된 메트릭 및 사용자 지정 메트릭을 수집합니다. Datadog Lambda Extension은 호스트 기반 인프라 및 애플리케이션에 대해 Datadog Agent 및 Datadog SDK를 사용하는 것과 유사합니다.
 
 {{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Datadog이 계측된 AWS Lambda 애플리케이션으로부터 텔레메트리를 수신하는 방법을 보여주는 다이어그램입니다. Datadog Lambda Library로 계측된 귀하의 Lambda 애플리케이션은 로그, 트레이스, 향상된 메트릭 및 사용자 정의 메트릭을 Datadog Lambda Extension으로 전송하며, 이 데이터는 Datadog으로 푸시됩니다." style="width:100%;" >}}
 
 ## 빠른 시작 {#quick-start}
 
-시작하려면, 아직 계정이 없으시면 [Datadog 계정에 가입하세요][1]. 그런 다음, AWS Lambda 함수의 계측을 위해 [Fleet Automation의 인앱 설치 흐름][8]을 따르세요. 이 빠른 시작 구성은 귀하의 함수가 실시간 메트릭, 로그 및 트레이스를 Datadog으로 전송할 수 있도록 합니다.
+시작하하기 전 아직 계정이 없으시면 [Datadog 계정에 가입][1]하세요. 그런 다음 AWS Lambda 함수의 계측을 위해 [Fleet Automation의 인앱 설치 흐름][8]을 따르세요. 빠른 시작 구성을 완료하면 함수가 실시간 메트릭, 로그, 트레이스를 Datadog으로 전송할 수 있습니다.
 
-샘플 애플리케이션은 [GitHub에서 제공][6]되며, 여러 런타임 및 IaC 도구로 배포하는 방법에 대한 지침을 포함하고 있습니다.
+여러 런타임 및 IaC(infrastructure-as-code) 도구를 활용한 배포 방법 지침이 포함된 샘플 애플리케이션은 [GitHub에서 제공][6]됩니다.
 
-빠른 시작 프로세스는 귀하의 Lambda 함수를 즉시 구성합니다. Lambda 함수를 영구적으로 계측하려면, 다음 섹션의 자세한 지침을 참조하세요.
+빠른 시작 프로세스는 귀하의 Lambda 함수를 즉시 구성합니다. Lambda 함수를 영구적으로 계측하려면 다음 섹션의 자세한 지침을 참조하세요.
 
 ## Datadog MCP 서버 사용 {#use-the-datadog-mcp-server}
 
-[Datadog MCP 서버][9]를 사용하여 AI 지원으로 AWS Lambda 컨테이너 모니터링을 설정하세요. 연결한 후, 다음과 같은 프롬프트를 시도해 보세요.
+[Datadog MCP 서버][9]를 사용하여 AI 지원으로 AWS Lambda 컨테이너 모니터링을 설정하세요. 연결한 후 다음과 같은 프롬프트를 시도해 보세요.
 
 ```shell
 Help me monitor my AWS Lambda functions with Datadog
@@ -45,9 +45,9 @@ Help me monitor my AWS Lambda functions with Datadog
   {{< image-card href="/serverless/installation/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
 {{< /card-grid >}}
 
-## 고급 설정 {#advanced-configurations}
+## 고급 구성 {#advanced-configurations}
 
-계측이 완료되고 텔레메트리 수집을 설정한 후, [Configure Serverless Monitoring for AWS Lambda][3]을 사용하여:
+계측을 완료하고 텔레메트리 수집을 설정한 후 [AWS Lambda용 Configure Serverless Monitoring][3]을 사용하여 다음 작업을 수행할 수 있습니다.
 
 - 태그를 사용하여 메트릭, 트레이스 및 로그를 연결
 - API 게이트웨이, AppSync 및 Step Functions와 같은 AWS 리소스로부터 텔레메트리를 수집

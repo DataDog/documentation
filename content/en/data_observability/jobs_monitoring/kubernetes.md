@@ -167,10 +167,11 @@ features:
   apm:
     instrumentation:
       enabled: true
-      enabledNamespaces:
-        - <NAMESPACE>  # namespace where your Spark jobs run
       targets:
         - name: spark-driver
+          namespaceSelector:
+            matchNames:
+              - <NAMESPACE>   # namespace where your Spark jobs run
           podSelector:
             matchLabels:
               spark-role: driver   # replace with your submitter pod labels if running in client mode
@@ -180,6 +181,9 @@ features:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
         - name: spark-executor
+          namespaceSelector:
+            matchNames:
+              - <NAMESPACE>
           podSelector:
             matchLabels:
               spark-role: executor
@@ -206,10 +210,11 @@ datadog:
   apm:
     instrumentation:
       enabled: true
-      enabledNamespaces:
-        - <NAMESPACE>  # namespace where your Spark jobs run
       targets:
         - name: spark-driver
+          namespaceSelector:
+            matchNames:
+              - <NAMESPACE>   # namespace where your Spark jobs run
           podSelector:
             matchLabels:
               spark-role: driver   # replace with your submitter pod labels if running in client mode
@@ -219,6 +224,9 @@ datadog:
             - name: DD_DATA_JOBS_ENABLED
               value: "true"
         - name: spark-executor
+          namespaceSelector:
+            matchNames:
+              - <NAMESPACE>
           podSelector:
             matchLabels:
               spark-role: executor
@@ -237,7 +245,6 @@ helm upgrade <RELEASE_NAME> datadog/datadog -f datadog-values.yaml
 {{< /tabs >}}
 
 After applying the configuration, restart the targeted pods. SSI injects the init container into each pod on startup.
-
 
 ## Validation
 

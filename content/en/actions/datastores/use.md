@@ -5,10 +5,10 @@ disable_toc: false
 aliases:
 - /actions/datastore/use
 further_reading:
-- link: "service_management/app_builder/build"
+- link: "actions/app_builder/build"
   tag: "Documentation"
   text: "Build Apps"
-- link: "service_management/workflows/build"
+- link: "actions/workflows/build"
   tag: "Documentation"
   text: "Build Workflows"
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"

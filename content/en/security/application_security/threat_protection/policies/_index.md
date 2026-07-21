@@ -6,6 +6,12 @@ aliases:
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 If your service is running [an Agent with Remote Configuration enabled and an SDK version that supports it][2], you can block attacks and attackers from the Datadog UI without additional configuration of the Agent or SDKs.
 
 App and API Protection (AAP) Protect enables you to slow down attacks and attackers by _blocking_ them. Security traces are blocked in real-time by the Datadog SDKs. Blocks are saved in the Datadog platform, automatically and securely fetched by the Datadog Agent, deployed in your infrastructure, and applied to your services.
@@ -112,6 +118,6 @@ As important as it is for you to be able to apply protection granularly and redu
 [14]: https://app.datadoghq.com/security/appsec/detection-rules
 [15]: /security/application_security/how-it-works/add-user-info/?tab=set_user#adding-authenticated-user-information-to-traces-and-enabling-user-blocking-capability
 [16]: https://app.datadoghq.com/security/appsec/in-app-waf?config_by=custom-responses
-[17]: https://docs.datadoghq.com/service_management/workflows/
+[17]: https://docs.datadoghq.com/actions/workflows/
 [18]: https://app.datadoghq.com/workflow/blueprints?selected_category=SECURITY
 [20]: /security/application_security/threat_protection/security_signals/

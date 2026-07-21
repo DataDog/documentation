@@ -56,6 +56,8 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 ## Setup
 
+Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
+
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
 
 ### Configuration
@@ -480,6 +482,28 @@ Tags are placed directly on the span:
 
 <div class="alert alert-info">Any <code>gen_ai.*</code> attributes that are not explicitly mapped to Agent Observability span fields are placed in the LLM span's tags, with a 256 character limit per value. Values exceeding this limit are truncated. All other non-<code>gen_ai</code> attributes are dropped.</div>
 
+#### Custom metadata
+
+To add structured metadata to a span's `meta.metadata` field instead of its tags, set the `_dd.ml_obs.metadata` attribute to a JSON **object** string. Its keys and values (including nested objects and arrays) are merged into `meta.metadata` and rendered as JSON in the UI.
+
+```python
+import json
+
+span.set_attribute("_dd.ml_obs.metadata", json.dumps({
+    "experiment": "a/b",
+    "config": {
+        "retry": {"max": 3, "backoff": "exp"},
+        "feature_flags": ["new_ranker", "fast_path"],
+    },
+}))
+```
+
+Notes:
+
+- Values may be arbitrarily nested; unlike tags, metadata is not subject to the 256 character per-value limit.
+- Keys that collide with metadata derived from `gen_ai.*` attributes (for example, `temperature`) are overwritten by your values, with the exception of `model_name` and `model_provider`, which are reserved.
+- The value must be a JSON object. A value that is not valid JSON, or that is a top-level array or scalar, is dropped.
+
 ### OpenLLMetry attribute mappings
 
 This section documents OpenLLMetry-specific attribute mappings that differ from or extend the standard OpenTelemetry GenAI semantic conventions.
@@ -618,4 +642,5 @@ with tracer.start_as_current_span("my-span") as span:
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
+[10]: /opentelemetry/compatibility/#feature-compatibility
 

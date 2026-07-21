@@ -35,7 +35,7 @@ title: Data Streams Monitoring for Amazon Kinesis
       <td><a href="https://www.npmjs.com/package/@aws-sdk/client-kinesis">client-kinesis</a></td>
       <td>{{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="minimal" >}}</td>
       <td>{{< dsm-tracer-version lang="nodejs" lib="client-kinesis" type="recommended" >}}</td>
-      <td>Not supported</td>
+      <td><a href="https://github.com/DataDog/datadog-lambda-js/releases/tag/v12.128.0">128</a></td>
     </tr>
     <tr>
       <td><a href="/data_streams/python">Python</a></td>

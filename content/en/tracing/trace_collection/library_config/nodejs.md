@@ -32,7 +32,7 @@ It is recommended that you use `DD_ENV`, `DD_SERVICE`, and `DD_VERSION` to set `
 
 For more examples of how to work with the library see [API documentation][2].
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

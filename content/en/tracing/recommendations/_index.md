@@ -138,7 +138,7 @@ AI-driven recommendation types are now available, expanding the set of [optimiza
 
 ## Prerequisites
 
-Certain recommendations rely on specific Datadog products. Use the **Recommendation Prerequisite** dropdown to filter recommendations by the Datadog products in your setup.
+Certain recommendations rely on specific Datadog products. Use the {{< ui >}}Recommendation Prerequisite{{< /ui >}} dropdown to filter recommendations by the Datadog products in your setup.
 
 If you plan to use [Bits Code][3] to implement recommendations, you must [complete its setup][4].
 
@@ -158,14 +158,14 @@ Datadog ranks recommendations by computing a priority score that weighs the pote
 
 To review recommendations that need your attention:
 
-1. Go to [**APM** > **Recommendations**][1].
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Recommendations{{< /ui >}}][1].
 2. Filter your recommendations by status or type.
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
-5. (Optional) To use [Bits Code][3] to generate a code fix, under **Next Steps**, click **Fix with Bits**.
-6. (Optional) To track the fix in Jira or Case Management, under **Triage**, click **Add Jira Ticket** or **Add Case**.
+5. (Optional) To use [Bits Code][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
+6. (Optional) To track the fix in Jira or Case Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
 
-After you've reviewed the recommendation, you can use the **FOR REVIEW** dropdown to change the recommendation status to **REVIEWED**, **IGNORED**, or **RESOLVED**.
+After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 
 ## Supported recommendations
 

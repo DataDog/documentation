@@ -58,4 +58,4 @@ Catalog acts as a single source of truth for your engineering environment. Newly
 [2]: /internal_developer_portal/self_service_actions/software_templates/
 [3]: /api/latest/api-management/
 [4]: /account_management/teams/
-[5]: /service_management/app_builder/
+[5]: /actions/app_builder/
