@@ -21,34 +21,34 @@ Work items can be created [manually](#manual-work-item-creation), [automatically
 
 1. Navigate to the [Work Management page][1].
 1. Select a project to create the work item in. **Note**: A work item can only belong to a single project.
-1. Click **New Work Item**. <!-- [TO VERIFY] -->
+1. Click **New Work Item**.
 1. Fill in a title for the work item.
 1. Select a [work item type](#work-item-types).
 1. Add a title.
 1. (Optional) Add a description.
-1. Click **Create Work Item** to complete. <!-- [TO VERIFY] -->
+1. Click **Create Work Item** to complete.
 
 You can also create work items manually from the following products:
 
 | Product | Instructions    |
 | ------  | ----------- |
-| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --><br> - In Slack, click **Create work item** <!-- [TO VERIFY] --> under a monitor notification. |
+| Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a work item**.<br> - In Slack, click **Create work item** under a monitor notification. |
 | Security signals | Beside a signal, in the **Cases** column, click the **Create Case** icon. Then, enter the work item details in the **Create Case** window that opens. |
-| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a work item**. <!-- [TO VERIFY] --> |
-| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --> |
-| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a work item**. <!-- [TO VERIFY] --> |
-| Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create work item**. <!-- [TO VERIFY] --> |
-| Sensitive Data Scanner | Click **Create work item** <!-- [TO VERIFY] --> next to a Sensitive Data Scanner issue.  |
-| Slack  | Click the **Create Work Item** <!-- [TO VERIFY] --> button under a monitor notification in Slack.  |
+| Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a work item**. |
+| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. <!-- [TO VERIFY] --> |
+| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. <!-- [TO VERIFY] --> |
+| Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create work item**. |
+| Sensitive Data Scanner | Click **Create case** <!-- [TO VERIFY] --> next to a Sensitive Data Scanner issue.  |
+| Slack  | Click the **Create Work Item** button under a monitor notification in Slack.  |
 
 ## Automatic work item creation
 
 Configure the following products to automatically create work items:
 | Product | Instructions    |
 | ------  | ----------- |
-| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Work items are automatically created when the monitor transitions to a different status. To only create work items for certain monitor transitions, use [conditional variables][3]. As an example, to create work items only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.<br><br> Toggle on **Auto-close work items when the monitor group resolves** <!-- [TO VERIFY] --> to reduce manual cleanup.|
+| Monitors | Navigate to the [Project Settings page][4], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>. <br><br> When creating a monitor, include `@case-{project_handle}` in the **Configure notifications and automations** section. Work items are automatically created when the monitor transitions to a different status. To only create work items for certain monitor transitions, use [conditional variables][3]. As an example, to create work items only when a monitor triggers, wrap the `@case` mention with `{{#is_alert}}` and `{{/is_alert}}`.<br><br> Toggle on **Auto-close work items when the monitor group resolves** to reduce manual cleanup.|
 | Event Management (Correlations) | In Event Management, correlations configured to aggregate events from Datadog and third-party sources automatically create work items.   |
-| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Work Management." <!-- [TO VERIFY] --><br> 2. Select the **Create Work Item** action. <!-- [TO VERIFY] --><br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
+| Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Work Management."<br> 2. Select the **Create Work Item** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
 | Error Tracking | In Error Tracking, work items are automatically created when an issue is commented on or assigned. |
 
 ## Work item types

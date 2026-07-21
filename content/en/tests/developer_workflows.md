@@ -119,15 +119,15 @@ The overview page for any commit can be discovered through a particular branch o
 
 <!-- {{< img src="continuous_integration/case_failed_test.png" alt="Create a Work Management work item in the Commit Overview page" style="width:100%;">}} -->
 
-From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
+From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create work item{{< /ui >}}.
 
 #### Branch Overview
-From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
+From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create work item{{< /ui >}}.
 
 <!-- {{< img src="continuous_integration/case_flaky_test.png" alt="Create a Work Management work item in the Flaky Tests list" style="width:100%;">}} -->
 
 #### Test Runs View
-From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create work item{{< /ui >}}<!-- [TO VERIFY] -->.
+From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create work item{{< /ui >}}.
 
 <!-- {{< img src="continuous_integration/case_test_runs.png" alt="Create a Work Management work item in the Test Runs side panel" style="width:100%;">}} -->
 

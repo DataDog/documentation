@@ -2478,7 +2478,7 @@ menu:
       identifier: error_tracking_linear
       weight: 101
     - name: Gestion des cas
-      url: error_tracking/ticketing_systems/work_management
+      url: error_tracking/ticketing_systems/case_management
       parent: error_tracking_ticketing_systems
       identifier: error_tracking_case_management
       weight: 102
@@ -2828,63 +2828,63 @@ menu:
       identifier: status_pages
       weight: 40000
     - name: Gestion des cas
-      url: incident_response/work_management/
+      url: incident_response/case_management/
       pre: case-management
       parent: incident_response_heading
       identifier: case_management
       weight: 60000
     - name: Projets
-      url: incident_response/work_management/projects
+      url: incident_response/case_management/projects
       parent: case_management
       identifier: case_management_projects
       weight: 1
     - name: Settings
-      url: incident_response/work_management/settings
+      url: incident_response/case_management/settings
       parent: case_management_projects
       identifier: case_management_settings
       weight: 102
     - name: Créer un cas
-      url: incident_response/work_management/create_work_item
+      url: incident_response/case_management/create_case
       parent: case_management
       identifier: case_management_create_case
       weight: 2
     - name: Personnalisation
-      url: incident_response/work_management/customization
+      url: incident_response/case_management/customization
       parent: case_management
       identifier: case_management_customization
       weight: 3
     - name: Afficher et gérer les dossiers
-      url: incident_response/work_management/view_and_manage
+      url: incident_response/case_management/view_and_manage
       parent: case_management
       identifier: case_management_view_and_manage
       weight: 4
     - name: Notifications et intégrations
-      url: incident_response/work_management/notifications_integrations
+      url: incident_response/case_management/notifications_integrations
       parent: case_management
       identifier: case_management_notifications_and_integrations
       weight: 5
     - name: "Règles d'automatisation des dossiers"
-      url: incident_response/work_management/automation_rules
+      url: incident_response/case_management/automation_rules
       parent: case_management
       identifier: case_management_automation_rules
       weight: 6
     - name: Approbations de dossiers
-      url: incident_response/work_management/approvals
+      url: incident_response/case_management/approvals
       parent: case_management
       identifier: case_management_approvals
       weight: 7
     - name: "Outils d'IA"
-      url: incident_response/work_management/ai
+      url: incident_response/case_management/ai
       parent: case_management
       identifier: case_management_ai
       weight: 8
     - name: Agents personnalisés
-      url: incident_response/work_management/ai/custom_agents
+      url: incident_response/case_management/ai/custom_agents
       parent: case_management_ai
       identifier: case_management_ai_custom_agents
       weight: 801
     - name: Dépannage
-      url: incident_response/work_management/troubleshooting
+      url: incident_response/case_management/troubleshooting
       parent: case_management
       identifier: case_management_troubleshooting
       weight: 9

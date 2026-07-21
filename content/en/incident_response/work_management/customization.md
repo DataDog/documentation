@@ -38,8 +38,8 @@ Datadog provides five [built-in work item types][1], each designed for common wo
 
 ### Create a custom work item type
 
-1. Navigate to [**Settings > Shared Settings > Work Item Types**][2]. <!-- [TO VERIFY] -->
-2. Click **+ Create Work Item Type**. <!-- [TO VERIFY] -->
+1. Navigate to [**Settings > Shared Settings > Work Item Types**][2].
+2. Click **+ Create Work Item Type**.
 3. Provide a **Name** and an optional **Description**.
 4. Save your new work item type.
 5. (Optional) See the [custom attributes section](#custom-attributes) of this page to add custom attributes.
@@ -51,7 +51,7 @@ After you create a custom work item type, you must explicitly assign it to each 
 1. Back on the [**Settings** page][2], locate the target project under either **Starred Projects** or **Other Projects**.
 2. Expand the project menu by clicking on the project name.
 3. Click **General** to open the project's settings panel.
-4. Scroll down to the **Work Item Types** <!-- [TO VERIFY] --> section in the settings panel.
+4. Scroll down to the **Work Item Types** section in the settings panel.
 5. Under **From your organization**, open the dropdown and select the custom work item type you created.
 
 <!-- {{< img src="/incident_response/work_management/customization/enable_custom_attribute.png" alt="Enable a custom work item type in project settings" style="width:100%;" >}} -->
@@ -78,7 +78,7 @@ Custom attributes allow you to capture the structured data your team needs to wo
 
 You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a custom attribute:
 
-1. Navigate to [**Settings > Shared Settings > Work Item Types**][2]. <!-- [TO VERIFY] -->
+1. Navigate to [**Settings > Shared Settings > Work Item Types**][2].
 2. Click the desired work item type.
 3. Click **+ Add Attribute**.
 4. Provide:
@@ -102,7 +102,7 @@ Work Management supports customizable work item statuses. By default, work items
 
 ### Create a custom status
 
-1. Navigate to [**Settings > Shared Settings > Work Item Types**][2]. <!-- [TO VERIFY] -->
+1. Navigate to [**Settings > Shared Settings > Work Item Types**][2].
 2. Select the work item type you want to update.
 3. Scroll to the **Statuses** section.
 4. Add a new status under one of the three existing status groups: **Open, In Progress,** or **Closed**.

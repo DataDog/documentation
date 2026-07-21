@@ -47,7 +47,7 @@ Datadog Work Management provides a centralized workspace for triaging, tracking,
 
 To set up Work Management, and the Jira and ServiceNow integrations:
 1. Create a [Work Management project][5] for your team.
-1. In Datadog, go to [{{< ui >}}Work Management{{< /ui >}}<!-- [TO VERIFY] --> > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
+1. In Datadog, go to [{{< ui >}}Work Management{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][6]. In the list of projects, expand your project, go to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Datadog Monitors{{< /ui >}}, and turn on the {{< ui >}}Enable Datadog Monitors integration for this project{{< /ui >}} toggle. This generates your project's unique handle: `@case-{project_name}`.
 1. On the same page, under {{< ui >}}Integrations{{< /ui >}}, set up the Work Management Jira and/or ServiceNow integrations. When a new work item is created, Work Management can automatically open the corresponding Jira ticket or ServiceNow incident.
 1. In your monitor, go to {{< ui >}}Configure notifications and automations{{< /ui >}} and add the `@case-{project_name}` handle. When the monitor triggers:
    - Datadog automatically creates a new work item

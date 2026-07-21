@@ -80,7 +80,7 @@ To manually trigger a page:
 To automatically trigger a page, configure automated paging rules in your project settings:
 1. Go to [**Project Settings**][1] and click on a project to expand its settings.
 1. In the expanded menu, click **Integrations** > **Datadog On-Call**.
-1. Toggle on **Automatically page work items to On-Call**. <!-- [TO VERIFY] --> This opens the Paging Rule modal, where you can define your first rule.
+1. Toggle on **Automatically page work items to On-Call**. This opens the Paging Rule modal, where you can define your first rule.
 1. In the modal, enter a query. If a work item matches the specified query at any point in its lifecycle, Datadog automatically pages the designated team.
 1. Choose which team to page:
    - **Specific Team**: Select a particular team to always be paged when the rule is triggered.
@@ -156,7 +156,7 @@ In Project Settings, you can manage membership, configure the auto-closing of wo
 
 Manual incident declaration during high event volumes can cause delays and increase risk exposure during critical situations. Incident auto-escalation from Work Management allows you to automatically declare incidents when work items match your defined criteria, removing the need for manual intervention.
 
-Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate work items to Incidents**. <!-- [TO VERIFY] -->
+Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate work items to Incidents**.
 
 <!-- {{< img src="/incident_response/work_management/notifications_integrations/case_auto_escalation.png" alt="Work Management settings page showing incident auto-escalation configuration" style="width:70%;" >}} -->
 

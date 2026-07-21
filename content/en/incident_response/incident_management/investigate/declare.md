@@ -60,7 +60,7 @@ Declare an incident from [Secret Scanning][15] by clicking **Declare incident** 
 
 ## From a work item
 
-Declare an incident from [Work Management][5]. From the individual work item detail page, click **Declare incident**<!-- [TO VERIFY] --> to escalate a work item to an incident.
+Declare an incident from [Work Management][5]. From the individual work item detail page, click **Declare incident** to escalate a work item to an incident.
 
 <!-- {{< img src="incident_response/incident_management/investigate/declare/declare_case_management.png" alt="An example case page highlighting the Declare Incident button at the top of the page" style="width:90%;" >}} -->
 

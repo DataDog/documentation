@@ -43,7 +43,7 @@ attributes:
        - **Resource, Long Task, and Vitals Events**: 15 Days
   - product: Work Management
     data_type: |
-       - **Work items** <!-- [TO VERIFY] -->: Retained for the duration of the account
+       - **Cases** <!-- [TO VERIFY] -->: Retained for the duration of the account
   - product: CD Visibility
     data_type: |
        - **Deployments**: 30 days

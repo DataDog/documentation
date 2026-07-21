@@ -35,7 +35,7 @@ With Quick Actions, you can take action without leaving the status page. Respond
 | {{< ui >}}Mute{{< /ui >}}  | Create a [downtime][1] to mute monitor alerts. |
 | {{< ui >}}Resolve{{< /ui >}} | Temporarily set the monitor status to `OK` until its next evaluation. |
 | {{< ui >}}Declare Incident{{< /ui >}} | Escalate monitor alerts with [Incident Management][2]. |
-| {{< ui >}}Create Work Item{{< /ui >}} <!-- [TO VERIFY] --> | Create a [work item][3] to keep track of this alert investigation without leaving Datadog. |
+| {{< ui >}}Create Work Item{{< /ui >}} | Create a [work item][3] to keep track of this alert investigation without leaving Datadog. |
 | {{< ui >}}Run Workflow{{< /ui >}} | Run [Workflow][4] Automation with predefined snippets to run mitigation actions. |
 
 ### Resolve

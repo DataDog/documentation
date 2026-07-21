@@ -40,7 +40,7 @@ You can create a Work Management work item directly from the issue panel to grou
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}. <!-- [TO VERIFY] -->
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}.
 4. Choose the Work Management project in which the work item should be created. By default, the work item will automatically be created in the Error Tracking project.
 5. Click {{< ui >}}Create{{< /ui >}} to create the work item.
 
@@ -57,9 +57,9 @@ You can attach multiple Error Tracking issues to a single Work Management work i
 
 1. Navigate to the [Error Tracking Explorer][2].
 2. Click on an issue to open the issue panel.
-3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}. <!-- [TO VERIFY] -->
-4. In the {{< ui >}}Add to Existing Case{{< /ui >}} <!-- [TO VERIFY] --> tab, select the work item in which you want to group your issues.
-5. Click {{< ui >}}Attach to Case{{< /ui >}} <!-- [TO VERIFY] --> to attach the issue to the work item.
+3. In the issue panel, in the {{< ui >}}Actions{{< /ui >}} dropdown, click {{< ui >}}Add Case{{< /ui >}}.
+4. In the {{< ui >}}Add to Existing Case{{< /ui >}} tab, select the work item in which you want to group your issues.
+5. Click {{< ui >}}Attach to Case{{< /ui >}} to attach the issue to the work item.
 6. Repeat these actions on all the issues you want to add to this group.
 
 <!-- {{< img src="error_tracking/add-to-existing-case.png" alt="Add an Error Tracking issue to an existing work item" >}} -->

@@ -15,7 +15,7 @@ Datadog Event Management supports maintenance windows to suppress work item noti
 
 To create a [Maintenance Window][2]:
 1. Navigate to {{< ui >}}Event Management Settings{{< /ui >}}.
-1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to **Case Attributes** <!-- [TO VERIFY] --> in the left navigation bar.
+1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to **Work Item Attributes** in the left navigation bar.
 1. Click {{< ui >}}New Maintenance Window{{< /ui >}} in the top right.
 1. Enter a Maintenance Window name.
 1. Set conditions for the work items that should be impacted by this maintenance window using tags or attributes. By default, Event Management work items inherit tags from the alerts they correlate.
@@ -29,7 +29,7 @@ After you save, your Maintenance Window will be added to the Maintenance Window 
 To sync Maintenance Windows with ServiceNow changes so your ServiceNow changes create, update, or delete work item Maintenance Windows:
 1. See [Forward change requests to Datadog][3] and follow the steps to ingest ServiceNow changes.
 1. Navigate to {{< ui >}}Event Management Settings{{< /ui >}}.
-1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to **Case Attributes** <!-- [TO VERIFY] --> in the left navigation bar.
+1. Select {{< ui >}}Maintenance Windows{{< /ui >}} next to **Work Item Attributes** in the left navigation bar.
 1. Click {{< ui >}}Sync from ServiceNow{{< /ui >}} in the top right
 1. Optionally, define a filter for the ServiceNow changes that should create, update, or delete maintenance windows.
 1. Set conditions for the work items that should be impacted by this maintenance window using tags or attributes. You can dynamically reference a value from your ServiceNow changes by prefacing the attribute with `$`.

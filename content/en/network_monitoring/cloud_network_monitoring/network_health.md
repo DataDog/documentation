@@ -43,7 +43,7 @@ Each recommended action displays:
 - The impacted client service (the service making requests)
 - The impacted server service (the service receiving requests)
 
-Hover over a service name to pivot to APM, or click {{< ui >}}Remediate{{< /ui >}} to view remediation steps along with options to create a [{{< ui >}}New Workflow{{< /ui >}}][2], [{{< ui >}}Create a Work Item{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
+Hover over a service name to pivot to APM, or click {{< ui >}}Remediate{{< /ui >}} to view remediation steps along with options to create a [{{< ui >}}New Workflow{{< /ui >}}][2], [{{< ui >}}Create a Case{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
 
    {{< img src="network_performance_monitoring/network_health/recommended_actions_side_panel.png" alt="Recommended actions side panel of an affected service, showing remediation steps." style="width:100%;">}}
 
@@ -64,7 +64,7 @@ Expired or expiring TLS certificates can block secure connections between servic
 - {{< ui >}}Expiring certificates{{< /ui >}}: Certificates about to expire
 - {{< ui >}}Impacted services{{< /ui >}}: The client and server services affected by each certificate issue (note that the client "service" may be an AWS load balancer, such as an Application Load Balancer)
 
-Click an expired certificate to view steps for renewing it in AWS, or to create a [{{< ui >}}New Workflow{{< /ui >}}][2], [{{< ui >}}Create a Work Item{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
+Click an expired certificate to view steps for renewing it in AWS, or to create a [{{< ui >}}New Workflow{{< /ui >}}][2], [{{< ui >}}Create a Case{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
 
 ## DNS failures
 
@@ -87,7 +87,7 @@ TIMEOUT
 SERVFAIL
 : The DNS server failed to process a query, often due to a server-side problem.
 
-Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [{{< ui >}}New workflow{{< /ui >}}][2], [{{< ui >}}Create a Work Item{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
+Hover over a service name to pivot to APM, or click on a recommended action to view remediation steps along with options to create a [{{< ui >}}New workflow{{< /ui >}}][2], [{{< ui >}}Create a Case{{< /ui >}}<!-- [TO VERIFY] -->][3], or [{{< ui >}}Declare an Incident{{< /ui >}}][4].
 
 ## Security groups
 

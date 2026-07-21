@@ -113,7 +113,7 @@ For more information about a specific flaky test, use these options in the actio
 
 ## Create work items for flaky tests
 
-For any flaky test, you can create a work item and use [Work Management][4] to track any work toward remediation. Click the {{< ui >}}Create Work Item{{< /ui >}}<!-- [TO VERIFY] --> button or use the actions menu at the end of the row.
+For any flaky test, you can create a work item and use [Work Management][4] to track any work toward remediation. Click the {{< ui >}}Create Work Item{{< /ui >}} button or use the actions menu at the end of the row.
 
 ## Confirm fixes for flaky tests
 

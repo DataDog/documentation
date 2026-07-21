@@ -12,7 +12,7 @@ further_reading:
 
 Event Management correlates related events and automatically consolidates them into a single work item. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
-From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Work Items{{< /ui >}}<!-- [TO VERIFY] --> at the end of the same row. You can also click {{< ui >}}Work Management{{< /ui >}}<!-- [TO VERIFY] --> at the top of the page to view all work items with correlated events in [Work Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
+From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Work Items{{< /ui >}} at the end of the same row. You can also click {{< ui >}}Work Management{{< /ui >}} at the top of the page to view all work items with correlated events in [Work Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Work Item
 
