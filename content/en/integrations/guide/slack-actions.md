@@ -1,9 +1,11 @@
 ---
 title: Slack Actions
-description: "Utilize these Slack actions for the workspaces you have set up. Follow the [Slack integration documentation for setup.][1]"
-
+description: "Use Slack actions to manage incidents, on-call, monitors, dashboards, workflows, and accounts directly from a Slack workspace with the Datadog app installed."
+further_reading:
+- link: "/integrations/slack/?tab=datadogforslack"
+  tag: "Documentation"
+  text: "Slack Integration"
 ---
-
 ## Overview
 
 To run any Slack actions, type `/dd` in any workspace with the Datadog App installed to pull up an action tray listing all actions you can take. Alternatively, directly type out the action.
