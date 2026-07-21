@@ -48458,7 +48458,6 @@ components:
           $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
       required:
         - name
-        - policy
       type: object
     IncidentUserDefinedRoleDataAttributesResponse:
       description: Attributes of an incident user-defined role.
