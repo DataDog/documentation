@@ -77,16 +77,6 @@ There are no secret identifiers to configure.
 {{% /tab %}}
 {{< /tabs >}}
 
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| None           | 100               | 900                 |
-
 ## Metrics
 
 For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][15] documentation. To filter or group by Google Cloud Storage destination metrics, use the tag `component_type:datadog_archives_gcs`.
@@ -106,3 +96,13 @@ For [component metrics][13] and [destination buffer metrics][14] emitted by all 
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][5] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 100               | 900                 |

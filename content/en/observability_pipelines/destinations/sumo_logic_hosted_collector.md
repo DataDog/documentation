@@ -57,16 +57,6 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 {{% /tab %}}
 {{< /tabs >}}
 
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| None           | 10                | 1                   |
-
 ## Metrics
 
 For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
@@ -79,3 +69,13 @@ For [component metrics][6] and [destination buffer metrics][7] emitted by all de
 [6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |

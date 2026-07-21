@@ -74,16 +74,6 @@ Enter the name of the OpenSearch index. See [template syntax][3] if you want to 
 {{% /tab %}}
 {{< /tabs >}}
 
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| None           | 10                | 1                   |
-
 ## Metrics
 
 For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
@@ -99,3 +89,13 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 10                | 1                   |
