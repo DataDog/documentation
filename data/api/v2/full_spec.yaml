@@ -122169,9 +122169,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 27
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/bulk:
     post:
       description: Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.
@@ -122217,9 +122214,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 29
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/count:
     get:
       description: Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.
@@ -122283,9 +122277,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 28
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/link:
     get:
       description: Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.
@@ -122350,9 +122341,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 35
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.
       operationId: CreateCaseLink
@@ -122412,9 +122400,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 36
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/link/{link_id}:
     delete:
       description: Deletes an existing link between cases by link ID.
@@ -122443,9 +122428,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 37
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects:
     get:
       description: >-
@@ -122575,9 +122557,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 30
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}:
     delete:
       description: Remove a project using the project's `id`.
@@ -122728,9 +122707,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 32
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Marks a case project as a favorite for the current authenticated user.
       operationId: FavoriteCaseProject
@@ -122758,9 +122734,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 31
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/notification_rules:
     get:
       description: >-
@@ -123027,9 +123000,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.
       operationId: CreateCaseAutomationRule
@@ -123104,9 +123074,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}:
     delete:
       description: Permanently deletes an automation rule from a project.
@@ -123138,9 +123105,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Returns a single automation rule identified by its UUID, including its trigger, action, and current state (enabled/disabled).
       operationId: GetCaseAutomationRule
@@ -123195,9 +123159,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the trigger, action, name, or state of an existing automation rule.
       operationId: UpdateCaseAutomationRule
@@ -123273,9 +123234,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/disable:
     post:
       description: Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.
@@ -123331,9 +123289,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/enable:
     post:
       description: Enables a previously disabled automation rule so it triggers on matching case events.
@@ -123389,9 +123344,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 6
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/types:
     get:
       description: Get all case types
@@ -123581,9 +123533,6 @@ paths:
       tags:
         - Case Management Type
       x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/types/{case_type_id}/custom_attributes:
     get:
       description: Get all custom attribute config of case type
@@ -123761,9 +123710,6 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/views:
     get:
       description: Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.
@@ -123812,9 +123758,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 59
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.
       operationId: CreateCaseView
@@ -123870,9 +123813,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 60
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/views/{view_id}:
     delete:
       description: Permanently deletes a saved case view.
@@ -123901,9 +123841,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 63
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.
       operationId: GetCaseView
@@ -123945,9 +123882,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 61
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the name, query, or notification rule of an existing case view.
       operationId: UpdateCaseView
@@ -124003,9 +123937,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 62
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}:
     get:
       description: >-
@@ -124372,9 +124303,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 21
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
     delete:
       description: Delete custom attribute from case
@@ -124618,9 +124546,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 25
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/insights:
     delete:
       description: Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.
@@ -124704,9 +124629,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 34
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
         Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.
@@ -124790,9 +124712,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 33
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -124929,9 +124848,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 52
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/jira_issues:
     delete:
       description: Remove the link between a Jira issue and a case
@@ -124976,9 +124892,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 55
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: Link an existing Jira issue to a case
       operationId: LinkJiraIssueToCase
@@ -125042,9 +124955,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 54
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Create a new Jira issue and link it to a case
       operationId: CreateCaseJiraIssue
@@ -125105,9 +125015,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 53
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/notebook:
     post:
       description: Create a new investigation notebook and link it to a case
@@ -125164,9 +125071,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 57
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a case
@@ -125239,9 +125143,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 51
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/servicenow_tickets:
     post:
       description: Create a new ServiceNow incident ticket and link it to a case
@@ -125301,9 +125202,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 56
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/resolved_reason:
     post:
       description: Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.
@@ -125368,9 +125266,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 26
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/status:
     post:
       description: Update case status
@@ -125502,9 +125397,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 58
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/title:
     post:
       description: Update case title
@@ -125736,9 +125628,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 64
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/watchers/{user_uuid}:
     delete:
       description: Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.
@@ -125768,9 +125657,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 66
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.
       operationId: WatchCase
@@ -125799,9 +125685,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 65
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -158479,9 +158362,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 38
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).
       operationId: CreateMaintenanceWindow
@@ -158539,9 +158419,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 39
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/maintenance_windows/{maintenance_window_id}:
     delete:
       description: Permanently deletes a maintenance window.
@@ -158570,9 +158447,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 41
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the name, query, start time, or end time of an existing maintenance window.
       operationId: UpdateMaintenanceWindow
@@ -158632,9 +158506,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 40
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics:
     get:
       description: |-
