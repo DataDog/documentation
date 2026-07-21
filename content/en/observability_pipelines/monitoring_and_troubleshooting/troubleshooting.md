@@ -144,6 +144,18 @@ The curl command you use is based on the port you are using, as well as the path
 
 If you see the error `Too many files` and the Worker processes repeatedly restart, it could be due to a low file descriptor limit on the host. To resolve this issue for Linux environments, set `LimitNOFILE` in the systemd service configuration to `65,536` to increase the file descriptor limit.
 
+### Source send canceled error
+
+If you see error logs with the reason `Source send canceled`, events at the source level are getting dropped. This could be due to several reasons, including backpressure or Worker shut down or restarts. In the case of shut down or restarts, the error occurs when a source shuts down or restarts while events are in transit.
+
+To determine if the error is due to backpressure, use the [Observability Pipelines Overview][28] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
+
+1. Destination buffer utilization
+    - A buffer near its maximum capacity is a sign of backpressure. Consider [choosing a disk buffer][25] or increasing the buffer size to help absorb traffic spikes and mitigate backpressure. See [buffer metrics][24] to monitor buffer utilization.
+2. Worker CPU utilization
+    - Sustained high CPU usage on Workers during traffic spikes indicates the pipeline doesn't have enough compute capacity. See [Best practices for scaling Observability Pipelines][26] for guidance on sizing and autoscaling Workers.
+    - The Sensitive Data Scanner processor is CPU-intensive and can also cause high CPU usage. See [Best practices to optimize performance][27] for more information.
+
 ## General pipeline issues
 
 ### Missing environment variable
@@ -188,20 +200,6 @@ Protobuf encoding failed: Error converting timestamp field: Can't convert '2012-
 ```
 
 If your log timestamps are in string format and your Databricks table has a timestamp column declared as `TIMESTAMP` type, you must convert the string timestamp to timestamp format. See [Convert string timestamps to timestamp format][22] for more information.
-
-## Performance and scaling issues
-
-### "Source send canceled" error in logs
-
-If you see an error logs with the reason `Source send cancelled`, this means that events at the source level are getting dropped and could be due to several reasons, including backpressure or Worker shut down or restarts. In the case of shut down or restarts, the error occurs when a source shuts down or restarts while events are in transit.
-
-To determine if the error is due to backpressure, use the [Observability Pipelines Overview][28] dashboard to troubleshoot. You can filter by pipelines ID, host, Worker ID, and components. Check the following:
-
-1. Destination buffer utilization
-    - A buffer near its maximum capacity is a sign of backpressure. See [buffer metrics][24] to monitor buffer utilization, and consider [choosing a disk buffer][25] or increasing the buffer size to help absorb traffic spikes and mitigate backpressure.
-2. Worker CPU utilization
-    - Sustained high CPU usage on Workers during traffic spikes indicates the pipeline doesn't have enough compute capacity. See [Best practices for scaling Observability Pipelines][26] for guidance on sizing and autoscaling Workers.
-    - The Sensitive Data Scanner processor is CPU-intensive and can also cause high CPU usage. See [Best practices to optimize performance][27] for more information.
 
 [1]: /help/
 [2]: https://app.datadoghq.com/observability-pipelines
