@@ -47,7 +47,7 @@ To instrument only .NET applications running on IIS:
 
    Run the command from an administrator PowerShell session. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
 
-   The UI provides a PowerShell installer:
+   Use the PowerShell installer:
 
    ```powershell
    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '{{< region-param key="dd_site" >}}'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
