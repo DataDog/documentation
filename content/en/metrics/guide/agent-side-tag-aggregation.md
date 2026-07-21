@@ -35,7 +35,7 @@ Before you create Agent-side tag aggregation rules, complete the steps described
 1. [Enable Remote Configuration](#enable-remote-configuration) on the API keys used by your Agents.
 2. [Enable the Agent Data Plane](#enable-the-agent-data-plane).
 
-Agent-side tag aggregation is supported on Agent version 7.80.0 and later. Datadog recommends version 7.80.2 or later, which includes additional troubleshooting information in Agent flares.
+Agent-side tag aggregation is supported on Agent version 7.80.0 and later. Datadog recommends version 7.81.0 or later, which includes broad backward compatibility of the Agent Data Plane with pre-existing Agent configuration options.
 
 ### Enable Remote Configuration
 
@@ -49,7 +49,7 @@ Comprehensive instructions are available in the [Remote Configuration documentat
 
 ### Enable the Agent Data Plane
 
-Upgrade your Agents to version 7.80.0 or later (7.80.2 or later recommended) and enable the Agent Data Plane. Agent-side tag aggregation requires the Agent Data Plane, a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
+Upgrade your Agents to version 7.80.0 or later (7.81.0 or later recommended) and enable the Agent Data Plane. Agent-side tag aggregation requires the Agent Data Plane, a high-performance data pipeline that lowers the combined resource usage of Agent processes and containers.
 
 When the Agent Data Plane is enabled:
 
@@ -73,7 +73,7 @@ spec:
   override:
     nodeAgent:
       image:
-        tag: "7.80.2" # use 7.80.2 or later
+        tag: "7.81.0" # use 7.81.0 or later
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -89,13 +89,13 @@ datadog:
     enabled: true # enable the Agent Data Plane feature
 agents:
   image:
-    tag: "7.80.2" # use 7.80.2 or later
+    tag: "7.81.0" # use 7.81.0 or later
 {{< /code-block >}}
 
 {{% /tab %}}
 {{% tab "Linux VM" %}}
 
-With Agent version 7.80.0 or later (7.80.2 or later recommended), add the following to your `datadog.yaml`:
+With Agent version 7.80.0 or later (7.81.0 or later recommended), add the following to your `datadog.yaml`:
 
 {{< code-block lang="yaml" >}}
 data_plane:
