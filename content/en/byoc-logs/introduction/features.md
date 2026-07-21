@@ -22,6 +22,7 @@ The following log features are supported:
 - Facet-based filtering and drill-down
 - Download CSV
 - Pagination
+- Notebooks (Preview)
 
 **Dashboards and monitors**
 - Dashboards with BYOC Logs data
@@ -45,7 +46,6 @@ The following log features are supported:
 **AI features**
 - Bits Investigation (Preview)
 - MCP Server (Preview)
-- Notebooks (Preview)
 
 ## Unsupported features
 
@@ -62,7 +62,6 @@ Feature support is actively evolving. The following are not currently supported:
 The following query capabilities are not supported by ddSQL:
 
 - **CIDR query**
-- **Sorting by text field**
 - **Group by transactions**
 - **Advanced query capabilities**:
   - Calculated fields
