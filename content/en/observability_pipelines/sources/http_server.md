@@ -56,9 +56,9 @@ To configure authentication tokens, enable the {{< ui >}}Configure authenticatio
 1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered.
 1. (Optional) Enter the field and value.
 1. Select the path to token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
-	- {{< ui >}}Header{{< /ui >}} for an authorization header. Optionally, enter the header name.
-	- {{< ui >}}Address{{< /ui >}} for an IP address.
-	- {{< ui >}}Path{{< /ui >}} for an endpoint path.
+	- {{< ui >}}Header{{< /ui >}} for an authorization header (optionally, enter the header name)
+	- {{< ui >}}Address{{< /ui >}} for an IP address
+	- {{< ui >}}Path{{< /ui >}} for an endpoint path
 
 ## Secret defaults
 
