@@ -59,8 +59,6 @@ Feature support is actively evolving. The following are not currently supported:
 
 ### Query capabilities not currently supported
 
-The following query capabilities are not supported by ddSQL:
-
 - **CIDR query**
 - **Group by transactions**
 - **Advanced query capabilities**:
@@ -70,5 +68,6 @@ The following query capabilities are not supported by ddSQL:
   - Join
   - Filter on reference tables
   - Filter with subquery
+  - DDSQL
 
 [1]: /api/latest/logs-restriction-queries/
