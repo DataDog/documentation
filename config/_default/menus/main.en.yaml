@@ -6393,6 +6393,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Stale Flags
+      url: feature_flags/concepts/stale_flags
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_stale_flags
+      weight: 309
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
