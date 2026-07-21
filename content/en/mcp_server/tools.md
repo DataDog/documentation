@@ -403,9 +403,9 @@ Lists Audit Trail events over a time window with support for pagination and opti
 *Permissions Required: `Audit Trail Read`*\
 Translates a natural-language description into an Audit Trail query string. If you are uncertain of query syntax when searching Audit Trail events, use this tool first with a description of the events you would like to retrieve, then pass the returned query and timestamps directly into `search_audit_events`.
 
-- Give me an Audit Trail query to see who created new monitors in the past 2 weeks.
+- Provide an Audit Trail query to see who created new monitors in the past 2 weeks.
 - Create an Audit Trail query to show when the dashboard `abc123` was deleted.
-- Generate an Audit Trail query to check which actions were executed through the use of an MCP.
+- Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
 
 ## Cases
 
