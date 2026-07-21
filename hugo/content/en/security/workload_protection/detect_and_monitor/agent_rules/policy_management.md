@@ -17,7 +17,7 @@ In addition to the out-of-the-box (OOTB) [default Agent rules][7], you can write
    The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
 5. In **New Rule**, add custom Agent rules to the policy. To create a new Agent rule, see [Create a custom Agent rule][14].
-6. Click **Edit** next to **Deployed on 0 agents**. 
+6. Click **Edit** next to **Deployed on 0 agents**.
 7. Add [tags][18] to the policy to target specific infrastructure.
 8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm. This uses [Remote Configuration](#remote-configuration), as detailed below in that page.
 
@@ -27,7 +27,7 @@ In addition to the out-of-the-box (OOTB) [default Agent rules][7], you can write
 
 When Datadog-managed policies are updated by Datadog, they are automatically deployed to your infrastructure.
 
-To control when a new policy version is deployed to your infrastructure, you can pin the policy to its current version. Pinning a policy version prevents policy updates from being automatically rolled out when Datadog releases a new policy version. 
+To control when a new policy version is deployed to your infrastructure, you can pin the policy to its current version. Pinning a policy version prevents policy updates from being automatically rolled out when Datadog releases a new policy version.
 
 To pin a policy, do the following:
 
@@ -49,15 +49,14 @@ Tags identify two things: the Agents using the policy and the infrastructure whe
 
 1. Go to [Agent Configuration][6].
 2. Open a policy and click **Edit**.
-3.  Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
+3. Enter tags and click **Apply**. If the policy is enabled, the policy is applied to the tag targets.
 
-When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agent. For example, `Tags match 144 agents`. 
+When you add tags, Datadog displays how many agents the tags target as well the infrastructure running each agent. For example, `Tags match 144 agents`.
 
 ## Create a custom Agent rule {#create-a-custom-agent-rule}
 
 You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][21], you reference the custom Agent rule and add expression parameters. To combine Agent and detection rules in one flow, see [Create the custom Agent and detection rules together][23].
 Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
-
 
 1. Go to [Agent Configuration][6].
 2. Create a new policy or open an existing one.
@@ -117,13 +116,13 @@ Copy the `default.policy` file to the target host in the `/etc/datadog-agent/run
 
 To apply the changes, do **one** of the following:
 
-- Reload runtime policies (no full Agent restart):
+-   Reload runtime policies (no full Agent restart):
 
-  ```bash
-  sudo /opt/datadog-agent/embedded/bin/system-probe runtime policy reload
-  ```
+    ```bash
+    sudo /opt/datadog-agent/embedded/bin/system-probe runtime policy reload
+    ```
 
-- Or restart the [Datadog Agent](/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent).
+-   Or restart the [Datadog Agent](/agent/configuration/agent-commands/?tab=agentv6v7#restart-the-agent).
 
 {{% /tab %}}
 
@@ -134,21 +133,21 @@ To apply the changes, do **one** of the following:
 
     ```yaml
     securityAgent:
-      # [...]
-      runtime:
-        # datadog.securityAgent.runtime.enabled
-        # Set to true to enable Security Runtime Module
-        enabled: true
-        policies:
-          # datadog.securityAgent.runtime.policies.configMap
-          # Place custom policies here
-          configMap: jdefaultpol
-      # [...]
+        # [...]
+        runtime:
+            # datadog.securityAgent.runtime.enabled
+            # Set to true to enable Security Runtime Module
+            enabled: true
+            policies:
+                # datadog.securityAgent.runtime.policies.configMap
+                # Place custom policies here
+                configMap: jdefaultpol
+        # [...]
     ```
 
 3. Upgrade the Helm chart with `helm upgrade <RELEASENAME> -f values.yaml --set datadog.apiKey=<APIKEY> datadog/datadog`.
 
-    **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with  `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
+    **Note:** If you need to make further changes to `default.policy`, you can either use `kubectl edit cm jdefaultpol` or replace the configMap with `kubectl create configmap jdefaultpol --from-file default.policy -o yaml --dry-run=client | kubectl replace -f -`.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -166,10 +165,9 @@ Deleting a rule from [Rules configuration][24] removes it from **all policies** 
 
 Here are some important [role and permissions][11] to use for custom rules RBAC:
 
-- The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Automated response][12] feature used to enable the blocking mode in the rules.
-  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
-- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
-
+-   The `security_monitoring_cws_agent_rules_actions` permission can be used to turn on and configure the [Automated response][12] feature used to enable the blocking mode in the rules.
+    -   To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
+-   The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule.
 
 [3]: https://app.datadoghq.com/security/workload-protection/policies
 [4]: https://app.datadoghq.com/security/configuration/agent-rules
