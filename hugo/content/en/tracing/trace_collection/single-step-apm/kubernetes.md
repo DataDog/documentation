@@ -45,6 +45,8 @@ Enabling Single Step Instrumentation across your cluster automatically sends tra
 
 Use the following commands to enable SSI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
 
+These examples use the `datadog` namespace. Replace it if your Agent is installed elsewhere.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -147,7 +149,7 @@ To generate the configuration through the UI, go to the [Install the Datadog Age
 1. Confirm the Agent is healthy and the APM Agent is running. Replace `<AGENT_POD>` with the name of a node Agent pod:
 
    ```shell
-   kubectl exec -it <AGENT_POD> -n datadog -- agent status
+   kubectl exec <AGENT_POD> -n datadog -- agent status
    ```
 
    Check the **APM Agent** section of the output.

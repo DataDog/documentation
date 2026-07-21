@@ -50,7 +50,7 @@ docker run -d --name dd-agent \
   registry.datadoghq.com/agent:7
 ```
 
-**Note**: Run only one Datadog Agent per node. If the Agent container already exists, redeploy it with the command above. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
+**Note**: Run only one Datadog Agent per node. If a Datadog Agent container already exists, update its definition (or your Docker Compose file) with these settings and recreate it, rather than starting a second Agent. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
 
 After the commands complete, restart your applications.
 
@@ -90,7 +90,7 @@ You can also select versions from dropdowns in Datadog: on the [Install the Data
 1. Confirm the Agent is healthy and the APM Agent is running:
 
    ```shell
-   docker exec -it dd-agent agent status
+   docker exec dd-agent agent status
    ```
 
    Check the **APM Agent** section of the output.

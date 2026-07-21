@@ -126,7 +126,7 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Check the **APM Agent** section of the output.
 
-1. After the instrumented IIS applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
+1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
