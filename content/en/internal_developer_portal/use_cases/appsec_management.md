@@ -1,5 +1,6 @@
 ---
 title: Manage App and API Protection Posture Across Development Teams
+description: Use Catalog to surface security signals, track third-party dependencies, and enforce security standards across development teams and services.
 aliases:
   - /tracing/software_catalog/guides/appsec_management
   - /software_catalog/guides/appsec_management

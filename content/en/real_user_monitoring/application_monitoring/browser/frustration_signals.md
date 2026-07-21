@@ -67,15 +67,15 @@ Frustration signals require actions. Enabling `trackFrustrations` automatically 
 
 ## Usage
 
-Frustration signals appear as high-level datapoints representing sources of user frustration on the [**RUM Applications** page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the **Options** button and add a column for `@session.frustration.count`.
+Frustration signals appear as high-level datapoints representing sources of user frustration on the [{{< ui >}}RUM Applications{{< /ui >}} page][1]. To display a list of frustration counts in the [RUM Explorer][2], click the {{< ui >}}Options{{< /ui >}} button and add a column for `@session.frustration.count`.
 
 ### Application list
 
-Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click **Frustrated Sessions** to access sessions with a frustration signal.
+Hover over the list of browser sessions and click on a session to observe a user's frustrated click behavior. Or, click {{< ui >}}Frustrated Sessions{{< /ui >}} to access sessions with a frustration signal.
 
 ### Explore the frustration signals dashboard
 
-The **Frustration Signals** dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest number of frustration signals.
+The {{< ui >}}Frustration Signals{{< /ui >}} dashboard provides an overview of frustration levels across your application, showing you topics like the most frustrated users and pages with the highest number of frustration signals.
 
 You can clone this dashboard and customize it to fit your needs. For more information, see [Frustration Signals Dashboard][3].
 
@@ -93,7 +93,7 @@ Frustration Count
 
 #### Sessions
 
-Click on a session with a value in the **Frustration Count** column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, or `error click`) and the event timeline, which shows what occurred during the session.
+Click on a session with a value in the {{< ui >}}Frustration Count{{< /ui >}} column to examine the user frustration detected. You can see the type of signal (`rage click`, `dead click`, or `error click`) and the event timeline, which shows what occurred during the session.
 
 #### Views
 
@@ -107,15 +107,15 @@ The performance waterfall displays actions containing frustration signals.
 
 #### Actions
 
-The **Actions** tab displays the `frustration detected` tag if the selected action contains a frustration signal.
+The {{< ui >}}Actions{{< /ui >}} tab displays the `frustration detected` tag if the selected action contains a frustration signal.
 
-If multiple frustration signals occur in an action, they are displayed under **What Happened** in the action panel.
+If multiple frustration signals occur in an action, they are displayed under {{< ui >}}What Happened{{< /ui >}} in the action panel.
 
 {{< img src="real_user_monitoring/frustration_signals/actions_panel_multiple_frustration_signals.png" alt="Multiple frustration signal types detected in the action under What Happened" style="width:90%;" >}}
 
 #### Errors
 
-Click on an error in the **Errors** tab to open a side panel with error details. You can see if a frustration signal occurred.
+Click on an error in the {{< ui >}}Errors{{< /ui >}} tab to open a side panel with error details. You can see if a frustration signal occurred.
 
 {{< img src="real_user_monitoring/frustration_signals/errors_tab.png" alt="Errors Tab in the Actions side panel" style="width:90%;" >}}
 

@@ -45,6 +45,9 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "Source Code"
     text: "Source code"
+  - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
+    tag: "Learning Center"
+    text: "Configure and manage the APM SDK for your applications"
 ---
 
 ## Compatibility requirements
@@ -226,7 +229,7 @@ After enabling the .NET Tracer for your service:
 
 2. Create application load.
 
-3. In Datadog, navigate to [**APM** > **APM Traces**][3].
+3. In Datadog, navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}APM Traces{{< /ui >}}][3].
 
 ## Configuration
 

@@ -296,6 +296,11 @@
     },
     {
       "group": "ci_visibility_pipelines",
+      "suffix": "_4007074677",
+      "description": "Send running job event returns \"Request accepted for processing\" response"
+    },
+    {
+      "group": "ci_visibility_pipelines",
       "suffix": "_2341150096",
       "description": "Send running pipeline event returns \"Request accepted for processing\" response"
     },
@@ -587,6 +592,13 @@
       "group": "confluent_cloud",
       "suffix": "",
       "description": "Update Confluent account returns \"OK\" response"
+    }
+  ],
+  "ListDORADeployments": [
+    {
+      "group": "dora_metrics",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
     }
   ],
   "CreateDORADeployment": [
@@ -1088,6 +1100,34 @@
       "description": "Update a personal access token returns \"OK\" response"
     }
   ],
+  "CreateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create a new LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "CreateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update a specific LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
   "AggregateLogs": [
     {
       "group": "logs",
@@ -1265,6 +1305,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Create a tag indexing rule returns \"Created\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2435129406",
+      "description": "Create a tag indexing rule with exclude-mode tag usage fields returns \"Created\" response"
     }
   ],
   "ReorderTagIndexingRules": [
@@ -1502,6 +1547,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag indexing rule returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4127399471",
+      "description": "Update a tag indexing rule with exclude-mode tag usage fields returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [
@@ -1659,6 +1709,21 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_620504950",
+      "description": "Validate an observability pipeline with ClickHouse destination arrow_stream format returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_1238441879",
+      "description": "Validate an observability pipeline with ClickHouse destination returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_253109967",
+      "description": "Validate an observability pipeline with ClickHouse destination with all fields set returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_1785209526",
       "description": "Validate an observability pipeline with HTTP server source valid_tokens returns \"OK\" response"
     },
@@ -1709,8 +1774,23 @@
     },
     {
       "group": "observability_pipelines",
+      "suffix": "_3928499240",
+      "description": "Validate an observability pipeline with parse grok processor include rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_3345949653",
+      "description": "Validate an observability pipeline with parse grok processor source rules returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
       "suffix": "_2899320203",
       "description": "Validate an observability pipeline with source secret key returns \"OK\" response"
+    },
+    {
+      "group": "observability_pipelines",
+      "suffix": "_337125830",
+      "description": "Validate an observability pipeline with websocket source bearer auth returns \"OK\" response"
     }
   ],
   "CreateOktaAccount": [

@@ -16,9 +16,9 @@ further_reading:
 
 Create a RUM application in Datadog to get your credentials:
 
-1. Go to [**Digital Experience > Performance Summary**][2].
-2. Click **New Application**.
-3. Select **JS**, enter an application name, and click **Create Application**.
+1. Go to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][2].
+2. Click {{< ui >}}New Application{{< /ui >}}.
+3. Select {{< ui >}}JS{{< /ui >}}, enter an application name, and click {{< ui >}}Create Application{{< /ui >}}.
 4. Copy the `applicationId` and `clientToken` values.
 
 <div class="alert alert-info">If you store these in <code>.env.local</code>, prefix them with <code>NEXT_PUBLIC_</code> to expose them to the browser. See <a href="https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables#bundling-environment-variables-for-the-browser" target="_blank">Next.js environment variables</a>.</div>

@@ -40,71 +40,71 @@ In the Network Topology Map, the following navigation options are available:
 
 ### Group by
 
-Under Group By, use **tags** such as `location` and `vendor` to select how you want to visualize your devices:
+Under {{< ui >}}Group By{{< /ui >}}, use tags such as `location` and `vendor` to select how you want to visualize your devices:
 
 {{< img src="/network_device_monitoring/network_topology_map/device-topology-group_by_2.png" alt="A Group by control showing tags for location and vendor." style="width:90%;" >}}
 
 ### Filter devices
 
-Select the **+ Filter** dropdown to refine which devices are displayed on the Device Topology Map.
+Select the {{< ui >}}+ Filter{{< /ui >}} dropdown to refine which devices are displayed on the Device Topology Map.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_topology_filter_3.png" alt="The Device Topology Map with the filter dropdown open." style="width:90%;" >}}
 
-**Note:** The **Filter Devices** setting determines which devices appear on the Device Topology Map for all queries, including those that filter by a device facet in the search bar.
+**Note:** The {{< ui >}}Filter Devices{{< /ui >}} setting determines which devices appear on the Device Topology Map for all queries, including those that filter by a device facet in the search bar.
 
 ### Resources
 
-Use the **Resource** dropdown to filter the diagram by specific device types, such as Firewalls, Access Points, and Routers.
+Use the {{< ui >}}Resource{{< /ui >}} dropdown to filter the diagram by specific device types, such as Firewalls, Access Points, and Routers.
 
 {{< img src="/network_device_monitoring/network_topology_map/resources_dropdown.png" alt="The Device Topology Map with the Resources drop-down open, and Unmonitored Device un-checked." style="width:30%;" >}}
 
-By default, the **Unmonitored Device** option is unchecked, which hides devices that are not directly monitored by Network Device Monitoring but are discovered through LLDP/CDP from adjacent monitored devices. Check this option to display these unmonitored devices on the diagram.
+By default, the {{< ui >}}Unmonitored Device{{< /ui >}} option is unchecked, which hides devices that are not directly monitored by Network Device Monitoring but are discovered through LLDP/CDP from adjacent monitored devices. Check this option to display these unmonitored devices on the diagram.
 
 ## Investigating devices
 
 In addition to showing an overview of your network's physical connections, the Device Topology Map lets you investigate individual devices to understand their connections, flows, and overall status. Hover over a device to see its status and key metrics, or click a device to open the NDM device view with details such as its IP address, tags, throughput, CPU, and memory.
 
-While investigating a device, click the **Open Device Page** dropdown in the top right of the device view to navigate to [NetFlow Monitoring][1] or other related pages for deeper investigation.
+While investigating a device, click the {{< ui >}}Open Device Page{{< /ui >}} dropdown in the top right of the device view to navigate to [NetFlow Monitoring][1] or other related pages for deeper investigation.
 
 {{< img src="/network_device_monitoring/network_topology_map/network_topology_map_device_inspect_view_7.png" alt="The Network Device Topology Map with a device selected, displaying information in the NDM device view." style="width:100%;" >}}
 
 ### Dependencies
 
-The **Dependencies** section in the NDM device view shows the number of physically connected devices and VPN tunnels at a glance, along with a visual graph of neighboring devices.
+The {{< ui >}}Dependencies{{< /ui >}} section in the NDM device view shows the number of physically connected devices and VPN tunnels at a glance, along with a visual graph of neighboring devices.
 
 {{< img src="/network_device_monitoring/network_topology_map/topology_dependencies.png" alt="The NDM device view showing the Dependencies section with a graph of connected devices." style="width:100%;" >}}
 
-Click **View dependencies** to open the full device page. On the **Dependencies** tab, use the **Physical** or **VPN** filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
+Click {{< ui >}}View dependencies{{< /ui >}} to open the full device page. On the {{< ui >}}Dependencies{{< /ui >}} tab, use the {{< ui >}}Physical{{< /ui >}} or {{< ui >}}VPN{{< /ui >}} filters to switch between physical connections and VPN tunnels (VPN dependencies require [VPN Monitoring][12] to be configured). The physical view displays a topology graph alongside a table of connected devices showing their status, device name, IP address, monitors, local interface, and remote interface.
 
 {{< img src="/network_device_monitoring/network_topology_map/ndm_summary_dependencies.png" alt="The Dependencies tab on the NDM device page with the Physical filter selected, showing a topology graph and a table of connected devices with status, IP address, and interface details." style="width:100%;" >}}
 
 ### Metrics
 
-Click the **Metrics** tab in the NDM device view to see key metrics for the device, including CPU usage, memory usage, and throughput. Summary stats are displayed at the top, and each metric is shown as a graph over time. Click **View all metrics** to explore the full list of collected metrics.
+Click the {{< ui >}}Metrics{{< /ui >}} tab in the NDM device view to see key metrics for the device, including CPU usage, memory usage, and throughput. Summary stats are displayed at the top, and each metric is shown as a graph over time. Click {{< ui >}}View all metrics{{< /ui >}} to explore the full list of collected metrics.
 
 {{< img src="/network_device_monitoring/network_topology_map/metrics_3.png" alt="The NDM device view with the Metrics tab open, showing CPU, memory, and throughput graphs." style="width:100%;" >}}
 
 ### Traffic
 
-Click the **Traffic** tab to view total, inbound, and outbound throughput for the device. A traffic graph shows activity over time, and the **Top Conversations** table lists the highest-volume source-to-destination flows with bit rate, packet rate, and total bytes. Click **View traffic** to investigate further on the device summary page, and in [NetFlow Monitoring][1].
+Click the {{< ui >}}Traffic{{< /ui >}} tab to view total, inbound, and outbound throughput for the device. A traffic graph shows activity over time, and the {{< ui >}}Top Conversations{{< /ui >}} table lists the highest-volume source-to-destination flows with bit rate, packet rate, and total bytes. Click {{< ui >}}View traffic{{< /ui >}} to investigate further on the device summary page, and in [NetFlow Monitoring][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/traffic_2.png" alt="The NDM device view with the Traffic tab open, showing throughput stats, a traffic graph, and a Top Conversations table." style="width:100%;" >}}
 
 ### Events
 
-Click the **Events** tab to view Syslog messages and SNMP traps in a single, combined view. Use filters to narrow results by event type. Spikes in event volume are visually highlighted, helping you identify and investigate errors.
+Click the {{< ui >}}Events{{< /ui >}} tab to view Syslog messages and SNMP traps in a single, combined view. Use filters to narrow results by event type. Spikes in event volume are visually highlighted, helping you identify and investigate errors.
 
 {{< img src="/network_device_monitoring/network_topology_map/events.png" alt="The NDM device view with the Events tab open, showing Syslog messages and SNMP traps." style="width:100%;" >}}
 
 ### View flow details
 
-To explore a device's traffic sources, destinations, and volume, click the **Open Device Page** dropdown and select **NetFlow Monitoring**. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
+To explore a device's traffic sources, destinations, and volume, click the {{< ui >}}Open Device Page{{< /ui >}} dropdown and select {{< ui >}}NetFlow Monitoring{{< /ui >}}. The data is automatically filtered by the device's `@device.ip`. For more information, see [NetFlow Monitoring][1].
 
 {{< img src="/network_device_monitoring/network_topology_map/netflow_tab_4.png" alt="The NDM device view with the Open Device Page dropdown showing the NetFlow Monitoring option." style="width:100%;" >}}
 
 ### Device settings
 
-Click the **Device Settings** icon in the NDM device view to open the Device Settings panel. The **Information** tab displays general details (name, namespace, and description), network details (IP address, subnet, and geolocation), and hardware details (model, vendor, OS, and version). The **Tags** tab lets you view and manage tags associated with the device.
+Click the {{< ui >}}Device Settings{{< /ui >}} icon in the NDM device view to open the Device Settings panel. The {{< ui >}}Information{{< /ui >}} tab displays general details (name, namespace, and description), network details (IP address, subnet, and geolocation), and hardware details (model, vendor, OS, and version). The {{< ui >}}Tags{{< /ui >}} tab lets you view and manage tags associated with the device.
 
 {{< img src="/network_device_monitoring/network_topology_map/device_settings.png" alt="The Device Settings panel for an NDM device, showing the Information tab with general, network, and hardware details." style="width:90%;" >}}
 
@@ -167,7 +167,7 @@ There are no devices because NDM is not configured.
 
 {{< img src="/network_device_monitoring/network_topology_map/no_connections_found.png" alt="The no devices found message that is displayed when NDM is either not configured or because of filtering." style="width:80%;" >}}
 
-- Turn the **Unmonitored Device** selection on to show the unmonitored devices.
+- Turn the {{< ui >}}Unmonitored Device{{< /ui >}} selection on to show the unmonitored devices.
 - Use categorization tag to help understand your map view with information hierarchy.
 
 ### Missing devices/connections
@@ -191,17 +191,17 @@ sudo -u dd-agent datadog-agent snmp walk <DEVICE_IP> 1.3.6.1.4.1.9.9.23
 
 ### Missing connections or links
 
-If your device is exposing topology data with LLDP or CDP but some of the connections are missing, verify that the **Unmonitored Device** selection is off.
+If your device is exposing topology data with LLDP or CDP but some of the connections are missing, verify that the {{< ui >}}Unmonitored Device{{< /ui >}} selection is off.
 
 ### Unmonitored devices showing on map
 
 The Device Topology Map shows all devices discovered with LLDP or CDP. These can be new devices that are not already monitored with SNMP or existing devices that were not [resolved](#device-resolution) to the equivalent monitored device.
-You can use the **Unmonitored Device** selection to hide these nodes.
+You can use the {{< ui >}}Unmonitored Device{{< /ui >}} selection to hide these nodes.
 
 ### Device duplicated on map
 
 The Device Topology Map shows all devices discovered with LLDP and/or CDP. In some cases, these devices are already monitored with SNMP but can not be [resolved](#device-resolution) to the equivalent monitored device. In this case, the device is shown twice: one node representing the monitored device and one node representing the LLDP/CDP discovered device.
-Use the **Unmonitored Device** selection to hide the unmonitored nodes.
+Use the {{< ui >}}Unmonitored Device{{< /ui >}} selection to hide the unmonitored nodes.
 
 ### Borderless or black nodes on the map
 

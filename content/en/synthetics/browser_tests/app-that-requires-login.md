@@ -52,7 +52,7 @@ Opening a pop-up in incognito mode allows you to start your test's recording fro
 
 ### SSO login
 
-If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default **Navigate to URL** step.
+If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default {{< ui >}}Navigate to URL{{< /ui >}} step.
 
 Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
 
@@ -96,7 +96,7 @@ You can manually apply these headers, cookies, and credentials to the recording 
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
+Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
 After you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and use them in your login steps.
 

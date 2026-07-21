@@ -28,7 +28,7 @@ Enable Kotlin Multiplatform Crash Reporting and Error Tracking to get comprehens
 - Deobfuscated Kotlin Multiplatform (iOS and Android) crash reports
 - Trend analysis with Kotlin Multiplatform error tracking
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -120,7 +120,7 @@ To test your implementation:
    }
    ```
 
-3. After the crash happens, restart your application and wait for the Kotlin Multiplatform SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the Kotlin Multiplatform SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Further Reading
 

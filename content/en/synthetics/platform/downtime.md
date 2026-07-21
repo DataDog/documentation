@@ -37,28 +37,28 @@ With Synthetic Monitoring Scheduled Downtime, you can:
 
 ## Create a downtime
 
-1. Navigate to [**Digital Experience > Synthetic Monitoring & Testing > Settings**][2] and click **Downtimes** in the left sidebar.
-2. Click **+ New Downtime**.
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][2] and click {{< ui >}}Downtimes{{< /ui >}} in the left sidebar.
+2. Click {{< ui >}}+ New Downtime{{< /ui >}}.
 3. Enter a name for the downtime.
 4. Define one or more time slots to support recurring or multi-window schedules.
 5. Select the Synthetic tests the downtime applies to.
 6. Optionally, assign tags, environment, or team metadata.
-7. Click **Save**.
+7. Click {{< ui >}}Save{{< /ui >}}.
 
 Downtimes can be saved in an enabled or disabled state and modified at any time.
 
 ## Manage downtimes
 
-The **Downtimes** page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the month.
+The {{< ui >}}Downtimes{{< /ui >}} page provides a list and calendar view of all configured downtimes. Use the calendar to see how scheduled time slots are distributed across the month.
 
 {{< img src="synthetics/settings/synthetics_downtimes_updated.png" alt="The Downtimes page in Synthetic Monitoring Settings showing a list of configured downtimes on the left with a monthly calendar view of their scheduled time slots on the right" style="width:90%;" >}}
 
 Use the filters at the top of the page to find specific downtimes:
 
-- **Tag**: Filter by associated tags.
-- **Environment**: Filter by environment.
-- **Team**: Filter by team.
-- **Status**: Filter by enabled or disabled status.
+- {{< ui >}}Tag{{< /ui >}}: Filter by associated tags.
+- {{< ui >}}Environment{{< /ui >}}: Filter by environment.
+- {{< ui >}}Team{{< /ui >}}: Filter by team.
+- {{< ui >}}Status{{< /ui >}}: Filter by enabled or disabled status.
 
 To modify or disable a downtime without deleting it, click the three-dot menu next to a downtime row.
 
@@ -68,12 +68,12 @@ To modify or disable a downtime without deleting it, click the three-dot menu ne
 
 When creating a new Synthetic test, you can attach an existing downtime from the test configuration form:
 
-1. In the test creation form, navigate to the **Downtimes** section.
-2. Click **Select downtimes** and choose an existing downtime.
+1. In the test creation form, navigate to the {{< ui >}}Downtimes{{< /ui >}} section.
+2. Click {{< ui >}}Select downtimes{{< /ui >}} and choose an existing downtime.
 
 The test automatically pauses during the downtime's scheduled time slots.
 
-**Note**: You cannot create a downtime from the test creation form. To create one, navigate to [**Settings > Downtimes**][2].
+**Note**: You cannot create a downtime from the test creation form. To create one, navigate to [{{< ui >}}Settings{{< /ui >}} > {{< ui >}}Downtimes{{< /ui >}}][2].
 
 {{< img src="synthetics/settings/add_downtime_to_test_2.png" alt="The Downtimes section in the test creation form showing a Select downtimes dropdown expanded with available downtimes listed and a Manage downtimes link" style="width:90%;" >}}
 
@@ -81,9 +81,9 @@ The test automatically pauses during the downtime's scheduled time slots.
 
 To apply an existing downtime to multiple tests or test suites at once:
 
-1. Navigate to [**Digital Experience > Synthetic Monitoring & Testing**][3].
+1. Navigate to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}][3].
 2. Select one or more tests or test suites using the checkboxes.
-3. Click **Add to Downtime** in the bulk actions bar.
+3. Click {{< ui >}}Add to Downtime{{< /ui >}} in the bulk actions bar.
 4. Select an existing downtime from the list.
 
 {{< img src="synthetics/settings/bulk_add_downtimes.png" alt="The Synthetic Monitoring Tests page with two tests selected and the Add to Downtime button highlighted in the bulk actions bar" style="width:90%;" >}}

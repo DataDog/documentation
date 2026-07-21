@@ -75,7 +75,7 @@ Agent (v7.x.x)
   Log Level: info
 ```
 
-There will also be an **OTel Agent** status section that includes OpenTelemetry information:
+There will also be an {{< ui >}}OTel Agent{{< /ui >}} status section that includes OpenTelemetry information:
 
 ```text
 ==========

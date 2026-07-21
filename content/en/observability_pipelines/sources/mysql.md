@@ -110,7 +110,7 @@ Checkpoint values are updated every job run. To monitor the checkpoint value, th
 1. To reset the checkpoint value in the MySQL source:
     1. Navigate to [Observability Pipelines][1].
     1. Click on your pipeline and click.
-    1. In the MySQL source, enter the destination's last checkpoint value in the **Checkpoint value** field.
+    1. In the MySQL source, enter the destination's last checkpoint value in the {{< ui >}}Checkpoint value{{< /ui >}} field.
 
 #### External tools for validating queries
 
@@ -148,8 +148,8 @@ After you select the MySQL source in the pipeline UI:
   1. Enter the name of your query.
   1. Enter the path to the local file containing the validated SQL query.
       - **Note**: All file paths are made relative to the configuration data directory. For example, if the SQL file path is `/var/lib/observability-pipelines-worker/config/config/db_queries/query.sql`, enter the path `/db_queries/query.sql`.
-5. Select your query type (**Batch** or **Incremental**). See [Query types](#query-types) for more information.
-    - For **Incremental**:
+5. Select your query type ({{< ui >}}Batch{{< /ui >}} or {{< ui >}}Incremental{{< /ui >}}). See [Query types](#query-types) for more information.
+    - For {{< ui >}}Incremental{{< /ui >}}:
       1. Define the [incremental column](#incremental-columns).
       1. Set the starting [checkpoint value](#checkpoint-values).
 6. Define your query scheduling using cron syntax. These are cron syntax examples for different query schedules:
@@ -199,7 +199,14 @@ After you select the MySQL source in the pipeline UI:
 - Database users, roles, and permissions must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
 
+## Metrics
+
+For [component metrics][5] and [source buffer metrics][6] emitted by all sources, see the [Pipelines Usage Metrics][7] documentation. To filter or group by database source metrics, use the tag `component_type:database`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [3]: https://app.datadoghq.com/logs
 [4]: https://dev.mysql.com/doc/refman/9.2/en/create-role.html
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

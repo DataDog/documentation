@@ -87,7 +87,7 @@ This page describes how you can set up the Observability Pipelines Worker in ECS
         datadog/observability-pipelines-worker run
     ```
 
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -114,16 +114,16 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
     datadog/observability-pipelines-worker run
 ```
 
-You must replace the placeholders with these values:
+Replace the placeholders with these values:
 - `<DATADOG_API_KEY>`: Your Datadog API key.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][11].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
     - See [Environment Variables][7] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
     - See [Environment Variables][7] for a list of destination environment variables.
 
 {% /if %}
@@ -165,7 +165,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
 
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
@@ -188,16 +188,16 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
 
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
+        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`.
         - See [Environment Variables][7] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`.
         - See [Environment Variables][7] for a list of destination environment variables.
 
 {% /if %}
@@ -215,7 +215,7 @@ Follow these steps if you want to use the one-line installation script to instal
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -240,16 +240,16 @@ Run this one-step command to install the Worker:
 ```bash
 DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
 ```
-You must replace the placeholders with the following values:
+Replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API key.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][11].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
     - See [Environment Variables][7] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
     - See [Environment Variables][7] for a list of destination environment variables.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
@@ -272,11 +272,11 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 1. Select the AWS region you want to use to install the Worker.
-1. Click **Select API key** to choose the Datadog API key you want to use.
+1. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-1. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+1. Click {% ui %}Launch CloudFormation Template{% /ui %} to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 1. Select the VPC and subnet you want to use to install the Worker.
-1. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+1. Review and check the necessary permissions checkboxes for IAM. Click {% ui %}Submit{% /ui %} to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -294,13 +294,13 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Docker** as your installation platform.
+1. Select {% ui %}Docker{% /ui %} as your installation platform.
 
 <!-- UI - Docker - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
-3. Click **Select API key** to choose the Datadog API key you want to use.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
+3. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 4. Run the command provided in the UI to install the Worker. The command points to the Worker bootstrap file that you configure to resolve secrets using your secrets manager.
 
@@ -311,19 +311,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     sudo systemctl restart observability-pipelines-worker
     ```
 
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
 <!-- UI - Docker - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
-3. Click **Select API key** to choose the Datadog API key you want to use.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
+3. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in **Review your secrets management**.
+4. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered in {% ui %}Review your secrets management{% /ui %}.
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
@@ -344,25 +344,25 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Kubernetes** as your installation platform.
+1. Select {% ui %}Kubernetes{% /ui %} as your installation platform.
 
 <!-- UI - Kubernetes - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Configure your `values.yaml` file for your secrets manager. See [Secrets Management][18].
 7. Run the command provided in the UI to install the Worker.
-8. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+8. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 
 <!-- UI - Kubernetes - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-kubernetes.mdoc.md" /%}
 6. Run the command provided in the UI to install the Worker. The command is automatically populated with the environment variables you entered earlier.
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% /if %}
 {% /if %}
@@ -372,19 +372,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **Linux** as your installation platform.
+1. Select {% ui %}Linux{% /ui %} as your installation platform.
 
 <!-- UI - Linux - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
 5. Modify the Worker bootstrap file to connect the Worker to your secrets manager. See [Secrets Management][12] for more information.
 6. Restart the Worker to use the updated bootstrap file:
     ```
     sudo systemctl restart observability-pipelines-worker
     ```
-7. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+7. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -393,9 +393,9 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 <!-- UI - Linux - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 {% partial file="observability_pipelines/install_the_worker/ui-linux.mdoc.md" /%}
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -410,19 +410,19 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
 
 {% partial file="observability_pipelines/install_the_worker/ui-intro.mdoc.md" /%}
 
-1. Select **CloudFormation** as your installation platform.
+1. Select {% ui %}CloudFormation{% /ui %} as your installation platform.
 
 <!-- UI - Cloudformation - Secrets Management -->
 {% if equals($secrets_source, "secrets_management") %}
 
-2. In **Review your secrets management**, ensure that your secrets are configured in your secrets manager.
+2. In {% ui %}Review your secrets management{% /ui %}, ensure that your secrets are configured in your secrets manager.
 
 {% /if %}
 
 <!-- UI - CloudFormation - Environment variables -->
 {% if equals($secrets_source, "environment_variables") %}
 
-2. In **Review your secrets management**, enter the [environment variables][7] for your sources and destinations, if applicable.
+2. In {% ui %}Review your secrets management{% /ui %}, enter the [environment variables][7] for your sources and destinations, if applicable.
 
 {% /if %}
 
@@ -438,12 +438,12 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     **Note**: All other parameters are set to reasonable defaults for a Worker deployment, but you can adjust them for your use case as needed in the AWS Console before creating the stack.
 
 4. Select the AWS region you want to use to install the Worker.
-5. Click **Select API key** to choose the Datadog API key you want to use.
+5. Click {% ui %}Select API key{% /ui %} to choose the Datadog API key you want to use.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
-6. Click **Launch CloudFormation Template** to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
+6. Click {% ui %}Launch CloudFormation Template{% /ui %} to navigate to the AWS Console to review the stack configuration and then launch it. Make sure the CloudFormation parameters are as expected.
 7. Select the VPC and subnet you want to use to install the Worker.
-8. Review and check the necessary permissions checkboxes for IAM. Click **Submit** to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
-9. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+8. Review and check the necessary permissions checkboxes for IAM. Click {% ui %}Submit{% /ui %} to create the stack. CloudFormation handles the installation at this point; the Worker instances are launched, the necessary software is downloaded, and the Worker starts automatically.
+9. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 **Note**: If you are using a firewall, see [Add domains to firewall allowlist](#add-domains-to-firewall-allowlist).
 
@@ -643,6 +643,95 @@ An example task definition:
 
 Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
 
+## Upgrade the Worker
+
+To upgrade the Worker, update the `image` field in your container definition, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+
+```json
+"image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
+```
+
+Restart the ECS tasks to use the updated image.
+
+**Note**: If your container definition doesn't specify a version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
+
+{% /if %}
+
+<!-- Docker - Upgrade Worker -->
+{% if equals($platform, "docker") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker:
+
+1. Run the following command, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+    ```
+    docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>
+    ```
+2. Run the following commands to stop and remove the container:
+    ```
+    docker stop <CONTAINER_NAME>
+    ```
+    ```
+    docker rm <CONTAINER_NAME>
+    ```
+
+<!-- Docker - Upgrade Worker - Secrets Management -->
+{% if equals($secrets_source, "environment_variables") %}
+
+3. Run the following command to install the updated Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
+        -p 8088:8088 \
+        datadog/observability-pipelines-worker run
+    ```
+
+    Replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
+        - See [Environment Variables][7] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
+        - See [Environment Variables][7] for a list of destination environment variables.
+{% /if %}
+
+<!-- Docker - Upgrade Worker - Environment variables -->
+{% if equals($secrets_source, "secrets_management") %}
+
+3. Run the following command to install the updated Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+        datadog/observability-pipelines-worker run
+    ```
+
+    Replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+
+{% /if %}
+
+{% /if %}
+
+<!-- CloudFormation - Upgrade Worker -->
+{% if equals($platform, "cloudformation") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker, update the Worker image version in your CloudFormation stack and redeploy it.
+
 {% /if %}
 
 <!-- UI, API, Terraform - Kubernetes -->
@@ -740,7 +829,7 @@ image:
 
 ### Upgrade with the chart's default image tag
 
-Run these commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
+Run the following commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
 
 ```shell
 helm repo update
@@ -817,7 +906,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux APT -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -888,7 +977,7 @@ Follow these steps to manually install the Worker, instead of running the one-li
 <!-- UI - Linux RPM -->
 {% if equals($interface, "ui") %}
 
-5. Navigate back to the Observability Pipelines installation page and click **Deploy**.
+5. Navigate back to the Observability Pipelines installation page and click {% ui %}Deploy{% /ui %}.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
 
@@ -965,6 +1054,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 - `config.`{% region-param key="dd_site" code=true /%}
 - `http-intake.`{% region-param key="dd_site" code=true /%}
 - `keys.`{% region-param key="dd_site" code=true /%}
+- `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
 
@@ -976,6 +1066,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 - `keys.`{% region-param key="dd_site" code=true /%}
 - `install.`{% region-param key="dd_site" code=true /%}
 - `yum.`{% region-param key="dd_site" code=true /%}
+- `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
 

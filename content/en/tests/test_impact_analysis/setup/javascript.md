@@ -95,15 +95,17 @@ Examples include:
 * Tests that read data from text files
 * Tests that interact with APIs outside of the code being tested (such as remote REST APIs)
 
-Designating tests as unskippable ensures that Test Impact Analysis runs them regardless of coverage data.
+Designating tests as unskippable helps Test Impact Analysis run them regardless of coverage data.
 
 ### Marking tests as unskippable
 
 {{< tabs >}}
 {{% tab "Jest/Mocha/Cypress" %}}
-You can use the following docblock at the top of your test file to mark a suite as unskippable. This prevents any of the tests defined in the test file from being skipped by Test Impact Analysis. This is similar to jest's [`testEnvironmentOptions`][1].
+You can use the following docblock to mark an entire test file as unskippable. You cannot mark individual tests as unskippable. Place the docblock at the top of the file, before any code; only other comments can appear before it. This prevents any of the tests defined in the test file from being skipped by Test Impact Analysis. This is similar to jest's [`testEnvironmentOptions`][1].
 
 ```javascript
+// Other comments can appear above the docblock.
+
 /**
  * @datadog {"unskippable": true}
  */
@@ -112,6 +114,22 @@ describe('context', () => {
   it('can sum', () => {
     expect(1 + 2).to.equal(3)
   })
+})
+```
+
+The following example is invalid because the docblock appears after code and attempts to mark only one test as unskippable:
+
+```javascript
+it('can sum', () => {
+  expect(1 + 2).to.equal(3)
+})
+
+// THIS IS INVALID: The docblock cannot mark an individual test as unskippable.
+/**
+ * @datadog {"unskippable": true}
+ */
+it('can subtract', () => {
+  expect(3 - 2).to.equal(1)
 })
 ```
 

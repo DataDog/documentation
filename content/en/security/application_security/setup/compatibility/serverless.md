@@ -7,6 +7,12 @@ aliases:
   - /security/application_security/threats/setup/compatibility/serverless
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 App and API Protection provides serverless capability for the following platforms and libraries:
 
 {{< card-grid card_width="225px" image_width="200" >}}
@@ -94,5 +100,5 @@ Only *web applications* are supported. Azure Functions are not supported.
 [2]: /serverless/guide/datadog_forwarder_python
 [3]: /serverless/guide/upgrade_java_instrumentation
 [4]: /serverless/guide/serverless_tracing_and_bundlers/
-[5]: /service_management/workflows/
+[5]: /actions/workflows/
 [6]: /security/application_security/policies/inapp_waf_rules/

@@ -274,7 +274,7 @@ Below are tips and common questions that may help guide you through troubleshoot
 
 ### Get exact coordinates
 
-To determine the x and y coordinates of where you clicked on the `<canvas>`, use `console.log` to add a print statement to the [`addEventListener`](#clicking-on-canvas) method. This will print the coordinates to the browser's [DevTools Console][8].
+To determine the x and y coordinates of where you clicked on the `<canvas>`, use `console.log` to add a print statement to the [`addEventListener`](#clicking-on-canvas) method. This will print the coordinates to the browser's [{{< ui >}}DevTools Console{{< /ui >}}][8].
 
 {{% collapse-content title="Add listener with console.log" level="h4" expanded=false id="Add listener" %}}
 {{< code-block lang="javascript" >}}
@@ -290,7 +290,7 @@ canvas.addEventListener('click', function(event) {
 
 ### Choosing the right color
 
-A good starting point is to inspect CSS styles using your browser's Developer Tools. Most styles include the color's RGB definition.
+A good starting point is to inspect CSS styles using your browser's {{< ui >}}Developer Tools{{< /ui >}}. Most styles include the color's RGB definition.
 
 The canvas element only supports RGBA color values. Formats like HEX are not supported. If you have a HEX color, you need to convert it to RGBA using an online tool or a conversion script.
 

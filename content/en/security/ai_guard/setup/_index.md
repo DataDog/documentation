@@ -72,9 +72,9 @@ The [AI Guard HTTP API][13] lets you call the AI Guard JSON:API endpoint directl
 ## 4. Create a custom retention filter {#retention-filter}
 
 To view AI Guard evaluations in Datadog, create a custom [retention filter][5] for AI Guard-generated spans. Follow the linked instructions to create a retention filter with the following settings:
-- **Retention query**: `resource_name:ai_guard`
-- **Span rate**: 100%
-- **Trace rate**: 100%
+- {{< ui >}}Retention query{{< /ui >}}: `resource_name:ai_guard`
+- {{< ui >}}Span rate{{< /ui >}}: 100%
+- {{< ui >}}Trace rate{{< /ui >}}: 100%
 
 ## 5. Configure AI Guard policies {#configure-policies}
 
@@ -82,11 +82,12 @@ AI Guard provides settings to control how evaluations are enforced, how sensitiv
 
 ### Configure service policies {#service-policies}
 
-On the **Security** > **AI Guard** > **Settings** > [**Services**][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
-- [**Enforcement mode**](#blocking-policy): Monitor only, or block unsafe requests
-- [**Sensitive data detection**](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+On the {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6] page, you can configure policies that determine what actions AI Guard should take when it detects unsafe content. For each policy, you determine:
+- [{{< ui >}}Enforcement mode{{< /ui >}}](#blocking-policy): Monitor only, or block unsafe requests
+- [{{< ui >}}Sensitive data detection{{< /ui >}}](#sensitive-data-scanning): Whether AI Guard should flag sensitive data when it detects it
+- [{{< ui >}}Evaluation context{{< /ui >}}](#evaluation-context): Additional information about the service that AI Guard uses during evaluation to reduce false positives
 
-Beside **Default policy**, click **Edit** to set AI Guard's default behavior. To override the default behavior, click **Add Service Policy**, select the service and environment you want your override to apply to, then configure the more specialized policy.
+Beside {{< ui >}}Default policy{{< /ui >}}, click {{< ui >}}Edit{{< /ui >}} to set AI Guard's default behavior. To override the default behavior, click {{< ui >}}Add Service Policy{{< /ui >}}, select the service and environment you want your override to apply to, then configure the more specialized policy.
 
 #### Blocking policy {#blocking-policy}
 
@@ -104,21 +105,39 @@ AI Guard can detect personally identifiable information (PII) such as email addr
 
 When enabled, AI Guard scans the last message in each evaluation call, including user prompts, assistant responses, tool call arguments, and tool call results. Findings appear on APM traces for visibility. Sensitive data scanning is detection-only; findings do not independently trigger blocking.
 
+By default, AI Guard scans for a standard set of secrets, such as AWS keys and Datadog API keys. To customize which [scanning rules][14] AI Guard uses, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][15], where you can enable or disable individual rules, and create scanning groups with custom rules, scoped specifically to AI Guard evaluations.
+
 ### Block specific tools
 
-You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to **Security** > **AI Guard** > **Settings** > [**Tool Blocklist**][8]. Click **Add Tool Blocking Configuration**, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
+You can configure AI Guard to block requests for specific tools, for specific services and environments. To do so, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Tool Blocklist{{< /ui >}}][8]. Click {{< ui >}}Add Tool Blocking Configuration{{< /ui >}}, select the service, environment, and tool, and choose whether AI Guard should follow the default service policy or block all requests for the tool.
 
 ### Evaluation sensitivity {#evaluation-sensitivity}
 
-AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to **Security** > **AI Guard** > **Settings** > [**Evaluation Sensitivity**][7].
+AI Guard assigns a confidence score to each threat category it detects (for example, prompt injection or jailbreaking). You can control the minimum confidence score required for AI Guard to flag a threat by going to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Evaluation Sensitivity{{< /ui >}}][7].
 
 Evaluation sensitivity is a value between 0.0 and 1.0, with a default of 0.5.
 - A **lower** value **increases** sensitivity: AI Guard flags threats even when the confidence is low, surfacing more potential attacks but also more false positives.
 - A **higher** value **decreases** sensitivity: AI Guard only flags threats when the confidence is high, reducing noise but potentially missing some attacks.
 
+### Add evaluation context {#evaluation-context}
+
+You can give AI Guard additional context about a service, such as its purpose and the type of data it processes. AI Guard uses this context during evaluation to better distinguish legitimate agent behavior from genuine threats, which helps reduce false positives.
+
+To add evaluation context for a service, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}AI Guard{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Services{{< /ui >}}][6]. Click {{< ui >}}Edit{{< /ui >}} beside the default policy, or add or edit a service policy, then enter your context in the {{< ui >}}Evaluation context{{< /ui >}} field (up to 1,000 characters). For example:
+
+```text
+This is a fintech app. Requests to query account balances or initiate transfers are expected and authorized.
+```
+
+As with the [blocking policy](#blocking-policy), evaluation context follows the same precedence, with more specific settings taking priority: organization-wide, per environment, per service, then per service and environment.
+
+Use the [AI Guard Playground][19] to test how evaluation context affects the outcome of an evaluation before applying it to a service. The Playground has its own {{< ui >}}Evaluation Context{{< /ui >}} field that applies only to the conversation you're testing, so you can experiment without changing any service policy. Import an existing payload into the Playground, then add evaluation context to see how it changes the evaluation result.
+
 ### Add context with your system prompt {#system-prompt-context}
 
 AI Guard evaluates the full conversation, including your system prompt, when assessing threats. Adding context about your agent's purpose, the data it handles, and the tools it is authorized to use helps AI Guard distinguish legitimate operations from genuine threats—reducing false positives without reducing security coverage.
+
+<div class="alert alert-info">To add this kind of context without modifying your application code, use the <a href="#evaluation-context">Evaluation context</a> field in your service settings instead.</div>
 
 #### What to include
 
@@ -173,3 +192,6 @@ To restrict access to AI Guard spans for specific users, you can use [Data Acces
 [11]: /security/ai_guard/setup/manual_integrations/
 [12]: /security/ai_guard/setup/sdk/
 [13]: /security/ai_guard/setup/http_api/
+[14]: /security/sensitive_data_scanner/scanning_rules/
+[15]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
+[19]: https://app.datadoghq.com/security/ai-guard/playground

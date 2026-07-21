@@ -45,20 +45,20 @@ Configure device locations using the following steps:
 
    {{< img src="network_device_monitoring/geomap/device_geomap_geolocation_tag.png" alt="The NDM device view of a device, highlighting the `geolocation:paris-office` tag." style="width:100%;" >}}
 
-2. From the Device Geomap page, click **Add locations** in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
+2. From the Device Geomap page, click {{< ui >}}Add locations{{< /ui >}} in the top right corner. This opens the [Geomap locations settings][3] page, which provides multiple tabs to manage device locations:
 
-   - **All**: Displays all devices with `geolocation` tags, regardless of their mapping status.
-   - **Needs Coordinates**: Shows devices tagged with `geolocation` values that don't have corresponding location coordinates configured.
-   - **On Map**: Lists tagged devices with configured coordinates that are displayed on the Geomap.
-   - **Unused**: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
+   - {{< ui >}}All{{< /ui >}}: Displays all devices with `geolocation` tags, regardless of their mapping status.
+   - {{< ui >}}Needs Coordinates{{< /ui >}}: Shows devices tagged with `geolocation` values that don't have corresponding location coordinates configured.
+   - {{< ui >}}On Map{{< /ui >}}: Lists tagged devices with configured coordinates that are displayed on the Geomap.
+   - {{< ui >}}Unused{{< /ui >}}: Shows location mappings (coordinates) that have been configured but are not associated with any tagged devices.
 
    {{< img src="network_device_monitoring/geomap/settings_on_map.png" alt="Settings page of Device Geomap, highlighting the All tab." style="width:100%;" >}}
 
-3. On the settings page, click **+ Add mapping** and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
+3. On the settings page, click {{< ui >}}+ Add mapping{{< /ui >}} and enter the location value along with its latitude and longitude coordinates in [decimal degrees][10] notation. 
 
    {{< img src="network_device_monitoring/geomap/add_mapping.png" alt="Settings page of Device Geomap, displaying the Add Mapping screen with fields for location, latitude, and longitude." style="width:80%;" >}}
 
-4. To bulk import locations, select **Import from CSV** from the **+ Add mapping** dropdown. The CSV form provides a template you can download and use.
+4. To bulk import locations, select {{< ui >}}Import from CSV{{< /ui >}} from the {{< ui >}}+ Add mapping{{< /ui >}} dropdown. The CSV form provides a template you can download and use.
 
    {{< img src="network_device_monitoring/geomap/mapping_csv.png" alt="Settings page of Device Geomap, displaying the Import from CSV option." style="width:90%;" >}}
 
@@ -82,7 +82,7 @@ If your CSV file fails to upload despite appearing correct, verify the following
 
 - No missing commas between fields
 - No extra spaces or special characters
-- Proper formatting according to the CSV template (available for download in the **+ Add mapping > Import from CSV** form)
+- Proper formatting according to the CSV template (available for download in the {{< ui >}}+ Add mapping{{< /ui >}} > {{< ui >}}Import from CSV{{< /ui >}} form)
 
 ### Tagged device does not appear on map
 

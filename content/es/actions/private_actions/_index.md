@@ -33,7 +33,7 @@ Un ejecutor de acciones privadas puede utilizarse con App Builder, Automatizaci�
 
 A continuación se presenta un esquema general de las acciones privadas:
 
-{{< img src="service_management/private_action_runner_-_diagram_general.png" alt="Diagrama de información general que muestra cómo las acciones privadas interactúan con Datadog y el navegador del usuario" style="width:90%;" >}}
+{{< img src="actions/private_actions/private_action_runner_-_diagram_general.png" alt="Diagrama de información general que muestra cómo las acciones privadas interactúan con Datadog y el navegador del usuario" style="width:90%;" >}}
 
 ### Diferencias de modo
 
@@ -53,7 +53,7 @@ Cuando tu ejecutor de acciones privadas está en modo App Builder, las consultas
 
 En el siguiente diagrama, **App Management** se refiere a las acciones backend de App Builder que no están relacionadas con el ejecutor de acciones privadas, como la eliminación de una aplicación.
 
-{{< img src="service_management/private_action_runner_-_diagram_app_builder.png" alt="Diagrama de información general que muestra cómo funcionan las acciones privadas en el modo App Builder, incluida la autenticación" style="width:90%;" >}}
+{{< img src="actions/private_actions/private_action_runner_-_diagram_app_builder.png" alt="Diagrama de información general que muestra cómo funcionan las acciones privadas en el modo App Builder, incluida la autenticación" style="width:90%;" >}}
 
 #### Autenticación
 
@@ -67,7 +67,7 @@ En el modo App Builder, el navegador del usuario habla directamente con tu ejecu
 
 Si el ejecutor de acciones privadas se ejecuta en modo de sólo Flujos de trabajo, no es necesario realizar ninguna configuración más allá de la inscripción inicial. El ejecutor de acciones privadas sondea continuamente las tareas de tu cuenta Datadog, las ejecuta interactuando con tu servicio interno e informa del resultado a Datadog.
 
-{{< img src="service_management/private_action_runner_-_diagram_workflow.png" alt="Diagrama de información general que muestra cómo funcionan las acciones privadas en el modo Automatización de flujos de trabajo" style="width:90%;" >}}
+{{< img src="actions/private_actions/private_action_runner_-_diagram_workflow.png" alt="Diagrama de información general que muestra cómo funcionan las acciones privadas en el modo Automatización de flujos de trabajo" style="width:90%;" >}}
 
 ### Ambos
 

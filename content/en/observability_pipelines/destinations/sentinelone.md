@@ -58,8 +58,8 @@ After you select the SentinelOne destination in the pipeline UI:
 After you've set up the pipeline to send logs to the SentinelOne destination, you can view the logs in a SentinelOne cluster:
 
 1. Log into the [S1 console][2].
-2. Navigate to the Singularity Data Lake (SDL)  "Search" page. To access it from the console, click on "Visibility" on the left menu to go to SDL, and make sure you're on the "Search" tab.
-3. Make sure the filter next to the search bar is set to **All Data**.
+2. Navigate to the Singularity Data Lake (SDL) {{< ui >}}Search{{< /ui >}} page. To access it from the console, click on {{< ui >}}Visibility{{< /ui >}} on the left menu to go to SDL, and make sure you're on the {{< ui >}}Search{{< /ui >}} tab.
+3. Make sure the filter next to the search bar is set to {{< ui >}}All Data{{< /ui >}}.
 4. This page shows the logs you sent from Observability Pipelines to SentinelOne.
 
 ## How the destination works
@@ -72,6 +72,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 1                 | 1                   |
 
+## Metrics
+
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Splunk HEC destination metrics, use the tag `component_type:splunk_hec_logs`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -82,3 +86,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: /observability_pipelines/configuration/set_up_pipelines/
 [5]: /api/latest/observability-pipelines/
 [6]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

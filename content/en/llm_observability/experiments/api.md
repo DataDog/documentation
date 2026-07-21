@@ -397,9 +397,10 @@ List all experiments, sorted by creation date. The most recently-created experim
 | `filter[project_id]` (_required_ if dataset not provided) | string | The ID of a project to retrieve experiments for. |
 | `filter[dataset_id]` | string | The ID of a dataset to retrieve experiments for. |
 | `filter[id]` | string | The ID(s) of an experiment to search for. To query for multiple experiments, use `?filter[id]=<>&filter[id]=<>`. |
-| `filter[experiment]` | string | Filter by the logical experiment name (the shared pipeline name set across all runs of the same pipeline). Composes with `filter[project_id]` and `filter[dataset_id]`.<br />**Note**: Cannot be combined with `page[cursor]`; returns `400` if both are provided. |
-| `filter[metadata]` | json (string) | Filter experiments whose metadata contains all the provided key-value pairs. Must be a valid JSON object string (for example, `{"commit":"abc123","branch":"main"}`). Composes with `filter[experiment]` and other filters.<br />**Note**: Cannot be combined with `page[cursor]`; returns `400` if both are provided. |
-| `page[cursor]` | string | List results with a cursor provided in the previous query. Not supported when `filter[experiment]` or `filter[metadata]` is provided. |
+| `filter[experiment]` | string | Filter by the logical experiment name (the shared pipeline name set across all runs of the same pipeline). Composes with `filter[project_id]` and `filter[dataset_id]`. |
+| `filter[metadata]` | json (string) | Filter experiments whose metadata contains all the provided key-value pairs. Must be a valid JSON object string (for example, `{"commit":"abc123","branch":"main"}`). Composes with `filter[experiment]` and other filters. |
+| `filter[parent_experiment_id]` | string (UUID) | Filter experiments by the ID of their parent (baseline) experiment. Returns all experiments that were run against the given baseline. Can be specified multiple times: `?filter[parent_experiment_id]=<uuid1>&filter[parent_experiment_id]=<uuid2>`. |
+| `page[cursor]` | string | List results with a cursor provided in the previous query. |
 | `page[limit]` | int | Limits the number of results. |
 
 **Response**
@@ -421,7 +422,7 @@ List all experiments, sorted by creation date. The most recently-created experim
 | `config` | json | Configuration used when creating the experiment. |
 | `created_at` | timestamp | Timestamp representing when the resource was created. |
 | `updated_at` | timestamp | Timestamp representing when the resource was last updated. |
-| `aggregate_data` | json | Pre-computed aggregate metrics for this experiment run (eval score distributions, token costs, error rates). Present when `filter[experiment]` or `filter[metadata]` is used. |
+| `aggregate_data` | json | Pre-computed aggregate metrics for this experiment run (eval score distributions, token costs, error rates). Always populated when available. |
 
 {{% /collapse-content %}}
 

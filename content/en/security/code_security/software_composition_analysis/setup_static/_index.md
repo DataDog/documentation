@@ -13,7 +13,7 @@ Datadog Software Composition Analysis (SCA) scans your repositories for open-sou
 
 To get started:
 1. Open [Code Security settings][2].
-2. In **Activate scanning for your repositories**, click **Manage Repositories**.
+2. In {{< ui >}}Activate scanning for your repositories{{< /ui >}}, click {{< ui >}}Manage Repositories{{< /ui >}}.
 3. Choose [where to run SCA scans](#select-where-to-run-static-sca-scans) (Datadog-hosted or CI pipelines).
 4. Follow the setup instructions for your source code provider.
 
@@ -43,6 +43,23 @@ Datadog SCA scans libraries in the following languages using dependency manifest
 
 **Note:** If both a `packages.lock.json` and a `.csproj` file are present, the `packages.lock.json` takes precedence and provides more precise version resolution.
 
+## Lockfile-less scanning
+
+Datadog SCA scans manifest files **only when no supported lockfile is detected**. When a lockfile is present, it takes precedence and the manifest is not scanned.
+
+| Language | Package Manager        | File             |
+|----------|------------------------|------------------|
+| Node.js  | npm, yarn, pnpm, Bun   | `package.json`   |
+| Python   | Poetry, PDM, UV, pip   | `pyproject.toml` |
+
+**Supported sections:**
+- `package.json`: `dependencies`, `devDependencies`, and `optionalDependencies`
+- `pyproject.toml`: PEP 621 `dependencies` and `optional-dependencies`, PEP 735 `dependency-groups`, and Poetry dependency sections
+
+<div class="alert alert-info">
+Because manifests can declare version ranges (such as <code>^2.3.4</code> or <code>&gt;=1.0,&lt;2</code>) rather than pinned versions, Datadog resolves each range by selecting the newest published version that satisfies the range. Pre-release versions are excluded.
+</div>
+
 ## Select where to run static SCA scans
 By default, scans run when you commit changes that update supported dependency manifests or lockfiles in an enabled repository. You can also run SCA in your CI pipelines; CI jobs are supported for `push` events.
 
@@ -53,7 +70,7 @@ You can run Datadog Static SCA scans directly on Datadog infrastructure. Support
 - [GitLab.com and GitLab Self-Managed](/security/code_security/software_composition_analysis/setup_static/?tab=gitlab#select-your-source-code-management-provider)
 - [Azure DevOps](/security/code_security/software_composition_analysis/setup_static/?tab=azuredevops#select-your-source-code-management-provider)
 
-To get started, navigate to the [**Code Security** page][2].
+To get started, navigate to the [{{< ui >}}Code Security{{< /ui >}} page][2].
 
 <div class="alert alert-info">
 Datadog-hosted SCA scanning is not supported for repositories that contain file names longer than 255 characters. <br>
@@ -65,7 +82,7 @@ For these cases, scan using CI pipelines.
 Datadog Software Composition Analysis runs in your CI pipelines using the [`datadog-ci` CLI][8].
 
 <div class="alert alert-info">
-You must scan your default branch at least once before results appear in <b>Code Security</b>.
+You must scan your default branch at least once before results appear in {{< ui >}}Code Security{{< /ui >}}.
 </div>
 
 {{< whatsnext desc="See instructions based on your CI provider:">}}

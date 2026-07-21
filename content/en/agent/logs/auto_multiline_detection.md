@@ -283,6 +283,49 @@ DD_LOGS_CONFIG_AUTO_MULTI_LINE_ENABLE_JSON_AGGREGATION=false
 {{% /tab %}}
 {{< /tabs >}}
 
+## Stack trace aggregation
+
+In Datadog Agent version 7.81+, multi-line Go stack traces are automatically detected and aggregated into a single log.
+
+For example, auto multi-line detection aggregates the following stack trace into a single log instead of splitting it into separate lines:
+
+```
+panic: INVALID ADDRESS runtime error: invalid memory address or nil pointer dereference [iter=249]
+[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x45e1f2]
+
+goroutine 1 [running]:
+main.doWork(0x0)
+	/app/main.go:24 +0x1d
+main.run(...)
+	/app/main.go:18
+main.main()
+	/app/main.go:14 +0x2c
+```
+
+
+Like JSON aggregation, stack trace aggregation is enabled automatically when auto multi-line detection is enabled.
+
+You can disable stack trace aggregation by setting `stack_trace_parsers` to an empty list. By default, it is set to `["go"]`:
+
+{{< tabs >}}
+{{% tab "Configuration file" %}}
+
+```yaml
+logs_config:
+  auto_multi_line:
+    stack_trace_parsers: []
+```
+
+{{% /tab %}}
+{{% tab "Environment Variable" %}}
+
+```shell
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_STACK_TRACE_PARSERS='[]'
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 
 ## Advanced customization
 
@@ -366,6 +409,7 @@ You can search for this tag by querying `aggregated_json:true` in the Logs Explo
 | `logs_config.auto_multi_line.enable_datetime_detection` | Bool | True | Enable datetime detection |
 | `logs_config.auto_multi_line.timestamp_detector_match_threshold` | Float | 0.5 | Timestamp matching threshold |
 | `logs_config.auto_multi_line.tokenizer_max_input_bytes` | Int | 60 | Bytes to tokenize |
+| `logs_config.auto_multi_line.stack_trace_parsers` | List | `["go"]` | Stack trace parsers to use for aggregation. Set to `[]` to disable. |
 
 
 ## Further reading

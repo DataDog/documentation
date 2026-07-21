@@ -1,5 +1,6 @@
 ---
 title: Native Entities
+description: Learn about the native entity types in Catalog, including services, systems, APIs, datastores, queues, and frontends, and how to define them using schema v3.0.
 disable_toc: false
 aliases:
   - /internal_developer_portal/software_catalog/entity_model/entity_types

@@ -186,7 +186,7 @@ curl -X POST "http://localhost:7280/api/v2/logs" \
 
 ### Search your local logs from the Log Explorer
 
-After verifying that BYOC Logs is running, you can search and analyze your logs in the Logs Explorer by searching into the `cloudprem` index!
+Verify that BYOC Logs is running. In the Log Explorer, select your BYOC Logs index to search and analyze your logs.
 
 ## Further reading
 

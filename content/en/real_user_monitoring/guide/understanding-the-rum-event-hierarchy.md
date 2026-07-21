@@ -21,7 +21,7 @@ All RUM data refers to user or synthetics sessions, which are at the top of the 
 
 #### Sample search: List all sessions from a user
 
-To list all sessions from a specific user, select **Sessions** from the event type dropdown, then make a search query for the session type and user.
+To list all sessions from a specific user, select {{< ui >}}Sessions{{< /ui >}} from the event type dropdown, then make a search query for the session type and user.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-sample-search-all-session-user-3.png" alt="Sample search listing all sessions from user 'Chantal Loya'." style="width:90%;">}}
 
@@ -67,7 +67,7 @@ Resources are collected from views and include external requests from your appli
 
 #### Sample search: A list of all images loaded on the `/demo` view filtered by image size
 
-In this example, **Resources** is selected from the event type dropdown, then a query for images that loaded on the `/demo` view and were larger or equal to 1000 kilobytes are listed.
+In this example, {{< ui >}}Resources{{< /ui >}} is selected from the event type dropdown, then a query for images that loaded on the `/demo` view and were larger or equal to 1000 kilobytes are listed.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-resources-1.png" alt="Sample search of all images loaded on the homepage view that were 1000 kilobytes or greater." style="width:90%;">}}
 
@@ -76,7 +76,7 @@ Long tasks are any task that blocks the UI thread for a specified period of time
 
 #### Sample search: All frozen frame long tasks that lasted more than 500 ms
 
-In this example, **Long tasks** is selected from the event type dropdown and then duration is specified.
+In this example, {{< ui >}}Long tasks{{< /ui >}} is selected from the event type dropdown and then duration is specified.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-long-tasks-1.png" alt="Sample search of all frozen frame long tasks lasting longer than 500 milliseconds." style="width:90%;">}}
 
@@ -86,7 +86,7 @@ Vitals are custom vitals you've created to measure the performance of your appli
 
 #### Sample search: A list of all sessions where the custom vital "checkout loading time" lasted more than 1000ms
 
-In this example, **Vitals** is selected from the event type dropdown and the checkout loading time is specified.
+In this example, {{< ui >}}Vitals{{< /ui >}} is selected from the event type dropdown and the checkout loading time is specified.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-events-vitals-1.png" alt="Sample search of all sessions where the custom vital `checkout-loading-time` duration was more than 1000ms." style="width:90%;">}}
 
@@ -96,7 +96,7 @@ In this example, **Vitals** is selected from the event type dropdown and the che
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-no-data-appears-4.png" alt="Example of no data appearing after writing a query." style="width:90%;">}}
 
-If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within **sessions**, but the search bar only contains  **action** attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
+If you aren't seeing data after writing a query, confirm that the event selector matches what you have in the search bar. In the example above, the event selector is set to search within {{< ui >}}sessions{{< /ui >}}, but the search bar only contains  {{< ui >}}action{{< /ui >}} attributes. To view action-related data, switch the view selector to actions. If you still don't see any data, check the time frame selector to ensure you are in a time window where data should be appearing.
 
 {{< img src="real_user_monitoring/guide/understanding-rum-event-hierarchy/rum-data-now-appears-1.png" alt="Example of updating a query by using the view and time frame selectors." style="width:90%;">}}
 

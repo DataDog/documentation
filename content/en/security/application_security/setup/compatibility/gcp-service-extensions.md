@@ -7,6 +7,12 @@ aliases:
   - /security/application_security/threats/setup/compatibility/gcp-service-extensions
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 The following table lists App and API Protection capabilities for GCP Service Extensions according to the specified Datadog Service Extensions callout image version:
 
 | App and API Protection capability        | Minimum App and API Protection Service Extensions callout image version  |

@@ -33,7 +33,7 @@ Ensure [Test Optimization][1] is configured for your test runs.
 The test framework compatibility is the same as [Test Optimization Compatibility][3], with the exception of `Scala Weaver`.
 
 ### Configuration
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -56,7 +56,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -78,7 +78,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -101,7 +101,7 @@ This behavior can be fine-tuned with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -124,7 +124,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -147,7 +147,7 @@ Customize the Auto Test Retries with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -171,7 +171,7 @@ You can fine tune this behavior with the following environment variables:
 
 ### Configuration
 
-After you set up Test Optimization, configure Auto Test Retries in [**CI/CD Optimization settings**][1]. You can apply the setting at the organization, repository, or test service level.
+After you set up Test Optimization, configure Auto Test Retries in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][1]. You can apply the setting at the organization, repository, or test service level.
 
 {{< img src="continuous_integration/auto_test_retries_test_settings-3.png" alt="Auto Test Retries toggle in CI/CD Settings." style="width:100%" >}}
 
@@ -196,7 +196,7 @@ In addition to automatically retrying failed tests, Failed Test Replay allows yo
 
 Failed Test Replay requires Auto Test Retries to be enabled, because it captures variable data from the retried test runs.
 
-Enable Failed Test Replay in [**CI/CD Optimization settings**][4] under **Mitigation** > **Failed Test Replay**. You can apply the setting at the organization, repository, or test service level.
+Enable Failed Test Replay in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][4] under {{< ui >}}Mitigation{{< /ui >}} > {{< ui >}}Failed Test Replay{{< /ui >}}. You can apply the setting at the organization, repository, or test service level.
 
 #### Create a logs index
 
@@ -222,7 +222,7 @@ You can query the retried tests in the [Test Optimization Explorer][2]: they hav
 
 ## Troubleshooting
 
-If you suspect there are any issues with Auto Test Retries, open [**CI/CD Optimization settings**][4], find your repository or service, and toggle Auto Test Retries off.
+If you suspect there are any issues with Auto Test Retries, open [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][4], find your repository or service, and toggle Auto Test Retries off.
 
 ## Further Reading
 

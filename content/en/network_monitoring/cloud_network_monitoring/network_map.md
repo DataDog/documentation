@@ -31,16 +31,16 @@ The network map visualizes data collected by the Datadog Agent automatically. On
 
 ## Usage
 
-Select the **Map** tab to configure your network map:
+Select the {{< ui >}}Map{{< /ui >}} tab to configure your network map:
 
 {{< img src="network_performance_monitoring/network_map/network_map_search.png" alt="Network map page search bar" >}}
 
-1. Choose the tag you want your **Nodes** to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
+1. Choose the tag you want your {{< ui >}}Nodes{{< /ui >}} to represent with the first selector at the top of the page. Available tags are the same as those offered in the network page.
 
     {{< img src="network_performance_monitoring/network_map/network_map_search_additional_filter.png" alt="Network map page search bar" >}}
 
-    - If there are too many nodes, a second tag is automatically added to the grouping. You can change the tag in the **By** dropdown menu. See [Clustering](#map-clusters) more information.
-2. Select the metric you want your **Edges** to represent:
+    - If there are too many nodes, a second tag is automatically added to the grouping. You can change the tag in the {{< ui >}}By{{< /ui >}} dropdown menu. See [Clustering](#map-clusters) more information.
+2. Select the metric you want your {{< ui >}}Edges{{< /ui >}} to represent:
 
     - Throughput sent
     - Throughput received
@@ -56,7 +56,7 @@ Select the **Map** tab to configure your network map:
     - Filter your tags based on a fuzzy string match.
       {{< img src="network_performance_monitoring/network_map/filtering_npm_map_search.mp4" alt="Filtering network map with search" video="true" >}}
 
-    - **Show unresolved traffic**.
+    - {{< ui >}}Show unresolved traffic{{< /ui >}}.
     - Hide network traffic outside a specified percentile range of the active network metric.
         {{< img src="network_performance_monitoring/network_map/filtering_network_map.mp4" alt="Filtering network map flows" video="true" width="50%" >}}
 
@@ -66,7 +66,7 @@ Hovering over a node highlights it and animates the directionality of the networ
 
 {{< img src="network_performance_monitoring/network_map/network_map_highlight.mp4" alt="Network Map" video="true" width="70%" >}}
 
-Click on a node and select _Inspect_ from the menu to contextualize it within the larger network:
+Click on a node and select {{< ui >}}Inspect{{< /ui >}} from the menu to contextualize it within the larger network:
 
 {{< img src="network_performance_monitoring/network_map/network_entity_zoom.mp4" alt="Network entity zoom" video="true" width="70%">}}
 

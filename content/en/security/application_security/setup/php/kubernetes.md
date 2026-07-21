@@ -14,6 +14,13 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% app_and_api_protection_php_setup_options platform="kubernetes" %}}
 
 {{% app_and_api_protection_php_overview %}}
@@ -120,5 +127,5 @@ If you encounter issues while setting up App and API Protection for your PHP app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/php/compatibility
+[1]: /security/application_security/setup/compatibility/php
 [2]: /security/application_security/setup/php/troubleshooting

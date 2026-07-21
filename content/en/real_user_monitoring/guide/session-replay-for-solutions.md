@@ -40,7 +40,7 @@ If there were a way to view the customer's user journey in Datadog and see assoc
 
 {{< img src="real_user_monitoring/guide/session-replay/apm-traces-in-session-replay.png" alt="An APM stack trace associated with a RUM view action" style="width:100%;">}}
 
-With the APM integration, you can connect requests from your web application with corresponding backend traces to access APM trace data from a RUM event and uncover any backend errors in the **Errors** tab. 
+With the APM integration, you can connect requests from your web application with corresponding backend traces to access APM trace data from a RUM event and uncover any backend errors in the {{< ui >}}Errors{{< /ui >}} tab. 
 
 For more information, see [Connect RUM and Traces][3].
 
@@ -50,7 +50,7 @@ The Technical Solutions team may have internal tools that connect a support plat
 
 The Technical Solutions team can use Session Replay to view a replica of the user journey in Datadog and use Browser Dev Tools to access additional errors that may appear in the frontend. With access to frontend errors and backend traces, your Technical Solutions team is empowered to use the RUM & Session Replay and APM integration to help troubleshoot customer issues.
 
-Click on a user session with a replay recording to observe the user's behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking **Save** in the UI triggers the backend call to save the test's configuration.
+Click on a user session with a replay recording to observe the user's behavior on the Datadog platform. By using Session Replay, you can locate the corresponding RUM events and identify the specific `click` action to save the multistep API test. Clicking {{< ui >}}Save{{< /ui >}} in the UI triggers the backend call to save the test's configuration.
 
 ## Uncover errors in backend traces
 

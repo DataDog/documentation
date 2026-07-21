@@ -13,6 +13,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/troubleshooting-rag-llms/"
   tag: "Blog"
   text: "Troubleshooting RAG-based LLM applications"
+- link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+  tag: "Learning Center"
+  text: "Investigate with LLM Observability"
 ---
 
 ## Overview

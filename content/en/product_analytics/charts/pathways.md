@@ -30,8 +30,8 @@ Action events are not supported in the Pathways diagram.
 
 ### View the default diagram
 
-1. Navigate to [**Product Analytics > Charts**][1].
-2. Click **Pathways** if it's not already selected. This displays the default visualization that represents the most popular user journeys in your application.
+1. Navigate to [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Charts{{< /ui >}}][1].
+2. Click {{< ui >}}Pathways{{< /ui >}} if it's not already selected. This displays the default visualization that represents the most popular user journeys in your application.
 
 ### Start or end the diagram at a given view
 
@@ -61,9 +61,9 @@ Click a node for a list of analysis options, such as viewing a sample [Session R
 
 ### Convert the diagram to a funnel
 
-1. From the Pathways diagram page, click the **Build Funnel** button.
+1. From the Pathways diagram page, click the {{< ui >}}Build Funnel{{< /ui >}} button.
 2. In the Pathways diagram, click the nodes of the views you want to include in the funnel.
-3. Click **Create Funnel From Selection**.
+3. Click {{< ui >}}Create Funnel From Selection{{< /ui >}}.
 
 {{< img src="/product_analytics/journeys/pathways/pana_pathway_page_img5.png" alt="A Pathway to funnel conversion in process" style="width:90%;" >}}
 
