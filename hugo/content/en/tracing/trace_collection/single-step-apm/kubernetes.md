@@ -139,12 +139,23 @@ To update an existing Helm installation, add the SSI configuration to your `data
 {{% /tab %}}
 {{< /tabs >}}
 
-## Verify APM is working
+## Verify the installation
 
-After you restart your applications and they receive traffic, confirm that Datadog is receiving traces:
+1. Confirm the Agent pods are running:
 
-1. In Datadog, go to the [APM Services page][42] and check that your services appear.
-1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][35] to diagnose injection issues.
+   ```shell
+   kubectl get pods -n datadog
+   ```
+
+1. Confirm the Agent is healthy and the APM Agent is running. Replace `<AGENT_POD>` with the name of a node Agent pod:
+
+   ```shell
+   kubectl exec -it <AGENT_POD> -n datadog -- agent status
+   ```
+
+   Check the **APM Agent** section of the output.
+
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][42]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][35].
 
 ## Configure Unified Service Tags
 

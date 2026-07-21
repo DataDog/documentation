@@ -128,12 +128,17 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
 
-## Verify APM is working
+## Verify the installation
 
-After you restart the instrumented applications and they receive traffic, confirm that Datadog is receiving traces:
+1. From an administrator PowerShell session, confirm the Agent is healthy and the APM Agent is running:
 
-1. In Datadog, go to the [APM Services page][7] and check that your services appear.
-1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][4] to diagnose injection issues.
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+   Check the **APM Agent** section of the output.
+
+1. After the instrumented IIS applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 

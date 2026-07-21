@@ -89,12 +89,23 @@ Available versions are listed in source repositories for each language:
 - [Ruby][12] (`ruby`)
 - [PHP][13] (`php`)
 
-## Verify APM is working
+## Verify the installation
 
-After you restart your applications and they receive traffic, confirm that Datadog is receiving traces:
+1. Confirm the Agent container is running:
 
-1. In Datadog, go to the [APM Services page][18] and check that your services appear.
-1. If your services don't appear within a few minutes, follow the [SSI troubleshooting guide][17] to diagnose injection issues.
+   ```shell
+   docker ps --filter name=dd-agent
+   ```
+
+1. Confirm the Agent is healthy and the APM Agent is running:
+
+   ```shell
+   sudo docker exec -it dd-agent agent status
+   ```
+
+   Check the **APM Agent** section of the output.
+
+1. After your applications receive traffic, confirm your services appear on the [APM Services page][18]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][17].
 
 ## Configure Unified Service Tags
 
