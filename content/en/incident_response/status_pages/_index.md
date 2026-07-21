@@ -273,7 +273,7 @@ To insert a variable, type `{{` in a message field and select a variable from th
 
 From the **Publish Notice** modal, select a template from the **Template** dropdown to pre-fill the notice with its title, messages, and components.
 
-After you apply a template, its fields become read-only, and the notice displays which template is applied. To make changes, edit a pre-filled field directly. A warning appears indicating that the template values were overridden, with a **Reset Values** option to revert to the original template content.
+Applying a template pre-fills the notice's fields, which remain editable and can be overridden if necessary, with a **Reset Values** option to revert to the original template content.
 
 {{< img src="incident_response/status_pages/apply_template_to_notice.png" alt="Publish Notice modal with a template applied, pre-filling the notice title, message, and impacted components" style="width:60%;" >}}
 
