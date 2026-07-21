@@ -22,7 +22,7 @@ If you experience unexpected behavior with Datadog Catalog, this guide may help 
 
 ### APM-instrumented services not appearing
 
-If services that you know are instrumented for APM are not appearing in the Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any primary tag values of your choosing) or [additional primary tags][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active. 
+If services that you know are instrumented for APM are not appearing in the Catalog list, it's likely because they have not been emitting performance data in the past hour for the selected `env` (or any primary tag values of your choosing) or [additional primary tags][1]. To confirm, on the **Performance** tab, hover over the columns where you expect the performance metrics to appear and see information on which environments the services are active.
 
 {{< img src="tracing/software_catalog/svc_cat_troubleshooting_1.png" alt="Hover message indicating that no performance data has been reported in the past hour" >}}
 
@@ -32,21 +32,21 @@ The count in the Catalog Setup Guidance section reflects the number of SLOs with
 
 ### Additional telemetry is available to a service but it's not listed
 
-Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastructure metrics, logs, Cloud Network Monitoring) to gather information about a given service. If you don't see a telemetry type that you expect in the Catalog, ensure that you have configured the `DD_SERVICE` tag according to the instructions in [Unified Service Tagging][2]. 
+Catalog relies on the `DD_SERVICE` tag in all telemetry types (infrastructure metrics, logs, Cloud Network Monitoring) to gather information about a given service. If you don't see a telemetry type that you expect in the Catalog, ensure that you have configured the `DD_SERVICE` tag according to the instructions in [Unified Service Tagging][2].
 
 ### Can't add metadata for RUM services
 
-Adding metadata for RUM services is not supported. 
+Adding metadata for RUM services is not supported.
 
 ### Multiple services share the same metadata
- 
-If you have many services that share the same metadata, you do not need separate `service.datadog.yaml` files for each one. You can define multiple services in a single `service.datadog.yaml` file by separating each service with a `---` separator. Copy and paste the shared metadata for the relevant dd-service entities. 
+
+If you have many services that share the same metadata, you do not need separate `service.datadog.yaml` files for each one. You can define multiple services in a single `service.datadog.yaml` file by separating each service with a `---` separator. Copy and paste the shared metadata for the relevant dd-service entities.
 
 ### Associated monitors not displayed in the Setup Guidance section
 
-The Catalog associates monitors to services when they are tagged, scoped, or grouped with service or [APM primary tags][3]. 
+The Catalog associates monitors to services when they are tagged, scoped, or grouped with service or [APM primary tags][3].
 
-The total monitor count displayed on the **Setup Guidance** tab for a single service does not include muted monitors and groups. 
+The total monitor count displayed on the **Setup Guidance** tab for a single service does not include muted monitors and groups.
 
 ## Endpoints
 
@@ -64,8 +64,8 @@ You can scope the definition to a specific service by adding the [service parame
 Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify the following:
 
 - `spec.implementedBy` includes the `service` from the span. For service overrides, Datadog also checks `base_service`.
-- The span's `http.method` matches the method in the definition.
-- The span has `http.route`, and its `http.url_details.path` or `http.route` matches the defined path. A path parameter matches exactly one segment. For example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
+- The span's `@http.method` matches the method in the definition.
+- The span has `@http.route`, and its `@http.url_details.path` or `@http.route` matches the defined path. A path parameter matches exactly one segment. For example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
 
 A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches. For the complete matching rules, see [How OpenAPI specifications are combined with traffic][8].
 

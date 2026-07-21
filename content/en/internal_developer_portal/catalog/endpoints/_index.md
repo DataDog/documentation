@@ -92,8 +92,8 @@ Read [Adding Entries][9] for more information.
 When you add an OpenAPI specification to an API entity, Datadog adds each declared HTTP method and path to the Endpoints list, including endpoints for which Datadog has not observed traffic. Datadog then compares recent endpoint telemetry with the specification and combines the data when all of the following values match:
 
 - **Service**: The service from the telemetry matches a service in the API entity's `spec.implementedBy` field. If the telemetry contains a service override, Datadog also checks its [`base_service`][13]. A definition without `spec.implementedBy` can match the same route on any service, so specify this field to avoid broad or ambiguous matches.
-- **HTTP method**: The `http.method` span attribute matches the method declared in the specification.
-- **Path**: The span must have an `http.route` attribute. Datadog first compares `http.url_details.path` with the declared path and then falls back to the normalized `http.route` value. Literal path segments match exactly. OpenAPI path parameters match one segment: for example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
+- **HTTP method**: The `@http.method` span attribute matches the method declared in the specification.
+- **Path**: The span must have an `@http.route` attribute. Datadog first compares `@http.url_details.path` with the declared path and then falls back to the normalized `@http.route` value. Literal path segments match exactly. OpenAPI path parameters match one segment: for example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
 
 When these values do not match unambiguously, the endpoint declared by the specification and the endpoint discovered from traffic remain separate entries. For an API entity example that uses `spec.implementedBy`, see [API entities][14].
 
