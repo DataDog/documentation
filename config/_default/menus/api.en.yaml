@@ -10538,8 +10538,7 @@ menu:
           - v2
         operationids:
           - GetCustomForecast
-        unstable:
-          - v2
+        unstable: []
         order: 69
     - name: Delete a budget's custom forecast
       url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
@@ -10551,8 +10550,7 @@ menu:
           - v2
         operationids:
           - DeleteCustomForecast
-        unstable:
-          - v2
+        unstable: []
         order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
@@ -10600,8 +10598,7 @@ menu:
           - v2
         operationids:
           - UpsertCustomForecast
-        unstable:
-          - v2
+        unstable: []
         order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
