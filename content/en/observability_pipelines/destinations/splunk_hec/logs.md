@@ -86,6 +86,16 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 : **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting a response.
 : **Metric type**: gauge
 
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: /observability_pipelines/destinations/#template-syntax
@@ -97,13 +107,3 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 [9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
 [11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| None           | 1                 | 1                   |

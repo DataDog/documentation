@@ -144,21 +144,6 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 
 For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
 
-[1]: /logs/log_configuration/rehydrating/
-[2]: /observability_pipelines/destinations/datadog_archives/
-[3]: https://console.aws.amazon.com/iam/
-[4]: /observability_pipelines/destinations/#template-syntax
-[5]: /observability_pipelines/configuration/set_up_pipelines/
-[6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
-[7]: /observability_pipelines/destinations/#event-batching
-[8]: https://app.datadoghq.com/observability-pipelines
-[9]: /api/latest/observability-pipelines/
-[10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[11]: /observability_pipelines/configuration/set_up_pipelines/
-[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
-[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-
 ## How the destination works
 
 ### AWS Authentication
@@ -182,3 +167,18 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------| ----------------| --------------------|
 | None           | 100,000,000     | 900                 |
+
+[1]: /logs/log_configuration/rehydrating/
+[2]: /observability_pipelines/destinations/datadog_archives/
+[3]: https://console.aws.amazon.com/iam/
+[4]: /observability_pipelines/destinations/#template-syntax
+[5]: /observability_pipelines/configuration/set_up_pipelines/
+[6]: https://docs.snowflake.com/en/user-guide/data-load-snowpipe-auto-s3
+[7]: /observability_pipelines/destinations/#event-batching
+[8]: https://app.datadoghq.com/observability-pipelines
+[9]: /api/latest/observability-pipelines/
+[10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[11]: /observability_pipelines/configuration/set_up_pipelines/
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
