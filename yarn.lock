@@ -6700,11 +6700,7 @@ __metadata:
     vite: "npm:^5.4.10"
     vite-plugin-singlefile: "npm:^2.0.2"
     zod: "npm:^4.1.12"
-<<<<<<< HEAD
-  checksum: 10/e00e25c950a006d03e43b7718418d56af53b2cd7aed7c997ee2b422dfd30e98bd1c3fad6a035c707422ac4cffc9b2ed3ede36bceca9ecad5303c8bd8ab912594
-=======
   checksum: 10/f507258a2f037290c8e6eba20e6909302274802e0ef252faaceeb8087840a9e3cb2cf213b0637d35c5f673a25db30fcafb9428525641e45471663eb25c2f04d0
->>>>>>> master
   languageName: node
   linkType: hard
 
