@@ -76,7 +76,7 @@ When you enable Bits Security Analyst, Datadog analyzes your rules, including cu
 
 Rule eligibility depends on whether Datadog has built the investigation capability for the log source, and whether the Agent is able to investigate the specific rule. If you have new custom rules to evaluate, or want to ask about a rule that wasn't made eligible, contact [Datadog support][1].
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits Security Analyst{{< /ui >}}][3].
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
 1. Turn on the toggle to {{< ui >}}Enable Bits Security Analyst{{< /ui >}}. Additional settings appear.
 1. (Optional) Configure which rules and which severities you want Bits Security Analyst to automatically investigate signals for. There are two ways to do so:
    - Click {{< ui >}}Rule Settings{{< /ui >}} to configure investigations for individual rules. You can change the minimum severity for signals to be investigated, and enable or disable individual rules for investigation.
@@ -120,13 +120,29 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
    </ol>
    {{< /collapse-content >}}
 
+### Add knowledge sources
+
+You can provide additional context for Bits Security Analyst, such as details about your organization's authorization rules, policies, and environment, allowing Bits to produce more accurate investigations tailored to your organization's needs.
+
+To add knowledge, in Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Knowledge Sources{{< /ui >}}][8]. There, you can add two kinds of knowledge:
+- **General Org Context (Bits.md)**: Organization-level instructions that Bits Security Analyst should apply to all investigations.
+  1. Click **Edit** to make the field editable so you can make your changes.
+  1. Click **Save**.
+- **Situational Context**: Investigation-specific facts that Bits Security Analyst should apply in specific situations. You can search and filter the table of context entries, and choose to view expired entries, to get an overview of existing context.
+  1. Click **Create Context Entry**. In the window that opens, enter:
+     1. **Title**: A short title for your entry.
+     1. **Context description**: The information you want Bits Security Analyst to take into account.
+     1. **Status**: Choose to enable this piece of context, or to save it without enabling it.
+     1. **Expiration date** (optional): A date for Bits Security Analyst to stop taking this piece of context into account.
+  1. Click **Create Entry**. The window closes and your context appears in the table.
+
 ### Get notifications for completed investigations
 
 You can create security notification rules to get a notification when Bits Security Analyst completes an investigation. To do so, follow the instructions in [Create notification rules][7]. When specifying the tags and attributes that must be present for the notification rule to be triggered, add the tag `@workflow.bits_investigator.state:*`.
 
 ## Disable Bits Security Analyst
 
-1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}Bits Security Analyst{{< /ui >}}][3].
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Bits Security Analyst{{< /ui >}} > [{{< ui >}}Analyst Configuration{{< /ui >}}][3].
 1. Scroll to the bottom of the page. Under {{< ui >}}Disable Bits Security Analyst{{< /ui >}}, turn off the {{< ui >}}Enabled{{< /ui >}} toggle.
    <div class="alert alert-warning">Disabling Bits Security Analyst permanently resets all configuration settings.</div>
 
@@ -136,8 +152,9 @@ You can create security notification rules to get a notification when Bits Secur
 
 [1]: /help
 [2]: /account_management/rbac/permissions/#cloud-security-platform
-[3]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst
+[3]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst/analyst-configuration
 [4]: /actions/connections/
 [5]: https://app.datadoghq.com/security/siem/signals
 [6]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_finding-types-active.html
 [7]: /security/notifications/rules/#create-notification-rules
+[8]: https://app.datadoghq.com/security/configuration/bits-ai-security-analyst/knowledge-sources
