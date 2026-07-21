@@ -206,7 +206,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
         - `Rerouted only` shows only logs rerouted to an overflow destination by the [Quota processor][8].
         - `Dropped only` shows only dropped events.
     - Use the {{< ui >}}All telemetry{{< /ui >}} dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
-1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes, and click {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
+1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes and then {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
 1. To deploy your updates to production, do one of the following:
     - **Deploy updates using the UI**: Click {{< ui >}}Next: Deploy Changes{{< /ui >}} on the pipeline page.
     - **Use the API to deploy changes**: See [Export and Import Configuration][11] for information on exporting pipeline configurations to JSON.
