@@ -22,13 +22,13 @@ Datadog AI agents onboard to the actor and delegation model individually, so cov
 | Agent | Status | Notes |
 | ----- | ------ | ----- |
 | Bits SRE | Tracked | Most actions include `@evt.actor.mode` and `@delegator.*`. Some tool-call and investigation actions do not include these fields yet. |
-| Bits Chat | Partially tracked | Actions taken from the full [Bits Chat page][3] run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (Cmd+I) don't include these fields yet. |
+| Bits Chat | Partially tracked | Actions taken from the full [Bits Chat page][3] run in `interactive` mode, with the requesting user in `@delegator.*`. Actions taken from the inline chat panel (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>) don't include these fields yet. |
 | Bits Security Analyst | Tracked | Actions run in `autonomous` mode. There is no delegating user, because these actions don't involve a human in the loop. |
 | Bits Agent Builder | Not yet tracked | Actions don't include `@evt.actor.mode` or `@delegator.*` yet. |
 | Actions taken through the Datadog MCP server | Tracked | See the [View actions taken through the Datadog MCP server](#view-actions-taken-through-the-datadog-mcp-server) section. |
 | Third-party or customer-built agents | Not tracked | Audit Trail doesn't distinguish these from regular usage of API keys, application keys, personal access tokens (PATs), or service account tokens (SATs). |
 
-**Note**: Even for a tracked agent, some action types haven't onboarded yet. `@evt.actor.mode:*` doesn't return every action for every tracked agent. Datadog is expanding coverage to the remaining agents and action types.
+**Note**: Even for a tracked agent, some action types haven't been onboarded yet. `@evt.actor.mode:*` doesn't return every action for every tracked agent. Datadog is expanding coverage to the remaining agents and action types.
 
 ## View all Datadog AI agent activity
 
