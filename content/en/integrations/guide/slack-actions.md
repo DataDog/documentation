@@ -16,16 +16,19 @@ Use the following commands for incidents navigation. All commands can use `/dd i
 | Command | Description|
 | ------------------ | ---------- |
 | `/dd in` or `/dd incident` | Declare an incident.|
+| `/dd in test` | Declare a test incident.|
 | `/dd in update` or `/dd in edit`| Update the incident's title, state, severity, and attributes.|
 | `/dd in responders`| Manage the incident's response team.|
 | `/dd in investigate` | Trigger Bits Investigation. |
-| `/dd in summary` | Generate the incident's summary with AI. |
+| `/dd in summary` | Generate the incident's summary with AI. Not available in Gov and Gov2 regions.|
 | `/dd in notify` | Notify @-handles about the incident. |
 | `/dd in list` | List open incidents.|
 | `/dd in private`| Archive the current channel, create a private channel, and add all existing responders.|
 | `/dd in public` | Make the incident and its timeline visible to anyone with incident-read permissions. |
 | `/dd followup` | Create a new follow-up.|
-| `/dd followup list`  | List Incident Follow-ups |
+| `/dd followup list`  | List Incident Follow-ups.|
+| `/dd task` | Create an incident task.|
+| `/dd task list` | List incident tasks.|
 | `/dd shortcuts` | View Incident Actions.|
 
 ## On-Call
