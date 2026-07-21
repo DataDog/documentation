@@ -43,7 +43,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/
 ### v0.1.32 — 2026-07-21
 
 *Bundled in chart: `0.4.6`.*
-*Validated with Observability Pipelines Worker: `2.19.0`.*
+*Validated with Observability Pipelines Worker: `2.20.0` (`datadog/observability-pipelines-worker` Helm chart `2.20.0`).*
 
 #### Changed
 - Adds opt-in PostgreSQL metastore read replica support for search and analytics read paths.
