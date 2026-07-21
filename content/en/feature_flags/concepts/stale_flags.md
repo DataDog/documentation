@@ -58,9 +58,9 @@ Archiving marks the flag as inactive so it is no longer evaluated or editable. A
 
 ### Mark as permanent
 
-Some flags are intentionally long-lived, such as kill switches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}PERMANENT{{< /ui >}} indicator in the flag details sidebar.
+Some flags are intentionally long-lived, such as kill switches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}Permanent{{< /ui >}} indicator in the flag details sidebar.
 
-{{< img src="feature_flags/mark_as_permanent-2.png" alt="Feature flag marked as PERMANENT on the flag details page." style="width:35%;" >}}
+{{< img src="feature_flags/mark_as_permanent-2.png" alt="Feature flag marked as Permanent on the flag details page." style="width:35%;" >}}
 
 ### Dismiss for 30 days
 
