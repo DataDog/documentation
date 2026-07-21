@@ -36,6 +36,14 @@ Both response features rely on `runtime_security_config.enforcement` in `/etc/da
 
 In addition to disabling enforcement, you can specify binaries to protect from response actions (none by default) or control which rule sources can trigger response actions (`file` rules and `remote-config`, both enabled by default).
 
+### RBAC for response
+
+Both **Automated response** and **Response** require specific RBAC permissions. The following [roles and permissions][5] are commonly used:
+
+- The `security_monitoring_cws_agent_rules_actions` permission lets users configure Automated response and manually respond to threats.
+  - A user with the Datadog Admin role must create a role that includes this permission, then assign that role only to users who manage Automated response or need to run manual Response actions.
+- The **Datadog Standard** role lets users create and update custom rules by default, as long as the changes do not modify **protection** settings on the rule. Users with the Standard role cannot enable a disabled rule that includes an Automated response action and cannot use manual Response actions.
+
 ## Automated response
 
 Automated response enables you to proactively block and terminate threats identified by the Datadog Agent detection rules using the Workload Protection {{< ui >}}Automated response{{< /ui >}} feature.
@@ -59,18 +67,9 @@ When Automated response applies to a rule that generated a signal, you can see i
 1. In [Signals][1], open a signal.
 2. In the signal, view **Next Steps**. If available for the matching rule, **Proactively block threats** displays **Automated response enabled**.
 
-### RBAC for Automated response
-
-Here are some important [role and permissions][5] to use for custom rules and Automated response RBAC:
-
-- The `security_monitoring_cws_agent_rules_actions` permission can be used to configure the Automated response feature.
-  - To use the `security_monitoring_cws_agent_rules_actions` permission, a user with the Datadog Admin role must create a role containing the `security_monitoring_cws_agent_rules_actions` permission and then add only those users that manage Automated response to this role.
-- The **Datadog Standard** role enables users to create/update a custom rule by default, as long as the operation does not change the **protection** settings on the rule. The Standard role cannot activate a disabled rule with an Automated response action.
-
-By default, all OOTB Agent rules (such as the crypto mining) are in an active state. You must configure the Automated response action manually.
-
 ### Configure Automated response on Agent rules
 
+By default, all OOTB Agent rules (such as the crypto mining) are in an active state. You must configure the Automated response action manually.
 You can change the protection option to **Blocking** on an Agent rule and the Agent will terminate the corresponding processes instantly.
 
 #### Protection options
