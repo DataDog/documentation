@@ -40,7 +40,7 @@ The table below lists a few examples of Datadog products:
         <td>
         <ul>
         <li>Highlight code vulnerabilities in your text editor or on GitHub with <a href="/security/code_security/">Code Security</a>.</li>
-        <li>Facilitate a remote pair-programming session with <a href="/coscreen/">CoScreen</a>.</li></ul>
+        </ul>
         </td>
     </tr>
     <tr>
