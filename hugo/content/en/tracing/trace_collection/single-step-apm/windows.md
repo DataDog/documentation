@@ -45,7 +45,7 @@ To instrument only .NET applications running on IIS:
    
 1. Copy and run the provided installation command on your Windows host.
 
-   Run the command from an administrator PowerShell session. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2]. Treat your API key as a secret: provide it through an environment variable or a secrets manager rather than hardcoding it in shared files.
+   Run the command from an administrator PowerShell session. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
 
    Use the PowerShell installer:
 
