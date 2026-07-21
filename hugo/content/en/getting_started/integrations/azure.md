@@ -256,9 +256,9 @@ If you already connected an app registration using a client secret, you can migr
 
    {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessMigration.png" alt="The General tab for an app registration, with a callout recommending Secretless Auth and a Set Up Secretless Auth button" style="width:100%;" >}}
 
-3. In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method, then complete the steps for that method.
+In the {{< ui >}}Secretless Authentication Setup{{< /ui >}} dialog, select a setup method, then complete the steps for that method:
 
-   {{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
+{{< img src="/getting_started/integrations/azure/GSwAzure_secretlessSetupModal.png" alt="The Secretless Authentication Setup dialog with the Azure CLI, Terraform, and Azure Portal setup methods and steps to create a federated credential, verify it, and complete setup" style="width:100%;" >}}
 
 {{< tabs >}}
 {{% tab "Azure CLI" %}}
