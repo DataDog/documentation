@@ -29,7 +29,7 @@ After creating a grok rule, the parser can write the IP address, user, request t
 Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To configure Grok parsing rules:
 
 1. Click {{< ui >}}Add Grok Parser{{< /ui >}} to open a new parser configuration.
-2. {{< ui >}}Log Samples{{< /ui >}}: Log samples automatically get pulled in the Log Samples section. You can also add more log samples (up to 10 total).
+1. {{< ui >}}Log Samples{{< /ui >}}: Log samples are automatically pulled into the Log Samples section. You can also add more log samples (up to 10 total, 5000 characters each).
    **Note**: The sample logs are pulled from the five highest-volume log patterns matching your pipeline filter.
 1. {{< ui >}}Log Samples{{< /ui >}}: Add up to five sample logs (up to 5000 characters each) to test your parsing rules.
 1. {{< ui >}}Define parsing rules{{< /ui >}}: Click {{< ui >}}Auto parsing{{< /ui >}} to generate rules that match your samples.
