@@ -38,7 +38,7 @@ To enable APM in a Docker Linux container:
    bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
    ```
 
-   Then, run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]:
+   Then, run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]. Treat your API key as a secret: provide it through an environment variable or a secrets manager rather than hardcoding it in shared files.
 
    ```shell
    docker run -d --name dd-agent \
@@ -100,10 +100,10 @@ Available versions are listed in source repositories for each language:
 1. Confirm the Agent is healthy and the APM Agent is running:
 
    ```shell
-   sudo docker exec -it dd-agent agent status
+   docker exec -it dd-agent agent status
    ```
 
-   Check the **APM Agent** section of the output.
+   Check the **APM Agent** section of the output. Prepend `sudo` if your Docker installation requires it.
 
 1. After your applications receive traffic, confirm your services appear on the [APM Services page][18]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][17].
 

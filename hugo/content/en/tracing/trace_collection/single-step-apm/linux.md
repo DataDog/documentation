@@ -109,6 +109,8 @@ If you don't yet have a Datadog Agent installed, follow these steps to install t
    ```
 
    Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. This command installs or updates the Agent and the SSI packages.
+
+   **Note**: Treat your API key as a secret. Provide it through an environment variable or a secrets manager rather than hardcoding it in shared files.
 5. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>

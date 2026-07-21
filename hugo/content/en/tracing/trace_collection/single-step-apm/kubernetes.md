@@ -58,6 +58,8 @@ Follow these steps to enable Single Step Instrumentation across your entire clus
 
 The following commands provide a minimal command-line setup equivalent to enabling SSI in the UI. In each command, replace `<YOUR_DD_API_KEY>` with your [Datadog API key][40] and `<YOUR_CLUSTER_NAME>` with your cluster name. SSI is enabled by `apm.instrumentation.enabled: true` in the configuration file.
 
+The API key is stored in a Kubernetes secret and referenced by name, so it does not appear in the configuration file. Treat your API key as a secret and avoid placing it directly in manifests or other shared files.
+
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
@@ -154,6 +156,14 @@ To update an existing Helm installation, add the SSI configuration to your `data
    ```
 
    Check the **APM Agent** section of the output.
+
+1. Confirm that injection reached an instrumented application pod. Replace `<APP_POD>` and `<APP_NAMESPACE>` with one of your application pods and its namespace:
+
+   ```shell
+   kubectl get pod <APP_POD> -n <APP_NAMESPACE> -o jsonpath='{.spec.initContainers[*].name}'
+   ```
+
+   The output includes `datadog-init-apm-inject` and a `datadog-lib-<language>-init` container for each instrumented language.
 
 1. After your applications receive traffic, confirm your services appear on the [APM Services page][42]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][35].
 
