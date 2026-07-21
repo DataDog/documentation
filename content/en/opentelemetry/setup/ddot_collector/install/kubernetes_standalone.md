@@ -91,8 +91,8 @@ helm repo update
 1. Store the API key as a Kubernetes secret:
    ```shell
    kubectl create secret generic datadog-secret \
-     --from-literal site={{< region-param key="dd_site" >}} \
-     --from-literal api-key=<DD_API_KEY>
+     --from-literal api-key=<DD_API_KEY>        \
+     --from-literal site={{< region-param key="dd_site" >}}
    ```
    Replace `<DD_API_KEY>` with your actual Datadog API key.
 
@@ -212,7 +212,6 @@ spec:
         endpoint: ${env:K8S_NODE_NAME}:10250
         node: ${env:K8S_NODE_NAME}
         metric_groups:
-          - node
           - pod
           - container
           - volume
@@ -351,7 +350,6 @@ spec:
         endpoint: ${env:K8S_NODE_NAME}:10250
         node: ${env:K8S_NODE_NAME}
         metric_groups:
-          - node
           - pod
           - container
           - volume
@@ -533,6 +531,8 @@ extraEnvs:
     value: 'true'
 {{< /code-block >}}
 
+Replace `<CLUSTER_NAME>` with a name for your cluster.
+
 4. Enable presets:
 
 {{< code-block lang="yaml" filename="node-collector-values.yaml" collapsible="true" >}}
@@ -574,8 +574,6 @@ config:
         k8s.cluster.name: ${env:DD_CLUSTER_NAME}
 {{< /code-block >}}
 
-Replace `<CLUSTER_NAME>` with a name for your cluster.
-
 6. (Optional) Enable additional Datadog features:
 
 <div class="alert alert-warning">Enabling these features may incur additional charges. Review the <a href="https://www.datadoghq.com/pricing/">pricing page</a> and talk to your Customer Success Manager before proceeding.</div>
@@ -584,6 +582,8 @@ Replace `<CLUSTER_NAME>` with a name for your cluster.
 config:
   # [...]
   processors:
+    infraattributes:
+      cardinality: 2
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
@@ -595,7 +595,14 @@ config:
         compute_top_level_by_span_kind: true
         peer_tags_aggregation: true
         compute_stats_by_span_kind: true
-
+  service:
+    pipelines:
+      logs:
+        processors: ['resource/add-cluster-name', 'infraattributes']
+      metrics:
+        processors: ['resource/add-cluster-name', 'infraattributes']
+      traces:
+        processors: ['resource/add-cluster-name', 'infraattributes']
 {{< /code-block >}}
 
 {{% collapse-content title="Completed node-collector-values.yaml file" level="p" %}}
@@ -632,10 +639,6 @@ config:
       sending_queue:
         batch:
           flush_timeout: 10s
-  extensions:
-    health_check:
-      # OTEL_K8S_POD_IP is injected automatically by the Collector Helm chart
-      endpoint: ${env:OTEL_K8S_POD_IP}:13133
   processors:
     infraattributes:
       cardinality: 2
@@ -735,12 +738,6 @@ Apply the `node-collector.yaml` file to create the `OpenTelemetryCollector` reso
 ```shell
 kubectl apply -f node-collector.yaml
 ```
-
-This follows the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
-
-[1]: https://opentelemetry.io/docs/collector/deployment/agent/
-[2]: https://opentelemetry.io/docs/collector/deployment/gateway/
-[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{% tab "Helm" %}}
 Install the OpenTelemetry Collector chart with your values file:
@@ -750,12 +747,6 @@ helm install node-collector open-telemetry/opentelemetry-collector -f node-colle
 ```
 
 To apply later changes, run `helm upgrade node-collector open-telemetry/opentelemetry-collector -f node-collector-values.yaml`.
-
-This follows the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
-
-[1]: https://opentelemetry.io/docs/collector/deployment/agent/
-[2]: https://opentelemetry.io/docs/collector/deployment/gateway/
-[3]: /opentelemetry/setup/ddot_collector/install/kubernetes_gateway/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -828,8 +819,6 @@ spec:
           - name: OTEL_RESOURCE_ATTRIBUTES
             value: "service.version=<VERSION>,deployment.environment.name=<ENV>"
 {{< /code-block >}}
-
-<div class="alert alert-info">Alternatively, you can use <a href="/getting_started/tagging/unified_service_tagging/?tab=kubernetes#configuration">Datadog-specific Kubernetes labels</a> to configure unified service tagging. Do not use both approaches, as this creates duplicate tags.</div>
 
 ### Run the application
 
