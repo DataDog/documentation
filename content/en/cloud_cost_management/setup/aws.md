@@ -59,9 +59,7 @@ The CloudFormation stack can be configured in three ways depending on your exist
 
 ### Configure the Cost and Usage Report settings
 
-If using an existing Cost and Usage Report 2.0 and bucket:
-
-* Select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
+If using an existing Cost and Usage Report 2.0 and bucket, select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
 
 {{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page with Create Cost and Usage Report and Create S3 Bucket unselected, showing the Data Export selector used to select an existing export" style="width:100%" >}}
 
@@ -99,9 +97,7 @@ The Terraform configuration supports three setups depending on your existing AWS
 
 ### Configure the Cost and Usage Report settings
 
-If using an existing Cost and Usage Report 2.0 and bucket:
-
-* Select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
+If using an existing Cost and Usage Report 2.0 and bucket, select your report from the {{< ui >}}Data Export{{< /ui >}} field and continue to the next step.
 
 {{< img src="cloud_cost/setup/aws_data_export_selector.png" alt="CCM Setup Page with Create Cost and Usage Report and Create S3 Bucket unselected, showing the Data Export selector used to select an existing export" style="width:100%" >}}
 
