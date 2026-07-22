@@ -92,6 +92,7 @@ Channel naming templates support a different, smaller set of variables than noti
 | `{{yyyy}}` | The four-digit year the incident was created. |
 | `{{mm}}` | The two-digit month the incident was created. |
 | `{{dd}}` | The two-digit day of month the incident was created. |
+| `{{severity_number}}` | The incident's numeric severity level. |
 | `{{random_adjective}}` | A random adjective. |
 | `{{random_noun}}` | A random noun. |
 | `{{severity}}` | The incident's severity. **Only available for Google Chat channel naming templates.** |

@@ -62,7 +62,16 @@ You can configure Incident Management to automatically create a dedicated Slack 
 
 To use incident channels, go to **[Incident Response > Incident Management > Settings > Integrations][3]** and enable **Create Slack channels for incidents**.
 
-The **channel name template** you define determines how Datadog names the incident channels it creates. For the list of available variables, see [Variables available only in channel naming templates][7].
+The **channel name template** you define determines how Datadog names the incident channels it creates. The following variables are available in channel name templates (see also [Variables available only in channel naming templates][7]):
+
+* `{{public_id}}`: Incident's numeric ID
+* `{{title}}`: Incident's title
+* `{{created}}`: Incident's creation date in format MM_DD_YYYY
+* `{{yyyy}}`: Incident's four-digit creation year
+* `{{mm}}`: Incident's two-digit creation month
+* `{{dd}}`: Incident's two-digit creation day of month
+* `{{random_adjective}}`: Random adjective
+* `{{random_noun}}`: Random noun
 
 
 ### Message syncing (Slack mirroring)
