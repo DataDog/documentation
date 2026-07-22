@@ -22,7 +22,7 @@ further_reading:
 
 BYOC (Bring Your Own Cloud) Logs consists of two main blocks:
 
-- [**Observability Pipelines**][1] collects, processes, and routes logs.
+- [**Observability Pipelines**](/observability_pipelines/) collects, processes, and routes logs.
 - The **BYOC Logs engine** indexes, stores, and queries logs. Datadog distributes the engine as the `datadog/cloudprem` Docker image.
 
 The Observability Pipelines Worker and the BYOC Logs engine process log data in your environment. Datadog hosts the pipeline configuration UI and Log Explorer, and routes queries to the engine.
@@ -98,5 +98,3 @@ Connect the Datadog UI to the BYOC Logs engine in one of two ways:
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /observability_pipelines/
