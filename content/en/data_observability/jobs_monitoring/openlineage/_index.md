@@ -599,13 +599,14 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | `tags`         | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
 
-The `tags` facet must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`; tags sent as a single object instead of an array, or with a missing or different `source`, are ignored.
+The [`tags` facet][2] must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`; tags sent as a single object instead of an array, or with a missing or different `source`, are ignored.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openlineage.io/docs/spec/run-cycle/
+[2]: https://openlineage.io/spec/facets/1-0-0/TagsRunFacet.json
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: /data_observability/jobs_monitoring/openlineage/datadog_agent_for_openlineage/
 [5]: https://openlineage.io/docs/spec/facets/job-facets/job-type/
