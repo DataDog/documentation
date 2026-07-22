@@ -68,6 +68,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 |----------------|-------------------|---------------------|
 | None           | 1                 | 15                  |
 
+## Metrics
+
+For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
+
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
 [3]: https://cloud.google.com/docs/authentication#auth-flowchart
@@ -78,3 +82,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /observability_pipelines/configuration/set_up_pipelines/
 [9]: /api/latest/observability-pipelines/
 [10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

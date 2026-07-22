@@ -39,7 +39,16 @@ further_reading:
   text: "Block Application Attacks with Application & API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
+site_support_id: application_security_override
+cascade:
+    site_support_id: application_security_override
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 {{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
 

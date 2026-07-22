@@ -7,10 +7,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
+- link: "/experiments/diagnostics/"
+  tag: "Documentation"
+  text: "Experiment Diagnostics"
 ---
 ## Overview
 
 If you experience issues setting up or running Datadog Experiments, use this page to troubleshoot. If you continue to have trouble, [contact Datadog support][1].
+
+Datadog also runs [experiment diagnostics][10] with experiment analysis. Start with any diagnostic warnings or failed diagnostic check banners, then use this page for additional manual checks.
 
 ## Experiment results do not appear
 
@@ -176,3 +181,4 @@ If the issue persists after completing all checks, contact the [Datadog support 
 [7]: /feature_flags/client/javascript/#set-the-evaluation-context
 [8]: /feature_flags/client/
 [9]: https://app.datadoghq.com/product-analytics/experiments/settings/subject-types
+[10]: /experiments/diagnostics/

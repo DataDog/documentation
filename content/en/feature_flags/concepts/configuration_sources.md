@@ -17,11 +17,10 @@ Datadog Feature Flags server SDKs evaluate flags locally from Universal Flag Con
 
 ## Get started with agentless delivery
 
-Agentless delivery is the default in supported server SDKs. To get started, use one of these minimum versions:
+Agentless delivery is the default in supported Node.js SDK versions. Other server SDKs use Agent Remote Configuration for flag delivery. To get started with Node.js, use one of these minimum versions:
 
 | SDK | Minimum version |
 |---|---|
-| Java (`dd-java-agent` and `dd-openfeature`) | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
@@ -32,11 +31,11 @@ DD_API_KEY=<DATADOG_API_KEY>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][2] or [Node.js][3] setup instructions.
+Then initialize or access the Datadog OpenFeature provider in application code. See the [Node.js setup instructions][2].
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
-<div class="alert alert-warning">The initial agentless releases support configuration delivery and local flag evaluation only. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
 
 ## Advanced configuration
 
@@ -64,20 +63,19 @@ If your organization is not on the default `datadoghq.com` site, set `DD_SITE` i
 | `DD_SITE` | `datadoghq.com` | Datadog site used to derive the agentless endpoint. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless backend URL. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Time between completed polling attempts. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `2` | Timeout for an individual configuration request. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_EXTRA_HEADERS` | None | Adds headers to agentless configuration requests. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Timeout for an individual configuration request. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source:
 
 - polls every 30 seconds by default;
-- uses a 2-second request timeout by default;
+- uses a 5-second request timeout by default;
 - uses ETags to avoid downloading unchanged configuration;
 - preserves the last accepted configuration during temporary network or payload errors; and
 - prevents overlapping polls.
 
 Keep `DD_API_KEY` in a secret manager and expose it only to the application process that loads flag configuration. Agentless configuration delivery sends the API key directly from the application to Datadog over HTTPS.
 
-Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Applications on that site continue to use caller-provided default values unless they use Agent Remote Configuration.
+Datadog-managed agentless delivery is not available for Datadog for Government in these Node.js versions. Applications on that site continue to use caller-provided default values unless they use Agent Remote Configuration.
 
 ### Enable or disable feature flags
 
@@ -126,7 +124,7 @@ If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true`, choose one of these
 
 If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false`, replace it with `DD_FEATURE_FLAGS_ENABLED=false`.
 
-Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, an application without an explicit source uses agentless delivery. Set `remote_config` explicitly before that release if you want to remain on Agent delivery.
+Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, a Node.js application without an explicit source uses agentless delivery. Set `remote_config` explicitly before that release if you want to remain on Agent delivery.
 
 ### Future offline mode
 
@@ -137,5 +135,4 @@ Offline mode is planned for applications that provide UFC JSON bytes at startup 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /remote_configuration/
-[2]: /feature_flags/server/java/
-[3]: /feature_flags/server/nodejs/
+[2]: /feature_flags/server/nodejs/
