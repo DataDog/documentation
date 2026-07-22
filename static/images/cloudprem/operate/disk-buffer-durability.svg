@@ -95,7 +95,7 @@
   <rect x="375" y="563" width="505" height="76" rx="8" fill="#DDF8E8" stroke="#00C875" stroke-width="2"/>
   <text x="397" y="588" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">SCALE DOWN</text>
   <text x="397" y="609" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="13">Stop intake → drain disk buffer → exit</text>
-  <text x="397" y="629" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">terminationGracePeriodSeconds: 3,600</text>
+  <text x="397" y="629" fill="#0A0A0A" font-family="Arial, Helvetica, sans-serif" font-size="12">Kubernetes and Worker shutdown limits: 3,600 seconds</text>
 
   <!-- OP to BYOC Engine -->
   <path d="M905 355h59" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>

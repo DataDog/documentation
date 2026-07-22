@@ -94,7 +94,12 @@ The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain`
 
 During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 
-The `terminationGracePeriodSeconds` value gives the Worker time to empty its buffer before exiting. You can estimate the required time from the drain throughput measured in your environment:
+Two settings give the Worker time to empty its buffer before exiting:
+
+- `terminationGracePeriodSeconds` controls how long Kubernetes waits before terminating the pod.
+- `DD_OP_GRACEFUL_SHUTDOWN_LIMIT_SECS` controls how long the Worker waits before forcing its own shutdown.
+
+The shorter of these two limits determines how long the buffer has to drain. You can estimate the required time from the drain throughput measured in your environment:
 
 ```text
 drain time = configured buffer size in MB ÷ measured drain throughput in MB/s
@@ -111,9 +116,13 @@ termination grace period = 833 seconds × 1.2
                          ≈ 1,000 seconds
 ```
 
-Although the estimate is approximately 1,000 seconds, this example uses a 3,600-second termination grace period to provide additional margin:
+Although the estimate is approximately 1,000 seconds, this example sets both shutdown limits to 3,600 seconds to provide additional margin:
 
 ```yaml
+env:
+  - name: DD_OP_GRACEFUL_SHUTDOWN_LIMIT_SECS
+    value: "3600"
+
 terminationGracePeriodSeconds: 3600
 ```
 
