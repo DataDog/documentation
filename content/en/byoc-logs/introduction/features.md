@@ -49,7 +49,7 @@ The following log features are supported:
 
 ## Unsupported features
 
-Feature support is actively evolving. The following are not supported:
+The following are not supported:
 
 - SIEM
 - Watchdog
