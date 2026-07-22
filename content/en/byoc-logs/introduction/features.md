@@ -64,10 +64,5 @@ Feature support is actively evolving. The following are not currently supported:
 - **Advanced query capabilities**:
   - Calculated fields
   - Grok extraction (query-time parsing)
-  - Formula
-  - Join
-  - Filter on reference tables
-  - Filter with subquery
-  - DDSQL
 
 [1]: /api/latest/logs-restriction-queries/
