@@ -109,6 +109,37 @@ Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the
 
 For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation.
 
+{{< site-region region="us,ap1,ap2,uk1" >}}
+
+## AWS PrivateLink
+
+To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][1] for setup instructions. The two endpoints you need to set up are:
+
+- Logs (User HTTP intake): {{< region-param key=http_endpoint_private_link code="true" >}}
+- Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
+
+**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
+
+[1]: /agent/guide/private-link/?tab=crossregionprivatelinkendpoints
+
+{{< /site-region >}}
+{{< site-region region="us3" >}}
+
+<!-- vale Datadog.headings = NO -->
+## Azure Private Link
+<!-- vale Datadog.headings = YES -->
+
+To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
+
+- Logs (User HTTP intake): `http-intake.logs.us3.datadoghq.com`
+- Remote Configuration: `config.us3.datadoghq.com`
+
+**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a Private Link endpoint.
+
+[1]: /agent/guide/azure-private-link/?site=us3
+
+{{< /site-region >}}
+
 ### Datadog Logs metrics
 
 - Use the `component_id` tag to filter or group by individual components.
@@ -157,37 +188,6 @@ Because the reserved `status` attribute already exists, the destination renames 
   "timestamp": "..."
 }
 ```
-
-{{< site-region region="us,ap1,ap2,uk1" >}}
-
-## AWS PrivateLink
-
-To send logs from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][1] for setup instructions. The two endpoints you need to set up are:
-
-- Logs (User HTTP intake): {{< region-param key=http_endpoint_private_link code="true" >}}
-- Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
-
-**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a PrivateLink endpoint.
-
-[1]: /agent/guide/private-link/?tab=crossregionprivatelinkendpoints
-
-{{< /site-region >}}
-{{< site-region region="us3" >}}
-
-<!-- vale Datadog.headings = NO -->
-## Azure Private Link
-<!-- vale Datadog.headings = YES -->
-
-To send logs from Observability Pipelines to Datadog using Azure Private Link, see [Connect to Datadog over Azure Private Link][1] for setup instructions. The two endpoints you need to set up are:
-
-- Logs (User HTTP intake): `http-intake.logs.us3.datadoghq.com`
-- Remote Configuration: `config.us3.datadoghq.com`
-
-**Note**: The `obpipeline-intake.datadoghq.com` endpoint is used for Live Capture and is not available as a Private Link endpoint.
-
-[1]: /agent/guide/azure-private-link/?site=us3
-
-{{< /site-region >}}
 
 ## How the destination works
 
