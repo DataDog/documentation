@@ -186,7 +186,7 @@ To diagnose and restore delivery:
 
 If delivery does not recover, contact [Datadog Support][12] and provide the AWS account ID and region, the CloudWatch Metric Stream and Firehose delivery stream ARNs, the approximate time delivery stopped, and relevant Firehose error logs.
 
-Restarting delivery affects new records and does not automatically recover a historical gap. Records written to the S3 backup are not automatically ingested into Datadog.
+**Note**: Restarting delivery affects new records only and does not backfill records that failed during the outage. Records written to the S3 backup are not automatically ingested into Datadog.
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
