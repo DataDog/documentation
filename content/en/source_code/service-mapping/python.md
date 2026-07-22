@@ -15,15 +15,15 @@ To embed Git information in your Python build artifacts, follow the instructions
 
 If you are using Docker containers, you have three options: using Docker, using Setuptools, or configuring your application with `DD_GIT_*` environment variables.
 
-{{% collapse-content title="Option 1: Docker" level="h3" %}}
+{{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: Setuptools or unified Python project settings file" level="h3" %}}
+{{% collapse-content title="Setuptools or unified Python project settings file" level="h3" %}}
 {{% sci-dd-setuptools-unified-python %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 3: `DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
@@ -31,15 +31,15 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
-{{% collapse-content title="Option 1: Datadog tooling" level="h3" %}}
+{{% collapse-content title="Datadog tooling" level="h3" %}}
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: Setuptools or unified Python project settings file" level="h3" %}}
+{{% collapse-content title="Setuptools or unified Python project settings file" level="h3" %}}
 {{% sci-dd-setuptools-unified-python %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 3: `DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
@@ -47,11 +47,11 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-{{% collapse-content title="Option 1: Setuptools or unified Python project settings file" level="h3" %}}
+{{% collapse-content title="Setuptools or unified Python project settings file" level="h3" %}}
 {{% sci-dd-setuptools-unified-python %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: `DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 

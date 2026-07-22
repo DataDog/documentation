@@ -15,11 +15,11 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with the `DD_TAGS` environment variable.
 
-{{% collapse-content title="Option 1: Docker" level="h3" %}}
+{{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker-ddtags %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: `DD_TAGS` environment variable" level="h3" %}}
+{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
 {{% sci-dd-tags-env-variable %}}
 {{% /collapse-content %}}
 
@@ -27,11 +27,11 @@ If you are using Docker containers, you have two options: using Docker or config
 
 If you are using Serverless, you have two options depending on your serverless application's setup.
 
-{{% collapse-content title="Option 1: Datadog tooling" level="h3" %}}
+{{% collapse-content title="Datadog tooling" level="h3" %}}
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: `DD_TAGS` environment variable" level="h3" %}}
+{{% collapse-content title="`DD_TAGS` environment variable" level="h3" %}}
 {{% sci-dd-tags-env-variable %}}
 {{% /collapse-content %}}
 

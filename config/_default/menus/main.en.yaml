@@ -6479,40 +6479,40 @@ menu:
       parent: source_code_integration
       identifier: sci_service_mapping
       weight: 2
-    - name: Go
-      url: source_code/service-mapping/go/
-      parent: sci_service_mapping
-      identifier: sci_service_mapping_go
-      weight: 1
-    - name: Python
-      url: source_code/service-mapping/python/
-      parent: sci_service_mapping
-      identifier: sci_service_mapping_python
-      weight: 2
     - name: .NET
       url: source_code/service-mapping/dotnet/
       parent: sci_service_mapping
       identifier: sci_service_mapping_dotnet
+      weight: 1
+    - name: Go
+      url: source_code/service-mapping/go/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_go
+      weight: 2
+    - name: Java
+      url: source_code/service-mapping/java/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_java
       weight: 3
     - name: Node.js
       url: source_code/service-mapping/nodejs/
       parent: sci_service_mapping
       identifier: sci_service_mapping_nodejs
       weight: 4
-    - name: Ruby
-      url: source_code/service-mapping/ruby/
-      parent: sci_service_mapping
-      identifier: sci_service_mapping_ruby
-      weight: 5
-    - name: Java
-      url: source_code/service-mapping/java/
-      parent: sci_service_mapping
-      identifier: sci_service_mapping_java
-      weight: 6
     - name: PHP
       url: source_code/service-mapping/php/
       parent: sci_service_mapping
       identifier: sci_service_mapping_php
+      weight: 5
+    - name: Python
+      url: source_code/service-mapping/python/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_python
+      weight: 6
+    - name: Ruby
+      url: source_code/service-mapping/ruby/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_ruby
       weight: 7
     - name: Other Languages
       url: source_code/service-mapping/other/

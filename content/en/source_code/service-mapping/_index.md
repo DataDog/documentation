@@ -25,14 +25,14 @@ You can embed a repository URL and commit hash in your build artifact. The [Data
 Select one of the following languages that support embedding Git information:
 
 {{< card-grid >}}
-  {{< image-card href="/source_code/service-mapping/go/" src="integrations_logos/go-metro.png" alt="Go" title="Go" >}}
-  {{< image-card href="/source_code/service-mapping/python/" src="integrations_logos/python.png" alt="Python" title="Python" >}}
-  {{< image-card href="/source_code/service-mapping/dotnet/" src="integrations_logos/dotnet-core.png" alt=".NET" title=".NET" >}}
-  {{< image-card href="/source_code/service-mapping/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" title="Node.js" >}}
-  {{< image-card href="/source_code/service-mapping/ruby/" src="integrations_logos/ruby.png" alt="Ruby" title="Ruby" >}}
-  {{< image-card href="/source_code/service-mapping/java/" src="integrations_logos/java.png" alt="Java" title="Java" >}}
-  {{< image-card href="/source_code/service-mapping/php/" src="integrations_logos/php.png" alt="PHP" title="PHP" >}}
-  {{< image-card href="/source_code/service-mapping/other/" title="Other Languages" >}}
+  {{< image-card href="/source_code/service-mapping/dotnet/" src="integrations_logos/dotnet-core.png" alt=".NET" tooltip=".NET" >}}
+  {{< image-card href="/source_code/service-mapping/go/" src="integrations_logos/go-metro.png" alt="Go" tooltip="Go" >}}
+  {{< image-card href="/source_code/service-mapping/java/" src="integrations_logos/java.png" alt="Java" tooltip="Java" >}}
+  {{< image-card href="/source_code/service-mapping/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" tooltip="Node.js" >}}
+  {{< image-card href="/source_code/service-mapping/php/" src="integrations_logos/php.png" alt="PHP" tooltip="PHP" >}}
+  {{< image-card href="/source_code/service-mapping/python/" src="integrations_logos/python.png" alt="Python" tooltip="Python" >}}
+  {{< image-card href="/source_code/service-mapping/ruby/" src="integrations_logos/ruby.png" alt="Ruby" tooltip="Ruby" >}}
+  {{< image-card href="/source_code/service-mapping/other/" tooltip="Other Languages" >}}
 {{< /card-grid >}}
 
 ## Build inside a Docker container

@@ -15,11 +15,11 @@ To embed Git information in your PHP build artifacts, follow the instructions fo
 
 If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
 
-{{% collapse-content title="Option 1: Docker" level="h3" %}}
+{{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker %}}
 {{% /collapse-content %}}
 
-{{% collapse-content title="Option 2: `DD_GIT_*` environment variables" level="h3" %}}
+{{% collapse-content title="`DD_GIT_*` environment variables" level="h3" %}}
 {{% sci-dd-git-env-variables %}}
 {{% /collapse-content %}}
 
