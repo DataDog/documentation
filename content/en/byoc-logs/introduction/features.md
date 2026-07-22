@@ -11,9 +11,8 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ## Supported features
 
-The following log features are supported:
+### Search and visualization
 
-**Search and visualization**
 - Full text search on any log attributes
 - List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
 - Group into Fields and Patterns (except monthly timeshift)
@@ -24,26 +23,32 @@ The following log features are supported:
 - Pagination
 - Notebooks (Preview)
 
-**Dashboards and monitors**
+### Dashboards and monitors
+
 - Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
 
-**Index management**
+### Index management
+
 - Multiple indexes with independent retention periods and routing rules
 
-**Access control**
+### Access control
+
 - RBAC through [Log Restriction Queries][1]
 
-**Correlation**
+### Correlation
+
 - Correlation from a log in BYOC Logs to metrics sent to Datadog SaaS
 - Correlation from a log in BYOC Logs to traces sent to Datadog SaaS
 - Correlation from a log in BYOC Logs to processes sent to Datadog SaaS
 
-**Processing**
+### Processing
+
 - Configurable processing pipelines through Observability Pipelines
 - Observability Pipeline connection
 
-**AI features**
+### AI features
+
 - Bits Investigation (Preview)
 - MCP Server (Preview)
 
