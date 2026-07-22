@@ -1,6 +1,6 @@
 ---
 title: Configure disk buffers for durable BYOC Logs ingestion
-description: Configure persistent disk buffers to retain logs when the BYOC Engine is unavailable or cannot accept logs fast enough.
+description: Configure persistent disk buffers to retain logs when the BYOC Logs engine is unavailable or cannot accept logs fast enough.
 aliases:
 - /cloudprem/operate/durable_autoscaling/
 - /byoc-logs/operate/durable_autoscaling/
@@ -16,11 +16,11 @@ further_reading:
   text: "Monitor BYOC Logs"
 ---
 
-{{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC Logs ingestion using Observability Pipelines disk buffers and the BYOC Engine." style="width:100%;" >}}
+{{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC Logs ingestion using Observability Pipelines disk buffers and the BYOC Logs engine." style="width:100%;" >}}
 
 ## Overview
 
-BYOC Logs combines Observability Pipelines with the BYOC Engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
+BYOC Logs combines Observability Pipelines with the BYOC Logs engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Logs engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
 
 A durable setup has four parts:
 
@@ -34,13 +34,13 @@ A durable setup has four parts:
 This guide assumes that you have a BYOC Logs deployment with:
 
 - Observability Pipelines configured with a [BYOC Logs destination][1]
-- A [BYOC Engine deployment][2]
+- A [BYOC Logs engine deployment][2]
 
 ## Size the disk buffer
 
-A useful starting point is to decide how long Workers need to retain logs if the BYOC Engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
+A useful starting point is to decide how long Workers need to retain logs if the BYOC Logs engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
 
-For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Engine outage:
+For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Logs engine outage:
 
 ```text
 total backlog = 50 TB × 1 hour ÷ 24 hours
@@ -92,7 +92,7 @@ The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain`
 
 ## Draining Workers before shutdown
 
-During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
+During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Logs engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 
 Two settings give the Worker time to empty its buffer before exiting:
 
