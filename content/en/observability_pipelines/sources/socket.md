@@ -118,13 +118,12 @@ containers:
     volumeMounts:
       - name: app-socket
         mountPath: /var/run/app
+
+# Monitor and adjust resources as necessary
     resources:
       requests:
         cpu: 10m
         memory: 16Mi
-      limits:
-        cpu: 100m
-        memory: 64Mi
     securityContext:
       runAsNonRoot: true
       runAsUser: 1000
@@ -132,7 +131,7 @@ containers:
       readOnlyRootFilesystem: true
 ```
 
-Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost` because the Worker's StatefulSet pods might not run on every node so the Worker pod might not be available in `localhost`.
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost` because the Worker's StatefulSet pods are not guaranteed to run on every node so the Worker pod might not be available in `localhost`. This is especially true if you have dedicated node groups for OPW and workloads.
 
 ## Secret defaults
 
