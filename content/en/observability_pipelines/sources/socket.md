@@ -13,6 +13,8 @@ products:
 
 Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP).
 
+If your application only writes to a Unix domain socket, see [Unix domain sockets](#unix-domain-sockets) below. This source only accepts TCP or UDP.
+
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/socket %}}
@@ -69,6 +71,71 @@ After you select the Socket source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
+## Unix domain sockets
+
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a Unix domain socket (UDS), use [`socat`][6] to bridge it to a TCP or UDP socket for the Worker.
+
+### Standalone bridge
+
+Run `socat` alongside your application to forward from the Unix socket to the Worker:
+
+```
+socat UNIX-RECV:/var/run/app.sock TCP:localhost:5000
+```
+
+This command adds an extra process dependency to your deployment.
+
+### Kubernetes sidecar
+
+In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it might not be reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file:
+
+```yaml
+volumes:
+  - name: app-socket
+    emptyDir: {}
+
+initContainers:
+  # Remove any stale socket file before the sidecar starts
+  - name: socket-cleanup
+    image: busybox:1.36
+    command: ["sh", "-c", "rm -f /var/run/app/app.sock"]
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+containers:
+  # Your application container
+  - name: app
+    # ...
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+  # socat sidecar: bridges the Unix socket to the Worker's Service
+  - name: socat-opw-bridge
+    image: alpine/socat:1.8.0.0
+    args:
+      - UNIX-RECV:/var/run/app/app.sock,fork
+      - TCP:<RELEASE_NAME>-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:5000
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 100m
+        memory: 64Mi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+```
+
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost`. The Worker's StatefulSet pods might not run on every node.
+
 ## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
@@ -95,3 +162,4 @@ After you select the Socket source in the pipeline UI:
 [3]: https://app.datadoghq.com/observability-pipelines
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: http://www.dest-unreach.org/socat/
