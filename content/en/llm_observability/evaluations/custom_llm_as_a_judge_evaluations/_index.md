@@ -542,20 +542,9 @@ You can:
 
 Use the {{< ui >}}Performance{{< /ui >}} tab to measure how your agentic service performs against an evaluation. Get a high-level overview, identify passing and failing traces, and find patterns in failure scenarios.
 
-#### Configuration summary
-
-For custom LLM-as-a-judge evaluations, the top of the {{< ui >}}Performance{{< /ui >}} tab shows a configuration summary card that includes:
-
-- The evaluation name and a status indicator: a green {{< ui >}}Published{{< /ui >}} pill or a gray {{< ui >}}Draft{{< /ui >}} pill.
-- A collapsible panel that shows the metric, assessment, scope, model, sampling rate, and the time the configuration was last updated. Select the chevron to expand or collapse the panel.
-- An {{< ui >}}Edit Configuration{{< /ui >}} button that opens the {{< ui >}}Configuration{{< /ui >}} tab.
-- The evaluation's system and user prompt. Select {{< ui >}}Show full prompt{{< /ui >}} to expand it, or {{< ui >}}Show less{{< /ui >}} to collapse it.
-
-If the evaluation is saved as a draft, an informational banner below the configuration summary explains that Datadog does not collect performance data until you publish the evaluation.
-
 #### Performance cards
 
-The {{< ui >}}Performance{{< /ui >}} tab shows visualization cards that summarize results over the selected time range. Each card header includes a fullscreen button (the resize icon) to view the chart in full-screen mode.
+Cards summarize the results over the selected time range. Each card header includes a fullscreen button (the resize icon) to view the chart in full-screen mode.
 
 For boolean evaluations:
 
@@ -570,9 +559,9 @@ For all evaluations:
 
 The {{< ui >}}Evaluated Spans{{< /ui >}} table (or {{< ui >}}Evaluated Traces{{< /ui >}} for trace-scoped evaluations) lists the spans or traces that the evaluation ran on.
 
-- A {{< ui >}}View in Trace Explorer{{< /ui >}} button in the table header opens the current filtered view in the Trace Explorer, mirroring the table's active filters (pass/fail assessment, boolean value, or category).
 - For boolean evaluations, {{< ui >}}True{{< /ui >}} and {{< ui >}}False{{< /ui >}} toggle filters appear above the table.
 - Assessment (pass/fail), boolean value, and category filters are disabled when there is no evaluated data in the selected time range.
+- A {{< ui >}}View in Trace Explorer{{< /ui >}} button in the table header opens the current filtered view in the Trace Explorer, mirroring the table's active filters (pass/fail assessment, boolean value, or category).
 
 #### Pattern Analysis
 
