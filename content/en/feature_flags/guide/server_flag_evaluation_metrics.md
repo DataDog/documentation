@@ -22,13 +22,15 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
+<div class="alert alert-warning"><strong>Node.js agentless limitation:</strong> The initial agentless releases in <code>dd-trace</code> 5.116.0 and 6.5.0 support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases. Do not set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> to enable these features in agentless mode. The setting is deprecated and preserves Agent Remote Configuration when no explicit configuration source is set; remove it when you migrate to agentless delivery.</div>
+
 ## Prerequisites
 
 Before setting up flag evaluation metrics, confirm the following:
 
 - [Server-side feature flags][1] are already configured.
 - Datadog Agent 7.32.0 or later is running.
-- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
+- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application. Do not use this setting for the initial Node.js agentless releases described above.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
 | Language | Minimum tracer version |
@@ -41,6 +43,8 @@ Before setting up flag evaluation metrics, confirm the following:
 | Python   | 4.7.0                  |
 | Ruby     | 2.32.0                 |
 
+The Node.js minimum in this table applies to supported Agent-backed evaluation metrics. The initial Node.js agentless releases do not support this metric.
+
 ## Step 1: Enable the Agent OTLP receiver
 
 Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver that is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2].
@@ -51,7 +55,7 @@ You only need to enable the protocol your application uses (gRPC on port 4317, o
 
 ## Step 2: Configure your application
 
-For all tracers except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see the [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) section instead.
+For supported tracer and delivery-mode combinations except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see the [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) section instead.
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics

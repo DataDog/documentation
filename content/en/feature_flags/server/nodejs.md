@@ -26,7 +26,7 @@ further_reading:
 
 This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-<div class="alert alert-warning">Node.js 5.116.0 and 6.5.0 support agentless configuration delivery and local flag evaluation only. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
+<div class="alert alert-warning">Node.js 5.116.0 and 6.5.0 support agentless configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
 ## Getting started
 
@@ -303,12 +303,14 @@ Feature Flags are enabled by default. You do not need to set `DD_FEATURE_FLAGS_E
 |---|---|---|
 | `DD_FEATURE_FLAGS_ENABLED` | `true` | Set to `false` to disable the provider and both configuration delivery paths. |
 | `DD_SITE` | `datadoghq.com` | Datadog site used to derive the agentless endpoint. Set this when your organization uses another site. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` | `agentless` | Selects `agentless` or `remote_config` delivery. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless backend URL. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Time between completed polling attempts. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Timeout for an individual configuration request. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` | `agentless` | Selects `agentless` or `remote_config` delivery. `offline` is reserved but unsupported; unsupported nonblank values fail closed. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless UFC endpoint or base URL. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
 The SDK polls in the background and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests. CDN requests contribute to server Feature Flags billing.
+
+For power-user testing, local development, or an operator-managed proxy, you can configure a custom HTTP or HTTPS endpoint. Custom endpoints can start without `DD_API_KEY`; if a key is configured, the SDK forwards it to the endpoint. See [Use a custom agentless endpoint][7] for path and security behavior.
 
 ### Use Agent remote configuration
 
@@ -324,7 +326,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 
 ### Migrate an existing remote configuration setup
 
-Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated, and its removal version and timeline are communicated separately.
+Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. This deprecated setting is a compatibility bridge. When you are ready to use agentless delivery, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, configure the application for agentless delivery, verify flag updates, and remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`.
 
 - **Stay on Agent delivery:** Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config`, then remove `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`.
 - **Move to agentless delivery:** Upgrade `dd-trace` to 5.116.0 or later on v5, or 6.5.0 or later on v6, set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless`, move the API key and environment to the application process, then remove the legacy setting.
@@ -332,7 +334,7 @@ Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` rema
 
 After the legacy setting is removed, Node.js defaults to agentless delivery unless you explicitly select `remote_config`. See [Server SDK Configuration Sources][6] for the complete precedence table.
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
+The initial Node.js agentless releases do not support `feature_flag.evaluations`, exposure logging, or experimentation use cases. The [Server-Side Flag Evaluation Metrics][4] guide applies only to supported Agent-backed configurations. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Testing
 
@@ -404,3 +406,4 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
 [6]: /feature_flags/concepts/configuration_sources/#configuration-precedence
+[7]: /feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint

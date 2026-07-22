@@ -31,7 +31,7 @@ Agentless configuration delivery is available in:
 
 Other server SDKs and earlier Node.js releases require Agent Remote Configuration for flag delivery.
 
-<div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial agentless releases load configuration and evaluate flags locally. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
+<div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
 ## Default Agentless architecture
 
@@ -126,7 +126,7 @@ Before enabling agentless Feature Flags in production:
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
 5. Confirm that your application handles caller-provided defaults if configuration is unavailable during a cold start.
-6. Do not use exposure or aggregate `flagevaluation` data as a readiness check for a no-Agent deployment; those events do not have an agentless delivery path in the initial releases.
+6. Do not plan experimentation workflows around evaluation metrics or exposure data; these uses are not supported in the initial Node.js agentless releases.
 
 ## Further reading
 

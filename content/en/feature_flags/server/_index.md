@@ -39,7 +39,7 @@ The default source does not activate Feature Flags traffic for every tracer inst
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-<div class="alert alert-warning">The initial agentless releases support configuration delivery and local flag evaluation only. They do not send exposure events or aggregate <code>flagevaluation</code> events in agentless mode.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
 Agentless delivery is available for Node.js in the versions listed. Other server SDKs use Agent Remote Configuration until their language pages list an agentless minimum version.
 
@@ -61,7 +61,7 @@ For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, ve
 
 ## Prerequisites
 
-All server SDKs require:
+Default Datadog-managed server SDK setups require:
 
 - **APM tracing** [enabled in your application][4]
 - The language-specific tracer and OpenFeature provider versions listed on the SDK page
@@ -128,7 +128,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 
 <div class="alert alert-info">In the Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Testing with in-memory providers
 
