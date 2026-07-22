@@ -11,6 +11,9 @@ further_reading:
 - link: /security/cloud_siem/triage_and_investigate/ioc_explorer/
   tag: documentation
   text: IOC Explorer
+- link: "/security/cloud_siem/guide/ingest-threat-intelligence-with-stix/"
+  tag: "Documentation"
+  text: "Ingest Threat Intelligence with STIX"
 ---
 
 ## Overview
@@ -18,6 +21,8 @@ further_reading:
 Datadog provides built-in [threat intelligence][1] for Cloud SIEM logs. This article explains how to extend that functionality by enriching logs with your own custom threat intelligence feeds.
 
 Cloud SIEM supports enriching and searching logs using threat intelligence indicators of compromise (IOCs) stored in Datadog reference tables. [Reference Tables][7] allow you to combine metadata with information already in Datadog.
+
+<div class="alert alert-info">You can also push indicators programmatically as STIX 2.1 bundles instead of uploading CSVs. See <a href="/security/cloud_siem/guide/ingest-threat-intelligence-with-stix/">Ingest Threat Intelligence with STIX</a>.</div>
 
 ### How bring your own threat intelligence works
 
