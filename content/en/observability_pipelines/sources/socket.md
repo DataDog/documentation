@@ -13,8 +13,6 @@ products:
 
 Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP).
 
-If your application only writes to a Unix domain socket, see [Unix domain sockets](#unix-domain-sockets) below. This source only accepts TCP or UDP.
-
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/socket %}}
@@ -22,6 +20,8 @@ If your application only writes to a Unix domain socket, see [Unix domain socket
 ## Setup
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
+
+**Note**:The Worker can only receive logs over TCP or UDP. If your application writes to a Unix domain socket, see [Unix domain sockets](#unix-domain-sockets) for more information.
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -73,7 +73,7 @@ After you select the Socket source in the pipeline UI:
 
 ## Unix domain sockets
 
-The Socket source only supports receiving logs over TCP or UDP. If your application writes to a Unix domain socket (UDS), use [`socat`][6] to bridge it to a TCP or UDP socket for the Worker.
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a Unix domain socket (UDS), use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
 
 ### Standalone bridge
 
@@ -83,11 +83,9 @@ Run `socat` alongside your application to forward from the Unix socket to the Wo
 socat UNIX-RECV:/var/run/app.sock TCP:localhost:5000
 ```
 
-This command adds an extra process dependency to your deployment.
-
 ### Kubernetes sidecar
 
-In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it might not be reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file:
+In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it might not be reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
 
 ```yaml
 volumes:
@@ -134,7 +132,7 @@ containers:
       readOnlyRootFilesystem: true
 ```
 
-Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost`. The Worker's StatefulSet pods might not run on every node.
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost` because the Worker's StatefulSet pods might not run on every node so the Worker pod might not be available in `localhost`.
 
 ## Secret defaults
 
@@ -162,4 +160,3 @@ Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of 
 [3]: https://app.datadoghq.com/observability-pipelines
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
-[6]: http://www.dest-unreach.org/socat/
