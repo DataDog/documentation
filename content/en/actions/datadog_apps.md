@@ -112,6 +112,19 @@ Backend functions can call any action in Datadog's [Action Catalog][4] through t
 
 The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
+#### Get the invoking user's information
+
+To get information about the user who invoked the backend function, use `globalThis.$.Source.initiator`. It returns an object with the following fields:
+
+```json
+{
+  "email": "test@gmail.com",
+  "id": "user_id",
+  "name": "first last",
+  "orgId": "org_id"
+}
+```
+
 {{% collapse-content title="Example backend function" level="h4" expanded=false %}}
 
 Create a backend function that lists hosts through the Action Catalog:
