@@ -10,7 +10,3 @@
     - The defined `group by` generates a signal for each `group by` value.
     - Typically, the `group by` is an entity (like user or IP address).
 1. In the dropdown menu to the right of **group by**, select the learning duration.
-1. (Optional) Define a signal grouping in the **group by** dropdown menu.
-    - The defined `group by` generates a signal for each `group by` value.
-    - Typically, the `group by` is an entity (like user or IP address).
-1. In the dropdown menu to the right of **group by**, select the learning duration.

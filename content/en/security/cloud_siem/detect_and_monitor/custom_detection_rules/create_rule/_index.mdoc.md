@@ -19,12 +19,12 @@ aliases:
 ## Overview
 
 {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}
-Real-time detection rules continuously monitors and analyzes incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
+Real-time detection rules continuously monitor and analyze incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
 {% /if %}
 {% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}
 Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
 
-Scheduled rules complement real-time monitoring by ensuring periodic, in-depth analysis of logs using [calculated fields][7].
+Scheduled rules complement real-time monitoring by providing periodic, in-depth analysis of logs using [calculated fields][7].
 {% /if %}
 {% if equals($cloud_siem_detection_rule_type, "historical_job") %}
 Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
@@ -42,8 +42,12 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
 1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Scheduled Rule**. Then, select **Event Query**.{% else and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Scheduled Rule**. Then, select **SQL**.{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Historical job**. Then, select **Event Query**.{% else and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Historical job**. Then, select **SQL**.{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Scheduled Rule**. Then, select **Event Query**.
+{% else and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Scheduled Rule**. Then, select **SQL**.
+{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Historical job**. Then, select **Event Query**.
+{% else and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Historical job**. Then, select **SQL**.
+{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
 
 ## Define your search query
 
@@ -507,19 +511,19 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 ### Other parameters
 
-#### Forget value {% #forget-value-rt-new-value%}
+#### Forget value {% #forget-value-rt-new-value %}
 
 {% partial file="security/cloud_siem/forget_value.mdoc.md" /%}
 
-#### Rule multi-triggering behavior {% #rule-multi-triggering-rt-new-value%}
+#### Rule multi-triggering behavior {% #rule-multi-triggering-rt-new-value %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
 
-#### Decrease severity for non-production environments {% #decrease-severity-new-value%}
+#### Decrease severity for non-production environments {% #decrease-severity-new-value %}
 
 {% partial file="security/cloud_siem/enable_decrease_severity.mdoc.md" /%}
 
-#### Enable optional group by {% #enable-group-by-rt-new-value%}
+#### Enable optional group by {% #enable-group-by-rt-new-value %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
@@ -953,15 +957,15 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
 ### Other parameters
 
-#### Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
+#### Job multi-triggering {% #job-multi-triggering-impossible-travel %}
 
 {% partial file="security/cloud_siem/job_multi_triggering.mdoc.md" /%}
 
-#### Enable optional group by {% #enable-group-by-historical-anomaly %}
+#### Enable optional group by {% #enable-group-by-impossible-travel %}
 
 {% partial file="security/cloud_siem/enable_group_by.mdoc.md" /%}
 
-#### Group signals {% #group-signals-historical-anomaly %}
+#### Group signals {% #group-signals-impossible-travel %}
 
 {% partial file="security/cloud_siem/group_signals.mdoc.md" /%}
 {% /if %}
@@ -1002,7 +1006,7 @@ You can set specific evaluation time and how often it runs by creating a [custom
 
 {% img src="security/security_monitoring/detection_rules/rrule_example.png" alt="The Use RRULE section with an example" style="width:100%;" /%}
 
-Recurrence rule (RRULE) is a property name from the [iCalendar RFC][8], which is the standard for defining recurring events. Use the [official RRULE generator][9] to generate recurring rules. Leverage RRULEs to cover more advanced scheduling use cases.
+Recurrence rule (RRULE) is a property name from the [iCalendar RFC][8], which is the standard for defining recurring events. Use the [official RRULE generator][9] to generate recurring rules for more advanced scheduling use cases.
 
 For example, if the RRULE is:
 
