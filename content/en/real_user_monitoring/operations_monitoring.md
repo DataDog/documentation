@@ -1,6 +1,6 @@
 ---
 title: Operations Monitoring
-description: Monitor critical technical operations within user-facing features to identify exactly when and why users fail to complete key workflows.
+description: Monitor critical technical operations within user-facing journeys to identify exactly when and why users fail to complete key workflows.
 further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
@@ -15,26 +15,28 @@ Operations Monitoring is in Preview.
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
-In Datadog RUM, a feature represents a major user-facing area of your application like checkout, login, or search. Each feature includes operations, which are the critical technical steps that make the experience work.
+In Datadog Real User Monitoring (RUM), a [journey][9] represents a major user-facing area of your application like checkout, login, or search. Each journey includes operations, which are the critical technical steps that make the experience work.
 
-- Business teams use **features** to track and improve user conversion.
+- Business teams use **journeys** to track and improve user conversion.
 - Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments.
 
-For example, the checkout experience of an e-commerce platform is a feature. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After the SDK has been instrumented, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your feature.
+For example, the checkout experience of an ecommerce platform is a journey. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After you create operations, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your journey.
 
-The following table shows additional example features and their associated feature operations by industry.
+You can create operations with the RUM SDK APIs, directly in Datadog, or programmatically with the Datadog API.
 
-| Industry       | Feature  | Feature Operations                                                                                                               |
+The following table shows additional example journeys and their associated journey operations by industry.
+
+| Industry       | Journey  | Journey operations                                                                                                               |
 |----------------|----------|----------------------------------------------------------------------------------------------------------------------------------|
 | Social network | Profile  | Users can load their profile <br> Users can upload a picture <br> Users can update their status                                  |
-| E-Commerce     | Checkout | Users can enter payment details <br> Users can save their payment method <br> Users can pay                                      |
+| Ecommerce      | Checkout | Users can enter payment details <br> Users can save their payment method <br> Users can pay                                      |
 | Streaming      | Search   | Users can find results for their search <br> Users can load the description of a title <br> Users can start watching the trailer |
 | CRM            | Quote    | Users can start a new quote <br> Users can add line items to the quote <br> Users can send a quote to recipients                 |
 
 ## Prerequisites
 
-- [RUM without Limits][5] must be enabled in your organization.
-- Make sure you've downloaded a supported Datadog RUM SDK version with client-side APIs to define operations:
+- [RUM without Limits][11] must be enabled in your organization.
+- To create operations with SDK APIs, download a supported Datadog RUM SDK version with client-side APIs to define operations:
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
   - [iOS (3.1.0)][3]
@@ -44,7 +46,7 @@ The following table shows additional example features and their associated featu
   - [React Native (3.0.0)][5]
   - [Roku (1.4.0)][6]
 
-## Setup
+## Create operations with the SDK APIs
 
 Use the SDK APIs to define your operations.
 
@@ -312,15 +314,42 @@ To use operations on Flutter Web, enable the `feature_operation_vital` experimen
 {{< /tabs >}}
 
 ### Parallelization
-You may have cases where users are starting several feature operations in parallel. To individually track them, use the `operationKey` defined when calling `startOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedOperation`.
+You may have cases where users are starting several journey operations in parallel. To individually track them, use the `operationKey` defined when calling `startOperation`. You must reuse the same `operationKey` later in other APIs, for example when calling `succeedOperation`.
 
 <div class="alert alert-warning">Operations that have been started but not explicitly stopped are automatically terminated when the RUM session expires. Those are marked as failed, with <code>@operation.failure_reason:timeout</code>. <br><br> If an operation stop API was called that was not started in the first place, the stop event emitted by the SDK is dropped upon ingestion.</div>
+
+## Create operations from Datadog
+
+You can create an operation from either the operations catalog or a journey's details report:
+
+- **Operations catalog**: Navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}, then click {{< ui >}}New Operation{{< /ui >}}.
+- **Journey Monitoring**: Navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Journey Monitoring{{< /ui >}}, select a journey, navigate to its {{< ui >}}Details Report{{< /ui >}}, and click {{< ui >}}New Operation{{< /ui >}}.
+
+<div class="alert alert-warning">Each RUM application supports up to 1000 operations created directly in Datadog. There is no organization-wide limit on operations created directly in Datadog.</div>
+
+After you click {{< ui >}}New Operation{{< /ui >}}:
+
+1. Enter a display name. Optionally, enter a description.
+2. Select a category. Datadog pre-fills the RUM event types that determine the start event, success conditions, and failure conditions. Alternatively, define a custom operation that uses any combination of supported RUM event types.
+3. Complete all required fields for the start event, success conditions, and failure conditions. Datadog uses these fields to determine the operation's outcome: success, or failure with an `error` or `abandoned` reason.
+4. Optionally, enable the {{< ui >}}Abandon{{< /ui >}} toggle. If the user navigates away from the operation's starting view before the operation finishes, Datadog marks the operation with the `abandoned` failure reason.
+5. Click {{< ui >}}Create Operation{{< /ui >}}.
+
+<div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog.</div>
+
+## Create operations with the Datadog API
+
+To create an operation programmatically, send a `POST` request to `/api/v2/rum/operations`. Authenticate the request with a Datadog API key and application key. For more information about authentication and calling Datadog API endpoints, see [Using the API][10].
+
+## Edit operations
+
+In the operations catalog, click the pencil icon for an operation to edit it. You can edit any operation, regardless of whether you created it directly in Datadog, created it with the Datadog API, or instrumented it with the RUM SDK APIs.
 
 ## Monitor your availability on Datadog
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-catalog-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
 
-After you've configured the SDK APIs, you can monitor your operations by navigating to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}.
+After you create operations with the RUM SDK APIs, directly in Datadog, or with the Datadog API, monitor them by navigating to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Performance Monitoring{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}.
 
 Datadog groups together all operations with the same name into a catalog.
 
@@ -343,7 +372,7 @@ You can run an agentic investigation on a single operation directly from the Ope
 
 ## Configure retention filters
 
-Operations are a new type of event in RUM. Operations are bound to a RUM Session, but can span across multiple RUM Views. Operations can be targeted in retention filters. This allows you to align your retention strategy on features that are cornerstones for your user experiences. For example, you can programmatically keep RUM Sessions that had specific operations fail or are taking longer than desired.
+Operations are a new type of event in RUM. Operations are bound to a RUM Session, but can span across multiple RUM Views. Operations can be targeted in [retention filters][12]. This allows you to align your retention strategy on journeys that are cornerstones for your user experiences. For example, you can programmatically keep RUM Sessions that had specific operations fail or are taking longer than desired.
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-3-temp.png" alt="Operations tab under RUM > Performance Monitoring" style="width:80%;" >}}
 
@@ -369,3 +398,7 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
 [8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
+[9]: /journey_monitoring/
+[10]: /api/latest/using-the-api/
+[11]: /real_user_monitoring/rum_without_limits/
+[12]: /real_user_monitoring/rum_without_limits/retention_filters/
