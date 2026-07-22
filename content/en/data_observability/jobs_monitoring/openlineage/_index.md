@@ -599,7 +599,7 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | `tags`         | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
 
-The [`tags` facet][2] must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`; tags sent as a single object instead of an array, or with a missing or different `source`, are ignored.
+**Note**: The [`tags` facet][2] must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`. If the tags facet is sent as a single object instead of an array of objects, or with a missing or different source, the tags are ignored.
 
 ## Further reading
 
