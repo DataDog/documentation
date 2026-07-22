@@ -16,6 +16,8 @@ further_reading:
   text: "Monitor BYOC Logs"
 ---
 
+{{< jqmath-vanilla >}}
+
 {{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC Logs ingestion using Observability Pipelines disk buffers and the BYOC Logs engine." style="width:100%;" >}}
 
 ## Overview
@@ -42,13 +44,8 @@ A useful starting point is to decide how long Workers need to retain logs if the
 
 For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Logs engine outage:
 
-```text
-total backlog = 50 TB × 1 hour ÷ 24 hours
-              = 2.08 TB
-
-buffer per Worker = 2.08 TB ÷ 25 Workers
-                  = 83 GB per Worker
-```
+1. **Total backlog:** `50 TB × 1 hour ÷ 24 hours = 2.08 TB`
+2. **Buffer per Worker:** `2.08 TB ÷ 25 Workers ≈ 83 GB`
 
 Rounding up the result leaves capacity for a longer incident or a higher ingress rate. With a 100 GB buffer on each Worker, the 25 Workers provide 2.5 TB of total buffer capacity. This retains approximately 1.2 hours of logs at 50 TB/day.
 
@@ -101,20 +98,14 @@ Two settings give the Worker time to empty its buffer before exiting:
 
 The shorter of these two limits determines how long the buffer has to drain. You can estimate the required time from the drain throughput measured in your environment:
 
-```text
-drain time = configured buffer size in MB ÷ measured drain throughput in MB/s
-termination grace period = drain time × safety factor
-```
+$$\text"drain time" = {\text"buffer size (MB)"} / {\text"drain throughput (MB/s)"}$$
+
+$$\text"termination grace period" = \text"drain time" × \text"safety factor"$$
 
 For a Worker draining a 100 GB buffer at 120 MB/s, a safety factor of `1.2` gives:
 
-```text
-drain time = 100,000 MB ÷ 120 MB/s
-           = 833 seconds
-
-termination grace period = 833 seconds × 1.2
-                         ≈ 1,000 seconds
-```
+1. **Drain time:** `100,000 MB ÷ 120 MB/s ≈ 833 seconds`
+2. **Termination grace period:** `833 seconds × 1.2 ≈ 1000 seconds`
 
 Although the estimate is approximately 1000 seconds, this example sets both shutdown limits to 3600 seconds to provide additional margin:
 
