@@ -29,7 +29,7 @@ The Observability Pipelines Worker and the BYOC Logs engine process log data in 
 
 The BYOC Logs engine separates compute from object storage. You can scale ingestion, compaction, and search independently based on workload demand while keeping log data in your object storage.
 
-## Architecture blocks
+## Architecture components
 
 ### Observability Pipelines
 
@@ -43,7 +43,7 @@ The BYOC Logs engine runs in your environment. In Kubernetes deployments, the `d
 : Receive processed logs from Observability Pipelines, create index files called *splits*, and write the splits to object storage.
 
 **Compactors**
-: Run merge work on dedicated compactor nodes instead of indexer nodes. Compactors read splits from object storage and write merged splits back to object storage.
+: Read splits from object storage, merge them, and write the merged splits back. Compactors run on dedicated nodes to isolate merge work from indexing.
 
 **Searchers**
 : Execute queries from Datadog, read index metadata through the metastore, and retrieve matching data from object storage.
@@ -79,14 +79,14 @@ Logs remain in your environment throughout ingestion:
 
 ### Query path
 
-When you search BYOC Logs data in Log Explorer, the query follows a secure connection between Datadog and the BYOC Logs engine:
+When you search BYOC Logs data in Log Explorer, the query travels over a secure connection between Datadog and the BYOC Logs engine:
 
 1. The Datadog UI sends the search query to Datadog's backend.
 2. Datadog forwards the query to the engine through a reverse connection or ingress.
 3. **Searchers** use metadata from PostgreSQL to retrieve matching data from object storage.
 4. The engine returns only the matching results to Datadog for display.
 
-**Only query results travel between your cluster and Datadog.** The full dataset remains in your object storage and is never transferred to Datadog.
+**Only query results travel between your environment and Datadog.** The full dataset remains in your object storage and is never transferred to Datadog.
 
 ## Connection to Datadog UI
 
