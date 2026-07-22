@@ -145,10 +145,9 @@ View the graph in [full screen mode](#full-screen).
 
 Click on the export icon of any dashboard graph to open an options menu:
 
-| Option         | Description                               |
-|----------------|-------------------------------------------|
-| Copy           | Create a copy of the dashboard graph.     |
-| Share snapshot | Create and send a snapshot of your graph. |
+| Option | Description                           |
+|--------|----------------------------------------|
+| Copy   | Create a copy of the dashboard graph. |
 
 #### Use within Datadog
 
