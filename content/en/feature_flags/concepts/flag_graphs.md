@@ -35,7 +35,7 @@ The flag details page includes observability insights to help you identify how a
 
 ### Targeting rule evaluation counts
 
-This shows the total client and server evaluations that fell through to each targeting rule during the time range selected in the top of the page (default is 1 hour).
+This shows the total of combined client and server evaluations that fell through to each targeting rule during the time range selected in the top of the page (default is 1 hour).
 
 {{< img src="feature_flags/flag_graphs/targeting_rule_distribution-2.png" alt="Targeting rule evaluation count" style="width:100%;" >}}
 
