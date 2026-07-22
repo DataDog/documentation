@@ -55,8 +55,8 @@ If you store Splunk HEC tokens in your HTTP request's authorization header, you 
 To configure authentication tokens, enable the {{< ui >}}Configure authentication tokens{{< /ui >}} toggle:
 
 1. Click {{< ui >}}Manage Tokens{{< /ui >}} and then {{< ui >}}Add Token{{< /ui >}}.
-1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered.
-1. (Optional) Enter a field and value if you want to add additional information to your logs because this token was used for validation.
+1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered prepended with `DD_OP_`.
+1. (Optional) Enter a field and value if you want to add additional information to logs successfully authenticated with this specific token.
 
 ## Secret defaults
 
