@@ -78,6 +78,12 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### 401 Unauthorized errors
+
+{{% observability_pipelines/splunk_hec_unauthorized_error %}}
+
 ## How the destination works
 
 ### Event batching
@@ -87,12 +93,6 @@ A batch of events is flushed when one of the following parameters is met. See [e
 | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
 |----------------|-------------------|-------------------|
 |    None        |       1           |          1        |
-
-## Troubleshooting
-
-### 401 Unauthorized errors
-
-If the destination returns a `401 Unauthorized` error, check the value stored for your Splunk HEC token identifier. Store only the token itself (for example, `<GUID>`), without a `Splunk` prefix. Including the prefix causes authentication to fail.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: /observability_pipelines/destinations/#event-batching

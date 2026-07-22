@@ -73,21 +73,11 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 {{% /tab %}}
 {{< /tabs >}}
 
-## How the destination works
-
-### Event batching
-
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
-
-| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
-|----------------|-------------------|---------------------|
-| None           | 1                 | 1                   |
-
 ## Troubleshooting
 
 ### 401 Unauthorized errors
 
-If the destination returns a `401 Unauthorized` error, check the value stored for your Splunk HEC token identifier. Store only the token itself (for example, `<GUID>`).
+{{% observability_pipelines/splunk_hec_unauthorized_error %}}
 
 ## Metrics
 
@@ -101,6 +91,16 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 `pipelines.splunk_pending_acks`
 : **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting a response.
 : **Metric type**: gauge
+
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| None           | 1                 | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
