@@ -10,6 +10,10 @@ content_filters:
     show_if:
       - cloud_siem_detection_rule_search_query: ["threshold"]
         cloud_siem_detection_rule_type: ["scheduled_rule", "historical_job"]
+aliases:
+- /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
+- /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/scheduled_rule
+- /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/historical_job
 ---
 
 ## Overview
@@ -38,8 +42,8 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
 1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}Select **Scheduled Rule**. Then, choose to either query for events, or to write a query in SQL.{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}Select **Historical job**. Then, choose to either query for events, or to write a query in SQL.{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Scheduled Rule**. Then, select **Event Query**.{% else and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Scheduled Rule**. Then, select **SQL**.{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Historical job**. Then, select **Event Query**.{% else and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Historical job**. Then, select **SQL**.{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
 
 ## Define your search query
 
