@@ -228,10 +228,12 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 
 {% img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" /%}
 
-1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
+1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
    - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
    - If you created a dataset, click **Create** so you can use it in your rule.
-2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+1. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+
+Datadog applies rule conditions to the results your SQL queries return. It evaluates each query result against the conditions you define in the [rule conditions](#set-conditions) section, such as a count threshold or group-by attribute. It generates a signal when the query results meet those conditions.
 {% /if %}
 
 {% /if %}
@@ -358,7 +360,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 {% if equals($cloud_siem_detection_rule_query_language, "sql") %}
-You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
+You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
 - Logs
@@ -375,10 +377,12 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
 
 {% img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" /%}
 
-1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
+1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a dataset from scratch.
    - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
    - If you created a dataset, click **Create** so you can use it in your rule.
-2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+1. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+
+Datadog applies conditions to the results your SQL queries return. It evaluates each query result against the conditions you define in the [job conditions](#set-conditions) section, such as a count threshold or group-by attribute. It generates a job result when the query results meet those conditions.
 {% /if %}
 
 {% /if %}
