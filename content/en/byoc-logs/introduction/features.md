@@ -54,7 +54,7 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ## Unsupported features
 
-The following are not supported:
+BYOC Logs does not support the following features:
 
 - SIEM
 - Watchdog
