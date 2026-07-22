@@ -21,7 +21,7 @@ Use Observability Pipelines' Socket source to send logs to the Worker over a soc
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-**Note**:The Worker can only receive logs over TCP or UDP. If your application writes to a Unix domain socket, see [Unix domain sockets](#unix-domain-sockets) for more information.
+**Note**:The Worker can only receive logs over TCP or UDP. If your application writes to a UNIX domain socket, see [UNIX domain sockets](#unix-domain-sockets) for more information.
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -71,13 +71,13 @@ After you select the Socket source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
-## Unix domain sockets
+## UNIX domain sockets
 
-The Socket source only supports receiving logs over TCP or UDP. If your application writes to a Unix domain socket (UDS), use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket (UDS), use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
 
 ### Standalone bridge
 
-Run `socat` alongside your application to forward from the Unix socket to the Worker:
+Run `socat` alongside your application to forward from the UNIX socket to the Worker:
 
 ```
 socat UNIX-RECV:/var/run/app.sock TCP:localhost:5000
@@ -109,7 +109,7 @@ containers:
       - name: app-socket
         mountPath: /var/run/app
 
-  # socat sidecar: bridges the Unix socket to the Worker's Service
+  # socat sidecar: bridges the UNIX socket to the Worker's Service
   - name: socat-opw-bridge
     image: alpine/socat:1.8.0.0
     args:
