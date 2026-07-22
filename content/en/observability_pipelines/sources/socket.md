@@ -80,12 +80,14 @@ The Socket source only supports receiving logs over TCP or UDP. If your applicat
 Run `socat` alongside your application to forward from the UNIX socket to the Worker:
 
 ```
-socat UNIX-RECV:/var/run/app.sock TCP:localhost:5000
+socat UNIX-RECV:/var/run/app.sock TCP:<OPW_HOST>
 ```
+
+Replace <OPW_HOST> with the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
 
 #### Kubernetes sidecar
 
-In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it might not be reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
+In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it is not reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
 
 ```yaml
 volumes:
