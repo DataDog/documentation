@@ -596,10 +596,15 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | -------------- | ---------------------------------------------------------------------------------- |
 | `parent`       | Creates parent-child job hierarchy in the lineage graph                            |
 | `errorMessage` | Generates error spans with `error.message` and `error.stack` tags                  |
-| `tags`         | Adds span tags to the run; `_dd.ol_service` value maps to the Datadog service name |
+| `tags`         | Adds custom tags to the job or run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
 
 **Note**: The [`tags` facet][2] must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`. If the tags facet is sent as a single object instead of an array of objects, or with a missing or different source, the tags are ignored.
+
+Tags on `job.facets.tags` and `run.facets.tags` behave differently:
+
+- **Job facet tags**: Become individual span tags you can search and facet on, in addition to being available for monitor scoping. Use job facet tags for properties that stay stable across runs, such as `team` or `owner`.
+- **Run facet tags**: Available for monitor scoping, but aren't promoted to individual span tags. Use run facet tags for properties that can vary between runs.
 
 ## Further reading
 
