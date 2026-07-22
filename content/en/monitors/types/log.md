@@ -30,7 +30,7 @@ further_reading:
 
 Logs are essential for security investigations, aiding in threat detection, compliance tracking, and security monitoring. Log Management systems correlate logs with observability data for rapid root cause detection. Log management also enables efficient troubleshooting, issue resolution, and security audits.
 
-Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type  exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
+Once [log management is enabled][1] for your organization, you can create a logs monitor to alert you when a specified log type exceeds a user-defined threshold over a given period of time. The logs monitor only evaluates [indexed logs][2].
 
 **Note**: Log monitors have a maximum rolling time window of `2 days`.
 
@@ -67,7 +67,13 @@ As you define the search query, the graph above the search fields updates.
    * **Third facet**: 5 top values
    * **Fourth facet**: 2 top values
 
-4. Configure the alerting grouping strategy (optional):
+4. Optionally, use the {{< ui >}}Σ Modify Query{{< /ui >}} menu to refine the query with:
+   * **Functions and formulas**: Transform and combine your query results. See [functions][11] and [formulas][12].
+   * **Advanced search**: Scope alerts to curated datasets, such as entity lists, customer tiers, or correlated events. See [subqueries][13] and [Reference Tables][14].
+
+   You can also create a monitor directly from an advanced search in the [Log Explorer][4].
+
+5. Configure the alerting grouping strategy (optional):
     * {{< ui >}}Simple-Alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
     * {{< ui >}}Multi Alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group `system.disk.in_use` by `device` to receive a separate alert for each device that is running out of space.
 
@@ -83,9 +89,9 @@ Trigger when the query meets one of the following conditions compared to a thres
 
 #### No data and below alerts
 
-`NO DATA` is a state given when no logs match the monitor query during the timeframe.
+`NO DATA` is a state given when no logs match the monitor query during the time frame.
 
-To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given timeframe across all aggregate groups.
+To receive a notification when all groups matching a specific query have stopped sending logs, set the condition to `below 1`. This notifies when no logs match the monitor query in a given time frame across all aggregate groups.
 
 When splitting the monitor by any dimension (tag or facet) and using a `below` condition, the alert is triggered **if and only if** there are logs for a given group, and the count is below the threshold—or if there are no logs for **all** of the groups.
 
@@ -143,3 +149,7 @@ Include a sample of 10 logs in the alert notification:
 [8]: /monitors/notify/
 [9]: /monitors/notify/variables/?tab=is_alert#matching-attributetag-variables
 [10]: /logs/log_configuration/flex_logs/
+[11]: /logs/explorer/analytics/#functions
+[12]: /logs/explorer/analytics/#formulas
+[13]: /logs/explorer/advanced_search/#filter-logs-with-subqueries
+[14]: /logs/explorer/advanced_search/#filter-logs-based-on-reference-tables

@@ -11,6 +11,7 @@ aliases:
 - /ko/getting_started/custom_metrics
 - /ko/developers/metrics/
 - /ko/metrics/guide/tag-configuration-cardinality-estimation-tool/
+description: 사용자 지정 메트릭이 무엇인지, 이름과 태그로 어떻게 식별되는지, Datadog에서 어떻게 청구되는지 알아보세요.
 further_reading:
 - link: /extend/dogstatsd/
   tag: 설명서
@@ -21,8 +22,11 @@ further_reading:
 - link: /account_management/billing/custom_metrics/?tab=countrate
   tag: 설명서
   text: Custom Metrics 청구
+- link: /account_management/billing/metric_name_pricing/
+  tag: 설명서
+  text: Custom Metrics의 Metric Name 요금제
 - link: /metrics/guide/custom_metrics_governance/
-  tag: 길라잡이
+  tag: 가이드
   text: 사용자 지정 메트릭 거버넌스 모범 사례
 - link: https://www.datadoghq.com/blog/metrics-without-limits/
   tag: 블로그
@@ -33,18 +37,18 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/metrics-governance
   tag: 학습 센터
   text: Metrics Governance
-title: 사용자 지정 메트릭
+title: Custom Metrics
 ---
-{{< learning-center-callout header="활성화 웨비나 세션에 참가하기" hide_image="true" btn_title="등록" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
-  사용자 지정 메트릭을 위한 Foundation Enablement 세션을 살펴보고 등록하세요. 사용자 지정 메트릭을 활용하여 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 사용자 지정 알고리즘의 성능 분포와 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
+{{< learning-center-callout header="활성화 웨비나 세션에 참여하기" hide_image="true" btn_title="가입" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
+  사용자 지정 메트릭을 위한 Foundation Enablement 세션을 살펴보고 가입하세요. 사용자 지정 메트릭을 활용하여 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 사용자 지정 알고리즘의 성능 분포와 같은 애플리케이션 KPI를 추적하는 방법을 알아보세요.
 {{< /learning-center-callout >}}
 
 ## 개요 {#overview}
 
 사용자 지정 메트릭은 방문자 수, 평균 고객 장바구니 크기, 요청 지연 시간 또는 사용자 지정 알고리즘의 성능 분포와 같은 애플리케이션 KPI를 추적하는 데 도움이 됩니다. 사용자 지정 메트릭은 **메트릭 이름과 태그 값(호스트 태그 포함)의 고유한 조합**으로 식별됩니다. 아래 예시에서 메트릭 `request.Latency`는 두 개의 태그 키로부터 네 가지 고유한 태그 값 조합을 가집니다.
 
-- `endpoint`: 값은 `endpoint:X` 또는 `endpoint:Y`.
-- `status`: 값은 `status:200` 또는 `status:400`.
+- `endpoint`(값 `endpoint:X` 또는 `endpoint:Y`)
+- `status`(값 `status:200` 또는 `status:400`)
 
 {{< img src="account_management/billing/custom_metrics/request_latency.png" alt="요청 지연 시간" style="width:80%;">}}
 
@@ -52,7 +56,7 @@ title: 사용자 지정 메트릭
 - 일반적으로 [DogStatsD][3] 또는 [사용자 지정 Agent Check][4]를 통해 제출되는 모든 메트릭.
 - [Marketplace integrations][29]에서 제출되는 메트릭
 - 일부 [표준 통합](#standard-integrations)은 사용자 지정 메트릭을 생성할 수 있음
-- [Datadog integrations][1] {{< translate key="integration_count" >}} 개 이상에 포함되지 않은 통합에서 제출된 메트릭.
+- [Datadog 통합 {{< translate key="integration_count" >}} 개 이상][1]에 포함되지 않은 통합에서 제출된 메트릭.
 
 **참고**: Datadog Admin 역할 또는 `usage_read` 권한이 있는 사용자는 [사용자 상세 정보 페이지][5]에서 계정의 시간당 월평균 사용자 지정 메트릭 수와 상위 5,000개 사용자 지정 메트릭을 확인할 수 있습니다. [사용자 지정 메트릭 계산 방식][6]에 대해 자세히 알아보세요.
 

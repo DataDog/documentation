@@ -113,6 +113,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4032568083",
+      "description": "Create a new dashboard with a live default_timeframe returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
     },
@@ -285,6 +290,11 @@
       "group": "dashboards",
       "suffix": "_2823363212",
       "description": "Create a new dashboard with heatmap widget with markers and num_buckets"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2780500284",
+      "description": "Create a new dashboard with hostmap DDSQL widget"
     },
     {
       "group": "dashboards",

@@ -5,6 +5,9 @@
 | `DD_API_KEY`             | [Datadog API key][1001] - **Required**| Sidecar container |
 | `DD_SITE`                | [Datadog site][1002] - **Required** | Sidecar container |
 | `DD_SERVICE`             | Datadog Service name. **Required** | Both containers |
+{{ if eq (.Get "defaultSource") "containerapp" }}| `DD_AZURE_SUBSCRIPTION_ID` | Azure Subscription ID. **Required** | Sidecar container |
+| `DD_AZURE_RESOURCE_GROUP` | Azure Resource Group name. **Required** | Sidecar container |
+{{ end -}}
 | `DD_SERVERLESS_LOG_PATH` | The path where the sidecar should tail logs from. Recommended to set to `/shared-volume/logs/app.log`. | Sidecar container |
 | `DD_LOGS_INJECTION`      | When true, enrich all logs with trace data for supported loggers. See [Correlate Logs and Traces][1003] for more information. | Application container |
 | `DD_VERSION`             | See [Unified Service Tagging][1004]. | Both containers |

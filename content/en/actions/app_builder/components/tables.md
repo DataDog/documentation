@@ -14,6 +14,12 @@ further_reading:
   text: "Build Apps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 This page describes advanced features you can use to manipulate table components in your App Builder apps.
 
 ## Client-side filtering

@@ -117,12 +117,14 @@ After you find your SSO URL from either method, bookmark it for future reference
 
 ## SAML role mapping
 
-Follow the steps below to map Okta attributes to Datadog entities. This step is optional.
+Datadog uses SAML group mapping to map Okta attributes to Datadog roles and teams. This step is optional.
+
+**Note**: Role mapping is available only through SAML. SCIM provisions users and teams from Okta, but it does not map roles. To set up SCIM, see [Configure SCIM with Okta][8].
 
 1. Navigate to the Okta admin dashboard.
 1. Select the {{< ui >}}Sign on{{< /ui >}} tab.
 1. Click {{< ui >}}Edit{{< /ui >}}.
-1. Populate the {{< ui >}}Attributes{{< /ui >}} with your [group attribute statements][6].
+1. Under {{< ui >}}Attributes{{< /ui >}}, add a group attribute statement named `memberOf`, with the name format {{< ui >}}Unspecified{{< /ui >}} and the value `.*` to retrieve all groups. Contact your IdP administrator if you need to scope this more narrowly.
 1. Set up your desired [mappings][7] in Datadog.
 
 ## Further Reading
@@ -134,5 +136,5 @@ Follow the steps below to map Okta attributes to Datadog entities. This step is 
 [3]: /getting_started/site/#access-the-datadog-site
 [4]: https://app.datadoghq.com/organization-settings/login-methods
 [5]: https://app.datadoghq.com/organization-settings/login-methods/saml
-[6]: /account_management/faq/okta/#group-attribute-statements-optional
 [7]: /account_management/saml/mapping/
+[8]: /account_management/scim/okta/

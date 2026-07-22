@@ -164,6 +164,7 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
+| UK1  | `https://browser-intake-uk1-datadoghq.com`    |
 
 ### Additional endpoints for Browser Profiling
 
@@ -179,6 +180,7 @@ When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to de
 | US2-FED  | `https://quota.browser-intake-us2-ddog-gov.com`      |
 | AP1  | `https://quota.browser-intake-ap1-datadoghq.com`         |
 | AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
+| UK1  | `https://quota.browser-intake-uk1-datadoghq.com`         |
 
 If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
 
@@ -292,8 +294,8 @@ You must have edit access to restore general access to a restricted application.
 [10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
 [11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
 [12]: /session_replay/browser/
-[13]: /session_replay/browser/privacy_options/
-[14]: /session_replay/browser/dev_tools/
+[13]: /session_replay/privacy_options?platform=browser
+[14]: /session_replay/dev_tools
 [15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect

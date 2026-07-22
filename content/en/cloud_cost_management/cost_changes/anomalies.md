@@ -105,7 +105,7 @@ As you investigate anomalies, you may find some that are not significant, were a
 To resolve an anomaly:
 
 1. Click {{< ui >}}Resolve Anomaly{{< /ui >}} to open the resolution popup.
-1. Select one of the following resolutions to help improve the algorithm:
+1. Select one of the following resolutions:
    - {{< ui >}}The anomaly amount was too small{{< /ui >}}
    - {{< ui >}}This is an unexpected increase{{< /ui >}}
    - {{< ui >}}This is an expected increase{{< /ui >}}

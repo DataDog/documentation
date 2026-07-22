@@ -14,7 +14,7 @@ This error usually indicates an issue with the trust policy associated with the 
 
 Check the following points for the AWS account mentioned in the error:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 1. If you created an IAM role, ensure that you are using the correct IAM role name in the [Datadog AWS integration page][2]. Extra spaces or characters in AWS or Datadog causes the role delegation to fail. If you deployed the role using CloudFormation, the default IAM role name is set to [DatadogIntegrationRole][3].
 
 2. On the Datadog integration role's page in AWS, under the **Trust relationships** tab, ensure that the **Principal** is configured as below. Replace `<DATADOG_AWS_ACCOUNT_ID>` with {{< region-param key="aws_customer_access_id" code="true" >}}:

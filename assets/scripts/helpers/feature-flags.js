@@ -29,13 +29,16 @@ export const initializeFeatureFlags = () => {
             return null;
         }
         try {
-            await OpenFeature.setProviderAndWait(new DatadogProvider({
-                applicationId: config.ddApplicationId,
-                clientToken: config.ddClientToken,
-                env,
-                // Sends exposure events to the FF dashboard. 
-                enableExposureLogging: true
-            }));
+            const targetingKey = window.DD_RUM?.getInternalContext?.()?.session_id ?? crypto.randomUUID();
+            await OpenFeature.setProviderAndWait(
+                new DatadogProvider({
+                    applicationId: config.ddApplicationId,
+                    clientToken: config.ddClientToken,
+                    env,
+                    enableExposureLogging: true
+                }),
+                { targetingKey }
+            );
             return OpenFeature.getClient();
         } catch (error) {
             console.warn('[Flags] Initialization failed:', error);
@@ -48,3 +51,6 @@ export const initializeFeatureFlags = () => {
 
 export const getBooleanFlag = (client, key, defaultValue = false) =>
     client?.getBooleanValue(key, defaultValue) ?? defaultValue;
+
+export const getStringFlag = (client, key, defaultValue = '') =>
+    client?.getStringValue(key, defaultValue) ?? defaultValue;
