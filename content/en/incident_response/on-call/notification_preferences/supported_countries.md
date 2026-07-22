@@ -120,7 +120,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 | United States | +1 |
 | Uruguay* | +598 |
 
-\* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local SMS carrier restrictions or government regulations can limit delivery. For these regions, set up push notifications as your primary notification method.
+\* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local carrier restrictions or government regulations can limit delivery. For these regions, set up push notifications as your primary notification method.
 
 \*\* Available by request: SMS and phone call notifications for these countries are not enabled by default. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request access.
 
