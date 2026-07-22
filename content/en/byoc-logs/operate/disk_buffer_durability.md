@@ -70,11 +70,11 @@ For the 25-Worker example, the destination configuration looks like this:
 }
 ```
 
-The `max_size` value is expressed in bytes. When the buffer is full, `block` keeps the Worker from discarding logs and allows backpressure to propagate to upstream applications.
+The `max_size` value is expressed in bytes (100 GB = 100,000,000,000 bytes). When the buffer is full, `block` keeps the Worker from discarding logs and allows backpressure to propagate to upstream applications.
 
 ## Persistent storage for the buffer
 
-Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB persistent volume to each Worker:
+Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB (about 129 GB) persistent volume to each Worker to leave headroom above the buffer capacity:
 
 ```yaml
 persistence:
@@ -90,9 +90,9 @@ persistence:
 
 The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain` policies also keep the volume when its Worker is scaled down or the StatefulSet is deleted.
 
-## Draining OP Workers before shutdown
+## Draining Workers before shutdown
 
-During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume and are not sent until a Worker reattaches that volume.
+During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume until a replacement Worker reattaches that volume.
 
 The `terminationGracePeriodSeconds` value gives the Worker time to empty its buffer before exiting. You can estimate the required time from the drain throughput measured in your environment:
 
