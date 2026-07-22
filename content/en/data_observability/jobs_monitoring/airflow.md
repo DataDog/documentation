@@ -379,6 +379,10 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 {{% /tab %}}
 {{< /tabs >}}
 
+## Known issues
+
+In Airflow 2.x, manually marking a DAG run or task as failed does not update its status in Data Observability: Jobs Monitoring. For affected runs, span durations and duration metrics may be inaccurate.
+
 ## OpenLineage provider version reference
 
 Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
