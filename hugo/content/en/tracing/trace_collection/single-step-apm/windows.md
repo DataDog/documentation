@@ -32,26 +32,30 @@ You can enable APM on Windows in the following ways:
 {{< tabs >}}
 {{% tab "IIS" %}}
 
-To instrument only .NET applications running on IIS, run one of the following commands from an administrator PowerShell session on your Windows host. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
+To instrument only .NET applications running on IIS:
 
-Use the PowerShell installer:
+1. From an administrator PowerShell session on your Windows host, run one of the following commands. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
 
-```powershell
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '{{< region-param key="dd_site" >}}'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
-```
+   Use the PowerShell installer:
 
-Alternatively, install with the MSI:
+   ```powershell
+   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '{{< region-param key="dd_site" >}}'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
+   ```
 
-```powershell
-$p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /norestart /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DD_API_KEY>" SITE="{{< region-param key="dd_site" >}}" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3"'
-if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
-```
+   Alternatively, install with the MSI:
 
-To install a different .NET version, change `dotnet:3`, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
+   ```powershell
+   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /norestart /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DD_API_KEY>" SITE="{{< region-param key="dd_site" >}}" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3"'
+   if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
+   ```
 
-**Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
+   To install a different .NET version, change `dotnet:3`, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
 
-After installation, restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.) The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
+   **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
+
+1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
+
+The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
 
 **Generate the command from Datadog**: To get a command pre-filled with your API key and site, go to [Install the Datadog Agent on Windows][1] and, in the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}. To pin the .NET SDK version, select {{< ui >}}Customize Library Versions{{< /ui >}} under {{< ui >}}Instrumentation Configuration{{< /ui >}}. Then copy and run the generated command.
 

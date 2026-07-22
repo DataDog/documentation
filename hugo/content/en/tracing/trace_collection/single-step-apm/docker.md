@@ -23,36 +23,36 @@ In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to in
 
 To install the Datadog Agent and enable SSI in a Docker Linux environment, run the following commands on your Docker host (not inside an application container).
 
-First, install the Docker instrumentation components without installing a host Agent:
+1. Install the Docker instrumentation components without installing a host Agent:
 
-```shell
-DD_APM_INSTRUMENTATION_ENABLED=docker \
-DD_NO_AGENT_INSTALL=true \
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
+   ```shell
+   DD_APM_INSTRUMENTATION_ENABLED=docker \
+   DD_NO_AGENT_INSTALL=true \
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
 
-Then, run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]:
+1. Run or redeploy the Agent container. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][1]:
 
-```shell
-docker run -d --name dd-agent \
-  -e DD_API_KEY=<YOUR_DD_API_KEY> \
-  -e DD_SITE="{{< region-param key="dd_site" >}}" \
-  -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
-  -e DD_APM_ENABLED=true \
-  -e DD_APM_NON_LOCAL_TRAFFIC=true \
-  -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
-  -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
-  -v /var/run/datadog:/var/run/datadog \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  -v /proc/:/host/proc/:ro \
-  -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
-  -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
-  registry.datadoghq.com/agent:7
-```
+   ```shell
+   docker run -d --name dd-agent \
+     -e DD_API_KEY=<YOUR_DD_API_KEY> \
+     -e DD_SITE="{{< region-param key="dd_site" >}}" \
+     -e DD_DOGSTATSD_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_ENABLED=true \
+     -e DD_APM_NON_LOCAL_TRAFFIC=true \
+     -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
+     -e DD_DOGSTATSD_SOCKET=/var/run/datadog/dsd.socket \
+     -v /var/run/datadog:/var/run/datadog \
+     -v /var/run/docker.sock:/var/run/docker.sock:ro \
+     -v /proc/:/host/proc/:ro \
+     -v /sys/fs/cgroup/:/host/sys/fs/cgroup:ro \
+     -v /var/lib/docker/containers:/var/lib/docker/containers:ro \
+     registry.datadoghq.com/agent:7
+   ```
 
-**Note**: Run only one Datadog Agent per node. If a Datadog Agent container already exists, update its definition (or your Docker Compose file) with these settings and recreate it, rather than starting a second Agent. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
+   **Note**: Run only one Datadog Agent per node. If a Datadog Agent container already exists, update its definition (or your Docker Compose file) with these settings and recreate it, rather than starting a second Agent. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
 
-After the commands complete, restart your applications.
+1. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 

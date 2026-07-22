@@ -26,20 +26,22 @@ On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install 
 
 ### New Agent installation
 
-If you don't yet have a Datadog Agent installed, run the following command on your Linux host or VM to install the Agent and enable SSI in one step:
+If you don't yet have a Datadog Agent installed, install the Agent and enable SSI in one step.
 
-```shell
-DD_API_KEY=<YOUR_DD_API_KEY> \
-DD_SITE="{{< region-param key="dd_site" >}}" \
-DD_APM_INSTRUMENTATION_ENABLED=host \
-bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
-```
+1. Run the following command on your Linux host or VM:
 
-Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. The command installs or updates the Agent and the SSI packages.
+   ```shell
+   DD_API_KEY=<YOUR_DD_API_KEY> \
+   DD_SITE="{{< region-param key="dd_site" >}}" \
+   DD_APM_INSTRUMENTATION_ENABLED=host \
+   bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+   ```
 
-By default, SSI installs the latest SDK versions. To pin specific versions, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable with comma-separated `language:major` pairs. Available versions are listed in the source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+   Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][22]. The command installs or updates the Agent and the SSI packages.
 
-After the command completes, restart your applications.
+   By default, SSI installs the latest SDK versions. To pin specific versions, add the `DD_APM_INSTRUMENTATION_LIBRARIES` variable with comma-separated `language:major` pairs. Available versions are listed in the source repositories for each language: [Java][8] (`java`), [Node.js][9] (`js`), [Python][10] (`python`), [.NET][11] (`dotnet`), [Ruby][12] (`ruby`), [PHP][13] (`php`).
+
+1. Restart your applications.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
