@@ -1,0 +1,122 @@
+---
+title: Configure disk buffers for durable BYOC Logs ingestion
+description: Configure persistent disk buffers to retain logs when the BYOC Engine is unavailable or cannot accept logs fast enough.
+aliases:
+- /cloudprem/operate/durable_autoscaling/
+- /byoc-logs/operate/durable_autoscaling/
+further_reading:
+- link: "/byoc-logs/operate/sizing/"
+  tag: "Documentation"
+  text: "Cluster Sizing"
+- link: "/observability_pipelines/scaling_and_performance/buffering_and_backpressure/"
+  tag: "Documentation"
+  text: "Observability Pipelines Buffering and Backpressure"
+- link: "/byoc-logs/operate/monitoring/"
+  tag: "Documentation"
+  text: "Monitor BYOC Logs"
+---
+
+{{< img src="cloudprem/operate/disk-buffer-durability.svg" alt="Diagram of durable BYOC Logs ingestion using Observability Pipelines disk buffers and the BYOC Engine." style="width:100%;" >}}
+
+## Overview
+
+BYOC Logs combines Observability Pipelines with the BYOC Engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Engine is unavailable or cannot accept logs as fast as they arrive. This gives the ingestion path time to recover without immediately dropping logs.
+
+A durable setup has four parts:
+
+- Enough buffer capacity for the backlog you want to retain
+- Disk buffering on the BYOC Logs destination
+- A persistent volume for each Worker's buffer
+- Enough time for a terminating Worker to drain its buffer
+
+## Before you begin
+
+This guide assumes that you have a BYOC Logs deployment with:
+
+- Observability Pipelines configured with a [BYOC Logs destination](/observability_pipelines/destinations/datadog_byoc_logs/)
+- A [BYOC Engine deployment](/byoc-logs/install/)
+
+## Size the disk buffer
+
+A useful starting point is to decide how long Workers need to retain logs if the BYOC Engine is unavailable. The expected backlog can then be divided across the minimum number of Workers that remain active.
+
+For example, consider a total ingress of 50 TB/day, 25 Workers, and a one-hour BYOC Engine outage:
+
+```text
+total backlog = 50 TB × 1 hour ÷ 24 hours
+              = 2.08 TB
+
+buffer per Worker = 2.08 TB ÷ 25 Workers
+                  = 83 GB per Worker
+```
+
+Rounding up the result leaves capacity for a longer incident or a higher ingress rate. With a 100 GB buffer on each Worker, the 25 Workers provide 2.5 TB of total buffer capacity and can retain approximately 1.2 hours of logs at 50 TB/day.
+
+## Disk buffer configuration
+
+The following buffering options are available when editing the BYOC Logs destination in the Observability Pipelines UI or through the API:
+
+- **Buffer type**: Disk
+- **Buffer size**: The per-Worker capacity from your calculation
+- **Behavior on full buffer**: Block
+
+For the 25-Worker example, the destination configuration looks like this:
+
+```json
+"buffer": {
+  "type": "disk",
+  "max_size": 100000000000,
+  "when_full": "block"
+}
+```
+
+The `max_size` value is expressed in bytes. When the buffer is full, `block` keeps the Worker from discarding logs and allows backpressure to propagate to upstream applications.
+
+## Persistent storage for the buffer
+
+Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB persistent volume to each Worker:
+
+```yaml
+persistence:
+  enabled: true
+  storageClassName: "<STORAGE_CLASS>"
+  accessModes:
+    - ReadWriteOnce
+  size: 120Gi
+  retentionPolicy:
+    whenScaled: Retain
+    whenDeleted: Retain
+```
+
+The persistent volume keeps buffered logs if a Worker pod restarts. The `Retain` policies also keep the volume when its Worker is scaled down or the StatefulSet is deleted.
+
+## Draining OP Workers before shutdown
+
+During a scale-down or rollout, a Worker stops accepting new logs and sends its buffered logs to the BYOC Engine. If the Worker exits before the buffer is empty, the logs remain on its persistent volume and are not sent until a Worker reattaches that volume.
+
+The `terminationGracePeriodSeconds` value gives the Worker time to empty its buffer before exiting. You can estimate the required time from the drain throughput measured in your environment:
+
+```text
+drain time = configured buffer size in MB ÷ measured drain throughput in MB/s
+termination grace period = drain time × safety factor
+```
+
+For a Worker draining a 100 GB buffer at 120 MB/s, a safety factor of `1.2` gives:
+
+```text
+drain time = 100,000 MB ÷ 120 MB/s
+           = 833 seconds
+
+termination grace period = 833 seconds × 1.2
+                         ≈ 1,000 seconds
+```
+
+Although the estimate is approximately 1,000 seconds, this example uses a 3,600-second termination grace period to provide additional margin:
+
+```yaml
+terminationGracePeriodSeconds: 3600
+```
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
