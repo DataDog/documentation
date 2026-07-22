@@ -518,6 +518,12 @@ After sending your events, check the following:
 - [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
 - [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, your job appears as a node connected to the dataset nodes.
 
+## Correlate logs with job runs
+
+To correlate your application logs with a job run in Datadog, emit your logs with the OpenLineage run ID in the `@openlineage.run_id` attribute. Set its value to the same `runId` you send in your OpenLineage run events. Datadog uses this attribute to associate logs with the matching job run.
+
+How you attach the run ID depends on your logging setup. For details on sending logs with custom attributes to Datadog, see [Log Collection and Integrations][10].
+
 ## Dataset naming conventions
 
 To connect your custom job's lineage to datasets already tracked by Datadog's native integrations, include `inputs` and `outputs` in your event using the exact `namespace` and `name` that Datadog expects for that platform. For example, referencing a Snowflake table in your custom job's `outputs` with the correct namespace and name links it to the existing dataset node in the lineage graph.
@@ -611,3 +617,4 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 [7]: https://app.datadoghq.com/data-jobs
 [8]: https://openlineage.io/docs/spec/naming/
 [9]: https://app.datadoghq.com/data-obs/lineage
+[10]: /logs/log_collection/
