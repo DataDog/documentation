@@ -88,15 +88,15 @@ Channel naming templates support a different, smaller set of variables than noti
 |---|---|
 | `{{public_id}}` | The incident's numeric ID. |
 | `{{title}}` | The incident title. |
-| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format. |
-| `{{yyyy}}` | The four-digit year the incident was created. |
-| `{{mm}}` | The two-digit month the incident was created. |
-| `{{dd}}` | The two-digit day of month the incident was created. |
-| `{{severity_number}}` | The incident's numeric severity level. |
+| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format, in the selected timezone. |
+| `{{yyyy}}` | The four-digit year the incident was created, in the selected timezone. |
+| `{{mm}}` | The two-digit month the incident was created, in the selected timezone. |
+| `{{dd}}` | The two-digit day of month the incident was created, in the selected timezone. |
+| `{{severity}}` | The incident's severity. |
+| `{{severity_number}}` | The incident's severity, as a number (for example, `1` for `SEV-1`). |
 | `{{random_adjective}}` | A random adjective. |
 | `{{random_noun}}` | A random noun. |
-| `{{severity}}` | The incident's severity. **Only available for Google Chat channel naming templates.** |
-| `{{slug}}` | A slug value. When the slug source is set to `servicenow`, this displays the ServiceNow record number. **Only available for Google Chat channel naming templates.** |
+| `{{slug}}` | A slug value. When the slug source is set to `servicenow`, this displays the ServiceNow record number. |
 
 **Note**: Because Slack, Microsoft Teams, and Google Chat enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
 
