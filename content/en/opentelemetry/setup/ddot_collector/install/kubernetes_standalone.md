@@ -1,5 +1,6 @@
 ---
-title: Install the standalone DDOT Collector as a Kubernetes DaemonSet
+title: Install the Standalone DDOT Collector as a Kubernetes DaemonSet
+description: Deploy the standalone Datadog Distribution of the OpenTelemetry (DDOT) Collector on Kubernetes using the OpenTelemetry Operator or Helm chart.
 code_lang: kubernetes_standalone
 type: multi-code-lang
 code_lang_weight: 3
@@ -8,6 +9,11 @@ further_reading:
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components in DDOT"
 ---
+
+
+{{< callout header="false" btn_hidden="true" >}}
+Installing the standalone DDOT Collector with OpenTelemetry tooling is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -38,14 +44,14 @@ Install and set up the following on your machine:
 | gRPC     | TCP       | 4317 |
 | HTTP     | TCP       | 4318 |
 
-## Install the Datadog Distribution of an OpenTelemetry Collector
+## Install the Datadog Distribution of the OpenTelemetry Collector
 
 ### Select installation method
 
 Choose one of the following installation methods:
 
-- [OpenTelemetry Operator][55]: A [Kubernetes-native][56] approach that automatically reconciles and maintains your OTel collector setup.
-- [Helm chart][4]: A straightforward way to deploy OTel collectors.
+- [OpenTelemetry Operator][55]: A [Kubernetes-native][56] approach that automatically reconciles and maintains your OTel Collector setup.
+- [Helm chart][4]: A straightforward way to deploy OTel Collectors.
 
 {{< tabs >}}
 {{% tab "Operator" %}}
