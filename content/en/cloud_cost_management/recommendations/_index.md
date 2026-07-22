@@ -54,6 +54,18 @@ multifiltersearch:
       recommendation_type: Enable Anthropic Prompt Caching
       recommendation_description: Identifies Anthropic API keys with no prompt caching usage and recommends enabling prompt caching to reduce input token costs.
       recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
+    - category: Configure
+      cloud_provider: Anthropic
+      resource_type: Anthropic API Key
+      recommendation_type: Optimize Anthropic Prompt Caching
+      recommendation_description: Identifies Anthropic API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
+    - category: Configure
+      cloud_provider: OpenAI
+      resource_type: OpenAI API Key
+      recommendation_type: Optimize OpenAI Prompt Caching
+      recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: '[OpenAI integration](/integrations/openai/)'
     - category: Migrate
       cloud_provider: AWS
       resource_type: Auto Scaling Group
@@ -360,6 +372,24 @@ multifiltersearch:
       recommendation_type: Transition old Standard-class data
       recommendation_description: A bucket prefix has old Standard-class data with no lifecycle transition rule to move it to cheaper storage.
       recommendation_prerequisites: '[Storage Management](https://www.datadoghq.com/product/storage-management)'
+    - category: Terminate
+      cloud_provider: AWS
+      resource_type: SageMaker Endpoint
+      recommendation_type: Delete Idle SageMaker Endpoint
+      recommendation_description: A SageMaker endpoint with zero invocations.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: SageMaker Endpoint
+      recommendation_type: Downsize SageMaker Endpoint
+      recommendation_description: SageMaker real-time inference endpoints with CPU and memory utilization less than the available resources of the next smallest instance in the family. Endpoints using GPU/accelerator instances or managed scaling are excluded.
+      recommendation_prerequisites: ""
+    - category: Configure
+      cloud_provider: AWS
+      resource_type: SageMaker Training Job
+      recommendation_type: Enable SageMaker Managed Spot Training
+      recommendation_description: Groups of SageMaker training jobs that share a common training image and can use managed spot training to reduce training costs when their training scripts support checkpointing.
+      recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: VPC NAT Gateway

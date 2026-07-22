@@ -2,21 +2,19 @@
 title: How Mobile Session Replay Impacts App Performance
 description: Performance benchmarking for Mobile Session Replay.
 aliases:
+  - /session_replay/mobile/app_performance
   - /real_user_monitoring/session_replay/mobile/app_performance
   - /product_analytics/session_replay/mobile/app_performance
 further_reading:
-  - link: '/session_replay/mobile'
+  - link: '/session_replay/privacy_options'
     tag: Documentation
-    text: Mobile Session Replay
-  - link: '/session_replay/mobile/privacy_options'
+    text: Session Replay Privacy Options
+  - link: '/session_replay/setup_and_configuration'
     tag: Documentation
-    text: Mobile Session Replay Privacy Options
-  - link: '/session_replay/mobile/setup_and_configuration'
+    text: Setup and Configure Session Replay
+  - link: '/session_replay/troubleshooting'
     tag: Documentation
-    text: Setup and Configure Mobile Session Replay
-  - link: '/session_replay/mobile/troubleshooting'
-    tag: Documentation
-    text: Troubleshoot Mobile Session Replay
+    text: Troubleshoot Session Replay
   - link: '/session_replay'
     tag: Documentation
     text: Session Replay
