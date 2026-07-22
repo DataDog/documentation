@@ -6,6 +6,9 @@ disable_toc: false
 Rule actions extend Workload Protection (Runtime Security) rules beyond detection. When a rule matches an event, the Agent can execute one or more actions to enrich the event, respond to a threat, or drive multi-step detection logic.
 
 Actions are defined in Agent policy files (`.policy`) under the `actions` field of a rule.
+<div class="alert alert-info">All actions can be configured in Agent policy files (YAML) on the Agent but <code>log</code>, <code>coredump</code>, and <code>network_filter</code> cannot be setup from the UI when creating a rule.
+When you create an Agent rule in the Datadog app, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">Automated Response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">Response</a>.
+</div>
 
 ## Overview
 
@@ -137,7 +140,7 @@ Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal t
 
 In addition to defining `kill` actions in Agent policy files, you can configure process termination from the Datadog app:
 
-- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/#automated-response) to set supported out-of-the-box Agent rules to **Blocking** in Agent Configuration.
+- **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/#automated-response).
 - **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
 
 Both approaches require [Response](/security/workload_protection/respond_and_report/#response) to be enabled on the Agent. See [Respond and Report](/security/workload_protection/respond_and_report/) for an overview of enforcement and response workflows.
@@ -166,7 +169,7 @@ Both approaches require [Response](/security/workload_protection/respond_and_rep
 
 ### Safeguards
 
-The Agent includes disarmers to prevent runaway kill loops. If too many kill actions fire against the same container or executable within a configured period, subsequent kills for that target are suppressed until the period expires. Configure disarmers under `runtime_security.enforcement.disarmer`.
+The Agent includes disarmers to prevent runaway kill loops during automated response. If too many kill actions fire against the same container or executable within a configured period, subsequent kills for that target are suppressed until the period expires. 
 
 Certain binaries can also be excluded from enforcement through `runtime_security.enforcement.exclude_binaries`.
 
@@ -216,8 +219,6 @@ In addition to defining `network_filter` actions in Agent policy files, you can 
 - **Automatic:** Add `network_filter` actions to Agent rules in a policy, as described in this section. When a rule matches, the Agent drops matching traffic automatically.
 - **Manual:** From a security signal, use [Network isolation](/security/workload_protection/investigate_and_triage/security_signals/actions#network-isolation) under **Respond** in the signal side panel.
 
-Both approaches require [Response](/security/workload_protection/respond_and_report/#response) to be enabled with network probes configured on the Agent. See [Respond and Report](/security/workload_protection/respond_and_report/) for setup instructions and an overview of enforcement workflows.
-
 ### When to use it
 
 - Cut off C2 communication after detecting a malicious process.
@@ -258,7 +259,7 @@ actions:
 
 #### Raw packet action event
 
-Each time the kernel drops a packet that matches an active filter, the Agent emits a `rawpacket_action` custom event (`@agent.rule_id:rawpacket_action`). The event payload includes:
+When the kernel drops a packet that matches an active filter, the Agent can emit a `rawpacket_action` custom event (`@agent.rule_id:rawpacket_action`). These events are rate-limited under high drop volume, because the Agent cannot send one event for every dropped packet. The event payload includes:
 
 
 | Field            | Description                                                          |
@@ -271,7 +272,7 @@ Each time the kernel drops a packet that matches an active filter, the Agent emi
 
 #### Metrics
 
-When the kernel drops a packet that matches an active filter, the Agent can emit a `rawpacket_action` custom event (`@agent.rule_id:rawpacket_action`). These events are rate-limited under high drop volume, because the Agent cannot send one event for every dropped packet. To track drop counts reliably, use the `datadog.runtime_security.network.raw_packet.dropped` metric.
+To track drop counts reliably, use the `datadog.runtime_security.network.raw_packet.dropped` metric.
 
 ## hash — Compute file hashes
 
@@ -293,7 +294,7 @@ Use `hash` to enrich an event with cryptographic hashes of a file referenced in 
 
 ### Supported algorithms
 
-Hashes are computed by the Agent hash resolver and may include MD5, SHA1, SHA256, and SSDEEP, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`).
+Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `SHA256`, and `SSDEEP`, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`). To change the algorithms used, update `runtime_security_config.hash_resolver.hash_algorithms` in `system-probe.yaml` or set `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS`. See [Workload Protection Agent configuration](/security/workload_protection/getting_started/advanced_configuration) for all hash resolver parameters.
 
 ### Example
 
