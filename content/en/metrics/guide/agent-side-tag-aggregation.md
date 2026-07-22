@@ -159,7 +159,7 @@ The initial Preview release has the following limitations:
 
 When Agent-side tag aggregation rules are configured, Agent Data Plane resource usage may increase by up to 10% CPU and up to 25% resident set size (RSS). These limits are intended to minimize the resource usage impact on the Agent during the Preview.
 
-## Example: query impact on count and rate metrics
+## Example: Query impact on count and rate metrics
 
 ### Example setup
 
