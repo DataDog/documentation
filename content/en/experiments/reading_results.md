@@ -10,6 +10,9 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: "/experiments/diagnostics/"
+  tag: "Documentation"
+  text: "Experiment Diagnostics"
 ---
 
 ## Overview
@@ -22,6 +25,10 @@ After you [launch an experiment][1], the experiment results page is the central 
 - **Document learnings**: Record conclusions and takeaways for your team.
 
 The following sections explain the metric scorecard and how to explore results.
+
+## Experiment diagnostics
+
+Datadog runs [experiment diagnostics][9] with experiment analysis to check exposure data, metric data, randomization, and analysis health. Review diagnostic warnings before interpreting results, especially when a metric is missing, unexpectedly zero, or marked with a warning.
 
 ## Metric scorecard
 
@@ -108,10 +115,11 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/plan_and_launch_experiments
-[2]: /experiments/analysis_methods
+[2]: /experiments/statistics/analysis_methods
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
 [6]: /session_replay/
 [7]: /experiments/global_lift/
 [8]: /experiments/statistics/multiple_testing_correction
+[9]: /experiments/diagnostics/

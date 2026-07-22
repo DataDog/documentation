@@ -28,7 +28,7 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
-  - link: /session_replay/mobile/setup_and_configuration#web-view-instrumentation
+  - link: /session_replay/setup_and_configuration#web-view-instrumentation
     tag: Documentation
     text: Web View Instrumentation
 ---
@@ -379,7 +379,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /session_replay/mobile/setup_and_configuration/#web-view-instrumentation
+[1]: /session_replay/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios

@@ -1,15 +1,19 @@
 ---
-title: Session Replay Browser Dev Tools
-description: 
+title: Session Replay Dev Tools
+description: Use Session Replay Dev Tools to debug and inspect session recordings.
 aliases:
-- /real_user_monitoring/session_replay/dev_tools
+  - /session_replay/browser/dev_tools
+  - /session_replay/mobile/dev_tools
+  - /real_user_monitoring/session_replay/dev_tools
+  - /real_user_monitoring/session_replay/mobile/dev_tools
+  - /product_analytics/session_replay/mobile/dev_tools
 further_reading:
-    - link: '/session_replay/'
-      tag: Documentation
-      text: Session Replay
-    - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
-      tag: "Blog"
-      text: "Obfuscate user data with Session Replay default privacy settings"
+  - link: '/session_replay/'
+    tag: Documentation
+    text: Session Replay
+  - link: "https://www.datadoghq.com/blog/default-privacy-session-replay/"
+    tag: "Blog"
+    text: "Obfuscate user data with Session Replay default privacy settings"
 ---
 
 ## Overview
@@ -30,13 +34,13 @@ Select and apply filters such as {{< ui >}}Action Name{{< /ui >}} and {{< ui >}}
 
 ### Console
 
-The {{< ui >}}Console{{< /ui >}} tab displays all [logs collected from the web browser][2] and errors for each view. 
+The {{< ui >}}Console{{< /ui >}} tab displays all [logs collected from the web browser][2] and errors for each view.
 
 Click {{< ui >}}Error{{< /ui >}}, {{< ui >}}Warn{{< /ui >}}, {{< ui >}}Info{{< /ui >}}, and {{< ui >}}Debug{{< /ui >}} to filter your logs based on severity. To search for these logs in the [Log Explorer][3], click {{< ui >}}View in Log Explorer{{< /ui >}}.
 
 {{< img src="real_user_monitoring/session_replay/dev_tools/dev-tools-console-1.png" alt="Console View in Log Explorer button" style="width:50%;">}}
 
-The Log Explorer opens in a separate tab with a pre-filled search query. 
+The Log Explorer opens in a separate tab with a pre-filled search query.
 
 ### Errors
 
