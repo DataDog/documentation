@@ -95,7 +95,7 @@ Container-based primary tags are enabled by default in Datadog Agent versions 7.
 
 With Agent 7.65.0 or later, no feature flag is required. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect.
 
-Now you can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+You can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
 **Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 
