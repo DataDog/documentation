@@ -4337,6 +4337,10 @@
     "description": "Retrieve a pruned, hierarchical view of an APM trace by its trace ID.\nThe trace is summarized as a tree of spans rooted at the trace root and reduced in size\nto keep rendering large traces in the UI practical.\nThis endpoint is rate limited to `60` requests per minute per organization.",
     "summary": "Get a pruned trace by ID"
   },
+  "GetPupBumpTest": {
+    "description": "Temporary test-only endpoint used to exercise the pup dependency-bump\ngeneration and merge pipeline. Not a real product feature.",
+    "summary": "Get pup bump test resource"
+  },
   "QueryScalarData": {
     "description": "Query scalar values (as seen on Query Value, Table, and Toplist widgets).\nMultiple data sources are supported with the ability to\nprocess the data using formulas and functions.",
     "summary": "Query scalar data across multiple products",

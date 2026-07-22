@@ -79771,6 +79771,49 @@ components:
       type: string
       x-enum-varnames:
         - PUBLISHREQUEST
+    PupBumpTestData:
+      description: Pup bump test resource data.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PupBumpTestDataAttributes"
+        id:
+          description: Pup bump test identifier.
+          example: "pup-bump-test-1"
+          type: string
+        type:
+          $ref: "#/components/schemas/PupBumpTestType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    PupBumpTestDataAttributes:
+      description: Attributes of the pup bump test resource.
+      properties:
+        message:
+          description: A test message.
+          example: "hello from pup bump test"
+          type: string
+      required:
+        - message
+      type: object
+    PupBumpTestResponse:
+      description: Response for the pup bump test endpoint.
+      properties:
+        data:
+          $ref: "#/components/schemas/PupBumpTestData"
+      required:
+        - data
+      type: object
+    PupBumpTestType:
+      default: pup_bump_test
+      description: Pup bump test resource type.
+      enum:
+        - pup_bump_test
+      example: "pup_bump_test"
+      type: string
+      x-enum-varnames:
+        - PUP_BUMP_TEST
     PutAppsDatastoreItemResponseArray:
       description: Response after successfully inserting multiple items into a datastore, containing the identifiers of the created items.
       properties:
@@ -171407,6 +171450,42 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/pup_bump_test:
+    get:
+      description: |-
+        Temporary test-only endpoint used to exercise the pup dependency-bump
+        generation and merge pipeline. Not a real product feature.
+      operationId: GetPupBumpTest
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        message: "hello from pup bump test"
+                      id: "pup-bump-test-1"
+                      type: pup_bump_test
+              schema:
+                $ref: "#/components/schemas/PupBumpTestResponse"
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get pup bump test resource
+      tags:
+        - Pup Bump Test
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/query/scalar:
     post:
       description: |-
@@ -207264,6 +207343,10 @@ tags:
       **Note**: Sending server-side events impacts billing. Review the [pricing page](https://www.datadoghq.com/pricing/?product=product-analytics#products)
       and contact your Customer Success Manager for more information.
     name: Product Analytics
+  - description: |-
+      Temporary test-only tag used to exercise the pup dependency-bump
+      generation and merge pipeline. Not a real product feature.
+    name: Pup Bump Test
   - description: |-
       Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information
     name: RUM

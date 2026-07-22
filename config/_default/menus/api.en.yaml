@@ -16855,6 +16855,23 @@ menu:
           - SubmitProductAnalyticsEvent
         unstable: []
         order: 1
+    - name: Pup Bump Test
+      url: /api/latest/pup-bump-test/
+      identifier: pup-bump-test
+      generated: true
+    - name: Get pup bump test resource
+      url: /api/latest/pup-bump-test/get-pup-bump-test-resource/
+      identifier: pup-bump-test-get-pup-bump-test-resource
+      parent: pup-bump-test
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetPupBumpTest
+        unstable:
+          - v2
+        order: 1
     - name: RUM
       url: /api/latest/rum/
       identifier: rum
