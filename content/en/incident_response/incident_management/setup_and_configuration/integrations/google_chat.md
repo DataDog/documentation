@@ -46,14 +46,15 @@ To use incident spaces:
 4. The **Channel Name Template** you define determines how Datadog names the incident spaces it creates. The following variables are available in channel name templates (see also [Variables available only in channel naming templates][4]):
    * `{{public_id}}`: Incident's numeric ID
    * `{{title}}`: Incident's title
-   * `{{created}}`: Incident's creation date in format `MM_DD_YYYY`
-   * `{{yyyy}}`: Incident's four-digit creation year
-   * `{{mm}}`: Incident's two-digit creation month
-   * `{{dd}}`: Incident's two-digit creation day of month
+   * `{{created}}`: Incident's creation date in format `MM_DD_YYYY` (in the timezone selected below)
+   * `{{yyyy}}`: Incident's four-digit creation year (in the timezone selected below)
+   * `{{mm}}`: Incident's two-digit creation month (in the timezone selected below)
+   * `{{dd}}`: Incident's two-digit creation day of month (in the timezone selected below)
    * `{{severity}}`: Incident's severity
+   * `{{severity_number}}`: Incident's severity, as a number (for example, `1` for `SEV-1`)
    * `{{random_adjective}}`: Random adjective
    * `{{random_noun}}`: Random noun
-   * `{{slug}}`: Slug (when slug source is set to `servicenow`, this will display the ServiceNow record number)
+   * `{{slug}}`: Slug (when slug source is set to `servicenow`, this displays the ServiceNow record number)
 
 ## Further reading
 
