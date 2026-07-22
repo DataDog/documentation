@@ -178,7 +178,7 @@ To diagnose and restore delivery:
      --region <AWS_REGION>
    ```
 
-2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it to capture subsequent delivery errors. Relevant errors include `HttpEndpoint.DestinationException`, such as HTTP 408 responses, and `S3.AccessDenied`.
+2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it so future delivery errors are captured. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
 3. Inspect the [Firehose CloudWatch metrics][10], including `DeliveryToHttpEndpoint.Success`, `DeliveryToHttpEndpoint.DataFreshness`, `DeliveryToHttpEndpoint.Records`, and `IncomingRecords`.
 4. If Firehose receives records but does not deliver them, verify the S3 backup configuration and IAM role. Confirm that Firehose can assume the configured role and write to the backup bucket. Check that the bucket policy, permissions boundary, service control policies (SCPs), and KMS key policy do not deny the required access. If the logs show an S3 permissions error, correct it before continuing.
 5. Make and save a valid update to the Firehose HTTP destination configuration, such as updating its retry duration. A configuration update can restart a stalled destination. You can use the Firehose [`UpdateDestination` API][11].
