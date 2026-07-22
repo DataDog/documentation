@@ -226,7 +226,7 @@ Message variables auto-populate with a randomly selected group based on the scop
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /monitors/configuration
-[2]: /incident_response/work_management/create_work_item/#automatic-case-creation
+[2]: /incident_response/work_management/create_work_item/#automatic-work-item-creation
 [3]: /monitors/notify/variables/?tabs=is_alert#attribute-and-tag-variables
 [4]: http://daringfireball.net/projects/markdown/syntax
 [5]: /monitors/notify/variables/

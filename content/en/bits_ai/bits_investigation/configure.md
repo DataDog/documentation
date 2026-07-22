@@ -141,7 +141,7 @@ You can trigger and retrieve investigations programmatically [via API][18].
 [3]: https://docs.datadoghq.com/integrations/slack/?tab=datadogforslack
 [4]: https://app.datadoghq.com/bits-ai/settings/integrations
 [5]: /incident_response/work_management/projects
-[6]: https://app.datadoghq.com/cases/settings
+[6]: https://app.datadoghq.com/work/settings
 [7]: https://app.datadoghq.com/integrations/confluence
 [8]: /account_management/rbac
 [9]: /bits_ai/bits_investigation/investigate_issues#manually-start-an-investigation

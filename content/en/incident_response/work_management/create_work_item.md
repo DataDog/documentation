@@ -35,10 +35,10 @@ You can also create work items manually from the following products:
 | Monitors | - On a [monitor status page][2], optionally scope the monitor to a time frame and specific monitor group(s). Then, click the **Actions** dropdown menu and select **Create a work item**.<br> - In Slack, click **Create work item** under a monitor notification. |
 | Security signals | Beside a signal, in the **Cases** column, click the **Create Case** icon. Then, enter the work item details in the **Create Case** window that opens. |
 | Error Tracking | Click into an Error Tracking issue to open the side panel. Then, click **Actions** and select **Create a work item**. |
-| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. <!-- [TO VERIFY] --> |
-| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. <!-- [TO VERIFY] --> |
+| Watchdog | Click into an alert to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
+| Event Management (raw events) | Click into an event to open its side panel. Click the **Actions** dropdown menu and select **Create a case**. |
 | Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create work item**. |
-| Sensitive Data Scanner | Click **Create case** <!-- [TO VERIFY] --> next to a Sensitive Data Scanner issue.  |
+| Sensitive Data Scanner | Click **Create case** next to a Sensitive Data Scanner issue.  |
 | Slack  | Click the **Create Work Item** button under a monitor notification in Slack.  |
 
 ## Automatic work item creation
@@ -76,10 +76,10 @@ Create a case through the [API endpoint][5].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cases
+[1]: https://app.datadoghq.com/work
 [2]: /monitors/status/
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
-[4]: https://app.datadoghq.com/cases/settings
+[4]: https://app.datadoghq.com/work/settings
 [5]: /api/latest/case-management/#create-a-case
 [6]: /actions/workflows/trigger/
 [7]: /incident_response/work_management/customization

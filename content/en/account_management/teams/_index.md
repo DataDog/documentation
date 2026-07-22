@@ -195,7 +195,7 @@ To customize your team, see [Team Management][3].
 [19]: https://app.datadoghq.com/synthetics
 [20]: https://app.datadoghq.com/notebook/list/
 [21]: https://app.datadoghq.com/app-builder/apps/list
-[22]: https://app.datadoghq.com/cases
+[22]: https://app.datadoghq.com/work
 [23]: https://app.datadoghq.com/actions/connections
 [24]: https://app.datadoghq.com/actions/connections?sort=-updated_at&tab=groups
 [25]: https://app.datadoghq.com/organization-settings/cross-org-visibility

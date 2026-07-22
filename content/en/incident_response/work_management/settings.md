@@ -53,6 +53,6 @@ Add custom work item types and attributes to projects so that you can tailor you
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/granular_access
-[2]: https://app.datadoghq.com/cases/settings
+[2]: https://app.datadoghq.com/work/settings
 [3]: /incident_response/work_management/notifications_integrations
 [4]: /incident_response/work_management/customization

@@ -29,8 +29,6 @@ To configure automation rules:
 1. Select **Automation**.
 1. Click **New Rule**.
 
-<!-- {{< img src="/incident_response/work_management/automation_rules/create_case_automation_rule-2.png" alt="Screenshot of the Create Automation Rule dialog in Work Management. The dialog includes steps to set when to evaluate the rule, specify workflow for rule match, name the rule, and set its status." style="width:100%;" >}} -->
-
 Add the following to your configuration:
 
 1. **Define a trigger** - Choose when an automation rule should run:
@@ -49,5 +47,5 @@ Add the following to your configuration:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cases/settings
+[1]: https://app.datadoghq.com/work/settings
 [2]: /actions/workflows/

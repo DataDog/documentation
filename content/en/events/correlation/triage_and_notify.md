@@ -8,16 +8,11 @@ further_reading:
   text: "Learn about Event Correlation"
 ---
 
-<!-- {{< img src="events/correlation/triage/triage.png" alt="Work item detail page with an event side panel. Investigate correlated events from a work item and analyze related metrics" style="width:100%;" >}} -->
-
 Event Management correlates related events and automatically consolidates them into a single work item. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
 From the [Correlation][1] page, find the pattern you want to analyze and click {{< ui >}}Triage Work Items{{< /ui >}} at the end of the same row. You can also click {{< ui >}}Work Management{{< /ui >}} at the top of the page to view all work items with correlated events in [Work Management][2]. Datadog pulls in related metrics and logs so you can troubleshoot issues with all the related data in one place.
 
 ## Event Management Work Item
-
-<!-- {{< img src="events/correlation/triage/event_management_case_detail.png" alt="Work item detail page - Overview" style="width:100%;" >}} -->
-
 
 | Feature | Description | 
 | ------  | ----------- | 
@@ -58,7 +53,7 @@ In work management, _views_ group work items based on a configured query. You ca
 
 
 [1]: https://app.datadoghq.com/event/correlation
-[2]: https://app.datadoghq.com/cases?query=status%3AOPEN%20creation_source%3AEVENT_MANAGEMENT&page=1&page-size=25&sort=created_at
+[2]: https://app.datadoghq.com/work?query=status%3AOPEN%20creation_source%3AEVENT_MANAGEMENT&page=1&page-size=25&sort=created_at
 [3]: /incident_response/work_management/settings#set-up-integrations
 [4]: /incident_response/work_management/view_and_manage#create-a-view
 [5]: /incident_response/work_management/view_and_manage

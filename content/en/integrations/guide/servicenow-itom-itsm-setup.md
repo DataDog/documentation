@@ -244,7 +244,7 @@ Send work items from Datadog to the Datadog Cases ITSM table in ServiceNow. Serv
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
 1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Work Management** tab.
 1. Under **Sync ServiceNow with Work Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table** <!-- [TO VERIFY] -->, choose to send work items to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Work Management.
+1. Beside **Case Table**, choose to send work items to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Work Management.
 1. Navigate to the [**Work Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
@@ -402,7 +402,7 @@ Need additional help? Contact [Datadog support][10].
 [2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
-[5]: https://app.datadoghq.com/cases/settings
+[5]: https://app.datadoghq.com/work/settings
 [6]: /incident_response/work_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html

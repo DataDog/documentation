@@ -28,8 +28,6 @@ To request approval on a work item:
 
 After requesting approval, a **Reviewers** section appears in the work item details panel. Each reviewer's name and current status (Requested, Approved, or Declined) is displayed. To modify the reviewers list, click the edit icon next to **Reviewers**. All approval events are recorded in the work item's activity timeline.
 
-<!-- {{< img src="incident_response/work_management/approvals/case_approvals_overview.png" alt="Work item details page showing the Reviewers panel" style="width:100%;" >}} -->
-
 ### Notifications
 
 - Approvers are notified by email when their approval is requested.

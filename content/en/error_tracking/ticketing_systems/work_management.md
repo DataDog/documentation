@@ -44,8 +44,6 @@ You can create a Work Management work item directly from the issue panel to grou
 4. Choose the Work Management project in which the work item should be created. By default, the work item will automatically be created in the Error Tracking project.
 5. Click {{< ui >}}Create{{< /ui >}} to create the work item.
 
-<!-- {{< img src="error_tracking/create-case.png" alt="Create a Work Management work item from an Error Tracking issue" style="width:100%;" >}} -->
-
 After it is created, the work item is linked to the Error Tracking issue. The work item link then appears in the issue panel, and the issue status automatically changes to {{< ui >}}REVIEWED{{< /ui >}}.
 
 When an issue is linked to a work item, their state, assignee, and comments are two-way synced.
@@ -62,11 +60,7 @@ You can attach multiple Error Tracking issues to a single Work Management work i
 5. Click {{< ui >}}Attach to Case{{< /ui >}} to attach the issue to the work item.
 6. Repeat these actions on all the issues you want to add to this group.
 
-<!-- {{< img src="error_tracking/add-to-existing-case.png" alt="Add an Error Tracking issue to an existing work item" >}} -->
-
 All linked Error Tracking issues appear in the work item view, providing a consolidated view of related errors.
-
-<!-- {{< img src="error_tracking/group-issues-into-a-case.png" alt="Link multiple Error Tracking issues to a single work item" >}} -->
 
 When several issues are linked to a work item, their state, assignee and comments are two-way synced. See [State dual-way sync between issues and work items](#state-dual-way-sync-between-issues-and-work-items) for more information on how the issues states and work item status are synced.
 
@@ -122,8 +116,6 @@ To create an automation rule for Work Management:
     - {{< ui >}}Auto-create{{< /ui >}}: Optionally enable automatic work item creation when issues match
 4. Click {{< ui >}}Save Rule{{< /ui >}}.
 
-<!-- {{< img src="error_tracking/create-case-management-automation-rule.png" alt="Create a Work Management automation rule" style="width:100%;" >}} -->
-
 ### Match criteria
 
 Configure rules based on the following attributes:
@@ -142,8 +134,6 @@ You can combine multiple criteria to create precise routing rules. The issue mat
 ### Automatic work item creation
 
 When adding an automation rule, you can enable automatic work item creation for issues matching your rule.
-
-<!-- {{< img src="error_tracking/enable-auto-case-creation.png" alt="Enable automatic work item creation" style="height:300px;" >}} -->
 
 By default, when a new Error Tracking issue is created, rules are evaluated and the first rule that matches is applied. If automatic work item creation is enabled on that matching rule, a new Work Management work item is created in the project specified in your rule, and attached to the matching issue.
 

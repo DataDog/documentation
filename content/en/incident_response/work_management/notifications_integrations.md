@@ -93,8 +93,6 @@ To automatically trigger a page, configure automated paging rules in your projec
 In Project Settings, you can manage membership, configure the auto-closing of work items, and set up third-party integrations like Jira and ServiceNow.
 
 {{% collapse-content title="Jira Configuration" level="h4" expanded=false %}}
-<!-- {{< img src="/incident_response/work_management/settings/settings_jira.png" alt="Jira configuration options for Work Management settings" style="width:100%;" >}} -->
-
 1. Ensure the Jira integration is configured.
 1. In Work Management project settings, enable **Jira** for manual Jira issue creation from the project.
 1. Select a Jira account, a project to create issues in, and the desired issue type (such as story, epic, bug, or task).
@@ -158,8 +156,6 @@ Manual incident declaration during high event volumes can cause delays and incre
 
 Navigate to the [Project Settings page][1], click **Integrations** > **Datadog Incidents**, and toggle on **Auto-escalate work items to Incidents**.
 
-<!-- {{< img src="/incident_response/work_management/notifications_integrations/case_auto_escalation.png" alt="Work Management settings page showing incident auto-escalation configuration" style="width:70%;" >}} -->
-
 When enabled, any work item that meets your specified query criteria (at any point in its lifecycle) automatically triggers an incident, enabling faster response times for your team.
 
 ## Slack mirroring
@@ -188,7 +184,7 @@ Slack thread mirroring is enabled by default for all Work Management projects. T
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/cases/settings
+[1]: https://app.datadoghq.com/work/settings
 [2]: /integrations/jira/#configure-a-jira-webhook
 [3]: /integrations/servicenow/#itom-and-itsm-setup
 [4]: /incident_response/on-call/

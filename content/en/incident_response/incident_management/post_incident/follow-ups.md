@@ -60,7 +60,7 @@ To export follow-ups:
 1. Navigate to [**Incident Management settings > Follow-Ups**][1].
 1. Add or define an **export template**. An export template describes the way that Datadog can export and sync a follow-up.
 1. The following export template types are supported:
-   1. [Work Management](#case-management-exports)
+   1. [Work Management](#work-management-exports)
    1. [Jira](#jira-exports)
 1. When defining a template, you can configure how Datadog should set the fields on the resulting Datadog work item or Jira issue, using variables provided by the follow-up and its incident. For example:
    * `{{ title }}` represents the incident's title

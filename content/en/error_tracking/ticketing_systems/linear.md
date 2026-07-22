@@ -114,11 +114,7 @@ If you experience syncing issues between your Linear issues and the correspondin
    - In Work Management settings, verify that the Linear integration is enabled for this project.
    - Verify that the correct Linear workspace and team are configured.
 
-   <!-- {{< img src="error_tracking/enable-linear-for-case-management-project.png" alt="Enable Linear for your Work Management project" style="width:100%;" >}} -->
-
 3. In Work Management settings, make sure that sync between Work Management and Linear is enabled for this project. Check that the fields you want to sync are configured for two-way sync between Datadog and Linear.
-
-   <!-- {{< img src="error_tracking/sync-data-between-case-management-and-linear.png" alt="Sync data between Work Management and Linear" style="width:100%;" >}} -->
 
 4. In your Linear settings, check that a webhook is configured to automatically sync updates between Datadog and Linear. If the webhook is missing, [add a Linear webhook][6].
 

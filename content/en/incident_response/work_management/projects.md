@@ -16,8 +16,6 @@ A project is a container object that holds a set of work items. Organize your wo
 
 ## Create a project
 
-<!-- {{< img src="incident_response/work_management/projects/projects_create_a_project_cropped.png" alt="Create a new project page under Work Management Settings" style="width:100%;" >}} -->
-
 To create a project:
 1. Select **New Project** on the Projects view or click on the **+** icon next to *Your Projects* in the left navigation bar.
 1. Enter a project name and key. Project keys must be between one and 10 characters long. Work item ID numbers are prefixed with a combination of letters, for example, `NOC-123`. Project keys are immutable.

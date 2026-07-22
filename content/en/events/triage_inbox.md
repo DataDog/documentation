@@ -54,7 +54,7 @@ On the right hand split-view side panel, you can perform the following:
 - {{< ui >}}Mark root cause{{< /ui >}}: Identify and mark a related event, such as a faulty change, as the root cause.
 - {{< ui >}}Run workflows{{< /ui >}}: Execute remediation runbooks manually or trigger them conditionally with [Work Item Automation Rules][5].
 - {{< ui >}}Merge work items{{< /ui >}}: Combine related work items to streamline investigations.
-- {{< ui >}}Split cases{{< /ui >}}<!-- [TO VERIFY] -->: Separate alerts that require individual investigation.
+- {{< ui >}}Split cases{{< /ui >}}: Separate alerts that require individual investigation.
 
 **Note**: When all alerts in a work item are resolved, the system automatically closes the work item. You can also manually mark a work item as resolved.
 

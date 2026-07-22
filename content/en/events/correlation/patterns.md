@@ -14,9 +14,6 @@ Pattern-based correlation allows you to control how the events are correlated. D
 
 To get you started, Datadog automatically suggests [pattern-based correlations][1] according to your environment. Click any of the recommendations to open the configuration for the recommended pattern. Configuration fields are pre-populated.
 
-<!-- {{< img src="events/correlation/pattern/recommended_patterns_preview.png" alt="Correlation recommended patterns with the preview panel showing potential cases the pattern would create" style="width:100%;" >}} -->
-
-
 ## Create a pattern
 
 To create a pattern:
@@ -68,8 +65,6 @@ Preview the possible patterns and work items your configuration would potentiall
 - the number of work items that would be created based on the configuration. 
 
 Use this data to preview the impact of your correlations and understand the expected output of a pattern.
-
-<!-- {{< img src="events/correlation/pattern/preview_pattern_output.png" alt="Configuration for pattern-based correlation highlighting the preview panel; panel shows the number of ingested events that match your configuration, how many of those events alert, how much deduplication would occur, and the number of work items that would result." style="width:100%;" >}} -->
 
 **Notes**: the default title in the preview work item is the first alert in correlation. After you save a pattern, the event management work item title is intelligently generated. 
 

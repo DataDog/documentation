@@ -661,8 +661,6 @@ Recommendations are run on a daily basis and are automatically refreshed in your
 - For **all resources**, [cloud cost metrics][6] are also pulled for that resource
 - For all **AWS resources** besides Kubernetes and EC2, AWS metrics are also pulled from [AWS CloudWatch][7]
 
-<!-- {{< img src="cloud_cost/recommendations/cost_recommendations_1.png" alt="Overview tab with potential monthly savings, potential annual savings, and total number of open cases on the Cloud Cost Recommendations page" style="width:100%;" >}} -->
-
 You can see the detailed logic for each recommendation type, along with observability metrics or cost data shown on this page.
 
 Recommendations support [Tag Pipelines][11], allowing you to filter, group, and analyze recommendations using your organization's standardized tags. Any tag rules configured in Tag Pipelines are automatically applied to recommendations and [are normalized][12].

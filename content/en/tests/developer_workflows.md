@@ -117,19 +117,13 @@ You can manually create a Jira issue from a work item in [Work Management][9] by
 
 The overview page for any commit can be discovered through a particular branch or from within any particular test. 
 
-<!-- {{< img src="continuous_integration/case_failed_test.png" alt="Create a Work Management work item in the Commit Overview page" style="width:100%;">}} -->
-
 From the Commit Overview page, click on any row in the `Failed Tests` or `New Flaky Tests` tables and select {{< ui >}}Create work item{{< /ui >}}.
 
 #### Branch Overview
 From this page, click on any row in the {{< ui >}}Flaky Tests{{< /ui >}} table and select {{< ui >}}Create work item{{< /ui >}}.
 
-<!-- {{< img src="continuous_integration/case_flaky_test.png" alt="Create a Work Management work item in the Flaky Tests list" style="width:100%;">}} -->
-
 #### Test Runs View
 From within a specific test run, click the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Create work item{{< /ui >}}.
-
-<!-- {{< img src="continuous_integration/case_test_runs.png" alt="Create a Work Management work item in the Test Runs side panel" style="width:100%;">}} -->
 
 For more information about configuring the Jira integration, see the [Work Management documentation][7].
 
@@ -175,5 +169,5 @@ IDE plugins and extensions are required to view your test in your IDE.
 [6]: https://app.datadoghq.com/integrations/github
 [7]: /incident_response/work_management/settings/#jira
 [8]: /incident_response/work_management/view_and_manage#take-action
-[9]: https://app.datadoghq.com/cases
+[9]: https://app.datadoghq.com/work
 [10]: /integrations/github/#link-a-repository-in-your-organization-or-personal-account

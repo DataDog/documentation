@@ -24,12 +24,10 @@ further_reading:
   tag: "Blog"
   text: "Ensure high service availability with Datadog Service Management"
 algolia:
-  tags: ['inbox', 'work management']
+  tags: ['inbox', 'work management', 'case management']
 ---
 
 ## Overview
-
-<!-- {{< img src="/incident_response/work_management/case_management_overview_cropped.png" alt="Overview of the Work Management page" style="width:100%;" >}} -->
 
 Datadog Work Management offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations. After you create a work item, you can assign it to a user, establishing clear lines of ownership that persist throughout the lifespan of the work item.
 

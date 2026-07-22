@@ -54,8 +54,6 @@ After you create a custom work item type, you must explicitly assign it to each 
 4. Scroll down to the **Work Item Types** section in the settings panel.
 5. Under **From your organization**, open the dropdown and select the custom work item type you created.
 
-<!-- {{< img src="/incident_response/work_management/customization/enable_custom_attribute.png" alt="Enable a custom work item type in project settings" style="width:100%;" >}} -->
-
 After you add the work item type, it is available as an option when you create a new work item within that project.
 
 Your new work item type is available for:
@@ -73,8 +71,6 @@ Custom attributes allow you to capture the structured data your team needs to wo
 * Environments
 * Datacenters
 * Versions
-
-<!-- {{< img src="/incident_response/work_management/customization/add_custom_attribute.png" alt="Add a custom attribute to a work item type" style="width:100%;" >}} -->
 
 You can add attributes that reflect your team's specific needs, such as escalation levels, component owners, business impact, or external links. To add a custom attribute:
 
@@ -114,4 +110,4 @@ Work Management supports customizable work item statuses. By default, work items
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /incident_response/work_management/create_work_item#work-item-types
-[2]: https://app.datadoghq.com/cases/settings?type=shared
+[2]: https://app.datadoghq.com/work/settings?type=shared
