@@ -51,17 +51,17 @@ The following log features are supported:
 
 Feature support is actively evolving. The following are not supported:
 
-- **SIEM**
-- **Watchdog**
-- **Federated search**
-- **LiveTail**
-- **Log context view**
+- SIEM
+- Watchdog
+- Federated search
+- LiveTail
+- Log context view
 
 ### Unsupported query capabilities
 
-- **CIDR query**
-- **Group by transactions**
-- **Advanced query capabilities**:
+- CIDR query
+- Group by transactions
+- Advanced query capabilities:
   - Calculated fields
   - Grok extraction (query-time parsing)
 
