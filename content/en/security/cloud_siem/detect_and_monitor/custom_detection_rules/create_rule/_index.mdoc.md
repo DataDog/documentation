@@ -29,9 +29,6 @@ Historical jobs are one-time executable queries on historical logs used to backt
 ## Create a rule
 
 1. To create a detection rule, navigate to the [Create a New Detection][2] page.
-1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
-{% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}Select **Scheduled Rule**.{% /if %}
-{% if equals($cloud_siem_detection_rule_type, "historical_job") %}Select **Historical job**, then select the **Logs Index** and **Timerange** for the job.{% /if %}
 1. {% if equals($cloud_siem_detection_rule_search_query, "threshold") %}Select the **Threshold** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "new_value") %}Select the **New value** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "anomaly") %}Select the **Anomaly** detection method.{% /if %}
@@ -40,6 +37,9 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% if equals($cloud_siem_detection_rule_search_query, "third_party") %}Select the **Third party** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
+1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}Select **Scheduled Rule**. Then, choose to either query for events, or to write a query in SQL.{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}Select **Historical job**. Then, choose to either query for events, or to write a query in SQL.{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
 
 ## Define your search query
 
