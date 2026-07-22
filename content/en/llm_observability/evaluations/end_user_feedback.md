@@ -107,9 +107,7 @@ Use `feedback_join_key` when feedback is not tied to a single span, trace, or se
 
 ## Analyze feedback
 
-To create a dashboard widget for feedback, create the widget as you would for an evaluation and add the filter `@event_kind:feedback`.
-
-<div class="alert alert-info">Support for filtering spans, traces, or sessions by feedback is not available. For example, you cannot yet filter traces to only traces with thumbs-down feedback. Use dashboards scoped to <code>@event_kind:feedback</code> instead.</div>
+To create a dashboard widget for feedback, create the widget as you would for an evaluation and add the filter `@event_kind:feedback`. To search and filter spans and traces by feedback in the Trace Explorer, see [Feedback queries][6].
 
 ## Further Reading
 
@@ -120,3 +118,4 @@ To create a dashboard widget for feedback, create the widget as you would for an
 [3]: /llm_observability/instrumentation/api/#evaluations-api
 [4]: /llm_observability/instrumentation/sdk/?tab=python#enriching-spans
 [5]: /llm_observability/instrumentation/api/?tab=model#spans-api
+[6]: /llm_observability/monitoring/querying/#feedback-queries

@@ -13,9 +13,6 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
-- link: "ide_plugins/vscode/?tab=cursor"
-  tag: "Documentation"
-  text: "Datadog Extension for Cursor"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
