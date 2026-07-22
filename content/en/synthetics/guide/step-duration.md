@@ -62,7 +62,7 @@ The Synthetics Worker also monitors pending network requests to determine step c
 - A 10-second timeout prevents indefinite waiting.
 - Certain requests are automatically ignored (favicon pings, Google Analytics, Sentry, etc.) to avoid unnecessary delays.
 
-**Performance optimization**: If a step takes approximately 10 seconds to complete, this typically indicates pending requests are causing delays. Check the network tab of that step or subsequent steps to identify slow requests. For requests irrelevant to your test, add them to the **blocked requests** section in your test configuration to improve performance.
+**Performance optimization**: If a step takes approximately 10 seconds to complete, this typically indicates pending requests are causing delays. Check the {{< ui >}}Network{{< /ui >}} tab of that step or subsequent steps to identify slow requests. For requests irrelevant to your test, add them to the {{< ui >}}Blocked requests{{< /ui >}} section in your test configuration to improve performance.
 
 ## Troubleshooting
 

@@ -7,6 +7,12 @@ aliases:
   - /security/application_security/threats/inapp_waf_rules
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 With App and API Protection (AAP) enabled, the Datadog SDK actively monitors all web services and API requests for suspicious security activity.

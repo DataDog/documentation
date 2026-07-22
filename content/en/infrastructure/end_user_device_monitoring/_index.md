@@ -9,7 +9,15 @@ End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>
 
 {{< img src="/infrastructure/end_user_device_monitoring/end_user_device_monitoring.png" alt="End User Devices page showing four healthy devices, charts for device types and operating systems, and a device table with one laptop marked for system crashes." style="width:100%;" >}}
 
-End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce.
+End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual. It helps identify performance and connectivity issues affecting employees and provides a unified view of device, network, and application health across your workforce to help answer questions such as:
+- Why does this employee's laptop slow down every time they open a specific application?
+- Which employees are affected by an overloaded Wi-Fi access point in the office?
+- Is a laggy Zoom, Microsoft Teams, or Google Meet call caused by the device, the network, or the application itself?
+- Where along the path to a SaaS application is latency being introduced?
+- Which devices are crashing with a Blue Screen of Death, and how often?
+- What software (and which versions) are installed across the fleet, for hardware and license inventory planning?
+- Which devices are underperforming on CPU, memory, or disk, and need attention or replacement?
+- What was happening on a device (which processes, logs, or events) right before a reported issue occurred?
 
 ## How it works
 
@@ -24,12 +32,15 @@ Use [Fleet Automation][6] to manage the Agents installed on those devices, inclu
 | Capability                        | Description                                                                                                                                                                                               |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Device performance monitoring** | Monitor overall system health metrics such as CPU, memory, disk, and network utilization to identify underperforming devices.                                                                             |
+| **Battery health** | Plan hardware life cycles with battery metrics such as maximum capacity, cycle count, and charge status.                                                                              |
 | **Process visibility**            | Use [Live Processes][1] to monitor resource usage by individual processes and identify applications affecting device performance.                                                                         |
 | **Logs collection**               | Use [Logs][7] to collect and explore logs from end-user devices and applications for troubleshooting crashes, errors, and performance issues.                                                             |
 | **Wi-Fi monitoring**              | Monitor Wi-Fi metrics such as signal quality, transmission rate, and access point transitions with the [WiFi/WLAN integration][2], which helps identify connectivity issues and overloaded access points. |
 | **Windows crash detection**       | Detect Blue Screen of Death (BSOD) events on Windows devices with the [Windows Crash Detection integration][3], which generates Datadog events showing when system crashes occur.                         |
+| **Network traffic**         | See traffic volume per destination along with latency and error rate.                                                        |
 | **Network path tracing**         | Use [Network Path][4] to trace network traffic from an end-user device to its destination and identify where latency or connectivity issues occur.                                                        |
-| **Application Inventory**         | Capture applications running on the device to verify version updates.                                          | 
+| **Application inventory**         | Capture applications running on the device to verify version updates.                                          |
+| **Identity mapping**         | Map devices back to the end user for pattern and cohort analysis.                                          | 
 
 ## Featured workflows
 

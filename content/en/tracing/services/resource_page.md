@@ -55,7 +55,7 @@ Use the top right percentile selectors to zoom into a given percentile, or hover
 
 Use the Dependency Map to view a flow graph of all of a resource's upstream and downstream service dependencies. The map is scoped to the requests flowing through the selected service and resource (endpoint, database query, etc.) you're focused on.
 
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 [Inferred service dependencies][10] like databases, queues or third-party services are represented with a purple background node.
 
 [10]: /tracing/services/inferred_services/
@@ -69,7 +69,7 @@ The dependency map is only available for service-entry span resources.
 
 {{< img src="tracing/visualization/resource/dependency_map.png" alt="Resource page dependency map" style="width:100%;" >}}
 
-{{< site-region region="ap1,us3,us5,eu,us,ap2" >}}
+{{< site-region region="ap1,us3,us5,eu,us,ap2,uk1" >}}
 **Note**: [Service overrides][9] are represented as part of the edge of the dependency map to keep visibility over the actual remote service, database or queue the service is interacting with.
 
 [9]: /tracing/guide/service_overrides/
@@ -81,7 +81,7 @@ Datadog provides you visibility into how a web resource impacts your frontend ap
 
 {{< img src="tracing/visualization/resource/resource_frontend_impact.png" alt="A table showing several key metrics for a list of views sending requests to a particular resource" style="width:100%;" >}} 
 
-Isolate requests and errors over time for a specific frontend view by hovering over a RUM View Name in the table and clicking on **Isolate this View**. From here, you can explore sampled traces originating from the frontend views by clicking on **View Traces** at the top right of the panel. You can also investigate the sampled RUM sessions for each view by clicking on the context menu for a frontend view in the table. 
+Isolate requests and errors over time for a specific frontend view by hovering over a RUM View Name in the table and clicking on {{< ui >}}Isolate this View{{< /ui >}}. From here, you can explore sampled traces originating from the frontend views by clicking on {{< ui >}}View Traces{{< /ui >}} at the top right of the panel. You can also investigate the sampled RUM sessions for each view by clicking on the context menu for a frontend view in the table. 
 
 The frontend impact panel is only available if you use Real User Monitoring (RUM) and the resource belongs to a web service. Unlike the requests, errors, and latency graphs which use unsampled data sources, the frontend impact metrics are built on indexed trace data from the past 1 hour: 
 
@@ -138,7 +138,7 @@ Consult the list of [traces][7] associated with this resource in the [Trace sear
 
 An endpoint is an HTTP resource exposed by a service at a specific URL path.
 
-If a resource represents an endpoint, a new **Definition** section is added to the resource page.
+If a resource represents an endpoint, a new {{< ui >}}Definition{{< /ui >}} section is added to the resource page.
 
 {{< img src="tracing/software_catalog/definition-section.png" alt="Resource side panel showing endpoint Definition section." style="width:100%;" >}}
 

@@ -35,7 +35,7 @@ Connect an MCP-compatible client to the Datadog MCP Server with the `llmobs` too
 
 The MCP Server endpoint depends on your [Datadog site][5]. Use the {{< ui >}}Datadog Site{{< /ui >}} selector to display the endpoint for your site. Append `?toolsets=llmobs,core` to enable the Agent Observability and core toolsets.
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Endpoint for your selected site ({{< region-param key="dd_site_name" >}}):
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core</code></pre>
 {{< /site-region >}}
@@ -51,7 +51,7 @@ Choose remote authentication when possible. Use local binary authentication if y
 {{< tabs >}}
 {{% tab "Remote authentication" %}}
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Remote authentication uses the MCP specification's [Streamable HTTP][1] transport.
 
 **Claude Code** (command line):
@@ -134,7 +134,7 @@ Local binary authentication uses the MCP specification's [stdio][2] transport. U
 
 The MCP Server uses OAuth 2.0 by default. If OAuth is unavailable, send a Datadog [API key and application key][6] as the `DD_API_KEY` and `DD_APPLICATION_KEY` HTTP headers:
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <pre><code>{
   "mcpServers": {
     "datadog": {
@@ -286,6 +286,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 - **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
+- **Managing datasets**: Look up projects and datasets, browse and inspect dataset records, and add new records to a dataset for use in experiments.
 
 ## Available tools
 
@@ -348,6 +349,26 @@ The `llmobs` toolset includes the following tools:
 `delete_llmobs_evaluator`
 : Delete an LLM-judge evaluator configuration by name.
 
+### Project and dataset tools
+
+`list_llmobs_projects`
+: List all LLM Observability experiments projects for the org, sorted by creation date (newest first). Returns each project's `id`, `name`, and timestamps, plus pagination fields (`next_cursor`, `truncated`). Use this to discover project names and IDs when you don't already know them.
+
+`get_llmobs_project`
+: Look up an LLM Observability experiments project by ID or name. Use this to resolve a `project_id` UUID before calling dataset tools.
+
+`list_llmobs_datasets`
+: List datasets within a project, with optional ID or name filter. Returns dataset metadata and pagination fields. Use this before `get_llmobs_dataset_records` or `add_llmobs_dataset_records` — those tools require a dataset UUID.
+
+`get_llmobs_dataset_records`
+: Read dataset records with structured previews and a schema summary. Shapes arbitrary JSON fields (`input`, `expected_output`, `metadata`) into readable previews. Use `compute_schema=true` to get a type-aware sketch of record structure before constructing new records.
+
+`get_llmobs_full_dataset_records`
+: Fetch up to 3 specific records with full, untrimmed content. Use this to inspect individual records in detail after finding record IDs with `get_llmobs_dataset_records`.
+
+`add_llmobs_dataset_records`
+: Create records in a dataset using a two-step preview-then-confirm flow. Call with `confirmed=false` to preview the planned write, then `confirmed=true` to commit after user approval.
+
 ### Patterns tools
 
 `list_llmobs_pattern_configs`
@@ -391,6 +412,14 @@ The `llmobs` toolset includes the following tools:
 4. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
 5. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
 
+### Dataset management
+
+1. **Find your project**: Use `list_llmobs_projects` to browse projects — each result includes the `id` UUID you need for subsequent calls. If you already know the project name but not its UUID, use `get_llmobs_project` to resolve it directly.
+2. **Find your dataset**: Use `list_llmobs_datasets` with the `project_id` to list datasets and get their UUIDs.
+3. **Understand the data**: Use `get_llmobs_dataset_records` with `compute_schema=true` to browse records and get a type sketch of the fields before reading or writing.
+4. **Read specific records**: Use `get_llmobs_full_dataset_records` to retrieve the complete content of up to 3 records by ID.
+5. **Add records**: Use `add_llmobs_dataset_records` with `confirmed=false` to preview a write, then `confirmed=true` after user approval.
+
 ### Patterns analysis
 
 1. **List configs**: Use `list_llmobs_pattern_configs` to find available Patterns configurations and their `config_id` values.
@@ -411,6 +440,8 @@ After connecting, try prompts like:
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
+- List the datasets in my `my-project` project and show me a sample of records from the dataset named `qa-golden-set`, including its schema.
+- I have a CSV of new test cases. Add them to the `qa-golden-set` dataset in `my-project` as a new version. Show me a preview first.
 
 ## Combine with other Datadog tools
 
