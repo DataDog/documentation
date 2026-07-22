@@ -78,6 +78,25 @@ The following variables work only in postmortem templates. They are not availabl
 | `{{incident.card}}` | Inserts a self-updating incident card into the postmortem. **Only available for postmortems created in Datadog Notebooks.** This variable does not work for postmortems created in third-party locations such as Confluence or Google Drive. |
 | `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
 
+## Variables available only in channel naming templates
+
+Channel naming templates configure the name of the Slack or Microsoft Teams channel that Datadog automatically creates for an incident. Configure these templates in the [Slack][3] or [Microsoft Teams][4] integration settings.
+
+Channel naming templates support a different, smaller set of variables than notification, postmortem, and Jira templates, and use a syntax without the `incident.` prefix.
+
+| Variable | Description |
+|---|---|
+| `{{public_id}}` | The incident's numeric ID. |
+| `{{title}}` | The incident title. |
+| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format. |
+| `{{yyyy}}` | The four-digit year the incident was created. |
+| `{{mm}}` | The two-digit month the incident was created. |
+| `{{dd}}` | The two-digit day of month the incident was created. |
+| `{{random_adjective}}` | A random adjective. |
+| `{{random_noun}}` | A random noun. |
+
+**Note**: Because Slack and Microsoft Teams enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
+
 ## AI variables
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
@@ -109,3 +128,5 @@ AI variables are available in notification and postmortem templates. Your organi
 
 [1]: /incident_response/incident_management/setup_and_configuration/information#status-levels
 [2]: /incident_response/incident_management/setup_and_configuration/property_fields
+[3]: /incident_response/incident_management/setup_and_configuration/integrations/slack/#incident-channels
+[4]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#automatic-channel-creation
