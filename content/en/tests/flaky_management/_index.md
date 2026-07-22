@@ -91,6 +91,10 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
      </tbody>
    </table>
 
+Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined or disabled tests that still fail from breaking CI again.
+
+Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on `broken_test:true` to show tests with a 100% failure rate over the last 7 days.
+
 ## Track evolution of flaky tests
 
 Track the evolution of the number of flaky tests with the `test_optimization.test_management.flaky_tests` out-of-the-box metric. The metric is enriched with the tags below to help you investigate the counts in more detail.
