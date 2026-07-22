@@ -300,6 +300,8 @@ assets/jsconfig.json
 # local build files
 .backup_path
 local/bin/py/build/*
+!local/bin/py/build/configurations/
+local/bin/py/build/configurations/*
 !local/bin/py/build/configurations/pull_config_preview.yaml
 !local/bin/py/build/configurations/pull_config.yaml
 !local/bin/py/build/configurations/integration_merge.yaml
