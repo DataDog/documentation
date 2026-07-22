@@ -5756,6 +5756,11 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: ci
+      identifier: cicd_optimization
+      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5964,6 +5969,11 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: tests
+      identifier: tests_cicd_optimization
+      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6433,6 +6443,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Stale Flags
+      url: feature_flags/concepts/stale_flags
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_stale_flags
+      weight: 309
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts

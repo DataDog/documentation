@@ -60,6 +60,10 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, use the tag `component_type:datadog_logs`.
+
 ## How the destination works
 
 ### Event batching
@@ -69,10 +73,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | 1,000          | 4.25              | 5                   |
-
-## Metrics
-
-For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, use the tag `component_type:datadog_logs`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

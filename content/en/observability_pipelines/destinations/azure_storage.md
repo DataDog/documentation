@@ -68,6 +68,10 @@ Enter a prefix that you want to apply to all key objects.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
+
 ## How the destination works
 
 ### Event batching
@@ -77,10 +81,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 100               | 900                 |
-
-## Metrics
-
-For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
 
 [1]: /logs/log_configuration/archives/
 [2]: /logs/log_configuration/rehydrating/
