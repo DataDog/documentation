@@ -394,7 +394,7 @@ Searches for Audit Trail events using Datadog query syntax with support for pagi
 ### `list_audit_events`
 *Toolset: **audit-trail***\
 *Permissions Required: `Audit Trail Read`*\
-Lists Audit Trail events over a time window with support for pagination and optional queries. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous/new asset values unless requested.
+Lists Audit Trail events over a time window with support for pagination and an optional query. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous/new asset values unless requested.
 
 - Show me Audit Trail events for the past hour.
 
