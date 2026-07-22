@@ -73,6 +73,8 @@ The SDK fetches configuration in the background and evaluates flags locally. Ind
 - preserves the last accepted configuration during temporary network or payload errors; and
 - prevents overlapping polls.
 
+The Datadog-managed CDN has points of presence across major global regions and peers with internet service providers and content networks. This makes a serving location likely to be geographically close to most application workloads. Multiple locations and redundant interconnections also allow the CDN to route around unavailable network paths or locations.
+
 Keep `DD_API_KEY` in a secret manager and expose it only to the application process that loads flag configuration. Agentless configuration delivery sends the API key directly from the application to Datadog over HTTPS.
 
 #### Use a custom agentless endpoint
