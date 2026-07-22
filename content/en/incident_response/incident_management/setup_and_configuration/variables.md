@@ -80,7 +80,7 @@ The following variables work only in postmortem templates. They are not availabl
 
 ## Variables available only in channel naming templates
 
-Channel naming templates configure the name of the Slack or Microsoft Teams channel that Datadog automatically creates for an incident. Configure these templates in the [Slack][3] or [Microsoft Teams][4] integration settings.
+Channel naming templates configure the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident. Configure these templates in the [Slack][3], [Microsoft Teams][4], or [Google Chat][5] integration settings.
 
 Channel naming templates support a different, smaller set of variables than notification, postmortem, and Jira templates, and use a syntax without the `incident.` prefix.
 
@@ -94,8 +94,10 @@ Channel naming templates support a different, smaller set of variables than noti
 | `{{dd}}` | The two-digit day of month the incident was created. |
 | `{{random_adjective}}` | A random adjective. |
 | `{{random_noun}}` | A random noun. |
+| `{{severity}}` | The incident's severity. **Only available for Google Chat channel naming templates.** |
+| `{{slug}}` | A slug value. When the slug source is set to `servicenow`, this displays the ServiceNow record number. **Only available for Google Chat channel naming templates.** |
 
-**Note**: Because Slack and Microsoft Teams enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
+**Note**: Because Slack, Microsoft Teams, and Google Chat enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
 
 ## AI variables
 {{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
@@ -130,3 +132,4 @@ AI variables are available in notification and postmortem templates. Your organi
 [2]: /incident_response/incident_management/setup_and_configuration/property_fields
 [3]: /incident_response/incident_management/setup_and_configuration/integrations/slack/#incident-channels
 [4]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#automatic-channel-creation
+[5]: /incident_response/incident_management/setup_and_configuration/integrations/google_chat/#incident-spaces

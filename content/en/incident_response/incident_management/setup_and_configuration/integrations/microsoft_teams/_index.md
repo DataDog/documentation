@@ -35,16 +35,7 @@ You can configure Incident Management to automatically create an incident Micros
 4. Select the Team in which you want to automatically create new channels.
 5. Save your settings.
 
-After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates:
-
-* `{{public_id}}`: Incident's numeric ID
-* `{{title}}`: Incident's title
-* `{{created}}`: Incident's creation date in format MM_DD_YYYY
-* `{{yyyy}}`: Incident's four-digit creation year
-* `{{mm}}`: Incident's two-digit creation month
-* `{{dd}}`: Incident's two-digit creation day of month
-* `{{random_adjective}}`: Random adjective
-* `{{random_noun}}`: Random noun
+After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. For the list of available variables, see [Variables available only in channel naming templates][6].
 
 ### Channel message syncing
 
@@ -150,3 +141,4 @@ For a full list of available `@Datadog` commands, see the [Microsoft Teams integ
 [3]: /integrations/microsoft-teams/?tab=datadogapprecommended#datadog-incident-management-in-microsoft-teams
 [4]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [5]: /integrations/microsoft-teams/#datadog-incident-management-in-microsoft-teams
+[6]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-naming-templates
