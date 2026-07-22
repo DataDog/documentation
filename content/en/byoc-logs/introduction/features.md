@@ -49,7 +49,7 @@ The following log features are supported:
 
 ## Unsupported features
 
-Feature support is actively evolving. The following are not currently supported:
+Feature support is actively evolving. The following are not supported:
 
 - **SIEM**
 - **Watchdog**
@@ -57,7 +57,7 @@ Feature support is actively evolving. The following are not currently supported:
 - **LiveTail**
 - **Log context view**
 
-### Query capabilities not currently supported
+### Unsupported query capabilities
 
 - **CIDR query**
 - **Group by transactions**
