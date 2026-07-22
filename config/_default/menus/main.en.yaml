@@ -6358,6 +6358,41 @@ menu:
       parent: feature_flags
       identifier: feature_flags_server
       weight: 2
+    - name: .NET
+      url: feature_flags/server/dotnet
+      parent: feature_flags_server
+      identifier: feature_flags_server_dotnet
+      weight: 201
+    - name: Go
+      url: feature_flags/server/go
+      parent: feature_flags_server
+      identifier: feature_flags_server_go
+      weight: 202
+    - name: Java
+      url: feature_flags/server/java
+      parent: feature_flags_server
+      identifier: feature_flags_server_java
+      weight: 203
+    - name: Node.js
+      url: feature_flags/server/nodejs
+      parent: feature_flags_server
+      identifier: feature_flags_server_nodejs
+      weight: 204
+    - name: PHP
+      url: feature_flags/server/php
+      parent: feature_flags_server
+      identifier: feature_flags_server_php
+      weight: 205
+    - name: Python
+      url: feature_flags/server/python
+      parent: feature_flags_server
+      identifier: feature_flags_server_python
+      weight: 206
+    - name: Ruby
+      url: feature_flags/server/ruby
+      parent: feature_flags_server
+      identifier: feature_flags_server_ruby
+      weight: 207
     - name: Concepts
       url: feature_flags/concepts
       parent: feature_flags
@@ -6413,66 +6448,51 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
+    - name: Use Cases
+      url: feature_flags/use_cases
+      parent: feature_flags
+      identifier: feature_flags_use_cases
+      weight: 4
+    - name: Progressive Rollouts and Canaries
+      url: feature_flags/use_cases/progressive_rollouts
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_progressive_rollouts
+      weight: 401
+    - name: Kill Switches
+      url: feature_flags/use_cases/kill_switches
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_kill_switches
+      weight: 402
+    - name: Dynamic Configuration
+      url: feature_flags/use_cases/dynamic_configuration
+      parent: feature_flags_use_cases
+      identifier: feature_flags_use_cases_dynamic_configuration
+      weight: 403
     - name: Implementation Patterns
       url: feature_flags/implementation_patterns
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
-      weight: 4
+      weight: 5
     - name: OpenTelemetry
       url: feature_flags/implementation_patterns/opentelemetry
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_opentelemetry
-      weight: 401
+      weight: 501
     - name: Serverless
       url: feature_flags/implementation_patterns/serverless
       parent: feature_flags_implementation_patterns
       identifier: feature_flags_implementation_patterns_serverless
-      weight: 402
+      weight: 502
     - name: MCP Server
       url: feature_flags/feature_flag_mcp_server
       parent: feature_flags
       identifier: feature_flags_mcp_server
-      weight: 8
-    - name: .NET
-      url: feature_flags/server/dotnet
-      parent: feature_flags_server
-      identifier: feature_flags_server_dotnet
-      weight: 201
-    - name: Go
-      url: feature_flags/server/go
-      parent: feature_flags_server
-      identifier: feature_flags_server_go
-      weight: 202
-    - name: Java
-      url: feature_flags/server/java
-      parent: feature_flags_server
-      identifier: feature_flags_server_java
-      weight: 203
-    - name: Node.js
-      url: feature_flags/server/nodejs
-      parent: feature_flags_server
-      identifier: feature_flags_server_nodejs
-      weight: 204
-    - name: PHP
-      url: feature_flags/server/php
-      parent: feature_flags_server
-      identifier: feature_flags_server_php
-      weight: 205
-    - name: Python
-      url: feature_flags/server/python
-      parent: feature_flags_server
-      identifier: feature_flags_server_python
-      weight: 206
-    - name: Ruby
-      url: feature_flags/server/ruby
-      parent: feature_flags_server
-      identifier: feature_flags_server_ruby
-      weight: 207
+      weight: 6
     - name: Guides
       url: feature_flags/guide
       parent: feature_flags
       identifier: feature_flags_guide
-      weight: 9
+      weight: 7
     - name: Source Code Integration
       url: source_code/
       pre: dev-code
@@ -7061,61 +7081,66 @@ menu:
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_haproxy_ingress
       weight: 513
+    - name: Infoblox
+      url: observability_pipelines/packs/infoblox/
+      parent: observability_pipelines_packs
+      identifier: observability_pipelines_packs_infoblox
+      weight: 514
     - name: Istio Proxy
       url: observability_pipelines/packs/istio_proxy/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_istio_proxy
-      weight: 514
+      weight: 515
     - name: Juniper SRX Firewall Traffic Logs
       url: observability_pipelines/packs/juniper_srx_traffic/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_juniper_srx_traffic
-      weight: 515
+      weight: 516
     - name: Netskope
       url: observability_pipelines/packs/netskope/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_netskope
-      weight: 516
+      weight: 517
     - name: NGINX
       url: observability_pipelines/packs/nginx/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_nginx
-      weight: 517
+      weight: 518
     - name: Okta
       url: observability_pipelines/packs/okta/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_okta
-      weight: 518
+      weight: 519
     - name: Palo Alto Firewall
       url: observability_pipelines/packs/palo_alto_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_palo_alto_firewall
-      weight: 519
+      weight: 520
     - name: Windows XML
       url: observability_pipelines/packs/windows_xml/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_windows_xml
-      weight: 520
+      weight: 521
     - name: ZScaler ZIA DNS
       url: observability_pipelines/packs/zscaler_zia_dns/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_dns
-      weight: 521
+      weight: 522
     - name: Zscaler ZIA Firewall
       url: observability_pipelines/packs/zscaler_zia_firewall/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_firewall
-      weight: 522
+      weight: 523
     - name: Zscaler ZIA Tunnel
       url: observability_pipelines/packs/zscaler_zia_tunnel/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_tunnel
-      weight: 523
+      weight: 524
     - name: Zscaler ZIA Web Logs
       url: observability_pipelines/packs/zscaler_zia_web_logs/
       parent: observability_pipelines_packs
       identifier: observability_pipelines_packs_zscaler_zia_web_logs
-      weight: 524
+      weight: 525
     - name: Search Syntax
       url: observability_pipelines/search_syntax/logs/
       parent: observability_pipelines
@@ -7633,11 +7658,16 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Releases and Updates
+      url: /byoc-logs/operate/updates
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_updates
+      weight: 604
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 604
+      weight: 605
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -9936,6 +9966,21 @@ menu:
       parent: product_analytics
       identifier: pa_export_pipelines
       weight: 7
+    - name: Usability
+      url: product_analytics/usability
+      parent: product_analytics
+      identifier: pa_usability
+      weight: 8
+    - name: Guides
+      url: product_analytics/guide/
+      parent: product_analytics
+      identifier: pa_guides
+      weight: 9
+    - name: Troubleshooting
+      url: product_analytics/troubleshooting/
+      parent: product_analytics
+      identifier: pa_troubleshooting
+      weight: 10
     - name: Experiments
       url: experiments/
       pre: experiment-wui
@@ -9943,9 +9988,14 @@ menu:
       identifier: pa_experiments
       weight: 50000
     - name: Create Experiment Metrics
-      url: experiments/defining_metrics
+      url: experiments/defining_metrics/
       parent: pa_experiments
       identifier: pa_experiments_metrics
+      weight: 1
+    - name: Sync Metrics from YAML
+      url: experiments/defining_metrics/metric_sync/
+      parent: pa_experiments_metrics
+      identifier: pa_experiments_metric_sync
       weight: 1
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
@@ -9957,11 +10007,16 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 3
+    - name: Experiment Diagnostics
+      url: experiments/diagnostics
+      parent: pa_experiments
+      identifier: pa_experiments_diagnostics
+      weight: 4
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 4
+      weight: 5
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -9986,22 +10041,32 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 5
+      weight: 6
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
       identifier: pa_experiments_analysis_methods
       weight: 1
+    - name: "CUPED: Variance Reduction Technique"
+      url: experiments/statistics/cuped
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_cuped
+      weight: 2
     - name: Minimum Detectable Effects
       url: experiments/statistics/minimum_detectable_effect
       parent: pa_experiments_statistics
       identifier: pa_experiments_mde
-      weight: 2
+      weight: 3
+    - name: Multiple Testing Correction
+      url: experiments/statistics/multiple_testing_correction
+      parent: pa_experiments_statistics
+      identifier: pa_experiments_multiple_testing
+      weight: 4
     - name: Global Lift
       url: experiments/statistics/global_lift
       parent: pa_experiments_statistics
       identifier: pa_experiments_global_lift
-      weight: 3
+      weight: 5
     - name: Break Out Metrics by Property
       url: experiments/metric_property_breakouts
       parent: pa_experiments
@@ -10022,92 +10087,52 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_guide
       weight: 12
-    - name: Guides
-      url: product_analytics/guide/
-      parent: product_analytics
-      identifier: pa_guides
-      weight: 6
-    - name: Troubleshooting
-      url: product_analytics/troubleshooting/
-      parent: product_analytics
-      identifier: pa_troubleshooting
-      weight: 7
     - name: Session Replay
       url: session_replay/
       pre: play-circle
       identifier: session_replay
       parent: digital_experience_heading
       weight: 50000
-    - name: Browser
-      url: /session_replay/browser
-      parent: session_replay
-      identifier: session_replay_browser
-      weight: 1
     - name: Setup
-      url: /session_replay/browser/setup_and_configuration
-      parent: session_replay_browser
-      identifier: session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: /session_replay/browser/privacy_options
-      parent: session_replay_browser
-      identifier: session_replay_browser_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: /session_replay/browser/dev_tools
-      parent: session_replay_browser
-      identifier: session_replay_browser_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: /session_replay/browser/troubleshooting
-      parent: session_replay_browser
-      identifier: session_replay_browser_troubleshooting
-      weight: 104
-    - name: Mobile
-      url: /session_replay/mobile
+      url: /session_replay/setup_and_configuration
       parent: session_replay
-      identifier: session_replay_mobile
-      weight: 2
-    - name: Setup and Configuration
-      url: /session_replay/mobile/setup_and_configuration
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_setup_and_configuration
-      weight: 101
+      identifier: session_replay_setup
+      weight: 1
     - name: Privacy Options
-      url: /session_replay/mobile/privacy_options
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_privacy_options
-      weight: 102
+      url: /session_replay/privacy_options
+      parent: session_replay
+      identifier: session_replay_privacy_options
+      weight: 2
     - name: Developer Tools
-      url: /session_replay/mobile/dev_tools
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_developer_tools
-      weight: 103
-    - name: Impact on App Performance
-      url: /session_replay/mobile/app_performance
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_app_performance
-      weight: 104
-    - name: Troubleshooting
-      url: /session_replay/mobile/troubleshooting
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_troubleshooting
-      weight: 105
+      url: /session_replay/dev_tools
+      parent: session_replay
+      identifier: session_replay_developer_tools
+      weight: 3
     - name: Playlists
       url: /session_replay/playlists
       parent: session_replay
       identifier: session_replay_playlists
-      weight: 3
+      weight: 4
     - name: Heatmaps
       url: /session_replay/heatmaps
       parent: session_replay
       identifier: session_replay_heatmaps
-      weight: 4
+      weight: 5
+    - name: Impact on App Performance
+      url: /session_replay/app_performance
+      parent: session_replay
+      identifier: session_replay_app_performance
+      weight: 6
+    - name: Troubleshooting
+      url: /session_replay/troubleshooting
+      parent: session_replay
+      identifier: session_replay_troubleshooting
+      weight: 7
     - name: Guides
       url: /session_replay/guide
       parent: session_replay
       identifier: session_replay_guide
-      weight: 5
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2

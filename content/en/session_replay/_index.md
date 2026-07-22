@@ -117,7 +117,7 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for [RUM][1] sessions.
 
-Learn more about Dev Tools for [browser][11] and [mobile][12].
+Learn more about [Dev Tools][11].
 
 ## Further reading
 
@@ -133,5 +133,4 @@ Learn more about Dev Tools for [browser][11] and [mobile][12].
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /session_replay/browser/dev_tools/
-[12]: /session_replay/mobile/dev_tools/
+[11]: /session_replay/dev_tools

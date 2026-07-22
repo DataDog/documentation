@@ -280,6 +280,17 @@ Costs are allocated into the following spend types:
 
 {% /if %}
 
+### Aggregated minor pod usage
+
+In rare cases, a single node runs a large number of short-lived, small pods. Datadog compresses the lowest-resource pods into an aggregate that preserves their combined CPU, memory, and GPU resource-hours and allocated cost. Pod-level tag granularity is reduced for this small portion of spend.
+
+Individual values for missing or differing tags are replaced by these context values:
+
+- `aggregated_pod_kube_cluster_name:<cluster>`
+- `aggregated_pod_kube_node_name:<node>`
+
+Use `pod_allocation_source:aggregated_minor_usage` to identify these rows.
+
 ## Cluster idle allocation
 
 Cluster idle costs (identified by `allocated_spend_type:cluster_idle`) represent the cost of resources not reserved by any workload in a cluster. By default, cluster idle allocation is disabled and these costs are not redistributed. After you enable this feature, idle costs are redistributed to workloads proportionally based on their usage costs (`allocated_spend_type:usage`), using the following destination tags:

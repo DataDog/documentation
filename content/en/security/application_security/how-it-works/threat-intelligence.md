@@ -10,6 +10,12 @@ further_reading:
 
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 This topic describes [threat intelligence][1] for App and API Protection (AAP).
@@ -42,6 +48,10 @@ To query for all traces containing threat intelligence from any source, use the 
     @appsec.threat_intel:true 
 
 ## Bring your own threat intelligence
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
 
 AAP supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 

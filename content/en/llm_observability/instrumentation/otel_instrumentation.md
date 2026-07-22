@@ -56,6 +56,8 @@ with tracer.start_as_current_span("chat gpt-4o", links=[link]) as llm_span:
 
 ## Setup
 
+Any method Datadog supports for ingesting OpenTelemetry traces works with Agent Observability. For the full list of supported ingestion paths, see [OpenTelemetry feature compatibility][10]. The following is one way to configure it.
+
 To send OpenTelemetry traces to Agent Observability, configure your OpenTelemetry exporter with the following settings:
 
 ### Configuration
@@ -640,4 +642,5 @@ with tracer.start_as_current_span("my-span") as span:
 [7]: https://strandsagents.com/latest/
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
+[10]: /opentelemetry/compatibility/#feature-compatibility
 

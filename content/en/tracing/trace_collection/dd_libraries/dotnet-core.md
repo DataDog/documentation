@@ -45,6 +45,9 @@ further_reading:
   - link: "https://github.com/DataDog/dd-trace-dotnet"
     tag: "Source Code"
     text: "Source code"
+  - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
+    tag: "Learning Center"
+    text: "Configure and manage the APM SDK for your applications"
 ---
 
 ## Compatibility requirements
