@@ -68,7 +68,7 @@ To add and enable custom work item types, see [Work Management Customization][7]
 
 ## API
 
-Create a case through the [API endpoint][5].
+Create a work item through the [API endpoint][5].
 
 **Note**: This endpoint requires the `cases_write` authorization scope.
 
