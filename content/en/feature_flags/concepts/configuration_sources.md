@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about Remote Configuration"
 ---
 
-Datadog Feature Flags server SDKs evaluate flags locally from Universal Flag Configuration (UFC). The _configuration source_ determines how the SDK receives UFC; it does not change OpenFeature evaluation semantics.
+Datadog Feature Flags server SDKs evaluate flags locally from flag configuration. The _configuration source_ determines how the SDK receives that configuration; it does not change OpenFeature evaluation semantics.
 
 ## Get started with agentless delivery
 
@@ -43,8 +43,8 @@ No configuration-source or provider-enable setting is required. Polling begins o
 
 | Mode | Configuration delivery | Activation | Agent requirement |
 |---|---|---|---|
-| `agentless` (default) | The SDK periodically fetches UFC from the Datadog-managed CDN over HTTPS. | Polling begins when application code initializes or accesses the Datadog OpenFeature provider. | No Datadog Agent is required for flag configuration. |
-| `remote_config` | The Datadog Agent receives UFC through Remote Configuration and delivers it to the SDK. | Selecting `remote_config` enables the Feature Flags Remote Configuration subscription. | Requires an Agent with Remote Configuration enabled. |
+| `agentless` (default) | The SDK periodically fetches flag configuration from the Datadog-managed CDN over HTTPS. | Polling begins when application code initializes or accesses the Datadog OpenFeature provider. | No Datadog Agent is required for flag configuration. |
+| `remote_config` | The Datadog Agent receives flag configuration through Remote Configuration and delivers it to the SDK. | Selecting `remote_config` enables the Feature Flags Remote Configuration subscription. | Requires an Agent with Remote Configuration enabled. |
 
 Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` only when you want to select a source explicitly:
 
@@ -54,14 +54,14 @@ DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless
 
 The SDK resolves the source once during initialization. Restart the application to change sources.
 
-### Configure Agentless delivery
+### Configure agentless delivery
 
 If your organization is not on the default `datadoghq.com` site, set `DD_SITE` in the application process. The agentless source also supports these operational settings:
 
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_SITE` | `datadoghq.com` | Datadog site used to derive the agentless endpoint. |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless UFC endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
@@ -83,9 +83,11 @@ The Datadog-managed endpoint is recommended for standard deployments. For power-
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL=http://localhost:8080
 {{< /code-block >}}
 
-The custom URL must use HTTP or HTTPS. If it contains only an origin or a root path, the SDK appends the canonical UFC path. If it contains a non-root path, the SDK uses that path as the complete endpoint.
+The custom URL must use HTTP or HTTPS. If it contains only an origin or a root path, the SDK appends the standard flag configuration path. If it contains a non-root path, the SDK uses that path as the complete endpoint.
 
-`DD_API_KEY` is required for the default Datadog-managed endpoint. A custom endpoint can start without it. If `DD_API_KEY` is configured, the SDK forwards it to the custom endpoint, including over HTTP. Prefer HTTPS, and do not configure the Datadog API key for a cleartext endpoint unless you control and trust the network path.
+The SDK sends `DD_API_KEY` only over HTTPS to the default Datadog-managed endpoint. It never forwards the Datadog API key to a custom endpoint. Custom endpoints can use HTTP for controlled local development; use HTTPS for any endpoint outside the local development environment.
+
+If the custom endpoint setting is invalid, the SDK keeps the provider disabled, logs the configuration error, and evaluations return caller-provided default values.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these Node.js versions. Applications on that site continue to use caller-provided default values unless they use Agent Remote Configuration.
 
@@ -117,7 +119,7 @@ Server Feature Flags billing is based on configuration requests made through Rem
 | No source and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false` | Keeps the provider and both delivery paths disabled. |
 | Neither setting is present | Selects agentless delivery. Polling begins when application code initializes or accesses the provider. |
 
-### Use Agent remote configuration
+### Use Agent Remote Configuration
 
 Set the source to `remote_config` to use Agent-managed delivery:
 
@@ -127,7 +129,7 @@ DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 
-### Migrate an existing remote configuration setup
+### Migrate an existing Remote Configuration setup
 
 Existing customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. This deprecated setting is a compatibility bridge, not the long-term configuration.
 
@@ -142,11 +144,11 @@ To remain on Agent Remote Configuration temporarily, set `DD_FEATURE_FLAGS_CONFI
 
 If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false`, replace it with `DD_FEATURE_FLAGS_ENABLED=false`.
 
-Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, a Node.js application without an explicit source uses agentless delivery. Set `remote_config` explicitly before that release if you want to remain on Agent delivery.
+Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, a Node.js application without an explicit source uses agentless delivery. Set `remote_config` explicitly before the deprecated legacy setting is removed if you want to remain on Agent delivery.
 
 ### Future offline mode
 
-Offline mode is planned for applications that provide UFC JSON bytes at startup and do not make CDN or Remote Configuration network requests. It is reserved but not implemented in the initial agentless releases. Setting the source to `offline` fails closed without selecting another delivery path.
+Offline mode is planned for applications that provide flag configuration JSON at startup and do not make CDN or Remote Configuration network requests. It is reserved but not implemented in the initial agentless releases. Setting the source to `offline` fails closed without selecting another delivery path.
 
 ## Further reading
 

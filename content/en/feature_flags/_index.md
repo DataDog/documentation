@@ -55,7 +55,7 @@ Use a client-side SDK when the flag is evaluated in a browser, mobile app, or ga
 | --- | --- | --- | --- |
 | Client token | Browser, mobile, and game SDKs | Client application configuration | No — safe to ship in public client code |
 | Application ID | Browser and RUM-backed client SDKs | Client application configuration | No — public identifier |
-| API key | Server SDKs and the Datadog Agent | Application configuration for agentless delivery; Agent configuration for Remote Configuration | Yes—keep server-side only |
+| API key | Server SDKs and the Datadog Agent | Application configuration for agentless delivery; Agent configuration for Remote Configuration | Yes — keep server-side only |
 
 Do not put API keys in browser, mobile, or game applications.
 

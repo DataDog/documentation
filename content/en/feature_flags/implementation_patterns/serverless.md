@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The Datadog Feature Flags Node.js SDK can receive Universal Flag Configuration (UFC) directly from the Datadog-managed CDN. This _agentless_ configuration source does not require a Datadog Agent, which makes it the default delivery mode for supported Node.js serverless applications.
+The Datadog Feature Flags Node.js SDK can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source does not require a Datadog Agent, which makes it the default delivery mode for supported Node.js serverless applications.
 
 After configuration is loaded, flag evaluation happens locally in the application. The SDK does not make a network request for each evaluation.
 
@@ -33,7 +33,7 @@ Other server SDKs and earlier Node.js releases require Agent Remote Configuratio
 
 <div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-## Default Agentless architecture
+## Default agentless architecture
 
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
@@ -56,7 +56,7 @@ Tracer installation and initialization alone do not start CDN polling. Requests 
 
 Agentless mode removes the Agent dependency for _flag configuration_. It does not change your APM or serverless telemetry setup. You can continue to use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
 
-## Agent-backed remote configuration
+## Agent-backed Remote Configuration
 
 Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use the existing Agent Remote Configuration path:
 
@@ -82,12 +82,12 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 ## Operational considerations
 
 - **Cold starts**: Blocking provider initialization waits for the first configuration and can add cold-start latency. Initialize asynchronously if serving caller-provided default values during startup is acceptable.
-- **Outbound connectivity**: Agentless delivery requires HTTPS access to the Datadog-managed UFC CDN. It does not require access to Agent port `8126`.
+- **Outbound connectivity**: Agentless delivery requires outbound HTTPS access to the Datadog-managed flag configuration service.
 - **API key ownership**: In agentless mode, the application owns `DD_API_KEY`. In `remote_config` mode, the Agent owns the API key.
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
 - **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Node.js runtime compatible with the tracer. Check the tracer's compatibility requirements.
-- **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths.
+- **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths. Evaluations then return caller-provided default values.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
 
@@ -103,7 +103,7 @@ Node.js Lambda functions can use agentless configuration delivery when they run 
 
 Node.js workloads can use agentless configuration delivery when the tracer is supported in the selected runtime and outbound HTTPS is available. This applies independently of in-container or sidecar telemetry instrumentation.
 
-### Azure functions
+### Azure Functions
 
 Node.js function apps can use agentless configuration delivery when the tracer is supported and outbound HTTPS is available. An external Agent is only required when `remote_config` is selected.
 
@@ -115,7 +115,7 @@ Some edge runtimes do not support the Datadog Node.js tracer APIs required by th
 
 The public [Feature Flags API][4] is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
 
-Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK, which periodically loads UFC and evaluates locally.
+Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK, which periodically loads flag configuration and evaluates locally.
 
 ## Validate your setup
 

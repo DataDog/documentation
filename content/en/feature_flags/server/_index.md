@@ -24,13 +24,13 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language, receive Universal Flag Configuration (UFC), and evaluate flags locally.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language, receive flag configuration, and evaluate flags locally.
 
 Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
 ## Configuration delivery
 
-Agentless configuration delivery is the default in server SDK versions that support it. The SDK fetches UFC directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
+Agentless configuration delivery is the default in server SDK versions that support it. The SDK fetches flag configuration directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
 
 The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
 
@@ -76,7 +76,7 @@ Source-specific requirements are:
 
 ## Agentless configuration
 
-For Node.js 5.116.0 or 6.5.0, configure the application process:
+For `dd-trace` 5.116.0 or 6.5.0 on Node.js, configure the application process:
 
 {{< code-block lang="bash" >}}
 # Required for direct configuration delivery
@@ -86,7 +86,7 @@ DD_ENV=<YOUR_ENVIRONMENT>
 
 No Feature Flags enablement or source setting is required. If your organization is not on the default `datadoghq.com` site, also set `DD_SITE`. See the Node.js page for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
-## Agent remote configuration
+## Agent Remote Configuration
 
 For Node.js, set the source explicitly to retain Agent-managed delivery:
 
@@ -100,7 +100,7 @@ See the [Remote Configuration documentation][1] for detailed setup instructions 
 
 Existing Node.js customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
-### Remote configuration polling interval
+### Remote Configuration polling interval
 
 The Agent polls Datadog for configuration updates at a configurable interval:
 
