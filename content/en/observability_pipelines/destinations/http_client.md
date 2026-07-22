@@ -80,6 +80,10 @@ Toggle the switch to {{< ui >}}Enable Compression{{< /ui >}}. If enabled:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
+
 ## How the destination works
 
 ### Event batching
@@ -89,10 +93,6 @@ A batch of events is flushed when one of these conditions occurs. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | 1,000          | 1                 | 1                   |
-
-## Metrics
-
-For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
