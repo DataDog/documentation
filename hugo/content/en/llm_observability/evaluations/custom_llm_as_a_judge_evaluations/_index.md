@@ -512,11 +512,35 @@ Select a span to show JSON data available for use in an evaluation. Then, click 
 
 After you {{< ui >}}Save and Publish{{< /ui >}} your evaluation, Datadog automatically runs your evaluation on targeted spans. Alternatively, you can {{< ui >}}Save as Draft{{< /ui >}} and edit or enable your evaluation later.
 
-Results are available across Agent Observability in near-real-time for published evaluations.
+Results are available across Agent Observability in near-real-time for published evaluations. You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
+
+Each evaluation result includes:
+
+- The evaluated value (for example `True`, `9`, or `Neutral`)
+- The reasoning (when enabled)
+- The pass/fail indicator (based on your assessment criteria)
+
+Use the syntax `@evaluation.<evaluation_name>.value` to query or visualize results.
+
+For example:
+```
+@evaluation.helpfulness-check.value
+```
+
+{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
+
+You can:
+- Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
+- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
+- Use evaluation results as [facets][3]
+- View aggregate results in the Agent Observability Overview page's Evaluation section
+- Create [monitors][4] to alert on performance changes or regression
 
 ### Performance tab
 
-The {{< ui >}}Performance{{< /ui >}} tab of an evaluation shows aggregate results over time. Use it to monitor an evaluation's health, examine common failure modes, and open matching spans in the Trace Explorer. Open the tab from an evaluation on the [Evaluations page][1].
+Use the {{< ui >}}Performance{{< /ui >}} tab to measure how your agentic service performs against an evaluation. Get a high-level overview, identify passing and failing traces, and find patterns in failure scenarios.
 
 #### Configuration summary
 
@@ -542,14 +566,6 @@ For all evaluations:
 
 - **Spans Evaluated Over Time**: The total number of evaluated spans over the selected time range, shown as a scalar with a prior-period trend. This card uses the same query as the evaluated spans list below it.
 
-#### Empty states
-
-When a card or the evaluated spans table has no data to show, the tab explains why:
-
-- **Draft**: If the evaluation is a draft, the tab prompts you to publish it and provides an {{< ui >}}Update Configuration{{< /ui >}} button.
-- **No data in the selected time range**: If the evaluation has data in the last 90 days but not in the selected time range, the tab suggests expanding the time range.
-- **Never evaluated**: If the evaluation has no data in the last 90 days, the tab notes that the configuration might not match any spans, traces, or sessions, and provides a {{< ui >}}View configuration{{< /ui >}} button.
-
 #### Evaluated spans
 
 The {{< ui >}}Evaluated Spans{{< /ui >}} table (or {{< ui >}}Evaluated Traces{{< /ui >}} for trace-scoped evaluations) lists the spans or traces that the evaluation ran on.
@@ -562,46 +578,12 @@ The {{< ui >}}Evaluated Spans{{< /ui >}} table (or {{< ui >}}Evaluated Traces{{<
 
 <div class="alert alert-info">Pattern Analysis is in Preview.</div>
 
-The {{< ui >}}Pattern Analysis{{< /ui >}} section, at the bottom of the {{< ui >}}Performance{{< /ui >}} tab, clusters the reasoning text from failed evaluations into ranked themes. This helps you identify the most common failure modes without reading each evaluation reason one by one.
+The {{< ui >}}Pattern Analysis{{< /ui >}} section clusters the reasoning text from failed evaluations into ranked themes. This helps you identify the most common failure modes without reading each evaluation reason one by one.
 
-- Before the first run, a panel describes the feature and shows a {{< ui >}}Set up pattern analysis{{< /ui >}} button. Use it to configure the LLM provider, account, model, time window, and sampling rate.
 - After you configure and run Pattern Analysis, the results panel shows ranked clusters of reasoning patterns with their interaction counts.
 - If no clusters are found, the panel prompts you to re-run with more spans or a higher sampling rate and provides a {{< ui >}}Re-run{{< /ui >}} button.
 
 Pattern Analysis is not available for session-scoped evaluations.
-
-#### Session-scoped evaluations
-
-For session-scoped evaluations, the {{< ui >}}Performance{{< /ui >}} tab shows an informational message that explains session scope, and the {{< ui >}}Pattern Analysis{{< /ui >}} section is hidden.
-
-### Span-level results
-
-You can find your custom LLM-as-a-judge results for a specific span in the {{< ui >}}Evaluations{{< /ui >}} tab, alongside other evaluations.
-
-{{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
-
-Each evaluation result includes:
-
-- The evaluated value (for example `True`, `9`, or `Neutral`)
-- The reasoning (when enabled)
-- The pass/fail indicator (based on your assessment criteria)
-
-Use the syntax `@evaluation.<evaluation_name>.value` to query or visualize results.
-
-For example:
-```
-@evaluation.helpfulness-check.value
-```
-
-{{< img src="llm_observability/evaluations/custom_llm_judge_4.png" alt="The Agent Observability Traces view. In the search box, the user has entered `@evaluation.budget-guru-intent-classifier.value:budgeting_question` and results are populated below." style="width:100%;" >}}
-
-
-You can:
-- Filter traces by evaluation results (example, `@evaluation.helpfulness-check.value`)
-- Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
-- Use evaluation results as [facets][3]
-- View aggregate results in the Agent Observability Overview page's Evaluation section
-- Create [monitors][4] to alert on performance changes or regression
 
 ## Using in experiments
 
