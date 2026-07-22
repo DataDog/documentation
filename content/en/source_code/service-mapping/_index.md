@@ -22,7 +22,7 @@ You can associate your APM [spans][3] with Git data to link a running applicatio
 
 You can embed a repository URL and commit hash in your build artifact. The [Datadog SDKs][1] use this information to automatically add tags to your APM service telemetry.
 
-Select one of the following languages that support embedding git information:
+Select one of the following languages that support embedding Git information:
 
 {{< card-grid >}}
   {{< image-card href="/source_code/service-mapping/go/" src="integrations_logos/go-metro.png" alt="Go" title="Go" >}}

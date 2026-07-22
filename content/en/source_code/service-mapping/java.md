@@ -9,13 +9,13 @@ To embed Git information in your Java build artifacts, follow the instructions f
 ## Prerequisites
 
 - [Datadog Agent][1] v7.35.0 or later is required.
-- The Java client library version 1.48.0 or later is required for embedded git properties. Version 1.12.0 or later is required for other options.
+- The Java client library version 1.48.0 or later is required for embedded Git properties. Version 1.12.0 or later is required for other options.
 
 ## Containers
 
-If you are using Docker containers, you have three options: embedding git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have three options: embedding Git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
-{{% collapse-content title="Option 1 (recommended): Embedded git properties" level="h3" %}}
+{{% collapse-content title="Option 1 (recommended): Embedded Git properties" level="h3" %}}
 {{% sci-java-git-properties %}}
 {{% /collapse-content %}}
 
@@ -31,7 +31,7 @@ If you are using Docker containers, you have three options: embedding git proper
 
 If you are using Serverless, you have three options depending on your serverless application's setup.
 
-{{% collapse-content title="Option 1 (recommended): Embedded git properties" level="h3" %}}
+{{% collapse-content title="Option 1 (recommended): Embedded Git properties" level="h3" %}}
 {{% sci-java-git-properties %}}
 {{% /collapse-content %}}
 
@@ -47,7 +47,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 If you are using a host, you have two options.
 
-{{% collapse-content title="Option 1 (recommended): Embedded git properties" level="h3" %}}
+{{% collapse-content title="Option 1 (recommended): Embedded Git properties" level="h3" %}}
 {{% sci-java-git-properties %}}
 {{% /collapse-content %}}
 
