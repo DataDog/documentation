@@ -188,5 +188,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [3]: https://app.datadoghq.com/organization-settings/remote-config
 [4]: /tracing/guide/#tutorials-enabling-tracing
 [5]: /feature_flags/implementation_patterns/serverless/
-[6]: /feature_flags/concepts/configuration_sources/
 [7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup

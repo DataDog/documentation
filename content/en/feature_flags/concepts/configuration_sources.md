@@ -73,7 +73,7 @@ The SDK fetches configuration in the background and evaluates flags locally. Ind
 - preserves the last accepted configuration during temporary network or payload errors; and
 - prevents overlapping polls.
 
-The Datadog-managed CDN has points of presence across major global regions and peers with internet service providers and content networks. This makes a serving location likely to be geographically close to most application workloads. Multiple locations and redundant interconnections also allow the CDN to route around unavailable network paths or locations.
+The Datadog-managed CDN uses globally distributed points of presence, network peering, and redundant routing. Serving locations are therefore likely to be geographically close to most application workloads.
 
 Keep `DD_API_KEY` in a secret manager and expose it only to the application process that loads flag configuration. Agentless configuration delivery sends the API key directly from the application to Datadog over HTTPS.
 
@@ -119,7 +119,7 @@ Server Feature Flags billing is based on configuration requests made through Rem
 | Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=offline` or another unsupported nonblank value | Fails closed when application code accesses the provider. The SDK does not select CDN or Remote Configuration delivery. |
 | No source and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` | Preserves Remote Configuration during the migration window. |
 | No source and `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false` | Keeps the provider and both delivery paths disabled. |
-| Neither setting is present | Selects agentless delivery. Polling begins when application code initializes or accesses the provider. |
+| Neither `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` nor `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` is set | Selects agentless delivery. Polling begins when application code initializes or accesses the provider. |
 
 ### Use Agent Remote Configuration
 

@@ -399,6 +399,5 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
-[6]: /feature_flags/concepts/configuration_sources/#configuration-precedence
 [7]: /feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint
 [8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
