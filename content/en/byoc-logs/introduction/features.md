@@ -16,8 +16,8 @@ The following log features are supported:
 **Search and visualization**
 - Full text search on any log attributes
 - List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
-- Group by into Fields and Patterns (except monthly timeshift)
-- Group by sort by, including group by sort by with count unique
+- Group into Fields and Patterns (except monthly timeshift)
+- Group and sort, including group and sort with count unique
 - Flat group queries
 - Facet-based filtering and drill-down
 - Download CSV
