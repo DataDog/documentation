@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-BYOC Logs combines Observability Pipelines with the BYOC Engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Engine is unavailable or cannot accept logs as fast as they arrive. This gives the ingestion path time to recover without immediately dropping logs.
+BYOC Logs combines Observability Pipelines with the BYOC Engine. Observability Pipelines Workers can store logs in persistent disk buffers when the BYOC Engine is unavailable or cannot keep up with the incoming rate. This gives the ingestion path time to recover without immediately dropping logs.
 
 A durable setup has four parts:
 
@@ -33,8 +33,8 @@ A durable setup has four parts:
 
 This guide assumes that you have a BYOC Logs deployment with:
 
-- Observability Pipelines configured with a [BYOC Logs destination](/observability_pipelines/destinations/datadog_byoc_logs/)
-- A [BYOC Engine deployment](/byoc-logs/install/)
+- Observability Pipelines configured with a [BYOC Logs destination][1]
+- A [BYOC Engine deployment][2]
 
 ## Size the disk buffer
 
@@ -50,7 +50,7 @@ buffer per Worker = 2.08 TB ÷ 25 Workers
                   = 83 GB per Worker
 ```
 
-Rounding up the result leaves capacity for a longer incident or a higher ingress rate. With a 100 GB buffer on each Worker, the 25 Workers provide 2.5 TB of total buffer capacity and can retain approximately 1.2 hours of logs at 50 TB/day.
+Rounding up the result leaves capacity for a longer incident or a higher ingress rate. With a 100 GB buffer on each Worker, the 25 Workers provide 2.5 TB of total buffer capacity. This retains approximately 1.2 hours of logs at 50 TB/day.
 
 ## Disk buffer configuration
 
@@ -74,7 +74,7 @@ The `max_size` value is expressed in bytes (100 GB = 100,000,000,000 bytes). Whe
 
 ## Persistent storage for the buffer
 
-Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB (about 129 GB) persistent volume to each Worker to leave headroom above the buffer capacity:
+Disk buffering is durable only when the storage outlives the Worker pod. In the 100 GB buffer example, the following Helm values assign a 120 GiB (about 129 GB) persistent volume to each Worker. The extra capacity leaves headroom above the buffer size:
 
 ```yaml
 persistence:
@@ -116,7 +116,7 @@ termination grace period = 833 seconds × 1.2
                          ≈ 1,000 seconds
 ```
 
-Although the estimate is approximately 1,000 seconds, this example sets both shutdown limits to 3,600 seconds to provide additional margin:
+Although the estimate is approximately 1000 seconds, this example sets both shutdown limits to 3600 seconds to provide additional margin:
 
 ```yaml
 env:
@@ -129,3 +129,6 @@ terminationGracePeriodSeconds: 3600
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /observability_pipelines/destinations/datadog_byoc_logs/
+[2]: /byoc-logs/install/
