@@ -71,11 +71,11 @@ After you select the Socket source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
-## UNIX domain sockets
+### UNIX domain sockets
 
 The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket (UDS), use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
 
-### Standalone bridge
+#### Standalone bridge
 
 Run `socat` alongside your application to forward from the UNIX socket to the Worker:
 
@@ -83,7 +83,7 @@ Run `socat` alongside your application to forward from the UNIX socket to the Wo
 socat UNIX-RECV:/var/run/app.sock TCP:localhost:5000
 ```
 
-### Kubernetes sidecar
+#### Kubernetes sidecar
 
 In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it might not be reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
 
