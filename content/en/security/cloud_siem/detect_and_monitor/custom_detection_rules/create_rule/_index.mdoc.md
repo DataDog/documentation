@@ -189,9 +189,8 @@ For the current step and the next step:
 
 <!-- Scheduled rule AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
-Choose the query language you want to use.
 
-{% collapse-content title="Event Query" level="h4" expanded=false id="threshold-event-query" %}
+{% if equals($cloud_siem_detection_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -205,8 +204,9 @@ Choose the query language you want to use.
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
    {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
-{% /collapse-content %}
-{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}
+{% /if %}
+
+{% if equals($cloud_siem_detection_rule_query_language, "sql") %}
 You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
@@ -228,8 +228,8 @@ In Datadog, SQL queries are compatible with data stored in [datasets][6]. You ca
    - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
    - If you created a dataset, click **Create** so you can use it in your rule.
 2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+{% /if %}
 
-{% /collapse-content %}
 {% /if %}
 
 <!-- Scheduled rule AND new value -->
@@ -337,6 +337,8 @@ All logs and events matching this query are analyzed for potential impossible tr
 
 <!-- Historical job AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+
+{% if equals($cloud_siem_detection_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -349,6 +351,32 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. (Optional) To test your rules against sample logs, click **Unit Test**.
    {% partial file="security/cloud_siem/unit_testing.mdoc.md" /%}
 1. Click **Save Rule**.
+{% /if %}
+
+{% if equals($cloud_siem_detection_rule_query_language, "sql") %}
+You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
+
+In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
+- Logs
+- Audit Trail logs
+- Events
+- Security signals
+- Spans
+- RUM events
+- Product Analytics events
+- Cloud Network data
+- NetFlow data
+- Reference tables
+- Infrastructure tables
+
+{% img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%;" /%}
+
+1. Under **Define Datasets**, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the **New** icon to create a database from scratch.
+   - If you chose an existing dataset and made changes, click **Update** to apply those changes to that dataset, or **Clone With Changes** to create a dataset with your changes applied.
+   - If you created a dataset, click **Create** so you can use it in your rule.
+2. Under **Write Queries**, enter one or more SQL queries. For more information, see [DDSQL Reference][5]. Click **Preview** to see a list of matching results.
+{% /if %}
+
 {% /if %}
 
 <!-- Historical job AND new value -->
