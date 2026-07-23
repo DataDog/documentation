@@ -208,7 +208,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
 
-{{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
 Use [`dd-trace` v5.116.0 or later][5] on the v5 release line, or [`dd-trace` v6.5.0 or later][6] on the v6 release line.
 
