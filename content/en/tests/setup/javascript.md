@@ -210,7 +210,9 @@ When enabled, Test Optimization uploads screenshots that Playwright captures whe
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][5] under `use` to one of the following values:
+Use [`dd-trace` v5.116.0 or later][5] on the v5 release line, or [`dd-trace` v6.5.0 or later][6] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][7] under `use` to one of the following values:
 
 - `'on'`: Capture screenshot after each test.
 - `'only-on-failure'`: Capture screenshot after each test failure.
@@ -222,7 +224,9 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
-[5]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
+[5]: https://github.com/DataDog/dd-trace-js/pull/9492
+[6]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+[7]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
