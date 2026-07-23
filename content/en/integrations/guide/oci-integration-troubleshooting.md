@@ -75,10 +75,10 @@ Complete the following checks for each monitored region:
 
 1. In the integration compartment, verify that the `dd-function-app` function application exists.
 2. In `dd-function-app`, verify that the `dd-metrics-forwarder` function exists.
-3. If you use custom subnets, verify that they meet the [permissions][7] (In the note after step 5).
-4. Check for stale Datadog service connector hubs. All Datadog created connector hubs are in the format: `dd-<service>-connectorhub-<suffix>`. Delete any stale Datadog-managed connector hubs.
+3. If you use custom subnets, verify that they meet the [permissions][7] (detailed in the note after step 5).
+4. For each Datadog-created metric service connector hub, confirm that its function target is the `dd-metrics-forwarder` function in `dd-function-app`. Datadog-created metric connector hubs use the format `dd-metrics-connectorhub-<suffix>`. If a connector hub targets a different forwarding function application, delete it and allow it to be automatically reprovisioned.
 
-After completing these checks, reapply the Datadog integration ORM stack.
+After completing these checks, reapply the Datadog integration ORM stack or Terraform module.
 
 ## Outdated integration version
 
