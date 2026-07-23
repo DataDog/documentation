@@ -68,7 +68,7 @@ MOCK_BASE_BRANCH = _test_config["mock_reorged_master_branch"]
 # that isn't in the base, so branching off a moving master would drag in every
 # new master commit as noise. Branching off this frozen point keeps each PR to
 # just its own change. Must already exist on the remote.
-BRANCH_FROM = _test_config["branch_from"]
+BRANCH_FROM = _test_config["mock_authors_branch_from"]
 
 # Distinctive prefix so branches created here are obvious and easy to clean up.
 BRANCH_PREFIX = "jen.gilbert/astro-reorg-test"

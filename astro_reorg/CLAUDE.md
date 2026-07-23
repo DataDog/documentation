@@ -16,7 +16,7 @@ This repo is currently a Hugo site. We instead want it to contain a `hugo` and `
 
 `astro_reorg/create_test_prs.py` creates test PRs for exercising `resolve_pr_conflicts.py`, including the conflicts it can't auto-fix. Each spec in `TEST_PRS` becomes a PR that reproduces one conflict scenario.
 
-Both scripts share the `test:` section of `config.yaml`, which names the branches a test run uses: `mock_reorged_master_branch` (the stand-in for post-reorg `master` that test PRs target and the resolver treats as the base) and `branch_from` (the frozen snapshot the test PRs are cut from).
+Both scripts share the `test:` section of `config.yaml`, which names the branches a test run uses: `mock_reorged_master_branch` (the stand-in for post-reorg `master` that test PRs target and the resolver treats as the base) and `mock_authors_branch_from` (the frozen snapshot the test PRs are cut from).
 
 For flags and the mechanics of each scenario, read the script's module docstring and the comments on `TEST_PRS` — that's the source of truth, so this file doesn't have to track them.
 

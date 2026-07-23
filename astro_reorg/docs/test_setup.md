@@ -4,7 +4,7 @@
 
 Two branches must exist on the remote, named in `config.yaml` under `test:`:
 
-- `branch_from` — a non-reorged snapshot of master that the mock contributor PRs are cut from. The scripts branch (`jen.gilbert/astro-reorg-scripts`) works and already exists, so you usually don't need to create this one.
+- `mock_authors_branch_from` — a non-reorged snapshot of master that the mock contributor PRs are cut from. The scripts branch (`jen.gilbert/astro-reorg-scripts`) works and already exists, so you usually don't need to create this one.
 - `mock_reorged_master_branch` — a reorged stand-in for post-reorg master that the test PRs target and the resolver treats as the base. You create this below. It must have the reorg applied, so the scripts branch can't stand in for it.
 
 ## Setup steps
