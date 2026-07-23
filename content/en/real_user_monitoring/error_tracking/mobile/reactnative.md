@@ -57,6 +57,8 @@ const config = new DatadogProviderConfiguration(
 );
 ```
 
+**Note**: This limitation applies to native iOS crash capture only. If you use another tool alongside Datadog for native crash reporting on iOS, see [iOS Crash Reporting and Error Tracking][18] for more information.
+
 ## Get deobfuscated stack traces
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
@@ -511,3 +513,4 @@ if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
 [15]: https://plugins.gradle.org/plugin/com.datadoghq.dd-sdk-android-gradle-plugin
 [16]: https://app.datadoghq.com/source-code/setup/rum
 [17]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
+[18]: /error_tracking/frontend/mobile/ios/
