@@ -43,7 +43,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 - [Source Code Integration][7] is enabled.
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
-If Source Code Integration is set up, Datadog can infer some Code Origin details automatically, even for services that don't meet the compatibility requirements below. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
+Source Code Integration alone can infer some Code Origin details automatically, even for services that don't meet the compatibility requirements below. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
 
 Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
 
