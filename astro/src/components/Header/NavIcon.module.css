@@ -1,0 +1,23 @@
+.nav-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* :global needed because the SVG is injected via set:html at runtime */
+.nav-icon :global(svg) {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+}
+
+.nav-icon--missing::before {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+}

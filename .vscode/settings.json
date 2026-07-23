@@ -1,4 +1,5 @@
 {
+    "markdoc.config.path": "./astro/markdoc.config.json",
     "files.associations": {
         "*.mdoc.md": "markdoc",
         "*.md": "markdown"

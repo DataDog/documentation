@@ -1,0 +1,16 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "preact",
+    "plugins": [{ "name": "@astrojs/ts-plugin" }],
+    "paths": {
+      "@hugo-site/*": ["../*"],
+      "@websites-modules/*": ["../../../../../../dd/websites-modules/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@components/*": ["./src/components/*"],
+      "@config/*": ["./src/config/*"],
+      "@lib/*": ["./src/lib/*"]
+    }
+  }
+}

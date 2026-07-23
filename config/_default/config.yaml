@@ -13,6 +13,7 @@ ignoreFiles:
   - "^hugpython/"
   - "^examples/"
   - "^local/"
+  - "^astro/"
 
 publishDir: "./public"
 

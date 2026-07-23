@@ -1,0 +1,304 @@
+@import './tokens/index.css';
+
+/* Font faces */
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Light.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Light.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Book.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Book.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Medium.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Semibold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NationalWeb';
+  src: url('/fonts/NationalWeb-Bold.woff2') format('woff2'),
+       url('/fonts/NationalWeb-Bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('/fonts/RobotoMono-Regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Disallow old-style numbers everywhere */
+*, *::before, *::after {
+  font-variant-numeric: lining-nums;
+}
+
+/* Base */
+html {
+  font-size: var(--font-size-root);
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 200;
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  margin: 0;
+  padding: 0;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'lnum' 1, 'frac' 0, 'liga' 1, 'clig' 1;
+  font-variant-numeric: lining-nums;
+  word-wrap: break-word;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+a {
+  color: var(--color-brand);
+}
+
+a:hover {
+  color: var(--color-brand-hover);
+}
+
+/* Inline code */
+code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-highlight-text);
+  background-color: var(--color-highlight-bg);
+  padding: 0 0.278rem;
+  border-radius: var(--border-radius);
+}
+
+pre code {
+  font-size: inherit;
+  color: inherit;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  line-height: 1.05;
+  padding-bottom: var(--space-sm);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 200;
+  line-height: 1;
+  padding-bottom: 0.167rem;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  margin-top: 0.778rem;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  color: var(--color-brand);
+  margin-top: 0.778rem;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+}
+
+/* Lists — opt-in via `.prose`. Wrap rendered docs/API prose in
+   <div class="prose"> (or add `prose` to the container) so lists in content
+   get the en-dash bullet; UI components like nav menus, tabs, and the side
+   nav stay unaffected. */
+.prose ul {
+  list-style: none;
+  padding-left: 1.222rem;
+}
+
+.prose ul li {
+  position: relative;
+  padding-left: 0;
+}
+
+.prose ul li::before {
+  content: '\2013';
+  position: absolute;
+  left: -1.111rem;
+}
+
+.prose ul ul {
+  padding-left: 1.111rem;
+}
+
+.prose ol ol {
+  list-style-type: lower-alpha;
+}
+
+.prose ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* Blockquote */
+blockquote {
+  margin: 0 0 var(--space-md);
+  padding: var(--space-sm) var(--space-md);
+  border-left: var(--border-width-accent) solid var(--color-border-dark);
+  color: var(--color-text-muted);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  border-top: var(--border-width) solid var(--color-border);
+  opacity: 0.25;
+  margin: var(--space-md) 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: var(--space-lg);
+  border: var(--border-width) solid var(--color-surface-border);
+  border-collapse: collapse;
+  font-size: var(--font-size-base);
+  background-color: var(--color-surface-bg);
+}
+
+table th,
+table td {
+  padding: var(--space-sm) 0.65rem;
+  border-left: var(--border-width) solid var(--color-surface-border);
+  vertical-align: top;
+}
+
+table thead th {
+  vertical-align: bottom;
+  background: var(--color-surface-header);
+  border: none;
+  border-left: var(--border-width) solid var(--color-surface-border);
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  color: var(--color-surface-header-text);
+}
+
+table tr:first-child td {
+  border-top: none;
+}
+
+table tbody tr:nth-child(2n) {
+  background: var(--color-surface-alt);
+}
+
+table a {
+  border-bottom: var(--border-width) solid var(--color-text-muted);
+}
+
+table a:hover {
+  border-bottom: var(--border-width) solid var(--color-brand);
+}
+
+tbody code {
+  word-wrap: normal;
+  word-break: break-word;
+}
+
+/* Region-scoped content — every element with `data-region="<key>"` renders
+   at build time (good for SEO) but is hidden unless `<html data-active-region>`
+   matches its key. The value on `<html>` is set by a pre-body inline script
+   before first paint so there's no flash of the wrong region. */
+[data-region] { display: none; }
+html[data-active-region='us'] [data-region='us'],
+html[data-active-region='us3'] [data-region='us3'],
+html[data-active-region='us5'] [data-region='us5'],
+html[data-active-region='eu'] [data-region='eu'],
+html[data-active-region='ap1'] [data-region='ap1'],
+html[data-active-region='ap2'] [data-region='ap2'],
+html[data-active-region='gov'] [data-region='gov'] {
+  display: revert;
+}
+
+
+@view-transition {
+  navigation: auto;
+}
+
+.header__nav {
+  view-transition-name: header__nav;
+}
+
+.announcement-banner {
+  view-transition-name: announcement-banner;
+}
+
+.api-side-nav {
+  view-transition-name: sidenav;
+}
+
+::view-transition-group(header__nav),
+::view-transition-group(announcement-banner),
+::view-transition-group(sidenav),
+::view-transition-group(root),
+::view-transition-old(header__nav),
+::view-transition-new(header__nav),
+::view-transition-old(announcement-banner),
+::view-transition-new(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-new(sidenav),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+::view-transition-old(header__nav),
+::view-transition-old(announcement-banner),
+::view-transition-old(sidenav),
+::view-transition-old(root) {
+  display: none;
+}
