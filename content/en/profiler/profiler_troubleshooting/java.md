@@ -282,7 +282,7 @@ jdk.OldObjectSample#enabled=false
 
 {{% /tab %}}
 {{% tab "Datadog Profiler" %}}
-If you are using the alpha feature of live heap profiling, you can tune the overhead by changing the percentage
+If you are using the preview feature of live heap profiling, you can tune the overhead by changing the percentage
 of the tracked allocation samples.
 ```shell
 # track only 10% of the allocation samples

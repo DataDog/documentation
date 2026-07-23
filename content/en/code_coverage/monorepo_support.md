@@ -11,6 +11,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/datadog-code-coverage"
     tag: "Blog"
     text: "Identify untested code across every level of your codebase"
+  - link: "/code_coverage/dashboards"
+    tag: "Documentation"
+    text: "Build dashboards on Code Coverage data"
 ---
 
 ## Overview

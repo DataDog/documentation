@@ -35,7 +35,7 @@ CI/CD and Test monitors allow you to visualize CI/CD data and set up alerts on i
 
 ## Monitor creation
 
-To create a new monitor, navigate to **Monitors > New Monitor > CI/CD & Tests**.
+To create a new monitor, navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}CI/CD & Tests{{< /ui >}}.
 
 <div class="alert alert-info">There is a default limit of 1000 CI/CD & Test monitors per account. <a href="/help/">Contact Support</a> to lift this limit for your account.</div>
 
@@ -48,17 +48,21 @@ Choose one of the monitor types:
 
 1. Construct a search query using the same logic as a CI Pipeline explorer search.
 2. Select the CI Pipeline events level:
-    * **Pipeline**: Evaluates the execution of an entire pipeline, usually composed of one or more jobs.
-    * **Stage**: Evaluates the execution of a group of one or more jobs in CI providers that support it.
-    * **Job**: Evaluates the execution of a group of commands.
-    * **Command**: Evaluates manually instrumented [custom command][1] events, which are individual commands being executed in a job.
-    * **All**: Evaluates all types of events.
+    * {{< ui >}}Pipeline{{< /ui >}}: Evaluates the execution of an entire pipeline, usually composed of one or more jobs.
+    * {{< ui >}}Stage{{< /ui >}}: Evaluates the execution of a group of one or more jobs in CI providers that support it.
+    * {{< ui >}}Job{{< /ui >}}: Evaluates the execution of a group of commands.
+    * {{< ui >}}Command{{< /ui >}}: Evaluates manually instrumented [custom command][1] events, which are individual commands being executed in a job.
+    * {{< ui >}}All{{< /ui >}}: Evaluates all types of events.
 3. Choose to monitor over a CI Pipeline event count, facet, or measure:
-    * **CI Pipeline event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
-    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}CI Pipeline event count{{< /ui >}}: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline events over a selected time frame, then compares it to the threshold conditions.
+    * {{< ui >}}Dimension{{< /ui >}}: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
+    * {{< ui >}}Measure{{< /ui >}}: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Pipeline events by multiple dimensions (optional):
-    * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CI Pipeline events matching the query are aggregated into groups based on the value of up to four facets. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@ci.pipeline.name` to receive a separate alert for each CI Pipeline name when the number of errors is high.
 
@@ -81,21 +85,25 @@ The following example is of a pipeline error rate monitor using a formula that c
 
 ### Define the search query
 
-1. Common monitor types: (optional) Provides a template query for each of the **New Flaky Test**, **Test Failures**, and **Test Performance** common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
+1. Common monitor types: (optional) Provides a template query for each of the {{< ui >}}New Flaky Test{{< /ui >}}, {{< ui >}}Test Failures{{< /ui >}}, and {{< ui >}}Test Performance{{< /ui >}} common monitor types, which you can then customize. Learn more about this feature by reading [Track new flaky tests](#track-new-flaky-tests).
 2. Construct a search query using the same logic as a CI Test explorer search. For example, you can search failed tests for the `main` branch of the `myapp` test service using the following query: `@test.status:fail @git.branch:main @test.service:myapp`.
 3. Choose to monitor over a CI Test event count, facet, or measure:
-    * **CI Test event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
-    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}CI Test event count{{< /ui >}}: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CI Pipeline test events over a selected time frame, then compares it to the threshold conditions.
+    * {{< ui >}}Dimension{{< /ui >}}: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
+    * {{< ui >}}Measure{{< /ui >}}: Select measure (quantitative facet) to alert over the numerical value of the CI Pipeline facet (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CI Test events by multiple dimensions (optional):
-    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CI Test events matching the query are aggregated into groups based on the value of up to four facets. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
     * If the query has a `group by`, an alert is sent for every source according to the group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@test.full_name` to receive a separate alert for each CI Test full name when the number of errors is high. Test full name is a combination of a test suite and test name, for example: `MySuite.myTest`. In Swift, test full name is a combination of a test bundle, and suite and name, for example: `MyBundle.MySuite.myTest`.
 
 {{< img src="monitors/monitor_types/ci_tests/define-the-search-query.png" alt="A query for CI Status:Error that is being set to group by Pipeline Name" style="width:100%;" >}}
 
 #### Test runs with different parameters or configurations
-Use `@test.fingerprint` in the monitor `group by` when you have tests with the same test full name, but different test parameters or configurations. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed, and Flaky Tests section on the **Commit Overview** page.
+Use `@test.fingerprint` in the monitor `group by` when you have tests with the same test full name, but different test parameters or configurations. This way, alerts trigger for test runs with specific test parameters or configurations. Using `@test.fingerprint` provides the same granularity level as the Test Stats, Failed, and Flaky Tests section on the {{< ui >}}Commit Overview{{< /ui >}} page.
 
 For example, if a test with the same full name failed on Chrome, but passed on Firefox, then using the fingerprint only triggers the alert on the Chrome test run.
 
@@ -126,7 +134,7 @@ The example below configures the notification with the following logic:
 {{/is_match}}
 {{< /code-block >}}
 
-In the `Notification message` section of your monitor, add text similar to the code snippet above to configure monitor notifications. You can add as many `is_match` clauses as you need. For more information on Notification variables, see [Monitors Conditional Variables][2].
+In the {{< ui >}}Notification message{{< /ui >}} section of your monitor, add text similar to the code snippet above to configure monitor notifications. You can add as many `is_match` clauses as you need. For more information on Notification variables, see [Monitors Conditional Variables][2].
 
 [1]: /dashboards/functions/#overview
 [2]: /monitors/notify/variables/?tab=is_match#conditional-variables
@@ -138,11 +146,15 @@ In the `Notification message` section of your monitor, add text similar to the c
 
 1. Construct a search query using the same logic as a CD Deployments explorer search.
 3. Choose to monitor over a CD Deployment event count, facet, or measure:
-    * **CD Deployment event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CD Deployment events over a selected time frame, then compares it to the threshold conditions.
-    * **Dimension**: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
-    * **Measure**: Select measure (quantitative facet) to alert over the numerical value of the CD Deployment measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}CD Deployment event count{{< /ui >}}: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of CD Deployment events over a selected time frame, then compares it to the threshold conditions.
+    * {{< ui >}}Dimension{{< /ui >}}: Select dimension (qualitative facet) to alert over the `Unique value count` of the facet.
+    * {{< ui >}}Measure{{< /ui >}}: Select measure (quantitative facet) to alert over the numerical value of the CD Deployment measure (similar to a metric monitor). Select the aggregation (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group CD Deployment events by multiple dimensions (optional):
-    * All CD Deployment events matching the query are aggregated into groups based on the value of up to four facets.
+    * All CD Deployment events matching the query are aggregated into groups based on the value of up to four facets. Dimensions limit depends on the total number of dimensions:
+        * **1 facet**: 1000 top values
+        * **2 facets**: 30 top values per facet (at most 900 groups)
+        * **3 facets**: 10 top values per facet (at most 1000 groups)
+        * **4 facets**: 5 top values per facet (at most 625 groups)
 5. Configure the alerting grouping strategy (optional):
    * If the query has a `group by`, multi alerts apply the alert to each source according to your group parameters. An alerting event is generated for each group that meets the set conditions. For example, you could group a query by `@deployment.name` to receive a separate alert for each CD Deployment name when the number of errors is high.
 
@@ -175,7 +187,7 @@ For detailed instructions on the advanced alert options (such as evaluation dela
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][5] page.
 
 #### Samples and breaching values top list
 
@@ -192,7 +204,7 @@ When a CI Pipeline, CI Test, or CD Deployments monitor is triggered, samples or 
 
 These are available for notifications sent to Slack, Jira, webhooks, Microsoft Teams, Pagerduty, and email. **Note**: Samples are not displayed for recovery notifications.
 
-To disable samples, uncheck the box at the bottom of the **Say what's happening** section. The text next to the box is based on your monitor's grouping (as stated above).
+To disable samples, uncheck the box at the bottom of the {{< ui >}}Say what's happening{{< /ui >}} section. The text next to the box is based on your monitor's grouping (as stated above).
 
 #### Sample examples
 
@@ -219,7 +231,7 @@ The `duration` metric can be used to identify pipeline and test performance regr
 {{< img src="ci/regression_monitor.png" alt="CI pipeline regression monitor" style="width:100%;">}}
 
 ### Track new flaky tests
-Test monitors have the `New Flaky Test`, `Test Failures`, and `Test Performance` common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
+Test monitors have the {{< ui >}}New Flaky Test{{< /ui >}}, {{< ui >}}Test Failures{{< /ui >}}, and {{< ui >}}Test Performance{{< /ui >}} common monitor types for simple monitor setup. This monitor sends alerts when new flaky tests are added to your codebase. The query is grouped by `Test Full Name` so you don't get alerted on the same new flaky test more than once.
 
 A test run is marked as `flaky` if it exhibits flakiness within the same commit after some retries. If it exhibits flakiness multiple times (because multiple retries were executed), the `is_flaky` tag is added to the first test run that is detected as flaky.
 

@@ -1,9 +1,9 @@
 ---
 title: Analyze Your Experiments Results
-description: How to analyze LLM Observability Experiments results.
+description: How to analyze Agent Observability Experiments results.
 ---
 
-This page describes how to analyze LLM Observability Experiments results in Datadog's Experiments UI and widgets.
+This page describes how to analyze Agent Observability Experiments results in Datadog's Experiments UI and widgets.
 
 After running an Experiment, you can analyze the results to understand performance patterns and investigate problematic records. 
 
@@ -71,7 +71,7 @@ The following options are available on tags:
 
 You can use the search bar to find specific records, based on their properties (dataset records data) or on the result of the experiment (output and evaluations). The search is executed at trace level.
 
-{{< img src="llm_observability/experiments/exp_details_search.png" alt="LLM Observability, Experiment Details focus. Heading: 'Highlighting the search bar'." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/exp_details_search.png" alt="Agent Observability, Experiment Details focus. Heading: 'Highlighting the search bar'." style="width:100%;" >}}
 
 <div class="alert alert-info">To have access to the most data, update to <code>ddtrace-py >= 4.1.0</code>, as this version brings the following changes: 
 
@@ -120,7 +120,7 @@ To find traces using tags, search `<tag>:<value>`. For example, `dataset_record_
 
 To see which tags are available, open a trace to find its tags.
 
-{{< img src="llm_observability/experiments/side-panel-tag.png" alt="LLM Observability, Experiment trace side-panel. Highlighting where to find trace tags." style="width:100%;" >}}
+{{< img src="llm_observability/experiments/side-panel-tag.png" alt="Agent Observability, Experiment trace side-panel. Highlighting where to find trace tags." style="width:100%;" >}}
 
 
 #### Find traces by input, output, expected output, or metadata
@@ -180,7 +180,7 @@ Datadog suggests that you:
 - Update `ddtrace-py` version >= 4.1.0
 
 
-To build a widget using LLM Experiments data, use {{< ui >}}LLM Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
+To build a widget using LLM Experiments data, use {{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Experiments{{< /ui >}} as data source. Then, use the [search syntax on this page](#searching-for-specific-records) to narrow down the events to plot. 
 
 For record level data aggregation, use {{< ui >}}Traces{{< /ui >}}; otherwise, use {{< ui >}}All Spans{{< /ui >}}.
 

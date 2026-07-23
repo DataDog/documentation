@@ -168,6 +168,14 @@ If you experience syncing issues between your Jira tickets and the corresponding
 
 4. A webhook must be configured to automatically sync updates between Datadog and Jira. In your Jira settings, check for this webhook. If the webhook is missing, follow [these steps][6] to add it and fix the sync between Datadog and Jira.
 
+### Reporter on Jira tickets is the wrong user
+
+When a Jira ticket is created from an Error Tracking issue, the ticket's {{< ui >}}Reporter{{< /ui >}} field is set to the Datadog user who configured the Jira integration, not to the user who triggered the ticket creation. This is a known limitation of the Jira integration for Datadog and applies to every ticket created from Error Tracking. To change the Reporter on a specific ticket, update it directly in Jira after creation.
+
+### A new Case Management project is created for each Jira ticket
+
+Datadog Case Management maps each Jira issue type to a different Case Management project. When you create a ticket from an Error Tracking issue using a Jira issue type that has not been used before, a new Case Management project is automatically created to link the Error Tracking issue and the Jira ticket. This behavior means that creating tickets with several Jira issue types over time produces several Case Management projects, one per issue type.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

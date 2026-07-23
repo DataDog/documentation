@@ -3,12 +3,12 @@ title: Triage and Notify
 aliases:
 - /service_management/events/correlation/triage_and_notify/
 further_reading:
-- link: "service_management/events/correlation/"
+- link: "events/correlation/"
   tag: "Documentation"
   text: "Learn about Event Correlation"
 ---
 
-{{< img src="service_management/events/correlation/triage/triage.png" alt="Case detail page with an event side panel. Investigate correlated events from a case and analyze related metrics" style="width:100%;" >}}
+{{< img src="events/correlation/triage/triage.png" alt="Case detail page with an event side panel. Investigate correlated events from a case and analyze related metrics" style="width:100%;" >}}
 
 Event Management correlates related events and automatically consolidates them into a single case. Bring in all the context of related logs, related metrics, and alerting monitors to triage and troubleshoot issues in one place.
 
@@ -16,7 +16,7 @@ From the [Correlation][1] page, find the pattern you want to analyze and click {
 
 ## Event Management Case
 
-{{< img src="service_management/events/correlation/triage/event_management_case_detail.png" alt="Case detail page - Overview" style="width:100%;" >}}
+{{< img src="events/correlation/triage/event_management_case_detail.png" alt="Case detail page - Overview" style="width:100%;" >}}
 
 
 | Feature | Description | 

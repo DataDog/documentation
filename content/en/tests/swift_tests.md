@@ -29,7 +29,7 @@ The Test Optimization - RUM integration is available for these versions of `dd-s
 
 If you link `dd-sdk-swift-testing` for your UI tests bundle and the application being tested is instrumented using [Real User Monitoring][1], your test results and their generated RUM application sessions and session replays are automatically linked.
 
-A **RUM Sessions** tab appears in the Test Optimization test detail side panel.
+A {{< ui >}}RUM Sessions{{< /ui >}} tab appears in the Test Optimization test detail side panel.
 
 {{< img src="ci/ci-swift-rum-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}
 

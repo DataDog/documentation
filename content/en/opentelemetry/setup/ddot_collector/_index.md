@@ -18,10 +18,8 @@ further_reading:
 
 ---
 
-{{< callout btn_hidden="true" >}}
-The DDOT Collector for Kubernetes is <strong>Generally Available</strong>. You can get started by following the <a href="#get-started">instructions below</a>.
-<br><br>
-Deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is <strong>in Preview</strong>. To get started, follow the <a href="/opentelemetry/setup/ddot_collector/install/linux">Linux documentation</a>.
+{{< callout url="https://www.datadoghq.com/product-preview/remote-configuration-for-datadogs-distribution-of-opentelemetry-collector-ddot/" >}}
+Remote Configuration for the DDOT Collector is <strong>in Preview</strong>. Use this form to request access.
 {{< /callout >}}
 
 ## Overview
@@ -88,11 +86,15 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 {{% collapse-content title="Receivers" level="p" %}}
 
+- [dockerstatsreceiver][58] (available since version 7.56.0)
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [jaegerreceiver][19]
+- [k8sobjectsreceiver][59] (available since version 7.56.0)
+- [kubeletstatsreceiver][60] (available since version 7.56.0)
 - [otlpreceiver][20]
+- [podmanreceiver][61] (available since version 7.56.0)
 - [prometheusreceiver][21]
 - [receivercreator][22]
 - [zipkinreceiver][23]
@@ -140,9 +142,11 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 {{% collapse-content title="Extensions" level="p" %}}
 
+- [datadogextension][62] (available since version 7.72.0)
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
+- [storage/filestorage][63] (available since version 7.56.0)
 - [zpagesextension][49]
 
 {{% /collapse-content %}}
@@ -243,3 +247,9 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
 [57]: /opentelemetry/compatibility/#support-levels
+[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/README.md
+[59]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sobjectsreceiver/README.md
+[60]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kubeletstatsreceiver/README.md
+[61]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/podmanreceiver/README.md
+[62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
+[63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md

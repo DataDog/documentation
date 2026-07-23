@@ -17,13 +17,15 @@ Use Observability Pipelines' New Relic destination to send logs to New Relic.
 
 Configure the New Relic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the account ID and license. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the New Relic destination in the pipeline UI:
 
 1.  Enter the identifier for your account ID. If you leave it blank, the [default](#secret-defaults) is used.
 1.  Enter the identifier for your license. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select the data center region (**US** or **EU**) of your New Relic account.
+1. Select the data center region ({{< ui >}}US{{< /ui >}} or {{< ui >}}EU{{< /ui >}}) of your New Relic account.
 
 ### Optional buffering
 

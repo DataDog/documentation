@@ -146,6 +146,28 @@ runtimes, a snapshot is only captured after the **second occurrence** for a give
 Use the query `@error.debug_info_captured:true` in Error Tracking Explorer to find errors with Exception Replay
 snapshots.
 
+### BatchUploader WARN messages on GovCloud (Java)
+
+On GovCloud sites (`app.ddog-gov.com`), Java tracers may log periodic WARN messages from `com.datadog.debugger.uploader.BatchUploader` with HTTP 403 and text similar to `This traffic is not permitted on your account`. This is expected when debugger-related uploads are attempted on a site where Exception Replay, Dynamic Instrumentation, and Code Origin for Spans are not supported. Core APM functionality (traces, metrics, profiling, log injection) is not affected.
+
+To stop these log messages, set the following environment variables on the Java application pod and restart the workload:
+
+```bash
+DD_EXCEPTION_REPLAY_ENABLED=false
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=false
+DD_CODE_ORIGIN_FOR_SPANS_ENABLED=false
+```
+
+Alternatively, use JVM system properties:
+
+```bash
+-Ddd.exception.replay.enabled=false
+-Ddd.dynamic.instrumentation.enabled=false
+-Ddd.code.origin.for.spans.enabled=false
+```
+
+To confirm the fix, check the tracer startup JSON (`DATADOG TRACER CONFIGURATION`) and verify that `debugger_exception_enabled`, `debugger_enabled`, and `debugger_span_origin_enabled` are all `false`. WARN messages are rate-limited to approximately once every five minutes, so wait at least that long after restarting before confirming the messages have stopped.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

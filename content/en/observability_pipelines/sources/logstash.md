@@ -23,13 +23,17 @@ You can also use the Logstash source to [send logs to Observability Pipelines us
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The instructions in this section are for setting up the source in the UI.
 
-<div class="alert alert-danger">Only enter the identifiers for the Logstash address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Logstash address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 After you select the Logstash source in the pipeline UI, enter the identifier for your Logstash address. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
 
 ## Secret defaults
 

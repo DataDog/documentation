@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/operate/monitoring/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Dashboards
 
-BYOC Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
+BYOC (Bring Your Own Cloud) Logs provides an out-of-the-box dashboard that monitors BYOC Logs' key metrics.
 
 ### Setup
 
@@ -57,4 +53,4 @@ Configure either option with your organization's API key to export these metrics
 Coming soon. -->
 
 [1]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent
-[2]: https://app.datadoghq.com/dashboard/lists?q=cloudprem&p=1
+[2]: https://app.datadoghq.com/dashboard/lists?q=byoc&p=1

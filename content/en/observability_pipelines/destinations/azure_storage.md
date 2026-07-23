@@ -25,10 +25,13 @@ You need to have Datadog's [Azure integration][3] installed to set up Datadog Lo
 
 Configure the Azure Storage destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Azure connection string. Do <b>not</b> enter the actual value.</div>
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
 After you select the Azure Storage destination in the pipeline UI:
 
 1. Enter the identifier for your Azure connection string. If you leave it blank, the [default](#secret-defaults) is used.
-    - **Note**: Only enter the identifier for the connection string. Do **not** enter the actual connection string.
 1. Enter the name of the Azure container you created earlier.
 
 ### Optional settings
@@ -65,6 +68,10 @@ Enter a prefix that you want to apply to all key objects.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][10] and [destination buffer metrics][11] emitted by all destinations, see the [Pipelines Usage Metrics][12] documentation. To filter or group by Azure Storage destination metrics, use the tag `component_type:datadog_archives_azure_blob`.
+
 ## How the destination works
 
 ### Event batching
@@ -84,3 +91,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [7]: https://app.datadoghq.com/observability-pipelines
 [8]: /api/latest/observability-pipelines/
 [9]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

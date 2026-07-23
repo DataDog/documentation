@@ -8,6 +8,9 @@ aliases:
   - /serverless/distributed_tracing/serverless_trace_propagation
   - /serverless/distributed_tracing
 further_reading:
+- link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
+  tag: "Learning Center"
+  text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
 - link: "/tracing/"
   tag: "Documentation"
   text: "Explore Datadog APM"
@@ -42,7 +45,14 @@ The Datadog Python, Node.js, Ruby, Go, Java, and .NET SDKs support distributed t
 
 ### Runtime recommendations
 
-{{< partial name="serverless/serverless-apm-recommendations.html" >}}
+{{< card-grid card_width="30%" image_width="200">}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/serverless/distributed_tracing#python-and-nodejs" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/serverless/distributed_tracing#ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/serverless/distributed_tracing#java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/serverless/distributed_tracing#go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/serverless/distributed_tracing#net" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+{{< /card-grid >}}
 
 #### Python and Node.js
 
@@ -114,7 +124,7 @@ Learn more about [tracing through .NET Azure serverless applications][15].
 ## Span Auto-linking
 {{< img src="serverless/lambda/tracing/autolink.png" alt="In Datadog, a DynamoDB trace. At the top, a message reads 'This trace is linked to other traces'. The Span Links tab is open and displays a clickable link to another DynamoDB trace." style="width:100%;" >}}
 
-Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [Span Links tab][30]. These appear as **Backward** or **Forward**.
+Datadog automatically detects linked spans when segments of your asynchronous requests cannot propagate trace context. For example, this may occur when a request triggers an [S3 Change Events][28], or [DynamoDB Streams][29]. You can see Auto-linked spans appear in the [{{< ui >}}Span Links{{< /ui >}} tab][30]. These appear as {{< ui >}}Backward{{< /ui >}} or {{< ui >}}Forward{{< /ui >}}.
 
 _Backward_: The linked span was caused by the trace you are viewing.
 

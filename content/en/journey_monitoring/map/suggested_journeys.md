@@ -1,6 +1,5 @@
 ---
 title: Suggested Journeys
-private: true
 description: Create journeys based on Datadog's automatically generated suggestions.
 further_reading:
 - link: '/journey_monitoring/'
@@ -20,7 +19,7 @@ further_reading:
   text: 'Learn about journey uptime'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="false">}}
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
 Journey Monitoring is in Preview.
 {{< /callout >}}
 

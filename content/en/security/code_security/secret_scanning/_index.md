@@ -22,7 +22,7 @@ Datadog Secret Scanning scans code to find exposed secrets. Datadog also attempt
 
 ## Set up Secret Scanning
 
-Scans can run in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). To get started, go to the [**Code Security Setup**][1] and click **Activate scanning for your repositories** or learn how to set up Secret Scanning using [GitHub actions][5] or with [other CI providers][6].
+Scans can run in your CI/CD pipelines or directly in Datadog with hosted scanning (supported for GitHub, Azure DevOps, and GitLab). To get started, go to the [{{< ui >}}Code Security Setup{{< /ui >}}][1] and click {{< ui >}}Activate scanning for your repositories{{< /ui >}} or learn how to set up Secret Scanning using [GitHub actions][5] or with [other CI providers][6].
 
 ## Secret Scanning rules
 
@@ -51,13 +51,13 @@ You can add inline exclusions to prevent certain findings from appearing in scan
 
 ### View and filter findings
 
-After setting up Secret Scanning, each commit to a scanned repository triggers a scan. Findings are summarized on the [Code Security Vulnerabilities][15] page and grouped per repository on the [Code Security Repositories][14] page.
+After setting up Secret Scanning, each commit to a scanned repository triggers a scan. Findings are summarized on the [{{< ui >}}Code Security Vulnerabilities{{< /ui >}}][15] page and grouped per repository on the [{{< ui >}}Code Security Repositories{{< /ui >}}][14] page.
 
 Use filters to narrow results by facets such as:
 
 - Severity
 - Status (open, muted, fixed)
-- Validation Status
+- {{< ui >}}Validation Status{{< /ui >}}
 - Team
 - Repository visibility
 
@@ -66,19 +66,19 @@ Use filters to narrow results by facets such as:
 You can create a bidirectional Jira ticket directly from any finding to track and remediate issues in your existing workflows. Ticket status remains synced between Datadog and Jira. For more information, see [Bidirectional ticket syncing with Jira][16].
 
 ### Declare an incident from a leaked secret
-[Declare an incident][13] from a finding by clicking **Declare incident** in the Secret Scanning side panel. The incident is pre-filled with all detection metadata.
+[Declare an incident][13] from a finding by clicking {{< ui >}}Declare incident{{< /ui >}} in the Secret Scanning side panel. The incident is pre-filled with all detection metadata.
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `repository`). Muting a finding hides it and excludes it from reports.
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][15] page to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [{{< ui >}}Code Security Vulnerabilities{{< /ui >}}][15] page to review muted findings.
 
 ## Next steps
 
 1. [Set up Secret Scanning][1] in your environment.
 2. Set up [Automation Pipelines][10] to automate initial triage.
-3. Review findings on the [Code Security Vulnerabilities][15] page.
+3. Review findings on the [{{< ui >}}Code Security Vulnerabilities{{< /ui >}}][15] page.
 
 ## Further Reading
 

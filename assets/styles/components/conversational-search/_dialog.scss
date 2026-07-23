@@ -2,6 +2,59 @@
 $conv-float-btn-bg: #632CA6;
 $conv-float-btn-bg-hover: #4f2384;
 
+:root {
+    --docs-ai-sidebar-width: 440px;
+    --docs-ai-floating-width: 500px;
+    --docs-ai-floating-height: 570px;
+    // Set by JS to the announcement banner height.
+    --docs-ai-sidebar-top-offset: 0px;
+}
+
+// Narrow the body (and make it a positioning context) instead of padding it,
+// so full-width children like `.greyside` reflow with it rather than the viewport.
+body {
+    width: 100%;
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &.docs-ai-sidebar-pushed {
+        position: relative;
+        width: calc(100% - var(--docs-ai-sidebar-width));
+    }
+
+    @media (max-width: 640px) {
+        transition: none;
+
+        &.docs-ai-sidebar-pushed {
+            width: 100%;
+        }
+    }
+}
+
+// The fixed nav isn't affected by the body width, so shrink its width to stay
+// aligned with the sidebar. The banner is left full-width (sidebar docks below it).
+.main-nav-wrapper,
+.main-nav-wrapper .main-nav {
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.docs-ai-sidebar-pushed {
+    .main-nav-wrapper,
+    .main-nav-wrapper .main-nav {
+        left: 0;
+        right: auto;
+        width: calc(100% - var(--docs-ai-sidebar-width));
+    }
+
+    @media (max-width: 640px) {
+        .main-nav-wrapper,
+        .main-nav-wrapper .main-nav {
+            left: 0;
+            right: 0;
+            width: 100%;
+        }
+    }
+}
+
 .conv-search-float-btn {
     position: fixed;
     bottom: 24px;
@@ -65,18 +118,10 @@ $conv-float-btn-bg-hover: #4f2384;
 
 .conv-search-sidebar {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.96);
     z-index: 10000;
-    width: 920px;
-    max-width: 92vw;
-    height: 733px;
-    max-height: 90vh;
     background: white;
     display: flex;
     flex-direction: column;
-    border-radius: 28px;
     box-shadow:
         0 0 8px 0 rgba(75, 179, 255, 0.4),
         0 0 11px 0 rgba(255, 209, 228, 0.2),
@@ -89,38 +134,107 @@ $conv-float-btn-bg-hover: #4f2384;
         opacity 0.25s ease-out,
         visibility 0.25s ease-out;
 
-    &.open {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 1;
-        visibility: visible;
-    }
-
-
-    @media (min-width: 1280px) {
-        width: clamp(920px, 66vw, 1408px);
+    // --- Mode: Full screen (default centered modal) -----------------------
+    &.mode-fullscreen {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.96);
+        width: 920px;
         max-width: 92vw;
-    
-        height: clamp(733px, 79vh, 915px);
+        height: 733px;
         max-height: 90vh;
-    
-    }
-
-    @media (max-width: 640px) {
-        inset: 0;
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100%;
-        max-width: none;
-        height: 100%;
-        max-height: none;
-        border-radius: 0;
+        border-radius: 28px;
 
         &.open {
+            transform: translate(-50%, -50%) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        // Scale up on large viewports, clamped so it never grows unbounded.
+        @media (min-width: 1280px) {
+            width: clamp(920px, 66vw, 1408px);
+            max-width: 92vw;
+            height: clamp(733px, 79vh, 915px);
+            max-height: 90vh;
+        }
+    }
+
+    // --- Mode: Floating (small bottom-right panel) ------------------------
+    &.mode-floating {
+        bottom: 24px;
+        right: 24px;
+        transform: translateY(8px) scale(0.98);
+        transform-origin: bottom right;
+        width: var(--docs-ai-floating-width);
+        max-width: calc(100vw - 32px);
+        height: var(--docs-ai-floating-height);
+        max-height: calc(100vh - 48px);
+        border-radius: 20px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.08),
+            0 16px 48px rgba(0, 0, 0, 0.18);
+
+        &.open {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // --- Mode: Sidebar (right-docked, below the announcement banner) ------
+    &.mode-sidebar {
+        top: var(--docs-ai-sidebar-top-offset);
+        right: 0;
+        bottom: 0;
+        transform: translateX(16px);
+        transform-origin: right center;
+        width: var(--docs-ai-sidebar-width);
+        min-width: 280px;
+        // String-interpolated so Sass passes the CSS-native min() through
+        // verbatim instead of trying to evaluate vw and px together.
+        max-width: #{"min(800px, 92vw)"};
+        border-radius: 0;
+        border-left: 1px solid $conv-search-border;
+        box-shadow: none;
+
+        .conv-search-header {
+            padding-top: 17px !important;
+            padding-bottom: 24px;
+        }
+
+        &.open {
+            transform: translateX(0);
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
+    // --- Small viewports: any mode collapses to full takeover -------------
+    @media (max-width: 640px) {
+        &.mode-fullscreen,
+        &.mode-floating,
+        &.mode-sidebar {
+            inset: 0;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             transform: none;
+            width: 100%;
+            max-width: none;
+            height: 100%;
+            max-height: none;
+            border-radius: 0;
+
+            &.open {
+                transform: none;
+            }
         }
     }
 }
+
 
 .conv-search-aurora {
     position: absolute;
@@ -145,7 +259,8 @@ $conv-float-btn-bg-hover: #4f2384;
     border-bottom: 1px solid $conv-search-border;
     flex-shrink: 0;
     position: relative;
-    z-index: 1;
+    // Above .conv-search-messages so the view-mode dropdown isn't clipped.
+    z-index: 2;
 
     @media (max-width: 640px) {
         padding: 8px 16px;
@@ -309,7 +424,7 @@ $conv-float-btn-bg-hover: #4f2384;
     background: transparent;
     border: none;
     cursor: pointer;
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     color: $conv-neutral-500;
@@ -324,8 +439,320 @@ $conv-float-btn-bg-hover: #4f2384;
         width: 18px;
         height: 18px;
     }
+}
 
-    @media (max-width: 640px) {
-        display: flex;
+// --- View-mode switcher (button + dropdown) ----------------------------------
+.conv-search-mode-switcher {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.conv-search-mode-toggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $conv-neutral-500;
+    transition: background 0.15s ease, color 0.15s ease;
+
+    &:hover,
+    &[aria-expanded="true"] {
+        background: rgba(0, 0, 0, 0.05);
+        color: $conv-neutral-700;
+    }
+
+    svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+    }
+}
+
+.conv-search-mode-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 200px;
+    padding: 6px;
+    background: white;
+    border: 1px solid $conv-search-border;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    z-index: 10002;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+        opacity 0.15s ease,
+        transform 0.15s ease,
+        visibility 0.15s ease;
+
+    &.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+}
+
+.conv-search-mode-menu-label {
+    padding: 6px 10px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $conv-neutral-500;
+}
+
+.conv-search-mode-option {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    color: $conv-neutral-700;
+    text-align: left;
+    transition: background 0.12s ease;
+
+    &:hover {
+        background: $conv-primary-100;
+    }
+
+    &[aria-checked="true"] {
+        color: $conv-search-purple-dark;
+
+        .conv-search-mode-option-check {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    .conv-search-mode-option-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        color: $conv-neutral-600;
+        flex-shrink: 0;
+    }
+
+    &[aria-checked="true"] .conv-search-mode-option-icon {
+        color: $conv-search-purple-dark;
+    }
+
+    .conv-search-mode-option-label {
+        flex: 1;
+    }
+
+    .conv-search-mode-option-check {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        color: $conv-search-purple-dark;
+        visibility: hidden;
+        opacity: 0;
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .conv-search-mode-switcher {
+        display: none;
+    }
+}
+
+// --- Resize handles ----------------------------------------------------------
+.conv-search-resize-handle {
+    display: none;
+    position: absolute;
+    background: transparent;
+    z-index: 3;
+}
+
+.conv-search-sidebar.mode-sidebar .conv-search-resize-handle--left,
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
+    display: block;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 8px;
+    cursor: col-resize;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 1px;
+        background: transparent;
+        transition: background 0.15s ease;
+    }
+}
+
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--top {
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    cursor: row-resize;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        height: 1px;
+        background: transparent;
+        transition: background 0.15s ease;
+    }
+}
+
+// z-index above the edge handles so the diagonal cursor wins in the overlap.
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--corner {
+    display: block;
+    top: 0;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    cursor: nwse-resize;
+    z-index: 4;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        width: 6px;
+        height: 6px;
+        border-top: 1px solid transparent;
+        border-left: 1px solid transparent;
+        transition: border-color 0.15s ease;
+    }
+}
+
+// Lit-state per axis. JS adds `docs-ai-panel-resizing-{width,height}` on
+// the body during a drag, so only the relevant rails light up.
+.conv-search-resize-handle--left:hover::after,
+body.docs-ai-panel-resizing-width .conv-search-resize-handle--left::after {
+    background: $conv-search-purple;
+}
+
+.conv-search-resize-handle--top:hover::after,
+body.docs-ai-panel-resizing-height .conv-search-resize-handle--top::after {
+    background: $conv-search-purple;
+}
+
+.conv-search-resize-handle--corner:hover::after,
+body.docs-ai-panel-resizing-width.docs-ai-panel-resizing-height .conv-search-resize-handle--corner::after {
+    border-top-color: $conv-search-purple;
+    border-left-color: $conv-search-purple;
+}
+
+// Inset past the 20px corner radius so edge handles align with the straight
+// portions of the edges; the corner handle owns the rounded section itself.
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--left {
+    top: 20px;
+    bottom: 20px;
+}
+.conv-search-sidebar.mode-floating .conv-search-resize-handle--top {
+    left: 20px;
+    right: 20px;
+}
+
+// Kill transitions during a drag so the resize tracks the pointer 1:1.
+body.docs-ai-panel-resizing {
+    user-select: none;
+    transition: none !important;
+
+    .conv-search-sidebar {
+        transition: none !important;
+    }
+}
+
+// --- Compact-mode tweaks (floating + sidebar) --------------------------------
+.conv-search-sidebar.mode-floating,
+.conv-search-sidebar.mode-sidebar {
+    .conv-search-header {
+        padding: 12px 16px;
+    }
+
+    .conv-search-new {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        border-radius: 50%;
+        gap: 0;
+
+        span {
+            display: none;
+        }
+    }
+
+    // Tighten the footer/disclaimer so the answer area gets more room.
+    .conv-search-footer {
+        padding: 0 16px 14px;
+    }
+
+    .conv-search-input-container {
+        padding: 8px 8px 8px 16px;
+    }
+
+    .conv-search-input {
+        font-size: 16px;
+        line-height: 24px;
+        min-height: 24px;
+    }
+
+    .conv-search-disclaimer {
+        padding-top: 8px;
+        font-size: 12px;
+        line-height: 16px;
+        text-align: center;
+    }
+
+    // Pull messages in to align with the footer's input box.
+    .conv-search-message-user,
+    .conv-search-message-assistant,
+    .conv-search-loading-state {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .conv-search-empty-state {
+        padding: 24px 16px 16px;
+    }
+
+    // Cap chips to the panel width and ellipsis-truncate so they never overflow.
+    .conv-search-suggestion {
+        max-width: 100%;
+        min-width: 0;
+        font-size: 14px;
+        line-height: 20px;
+        height: 32px;
+
+        span {
+            display: block;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
     }
 }

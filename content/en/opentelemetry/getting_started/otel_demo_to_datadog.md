@@ -69,7 +69,7 @@ git clone https://github.com/open-telemetry/opentelemetry-demo.git
 
 To send the demo's telemetry data to Datadog you need to add the following components to the OpenTelemetry Collector configuration:
 
-- `Resource Processor` is an `optional` component which is recommended, used to set the `env` tag for Datadog.
+- `Resource Processor` is an `optional` but recommended component used to set the `deployment.environment.name` resource attribute, which Datadog maps to the `env` tag.
 - `Datadog Connector` is responsible for computing Datadog APM Trace Metrics.
 - `Datadog Exporter` is responsible for exporting Traces, Metrics and Logs to Datadog.
 - `Datadog Extension` is an `optional` component which allows you to view OpenTelemetry Collector configuration within infrastructure monitoring. (Read more at [Datadog Extension][13]).
@@ -320,15 +320,15 @@ After a couple of seconds you can see data arriving in Datadog.
 
 View all services that are part of the OTel Demo:
 
-1. Go to [**APM** > **Catalog**][11].
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Catalog{{< /ui >}}][11].
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog.png" alt="View Catalog page with list of services from OpenTelemetry demo application" style="width:90%;" >}}
 
-2. Select **Map** to see how the services are connected. Change the **Map layout** to **Cluster** or **Flow** to view the map in different modes.
+2. Select {{< ui >}}Map{{< /ui >}} to see how the services are connected. Change the {{< ui >}}Map layout{{< /ui >}} to {{< ui >}}Cluster{{< /ui >}} or {{< ui >}}Flow{{< /ui >}} to view the map in different modes.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_flow.png" alt="View Service Map Flow with all services connected" style="width:90%;" >}}
 
-3. Select the **Catalog** view, then select a service to view a performance summary in the side panel.
+3. Select the {{< ui >}}Catalog{{< /ui >}} view, then select a service to view a performance summary in the side panel.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/software_catalog_service.png" alt="View summary of performance and setup guidance from specific service" style="width:90%;" >}}
 
@@ -336,7 +336,7 @@ View all services that are part of the OTel Demo:
 
 Explore traces received from the OTel Demo:
 
-1. From **Performance** > **Setup Guidance**, click **View Traces** to open the Trace Explorer, with the selected service applied as a filter.
+1. From {{< ui >}}Performance{{< /ui >}} > {{< ui >}}Setup Guidance{{< /ui >}}, click {{< ui >}}View Traces{{< /ui >}} to open the Trace Explorer, with the selected service applied as a filter.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/traces_view.png" alt="Traces view with all indexed spans for checkout service" style="width:90%;" >}}
 
@@ -356,9 +356,9 @@ Datadog allows you to filter and group the received OpenTelemetry data. For exam
 
 The OTel Demo sends `user.id` as span tags, so you can use this to filter all transactions triggered by the user:
 
-1. From **Info** in the side panel, hover over the line with the user ID, click the **cog** icon, and select **filter by @app.user.id:<user_id>**.
+1. From {{< ui >}}Info{{< /ui >}} in the side panel, hover over the line with the user ID, click the {{< ui >}}cog{{< /ui >}} icon, and select {{< ui >}}filter by @app.user.id:<user_id>{{< /ui >}}.
 
-2. Remove any previous filters, leaving only **@app.user.id** applied to view all transactions containing spans with the specified user ID.
+2. Remove any previous filters, leaving only {{< ui >}}@app.user.id{{< /ui >}} applied to view all transactions containing spans with the specified user ID.
 
 {{< img src="/getting_started/opentelemetry/otel_demo/trace_query.png" alt="Trace query filtering all spans that contain a specific app.user.id" style="width:90%;" >}}
 

@@ -57,5 +57,5 @@ Redmine インテグレーションには、サービスのチェック機能は
 ご不明な点は、[Datadog のサポートチーム][3]までお問合せください。
 
 [1]: https://app.datadoghq.com/integrations/redmine
-[2]: https://docs.datadoghq.com/ja/service_management/events/explorer/
+[2]: https://docs.datadoghq.com/ja/events/explorer/
 [3]: https://docs.datadoghq.com/ja/help/

@@ -16,7 +16,7 @@ further_reading:
 
 ## Overview
 
-RUM Recommendations highlight opportunities to improve your application's frontend availability, performance, and reliability. Each view in your application has its own set of recommendations, available from the [Optimization page][2].
+RUM Recommendations highlight opportunities to improve your application's frontend availability, performance, and reliability. Each view in your application has its own set of recommendations, available from the [{{< ui >}}Optimization{{< /ui >}} page][2].
 
 {{< img src="real_user_monitoring/browser/optimizing_performance/rum-recommendations-overview.mp4" alt="Reviewing a RUM recommendation by Bits AI to review a session replay and alleviate user frustration." video="true">}}
 

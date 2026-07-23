@@ -70,7 +70,7 @@ In the Databricks workspace:
     ```
     - See Databricks' [Create a Unity Catalog Managed Table][3] documentation for more information.
 
-The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for **Table Name** when you set up the Observability Pipelines Databricks destination.
+The fully qualified table name is `catalog.schema.table`, for example `main.obs_pipelines.apache_common_logs`. This is the value you enter for {{< ui >}}Table Name{{< /ui >}} when you set up the Observability Pipelines Databricks destination.
 
 ### Set up a service principal
 
@@ -101,13 +101,15 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 <div class="alert alert-warning">Databricks (Zerobus) doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
 
-<div class="alert alert-danger">Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
 
-1. Enter the **Ingestion Endpoint** for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
-1. Enter the **Table Name** in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.
-1. Enter the **Unity Catalog Endpoint** for your Databricks workspace, such as `https://<workspace>.cloud.databricks.com`. The Worker uses this endpoint to read the table's schema.
-1. In the **Auth - Client ID** field, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
-1. In the **Auth - Client Secret** field, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
+{{% observability_pipelines/secrets_env_var_note %}}
+
+1. Enter the {{< ui >}}Ingestion Endpoint{{< /ui >}} for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
+1. Enter the {{< ui >}}Table Name{{< /ui >}} in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.
+1. Enter the {{< ui >}}Unity Catalog Endpoint{{< /ui >}} for your Databricks workspace, such as `https://<workspace>.cloud.databricks.com`. The Worker uses this endpoint to read the table's schema.
+1. In the {{< ui >}}Auth - Client ID{{< /ui >}} field, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
+1. In the {{< ui >}}Auth - Client Secret{{< /ui >}} field, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
 
 ### Optional settings
 
@@ -154,6 +156,10 @@ To convert timestamps in string format to timestamp format:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][14] and [destination buffer metrics][15] emitted by all destinations, see the [Pipelines Usage Metrics][16] documentation. To filter or group by Databricks destination metrics, use the tag `component_type:databricks_zerobus`.
+
 ## How the destination works
 
 ### Event batching
@@ -177,3 +183,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [11]: https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type
 [12]: /observability_pipelines/processors/custom_processor#setup
 [13]: /observability_pipelines/processors/custom_processor/#parse_timestamp
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[16]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

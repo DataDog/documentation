@@ -11,13 +11,9 @@ aliases:
   - /cloudprem/install/gcp_gke/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-This installation setup walks you through deploying Datadog BYOC Logs on Google Kubernetes Engine (GKE).
+This installation setup walks you through deploying Datadog BYOC (Bring Your Own Cloud) Logs on Google Kubernetes Engine (GKE).
 
 BYOC Logs on GKE uses the following Google Cloud services:
 - **Google Kubernetes Engine (GKE)**: Container orchestration platform for running BYOC Logs components

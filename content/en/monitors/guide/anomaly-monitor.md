@@ -67,10 +67,10 @@ Previously, Datadog treated count metrics as gauges, and thus interpolated betwe
 
 Not interpolating between counts makes sense if your count metric is something like errors. However, if you have regularly scheduled jobs that happen every hour, it might make more sense if the metric is not reporting a value of 0.0 between runs. There are two different ways to accomplish this:
 
-1. Set the rollup (found in the advanced options section) to be one hour.
+1. Set the rollup (found in the {{< ui >}}Advanced Options{{< /ui >}} section) to be one hour.
 2. Explicitly set `count_default_zero='false'` using the API.
 
-### How does setting the rollup interval in "Advanced Options" differ from setting it on the query using .rollup()?
+### How does setting the rollup interval in {{< ui >}}Advanced Options{{< /ui >}} differ from setting it on the query using .rollup()?
 
 If the rollup is set explicitly on the query, the rollup interval option for the anomaly monitor is ignored.
 

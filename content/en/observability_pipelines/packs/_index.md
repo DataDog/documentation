@@ -90,15 +90,15 @@ These packs are available:
 To set up packs:
 
 1. Navigate to the [Pipelines][1] page.
-1. Click **Packs**.
+1. Click {{< ui >}}Packs{{< /ui >}}.
 1. Click the pack you want to set up.
 1. You can either create a new pipeline from the pack or add the pack to an existing pipelines.
-    - If you clicked **Add to New Pipeline**, in the new pipeline that was created:
+    - If you clicked {{< ui >}}Add to New Pipeline{{< /ui >}}, in the new pipeline that was created:
         - Click the processor group that was added to see the individual processors that the pack added and edit them as needed. See [Processors][2] for more information.
         - See [Set Up Pipelines][3] for information on setting up the rest of the pipeline.
-    - If you clicked **Add to Existing Pipeline**:
+    - If you clicked {{< ui >}}Add to Existing Pipeline{{< /ui >}}:
         1. Select the pipeline you want to add the pack to.
-        1. Click **Add to Existing Pipeline**.
+        1. Click {{< ui >}}Add to Existing Pipeline{{< /ui >}}.
             1. The pack is added to the last processor group in your pipeline.
             1. Click on the group to review the individual processors and edit them as needed. See [Processors][2] for more information.
 

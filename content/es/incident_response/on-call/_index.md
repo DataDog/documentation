@@ -21,7 +21,7 @@ title: On-Call
 ---
 Datadog On-Call integra seguimiento, envío de alertas y respuesta a incidentes en una sola plataforma.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Descripción general de cómo se enrutan las páginas. Desde un seguimiento, incidente, señal de seguridad o llamada a la API, la página se envía a un equipo (por ejemplo, 'equipo-de-pagos'), luego a reglas de enrutamiento (por ejemplo, basadas en prioridad) y luego a una política de escalamiento. Allí, puede ser enviada a un horario o directamente a un usuario." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="Descripción general de cómo se enrutan las páginas. Desde un seguimiento, incidente, señal de seguridad o llamada a la API, la página se envía a un equipo (por ejemplo, 'equipo-de-pagos'), luego a reglas de enrutamiento (por ejemplo, basadas en prioridad) y luego a una política de escalamiento. Allí, puede ser enviada a un horario o directamente a un usuario." style="width:100%;" >}}
 
 ## Conceptos {#concepts}
 
@@ -35,15 +35,15 @@ Los equipos son grupos configurados dentro de Datadog para manejar tipos especí
 
 **Los equipos** son la unidad organizativa central de Datadog On-Call. Cuando se activa una notificación en Datadog, se envía una **página** al equipo On-Call designado.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notificación que menciona un equipo On-Call." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notificación que menciona un equipo On-Call." style="width:80%;" >}}
 
 Cada equipo posee **políticas de escalamiento** y **horarios**. Las políticas de escalamiento definen cómo se envía una página a varios horarios, como _Operaciones de Checkout - Manejador de Interrupciones_, _Primario_ y _Secundario_ en la siguiente captura de pantalla. Cada equipo también puede configurar **reglas de enrutamiento** para dirigir páginas a diferentes políticas de escalamiento.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="Una política de escalamiento de muestra." style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="Una política de escalamiento de muestra." style="width:80%;" >}}
 
 Un horario define momentos específicos cuando los miembros del equipo están asignados para responder a páginas. Los horarios organizan y gestionan la disponibilidad de los miembros del equipo a través de diferentes zonas horarias y turnos.
 
-{{< img src="service_management/oncall/schedule.png" alt="Un horario de muestra, con múltiples capas para los horarios laborales de JP, EU y US." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="Un horario de muestra, con múltiples capas para los horarios laborales de JP, EU y US." style="width:80%;" >}}
 
 ## Control de acceso granular {#granular-access-control}
 

@@ -114,4 +114,4 @@ The data sources that Database Investigator uses are also exposed through the [D
 
 [1]: /notebooks/
 [2]: /service_management/incident_management/
-[3]: /bits_ai/mcp_server/
+[3]: /mcp_server/

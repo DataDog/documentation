@@ -1,6 +1,6 @@
 ---
 aliases:
-- /es/service_management/events/ingest/
+- /es/events/ingest/
 title: Enviar eventos a Datadog
 ---
 

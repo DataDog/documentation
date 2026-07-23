@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/ingest/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-After installing and configuring BYOC Logs, you need to set up log ingestion to start sending log data from your applications and infrastructure. BYOC Logs supports multiple ingestion methods to accommodate different architectures and requirements.
+After installing and configuring BYOC (Bring Your Own Cloud) Logs, you need to set up log ingestion to start sending log data from your applications and infrastructure. BYOC Logs supports multiple ingestion methods to accommodate different architectures and requirements.
 
 ## Supported log format
 
@@ -43,7 +39,7 @@ BYOC Logs accepts logs as **JSON objects** sent to the `/api/v2/logs` endpoint. 
 The [Datadog Lambda Forwarder][1] can send AWS CloudWatch Logs to BYOC Logs by setting the `DD_URL` environment variable to your BYOC Logs endpoint:
 
 ```
-DD_URL=<CLOUDPREM_HOST>
+DD_URL=<BYOC_LOGS_HOST>
 ```
 
 The forwarder sends logs to `https://<DD_URL>:443/api/v2/logs`. 

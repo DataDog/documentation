@@ -29,8 +29,8 @@ You can use this dashboard to answer the following questions:
 
 It shows:
 
-- **Percentage of tested actions**: Scan your application's overall testing coverage.
-- **Untested actions**: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
+- {{< ui >}}Percentage of tested actions{{< /ui >}}: Scan your application's overall testing coverage.
+- {{< ui >}}Untested actions{{< /ui >}}: Explore the most popular untested user actions with the count of real user interactions and the number of actions covered in browser tests.
 
 {{< img src="synthetics/dashboards/testing_coverage-2.png" alt="Out-of-the-box Synthetics testing coverage dashboard" style="width:100%" >}}
 
@@ -42,11 +42,11 @@ For more information about the data displayed, see [RUM Browser Data Collected][
 
 The RUM Web App Deployment Tracking dashboard helps you identify when a recent deployment is causing performance issues or new errors within your application. To use this feature, make sure that you [add RUM versions to your application][4]. This dashboard shows:
 
-- **Core web vitals**:
+- {{< ui >}}Core web vitals{{< /ui >}}:
   For all views, three browser KPIs are highlighted: Largest Contentful Paint, First Input Delay, and Cumulative Layout Shift. Other performance telemetry, such as Load Time, is also available.
-- **Errors**: 
+- {{< ui >}}Errors{{< /ui >}}: 
   See a count of errors, percentage of views with errors, and explore ongoing issues.
-- **Browser performance telemetry**:
+- {{< ui >}}Browser performance telemetry{{< /ui >}}:
 Compare performance telemetry like loading time, sessions, errors, and load times across different services and versions.
 
 {{< img src="real_user_monitoring/dashboards/dashboard-deployment-web.png" alt="Out-of-the-box web deployment dashboard" style="width:100%" >}}
@@ -59,11 +59,11 @@ To use deployment tracking, make sure to specify an app version when you initial
 
 This dashboard shows:
 
-- **Crashes**: 
+- {{< ui >}}Crashes{{< /ui >}}: 
   Review crash count by version, crash rate by version, and explore ongoing crashes.
-- **Errors**:
+- {{< ui >}}Errors{{< /ui >}}:
   Review error count by version, error rate by version, and explore ongoing errors.
-- **Mobile vitals by version**:
+- {{< ui >}}Mobile vitals by version{{< /ui >}}:
   For all versions, additional mobile KPIs are highlighted: slow renders, frozen frames, application start time, and memory usage.
 
 {{< img src="real_user_monitoring/dashboards/dashboard-deployment-mobile.png" alt="Out-of-the-box mobile deployment dashboard" style="width:100%" >}}

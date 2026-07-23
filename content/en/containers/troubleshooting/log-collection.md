@@ -24,7 +24,7 @@ For [**ECS Fargate**][3] and [**EKS Fargate**][4] based log collection, see thei
 
 In containerized environments, logs are collected by the Datadog Agent in two main ways, **file based** collection and **socket based** collection through the Docker API.
 
-The Docker and Kubernetes documentation default to file based collection as it offers better performance and reliability. Socket based collection can be used in Docker environments as a fallback option. In Kubernetes clusters, socket based collections requires Docker runtime, which is largely is deprecated in most Kubernetes distributions.
+The Docker and Kubernetes documentation default to file-based collection as it offers better performance and reliability. Socket based collection can be used in Docker environments as a fallback option. In Kubernetes clusters, socket based collections requires Docker runtime, which is largely deprecated in most Kubernetes distributions.
 
 In containerized environments, Datadog recommends logging to the `stdout` / `stderr` streams instead of writing to log files that are isolated in the application containers. These streams allow for more automated and reliable collection.
 

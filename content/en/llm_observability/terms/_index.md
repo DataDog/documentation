@@ -1,6 +1,6 @@
 ---
-title: LLM Observability Terms and Concepts
-description: Reference guide for LLM Observability key terms and concepts, including spans, traces, and evaluations.
+title: Agent Observability Terms and Concepts
+description: Reference guide for Agent Observability key terms and concepts, including spans, traces, and evaluations.
 aliases:
     - /tracing/llm_observability/core_concepts
     - /llm_observability/core_concepts
@@ -9,15 +9,15 @@ aliases:
 further_reading:
     - link: '/llm_observability/setup'
       tag: 'Documentation'
-      text: 'Learn how to set up LLM Observability'
+      text: 'Learn how to set up Agent Observability'
     - link: '/llm_observability/evaluations'
       tag: 'Guide'
-      text: 'Evaluation options for LLM Observability'
+      text: 'Evaluation options for Agent Observability'
 ---
 
 ## Overview
 
-The LLM Observability UI provides many tools to troubleshoot conversation performance and correlate data throughout the product, enabling you to find and resolve issues in large language models (LLMs).
+The Agent Observability UI provides many tools to troubleshoot conversation performance and correlate data throughout the product, enabling you to find and resolve issues in large language models (LLMs).
 
 | Concept | Description |
 |---|---|
@@ -39,9 +39,9 @@ A span consists of the following attributes:
 
 ### Span kinds
 
-LLM Observability categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.
+Agent Observability categorizes spans by their *span kind*, which defines the type of work the span is performing. This can give you more granular insights on what operations are being performed by your LLM application.
 
-LLM Observability supports the following span kinds:
+Agent Observability supports the following span kinds:
 
 | Kind      | Represents   | Valid Root span?   | Examples |
 |-----------|--------------|--------------|-------------|
@@ -53,7 +53,7 @@ LLM Observability supports the following span kinds:
 | [Embedding](#embedding-span) | A call to a model or function that returns an embedding. | No | A call to text-embedding-ada-002. |
 | [Retrieval](#retrieval-span) | A data retrieval operation from an external knowledge base. | No | A call to a vector database that returns an array of ranked documents. |
 
-For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the LLM Observability SDK for Python documentation.
+For instructions on creating spans from your application, including code examples, see [Tracing spans][2] in the Agent Observability SDK for Python documentation.
 
 #### LLM span
 
@@ -107,7 +107,7 @@ Retrieval spans typically do not have child spans, as they represent a standalon
 
 ## Traces
 
-LLM Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can use the following features of LLM Observability:
+Agent Observability supports observability for LLM applications with varying complexity. Based on the structure and complexity of your traces, you can use the following features of Agent Observability:
 
 ### LLM Inference Monitoring
 
@@ -115,7 +115,7 @@ LLM inference traces are composed of a single LLM span.
 
 {{< img src="llm_observability/llm-observability-llm-span.png" alt="A single LLM span" style="width:100%;" >}}
 
-Tracing individual LLM inferences unlocks basic LLM Observability features, allowing you to:
+Tracing individual LLM inferences unlocks basic Agent Observability features, allowing you to:
 
 1. Track inputs and outputs to your LLM calls.
 2. Track token usage, error rates, and latencies for your LLM calls.
@@ -152,14 +152,14 @@ For a detailed example, see the [LLM Monitoring Jupyter notebook][9] which demon
 
 ## Evaluations
 
-LLM Observability offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
+Agent Observability offers managed evaluations and quality checks to evaluate the quality, safety, and effectiveness of your LLM conversations. With [evaluations][11], you can understand the performance of conversations and enhance your LLM application's responses. This improves the user experience and ensures valuable, accurate outputs.
 
 Datadog provides a variety of options for your evaluations:
 - Use [managed evaluations][12] for your traces
-- [Submit custom evaluations][6] to LLM Observability
+- [Submit custom evaluations][6] to Agent Observability
 - Integrate with frameworks like [NeMo][13]
 
-In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with LLM Observability, so you can ensure any sensitive data in your input and output is scanned and redacted.
+In addition, Datadog's [Sensitive Data Scanner][5] is natively integrated with Agent Observability, so you can ensure any sensitive data in your input and output is scanned and redacted.
 
 ## Further Reading
 

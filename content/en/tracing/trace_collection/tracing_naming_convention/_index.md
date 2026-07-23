@@ -53,7 +53,7 @@ The list of added tags can be found for [Kubernetes][7], [Docker][8] and [Amazon
 
 Tags are usually enriched from other data sources like tags sourced from host, container, or Catalog. These tags are added to the span to describe the context. For example, tags might describe the properties of the host and the container the span is coming from, or the properties of the services the span is emitted from.
 
-To find span tags in Datadog, go to the **Infrastructure** tab in the Trace side panel:
+To find span tags in Datadog, go to the {{< ui >}}Infrastructure{{< /ui >}} tab in the Trace side panel:
 
 {{< img src="/tracing/attributes/span-tags.png" alt="Span tags on Infrastructure tab." style="width:100%;" >}}
 
@@ -67,7 +67,7 @@ Span attributes are the content of the span, collected with automatic or manual 
 
 To query span attributes, use the `@` character followed by the attribute name in the search box. For example, `@http.url`.
 
-To find span attributes in Datadog, go to the **Info** tab in the Trace side panel:
+To find span attributes in Datadog, go to the {{< ui >}}Info{{< /ui >}} tab in the Trace side panel:
 
 {{< img src="/tracing/attributes/span-attributes.png" alt="Span attributes on Info tab." style="width:100%;" >}}
 

@@ -110,7 +110,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt a SARIF upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
 If you are using Datadog’s analyzer, [diff-aware scanning][21] is enabled by default. If you are running the tool within your CI pipeline, make sure that `datadog-ci` runs **at the root** of the repository being analyzed.
 
@@ -244,7 +244,7 @@ After updating either file on your default branch, it may take up to six hours f
 
 ### Results are not being surfaced in the Datadog UI
 
-**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [Repository Settings][4]. Afterwards, uploads from your non-default branches will succeed.
+**If you are running Code Security on a non-GitHub repository**, ensure that the first scan is ran on your default branch. If your default branch is not one of `master`, `main`, `default`, `stable`, `source`, `prod`, or `develop`, you must attempt an SBOM upload for your repository and then manually override the default branch in-app under [{{< ui >}}Repository Settings{{< /ui >}}][4]. Afterwards, uploads from your non-default branches will succeed.
 
 ### No package detected for C# projects
 
@@ -276,15 +276,15 @@ To ensure data quality, Datadog applies validation rules during SBOM processing.
 
 ### No vulnerabilities detected by Software Composition Analysis
 
-There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] **Security** view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
+There are a series of steps that must run successfully for vulnerability information to appear either in the [Catalog][16] {{< ui >}}Security{{< /ui >}} view or in the [Vulnerabilities explorer][12]. It is important to check each step when investigating this issue.
 
 #### Confirming runtime detection is enabled
 
 If you have enabled Runtime Software Composition Analysis (SCA) on your services, you can use the metric `datadog.appsec.risk_management.sca.host_instance` to check if it is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.sca.host_instance`. If the metric doesn't exist, then there are no services running Runtime Software Composition Analysis (SCA). If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.appsec.risk_management.sca.host_instance`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
@@ -298,6 +298,10 @@ See the Application Security product set up documentation to validate you you ar
 
 Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRACE_TELEMETRY_ENABLED` for Node.js) is set to `true`, or the corresponding system property for your language is enabled. For example in Java: `-Ddd.instrumentation.telemetry.enabled=true`.
 
+### Bits Code remediation fails or produces incomplete fixes
+
+Bits Code requires internet access to apply library upgrades when remediating SCA findings. If Bits Code fails to generate a fix or produces an incomplete patch, confirm that your internet access policy allows Bits Code to reach the package registries required for your language (for example, `registry.npmjs.org` for JavaScript or `pypi.org` for Python). See [Configure internet access][30] for more information.
+
 ## Runtime Code Analysis (IAST)
 
 ### Confirm IAST is enabled
@@ -305,9 +309,9 @@ Ensure the `DD_IAST_ENABLED` environment variable is set to `true` or the corres
 
 If you have enabled Runtime Code Analysis (IAST) on your services, you can use the metric `datadog.appsec.risk_management.iast.host_instance` to check if it is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.appsec.risk_management.iast.host_instance`. If the metric doesn't exist, then there are no services running Runtime Code Analysis (IAST). If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.appsec.risk_management.iast.host_instance`, check the [in-app instructions][20] to confirm that all steps for the initial setup are complete.
 
@@ -321,7 +325,7 @@ A **committer** is an active Git contributor identified by the `author_email` fi
 
 A committer is counted toward billing if they make **at least three commits in a calendar month** in repositories where Code Security is enabled.
 
-Each unique `author_email` counts as a separate committer. Multiple commits with the same email count as one committer, while commits with different email addresses count separately.
+Multiple commits with the same `author_email` count as one committer. By default, commits with different email addresses count separately. For GitHub repositories that meet the requirements in [Deduplicating committers across email addresses](#deduplicating-committers-across-email-addresses), multiple emails belonging to the same GitHub user are counted as one committer.
 
 ### How email addresses are counted as committers
 Committers are identified based on the normalized `author_email` value in Git commit metadata.
@@ -332,10 +336,19 @@ Commits using `@users.noreply.github.com` are not automatically excluded. These 
 
 For clarification on how committers are counted in your environment, [contact Datadog Support][1].
 
+### Deduplicating committers across email addresses
+In some cases, a single developer's commits can be split across multiple Git author emails. For example, a developer might set a different email with `git config user.email` in different repositories. If more than one of those emails passes the three-commit billing threshold, each counts as a separate committer.
+
+For repositories hosted on GitHub, Datadog can map each Git author email to the underlying GitHub user so that the developer is counted once, even when they push under different emails. This requires a Datadog [GitHub App][28] installed on the affected repositories with the `Contents: Read` permission.
+
+This mapping is available for GitHub repositories only. Repositories hosted on GitLab, Azure DevOps, or Bitbucket are not deduplicated.
+
+If your committer count looks higher than expected for GitHub repositories, check that the Datadog GitHub App is installed on those repositories with the `Contents: Read` permission. You can review your installation from the [GitHub integration tile][29].
+
 ## Disabling Code Security capabilities
 ### Disabling static repository scanning
 To disable scanning Static Code Analysis (SAST) or static Software Composition Analysis:
-- If you are scanning your repositories through Datadog-hosted scanning, navigate to Code Security [**Setup**][17], click **Enable scanning for your repositories**, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
+- If you are scanning your repositories through Datadog-hosted scanning, navigate to Code Security [{{< ui >}}Setup{{< /ui >}}][17], click {{< ui >}}Enable scanning for your repositories{{< /ui >}}, and disable the toggles previously enabled for scanning either all connected repositories or each repository.
 - If you are scanning source code repositories through your CI pipelines, remove the relevant job(s) from your CI pipelines.
 
 ### Disabling runtime SCA on your services
@@ -354,12 +367,12 @@ If you enabled SCA through the <code>DD_APPSEC_SCA_ENABLED</code> environment va
 
 To disable SCA through the UI, you can:
 
-* Go to the [Code Security Setup page][1] and select **Activate runtime detection of library vulnerabilities"**. In this table, you can disable services that were previously activated.
+* Go to the [Code Security Setup page][1] and select {{< ui >}}Activate runtime detection of library vulnerabilities{{< /ui >}}. In this table, you can disable services that were previously activated.
 
 or
 
-* Go to [Services][2], select **Software Composition Analysis (SCA)**. Under **Coverage**, hover over a service's SCA icon and then click **Deactivate**.
-* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under **Bulk Actions** select **Deactivate Software Composition Analysis (SCA) on x services**.
+* Go to [Services][2], select {{< ui >}}Software Composition Analysis (SCA){{< /ui >}}. Under {{< ui >}}Coverage{{< /ui >}}, hover over a service's SCA icon and then click {{< ui >}}Deactivate{{< /ui >}}.
+* To disable Software Composition Analysis on your services in bulk, click the check box in the list header and then under {{< ui >}}Bulk Actions{{< /ui >}} select {{< ui >}}Deactivate Software Composition Analysis (SCA) on x services{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/security/configuration/code-security/setup
 [2]: https://app.datadoghq.com/security/code-security/inventory/services
@@ -402,3 +415,6 @@ To disable IAST, remove the `DD_IAST_ENABLED=true` environment variable from you
 [25]: /security/code_security/dev_tool_int/pull_request_comments/
 [26]: /pr_gates/
 [27]: https://github.com/DataDog/datadog-sbom-generator/releases
+[28]: /integrations/github/
+[29]: https://app.datadoghq.com/integrations/github/
+[30]: /bits_ai/bits_code/setup/#configure-internet-access

@@ -105,7 +105,7 @@ Les [checks custom][11], ou checks custom d'Agent, vous permettent d'envoyer des
 
 {{< whatsnext desc="Familiarisez-vous avec les différents types de données que vous pouvez envoyer à Datadog et avec leur méthode d'envoi :" >}}
     {{< nextlink href="/metrics" >}}<u>Métriques custom</u> : plongez au cœur des métriques custom de Datadog et découvrez les différents types de métriques, ce qu'ils représentent, comment les envoyer et leur rôle au sein de l'écosystème Datadog.{{< /nextlink >}}
-    {{< nextlink href="service_management/events/guides/" >}}<u>Événements</u> : découvrez comment envoyer des événements à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
+    {{< nextlink href="events/guides/" >}}<u>Événements</u> : découvrez comment envoyer des événements à Datadog avec des checks custom d'Agent, DogStatsD ou l'API Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Checks de service</u> : apprenez à envoyer le statut de disponibilité d'un service spécifique à Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 

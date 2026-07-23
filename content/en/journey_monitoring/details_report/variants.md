@@ -1,6 +1,5 @@
 ---
 title: Journey Variants
-private: true
 description: Journey variants are versions of a journey that contain a unique sequence of intermediate steps between the journey's start and end.
 further_reading:
 - link: "/journey_monitoring/"
@@ -16,6 +15,10 @@ further_reading:
   tag: 'Documentation'
   text: 'Learn about journey uptime'
 ---
+
+{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
+Journey Monitoring is in Preview.
+{{< /callout >}}
 
 ## Overview
 

@@ -22,7 +22,7 @@ A process check monitor watches the status produced by the Agent check `process.
 
 ## Monitor creation
 
-To create a [process check monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Process Check*.
+To create a [process check monitor][2] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}Process Check{{< /ui >}}.
 
 ### Pick a process
 
@@ -59,7 +59,7 @@ A cluster alert calculates the percent of process checks in a given status and c
 
 Set up a cluster alert:
 
-1. Decide whether or not to group your process checks according to a tag. `Ungrouped` calculates the status percentage across all sources. `Grouped` calculates the status percentage on a per group basis.
+1. Decide whether or not to group your process checks according to a tag. {{< ui >}}Ungrouped{{< /ui >}} calculates the status percentage across all sources. {{< ui >}}Grouped{{< /ui >}} calculates the status percentage on a per group basis.
 
 2. Select the percentage for alert and warn thresholds. Only one setting (alert or warn) is required.
 
@@ -77,7 +77,7 @@ See the [Monitor configuration][3] documentation for information on [No data][4]
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][7] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][7] page.
 
 ## Further Reading
 

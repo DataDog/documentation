@@ -40,7 +40,7 @@ further_reading:
   text: "How we created a single app to automate repetitive tasks with Datadog Workflow Automation, Datastore, and App Builder"
 - link: "https://www.datadoghq.com/blog/datadog-agent-builder/"
   tag: "Blog"
-  text: "Introducing Datadog Agent Builder: Build agentic workflows for alert response and remediation"
+  text: "Introducing Bits Agent Builder: Build agentic workflows for alert response and remediation"
 ---
 
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/852419580/rendition/1080p/file.mp4?loc=external&signature=fb7ae8df018e24c9f90954f62ff3217bc1b904b92e600f3d3eb3f5a9d143213e" poster="/images/poster/workflow_automation.png" >}}
@@ -63,7 +63,7 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 
 The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 
 ## Examples
 

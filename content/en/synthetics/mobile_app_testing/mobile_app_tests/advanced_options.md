@@ -35,7 +35,7 @@ By default, mobile app tests use the Datadog locator system. When a test searche
 
 These points of reference become a set of locators, each of which uniquely define the element. You should only use custom selectors in edge cases because the Datadog locator system enables tests to be self-maintaining.
 
-Custom selectors are created by performing a [step in the recorder][1] (such as a **tap**, **double tap**, or **open deep link**) on any element of your page. This specifies the kind of step that needs to be performed.
+Custom selectors are created by performing a [step in the recorder][1] (such as a {{< ui >}}tap{{< /ui >}}, {{< ui >}}double tap{{< /ui >}}, or {{< ui >}}open deep link{{< /ui >}}) on any element of your page. This specifies the kind of step that needs to be performed.
 
 Optionally, under advanced options, use handlebars (`{{`) syntax to insert dynamic content. A pre-populated dropdown list of variables is shown:
 
@@ -51,15 +51,15 @@ You can customize this timeout up to 60 seconds if you want your test to wait fo
 
 ## Optional step
 
-In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select **Continue with test if this step fails**. If the step fails after the amount of minutes specified on the timeout option, then the mobile app test moves on and executes the next step.
+In some cases, such as in the event of a pop-up, you may want to make some steps optional. To configure this option, select {{< ui >}}Continue with test if this step fails{{< /ui >}}. If the step fails after the amount of minutes specified on the timeout option, then the mobile app test moves on and executes the next step.
 
 {{< img src="mobile_app_testing/failure_behavior.png" alt="Choose if the test should fail or continue if the test step fails" style="width:50%" >}}
 
-Optionally, click **Consider entire test as failed if this step fails** to ensure important steps are performing.
+Optionally, click {{< ui >}}Consider entire test as failed if this step fails{{< /ui >}} to ensure important steps are performing.
 
 ## Prevent screenshot capture
 
-You can prevent a step screenshot from being captured at test execution by clicking **Do not capture screenshot for this step**. 
+You can prevent a step screenshot from being captured at test execution by clicking {{< ui >}}Do not capture screenshot for this step{{< /ui >}}. 
 
 {{< img src="mobile_app_testing/no_screenshots.png" alt="Do not capture a screenshot for this test step" style="width:50%" >}}
 
@@ -79,7 +79,7 @@ The advanced options for [subtests][3] allow you to set the behavior of your mob
 
 ### Set failure behavior
 
-Click **Continue with test if this step fails** to ensure your mobile app test continues if the subtest fails.
+Click {{< ui >}}Continue with test if this step fails{{< /ui >}} to ensure your mobile app test continues if the subtest fails.
 
 ## Further reading
 

@@ -23,7 +23,7 @@ Before you begin, you need:
 
 To send RUM data from your Apple platform application to Datadog, complete the following steps.
 
-{% stepper %}
+{% stepper level="h4" %}
 
 {% step title="Add the iOS SDK as a dependency" %}
 Add the iOS SDK to your project using your preferred package manager. Datadog recommends using Swift Package Manager (SPM).
@@ -388,6 +388,42 @@ Datadog.initialize(
 DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
 configuration.service = @"<service name>";
 configuration.site = [DDSite ap2];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
+{% site-region region="uk1" %}
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+import DatadogCore
+
+Datadog.initialize(
+  with: Datadog.Configuration(
+    clientToken: "<client token>",
+    env: "<environment>",
+    site: .uk1,
+    service: "<service name>"
+  ),
+  trackingConsent: trackingConsent
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+@import DatadogCore;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
 
 [DDDatadog initializeWithConfiguration:configuration
                        trackingConsent:trackingConsent];

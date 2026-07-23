@@ -174,6 +174,38 @@ RETURNS NULL ON NULL INPUT
 SECURITY DEFINER;
 ```
 
+### Create the column statistics function
+
+Create the following function **in every database** to enable the Agent to collect column-level table statistics from `pg_stats`:
+
+```SQL
+CREATE OR REPLACE FUNCTION datadog.column_statistics()
+RETURNS TABLE (
+    schemaname name, tablename name, attname name,
+    n_distinct real, avg_width integer, null_frac real,
+    inherited boolean, correlation real, most_common_freqs real[]
+) AS
+$$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
+LANGUAGE sql
+SECURITY DEFINER
+SET search_path = pg_catalog, pg_temp;
+```
+
+After the function exists, enable collection in your Postgres instance config:
+
+```yaml
+instances:
+  - dbm: true
+    ...
+    collect_column_statistics:
+      enabled: true
+```
+
+For tuning options, see [Advanced Configuration][16].
+
 ### Securely store your password
 {{% dbm-secret %}}
 
@@ -313,15 +345,15 @@ After you enable logging collection:
 3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
 
    ```conf
-    auto_explain.log_format: "json"
-    auto_explain.log_min_duration: "1000"
-    auto_explain.log_analyze: "on"
-    auto_explain.log_buffers: "on"
-    auto_explain.log_timing: "off"
-    auto_explain.log_triggers: "on"
-    auto_explain.log_verbose: "on"
-    auto_explain.log_nested_statements: "on"
-    auto_explain.sample_rate: "1"
+    auto_explain.log_format = 'json'
+    auto_explain.log_min_duration = 1000
+    auto_explain.log_analyze = 'on'
+    auto_explain.log_buffers = 'on'
+    auto_explain.log_timing = 'off'
+    auto_explain.log_triggers = 'on'
+    auto_explain.log_verbose = 'on'
+    auto_explain.log_nested_statements = 'on'
+    auto_explain.sample_rate = 1
    ```
 
 4. [Restart the Agent][10].
@@ -356,5 +388,6 @@ If you have installed and configured the integrations and Agent as described and
 [13]: /agent/configuration/agent-commands/#agent-status-and-information
 [14]: https://app.datadoghq.com/databases
 [15]: /database_monitoring/troubleshooting/?tab=postgres
+[16]: /database_monitoring/setup_postgres/advanced_configuration/#configuring-column-statistics-collection
 [17]: https://www.postgresql.org/docs/current/sql-explain.html
 [18]: https://www.postgresql.org/docs/current/auto-explain.html

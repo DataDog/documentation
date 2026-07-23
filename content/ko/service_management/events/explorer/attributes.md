@@ -1,7 +1,7 @@
 ---
 disable_toc: false
 further_reading:
-- link: /service_management/events/explorer/facets
+- link: /events/explorer/facets
   tag: 설명서
   text: 이벤트 패싯에 대해 알아보기
 - link: logs/processing/pipelines
@@ -38,4 +38,4 @@ title: 예약된 속성
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /ko/logs/log_configuration/processors/?tab=ui#remapper
-[2]: /ko/service_management/events/explorer/facets
+[2]: /ko/events/explorer/facets

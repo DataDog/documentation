@@ -13,11 +13,10 @@ further_reading:
 - link: "/tracing/trace_collection/custom_instrumentation/rust"
   tag: "Documentation"
   text: "Custom Instrumentation"
+- link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
+  tag: "Learning Center"
+  text: "Configure and manage the APM SDK for your applications"
 ---
-
-{{< callout header="false" btn_hidden="true"  >}}
-    The Datadog Rust SDK is in Preview.
-{{< /callout >}}
 
 <div class="alert alert-info">
 The Rust SDK does not provide automatic instrumentation. Tracing is achieved by manually instrumenting your application using the OpenTelemetry API.

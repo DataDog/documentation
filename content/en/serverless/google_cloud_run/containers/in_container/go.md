@@ -79,7 +79,7 @@ go get github.com/DataDog/dd-trace-go/contrib/net/http/v2
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" in_container="true" %}}
 
 ## Further reading
 

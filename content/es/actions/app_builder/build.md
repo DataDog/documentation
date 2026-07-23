@@ -24,7 +24,7 @@ Puedes crear una aplicación o editar aplicaciones existentes desde la página d
 
 En la página de App Builder, puedes acceder a tus aplicaciones y filtrarlas. Pasa el cursor sobre una aplicación para ver las opciones de editar, eliminar, ver o clonar la aplicación. También puedes activar la opción **My apps** (Mis aplicaciones) para ver únicamente las aplicaciones que has creado:
 
-{{< img src="service_management/app_builder/app-builder-my-apps-2025-11-19.png" alt="Página de App Builder con filtro aplicado para mostrar únicamente 'My apps' (Mis aplicaciones)" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-my-apps-2025-11-19.png" alt="Página de App Builder con filtro aplicado para mostrar únicamente 'My apps' (Mis aplicaciones)" style="width:100%;" >}}
 
 ## Crear una aplicación
 
@@ -69,7 +69,7 @@ Para iterar en una aplicación existente:
 
 1. En [App Builder][1], haz clic en **New App** (Nueva aplicación).
 1. Para cambiar el nombre y la descripción de la aplicación, haz clic en su nombre.
-1. Para añadir un [componente de interfaz de usuario](#app-canvas-and-components) al lienzo de la aplicación, haz clic en el signo más ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes) y, luego, haz clic en el componente o arrástralo hasta el lienzo.
+1. Para añadir un [componente de interfaz de usuario](#app-canvas-and-components) al lienzo de la aplicación, haz clic en el signo más ({{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes) y, luego, haz clic en el componente o arrástralo hasta el lienzo.
 1. Utiliza [consultas][12] para rellenar o interactuar con tu lienzo.
 1. Para guardar la aplicación, haz clic en **Save as New App** (Guardar como nueva aplicación).
 1. Para obtener una vista previa de la aplicación, haz clic en **Preview** (Vista previa). Haz clic en **Edit** (Editar), en la pantalla de vista previa, para volver a la vista de configuración.
@@ -87,7 +87,7 @@ Personalización básica:
 
 ### Lienzo y componentes de una aplicación
 
-El lienzo de la aplicación representa la interfaz gráfica con la que interactúan los usuarios. Puedes arrastrar y soltar componentes para moverlos por el lienzo. Para ver todos los componentes disponibles, haz clic en el signo más ({{< img src="service_management/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes).
+El lienzo de la aplicación representa la interfaz gráfica con la que interactúan los usuarios. Puedes arrastrar y soltar componentes para moverlos por el lienzo. Para ver todos los componentes disponibles, haz clic en el signo más ({{< img src="actions/app_builder/components-icon.png" inline="true" width="30px">}}) para abrir la pestaña **Components** (Componentes).
 
 Cada componente cuenta con una lista de opciones de configuración correspondientes que controlan la forma en que los usuarios interactúan con tu aplicación. Por ejemplo, el componente **Text Input** (Entrada de texto) te permite establecer un valor predeterminado, el texto de un parámetro y una etiqueta (label). El componente **Button** (Botón) incluye una etiqueta y un evento que se activa cuando se pulsa el botón. Los componentes también cuentan con la sección **Appearance** (Aspecto) que cambia el aspecto y el funcionamiento de los componentes. Por ejemplo, puedes desactivar un botón o controlar su visibilidad.
 
@@ -117,11 +117,11 @@ La etiqueta aparece en la línea correspondiente a esta aplicación en la lista 
 
 Para marcar una aplicación como favorita y anclarla a la parte superior de tu lista de aplicaciones, haz clic en el icono de estrella que aparece junto al nombre de la aplicación en [lista de aplicaciones][14]:
 
-{{< img src="service_management/app_builder/app-list-star.png" alt="Una lista de aplicaciones con cuatro aplicaciones, ninguna de las cuales está marcada con una estrella." style="width:40%;" >}}
+{{< img src="actions/app_builder/app-list-star.png" alt="Una lista de aplicaciones con cuatro aplicaciones, ninguna de las cuales está marcada con una estrella." style="width:40%;" >}}
 
 Cuando actualices la página, la aplicación marcada con una estrella aparecerá en una sección en la parte superior de tu lista de aplicaciones:
 
-{{< img src="service_management/app_builder/app-list-with-favorited-app.png" alt="Una lista de aplicaciones con cuatro aplicaciones, una de las cuales está marcada con una estrella y anclada en la parte superior de la lista." style="width:40%;" >}}
+{{< img src="actions/app_builder/app-list-with-favorited-app.png" alt="Una lista de aplicaciones con cuatro aplicaciones, una de las cuales está marcada con una estrella y anclada en la parte superior de la lista." style="width:40%;" >}}
 
 ## Ver el historial de versiones de la aplicación
 
@@ -131,7 +131,7 @@ Para ver el historial de versiones de tu aplicación, en el menú de la izquierd
 
 La interfaz de usuario muestra hasta 50 versiones guardadas o publicadas de tu aplicación, junto con el icono del usuario que guardó o publicó la versión:
 
-{{< img src="service_management/app_builder/version-history-example.png" alt="Un ejemplo de lista del historial de versiones de App Builder con dos elementos, la versión actual y una versión anterior." style="width:70%;" >}}
+{{< img src="actions/app_builder/version-history-example.png" alt="Un ejemplo de lista del historial de versiones de App Builder con dos elementos, la versión actual y una versión anterior." style="width:70%;" >}}
 
 Puedes realizar las siguientes operaciones:
 
@@ -167,7 +167,7 @@ Para acceder a la consola de depuración, ve a [tu lista de aplicaciones][14] y 
 - **Logs:** Visualiza errores de configuración de tus acciones, transformadores, variables y componentes.
 - **Estado de la aplicación:** Accede a los cambios de estado de la aplicación en tiempo real.
 
-{{< img src="service_management/app_builder/app-builder-debug-console.png" alt="Panel ampliado de la consola de depuración dentro de la vista de edición de una aplicación" style="width:100%;" >}}
+{{< img src="actions/app_builder/app-builder-debug-console.png" alt="Panel ampliado de la consola de depuración dentro de la vista de edición de una aplicación" style="width:100%;" >}}
 
 ## Referencias adicionales
 

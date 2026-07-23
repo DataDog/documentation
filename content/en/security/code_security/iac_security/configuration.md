@@ -33,10 +33,12 @@ You can configure IaC Security using:
 
 The following configuration format applies to all configuration locations: org-level, repository-level, and repository-level (file).
 
-The configuration file must begin with `schema-version: v1.2`, followed by an `iac` key containing the analysis configuration. The full structure is as follows:
+The configuration file must begin with `schema-version: v1.4`, followed by an `iac` key containing the analysis configuration.
+
+The full structure is as follows:
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   # Do not run these rules.
   ignore-rules:
@@ -68,6 +70,27 @@ iac:
     # Report only findings in these categories.
     only-categories:
       - "Encryption"
+    # Do not run rules from these platforms.
+    ignore-platforms:
+      - Dockerfile
+    # Only run rules from these platforms.
+    only-platforms:
+      - Terraform
+      - Kubernetes
+      - CICD
+  # Per-rule configurations.
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      ignore-paths:
+        - "test/"
+      severity: low
+    kubernetes-deployment-without-resource-limits:
+      only-paths:
+        - "k8s/production/"
+    cicd-github-unpinned-actions-full-length-commit-sha:
+      arguments:
+        allow:
+          - libbpf/ci/run-qemu
 {{< /code-block >}}
 
 The `iac` key supports the following fields:
@@ -75,8 +98,9 @@ The `iac` key supports the following fields:
 | **Property** | **Type** | **Description** |
 | --- | --- | --- |
 | `ignore-rules` | Array | A list of rule IDs to ignore. |
-| `use-rules` | Array | A list of rule IDs to run. If this field is set, rules not listed are ignored. |
-| `global-config` | Object | Global settings for the repository. |
+| `use-rules` | Array | A list of rule IDs to run. If specified, _only_ these rules run. `ignore-rules` takes precedence over `use-rules`: a rule in both arrays is ignored. |
+| `global-config` | Object | Global settings for the IaC scanner. |
+| `rule-configs` | Object | Per-rule configurations. Keys are rule IDs. |
 
 ## Rule configuration
 
@@ -86,7 +110,7 @@ To modify which rules run:
 - **Disable specific rules**: List them under `ignore-rules`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   ignore-rules:
     - A
@@ -94,7 +118,7 @@ iac:
 {{< /code-block >}}
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   use-rules:
     - A
@@ -110,10 +134,12 @@ The `global-config` object controls repository-wide settings:
 | --- | --- | --- |
 | `only-paths` | Array | File paths or glob patterns. Only matching files are analyzed. |
 | `ignore-paths` | Array | File paths or glob patterns to exclude. Matching files are not analyzed. |
-| `only-severities` | Array | Severity levels to report. Findings with other severities are ignored. |
+| `only-severities` | Array | Severity levels to report. Findings with other severities are not reported. |
 | `ignore-severities` | Array | Severity levels to ignore. |
-| `only-categories` | Array | Categories to report. Findings in other categories are ignored. |
+| `only-categories` | Array | Categories to report. Findings in other categories are not reported. |
 | `ignore-categories` | Array | Categories to ignore. |
+| `ignore-platforms` | Array | Platforms to skip. Rules from these platforms are not applied. |
+| `only-platforms` | Array | Platforms to scan. Rules from other platforms are not applied. |
 
 ### Severities
 
@@ -128,7 +154,7 @@ Use `ignore-severities` to ignore findings based on severity level. Use `only-se
 - `info`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   global-config:
     ignore-severities:
@@ -141,7 +167,7 @@ iac:
 Use `ignore-paths` to exclude specific files or directories from scanning. Use `only-paths` to scan only specific files or directories. These options support glob patterns.
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   global-config:
     ignore-paths:
@@ -172,12 +198,98 @@ Use `ignore-categories` to ignore findings in specific categories. Use `only-cat
 - `Supply-Chain`
 
 {{< code-block lang="yaml" >}}
-schema-version: v1.2
+schema-version: v1.4
 iac:
   global-config:
     ignore-categories:
       - "Access Control"
       - "Best Practices"
+{{< /code-block >}}
+
+### Platforms
+
+Use `ignore-platforms` to skip specific platforms. Use `only-platforms` to restrict scanning to specific platforms.
+
+**Possible values:**
+
+- `Ansible`
+- `CICD`
+- `CloudFormation`
+- `Dockerfile`
+- `Kubernetes`
+- `Terraform`
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+iac:
+  global-config:
+    only-platforms:
+      - Terraform
+      - Kubernetes
+{{< /code-block >}}
+
+## Per-rule configuration
+
+Use `rule-configs` to configure individual rules.
+
+Each key under `rule-configs` is a rule ID. The following properties are supported per rule:
+
+| **Property** | **Type** | **Description** |
+| --- | --- | --- |
+| `only-paths` | Array | File paths or glob patterns. The rule is applied only to files matching these patterns. |
+| `ignore-paths` | Array | File paths or glob patterns to exclude. The rule is not applied to files matching these patterns. |
+| `arguments` | Object | Rule-specific parameters that tune the rule's behavior. Supported argument names and value types depend on the rule. |
+| `severity` | String | Overrides the severity of findings generated by this rule. Accepted values: `critical`, `high`, `medium`, `low`, `info`. |
+
+### Per-rule path scoping
+
+Exclude a rule from certain paths, or restrict it to specific paths:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+iac:
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      # Do not apply this rule in test directories.
+      ignore-paths:
+        - "test/"
+        - "**/testdata/"
+    kubernetes-deployment-without-resource-limits:
+      # Apply this rule only in production manifests.
+      only-paths:
+        - "k8s/production/"
+{{< /code-block >}}
+
+Path patterns support glob syntax (`*`, `**`, `?`). Paths are relative to the repository root.
+
+### Per-rule severity override
+
+Change the severity of findings generated by a specific rule:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+iac:
+  rule-configs:
+    terraform-aws-s3-bucket-without-encryption:
+      severity: low
+{{< /code-block >}}
+
+This severity applies to all findings generated by that rule.
+
+### Per-rule arguments
+
+Use `arguments` to set parameters for a specific rule. Supported argument names and value types depend on the rule. Define arguments under the rule ID in `rule-configs`.
+
+The following example configures the `cicd-github-unpinned-actions-full-length-commit-sha` rule and allows the `libbpf/ci/run-qemu` action:
+
+{{< code-block lang="yaml" >}}
+schema-version: v1.4
+iac:
+  rule-configs:
+    cicd-github-unpinned-actions-full-length-commit-sha:
+      arguments:
+        allow:
+          - libbpf/ci/run-qemu
 {{< /code-block >}}
 
 ## Legacy configuration

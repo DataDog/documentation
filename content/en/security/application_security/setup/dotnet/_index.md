@@ -10,6 +10,7 @@ aliases:
   - /security/application_security/threats_detection/dotnet
   - /security/application_security/setup/threat_detection/dotnet
   - /security/application_security/enabling/dotnet
+  - /security/application_security/setup/dotnet/compatibility
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -24,6 +25,13 @@ further_reading:
   tag: "Documentation"
   text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% aap/aap_and_api_protection_dotnet_overview showSetup="false"%}}
@@ -64,4 +72,4 @@ further_reading:
 - [Compatibility Information][2]
 
 [1]: /security/application_security/setup/dotnet/troubleshooting
-[2]: /security/application_security/setup/dotnet/compatibility
+[2]: /security/application_security/setup/compatibility/dotnet

@@ -9,6 +9,8 @@ further_reading:
 
 ## Overview
 
+<div class="alert alert-info">This feature is in limited support.</div>
+
 **Exception Replay** allows you to inspect the stack trace frames of any Error Tracking code insight and get information about variable values from the code running in production.
 
 To access this feature, you must enable [Error Tracking Exception Replay][1] on Datadog.

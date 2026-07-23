@@ -5,13 +5,9 @@ aliases:
   - /cloudprem/introduction/
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!" >}}
-  BYOC Logs is in Preview.
-{{< /callout >}}
-
 ## Overview
 
-BYOC Logs is Datadog's log management solution that runs in your own infrastructure. It indexes and stores logs in your object storage, executes search and analytics queries, and connects to the Datadog UI for a fully integrated experience. BYOC Logs is designed for organizations with specific requirements:
+BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution that runs in your own infrastructure. It indexes and stores logs in your object storage, executes search and analytics queries, and connects to the Datadog UI for a fully integrated experience. BYOC Logs is designed for organizations with specific requirements:
 - Data residency, privacy, and regulatory requirements
 - High volume requirements
 

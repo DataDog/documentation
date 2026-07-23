@@ -37,7 +37,7 @@ The SDK automatically detects whether parallelization is disabled and enables Te
 
 ### Test Optimization
 
-Prior to setting up Test Impact Analysis, set up [Test Optimization for Swift][2]. The **code coverage** option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
+Prior to setting up Test Impact Analysis, set up [Test Optimization for Swift][2]. The {{< ui >}}code coverage{{< /ui >}} option must also be enabled in the test settings of your scheme or test plan, or `--enable-code-coverage` must be added to your Swift test command (if using a SPM target).
 
 If you are reporting data through the Agent, use v6.40 and later or v7.40 and later.
 

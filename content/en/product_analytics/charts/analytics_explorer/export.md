@@ -27,7 +27,7 @@ Copy, export, or download your aggregated search query and visualization graphs 
 
 {{< img src="product_analytics/export/export-more.png" alt="Export button in the right hand corner of the RUM Explorer" width="100%" >}}
 
-Click the **More** button on the right hand corner and select an option from the dropdown menu:
+Click the {{< ui >}}More{{< /ui >}} button on the right hand corner and select an option from the dropdown menu:
 
 - Download your search results as a CSV file for individual Product Analytics events and specific aggregations. You can export up to 5,000 individual Product Analytics events with lists and up to 500 aggregations for timeseries, top lists, and table graphs.
 

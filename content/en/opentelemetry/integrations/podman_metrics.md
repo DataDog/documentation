@@ -12,7 +12,7 @@ further_reading:
 
 The [Podman receiver][1] collects metrics that populate the [Containers - Overview][5] dashboard. Configure the receiver according to the specifications of the latest version of the `podmanreceiver`.
 
-This dashboard displays metrics from all container runtimes. To view your Podman data, use the **runtime** template variable at the top of the dashboard to select `podman`.
+This dashboard displays metrics from all container runtimes. To view your Podman data, use the {{< ui >}}runtime{{< /ui >}} template variable at the top of the dashboard to select `podman`.
 
 For more information, see the OpenTelemetry project documentation for the [Podman receiver][1].
 

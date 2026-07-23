@@ -34,7 +34,7 @@ To collect Kubernetes metrics with OpenTelemetry, you need to deploy `kube-state
 
 * **Helm**: The setup uses Helm to deploy resources. To install Helm, see the [official Helm documentation][2].
 * **Helm chart**: OpenTelemetry Collector [Helm chart][9] v0.156.2 or later.
-* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.153.0` image or newer.
+* **Collector Image**: This guide uses the `otel/opentelemetry-collector-contrib:0.154.0` image or newer.
 
 ### Installation
 
@@ -77,13 +77,13 @@ kubectl create secret generic datadog-secret --from-literal api-key=$DD_API_KEY
    helm install otel-daemon-collector open-telemetry/opentelemetry-collector \
      -f daemonset-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.153.0
+     --set image.tag=0.154.0
 
    # Install the Cluster Collector (Deployment)
    helm install otel-cluster-collector open-telemetry/opentelemetry-collector \
      -f cluster-collector.yaml \
      --set image.repository=otel/opentelemetry-collector-contrib \
-     --set image.tag=0.153.0
+     --set image.tag=0.154.0
    ```
 
 ## Correlating traces with infrastructure metrics
@@ -161,6 +161,12 @@ The `k8sclusterreceiver` collects cluster-level metrics, such as the status and 
 
 {{< mapping-table resource="k8scluster.csv">}}
 
+### Count connector
+
+The [count connector][11] generates object-count metrics by counting the number of metric series that pass through the pipeline. It produces the following metrics:
+
+{{< mapping-table resource="count-connector.csv">}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -173,3 +179,4 @@ The `k8sclusterreceiver` collects cluster-level metrics, such as the status and 
 [8]: https://github.com/kubernetes/kube-state-metrics
 [9]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/opentelemetry-collector-0.156.2/charts/opentelemetry-collector
 [10]: /containers/monitoring/kubernetes_explorer/
+[11]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/connector/countconnector

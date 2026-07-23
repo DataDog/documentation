@@ -57,6 +57,19 @@ After you create the service account, continue to [Step 1](#step-1-prepare-the-g
 If you plan to use other Google Cloud observability functionality in Datadog, see [Datadog's Google Cloud Platform integration documentation][10] to determine which resources to enable.
 {% /alert %}
 
+## Allow Datadog IP addresses
+
+If your Google Cloud project uses [VPC Service Controls][22] to restrict access to BigQuery, add Datadog's outbound IP addresses to the access policy for your service perimeter. For standard BigQuery connections through a service account, this step is not required.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
 ## Step 1: Prepare the Google Cloud resources
 
 Datadog Experiments uses a BigQuery dataset for caching experiment results and a Cloud Storage bucket for staging experiment records.
@@ -147,10 +160,6 @@ Datadog Experiments connects to Databricks through the [Datadog Databricks integ
    1. Click {% ui %}Generate{% /ui %}.
    1. Note your {% ui %}Secret{% /ui %} and {% ui %}Client ID{% /ui %}.
    1. Click {% ui %}Done{% /ui %}.
-1. In the {% ui %}Settings{% /ui %} menu, click {% ui %}Identity and access{% /ui %}.
-1. On the {% ui %}Groups{% /ui %} row, click {% ui %}Manage{% /ui %}, then:
-   1. Click {% ui %}admins{% /ui %}, then {% ui %}Add members{% /ui %}.
-   1. Enter the service principal name and click {% ui %}Add{% /ui %}.
 
 After you create the service principal, continue to [Step 1](#step-1-grant-permissions-to-the-service-principal) to grant the required permissions.
 
@@ -159,6 +168,21 @@ After you create the service principal, continue to [Step 1](#step-1-grant-permi
 {% alert %}
 If you plan to use other warehouse observability functionality in Datadog, see [Datadog's Databricks integration documentation][13] to determine which resources to enable.
 {% /alert %}
+
+## Allow Datadog IP addresses
+
+If your Databricks workspace has [IP access lists][24] enabled, add Datadog's outbound IP addresses to the workspace allowlist so Datadog can connect.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+After retrieving the IPs, add them to your workspace's IP access list. See [Databricks documentation on IP access lists][24] for instructions.
 
 ## Step 1: Grant permissions to the service principal
 
@@ -232,6 +256,10 @@ To connect your Databricks Workspace to Datadog for warehouse-native experiment 
 1. Toggle off the {% ui %}Metrics - Model Serving{% /ui %} resource.
 1. Click {% ui %}Save Databricks Workspace{% /ui %}.
 
+{% alert %}
+If you turn on other features in the {% ui %}Configure{% /ui %} tab, additional configuration steps may be required. See the documentation for those features to complete their setup.
+{% /alert %}
+
 {% /if %}
 <!-- end Databricks -->
 
@@ -273,6 +301,23 @@ You can follow your configuration's completion steps under {% ui %}Deployment St
 {% alert %}
 If you plan to use other warehouse observability functionality in Datadog, see [Datadog's Amazon Web Services integration documentation][17] to determine which resources to enable.
 {% /alert %}
+
+## Allow Datadog IP addresses
+
+Add Datadog's outbound IP addresses as inbound rules to the VPC security group associated with your Redshift cluster. This allows Datadog to connect to your cluster and run experiment queries.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+### Update the Redshift security group
+
+Add each IP address as an inbound rule in the [VPC security group][25] associated with your Redshift cluster, allowing TCP traffic on port `5439` (or your cluster's configured port). See [Amazon's documentation on VPC security groups][25] for instructions.
 
 ## Step 1: Prepare the Redshift cluster
 
@@ -382,6 +427,75 @@ Use the following table to gather the values for your environment, then add the 
 }
 ```
 
+### (Optional) Create an IAM role for Redshift to read exposure data
+
+This step is required only if you use Datadog Feature Flagging. It enables Datadog to synchronize your feature flag exposures into Redshift so that metrics in your warehouse can be used in experiments. Datadog Experiments stages exposure data in the S3 bucket you created, then runs a Redshift `COPY` command to load that data into your warehouse. The `COPY` command uses a dedicated IAM role that your Redshift cluster assumes to read from the bucket. This role is separate from the role your Datadog AWS integration uses.
+
+If you use your own feature flagging solution, exposure data already lives in your systems and Datadog does not synchronize exposures into Redshift. In that case, skip this step and leave the **Copy IAM role ARN** field blank in [Step 3](#step-3-configure-experiment-settings).
+
+If you do need to synchronize exposures, create this role and associate it with your cluster.
+
+#### Create an IAM policy
+
+Create an IAM policy that grants read access to the S3 bucket you created. Replace `[bucket-name]` with your bucket name (for example, `datadog-experimentation-[aws_account_id]`).
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ListStagingBucket",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListBucket",
+        "s3:GetBucketLocation"
+      ],
+      "Resource": "arn:aws:s3:::[bucket-name]"
+    },
+    {
+      "Sid": "ReadStagedExposures",
+      "Effect": "Allow",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::[bucket-name]/*"
+    }
+  ]
+}
+```
+
+#### Create a role that Redshift can assume
+
+Create an IAM role and use the following trust policy so the Redshift service can assume the role:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "redshift.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+```
+
+#### Attach the policy to the role
+
+Attach the policy you created to the role. For instructions, see [Adding and removing IAM identity permissions][26] in the AWS documentation.
+
+#### Associate the role with your Redshift cluster
+
+Associate the role with your cluster so the `COPY` command can assume it:
+
+- For a provisioned cluster, open your cluster in the [Amazon Redshift console][27], select {% ui %}Actions{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
+- For Redshift Serverless, open your namespace, go to {% ui %}Security and encryption{% /ui %} > {% ui %}Manage IAM roles{% /ui %}, add the role, and save.
+
+For more details, see [Associating IAM roles with clusters][28] in the AWS documentation.
+
+After the role is associated, note its ARN (for example, `arn:aws:iam::[aws_account_id]:role/[role-name]`). You enter this ARN when configuring experiment settings in [Step 3](#step-3-configure-experiment-settings).
+
 {% /if %}
 <!-- end Redshift -->
 
@@ -393,6 +507,21 @@ To set this up for Snowflake, connect a Snowflake service account to Datadog and
 - [Preparing a Snowflake service account](#step-1-prepare-the-snowflake-service-account)
 - [Connecting it to Datadog](#step-2-connect-snowflake-to-datadog)
 - [Configuring experiment settings](#step-3-configure-experiment-settings)
+
+## Allow Datadog IP addresses
+
+If your Snowflake account uses [network policies][23] to restrict connections by IP address, add Datadog's outbound IP addresses to a network policy and apply it to the Datadog Experiments service user.
+
+### Find Datadog's outbound IP addresses
+
+Datadog's outbound IP addresses vary by Datadog site. To get the current list:
+
+1. Open the [IP Ranges page][21] in the Datadog API documentation.
+1. Select your Datadog site from the site selector in the top right corner. The page displays the API endpoint URL for your site, shown next to `GET` (for example, `https://ip-ranges.us5.datadoghq.com/`).
+1. Open that URL in a browser or HTTP client.
+1. In the JSON response, find the `webhooks.prefixes_ipv4` property. These IPv4 addresses are what Datadog uses to connect to your data warehouse.
+
+After retrieving the IPs, see [Snowflake documentation on network policies][23] to create a policy that allows those addresses and apply it to the service user you create in [Step 1](#step-1-prepare-the-snowflake-service-account).
 
 ## Step 1: Prepare the Snowflake service account
 
@@ -564,6 +693,7 @@ After you set up your AWS integration and Redshift cluster, configure the experi
    - {% ui %}Database user{% /ui %}: The service user you created in [Step 1](#create-a-datadog-service-user-in-your-redshift-database) (for example, `datadog_experiments_user`).
    - {% ui %}Schema{% /ui %}: The schema you created in [Step 1](#create-a-redshift-output-schema) for Datadog Experiments to write to (for example, `datadog_experiments_output`).
    - {% ui %}Temp S3 bucket{% /ui %}: The S3 bucket you created in [Step 2](#create-an-s3-bucket) (for example, `datadog-experimentation-[aws_account_id]`).
+   - {% ui %}Copy IAM role ARN{% /ui %} (optional): The ARN of the IAM role you created in [Step 2](#optional-create-an-iam-role-for-redshift-to-read-exposure-data) for Redshift to read exposure data from S3 (for example, `arn:aws:iam::[aws_account_id]:role/[role-name]`). Provide this only if you use Datadog Feature Flagging and want Datadog to synchronize exposures into Redshift. If you use your own feature flagging solution, leave this blank.
 1. Click {% ui %}Save{% /ui %}.
 
 {% img src="/product_analytics/experiment/guide/redshift_pa_setup.png" alt="The Redshift connection setup page in Datadog showing warehouse type tiles for Snowflake, BigQuery, Redshift (selected), and Databricks, with three sections: Select AWS Account with an AWS account dropdown, Cluster Connection with fields for AWS region, Cluster identifier, Cluster endpoint, and Port, and Database and Storage with fields for Database, Database user, Schema, and Temp S3 bucket." style="width:90%;" /%}
@@ -616,3 +746,11 @@ After you save your warehouse connection, [create experiment metrics][1] using y
 [18]: https://docs.snowflake.com/en/user-guide/key-pair-auth
 [19]: https://docs.snowflake.com/en/user-guide/organizations-connect
 [20]: https://docs.datadoghq.com/integrations/snowflake-web/
+[21]: https://docs.datadoghq.com/api/latest/ip-ranges/
+[22]: https://cloud.google.com/vpc-service-controls/docs/overview
+[23]: https://docs.snowflake.com/en/user-guide/network-policies
+[24]: https://docs.databricks.com/en/security/network/front-end/ip-access-list-workspace.html
+[25]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
+[26]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_manage-attach-detach.html
+[27]: https://console.aws.amazon.com/redshiftv2/
+[28]: https://docs.aws.amazon.com/redshift/latest/mgmt/copy-unload-iam-role.html

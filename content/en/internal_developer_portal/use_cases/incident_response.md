@@ -1,5 +1,6 @@
 ---
 title: Improve Incident Response
+description: Use Catalog to consolidate ownership details, communication channels, runbooks, and dependency maps to speed up incident detection, escalation, and recovery.
 aliases:
   - /tracing/software_catalog/use_cases/incident_response
   - /tracing/software_catalog/guides/upstream-downstream-dependencies

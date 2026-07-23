@@ -21,13 +21,13 @@ Datadog recommends that you make an exception to your third-party cookie blockin
 
 If you use Google Chrome, follow the instructions below. This exception workflow also applies to Firefox and other desktop browsers, including Brave and Edge.
 
-1. In your web browser, click the **Lock** icon to the left of the page URL.
-2. Click **Cookies**. A pop-up modal appears.
+1. In your web browser, click the {{< ui >}}Lock{{< /ui >}} icon to the left of the page URL.
+2. Click {{< ui >}}Cookies{{< /ui >}}. A pop-up modal appears.
 
    {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-1.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 
-3. Navigate to the **Blocked** tab and select `session-replay-datadoghq.com` from the list of pages.
-4. Click **Allow** and **Done**.
+3. Navigate to the {{< ui >}}Blocked{{< /ui >}} tab and select `session-replay-datadoghq.com` from the list of pages.
+4. Click {{< ui >}}Allow{{< /ui >}} and {{< ui >}}Done{{< /ui >}}.
 
    {{< img src="real_user_monitoring/session_replay/allow-3p-serviceworker-2.png" alt="Allow Session Replay Third-Party Service Worker" >}}
 

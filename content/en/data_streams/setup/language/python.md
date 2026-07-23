@@ -28,6 +28,7 @@ aliases:
 | Amazon SQS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
 | Amazon Kinesis | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
 | Amazon SNS     | [Botocore](https://pypi.org/project/botocore/)               | {{< dsm-tracer-version lang="python" lib="botocore" type="minimal" >}}        | {{< dsm-tracer-version lang="python" lib="botocore" type="recommended" >}}        | [112](https://github.com/DataDog/datadog-lambda-python/releases/tag/v7.112.0) |
+| Google Pub/Sub | [google-cloud-pubsub](https://pypi.org/project/google-cloud-pubsub/) | {{< dsm-tracer-version lang="python" lib="google-cloud-pubsub" type="minimal" >}} | {{< dsm-tracer-version lang="python" lib="google-cloud-pubsub" type="recommended" >}} | |
 
 ### Installation
 

@@ -73,14 +73,14 @@ In Datadog's Snowflake integration documentation, see [Reference Tables][3] for 
 
 To set up the Enrichment Table processor:
 
-1. Click **Add enrichment**.
-1. Define a **filter query**. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
-1. In the **Set lookup mapping** section, select the type of lookup dataset you want to use.
+1. Click {{< ui >}}Add enrichment{{< /ui >}}.
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are sent through the processor. **Note**: All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][8] for more information.
+1. In the {{< ui >}}Set lookup mapping{{< /ui >}} section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}
 
   1. Select the Reference Table in the dropdown menu. See [Using reference tables](#using-reference-tables) for more information.
-  1. Click **Manage** to go to the Reference Tables configuration page.
+  1. Click {{< ui >}}Manage{{< /ui >}} to go to the Reference Tables configuration page.
   1. (Optional) Select specific columns with which to enrich your logs.
       - Observability Pipelines enriches logs with all columns in the table by default. Each column in the table is added as an attribute to the log, where the attribute name is the column name and the attribute value is the column value.
       - If you want to enrich your logs with specific columns from your Reference Table, select the columns' corresponding attributes in the dropdown menu.
@@ -89,7 +89,7 @@ To set up the Enrichment Table processor:
       - Limited to the [`reference_tables_read`][3] scope.
   1. Enter the source attribute of the log. The source attribute's value is what you want Observability Pipelines to find in the Reference Table. See the [Enrichment example](#enrichment-example) for more information.
   1. Enter the target attribute. The target attribute's value stores, as a JSON object, the information found in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Click **Save**.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /account_management/api-app-keys/#application-keys
 [2]: /account_management/org_settings/service_accounts#service-account-application-keys
@@ -101,12 +101,12 @@ To set up the Enrichment Table processor:
   1. Enter the file path.
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the column name. The column name in the enrichment table is used for matching the source attribute value. See the [Enrichment example](#enrichment-example) for more information.
-  1. ({{< tooltip glossary="preview" case="title" >}}) If you are using a secret as a source attribute, toggle **Use Secret as source attribute** to enable it.
-      - Select the type of secret (**Datadog API Key** or **Splunk HEC token**).
+  1. ({{< tooltip glossary="preview" case="title" >}}) If you are using a secret as a source attribute, toggle {{< ui >}}Use Secret as source attribute{{< /ui >}} to enable it.
+      - Select the type of secret ({{< ui >}}Datadog API Key{{< /ui >}} or {{< ui >}}Splunk HEC token{{< /ui >}}).
       - See [Use a secret as a source attribute example](#use-a-secret-as-a-source-attribute) for more information.
   1. If you are not using a secret, enter the source attribute of the log. The source attribute's value is used as the key to match against the column name in your local file.
   1. Enter the target attribute. The target attribute's value stores the information found in the file as a JSON object.
-  1. Click **Save**.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
@@ -116,7 +116,7 @@ To set up the Enrichment Table processor:
       - **Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user. See [Advanced Worker Configurations][1] for more information.
   1. Enter the source attribute of the log. The source attribute's value is what you want Observabiity Pipelines to find in the Reference Table. See the [Enrichment file example](#enrichment-file-example) for more information.
   1. Enter the target attribute. The target attribute's value stores the information found in the Reference Table as a JSON object. See the [Enrichment file example](#enrichment-file-example) for more information.
-  1. Click **Save**.
+  1. Click {{< ui >}}Save{{< /ui >}}.
 
 [1]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
   {{% /tab %}}
@@ -150,15 +150,15 @@ merchant_info {
 
 ### Use a secret as a source attribute
 
-For the file lookup option, you can enable **Use Secret as source attribute** to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file. The secret is used as the key to match against the column name in your local file.
+For the file lookup option, you can enable {{< ui >}}Use Secret as source attribute{{< /ui >}} to map to a secret, such as a Datadog API key, Splunk HEC token, or a custom header in an HTTP request, in your local CSV file. The secret is used as the key to match against the column name in your local file.
 
-**Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable **Store HEC token** on the source.
+**Note**: If you want to map to Splunk HEC tokens, you must use a [Splunk HEC source][9] and enable {{< ui >}}Store HEC token{{< /ui >}} on the source.
 
 #### Splunk HEC example
 
 For example, if you want to filter and route logs based on Splunk HEC tokens:
 
-1. Enable **Store HEC token** on the Splunk HEC source to store the token in the event metadata.
+1. Enable {{< ui >}}Store HEC token{{< /ui >}} on the Splunk HEC source to store the token in the event metadata.
 1. Use the file lookup option in the Enrichment Table processor to use the HEC token stored in the event metadata as a lookup key. The Worker enriches the event so you can filter and route logs based on that value.
 
 Example of a local lookup CSV file with Splunk HEC tokens mapped to a value:
@@ -180,25 +180,9 @@ For this example, enter `Splunk HEC token (secret)` as the column name when you 
 
 You can filter and route logs based on `token_value: hec_token_one`.
 
-## How the processor works
+## Metrics
 
-### Using Reference Tables
-
-[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
-
-When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity, it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
-
-A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
-
-If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
-
-If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
-
-Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
-
-### Metrics
-
-#### Processor metrics
+### Processor metrics
 
 To see metrics about your Enrichment Table processor, add the tags `component_type=enrichment_table` and  `component_id=<processor_id>` to processor metrics:
 
@@ -209,7 +193,9 @@ To see metrics about your Enrichment Table processor, add the tags `component_ty
 : Number of logs that cannot be enriched because of an error. These errors are reported with the tag `error_code=did_not_enrich_event`.
 : The tag `reason` may contain the following values:<br>- `target_exists`: The target value to store the enriched data already exists and is not an object.<br>- `too_many_pending_lookups`: The buffer or lookup queue is full.<br>- `lookup_failed`: The lookup key was not found in the log, not a string, or not an integer.
 
-#### Buffer metrics (when enabled)
+### Buffer metrics (when using Reference Tables)
+
+The Enrichment Table processor's buffer is only enabled when enriching from a Reference Table.
 
 To see buffer metrics for your Enrichment Table processor, add these tags to buffer metrics:
 
@@ -241,12 +227,12 @@ To see buffer metrics for your Enrichment Table processor, add these tags to buf
 : **Description**: Bytes sent downstream by the processor's buffer.
 : **Metric type**: counter
 
-#### Reference Table metrics
+### Reference Table metrics
 
 To see metrics about your Enrichment Table processor using a Reference Table, add the tags `component_type:enrichment_table` and `component_id=<processor_id>` to the metrics below. The tag `reference_table_id:<table_uuid>` can also be used to aggregate across all processors using the same Reference Table.
 
 `pipelines.enrichment_rows_not_found_total`
-: This counter is incremented for each processed log that does not have a corresponding row in the table.
+: This counter is incremented for each processed log that does not have a corresponding row in the table. Available in Worker version 2.14 and later.
 
 `pipelines.enrichment_cache_hits_total`
 : Number of cache hits, that is logs that could be enriched without being buffered.
@@ -269,6 +255,22 @@ The metrics below are common to all processors consuming the same Reference Tabl
 
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
+
+## How the processor works
+
+### Using Reference Tables
+
+[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
+
+When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20,000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
+
+A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
+
+If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
+
+If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
+
+Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ## Further reading
 
