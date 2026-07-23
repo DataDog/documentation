@@ -1,4 +1,8 @@
 {
+  "ai-guard": {
+    "name": "AI Guard",
+    "description": "Analyze AI conversations for security threats including prompt injection,\njailbreak attempts, and other AI-specific attacks."
+  },
   "api-management": {
     "name": "API Management",
     "description": "Configure your API endpoints through the Datadog API."

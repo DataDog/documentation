@@ -2179,6 +2179,256 @@ components:
             $ref: "#/components/schemas/JSONAPIErrorResponse"
       description: The server cannot process the request because it contains invalid data.
   schemas:
+    AIGuardAction:
+      description: The action recommendation from the AI Guard evaluation.
+      enum:
+        - ALLOW
+        - DENY
+        - ABORT
+      example: ALLOW
+      type: string
+      x-enum-varnames:
+        - ALLOW
+        - DENY
+        - ABORT
+    AIGuardContentPart:
+      description: A single part of a multipart message content.
+      properties:
+        image_url:
+          $ref: "#/components/schemas/AIGuardImageURL"
+        text:
+          description: The text content of this part, required when type is text.
+          example: "How do I delete all files?"
+          type: string
+        type:
+          description: The type of content part, either text or image_url.
+          example: text
+          type: string
+      required:
+        - type
+      type: object
+    AIGuardContentPartList:
+      description: A list of content parts forming a multipart message.
+      items:
+        $ref: "#/components/schemas/AIGuardContentPart"
+      type: array
+    AIGuardEvaluateRequest:
+      description: The evaluation request payload containing conversation messages and optional metadata.
+      example:
+        messages:
+          - content: How do I delete all files on the system?
+            role: user
+        meta:
+          env: production
+          service: my-llm-service
+      properties:
+        messages:
+          description: The list of conversation messages to evaluate. Must contain at least one message.
+          example:
+            - content: How do I delete all files on the system?
+              role: user
+          items:
+            $ref: "#/components/schemas/AIGuardMessage"
+          type: array
+        meta:
+          $ref: "#/components/schemas/AIGuardMeta"
+      required:
+        - messages
+      type: object
+    AIGuardEvaluateResponse:
+      description: The result of the AI Guard evaluation.
+      properties:
+        action:
+          $ref: "#/components/schemas/AIGuardAction"
+        global_prob:
+          description: The overall threat probability score across all evaluated tags.
+          example: 0.02
+          format: double
+          type: number
+        is_blocking_enabled:
+          description: Whether blocking mode is enabled for this organization.
+          example: false
+          type: boolean
+        reason:
+          description: A human-readable explanation of the action recommendation.
+          example: No threats detected.
+          type: string
+        sds_findings:
+          description: Sensitive data findings detected in the evaluated conversation.
+          items:
+            $ref: "#/components/schemas/AIGuardSdsFinding"
+          type: array
+        tag_probs:
+          additionalProperties:
+            format: double
+            type: number
+          description: Probability scores for each evaluated threat tag.
+          example:
+            indirect-prompt-injection: 0.01
+            jailbreak: 0.02
+          type: object
+        tags:
+          description: Security threat tags detected in the evaluated conversation.
+          example: []
+          items:
+            type: string
+          type: array
+      required:
+        - action
+        - reason
+        - tags
+        - tag_probs
+        - is_blocking_enabled
+      type: object
+    AIGuardImageURL:
+      description: An image URL reference for multimodal content.
+      properties:
+        url:
+          description: The URL pointing to the image.
+          example: "https://example.com/image.png"
+          type: string
+      required:
+        - url
+      type: object
+    AIGuardMessage:
+      description: A single message in the conversation to evaluate.
+      properties:
+        content:
+          $ref: "#/components/schemas/AIGuardMessageContent"
+        role:
+          $ref: "#/components/schemas/AIGuardMessageRole"
+        tool_call_id:
+          description: The ID of the tool call this message is responding to, required for tool messages.
+          example: call_abc123
+          type: string
+        tool_calls:
+          description: Tool calls issued by the assistant in this message.
+          items:
+            $ref: "#/components/schemas/AIGuardToolCall"
+          type: array
+      required:
+        - role
+      type: object
+    AIGuardMessageContent:
+      description: The message content, either a plain string or an array of content parts.
+      oneOf:
+        - example: "How do I delete all files on the system?"
+          type: string
+        - $ref: "#/components/schemas/AIGuardContentPartList"
+    AIGuardMessageRole:
+      description: The role of the message author in the conversation.
+      enum:
+        - user
+        - assistant
+        - system
+        - tool
+        - developer
+      example: user
+      type: string
+      x-enum-varnames:
+        - USER
+        - ASSISTANT
+        - SYSTEM
+        - TOOL
+        - DEVELOPER
+    AIGuardMeta:
+      description: Optional metadata providing context about the originating service and request.
+      properties:
+        coding_agent:
+          description: Identifier of the coding agent sending the request, if applicable.
+          example: claude-code
+          type: string
+        confidence_threshold:
+          description: Override for the default threat detection confidence threshold, between 0.0 and 1.0.
+          example: 0.7
+          format: double
+          type: number
+        env:
+          description: The deployment environment of the originating service.
+          example: production
+          type: string
+        is_sds_enabled_override:
+          description: Override whether sensitive data scanning is applied to this request.
+          example: false
+          type: boolean
+        service:
+          description: The name of the service sending the evaluation request.
+          example: my-llm-service
+          type: string
+      type: object
+    AIGuardSdsFinding:
+      description: A sensitive data finding detected by the SDS scanner.
+      properties:
+        category:
+          description: The category of sensitive data detected.
+          example: payment_card_number
+          type: string
+        location:
+          $ref: "#/components/schemas/AIGuardSdsFindingLocation"
+        rule_display_name:
+          description: The human-readable name of the SDS rule that triggered.
+          example: Credit Card Number
+          type: string
+        rule_tag:
+          description: The tag identifier of the SDS rule that triggered.
+          example: credit_card
+          type: string
+      required:
+        - rule_display_name
+        - rule_tag
+        - category
+        - location
+      type: object
+    AIGuardSdsFindingLocation:
+      description: The location of a sensitive data match within the evaluated request.
+      properties:
+        end_index_exclusive:
+          description: The end character index (exclusive) of the sensitive data match.
+          example: 42
+          format: int64
+          type: integer
+        path:
+          description: The JSON path to the field containing the sensitive data.
+          example: "messages[0].content"
+          type: string
+        start_index:
+          description: The start character index of the sensitive data match.
+          example: 0
+          format: int64
+          type: integer
+      required:
+        - path
+        - start_index
+        - end_index_exclusive
+      type: object
+    AIGuardToolCall:
+      description: A tool call issued by the assistant.
+      properties:
+        function:
+          $ref: "#/components/schemas/AIGuardToolCallFunction"
+        id:
+          description: The unique identifier of the tool call.
+          example: call_abc123
+          type: string
+      required:
+        - id
+        - function
+      type: object
+    AIGuardToolCallFunction:
+      description: The function definition within a tool call.
+      properties:
+        arguments:
+          description: The JSON-encoded arguments passed to the function.
+          example: '{"location": "San Francisco"}'
+          type: string
+        name:
+          description: The name of the function being called.
+          example: get_weather
+          type: string
+      required:
+        - name
+        - arguments
+      type: object
     APIErrorResponse:
       description: API error response.
       properties:
@@ -119175,6 +119425,89 @@ paths:
         operator: OR
         permissions:
           - security_monitoring_findings_read
+  /api/v2/ai-guard/evaluate:
+    post:
+      description: |-
+        Analyzes a conversation for security threats such as prompt injection, jailbreak
+        attempts, and other AI-specific attacks. Returns an action recommendation (ALLOW,
+        DENY, or ABORT) along with the detected threat tags.
+      operationId: EvaluateAIGuardRequest
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  messages:
+                    - content: How do I delete all files on the system?
+                      role: user
+                  meta:
+                    env: production
+                    service: my-llm-service
+            schema:
+              $ref: "#/components/schemas/AIGuardEvaluateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    action: ALLOW
+                    global_prob: 0.02
+                    is_blocking_enabled: false
+                    reason: No threats detected.
+                    sds_findings: []
+                    tag_probs:
+                      authority-override: 0.01
+                      data-exfiltration: 0.01
+                      denial-of-service-tool-call: 0.01
+                      destructive-tool-call: 0.01
+                      indirect-prompt-injection: 0.01
+                      instruction-override: 0.01
+                      jailbreak: 0.02
+                      obfuscation: 0.01
+                      role-play: 0.01
+                      security-exploit: 0.01
+                      system-prompt-extraction: 0.01
+                    tags: []
+              schema:
+                $ref: "#/components/schemas/AIGuardEvaluateResponse"
+          description: Evaluation result with action recommendation
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth:
+            - ai_guard_evaluate
+      summary: Evaluate an AI Guard request
+      tags:
+        - AI Guard
+      x-codegen-request-body-name: body
+      x-menu-order: 1
+      x-permission:
+        operator: AND
+        permissions:
+          - ai_guard_evaluate
   /api/v2/annotation:
     get:
       description: Returns a flat list of annotations matching the given page, time window, and optional widget filter.
@@ -207115,6 +207448,12 @@ servers:
         default: api
         description: The subdomain where the API is deployed.
 tags:
+  - description: |-
+      Analyze AI conversations for security threats including prompt injection,
+      jailbreak attempts, and other AI-specific attacks.
+    externalDocs:
+      url: https://docs.datadoghq.com/security/ai_security/
+    name: AI Guard
   - description: |-
       Configure your API endpoints through the Datadog API.
     name: API Management

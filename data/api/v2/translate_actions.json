@@ -259,6 +259,12 @@
     "description": "Fetch the data of a specific on demand task.",
     "summary": "Get AWS on demand task"
   },
+  "EvaluateAIGuardRequest": {
+    "description": "Analyzes a conversation for security threats such as prompt injection, jailbreak\nattempts, and other AI-specific attacks. Returns an action recommendation (ALLOW,\nDENY, or ABORT) along with the detected threat tags.",
+    "summary": "Evaluate an AI Guard request",
+    "request_description": "",
+    "request_schema_description": "The evaluation request payload containing conversation messages and optional metadata."
+  },
   "ListAnnotations": {
     "description": "Returns a flat list of annotations matching the given page, time window, and optional widget filter.",
     "summary": "List annotations"
