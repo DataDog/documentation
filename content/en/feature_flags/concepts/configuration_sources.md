@@ -85,9 +85,9 @@ The Datadog-managed endpoint is recommended for standard deployments. For power-
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL=http://localhost:8080
 {{< /code-block >}}
 
-If the custom URL contains only an origin or a root path, the SDK appends the standard flag configuration path. If it contains a non-root path, the SDK uses that path as the complete endpoint.
+The custom URL must use HTTP or HTTPS. If it contains only an origin or a root path, the SDK appends the standard flag configuration path. If it contains a non-root path, the SDK uses that path as the complete endpoint.
 
-The SDK includes the `DD-API-KEY` header on every configuration request, including requests to a custom endpoint. A custom endpoint may use HTTP only when it targets a loopback host (for example, `http://127.0.0.1:8080` for local testing); any other custom endpoint must use HTTPS. Because your API key is sent to whichever endpoint you configure, only point `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` at endpoints you trust with it.
+The SDK sends `DD_API_KEY` only over HTTPS to the default Datadog-managed endpoint. It never forwards the Datadog API key to a custom endpoint. Custom endpoints can use HTTP for controlled local development; use HTTPS for any endpoint outside the local development environment.
 
 If the custom endpoint setting is invalid, the SDK keeps the provider disabled, logs the configuration error, and evaluations return caller-provided default values.
 
