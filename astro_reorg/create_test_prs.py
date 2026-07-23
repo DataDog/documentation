@@ -202,6 +202,48 @@ TEST_PRS = [
         ),
     },
     {
+        # Mixed conflicts: a wrong-path addition (reorg conflict) + a line in
+        # CONTRIBUTING.md that both the PR and the base changed (non-reorg
+        # conflict). The resolver must route to manual review — it can't safely
+        # auto-fix the reorg part while unrelated conflicts are present.
+        "branch": f"{BRANCH_PREFIX}-mixed-conflicts",
+        "add_file": {
+            "path": "content/en/getting_started/example_mixed/_index.md",
+            "content": (
+                "---\n"
+                "title: Example Mixed\n"
+                "---\n\n"
+                "Placeholder page for exercising the astro reorg tooling.\n"
+            ),
+        },
+        "file": "CONTRIBUTING.md",
+        "old": "Use active instead of passive voice.",
+        "new": "Use active rather than passive voice.",
+        "commit": "Test PR: add page (reorg conflict) and edit CONTRIBUTING.md (non-reorg conflict)",
+        "title": "[TEST] Mixed reorg + non-reorg conflicts (manual review expected)",
+        "body": (
+            "Test PR for exercising the astro reorg tooling. Adds a new page at a "
+            "pre-reorg path (wrong-path addition → reorg conflict) and edits a line "
+            "in CONTRIBUTING.md that the base also changed (non-reorg conflict). "
+            "The resolver should label this PR for manual review without attempting "
+            "an auto-fix.\n\n"
+            "Do not merge."
+        ),
+        "base_edit": {
+            "file": "CONTRIBUTING.md",
+            "old": "Use active instead of passive voice.",
+            "new": "Use active voice instead of passive.",
+        },
+        "expected_outcome": (
+            "**Manual review (mixed conflicts).** The PR has both a reorg-caused "
+            "conflict (a page added at a pre-reorg `content/` path) and an unrelated "
+            "conflict (both sides edited the same line in `CONTRIBUTING.md`). The "
+            "resolver cannot safely auto-fix the reorg portion while unrelated "
+            "conflicts are present, so it labels this PR `astro-reorg-manual-review` "
+            "and posts a comment."
+        ),
+    },
+    {
         # Auto-fixable: a new page plus a nav-menu link to it, where nobody else
         # touched that menu line. Exercises the "wrong-path addition + menu edit"
         # case where both changes can be replayed cleanly by the auto-fix.
