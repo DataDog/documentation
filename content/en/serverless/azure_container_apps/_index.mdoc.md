@@ -1,5 +1,6 @@
 ---
 title: Azure Container Apps
+description: "Instrument Azure Container Apps with Datadog to collect traces, logs, and custom metrics, using either in-container or sidecar serverless-init instrumentation."
 content_filters:
   - trait_id: instrumentation_method
     option_group_id: aca_instrumentation_method_options
@@ -40,7 +41,7 @@ further_reading:
     text: "Azure Integration"
 ---
 
-{% collapse-content title="Compare methods" level="h5" %}
+{% collapse-content title="In-Container vs. Sidecar" level="h5" %}
 
 | Aspect | In-Container | Sidecar |
 |--------|--------------|---------|
@@ -60,6 +61,9 @@ further_reading:
 
 <!-- In-Container > Python -->
 {% if equals($prog_lang, "python") %}
+
+### In-Container: Python
+
 {% stepper %}
 {% step title="Install the Datadog Python SDK" %}
 Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI](https://pypi.org/project/ddtrace/):
@@ -164,6 +168,9 @@ Datadog's Continuous Profiler is available in preview for Azure Container Apps.
 
 <!-- In-Container > Node.js -->
 {% if equals($prog_lang, "node_js") %}
+
+### In-Container: Node.js
+
 {% stepper %}
 {% step title="Install the Datadog Node.js SDK" %}
 In your main application, install the `dd-trace` package.
@@ -253,6 +260,9 @@ Datadog's Continuous Profiler is available in preview for Azure Container Apps.
 
 <!-- In-Container > Go -->
 {% if equals($prog_lang, "go") %}
+
+### In-Container: Go
+
 {% stepper %}
 {% step title="Install the Datadog Go SDK" %}
 In your main application, add the SDK from `dd-trace-go`.
@@ -338,6 +348,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=go
 
 <!-- In-Container > Java -->
 {% if equals($prog_lang, "java") %}
+
+### In-Container: Java
+
 {% stepper %}
 {% step title="Install the Datadog Java SDK" %}
 Add the Datadog Java SDK to your Dockerfile:
@@ -437,6 +450,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=ja
 
 <!-- In-Container > .NET -->
 {% if equals($prog_lang, "dot_net") %}
+
+### In-Container: .NET
+
 {% stepper %}
 {% step title="Install the Datadog .NET SDK" %}
 Install the Datadog .NET SDK in your Dockerfile.
@@ -525,6 +541,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=do
 
 <!-- In-Container > Ruby -->
 {% if equals($prog_lang, "ruby") %}
+
+### In-Container: Ruby
+
 {% stepper %}
 {% step title="Install the Datadog Ruby SDK" %}
 Add the `datadog` gem to your Gemfile:
@@ -596,6 +615,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=ru
 
 <!-- In-Container > PHP -->
 {% if equals($prog_lang, "php") %}
+
+### In-Container: PHP
+
 {% stepper %}
 {% step title="Install the Datadog PHP SDK" %}
 Install the Datadog PHP SDK in your Dockerfile.
@@ -670,6 +692,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=ph
 
 <!-- Sidecar > Python -->
 {% if equals($prog_lang, "python") %}
+
+### Sidecar: Python
+
 {% stepper %}
 {% step title="Install the Datadog Python SDK" %}
 Add `ddtrace` to your `requirements.txt` or `pyproject.toml`. You can find the latest version on [PyPI](https://pypi.org/project/ddtrace/):
@@ -743,6 +768,9 @@ Datadog's Continuous Profiler is available in preview for Azure Container Apps.
 
 <!-- Sidecar > Node.js -->
 {% if equals($prog_lang, "node_js") %}
+
+### Sidecar: Node.js
+
 {% stepper %}
 {% step title="Install the Datadog Node.js SDK" %}
 In your main application, install the `dd-trace` package.
@@ -803,6 +831,9 @@ Datadog's Continuous Profiler is available in preview for Azure Container Apps.
 
 <!-- Sidecar > Go -->
 {% if equals($prog_lang, "go") %}
+
+### Sidecar: Go
+
 {% stepper %}
 {% step title="Install the Datadog Go SDK" %}
 In your main application, add the SDK from `dd-trace-go`.
@@ -863,6 +894,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=go
 
 <!-- Sidecar > Java -->
 {% if equals($prog_lang, "java") %}
+
+### Sidecar: Java
+
 {% stepper %}
 {% step title="Install the Datadog Java SDK" %}
 Add the Datadog Java SDK to your Dockerfile:
@@ -933,6 +967,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=ja
 
 <!-- Sidecar > .NET -->
 {% if equals($prog_lang, "dot_net") %}
+
+### Sidecar: .NET
+
 {% stepper %}
 {% step title="Install the Datadog .NET SDK" %}
 Install the Datadog .NET SDK in your Dockerfile.
@@ -996,6 +1033,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=do
 
 <!-- Sidecar > Ruby -->
 {% if equals($prog_lang, "ruby") %}
+
+### Sidecar: Ruby
+
 {% stepper %}
 {% step title="Install the Datadog Ruby SDK" %}
 Add the `datadog` gem to your Gemfile:
@@ -1038,6 +1078,9 @@ To send custom metrics, [install the DogStatsD client](/extend/dogstatsd/?tab=ru
 
 <!-- Sidecar > PHP -->
 {% if equals($prog_lang, "php") %}
+
+### Sidecar: PHP
+
 {% stepper %}
 {% step title="Install the Datadog PHP SDK" %}
 Install the Datadog PHP SDK in your Dockerfile.
