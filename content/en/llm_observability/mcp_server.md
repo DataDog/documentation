@@ -165,7 +165,7 @@ Agent skills are prebuilt instruction sets for AI coding agents that automate co
 Install the `agent-observability` skills with the following command:
 
 ```shell
-npx skills add datadog-labs/agent-skills --skill agent-observability --full-depth -y
+npx skills add datadog-labs/agent-skills/agent-observability --full-depth -y
 ```
 
 The skills require the `llmobs` MCP toolset to be connected. If you have not already connected it, run:

@@ -3,7 +3,7 @@ title: OCI Integration Troubleshooting
 
 description: "Troubleshooting steps for the Datadog OCI Integration"
 further_reading:
-- link: "https://docs.datadoghq.com/integrations/oracle_cloud_infrastructure/"
+- link: "https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/"
   tag: "Integration"
   text: "OCI Integration"
 ---
@@ -69,6 +69,10 @@ To remediate this, reapply the existing Datadog integration ORM Stack in your OC
 
 **Note**: If you specified the subnet OCIDs in the optional configuration section, ensure that there is one subnet OCID per subscribed region. Do not make any other modifications to the existing stack before reapplying it.
 
+## Outdated integration version
+
+This occurs when your Datadog integration ORM stack or Terraform module is out of date. To remediate this, update your deployment to the latest version and reapply it. For instructions covering both QuickStart (ORM stack) and Terraform, see [Update the integration][7].
+
 Still need help? Contact [Datadog support][3].
 
 [1]: /integrations/oracle-cloud-infrastructure
@@ -77,4 +81,5 @@ Still need help? Contact [Datadog support][3].
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
 [6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: /integrations/oracle-cloud-infrastructure/#update-the-integration
 [8]: https://app.datadoghq.com/organization-settings/application-keys

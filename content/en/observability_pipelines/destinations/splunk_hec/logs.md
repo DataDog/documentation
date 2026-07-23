@@ -73,6 +73,12 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### 401 Unauthorized errors
+
+{{% observability_pipelines/splunk_hec_unauthorized_error %}}
+
 ## Metrics
 
 For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
