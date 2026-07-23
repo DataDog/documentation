@@ -12482,7 +12482,20 @@ menu:
           - UpsertAndPublishFormVersion
         unstable:
           - v2
-        order: 10
+        order: 11
+    - name: Revert a form to a prior version
+      url: /api/latest/forms/revert-a-form-to-a-prior-version/
+      identifier: forms-revert-a-form-to-a-prior-version
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - RevertFormVersion
+        unstable:
+          - v2
+        order: 9
     - name: Create or update a form version
       url: /api/latest/forms/create-or-update-a-form-version/
       identifier: forms-create-or-update-a-form-version
@@ -12493,6 +12506,19 @@ menu:
           - v2
         operationids:
           - UpsertFormVersion
+        unstable:
+          - v2
+        order: 8
+    - name: List form versions
+      url: /api/latest/forms/list-form-versions/
+      identifier: forms-list-form-versions
+      parent: forms
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFormVersions
         unstable:
           - v2
         order: 7
@@ -12508,7 +12534,7 @@ menu:
           - PublishForm
         unstable:
           - v2
-        order: 8
+        order: 10
     - name: Clone a form
       url: /api/latest/forms/clone-a-form/
       identifier: forms-clone-a-form
@@ -12521,7 +12547,7 @@ menu:
           - CloneForm
         unstable:
           - v2
-        order: 9
+        order: 12
     - name: Update a form
       url: /api/latest/forms/update-a-form/
       identifier: forms-update-a-form

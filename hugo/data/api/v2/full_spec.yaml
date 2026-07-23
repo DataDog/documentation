@@ -41375,7 +41375,9 @@ components:
           nullable: true
           type: string
         has_submitted:
-          description: Whether the current user has already submitted this form. Only present for forms with `single_response` set to `true`.
+          description: |-
+            Whether the current user has already submitted this form. Only present for forms with
+            `single_response` set to `true`.
           nullable: true
           type: boolean
         idp_survey:
@@ -41690,6 +41692,10 @@ components:
           example: b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
           nullable: true
           type: string
+        has_ever_been_published:
+          description: Whether this version number has ever appeared in the form's publication history.
+          example: true
+          type: boolean
         id:
           description: The ID of the form version.
           example: "126"
@@ -41746,6 +41752,15 @@ components:
         - type
         - attributes
       type: object
+    FormVersionListType:
+      default: form_version_lists
+      description: The resource type for a list of form versions.
+      enum:
+        - form_version_lists
+      example: form_version_lists
+      type: string
+      x-enum-varnames:
+        - FORM_VERSION_LISTS
     FormVersionResponse:
       description: A response containing a single form version.
       properties:
@@ -63116,6 +63131,41 @@ components:
       required:
         - data
         - meta
+      type: object
+    ListFormVersionsData:
+      description: A list-of-form-versions resource object.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ListFormVersionsDataAttributes"
+        id:
+          description: The ID of the form.
+          example: 22f6006a-2302-4926-9396-d2dfcf7b0b34
+          type: string
+        type:
+          $ref: "#/components/schemas/FormVersionListType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ListFormVersionsDataAttributes:
+      description: The attributes for a list of form versions.
+      properties:
+        versions:
+          description: The list of versions for the form.
+          items:
+            $ref: "#/components/schemas/FormVersionAttributes"
+          type: array
+      required:
+        - versions
+      type: object
+    ListFormVersionsResponse:
+      description: A response containing the list of versions for a form.
+      properties:
+        data:
+          $ref: "#/components/schemas/ListFormVersionsData"
+      required:
+        - data
       type: object
     ListHistoricalJobsResponse:
       description: List of historical jobs.
@@ -145758,7 +145808,9 @@ paths:
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
-      description: Create a new form. The form is created in draft mode and must be published before it can be used. This also creates a new datastore for form responses and links it to the form.
+      description: |-
+        Create a new form. The form is created in draft mode and must be published before it can be used. This
+        also creates a new datastore for form responses and links it to the form.
       operationId: CreateForm
       requestBody:
         content:
@@ -145833,7 +145885,9 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/forms/create_and_publish:
     post:
-      description: Creates a new form and immediately publishes its initial version. This also creates a new datastore for form responses and links it to the form.
+      description: |-
+        Creates a new form and immediately publishes its initial version. This also creates a new datastore for
+        form responses and links it to the form.
       operationId: CreateAndPublishForm
       requestBody:
         content:
@@ -145965,7 +146019,9 @@ paths:
           schema:
             format: uuid
             type: string
-        - description: The version of the form to retrieve. Use 'latest' for the most recent draft, 'published' for the last published version, or a specific version number.
+        - description: |-
+            The version of the form to retrieve. Use 'latest' for the most recent draft, 'published' for the
+            last published version, or a specific version number.
           in: query
           name: version
           required: false
@@ -146195,7 +146251,7 @@ paths:
       summary: Clone a form
       tags:
         - Forms
-      x-menu-order: 9
+      x-menu-order: 12
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -146271,11 +146327,78 @@ paths:
       summary: Publish a form version
       tags:
         - Forms
-      x-menu-order: 8
+      x-menu-order: 10
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/forms/{form_id}/versions:
+    get:
+      description: List all versions of a form.
+      operationId: ListFormVersions
+      parameters:
+        - description: The ID of the form.
+          example: 22f6006a-2302-4926-9396-d2dfcf7b0b34
+          in: path
+          name: form_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        versions:
+                          - created_at: "2026-05-29T20:06:14.895921Z"
+                            data_definition: {}
+                            definition_signature: >-
+                              {"signature":"b7f312957a80cea2c8c9950532b205a90a3f8a7ebb7e52fc25437a25d903d545", "version":1}
+                            etag: b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
+                            has_ever_been_published: true
+                            id: "126"
+                            modified_at: "2026-05-29T20:06:14.949163Z"
+                            state: draft
+                            ui_definition: {}
+                            user_id: 10001
+                            user_uuid: 1fc709aa-be19-4539-a47d-52a30d78a978
+                            version: 2
+                      id: 22f6006a-2302-4926-9396-d2dfcf7b0b34
+                      type: form_version_lists
+              schema:
+                $ref: "#/components/schemas/ListFormVersionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List form versions
+      tags:
+        - Forms
+      x-menu-order: 7
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Create or update the latest draft version of a form. The `upsert_params` field controls
@@ -146319,7 +146442,8 @@ paths:
                         created_at: "2026-05-29T20:06:14.895921Z"
                         data_definition:
                           $ref: "#/components/schemas/FormDataDefinition"
-                        definition_signature: '{"signature":"b7f312957a80cea2c8c9950532b205a90a3f8a7ebb7e52fc25437a25d903d545","version":1}'
+                        definition_signature: >-
+                          {"signature":"b7f312957a80cea2c8c9950532b205a90a3f8a7ebb7e52fc25437a25d903d545", "version":1}
                         etag: b51f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
                         modified_at: "2026-05-29T20:06:14.949163Z"
                         state: draft
@@ -146355,7 +146479,87 @@ paths:
       summary: Create or update a form version
       tags:
         - Forms
-      x-menu-order: 7
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/forms/{form_id}/versions/revert:
+    post:
+      description: Revert a form to a prior version by creating a new draft version copied from it.
+      operationId: RevertFormVersion
+      parameters:
+        - description: The ID of the form.
+          example: 22f6006a-2302-4926-9396-d2dfcf7b0b34
+          in: path
+          name: form_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The version number to revert to.
+          example: 1
+          in: query
+          name: version
+          required: true
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        created_at: "2026-05-29T20:10:14.895921Z"
+                        data_definition:
+                          $ref: "#/components/schemas/FormDataDefinition"
+                        definition_signature: >-
+                          {"signature":"c8f312957a80cea2c8c9950532b205a90a3f8a7ebb7e52fc25437a25d903d545", "version":1}
+                        etag: c61f08b698d88d8027a935d9db649774949f5fb41a0c559bfee6a9a13225c72d
+                        modified_at: "2026-05-29T20:10:14.949163Z"
+                        state: draft
+                        ui_definition: {}
+                        user_id: 10001
+                        user_uuid: 1fc709aa-be19-4539-a47d-52a30d78a978
+                        version: 3
+                      id: "127"
+                      type: form_versions
+              schema:
+                $ref: "#/components/schemas/FormVersionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Revert a form to a prior version
+      tags:
+        - Forms
+      x-menu-order: 9
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -146442,7 +146646,7 @@ paths:
       summary: Upsert and publish a form version
       tags:
         - Forms
-      x-menu-order: 10
+      x-menu-order: 11
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
