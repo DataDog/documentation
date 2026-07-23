@@ -26,7 +26,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>, which may impact billing.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>. During the Bits Live Debugger preview phase, Bits Code AI Credits will not be charged when sessions are started through Live Debugger.
 </div>
 
 ## Prerequisites
