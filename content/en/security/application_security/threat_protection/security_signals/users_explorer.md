@@ -5,6 +5,12 @@ title: Users Explorer
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
 
 ## Overview

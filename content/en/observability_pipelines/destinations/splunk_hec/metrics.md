@@ -78,6 +78,12 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### 401 Unauthorized errors
+
+{{% observability_pipelines/splunk_hec_unauthorized_error %}}
+
 ## How the destination works
 
 ### Event batching

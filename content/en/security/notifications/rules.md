@@ -47,7 +47,8 @@ To create a notification rule, specify the conditions under which the rule shoul
     - **Finding**: A potential security flaw in your infrastructure.
     - **Signal**: Suspicious activity that poses an active threat against your infrastructure.
 1. Select one or more severity levels.
-1. Specify the tags and attributes that must be present in order for the notification rule to be triggered.
+1. Specify the tags and attributes that must be present for the notification rule to be triggered.
+   <div class="alert alert-tip">If you selected <strong>Signal</strong> in step 3, you can get notifications for completed <a href="/bits_ai/bits_security_analyst">Bits Security Analyst</a> investigations by adding the tag <code>@workflow.bits_investigator.state:*</code>.</div>
 1. If you selected **Finding** in step 3, select the frequency of the notifications:
    - **Aggregate results over**: Select this option, followed by a time frame from the list, to only get one notification for detections that occurred over that time frame.
    - **Trigger immediately for each individual issue meeting the criteria**: Select this option to get one notification for each detection.<br />**Note**: Selecting this option can result in a large number of notifications.

@@ -270,18 +270,6 @@
                 tag: "Documentation"
                 text: "Learn about the Testing Tunnel"
 
-      - repo_name: datadog-static-analyzer-rule-docs
-        contents:
-        - action: pull-and-push-folder
-          branch: main
-          globs:
-          - rulesets/**/*.md
-          options:
-            dest_dir: '/security/code_security/static_analysis/static_analysis_rules/'
-            path_to_remove: 'rulesets/'
-            front_matters:
-              disable_edit: true
-
       - repo_name: datadog-cdk-constructs
         contents:
         - action: pull-and-push-file

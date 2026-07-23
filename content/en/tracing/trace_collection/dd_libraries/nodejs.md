@@ -26,6 +26,9 @@ further_reading:
     - link: 'tracing/'
       tag: 'Documentation'
       text: 'Advanced Usage'
+    - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
+      tag: "Learning Center"
+      text: "Configure and manage the APM SDK for your applications"
 ---
 ## Compatibility requirements
 

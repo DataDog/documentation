@@ -144,10 +144,12 @@ aws rds create-db-instance \
   --db-subnet-group-name <DB-SUBNET-GROUP-NAME> \
   --vpc-security-group-ids <EKS-CLUSTER-SECURITY-GROUP-ID> \
   --db-name byoclogs \
-  --backup-retention-period 0 \
+  --backup-retention-period 7 \
   --region <AWS_REGION> \
   --no-multi-az
 ```
+
+The `--backup-retention-period 7` flag enables automated backups with a 7-day retention period. Enable backups for disaster recovery in production deployments.
 
 You can retrieve RDS information by executing the following shell commands. The below commands retrieve information for the RDS instance created above:
 
