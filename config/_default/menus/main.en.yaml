@@ -51,6 +51,10 @@ menu:
       pre: hex-ringed
       parent: essentials_heading
       weight: 10000
+    - name: Example Auto Fix
+      identifier: example_auto_fix_heading
+      url: /getting_started/example_auto_fix/
+      weight: 500000
     - name: Agent
       identifier: getting_started_agent
       url: getting_started/agent/
