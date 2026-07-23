@@ -385,7 +385,7 @@ Tools for [Audit Trail][71], including searching and retrieving Audit Trail even
 ### `search_audit_events`
 *Toolset: **audit-trail***\
 *Permissions Required: `Audit Trail Read`*\
-Searches for Audit Trail events using Datadog query syntax with support for pagination. Use when you need to find and filter events by specific attributes. Returns Audit Trail events without metadata and previous/new asset values unless requested.
+Searches for Audit Trail events using Datadog query syntax with support for pagination. Use when you need to find and filter events by specific attributes. Returns Audit Trail events without metadata and previous or new asset values unless requested.
 
 - Who deleted the monitor `abc123`?
 - Have there been any failed Datadog login attempts in the past week?
@@ -394,7 +394,7 @@ Searches for Audit Trail events using Datadog query syntax with support for pagi
 ### `list_audit_events`
 *Toolset: **audit-trail***\
 *Permissions Required: `Audit Trail Read`*\
-Lists Audit Trail events over a time window with support for pagination and an optional query. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous/new asset values unless requested.
+Lists Audit Trail events over a time window with support for pagination and an optional query. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous or new asset values unless requested.
 
 - Show me Audit Trail events for the past hour.
 
