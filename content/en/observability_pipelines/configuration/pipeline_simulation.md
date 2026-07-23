@@ -103,7 +103,10 @@ When you import sample data in JSON format, the data must be:
 - Structured as a set of JSON objects wrapped in an array
 - Comma-separated between each log event
 
-The following is an example set of logs in JSON you can import for a simulation:
+The following is an example set of data in JSON you can import for a simulation:
+
+{{< tabs >}}
+{{% tab "Logs" %}}
 
 ```json
 [
@@ -144,6 +147,171 @@ The following is an example set of logs in JSON you can import for a simulation:
   }
 ]
 ```
+
+{{% /tab %}}
+{{% tab "Metrics" %}}
+
+```json
+[
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.761998760Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762001805Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762002953Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762003454Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762004406Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762005210Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762009493Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762010190Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762010978Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762011618Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762013275Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762013825Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  },
+  {
+    "name": "counter",
+    "timestamp": "2026-05-22T12:40:53.762014416Z",
+    "kind": "incremental",
+    "counter": {
+      "value": 1
+    }
+  },
+  {
+    "name": "test_metric",
+    "timestamp": "2026-05-22T12:40:53.762015007Z",
+    "kind": "incremental",
+    "distribution": {
+      "samples": [
+        {
+          "value": 1,
+          "rate": 1
+        }
+      ],
+      "statistic": "summary"
+    }
+  }
+]
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ##### JSONL sample data format
 
