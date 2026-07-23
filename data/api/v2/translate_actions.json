@@ -6266,6 +6266,30 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a component."
   },
+  "ListDegradationTemplates": {
+    "description": "Lists all degradation templates for a status page.",
+    "summary": "List degradation templates"
+  },
+  "CreateDegradationTemplate": {
+    "description": "Creates a new degradation template.",
+    "summary": "Create degradation template",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a degradation template."
+  },
+  "DeleteDegradationTemplate": {
+    "description": "Deletes a degradation template by its ID (soft delete).",
+    "summary": "Delete degradation template"
+  },
+  "GetDegradationTemplate": {
+    "description": "Retrieves a specific degradation template by its ID.",
+    "summary": "Get degradation template"
+  },
+  "UpdateDegradationTemplate": {
+    "description": "Updates an existing degradation template's attributes.",
+    "summary": "Update degradation template",
+    "request_description": "",
+    "request_schema_description": "Request object for updating a degradation template."
+  },
   "CreateDegradation": {
     "description": "Creates a new degradation.",
     "summary": "Create degradation",
@@ -6301,6 +6325,30 @@
     "summary": "Edit degradation update",
     "request_description": "",
     "request_schema_description": "Request object for editing a degradation update."
+  },
+  "ListMaintenanceTemplates": {
+    "description": "Lists all maintenance templates for a status page.",
+    "summary": "List maintenance templates"
+  },
+  "CreateMaintenanceTemplate": {
+    "description": "Creates a new maintenance template.",
+    "summary": "Create maintenance template",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a maintenance template."
+  },
+  "DeleteMaintenanceTemplate": {
+    "description": "Deletes a maintenance template by its ID (soft delete).",
+    "summary": "Delete maintenance template"
+  },
+  "GetMaintenanceTemplate": {
+    "description": "Retrieves a specific maintenance template by its ID.",
+    "summary": "Get maintenance template"
+  },
+  "UpdateMaintenanceTemplate": {
+    "description": "Updates an existing maintenance template's attributes.",
+    "summary": "Update maintenance template",
+    "request_description": "",
+    "request_schema_description": "Request object for updating a maintenance template."
   },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",

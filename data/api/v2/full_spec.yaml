@@ -23360,6 +23360,8 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/CreateBackfilledDegradationRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateBackfilledDegradationRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchDegradationRequestDataType"
       required:
@@ -23403,6 +23405,34 @@ components:
         - started_at
         - status
       type: object
+    CreateBackfilledDegradationRequestDataRelationships:
+      description: The supported relationships for creating a backfilled degradation.
+      properties:
+        template:
+          $ref: "#/components/schemas/CreateBackfilledDegradationRequestDataRelationshipsTemplate"
+          description: The template used to create the backfilled degradation.
+      type: object
+    CreateBackfilledDegradationRequestDataRelationshipsTemplate:
+      description: The template used to create the backfilled degradation.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateBackfilledDegradationRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    CreateBackfilledDegradationRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the backfilled degradation.
+      properties:
+        id:
+          description: The ID of the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
     CreateBackfilledMaintenanceRequest:
       description: Request object for creating a backfilled maintenance.
       example:
@@ -23432,6 +23462,8 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/CreateBackfilledMaintenanceRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateBackfilledMaintenanceRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchMaintenanceRequestDataType"
       required:
@@ -23478,6 +23510,34 @@ components:
         - description
         - started_at
         - status
+      type: object
+    CreateBackfilledMaintenanceRequestDataRelationships:
+      description: The supported relationships for creating a backfilled maintenance.
+      properties:
+        template:
+          $ref: "#/components/schemas/CreateBackfilledMaintenanceRequestDataRelationshipsTemplate"
+          description: The template used to create the backfilled maintenance.
+      type: object
+    CreateBackfilledMaintenanceRequestDataRelationshipsTemplate:
+      description: The template used to create the backfilled maintenance.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateBackfilledMaintenanceRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    CreateBackfilledMaintenanceRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the backfilled maintenance.
+      properties:
+        id:
+          description: The ID of the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+        - id
       type: object
     CreateCampaignRequest:
       description: Request to create a new campaign.
@@ -23865,6 +23925,8 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/CreateDegradationRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateDegradationRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchDegradationRequestDataType"
       required:
@@ -23931,6 +23993,101 @@ components:
         - IDENTIFIED
         - MONITORING
         - RESOLVED
+    CreateDegradationRequestDataRelationships:
+      description: The supported relationships for creating a degradation.
+      properties:
+        template:
+          $ref: "#/components/schemas/CreateDegradationRequestDataRelationshipsTemplate"
+          description: The template used to create the degradation.
+      type: object
+    CreateDegradationRequestDataRelationshipsTemplate:
+      description: The template used to create the degradation.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateDegradationRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    CreateDegradationRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the degradation.
+      properties:
+        id:
+          description: The ID of the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    CreateDegradationTemplateRequest:
+      description: Request object for creating a degradation template.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateDegradationTemplateRequestData"
+      type: object
+    CreateDegradationTemplateRequestData:
+      description: The data object for creating a degradation template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateDegradationTemplateRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+      type: object
+    CreateDegradationTemplateRequestDataAttributes:
+      description: The attributes for creating a degradation template.
+      properties:
+        components_affected:
+          description: The components affected by a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/CreateDegradationTemplateRequestDataAttributesComponentsAffectedItems"
+          type: array
+        degradation_title:
+          description: The title used for a degradation created from this template.
+          type: string
+        name:
+          description: The name of the degradation template.
+          example: ""
+          type: string
+        updates:
+          description: The pre-filled updates for a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/CreateDegradationTemplateRequestDataAttributesUpdatesItems"
+          type: array
+      required:
+        - name
+      type: object
+    CreateDegradationTemplateRequestDataAttributesComponentsAffectedItems:
+      description: A component affected by a degradation created from this template.
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ""
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributesComponentsAffectedItemsStatus"
+      required:
+        - id
+        - status
+      type: object
+    CreateDegradationTemplateRequestDataAttributesUpdatesItems:
+      description: A pre-filled update for a degradation created from this template.
+      properties:
+        message:
+          description: The message of the update.
+          type: string
+        status:
+          $ref: "#/components/schemas/CreateDegradationRequestDataAttributesStatus"
+      required:
+        - status
+      type: object
     CreateDeploymentGateParams:
       description: Parameters for creating a deployment gate.
       properties:
@@ -24381,6 +24538,8 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/CreateMaintenanceRequestDataAttributes"
+        relationships:
+          $ref: "#/components/schemas/CreateMaintenanceRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchMaintenanceRequestDataType"
       required:
@@ -24457,6 +24616,77 @@ components:
       x-enum-varnames:
         - IN_PROGRESS
         - COMPLETED
+    CreateMaintenanceRequestDataRelationships:
+      description: The supported relationships for creating a maintenance.
+      properties:
+        template:
+          $ref: "#/components/schemas/CreateMaintenanceRequestDataRelationshipsTemplate"
+          description: The template used to create the maintenance.
+      type: object
+    CreateMaintenanceRequestDataRelationshipsTemplate:
+      description: The template used to create the maintenance.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateMaintenanceRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    CreateMaintenanceRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the maintenance.
+      properties:
+        id:
+          description: The ID of the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    CreateMaintenanceTemplateRequest:
+      description: Request object for creating a maintenance template.
+      properties:
+        data:
+          $ref: "#/components/schemas/CreateMaintenanceTemplateRequestData"
+      type: object
+    CreateMaintenanceTemplateRequestData:
+      description: The data object for creating a maintenance template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CreateMaintenanceTemplateRequestDataAttributes"
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+      type: object
+    CreateMaintenanceTemplateRequestDataAttributes:
+      description: The attributes for creating a maintenance template.
+      properties:
+        completed_description:
+          description: The description shown when a maintenance created from this template is completed.
+          type: string
+        component_ids:
+          description: The IDs of the components affected by a maintenance created from this template.
+          items:
+            type: string
+          type: array
+        in_progress_description:
+          description: The description shown while a maintenance created from this template is in progress.
+          type: string
+        maintenance_title:
+          description: The title used for a maintenance created from this template.
+          type: string
+        name:
+          description: The name of the maintenance template.
+          example: ""
+          type: string
+        scheduled_description:
+          description: The description shown when a maintenance created from this template is scheduled.
+          type: string
+      required:
+        - name
+      type: object
     CreateNotificationChannelAttributes:
       description: Attributes for creating an on-call notification channel.
       properties:
@@ -31283,6 +31513,9 @@ components:
         status_page:
           $ref: "#/components/schemas/DegradationDataRelationshipsStatusPage"
           description: The status page the degradation belongs to.
+        template:
+          $ref: "#/components/schemas/DegradationDataRelationshipsTemplate"
+          description: The template the degradation was created from.
       type: object
     DegradationDataRelationshipsCreatedByUser:
       description: The Datadog user who created the degradation.
@@ -31348,11 +31581,206 @@ components:
         - type
         - id
       type: object
+    DegradationDataRelationshipsTemplate:
+      description: The template the degradation was created from.
+      properties:
+        data:
+          $ref: "#/components/schemas/DegradationDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    DegradationDataRelationshipsTemplateData:
+      description: The data object identifying the template the degradation was created from.
+      properties:
+        id:
+          description: The ID of the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
     DegradationIncluded:
       description: An included resource related to a degradation or maintenance.
       oneOf:
         - $ref: "#/components/schemas/StatusPagesUser"
         - $ref: "#/components/schemas/StatusPageAsIncluded"
+    DegradationTemplate:
+      description: Response object for a single degradation template.
+      properties:
+        data:
+          $ref: "#/components/schemas/DegradationTemplateData"
+        included:
+          description: The included related resources of a degradation template. Client must explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/DegradationIncluded"
+          type: array
+      type: object
+    DegradationTemplateArray:
+      description: Response object for a list of degradation templates.
+      properties:
+        data:
+          description: A list of degradation template data objects.
+          items:
+            $ref: "#/components/schemas/DegradationTemplateData"
+          type: array
+        included:
+          description: The included related resources of a degradation template. Client must explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/DegradationIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    DegradationTemplateData:
+      description: The data object for a degradation template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DegradationTemplateDataAttributes"
+        id:
+          description: The ID of the degradation template.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationships"
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+      type: object
+    DegradationTemplateDataAttributes:
+      description: The attributes of a degradation template.
+      properties:
+        components_affected:
+          description: The components affected by a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/DegradationTemplateDataAttributesComponentsAffectedItems"
+          type: array
+        created_at:
+          description: Timestamp of when the degradation template was created.
+          format: date-time
+          type: string
+        degradation_title:
+          description: The title used for a degradation created from this template.
+          type: string
+        modified_at:
+          description: Timestamp of when the degradation template was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the degradation template.
+          type: string
+        updates:
+          description: The pre-filled updates for a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/DegradationTemplateDataAttributesUpdatesItems"
+          type: array
+      type: object
+    DegradationTemplateDataAttributesComponentsAffectedItems:
+      description: A component affected by a degradation created from this template.
+      properties:
+        id:
+          description: The ID of the component.
+          example: ""
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributesComponentsAffectedItemsStatus"
+      required:
+        - id
+        - status
+      type: object
+    DegradationTemplateDataAttributesUpdatesItems:
+      description: A pre-filled update for a degradation created from this template.
+      properties:
+        message:
+          description: The message of the update.
+          type: string
+        status:
+          $ref: "#/components/schemas/CreateDegradationRequestDataAttributesStatus"
+      required:
+        - status
+      type: object
+    DegradationTemplateDataRelationships:
+      description: The relationships of a degradation template.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsCreatedByUser"
+          description: The Datadog user who created the degradation template.
+        last_modified_by_user:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsLastModifiedByUser"
+          description: The Datadog user who last modified the degradation template.
+        status_page:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsStatusPage"
+          description: The status page the degradation template belongs to.
+      type: object
+    DegradationTemplateDataRelationshipsCreatedByUser:
+      description: The Datadog user who created the degradation template.
+      properties:
+        data:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsCreatedByUserData"
+      required:
+        - data
+      type: object
+    DegradationTemplateDataRelationshipsCreatedByUserData:
+      description: The data object identifying the Datadog user who created the degradation template.
+      properties:
+        id:
+          description: The ID of the Datadog user who created the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
+    DegradationTemplateDataRelationshipsLastModifiedByUser:
+      description: The Datadog user who last modified the degradation template.
+      properties:
+        data:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsLastModifiedByUserData"
+      required:
+        - data
+      type: object
+    DegradationTemplateDataRelationshipsLastModifiedByUserData:
+      description: The data object identifying the Datadog user who last modified the degradation template.
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
+    DegradationTemplateDataRelationshipsStatusPage:
+      description: The status page the degradation template belongs to.
+      properties:
+        data:
+          $ref: "#/components/schemas/DegradationTemplateDataRelationshipsStatusPageData"
+      required:
+        - data
+      type: object
+    DegradationTemplateDataRelationshipsStatusPageData:
+      description: The data object identifying the status page associated with a degradation template.
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPageDataType"
+      required:
+        - type
+        - id
+      type: object
     DegradationUpdate:
       description: Response object for a degradation update.
       properties:
@@ -61654,6 +62082,9 @@ components:
         status_page:
           $ref: "#/components/schemas/MaintenanceDataRelationshipsStatusPage"
           description: The status page the maintenance belongs to.
+        template:
+          $ref: "#/components/schemas/MaintenanceDataRelationshipsTemplate"
+          description: The template the maintenance was created from.
       type: object
     MaintenanceDataRelationshipsCreatedByUser:
       description: The Datadog user who created the maintenance.
@@ -61714,6 +62145,177 @@ components:
           description: The ID of the status page.
           example: ""
           format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPageDataType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceDataRelationshipsTemplate:
+      description: The template the maintenance was created from.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    MaintenanceDataRelationshipsTemplateData:
+      description: The data object identifying the template the maintenance was created from.
+      properties:
+        id:
+          description: The ID of the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceTemplate:
+      description: Response object for a single maintenance template.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceTemplateData"
+        included:
+          description: The included related resources of a maintenance template. Client must explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/DegradationIncluded"
+          type: array
+      type: object
+    MaintenanceTemplateArray:
+      description: Response object for a list of maintenance templates.
+      properties:
+        data:
+          description: A list of maintenance template data objects.
+          items:
+            $ref: "#/components/schemas/MaintenanceTemplateData"
+          type: array
+        included:
+          description: The included related resources of a maintenance template. Client must explicitly request these resources by name in the `include` query parameter.
+          items:
+            $ref: "#/components/schemas/DegradationIncluded"
+          type: array
+      required:
+        - data
+      type: object
+    MaintenanceTemplateData:
+      description: The data object for a maintenance template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MaintenanceTemplateDataAttributes"
+        id:
+          description: The ID of the maintenance template.
+          type: string
+        relationships:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationships"
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+      type: object
+    MaintenanceTemplateDataAttributes:
+      description: The attributes of a maintenance template.
+      properties:
+        completed_description:
+          description: The description shown when a maintenance created from this template is completed.
+          type: string
+        component_ids:
+          description: The IDs of the components affected by a maintenance created from this template.
+          items:
+            type: string
+          type: array
+        created_at:
+          description: Timestamp of when the maintenance template was created.
+          format: date-time
+          type: string
+        in_progress_description:
+          description: The description shown while a maintenance created from this template is in progress.
+          type: string
+        maintenance_title:
+          description: The title used for a maintenance created from this template.
+          type: string
+        modified_at:
+          description: Timestamp of when the maintenance template was last modified.
+          format: date-time
+          type: string
+        name:
+          description: The name of the maintenance template.
+          type: string
+        scheduled_description:
+          description: The description shown when a maintenance created from this template is scheduled.
+          type: string
+      type: object
+    MaintenanceTemplateDataRelationships:
+      description: The relationships of a maintenance template.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsCreatedByUser"
+          description: The Datadog user who created the maintenance template.
+        last_modified_by_user:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsLastModifiedByUser"
+          description: The Datadog user who last modified the maintenance template.
+        status_page:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsStatusPage"
+          description: The status page the maintenance template belongs to.
+      type: object
+    MaintenanceTemplateDataRelationshipsCreatedByUser:
+      description: The Datadog user who created the maintenance template.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsCreatedByUserData"
+      required:
+        - data
+      type: object
+    MaintenanceTemplateDataRelationshipsCreatedByUserData:
+      description: The data object identifying the Datadog user who created the maintenance template.
+      properties:
+        id:
+          description: The ID of the Datadog user who created the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceTemplateDataRelationshipsLastModifiedByUser:
+      description: The Datadog user who last modified the maintenance template.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsLastModifiedByUserData"
+      required:
+        - data
+      type: object
+    MaintenanceTemplateDataRelationshipsLastModifiedByUserData:
+      description: The data object identifying the Datadog user who last modified the maintenance template.
+      properties:
+        id:
+          description: The ID of the Datadog user who last modified the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceTemplateDataRelationshipsStatusPage:
+      description: The status page the maintenance template belongs to.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceTemplateDataRelationshipsStatusPageData"
+      required:
+        - data
+      type: object
+    MaintenanceTemplateDataRelationshipsStatusPageData:
+      description: The data object identifying the status page associated with a maintenance template.
+      properties:
+        id:
+          description: The ID of the status page.
+          example: ""
           type: string
         type:
           $ref: "#/components/schemas/StatusPageDataType"
@@ -77100,6 +77702,8 @@ components:
           example: "1234abcd-12ab-34cd-56ef-123456abcdef"
           format: uuid
           type: string
+        relationships:
+          $ref: "#/components/schemas/PatchDegradationRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchDegradationRequestDataType"
       required:
@@ -77161,6 +77765,34 @@ components:
         - IDENTIFIED
         - MONITORING
         - RESOLVED
+    PatchDegradationRequestDataRelationships:
+      description: The supported relationships for updating a degradation.
+      properties:
+        template:
+          $ref: "#/components/schemas/PatchDegradationRequestDataRelationshipsTemplate"
+          description: The template used to create the degradation.
+      type: object
+    PatchDegradationRequestDataRelationshipsTemplate:
+      description: The template used to create the degradation.
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchDegradationRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    PatchDegradationRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the degradation.
+      properties:
+        id:
+          description: The ID of the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
     PatchDegradationRequestDataType:
       default: degradations
       description: Degradations resource type.
@@ -77170,6 +77802,98 @@ components:
       type: string
       x-enum-varnames:
         - DEGRADATIONS
+    PatchDegradationTemplateRequest:
+      description: Request object for updating a degradation template.
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestData"
+      type: object
+    PatchDegradationTemplateRequestData:
+      description: The data object for updating a degradation template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributes"
+        id:
+          description: The ID of the degradation template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    PatchDegradationTemplateRequestDataAttributes:
+      description: The supported attributes for updating a degradation template.
+      properties:
+        components_affected:
+          description: The components affected by a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributesComponentsAffectedItems"
+          type: array
+        degradation_title:
+          description: The title used for a degradation created from this template.
+          type: string
+        name:
+          description: The name of the degradation template.
+          type: string
+        updates:
+          description: The pre-filled updates for a degradation created from this template.
+          items:
+            $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributesUpdatesItems"
+          type: array
+      type: object
+    PatchDegradationTemplateRequestDataAttributesComponentsAffectedItems:
+      description: A component affected by a degradation created from this template.
+      properties:
+        id:
+          description: The ID of the component. Must be a component of type `component`.
+          example: ""
+          type: string
+        name:
+          description: The name of the component.
+          readOnly: true
+          type: string
+        status:
+          $ref: "#/components/schemas/PatchDegradationTemplateRequestDataAttributesComponentsAffectedItemsStatus"
+      required:
+        - id
+        - status
+      type: object
+    PatchDegradationTemplateRequestDataAttributesComponentsAffectedItemsStatus:
+      description: The status of the component.
+      enum:
+        - operational
+        - degraded
+        - partial_outage
+        - major_outage
+      example: operational
+      type: string
+      x-enum-varnames:
+        - OPERATIONAL
+        - DEGRADED
+        - PARTIAL_OUTAGE
+        - MAJOR_OUTAGE
+    PatchDegradationTemplateRequestDataAttributesUpdatesItems:
+      description: A pre-filled update for a degradation created from this template.
+      properties:
+        message:
+          description: The message of the update.
+          type: string
+        status:
+          $ref: "#/components/schemas/CreateDegradationRequestDataAttributesStatus"
+      required:
+        - status
+      type: object
+    PatchDegradationTemplateRequestDataType:
+      default: degradation_templates
+      description: Degradation templates resource type.
+      enum:
+        - degradation_templates
+      example: degradation_templates
+      type: string
+      x-enum-varnames:
+        - DEGRADATION_TEMPLATES
     PatchDegradationUpdateRequest:
       description: Request object for editing a degradation update.
       example:
@@ -77259,6 +77983,8 @@ components:
           example: "1234abcd-12ab-34cd-56ef-123456abcdef"
           format: uuid
           type: string
+        relationships:
+          $ref: "#/components/schemas/PatchMaintenanceRequestDataRelationships"
         type:
           $ref: "#/components/schemas/PatchMaintenanceRequestDataType"
       required:
@@ -77326,6 +78052,34 @@ components:
       x-enum-varnames:
         - OPERATIONAL
         - MAINTENANCE
+    PatchMaintenanceRequestDataRelationships:
+      description: The supported relationships for updating a maintenance.
+      properties:
+        template:
+          $ref: "#/components/schemas/PatchMaintenanceRequestDataRelationshipsTemplate"
+          description: The template used to create the maintenance.
+      type: object
+    PatchMaintenanceRequestDataRelationshipsTemplate:
+      description: The template used to create the maintenance.
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchMaintenanceRequestDataRelationshipsTemplateData"
+      required:
+        - data
+      type: object
+    PatchMaintenanceRequestDataRelationshipsTemplateData:
+      description: The data object identifying the template used to create the maintenance.
+      properties:
+        id:
+          description: The ID of the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
     PatchMaintenanceRequestDataType:
       default: maintenances
       description: Maintenances resource type.
@@ -77335,6 +78089,60 @@ components:
       type: string
       x-enum-varnames:
         - MAINTENANCES
+    PatchMaintenanceTemplateRequest:
+      description: Request object for updating a maintenance template.
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestData"
+      type: object
+    PatchMaintenanceTemplateRequestData:
+      description: The data object for updating a maintenance template.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataAttributes"
+        id:
+          description: The ID of the maintenance template.
+          example: ""
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceTemplateRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    PatchMaintenanceTemplateRequestDataAttributes:
+      description: The supported attributes for updating a maintenance template.
+      properties:
+        completed_description:
+          description: The description shown when a maintenance created from this template is completed.
+          type: string
+        component_ids:
+          description: The IDs of the components affected by a maintenance created from this template.
+          items:
+            type: string
+          type: array
+        in_progress_description:
+          description: The description shown while a maintenance created from this template is in progress.
+          type: string
+        maintenance_title:
+          description: The title used for a maintenance created from this template.
+          type: string
+        name:
+          description: The name of the maintenance template.
+          type: string
+        scheduled_description:
+          description: The description shown when a maintenance created from this template is scheduled.
+          type: string
+      type: object
+    PatchMaintenanceTemplateRequestDataType:
+      default: maintenance_templates
+      description: Maintenance templates resource type.
+      enum:
+        - maintenance_templates
+      example: maintenance_templates
+      type: string
+      x-enum-varnames:
+        - MAINTENANCE_TEMPLATES
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
       properties:
@@ -196905,6 +197713,11 @@ paths:
           name: sort
           schema:
             type: string
+        - description: Optional source ID filter. Returns only degradations whose source matches this ID (for example, an incident ID).
+          in: query
+          name: filter[source_id]
+          schema:
+            type: string
       responses:
         "200":
           content:
@@ -197471,6 +198284,285 @@ paths:
         operator: AND
         permissions:
           - status_pages_settings_write
+  /api/v2/statuspages/{page_id}/degradation_templates:
+    get:
+      description: Lists all degradation templates for a status page.
+      operationId: ListDegradationTemplates
+      parameters:
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          components_affected:
+                            - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+                              status: degraded
+                          degradation_title: Elevated API Latency
+                          name: Elevated API Latency
+                          updates:
+                            - message: We are investigating the issue.
+                              status: investigating
+                        id: 00000000-0000-0000-0000-000000000003
+                        type: degradation_templates
+              schema:
+                $ref: "#/components/schemas/DegradationTemplateArray"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: List degradation templates
+      tags:
+        - Status Pages
+      x-menu-order: 27
+    post:
+      description: Creates a new degradation template.
+      operationId: CreateDegradationTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      components_affected:
+                        - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+                          status: degraded
+                      degradation_title: Elevated API Latency
+                      name: Elevated API Latency
+                      updates:
+                        - message: We are investigating the issue.
+                          status: investigating
+                    type: degradation_templates
+            schema:
+              $ref: "#/components/schemas/CreateDegradationTemplateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        components_affected:
+                          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+                            status: degraded
+                        degradation_title: Elevated API Latency
+                        name: Elevated API Latency
+                        updates:
+                          - message: We are investigating the issue.
+                            status: investigating
+                      id: 00000000-0000-0000-0000-000000000003
+                      type: degradation_templates
+              schema:
+                $ref: "#/components/schemas/DegradationTemplate"
+          description: Created
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Create degradation template
+      tags:
+        - Status Pages
+      x-menu-order: 35
+  /api/v2/statuspages/{page_id}/degradation_templates/{template_id}:
+    delete:
+      description: Deletes a degradation template by its ID (soft delete).
+      operationId: DeleteDegradationTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Delete degradation template
+      tags:
+        - Status Pages
+      x-menu-order: 34
+    get:
+      description: Retrieves a specific degradation template by its ID.
+      operationId: GetDegradationTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        components_affected:
+                          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+                            status: degraded
+                        degradation_title: Elevated API Latency
+                        name: Elevated API Latency
+                        updates:
+                          - message: We are investigating the issue.
+                            status: investigating
+                      id: 00000000-0000-0000-0000-000000000003
+                      type: degradation_templates
+              schema:
+                $ref: "#/components/schemas/DegradationTemplate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: Get degradation template
+      tags:
+        - Status Pages
+      x-menu-order: 33
+    patch:
+      description: Updates an existing degradation template's attributes.
+      operationId: UpdateDegradationTemplate
+      parameters:
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      degradation_title: Elevated API Latency for 40 minutes
+                      name: Elevated API Latency
+                    id: 00000000-0000-0000-0000-000000000003
+                    type: degradation_templates
+            schema:
+              $ref: "#/components/schemas/PatchDegradationTemplateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        components_affected:
+                          - id: 1234abcd-12ab-34cd-56ef-123456abcdef
+                            status: degraded
+                        degradation_title: Elevated API Latency for 40 minutes
+                        name: Elevated API Latency
+                        updates:
+                          - message: We are investigating the issue.
+                            status: investigating
+                      id: 00000000-0000-0000-0000-000000000003
+                      type: degradation_templates
+              schema:
+                $ref: "#/components/schemas/DegradationTemplate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Update degradation template
+      tags:
+        - Status Pages
+      x-menu-order: 26
   /api/v2/statuspages/{page_id}/degradations:
     post:
       description: Creates a new degradation.
@@ -197934,6 +199026,282 @@ paths:
       tags:
         - Status Pages
       x-menu-order: 25
+  /api/v2/statuspages/{page_id}/maintenance_templates:
+    get:
+      description: Lists all maintenance templates for a status page.
+      operationId: ListMaintenanceTemplates
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          completed_description: We have completed maintenance on the API to improve performance.
+                          component_ids:
+                            - 1234abcd-12ab-34cd-56ef-123456abcdef
+                          in_progress_description: We are currently performing maintenance on the API to improve performance.
+                          maintenance_title: API Maintenance
+                          name: API Maintenance
+                          scheduled_description: We will be performing maintenance on the API to improve performance.
+                        id: 00000000-0000-0000-0000-000000000004
+                        type: maintenance_templates
+              schema:
+                $ref: "#/components/schemas/MaintenanceTemplateArray"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: List maintenance templates
+      tags:
+        - Status Pages
+      x-menu-order: 29
+    post:
+      description: Creates a new maintenance template.
+      operationId: CreateMaintenanceTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      completed_description: We have completed maintenance on the API to improve performance.
+                      component_ids:
+                        - 1234abcd-12ab-34cd-56ef-123456abcdef
+                      in_progress_description: We are currently performing maintenance on the API to improve performance.
+                      maintenance_title: API Maintenance
+                      name: API Maintenance
+                      scheduled_description: We will be performing maintenance on the API to improve performance.
+                    type: maintenance_templates
+            schema:
+              $ref: "#/components/schemas/CreateMaintenanceTemplateRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        completed_description: We have completed maintenance on the API to improve performance.
+                        component_ids:
+                          - 1234abcd-12ab-34cd-56ef-123456abcdef
+                        in_progress_description: We are currently performing maintenance on the API to improve performance.
+                        maintenance_title: API Maintenance
+                        name: API Maintenance
+                        scheduled_description: We will be performing maintenance on the API to improve performance.
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: maintenance_templates
+              schema:
+                $ref: "#/components/schemas/MaintenanceTemplate"
+          description: Created
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Create maintenance template
+      tags:
+        - Status Pages
+      x-menu-order: 28
+  /api/v2/statuspages/{page_id}/maintenance_templates/{template_id}:
+    delete:
+      description: Deletes a maintenance template by its ID (soft delete).
+      operationId: DeleteMaintenanceTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        "204":
+          description: No Content
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Delete maintenance template
+      tags:
+        - Status Pages
+      x-menu-order: 32
+    get:
+      description: Retrieves a specific maintenance template by its ID.
+      operationId: GetMaintenanceTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        completed_description: We have completed maintenance on the API to improve performance.
+                        component_ids:
+                          - 1234abcd-12ab-34cd-56ef-123456abcdef
+                        in_progress_description: We are currently performing maintenance on the API to improve performance.
+                        maintenance_title: API Maintenance
+                        name: API Maintenance
+                        scheduled_description: We will be performing maintenance on the API to improve performance.
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: maintenance_templates
+              schema:
+                $ref: "#/components/schemas/MaintenanceTemplate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_read
+      summary: Get maintenance template
+      tags:
+        - Status Pages
+      x-menu-order: 30
+    patch:
+      description: Updates an existing maintenance template's attributes.
+      operationId: UpdateMaintenanceTemplate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the degradation or maintenance template.
+          in: path
+          name: template_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: "Comma-separated list of resources to include. Supported values: created_by_user, last_modified_by_user, status_page."
+          in: query
+          name: include
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      completed_description: We have completed maintenance on the API to improve performance.
+                      in_progress_description: We are currently performing maintenance on the API to improve performance for 40 minutes.
+                      maintenance_title: API Maintenance
+                      scheduled_description: We will be performing maintenance on the API to improve performance for 40 minutes.
+                    id: 00000000-0000-0000-0000-000000000004
+                    type: maintenance_templates
+            schema:
+              $ref: "#/components/schemas/PatchMaintenanceTemplateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        completed_description: We have completed maintenance on the API to improve performance.
+                        component_ids:
+                          - 1234abcd-12ab-34cd-56ef-123456abcdef
+                        in_progress_description: We are currently performing maintenance on the API to improve performance for 40 minutes.
+                        maintenance_title: API Maintenance
+                        name: API Maintenance
+                        scheduled_description: We will be performing maintenance on the API to improve performance for 40 minutes.
+                      id: 00000000-0000-0000-0000-000000000004
+                      type: maintenance_templates
+              schema:
+                $ref: "#/components/schemas/MaintenanceTemplate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_settings_write
+      summary: Update maintenance template
+      tags:
+        - Status Pages
+      x-menu-order: 31
   /api/v2/statuspages/{page_id}/maintenances:
     post:
       description: Schedules a new maintenance.
