@@ -605,8 +605,8 @@ To make custom OpenLineage tags available in Data Job Monitors, set `source` to 
 
 Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 
-- **Job facet tags**: Added as individual tags, so you can search and filter by them on the Jobs Overview page and in Trace Explorer. When `source` is `USER`, they are also available in Data Job Monitors. Use job facet tags for stable job properties, such as `team` or `owner`.
-- **Run facet tags**: Available in Data Job Monitors when `source` is `USER`, but they aren't added as individual tags for searching and filtering on the Jobs Overview page or in Trace Explorer. Use run facet tags for values that can vary between runs.
+- **Job facet tags**: Added as top-level tags to underlying job traces, so you can search and filter by them on the Jobs Overview page and in Trace Explorer. When `source` is `USER`, they are also available in Data Job Monitors. Use job facet tags for stable job properties, such as `team` or `owner`.
+- **Run facet tags**: Available in Data Job Monitors when `source` is `USER`. They aren't added as individual tags for searching and filtering on the Jobs Overview page or in Trace Explorer. Use run facet tags for values that can vary between runs.
 
 ## Further reading
 
