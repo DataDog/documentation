@@ -43,7 +43,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 - [Source Code Integration][7] is enabled.
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
-Source Code Integration alone gives you some Code Origin coverage automatically, even if your service doesn't meet the compatibility requirements below. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
+If your Source Code Integration is set up, some Code Origin details can be inferred automatically, even if your service doesn't meet the compatibility requirements below. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
 
 ### Compatibility requirements
 
