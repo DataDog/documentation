@@ -69,6 +69,17 @@ To remediate this, reapply the existing Datadog integration ORM Stack in your OC
 
 **Note**: If you specified the subnet OCIDs in the optional configuration section, ensure that there is one subnet OCID per subscribed region. Do not make any other modifications to the existing stack before reapplying it.
 
+## Metrics not being collected
+
+Complete the following checks for each monitored region:
+
+1. In the integration compartment, verify that the `dd-function-app` function application exists.
+2. In `dd-function-app`, verify that the `dd-metrics-forwarder` function exists.
+3. If you use custom subnets, verify that they meet the the permissions outlined [here][7]
+4. Check for stale Datadog service connector hubs. All Datadog created connector hubs will be in the format `dd-<service>-connectorhub-<suffix>`. If you find any, delete these Datadog-managed connector hubs.
+
+After completing these checks, reapply the Datadog integration ORM stack.
+
 Still need help? Contact [Datadog support][3].
 
 [1]: /integrations/oracle-cloud-infrastructure
@@ -77,4 +88,5 @@ Still need help? Contact [Datadog support][3].
 [4]: https://cloud.oracle.com/identity/domains/policies
 [5]: https://docs.oracle.com/en/cloud/get-started/subscriptions-cloud/mmocs/requesting-service-limit-change.html
 [6]: https://app.datadoghq.com/organization-settings/api-keys
+[7]: https://docs.datadoghq.com/integrations/oracle-cloud-infrastructure/#deploy-the-quickstart-orm-stack
 [8]: https://app.datadoghq.com/organization-settings/application-keys
