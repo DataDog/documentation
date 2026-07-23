@@ -206,7 +206,7 @@ If the browser application being tested is instrumented using [Browser Monitorin
 
 ### Upload test failure screenshots
 
-When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. They appear in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
+When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. View the screenshots in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
 
 {{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
