@@ -106,7 +106,7 @@ After your application starts sending data, the traces automatically appear in t
 <div class="alert alert-danger">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
-<li/> OpenInference spans are supported when they include a non-empty <code>openinference.span.kind</code> attribute. See the <a href="#using-openinference">OpenInference example</a> and <a href="#openinference-attribute-mappings">attribute mappings</a>.
+<li/> OpenInference spans are supported. See the <a href="#using-openinference">OpenInference example</a>.
 <li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the Agent Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 </ul>
 </div>
@@ -709,12 +709,13 @@ Reserved Agent Observability fields in `llm.invocation_parameters` and `metadata
 
 #### Input and output messages
 
-OpenInference uses zero-based indexed attributes for structured messages. Input and output are extracted from the following sources, in priority order:
+In these attributes, `<direction>` is `input` or `output`.
+Input and output are extracted from the following sources, in priority order:
 
 1. OpenTelemetry `gen_ai.*` direct attributes and span events
 2. OpenLLMetry indexed attributes
 3. OpenInference indexed attributes
-4. OpenInference `input.value` and `output.value` when a corresponding indexed message is absent
+4. OpenInference `input.value` and `output.value`
 
 | OpenInference Source | Agent Observability Field |
 |----------------------|---------------------------|
@@ -735,7 +736,7 @@ The following indexed message attributes are supported:
 | `llm.<direction>_messages.<message-index>.message.contents.<content-index>.tool_call.*` | Tool call within ordered content |
 | `llm.<direction>_messages.<message-index>.message.tool_call_id` | Tool result ID when the message role is `tool` |
 
-In these attributes, `<direction>` is `input` or `output`. Tool calls without a function name are retained with the name `unknown`. Image content maps to an image URI while preserving its position among other message content.
+Image content maps to an image URI while preserving its position among other message content.
 
 #### Embedding spans
 
@@ -754,8 +755,6 @@ In these attributes, `<direction>` is `input` or `output`. Tool calls without a 
 | `retrieval.documents.<index>.document.score` | `meta.output.documents[].score` |
 | `retrieval.documents.<index>.document.metadata` | `meta.output.documents[].metadata` (parsed JSON object) |
 
-Retrieval documents are retained when they contain an ID, score, or metadata but no content.
-
 #### Tags filtering
 
 OpenInference attributes with `llm.*`, `retrieval.*`, `embedding.*`, and `reranker.*` prefixes are excluded from tags. Specifically mapped values such as `input.value`, `output.value`, `metadata`, `tag.tags`, and `tool.parameters` are also excluded from duplicate tags.
@@ -772,8 +771,6 @@ Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic 
 - Model parameters and metadata
 
 For the complete list of supported attributes and their specifications, see the [OpenTelemetry semantic conventions for generative AI documentation][1].
-
-Agent Observability also supports OpenInference spans with a non-empty `openinference.span.kind`. The [OpenInference attribute mappings](#openinference-attribute-mappings) list supported model, token, message, tool, embedding, retrieval, session, and metadata attributes. For attribute types and flattened indexed formats, see the [OpenInference semantic conventions][12].
 
 ## Disabling Agent Observability conversion
 
