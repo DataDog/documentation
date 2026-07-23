@@ -166,6 +166,9 @@ STALE_DAYS = 31  # ~1 calendar month
 # any skew so our own labeling never counts as fresh activity.
 STALE_REACTIVATE_GRACE = timedelta(seconds=60)
 
+# Prepended to every author-facing comment so readers know it is automated.
+AUTOMATED_COMMENT_HEADER = "[Automated message] "
+
 # Appended to every author-facing comment so readers know how to follow up.
 AUTOMATED_COMMENT_FOOTER = (
     "\n\nThis is an automated comment, but if you have a question, you can mention me in this PR "
@@ -179,6 +182,7 @@ AUTOMATED_COMMENT_FOOTER = (
 def build_manual_review_comment() -> str:
     """Posted on PRs with non-reorg conflicts, or when auto-fix fails."""
     return (
+        AUTOMATED_COMMENT_HEADER +
         f"This PR has merge conflicts from a [recent repo reorg]({REPO_REORG_README_LINK}) that could not be resolved automatically.\n\n"
         "If you feel comfortable resolving the conflicts yourself:\n\n"
         "1. Resolve the conflicts. For a full list of repo files and folders and their updated location, "
@@ -197,6 +201,7 @@ def build_manual_review_comment() -> str:
 def build_no_reorg_conflicts_comment() -> str:
     """Posted on PRs with merge conflicts that are unrelated to the reorg."""
     return (
+        AUTOMATED_COMMENT_HEADER +
         f"This PR has been scanned for conflicts caused by the [recent repo reorg]({REPO_REORG_README_LINK}). "
         "No reorg-related conflicts were found, so no action was taken to auto-fix the conflicts.\n\n"
         f"If you believe this is incorrect, add the `{LABEL_HELP_REQUESTED}` label, and the WebOps Platform team will take a closer look."
@@ -207,6 +212,7 @@ def build_no_reorg_conflicts_comment() -> str:
 def build_stale_comment() -> str:
     """Posted on PRs with no activity in the last STALE_DAYS days."""
     return (
+        AUTOMATED_COMMENT_HEADER +
         f"This PR has conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
         f"Because this PR is stale (more than {STALE_DAYS} days old), no attempt was made to auto-resolve the conflicts. "
         "If you still intend to use this PR, remove the label "
@@ -218,6 +224,7 @@ def build_stale_comment() -> str:
 def build_wip_comment() -> str:
     """Posted on PRs carrying the WORK IN PROGRESS label."""
     return (
+        AUTOMATED_COMMENT_HEADER +
         f"This PR has merge conflicts created by the [docs repo reorg project]({REPO_REORG_README_LINK}). "
         "Because this PR is marked as a work in progress, no attempt was made to auto-resolve the conflicts. "
         f"When your PR is finished, you can queue your PR for an auto-fix by removing the `{LABEL_WIP}` label and the `{LABEL_SKIP}` label. "
@@ -229,7 +236,7 @@ def build_wip_comment() -> str:
 def build_autofix_close_comment(new_pr_number: int | str) -> str:
     """Posted on the original PR when it is closed in favor of a fix PR."""
     return (
-        f"🤖 **Reorg conflict auto-fix:**\n\n"
+        AUTOMATED_COMMENT_HEADER +
         f"This PR has merge conflicts caused by the [recent docs repo reorg]({REPO_REORG_README_LINK}) "
         f"(files moved from the repo root into `hugo/`). "
         f"A new PR with your commits translated to the correct paths "

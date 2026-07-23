@@ -13,11 +13,42 @@
 
 ### 3. Announce the reorg
 
-Announce the reorg:
+Announce the reorg (see copy for various channels below).
 
 - [ ] To the #documentation channel (<LINK>)
 - [ ] To the #docs-backroom channel (<LINK>)
 - [ ] In a banner in the `documentation` README
+
+#### Announcement copy for #documentation:
+
+```
+On <DATE>, most of the files in the `documentation` repo will move into a new folder.
+
+If your role involves adding content to the `documentation` repo, you could be impacted:
+
+- We'll spend some portion of <DATE> in a code freeze. You won't be able to update content at that time. We'll keep this as brief as possible.
+- The reorg will cause conflicts in the majority of open PRs. If you have a PR open in the `documentation` repo at this time, action may be required from you.
+
+We'll fix most of the conflicting PRs automatically, closing the old PR with a link to the new one. The new PR will be marked `WORK IN PROGRESS` while it awaits the author's review.
+
+In edge cases when an automatic fix is not available for a PR, we'll leave a comment in the PR offering further instructions.
+
+You can read more about the reorg here.<LINK TO REORG README>
+```
+
+#### Announcement copy for #docs-backroom
+
+By now, you should have met with the team to explain what's going to happen, so this shouldn't be brand-new information.
+
+```
+Hi all,
+
+I just announced the docs repo reorg in `#documentation`. I wanted to post a message here to note that the docs on-call is **not** expected to provide support for the reorg. I'll be doing that, along with David and Heston. Our automations should keep PRs out of your queue until they've been fixed and are ready for a typical review.
+
+The day before the reorg, I'll post here again with additional information for the folks on call, and tag them in that. That message will include support channels that you can redirect people to when they ask you for help.
+
+Let me know if you have any questions. Thank you!
+```
 
 ## The day before
 
