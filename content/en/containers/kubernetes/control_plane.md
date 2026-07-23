@@ -321,12 +321,13 @@ scheduler:
 
 ### Recommended method
 
-<div class="alert alert-info">This feature is in Preview.</div>
 
 Datadog supports monitoring Kubernetes Control Plane components, including the API Server, Controller Manager, and Scheduler.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
+
+<div class="alert alert-info">This feature is in Preview.</div>
 
 #### Prerequisites
 
