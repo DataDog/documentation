@@ -43,18 +43,7 @@ To use incident spaces:
 2. Select an **Organization** from the dropdown. If you don't see any options, reach out to your Google Workspace administrator to connect your Google organization to Datadog.
 3. Select a **Target Audience** from the dropdown. **Default** is the default target audience set by your Google Workspace administrator, which could be a private or public target audience group. Reach out to your Google Workspace administrator if this is unclear.
 
-4. The **Channel Name Template** you define determines how Datadog names the incident spaces it creates. The following variables are available in channel name templates (see also [Variables available only in channel naming templates][4]):
-   * `{{public_id}}`: Incident's numeric ID
-   * `{{title}}`: Incident's title
-   * `{{created}}`: Incident's creation date in format `MM_DD_YYYY` (in the timezone selected below)
-   * `{{yyyy}}`: Incident's four-digit creation year (in the timezone selected below)
-   * `{{mm}}`: Incident's two-digit creation month (in the timezone selected below)
-   * `{{dd}}`: Incident's two-digit creation day of month (in the timezone selected below)
-   * `{{severity}}`: Incident's severity
-   * `{{severity_number}}`: Incident's severity, as a number (for example, `1` for `SEV-1`)
-   * `{{random_adjective}}`: Random adjective
-   * `{{random_noun}}`: Random noun
-   * `{{slug}}`: Slug (when slug source is set to `servicenow`, this displays the ServiceNow record number)
+4. The **Channel Name Template** you define determines how Datadog names the incident spaces it creates. For full descriptions, see [Variables available only in channel naming templates][4].
 
 ## Further reading
 

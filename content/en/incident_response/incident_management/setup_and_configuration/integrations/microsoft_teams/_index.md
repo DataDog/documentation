@@ -35,19 +35,7 @@ You can configure Incident Management to automatically create an incident Micros
 4. Select the Team in which you want to automatically create new channels.
 5. Save your settings.
 
-After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. The following variables are available in channel name templates (see also [Variables available only in channel naming templates][6]):
-
-* `{{public_id}}`: Incident's numeric ID
-* `{{title}}`: Incident's title
-* `{{created}}`: Incident's creation date in format MM_DD_YYYY (in the timezone selected below)
-* `{{yyyy}}`: Incident's four-digit creation year (in the timezone selected below)
-* `{{mm}}`: Incident's two-digit creation month (in the timezone selected below)
-* `{{dd}}`: Incident's two-digit creation day of month (in the timezone selected below)
-* `{{severity}}`: Incident's severity
-* `{{severity_number}}`: Incident's severity, as a number (for example, `1` for `SEV-1`)
-* `{{random_adjective}}`: Random adjective
-* `{{random_noun}}`: Random noun
-* `{{slug}}`: Slug (when slug source is set to `servicenow`, this displays the ServiceNow record number)
+After you enable this automation, you can define a **channel name template** for Datadog to follow when creating the channel. For full descriptions, see [Variables available only in channel naming templates][6].
 
 ### Channel message syncing
 
