@@ -91,9 +91,7 @@ If you change a previously set primary tag, be aware of the following:
 
 You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms.
 
-Container-based primary tags are enabled by default in Datadog Agent versions 7.65.0 and later. In Agent versions 7.35.0 through 7.64.x, container-based primary tags are enabled automatically in Fargate and are opt-in everywhere else.
-
-With Agent 7.65.0 or later, no feature flag is required. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect.
+Container-based primary tags are enabled by default in Datadog Agent versions 7.65.0 and later. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect.
 
 You can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
 
