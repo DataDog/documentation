@@ -109223,6 +109223,34 @@ components:
       required:
         - data
       type: object
+    TestExample:
+      description: A test example resource.
+      properties:
+        created_at:
+          description: Creation time of the test example.
+          format: date-time
+          readOnly: true
+          type: string
+        id:
+          description: The ID of the test example.
+          example: "abc-123"
+          type: string
+        name:
+          description: The name of the test example.
+          example: "My Test Example"
+          type: string
+      required:
+        - id
+        - name
+      type: object
+    TestExamplesResponse:
+      description: Response containing a list of test examples.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/TestExample"
+          type: array
+      type: object
     TestOptimizationDeleteServiceSettingsRequest:
       description: Request object for deleting Test Optimization service settings.
       properties:
@@ -203871,6 +203899,35 @@ paths:
         operator: OR
         permissions:
           - teams_read
+  /api/v2/test-examples:
+    get:
+      description: Get a list of all test examples.
+      operationId: ListTestExamples
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - id: "abc-123"
+                        name: "My Test Example"
+              schema:
+                $ref: "#/components/schemas/TestExamplesResponse"
+          description: OK
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: List test examples
+      tags:
+        - Test Examples
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - test_read
   /api/v2/test/flaky-test-management/tests:
     patch:
       description: |-
@@ -207744,6 +207801,8 @@ tags:
     name: Tag Policies
   - description: View and manage teams within Datadog. See the [Teams page](https://docs.datadoghq.com/account_management/teams/) for more information.
     name: Teams
+  - description: Manage test example resources.
+    name: Test Examples
   - description: |-
       Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information.
     name: Test Optimization
