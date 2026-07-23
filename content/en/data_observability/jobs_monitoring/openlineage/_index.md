@@ -599,7 +599,7 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | `tags`         | Adds custom tags to the job or run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
 
-**Note**: The `tags` field in the [`tags` facet][2] must be an array of objects. Each tag object must include a `key`, `value`, and `source`.
+**Note**: Each tag in the [`tags` facet][2] must include a `key`, `value`, and `source`.
 
 To make custom OpenLineage tags available in Data Job Monitors, set `source` to exactly `USER`. Tags with a missing or different `source` are not available in Data Job Monitors as custom tags.
 
