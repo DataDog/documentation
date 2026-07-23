@@ -137,7 +137,9 @@ messages = prompt.format(**variables)
 
 When the formatted value is passed directly to a supported automatically instrumented provider, preserve that value unchanged so Datadog can associate the managed prompt with the resulting LLM span automatically.
 
-If the application copies, rebuilds, concatenates, or otherwise transforms the formatted value before the provider call, wrap that call with `LLMObs.annotation_context()` and pass the same variables to `prompt.to_annotation_dict()` that were passed to `prompt.format()`:
+If the application copies, rebuilds, concatenates, mutates, or otherwise transforms the formatted value before the provider call, wrap that call with `LLMObs.annotation_context()` and pass the same variables to `prompt.to_annotation_dict()` that were passed to `prompt.format()`. Treat appending or extending a formatted chat message list with user messages, assistant replies, tool calls, or tool results—including across a multi-turn loop—as a transformation, and keep the annotation context active for every provider call that uses that conversation.
+
+Before completing the integration, inspect the actual data flow from `prompt.format()` to every provider call: if anything in between copies, rebuilds, concatenates, mutates, or converts the formatted value, use `annotation_context()`.
 
 ```python
 variables = {"audience": audience}
