@@ -11,6 +11,12 @@ further_reading:
   text: "Build Apps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 The React renderer enables users to create fully custom UI components using the language and libraries they already know. This component gives builders access to [React APIs][1] so they can create flexible, dynamic, and visually impactful apps in App Builder.
 
 This page provides an example of how to use the React renderer component. For a full reference to all of the fields in the React renderer, see [Components][2].

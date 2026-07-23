@@ -16,11 +16,11 @@ The Product Analytics Explorer displays individual events in a side panel format
 
 General context information is provided at the top. Scroll to the waterfall to see the content of the event. 
 
-Context about your users and their applications, including the OS, country, code version, and more, is captured when the event is generated. Context also refers to the event itself, which includes information specific to the event type. For example, the event side panel shows the view path while the **Errors** side panel shows the error message.
+Context about your users and their applications, including the OS, country, code version, and more, is captured when the event is generated. Context also refers to the event itself, which includes information specific to the event type. For example, the event side panel shows the view path while the {{< ui >}}Errors{{< /ui >}} side panel shows the error message.
 
 ## Event side panel
 
-To open the event side panel in the [Analytics Explorer][1], click on a table row in the **List** visualization type. Alternatively, click in the side panel list displayed after you click on **Show related events**. 
+To open the event side panel in the [Analytics Explorer][1], click on a table row in the {{< ui >}}List{{< /ui >}} visualization type. Alternatively, click in the side panel list displayed after you click on {{< ui >}}Show related events{{< /ui >}}. 
 
 The event side panel displays all the information relative to a Product Analytics event. The waterfall displays related views and actions.
 

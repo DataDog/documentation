@@ -19,7 +19,7 @@ further_reading:
 
 ## Monitor creation
 
-To create a [Watchdog monitor][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> Watchdog*.
+To create a [Watchdog monitor][2] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Watchdog{{< /ui >}}.
 
 {{< img src="/monitors/monitor_types/watchdog/watchdog-monitor-1.png" alt="Configuring a Watchdog Monitor" style="width:80%;">}}
 
@@ -42,7 +42,7 @@ Log anomalies are found based on the `service`, `source`, and `env` tags. If
 
 ### Notifications
 
-For more instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+For more instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][4] page.
 
 ## Further Reading
 

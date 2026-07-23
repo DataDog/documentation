@@ -45,7 +45,7 @@ This guide walks you through how to:
 
 ### Create an Amazon S3 bucket
 
-{{< site-region region="us,us3,us5" >}}
+{{< site-region region="us,us3,us5,uk1" >}}
 See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
 [1]: https://aws.amazon.com/s3/pricing/

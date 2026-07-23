@@ -1,5 +1,6 @@
 ---
 title: Integrations
+description: Connect Internal Developer Portal with third-party tools including PagerDuty, Opsgenie, GitHub, Jira, and CI/CD platforms to enrich Catalog metadata and automate actions.
 aliases:
   - /tracing/software_catalog/integrations
   - /tracing/service_catalog/integrations
@@ -11,14 +12,14 @@ further_reading:
   text: "Learn about the Service Definition API"
 - link: "/integrations/opsgenie/"
   tag: "Documentation"
-  text: "Learn about the OpsGenie integration"
+  text: "Learn about the Opsgenie integration"
 - link: "/integrations/pagerduty/"
   tag: "Documentation"
   text: "Learn about the PagerDuty integration"
 ---
 {{% site-region region="gov,gov2" %}}
 <div class="alert alert-danger">
-PagerDuty and OpsGenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+PagerDuty and Opsgenie integrations for Internal Developer Portal are not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
   
@@ -34,7 +35,7 @@ When you configure a service account for a [Datadog integration][1], you can inc
 | Integration  | Description    | Example actions (Action Catalog) |
 |--------------|----------------|----------------------------------|
 | [PagerDuty][2] | Add PagerDuty metadata to a service so that the Catalog displays and links to information such as who is on-call and whether there are active PagerDuty incidents for the service. | `Get current on-call`, `Trigger incident` <br> [See all available actions.][32] |
-| [OpsGenie][3] | Add OpsGenie metadata to a service so that the Catalog displays and links to information such as who is on-call for the service. | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
+| [Opsgenie][3] | Add Opsgenie metadata to a service so that the Catalog displays and links to information such as who is on-call for the service. | `Acknowledge alert`, `Get current on call` <br> [See all available actions.][33] |
 | [StatusPage][4] | Create, update, and retrieve details about incidents and components. | `Create an incident`, `Update component status` <br> [See all available actions.][34] |
 | [Freshservice][5] | Create, update, and query Freshservice tickets. | `List tickets`, `Update ticket` <br> [See all available actions.][35] |
 | [Slack][6] | Send incident alerts or updates to Slack channels, and perform channel management. | `Invite users to channel`, `Set channel topic` <br> [See all available actions.][36] |
@@ -65,18 +66,18 @@ You can connect any service in your [PagerDuty Service Directory][63]. You can m
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="OpsGenie" level="h4" expanded=false id="opsgenie-setup" %}}
+{{% collapse-content title="Opsgenie" level="h4" expanded=false id="opsgenie-setup" %}}
 
-To add OpsGenie metadata to an entity definition: 
+To add Opsgenie metadata to an entity definition: 
 
-1. If you have not already done so, set up the [Datadog OpsGenie integration][3].
-1. Obtain your [OpsGenie API Access Key][62] and ensure it has **configuration access** and **read** permissions.
-3. At the bottom of the [integration tile][55], add an account, paste your OpsGenie API access key, and select the region for your OpsGenie account.
+1. If you have not already done so, set up the [Datadog Opsgenie integration][3].
+1. Obtain your [Opsgenie API Access Key][62] and ensure it has **configuration access** and **read** permissions.
+3. At the bottom of the [integration tile][55], add an account, paste your Opsgenie API access key, and select the region for your Opsgenie account.
 
-   {{< img src="tracing/software_catalog/create_account1.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
-   {{< img src="tracing/software_catalog/create_account2.png" alt="The Create New Account workflow in the OpsGenie integration tile" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account1.png" alt="The Create New Account workflow in the Opsgenie integration tile" style="width:80%;" >}}
+   {{< img src="tracing/software_catalog/create_account2.png" alt="The Create New Account workflow in the Opsgenie integration tile" style="width:80%;" >}}
 
-4. Update the [entity definition][82] with OpsGenie metadata. For example:
+4. Update the [entity definition][82] with Opsgenie metadata. For example:
 
    ```yaml
    "integrations": {
@@ -89,7 +90,7 @@ To add OpsGenie metadata to an entity definition:
 
 Once you've completed these steps, an **On Call** information box appears in the **Ownership** tab for services in Catalog.
 
-{{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from OpsGenie in the Catalog" style="width:85%;" >}}
+{{< img src="tracing/software_catalog/oncall_information.png" alt="On Call information box displaying information from Opsgenie in the Catalog" style="width:85%;" >}}
 
 {{% /collapse-content %}}
 

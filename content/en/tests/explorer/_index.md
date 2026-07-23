@@ -17,13 +17,13 @@ further_reading:
 
 The Test Optimization Explorer allows you to [search and filter](#search-and-filter), [visualize](#visualize), and [export](#export) test runs at multiple levels using any tag.
 
-Navigate to [**Software Delivery** > **Test Optimization** > **Test Runs**][6] to see your CI test run results across the following levels: **Session**, **Module**, **Suite**, and **Test**. Each test level represents a different level of aggregation of tests.
+Navigate to [{{< ui >}}Software Delivery{{< /ui >}} > {{< ui >}}Test Optimization{{< /ui >}} > {{< ui >}}Test Runs{{< /ui >}}][6] to see your CI test run results across the following levels: {{< ui >}}Session{{< /ui >}}, {{< ui >}}Module{{< /ui >}}, {{< ui >}}Suite{{< /ui >}}, and {{< ui >}}Test{{< /ui >}}. Each test level represents a different level of aggregation of tests.
 
 {{< img src="/tests/explorer/test_runs.png" text="A list of test run results in the Test Optimization Explorer" style="width:100%" >}}
 
 ## Common facets
 
-The **Test** panel on the left lists default facets you can use to search for your test runs.
+The {{< ui >}}Test{{< /ui >}} panel on the left lists default facets you can use to search for your test runs.
 
 | Facet | Description |
 |---|---|
@@ -46,6 +46,7 @@ The **Test** panel on the left lists default facets you can use to search for yo
 | Standard Deviation Change | Indicates if the test has been newly added. |
 | Test Code Owners | The name of the test's codeowners as inferred from the repository configuration. |
 | Test Fingerprint | The unique identifier for an individual test run. |
+| Test Fingerprint (FQN) | A stable, unique identifier for a test (`@test.fingerprint_fqn`) across all of its runs, derived from a hash of the repository ID and the test's fully qualified name (FQN). Use it to consistently identify the same test over time. This is also the identifier used by the [Flaky Tests Management API][19]. |
 | Test Framework | The underlying framework or set of tools used for creating and executing tests. |
 | Test Command | The command that was used to execute tests. |
 | Test Bundle | Equivalent to a test module. This is used by earlier Datadog testing library versions. |
@@ -138,3 +139,4 @@ Select a visualization type to visualize the outcomes of your filters and aggreg
 [16]: /intelligent_test_runner/
 [17]: /tests/code_coverage/
 [18]: https://app.datadoghq.com/ci/test-runs?viz=timeseries
+[19]: /api/latest/test-optimization/

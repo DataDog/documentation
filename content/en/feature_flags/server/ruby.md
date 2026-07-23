@@ -11,6 +11,12 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Learn about Application Performance Monitoring (APM)"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -24,10 +30,13 @@ Before setting up the Ruby Feature Flags SDK, ensure you have:
 - **Datadog Agent** version 7.55 or later with [Remote Configuration][1] enabled
 - **Datadog [API key][4]** configured on the Agent
 - **Datadog Ruby SDK** `datadog` version 2.24.0 or later
-- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later if you need flag evaluation metrics support
+- **Ruby runtime** version 3.1 or later to use the full Datadog Feature Flags OpenFeature integration
+- **OpenFeature Ruby SDK** `openfeature-sdk` version 0.5.1 or later for provider hooks, exposure logging, and flag evaluation metrics support
+- **OpenTelemetry metrics gems** for [flag evaluation metrics][5]: `opentelemetry-metrics-sdk` version 0.8.0 or later, and `opentelemetry-exporter-otlp-metrics` version 0.4.0 or later
 - **Service and environment configured** - Feature flags are targeted by service and environment
 - **Supported operating system** - Production support is limited to [Linux operating systems][2]. macOS and Windows are not natively supported production targets, but Dockerized Linux environments running on those operating systems are. For local development on macOS, you can use a compatible prebuilt native artifact when one is available.
 
+<div class="alert alert-info">The Datadog Ruby tracer supports older Ruby runtimes for APM. Applications on older Ruby versions, including Ruby 2.5, can continue to use Datadog APM, but cannot use Datadog Feature Flags through OpenFeature until they upgrade to Ruby 3.1 or later. The OpenFeature Ruby SDK versions that expose the provider hook surface required for complete Feature Flags telemetry require Ruby 3.1 or later.</div>
 
 ## Installing and initializing
 
@@ -35,6 +44,13 @@ Feature Flagging is provided by Application Performance Monitoring (APM). To int
 
 ```shell
 gem install datadog openfeature-sdk
+```
+
+To emit flag evaluation metrics, add the OpenTelemetry metrics gems to your application bundle:
+
+```ruby
+gem "opentelemetry-metrics-sdk", ">= 0.8"
+gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
 ```
 
 You can enable Feature Flags with environment variables:
@@ -48,6 +64,8 @@ DD_METRICS_OTEL_ENABLED=true
 ```
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+
+See <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 Or enable the provider in code:
 
@@ -304,3 +322,4 @@ Look for messages about:
 [2]: /tracing/trace_collection/compatibility/ruby/#supported-operating-systems
 [3]: https://openfeature.dev/
 [4]: /account_management/api-app-keys/#api-keys
+[5]: /feature_flags/guide/server_flag_evaluation_metrics/

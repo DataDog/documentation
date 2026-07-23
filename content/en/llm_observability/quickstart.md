@@ -34,7 +34,20 @@ To try Agent Observability locally, for free, [follow the steps][12] to instrume
 
 Agent Observability requires a Datadog API key if you don't have a Datadog Agent running. Find your API key [in Datadog](https://app.datadoghq.com/organization-settings/api-keys).
 
-### Setup
+### Instrument Agent Observability with a coding agent
+
+Instrument Agent Observability with a coding agent of your choice by pasting in the following prompt:
+
+```bash
+Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic.md to instrument my application with Datadog LLM Observability. When configuring the environment, use the following values for variable entries:
+
+DD_SITE={{< region-param key="dd_site" code="true" >}}
+DD_API_KEY=<your-dd-api-key>
+```
+
+**Note:** Giving the API key as part of the prompt is optional and not required for the coding agent to instrument your application.
+
+### Manual Setup
 
 Follow the setup instructions in Datadog's [in-app onboarding flow](https://app.datadoghq.com/llm/applications?setupMethod=manual&showOnboarding=true) for an interactive quickstart experience.
 

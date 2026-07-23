@@ -19,7 +19,7 @@ If you use [Atlassian Statuspage][6] for visibility into your applications' and 
 2. Add the generated email address into your test's notification message. For example, `@custom-statuspage-email@notifications.statuspage.io`.
 3. Customize the monitor name to return `UP` or `DOWN` depending on the test state. For example, `{{#is_alert}}DOWN{{/is_alert}}{{#is_recovery}}UP{{/is_recovery}}`.
 4. Fill out the monitor notification section and add a summary in the monitor name. For example, `Shopist Checkout Functionality`.
-5. After you have configured your monitor, click **Save & Exit**.
+5. After you have configured your monitor, click {{< ui >}}Save & Exit{{< /ui >}}.
 
 For more information, see [Integrating Monitors with Statuspage][8].
 

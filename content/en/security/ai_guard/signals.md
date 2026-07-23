@@ -33,10 +33,10 @@ To help you prioritize your remediation efforts, AI Guard automatically assigns 
 You can create custom detection rules by defining thresholds for when you want to receive notifications; for example, more than 5 `DENY` actions in 10 minutes. When AI Guard evaluations exceed those thresholds, it generates security signals.
 
 To create AI Guard detection rules:
-1. In Datadog, go to the [AI Guard detection rule explorer][2], then click **New Rule**.
+1. In Datadog, go to the [AI Guard detection rule explorer][2], then click {{< ui >}}New Rule{{< /ui >}}.
    {{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" style="width:100%;" >}}
-1. Under **Define your Real-time rule**, choose the type of rule to create.
-1. Under **Define Search Queries**, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
+1. Under {{< ui >}}Define your Real-time rule{{< /ui >}}, choose the type of rule to create.
+1. Under {{< ui >}}Define Search Queries{{< /ui >}}, define the types of tags you want to create signals for. You can use the following AI Guard attributes to filter and target specific threat patterns:
    <table>
      <thead>
        <tr>
@@ -92,14 +92,14 @@ To create AI Guard detection rules:
        </tr>
      </tbody>
    </table>
-1. Under **Define Rule Conditions**:
+1. Under {{< ui >}}Define Rule Conditions{{< /ui >}}:
    1. Define your threshold conditions, if applicable to the type of rule you chose.
    1. Set the severity level of the security signals AI Guard generates with this rule.
    1. Choose who should get notifications for new signals and how often.
    1. Choose security responses to take, such as automated IP or user blocking, and IP flagging.
    1. Configure additional settings, such as updating the same signal instead of creating a new one if AI Guard detects new values within a set amount of time, and decreasing signal severity for non-production environments.
-1. Under **Describe your Playbook**, customize the notification and define tags to send with the signals.
-1. Click **Save Rule**.
+1. Under {{< ui >}}Describe your Playbook{{< /ui >}}, customize the notification and define tags to send with the signals.
+1. Click {{< ui >}}Save Rule{{< /ui >}}.
 
 For more comprehensive detection rule capabilities, see [detection rules][3].
 
@@ -109,7 +109,7 @@ To view and investigate AI Guard security signals, and correlate them with other
 - [Application and API Protection Security Signals explorer][4]
 - [Cloud SIEM Security Signals explorer][5]
 
-  In the Cloud SIEM Security Signals explorer, beside the search bar, click the **Filter** icon and select the **App & API Protection** checkbox to view AI Guard signals.
+  In the Cloud SIEM Security Signals explorer, beside the search bar, click the {{< ui >}}Filter{{< /ui >}} icon and select the {{< ui >}}App & API Protection{{< /ui >}} checkbox to view AI Guard signals.
 
 The Security Signals explorers allow you to filter, prioritize, and investigate AI Guard signals alongside other application security threats, providing a unified view of your security posture.
 
@@ -132,7 +132,7 @@ When you click on a span in the explorer, you can see:
 - Whether the request included sensitive data, and if so, what type of sensitive data
 - Additional tags, which you can use to filter spans in the explorer
 
-Additionally, you can click **Explore in graph view** to see the requests in the conversation graphed out, or view the span in [APM][8] or [LLM Observability][9].
+Additionally, you can click {{< ui >}}Explore in graph view{{< /ui >}} to see the requests in the conversation graphed out, or view the span in [APM][8] or [LLM Observability][9].
 
 ## Further reading
 

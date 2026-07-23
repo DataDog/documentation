@@ -36,7 +36,7 @@ When Datadog migrated to Kubernetes, the process of moving stateless services wa
 
    {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/team_region_2.png" alt="Use the team tag to isolate traffic.">}}
 
-4. To monitor costs from external traffic, scope your destination endpoints to public IPs using the **IP Type** facet.
+4. To monitor costs from external traffic, scope your destination endpoints to public IPs using the {{< ui >}}IP Type{{< /ui >}} facet.
     {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/scope_destination_points_2.png" alt="Use the IP type facet." style="width: 40%;">}}
 
     Then group your destination by `domain` to break down external traffic volume by where it is going. Although you cannot install a Datadog Agent on public servers, Datadog can resolve IPs representing external and cloud endpoints to human-readable domain names. 
@@ -51,13 +51,13 @@ Cross-AZ traffic:
 Inter-AZ service-to-service traffic:
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/inter-az-service-to-service-traffic.png" alt="Inter-AZ service-to-service traffic">}}
 
-You can edit your preferences using the **Filter traffic** button. In larger environments, Datadog recommends scoping to just the most significant traffic sources by moving the sliders to include only the highest-volume dependencies.
+You can edit your preferences using the {{< ui >}}Filter traffic{{< /ui >}} button. In larger environments, Datadog recommends scoping to just the most significant traffic sources by moving the sliders to include only the highest-volume dependencies.
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/filter-traffic_2.png" alt="Filter your traffic" style="width: 50%;">}}
 
 ## Graphing traffic costs 
 
-Datadog recommends tracking traffic volume metrics over time in dashboards and notebooks. You can graph traffic between any two endpoints using the same queries you would make on the [Cloud Network][3] page. To do this, create a **Timeseries Widget** and select the **Network** source from the dropdown menu.  
+Datadog recommends tracking traffic volume metrics over time in dashboards and notebooks. You can graph traffic between any two endpoints using the same queries you would make on the [Cloud Network][3] page. To do this, create a {{< ui >}}Timeseries Widget{{< /ui >}} and select the {{< ui >}}Network{{< /ui >}} source from the dropdown menu.  
 
 {{< img src="network_performance_monitoring/guide/manage_traffic_costs_with_cnm/timeseries_2.png" alt="Create a Timeseries Widget with Network metrics">}}
 

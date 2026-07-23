@@ -8,6 +8,12 @@ further_reading:
 - link: "/tracing/trace_collection/dd_libraries/python/"
   tag: "Documentation"
   text: "Python Tracing"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
 ---
 
 ## Overview
@@ -41,6 +47,8 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
 
+To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
+
 ## Installation
 
 Install the Datadog Python SDK and OpenFeature SDK:
@@ -54,6 +62,19 @@ Or add them to your `requirements.txt`:
 {{< code-block lang="text" filename="requirements.txt" >}}
 ddtrace>=3.19.0
 openfeature-sdk>=0.5.0
+{{< /code-block >}}
+
+If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+
+{{< code-block lang="bash" >}}
+pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-grpc
+{{< /code-block >}}
+
+Or add them to your `requirements.txt`:
+
+{{< code-block lang="text" filename="requirements.txt" >}}
+opentelemetry-sdk>=1.41.0
+opentelemetry-exporter-otlp-proto-grpc>=1.41.0
 {{< /code-block >}}
 
 ## Initialize the SDK
@@ -295,6 +316,8 @@ Verify the following to ensure that Remote Configuration is working:
 [1]: https://openfeature.dev/
 [2]: /agent/remote_config/
 [3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/
 
 ## Further reading
 

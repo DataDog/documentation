@@ -76,19 +76,19 @@ Use the `group by` function to break down retention based on events' attributes.
 
 ## Build a graph
 
-To build a retention graph, navigate to **[Product Analytics > Charts][1]**, click the **Retention** tab, then follow the steps below.
+To build a retention graph, navigate to [{{< ui >}}Product Analytics{{< /ui >}} > {{< ui >}}Charts{{< /ui >}}][1], click the {{< ui >}}Retention{{< /ui >}} tab, then follow the steps below.
 
 ### Step 1 - Define the starting and return events
 1. Select the view or action to act as the starting event for defining a group of users.<br>
 2. Select the view or action to act as the return event.
 
 ### Step 2 - Define the measures
-1. Select `Retention rate` to see the data in percentages, or `Unique users` to see the absolute number of users.
-2. Scope the retention measure `Return on or after` or `Return on` based on when the return event occurs.
+1. Select {{< ui >}}Retention rate{{< /ui >}} to see the data in percentages, or {{< ui >}}Unique users{{< /ui >}} to see the absolute number of users.
+2. Scope the retention measure {{< ui >}}Return on or after{{< /ui >}} or {{< ui >}}Return on{{< /ui >}} based on when the return event occurs.
 3. Choose the time frame for which you want to analyze user retention. Select a period size (day, week, or month) to define how return events are grouped in the analysis. Consider the following when selecting a period size:
-- **Daily retention**: Can be applied for up to a month.
-- **Weekly retention**: Can be applied for up to a year.
-- **Monthly retention**: Can be applied for up to 16 months.
+- {{< ui >}}Daily retention{{< /ui >}}: Can be applied for up to a month.
+- {{< ui >}}Weekly retention{{< /ui >}}: Can be applied for up to a year.
+- {{< ui >}}Monthly retention{{< /ui >}}: Can be applied for up to 16 months.
 
 {{< img src="product_analytics/retention/pana_retention_timeframes_ui.png" alt="Example Retention Analysis graph" style="width:100%;" >}}
 

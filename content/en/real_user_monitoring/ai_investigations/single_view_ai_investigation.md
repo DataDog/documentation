@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click **Investigate with AI**. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
+Single-View AI Investigation runs an agentic root-cause analysis on a single RUM view. When you find a session with poor performance, such as a page or screen that loaded slowly or threw errors, click {{< ui >}}Investigate with AI{{< /ui >}}. Datadog's RUM agent inspects all the data attached to that view: errors, slow network requests, main-thread blocking, backend traces, CPU profiles, and device context.
 
 Instead of manually combing through RUM events to figure out whether the cause was a slow API call, a heavy client-side computation, or a CDN issue, you get a ranked list of findings grouped by root-cause category: App Performance, Server Side, Third Party, and Environment. From there, you can follow up through a chat interface or save the results to a [Notebook][1] to share with your team.
 
@@ -24,7 +24,7 @@ Instead of manually combing through RUM events to figure out whether the cause w
 ## Launch an investigation
 
 1. Open a RUM view side panel.
-2. Click the **Investigate with AI** button.
+2. Click the {{< ui >}}Investigate with AI{{< /ui >}} button.
 
    **Note**: The button can take up to 15 minutes to become available after a view ends.
 
@@ -67,7 +67,7 @@ A lightweight chat interface lets you follow up on the analysis: ask for more de
 
 After an investigation completes, you can act on findings without leaving the panel:
 
-- **Save to a Notebook**: Exports the full timeline and findings to a [Notebook][1] to share with your team.
+- {{< ui >}}Save to a Notebook{{< /ui >}}: Exports the full timeline and findings to a [Notebook][1] to share with your team.
 
 ## Further reading
 

@@ -100,6 +100,7 @@ Datadog implements the following safeguards to protect the confidentiality, inte
 - The communication between your datadog components and Datadog is encrypted using HTTPS and is authenticated and authorized using your Datadog API key except in the case of private action runners where a JWT token is used instead.
 - Only users with the [`api_keys_write`][5] permission are authorized to enable or disable Remote Configuration capability on API keys and use the supported product features.
 - Your configuration changes submitted through the Datadog UI are signed and validated by the requesting Datadog component, verifying the integrity of the configuration.
+- When Remote Configuration is enabled, components periodically perform a connectivity test to Datadog over TLS on port 8042/TCP. This is a raw TLS connection rather than HTTPS. This test is used for protocol development; it includes no customer data and no customer-identifying information. This connection is used only while Remote Configuration is enabled and can be safely blocked without affecting functionality.
 
 ### Role-based access
 
@@ -124,7 +125,7 @@ Enabling Remote Configuration impacts the following products. Each product defin
 
 In most cases, Remote Configuration is enabled by default for your organization. You can check if Remote Configuration is enabled on your organization from the [Remote Configuration][8] settings page. If you need to enable it:
 1. Ensure your RBAC permissions include [`org_management`][7], so you can enable Remote Configuration for your organization.
-1. From your Organization Settings page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
+1. From your {{< ui >}}Organization Settings{{< /ui >}} page, enable [Remote Configuration][8]. This enables Datadog components across your organization to receive configurations from Datadog.
 1. Follow the [product-specific configuration](#product-specific-configuration) guidance below to finish setting up Remote Configuration.
 
 ### Product-specific configuration

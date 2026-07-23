@@ -1,6 +1,51 @@
 // API
 $ddpurple: #632ca6;
 
+// Both endpoint and category pages: flush right alongside the h1.
+.main-api .api-copy-btn,
+.api-intro-header .api-copy-btn {
+    margin-top: 10px;
+
+    a {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        text-decoration: none;
+        border-bottom: none;
+
+        &:hover {
+            text-decoration: none;
+            border-bottom: none;
+        }
+    }
+
+    .copy-btn-icon-wrapper {
+        position: relative;
+        margin-right: 2px;
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+    }
+
+    #page-copied-text {
+        display: none;
+    }
+
+    @include media-breakpoint-down(xl) {
+        #page-copy-text {
+            display: none;
+        }
+    }
+}
+
+// Category page: shrink-proof in the flex row; spacing goes on the header wrapper, not the button.
+.api-intro-header .api-copy-btn {
+    flex-shrink: 0;
+}
+
+.api-intro-header {
+    margin-bottom: 0.75rem;
+}
 
 .announcement.api {
     .main-api {
@@ -11,6 +56,10 @@ $ddpurple: #632ca6;
     }
     .api-toolbar {
         margin-top: 0;
+
+        @include media-breakpoint-up(lg) {
+            top: 95px;
+        }
     }
 
     .main-api,
@@ -142,7 +191,7 @@ $ddpurple: #632ca6;
             background: white;
             position: sticky;
             z-index: 5;
-            top: 94px;
+            top: 65px;
             height: 65px;
         }
     }

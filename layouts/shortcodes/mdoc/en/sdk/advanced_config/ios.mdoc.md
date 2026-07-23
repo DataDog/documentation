@@ -324,6 +324,9 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 `applicationID`
 : The RUM application identifier.
 
+`collectAccessibility`
+: Determines whether accessibility settings are collected and included in RUM view events. By default, this is set to `false`.
+
 `customEndpoint`
 : A custom server URL for sending RUM data.
 
@@ -686,7 +689,7 @@ NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConf
 
 **Notes**:
 - Without `URLSessionInstrumentation`, network requests are still tracked. Enabling it provides detailed timing breakdown for performance analysis.
-- Response data is available in the `resourceAttributesProvider` callback (set in `RUM.Configuration.URLSessionTracking`) for tasks with completion handlers in automatic mode, and for all tasks after enabling `URLSessionInstrumentation`.
+- In registered-delegate mode (`URLSessionInstrumentation.enableDurationBreakdown`), the `data` parameter passed to `resourceAttributesProvider` is subject to constraints. See below for full details.
 - To filter out specific requests from being tracked, use the `resourceEventMapper` in `RUM.Configuration` (see [Modify or drop RUM events](#modify-or-drop-rum-events)).
 
 {% alert level="info" %}
@@ -699,6 +702,8 @@ To avoid memory leaks, make sure to invalidate any `URLSession` instances you no
 If you have more than one delegate type in your app that you want to instrument, you can call `URLSessionInstrumentation.enable(with:)` for each delegate type.
 
 Also, you can configure first party hosts using `urlSessionTracking`. This classifies resources that match the given domain as "first party" in RUM and propagates tracing information to your backend (if you have enabled Tracing). Network traces are sampled with an adjustable sampling rate. A sampling of 20% is applied by default.
+
+Each entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 For instance, you can configure `example.com` as the first party host and enable both RUM and Tracing features:
 
@@ -770,6 +775,10 @@ RUM.enable(
   )
 )
 ```
+
+**Note**: `data` can be `nil` for reasons unrelated to response size, such as tasks without a completion handler (for example, async/await) or download tasks. In registered-delegate mode (when using `URLSessionInstrumentation.enableDurationBreakdown`), `data` is additionally `nil` in these cases:
+- Media responses (`image/*`, `video/*`, `audio/*`, `application/octet-stream`): the body is never buffered.
+- Responses of other types whose body exceeds 512 KB—the buffered data is discarded entirely, not truncated.
 
 #### Capture resource headers
 

@@ -25,7 +25,7 @@ To get started, pick one of the standard visualization types from the dashboard 
 
 For the {{< ui >}}Measure{{< /ui >}} parameter, see the table below for more information on what each measure visualizes. The {{< ui >}}Display{{< /ui >}} parameter allows you to break out the query by the groups that are already configured for the SLO. 
 
-{{< callout url="#" btn_hidden="true" header="Key Information">}}
+{{< callout url="#" btn_hidden="true" header="Key Information" respect-site-support="false">}}
   When using an SLO data source measures in the Timeseries widget, the value shown at each point is based on the default rollup in the widget, not rolling time period of the SLO. 
 {{< /callout >}}
 

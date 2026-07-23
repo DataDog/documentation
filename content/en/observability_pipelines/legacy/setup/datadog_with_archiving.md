@@ -100,7 +100,7 @@ To run the Worker in your AWS account, you need administrative access to that ac
 
 When you [install the Observability Pipelines Worker](#install-the-observability-pipelines-worker) later on, the sample configuration provided includes a sink for sending logs to Amazon S3 under a Datadog-rehydratable format. To use this configuration, create an S3 bucket for your archives and set up an IAM policy that allows the Workers to write to the S3 bucket. Then, connect the S3 bucket to Datadog Log Archives.
 
-{{% site-region region="us,us3,us5" %}}
+{{% site-region region="us,us3,us5,uk1" %}}
 See [AWS Pricing][1] for inter-region data transfer fees and how cloud storage costs may be impacted.
 
 [1]: https://aws.amazon.com/s3/pricing/

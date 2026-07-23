@@ -25,7 +25,7 @@ After you select the New Relic destination in the pipeline UI:
 
 1.  Enter the identifier for your account ID. If you leave it blank, the [default](#secret-defaults) is used.
 1.  Enter the identifier for your license. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select the data center region (**US** or **EU**) of your New Relic account.
+1. Select the data center region ({{< ui >}}US{{< /ui >}} or {{< ui >}}EU{{< /ui >}}) of your New Relic account.
 
 ### Optional buffering
 

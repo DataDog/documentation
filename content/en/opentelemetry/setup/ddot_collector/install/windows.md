@@ -75,7 +75,7 @@ Agent (v7.x.x)
   Log Level: info
 ```
 
-There will also be an **OTel Agent** status section that includes OpenTelemetry information:
+There will also be an {{< ui >}}OTel Agent{{< /ui >}} status section that includes OpenTelemetry information:
 
 ```text
 ==========
@@ -156,6 +156,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -170,7 +171,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]

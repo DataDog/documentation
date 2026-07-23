@@ -18,7 +18,7 @@ title: Páginas de Estado
 ---
 ## Descripción general {#overview}
 
-{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Ejemplo de página de estado que muestra los componentes del servicio con su estado actual y actualizaciones recientes de incidentes" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page2.png" alt="Ejemplo de página de estado que muestra los componentes del servicio con su estado actual y actualizaciones recientes de incidentes" style="width:100%;" >}}
 
 Las Páginas de Estado son parte de la suite de Incident Response de Datadog, junto con On-Call e Incident Management. Permite a su equipo comunicar proactivamente **la disponibilidad del servicio**, **los incidentes** y **el mantenimiento programado** a los clientes o interesados internos a través de una página web compartible.
 
@@ -80,7 +80,7 @@ Para crear, actualizar o publicar Páginas de Estado, debe tener `status_pages_s
 
 ## Agregue componentes {#add-components}
 
-{{< img src="/service_management/status_pages/status_page_components.png" alt="Configuración de componentes de la página de estado con panel de vista previa en vivo" style="width:100%;" >}}
+{{< img src="/incident_response/status_pages/status_page_components.png" alt="Configuración de componentes de la página de estado con panel de vista previa en vivo" style="width:100%;" >}}
 
 Los componentes son los bloques de construcción de su página de estado. Cada uno representa un servicio o característica que a sus usuarios les importa. Algunos ejemplos de componentes incluyen:
 - API Gateway
@@ -114,11 +114,11 @@ Si seleccionó:
 
 Los avisos son mensajes publicados en una página de estado para comunicar el estado del sistema. Las Páginas de Estado soportan dos tipos de avisos: **degradaciones** para impactos de servicio no planificados y **ventanas de mantenimiento** para tiempos de inactividad planificados.
 
-{{< img src="service_management/status_pages/select_notice_type_status_page.png" alt="Selector de tipo de aviso de página de estado con opciones de degradación y mantenimiento programado" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/select_notice_type_status_page.png" alt="Selector de tipo de aviso de página de estado con opciones de degradación y mantenimiento programado" style="width:60%;" >}}
 
 ### Publique una degradación {#publish-a-degradation}
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Ejemplo de página de estado que muestra componentes de servicio que experimentan degradación" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page_degradations.png" alt="Ejemplo de página de estado que muestra componentes de servicio que experimentan degradación" style="width:100%;" >}}
 
 Los avisos de degradación comunican **impacto de servicio no planificado**, como incidentes o interrupciones del servicio. Utilice avisos de degradación para mantener informados a los usuarios mientras se investiga, mitiga y resuelve un problema.
 
@@ -133,7 +133,7 @@ Desde una página de estado, haga clic en **Publicar aviso** y seleccione **Degr
 | **Impacto** | Nivel de impacto por componente: <br>- Operativo <br>- Rendimiento degradado <br>- Interrupción parcial <br>- Interrupción mayor |
 | **Notificar a los suscriptores** | Alternar para enviar actualizaciones a los usuarios suscritos |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Ejemplo de ventana modal de aviso de publicación para degradaciones" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_degradation.png" alt="Ejemplo de ventana modal de aviso de publicación para degradaciones" style="width:60%;" >}}
 
 Después de que se revisa y publica un aviso de degradación, este:
 - Aparece en la **Lista de Páginas de Estado** bajo Avisos Activos.
@@ -153,11 +153,11 @@ Desde una página de estado, seleccione el menú desplegable junto a **Publicar 
 | **Título del aviso** | Descripción corta y clara del incidente <br>*Ejemplo: Aumento de tasas de error en la región de EE. UU.* |
 | **Actualizaciones** | Exactamente dos actualizaciones con marca de tiempo que representan el inicio y el final de la degradación. Cada actualización requiere una marca de tiempo de inicio, estado (Investigando o Resuelto), descripción y componentes afectados. |
 
-{{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Ejemplo de ventana modal para publicar un aviso retroactivo de degradación" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_backfill_degradation.png" alt="Ejemplo de ventana modal para publicar un aviso retroactivo de degradación" style="width:60%;" >}}
 
 ### Programar una ventana de mantenimiento {#schedule-a-maintenance-window}
 
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Página de estado de ejemplo que muestra los componentes del servicio en mantenimiento" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_maintenance_example.png" alt="Página de estado de ejemplo que muestra los componentes del servicio en mantenimiento" style="width:100%;" >}}
 
 Las ventanas de mantenimiento le permiten comunicar proactivamente el tiempo de inactividad planificado o el impacto del servicio antes de que ocurra. A diferencia de las degradaciones que se utilizan para incidentes no planificados, las ventanas de mantenimiento se programan con anticipación para actualizaciones de infraestructura, mantenimiento del sistema, migraciones de bases de datos y otros trabajos planificados. Esto le permite mantener informados a los clientes y reducir el volumen de soporte.
 
@@ -171,7 +171,7 @@ Desde la página de estado, haga clic en **Programar Mantenimiento**, o haga cli
 | **Componentes afectados** | Componentes afectados durante la ventana de mantenimiento |
 | **Notificar a los suscriptores** | Alternar para enviar notificación anticipada a los suscriptores |
 
-{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Modal de aviso de publicación de ejemplo para ventanas de mantenimiento" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Modal de aviso de publicación de ejemplo para ventanas de mantenimiento" style="width:60%;" >}}
 
 Después de revisar y programar, la ventana de mantenimiento:
 - Aparece bajo **Próximo Mantenimiento** en la página de estado
@@ -191,7 +191,7 @@ Desde una página de estado, seleccione el menú desplegable junto a **Publicar 
 | **Título del aviso** | Descripción clara de la actividad de mantenimiento <br>*Ejemplo: Actualización de infraestructura de base de datos* |
 | **Actualizaciones** | Exactamente dos actualizaciones con marca de tiempo que representan el inicio y el fin de la ventana de mantenimiento. Cada actualización requiere una marca de tiempo de inicio, estado (En Progreso o Completado), descripción y componentes afectados. |
 
-{{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Ejemplo de modal de aviso retroactivo publicado para ventanas de mantenimiento" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Ejemplo de modal de aviso retroactivo publicado para ventanas de mantenimiento" style="width:60%;" >}}
 
 ## Suscripciones por correo electrónico {#email-subscriptions}
 
@@ -199,7 +199,7 @@ Las suscripciones por correo electrónico en las páginas de estado son **double
 
 Para **páginas de estado** internas, el proceso de suscripción es el mismo, pero los usuarios deben iniciar sesión en la misma organización de Datadog para confirmar su suscripción y recibir notificaciones.
 
-{{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Captura de pantalla del modal de suscripción de la Página de Estado con campos completados" style="width:70%;" >}}
+{{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Captura de pantalla del modal de suscripción de la Página de Estado con campos completados" style="width:70%;" >}}
 
 ## Configurar un dominio personalizado {#set-a-custom-domain}
 

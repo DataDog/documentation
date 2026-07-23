@@ -8,6 +8,7 @@ aliases:
   - /security/application_security/threats_detection/nodejs
   - /security/application_security/setup/aws/fargate/nodejs
   - /security/application_security/setup/standalone/nodejs
+  - /security/application_security/setup/nodejs/compatibility
 further_reading:
   - link: "/security/application_security/add-user-info/"
     tag: "Documentation"
@@ -22,6 +23,13 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{< partial name="app_and_api_protection/callout.html" >}}
 
 {{% aap/aap_and_api_protection_nodejs_overview showSetup="false" %}}
@@ -60,4 +68,4 @@ further_reading:
 ## Additional Resources
 
 - [Troubleshooting Guide](./troubleshooting)
-- [Compatibility Information](./compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/nodejs)

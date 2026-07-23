@@ -89,7 +89,7 @@ API test results for the Synthetics Worker > v0.1.6: `intake.synthetics.`{{< reg
 Browser test results for the Synthetics Worker > v0.2.0: `intake-v2.synthetics.`{{< region-param key="dd_site" code="true" >}}<br>
 API test results for the Synthetics Worker < v0.1.5: `api.`{{< region-param key="dd_site" code="true" >}}
 
-{{% site-region region="us,eu,us3,us5,ap1,ap2" %}}
+{{% site-region region="us,eu,us3,us5,ap1,ap2,uk1" %}}
 
 [Remote Configuration][101]
 : `config.`{{< region-param key="dd_site" code="true" >}}
@@ -184,6 +184,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 | [Custom Agent Autoscaling][22]                                                                                                                                           | 8443                                           | TCP              |                                                                                                                                                                                             |
 | Log collection                                                                                                                                                           | {{< region-param key=web_integrations_port >}} | (Deprecated) TCP | Logging over TCP. <br>**Note**:TCP log collection is **not supported**. Datadog provides **no delivery or reliability guarantees** when using TCP, and log data may be lost without notice. For reliable ingestion, use the HTTP intake endpoint, an official Datadog Agent, or forwarder integration instead. For other connection types, see [logs endpoints][21]. |
 | NTP                                                                                                                                                                      | 123                                            | UDP              | Network Time Protocol (NTP). See [default NTP targets][20].<br>For information on troubleshooting NTP, see [NTP issues][19].                                                                |
+| Connectivity test                                                                                                                                                        | 8042                                           | TCP              | Remote configuration connectivity test.<br>**Note**: this is a telemetry endpoint containing no customer data for protocol development, and is only used when [Remote Config][101] is enabled.
 
 [19]: /agent/faq/network-time-protocol-ntp-offset-issues/
 [20]: /integrations/ntp/#overview
@@ -192,7 +193,7 @@ Open the following ports to benefit from all the **Agent** functionalities:
 
 {{% /site-region %}}
 
-{{% site-region region="us3,us5,gov,gov2,ap1,ap2" %}}
+{{% site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" %}}
 
 | Product/Functionality                                                                                               | Port | Protocol | Description                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------------- | ---- | -------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -213,8 +214,8 @@ Used for Agent services communicating with each other locally within the host on
 | [Agent browser GUI][16]      | 5002 | TCP      |                                                                                                                                |
 | APM receiver                 | 8126 | TCP      | Includes Tracing and the Profiler.                                                                                             |
 | [DogStatsD][18]              | 8125 | UDP      | Port for DogStatsD unless `dogstatsd_non_local_traffic` is set to true. This port is available on IPv4 localhost: `127.0.0.1`. |
-| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expar integration documentation][15].                                                        |
-| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expar integration documentation][15].                                                        |
+| go_expvar server (APM)       | 5012 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
+| go_expvar integration server | 5000 | TCP      | For more information, see [the go_expvar integration documentation][15].                                                        |
 | IPC API                      | 5001 | TCP      | Port used for Inter Process Communication (IPC).                                                                               |
 | Process Agent debug          | 6062 | TCP      | Debug endpoints for the Process Agent.                                                                                         |
 | Process Agent runtime        | 6162 | TCP      | Runtime configuration settings for the Process Agent.                                                                          |

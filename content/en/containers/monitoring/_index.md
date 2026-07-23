@@ -60,7 +60,7 @@ Automated fixes from Bits Remediation is in Preview. To sign up, click <strong>R
 [11]: https://app.datadoghq.com/orchestration/scaling/summary
 [12]: /containers/monitoring/autoscaling
 [13]: https://app.datadoghq.com/orchestration/remediation
-[14]: /bits_ai/bits_ai_dev_agent
+[14]: /bits_ai/bits_code
 [15]: /containers/bits_ai_kubernetes_remediation/
 [16]: https://app.datadoghq.com/orchestration/explorer/ecsTask
 [17]: /infrastructure/containers/amazon_elastic_container_explorer

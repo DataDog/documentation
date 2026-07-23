@@ -318,7 +318,7 @@ resource "kubernetes_manifest" "datadogpodautoscaler_nginx_dka_demo_nginx" {
               "value" = 50
             },
           ]
-          "stabilizationWindowSeconds" = 600
+          "stabilizationWindowSeconds" = 130
           "strategy" = "Max"
         }
         "update" = {

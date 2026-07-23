@@ -53,8 +53,11 @@ Create a `DatadogProvider` instance and register it with OpenFeature. Do this as
 import { DatadogProvider } from '@datadog/openfeature-browser';
 
 const provider = new DatadogProvider({
-  // Required client-side Datadog credentials
+  // Required
+  // applicationId is a unique identifier to distinguish multiple frontend applications.
+  // This should match the app ID you provide to your RUM SDK.
   applicationId: '<APPLICATION_ID>',
+  // Required
   clientToken: '<CLIENT_TOKEN>',
   site: '{{< region-param key="dd_site" code="true" >}}',
   env: '<ENV_NAME>',

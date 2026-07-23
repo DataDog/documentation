@@ -22,7 +22,7 @@ The Agent collects telemetry directly from the database by logging in as a read-
 ## Before you begin
 
 Supported PostgreSQL versions
-: 9.6, 10, 11, 12, 13, 14, 15, 16, 17
+: 9.6, 10, 11, 12, 13, 14, 15, 16, 17, 18
 
 Supported Agent versions
 : 7.36.1+
@@ -163,7 +163,9 @@ RETURNS TABLE (
     inherited boolean, correlation real, most_common_freqs real[]
 ) AS
 $$ SELECT schemaname, tablename, attname, n_distinct, avg_width, null_frac,
-          inherited, correlation, most_common_freqs FROM pg_catalog.pg_stats; $$
+          inherited, correlation, most_common_freqs
+          FROM pg_catalog.pg_stats
+          WHERE schemaname NOT IN ('pg_catalog', 'information_schema'); $$
 LANGUAGE sql
 SECURITY DEFINER
 SET search_path = pg_catalog, pg_temp;

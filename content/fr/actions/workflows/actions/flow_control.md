@@ -29,13 +29,13 @@ Utilisez les [actions logiques][1] pour ajouter une logique de contrôle à votr
 
 Vous pouvez créer une branche dans le chemin d'exécution de votre workflow en fonction de l'évaluation d'une ou plusieurs instructions que vous définissez. Dans la capture d'écran ci-dessous, une action **If condition** détermine l'étape suivante dans le workflow en fonction de si le code de statut d'une action de requête HTTP précédente renvoie `200`. 
 
-{{< img src="service_management/workflows/if-condition.png" alt="Le canevas du workflow avec une action if condition sélectionnée et l'onglet de configuration ouvert. La section Statements est mise en évidence avec deux instructions spécifiant que le statut d'une requête précédente doit être 200." >}} 
+{{< img src="actions/workflows/actions/flow_control/if-condition.png" alt="Le canevas du workflow avec une action if condition sélectionnée et l'onglet de configuration ouvert. La section Statements est mise en évidence avec deux instructions spécifiant que le statut d'une requête précédente doit être 200." >}} 
 
 ## Switch statement
 
 Utilisez l'action Switch statement pour gérer plusieurs chemins de branchement dans une seule étape. Spécifiez une expression switch et comparez-la à une ou plusieurs valeurs de cas. Si aucun cas ne correspond, une branche par défaut s'exécute à la place. Dans l'exemple ci-dessous, une instruction Switch achemine le workflow en fonction de si le code de statut d'une requête HTTP précédente est `200`, `403`, `404`, `500` ou une autre valeur.
 
-{{< img src="service_management/workflows/switch-statement.png" alt="Le canevas du workflow montrant une action Switch statement nommée 'Make_request.status' se ramifiant en plusieurs cas pour différents codes de statut HTTP. Chaque cas envoie un message Slack différent, et la branche par défaut génère une erreur inattendue si aucun autre cas ne correspond." >}}
+{{< img src="actions/workflows/actions/flow_control/switch-statement.png" alt="Le canevas du workflow montrant une action Switch statement nommée 'Make_request.status' se ramifiant en plusieurs cas pour différents codes de statut HTTP. Chaque cas envoie un message Slack différent, et la branche par défaut génère une erreur inattendue si aucun autre cas ne correspond." >}}
 
 ## Sleep
 
@@ -47,7 +47,7 @@ L'action **For loop** vous permet d'exécuter un ensemble d'actions de manière 
 
 Dans l'exemple ci-dessous, une boucle for itère sur une liste d'incidents et envoie un message Slack pour tout incident de plus d'une semaine.
 
-{{< img src="service_management/workflows/iteration2.png" alt="Un workflow avec une boucle for. La boucle itère sur une liste d'incidents et envoie un message à un canal slack si l'incident a plus d'une semaine." style="width:100%;" >}}
+{{< img src="actions/workflows/actions/flow_control/iteration2.png" alt="Un workflow avec une boucle for. La boucle itère sur une liste d'incidents et envoie un message à un canal slack si l'incident a plus d'une semaine." style="width:100%;" >}}
 
 Pour ajouter une boucle for à votre workflow :
 1. Cliquez sur l'icône plus (**+**) sur votre canevas de workflow pour ouvrir le catalogue d'actions.
@@ -66,7 +66,7 @@ L'action **While loop** vous permet d'exécuter un ensemble d'actions de manièr
 
 L'exemple suivant utilise une boucle while pour paginer l'API AWS S3 List Buckets pour une application.
 
-{{< img src="service_management/workflows/iteration3.png" alt="Un workflow avec une boucle while. Le workflow utilise une boucle while pour paginer l'API AWS S3 List Buckets pour une application." style="width:100%;" >}}
+{{< img src="actions/workflows/actions/flow_control/iteration3.png" alt="Un workflow avec une boucle while. Le workflow utilise une boucle while pour paginer l'API AWS S3 List Buckets pour une application." style="width:100%;" >}}
 
 Pour ajouter une boucle while à votre workflow :
 1. Cliquez sur l'icône plus (**+**) sur votre canevas de workflow pour ouvrir le catalogue d'actions.

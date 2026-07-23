@@ -36,16 +36,22 @@ When a job in your CI pipeline fails:
 
 To use automatic job retries:
 - CI Visibility must be enabled for your [GitHub Actions][1] or [GitLab][2] integration.
+- For GitHub Actions, the [Datadog GitHub App][8] must have the **Actions: Write** permission.
 - The [Datadog Source Code Integration][3] must be configured for the repositories where you'd like to use automatic retries.
 - Datadog must have indexed CI job logs for the repositories where you'd like to use automatic retries (see [Collect job logs for GitHub Actions][4] or [Collect job logs for GitLab][5]).
 - To enable this feature, you must have the **CI Provider Settings Write** permission in Datadog.
 
 ## Enable automatic job retries
 
-After the prerequisites are met, enable automatic job retries from the CI Visibility repository settings:
+After the prerequisites are met, enable automatic job retries from CI/CD Optimization settings:
 
-1. In Datadog, navigate to **CI Visibility** > **Settings** > [**Repositories**][7].
-2. For each repository you'd like to enable automatic job retries for, set the **Auto Job Retries** toggle on. To enable it for all repositories at once, use the **Enable Auto Job Retries for ALL repositories** global toggle.
+1. Open [**CI/CD Optimization** > **Settings** > **Repositories**][7].
+1. Choose where to apply the setting:
+   - Select the **Organization** tab to enable Auto Job Retries for every repository by default.
+   - Select the **Repository-specific** tab to enable Auto Job Retries for a single repository. To apply to many repositories at once, select them and use **Bulk Apply Settings**.
+1. Under **Mitigation**, toggle **Auto Job Retries** on.
+
+{{< img src="continuous_integration/auto_job_retries_settings.png" alt="Auto Job Retries toggle in CI/CD Settings." style="width:100%" >}}
 
 ## Provider-specific behavior
 
@@ -94,4 +100,5 @@ A failed job is not retried when:
 [4]: /continuous_integration/pipelines/github/#collect-job-logs
 [5]: /continuous_integration/pipelines/gitlab/#collect-job-logs
 [6]: /continuous_integration/guides/use_ci_jobs_failure_analysis/
-[7]: https://app.datadoghq.com/ci/settings/visibility/repositories
+[7]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[8]: /continuous_integration/pipelines/github/#configure-a-github-app

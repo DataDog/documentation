@@ -17,16 +17,16 @@ See [Export a Pipeline Configuration to JSON or Terraform][4] if you want to pro
 
 1. Navigate to [Observability Pipelines][1].
 1. Select the pipeline you want to update.
-1. Click **Edit Pipeline** in the top right corner.
+1. Click {{< ui >}}Edit Pipeline{{< /ui >}} in the top right corner.
 1. Make changes to the pipeline.
-	- If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click **Deploy Changes**.
-	- To update source or destination environment variables, click **Go to Worker Installation Steps** and see [Update source or destination environment variables](#update-source-or-destination-environment-variables) for instructions.
+	- If you are updating the source or destination settings shown in the tiles, or updating and adding processors, make the changes and then click {{< ui >}}Deploy Changes{{< /ui >}}.
+	- To update source or destination environment variables, click {{< ui >}}Go to Worker Installation Steps{{< /ui >}} and see [Update source or destination environment variables](#update-source-or-destination-environment-variables) for instructions.
 1. If you add, update, or delete a source, destination, or corresponding secrets, you must restart the Worker using a command such as `sudo systemctl restart observability-pipelines-worker` for the change to take effect.
 
 ### Update source or destination environment variables
 
 On the Worker installation page:
-1. Select your platform in the **Choose your installation platform** dropdown menu.
+1. Select your platform in the {{< ui >}}Choose your installation platform{{< /ui >}} dropdown menu.
 1. If you want to update source environment variables, update the information for your data source.
 {{< tabs >}}
 {{% tab "Amazon Data Firehose" %}}
@@ -104,6 +104,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/syslog %}}
 
 {{% /tab %}}
+{{% tab "WebSocket" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/websocket %}}
+
+{{% /tab %}}
 {{< /tabs >}}
 1. If you want to update destination environment variables, update the information for your data destination.
 {{< tabs >}}
@@ -115,6 +120,11 @@ On the Worker installation page:
 {{% tab "Amazon Security Lake" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/amazon_security_lake %}}
+
+{{% /tab %}}
+{{% tab "ClickHouse" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/clickhouse %}}
 
 {{% /tab %}}
 {{% tab "CrowdStrike NG-SIEM" %}}

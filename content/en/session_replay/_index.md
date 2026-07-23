@@ -72,20 +72,20 @@ Session Replay comments allow your team to collaborate on bugs, usability issues
 
 With comments, you can:
 
-- Add a comment at a specific timestamp on the replay timeline. Comment markers appear on the timeline and the **Comments** tab.
+- Add a comment at a specific timestamp on the replay timeline. Comment markers appear on the timeline and the {{< ui >}}Comments{{< /ui >}} tab.
 - @mention a teammate or team in a comment. Tagged users receive an email notification with a link that opens the replay at the commented timestamp.
 - Copy a link to any comment and share it externally. The link opens the replay at the annotated moment with that comment thread open.
 - Reply in-thread to collaborate within a replay, and edit or delete your own comments as needed.
 
 {{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Session Replay player with timestamped comments on the timeline and a Comments tab open with threaded replies." style="width:100%;" >}}
 
-To find replays that need your attention, use the **All mentions to me** and **Commented replays** default playlists. See [Session Replay Playlists][7] for details.
+To find replays that need your attention, use the {{< ui >}}All mentions to me{{< /ui >}} and {{< ui >}}Commented replays{{< /ui >}} default playlists. See [Session Replay Playlists][7] for details.
 
 ## Extend data retention
 
 By default, Session Replay data is retained for 30 days.
 
-To extend Session Replay data retention to 15 months, you can enable _Extended Retention_ on individual session replays. These sessions must be non-active (the user has completed their experience).
+To extend Session Replay data retention to 15 months, you can enable {{< ui >}}Extended Retention{{< /ui >}} on individual session replays. These sessions must be non-active (the user has completed their experience).
 
 To access any Session Replay at a later time, Datadog recommends saving the URL or adding it to a [Playlist][7].
 
@@ -107,7 +107,7 @@ You can see who has watched a given session replay by clicking the **watched** c
 
 The history includes only playbacks that occurred in the player page or in an embedded player, like in a [Notebook][8] or side panel. Included playbacks also generate an [Audit Trail][9] event. Thumbnail previews are not included in history.
 
-To view your own playback history, check out the [My Watch History][10] playlist.
+To view your own playback history, check out the [{{< ui >}}My Watch History{{< /ui >}}][10] playlist.
 
 ## Playlists
 
@@ -117,7 +117,7 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for [RUM][1] sessions.
 
-Learn more about Dev Tools for [browser][11] and [mobile][12].
+Learn more about [Dev Tools][11].
 
 ## Further reading
 
@@ -133,5 +133,4 @@ Learn more about Dev Tools for [browser][11] and [mobile][12].
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /session_replay/browser/dev_tools/
-[12]: /session_replay/mobile/dev_tools/
+[11]: /session_replay/dev_tools

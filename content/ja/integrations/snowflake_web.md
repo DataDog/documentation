@@ -702,7 +702,7 @@ _ステータス: ok, critical_
 [10]: images/custom_query.png
 [11]: images/snowflake_metrics.png
 [12]: https://docs.datadoghq.com/ja/reference_tables/?tab=manualupload
-[13]: https://docs.datadoghq.com/ja/service_management/events/explorer/
+[13]: https://docs.datadoghq.com/ja/events/explorer/
 [14]: https://docs.snowflake.com/en/user-guide/views-introduction
 [15]: https://www.datadoghq.com/product/cloud-cost-management/
 [16]: https://docs.snowflake.com/en/user-guide/views-materialized

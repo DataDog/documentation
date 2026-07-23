@@ -70,7 +70,7 @@
 {{ $translate_tag := (index $translate_tags $tagSlug) | default (dict) }}
 
 <!-- lets show the intro text -->
-{{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag) }}
+{{ partial "api/intro.html" (dict "api" $dot.Site.Data.api "title" $ParamTitleEn "translate_tag" $translate_tag "dot" $dot) }}
 
 <!-- Render a compact summary block per endpoint, linking to the full per-endpoint page -->
 {{ range (where .Sites.Default.Menus.api ".Name" "==" $ParamTitleEn) }}

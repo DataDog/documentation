@@ -57,7 +57,7 @@ curl -vvv -X POST "https://dbquery-intake.{{< region-param key="dd_site" code="t
 
 The responses should contain `{"status":"error","code":403,"errors":["Forbidden"],...}` if requests were successfully sent and a response was received.
 
-Some common causes of connection failure include [proxy setups][7] and firewalls, which outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IP addresses for the DBM endpoints are allowed. These addresses can be found in the APM block at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
+Some common causes of connection failure include [proxy setups][7] and firewalls, which block outbound traffic to Datadog's endpoints. If you have a proxy or firewall, make sure the IP addresses for the DBM endpoints are allowed. These addresses can be found in the APM block at `https://ip-ranges.`{{< region-param key="dd_site" code="true" >}}.
 
 ## Need more help?
 

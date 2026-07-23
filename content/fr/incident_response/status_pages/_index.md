@@ -18,7 +18,7 @@ title: Pages de statut
 ---
 ## Aperçu {#overview}
 
-{{< img src="service_management/status_pages/shopist_status_page2.png" alt="Exemple de page de statut montrant les composants de service avec leur statut actuel et les mises à jour récentes des incidents" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page2.png" alt="Exemple de page de statut montrant les composants de service avec leur statut actuel et les mises à jour récentes des incidents" style="width:100%;" >}}
 
 Les pages de statut font partie de la suite de réponse aux incidents de Datadog, aux côtés de l'astreinte et de la gestion des incidents. Cela permet à votre équipe de communiquer de manière proactive **la disponibilité des services**, **les incidents** et **la maintenance planifiée** avec les clients ou les parties prenantes internes via une page web partageable.
 
@@ -80,7 +80,7 @@ Pour créer, mettre à jour ou publier des pages de statut, vous devez avoir les
 
 ## Ajoutez des composants {#add-components}
 
-{{< img src="/service_management/status_pages/status_page_components.png" alt="Configuration des composants de la page de statut avec un panneau d'aperçu en direct" style="width:100%;" >}}
+{{< img src="/incident_response/status_pages/status_page_components.png" alt="Configuration des composants de la page de statut avec un panneau d'aperçu en direct" style="width:100%;" >}}
 
 Les composants sont les éléments constitutifs de votre page de statut. Chacun représente un service ou une fonctionnalité qui intéresse vos utilisateurs. Quelques exemples de composants incluent :
 - Passerelle API
@@ -114,11 +114,11 @@ Si vous avez sélectionné :
 
 Les avis sont des messages publiés sur une page de statut pour communiquer l'état du système. Les pages de statut prennent en charge deux types d'avis : **degradations** pour un impact de service non planifié et **maintenance windows** pour un temps d'arrêt planifié.
 
-{{< img src="service_management/status_pages/select_notice_type_status_page.png" alt="Sélecteur de type d'avis de page de statut avec options « degradations » et « maintenance windows »." style="width:60%;" >}}
+{{< img src="incident_response/status_pages/select_notice_type_status_page.png" alt="Sélecteur de type d'avis de page de statut avec options « degradations » et « maintenance windows »." style="width:60%;" >}}
 
 ### Publish a degradation {#publish-a-degradation}
 
-{{< img src="service_management/status_pages/shopist_status_page_degradations.png" alt="Exemple de page de statut montrant que les composants de service subissent une dégradation" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_status_page_degradations.png" alt="Exemple de page de statut montrant que les composants de service subissent une dégradation" style="width:100%;" >}}
 
 Les avis de dégradation communiquent **unplanned service impact**, tels que des incidents ou des interruptions de service. Utilisez des avis de dégradation pour tenir les utilisateurs informés pendant qu'un problème est examiné, atténué et résolu.
 
@@ -133,7 +133,7 @@ Depuis une page de statut, cliquez sur **Publish Notice** et sélectionnez **Deg
 | **Impact** | Impact level per component: <br>- Operational <br>- Degraded Performance <br>- Partial Outage <br>- Major Outage |
 | **Notify subscribers** | Toggle to send updates to subscribed users |
 
-{{< img src="service_management/status_pages/publish_status_page_degradation.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_degradation.png" alt="Exemple de modal de publication d'avis pour les dégradations" style="width:60%;" >}}
 
 Après qu'un avis de dégradation a été examiné et publié, il :
 - Appears on the **Status Pages List** under Active Notices.
@@ -153,11 +153,11 @@ Depuis une page de statut, sélectionnez le menu déroulant à côté de **Publi
 | **Notice title** | Short, clear description of the incident <br>*Example: Increased error rates in US region* |
 | **Mises à jour** | Exactement deux mises à jour horodatées représentant le début et la fin de la dégradation. Chaque mise à jour nécessite un horodatage de début, un statut (En cours d'investigation ou Résolu), une description et les composants affectés. |
 
-{{< img src="service_management/status_pages/publish_status_page_backfill_degradation.png" alt="Exemple de modal de publication d'avis rétroactif pour les dégradations" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_backfill_degradation.png" alt="Exemple de modal de publication d'avis rétroactif pour les dégradations" style="width:60%;" >}}
 
 ### Planifier une fenêtre de maintenance {#schedule-a-maintenance-window}
 
-{{< img src="service_management/status_pages/shopist_maintenance_example.png" alt="Exemple de page d'état montrant les composants de service en cours de maintenance" style="width:100%;" >}}
+{{< img src="incident_response/status_pages/shopist_maintenance_example.png" alt="Exemple de page d'état montrant les composants de service en cours de maintenance" style="width:100%;" >}}
 
 Les fenêtres de maintenance vous permettent de communiquer de manière proactive sur les temps d'arrêt ou l'impact sur le service prévus avant qu'ils ne se produisent. Contrairement aux dégradations qui sont utilisées pour des incidents imprévus, les fenêtres de maintenance sont planifiées à l'avance pour des mises à niveau d'infrastructure, de la maintenance système, des migrations de bases de données et d'autres travaux prévus. Cela vous permet de tenir les clients informés et de réduire le volume de support.
 
@@ -171,7 +171,7 @@ Depuis la page d'état, cliquez sur **Planifier la maintenance**, ou cliquez sur
 | **Composants impactés** | Composants affectés pendant la fenêtre de maintenance |
 | **Notifier les abonnés** | Basculer pour envoyer une notification préalable aux abonnés |
 
-{{< img src="service_management/status_pages/publish_status_page_maintenance.png" alt="Exemple de modal de publication d'avis pour les fenêtres de maintenance" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_maintenance.png" alt="Exemple de modal de publication d'avis pour les fenêtres de maintenance" style="width:60%;" >}}
 
 Après révision et planification, la fenêtre de maintenance :
 - Apparaît sous **Maintenance à venir** sur la page d'état
@@ -191,7 +191,7 @@ Depuis une page d'état, sélectionnez le menu déroulant à côté de **Publier
 | **Titre de l'avis** | Description claire de l'activité de maintenance <br>*Exemple : Mise à niveau de l'infrastructure de base de données* |
 | **Mises à jour** | Exactement deux mises à jour horodatées représentant le début et la fin de la fenêtre de maintenance. Chaque mise à jour nécessite un horodatage de début, un statut (En cours ou Terminé), une description et les composants affectés. |
 
-{{< img src="service_management/status_pages/publish_status_page_backfill_maintenance.png" alt="Exemple de modal de publication d'avis rétroactif pour les fenêtres de maintenance" style="width:60%;" >}}
+{{< img src="incident_response/status_pages/publish_status_page_backfill_maintenance.png" alt="Exemple de modal de publication d'avis rétroactif pour les fenêtres de maintenance" style="width:60%;" >}}
 
 ## Abonnements par e-mail {#email-subscriptions}
 
@@ -199,7 +199,7 @@ Les abonnements par e-mail sur les pages d'état sont **double opt-in**. Après 
 
 Pour les pages d'état **internes**, le processus d'abonnement est le même, mais les utilisateurs doivent se connecter à la même organisation Datadog pour confirmer leur abonnement et recevoir des notifications.
 
-{{< img src="/service_management/status_pages/status_pages_subscription_1.png" alt="Capture d'écran du modal d'abonnement à la page d'état avec les champs remplis" style="width:70%;" >}}
+{{< img src="/incident_response/status_pages/status_pages_subscription_1.png" alt="Capture d'écran du modal d'abonnement à la page d'état avec les champs remplis" style="width:70%;" >}}
 
 ## Définir un domaine personnalisé {#set-a-custom-domain}
 

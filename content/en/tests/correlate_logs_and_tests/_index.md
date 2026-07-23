@@ -84,6 +84,86 @@ Use the following environment variable to enable log submission for agentless mo
 
 If you use the **Datadog Agent** instead of agentless mode, set instead `DD_LOGS_INJECTION=true` in the environment.
 
+#### Out-of-process logs
+
+When a separate process executes code triggered by a test, it needs a `trace_id` and `span_id` from that test trace to correlate its logs. Use `ddtrace.testing.logs.DDTestLogsHandler` (`ddtrace >= 4.11.0`) to ship those log records to the Datadog logs intake, correlated with the originating test trace.
+
+`DDTestLogsHandler` reads the same environment variables as the pytest plugin to detect the backend (agentless or EVP proxy). It is available in any subprocess where those variables are available.
+
+**Agentless mode** (set `DD_CIVISIBILITY_AGENTLESS_ENABLED=true`):
+
+| Variable     | Description     | Default         |
+| ------------ | --------------- | --------------- |
+| `DD_API_KEY` | Datadog API key | (required)      |
+| `DD_SITE`    | Datadog site    | `datadoghq.com` |
+
+**Agent/EVP proxy mode** (default):
+
+| Variable                  | Description    | Default     |
+| ------------------------- | -------------- | ----------- |
+| `DD_TRACE_AGENT_URL`      | Full agent URL | -           |
+| `DD_TRACE_AGENT_HOSTNAME` | Agent hostname | `localhost` |
+| `DD_TRACE_AGENT_PORT`     | Agent port     | `8126`      |
+
+##### Thread-per-worker
+
+For one thread per test worker, use `ThreadLocalCorrelationFilter` to associate each thread's log records with the correct test trace:
+
+```python
+import logging
+from ddtrace.testing.logs import DDTestLogsHandler, ThreadLocalCorrelationFilter
+
+with DDTestLogsHandler(service="my-service") as handler:
+    correlation = ThreadLocalCorrelationFilter()
+    handler.addFilter(correlation)
+    logging.getLogger().addHandler(handler)
+
+    while True:
+        job = queue.get()  # queue and run_test are provided by your worker framework
+        correlation.set_context(trace_id=job.trace_id, span_id=job.span_id)
+        run_test(job.item)
+```
+
+`DDTestLogsHandler` flushes buffered records automatically when used as a context manager. Call `handler.close()` if you do not use the context manager form.
+
+##### Asyncio workers
+
+For asyncio-based workers, `ThreadLocalCorrelationFilter` is not compatible with asyncio-based workers because thread-local storage does not propagate across `asyncio.Task` boundaries. Subclass `CorrelationFilter` and use a `contextvars.ContextVar` instead, which the event loop propagates automatically across `await` boundaries:
+
+```python
+import asyncio
+import contextvars
+import logging
+from ddtrace.testing.logs import CorrelationFilter, DDTestLogsHandler
+
+class ContextVarCorrelationFilter(CorrelationFilter):
+    def __init__(self):
+        super().__init__()
+        self._trace_id = contextvars.ContextVar("dd_trace_id", default=None)
+        self._span_id = contextvars.ContextVar("dd_span_id", default=None)
+
+    def set_context(self, trace_id, span_id):
+        self._trace_id.set(trace_id)
+        self._span_id.set(span_id)
+
+    def get_trace_id(self):
+        return self._trace_id.get()
+
+    def get_span_id(self):
+        return self._span_id.get()
+
+async def run_one(job, correlation):
+    correlation.set_context(trace_id=job.trace_id, span_id=job.span_id)
+    await run_test(job.item)
+
+async def main(jobs):
+    with DDTestLogsHandler(service="my-service") as handler:
+        correlation = ContextVarCorrelationFilter()
+        handler.addFilter(correlation)
+        logging.getLogger().addHandler(handler)
+        await asyncio.gather(*(run_one(job, correlation) for job in jobs))
+```
+
 ### Ruby
 
 Agentless logs submission with Test Optimization is supported for Rails applications. Before enabling, ensure

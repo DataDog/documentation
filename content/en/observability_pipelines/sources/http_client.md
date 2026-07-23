@@ -29,10 +29,10 @@ After you select the HTTP/S Client source in the pipeline UI:
 
 1. Enter the identifier for your HTTP/S Client endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected:
-   - **Basic**:
+   - {{< ui >}}Basic{{< /ui >}}:
       - Enter the identifier for your HTTP/S Client username. If you leave it blank, the [default](#secret-defaults) is used.
       - Enter the identifier for your HTTP/S Client password. If you leave it blank, the [default](#secret-defaults) is used.
-   - **Bearer**: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
+   - {{< ui >}}Bearer{{< /ui >}}: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
 
 ### Optional settings

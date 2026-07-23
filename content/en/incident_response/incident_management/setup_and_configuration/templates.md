@@ -47,7 +47,7 @@ Incident AI can dynamically populate key details in notifications with AI-genera
 | AI Issue | `{{incident.ai_issue}}` |
 | AI Remediation | `{{incident.ai_remediation}}` |
 
-{{< img src="service_management/incidents/incident_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:80%;" >}}
+{{< img src="incident_response/incident_management/investigate/incident_ai/message_template_variables.png" alt="New message template with AI variables in it" style="width:80%;" >}}
 
 ## Postmortems
 

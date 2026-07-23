@@ -30,7 +30,7 @@ After you select the Google SecOps destination in the pipeline UI:
 1. If you have a credentials JSON file, enter the path to your credentials JSON file. The credentials file must be placed under `DD_OP_DATA_DIR/config`. Alternatively, you can use the `GOOGLE_APPLICATION_CREDENTIALS` environment variable to provide the credential path.
     - If you're using [workload identity][6] on Google Kubernetes Engine (GKE), the `GOOGLE_APPLICATION_CREDENTIALS` is provided for you.
     - The Worker uses standard [Google authentication methods][7].
-1. Select **JSON** or **Raw** encoding in the dropdown menu.
+1. Select {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}} encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
 
 ### Optional buffering
@@ -58,9 +58,13 @@ After you select the Google SecOps destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## Metrics
 
-#### Event batching
+For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
+
+## How the destination works
+
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
@@ -78,3 +82,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [8]: /observability_pipelines/configuration/set_up_pipelines/
 [9]: /api/latest/observability-pipelines/
 [10]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

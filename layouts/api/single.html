@@ -28,7 +28,7 @@
       {{ end }}
     {{ end }}
 
-    {{ $versions := $menuEntry.Params.versions | default (slice) }}
+    {{ $versions := $menuEntry.Params.versions | default (slice) | sort | collections.Reverse }}
     {{ $operationids := $menuEntry.Params.operationids | default (slice) }}
 
     <!-- Load YAML specs using shared partial -->
@@ -49,28 +49,30 @@
     {{ $versionCount := (len $versions) }}
     {{ $anchorStr := .Title }}
 
-    <div class="row">
-      <div class="col-12 {{ if gt $versionCount 0 }}col-md-9{{ end }}">
-          <h1 class="mb-2 api-task-description" id="{{ $anchorStr | anchorize }}">
+    <div class="row align-items-start mb-1">
+      <div class="col-11 col-xl-9">
+          <h1 class="api-task-description mb-0" id="{{ $anchorStr | anchorize }}">
               {{- $anchorStr -}}
           </h1>
       </div>
-      {{ if gt $versionCount 0 }}
-      <div class="col-12 col-md-3 api-version-label-wrapper">
-          <ul class="nav nav-tabs response-toggle border-none justify-content-md-end">
-            {{ range $versionIndex, $versionNum := $versions }}
-              {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
-              {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
-              {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
-              {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
-              <li class="nav-item">
-                <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (gt $versionCount 1) }}active{{ end }} {{ if and ($endpointVisibility.isVisibleVersion) (eq $versionCount 1) }}disabled{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
-              </li>
-            {{ end }}
-          </ul>
+      <div class="col-1 col-xl-3 d-flex justify-content-end align-items-center">
+          {{ partial "api/api-copy-btn.html" . }}
       </div>
-      {{ end }}
     </div>
+
+    {{ if gt $versionCount 0 }}
+    <ul class="nav nav-tabs border-none response-toggle px-0">
+      {{ range $versionIndex, $versionNum := $versions }}
+        {{ $adat := cond (eq $versionNum "v1") $d $d2 }}
+        {{ $generalRegions := partial "api/regions.html" (dict "servers" $adat.servers) }}
+        {{ $endpoint := partial "api/get-endpoint.html" (dict "lang" $.Page.Lang "operationids" $operationids "version" $versionNum "generalRegions" $generalRegions ) }}
+        {{ $endpointVisibility := partial "api/endpoint-visibility.html" (dict "versionCount" $versionCount "versionNum" $versionNum "menuChild" $menuEntry "endpoint" $endpoint) }}
+        <li class="nav-item">
+          <a class="nav-link me-1 api-version-label {{ with $endpointVisibility.label }}{{ else }}px-3{{ end }} {{ if $endpointVisibility.isVisibleVersion }}active{{ end }}" data-bs-toggle="tab" data-bs-target="#{{ (print $anchorStr "-" $versionNum) | anchorize }}" href="#{{ (print $anchorStr "-" $versionNum) | anchorize }}">{{ $versionNum }} {{ with $endpointVisibility.label }}({{ . }}){{ end }}</a>
+        </li>
+      {{ end }}
+    </ul>
+    {{ end }}
 
     {{ if gt $versionCount 0 }}
 

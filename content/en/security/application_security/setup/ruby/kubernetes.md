@@ -15,6 +15,12 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% app-and-api-protection-ruby-setup-options platform="kubernetes" %}}
 
 {{% app-and-api-protection-ruby-overview %}}
@@ -208,5 +214,5 @@ If you encounter issues while setting up App and API Protection for your Ruby ap
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/ruby/compatibility
+[1]: /security/application_security/setup/compatibility/ruby
 [2]: /security/application_security/setup/ruby/troubleshooting

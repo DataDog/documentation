@@ -11,7 +11,7 @@ title: 온콜
 
 Datadog On-Call은 모니터링, 페이징, 인시던트 대응을 하나의 플랫폼에 통합합니다.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="페이지가 라우팅되는 방식에 대한 개요. 모니터, 인시던트, 보안 신호 또는 API 호출에서 페이지는 팀(예: 'payments-team')으로 전송된 다음 처리 규칙(예: 우선순위 기반)으로 전송되고 에스컬레이션 정책으로 전송됩니다. 그곳에서 스케줄로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="페이지가 라우팅되는 방식에 대한 개요. 모니터, 인시던트, 보안 신호 또는 API 호출에서 페이지는 팀(예: 'payments-team')으로 전송된 다음 처리 규칙(예: 우선순위 기반)으로 전송되고 에스컬레이션 정책으로 전송됩니다. 그곳에서 스케줄로 전송되거나 사용자에게 직접 전송될 수 있습니다." style="width:100%;" >}}
 
 ## 개념
 
@@ -25,15 +25,15 @@ Datadog On-Call은 모니터링, 페이징, 인시던트 대응을 하나의 플
 
 **팀**은 Datadog On-Call의 중앙 조직 단위입니다. Datadog에서 알림이 트리거되면 지정된 On-Call 팀에 **페이지**가 전송됩니다.
 
-{{< img src="service_management/oncall/notification_page.png" alt="On-Call 팀을 언급하는 알림." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="On-Call 팀을 언급하는 알림." style="width:80%;" >}}
 
 각 팀은 **에스컬레이션 정책**과 **스케줄**을 가지고 있습니다. 에스컬레이션 정책은 다음 스크린샷에서  _Checkout Operations - Interrupt Handler_, _Primary_,  _Secondary_와 같이 페이지가 다양한 스케줄로 전송되는 방식을 정의합니다. 각 팀은 또한 페이지를 다른 에스컬레이션 정책으로 라우팅하기 위한 **처리 규칙**을 구성할 수 있습니다.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="에스컬레이션 정책 샘플" style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="에스컬레이션 정책 샘플" style="width:80%;" >}}
 
 스케줄은 팀원들이 페이지에 응답하도록 배정되는 특정 시간을 정의하며, 다양한 시간대와 교대 근무에 따른 팀원의 근무 가능 시간을 구성하고 관리합니다.
 
-{{< img src="service_management/oncall/schedule.png" alt="일본, 유럽, 미국 근무 시간에 따른 배정을 보여주는 샘플 스케줄." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="일본, 유럽, 미국 근무 시간에 따른 배정을 보여주는 샘플 스케줄." style="width:80%;" >}}
 
 ## Datadog On-Call 시작하기
 

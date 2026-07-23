@@ -69,7 +69,7 @@ Consultez la section [Hostmap][9] pour en savoir plus.
 
 ## Événements
 
-{{< img src="service_management/events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
+{{< img src="events/explorer/events-overview.png" alt="Events Explorer" style="width:100%;" >}}
 
 La vue [Events Explorer][10] affiche les événements les plus récents générés par votre infrastructure et vos services.
 
@@ -158,8 +158,8 @@ L'[application mobile Datadog][23] est disponible dans [l'App Store d'Apple][24
 [7]: /fr/infrastructure/
 [8]: /fr/getting_started/tagging/
 [9]: /fr/infrastructure/hostmap/
-[10]: /fr/service_management/events/
-[11]: /fr/service_management/events/explorer/analytics
+[10]: /fr/events/
+[11]: /fr/events/explorer/analytics
 [12]: /fr/dashboards/
 [13]: /fr/dashboards/#screenboards
 [14]: /fr/dashboards/functions/arithmetic/

@@ -27,11 +27,11 @@ Configure the HTTP Client destination when you [set up a pipeline][3]. You can s
 After you select the HTTP Client destination in the pipeline UI:
 
 1. Enter the identifier for your HTTP Client URI. If you leave it blank, the [default](#secret-defaults) is used.
-1. Select your authorization strategy (**None**, **Basic**, or **Bearer**). If you selected:
-	- **Basic**:
+1. Select your authorization strategy ({{< ui >}}None{{< /ui >}}, {{< ui >}}Basic{{< /ui >}}, or {{< ui >}}Bearer{{< /ui >}}). If you selected:
+	- {{< ui >}}Basic{{< /ui >}}:
 		- Enter the identifier for your HTTP Client username. If you leave it blank, the [default](#secret-defaults) is used.
 		- Enter the identifier for your HTTP Client password. If you leave it blank, the [default](#secret-defaults) is used.
-	- **Bearer**:
+	- {{< ui >}}Bearer{{< /ui >}}:
 		- Enter the identifier for your HTTP Client token. If you leave it blank, the [default](#secret-defaults) is used.
 1. JSON is the only available encoder.
 
@@ -39,7 +39,7 @@ After you select the HTTP Client destination in the pipeline UI:
 
 #### Enable compression
 
-Toggle the switch to **Enable Compression**. If enabled:
+Toggle the switch to {{< ui >}}Enable Compression{{< /ui >}}. If enabled:
 1. GZIP is the only available compression algorithm.
 1. Select the compression level you want to use.
 
@@ -80,6 +80,10 @@ Toggle the switch to **Enable Compression**. If enabled:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
+
 ## How the destination works
 
 ### Event batching
@@ -95,3 +99,6 @@ A batch of events is flushed when one of these conditions occurs. See [event bat
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -78,9 +78,9 @@ The rsyslog and syslog-ng destinations match these log fields to the following s
 {{% /tab %}}
 {{< /tabs >}}
 
-### How the destination works
+## How the destination works
 
-#### Event batching
+### Event batching
 
 The rsyslog and syslog-ng destinations do not batch events.
 

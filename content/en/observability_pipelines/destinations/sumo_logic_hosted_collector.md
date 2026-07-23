@@ -25,11 +25,11 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 
 ### Optional settings
 
-1. In the **Encoding** dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
-1. Enter a **source name** to override the default `name` value configured for your Sumo Logic collector's source.
-1. Enter a **host name** to override the default `host` value configured for your Sumo Logic collector's source.
-1. Enter a **category name** to override the default `category` value configured for your Sumo Logic collector's source.
-1. Click **Add Header** to add any custom header fields and values.
+1. In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select whether you want to encode your pipeline's output in `JSON`, `Logfmt`, or `Raw` text. If no decoding is selected, the decoding defaults to JSON.
+1. Enter a {{< ui >}}source name{{< /ui >}} to override the default `name` value configured for your Sumo Logic collector's source.
+1. Enter a {{< ui >}}host name{{< /ui >}} to override the default `host` value configured for your Sumo Logic collector's source.
+1. Enter a {{< ui >}}category name{{< /ui >}} to override the default `category` value configured for your Sumo Logic collector's source.
+1. Click {{< ui >}}Add Header{{< /ui >}} to add any custom header fields and values.
 
 #### Buffering options
 
@@ -43,7 +43,7 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 {{% tab "Secrets Management" %}}
 
 - Sumo Logic HTTP Collector URL identifier:
-	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:   
+	- References the Sumo Logic HTTP Source endpoint. The Observability Pipelines Worker sends processed logs to this endpoint. For example, `https://<ENDPOINT>.collection.sumologic.com/receiver/v1/http/<UNIQUE_HTTP_COLLECTOR_CODE>`, where:
         - `<ENDPOINT>` is your Sumo collection endpoint.
         - `<UNIQUE_HTTP_COLLECTOR_CODE>` is the string that follows the last forward slash (`/`) in the upload URL for the HTTP source.
 	- The default identifier is `DESTINATION_SUMO_LOGIC_HTTP_COLLECTOR_URL`.
@@ -56,6 +56,10 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
 
 ## How the destination works
 
@@ -72,3 +76,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
