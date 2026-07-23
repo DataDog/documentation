@@ -54,6 +54,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
    - **Time window:** The lookback period for interactions to analyze
    - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.
    - **Sampling Rate:** The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
+   - **Coverage datasets (optional):** Select one or more datasets from a project to measure offline coverage. When configured, each topic in the run will include a coverage breakdown showing: how many of the topic's production interactions are already covered by records in the selected dataset(s), and how many suggested datapoints are available to improve coverage.
 5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.input.value}} to analyze patterns by user input, or {{meta.span.kind}} to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
 6. Click **Save**
 
@@ -85,6 +86,7 @@ The topic table provides a hierarchical view of all discovered topics. Each topi
 - {{< ui >}}Errors{{< /ui >}} — error count and rate
 - {{< ui >}}Latency{{< /ui >}} — median latency for interactions in this topic
 - {{< ui >}}Online Evals{{< /ui >}} — evaluation results if online evaluations are configured
+- {{< ui >}}Coverage{{< /ui >}} — when a coverage dataset is configured, shows the ratio of interactions already covered by the dataset and the number of suggested datapoints
  
 
 Expand parent topics to see their sub-topics and examine specific areas of your application's traffic.
@@ -103,6 +105,8 @@ From the interactions table inside a topic's detail view, you can act on the int
 - **Add to Dataset:** Send the interactions to a [Dataset][2] to build evaluation test cases from real production traffic.
 - **Add to Queue:** Send the interactions to an [Annotation Queue][3] for human review and labeling.
 
+When coverage datasets are configured, Patterns marks individual interactions as **suggested** based on which ones would most improve your dataset coverage for each topic. Suggested interactions are highlighted in the interactions table and can be added to your dataset with **Add to Dataset**.
+
 ## Trigger a new run
 
 To analyze your production traffic, click {{< ui >}}Run analysis{{< /ui >}} in the Patterns header. The pipeline runs in the background and takes 5 to 10 minutes. You can close the page and return later — the header shows the last run date and lookback period when the run completes.
@@ -120,6 +124,8 @@ Use traffic percentage to identify your most common use cases. The parent-child 
 ### Find evaluation coverage gaps
 
 Compare your topic distribution against what your golden datasets actually cover. Look at topics that represent high production volume but have no corresponding evaluation cases: this is where your test coverage has gaps, and where model regressions are least likely to be caught before they reach users.
+
+When a coverage dataset is configured, Patterns computes offline coverage automatically for each topic: each topic shows a global coverage ratio (how many of its production interactions match a record in the dataset) and a per-dataset breakdown. Topics with low coverage and available suggested datapoints are flagged so you can add the most impactful real-world examples to your evaluation datasets.
 
 ### Diagnose failure patterns
 
