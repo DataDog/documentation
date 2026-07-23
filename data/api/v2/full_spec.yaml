@@ -139369,7 +139369,7 @@ paths:
     get:
       description: |-
         Returns a list of environments for the organization.
-        Supports filtering by name and key.
+        Supports filtering by name, key, and DD_ENV.
       operationId: ListFeatureFlagsEnvironments
       parameters:
         - description: Filter environments by name (partial matching).
@@ -139382,6 +139382,12 @@ paths:
           example: "env-partial"
           in: query
           name: key
+          schema:
+            type: string
+        - description: Filter environments by queries that contain the provided DD_ENV value.
+          example: "staging"
+          in: query
+          name: dd_env
           schema:
             type: string
         - description: Maximum number of results to return.

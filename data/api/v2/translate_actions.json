@@ -1847,7 +1847,7 @@
     "request_schema_description": "Request to create a new feature flag."
   },
   "ListFeatureFlagsEnvironments": {
-    "description": "Returns a list of environments for the organization.\nSupports filtering by name and key.",
+    "description": "Returns a list of environments for the organization.\nSupports filtering by name, key, and DD_ENV.",
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
