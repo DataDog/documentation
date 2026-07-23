@@ -43,7 +43,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 - [Source Code Integration][7] is enabled (required for code previews).
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
-If your service's language or framework isn't listed below, see [Alternative Setup](#alternative-setup) for another way to get Code Origin data.
+Source Code Integration alone already gives you some Code Origin coverage automatically, even if your service doesn't meet the compatibility requirements below — see [Code Origin coverage without the SDK flag](#code-origin-coverage-without-the-sdk-flag). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
 
 ### Compatibility requirements
 
@@ -146,7 +146,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### Code Origin section is missing
 
 - Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
-- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, see [Alternative Setup](#alternative-setup).
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you may still get some Code Origin data automatically — see [Code Origin coverage without the SDK flag](#code-origin-coverage-without-the-sdk-flag).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
@@ -157,17 +157,14 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 - For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the [`--enable-source-maps`][10] flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
 - Code Origin is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
 
-## Alternative Setup
+## Code Origin coverage without the SDK flag
 
-For services and frameworks not covered by the [compatibility requirements](#compatibility-requirements) above, Datadog can determine code locations using static analysis of your repository through [Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) instead of tracer instrumentation.
+[Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is already required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some services, without setting the `DD_CODE_ORIGIN_FOR_SPANS_ENABLED` flag or meeting a minimum tracer version:
 
-Key differences from the setup described above:
-
-- No `DD_CODE_ORIGIN_FOR_SPANS_ENABLED` flag or minimum tracer version is required — only [Source Code Integration][7] needs to be configured.
 - It's currently the only way to get Code Origin data for **Go** services (custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers, OpenTelemetry, and OpenTracing).
-- It also extends coverage for **Python** (FastAPI, aiohttp) and **Node.js** (Next.js) beyond the frameworks listed in the compatibility table.
+- It extends coverage for **Python** (FastAPI, aiohttp) and **Node.js** (Next.js) beyond the frameworks listed in the [compatibility requirements](#compatibility-requirements) table.
 
-Code Origin data from this method appears in the same Code Origin section of the Trace Explorer and powers the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows as tracer-instrumented Code Origin.
+To get full tracer-instrumented coverage for the languages and frameworks listed in [compatibility requirements](#compatibility-requirements), also [enable Code Origin](#enable-code-origin) in your SDK. Data from both methods appears in the same Code Origin section of the Trace Explorer and powers the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows.
 
 ## Further Reading
 
