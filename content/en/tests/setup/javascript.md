@@ -224,7 +224,7 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
-[5]: https://github.com/DataDog/dd-trace-js/pull/9492
+[5]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
 [6]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
 [7]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 {{% /tab %}}
