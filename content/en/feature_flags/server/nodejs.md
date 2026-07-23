@@ -310,7 +310,7 @@ Datadog Feature Flags is enabled by default. You do not need to set `DD_FEATURE_
 
 The SDK polls in the background and evaluates flags locally from the last accepted configuration. Individual evaluations do not make network requests. CDN requests contribute to server Feature Flags billing.
 
-For power-user testing, local development, or an operator-managed proxy, you can configure a custom HTTP or HTTPS endpoint. The SDK never forwards `DD_API_KEY` to a custom endpoint. See [Use a custom agentless endpoint][7] for path, failure, and security behavior.
+For power-user testing, local development, or an operator-managed proxy, you can configure a custom endpoint. A custom endpoint may use HTTP only when it targets a loopback host; any other custom endpoint must use HTTPS. The SDK includes the `DD-API-KEY` header on requests to a custom endpoint, so only use an endpoint you trust with your API key. See [Use a custom agentless endpoint][7] for path, failure, and security behavior.
 
 ### Use Agent Remote Configuration
 
