@@ -88881,6 +88881,8 @@ components:
     ScheduleTrigger:
       description: "Trigger a workflow from a Schedule. The workflow must be published."
       properties:
+        overlapBehavior:
+          $ref: "#/components/schemas/ScheduleTriggerOverlapBehavior"
         rruleExpression:
           description: "Recurrence rule expression for scheduling."
           example: ""
@@ -88888,6 +88890,17 @@ components:
       required:
         - rruleExpression
       type: object
+    ScheduleTriggerOverlapBehavior:
+      default: EXCLUSIVE_RUN
+      description: Controls whether a scheduled workflow run may start while another instance is still running.
+      enum:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
+      example: EXCLUSIVE_RUN
+      type: string
+      x-enum-varnames:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
     ScheduleTriggerWrapper:
       description: "Schema for a Schedule-based trigger."
       properties:
