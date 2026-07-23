@@ -50,11 +50,11 @@ Datadog adds the following tags to a Synthetic test monitor based on the test's 
 | `probe_dc`           | `aws:us-east-1`, `aws:eu-west-1`, and other managed or private locations          | The locations the test runs from. Multi-location tests have one `probe_dc` tag for each assigned location.         |
 | `ci_execution_rule`  | `blocking`, `non_blocking`                                                         | The test's CI/CD execution rule, present when the test is used as a quality gate in a CI/CD pipeline.              |
 
-These tags update automatically when you edit the test, so searching on them stays accurate as tests move locations, get paused, or change their CI/CD configuration. For example:
+These tags update automatically when you edit the test, so searching on them stays accurate as tests move locations, get paused, or change their CI/CD configuration. Search on them with the `tag` facet, quoting the full `key:value` pair. For example:
 
-- `check_type:browser check_status:live` finds all active Browser tests.
-- `probe_dc:"aws:ap-northeast-1"` finds every test running from that location. Quote the value because it contains a colon.
-- `ci_execution_rule:blocking` finds the tests configured to block a CI/CD pipeline on failure.
+- `type:synthetics tag:"check_status:live"` finds all active Synthetic test monitors.
+- `type:synthetics tag:("probe_dc:aws:us-east-1" AND "probe_dc:aws:ap-northeast-1")` finds tests running from both locations.
+- `type:synthetics tag:"ci_execution_rule:blocking"` finds the tests configured to block a CI/CD pipeline on failure.
 
 ### Tailor monitor notifications
 
