@@ -410,12 +410,11 @@ The `llmobs` toolset includes the following tools:
 
 ### Experiment analysis
 
-1. **Create**: Use `create_llmobs_experiment` to register a new experiment object in a project before submitting events or metrics against it.
-2. **Summarize**: Use `get_llmobs_experiment_summary` to get overall statistics and discover available metrics and dimensions.
-3. **Browse events**: Use `list_llmobs_experiment_events` to find events of interest, filtering by dimension or sorting by metric.
-4. **Inspect events**: Use `get_llmobs_experiment_event` to view full details for a specific event.
-5. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
-6. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
+1. **Summarize**: Use `get_llmobs_experiment_summary` to get overall statistics and discover available metrics and dimensions.
+2. **Browse events**: Use `list_llmobs_experiment_events` to find events of interest, filtering by dimension or sorting by metric.
+3. **Inspect events**: Use `get_llmobs_experiment_event` to view full details for a specific event.
+4. **Analyze metrics**: Use `get_llmobs_experiment_metric_values` to get percentile distributions, true/false rates, or compare across dimension segments.
+5. **Discover dimensions**: Use `get_llmobs_experiment_dimension_values` to find valid filter and segment values.
 
 ### Dataset management
 
