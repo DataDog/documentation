@@ -19,6 +19,10 @@ Support for SMS and phone call notifications varies by country because of local 
 If your country isn't listed in the following table, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request phone number support for that country.
 </div>
 
+<div class="alert alert-info">
+For the best experience, we recommend downloading the Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> and using push notifications as your primary method of getting paged. SMS and phone call notifications are also available, but local carrier restrictions and regional regulations can occasionally affect their reliability.
+</div>
+
 | Country | Country code |
 |---|---|
 | Åland Islands | +358 |
@@ -120,9 +124,9 @@ If your country isn't listed in the following table, contact <a href="https://do
 | United States | +1 |
 | Uruguay* | +598 |
 
-\* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local carrier restrictions or government regulations can limit delivery. For these regions, set up push notifications as your primary notification method.
+\* Partial support: Your ability to receive or respond to notifications in these countries might be limited. Datadog sends notification requests to its provider partners in these countries, but local carrier restrictions or government regulations can limit delivery.
 
-\*\* Available by request: SMS and phone call notifications for these countries are not enabled by default. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request access.
+\*\* Available by request: SMS and phone call notifications for these countries are supported but not enabled by default. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to request access.
 
 <div class="alert alert-info">
 Not all countries listed in the table are available during a trial. If you need to test SMS or phone call notifications for a country that isn't available during your trial, contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a>.
