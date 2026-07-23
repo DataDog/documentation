@@ -287,6 +287,8 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  coscreen: [gov, gov2]
+  amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
   ai_agents_console: [gov, gov2]
@@ -306,8 +308,10 @@ unsupported_sites:
   apm_processing_pipelines: [gov,gov2]
   apm_recommendations: [gov,gov2]
   application_security: [gov,gov2]
+  application_security_override: [gov2] # docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov
   autocomplete_search: [gov,gov2]
   azure-automated-log-forwarding: [gov,gov2]
+  azure-devops-source-code: [gov, gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2,uk1]
   backstage: [gov,gov2]
   bits_ai: [gov,gov2]
