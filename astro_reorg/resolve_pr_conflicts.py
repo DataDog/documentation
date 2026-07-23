@@ -194,6 +194,16 @@ def build_manual_review_comment() -> str:
     )
 
 
+def build_no_reorg_conflicts_comment() -> str:
+    """Posted on PRs with merge conflicts that are unrelated to the reorg."""
+    return (
+        f"This PR has been scanned for conflicts caused by the [recent repo reorg]({REPO_REORG_README_LINK}). "
+        "No reorg-related conflicts were found, so no action was taken to auto-fix the conflicts.\n\n"
+        f"If you believe this is incorrect, add the `{LABEL_HELP_REQUESTED}` label, and the WebOps Platform team will take a closer look."
+        + AUTOMATED_COMMENT_FOOTER
+    )
+
+
 def build_stale_comment() -> str:
     """Posted on PRs with no activity in the last STALE_DAYS days."""
     return (
@@ -945,10 +955,20 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
             print("  No conflicts found locally (GitHub mergeability may be stale).")
             return False
 
+        if other_conflicts and not reorg_conflicts:
+            # Conflicts exist but none are from the reorg — label it so future
+            # runs skip it, and leave a neutral comment so the author isn't
+            # confused by a reorg-specific message.
+            print("  Non-reorg conflicts only — labeling no-conflicts and commenting.")
+            add_label(pr_number, LABEL_NO_CONFLICTS, dry_run)
+            post_comment(pr_number, build_no_reorg_conflicts_comment(), dry_run)
+            return True
+
         if other_conflicts:
-            # The PR has conflicts that are NOT from the reorg.  We must not
-            # touch it — just label it so a human can resolve it manually.
-            print("  Non-reorg conflicts present — labeling for manual review.")
+            # Mixed: reorg AND non-reorg conflicts present.  We can't safely
+            # auto-fix the reorg portion without also touching unrelated
+            # conflicts, so route to manual review.
+            print("  Mixed reorg + non-reorg conflicts — labeling for manual review.")
             send_to_manual_review(pr_number, dry_run)
             return True
 
