@@ -57,7 +57,7 @@ Si aún no lo has hecho, instala la [Integración de Datadog y Azure][5] para re
    from datadog_serverless_compat import start
    start()
 
-   import ddtrace.auto
+   import ddtrace.auto # noqa: E402, F401
    ```
 
 3. **Configurar el rastreador de Python de Datadog **
