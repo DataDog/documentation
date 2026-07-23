@@ -214,6 +214,7 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
            new_name: system.cpu.usage_time
      infraattributes:
        cardinality: 2
+     cumulativetodelta:
    connectors:
      datadog/connector:
        traces:
@@ -228,7 +229,7 @@ After the build completes, verify the custom `otel-agent.exe` binary includes yo
          exporters: [datadog, datadog/connector]
        metrics:
          receivers: [otlp, datadog/connector, prometheus]
-         processors: [metricstransform, infraattributes]
+         processors: [metricstransform, infraattributes, cumulativetodelta]
          exporters: [datadog]
        logs:
          receivers: [otlp]
