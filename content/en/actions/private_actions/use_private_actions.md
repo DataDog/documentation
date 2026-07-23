@@ -30,6 +30,8 @@ For more information about how private actions work, see the full [overview page
 
 {{< partial name="actions/private_actions_list" >}}
 
+For the actions available to each type of private action runner, see [Available actions by runner type](#available-actions-by-runner-type).
+
 ## Prerequisites
 
 Choose your installation method based on your environment:

@@ -1,14 +1,8 @@
 {{ $dot := . }}
 {{ $workflow_bundles := site.Data.workflow_bundles | default slice }}
-{{ $runner_flavors := slice
-    (dict "key" "standalone" "title" "Standalone private action runners")
-    (dict "key" "agent" "title" "Datadog Agent private action runners")
-    (dict "key" "cluster_agent" "title" "Datadog Cluster Agent private action runners")
-}}
-{{ $runner_flavor_keys := slice "standalone" "agent" "cluster_agent" }}
-{{ $parents_by_runner := dict "standalone" (slice) "agent" (slice) "cluster_agent" (slice) }}
-{{ $titles_by_fqn := dict }}
-{{ $final_actions_by_runner := dict "standalone" (slice) "agent" (slice) "cluster_agent" (slice) }}
+{{ $on_prem_actions := dict }}
+{{ $on_prem_parents := slice }}
+{{ $final_actions := dict }}
 
 {{ if lt (len $workflow_bundles) 1 }}
   {{ $err_msg := "Could not load workflow bundles data" }}
@@ -21,61 +15,42 @@
 {{ end }}
 
 
-{{/* Build a lookup for integration titles. */}}
+{{/* Build dict of supported actions */}}
 {{ range sort $workflow_bundles "title" }}
-    {{ $titles_by_fqn = merge $titles_by_fqn (dict .name .title) }}
-{{ end }}
-
-{{/* Build lists of parent integrations that contain private actions per runner type. */}}
-{{ range sort $workflow_bundles "title" }}
+    {{ $workflow_title := .title }}
     {{ $workflow_name := .name }}
     {{ range $action_name, $action_data := .actions }}
         {{ if $action_data.canRunOnPremises }}
-            {{ $parts := split $workflow_name "." }}
-            {{ $parent_fqn := $workflow_name }}
-            {{ if ge (len $parts) 3 }}
-                {{ $parent_fqn = delimit (first 3 $parts) "." }}
-            {{ end }}
-            {{ $supported_agent_types := $action_data.supportedAgentTypes | default slice }}
-            {{ if lt (len $supported_agent_types) 1 }}
-                {{ $supported_agent_types = $runner_flavor_keys }}
-            {{ end }}
-            {{ range $runner_key := $supported_agent_types }}
-                {{ if in $runner_flavor_keys $runner_key }}
-                    {{ $existing := index $parents_by_runner $runner_key | default slice }}
-                    {{ $parents_by_runner = merge $parents_by_runner (dict $runner_key ($existing | append $parent_fqn | uniq)) }}
-                {{ end }}
-            {{ end }}
+            {{ $on_prem_actions = merge $on_prem_actions (dict $workflow_name $workflow_title) }}
         {{ end }}
     {{ end }}
 {{ end }}
 
-{{/* Match parent FQNs to titles and build final lists. */}}
-{{ range $runner := $runner_flavors }}
-    {{ $final_actions := slice }}
-    {{ range $parent_fqn := index $parents_by_runner $runner.key }}
-        {{ $title := index $titles_by_fqn $parent_fqn }}
-        {{/* Kubernetes doesn't have a parent bundle in the action manifest. */}}
-        {{ if eq $parent_fqn "com.datadoghq.kubernetes" }}
-            {{ $title = "Kubernetes" }}
-        {{ end }}
-        {{ if $title }}
-            {{ $final_actions = $final_actions | append (dict "fqn" $parent_fqn "title" $title) }}
-        {{ end }}
+{{/* Grab parent action for each workflow name */}}
+{{ range $fqn, $title := $on_prem_actions }}
+    {{ $parts := split $fqn "." }}
+    {{ range $parts }}
+        {{ $parent_fqn := print (index $parts 0) "." (index $parts 1) "." (index $parts 2) }}
+        {{ $on_prem_parents = $on_prem_parents | append $parent_fqn | uniq }}
     {{ end }}
-    {{ $final_actions_by_runner = merge $final_actions_by_runner (dict $runner.key (sort $final_actions "title")) }}
 {{ end }}
 
-{{ $has_actions := false }}
-{{ range $runner := $runner_flavors }}
-    {{ if gt (len (index $final_actions_by_runner $runner.key)) 0 }}
-        {{ $has_actions = true }}
+{{/* Match on_prem_parents to action and build final dict */}}
+{{ range sort $workflow_bundles "title" }}
+    {{ $title := .title }}
+    {{ $fqn := .name }}
+    {{ range $action_name, $action_data := .actions }}
+        {{ range $on_prem_parents}}
+            {{ if eq $fqn . }}
+                {{ $final_actions = merge $final_actions (dict $fqn $title) }}
+            {{ end }}
+        {{ end }}
     {{ end }}
 {{ end }}
 
 {{ $base_url := "https://app.datadoghq.com/actions/action-catalog#" }}
 
-{{ if not $has_actions }}
+{{ if lt (len $final_actions) 1}}
     {{ $err_msg := "On prem action list is empty" }}
 
     {{ if eq hugo.Environment "development" -}}
@@ -85,17 +60,14 @@
     {{ end }}    
 {{ end }}
 
+{{/* Kubernetes doesnt have a parent */}}
+{{ $final_actions = merge $final_actions (dict "com.datadoghq.kubernetes" "Kubernetes") }}
+
 {{/* Final output */}}
-<p>The following integrations support private actions. Availability depends on the private action runner type.</p>
-{{ range $runner := $runner_flavors }}
-{{ $final_actions := index $final_actions_by_runner $runner.key }}
-{{ if gt (len $final_actions) 0 }}
-<h4>{{ $runner.title }}</h4>
+<p>The following integrations support private actions:</p>
 <ul>
-{{ range $final_actions -}}
-    {{ $full_url := print $base_url "/" .fqn -}}
-    <li><a href="{{ $full_url }}">{{ .title }}</a></li>
+{{ range $fqn, $title := $final_actions -}}
+    {{ $full_url := print $base_url "/" $fqn -}}
+    <li><a href="{{ $full_url }}">{{ $title}}</a></li>
 {{ end -}}
 </ul>
-{{ end }}
-{{ end }}
