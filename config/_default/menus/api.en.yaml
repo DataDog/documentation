@@ -8622,6 +8622,45 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Count untagged findings by ownership confidence
+      url: /api/latest/csm-ownership/count-untagged-findings-by-ownership-confidence/
+      identifier: csm-ownership-count-untagged-findings-by-ownership-confidence
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipUntaggedFindings
+        unstable:
+          - v2
+        order: 9
+    - name: Update ownership settings for the org
+      url: /api/latest/csm-ownership/update-ownership-settings-for-the-org/
+      identifier: csm-ownership-update-ownership-settings-for-the-org
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PostOwnershipSettings
+        unstable:
+          - v2
+        order: 8
+    - name: Get ownership settings for the org
+      url: /api/latest/csm-ownership/get-ownership-settings-for-the-org/
+      identifier: csm-ownership-get-ownership-settings-for-the-org
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipSettings
+        unstable:
+          - v2
+        order: 7
     - name: CSM Settings
       url: /api/latest/csm-settings/
       identifier: csm-settings

@@ -1450,6 +1450,20 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "GetOwnershipSettings": {
+    "description": "Get ownership settings for the org. When settings are unset, the API returns the default opt-out configuration with `auto_tag` set to `true` and `confidence_level` set to `high`.",
+    "summary": "Get ownership settings for the org"
+  },
+  "PostOwnershipSettings": {
+    "description": "Update ownership settings for the org.",
+    "summary": "Update ownership settings for the org",
+    "request_description": "",
+    "request_schema_description": "The request body for updating ownership settings."
+  },
+  "GetOwnershipUntaggedFindings": {
+    "description": "Count findings with no team tag, grouped by ownership confidence level.",
+    "summary": "Count untagged findings by ownership confidence"
+  },
   "ListOwnershipInferences": {
     "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
     "summary": "List ownership inferences for a resource"

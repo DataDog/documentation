@@ -78,6 +78,8 @@ Impact lineage generates a graph of the downstream assets that may be affected b
 
 Drift detection compares the current state of your data on the branch to a baseline and flags any deviations. For Datadog to understand which models ran as part of a CI pipeline, you must send OpenLineage events from your CI job. Datadog uses these events as triggers for drift detection checks. See the [OpenLineage setup documentation][6] for instructions on how to set up OpenLineage.
 
+For **dbt Core**, drift detection also requires the pull request number to be attached to your OpenLineage events through the `sourceCodeLocation` facet. This requires `openlineage-dbt` version 1.46.0 or later and the `OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__DISABLED=false` environment variable. See [Set the environment variables][7].
+
 ##### General settings
 
 | Setting                            | Description                                                                                                                                                   |
