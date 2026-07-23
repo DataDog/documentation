@@ -41,7 +41,7 @@ Monitor messages in Synthetic Monitoring consist of:
 
 ## Automatically added tags
 
-Datadog adds the following tags to a Synthetic test monitor based on the test's configuration, in addition to any custom tags you add. Use these tags to search and filter on the [**Manage Monitors**][2] page or in the Synthetic Monitoring test list.
+Datadog adds the following tags to a Synthetic test monitor based on the test's configuration, in addition to any custom tags you add. Use these tags to search and filter on the [{{< ui >}}Manage Monitors{{< /ui >}}][2] page or in the Synthetic Monitoring test list.
 
 | Tag key             | Available values                                                                 | What it captures                                                                                                    |
 |----------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
