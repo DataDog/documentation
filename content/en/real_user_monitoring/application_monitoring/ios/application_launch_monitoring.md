@@ -1,6 +1,6 @@
 ---
-title: iOS Mobile App Launch Monitoring
-description: "Measure iOS mobile application launch performance, including the time to initial display and time to full display."
+title: Apple Platform App Launch Monitoring
+description: "Measure application launch performance on Apple platforms, including the time to initial display and time to full display."
 aliases:
 - /real_user_monitoring/ios/data_collected/
 - /real_user_monitoring/mobile_and_tv_monitoring/application_launch_monitoring/ios/
@@ -12,11 +12,14 @@ further_reading:
   - link: "/real_user_monitoring/"
     tag: "Documentation"
     text: "Datadog Real User Monitoring"
+  - link: "https://www.datadoghq.com/blog/rum-mobile-app-launch-monitoring"
+    tag: "Blog"
+    text: "Measure and improve mobile app startup performance with Datadog RUM"
 ---
 
 ## Overview
 
-Application launch monitoring helps you understand how fast your iOS app becomes usable after a user taps the app icon. Use it to identify slow startup times, track performance regressions, and optimize the user’s first impression of your app.
+Application launch monitoring helps you understand how fast your app becomes usable after a user opens it on their Apple device. Use it to identify slow startup times, track performance regressions, and optimize the user's first impression of your app.
 
 With this feature, you can:
 - Measure time to initial display (TTID) and time to full display (TTFD) for cold and warm starts
@@ -92,9 +95,9 @@ class HomeViewController: UIViewController {
   If the time to full display is not defined, the iOS SDK only collects the time to initial display. 
 </div>
 
-### RUM summary
+### RUM Summary
 
-The time to initial display and time to full display are presented in the RUM Summary under Mobile Performance. The standalone Mobile Performance Dashboard also contains distribution visuals for time to initial display and time to full display. 
+The time to initial display and time to full display are presented in the {{< ui >}}RUM Summary{{< /ui >}} under {{< ui >}}Mobile Performance{{< /ui >}}. The standalone {{< ui >}}Mobile Performance Dashboard{{< /ui >}} also contains distribution visuals for time to initial display and time to full display. 
 
   {{< img src="real_user_monitoring/ios/ios-rum-summary-app-launch.png" alt="iOS RUM Summary" style="width:90%;">}}
 
@@ -105,7 +108,7 @@ The time to initial display and time to full display are presented as vital even
   {{< img src="real_user_monitoring/ios/ios-app-launch-session.png" alt="iOS session side panel" style="width:90%;">}}
 
 
-The TTID and TTFD can be queried in the RUM Sessions Explorer using the following attributes on the vital event type:
+The TTID and TTFD can be queried in the {{< ui >}}RUM Sessions Explorer{{< /ui >}} using the following attributes on the vital event type:
 - `@vital.type:app_launch`
 - `@vital.name:time_to_initial_display` or `@vital.name:time_to_full_display`
 

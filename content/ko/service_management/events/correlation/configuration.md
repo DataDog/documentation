@@ -1,9 +1,9 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: 설명서
   text: 사례 심사 및 알림에 대해 더 알아보기
-- link: service_management/events/correlation/analytics
+- link: events/correlation/analytics
   tag: 설명서
   text: 사례 분석
 title: 구성

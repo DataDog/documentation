@@ -1,9 +1,10 @@
 ---
+id: alerting_type
 core_product:
 - 알림
 related_terms:
-- 간단한 알림
-- 다중 알림
+- simple_alert
+- multi_alert
 synonyms:
 - 알림 그룹화
 title: 경고 유형

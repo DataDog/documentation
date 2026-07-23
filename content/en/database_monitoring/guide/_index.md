@@ -16,6 +16,7 @@ cascade:
     {{< nextlink href="database_monitoring/guide/rds_autodiscovery" >}}Configuring Database Monitoring for Amazon RDS DB Instances{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/rds_autodiscovery_terraform" >}}Setting Up Database Monitoring with RDS Autodiscovery Using Terraform{{< /nextlink >}}
     {{< nextlink href="database_monitoring/guide/database_identifier" >}}Specifying a Database Identifier{{< /nextlink >}}
+    {{< nextlink href="database_monitoring/guide/build_apps_with_dbm_api" >}}Building Applications with the Database Monitoring API{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="SQL Server guides:" >}}

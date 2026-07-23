@@ -1,4 +1,5 @@
 ---
+id: minified_code
 core_product:
 - apm
 - monitorización Synthetic

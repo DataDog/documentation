@@ -54,7 +54,7 @@ El check de log de eventos de Windows se incluye en el paquete del [Datadog Agen
 
 Los logs de eventos de Windows se pueden recopilar mediante uno o ambos de los siguientes métodos.
 
-- Como [eventos de Datadog](https://docs.datadoghq.com/service_management/events/)
+- Como [eventos de Datadog](https://docs.datadoghq.com/events/)
 - Como [logs de Datadog](https://docs.datadoghq.com/logs/)
 
 Ambos métodos se configuran en `win32_event_log.d/conf.yaml` en la carpeta `conf.d/` en la raíz del [directorio de configuración del Agent](https://docs.datadoghq.com/agent/guide/agent-configuration-files/#agent-configuration-directory). Consulta el [win32_event_log.d/conf.yaml de ejemplo](https://github.com/DataDog/integrations-core/blob/master/win32_event_log/datadog_checks/win32_event_log/data/conf.yaml.example) para conocer todas las opciones de configuración disponibles. Para una opción de inicio rápido para enviar logs de eventos de seguridad, consulta [Send default Security logs](#send-default-security-logs).

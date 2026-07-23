@@ -1,6 +1,6 @@
 ---
 further_reading:
-- link: service_management/events/
+- link: events/
   tag: Documentación
   text: Gestión de eventos
 title: Status Events

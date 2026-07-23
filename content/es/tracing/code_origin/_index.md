@@ -2,135 +2,168 @@
 aliases:
 - /es/tracing/code_origins/
 - /es/tracing/guide/code_origins/
-description: Más información sobre cómo utilizar Code Origin para entender dónde
-  se originan tus tramos en tu código base
+description: Aprende a usar Code Origin para entender de dónde provienen tus tramos
+  en tu base de código.
 further_reading:
 - link: /tracing/glossary/
   tag: Documentación
-  text: Más información sobre términos y conceptos de APM
+  text: Aprende sobre términos y conceptos de APM
 - link: /tracing/trace_collection/
   tag: Documentación
-  text: Aprende a configurar APM tracing con su aplicación
+  text: Aprende a configurar el trazado de APM con tu aplicación
 - link: /tracing/services/service_page/
   tag: Documentación
-  text: Más información sobre servicios en Datadog
+  text: Aprende más sobre los servicios en Datadog
 - link: /tracing/services/resource_page/
   tag: Documentación
-  text: Profundizar en el rendimiento de tus recursos y trazas
+  text: Profundiza en el rendimiento de tus recursos y trazas
 - link: /tracing/live_debugger/
   tag: Documentación
-  text: Más información sobre cómo depurar servicios de producción con Live Debugger
+  text: Aprende a depurar servicios en producción con Live Debugger
 - link: /dynamic_instrumentation/
   tag: Documentación
-  text: Más información sobre cómo añadir tramos personalizados con Dynamic Instrumentation
-title: Code Origin para tramos (spans)
+  text: Aprende a agregar tramos personalizados con Instrumentación Dinámica
+title: Code Origin para Tramos
 ---
+## Resumen {#overview}
 
-{{< beta-callout url="#" btn_hidden="true" >}}
-Code Origin está actualmente en Vista previa. Para unirte a la vista previa, sigue las siguientes instrucciones para activar la función en tus servicios compatibles.
-
-Para enviar preguntas, comentarios o solicitudes relacionadas con Code Origin, <a href="https://docs.google.com/forms/d/e/1FAIpQLScyeRsF2GJjYdf9bUyeDjt8_9id-gvqiBU1SHR3ioDGe5eF3g/viewform?usp=header">rellena este formulario</a> con tus datos.
-{{< /beta-callout >}}
-
-## Información general
-
-Code Origin detecta las localizaciones exactas en tu código base donde se crean tramos APM. Cuando se activa en un servicio compatible, añade automáticamente la ruta del archivo, el número de la línea y el nombre de la función a cada [tramo de entrada de servicios][12], lo que facilita:
+Code Origin captura las ubicaciones exactas en tu base de código donde se crean los tramos de APM. Cuando está habilitado en un servicio compatible, agrega automáticamente la ruta del archivo, el número de línea y el nombre de la función a cada [tramo de entrada del servicio][12], facilitando así:
 
 - Depurar problemas de rendimiento
 - Entender el flujo de ejecución del código
 - Identificar cuellos de botella en el rendimiento
 
-En el Explorador de trazas, selecciona un tramo de un servicio habilitado para ver detalles de Code Origin en la pestaña Información general:
+En Trace Explorer, selecciona un tramo de un servicio habilitado para ver los detalles de Code Origin en la pestaña Resumen:
 {{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Detalles de Code Origin" style="width:100%;">}}
 
 
-## Empezando
+## Introducción {#getting-started}
 
-### Requisitos previos
+### Requisitos previos {#prerequisites}
 - [Datadog APM][6] está configurado para capturar tramos.
-- La [integración del código fuente][7] (necesaria para la vista previa del código) está habilitada.
-- Tu servicio cumple los [requisitos de compatibilidad](#compatibility-requirements).
+- [Integración de código fuente][7] está habilitada (requerida para las vistas previas de código).
+- Su servicio cumple con los [requisitos de compatibilidad](#compatibility-requirements).
 
-### Requisitos de compatibilidad
+### Requisitos de compatibilidad {#compatibility-requirements}
 
-| Lenguaje en tiempo de ejecución | Versión de librería de rastreo | Marcos |
-|---|---|---|
-| Java | 1.47.0 o posterior | Spring Boot/Data, servidores gRPC, Micronaut 4, consumidores Kafka|
-| Python | 2.15.0+ | Django, Flask, Starlette y derivados|
-| Node.js | 4.49.0 o posterior | Fastify|
-| .NET | 3.15.0 o posterior | ASP.NET, ASP.NET Core|
+{{% tabs %}}
 
-### Activar Code Origin
+{{% tab "Java" %}}
 
-Ejecuta tu servicio con la siguiente variable de entorno:
+| Versión del SDK | Frameworks |
+|---|---|
+| 1.47.0+ | Spring Boot/Data, servidores gRPC, Micronaut 4, consumidores de Kafka |
+
+**Limitación:** En JDK 18 y versiones anteriores, las clases compiladas con la `-parameters` bandera pueden no ser compatibles. Spring 6+, Spring Boot 3+ y Scala utilizan esta bandera por defecto.
+
+{{% /tab %}}
+
+{{% tab "Python" %}}
+
+| Versión del SDK | Frameworks |
+|---|---|
+| 2.15.0+ | Django, Flask, Starlette y derivados |
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+
+| Versión del SDK | Frameworks |
+|---|---|
+| 4.49.0+ | Fastify |
+| 5.54.0+ | Express |
+
+**Nota:** NestJS no es compatible, aunque el marco subyacente sea Express o Fastify.
+
+{{% /tab %}}
+
+{{% tab ".NET" %}}
+
+| Versión del SDK | Frameworks |
+|---|---|
+| 3.15.0+ | ASP.NET, ASP.NET Core |
+
+{{% /tab %}}
+
+{{% tab "PHP" %}}
+
+| Versión del SDK | Frameworks |
+|---|---|
+| 1.11.0+ | Todos los frameworks web compatibles |
+
+{{% /tab %}}
+
+{{% /tabs %}}
+
+### Habilitar origen de código {#enable-code-origin}
+
+Ejecute su servicio con la siguiente variable de entorno:
 
 ```shell
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
 
 <div class="alert alert-info">
-  En aplicaciones Node.js transpiladas (por ejemplo, TypeScript), asegúrate de generar y publicar mapas de fuentes con la aplicación desplegada y de ejecutar Node.js con el marcador <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a>. De lo contrario, las vistas previas del código no funcionarán. Para ver más detalles, consulta la documentación de la <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">integración del código fuente</a> de Node.js.
+  Para aplicaciones de Node.js transpileadas (por ejemplo, TypeScript), asegúrese de generar y publicar mapas del código fuente con la aplicación desplegada, ejecute Node.js con el <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a>la bandera, y use la versión 5.59.0 o más reciente del rastreador de Node.js. De lo contrario, las vistas previas de código no funcionan. Consulte la documentación de <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Integración de Código Fuente</a> de Node.js para más detalles.
 </div>
 
-## Uso de Code Origin
+## Usando el Origen de Código {#using-code-origin}
 
-### En el Explorador de trazas
+### En el Explorador de Trazas {#in-the-trace-explorer}
 
-1. Ve al [Explorador de trazas][1].
-1. Busca "tramos de entrada de servicios" desde tus servicios habilitados para Code Origin.
+1. Navegue hasta el [Explorador de Trazas][1].
+1. Busque "Service Entry Spans" de sus servicios habilitados para Origen de Código.
 
-    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Buscar tramos de entrada de servicios" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Origen de Código - Buscar Service Entry Spans" style="width:100%;">}}
 
-1. Haz clic en un tramo para ver los detalles.
-1. En el panel lateral de detalles de la traza, busca la sección "Code Origin".
+1. Haga clic en un tramo para ver sus detalles.
+1. En el panel lateral de detalles de la traza, busque la sección "Origen de Código".
 
-    {{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Detalles de Code Origin en el Explorador de trazas" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Detalles del Origen de Código en el Explorador de Trazas" style="width:100%;">}}
 
-1. De la sección Code Origin:
-    - Inicia una sesión de [Live Debugger][11] en el servicio en ejecución haciendo clic en "Start Debug Session" (Empezar la sesión de depuración), para capturar logs en la localización del método de Code Origin. O bien, selecciona un punto de interrupción en el gutter de la vista previa del código, para capturar logs en la línea de código seleccionada.
+1. Desde la sección de Origen de Código:
+    - Inicie una sesión de [Depurador en Vivo][11] en el servicio en ejecución haciendo clic en "Iniciar Sesión de Depuración" para capturar registros en la ubicación del método de Origen de Código. O, seleccione un punto de interrupción en el margen de la vista previa de código para capturar registros en la línea de código seleccionada.
 
-        {{< img src="tracing/code_origin/code_origin_start_debug_session.png" alt="Code Origin - Iniciar sesión de Live Debugger" style="width:100%;">}}
+        {{< img src="tracing/code_origin/code_origin_start_debug_session.png" alt="Origen de Código - Iniciar Sesión de Depurador en Vivo" style="width:100%;">}}
 
-     - Haz clic en las variables del código fuente para añadirlas como atributos a tramos futuros con [Dynamic Instrumentation][5].
+     - Click on source code variables to add them as attributes to future spans with [Dynamic Instrumentation][5].
 
-        {{< img src="tracing/code_origin/code_origin_add_span_tag_spotlight.png" alt="Code Origin - Añadir span tags con Dynamic Instrumentation" style="width:100%;">}}
+        {{< img src="tracing/code_origin/code_origin_add_span_tag_spotlight.png" alt="Origen de Código - Agregar etiqueta de tramo con Instrumentación Dinámica" style="width:100%;">}}
 
 
-### En tu IDE
+### En su IDE {#in-your-ide}
 
-1. Configura tu [integración Datadog IDE][4].
-    - IDE compatibles: IntelliJ, VS Code
-    - Lenguajes admitidos: Java, Python
-2. Visualiza las métricas RED (Solicitudes, Errores y Duración) como anotaciones en línea de tus métodos de endpoint.
+1. Configura tu [Integración de IDE de Datadog][4].
+    - IDEs soportados: IntelliJ, VS Code
+    - Lenguajes soportados: Java, Python
+2. Visualiza métricas RED (Solicitudes, Errores y Duración) como anotaciones en línea sobre tus métodos de endpoint.
 
-    {{< img src="tracing/code_origin/code_origin_ide_details.png" alt="Detalles de Code Origin en IDE" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_ide_details.png" alt="Detalles de Origen del Código en IDE" style="width:100%;">}}
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-### Falta sección Code Origin
+### Falta la sección de Origen del Código {#code-origin-section-is-missing}
 
-- Verifica que Code Origin está [habilitado](#enable-code-origin) en la configuración de tu biblioteca de rastreo.
-- Confirma que tu servicio cumple todos los [requisitos de compatibilidad](#compatibility-requirements) (es decir, lenguaje del servicio, marcos compatibles y versión mínima del rastreador).
-- En la mayoría de los servicios, los datos de Code Origin se capturan sólo para [tramos de entrada de servicios][12]. Puedes filtrar por "tramos de entrada de servicios" en el [Explorador de trazas APM][1].
+- Verifica que el Origen del Código esté [habilitado](#enable-code-origin) en la configuración de tu SDK.
+- Confirma que tu servicio cumpla con todos los [requisitos de compatibilidad](#compatibility-requirements) (es decir, lenguaje del servicio, frameworks soportados y versión mínima del tracer).
+- Para la mayoría de los servicios, los datos de Origen del Código se capturan solo para [tramos de entrada del servicio][12]. Puedes filtrar a "Tramos de Entrada del Servicio" en el [Explorador de Trazas APM][1].
 
-    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Buscar tramos de entrada de servicios" style="width:100%;">}}
+    {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Origen de Código - Buscar Service Entry Spans" style="width:100%;">}}
 
-- Para buscar todos los tramos que incluyan Code Origin, utiliza la consulta `@_dd.code_origin.type:*` en el [Explorador de trazas APM][1].
+### La vista previa del código no es visible o el archivo no se encuentra {#code-preview-is-not-visible-or-the-file-is-not-found}
 
-### La vista previa del código no es visible o no se encuentra el archivo
+- Asegúrate de que se cumplan todos los requisitos de configuración de [Integración de Código Fuente][7], incluyendo que tus `DD_GIT_*` variables de entorno estén configuradas con los valores correctos.
+- Para aplicaciones de Node.js transpileadas (por ejemplo, TypeScript), asegúrate de generar y publicar mapas del código fuente con la aplicación desplegada, ejecuta Node.js con la bandera [`--enable-source-maps`][10] y utiliza la versión 5.59.0 o más reciente del tracer de Node.js. De lo contrario, las vistas previas del código no funcionarán. Consulta la documentación de [Integración de Código Fuente][9] de Node.js para más detalles.
+- El Origen del Código está diseñado para referenciar solo el código del usuario, pero en algunos casos, las referencias de código de terceros pueden pasar desapercibidas. Puedes reportar estos casos a [soporte de Datadog][13] y ayudar a mejorar estas referencias.
 
-- Asegúrate de que se cumplen todos los requisitos de configuración de la [integración del código fuente][7] y de que tus variables de entorno de `DD_GIT_*` están configuradas con los valores correctos.
-- En aplicaciones Node.js transpiladas (por ejemplo, TypeScript), asegúrate de generar y publicar mapas de fuentes con la aplicación desplegada y de ejecutar Node.js con el marcador [`--enable-source-maps`][10]. De lo contrario, las vistas previas del código no funcionarán. Para ver más detalles, consulta la documentación de la [integración del código fuente][9] de Node.js.
-- Code Origin está diseñado para referenciar únicamente códigos de usuario, pero en algunos casos pueden colarse referencias a códigos de terceros. Puedes informar de estos casos al [servicio de asistencia de Datadog][13] y ayudar a mejorar estas referencias.
-
-## Referencias adicionales
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/apm/traces
 [2]: /es/tracing/services/service_page/
 [3]: /es/tracing/services/resource_page/
-[4]: /es/developers/ide_plugins/
+[4]: /es/ide_plugins/
 [5]: /es/dynamic_instrumentation/
 [6]: /es/tracing/trace_collection/
 [7]: /es/integrations/guide/source-code-integration/

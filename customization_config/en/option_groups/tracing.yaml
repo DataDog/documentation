@@ -17,3 +17,4 @@ custom_instrumentation_api_options:
   - id: otel_api
     default: true
   - id: dd_api
+    label: Datadog

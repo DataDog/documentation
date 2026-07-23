@@ -29,7 +29,7 @@ When using OpenTelemetry with Datadog, you might encounter various hostname-rela
          fieldRef:
            apiVersion: v1
            fieldPath: status.podIP
-     - name: OTEL_RESOURCE
+     - name: OTEL_RESOURCE_ATTRIBUTES
        value: k8s.pod.ip=$(MY_POD_IP)
    ```
 
@@ -293,9 +293,9 @@ To verify the configuration:
 1. Check the raw trace data to confirm that container IDs and tags are properly translated into Datadog format (for example, `container.id` should become `container_id`).
 2. Verify that container metadata appears on the Containers page.
 
-## Missing metrics in Software Catalog and dashboards
+## Missing metrics in Catalog and dashboards
 
-**Symptom**: Metrics are not appearing in the Software Catalog and dashboards despite being properly collected.
+**Symptom**: Metrics are not appearing in the Catalog and dashboards despite being properly collected.
 
 **Cause**: This typically occurs due to incorrect or improperly mapped semantic conventions.
 

@@ -1,4 +1,5 @@
 ---
+id: collector
 title: collector
 core_product:
   - datadog agent

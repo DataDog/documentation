@@ -1,4 +1,5 @@
 ---
+id: transaction
 core_product:
 - log management
 title: 트랜잭션

@@ -8,7 +8,7 @@ title: Cronología
 
 ## Información general
 
-{{< img src="/service_management/incidents/investigate/timeline/timeline_tab.png" alt="Incidencia de ejemplo que muestra la pestaña Línea temporal" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/timeline/timeline_tab.png" alt="Incidencia de ejemplo que muestra la pestaña Línea temporal" style="width:100%;" >}}
 
 La línea temporal de la incidencia es la principal fuente de información del trabajo realizado durante una incidencia. A medida que se realizan acciones, se añaden nuevas celdas a la línea temporal en orden cronológico para capturar los cambios realizados, la persona que realizó el cambio y la hora en que se realizaron los cambios.
 
@@ -41,7 +41,7 @@ Las definiciones de gráficos se almacenan utilizando URLs compartidas para grá
 Para cargar una imagen en Datadog, suelta un archivo de imagen en el campo de texto situado encima de la línea temporal. Esto añade la imagen como una celda individual en la línea temporal.
 
 También puedes añadir una imagen a una celda existente:  
-{{< img src="/service_management/incidents/investigate/timeline/timeline_cell_add_image.png" alt="Descripción de tu imagen" style="width:100%;" >}}
+{{< img src="/incident_response/incident_management/investigate/timeline/timeline_cell_add_image.png" alt="Descripción de tu imagen" style="width:100%;" >}}
 1. Haz clic en el icono del lápiz para editar una celda.  
 2. Haz clic en el icono de imagen y localiza la imagen en tu directorio de archivos.  
 3. Puedes utilizar cualquiera de las siguientes opciones para subir una imagen que se alojará en Datadog:  

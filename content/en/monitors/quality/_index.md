@@ -17,7 +17,7 @@ The Monitor Quality feature in Datadog identifies common misconfigurations in mo
 
 ## View misconfigured monitors
 
-From the [**Manage Monitors**][8] page, click the [**Monitor Quality**][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor.
+From the [{{< ui >}}Manage Monitors{{< /ui >}}][8] page, click the [{{< ui >}}Monitor Quality{{< /ui >}}][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor.
 
 Filter and view the [Monitor Quality page][7] based on the teams, creators, services, or environments to organize and manage the list.
 

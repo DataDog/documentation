@@ -1,4 +1,5 @@
 ---
+id: conditional_variables
 core_product:
 - alertas
 title: variables condicionales

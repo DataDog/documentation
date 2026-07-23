@@ -255,9 +255,13 @@ button.list-group-item-white:hover {
     }
 }
 
-// remove outlines
-button:focus {
+// Hide focus outlines for mouse/touch only; keep for keyboard
+button:focus:not(:focus-visible) {
     outline: none;
+}
+button:focus-visible {
+    outline: 2px solid $ddpurple;
+    outline-offset: 2px;
 }
 .form-control:focus {
     box-shadow: none;

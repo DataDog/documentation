@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer**.
+1. **Install the Datadog .NET SDK**.
 
    Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 

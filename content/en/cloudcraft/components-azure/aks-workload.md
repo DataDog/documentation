@@ -12,9 +12,9 @@ You can use the AKS Workload component to represent and visualize Kubernetes wor
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Name**: Enter a name for the AKS Workload.
-- **Type**: Select the type of workload inside the cluster.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Enter a name for the AKS Workload.
+- {{< ui >}}Type{{< /ui >}}: Select the type of workload inside the cluster.
 
 ## API
 

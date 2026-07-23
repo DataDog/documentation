@@ -1,5 +1,6 @@
 ---
 title: Derived Metrics 
+description: "Save a metrics query as a new metric you can reuse across dashboards, monitors, SLOs, and notebooks."
 further_reading:
 - link: "https://www.datadoghq.com/blog/auto-smoother-asap/"
   tag: "Blog"
@@ -23,7 +24,7 @@ Derived Metrics allow you to save any metrics query as a new metric, so you can 
 
 ## Create a derived metric
 
-To create a derived metric, navigate to **[Metrics > Generate Metrics][1]** and click **+ New Metric**.
+To create a derived metric, navigate to [{{< ui >}}Metrics > Generate Metrics{{< /ui >}}][1] and click {{< ui >}}+ New Metric{{< /ui >}}.
 
 {{< img src="metrics/derived_metrics/generate_metrics_tab.png" alt="The generate metrics tab in Datadog" style="width:90%;" >}}
 
@@ -37,17 +38,17 @@ To create a derived metric, navigate to **[Metrics > Generate Metrics][1]** and 
 
 {{< img src="metrics/derived_metrics/derived_metric_query.png" alt="A Datadog metric query to generate a derived metric" style="width:90%;" >}}
 
-3. Click **Create Metric**.
+3. Click {{< ui >}}Create Metric{{< /ui >}}.
 
 ## Update a derived metric
 
-To update a derived metric, hover over the metric and click the **Edit** icon that appears to the right. 
+To update a derived metric, hover over the metric and click the {{< ui >}}Edit{{< /ui >}} icon that appears to the right. 
 
 **Note**: You cannot rename an existing metric. Create a new metric instead.
 
 ## Delete a derived metric
 
-To delete a derived metric, hover over the derived metric and click the **Delete** icon that appears to the right. 
+To delete a derived metric, hover over the derived metric and click the {{< ui >}}Delete{{< /ui >}} icon that appears to the right. 
 
 ## Further reading
 

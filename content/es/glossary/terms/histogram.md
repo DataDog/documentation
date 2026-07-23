@@ -1,4 +1,5 @@
 ---
+id: histogram
 core_product:
 - métricas
 title: histograma

@@ -13,6 +13,7 @@
 
     {{ partial "integration-labels/integration-labels.html" . }}
     {{ partial "site_support_banner/site_support_banner.html" . }}
+    {{ partial "us2_fed_integration_banner/us2_fed_integration_banner.html" . }}
     {{ $dir := "" }}
     {{ with .File }}{{ $dir = .Dir }}{{ end }}
     {{ if and (eq $dir "integrations/") ($media | len) }}

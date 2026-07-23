@@ -17,43 +17,45 @@ aliases:
 - /es/getting_started/from_the_query_to_the_graph
 - /es/graphing/miscellaneous/from_the_query_to_the_graph
 - /es/graphing/functions/
+description: Aplica funciones matemáticas y estadísticas para modificar los resultados
+  de la consulta métrica en los tableros y visualizaciones de Datadog.
 further_reading:
 - link: /metrics/#querying-metrics
   tag: Documentación
-  text: Consulta de métricas
+  text: Consultando métricas
 title: Funciones
 ---
+## Descripción general {#overview}
 
-## Información general
+Las funciones pueden modificar cómo se devuelven los resultados de una consulta métrica para las visualizaciones. La mayoría de las funciones se aplican después de que se devuelven los resultados de la consulta métrica, pero las funciones también pueden cambiar los parámetros antes de que se realice la consulta. 
 
-Las funciones pueden modificar la forma en que se devuelven los resultados de una consulta de métricas para las visualizaciones. La mayoría de las funciones se aplican después de que se devuelven los resultados de la consulta de métricas, pero estas también pueden modificar los parámetros antes de realizar la consulta. 
+Por ejemplo, la función Rollup cambia la agregación temporal de una consulta antes de que se devuelvan los resultados. Alternativamente, las funciones aritméticas aplican cambios a los resultados devueltos de la consulta métrica. Consulta la página de [Metrics][3] para aprender más sobre cómo consultar métricas. Para aprender más sobre las diferentes funciones, consulta los [tipos de funciones](#function-types).
 
-Por ejemplo, la función de rollup cambia la agregación temporal de una consulta antes de que se devuelvan los resultados. De manera alternativa, las funciones aritméticas aplican cambios a los resultados devueltos de la consulta de métricas. Consulta la página de [Métricas][3] para obtener más información sobre la consulta de métricas. Para obtener más información sobre las diferentes funciones, consulta la página de [tipos de funciones](#function-types).
+## Agregar una función {#add-a-function}
 
-## Añadir un función
+Las funciones se pueden aplicar a sus consultas haciendo clic en el ícono Add Function `Σ` en el editor de gráficos. La mayoría de las funciones se aplican después de [desglose temporal][1] y [desglose espacial][2].
 
-Las funciones se pueden aplicar a tus consultas al hacer clic en el icono `Σ` de Add Function (Añadir función) en el editor de gráficas. La mayoría de las funciones se aplican después de la [agregación temporal][1] y [espacial][2].
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Símbolo de Sigma mayúscula para Add Function" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Símbolo sigma mayúscula de añadir función" style="width:100%;" >}}
+## Tipos de funciones {#function-types}
 
-## Tipos de funciones
-
-{{< whatsnext desc="Elige un tipo de función:" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorítmica: implementa la detección de anomalías o valores atípicos.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Aritmética: realiza operaciones aritméticas.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Conteo: cuenta valores distintos de cero o no nulos.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusión: excluye ciertos valores de la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolación: rellena o establece valores predeterminados.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Clasificación: solo selecciona un subconjunto de métricas. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}Tasa: calcula una derivada personalizada sobre la métrica.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Regresión: aplica una función de machine learning.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: controla la cantidad de puntos de datos sin procesar utilizados. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Suavizado: suaviza las variaciones métricas.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Cambio de tiempo: cambia el punto de datos de la métrica a lo largo de la línea de tiempo. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/beta" >}}Beta: calcula el promedio móvil de una métrica.{{< /nextlink >}}
+{{< whatsnext desc="Elija un tipo de función:" >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorítmica: Implementar detección de anomalías o valores anómalos.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Aritmética: Realizar operaciones aritméticas.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Contar: Contar valores no cero o no nulos.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusión: Excluir ciertos valores de su métrica.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolación: Llenar o establecer valores predeterminados.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Clasificación: Seleccionar solo un subconjunto de métricas. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Tasa: Calcular una derivada personalizada sobre su métrica.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Regresión: Aplicar una función de aprendizaje automático.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup: Controlar el número de puntos de datos en bruto utilizados. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Suavizado: Suavizar las variaciones de su métrica.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/telemetry_source" >}}Fuente de Telemetría: Elegir la fuente de telemetría de sus datos métricos.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Desplazamiento temporal: Desplazar su punto de datos métrico a lo largo de la línea de tiempo. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/beta" >}}Beta: Calcular el promedio móvil de una métrica.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Leer más
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

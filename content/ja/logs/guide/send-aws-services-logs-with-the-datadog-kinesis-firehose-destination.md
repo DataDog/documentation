@@ -29,25 +29,25 @@ AWS は Amazon Data Firehose を完全に管理しているため、ログをス
 {{< tabs >}}
 {{% tab "Amazon Data Firehose 配信ストリーム" %}}
 
+<div class="alert alert-info">Datadog には <strong>1 バッチあたり 65,536 イベント</strong> の取り込み制限があり、Kinesis のバッファ サイズを <strong>2 MiB</strong> に設定することが推奨されています。この制限を超えると、一部のログがドロップされることがあります。</div>
+
 Datadog は、Amazon Data Firehose で Datadog の宛先を使用する場合、入力として Kinesis データストリームを使用することをお勧めします。Datadog がログの唯一のコンシューマーではない場合に備えて、ログを複数の宛先に転送する機能が用意されています。Datadog がログの唯一の宛先である場合、またはすでにログを含む Kinesis データストリームを持っている場合、ステップ 1 を無視することができます。
 
 1. オプションとして、AWS の Amazon Kinesis Data Streams 開発者ガイドの[データストリームの作成][1]セクションを使用して、新しい Kinesis データストリームを作成します。ストリームには `DatadogLogStream` のような分かりやすい名前を付けます。
 2. [Amazon Data Firehose][2] に移動します。  
 3. **Create Firehose stream** をクリックします。
-   a. ソースを設定します。
+   1. ソースを設定します:
       - ログが Kinesis データストリームから取得されている場合は、`Amazon Kinesis Data Streams`
       - ログが CloudWatch のロググループから直接送られてくる場合は、`Direct PUT`
-
-   b. 宛先を `Datadog` にします。 
-   c. 配信ストリームの名前を指定します。
-   d. **Destination settings** で、[Datadog サイト][5]に対応する `Datadog logs` HTTP エンドポイント URL を選択します。 
-   e. **API key** フィールドに API キーを貼り付けてください。API キーは [Datadog API Keys ページ][3]で取得または作成できます。Secrets Manager 認証を使用する場合は、次のように JSON 形式で value フィールドに Datadog API キーを追加してください: `{"api_key":"<YOUR_API_KEY>"}`。
-
-   f. オプションとして、**Retry duration**、バッファの設定を構成するか、またはログにタグとしてアタッチされる **Parameters** を追加することができます。 
-   **注**: Datadog は、ログが 1 行のメッセージである場合、**Buffer size** を `2 MiB` に設定することを推奨します。
-   g. **Backup settings** で、再試行期間を超える失敗したイベントを受け取る S3 バックアップバケットを選択します。 
-   **注**: 配信ストリームで失敗したすべてのログが引き続き Datadog に送信されるようにするには、この S3 バケットから[ログを転送][4]するように Datadog Forwarder Lambda 関数を設定します。
-   h. **Create Firehose stream** をクリックします。
+   1. 宛先を `Datadog` にします。 
+   1. 配信ストリームの名前を指定します。
+   1. **Destination settings** で、利用中の [Datadog サイト][5]に対応する `Datadog logs` HTTP endpoint URL を選択します。
+   1. **API key** フィールドに API キーを貼り付けてください。API キーは [Datadog API Keys ページ][3] で取得または作成できます。Secrets Manager 認証を使用する場合は、Datadog API キーを次のような完全な JSON 形式で value フィールドに追加してください: `{"api_key":"<YOUR_API_KEY>"}`。
+   1. 任意で、**Retry duration** やバッファ設定を指定したり、ログにタグとして付与される **Parameters** を追加したりできます。
+   **注**: Datadog には 1 バッチあたり 65,536 イベントの取り込み制限があり、ログが単一行メッセージである場合は、**Buffer size** を `2 MiB` に設定することが推奨されています。
+   1. **Backup settings** では、再試行期間を超えた失敗イベントのバックアップ先となる S3 バケットを選択します。
+     **注**: 配信ストリームで失敗したログが依然として Datadog に送信されるようにするには、この S3 バケットから[ログを転送][4]するよう Datadog Forwarder Lambda 関数を設定してください。
+   1. **Create Firehose stream** をクリックします。
 
 [1]: https://docs.aws.amazon.com/streams/latest/dev/tutorial-stock-data-kplkcl-create-stream.html
 [2]: https://console.aws.amazon.com/firehose/

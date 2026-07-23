@@ -38,7 +38,7 @@ This guide walks you through how to correlate your full stack data. Depending on
 
 When your users are encountering errors or high latency in your application, viewing the specific logs from a problematic request can reveal exactly what went wrong. By pulling together all the logs pertaining to a given request, you can see in rich detail how it was handled from beginning to end so you can quickly diagnose the issue.
 
-Correlating your logs with traces also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of `trace_id`.
+Correlating your logs with traces also eases [aggressive sampling strategy without losing entity-level consistency][2] with the use of `trace_id`. Because traces and logs are sampled independently, a log may contain a trace ID that refers to a trace that was not retained. For more information, see [Log has a trace ID but the associated trace is missing][21].
 
 [Correlating application logs](#correlate-application-logs) offers extensive visibility across your stack, but some specific use cases require correlation deeper into your stack. Follow the links to complete setup per use case:
 
@@ -170,7 +170,7 @@ You can access RUM views in the [Trace Explorer][14] and APM traces in the [RUM 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/trace-details-rum.png" alt="RUM information in a trace" style="width:100%;" >}}
 
-There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the **Traces** tab. 
+There is no direct correlation between RUM views and server logs. To see RUM events in a log and logs in a RUM event, click in the {{< ui >}}Traces{{< /ui >}} tab. 
 
 {{< img src="logs/guide/ease-troubleshooting-with-cross-product-correlation/rum-action-server-logs.png" alt="Logs in a RUM action trace preview" style="width:100%;" >}}
 
@@ -199,8 +199,8 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [3]: /tracing/other_telemetry/connect_logs_and_traces
 [4]: /tracing/faq/why-cant-i-see-my-correlated-logs-in-the-trace-id-panel
 [5]: /tracing/trace_collection/proxy_setup/?tab=nginx
-[6]: /logs/log_configuration/processors/#grok-parser
-[7]: /logs/log_configuration/processors/#trace-remapper
+[6]: /logs/log_configuration/processors/grok_parser/
+[7]: /logs/log_configuration/processors/trace_remapper/
 [8]: /integrations/postgres/?tab=host#log-collection
 [9]: https://www.postgresql.org/docs/13/auto-explain.html
 [10]: https://www.postgresql.org/docs/13/sql-syntax-lexical.html#SQL-SYNTAX-COMMENTS
@@ -214,3 +214,4 @@ For more information, see [Connect Synthetic Tests and Traces][19].
 [18]: https://app.datadoghq.com/synthetics/tests
 [19]: /synthetics/apm
 [20]: /tracing/trace_collection/proxy_setup/nginx
+[21]: /logs/troubleshooting/#log-has-a-trace-id-but-the-associated-trace-is-missing

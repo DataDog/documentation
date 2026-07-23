@@ -1,0 +1,12 @@
+{
+  "data": {
+    "type": "environments",
+    "attributes": {
+      "name": "Test Environment Example-Feature-Flag",
+      "queries": [
+        "test-Example-Feature-Flag",
+        "env-Example-Feature-Flag"
+      ]
+    }
+  }
+}

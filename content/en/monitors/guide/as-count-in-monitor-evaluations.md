@@ -1,13 +1,13 @@
 ---
 title: as_count() in Monitor Evaluations
-description: "Understanding how as_count() and as_rate() modifiers affect monitor evaluations and arithmetic operations in different evaluation paths."
+description: "Understanding how as_count() and as_rate() modifiers affect monitor evaluations and the order of operations in different evaluation paths."
 aliases:
   - /monitors/guide/as-count-monitor-evaluation
 ---
 
 ## Overview
 
-Queries using **`as_count()`** and **`as_rate()`** modifiers are calculated in ways that can yield different results in monitor evaluations. Monitors involving arithmetic and at least 1 **`as_count()`** modifier use a separate evaluation path that changes the order in which arithmetic and time aggregation are performed.
+Queries using **`as_count()`** and **`as_rate()`** modifiers are calculated in ways that can yield different results in monitor evaluations. Monitors involving at least one **`as_count()`** modifier use a separate evaluation path that changes the order in which operations and time aggregation are performed.
 
 ## Error rate example
 
@@ -75,6 +75,17 @@ sum(last_5m):total
 ```
 
 In general, **`avg`** time aggregation with **`.as_rate()`** is reasonable, but **`sum`** aggregation with **`.as_count()`** is recommended for error rates. Aggregation methods other than **`sum`** do not make sense to use with (and cannot be used with) **`.as_count()`**.
+
+## Gauge metrics and pct_change()
+
+The evaluation path also affects gauge metrics when used with rollup-dependent functions like `pct_change()`. Without `as_count()`, the monitor uses the classic evaluation path, in which `pct_change()` is computed per-bucket and those values are summed over the evaluation window. For sparse gauge metrics, this can produce values well below -100%.
+
+| Path | Evaluation order | Effect on sparse gauge metrics |
+|:-----|:-----------------|:-------------------------------|
+| **`classic_eval_path`** (no `as_count()`) | `pct_change()` is applied per-bucket, then values are summed over the window | Can produce large negative values (for example, -1,500%) |
+| **`as_count_eval_path`** | Timeseries is bucketed and aggregated first, then `pct_change()` is applied at the window level | Produces the intended window-level result |
+
+To use the count-style evaluation path on a gauge metric, add `as_count()` to the query.
 
 [Reach out to the Datadog support team][1] if you have any questions.
 

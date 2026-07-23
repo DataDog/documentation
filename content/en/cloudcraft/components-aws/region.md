@@ -12,9 +12,9 @@ Use the Region component to represent physical locations from your Amazon Web Se
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Visibility**. Toggle the visibility of the component on the diagram.
-- **Color**. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
-- **Padding**. Enter the padding value to adjust the space between the component border and its content.
+- {{< ui >}}Visibility{{< /ui >}}. Toggle the visibility of the component on the diagram.
+- {{< ui >}}Color{{< /ui >}}. Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors on 2D and 3D views or different colors for each.
+- {{< ui >}}Padding{{< /ui >}}. Enter the padding value to adjust the space between the component border and its content.
 
 ## API
 

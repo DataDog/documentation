@@ -1,5 +1,6 @@
 ---
 title: Amazon Elastic Container Service with Agent v5
+description: "Set up the Datadog Agent v5 to monitor Amazon ECS containers and workloads."
 
 private: true
 ---

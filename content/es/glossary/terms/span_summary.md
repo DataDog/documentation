@@ -1,4 +1,5 @@
 ---
+id: span_summary
 core_product:
 - apm
 title: resumen de tramos (spans)

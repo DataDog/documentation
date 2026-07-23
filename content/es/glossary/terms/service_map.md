@@ -1,4 +1,5 @@
 ---
+id: service_map
 core_product:
 - apm
 - catálogo de servicios

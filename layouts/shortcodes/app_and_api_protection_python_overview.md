@@ -3,7 +3,7 @@
 ## Overview
 App and API Protection leverages the [Datadog Python library](https://github.com/DataDog/dd-trace-py/) to monitor and secure your Python service. The library integrates seamlessly with your existing application without requiring code changes.
 
-For detailed compatibility information, including supported Python versions, frameworks, and deployment environments, see [Python Compatibility Requirements](/security/application_security/setup/python/compatibility).
+For detailed compatibility information, including supported Python versions, frameworks, and deployment environments, see [Python Compatibility Requirements](/security/application_security/setup/compatibility/python).
 
 {{ if $showSetup }}
 This guide explains how to set up App and API Protection (AAP) for Python applications. The setup involves:

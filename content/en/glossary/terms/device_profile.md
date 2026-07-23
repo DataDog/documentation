@@ -1,4 +1,5 @@
 ---
+id: device_profile
 title: device profile
 core_product:
   - network device monitoring

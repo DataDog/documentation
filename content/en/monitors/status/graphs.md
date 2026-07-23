@@ -28,7 +28,7 @@ The right panel of the graph section of the monitor status page provides a high-
 |  | Description |
 | ---- | ---- |
 | Groups | Count of groups per status (`ALERT`, `WARN`, `NO DATA`, `OK`) |
-| Visualize as | Graph selector to toggle between the Evaluated Data, Source Data, and Transitions graphs. |
+| {{< ui >}}Visualize as{{< /ui >}} | Graph selector to toggle between the {{< ui >}}Evaluated Data{{< /ui >}}, {{< ui >}}Source Data{{< /ui >}}, and {{< ui >}}Transitions{{< /ui >}} graphs. |
 | Query | The raw monitor query. Each monitor includes a dynamic link to a specific explorer or page based on the data type, such as event explorer for event data types or a general metric explorer for other types. |
 | Evaluation | The aggregation method applied to the Query with the evaluation window. |
 | Notification count | Count of notifications sent from this monitor. |
@@ -59,9 +59,9 @@ The visualization matches your monitor's configuration to show the monitor's his
 
 {{< img src="/monitors/status/graphs/status_page_demo.mp4" alt="Walkthrough of Evaluated data UI features including event details and filter to group" video=true >}}
 
-To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the **Event Details** section for more information.
+To view details on status changes (such as a change from `WARN` to `ALERT`), click the alert event on the graph and check the {{< ui >}}Event Details{{< /ui >}} section for more information.
 
-To filter the view for an individual group, hover over the group title and click **Filter to Group** in the tooltip.
+To filter the view for an individual group, hover over the group title and click {{< ui >}}Filter to Group{{< /ui >}} in the tooltip.
 
 {{< img src="/monitors/status/graphs/current_status_dot.png" alt="Evaluated data graph showing an OK graph with a WARN dot to show the current status is in WARN" style="width:100%;" >}}
 
@@ -105,12 +105,12 @@ The Transitions graph displays your monitor's state transitions over time, broke
 
 {{< img src="/monitors/status/graphs/non_reporting_transitions_1.png" alt="Transitions graph showing non reporting data" style="width:100%;" >}}
 
-Datadog keeps monitor groups in the UI for 24 hours unless configured differently. For more information, see [Group Retention time][1]. A dotted line in the graph can indicate:
+Datadog keeps monitor groups in the UI for a retention period after they stop reporting, unless configured differently. For more information, see [Group retention time][1]. A dotted line in the graph can indicate:
 
 * A new group evaluated after monitor creation, shown as a dotted line from the start of the time period to when first evaluated.
 * A group that has stopped reporting, then started again, with a dotted line appearing from when it dropped out to when reporting resumes.
 
-**Note**: The non-reporting status is different from a "no data" status. Host monitors and service checks set to notify on missing data are available for 48 hours.
+**Note**: The non-reporting status is different from a "no data" status. For the retention period that applies to each monitor type, see [Group retention time][1].
 
 ## Further reading
 

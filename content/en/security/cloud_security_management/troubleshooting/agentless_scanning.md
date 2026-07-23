@@ -21,7 +21,23 @@ If no results appear after two hours:
 
 - Verify that the scanner infrastructure was deployed. In your cloud provider console, check that scanner instances are running.
 - Confirm that [Remote Configuration][3] is enabled on the API key you used to set up Agentless Scanning. Scanners receive their scan instructions through Remote Configuration.
-- Check that the cloud integration is properly configured. On the [Cloud Security Setup][4] page, verify that your cloud account appears with Agentless Scanning enabled.
+- Check that the cloud integration is properly configured. On the [{{< ui >}}Cloud Security Setup{{< /ui >}}][4] page, verify that your cloud account appears with Agentless Scanning enabled.
+
+## GCP: Failed to create state bucket (storage.buckets.create 403)
+
+If the GCP Cloud Shell setup fails at **"{{< ui >}}Setting up Terraform state storage{{< /ui >}}"** with an error like:
+
+```
+Failed to create state bucket: datadog-agentless-tfstate-<project>
+HTTPError 403: ... does not have storage.buckets.create access to the Google Cloud project.
+```
+
+the identity running the script does not have permission to create or manage GCS buckets in the scanner project.
+
+**Fix (choose one):**
+
+1. **Grant Storage permissions** on the scanner project to the user (or service account) running the script. For example, grant **Storage Admin** (`roles/storage.admin`) on that project, or a custom role that includes `storage.buckets.create`, `storage.buckets.get`, and `storage.buckets.update`.
+2. **Reuse an existing bucket:** Use a bucket that already exists (create it with an identity that has Storage permissions if needed), then set `TF_STATE_BUCKET` to that bucket name when running the script. The script will use the existing bucket for Terraform state and will not try to create one.
 
 ## Deployment fails due to VPC creation restrictions
 
@@ -35,7 +51,7 @@ Agentless scanner instances are ephemeral EC2 instances (or equivalent) deployed
 
 These findings reflect vulnerabilities identified in the underlying OS image and do not indicate a misconfiguration of your environment.
 
-If desired, you can use tag-based filtering in the [Cloud Security Vulnerabilities Explorer][2] to exclude Datadog-managed scanner instances from your vulnerability views.
+If desired, you can use tag-based filtering in the [{{< ui >}}Cloud Security Vulnerabilities Explorer{{< /ui >}}][2] to exclude Datadog-managed scanner instances from your vulnerability views.
 
 ## Hosts with the Datadog Agent are not scanned
 

@@ -1,4 +1,5 @@
 ---
+id: enhanced_metric
 core_product:
 - serverless monitoring
 synonyms:

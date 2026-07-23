@@ -142,7 +142,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 
 ### Incident channel commands
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 | Command | Description |
 | ------- | ----------- |
 | `/datadog` | Open the incident action tray to perform common actions. |
@@ -157,7 +157,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 | `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 | Command | Description |
 | ------- | ----------- |
 | `/datadog` | Open the incident action tray to perform common actions. |

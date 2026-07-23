@@ -107,7 +107,7 @@ Notifications ページから、通知チャネルを有効化・無効化した
 サポートが必要な場合は [Harness サポート][5]にお問い合わせください。
 
 
-[1]: https://docs.datadoghq.com/ja/service_management/events/explorer/
+[1]: https://docs.datadoghq.com/ja/events/explorer/
 [2]: mailto:support@harness.io
 [3]: https://developer.harness.io/docs/continuous-delivery/x-platform-cd-features/cd-steps/notify-users-of-pipeline-events/#datadog-notifications
 [4]: https://docs.datadoghq.com/ja/account_management/api-app-keys/

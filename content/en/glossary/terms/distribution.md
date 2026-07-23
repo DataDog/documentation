@@ -1,9 +1,10 @@
 ---
+id: distribution
 title: distribution
 core_product:
   - metrics
 related_terms:
-  - flush interval
+  - flush_interval
   - heatmap
 ---
 A distribution is a metric type that aggregates values (such as `count`, `min`, `max`, `sum`, `avg`, `p50`, `p75`, `p90`, `p95`, and `p99`) sent from multiple hosts during a flush interval.

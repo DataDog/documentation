@@ -5,6 +5,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/managing-datadog-with-terraform/'
       tag: 'Blog'
       text: 'Managing Datadog with Terraform'
+    - link: "https://www.datadoghq.com/blog/datadog-terraform-provider-v4"
+      tag: "Blog"
+      text: "Announcing the Datadog Terraform provider v4.0.0"
 ---
 
 ## Overview
@@ -41,8 +44,8 @@ To further analyze or display your data for an audience, create [Datadog dashboa
 
 ### Synthetic tests
 
-   - For API tests, see the [Terraform section][21] of the **Create An API Test With The API** page.
-   - For Browser tests, see the [Terraform section][22] of the **Manage Your Browser Tests Programmatically** page.
+   - For API tests, see the [Terraform section][21] of the {{< ui >}}Create An API Test With The API{{< /ui >}} page.
+   - For Browser tests, see the [Terraform section][22] of the {{< ui >}}Manage Your Browser Tests Programmatically{{< /ui >}} page.
 
 ### Webhooks
 

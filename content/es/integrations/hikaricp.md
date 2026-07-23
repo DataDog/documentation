@@ -1,65 +1,18 @@
 ---
 app_id: hikaricp
-app_uuid: fa40ec7e-e8f6-4c4b-a675-31716b23a9fa
-assets:
-  integration:
-    auto_install: true
-    configuration:
-      spec: assets/configuration/spec.yaml
-    events:
-      creates_events: false
-    metrics:
-      check: hikaricp.connections.active
-      metadata_path: metadata.csv
-      prefix: hikaricp.
-    service_checks:
-      metadata_path: assets/service_checks.json
-    source_type_id: 10308
-    source_type_name: hikaricp
-author:
-  homepage: https://github.com/DataDog/integrations-extras
-  name: Comunidad
-  sales_email: damien.bertau@blablacar.com
-  support_email: damien.bertau@blablacar.com
-categories: []
 custom_kind: integración
-dependencies:
-- https://github.com/DataDog/integrations-extras/blob/master/hikaricp/README.md
-display_on_public_website: true
-draft: false
-git_integration_title: hikaricp
-integration_id: hikaricp
-integration_title: HikariCP
+description: Integración de HikariCP con openmetrics v2
 integration_version: 1.2.0
-is_public: true
-manifest_version: 2.0.0
-name: hikaricp
-public_title: HikariCP
-short_description: Integración de HikariCP con openmetrics v2
+media: []
 supported_os:
 - linux
 - windows
 - macos
-tile:
-  changelog: CHANGELOG.md
-  classifier_tags:
-  - Supported OS::Linux
-  - Supported OS::Windows
-  - Supported OS::macOS
-  - Offering::Integration
-  configuration: README.md#Setup
-  description: Integración de HikariCP con openmetrics v2
-  media: []
-  overview: README.md#Overview
-  support: README.md#Support
-  title: HikariCP
+title: HikariCP
 ---
-
-<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-extras -->
-
-
 ## Información general
-[HikariCP][1] es un marco de agrupación de conexiones JDBC ligero y rápido.
+
+[HikariCP](https://github.com/brettwooldridge/HikariCP) es un framework de agrupación de conexiones JDBC ligero y rápido.
 Este check monitoriza HikariCP a través del Datadog Agent.
 
 ## Configuración
@@ -68,35 +21,68 @@ Este check monitoriza HikariCP a través del Datadog Agent.
 
 Para instalar el check de HikariCP en tu host:
 
+1. Instala el [kit de herramientas para desarrolladores](https://docs.datadoghq.com/developers/integrations/python/)
+   en cualquier máquina.
 
-1. Instala el [kit de herramientas para desarrolladores][2]
- en cualquier máquina.
+1. Clona el repositorio [integrations-extras](https://github.com/DataDog/integrations-extras) y navega hasta el directorio.
 
-2. Clona el repositorio [integrations-extras][3] y navega hasta el directorio.
+1. Ejecuta `ddev release build hikaricp` para crear el paquete.
 
-3. Ejecuta `ddev release build hikaricp` para crear el paquete.
+1. [Descarga el Datadog Agent](https://app.datadoghq.com/account/settings/agent/latest).
 
-4. [Descarga el Datadog Agent][4].
-
-5. Sube el artefacto de compilación a cualquier host con un Agent y
- ejecuta `datadog-agent integration install -w
- path/to/hikaricp/dist/<ARTIFACT_NAME>.whl`.
+1. Sube el artefacto de compilación a cualquier host con un Agent y
+   Ejecuta `datadog-agent integration install -w path/to/hikaricp/dist/<ARTIFACT_NAME>.whl`.
 
 ### Configuración
 
-1. Edita el archivo `hikaricp/conf.yaml`, en la carpeta `conf.d/` en la raíz de tu directorio de configuración del Agent para comenzar a recopilar tus datos de rendimiento de HikariCP. Consulta el [hikaricp/conf.yaml de ejemplo][5] para todas las opciones disponibles de configuración.
+1. Edita el archivo `hikaricp/conf.yaml`, en la carpeta `conf.d/` en la raíz del directorio de configuración de tu Agent para comenzar a recopilar tus datos de rendimiento de HikariCP. Consulta el [hikaricp/conf.yaml de ejemplo](https://github.com/DataDog/integrations-extras/blob/master/hikaricp/datadog_checks/hikaricp/data/conf.yaml.example) para todas las opciones de configuración disponibles.
 
-2. [Reinicia el Agent][6].
+1. [Reinicia el Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#start-stop-and-restart-the-agent).
 
 ### Validación
 
-[Ejecuta el subcomando de estado del Agent[7] y busca `hikaricp` en la sección Checks.
+[Ejecuta el subcomando de estado del Agent](https://docs.datadoghq.com/agent/guide/agent-commands/#agent-status-and-information) y busca `hikaricp` en la sección Checks.
 
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "hikaricp" >}}
 
+| | |
+| --- | --- |
+| **hikaricp.connections** <br>(gauge) | Número de conexiones|
+| **hikaricp.connections.timeout.count** <br>(count) | Número total de conexiones con tiempo de espera|
+| **hikaricp.connections.active** <br>(gauge) | Número de conexiones activas|
+| **hikaricp.connections.idle** <br>(gauge) | Número de conexiones inactivas|
+| **hikaricp.connections.max** <br>(gauge) | Número máximo de conexiones<br>_Se muestra como conexión_ |
+| **hikaricp.connections.min** <br>(gauge) | Número mínimo de conexiones<br>_Se muestra como conexión_ |
+| **hikaricp.connections.pending** <br>(gauge) | Número de conexiones pendientes|
+| **hikaricp.connections.acquire.seconds.count** <br>(count) | Recuento del tiempo de adquisición de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.acquire.seconds.max** <br>(gauge) |  Máximo del tiempo de adquisición de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.acquire.seconds.sum** <br>(count) | Suma del tiempo de adquisición de la conexión<br> _Se muestra como segundo_ |
+| **hikaricp.connections.creation.seconds.count** <br>(count) | Recuento del tiempo de creación de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.creation.seconds.max** <br>(gauge) | Máximo del tiempo de creación de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.creation.seconds.sum** <br>(count) | Suma del tiempo de creación de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.usage.seconds.count** <br>(count) | Recuento del tiempo de uso de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.usage.seconds.max** <br>(gauge) | Máximo del tiempo de uso de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.connections.usage.seconds.sum** <br>(count) | Suma del tiempo de uso de la conexión<br>_Se muestra como segundo_ |
+| **hikaricp.threads.pending** <br>(gauge) | Número de subprocesos pendientes<br>_Se muestra como subproceso_ |
+| **hikaricp.connections.acquired.nanos.count** <br>(count) | Recuento del tiempo de conexión adquirido<br> _Se muestra como nanosegundo_ |
+| **hikaricp.connections.acquired.nanos.sum** <br>(count) | Suma del tiempo de conexión adquirido<br> _Se muestra en nanosegundos_ |
+| **hikaricp.connections.acquired.nanos.quantile** <br>(gauge) | Cuantil del tiempo de conexión adquirido<br>_Se muestra en nanosegundos_ |
+| **hikaricp.connections.creation.millis.count** <br>(count) | Recuento del tiempo de creación de la conexión<br>_Se muestra en milisegundos_ |
+| **hikaricp.connections.creation.millis.sum** <br>(count) | Suma del tiempo de creación de la conexión<br>_Se muestra en milisegundos_ |
+| **hikaricp.connections.creation.millis.quantile** <br>(gauge) | Cuantil del tiempo de creación de la conexión<br>_Se muestra en milisegundos_ |
+| **hikaricp.connections.usage.millis.count** <br>(count) | Recuento del tiempo de uso de la conexión<br>_Se muestra en milisegundos_ |
+| **hikaricp.connections.usage.millis.sum** <br>(count) | Suma del tiempo de uso de la conexión<br>_Se muestra en milisegundos_ |
+| **hikaricp.connections.usage.millis.quantile** <br>(gauge) | Cuantil del tiempo de uso de la conexión<br>_Se muestra en milisegundos_ |
+
+### Checks de servicio
+
+**hikaricp.openmetrics.health**
+
+Devuelve `CRITICAL` si el Agent no puede conectarse con el endpoint de HikariCP OpenMetrics, en caso contrario devuelve `OK`.
+
+_Estados: ok, critical_
 
 ### Eventos
 
@@ -104,15 +90,4 @@ HikariCP no incluye ningún evento.
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [equipo de asistencia de Datadog][10].
-
-[1]: https://github.com/brettwooldridge/HikariCP
-[2]: https://docs.datadoghq.com/es/developers/integrations/python/
-[3]: https://github.com/DataDog/integrations-extras
-[4]: https://app.datadoghq.com/account/settings/agent/latest
-[5]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/datadog_checks/hikaricp/data/conf.yaml.example
-[6]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#start-stop-and-restart-the-agent
-[7]: https://docs.datadoghq.com/es/agent/guide/agent-commands/#agent-status-and-information
-[8]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/metadata.csv
-[9]: https://github.com/DataDog/integrations-extras/blob/master/hikaricp/assets/service_checks.json
-[10]: https://docs.datadoghq.com/es/help/
+¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog](https://docs.datadoghq.com/help/).

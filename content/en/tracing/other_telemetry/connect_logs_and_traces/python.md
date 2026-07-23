@@ -126,7 +126,7 @@ Once the logger is configured, executing a traced function that logs an event yi
 
 [1]: /tracing/glossary/#trace
 [2]: /logs/log_collection/python/#configure-the-datadog-agent
-[3]: /logs/log_configuration/processors/#trace-remapper
+[3]: /logs/log_configuration/processors/trace_remapper/
 [4]: /tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [5]: /tracing/trace_collection/library_injection_local/
 [6]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#logs-injection

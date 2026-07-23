@@ -2,7 +2,7 @@
 aliases:
 - /es/tracing/languages/php
 - /es/agent/apm/php/
-- /es/tracing/PHP/
+- /es/tracing/php/
 - /es/tracing/setup/php
 - /es/tracing/setup_overview/php
 - /es/tracing/setup_overview/setup/php
@@ -13,33 +13,33 @@ code_lang_weight: 40
 further_reading:
 - link: /tracing/guide/trace-php-cli-scripts/
   tag: Guía
-  text: Rastreo de scripts de CLI PHP
+  text: Trazado de scripts CLI de PHP
 - link: https://www.datadoghq.com/blog/monitor-php-performance/
   tag: Blog
-  text: Monitorización PHP con Datadog APM y rastreo distribuido
+  text: Monitoreo de PHP con Datadog APM y trazado distribuido
 - link: https://github.com/DataDog/dd-trace-php
   tag: Código fuente
-  text: Código de origen
+  text: Código fuente
 - link: https://github.com/DataDog/dd-trace-php/blob/master/CONTRIBUTING.md
   tag: Código fuente
-  text: Contribuir al proyecto de código abierto
+  text: Contribuyendo al proyecto de código abierto
 - link: /tracing/glossary/
   tag: Documentación
-  text: Explorar tus servicios, recursos y trazas (traces)
+  text: Explora tus servicios, recursos y trazas
 title: Rastreo de aplicaciones PHP
 type: multi-code-lang
 ---
-## Requisitos de compatibilidad
+## Requisitos de compatibilidad {#compatibility-requirements}
 
-El requisito mínimo de versión de PHP para la última versión de `dd-trace-php` es PHP 7. Si estás utilizando PHP 5, puedes seguir utilizando el rastreador PHP hasta la versión [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 es EOL a partir de la versión 1.0 de PHP biblioteca.
+El requisito mínimo de versión de PHP para la última versión de `dd-trace-php` es PHP 7. Si estás usando PHP 5, aún puedes usar el rastreador de PHP hasta la versión [0.99](https://github.com/DataDog/dd-trace-php/releases/tag/0.99.0). PHP 5 está al final de su vida útil desde la versión 1.0 de la biblioteca PHP.
 
-Para ver la lista completa de compatibilidad de versiones PHP y de frameworks de Datadog (incluidas las versiones heredadas y de mantenimiento), consulta la página de [requisitos de compatibilidad][1].
+Para una lista completa de la versión de PHP y el soporte de frameworks de Datadog (incluyendo versiones heredadas y de mantenimiento), consulta la página de [Requisitos de Compatibilidad][1].
 
-## Empezando
+## Comenzando {#getting-started}
 
-Antes de empezar, asegúrate de haber [instalado y configurado el Agent][14].
+Antes de comenzar, asegúrate de haber [instalado y configurado el Agente][14].
 
-### Instalación de la extensión
+### Instala la extensión {#install-the-extension}
 
 Descarga el instalador oficial:
 
@@ -47,7 +47,7 @@ Descarga el instalador oficial:
 curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php
 ```
 
-Si utilizas Alpine Linux, debes instalar `libgcc_s` antes de ejecutar el instalador:
+En caso de que estés usando Alpine Linux, necesitas instalar `libgcc_s` antes de ejecutar el instalador:
 
 ```shell
 apk add libgcc
@@ -70,96 +70,96 @@ php datadog-setup.php --php-bin=all --enable-profiling
 ```
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Solo APM es compatible con Windows. No uses las opciones <code>--enable-appsec</code> y <code>--enable-profiling</code> cuando rastreas aplicaciones PHP en Windows.
+<strong>Nota</strong>: Solo APM es compatible en Windows. No utilice el <code>--enable-appsec</code> y <code>--enable-profiling</code> banderas al rastrear aplicaciones PHP en Windows.
 </div>
 
-Este comando instala la extensión a todos los binarios PHP que se encuentran en el host o el contenedor. Si `--PHP-bin` se omite, el instalador ejecuta el modo interactivo y pide al usuario que seleccione los binarios para la instalación. El valor de `--PHP-bin` puede ser una ruta a un binario específico en caso de que `dd-rastrear-PHP` sólo deba instalarse en dichos binarios.
+Este comando instala la extensión en todos los binarios de PHP encontrados en el host o contenedor. Si se omite `--php-bin`, el instalador se ejecuta en modo interactivo y le pide al usuario que seleccione los binarios para la instalación. El valor de `--php-bin` puede ser una ruta a un binario específico en caso de que `dd-trace-php` deba instalarse solo en dicho binario.
 
-Reinicia PHP (PHP-FPM o SAPI de Apache) y visita un endpoint de tu aplicación, habilitado para el rastreo. Para ver las trazas generadas, ve a la [página de trazas APM][4].
+Reinicie PHP (PHP-FPM o el SAPI de Apache) y visite un punto de conexión habilitado para trazado de su aplicación. Para ver las trazas generadas, vaya a la [página de trazas de APM][4].
 
-Cuando no especificas `--enable-appsec`, la extensión AppSec se carga poco después del inicio y no está activada por defecto. Se cortocircuita inmediatamente, causando una sobrecarga de rendimiento insignificante.
+Cuando no especifique `--enable-appsec`, la extensión de AppSec se carga brevemente al inicio y no está habilitada por defecto. Se interrumpe inmediatamente, causando una sobrecarga de rendimiento negligible.
 
 <div class="alert alert-info">
-Pueden pasar algunos minutos hasta que aparezcan las trazas en la interfaz de usuario. Si las trazas siguen sin aparecer después de unos minutos, crea una página <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> desde la máquina host y desplázate hasta `ddtrace`. Los checks de diagnóstico fallidos aparecen en esta sección para ayudarte a identificar cualquier problema.
+Puede tardar unos minutos antes de que las trazas aparezcan en la interfaz de usuario. Si las trazas aún no aparecen después de unos minutos, cree un <a href="/tracing/troubleshooting/tracer_startup_logs?tab=php#php-info"><code>phpinfo()</code></a> página desde la máquina host y desplácese hacia abajo hasta el `ddtrace`. Las comprobaciones de diagnóstico fallidas aparecen en esta sección para ayudar a identificar cualquier problema.
 </div>
 
 <div class="alert alert-danger">
 <strong>Apache ZTS:</strong>
-Si el binario CLI PHP se ha creado como NTS (no seguro para subprocesos), mientras que Apache utiliza una versión ZTS (seguro para subprocesos Zend) de PHP, necesitas cambiar manualmente la carga de extensión del binario ZTS. Ejecuta <code>/path/to/php-zts --ini</code> para ver dónde se encuentra el archivo <code>.ini</code> de Datadog, y luego añade el sufijo <code>-zts</code> del nombre del archivo. Por ejemplo, de <code>extension=ddtrace-20210902.so</code> a <code>extension=ddtrace-20210902-zts.so</code>.
+Si el binario de PHP CLI se compila como NTS (no seguro para hilos), mientras que Apache utiliza una versión ZTS (segura para hilos de Zend) de PHP, necesita cambiar manualmente la carga de la extensión para el binario ZTS. Ejecutar <code>/path/to/php-zts --ini</code> encontrar dónde se encuentra el archivo de Datadog, luego agregar el <code>.ini</code> sufijo del nombre del archivo. <code>-zts</code> Por ejemplo, de a <code>extension=ddtrace-20210902.so</code> . <code>extension=ddtrace-20210902-zts.so</code>SELinux:
 </div>
 
 <div class="alert alert-danger">
-<strong>SELinux:</strong>
-Si las políticas de SELinux httpd están configuradas en el host, la funcionalidad del rastreador puede verse limitada, a menos que la escritura y ejecución de archivos temporales esté explícitamente permitida en la configuración de SELinux:
+<strong>Si las políticas de SELinux de httpd están configuradas en el host, la funcionalidad del SDK puede estar limitada, a menos que se permita explícitamente la escritura y ejecución de archivos temporales en la configuración de SELinux:</strong>
+Si las políticas de SELinux de httpd están configuradas en el servidor, la funcionalidad del SDK puede estar limitada, a menos que se permita explícitamente la escritura y ejecución de archivos temporales en la configuración de SELinux.
 
 `allow httpd_t httpd_tmpfs_t:file { execute execute_no_trans };`
 
 </div>
 
-## Instrumentación automática
+## Instrumentación automática {#automatic-instrumentation}
 
-El rastreo se activa automáticamente por defecto. Una vez instalada la extensión, **ddtrace** rastrea tu aplicación y envía trazas al Agent.
+El trazado se habilita automáticamente por defecto. Una vez que la extensión está instalada, **ddtrace** traza su aplicación y envía trazas al Agente.
 
-Datadog es compatible con todos los frameworks de trabajo web listos para utilizar. La instrumentación automática funciona modificando el tiempo de ejecución de PHP para envolver ciertas funciones y métodos para rastrearlas. El rastreador PHP admite la instrumentación automática para varias bibliotecas.
+La instrumentación automática funciona modificando el entorno de ejecución de PHP para envolver ciertas funciones y métodos y así poder trazarlos. El rastreador de PHP admite instrumentación automática para varias bibliotecas. La instrumentación automática captura:
 
-Capturas de instrumentación automática:
+Tiempo de ejecución del método
 
-* Tiempo de ejecución del método
-* Datos de rastreo pertinentes, como códigos de respuesta URL y de estado para solicitudes web o consultas SQL para el acceso a bases de datos.
-* Excepciones no controladas, incluyendo trazas de stacks tecnológicos, si están disponibles
-* Recuento total de trazas (por ejemplo, solicitudes web) que circulan por el sistema
+* Datos de traza relevantes, como URL y códigos de respuesta de estado para solicitudes web o consultas SQL para acceso a bases de datos
+* Excepciones no controladas, incluidos los rastros de pila si están disponibles
+* Un conteo total de trazas (por ejemplo, solicitudes web) fluyendo a través del sistema
+* Configuración 
 
-## Configuración
+## {#configuration}
 
-Si es necesario, configura la biblioteca de rastreo para enviar datos de telemetría del rendimiento de la aplicación, según tus necesidades, incluyendo la configuración del etiquetado unificado de servicios. Para obtener más detalles, consulta la [configuración de bibliotecas][6].
+Si es necesario, configure el SDK para enviar datos de telemetría de rendimiento de la aplicación según lo requiera, incluyendo la configuración de la Etiquetación de Servicio Unificada. Lea [Configuración de la Biblioteca][6] para más detalles.
 
-Para controlar la ingesta de trazas por servicio o recurso (incluido el uso de comodines en los nombres de los recursos), consulta [Control de la ingesta de trazas con muestreo basado en recursos][15].
+Para controlar la ingestión de trazas por servicio o recurso (incluyendo el uso de comodines en los nombres de recursos), consulte [Controlar la ingestión de trazas con muestreo basado en recursos][15].
 
-## Rastreo de scripts de CLI de corta y larga ejecución
+## Trazando scripts de CLI de corta y larga duración {#tracing-short-and-long-running-cli-scripts}
 
-Se requieren pasos adicionales para instrumentar scripts de CLI. Para obtener más información, consulta [Rastreo de scripts de CLI PHP][7].
+Se requieren pasos adicionales para instrumentar scripts de CLI. Lea [Traza de Scripts PHP CLI][7] para más información.
 
-## Actualización
+## Actualizando {#upgrading}
 
-Para actualizar el rastreador PHP, [descarga la última versión][5] y sigue los mismos pasos que para [instalar la extensión](#install-the-extension).
+Para actualizar el rastreador de PHP, [descargue la última versión][5] y siga los mismos pasos que [instalando la extensión](#install-the-extension).
 
-Una vez finalizada la instalación, reinicia PHP (PHP-FPM o SAPI de Apache).
+Una vez completada la instalación, reinicie PHP (PHP-FPM o el SAPI de Apache).
 
-**Nota**: Si estás utilizando caché de segundo nivel en OPcache configurando el parámetro `opcache.file_cache`, elimina la carpeta de caché.
+**Nota**: Si está utilizando caché de segundo nivel en OPcache configurando el parámetro `opcache.file_cache`, elimine la carpeta de caché.
 
-## Eliminación
+## Eliminando {#removing}
 
-Para eliminar el rastreador PHP:
+Para eliminar el rastreador de PHP:
 
-1. Para php-fpm, detén el servicio php-fpm, si no, detén el servidor web Apache.
-2. Desvincula los archivos `98-ddtrace.ini` y `99-ddtrace-custom.ini` de tu carpeta de configuración PHP.
-3. Para php-fpm, reinicia el servicio php-fpm, si no, reinicia el servidor web Apache.
+1. Para php-fpm, detenga el servicio php-fpm, de lo contrario, detenga el servidor web Apache.
+2. Desvincule los archivos `98-ddtrace.ini` y `99-ddtrace-custom.ini` de su carpeta de configuración de PHP.
+3. Para php-fpm, reinicie el servicio php-fpm, de lo contrario, reinicie el servidor web Apache.
 
-**Nota**: Si estás utilizando caché de segundo nivel en OPcache configurando el parámetro `opcache.file_cache`, elimina la carpeta de caché.
+**Nota**: Si está utilizando caché de segundo nivel en OPcache configurando el parámetro `opcache.file_cache`, elimine la carpeta de caché.
 
-## Solucionar problemas de fallos de una aplicación
+## Resolviendo un fallo de aplicación {#troubleshooting-an-application-crash}
 
-En el caso inusual de un fallo de la aplicación causado por el rastreador PHP, normalmente debido a un fallo de segmentación, lo mejor es lograr un volcado de núcleo o una traza Valgrind y ponerse en contacto con el servicio de asistencia de Datadog.
+En el inusual evento de un fallo de aplicación causado por el rastreador de PHP, típicamente debido a un fallo de segmentación, lo mejor que se puede hacer es obtener un volcado de núcleo o un trazo de Valgrind y contactar al soporte de Datadog.
 
-### Instalación de símbolos de depuración
+### Instalar símbolos de depuración {#install-debug-symbols}
 
-Para que los volcados de núcleo sean legibles, los símbolos de depuración de los binarios PHP deben estar instalados en el sistema que ejecuta PHP.
+Para que los volcados de núcleo sean legibles, los símbolos de depuración para los binarios de PHP deben estar instalados en el sistema que ejecuta PHP.
 
-Para comprobar si están instalados los símbolos de depuración para PHP o PHP-FPM, utiliza `gdb`.
+Para verificar si los símbolos de depuración están instalados para PHP o PHP-FPM, use `gdb`.
 
-Instala `gdb`:
+Instale `gdb`:
 
 ```
 apt|yum install -y gdb
 ```
 
-Ejecuta `gdb` con el binario de interés. Por ejemplo, para PHP-FPM:
+Ejecute `gdb` con el binario de interés. Por ejemplo, para PHP-FPM:
 
 ```
 gdb php-fpm
 ```
 
-Si el resultado de `gdb` contiene una línea similar al texto siguiente, entonces los símbolos de depuración ya están instalados.
+Si la salida de `gdb` contiene una línea similar al texto a continuación, entonces los símbolos de depuración ya están instalados.
 
 ```
 ...
@@ -167,7 +167,7 @@ Reading symbols from php-fpm...Reading symbols from /usr/lib/debug/path/to/some/
 ...
 ```
 
-Si el resultado de `gdb` contiene una línea similar al texto siguiente, entonces los símbolos de depuración deben instalarse.
+Si la salida de `gdb` contiene una línea similar al texto a continuación, entonces es necesario instalar los símbolos de depuración:
 
 ```
 ...
@@ -176,48 +176,48 @@ Reading symbols from php-fpm...(no debugging symbols found)...done.
 ```
 
 
-#### CentOS
+#### Centos {#centos}
 
-Instala el paquete `yum-utils` que proporciona el programa `debuginfo-install`:
+Instale el paquete `yum-utils` que proporciona el programa `debuginfo-install`:
 
 ```
 yum install -y yum-utils
 ```
 
-Busca el nombre de paquete de tus binarios PHP. Puede variar dependiendo del método de instalación de PHP:
+Encuentre el nombre del paquete para sus binarios de PHP, puede variar dependiendo del método de instalación de PHP:
 
 ```
 yum list installed | grep php
 ```
 
-Instala los símbolos de depuración. Por ejemplo, para el paquete `php-fpm` :
+Instale los símbolos de depuración. Por ejemplo, para el paquete `php-fpm`:
 
 ```
 debuginfo-install -y php-fpm
 ```
 
-**Nota**: Si el repositorio que proporciona los binarios PHP no está habilitado por defecto, puede habilitarse al ejecutar el comando `debuginfo-install`. Por ejemplo:
+**Nota**: Si el repositorio que proporciona los binarios de PHP no está habilitado por defecto, se puede habilitar al ejecutar el comando `debuginfo-install`. Por ejemplo:
 
 ```
 debuginfo-install --enablerepo=remi-php74 -y php-fpm
 ```
 
-#### Debian
+#### Debian {#debian}
 
-##### PHP instalado desde el DPA Debian Sury
+##### PHP instalado desde el DPA de Sury Debian {#php-installed-from-the-sury-debian-dpa}
 
-Si PHP se ha instalado desde el [DPA Debian Sury][8], los símbolos de depuración ya están disponibles en el DPA. Por ejemplo, para PHP-FPM 7.2:
+Si PHP fue instalado desde el [DPA de Sury Debian][8], los símbolos de depuración ya están disponibles desde el DPA. Por ejemplo, para PHP-FPM 7.2:
 
 ```
 apt update
 apt install -y php7.2-fpm-dbgsym
 ```
 
-##### PHP instalado desde un paquete diferente
+##### PHP instalado desde un paquete diferente {#php-installed-from-a-different-package}
 
-El proyecto Debian tiene una página wiki con las [instrucciones para instalar símbolos de depuración][9].
+El proyecto Debian mantiene una página wiki con [instrucciones para instalar símbolos de depuración][9].
 
-Edita el archivo `/etc/apt/sources.list`:
+Edite el archivo `/etc/apt/sources.list`:
 
 ```
 # ... leave here all the pre-existing packages
@@ -227,13 +227,13 @@ Edita el archivo `/etc/apt/sources.list`:
 deb http://deb.debian.org/debian-debug/ buster-debug main
 ```
 
-Actualiza `apt`:
+Actualizar `apt`:
 
 ```
 apt update
 ```
 
-Prueba primero nombres canónicos de paquetes para los símbolos de depuración. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intenta:
+Intente nombres de paquetes canónicos para los símbolos de depuración, primero. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intenta:
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -243,29 +243,29 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-Si no encuentras símbolos de depuración, utiliza la herramienta `find-dbgsym-packages`. Instala el binario:
+Si no se pueden encontrar los símbolos de depuración, utiliza la herramienta de utilidad `find-dbgsym-packages`. Instala el binario:
 
 ```
 apt install -y debian-goodies
 ```
 
-Intenta encontrar símbolos de depuración desde la ruta completa al binario o desde el identificador de procesos de un proceso en ejecución:
+Intenta encontrar los símbolos de depuración desde la ruta completa al binario o el id del proceso de un proceso en ejecución:
 
 ```
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-Instala el nombre de paquete resultante, si lo encuentras:
+Instala el nombre del paquete resultante, si se encuentra:
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 ```
 
-#### Ubuntu
+#### Ubuntu {#ubuntu}
 
-##### PHP instalado desde `ppa:ondrej/php`
+##### PHP instalado desde `ppa:ondrej/php` {#php-installed-from-ppaondrejphp}
 
-Si PHP se ha instalado desde [`ppa:ondrej/php`][10], edita el archivo fuente apt `/etc/apt/sources.list.d/ondrej-*.list` añadiendo el componente `main/debug`.
+Si PHP fue instalado desde el [`ppa:ondrej/php`][10], edita el archivo de origen de apt `/etc/apt/sources.list.d/ondrej-*.list` añadiendo el componente `main/debug`.
 
 Antes:
 
@@ -275,23 +275,23 @@ Después:
 
 ```deb http://ppa.launchpad.net/ondrej/php/ubuntu <version> main main/debug```
 
-Actualiza e instale los símbolos de depuración. Por ejemplo, para PHP-FPM 7.2:
+Actualiza e instala los símbolos de depuración. Por ejemplo, para PHP-FPM 7.2:
 
 ```
 apt update
 apt install -y php7.2-fpm-dbgsym
 ```
-##### PHP instalado desde un paquete diferente
+##### PHP instalado desde un paquete diferente {#php-installed-from-a-different-package-1}
 
-Busca el nombre de paquete de tus binarios PHP. Puede variar dependiendo del método de instalación de PHP:
+Encuentre el nombre del paquete para sus binarios de PHP, puede variar dependiendo del método de instalación de PHP:
 
 ```
 apt list --installed | grep php
 ```
 
-**Nota**: En algunos casos `php-fpm` puede ser un metapaquete que hace referencia al paquete real, por ejemplo `php7.2-fpm` en el caso de PHP-FPM 7.2. En este caso, el nombre de paquete es este último.
+**Nota**: En algunos casos `php-fpm` puede ser un metapaquete que se refiere al paquete real, por ejemplo `php7.2-fpm` en el caso de PHP-FPM 7.2. En este caso, el nombre del paquete es el último.
 
-Prueba primero nombres canónicos de paquetes para los símbolos de depuración. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intenta:
+Intente nombres de paquetes canónicos para los símbolos de depuración, primero. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intenta:
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -301,9 +301,9 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-Si los paquetes `-dbg` y `-dbgsym` no se pueden encontrar, habilita los respositorios `ddebs`. Para obtener información detallada sobre cómo [instalar símbolos de depuración][11] desde los `ddebs`, consulta la documentación de Ubuntu.
+Si no se pueden encontrar los paquetes `-dbg` y `-dbgsym`, habilita los repositorios `ddebs`. Se puede encontrar información detallada sobre cómo [instalar símbolos de depuración][11] desde el `ddebs` en la documentación de Ubuntu.
 
-Por ejemplo, para Ubuntu v18.04 y posterior, habilita el repositorio `ddebs`:
+Por ejemplo, para Ubuntu 18.04+, habilite el repositorio `ddebs`:
 
 ```
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
@@ -311,7 +311,7 @@ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe mu
 echo "deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse" | tee -a /etc/apt/sources.list.d/ddebs.list
 ```
 
-Importa la clave de firma (asegúrate de que la [clave de firma es correcta][12]):
+Importe la clave de firma (asegúrese de que la [clave de firma sea correcta][12]):
 
 ```
 apt install ubuntu-dbgsym-keyring
@@ -319,7 +319,7 @@ apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <SIGNING KEY FROM UBUNT
 apt update
 ```
 
-Intenta añadir nombres canónicos de paquetes para los símbolos de depuración. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intenta:
+Intente agregar los nombres de paquetes canónicos para los símbolos de depuración. Por ejemplo, si el nombre del paquete es `php7.2-fpm`, intente:
 
 ```
 apt install -y php7.2-fpm-dbgsym
@@ -329,85 +329,87 @@ apt install -y php7.2-fpm-dbgsym
 apt install -y php7.2-fpm-dbg
 ```
 
-Si no encuentras símbolos de depuración, utiliza la herramienta `find-dbgsym-packages`. Instala el binario:
+En caso de que no se puedan encontrar los símbolos de depuración, utilice la herramienta de utilidad `find-dbgsym-packages`. Instale el binario:
 
 ```
 apt install -y debian-goodies
 ```
 
-Intenta encontrar símbolos de depuración desde la ruta completa al binario o desde el identificador de procesos de un proceso en ejecución:
+Intente encontrar los símbolos de depuración desde la ruta completa al binario o el id del proceso de un proceso en ejecución:
 
 ```
 find-dbgsym-packages /usr/sbin/php-fpm7.2
 ```
 
-Instala el nombre de paquete resultante, si lo encuentras:
+Instale el nombre del paquete resultante, si se encuentra:
 
 ```
 apt install -y php7.2-fpm-{package-name-returned-by-find-dbgsym-packages}
 ```
 
-### Obtener un volcado de núcleo
+### Obteniendo un volcado de núcleo {#obtaining-a-core-dump}
 
-Obtener un volcado de núcleo para aplicaciones PHP puede ser complicado, especialmente en PHP-FPM. Aquí tienes algunos consejos para ayudarte a obtener un volcado de núcleo:
+Obtener un volcado de núcleo para aplicaciones PHP puede ser complicado, especialmente en PHP-FPM. Aquí tiene algunos consejos para ayudarle a obtener un volcado de núcleo:
 
-1. Determina si PHP-FPM ha generado un volcado de núcleo consultando el log de errores de aplicación:
-   - Busca `(SIGSEGV - core dumped)`, ya que un mensaje como este significa que el núcelo ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
-   - Busca `(SIGSEGV)`, ya que un mensaje como éste indica que el núcleo no ha sido volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
-1. Localiza el volcado de núcleo ejecutando `cat /proc/sys/kernel/core_pattern`. El valor por defecto suele ser `core`, lo que significa que se generará un archivo llamado `core` en la carpeta raíz de la web.
+1. Determine si PHP-FPM generó un volcado de núcleo revisando el registro de errores de la aplicación:
+   - Busque `(SIGSEGV - core dumped)` porque un mensaje como este significa que se ha volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV - core dumped) after <duration> seconds from start`.
+   - Busque `(SIGSEGV)` porque un mensaje como este indica que el núcleo no fue volcado: `WARNING: [pool www] child <pid> exited on signal 11 (SIGSEGV) after <duration> seconds from start`.
+1. Localice el volcado de núcleo ejecutando `cat /proc/sys/kernel/core_pattern`. El valor predeterminado es típicamente `core`, lo que significa que se generará un archivo llamado `core` en la carpeta raíz del servidor web.
 
-Si no se ha generado ningún volcado de núcleo, comprueba las siguientes configuraciones y cámbielas, si es necesario:
+Si no se generó un volcado de núcleo, verifique las siguientes configuraciones y cámbielas según sea necesario:
 
-1. Si `/proc/sys/kernel/core_pattern` contiene una ruta que incluye directorios anidados, asegúrate de que existe la ruta completa del directorio.
-1. Si el usuario que ejecuta el pool de trabajadores PHP-FPM no es `root` (un nombre de usuario común es `www-data`), proporciónale permisos de escritura en el directorio de volcados de núcleo.
-1. Asegúrate de que el valor de `/proc/sys/fs/suid_dumpable` no es `0`. Configúralo en `1` o `2`, a menos que ejecutes pool de trabajadores PHP-FPM como `root`. Consulta tus opciones con el administrador del sistema.
-1. Asegúrate de que tienes un `rlimit_core` adecuado en la sección de configuración del pool PHP-FPM. Puedes configurarlo como ilimitado: `rlimit_core = unlimited`.
-1. Asegúrate de que dispones de un conjunto `ulimit` en tu sistema. Puedes configurarlo como ilimitado: `ulimit -c unlimited`.
-1. Si tu aplicación se ejecuta en un contenedor Docker, los cambios en `/proc/sys/*` deben realizarse en la máquina host. Ponte en contacto con el administrador del sistema para conocer las opciones disponibles. Si puedes, intenta recrear la incidencia en tus entornos de test o de staging.
+1. Si `/proc/sys/kernel/core_pattern` contiene una ruta que incluye directorios anidados, asegúrese de que la ruta completa del directorio exista.
+1. Si el usuario que ejecuta los trabajadores del grupo PHP-FPM es algo diferente a `root` (un nombre de usuario común es `www-data`), otorgue a ese usuario permisos de escritura en el directorio de volcados de núcleo.
+1. Asegúrese de que el valor de `/proc/sys/fs/suid_dumpable` no sea `0`. Establezca el valor en `1` o `2` a menos que ejecute el grupo de trabajadores PHP-FPM como `root`. Consulte sus opciones con su administrador del sistema.
+1. Asegúrese de tener un `rlimit_core` adecuado en la sección de configuración del grupo PHP-FPM. Puede establecerlo en ilimitado: `rlimit_core = unlimited`.
+1. Asegúrese de tener un `ulimit` adecuado configurado en su sistema. Puede configurarlo como ilimitado: `ulimit -c unlimited`.
+1. Si su aplicación se ejecuta en un contenedor Docker, los cambios en `/proc/sys/*` deben realizarse en la máquina host. Contacte a su administrador del sistema para conocer las opciones disponibles para usted. Si puede, intente recrear la incidencia en sus entornos de prueba o de preparación.
 
-### Obtener un volcado de núcleo desde dentro de un contenedor Docker
+### Obteniendo un volcado de núcleo desde dentro de un contenedor Docker {#obtaining-a-core-dump-from-within-a-docker-container}
 
-Utiliza la siguiente información para ayudarte a obtener un volcado de núcleo en un contenedor Docker:
+Utilice la información a continuación para ayudar a obtener un volcado de núcleo en un contenedor Docker:
 
-1. El contenedor Docker necesita ejecutarse como contenedor privilegiado y el valor `ulimit` para los archivos del núcleo necesita ser ajustado a su máximo, como se muestra en los siguientes ejemplos.
-   - Si utilizas el comando `docker run`, añade los argumentos `--privileged` y `--ulimit core=99999999999`.
-   - Si utilizas `docker compose`, añade los siguiente al archivo `docker-compose.yml`:
+1. El contenedor Docker necesita ejecutarse como un contenedor privilegiado, y el valor `ulimit` para los archivos de núcleo debe establecerse en su máximo, como se muestra en los ejemplos a continuación.
+   - Si usa el comando `docker run`, agregue los argumentos `--privileged` y `--ulimit core=99999999999`
+   - Si usa `docker compose`, agregue lo siguiente al archivo `docker-compose.yml`:
+
 ```yaml
 privileged: true
 ulimits:
   core: 99999999999
 ```
-2. Cuando ejecutes el contenedor (y antes de iniciar la aplicación PHP), debes ejecutar los siguientes comandos:
+2. Al ejecutar el contenedor (y antes de iniciar la aplicación PHP) debe ejecutar los siguientes comandos:
+
 ```
 ulimit -c unlimited
 echo '/tmp/core' > /proc/sys/kernel/core_pattern
 echo 1 > /proc/sys/fs/suid_dumpable
 ```
 
-### Obtener una traza Valgrind
+### Obteniendo una traza de Valgrind {#obtaining-a-valgrind-trace}
 
-Para obtener más detalles sobre el fallo, ejecuta la aplicación con Valgrind. A diferencia de los volcados de núcleo, este método siempre opera en un contenedor sin privilegios.
+Para obtener más detalles sobre el fallo, ejecute la aplicación con Valgrind. A diferencia de los volcados de núcleo, este enfoque siempre funciona en un contenedor no privilegiado.
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Una aplicación que se ejecuta a través de Valgrind es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos que no sean de producción.
+<strong>Nota</strong>: Una aplicación que se ejecuta a través de Valgrind es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos no productivos.
 </div>
 
-Instala Valgrind con tu gestor de paquetes. Ejecuta la aplicación con Valgrind lo suficiente para generar unas cuantas solicitudes.
+Instale Valgrind con su gestor de paquetes. Ejecute la aplicación con Valgrind lo suficiente como para generar algunas solicitudes.
 
-For a CLI application, run:
+Para una aplicación CLI, ejecute:
 {{< code-block lang=shell >}}
 USE_ZEND_ALLOC=0 valgrind -- php path/to/script.php
 {{< /code-block >}}
-When running `php-fpm` run:
+Al ejecutar `php-fpm`, ejecute:
 {{< code-block lang="shell" >}}
 USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
 {{< /code-block >}}
-When using Apache, run:
+Al usar Apache, ejecute:
 {{< code-block lang="shell" >}}
 (. /etc/apache2/envvars; USE_ZEND_ALLOC=0 valgrind --trace-children=yes -- apache2 -X)`
 {{< /code-block >}}
 
-La traza de Valgrind resultante se imprime por defecto en el error estándar. Para imprimir en un destino diferente, consulta la [documentación oficial][13]. El resultado esperado es similar al ejemplo siguiente para un proceso PHP-FPM:
+La traza de Valgrind resultante se imprime por defecto en el error estándar, consulte la [documentación oficial][13] para imprimir en un destino diferente. La salida esperada es similar al ejemplo a continuación para un proceso PHP-FPM:
 
 ```
 ==322== Conditional jump or move depends on uninitialised value(s)
@@ -448,32 +450,32 @@ La traza de Valgrind resultante se imprime por defecto en el error estándar. Pa
 ==322== ERROR SUMMARY: 18868 errors from 102 contexts (suppressed: 0 from 0)
 ```
 
-### Obtener un strace
+### Obteniendo un strace {#obtaining-a-strace}
 
-Algunos problemas son causados por factores externos, por lo que puede ser valioso disponer de un `strace`.
+Algunos problemas son causados por factores externos, por lo que puede ser valioso tener un `strace`.
 
 <div class="alert alert-warning">
-<strong>Nota</strong>: Una aplicación que se ejecuta a través de <code>strace</code> es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos que no sean de producción.
+<strong>Nota</strong>: Una aplicación que se ejecuta a través de <code>strace</code> es órdenes de magnitud más lenta que cuando se ejecuta de forma nativa. Este método se recomienda para entornos no productivos.
 </div>
 
-Instala el `strace` con tu gestor de paquetes. Cuando generes un `strace` para enviarlo al servicio de asistencia de Datadog, asegúrate de utilizar la opción `-f` para seguir a procesos secundarios.
+Instale `strace` con su gestor de paquetes. Al generar un `strace` para enviar al soporte de Datadog, asegúrese de usar la opción `-f` para seguir los procesos secundarios.
 
-Para una aplicación de CLI, ejecuta:
+Para una aplicación CLI, ejecute:
 {{< code-block lang="shell" >}}
 strace -f php path/to/script.php
 {{< /code-block >}}
 
 Para `php-fpm`, ejecute:
 {{< code-block lang="shell" >}}
-strace -f PHP-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
+strace -f php-fpm -F --fpm-config <CONFIG_FILE_PATH> <MORE_OPTIONS>
 {{< /code-block >}}
 
-Para Apache, ejecuta:
+Para Apache, ejecute:
 {{< code-block lang="shell" >}}
 (. /etc/apache2/envvars; strace -f apache2 -X)
 {{< /code-block >}}
 
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

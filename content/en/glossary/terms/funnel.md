@@ -1,4 +1,5 @@
 ---
+id: funnel
 title: funnel
 core_product:
   - dashboards

@@ -53,37 +53,37 @@ You can forward your logs through an [Azure Container App][4], or [Azure Blob St
 
 If you already have a function app configured for this purpose, skip to [Add a new function to your Function App using the Event Hub trigger template](#add-a-new-function-to-your-function-app-using-the-azure-blob-storage-trigger-template).
 
-1. In the Azure portal, navigate to the [Function App overview][106] and click **Create**.
-2. In the **Instance Details** section, configure the following settings:
-   1. Select the **Code** radio button.
-   1. For **Runtime stack**, select `Node.js`.
-   1. For **Version**, select `18 LTS`.
-   1. For **Operating System**, select `Windows`.
+1. In the Azure portal, navigate to the [Function App overview][106] and click {{< ui >}}Create{{< /ui >}}.
+2. In the {{< ui >}}Instance Details{{< /ui >}} section, configure the following settings:
+   1. Select the {{< ui >}}Code{{< /ui >}} radio button.
+   1. For {{< ui >}}Runtime stack{{< /ui >}}, select `Node.js`.
+   1. For {{< ui >}}Version{{< /ui >}}, select `18 LTS`.
+   1. For {{< ui >}}Operating System{{< /ui >}}, select `Windows`.
 3. Configure other settings as desired.
-4. Click **Review + create** to validate the resource. If validation is successful, click **Create**.
+4. Click {{< ui >}}Review + create{{< /ui >}} to validate the resource. If validation is successful, click {{< ui >}}Create{{< /ui >}}.
 
 ##### Add a new function to your Function App using the Azure Blob Storage trigger template
 
 1. Select your new or existing function app from the [Function App overview][106].
-2. Under the **Functions** tab, click **Create**.
-3. For the **Development environment** field, select **Develop in portal**.
-4. Under **Select a template**, choose [Azure Blob storage trigger][107].
-5. Select your **Storage account connection**.
+2. Under the {{< ui >}}Functions{{< /ui >}} tab, click {{< ui >}}Create{{< /ui >}}.
+3. For the {{< ui >}}Development environment{{< /ui >}} field, select {{< ui >}}Develop in portal{{< /ui >}}.
+4. Under {{< ui >}}Select a template{{< /ui >}}, choose [Azure Blob storage trigger][107].
+5. Select your {{< ui >}}Storage account connection{{< /ui >}}.
    **Note**: See [Configure a connection string for an Azure storage account][108] for more information.
-6. Click **Create**.
+6. Click {{< ui >}}Create{{< /ui >}}.
 
 See [Getting started with Azure Functions][109] for more information.
 
 ##### Point your Blob Storage trigger to Datadog
 
-1. On the detail page of your Event Hub trigger function, click **Code + Test** under the **Developer** side menu.
+1. On the detail page of your Event Hub trigger function, click {{< ui >}}Code + Test{{< /ui >}} under the {{< ui >}}Developer{{< /ui >}} side menu.
 2. Add the [Datadog-Azure Function code][110] to the function's `index.js` file.
 3. Add your Datadog API key with a `DD_API_KEY` environment variable, or copy it into the function code by replacing `<DATADOG_API_KEY>` on line 20.
 4. If you're not using the Datadog US1 site, set your [Datadog site][111] with a `DD_SITE` environment variable under the configuration tab of your function app, or copy the site parameter into the function code on line 21.
-5. **Save** the function.
-6. Click **Integration** under the **Developer** side menu.
-7. Click **Azure Blob Storage** under **Trigger and inputs**.
-8. Set the **Blob Parameter Name** to `blobContent` and click **Save**.
+5. {{< ui >}}Save{{< /ui >}} the function.
+6. Click {{< ui >}}Integration{{< /ui >}} under the {{< ui >}}Developer{{< /ui >}} side menu.
+7. Click {{< ui >}}Azure Blob Storage{{< /ui >}} under {{< ui >}}Trigger and inputs{{< /ui >}}.
+8. Set the {{< ui >}}Blob Parameter Name{{< /ui >}} to `blobContent` and click {{< ui >}}Save{{< /ui >}}.
 9. Verify your setup is correct by checking the [Datadog Log Explorer][112] for logs from this resource.
 
 

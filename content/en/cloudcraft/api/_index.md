@@ -57,4 +57,8 @@ import { Cloudcraft } from 'cloudcraft';
 
 Or check out the SDKs directly:
 
-{{< partial name="cloudcraft/sdk-languages.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="https://github.com/DataDog/cloudcraft-go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="https://github.com/DataDog/cloudcraft-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/cloudcraft-node" src="integrations_logos/node.png" alt="Node.js" >}}
+{{< /card-grid >}}

@@ -204,7 +204,7 @@ When you upgrade your AKS cluster, you may see the Kubelet serving certificate r
 - In Datadog Operator: The Agent container shuts down in `Error`, as it cannot connect to the Kubelet, and it logs `Error while getting hostname, exiting: unable to reliably determine the host name`
 - In Helm: The Agent pod fails to start with the warning event `MountVolume.SetUp failed for volume "kubelet-ca" : hostPath type check failed: /etc/kubernetes/certs/kubeletserver.crt is not a file`
 
-In these cases, remove the additional Kubelet configurations. 
+In these cases, remove the additional Kubelet configurations.
 
 As an alternative, you can also [connect to the Kubelet without TLS verification](#without-tls-verification).
 
@@ -349,6 +349,56 @@ providers:
 ```
 
 {{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+
+Starting with Datadog Operator `1.27.0+`, enable Autopilot mode with the `experimental.agent.datadoghq.com/autopilot` annotation. The Operator configures the Agent for GKE Autopilot, including API server pod discovery and the required WorkloadAllowlist.
+
+Custom `datadog-agent.yaml`:
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    experimental.agent.datadoghq.com/autopilot: "true"
+spec:
+  global:
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+    # The site of the Datadog intake to send Agent data to (example: `us3.datadoghq.com`)
+    # Default value is `datadoghq.com' (the US1 site)
+    # Documentation: https://docs.datadoghq.com/getting_started/site/
+    site: <DATADOG_SITE>
+  override:
+    nodeAgent:
+      containers:
+        agent:
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
+        trace-agent:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+        process-agent:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 200Mi
+        system-probe:
+          resources:
+            requests:
+              cpu: 100m
+              memory: 400Mi
+```
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Spot pods and compute classes
@@ -368,6 +418,19 @@ agents:
     value: "true"
 ```
 {{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+```yaml
+spec:
+  override:
+    nodeAgent:
+      tolerations:
+      - effect: NoSchedule
+        key: cloud.google.com/gke-spot
+        operator: Equal
+        value: "true"
+```
+{{% /tab %}}
 {{< /tabs >}}
 
 Similarly when using [GKE Autopilot Compute classes][11] to run workloads that have specific hardware requirements, take note of the [taints][9] that GKE Autopilot is applying to these specific nodes and add matching tolerations to the Agent DaemonSet. You can match the tolerations on your corresponding pods. For example for the `Scale-Out` compute class use a toleration like:
@@ -383,6 +446,19 @@ agents:
     key: cloud.google.com/compute-class
     operator: Equal
     value: Scale-Out
+```
+{{% /tab %}}
+
+{{% tab "Datadog Operator" %}}
+```yaml
+spec:
+  override:
+    nodeAgent:
+      tolerations:
+      - effect: NoSchedule
+        key: cloud.google.com/compute-class
+        operator: Equal
+        value: Scale-Out
 ```
 {{% /tab %}}
 {{< /tabs >}}

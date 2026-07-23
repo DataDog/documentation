@@ -1,8 +1,9 @@
 ---
+id: quartile
 core_product:
 - serverless_aws_lambda
 related_terms:
-- médiane
+- median
 title: quartile
 ---
 Les quartiles organisent les données en quatre sections comportant chacune 25 % des données. 

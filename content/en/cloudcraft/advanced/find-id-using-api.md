@@ -89,8 +89,8 @@ Cloudcraft doesn't expose the team ID in the UI or through a simple API call. Ho
 To find the ID of your team, follow these steps:
 
 1. Open the Cloudcraft UI and create a new empty blueprint.
-2. Click the **Share & Export** button in the top-right corner.
-3. Under **Share with a team...**, click the field and select the team or teams you want to get the ID for.
+2. Click the {{< ui >}}Share & Export{{< /ui >}} button in the top-right corner.
+3. Under {{< ui >}}Share with a team...{{< /ui >}}, click the field and select the team or teams you want to get the ID for.
 
 {{< img src="cloudcraft/advanced/find-id-using-api/share-with-team.mp4" alt="A quick video showing a Cloudcraft user selecting the Datadog and Cloudcraft teams from the Share & Export menu." video="true">}}
 

@@ -1,5 +1,6 @@
 ---
 title: Streamline the Development Lifecycle with CI Visibility
+description: Use the Catalog Delivery tab to monitor CI pipeline performance, track static analysis violations, and improve pre-production reliability for your services.
 aliases:
   - /tracing/software_catalog/use_cases/pipeline_visibility
   - /service_catalog/use_cases/pipeline_visibility
@@ -16,7 +17,7 @@ further_reading:
   - link: "/security/code_security/static_analysis/"
     tag: "Documentation"
     text: "Static Analysis"
-  - link: "/dora_metrics/"
+  - link: "/delivery_performance/dora_metrics/"
     tag: "Documentation"
     text: "DORA Metrics"
   - link: "https://www.datadoghq.com/blog/memory-leak-workflow/"
@@ -28,9 +29,9 @@ further_reading:
 ---
 
 
-The Delivery tab in Software Catalog helps you assess and optimize your service's pre-production status by providing insights into CI pipelines and static analysis violations. 
+The Delivery tab in Catalog helps you assess and optimize your service's pre-production status by providing insights into CI pipelines and static analysis violations. 
 
-{{< img src="tracing/software_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Software Catalog" style="width:100%;" >}}
+{{< img src="tracing/software_catalog/pipeline-visibility-software-delivery.png" alt="The Delivery tab for monitoring pre-production status in Catalog" style="width:100%;" >}}
 
 With Delivery, you can:
 
@@ -41,9 +42,9 @@ With Delivery, you can:
 
 By default, your service is linked to CI pipelines through its repository URL. To add or remove a pipeline associated with your service:
 
-1. Click on your service in [Software Catalog][4] to open the service side panel, click on the Ownership tab, and find the edit options for Entity Metadata.
+1. Click on your service in [Catalog][4] to open the service side panel, click on the Ownership tab, and find the edit options for Entity Metadata.
 
-   **Note**: This is only available for Software Catalog schema v2.2 and above.
+   **Note**: This is only available for Catalog schema v2.2 and above.
 
    {{< img src="tracing/software_catalog/edit_metadata.png" alt="The detailed side panel view for a service, highlighting metadata editing options" style="width:100%;" >}}
 
@@ -66,7 +67,7 @@ For more details on CI status and static analysis violations for the pipelines a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/code_security/static_analysis/
-[2]: /dora_metrics/
+[2]: /delivery_performance/dora_metrics/
 [4]: https://app.datadoghq.com/software
 [5]: https://app.datadoghq.com/ci/pipelines
-[6]: /software_catalog/service_definitions/v2-2/#example-yaml
+[6]: /internal_developer_portal/catalog/entity_model/

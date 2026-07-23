@@ -21,7 +21,7 @@ To build an SLO from new or existing Datadog monitors, create a monitor-based SL
 
 <div class="alert alert-info">Time Slice SLOs are another way to create SLOs with a time-based SLI calculation. With Time Slice SLOs, you can create an uptime SLO without going through a monitor, so you don’t have to create and maintain both a monitor and an SLO.</div>
 
-{{< img src="service_management/service_level_objectives/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_side_panel.png" alt="monitor-based SLO example" >}}
 
 ## 前提条件
 
@@ -73,7 +73,7 @@ Choose a name and extended description for your SLO. Select any tags you would l
 
 ## ステータス計算
 
-{{< img src="service_management/service_level_objectives/monitor_slo_overall_status.png" alt="Monitor-based SLO with groups" >}}
+{{< img src="service_level_objectives/monitor/monitor_slo_overall_status.png" alt="Monitor-based SLO with groups" >}}
 
 Datadog calculates the overall SLO status as the uptime percentage across all monitors or monitor groups, unless specific groups have been selected:
 - If specific groups have been selected (up to 20), the SLO status is calculated with only those groups. The UI displays all selected groups. 
