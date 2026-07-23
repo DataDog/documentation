@@ -7,8 +7,7 @@
 {{ $endpoint_data := .endpoint_data }}
 {{ $endpoint_path := .endpoint_path }}
 {{ $method := .method }}
-{{ $api_v1_translate_actions := .api_v1_translate_actions }}
-{{ $api_v2_translate_actions := .api_v2_translate_actions }}
+{{ $translate_actions := .translate_actions }}
 
 {{/* Hugo page-level variables */}}
 {{ $type := $page.Type }}
@@ -16,24 +15,25 @@
 {{ $permalink := $page.Permalink }}
 {{ $relpermalink := $page.RelPermalink }}
 
-{{/* Get API action data from spec */}}
+{{/* Use localized text for search content, but the English OpenAPI summary for stable URLs. */}}
 {{ $operationId := $endpoint_data.operationId }}
-{{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
-{{ $action_data := index $translate_actions_datafile $operationId }}
-{{ $section_header := $action_data.summary }}
-{{ $section_content := $action_data.description }}
+{{ $localized_action := index ($translate_actions | default dict) $operationId | default dict }}
+{{ $canonical_summary := $endpoint_data.summary }}
+{{ $section_header := $localized_action.summary | default $canonical_summary }}
+{{ $section_content := $localized_action.description | default $endpoint_data.description }}
 
 {{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
 {{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
 
-{{ $endpoint_slug := $section_header | anchorize }}
+{{ $endpoint_slug := $canonical_summary | anchorize }}
 {{ $full_url := print $permalink $endpoint_slug "/" }}
 {{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
 
-{{/* When the same operationId+summary exists in both v1 and v2, both versions share one endpoint page with version tabs. Disambiguate the records by linking to the tab anchor. */}}
-{{ $other_action := cond (eq $api_version "v1") (index $api_v2_translate_actions $operationId) (index $api_v1_translate_actions $operationId) }}
-{{ if and (ne $other_action nil) (eq ($other_action.summary | anchorize) ($section_header | anchorize)) }}
-    {{ $tab_anchor := (print $section_header "-" $api_version) | anchorize }}
+{{/* When the same operation exists in both versions, each record links to its version tab. */}}
+{{ $other_version := cond (eq $api_version "v1") "v2" "v1" }}
+{{ $other_endpoint := partial "api/load-specs.html" (dict "version" $other_version "lookup" $operationId) }}
+{{ if and $other_endpoint (eq ($other_endpoint.action.summary | anchorize) ($canonical_summary | anchorize)) }}
+    {{ $tab_anchor := (print $canonical_summary "-" $api_version) | anchorize }}
     {{ $full_url = print $full_url "#" $tab_anchor }}
     {{ $relpermalink = print $relpermalink "#" $tab_anchor }}
 {{ end }}

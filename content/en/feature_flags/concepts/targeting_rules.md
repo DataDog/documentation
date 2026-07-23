@@ -38,7 +38,7 @@ To configure targeting rules for a flag:
 2. Select the environment whose rules you want to modify.
 3. Click **Add Targeting Rule** (or click the targeting rule you want to modify).
 
-{{< img src="getting_started/feature_flags/ff-targeting-rules-and-rollouts.png" alt="Targeting Rules and Rollouts section on a feature flag." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/ff-targeting-rules-and-rollouts-2.png" alt="Targeting Rules and Rollouts section on a feature flag." style="width:100%;" >}}
 
 For each targeting rule, configure the following:
 
@@ -47,7 +47,7 @@ For each targeting rule, configure the following:
 - **Select variants**: Choose which variants to serve to matching subjects. Click **Split Traffic** to randomize across multiple variants (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 - **Set the traffic exposure** (optional): Serve the variant to a percentage of matching subjects (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 
-{{< img src="getting_started/feature_flags/configure-targeting-rule.png" alt="Targeting Rule editor side panel on a feature flag." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/configure-targeting-rule-2.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
 After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
 

@@ -5,7 +5,8 @@ Toggle the switch to **Enable TLS**.
   - `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER, PEM, or CRT (X.509).
   - `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER, PEM, or CRT (PKCS #8) format.
   - **Notes**:
-    - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][101] for more information.
+    - The configuration data directory `/var/lib/observability-pipelines-worker/config/` is automatically appended to the file paths. See [Advanced Worker Configurations][10172] for more information.
     - The file must be readable by the `observability-pipelines-worker` group and user.
 
-[101]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[10172]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+<!-- 10172 link is used in multiple shortcodes, so if it is changed, make sure to update those shortcodes using find and replace -->

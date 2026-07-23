@@ -824,6 +824,14 @@ To use a private action in your [Workflow Automation][10] workflow or [App Build
 
 From the {{< ui >}}Private Action Runner{{< /ui >}} page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click {{< ui >}}View Details{{< /ui >}}. Click the trash can icon to delete a runner.
 
+### Automatic deletion of inactive runners
+
+To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only configuration after an extended period of inactivity.
+
+If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
+
+This automatic cleanup doesn't apply to standalone runners or runners that use an Application key.
+
 ### Change the allowlist of a runner
 
 {{< tabs >}}

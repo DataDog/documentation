@@ -10,6 +10,9 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: "/experiments/diagnostics/"
+  tag: "Documentation"
+  text: "Experiment Diagnostics"
 ---
 
 ## Overview
@@ -22,6 +25,10 @@ After you [launch an experiment][1], the experiment results page is the central 
 - **Document learnings**: Record conclusions and takeaways for your team.
 
 The following sections explain the metric scorecard and how to explore results.
+
+## Experiment diagnostics
+
+Datadog runs [experiment diagnostics][9] with experiment analysis to check exposure data, metric data, randomization, and analysis health. Review diagnostic warnings before interpreting results, especially when a metric is missing, unexpectedly zero, or marked with a warning.
 
 ## Metric scorecard
 
@@ -62,6 +69,8 @@ The confidence interval is a range of lift values that are consistent with the o
 - If the **interval crosses zero**, the result is not statistically significant. The result is consistent with a true effect of zero.
 
 Use the interval width as an indicator of precision: a narrower interval means a more precise estimate of lift; a wider interval means more uncertainty, often because the sample is smaller or the metric is noisy.
+
+If [multiple testing correction][8] is enabled, confidence intervals are wider because Datadog controls the family-wise error rate across the experiment's metric and treatment-variant comparisons.
 
 ### Global lift
 
@@ -106,9 +115,11 @@ For metrics built on [RUM][4] or [Product Analytics][5] data, click {{< ui >}}Re
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /experiments/plan_and_launch_experiments
-[2]: /experiments/analysis_methods
+[2]: /experiments/statistics/analysis_methods
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /real_user_monitoring/
 [5]: /product_analytics/
 [6]: /session_replay/
 [7]: /experiments/global_lift/
+[8]: /experiments/statistics/multiple_testing_correction
+[9]: /experiments/diagnostics/

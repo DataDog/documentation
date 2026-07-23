@@ -43,11 +43,11 @@ To set up the Grok Parser processor:
 
 1. Define a processor-level filter query. Only logs that match this filter query are sent to the parser. All logs, regardless of whether they are parsed by the processor, are sent to the next step in the pipeline. See [Logs Search Syntax][3] for information on creating queries.
 1. Enter the log field to parse on. For example, if you enter `logmessage`, the content of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
-1. Click {{< ui >}}Preview Library Rules{{< /ui >}} to preview preset rules for integrations. You can test out-of-the-box parsing rules with your log samples. See [Library rules](#library-rules) for more information.
-1. Toggle {{< ui >}}Disable library rules{{< /ui >}} on the Grok Parser to disable all library parsing rules.
+1. Toggle {{< ui >}}Enable Library Rules{{< /ui >}} off to disable all library parsing rules.
    <br>**Notes**:
    - You must create a custom parsing rule before you can disable library rules.
    - Library rules are applied by default. Disable library rules only if you are relying on custom parsing rules.
+1. Click {{< ui >}}View Library Rules{{< /ui >}} to preview preset rules for integrations. You can test out-of-the-box parsing rules with your log samples. See [Library rules](#library-rules) for more information.
 
 ### Create an AI-generated or custom parsing rule
 
@@ -73,7 +73,7 @@ If a log is sent to the parser but is not parsed by any rules, the Worker genera
 
 #### Order of custom rules
 
-When you have multiple custom rules for a Grok Parser processor, a log is parsed by the first rule whose query it matches, and then sent to the next step in the pipeline. The processor does not try to match the log to subsequent rules. Therefore, the order of the rules matters if a log might match multiple rules.
+When you have multiple custom rules for a Grok Parser processor, a log is parsed by the first rule whose query it matches, and then sent to the next step in the pipeline. The processor does not try to match the log to subsequent rules. Therefore, the order of the rules matters if a log might match multiple rules. To reorder rules, drag and drop them into the desired order.
 
 ##### Example
 
@@ -98,13 +98,20 @@ To write parsing rules manually, in the {{< ui >}}Create Parsing Rule{{< /ui >}}
 
 ### Library rules
 
-When a log is sent to the parser, library rules are automatically applied to the log if there is a `source` or `ddsource` field. For example, if a log has `source:mysql`, the parser applies the MySQL library rules to that log. To see all available library rules, click {{< ui >}}Preview Library Rules{{< /ui >}} in the Grok Parser processor.
+When a log is sent to the parser, library rules are automatically applied to the log if there is a `source` or `ddsource` field. For example, if a log has `source:mysql`, the parser applies the MySQL library rules to that log. To browse all available library rules, click {{< ui >}}View Library Rules{{< /ui >}} in the Grok Parser processor. You can search the table of library rules and click any rule to preview how it is applied to your logs.
 
 You can also add library rules when you create a custom rule. See [Create an AI-assisted or custom parsing rule](#create-an-ai-assisted-or-custom-parsing-rule) for more information.
+
+## Metrics
+
+For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
 
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
 [3]: /observability_pipelines/search_syntax/logs/
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 
 ## Further reading
 
