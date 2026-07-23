@@ -68045,6 +68045,32 @@ components:
       type: string
       x-enum-varnames:
         - CLICKHOUSE
+    ObservabilityPipelineClientTls:
+      description: Configuration for enabling TLS encryption between the pipeline component and external services.
+      properties:
+        ca_file:
+          description: Path to the Certificate Authority (CA) file used to validate the server’s TLS certificate.
+          type: string
+        crt_file:
+          description: Path to the TLS client certificate file used to authenticate the pipeline component with upstream or downstream services.
+          example: "/path/to/cert.crt"
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS client certificate. Used for mutual TLS authentication.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase for the private key file.
+          example: TLS_KEY_PASSPHRASE
+          type: string
+        server_name:
+          description: Server name to use for Server Name Indication (SNI) and to verify against the certificate presented by the remote host. Use this when the address you connect to doesn't match the certificate's Common Name or Subject Alternative Name.
+          example: server.example.com
+          maxLength: 253
+          minLength: 1
+          type: string
+      required:
+        - crt_file
+      type: object
     ObservabilityPipelineCloudPremDestination:
       description: |-
         The `cloud_prem` destination sends logs to Datadog CloudPrem.
@@ -68069,7 +68095,7 @@ components:
             type: string
           type: array
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: Configuration for TLS encryption.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestinationType"
@@ -69784,7 +69810,7 @@ components:
           example: HTTP_AUTH_PASSWORD
           type: string
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -69882,7 +69908,7 @@ components:
           format: int64
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -71965,7 +71991,7 @@ components:
         mode:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationMode"
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: TLS configuration. Relevant only when `mode` is `tcp`.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationType"
@@ -72697,7 +72723,7 @@ components:
           minimum: 0
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestinationType"
       required:
