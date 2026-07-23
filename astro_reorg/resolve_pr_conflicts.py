@@ -1048,7 +1048,8 @@ def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
         "pr", "list", "--repo", REPO, "--state", "open",
         "--base", BASE_BRANCH,
         "--search", f"-label:{LABEL_NO_CONFLICTS} -label:{LABEL_MANUAL_REVIEW} "
-                    f"-label:{LABEL_HELP_REQUESTED} -label:{LABEL_SKIP}",
+                    f"-label:{LABEL_HELP_REQUESTED} -label:{LABEL_SKIP} "
+                    f"-label:{LABEL_AUTO_PR}",
         "--json", fields, "--limit", str(limit),
     )
 
