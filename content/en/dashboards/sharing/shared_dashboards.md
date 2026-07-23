@@ -161,6 +161,12 @@ The following widget types are not supported on shared dashboards. Widgets of th
 * Topology Map
 * List Widget (all data sources)
 * Legacy treemap widget
+* SLO Summary
+* Event Stream
+* Log Stream
+* Flame Graph
+* Uptime
+* Service Map
 
 ### Limited timeframe options
 
