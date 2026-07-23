@@ -26,7 +26,8 @@ Testing the *unresolvable* conflict paths:
     - A base_edit on a moved (hugo/) file makes git am --3way fail: the fix is
       classified reorg-caused but can't be replayed (manual-review fallback).
     - A base_edit on a top-level (never-moved) file surfaces as a plain
-      non-reorg conflict, which is sent straight to manual review.
+      non-reorg conflict, which is labeled astro-reorg-no-conflicts and left
+      for the author to resolve (no manual-review label, no WIP label).
 
 View all test PRs:
     https://github.com/DataDog/documentation/pulls?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-testing
@@ -173,8 +174,8 @@ TEST_PRS = [
     },
     {
         # Unresolvable (Case 1): the conflict is on a top-level file the reorg
-        # never moves, so it isn't reorg-caused at all — sent straight to manual
-        # review with no auto-fix attempt.
+        # never moves, so it isn't reorg-caused at all — labeled no-conflicts
+        # with a neutral comment, not routed to manual review.
         "branch": f"{BRANCH_PREFIX}-non-reorg-conflict",
         "file": "CONTRIBUTING.md",
         "old": "how to write and edit content",
@@ -193,10 +194,11 @@ TEST_PRS = [
             "new": "how to author and edit content",
         },
         "expected_outcome": (
-            "**Manual review (non-reorg conflict).** The conflict is in `CONTRIBUTING.md`, "
-            "a top-level file the reorg never moves. The resolver classifies it as an "
-            "unrelated conflict and immediately labels this PR `astro-reorg-manual-review` "
-            "without attempting an auto-fix."
+            "**No reorg conflicts.** The conflict is in `CONTRIBUTING.md`, "
+            "a top-level file the reorg never moves. The resolver classifies it as "
+            "unrelated to the reorg, labels this PR `astro-reorg-no-conflicts`, and "
+            "leaves a neutral comment directing the author to add `astro-reorg-help-requested` "
+            "if they think this is wrong. No manual-review or WIP label is applied."
         ),
     },
     {
