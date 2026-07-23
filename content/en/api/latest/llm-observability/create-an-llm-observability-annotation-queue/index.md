@@ -1,3 +1,3 @@
 ---
-title: Create an LLM Observability annotation queue
+title: Create an Agent Observability annotation queue
 ---

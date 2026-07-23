@@ -198,7 +198,7 @@ Esta tabla muestra la correspondencia entre el origen de una métrica tal y como
 | Datadog Exporter        | Series temporales enviadas por el [OpenTelemetry Collector][17] o el [Datadog Exporter][18].
 | Plataforma Datadog        | Series temporales enviadas por métricas de admisión que se utilizan para [informar sobre el uso de métricas][11].
 | Eventos                  | Series temporales generadas a partir de la plataforma de eventos de Datadog.
-| LLM Observability       | Series temporales emitidas por el producto LLM Observability utilizando el servicio `lmobs_to_metrics`.
+| Agent Observability       | Series temporales emitidas por el producto Agent Observability utilizando el servicio `lmobs_to_metrics`.
 | Logs                    | Series temporales generadas a partir de la plataforma de [logs][28] de Datadog.
 | API de métricas             | Series temporales enviadas mediante el [endpoint de ingesta OTLP][21] y el receptor OTel con una contrapartida o con puntos en la integración Datadog para obtener métricas del uso estimado o el cliente API de Datadog.
 | CNM                     | Series temporales enviadas por el producto [Cloud Network Monitoring][19] de Datadog.

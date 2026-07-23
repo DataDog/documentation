@@ -1,8 +1,8 @@
 ---
-title: Integración Datadog-CrewAI para LLM Observability
+title: Integración Datadog-CrewAI para Agent Observability
 ---
 
-Esta guía muestra cómo integrar LLM Observability con [CrewAI][1] utilizando la [instrumentación automática][2]. También muestra cómo enviar trazas (traces) de LLM Observability a Datadog y ver las ejecuciones del Agent de CrewAI en la [vista de ejecución de Agents][3] de Datadog.
+Esta guía muestra cómo integrar Agent Observability con [CrewAI][1] utilizando la [instrumentación automática][2]. También muestra cómo enviar trazas (traces) de Agent Observability a Datadog y ver las ejecuciones del Agent de CrewAI en la [vista de ejecución de Agents][3] de Datadog.
 
 ## Empezando
 
@@ -18,7 +18,7 @@ pip install ddtrace crewai crewai-tools
 
 Si no dispones de una clave de API Datadog, crea una cuenta y [obtén tu clave de API][4].
 
-También es necesario especificar un _nombre de aplicación ML_ en las siguientes variables de entorno. Una aplicación ML es una agrupación de trazas de LLM Observability asociadas a una aplicación específica basada en LLM. Consulta la [directrices de nomenclatura de aplicaciones][5] para obtener más información sobre las limitaciones de los nombres de las aplicaciones ML.
+También es necesario especificar un _nombre de aplicación ML_ en las siguientes variables de entorno. Una aplicación ML es una agrupación de trazas de Agent Observability asociadas a una aplicación específica basada en LLM. Consulta la [directrices de nomenclatura de aplicaciones][5] para obtener más información sobre las limitaciones de los nombres de las aplicaciones ML.
 
 ```shell 
 export DD_API_KEY=<YOUR_DD_API_KEY>
@@ -85,15 +85,15 @@ ddtrace-run python crewai_agent.py
 
 ### Ver trazas en Datadog
 
-Después de ejecutar la aplicación, puedes ver las trazas en [Vista de trazas de Datadog LLM Observability][6], seleccionando el nombre de la aplicación ML que has elegido en el desplegable superior izquierdo.
+Después de ejecutar la aplicación, puedes ver las trazas en [Vista de trazas de Datadog Agent Observability][6], seleccionando el nombre de la aplicación ML que has elegido en el desplegable superior izquierdo.
 
 Al hacer clic en una traza se muestra su información, incluido el total de tokens utilizados, el número de llamadas LLM, los modelos utilizados y el coste estimado. Al hacer clic en un tramo (span) específico se reduce esta información y se muestran los datos de entradas, salidas y metadatos relacionados.
 
-{{< img src="llm_observability/guides/crewai/trace_view.png" alt="Una traza en LLM Observability, en que el usuario ha hecho clic en un tramo del flujo de trabajo de CrewAI, con la vista de 'Información del tramo' activada. A la izquierda, una vista de árbol de las llamadas de herramientas y de LLM. Se muestran entradas, salidas y metadatos." style="width:100%;" >}}
+{{< img src="llm_observability/guides/crewai/trace_view.png" alt="Una traza en Agent Observability, en que el usuario ha hecho clic en un tramo del flujo de trabajo de CrewAI, con la vista de 'Información del tramo' activada. A la izquierda, una vista de árbol de las llamadas de herramientas y de LLM. Se muestran entradas, salidas y metadatos." style="width:100%;" >}}
 
 Además, puedes ver la vista del gráfico de ejecución de la traza, que muestra su flujo de control y de datos. Esto se amplía con agentes más grandes para mostrar los traspasos y las relaciones entre las llamadas LLM, las llamadas a herramientas y las interacciones de los Agents.
 
-{{< img src="llm_observability/guides/crewai/execution_graph.png" alt="La misma traza en LLM Observability con la vista del 'Gráfico de ejecución' activada. Se muestra el flujo de control y de datos de la traza." style="width:100%;" >}}
+{{< img src="llm_observability/guides/crewai/execution_graph.png" alt="La misma traza en Agent Observability con la vista del 'Gráfico de ejecución' activada. Se muestra el flujo de control y de datos de la traza." style="width:100%;" >}}
 
 [1]: https://docs.crewai.com/en/introduction
 [2]: /es/llm_observability/instrumentation/auto_instrumentation

@@ -69,7 +69,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
        }
     }</code></pre>
 
-1. Para habilitar [herramientas específicas de producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas de producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -102,7 +102,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   Para habilitar [herramientas específicas de producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+   Para habilitar [herramientas específicas de producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -190,7 +190,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
       }
     }</code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el `toolsets` parámetro de consulta al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el `toolsets` parámetro de consulta al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -219,7 +219,7 @@ Punto de conexión seleccionado ({{< region-param key="dd_site_name" >}}): <code
    - **Instalación con un clic (recomendado):** Utiliza el servidor MCP de Datadog {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}.
    - **Configuración manual:** Sigue las instrucciones de Goose para [agregar un servidor MCP][2], utilizando el punto de conexión listado en esta sección como la URL del servidor HTTP transmitible. Para editar la configuración directamente, modifica `~/.config/goose/config.yaml`.
 
-1. Para habilitar [herramientas específicas del producto][1], incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability:
+1. Para habilitar [herramientas específicas del producto][1], incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability:
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -262,7 +262,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
     }
     </code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -288,7 +288,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
     }
     </code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -311,7 +311,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
     }
     </code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -363,7 +363,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
       }
     }</code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, lo mejor para clientes que soportan filtrado de herramientas):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -422,7 +422,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
   }
 }</code></pre>
 
-Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y LLM Observability:
+Para habilitar [herramientas específicas del producto](#toolsets), incluye el parámetro de consulta `toolsets` al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas de APM y Agent Observability:
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -485,7 +485,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -523,7 +523,7 @@ Punto final seleccionado ({{< region-param key="dd_site_name" >}}): <code>{{< re
       }
     }</code></pre>
 
-1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el `toolsets` parámetro de consulta al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y LLM Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, ideal para clientes que admiten filtrado de herramientas):
+1. Para habilitar [herramientas específicas del producto](#toolsets), incluye el `toolsets` parámetro de consulta al final de la URL del punto de conexión. Por ejemplo, esta URL habilita _solo_ herramientas APM y Agent Observability (usa `toolsets=all` para habilitar todos los conjuntos de herramientas generalmente disponibles, ideal para clientes que admiten filtrado de herramientas):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -577,7 +577,7 @@ Estos conjuntos de herramientas son generalmente disponibles. Consulta [Datadog 
 - `error-tracking`: Herramientas para interactuar con Datadog [Error Tracking][32]
 - `feature-flags`: Herramientas para gestionar [banderas de características][35], que incluyen crear, listar y actualizar banderas y sus entornos.
 - `kubernetes`: Herramientas para buscar y describir recursos de [Kubernetes][51] y recuperar manifiestos en todos los clústeres.
-- `llmobs`: Herramientas para buscar y analizar tramos y experimentos de [LLM Observability][36].
+- `llmobs`: Herramientas para buscar y analizar tramos y experimentos de [Agent Observability][36].
 - `networks`: Herramientas para análisis de [Cloud Network Monitoring][37] y [Network Device Monitoring][38].
 - `onboarding`: Herramientas de incorporación agencial para la configuración e incorporación guiada de Datadog.
 - `product-analytics`: Herramientas para interactuar con consultas de [Product Analytics][41].

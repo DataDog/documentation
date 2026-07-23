@@ -19,7 +19,7 @@ title: Datadog MCP サーバーツール
 Datadog MCP サーバーで利用可能なツールは以下の通りです。各エントリには、必要なツールセット、権限、およびサンプルプロンプトが含まれています。ツールは[ツールセット][1]ごとに分類されています。それにより、必要なツールのみ使用でき、貴重なコンテキストウィンドウのスペースを節約できます。
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-製品特有のツールを有効にするには、Datadog MCP サーバーへの接続に使用するエンドポイント URL の末尾に、`toolsets` クエリパラメータを含めてください。たとえば、選択した[Datadogサイト][2]に基づいて({{< region-param key="dd_site_name" >}}、この URL で有効になるのは、APM と LLM Observability のツール_だけ_です。
+製品特有のツールを有効にするには、Datadog MCP サーバーへの接続に使用するエンドポイント URL の末尾に、`toolsets` クエリパラメータを含めてください。たとえば、選択した[Datadogサイト][2]に基づいて({{< region-param key="dd_site_name" >}}、この URL で有効になるのは、APM と Agent Observability のツール_だけ_です。
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -868,9 +868,9 @@ Kubernetes クラスターを Datadog にオンボーディングする手順を
 
 ### `llm_observability_onboarding`{#llm-observability-onboarding}
 *ツールセット: **オンボーディング***\
-LLM Observability を Datadog にオンボーディングする手順を案内します。
+Agent Observability を Datadog にオンボーディングする手順を案内します。
 
-- 私の AI アプリケーションのために LLM Observability を設定する手助けをしてください。
+- 私の AI アプリケーションのために Agent Observability を設定する手助けをしてください。
 
 ### `test_optimization_onboarding`{#test-optimization-onboarding}
 *ツールセット: **オンボーディング***\

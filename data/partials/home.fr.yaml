@@ -120,7 +120,7 @@ nav_sections:
     - desc: Tracer, surveiller et sécuriser vos applications LLM
       icon: llm-observability
       link: llm_observability/
-      title: LLM Observability
+      title: Agent Observability
 - nav_section:
   - name: Digital Experience
   - navtiles:

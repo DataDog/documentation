@@ -1,12 +1,12 @@
 ---
 description: Instrumenta aplicaciones LLM con OpenTelemetry utilizando convenciones
-  semánticas de GenAI y envía trazas a Datadog LLM Observability sin el SDK de Datadog.
+  semánticas de GenAI y envía trazas a Datadog Agent Observability sin el SDK de Datadog.
 title: Instrumentación de OpenTelemetry
 ---
 ## Descripción general {#overview}
-Al utilizar las convenciones semánticas estandarizadas de OpenTelemetry para operaciones de inteligencia artificial generativa, puedes instrumentar tus aplicaciones LLM con cualquier biblioteca o marco compatible con OpenTelemetry y visualizar las trazas en LLM Observability.
+Al utilizar las convenciones semánticas estandarizadas de OpenTelemetry para operaciones de inteligencia artificial generativa, puedes instrumentar tus aplicaciones LLM con cualquier biblioteca o marco compatible con OpenTelemetry y visualizar las trazas en Agent Observability.
 
-LLM Observability admite la ingestión de trazas de OpenTelemetry que siguen las [convenciones semánticas de OpenTelemetry 1.37+ para inteligencia artificial generativa][1]. Esto te permite enviar trazas LLM directamente desde aplicaciones instrumentadas con OpenTelemetry a Datadog sin requerir el SDK de Datadog LLM Observability o un Agente de Datadog.
+Agent Observability admite la ingestión de trazas de OpenTelemetry que siguen las [convenciones semánticas de OpenTelemetry 1.37+ para inteligencia artificial generativa][1]. Esto te permite enviar trazas LLM directamente desde aplicaciones instrumentadas con OpenTelemetry a Datadog sin requerir el SDK de Datadog Agent Observability o un Agente de Datadog.
 
 ## Requisitos previos {#prerequisites}
 
@@ -17,11 +17,11 @@ Para enviar <a href="/llm_observability/evaluations/external_evaluations#submitt
 
 Para información sobre el uso de Seguimiento de Prompts con spans de OpenTelemetry, consulta <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Seguimiento de Prompts - Instrumentación de OpenTelemetry</a>.
 
-También puedes usar spans de OpenTelemetry dentro de <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">Experimentos de LLM Observability</a>. Al establecer <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans creados dentro de una tarea de experimento aparecen automáticamente como hijos del span del experimento.
+También puedes usar spans de OpenTelemetry dentro de <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">Experimentos de Agent Observability</a>. Al establecer <code>DD_TRACE_OTEL_ENABLED=1</code>, OTel spans creados dentro de una tarea de experimento aparecen automáticamente como hijos del span del experimento.
 
 ## Configuración {#setup}
 
-Para enviar trazas de OpenTelemetry a LLM Observability, configura tu exportador de OpenTelemetry con los siguientes ajustes:
+Para enviar trazas de OpenTelemetry a Agent Observability, configura tu exportador de OpenTelemetry con los siguientes ajustes:
 
 ### Configuración {#configuration}
 
@@ -45,7 +45,7 @@ Esta variable de entorno habilita trazas de OpenTelemetry compatibles con la ver
 
 **Nota**:
 * Si estás utilizando una biblioteca de OpenTelemetry diferente al SDK de OpenTelemetry por defecto, es posible que necesites configurar el endpoint, el protocolo y los encabezados de manera diferente dependiendo de la API de la biblioteca. Consulta la documentación de tu biblioteca para el método de configuración apropiado.
-* Al utilizar instrumentación de OpenTelemetry, algunos datos enviados a LLM Observability también pueden ser escritos en las trazas APM correspondientes. Si estás protegiendo datos sensibles, considera también configurar un Conjunto de Datos Restringido en APM para que coincida con tus controles de acceso de LLM Observability. Consulta [Control de Acceso a Datos][8] para más información.
+* Al utilizar instrumentación de OpenTelemetry, algunos datos enviados a Agent Observability también pueden ser escritos en las trazas APM correspondientes. Si estás protegiendo datos sensibles, considera también configurar un Conjunto de Datos Restringido en APM para que coincida con tus controles de acceso de Agent Observability. Consulta [Control de Acceso a Datos][8] para más información.
 
 #### Usando strands-agents {#using-strands-agents}
 
@@ -55,11 +55,11 @@ Si estás utilizando la [`strands-agents` biblioteca][5], necesitas establecer u
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-Esta variable de entorno asegura que `strands-agents` emita trazas siguiendo las convenciones semánticas de OpenTelemetry v1.37+ para IA generativa, que son requeridas por LLM Observability.
+Esta variable de entorno asegura que `strands-agents` emita trazas siguiendo las convenciones semánticas de OpenTelemetry v1.37+ para IA generativa, que son requeridas por Agent Observability.
 
 ### Instrumentación {#instrumentation}
 
-Para generar trazas compatibles con LLM Observability, haz una de las siguientes opciones:
+Para generar trazas compatibles con Agent Observability, haz una de las siguientes opciones:
 
 - Usa una biblioteca de OpenTelemetry o un paquete de instrumentación que emita spans siguiendo las [convenciones semánticas de OpenTelemetry 1.37+ para IA generativa][1].
 - Cree instrumentación personalizada de OpenTelemetry que produzca spans con los atributos requeridos `gen_ai.*`, según lo definido en las convenciones semánticas.
@@ -152,7 +152,7 @@ os.environ["AWS_DEFAULT_REGION"] = "<YOUR_AWS_REGION>"
 # Enable latest GenAI semantic conventions (1.37)
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
-# Configure OTLP endpoint to send traces to Datadog LLM Observability
+# Configure OTLP endpoint to send traces to Datadog Agent Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
@@ -378,7 +378,7 @@ Todos los `gen_ai.request.*` parámetros se mapean a `meta.metadata.*` con el pr
 
 #### Atributos de la herramienta {#tool-attributes}
 
-| Atributo de OTel | Campo de LLM Observability | Notas |
+| Atributo de OTel | Campo de Agent Observability | Notas |
 |----------------|--------------|-------|
 | `gen_ai.tool.name` | `name` | Sobrescribe el nombre del span |
 | `gen_ai.tool.call.id` | `metadata.tool_id` | |
@@ -390,13 +390,13 @@ Todos los `gen_ai.request.*` parámetros se mapean a `meta.metadata.*` con el pr
 
 #### Sesión y conversación {#session-and-conversation}
 
-| Atributo de OTel | Campo de LLM Observability | Notas |
+| Atributo de OTel | Campo de Agent Observability | Notas |
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | También agregado a `metadata.conversation_id` y etiquetas |
 
 #### Atributos de respuesta {#response-attributes}
 
-| Atributo de OTel | Campo de LLM Observability |
+| Atributo de OTel | Campo de Agent Observability |
 |----------------|--------------|
 | `gen_ai.response.model` | `meta.model_name` |
 | `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
@@ -408,7 +408,7 @@ Los mensajes de entrada y salida se extraen de las siguientes fuentes, en orden 
 1. Atributos directos: `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`
 2. Eventos de tramo (`meta["events"]`) con nombre `gen_ai.client.inference.operation.details`
 
-| Fuente de OTel | Campo de LLM Observability | Notas |
+| Fuente de OTel | Campo de Agent Observability | Notas |
 |-------------|--------------|-------|
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (otros) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (otros) | |
@@ -429,7 +429,7 @@ Las etiquetas se colocan directamente en el span:
 - Claves desconocidas `gen_ai.*` se añaden con el prefijo eliminado
 Filtrado: - , `_dd.*`, `llm.*`, `ddtags`, `events`, y claves `gen_ai.*` ya mapeadas específicamente
 
-<div class="alert alert-info">Cualquiera <code>gen_ai.*</code> los atributos que no están explícitamente mapeados a los campos de span de LLM Observability se colocan en las etiquetas del span de LLM, con un límite de 256 caracteres por valor. Los valores que exceden este límite son truncados. Todos los demás no-<code>gen_ai</code> atributos son eliminados.</div>
+<div class="alert alert-info">Cualquiera <code>gen_ai.*</code> los atributos que no están explícitamente mapeados a los campos de span de Agent Observability se colocan en las etiquetas del span de LLM, con un límite de 256 caracteres por valor. Los valores que exceden este límite son truncados. Todos los demás no-<code>gen_ai</code> atributos son eliminados.</div>
 
 ### Mapeo de atributos de OpenLLMetry {#openllmetry-attribute-mappings}
 
@@ -439,7 +439,7 @@ Esta sección documenta los mapeos de atributos específicos de OpenLLMetry que 
 
 `llm.request.type` se utiliza como respaldo cuando `gen_ai.operation.name` está ausente.
 
-| `llm.request.type` | LLM Observability `span.kind` |
+| `llm.request.type` | Agent Observability `span.kind` |
 |--------------------|-------------------|
 | `chat` | `llm` |
 | `completion` | `llm` |
@@ -525,7 +525,7 @@ Los siguientes atributos específicos de OpenLLMetry se filtran de las etiquetas
 
 ## Convenciones semánticas soportadas {#supported-semantic-conventions}
 
-LLM Observability soporta tramos que siguen las convenciones semánticas de OpenTelemetry 1.37+ para IA generativa, incluyendo:
+Agent Observability soporta tramos que siguen las convenciones semánticas de OpenTelemetry 1.37+ para IA generativa, incluyendo:
 
 - Operaciones de LLM con `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model` y otros atributos de gen_ai
 - Entradas/salidas de operación en atributos directos de tramo o mediante eventos de tramo
@@ -534,9 +534,9 @@ LLM Observability soporta tramos que siguen las convenciones semánticas de Open
 
 Para la lista completa de atributos soportados y sus especificaciones, consulte la [documentación de convenciones semánticas de OpenTelemetry para IA generativa][1].
 
-## Deshabilitando la conversión de LLM Observability {#disabling-llm-observability-conversion}
+## Deshabilitando la conversión de Agent Observability {#disabling-llm-observability-conversion}
 
-Si solo desea que sus tramos de IA generativa permanezcan en APM y no aparezcan en LLM Observability, puede deshabilitar la conversión automática configurando el atributo `dd_llmobs_enabled` a `false`. Configurar este atributo en cualquier tramo de una traza impide que toda la traza se convierta en LLM Observability.
+Si solo desea que sus tramos de IA generativa permanezcan en APM y no aparezcan en Agent Observability, puede deshabilitar la conversión automática configurando el atributo `dd_llmobs_enabled` a `false`. Configurar este atributo en cualquier tramo de una traza impide que toda la traza se convierta en Agent Observability.
 
 ### Usando variables de entorno {#using-environment-variables}
 
@@ -556,7 +556,7 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable LLM Observability conversion for this entire trace
+    # Disable Agent Observability conversion for this entire trace
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 

@@ -5,7 +5,7 @@ description: Identifica derivas en tu aplicación LLM consultando su Mapa de cl�
 further_reading:
 - link: /llm_observability/
   tag: Documentación
-  text: Más información sobre LLM Observability
+  text: Más información sobre Agent Observability
 - link: /llm_observability/terms/
   tag: Documentación
   text: Más información sobre los términos y conceptos clave de la observabilidad
@@ -15,7 +15,7 @@ title: Rastrear un Mapa de clústeres
 
 ## Información general
 
-Puedes identificar derivas en tus aplicaciones LLM visualizando los datos de rastreo en clústeres en la [página Clústeres][1]. Selecciona una aplicación configurada con LLM Observability para ver información de clúster.
+Puedes identificar derivas en tus aplicaciones LLM visualizando los datos de rastreo en clústeres en la [página Clústeres][1]. Selecciona una aplicación configurada con Agent Observability para ver información de clúster.
 
 **Nota:** La agrupación en clústeres puede tardar hasta **24 horas** después de la ingesta de los datos para estar completamente procesada y visible en el mapa de clústeres. Durante este tiempo, los intervalos que aún no se han agrupado aparecerán en un clúster **"Pendiente"**.
 

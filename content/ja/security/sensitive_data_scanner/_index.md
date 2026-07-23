@@ -55,7 +55,7 @@ title: Sensitive Data Scanner
 - APM スパン
 - コードリポジトリ
 - Event Management からのイベント
-- LLM Observability トレース
+- Agent Observability トレース
 - RUM イベント
 - アプリケーションログなどのテレメトリーデータ
 
@@ -103,13 +103,13 @@ Sensitive Data Scanner を使用するためには、まずスキャングルー
 
 詳細は[パイプラインのセットアップ][7]を参照してください。
 
-## LLM Observability データをスキャンする {#scan-llm-observability-data}
+## Agent Observability データをスキャンする {#scan-llm-observability-data}
 
-Sensitive Data Scanner は、LLM アプリケーションの入力と出力を含む [Datadog LLM Observability][20] のトレースをスキャンできます。これにより、プロンプト、完了、および LLM ワークフローメタデータにおいて、PII、API キー、機密情報などの機密データが露出するのを防ぐことができます。
+Sensitive Data Scanner は、LLM アプリケーションの入力と出力を含む [Datadog Agent Observability][20] のトレースをスキャンできます。これにより、プロンプト、完了、および LLM ワークフローメタデータにおいて、PII、API キー、機密情報などの機密データが露出するのを防ぐことができます。
 
-LLM Observability スキャンは、テレメトリーデータスキャンとは別の管理された構成モデルを使用します。LLM Observability スキャンには次のものがあります。
+Agent Observability スキャンは、テレメトリーデータスキャンとは別の管理された構成モデルを使用します。Agent Observability スキャンには次のものがあります。
 
-- **1 つの管理されたスキャングループ**: 最初に [LLM Observability の設定ページ][18]にアクセスすると、組織のデフォルトのスキャングループが自動的に作成されます。追加のスキャングループを作成したり、管理されたグループを削除したりすることはできません。
+- **1 つの管理されたスキャングループ**: 最初に [Agent Observability の設定ページ][18]にアクセスすると、組織のデフォルトのスキャングループが自動的に作成されます。追加のスキャングループを作成したり、管理されたグループを削除したりすることはできません。
 - **カスタマイズ可能なルール**: 既存のルールを変更したり、不要なルールを無効にしたり、追加の機密データパターンを検出するためのカスタムスキャンルールを追加したりできます。
 
 スキャンルールごとに、一致した機密データに次のいずれかのアクションを適用できます。
@@ -118,7 +118,7 @@ LLM Observability スキャンは、テレメトリーデータスキャンと�
 - **Partially redact**: 一致するすべての値の特定の部分を置き換えます。
 - **Hash**: 一致したデータ全体を非可逆の一意の識別子で置き換えます。
 
-LLM Observability データのスキャンを構成するには、Sensitive Data Scanner の設定で [LLM Observability の設定ページ][18]に移動します。LLM Observability の詳細については、[LLM Observability のドキュメント][20]を参照してください。
+Agent Observability データのスキャンを構成するには、Sensitive Data Scanner の設定で [Agent Observability の設定ページ][18]に移動します。Agent Observability の詳細については、[Agent Observability のドキュメント][20]を参照してください。
 
 ## クラウドストレージをスキャンする {#scan-cloud-storage}
 

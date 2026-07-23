@@ -8,11 +8,11 @@ title: Evaluaciones
 
 ## Información general
 
-LLM Observability ofrece varias formas de apoyar las evaluaciones:
+Agent Observability ofrece varias formas de apoyar las evaluaciones:
 
 ### Evaluaciones predefinidas
 
-Datadog crea y admite [Evaluaciones predefinidas][1] para admitir casos de uso comunes. Puedes activarlas y configurarlas en la aplicación LLM Observability.
+Datadog crea y admite [Evaluaciones predefinidas][1] para admitir casos de uso comunes. Puedes activarlas y configurarlas en la aplicación Agent Observability.
 
 ### Enviar evaluaciones personalizadas
 
@@ -24,9 +24,9 @@ Datadog también admite integraciones con algunos marcos de evaluación de terce
 
 ### Integración de Sensitive Data Scanner
 
-Además de evaluar la entrada y la salida de las solicitudes de LLM, los agentes, los workflows (UI) / procesos (generic) o la aplicación, LLM Observability se integra con [Sensitive Data Scanner][5], que ayuda a prevenir la fuga de datos identificando y redactando cualquier información confidencial (como datos personales, datos financieros o información propietaria) que pueda estar presente en cualquier step (UI) / paso (generic) de tu aplicación LLM. 
+Además de evaluar la entrada y la salida de las solicitudes de LLM, los agentes, los workflows (UI) / procesos (generic) o la aplicación, Agent Observability se integra con [Sensitive Data Scanner][5], que ayuda a prevenir la fuga de datos identificando y redactando cualquier información confidencial (como datos personales, datos financieros o información propietaria) que pueda estar presente en cualquier step (UI) / paso (generic) de tu aplicación LLM.
 
-Al escanear de forma proactiva los datos confidenciales, LLM Observability garantiza que las conversaciones permanezcan seguras y cumplan con las normas de protección de datos. Esta capa adicional de seguridad refuerza el compromiso de Datadog de mantener la confidencialidad y la integración de las interacciones de los usuarios con LLM.
+Al escanear de forma proactiva los datos confidenciales, Agent Observability garantiza que las conversaciones permanezcan seguras y cumplan con las normas de protección de datos. Esta capa adicional de seguridad refuerza el compromiso de Datadog de mantener la confidencialidad y la integración de las interacciones de los usuarios con LLM.
 
 [1]: /es/llm_observability/evaluations/ootb_evaluations
 [2]: /es/llm_observability/evaluations/submit_evaluations

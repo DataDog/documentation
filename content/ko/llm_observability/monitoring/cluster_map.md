@@ -5,16 +5,16 @@ description: Cluster Map을 통해 LLM 애플리케이션의 드리프트를 식
 further_reading:
 - link: /llm_observability/
   tag: 설명서
-  text: LLM Observability에 대해 자세히 알아보기
+  text: Agent Observability에 대해 자세히 알아보기
 - link: /llm_observability/terms/
   tag: 설명서
-  text: LLM Observability 핵심 용어와 개념에 대해 자세히 알아보기
+  text: Agent Observability 핵심 용어와 개념에 대해 자세히 알아보기
 title: 트레이스 Cluster Map
 ---
 
 ## 개요
 
-[Clusters 페이지][1]에서 트레이스 데이터를 클러스터로 시각화하여 LLM 애플리케이션의 드리프트를 식별할 수 있습니다. 클러스터 정보를 확인하려면 LLM Observability가 구성된 애플리케이션을 선택합니다.
+[Clusters 페이지][1]에서 트레이스 데이터를 클러스터로 시각화하여 LLM 애플리케이션의 드리프트를 식별할 수 있습니다. 클러스터 정보를 확인하려면 Agent Observability가 구성된 애플리케이션을 선택합니다.
 
 **참고:** 데이터가 수집된 후 클러스터링이 완전히 처리되어 Cluster Map에 표시되기까지 최대 **24시간**이 소요될 수 있습니다. 이 기간 동안 아직 클러스터링되지 않은 스팬은 **"Pending"** 클러스터 아래에 표시됩니다.
 

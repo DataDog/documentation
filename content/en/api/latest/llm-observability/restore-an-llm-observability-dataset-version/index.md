@@ -1,3 +1,3 @@
 ---
-title: Restore an LLM Observability dataset version
+title: Restore an Agent Observability dataset version
 ---

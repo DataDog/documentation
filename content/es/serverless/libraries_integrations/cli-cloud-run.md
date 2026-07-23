@@ -79,7 +79,7 @@ Puedes pasar los siguientes argumentos a `instrument` para especificar su compor
 | `--service-tag` o `--serviceTag` |  | El valor para la tag (etiqueta) del servicio. Utiliza esto para agrupar servicios de Cloud Run relacionados que pertenezcan a cargas de trabajo similares. Por ejemplo, `my-service`. Si no se proporciona, se utiliza el nombre del servicio de Cloud Run. |  |
 | `--version` |  | El valor para la tag (etiqueta) de la versión. Utiliza esto para correlacionar picos en la latencia, la carga o errores con nuevas versiones. Por ejemplo, `1.0.0`. |  |
 | `--env` |  | El valor para la tag (etiqueta) de la variable de entorno. Utiliza esto para separar tus entornos de almacenamiento provisional, desarrollo y producción. Por ejemplo, `prod`. |  |
-| `--llmobs` |  | Si se especifica, activa LLM Observability para los servicios instrumentados con el nombre de la aplicación de ML proporcionado. |  |
+| `--llmobs` |  | Si se especifica, activa Agent Observability para los servicios instrumentados con el nombre de la aplicación de ML proporcionado. |  |
 | `--image` o `--sidecar-image` |  | La imagen a utilizar para el contenedor de sidecar. | `gcr.io/datadoghq/serverless-init:latest` |
 | `--sidecar-name` |  | (No recomendado) El nombre a utilizar para el contenedor de sidecar. | `datadog-sidecar` |
 | `--shared-volume-name` |  | (No recomendado) Especifica un nombre de volumen compartido personalizado. | `shared-volume` |

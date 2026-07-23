@@ -55,7 +55,7 @@ title: Sensitive Data Scanner
 - APM 스팬
 - 코드 리포지토리
 - Event Management의 이벤트
-- LLM Observability 트레이스
+- Agent Observability 트레이스
 - RUM 이벤트
 - 애플리케이션 로그와 같은 텔레메트리 데이터
 
@@ -103,13 +103,13 @@ Sensitive Data Scanner를 사용하려면 스캔 그룹을 설정하여 스캔�
 
 자세한 내용은 [파이프라인 설정][7]을 참조하세요.
 
-## LLM Observability 데이터를 스캔 {#scan-llm-observability-data}
+## Agent Observability 데이터를 스캔 {#scan-llm-observability-data}
 
-Sensitive Data Scanner는 [Datadog LLM Observability][20] 트레이스를 스캔할 수 있으며, 여기에는 LLM 애플리케이션의 입력 및 출력이 포함됩니다. 프롬프트, 완성 및 LLM 워크플로 메타데이터에서 PII, API 키 또는 독점 정보를 노출하는 것을 방지하는 데 도움이 됩니다.
+Sensitive Data Scanner는 [Datadog Agent Observability][20] 트레이스를 스캔할 수 있으며, 여기에는 LLM 애플리케이션의 입력 및 출력이 포함됩니다. 프롬프트, 완성 및 LLM 워크플로 메타데이터에서 PII, API 키 또는 독점 정보를 노출하는 것을 방지하는 데 도움이 됩니다.
 
-LLM Observability 스캔은 텔레메트리 데이터 스캔과 다른 관리형 구성 모델을 사용하며, LLM Observability 스캔에는 다음이 포함됩니다.
+Agent Observability 스캔은 텔레메트리 데이터 스캔과 다른 관리형 구성 모델을 사용하며, Agent Observability 스캔에는 다음이 포함됩니다.
 
-- **하나의 관리형 스캔 그룹**: [LLM Observability 설정 페이지][18]에 처음 접근할 때 귀하의 조직을 위해 기본 스캔 그룹이 자동으로 생성됩니다. 추가 스캔 그룹을 생성하거나 관리형 그룹을 삭제할 수 없습니다.
+- **하나의 관리형 스캔 그룹**: [Agent Observability 설정 페이지][18]에 처음 접근할 때 귀하의 조직을 위해 기본 스캔 그룹이 자동으로 생성됩니다. 추가 스캔 그룹을 생성하거나 관리형 그룹을 삭제할 수 없습니다.
 - **사용자 정의 가능한 규칙**: 기존 규칙을 수정하거나 필요 없는 규칙을 비활성화하거나 추가 민감한 데이터 패턴을 감지하기 위해 사용자 정의 스캔 규칙을 추가할 수 있습니다.
 
 각 스캔 규칙에 대해, 일치하는 민감한 데이터에 다음 중 하나의 작업을 적용할 수 있습니다.
@@ -118,7 +118,7 @@ LLM Observability 스캔은 텔레메트리 데이터 스캔과 다른 관리형
 - **부분 비식별화**: 모든 일치하는 값의 특정 부분을 교체합니다.
 - **해시**: 일치하는 전체 데이터를 비가역적인 고유 식별자로 교체합니다.
 
-LLM Observability 데이터 스캔을 구성하려면 Sensitive Data Scanner 설정에서 [LLM Observability 설정 페이지][18]로 이동하세요. LLM Observability에 대한 자세한 정보는 [LLM Observability 설명서][20]를 참조하세요.
+Agent Observability 데이터 스캔을 구성하려면 Sensitive Data Scanner 설정에서 [Agent Observability 설정 페이지][18]로 이동하세요. Agent Observability에 대한 자세한 정보는 [Agent Observability 설명서][20]를 참조하세요.
 
 ## 클라우드 스토리지 스캔 {#scan-cloud-storage}
 

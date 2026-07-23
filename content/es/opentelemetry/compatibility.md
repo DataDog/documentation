@@ -65,7 +65,7 @@ Los SDKs de Datadog proporcionan soporte para las APIs de OpenTelemetry Traces, 
 
 ### Observabilidad de LLM {#llm-observability}
 
-Las trazas de OpenTelemetry que tienen [atributos de IA generativa](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) se convierten automáticamente en trazas de LLM Observability. Para deshabilitar esta conversión, consulte [Deshabilitar la conversión de Observabilidad de LLM][38].
+Las trazas de OpenTelemetry que tienen [atributos de IA generativa](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/) se convierten automáticamente en trazas de Agent Observability. Para deshabilitar esta conversión, consulte [Deshabilitar la conversión de Observabilidad de LLM][38].
 
 ### Métricas de tiempo de ejecución {#runtime-metrics}
 

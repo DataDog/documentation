@@ -1,3 +1,3 @@
 ---
-title: Update an LLM Observability prompt
+title: Update an Agent Observability prompt
 ---

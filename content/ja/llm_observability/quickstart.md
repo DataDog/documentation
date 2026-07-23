@@ -11,11 +11,11 @@ further_reading:
 title: クイックスタート
 ---
 
-このページでは、Datadog の LLM Observability SDK を使って、Python、Node.js、または Java の LLM アプリケーションをインスツルメントする方法を紹介します。
+このページでは、Datadog の Agent Observability SDK を使って、Python、Node.js、または Java の LLM アプリケーションをインスツルメントする方法を紹介します。
 
 ### 前提条件
 
-Datadog Agent が稼働していない場合、LLM Observability には Datadog の API キーが必要です。API キーは [Datadog で](https://app.datadoghq.com/organization-settings/api-keys) 確認できます。
+Datadog Agent が稼働していない場合、Agent Observability には Datadog の API キーが必要です。API キーは [Datadog で](https://app.datadoghq.com/organization-settings/api-keys) 確認できます。
 
 ### セットアップ
 
@@ -91,7 +91,7 @@ Datadog Agent が稼働していない場合、LLM Observability には Datadog 
 
 ### トレースを確認する
 
-アプリケーションにリクエストを送って LLM 呼び出しが発生するようにしたうえで、Datadog の [**LLM Observability** ページ][3] にある **Traces** タブでトレースを確認します。トレースが表示されない場合は、サポート対象のライブラリを使っているか確認してください。サポート対象外の場合は、アプリケーションの LLM 呼び出しを手動でインスツルメントする必要があります。
+アプリケーションにリクエストを送って LLM 呼び出しが発生するようにしたうえで、Datadog の [**Agent Observability** ページ][3] にある **Traces** タブでトレースを確認します。トレースが表示されない場合は、サポート対象のライブラリを使っているか確認してください。サポート対象外の場合は、アプリケーションの LLM 呼び出しを手動でインスツルメントする必要があります。
 
 
 ### 次のステップ
@@ -104,7 +104,7 @@ Datadog Agent が稼働していない場合、LLM Observability には Datadog 
 
 ## 「Hello World」アプリケーションの例
 
-LLM Observability 製品を試し始めるためのシンプルなアプリケーション例を以下に示します。
+Agent Observability 製品を試し始めるためのシンプルなアプリケーション例を以下に示します。
 
 
 {{< tabs >}}

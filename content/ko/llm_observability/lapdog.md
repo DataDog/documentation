@@ -1,5 +1,5 @@
 ---
-description: 로컬에서 LLM Observability 대시보드를 실행하여 Datadog 계정 없이 브라우저에서 코딩 에이전트 및 애플리케이션
+description: 로컬에서 Agent Observability 대시보드를 실행하여 Datadog 계정 없이 브라우저에서 코딩 에이전트 및 애플리케이션
   트레이스를 검사합니다.
 further_reading:
 - link: https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md
@@ -7,17 +7,17 @@ further_reading:
   text: GitHub의 Lapdog README
 - link: /llm_observability/instrumentation/sdk
   tag: 설명서
-  text: LLM Observability SDK로 애플리케이션 계측
+  text: Agent Observability SDK로 애플리케이션 계측
 - link: /llm_observability/instrumentation/auto_instrumentation
   tag: 설명서
-  text: LLM Observability를 위한 자동 계측
+  text: Agent Observability를 위한 자동 계측
 title: Lapdog
 ---
 ## 개요 {#overview}
 
-Lapdog은 LLM Observability를 위한 로컬 개발 도구입니다. 이 도구는 `localhost:8126`에서 에이전트를 실행하여 LLM 애플리케이션이나 Claude Code, Codex, Pi와 같은 코딩 에이전트에서 모든 스팬, 프롬프트, 도구 호출 및 비용을 캡처하고 이를 [lapdog.datadoghq.com](https://lapdog.datadoghq.com)의 브라우저 대시보드로 스트리밍합니다. Datadog 계정은 필요하지 않습니다.
+Lapdog은 Agent Observability를 위한 로컬 개발 도구입니다. 이 도구는 `localhost:8126`에서 에이전트를 실행하여 LLM 애플리케이션이나 Claude Code, Codex, Pi와 같은 코딩 에이전트에서 모든 스팬, 프롬프트, 도구 호출 및 비용을 캡처하고 이를 [lapdog.datadoghq.com](https://lapdog.datadoghq.com)의 브라우저 대시보드로 스트리밍합니다. Datadog 계정은 필요하지 않습니다.
 
-Lapdog은 오픈 소스 [Datadog APM 테스트 에이전트][1]를 기반으로 구축되었습니다. 캡처된 텔레메트리를 Datadog으로 전달하여 동일한 데이터가 프로덕션 트래픽과 함께 LLM Observability에 표시되도록 할 수도 있습니다.
+Lapdog은 오픈 소스 [Datadog APM 테스트 에이전트][1]를 기반으로 구축되었습니다. 캡처된 텔레메트리를 Datadog으로 전달하여 동일한 데이터가 프로덕션 트래픽과 함께 Agent Observability에 표시되도록 할 수도 있습니다.
 
 ## 이 작업으로 얻게 되는 사항 {#what-you-get}
 
@@ -92,7 +92,7 @@ lapdog python my_app.py
 
 ## Datadog에 이벤트 전달 {#forward-events-to-datadog}
 
-캡처된 이벤트를 Datadog의 LLM Observability로 동시에 전송하려면 API 키를 설정하고 `--forward`를 전달하세요.
+캡처된 이벤트를 Datadog의 Agent Observability로 동시에 전송하려면 API 키를 설정하고 `--forward`를 전달하세요.
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude

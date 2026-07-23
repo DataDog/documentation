@@ -155,7 +155,7 @@ attributes:
     - **Datasets**: 3 years
 
     '
-  product: LLM Observability
+  product: Agent Observability
 - data_type: '- **Logs**: Determined by customer plan
 
     '

@@ -25,7 +25,7 @@ con Amazon Bedrock.
 Si creas aplicaciones de LLM, usa la observabilidad de LLM para investigar la causa raíz de los problemas,
 monitorizar el rendimiento operativo y evaluar la calidad, la privacidad y la seguridad de tus aplicaciones de LLM.
 
-Consulta el [vídeo de la vista de rastreo de LLM Observability](https://imgix.datadoghq.com/video/products/llm-observability/expedite-troubleshooting.mp4?fm=webm&fit=max) para ver un ejemplo de cómo puedes investigar una traza (trace).
+Consulta el [vídeo de la vista de rastreo de Agent Observability](https://imgix.datadoghq.com/video/products/llm-observability/expedite-troubleshooting.mp4?fm=webm&fit=max) para ver un ejemplo de cómo puedes investigar una traza (trace).
 
 Amazon Bedrock es un servicio totalmente gestionado que ofrece [modelos fundacionales](https://aws.amazon.com/what-is/foundation-models/) (FM) de Amazon y de las principales startups de IA
 a través de una API, para que puedas elegir entre varios FM y encontrar el modelo que mejor
@@ -37,7 +37,7 @@ Habilita esta integración para ver todas tus métricas de Bedrock en Datadog.
 
 ### Observabilidad de LLM: obtén visibilidad integral de tu aplicación de LLM con Amazon Bedrock
 
-Puedes activar LLM Observability en diferentes entornos. Sigue la configuración adecuada en función de tu escenario:
+Puedes activar Agent Observability en diferentes entornos. Sigue la configuración adecuada en función de tu escenario:
 
 #### Instalación para Python
 
@@ -88,10 +88,10 @@ docker run -d \
 
 **Nota**: Si el Agent se ejecuta en un puerto o host personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` en consecuencia.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless (AWS Lambda):
+##### Si estás ejecutando Agent Observability en un entorno serverless (AWS Lambda):
 
 1. Instala las capas de Lambda **Datadog-Python** y **Datadog-Extension** como parte de tu configuración de AWS Lambda.
-1. Activa LLM Observability configurando las siguientes variables de entorno:
+1. Activa Agent Observability configurando las siguientes variables de entorno:
 
 ```shell
    DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -112,7 +112,7 @@ Estos métodos no requieren ninguna configuración adicional.
 
 ##### Validación
 
-Comprueba si LLM Observability captura correctamente los tramos, verificando la creación exitosa de tramos en tus logs de aplicación. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
+Comprueba si Agent Observability captura correctamente los tramos, verificando la creación exitosa de tramos en tus logs de aplicación. También puedes ejecutar el siguiente comando para comprobar el estado de la integración `ddtrace`:
 
 ```shell
 ddtrace-run --info
@@ -183,9 +183,9 @@ Aquí se muestran todos los errores relacionados con la instrumentación o trans
 
 **Nota**: Si el Agent se ejecuta en un puerto o host personalizado, configura `DD_AGENT_HOST` y `DD_TRACE_AGENT_PORT` en consecuencia.
 
-##### Si estás ejecutando LLM Observability en un entorno serverless (AWS Lambda):
+##### Si estás ejecutando Agent Observability en un entorno serverless (AWS Lambda):
 
-1. Activa LLM Observability configurando las siguientes variables de entorno:
+1. Activa Agent Observability configurando las siguientes variables de entorno:
 
    ```shell
    DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>

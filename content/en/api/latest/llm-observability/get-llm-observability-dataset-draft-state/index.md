@@ -1,3 +1,3 @@
 ---
-title: Get LLM Observability dataset draft state
+title: Get Agent Observability dataset draft state
 ---

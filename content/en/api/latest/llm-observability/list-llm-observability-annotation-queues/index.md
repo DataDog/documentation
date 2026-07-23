@@ -1,3 +1,3 @@
 ---
-title: List LLM Observability annotation queues
+title: List Agent Observability annotation queues
 ---

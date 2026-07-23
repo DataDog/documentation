@@ -1,3 +1,3 @@
 ---
-title: Search LLM Observability spans
+title: Search Agent Observability spans
 ---

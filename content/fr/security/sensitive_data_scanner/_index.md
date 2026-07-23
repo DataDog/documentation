@@ -114,7 +114,7 @@ Voir [Configurer les Pipelines][7] pour plus d'informations.
 
 ## Analyser les données d'Observabilité LLM {#scan-llm-observability-data}
 
-Le Scanner de Données Sensibles peut analyser les traces [Datadog LLM Observability][20], y compris les entrées et sorties des applications LLM. Cela aide à prévenir l'exposition de données sensibles telles que les informations personnelles identifiables (PII), les clés API ou les informations propriétaires dans les invites, les complétions et les métadonnées des flux de travail LLM.
+Le Scanner de Données Sensibles peut analyser les traces [Datadog Agent Observability][20], y compris les entrées et sorties des applications LLM. Cela aide à prévenir l'exposition de données sensibles telles que les informations personnelles identifiables (PII), les clés API ou les informations propriétaires dans les invites, les complétions et les métadonnées des flux de travail LLM.
 
 La numérisation de l'observabilité LLM utilise un modèle de configuration géré qui diffère de la numérisation des données de télémétrie, où la numérisation de l'observabilité LLM a :
 

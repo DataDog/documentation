@@ -9,7 +9,7 @@ further_reading:
   text: Más información sobre la creación de evaluadores personalizados
 - link: /llm_observability/setup/sdk
   tag: Documentación
-  text: Más información sobre el SDK de  LLM Observability para Python
+  text: Más información sobre el SDK de  Agent Observability para Python
 - link: /llm_observability/setup/api
   tag: Documentación
   text: Más información sobre la API de evaluaciones
@@ -22,7 +22,7 @@ title: Evaluaciones externas
 ## Información general
 
 En el contexto de las aplicaciones LLM, es importante hacer un seguimiento de los comentarios de los usuarios y evaluar la calidad de las respuestas de tu aplicación LLM.
-Aunque LLM Observability proporciona algunas evaluaciones predefinidas para tus trazas (traces), puedes enviar tus propias evaluaciones a LLM Observability de dos formas: con el [SDK](#submitting-evaluations-with-the-sdk) de Datadog o con la API de [LLM Observability](#submitting-evaluations-with-the-api). Utiliza esta convención de nomenclatura para la etiqueta (label) de evaluación:
+Aunque Agent Observability proporciona algunas evaluaciones predefinidas para tus trazas (traces), puedes enviar tus propias evaluaciones a Agent Observability de dos formas: con el [SDK](#submitting-evaluations-with-the-sdk) de Datadog o con la API de [Agent Observability](#submitting-evaluations-with-the-api). Utiliza esta convención de nomenclatura para la etiqueta (label) de evaluación:
 
 * Las etiquetas (labels) de evaluación deben empezar por una letra.
 * Las etiquetas (labels) de evaluación solo deben contener caracteres alfanuméricos ASCII o guiones bajos.
@@ -38,7 +38,7 @@ Las etiquetas (labels) de evaluación deben ser únicas para una aplicación <co
 
 ## Envío de evaluaciones externas con el SDK
 
-El SDK de LLM Observability proporciona los métodos `LLMObs.submit_evaluation()` y `LLMObs.export_span()` para ayudar a tu aplicación LLM rastreada a enviar evaluaciones externas a LLM Observability. Consulta la documentación del SDK de [Python][3] o [Node.js][4] para ver más detalles.
+El SDK de Agent Observability proporciona los métodos `LLMObs.submit_evaluation()` y `LLMObs.export_span()` para ayudar a tu aplicación LLM rastreada a enviar evaluaciones externas a Agent Observability. Consulta la documentación del SDK de [Python][3] o [Node.js][4] para ver más detalles.
 
 <div class="alert alert-info">Para crear evaluadores reutilizables basados en clases con metadatos de resultados enriquecidos, consulta la <a href="/llm_observability/guide/evaluation_developer_guide/">guía del desarrollador de evaluaciones</a>.</div>
 
@@ -75,7 +75,7 @@ def llm_call():
 
 ## Envío de evaluaciones externas con la API
 
-Puedes utilizar la API de evaluaciones proporcionada por LLM Observability para enviar evaluaciones asociadas a tramos a Datadog. Consulta la [API de evaluaciones][2] para obtener más detalles sobre las especificaciones de la API. Para la creación de evaluadores reutilizables, consulta la [guía del desarrollador de evaluaciones][5].
+Puedes utilizar la API de evaluaciones proporcionada por Agent Observability para enviar evaluaciones asociadas a tramos a Datadog. Consulta la [API de evaluaciones][2] para obtener más detalles sobre las especificaciones de la API. Para la creación de evaluadores reutilizables, consulta la [guía del desarrollador de evaluaciones][5].
 
 Para enviar evaluaciones de <a href="/llm_observability/instrumentation/otel_instrumentation">tramos de OpenTelemetry </a> directamente a la API de evaluaciones, debes incluir la etiqueta (tag) <code>source:otel</code> en la evaluación.
 

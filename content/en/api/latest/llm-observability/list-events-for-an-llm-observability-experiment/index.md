@@ -1,3 +1,3 @@
 ---
-title: List events for an LLM Observability experiment
+title: List events for an Agent Observability experiment
 ---

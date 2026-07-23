@@ -75,7 +75,7 @@ La prise en charge de Terraform sera annoncée une fois que Data Access Control 
 - Les problèmes issus de la fonctionnalité de suivi des erreurs
 - Logs
 - Sessions RUM
-- LLM Observability
+- Agent Observability
 
 ## Contraintes d'utilisation
 

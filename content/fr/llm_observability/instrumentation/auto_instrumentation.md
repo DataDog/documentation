@@ -102,7 +102,7 @@ Pour utiliser ce chargeur personnalisé, exécutez votre application avec l'opti
 {{% /collapse-content %}}
 
 {{% collapse-content title="Support pour les applications empaquetées (esbuild, Webpack)" level="h4" expanded=false id="bundling-support" %}}
-Pour utiliser les intégrations LLM Observability dans les applications empaquetées (esbuild, Webpack), vous devez exclure les modules de ces intégrations de l'empaquetage.
+Pour utiliser les intégrations Agent Observability dans les applications empaquetées (esbuild, Webpack), vous devez exclure les modules de ces intégrations de l'empaquetage.
 
 ##### esbuild
 Si vous utilisez esbuild, consultez [L'empaquetage avec le traceur Node.js](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling).
@@ -177,7 +177,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog LLM Observability prend également en charge tout cadre qui émet nativement des spans conformes à la convention sémantique <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI v1.37+</a>, sans nécessiter le traceur Datadog. Voir <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentation OpenTelemetry</a> pour plus de détails.</div>
+<div class="alert alert-info">Datadog Agent Observability prend également en charge tout cadre qui émet nativement des spans conformes à la convention sémantique <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI v1.37+</a>, sans nécessiter le traceur Datadog. Voir <a href="/llm_observability/instrumentation/otel_instrumentation">Instrumentation OpenTelemetry</a> pour plus de détails.</div>
 
 ## Intégrations LLM
 
@@ -643,7 +643,7 @@ Le fournisseur (OpenAI vs Azure OpenAI) est automatiquement détecté en fonctio
 {{< tabs >}}
 {{% tab "Python" %}}
 L’intégration OpenAI Agents convertit le [traçage intégré][1] du [OpenAI Agents SDK][2] en
-Le format LLM Observability et l'envoi au produit LLM Observability de Datadog s'effectuent en ajoutant un processeur de trace Datadog.
+Le format Agent Observability et l'envoi au produit Agent Observability de Datadog s'effectuent en ajoutant un processeur de trace Datadog.
 
 Les opérations suivantes sont prises en charge :
 - [`traces`][3]
@@ -691,7 +691,7 @@ L'intégration Pydantic AI instrumente les méthodes suivantes :
 {{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-À partir de [v1.11.0][1], [Strands Agents][2] émet nativement des spans conformes aux conventions sémantiques [OpenTelemetry GenAI semantic conventions v1.37][3], que Datadog LLM Observability ingère automatiquement sans nécessiter le traceur Datadog.
+À partir de [v1.11.0][1], [Strands Agents][2] émet nativement des spans conformes aux conventions sémantiques [OpenTelemetry GenAI semantic conventions v1.37][3], que Datadog Agent Observability ingère automatiquement sans nécessiter le traceur Datadog.
 
 Pour des instructions de configuration et un exemple complet, voir [Instrumentation OpenTelemetry — Utilisation des Strands Agents][4].
 
@@ -706,7 +706,7 @@ Pour des instructions de configuration et un exemple complet, voir [Instrumentat
 {{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-L'intégration [Vercel AI SDK][1] trace automatiquement la génération de texte et d'objets, les embeddings et les appels d'outils en interceptant les spans OpenTelemetry créés par le cœur sous-jacent [Vercel AI SDK][2] et en les convertissant en spans Datadog LLM Observability.
+L'intégration [Vercel AI SDK][1] trace automatiquement la génération de texte et d'objets, les embeddings et les appels d'outils en interceptant les spans OpenTelemetry créés par le cœur sous-jacent [Vercel AI SDK][2] et en les convertissant en spans Datadog Agent Observability.
 
 ### Méthodes tracées
 - [Génération de texte][3] :
@@ -723,7 +723,7 @@ L'intégration [Vercel AI SDK][1] trace automatiquement la génération de texte
 
 ### Télémétrie du Vercel AI Core SDK
 
-Cette intégration applique automatiquement les correctifs au traceur passé dans chacune des méthodes tracées sous l'option [`experimental_telemetry`][7]. Si aucune configuration `experimental_telemetry` n'est passée, l'intégration permet d'envoyer tout de même des spans LLM Observability.
+Cette intégration applique automatiquement les correctifs au traceur passé dans chacune des méthodes tracées sous l'option [`experimental_telemetry`][7]. Si aucune configuration `experimental_telemetry` n'est passée, l'intégration permet d'envoyer tout de même des spans Agent Observability.
 
 ```javascript
 require('dd-trace').init({
@@ -741,18 +741,18 @@ async function main () {
     ...
     experimental_telemetry: {
       isEnabled: true,
-      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog Agent Observability
     }
   });
 
   result = await generateText({
     model: openai('gpt-4o'),
     ...
-  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
+  }); // since no tracer is passed in, the integration will enable it to still send Agent Observability spans
 }
 ```
 
-**Remarque** : Si `experimental_telemetry.isEnabled` est défini sur `false`, l'intégration ne l'active pas et n'envoie pas de spans LLM Observability.
+**Remarque** : Si `experimental_telemetry.isEnabled` est défini sur `false`, l'intégration ne l'active pas et n'envoie pas de spans Agent Observability.
 
 [1]: /fr/integrations/vercel-ai-sdk
 [2]: https://ai-sdk.dev/docs/introduction

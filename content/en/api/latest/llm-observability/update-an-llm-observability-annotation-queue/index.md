@@ -1,3 +1,3 @@
 ---
-title: Update an LLM Observability annotation queue
+title: Update an Agent Observability annotation queue
 ---

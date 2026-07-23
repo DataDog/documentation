@@ -1,3 +1,3 @@
 ---
-title: Lock LLM Observability dataset draft state
+title: Lock Agent Observability dataset draft state
 ---

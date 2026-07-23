@@ -1,3 +1,3 @@
 ---
-title: Get an LLM Observability prompt
+title: Get an Agent Observability prompt
 ---

@@ -19,7 +19,7 @@ title: Datadog MCP 서버 도구
 Datadog MCP 서버에서 사용할 수 있는 도구는 다음과 같습니다. 각 항목에 필수 도구 세트, 권한 및 예시 프롬프트가 포함되어 있습니다. 도구는 [도구 세트][1] 기준으로 그룹화되어 있어서 필요한 도구만 사용할 수 있으므로 귀중한 컨텍스트 윈도가 절약됩니다.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
-제품별 도구를 활성화하려면 Datadog MCP 서버에 연결하는 데 사용하는 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함하세요. 예를 들어, 선택한 [Datadog 사이트][2]({{< region-param key="dd_site_name" >}})에 따라 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다.
+제품별 도구를 활성화하려면 Datadog MCP 서버에 연결하는 데 사용하는 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함하세요. 예를 들어, 선택한 [Datadog 사이트][2]({{< region-param key="dd_site_name" >}})에 따라 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다.
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -868,9 +868,9 @@ Kubernetes 클러스터를 Datadog에 온보딩하는 과정을 안내합니다.
 
 ### `llm_observability_onboarding` {#llm-observability-onboarding}
 *도구 세트: **onboarding***\
-Datadog에서 LLM Observability를 온보딩하는 과정을 안내합니다.
+Datadog에서 Agent Observability를 온보딩하는 과정을 안내합니다.
 
-- AI 애플리케이션에 대해 LLM Observability를 설정하게 도와줘.
+- AI 애플리케이션에 대해 Agent Observability를 설정하게 도와줘.
 
 ### `test_optimization_onboarding` {#test-optimization-onboarding}
 *도구 세트: **onboarding***\

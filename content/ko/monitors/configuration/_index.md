@@ -48,7 +48,7 @@ Evaluated Data 그래프는 현재 쿼리와 임계값을 기준으로 모니터
 - 누가 알림을 받게 되는지 미리 확인(알림 규칙에 따른 대상 포함)
 - 저장하기 전에 구성 오류를 빠르게 발견
 
-이 기능은 Metrics, Logs, APM, RUM, Events, Audit, Database, LLM Observability 및 Deployment 모니터에서 지원됩니다.
+이 기능은 Metrics, Logs, APM, RUM, Events, Audit, Database, Agent Observability 및 Deployment 모니터에서 지원됩니다.
 
 {{% /tab %}}
 

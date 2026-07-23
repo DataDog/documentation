@@ -1,3 +1,3 @@
 ---
-title: Delete an LLM Observability annotation queue
+title: Delete an Agent Observability annotation queue
 ---

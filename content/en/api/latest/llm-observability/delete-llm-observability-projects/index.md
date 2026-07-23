@@ -1,3 +1,3 @@
 ---
-title: Delete LLM Observability projects
+title: Delete Agent Observability projects
 ---

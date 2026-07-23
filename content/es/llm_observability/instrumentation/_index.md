@@ -3,17 +3,17 @@ further_reading:
 - link: /llm_observability/auto_instrumentation
   tag: Instrumentación automática
   text: Empezar rápidamente con la instrumentación automática
-title: Instrumentación de LLM Observability
+title: Instrumentación de Agent Observability
 ---
 
 
-Para empezar con Datadog LLM Observability, instrumenta tus aplicaciones o agente(s) LLM eligiendo entre varias estrategias basadas en tu lenguaje de programación y configuración. Datadog proporciona opciones de instrumentación completas diseñadas para capturar trazas (traces), métricas y evaluaciones detalladas de tus aplicaciones y agentes LLM con cambios mínimos en el código.
+Para empezar con Datadog Agent Observability, instrumenta tus aplicaciones o agente(s) LLM eligiendo entre varias estrategias basadas en tu lenguaje de programación y configuración. Datadog proporciona opciones de instrumentación completas diseñadas para capturar trazas (traces), métricas y evaluaciones detalladas de tus aplicaciones y agentes LLM con cambios mínimos en el código.
 
 ## Opciones de instrumentación
-Puedes instrumentar tu aplicación con los SDK de Python, Node.js o Java, o utilizando la API de LLM Observability.
+Puedes instrumentar tu aplicación con los SDK de Python, Node.js o Java, o utilizando la API de Agent Observability.
 
 ### Instrumentación basada en SDK (recomendado)
-Datadog proporciona SDK nativos que ofrecen las funciones de LLM Observability más completas:
+Datadog proporciona SDK nativos que ofrecen las funciones de Agent Observability más completas:
 | Lenguaje | SDK disponible | Instrumentación automática | Instrumentación personalizada | .
 | -------- | ------------- | -------------------- | ---------------------- |
 | Python | Python v3.7 o posterior {{< X >}} | {{< X >}} |
@@ -22,7 +22,7 @@ Datadog proporciona SDK nativos que ofrecen las funciones de LLM Observability m
 
 
 Para instrumentar una aplicación LLM con el SDK:
-1. Instala el SDK de LLM Observability.
+1. Instala el SDK de Agent Observability.
 2. Configura el SDK proporcionando [las variables de entorno necesarias][6] en el comando de inicio de tu aplicación o [en el código][7] mediante programación. Asegúrate de haber configurado tu clave de API Datadog, el sitio Datadog y el nombre de la aplicación de machine learning (ML).
 
 #### Instrumentación automática

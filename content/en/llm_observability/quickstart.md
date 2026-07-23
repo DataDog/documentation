@@ -39,7 +39,7 @@ Agent Observability requires a Datadog API key if you don't have a Datadog Agent
 Instrument Agent Observability with a coding agent of your choice by pasting in the following prompt:
 
 ```bash
-Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic.md to instrument my application with Datadog LLM Observability. When configuring the environment, use the following values for variable entries:
+Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic.md to instrument my application with Datadog Agent Observability. When configuring the environment, use the following values for variable entries:
 
 DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_API_KEY=<your-dd-api-key>

@@ -200,8 +200,8 @@
     "description": "Gérez vos clés API et clés d'application Datadog. Vous avez besoin d'une clé API et d'une clé d'application pour un utilisateur disposant des autorisations requises pour interagir avec ces endpoints.\n\nConsulter les pages suivantes pour afficher et gérer vos clés :\n\n- [API Keys](https://app.datadoghq.com/organization-settings/api-keys)\n- [Application Keys](https://app.datadoghq.com/personal-settings/application-keys)"
   },
   "llm-observability": {
-    "name": "LLM Observability",
-    "description": "Gérez les projets, jeux de données, enregistrements de jeux de données et expériences LLM Observability via l'API Experiments."
+    "name": "Agent Observability",
+    "description": "Gérez les projets, jeux de données, enregistrements de jeux de données et expériences Agent Observability via l'API Experiments."
   },
   "logs": {
     "name": "Logs",

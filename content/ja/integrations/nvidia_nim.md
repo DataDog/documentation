@@ -92,8 +92,8 @@ tile:
 `### Installation
 NVIDIA NIM チェックは [Datadog Agent][4] パッケージに含まれています。サーバーで追加のインストールは不要です。
 
-#### LLM Observability: LLM アプリケーションから NVIDIA Nim への呼び出しをエンド ツー エンドで可視化
-NVIDIA NIM は、[NVIDIA NIM][5] からの API 呼び出しを処理するために OpenAI クライアントを使用します。NVIDIA NIM を使用するアプリケーションを監視し、LLM Observability を設定するには、[OpenAI インテグレーション][6] のドキュメントの手順に従ってください。
+#### Agent Observability: LLM アプリケーションから NVIDIA Nim への呼び出しをエンド ツー エンドで可視化
+NVIDIA NIM は、[NVIDIA NIM][5] からの API 呼び出しを処理するために OpenAI クライアントを使用します。NVIDIA NIM を使用するアプリケーションを監視し、Agent Observability を設定するには、[OpenAI インテグレーション][6] のドキュメントの手順に従ってください。
 `
 ### 構成
 

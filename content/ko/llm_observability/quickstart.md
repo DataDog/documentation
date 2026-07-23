@@ -11,11 +11,11 @@ further_reading:
 title: 빠른 시작
 ---
 
-이 페이지에서는 Datadog의 LLM Observability SDK를 사용해 Python, Node.js, 또는 Java LLM 애플리케이션을 계측하는 방법을 설명합니다.
+이 페이지에서는 Datadog의 Agent Observability SDK를 사용해 Python, Node.js, 또는 Java LLM 애플리케이션을 계측하는 방법을 설명합니다.
 
 ### 사전 필수 조건
 
-Datadog Agent를 사용하지 않으면서 LLM Observability를 실행하려면 Datadog API 키가 필요합니다. [Datadog](https://app.datadoghq.com/organization-settings/api-keys)에서 API 키를 찾으세요.
+Datadog Agent를 사용하지 않으면서 Agent Observability를 실행하려면 Datadog API 키가 필요합니다. [Datadog](https://app.datadoghq.com/organization-settings/api-keys)에서 API 키를 찾으세요.
 
 ### 설정
 
@@ -91,7 +91,7 @@ Datadog Agent를 사용하지 않으면서 LLM Observability를 실행하려면 
 
 ### 트레이스 보기
 
-애플리케이션에 LLM 호출을 발동하는 요청을 하고 Datadog의 **LLM Observability** 페이지[3]에 있는 **Traces** 탭에서 트레이스를 확인합니다. 트레이스가 보이지 않을 경우 지원되는 라이브러리를 사용하고 있는지 체크해 보세요. 그 외의 경우, 애플리케이션의 LLM 호출을 수동으로 계측해야 할 수 있습니다.
+애플리케이션에 LLM 호출을 발동하는 요청을 하고 Datadog의 **Agent Observability** 페이지[3]에 있는 **Traces** 탭에서 트레이스를 확인합니다. 트레이스가 보이지 않을 경우 지원되는 라이브러리를 사용하고 있는지 체크해 보세요. 그 외의 경우, 애플리케이션의 LLM 호출을 수동으로 계측해야 할 수 있습니다.
 
 
 ### 다음 단계
@@ -104,7 +104,7 @@ Datadog Agent를 사용하지 않으면서 LLM Observability를 실행하려면 
 
 ## "Hello World" 애플리케이션 예시
 
-LLM Observability 제품을 탐색해보려면 아래 간단 애플리케이션을 살펴보세요.
+Agent Observability 제품을 탐색해보려면 아래 간단 애플리케이션을 살펴보세요.
 
 
 {{< tabs >}}
