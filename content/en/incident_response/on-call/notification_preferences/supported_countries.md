@@ -20,7 +20,7 @@ If your country isn't listed in the following table, contact <a href="https://do
 </div>
 
 <div class="alert alert-info">
-For the best experience, we recommend downloading the Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> and using push notifications as your primary method of getting paged. SMS and phone call notifications are also available, but local carrier restrictions and regional regulations can occasionally affect their reliability.
+For the best experience, download the Datadog <a href="https://docs.datadoghq.com/mobile">Mobile App</a> and use push notifications as your primary method of getting paged. SMS and phone call notifications are also available, but local carrier restrictions and regional regulations can affect their reliability.
 </div>
 
 | Country | Country code |
