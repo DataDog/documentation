@@ -55,9 +55,9 @@ Si aún no lo has hecho, instala la [Integración de Datadog y Azure][5] para re
 
    ```python
    from datadog_serverless_compat import start
-   import ddtrace.auto
-
    start()
+
+   import ddtrace.auto
    ```
 
 3. **Configurar el rastreador de Python de Datadog **
