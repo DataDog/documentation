@@ -22,9 +22,11 @@
     {{ $workflow_title := .title }}
     {{ $workflow_name := .name }}
     {{ range $action_name, $action_data := .actions }}
-        {{ if $action_data.canRunOnPremises }}
+        {{ $can_run_on_premises := index $action_data "canRunOnPremises" | default false }}
+        {{ $environments := index $action_data "environments" | default (slice) }}
+        {{ if or $can_run_on_premises (in $environments "ON_PREMISES") }}
             {{ $fqn := print $workflow_name "." $action_name }}
-            {{ $supported_agent_types := $action_data.supportedAgentTypes | default slice }}
+            {{ $supported_agent_types := index $action_data "supportedAgentTypes" | default (index $action_data "supported_agent_types") | default (slice) }}
             {{ if lt (len $supported_agent_types) 1 }}
                 {{ $supported_agent_types = $runner_flavor_keys }}
             {{ end }}
