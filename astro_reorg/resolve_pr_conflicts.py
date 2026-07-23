@@ -1135,7 +1135,7 @@ def main() -> None:
               f"Check that the label name is correct.", file=sys.stderr)
         sys.exit(1)
 
-    prs = get_open_prs(args.prs, limit=args.limit)
+    prs = get_open_prs(args.prs)
     print(f"Found {len(prs)} open PR(s) to check.")
     print(f"Limit: will stop after acting on {args.limit} PR(s).")
 
