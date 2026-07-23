@@ -115,7 +115,6 @@ In Datadog, view the [Data Observability: Jobs Monitoring][8] page to see a list
 [3]: https://cloud.google.com/secret-manager/docs/secret-rotation?_gl=1*144zyx0*_ga*MTk0ODY1OTU1OS4xNzI0NzA5NDM4*_ga_WH2QY8WWF5*MTcyNTk1MDU4Mi4yMy4xLjE3MjU5Nzk3NzUuNDEuMC4w
 [4]: https://console.cloud.google.com/dataproc/
 [5]: https://console.cloud.google.com/iam-admin/iam
-[7]: /getting_started/site/
 [8]: https://app.datadoghq.com/data-jobs/
 [9]: /data_jobs
 [10]: https://cloud.google.com/dataproc/docs/concepts/versioning/overview

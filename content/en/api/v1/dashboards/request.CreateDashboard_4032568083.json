@@ -1,0 +1,23 @@
+{
+  "title": "Example-Dashboard",
+  "layout_type": "ordered",
+  "widgets": [
+    {
+      "definition": {
+        "type": "note",
+        "content": "test",
+        "background_color": "white",
+        "font_size": "14",
+        "text_align": "left",
+        "show_tick": false,
+        "tick_pos": "50%",
+        "tick_edge": "left"
+      }
+    }
+  ],
+  "default_timeframe": {
+    "type": "live",
+    "unit": "hour",
+    "value": 4
+  }
+}

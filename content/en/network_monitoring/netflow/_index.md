@@ -6,6 +6,9 @@ further_reading:
 - link: "/network_monitoring/devices/profiles"
   tag: "Documentation"
   text: "Using Profiles with Network Device Monitoring"
+- link: "/network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental"
+  tag: "Documentation"
+  text: "Set up Dynamic Tests for NetFlow"
 - link: "https://www.datadoghq.com/blog/monitor-netflow-with-datadog/"
   tag: "Blog"
   text: "Monitor NetFlow traffic data with Datadog"
@@ -124,6 +127,12 @@ In the **Conversations** view, you can view the Public IP address of the Destina
 You can visualize the flows in NetFlow Monitoring by clicking on the {{< ui >}}Flows{{< /ui >}} menu and hovering over a flow from the list to view additional information about Source IP, Ingress Interface Name, Device name, and Destination IP across related network connections.
 
 {{< img src="network_device_monitoring/netflow/flows.png" alt="Hover over a flow aggregated from a device emitting netflow to access related network connections" width="100%" >}}
+
+## Network Path for NetFlow
+
+Dynamic Tests for NetFlow can automatically run Network Path tests from the Agent that collects NetFlow traffic to destination IPs observed in NetFlow records. Use Dynamic Tests for NetFlow to add hop-by-hop route and latency context to your NetFlow destinations.
+
+Dynamic Tests for NetFlow are experimental and require Agent `v7.81+`. To set up Dynamic Tests for NetFlow, see [Network Path setup][11].
 
 ## NetFlow monitor
 
@@ -371,3 +380,4 @@ Use the `netstat -s` command to see if there are any dropped UDP packets:
 [8]: https://github.com/DataDog/datadog-agent/blob/f6ae461a7d22aaf398de5a94d9330694d69560d6/pkg/config/config_template.yaml#L4203-L4275
 [9]: /network_monitoring/devices/troubleshooting#traps-or-flows-not-being-received-at-all
 [10]: https://app.datadoghq.com/devices/settings/enrichment/ip
+[11]: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental

@@ -1804,9 +1804,9 @@ To control which micro frontend's source maps are used, use the [manual attribut
 
 After setup, the `service` and `version` on RUM events identify which micro frontend generated each event. Use these attributes in several places in Datadog:
 
--   **Side panels**: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
--   **RUM Summary dashboard**: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
--   **Custom dashboards**: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
+-   {% ui %}Side panels{% /ui %}: The `service` and `version` attributes appear in the session, view, error, resource, action, and long task side panels in the RUM Explorer.
+-   {% ui %}RUM Summary dashboard{% /ui %}: Use the `service` and `version` to filter in the RUM Summary dashboard to scope performance metrics to a specific micro frontend.
+-   {% ui %}Custom dashboards{% /ui %}: Create dashboards using the `service` and `version` to monitor each micro frontend independently.
 
 The `service` and `version` tags representing each micro frontend can also be found in the following [RUM without Limits][24] metrics:
 

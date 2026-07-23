@@ -14,7 +14,7 @@ further_reading:
 
 Datadog Agent v7.35.0 or later is required.
 
-If you have [APM][6] set up already, navigate to [**Integrations** > **Link Source Code**][7] and configure the source code integration for your backend services.
+If you have [APM][6] set up already, navigate to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Link Source Code{{< /ui >}}][7] and configure the source code integration for your backend services.
 
 Your telemetry must be tagged with Git information that ties the running application version with a particular repository and commit.
 

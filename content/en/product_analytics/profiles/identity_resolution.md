@@ -59,7 +59,7 @@ Identity Resolution only links identifiers your application has already associat
 
 Identity Resolution expands the scope of user-based metrics to include anonymous activity not previously attributed to known users. As a result, you may see an increase in user counts, funnel volumes, and retention cohorts. 
 
-To reproduce previous metrics, filter for authenticated users by setting the User Id filter to `is not public`.
+To reproduce previous metrics, filter for authenticated users by setting the User Id filter to `is All`.
 
 ## Further reading
 

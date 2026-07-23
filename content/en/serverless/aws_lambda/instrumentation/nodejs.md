@@ -26,7 +26,7 @@ aliases:
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Instrument Functions{{< /ui >}}][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -404,6 +404,10 @@ To configure Datadog using SST v3, follow these steps:
 ## AWS Lambda and VPC
 
 {{% svl-lambda-vpc %}}
+
+## Durable Function
+
+{{% svl-lambda-durable-function %}}
 
 ## What's next?
 

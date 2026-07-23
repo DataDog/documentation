@@ -53,6 +53,14 @@ The following operating systems are officially supported by `dd-trace`. Any oper
 
 | dd-trace Version    | Operating System      | Architectures         | Minimum Versions                         |
 | ------------------- | --------------------- | --------------------- | ---------------------------------------- |
+| 6.x                 | Linux (glibc)         | arm, arm64, x64       | Debian 10, RHEL 8, Ubuntu 20.04          |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.19                              |
+|                     | macOS                 | arm64, x64            | Big Sur (11.0)                           |
+|                     | Windows               | ia32, x64             | Windows 10, Windows Server 2016          |
+| 5.x                 | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 10, RHEL 8, Ubuntu 20.04 |
+|                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.15                              |
+|                     | macOS                 | arm64, x64            | Catalina (10.15)                         |
+|                     | Windows               | ia32, x64             | Windows 10, Windows Server 2016          |
 | 3.x, 4.x            | Linux (glibc)         | arm, arm64, x64       | CentOS 7, Debian 9, RHEL 7, Ubuntu 14.04 |
 |                     | Linux (musl)          | arm, arm64, x64       | Alpine 3.13                              |
 |                     | macOS                 | arm64, x64            | Catalina (10.15)                         |

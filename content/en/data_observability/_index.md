@@ -14,6 +14,9 @@ further_reading:
  - link: '/data_observability/jobs_monitoring'
    tag: 'Documentation'
    text: 'Jobs Monitoring'
+ - link: '/data_observability/cicd/'
+   tag: 'Documentation'
+   text: 'CI/CD'
  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
    tag: 'Blog'
    text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
@@ -38,4 +41,5 @@ Data Observability (DO) helps data teams improve the reliability of data for ana
    {{< nextlink href="/data_observability/lineage/" >}}Lineage: Trace upstream dependencies and downstream consumers across your data stack.{{< /nextlink >}}
    {{< nextlink href="/data_observability/quality_monitoring/" >}}Quality Monitoring: Identify data issues before downstream BI and AI applications are impacted.{{< /nextlink >}}
    {{< nextlink href="/data_observability/jobs_monitoring/" >}}Jobs Monitoring: Observe, troubleshoot, and optimize jobs across your data pipelines.{{< /nextlink >}}
+   {{< nextlink href="/data_observability/cicd/" >}}CI/CD: Prevent data-quality issues before they're merged.{{< /nextlink >}}
 {{< /whatsnext >}}

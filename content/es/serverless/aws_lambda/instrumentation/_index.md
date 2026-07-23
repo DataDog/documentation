@@ -14,21 +14,21 @@ title: Instrumentar aplicaciones de AWS Lambda
 ---
 ## Descripción general {#overview}
 
-Instrumente sus aplicaciones de AWS Lambda con Datadog Lambda Extension para recopilar trazas, métricas mejoradas y métricas personalizadas. La Datadog Lambda Extension es análoga a usar el Datadog Agent y los SDK de Datadog para infraestructura y aplicaciones basadas en host.
+Instrumente sus aplicaciones de AWS Lambda con el Datadog Lambda Extension para recopilar trazas, métricas mejoradas y métricas personalizadas. El Datadog Lambda Extension es análogo a usar el Datadog Agent y los Datadog SDKs para infraestructura y aplicaciones basadas en host.
 
-{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Un diagrama que muestra cómo Datadog recibe telemetría de su aplicación de AWS Lambda instrumentada. Su aplicación Lambda, instrumentada con Datadog Lambda Library, envía registros, trazas, métricas mejoradas y métricas personalizadas a Datadog Lambda Extension, que luego envía estos datos a Datadog." style="width:100%;" >}}
+{{< img src="serverless/serverless_tracing_installation_instructions.png" alt="Un diagrama que muestra cómo Datadog recibe telemetría de su aplicación de AWS Lambda instrumentada. Su aplicación Lambda, instrumentada con el Datadog Lambda Library, envía registros, trazas, métricas mejoradas y métricas personalizadas al Datadog Lambda Extension, que luego envía estos datos a Datadog." style="width:100%;" >}}
 
 ## Inicio rápido {#quick-start}
 
-Para comenzar, [regístrese para obtener una cuenta de Datadog][1] si aún no la tiene. Luego, siga el [flujo de instalación en la aplicación en Fleet Automation][8] para AWS Lambda para instrumentar sus funciones Lambda. Esta configuración de inicio rápido permite que sus funciones envíen métricas, registros y trazas en tiempo real a Datadog.
+Para comenzar, [régístrese para obtener una cuenta de Datadog][1] si aún no la tiene. Luego, siga el [flujo de instalación en la aplicación en Fleet Automation][8] para AWS Lambda para instrumentar sus funciones Lambda. Esta configuración de inicio rápido permite que sus funciones envíen métricas, registros y trazas en tiempo real a Datadog.
 
 Una aplicación de muestra está [disponible en GitHub][6] con instrucciones sobre cómo desplegar con múltiples entornos de ejecución y herramientas de infraestructura como código.
 
 El proceso de inicio rápido configura sus funciones Lambda sobre la marcha. Para instrumentar funciones Lambda de manera permanente, consulte las instrucciones detalladas en la siguiente sección.
 
-## Usar el servidor MCP de Datadog {#use-the-datadog-mcp-server}
+## Usar el Datadog MCP server {#use-the-datadog-mcp-server}
 
-Utilice el [Datadog MCP server][9] para configurar el monitoreo de sus contenedores de AWS Lambda con asistencia de IA. Después de conectarse, pruebe un aviso como:
+Utilice el [Datadog MCP server][9] para configurar el seguimiento de sus contenedores de AWS Lambda con asistencia de IA. Después de conectarse, pruebe un aviso como:
 
 ```shell
 Help me monitor my AWS Lambda functions with Datadog
@@ -47,13 +47,13 @@ Help me monitor my AWS Lambda functions with Datadog
 
 ## Configuraciones avanzadas {#advanced-configurations}
 
-Después de haber terminado con la instrumentación y de haber configurado la recolección de telemetría, puede usar [Configurar Serverless Monitoring for AWS Lambda][3] para:
+Después de que haya terminado con la instrumentación y haya configurado la recolección de telemetría, puede usar [Configurar Serverless Monitoring para AWS Lambda][3] para:
 
-- Conecte sus métricas, trazas y registros usando etiquetas
-- Recolecte telemetría de recursos de AWS como API Gateway, AppSync y Step Functions
-- Capture las cargas útiles de solicitud y respuesta para invocaciones individuales de Lambda
-- Vincule los errores de sus funciones Lambda a su código fuente
-- Filtre o elimine información sensible de registros o trazas
+- conectar sus métricas, trazas y registros usando etiquetas
+- recolectar telemetría de recursos de AWS como API Gateway, AppSync y Step Functions
+- capturar las cargas útiles de solicitud y respuesta para invocaciones individuales de Lambda
+- vincular errores de sus funciones Lambda a su código fuente
+- filtrar o eliminar información sensible de registros o trazas
 
 ## Lectura adicional {#further-reading}
 

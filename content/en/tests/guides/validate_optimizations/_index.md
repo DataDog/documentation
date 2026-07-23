@@ -240,7 +240,7 @@ git push origin validate-test-optimization-mitigation
 
 **Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-mitigation`.
 
-Click on the only test in the list and verify that it shows as `DISABLED`. This confirms that the flaky test policy was triggered.
+Click on the only test in the list and verify that it shows as {{< ui >}}DISABLED{{< /ui >}}. This confirms that the flaky test policy was triggered.
 
 9. Go to [Test Runs][9] and check that the newly added flaky test shows up.
 
@@ -342,7 +342,7 @@ git push origin validate-test-optimization-attempt-to-fix
 
 4. Wait for CI to run.
 5. Confirm that the newly added flaky test does not cause CI to fail.
-6. Go to [Flaky Test Management][11] and check that the newly added flaky test shows up as **Active**.
+6. Go to [Flaky Test Management][11] and check that the newly added flaky test shows up as {{< ui >}}Active{{< /ui >}}.
 
 **Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-attempt-to-fix`.
 
@@ -415,7 +415,7 @@ func testFlaky() {
 {{% /tab %}}
 {{< /tabs >}}
 
-8. In [Flaky Test Management][11], click the flaky test, then click on the `Actions` button and select `Link commit to Flaky Test fix`. This opens a modal that provides a test key and sample Git command:
+8. In [Flaky Test Management][11], click the flaky test, then click on the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Link commit to Flaky Test fix{{< /ui >}}. This opens a modal that provides a test key and sample Git command:
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to fix modal" style="width:50%" >}}
 
@@ -430,7 +430,7 @@ git push origin validate-test-optimization-attempt-to-fix
 ```
 
 10. Wait for CI to finish.
-11. After CI has finished, go back to [Flaky Test Management][11]. The test now shows up as `Fix In Progress`. This means that the attempt to fix has worked. The test automatically moves to `Fixed` when the PR is merged.
+11. After CI has finished, go back to [Flaky Test Management][11]. The test now shows up as {{< ui >}}Fix In Progress{{< /ui >}}. This means that the attempt to fix has worked. The test automatically moves to {{< ui >}}Fixed{{< /ui >}} when the PR is merged.
 
 **Important**: Do not merge the PR, as it was just purely for validation purposes. Close the pull request without merging.
 

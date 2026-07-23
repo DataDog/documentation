@@ -179,7 +179,7 @@ Create a sample configuration file and run your custom DDOT Collector (Agent) to
          exporters: [datadog, datadog/connector]
        metrics:
          receivers: [otlp, datadog/connector, prometheus]
-         processors: [metricstransform, infraattributes]
+         processors: [metricstransform, infraattributes, cumulativetodelta]
          exporters: [datadog]
        logs:
          receivers: [otlp]

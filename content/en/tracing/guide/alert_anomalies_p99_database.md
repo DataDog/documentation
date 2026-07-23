@@ -32,11 +32,11 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_2_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 
-3. **Choose an *Anomaly Alert*** and under the *For* option select p99 latency.
+3. **Choose an {{< ui >}}Anomaly Alert{{< /ui >}}** and under the {{< ui >}}For{{< /ui >}} option select p99 latency.
 
     Once you choose Anomaly Alert the chart also shows you the baseline expected behavior for the metric chosen - in our case, p99 latency.
 
-4. **Set the *Alert when* field value to 100%**.
+4. **Set the {{< ui >}}Alert when{{< /ui >}} field value to 100%**.
 
     This means that all of the events for the selected duration have to be anomalous for the alert to trigger. This is a best practice for starting with Anomaly Detection. Over time, you'll find the right values that fit your situation. You can find out more about Anomaly Detection Monitors in the [FAQ][6].
 
@@ -48,13 +48,13 @@ Datadog allows you to set monitors to keep track of the health of your services 
 
     You can read more about the markup for notification text and what values and conditions you can set there in the [notifications overview][7].
 
-6. **Make sure your username appears in the *Configure notifications and automations notification* field** and add any additional team members that should be notified in case of a database latency anomaly.
+6. **Make sure your username appears in the {{< ui >}}Configure notifications and automations notification{{< /ui >}} field** and add any additional team members that should be notified in case of a database latency anomaly.
 
-    **Note**: To add another user, type `@` at the start. **Click *Save***.
+    **Note**: To add another user, type `@` at the start. **Click {{< ui >}}Save{{< /ui >}}**.
 
     Your alert is now set, you can tweak any of the parameters from this screen and follow the metric performance.
 
-7. **Switch from the *Edit* tab to the *Status* tab**.
+7. **Switch from the {{< ui >}}Edit{{< /ui >}} tab to the {{< ui >}}Status{{< /ui >}} tab**.
 
     {{< img src="tracing/guide/alert_anomalies_p99_database/alert_anomalies_4_cropped.png" alt="Monitor view with ongoing alert" style="width:90%;">}}
 

@@ -114,7 +114,7 @@ DD_AGENT_TELEMETRY_ENABLED=false
 {{< /tabs >}}
 [1]: https://docs.datadoghq.com/agent/configuration/fips-compliance?tab=hostorvm&site=gov
 {{< /site-region >}}
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 Datadog may collect environmental, performance, and feature usage information about the Datadog Agent. This may include diagnostic logs and crash dumps of the Datadog Agent with obfuscated stack traces to support and further improve the Datadog Agent.
 
 You can disable this telemetry collection by updating the `agent_telemetry` setting in the Agent configuration file, as shown in the example below.
@@ -158,13 +158,21 @@ agent diagnose show-metadata agent-telemetry
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
 | dogstatsd.uds_packets_bytes                 | DogStatsD UDS packets bytes                                                                                            |
 | logs.auto_multi_line_aggregator_flush       | Number of multi-line logs aggregated by the Agent                                                                       |
+| logs.auto_multi_line_default_total_lines    | Total log lines processed by the detecting aggregator for sources relying on the auto multi-line detection default           |
+| logs.auto_multi_line_default_would_combine  | Number of lines that would be combined if auto multi-line detection were enabled by default                              |
+| logs.auto_multi_line_default_would_truncate | Number of lines in groups that would be truncated if auto multi-line detection were enabled by default                   |
 | logs.bytes_missed                           | Total number of bytes lost before they could be consumed by the Agent, for example, after log rotation                 |
 | logs.bytes_sent                             | Total number of bytes sent before encoding, if applicable                                                              |
 | logs.decoded                                | Total number of decoded logs                                                                                           |
 | logs.dropped                                | Total number of logs dropped                                                                                           |
 | logs.encoded_bytes_sent                     | Total number of bytes sent after encoding, if applicable                                                               |
+| logs.http_connectivity_check                | Count of HTTP connectivity checks, tagged by status (success or failure)                                               |
+| logs.http_connectivity_failure              | Count of HTTP connectivity check failures, tagged by root cause (dns, tls, timeout, connection, http_status, other)    |
+| logs.http_connectivity_retry_attempt        | Count of HTTP connectivity retry attempts, tagged by status (success or failure)                                       |
+| logs.restart_attempt                        | Count of logs agent restart attempts, tagged by status and target transport                                             |
 | logs.sender_latency                         | HTTP sender latency in milliseconds                                                                                    |
 | logs.truncated                              | Total number of logs truncated by the Agent                                                                            |
+| logs_destination.destination_workers        | Maximum number of active HTTP connections per log destination                                                          |
 | point.dropped                               | Total number of dropped metrics                                                                                        |
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
@@ -193,6 +201,9 @@ agent diagnose show-metadata agent-telemetry
 | agent_bsod                                  | Agent-related Blue Screen of Death (BSOD) data, including the BugCheck code, four associated arguments, and the unsymbolized crashing call stack |
 | **Service Discovery**                       |                                                                                                                        |
 | service_discovery.discovered_services       | Number of services detected by the Agent's Service Discovery feature                                                   |
+| **Autodiscovery**                          |                                                                                                                        |
+| autodiscovery.discovery_queue_depth         | Number of services currently in the Agent's integration discovery queue                                                |
+| autodiscovery.discovery_results             | Count of the Agent's integration discovery attempts, tagged by result (success or failure)                             |
 | **GPU Monitoring**                          |                                                                                                                        |
 | gpu.device_total                            | Total number of GPUs in the system                                                                                     |
 | **APM**                                     |                                                                                                                        |
@@ -222,6 +233,17 @@ agent diagnose show-metadata agent-telemetry
 | tagger.stored_entities                      | Number of entities stored in the Tagger                                                                                |
 | workloadmeta.stored_entities                | Number of entities stored in WorkloadMeta                                                                              |
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
+| appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
+| appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| agent_performance.containers_restarts       | Number of container restarts for the Cluster Agent and Cluster Checks Runner pods                                      |
+| agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
+| agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |
+| agent_performance.memory_limit              | Total container runtime memory limits, in bytes, for the Cluster Agent and Cluster Checks Runner pods                  |
+| **eBPF**                                    |                                                                                                                        |
+| ebpf.core_load_success                      | Number of successful loads of an eBPF CO-RE program                                                                    |
+| ebpf.core_load_error                        | Number of errors loading an eBPF CO-RE program                                                                         |
+| ebpf.core_remoteconfig_success              | Number of successful downloads of BTF (BPF Type Format) data from remote configuration                                 |
+| ebpf.core_remoteconfig_error                | Number of errors downloading BTF data from remote configuration                                                        |
 
 Only applicable metrics are emitted. For example, if DBM is not enabled, none of the database related metrics are emitted.
 

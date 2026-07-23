@@ -14,8 +14,6 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-{{< partial name="dynamic_instrumentation/beta-callout.html" language="Ruby" limitations_anchor="unsupported-features" >}}
-
 Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Ruby.
 
 ## Prerequisites

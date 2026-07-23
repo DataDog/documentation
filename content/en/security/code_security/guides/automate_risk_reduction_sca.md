@@ -31,14 +31,14 @@ Datadog SCA helps automate risk reduction processes, enhancing productivity in t
 
 The Libraries inventory displays the libraries and versions used across your services and repositories. 
 
-The inventory surfaces all library details using several public data sources (such as GuardDog, NIST, osv.dev, and OpenSSF scores) and private data sources (including Datadog’s Security Research group). 
+The inventory surfaces all library details using several public data sources (such as GuardDog, NIST, osv.dev, and OpenSSF scores) and private data sources (including Datadog's Security Research group). 
 
-To use the Libraries inventory, see [Libraries][1] or select **Security > Code Security**, and then select **Libraries**.
+To use the Libraries inventory, see [Libraries][1] or select {{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}}, and then select {{< ui >}}Libraries{{< /ui >}}.
 
-In **Libraries**, you can:
+In {{< ui >}}Libraries{{< /ui >}}, you can:
 
 - View all of the libraries used in each of your services.
-- Use the **Datadog Severity** facet to filter libraries according to vulnerability rating.
+- Use the {{< ui >}}Datadog Severity{{< /ui >}} facet to filter libraries according to vulnerability rating.
 - View the source repository for each library.
 - See library details such as the current version used in a service and the latest version available.
 - View the [OpenSSF Scorecard][2] for the library.
@@ -46,17 +46,17 @@ In **Libraries**, you can:
 
 ## View vulnerabilities and risks in libraries
 
-In the **Vulnerabilities** explorer, you can view the vulnerabilities for the libraries you are using.
+In the {{< ui >}}Vulnerabilities{{< /ui >}} explorer, you can view the vulnerabilities for the libraries you are using.
 
 ### Library vulnerabilities
 
 A library vulnerability is a security bug in a library. 
 
-To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to **Security > Code Security > Vulnerabilities > Libraries**.
+To view your library vulnerabilities, see [Library Vulnerabilities][3] or navigate to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}} > {{< ui >}}Libraries{{< /ui >}}.
 
-In **Libraries**, you can:
+In {{< ui >}}Libraries{{< /ui >}}, you can:
 
-- Use **Libraries** to view different vulnerability types.
+- Use {{< ui >}}Libraries{{< /ui >}} to view different vulnerability types.
   - For example, every vulnerability has an associated CVE ID, displayed in the explorer and each library detail. You can use the Vulnerability facet to sort by CVE ID. 
 - View vulnerability details like:
   - Explanation

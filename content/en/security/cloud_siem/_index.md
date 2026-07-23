@@ -108,7 +108,7 @@ Build searches in the Log Explorer using facets or by clicking fields directly i
 If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
 
 1. Navigate to [Cloud SIEM][12].
-1. Click **Enable Cloud SIEM**.
+1. Click {{< ui >}}Enable Cloud SIEM{{< /ui >}}.
 1. Follow the onboarding steps.
 
 See the [Getting Started Guide][4] for more detailed setup instructions.
@@ -123,7 +123,7 @@ Navigate to the [Cloud SIEM Overview page][3]. Use this page to see key security
 - Track detection performance (Mean Time to Detect (MTTD), false‑positive rates).
 - Read the latest [Security Labs][1] research and release notes.
 
-Click **Customize Page** to reorder or hide modules so you can see what is important to you.
+Click {{< ui >}}Customize Page{{< /ui >}} to reorder or hide modules so you can see what is important to you.
 
 Learn more about each Cloud SIEM Overview page section below.
 
@@ -226,11 +226,11 @@ See how many techniques have high, medium, or low density or no rules at all. Cl
 
 #### Signals per tactic view
 
-See which MITRE ATT&CK tactics are generating signals. Click a pie chart wedge to view the Signal Explorer filtered by that tactic. Click the dropdown and select **Rules count** to see which tactics have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that tactic.
+See which MITRE ATT&CK tactics are generating signals. Click a pie chart wedge to view the Signal Explorer filtered by that tactic. Click the dropdown and select {{< ui >}}Rules count{{< /ui >}} to see which tactics have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that tactic.
 
 #### Signals per technique view
 
-See which MITRE ATT&CK techniques are generating signals. Click on a pie chart wedge to view the Signal Explorer filtered by technique. Click the dropdown and select **Rules count** to see which techniques have the most rules mapped to it. When viewing by rule count, click on a pie chart wedge to see the detection rule explorer filtered by that technique.
+See which MITRE ATT&CK techniques are generating signals. Click on a pie chart wedge to view the Signal Explorer filtered by technique. Click the dropdown and select {{< ui >}}Rules count{{< /ui >}} to see which techniques have the most rules mapped to it. When viewing by rule count, click on a pie chart wedge to see the detection rule explorer filtered by that technique.
 
 ### Detection rules performance
 

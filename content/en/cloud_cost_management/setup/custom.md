@@ -23,10 +23,6 @@ further_reading:
   text: "Gain insights into your Oracle bill"
 ---
 
-{{< callout btn_hidden="true" header="Join the Preview!">}}
-Custom Costs are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Custom Costs allow you to upload *any cost data source* to Datadog, so that you can understand the total cost of your services.
@@ -45,7 +41,7 @@ Additionally, all dates are transformed into UTC timestamps. For example, "2024-
 
 ## Setup
 
-To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either AWS, Azure, Google Cloud, or Oracle Cloud, even if your custom costs are not related to any of these cloud providers. This configuration is required to enable the Custom Costs feature.
+To use Custom Costs in Datadog, you must [configure Cloud Cost Management][1] for either a cloud provider (AWS, Azure, Google Cloud, or Oracle Cloud) or a SaaS provider, even if your custom costs are not related to any of these providers. This configuration is required to enable the Custom Costs feature.
 
 ### Collect the required fields
 

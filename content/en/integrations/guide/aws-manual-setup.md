@@ -71,7 +71,7 @@ Changing the access type on an existing AWS account is a destructive operation. 
    <div class="alert alert-info">
    If your AWS account is in the <code>aws-us-gov</code> (GovCloud) partition, verify with your compliance team before connecting it to your Datadog site. Confirm that forwarding data from that account meets your organization's authorization boundary and data handling requirements. Applicable frameworks may include FedRAMP, ITAR, IL4, or IL5.
    </div>
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 3. Select `Role Delegation` for the access type. Role delegation is only supported for AWS accounts scoped to AWS commercial regions.
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
@@ -86,7 +86,7 @@ Datadog assumes this role to collect data on your behalf.
 
 1. Go to the AWS [IAM Console][4] and click `Create role`.
 2. Select **AWS account** for the trusted entity type, and **Another AWS account**.
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 3. Enter {{< region-param key="aws_customer_access_id" code="true" >}} as the `Account ID`. This is Datadog's account ID, and grants Datadog access to your AWS data.
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
