@@ -159,10 +159,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ## Code Origin coverage via Source Code Integration
 
-[Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is already required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some services, without setting the `DD_CODE_ORIGIN_FOR_SPANS_ENABLED` flag or meeting a minimum tracer version:
-
-- It's currently the only way to get Code Origin data for **Go** services (custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers, OpenTelemetry, and OpenTracing).
-- It extends coverage for **Python** (FastAPI, aiohttp) and **Node.js** (Next.js) beyond the frameworks listed in the [compatibility requirements](#compatibility-requirements) table.
+[Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is already required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some languages and frameworks, without meeting the other requirements.
 
 To get full tracer-instrumented coverage for the languages and frameworks listed in [compatibility requirements](#compatibility-requirements), also [enable Code Origin](#enable-code-origin) in your SDK. Data from both methods appears in the same Code Origin section of the Trace Explorer and powers the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows.
 
