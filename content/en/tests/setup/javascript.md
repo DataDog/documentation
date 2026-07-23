@@ -427,7 +427,9 @@ When enabled, Test Optimization uploads screenshots that Cypress captures when a
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][8] is set to `true` (the default).
+Use [`dd-trace` v5.112.0 or later][8] on the v5 release line, or [`dd-trace` v6.1.0 or later][9] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][10] is set to `true` (the default).
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
@@ -436,7 +438,9 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
 [7]: /continuous_integration/guides/rum_integration/
-[8]: https://docs.cypress.io/app/references/configuration#Screenshots
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+[10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
