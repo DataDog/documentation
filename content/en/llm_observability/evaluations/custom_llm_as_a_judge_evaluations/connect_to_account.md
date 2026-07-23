@@ -91,7 +91,7 @@ Connect your Amazon Bedrock account to Agent Observability with your AWS Account
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect Vertex AI to Agent Observability with your Google Cloud Platform account. Agent Observability uses the `gemini-2.5-flash` model for evaluations.
+Connect Vertex AI to Agent Observability with your Google Cloud Platform account. Agent Observability uses the `gemini-2.5-flash` model for evaluations by default. You can also select other supported GA models from the **Model** dropdown, including `gemini-3.5-flash`, `gemini-3.6-flash`, and `gemini-3.5-flash-lite`.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. On the Google Cloud Vertex AI tile, click {{< ui >}}Connect{{< /ui >}} to add a new GCP account, or click {{< ui >}}Configure{{< /ui >}} next to where your existing accounts are listed to begin the onboarding process.
