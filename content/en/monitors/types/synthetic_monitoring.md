@@ -53,7 +53,7 @@ Datadog adds the following tags to a Synthetic test monitor based on the test's 
 These tags update automatically when you edit the test, so searching on them stays accurate as tests move locations, get paused, or change their CI/CD configuration. For example:
 
 - `check_type:browser check_status:live` finds all active Browser tests.
-- `probe_dc:aws:ap-northeast-1` finds every test running from that location.
+- `probe_dc:"aws:ap-northeast-1"` finds every test running from that location. Quote the value because it contains a colon.
 - `ci_execution_rule:blocking` finds the tests configured to block a CI/CD pipeline on failure.
 
 ### Tailor monitor notifications
