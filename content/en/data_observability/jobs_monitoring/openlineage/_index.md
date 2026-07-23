@@ -599,12 +599,14 @@ Common values include `JOB`, `TASK`, `DAG`, `MODEL`, `COMMAND`, and `QUERY`.
 | `tags`         | Adds custom tags to the job or run; `_dd.ol_service` value maps to the Datadog service name |
 | `sql`          | Parses and masks the SQL query; generates query events                             |
 
-**Note**: The [`tags` facet][2] must be an array of objects, each with a `key`, `value`, and `source`. For custom OpenLineage jobs, `source` must be exactly `USER`. If the tags facet is sent as a single object instead of an array of objects, or with a missing or different source, the tags are ignored.
+**Note**: The `tags` field in the [`tags` facet][2] must be an array of objects. Each tag object must include a `key`, `value`, and `source`.
+
+To make custom OpenLineage tags available in Data Job Monitors, set `source` to exactly `USER`. Tags with a missing or different `source` are not available in Data Job Monitors as custom tags.
 
 Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 
-- **Job facet tags**: Become individual span tags you can search and facet on, in addition to being available for monitor scoping. Use job facet tags for properties that stay stable across runs, such as `team` or `owner`.
-- **Run facet tags**: Available for monitor scoping, but aren't promoted to individual span tags. Use run facet tags for properties that can vary between runs.
+- **Job facet tags**: Added as individual tags, so you can search and filter by them on the Jobs Overview page and in Trace Explorer. When `source` is `USER`, they are also available in Data Job Monitors. Use job facet tags for stable job properties, such as `team` or `owner`.
+- **Run facet tags**: Available in Data Job Monitors when `source` is `USER`, but they aren't added as individual tags for searching and filtering on the Jobs Overview page or in Trace Explorer. Use run facet tags for values that can vary between runs.
 
 ## Further reading
 
