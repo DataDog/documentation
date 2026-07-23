@@ -100,7 +100,7 @@ Go services get Code Origin data via [Source Code Integration](#code-origin-cove
 
 | Requirement | Frameworks |
 |---|---|
-| [Source Code Integration][7] enabled | Custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers (sarama), OpenTelemetry, OpenTracing |
+| [Source Code Integration][7] enabled | custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers (sarama), OpenTelemetry, OpenTracing |
 
 {{% /tab %}}
 
