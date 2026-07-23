@@ -43,7 +43,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 - [Source Code Integration][7] is enabled.
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
-Source Code Integration alone already gives you some Code Origin coverage automatically, even if your service doesn't meet the compatibility requirements below — see [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
+Source Code Integration alone gives you some Code Origin coverage automatically, even if your service doesn't meet the compatibility requirements below. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
 
 ### Compatibility requirements
 
@@ -156,7 +156,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### Code Origin section is missing
 
 - Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
-- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you may still get some Code Origin data automatically — see [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration).
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you might still get some Code Origin data automatically. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
@@ -169,7 +169,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ## Code Origin coverage via Source Code Integration
 
-[Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is already required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some languages and frameworks, without meeting the other requirements.
+[Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some languages and frameworks, without meeting the other requirements.
 
 To get full tracer-instrumented coverage for the languages and frameworks listed in [compatibility requirements](#compatibility-requirements), also [enable Code Origin](#enable-code-origin) in your SDK. Data from both methods appears in the same Code Origin section of the Trace Explorer and powers the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows.
 
