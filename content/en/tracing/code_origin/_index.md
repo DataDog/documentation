@@ -43,7 +43,9 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 - [Source Code Integration][7] is enabled.
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
-If your Source Code Integration is set up, some Code Origin details can be inferred automatically, even if your service doesn't meet the compatibility requirements below. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
+If Source Code Integration is set up, Datadog can infer some Code Origin details automatically, even for services that don't meet the compatibility requirements below. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
+
+Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
 
 ### Compatibility requirements
 
@@ -96,7 +98,7 @@ If your Source Code Integration is set up, some Code Origin details can be infer
 
 {{% tab "Go" %}}
 
-Go services get Code Origin data via [Source Code Integration](#code-origin-coverage-via-source-code-integration) rather than the SDK flag.
+Go services get Code Origin data through [Source Code Integration](#code-origin-coverage-through-source-code-integration) rather than the SDK flag.
 
 | Requirement | Frameworks |
 |---|---|
@@ -156,7 +158,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### Code Origin section is missing
 
 - Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
-- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you might still get some Code Origin data automatically if the source code repository is linked in Datadog. See [Code Origin coverage via Source Code Integration](#code-origin-coverage-via-source-code-integration).
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you might still get some Code Origin data automatically if the source code repository is linked in Datadog. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
@@ -167,7 +169,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 - For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the [`--enable-source-maps`][10] flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
 - Code Origin is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
 
-## Code Origin coverage via Source Code Integration
+## Code Origin coverage through Source Code Integration
 
 [Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) is required as a [prerequisite](#prerequisites). On its own, it uses static analysis of your repository to automatically determine code locations for some languages and frameworks, without meeting the other requirements.
 
