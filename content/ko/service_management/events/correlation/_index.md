@@ -6,7 +6,7 @@ algolia:
   - 상관관계 패턴
 disable_toc: false
 further_reading:
-- link: service_management/events/
+- link: events/
   tag: 설명서
   text: 이벤트 관리
 - link: service_management/case_management/
@@ -22,9 +22,9 @@ title: 상관관계
 * 단일 문제에 대해 해당 팀 전부의 협업 가능
 
 {{< whatsnext desc="Get Started:">}}
-    {{< nextlink href="/service_management/events/correlation/configuration" >}}<u>상관관계</u> - 두 가지 서로 다른 상관관계 유형으로 시작해 보세요.{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/triage_and_notify/" >}}<u>우선순위 및 알림</u> - 생성된 상관관계에 대한 티켓을 확인하고, 우선순위를 지정하고, 일림을 받거나 이를 수신하세요.{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/analytics/" >}}<u>분석</u> - 서비스별 개수, 할당된 사례 수 등 상관관계에 대한 메트릭을 분석하고 조사하세요.{{< /nextlink >}}
+    {{< nextlink href="/events/correlation/configuration" >}}<u>상관관계</u> - 두 가지 서로 다른 상관관계 유형으로 시작해 보세요.{{< /nextlink >}}
+    {{< nextlink href="/events/correlation/triage_and_notify/" >}}<u>우선순위 및 알림</u> - 생성된 상관관계에 대한 티켓을 확인하고, 우선순위를 지정하고, 일림을 받거나 이를 수신하세요.{{< /nextlink >}}
+    {{< nextlink href="/events/correlation/analytics/" >}}<u>분석</u> - 서비스별 개수, 할당된 사례 수 등 상관관계에 대한 메트릭을 분석하고 조사하세요.{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## 참고 자료

@@ -1,9 +1,10 @@
 ---
+id: multi_alert
 core_product:
 - alertas
 related_terms:
-- alerta simple
-- tipo de alerta
+- simple_alert
+- alerting_type
 title: alerta múltiple
 ---
 Una alerta múltiple aplica la alerta a cada fuente según el parámetro de grupo del monitor. Se envía una notificación de alerta para cada grupo que cumpla las condiciones establecidas.

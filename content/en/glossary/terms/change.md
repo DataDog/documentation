@@ -1,4 +1,5 @@
 ---
+id: change
 title: change
 core_product:
   - dashboards

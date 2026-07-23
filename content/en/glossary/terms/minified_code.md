@@ -1,4 +1,5 @@
 ---
+id: minified_code
 title: minified code
 core_product:
   - apm

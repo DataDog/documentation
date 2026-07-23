@@ -6,7 +6,7 @@ further_reading:
 - link: /logs/guide/reduce_data_transfer_fees
   tag: Guía
   text: Enviar logs a Datadog mientras se reducen los costes de transferencia de datos
-site_support_id: amazon_event_bridge
+site_support_id: amazon-event-bridge
 title: Envío de eventos y logs a Datadog con destinos de API de Amazon EventBridge
 ---
 

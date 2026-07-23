@@ -1,4 +1,5 @@
 ---
+id: test_run
 core_product:
 - 신서틱 모니터링
 - ci-cd

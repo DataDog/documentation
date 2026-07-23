@@ -139,19 +139,29 @@ The [Kubernetes Explorer][3] automatically collects Custom Resource Definitions 
 
 When the following CRDs are present in your cluster, the Agent automatically collects their Custom Resources (CRs). If a CRD you use is **not** listed here—or your Agent version is older—follow the **manual configuration** steps below.
 
-| CRD group          | CRD kind             | CRD versions | Minimal Agent version |
-| ------------------ | -------------------- | ------------ | --------------------- |
-| datadoghq.com      | datadogslo           | v1alpha1     | 7.71.0                |
-| datadoghq.com      | datadogdashboard     | v1alpha1     | 7.71.0                |
-| datadoghq.com      | datadogagentprofile  | v1alpha1     | 7.71.0                |
-| datadoghq.com      | datadogmonitor       | v1alpha1     | 7.71.0                |
-| datadoghq.com      | datadogmetric        | v1alpha1     | 7.71.0                |
-| datadoghq.com      | datadogpodautoscaler | v1alpha2     | 7.71.0                |
-| datadoghq.com      | datadogagent         | v2alpha1     | 7.71.0                |
-| argoproj.io        | rollout              | v1alpha1     | 7.71.0                |
-| karpenter.sh       | *                    | v1           | 7.71.0                |
-| karpenter.k8s.aws  | *                    | v1           | 7.71.0                |
-| azure.karpenter.sh | *                    | v1beta1      | 7.71.0                |
+| CRD group                   | CRD kind             | CRD versions | Minimal Agent version |
+| --------------------------- | -------------------- | ------------ | --------------------- |
+| argoproj.io                 | application          | v1alpha1     | 7.71.0                |
+| argoproj.io                 | applicationset       | v1alpha1     | 7.71.0                |
+| argoproj.io                 | rollout              | v1alpha1     | 7.71.0                |
+| azure.karpenter.sh          | *                    | v1beta1      | 7.71.0                |
+| datadoghq.com               | datadogagent         | v2alpha1     | 7.71.0                |
+| datadoghq.com               | datadogagentprofile  | v1alpha1     | 7.71.0                |
+| datadoghq.com               | datadogdashboard     | v1alpha1     | 7.71.0                |
+| datadoghq.com               | datadogmetric        | v1alpha1     | 7.71.0                |
+| datadoghq.com               | datadogmonitor       | v1alpha1     | 7.71.0                |
+| datadoghq.com               | datadogpodautoscaler | v1alpha2     | 7.71.0                |
+| datadoghq.com               | datadogslo           | v1alpha1     | 7.71.0                |
+| eks.amazonaws.com           | nodeclass            | v1, v1beta1  | 7.77.0                |
+| karpenter.k8s.aws           | *                    | v1           | 7.71.0                |
+| karpenter.sh                | *                    | v1           | 7.71.0                |
+| kustomize.toolkit.fluxcd.io | kustomization        | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | bucket               | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | externalartifact     | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | gitrepository        | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | helmchart            | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | helmrepository       | v1           | 7.76.0                |
+| source.toolkit.fluxcd.io    | ocirepository        | v1           | 7.76.0                |
 
 
 #### Manual Configuration

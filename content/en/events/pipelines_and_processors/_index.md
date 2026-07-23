@@ -34,10 +34,10 @@ Pipelines and processors can be applied to all events and can be configured in t
 Create an Pipeline to filter to the events that you are interested in, for example, a source or a tag.
 
 1. Navigate to [Event Management Pipelines][1] in Datadog.
-1. Click **Add a Pipeline**.
+1. Click {{< ui >}}Add a Pipeline{{< /ui >}}.
 1. Choose a filter from the dropdown menu or create your own filter query in the [Event Management Explorer][2] by selecting the `</>` icon. Use the filter to apply pipeline processors to specific events. **Note**: The pipeline filtering is applied before any of the pipeline's processors. You cannot filter on an attribute that is extracted in the pipeline itself.
 1. Name the pipeline.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ## Add a processor
 
@@ -53,6 +53,16 @@ You can add processors after you create a pipeline. The processors available are
 - [Service Remapper][10]
 - [Status Remapper][11]
 - [String Builder Processor][12]
+
+
+## Pipeline permissions
+
+Access to Event Management Pipelines is controlled by two permissions:
+
+- **`events_write_pipelines`**: Allows you to create, edit, and delete pipelines, including modifying pipeline attributes such as filter queries and pipeline ordering.
+- **`events_write_processors`**: Allows you to create, edit, and delete processors within a pipeline.
+
+Administrators can assign these permissions to roles using [Role Based Access Control][13] to control who can modify pipeline and processor configurations.
 
 
 ## Further reading
@@ -71,3 +81,4 @@ You can add processors after you create a pipeline. The processors available are
 [10]: /events/pipelines_and_processors/service_remapper
 [11]: /events/pipelines_and_processors/status_remapper
 [12]: /events/pipelines_and_processors/string_builder_processor
+[13]: /account_management/rbac/permissions/

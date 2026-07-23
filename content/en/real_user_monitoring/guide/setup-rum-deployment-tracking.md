@@ -82,7 +82,7 @@ The version tag is captured automatically from the application's `info.plist`.
 
 ### Using version tags on the Application Overview page
 
-An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
+An application configured with version tags has a {{< ui >}}Deployment Tracking{{< /ui >}} section on the Application Overview page. The {{< ui >}}Deployment Tracking{{< /ui >}} section shows all versions of the application and services that were active during the selected time interval.
 
 This enables you to roll back release candidates as soon as you notice an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
@@ -105,15 +105,15 @@ These widgets can be exported to dashboards and monitors.
 
 ### Deployment Comparison
 
-Click on any version row in the **List of Versions*** table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
+Click on any version row in the {{< ui >}}List of Versions{{< /ui >}}* table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
 
-Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Core Web Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
+Similar to the graphs on the {{< ui >}}Application Overview{{< /ui >}} page, the {{< ui >}}User Sessions{{< /ui >}}, {{< ui >}}Core Web Vitals{{< /ui >}}, and {{< ui >}}Errors{{< /ui >}} graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
 As you are monitoring your release, this helps you to compare the performance of code deployments against existing live code to verify that new code is performing properly, and that no new errors have surfaced in between versions.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison.png" alt="Browser Deployment Tracking Comparison" style="width:75%;">}}
 
-The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
+The {{< ui >}}Issues{{< /ui >}} tab lists differences in errors detected for each of the two versions, highlighting:
 - Error Count by Version
 - % of Views with Errors by Version
 - Error Tracking issues
@@ -121,7 +121,7 @@ The **Issues** tab lists differences in errors detected for each of the two vers
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-comparison-error.png" alt="Browser Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM deployment tracking powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the {{< ui >}}Deployment Version Tracking{{< /ui >}} powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/browser-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 
@@ -130,7 +130,7 @@ You can add deployment tracking for your RUM services to dashboards using the po
 
 ### Using version tags on the Application Overview page
 
-An application configured with version tags has a **Deployment Tracking** section on the Application Overview page. The **Deployment Tracking** section shows all versions of the application and services that were active during the selected time interval.
+An application configured with version tags has a {{< ui >}}Deployment Tracking{{< /ui >}} section on the Application Overview page. The {{< ui >}}Deployment Tracking{{< /ui >}} section shows all versions of the application and services that were active during the selected time interval.
 
 This enables you to quickly roll back release candidates as soon as you spot an issue so you can avoid negative user experiences. These out of the box graphs are aggregated across versions, making it easier to identify problems in your application before they turn into serious issues.
 
@@ -152,15 +152,15 @@ These widgets can be exported to dashboards and monitors.
 
 ### Deployment comparison
 
-Click on any version row in the **List of Versions** table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
+Click on any version row in the {{< ui >}}List of Versions{{< /ui >}} table to open a version comparison page, allowing you to compare two versions of the same service. By default, the selected version is compared to all previous versions. You can change the selection to compare any two versions within the past 30 days.
 
-Similar to the graphs on the **Application Overview** page, the **User Sessions**, **Mobile Vitals**, and **Errors** graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
+Similar to the graphs on the {{< ui >}}Application Overview{{< /ui >}} page, the {{< ui >}}User Sessions{{< /ui >}}, {{< ui >}}Mobile Vitals{{< /ui >}}, and {{< ui >}}Errors{{< /ui >}} graphs show an overview of a deployment rollout or spikes in error rates. On this page, the graphs highlight the selected versions for comparison and display all other versions in gray for additional context.
 
 As you are monitoring your release, this makes it easy for you to compare the performance of code deployments against existing live code to verify that new code is performing properly and that no new errors have surfaced in between versions.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison.png" alt="Mobile Deployment Tracking Comparison" style="width:75%;">}}
 
-The **Issues** tab lists differences in errors detected for each of the two versions, highlighting:
+The {{< ui >}}Issues{{< /ui >}} tab lists differences in errors detected for each of the two versions, highlighting:
 - Error Count by Version
 - % of Views with Errors by Version
 - Error Tracking issues
@@ -168,7 +168,7 @@ The **Issues** tab lists differences in errors detected for each of the two vers
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-comparison-error.png" alt="Mobile Deployment Tracking Comparison Errors" style="width:75%;">}}
 
 ### Explore the RUM Deployment Tracking Powerpacks
-You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the "Deployment Version Tracking" powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
+You can add deployment tracking for your RUM services to dashboards using the powerpacks menu on a dashboard and searching for the {{< ui >}}Deployment Version Tracking{{< /ui >}} powerpack. You can then iterate and add any other widgets to your dashboards to help your teams release new features safely.
 
 {{< img src="real_user_monitoring/guide/setup-rum-deployment-tracking/mobile-deployment-tracking-powerpack.png" alt="Browser Deployment Tracking Powerpack" style="width:75%;">}}
 

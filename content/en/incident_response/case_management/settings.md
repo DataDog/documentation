@@ -31,7 +31,7 @@ To reduce noise, configure cases to automatically close after 7, 14, 30, 90, or 
 
 ## Set up integrations
 
-Case Management offers a range of native and third-party integrations, so you can incorporate Datadog solutions into your existing workflows and processes. With the Jira and ServiceNow integrations, you can solve the case with full-stack telemetry in Datadog, while maintaining a record of the investigation in those third-party systems.
+Case Management offers a range of native and third-party integrations, so you can incorporate Datadog solutions into your existing workflows and processes. With the Jira, ServiceNow, and Linear integrations, you can solve the case with full-stack telemetry in Datadog, while maintaining a record of the investigation in those third-party systems.
 
 ### Monitors
 
@@ -53,5 +53,5 @@ Add custom case types and attributes to projects so that you can tailor your cas
 
 [1]: /account_management/rbac/granular_access
 [2]: https://app.datadoghq.com/cases/settings
-[3]: /incident_response/case_management/create_notifications_and_third_party_tickets
+[3]: /incident_response/case_management/notifications_integrations
 [4]: /incident_response/case_management/customization

@@ -25,7 +25,7 @@ Remote configuration allows you to dynamically set ingestion [sampling rates by 
 
 ### Tracing library version
 
-Find below the minimum tracing library version required for the feature:
+Find below the minimum SDK version required for the feature:
 
 Language  | Minimum version required
 ----------|--------------------------
@@ -47,20 +47,20 @@ To see configured sampling rates by resource, navigate to the Ingestion controls
 - The `Ingested bytes` column surfaces the ingested bytes from spans of the service and resource, while the `Downstream bytes` column surfaces the ingested bytes from spans where the sampling decision is made starting from that service and resource, including bytes from downstream services in the call chain.
 - The `Configuration` column surfaces where the resource sampling rate is being applied from: 
   - `Automatic` if the [default head-based sampling mechanism][8] from the Agent applies.
-  - `Local Configured` if a [sampling rule][7] was set locally in the tracing library.
+  - `Local Configured` if a [sampling rule][7] was set locally in the SDK.
   - `Remote Configured` if a remote sampling rule was set from the Datadog UI. To learn how to configure sampling rules from the Ingestion Control page, read the section on [remotely configuring sampling rules](#remotely-configure-sampling-rules-for-the-service).
 
 ## Remotely configure sampling rules for the service
 
 To configure sampling rates for the service by resource name: 
-1. Click **Manage Ingestion rate**. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
+1. Click {{< ui >}}Manage Ingestion rate{{< /ui >}}. If the remote configuration option is disabled, make sure that the listed [requirements](#compatibility-requirements) are all met.
    {{< img src="/tracing/trace_indexing_and_ingestion/sampling_configuration_modal.png" alt="Configuration Modal" style="width:100%;">}}
-1. Click **Add new rule** to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
-1. Click **Apply** to save the configuration.
+1. Click {{< ui >}}Add new rule{{< /ui >}} to set sampling rates for some resources. Sampling rules use glob pattern matching, so you can use wildcards (`*`) to match against multiple resources at the same time.
+1. Click {{< ui >}}Apply{{< /ui >}} to save the configuration.
 
 The configuration should take effect in less than a minute. You can observe the configuration changes from the [Live Search Explorer][9].
 
-From the **Service Ingestion Summary**, resources for which the sampling rate are remotely applied should show as `Remote Configured` in the **Configuration** column.
+From the {{< ui >}}Service Ingestion Summary{{< /ui >}}, resources for which the sampling rate are remotely applied should show as `Remote Configured` in the {{< ui >}}Configuration{{< /ui >}} column.
 
 
 

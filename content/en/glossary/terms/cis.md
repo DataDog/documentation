@@ -1,4 +1,5 @@
 ---
+id: cis
 title: Center for Internet Security (CIS)
 core_product:
   - security

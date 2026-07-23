@@ -1,0 +1,127 @@
+---
+title: Summary Page
+further_reading:
+- link: "/network_monitoring/devices/"
+  tag: "Documentation"
+  text: "Network Device Monitoring"
+- link: "/network_monitoring/devices/topology"
+  tag: "Documentation"
+  text: "Device Maps"
+- link: "/network_monitoring/devices/config_management"
+  tag: "Documentation"
+  text: "Configuration Management"
+---
+
+{{< callout url="https://www.datadoghq.com/product-preview/network-device-summary-page/" header="Join the Preview!">}}
+The NDM Summary Page is in Preview.
+{{< /callout >}}
+
+## Overview
+
+The Network Device Monitoring (NDM) **Summary Page** gives network engineers a single view of device and interface health, active issues, and recent configuration changes. Use it as a starting point for assessing your network's state and investigating problems.
+
+**Note**: To use the Summary Page, [Network Device Monitoring][1] must be configured and collecting metrics from at least one SNMP-monitored device. For setup instructions, see [Setup][2].
+
+{{< img src="network_device_monitoring/summary/summary_page.png" alt="The NDM Summary Page, showing network health, interface and device health, traffic, and recent changes." style="width:100%;" >}}
+
+## Using the Summary Page
+
+The Summary Page is organized into sections that each cover a different aspect of your network's state and activity. Three of those sections (**Network health**, **Interface health**, and **Device health**) also report a health state to summarize what they're tracking:
+
+| State | Meaning |
+|-------|---------|
+| Good | All sampled metrics are within healthy thresholds. |
+| Degraded | Some metrics have crossed warning thresholds. |
+| Poor | Critical thresholds have been crossed on multiple devices or interfaces. |
+| Unknown | Not enough data is available to assess health. |
+
+To customize your view, use the filter bar to scope the page by device tag (for example, `device_namespace`, `device_vendor`, `device_type`, or `geolocation`). The default time range is {{< ui >}}Past 2 Hours{{< /ui >}}.
+
+### Network health
+
+The {{< ui >}}Network health{{< /ui >}} section summarizes your overall network state.
+
+{{< img src="network_device_monitoring/summary/network_health.png" alt="The Network health section showing a Bits AI summary on the left and a topology view with health-coded nodes on the right." style="width:100%;" >}}
+
+A Bits AI summary explains the current state of your network. It highlights affected devices, interfaces, and any recent configuration changes that may correlate with the observed behavior. Click {{< ui >}}Chat with Bits Assistant{{< /ui >}} to ask follow-up questions.
+
+Below the summary, a status panel shows the total device count broken down by status, the number of active monitor alerts and warnings, and the number of active issues. Click {{< ui >}}View Health{{< /ui >}} to open the [Device Health][5] view.
+
+### Interface health
+
+The {{< ui >}}Interface health{{< /ui >}} section ranks the top interfaces operating outside healthy thresholds. For each interface, the page reports error rate, discard rate, and inbound and outbound bandwidth utilization as a percentage of the configured interface speed.
+
+{{< img src="network_device_monitoring/summary/interface-performance.png" alt="The Interface health section showing a Bits AI summary, a table of top interfaces with error, discard, and bandwidth columns, and aggregate health cards for bandwidth utilization, errors, and discards." style="width:100%;" >}}
+
+A Bits AI summary highlights patterns across the affected interfaces, such as multiple interfaces saturating at the same site or correlated error spikes after a configuration change.
+
+Three cards below the list show aggregate health for the fleet: [{{< ui >}}Bandwidth utilization{{< /ui >}}][6], [{{< ui >}}Errors{{< /ui >}}][7], and [{{< ui >}}Discards{{< /ui >}}][8]. Click a card to see the full list of affected interfaces with average, minimum, and maximum values. The Errors and Discards detail views also include an {{< ui >}}Ask Bits{{< /ui >}} button for AI-assisted investigation.
+
+{{< img src="network_device_monitoring/summary/errors-detail.png" alt="The Errors detail view showing inbound and outbound error rate charts, a Bits AI summary, and a table of interfaces with error rate and packet counts." style="width:100%;" >}}
+
+Click any interface to open the device side panel, which includes details such as interface status, metrics, configuration, and recent events. From the side panel, click {{< ui >}}Open Device Page{{< /ui >}} in the top-right corner to open the device page, where you can investigate the device in more depth.
+
+{{< img src="network_device_monitoring/summary/interface-side-panel.png" alt="The device side panel open on the Interfaces tab, showing interface status, bandwidth, and monitor data." style="width:100%;" >}}
+
+**Interface health thresholds**
+
+The following thresholds determine an interface's health state:
+
+| Signal | Warn | Critical |
+|--------|------|----------|
+| Bandwidth In/Out | 80% | 90% |
+| Errors In/Out | 0.10% | 5% |
+| Discards In/Out | 0.10% | 5% |
+
+### Device health
+
+The {{< ui >}}Device health{{< /ui >}} section ranks the top devices operating outside healthy thresholds. For each device, the page reports CPU, memory, and fan health, along with any configuration changes recorded in the selected time range. By default, devices are sorted by {{< ui >}}CPU{{< /ui >}}. Sort by {{< ui >}}Memory{{< /ui >}} to surface devices under memory pressure.
+
+{{< img src="network_device_monitoring/summary/device-perf.png" alt="The Device health section showing a Bits AI summary, a table of top devices with CPU and memory columns, and aggregate health cards at the bottom." style="width:100%;" >}}
+
+A Bits AI summary explains the current device health state and points to recent changes or anomalies that may have contributed.
+
+Two cards below the list show aggregate health: [{{< ui >}}CPU{{< /ui >}}][9] and [{{< ui >}}Memory{{< /ui >}}][10]. Click a card to see the full list of affected devices with minimum, maximum, and past 24-hour trend data.
+
+Click any device to open the device side panel, which includes details such as device status, metrics, configuration, and recent events. From the side panel, click {{< ui >}}Open Device Page{{< /ui >}} in the top-right corner to investigate the device in more depth.
+
+{{< img src="network_device_monitoring/summary/device-side-panel.png" alt="The device side panel open on the Device Summary tab, showing triggered monitors, device tags, and interface status." style="width:100%;" >}}
+
+**Device health thresholds**
+
+The following thresholds determine a device's health state:
+
+| Signal | Warn | Critical |
+|--------|------|----------|
+| CPU | 80% | 90% |
+| Memory | 85% | 95% |
+
+### Traffic
+
+The {{< ui >}}Traffic{{< /ui >}} section uses [NetFlow][3] data to visualize traffic volume between sources and destinations as a Sankey diagram, scoped to your current filter and time range. Click {{< ui >}}View NetFlow{{< /ui >}} to explore flow data in detail.
+
+{{< img src="network_device_monitoring/summary/traffic-panel.png" alt="The Traffic section showing a Sankey diagram of the top 25 flows by volume, with source IPs, interface names, device names, and destination IPs." style="width:100%;" >}}
+
+### Changes
+
+The {{< ui >}}Changes{{< /ui >}} section lists recent network device configuration changes from [Configuration Management][4]. Each entry shows the affected device, a summary of what changed, and a timestamp.
+
+{{< img src="network_device_monitoring/summary/changes-panel.png" alt="The Changes section listing recent configuration changes per device with a summary and timestamp for each." style="width:100%;" >}}
+
+Click [{{< ui >}}View all changes{{< /ui >}}][11] to open the full Changes view. Filters and the time range are shared between the two views. Click any row to open the device side panel with details about the change.
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /network_monitoring/devices/
+[2]: /network_monitoring/devices/setup
+[3]: /network_monitoring/netflow/
+[4]: /network_monitoring/devices/config_management
+[5]: /network_monitoring/devices/device_health
+[6]: https://app.datadoghq.com/devices/summary/interface-bandwidth
+[7]: https://app.datadoghq.com/devices/summary/interface-errors
+[8]: https://app.datadoghq.com/devices/summary/interface-discards
+[9]: https://app.datadoghq.com/devices/summary/device-cpu
+[10]: https://app.datadoghq.com/devices/summary/device-memory
+[11]: https://app.datadoghq.com/devices/summary/changes

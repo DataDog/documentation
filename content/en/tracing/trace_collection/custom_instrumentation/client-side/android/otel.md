@@ -38,7 +38,7 @@ dependencies {
 }
 ```
 
-**Note**:  If you are targeting Android API level lower than 24, enable desugaring by adding the following lines to your `build.gradle` file:
+**Note**: If you are targeting Android API level lower than 24, enable desugaring by adding the following lines to your `build.gradle` file:
 
 ```groovy
 android {
@@ -239,6 +239,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.US2_FED)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.US2_FED)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    {{< site-region region="ap1" >}}
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -313,6 +350,43 @@ android {
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="uk1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+        override fun onCreate() {
+            super.onCreate()
+            val configuration = Configuration.Builder(
+                  clientToken = <CLIENT_TOKEN>,
+                  env = <ENV_NAME>,
+                  variant = <APP_VARIANT_NAME>
+                )
+                .useSite(DatadogSite.UK1)
+                .build()
+            Datadog.initialize(this, configuration, trackingConsent)
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+        @Override
+        public void onCreate() {
+            super.onCreate();
+            Configuration configuration =
+                    new Configuration.Builder(<CLIENT_TOKEN>, <ENV_NAME>, <APP_VARIANT_NAME>)
+                            .useSite(DatadogSite.UK1)
+                            .build();
+            Datadog.initialize(this, configuration, trackingConsent);
+        }
+    }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be GDPR compliant, the SDK requires the tracking consent value at initialization.
    The tracking consent can be one of the following values [see Tracking Consent][6]:
    * `TrackingConsent.PENDING`: The SDK starts collecting and batching the data but does not send it to the data
@@ -356,7 +430,7 @@ Trace.enable(traceConfig);
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Datadog tracer implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
+4. Datadog SDK implements the [OpenTelemetry standard][18]. Create `OtelTracerProvider` and register `OpenTelemetrySdk` in `GlobalOpenTelemetry` in your `onCreate()` method:
 
 {{< tabs >}}
 {{% tab "Kotlin" %}}

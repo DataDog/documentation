@@ -1,9 +1,10 @@
 ---
+id: distribution
 core_product:
 - métricas
 related_terms:
-- intervalo de descarga
-- mapa de calor
+- flush_interval
+- heatmap
 title: distribución
 ---
 Una distribución es un tipo de métrica que agrega valores (como `count`, `min`, `max`, `sum`, `avg`, `p50`, `p75`, `p90`, `p95` y `p99`) enviados desde varios hosts durante un intervalo de descarga.

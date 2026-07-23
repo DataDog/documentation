@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET SDK** in your Dockerfile.
 
    {{< tabs >}}
    {{% tab "Standard Linux (glibc)" %}}

@@ -1,4 +1,5 @@
 ---
+id: sla
 title: Service Level Agreement (SLA)
 core_product:
   - slos

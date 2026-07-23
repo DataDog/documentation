@@ -11,8 +11,8 @@ Use the SES component to represent  transactional and marketing email services f
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
-- **Emails/month (K)**: Enter the number of email messages sent per month, in the thousands.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Emails/month (K){{< /ui >}}: Enter the number of email messages sent per month, in the thousands.
 
 ## API
 

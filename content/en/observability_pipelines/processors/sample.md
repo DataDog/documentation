@@ -18,9 +18,9 @@ The sampling only applies to logs that match your filter query and does not impa
 ## Setup
 
 To set up the sample processor:
-1. Define a **filter query**. Only logs that match the specified filter query are sampled at the specified retention rate below. The sampled logs and the logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
-1. Enter your desired sampling rate in the **Retain** field. For example, entering `2` means 2% of logs are retained out of all the logs that match the filter query.
-1. Optionally, enter a **Group By** field to create separate sampling groups for each unique value for that field. For example, `status:error` and `status:info` are two unique field values. Each bucket of events with the same field is sampled independently. Click Add Field if you want to add more fields to partition by. See the [group-by example](#group-by-example).
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are sampled at the specified retention rate below. The sampled logs and the logs that do not match the filter query are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. Enter your desired sampling rate in the {{< ui >}}Retain{{< /ui >}} field. For example, entering `2` means 2% of logs are retained out of all the logs that match the filter query.
+1. Optionally, enter a {{< ui >}}Group By{{< /ui >}} field to create separate sampling groups for each unique value for that field. For example, `status:error` and `status:info` are two unique field values. Each bucket of events with the same field is sampled independently. Click {{< ui >}}Add Field{{< /ui >}} if you want to add more fields to partition by. See the [group-by example](#group-by-example).
 
 ### Group-by example
 

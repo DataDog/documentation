@@ -16,9 +16,9 @@ También puedes enviar tus propio eventos personalizados mediante la API de Data
 
 {{< whatsnext desc="Envía tus eventos personalizados a Datadog:">}}
     {{< nextlink href="/api/latest/events/#post-an-event" >}}API de Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/agent/" >}}Check del Agent personalizado{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/email/" >}}Correo electrónico{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/events/guides/agent/" >}}Check del Agent personalizado{{< /nextlink >}}
+    {{< nextlink href="/events/guides/email/" >}}Correo electrónico{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/events-from-sns-emails/" >}}Correos electrónicos de Amazon SNS{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/#configuration" >}}Destinos de la API de Amazon EventBridge{{< /nextlink >}}
 {{< /whatsnext >}}

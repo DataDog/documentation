@@ -3,12 +3,12 @@
 {{ $api_v1_data := partial "api/load-specs.html" (dict "version" "v1") }}
 {{ $api_v2_data := partial "api/load-specs.html" (dict "version" "v2") }}
 
-{{ range (where $hugo_context.Site.AllPages "Type" "=" "api") }}
+{{/* Kind filter excludes per-endpoint pages, which also have Type=api but are indexed via their tag's spec entries below. */}}
+{{ range (where (where $hugo_context.Site.AllPages "Type" "=" "api") "Kind" "!=" "page") }}
     {{ if and (in .RelPermalink "latest/") }}
         {{ $page := . }}
         {{ $title := .Title }}
         {{ $lang := .Language.Lang }}
-        {{ $hugo_context.Scratch.Add "duplicate_operation_ids" slice }}
 
         {{/* API spec is not translated, so we need english title to access API action data properly */}}
         {{ if ne $lang "en" }}
@@ -21,21 +21,22 @@
             {{ end }}
         {{ end }}
 
-        {{/* Get appropriate translate_actions data file by language */}}
+        {{/* Korean action translations use the legacy `kr` suffix; the site language is `ko`. */}}
+        {{ $translation_lang := cond (eq $lang "ko") "kr" $lang }}
         {{ $api_v1_translate_actions := index $hugo_context.Site.Data.api.v1 "translate_actions" }}
         {{ $api_v2_translate_actions := index $hugo_context.Site.Data.api.v2 "translate_actions" }}
 
         {{ if ne $lang "en" }}
-            {{ $api_v1_translate_actions = index $hugo_context.Site.Data.api.v1 (print "translate_actions." $lang) }}
-            {{ $api_v2_translate_actions = index $hugo_context.Site.Data.api.v2 (print "translate_actions." $lang) }}
+            {{ $api_v1_translate_actions = index $hugo_context.Site.Data.api.v1 (print "translate_actions." $translation_lang) }}
+            {{ $api_v2_translate_actions = index $hugo_context.Site.Data.api.v2 (print "translate_actions." $translation_lang) }}
         {{ end }}
 
         {{/* Get all v1 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v1_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $action "tags" }}
+                  {{ $tags = $action.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -47,9 +48,10 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v1"
-                            "endpoint_data" .
-                            "api_v1_translate_actions" $api_v1_translate_actions
-                            "api_v2_translate_actions" $api_v2_translate_actions
+                            "endpoint_data" $action
+                            "endpoint_path" $endpoint_path
+                            "method" $method
+                            "translate_actions" $api_v1_translate_actions
                         )
                     }}
 
@@ -60,10 +62,10 @@
 
         {{/* Get all v2 api actions for this page by matching title with spec data's tag property */}}
         {{ range $endpoint_path, $endpoint_data := $api_v2_data.paths }}
-            {{ range $endpoint_data }}
+            {{ range $method, $action := $endpoint_data }}
                 {{ $tags := slice }}
-                {{ if isset . "tags" }}
-                  {{ $tags = .tags }}
+                {{ if isset $action "tags" }}
+                  {{ $tags = $action.tags }}
                 {{ end }}
 
                 {{ if in $tags $title }}
@@ -75,9 +77,10 @@
                             "title" $title
                             "lang" $lang
                             "api_version" "v2"
-                            "endpoint_data" .
-                            "api_v1_translate_actions" $api_v1_translate_actions
-                            "api_v2_translate_actions" $api_v2_translate_actions
+                            "endpoint_data" $action
+                            "endpoint_path" $endpoint_path
+                            "method" $method
+                            "translate_actions" $api_v2_translate_actions
                         )
                     }}
 

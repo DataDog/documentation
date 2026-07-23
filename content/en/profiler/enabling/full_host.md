@@ -17,7 +17,7 @@ The Full-Host Profiler is an eBPF-based profiling solution built on OpenTelemetr
 
 The Full-Host Profiler is particularly valuable for:
 
-- Profiling open source software components that aren't instrumented with Datadog's tracing libraries.
+- Profiling open source software components that aren't instrumented with Datadog SDKs.
 - Analyzing performance across multi-language processes and runtimes.
 
 ## Requirements

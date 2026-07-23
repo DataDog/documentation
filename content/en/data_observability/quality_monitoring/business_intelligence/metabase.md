@@ -28,12 +28,12 @@ Follow [Metabase's API documentation][1] to generate an API key.
 
 1. Log into your Metabase cloud instance as an administrator.
 1. Click on the gear icon in the upper right corner.
-1. Select **Admin settings**.
-1. Go to the **Settings** tab.
-1. Click on the **Cloud** tab from the left menu.
-1. Click on **Go to the Metabase Store**.
+1. Select {{< ui >}}Admin settings{{< /ui >}}.
+1. Go to the {{< ui >}}Settings{{< /ui >}} tab.
+1. Click on the {{< ui >}}Cloud{{< /ui >}} tab from the left menu.
+1. Click on {{< ui >}}Go to the Metabase Store{{< /ui >}}.
 1. Log into your Metabase Store using Metabase credentials.
-1. Go to the **Instances** tab.
+1. Go to the {{< ui >}}Instances{{< /ui >}} tab.
 1. Click on the DNS alias section to get the DNS alias value.
 
 ### Get self-hosted instance domain (required for self-hosted instances only)
@@ -42,10 +42,10 @@ Follow [Metabase's API documentation][1] to generate an API key.
 
 1. Log in to your Metabase instance as an administrator.
 1. Click on the gear icon in the upper right corner.
-1. Select **Admin settings**.
-1. Go to the **Settings** tab.
-1. Click on the **General** tab from the left menu.
-1. Under **SITE URL**, copy the domain portion of the URL. For example, if the URL is `https://example.com`, copy `example.com`.
+1. Select {{< ui >}}Admin settings{{< /ui >}}.
+1. Go to the {{< ui >}}Settings{{< /ui >}} tab.
+1. Click on the {{< ui >}}General{{< /ui >}} tab from the left menu.
+1. Under {{< ui >}}SITE URL{{< /ui >}}, copy the domain portion of the URL. For example, if the URL is `https://example.com`, copy `example.com`.
 
 ### Add the Metabase integration
 
@@ -59,7 +59,7 @@ Follow [Metabase's API documentation][1] to generate an API key.
    | Self-hosted instance domain | The domain of your self-hosted Metabase instance (required for self-hosted instances only). Must be publicly accessible through HTTPS only (for example, `example.com`). |
    | Metabase API key | The API key used to authenticate the API requests. |
 
-2. After you've entered these credentials, click **Save**.
+2. After you've entered these credentials, click {{< ui >}}Save{{< /ui >}}.
 
 ## What's next
 

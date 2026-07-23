@@ -18,6 +18,7 @@ Use the different principals to control access patterns in your organization and
 | [Case Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Critical Assets][26]                            | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Cross Org Connections][20]                      | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -44,7 +45,7 @@ Use the different principals to control access patterns in your organization and
 
 ### Elevate access to individual resources
 
-A user with the `user_access_manage` permission can elevate their access to any individual resource that supports restrictions based on team, role, and user or service account. Resources with only role-based access restrictions are not supported. To get access, click the **Elevate Access** button in the granular access control modal.
+A user with the `user_access_manage` permission can elevate their access to any individual resource that supports restrictions based on team, role, and user or service account. Resources with only role-based access restrictions are not supported. To get access, click the {{< ui >}}Elevate Access{{< /ui >}} button in the granular access control modal.
 
 [1]: /account_management/teams/
 [2]: /dashboards/configure/#permissions
@@ -71,3 +72,4 @@ A user with the `user_access_manage` permission can elevate their access to any 
 [23]: /observability_pipelines/configuration/access_control/
 [24]: /logs/log_configuration/pipelines/#pipeline-permissions
 [25]: /getting_started/feature_flags/
+[26]: /security/cloud_siem/detect_and_monitor/critical_assets/#restrict-edit-permissions

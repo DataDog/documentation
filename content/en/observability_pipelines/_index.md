@@ -2,12 +2,6 @@
 title: Observability Pipelines
 disable_toc: false
 further_reading:
-- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
-  tag: "Blog"
-  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
-- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
-  tag: Blog
-  text: Manage metric volume and tags in your environment with Observability Pipelines
 - link: "/observability_pipelines/configuration/explore_templates/"
   tag: "documentation"
   text: "Set up pipelines"
@@ -55,20 +49,30 @@ further_reading:
   text: "Search your historical logs more efficiently with Datadog Archive Search"
 - link: "https://www.datadoghq.com/blog/introducing-datadog-cloudprem/"
   tag: "blog"
-  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog CloudPrem"
+  text: "Store and search logs at petabyte scale in your own infrastructure with Datadog BYOC Logs"
 - link: "https://www.datadoghq.com/blog/manage-high-volume-logs-with-observability-pipeline-packs/"
   tag: "blog"
   text: "Control logging costs on any SIEM or data lake using Packs with Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-otel-cost-control/"
   tag: "Blog"
   text: "Use OpenTelemetry with Observability Pipelines for vendor-neutral log collection and cost control"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
+  tag: Blog
+  text: Manage metric volume and tags in your environment with Observability Pipelines
+- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
+  tag: "Learning Center"
+  text: "Getting Started with Observability Pipelines"
+
 ---
 
 ## Overview
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
-Datadog Observability Pipelines allows you to collect and process logs and metrics ({{< tooltip glossary="preview" case="title" >}}) within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
+Datadog Observability Pipelines allows you to collect and process logs and metrics within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
 
 With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich data, filter out noisy events, and route data to destinations like Datadog, SIEM tools, or cloud storage.
 
@@ -126,9 +130,6 @@ Observability Pipelines includes prebuilt templates for common data routing and 
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
-
-<div class="alert alert-info">
-Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 | Template | Description |
 |----------|-------------|

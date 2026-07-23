@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "name": "Example-Scorecard",
+      "scorecard_name": "Observability Best Practices"
+    },
+    "type": "rule"
+  }
+}

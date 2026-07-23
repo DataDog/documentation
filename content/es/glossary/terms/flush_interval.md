@@ -1,9 +1,10 @@
 ---
+id: flush_interval
 core_product:
 - Datadog Agent
 - métricas
 related_terms:
-- desviación
+- standard_deviation
 title: intervalo de descarga
 ---
 El Datadog Agent no realiza una solicitud independiente a los servidores de Datadog por cada punto de datos que envíes. 

@@ -34,7 +34,7 @@ To see usage information for the monitor, use Audit Trail to search for all API 
 
    **Note**: You can also use the facet panel on the left side of the page to formulate the search query.
 3. Select the timeframe in the upper right side of the page to see the events for a specific time period.
-4. You can configure the **Group into fields** section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click **Top List** in the **Visualize as** section, you get a top list of users who accessed the monitor.
+4. You can configure the {{< ui >}}Group into fields{{< /ui >}} section and select different visualization tools to break down and analyze the data based on your use case. For example, if you set the `group by` field to `User Email` and click {{< ui >}}Top List{{< /ui >}} in the {{< ui >}}Visualize as{{< /ui >}} section, you get a top list of users who accessed the monitor.
 5. See [Create a dashboard or a graph][3] if you want to put this information into a dashboard or graph.
 
 ## View recent monitor configuration changes
@@ -42,7 +42,7 @@ To see usage information for the monitor, use Audit Trail to search for all API 
 You can use [event queries][8] in Audit Trail to see a list of monitors that have had recent changes to their configurations.
 
 1. Navigate to [Audit Trail][2].
-1. In the **Search for** field, paste a query to filter for the kind of changes you want to see. Here are some common examples:
+1. In the {{< ui >}}Search for{{< /ui >}} field, paste a query to filter for the kind of changes you want to see. Here are some common examples:
    
    | Audit event           | Query in audit explorer                                  |
    |-----------------------|----------------------------------------------------------|
@@ -51,10 +51,10 @@ You can use [event queries][8] in Audit Trail to see a list of monitors that hav
    | [Monitor deleted][6]  | `@evt.name:Monitor @asset.type:monitor @action:deleted`  |
    | [Monitor resolved][7] | `@evt.name:Monitor @asset.type:monitor @action:resolved` |
 
-1. Optionally, on the facet panel, use filters like **Asset ID** or **Asset Name** to narrow your results down to a specific monitor.
+1. Optionally, on the facet panel, use filters like {{< ui >}}Asset ID{{< /ui >}} or {{< ui >}}Asset Name{{< /ui >}} to narrow your results down to a specific monitor.
 1. For each event in the table, you can see the email address of the user who performed the last change, and a summary of what happened. 
 
-   To see additional information about a specific change, click the row in the table. Then, click the **Inspect Changes (Diff)** tab to see the changes that were made to the monitor's configuration:
+   To see additional information about a specific change, click the row in the table. Then, click the {{< ui >}}Inspect Changes (Diff){{< /ui >}} tab to see the changes that were made to the monitor's configuration:
 
    {{< img src="account_management/audit_logs/monitor_change_diff.png" alt="A text diff showing a `check_type: api` tag being added to the monitor" style="width:100%;" >}}
 

@@ -16,11 +16,11 @@ The SDK Configurations view shows the active configurations of SDKs per service.
 
 To view SDK configurations for a service:
 
-1. Navigate to [**APM** > **Services**][5].
-1. Open the **Service Page** for your service.
-1. Go to **Service Config** > **SDK & Agent Configurations** tab.
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Services{{< /ui >}}][5].
+1. Open the {{< ui >}}Service Page{{< /ui >}} for your service.
+1. Go to {{< ui >}}Service Config{{< /ui >}} > {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.
 
-The **SDK Configurations** section displays configurations for active instances of the service.
+The {{< ui >}}SDK Configurations{{< /ui >}} section displays configurations for active instances of the service.
 
 ## Configuration sources
 
@@ -28,12 +28,12 @@ The configuration source shows where a given value is configured:
 
 | Source | Description |
 |--------|-------------|
-| **Remote Configuration at Runtime** | Set through the Datadog UI using [Configuration at Runtime][1] |
-| **Code** | Set in application code |
-| **Remote Fleet Automation** | Applied remotely at the host level through [Fleet Automation][2] |
-| **Local environment variable** | Set through an environment variable (or system property) in the runtime environment |
-| **Local file** | Set in a local configuration file |
-| **Default** | Default value provided by the SDK |
+| {{< ui >}}Remote Configuration at Runtime{{< /ui >}} | Set through the Datadog UI using [Configuration at Runtime][1] |
+| {{< ui >}}Code{{< /ui >}} | Set in application code |
+| {{< ui >}}Remote Fleet Automation{{< /ui >}} | Applied remotely at the host level through [Fleet Automation][2] |
+| {{< ui >}}Local environment variable{{< /ui >}} | Set through an environment variable (or system property) in the runtime environment |
+| {{< ui >}}Local file{{< /ui >}} | Set in a local configuration file |
+| {{< ui >}}Default{{< /ui >}} | Default value provided by the SDK |
 
 ## Missing configuration data
 
@@ -45,7 +45,7 @@ Telemetry data is not available in the following situations:
 - The service name is manually set on spans (a [Service Override][4]).
 
 [1]: /tracing/trace_collection/runtime_config
-[2]: /agent/fleet_automation/remote_management
+[2]: /agent/fleet_automation/
 [3]: /agent/configuration/network/#destinations
 [4]: /tracing/guide/base_service/#service-overrides
 [5]: https://app.datadoghq.com/software

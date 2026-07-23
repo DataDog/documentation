@@ -25,4 +25,18 @@ cascade:
     lang: en
   aliases:
     - /api/screenboards/
+- _target:
+    path: /api/latest/scorecards
+    lang: en
+  aliases:
+    - /api/latest/service-scorecards
+- _target:
+    path: /api/latest/app-builder
+    lang: en
+  site_support_id: app_builder_override
+- _target:
+    path: /api/latest/app-builder/**
+    lang: en
+  site_support_id: app_builder_override
+
 ---

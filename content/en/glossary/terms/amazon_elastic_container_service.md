@@ -1,4 +1,5 @@
 ---
+id: amazon_elastic_container_service
 title: Amazon Elastic Container Service (ECS)
 core_product:
   - infrastructure monitoring

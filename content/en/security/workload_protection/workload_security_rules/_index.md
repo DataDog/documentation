@@ -51,8 +51,8 @@ Workload Protection uses the following pipeline when evaluating events:
 1. The Agent rules evaluate system activity on the Agent host.
 2. When activity matches an Agent rule expression, the Agent generates a detection event and passes it to the Datadog backend.
 3. The Datadog backend evaluates the detection event to see if it matches any threat detection rules that use the Agent rule that sent the event.
-4. If there is a match, a signal is generated and displayed in [Signals][8].
-5. Any [Notification Rules][10] that match the severity, detection rule type, tags, and attributes of the signal are triggered.
+4. If there is a match, a signal is generated and displayed in [{{< ui >}}Signals{{< /ui >}}][8].
+5. Any [{{< ui >}}Notification Rules{{< /ui >}}][10] that match the severity, detection rule type, tags, and attributes of the signal are triggered.
 
 The following diagram illustrates this pipeline:
 

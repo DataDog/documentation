@@ -1,4 +1,5 @@
 ---
+id: geomap
 title: geomap
 core_product:
   - dashboards

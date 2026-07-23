@@ -1,4 +1,5 @@
 ---
+id: archive
 title: archive
 core_product:
   - log management

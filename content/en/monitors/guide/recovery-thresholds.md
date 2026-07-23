@@ -34,7 +34,7 @@ Recovery thresholds reduce noise of a flapping monitor. This can increase confid
 
 ### Website UI
 
-Set the alert or warning recovery threshold when creating a monitor under **Set alert conditions** > **Advanced Options**.
+Set the alert or warning recovery threshold when creating a monitor under {{< ui >}}Set alert conditions{{< /ui >}} > {{< ui >}}Advanced Options{{< /ui >}}.
 
 ### API
 

@@ -1,4 +1,5 @@
 ---
+id: new
 title: new
 short_definition: NEW indicates a fully developed, production-ready product or feature that has been recently released
 ---

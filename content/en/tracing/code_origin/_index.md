@@ -50,7 +50,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% tab "Java" %}}
 
-| Tracing Library Version | Frameworks |
+| SDK Version | Frameworks |
 |---|---|
 | 1.47.0+ | Spring Boot/Data, gRPC servers, Micronaut 4, Kafka consumers |
 
@@ -60,7 +60,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% tab "Python" %}}
 
-| Tracing Library Version | Frameworks |
+| SDK Version | Frameworks |
 |---|---|
 | 2.15.0+ | Django, Flask, Starlette, and derivatives |
 
@@ -68,7 +68,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% tab "Node.js" %}}
 
-| Tracing Library Version | Frameworks |
+| SDK Version | Frameworks |
 |---|---|
 | 4.49.0+ | Fastify |
 | 5.54.0+ | Express |
@@ -79,7 +79,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% tab ".NET" %}}
 
-| Tracing Library Version | Frameworks |
+| SDK Version | Frameworks |
 |---|---|
 | 3.15.0+ | ASP.NET, ASP.NET Core |
 
@@ -87,7 +87,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 {{% tab "PHP" %}}
 
-| Tracing Library Version | Frameworks |
+| SDK Version | Frameworks |
 |---|---|
 | 1.11.0+ | All supported web frameworks |
 
@@ -144,7 +144,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 
 ### Code Origin section is missing
 
-- Verify Code Origin is [enabled](#enable-code-origin) in your tracing library configuration.
+- Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
 - Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 

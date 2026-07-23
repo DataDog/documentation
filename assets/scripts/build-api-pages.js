@@ -47,6 +47,15 @@ const updateMenu = (specData, specs, languages) => {
   languages.forEach((language) => {
     const currentMenuYaml = yaml.safeLoad(fs.readFileSync(`./config/_default/menus/api.${language}.yaml`, 'utf8'));
 
+  // Build a map of identifier → existing name for generated entries so we can preserve
+  // translated names (e.g. "Intégration AWS") when regenerating non-English menus.
+  const existingNames = {};
+  (currentMenuYaml['menu']['api'] || []).forEach((entry) => {
+    if (entry.generated && entry.identifier && entry.name) {
+      existingNames[entry.identifier] = entry.name;
+    }
+  });
+
   // filter out auto generated menu items so we just have hardcoded ones
   const newMenuArray = (currentMenuYaml['menu']['api'] || []).filter((entry => !entry.hasOwnProperty("generated")));
 
@@ -63,8 +72,8 @@ const updateMenu = (specData, specs, languages) => {
       } else {
         // doesn't exist lets add it
         newMenuArray.push({
-          name: tag.name,
-          url: (language === 'en' ? `/api/latest/${tagSlug}/` : `/${language}/api/latest/${tagSlug}/` ),
+          name: existingNames[tagSlug] || tag.name,
+          url: `/api/latest/${tagSlug}/`,
           identifier: tagSlug,
           generated: true
         });
@@ -98,8 +107,8 @@ const updateMenu = (specData, specs, languages) => {
             // instead of push we need to insert after last parent: tag.name
             const indx = newMenuArray.findIndex((i) => i.identifier === tagSlug);
             const item = {
-              name: action.summary,
-              url: `#` + actionSlug,
+              name: existingNames[itemIdentifier] || action.summary,
+              url: `/api/latest/${tagSlug}/${actionSlug}/`,
               identifier: itemIdentifier,
               parent: tagSlug,
               generated: true,
@@ -163,6 +172,68 @@ const createPages = (apiYaml, deref, apiVersion) => {
     console.log(`successfully wrote ./content/en/api/${apiVersion}/${newDirName}/_index.md`);
   });
 
+};
+
+
+/**
+ * Create per-endpoint leaf bundles under content/en/api/latest/{tag}/{endpoint}/index.md.
+ * Aggregates versions and operationIds for endpoints that exist in both v1 and v2
+ * (matched by summary slug), so a single page hosts the version tabs.
+ * @param {array} specData - array of parsed YAML spec objects (one per spec)
+ * @param {array} specs - array of spec file paths (parallel to specData)
+ */
+const createEndpointPages = (specData, specs) => {
+  const endpoints = buildEndpointsMap(specData, specs);
+  endpoints.forEach(writeEndpointPage);
+  console.log(`successfully wrote ${endpoints.size} per-endpoint pages under content/en/api/latest/`);
+};
+
+const getActionsForTag = (paths, tagName) =>
+  Object.keys(paths)
+    .filter((path) => isTagMatch(paths[path], tagName))
+    .flatMap((path) =>
+      Object.entries(paths[path])
+        .filter(([key]) => !key.startsWith("x-"))
+        .map(([, values]) => values)
+    );
+
+const buildEndpointsMap = (specData, specs) => {
+  const endpoints = new Map();
+  specData.forEach((apiYaml, index) => {
+    const apiVersion = specs[index].split('/')[3];
+    apiYaml.tags.forEach((tag) => {
+      const tagSlug = getTagSlug(tag.name);
+      getActionsForTag(apiYaml.paths, tag.name).forEach((action) => {
+        const endpointSlug = getTagSlug(action.summary);
+        const mapKey = `${tagSlug}/${endpointSlug}`;
+        if (endpoints.has(mapKey)) {
+          const entry = endpoints.get(mapKey);
+          if (!entry.versions.includes(apiVersion)) entry.versions.push(apiVersion);
+          if (!entry.operationids.includes(action.operationId)) entry.operationids.push(action.operationId);
+        } else {
+          endpoints.set(mapKey, {
+            tag: tag.name,
+            tagSlug,
+            endpointSlug,
+            title: action.summary,
+            versions: [apiVersion],
+            operationids: [action.operationId],
+          });
+        }
+      });
+    });
+  });
+  return endpoints;
+};
+
+const writeEndpointPage = (entry) => {
+  const dir = `./content/en/api/latest/${entry.tagSlug}/${entry.endpointSlug}`;
+  fs.mkdirSync(dir, { recursive: true });
+  const frontMatter = {
+    title: entry.title,
+  };
+  const yamlStr = `---\n${yaml.safeDump(frontMatter)}---\n`;
+  fs.writeFileSync(`${dir}/index.md`, yamlStr, 'utf8');
 };
 
 
@@ -767,6 +838,115 @@ const descColumn = (key, value) => {
   return `<div class="col-6 column">${descHtml}${def}</div>`.trim();
 };
 
+/**
+ * Shim for Map.groupBy(), which is only available in Node 21+ (this repo
+ * targets Node 20).
+ *
+ * @param {Iterable} items - items to group
+ * @param {function} keyFn - maps an item to its group key
+ * @returns {Map} map of key to array of items
+ */
+const groupBy = (items, keyFn) => {
+  const map = new Map();
+  items.forEach((item, i) => {
+    const key = keyFn(item, i);
+    const group = map.get(key);
+    if (group) {
+      group.push(item);
+    } else {
+      map.set(key, [item]);
+    }
+  });
+  return map;
+};
+
+/**
+ * Returns "<type=c>" if `item` is an object schema with a const `type` field
+ * @param {object} schema
+ * Returns `<discriminant=c>` when `item.properties[discriminant]` is a
+ * single-value string enum.
+ * @param {object} item - schema object
+ * @param {string} discriminant - property name to inspect
+ * @returns {string|undefined} formatted label, or undefined if not a const
+ */
+const getMaybeConstTypeName = (item, discriminant) => {
+  const type = item.properties?.[discriminant];
+  if (
+    type
+    && type.type === 'string'
+    && type.enum
+    && type.enum.length === 1
+  ) {
+    return `&lt;${discriminant}=${type.enum[0]}&gt;`;
+  }
+  return undefined;
+};
+
+/**
+ * Auto-detects the best discriminant property across a set of oneOf branches.
+ *
+ * A property is a candidate discriminant when every branch either omits it or
+ * defines it as a string enum.
+ *
+ * Preference order:
+ *  1. The first candidate that covers every branch (all-defined + unique).
+ *  2. Otherwise, the candidate covering the most branches, provided it covers
+ *     all-but-one branch or at least 75% of branches.
+ *
+ * @param {array} items - oneOf items
+ * @returns {string|undefined} the discriminant property name, or undefined
+ */
+const getBestDiscriminant = (items) => {
+  const candidates = Array.from(new Set(
+    items.flatMap((item) => Object.keys(item.properties ?? {}))
+  ));
+  const enumCandidates = candidates.filter((d) => items.some((item) => {
+    const prop = item.properties?.[d];
+    return prop && prop.type === 'string' && prop.enum?.length === 1;
+  }));
+  const onlyEnumCandidates = enumCandidates.filter((d) => !items.some((item) => {
+    const prop = item.properties?.[d];
+    return prop && (prop.type !== 'string' || !prop.enum);
+  }));
+
+  const countedCandidates = onlyEnumCandidates.map((d) => {
+    const byName = groupBy(items, (item) => getMaybeConstTypeName(item, d));
+    const nUnique = [...byName].reduce(
+      (acc, [value, arr]) => acc + ((value && arr.length === 1) ? 1 : 0),
+      0,
+    );
+    return { name: d, nUnique };
+  });
+  countedCandidates.sort((a, b) => b.nUnique - a.nUnique);
+
+  const bestCandidate = countedCandidates[0];
+  if (!bestCandidate) {
+    return undefined;
+  }
+
+  const { name, nUnique } = bestCandidate;
+  if (nUnique >= items.length - 1 || (nUnique / items.length) >= 0.75) {
+    return name;
+  }
+
+  return undefined;
+};
+
+/**
+ * @param {array} items - oneOf items
+ * @returns {object} object keyed by item name
+ */
+const getOneOfChildData = (items) => {
+  const discriminant = getBestDiscriminant(items);
+  const namedEntries = items.map((item) => [discriminant ? getMaybeConstTypeName(item, discriminant) : undefined, item]);
+  const byName = groupBy(namedEntries, ([name]) => name);
+  const entries = namedEntries.map(([name, item], i) =>
+    // if name is unique, use it; otherwise, use "Object 3"
+    [name && byName.get(name)?.length === 1 ? name : `Object ${i + 1}`, item]
+  );
+  return Object.fromEntries(entries);
+};
+
 
 /**
  * Takes a application/json schema for request or response and outputs a table
@@ -810,11 +990,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
             }
             // for items -> oneOf
             if (value.items.oneOf && value.items.oneOf instanceof Array && value.items.oneOf.length < oneOfLimit) {
-              childData = value.items.oneOf
-              .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.items.oneOf[indx]}
-              })
-              .reduce((obj, item) => ({...obj, ...item}), {});
+              childData = getOneOfChildData(value.items.oneOf);
             }
           } else if(typeof value.items === 'string') {
             if(value.items === '[Circular]') {
@@ -833,11 +1009,7 @@ const rowRecursive = (tableType, data, isNested, requiredFields=[], level = 0, p
         } else if (typeof value === 'object' && "oneOf" in value) {
           // for properties -> oneOf
           if(value.oneOf instanceof Array && value.oneOf.length < oneOfLimit) {
-            childData = value.oneOf
-              .map((obj, indx) => {
-                return {[`Option ${indx + 1}`]: value.oneOf[indx]}
-              })
-              .reduce((obj, item) => ({...obj, ...item}), {});
+            childData = getOneOfChildData(value.oneOf);
           }
         }
         // for widgets
@@ -1032,12 +1204,17 @@ const processSpecs = (specs) => {
           if(deref.components.schemas && deref.components.schemas.WidgetDefinition && deref.components.schemas.WidgetDefinition.oneOf) {
             const jsonData = {};
             const pageDir = `./content/en/api/${version}/dashboards/`;
-            deref.components.schemas.WidgetDefinition.oneOf.forEach((widget) => {
+            const addWidget = (widget) => {
+              if (widget.oneOf) {
+                widget.oneOf.forEach(addWidget);
+                return;
+              }
               const requestJson = filterExampleJson("request", widget);
               const requestCurlJson = filterExampleJson("curl", widget);
               const html = schemaTable("request", widget);
               jsonData[widget.properties.type.default] = {"json_curl": requestCurlJson, "json": requestJson, "html": html};
-            });
+            };
+            deref.components.schemas.WidgetDefinition.oneOf.forEach(addWidget);
             fs.writeFileSync(`${pageDir}widgets.json`, safeJsonStringify(jsonData, null, 2), 'utf-8');
           }
 
@@ -1050,6 +1227,7 @@ const processSpecs = (specs) => {
   // update menu with all specs
   const specData = specs.map((spec) => yaml.safeLoad(fs.readFileSync(spec, 'utf8')));
   updateMenu(specData, specs, supportedLangs);
+  createEndpointPages(specData, specs);
 };
 
 // Helper function to find spec files with fallback
@@ -1084,6 +1262,7 @@ const init = () => {
 
 module.exports = {
   init,
+  getBestDiscriminant,
   isTagMatch,
   isReadOnlyRow,
   descColumn,
@@ -1095,5 +1274,7 @@ module.exports = {
   getSchema,
   getTagSlug,
   outputExample,
-  getJsonWrapChars
+  getJsonWrapChars,
+  createEndpointPages,
+  updateMenu,
 };

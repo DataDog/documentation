@@ -1,9 +1,10 @@
 ---
+id: multi_alert
 core_product:
 - 알림
 related_terms:
-- 간단한 알림
-- 경고 유형
+- simple_alert
+- alerting_type
 title: 다중 알림
 ---
 다중 알림은 모니터링 그룹 파라미터에 따라 각 소스에 알림을 적용합니다. 설정한 조건을 충족하는 각 그룹에 대한 알림이 전송됩니다.

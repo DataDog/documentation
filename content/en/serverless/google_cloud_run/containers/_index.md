@@ -16,8 +16,42 @@ further_reading:
   - link: 'https://www.datadoghq.com/blog/instrument-cloud-run-with-datadog-sidecar/'
     tag: 'Blog'
     text: 'Instrument Google Cloud Run applications with the new Datadog Agent sidecar'
+  - link: "/mcp_server/tools/#serverless_onboarding"
+    tag: 'Documentation'
+    text: 'Datadog MCP Server: serverless_onboarding tool'
 ---
 
+## Set up with agentic onboarding
+
+Use agentic onboarding to set up monitoring for your Cloud Run containers with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+{{< tabs >}}
+{{% tab "AI Setup CLI" %}}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Cloud Run service:
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=gcp-cloud-run
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{{% /tab %}}
+{{% tab "MCP server" %}}
+
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Cloud Run containers with AI assistance. After you connect, try a prompt like:
+
+```
+Help me monitor my GCP Cloud Run services with Datadog using Terraform.
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Manual instrumentation
 To instrument your Google Cloud Run containers with Datadog, choose one of two options:
 
 {{% gcr-container-options %}}
@@ -25,7 +59,7 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 - [**In-Container**][1]: Wraps your application container with the Datadog Agent. Choose this option for a simpler setup, lower cost overhead, and direct log piping.
 - [**Sidecar**][2]: Deploys the Datadog Agent in a separate container alongside your app container. Choose this option if you have multiple containers in a single service, if you prefer strict isolation of the Datadog Agent, or if you have performance-sensitive workloads.
 
-## Comparison: In-Container versus sidecar instrumentation
+### Comparison: In-Container versus sidecar instrumentation
 
 | Aspect                        | In-Container                                               | Sidecar                                                                                                                                                      |
 |-------------------------------|----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -35,10 +69,10 @@ To instrument your Google Cloud Run containers with Datadog, choose one of two o
 | Logging                       | Direct stdout/stderr access.                             | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation             | In rare cases, Datadog Agent bugs can affect your app.   | Datadog Agent faults are isolated.                                                                                                                           |
 
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /serverless/google_cloud_run/containers/in_container
 [2]: /serverless/google_cloud_run/containers/sidecar
+[3]: /agentic_onboarding/setup

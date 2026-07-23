@@ -19,7 +19,7 @@ This page provides information to help you troubleshot issues with CI Visibility
 ## Your Jenkins instance is instrumented, but Datadog isn't showing any data
 
 1. Make sure that at least one pipeline has finished executing. Pipeline execution information is only sent after the pipeline has finished.
-2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the **Check connectivity with the Datadog Agent** button on the Jenkins plugin configuration UI.
+2. Make sure the Datadog Agent host is properly configured and is reachable by the Datadog Plugin. You can test connectivity by clicking on the {{< ui >}}Check connectivity with the Datadog Agent{{< /ui >}} button on the Jenkins plugin configuration UI.
 3. Check for any errors in the Jenkins logs. You can enable debug-level logs for the Datadog plugin by [creating a `logging.properties` file][1] and adding the line: `org.datadog.level = ALL`.
 
 ## Pipeline not found
@@ -32,7 +32,7 @@ The pipeline page only displays pipelines with no Git information, or pipelines 
 
 ## Missing stages or jobs in summary tables
 
-Missing stages or jobs in the _Pipeline Details_ page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
+Missing stages or jobs in the {{< ui >}}Pipeline Details{{< /ui >}} page might be due to a wrong configuration. Make sure that the pipeline name stored in the stage or job executions matches the **same** name of their parent pipeline. If you are using custom pipelines, refer to the [public API endpoint specification][15].
 
 ## Missing variables in Gitlab pipelines
 
@@ -47,6 +47,10 @@ Running pipelines support relies on data sent from CI providers indicating execu
 ### Maximum duration for a pipeline execution
 
 A pipeline execution can maintain `Running` status for a maximum of three days. If it is still running after that time, the pipeline execution does not appear in CI Visibility. If a pipeline execution finishes after three days, the finished pipeline execution appears in CI Visibility with its correspondent final status (`Success`, `Error`, `Canceled`, `Skipped`) and with the correct duration.
+
+## Limitations on running jobs
+
+Jobs that have not started executing yet do not appear as running jobs in CI Visibility until their runner picks them up. This includes jobs in a `Pending`, `Queued`, or `Manual` state. For example, a GitLab manual job that requires a trigger does not show up in CI Visibility until it is triggered and its runner begins execution.
 
 ## Limitations on finished jobs from pipelines
 

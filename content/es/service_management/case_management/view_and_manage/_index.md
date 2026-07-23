@@ -8,7 +8,7 @@ title: Ver y gestionar casos
 
 ## Información general
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Página de Case Management que muestra una vista de todos los casos, la opción de seleccionar el estado y ver los miembros asignados" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="Página de Case Management que muestra una vista de todos los casos, la opción de seleccionar el estado y ver los miembros asignados" style="width:100%;" >}}
 
 En la [página de Case Management][1], los casos se pueden ordenar por fecha de creación, estado o prioridad. De manera predeterminada, los casos se ordenan por fecha de creación. 
 
@@ -53,7 +53,7 @@ Para crear una vista personalizada:
 
 ## Detalles del caso
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="Vista detallada de un caso de ejemplo que se escaló" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="Vista detallada de un caso de ejemplo que se escaló" style="width:100%;" >}}
 
 La página de detalles del caso actúa como la única fuente de información sobre lo que sucede con la investigación. Cada caso tiene las siguientes propiedades:
 
@@ -89,7 +89,7 @@ En un caso individual:
 
 ## Análisis de casos
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Editor de gráficas que muestra las opciones de casos seleccionados como origen de datos" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="Editor de gráficas que muestra las opciones de casos seleccionados como origen de datos" style="width:100%;" >}}
 
 El análisis de casos es un origen de datos consultable para estadísticas de casos agregadas. Puedes consultar estos análisis en una variedad de widgets de gráficas tanto en [Dashboards][7] como en [Notebooks][3] para analizar la productividad del equipo e identificar patrones en los problemas. 
 

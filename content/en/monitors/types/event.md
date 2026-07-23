@@ -29,7 +29,7 @@ Event monitors alert on ingested events that match a search query, allowing you 
 
 ## Monitor creation
 
-To create an event monitor in Datadog, navigate to [**Monitors** > **New Monitor** > **Event**][1].
+To create an event monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Event{{< /ui >}}][1].
 
 <div class="alert alert-info">There is a default limit of 1000 Event monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/#set-alert-aggregation">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
@@ -41,7 +41,7 @@ As you define the search query, the top graph updates.
 2. Choose to monitor over an event count, facet, tags, or attributes:
     * Datadog evaluates the number of events over a selected time frame, then compares it to the threshold conditions.
     * For some attributes and tags, Datadog evaluates the aggregate values (for example, Avg, Median, Min, or Sum).
-    * **Monitor over a facet**: If a facet is selected, the monitor alerts over the unique value count of the facet.
+    * {{< ui >}}Monitor over a facet{{< /ui >}}: If a facet is selected, the monitor alerts over the unique value count of the facet.
       
 4. Group events by multiple dimensions (optional): 
 
@@ -69,7 +69,7 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications & automations** section, see the [Notifications][5] page.
+For detailed instructions on the {{< ui >}}Configure notifications & automations{{< /ui >}} section, see the [Notifications][5] page.
 
 #### Event template variables
 
@@ -96,8 +96,8 @@ The template variable is `{{event.tags.env}}`. The result of using this template
 ### Notification aggregation
 
 Configure the alert grouping strategy:
-    * **Simple-Alert**: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
-    * **Multi Alert**: Multi alerts apply the alert to each source according to your group parameters, up to 1000 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
+    * {{< ui >}}Simple-Alert{{< /ui >}}: Simple alerts aggregate over all reporting sources. You receive one alert when the aggregated value meets the set conditions. This works best to monitor a metric from a single host or the sum of a metric across many hosts. This strategy may be selected to reduce notification noise.
+    * {{< ui >}}Multi Alert{{< /ui >}}: Multi alerts apply the alert to each source according to your group parameters, up to 1000 matching groups. An alerting event is generated for each group that meets the set conditions. For example, you can group by `host` to receive separate alerts for each host.
 
 ## Further Reading
 

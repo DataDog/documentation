@@ -18,4 +18,9 @@ Las siguientes funciones son compatibles con la biblioteca de rastreo de cada le
 
 Selecciona el lenguaje de tu aplicación para obtener más información sobre la compatibilidad de marcos y funciones.
 
-{{< partial name="security-platform/appsec-languages-code-security.html" >}}
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="java/" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="dotnet/" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
+  {{< image-card href="nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="python/" src="integrations_logos/python.png" alt="Python" >}}
+{{< /card-grid >}}

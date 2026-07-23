@@ -112,7 +112,7 @@ The following table enumerates some of the frameworks and versions Datadog succe
 | Zend Framework | 1.12, 1.21                              | All supported PHP versions | Framework-level instrumentation |
 | Zend Framework | 2.x                                     | All supported PHP versions | Generic web tracing             |
 
-Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the tracer.
+Note that even if you don't see your web framework in this list, it is supported out of the box with the latest release of the SDK.
 
 Datadog is continuously adding more support for in-depth tracing for PHP web-frameworks. To request support for additional span metadata and framework internals, contact our awesome [support team][3].
 
@@ -145,6 +145,11 @@ To request support for additional CLI libraries, contact our awesome [support te
 | Predis                                                                  | 1.1                        | Fully Supported |
 | SQLSRV                                                                  | *(Any Supported PHP)*      | Fully Supported |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
+
 To request support for additional datastores, contact our awesome [support team][3].
 
 #### Library compatibility
@@ -170,7 +175,7 @@ Instrumenting [generators][6] is not supported on PHP 5 and PHP 7.
 
 Datadog supports tracing forked processes using [pcntl][7]. When a call to `pcntl_fork` is detected, a dedicated span is created, and the forked process is instrumented. This can be disabled with `DD_TRACE_FORKED_PROCESS`. Refer to the [library configuration page][9] for more details.
 
-If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the tracer is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
+If the application invokes `pcntl_unshare(CLONE_NEWUSER);` and the SDK is installed, the application fatally crashes. This happens because `unshare` with `CLONE_NEWUSER` requires the process [not to be threaded][8], while the PHP tracer uses a separate thread to send traces to the Datadog Agent without blocking the main process.
 
 ## Further Reading
 

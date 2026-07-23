@@ -459,7 +459,7 @@ Legacy delegate types have been replaced by a unified instrumentation API:
 |`DDURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 |`DDNSURLSessionDelegate()`|`URLSessionInstrumentation.enable(with:)`|
 
-[1]: /session_replay/mobile/privacy_options?platform=ios
+[1]: /session_replay/privacy_options?platform=ios
 
 {{% /tab %}}
 
@@ -1053,7 +1053,7 @@ To dynamically adjust sampling, provide your own implementation of the `com.data
 
 ### `dd-sdk-android-ktx` module removal
 
-To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
+To improve granularity for the Datadog SDKs used, the `dd-sdk-android-ktx` module is removed. The code is distributed between the other modules to provide extension methods for both RUM and Trace features.
 
 | `1.x`                                                                                     | '2.0'                                                                                       | Module name                       |
 |-------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|-----------------------------------|
@@ -1077,7 +1077,7 @@ To improve granularity for the Datadog SDK libraries used, the `dd-sdk-android-k
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][6].
 
-[6]: /session_replay/mobile/setup_and_configuration/?tab=android
+[6]: /session_replay/setup_and_configuration/?platform=android
 
 {{% /tab %}}
 {{% tab "iOS" %}}
@@ -1272,7 +1272,7 @@ WebViewTracking.enable(webView: webView)
 
 For instructions on setting up Mobile Session Replay, see [Mobile Session Replay Setup and Configuration][7].
 
-[7]: /session_replay/mobile/setup_and_configuration/?tab=ios
+[7]: /session_replay/setup_and_configuration/?platform=ios
 
 {{% /tab %}}
 {{% tab "React Native" %}}

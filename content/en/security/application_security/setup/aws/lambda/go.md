@@ -18,9 +18,15 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].
 2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 

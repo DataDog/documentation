@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a container
 further_reading:
 - link: /tracing/trace_collection/library_config/java/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/java/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/java/
   tag: "Documentation"
   text: Supported Java frameworks for automatic instrumentation
@@ -39,7 +39,7 @@ See [Tracing Java Applications][2] for general comprehensive tracing setup docum
 
 If you haven't installed a Datadog Agent on your machine, install one now.
 
-1. Go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+1. Go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
    {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"
@@ -54,11 +54,11 @@ DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash 
    **MacOS**: `launchctl start com.datadoghq.agent`<br/>
    **Linux**: `sudo service datadog-agent start`
 
-4. Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+4. Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
    {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
-<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under <strong>Infrastructure > Host map</strong>), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys"><strong>Organization Settings > API Keys</strong></a>.</div>
+<div class="alert alert-info">If after a few minutes you don't see your host in Datadog (under {{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host map{{< /ui >}}), ensure you used the correct API key for your organization, available at <a href="https://app.datadoghq.com/organization-settings/api-keys">{{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}</a>.</div>
 
 
 ## Install the sample Dockerized Java application
@@ -200,7 +200,7 @@ The `notes` section of your compose file should look something like this:
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed and the Agent is running, restart your application to start receiving traces. Run the following commands:
+Now that the SDK is installed and the Agent is running, restart your application to start receiving traces. Run the following commands:
 
 ```
 docker-compose -f service-docker-compose.yaml build notes
@@ -221,7 +221,7 @@ With the application running, send some curl requests to it:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-java-container-traces2.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 
@@ -245,7 +245,7 @@ A `GET /notes` trace looks something like this:
 
 ### Tracing configuration
 
-The Java tracing library uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java tracing library so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
+The Java SDK uses Java's built-in agent and monitoring support. The flag `-javaagent:../dd-java-agent.jar` in the Dockerfile tells the JVM where to find the Java SDK so it can run as a Java Agent. Learn more about Java Agents at [https://www.baeldung.com/java-instrumentation][7].
 
 The `dd.trace.sample.rate` flag sets the sample rate for this application. The ENTRYPOINT command in the Dockerfile sets its value to `1`, which means that 100% of all requests to the `notes` service are sent to the Datadog backend for analysis and display. For a low-volume test application, this is fine. Do not do this in production or in any high-volume environment, because this results in a very large volume of data. Instead, sample some of your requests. Pick a value between 0 and 1. For example, `-Ddd.trace.sample.rate=0.1` sends traces for 10% of your requests to Datadog. Read more about [tracing configuration settings][17] and [sampling mechanisms][16].
 

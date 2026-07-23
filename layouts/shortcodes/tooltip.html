@@ -13,19 +13,22 @@
 
 <!-- Handle glossary terms if provided -->
 {{- if $glossary -}}
-  <!-- Add underscore to multi-word terms to match file name -->
-  {{- $glossaryTerm := replace $glossary " " "_" -}}
-  <!-- Get the bundle of glossary term -->
   {{- $headless := .Site.GetPage "/glossary/terms" -}}
-  <!-- Find the matching glossary term file -->
-  {{- with $headless.Resources.GetMatch (printf "%s.md" $glossaryTerm) -}}
+  <!-- Find the matching glossary term by id -->
+  {{- $matchedTerm := false -}}
+  {{- range $headless.Resources.ByType "page" -}}
+    {{- if eq .Params.id $glossary -}}
+      {{- $matchedTerm = . -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $matchedTerm -}}
     {{- $glossaryMatch = true -}}
     {{- $displayText = .Title -}}
     {{- if .Params.short_definition -}}
       {{- $shortDefMatch = true -}}
       <!-- Use short definition if available -->
       {{- $tooltipContent = .Params.short_definition -}}
-      {{- $fullDefinitionLink = printf "/glossary/#%s" ($glossary | urlize) -}}
+      {{- $fullDefinitionLink = printf "%s#%s" ("glossary/" | relLangURL) (replace .Params.id "_" "-") -}}
       {{- else -}}
         {{- warnf "Glossary term '%s' found but has no short_definition" $glossary -}}
     {{- end -}}
@@ -47,4 +50,4 @@
 {{- end -}}
 
 <!-- Render tooltip (on one line to prevent unnecessary whitespace around tooltip) -->
-{{- if or $shortDefMatch (and $text $tooltip) -}}<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{- $displayText | anchorize -}}">{{- $displayText -}}</button><span id="tooltip-{{- $displayText | anchorize -}}" class="tooltip-content" role="tooltip">{{- $tooltipContent | safeHTML -}}{{- if $fullDefinitionLink -}}<a href="{{- $fullDefinitionLink -}}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end -}}</span></span>{{- else -}}{{- $displayText -}}{{- end -}}
+{{- if or $shortDefMatch (and $text $tooltip) -}}<span class="tooltip-container"><button class="tooltip-trigger" aria-describedby="tooltip-{{- $glossary | default ($displayText | anchorize) -}}">{{- $displayText -}}</button><span id="tooltip-{{- $glossary | default ($displayText | anchorize) -}}" class="tooltip-content" role="tooltip">{{- $tooltipContent | safeHTML -}}{{- if $fullDefinitionLink -}}<a href="{{- $fullDefinitionLink -}}" class="tooltip-full-link" aria-label="View full definition">Glossary</a>{{- end -}}</span></span>{{- else -}}{{- $displayText -}}{{- end -}}

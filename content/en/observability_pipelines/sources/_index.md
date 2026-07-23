@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' sources to receive logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
+Use Observability Pipelines' sources to receive logs or metrics from different data sources. Sources have different prerequisites and settings. Some sources also need to be configured to send data to the Observability Pipelines Worker.
 
 Select a source in the left navigation menu to see more information about it.
 
@@ -42,12 +42,14 @@ These are the available sources:
 - [Lambda Forwarder][14]
 - [Logstash][15]
 - [MySQL][16]
-- [OpenTelemetry][17]
-- [Socket][18]
-- [Splunk HTTP Event Collector (HEC)][19]
-- [Splunk Heavy or Universal Forwarders (TCP)][20]
-- [Sumo Logic Hosted Collector][21]
-- [Syslog][22]
+- [Okta][17]
+- [OpenTelemetry][18]
+- [Socket][19]
+- [Splunk HTTP Event Collector (HEC)][20]
+- [Splunk Heavy or Universal Forwarders (TCP)][21]
+- [Sumo Logic Hosted Collector][22]
+- [Syslog][23]
+- [WebSocket][24]
 
 [1]: /observability_pipelines/sources/akamai_datastream/
 [2]: /observability_pipelines/sources/amazon_data_firehose/
@@ -65,19 +67,23 @@ These are the available sources:
 [14]: /observability_pipelines/sources/lambda_forwarder/
 [15]: /observability_pipelines/sources/logstash/
 [16]: /observability_pipelines/sources/mysql/
-[17]: /observability_pipelines/sources/opentelemetry/
-[18]: /observability_pipelines/sources/socket/
-[19]: /observability_pipelines/sources/splunk_hec/
-[20]: /observability_pipelines/sources/splunk_tcp/
-[21]: /observability_pipelines/sources/sumo_logic/
-[22]: /observability_pipelines/sources/syslog/
+[17]: /observability_pipelines/sources/okta/
+[18]: /observability_pipelines/sources/opentelemetry/
+[19]: /observability_pipelines/sources/socket/
+[20]: /observability_pipelines/sources/splunk_hec/
+[21]: /observability_pipelines/sources/splunk_tcp/
+[22]: /observability_pipelines/sources/sumo_logic/
+[23]: /observability_pipelines/sources/syslog/
+[24]: /observability_pipelines/sources/websocket/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
 - [Datadog Agent][1]
+- [OpenTelemetry][2]
 
 [1]: /observability_pipelines/sources/datadog_agent/
+[2]: /observability_pipelines/sources/opentelemetry/
 
 {{% /tab %}}
 {{< /tabs >}}
