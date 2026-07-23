@@ -36,19 +36,14 @@ Code Origin captures the exact locations in your codebase where APM spans are cr
 In Trace Explorer, select a span from an enabled service to see Code Origin details on the Overview tab:
 {{< img src="tracing/code_origin/code_origin_details_spotlight.png" alt="Code Origin Details" style="width:100%;">}}
 
-Code Origin data comes from one of two sources:
-
-- **Tracer-instrumented Code Origin**: your tracing library embeds the code location directly into the span when [explicitly enabled](#enable-code-origin) and your service meets the [compatibility requirements](#compatibility-requirements).
-- **Code Origin powered by Source Code Integration**: Datadog determines code locations automatically using static analysis of your repository through [Source Code Integration][7] (for example, with GitHub). This method requires no SDK flag or minimum tracer version, and is the primary source of Code Origin data for languages and frameworks not yet covered by tracer instrumentation, such as Go.
-
-Both sources populate the same Code Origin section in Trace Explorer and power the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows.
-
 ## Getting started
 
 ### Prerequisites
 - [Datadog APM][6] is configured to capture spans.
-- [Source Code Integration][7] is enabled (required for code previews, and for Code Origin powered by Source Code Integration).
-- For tracer-instrumented Code Origin, your service meets the [compatibility requirements](#compatibility-requirements).
+- [Source Code Integration][7] is enabled (required for code previews).
+- Your service meets the [compatibility requirements](#compatibility-requirements).
+
+If your service's language or framework isn't listed below, see [Alternative Setup](#alternative-setup) for another way to get Code Origin data.
 
 ### Compatibility requirements
 
@@ -70,8 +65,6 @@ Both sources populate the same Code Origin section in Trace Explorer and power t
 |---|---|
 | 2.15.0+ | Django, Flask, Starlette, and derivatives |
 
-**Powered by Source Code Integration:** FastAPI and aiohttp are also supported through [Code Origin powered by Source Code Integration](#overview), with no SDK flag required.
-
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -82,8 +75,6 @@ Both sources populate the same Code Origin section in Trace Explorer and power t
 | 5.54.0+ | Express |
 
 **Note:** NestJS is not supported, even though the underlying framework is either Express or Fastify.
-
-**Powered by Source Code Integration:** Next.js is also supported through [Code Origin powered by Source Code Integration](#overview), with no SDK flag required.
 
 {{% /tab %}}
 
@@ -103,27 +94,15 @@ Both sources populate the same Code Origin section in Trace Explorer and power t
 
 {{% /tab %}}
 
-{{% tab "Go" %}}
-
-Go services use [Code Origin powered by Source Code Integration](#overview) exclusively — there is no SDK flag or minimum tracer version requirement.
-
-| Requirement | Frameworks |
-|---|---|
-| [Source Code Integration][7] enabled | Custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers (sarama), OpenTelemetry, OpenTracing |
-
-{{% /tab %}}
-
 {{% /tabs %}}
 
 ### Enable Code Origin
 
-Tracer-instrumented Code Origin requires setting the following environment variable on your service:
+Run your service with the following environment variable:
 
 ```shell
 export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ```
-
-Code Origin powered by Source Code Integration doesn't require this flag. It's enabled automatically for compatible languages and frameworks once [Source Code Integration][7] is configured for your service (for example, with GitHub, GitLab, or Azure DevOps).
 
 <div class="alert alert-info">
   For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the <a href="https://nodejs.org/docs/latest/api/cli.html#--enable-source-maps"><code>--enable-source-maps</code></a> flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews do not work. See the Node.js <a href="/integrations/guide/source-code-integration/?tab=nodejs#setup">Source Code Integration</a> documentation for more details.
@@ -166,8 +145,8 @@ Code Origin powered by Source Code Integration doesn't require this flag. It's e
 
 ### Code Origin section is missing
 
-- For tracer-instrumented Code Origin, verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration and that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version).
-- For Code Origin powered by Source Code Integration, confirm [Source Code Integration][7] is properly configured and that your service's language and framework are supported (see [compatibility requirements](#compatibility-requirements)).
+- Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, see [Alternative Setup](#alternative-setup).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
@@ -177,6 +156,18 @@ Code Origin powered by Source Code Integration doesn't require this flag. It's e
 - Ensure all [Source Code Integration][7] setup requirements are met, including your `DD_GIT_*` environment variables are configured with the correct values.
 - For transpiled Node.js applications (for example, TypeScript), make sure to generate and publish source maps with the deployed application, run Node.js with the [`--enable-source-maps`][10] flag, and use v5.59.0 or newer of the Node.js tracer. Otherwise, code previews will not work. See the Node.js [Source Code Integration][9] documentation for more details.
 - Code Origin is designed to reference user code only, but in some cases, third-party code references may slip through. You can report these cases to [Datadog support][13] and help improve these references.
+
+## Alternative Setup
+
+For services and frameworks not covered by the [compatibility requirements](#compatibility-requirements) above, Datadog can determine code locations using static analysis of your repository through [Source Code Integration][7] (for example, with GitHub, GitLab, or Azure DevOps) instead of tracer instrumentation.
+
+Key differences from the setup described above:
+
+- No `DD_CODE_ORIGIN_FOR_SPANS_ENABLED` flag or minimum tracer version is required — only [Source Code Integration][7] needs to be configured.
+- It's currently the only way to get Code Origin data for **Go** services (custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers, OpenTelemetry, and OpenTracing).
+- It also extends coverage for **Python** (FastAPI, aiohttp) and **Node.js** (Next.js) beyond the frameworks listed in the compatibility table.
+
+Code Origin data from this method appears in the same Code Origin section of the Trace Explorer and powers the same [IDE integration](#in-your-ide) and [Live Debugger](#in-the-trace-explorer) workflows as tracer-instrumented Code Origin.
 
 ## Further Reading
 
