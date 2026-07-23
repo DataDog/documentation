@@ -94,6 +94,16 @@ Source Code Integration alone already gives you some Code Origin coverage automa
 
 {{% /tab %}}
 
+{{% tab "Go" %}}
+
+Go services get Code Origin data via [Source Code Integration](#code-origin-coverage-via-source-code-integration) rather than the SDK flag.
+
+| Requirement | Frameworks |
+|---|---|
+| [Source Code Integration][7] enabled | Custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, Kafka consumers (sarama), OpenTelemetry, OpenTracing |
+
+{{% /tab %}}
+
 {{% /tabs %}}
 
 ### Enable Code Origin
