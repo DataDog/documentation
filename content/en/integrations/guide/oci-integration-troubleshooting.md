@@ -75,8 +75,8 @@ Complete the following checks for each monitored region:
 
 1. In the integration compartment, verify that the `dd-function-app` function application exists.
 2. In `dd-function-app`, verify that the `dd-metrics-forwarder` function exists.
-3. If you use custom subnets, verify that they meet the the permissions outlined [here][7]
-4. Check for stale Datadog service connector hubs. All Datadog created connector hubs will be in the format `dd-<service>-connectorhub-<suffix>`. If you find any, delete these Datadog-managed connector hubs.
+3. If you use custom subnets, verify that they meet the [permissions][7] (In the note after step 5).
+4. Check for stale Datadog service connector hubs. All Datadog created connector hubs are in the format: `dd-<service>-connectorhub-<suffix>`. Delete any stale Datadog-managed connector hubs.
 
 After completing these checks, reapply the Datadog integration ORM stack.
 
