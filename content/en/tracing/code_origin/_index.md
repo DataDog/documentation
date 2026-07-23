@@ -40,7 +40,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 
 ### Prerequisites
 - [Datadog APM][6] is configured to capture spans.
-- [Source Code Integration][7] is enabled (required for code previews).
+- [Source Code Integration][7] is enabled.
 - Your service meets the [compatibility requirements](#compatibility-requirements).
 
 Source Code Integration alone already gives you some Code Origin coverage automatically, even if your service doesn't meet the compatibility requirements below — see [Code Origin coverage without the SDK flag](#code-origin-coverage-without-the-sdk-flag). Enabling the SDK flag for a compatible language and framework gets you full tracer-instrumented coverage.
