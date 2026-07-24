@@ -167635,18 +167635,6 @@ paths:
         the authenticated org or the request is rejected. Successful calls disable the org
         and return the resulting state from the downstream service. Requires the
         `org_management` permission.
-
-        **Limitations**:
-
-        - **Organization age**: Only organizations created within the last 10 days can be disabled
-          through this endpoint. This restriction is a safeguard against accidentally disabling
-          long-running organizations. Attempting to disable an older organization returns a `403 Forbidden`.
-        - **Feature flag**: The feature flag `org_disable_self_service_enabled` must be enabled for the
-          target organization or one of its ancestor organizations. Contact
-          [Datadog support](https://docs.datadoghq.com/help/) to enable this for your organization.
-          Requests for organizations without this flag return a `403 Forbidden`.
-        - **Already-disabled organizations**: If the target organization is already disabled, the request
-          returns a `409 Conflict`.
       operationId: DisableCustomerOrg
       requestBody:
         content:
@@ -167695,12 +167683,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Forbidden
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/JSONAPIErrorResponse"
-          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -192905,6 +192887,7 @@ paths:
         Please check the documentation regularly for updates.
   /api/v2/slo/report:
     post:
+      deprecated: true
       description: |-
         Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.
 
@@ -192968,10 +192951,12 @@ paths:
         operator: OR
         permissions:
           - slos_read
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/download:
     get:
+      deprecated: true
       description: |-
         Download an SLO report. This can only be performed after the report job has completed.
 
@@ -193018,10 +193003,12 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 103
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/status:
     get:
+      deprecated: true
       description: Get the status of the SLO report job.
       operationId: GetSLOReportJobStatus
       parameters:
@@ -193070,8 +193057,9 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 102
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/{slo_id}/status:
     get:
       description: |-
