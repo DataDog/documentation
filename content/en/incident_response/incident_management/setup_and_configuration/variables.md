@@ -1,6 +1,6 @@
 ---
 title: Incident Variables Reference
-description: "A reference for all available template variables in Incident Management used in notification, postmortem, and Jira templates."
+description: "A reference for all available template variables in Incident Management used in notification, postmortem, Jira, and channel name templates."
 further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
@@ -15,13 +15,14 @@ further_reading:
 
 ## Overview
 
-Incident variables are template variables that dynamically inject incident data into notifications, postmortems, and Jira issues. Use them to automatically populate templates with relevant incident context, reducing manual effort during and after an incident.
+Incident variables are template variables that dynamically inject incident data into notifications, postmortems, Jira issues, and channel names. Use them to automatically populate templates with relevant incident context, reducing manual effort during and after an incident.
 
-Variables are available in three template types:
+Variables are available in four template types:
 
 - **Notifications**: Used in manual and automated incident notifications sent to email, Slack, or other channels.
 - **Postmortem templates**: Used to auto-populate Datadog Notebooks or Confluence pages when generating a postmortem.
 - **Jira templates**: Used to map incident fields to Jira issue fields when a Jira issue is created from an incident.
+- **Channel name templates**: Used to generate the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident.
 
 **Note**: In Jira templates, variables are displayed without their prefix. For example, `{{incident.title}}` appears as `{{ title }}` in the Jira template editor. The variables behave the same way.
 
