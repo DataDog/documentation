@@ -131,7 +131,7 @@ spec:
     service:
       telemetry:
         resource:
-          k8s.cluster.name: ${env:DD_CLUSTER_NAME}
+          k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
   env:
     - name: DD_API_KEY
       valueFrom:
@@ -144,11 +144,13 @@ spec:
           key: site
           name: datadog-apikey
     - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-      value: datadog,pprof,zpages,prometheus
+      value: datadog,pprof,zpages,prometheus,infraattributes
+    - name: K8S_CLUSTER_NAME
+      value: <CLUSTER_NAME>
+    # vvv Will no longer be necessary from 7.83.0 onwards vvv
     - name: DD_OTEL_STANDALONE
       value: 'true'
-    - name: DD_CLUSTER_NAME
-      value: <CLUSTER_NAME>
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # vvv Will no longer be necessary from 7.82.0 onwards vvv
     - name: DD_OTELCOLLECTOR_ENABLED
       value: 'true'
@@ -227,7 +229,7 @@ spec:
       resource/add-cluster-name:
         attributes:
           - key: k8s.cluster.name
-            value: ${env:DD_CLUSTER_NAME}
+            value: ${env:K8S_CLUSTER_NAME}
             action: upsert
     connectors:
       datadog/connector:
@@ -379,7 +381,7 @@ spec:
       resource/add-cluster-name:
         attributes:
           - key: k8s.cluster.name
-            value: ${env:DD_CLUSTER_NAME}
+            value: ${env:K8S_CLUSTER_NAME}
             action: upsert
     connectors:
       datadog/connector:
@@ -401,7 +403,7 @@ spec:
     service:
       telemetry:
         resource:
-          k8s.cluster.name: ${env:DD_CLUSTER_NAME}
+          k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
       extensions: ['health_check']
       pipelines:
         logs:
@@ -428,10 +430,8 @@ spec:
           key: site
           name: datadog-apikey
     - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-      value: datadog,pprof,zpages,prometheus
-    - name: DD_OTEL_STANDALONE
-      value: 'true'
-    - name: DD_CLUSTER_NAME
+      value: datadog,pprof,zpages,prometheus,infraattributes
+    - name: K8S_CLUSTER_NAME
       value: <CLUSTER_NAME>
     - name: K8S_POD_IP
       valueFrom:
@@ -439,6 +439,10 @@ spec:
           apiVersion: v1
           fieldPath: status.podIP
     # K8S_NODE_NAME is added automatically by the operator
+    # vvv Will no longer be necessary from 7.83.0 onwards vvv
+    - name: DD_OTEL_STANDALONE
+      value: 'true'
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # vvv Will no longer be necessary from 7.82.0 onwards vvv
     - name: DD_OTELCOLLECTOR_ENABLED
       value: 'true'
@@ -526,15 +530,18 @@ extraEnvs:
       secretKeyRef:
         key: site
         name: datadog-apikey
+  - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
+    value: datadog,pprof,zpages,prometheus,infraattributes
+  - name: K8S_CLUSTER_NAME
+    value: <CLUSTER_NAME>
+    # vvv Will no longer be necessary from 7.83.0 onwards vvv
   - name: DD_OTEL_STANDALONE
     value: 'true'
-  - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-    value: datadog,pprof,zpages,prometheus
-  - name: DD_CLUSTER_NAME
-    value: <CLUSTER_NAME>
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
     # vvv Will no longer be necessary from 7.82.0 onwards vvv
   - name: DD_OTELCOLLECTOR_ENABLED
     value: 'true'
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 {{< /code-block >}}
 
 Replace `<CLUSTER_NAME>` with a name for your cluster.
@@ -577,7 +584,7 @@ config:
         exporters: ['datadog']
     telemetry:
       resource:
-        k8s.cluster.name: ${env:DD_CLUSTER_NAME}
+        k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
 {{< /code-block >}}
 
 6. (Optional) Enable additional Datadog features:
@@ -593,7 +600,7 @@ config:
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
-          value: ${env:DD_CLUSTER_NAME}
+          value: ${env:K8S_CLUSTER_NAME}
           action: upsert
   connectors:
     datadog/connector:
@@ -604,11 +611,16 @@ config:
   service:
     pipelines:
       logs:
+	    # [...]
         processors: ['resource/add-cluster-name', 'infraattributes']
       metrics:
+        receivers: ['otlp', 'datadog/connector']
         processors: ['resource/add-cluster-name', 'infraattributes']
+	    # [...]
       traces:
+	    # [...]
         processors: ['resource/add-cluster-name', 'infraattributes']
+        exporters: ['datadog', 'datadog/connector']
 {{< /code-block >}}
 
 {{% collapse-content title="Completed node-collector-values.yaml file" level="p" %}}
@@ -651,7 +663,7 @@ config:
     resource/add-cluster-name:
       attributes:
         - key: k8s.cluster.name
-          value: ${env:DD_CLUSTER_NAME}
+          value: ${env:K8S_CLUSTER_NAME}
           action: upsert
   receivers:
     otlp:
@@ -692,7 +704,7 @@ config:
           - datadog/connector
     telemetry:
       resource:
-        k8s.cluster.name: ${env:DD_CLUSTER_NAME}
+        k8s.cluster.name: ${env:K8S_CLUSTER_NAME}
 extraEnvs:
   - name: DD_API_KEY
     valueFrom:
@@ -704,18 +716,18 @@ extraEnvs:
       secretKeyRef:
         key: site
         name: datadog-apikey
-  - name: DD_OTELCOLLECTOR_ENABLED
-    value: 'true'
+  - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
+    value: datadog,pprof,zpages,prometheus,infraattributes
+  - name: K8S_CLUSTER_NAME
+    value: <CLUSTER_NAME>
+    # vvv Will no longer be necessary from 7.83.0 onwards vvv
   - name: DD_OTEL_STANDALONE
     value: 'true'
-  - name: DD_OTELCOLLECTOR_CONVERTER_FEATURES
-    value: datadog,pprof,zpages,prometheus
-  - name: DD_HOSTNAME
-    valueFrom:
-      fieldRef:
-        fieldPath: spec.nodeName
-  - name: DD_CLUSTER_NAME
-    value: <CLUSTER_NAME>
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    # vvv Will no longer be necessary from 7.82.0 onwards vvv
+  - name: DD_OTELCOLLECTOR_ENABLED
+    value: 'true'
+    # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ports:
   jaeger-compact:
     enabled: false
