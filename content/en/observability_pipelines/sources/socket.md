@@ -21,7 +21,7 @@ Use Observability Pipelines' Socket source to send logs to the Worker over a soc
 
 Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-**Note**:The Worker can only receive logs over TCP or UDP. If your application writes to a UNIX domain socket, see [UNIX domain sockets](#unix-domain-sockets) for more information.
+**Note**: The Worker can only receive logs over TCP or UDP. If your application writes to a UNIX domain socket, see [UNIX domain sockets](#unix-domain-sockets) for more information.
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
@@ -71,11 +71,11 @@ After you select the Socket source in the pipeline UI:
 
 {{% observability_pipelines/tls_settings_mtls %}}
 
-### UNIX domain sockets
+## UNIX domain sockets
 
-The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket (UDS), use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket, use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
 
-#### Standalone bridge
+### Standalone bridge
 
 Run `socat` alongside your application to forward from the UNIX socket to the Worker:
 
@@ -85,7 +85,7 @@ socat UNIX-RECV:/var/run/app.sock TCP:<OPW_HOST>
 
 Replace <OPW_HOST> with the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
 
-#### Kubernetes sidecar
+### Kubernetes sidecar
 
 In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it is not reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
 
@@ -133,7 +133,7 @@ containers:
       readOnlyRootFilesystem: true
 ```
 
-Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost` because the Worker's StatefulSet pods are not guaranteed to run on every node so the Worker pod might not be available in `localhost`. This is especially true if you have dedicated node groups for OPW and workloads.
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost`. The Worker's StatefulSet pods aren't guaranteed to run on every node, so the Worker pod might not be reachable at `localhost`. This is especially true if you have dedicated node groups for the Worker and your workloads.
 
 ## Secret defaults
 
