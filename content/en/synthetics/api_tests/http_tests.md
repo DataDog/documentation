@@ -185,7 +185,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-[18]: https://json-schema.org/
+[7]: https://json-schema.org/
 
 {{% /tab %}}
 {{% tab "JavaScript" %}}
