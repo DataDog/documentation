@@ -1448,6 +1448,31 @@ components:
       required: false
       schema:
         $ref: "#/components/schemas/OrgGroupPolicySortOption"
+    PostmortemTemplateFilterIncidentTypeParameter:
+      description: Filter postmortem templates by the associated incident type ID.
+      in: query
+      name: filter[incident-type]
+      required: false
+      schema:
+        format: uuid
+        type: string
+    PostmortemTemplateIdParameter:
+      description: The ID of the postmortem template.
+      example: 00000000-0000-0000-0000-000000000000
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
+    PostmortemTemplateSortParameter:
+      description: The attribute to sort results by. Prefix with `-` for descending order.
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: created_at
+        example: "-created_at"
+        type: string
     ProjectIDPathParameter:
       description: Project UUID.
       example: "e555e290-ed65-49bd-ae18-8acbfcf18db7"
@@ -20789,6 +20814,26 @@ components:
       type: string
       x-enum-varnames:
         - SCHEDULE_TARGET
+    ConfluencePostmortemSettings:
+      description: Settings for a postmortem template stored in Confluence. Required when `location` is `confluence`.
+      properties:
+        account_id:
+          description: The ID of the Confluence integration account.
+          example: "123456"
+          type: string
+        parent_id:
+          description: The ID of the parent Confluence page under which postmortems are created.
+          example: "345678"
+          nullable: true
+          type: string
+        space_id:
+          description: The ID of the Confluence space where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - space_id
+      type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -43397,6 +43442,21 @@ components:
           $ref: "#/components/schemas/GoogleChatUpdateOrganizationHandleRequestAttributes"
       required:
         - attributes
+      type: object
+    GoogleDocsPostmortemSettings:
+      description: Settings for a postmortem template stored in Google Docs. Required when `location` is `google_docs`.
+      properties:
+        account_id:
+          description: The ID of the Google Drive integration account.
+          example: "123456"
+          type: string
+        parent_folder_id:
+          description: The ID of the Google Drive folder where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - parent_folder_id
       type: object
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
@@ -78155,8 +78215,24 @@ components:
     PostmortemTemplateAttributesRequest:
       description: Attributes for creating or updating a postmortem template.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp. Set to `null` to unset.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
@@ -78165,30 +78241,61 @@ components:
     PostmortemTemplateAttributesResponse:
       description: Attributes of a postmortem template returned in a response.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
         createdAt:
-          description: When the template was created
+          description: When the template was created.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         modifiedAt:
-          description: When the template was last modified
+          description: When the template was last modified.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
         - name
+        - content
+        - is_default
+        - location
         - createdAt
         - modifiedAt
+      type: object
+    PostmortemTemplateCreateRelationships:
+      description: Relationships for a postmortem template. `incident_type` is required when creating a template and is immutable afterwards.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
       type: object
     PostmortemTemplateDataRequest:
       description: Data object for creating or updating a postmortem template.
       properties:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesRequest"
+        id:
+          description: The ID of the template. Required when updating.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateCreateRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -78201,9 +78308,11 @@ components:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesResponse"
         id:
-          description: The ID of the template
-          example: "template-456"
+          description: The ID of the template.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateResponseRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -78211,6 +78320,43 @@ components:
         - type
         - attributes
       type: object
+    PostmortemTemplateIncidentTypeRelationship:
+      description: Relationship to the incident type this template belongs to.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateIncidentTypeRelationshipData:
+      description: Incident type relationship data.
+      properties:
+        id:
+          description: The incident type identifier.
+          example: 00000000-0000-0000-0000-000000000009
+          format: uuid
+          type: string
+        type:
+          description: The incident type resource type.
+          example: incident_types
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    PostmortemTemplateLocation:
+      default: datadog_notebooks
+      description: The location where the postmortem is created and stored.
+      enum:
+        - datadog_notebooks
+        - confluence
+        - google_docs
+      example: datadog_notebooks
+      type: string
+      x-enum-varnames:
+        - DATADOG_NOTEBOOKS
+        - CONFLUENCE
+        - GOOGLE_DOCS
     PostmortemTemplateRequest:
       description: Request body for creating or updating a postmortem template.
       properties:
@@ -78227,14 +78373,48 @@ components:
       required:
         - data
       type: object
+    PostmortemTemplateResponseRelationships:
+      description: Relationships of a postmortem template returned in a response.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationship"
+      type: object
     PostmortemTemplateType:
-      description: Postmortem template resource type
+      description: Postmortem template resource type.
       enum:
+        - postmortem_templates
         - postmortem_template
-      example: postmortem_template
+      example: postmortem_templates
       type: string
       x-enum-varnames:
+        - POSTMORTEM_TEMPLATES
         - POSTMORTEM_TEMPLATE
+    PostmortemTemplateUserRelationship:
+      description: Relationship to a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateUserRelationshipData:
+      description: User relationship data.
+      properties:
+        id:
+          description: The user identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          description: The user resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
     PostmortemTemplatesResponse:
       description: Response containing a list of postmortem templates.
       properties:
@@ -143809,6 +143989,9 @@ paths:
     get:
       description: Retrieve a list of all postmortem templates for incidents.
       operationId: ListIncidentPostmortemTemplates
+      parameters:
+        - $ref: "#/components/parameters/PostmortemTemplateFilterIncidentTypeParameter"
+        - $ref: "#/components/parameters/PostmortemTemplateSortParameter"
       responses:
         "200":
           content:
@@ -143818,11 +144001,19 @@ paths:
                   value:
                     data:
                       - attributes:
+                          content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                           createdAt: "2024-01-01T00:00:00+00:00"
+                          is_default: "2024-01-01T00:00:00+00:00"
+                          location: datadog_notebooks
                           modifiedAt: "2024-01-01T00:00:00+00:00"
                           name: Standard Postmortem Template
                         id: 00000000-0000-0000-0000-000000000001
-                        type: postmortem_template
+                        relationships:
+                          incident_type:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000009
+                              type: incident_types
+                        type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplatesResponse"
           description: OK
@@ -143852,8 +144043,14 @@ paths:
                 value:
                   data:
                     attributes:
+                      content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    relationships:
+                      incident_type:
+                        data:
+                          id: 00000000-0000-0000-0000-000000000009
+                          type: incident_types
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -143866,11 +144063,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000002
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: Created
@@ -143900,13 +144105,7 @@ paths:
       description: Delete a postmortem template.
       operationId: DeleteIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "204":
           description: No Content
@@ -143935,13 +144134,7 @@ paths:
       description: Retrieve details of a specific postmortem template.
       operationId: GetIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "200":
           content:
@@ -143951,11 +144144,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000003
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
@@ -143984,13 +144185,7 @@ paths:
       description: Update an existing postmortem template.
       operationId: UpdateIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       requestBody:
         content:
           application/json:
@@ -144000,7 +144195,8 @@ paths:
                   data:
                     attributes:
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    id: 00000000-0000-0000-0000-000000000004
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -144013,11 +144209,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000004
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
