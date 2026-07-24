@@ -30,7 +30,7 @@ Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature
 
 ## Configuration delivery
 
-Agentless configuration delivery is the default in server SDK versions that support it. The SDK fetches flag configuration directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
+Agentless [configuration delivery][8] is the default in server SDK versions that support it. The SDK fetches flag configuration directly from the Datadog-managed CDN over HTTPS, then evaluates flags locally. A Datadog Agent is not required for flag configuration.
 
 The default source does not activate Feature Flags traffic for every tracer installation. Agentless polling begins only when application code initializes or accesses the Datadog OpenFeature provider. Explicitly selecting `remote_config` activates the Feature Flags Remote Configuration subscription. Requests through either source contribute to server Feature Flags billing.
 
@@ -189,3 +189,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [4]: /tracing/guide/#tutorials-enabling-tracing
 [5]: /feature_flags/implementation_patterns/serverless/
 [7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[8]: /feature_flags/concepts/configuration_sources/

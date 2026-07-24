@@ -6418,16 +6418,21 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
       weight: 306
+    - name: Configuration Sources
+      url: feature_flags/concepts/configuration_sources
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_configuration_sources
+      weight: 307
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 307
+      weight: 308
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 308
+      weight: 309
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -6438,11 +6443,6 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_approvals
       weight: 321
-    - name: Configuration Sources
-      url: feature_flags/concepts/configuration_sources
-      parent: feature_flags_server
-      identifier: feature_flags_server_configuration_sources
-      weight: 200
     - name: Use Cases
       url: feature_flags/use_cases
       parent: feature_flags

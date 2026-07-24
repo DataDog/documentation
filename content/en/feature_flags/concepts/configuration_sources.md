@@ -13,7 +13,7 @@ further_reading:
   text: "Learn about Remote Configuration"
 ---
 
-Datadog Feature Flags server SDKs evaluate flags locally from flag configuration. The _configuration source_ determines how the SDK receives that configuration; it does not change OpenFeature evaluation semantics.
+Datadog Feature Flags [server-side SDKs][3] evaluate flags locally from flag configuration. The _configuration source_ determines how the SDK receives that configuration; it does not change OpenFeature evaluation semantics.
 
 ## Get started with agentless delivery
 
@@ -158,3 +158,4 @@ Offline mode is planned for applications that provide flag configuration JSON at
 
 [1]: /remote_configuration/
 [2]: /feature_flags/server/nodejs/
+[3]: /feature_flags/server/
