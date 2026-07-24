@@ -10,7 +10,7 @@ We're gradually migrating the Datadog docs site from Hugo to Astro. To support t
 
 **This reorg causes conflicts in almost every open PR in the `documentation` repo.**
 
-### Which files does the reorg change?
+### Which files will be moved?
 
 The most impactful change is that any Hugo-specific site files move to a `hugo` folder instead of being located at the top level of the repo. This change impacts thousands of files, and causes the majority of conflicts.
 
