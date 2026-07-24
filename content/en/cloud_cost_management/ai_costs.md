@@ -79,7 +79,8 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to sources
 
-[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI.
+[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
+
 
 The following tags are available through OOTB allocation rules:
 
@@ -117,8 +118,6 @@ The following tags are available through OOTB allocation rules:
 
 {{% /tab %}}
 {{< /tabs >}}
-
-In addition, user-level allocation is support for Cursor.
 
 Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
 
