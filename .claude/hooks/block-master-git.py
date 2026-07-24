@@ -45,6 +45,17 @@ PUSH_VALUE_FLAGS = {
 
 FORCE_FLAGS = {"--force", "--force-with-lease", "--force-if-includes"}
 
+# `--force-with-lease` and `--force-if-includes` accept an optional `=value`
+# suffix (e.g. `--force-with-lease=refs/heads/x:sha`). Matching FORCE_FLAGS by
+# exact membership misses that form, so check prefixes too.
+FORCE_FLAG_PREFIXES = tuple(flag + "=" for flag in FORCE_FLAGS)
+
+
+def has_force_flag(args):
+    return any(
+        flag in FORCE_FLAGS or flag.startswith(FORCE_FLAG_PREFIXES) for flag in args
+    )
+
 BRANCH_ADVICE = (
     "Create a feature branch first: git checkout -b <name>/<description>\n"
     "See the Critical Rules and Branch Naming sections in CLAUDE.md."
@@ -56,11 +67,18 @@ def fail(message):
     return "[block-master-git] {}\n".format(message)
 
 
-def git(*args):
-    """Run a git command, returning stripped stdout or None on any failure."""
+def git(*args, global_flags=()):
+    """
+    Run a git command, returning stripped stdout or None on any failure.
+
+    `global_flags` are spliced in before the subcommand (e.g. `-C <dir>`) so
+    callers inspecting repo state honor a `-C`/`--git-dir`/`--work-tree` the
+    caller passed on the original command line, rather than always
+    inspecting the hook process's own cwd.
+    """
     try:
         result = subprocess.run(
-            ["git"] + list(args),
+            ["git"] + list(global_flags) + list(args),
             capture_output=True,
             text=True,
         )
@@ -71,7 +89,7 @@ def git(*args):
     return result.stdout.strip()
 
 
-def current_branch_state():
+def current_branch_state(global_flags=()):
     """
     Return a description of the current HEAD if it is on master, else None.
 
@@ -80,18 +98,20 @@ def current_branch_state():
     name comparison silently passes even when HEAD sits on master's tip.
     Compare SHAs to catch that.
     """
-    branch = git("branch", "--show-current")
+    branch = git("branch", "--show-current", global_flags=global_flags)
     if branch is None:
         return None
     if branch in PROTECTED:
         return "HEAD is on {}".format(branch)
 
     if branch == "":
-        head_sha = git("rev-parse", "HEAD")
+        head_sha = git("rev-parse", "HEAD", global_flags=global_flags)
         if head_sha is None:
             return None
         for protected in sorted(PROTECTED):
-            protected_sha = git("rev-parse", "refs/heads/{}".format(protected))
+            protected_sha = git(
+                "rev-parse", "refs/heads/{}".format(protected), global_flags=global_flags
+            )
             if protected_sha and head_sha == protected_sha:
                 return "HEAD is detached at {}'s tip".format(protected)
     return None
@@ -107,18 +127,152 @@ def strip_assignments(tokens):
     return assigns, rest
 
 
+# `env` flags that consume the following token, so it is not mistaken for the
+# wrapped command (e.g. `env -u PATH git push` should still resolve to `git`).
+ENV_VALUE_FLAGS = {"-u", "--unset", "-C", "--chdir"}
+
+# `env -S/--split-string STRING` re-parses STRING itself as a command line
+# (its own quoting/escaping rules, not the shell's), so it needs its own
+# recursive split rather than being treated as an opaque value token.
+ENV_SPLIT_STRING_FLAGS = {"-S", "--split-string"}
+
+# Shell builtins/prefixes that run their argument as-is without changing what
+# binary is ultimately invoked, so they can simply be peeled off.
+TRANSPARENT_WRAPPERS = {"command", "builtin", "exec"}
+
+# `sh -c '...'` / `bash -c '...'` hand a whole command line to a fresh shell.
+SHELL_C_INVOCATIONS = {"sh", "bash", "zsh", "dash", "ksh"}
+
+
+def strip_backslash_escape(token):
+    """`\\git` is a bare escape that stops alias/function lookup but still runs git."""
+    if token.startswith("\\") and len(token) > 1:
+        return token[1:]
+    return token
+
+
+def strip_env_wrapper(assigns, tokens):
+    """
+    Unwrap one leading `env [OPTIONS] [VAR=value ...] command ...` layer.
+
+    `env VAR=value git push` sets VAR for the child process the same as a
+    plain leading assignment, but the earlier assignment stripping alone
+    doesn't see it because `env` is the token in position 0. Without
+    unwrapping, `invoked` resolves to "env" and every git-specific check
+    downstream is skipped.
+
+    Returns (assigns, tokens, changed). `changed` is False when nothing was
+    unwrapped, so the caller's peel loop can stop.
+    """
+    if not tokens or os.path.basename(tokens[0]) != "env":
+        return assigns, tokens, False
+
+    rest = tokens[1:]
+    index = 0
+    while index < len(rest):
+        token = rest[index]
+        if token in ENV_SPLIT_STRING_FLAGS:
+            # Consume the flag and its STRING argument, then splice the
+            # re-parsed tokens from STRING in as the new front of the command
+            # so downstream checks see through it (e.g. `env -S "HUSKY=0 git
+            # push origin feature:master"`).
+            if index + 1 >= len(rest):
+                return assigns, [], True
+            try:
+                inner = shlex.split(rest[index + 1], comments=False)
+            except ValueError:
+                return assigns, [], True
+            return assigns, inner + rest[index + 2 :], True
+        if token.startswith("-"):
+            if token in ENV_VALUE_FLAGS:
+                index += 2
+            else:
+                index += 1
+            continue
+        if ASSIGNMENT.match(token):
+            name, _, value = token.partition("=")
+            assigns[name] = value
+            index += 1
+            continue
+        break
+
+    return assigns, rest[index:], True
+
+
+def strip_transparent_wrapper(tokens):
+    """Peel a leading `command`/`builtin`/`exec` or backslash-escape."""
+    if not tokens:
+        return tokens, False
+
+    head = tokens[0]
+    if os.path.basename(head) in TRANSPARENT_WRAPPERS:
+        return tokens[1:], True
+
+    unescaped = strip_backslash_escape(head)
+    if unescaped != head:
+        return [unescaped] + tokens[1:], True
+
+    return tokens, False
+
+
+def unwrap_shell_c(assigns, tokens):
+    """
+    If the command is `sh -c '...'` (or bash/zsh/dash/ksh), recurse into the
+    quoted command line so `sh -c "git push --force origin master"` is
+    inspected the same as a bare `git push --force origin master`.
+
+    Any positional arguments after the STRING become $0, $1, ... inside the
+    child shell and are not part of the command itself, so they are dropped.
+    """
+    if not tokens or os.path.basename(tokens[0]) not in SHELL_C_INVOCATIONS:
+        return assigns, tokens, False
+
+    rest = tokens[1:]
+    index = 0
+    while index < len(rest):
+        token = rest[index]
+        if token == "-c":
+            if index + 1 >= len(rest):
+                return assigns, [], True
+            try:
+                inner = shlex.split(rest[index + 1], comments=False)
+            except ValueError:
+                return assigns, [], True
+            return assigns, inner, True
+        if token.startswith("-"):
+            index += 1
+            continue
+        break
+
+    return assigns, tokens, False
+
+
+def unwrap_command(assigns, tokens):
+    """Repeatedly peel wrapper layers until the real invoked command surfaces."""
+    for _ in range(10):
+        assigns, tokens, changed_env = strip_env_wrapper(assigns, tokens)
+        tokens, changed_transparent = strip_transparent_wrapper(tokens)
+        assigns, tokens, changed_shell = unwrap_shell_c(assigns, tokens)
+        if not (changed_env or changed_transparent or changed_shell):
+            break
+    return assigns, tokens
+
+
 def find_subcommand(tokens):
-    """Skip `git` global flags and return (subcommand, remaining_args)."""
+    """Skip `git` global flags and return (subcommand, remaining_args, global_flags)."""
+    global_flags = []
     index = 0
     while index < len(tokens):
         token = tokens[index]
         if not token.startswith("-"):
-            return token, tokens[index + 1 :]
+            return token, tokens[index + 1 :], global_flags
         if token in GIT_GLOBAL_VALUE_FLAGS:
+            global_flags.extend(tokens[index : index + 2])
             index += 2
         else:
+            global_flags.append(token)
             index += 1
-    return None, []
+    return None, [], global_flags
 
 
 def destination_is_protected(refspec):
@@ -132,23 +286,35 @@ def destination_is_protected(refspec):
     return destination if destination in PROTECTED else None
 
 
-def push_targets_protected(args):
+def push_targets_protected(args, global_flags=()):
     """
     Return a reason string if a `git push` would write to a protected branch.
 
     Deliberately branch-independent for explicit refspecs: a push of
     `some-branch:master` from a feature branch must still be blocked.
     """
-    if "--all" in args or "--mirror" in args:
+    if "--all" in args or "--branches" in args or "--mirror" in args:
         return "this push includes all branches, which covers {}".format(
             "/".join(sorted(PROTECTED))
         )
+
+    # `--repo <remote>` names the remote explicitly, so it must not be
+    # consumed-and-discarded: every remaining positional is then a refspec,
+    # not "the first positional is the remote."
+    explicit_remote = False
 
     positional = []
     index = 0
     while index < len(args):
         token = args[index]
         if token.startswith("-"):
+            if token == "--repo" or token.startswith("--repo="):
+                explicit_remote = True
+                if token == "--repo":
+                    index += 2
+                else:
+                    index += 1
+                continue
             # --flag=value is self-contained; --flag value consumes the next token.
             if token in PUSH_VALUE_FLAGS:
                 index += 2
@@ -161,8 +327,12 @@ def push_targets_protected(args):
         positional.append(token)
         index += 1
 
-    # First positional is the remote; anything after it is a refspec.
-    refspecs = positional[1:] if len(positional) > 1 else []
+    # First positional is the remote; anything after it is a refspec. When
+    # --repo already supplied the remote, every positional left is a refspec.
+    if explicit_remote:
+        refspecs = positional
+    else:
+        refspecs = positional[1:] if len(positional) > 1 else []
 
     for refspec in refspecs:
         protected = destination_is_protected(refspec)
@@ -174,11 +344,11 @@ def push_targets_protected(args):
         return None
 
     # No refspec: git resolves the destination from the current branch.
-    state = current_branch_state()
+    state = current_branch_state(global_flags=global_flags)
     if state:
         return "{}, so a bare push would write to a protected branch".format(state)
 
-    if git("config", "push.default") == "matching":
+    if git("config", "push.default", global_flags=global_flags) == "matching":
         return (
             "push.default is 'matching', so a bare push can write to "
             "a protected branch. Name the branch explicitly."
@@ -207,6 +377,25 @@ def check_segment(segment):
     if not tokens:
         return None
 
+    assigns, tokens = unwrap_command(assigns, tokens)
+    if not tokens:
+        return None
+
+    # `sh -c` may have unwrapped into a whole new command line containing its
+    # own shell operators (e.g. `sh -c "cd x && git push --force origin y"`).
+    # Re-split and recurse rather than assuming tokens[0] is still the head.
+    rejoined = shlex.join(tokens)
+    if SEGMENT_SPLIT.search(rejoined):
+        for inner_segment in SEGMENT_SPLIT.split(rejoined):
+            reason = check_segment(inner_segment)
+            if reason:
+                return reason
+        return None
+
+    assigns, tokens = strip_assignments(tokens)
+    if not tokens:
+        return None
+
     invoked = os.path.basename(tokens[0])
     if invoked != "git":
         return None
@@ -217,7 +406,7 @@ def check_segment(segment):
             "CLAUDE.md forbids bypassing the .husky hooks."
         )
 
-    subcommand, args = find_subcommand(tokens[1:])
+    subcommand, args, global_flags = find_subcommand(tokens[1:])
     if subcommand is None:
         return None
 
@@ -226,7 +415,7 @@ def check_segment(segment):
     )
 
     if subcommand == "push":
-        if any(flag in args for flag in FORCE_FLAGS) or "f" in short_flags:
+        if has_force_flag(args) or "f" in short_flags:
             return (
                 "force-push is forbidden. It rewrites history and destroys "
                 "commit history in open PRs.\nSee the Critical Rules in CLAUDE.md."
@@ -236,7 +425,7 @@ def check_segment(segment):
                 "--no-verify skips the .husky pre-push guards.\n"
                 "CLAUDE.md forbids bypassing the .husky hooks."
             )
-        reason = push_targets_protected(args)
+        reason = push_targets_protected(args, global_flags=global_flags)
         if reason:
             return "{}.\n{}".format(reason, BRANCH_ADVICE)
         return None
@@ -249,18 +438,12 @@ def check_segment(segment):
                 "--no-verify skips the .husky pre-commit guards.\n"
                 "CLAUDE.md forbids bypassing the .husky hooks."
             )
-        state = current_branch_state()
+        state = current_branch_state(global_flags=global_flags)
         if state:
             return "{}. Do not commit directly to a protected branch.\n{}".format(
                 state, BRANCH_ADVICE
             )
         return None
-
-    if any(flag in args for flag in FORCE_FLAGS):
-        return (
-            "force-push is forbidden. It rewrites history and destroys "
-            "commit history in open PRs.\nSee the Critical Rules in CLAUDE.md."
-        )
 
     return None
 
