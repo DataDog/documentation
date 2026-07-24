@@ -158,7 +158,7 @@ export DD_CODE_ORIGIN_FOR_SPANS_ENABLED=true
 ### Code Origin section is missing
 
 - Verify Code Origin is [enabled](#enable-code-origin) in your SDK configuration.
-- Confirm that your service meets all [compatibility requirements](#compatibility-requirements) (that is, service language, supported frameworks, and minimum tracer version). If it doesn't, you might still get some Code Origin data automatically if the source code repository is linked in Datadog. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
+- Confirm that your service meets all [compatibility requirements](#compatibility-requirements), including service language, supported frameworks, and minimum tracer version. If it doesn't, you might still get some Code Origin data automatically if the source code repository is linked in Datadog. See [Code Origin coverage through Source Code Integration](#code-origin-coverage-through-source-code-integration).
 - For most services, Code Origin data is captured for [service entry spans][12] only. You can filter to "Service Entry Spans" in the [APM Trace Explorer][1].
 
     {{< img src="tracing/code_origin/code_origin_service_entry_spans_filter.png" alt="Code Origin - Search for Service Entry Spans" style="width:100%;">}}
