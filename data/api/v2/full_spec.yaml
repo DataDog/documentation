@@ -1539,7 +1539,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -90827,6 +90827,57 @@ components:
         - NEVER_ACTIVATED
         - ACTIVATED
         - DEACTIVATED
+    SecurityMonitoringContentPackAppSecDetails:
+      description: Details for an Application Security content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAppSecDetailsType:
+      description: Type for Application Security content pack details.
+      enum:
+        - appsec
+      example: appsec
+      type: string
+      x-enum-varnames:
+        - APPSEC
+    SecurityMonitoringContentPackAuditDetails:
+      description: Details for an audit trail content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAuditDetailsType:
+      description: Type for audit trail content pack details.
+      enum:
+        - audit
+      example: audit
+      type: string
+      x-enum-varnames:
+        - AUDIT
+    SecurityMonitoringContentPackEntityDetails:
+      description: Details for an entity or identity content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetailsType"
+      required:
+        - type
+        - cp_activation
+      type: object
+    SecurityMonitoringContentPackEntityDetailsType:
+      description: Type for entity content pack details.
+      enum:
+        - entity
+      example: entity
+      type: string
+      x-enum-varnames:
+        - ENTITY
     SecurityMonitoringContentPackIntegrationStatus:
       description: The installation status of the related integration.
       enum:
@@ -90849,16 +90900,14 @@ components:
         - PARTIALLY_INSTALLED
         - DETECTED
         - ERROR
-    SecurityMonitoringContentPackStateAttributes:
-      description: Attributes of a content pack state
+    SecurityMonitoringContentPackLogsDetails:
+      description: Details for a logs-based content pack.
       properties:
-        cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect (only applies to certain pricing models)
-          example: false
-          type: boolean
         cp_activation:
           $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
-        filters_configured_for_logs:
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        filters_configured:
           description: |-
             Whether filters (Security Filters or Index Query depending on the pricing model) are
             present and correctly configured to route logs into Cloud SIEM.
@@ -90866,21 +90915,59 @@ components:
           type: boolean
         integration_installed_status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
-        logs_last_collected:
-          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
         logs_seen_from_any_index:
-          description: Whether logs for this content pack have been seen in any Datadog index within the last 72 hours.
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
           example: true
           type: boolean
-        state:
+        siem_index_incorrect:
+          description: Whether the Cloud SIEM index configuration is incorrect (only applies to certain pricing models).
+          example: false
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityFilterFilteredDataType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+        - filters_configured
+        - logs_seen_from_any_index
+        - siem_index_incorrect
+      type: object
+    SecurityMonitoringContentPackOnboardingDetails:
+      description: |-
+        Content pack details returned when Cloud SIEM is inactive for the requesting organization.
+      properties:
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        logs_seen_from_any_index:
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
+          example: true
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetailsType"
+      required:
+        - type
+        - logs_seen_from_any_index
+      type: object
+    SecurityMonitoringContentPackOnboardingDetailsType:
+      description: Type for onboarding content pack details.
+      enum:
+        - onboarding
+      example: onboarding
+      type: string
+      x-enum-varnames:
+        - ONBOARDING
+    SecurityMonitoringContentPackStateAttributes:
+      description: Attributes of a content pack state.
+      properties:
+        details:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackStateDetails"
+        status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackStatus"
       required:
-        - state
-        - cp_activation
-        - logs_seen_from_any_index
-        - logs_last_collected
-        - cloud_siem_index_incorrect
-        - filters_configured_for_logs
+        - status
+        - details
       type: object
     SecurityMonitoringContentPackStateData:
       description: Content pack state data.
@@ -90898,13 +90985,42 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringContentPackStateDetails:
+      description: |-
+        Type-specific details for a content pack state. The set of fields present depends
+        on the content pack's `type`. When Cloud SIEM is inactive for the requesting organization, `onboarding` is returned instead of the content pack's usual type, such as `logs` or `vulnerability`.`
+      discriminator:
+        mapping:
+          appsec: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+          audit: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+          entity: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+          logs: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+          onboarding: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
+          threat_intel: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+          vulnerability: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        propertyName: type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
     SecurityMonitoringContentPackStateMeta:
-      description: Metadata for content pack states
+      description: Metadata for content pack states.
       properties:
         cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect at the organization level
+          description: Whether the Cloud SIEM index configuration is incorrect for the organization.
           example: false
           type: boolean
+        retention_months:
+          description: |-
+            The number of months that standard logs are retained for organizations on the standalone_indexed` pricing model. This field is omitted for other pricing models.
+          example: 15
+          format: int32
+          maximum: 60
+          type: integer
         sku:
           $ref: "#/components/schemas/SecurityMonitoringSKU"
       required:
@@ -90942,6 +91058,7 @@ components:
         - active
         - warning
         - broken
+        - not_configured
       example: active
       type: string
       x-enum-descriptions:
@@ -90951,6 +91068,7 @@ components:
         - Activated; logs received within the last 24 hours.
         - Activated; integration not installed or logs last seen 24 to 72 hours ago.
         - Activated; no logs for over 72 hours, filter missing, or Cloud SIEM index incorrectly ordered.
+        - Activated, but no credentials are configured (entity content packs only).
       x-enum-varnames:
         - INSTALL
         - ACTIVATE
@@ -90958,6 +91076,32 @@ components:
         - ACTIVE
         - WARNING
         - BROKEN
+        - NOT_CONFIGURED
+    SecurityMonitoringContentPackThreatIntelDetails:
+      description: Details for a threat intelligence content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackThreatIntelDetailsType:
+      description: Type for threat intelligence content pack details.
+      enum:
+        - threat_intel
+      example: threat_intel
+      type: string
+      x-enum-varnames:
+        - THREAT_INTEL
     SecurityMonitoringContentPackTimestampBucket:
       description: Timestamp bucket indicating when logs were last collected.
       enum:
@@ -90980,6 +91124,31 @@ components:
         - WITHIN_24_TO_72_HOURS
         - OVER_72H_TO_30D
         - OVER_30D
+    SecurityMonitoringContentPackVulnerabilityDetails:
+      description: Details for a vulnerability content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackVulnerabilityDetailsType:
+      description: Type for vulnerability content pack details.
+      enum:
+        - vulnerability
+      example: vulnerability
+      type: string
+      x-enum-varnames:
+        - VULNERABILITY
     SecurityMonitoringCriticalAsset:
       description: The critical asset's properties.
       properties:
@@ -93351,12 +93520,16 @@ components:
         - per_gb_analyzed
         - per_event_in_siem_index_2023
         - add_on_2024
+        - standalone_indexed
+        - unknown
       example: add_on_2024
       type: string
       x-enum-varnames:
         - PER_GB_ANALYZED
         - PER_EVENT_IN_SIEM_INDEX_2023
         - ADD_ON_2024
+        - STANDALONE_INDEXED
+        - UNKNOWN
     SecurityMonitoringSchedulingOptions:
       description: Options for scheduled rules. When this field is present, the rule runs based on the schedule. When absent, it runs real-time on ingested logs.
       nullable: true
@@ -160823,6 +160996,7 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
+        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -175090,6 +175264,7 @@ paths:
         - Case Management Projects: `case-management-project`
         - Monitor Notification Rules: `monitor-notification-rule`
         - Status Pages: `status-page`
+        - Feature Flags: `feature-flag`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -175120,6 +175295,7 @@ paths:
         Case Management Projects    | `viewer`, `contributor`, `manager`
         Monitor Notification Rules  | `viewer`, `editor`
         Status Pages                | `viewer`, `responder`, `manager`
+        Feature Flags               | `viewer`, `contributor`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -187162,12 +187338,15 @@ paths:
                   value:
                     data:
                       - attributes:
-                          cloud_siem_index_incorrect: false
-                          cp_activation: activated
-                          filters_configured_for_logs: true
-                          logs_last_collected: within_24_hours
-                          logs_seen_from_any_index: true
-                          state: active
+                          details:
+                            cp_activation: activated
+                            data_last_seen: within_24_hours
+                            filters_configured: true
+                            integration_installed_status: installed
+                            logs_seen_from_any_index: true
+                            siem_index_incorrect: false
+                            type: logs
+                          status: active
                         id: aws-cloudtrail
                         type: content_pack_state
                     meta:
