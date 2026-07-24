@@ -56,11 +56,11 @@ The SDK resolves the source once during initialization. Restart the application 
 
 ### Configure agentless delivery
 
-If your organization is not on the default `datadoghq.com` site, set `DD_SITE` in the application process. The agentless source also supports these operational settings:
+If your organization is not on the default {{< region-param key="dd_site" code="true" >}} site, set `DD_SITE` in the application process. The agentless source also supports these operational settings:
 
 | Environment variable | Default | Description |
 |---|---|---|
-| `DD_SITE` | `datadoghq.com` | Datadog site used to derive the agentless endpoint. |
+| `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Datadog site used to derive the agentless endpoint. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
