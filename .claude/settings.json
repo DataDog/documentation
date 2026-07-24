@@ -44,7 +44,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "hook=\"$CLAUDE_PROJECT_DIR/.claude/hooks/block-master-git.py\"; if [ -f \"$hook\" ]; then python3 \"$hook\"; fi",
+            "command": "python3 \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-master-git.py\"",
             "timeout": 10
           }
         ]

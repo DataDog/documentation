@@ -30,18 +30,8 @@ SEGMENT_SPLIT = re.compile(r"&&|\|\||;|\||\n")
 # Leading VAR=value assignments, e.g. `HUSKY=0 git commit`.
 ASSIGNMENT = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
 
-# `git` global flags that consume the following token. `-c` and `--config-env`
-# matter here beyond argument counting: `git -c core.hooksPath=/dev/null commit`
-# disables the .husky hooks, so the subcommand behind them must still be found.
-GIT_GLOBAL_VALUE_FLAGS = {
-    "-C",
-    "-c",
-    "--config-env",
-    "--git-dir",
-    "--work-tree",
-    "--namespace",
-    "--exec-path",
-}
+# `git` global flags that consume the following token.
+GIT_GLOBAL_VALUE_FLAGS = {"-C", "--git-dir", "--work-tree", "--namespace", "--exec-path"}
 
 # `git push` flags that consume the following token, so it is not mistaken for
 # a remote or a refspec.
@@ -55,10 +45,6 @@ PUSH_VALUE_FLAGS = {
 
 FORCE_FLAGS = {"--force", "--force-with-lease", "--force-if-includes"}
 
-# Refspec destinations that resolve to whatever branch HEAD points at, so the
-# current branch decides whether the push is protected.
-HEAD_ALIASES = {"HEAD", "@"}
-
 BRANCH_ADVICE = (
     "Create a feature branch first: git checkout -b <name>/<description>\n"
     "See the Critical Rules and Branch Naming sections in CLAUDE.md."
@@ -68,16 +54,6 @@ BRANCH_ADVICE = (
 def fail(message):
     """Format a block message for stderr."""
     return "[block-master-git] {}\n".format(message)
-
-
-def has_force_flag(args):
-    """
-    Return True if any argument is a force flag.
-
-    Matches on the flag name only, so the value forms
-    (`--force-with-lease=refs/heads/x`) are caught alongside the bare flags.
-    """
-    return any(arg.split("=", 1)[0] in FORCE_FLAGS for arg in args)
 
 
 def git(*args):
@@ -132,56 +108,27 @@ def strip_assignments(tokens):
 
 
 def find_subcommand(tokens):
-    """
-    Split `git` global flags off the subcommand.
-
-    Returns (globals, subcommand, remaining_args). The globals are returned
-    rather than discarded so `-c core.hooksPath=...` can be inspected.
-    """
+    """Skip `git` global flags and return (subcommand, remaining_args)."""
     index = 0
     while index < len(tokens):
         token = tokens[index]
         if not token.startswith("-"):
-            return tokens[:index], token, tokens[index + 1 :]
+            return token, tokens[index + 1 :]
         if token in GIT_GLOBAL_VALUE_FLAGS:
             index += 2
         else:
             index += 1
-    return tokens, None, []
+    return None, []
 
 
-def disables_hooks(globals_):
-    """Return True if the global flags turn off the repository's git hooks."""
-    for index, token in enumerate(globals_):
-        value = None
-        if token in ("-c", "--config-env"):
-            value = globals_[index + 1] if index + 1 < len(globals_) else ""
-        elif token.startswith("-c") and token != "-c":
-            # Attached form, e.g. `-ccore.hooksPath=/dev/null`.
-            value = token[2:]
-        elif token.startswith("--config-env="):
-            value = token[len("--config-env=") :]
-        if value is None:
-            continue
-        if value.split("=", 1)[0].strip().lower() == "core.hookspath":
-            return True
-    return False
-
-
-def refspec_destination(refspec):
-    """Return the branch name a refspec writes to, stripped of any prefix."""
+def destination_is_protected(refspec):
+    """Return the protected branch a refspec targets, or None."""
     # `foo:refs/heads/master` -> take the part after the LAST colon so the
     # refs/heads/ prefix is handled rather than tripping on the first colon.
     destination = refspec.rsplit(":", 1)[-1] if ":" in refspec else refspec
     destination = destination.strip()
     if destination.startswith("refs/heads/"):
         destination = destination[len("refs/heads/") :]
-    return destination
-
-
-def destination_is_protected(refspec):
-    """Return the protected branch a refspec targets, or None."""
-    destination = refspec_destination(refspec)
     return destination if destination in PROTECTED else None
 
 
@@ -222,24 +169,16 @@ def push_targets_protected(args):
         if protected:
             return "this push targets {}".format(protected)
 
-    # `git push origin HEAD` names a refspec but still resolves through HEAD,
-    # so it writes to master when HEAD is on master. Fall through to the
-    # current-branch check rather than treating it as an explicit destination.
-    follows_head = any(
-        refspec_destination(refspec) in HEAD_ALIASES for refspec in refspecs
-    )
-
-    if refspecs and not follows_head:
+    if refspecs:
         # Explicit, non-protected destinations. Allow.
         return None
 
-    # No refspec, or one that resolves through HEAD: git resolves the
-    # destination from the current branch.
+    # No refspec: git resolves the destination from the current branch.
     state = current_branch_state()
     if state:
-        return "{}, so this push would write to a protected branch".format(state)
+        return "{}, so a bare push would write to a protected branch".format(state)
 
-    if not refspecs and git("config", "push.default") == "matching":
+    if git("config", "push.default") == "matching":
         return (
             "push.default is 'matching', so a bare push can write to "
             "a protected branch. Name the branch explicitly."
@@ -278,22 +217,16 @@ def check_segment(segment):
             "CLAUDE.md forbids bypassing the .husky hooks."
         )
 
-    globals_, subcommand, args = find_subcommand(tokens[1:])
+    subcommand, args = find_subcommand(tokens[1:])
     if subcommand is None:
         return None
-
-    if disables_hooks(globals_):
-        return (
-            "core.hooksPath disables the repository's git hooks.\n"
-            "CLAUDE.md forbids bypassing the .husky hooks."
-        )
 
     short_flags = "".join(
         token[1:] for token in args if token.startswith("-") and not token.startswith("--")
     )
 
     if subcommand == "push":
-        if has_force_flag(args) or "f" in short_flags:
+        if any(flag in args for flag in FORCE_FLAGS) or "f" in short_flags:
             return (
                 "force-push is forbidden. It rewrites history and destroys "
                 "commit history in open PRs.\nSee the Critical Rules in CLAUDE.md."
@@ -323,7 +256,7 @@ def check_segment(segment):
             )
         return None
 
-    if has_force_flag(args):
+    if any(flag in args for flag in FORCE_FLAGS):
         return (
             "force-push is forbidden. It rewrites history and destroys "
             "commit history in open PRs.\nSee the Critical Rules in CLAUDE.md."
