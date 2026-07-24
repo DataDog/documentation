@@ -22,7 +22,7 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
-<div class="alert alert-warning"><strong>Node.js agentless limitation:</strong> The initial agentless releases in <code>dd-trace</code> 5.116.0 and 6.5.0 support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases. Do not set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> to enable these features in agentless mode. The setting is deprecated and preserves Agent Remote Configuration when no explicit configuration source is set; remove it when you migrate to agentless delivery.</div>
+<div class="alert alert-warning"><strong>Node.js agentless limitation:</strong> The initial agentless releases in <code>dd-trace</code> 5.116.0 and 6.5.0 support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases. Do not set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> to enable these features in agentless mode. The setting is deprecated and preserves Agent Remote Configuration when no explicit configuration source is set; remove it when you <a href="/feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup">migrate to agentless delivery</a>.</div>
 
 ## Prerequisites
 
