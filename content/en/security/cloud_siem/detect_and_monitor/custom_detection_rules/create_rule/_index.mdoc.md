@@ -31,6 +31,7 @@ aliases:
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/scheduled_rule
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/historical_job
+- /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
 ---
 
 ## Overview
