@@ -164,7 +164,7 @@ Assertions define what an expected test result is. After you click {{< ui >}}Tes
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
 | body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5], <br> [`jsonschema`][18] | _String_ <br> _[Regex][6]_ <br> _String_, _[Regex][6]_ <br> _String_ |
 | body hash     | `md5`, `sha1`, `sha256`                                                                                 | _String_                                                        |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `does not exist`, <br> `is less than`, `is less than or equal`, <br> `is more than`, `is more than or equal` | _String_ <br> _[Regex][6]_ <br> _Integer_ |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> `does not exist`, <br> `is less than`, `is less than or equal`, `is more than`, `is more than or equal` | _String_ <br> _[Regex][6]_ <br> _None_ <br> _Integer_ |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][6]_                                                     |
 
