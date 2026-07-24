@@ -1,9 +1,9 @@
 ---
 title: Install the Standalone DDOT Collector as a Kubernetes DaemonSet
 description: Deploy the standalone Datadog Distribution of the OpenTelemetry (DDOT) Collector on Kubernetes using the OpenTelemetry Operator or Helm chart.
-code_lang: kubernetes_standalone
-type: multi-code-lang
-code_lang_weight: 3
+# code_lang: kubernetes_standalone
+# type: multi-code-lang
+# code_lang_weight: 3
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
