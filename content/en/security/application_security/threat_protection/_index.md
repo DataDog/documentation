@@ -7,6 +7,12 @@ further_reading:
   text: "Protect your applications from zero-day attacks with Datadog Exploit Prevention"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Use Threat Protection in [App and API Protection][1] (AAP) to detect attacks against your applications and APIs, perform investigations, and block malicious traffic in real time.
 
 To get started, [set up AAP][2] on your services so they report security traces. AAP then detects threats from your live application traffic and lets you respond to them.

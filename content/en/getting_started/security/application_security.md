@@ -20,8 +20,15 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
   tag: "Learning Center"
   text: "Block Application Attacks with Application & API Protection"
+site_support_id: application_security_override
 
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 ## Overview
 

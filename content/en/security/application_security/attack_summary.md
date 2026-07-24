@@ -13,6 +13,12 @@ further_reading:
   text: "Threat Protection Overview"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 <!-- {{< img src="security/application_security/threats/appsec-threat-overview-page-top.png" alt="Screenshot of the AAP Attack Summary page"  >}} -->
 
 The App and API Protection (AAP) [Attack Summary][2] provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.

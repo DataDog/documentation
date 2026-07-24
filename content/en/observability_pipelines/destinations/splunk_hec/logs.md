@@ -73,6 +73,25 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+### 401 Unauthorized errors
+
+{{% observability_pipelines/splunk_hec_unauthorized_error %}}
+
+## Metrics
+
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
+
+### Splunk HEC metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `splunk_hec_logs` for Splunk HEC metrics.
+
+`pipelines.splunk_pending_acks`
+: **Description**: The number of outstanding Splunk HEC indexer acknowledgements awaiting a response.
+: **Metric type**: gauge
+
 ## How the destination works
 
 ### Event batching
@@ -91,3 +110,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [8]: /observability_pipelines/sources/splunk_hec/
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

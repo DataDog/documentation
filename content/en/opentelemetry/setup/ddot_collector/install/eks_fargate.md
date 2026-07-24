@@ -136,7 +136,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [resourcedetection, infraattributes]
+      processors: [resourcedetection, infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]

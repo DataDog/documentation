@@ -139,6 +139,26 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : Assigns or unassigns security findings to a user. Assignment cascades to any linked cases. Omit the assignee ID to unassign.
 : *Permissions required: `Security Monitoring Findings Write`*
 
+`list_datadog_security_findings_automation_rules`
+: Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
+: *Permissions required: `Security Pipelines Read`*
+
+`create_datadog_security_findings_automation_rule`
+: Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+: *Permissions required: `Security Pipelines Write`, `Security Monitoring Findings Read`*
+
+`update_datadog_security_findings_automation_rule`
+: Updates an existing automation rule. Supports partial updates, so only the provided fields are changed. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
+: *Permissions required: `Security Pipelines Write`*
+
+`delete_datadog_security_findings_automation_rule`
+: Permanently deletes a security findings automation rule by ID.
+: *Permissions required: `Security Pipelines Write`*
+
+`reorder_datadog_security_findings_automation_rules`
+: Moves an automation rule up or down in the list. Rules are applied in order, so a rule's position sets its priority.
+: *Permissions required: `Security Pipelines Write`*
+
 ### Detection Rules
 
 `get_datadog_security_detection_rules_schema`

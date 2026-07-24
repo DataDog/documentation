@@ -345,15 +345,15 @@ After you enable logging collection:
 3. Configure `auto_explain` settings. The log format _must_ be `json`, but other settings can vary depending on your application. This example logs an `EXPLAIN ANALYZE` plan for all queries over one second, including buffer information but omitting timing (which can have overhead).
 
    ```conf
-    auto_explain.log_format: "json"
-    auto_explain.log_min_duration: "1000"
-    auto_explain.log_analyze: "on"
-    auto_explain.log_buffers: "on"
-    auto_explain.log_timing: "off"
-    auto_explain.log_triggers: "on"
-    auto_explain.log_verbose: "on"
-    auto_explain.log_nested_statements: "on"
-    auto_explain.sample_rate: "1"
+    auto_explain.log_format = 'json'
+    auto_explain.log_min_duration = 1000
+    auto_explain.log_analyze = 'on'
+    auto_explain.log_buffers = 'on'
+    auto_explain.log_timing = 'off'
+    auto_explain.log_triggers = 'on'
+    auto_explain.log_verbose = 'on'
+    auto_explain.log_nested_statements = 'on'
+    auto_explain.sample_rate = 1
    ```
 
 4. [Restart the Agent][10].
