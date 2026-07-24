@@ -230,7 +230,7 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Application Security Management Protect Read`*
 
 `upsert_datadog_security_aap_custom_rule`
-: Creates or updates an AAP custom WAF rule in the attack attempt, business logic, or security response category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+: Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
 : *Permissions required: `Application Security Management Protect Write`*
 
 `delete_datadog_security_aap_custom_rule`

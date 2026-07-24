@@ -1882,12 +1882,11 @@ Retrieves one App & API Protection (AAP) custom WAF rule by ID or lists custom r
 
 - List custom WAF rules that apply to service "checkout-service" in production.
 - Get AAP custom rule "rule-xyz-123".
-- Show me custom security response rules that block traffic.
 
 ### `upsert_datadog_security_aap_custom_rule`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
-Creates or updates an AAP custom WAF rule in the attack attempt, business logic, or security response category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
 
 - Create a monitoring custom WAF rule for requests to path "/admin".
 - Update AAP custom rule "rule-xyz-123" to block matching traffic.
