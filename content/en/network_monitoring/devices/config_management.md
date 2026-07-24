@@ -136,7 +136,7 @@ The comparison view shows both configurations side by side with inline diffs tha
 
 ### Roll back to a previous configuration
 
-If a configuration change causes an issue, you can restore a device to a previous configuration directly from Datadog. Rollbacks use a Private Action Runner to apply the selected configuration back to the device.
+If a configuration change causes an issue, you can restore a device to a previous configuration directly from Datadog. Rollbacks use a Private Action Runner to restore the selected configuration to the device.
 
 See [Network Configuration Management Rollbacks][8] for setup and usage instructions.
 

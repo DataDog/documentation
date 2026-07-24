@@ -65,7 +65,7 @@ Rollbacks are supported for the following vendors and platforms:
        max_raw_config_store_bytes: 2000000000
    ```
 
-4. The Agent process needs write access to the `run_path` directory, where rollback data is stored locally.
+4. The Agent process needs write access to the `run_path` directory where rollback data is stored locally.
 
 5. Restart the Agent to apply the configuration changes.
 
@@ -73,7 +73,7 @@ Rollbacks are supported for the following vendors and platforms:
 
 1. [Set up a Private Action Runner][1] on a host that the Agent's IPC port can reach.
 2. Add `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` to the `private_action_runner.actions_allowlist` section of `/etc/datadog-agent/datadog.yaml`. See [Change the allowlist of a runner][3] for details.
-3. Register the runner in Datadog and assign it to an execution group. Within that group, create a policy within the execution group that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action.
+3. Register the runner in Datadog and assign it to an execution group. Within that group, create a policy that allows the `com.datadoghq.remoteaction.networkconfigmanagement.rollbackConfig` action.
    - The policy must grant `Editor` access to users with the `NCM Device Config Write` role.
 
    {{< img src="/network_device_monitoring/config_mgmt/execution_group_policy.png" alt="Screenshot that shows how to add the NCM Write role to an execution group policy" style="width:100%;" >}}
@@ -92,7 +92,8 @@ Rollbacks use the following NCM permissions:
 
 1. Navigate to the [Configuration tab][2] for a device in the NDM device view.
 2. Select the configuration version you want to roll back to. The side panel displays a {{< ui >}}Rollback{{< /ui >}} button for that version.
-3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal, and click {{< ui >}}Rollback{{< /ui >}} again to confirm.
+3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal.
+4. Click {{< ui >}}Rollback{{< /ui >}} again to confirm.
 
    {{< img src="/network_device_monitoring/config_mgmt/rollback.png" alt="Screenshot that shows when a rollback has been initiated and what to expect" style="width:100%;" >}}
 
