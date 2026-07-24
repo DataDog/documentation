@@ -101,11 +101,12 @@ Connect Vertex AI to Agent Observability with your Google Cloud Platform account
 
 {{< img src="llm_observability/configuration/vertex-ai-pint.png" alt="The Vertex AI onboarding workflow. Follow steps to configure your GCP service account with the right Vertex AI permissions for use with Agent Observability." style="width:100%;" >}}
 
-**Note**: When you run evaluations, the location selector offers `us (multi-region)` and `eu (multi-region)` options for jurisdictional data residency, keeping requests within the US or EU respectively, in addition to single-region and global locations.
+**Note**: When you run evaluations, the location selector offers single-region, multi-region, and global options. For details on each option, see [Google's Vertex AI locations documentation][4].
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [2]: https://docs.cloud.google.com/vertex-ai/docs/general/access-control#aiplatform.user
 [3]: https://console.cloud.google.com/apis/library/aiplatform.googleapis.com
+[4]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 {{% /tab %}}
 
 {{% tab "AI Gateway" %}}
