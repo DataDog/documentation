@@ -7663,16 +7663,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Disk Buffer Durability
+      url: /byoc-logs/operate/disk_buffer_durability
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_disk_buffer_durability
+      weight: 604
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 604
+      weight: 605
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 605
+      weight: 606
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem

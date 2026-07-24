@@ -204,10 +204,29 @@ For more information about custom measures, see the [Add Custom Measures Guide][
 
 If the browser application being tested is instrumented using [Browser Monitoring][3], the Playwright test results and their generated RUM browser sessions and session replays are automatically linked. For more information, see the [Instrumenting your browser tests with RUM guide][4].
 
+### Upload test failure screenshots
+
+When enabled, Test Optimization uploads screenshots that Playwright captures when a test fails. View the screenshots in the {{< ui >}}Media{{< /ui >}} tab of the Test Optimization test details side panel. Use them to inspect browser state at the time of failure.
+
+{{< img src="continuous_integration/tests/setup/playwright-failure-screenshot-media-tab.png" alt="A Playwright failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
+
+Use [`dd-trace` v5.116.0 or later][5] on the v5 release line, or [`dd-trace` v6.5.0 or later][6] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Playwright configuration, set [`screenshot`][7] under `use` to one of the following values:
+
+- `'on'`: Capture screenshot after each test.
+- `'only-on-failure'`: Capture screenshot after each test failure.
+- `'on-first-failure'`: Capture screenshot after each test's first failure.
+
+**Note**: If you use `'on'`, Test Optimization only uploads screenshots from failed tests.
+
 [1]: /tracing/trace_collection/custom_instrumentation/nodejs?tab=locally#adding-tags
 [2]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [3]: /real_user_monitoring/application_monitoring/browser/setup/
 [4]: /continuous_integration/guides/rum_integration/
+[5]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.116.0
+[6]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.5.0
+[7]: https://playwright.dev/docs/api/class-testoptions#test-options-screenshot
 {{% /tab %}}
 
 {{% tab "Cucumber" %}}
@@ -408,7 +427,9 @@ When enabled, Test Optimization uploads screenshots that Cypress captures when a
 
 {{< img src="continuous_integration/tests/setup/cypress-failure-screenshot-media-tab.png" alt="A Cypress failure screenshot displayed in the Media tab of the Test Optimization test details side panel." style="width:100%;" >}}
 
-To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][8] is set to `true` (the default).
+Use [`dd-trace` v5.112.0 or later][8] on the v5 release line, or [`dd-trace` v6.1.0 or later][9] on the v6 release line.
+
+To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` environment variable to `1`. In your Cypress configuration, make sure [`screenshotOnRunFailure`][10] is set to `true` (the default).
 
 [1]: https://docs.cypress.io/guides/tooling/plugins-guide#Using-a-plugin
 [2]: https://docs.cypress.io/api/plugins/after-run-api
@@ -417,7 +438,9 @@ To enable screenshot uploads, set the `DD_TEST_FAILURE_SCREENSHOTS_ENABLED` envi
 [5]: /tests/guides/add_custom_measures/?tab=javascripttypescript
 [6]: /real_user_monitoring/application_monitoring/browser/setup/
 [7]: /continuous_integration/guides/rum_integration/
-[8]: https://docs.cypress.io/app/references/configuration#Screenshots
+[8]: https://github.com/DataDog/dd-trace-js/releases/tag/v5.112.0
+[9]: https://github.com/DataDog/dd-trace-js/releases/tag/v6.1.0
+[10]: https://docs.cypress.io/app/references/configuration#Screenshots
 {{% /tab %}}
 
 {{% tab "Vitest" %}}
