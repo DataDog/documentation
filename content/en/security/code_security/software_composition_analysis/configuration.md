@@ -20,14 +20,14 @@ The `sca` key requires `schema-version: v1.1` and supports the following field:
 
 Example:
 
-```yaml
+{{< code-block lang="yaml" >}}
 schema-version: v1.1
 sca:
   ignore-paths:
     - "vendor/"
     - "**/node_modules/**"
     - "third_party/"
-```
+{{< /code-block >}}
 
 For more information on configuration locations, precedence, and merging, see [Code Security Configuration Reference][1].
 
