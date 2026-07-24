@@ -584,9 +584,10 @@ Each of these metrics has `ml_app`, `model_server`, `model_provider`, `model_nam
 
 You can use basic CRUD operations to manipulate managed evaluation configs, after you have the `DD_API_KEY` [API key][14] specified in your environment.
 
- - [GET][11] existing evaluation configurations
- - [PUT][12] existing evaluation configurations
- - [DELETE][13] existing evaluation configurations
+ - [LIST][18] all custom evaluator configurations
+ - [GET][11] an existing evaluator configuration by name
+ - [PUT][12] an existing evaluator configuration by name
+ - [DELETE][13] an existing evaluator configuration by name
 
 ## Further Reading
 
@@ -609,4 +610,5 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 [15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+[18]: /api/latest/llm-observability/#list-custom-evaluator-configurations
 
