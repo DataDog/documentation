@@ -36,7 +36,7 @@ aliases:
 ## Overview
 
 ### How rule creation works
-The languages you can use to write a query in a new rule vary, depending on the type of search query and the rule type. Click a search query, or rule type to apply it as a filter to this page.
+The languages you can use to write a query in a new rule vary, depending on the type of search query and the rule type. Click a search query or rule type to apply it as a filter to this page, then choose a query language above from the available options.
 
 {% table %}
 * **Search Query**
