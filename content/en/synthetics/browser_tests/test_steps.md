@@ -364,12 +364,13 @@ To define your HTTP request:
 
 Assertions define what an expected test result is. After you click {{< ui >}}Send{{< /ui >}}, basic assertions on `status code`, `response time`, and `header` `content-type` are added based on the test response. Assertions are optional for HTTP steps in browser tests.
 
-| Type            | Operator                                                                                                               | Value type                                               |
-|-----------------|------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
-| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12] | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ |
-| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                                       | _String_ <br> _[Regex][13]_                              |
-| `response time` | `is less than`                                                                                                         | _Integer (ms)_                                           |
-| `status code`   | `is`, `is not`                                                                                                         | _Integer_                                                |
+| Type            | Operator                                                                                                                                              | Value type                                               |
+|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------|
+| `body`          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][11], [`xpath`][12], <br> [`jsonschema`][16]       | _String_ <br> _[Regex][13]_ <br> _String_, _[Regex][13]_ <br> _String_ |
+| `body hash`     | `md5`, `sha1`, `sha256`                                                                                                                               | _String_                                                 |
+| `header`        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, `does not exist`, <br> `is less than`, `is less than or equal`, <br> `is more than`, `is more than or equal` | _String_ <br> _[Regex][13]_ <br> _Integer_               |
+| `response time` | `is less than`                                                                                                                                       | _Integer (ms)_                                           |
+| `status code`   | `is`, `is not`, <br> `matches`, `does not match`                                                                                                      | _Integer_ <br> _[Regex][13]_                             |
 
 HTTP requests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
@@ -585,3 +586,4 @@ To edit a browser recording after it's saved:
 [13]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [14]: https://app.datadoghq.com/synthetics/tests
 [15]: /synthetics/guide/export-tests-to-terraform
+[16]: https://json-schema.org/
