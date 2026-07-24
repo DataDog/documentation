@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -59,6 +59,7 @@ The AI cost summary page provides:
 - **Daily AI Cost**: Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
 - **Top Cost Drivers**: The models, projects, services, and users generating the most spend.
 - **Active AI Cost Anomalies**: Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **AI Cost Recommendations**: Cost [recommendations][17] and optimization opportunities surfaced across all connected providers. Select a recommendation to open a side panel with more details and options for further action.
 - **AI Cost Dashboards**: Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
 
 ## Normalized AI tags
@@ -117,6 +118,8 @@ The following tags are available through OOTB allocation rules:
 {{% /tab %}}
 {{< /tabs >}}
 
+In addition, user-level allocation is support for Cursor.
+
 Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
 
 {{< img src="cloud_cost/ai_costs/ccm-tag-pipeline-ai-costs.png" alt="The Tag Pipelines Rule Setup page, showing user_email values mapped to team values through an existing reference table, and additional tag mapping options." responsive="true" style="width:100%; background:none; border:none; box-shadow:none;">}}
@@ -145,3 +148,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [14]: /cloud_cost_management/reporting
 [15]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
+[17]: /cloud_cost_management/recommendations
