@@ -73,7 +73,7 @@ A definition without `spec.implementedBy` can match the same route on any servic
 
 A catch-all path is a path made entirely of parameters, such as `/{resource}` or `/{resource}/{id}`. To prevent an ambiguous match across services, Datadog does not combine traffic with an unscoped catch-all definition. Add the traffic's service to `spec.implementedBy`.
 
-For example, `GET /{resource}` without `spec.implementedBy` remains separate from traffic with `service:store-api`, `http.method:GET`, and `http.route:/orders`. Adding `service:store-api` to `spec.implementedBy` allows them to combine. Each parameter still matches only one path segment, so `/{resource}` does not match `/orders/123`; use `/{resource}/{id}` for that shape.
+For example, `GET /{resource}` without `spec.implementedBy` remains separate from traffic with `service:store-api`, `@http.method:GET`, and `@http.route:/orders`. Adding `service:store-api` to `spec.implementedBy` allows them to combine. Each parameter still matches only one path segment, so `/{resource}` does not match `/orders/123`; use `/{resource}/{id}` for that shape.
 
 ### No telemetry data for OpenAPI file
 
