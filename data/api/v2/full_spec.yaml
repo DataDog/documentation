@@ -92708,6 +92708,10 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteAttributes"
+        id:
+          description: Request ID. This value is echoed back as the response's resource ID.
+          example: bulk_delete
+          type: string
         type:
           $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteRequestDataType"
       required:
@@ -92733,6 +92737,12 @@ components:
     SecurityMonitoringRuleBulkDeleteResponse:
       description: Response for bulk deleting security monitoring rules.
       properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseData"
+      type: object
+    SecurityMonitoringRuleBulkDeleteResponseAttributes:
+      description: Attributes for the bulk delete response.
+      properties:
         deletedRules:
           description: List of successfully deleted rule IDs.
           items:
@@ -92744,6 +92754,25 @@ components:
             type: string
           type: array
       type: object
+    SecurityMonitoringRuleBulkDeleteResponseData:
+      description: Data for the bulk delete response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseAttributes"
+        id:
+          description: The identifier of the bulk delete response.
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseDataType"
+      type: object
+    SecurityMonitoringRuleBulkDeleteResponseDataType:
+      description: The resource type for a bulk delete response.
+      enum:
+        - bulk_delete_response
+      example: bulk_delete_response
+      type: string
+      x-enum-varnames:
+        - BULK_DELETE_RESPONSE
     SecurityMonitoringRuleBulkExportAttributes:
       description: Attributes for bulk exporting security monitoring rules.
       properties:
@@ -188477,6 +188506,7 @@ paths:
                       ruleIds:
                         - abc-000-u7q
                         - abc-000-7dd
+                    id: bulk_delete
                     type: bulk_delete_rules
             schema:
               $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeletePayload"
@@ -188488,10 +188518,14 @@ paths:
               examples:
                 default:
                   value:
-                    deletedRules:
-                      - abc-000-u7q
-                      - abc-000-7dd
-                    failedRules: []
+                    data:
+                      attributes:
+                        deletedRules:
+                          - abc-000-u7q
+                          - abc-000-7dd
+                        failedRules: []
+                      id: bulk_delete_response
+                      type: bulk_delete_response
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponse"
           description: OK
