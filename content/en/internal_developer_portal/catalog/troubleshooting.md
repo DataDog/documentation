@@ -61,13 +61,13 @@ You can scope the definition to a specific service by adding the [service parame
 
 ### Definition and traffic appear as separate endpoints
 
-Datadog combines traffic with an OpenAPI definition by matching the service, HTTP method, and path. If the definition and traffic remain separate, verify the following:
+When you add an OpenAPI specification to an API entity, Datadog adds each declared HTTP method and path to the Endpoints list and combines it with traffic when the service, HTTP method, and path all match. If the definition and traffic remain as separate entries, verify the following:
 
-- `spec.implementedBy` includes the `service` from the span. For service overrides, Datadog also checks `base_service`.
+- `spec.implementedBy` includes the `service` from the span. For service overrides, Datadog also checks [`base_service`][8].
 - The span's `@http.method` matches the method in the definition.
 - The span has `@http.route`, and its `@http.url_details.path` or `@http.route` matches the defined path. A path parameter matches exactly one segment. For example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
 
-A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches. For the complete matching rules, see [How OpenAPI specifications are combined with traffic][8].
+A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches.
 
 ### Catch-all definition does not combine with traffic
 
@@ -97,4 +97,4 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /api_catalog/add_metadata/
 [7]: /tracing/trace_collection/
-[8]: /internal_developer_portal/catalog/endpoints/#how-openapi-specifications-are-combined-with-traffic
+[8]: /tracing/guide/base_service/
