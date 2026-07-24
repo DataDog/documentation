@@ -5,11 +5,28 @@ content_filters:
     option_group_id: cloud_siem_detection_rule_search_query_options
   - trait_id: cloud_siem_detection_rule_type
     option_group_id: cloud_siem_detection_<CLOUD_SIEM_DETECTION_RULE_SEARCH_QUERY>_rule_type_options
-  - trait_id: cloud_siem_detection_rule_query_language
-    option_group_id: cloud_siem_detection_rule_query_language_options
+  - trait_id: cloud_siem_detection_threshold_rule_query_language
+    option_group_id: cloud_siem_detection_rule_event_query_only_language_options
+    show_if:
+      - cloud_siem_detection_rule_search_query: ["threshold"]
+        cloud_siem_detection_rule_type: ["real_time_rule"]
+  - trait_id: cloud_siem_detection_threshold_sql_rule_query_language
+    option_group_id: cloud_siem_detection_threshold_sql_rule_query_language_options
     show_if:
       - cloud_siem_detection_rule_search_query: ["threshold"]
         cloud_siem_detection_rule_type: ["scheduled_rule", "historical_job"]
+  - trait_id: cloud_siem_detection_sequence_rule_query_language
+    option_group_id: cloud_siem_detection_sequence_rule_query_language_options
+    show_if:
+      - cloud_siem_detection_rule_search_query: ["sequence"]
+  - trait_id: cloud_siem_detection_signal_correlation_rule_query_language
+    option_group_id: cloud_siem_detection_signal_correlation_rule_query_language_options
+    show_if:
+      - cloud_siem_detection_rule_search_query: ["signal_correlation"]
+  - trait_id: cloud_siem_detection_rule_query_language
+    option_group_id: cloud_siem_detection_rule_event_query_only_language_options
+    hide_if:
+      - cloud_siem_detection_rule_search_query: ["threshold","signal_correlation","sequence"]
 aliases:
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/scheduled_rule
@@ -18,22 +35,62 @@ aliases:
 
 ## Overview
 
+### How rule creation works
+The languages you can use to write a query in a new rule vary, depending on the type of search query and the rule type. Click a search query, or rule type to apply it as a filter to this page.
+
+{% table %}
+* **Search Query**
+* **Rule Types** {% colspan=3 %}
+---
+* 
+* **[Real-time rule](?cloud_siem_detection_rule_type=real_time_rule)**
+* **[Scheduled rule](?cloud_siem_detection_rule_type=scheduled_rule)**
+* **[Historical job](?cloud_siem_detection_rule_type=historical_job)**
+---
+* **[Threshold](?cloud_siem_detection_rule_search_query=threshold)**
+* Event query
+* Event query, SQL {% colspan=2 %}
+---
+* **[New Value](?cloud_siem_detection_rule_search_query=new_value)**
+* Event query {% rowspan=5 %} {% colspan=3 %}
+---
+* **[Anomaly](?cloud_siem_detection_rule_search_query=anomaly)**
+---
+* **[Content anomaly](?cloud_siem_detection_rule_search_query=content_anomaly)**
+---
+* **[Impossible travel](?cloud_siem_detection_rule_search_query=impossible_travel)**
+---
+* **[Third party](?cloud_siem_detection_rule_search_query=third_party)**
+---
+* **[Sequence](?cloud_siem_detection_rule_search_query=sequence)**
+* Event/rule query
+* *Not supported*
+* Event/rule query
+---
+* **[Signal correlation](?cloud_siem_detection_rule_search_query=signal_correlation)**
+* Rule query {% colspan=2 %}
+* *Not supported*
+{% /table %}
+
 {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}
+### Real-time rules
 Real-time detection rules continuously monitor and analyze incoming logs for security threats. These rules trigger immediate alerts when specific patterns or anomalies are detected, enabling quicker response to potential incidents.
 {% /if %}
 {% if equals($cloud_siem_detection_rule_type, "scheduled_rule") %}
+### Scheduled rules
 Scheduled detection rules run at predefined intervals to analyze indexed log data and detect security threats. These rules can identify patterns, anomalies, or specific conditions within a defined time frame, and trigger alerts or reports if the criteria are met.
 
 Scheduled rules complement real-time monitoring by providing periodic, in-depth analysis of logs using [calculated fields][7].
 {% /if %}
 {% if equals($cloud_siem_detection_rule_type, "historical_job") %}
+### Historical jobs
 Historical jobs are one-time executable queries on historical logs used to backtest detection rules and assess their effectiveness on past data. The generated job results are lightweight versions of signals providing information on potential threats and anomalies on historical logs. After reviewing the results, you can convert results needing immediate action into signals.
 {% /if %}
 
 ## Create a rule
 
 1. To create a detection rule, navigate to the [Create a New Detection][2] page.
-1. {% if equals($cloud_siem_detection_rule_search_query, "threshold") %}Select the **Threshold** detection method.{% /if %}
+1. {% if equals($cloud_siem_detection_rule_search_query, "threshold") %}Select the **Threshold** detection method.{% /if %}<!-- Steps to select search query type. Comments have to go back here to not interfere with the formatting! Ain't that a kick in the pants -->
 {% if equals($cloud_siem_detection_rule_search_query, "new_value") %}Select the **New value** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "anomaly") %}Select the **Anomaly** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "content_anomaly") %}Select the **Content Anomaly** detection method.{% /if %}
@@ -41,13 +98,17 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% if equals($cloud_siem_detection_rule_search_query, "third_party") %}Select the **Third party** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
 {% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
-1. {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}Select **Real-Time Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Scheduled Rule**. Then, select **Event Query**.
-{% else and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Scheduled Rule**. Then, select **SQL**.
-{% else equals($cloud_siem_detection_rule_type, "scheduled_rule") /%}Select **Scheduled Rule**.{% /if %}
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "event_query")) %}Select **Historical job**. Then, select **Event Query**.
-{% else and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_query_language, "sql")) /%}Select **Historical job**. Then, select **SQL**.
-{% else equals($cloud_siem_detection_rule_type, "historical_job") /%}Select **Historical job**.{% /if %}
+1. {% if and(or(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-Time Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select real-time rule, where event query is the only option-->
+{% if and(or(equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select scheduled rule, where event query is the only option-->
+{% if and(or(equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical Job**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select historical job, where event query is the only option-->
+{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Scheduled Rule**, then **Event query**.{% /if %}<!-- Step to select threshold/scheduled rule/event query -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Scheduled Rule**, then **SQL**.{% /if %}<!-- Step to select threshold/scheduled rule/SQL -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Historical Job**, then **Event query**.{% /if %}<!-- Step to select threshold/historical job/event query -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Historical Job**, then **SQL**.{% /if %}<!-- Step to select threshold/historical job/SQL -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "sequence"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Event/rule query** as the query language.{% /if %}<!-- Step to select sequence/real-time rule, which defaults to event/rule query -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "sequence"),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical job**, which also automatically selects **Event/rule query** as the query language.{% /if %}<!-- Step to select sequence/historical job, which defaults to event/rule query -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "signal_correlation"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/real-time, which defaults to rule query -->
+{% if and(equals($cloud_siem_detection_rule_search_query, "signal_correlation"),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/scheduled rule, which defaults to rule query -->
 
 ## Define your search query
 
@@ -198,7 +259,7 @@ For the current step and the next step:
 <!-- Scheduled rule AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
 
-{% if equals($cloud_siem_detection_rule_query_language, "event_query") %}
+{% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -214,7 +275,7 @@ For the current step and the next step:
 1. Click **Save Rule**.
 {% /if %}
 
-{% if equals($cloud_siem_detection_rule_query_language, "sql") %}
+{% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql") %}
 You can use SQL syntax to write detection rules for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:
@@ -348,7 +409,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 <!-- Historical job AND threshold -->
 {% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
 
-{% if equals($cloud_siem_detection_rule_query_language, "event_query") %}
+{% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -363,7 +424,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 1. Click **Save Rule**.
 {% /if %}
 
-{% if equals($cloud_siem_detection_rule_query_language, "sql") %}
+{% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql") %}
 You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][5].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][6]. You can create datasets to format data already stored in tables for the following data types:

@@ -544,7 +544,13 @@ options:
   label: Sequence
 
 - id: event_query
-  label: Event Query
+  label: Event query
+
+- id: rule_query
+  label: Rule query
+
+- id: event_rule_query
+  label: Event/rule query
 
 - id: sql
   label: SQL
