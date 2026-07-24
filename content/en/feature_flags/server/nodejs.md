@@ -302,7 +302,7 @@ Datadog Feature Flags is enabled by default. You do not need to set `DD_FEATURE_
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_ENABLED` | `true` | Set to `false` to disable the provider and both configuration delivery paths. |
-| `DD_SITE` | `datadoghq.com` | Datadog site used to derive the agentless endpoint. Set this when your organization uses another site. |
+| `DD_SITE` | {{< region-param key="dd_site" code="true" >}} | Datadog site used to derive the agentless endpoint. Set this when your organization uses another site. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` | `agentless` | Selects `agentless` or `remote_config` delivery. `offline` is reserved but unsupported; unsupported nonblank values fail closed. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |

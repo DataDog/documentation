@@ -29,25 +29,24 @@ Agentless configuration delivery is available in:
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-Other server SDKs and earlier Node.js releases require Agent Remote Configuration for flag delivery.
+Other server SDKs and earlier version releases require Agent Remote Configuration for flag delivery.
 
-<div class="alert alert-warning"><strong>Flag evaluation only:</strong> The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-## Default agentless architecture
+## Agentless architecture
 
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
-1. Use a Node.js SDK version listed in [Overview](#overview).
+1. Use a [supported SDK version](#overview).
 2. Configure the API key and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
    DD_API_KEY=<DATADOG_API_KEY>
-   DD_ENV=<YOUR_ENVIRONMENT>
-   {{< /code-block >}}
+   DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-   If your organization is not on the default `datadoghq.com` site, also set `DD_SITE`.
+   If your organization is not on the default {{< region-param key="dd_site" code="true" >}} site, also set `DD_SITE`.
 
-3. Initialize or access the Datadog OpenFeature provider as described on the [Node.js setup page][3]. This starts CDN polling. No Feature Flags enablement or source setting is required.
+3. Initialize or access the Datadog OpenFeature provider as described in [Node.js setup][3]. This starts CDN polling. No Feature Flags enablement or source setting is required.
 4. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
 The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.

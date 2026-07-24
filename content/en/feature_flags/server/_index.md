@@ -41,7 +41,7 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 <div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-Agentless delivery is available for Node.js in the versions listed. Other server SDKs use Agent Remote Configuration until their language pages list an agentless minimum version.
+Agentless delivery is available for the SDKs and versions listed. Other server SDKs use Agent Remote Configuration.
 
 ## Choose a language
 
@@ -84,7 +84,7 @@ DD_API_KEY=<DATADOG_API_KEY>
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. If your organization is not on the default `datadoghq.com` site, also set `DD_SITE`. See the Node.js page for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. If your organization is not on the default {{< region-param key="dd_site" code="true" >}} site, also set `DD_SITE`. See [Node.js Feature Flags][] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent Remote Configuration
 
@@ -98,7 +98,7 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Node.js customers who set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Node.js implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
 ### Remote Configuration polling interval
 
@@ -128,7 +128,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 
 <div class="alert alert-info">In the Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the experimental <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Testing with in-memory providers
 
@@ -190,3 +190,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [5]: /feature_flags/implementation_patterns/serverless/
 [7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [8]: /feature_flags/concepts/configuration_sources/
+[9]: /feature_flags/server/nodejs/

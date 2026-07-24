@@ -17,7 +17,7 @@ Datadog Feature Flags [server-side SDKs][3] evaluate flags locally from flag con
 
 ## Get started with agentless delivery
 
-Agentless delivery is the default in supported Node.js SDK versions. Other server SDKs use Agent Remote Configuration for flag delivery. To get started with Node.js, use one of these minimum versions:
+Agentless delivery is the default in the following supported SDKs and versions. Other server SDKs use Agent Remote Configuration for flag delivery. To get started, use one of these minimum versions:
 
 | SDK | Minimum version |
 |---|---|
@@ -65,13 +65,13 @@ If your organization is not on the default `datadoghq.com` site, set `DD_SITE` i
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
-The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source:
+The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:
 
-- polls every 30 seconds by default;
-- uses a 5-second request timeout by default;
-- uses ETags to avoid downloading unchanged configuration;
-- preserves the last accepted configuration during temporary network or payload errors; and
-- prevents overlapping polls.
+- Polls every 30 seconds by default
+- Uses a 5-second request timeout by default
+- Uses ETags to avoid downloading unchanged configuration
+- Preserves the last accepted configuration during temporary network or payload errors
+- Prevents overlapping polls
 
 The Datadog-managed CDN uses globally distributed points of presence, network peering, and redundant routing. Serving locations are therefore likely to be geographically close to most application workloads.
 
@@ -79,7 +79,7 @@ Keep `DD_API_KEY` in a secret manager and expose it only to the application proc
 
 #### Use a custom agentless endpoint
 
-The Datadog-managed endpoint is recommended for standard deployments. For power-user testing, local development, or an operator-managed proxy, override it with `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL`:
+The Datadog-managed endpoint is recommended for standard deployments. For advanced testing, local development, or an operator-managed proxy, override it with `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL`:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL=http://localhost:8080
@@ -91,7 +91,7 @@ The SDK sends `DD_API_KEY` only over HTTPS to the default Datadog-managed endpoi
 
 If the custom endpoint setting is invalid, the SDK keeps the provider disabled, logs the configuration error, and evaluations return caller-provided default values.
 
-Datadog-managed agentless delivery is not available for Datadog for Government in these Node.js versions. Applications on that site continue to use caller-provided default values unless they use Agent Remote Configuration.
+Datadog-managed agentless delivery is not available for Datadog for Government in the supported SDK versions. Applications on that site continue to use caller-provided default values unless they use Agent Remote Configuration.
 
 ### Enable or disable feature flags
 
@@ -148,9 +148,6 @@ If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false`, replace it with `D
 
 Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, a Node.js application without an explicit source uses agentless delivery. Set `remote_config` explicitly before the deprecated legacy setting is removed if you want to remain on Agent delivery.
 
-### Future offline mode
-
-Offline mode is planned for applications that provide flag configuration JSON at startup and do not make CDN or Remote Configuration network requests. It is reserved but not implemented in the initial agentless releases. Setting the source to `offline` fails closed without selecting another delivery path.
 
 ## Further reading
 
