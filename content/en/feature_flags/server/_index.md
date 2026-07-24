@@ -71,7 +71,7 @@ Source-specific requirements are:
 
 | Source | Requirements |
 |---|---|
-| `agentless` (default where supported) | Configure `DD_API_KEY`, `DD_ENV`, and optionally `DD_SITE` in the application process. No Agent is required for flag configuration. |
+| `agentless` (default where supported) | Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process. No Agent is required for flag configuration. |
 | `remote_config` | Datadog Agent 7.55 or later with Remote Configuration enabled, the API key configured on the Agent, and Remote Configuration enabled for your organization in [{{< ui >}}Organization Settings{{< /ui >}}][3]. |
 
 ## Agentless configuration
@@ -81,10 +81,11 @@ For `dd-trace` 5.116.0 or 6.5.0 on Node.js, configure the application process:
 {{< code-block lang="bash" >}}
 # Required for direct configuration delivery
 DD_API_KEY=<DATADOG_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. If your organization is not on the default {{< region-param key="dd_site" code="true" >}} site, also set `DD_SITE`. See [Node.js Feature Flags][] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. See [Node.js Feature Flags][9] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
 ## Agent Remote Configuration
 

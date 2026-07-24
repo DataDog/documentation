@@ -29,7 +29,7 @@ Agentless configuration delivery is available in:
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-Other server SDKs and earlier version releases require Agent Remote Configuration for flag delivery.
+Other server SDKs and `dd-trace` versions earlier than those listed require Agent Remote Configuration for flag delivery.
 
 <div class="alert alert-warning">The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
@@ -38,13 +38,12 @@ Other server SDKs and earlier version releases require Agent Remote Configuratio
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
 1. Use a [supported SDK version](#overview).
-2. Configure the API key and environment in the serverless application:
+2. Configure the API key, Datadog site, and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
    DD_API_KEY=<DATADOG_API_KEY>
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
    DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
-
-   If your organization is not on the default {{< region-param key="dd_site" code="true" >}} site, also set `DD_SITE`.
 
 3. Initialize or access the Datadog OpenFeature provider as described in [Node.js setup][3]. This starts CDN polling. No Feature Flags enablement or source setting is required.
 4. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
@@ -118,14 +117,14 @@ Do not query Datadog APIs from each serverless invocation to evaluate flags. Use
 
 ## Validate your setup
 
-Before enabling agentless Feature Flags in production:
+Before enabling Feature Flags in production:
 
-1. Confirm the application uses a minimum Node.js SDK version.
-2. Confirm the application has `DD_API_KEY`, `DD_ENV`, and the correct `DD_SITE`.
+1. Confirm the application uses a [minimum supported SDK version](#overview).
+2. For agentless delivery, confirm the application has `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. For Agent Remote Configuration, confirm the Agent has its API key and Remote Configuration enabled.
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
 5. Confirm that your application handles caller-provided defaults if configuration is unavailable during a cold start.
-6. Do not plan experimentation workflows around evaluation metrics or exposure data; these uses are not supported in the initial Node.js agentless releases.
+6. For the initial Node.js agentless releases, do not plan experimentation workflows around evaluation metrics or exposure data. These uses are not supported.
 
 ## Further reading
 
