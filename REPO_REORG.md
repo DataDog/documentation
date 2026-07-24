@@ -1,33 +1,35 @@
 # `documentation` repository reorg
 
-This project is owned by the WebOps Platform team (#webops-platform).
+## Status
 
-# Reorg status
+Not yet merged. Scheduled to take effect on Thursday, August 6, 2026.
 
-Not yet merged.
-
-# Project overview
+## Project overview
 
 We're gradually migrating the Datadog docs site from Hugo to Astro. To support this, we must reorganize the `documentation` repo into a monorepo that supports two sites (`hugo` and `astro`), instead of having the entire repo serve as our Hugo site.
 
 **This reorg causes conflicts in almost every open PR in the `documentation` repo.**
 
-## Which files does the reorg change?
+### Which files does the reorg change?
 
 The most impactful change is that any Hugo-specific site files move to a `hugo` folder instead of being located at the top level of the repo. This change impacts thousands of files, and causes the majority of conflicts.
 
 For a full list of repo files and folders and their updated location, see [the configuration file for the reorg script](https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/astro_reorg/config.yaml).
 
-# Impact
+## Impact to contributors
 
-## Code freeze
-
-We'll institute a code freeze while the reorg is in progress.
-
-## PR conflicts
+### PR conflicts
 
 This reorg will cause conflicts in almost every open PR in the `documentation` repo.
 
-Once the reorg is merged to master, all open PRs will be processed by a conflict-resolution script. Conflicts will be fixed automatically where possible. 
+Once the reorg is merged to master, all open PRs will be processed by a conflict-resolution script. Conflicts will be fixed automatically where possible.
 
 When an automatic fix is not possible, we'll defer to the author's best judgment in resolving the conflicts, but offer escalation options in the PR comments in case they need help.
+
+### Code freeze
+
+We'll institute a code freeze while the reorg is in progress, likely for a few hours on the morning of the reorg. We'll lift the freeze after the reorg changes have been merged, the build is confirmed to be operational, and the open PRs have been processed.
+
+## Owners
+
+This project is owned by the WebOps Platform team (#webops-platform).
