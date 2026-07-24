@@ -180,22 +180,6 @@ For this example, enter `Splunk HEC token (secret)` as the column name when you 
 
 You can filter and route logs based on `token_value: hec_token_one`.
 
-## How the processor works
-
-### Using Reference Tables
-
-[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
-
-When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20,000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
-
-A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
-
-If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
-
-If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
-
-Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
-
 ## Metrics
 
 ### Processor metrics
@@ -271,6 +255,22 @@ The metrics below are common to all processors consuming the same Reference Tabl
 
 `pipelines.reference_table_fetched_keys_total`
 : For each request sent to the Reference Tables API, this counter is incremented with the number of rows fetched in that request.
+
+## How the processor works
+
+### Using Reference Tables
+
+[Reference Tables][4] allow you to store information like customer details, asset lists, and service dependency information in Datadog. The Enrichment Table processor pulls rows from Reference Tables on demand and caches them locally. Table rows persist in the cache for about 10 minutes (30 minutes for a negative lookup, where the row was not found in the table). After that, they are evicted or refreshed.
+
+When the processor encounters a log that does not have a corresponding row in the cache, the log data is buffered in memory until the row is retrieved from the Reference Table. If the buffer reaches its maximum capacity (20,000 events), it begins sending the oldest buffered logs downstream without enrichment. The processor does not exert upstream backpressure.
+
+A request to read the Reference Tables is sent every second or when 250 keys are queued for a lookup.
+
+If an authentication error occurs while connecting to the Reference Table or after a series of failed requests, Datadog flushes buffered logs downstream without enrichment, to prevent the logs from waiting indefinitely, and the buffer stops accepting new logs. The processor periodically retries requests and automatically resumes normal operations when a request succeeds.
+
+If an error that causes a log to be sent without enrichment occurs, you can view it in the Worker logs. It also increments the [`pipelines.component_errors_total`](#processor-metrics) metric.
+
+Datadog does not recommend using the processor on a log field with high cardinality (in the order of 10,000 or more possible values within a time frame of 10 minutes). The Reference Tables API is subject to rate limits and might deny Worker requests. Reach out to [Datadog support][5] if you continue to notice rate limit warnings in the Worker logs while running the processor.
 
 ## Further reading
 

@@ -20,10 +20,10 @@ Flag History allows you to track changes and maintain an audit trail of your Dat
 
 When you view an individual feature flag, the {{< ui >}}Version history{{< /ui >}} sidebar section displays all changes made to that specific flag. 
 
-- Select an {{< ui >}}Environment{{< /ui >}} tab to view changes in a particular environment.
+- Select an environment tab to view changes in a particular environment.
 - Select {{< ui >}}View diff{{< /ui >}} to display a diff view of a specific change.
 
-{{< img src="/feature_flags/flag_history.png" alt="History panel for a single feature flag" style="width:100%;" >}}
+{{< img src="/feature_flags/flag_history-2.png" alt="History panel for a single feature flag" style="width:100%;" >}}
 
 ## Global flag history
 
@@ -34,7 +34,7 @@ Navigate to {{< ui >}}Feature Flags{{< /ui >}} > [{{< ui >}}Global Flag History{
 - Use the date range filter to narrow results to a specific time period.
 - Select {{< ui >}}See Changes{{< /ui >}} to display a diff view of a specific change.
 
-{{< img src="/feature_flags/flag_history_global.png" alt="Global flag history view" style="width:100%;" >}}
+{{< img src="/feature_flags/flag_history_global-2.png" alt="Global flag history view" style="width:100%;" >}}
 
 ## Further reading
 

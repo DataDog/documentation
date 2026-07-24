@@ -17,6 +17,9 @@ further_reading:
 - link: "/experiments/statistics/cuped"
   tag: "Documentation"
   text: "CUPED: Variance Reduction Technique"
+- link: "/experiments/statistics/multiple_testing_correction"
+  tag: "Documentation"
+  text: "Multiple Testing Correction"
 ---
 
 ## Overview
@@ -76,11 +79,11 @@ The prior matters most when sample sizes are small. With enough data, the poster
 
 Analysis methods are only one part of the statistical analysis plan. Datadog Experiments also supports modifying the following [settings][1]:
 
-[CUPED][3]
+[CUPED][4]
 : Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
-: Adjusts for the increased false positive risk that comes from evaluating multiple metric comparisons. This produces more conservative results and is not available with Bayesian analysis.
+: Adjusts for the increased family-wise error rate that comes from evaluating multiple metrics and treatment-variant comparisons. This produces more conservative results and is not available with Bayesian analysis. For more information, see [Multiple Testing Correction][3].
 
 Confidence level
 : Controls the width of the interval around the lift estimate. Higher confidence levels produce wider intervals and require more data to reach statistical significance.
@@ -91,3 +94,5 @@ Confidence level
 
 [1]: /experiments/plan_and_launch_experiments/#choose-a-statistical-analysis-plan
 [2]: /experiments/statistics/minimum_detectable_effect
+[3]: /experiments/statistics/multiple_testing_correction
+[4]: /experiments/statistics/cuped

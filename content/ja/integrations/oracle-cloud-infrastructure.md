@@ -11,484 +11,542 @@ custom_kind: integration
 description: OCI は、ホスト環境において多様なアプリケーションをサポートするよう設計されたクラウドサービスの集合体です。
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-oci-with-datadog/
-  tag: blog
-  text: Monitor Oracle Cloud Infrastructure with Datadog
+  tag: ブログ
+  text: Datadog で Oracle Cloud Infrastructure を監視する
 - link: https://www.datadoghq.com/blog/datadog-oci-quickstart/
-  tag: blog
-  text: Accelerate Oracle Cloud Infrastructure monitoring with Datadog OCI QuickStart
-integration_version: 1.1.0
+  tag: ブログ
+  text: Datadog OCI QuickStart を使用して Oracle Cloud Infrastructure の監視を効率化
+integration_version: 1.1.1
 media: []
 title: Oracle Cloud Infrastructure
 ---
-{{% site-region region="gov" %}}
-
-<div class="alert alert-warning">選択中の <a href="/getting_started/site">Datadog サイト</a> ({{< region-param key="dd_site_name" >}}) では、Oracle Cloud Infrastructure インテグレーションはサポートされていません。</div>
-
-{{% /site-region %}}
-
 {{< jqmath-vanilla >}}
 
-## 概要
+## 概要 {#overview}
 
-Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で利用されている infrastructure-as-a-service (IaaS) と platform-as-a-service (PaaS) です。ホスティング、ストレージ、ネットワーキング、データベースなど、30 を超えるマネージド サービスを包括的に提供しています。
+Oracle Cloud Infrastructure (OCI) は、エンタープライズ規模の企業で使用される Infrastructure-as-a-Service (IaaS) および Platform-as-a-Service (PaaS) です。これには、ホスティング、ストレージ、ネットワーキング、データベースなどに対応する、30 を超えるマネージドサービスのフルスイートが含まれています。
 
-Datadog の OCI インテグレーションを利用すると、メトリクス、ログ、リソース データを通じて OCI 環境を包括的に可視化できます。これらのデータは、ダッシュボードの構築やトラブルシューティングに役立つだけでなく、セキュリティやコンプライアンス態勢の監視にも活用できます。
+Datadog の OCI インテグレーションを使用すると、メトリクス、ログ、およびリソースデータを通じて OCI 環境を完全に可視化できます。このデータにより、ダッシュボードを駆動し、トラブルシューティングを支援することが可能になり、セキュリティおよびコンプライアンス体制を監視することができます。
 
-## セットアップ
+## セットアップ{#setup}
 
-### メトリクスの収集
+Datadog では、QuickStart のセットアップ方法の使用が推奨されています。必要に応じて、[Terraform](#oci-terraform-setup) を使用してインテグレーションをセットアップすることもできます。
 
-{{< tabs >}}
+### データ収集 {#data-collection}
 
-{{% tab "OCI QuickStart (Preview; recommended)" %}}
+#### 注意点 {#considerations}
 
-<div class="alert alert-info">
-OCI QuickStart は Preview 提供中です。今すぐ申請するには、<a href="https://docs.google.com/forms/d/1nx4ALq7iwnc2afuRaPNFNzYqGHM6UNJtj-jsVuoybBw/preview?edit_requested=true">このフォーム</a> をご利用ください。
-</div>
+- ログ、メトリクス、リソースデータ、およびイベントの収集は、デフォルトで有効になっています。セットアップ中にログまたはイベントの収集を無効にすることができます。セットアップ完了後、[Datadog OCI インテグレーションタイル ](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) から、リソースデータ収集、イベント収集、および個別のログまたはメトリクスサービスを変更できます。
+- 2026 年 1 月 1 日時点で存在していたすべての OCI 商用リージョン (OC1 レルム内) がサポートされています。この日付以降に追加された OCI リージョンはサポートされていません。
+- Datadog OCI インテグレーションは、テナンシーごとに 1 つのインテグレーションに制限されています。2025 年 6 月より前にインテグレーションをセットアップした場合、手動セットアップの手順に従っていることになります。その結果として作成されたすべての Datadog OCI インテグレーションデプロイメントスタックを、OCI QuickStart のセットアップ方法を使用する前に削除する必要があります。ログ転送を手動で構成しており、OCI QuickStart タイルでログ収集を有効にすることを選択した場合は、ログの二重送信を防ぐため、既存のログ転送リソースも削除する必要があります。詳細については、このページの [手動から QuickStart への移行セクション](#oci-integration-manual-to-quickstart-migration)を参照してください。
 
-Datadog の OCI QuickStart は、数回クリックするだけで OCI のインフラとアプリケーションの監視を始められる、フル マネージドのセットアップです。OCI QuickStart は、メトリクス、ログ、リソース データを Datadog に転送するために必要な基盤を構築し、新しいリソースや OCI コンパートメントも自動的に検出してデータ収集に取り込みます。
+{{% collapse-content title="QuickStart (推奨)" level="h4" %}}
 
-**注**:
+Datadog の OCI QuickStart は、わずか数回のクリックで OCI インフラストラクチャーとアプリケーションを監視できる、完全管理型で単一フローのセットアップエクスペリエンスです。OCI QuickStart は、メトリクス、ログ、およびリソースデータを Datadog に転送するために必要なインフラストラクチャーを作成し、データ収集のために新しいリソースや OCI コンパートメントを自動的に検出します。
 
-- デフォルトで送信されるのはメトリクスのみです。このセットアップが完了したら、[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) からログ収集とリソース データ収集を有効にしてください。
-- 2025 年 7 月 15 日時点で存在していた OCI Commercial リージョンはすべてサポートされています。この日以降に追加された OCI リージョンは、現時点ではサポートされていません。
+#### 次の場合は QuickStart セットアップを選択してください... {#choose-quickstart-setup-if}
 
-To set up the infrastructure for metric and log forwarding to Datadog:
+- OCI インテグレーションを初めてセットアップする。
+- UI ベースのワークフローを好み、必要なリソースの作成と構成にかかる時間を最小限に抑えたい。
+- スクリプトや CI/CD パイプラインでセットアップ手順を自動化したい。
 
-- [Configure the Datadog OCI integration tile](#datadog-oci-integration-tile)
-- [Deploy the QuickStart stack](#orm-stack)
-- [Complete the setup in Datadog](#complete-the-setup-in-datadog)
-- [Validate metrics are flowing](#validation)
-- [Configure metric collection (optional)](#configuration)
-- [Configure log collection (optional)](#log-collection)
+#### QuickStart セットアップの前提条件 {#quickstart-setup-prerequisites}
 
-このインテグレーションでは、Datadog へデータを転送するために Oracle Service Connector Hub を使用する必要があります。セットアップを完了する前に、[サービス制限の引き上げを申請する](https://docs.oracle.com/iaas/Content/General/Concepts/servicelimits.htm#Requesti) ことをおすすめします。必要となる Service Connector Hub のおおよその数は次のとおりです:
+- これらの手順を完了するには、OCI ユーザーアカウントに **Identity Domain Administrator** ロールが必要です。
+- インテグレーションを行うテナンシーで OCI にログインしている必要があります。
+- 画面右上で Home Region が選択された状態で OCI にログインしている必要があります。
+- お使いの OCI ユーザーアカウントが、ログインしている ID ドメイン (指定されている場合はターゲットドメイン) 内でユーザー、ユーザーグループ、および動的グループを作成可能でなければなりません。ターゲットドメインの OCID を指定する場合、お使いの OCI ユーザーアカウントはそのドメインにおける管理者権限を持っている必要があります。
+- お使いの OCI ユーザーアカウントが、root コンパートメントでポリシーを作成可能でなければなりません。
 
-$$\\text"Service Connector Hubs" = \\text"テナンシ内のコンパートメント数" / \\text"5"$$
+#### QuickStart セットアップ手順 {#quickstart-setup-instructions}
 
-{{% collapse-content title="Prerequisites for this setup" level="h4" %}}
+Datadog へのメトリクスおよびログ転送用のインフラストラクチャーをセットアップするには、以下の手順に従います。
 
-- Your OCI user account needs the **Cloud Administrator** role to complete these steps
-- You must be logged into OCI in the tenancy you want to integrate with
-- You must be logged into OCI with the Home Region selected in the top right of the screen
-- Your OCI user account needs to be in the <a href="https://docs.oracle.com/iaas/Content/Identity/domains/the_default_domain.htm" target="_blank">Default Identity Domain</a>
-- Your OCI user account must be able to create a user, user group, and dynamic group in the Default Identity Domain
-- Your OCI user account must be able to create policies in the root compartment
+- [Datadog OCI インテグレーションタイルを設定する](#configure-the-datadog-oci-integration-tile)
+- [QuickStart ORM スタックをデプロイする](#deploy-the-quickstart-orm-stack)
+- [Datadog でセットアップを完了する](#complete-the-setup-in-datadog)
+- [メトリクスが送信されていることを確認する](#validation)
+- [メトリクスまたはログの収集を設定する (オプション)](#configuration)
+- [リソース収集を設定する (オプション)](#resource-collection)
 
-{{% /collapse-content %}}
+このインテグレーションでは、Oracle Service Connector Hubs を使用してデータを Datadog に転送する必要があります。セットアップを完了する前に、[サービス制限の引き上げをリクエストする](https://docs.oracle.com/iaas/Content/General/Concepts/servicelimits.htm#Requesti)ことをお勧めします。必要な Service Connector Hubs のおおよその数は次のとおりです。
 
-#### Datadog OCI integration tile
+$$\\text"Service Connector Hubs" = \\text"Number of compartments in tenancy" / \\text"5"$$
 
-1. [Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) に移動し、**Add New Tenancy** をクリックします。
-1. Select or create a Datadog API key to use for the integration.
-1. Create a Datadog application key.
-1. Click **Create OCI Stack**. This takes you to an Oracle Resource Manager (ORM) stack to finish deployment.<br />
-   **Note**: Deploy this stack only once per tenancy.
+##### Datadog OCI インテグレーションタイルを設定する{#configure-the-datadog-oci-integration-tile}
 
-#### ORM stack
+1. [Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)に移動し、[**Add New Tenancy**] をクリックします。
+
+1. インテグレーションに使用する Datadog API キーを選択するか、作成します。
+
+1. Datadog アプリケーションキーを作成します。
+
+1. トグルを使用して、ログを有効または無効にします。
+
+1. トグルを使用して、イベント収集を有効または無効にします。
+
+1. [**Create OCI Stack**] をクリックします。これにより、Oracle Resource Manager (ORM) スタックに移動し、デプロイを完了できます。<br />
+   **注**: このスタックは、テナンシーごとに 1 回だけデプロイしてください。
+
+##### QuickStart ORM スタックをデプロイする{#deploy-the-quickstart-orm-stack}
 
 1. Oracle 利用規約に同意します。
-1. Leave the option to use custom Terraform providers unchecked.
-1. スタックのデプロイ先には既定の作業ディレクトリを使用するか、必要に応じて別のディレクトリを選択します。
-1. Click **Next**, and **Next** again.<br />
-1. **Create** をクリックし、デプロイが完了するまで最大 15 分待ちます。
 
-#### Datadog で設定を完了する
+1. カスタム Terraform プロバイダーを使用するオプションは未選択のままにします。
 
-[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) に戻り、**Ready!** をクリックします。
+1. デフォルトの作業ディレクトリを使用してスタックをデプロイするか、必要に応じて別のディレクトリを選択します。
 
-#### 検証
+1. [**Next**] をクリックします。
 
-Datadog の [OCI インテグレーション概要ダッシュボード](https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview) または [Metrics Explorer ページ](https://app.datadoghq.com/metric/explorer) で `oci.*` メトリクスを確認します。
+1. Datadog では、このテナンシーの各リージョンに仮想クラウドネットワーク (VCN) とサブネットを新規作成するために、`(Optional) Choose specific subnet(s)` セクションを空白のままにすることを推奨しています。
 
-<div class="alert alert-warning">OCI 関数メトリクス (<code>oci.faas</code> ネームスペース) とコンテナインスタンスメトリクス (<code>oci_computecontainerinstance</code> ネームスペース) はプレビュー版です。</div>
+   **オプションで**、Datadog QuickStart スタック用に既存のサブネット (OCI リージョンあたり最大 1 つ) を選択できます。その場合は、スタックにサブネット OCID を指定する必要があります。OCID を 1 行に 1 つずつ、カンマなしで入力します。Datadog QuickStart スタックは、各サブネットに対応するリージョンにデプロイされます。各サブネットの OCID は、`ocid1.subnet.oc[0-9].*` の形式である必要があります。例: `ocid1.subnet.oc1.iad.abcedfgh`。<br />
+   **注**: 既存の VCN とサブネットを使用する場合、各リージョンの VCN が以下を満たしていることを確認してください。
 
-#### 設定
+   - NAT Gateway を経由した HTTP の外向き通信が許可されている。
+   - "Oracle Services Network のすべてのサービス" をサポートするサービスゲートウェイを持っている。
+   - NAT Gateway と Service Gateway を許可するルートテーブルのルールが設定されている。
+   - HTTP リクエストを送信するためのセキュリティルールが設定されている。
 
-![Datadog における OCI テナンシの設定タブ](images/oci_configuration_tab.png)
+1. Datadog では、ユーザーとグループを新規作成するために `(Optional) Choose a User` セクションを空白のままにすることを推奨しています。グループとユーザーは、現在ログインしている OCI ID ドメインに作成されます (デフォルトドメインである必要はありません)。<br />
+   **必要に応じて**、Datadog QuickStart スタック用に既存のユーザーとグループを選択できます。この場合、Datadog はユーザーとグループのドメインを自動的に推論し、それを使用して動的グループを作成します。<br />
+   a.**Group ID**: Datadog 認証に使用する既存の OCI グループの OCID を指定します。これを指定する場合、[**User ID**] も指定する必要があります。<br />
+   b.**User ID**: Datadog 認証に使用する既存の OCI ユーザーの OCID を指定します。ユーザーは、指定されたグループのメンバーである必要があります。これを指定する場合、[**Group ID**] も指定する必要があります。
 
-セットアップが完了すると、[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) の左側で、そのテナンシ用の設定タブが利用できるようになります。以下のセクションで説明するように、テナンシ全体のデータ収集設定を適用してください。
+1. これらのユースケースは一般的ではないため、Datadog では `(Optional) Advanced configuration` セクションを空白のままにすることを推奨しています。<br />
+   **必要に応じて**、Datadog QuickStart スタック用に既存のコンパートメントとドメインを選択できます。<br />
+   a.**Compartment**: Datadog によって作成されるすべてのリソースを配置する既存のコンパートメントを選択します。<br />
+   b.**Domain**: ユーザーとグループが作成される場所を上書きするために、既存の ID ドメインの OCID を指定します。このフィールドは、手順 6 で既存のユーザーとグループが指定されていない場合にのみ表示されます。これを指定する場合、[**User Email**] も指定する必要があります。**注**: OCI ユーザーアカウントには、ターゲットドメインにおける **Identity Domain Administrator** ロールが必要です。<br />
+   c.**Resource tags**: Datadog QuickStart スタックによってデプロイされるすべての OCI リソースに追加する定義済みタグのリストを指定します。1 行に 1 つのタグを入力します。カンマは追加しないでください。各定義済みタグは、`namespace.key:value` の形式である必要があります。例: `CostCenter.Environment:prod`。空白のままにした場合、Datadog QuickStart スタックによってデプロイされた OCI リソースに定義済みタグは追加されません。<br />
 
-##### Add regions
+1. [**Next**] をクリックします。
 
-On the **General** tab, select the regions for data collection from the **Regions** checkbox list. Region selections apply to the entire tenancy, for both metrics and logs.
+1. [**Create**] をクリックし、デプロイが完了するまで最大 30 分お待ちください。
 
-**Note**: If you used the QuickStart setup method, and afterward subscribed to a new OCI region, reapply the initial setup stack in ORM. The new region then becomes available in the Datadog OCI tile.
+##### Datadog でセットアップを完了する{#complete-the-setup-in-datadog}
 
-##### Metric and log collection
-
-Use the **Metric collection** and **Log collection** tabs to configure which metrics and logs are sent to Datadog:
-
-- **Enable** or **disable** collection of metrics or logs for the entire tenancy
-- **Include** or **exclude** specific compartments based on `key:value` format compartment tags. For example:
-  - `datadog:monitored,env:prod*` includes compartments if **either** of these tags is present
-  - `!env:staging,!testing` では、**両方** のタグが存在する場合にのみコンパートメントが除外されます。
-  - `datadog:monitored,!region:us-phoenix-1` includes compartments that both have the tag `datadog:monitored` and do not have the tag `region:us-phoenix-1`
-- **Enable** or **disable** collection for specific OCI services
-
-**注**:
-
-- After modifying tags in OCI, it may take up to 15 minutes for the changes to appear in Datadog
-- In OCI, tags are not inherited by child compartments; each compartment must be tagged individually
-
-### Resource Collection
-
-[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) の **Resource Collection** タブで、**Enable Resource Collection** トグルをクリックします。リソースは [Datadog Resource Catalog](https://docs.datadoghq.com/infrastructure/resource_catalog/) で確認できます。
-
-{{% /tab %}}
-
-{{% tab "Manual setup" %}}
-
-OCI メトリクスを Datadog に転送するには
-
-- [Enter tenancy info](#enter-tenancy-info)
-- [Deploy OCI policy stack](#create-oci-policy-stack) in the home region of your tenancy to create a Datadog read-only user, group, and policies
-- [Enter DatadogROAuthUser info](#enter-datadogroauthuser-info) in Datadog
-- [Deploy OCI metric forwarding stack](#create-oci-metric-forwarding-stack) for every tenancy region you want to forward metrics from
-- [Complete the setup in Datadog](#complete-the-setup-in-datadog)
-- [Validate metrics are flowing](#validation)
-- [Configure metric collection (optional)](#configuration)
-- [Configure log collection (optional)](#log-collection)
-
-For a visual representation of this architecture, see the [Architecture section](#architecture).
-
-#### テナンシー情報を入力
-
-{{% collapse-content title="Requirements for this section" level="h5" %}}
-
-- Your OCI user account needs the **Cloud Administrator** role to complete these steps
-- Tenancy OCID
-- Home Region
+[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)に戻り、[**Ready!**] をクリックします。
 
 {{% /collapse-content %}}
 
-監視対象のテナンシの OCID と Home Region を、[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) に入力します。
+{{% collapse-content title="Terraform" level="h4" id="oci-terraform-setup" %}}
 
-- この情報は [テナンシ詳細ページ](https://cloud.oracle.com/tenancy) で確認できます。
-- Home Region には、OCI の [Regions and Availability Domains ページ](https://docs.oracle.com/iaas/Content/General/Concepts/regions.htm) に記載されている **Region Identifier** の値を入力します。
+#### 次の場合は Terraform セットアップを選択してください... {#choose-terraform-setup-if}
 
-#### Create OCI policy stack
+- インフラストラクチャーをコードとして管理しており、Datadog OCI インテグレーションをバージョン管理下に置きたい。
+- 再利用可能な provider ブロックを使用して、複数のフォルダーまたはプロジェクトを一貫した構成にする必要がある。
+- Terraform 管理環境に応じた、繰り返し可能で監査可能なデプロイメントプロセスを確立したい。
 
-{{% collapse-content title="Requirements for this section" level="h5" %}}
+Terraform を使用して Datadog OCI インテグレーションをプロビジョニングできます。このガイドでは、前提条件、必須の変数、および初期化、計画、適用の正確な手順を説明します。
 
-- OCI ユーザー アカウントには、Default ドメインで [動的グループとポリシーを作成する](https://docs.oracle.com/en/cloud/paas/weblogic-container/user/create-dynamic-groups-and-policies.html) 権限が必要です。
-- You must be in the home region of the tenancy
+#### Terraform セットアップの前提条件 {#terraform-setup-prerequisites}
+
+開始する前に、以下を行ってください。
+
+- Terraform 1.x のインストールを完了する。
+- 有効な [Datadog API キー](https://app.datadoghq.com/organization-settings/api-keys)を用意する。
+- ターゲットドメインにおける Identity Domain Administrator ロールを持つ OCI アクセス権を用意する。
+
+#### Terraform セットアップ手順 {#terraform-setup-instructions}
+
+Datadog へのメトリクスおよびログ転送用のインフラストラクチャーをセットアップするには、以下の手順に従います。
+
+- [OCI 設定ファイルを作成する](#create-an-oci-configuration-file)
+- [Terraform モジュールを設定する](#configure-the-terraform-module)
+- [Terraform でデプロイする](#deploy-with-terraform)
+- [メトリクスが送信されていることを確認する](#validation)
+- [メトリクスまたはログの収集を設定する (オプション)](#configuration)
+- [リソース収集を設定する (オプション)](#resource-collection)
+
+##### OCI 設定ファイルを作成する {#create-an-oci-configuration-file}
+
+`~/.oci/config` ファイルが、Terraform に OCI 内でリソースを作成するための権限を付与します。[API キーを作成](https://cloud.oracle.com/identity/domains/my-profile/auth-tokens)して、それを設定に追加するか、[Oracle のドキュメント](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/sdkconfig.htm)に従ってください。ファイルは次のようになります。
+
+```ini
+[DEFAULT]
+user=<USER_OCID>
+fingerprint=<USER_FINGERPRINT>
+tenancy=<TENANCY_OCID>
+region=<HOME_REGION>
+key_file=<PATH_TO_PRIVATE_KEY_FILE>
+```
+
+##### Terraform モジュールを設定する {#configure-the-terraform-module}
+
+以下の入力項目は、Datadog OCI インテグレーションモジュールを設定します。必須フィールドは注記されています。利用可能な設定オプションの一覧については、[テナンシーの追加のページ](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure/add)を参照してください。
+
+###### 1. Datadog API キーを追加します。{#1-add-a-datadog-api-key}
+
+[**Select API Key**] をクリックし、使用する API キーを選択します。
+
+###### 2. Datadog アプリケーションキーを作成します。{#2-create-a-datadog-application-key}
+
+[**Create**] をクリックすると、アプリケーションキーが生成され、フィールドに追加されます。この画面を離れると再度アクセスできなくなるため、必ずこの値をコピーして安全な場所に保存してください。
+
+###### 3. OCI テナンシー OCID を追加します。{#3-add-your-oci-tenancy-ocid}
+
+1. Datadog で監視するテナンシーの OCID を入力します。これは [cloud.oracle.com/tenancy](https://cloud.oracle.com/tenancy) で確認できます。
+1. オプションで、特定の OCI コンパートメントとサブネットを選択します。Datadog では、テナンシーの各リージョンに OCI コンパートメントと OCI Virtual Cloud Network (VCN) を新規作成するために、このセクションを空白のままにすることを推奨しています。
+
+###### 4. 自分の OCI ユーザー OCID を追加します。{#4-add-your-oci-user-ocid}
+
+ユーザー OCID を入力します。このユーザーには、Identity Domain Administrator ロールが必要です。これは、[cloud.oracle.com/identity/domains/my-profile](https://cloud.oracle.com/identity/domains/my-profile) で確認できます。
+
+###### 5. ログ収集を設定します (オプション)。{#5-configure-log-collection-optional}
+
+テナンシーからのすべてのログ収集を無効にするには、トグルをクリックしてください。特定の OCI サービスのログ収集を無効にする場合は、セットアップ後に [Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) で設定を編集します。
+
+###### 6. イベント収集を設定します (オプション)。{#6-configure-event-collection-optional}
+
+テナンシーからのすべてのイベント収集を無効にするには、トグルをクリックしてください。セットアップ後にイベント収集を無効にする場合は、[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) で設定を編集します。
+
+###### 7. 生成された Terraform モジュールの設定の詳細を確認します。{#7-confirm-the-configuration-details-of-the-generated-terraform-module}
+
+生成された Terraform モジュールは、以下の形式に従う必要があります。
+
+```hcl
+module "datadog_oci" {
+  source = "github.com/DataDog/oracle-cloud-integration//datadog-terraform-onboarding"
+
+  datadog_api_key = <API_KEY>
+  datadog_app_key = <APP_KEY>
+  datadog_site    = <DATADOG_SITE>
+
+  tenancy_ocid      = "<TENANCY_OCID>"
+  current_user_ocid = "<CURRENT_USER_OCID>"
+
+  logs_enabled              = true
+  events_collection_enabled = true
+}
+```
+
+#### Terraform でデプロイする {#deploy-with-terraform}
+
+1. 生成された Terraform モジュールをコピーし、`.tf` ファイルに貼り付けます。
+1. `terraform init && terraform apply` を実行して Terraform を初期化し、インテグレーションを作成します。変更をプレビューする場合は、`plan` を `apply` に置き換えてください。
+
+#### トラブルシューティング {#troubleshooting}
+
+##### Timeouts {#timeouts}
+
+設定を変更せずに Terraform コマンドを再実行します。
+
+##### プロバイダーの競合 {#provider-conflicts}
+
+`terraform init` コマンドでプロバイダーの競合が発生した場合は、ローカルのプロバイダーの設定をモジュールで要求されるバージョンに合わせて更新してください。
+
+##### セットアップ直後の Datadog で警告が発生する{#warnings-in-datadog-immediately-after-setup}
+
+警告が消えるまで最大 15 分ほどお待ちください。
 
 {{% /collapse-content %}}
 
-<div class="alert alert-warning">Ensure that the <strong>home region</strong> of the tenancy is selected in the top right of the screen.</div>
+#### 検証 {#validation}
 
-This Oracle Resource Manager (ORM) policy stack should only be deployed once per tenancy.
+Datadog の [OCI インテグレーション概要ダッシュボード ](https://app.datadoghq.com/dash/integration/31417/oracle-cloud-infrastructure-oci-overview) または [Metrics Explorer ページ](https://app.datadoghq.com/metric/explorer)で `oci.*` メトリクスを表示します。
 
-1. Click the **Create Policy Stack** button on the Datadog OCI integration tile.
-1. Oracle 利用規約に同意します。
-1. カスタム Terraform プロバイダーを使用するオプションは**未選択**のままにします。
-1. Use the default name and compartment for the stack, or optionally provide your own descriptive name or compartment.
-1. **Next** をクリックします。
-1. Leave the tenancy field and current user field as-is.
-1. **Next** をクリックします。
-1. **Create** をクリックします。
+<div class="alert alert-warning">OCI 関数メトリクス (<code>oci.faas</code> 名前空間) および Container インスタンスメトリクス (<code>oci_computecontainerinstance</code> 名前空間) はプレビュー版です。</div>
 
-#### Enter DatadogROAuthUser info
+### 設定 {#configuration}
 
-{{% collapse-content title="Requirements for this section" level="h5" %}}
+![Datadog における OCI テナンシーの設定タブ](images/oci_configuration_tab_2026-02-25.png)
 
-- OCID of the `DatadogROAuthUser`
-- OCI API key and fingerprint value
+セットアップ完了後、[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)の左側にテナンシーの設定タブが表示されるようになります。以下のセクションで説明されているように、テナンシー全体のデータ収集設定を適用してください。
 
-{{% /collapse-content %}}
+#### リージョンを追加する {#add-regions}
 
-1. In the OCI console search bar, search for `DatadogROAuthUser` and click on the User resource that appears.
-1. Copy the user's OCID value.
-1. その値を [Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) の **User OCID** フィールドに貼り付けます。
-1. Returning to the OCI console, generate an API key with these steps:<br />
-   a. In the bottom left corner of the screen, under **Resources**, click **API keys**.<br />
-   b. Click **Add API key**.<br />
-   c. Click **Download private key**.<br />
-   d. Click **Add**.<br />
-   e. A **Configuration file preview** popup appears, but no action is needed; close the popup.
+[**General**] タブで、[**Regions**] チェックボックスリストからデータ収集対象のリージョンを選択します。リージョンの選択は、メトリクスとログの両方について、テナンシー全体に適用されます。
 
-![OCI コンソールの Add API Key ページ](images/add_api_key.png)
+**注**: QuickStart セットアップ方法を使用し、その後新しい OCI リージョンをサブスクライブした場合は、ORM で初期セットアップスタックを再適用してください。新しいリージョンは、Datadog OCI タイルで使用できるようになります。
 
-5. フィンガープリント値をコピーし、[Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) の **Fingerprint** フィールドに貼り付けます。
-1. Copy the private key value with these steps:
-   a. Open the downloaded private key `.pem` file in a text editor, or use a terminal command such as `cat` to display the file's contents.
-   b. `-----BEGIN PRIVATE KEY-----` と `-----END PRIVATE KEY-----` を含む全内容をコピーします。
-1. プライベートキーの値を Datadog OCI インテグレーションタイルの **Private Key** フィールドに貼り付けてください。
+#### メトリクスとログを収集する {#metric-and-log-collection}
 
-#### Create OCI metric forwarding stack
+[**Metric collection**] タブと [**Log collection**] タブを使用して、どのメトリクスとログを Datadog に送信するかを設定します。
 
-{{% collapse-content title="Requirements for this section" level="h5" %}}
+##### テナンシーからのすべてのメトリクスまたはログの収集を有効/無効にする {#enable-or-disable-all-metric-or-log-collection-from-a-tenancy}
 
-- Your OCI user account must be able to create resources in the compartment
-- [Datadog API Key](https://app.datadoghq.com/organization-settings/api-keys) の値
-- Username and auth token for a user with the `REPOSITORY_READ` and `REPOSITORY_UPDATE` permissions to pull and push images to a Docker repo
-  - 認証トークンの作成方法については、[認証トークンを取得する](https://docs.oracle.com/iaas/Content/Registry/Tasks/registrygettingauthtoken.htm) を参照してください。
-  - 必要なポリシーの詳細については、[リポジトリ アクセスを制御するポリシー](https://docs.oracle.com/iaas/Content/Registry/Concepts/registrypolicyrepoaccess.htm#Policies_to_Control_Repository_Access) を参照してください。
+[Metric collection] タブと [Log collection] タブには、テナンシー全体でそのデータタイプの収集を無効にするために使用できるメイントグルがあります。テナンシーで特定のデータタイプを収集する場合、以下のセクションを使用して、[サービス ](#limit-metric-or-log-collection-to-specific-oci-services)、[コンパートメント ](#limit-metric-or-log-collection-by-compartment)、および[特定のリソース ](#limit-metric-or-log-collection-to-specific-resources)ごとに詳細なフィルタリングを実装できます。
 
-**注**: Docker registry へのログイン設定が正しいことを確認するには、[Oracle Cloud Infrastructure Registry にログインする](https://docs.oracle.com/iaas/Content/Functions/Tasks/functionslogintoocir.htm) を参照してください。
+**注**: フィルターは順番に評価されます。[**Selected Service**] はサービスからのデータ収集の主要なトグルとして機能し、次にコンパートメントタグフィルターが適用され、最後にリソースタグフィルターが適用されます。
+
+##### 特定の OCI サービスにメトリクスまたはログ収集を制限する{#limit-metric-or-log-collection-to-specific-oci-services}
+
+[**Selected Service**] セクションを使用して、個々の OCI サービスからの収集を有効または無効にします。サービスを無効にすると、そのサービスに対して設定されているリソースタグフィルターに関係なく、そのサービスからのすべての収集が停止します。サービスが有効になっている場合、リソースタグフィルターを使用して、そのサービス内の特定のリソースに収集をさらに絞り込むことができます。一致する包含タグがないリソースは除外されます。
+
+**注**: OCI でタグを変更した後、変更が Datadog に反映されるまで最大 15 分かかる場合があります。サービスのトグルの変更が有効になるまで、最大 5 分かかる場合があります。
+
+{{% collapse-content title="タグフィルター構文" level="h6" id="tag-filter-syntax" %}}
+
+[**Compartment Tags**] セクションと [**Limit Collection to Specific Resources**] セクションはいずれも、カンマで区切られた`key:value` OCI タグを受け付けます。タグの先頭に `!` を付けると、そのタグが否定されます。カンマ区切り文字の動作は、使用するタグの種類によって異なります。
+
+- **正のタグのみ**: OR ロジック。OCI オブジェクト (コンパートメントまたは特定のリソース) がリストされたタグの**いずれか**を持っている場合に含められます。
+- **負のタグのみ** (先頭に `!` を付加): OR ロジック。否定されたタグの**いずれか**が存在する場合に除外されます。
+- **正のタグと負のタグの混合**: AND ロジック。リストされた**すべて**の条件を満たす場合に含められます。
+
+例:
+
+- `datadog:monitored,env:prod*`: **いずれか**のタグが存在する場合に含めます。
+- `!env:staging,!testing:true`: **いずれか**のタグが存在する場合に除外します。
+- `datadog:monitored,!region:us-phoenix-1`: `datadog:monitored`タグが存在し、**かつ**`region:us-phoenix-1` タグが存在しない場合にのみ含めます。
+
+**タグキーの形式**: Datadog は、照合前に OCI タグキーを小文字の `snake_case` に正規化します。OCI で camelCase や PascalCase (例: `deploymentType` や `DeploymentType`) を使用して設定されたキーは、小文字の snake_case (`deployment_type`) に変換されて保存および照合されます。インテグレーションタイルでタグフィルターを指定する場合は、小文字の `snake_case` を使用してください。
 
 {{% /collapse-content %}}
 
-The metric forwarding stack must be deployed for **each combination of tenancy and region** to be monitored. For the simplest setup, Datadog recommends creating all the necessary OCI resources with the Oracle Resource Manager (ORM) stack provided below. Alternatively, you can use your existing OCI networking infrastructure.
+##### コンパートメント別にメトリクス/ログの収集を制限する{#limit-metric-or-log-collection-by-compartment}
 
-All resources created by Datadog's ORM stack are deployed to the compartment specified, and for the region currently selected in the top right of the screen.
+[**Compartment Tags**] セクションを使用して、OCI コンパートメントタグに基づき特定のコンパートメントを含める/除外します。[タグフィルターの構文](#tag-filter-syntax)で構文を参照してください。
 
-1. Click the **Create Metric Stack** button on the Datadog OCI integration tile.
-1. Oracle 利用規約に同意します。
-1. Leave the **Custom providers** option unchecked.
-1. スタックに名前を付け、それをデプロイするコンパートメントを選択します。
-1. **Next** をクリックします。
-1. **Datadog API Key** フィールドに、[Datadog API Key](https://app.datadoghq.com/organization-settings/api-keys) の値を入力します。
-1. In the **Network options** section, leave `Create VCN` checked.
+**注**: OCI では、タグは子コンパートメントに継承されません。各コンパートメントに個別にタグを付ける必要があります。
 
-{{% collapse-content title="(Optional) Use existing VCN instead" level="h4" %}}
+##### 特定のリソースにメトリクスまたはログの収集を制限する{#limit-metric-or-log-collection-to-specific-resources}
 
-If using an existing Virtual Cloud Network (VCN), the subnet's OCID must be provided to the stack. Make sure that the VCN:
+[**Limit Collection to Specific Resources**] セクションを使用して、Datadog にメトリクスやログを送信するリソースを定義します。ドロップダウンから OCI サービスを選択し、データ収集の対象とするリソースタグを指定します。[タグフィルターの構文](#tag-filter-syntax)で構文を参照してください。
 
-- Is allowed to make HTTP egress calls through NAT gateway
-- Is able to pull images from OCI container registry using service gateway
-- Has the route table rules to allow NAT gateway and service gateway
-- Has the security rules to send HTTP requests
+{{% collapse-content title="メトリクス名前空間の一覧を参照してください" level="h4" id="oci-metric-namespaces" %}}
 
-7. In the **Network options** section, uncheck the `Create VCN` option and enter your VCN information:<br />
-   a. In the **vcnCompartment** field, select your compartment.<br />
-   b. In the **existingVcn** section, select your existing VCN.<br />
-   c. **Function Subnet OCID** セクションで、使用するサブネットの OCID を入力します。
-
-{{% /collapse-content %}}
-
-8. In the **Metrics settings** section, optionally remove any metric namespaces from collection.
-1. In the **Metrics compartments** section, enter a comma-separated list of compartment OCIDs to monitor. Any metric namespace filters selected in the previous step are applied to each compartment.
-1. In the **Function settings** section, select `GENERIC_ARM`. Select `GENERIC_X86` if deploying in a Japan region.
-1. **Next** をクリックします。
-1. **Create** をクリックします。
-1. [Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) に戻り、**Create Configuration** をクリックします。
-
-**注**:
-
-- By default, only the root compartment is selected, and all of the metric namespaces from Step 8 which are present in the compartment are enabled (up to 50 namespaces are supported per connector hub). If you choose to monitor additional compartments, the namespaces added to them are an intersection of namespaces selected and the namespaces present in the compartment.
-- Resource Manager スタックの Terraform state file にアクセスできるユーザーは、適切に管理する必要があります。詳しくは、Securing Resource Manager ページの [Terraform State Files セクション](https://docs.oracle.com/iaas/Content/Security/Reference/resourcemanager_security.htm#confidentiality__terraform-state) を参照してください。
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-{{% collapse-content title="See the full list of metric namespaces" level="h4" %}}
-
-### メトリクスネームスペース
-
-| インテグレーション                         | メトリクスネームスペース                                                                                                                         |
+| インテグレーション                         | メトリクス名前空間                                                                                                                         |
 |-------------------------------------| ---------------------------------------------------------------------------------------------------------------------------------------- |
-| [API Gateway](https://docs.datadoghq.com/integrations/oci_api_gateway/)                  | [oci_apigateway](https://docs.oracle.com/iaas/Content/APIGateway/Reference/apigatewaymetrics.htm)                                                                                                                    |
-| [Autonomous Database](https://docs.datadoghq.com/integrations/oci_autonomous_database/)           | [oci_autonomous_database](https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-monitor-metrics-list.html)                                                                                                            |
-| [Block Storage](https://docs.datadoghq.com/integrations/oci_block_storage/)                       | [oci_blockstore](https://docs.oracle.com/iaas/Content/Block/References/volumemetrics.htm)                                                                                                                     |
-| [Compute](https://docs.datadoghq.com/integrations/oci_compute/)                       | [oci_computeagent](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#Availabl), [rdma_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_compute_rdma_network), [gpu_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute), [oci_compute_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/infrastructurehealthmetrics.htm)       |
-| [Container Instances (Preview)](https://docs.datadoghq.com/integrations/oci_container_instances/) | [oci_computecontainerinstance](https://docs.oracle.com/iaas/Content/container-instances/container-instance-metrics.htm)                                                                                                       |
-| [Database](https://docs.datadoghq.com/integrations/oci_database/)                      | [oci_database](https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-57B7B9B1-288B-4DCB-82AE-D53B2BD9C78F), [oci_database_cluster](https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-A42CF0E3-EE65-4A66-B8A3-C89B62AFE489)                                                                                           |
-| [Dynamic Routing Gateway](https://docs.datadoghq.com/integrations/oci-dynamic-routing-gateway/)             | [oci_dynamic_routing_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/drgmetrics.htm)                                                                                                        |
-| [E-Business Suite (EBS)](https://docs.datadoghq.com/integrations/oci_ebs/)             | [oracle_appmgmt](https://docs.oracle.com/iaas/stack-monitoring/doc/metric-reference.html#STMON-GUID-4E859CA3-1CAB-43FB-8DC7-0AA17E6B52EC)                                                                                                        |
-| [FastConnect](https://docs.datadoghq.com/integrations/oci_fastconnect/)                         | [oci_fastconnect](https://docs.oracle.com/iaas/Content/Network/Reference/fastconnectmetrics.htm)                                                                                                                    |
-| [File Storage](https://docs.datadoghq.com/integrations/oci_file_storage/)                        | [oci_filestorage](https://docs.oracle.com/iaas/Content/File/Reference/filemetrics.htm)                                                                                                                    |
-| [Functions (Preview)](https://docs.datadoghq.com/integrations/oci_functions/)           | [oci_faas](https://docs.oracle.com/iaas/Content/Functions/Reference/functionsmetrics.htm)                                                                                                                           |
-| [GoldenGate](https://docs.datadoghq.com/integrations/oci-goldengate/)           | [oci_goldengate](https://docs.oracle.com/en/cloud/paas/goldengate-service/ofroo/)                                                                                                                           |
-| [GPU](https://docs.datadoghq.com/integrations/oci_gpu/)           | [gpu_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute)                                                                                                                           |
-| [HeatWave MySQL](https://docs.datadoghq.com/integrations/oci_mysql_database/)                | [oci_mysql_database](https://docs.oracle.com/iaas/mysql-database/doc/metrics.html)                                                                                                                 |
-| [Kubernetes Engine](https://docs.datadoghq.com/integrations/oke/)                   | [oci_oke](https://docs.oracle.com/iaas/Content/ContEng/Reference/contengmetrics.htm)                                                                                                                            |
-| [Load Balancer](https://docs.datadoghq.com/integrations/oci_load_balancer/)                 | [oci_lbaas](https://docs.oracle.com/iaas/Content/Balance/Reference/loadbalancermetrics.htm), [oci_nlb](https://docs.oracle.com/iaas/Content/NetworkLoadBalancer/Metrics/metrics.htm)                                                                                                           |
-| [Media Streams](https://docs.datadoghq.com/integrations/oci_media_streams/)                   | [oci_mediastreams](https://docs.oracle.com/iaas/Content/dms-mediastream/mediastreams_metrics.htm?)                                                                                                                    |
-| [NAT Gateway](https://docs.datadoghq.com/integrations/oci_nat_gateway/)                   | [oci_nat_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/nat-gateway-metrics.htm)                                                                                                                    |
-| [Network Firewall](https://docs.datadoghq.com/integrations/oci_network_firewall/)                   | [oci_network_firewall](https://docs.oracle.com/iaas/Content/network-firewall/metrics.htm)                                                                                                                    |
-| [Object Storage](https://docs.datadoghq.com/integrations/oci_object_storage/)                      | [oci_objectstorage](https://docs.oracle.com/iaas/Content/Object/Reference/objectstoragemetrics.htm)                                                                                                                  |
-| [PostgreSQL](https://docs.datadoghq.com/integrations/oci_postgresql/)                   | [oci_postgresql](https://docs.oracle.com/iaas/Content/postgresql/metrics.htm)                                                                                                                    |
-| [Queue](https://docs.datadoghq.com/integrations/oci_queue/)                               | [oci_queue](https://docs.oracle.com/iaas/Content/queue/metrics.htm)                                                                                                                          |
-| [Service Connector Hub](https://docs.datadoghq.com/integrations/oci_service_connector_hub/)               | [oci_service_connector_hub](https://docs.oracle.com/iaas/Content/connector-hub/metrics-reference.htm)                                                                                                          |
-| [Service Gateway](https://docs.datadoghq.com/integrations/oci_service_gateway/)                     | [oci_service_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/SGWmetrics.htm)                                                                                                                |
-| [VCN](https://docs.datadoghq.com/integrations/oci_vcn/)                           | [oci_vcn](https://docs.oracle.com/iaas/Content/Network/Reference/vnicmetrics.htm)                                                                                                                            |
-| [VPN](https://docs.datadoghq.com/integrations/oci_vpn/)                           | [oci_vpn](https://docs.oracle.com/iaas/Content/Network/Reference/ipsecmetrics.htm)                                                                                                                            |
-| [Web Application Firewall](https://docs.datadoghq.com/integrations/oci_waf/)            | [oci_waf](https://docs.oracle.com/iaas/Content/WAF/Reference/metricsalarms.htm)
+| [API Gateway](https://docs.datadoghq.com/ja/integrations/oci_api_gateway/)                  | [oci_apigateway](https://docs.oracle.com/iaas/Content/APIGateway/Reference/apigatewaymetrics.htm)                                                                                                                    |
+| [Autonomous Database](https://docs.datadoghq.com/ja/integrations/oci_autonomous_database/)           | [oci_autonomous_database](https://docs.oracle.com/iaas/autonomous-database-serverless/doc/autonomous-monitor-metrics-list.html)                                                                                                            |
+| [Block Storage](https://docs.datadoghq.com/ja/integrations/oci_block_storage/)                       | [oci_blockstore](https://docs.oracle.com/iaas/Content/Block/References/volumemetrics.htm)                                                                                                                     |
+| [Cloud Events](https://docs.datadoghq.com/ja/integrations/oci_cloudevents/)                       | [oci_cloudevents](https://docs.oracle.com/en-us/iaas/Content/Events/Reference/eventsmetrics.htm)                                                                                                                   |
+| [Compute](https://docs.datadoghq.com/ja/integrations/oci_compute/)                       | [oci_computeagent](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#Availabl), [rdma_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_compute_rdma_network), [gpu_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute), [oci_compute_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/infrastructurehealthmetrics.htm)       |
+| [Container Instances (プレビュー)](https://docs.datadoghq.com/ja/integrations/oci_container_instances/) | [oci_computecontainerinstance](https://docs.oracle.com/iaas/Content/container-instances/container-instance-metrics.htm)                                                                                                       |
+| [Database](https://docs.datadoghq.com/ja/integrations/oci_database/)                      | [oci_database](https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-57B7B9B1-288B-4DCB-82AE-D53B2BD9C78F), [oci_database_cluster](https://docs.oracle.com/iaas/base-database/doc/available-metrics-base-database-service-resources.html#DBSCB-GUID-A42CF0E3-EE65-4A66-B8A3-C89B62AFE489)                                                                                           |
+| [Dynamic Routing Gateway](https://docs.datadoghq.com/ja/integrations/oci-dynamic-routing-gateway/)             | [oci_dynamic_routing_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/drgmetrics.htm)                                                                                                        |
+| [E-Business Suite (EBS)](https://docs.datadoghq.com/ja/integrations/oci_ebs/)             | [oracle_appmgmt](https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/metric-reference.html)                                                                                                        |
+| [FastConnect](https://docs.datadoghq.com/ja/integrations/oci_fastconnect/)                         | [oci_fastconnect](https://docs.oracle.com/iaas/Content/Network/Reference/fastconnectmetrics.htm)                                                                                                                    |
+| [File Storage](https://docs.datadoghq.com/ja/integrations/oci_file_storage/)                        | [oci_filestorage](https://docs.oracle.com/iaas/Content/File/Reference/filemetrics.htm)                                                                                                                    |
+| [Functions (プレビュー)](https://docs.datadoghq.com/ja/integrations/oci_functions/)           | [oci_faas](https://docs.oracle.com/iaas/Content/Functions/Reference/functionsmetrics.htm)                                                                                                                           |
+| [GoldenGate](https://docs.datadoghq.com/ja/integrations/oci-goldengate/)           | [oci_goldengate](https://docs.oracle.com/en/cloud/paas/goldengate-service/ofroo/)                                                                                                                           |
+| [GPU](https://docs.datadoghq.com/ja/integrations/oci_gpu/)           | [gpu_infrastructure_health](https://docs.oracle.com/iaas/Content/Compute/References/computemetrics.htm#computemetrics_topic-Available_Metrics_oci_high_performance_compute)                                                                                                                           |
+| [HeatWave MySQL](https://docs.datadoghq.com/ja/integrations/oci_mysql_database/)                | [oci_mysql_database](https://docs.oracle.com/iaas/mysql-database/doc/metrics.html)                                                                                                                 |
+| [Instance Pools](https://docs.datadoghq.com/ja/integrations/oci-instancepools/)                | [oci_instancepools](https://docs.oracle.com/en-us/iaas/Content/Compute/References/instancepoolmetrics.htm)                                                                                                                 |
+| [Internet Gateway](https://docs.datadoghq.com/ja/integrations/oci-internet-gateway/)                | [oci_internet_gateway](https://docs.oracle.com/en-us/iaas/Content/Network/Reference/IGWmetrics.htm)                                                                                                                 |
+| [Kafka](https://docs.datadoghq.com/ja/integrations/oci-kafka/)                          | [oci_kafka](https://docs.oracle.com/en-us/iaas/Content/kafka/metrics.htm)                                                                                                                          |
+| [Kubernetes Engine](https://docs.datadoghq.com/ja/integrations/oke/)                   | [oci_oke](https://docs.oracle.com/iaas/Content/ContEng/Reference/contengmetrics.htm)                                                                                                                            |
+| [Load Balancer](https://docs.datadoghq.com/ja/integrations/oci_load_balancer/)                 | [oci_lbaas](https://docs.oracle.com/iaas/Content/Balance/Reference/loadbalancermetrics.htm), [oci_nlb](https://docs.oracle.com/iaas/Content/NetworkLoadBalancer/Metrics/metrics.htm)                                                                                                           |
+| [Media Streams](https://docs.datadoghq.com/ja/integrations/oci_media_streams/)                   | [oci_mediastreams](https://docs.oracle.com/iaas/Content/dms-mediastream/mediastreams_metrics.htm?)                                                                                                                    |
+| [NAT Gateway](https://docs.datadoghq.com/ja/integrations/oci_nat_gateway/)                   | [oci_nat_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/nat-gateway-metrics.htm)                                                                                                                    |
+| [Network Firewall](https://docs.datadoghq.com/ja/integrations/oci_network_firewall/)                   | [oci_network_firewall](https://docs.oracle.com/iaas/Content/network-firewall/metrics.htm)                                                                                                                    |
+| [NoSQL Table](https://docs.datadoghq.com/ja/integrations/oci-nosqltable/)                        | [oci_nosql](https://docs.oracle.com/en/cloud/paas/nosql-cloud/mgygg)                                                                                                                         |
+| [Object Storage](https://docs.datadoghq.com/ja/integrations/oci_object_storage/)                      | [oci_objectstorage](https://docs.oracle.com/iaas/Content/Object/Reference/objectstoragemetrics.htm)                                                                                                                  |
+| [Oracle Fusion](https://docs.datadoghq.com/ja/integrations/oracle-fusion/)                      | [oci_fusion](https://docs.oracle.com/en-us/iaas/Content/fusion-applications/metrics.htm)                                                                                                                        |
+| [Oracle Integration (OIC)](https://docs.datadoghq.com/ja/integrations/oci-integration/)                | [oci_integration](https://docs.oracle.com/en-us/iaas/application-integration/doc/modify-charts-and-create-custom-charts.html)                                                                                                                 |
+| [PostgreSQL](https://docs.datadoghq.com/ja/integrations/oci_postgresql/)                   | [oci_postgresql](https://docs.oracle.com/iaas/Content/postgresql/metrics.htm)                                                                                                                    |
+| [Queue](https://docs.datadoghq.com/ja/integrations/oci_queue/)                               | [oci_queue](https://docs.oracle.com/iaas/Content/queue/metrics.htm)                                                                                                                          |
+| [Recovery Service](https://docs.datadoghq.com/ja/integrations/oci-recovery-service/)                   | [oci_recovery_service](https://docs.oracle.com/iaas/recovery-service/doc/available-recovery-service-metrics.html)                                                                                                              |
+| [Secrets](https://docs.datadoghq.com/ja/integrations/oci-secrets/)                            | [oci_secrets](https://docs.oracle.com/iaas/Content/KeyManagement/Reference/keymgmtmetrics.htm)                                                                                                                       |
+| [Service Connector Hub](https://docs.datadoghq.com/ja/integrations/oci_service_connector_hub/)               | [oci_service_connector_hub](https://docs.oracle.com/iaas/Content/connector-hub/metrics-reference.htm)                                                                                                          |
+| [Service Gateway](https://docs.datadoghq.com/ja/integrations/oci_service_gateway/)                     | [oci_service_gateway](https://docs.oracle.com/iaas/Content/Network/Reference/SGWmetrics.htm)                                                                                                                |
+| [Stack Monitoring](https://docs.datadoghq.com/ja/integrations/oci-stack-monitoring/)                  | [oci_stack_monitoring](https://docs.oracle.com/en-us/iaas/stack-monitoring/doc/metric-reference.html)                                                                                                                 |
+| [VCN](https://docs.datadoghq.com/ja/integrations/oci_vcn/)                           | [oci_vcn](https://docs.oracle.com/iaas/Content/Network/Reference/vnicmetrics.htm)                                                                                                                            |
+| [Visual Builder](https://docs.datadoghq.com/ja/integrations/oci_visual_builder/)               | [oci_visual_builder](https://docs.oracle.com/en-us/iaas/visual-builder/doc/view-instance-metrics.html)                                                                                                                |
+| [VPN](https://docs.datadoghq.com/ja/integrations/oci_vpn/)                           | [oci_vpn](https://docs.oracle.com/iaas/Content/Network/Reference/ipsecmetrics.htm)                                                                                                                            |
+| [Web Application Firewall](https://docs.datadoghq.com/ja/integrations/oci_waf/)            | [oci_waf](https://docs.oracle.com/iaas/Content/WAF/Reference/metricsalarms.htm)
 
 {{% /collapse-content %}}
 
-### ログ収集
+### Resource Catalog {#resource-collection}
 
-Use one of the methods below to send your OCI logs to Datadog:
+[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)の [**Resource Collection**] タブで、[**Enable Resource Collection**] トグルをクリックします。[Datadog Resource Catalog](https://docs.datadoghq.com/ja/infrastructure/resource_catalog/)でリソースを確認できます。
 
-{{< tabs >}}
+イベント収集は、インテグレーションをセットアップするとデフォルトで有効になります。Datadog のイベント収集機能が利用可能になる前に OCI インテグレーションをセットアップした場合は、[**Resource Collection**] タブの [**Enable Resource Changes Collection**] トグルをクリックしてください。このトグルは、リソース変更イベントだけでなく、すべての OCI イベントの収集をコントロールします。OCI イベントは [Events Explorer](/event/explorer?query=source%3Aoci_events_service) に表示され、`source:oci_events_service`でフィルタリングできます。
 
-{{% tab "OCI QuickStart (Preview; recommended)" %}}
+## インテグレーションを更新する {#update-the-integration}
 
-1. メトリクスとログの両方を Datadog に転送するために必要な基盤を作成するには、[セットアップ セクション](#setup) の手順に従ってください。
-1. [Datadog OCI インテグレーション タイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure) の **Log Collection** タブで、**Enable Log Collection** トグルをクリックします。
+Datadog がバグ修正、セキュリティパッチ、または新しい OCI リソースや IAM ポリシーを必須とする新機能をリリースした場合は、インテグレーションのデプロイメントを再適用して、更新されたインフラストラクチャーをプロビジョニングしてください。
 
-{{% /tab %}}
+**注**: ORM スタックまたは Terraform 設定内の `logs_enabled` 変数と `events_collection_enabled` 変数は、初期セットアップ時にのみ使用されます。その後の適用では、これらの値は無視されます。Datadog インテグレーションタイルは、データ収集構成の正確な参照元となります。スタックを再適用しても、Datadog で構成したログ、メトリクス、またはイベント収集設定は上書きされません。
 
-{{% tab "サービスコネクタハブ" %}}
+{{% collapse-content title="QuickStart (ORM スタック)" level="h3" %}}
 
-1. OCI ログを構成します。
-1. OCI 関数を作成します。
-1. OCI サービスコネクタを設定します。
+**前提条件**: アップデートを適用する前に、OCI スタックで設定した [Datadog アプリケーションキー](https://app.datadoghq.com/organization-settings/application-keys) がまだ有効であることを確認してください。キーの有効期限が切れているか、取り消されている場合、destroy ジョブは失敗します。キーを更新するには、OCI コンソールでスタック変数 `datadog_app_key` を編集し、有効なアプリケーションキーを指定してから続行します。
 
-以下の手順では、OCI ポータルを使用してインテグレーションを設定します。
+スタックを最新バージョンに更新して変更を適用するには、[OCI Cloud Shell](https://cloud.oracle.com/resourcemanager/stacks?cloudshell=true) から次のコマンドを実行します。
 
-#### OCI ロギング
+```shell
+curl -fL -o datadog-integration.zip \
+  "https://github.com/DataDog/oracle-cloud-integration/releases/latest/download/datadog-integration.zip"
 
-1. OCI ポータルで、*Logging -> Log Groups* に移動します。
-1. コンパートメントを選択し、**Create Log Group** をクリックします。サイドパネルが開きます。
-1. 名前には `data_log_group` を入力し、オプションで説明とタグを入力します。
-1. **Create** をクリックして、新しいロググループを設定します。
-1. **Resources** の下にある **Logs** をクリックします。
-1. 必要に応じて、**Create custom log** または **Enable service log** をクリックします。
-1. **Enable Log** をクリックして、新しい OCI ログを作成します。
+export STACK_ID="<YOUR_STACK_OCID>"
+export OCI_CLI_REGION="<YOUR_HOME_OR_STACK_REGION>"
 
-OCI Logs の詳細については、[リソースの Logging を有効にする](https://docs.oracle.com/iaas/Content/Logging/Task/enabling_logging.htm) を参照してください。
+oci resource-manager stack update \
+  --stack-id "$STACK_ID" \
+  --config-source datadog-integration.zip \
+  --region "$OCI_CLI_REGION" \
+  --force
 
-#### OCI 関数
+oci resource-manager job create-apply-job \
+  --stack-id "$STACK_ID" \
+  --execution-plan-strategy AUTO_APPROVED \
+  --region "$OCI_CLI_REGION" \
+  --wait-for-state SUCCEEDED
+```
 
-1. OCI ポータルで、*Functions* に移動します。
-1. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-1. アプリケーション内に新しい OCI 関数を作成します。詳しくは、[Oracle による関数の概要](https://docs.cloud.oracle.com/iaas/Content/Functions/Concepts/functionsoverview.htm) を参照してください。
-1. It is recommended to create a boilerplate Python function first and replace the automatically-generated files with Datadog's source code:
-   - `func.py` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.py) のコードに置き換えます。
-   - `func.yaml` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/func.yaml) のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、使用している Datadog API Key とリージョンの logs intake リンクに置き換えてください。
-   - `requirements.txt` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Service%20Connector%20%20Hub/requirements.txt) のコードに置き換えます。
+以下のようにプレースホルダーの値を置き換えます。
 
-#### OCI サービスコネクタハブ
+- `<YOUR_STACK_OCID>`: Datadog ORM スタックの OCID。[cloud.oracle.com/resourcemanager/stacks](https://cloud.oracle.com/resourcemanager/stacks) で確認してください。
+- `<YOUR_HOME_OR_STACK_REGION>`: テナンシーの Home Region (例: us-ashburn-1)。
 
-1. OCI ポータルで、*Logging -> Service Connectors* に移動します。
-1. **Create Service Connector** をクリックして、**Create Service Connector** ページに移動します。
-1. ロギングとして **Source** を選択し、関数として **Target** を選択します。
-1. **Configure Source Connection** で、**Compartment name**、**Log Group**、**Log** を選択します。(最初のステップで作成された **Log Group** と **Log**)
-1. **Audit Logs** も送信したい場合は、**+Another Log** をクリックし、同じ **Compartment** を選択したうえで、**Log Group** に "\_Audit" を指定します。
-1. **Configure target** で、**Compartment**、**Function application**、**Function** を選択します。(前のステップで作成された **Function Application** と **Function**)
-1. ポリシーを作成するように求められたら、プロンプトから **Create** をクリックします。
-1. 一番下の **Create** をクリックして、サービスコネクタの作成を完了します。
+{{% /collapse-content %}}
 
-OCI Object Storage の詳細については、[Oracle の Service Connector に関するブログ記事](https://blogs.oracle.com/cloud-infrastructure/oracle-cloud-infrastructure-service-connector-hub-now-generally-available) を参照してください。
+{{% collapse-content title="Terraform" level="h3" %}}
 
-{{% /tab %}}
+**前提条件**: Terraform を再適用する前に、Terraform 構成内の `datadog_app_key` 変数に有効な [Datadog アプリケーションキー](https://app.datadoghq.com/organization-settings/application-keys) が保持されていることを確認してください。キーの有効期限が切れているか、取り消されている場合、destroy コマンドは失敗します。`.tf` ファイル内の値を更新するか、`terraform.tfvars` ファイルを通じて値を指定してから続行します。
 
-{{% tab "Object store" %}}
+Terraform を再実行して更新されたモジュールを初期化し、最新の変更を適用します。
 
-1. OCI ログを構成します。
-1. OCI オブジェクトストアを作成し、OCI ログの読み取り/書き込みアクセスを有効にします。
-1. OCI 関数を作成します。
-1. OCI イベントを設定します。
+```shell
+terraform init -upgrade && terraform apply
+```
 
-以下の手順では、OCI ポータルを使用してインテグレーションを設定します。
+必要に応じて、`apply` の前に `terraform plan` を実行して変更をプレビューします。
 
-#### OCI ロギング
+{{% /collapse-content %}}
 
-1. OCI ポータルで、*Solutions and Platform -> Logging -> Logs* に移動します。
-1. **Create Custom Log** をクリックして、**Create Custom Log** ページに移動します。
-1. 新しい OCI ログに名前を付けます。
-1. **Compartment** と **Log Group** を選択します。この選択は、インストール全体で一貫しています。
-1. **Create Custom Log** をクリックして、**Create Agent Config** ページに移動します。
-1. **Create new configuration** をクリックします。
-1. 新しいコンフィギュレーションに名前を付けます。コンパートメントは事前に選択されています。
-1. グループタイプを **Dynamic Group** に設定し、グループを既存のグループの 1 つに設定します。
-1. 入力タイプを **Log Path** に設定し、希望の入力名を入力して、ファイルパスに "/" を使用します。
-1. **Create Custom Log** をクリックすると、OCI ログが作成され、ログページで利用できるようになります。
+## インテグレーションのアンインストール{#uninstalling-the-integration}
 
-OCI Logs の詳細については、[リソースの Logging を有効にする](https://docs.oracle.com/iaas/Content/Logging/Task/enabling_logging.htm) を参照してください。
+Datadog OCI インテグレーションをアンインストールするには、Datadog と OCI の両方でインテグレーションリソースを削除します。
 
-#### OCI オブジェクトストレージ
+### Datadog {#in-datadog}
 
-1. OCI ポータルで、*Core Infrastructure -> Object Storage -> Object Storage* に移動します。
-1. **Create Bucket** をクリックして、**Create Bucket** フォームに移動します。
-1. ストレージ階層に **Standard** を選択し、**Emit Object Events** をチェックします。
-1. 好みに応じてフォームの残りの部分に記入します。
-1. **Create Bucket** をクリックすると、バケットが作成され、バケットリストで利用できるようになります。
-1. アクティブなバケットリストから新しいバケットを選択し、リソースの下の **Logs** をクリックします。
-1. Toggle **read** to enabled, which directs you to an **Enable Log** side menu.
-1. **Compartment** と **Log Group** を選択します (OCI ログと同じ選択を使用します)。
-1. **Log Name** の名前を入力し、希望するログ保持を選択します。
+[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)で、[**Delete Configuration**] をクリックします。この時点で、メトリクスとログは収集されなくなります。
 
-OCI Object Storage の詳細については、[Object Storage にデータを格納する](https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/addingbuckets.htm) を参照してください。
+![Datadog で OCI インテグレーション構成を削除する](images/oci_delete_configuration_2025-11-17.png)
 
-#### OCI 関数
+### OCI{#in-oci}
 
-1. OCI ポータルで、*Solutions and Platform -> Developer Services -> Functions* に移動します。
-1. 既存のアプリケーションを選択するか、**Create Application** をクリックします。
-1. アプリケーション内に新しい OCI 関数を作成します。詳しくは、[Oracle による関数の概要](https://docs.cloud.oracle.com/iaas/Content/Functions/Concepts/functionsoverview.htm) を参照してください。
-1. It is recommended to create a boilerplate Python function first and replace the automatically-generated files with Datadog's source code:
-   - `func.py` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/func.py) のコードに置き換えます。
-   - `func.yaml` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/func.yaml) のコードに置き換えます。`DATADOG_TOKEN` と `DATADOG_HOST` は、使用している Datadog API Key とリージョンの logs intake リンクに置き換えてください。
-   - `requirements.txt` は、[Datadog OCI リポジトリ](https://github.com/DataDog/Oracle_Logs_Integration/blob/master/Object%20Store/requirements.txt) のコードに置き換えます。
+**前提条件**: OCI リソースをクリーンアップする前に、上記の [Datadog](#in-datadog) 手順を完了してください。Datadog 構成を最初に削除することで、Datadog バックエンドで管理されているリソースが確実に事前に破棄されます。
 
-#### OCI イベント
+{{% collapse-content title="QuickStart (ORM スタック)" level="h3" %}}
 
-1. OCI ポータルで、*Solutions and Platform -> Application Integration -> Event Service* に移動します。
-1. **Create Rule** をクリックして、**Create Rule** ページに移動します。
-1. イベントルールに名前と説明を付けます。
-1. 条件を *Event Type**、サービス名を **Object Storage**、イベントタイプを **Object - Create** として設定します。
-1. アクションタイプを **Functions** として設定します。
-1. 関数コンパートメントが、OCI ログ、OCI バケット、および OCI 関数に対して行った選択と同じであることを確認します。
-1. Select your function application and function (according to the previous installation step).
-1. **Create Rule** をクリックすると、ルールが作成され、ルールリストで利用できるようになります。
+**前提条件**: destroy ジョブを実行する前に、OCI スタックで構成された Datadog アプリケーションキーがまだ有効であることを確認してください。キーの有効期限が切れているか、取り消されている場合、destroy ジョブは失敗します。キーを更新するには、OCI コンソールでスタック変数を編集し、有効なアプリケーションキーを指定してから続行します。
 
-OCI Object Storage の詳細については、[Events の利用開始](https://docs.cloud.oracle.com/iaas/Content/Events/Concepts/eventsgetstarted.htm) を参照してください。
+1. OCI コンソールの Oracle Resource Manager (ORM) に移動します。
 
-{{% /tab %}}
+1. インストール中に作成された Datadog QuickStart スタックを見つけます。デフォルトでは、スタックには `datadog-integration.zip-<NUMBER>` というラベルが付けられていますが、デプロイ時にカスタム名でスタックが構成されている可能性があります。
 
-{{< /tabs >}}
+1.  スタックで `Destroy` ジョブを実行し、すべてのリージョンにわたってインテグレーションによって作成されたすべてのリソースを削除します。
 
-## アーキテクチャ
+   ![OCI の Datadog 統合スタックを破棄する](images/oci_destroy_stack.png)
 
-{{< tabs >}}
+1. **必要に応じて**、破棄が完了した後に Datadog OCI スタックを削除します。
 
-{{% tab "OCI QuickStart (Preview; recommended)" %}}
+**注**: QuickStart スタックで destroy ジョブを 1 回実行すると、インテグレーションがデプロイされたすべてのリージョンのすべてのリソースが自動的にクリーンアップされます。
 
-### Metric and log forwarding resources
+{{% /collapse-content %}}
 
-![このセットアップ オプションで使用する OCI のメトリクスおよびログ転送リソースと、データ フローを示した図](images/oci_quickstart_infrastructure_diagram.png)
+{{% collapse-content title="Terraform" level="h3" %}}
 
-監視対象の各リージョンについて、このセットアップ オプションでは、そのリージョン内に Datadog へメトリクスとログを転送するための次の基盤が作成されます:
+**前提条件**: destroy コマンドを実行する前に、`datadog_app_key`Terraform の設定でその変数に有効な [Datadog アプリケーションキー](https://app.datadoghq.com/organization-settings/application-keys)が保持されていることを確認します。キーの有効期限が切れているか、取り消されている場合、destroy コマンドは失敗します。`.tf`ファイルの値を更新するか、`terraform.tfvars`ファイルを通じて値を指定してから続行します。
 
-- Function Application (`dd-function-app`)
-- 2 つの関数:
-  - Metrics Forwarder (`dd-metrics-forwarder`)
-  - Logs Forwarder (`dd-logs-forwarder`)
-- VCN (`dd-vcn`) with secure networking infrastructure:
-  - Private subnet (`dd-vcn-private-subnet`)
-  - NAT gateway (`dd-vcn-natgateway`) for external access to the internet
-  - Service gateway (`dd-vcn-servicegateway`) for internal access to OCI services
-- Key Management Service (KMS) vault (`datadog-vault`) to store the Datadog API key
-- Dedicated **Datadog** compartment (`Datadog`)
+`~/.oci/config` 内の `DEFAULT` プロファイルに、対応するテナンシーのリソースを管理するためのユーザー資格情報が含まれていることを確認した上で、以下を実行します。
 
-All resources are tagged with `ownedby = "datadog"`.
-
-### IAM resources
-
-![このセットアップ オプションで使用する OCI IAM リソースと、データ フローを示した図](images/oci_quickstart_iam_diagram.png)
-
-This setup option creates the following IAM resources to enable data forwarding to Datadog:
-
-- Service user (`dd-svc`)
-- Group (`dd-svc-admin`) that the service user belongs to
-- RSA key pair for API authentication
-- OCI API key for the service user
-- Dynamic Group (`dd-dynamic-group-connectorhubs`) that includes all service connectors in the Datadog compartment
-- Dynamic Group (`dd-dynamic-group-function`) that includes all functions in the Datadog compartment
-- Policy (`dd-svc-policy`) to give the service user read access to the tenancy resources, as well as access to manage OCI Service Connector Hubs and OCI Functions in the compartment created and managed by Datadog
-
-{{% collapse-content title="See the policy" level="h6" %}}
-
-```text
-- dd-svc-admin に tenancy 内の all-resources の読み取りを許可
-- dd-svc-admin に Datadog コンパートメント内の serviceconnectors の管理を許可
-- dd-svc-admin に Datadog コンパートメント内の functions-family の管理を許可 (権限を限定):
-     * FN_FUNCTION_UPDATE
-     * FN_FUNCTION_LIST
-     * FN_APP_LIST
-- dd-svc-admin が tenancy usage-report 内の objects を読み取れるように Endorse
+```shell
+terraform destroy
 ```
 
 {{% /collapse-content %}}
 
-- Policy `dd-dynamic-group-policy` to enable the service connectors to read data (logs and metrics) and interact with functions. This policy also allows the functions to read secrets in the Datadog compartment (the Datadog API and application keys stored in the KMS vault)
+## OCI インテグレーションの手動から QuickStart への移行{#oci-integration-manual-to-quickstart-migration}
 
-{{% collapse-content title="See the policy" level="h6" %}}
+### なぜ移行が必要なのですか？{#why-do-i-need-to-migrate}
+
+Datadog OCI インテグレーションでは、1 つのテナンシーにつき 1 つのインテグレーションに制限されています。2025 年 6 月より前にインテグレーションをセットアップした場合、手動セットアップの手順に従ったことになります。そのため、OCI QuickStart セットアップ方法を使用する前に、以前の Datadog OCI インテグレーションデプロイメントスタックをすべて削除する必要があります。ログ転送を手動で構成しており、OCI QuickStart タイルでログ収集を有効にすることを選択した場合は、ログの二重送信を防ぐため、ログ転送リソースも削除する必要があります。
+
+**注**: 手動インテグレーションが削除されてから QuickStart デプロイが完了するまでの間、メトリクスとログの収集にギャップが生じます。
+
+### 移行方法{#how-to-migrate}
+
+Datadog と OCI の両方で、以前のインテグレーションリソースを削除します。
+
+#### Datadog{#in-datadog-1}
+
+[Datadog OCI インテグレーションタイル](https://app.datadoghq.com/integrations/oracle-cloud-infrastructure)で、[**Delete Configuration**] をクリックします。この時点で、メトリクスとログは収集されなくなります。
+
+![Datadog で OCI インテグレーション構成を削除する](images/oci_delete_configuration_2025-11-17.png)
+
+#### OCI{#in-oci-1}
+
+**前提条件**: destroy ジョブを実行する前に、OCI スタックで構成された Datadog アプリケーションキーがまだ有効であることを確認してください。キーの有効期限が切れているか、取り消されている場合、destroy ジョブは失敗します。キーを更新するには、OCI コンソールでスタック変数を編集し、有効なアプリケーションキーを指定してから続行します。
+
+手動インテグレーションが以前にデプロイされていた**各リージョン**について、以下の手順を完了します。
+
+1. Datadog OCI メトリクス転送スタックで `Destroy` ジョブを実行し、そのスタックによって作成されたすべてのリソースを削除します。デフォルトでは、スタックには `datadog-oci-orm-metrics-setup.zip-<NUMBER>` というラベルが付けられていますが、デプロイ時にカスタム値でスタックが構成されている可能性があります。
+
+1. Datadog OCI ポリシースタックで `Destroy` ジョブを実行します。デフォルトでは、スタックには `datadog-oci-orm-policy-setup.zip-<NUMBER>` というラベルが付けられていますが、デプロイ時にカスタム値でスタックが構成されている可能性があります。
+
+   ![OCI の Datadog 統合スタックを破棄する](images/oci_destroy_stack.png)
+
+1. **必要に応じて**、破棄が完了した後に Datadog OCI スタックを削除します。
+
+1. ログ収集を設定した場合は、Datadog OCI アプリケーション、関数、および Service Connector Hub を削除します。
+
+   ![OCI で logconnector を削除する](images/oci_delete_logconnector.png)
+
+これで、[QuickStart セットアップ手順](#quickstart-setup-instructions)に従って OCI QuickStart をデプロイし、データ収集を再開する準備が整いました。OCI QuickStart のデプロイが完了するまで、最大 30 分かかる場合があります。
+
+## アーキテクチャ {#architecture}
+
+### メトリクスおよびログ転送リソース{#metric-and-log-forwarding-resources}
+
+![このセットアップオプションで言及されている OCI メトリクスおよびログ転送リソースの図。データのフローが表示されています](images/oci_quickstart_infrastructure_diagram.png)
+
+このセットアップオプションでは、監視対象の各リージョンについて、メトリクスとログを Datadog に転送するために、そのリージョン内に以下のインフラストラクチャーを作成します。
+
+- 関数アプリケーション (`dd-function-app`)
+- 2 つの関数:
+  - メトリクスフォワーダー (`dd-metrics-forwarder`)
+  - ログフォワーダー (`dd-logs-forwarder`)
+- セキュアなネットワークインフラストラクチャーを備えた VCN (`dd-vcn`):
+  - プライベートサブネット (`dd-vcn-private-subnet`)
+  - インターネットへの外部アクセス用 NAT Gateway (`dd-vcn-natgateway`)
+  - OCI サービスへの内部アクセス用 Service Gateway (`dd-vcn-servicegateway`)
+- Datadog API キー保存用 Key Management Service (KMS) Vault (`datadog-vault`)
+- 専用の **Datadog** コンパートメント (`Datadog`)
+
+すべてのリソースには `ownedby = "datadog"` がタグ付けされます。
+
+### IAM リソース {#iam-resources}
+
+![このセットアップオプションで言及されている OCI IAM リソースの図。データのフローが表示されています](images/oci_quickstart_iam_diagram.png)
+
+このセットアップオプションでは、Datadog へのデータ転送を有効にするために、以下の IAM リソースを作成します。
+
+- サービスユーザー (`dd-svc`)。
+- サービスユーザーが所属するグループ (`dd-svc-admin`)。
+- API 認証用の RSA キーペア。
+- サービスユーザー用の OCI API キー。
+- Datadog コンパートメント内のすべてのサービスコネクタを含む動的グループ (`dd-dynamic-group-connectorhubs`)。
+- Datadog コンパートメント内のすべての関数を含む動的グループ (`dd-dynamic-group-function`)。
+- データの収集と転送に必要な、テナンシーリソースへの読み取りアクセス権と Datadog コンパートメント内の OCI インフラストラクチャーへの管理アクセス権をサービスユーザーに付与するポリシー (`dd-svc-policy`)。
+
+{{% collapse-content title="ポリシーを参照" level="h6" %}}
+
+```text
+- Allow dd-svc-admin to read all-resources in tenancy
+- Allow dd-svc-admin to use tag-namespaces in tenancy
+- Allow dd-svc-admin to manage serviceconnectors in Datadog compartment
+- Allow dd-svc-admin to manage functions-family in Datadog compartment
+- Allow dd-svc-admin to use fn-invocation in Datadog compartment
+- Allow dd-svc-admin to manage buckets in Datadog compartment where target.bucket.name=/dd-*/
+- Allow dd-svc-admin to manage object-family in Datadog compartment where target.bucket.name=/dd-*/
+- Endorse dd-svc-admin to read objects in tenancy usage-report
+- Allow dd-svc-admin to manage cloudevents-rules in tenancy where any {request.permission = 'EVENTRULE_CREATE', target.resource.tag.DatadogManaged.marker = 'true'}
+- Allow dd-svc-admin to manage streams in Datadog compartment where any {request.permission = 'STREAM_CREATE', target.resource.tag.DatadogManaged.marker = 'true'}
+- Allow service objectstorage-<REGION> to manage object-family in Datadog compartment where target.bucket.name=/dd-*/
+```
+
+**注**: `Allow service objectstorage-<REGION>` ステートメントは、サブスクライブされたリージョンごとに 1 回追加する必要があります (例: `objectstorage-us-ashburn-1`, `objectstorage-ap-batam-1`)。これにより、Datadog はオブジェクトライフサイクルポリシーを通じて、Datadog が管理するバケット内の古いデータを自動的にクリーンアップできるようになります。
+
+{{% /collapse-content %}}
+
+- サービスコネクタと関数がデータを読み取って転送できるようにし、Datadog コンパートメント内のシークレット、バケット、ストリームへのアクセスを許可するポリシー `dd-dynamic-group-policy`。
+
+{{% collapse-content title="ポリシーを参照" level="h6" %}}
 
 ```text
    - Allow dd-dynamic-group-connectorhubs to read log-content in tenancy
@@ -496,74 +554,33 @@ This setup option creates the following IAM resources to enable data forwarding 
    - Allow dd-dynamic-group-connectorhubs to use fn-function in Datadog compartment
    - Allow dd-dynamic-group-connectorhubs to use fn-invocation in Datadog compartment
    - Allow dd-dynamic-group-functions to read secret-bundles in Datadog compartment
+   - Allow dd-dynamic-group-functions to manage object-family in Datadog compartment where target.bucket.name=/dd-*/
+   - Allow dd-dynamic-group-connectorhubs to use stream-pull in Datadog compartment where target.resource.tag.DatadogManaged.marker = 'true'
+   - Allow any-user to use stream-push in Datadog compartment where all {request.principal.type = 'eventrule', target.resource.tag.DatadogManaged.marker = 'true'}
 ```
 
 {{% /collapse-content %}}
 
-{{% /tab %}}
+<div class="alert alert-warning"><strong>インテグレーションリソースの名前を変更しないでください。</strong>Datadog は、関数イメージの更新などの重要なメンテナンス操作のために生成するリソースを識別する際に、OCID ではなくリソース名を使用します。上記のリソースの名前 (例: <code>dd-function-app</code>) を変更すると、インテグレーションが正常に動作しなくなる可能性があります。組織でカスタム命名規則が必要な場合は、<a href="https://www.datadoghq.com/support/">Datadog サポート</a>までお問い合わせください。</div>
 
-{{% tab "Manual setup" %}}
+## 収集されたデータ {#data-collected}
 
-### Metric forwarding resources
+<!-- ### Metrics -->
 
-![このセットアップ オプションで使用する OCI リソースと、データ フローを示した図](images/OCI_metrics_integration_diagram.png)
+<!-- See [metadata.csv][12] for a list of metrics provided by this integration. -->
 
-このセットアップ オプションでは、OCI メトリクスを Datadog に転送するために、OCI の [Connector Hub](https://docs.oracle.com/iaas/Content/connector-hub/home.htm)、[関数アプリケーション](https://docs.oracle.com/iaas/Content/Functions/Concepts/functionsconcepts.htm#applications)、およびセキュアなネットワーク基盤を作成します。これらのリソース向け ORM スタックでは、テナンシ内の対象リージョンに関数用のコンテナ リポジトリが作成され、その関数で使用する Docker イメージがそこにプッシュされます。
+### メトリクス {#metrics}
 
-### IAM resources
+メトリクスの詳細なリストについては、[メトリクス名前空間のセクション ](#oci-metric-namespaces) で該当する OCI サービスを選択してください。
 
-![インテグレーション認証に使用される OCI リソースとワークフローを示した図](images/OCI_auth_workflow_diagram.png)
-
-This setup option creates:
-
-- Dynamic group with `resource.type = 'serviceconnectors'`, to enable access to the connector hub
-- User named **DatadogROAuthUser**, which Datadog uses to read tenancy resources
-- Group to which the created user is added for policy access
-- User named **DatadogAuthWriteUser**, which is used to push Docker images for the function
-- Write access group that the `DatadogAuthWriteUser` is added to, for pushing images through policy access
-- Policy in the root compartment to allow connector hubs to read metrics and invoke functions. This policy also gives the created user group read access to both the tenancy resources and write access group, to push images
-
-{{% collapse-content title="See the policy" level="h6" %}}
-
-```text
-Allow dynamic-group Default/<GROUP_NAME> to read metrics in tenancy
-Allow dynamic-group Default/<GROUP_NAME> to use fn-function in tenancy
-Allow dynamic-group Default/<GROUP_NAME> to use fn-invocation in tenancy
-Allow group Default/<USER_GROUP_NAME> to read all-resources in tenancy
-Allow group Default/<WRITE_USER_GROUP_NAME> to manage repos in tenancy where ANY {request.permission = 'REPOSITORY_READ', request.permission = 'REPOSITORY_UPDATE', request.permission = 'REPOSITORY_CREATE'}
-```
-
-{{% /collapse-content %}}
-
-{{% /tab %}}
-
-{{< /tabs >}}
-
-## 収集されるデータ
-
-<!-- ### メトリクス -->
-
-<!-- このインテグレーションで提供されるメトリクスの一覧は、[metadata.csv][12] を参照してください。 -->
-
-### メトリクス
-
-メトリクスの詳細一覧については、[メトリクス ネームスペース セクション](#metric-namespaces) で該当する OCI サービスを選択してください。
-
-### サービス チェック
+### サービスのチェック {#service-checks}
 
 OCI インテグレーションには、サービスのチェック機能は含まれません。
 
-### イベント
+### イベント {#events}
 
-OCI インテグレーションには、イベントは含まれません。
+OCI Events Service からのすべてのイベントは、Datadog Events Explorer に転送されます。イベントを確認するには、`source:oci_events_service` でフィルタリングしてください。
 
-## トラブルシューティング
+## トラブルシューティング {#troubleshooting-1}
 
-お問合せは、[Datadog サポート](https://docs.datadoghq.com/help/) まで。
-
-## その他の参考資料
-
-役立つドキュメント、リンク、記事:
-
-- [Datadog で Oracle Cloud Infrastructure を監視する](https://www.datadoghq.com/blog/monitor-oci-with-datadog/)
-- [Datadog OCI QuickStart で Oracle Cloud Infrastructure の監視を加速する](https://www.datadoghq.com/blog/datadog-oci-quickstart/)
+OCI インテグレーションに関する問題を解決するには、[OCI インテグレーションのトラブルシューティングガイド](https://docs.datadoghq.com/ja/integrations/guide/oci-integration-troubleshooting)を参照してください。
