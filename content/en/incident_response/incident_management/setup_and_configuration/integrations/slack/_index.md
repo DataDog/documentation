@@ -62,7 +62,7 @@ You can configure Incident Management to automatically create a dedicated Slack 
 
 To use incident channels, go to **[Incident Response > Incident Management > Settings > Integrations][3]** and enable **Create Slack channels for incidents**.
 
-The **channel name template** you define determines how Datadog names the incident channels it creates. For full descriptions, see [Variables available only in channel naming templates][7].
+The **channel name template** you define determines how Datadog names the incident channels it creates. For full descriptions, see [Variables available only in channel name templates][7].
 
 
 ### Message syncing (Slack mirroring)
@@ -174,4 +174,4 @@ You can view the full list of available Slack commands at any time by typing `/d
 [4]: /integrations/jira/
 [5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
-[7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-naming-templates
+[7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates

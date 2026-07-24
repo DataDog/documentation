@@ -78,20 +78,20 @@ The following variables work only in postmortem templates. They are not availabl
 | `{{incident.card}}` | Inserts a self-updating incident card into the postmortem. **Only available for postmortems created in Datadog Notebooks.** This variable does not work for postmortems created in third-party locations such as Confluence or Google Drive. |
 | `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
 
-## Variables available only in channel naming templates
+## Variables available only in channel name templates
 
-Channel naming templates configure the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident. Configure these templates in the [Slack][3], [Microsoft Teams][4], or [Google Chat][5] integration settings.
+Channel name templates configure the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident. Configure these templates in the [Slack][3], [Microsoft Teams][4], or [Google Chat][5] integration settings.
 
-Channel naming templates support a different, smaller set of variables than notification, postmortem, and Jira templates, and use a syntax without the `incident.` prefix.
+Channel name templates support a different, smaller set of variables than notification, postmortem, and Jira templates, and use a syntax without the `incident.` prefix.
 
 | Variable | Description |
 |---|---|
 | `{{public_id}}` | The incident's numeric ID. |
 | `{{title}}` | The incident title. |
-| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format, in the timezone you configure for the channel naming template. |
-| `{{yyyy}}` | The four-digit year the incident was created, in the timezone you configure for the channel naming template. |
-| `{{mm}}` | The two-digit month the incident was created, in the timezone you configure for the channel naming template. |
-| `{{dd}}` | The two-digit day of month the incident was created, in the timezone you configure for the channel naming template. |
+| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format, in the timezone you configure for the channel name template. |
+| `{{yyyy}}` | The four-digit year the incident was created, in the timezone you configure for the channel name template. |
+| `{{mm}}` | The two-digit month the incident was created, in the timezone you configure for the channel name template. |
+| `{{dd}}` | The two-digit day of month the incident was created, in the timezone you configure for the channel name template. |
 | `{{severity}}` | The incident's severity. |
 | `{{severity_number}}` | The incident's severity, as a number (for example, `1` for `SEV-1`). |
 | `{{random_adjective}}` | A random adjective. |
