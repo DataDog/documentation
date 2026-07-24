@@ -98,7 +98,7 @@ Go services get Code Origin data through [Source Code Integration](#code-origin-
 
 | Requirement | Frameworks |
 |---|---|
-| [Source Code Integration](/integrations/guide/source-code-integration/) enabled | custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, OpenTelemetry, OpenTracing |
+| [Source Code Integration](/integrations/guide/source-code-integration/) enabled | Custom spans, gRPC servers, Gin, Chi, Echo, Fiber, gorilla/mux, OpenTelemetry, OpenTracing |
 
 {{% /tab %}}
 
