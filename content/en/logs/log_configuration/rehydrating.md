@@ -128,19 +128,19 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 A historical view becomes `ACTIVE` whether it rehydrates all matching logs or stops early after reaching its volume limit. To confirm whether a view stopped because it reached the limit, compare the number of rehydrated logs against the configured volume limit:
 
-- The completion event for each rehydration reports the total number of rehydrated logs in the `{{number_of_indexed_logs}}` template variable, and is available in your [Events Explorer][7].
-- If the number of rehydrated logs matches the volume limit, the rehydration reached its limit and not all matching logs in the selected time range were rehydrated.
+- The completion event for each rehydration reports the total number of rehydrated logs in the `{{number_of_indexed_logs}}` template variable. You can view this completion event in your [Events Explorer][7].
+- If the number of rehydrated logs matches the volume limit, the rehydration reached its limit. This means not all matching logs in the selected time range were rehydrated.
 
-When a view reaches its limit, rehydrate the remaining logs by creating a new historical view with a higher volume limit, or with a narrower query or time range.
+When a view reaches its limit, rehydrate the remaining logs by creating a historical view with a higher volume limit, or with a narrower query or time range.
 
 ### Cloud-specific permissions
 
-Datadog requires the permission to read from your archives in order to rehydrate content from them. This permission can be changed at any time.
+Datadog requires the permission to read from your archives to rehydrate content from them. This permission can be changed at any time.
 
 {{< tabs >}}
 {{% tab "Amazon S3" %}}
 
-In order to rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
+To rehydrate log events from your archives, Datadog uses the IAM Role in your AWS account that you configured for [your AWS integration][1]. If you have not yet created that Role, [follow these steps to do so][2]. To allow that Role to rehydrate log events from your archives, add the following permission statement to its IAM policies. Be sure to edit the bucket names and, if desired, specify the paths that contain your log archives.
 
 ```json
 {
@@ -170,7 +170,7 @@ In order to rehydrate log events from your archives, Datadog uses the IAM Role i
 
 #### Adding role delegation to S3 archives
 
-Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. Once you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
+Datadog only supports rehydrating from archives that have been configured to use role delegation to grant access. After you have modified your Datadog IAM role to include the IAM policy above, ensure that each archive in your [archive configuration page][3] has the correct AWS Account + Role combination.
 
 {{< img src="logs/archives/log_archives_rehydrate_configure_s3.png" alt="Adding role delegation to S3 archives" style="width:75%;">}}
 
@@ -191,7 +191,7 @@ Datadog uses an Azure AD group with the Storage Blob Data Contributor role scope
 
 {{% tab "Google Cloud Storage" %}}
 
-In order to rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}}.
+To rehydrate log events from your archives, Datadog uses a service account with the Storage Object Viewer role. You can grant this role to your Datadog service account from the [Google Cloud IAM Admin page][1] by editing the service account's permissions, adding another role, and then selecting {{< ui >}}Storage{{< /ui >}} > {{< ui >}}Storage Object Viewer{{< /ui >}}.
 
 {{< img src="logs/archives/log_archives_gcs_role.png" alt="Rehydration from GCS requires the Storage Object Viewer role" style="width:75%;">}}
 
