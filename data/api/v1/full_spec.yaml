@@ -6718,6 +6718,7 @@ components:
         - Select value from matching element
         - Compute array length
         - Append a value to an array
+        - Extract key-value pairs from an array
       properties:
         is_enabled:
           default: false
@@ -6740,6 +6741,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessorOperationAppend"
         - $ref: "#/components/schemas/LogsArrayProcessorOperationLength"
         - $ref: "#/components/schemas/LogsArrayProcessorOperationSelect"
+        - $ref: "#/components/schemas/LogsArrayProcessorOperationExtractKeyValue"
     LogsArrayProcessorOperationAppend:
       description: Operation that appends a value to a target array attribute.
       properties:
@@ -6769,6 +6771,44 @@ components:
       type: string
       x-enum-varnames:
         - APPEND
+    LogsArrayProcessorOperationExtractKeyValue:
+      description: Operation that extracts key-value pairs from a `source` array and stores the result in the `target` attribute.
+      properties:
+        key_to_extract:
+          description: Key of the attribute in each array element that holds the name to use for the extracted attribute.
+          example: name
+          type: string
+        override_on_conflict:
+          default: false
+          description: Whether to override the target element if it's already set.
+          type: boolean
+        source:
+          description: Attribute path of the array to extract key-value pairs from.
+          example: tags
+          type: string
+        target:
+          description: Attribute that receives the extracted key-value pairs. If not specified, the extracted attributes are added at the root level of the log.
+          example: extracted
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsArrayProcessorOperationExtractKeyValueType"
+        value_to_extract:
+          description: Key of the attribute in each array element that holds the value to use for the extracted attribute.
+          example: value
+          type: string
+      required:
+        - type
+        - source
+        - key_to_extract
+        - value_to_extract
+      type: object
+    LogsArrayProcessorOperationExtractKeyValueType:
+      description: Operation type.
+      enum: [key-value]
+      example: key-value
+      type: string
+      x-enum-varnames:
+        - KEY_VALUE
     LogsArrayProcessorOperationLength:
       description: Operation that computes the length of a `source` array and stores the result in the `target` attribute.
       properties:
@@ -6853,7 +6893,7 @@ components:
           type: string
         override_on_conflict:
           default: false
-          description: Override or not the target element if already set,
+          description: Whether to override the target element if it's already set.
           type: boolean
         preserve_source:
           default: false
@@ -8019,7 +8059,7 @@ components:
           type: string
         override_on_conflict:
           default: false
-          description: Override or not the target element if already set.
+          description: Whether to override the target element if it's already set.
           type: boolean
         preserve_source:
           default: false

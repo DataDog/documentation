@@ -31,7 +31,7 @@ A flag is evaluated for staleness only if it is not archived, not marked as perm
 
 The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to each flag that Datadog has identified as stale. Hover over the chip to see which signal triggered it.
 
-- Use the {{< ui >}}Staleness{{< /ui >}} filter to narrow the list to stale flags only.
+- Use the {{< ui >}}Stale Flags{{< /ui >}} toggle to narrow the list to stale flags only.
 - Filter by team to see the flag debt your team is responsible for.
 
 {{< img src="feature_flags/stale_flag_chip.png" alt="Feature flag list view showing the STALE chip and staleness filter." style="width:100%;" >}}
@@ -40,7 +40,7 @@ The [Feature Flags list page][1] shows a {{< ui >}}STALE{{< /ui >}} chip next to
 
 When you open a stale flag, a banner at the top of the flag details page explains why the flag is considered stale and recommends actions to resolve it. The banner highlights one **primary suggestion** based on the highest-confidence signal and the lowest-risk action, and provides additional secondary actions.
 
-{{< img src="feature_flags/stale_flag_banner.png" alt="Stale banner on the feature flag details page with recommended actions." style="width:100%;" >}}
+{{< img src="feature_flags/stale_flag_banner-2.png" alt="Stale banner on the feature flag details page with recommended actions." style="width:100%;" >}}
 
 ## Manage stale flags
 
@@ -50,7 +50,7 @@ From the stale banner, select {{< ui >}}Generate Removal PR with Bits{{< /ui >}}
 
 **Note**: Remove the flag from your code and deploy the change before you archive the flag. Archiving a flag that is still referenced in code can cause unexpected behavior in your application.
 
-{{< img src="feature_flags/generate_removal_pr.png" alt="Generate Removal PR with Bits modal." style="width:100%;" >}}
+{{< img src="feature_flags/generate_removal_pr-2.png" alt="Generate Removal PR with Bits modal." style="width:60%;" >}}
 
 ### Archive the flag
 
@@ -58,9 +58,9 @@ Archiving marks the flag as inactive so it is no longer evaluated or editable. A
 
 ### Mark as permanent
 
-Some flags are intentionally long-lived, such as kill switches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}PERMANENT{{< /ui >}} indicator in the flag details sidebar.
+Some flags are intentionally long-lived, such as kill switches or permission gates. Select {{< ui >}}Mark as Permanent{{< /ui >}} on the stale banner to designate a flag as a permanent operational control and exclude it from future stale detection. Permanent flags show a {{< ui >}}Permanent{{< /ui >}} indicator in the flag details sidebar.
 
-{{< img src="feature_flags/mark_as_permanent.png" alt="Feature flag marked as PERMANENT on the flag details page." style="width:100%;" >}}
+{{< img src="feature_flags/mark_as_permanent-2.png" alt="Feature flag marked as Permanent on the flag details page." style="width:35%;" >}}
 
 ### Dismiss for 30 days
 

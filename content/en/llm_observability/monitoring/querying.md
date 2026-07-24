@@ -87,14 +87,13 @@ You can search spans by the results of [evaluations][4]. For example, if you hav
 
 ### Feedback queries
 
-Use the `@feedback` attribute to find spans or traces by [end-user feedback][8] result. Feedback events are joined to spans at query time, so feedback submitted after a span's time window remains discoverable.
-
-Feedback queries take the form `@feedback.<label>.<field>:<value>`. For example, if you have a feedback label called `thumbs`, you could use the query `@feedback.thumbs.value:down`.
+Use the `@feedback` attribute to find spans or traces by [end-user feedback][8] submissions. For example, if your users are submitting feedback under the label `user_satisfaction` with categorical values `thumbs_up` or `thumbs_down`, you could use the query: `@feedback.user_satisfaction.value:thumbs_down`.
 
 | Query | Match |
 | ----- | ----- |
-| `@feedback.thumbs.value:down` | Spans or traces that received a thumbs-down rating for a feedback label called `thumbs` |
+| `@feedback.user_satisfaction.value:thumbs_down` | Spans or traces that received a thumbs down rating for a feedback label called `user_satisfaction` |
 | `@feedback.user_comment.assessment:fail` | Spans or traces with a failing assessment for a feedback label called `user_comment` |
+| `@feedback.user_score.value:<2` | Spans or traces with a score less than 2 for a feedback label called `user_score` |
 
 ### Metadata queries
 

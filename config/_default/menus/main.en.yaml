@@ -5751,6 +5751,11 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: ci
+      identifier: cicd_optimization
+      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5959,6 +5964,11 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: tests
+      identifier: tests_cicd_optimization
+      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6433,6 +6443,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 309
+    - name: Stale Flags
+      url: feature_flags/concepts/stale_flags
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_stale_flags
+      weight: 310
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -7653,16 +7668,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Disk Buffer Durability
+      url: /byoc-logs/operate/disk_buffer_durability
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_disk_buffer_durability
+      weight: 604
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 604
+      weight: 605
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 605
+      weight: 606
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
