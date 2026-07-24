@@ -197,7 +197,7 @@ resource "datadog_observability_pipeline" "main" {
 
 ### Deploy a pipeline with Terraform
 
-Run the following Terraform commands to deploy your pipeline configuration:
+After you define a new pipeline configuration or update an existing configuration, run the following Terraform commands to deploy your pipeline configuration:
 
 ```bash
 terraform init
