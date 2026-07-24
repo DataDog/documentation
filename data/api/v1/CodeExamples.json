@@ -780,6 +780,16 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2595757342",
+      "description": "Create a pipeline with Array Processor Key Value Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_4041812833",
+      "description": "Create a pipeline with Array Processor Key Value Operation with target and override_on_conflict returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_1271012410",
       "description": "Create a pipeline with Array Processor Length Operation returns \"OK\" response"
     },

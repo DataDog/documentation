@@ -5751,6 +5751,11 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: ci
+      identifier: cicd_optimization
+      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5959,6 +5964,11 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: tests
+      identifier: tests_cicd_optimization
+      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6428,6 +6438,11 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
       weight: 308
+    - name: Stale Flags
+      url: feature_flags/concepts/stale_flags
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_stale_flags
+      weight: 309
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -7648,16 +7663,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Disk Buffer Durability
+      url: /byoc-logs/operate/disk_buffer_durability
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_disk_buffer_durability
+      weight: 604
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 604
+      weight: 605
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 605
+      weight: 606
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -9997,11 +10017,16 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 3
+    - name: Experiment Diagnostics
+      url: experiments/diagnostics
+      parent: pa_experiments
+      identifier: pa_experiments_diagnostics
+      weight: 4
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 4
+      weight: 5
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10026,7 +10051,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 5
+      weight: 6
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics

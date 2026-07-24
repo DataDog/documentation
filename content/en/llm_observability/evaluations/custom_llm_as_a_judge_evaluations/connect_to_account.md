@@ -16,7 +16,7 @@ Configure the LLM provider you would like to use for bring-your-own-key (BYOK) e
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an OpenAI account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your OpenAI account to Agent Observability with your OpenAI API key. Agent Observability uses the `GPT-4o mini` model for evaluations.
+Connect your OpenAI account to Agent Observability with your OpenAI API key.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the OpenAI tile.
@@ -55,7 +55,7 @@ Connect your Azure OpenAI account to Agent Observability with your OpenAI API ke
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Anthropic account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Anthropic account to Agent Observability with your Anthropic API key. Agent Observability uses the `Haiku` model for evaluations.
+Connect your Anthropic account to Agent Observability with your Anthropic API key.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the Anthropic tile.
@@ -70,7 +70,7 @@ Connect your Anthropic account to Agent Observability with your Anthropic API ke
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to an Amazon Bedrock account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect your Amazon Bedrock account to Agent Observability with your AWS Account. Agent Observability uses the `Haiku` model for evaluations.
+Connect your Amazon Bedrock account to Agent Observability with your AWS Account.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. Select {{< ui >}}Connect{{< /ui >}} on the Amazon Bedrock tile.
@@ -91,7 +91,7 @@ Connect your Amazon Bedrock account to Agent Observability with your AWS Account
 
 <div class="alert alert-danger">If you are subject to HIPAA, you are responsible for ensuring that you connect only to a Google Cloud Platform account that is subject to a business associate agreement (BAA) and meets all requirements for HIPAA compliance.</div>
 
-Connect Vertex AI to Agent Observability with your Google Cloud Platform account. Agent Observability uses the `gemini-2.5-flash` model for evaluations.
+Connect Vertex AI to Agent Observability with your Google Cloud Platform account.
 
 1. In Datadog, navigate to [{{< ui >}}Agent Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Integrations{{< /ui >}}][1].
 1. On the Google Cloud Vertex AI tile, click {{< ui >}}Connect{{< /ui >}} to add a new GCP account, or click {{< ui >}}Configure{{< /ui >}} next to where your existing accounts are listed to begin the onboarding process.
