@@ -370,7 +370,7 @@ Monitor the feature rollout from the feature flag details page, which provides r
 
 {{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
-For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9]. To attach feature flag data to APM traces and filter traces by flag variant, see [Set Up APM Trace Enrichment][10].
+For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9]. To attach feature flag data to APM traces and filter traces by flag variant, see [Set Up APM Trace Enrichment for Feature Flags][10].
 
 ## Further reading
 
