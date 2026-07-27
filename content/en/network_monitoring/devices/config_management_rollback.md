@@ -95,7 +95,7 @@ Rollbacks use the following NCM permissions:
 3. Click {{< ui >}}Rollback{{< /ui >}}, review the diff in the confirmation modal.
 4. Click {{< ui >}}Rollback{{< /ui >}} again to confirm.
 
-   {{< img src="/network_device_monitoring/config_mgmt/rollback.png" alt="Screenshot that shows when a rollback has been initiated and what to expect" style="width:100%;" >}}
+   {{< img src="/network_device_monitoring/config_mgmt/config_rollback.png" alt="Screenshot that shows when a rollback has been initiated and what to expect" style="width:100%;" >}}
 
 
 ## Further Reading
