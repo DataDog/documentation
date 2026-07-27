@@ -72,26 +72,6 @@ The enrichment environment variable is supported by all supported server-side SD
 ### Language-specific configuration
 
 {{< tabs >}}
-{{% tab "Node.js" %}}
-
-You can also enable span enrichment in code:
-
-{{< code-block lang="javascript" filename="app.js" >}}
-import tracer from 'dd-trace';
-
-tracer.init({
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-      spanEnrichment: {
-        enabled: true,
-      },
-    },
-  },
-});
-{{< /code-block >}}
-
-{{% /tab %}}
 {{% tab "Go" %}}
 
 No additional code configuration is needed. The `DD_EXPERIMENTAL_FLAGGING_PROVIDER_SPAN_ENRICHMENT_ENABLED` environment variable enables span enrichment when the `DatadogProvider` initializes.
@@ -142,6 +122,26 @@ OpenFeatureAPI api = OpenFeatureAPI.getInstance();
 api.setProviderAndWait(new Provider());
 Client client = api.getClient("my-app");
 // Flag evaluations now enrich APM spans automatically
+{{< /code-block >}}
+
+{{% /tab %}}
+{{% tab "Node.js" %}}
+
+You can also enable span enrichment in code:
+
+{{< code-block lang="javascript" filename="app.js" >}}
+import tracer from 'dd-trace';
+
+tracer.init({
+  experimental: {
+    flaggingProvider: {
+      enabled: true,
+      spanEnrichment: {
+        enabled: true,
+      },
+    },
+  },
+});
 {{< /code-block >}}
 
 {{% /tab %}}
