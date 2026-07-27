@@ -26,6 +26,9 @@ further_reading:
 - link: "/cloud_cost_management/planning/forecasting"
   tag: "Documentation"
   text: "Forecasting"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/"
+  tag: "Blog"
+  text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
 ---
 
 
