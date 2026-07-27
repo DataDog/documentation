@@ -29,6 +29,24 @@ export default {
         label: { type: String, required: true },
       },
     },
+    stepper: {
+      attributes: {
+        open: { type: Boolean, default: false },
+        level: {
+          type: String,
+          default: "h3",
+          matches: ["h1", "h2", "h3", "h4", "h5", "h6"],
+        },
+      },
+    },
+    step: {
+      attributes: {
+        title: { type: String, required: true },
+      },
+    },
+    "stepper-finished": {
+      attributes: {},
+    },
     "region-selector": {
       attributes: {},
     },
@@ -42,6 +60,34 @@ export default {
         href: { type: String, required: true },
         tag: { type: String },
       },
+    },
+    "collapse-content": {
+      attributes: {
+        title: { type: String, required: true },
+        level: {
+          type: String,
+          default: "h3",
+          matches: ["h1", "h2", "h3", "h4", "h5", "h6"],
+        },
+        expanded: { type: Boolean, default: false },
+        id: { type: String },
+      },
+    },
+    ui: {
+      attributes: {},
+    },
+    kbd: {
+      attributes: {},
+    },
+    sup: {
+      attributes: {},
+    },
+    nbsp: {
+      attributes: {},
+      selfClosing: true,
+    },
+    "agent-only": {
+      attributes: {},
     },
   },
 };

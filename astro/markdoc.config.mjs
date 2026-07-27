@@ -82,6 +82,77 @@ export default defineMarkdocConfig({
       // attribute shape for validation.
       ...schema.tags.tab,
     },
+    stepper: {
+      render: component("./src/components/Stepper/Stepper.astro"),
+      ...schema.tags.stepper,
+      // Like `tabs`, the transform assembles the children server-side rather
+      // than letting Stepper.astro eager-render its slot. Each `step` /
+      // `stepper-finished` child is a registered component tag, so it renders
+      // with proper CSS-module classes; here we just inject the shared
+      // attributes (stepper id, index, position, level) each child needs.
+      transform(node, config) {
+        const stepperRender = config.tags.stepper.render;
+        const stepRender = config.tags.step.render;
+        const finishedRender = config.tags["stepper-finished"].render;
+
+        const stepperId = generateElementId("stepper");
+        const attributes = node.transformAttributes(config);
+        const open = attributes.open ?? false;
+        const level = attributes.level ?? "h3";
+
+        const stepNodes = node.children.filter(
+          (child) => child.type === "tag" && child.tag === "step",
+        );
+        const stepCount = stepNodes.length;
+
+        const children = [];
+        let stepIndex = 0;
+        for (const child of node.children) {
+          if (child.type !== "tag") continue;
+          if (child.tag === "step") {
+            const isLastStep = stepIndex === stepCount - 1;
+            children.push(
+              new Markdoc.Tag(
+                stepRender,
+                {
+                  title: child.attributes.title ?? "",
+                  stepperId,
+                  stepIndex,
+                  isLastStep,
+                  open,
+                  level,
+                },
+                child.transformChildren(config),
+              ),
+            );
+            stepIndex++;
+          } else if (child.tag === "stepper-finished") {
+            children.push(
+              new Markdoc.Tag(
+                finishedRender,
+                { stepperId },
+                child.transformChildren(config),
+              ),
+            );
+          }
+        }
+
+        return new Markdoc.Tag(
+          stepperRender,
+          { id: stepperId, open },
+          children,
+        );
+      },
+    },
+    step: {
+      // Rendered via the `stepper` transform; schema declares attributes only.
+      render: component("./src/components/Stepper/Step.astro"),
+      ...schema.tags.step,
+    },
+    "stepper-finished": {
+      render: component("./src/components/Stepper/StepperFinished.astro"),
+      ...schema.tags["stepper-finished"],
+    },
     "region-selector": {
       render: component(
         "./src/components/RegionSelector/RegionSelectorIsland.astro",
@@ -114,6 +185,32 @@ export default defineMarkdocConfig({
     "next-link": {
       render: component("./src/components/WhatsNext/NextLink.astro"),
       ...schema.tags["next-link"],
+    },
+    "collapse-content": {
+      render: component(
+        "./src/components/CollapseContent/CollapseContent.astro",
+      ),
+      ...schema.tags["collapse-content"],
+    },
+    ui: {
+      render: component("./src/components/Ui/Ui.astro"),
+      ...schema.tags.ui,
+    },
+    kbd: {
+      render: component("./src/components/Kbd/Kbd.astro"),
+      ...schema.tags.kbd,
+    },
+    sup: {
+      render: component("./src/components/Sup/Sup.astro"),
+      ...schema.tags.sup,
+    },
+    nbsp: {
+      render: component("./src/components/Nbsp/Nbsp.astro"),
+      ...schema.tags.nbsp,
+    },
+    "agent-only": {
+      render: component("./src/components/AgentOnly/AgentOnly.astro"),
+      ...schema.tags["agent-only"],
     },
   },
 });
