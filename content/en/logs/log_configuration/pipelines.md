@@ -65,7 +65,7 @@ For each pipeline, administrators can choose the following edit scopes:
 - **Editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
 - **Processor Editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
-<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
+<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
 You can manage these permissions programmatically through [**API**][14] and **Terraform**.
 
@@ -285,6 +285,23 @@ Move a pipeline into another pipeline to make it into a nested pipeline:
 1. Hover over the pipeline you want to move, and click on the {{< ui >}}Move to{{< /ui >}} icon.
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
 1. Click {{< ui >}}Move{{< /ui >}}.
+
+## Preview pipeline changes
+
+When creating or editing a pipeline or its processors, you can preview how your changes affect logs before applying them. The preview uses a live tail of your logs, processed with your proposed changes.
+
+{{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="The pipeline simulation view showing the pipeline's processors on the left and the diff of a selected log on the right" >}}
+
+For each log, compare its before and after states. Select which change to compare against:
+
+- **Your changes**: compares the pipeline's current deployed version against the version with your changes.
+- **Entire pipeline**: compares the log entering the pipeline against the log after the entire pipeline runs.
+
+To narrow the log list, use the query filter or filter by impact:
+
+- **All logs**: every log in the live tail.
+- **Impacted logs**: only logs changed by your edits in this session.
+- **Not impacted logs**: only logs your edits leave unchanged.
 
 ## Manage your pipelines
 

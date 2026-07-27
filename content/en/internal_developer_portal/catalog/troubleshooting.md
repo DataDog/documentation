@@ -59,9 +59,25 @@ The Endpoints list is based on APM tracing, so make sure your [services are inst
 By default, the Endpoints list matches a definition to all instances that fit the defined path.
 You can scope the definition to a specific service by adding the [service parameter][6] to the API definition.
 
+### Definition and traffic appear as separate endpoints
+
+When you add an OpenAPI specification to an API entity, Datadog adds each declared HTTP method and path to the Endpoints list and combines it with traffic when the service, HTTP method, and path all match. If the definition and traffic remain as separate entries, verify the following:
+
+- `spec.implementedBy` includes the `service` from the span. For service overrides, Datadog also checks [`base_service`][8].
+- The span's `@http.method` matches the method in the definition.
+- The span has `@http.route`, and its `@http.url_details.path` or `@http.route` matches the defined path. A path parameter matches exactly one segment. For example, `/users/{user_id}` matches `/users/123`, but not `/users/123/orders`.
+
+A definition without `spec.implementedBy` can match the same route on any service. Define the implementing services to avoid broad or ambiguous matches.
+
+### Catch-all definition does not combine with traffic
+
+A catch-all path is a path made entirely of parameters, such as `/{resource}` or `/{resource}/{id}`. To prevent an ambiguous match across services, Datadog does not combine traffic with an unscoped catch-all definition. Add the traffic's service to `spec.implementedBy`.
+
+For example, `GET /{resource}` without `spec.implementedBy` remains separate from traffic with `service:store-api`, `@http.method:GET`, and `@http.route:/orders`. Adding `service:store-api` to `spec.implementedBy` allows them to combine. Each parameter still matches only one path segment, so `/{resource}` does not match `/orders/123`; use `/{resource}/{id}` for that shape.
+
 ### No telemetry data for OpenAPI file
 
-The Endpoints list is derived from APM tracing, so traffic information is displayed only if traces are available for the endpoint. After uploading an OpenAPI file, deployment data becomes visible after Datadog ingests a span for the endpoint.
+Uploading an OpenAPI file adds its declared endpoints to the Endpoints list even if Datadog has not observed traffic. Traffic and performance information become visible after Datadog ingests matching spans for an endpoint.
 
 ### No data for new monitor
 
@@ -81,3 +97,4 @@ The Endpoints list relies on APM tracing, so traffic information is displayed on
 [5]: /tracing/trace_pipeline/ingestion_controls/
 [6]: /api_catalog/add_metadata/
 [7]: /tracing/trace_collection/
+[8]: /tracing/guide/base_service/

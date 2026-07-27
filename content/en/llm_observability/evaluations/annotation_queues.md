@@ -34,7 +34,7 @@ Annotation Queues provide a structured workflow for human review of LLM traces. 
 ### Step 1: Configure queue settings
 
 1. Navigate to [{{< ui >}}AI Observability{{< /ui >}} > {{< ui >}}Experiment{{< /ui >}} > {{< ui >}}Annotations{{< /ui >}}][2] and select your project.
-2. Click {{< ui >}}Create Queue{{< /ui >}} 
+2. Click {{< ui >}}Create Queue{{< /ui >}}.
 3. On the {{< ui >}}About{{< /ui >}} tab, configure:
    - {{< ui >}}Name{{< /ui >}}: Descriptive name reflecting the queue's purpose (for example, "Failed Evaluations Review - Q1 2026")
    - {{< ui >}}Project{{< /ui >}}: Agent Observability project this queue belongs to
