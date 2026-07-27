@@ -175,7 +175,7 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 ### Identifying a rehydration that reached its limit
 
-When a {{< ui >}}Search & Rehydration{{< /ui >}} reaches its volume limit, rehydration stops and the Archive Search status changes to {{< ui >}}Limit reached{{< /ui >}}. Already rehydrated logs remain accessible, but not all logs matching your query and time range were rehydrated. To rehydrate the remaining logs, run a new Archive Search with a higher volume limit, or with a narrower query or time range.
+When an Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode reaches its volume limit, rehydration stops and the status changes to {{< ui >}}Limit reached{{< /ui >}}. Already rehydrated logs remain accessible, but not all logs matching your query and time range were rehydrated. To rehydrate the remaining logs, run a new Archive Search with a higher volume limit, or with a narrower query or time range.
 
 ## Cloud-specific permissions
 
