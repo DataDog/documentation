@@ -196,7 +196,7 @@ Use this method to test a single machine or for devices that are not managed by 
 
 ## MDM deploy with Jamf Pro (multiple devices)
 
-This method uses a Jamf Pro policy and shell script to install and configure the Datadog Agent across your fleet of managed Macs, with no manual steps on each device. The script performs the same actions as the manual install, but runs in the background when the policy triggers.
+This example method uses a Jamf Pro policy and shell script to install and configure the Datadog Agent across your fleet of managed Macs, with no manual steps on each device. The script performs the same actions as the manual install, but runs in the background when the policy triggers.
 
 You can use other MDMs; however, this page walks through Jamf Pro as an example.
 
