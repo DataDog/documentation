@@ -375,8 +375,7 @@ compliance_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
-      Port: 443
+      host: "cspm-intake.{{< region-param key="dd_site">}}.:443"
       is_reliable: true
 ```
 
@@ -384,7 +383,7 @@ compliance_config:
 
 ```bash
 DD_COMPLIANCE_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
+DD_COMPLIANCE_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"host\": \"cspm-intake.{{< region-param key="dd_site">}}.:443\", \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}
@@ -399,8 +398,7 @@ runtime_security_config:
     force_use_http: true
     additional_endpoints:
     - api_key: "apiKey2"
-      Host: "https://<VERSION>-app.agent.{{< region-param key="dd_site">}}"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
-      Port: 443
+      host: "cws-intake.{{< region-param key="dd_site">}}.:443"
       is_reliable: true
 ```
 
@@ -408,7 +406,7 @@ runtime_security_config:
 
 ```bash
 DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_USE_HTTP=true
-DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"Host\": \"https://<VERSION>-app.agent.{{< region-param key="dd_site">}}\", \"Port\": 443, \"is_reliable\": true}]"  # Replace <VERSION> with your Datadog Agent version (for example, 7-34-0).
+DD_RUNTIME_SECURITY_CONFIG_ENDPOINTS_ADDITIONAL_ENDPOINTS="[{\"api_key\": \"apiKey2\", \"host\": \"cws-intake.{{< region-param key="dd_site">}}.:443\", \"is_reliable\": true}]"
 ```
 
 {{% agent-dual-shipping %}}

@@ -23,7 +23,14 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
 ---
+
+{{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
+  Learn how to define meaningful digital product metrics and visualize them in Product Analytics with a Datadog trial account. Enroll for free today!
+{{< /learning-center-callout >}}
 
 ## Overview
 

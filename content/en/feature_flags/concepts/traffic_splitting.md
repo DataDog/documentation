@@ -15,11 +15,11 @@ When you define a targeting rule, you can serve a variant to a percentage of sub
 
 In the **Targeting Rules & Rollouts** section, set the percentage of the audience that should receive each variant. For a **single-variant** targeting rule, assign your desired traffic exposure to one variant. For example, roll out the **Free Shipping** variant of your promo banner to 50% of subjects matching your filter:
 
-{{< img src="getting_started/feature_flags/single-variant-traffic-exposure.png" alt="Targeting rule with a single-variant percentage rollout." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/single-variant-traffic-exposure-2.png" alt="Targeting rule with a single-variant percentage rollout." style="width:75%;" >}}
 
 For a **multi-variant** rollout, assign percentages across multiple variants in the same targeting rule by selecting **Serve > Split Traffic** when editing or creating your targeting rule. The SDK distributes matching subjects across those variants according to the percentages you configure.
 
-{{< img src="getting_started/feature_flags/multi-variant-traffic-split.png" alt="Targeting rule with percentages split across multiple variants." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/multi-variant-traffic-split-2.png" alt="Targeting rule with percentages split across multiple variants." style="width:75%;" >}}
 
 ## How the SDK evaluates percentage rollouts
 

@@ -58,6 +58,10 @@ After you select the Google SecOps destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
+
 ## How the destination works
 
 ### Event batching
@@ -67,10 +71,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 1                 | 15                  |
-
-## Metrics
-
-For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

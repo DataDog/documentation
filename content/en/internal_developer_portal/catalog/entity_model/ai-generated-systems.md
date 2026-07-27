@@ -13,8 +13,6 @@ further_reading:
   text: "Discover Entities"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for AI-generated Systems!" >}}
-{{< /callout >}}
 
 ## Overview
 

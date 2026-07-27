@@ -31,7 +31,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
 - **Measuring DORA metrics**: Query deployment frequency, change lead time, change failure rate, and recovery time by service or team.
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
-- **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions job without leaving the agent session.
+- **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
 - **Checking PR health**: Get a combined view of CI failures, code coverage, and quality or security violations for a pull request.
 
 ## Available tools
@@ -75,7 +75,7 @@ The `software-delivery` toolset includes the following tools:
 : Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
 
 `retry_datadog_ci_job`
-: Queue a retry for a failed GitHub Actions CI job. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. This tool only applies to GitHub Actions. For other CI providers, use the provider's UI to rerun.
+: Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
 
 ## Example prompts
 
@@ -150,7 +150,7 @@ If the skill recommends quarantine, it presents the proposed action and requires
 
 `/unblock-pr` investigates a failing PR CI pipeline. For each failing job, it checks whether the failure was already present on the default branch or on other branches. The skill classifies the failure as **flaky**, **infra**, or **regression**. In parallel, it fetches the branch's code coverage and any code quality or security violations from PR insights. It produces a triage brief with per-job classification, evidence, a recommended action, and a PR Health section summarizing coverage and violations.
 
-For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions, it retries failed jobs using `retry_datadog_ci_job` (MCP) or `gh run rerun` (pup fallback); for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
+For flaky failures, the skill chains into `triage-flaky-test` for a deeper investigation. For transient infra failures on GitHub Actions or GitLab, it retries failed jobs using `retry_datadog_ci_job` (MCP) or `gh run rerun` (pup fallback, GitHub Actions only); for other CI providers, it provides a link to the provider's UI. For regressions, it prompts you to investigate your code changes.
 
 **Note**: Code quality and security violation data in the PR Health section requires the MCP toolset and is not available in pup mode.
 

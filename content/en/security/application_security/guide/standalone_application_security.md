@@ -3,6 +3,12 @@ title: Set Up App and API Protection Without APM or Infrastructure Monitoring
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Datadog App and API Protection (AAP) is built on top of [APM][3] and runs alongside [Infrastructure Monitoring][7] by default. While Datadog recommends using AAP together with APM and Infrastructure Monitoring to adopt DevSecOps practices, you can also run AAP on its own. This configuration is referred to as Standalone App and API Protection.
 
 Running standalone allows to be billed primarily for App and API Protection. Some APM intake is still present to support AAP features (for example, security traces), and is expected to appear on your bill.
