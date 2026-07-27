@@ -107,8 +107,8 @@ Learn how to [troubleshoot Mobile Session Replay][6].
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /session_replay/browser/#how-it-works
-[2]: /session_replay/mobile/setup_and_configuration
-[3]: /session_replay/mobile/privacy_options
-[4]: /session_replay/mobile/app_performance
-[5]: /session_replay/#dev-tools
-[6]: /session_replay/mobile/troubleshooting
+[2]: /session_replay/setup_and_configuration?platform=android
+[3]: /session_replay/privacy_options?platform=android
+[4]: /session_replay/app_performance
+[5]: /session_replay/dev_tools
+[6]: /session_replay/troubleshooting?platform=mobile

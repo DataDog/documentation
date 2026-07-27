@@ -286,7 +286,9 @@ class ConversationalSearch {
         this.sendBtn.addEventListener('click', () => this.sendMessage());
 
         this.input.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
+            // Safari can end composition before dispatching the IME-confirming Enter keydown.
+            const isImeComposition = e.isComposing || e.keyCode === 229;
+            if (e.key === 'Enter' && !e.shiftKey && !isImeComposition) {
                 e.preventDefault();
                 this.sendMessage();
             }

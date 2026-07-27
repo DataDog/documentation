@@ -19,6 +19,12 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 App and API Protection (AAP) leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrates seamlessly into your workflow using [Orchestrion][6], an automatic compile-time instrumentation of Go code that does not require code changes.

@@ -41,7 +41,7 @@ Only **searcher** pods establish the reverse connection. Indexers, the control p
 
 It is also possible to configure BYOC Logs to deploy a public ingress so Datadog can establish the connection in the other direction.
 
-The public ingress enables Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page](/cloudprem/configure/ingress/).
+The public ingress enables Datadog's control plane and query service to manage and query BYOC Logs clusters over the public internet. It provides secure access to the BYOC Logs gRPC API using mTLS authentication. You can find more information about BYOC Logs ingress in its [configuration page](/byoc-logs/configure/ingress/).
 
 ## Further reading
 

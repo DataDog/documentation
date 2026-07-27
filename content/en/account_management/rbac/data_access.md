@@ -59,18 +59,18 @@ You may create a maximum of 100 Restricted Datasets under the Enterprise plan, a
 
 ### Supported telemetry types {#supported-telemetry}
 
+- Agent Observability traces
 - APM traces
+- Cloud costs
+- Error Tracking issues
 - Logs
 - RUM sessions
-- Agent Observability traces
+- Software Delivery repository info (in CI Visibility pipelines)
 - Workload Protection Agent Events
 
 The following are available as a Preview upon request:
-- Cloud costs
 - Custom metrics
     - **Note:** Standard and OpenTelemetry (OTel) metrics are not supported
-- Error Tracking issues
-- Software Delivery repository info (in CI Visibility pipelines, Test Optimization, and Code Coverage products)
 
 ## Advanced configuration
 
@@ -129,6 +129,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 * **Supported dataset tags**: Only the following tags are supported:
   * `@git.repository_url`
   * `@git.repository.id`
+  * `@git.repository.id_v2`
   * `@gitlab.groups`
 
 ### Agent Observability
