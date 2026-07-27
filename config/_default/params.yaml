@@ -138,6 +138,7 @@ code_language_ids:
     scheduled_rule: "Scheduled Rule"
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_standalone: "Kubernetes (Standalone)"
     kubernetes_gateway: "Kubernetes (Gateway)"
     ecs_fargate: "ECS Fargate"
     eks_fargate: "EKS Fargate"
@@ -287,6 +288,7 @@ core_product:
 
 # Unsupported sites for each product
 unsupported_sites:
+  coscreen: [gov, gov2]
   amazon-security-lake: [gov, gov2]
   resource_catalog_policies: [gov, gov2]
   runtime_prioritization_engine: [gov, gov2]
@@ -378,12 +380,14 @@ unsupported_sites:
   llm_observability: [gov,gov2]
   mcp_server: [gov,gov2]
   mobile_app_testing: [gov,gov2]
+  nebius-cloud: [gov,gov2]
   network_config_management: [gov,gov2]
   observability_pipelines: [gov,gov2]
   on-call: [gov,gov2]
   oracle-cloud-infrastructure: [gov,gov2]
   oracle-fusion: [gov,gov2]
   oracle_fusion_integration_setup: [gov,gov2]
+  ovhcloud: [gov,gov2]
   pr_gates: [gov,gov2]
   product_analytics: [gov,gov2]
   recorded-future: [gov,gov2]
@@ -402,6 +406,7 @@ unsupported_sites:
   rum_server_nginx: [gov,gov2]
   rum_server_windows_iis: [gov,gov2]
   safety_center: [gov,gov2]
+  scaleway: [gov,gov2]
   service_override_removal: [gov,gov2]
   service_remapping_rules: [gov,gov2]
   setup_remote_config: [gov,gov2]

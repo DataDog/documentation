@@ -45,7 +45,7 @@ You can use the `security` toolset to:
 - **Correlate signals and findings**: Cross-reference active security signals with open findings to determine whether an alert is tied to a known posture issue.
 - **Inspect and manage detection rules**: List, retrieve, create, update, and delete detection rules to understand and manage the logic generating signals.
 - **Manage suppressions**: Create, update, and delete suppressions to silence noisy rules for specific conditions without disabling them entirely.
-- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist, and suppress false positives with passlist exclusion filters.
+- **Respond to attacks with App & API Protection**: Block or unblock IPs, users, and user agents on the denylist; suppress false positives with passlist exclusion filters; and create, update, or delete custom WAF rules to protect a specific service or endpoint.
 - **Remediate vulnerabilities with an AI agent**: Pull library vulnerability findings, including code location and remediation guidance, and pass them to your AI agent to apply patches directly in your codebase.
 - **Investigate indicators of compromise (IoCs)**: Search and retrieve IP addresses, domains, URLs, and file hashes matched against threat intelligence feeds. Review individual indicators and update their triage state.
 
@@ -201,29 +201,45 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 
 ### App & API Protection
 
-`get_datadog_security_passlist`
+`get_datadog_security_trace_passlist`
 : Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
 : *Permissions required: `Application Security Management Protect Read`*
 
-`upsert_datadog_security_passlist`
+`upsert_datadog_security_trace_passlist`
 : Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
 : *Permissions required: `Application Security Management Protect Write`*
 
-`delete_datadog_security_passlist`
+`delete_datadog_security_trace_passlist`
 : Deletes an existing WAF exclusion filter (passlist) entry.
 : *Permissions required: `Application Security Management Protect Write`*
 
-`get_datadog_security_denylist`
+`get_datadog_security_aap_denylist`
 : Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
 : *Permissions required: `Application Security Management Protect Read`*
 
-`upsert_datadog_security_denylist_entry`
+`upsert_datadog_security_aap_denylist`
 : Adds or updates a denylist block for an IP, user, or user agent with an expiration.
 : *Permissions required: `Application Security Management Protect Write`*
 
-`delete_datadog_security_denylist_entry`
+`unblock_datadog_security_aap_denylist`
 : Unblocks a previously denylisted entity by setting its expiration in the past.
 : *Permissions required: `Application Security Management Protect Write`*
+
+`get_datadog_security_aap_custom_rules`
+: Retrieves one App & API Protection (AAP) custom WAF rule by ID or lists custom rules. Supports filtering by category, status, service, and environment.
+: *Permissions required: `Application Security Management Protect Read`*
+
+`upsert_datadog_security_aap_custom_rule`
+: Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+: *Permissions required: `Application Security Management Protect Write`*
+
+`delete_datadog_security_aap_custom_rule`
+: Permanently deletes an AAP custom WAF rule by ID.
+: *Permissions required: `Application Security Management Protect Write`*
+
+`get_datadog_security_aap_blocking_config`
+: Retrieves the organization-wide AAP blocking and denylist enforcement settings.
+: *Permissions required: `Application Security Management Protect Read`*
 
 ## Further reading
 

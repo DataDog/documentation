@@ -533,6 +533,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2815497946",
+      "description": "Create a new dashboard with topology_map data_streams widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2652180930",
       "description": "Create a new dashboard with topology_map widget"
     },
@@ -777,6 +782,16 @@
       "group": "logs_pipelines",
       "suffix": "_3314493032",
       "description": "Create a pipeline with Array Processor Append Operation with preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2595757342",
+      "description": "Create a pipeline with Array Processor Key Value Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_4041812833",
+      "description": "Create a pipeline with Array Processor Key Value Operation with target and override_on_conflict returns \"OK\" response"
     },
     {
       "group": "logs_pipelines",

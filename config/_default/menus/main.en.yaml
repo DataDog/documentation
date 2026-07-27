@@ -2816,11 +2816,16 @@ menu:
       parent: oncall
       identifier: oncall_automations
       weight: 6
-    - name: Profile Settings
-      url: incident_response/on-call/profile_settings/
+    - name: Notification Preferences
+      url: incident_response/on-call/notification_preferences/
       parent: oncall
-      identifier: oncall_profile_settings
+      identifier: oncall_notification_preferences
       weight: 7
+    - name: Supported Countries
+      url: incident_response/on-call/notification_preferences/supported_countries/
+      identifier: oncall_notification_preferences_countries
+      parent: oncall_notification_preferences
+      weight: 1
     - name: Guides
       url: incident_response/on-call/guides/
       parent: oncall
@@ -5751,6 +5756,11 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: ci
+      identifier: cicd_optimization
+      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5959,6 +5969,11 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
+    - name: CI/CD Optimization
+      url: continuous_integration/cicd_optimization/
+      parent: tests
+      identifier: tests_cicd_optimization
+      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
@@ -6418,16 +6433,26 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
       weight: 306
+    - name: Configuration Sources
+      url: feature_flags/concepts/configuration_sources
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_configuration_sources
+      weight: 307
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 307
+      weight: 308
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 308
+      weight: 309
+    - name: Stale Flags
+      url: feature_flags/concepts/stale_flags
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_stale_flags
+      weight: 310
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -7648,16 +7673,21 @@ menu:
       parent: cloudprem_operate
       identifier: cloudprem_operate_best_practices
       weight: 603
+    - name: Disk Buffer Durability
+      url: /byoc-logs/operate/disk_buffer_durability
+      parent: cloudprem_operate
+      identifier: cloudprem_operate_disk_buffer_durability
+      weight: 604
     - name: Releases and Updates
       url: /byoc-logs/operate/updates
       parent: cloudprem_operate
       identifier: cloudprem_operate_updates
-      weight: 604
+      weight: 605
     - name: Troubleshooting
       url: /byoc-logs/operate/troubleshooting
       parent: cloudprem_operate
       identifier: cloudprem_operate_troubleshooting
-      weight: 605
+      weight: 606
     - name: Guides
       url: /byoc-logs/guides/
       parent: cloudprem
@@ -9997,11 +10027,16 @@ menu:
       parent: pa_experiments
       identifier: pa_experiments_results
       weight: 3
+    - name: Experiment Diagnostics
+      url: experiments/diagnostics
+      parent: pa_experiments
+      identifier: pa_experiments_diagnostics
+      weight: 4
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 4
+      weight: 5
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10026,7 +10061,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 5
+      weight: 6
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10078,76 +10113,46 @@ menu:
       identifier: session_replay
       parent: digital_experience_heading
       weight: 50000
-    - name: Browser
-      url: /session_replay/browser
-      parent: session_replay
-      identifier: session_replay_browser
-      weight: 1
     - name: Setup
-      url: /session_replay/browser/setup_and_configuration
-      parent: session_replay_browser
-      identifier: session_replay_browser_setup
-      weight: 101
-    - name: Privacy Options
-      url: /session_replay/browser/privacy_options
-      parent: session_replay_browser
-      identifier: session_replay_browser_privacy_options
-      weight: 102
-    - name: Developer Tools
-      url: /session_replay/browser/dev_tools
-      parent: session_replay_browser
-      identifier: session_replay_browser_developer_tools
-      weight: 103
-    - name: Troubleshooting
-      url: /session_replay/browser/troubleshooting
-      parent: session_replay_browser
-      identifier: session_replay_browser_troubleshooting
-      weight: 104
-    - name: Mobile
-      url: /session_replay/mobile
+      url: /session_replay/setup_and_configuration
       parent: session_replay
-      identifier: session_replay_mobile
-      weight: 2
-    - name: Setup and Configuration
-      url: /session_replay/mobile/setup_and_configuration
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_setup_and_configuration
-      weight: 101
+      identifier: session_replay_setup
+      weight: 1
     - name: Privacy Options
-      url: /session_replay/mobile/privacy_options
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_privacy_options
-      weight: 102
+      url: /session_replay/privacy_options
+      parent: session_replay
+      identifier: session_replay_privacy_options
+      weight: 2
     - name: Developer Tools
-      url: /session_replay/mobile/dev_tools
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_developer_tools
-      weight: 103
-    - name: Impact on App Performance
-      url: /session_replay/mobile/app_performance
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_app_performance
-      weight: 104
-    - name: Troubleshooting
-      url: /session_replay/mobile/troubleshooting
-      parent: session_replay_mobile
-      identifier: session_replay_mobile_troubleshooting
-      weight: 105
+      url: /session_replay/dev_tools
+      parent: session_replay
+      identifier: session_replay_developer_tools
+      weight: 3
     - name: Playlists
       url: /session_replay/playlists
       parent: session_replay
       identifier: session_replay_playlists
-      weight: 3
+      weight: 4
     - name: Heatmaps
       url: /session_replay/heatmaps
       parent: session_replay
       identifier: session_replay_heatmaps
-      weight: 4
+      weight: 5
+    - name: Impact on App Performance
+      url: /session_replay/app_performance
+      parent: session_replay
+      identifier: session_replay_app_performance
+      weight: 6
+    - name: Troubleshooting
+      url: /session_replay/troubleshooting
+      parent: session_replay
+      identifier: session_replay_troubleshooting
+      weight: 7
     - name: Guides
       url: /session_replay/guide
       parent: session_replay
       identifier: session_replay_guide
-      weight: 5
+      weight: 8
     - name: Account Management
       url: account_management/
       pre: cog-2
