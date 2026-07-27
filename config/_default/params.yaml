@@ -138,6 +138,7 @@ code_language_ids:
     scheduled_rule: "Scheduled Rule"
     historical_job: "Historical Job"
     kubernetes_daemonset: "Kubernetes (DaemonSet)"
+    kubernetes_standalone: "Kubernetes (Standalone)"
     kubernetes_gateway: "Kubernetes (Gateway)"
     ecs_fargate: "ECS Fargate"
     eks_fargate: "EKS Fargate"
