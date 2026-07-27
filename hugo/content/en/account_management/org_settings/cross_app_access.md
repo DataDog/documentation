@@ -142,26 +142,13 @@ Complete the setup in the agent's own administration console. The steps below ap
 5. Click **Save**.
 6. Open the connector details and click **Test connection**.
 
-The connection test reports each stage of the exchange separately, which narrows down where a failed setup breaks. See the troubleshooting table below.
+The connection test reports each stage of the exchange separately, which narrows down where a failed setup breaks.
 
 ## Verify the configuration
 
 Sign in to the agent as a user assigned to both Okta applications, then run a request that calls Datadog. A successful call confirms the full path: Okta issues the token, Datadog accepts it, and Datadog resolves the user.
 
 If a user signed in before you enabled Cross-App Access, have them sign out of the agent and sign back in through Okta. Sessions established earlier lack the identity token the agent needs.
-
-## Troubleshooting
-
-| Symptom | Cause |
-|---------|-------|
-| Token exchange fails for every user | Cross-App Access is disabled in Datadog, or the **Okta issuer URL** does not match the issuer in the token. |
-| Datadog cannot identify the organization | The resource tenant identifier in Okta does not match your **Public Org ID**. |
-| Signature verification fails | The **Okta issuer URL** points to a different Okta tenant than the one issuing tokens. |
-| Token exchange fails for one agent but works for another | The **Client ID at resource** in that agent's Resource Connection does not match the client ID Datadog lists for it. |
-| Token exchange fails after the token passes signature checks | The SAML issuer in the token does not match a SAML connection configured on your organization. |
-| Token exchange fails for some users only | The Name ID for those users does not match their Datadog handle, or they do not exist in the Datadog organization. |
-| Datadog rejects the issuer URL when saving | The value includes a path, port, query string, or fragment, uses `http`, or is not a subdomain of an accepted Okta domain. |
-| The agent connects but cannot reach some data | The scope is not allowed for that agent's OAuth client in Datadog, or the scopes set in Okta exclude it. Access is the intersection of both. |
 
 ## Further reading
 
