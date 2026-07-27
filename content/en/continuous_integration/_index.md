@@ -3,15 +3,6 @@ title: Continuous Integration Visibility
 aliases:
   - /ci
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: "Release Notes"
-    text: "Check out the latest Software Delivery releases! (App login required)"
-  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-    tag: "Blog"
-    text: "Monitor your CircleCI environment with Datadog"
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: "Blog"
-    text: "Configure pipeline alerts with Datadog CI monitors"
   - link: "/continuous_integration/pipelines/"
     tag: "Documentation"
     text: "Explore pipeline data to resolve build problems"
@@ -21,6 +12,12 @@ further_reading:
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
     text: "Explore test data to find and fix problem tests"
+  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
+    tag: "Blog"
+    text: "Monitor your CircleCI environment with Datadog"
+  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+    tag: "Blog"
+    text: "Configure pipeline alerts with Datadog CI monitors"
   - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
     tag: "Blog"
     text: "Best practices for monitoring static web applications"
@@ -42,6 +39,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
     tag: "Blog"
     text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+  - link: "https://www.datadoghq.com/blog/platform-engineering-metrics/"
+    tag: "Blog"
+    text: "Success Metrics for Platform Engineering Teams"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+    tag: "Release Notes"
+    text: "Check out the latest Software Delivery releases! (App login required)"
 cascade:
     algolia:
         rank: 70
