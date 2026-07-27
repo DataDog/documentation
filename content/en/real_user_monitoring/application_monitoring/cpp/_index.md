@@ -11,6 +11,8 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
+cascade:
+    site_support_id: rum_cpp
 ---
 ## Overview
 

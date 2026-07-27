@@ -1,6 +1,8 @@
 ---
-null
-...
+title: Configuración del SDK de .NET Core
+code_lang: dotnet-core
+type: multi-code-lang
+code_lang_weight: 60
 ---
 
 Después de configurar la librería de rastreo con tu código y de configurar el Agent para recopilar datos de APM, también puedes configurar la librería de rastreo como prefieras e incluir la configuración del [Etiquetado de servicios unificado][4].

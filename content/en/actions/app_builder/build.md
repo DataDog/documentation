@@ -14,6 +14,12 @@ further_reading:
   text: "Getting Started with App Builder"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 You can create an app or edit existing apps from the [App Builder][1] page. The page lists information about existing apps, including the following:
 - Author
 - Tags

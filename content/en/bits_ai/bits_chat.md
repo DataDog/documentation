@@ -126,10 +126,11 @@ Use these insights to understand adoption patterns, identify power users for bes
 
 ### Web application
 There are multiple ways to open Bits Chat in the Datadog web application:
-- In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}
-- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon)
-- Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>
-- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}
+- Go to [Bits Chat][11].
+- In the top-right of the navigation bar, click {{< ui >}}Ask Bits{{< /ui >}}.
+- In a Datadog product integrated with Bits Chat, click {{< ui >}}Ask Bits{{< /ui >}} or {{< img src="bits_ai/dev_agent/twinkling_stars_icon.png" inline="true" style="width:24px">}} (the twinkling stars icon).
+- Press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
+- In the left-side navigation panel, click {{< ui >}}Bits AI{{< /ui >}}.
 
 {{< img src="bits_ai/getting_started/bits_assistant_side_panel.png" alt="Bits Chat panel open alongside the Dashboards list" style="width:40%;">}}
 
@@ -138,7 +139,7 @@ There are multiple ways to open Bits Chat in the Datadog web application:
 Ask Bits questions about your system or active incident. Bits has context on Datadog public documentation, telemetry, and ownership.
 
 1. [Download the mobile app and log in][2].
-2. On the home screen, tap {{< ui >}}Bits Assistant{{< /ui >}}.
+2. On the home screen, tap {{< ui >}}Bits Chat{{< /ui >}}.
 3. Start chatting with Bits Chat by voice or text.
 {{< img src="bits_ai/getting_started/bits_ai_mobile_app_2026.png" alt="View of the Mobile App Home dashboard with Bits AI" style="width:40%;" >}}
 
@@ -165,3 +166,4 @@ After setup is completed, you can send queries to `@Datadog` in natural language
 [8]: /ddsql_reference/data_directory/
 [9]: /cloud_cost_management/cloud_cost_skill/
 [10]: https://app.datadoghq.com/ask/usage
+[11]: https://app.datadoghq.com/ask

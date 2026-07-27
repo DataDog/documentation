@@ -18,6 +18,12 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{< callout url="#" btn_hidden="true" header="App and API Protection for Istio is in Preview" >}}
 To try the preview of App and API Protection for Istio, use the following setup instructions.
 {{< /callout >}}

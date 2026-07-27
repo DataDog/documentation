@@ -1,10 +1,10 @@
 ---
-title: OpenTelemetry API Support
-aliases:
-  - /opentelemetry/interoperability/api_support
-  - /opentelemetry/interoperability/otel_api_tracing_interoperability/
-  - /opentelemetry/instrument/api_support/
+title: Using Datadog SDKs with OpenTelemetry
+description: Export telemetry in OTLP format from Datadog SDKs, or use the OpenTelemetry API with Datadog SDKs to keep vendor-neutral instrumentation.
 further_reading:
+    - link: '/opentelemetry/setup/ddot_collector/'
+      text: 'Datadog Distribution of the OpenTelemetry Collector (DDOT)'
+      tag: 'Documentation'
     - link: 'tracing/guide/instrument_custom_method'
       text: 'Instrument a custom method to get deep visibility into your business logic'
       tag: 'Documentation'
@@ -21,44 +21,37 @@ algolia:
   tags: ['otel custom instrumentation']
 ---
 
-Datadog SDKs provide an implementation of the [OpenTelemetry API][1] for traces, metrics, and logs. This means you can maintain vendor-neutral instrumentation of your services, while still taking advantage of Datadog's native implementation, features, and products. 
+Datadog SDKs work with OpenTelemetry in two independent ways. Exporting telemetry in [OpenTelemetry Protocol (OTLP)][1] format controls how telemetry is sent. The [OpenTelemetry API][2] controls how you instrument your services. These can be enabled separately, but using them together provides an OpenTelemetry-native experience.
 
-The telemetry produced by your running code can be processed, analyzed, and monitored alongside Datadog's native telemetry, allowing you to take advantage of Datadog's unified platform and products like [Continuous Profiler][3], [Data Streams Monitoring][4], [App and API Protection][5], and [Live Processes][6].
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}
+    <h3>Export traces in OTLP format</h3>
+    Export traces from a Datadog SDK in OTLP format to DDOT or any OpenTelemetry Collector, instead of sending them to the Datadog Agent. In Preview.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/api_support/" >}}
+    <h3>Use the OpenTelemetry API</h3>
+    Instrument your services with vendor-neutral OpenTelemetry APIs while taking advantage of Datadog's native features and products.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
-{{< img src="/opentelemetry/setup/otel-api-dd-sdk.png" alt="Diagram: OpenTelemetry API with Datadog SDKs sends telemetry data through the OTLP protocol to the Datadog Agent, which forwards to Datadog's platform." style="width:100%;" >}}
+<div class="alert alert-info"><strong>Comparing setups?</strong><br> See the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table</a> to understand which Datadog features each setup supports.</div>
 
-**Note:** You can also send your OpenTelemetry API instrumented traces to Datadog using the [OTel Collector][7].
+## Configure and extend
 
-By [instrumenting your code with OpenTelemetry APIs][2], your code:
-
-- Remains free of vendor-specific API calls.
-- Does not depend on Datadog SDKs at compile time (only runtime).
-
-To learn more, follow the link for your language:
-
-{{< card-grid card_width="170px">}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=php" src="integrations_logos/php.png" alt="PHP" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".Net" >}}
-  {{< image-card href="/opentelemetry/instrument/dd_sdks/api_support/?prog_lang=rust" src="integrations_logos/rust.png" alt="Rust" >}}
-{{< /card-grid >}}
-
-<br>
-
-<div class="alert alert-info">To see which Datadog features are supported with this setup, see the <a href="/opentelemetry/compatibility/#feature-compatibility">feature compatibility table.</a></div>
+{{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}
+    <h3>Instrumentation Libraries</h3>
+    Add OpenTelemetry instrumentation libraries to capture telemetry from third-party components alongside Datadog SDK instrumentation.
+    {{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}
+    <h3>Configuration</h3>
+    Configure Datadog SDKs with OpenTelemetry SDK environment variables.
+    {{< /nextlink >}}
+{{< /whatsnext >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://opentelemetry.io/docs/specs/otel/trace/api/
-[2]: /tracing/trace_collection/otel_instrumentation/
-[3]: /profiler/
-[4]: /data_streams/
-[5]: /security/application_security/
-[6]: /infrastructure/process
-[7]: /opentelemetry/setup/collector_exporter/
+[1]: https://opentelemetry.io/docs/specs/otlp/
+[2]: https://opentelemetry.io/docs/specs/otel/trace/api/
