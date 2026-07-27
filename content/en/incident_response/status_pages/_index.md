@@ -260,7 +260,7 @@ Templates let you save pre-configured language for degradation notices and maint
 
 ### Insert template variables
 
-Insert a variable into a template message to have Datadog resolve it when the template is applied to a notice, either automatically or by prompting the publisher for a value. The **Message Variables** panel next to the message fields lists the available variables:
+Insert a variable into a template message to have Datadog resolve it when the template is applied to a notice. Depending on the variable, Datadog either fills the value automatically or prompts the publisher to provide one. The **Message Variables** panel next to the message fields lists the available variables:
 
 | Variable | Description |
 | ---- | ---- |
@@ -273,7 +273,7 @@ To insert a variable, type `{{` in a message field and select a variable from th
 
 From the **Publish Notice** modal, select a template from the **Template** dropdown to pre-fill the notice with its title, messages, and components.
 
-Applying a template pre-fills the notice's fields, which remain editable and can be overridden if necessary, with a **Reset Values** option to revert to the original template content.
+Applying a template pre-fills the notice's fields, which remain editable. To discard your edits and restore the original template content, click **Reset Values**. 
 
 {{< img src="incident_response/status_pages/apply_template_to_notice.png" alt="Publish Notice modal with a template applied, pre-filling the notice title, message, and impacted components" style="width:60%;" >}}
 
