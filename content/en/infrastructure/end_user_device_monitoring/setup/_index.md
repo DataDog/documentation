@@ -12,9 +12,7 @@ further_reading:
 End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>.
 {{< /callout >}}
 
-## Overview
-
-Managing employee devices at scale is difficult when performance issues, connectivity problems, and crashes are hard to detect before they affect users. End User Device Monitoring gives IT teams visibility into the health and performance of employee desktops and laptops, both physical and virtual, from a single location in Datadog. This page covers how End User Device Monitoring works and its key capabilities.
+Set up the Datadog Agent on employee desktops and laptops to collect [End User Device Monitoring data][11].
 
 <div class="alert alert-danger">You must receive confirmation of Preview access before data appears in Datadog. After submitting your request, wait for an access confirmation before completing the setup steps below.</div>
 
@@ -31,21 +29,7 @@ Managing employee devices at scale is difficult when performance issues, connect
     - [macOS][14]
     - [Windows][15]
 
-## Explore the app
-
-### Fleet overview
-
-The summary section displays device health status, device type distribution, and OS breakdown. This helps you identify unhealthy devices, track fleet composition, and understand overall system health at a glance.
-
-### Device-level details
-
-View detailed health and usage information for individual devices.
-
-Select a device to access device-specific metrics and status information. Use this view to investigate anomalies, monitor usage trends, and troubleshoot issues more efficiently.
-
-For a complete list of features, see [Key Capabilities][11].
-
-## Enable related features and integrations
+## Next steps
 
 To collect additional data from monitored devices, enable one or more of the following features or integrations:
 
@@ -65,7 +49,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 [7]: /network_monitoring/network_path/setup/
 [8]: /integrations/wlan/
 [9]: /integrations/wincrashdetect/
-[11]: /infrastructure/end_user_device_monitoring/#key-capabilities
+[11]: /infrastructure/end_user_device_monitoring/
 [12]: https://www.datadoghq.com/product-preview/end-user-device-monitoring/
 [13]: /integrations/event-viewer/?tab=logs
 [14]: /infrastructure/end_user_device_monitoring/setup/macos/
