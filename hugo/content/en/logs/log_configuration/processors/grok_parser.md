@@ -36,7 +36,7 @@ Define the Grok processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]. To co
    {{< site-region region="gov,gov2" >}}
    <div class="alert alert-info">Auto parsing is not available for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
    {{< /site-region >}}
-1. {{< ui >}}Test your rules{{< /ui >}}: Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result on the right of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
+1. {{< ui >}}Test your rules{{< /ui >}}: Click a sample to trigger its evaluation against the parsing rule and display the result on the right of the screen. All samples show a status (`match` or `no match`), which highlights if one of the parsing rules of the grok parser matches the sample.
 
 
 ## Before and after state of logs
