@@ -92,7 +92,7 @@ To add a Datadog API key or client token:
 
 ## Revoke API keys or remove client tokens
 
-To revoke a Datadog API key, navigate to the list of keys, and click the {{< ui >}}Revoke{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key you want to revoke. To remove a client token, navigate to the list of tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the token you want to remove.
+To revoke a Datadog API key, navigate to the list of keys, and click the {{< ui >}}Revoke{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key. To remove a client token, navigate to the list of tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the token.
 
 A revoked API key stays in the list with a {{< ui >}}Revoked{{< /ui >}} status for 7 days, during which you can restore it. See [Unrevoke an API key](#unrevoke-an-api-key). Client tokens don't support this restoration window; after you remove a client token, it can't be recovered.
 
