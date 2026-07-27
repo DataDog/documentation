@@ -15,8 +15,8 @@
 
 Announce the reorg (see copy for various channels below).
 
+- [x] To the #docs-announcements channel (https://dd.slack.com/archives/C09641REVHN/p1785165930974599)
 - [ ] To the #documentation channel (<LINK>)
-- [ ] To the #docs-backroom channel (<LINK>)
 - [ ] In a banner in the `documentation` README
 
 #### Announcement copy for #documentation:
@@ -34,20 +34,6 @@ We'll fix most of the conflicting PRs automatically, closing the old PR with a l
 In edge cases when an automatic fix is not available for a PR, we'll leave a comment in the PR offering further instructions.
 
 You can read more about the reorg here.<LINK TO REORG README>
-```
-
-#### Announcement copy for #docs-backroom
-
-By now, you should have met with the team to explain what's going to happen, so this shouldn't be brand-new information.
-
-```
-Hi all,
-
-I just announced the docs repo reorg in `#documentation`. I wanted to post a message here to note that the docs on-call is **not** expected to provide support for the reorg. I'll be doing that, along with David and Heston. Our automations should keep PRs out of your queue until they've been fixed and are ready for a typical review.
-
-The day before the reorg, I'll post here again with additional information for the folks on call, and tag them in that. That message will include support channels that you can redirect people to when they ask you for help.
-
-Let me know if you have any questions. Thank you!
 ```
 
 ## The day before
