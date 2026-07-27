@@ -77,7 +77,118 @@ Use this method to test a single machine or for devices that are not managed by 
 
 ### Enable Network Path (optional)
 
-<!-- todo, waiting on open questions -->
+1. Add the following to `/opt/datadog-agent/etc/system-probe.yaml`:
+
+    ```yaml
+    traceroute:
+      enabled: true
+    ```
+
+1. Make a copy of `/opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml.example`, removing `.example` from the filename:
+
+    ```shell
+    cp /opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml.example /opt/datadog-agent/etc/conf.d/network_path.d/conf.yaml
+    ```
+
+1. Edit the `conf.yaml` file. Replace the example hostnames with the destinations you want to monitor:
+
+    ```yaml
+    init_config:
+        ## @param min_collection_interval - number - optional - default: 60
+        ## Specifies how frequently we should probe the endpoint.
+        ## Min collection interval is defined in seconds.
+        #
+        min_collection_interval: 60
+
+        ## @param timeout - integer - optional - default: 1000
+        ## Specifies how much time in milliseconds the traceroute should
+        ## wait for a response from each hop before timing out.
+        #
+        timeout: 1000
+
+    # Network Path integration is used to monitor individual endpoints.
+    instances:
+      - hostname: google.com # endpoint hostname or IP
+        protocol: TCP
+        port: 443
+      - ## @param hostname - string - required
+        ## Hostname or IP of the target endpoint to monitor via Network Path.
+        #
+        hostname: api.datadoghq.com
+
+        ## @param port - integer - optional
+        ## Port of the target endpoint to monitor via Network Path.
+        ## For UDP, we do not recommend setting the port since it can make probes less reliable.
+        ## If port is not set, a random port will be used.
+        #
+        port: 443
+
+        ## @param protocol - string - optional - default: UDP
+        ## Protocol used to monitor an endpoint via Network Path.
+        ## Available protocols: UDP, TCP, ICMP
+        #
+        protocol: TCP
+
+        ## @param max_ttl - integer - optional - default: 30
+        ## Specifies the maximum number of hops (max time-to-live value) traceroute will probe.
+        #
+        # max_ttl: <MAX_TTL>
+
+        ## @param timeout - integer - optional - default: 1000
+        ## Specifies how much time in milliseconds the traceroute should
+        ## wait for a response from each hop before timing out.
+        #
+        # timeout: 1000
+
+        ## @param min_collection_interval - number - optional - default: 60
+        ## Specifies how frequently we should probe the endpoint.
+        ## Min collection interval is defined in seconds.
+        #
+        min_collection_interval: 120
+
+        ## @param source_service - string - optional
+        ## Source service name.
+        #
+        # source_service: <SOURCE_SERVICE>
+
+        ## @param destination_service - string - optional
+        ## Destination service name.
+        #
+        # destination_service: <DESTINATION_SERVICE>
+
+        ## @param tcp_method - string - optional - default: syn
+        ## Traceroute method used to monitor an endpoint via Network Path
+        ## Available methods: syn, sack, prefer_sack, syn_socket (syn_socket only works on Windows OSes)
+        ## Note: Windows client versions only support syn_socket
+        #
+        # tcp_method: <METHOD>
+
+        ## @param traceroute_queries - integer - optional - default: 3
+        ## Number of traceroutes to send for each check run.
+        #
+        # traceroute_queries: 3
+
+        ## @param e2e_queries - integer - optional - default: 50
+        ## Number of end-to-end probes to send for each check run.
+        #
+        # e2e_queries: 50
+
+        ## @param tags - list of strings - optional
+        ## A list of tags to attach to every metric and service check emitted by this instance.
+        ##
+        ## Learn more about tagging at https://docs.datadoghq.com/tagging
+        #
+        # tags:
+        #   - <KEY_1>:<VALUE_1>
+        #   - <KEY_2>:<VALUE_2>
+    ```
+
+1. Restart the Agent and system probe to start seeing network paths:
+
+    ```shell
+    sudo launchctl kickstart -k system/com.datadoghq.agent
+    sudo launchctl kickstart -k system/com.datadoghq.sysprobe
+    ```
 
 ## MDM deploy with Jamf Pro (multiple devices)
 
