@@ -116043,6 +116043,7 @@ components:
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
+            network_connections_read: Read cloud network connections.
             org_connections_read: Read cross organization connections.
             org_connections_write: Create, edit, and delete cross organization connections.
             org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
@@ -165071,12 +165072,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated connections
       tags:
         - Cloud Network Monitoring
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/network/dns/aggregate:
     get:
       description: Get all aggregated DNS traffic.
@@ -165143,12 +165155,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated DNS traffic
       tags:
         - Cloud Network Monitoring
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/oauth2/.well-known/sites:
     get:
       description: Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.
@@ -192887,6 +192910,7 @@ paths:
         Please check the documentation regularly for updates.
   /api/v2/slo/report:
     post:
+      deprecated: true
       description: |-
         Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.
 
@@ -192950,10 +192974,12 @@ paths:
         operator: OR
         permissions:
           - slos_read
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/download:
     get:
+      deprecated: true
       description: |-
         Download an SLO report. This can only be performed after the report job has completed.
 
@@ -193000,10 +193026,12 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 103
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/status:
     get:
+      deprecated: true
       description: Get the status of the SLO report job.
       operationId: GetSLOReportJobStatus
       parameters:
@@ -193052,8 +193080,9 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 102
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/{slo_id}/status:
     get:
       description: |-
