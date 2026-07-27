@@ -16,6 +16,9 @@ further_reading:
 - link: "/getting_started/monitors/"
   tag: "Documentation"
   text: "Getting started with monitors"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 ---
 
 ## Overview
