@@ -4327,8 +4327,7 @@ menu:
           - v2
         operationids:
           - CreateLinearIssues
-        unstable:
-          - v2
+        unstable: []
         order: 153
     - name: Attach security findings to a Linear issue
       url: /api/latest/security-monitoring/attach-security-findings-to-a-linear-issue/
@@ -4340,8 +4339,7 @@ menu:
           - v2
         operationids:
           - AttachLinearIssue
-        unstable:
-          - v2
+        unstable: []
         order: 154
     - name: Create Jira issues for security findings
       url: /api/latest/security-monitoring/create-jira-issues-for-security-findings/

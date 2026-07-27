@@ -1448,6 +1448,31 @@ components:
       required: false
       schema:
         $ref: "#/components/schemas/OrgGroupPolicySortOption"
+    PostmortemTemplateFilterIncidentTypeParameter:
+      description: Filter postmortem templates by the associated incident type ID.
+      in: query
+      name: filter[incident-type]
+      required: false
+      schema:
+        format: uuid
+        type: string
+    PostmortemTemplateIdParameter:
+      description: The ID of the postmortem template.
+      example: 00000000-0000-0000-0000-000000000000
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
+    PostmortemTemplateSortParameter:
+      description: The attribute to sort results by. Prefix with `-` for descending order.
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: created_at
+        example: "-created_at"
+        type: string
     ProjectIDPathParameter:
       description: Project UUID.
       example: "e555e290-ed65-49bd-ae18-8acbfcf18db7"
@@ -1539,7 +1564,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -20789,6 +20814,26 @@ components:
       type: string
       x-enum-varnames:
         - SCHEDULE_TARGET
+    ConfluencePostmortemSettings:
+      description: Settings for a postmortem template stored in Confluence. Required when `location` is `confluence`.
+      properties:
+        account_id:
+          description: The ID of the Confluence integration account.
+          example: "123456"
+          type: string
+        parent_id:
+          description: The ID of the parent Confluence page under which postmortems are created.
+          example: "345678"
+          nullable: true
+          type: string
+        space_id:
+          description: The ID of the Confluence space where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - space_id
+      type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -43397,6 +43442,21 @@ components:
           $ref: "#/components/schemas/GoogleChatUpdateOrganizationHandleRequestAttributes"
       required:
         - attributes
+      type: object
+    GoogleDocsPostmortemSettings:
+      description: Settings for a postmortem template stored in Google Docs. Required when `location` is `google_docs`.
+      properties:
+        account_id:
+          description: The ID of the Google Drive integration account.
+          example: "123456"
+          type: string
+        parent_folder_id:
+          description: The ID of the Google Drive folder where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - parent_folder_id
       type: object
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
@@ -68045,6 +68105,32 @@ components:
       type: string
       x-enum-varnames:
         - CLICKHOUSE
+    ObservabilityPipelineClientTls:
+      description: Configuration for enabling TLS encryption between the pipeline component and external services.
+      properties:
+        ca_file:
+          description: Path to the Certificate Authority (CA) file used to validate the server’s TLS certificate.
+          type: string
+        crt_file:
+          description: Path to the TLS client certificate file used to authenticate the pipeline component with upstream or downstream services.
+          example: "/path/to/cert.crt"
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS client certificate. Used for mutual TLS authentication.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase for the private key file.
+          example: TLS_KEY_PASSPHRASE
+          type: string
+        server_name:
+          description: Server name to use for Server Name Indication (SNI) and to verify against the certificate presented by the remote host. Use this when the address you connect to doesn't match the certificate's Common Name or Subject Alternative Name.
+          example: server.example.com
+          maxLength: 253
+          minLength: 1
+          type: string
+      required:
+        - crt_file
+      type: object
     ObservabilityPipelineCloudPremDestination:
       description: |-
         The `cloud_prem` destination sends logs to Datadog CloudPrem.
@@ -68069,7 +68155,7 @@ components:
             type: string
           type: array
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: Configuration for TLS encryption.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestinationType"
@@ -69784,7 +69870,7 @@ components:
           example: HTTP_AUTH_PASSWORD
           type: string
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -69882,7 +69968,7 @@ components:
           format: int64
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -71965,7 +72051,7 @@ components:
         mode:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationMode"
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: TLS configuration. Relevant only when `mode` is `tcp`.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationType"
@@ -72697,7 +72783,7 @@ components:
           minimum: 0
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestinationType"
       required:
@@ -78129,8 +78215,24 @@ components:
     PostmortemTemplateAttributesRequest:
       description: Attributes for creating or updating a postmortem template.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp. Set to `null` to unset.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
@@ -78139,30 +78241,61 @@ components:
     PostmortemTemplateAttributesResponse:
       description: Attributes of a postmortem template returned in a response.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
         createdAt:
-          description: When the template was created
+          description: When the template was created.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         modifiedAt:
-          description: When the template was last modified
+          description: When the template was last modified.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
         - name
+        - content
+        - is_default
+        - location
         - createdAt
         - modifiedAt
+      type: object
+    PostmortemTemplateCreateRelationships:
+      description: Relationships for a postmortem template. `incident_type` is required when creating a template and is immutable afterwards.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
       type: object
     PostmortemTemplateDataRequest:
       description: Data object for creating or updating a postmortem template.
       properties:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesRequest"
+        id:
+          description: The ID of the template. Required when updating.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateCreateRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -78175,9 +78308,11 @@ components:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesResponse"
         id:
-          description: The ID of the template
-          example: "template-456"
+          description: The ID of the template.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateResponseRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -78185,6 +78320,43 @@ components:
         - type
         - attributes
       type: object
+    PostmortemTemplateIncidentTypeRelationship:
+      description: Relationship to the incident type this template belongs to.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateIncidentTypeRelationshipData:
+      description: Incident type relationship data.
+      properties:
+        id:
+          description: The incident type identifier.
+          example: 00000000-0000-0000-0000-000000000009
+          format: uuid
+          type: string
+        type:
+          description: The incident type resource type.
+          example: incident_types
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    PostmortemTemplateLocation:
+      default: datadog_notebooks
+      description: The location where the postmortem is created and stored.
+      enum:
+        - datadog_notebooks
+        - confluence
+        - google_docs
+      example: datadog_notebooks
+      type: string
+      x-enum-varnames:
+        - DATADOG_NOTEBOOKS
+        - CONFLUENCE
+        - GOOGLE_DOCS
     PostmortemTemplateRequest:
       description: Request body for creating or updating a postmortem template.
       properties:
@@ -78201,14 +78373,48 @@ components:
       required:
         - data
       type: object
+    PostmortemTemplateResponseRelationships:
+      description: Relationships of a postmortem template returned in a response.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationship"
+      type: object
     PostmortemTemplateType:
-      description: Postmortem template resource type
+      description: Postmortem template resource type.
       enum:
+        - postmortem_templates
         - postmortem_template
-      example: postmortem_template
+      example: postmortem_templates
       type: string
       x-enum-varnames:
+        - POSTMORTEM_TEMPLATES
         - POSTMORTEM_TEMPLATE
+    PostmortemTemplateUserRelationship:
+      description: Relationship to a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateUserRelationshipData:
+      description: User relationship data.
+      properties:
+        id:
+          description: The user identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          description: The user resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
     PostmortemTemplatesResponse:
       description: Response containing a list of postmortem templates.
       properties:
@@ -88855,6 +89061,8 @@ components:
     ScheduleTrigger:
       description: "Trigger a workflow from a Schedule. The workflow must be published."
       properties:
+        overlapBehavior:
+          $ref: "#/components/schemas/ScheduleTriggerOverlapBehavior"
         rruleExpression:
           description: "Recurrence rule expression for scheduling."
           example: ""
@@ -88862,6 +89070,17 @@ components:
       required:
         - rruleExpression
       type: object
+    ScheduleTriggerOverlapBehavior:
+      default: EXCLUSIVE_RUN
+      description: Controls whether a scheduled workflow run may start while another instance is still running.
+      enum:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
+      example: EXCLUSIVE_RUN
+      type: string
+      x-enum-varnames:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
     ScheduleTriggerWrapper:
       description: "Schema for a Schedule-based trigger."
       properties:
@@ -90788,6 +91007,57 @@ components:
         - NEVER_ACTIVATED
         - ACTIVATED
         - DEACTIVATED
+    SecurityMonitoringContentPackAppSecDetails:
+      description: Details for an Application Security content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAppSecDetailsType:
+      description: Type for Application Security content pack details.
+      enum:
+        - appsec
+      example: appsec
+      type: string
+      x-enum-varnames:
+        - APPSEC
+    SecurityMonitoringContentPackAuditDetails:
+      description: Details for an audit trail content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAuditDetailsType:
+      description: Type for audit trail content pack details.
+      enum:
+        - audit
+      example: audit
+      type: string
+      x-enum-varnames:
+        - AUDIT
+    SecurityMonitoringContentPackEntityDetails:
+      description: Details for an entity or identity content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetailsType"
+      required:
+        - type
+        - cp_activation
+      type: object
+    SecurityMonitoringContentPackEntityDetailsType:
+      description: Type for entity content pack details.
+      enum:
+        - entity
+      example: entity
+      type: string
+      x-enum-varnames:
+        - ENTITY
     SecurityMonitoringContentPackIntegrationStatus:
       description: The installation status of the related integration.
       enum:
@@ -90810,16 +91080,14 @@ components:
         - PARTIALLY_INSTALLED
         - DETECTED
         - ERROR
-    SecurityMonitoringContentPackStateAttributes:
-      description: Attributes of a content pack state
+    SecurityMonitoringContentPackLogsDetails:
+      description: Details for a logs-based content pack.
       properties:
-        cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect (only applies to certain pricing models)
-          example: false
-          type: boolean
         cp_activation:
           $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
-        filters_configured_for_logs:
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        filters_configured:
           description: |-
             Whether filters (Security Filters or Index Query depending on the pricing model) are
             present and correctly configured to route logs into Cloud SIEM.
@@ -90827,21 +91095,59 @@ components:
           type: boolean
         integration_installed_status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
-        logs_last_collected:
-          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
         logs_seen_from_any_index:
-          description: Whether logs for this content pack have been seen in any Datadog index within the last 72 hours.
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
           example: true
           type: boolean
-        state:
+        siem_index_incorrect:
+          description: Whether the Cloud SIEM index configuration is incorrect (only applies to certain pricing models).
+          example: false
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityFilterFilteredDataType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+        - filters_configured
+        - logs_seen_from_any_index
+        - siem_index_incorrect
+      type: object
+    SecurityMonitoringContentPackOnboardingDetails:
+      description: |-
+        Content pack details returned when Cloud SIEM is inactive for the requesting organization.
+      properties:
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        logs_seen_from_any_index:
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
+          example: true
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetailsType"
+      required:
+        - type
+        - logs_seen_from_any_index
+      type: object
+    SecurityMonitoringContentPackOnboardingDetailsType:
+      description: Type for onboarding content pack details.
+      enum:
+        - onboarding
+      example: onboarding
+      type: string
+      x-enum-varnames:
+        - ONBOARDING
+    SecurityMonitoringContentPackStateAttributes:
+      description: Attributes of a content pack state.
+      properties:
+        details:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackStateDetails"
+        status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackStatus"
       required:
-        - state
-        - cp_activation
-        - logs_seen_from_any_index
-        - logs_last_collected
-        - cloud_siem_index_incorrect
-        - filters_configured_for_logs
+        - status
+        - details
       type: object
     SecurityMonitoringContentPackStateData:
       description: Content pack state data.
@@ -90859,13 +91165,42 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringContentPackStateDetails:
+      description: |-
+        Type-specific details for a content pack state. The set of fields present depends
+        on the content pack's `type`. When Cloud SIEM is inactive for the requesting organization, `onboarding` is returned instead of the content pack's usual type, such as `logs` or `vulnerability`.`
+      discriminator:
+        mapping:
+          appsec: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+          audit: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+          entity: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+          logs: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+          onboarding: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
+          threat_intel: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+          vulnerability: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        propertyName: type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
     SecurityMonitoringContentPackStateMeta:
-      description: Metadata for content pack states
+      description: Metadata for content pack states.
       properties:
         cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect at the organization level
+          description: Whether the Cloud SIEM index configuration is incorrect for the organization.
           example: false
           type: boolean
+        retention_months:
+          description: |-
+            The number of months that standard logs are retained for organizations on the standalone_indexed` pricing model. This field is omitted for other pricing models.
+          example: 15
+          format: int32
+          maximum: 60
+          type: integer
         sku:
           $ref: "#/components/schemas/SecurityMonitoringSKU"
       required:
@@ -90903,6 +91238,7 @@ components:
         - active
         - warning
         - broken
+        - not_configured
       example: active
       type: string
       x-enum-descriptions:
@@ -90912,6 +91248,7 @@ components:
         - Activated; logs received within the last 24 hours.
         - Activated; integration not installed or logs last seen 24 to 72 hours ago.
         - Activated; no logs for over 72 hours, filter missing, or Cloud SIEM index incorrectly ordered.
+        - Activated, but no credentials are configured (entity content packs only).
       x-enum-varnames:
         - INSTALL
         - ACTIVATE
@@ -90919,6 +91256,32 @@ components:
         - ACTIVE
         - WARNING
         - BROKEN
+        - NOT_CONFIGURED
+    SecurityMonitoringContentPackThreatIntelDetails:
+      description: Details for a threat intelligence content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackThreatIntelDetailsType:
+      description: Type for threat intelligence content pack details.
+      enum:
+        - threat_intel
+      example: threat_intel
+      type: string
+      x-enum-varnames:
+        - THREAT_INTEL
     SecurityMonitoringContentPackTimestampBucket:
       description: Timestamp bucket indicating when logs were last collected.
       enum:
@@ -90941,6 +91304,31 @@ components:
         - WITHIN_24_TO_72_HOURS
         - OVER_72H_TO_30D
         - OVER_30D
+    SecurityMonitoringContentPackVulnerabilityDetails:
+      description: Details for a vulnerability content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackVulnerabilityDetailsType:
+      description: Type for vulnerability content pack details.
+      enum:
+        - vulnerability
+      example: vulnerability
+      type: string
+      x-enum-varnames:
+        - VULNERABILITY
     SecurityMonitoringCriticalAsset:
       description: The critical asset's properties.
       properties:
@@ -93312,12 +93700,16 @@ components:
         - per_gb_analyzed
         - per_event_in_siem_index_2023
         - add_on_2024
+        - standalone_indexed
+        - unknown
       example: add_on_2024
       type: string
       x-enum-varnames:
         - PER_GB_ANALYZED
         - PER_EVENT_IN_SIEM_INDEX_2023
         - ADD_ON_2024
+        - STANDALONE_INDEXED
+        - UNKNOWN
     SecurityMonitoringSchedulingOptions:
       description: Options for scheduled rules. When this field is present, the rule runs based on the schedule. When absent, it runs real-time on ingested logs.
       nullable: true
@@ -115651,6 +116043,7 @@ components:
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
+            network_connections_read: Read cloud network connections.
             org_connections_read: Read cross organization connections.
             org_connections_write: Create, edit, and delete cross organization connections.
             org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
@@ -139343,7 +139736,7 @@ paths:
     get:
       description: |-
         Returns a list of environments for the organization.
-        Supports filtering by name and key.
+        Supports filtering by name, key, and DD_ENV.
       operationId: ListFeatureFlagsEnvironments
       parameters:
         - description: Filter environments by name (partial matching).
@@ -139356,6 +139749,12 @@ paths:
           example: "env-partial"
           in: query
           name: key
+          schema:
+            type: string
+        - description: Filter environments by queries that contain the provided DD_ENV value.
+          example: "staging"
+          in: query
+          name: dd_env
           schema:
             type: string
         - description: Maximum number of results to return.
@@ -143591,6 +143990,9 @@ paths:
     get:
       description: Retrieve a list of all postmortem templates for incidents.
       operationId: ListIncidentPostmortemTemplates
+      parameters:
+        - $ref: "#/components/parameters/PostmortemTemplateFilterIncidentTypeParameter"
+        - $ref: "#/components/parameters/PostmortemTemplateSortParameter"
       responses:
         "200":
           content:
@@ -143600,11 +144002,19 @@ paths:
                   value:
                     data:
                       - attributes:
+                          content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                           createdAt: "2024-01-01T00:00:00+00:00"
+                          is_default: "2024-01-01T00:00:00+00:00"
+                          location: datadog_notebooks
                           modifiedAt: "2024-01-01T00:00:00+00:00"
                           name: Standard Postmortem Template
                         id: 00000000-0000-0000-0000-000000000001
-                        type: postmortem_template
+                        relationships:
+                          incident_type:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000009
+                              type: incident_types
+                        type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplatesResponse"
           description: OK
@@ -143634,8 +144044,14 @@ paths:
                 value:
                   data:
                     attributes:
+                      content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    relationships:
+                      incident_type:
+                        data:
+                          id: 00000000-0000-0000-0000-000000000009
+                          type: incident_types
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -143648,11 +144064,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000002
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: Created
@@ -143682,13 +144106,7 @@ paths:
       description: Delete a postmortem template.
       operationId: DeleteIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "204":
           description: No Content
@@ -143717,13 +144135,7 @@ paths:
       description: Retrieve details of a specific postmortem template.
       operationId: GetIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "200":
           content:
@@ -143733,11 +144145,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000003
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
@@ -143766,13 +144186,7 @@ paths:
       description: Update an existing postmortem template.
       operationId: UpdateIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       requestBody:
         content:
           application/json:
@@ -143782,7 +144196,8 @@ paths:
                   data:
                     attributes:
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    id: 00000000-0000-0000-0000-000000000004
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -143795,11 +144210,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000004
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
@@ -160778,6 +161201,7 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
+        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -164648,12 +165072,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated connections
       tags:
         - Cloud Network Monitoring
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/network/dns/aggregate:
     get:
       description: Get all aggregated DNS traffic.
@@ -164720,12 +165155,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated DNS traffic
       tags:
         - Cloud Network Monitoring
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/oauth2/.well-known/sites:
     get:
       description: Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.
@@ -175045,6 +175491,7 @@ paths:
         - Case Management Projects: `case-management-project`
         - Monitor Notification Rules: `monitor-notification-rule`
         - Status Pages: `status-page`
+        - Feature Flags: `feature-flag`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -175075,6 +175522,7 @@ paths:
         Case Management Projects    | `viewer`, `contributor`, `manager`
         Monitor Notification Rules  | `viewer`, `editor`
         Status Pages                | `viewer`, `responder`, `manager`
+        Feature Flags               | `viewer`, `contributor`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -182946,9 +183394,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
         Create Linear issues for security findings.
@@ -183023,9 +183468,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/mute:
     patch:
       description: >-
@@ -187123,12 +187565,15 @@ paths:
                   value:
                     data:
                       - attributes:
-                          cloud_siem_index_incorrect: false
-                          cp_activation: activated
-                          filters_configured_for_logs: true
-                          logs_last_collected: within_24_hours
-                          logs_seen_from_any_index: true
-                          state: active
+                          details:
+                            cp_activation: activated
+                            data_last_seen: within_24_hours
+                            filters_configured: true
+                            integration_installed_status: installed
+                            logs_seen_from_any_index: true
+                            siem_index_incorrect: false
+                            type: logs
+                          status: active
                         id: aws-cloudtrail
                         type: content_pack_state
                     meta:
@@ -192465,6 +192910,7 @@ paths:
         Please check the documentation regularly for updates.
   /api/v2/slo/report:
     post:
+      deprecated: true
       description: |-
         Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.
 
@@ -192528,10 +192974,12 @@ paths:
         operator: OR
         permissions:
           - slos_read
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/download:
     get:
+      deprecated: true
       description: |-
         Download an SLO report. This can only be performed after the report job has completed.
 
@@ -192578,10 +193026,12 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 103
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/status:
     get:
+      deprecated: true
       description: Get the status of the SLO report job.
       operationId: GetSLOReportJobStatus
       parameters:
@@ -192630,8 +193080,9 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 102
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/{slo_id}/status:
     get:
       description: |-
