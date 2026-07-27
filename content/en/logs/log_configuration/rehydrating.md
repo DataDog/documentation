@@ -124,15 +124,6 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 - {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when creating rehydrations. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
-### Detecting when a rehydration reaches its volume limit
-
-A historical view becomes `ACTIVE` whether it rehydrates all matching logs or stops early after reaching its volume limit. To confirm whether a view stopped because it reached the limit, compare the number of rehydrated logs against the configured volume limit:
-
-- The completion event for each rehydration reports the total number of rehydrated logs in the `{{number_of_indexed_logs}}` template variable. You can view this completion event in your [Events Explorer][7].
-- If the number of rehydrated logs matches the volume limit, the rehydration reached its limit. This means not all matching logs in the selected time range were rehydrated.
-
-When a view reaches its limit, rehydrate the remaining logs by creating a historical view with a higher volume limit, or with a narrower query or time range.
-
 ### Cloud-specific permissions
 
 Datadog requires the permission to read from your archives to rehydrate content from them. This permission can be changed at any time.

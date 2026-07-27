@@ -173,6 +173,10 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 - {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
 
+### Identifying a rehydration that reached its limit
+
+When a {{< ui >}}Search & Rehydration{{< /ui >}} reaches its volume limit, rehydration stops and the Archive Search status changes to {{< ui >}}Limit reached{{< /ui >}}. Already rehydrated logs remain accessible, but not all logs matching your query and time range were rehydrated. To rehydrate the remaining logs, run a new Archive Search with a higher volume limit, or with a narrower query or time range.
+
 ## Cloud-specific permissions
 
 Datadog requires the permission to read your archives to search content from them. This permission can be changed at any time.
