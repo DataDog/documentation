@@ -1,10 +1,13 @@
 ---
 title: Serverless Environments
-description: Use Datadog Feature Flags server SDKs from serverless environments with a Datadog Agent.
+description: Use Datadog Feature Flags server SDKs in serverless environments with or without a Datadog Agent.
 further_reading:
 - link: "/feature_flags/server/"
   tag: "Documentation"
   text: "Server-Side Feature Flags"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 - link: "/remote_configuration/"
   tag: "Documentation"
   text: "Remote Configuration"
@@ -15,100 +18,113 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags server SDKs receive flag configuration through [Remote Configuration][1]. The Datadog Agent is required for this flow: it connects to Datadog, receives signed Remote Configuration payloads, validates those payloads, and makes the resulting feature flag configuration available to the Datadog SDK in your application.
+The Datadog Feature Flags Node.js SDK can receive flag configuration directly from the Datadog-managed CDN. This _agentless_ configuration source does not require a Datadog Agent, which makes it the default delivery mode for supported Node.js serverless applications.
 
-After the SDK receives the payload, flag evaluation happens locally in your application. The SDK does not make a network request to Datadog for each flag evaluation.
+After configuration is loaded, flag evaluation happens locally in the application. The SDK does not make a network request for each evaluation.
 
-Serverless runtimes that cannot run or reach a Datadog Agent do not support Feature Flags server SDK payload delivery.
+Agentless configuration delivery is available in:
 
-## Agent-backed architecture
+| SDK | Minimum version |
+|---|---|
+| Node.js `dd-trace` v5 | 5.116.0 |
+| Node.js `dd-trace` v6 | 6.5.0 |
 
-Some serverless workloads can be configured to reach private network resources. In those environments, you may be able to route tracer traffic to a Datadog Agent running on stateful infrastructure, such as EC2, ECS, EKS, a Google Compute Engine VM, GKE, an Azure VM, or AKS. This pattern depends on your cloud networking, runtime, and SDK support. Validate it in a non-production environment before relying on it for feature flag delivery.
+Other server SDKs and `dd-trace` versions earlier than those listed require Agent Remote Configuration for flag delivery.
 
-1. Configure the Agent with Remote Configuration enabled. The Agent uses the full-word Remote Configuration variable:
+<div class="alert alert-warning">The initial Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-    {{< code-block lang="bash" >}}
-    DD_REMOTE_CONFIGURATION_ENABLED=true
-    DD_API_KEY=<DATADOG_API_KEY>
-    DD_SITE=<DATADOG_SITE>
-    {{< /code-block >}}
+## Agentless architecture
 
-1. Configure the serverless application to use the Agent as its trace Agent endpoint and enable the Feature Flags provider:
+Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog:
 
-    {{< code-block lang="bash" >}}
-    DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
-    DD_TRACE_AGENT_PORT=8126
-    DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-    {{< /code-block >}}
+1. Use a [supported SDK version](#overview).
+2. Configure the API key, Datadog site, and environment in the serverless application:
 
-    <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+   {{< code-block lang="bash" >}}
+   DD_API_KEY=<DATADOG_API_KEY>
+   DD_SITE={{< region-param key="dd_site" code="true" >}}
+   DD_ENV=<YOUR_ENVIRONMENT>{{< /code-block >}}
 
-    Some language tracers also support or require a tracer-side Remote Configuration setting, such as `DD_REMOTE_CONFIG_ENABLED=true`. This is separate from the Agent's `DD_REMOTE_CONFIGURATION_ENABLED` setting. See the language-specific Feature Flags server SDK setup for the variables required by your SDK.
+3. Initialize or access the Datadog OpenFeature provider as described in [Node.js setup][3]. This starts CDN polling. No Feature Flags enablement or source setting is required.
+4. Store `DD_API_KEY` in the serverless platform's secret manager and expose it only to the application process.
 
-1. Configure the standard service tags used by the server SDK:
+The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags for unchanged configuration. It preserves the last accepted configuration during temporary errors. If no configuration has been accepted, OpenFeature evaluations return the caller-provided default value.
 
-    {{< code-block lang="bash" >}}
-    DD_SERVICE=<YOUR_SERVICE_NAME>
-    DD_ENV=<YOUR_ENVIRONMENT>
-    DD_VERSION=<YOUR_APP_VERSION>
-    {{< /code-block >}}
+Tracer installation and initialization alone do not start CDN polling. Requests to the CDN contribute to server Feature Flags billing only after application code activates the provider.
 
-1. Use the language-specific Feature Flags server SDK setup after the Agent connection is available. See [Server-Side Feature Flags][2] for setup by language.
+Agentless mode removes the Agent dependency for _flag configuration_. It does not change your APM or serverless telemetry setup. You can continue to use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
+
+## Agent-backed Remote Configuration
+
+Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use the existing Agent Remote Configuration path:
+
+{{< code-block lang="bash" >}}
+# Serverless application
+DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
+DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
+DD_TRACE_AGENT_PORT=8126
+{{< /code-block >}}
+
+Configure the Agent with Remote Configuration and the API key:
+
+{{< code-block lang="bash" >}}
+DD_REMOTE_CONFIGURATION_ENABLED=true
+DD_API_KEY=<DATADOG_API_KEY>
+DD_SITE=<DATADOG_SITE>
+{{< /code-block >}}
+
+The serverless workload must be able to reach the Agent on a private network, and the Agent must be able to reach Datadog over HTTPS. Do not expose the Agent trace intake publicly.
+
+Explicitly selecting `remote_config` enables the Feature Flags Remote Configuration subscription, even if application code does not initialize the provider. These requests contribute to server Feature Flags billing.
 
 ## Operational considerations
 
-Treat the Datadog Agent as part of the runtime dependency chain for server-side flag delivery:
+- **Cold starts**: Blocking provider initialization waits for the first configuration and can add cold-start latency. Initialize asynchronously if serving caller-provided default values during startup is acceptable.
+- **Outbound connectivity**: Agentless delivery requires outbound HTTPS access to the Datadog-managed flag configuration service.
+- **API key ownership**: In agentless mode, the application owns `DD_API_KEY`. In `remote_config` mode, the Agent owns the API key.
+- **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
+- **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
+- **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Node.js runtime compatible with the tracer. Check the tracer's compatibility requirements.
+- **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths. Evaluations then return caller-provided default values.
 
-- **Network path**: The serverless workload must be able to reach the Agent on the trace Agent port, typically `8126`. The Agent must be able to reach Datadog over HTTPS.
-- **Private connectivity**: Keep the Agent endpoint on a private network. Do not expose the Agent trace intake publicly.
-- **High availability**: If the Agent is unavailable during startup, SDKs use default values until the first configuration payload is available. Run enough Agent capacity for the serverless workload's concurrency and availability requirements.
-- **Cold starts**: Blocking provider initialization can increase cold-start latency. If startup latency is more important than immediately serving remote flag values, initialize asynchronously and rely on defaults until the provider is ready.
-- **Flag updates**: Remote Configuration delivery is eventually consistent. Allow for the Agent polling interval and SDK startup time when testing a newly changed flag.
+Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
+
+If your deployment uses `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, see [Migrate from the legacy provider setting][5].
 
 ## Environment notes
 
 ### AWS Lambda
 
-AWS Lambda does not support direct Feature Flags server SDK payload delivery through the Datadog Lambda Extension alone. The Lambda Extension can collect telemetry, but it is not a replacement for the Agent Remote Configuration path required by Feature Flags server SDKs.
+Node.js Lambda functions can use agentless configuration delivery when they run a minimum SDK version and can reach Datadog over HTTPS. The Datadog Lambda Extension is not required for flag configuration, but you can continue to use it for supported serverless telemetry.
 
-If the Lambda function runs in a VPC and can reach private infrastructure, you can validate an Agent-backed architecture with a Datadog Agent running on stateful infrastructure, such as EC2, ECS, or EKS. Configure the function's Agent endpoint and Feature Flags provider settings as described in [Agent-backed architecture](#agent-backed-architecture).
+### Google Cloud serverless environments
 
-For Java Lambda functions, the Java Feature Flags SDK expects the Datadog Java tracer runtime to receive Remote Configuration from the Agent. Native-image builds, such as Quarkus native or GraalVM AOT applications, are not a supported direct path for Java Feature Flags server SDK payload delivery.
-
-### Google Cloud Run services
-
-Cloud Run services can use Datadog serverless monitoring instrumentation, including in-container and sidecar approaches for telemetry. Remote Configuration for Feature Flags server SDKs is not supported directly in Cloud Run managed services. If your Cloud Run service can reach private network resources, validate an external Agent-backed architecture in a non-production environment before using it for feature flag delivery.
-
-### Google Cloud Run functions and Cloud Functions
-
-Cloud Run functions and Cloud Functions do not support direct Feature Flags server SDK payload delivery. If your networking model allows access to a private Agent endpoint, validate the Agent-backed architecture before relying on it. Otherwise, rely on application defaults.
+Node.js workloads can use agentless configuration delivery when the tracer is supported in the selected runtime and outbound HTTPS is available. This applies independently of in-container or sidecar telemetry instrumentation.
 
 ### Azure Functions
 
-Azure Functions do not support direct Feature Flags server SDK payload delivery. If the function app can reach private Azure infrastructure, validate an Agent-backed architecture with the Agent on an Azure VM, AKS, or another supported stateful compute environment.
+Node.js function apps can use agentless configuration delivery when the tracer is supported and outbound HTTPS is available. An external Agent is only required when `remote_config` is selected.
 
-### AWS Fargate and container tasks
+### Edge runtimes
 
-If your serverless container environment lets you run a Datadog Agent sidecar or otherwise connect to a supported Agent, use the standard server SDK setup. In this model, the task or service behaves like any other application connected to an Agent with Remote Configuration enabled.
-
-### Managed edge and function platforms
-
-Platforms such as Vercel Functions, Netlify Functions, and Cloudflare Workers do not provide a supported Agent runtime or private Agent connection model for Feature Flags server SDKs. These platforms are not supported for server-side Feature Flags payload delivery.
+Some edge runtimes do not support the Datadog Node.js tracer APIs required by the Feature Flags provider. Verify tracer compatibility for the target platform before relying on agentless configuration delivery.
 
 ## Public API and local evaluation
 
-The public [Feature Flags API][3] is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
+The public [Feature Flags API][4] is intended for managing flags and environments. It is not a per-request flag evaluation API for server-side applications.
 
-Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK with an Agent-backed Remote Configuration path when available. If no Agent path is available, use application-owned defaults or static configuration. This fallback is outside Remote Configuration delivery and does not provide signed payload validation or live updates.
+Do not query Datadog APIs from each serverless invocation to evaluate flags. Use the server SDK, which periodically loads flag configuration and evaluates locally.
 
-## Validate the Agent-backed architecture
+## Validate your setup
 
-Before using an external Agent endpoint for serverless feature flag delivery:
+Before enabling Feature Flags in production:
 
-1. Verify that the Agent has Remote Configuration enabled with `datadog-agent status`.
-2. Confirm that the serverless workload can connect to the Agent trace endpoint.
+1. Confirm the application uses a [minimum supported SDK version](#overview).
+2. For agentless delivery, confirm the application has `DD_API_KEY`, `DD_SITE`, and `DD_ENV`. For Agent Remote Configuration, confirm the Agent has its API key and Remote Configuration enabled.
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
-4. Change a non-production flag in Datadog and confirm that the serverless workload receives the updated value after the Remote Configuration polling interval.
+4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
+5. Confirm that your application handles caller-provided defaults if configuration is unavailable during a cold start.
+6. For the initial Node.js agentless releases, do not plan experimentation workflows around evaluation metrics or exposure data. These uses are not supported.
 
 ## Further reading
 
@@ -116,4 +132,6 @@ Before using an external Agent endpoint for serverless feature flag delivery:
 
 [1]: /remote_configuration/
 [2]: /feature_flags/server/
-[3]: /api/latest/feature-flags/
+[3]: /feature_flags/server/nodejs/
+[4]: /api/latest/feature-flags/
+[5]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup

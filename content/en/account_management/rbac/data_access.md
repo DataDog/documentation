@@ -134,7 +134,7 @@ If you are concerned about unauthorized data access through monitors, Datadog re
 
 ### Agent Observability
 
-* **Supported telemetry**: Only Agent Observability traces are supported. Experiments, datasets, annotation queues, and managed prompts are not supported.
+* **Supported telemetry**: Agent Observability traces are supported. Experiment event data (spans and evaluation metrics) for experiments in a project is also restricted by `ml_app`-keyed Restricted Datasets. Only the event data is restricted—experiment list views and metadata are not. Datasets, annotation queues, and managed prompts are not supported.
 * **OpenTelemetry**: When using [OpenTelemetry instrumentation][13], some data sent to Agent Observability may also be written to APM traces, as well as metrics and monitors. If you are protecting sensitive data with a Restricted Dataset on Agent Observability, consider also configuring Restricted Datasets on APM, metrics, or monitors with matching data boundaries.
 
 

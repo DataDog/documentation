@@ -74,6 +74,7 @@ processors:
       - include: system.cpu.usage
         action: insert
         new_name: host.cpu.utilization
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -85,7 +86,7 @@ service:
       exporters: [datadog/connector, datadog]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [metricstransform, infraattributes, batch]
+      processors: [metricstransform, infraattributes, batch, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -120,6 +121,7 @@ processors:
     cardinality: 2
   batch:
     timeout: 10s
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -131,7 +133,7 @@ service:
       exporters: [datadog/connector, datadog]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [infraattributes, batch]
+      processors: [infraattributes, batch, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]

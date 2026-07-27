@@ -1,17 +1,17 @@
 ---
 title: OpenTelemetry Instrumentation
-description: Instrument LLM applications with OpenTelemetry using GenAI semantic conventions and send traces to Agent Observability without the Datadog SDK.
+description: Instrument LLM applications with OpenTelemetry using GenAI or OpenInference semantic conventions and send traces to Agent Observability without the Datadog SDK.
 ---
 
 ## Overview
 By using OpenTelemetry's standardized semantic conventions for generative AI operations, you can instrument your LLM applications with any OpenTelemetry-compatible library or framework and visualize the traces in Agent Observability.
 
-Agent Observability supports ingesting OpenTelemetry traces that follow the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Agent Observability SDK or a Datadog Agent.
+Agent Observability supports ingesting OpenTelemetry traces that follow either the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12]. This allows you to send LLM traces directly from OpenTelemetry-instrumented applications to Datadog without requiring the Agent Observability SDK or a Datadog Agent.
 
 ## Prerequisites
 
 - A [Datadog API key][2]
-- An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1]
+- An application instrumented with OpenTelemetry that emits traces following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12]
 
 ## Supported features
 
@@ -98,28 +98,29 @@ This environment variable ensures that `strands-agents` emits traces following t
 
 To generate traces compatible with Agent Observability, do one of the following:
 
-- Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1].
-- Create custom OpenTelemetry instrumentation that produces spans with the required `gen_ai.*` attributes, as defined in the semantic conventions.
+- Use an OpenTelemetry library or instrumentation package that emits spans following the [OpenTelemetry 1.37+ semantic conventions for generative AI][1] or the supported [OpenInference semantic conventions][12].
+- Create custom OpenTelemetry instrumentation that produces the required `gen_ai.*` or OpenInference attributes defined by your chosen convention.
 
 After your application starts sending data, the traces automatically appear in the [{{< ui >}}Agent Observability Traces{{< /ui >}} page][3]. To search for your traces in the UI, use the `ml_app` attribute, which is automatically set to the value of your OpenTelemetry root span's `service` attribute.
 
 <div class="alert alert-danger">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
-<li/> OpenInference is not supported.
+<li/> OpenInference spans are supported. See the <a href="#using-openinference">OpenInference example</a>.
 <li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the Agent Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 </ul>
 </div>
 
 ## Tested frameworks and libraries
 
-These frameworks and libraries have been tested with Agent Observability. Any framework that emits [OpenTelemetry 1.37+ GenAI semantic convention][1]-compliant spans is supported.
+These frameworks and libraries have been tested with Agent Observability. Frameworks that emit the supported attributes from the [OpenTelemetry 1.37+ GenAI semantic conventions][1] or [OpenInference semantic conventions][12] can send spans to Agent Observability.
 
 {{< tabs >}}
 {{% tab "Python" %}}
 | Framework | Instrumentation | Supported Versions |
 |-----------|----------------|--------------------|
 | [OpenAI][20] | [`opentelemetry-instrumentation-openai-v2`][21] | >= 1.26.0 |
+| [OpenAI][20] | [`openinference-instrumentation-openai`][36] | >= 1.26.0 |
 | [Anthropic][22] | [`opentelemetry-instrumentation-anthropic`][23] | >= 0.51.0 |
 | [Google GenAI][24] | [`opentelemetry-instrumentation-google-genai`][25] | >= 1.32.0 |
 | [Google Vertex AI][26] | [`opentelemetry-instrumentation-vertexai`][27] | >= 1.64.0 |
@@ -146,6 +147,7 @@ These frameworks and libraries have been tested with Agent Observability. Any fr
 [33]: https://pypi.org/project/opentelemetry-instrumentation-llamaindex/
 [34]: https://www.traceloop.com/openllmetry
 [35]: https://pypi.org/project/traceloop-sdk/
+[36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Framework | Instrumentation | Supported Versions |
@@ -348,11 +350,58 @@ provider.force_flush(timeout_millis=5000)
 
 After running this example, search for `ml_app:simple-openllmetry-test` in the Agent Observability UI to find the generated trace.
 
+### Using OpenInference
+
+The following example uses the [OpenInference OpenAI instrumentation][11] to automatically instrument OpenAI calls with OpenTelemetry.
+
+Configure the OpenTelemetry exporter and instrument the OpenAI client:
+
+```python
+import openai
+from openinference.instrumentation.openai import OpenAIInstrumentor
+from opentelemetry import trace
+from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+from opentelemetry.sdk.resources import Resource
+from opentelemetry.sdk.trace import TracerProvider
+from opentelemetry.sdk.trace.export import BatchSpanProcessor
+
+resource = Resource.create({
+    "service.name": "simple-openinference-test",
+})
+
+provider = TracerProvider(resource=resource)
+trace.set_tracer_provider(provider)
+
+exporter = OTLPSpanExporter(
+    endpoint="{{< region-param key="otlp_trace_endpoint" code="true" >}}",
+    headers={
+        "dd-api-key": "<YOUR_DATADOG_API_KEY>",
+        "dd-ml-app": "simple-openinference-test",
+        "dd-otlp-source": "llmobs",
+    },
+)
+
+provider.add_span_processor(BatchSpanProcessor(exporter))
+
+OpenAIInstrumentor().instrument(tracer_provider=provider)
+
+# Make OpenAI call (automatically traced)
+client = openai.OpenAI(api_key="<YOUR_OPENAI_API_KEY>")
+client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "What is 15 multiplied by 7?"}]
+)
+
+provider.force_flush(timeout_millis=5000)
+```
+
+After running this example, search for `ml_app:simple-openinference-test` in the Agent Observability UI to find the generated trace.
+
 ## Attribute mapping reference
 
-This section provides the mapping between OpenTelemetry GenAI semantic conventions (v1.37+) as well as OpenLLMetry to Datadog's Agent Observability span schema.
+This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, and OpenInference to Datadog's Agent Observability span schema.
 
-<div class="alert alert-info">OpenLLMetry-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> section.</div>
+<div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> and <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a> sections.</div>
 
 ### OpenTelemetry 1.37+ attribute mappings
 
@@ -596,6 +645,122 @@ The following OpenLLMetry-specific attributes are filtered from tags:
 - `gen_ai.completion.*`
 - `llm.*`
 
+### OpenInference attribute mappings
+
+Agent Observability recognizes an OpenInference span when the `openinference.span.kind` attribute is present and non-empty. The following sections document the OpenInference attributes that map to dedicated Agent Observability fields.
+
+#### Span kind resolution
+
+If both `gen_ai.operation.name` and `openinference.span.kind` are present, `gen_ai.operation.name` takes precedence.
+
+| `openinference.span.kind` | Agent Observability `span.kind` |
+|---------------------------|---------------------------------|
+| `LLM` | `llm` |
+| `EMBEDDING` | `embedding` |
+| `TOOL` | `tool` |
+| `AGENT` | `agent` |
+| `RETRIEVER` | `retrieval` |
+| `CHAIN`, `RERANKER`, `GUARDRAIL`, `EVALUATOR`, `PROMPT`, other values | `workflow` |
+
+#### Model information
+
+| OpenInference Attribute | Agent Observability Field | Notes |
+|-------------------------|---------------------------|-------|
+| `llm.provider` | `meta.model_provider` | Preferred OpenInference provider source |
+| `llm.system` | `meta.model_provider` | Fallback when `llm.provider` is absent |
+| `llm.model_name` | `meta.model_name` | |
+| `embedding.model_name` | `meta.model_name` | Fallback for embedding spans |
+
+For `llm` and `embedding` spans, missing provider or model values are set to `unknown`.
+
+#### Token usage metrics
+
+| OpenInference Attribute | Agent Observability Field |
+|-------------------------|---------------------------|
+| `llm.token_count.prompt` | `metrics.prompt_tokens` |
+| `llm.token_count.completion` | `metrics.completion_tokens` |
+| `llm.token_count.total` | `metrics.total_tokens` |
+| `llm.token_count.prompt_details.cache_read` | `metrics.cache_read_input_tokens` |
+| `llm.token_count.prompt_details.cache_write` | `metrics.cache_write_input_tokens` |
+| `llm.token_count.completion_details.reasoning` | `metrics.reasoning_output_tokens` |
+
+#### Session, user, and metadata
+
+| OpenInference Attribute | Agent Observability Field | Notes |
+|-------------------------|---------------------------|-------|
+| `session.id` | `session_id` | Also adds `session_id` and `conversation_id` tags and propagates the session to the trace root |
+| `user.id` | `tags` | Added as `user_id:<value>` |
+| `tag.tags` | `tags` | Each list item becomes a span tag |
+| `llm.invocation_parameters` | `meta.metadata` | Parsed as a JSON object |
+| `metadata` | `meta.metadata` | Parsed as a JSON object |
+
+Reserved Agent Observability fields in `llm.invocation_parameters` and `metadata` do not override dedicated span fields.
+
+#### Tool attributes
+
+| OpenInference Attribute | Agent Observability Field | Notes |
+|-------------------------|---------------------------|-------|
+| `tool.name` | `name` | Overrides the span name |
+| `tool.id` | `meta.metadata.tool_id` | |
+| `tool.description` | `meta.metadata.tool_description` | |
+| `tool.parameters` | `meta.metadata.tool_parameters` | |
+| `input.value` | `meta.input.value` | Used directly for `tool`, `agent`, and `workflow` spans |
+| `output.value` | `meta.output.value` | Used directly for `tool`, `agent`, and `workflow` spans |
+
+#### Input and output messages
+
+In these attributes, `<direction>` is `input` or `output`.
+Input and output are extracted from the following sources, in priority order:
+
+1. OpenTelemetry `gen_ai.*` direct attributes and span events
+2. OpenLLMetry indexed attributes
+3. OpenInference indexed attributes
+4. OpenInference `input.value` and `output.value`
+
+| OpenInference Source | Agent Observability Field |
+|----------------------|---------------------------|
+| `llm.input_messages.<index>.*` | `meta.input.messages` (llm) / `meta.input.value` (other span kinds) |
+| `llm.output_messages.<index>.*` | `meta.output.messages` (llm) / `meta.output.value` (other span kinds) |
+| `input.value` | Input fallback |
+| `output.value` | Output fallback |
+
+The following indexed message attributes are supported:
+
+| OpenInference Attribute | Mapping |
+|-------------------------|---------|
+| `llm.<direction>_messages.<message-index>.message.role` | Message role |
+| `llm.<direction>_messages.<message-index>.message.content` | Text content |
+| `llm.<direction>_messages.<message-index>.message.contents.<content-index>.message_content.text` | Ordered text content |
+| `llm.<direction>_messages.<message-index>.message.contents.<content-index>.message_content.image.image.url` | Ordered image content |
+| `llm.<direction>_messages.<message-index>.message.tool_calls.<tool-index>.tool_call.*` | Tool call ID, name, and arguments |
+| `llm.<direction>_messages.<message-index>.message.contents.<content-index>.tool_call.*` | Tool call within ordered content |
+| `llm.<direction>_messages.<message-index>.message.tool_call_id` | Tool result ID when the message role is `tool` |
+
+Image content maps to an image URI while preserving its position among other message content.
+
+#### Embedding spans
+
+| OpenInference Source | Agent Observability Field |
+|----------------------|---------------------------|
+| `embedding.embeddings.<index>.embedding.text` | `meta.input.documents[].text` |
+| N/A | `meta.output.value` = `[N embedding(s) returned]` |
+
+#### Retrieval spans
+
+| OpenInference Source | Agent Observability Field |
+|----------------------|---------------------------|
+| `input.value` | `meta.input.value` |
+| `retrieval.documents.<index>.document.content` | `meta.output.documents[].text` |
+| `retrieval.documents.<index>.document.id` | `meta.output.documents[].id` |
+| `retrieval.documents.<index>.document.score` | `meta.output.documents[].score` |
+| `retrieval.documents.<index>.document.metadata` | `meta.output.documents[].metadata` (parsed JSON object) |
+
+#### Tags filtering
+
+OpenInference attributes with `llm.*`, `retrieval.*`, `embedding.*`, and `reranker.*` prefixes are excluded from tags. Specifically mapped values such as `input.value`, `output.value`, `metadata`, `tag.tags`, and `tool.parameters` are also excluded from duplicate tags.
+
+Other non-empty OpenInference attributes with values of 256 characters or fewer are added as `key:value` tags. The `tag.tags` list is promoted directly to span tags.
+
 ## Supported semantic conventions
 
 Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
@@ -643,4 +808,5 @@ with tracer.start_as_current_span("my-span") as span:
 [8]: /account_management/rbac/data_access/
 [9]: https://opentelemetry.io/docs/concepts/signals/traces/#span-links
 [10]: /opentelemetry/compatibility/#feature-compatibility
-
+[11]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
+[12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html

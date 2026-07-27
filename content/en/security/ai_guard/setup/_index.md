@@ -52,18 +52,19 @@ The [AI Guard SDK][12] provides language-specific libraries (Python, JavaScript,
 
 [Automatic integrations][10] provide out-of-the-box AI Guard protection for supported frameworks. When you run your application with the Datadog SDK, AI Guard evaluations are automatically performed without requiring any code changes.
 
-| Language   | Supported Frameworks |
-|------------|---------------------|
-| Python     | LangChain           |
-| Node.js    | AI SDK              |
+| Language | Supported Frameworks         |
+|----------|------------------------------|
+| Python   | LangChain, OpenAI, Anthropic |
+| Node.js  | AI SDK, OpenAI, Anthropic    |
+| Ruby     | RubyLLM                      |
 
 ### Manual integrations
 
 [Manual integrations][11] require additional configuration to enable AI Guard protection for supported frameworks.
 
-| Language   | Supported Frameworks        |
-|------------|-----------------------------|
-| Python     | Amazon Strands, LiteLLM Proxy |
+| Language   | Supported Frameworks           |
+|------------|--------------------------------|
+| Python     | Amazon Strands, LiteLLM Proxy  |
 
 ### HTTP API
 
@@ -174,6 +175,17 @@ Do not use the system prompt to override AI Guard's security checks or to instru
 ## 6. (Optional) Limit access to AI Guard spans {#limit-access}
 
 To restrict access to AI Guard spans for specific users, you can use [Data Access Control][9]. Follow the linked instructions to create a restricted dataset, scoped to **APM data**, with the `resource_name:ai_guard` filter applied. Then, you can grant access to the dataset to specific roles or teams.
+
+## Disable APM tracing
+
+To disable APM tracing on the tracer while keeping AI Guard enabled, set `DD_APM_TRACING_ENABLED=false`:
+
+{{< code-block lang="bash" >}}
+DD_AI_GUARD_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
 
 ## Further reading
 
