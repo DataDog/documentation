@@ -15,7 +15,7 @@ further_reading:
 
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, limit your grok parser to 10 parsing rules. For more information on Grok syntax and parsing rules, see [Parsing][1].
 
-{{< img src="/logs/processing/processors/ai-grok-rules.png" alt="Grok parser syntax suggestions in the UI" style="width:90%;" >}}
+{{< img src="/logs/processing/processors/ai-grok-rules.png" alt="Grok parser configuration" style="width:90%;" >}}
 
 ## Use cases
 
