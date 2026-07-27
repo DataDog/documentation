@@ -27,7 +27,7 @@ Pipeline Simulation is in Preview. Reach out to your account manager to request 
 
 When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
 
-Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify your data as expected. You can test your configuration with live data sent through the pipeline or import your own sample data.
+Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify it as expected. You can test your configuration with live data sent through the pipeline or import your own sample data.
 
 The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
 
@@ -369,7 +369,7 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel." style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the data that the processor received and sent out.
-    - Enter a free-text search query to find specific data that was captured. The query searches all attributes and tags in the data.
+    - Enter a free-text search query to find specific data that was captured. The query searches all attributes and tags in the event.
     - Use the {{< ui >}}All events{{< /ui >}} dropdown menu to view events by status:
         - `Modified only` shows modified and created events. Created events include:
           - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
