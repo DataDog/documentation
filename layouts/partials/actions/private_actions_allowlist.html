@@ -57,7 +57,7 @@
 {{/* Prefixes whose sub-integrations get nested under a parent accordion */}}
 {{ $grouped_prefixes := slice "Kubernetes" "GitLab" }}
 
-<p>Use the list for the type of private action runner you are configuring. Actions available to all runner types are included in each list.</p>
+<p>Use the list that matches the private action runner you are configuring. Actions available to all runner types are included in each list.</p>
 
 {{ range $runner := $runner_flavors }}
 {{ $allowlist := index $allowlists_by_runner $runner.key }}
