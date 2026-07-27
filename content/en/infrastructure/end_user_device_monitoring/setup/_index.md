@@ -21,8 +21,7 @@ Managing employee devices at scale is difficult when performance issues, connect
 ## Supported platforms
 
 - Windows 10 and later
-- macOS
-- Linux
+- macOS 11 and later
 
 ## Set up the Datadog Agent
 
@@ -34,9 +33,9 @@ Managing employee devices at scale is difficult when performance issues, connect
 
 ## Explore the app
 
-### Overview
+### Fleet overview
 
-The Overview section displays device health status, device type distribution, and OS breakdown. This helps you efficiently identify unhealthy devices, track fleet composition, and understand overall system health at a glance.
+The summary section displays device health status, device type distribution, and OS breakdown. This helps you identify unhealthy devices, track fleet composition, and understand overall system health at a glance.
 
 ### Device-level details
 
@@ -63,7 +62,7 @@ To collect additional data from monitored devices, enable one or more of the fol
 
 [5]: /infrastructure/process/
 [6]: /logs/
-[7]: /network_monitoring/network_path/setup
+[7]: /network_monitoring/network_path/setup/
 [8]: /integrations/wlan/
 [9]: /integrations/wincrashdetect/
 [11]: /infrastructure/end_user_device_monitoring/#key-capabilities
