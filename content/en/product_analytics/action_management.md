@@ -36,16 +36,12 @@ Two labeling methods are available:
 Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you are unable to add the extension through the Chrome web store, see the [manual instructions][2] for extension installation, or use [manual labeling](#manual-labeling) instead.
 
 1. Go to the [Actions][3] page in Datadog and select your application.
-
 2. Select {{< ui >}}Visual Labeler{{< /ui >}}. Elements that already have a labeled action are marked with a blue dot. To display the names of these labeled actions automatically, select the checkbox in the menu.
 
-   <!-- TODO: Add screenshot showing blue-dot indicator and auto-display checkbox (noted in source doc after step 2). -->
+   {{< img src="product_analytics/action_management/pana-visual-labeler-toolbar.png" alt="Visual Labeler toolbar showing the Navigate Site and Label Actions modes, and a checkbox for displaying the names of the five labeled actions on the page." style="width:90%;">}}
 
 3. Use {{< ui >}}Navigate Site{{< /ui >}} mode to browse to the location of the action or actions you want to label.
-
 4. Switch to {{< ui >}}Label Actions{{< /ui >}} mode when you are ready to label an action.
-
-<!-- TODO: Add updated screenshot of Visual Labeler modes (image1 from source doc). -->
 
 ### Create a labeled action
 
@@ -56,7 +52,7 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 5. Optional: Edit the CSS selector directly if you want to change or refine which elements the label matches.
 6. Click {{< ui >}}Save labeled action{{< /ui >}}.
 
-<!-- TODO: Add screenshot of creating a labeled action (image2 from source doc). -->
+{{< img src="product_analytics/action_management/pana-create-labeled-action.png" alt="Labeled action panel with a name of New Chart CTA Click from Home, a tracked element named main navigation, the Target all pages checkbox, the CSS selector for the element, and the Save labeled action button." style="width:60%;">}}
 
 ### Update an existing labeled action
 
@@ -64,8 +60,6 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 2. Select {{< ui >}}Edit{{< /ui >}}.
 3. Add or remove tracked elements, and update the name or CSS selector as needed.
 4. Click {{< ui >}}Save labeled action{{< /ui >}}.
-
-<!-- TODO: Add screenshot of updating a labeled action (image3 from source doc). -->
 
 After you define an action, it appears in the list of labeled actions on the [Actions][3] page, and you can use it in any Product Analytics chart.
 
