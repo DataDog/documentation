@@ -1823,7 +1823,7 @@ Moves an automation rule up or down in the list. Rules are applied in order, so 
 - Move the mute rule `abc-123-def` to the top of the list.
 - Lower the priority of this due-date rule by two positions.
 
-### `get_datadog_security_passlist`
+### `get_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
@@ -1832,7 +1832,7 @@ Returns all WAF exclusion filter (passlist) entries for the organization to revi
 - Show me active WAF exclusion filters.
 - Check existing passlist suppressions before I add a new one.
 
-### `upsert_datadog_security_passlist`
+### `upsert_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
@@ -1841,7 +1841,7 @@ Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rul
 - Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
 - Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
 
-### `delete_datadog_security_passlist`
+### `delete_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Deletes an existing WAF exclusion filter (passlist) entry.
@@ -1849,7 +1849,7 @@ Deletes an existing WAF exclusion filter (passlist) entry.
 - Delete WAF exclusion filter "passlist-abc-123".
 - Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
 
-### `get_datadog_security_denylist`
+### `get_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
@@ -1858,7 +1858,7 @@ Lists blocked IPs, users, and user agents (denylist entries), with optional filt
 - Show me blocked IP addresses from yesterday.
 - Check if IP "198.51.100.42" is on the security denylist.
 
-### `upsert_datadog_security_denylist_entry`
+### `upsert_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Adds or updates a denylist block for an IP, user, or user agent with an expiration.
@@ -1867,13 +1867,47 @@ Adds or updates a denylist block for an IP, user, or user agent with an expirati
 - Add user "attacker_user_99" to the blocked entities denylist.
 - Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
 
-### `delete_datadog_security_denylist_entry`
+### `unblock_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Unblocks a previously denylisted entity by setting its expiration in the past.
 
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
+
+### `get_datadog_security_aap_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves one App & API Protection (AAP) custom WAF rule by ID or lists custom rules. Supports filtering by category, status, service, and environment.
+
+- List custom WAF rules that apply to service "checkout-service" in production.
+- Get AAP custom rule "rule-xyz-123".
+
+### `upsert_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+
+- Create a monitoring custom WAF rule for requests to path "/admin".
+- Update AAP custom rule "rule-xyz-123" to block matching traffic.
+- Disable custom rule "rule-xyz-123" without deleting it.
+
+### `delete_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Permanently deletes an AAP custom WAF rule by ID.
+
+- Delete custom WAF rule "rule-xyz-123".
+- Remove the AAP custom rule that monitors requests to "/admin".
+
+### `get_datadog_security_aap_blocking_config`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves the organization-wide AAP blocking and denylist enforcement settings.
+
+- Is AAP blocking enabled for the organization?
+- Is the AAP denylist enforced?
+- Show me the AAP blocking configuration.
 
 ## Session Replay
 
