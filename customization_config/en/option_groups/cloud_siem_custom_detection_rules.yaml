@@ -1,4 +1,4 @@
-cloud_siem_detection_rule_search_query_options:
+cloud_siem_detection_rule_detection_method_options:
   - id: threshold
     default: true
   - id: new_value

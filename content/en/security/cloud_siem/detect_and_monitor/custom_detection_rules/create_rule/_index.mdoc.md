@@ -1,32 +1,32 @@
 ---
 title: Create a Custom Rule
 content_filters:
-  - trait_id: cloud_siem_detection_rule_search_query
-    option_group_id: cloud_siem_detection_rule_search_query_options
+  - trait_id: cloud_siem_detection_rule_detection_method
+    option_group_id: cloud_siem_detection_rule_detection_method_options
   - trait_id: cloud_siem_detection_rule_type
-    option_group_id: cloud_siem_detection_<CLOUD_SIEM_DETECTION_RULE_SEARCH_QUERY>_rule_type_options
+    option_group_id: cloud_siem_detection_<CLOUD_SIEM_DETECTION_RULE_DETECTION_METHOD>_rule_type_options
   - trait_id: cloud_siem_detection_threshold_rule_query_language
     option_group_id: cloud_siem_detection_rule_event_query_only_language_options
     show_if:
-      - cloud_siem_detection_rule_search_query: ["threshold"]
+      - cloud_siem_detection_rule_detection_method: ["threshold"]
         cloud_siem_detection_rule_type: ["real_time_rule"]
   - trait_id: cloud_siem_detection_threshold_sql_rule_query_language
     option_group_id: cloud_siem_detection_threshold_sql_rule_query_language_options
     show_if:
-      - cloud_siem_detection_rule_search_query: ["threshold"]
+      - cloud_siem_detection_rule_detection_method: ["threshold"]
         cloud_siem_detection_rule_type: ["scheduled_rule", "historical_job"]
   - trait_id: cloud_siem_detection_sequence_rule_query_language
     option_group_id: cloud_siem_detection_sequence_rule_query_language_options
     show_if:
-      - cloud_siem_detection_rule_search_query: ["sequence"]
+      - cloud_siem_detection_rule_detection_method: ["sequence"]
   - trait_id: cloud_siem_detection_signal_correlation_rule_query_language
     option_group_id: cloud_siem_detection_signal_correlation_rule_query_language_options
     show_if:
-      - cloud_siem_detection_rule_search_query: ["signal_correlation"]
+      - cloud_siem_detection_rule_detection_method: ["signal_correlation"]
   - trait_id: cloud_siem_detection_rule_query_language
     option_group_id: cloud_siem_detection_rule_event_query_only_language_options
     hide_if:
-      - cloud_siem_detection_rule_search_query: ["threshold","signal_correlation","sequence"]
+      - cloud_siem_detection_rule_detection_method: ["threshold","signal_correlation","sequence"]
 aliases:
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule
 - /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/scheduled_rule
@@ -37,10 +37,10 @@ aliases:
 ## Overview
 
 ### How rule creation works
-The languages you can use to write a query in a new rule vary, depending on the type of search query and the rule type. Click a search query or rule type to apply it as a filter to this page, then choose a query language above from the available options.
+The languages you can use to write a query in a new rule vary, depending on the detection method and the rule type. Click a detection method or rule type to apply it as a filter to this page, then choose a query language above from the available options.
 
 {% table %}
-* **Search Query**
+* **Detection method**
 * **Rule Types** {% colspan=3 %}
 ---
 * 
@@ -48,27 +48,27 @@ The languages you can use to write a query in a new rule vary, depending on the 
 * **[Scheduled rule](?cloud_siem_detection_rule_type=scheduled_rule)**
 * **[Historical job](?cloud_siem_detection_rule_type=historical_job)**
 ---
-* **[Threshold](?cloud_siem_detection_rule_search_query=threshold)**
+* **[Threshold](?cloud_siem_detection_rule_detection_method=threshold)**
 * Event query
 * Event query, SQL {% colspan=2 %}
 ---
-* **[New Value](?cloud_siem_detection_rule_search_query=new_value)**
+* **[New Value](?cloud_siem_detection_rule_detection_method=new_value)**
 * Event query {% rowspan=5 %} {% colspan=3 %}
 ---
-* **[Anomaly](?cloud_siem_detection_rule_search_query=anomaly)**
+* **[Anomaly](?cloud_siem_detection_rule_detection_method=anomaly)**
 ---
-* **[Content anomaly](?cloud_siem_detection_rule_search_query=content_anomaly)**
+* **[Content anomaly](?cloud_siem_detection_rule_detection_method=content_anomaly)**
 ---
-* **[Impossible travel](?cloud_siem_detection_rule_search_query=impossible_travel)**
+* **[Impossible travel](?cloud_siem_detection_rule_detection_method=impossible_travel)**
 ---
-* **[Third party](?cloud_siem_detection_rule_search_query=third_party)**
+* **[Third party](?cloud_siem_detection_rule_detection_method=third_party)**
 ---
-* **[Sequence](?cloud_siem_detection_rule_search_query=sequence)**
+* **[Sequence](?cloud_siem_detection_rule_detection_method=sequence)**
 * Event/rule query
 * *Not supported*
 * Event/rule query
 ---
-* **[Signal correlation](?cloud_siem_detection_rule_search_query=signal_correlation)**
+* **[Signal correlation](?cloud_siem_detection_rule_detection_method=signal_correlation)**
 * Rule query {% colspan=2 %}
 * *Not supported*
 {% /table %}
@@ -91,30 +91,30 @@ Historical jobs are one-time executable queries on historical logs used to backt
 ## Create a rule
 
 1. To create a detection rule, navigate to the [Create a New Detection][2] page.
-1. {% if equals($cloud_siem_detection_rule_search_query, "threshold") %}Select the **Threshold** detection method.{% /if %}<!-- Steps to select search query type. Comments have to go back here to not interfere with the formatting! Ain't that a kick in the pants -->
-{% if equals($cloud_siem_detection_rule_search_query, "new_value") %}Select the **New value** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "anomaly") %}Select the **Anomaly** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "content_anomaly") %}Select the **Content Anomaly** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "impossible_travel") %}Select the **Impossible travel** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "third_party") %}Select the **Third party** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "sequence") %}Select the **Sequence** detection method.{% /if %}
-{% if equals($cloud_siem_detection_rule_search_query, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
-1. {% if and(or(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-Time Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select real-time rule, where event query is the only option-->
-{% if and(or(equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select scheduled rule, where event query is the only option-->
-{% if and(or(equals($cloud_siem_detection_rule_search_query, "new_value"),equals($cloud_siem_detection_rule_search_query, "anomaly"),equals($cloud_siem_detection_rule_search_query, "content_anomaly"),equals($cloud_siem_detection_rule_search_query, "impossible_travel"),equals($cloud_siem_detection_rule_search_query, "third_party")),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical Job**, which also automatically selects **Event query** as the query language. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select historical job, where event query is the only option-->
-{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Scheduled Rule**, then **Event query**.{% /if %}<!-- Step to select threshold/scheduled rule/event query -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Scheduled Rule**, then **SQL**.{% /if %}<!-- Step to select threshold/scheduled rule/SQL -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Historical Job**, then **Event query**. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select threshold/historical job/event query -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Historical Job**, then **SQL**. Under **Select Timerange**, select the time window for your historical query.{% /if %}<!-- Step to select threshold/historical job/SQL -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "sequence"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Event/rule query** as the query language.{% /if %}<!-- Step to select sequence/real-time rule, which defaults to event/rule query -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "sequence"),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical job**, which also automatically selects **Event/rule query** as the query language. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select sequence/historical job, which defaults to event/rule query -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "signal_correlation"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/real-time, which defaults to rule query -->
-{% if and(equals($cloud_siem_detection_rule_search_query, "signal_correlation"),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/scheduled rule, which defaults to rule query -->
+1. {% if equals($cloud_siem_detection_rule_detection_method, "threshold") %}Select the **Threshold** detection method.{% /if %}<!-- Steps to select search query type. Comments have to go back here to not interfere with the formatting! Ain't that a kick in the pants -->
+{% if equals($cloud_siem_detection_rule_detection_method, "new_value") %}Select the **New value** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "anomaly") %}Select the **Anomaly** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "content_anomaly") %}Select the **Content Anomaly** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "impossible_travel") %}Select the **Impossible travel** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "third_party") %}Select the **Third party** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "sequence") %}Select the **Sequence** detection method.{% /if %}
+{% if equals($cloud_siem_detection_rule_detection_method, "signal_correlation") %}Select the **Signal correlation** detection method.{% /if %}
+1. {% if and(or(equals($cloud_siem_detection_rule_detection_method, "threshold"),equals($cloud_siem_detection_rule_detection_method, "new_value"),equals($cloud_siem_detection_rule_detection_method, "anomaly"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel"),equals($cloud_siem_detection_rule_detection_method, "third_party")),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-Time Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select real-time rule, where event query is the only option-->
+{% if and(or(equals($cloud_siem_detection_rule_detection_method, "new_value"),equals($cloud_siem_detection_rule_detection_method, "anomaly"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel"),equals($cloud_siem_detection_rule_detection_method, "third_party")),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled Rule**, which also automatically selects **Event query** as the query language.{% /if %}<!-- Step to select scheduled rule, where event query is the only option-->
+{% if and(or(equals($cloud_siem_detection_rule_detection_method, "new_value"),equals($cloud_siem_detection_rule_detection_method, "anomaly"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel"),equals($cloud_siem_detection_rule_detection_method, "third_party")),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical Job**, which also automatically selects **Event query** as the query language. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select historical job, where event query is the only option-->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Scheduled Rule**, then **Event query**.{% /if %}<!-- Step to select threshold/scheduled rule/event query -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "threshold"),equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Scheduled Rule**, then **SQL**.{% /if %}<!-- Step to select threshold/scheduled rule/SQL -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query")) %}Select **Historical Job**, then **Event query**. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select threshold/historical job/event query -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "threshold"),equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_threshold_sql_rule_query_language, "sql")) %}Select **Historical Job**, then **SQL**. Under **Select Timerange**, select the time window for your historical query.{% /if %}<!-- Step to select threshold/historical job/SQL -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "sequence"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Event/rule query** as the query language.{% /if %}<!-- Step to select sequence/real-time rule, which defaults to event/rule query -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "sequence"),equals($cloud_siem_detection_rule_type, "historical_job")) %}Select **Historical job**, which also automatically selects **Event/rule query** as the query language. Under **Select Logs Index and Timerange**, select the parameters for your historical query.{% /if %}<!-- Step to select sequence/historical job, which defaults to event/rule query -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "signal_correlation"),equals($cloud_siem_detection_rule_type, "real_time_rule")) %}Select **Real-time rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/real-time, which defaults to rule query -->
+{% if and(equals($cloud_siem_detection_rule_detection_method, "signal_correlation"),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}Select **Scheduled rule**, which also automatically selects **Rule query** as the query language.{% /if %}<!-- Step to select signal correlation/scheduled rule, which defaults to rule query -->
 
 ## Define your search query
 
 <!-- Real-time rule AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
@@ -129,7 +129,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% /if %}
 
 <!-- Real-time rule AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -143,7 +143,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% /if %}
 
 <!-- Real-time rule AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -158,7 +158,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% /if %}
 
 <!-- Real-time rule AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -172,7 +172,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {% /if %}
 
 <!-- Real-time rule AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" /%}
 {% alert level="info" %}
 All logs and events matching this query are analyzed for potential impossible travel.
@@ -189,7 +189,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Real-time rule AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -202,7 +202,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Real-time rule AND sequence -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "sequence")) %}
 {% img src="security/security_monitoring/detection_rules/sequence/sequence_queries.png" alt="Sequence editor page showing the sequence with two steps" style="width:100%;" /%}
 
 ### Add step
@@ -244,7 +244,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND signal correlation -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/signal_correlation_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. Select a rule for **Rule a**.
@@ -258,7 +258,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 
 {% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
@@ -305,7 +305,7 @@ Datadog applies rule conditions to the results your SQL queries return. It evalu
 {% /if %}
 
 <!-- Scheduled rule AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -322,7 +322,7 @@ Datadog applies rule conditions to the results your SQL queries return. It evalu
 {% /if %}
 
 <!-- Scheduled rule AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -339,7 +339,7 @@ Datadog applies rule conditions to the results your SQL queries return. It evalu
 {% /if %}
 
 <!-- Scheduled rule AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -356,7 +356,7 @@ Datadog applies rule conditions to the results your SQL queries return. It evalu
 {% /if %}
 
 <!-- Scheduled rule AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" /%}
 {% alert level="info" %}
 All logs and events matching this query are analyzed for potential impossible travel.
@@ -376,7 +376,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Scheduled rule AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -394,7 +394,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Scheduled rule AND signal correlation -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/signal_correlation_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. Select a rule for **Rule a**.
@@ -408,7 +408,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Historical job AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 
 {% if equals($cloud_siem_detection_threshold_sql_rule_query_language, "event_query") %}
 {% img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" /%}
@@ -454,7 +454,7 @@ Datadog applies conditions to the results your SQL queries return. It evaluates 
 {% /if %}
 
 <!-- Historical job AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -470,7 +470,7 @@ Datadog applies conditions to the results your SQL queries return. It evaluates 
 {% /if %}
 
 <!-- Historical job AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -486,7 +486,7 @@ Datadog applies conditions to the results your SQL queries return. It evaluates 
 {% /if %}
 
 <!-- Historical job AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -502,7 +502,7 @@ Datadog applies conditions to the results your SQL queries return. It evaluates 
 {% /if %}
 
 <!-- Historical job AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" /%}
 {% alert level="info" %}
 All logs and events matching this query are analyzed for potential impossible travel.
@@ -521,7 +521,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Historical job AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" /%}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
@@ -538,7 +538,7 @@ All logs and events matching this query are analyzed for potential impossible tr
 {% /if %}
 
 <!-- Historical job AND sequence -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "sequence")) %}
 {% img src="security/security_monitoring/detection_rules/sequence/sequence_queries.png" alt="Sequence editor page showing the sequence with two steps" style="width:100%;" /%}
 
 ### Add step
@@ -582,7 +582,7 @@ For the current step and the next step:
 ## Set conditions
 
 <!-- Real-time rule AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
@@ -608,7 +608,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
@@ -641,7 +641,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/anomaly_notification.png" alt="Set your severity, anomaly percentile, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_anomaly.mdoc.md" /%}
@@ -666,7 +666,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
@@ -695,7 +695,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
@@ -720,7 +720,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_third_party.mdoc.md" /%}
@@ -741,7 +741,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND sequence -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "sequence")) %}
 #### Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}
@@ -760,7 +760,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Real-time rule AND signal correlation -->
-{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_detection_method, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_then_operator.mdoc.md" /%}
@@ -777,7 +777,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
@@ -802,7 +802,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
@@ -831,7 +831,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
@@ -856,7 +856,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/condition_content_anomaly.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_content_anomaly.mdoc.md" /%}
@@ -885,7 +885,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 {% img src="security/security_monitoring/detection_rules/severity_notification.png" alt="Set your severity and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_severity_notify_only.mdoc.md" /%}
@@ -910,7 +910,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/condition_else.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_third_party.mdoc.md" /%}
@@ -931,7 +931,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Scheduled rule AND signal correlation -->
-{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_search_query, "signal_correlation")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "scheduled_rule"),equals($cloud_siem_detection_rule_detection_method, "signal_correlation")) %}
 {% img src="security/security_monitoring/detection_rules/condition_simple_then.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_then_operator.mdoc.md" /%}
@@ -952,7 +952,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Historical job AND threshold -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "threshold")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "threshold")) %}
 {% img src="security/security_monitoring/detection_rules/threshold_historical_condition.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 {% partial file="security/cloud_siem/set_conditions_threshold.mdoc.md" /%}
@@ -973,7 +973,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Historical job AND new value -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "new_value")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "new_value")) %}
 ### Other parameters
 
 #### Forget value {% #forget-value-historical-new-value %}
@@ -994,7 +994,7 @@ For the current step and the next step:
 {% /if %}
 
 <!-- Historical job AND anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "anomaly")) %}
 ### Other parameters
 
 #### Job multi-triggering {% #job-multi-triggering-historical-anomaly %}
@@ -1023,7 +1023,7 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 {% /if %}
 
 <!-- Historical job AND content anomaly -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "content_anomaly")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "content_anomaly")) %}
 {% img src="security/security_monitoring/detection_rules/content_anomaly_historical_condition.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
@@ -1058,7 +1058,7 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 {% /if %}
 
 <!-- Historical job AND impossible travel -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "impossible_travel")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "impossible_travel")) %}
 ### Other parameters
 
 #### Job multi-triggering {% #job-multi-triggering-impossible-travel %}
@@ -1075,7 +1075,7 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 {% /if %}
 
 <!-- Historical job AND third party -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "third_party")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "third_party")) %}
 {% img src="security/security_monitoring/detection_rules/set_condition_root_query.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" /%}
 
 1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
@@ -1094,7 +1094,7 @@ In the **Learning Period Alerts** dropdown, choose whether you want Cloud SIEM t
 {% /if %}
 
 <!-- Historical job AND sequence -->
-{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_search_query, "sequence")) %}
+{% if and(equals($cloud_siem_detection_rule_type, "historical_job"),equals($cloud_siem_detection_rule_detection_method, "sequence")) %}
 #### Rule multi-triggering {% #rule-multi-triggering-rt-sequence %}
 
 {% partial file="security/cloud_siem/rule_multi_triggering.mdoc.md" /%}

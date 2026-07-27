@@ -65,4 +65,4 @@ When you [create a sequence detection rule][1], you can configure these options:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_search_query=sequence
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=sequence

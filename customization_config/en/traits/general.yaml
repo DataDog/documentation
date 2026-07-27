@@ -58,10 +58,10 @@ traits:
   type: text
   internal_notes: The rule type a user wants to use when creating a custom detection rule for Cloud SIEM.
 
-- id: cloud_siem_detection_rule_search_query
-  label: "Search query"
+- id: cloud_siem_detection_rule_detection_method
+  label: "Detection method"
   type: text
-  internal_notes: The search query a user wants to use when creating a custom detection rule for Cloud SIEM.
+  internal_notes: The detection method a user wants to use when creating a custom detection rule for Cloud SIEM.
 
 - id: cloud_siem_detection_rule_query_language
   label: "Query language"

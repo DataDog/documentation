@@ -37,4 +37,4 @@ When {{< ui >}}Baseline User Locations{{< /ui >}} is enabled:
         - If it's not an impossible travel situation, Datadog moves on to the next log or event.
         - It it's an impossible travel situation, Datadog checks if there is an IP transition pattern. From example, if a user travels from location A to location B and that travel pattern has occurred in the past, a signal is not triggered.
 
-[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_search_query=impossible_travel
+[1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule?cloud_siem_detection_rule_detection_method=impossible_travel
