@@ -21,7 +21,7 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes each agent individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
 
-Okta issues each agent a short-lived token called an ID-JAG (Identity Assertion Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators control which agents reach Datadog and revoke that access from Okta.
+Okta issues each agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators control which agents reach Datadog and revoke that access from Okta.
 
 Cross-App Access supports Okta as the identity provider.
 
@@ -130,21 +130,9 @@ Register each agent in Okta as an AI Agent, then add a resource connection from 
 
 Each agent needs its own client ID, so repeat this for every agent you connect. Add the agent's SAML application as a delegated caller on the AI Agent, then activate the agent.
 
-## Enable the connector in the agent
-
-Complete the setup in the agent's own administration console. The steps below apply to Claude. For other agents, see that vendor's documentation.
-
-1. Go to **Settings > Connectors** in the Claude admin console.
-2. Click **Add**, select **Custom**, then select **Web**.
-3. When prompted for a URL, enter the MCP server endpoint for your [Datadog site][6]:
-   <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
-4. Open **Advanced** and turn on **Enterprise managed authentication**.
-5. Click **Save**.
-6. Open the connector details and click **Test connection**.
-
-The connection test reports each stage of the exchange separately, which narrows down where a failed setup breaks.
-
 ## Verify the configuration
+
+Add Datadog as a connector in the agent and turn on enterprise managed authentication. For those steps, see the agent vendor's documentation.
 
 Sign in to the agent as a user assigned to both Okta applications, then run a request that calls Datadog. A successful call confirms the full path: Okta issues the token, Datadog accepts it, and Datadog resolves the user.
 
