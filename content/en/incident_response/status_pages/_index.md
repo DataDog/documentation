@@ -260,7 +260,7 @@ Templates let you save pre-configured language for degradation notices and maint
 
 ### Insert template variables
 
-Insert a variable into a template message to have Datadog resolve it when the template is applied to a notice, either automatically or by prompting the publisher for a value. The **Message Variables** panel next to the message fields lists the available variables:
+Insert a variable into a template message to have Datadog resolve it when the template is applied to a notice. Depending on the variable, Datadog either fills the value automatically or prompts the publisher to provide one. The **Message Variables** panel next to the message fields lists the available variables:
 
 | Variable | Description |
 | ---- | ---- |
