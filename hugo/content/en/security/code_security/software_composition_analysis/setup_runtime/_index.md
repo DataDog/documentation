@@ -10,7 +10,7 @@ SCA can detect vulnerabilities that affect open source libraries running in your
 Before setting up runtime detection, ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Supported SDK:** The Datadog SDK used by your application or service supports Software Composition Analysis capabilities for the language of your application or service. For more details, refer to the [Library Compatibility][2] page.
+2. **Supported SDK:** The Datadog SDK used by your application or service must support Software Composition Analysis for your application's language. For more information, see the [Library Compatibility][2] page.
 
 <div class="alert alert-info">The Datadog Agent and SDK are the only requirements for SCA. APM tracing and Infrastructure Monitoring are not required, and SCA reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="/security/code_security/iast/setup/#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>. If APM is disabled, SCA may still generate some APM intake costs for data that supports SCA features, such as security traces and spans.</div>
 
