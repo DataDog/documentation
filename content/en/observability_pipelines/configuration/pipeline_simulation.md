@@ -27,7 +27,7 @@ Pipeline Simulation is in Preview. Reach out to your account manager to request 
 
 When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.
 
-Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify your logs as expected. You can test your configuration with live logs sent through the pipeline or import your own sample data.
+Use Pipeline Simulation to preview how your processors, volume control rules, and [Packs][12] modify your data before deploying your pipeline configuration. This helps ensure your processors target the right data and modify your data as expected. You can test your configuration with live data sent through the pipeline or import your own sample data.
 
 The following example of Pipeline Simulation shows an unparsed log that a processor group receives (Entry) and the parsed output after the log is processed and tagged (Exit).
 
@@ -75,7 +75,7 @@ The status of a pipeline determines whether a simulation can be run with live da
 
 **Note**: For inactive pipelines or pipelines in draft mode, you must import data the first time you run a simulation for the pipeline.
 
-### Capture live logs from your pipeline to run a simulation with production data
+### Capture live data from your pipeline to run a simulation with production data
 
 For active pipelines, Observability Pipelines automatically runs a Live Capture if a previously saved capture, whether from imported data or a live capture, is not available.
 
@@ -83,7 +83,7 @@ To run a capture for a specific set of data:
 
 1. Click {{< ui >}}Live Capture{{< /ui >}}.
 1. (Optional) Enter a query to specify which events you want to capture. The default query is `*`.
-    - Use a capture query, such as `service:cloudtrail env:prod`, to target a specific set of logs. This helps to distinguish between different sets of logs you use for your simulations. For example, you can capture a set of logs for custom app log processors and another for the [Cloudflare Pack][5].
+    - Use a capture query, such as `service:cloudtrail env:prod`, to target a specific set of data. This helps to distinguish between different sets of data you use for your simulations. For example, you can capture a set of logs for custom app log processors and another for the [Cloudflare Pack][5].
     - For more information on creating queries, see [Search Syntax for Logs][6] or [Search Syntax for Metrics][7].
 1. (Optional) Enter a capture duration (in seconds or minutes) for how long you want events to be captured.
     - Minimum duration (default, if no duration is specified): 30 seconds
@@ -95,7 +95,7 @@ To run a capture for a specific set of data:
 To import sample data for your pipeline simulation:
 
 1. For an active or draft pipeline, click the down arrow next to {{< ui >}}Live Capture{{< /ui >}} and select {{< ui >}}Import Sample Data{{< /ui >}}.
-1. Drag and drop or browse for your sample data files or paste your sample logs in the modal. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
+1. Drag and drop or browse for your sample data files or paste your sample data in the modal. **Note**: Sample data must be in a JSON or JSONL file. See [Sample file import specifications](#sample-file-import-specifications) for more details.
 1. Click {{< ui >}}Confirm{{< /ui >}}.
 
 #### Sample file import specifications
@@ -369,13 +369,13 @@ After you have captured data for your pipeline simulation, edit your pipeline pr
   {{< img src="observability_pipelines/pipeline_simulation/pipeline_simulation_preview.png" alt="The Preview button at the bottom of the processors panel." style="width:60%;" >}}
 1. After the simulation is complete, you can:
     - See the data that the processor received and sent out.
-    - Enter a free-text search query to find specific logs that were captured. The query searches all attributes and tags in the logs.
+    - Enter a free-text search query to find specific data that was captured. The query searches all attributes and tags in the data.
     - Use the {{< ui >}}All events{{< /ui >}} dropdown menu to view events by status:
         - `Modified only` shows modified and created events. Created events include:
           - Metrics generated from logs with the [Generate Logs-Based Metrics][9] processor.
           - Logs created by the [Split Array][10] processor.
         - `Unmodified only` shows only unmodified events.
-        - `Rerouted only` shows only logs rerouted to an overflow destination by the [Quota processor][8].
+        - `Rerouted only` shows only events rerouted to an overflow destination by the [Quota processor][8].
         - `Dropped only` shows only dropped events.
     - Use the {{< ui >}}All telemetry{{< /ui >}} dropdown menu to view `Logs only` or `Metrics only` events. `Metrics only` shows events only from the [Generate Logs-Based Metrics][9] processor.
 1. Click {{< ui >}}Save{{< /ui >}} at the bottom right side of the page to save your changes and then {{< ui >}}Back to Pipeline{{< /ui >}} on the top right side of the page.
@@ -398,7 +398,7 @@ On the Pipeline Simulation page, you can choose which set of processors you want
 
 #### Run a simulation for the entire pipeline
 
-When you enable the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle and run a simulation, the entry event shown is the log sent from the source before any processing is done. The exit log is the result after all processors have been applied and sent to the destination. This lets you visualize how a log is transformed after it goes through the entire pipeline.
+When you enable the {{< ui >}}Simulate entire pipeline{{< /ui >}} toggle and run a simulation, the entry event shown is the event sent from the source before any processing is done. The exit event is the result after all processors have been applied and sent to the destination. This lets you visualize how an event is transformed after it goes through the entire pipeline.
 
 ## Further reading
 
