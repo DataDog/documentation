@@ -74,6 +74,10 @@ Enter the name of the OpenSearch index. See [template syntax][3] if you want to 
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
+
 ## How the destination works
 
 ### Event batching
@@ -92,3 +96,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [6]: /observability_pipelines/configuration/set_up_pipelines/
 [7]: /api/latest/observability-pipelines/
 [8]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

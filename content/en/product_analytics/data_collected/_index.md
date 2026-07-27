@@ -14,6 +14,9 @@ further_reading:
 - link: "/product_analytics/data_collected/server_side_events/"
   tag: "Documentation"
   text: "Track Server-Side Events"
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
 ---
 
 ## Overview

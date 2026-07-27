@@ -80,6 +80,8 @@ To create an Exposure SQL Model:
 
 {{< img src="/product_analytics/experiment/exposure-sql/create-exposure-sql-model.png" alt="The Create Exposure SQL Model page showing a SQL editor with an example exposure query and a mapping panel that maps query columns to Datadog fields." style="width:80%;" >}}
 
+For large exposure tables, use [SQL template variables][5] to push Datadog's date filters into your query and reduce the amount of data your warehouse scans on each run.
+
 ## Create experiments using Exposure SQL Models
 
 After you save an Exposure SQL Model, Datadog scans the model for distinct experiment and variant values. To [create an experiment][4] with warehouse exposures:
@@ -121,3 +123,4 @@ To view a simplified version of the pipeline logic, click {{< ui >}}Copy SQL{{< 
 [2]: /experiments/defining_metrics/?tab=warehouse#create-a-sql-model
 [3]: /experiments/guide/connecting_a_data_warehouse/
 [4]: /experiments/plan_and_launch_experiments/
+[5]: /experiments/concepts/sql_template_variables/

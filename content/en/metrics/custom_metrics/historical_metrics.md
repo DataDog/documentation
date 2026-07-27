@@ -18,10 +18,6 @@ further_reading:
 
 {{< jqmath-vanilla >}}
 
-{{% site-region region="gov,gov2" %}}
-<div class="alert alert-danger">Historical metrics ingestion is not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{% /site-region %}}
-
 ## Overview
 
 Enabling Historical Metrics Ingestion allows you to collect **custom metric** values with timestamps older than one hour from the time of submission, but no older than your total metric retention period (default of 15 months).

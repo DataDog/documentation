@@ -33,6 +33,10 @@ Datadog curates commercial, open-source, and in-house threat intelligence indica
 
 ## Bring your own threat intelligence
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
+
 Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 The amount of time threat intelligence persists as an available enrichment varies depending on source:

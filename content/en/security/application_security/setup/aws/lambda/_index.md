@@ -22,6 +22,12 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Learn how to setup App and API Protection on your AWS Lambda functions by selecting the programming language your function is written with.
 
 <div class="alert alert-info">

@@ -33,13 +33,32 @@ After you select the HTTP/S Server source in the pipeline UI:
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
 1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for your HTTP/S Server username and password. If you leave it blank, the [default](#secret-defaults) is used.
+1. (Optional) Set up authentication tokens. See [Configure authentication tokens](#configure-authentication-tokens) for details.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
 
-### Optional TLS settings
+### Optional settings
+
+#### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
 
 {{% observability_pipelines/tls_settings_mtls %}}
+
+#### Configure authentication tokens
+
+If you store tokens as credentials in your HTTP request's authorization header, you can configure the Worker to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
+
+**Note**: You cannot configure authentication tokens with the {{< ui >}}Plain{{< /ui >}} authorization strategy.
+
+To configure authentication tokens, enable the {{< ui >}}Configure authentication tokens{{< /ui >}} toggle:
+
+1. Click {{< ui >}}Manage Tokens{{< /ui >}} and then {{< ui >}}Add Token{{< /ui >}}.
+1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered prepended with `DD_OP_`.
+1. (Optional) Enter a field and value if you want to add additional information to logs successfully authenticated with this specific token.
+1. Select the path to token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
+	- {{< ui >}}Header{{< /ui >}} for an authorization header (optionally, enter the header name)
+	- {{< ui >}}Address{{< /ui >}} for an IP address
+	- {{< ui >}}Path{{< /ui >}} for an endpoint path
 
 ## Secret defaults
 

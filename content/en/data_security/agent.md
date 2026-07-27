@@ -235,6 +235,10 @@ agent diagnose show-metadata agent-telemetry
 | workloadmeta.pull_errors                    | Number of WorkloadMeta pull errors                                                                                     |
 | appsec_injector.watched_changes             | Number of changes detected by the AppSec injector for watched resources                                                |
 | appsec_injector.sidecar_mutations           | Number of AppSec injector sidecar admission outcomes (pod mutation and deletion)                                       |
+| agent_performance.containers_restarts       | Number of container restarts for the Cluster Agent and Cluster Checks Runner pods                                      |
+| agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
+| agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |
+| agent_performance.memory_limit              | Total container runtime memory limits, in bytes, for the Cluster Agent and Cluster Checks Runner pods                  |
 | **eBPF**                                    |                                                                                                                        |
 | ebpf.core_load_success                      | Number of successful loads of an eBPF CO-RE program                                                                    |
 | ebpf.core_load_error                        | Number of errors loading an eBPF CO-RE program                                                                         |

@@ -45,13 +45,13 @@ sbom:
     # Enables scanning of application libraries in addition to OS packages (Agent 7.70+)
     analyzers: ["os", "languages"]
   # Enables runtime package prioritization (Preview, Agent 7.79+)
-  # See Runtime Package Tracking section below.
+  # See Runtime Package Prioritization section below.
   enrichment:
     usage:
       enabled: true
 {{< /code-block >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][7] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][7] and does not affect its usage. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
 
 {{< code-block lang="bash" filename="/etc/datadog-agent/security-agent.yaml" disable_copy="false" collapsible="true" >}}
 compliance_config:
@@ -85,9 +85,9 @@ The `languages` analyzer covers the following package ecosystems:
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Tracking (Preview)
+## Runtime Package Prioritization (Preview)
 
-Runtime package tracking enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+Runtime package prioritization enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
 
 Each vulnerability finding is enriched with the following signals:
 
@@ -103,7 +103,7 @@ These signals power vulnerability prioritization in Cloud Security, surfacing fi
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
 Add the `enrichment` block to the `sbom` section of your `datadog.yaml` file:
 
