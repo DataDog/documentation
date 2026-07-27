@@ -10,6 +10,9 @@ further_reading:
   - link: "/security/cloud_siem/threat_intelligence/"
     tag: "documentation"
     text: "Cloud SIEM Threat Intelligence"
+  - link: "https://www.datadoghq.com/blog/cloud-security-investigation-ai/"
+    tag: "Blog"
+    text: "How to investigate cloud credential compromise with Bits Security Analyst"
 
 products:
 - name: Cloud SIEM

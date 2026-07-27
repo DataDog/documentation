@@ -2,6 +2,10 @@
 title: Setting Up Database Monitoring for Supabase
 description: Setting up Database Monitoring on a Supabase Postgres database.
 disable_sidebar: true
+further_reading:
+- link: "https://www.datadoghq.com/blog/dbm-supabase/"
+  tag: "Blog"
+  text: "Monitor and optimize Supabase query performance with Datadog Database Monitoring"
 ---
 
 Database Monitoring provides visibility into your Supabase Postgres databases by exposing query performance metrics, query samples, and database states.
@@ -14,3 +18,7 @@ Select your setup method to get started:
 {{< /card-grid >}}
 
 <br>
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

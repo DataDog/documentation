@@ -14,6 +14,9 @@ further_reading:
 - link: "/database_monitoring/query_samples/"
   tag: "Documentation"
   text: "Exploring Query Samples"
+- link: "https://www.datadoghq.com/blog/database-investigator/"
+  tag: "Blog"
+  text: "Diagnose and resolve database performance issues faster with Database Investigator"
 ---
 
 {{< callout url="#" btn_hidden="true" header="Database Investigator is in Preview" >}}
