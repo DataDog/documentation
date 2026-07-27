@@ -132,8 +132,6 @@ Each agent needs its own client ID, so repeat this for every agent you connect. 
 
 ## Verify the configuration
 
-Add Datadog as a connector in the agent and turn on enterprise managed authentication. For those steps, see the agent vendor's documentation.
-
 Sign in to the agent as a user assigned to both Okta applications, then run a request that calls Datadog. A successful call confirms the full path: Okta issues the token, Datadog accepts it, and Datadog resolves the user.
 
 If a user signed in before you enabled Cross-App Access, have them sign out of the agent and sign back in through Okta. Sessions established earlier lack the identity token the agent needs.
