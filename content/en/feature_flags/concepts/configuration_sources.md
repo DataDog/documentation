@@ -17,12 +17,19 @@ Datadog Feature Flags [server-side SDKs][3] evaluate flags locally from flag con
 
 ## Choose a configuration source
 
-| Mode | Configuration delivery | Activation | Agent requirement |
-|---|---|---|---|
-| `agentless` (default) | The SDK periodically fetches flag configuration from the Datadog-managed CDN over HTTPS. | Polling begins when application code initializes or accesses the Datadog OpenFeature provider. | No Datadog Agent is required for flag configuration. |
-| `remote_config` | The Datadog Agent receives flag configuration through Remote Configuration and delivers it to the SDK. | Selecting `remote_config` enables the Feature Flags Remote Configuration subscription. | Requires an Agent with Remote Configuration enabled. |
+These configuration source options are available for supported server SDKs:
 
-Agentless delivery is the default in the supported SDK versions listed below. Other server SDKs use Agent Remote Configuration for flag delivery.
+`agentless`
+: The SDK periodically fetches flag configuration from the Datadog-managed CDN over HTTPS.
+  - Polling begins when application code initializes or accesses the Datadog OpenFeature provider.
+  - No Datadog Agent is required for flag configuration.
+
+`remote_config`
+: The Datadog Agent receives flag configuration through Remote Configuration and delivers it to the SDK.
+  - Selecting `remote_config` enables the Feature Flags Remote Configuration subscription.
+  - Requires a Datadog Agent with Remote Configuration enabled.
+
+Agentless delivery is the default in [supported SDK versions](#use-agentless-delivery). Other server SDKs use [Agent Remote Configuration](#use-agent-remote-configuration) for flag delivery.
 
 Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` only when you want to select a source explicitly:
 
