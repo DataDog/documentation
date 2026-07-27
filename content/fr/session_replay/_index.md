@@ -29,111 +29,111 @@ further_reading:
   text: Détectez et agrégez les violations de CSP avec Datadog
 - link: https://learn.datadoghq.com/courses/intro-to-rum
   tag: Centre d'apprentissage
-  text: Introduction à la surveillance des utilisateurs réels (RUM)
+  text: Introduction au Real User Monitoring (RUM)
 title: Session Replay
 ---
-## Aperçu {#overview}
+## Présentation {#overview}
 
-La lecture de session élargit votre surveillance de l'expérience utilisateur en vous permettant de capturer et de rejouer visuellement l'expérience de navigation web ou d'application mobile de vos utilisateurs. Session Replay est disponible à la fois dans [RUM][1] et [Product Analytics][2], vous aidant à identifier et reproduire des erreurs, à comprendre les parcours utilisateurs et à obtenir des informations sur les modèles d'utilisation et les défauts de conception de votre application.
+Le Session Replay étend votre surveillance de l'expérience utilisateur en vous permettant de capturer et de rejouer visuellement l'expérience de navigation web ou d'application mobile de vos utilisateurs. Le Session Replay est disponible à la fois dans [RUM][1] et [Product Analytics][2], vous aidant à identifier et à reproduire les erreurs, à comprendre les parcours utilisateur et à obtenir des informations sur les modèles d'utilisation et les défauts de conception de votre application.
 
-## Lecture de session dans le navigateur {#browser-session-replay}
+## Browser Session Replay {#browser-session-replay}
 
-La lecture de session dans le navigateur élargit votre surveillance de l'expérience utilisateur en vous permettant de capturer et de rejouer visuellement l'expérience de navigation web de vos utilisateurs. Conjointement aux données de performance RUM, Session Replay facilite l'identification, la reproduction et la résolution des erreurs, et vous fournit des informations utiles sur les tendances d'utilisation et les défauts de conception de votre application Web.
+Le Browser Session Replay étend votre surveillance de l'expérience utilisateur en vous permettant de capturer et de rejouer visuellement l'expérience de navigation web de vos utilisateurs. Conjointement aux données de performance RUM, Session Replay facilite l'identification, la reproduction et la résolution des erreurs, et vous fournit des informations utiles sur les tendances d'utilisation et les défauts de conception de votre application Web.
 
-Le SDK RUM pour navigateur est [open source][3] et s'appuie sur le projet open source [rrweb][4].
+Le SDK RUM Browser est [open source][3] et s'appuie sur le projet open source [rrweb][4].
 
-En savoir plus sur [Session Replay for Browsers][5].
+En savoir plus sur le [Session Replay for Browsers][5].
 
 ## Mobile Session Replay {#mobile-session-replay}
 
-Mobile Session Replay étend la visibilité de vos applications mobiles en vous permettant de rejouer visuellement chaque interaction utilisateur, telles que les taps, les swipes et les scrolls. Mobile Session Replay est disponible pour les applications natives sur Android et iOS. Rejouer visuellement les interactions des utilisateurs sur vos applications facilite la reproduction des bogues et des erreurs, ainsi que la compréhension du parcours utilisateur pour améliorer l'interface utilisateur.
+Le Mobile Session Replay étend la visibilité sur vos applications mobiles en rejouant visuellement chaque interaction utilisateur, telles que des tapotements, des balayages et des défilements. Il est disponible pour les applications natives sur Android et iOS. La relecture visuelle des interactions utilisateur sur vos applications facilite la reproduction des plantages et des erreurs, ainsi que la compréhension du parcours utilisateur pour apporter des améliorations à l'UI.
 
-En savoir plus sur [Session Replay for Mobile][6].
+En savoir plus sur le [Session Replay for Mobile][6].
 
-## Résumés alimentés par l'IA et chapitres intelligents {#ai-powered-summaries-and-smart-chapters}
+## Résumés optimisés par l'IA et chapitres intelligents\r {#ai-powered-summaries-and-smart-chapters}
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Cette fonctionnalité n'est pas prise en charge pour votre site <a href="/getting_started/site">Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Cette fonctionnalité n'est pas prise en charge pour votre <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}).</div>{{< /site-region >}}
 
-Les résumés et chapitres intelligents vous donnent un contexte sur ce qui s'est passé lors d'une session avant que vous ne la regardiez.
+Les résumés et les chapitres intelligents vous donnent du contexte sur ce qui s'est passé dans une session avant que vous ne la regardiez.
 
-**Les résumés** décrivent l'intention de l'utilisateur, les actions clés, les signaux de friction et le résultat. Des moments spécifiques dans le résumé sont hyperliés afin que vous puissiez accéder directement à ce point dans Session Replay. Dans la liste des sessions, survolez un Session Replay pour prévisualiser le résumé, ou ouvrez-le directement. Si une session a déjà été résumée, le résumé s'affiche instantanément lorsque vous lancez Session Replay.
+**Les résumés** décrivent l'intention de l'utilisateur, les actions clés, les signaux de friction et le résultat. Des moments spécifiques du résumé sont hyperliés afin que vous puissiez accéder directement à ce point dans la relecture. Dans la liste des sessions, survolez une relecture pour prévisualiser le résumé, ou ouvrez directement la relecture. Si une session a déjà été résumée, le résumé s'affiche instantanément lorsque vous ouvrez la relecture.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="Résumé alimenté par l'IA dans le Session Replay player, montrant l'intention de l'utilisateur, les actions clés, les signaux de friction et les moments hyperliés." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-ai-summary.png" alt="Résumé optimisé par l'IA dans le lecteur Session Replay, affichant l'intention de l'utilisateur, les actions clés, les signaux de friction et les moments avec liens hypertextes" style="width:100%;" >}}
 
-**Les chapitres intelligents** segmentent automatiquement la chronologie du Session Replay en étapes étiquetées du parcours utilisateur. Par exemple, dans une session de commerce électronique, les chapitres peuvent inclure "Parcourir l'éclairage", "Acheter de la literie et des chaises", et "Vérifier le panier et passer à la caisse". Les chapitres apparaissent lorsque vous survolez la chronologie et dans le menu déroulant des contrôles du lecteur, vous permettant de sauter directement entre eux.
+Les **Smart chapters** segmentent automatiquement la chronologie de la relecture en étapes étiquetées du parcours utilisateur. Par exemple, dans une session e-commerce, les chapitres peuvent inclure « Parcourir les luminaires », « Acheter de la literie et des chaises » et « Examiner le panier et payer ». Les chapitres apparaissent lorsque vous survolez la chronologie et dans le menu déroulant des commandes du lecteur, vous permettant de passer directement de l'un à l'autre.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Menu déroulant des chapitres intelligents dans le Session Replay player montrant les étapes étiquetées du parcours utilisateur." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-smart-chapters.png" alt="Smart chapter dropdown dans le lecteur Session Replay affichant les étapes étiquetées du parcours utilisateur." style="width:100%;" >}}
 
-Les résumés IA et les chapitres intelligents sont générés pour les sessions comportant au moins quatre actions utilisateur et d'une durée d'au moins 45 secondes.
+Les AI summaries et les Smart chapters sont générés pour les sessions comportant au moins quatre actions utilisateur et une durée d'au moins 45 secondes.
 
-## Commentaires {#comments}
+## Commentaires\r {#comments}
 
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Cette fonctionnalité n'est pas prise en charge pour votre site <a href="/getting_started/site">Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}). Si vous avez besoin de cette fonctionnalité, contactez <a href="/help/">le support Datadog</a>.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">Cette fonctionnalité n'est pas prise en charge pour votre <a href="/getting_started/site">site Datadog</a> sélectionné ({{< region-param key="dd_site_name" >}}). Si vous avez besoin de cette fonctionnalité, contactez <a href="/help/">Datadog Support</a>.</div>{{< /site-region >}}
 
-Les commentaires Session Replay permettent à votre équipe de collaborer sur des bogues, des problèmes d'utilisabilité et d'autres observations directement au sein d'un Session Replay.
+Les commentaires de Session Replay permettent à votre équipe de collaborer sur les bugs, les problèmes d'utilisabilité et d'autres observations directement au sein d'une relecture.
 
-Avec les commentaires, vous pouvez :
+Grâce aux commentaires, vous pouvez :
 
-- Ajouter un commentaire à un moment précis sur la chronologie du Session Replay. Les marqueurs de commentaire apparaissent sur la chronologie et dans l'onglet **Commentaires**.
-- @mentionner un coéquipier ou une équipe dans un commentaire. Les utilisateurs tagués reçoivent une notification par e-mail avec un lien qui ouvre le Session Replay au moment commenté.
-- Copier un lien vers n'importe quel commentaire et le partager à l'extérieur. Le lien ouvre le Session Replay au moment annoté, avec le fil de commentaire ouvert.
-- Répondez dans le fil pour collaborer au sein d'un Session Replay, et modifiez ou supprimez vos propres commentaires si nécessaire.
+- Ajouter un commentaire à un horodatage spécifique sur la chronologie de la relecture. Des marqueurs de commentaire apparaissent sur la chronologie et dans l'onglet {{< ui >}}Comments{{< /ui >}}.
+- @mentionner un coéquipier ou une équipe dans un commentaire. Les utilisateurs tagués reçoivent une notification par e-mail contenant un lien qui ouvre la relecture à l'horodatage commenté.
+- Copier un lien vers n'importe quel commentaire et le partager en externe. Le lien ouvre la relecture au moment annoté avec ce fil de discussion ouvert.
+- Répondre dans le fil de discussion pour collaborer au sein d'une relecture, et modifier ou supprimer vos propres commentaires si nécessaire.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Session Replay player avec des commentaires horodatés sur la chronologie et un onglet Commentaires ouvert avec des réponses en fil." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-comments.png" alt="Lecteur Session Replay avec des commentaires horodatés sur la chronologie et un onglet Commentaires ouvert avec des réponses en fil de discussion." style="width:100%;" >}}
 
-Pour trouver les replays nécessitant votre attention, utilisez les playlists par défaut **All mentions to me** et **Commented replays**. Voir [Session Replay Playlists][7] pour plus de détails.
+Pour trouver les replays qui nécessitent votre attention, utilisez les playlists {{< ui >}}All mentions to me{{< /ui >}} et {{< ui >}}Commented replays{{< /ui >}} par défaut. Consultez [Session Replay Playlists][7] pour plus de détails.
 
-## Prolonger la conservation des données {#extend-data-retention}
+## Étendre la rétention des données\r {#extend-data-retention}
 
 Par défaut, les données Session Replay sont conservées pendant 30 jours.
 
-Pour prolonger la conservation des données de Session Replay à 15 mois, activez _Extended Retention_ pour chaque Session Replay. Ces sessions doivent être non actives (l'utilisateur a terminé son expérience).
+Pour étendre la rétention des données de Session Replay à 15 mois, vous pouvez activer {{< ui >}}Extended Retention{{< /ui >}} sur des replays de session individuels. Ces sessions doivent être inactives (l'utilisateur a terminé son expérience).
 
-Pour accéder à un Session Replay ultérieurement, Datadog recommande de sauvegarder l'URL ou de l'ajouter à une [Playlist][7].
+Pour accéder à tout Session Replay ultérieurement, Datadog recommande d'enregistrer l'URL ou de l'ajouter à une [Playlist][7].
 
-Extended Retention ne s'applique qu'à Session Replay et n'inclut pas les événements associés. Les 15 mois commencent dès l'activation de Extended Retention, et non au moment de la collecte de la session.
+La rétention étendue s'applique uniquement à Session Replay et n'inclut pas les événements associés. Les 15 mois commencent lorsque la rétention étendue est activée, et non lorsque la session est collectée.
 
-Vous pouvez désactiver Extended Retention à tout moment. Si Session Replay est toujours dans sa période de rétention par défaut de 30 jours, il expire à la fin de cette période. Si vous désactivez Extended Retention sur un Session Replay âgé de plus de 30 jours, il expire immédiatement.
+Vous pouvez désactiver la rétention étendue à tout moment. Si le replay de session est toujours dans sa période de rétention par défaut de 30 jours, le replay expire à la fin de cette fenêtre initiale de 30 jours. Si vous désactivez la rétention étendue sur un replay de session vieux de plus de 30 jours, le replay expire immédiatement.
 
-{{< img src="real_user_monitoring/session_replay/extended-retention-1.png" alt="Activer Extended Retention." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/extended-retention-1.png" alt="Activer la rétention étendue" style="width:100%;" >}}
 
 Le diagramme ci-dessous décrit les types de données concernés par la rétention prolongée.
 
-{{< img src="real_user_monitoring/session_replay/replay-extended-retention-1.png" alt="Diagramme des données conservées avec Extended Retention." style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/replay-extended-retention-1.png" alt="Diagramme des données conservées avec la rétention étendue" style="width:100%;" >}}
 
-## Historique de lecture {#playback-history}
+## Historique de lecture\r {#playback-history}
 
-Vous pouvez voir qui a regardé un replay de session donné en cliquant sur le **nombre de vues** affiché sur la page du lecteur. Cette fonctionnalité vous permet de vérifier si quelqu'un avec qui vous souhaitez partager l'enregistrement l'a déjà regardé.
+Vous pouvez voir qui a visionné un replay de session donné en cliquant sur le compteur **watched** affiché sur la page du lecteur. Cette fonctionnalité vous permet de vérifier si une personne avec qui vous souhaitez partager l'enregistrement l'a déjà visionné.
 
-{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Vérifiez qui a regardé l'enregistrement d'une session" style="width:100%;" >}}
+{{< img src="real_user_monitoring/session_replay/session-replay-playback-history.png" alt="Vérifier qui a visionné l'enregistrement d'une session" style="width:100%;" >}}
 
-L'historique inclut uniquement les lectures ayant eu lieu sur la page du lecteur ou dans un lecteur intégré, tel qu'un [Notebook][8] ou un panneau latéral. Les lectures incluses génèrent également un événement [Audit Trail][9]. Les aperçus en miniature ne sont pas inclus dans l'historique.
+L'historique inclut uniquement les lectures effectuées sur la page du lecteur ou dans un lecteur intégré, comme dans un [Notebook][8] ou un panneau latéral. Les lectures incluses génèrent également un événement [Audit Trail][9]. Les aperçus sous forme de vignettes ne sont pas inclus dans l'historique.
 
-Pour consulter votre propre historique de lecture, consultez la playlist [My Watch History][10].
+Pour consulter votre propre historique de lecture, consultez la playlist [{{< ui >}}My Watch History{{< /ui >}}][10].
 
-## Playlists {#playlists}
+## Playlists\r {#playlists}
 
-Vous pouvez créer une playlist de Session Replays afin de les organiser selon les motifs que vous identifiez. En savoir plus sur [Session Replay Playlists][7].
+Vous pouvez créer une playlist de Session Replays pour les organiser selon les modèles que vous remarquez. En savoir plus sur [Session Replay Playlists][7].
 
 ## Dev Tools {#dev-tools}
 
-Dev Tools est un panneau de débogage intégré dans Session Replay qui présente des informations clés pendant la lecture. Utilisez-le pour identifier des problèmes, tracer des requêtes et comprendre les goulets d’étranglement de performance, le tout sans reproduire vous-même le problème. L’Outil de développement est disponible pour les sessions [RUM][1].
+Dev Tools est un panneau de débogage intégré à Session Replay qui expose des informations clés pendant la lecture. Utilisez-le pour identifier des problèmes, suivre des requêtes et comprendre les goulots d'étranglement de performances, le tout sans avoir à reproduire le problème vous-même. Les Outils de développement sont disponibles pour les sessions [RUM][1].
 
 En savoir plus sur Dev Tools pour [browser][11] et [mobile][12].
 
-## Lectures complémentaires {#further-reading}
+## Lectures complémentaires\r {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/real_user_monitoring/
-[2]: /fr/product_analytics/
-[3]: https://github.com/DataDog/browser-sdk
-[4]: https://www.rrweb.io/
-[5]: /fr/session_replay/browser/
-[6]: /fr/session_replay/mobile/
-[7]: /fr/session_replay/playlists
-[8]: /fr/notebooks/
-[9]: /fr/account_management/audit_trail/
-[10]: /fr/rum/replay/playlists/my-watch-history
-[11]: /fr/session_replay/browser/dev_tools/
+[1]: /fr/real_user_monitoring/\r
+[2]: /fr/product_analytics/\r
+[3]: https://github.com/DataDog/browser-sdk\r
+[4]: https://www.rrweb.io/\r
+[5]: /fr/session_replay/browser/\r
+[6]: /fr/session_replay/mobile/\r
+[7]: /fr/session_replay/playlists\r
+[8]: /fr/notebooks/\r
+[9]: /fr/account_management/audit_trail/\r
+[10]: /fr/rum/replay/playlists/my-watch-history\r
+[11]: /fr/session_replay/browser/dev_tools/\r
 [12]: /fr/session_replay/mobile/dev_tools/

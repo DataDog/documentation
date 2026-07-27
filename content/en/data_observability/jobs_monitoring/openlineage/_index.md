@@ -518,6 +518,12 @@ After sending your events, check the following:
 - [**Jobs Monitoring**][7]: Your job run appears with start time, duration, and status.
 - [**Lineage graph**][9]: If you included `inputs` or `outputs` in your event, your job appears as a node connected to the dataset nodes.
 
+## Correlate logs with job runs
+
+To correlate your application logs with a job run in Datadog, emit your logs with the OpenLineage run ID in the `@openlineage.run_id` attribute. Set its value to the same `runId` you send in your OpenLineage run events. Datadog uses this attribute to associate logs with the matching job run.
+
+How you attach the run ID depends on your logging setup. For details on sending logs with custom attributes to Datadog, see [Log Collection and Integrations][10].
+
 ## Dataset naming conventions
 
 To connect your custom job's lineage to datasets already tracked by Datadog's native integrations, include `inputs` and `outputs` in your event using the exact `namespace` and `name` that Datadog expects for that platform. For example, referencing a Snowflake table in your custom job's `outputs` with the correct namespace and name links it to the existing dataset node in the lineage graph.
@@ -605,8 +611,8 @@ To make custom OpenLineage tags available in Data Job Monitors, set `source` to 
 
 Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 
-- **Job facet tags**: Added as tags to underlying job traces, allowing you to filter by them on the Jobs Overview page and in [Trace Explorer][10]. When `source` is `USER`, they are also available in Data Job Monitors. Use job facet tags for stable job properties, such as `team` or `owner`.
-- **Run facet tags**: Available in Data Job Monitors when `source` is `USER`. They aren't added as individual tags for searching and filtering on the Jobs Overview page or in [Trace Explorer][10]. Use run facet tags for values that can vary between runs.
+- **Job facet tags**: Added as tags to underlying job traces, allowing you to filter by them on the Jobs Overview page and in [Trace Explorer][11]. When `source` is `USER`, they are also available in Data Job Monitors. Use job facet tags for stable job properties, such as `team` or `owner`.
+- **Run facet tags**: Available in Data Job Monitors when `source` is `USER`. They aren't added as individual tags for searching and filtering on the Jobs Overview page or in [Trace Explorer][11]. Use run facet tags for values that can vary between runs.
 
 ## Further reading
 
@@ -621,4 +627,5 @@ Tags on `job.facets.tags` and `run.facets.tags` behave differently:
 [7]: https://app.datadoghq.com/data-jobs
 [8]: https://openlineage.io/docs/spec/naming/
 [9]: https://app.datadoghq.com/data-obs/lineage
-[10]: /tracing/trace_explorer/?tab=listview
+[10]: /logs/log_collection/
+[11]: /tracing/trace_explorer/?tab=listview

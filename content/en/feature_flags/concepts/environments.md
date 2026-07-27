@@ -21,7 +21,7 @@ Environments represent different deployment stages or modes in your software del
 
 Manage environments from **Feature Flags > Settings > Environments**:
 
-{{< img src="getting_started/feature_flags/environments-list.png" alt="Environments list in Feature Flags settings." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/environments-list-2.png" alt="Environments list in Feature Flags settings." style="width:100%;" >}}
 
 ### Add an environment
 
