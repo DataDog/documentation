@@ -3241,11 +3241,6 @@ menu:
       identifier: eudm_setup_windows
       parent: eudm_setup
       weight: 2
-    # - name: Linux
-    #   url: infrastructure/end_user_device_monitoring/setup/linux/
-    #   identifier: eudm_setup_linux
-    #   parent: eudm_setup
-    #   weight: 3
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts

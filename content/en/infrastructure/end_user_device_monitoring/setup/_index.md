@@ -26,17 +26,13 @@ Managing employee devices at scale is difficult when performance issues, connect
 
 ## Set up the Datadog Agent
 
-Confirm that you have received access to the Preview before continuing. If you have not received confirmation, [request access][12] and wait for approval.
+1. Confirm that you have received access to the Preview before continuing. If you have not received confirmation, [request access][12] and wait for approval.
 
-<div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, devices are billed as hosts and do not appear in the End User Devices view.</div>
+2. Follow the setup instructions for your platform:
+    - [macOS][14]
+    - [Windows][15]
 
-Follow the setup instructions for your platform:
-
-- [macOS][14]
-- [Windows][15]
-<!-- - [Linux][16] -->
-
-## Explore the App
+## Explore the app
 
 ### Overview
 
@@ -75,4 +71,3 @@ To collect additional data from monitored devices, enable one or more of the fol
 [13]: /integrations/event-viewer/?tab=logs
 [14]: /infrastructure/end_user_device_monitoring/setup/macos/
 [15]: /infrastructure/end_user_device_monitoring/setup/windows/
-[16]: /infrastructure/end_user_device_monitoring/setup/linux/
