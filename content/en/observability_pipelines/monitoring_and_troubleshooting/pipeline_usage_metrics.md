@@ -134,14 +134,6 @@ Worker reloads
 : **Metric**: `pipelines.reloaded_total`
 : **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
 
-Worker starts
-: **Metric**: `pipelines.started_total`
-: **Description:** The number of times the Worker instance has been started.
-
-Worker stops
-: **Metric**: `pipelines.stopped_total`
-: **Description:** The number of times the Worker instance has been stopped.
-
 ## Component metrics
 
 These metrics are available for sources, processors, and destinations.
