@@ -51,7 +51,7 @@ Use this method to test a single machine or for devices that are not managed by 
     {{< /code-block >}}
 
     In the output, confirm the following:
-    - The Agent version is 7.77.0 or later.
+    - The Agent version is 7.80 or later.
     - **Status** is `Running`.
     - `infrastructure_mode: end_user_device` is set.
 

@@ -32,7 +32,7 @@ Use this method to test a single machine or for devices that are not managed by 
 
 - Administrator (`sudo`) access on the Mac.
 - A valid Datadog API key. For instructions, see [API and Application Keys][1].
-- (Recommended) macOS 12 or later.
+- macOS 11 or later.
 - An active internet connection on the device.
 
 ### Install the Agent
@@ -69,7 +69,7 @@ Use this method to test a single machine or for devices that are not managed by 
     ```
 
     In the output, confirm the following:
-    - The Agent version is 7.79.0 or later.
+    - The Agent version is 7.80 or later.
     - **Status** is `Running`.
     - `infrastructure_mode: end_user_device` is set.
 
