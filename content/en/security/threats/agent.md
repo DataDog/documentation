@@ -47,7 +47,7 @@ Patterns or regular expressions can be used in SECL expressions. They can be use
 | `~"pattern"`     | `~"httpd.*"`         | All                | 7.27          |
 | `r"regexp"`      | `r"rc[0-9]+"`        | All except `.path` | 7.27          |
 
-Patterns on `.path` fields will be used as Glob. `*` will match files and folders at the same level. `**`, introduced in 7.34, can be used at the end of a path in order to match all the files and subfolders.
+Patterns on `.path` fields are used as Glob. `*` matches files and folders at the same level. `**`, introduced in 7.34, can be used at the end of a path to match all the files and subfolders.
 
 ## Duration
 You can use SECL to write rules based on durations, which trigger on events that occur during a specific time period. For example, trigger on an event where a secret file is accessed more than a certain length of time after a process is created.

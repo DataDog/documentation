@@ -1,5 +1,5 @@
 ---
-title: Setting up Workload Protection on Amazon Fargate
+title: Setting up Workload Protection on AWS Fargate
 disable_toc: false
 ---
 
@@ -30,7 +30,7 @@ Use the following instructions to enable Workload Protection.
 1. Sign in to [AWS Management Console][6].
 2. Navigate to the ECS section.
 3. On the left menu, select **Task Definitions**, and then select **Create new Task Definition with JSON**. Alternatively, choose an existing Fargate task definition.
-4. To create a new task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
+4. To create a task definition, use the JSON definition, or the [AWS CLI method](#aws-cli).
 5. Click **Create** to create the task definition.
 
 ### AWS CLI

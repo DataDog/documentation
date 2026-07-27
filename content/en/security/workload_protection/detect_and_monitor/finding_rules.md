@@ -17,7 +17,7 @@ further_reading:
 
 Finding rules describe the backend logic used to evaluate your runtime security posture by analyzing [Agent events][1]. When a finding rule matches, Workload Protection generates a [finding][2] for the affected resource.
 
-Unlike [detection rules][3], which surface point-in-time threats as security signals, finding rules track ongoing bad practices and misconfigurations. A finding represents a resource — a host or container — that is actively failing a security policy, not a single suspicious event.
+Unlike [detection rules][3], which surface point-in-time threats as security signals, finding rules track ongoing bad practices and misconfigurations. A finding represents a resource (a host or container) that is actively failing a security policy, not a single suspicious event.
 
 Finding rules use existing Agent events to surface practical security recommendations such as package manager usage in containers, IMDS access patterns, or unnecessary privilege configurations. This helps you address real-world risks that are not direct threats but represent risky practices in production environments.
 
@@ -35,9 +35,9 @@ For example, `Sudoers Policy File Modification Detection` flags modifications to
 
 ## OOTB finding rules {#ootb-finding-rules}
 
-Workload Protection includes out-of-the-box (OOTB) finding rules maintained by Datadog. These rules continuously surface bad practices and risky configurations in production workloads. Datadog develops new default rules on an ongoing basis, and new rules are automatically imported into your account. [OOTB rules list][9].
+Workload Protection includes out-of-the-box (OOTB) finding rules maintained by Datadog. These rules continuously surface bad practices and risky configurations in production workloads. Datadog develops new default rules on an ongoing basis, and new rules are automatically imported into your account. For the full list, see [OOTB rules list][9].
 
-Browse and review finding rules deployed to your org in the Workload Protection [finding rules][7] list in the app. Each rule includes a description of the security risk, the resource types it applies to, and remediation guidance.
+Browse and review finding rules deployed to your organization in the Workload Protection [finding rules][7] list in Datadog. Each rule includes a description of the security risk, the resource types it applies to, and remediation guidance.
 
 To reduce noise for expected configurations, use a findings automation to mute a rule without disabling it. See [Findings automation][8].
 
@@ -72,7 +72,7 @@ Use the [Agent Events explorer][6] to test your query and validate which events 
 
 ### Step 2: Define finding severity
 
-Define which severity a Finding should have when triggered by a rule.
+Define the severity a finding has when the rule is triggered.
 
 ### Step 3: Describe the finding
 

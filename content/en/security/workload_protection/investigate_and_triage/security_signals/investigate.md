@@ -7,7 +7,7 @@ When you select a Workload Protection signal in the [Signals Explorer][1], the s
 
 ## What happened
 
-The **What Happened** section gives you a quick summary of the current signal:
+The **What Happened** section gives you a summary of the current signal:
 
 - **Attack chain**: A human-readable description of the detected activity and how it fits into the broader threat story.
 - **Where**: The infrastructure context where the signal occurred, including cloud provider, account, region, host, Kubernetes cluster, namespace, pod, container, and image.
@@ -18,7 +18,7 @@ The **What Happened** section gives you a quick summary of the current signal:
 
 The **Investigation** tab displays an interactive graph that maps processes, resources, and runtime events involved in the signal. The investigation graph helps you see how an attack unfolded step by step.
 
-From the graph, you can pivot to other telemetry sources, such as Code Security or Infrastructure Monitoring, to validate code vulnerabilities or simply get more info on the specific ressource.
+From the graph, you can pivot to other telemetry sources, such as Code Security or Infrastructure Monitoring, to validate code vulnerabilities or get more information about the specific resource.
 
 ### Correlated events
 

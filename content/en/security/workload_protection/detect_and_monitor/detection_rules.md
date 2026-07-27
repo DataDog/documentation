@@ -5,15 +5,15 @@ disable_toc: false
 
 ## Overview
 
-Detection rules describe the backend logic used to detect threats in your environment by analyzing [Agent events][1]. When a detection rule matches, Workload Protection generates a [security signal][2] that you can investigate and respond to in the Datadog app.
+Detection rules describe the backend logic used to detect threats in your environment by analyzing [Agent events][1]. When a detection rule matches, Workload Protection generates a [security signal][2] that you can investigate and respond to in Datadog.
 
 Detection rules combine one or more Agent rules (referenced with `@agent.rule_id`), apply detection methods such as thresholds or anomalies, suppress noise, and route alerts to the right teams. Agent rules collect runtime telemetry on the host; detection rules turn that telemetry into prioritized threat detections.
 
-This page explains how out-of-the-box (OOTB) detection rules work and how to create custom detection rules in the Datadog app.
+This page explains how out-of-the-box (OOTB) detection rules work and how to create custom detection rules in Datadog.
 
 ## OOTB detection rules {#ootb-detection-rules}
 
-Workload Protection includes OOTB **threat detection** rules maintained by Datadog. They combine telemetry collected through Agent rules with backend expressions to raise security signals when activity looks suspicious. Browse the full catalog in [default detection rules][3], or review and tune them in the Workload Protection [detection rules][4] list in the app.
+Workload Protection includes OOTB **threat detection** rules maintained by Datadog. They combine telemetry collected through Agent rules with backend expressions to raise security signals when activity looks suspicious. Browse the full catalog in [default detection rules][3], or review and tune them in the Workload Protection [detection rules][4] list in Datadog.
 
 ## Create a custom detection rule
 
@@ -76,11 +76,11 @@ For more information on suppressions across detection rules, see [Suppressions][
 
 ## Create the custom Agent and detection rules together {#create-the-custom-agent-and-detection-rules-together}
 
-For how default Agent rules are packaged in policies and deployed in the app, see the [Agent rules][10] overview and [Policy management][11].
+For how default Agent rules are packaged in policies and deployed, see the [Agent rules][10] overview and [Policy management][11].
 
 You can define a matching Agent rule and threat detection rule in one of these ways:
 
-- **Assisted rule creator:** In the Datadog app, start a custom Workload Protection [detection rule][4] and use the wizard to configure both the Agent expression and the backend threat detection logic.
+- **Assisted rule creator:** In Datadog, start a custom Workload Protection [detection rule][4] and use the wizard to configure both the Agent expression and the backend threat detection logic.
 - **Manual rule creator:** From [Agent Configuration][12], open or create a policy and choose **Manual rule creator** to author the Agent rule first, then add a threat detection rule that references it. For UI steps and deployment, see [Policy management][11].
 
 [1]: /security/workload_protection/investigate_and_triage/agent_events
