@@ -58,7 +58,11 @@ Use this method to test a single machine or for devices that are not managed by 
     infrastructure_mode: end_user_device
     ```
 
-1. Save your changes, then [restart the Agent][2].
+1. Save your changes, then [restart the Agent][2]:
+
+    ```shell
+    sudo launchctl kickstart -k system/com.datadoghq.agent
+    ```
 
 ### Verify the installation
 
@@ -308,7 +312,7 @@ To confirm that the Agent installed on a device, use one of the following method
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/api-app-keys/
-[2]: /agent/configuration/agent-commands/#restart-the-agent
+[2]: /agent/supported_platforms/osx/#commands
 [3]: /getting_started/site/
 [4]: https://app.datadoghq.com/end-user-devices
 [5]: /network_monitoring/network_path/setup/
