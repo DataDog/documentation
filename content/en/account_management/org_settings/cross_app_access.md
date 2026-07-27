@@ -95,23 +95,20 @@ When Okta sends scopes in a token, Datadog grants the intersection of those scop
 
 ## Finish the setup in Okta
 
-Perform these steps in the Okta Admin Console as a Super Administrator. For the full agent-side procedure, including the public key exchange, see the Okta documentation for Cross-App Access.
+Complete the setup in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. For the full procedure, including registering an AI agent and exchanging a public key with the agent vendor, see [Okta's Cross-App Access documentation][7].
 
-### Enable Cross-App Access on the Datadog application
+### Configure the Datadog application as a resource server
+
+On your Datadog application, open the **Resource Server** tab and enable **Cross-app access (XAA)**. Set the following fields.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 The values below match your selected [Datadog site][6] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
 
-1. Go to **Applications** and select your Datadog application.
-2. Open the **Resource Server** tab.
-3. Under **Access methods**, select **Cross-app access (XAA)**, then click **Edit**.
-4. Select **Enable**.
-5. In **Resource URL**, enter:
-   <pre><code>{{< region-param key="mcp_xaa_resource_url" >}}</code></pre>
-6. In **Issuer URL**, enter:
-   <pre><code>{{< region-param key="mcp_xaa_issuer_url" >}}</code></pre>
-7. In **Audience/tenant ID**, enter the **Public Org ID** you copied from Datadog.
-8. Click **Save**.
+| Okta field | Value |
+|------------|-------|
+| **Resource URL** | {{< region-param key="mcp_xaa_resource_url" code="true" >}} |
+| **Issuer URL** | {{< region-param key="mcp_xaa_issuer_url" code="true" >}} |
+| **Audience/tenant ID** | The **Public Org ID** you copied from Datadog |
 
 The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches. **Audience/tenant ID** carries your Public Org ID, which tells Datadog which organization the token targets when several organizations share one Okta tenant.
 {{< /site-region >}}
@@ -120,41 +117,18 @@ The issuer URL identifies the Datadog authorization server, not the token endpoi
 <div class="alert alert-danger">Cross-App Access is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
-**Note**: Changing the issuer URL later requires deleting and recreating the Resource Connection described below.
+**Note**: Changing the issuer URL later requires deleting and recreating the resource connection described below.
 
-### Confirm the SAML Name ID format
+### Connect each agent
 
-Skip this step for applications installed from the Okta Integration Network.
+Register each agent in Okta as an AI Agent, then add a resource connection from that agent to your Datadog application. Set the following fields on the resource connection.
 
-1. On the Datadog application, open the **Sign On** tab and confirm **Application username format** is Okta username, Email Address, or a custom value that supplies the user's email.
-2. Open **General > SAML Settings** and confirm **Name ID Format** is `EmailAddress`.
-3. If it differs, click **Edit**, set **Name ID Format** to `EmailAddress`, then click **Next** and **Finish**.
+| Okta field | Value |
+|------------|-------|
+| **Client ID at resource** | That agent's client ID from the **Registered client IDs** table in Datadog |
+| **Scope Condition** | **Allow all**. Control scopes in Datadog instead, as described in [Control what an agent can do](#control-what-an-agent-can-do) |
 
-### Register the AI agent
-
-1. Go to **Directory > AI Agents**.
-2. Click **Register AI Agent**, then **Register Manually**.
-3. Name the agent, for example `Claude (Requester App)`, and assign an owner.
-4. Open the **Credentials** tab, copy the **AI Agent ID**, and send it to the agent vendor. Add the public key they return.
-
-### Add the delegated caller
-
-1. On the AI Agent, go to **Delegations** and click **Add Caller**.
-2. Select the agent's SAML application, for example Claude, as a Requester.
-3. Click **Add Caller**.
-
-### Add the resource connection
-
-1. Click **Add Resource Connection**, then **Application**.
-2. Select your Datadog application.
-3. In **Client ID at resource**, enter the Datadog client ID for this agent, which you copied from the **Registered client IDs** table.
-4. Under **Scope Condition**, select **Allow all**, and control scopes from Datadog as described in [Control what an agent can do](#control-what-an-agent-can-do).
-
-Repeat these steps for each agent, using that agent's own client ID.
-
-### Activate the agent
-
-Confirm the configuration checkmarks are green, then go to **Actions > Activate**.
+Each agent needs its own client ID, so repeat this for every agent you connect. Add the agent's SAML application as a delegated caller on the AI Agent, then activate the agent.
 
 ## Enable the connector in the agent
 
@@ -199,3 +173,4 @@ If a user signed in before you enabled Cross-App Access, have them sign out of t
 [4]: /account_management/org_settings/mobile_third_party_access/
 [5]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
 [6]: /getting_started/site/
+[7]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
