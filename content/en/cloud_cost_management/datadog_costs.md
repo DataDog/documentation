@@ -39,7 +39,8 @@ After Datadog Costs is enabled, users need the following permission to view the 
 
 | Permission | Description | Available Roles |
 |------------|-------------|-----------------|
-| `cloud_cost_management_read` | Read access to Cloud Cost Management. **Required to view Datadog Costs data in Cloud Cost Management.** | • Datadog Admin<br>• Datadog Read Only (default) |
+| `billing_read` | Read access to billing information. | • Datadog Admin |
+| `usage_read` | Read access to usage data. | • Datadog Admin |
 
 ## Enabling Datadog Costs
 
