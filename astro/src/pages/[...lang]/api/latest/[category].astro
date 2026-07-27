@@ -1,0 +1,75 @@
+---
+import ApiLayout from '@layouts/ApiLayout.astro';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
+import Alert from '@components/Alert/Alert.astro';
+import ApiEndpointSummary from '@components/ApiEndpointSummary/ApiEndpointSummary.astro';
+import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
+import { renderMarkdown } from '@lib/api/markdownRenderer';
+import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+import { mdToMetaDescription } from '@lib/seo';
+import { i18n } from '@lib/i18n/i18n';
+import type { GetStaticPaths, GetStaticPathsResult } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const paths: GetStaticPathsResult = [];
+  for (const lang of LOCALES) {
+    for (const cat of await getCategoryStubsView(lang)) {
+      paths.push({
+        params: {
+          lang: lang === 'en' ? undefined : lang,
+          category: cat.slug,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+const slug = Astro.params.category;
+if (!slug || typeof slug !== 'string') {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoryStubsView(lang);
+const current = await getCategoryViewBySlug(slug, lang);
+if (!current) {
+  return new Response(null, { status: 404 });
+}
+
+const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
+---
+
+<ApiLayout
+  title={`${current.name} - Datadog API`}
+  description={mdToMetaDescription(current.description) || `${current.name} endpoints in the Datadog API.`}
+  categories={categories}
+  activeCategory={current}
+  breadcrumbs={[
+    { label: i18n('docs', lang), href: localizedHref(lang, '/') },
+    { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
+    { label: current.name },
+  ]}
+>
+  <ApiPageHeader title={current.name} lang={lang} />
+  {current.deprecated && <Alert level="warning">This endpoint is deprecated.</Alert>}
+  {current.description && (
+    <div set:html={renderMarkdown(current.description)} />
+  )}
+  {current.operations.map((op) => (
+    <ApiEndpointSummary
+      summary={op.summary}
+      href={`${categoryBaseHref}${op.slug}/`}
+      anchorId={op.slug}
+      method={op.method}
+      regionUrls={op.regionUrls}
+      deprecated={op.deprecated}
+      unstable={op.unstable}
+    />
+  ))}
+</ApiLayout>
+

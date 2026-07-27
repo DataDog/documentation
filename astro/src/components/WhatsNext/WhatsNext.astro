@@ -1,0 +1,23 @@
+---
+import styles from "./WhatsNext.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { i18n } from "@lib/i18n/i18n";
+import { DEFAULT_LOCALE, isLocale } from "@lib/i18n/locale";
+
+interface Props {
+  desc?: string;
+}
+
+const lang = isLocale(Astro.currentLocale)
+  ? Astro.currentLocale
+  : DEFAULT_LOCALE;
+const { desc = `${i18n("additional_sentence", lang)}:` } = Astro.props;
+const cl = classListFactory(styles);
+---
+
+<aside class={cl("whatsnext")}>
+  {desc && <p class={cl("whatsnext__desc")}>{desc}</p>}
+  <ul class={cl("whatsnext__list")}>
+    <slot />
+  </ul>
+</aside>

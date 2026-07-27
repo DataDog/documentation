@@ -1,0 +1,45 @@
+.dev-badge {
+  position: fixed;
+  z-index: 9999;
+  background: hotpink;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  cursor: grab;
+  user-select: none;
+  touch-action: none;
+}
+
+.dev-badge--dragging {
+  cursor: grabbing;
+}
+
+.dev-badge__label {
+  pointer-events: none;
+}
+
+.dev-badge__close {
+  background: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 10px;
+  width: 14px;
+  height: 14px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.dev-badge__close:hover {
+  background: rgba(0, 0, 0, 0.45);
+}

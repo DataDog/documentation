@@ -1,0 +1,52 @@
+---
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import styles from "./Breadcrumbs.module.css";
+
+const cl = classListFactory(styles);
+
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  crumbs: BreadcrumbItem[];
+}
+
+const { crumbs } = Astro.props;
+const hasTrailing = Astro.slots.has("trailing");
+---
+
+<nav aria-label="Breadcrumb" class={cl("breadcrumbs")}>
+  <ol class={cl("breadcrumbs__list")}>
+    {
+      crumbs.map((crumb, i) => {
+        const isLast = i === crumbs.length - 1;
+        return (
+          <li class={cl("breadcrumbs__item")}>
+            {crumb.href && !isLast ? (
+              <a class={cl("breadcrumbs__link")} href={crumb.href}>
+                {crumb.label}
+              </a>
+            ) : (
+              <span
+                class:list={[
+                  cl("breadcrumbs__label"),
+                  isLast && cl("breadcrumbs__label--current"),
+                ]}
+                aria-current={isLast ? "page" : undefined}
+              >
+                {crumb.label}
+              </span>
+            )}
+            {isLast && hasTrailing && (
+              <span class={cl("breadcrumbs__trailing")}>
+                <slot name="trailing" />
+              </span>
+            )}
+          </li>
+        );
+      })
+    }
+  </ol>
+</nav>

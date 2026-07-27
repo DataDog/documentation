@@ -1,0 +1,275 @@
+.search-bar {
+  position: relative;
+  width: 100%;
+}
+
+.search-bar__form {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  border: none;
+  border-radius: 0;
+  background: var(--color-bg);
+  overflow: hidden;
+}
+
+.search-bar__input {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-xs) var(--space-md) var(--space-xs) 0;
+  border: none;
+  outline: none;
+  font: inherit;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.search-bar__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.search-bar__input--mobile::placeholder {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+}
+
+/* Hide the browser-default clear button (Hugo strips it the same way in
+   `searchbar-with-dropdown.scss`) so the input behaves like a plain text box. */
+.search-bar__input::-webkit-search-decoration,
+.search-bar__input::-webkit-search-cancel-button,
+.search-bar__input::-webkit-search-results-button,
+.search-bar__input::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* Submit button is positioned to the left of the input (matching Hugo's side
+   nav: `searchbar-sidenav.scss` uses `order: -1`) and styled as an icon-only
+   button. The inlined SVG inherits color from `currentColor`. */
+.search-bar__submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0 var(--space-sm);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  line-height: 1;
+}
+
+.search-bar__submit svg {
+  display: block;
+}
+
+.search-bar__submit:hover {
+  color: var(--color-brand);
+}
+
+.search-bar__submit--mobile {
+  padding-left: var(--hugo-mobile-nav-search-submit-padding-start);
+}
+
+/* Visual hint that `/` focuses the input. Ported from Hugo's
+   `.ais-SearchBox::after` (with the side-nav `right: 10px` override). */
+.search-bar__shortcut {
+  position: absolute;
+  right: var(--space-sm);
+  top: 50%;
+  transform: translateY(-50%) scale(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 24px;
+  padding-bottom: var(--space-2xs);
+  border: var(--border-width) solid var(--color-border-dark);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  pointer-events: none;
+  user-select: none;
+  transition:
+    opacity 0.2s ease-out,
+    transform 0.2s ease-out;
+}
+
+.search-bar__form:focus-within .search-bar__shortcut {
+  opacity: 0;
+  transform: translateY(-50%) scale(0.8);
+}
+
+@media (max-width: 1280px) {
+  .search-bar__shortcut {
+    display: none;
+  }
+}
+
+/* `position: fixed` so the popup escapes the side nav's `overflow: auto` clip
+   and isn't trapped inside an ancestor's stacking context. Coordinates are
+   computed from the input's bounding rect at runtime. Width matches Hugo's
+   `searchbar-sidenav.scss` (50vw, capped to keep the popup on screen). */
+.search-bar__popup {
+  position: fixed;
+  margin-top: var(--space-2xs);
+  width: 50vw;
+  max-width: calc(100vw - 2 * var(--space-md));
+  max-height: 70vh;
+  overflow-y: auto;
+  background: var(--color-bg);
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* Above `--hugo-banner-z` (1080) and `--hugo-header-z` (200) so neither
+     can paint over the popup as the user scrolls. */
+  z-index: 1090;
+  padding: var(--space-sm) 0;
+}
+
+/* Mobile-nav placement: the popup fills the mobile nav edge to edge, with the
+   search bar as its top edge. Width is set inline to match the full-width search
+   bar (so the 50vw cap is dropped); `bottom: 0` stretches it from the inline
+   `top` (the bar's bottom) down to the bottom of the screen. Borders, rounding,
+   and shadow are removed so it reads as a flush panel rather than a floating
+   card. It still sits above the mobile-nav overlay (z-index 99) via the base
+   popup's z-index. */
+.search-bar__popup--mobile {
+  width: auto;
+  max-width: none;
+  margin-top: 0;
+  bottom: 0;
+  max-height: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Match Hugo's mobile results: a narrow first column (subcategory) at a quarter
+   of the row, the rest for the title/snippet — vs. the wider side-nav column. */
+.search-bar__popup--mobile .search-hit__link {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  column-gap: var(--space-sm);
+}
+
+/* Bump the result text from the dense side-nav size up to Hugo's mobile size
+   (~14px / --font-size-sm), which reads far better at a phone viewport. */
+.search-bar__popup--mobile .search-hit__subcategory,
+.search-bar__popup--mobile .search-hit__title,
+.search-bar__popup--mobile .search-hit__snippet {
+  font-size: var(--font-size-sm);
+}
+
+.search-bar__ai-suggestion {
+  margin: 0 var(--space-sm) var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-placeholder-bg);
+  outline: var(--border-width-thick) solid var(--color-placeholder-outline);
+  outline-offset: calc(-1 * var(--border-width-thick));
+  color: var(--color-placeholder-text);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  user-select: none;
+  font-size: var(--font-size-sm);
+}
+
+.search-bar__ai-suggestion--selected {
+  filter: brightness(0.95);
+}
+
+.search-bar__no-hits {
+  padding: var(--space-md);
+  color: var(--color-text-muted);
+  text-align: center;
+  font-size: var(--font-size-sm);
+}
+
+.search-category {
+  padding: var(--space-sm) 0 var(--space-xs);
+}
+
+.search-category__label {
+  margin: 0 var(--space-md) var(--space-xs);
+  padding: 0 0 var(--space-2xs);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--color-text-muted);
+  border-bottom: var(--border-width) solid var(--color-surface-border);
+}
+
+.search-category__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.search-hit {
+  margin: 0;
+}
+
+/* Two-column row: subcategory on the left, title+snippet on the right.
+   Mirrors Hugo's `.ais-Hits-item` layout in the search popup. */
+.search-hit__link {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr);
+  column-gap: var(--space-md);
+  padding: var(--space-xs) var(--space-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.search-hit__link:hover,
+.search-hit--selected .search-hit__link {
+  background: var(--color-bg-hover);
+}
+
+.search-hit__subcategory {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+.search-hit__body {
+  min-width: 0;
+}
+
+.search-hit__title {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.search-hit__title strong {
+  font-weight: 600;
+}
+
+.search-hit__section {
+  color: var(--color-text-muted);
+}
+
+.search-hit__section strong {
+  color: var(--color-text);
+}
+
+.search-hit__snippet {
+  margin: var(--space-2xs) 0 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+/* Hugo highlights query terms with a brand-tinted pill. Use the existing
+   brand tokens so the look adapts to dark mode. */
+.search-hit__snippet :global(mark),
+.search-hit__title :global(mark),
+.search-hit__section :global(mark) {
+  background: var(--color-brand-tint);
+  color: var(--color-brand);
+  padding: 0 0.15em;
+  border-radius: var(--border-radius-sm);
+  font-weight: 600;
+}

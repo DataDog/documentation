@@ -1,0 +1,90 @@
+---
+import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+import styles from "./ApiSideNav.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import SearchBar, {
+  type SearchBarLabels,
+} from "@components/SearchBar/SearchBar";
+import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
+import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
+
+interface Props {
+  categories: ApiCategoryStub[];
+  activeCategory?: ApiCategory;
+  currentOperationSlug?: string;
+  lang?: Locale;
+}
+
+const {
+  categories,
+  activeCategory,
+  currentOperationSlug,
+  lang = DEFAULT_LOCALE,
+} = Astro.props;
+const cl = classListFactory(styles);
+
+// TODO: replace hardcoded English with i18n() once authoritative translation
+// keys exist for these strings in the Hugo i18n bundle.
+const searchLabels: SearchBarLabels = {
+  Search: "Search",
+  "Search documentation": "Search documentation",
+  "Search documentation...": "Search documentation...",
+  "No results.": "No results.",
+};
+---
+
+<nav class={cl("api-side-nav")}>
+  <a href={localizedHref(lang, "/")} class={cl("api-side-nav__title")}>
+    Datadog Docs&nbsp;&nbsp;<span class={cl("api-side-nav__title-api")}
+      >API</span
+    >
+  </a>
+  <div class={cl("api-side-nav__search")}>
+    <SearchBar client:load labels={searchLabels} />
+  </div>
+  <ul class={cl("api-side-nav__list")}>
+    {
+      categories.map((cat) => {
+        const isActive = cat.slug === activeCategory?.slug;
+        const categoryHref = localizedHref(lang, `/api/latest/${cat.slug}/`);
+        return (
+          <li>
+            <a
+              href={categoryHref}
+              class:list={[
+                cl("api-side-nav__category"),
+                isActive && cl("api-side-nav__category--active"),
+              ]}
+            >
+              {cat.name}
+            </a>
+            {isActive && activeCategory && (
+              <ul class={cl("api-side-nav__operations")}>
+                {activeCategory.operations.map((op) => {
+                  const isOpActive = op.slug === currentOperationSlug;
+                  return (
+                    <li>
+                      <a
+                        href={`${categoryHref}${op.slug}/`}
+                        class:list={[
+                          cl("api-side-nav__operation"),
+                          isOpActive && cl("api-side-nav__operation--active"),
+                        ]}
+                      >
+                        {op.summary}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </li>
+        );
+      })
+    }
+  </ul>
+  <ScrollActiveIntoView
+    containerSelector=".api-side-nav__list"
+    activeSelector=".api-side-nav__category--active"
+  />
+</nav>

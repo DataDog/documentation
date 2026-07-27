@@ -1,0 +1,23 @@
+---
+import { RegionSelector, type RegionSelectorLabels, type RegionSelectorHrefs } from './RegionSelector';
+import { buildClientRegions } from '@config/regions';
+import { HUGO_ORIGIN } from '@config/origins';
+
+// Resolve the region list at build time so the `yaml` parser and the full
+// `regions.config.js` data object never reach the client bundle. The slim
+// `ClientRegion[]` shape is serialized as the island's prop.
+const regions = buildClientRegions();
+
+// TODO: replace hardcoded English with i18n() once an authoritative translation
+// key exists for this string in the Hugo i18n bundle.
+const labels: RegionSelectorLabels = {
+  "Datadog site": "Datadog site",
+  "Site help": "Site help",
+};
+
+const hrefs: RegionSelectorHrefs = {
+  "Site help": `${HUGO_ORIGIN}/getting_started/site/`,
+};
+---
+
+<RegionSelector regions={regions} labels={labels} hrefs={hrefs} client:load />
