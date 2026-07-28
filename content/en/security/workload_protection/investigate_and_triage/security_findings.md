@@ -2,15 +2,12 @@
 title: Findings
 disable_toc: false
 further_reading:
-  - link: "/security/workload_protection/finding-rules"
-    tag: "Documentation"
-    text: "Learn about finding rules"
   - link: "/security/workload_protection/detect_and_monitor/finding_rules"
     tag: "Documentation"
     text: "Learn about finding rules"
 ---
 
-[Workload Protection][1] findings are generated when a resource — a host or container — fails a [finding rule][2]. View, filter, and triage findings in the [Findings Explorer][3] to assess and improve your runtime security posture.
+[Workload Protection][1] findings are generated when a resource (a host or container) fails a [finding rule][2]. View, filter, and triage findings in the [Findings Explorer][3] to assess and improve your runtime security posture.
 
 Workload Protection evaluates resources against finding rules based on Agent events. Datadog generates a new finding as soon as a finding rule is triggered and stores a complete history of all findings for investigation and audit.
 

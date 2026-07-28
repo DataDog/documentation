@@ -71,7 +71,7 @@ Patterns or regular expressions can be used in SECL expressions. They can be use
 | `~"pattern"`     | `~"httpd.*"`         | All                | 7.27          |
 | `r"regexp"`      | `r"rc[0-9]+"`        | All except `.path` | 7.27          |
 
-Patterns on `.path` fields will be used as Glob. `*` will match files and folders at the same level. `**`, introduced in 7.34, can be used at the end of a path in order to match all the files and subfolders.
+Patterns on `.path` fields are used as Glob. `*` matches files and folders at the same level. `**`, introduced in 7.34, can be used at the end of a path to match all the files and subfolders.
 
 #### Durations
 
@@ -126,7 +126,7 @@ open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
 process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
 {{< /code-block >}}
 
-#### Nginx or PHP spawning bash
+#### NGINX or PHP spawning bash
 
 {{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 exec.file.path == "/usr/bin/bash" &&
@@ -169,14 +169,14 @@ network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
 
 ### Windows
 
-#### Registry persistence via run key
+#### Registry persistence through a run key
 
 {{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 set_key_value &&
 open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
 {{< /code-block >}}
 
-#### Unsigned Binary Launching PowerShell
+#### Unsigned binary launching PowerShell
 
 {{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
 exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&

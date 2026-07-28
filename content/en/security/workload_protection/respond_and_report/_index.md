@@ -16,7 +16,7 @@ further_reading:
 - link: "security/workload_protection/getting_started"
   tag: "Documentation"
   text: "Getting started with Workload Protection"
-- link: "security/workload_protection/workload_protection_agent_config"
+- link: "/security/workload_protection/getting_started/advanced_configuration"
   tag: "Documentation"
   text: "Workload Protection Agent configuration"
 - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
@@ -69,8 +69,8 @@ When Automated response applies to a rule that generated a signal, you can see i
 
 ### Configure Automated response on Agent rules
 
-By default, all OOTB Agent rules (such as the crypto mining) are in an active state. You must configure the Automated response action manually.
-You can change the protection option to **Blocking** on an Agent rule and the Agent will terminate the corresponding processes instantly.
+By default, all OOTB Agent rules (such as crypto mining) are in an active state. You must configure the Automated response action manually.
+You can change the protection option to **Blocking** on an Agent rule and the Agent terminates the corresponding processes instantly.
 
 #### Protection options
 
@@ -84,13 +84,13 @@ You have three options for Agent rules:
 
 To enable automated response on an Agent rule:
 
-1. In [Agent Configuration][2], open a rule. If there is no Automated Reponse in the **Agent's actions** section, then Automated response is not available for that rule yet.
-2. Click on Edit
+1. In [Agent Configuration][2], open a rule. If there is no Automated Response in the **Agent's actions** section, then Automated response is not available for that rule yet.
+2. Click **Edit**.
 3. In the Agent rule, in **Add actions for the agent to follow**, check **Automated Response**.
 
    {{< img src="security/cws/guide/automated-response-activation.png" alt="An Agent rule Protection section displaying the Automated response action" style="width:100%;" >}}
 4. In **Link the rule to policies**, validate that the rule is active in at least one policy.
-5. Click on **Update Agent Rule**.
+5. Click **Update Agent Rule**.
 
 ### Report blocked attack attempts
 
@@ -104,7 +104,7 @@ A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The
 
 If you do not want to automatically kill processes based on rules, you can respond manually after a [Workload Protection signal][6] is triggered.
 
-<div class="alert alert-info">Response and agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
+<div class="alert alert-info">Response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
 You can take actions directly from the signal side panel to protect your infrastructure after a signal is generated.
 

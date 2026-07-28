@@ -16,14 +16,14 @@ In addition to the out-of-the-box (OOTB) [default Agent rules][7], you can write
 3. Enter a name for the policy and click **Create**.
    The new policy is created, but it is not enabled or deployed.
 4. Click the policy to open it.
-5. In **New Rule**, add custom Agent rules to the policy. To create a new Agent rule, see [Create a custom Agent rule][14].
+5. In **New Rule**, add custom Agent rules to the policy. To create an Agent rule, see [Create a custom Agent rule][14].
 6. Click **Edit** next to **Deployed on 0 agents**.
 7. Add [tags][18] to the policy to target specific infrastructure.
 8. To deploy the policy, toggle the switch next to **Policy is disabled** and confirm. This uses [Remote Configuration](#remote-configuration), as detailed below in that page.
 
 ### Pin a Datadog-managed policy to its current version
 
-<div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents will continue to receive the latest policy updates automatically.</div>
+<div class="alert alert-info">Policy pinning is supported in Agent version 7.71.0 and later. Previous Agents continue to receive the latest policy updates automatically.</div>
 
 When Datadog-managed policies are updated by Datadog, they are automatically deployed to your infrastructure.
 
@@ -39,7 +39,7 @@ To pin a policy, do the following:
 
 ### Conflicting rules
 
-When two policies deployed to the same host contain the same rule with a different status, the most severe action will be taken (Blocking > Monitoring > Disabled).
+When two policies deployed to the same host contain the same rule with a different status, the most severe action is taken (Blocking > Monitoring > Disabled).
 
 ### Apply tags
 
@@ -59,8 +59,8 @@ You can create a custom Agent rule and deploy it as part of a custom policy. Lat
 Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
 
 1. Go to [Agent Configuration][6].
-2. Create a new policy or open an existing one.
-3. With the policy open, in **Actions**, select **Manual rule creator** to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in the app. To use the **Assisted rule creator** wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
+2. Create a policy or open an existing one.
+3. With the policy open, in **Actions**, select **Manual rule creator** to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in Datadog. To use the **Assisted rule creator** wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
 4. Enter a **Name** and **Description** for the rule.
 5. In **Expression**, define the match using [Datadog Security Language (SECL)][16].
 6. For each policy that should include this rule, set the rule status: **Monitoring** or **Disabled**. If the rule supports enforcement, you can choose **Blocking** when [Automated response][12] is turned on and your user has the `security_monitoring_cws_agent_rules_actions` permission.
@@ -77,7 +77,7 @@ You can use **Remote Configuration** in the Datadog UI to automatically deploy t
 
 ### Remote Configuration {#remote-configuration}
 
-**Remote Configuration** is how Datadog delivers automatically policies to your agents. It uses a secure mechanism to guarantee that only signed and authentified policies are push to your agents. To deploy a policy using remote configuration, you just have to follow the steps detailed in Create a policy.
+**Remote Configuration** is how Datadog automatically delivers policies to your agents. It uses a secure mechanism to guarantee that only signed and authenticated policies are pushed to your agents. To deploy a policy using remote configuration, follow the steps detailed in Create a policy.
 
 #### Deployment strategies
 

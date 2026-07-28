@@ -5,11 +5,11 @@ disable_toc: false
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 
-This page will guide you through the process of enabling Workload Protection in your environment. You’ll start by activating Workload Protection in the Datadog app, then deploy the Datadog Agent to begin collecting runtime telemetry. Once setup is complete, you can explore Workload Protection’s capabilities using our playground scripts. Optionally, you can also request access to enforcement capabilities to take automated response actions directly with the Datadog platform.
+This page guides you through the process of enabling Workload Protection in your environment. Start by activating Workload Protection in Datadog, then deploy the Datadog Agent to begin collecting runtime telemetry. After setup is complete, you can explore Workload Protection's capabilities using the playground scripts. Optionally, you can also request access to enforcement capabilities to take automated response actions directly with the Datadog platform.
 
-## 1) Enable Workload Protection from the Datadog app
+## 1) Enable Workload Protection in Datadog
 
-To get started with Workload Protection, you need to enable the Workload Protection product from the Datadog App. To do so, log in to your Datadog account, and click on [Get Started][1]. You can follow the deployment steps of the agent in the app, or come back to this page for more details.
+To get started with Workload Protection, you need to enable the Workload Protection product in Datadog. To do so, log in to your Datadog account, and click [Get Started][1]. You can follow the Agent deployment steps in Datadog, or come back to this page for more details.
 
 <div class="alert alert-info">Activating Workload Protection requires the Org Management <a href="https://docs.datadoghq.com/account_management/rbac/permissions/">permission</a>.</div>
 
@@ -45,7 +45,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 **Notes:**
 
-- Custom kernel builds might modify critical hook points that our agent requires to properly function. Support isn't guaranteed.
+- Custom kernel builds might modify critical hook points that the Agent requires to properly function. Support isn't guaranteed.
 - Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 - For compatibility issues with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][2].
 
@@ -59,14 +59,14 @@ On Linux, you need to look at the Linux kernel version and distribution version,
  
 - The Workload Protection eBPF-less solution for eBPF disabled environments uses a ptrace-based Datadog Agent.
 
-##### Supported Cloud environments
+##### Supported cloud environments
 
 | Cloud environments                      | Supported | 
 |-----------------------------------------|----------------------|
 | Amazon Elastic Compute Cloud (EC2)      | ✅                    |
 | Amazon Elastic Kubernetes Service (EKS) | ✅                    |
 | Amazon Elastic Container Service (ECS)  | ✅                    |
-| Amazon Fargate                          | ✅ (only using eBPF-less agent)                    |
+| AWS Fargate                             | ✅ (only using eBPF-less agent)                    |
 | Azure Virtual Machines (Azure VMs)      | ✅                    |
 | Azure Kubernetes Service (AKS)          | ✅                    | 
 | Google Compute Engine (GCE)             | ✅                    |
@@ -74,7 +74,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 **Notes:**
 
-- Keep in mind that the underlying Linux distribution and system configuration used by these cloud environments are the primary factors determining whether our solution is supported.
+- The underlying Linux distribution and system configuration used by these cloud environments are the primary factors determining whether Workload Protection is supported.
 - For cloud environments where you can choose the Linux distribution and kernel version, select a configuration that meets the requirements listed above.
 
 #### Supported Windows flavors
@@ -103,20 +103,20 @@ Use the following instructions to enable the Windows agent of Workload Protectio
 
 ## 3) Discover and explore Workload Protection capabilities
 
-We've put together a testing playground for you to discover Workload Protection and learn its powerful capabilities. The playground proposes various scenarios you can run safely in a test environment, simulating threats and real world attacks that Workload Protection can detect and protect you from. Head over to [our playground's repository][3] to get started.
+Datadog provides a testing playground for discovering Workload Protection and learning its capabilities. The playground offers various scenarios you can run safely in a test environment, simulating threats and real world attacks that Workload Protection can detect and protect you from. See the [playground repository][3] to get started.
 
-## 4) (optional) Request access to enforcement capabilities
+## 4) (Optional) Request access to enforcement capabilities
 
-<div class="alert alert-danger">Please contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
+<div class="alert alert-danger">Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
 
-Once you've been granted access to Automated response, head over to the [Automated response][4] page.
+After you are granted access to Automated response, see the [Automated response][4] page.
 
-## 5) (optional) Advanced agent configurations
+## 5) (Optional) Advanced Agent configurations
 
-We've put together an [advanced agent configuration page][5] for power users to learn how to configure and tweak the agent to better fit your environment and needs.
+The [advanced Agent configuration page][5] describes how to configure and tune the Agent to better fit your environment and needs.
 
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
 [2]: /security/workload_protection/troubleshooting/threats
 [3]: https://github.com/DataDog/datadog-security-playground
-[4]: /security/workload_protection/respond_and_report/#automated_response
+[4]: /security/workload_protection/respond_and_report/#automated-response
 [5]: /security/workload_protection/getting_started/advanced_configuration

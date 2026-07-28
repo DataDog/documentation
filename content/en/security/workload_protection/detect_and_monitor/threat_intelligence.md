@@ -14,7 +14,7 @@ further_reading:
 
 Workload Protection enriches [Agent events][1] with [Threat Intelligence][2] curated by Datadog. This enrichment adds reputation context to entities observed on your hosts and containers, such as IP addresses and file hashes, to help you assess whether an event is part of a known malicious campaign.
 
-For general concepts, sources, categories, intents, and lifecycle information that apply across all Datadog security products, see [Threat Intelligence][2]. This page covers the details specific to Workload Protection.
+For general concepts, sources, categories, intents, and life cycle information that apply across all Datadog security products, see [Threat Intelligence][2]. This page covers the details specific to Workload Protection.
 
 ## Entity types for Workload Protection
 
