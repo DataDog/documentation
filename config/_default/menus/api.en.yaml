@@ -14772,6 +14772,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List custom evaluator configurations
+      url: /api/latest/llm-observability/list-custom-evaluator-configurations/
+      identifier: llm-observability-list-custom-evaluator-configurations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsCustomEvalConfigs
+        unstable:
+          - v2
+        order: 73
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives

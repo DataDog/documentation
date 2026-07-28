@@ -5,6 +5,18 @@ aliases:
 - /real_user_monitoring/product_analytics
 - /real_user_monitoring/guide/rum-for-product-analytics
 further_reading:
+- link: "/product_analytics/analytics_explorer/"
+  tag: "Documentation"
+  text: "Analytics Explorer"
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
+- link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
+  tag: "Blog"
+  text: "The product signal latency gap slowing your growth"
+- link: "https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/"
+  tag: "Blog"
+  text: "Understand session replays faster with AI summaries and smart chapters"
 - link: "https://www.datadoghq.com/blog/product-data-best-practices"
   tag: "Blog"
   text: "What your product data is actually saying"
@@ -20,13 +32,11 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-product-analytics/"
   tag: "Blog"
   text: "Make data-driven design decisions with Product Analytics"
-- link: "/product_analytics/analytics_explorer/"
-  tag: "Documentation"
-  text: "Analytics Explorer"
-- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
-  tag: Learning Center
-  text: Getting Started with Product Analytics
 ---
+
+{{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
+  Learn how to define meaningful digital product metrics and visualize them in Product Analytics with a Datadog trial account. Enroll for free today!
+{{< /learning-center-callout >}}
 
 ## Overview
 

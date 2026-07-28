@@ -23,7 +23,7 @@ The following configuration format applies to all configuration locations: org-l
 
 The configuration file must begin with a supported `schema-version` (`v1.0`, `v1.1`, or `v1.2`), followed by a `sast` key containing the analysis configuration, structured as shown below:
 
-```yaml
+{{< code-block lang="yaml" >}}
 schema-version: v1.0
 sast:
   use-default-rulesets: true
@@ -77,7 +77,7 @@ sast:
     use-gitignore: true
     ignore-generated-files: true
     max-file-size-kb: 200
-```
+{{< /code-block >}}
 
 The `sast` key supports the following fields:
 
@@ -117,15 +117,15 @@ Arguments and severity can be defined in one of two formats:
 
 1. **Single value:** Applies to the whole repository.
 
-   ```yaml
+   {{< code-block lang="yaml" >}}
    arguments:
      argument-name: value
    severity: ERROR
-   ```
+   {{< /code-block >}}
 
 2. **Per-path mapping:** Different values for different subtrees. The longest matching path prefix applies. Use `/` as a catch-all default.
 
-   ```yaml
+   {{< code-block lang="yaml" >}}
    arguments:
      argument-name:
        /: value_default
@@ -133,7 +133,7 @@ Arguments and severity can be defined in one of two formats:
    severity:
      /: WARNING
      path/example: ERROR
-   ```
+   {{< /code-block >}}
 
    | **Key** | **Type** | **Description** | **Default** |
    | --- | --- | --- | --- |
@@ -156,7 +156,7 @@ The `global-config` object controls repository-wide settings:
 
 Example configuration:
 
-```yaml
+{{< code-block lang="yaml" >}}
 schema-version: v1.0
 sast:
   use-default-rulesets: false
@@ -211,7 +211,7 @@ sast:
     # Do not analyze third-party files
     ignore-paths:
       - "lib/third_party"
-```
+{{< /code-block >}}
 
 ## Legacy configuration
 
@@ -225,7 +225,7 @@ If both files are present, `code-security.datadog.yaml` takes precedence over `s
 
 Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for all directories.
 
-```yaml
+{{< code-block lang="yaml" >}}
 schema-version: v1.0
 sast:
   ruleset-configs:
@@ -234,13 +234,13 @@ sast:
         reduce-server-fingerprinting:
           ignore-paths:
             - "**"
-```
+{{< /code-block >}}
 
 #### Ignore for a file or directory
 
 Add a rule configuration in your `code-security.datadog.yaml` file. The following example ignores the rule `javascript-express/reduce-server-fingerprinting` for a specific file. For more information on how to ignore by path, see [Customize your configuration](#customize-your-configuration).
 
-```yaml
+{{< code-block lang="yaml" >}}
 schema-version: v1.0
 sast:
   ruleset-configs:
@@ -249,7 +249,7 @@ sast:
         reduce-server-fingerprinting:
           ignore-paths:
             - "ad-server/src/app.js"
-```
+{{< /code-block >}}
 
 #### Ignore for a specific instance
 
@@ -259,11 +259,11 @@ On the [Repositories page][1], suppressed violations appear with `is_suppressed:
 
 For example, in the following Python code snippet, the line `foo = 1` would be suppressed in Static Code Analysis scans.
 
-```python
+{{< code-block lang="python" >}}
 #no-dd-sa
 foo = 1
 bar = 2
-```
+{{< /code-block >}}
 
 You can also use `no-dd-sa` to only suppress a particular rule, rather than suppressing all rules. To do so, specify the name of the rule you wish to suppress in place of `<rule-name>` using this template:
 
@@ -271,11 +271,11 @@ You can also use `no-dd-sa` to only suppress a particular rule, rather than supp
 
 For example, in the following JavaScript code snippet, the line `my_foo = 1` is suppressed only for the `javascript-code-style/assignment-name` rule, but all other rules still analyze it.
 
-```javascript
+{{< code-block lang="javascript" >}}
 // no-dd-sa:javascript-code-style/assignment-name
 my_foo = 1
 myBar = 2
-```
+{{< /code-block >}}
 
 [1]: https://app.datadoghq.com/security/code-security/repositories
 [2]: https://app.datadoghq.com/security/code-security/sca

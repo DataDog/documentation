@@ -3,15 +3,15 @@ title: Internal Developer Portal
 description: Datadog's Internal Developer Portal unifies live telemetry, metadata, and self-service workflows to standardize software delivery and optimize developer experience.
 disable_toc: false
 further_reading:
-- link: https://www.datadoghq.com/blog/datadog-forms
-  tag: Blog
-  text: Turn feedback into action across your engineering org with Datadog Forms
-- link: 'https://app.datadoghq.com/idp/get-started'
-  tag: 'App'
-  text: 'Exploring IDP in Datadog'
 - link: "getting_started/internal_developer_portal/"
   tag: "Documentation"
   text: "Getting Started with Internal Developer Portal"
+- link: "https://www.datadoghq.com/blog/platform-engineering-metrics/"
+  tag: "Blog"
+  text: "Success Metrics for Platform Engineering Teams"
+- link: https://www.datadoghq.com/blog/datadog-forms
+  tag: Blog
+  text: Turn feedback into action across your engineering org with Datadog Forms
 - link: "https://www.datadoghq.com/blog/software-catalog"
   tag: "Blog"
   text: "Improve developer experience and collaboration with Catalog"
@@ -33,6 +33,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/idp-campaigns/"
   tag: "Blog"
   text: "Coordinate large-scale engineering initiatives with IDP Campaigns"
+- link: 'https://app.datadoghq.com/idp/get-started'
+  tag: 'App'
+  text: 'Exploring IDP in Datadog'
 ---
 
 {{< img src="tracing/internal_developer_portal/scrolling_the_catalog.mp4" alt="A video that scrolls through the Internal Developer Portal Catalog page and clicks on a service to show a dependency graph with parent and child services represented" video=true >}}
