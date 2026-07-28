@@ -1,17 +1,18 @@
 # Astro Docs
 
-This is the next-generation Datadog documentation site, built with Astro 5, Markdoc, and Preact.
+This is the next-generation Datadog documentation site, built with Astro 7, Markdoc, and Preact.
 
 ## Prerequisites
 
-- Node.js >= 20
+- Node.js >= 22.12 (see [`.nvmrc`](.nvmrc); `nvm use` picks it up)
+- Yarn 4 via Corepack (pinned by the `packageManager` field). Enable it once with `corepack enable`.
 
 ## Getting started
 
 ```bash
 cd astro
-npm install
-npm run dev
+yarn install
+yarn dev
 ```
 
 The dev server starts at **http://localhost:4321**.
@@ -27,27 +28,27 @@ make start-proxied        # Hugo on :1313, baseURL set to :1314
 ```
 
 ```bash
-cd astro && npm run dev:proxied   # Astro on :4321, HMR through :1314
+cd astro && yarn dev:proxied   # Astro on :4321, HMR through :1314
 ```
 
 ```bash
 caddy run                 # Proxy on :1314
 ```
 
-Then visit **http://localhost:1314**. `npm run dev:proxied` differs from `npm run dev` only in that it points Vite's HMR client and asset origin at the proxy port so hot reload works through Caddy.
+Then visit **http://localhost:1314**. `yarn dev:proxied` differs from `yarn dev` only in that it points Vite's HMR client and asset origin at the proxy port so hot reload works through Caddy.
 
 ## Component documentation
 
-Each component has a dedicated page showing its properties and visual permutations. After running `npm run build`, browse the index at [http://localhost:4322/docs/test_pages/](http://localhost:4322/docs/test_pages/) (via `npm run preview`). The pages are also reachable under `npm run dev`, but client-side hydration only behaves correctly in a production build.
+Each component has a dedicated page showing its properties and visual permutations. After running `yarn build`, browse the index at [http://localhost:4322/docs/test_pages/](http://localhost:4322/docs/test_pages/) (via `yarn preview`). The pages are also reachable under `yarn dev`, but client-side hydration only behaves correctly in a production build.
 
 ## Other commands
 
-| Command              | Description                          |
-|----------------------|--------------------------------------|
-| `npm run build`      | Production build to `dist/`          |
-| `npm run preview`    | Preview the production build locally |
-| `npm run test`       | Run unit tests (Vitest)              |
-| `npm run test:browser` | Run browser tests (Playwright)     |
+| Command            | Description                          |
+|--------------------|--------------------------------------|
+| `yarn build`       | Production build to `dist/`          |
+| `yarn preview`     | Preview the production build locally |
+| `yarn test`        | Run unit tests (Vitest)              |
+| `yarn test:browser` | Run browser tests (Playwright)      |
 
 ## Testing
 
@@ -56,15 +57,15 @@ Each component has a dedicated page showing its properties and visual permutatio
 Fast, runs in Node with happy-dom. No dev server required.
 
 ```bash
-npm test
+yarn test
 ```
 
 ### Browser tests (Playwright)
 
-Runs against a dev server. Playwright starts one automatically via the config's `webServer`; if you already have `npm run dev` on port 4321, it reuses it.
+Runs against a dev server. Playwright starts one automatically via the config's `webServer`; if you already have `yarn dev` on port 4321, it reuses it.
 
 ```bash
-npm run test:browser
+yarn test:browser
 ```
 
 Useful flags (pass them after `--`):
@@ -80,7 +81,7 @@ Useful flags (pass them after `--`):
 After a failed run, open the HTML report for side-by-side diffs of expected vs. actual PNGs:
 
 ```bash
-npx playwright show-report
+yarn playwright show-report
 ```
 
 Screenshot baselines are captured at 2x retina (1440×900 viewport, `deviceScaleFactor: 2`, `scale: 'device'`) and currently live under `tests/browser/*-snapshots/` with a `-chromium-darwin.png` suffix. They need to be regenerated on the CI platform once CI is wired up; Playwright's per-platform suffix lets Mac and CI baselines coexist.

@@ -1,5 +1,5 @@
-// @vitest-environment happy-dom
 import { describe, it, expect } from "vitest";
+import { Window } from "happy-dom";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 // @ts-ignore — Preact renderer is registered for SSR of the toggle island.
 import preactRenderer from "@astrojs/preact/server.js";
@@ -8,6 +8,13 @@ import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 import type { ApiCategory } from "@lib/api/schemas/views";
 import { HUGO_ORIGIN } from "@config/origins";
+
+// Astro 7's Vite plugin stubs out `.astro` imports in the `client` Vite
+// environment, which is what the `happy-dom` vitest environment selects. So we
+// keep this test in the default (node/ssr) environment — where the `.astro`
+// import compiles — and parse the rendered HTML with a happy-dom `DOMParser`
+// created programmatically instead of relying on a browser-like global.
+const parserWindow = new Window();
 
 async function renderMobileNav(pathname?: string): Promise<Document> {
   const container = await AstroContainer.create();
@@ -22,7 +29,10 @@ async function renderMobileNav(pathname?: string): Promise<Document> {
       ? new Request(`https://docs.datadoghq.com${pathname}`)
       : undefined,
   });
-  return new DOMParser().parseFromString(html, "text/html");
+  return new parserWindow.DOMParser().parseFromString(
+    html,
+    "text/html",
+  ) as unknown as Document;
 }
 
 function sectionByLabel(doc: Document, label: string): Element | undefined {

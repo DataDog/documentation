@@ -1,7 +1,7 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from 'vitest/config';
 
-// Root vitest config — lists both projects so `npm run test` runs everything.
+// Root vitest config — lists both projects so `yarn test` runs everything.
 // Each project file uses its own getViteConfig() call, giving it an isolated
 // Vite server and module graph:
 //

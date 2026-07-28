@@ -7,7 +7,7 @@
  * `vitest.integration.config.ts`, which omits the frozen-fixture plugin so
  * `@hugo-site/data/api` resolves to the actual Hugo data directory.
  *
- * Both unit and integration projects run via `npm run test`.
+ * Both unit and integration projects run via `yarn test`.
  */
 
 import { describe, it, expect } from 'vitest';

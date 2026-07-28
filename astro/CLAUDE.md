@@ -23,8 +23,8 @@ Prompts often refer to the "Hugo docs". This refers either to the general Hugo s
 ## Testing
 
 - When possible, test files should be localized with the code they're testing.
-- Use `npm run test:headless-ai` for the headless (Vitest, mostly unit) tests and `npm run test:browser-ai` for browser (Playwright) tests; `npm run test-ai` runs both. Don't run vitest directly, it will fail to set necessary env variables and will not suppress extraneous tokens.
-- Scope your tests tightly. While developing, run only the tests relevant to your change — `npm run test:headless-ai -- <path>` for unit tests, or `npm run test:browser-ai -- <file>` for browser tests. Run the full `npm run test-ai` (both suites) once before considering the feature done, to catch broader regressions.
+- Use `yarn test:headless-ai` for the headless (Vitest, mostly unit) tests and `yarn test:browser-ai` for browser (Playwright) tests; `yarn test-ai` runs both. Don't run vitest directly, it will fail to set necessary env variables and will not suppress extraneous tokens.
+- Scope your tests tightly. While developing, run only the tests relevant to your change — `yarn test:headless-ai <path>` for unit tests, or `yarn test:browser-ai <file>` for browser tests. Run the full `yarn test-ai` (both suites) once before considering the feature done, to catch broader regressions.
 - Components should have both unit and browser tests, with browser tests covering just the cases that unit tests cannot.
 - Where possible, use the stable (non-hashed) BEM class as a selector, and as a verification of the component state (for example, use the relevant stable BEM class to verify that the correct tab is active). When a non-BEM direct property is very straightforward to check (like visibility), you can check that too.
 
@@ -43,9 +43,9 @@ If a task seems to require a Hugo-side change, stop and ask first.
 
 ## Commands
 
-- `npm run dev` — Start dev server on port 4321
-- `npm run build` — Production build to `dist/`
-- `npm run preview` — Preview the production build locally
+- `yarn dev` — Start dev server on port 4321
+- `yarn build` — Production build to `dist/`
+- `yarn preview` — Preview the production build locally
 
 ## Stack
 
@@ -75,7 +75,7 @@ Anytime you're building a feature that depends on some external resource that is
 
 Test fixtures live under [tests/fixtures/](./tests/fixtures/), **not** in `mocked-dependencies/`. They are intentionally small, frozen snapshots of real upstream data, kept stable so unit tests don't churn every time the live source changes. For example, [tests/fixtures/api/](./tests/fixtures/api/) is a trimmed copy of the live Hugo API spec.
 
-These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `npm test -- -u`. Treat the fixture as the source of truth, not a derived artifact.
+These fixtures are **frozen and hand-maintained** — there is no regeneration step. They were originally seeded from the live spec, then trimmed (only the audited tags/paths are kept, and explosive recursive `oneOf`s like `WidgetDefinition` are capped to a few representative variants). If a change needs spec data not present in the fixture, edit the fixture YAML directly to add it, then update snapshots with `yarn test -u`. Treat the fixture as the source of truth, not a derived artifact.
 
 The unit Vitest config redirects live spec imports to these fixtures via a plugin in [vitest.unit.config.ts](./vitest.unit.config.ts); the integration config deliberately does not, so it validates against the real upstream data.
 

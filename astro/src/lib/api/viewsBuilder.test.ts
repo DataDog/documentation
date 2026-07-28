@@ -11,7 +11,7 @@
  *
  * Snapshots are written to `__snapshots__/*.json` via `toMatchFileSnapshot`
  * so each one is human-readable on its own. To regenerate after an
- * intentional change, run `npm test -- -u`.
+ * intentional change, run `yarn test -u`.
  */
 
 import { describe, it, expect } from 'vitest';
