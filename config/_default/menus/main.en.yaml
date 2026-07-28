@@ -8725,27 +8725,6 @@ menu:
       identifier: ai_guard_signals
       parent: ai_guard
       weight: 3
-    - name: Workload Protection
-      url: security/workload_protection/
-      pre: security-workload-security
-      parent: security_platform_heading
-      identifier: workload_protection
-      weight: 70000
-    - name: Coverage
-      url: security/workload_protection/inventory
-      parent: workload_protection
-      identifier: workload_protection_inventory
-      weight: 205
-    - name: Guides
-      url: security/workload_protection/guide
-      parent: workload_protection
-      identifier: workload_protection_guides
-      weight: 206
-    - name: Troubleshooting
-      url: security/workload_protection/troubleshooting/threats
-      parent: workload_protection
-      identifier: workload_protection_troubleshooting
-      weight: 206
     - name: Sensitive Data Scanner
       url: /security/sensitive_data_scanner/
       pre: sensitive-data-scanner
