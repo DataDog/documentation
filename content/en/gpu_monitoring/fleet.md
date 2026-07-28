@@ -37,7 +37,7 @@ You can click on the {{< ui >}}>{{< /ui >}} button next to each table row entry 
 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
-## Use case-driven views
+## Use case-driven views and recommendations
 GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven views:
 
 - **Provisioning**: Allocate capacity and manage quotas.
@@ -47,6 +47,10 @@ GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven view
 The {{< ui >}}Provisioning{{< /ui >}} tab detects any hardware health issues impacting the allocation of your devices to workloads and provides guidance to all users, regardless of their hardware familiarity, on how to remediate those issues.
 
 {{< img src="gpu_monitoring/provisioning-tab-3.jpg" alt="The Provisioning use case-driven view" style="width:90%;" >}}
+
+For each detected issue, Datadog recommends step-by-step remediation actions to help you resolve it.
+
+{{< img src="gpu_monitoring/critical-xid-recommendation.jpg" alt="Recommended remediation actions for a critical XID error" style="width:60%;" >}}
 
 #### Summary Graph
 
@@ -68,6 +72,10 @@ Expand this section below to see a table of the available options and what they 
 The {{< ui >}}Performance{{< /ui >}} tab detects any hardware health or workload issues that are stalling the workloads running on your GPU devices and provides a single source of truth and guidance to platform engineers and AI/ML teams on how to remediate those issues.
 
 {{< img src="gpu_monitoring/performance-tab-3.jpg" alt="The Performance use case-driven view" style="width:90%;" >}}
+
+For each detected issue, Datadog recommends step-by-step remediation actions to help you resolve it.
+
+{{< img src="gpu_monitoring/power-cap-recommendation.jpg" alt="Recommended remediation actions for a GPU power cap throttling issue" style="width:60%;" >}}
 
 #### Summary Graph
 
