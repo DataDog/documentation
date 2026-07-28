@@ -117,7 +117,7 @@ replicaCount: 1
 
 image:
   repository: otel/opentelemetry-collector-contrib
-  tag: 0.153.0
+  tag: 0.154.0
   pullPolicy: IfNotPresent
 
 extraEnvs:
@@ -293,6 +293,88 @@ For a complete reference example, see the [DaemonSet collector configuration][10
 [108]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor
 [109]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/daemonset-collector.yaml
 [111]: /opentelemetry/integrations/kubernetes_metrics/#setup
+{{% /tab %}}
+{{% tab "OpenTelemetry Kube Stack" %}}
+
+The [`opentelemetry-kube-stack`][112] Helm chart installs the OpenTelemetry Operator and manages collectors as `OpenTelemetryCollector` CRs. Datadog maintains a reference [`values.yaml`][114] that configures two collectors:
+
+- **`cluster`** (Deployment): scrapes kube-state-metrics, watches Kubernetes objects, and enables `orchestrator_explorer` to populate Kubernetes Explorer.
+- **`daemon`** (DaemonSet): collects host and kubelet metrics, plus an OTLP endpoint for application telemetry.
+
+#### Prerequisites
+
+- OpenTelemetry Kube Stack Helm chart [0.20.0][113] or later.
+- OpenTelemetry Collector Contrib [v0.154.0][102] or later (pinned by the reference values file).
+- cert-manager installed, for the operator's admission webhook.
+
+#### Limitations
+
+The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
+
+Recommendations:
+1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
+2. Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
+
+#### 1. Install cert-manager (if not already present)
+
+```sh
+helm repo add jetstack https://charts.jetstack.io
+helm repo update
+
+helm install cert-manager jetstack/cert-manager \
+  --namespace cert-manager --create-namespace \
+  --set crds.enabled=true
+```
+
+#### 2. Create the Datadog secret
+
+```sh
+export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
+export DD_SITE="<YOUR_DATADOG_SITE>"  # for example datadoghq.com, us3.datadoghq.com, datadoghq.eu
+
+kubectl create namespace opentelemetry-operator-system
+kubectl create secret generic datadog-secret \
+  --namespace opentelemetry-operator-system \
+  --from-literal="api-key=$DD_API_KEY" \
+  --from-literal="dd-site=$DD_SITE"
+```
+
+#### 3. Deploy the reference collectors
+
+Download the reference [`values.yaml`][114] from the `opentelemetry-examples` repository, then install the chart:
+
+```sh
+helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
+helm repo update
+
+helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kube-stack \
+  --namespace opentelemetry-operator-system \
+  --values values.yaml
+```
+
+The required `k8s.cluster.name` is automatically detected on EKS, AKS, and GKE through the `resourceDetection` preset in the reference `values.yaml`. For other unsupported clouds, add a `resource/cluster` processor at the start of each pipeline:
+
+```yaml
+processors:
+  resource/cluster:
+    attributes:
+      - key: k8s.cluster.name
+        value: <YOUR_CLUSTER_NAME>
+        action: insert
+```
+
+Both collectors default to `500m` CPU / `1Gi` memory limits and `200m` CPU / `500Mi` memory requests. Scale up for large clusters.
+
+#### 4. Verify the installation
+
+Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**.
+
+[1]: https://app.datadoghq.com/orchestration/overview
+[102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
+[106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
+[112]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
+[113]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.0
+[114]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/kube-stack
 
 {{% /tab %}}
 {{< /tabs >}}
