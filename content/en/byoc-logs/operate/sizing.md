@@ -139,19 +139,18 @@ The BYOC Logs Helm chart provides predefined resource tiers through the `indexer
 The presets account for resources reserved for Kubernetes system components. The reservation amounts are based on the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations). An additional 250m CPU and 512Mi memory per node is reserved for DaemonSets and add-ons:
 
 ```text
-Actual CPU request = nominal pod CPU - Kubernetes system CPU reservation - 250m
-Actual memory request/limit = nominal pod memory - Kubernetes system memory reservation - 512Mi
+Actual CPU request = (nominal pod CPU - Kubernetes system CPU reservation - 250m), rounded down to the nearest 100m
+Actual memory request/limit = (nominal pod memory - Kubernetes system memory reservation - 512Mi), rounded down to the nearest 100Mi
 ```
 
 | `podSize` | Nominal CPU request | Actual CPU request | Nominal memory request/limit | Actual memory request/limit |
 |---|---:|---:|---:|---:|
-| `medium` | 1 | 690m | 4Gi | 2460Mi |
-| `large` | 2 | 1680m | 8Gi | 5736Mi |
-| `xlarge` | 4 | 3670m | 16Gi | 13109Mi |
-| `2xlarge` | 8 | 7660m | 32Gi | 28510Mi |
-| `4xlarge` | 16 | 15640m | 64Gi | 59312Mi |
-| `6xlarge` | 24 | 23620m | 96Gi | 90114Mi |
-| `8xlarge` | 32 | 31600m | 128Gi | 120916Mi |
+| `large` | 2 | 1600m | 8Gi | 5700Mi |
+| `xlarge` | 4 | 3600m | 16Gi | 13100Mi |
+| `2xlarge` | 8 | 7600m | 32Gi | 28500Mi |
+| `4xlarge` | 16 | 15600m | 64Gi | 59300Mi |
+| `6xlarge` | 24 | 23600m | 96Gi | 90100Mi |
+| `8xlarge` | 32 | 31600m | 128Gi | 120900Mi |
 
 The presets do not set a CPU limit, allowing a pod to use idle CPU on its node without being throttled. Memory requests and limits are equal to keep memory usage within the allocatable node capacity.
 
