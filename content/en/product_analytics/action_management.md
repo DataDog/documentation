@@ -52,7 +52,7 @@ Visual labeling requires [the Datadog test recorder Chrome extension][1]. If you
 5. Optional: Edit the CSS selector directly if you want to change or refine which elements the label matches.
 6. Click {{< ui >}}Save labeled action{{< /ui >}}.
 
-{{< img src="product_analytics/action_management/pana-create-labeled-action.png" alt="Labeled action panel with a name of New Chart CTA Click from Home, a tracked element named main navigation, the Target all pages checkbox, the CSS selector for the element, and the Save labeled action button." style="width:60%;">}}
+{{< img src="product_analytics/action_management/pana-create-labeled-action-2.png" alt="Labeled action panel with a name of New Chart CTA Click from Home, a tracked element named main navigation, the Target all pages checkbox, the CSS selector for the element, and the Save labeled action button." style="width:60%;">}}
 
 ### Update an existing labeled action
 
