@@ -1070,6 +1070,8 @@ If you are using a firewall, these domains must be added to the allowlist:
 
 {% /if %}
 
+See [Network Traffic][26] for more information.
+
 ## Index your Worker logs
 
 Make sure your Worker logs are [indexed][9] in Log Management for optimal functionality. The logs provide deployment information, such as Worker status, version, and any errors, that is shown in the UI. The logs are also helpful for troubleshooting Worker or pipelines issues. All Worker logs have the tag `source:op_worker`.
@@ -1093,3 +1095,4 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [23]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[26]: /observability_pipelines/configuration/network_traffic/
