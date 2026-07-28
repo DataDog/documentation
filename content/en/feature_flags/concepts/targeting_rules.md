@@ -32,7 +32,7 @@ Datadog supports different targeting rule types depending on your rollout strate
 
 ## Permissions
 
-Creating or editing targeting rules requires the **Feature Flag Write** permission. Changes that create, update, or remove experiment-owned allocation state also require the **Product Analytics Experiments Write** permission. Experiment-owned state includes canary allocations, experiment allocations, progressive rollout exposure schedules, and guardrail metrics.
+Creating or editing targeting rules requires the **Feature Flag Write** permission. Changes that create, update, or remove experiment-owned allocation state also require the **Product Analytics Experiments Write** permission. Experiment-owned state includes canary allocations, experiment allocations, progressive rollout exposure schedules, and guardrail metrics. Instant targeting rules with a `NO_ROLLOUT` exposure schedule require only the **Feature Flag Write** permission.
 
 Saving targeting rules replaces the complete allocation set for the flag environment. As a result, the additional permission is required when either the new rules or the existing allocation set contains experiment-owned state.
 

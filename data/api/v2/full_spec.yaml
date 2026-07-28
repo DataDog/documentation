@@ -140662,8 +140662,9 @@ paths:
 
         This operation requires the **Feature Flag Write** permission. Creating experiment-owned allocation
         state also requires the **Product Analytics Experiments Write** permission. Experiment-owned state
-        includes `CANARY` allocations and allocations with an `experiment_id`, `exposure_schedule`, or
-        `guardrail_metrics`.
+        includes `CANARY` allocations, allocations with an `experiment_id` or `guardrail_metrics`, and
+        allocations with a progressive `exposure_schedule` (a strategy other than `NO_ROLLOUT`). An instant
+        `NO_ROLLOUT` targeting rule requires only the **Feature Flag Write** permission.
       operationId: CreateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -140787,10 +140788,11 @@ paths:
 
         This operation requires the **Feature Flag Write** permission. Updating or removing experiment-owned
         allocation state also requires the **Product Analytics Experiments Write** permission. Experiment-owned
-        state includes `CANARY` allocations and allocations with an `experiment_id`, `exposure_schedule`, or
-        `guardrail_metrics`. Because this operation replaces the complete allocation set, the additional
-        permission is required when either the request or the existing allocation set contains experiment-owned
-        state.
+        state includes `CANARY` allocations, allocations with an `experiment_id` or `guardrail_metrics`, and
+        allocations with a progressive `exposure_schedule` (a strategy other than `NO_ROLLOUT`). An instant
+        `NO_ROLLOUT` targeting rule requires only the **Feature Flag Write** permission. Because this operation
+        replaces the complete allocation set, the additional permission is required when either the request or
+        the existing allocation set contains experiment-owned state.
       operationId: UpdateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
