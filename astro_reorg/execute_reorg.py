@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -249,3 +250,64 @@ if left_alone:
 if changed:
     codeowners.write_text("".join(lines))
     print("  Written: CODEOWNERS")
+
+# Update translate.yaml to reference content paths under hugo/.
+#
+# translate.yaml drives the translation pipeline: each entry maps an English
+# source file to its per-language destination. The FILE itself STAYS at the repo
+# root (it is in top_level) because the external translation service that reads
+# it — marketing-lambdas — loads it from a hardcoded root path ("translate.yaml")
+# and we do not make cross-repo changes. Its src/dst VALUES, however, are paths
+# interpreted relative to the repo root, so once content/, data/, etc. live under
+# hugo/, each value needs a "hugo/" prefix for source matching and translation
+# write-back to resolve to the new locations.
+#
+# As with CODEOWNERS and .gitignore, we route each value by its FIRST PATH
+# SEGMENT (driven entirely by astro_reorg/config.yaml) and edit the file
+# line-by-line so comments, blank lines, and formatting survive untouched — we
+# never reserialize the YAML. The regex only matches active `- src:`/`dst:`
+# lines with a quoted value; commented-out lines start with '#' and are skipped.
+TRANSLATE_PATH_RE = re.compile(r'^(\s*(?:-\s*)?(?:src|dst):\s*")([^"]+)(".*)$')
+
+
+def route_translate_path(value):
+    """Rewrite one translate.yaml src/dst value for the hugo/ move.
+
+    Returns (segment, new_value). new_value is None when the value is left
+    untouched. Routing is by first path segment, identical to CODEOWNERS.
+    """
+    segment = value.split("/", 1)[0]
+    if segment in hugo_level_files:
+        return segment, "hugo/" + value
+    return segment, None
+
+
+print("\nUpdating translate.yaml...")
+translate_yaml = repo_root / "translate.yaml"
+if not translate_yaml.is_file():
+    print("  Skipped: translate.yaml not found")
+else:
+    t_lines = translate_yaml.read_text().splitlines(keepends=True)
+    t_left_alone = set()   # first segments in neither config list (surfaced below)
+    t_changed = False
+    for i, raw in enumerate(t_lines):
+        newline = "\n" if raw.endswith("\n") else ""
+        line = raw[:-len(newline)] if newline else raw
+        m = TRANSLATE_PATH_RE.match(line)
+        if not m:
+            continue
+        prefix, value, suffix = m.groups()
+        segment, new_value = route_translate_path(value)
+        if new_value is None:
+            if segment not in repo_level_files:
+                t_left_alone.add(segment)
+            continue
+        t_lines[i] = prefix + new_value + suffix + newline
+        t_changed = True
+
+    if t_left_alone:
+        print("  NOTE: left unchanged (first path segment not in astro_reorg/config.yaml): "
+              + ", ".join(sorted(t_left_alone)))
+    if t_changed:
+        translate_yaml.write_text("".join(t_lines))
+        print("  Written: translate.yaml")

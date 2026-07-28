@@ -46,6 +46,13 @@ top_level:
   - general.preview.synthetics.json
   - repository.datadog.yml
 
+  # Translation pipeline config. Stays at the repo root because the external
+  # translation service (marketing-lambdas) loads it from a HARDCODED root path
+  # ("translate.yaml") and we do not make cross-repo changes. Its src/dst VALUES
+  # are still repathed to hugo/ by execute_reorg.py, since the content they point
+  # at moves into hugo/.
+  - translate.yaml
+
   # Docker
   - docker-compose-docs.yml
 
@@ -104,7 +111,6 @@ moves_to_hugo:
   - e2e
 
   # Content tooling
-  - translate.yaml
   - .translate
   - typesense.config.json
   - .htmltest.yml
