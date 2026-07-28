@@ -283,6 +283,7 @@ The Agent Observability MCP tools enable AI-assisted workflows for:
 - **Analyzing trace structure**: Visualize the full span tree of a trace to understand how agents, LLMs, tools, and retrievals interact.
 - **Investigating agent loops**: Review an agent's step-by-step execution loop to understand decision-making and tool invocation patterns.
 - **Evaluating experiments**: Get summary statistics for experiment metrics, compare results across dimension segments, and inspect individual events.
+- **Creating experiments**: Register a new experiment object with `create_llmobs_experiment` to record experiment metadata (project, dataset, description, config) without running model inference. Attach evaluation metrics afterward with `submit_llmobs_experiment_events`.
 - **Discovering experiment patterns**: Filter and sort experiment events by metric performance to find the best and worst-performing cases.
 - **Managing evaluators**: List, inspect, create, update, and delete evaluator configurations across an ML application or the entire organization.
 - **Exploring Patterns**: List pattern configurations, check run status, and browse the discovered topic hierarchy to understand what users are asking and how traffic is distributed.
@@ -316,6 +317,9 @@ The `llmobs` toolset includes the following tools:
 : Get a chronological view of an agent's execution loop, showing each step (LLM calls, tool invocations, decisions) in order.
 
 ### Experiment tools
+
+`create_llmobs_experiment`
+: Create a new LLM Observability experiment object in a project. Records the experiment (so events and metrics can be reported against it) without running any model inference. Requires `project_id` and `experiment_name`. Returns the created `experiment_id` and its resolved name. Use `submit_llmobs_experiment_events` to attach evaluation metrics, or `update_llmobs_experiment` to change its properties.
 
 `get_llmobs_experiment_summary`
 : Get a high-level experiment summary with pre-computed statistics for all evaluation metrics. Start here before using other experiment tools.
@@ -440,6 +444,7 @@ After connecting, try prompts like:
 - Analyze experiment `exp-456` and generate a markdown table of the worst-performing dimensions broken down by evaluation scores. Include any other relevant columns that help me understand where and why performance is degrading.
 - Compare experiment `exp-123` (baseline) against experiment `exp-456`. Summarize what improved, what regressed, and by how much. Give me a recommendation on whether the changes are worth shipping.
 - Summarize experiment `exp-456` and identify the top 5 lowest-scoring events. For each, show the input, output, and which evaluations failed.
+- Create a new experiment called "prompt-v2-test" in my project `my-chatbot-project` and return its experiment ID so I can attach evaluation metrics to it.
 - List the datasets in my `my-project` project and show me a sample of records from the dataset named `qa-golden-set`, including its schema.
 - I have a CSV of new test cases. Add them to the `qa-golden-set` dataset in `my-project` as a new version. Show me a preview first.
 

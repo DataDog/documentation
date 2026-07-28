@@ -926,10 +926,10 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
-[58]: https://partners.datadoghq.com/s/login/SelfRegister
+[58]: /getting_started/profiler/
 [59]: https://chatgpt.com/
 [60]: https://www.datadoghq.com/product-preview/mcp-codexec/
-[61]: /getting_started/profiler/
+[61]: https://partners.datadoghq.com/s/login/SelfRegister
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli

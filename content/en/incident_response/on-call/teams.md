@@ -43,7 +43,7 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
 
 Configure your monitors, incidents, or other resources to send Pages to your On-Call Team. See [Send a Page][7].
 
-Ensure that your On-Call Team members have set up their [Profile Settings][8].
+Ensure that your On-Call Team members have set up their [Notification Preferences][8].
 
 ## Further Reading
 
@@ -56,4 +56,4 @@ Ensure that your On-Call Team members have set up their [Profile Settings][8].
 [5]: /incident_response/on-call/escalation_policies
 [6]: /incident_response/on-call/schedules
 [7]: /incident_response/on-call/pages/
-[8]: /incident_response/on-call/profile_settings
+[8]: /incident_response/on-call/notification_preferences

@@ -28,6 +28,10 @@ further_reading:
   text: Getting Started with Product Analytics
 ---
 
+{{< learning-center-callout header="Try Getting Started with Product Analytics in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-product-analytics">}}
+  Learn how to define meaningful digital product metrics and visualize them in Product Analytics with a Datadog trial account. Enroll for free today!
+{{< /learning-center-callout >}}
+
 ## Overview
 
 Product Analytics helps you gain insight into user behavior and make data-driven decisions. It supports the following use cases in your application:
