@@ -44,40 +44,53 @@ GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven view
 - **Performance**: Optimize workload efficiency and throughput.
 
 ### Provisioning
-The {{< ui >}}Provisioning{{< /ui >}} tab shows key recommendations and metrics insights for allocating and managing your capacity. 
+The {{< ui >}}Provisioning{{< /ui >}} tab detects any hardware health issues impacting the allocation of your devices to workloads and provides guidance to all users, regardless of their hardware familiarity, on how to remediate those issues.
 
-{{< img src="gpu_monitoring/provisioning-tab-2.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/provisioning-tab-3.jpg" alt="The Provisioning use case-driven view" style="width:90%;" >}}
 
-Built-in recommendations: 
-- Datadog proactively detects thermal throttling or hardware defects and instantly recommends remediation based on hardware errors like ECC/XID errors.
-- Datadog detects whether inactive devices should be provisioned to avoid having devices sit idle.
+#### Summary Graph
 
-Metrics relevant for your provisioning workflow: 
-- ECC Errors
-- XID Errors
-- Graphics Engine Activity
-- GPU Utilization
-- GPU Memory
-- Allocated Devices (Only available for Kubernetes users) 
-- Active Devices
-- Idle Cost
+The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Provisioning use case, this breaks down your Provisioned, Allocated, and Active devices so you can reclaim wasted idle spend and rediscover available devices that can be allocated to workloads.
+
+{{< img src="gpu_monitoring/summary-graph.jpg" alt="Summary Graph showing Provisioned Devices, Allocated Devices, and Active Devices breakdowns" style="width:90%;" >}}
+
+Expand this section below to see a table of the available options and what they represent.
+
+{{% collapse-content title="See full list of Provisioning Summary Graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
+| Option              | Definition                                                |
+| -------------------- | ---------------------------------------------------------- |
+| Provisioned Devices  | Breakdown of provisioned devices and active devices.       |
+| Allocated Devices    | Breakdown of available devices by allocated vs. unallocated. |
+| Active Devices       | Breakdown of allocated devices by active vs. idle.          |
+{{% /collapse-content %}}
 
 ### Performance
 The {{< ui >}}Performance{{< /ui >}} tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
 
-{{< img src="gpu_monitoring/performance-tab-2.png" alt="The Performance use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/performance-tab-3.jpg" alt="The Performance use case-driven view" style="width:90%;" >}}
 
-Built-in recommendations: 
-- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and recommends solutions.
-- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations for tuning workloads to get more value out of their capacity.
+Expand the section below to see a table of the available options and what they represent.
 
-Metrics relevant for your performance workflow: 
-- ECC Errors
-- XID Errors
-- Graphics Engine Activity
-- GPU Utilization
-- GPU Memory
-- Effective Devices
+{{% collapse-content title="See full list of Performance Summary Graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
+| Option              | Definition                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU Util            | % of time the CPU spent running user space processes.                                                                                                                                                                 |
+| Host Memory         | % of usable memory in use.                                                                                                                                                                                             |
+| GPU Util            | Average % of time each streaming multiprocessor was active (lower values indicate idle time).                                                                                                                         |
+| GPU Saturation      | Measures how fully the GPU's parallel execution capacity is being used during the time frame (average ratio of active warps to the maximum warps supported per streaming multiprocessor across all SMs).            |
+| GPU Memory          | Ratio (%) of GPU memory used to total GPU memory limit.                                                                                                                                                                |
+| PCIe RX             | Bytes received through PCI from the GPU device per second.                                                                                                                                                             |
+| PCIe TX             | Bytes transmitted through PCI to the GPU device per second.                                                                                                                                                            |
+| NVLink RX           | Total RX of all NVLINK links.                                                                                                                                                                                          |
+| NVLink TX           | Total TX of all NVLINK links.                                                                                                                                                                                          |
+| Graphics Activity   | Fraction of time the GPU was performing any compute work during the interval. A coarse signal of whether the GPU is busy or idle.                                                                                     |
+| Power               | Power usage for the GPU device. On GA100 and previous architectures, this represents the instantaneous power at that moment. For newer architectures, it represents the average power draw (Watts) over one second. |
+| Temperature         | Temperature of a GPU device.                                                                                                                                                                                            |
+| SM Clock            | SM clock frequency in MHz.                                                                                                                                                                                             |
+| NVLink Active Links | Number of active NVLINK links for the device.                                                                                                                                                                          |
+| ECC Errors          | Total count of uncorrected ECC errors.                                                                                                                                                                                 |
+| XID Errors          | Count of NVIDIA XID errors, indicating hardware or driver-level issues.                                                                                                                                                |
+{{% /collapse-content %}}
 - Power
 - Temperature
 - PCIe RX Throughput
