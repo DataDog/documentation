@@ -846,13 +846,13 @@ export default {
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
   mcp_xaa_resource_url: {
-    us: 'https://mcp.datadoghq.com',
-    us3: 'https://mcp.us3.datadoghq.com',
-    us5: 'https://mcp.us5.datadoghq.com',
-    eu: 'https://mcp.datadoghq.eu',
-    ap1: 'https://mcp.ap1.datadoghq.com',
-    ap2: 'https://mcp.ap2.datadoghq.com',
-    uk1: 'https://mcp.uk1.datadoghq.com',
+    us: 'https://mcp.datadoghq.com/v1/mcp',
+    us3: 'https://mcp.us3.datadoghq.com/v1/mcp',
+    us5: 'https://mcp.us5.datadoghq.com/v1/mcp',
+    eu: 'https://mcp.datadoghq.eu/v1/mcp',
+    ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
+    ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
+    uk1: 'https://mcp.uk1.datadoghq.com/v1/mcp',
     gov2: 'Cross-App Access is not supported for US2-FED.',
     gov: 'Cross-App Access is not supported for US1-FED.'
   },

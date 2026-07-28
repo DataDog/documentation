@@ -21,7 +21,7 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes each agent individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
 
-Okta issues each agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators control which agents reach Datadog and revoke that access from Okta.
+Okta issues each agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
 
 Cross-App Access supports Okta as the identity provider.
 
@@ -41,7 +41,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 
 | Value | Direction | Where you enter it |
 |-------|-----------|--------------------|
-| Public Org ID | Datadog to Okta | Datadog application in Okta, **Resource Server** tab, **Audience/tenant ID** |
+| Datadog organization ID | Datadog to Okta | Datadog application in Okta, **Resource Server** tab, **Audience/tenant ID** |
 | Agent client IDs | Datadog to Okta | Okta AI Agent, **Resource Connection**, **Client ID at resource** |
 | Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta, **Resource Server** tab, **Resource URL** and **Issuer URL** |
 | Okta tenant issuer URL | Okta to Datadog | Datadog, **Cross-App Access** page, **Okta issuer URL** |
@@ -65,7 +65,7 @@ Complete the Datadog steps before the Okta steps. Datadog rejects tokens for org
 1. Navigate to [**Organization Settings > Cross-App Access**][3].
 2. Click **Enable**. This applies to your whole organization.
 3. In **Okta issuer URL**, enter the issuer URL for your Okta tenant, for example `https://<YOUR_OKTA_SUBDOMAIN>.okta.com`. Click **Save**.
-4. Copy the **Public Org ID**. You enter this in Okta.
+4. Copy your organization ID from the **Public Org ID** field. You enter this in Okta. This identifier is not the same as the company ID that Okta asks for elsewhere, so copy it from this page.
 5. Copy the client ID for each agent listed under **Registered client IDs**. You enter these in Okta.
 
 {{< img src="account_management/cross_app_access/cross-app-access-settings.png" alt="The Cross-App Access page in Datadog organization settings, showing the enablement status, the Okta issuer URL field, the Public Org ID, and a table of registered client IDs for Claude and Cursor" style="width:100%;" >}}
@@ -80,7 +80,9 @@ Clearing the field and saving removes the issuer and stops Datadog from acceptin
 
 ## Control what an agent can do
 
-Scope each agent in Datadog rather than in Okta. For now, Okta accepts scopes as free text, which makes scopes harder to discover and hard to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the agent's OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
+You can restrict what an agent reaches in either place: on the agent's OAuth client in Datadog, or on the resource connection in Okta. Both take effect, so you only need to set the restriction in one of them.
+
+Datadog recommends setting it in Datadog. Okta accepts scopes as free text, which makes them harder to discover and harder to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the agent's OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
 
 To set the scopes an agent is allowed:
 
@@ -91,7 +93,7 @@ To set the scopes an agent is allowed:
 
 Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][5].
 
-When Okta sends scopes in a token, Datadog grants the intersection of those scopes and the scopes allowed for that agent's OAuth client. Scopes set in Okta narrow what an agent reaches within what Datadog allows, and they do not widen it. An agent receives no access to a scope that is not allowed in Datadog, whatever the token requests.
+If you set scopes in Okta as well, Datadog grants the intersection of the scopes in the token and the scopes allowed for that agent's OAuth client. Scopes set in Okta narrow what an agent reaches within what Datadog allows, and they do not widen it. An agent receives no access to a scope that is not allowed in Datadog, whatever the token requests.
 
 ## Finish the setup in Okta
 
@@ -108,9 +110,9 @@ The values below match your selected [Datadog site][6] ({{< region-param key="dd
 |------------|-------|
 | **Resource URL** | {{< region-param key="mcp_xaa_resource_url" code="true" >}} |
 | **Issuer URL** | {{< region-param key="mcp_xaa_issuer_url" code="true" >}} |
-| **Audience/tenant ID** | The **Public Org ID** you copied from Datadog |
+| **Audience/tenant ID** | The organization ID you copied from Datadog |
 
-The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches. **Audience/tenant ID** carries your Public Org ID, which tells Datadog which organization the token targets when several organizations share one Okta tenant.
+The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches. **Audience/tenant ID** carries your organization ID, which tells Datadog which organization the token targets when several organizations share one Okta tenant.
 {{< /site-region >}}
 
 {{< site-region region="gov,gov2" >}}
@@ -126,7 +128,7 @@ Register each agent in Okta as an AI Agent, then add a resource connection from 
 | Okta field | Value |
 |------------|-------|
 | **Client ID at resource** | That agent's client ID from the **Registered client IDs** table in Datadog |
-| **Scope Condition** | **Allow all**. Control scopes in Datadog instead, as described in [Control what an agent can do](#control-what-an-agent-can-do) |
+| **Scope Condition** | **Allow all**, if you control scopes in Datadog as described in [Control what an agent can do](#control-what-an-agent-can-do). Otherwise, list the scopes this agent is allowed |
 
 Each agent needs its own client ID, so repeat this for every agent you connect. Add the agent's SAML application as a delegated caller on the AI Agent, then activate the agent.
 
