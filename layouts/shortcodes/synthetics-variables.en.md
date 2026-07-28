@@ -26,22 +26,4 @@ To create a local variable, click **+ All steps > Variables**. You can select on
 &#x7b;&#x7b; result-id &#x7d;&#x7d;
 : Injects the Result ID of your test run.
 
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. After you have defined the variable string, click **Add Variable**.
-
-### Apply filters to variable values
-
-When you reference a variable, you can transform its resolved value by appending a filter with a pipe (`|`). Use the syntax &#x7b;&#x7b; VARIABLE_NAME | filter &#x7d;&#x7d; anywhere a variable is accepted, such as the URL, request body, headers, and assertions. The following filters are available:
-
-&#x7b;&#x7b; VARIABLE_NAME | urlEncode &#x7d;&#x7d;
-: URL-encodes the variable's value. For example, `hello world` becomes `hello%20world`.
-
-&#x7b;&#x7b; VARIABLE_NAME | urlDecode &#x7d;&#x7d;
-: URL-decodes the variable's value. For example, `hello%20world` becomes `hello world`.
-
-&#x7b;&#x7b; VARIABLE_NAME | base64Encode &#x7d;&#x7d;
-: Base64-encodes the variable's value. For example, `hello` becomes `aGVsbG8=`.
-
-&#x7b;&#x7b; VARIABLE_NAME | base64Decode &#x7d;&#x7d;
-: Base64-decodes the variable's value. For example, `aGVsbG8=` becomes `hello`.
-
-Filters apply to both local and global variables. You can apply one filter per reference, and filter names are case-sensitive.
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
