@@ -65,7 +65,7 @@ In the following example, the 50 units of allotment left unused in the first two
 | Hour 3 | 150 | 100 | 0 (covered by the 50 pooled earlier) |
 | **Total** | **300** | **300** | **0** |
 
-For products measured on a concurrent count, peak, or average (such as hosts, containers, and custom metrics), the allotment applies at each point in time rather than as a monthly budget, so there is no unused amount to carry across hours, and their behavior is unchanged.
+For products measured on a concurrent count, peak, or average (such as hosts, containers, and custom metrics), the allotment applies at each point in time rather than as a monthly budget. There is no unused amount to carry across hours, so behavior for these products is unchanged.
 
 This change does not apply to usage billed through an external marketplace (for example, AWS, Azure, or GCP), where allotments continue to apply per hour.
 
