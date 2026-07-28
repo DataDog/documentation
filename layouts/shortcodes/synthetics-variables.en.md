@@ -26,7 +26,7 @@ To create a local variable, click **+ All steps > Variables**. You can select on
 &#x7b;&#x7b; result-id &#x7d;&#x7d;
 : Injects the Result ID of your test run.
 
-To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. Once you have defined the variable string, click **Add Variable**.
+To obfuscate local variable values in test results, select **Hide and obfuscate variable value**. After you have defined the variable string, click **Add Variable**.
 
 ### Apply filters to variable values
 
