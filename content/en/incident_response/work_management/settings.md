@@ -36,6 +36,8 @@ Work Management offers a range of native and third-party integrations, so you ca
 
 ### Monitors
 
+<div class="alert alert-info">Monitor handles use <code>@case-&lt;project_handle&gt;</code> terminology, which reflects Work Management's previous name, Case Management.</div>
+
 Navigate to the [Project Settings page][2], click **Integrations** > **Datadog Monitors**, and click on the toggle to get your @case-<project_handle>.
 
 Project handles can be used in monitors to automatically create work items. In the monitor message body, include `@case-<project_handle>`. Datadog suggests a handle based on the project's name. You can accept or modify it as you wish.

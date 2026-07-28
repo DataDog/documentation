@@ -71,6 +71,8 @@ Create a work item through the [API endpoint][5].
 
 **Note**: This endpoint requires the `cases_write` authorization scope.
 
+<div class="alert alert-info">The Work Management API endpoints use <code>case-management</code> terminology, which reflects the product's previous name.</div>
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
