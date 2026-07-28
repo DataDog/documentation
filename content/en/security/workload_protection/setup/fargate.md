@@ -1,5 +1,7 @@
 ---
 title: Setting up Workload Protection on AWS Fargate
+aliases:
+  - /security/workload_protection/getting_started/fargate/
 disable_toc: false
 ---
 

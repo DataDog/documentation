@@ -1,5 +1,8 @@
 ---
 title: Setting up Workload Protection on Docker
+aliases:
+  - /security/workload_protection/getting_started/docker/
+  - /security/workload_protection/setup/agent/docker/
 disable_toc: false
 ---
 

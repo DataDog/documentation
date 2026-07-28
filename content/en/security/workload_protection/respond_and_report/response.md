@@ -4,10 +4,10 @@ disable_toc: false
 aliases:
   - /security/workload_protection/respond_and_report/remediation
 further_reading:
-- link: "security/workload_protection/getting_started"
+- link: "security/workload_protection/setup"
   tag: "Documentation"
-  text: "Getting started with Workload Protection"
-- link: "security/workload_protection/getting_started/advanced_configuration"
+  text: "Setting up Workload Protection"
+- link: "security/workload_protection/setup/advanced_configuration"
   tag: "Documentation"
   text: "Workload Protection Agent advanced configuration"
 ---
@@ -93,7 +93,7 @@ The Agent supports the following **enforcement** action types for response workf
 
 - **Purpose:** **Revert** a previous isolation rule when it is removed from the policy that is applied to the host—traffic returns to the prior ruleset. This action is how isolation is undone programmatically.
 
-<div class="alert alert-warning">Misconfigured enforcement rules can disrupt workloads. Test response rules in non-production environments, keep expressions tightly scoped (for example to a specific process ID or cgroup), and use the safety mechanisms described in the <a href="/security/workload_protection/getting_started/advanced_configuration">Workload Protection Agent configuration</a> documentation unless Support advises otherwise.</div>
+<div class="alert alert-warning">Misconfigured enforcement rules can disrupt workloads. Test response rules in non-production environments, keep expressions tightly scoped (for example to a specific process ID or cgroup), and use the safety mechanisms described in the <a href="/security/workload_protection/setup/advanced_configuration">Workload Protection Agent configuration</a> documentation unless Support advises otherwise.</div>
 
 ## Action statuses
 
@@ -112,7 +112,7 @@ Additional statuses (such as `error`, `not_triggered`, or disarmer-related value
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/workload_protection/investigate_and_triage/security_signals
-[2]: /security/workload_protection/getting_started/
+[2]: /security/workload_protection/setup/
 [3]: /agent/remote_config/?tab=configurationyamlfile
-[4]: /security/workload_protection/getting_started/advanced_configuration
-[5]: /security/workload_protection/getting_started/kubernetes
+[4]: /security/workload_protection/setup/advanced_configuration
+[5]: /security/workload_protection/setup/kubernetes
