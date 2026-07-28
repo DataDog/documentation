@@ -279,8 +279,6 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 5. (Optional) Enable "Capture Variables" to collect all execution context (this feature is rate-limited to 1 execution per second).
 6. (Optional) Define a condition for when the logs should be emitted.
 
-**Note:** Some feature limitations may apply depending on the service's runtime language. Review the [runtime language-specific documentation][16] for more details.
-
 ### Protecting sensitive data
 
 Live Debugger data might contain sensitive information, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
@@ -344,7 +342,6 @@ The following constraints apply to Live Debugger usage and configuration:
 [13]: https://app.datadoghq.com/debugging/sessions
 [14]: https://app.datadoghq.com/apm/traces
 [15]: /dynamic_instrumentation/expression-language/
-[16]: /dynamic_instrumentation/enabling
 [17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
 [19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin

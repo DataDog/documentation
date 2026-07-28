@@ -5,7 +5,7 @@ aliases:
     - /dynamic_instrumentation/sensitive-data-scrubbing/
     - /tracing/dynamic_instrumentation/sensitive-data-scrubbing
 further_reading:
-- link: "/dynamic_instrumentation/enabling/"
+- link: "/dynamic_instrumentation/#enable-dynamic-instrumentation"
   tag: "Documentation"
   text: "Setting Up Dynamic Instrumentation"
 - link: "/security/sensitive_data_scanner/"

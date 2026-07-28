@@ -5,6 +5,9 @@ aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
     - /tracing/dynamic_instrumentation/
+    - /tracing/trace_collection/dynamic_instrumentation/enabling/
+    - /dynamic_instrumentation/enabling/
+    - /tracing/dynamic_instrumentation/enabling
 is_beta: false
 private: false
 further_reading:
@@ -44,7 +47,6 @@ Dynamic Instrumentation requires the following:
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog SDK is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
-- Recommended: [Autocomplete and search (in Preview)][17] are enabled.
 - Recommended: [Source Code Integration][7] is set up for your service.
 
 ### Permissions
