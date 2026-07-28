@@ -1,7 +1,7 @@
 /**
  * Per-locale page titles for the API docs static pages.
  *
- * Mirrors what Hugo's breadcrumb partial does ([layouts/partials/breadcrumbs.html](../../../../layouts/partials/breadcrumbs.html)):
+ * Mirrors what Hugo's breadcrumb partial does ([layouts/partials/breadcrumbs.html](../../../../hugo/layouts/partials/breadcrumbs.html)):
  * deeper crumbs use the page's front-matter `title:` from
  * `content/{lang}/api/latest/{slug}/_index.md`. We read those same files
  * directly so the breadcrumb labels track translator updates without any
