@@ -65,9 +65,15 @@ Expand this section below to see a table of the available options and what they 
 {{% /collapse-content %}}
 
 ### Performance
-The {{< ui >}}Performance{{< /ui >}} tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
+The {{< ui >}}Performance{{< /ui >}} tab detects any hardware health or workload issues that are stalling the workloads running on your GPU devices and provides a single source of truth and guidance to platform engineers and AI/ML teams on how to remediate those issues.
 
 {{< img src="gpu_monitoring/performance-tab-3.jpg" alt="The Performance use case-driven view" style="width:90%;" >}}
+
+#### Summary Graph
+
+The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Performance use case, this breaks down key resource utilization metrics like GPU Utilization or GPU Saturation alongside network fabric metrics, power, temperature, and more.
+
+{{< img src="gpu_monitoring/summary-graph-performance.jpg" alt="Summary Graph showing GPU Util, GPU Saturation, and GPU Memory breakdowns" style="width:90%;" >}}
 
 Expand the section below to see a table of the available options and what they represent.
 
