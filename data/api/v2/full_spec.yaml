@@ -140659,6 +140659,11 @@ paths:
     post:
       description: |-
         Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
+
+        This operation requires the **Feature Flag Write** permission. Creating experiment-owned allocation
+        state also requires the **Product Analytics Experiments Write** permission. Experiment-owned state
+        includes `CANARY` allocations and allocations with an `experiment_id`, `exposure_schedule`, or
+        `guardrail_metrics`.
       operationId: CreateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -140779,6 +140784,13 @@ paths:
       description: |-
         Updates targeting rules (allocations) for a specific feature flag in a specific environment.
         This operation replaces the existing allocation set with the request payload.
+
+        This operation requires the **Feature Flag Write** permission. Updating or removing experiment-owned
+        allocation state also requires the **Product Analytics Experiments Write** permission. Experiment-owned
+        state includes `CANARY` allocations and allocations with an `experiment_id`, `exposure_schedule`, or
+        `guardrail_metrics`. Because this operation replaces the complete allocation set, the additional
+        permission is required when either the request or the existing allocation set contains experiment-owned
+        state.
       operationId: UpdateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"

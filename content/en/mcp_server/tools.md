@@ -1067,7 +1067,7 @@ Lists allocations for a feature flag in a specific environment.
 
 ### `update_datadog_feature_flag_environment`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`. `Product Analytics Experiments Write` is also required when the environment contains experiment-owned allocation state.*\
 Updates a feature flag configuration in a specific environment.
 
 - Enable the `dark-mode` flag in the staging environment.
@@ -1082,7 +1082,7 @@ Checks if a feature flag is implemented in code.
 
 ### `sync_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Write`. `Product Analytics Experiments Write` is also required when the request or the existing environment contains experiment-owned allocation state.*\
 Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
