@@ -133,7 +133,7 @@ REPO = "DataDog/documentation"
 # CONFIG_LINK_BRANCH: branch hosting astro_reorg/config.yaml. The reorg DELETES
 #   astro_reorg/ from master, so this link must point at a branch that RETAINS it
 #   (the scripts branch) — it can never be "master".
-REORG_README_BRANCH = "jen.gilbert/astro-reorg-scripts"
+REORG_README_BRANCH = "master"
 CONFIG_LINK_BRANCH = "jen.gilbert/astro-reorg-scripts"
 REPO_REORG_README_LINK = f"https://github.com/DataDog/documentation/blob/{REORG_README_BRANCH}/REPO_REORG.md"
 LABEL_MANUAL_REVIEW = "astro-reorg-manual-review"

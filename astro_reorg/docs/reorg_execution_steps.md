@@ -4,37 +4,20 @@
 
 ### 1. Update the reorg README
 
-- [ ] Add the target date to the reorg README.
+- [x] Add the target date to the reorg README.
 
 ### 2. Publish the README
 
-- [ ] Publish [REPO_REORG.md](../../REPO_REORG.md) on master, so you can link to it.
-- [ ] Set the `REORG_README_BRANCH` constant in `resolve_pr_conflicts.py` to `"master"` (it defaults to the scripts branch), commit, and push. Leave `CONFIG_LINK_BRANCH` pointing at the scripts branch — the reorg deletes `astro_reorg/` from master, so that link must stay on a branch that retains it.
+- [x] Publish [REPO_REORG.md](../../REPO_REORG.md) on master, so you can link to it.
+- [x] Set the `REORG_README_BRANCH` constant in `resolve_pr_conflicts.py` to `"master"` (it defaults to the scripts branch), commit, and push. Leave `CONFIG_LINK_BRANCH` pointing at the scripts branch — the reorg deletes `astro_reorg/` from master, so that link must stay on a branch that retains it.
 
 ### 3. Announce the reorg
 
 Announce the reorg (see copy for various channels below).
 
 - [x] To the #docs-announcements channel (https://dd.slack.com/archives/C09641REVHN/p1785165930974599)
-- [ ] To the #documentation channel (<LINK>)
-- [ ] In a banner in the `documentation` README
-
-#### Announcement copy for #documentation:
-
-```
-On <DATE>, most of the files in the `documentation` repo will move into a new folder.
-
-If your role involves adding content to the `documentation` repo, you could be impacted:
-
-- We'll spend some portion of <DATE> in a code freeze. You won't be able to update content at that time. We'll keep this as brief as possible.
-- The reorg will cause conflicts in the majority of open PRs. If you have a PR open in the `documentation` repo at this time, action may be required from you.
-
-We'll fix most of the conflicting PRs automatically, closing the old PR with a link to the new one. The new PR will be marked `WORK IN PROGRESS` while it awaits the author's review.
-
-In edge cases when an automatic fix is not available for a PR, we'll leave a comment in the PR offering further instructions.
-
-You can read more about the reorg here.<LINK TO REORG README>
-```
+- [x] To the #documentation channel (https://dd.slack.com/archives/C0DESMBQU/p1785255569372869)
+- [x] In a banner in the `documentation` README
 
 ## The day before
 
