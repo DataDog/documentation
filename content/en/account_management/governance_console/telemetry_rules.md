@@ -4,6 +4,9 @@ is_beta: true
 private: true
 description: Use telemetry rules to govern tags, indexing, and other characteristics of your metrics, logs, and spans.
 further_reading:
+- link: '/api/latest/tag-policies/'
+  tag: 'Documentation'
+  text: 'Tag Visibility and Enforcement Rules API'
 - link: '/account_management/governance_console/'
   tag: 'Documentation'
   text: 'Governance Console'
@@ -24,7 +27,7 @@ Telemetry rules are in Preview. If you see an issue or want to propose a new fea
 
 ## Overview
 
-Telemetry rules let Datadog admins govern characteristics of their metrics, logs, and spans from the Governance Console. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry, which can improve usage and cost management.
+Telemetry rules help admins govern characteristics of their metrics, logs, and spans from the Governance Console, to reduce costs for unwanted telemetry. Telemetry rules can help standardize tagging, manage ingested and indexed volume, and minimize unused or redundant telemetry.
 
 ## Prerequisites
 
@@ -96,7 +99,11 @@ You can create and manage specific rules for metrics from the Governance Console
 
 ## Limitations
 
-You can create up to 10 rules per signal type (spans, metrics, and logs each have a separate limit of 10). You can specify up to 30 tag values per Tag Visibility and Enforcement rule. If your tagging strategy requires more rules, contact your Datadog account team to request a higher limit. Telemetry rules aren't available for telemetry types outside metrics, logs, and spans.
+- You can create up to 10 rules per signal type (spans, metrics, and logs each have a separate limit of 10).
+- A Tag Visibility and Enforcement rule can specify up to 30 tag values.
+- Telemetry rules aren't available for telemetry types outside metrics, logs, and spans.
+
+If your tagging strategy requires more rules or tag values, contact your Datadog account team to request a higher limit.
 
 ## Further reading
 
