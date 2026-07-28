@@ -238,17 +238,17 @@ The following permissions are required to use Live Debugger:
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][21].
 
-### Create a logs index
+### Create a logs index (recommended)
 
-Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
+Datadog recommends creating a dedicated logs index for Live Debugger to help ensure that Live Debugger logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11]. Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
 
-If you use [Exclusion filters][11], make sure Live Debugger logs are not filtered:
+To create a dedicated logs index:
 
 1. Create a logs index and [configure it][12] to the desired retention with **no sampling**.
 2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### Link your source code
+### Link your source code (recommended)
 
 Datadog recommends setting up [Source Code Integration][28] for the best experience with Live Debugger. Source Code Integration is optional when starting a Debug Session manually, but required when using [Bits Live Debugger][23].
 
