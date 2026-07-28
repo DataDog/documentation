@@ -140176,6 +140176,10 @@ paths:
     post:
       description: |-
         Pauses a progressive rollout while preserving rollout state.
+
+        This operation requires the **Feature Flag Write** permission. If the rollout's allocation has
+        a non-empty `experiment_id` or guardrail metrics, it also requires the
+        **Product Analytics Experiments Write** permission.
       operationId: PauseExposureSchedule
       parameters:
         - $ref: "#/components/parameters/exposure_schedule_id"
@@ -140243,6 +140247,10 @@ paths:
     post:
       description: |-
         Resumes progression for a previously paused progressive rollout.
+
+        This operation requires the **Feature Flag Write** permission. If the rollout's allocation has
+        a non-empty `experiment_id` or guardrail metrics, it also requires the
+        **Product Analytics Experiments Write** permission.
       operationId: ResumeExposureSchedule
       parameters:
         - $ref: "#/components/parameters/exposure_schedule_id"
@@ -140310,6 +140318,10 @@ paths:
     post:
       description: |-
         Starts a progressive rollout and begins progression.
+
+        This operation requires the **Feature Flag Write** permission. If the rollout's allocation has
+        a non-empty `experiment_id` or guardrail metrics, it also requires the
+        **Product Analytics Experiments Write** permission.
       operationId: StartExposureSchedule
       parameters:
         - $ref: "#/components/parameters/exposure_schedule_id"
@@ -140377,6 +140389,10 @@ paths:
     post:
       description: |-
         Stops a progressive rollout and marks it as aborted.
+
+        This operation requires the **Feature Flag Write** permission. If the rollout's allocation has
+        a non-empty `experiment_id` or guardrail metrics, it also requires the
+        **Product Analytics Experiments Write** permission.
       operationId: StopExposureSchedule
       parameters:
         - $ref: "#/components/parameters/exposure_schedule_id"
@@ -140661,10 +140677,10 @@ paths:
         Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.
 
         This operation requires the **Feature Flag Write** permission. Creating experiment-owned allocation
-        state also requires the **Product Analytics Experiments Write** permission. Experiment-owned state
-        includes `CANARY` allocations, allocations with an `experiment_id` or `guardrail_metrics`, and
-        allocations with a progressive `exposure_schedule` (a strategy other than `NO_ROLLOUT`). An instant
-        `NO_ROLLOUT` targeting rule requires only the **Feature Flag Write** permission.
+        state also requires the **Product Analytics Experiments Write** permission. An allocation is
+        experiment-owned when it has a non-empty `experiment_id` or `guardrail_metrics`. A standalone
+        `CANARY` allocation or progressive `exposure_schedule` requires only the **Feature Flag Write**
+        permission.
       operationId: CreateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
@@ -140787,12 +140803,11 @@ paths:
         This operation replaces the existing allocation set with the request payload.
 
         This operation requires the **Feature Flag Write** permission. Updating or removing experiment-owned
-        allocation state also requires the **Product Analytics Experiments Write** permission. Experiment-owned
-        state includes `CANARY` allocations, allocations with an `experiment_id` or `guardrail_metrics`, and
-        allocations with a progressive `exposure_schedule` (a strategy other than `NO_ROLLOUT`). An instant
-        `NO_ROLLOUT` targeting rule requires only the **Feature Flag Write** permission. Because this operation
-        replaces the complete allocation set, the additional permission is required when either the request or
-        the existing allocation set contains experiment-owned state.
+        allocation state also requires the **Product Analytics Experiments Write** permission. An allocation is
+        experiment-owned when it has a non-empty `experiment_id` or `guardrail_metrics`. A standalone `CANARY`
+        allocation or progressive `exposure_schedule` requires only the **Feature Flag Write** permission.
+        Because this operation replaces the complete allocation set, the additional permission is required when
+        either the request or the existing allocation set contains experiment-owned state.
       operationId: UpdateAllocationsForFeatureFlagInEnvironment
       parameters:
         - $ref: "#/components/parameters/feature_flag_id"
