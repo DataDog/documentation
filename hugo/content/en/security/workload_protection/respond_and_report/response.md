@@ -12,8 +12,8 @@ further_reading:
   text: "Workload Protection Agent advanced configuration"
 ---
 
-Response in Workload Protection lets the Datadog Agent **enforce** follow-up actions directly from the [Workload Protection Signals][1]
-<div class="alert alert-info">Response and agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
+Response in Workload Protection lets the Datadog Agent **enforce** follow-up actions directly from the [Workload Protection Signals][1].
+<div class="alert alert-info">Response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
 ## Enable the Response feature
 
@@ -73,7 +73,7 @@ On Kubernetes, mirror these keys in your `DatadogAgent` spec or Helm `values.yam
 
 ### 5. Confirm in Datadog
 
-After restarts, confirm that hosts are reporting Workload Protection telemetry as usual. When response rules are published for your org, matching hosts execute the configured **kill** or **network_filter** actions and report outcomes (see [Available actions](#available-actions) and [Action statuses](#action-statuses)).
+After restarts, confirm that hosts are reporting Workload Protection telemetry as usual. When response rules are published for your organization, matching hosts execute the configured **kill** or **network_filter** actions and report outcomes (see [Available actions](#available-actions) and [Action statuses](#action-statuses)).
 
 ## Available actions
 

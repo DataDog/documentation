@@ -15,17 +15,17 @@ further_reading:
     text: "Learn more about security notifications"
 ---
 
-This topic explains how to use the Agent Events explorer to query and review the Workload Protection events.
+This topic explains how to use the Agent Events explorer to query and review Workload Protection events.
 
 The Datadog Agent evaluates system activity on the Agent host. When activity matches an Agent rule expression, the Agent generates an event and passes it to the Datadog backend.
 
-With the [Agent Events explorer][13], you can investigate Agent Events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
+With the [Agent Events explorer][13], you can investigate Agent events separately from signals. Review what happened, where it occurred, and which Agent rule matched using the event side panel. You can also explore the investigation graph, process tree, and raw JSON payload, and view triage and response instructions for the matching rule.
 
 ## View Agent events
 
 To view Agent events, go to the [Agent Events explorer][13].
 
-Agent events are queried and displayed using the standard explorer controls in the Datadog [Events explorer][14]. 
+Agent events are queried and displayed using the standard explorer controls in the Datadog [Events explorer][14].
 
 ## Investigate Agent events
 
@@ -52,7 +52,7 @@ The **Investigation graph** is an interactive visualization that maps the infras
 
 The graph traces the event from the host through the surrounding infrastructure—such as the Kubernetes pod, replica set, container, and container image—and into the process execution path. Main processes involved in the event are displayed individually, while less relevant processes are aggregated into grouped nodes (for example, **+7 processes**) to keep the view focused on the suspicious activity.
 
-Use the investigation graph to quickly understand how the detected activity fits into the broader runtime context without reviewing every process on the host.
+Use the investigation graph to understand how the detected activity fits into the broader runtime context without reviewing every process on the host.
 
 #### Process tree
 

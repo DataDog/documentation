@@ -41,7 +41,7 @@ Depending on the Content Pack, a bundle can include:
 2. Browse the available Content Packs and select one.
 3. Review the included Agent rules, detection rules, and deployment requirements.
 4. Click **Enable** to activate the Content Pack.
-5. You should be redirected to the associated policy page.
+5. You are redirected to the associated policy page.
 
 Enabling a Content Pack adds its associated policy and rules to your organization. To start detecting threats, deploy the associated policy to your infrastructure.
 
@@ -57,11 +57,12 @@ Content Packs deploy through [policies][4]. After you enable a Content Pack, sco
 
 For more information about policy deployment, see [Policy management][4].
 
-## Desactivate a Content Pack
+## Deactivate a Content Pack
 
 1. Go to [Content Packs][1].
 2. Browse the available Content Packs and select one that is activated.
-3. Click **Desactivate** to remove the associated policy from the policy page.
+3. Click **Deactivate** to remove the associated policy from the policy page.
+
 [1]: https://app.datadoghq.com/security/workload-protection/overview#content-packs
 [2]: /security/workload_protection/detect_and_monitor/agent_rules
 [3]: /security/workload_protection/detect_and_monitor/detection_rules
