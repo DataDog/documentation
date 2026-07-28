@@ -1,7 +1,5 @@
 ---
 title: Setting up Workload Protection
-aliases:
-  - /security/workload_protection/getting_started/
 disable_toc: false
 ---
 

@@ -1,7 +1,6 @@
 ---
 title: Setting up Workload Protection on Windows
 aliases:
-  - /security/workload_protection/getting_started/windows/
   - /security/workload_protection/setup/agent/windows/
 disable_toc: false
 ---
