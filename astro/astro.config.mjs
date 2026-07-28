@@ -58,6 +58,11 @@ export default defineConfig({
     routing: { prefixDefaultLocale: false },
   },
   vite: {
+    // Treat SDK example source files as static assets so vite:import-analysis
+    // doesn't misread language-specific import syntax (e.g. Go's `import (...)`)
+    // as JavaScript dynamic imports. The ?raw glob in codeExampleLoader.ts
+    // still works correctly with these extensions marked as assets.
+    assetsInclude: ["**/*.go", "**/*.java", "**/*.py", "**/*.pybeta", "**/*.rb", "**/*.rbbeta", "**/*.rs"],
     server: {
       fs: {
         allow: [astroSite, hugoSite, websitesModules],
