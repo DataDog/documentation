@@ -156,6 +156,10 @@ To convert timestamps in string format to timestamp format:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][14] and [destination buffer metrics][15] emitted by all destinations, see the [Pipelines Usage Metrics][16] documentation. To filter or group by Databricks destination metrics, use the tag `component_type:databricks_zerobus`.
+
 ## How the destination works
 
 ### Event batching
@@ -165,10 +169,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
-
-## Metrics
-
-For [component metrics][14] and [destination buffer metrics][15] emitted by all destinations, see the [Pipelines Usage Metrics][16] documentation. To filter or group by Databricks destination metrics, use the tag `component_type:databricks_zerobus`.
 
 [1]: https://docs.databricks.com/aws/en/ingestion/zerobus-overview
 [2]: https://docs.databricks.com/aws/en/schemas/create-schema

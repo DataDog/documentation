@@ -86,7 +86,11 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
        </tr>
        <tr>
          <td>{{< ui >}}Fixed{{< /ui >}}</td>
-         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</td>
+         <td>
+           <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
+           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
+           <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
+         </td>
        </tr>
      </tbody>
    </table>

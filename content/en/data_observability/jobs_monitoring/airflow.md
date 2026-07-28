@@ -379,6 +379,10 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 {{% /tab %}}
 {{< /tabs >}}
 
+## Known issues
+
+In Airflow 2.x, manually marking a DAG run or task as failed does not update its status in Data Observability: Jobs Monitoring. For affected runs, span durations and duration metrics may be inaccurate.
+
 ## OpenLineage provider version reference
 
 Data Observability: Jobs Monitoring uses the Apache Airflow OpenLineage provider to emit Airflow DAG and task events. For the best experience, Datadog recommends using the newest OpenLineage provider version that is compatible with your Airflow version.
@@ -639,4 +643,4 @@ With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ linea
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
-[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html#passing-parent-job-information-to-spark-jobs
+[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection

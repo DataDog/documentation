@@ -378,6 +378,35 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
+## Audit Trail
+
+Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
+
+### `search_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Searches for Audit Trail events using Datadog query syntax with support for pagination. Use when you need to find and filter events by specific attributes. Returns Audit Trail events without metadata and previous or new asset values unless requested.
+
+- Who deleted the monitor `abc123`?
+- Have there been any failed Datadog login attempts in the past week?
+- Search Audit Trail to see if there were any API key leak notifications this month.
+
+### `list_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Lists Audit Trail events over a time window with support for pagination and an optional query. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous or new asset values unless requested.
+
+- Show me Audit Trail events for the past hour.
+
+### `build_audit_trail_query`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Translates a natural-language description into an Audit Trail query string. If you are uncertain of query syntax when searching Audit Trail events, use this tool first with a description of the events you would like to retrieve, then pass the returned query and timestamps directly into `search_audit_events`.
+
+- Provide an Audit Trail query to see who created new monitors in the past 2 weeks.
+- Create an Audit Trail query to show when the dashboard `abc123` was deleted.
+- Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
+
 ## Cases (Work Management)
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
@@ -1823,7 +1852,7 @@ Moves an automation rule up or down in the list. Rules are applied in order, so 
 - Move the mute rule `abc-123-def` to the top of the list.
 - Lower the priority of this due-date rule by two positions.
 
-### `get_datadog_security_passlist`
+### `get_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
@@ -1832,7 +1861,7 @@ Returns all WAF exclusion filter (passlist) entries for the organization to revi
 - Show me active WAF exclusion filters.
 - Check existing passlist suppressions before I add a new one.
 
-### `upsert_datadog_security_passlist`
+### `upsert_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
@@ -1841,7 +1870,7 @@ Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rul
 - Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
 - Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
 
-### `delete_datadog_security_passlist`
+### `delete_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Deletes an existing WAF exclusion filter (passlist) entry.
@@ -1849,7 +1878,7 @@ Deletes an existing WAF exclusion filter (passlist) entry.
 - Delete WAF exclusion filter "passlist-abc-123".
 - Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
 
-### `get_datadog_security_denylist`
+### `get_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
@@ -1858,7 +1887,7 @@ Lists blocked IPs, users, and user agents (denylist entries), with optional filt
 - Show me blocked IP addresses from yesterday.
 - Check if IP "198.51.100.42" is on the security denylist.
 
-### `upsert_datadog_security_denylist_entry`
+### `upsert_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Adds or updates a denylist block for an IP, user, or user agent with an expiration.
@@ -1867,13 +1896,47 @@ Adds or updates a denylist block for an IP, user, or user agent with an expirati
 - Add user "attacker_user_99" to the blocked entities denylist.
 - Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
 
-### `delete_datadog_security_denylist_entry`
+### `unblock_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Unblocks a previously denylisted entity by setting its expiration in the past.
 
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
+
+### `get_datadog_security_aap_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves one App & API Protection (AAP) custom WAF rule by ID or lists custom rules. Supports filtering by category, status, service, and environment.
+
+- List custom WAF rules that apply to service "checkout-service" in production.
+- Get AAP custom rule "rule-xyz-123".
+
+### `upsert_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+
+- Create a monitoring custom WAF rule for requests to path "/admin".
+- Update AAP custom rule "rule-xyz-123" to block matching traffic.
+- Disable custom rule "rule-xyz-123" without deleting it.
+
+### `delete_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Permanently deletes an AAP custom WAF rule by ID.
+
+- Delete custom WAF rule "rule-xyz-123".
+- Remove the AAP custom rule that monitors requests to "/admin".
+
+### `get_datadog_security_aap_blocking_config`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves the organization-wide AAP blocking and denylist enforcement settings.
+
+- Is AAP blocking enabled for the organization?
+- Is the AAP denylist enforced?
+- Show me the AAP blocking configuration.
 
 ## Session Replay
 
@@ -2199,3 +2262,4 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [68]: /product_analytics/
 [69]: /session_replay/
 [70]: /data_observability/
+[71]: /account_management/audit_trail/
