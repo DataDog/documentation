@@ -52,7 +52,7 @@ If an organization's billable usage of the parent product exceeds their commitme
 
 For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional _spans_ usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
 
-**Note: Beginning August 2026, some accounts will start to see a change in how allotments are treated.** The changes described below will be applied to accounts on a rolling basis. A banner will appear in Plan and Usage under Bill Overview when this change goes into effect. Users can also contact their account representative to understand their current allotment application.
+**Note**: Beginning August 2026, some accounts start to see a change in how allotments are treated. The changes described below are applied to accounts on a rolling basis. A banner appears in Plan and Usage under Bill Overview when this change takes effect. Users can also contact their account representative to understand their current allotment application.
 
 Allotments for products where usage is cumulative over the month (for example, Ingested Spans or Indexed Spans) apply across the whole billing period instead of hour by hour, so unused allotment can carry over to other hours within the same billing period. This can lower on-demand cost.
 
