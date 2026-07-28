@@ -13,6 +13,7 @@ disable_toc: false
 {{< whatsnext desc="See the documentation for information about the following integrations:">}}
     {{< nextlink href="ide_plugins/idea/" >}}<u>JetBrains IDEs</u>: IntelliJ IDEA, GoLand, PyCharm, RubyMine, WebStorm, and PhpStorm{{< /nextlink >}}
     {{< nextlink href="ide_plugins/vscode/" >}}<u>Visual Studio Code</u>{{< /nextlink >}}
+    {{< nextlink href="ide_plugins/vscode/?tab=cursor" >}}<u>Cursor</u>{{< /nextlink >}}
 {{< /whatsnext >}}
 
 
