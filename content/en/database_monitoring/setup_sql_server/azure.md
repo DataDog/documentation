@@ -253,7 +253,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][6].
 [1]: https://app.datadoghq.com/account/settings/agent/latest
 [2]: https://docs.microsoft.com/en-us/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server
 [3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L838
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L841
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [7]: /agent/configuration/agent-commands/#agent-status-and-information
