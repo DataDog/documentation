@@ -96,7 +96,7 @@ The email body goes through several cleanup steps to enhance readability and sec
 
 The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body.
 
-The following field limits apply by default. Values that exceed these limits are truncated:
+Datadog truncates values that exceed these default field limits:
 
 | Field   | Maximum         |
 |---------|-----------------|
