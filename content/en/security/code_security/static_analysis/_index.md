@@ -7,6 +7,9 @@ is_beta: false
 algolia:
   tags: ['static analysis', 'datadog static analysis', 'code quality', 'SAST']
 further_reading:
+- link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+  tag: "Blog"
+  text: "CI/CD security: How to secure your GitHub ecosystem"
 - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
   tag: "Blog"
   text: "Introducing Bits Code for Code Security"
