@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your Java Build Artifacts
+title: Embed Git Information in Java Build Artifacts
+description: Embed Git information in Java build artifacts for containers, serverless, and host deployments.
 ---
 
 ## Overview
@@ -13,7 +14,7 @@ To embed Git information in your Java build artifacts, follow the instructions f
 
 ## Containers
 
-If you are using Docker containers, you have three options: embedding Git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have the following options: embedding Git properties in your build artifact, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Embedded Git properties (recommended)" level="h3" %}}
 {{% sci-java-git-properties %}}
@@ -29,7 +30,7 @@ If you are using Docker containers, you have three options: embedding Git proper
 
 ## Serverless
 
-If you are using Serverless, you have three options depending on your serverless application's setup.
+If you are using Serverless, you have the following options depending on your serverless application's setup.
 
 {{% collapse-content title="Embedded Git properties (recommended)" level="h3" %}}
 {{% sci-java-git-properties %}}
@@ -45,7 +46,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 ## Host
 
-If you are using a host, you have two options.
+If you are using a host, you have the following options.
 
 {{% collapse-content title="Embedded Git properties (recommended)" level="h3" %}}
 {{% sci-java-git-properties %}}

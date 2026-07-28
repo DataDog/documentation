@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your Node.js Build Artifacts
+title: Embed Git Information in Node.js Build Artifacts
+description: Embed Git information in Node.js build artifacts for containers, serverless, and host deployments.
 ---
 
 ## Overview
@@ -15,7 +16,7 @@ To embed Git information in your Node.js build artifacts, follow the instruction
 
 ## Containers
 
-If you are using Docker containers, you have three options: using a bundler plugin, using Docker, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have the following options: using a bundler plugin, using Docker, or configuring your application with `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Bundler plugin" level="h3" %}}
 {{% sci-dd-tags-bundled-node-js %}}
@@ -31,7 +32,7 @@ If you are using Docker containers, you have three options: using a bundler plug
 
 ## Serverless
 
-If you are using Serverless, you have three options depending on your serverless application's setup.
+If you are using Serverless, you have the following options depending on your serverless application's setup.
 
 {{% collapse-content title="Bundler plugin" level="h3" %}}
 {{% sci-dd-tags-bundled-node-js %}}
@@ -47,7 +48,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 ## Host
 
-For host-based environments, you have two options based on your build and deploy configuration.
+For host-based environments, you have the following options based on your build and deploy configuration.
 
 {{% collapse-content title="Bundler plugin" level="h3" %}}
 {{% sci-dd-tags-bundled-node-js %}}

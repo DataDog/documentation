@@ -1,10 +1,11 @@
 ---
-title: Embed Git Information in Your Build Artifacts
+title: Embed Git Information in Build Artifacts
+description: Manually tag telemetry with Git information for languages that lack native support.
 ---
 
 ## Overview
 
-If the language your service is written in is not listed in the [Embed Git information in your build artifacts](/source_code/service-mapping/#embed-git-information-in-your-build-artifacts) section, use this page to manually tag your telemetry with Git information by setting environment variables.
+If the language your service is written in is not [supported natively][2] section, use this page to manually tag your telemetry with Git information by setting environment variables.
 
 ## Prerequisites
 
@@ -24,3 +25,4 @@ Replace `<commitSha>` with the commit SHA used to build your application. You ca
 These environment variables add `git.commit.sha` and `git.repository_url` tags to your APM spans, linking your service to a specific commit in your source code repository.
 
 [1]: /agent/
+[2]: /source_code/service-mapping/#embed-git-information-in-your-build-artifacts

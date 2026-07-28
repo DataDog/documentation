@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your Ruby Build Artifacts
+title: Embed Git Information in Ruby Build Artifacts
+description: Embed Git information in Ruby build artifacts for containers, serverless, and host deployments.
 ---
 
 ## Overview
@@ -13,7 +14,7 @@ To embed Git information in your Ruby build artifacts, follow the instructions f
 
 ## Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with the `DD_TAGS` environment variable.
+If you are using Docker containers, you have the following options: using Docker or configuring your application with the `DD_TAGS` environment variable.
 
 {{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker-ddtags %}}
@@ -25,7 +26,7 @@ If you are using Docker containers, you have two options: using Docker or config
 
 ## Serverless
 
-If you are using Serverless, you have two options depending on your serverless application's setup.
+If you are using Serverless, you have the following options depending on your serverless application's setup.
 
 {{% collapse-content title="Datadog tooling" level="h3" %}}
 {{% sci-dd-serverless %}}

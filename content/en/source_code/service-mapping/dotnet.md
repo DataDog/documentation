@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your .NET Build Artifacts
+title: Embed Git Information in .NET Build Artifacts
+description: Embed Git information in .NET build artifacts for containers, serverless, and host deployments.
 ---
 
 ## Overview
@@ -30,9 +31,8 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 ## Serverless
 
-If you are using Serverless, you have three options depending on your serverless application's setup.
+If you are using Serverless, you have the following options depending on your serverless application's setup.
 
-### Datadog tooling
 {{% collapse-content title="Datadog tooling" level="h3" %}}
 {{% sci-dd-serverless %}}
 {{% /collapse-content %}}
@@ -47,7 +47,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 ## Host
 
-If you are using a host, you have two options: using Microsoft SourceLink or configuring your application with `DD_GIT_*` environment variables.
+If you are using a host, you have the following options: using Microsoft SourceLink or configuring your application with `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Microsoft SourceLink" level="h3" %}}
 {{% sci-microsoft-sourcelink %}}

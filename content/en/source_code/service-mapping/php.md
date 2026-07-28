@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your PHP Build Artifacts
+title: Embed Git Information in PHP Build Artifacts
+description: Embed Git information in PHP build artifacts for containers and host deployments.
 ---
 
 ## Overview
@@ -13,7 +14,7 @@ To embed Git information in your PHP build artifacts, follow the instructions fo
 
 ## Containers
 
-If you are using Docker containers, you have two options: using Docker or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have the following options: using Docker or configuring your application with `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker %}}

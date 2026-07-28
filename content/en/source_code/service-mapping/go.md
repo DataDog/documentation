@@ -1,5 +1,6 @@
 ---
-title: Embed Git Information in Your Go Build Artifacts
+title: Embed Git Information in Go Build Artifacts
+description: Embed Git information in Go build artifacts for containers, serverless, and host deployments.
 ---
 
 ## Overview
@@ -13,7 +14,7 @@ To embed Git information in your Go build artifacts, follow the instructions for
 
 ## Containers
 
-If you are using Docker containers, you have three options: using Docker, using the Datadog SDK, or configuring your application with `DD_GIT_*` environment variables.
+If you are using Docker containers, you have the following options: using Docker, using the Datadog SDK, or configuring your application with `DD_GIT_*` environment variables.
 
 {{% collapse-content title="Docker" level="h3" %}}
 {{% sci-docker %}}
@@ -29,7 +30,7 @@ If you are using Docker containers, you have three options: using Docker, using 
 
 ## Serverless
 
-If you are using Serverless, you have three options depending on your serverless application's setup.
+If you are using Serverless, you have the following options depending on your serverless application's setup.
 
 {{% collapse-content title="Datadog tooling" level="h3" %}}
 {{% sci-dd-serverless %}}
@@ -45,7 +46,7 @@ If you are using Serverless, you have three options depending on your serverless
 
 ## Host
 
-If you are using a host, you have two options.
+If you are using a host, you have the following options.
 
 {{% collapse-content title="Datadog SDK" level="h3" %}}
 {{% sci-dd-tracing-library %}}
