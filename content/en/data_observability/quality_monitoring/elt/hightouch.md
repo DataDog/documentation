@@ -4,7 +4,7 @@ description: Connect Hightouch to Datadog Data Observability to trace lineage fr
 further_reading:
   - link: '/data_observability/'
     tag: 'Documentation'
-    text: 'Learn about Data Observability'
+    text: 'Data Observability Overview'
 ---
 
 ## Overview
@@ -19,7 +19,7 @@ Lineage granularity depends on the sync's model type:
 - **Table-selector models** produce column-level lineage from the sync's field mappings.
 - **dbt models** and **raw SQL models** produce table-level lineage.
 
-Lineage is derived from all [supported data warehouse sources][4].
+Datadog derives lineage from all [supported data warehouse sources][4].
 
 ## Connect Hightouch
 
@@ -31,10 +31,10 @@ Follow the [Hightouch API documentation][1] to generate an API key with read acc
 
 To connect Hightouch to Datadog:
 
-1. Navigate to the [Hightouch integration tile][2].
-2. Enter an **Account Name** to identify this Hightouch account in Datadog. This can be any name you choose.
+1. In Datadog, navigate to the [Hightouch integration tile][2], then go to the **Configuration** tab.
+2. Enter an **Account name** to identify this Hightouch account in Datadog. This can be any name you choose.
 3. Enter your **API Key**.
-4. Click {{< ui >}}Save{{< /ui >}}.
+4. Click {{< ui >}}Create Account{{< /ui >}}.
 
 ## What's next
 
@@ -50,5 +50,5 @@ After the metadata refresh completes, you can explore your Hightouch destination
 
 [1]: https://hightouch.com/docs/developer-tools/api-guide#create-an-api-key
 [2]: https://app.datadoghq.com/integrations/hightouch
-[3]: https://app.datadoghq.com/data-obs/catalog
+[3]: https://app.datadoghq.com/data-obs/catalog?platform=hightouch
 [4]: /data_observability/quality_monitoring/data_warehouses
