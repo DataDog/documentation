@@ -54,8 +54,12 @@
     {{ end }}
 {{ end }}
 
-{{/* Prefixes whose sub-integrations get nested under a parent accordion */}}
-{{ $grouped_prefixes := slice "Kubernetes" "GitLab" "Remote Action" }}
+{{/* Bundles whose sub-integrations get nested under a parent accordion, matched by action FQN prefix */}}
+{{ $grouped_prefixes := slice
+    (dict "prefix" "com.datadoghq.kubernetes." "title" "Kubernetes")
+    (dict "prefix" "com.datadoghq.gitlab." "title" "GitLab")
+    (dict "prefix" "com.datadoghq.remoteaction." "title" "Remote Action")
+}}
 
 <p>Use the list that matches the private action runner you are configuring. Actions available to all runner types are included in each list.</p>
 
@@ -70,10 +74,11 @@
 
     {{ range $title, $fqns := $allowlist }}
         {{ $matched := false }}
+        {{ $first_fqn := index $fqns 0 }}
         {{ range $grouped_prefixes }}
-            {{ if hasPrefix $title . }}
-                {{ $existing := index $grouped . | default dict }}
-                {{ $grouped = merge $grouped (dict . (merge $existing (dict $title $fqns))) }}
+            {{ if hasPrefix $first_fqn .prefix }}
+                {{ $existing := index $grouped .title | default dict }}
+                {{ $grouped = merge $grouped (dict .title (merge $existing (dict $title $fqns))) }}
                 {{ $matched = true }}
             {{ end }}
         {{ end }}
@@ -93,10 +98,10 @@
 
     {{/* Output grouped integrations under a parent accordion */}}
     {{ range $grouped_prefixes }}
-        {{ $children := index $grouped . }}
+        {{ $children := index $grouped .title }}
         {{ if $children }}
 <details>
-  <summary>{{ . }}</summary>
+  <summary>{{ .title }}</summary>
             {{ range $title, $fqns := $children }}
   <details>
     <summary>{{ $title }}</summary>
