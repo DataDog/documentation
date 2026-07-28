@@ -7,7 +7,7 @@ Rule actions extend Workload Protection (Runtime Security) rules beyond detectio
 
 Actions are defined in Agent policy files (`.policy`) under the `actions` field of a rule.
 <div class="alert alert-info">All actions can be configured in Agent policy files (YAML) on the Agent but <code>log</code>, <code>coredump</code>, and <code>network_filter</code> cannot be setup from the UI when creating a rule.
-When you create an Agent rule in the Datadog app, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">Automated Response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">Response</a>.
+When you create an Agent rule in Datadog, you can configure <code>hash</code>, <code>kill</code> (<a href="/security/workload_protection/respond_and_report/#automated-response">Automated Response</a>), and <code>set</code> actions. From a security signal, you can manually apply <code>kill</code> or <code>network_filter</code> to a targeted threat with <a href="/security/workload_protection/respond_and_report/#response">Response</a>.
 </div>
 
 ## Overview
@@ -66,9 +66,9 @@ actions:
 
 {{< /code-block >}}
 
-## set — Store variables
+## `set`: store variables
 
-Use `set` to store state that persists across rules within the same policy. Once defined, a variable can be referenced from any other rule in that policy.
+Use `set` to store state that persists across rules within the same policy. After it is defined, a variable can be referenced from any other rule in that policy.
 
 ### When to use it
 
@@ -83,7 +83,7 @@ Variables are one of the most powerful capabilities in Agent rule authoring. The
 | Field           | Required                                 | Default                         | Description                                                                                      |
 | --------------- | ---------------------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------ |
 | `name`          | Yes                                      | —                               | Variable name. Referenced in expressions as `${name}` or `${scope.name}`.                        |
-| `value`         | One of `value`, `field`, or `expression` | —                               | Static value (string, integer, boolean, or array).                                               |
+| `value`         | One of `value`, `field`, or `expression` | —                               | Static value (string, integer, Boolean, or array).                                               |
 | `field`         | One of `value`, `field`, or `expression` | —                               | Copy a value from the triggering event (for example, `process.file.name`).                       |
 | `expression`    | One of `value`, `field`, or `expression` | —                               | SECL expression whose result is stored. Requires `default_value` if type cannot be inferred.     |
 | `default_value` | No                                       | —                               | Default when using `expression`. Must match the type of `value`.                                 |
@@ -98,7 +98,7 @@ Variables are one of the most powerful capabilities in Agent rule authoring. The
 
 ### Examples
 
-Set a boolean flag:
+Set a Boolean flag:
 
 {{< code-block lang="yaml" >}}
 rules:
@@ -132,13 +132,13 @@ actions:
 
 {{< /code-block >}}
 
-## kill — Terminate a process
+## `kill`: terminate a process
 
 Use `kill` to actively stop malicious activity. The Agent sends a POSIX signal to the target process, container, or cgroup.
 
-### Configure in the Datadog app
+### Configure in Datadog
 
-In addition to defining `kill` actions in Agent policy files, you can configure process termination from the Datadog app:
+In addition to defining `kill` actions in Agent policy files, you can configure process termination in Datadog:
 
 - **Automatic:** Add `kill` actions to Agent rules in a policy, as described in this section, or use [Automated response](/security/workload_protection/respond_and_report/#automated-response).
 - **Manual:** From a security signal, use [Kill containers or processes](/security/workload_protection/investigate_and_triage/security_signals/actions#kill-containers-or-processes) under **Respond** in the signal side panel.
@@ -208,13 +208,13 @@ When a `kill` action runs, the Agent attaches an action report to the triggering
 
 To count how many times a `kill` action ran after a rule match, use the `datadog.runtime_security.rules.action_performed` metric with tags `rule_id:<rule_id>` and `action_name:kill`.
 
-## network_filter — Block network traffic
+## `network_filter`: block network traffic
 
 Use `network_filter` to drop packets matching a BPF filter expression for the offending process or cgroup. This is network isolation at the host level.
 
-### Configure in the Datadog app
+### Configure in Datadog
 
-In addition to defining `network_filter` actions in Agent policy files, you can isolate a compromised workload from the Datadog app:
+In addition to defining `network_filter` actions in Agent policy files, you can isolate a compromised workload in Datadog:
 
 - **Automatic:** Add `network_filter` actions to Agent rules in a policy, as described in this section. When a rule matches, the Agent drops matching traffic automatically.
 - **Manual:** From a security signal, use [Network isolation](/security/workload_protection/investigate_and_triage/security_signals/actions#network-isolation) under **Respond** in the signal side panel.
@@ -274,7 +274,7 @@ When the kernel drops a packet that matches an active filter, the Agent can emit
 
 To track drop counts reliably, use the `datadog.runtime_security.network.raw_packet.dropped` metric.
 
-## hash — Compute file hashes
+## `hash`: compute file hashes
 
 Use `hash` to enrich an event with cryptographic hashes of a file referenced in the triggering event. This is useful for threat intelligence matching and forensic analysis.
 
@@ -310,7 +310,7 @@ actions:
 
 {{< /code-block >}}
 
-## log — Write to Agent logs
+## `log`: write to Agent logs
 
 Use `log` to emit a structured message to the Runtime Security Agent log when a rule fires. This is helpful for debugging custom rules or auditing rule triggers without generating a full security signal.
 
@@ -341,7 +341,7 @@ actions:
 
 {{< /code-block >}}
 
-## coredump — Capture forensic state
+## `coredump`: capture forensic state
 
 Use `coredump` to snapshot internal Agent state at the time of a rule match. The dump is gzip-compressed (unless disabled) and attached to the security event.
 
@@ -435,8 +435,8 @@ Typical patterns:
 
 The Agent validates actions at policy load time:
 
-- **One action type per list item** — `set` and `kill` cannot appear in the same action block.
-- **Required fields** — for example, `kill.signal`, `log.level`, `network_filter.filter`.
-- **Enforcement gate** — `kill` and `network_filter` require enforcement to be enabled.
-- **Event type compatibility** — `network_filter` requires the `raw_packet` event type; `hash.field` must be compatible with the rule's event type.
+- **One action type per list item**: `set` and `kill` cannot appear in the same action block.
+- **Required fields**: for example, `kill.signal`, `log.level`, `network_filter.filter`.
+- **Enforcement gate**: `kill` and `network_filter` require enforcement to be enabled.
+- **Event type compatibility**: `network_filter` requires the `raw_packet` event type; `hash.field` must be compatible with the rule's event type.
 

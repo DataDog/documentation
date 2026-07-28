@@ -87,7 +87,7 @@ When a rule is filtered or in error, a **verdict** explains why:
 | `filtered_event_type_disabled` | The event type is disabled in the configuration. |
 | `filtered_rule_filter` | The rule was excluded by a rule filter. |
 
-To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules, and for each rule shows its expression, status and verdict, and the error message reported by the agent.
+To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules. For each rule, it shows the expression, the status and verdict, and the error message reported by the agent.
 
 {{< img src="security/cws/workload_protection_coverage_map_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
 
