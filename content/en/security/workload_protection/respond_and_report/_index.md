@@ -3,10 +3,6 @@ title: Respond and Report
 disable_toc: false
 site_support_id: workload_security_active_protection
 aliases:
-  - /security/workload_protection/respond_and_report/active_protection
-  - /security/workload_protection/respond_and_report/automated_response
-  - /security/workload_protection/respond_and_report/response
-  - /security/workload_protection/respond_and_report/remediation
   - /security/workload_protection/guide/active-protection
   - /security/cloud_security_management/guide/active-protection
 further_reading:

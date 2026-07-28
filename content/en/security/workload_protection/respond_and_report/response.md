@@ -1,8 +1,6 @@
 ---
 title: Response
 disable_toc: false
-aliases:
-  - /security/workload_protection/respond_and_report/remediation
 further_reading:
 - link: "security/workload_protection/setup"
   tag: "Documentation"
