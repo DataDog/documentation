@@ -14,9 +14,9 @@ further_reading:
 - link: "/getting_started/workflow_automation/"
   tag: "Documentation"
   text: "Getting Started with Workflow Automation"
-- link: "/actions/workflows/access_and_auth/#use-a-service-account"
+- link: "/actions/workflows/access_and_auth/#workflow-identity"
   tag: "Documentation"
-  text: "Find out more about Service Accounts for workflows"
+  text: "Find out more about the identity a workflow runs as"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"
@@ -33,7 +33,7 @@ further_reading:
 
 You can trigger a workflow manually or automatically and a workflow can have multiple triggers. This allows you to trigger a workflow from a variety of different sources, like a Datadog monitor and a Datadog dashboard.
 
-A workflow can either run with the identity of the user who owns it, or with the identity of a service account associated with the workflow. For more information on service accounts, see [Service accounts for Workflow Automation][1].
+A workflow runs with the identity of its owner, the user who triggered the run, or an associated service account. Triggers that fire without a user, such as schedules and webhooks, require the owner or a service account. For more information, see [Workflow identity][1].
 
 {{< img src="actions/workflows/trigger/multiple-triggers.png" alt="A workflow with multiple triggers" style="width:100%;" >}}
 
@@ -262,7 +262,7 @@ In later steps of your workflow, use `Source.api.requestBody` to reference the p
 
 To schedule a workflow run:
 1. On the workflow canvas, click {{< ui >}}Add an Automated Trigger{{< /ui >}} and select {{< ui >}}Schedule{{< /ui >}}.
-1. Click {{< ui >}}Create{{< /ui >}} to create a service account. For more information, see [Use a service account][1].
+1. Click {{< ui >}}Create{{< /ui >}} to create a service account. For more information, see [Use a service account][17].
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the {{< ui >}}Memo{{< /ui >}} field.
 1. Click {{< ui >}}Save{{< /ui >}}.
@@ -292,7 +292,7 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 
 <br>Do you have questions or feedback? Join the {{< ui >}}#workflows{{< /ui >}} channel on the [Datadog Community Slack][7].
 
-[1]: /actions/workflows/access_and_auth/#use-a-service-account
+[1]: /actions/workflows/access_and_auth/#workflow-identity
 [2]: https://app.datadoghq.com/monitors/manage
 [3]: https://app.datadoghq.com/security/configuration/notification-rules
 [4]: /security/cloud_security_management/workflows
@@ -308,3 +308,4 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [14]: https://app.datadoghq.com/software
 [15]: /incident_response/incident_management/setup_and_configuration/automations
 [16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
+[17]: /actions/workflows/access_and_auth/#use-a-service-account
