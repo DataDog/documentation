@@ -60,9 +60,11 @@ Use this method to test a single machine or for devices that are not managed by 
 
 ### Enable Network Path (optional)
 
-Use [Network Path][104] to trace network routes between your devices and destination SaaS applications and see a hop-by-hop view of the traceroute. Enabling Network Path may incur additional charges. See the [pricing page][105] for details.
+<div class="alert alert-info">Enabling Network Path may incur additional charges. See the <a href="https://www.datadoghq.com/pricing/">pricing page</a> for details.</div>
 
-For a single device, enable Network Path through [Fleet Automation][106], Datadog's tool for remote management of the Datadog Agent:
+Use [Network Path][104] to trace network routes between your devices and destination SaaS applications and see a hop-by-hop view of the traceroute.
+
+For a single device, enable Network Path through [Fleet Automation][105], Datadog's tool for remote management of the Datadog Agent:
 
 1. Go to **Fleet Automation** > **Configuration**.
 1. Select **Configure Agents**.
@@ -70,13 +72,11 @@ For a single device, enable Network Path through [Fleet Automation][106], Datado
 1. Select **Network Path** and enter the domains you want to monitor.
 1. Deploy your changes.
 
-
 [101]: /account_management/api-app-keys/
 [102]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
 [103]: https://app.datadoghq.com/end-user-devices
 [104]: /network_monitoring/network_path/setup/
-[105]: https://www.datadoghq.com/pricing/
-[106]: /agent/fleet_automation/
+[105]: /agent/fleet_automation/
 {{% /tab %}}
 {{% tab "MDM deploy with Microsoft Intune" %}}
 
@@ -129,7 +129,7 @@ Create a working folder on your computer, such as `C:\DDPackage\`, and add the f
 
 ### Enable Network Path (optional)
 
-Enabling Network Path may incur additional charges. See the [pricing page][203] for details.
+<div class="alert alert-info">Enabling Network Path may incur additional charges. See the <a href="https://www.datadoghq.com/pricing/">pricing page</a> for details.</div>
 
 To enable scheduled Network Path tests, add the following block to `Install.ps1` before you package the app with the Intune Content Prep Tool. This block enables the `traceroute` system-probe module and writes the `network_path` check configuration.
 
@@ -166,11 +166,11 @@ instances:
 '@ | Set-Content -Path $networkPathConf -Encoding UTF8
 {{< /code-block >}}
 
-On Windows client versions, the `tcp_method` must be set to `syn_socket`. For the full list of configuration options, see the [Network Path setup documentation][204].
+On Windows client versions, the `tcp_method` must be set to `syn_socket`. For the full list of configuration options, see the [Network Path setup documentation][203].
 
 ### Package with the Intune Content Prep Tool
 
-1. Download the [Microsoft Win32 Content Prep Tool][205] (`IntuneWinAppUtil.exe`) if you do not already have it.
+1. Download the [Microsoft Win32 Content Prep Tool][204] (`IntuneWinAppUtil.exe`) if you do not already have it.
 1. Run the tool from PowerShell or Command Prompt to package your files:
 
    {{< code-block lang="powershell" >}}
@@ -184,7 +184,7 @@ IntuneWinAppUtil.exe `
 
 ### Create the Win32 app in Intune
 
-1. In the [Microsoft Intune admin center][206], go to **Apps** > **All apps** and click **Add**.
+1. In the [Microsoft Intune admin center][205], go to **Apps** > **All apps** and click **Add**.
 1. Select **Windows app (Win32)** as the app type and click **Select**.
 1. Upload the `Install.intunewin` file and click **OK**.
 1. Fill in the **App information** tab:
@@ -211,16 +211,14 @@ To confirm that the Agent installed on a device, use one of the following method
 
 - In Intune, go to **Apps** > **All apps** > **Datadog Agent EUDM** and check the **Device install status**. Successful installs appear as **Installed**. If a device shows **Failed**, check `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log` for details.
 - On a target device, open PowerShell and run `& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status`. In the output, confirm that **Status** is `Running` and `infrastructure_mode: end_user_device` is set.
-- In Datadog, go to [**Infrastructure** > **End User Devices**][207]. Enrolled devices appear within 5-10 minutes of the Agent starting.
-
+- In Datadog, go to [**Infrastructure** > **End User Devices**][206]. Enrolled devices appear within 5-10 minutes of the Agent starting.
 
 [201]: /agent/supported_platforms/windows/
 [202]: /getting_started/site/
-[203]: https://www.datadoghq.com/pricing/
-[204]: /network_monitoring/network_path/setup/
-[205]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
-[206]: https://intune.microsoft.com
-[207]: https://app.datadoghq.com/end-user-devices
+[203]: /network_monitoring/network_path/setup/
+[204]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
+[205]: https://intune.microsoft.com
+[206]: https://app.datadoghq.com/end-user-devices
 {{% /tab %}}
 {{< /tabs >}}
 
