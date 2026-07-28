@@ -88,7 +88,7 @@ The following examples assume a variable named `mySequence` with value `[1,2,3,4
 
 This interactive simulator helps you experiment with the Expression Language syntax in a realistic environment. It shows how conditions affect whether data is captured when instrumenting a method.
 
-Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see if the log would be generated based on your condition.
+Select one of the examples or enter an expression in the "when" field and click "SIMULATE" to see whether data is captured based on your condition.
 
 Available variables in this example:
 

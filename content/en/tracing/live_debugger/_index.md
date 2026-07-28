@@ -49,17 +49,20 @@ Live Debugger provides:
 
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
 
-- [Datadog Agent][2] version 7.49.0 or later
-- [Datadog SDK][3] installed
+- The [Datadog Agent][2], version 7.49.0 or later
+- An installed [Datadog SDK][3]
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
-- (Recommended) [Source Code Integration][28] set up
+- (Recommended) [Source Code Integration][28]
 
 ### Enabling Live Debugger
 
-For Java, Python, .NET, and Node.js services that already have an updated SDK version and meet the setup requirements (including the `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` [UST tags][27]), Live Debugger can be enabled directly in the Datadog platform. You can either enable the service and environment from the [Live Debugger Settings page][26], or just start a new Debug Session and the feature will be enabled automatically.
+For Java, Python, .NET, and Node.js services running an updated SDK version, you can enable Live Debugger in Datadog in one of two ways:
 
-For other runtime languages or older SDK versions, use the configuration steps below. Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
+- On the [Live Debugger Settings page][26], enable the service and environment.
+- Start a Debug Session. Live Debugger is enabled automatically.
+
+For other runtime languages (Ruby, PHP, and Go) or older SDK versions, see the manual configuration steps below. Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
 You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
@@ -82,7 +85,7 @@ java \
     -jar <YOUR_SERVICE>.jar
 ```
 
-**Note**: On JDK 18 and below, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument.
+**Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -219,11 +222,11 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 #### Enablement modes
 
-Each service and environment is in one of three modes on the Live Debugger Settings page:
+On the [Live Debugger Settings page][26], you can check and update the enablement status of each service and environment. Each is in one of three modes:
 
-- **Automatic**: Live Debugger has not been set to Enabled or Disabled yet on this service and environment. This setting changes to **Enabled** automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to **Enabled** in advance.
-- **Enabled**: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
-- **Disabled**: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or SDK version.
+- {{< ui >}}Automatic{{< /ui >}}: Live Debugger has not been set to {{< ui >}}Enabled{{< /ui >}} or {{< ui >}}Disabled{{< /ui >}} yet on this service and environment. This setting changes to {{< ui >}}Enabled{{< /ui >}} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {{< ui >}}Enabled{{< /ui >}} in advance.
+- {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
+- {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or SDK version.
 
 ### Permissions
 
@@ -286,8 +289,8 @@ Live Debugger data might contain sensitive information, especially when using th
 
 Live Debugger has two redaction modes:
 
-- **Strict Mode**: Redacts all values except numbers and Booleans. Bits Live Debugger is not available for service and environment combinations set to Strict Mode.
-- **Targeted Mode**: Redacts known sensitive patterns such as credit card numbers, API keys, and IPs. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans. Bits Live Debugger is not available for service and environment combinations set to {{< ui >}}Strict Mode{{< /ui >}}.
+- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, and IPs. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
 These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
@@ -352,4 +355,3 @@ The following constraints apply to Live Debugger usage and configuration:
 [26]: https://app.datadoghq.com/debugging/settings
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/
-[29]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file

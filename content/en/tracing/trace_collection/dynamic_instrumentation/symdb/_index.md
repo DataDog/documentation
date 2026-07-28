@@ -47,9 +47,11 @@ Select your runtime below:
 
 ## Explore autocomplete and search
 
-Autocomplete and search make Dynamic Instrumentation behave more like an IDE by supporting class and method search, code display, and expression autocomplete.
+Autocomplete and search make Dynamic Instrumentation behave more like an IDE:
 
-Use class and method search to find where to add instrumentation. When you select a method in the Dynamic Instrumentation configuration, Datadog displays the code for that method. Dynamic Instrumentation also provides autocomplete for expression templates that use the [Dynamic Instrumentation expression language][5].
+- **Class and method search**: Find where to add instrumentation.
+- **Code display**: When you select a method in the Dynamic Instrumentation configuration, Datadog displays the code for that method.
+- **Expression autocomplete**: Get suggestions for expression templates that use the [Dynamic Instrumentation expression language][5].
 
 ## Further Reading
 
