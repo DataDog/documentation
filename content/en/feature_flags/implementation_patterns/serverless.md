@@ -26,7 +26,7 @@ Agentless configuration delivery is available in:
 
 | SDK | Minimum version |
 |---|---|
-| Java (`dd-java-agent` and `dd-openfeature`) | 1.65.0 |
+| Java tracer | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
@@ -55,7 +55,7 @@ Tracer installation and initialization alone do not start CDN polling. Requests 
 
 Agentless mode removes the Agent dependency for _flag configuration_. It does not change your APM or serverless telemetry setup. You can continue to use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
 
-## Agent-backed remote configuration
+## Agent-backed Remote Configuration
 
 Set `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` to explicitly use the existing Agent Remote Configuration path:
 
@@ -85,7 +85,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 - **API key ownership**: In agentless mode, the application owns `DD_API_KEY`. In `remote_config` mode, the Agent owns the API key.
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
-- **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an unsupported runtime compatible with the tracer. Check the tracer's compatibility requirements.
+- **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Java or Node.js runtime compatible with the tracer. Check the tracer's compatibility requirements.
 - **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths. Evaluations then return caller-provided default values.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
@@ -102,13 +102,13 @@ Java and Node.js Lambda functions can use agentless configuration delivery when 
 
 Java and Node.js workloads can use agentless configuration delivery when the tracer is supported in the selected runtime and outbound HTTPS is available. This applies independently of in-container or sidecar telemetry instrumentation.
 
-### Azure functions
+### Azure Functions
 
 Java and Node.js function apps can use agentless configuration delivery when the tracer is supported and outbound HTTPS is available. An external Agent is only required when `remote_config` is selected.
 
 ### Edge runtimes
 
-Some edge runtimes do not support the tracer APIs required by the Feature Flags provider. Verify tracer compatibility for the target platform before relying on agentless configuration delivery.
+Some edge runtimes do not support the Datadog Java or Node.js tracer APIs required by the Feature Flags provider. Verify tracer compatibility for the target platform before relying on agentless configuration delivery.
 
 ## Public API and local evaluation
 

@@ -106,7 +106,7 @@ Flag evaluation metrics require a supported Agent-backed configuration. See [Set
 
 ## Configuration
 
-### Configure Agentless delivery
+### Configure agentless delivery
 
 Configure the API key, Datadog site, and environment in the application process:
 
@@ -126,7 +126,7 @@ No Feature Flags enablement or source setting is required. Initialize the Datado
 
 For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
-## Initialize the provider
+## Initialize the OpenFeature provider
 
 Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog Java tracer.
 
@@ -393,7 +393,7 @@ The `Provider` instance is shared globally. Client names are for organizational 
 ## Best practices
 
 ### Initialize early
-Initialize the OpenFeature provider early in your application life cycle, such as in `main()` or during application startup. This loads flags before business logic executes.
+Initialize the OpenFeature provider as early as possible in your application lifecycle (for example, in `main()` or application startup). This helps ensure flags are ready before business logic executes.
 
 ### Use meaningful default values
 Always provide sensible default values that maintain safe behavior if flag evaluation fails:
@@ -420,7 +420,7 @@ boolean featureA = client.getBooleanValue("feature.a", false, userContext);
 boolean featureB = client.getBooleanValue("feature.b", false, userContext);
 {{< /code-block >}}
 
-Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request life cycle, then pass it to all subsequent flag evaluations.
+Rebuilding the evaluation context for every flag evaluation adds unnecessary overhead. Create the context once at the start of the request lifecycle, then pass it to all subsequent flag evaluations.
 
 ### Handle initialization failures (optional)
 Consider handling initialization failures if your application can function with default flag values:
@@ -512,7 +512,7 @@ class CheckoutFlagTest {
 
 `OpenFeatureAPI.getInstance()` is a singleton. Always call `shutdown()` in `@AfterEach` (or equivalent); otherwise, provider state leaks between test classes and causes flaky suites.
 
-In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfiguration` bean or a `@BeforeAll` hook on an `@SpringBootTest` class. The OpenFeature API singleton persists for the lifetime of the Spring context, so initialize it one time.
+In Spring Boot tests, register the `InMemoryProvider` through a `@TestConfiguration` bean or in a `@BeforeAll` hook on an `@SpringBootTest` class — the OpenFeature API singleton persists for the lifetime of the Spring context, so initialization only needs to run once.
 
 ## Troubleshooting
 
@@ -538,7 +538,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 6. Confirm that the application can make outbound HTTPS requests to Datadog.
 7. Enable `DD_TRACE_DEBUG=true` and check for authentication, timeout, or malformed-payload messages from the Feature Flags agentless endpoint.
 
-#### Agent remote configuration
+#### Agent Remote Configuration
 
 1. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no source is set.
 2. Confirm that `DD_FEATURE_FLAGS_ENABLED` is not set to `false`.
@@ -548,7 +548,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 6. Confirm that `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
 7. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
 
-### 3. Verify Java SDK state
+### 3. SDK: Verify Java SDK state
 
 #### Enable debug logging
 
@@ -625,7 +625,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 `TYPE_MISMATCH` is returned when the evaluation method does not match the flag's configured type. Use the correct method for each flag type: `getBooleanValue()`, `getStringValue()`, `getIntegerValue()`, `getDoubleValue()`.
 
-### 4. Verify feature flags telemetry
+### 4. Flagging platform: Verify data appears in Datadog
 
 <div class="alert alert-warning">Java 1.65.0 does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. Their absence in a no-Agent deployment is expected and does not indicate that configuration loading or local evaluation failed.</div>
 
