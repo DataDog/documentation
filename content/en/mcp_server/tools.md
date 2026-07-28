@@ -380,78 +380,78 @@ Retrieves full details of a specific APM recommendation by ID.
 
 ## Cases (Work Management)
 
-Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
+Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Searches [Work Management][38] work items with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
+Searches [Case Management][38] cases with filters including status, priority, project, and assignee. Supports time range filtering and pagination.
 
-- Show me all open work items assigned to me.
-- Are there any open P1 work items in the Security Reviews project?
-- Show me all work items opened this week related to the payment service.
+- Show me all open cases assigned to me.
+- Are there any open P1 cases in the Security Reviews project?
+- Show me all cases opened this week related to the payment service.
 
 ### `get_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves detailed information about a specific work item by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
+Retrieves detailed information about a specific case by ID or key, including title, status, priority, assignee, and timestamps. Optionally includes timeline activity (comments and status changes) and custom attributes.
 
 - What's the latest update on CASE-1234? Show me the full timeline.
-- Who's working on this work item and what progress has been made so far?
-- Pull up the details and all comments for the database migration work item.
+- Who's working on this case and what progress has been made so far?
+- Pull up the details and all comments for the database migration case.
 
 ### `create_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Creates a new [Work Management][38] work item with a title, project, and optional fields like description, priority, and assignee.
+Creates a new [Case Management][38] case with a title, project, and optional fields like description, priority, and assignee.
 
-- I'm seeing a latency spike on the checkout service. Create a P2 work item to track the investigation.
-- Open a security review work item for the suspicious login activity we found in the logs.
+- I'm seeing a latency spike on the checkout service. Create a P2 case to track the investigation.
+- Open a security review case for the suspicious login activity we found in the logs.
 
 ### `update_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Updates an existing work item's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
+Updates an existing case's fields such as status, priority, title, description, assignee, due date, and custom attributes. Only the fields you provide are updated.
 
 - This issue is now customer-impacting. Escalate CASE-1234 to P1.
-- Mark the database migration work item as resolved.
+- Mark the database migration case as resolved.
 - Set a due date for end of week on CASE-1234.
 
 ### `add_comment_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*\
-Adds a comment to a work item's timeline. Comments support markdown formatting.
+Adds a comment to a case's timeline. Comments support markdown formatting.
 
-- Add a note to the work item summarizing what we found in the logs and traces.
+- Add a note to the case summarizing what we found in the logs and traces.
 - Post an update that the hotfix has been deployed and we're monitoring.
-- Document the root cause analysis findings on this work item.
+- Document the root cause analysis findings on this case.
 
 ### `link_jira_issue_to_datadog_case`
 *Toolset: **cases***\
 *Permissions Required: `Cases Write`*
 
-- Link the Jira ticket for the infrastructure migration to this work item so we can track both together.
-- Connect PROJ-456 to the Datadog work item so the engineering team has visibility.
+- Link the Jira ticket for the infrastructure migration to this case so we can track both together.
+- Connect PROJ-456 to the Datadog case so the engineering team has visibility.
 
 ### `list_datadog_case_projects`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Lists available [Work Management][38] projects with optional filtering by name or key.
+Lists available [Case Management][38] projects with optional filtering by name or key.
 
-- What projects are available in Work Management?
-- Is there a project related to security in Work Management?
+- What projects are available in Case Management?
+- Is there a project related to security in Case Management?
 
 ### `get_datadog_case_project`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
-Retrieves details for a specific work item project by ID.
+Retrieves details for a specific case project by ID.
 
-- What project is this work item part of?
+- What project is this case part of?
 
 ### `search_datadog_users`
 *Toolset: **cases***\
 *Permissions Required: `User Access Read`*\
-Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a work item to.
+Searches for Datadog users by email, name, or handle. Useful for finding the right person to assign a case to.
 
 - Find the Datadog user account for jane.doe@example.com.
 
@@ -1739,25 +1739,25 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_data
 ### `get_datadog_security_findings_ticket_suggestions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
-Returns ranked project suggestions for ticketing security findings. Shows available Work Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 
 - What Jira projects can I use to create tickets for security findings?
 - Show me available ServiceNow projects for ticketing.
-- Which Work Management projects are most used for findings?
+- Which Case Management projects are most used for findings?
 
 ### `create_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
-Creates a Work Management work item, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 
 - Create a Jira ticket for these critical findings in project SECURITY.
-- Open a Work Management work item for the findings from this rule.
+- Open a Case Management case for the findings from this rule.
 - Create a ServiceNow ticket for these library vulnerabilities.
 
 ### `detach_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Write`*\
-Detaches security findings from their linked work item or ticket. Since Jira and ServiceNow tickets are linked through Work Management, detaching the work item also detaches any downstream ticket.
+Detaches security findings from their linked case or ticket. Since Jira and ServiceNow tickets are linked through Case Management, detaching the case also detaches any downstream ticket.
 
 - Detach these findings from their linked Jira ticket.
 - Remove the case association for these findings.
