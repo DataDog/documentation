@@ -482,7 +482,7 @@ To avoid exposing the `datadog` user's password in plain text, use the Agent's [
 [1]: /agent/cluster_agent
 [2]: /agent/cluster_agent/clusterchecks/
 [3]: /containers/kubernetes/installation/?tab=helm#installation
-[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L838
+[4]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L841
 [5]: /agent/configuration/secrets-management
 [6]: /containers/kubernetes/integrations/?tab=datadogoperator
 {{% /tab %}}
