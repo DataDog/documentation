@@ -67,7 +67,7 @@ In the following example, the 50 units of allotment left unused in the first two
 
 For products measured on a concurrent count, peak, or average (such as hosts, containers, and custom metrics), the allotment applies at each point in time rather than as a monthly budget. There is no unused amount to carry across hours, so behavior for these products is unchanged.
 
-This change does not apply to usage billed through an external marketplace (for example, AWS, Azure, or GCP), where allotments continue to apply per hour.
+This change does not apply to usage billed through an external marketplace (for example, AWS, Azure, or Google Cloud), where allotments continue to apply per hour.
 
 Until an account is transitioned, allotments still apply per hour as described above. In all cases, allotments do not carry over between billing periods: any remainder at the end of the metering period is not applicable in the next period.
 
