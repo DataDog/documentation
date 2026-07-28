@@ -201,6 +201,10 @@ func main() {
 
 [1]: https://pkg.go.dev/github.com/DataDog/dd-trace-go/v2
 
+<div class="alert alert-warning">
+If your application uses the <code>pgx</code> driver (directly or through <code>database/sql</code>), enabling <code>full</code> propagation mode can cause a significant increase in query latency. The <code>pgx</code> driver caches prepared statements by query text. The trace context that <code>full</code> mode injects into each query makes every query text unique. This defeats the cache and forces the database to re-plan each query. If you observe increased latency after enabling <code>full</code> mode with <code>pgx</code>, switch to <code>service</code> mode.
+</div>
+
 {{% /tab %}}
 
 {{% tab "Java" %}}
