@@ -77,7 +77,7 @@ Source-specific requirements are:
 
 ## Agentless configuration
 
-Configure the application process for Java 1.65.0 or later. For Node.js, use `dd-trace` 5.116.0 or later on v5, or 6.5.0 or later on v6.
+On a [supported SDK version](#configuration-delivery), configure the application process:
 
 {{< code-block lang="bash" >}}
 # Required for direct configuration delivery

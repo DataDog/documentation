@@ -25,7 +25,7 @@ This page describes how to instrument a Java application with the Datadog Featur
 
 The Java SDK integrates with the Datadog Java tracer (`dd-trace-java`) and implements the [OpenFeature](https://openfeature.dev/) standard.
 
-<div class="alert alert-warning">Java 1.65.0 supports agentless configuration delivery and local flag evaluation only. It does not support evaluation metrics, exposure logging, or experimentation use cases in agentless mode.</div>
+<div class="alert alert-warning">In agentless mode, Java 1.65.0 supports configuration delivery and local flag evaluation only. It does not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
 ## Compatibility requirements
 
@@ -627,7 +627,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 ### 4. Flagging platform: Verify data appears in Datadog
 
-<div class="alert alert-warning">Java 1.65.0 does not provide agentless delivery for exposure events or aggregate <code>flagevaluation</code> events. Their absence in a no-Agent deployment is expected and does not indicate that configuration loading or local evaluation failed.</div>
+<div class="alert alert-warning">Java 1.65.0 does not send exposure events or the <code>feature_flag.evaluations</code> metric without an Agent. Their absence in a no-Agent deployment is expected and does not indicate that configuration loading or local evaluation failed.</div>
 
 #### Flag evaluation metrics
 

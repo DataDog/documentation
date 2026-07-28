@@ -70,7 +70,7 @@ Set `DD_SITE` to your organization's Datadog site. For the site selected on this
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds in Node.js. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Node.js caps values at 3600 seconds. Java does not apply this cap. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:

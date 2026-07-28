@@ -108,7 +108,7 @@ Java and Node.js function apps can use agentless configuration delivery when the
 
 ### Edge runtimes
 
-Some edge runtimes do not support the Datadog Java or Node.js tracer APIs required by the Feature Flags provider. Verify tracer compatibility for the target platform before relying on agentless configuration delivery.
+Some edge runtimes do not support the Datadog Node.js tracer APIs required by the Feature Flags provider. Verify tracer compatibility for the target platform before relying on agentless configuration delivery.
 
 ## Public API and local evaluation
 
