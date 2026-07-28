@@ -262,7 +262,7 @@ In later steps of your workflow, use `Source.api.requestBody` to reference the p
 
 To schedule a workflow run:
 1. On the workflow canvas, click {{< ui >}}Add an Automated Trigger{{< /ui >}} and select {{< ui >}}Schedule{{< /ui >}}.
-1. Click {{< ui >}}Create{{< /ui >}} to create a service account. For more information, see [Use a service account][17].
+1. Click {{< ui >}}Create{{< /ui >}} to create a service account. For more information, see [Run as a service account][17].
 1. Enter a time and frequency for the run.
 1. (Optional) Enter a description for the workflow in the {{< ui >}}Memo{{< /ui >}} field.
 1. Click {{< ui >}}Save{{< /ui >}}.
@@ -308,4 +308,4 @@ After you trigger a workflow, the workflow page switches to the workflow's {{< u
 [14]: https://app.datadoghq.com/software
 [15]: /incident_response/incident_management/setup_and_configuration/automations
 [16]: /incident_response/incident_management/setup_and_configuration/notification_rules/
-[17]: /actions/workflows/access_and_auth/#use-a-service-account
+[17]: /actions/workflows/access_and_auth/#run-as-a-service-account
