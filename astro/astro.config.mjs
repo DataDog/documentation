@@ -12,7 +12,8 @@ const websitesModules = realpathSync(
     new URL("../../../../../../dd/websites-modules", import.meta.url),
   ),
 );
-const hugoSite = fileURLToPath(new URL("..", import.meta.url));
+const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
+const astroSite = fileURLToPath(new URL(".", import.meta.url));
 
 const proxied = process.env.PROXIED === "1";
 const proxyPort = 1314;
@@ -59,7 +60,7 @@ export default defineConfig({
   vite: {
     server: {
       fs: {
-        allow: [hugoSite, websitesModules],
+        allow: [astroSite, hugoSite, websitesModules],
       },
       ...(proxied && {
         origin: `http://localhost:${proxyPort}`,

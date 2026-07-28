@@ -11,7 +11,7 @@ const fixture = path.resolve(__dirname, "tests/fixtures/api");
 // decoupled from the live Hugo spec. The @hugo-site alias is applied by an
 // earlier plugin, so by the time our resolveId fires the ids are already
 // absolute paths — we match on those absolute paths, not on the alias strings.
-const docRoot = path.resolve(__dirname, "..");
+const docRoot = path.resolve(__dirname, "../hugo");
 function buildLiveToFixtureMap(): Record<string, string> {
   const raw: Record<string, string> = {
     [path.join(docRoot, "data/api/v1/full_spec.yaml")]: path.join(
