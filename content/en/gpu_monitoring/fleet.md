@@ -9,26 +9,39 @@ further_reading:
 
 ## Overview
 
-The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's built-in provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
+[GPU Fleet Explorer][0] provides a detailed breakdown across AI infrastructure (like GPU devices, hosts, or Ray clusters) and AI workloads (Pods, Kube Containers, or Training Runs) for a specified time. Use this page to uncover provisioning inefficiencies and workload performance optimizations through rich resource telemetry covering GPU utilization, host-level metrics, and costs. This page also surfaces Datadog's proactive real-time detection of any issues impacting your fleet and workloads, alongside guidance on how to remediate those issues, to help you maximize the value of your GPU spend.
+
+## Detect issues with out-of-the-box monitors
+
+Datadog provides several out-of-the-box (OOTB) monitor templates that detect common GPU issues in real time, including temperature spikes, power cap throttling, unmet GPU requests, XID errors, ECC errors, bursty workloads, and idle devices. You can customize any monitor's thresholds to fit your organization's needs.
+
+To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in the top-right corner of the page.
+
+{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the GPU Fleet page, showing OOTB monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices" style="width:40%;" >}}
 
 ## Break down your fleet by any tag
+
+GPU Fleet Explorer gives you visibility from your AI workloads down to the AI infrastructure they rely on, letting you pivot between workload entities like pods and training runs, and infrastructure entities like devices, hosts, and clusters.
+
+{{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
 Use quick filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
 You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, with {{< ui >}}Host{{< /ui >}} selected, group by `Team` to view a table entry for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
 
-**Note**: You can only {{< ui >}}Group by{{< /ui >}} one additional tag.
-
-If you select {{< ui >}}Cluster{{< /ui >}} or {{< ui >}}Host{{< /ui >}}, you can click on the {{< ui >}}>{{< /ui >}} button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
+You can click on the {{< ui >}}>{{< /ui >}} button next to each table row entry to view the group's respective devices.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
-**Note**: The Cluster table is only populated if you use Kubernetes.
+**Note**: Kube Clusters, Pods, and Containers options in the side navigation are only available if you use Kubernetes.
 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
-## Use-case driven views
-Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
+## Use case-driven views
+GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven views:
+
+- **Provisioning**: Allocate capacity and manage quotas.
+- **Performance**: Optimize workload efficiency and throughput.
 
 ### Provisioning
 The {{< ui >}}Provisioning{{< /ui >}} tab shows key recommendations and metrics insights for allocating and managing your capacity. 
