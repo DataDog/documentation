@@ -202,7 +202,7 @@ Once all Agent configuration is complete, [restart the Datadog Agent][9].
 
 [1]: https://app.datadoghq.com/account/settings/agent/latest?platform=windows
 [2]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/datadog_checks/sqlserver/data/conf.yaml.example
-[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L838
+[3]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L797-L841
 [4]: https://docs.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode
 [5]: /getting_started/tagging/unified_service_tagging
 [6]: https://docs.microsoft.com/en-us/sql/ado/microsoft-activex-data-objects-ado
