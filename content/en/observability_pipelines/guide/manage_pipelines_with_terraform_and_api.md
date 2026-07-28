@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-If you manage hundreds of clusters per client and need to streamline operations and minimize errors, you can use the API or Terraform to programmatically manage Observability Pipelines. This guide describes how to configure and update your pipelines with the [API](#manage-pipelines-with-the-api) or [Terraform](#manage-pipelines-with-terraform).
+If you manage many Observability Pipelines deployments and want to reduce manual configuration errors, you can use the API or Terraform to programmatically manage your pipelines. This guide describes how to configure and update your pipelines with the [API](#manage-pipelines-with-the-api) or [Terraform](#manage-pipelines-with-terraform).
 
 ## Prerequisites
 
@@ -32,9 +32,11 @@ You can perform CRUD (Create, Read, Update, Delete) operations with the Observab
 - `<DD_API_KEY>` with your Datadog API key
 - `<DD_APP_KEY>` with your Datadog application key
 
+The example payloads also include sample `id` values (such as `my-processor-group` and `datadog-agent-source`) for sources, processors, and destinations. These are names you choose and can rename to fit your own conventions. The `type` values (such as `datadog_agent`, `filter`, and `datadog_logs`) are fixed and must match a supported component type.
+
 ### Create a pipeline
 
-To [create a pipeline][4], construct a JSON payload that defines your pipeline's configuration and then send a `POST` request to the API endpoint. The endpoint accepts a JSON payload defining the pipeline's name and its main components: sources, processors, and destinations.
+To [create a pipeline][4], send a `POST` request with a JSON payload that defines the pipeline's name and its main components: sources, processors, and destinations.
 
 Example request:
 
@@ -78,7 +80,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipeli
 
 ### Retrieve a pipeline configuration
 
-To audit or verify an existing pipeline configuration, send a [`GET` request][5] with the specific pipeline ID.
+To [audit or verify an existing pipeline configuration][5], send a `GET` request with the specific pipeline ID.
 
 Example request:
 
@@ -124,7 +126,7 @@ curl -X PUT "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelin
 
 ### Delete a pipeline
 
-To [delete a pipeline][7], send a `DELETE` request to the corresponding endpoint. A successful deletion results in an appropriate status code indicating that the pipeline has been removed.
+To [delete a pipeline][7], send a `DELETE` request to the corresponding endpoint. A successful deletion results in a `204` status code indicating that the pipeline has been removed.
 
 **Note**: The delete operation is irreversible. Use this endpoint only when you're certain that the pipeline is no longer needed.
 
