@@ -22,21 +22,22 @@ There are two ways to deploy the Datadog Agent on Windows devices for End User D
 
 <div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
-## Manual install (single device)
+{{< tabs >}}
+{{% tab "Manual install" %}}
 
 Use this method to test a single machine or for devices that are not managed by an MDM solution.
 
 ### Prerequisites
 
 - Administrator access on the Windows device.
-- A valid Datadog API key. For instructions, see [API and Application Keys][1].
+- A valid Datadog API key. For instructions, see [API and Application Keys][101].
 - Windows 10 (64-bit) or Windows 11.
 - PowerShell 5.1 or later.
 - An active internet connection on the device.
 
 ### Install the Agent
 
-1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}Windows{{< /ui >}}][2].
+1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}Windows{{< /ui >}}][102].
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
 1. Copy the provided installation command beginning with `[System.Net.ServicePointManager]::SecurityProtocol =`.
 1. Right-click the **Start** menu and select **Windows PowerShell (Admin)** or **Terminal (Admin)**. Click **Yes** on the User Account Control prompt.
@@ -55,13 +56,13 @@ Use this method to test a single machine or for devices that are not managed by 
     - **Status** is `Running`.
     - `infrastructure_mode: end_user_device` is set.
 
-1. In Datadog, go to [**Infrastructure** > **End User Devices**][4]. Your device appears within 5-10 minutes. If it does not appear after 15 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+1. In Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 15 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
 ### Enable Network Path (optional)
 
-Use [Network Path][5] to trace network routes between your devices and destination SaaS applications and see a hop-by-hop view of the traceroute.
+Use [Network Path][104] to trace network routes between your devices and destination SaaS applications and see a hop-by-hop view of the traceroute. Enabling Network Path may incur additional charges. See the [pricing page][105] for details.
 
-For a single device, enable Network Path through [Fleet Automation][6], Datadog's tool for remote management of the Datadog Agent:
+For a single device, enable Network Path through [Fleet Automation][106], Datadog's tool for remote management of the Datadog Agent:
 
 1. Go to **Fleet Automation** > **Configuration**.
 1. Select **Configure Agents**.
@@ -69,7 +70,15 @@ For a single device, enable Network Path through [Fleet Automation][6], Datadog'
 1. Select **Network Path** and enter the domains you want to monitor.
 1. Deploy your changes.
 
-## MDM deploy with Microsoft Intune (multiple devices)
+
+[101]: /account_management/api-app-keys/
+[102]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[103]: https://app.datadoghq.com/end-user-devices
+[104]: /network_monitoring/network_path/setup/
+[105]: https://www.datadoghq.com/pricing/
+[106]: /agent/fleet_automation/
+{{% /tab %}}
+{{% tab "MDM deploy with Microsoft Intune" %}}
 
 This method packages the Datadog Agent MSI and a PowerShell configuration script into an Intune Win32 app, which Intune pushes to enrolled Windows devices in the background. No manual steps are needed on each device.
 
@@ -77,7 +86,7 @@ This method packages the Datadog Agent MSI and a PowerShell configuration script
 
 Create a working folder on your computer, such as `C:\DDPackage\`, and add the following three files:
 
-- **The Datadog Agent MSI.** [Download the latest Agent MSI from Datadog][9] and place it in the folder. The file is named similar to `datadog-agent-7-latest.amd64.msi`.
+- **The Datadog Agent MSI.** [Download the latest Agent MSI from Datadog][201] and place it in the folder. The file is named similar to `datadog-agent-7-latest.amd64.msi`.
 - **`Install.ps1`.** Create this file with the following content, replacing the placeholder with your API key:
 
     ```powershell
@@ -104,7 +113,7 @@ Create a working folder on your computer, such as `C:\DDPackage\`, and add the f
     Write-Host 'Datadog Agent installation complete.'
     ```
 
-    - If your Datadog site is not US1, update `$site` to match. For the list of sites, see [Datadog sites][3].
+    - If your Datadog site is not US1, update `$site` to match. For the list of sites, see [Datadog sites][202].
 
     - For production deployments, avoid hardcoding the API key in the script. Consider storing the key in an Intune Proactive Remediations environment variable, or deploy it separately using the Intune Win32 app SYSTEM context.
 
@@ -119,6 +128,8 @@ Create a working folder on your computer, such as `C:\DDPackage\`, and add the f
     ```
 
 ### Enable Network Path (optional)
+
+Enabling Network Path may incur additional charges. See the [pricing page][203] for details.
 
 To enable scheduled Network Path tests, add the following block to `Install.ps1` before you package the app with the Intune Content Prep Tool. This block enables the `traceroute` system-probe module and writes the `network_path` check configuration.
 
@@ -155,11 +166,11 @@ instances:
 '@ | Set-Content -Path $networkPathConf -Encoding UTF8
 {{< /code-block >}}
 
-On Windows client versions, the `tcp_method` must be set to `syn_socket`. For the full list of configuration options, see the [Network Path setup documentation][5].
+On Windows client versions, the `tcp_method` must be set to `syn_socket`. For the full list of configuration options, see the [Network Path setup documentation][204].
 
 ### Package with the Intune Content Prep Tool
 
-1. Download the [Microsoft Win32 Content Prep Tool][7] (`IntuneWinAppUtil.exe`) if you do not already have it.
+1. Download the [Microsoft Win32 Content Prep Tool][205] (`IntuneWinAppUtil.exe`) if you do not already have it.
 1. Run the tool from PowerShell or Command Prompt to package your files:
 
    {{< code-block lang="powershell" >}}
@@ -173,7 +184,7 @@ IntuneWinAppUtil.exe `
 
 ### Create the Win32 app in Intune
 
-1. In the [Microsoft Intune admin center][8], go to **Apps** > **All apps** and click **Add**.
+1. In the [Microsoft Intune admin center][206], go to **Apps** > **All apps** and click **Add**.
 1. Select **Windows app (Win32)** as the app type and click **Select**.
 1. Upload the `Install.intunewin` file and click **OK**.
 1. Fill in the **App information** tab:
@@ -200,18 +211,19 @@ To confirm that the Agent installed on a device, use one of the following method
 
 - In Intune, go to **Apps** > **All apps** > **Datadog Agent EUDM** and check the **Device install status**. Successful installs appear as **Installed**. If a device shows **Failed**, check `C:\ProgramData\Microsoft\IntuneManagementExtension\Logs\IntuneManagementExtension.log` for details.
 - On a target device, open PowerShell and run `& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status`. In the output, confirm that **Status** is `Running` and `infrastructure_mode: end_user_device` is set.
-- In Datadog, go to [**Infrastructure** > **End User Devices**][4]. Enrolled devices appear within 5-10 minutes of the Agent starting.
+- In Datadog, go to [**Infrastructure** > **End User Devices**][207]. Enrolled devices appear within 5-10 minutes of the Agent starting.
+
+
+[201]: /agent/supported_platforms/windows/
+[202]: /getting_started/site/
+[203]: https://www.datadoghq.com/pricing/
+[204]: /network_monitoring/network_path/setup/
+[205]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
+[206]: https://intune.microsoft.com
+[207]: https://app.datadoghq.com/end-user-devices
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /account_management/api-app-keys/
-[2]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
-[3]: /getting_started/site/
-[4]: https://app.datadoghq.com/end-user-devices
-[5]: /network_monitoring/network_path/setup/
-[6]: /agent/fleet_automation/
-[7]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
-[8]: https://intune.microsoft.com
-[9]: /agent/supported_platforms/windows/
