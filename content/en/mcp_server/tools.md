@@ -378,7 +378,7 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
-## Cases
+## Cases (Work Management)
 
 Tools for [Work Management][38], including creating, searching, and updating work items; managing projects; and linking Jira issues.
 

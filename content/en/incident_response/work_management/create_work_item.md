@@ -24,7 +24,6 @@ Work items can be created [manually](#manual-work-item-creation), [automatically
 1. Click **New Work Item**.
 1. Fill in a title for the work item.
 1. Select a [work item type](#work-item-types).
-1. Add a title.
 1. (Optional) Add a description.
 1. Click **Create Work Item** to complete.
 

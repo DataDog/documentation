@@ -79,7 +79,7 @@ The **Jira** tab lists the Jira tickets assigned to you, grouped by status categ
 
 ### Work Items
 
-The **Cases** tab lists the Datadog Work Management work items assigned to you, grouped by status: **Open**, **In Progress**, and **Closed**. Each group shows a count.
+The **Work Items** tab lists the Datadog Work Management work items assigned to you, grouped by status: **Open**, **In Progress**, and **Closed**. Each group shows a count.
 
 Each work item includes:
 
