@@ -36,10 +36,11 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 | SDK | Minimum agentless version |
 |---|---|
+| Java (`dd-java-agent` and `dd-openfeature`) | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">The initial Java and Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
 Agentless delivery is available for the SDKs and versions listed. Other server SDKs use Agent Remote Configuration.
 
@@ -51,7 +52,9 @@ Select your language or framework to view SDK-specific setup instructions:
   {{< image-card href="/feature_flags/server/dotnet/" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
   {{< image-card href="/feature_flags/server/go/" src="integrations_logos/go-metro.png" alt="Go" >}}
   {{< image-card href="/feature_flags/server/java/" src="integrations_logos/java.png" alt="Java" >}}
+  <!-- vale Datadog.words_case_sensitive = NO -->
   {{< image-card href="/feature_flags/server/nodejs/" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  <!-- vale Datadog.words_case_sensitive = YES -->
   {{< image-card href="/feature_flags/server/php/" src="integrations_logos/php.png" alt="PHP" >}}
   {{< image-card href="/feature_flags/server/python/" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/feature_flags/server/ruby/" src="integrations_logos/ruby.png" alt="Ruby" >}}
@@ -76,7 +79,7 @@ Source-specific requirements are:
 
 ## Agentless configuration
 
-For `dd-trace` 5.116.0 or 6.5.0 on Node.js, configure the application process:
+Configure the application process for Java 1.65.0 or later. For Node.js, use `dd-trace` 5.116.0 or later on v5, or 6.5.0 or later on v6.
 
 {{< code-block lang="bash" >}}
 # Required for direct configuration delivery
@@ -85,11 +88,11 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. See [Node.js Feature Flags][9] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
+No Feature Flags enablement or source setting is required. See [Java Feature Flags][10] or [Node.js Feature Flags][9] for dependency versions and language-specific initialization. Initializing or accessing the provider starts CDN polling; tracer installation and initialization alone do not.
 
-## Agent Remote Configuration
+## Agent remote configuration
 
-For Node.js, set the source explicitly to retain Agent-managed delivery:
+For Java and Node.js, set the source explicitly to retain Agent-managed delivery:
 
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
@@ -99,9 +102,9 @@ Remote Configuration is enabled by default in Agent 7.47.0 and later. If your Ag
 
 See the [Remote Configuration documentation][1] for detailed setup instructions across deployment environments.
 
-Existing Node.js implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
+Existing Java and Node.js implementations with `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` remain on Remote Configuration during a migration window. The setting is deprecated. See [Migrate from the legacy provider setting][7] to remain on Remote Configuration explicitly or move to agentless delivery.
 
-### Remote Configuration polling interval
+### Remote configuration polling interval
 
 The Agent polls Datadog for configuration updates at a configurable interval:
 
@@ -127,9 +130,9 @@ DD_VERSION=<YOUR_APP_VERSION>
 # See "Set Up Server-Side Flag Evaluation Metrics" documentation
 {{< /code-block >}}
 
-<div class="alert alert-info">In the Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
+<div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Java and Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Testing with in-memory providers
 
@@ -138,7 +141,7 @@ Datadog supports these testing approaches:
 - **Integration tests**: Point `DatadogProvider` at a dedicated test environment and control flag values from the Datadog UI. This exercises the real provider and selected configuration source end-to-end.
 - **Unit tests**: Swap `DatadogProvider` for OpenFeature's standard `InMemoryProvider` (or an equivalent test stub, where no in-memory provider is available in the language) and set flag values directly in test code. This keeps tests hermetic and offline.
 
-This section covers the in-memory approach. Because the OpenFeature API is designed to make providers swappable at runtime, your application code does not change — only the provider registered during test setup.
+This section covers the in-memory approach. The OpenFeature API supports provider replacement at runtime. Only provider registration changes during test setup.
 
 A typical test follows this pattern:
 
@@ -152,7 +155,7 @@ See your language's SDK page (select from the top of this page) for a concrete t
 ## Context attribute requirements
 
 <div class="alert alert-warning">
-Evaluation context attributes must be flat primitive values (strings, numbers, booleans). Nested objects and arrays are <strong>not supported</strong> and will cause exposure events to be silently dropped.
+Evaluation context attributes must be flat primitive values (strings, numbers, and Boolean values). Nested objects and arrays are <strong>not supported</strong> and cause exposure events to be silently dropped.
 </div>
 
 Use flat attributes in your evaluation context:
@@ -192,3 +195,4 @@ For percentage-based rollouts and deterministic bucketing, see [Traffic Splittin
 [7]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [8]: /feature_flags/concepts/configuration_sources/
 [9]: /feature_flags/server/nodejs/
+[10]: /feature_flags/server/java/
