@@ -248,7 +248,7 @@ nav_sections:
     - desc: Trier, suivre et corriger les problèmes avec une propriété centralisée
         et la collaboration d'équipe
       icon: case-management
-      link: incident_response/work_management/
+      link: incident_response/case_management/
       title: Case Management
     - desc: Automatisez et orchestrez des processus dans toute votre pile technologique.
       icon: workflows

@@ -212,7 +212,7 @@ nav_sections:
         icon: slos
         desc: 一貫した顧客体験を提供するために、パフォーマンス目標を定義し、追跡します。
       - title: Case Management
-        link: incident_response/work_management/
+        link: incident_response/case_management/
         icon: case-management
         desc: 一元的な責任とチームのコラボレーションで問題をトリアージし、追跡し、修正します。
       - title: Workflow Automation
