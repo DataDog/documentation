@@ -48,12 +48,11 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 ## Set up a Pattern
 
 1. Click **+ New Pattern**
-2. Enter a **Pattern Name**
-3. Under **Clustering model**, select your LLM Provider, Account, and Model. These are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic. Supported providers are **OpenAI**, **Azure OpenAI**, and **Amazon Bedrock**.
-4. Under **Scope**, configure:
-   - **Time window:** The lookback period for interactions to analyze
-   - **Which spans do you want to cluster?:** Filter by application, environment, span type, or other tags to scope the Pattern to a specific slice of traffic.
-   - **Sampling Rate:** The percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap.
+2. Enter a **Name**
+3. Under **Model**, click the **Model** button to open the **Model configuration** modal, then select your LLM Provider, Account, and Model. These are used to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic. Supported providers are **OpenAI**, **Azure OpenAI**, and **Amazon Bedrock**.
+4. Under **Runs**, use the **Application** multi-selector to choose one or more LLM applications whose spans to include. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications. Also set the **Sampling Rate**: the percentage of matching interactions to include. Patterns processes up to 10,000 records per run; if your filter matches more than that, records are randomly sampled down to the cap. For finer-grained scoping, click the filter icon next to the **Application** selector to open the **Advanced** popover, which exposes:
+   - **Which spans do you want to cluster?:** The raw span filter query for scoping by environment, span type, or other tags.
+   - **Time window:** The lookback period for interactions to analyze.
 5. Under **What should we detect Patterns on?**, enter a template that defines what gets sent to the model for analysis. Use {{variable}} syntax to reference any span field — for example, {{meta.input.value}} to analyze patterns by user input, or {{meta.span.kind}} to analyze by span kind. Click {{< ui >}}Template Examples{{< /ui >}} to see common configurations. As you type, the right panel previews matching spans and shows what percentage of interactions have values for the variables you've referenced.
 6. Click **Save**
 
