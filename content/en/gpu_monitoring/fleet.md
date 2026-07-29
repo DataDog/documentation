@@ -9,149 +9,135 @@ further_reading:
 
 ## Overview
 
-The [GPU Fleet page][0] provides a detailed inventory of all of your GPU-accelerated hosts for a specified time frame. Use this view to uncover inefficiencies through resource telemetry, ranging from performance and usage metrics to costs. This page also surfaces Datadog's built-in provisioning and performance optimization recommendations for your devices, to help you maximize the value of your GPU spend. 
+[GPU Fleet Explorer][0] provides a detailed breakdown across AI infrastructure (like GPU devices, hosts, or Ray clusters) and AI workloads (Pods, Kube Containers, or Training Runs) for a specified time. Use this page to uncover provisioning inefficiencies and workload performance optimizations through rich resource telemetry covering GPU utilization, host-level metrics, and costs. This page also surfaces Datadog's proactive real-time detection of any issues impacting your fleet and workloads, alongside guidance on how to remediate those issues, to help you maximize the value of your GPU spend.
+
+## Detect issues with out-of-the-box monitors
+
+Datadog provides several out-of-the-box (OOTB) monitor templates that detect common GPU issues in real time, including temperature spikes, power cap throttling, unmet GPU requests, XID errors, ECC errors, bursty workloads, and idle devices. You can customize any monitor's thresholds to fit your organization's needs.
+
+To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in the top-right corner of the page.
+
+{{< img src="gpu_monitoring/fleet-ootb-monitors.jpg" alt="Monitors dropdown in the top-right corner of the GPU Fleet page, showing OOTB monitor templates for Temperature, Power Cap Throttling, Unmet GPU Requests, Critical XID Errors, General XID Errors, ECC Errors, Bursty Workloads, and Idle Devices" style="width:40%;" >}}
 
 ## Break down your fleet by any tag
+
+GPU Fleet Explorer gives you visibility from your AI workloads down to the AI infrastructure they rely on, letting you pivot between workload entities like pods and training runs, and infrastructure entities like devices, hosts, and clusters.
+
+{{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
 Use quick filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
 You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, with {{< ui >}}Host{{< /ui >}} selected, group by `Team` to view a table entry for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
 
-**Note**: You can only {{< ui >}}Group by{{< /ui >}} one additional tag.
-
-If you select {{< ui >}}Cluster{{< /ui >}} or {{< ui >}}Host{{< /ui >}}, you can click on the {{< ui >}}>{{< /ui >}} button next to each table entry to view a cluster's hosts or a host's devices, respectively. 
+You can click on the {{< ui >}}>{{< /ui >}} button next to each table row entry to view the group's respective devices.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
-**Note**: The Cluster table is only populated if you use Kubernetes.
+**Note**: Kube Clusters, Pods, and Containers options in the side navigation are only available if you use Kubernetes.
 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
-## Use-case driven views
-Datadog guides you through your provisioning and performance optimization workflows by providing two dedicated use-case driven views. 
+## Use case-driven views and recommendations
+GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven views:
+
+- **Provisioning**: Allocate capacity and manage quotas.
+- **Performance**: Optimize workload efficiency and throughput.
 
 ### Provisioning
-The {{< ui >}}Provisioning{{< /ui >}} tab shows key recommendations and metrics insights for allocating and managing your capacity. 
+The {{< ui >}}Provisioning{{< /ui >}} tab detects any hardware health issues impacting the allocation of your devices to workloads and provides guidance to all users, regardless of their hardware familiarity, on how to remediate those issues.
 
-{{< img src="gpu_monitoring/provisioning-tab-2.png" alt="The Provisioning use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/provisioning-tab-3.jpg" alt="The Provisioning use case-driven view" style="width:90%;" >}}
 
-Built-in recommendations: 
-- Datadog proactively detects thermal throttling or hardware defects and instantly recommends remediation based on hardware errors like ECC/XID errors.
-- Datadog detects whether inactive devices should be provisioned to avoid having devices sit idle.
+For each detected issue, Datadog recommends step-by-step remediation actions to help you resolve it.
 
-Metrics relevant for your provisioning workflow: 
-- ECC Errors
-- XID Errors
-- Graphics Engine Activity
-- GPU Utilization
-- GPU Memory
-- Allocated Devices (Only available for Kubernetes users) 
-- Active Devices
-- Idle Cost
+{{< img src="gpu_monitoring/critical-xid-recommendation.jpg" alt="Recommended remediation actions for a critical XID error" style="width:60%;" >}}
+
+#### Summary Graph
+
+The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Provisioning use case, this breaks down your Provisioned, Allocated, and Active devices so you can reclaim wasted idle spend and rediscover available devices that can be allocated to workloads.
+
+{{< img src="gpu_monitoring/summary-graph.jpg" alt="Summary Graph showing Provisioned Devices, Allocated Devices, and Active Devices breakdowns" style="width:90%;" >}}
+
+Expand this section below to see a table of the available options and what they represent.
+
+{{% collapse-content title="See full list of Provisioning Summary Graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
+| Option              | Definition                                                |
+| -------------------- | ---------------------------------------------------------- |
+| Provisioned Devices  | Breakdown of provisioned devices and active devices.       |
+| Allocated Devices    | Breakdown of available devices by allocated vs. unallocated. |
+| Active Devices       | Breakdown of allocated devices by active vs. idle.          |
+{{% /collapse-content %}}
 
 ### Performance
-The {{< ui >}}Performance{{< /ui >}} tab helps you understand workload execution and tune GPU utilization to use your devices more effectively.
+The {{< ui >}}Performance{{< /ui >}} tab detects any hardware health or workload issues that are stalling the workloads running on your GPU devices and provides a single source of truth and guidance to platform engineers and AI/ML teams on how to remediate those issues.
 
-{{< img src="gpu_monitoring/performance-tab-2.png" alt="The Performance use-case driven view" style="width:90%;" >}}
+{{< img src="gpu_monitoring/performance-tab-3.jpg" alt="The Performance use case-driven view" style="width:90%;" >}}
 
-Built-in recommendations: 
-- If your workloads are CPU-intensive, Datadog flags hosts with CPU saturation and recommends solutions.
-- If your workloads aren't effectively using their allocated GPU devices, Datadog provides recommendations for tuning workloads to get more value out of their capacity.
+For each detected issue, Datadog recommends step-by-step remediation actions to help you resolve it.
 
-Metrics relevant for your performance workflow: 
-- ECC Errors
-- XID Errors
-- Graphics Engine Activity
-- GPU Utilization
-- GPU Memory
-- Effective Devices
-- Power
-- Temperature
-- PCIe RX Throughput
-- PCIe TX Throughput
-- CPU Utilization
+{{< img src="gpu_monitoring/power-cap-recommendation.jpg" alt="Recommended remediation actions for a GPU power cap throttling issue" style="width:60%;" >}}
 
-## Summary Graph
+#### Summary Graph
 
-After selecting {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Device{{< /ui >}}, the {{< ui >}}Summary Graph{{< /ui >}} displays key resource telemetry across your entire GPU infrastructure grouped by that selection. Expand the section below to see a table of the available metrics and what they represent. 
+The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Performance use case, this breaks down key resource utilization metrics like GPU Utilization or GPU Saturation alongside network fabric metrics, power, temperature, and more.
 
-{{% collapse-content title="See the full list of GPU metrics" level="h4" expanded=false id="gpu-metrics-table" %}}
-| Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        |
-| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| Provisioned Devices      | Breakdown of provisioned devices by active and effective devices.                                                                                                                                                       | `gpu.device.total`                                 |
-| Allocated Devices        | (Only available if using Kubernetes) Count of devices that have been allocated to a workload.                                                                                                                           | `gpu.device.total`                                 |
-| Active Devices           | Count of devices that are actively used for a workload or are busy. If using Kubernetes: count of allocated devices that are actively used for a workload.                                                                   | `gpu.gr_engine_active`                             |
-| Effective Devices        | Count of devices that are used and working for more than 50% of the selected time frame.                                                                                                                                         | `gpu.sm_active`                                    |
-| Core Utilization         | (Only available if System Probe enabled) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.                                                                                              | `gpu_core_utilization`                             |
-| GPU Memory               | Ratio (%) of GPU memory used to total GPU memory limit.                                                                                                                                                                 | `100 - (gpu.memory.free / gpu.memory.limit * 100)` |
-| PCIe RX Throughput       | Bytes received through PCI from the GPU device per second.                                                                                                                                                              | `gpu.pci.throughput.rx`                            |
-| PCIe TX Throughput       | Bytes transmitted through PCI to the GPU device per second.                                                                                                                                                             | `gpu.pci.throughput.tx`                            |
-| Graphics Engine Activity | Fraction of time the GPU was performing any compute work during the interval. A coarse signal of whether the GPU is busy or idle.                                                                                       | `gpu.gr_engine_active`                             |
-| GPU Utilization          | Average % of time each streaming multiprocessor was active (lower values indicate idle time).                                                                                                                           | `gpu.sm_active`                                    |
-| Power                    | Power usage for the GPU device.<br>**Note**: On GA100 and previous architectures, this represents the instantaneous power at that moment.<br>For newer architectures, it represents the average power draw (Watts) over one second. | `gpu.power.usage`                                  |
-| Temperature              | Temperature of a GPU device.                                                                                                                                                                                            | `gpu.temperature`                                  |
-| SM Clock                 | SM clock frequency in MHz.                                                                                                                                                                                              | `gpu.clock_speed.sm`                               |
-| Memory Free              | Amount of available / free memory.                                                                                                                                                                                      | `gpu.memory.free`                                  |
-| GPU Saturation           | Measures how fully the GPU's parallel execution capacity is being used during the time frame (average ratio of active warps to the maximum warps supported per streaming multiprocessor across all SMs).                 | `gpu.sm_occupancy`                                 |
-| NVLink RX                | Total RX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.rx`                     |
-| NVLink TX                | Total TX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.tx`                     |
-| NVLink Active Links      | Number of active NVLINK links for the device.                                                                                                                                                                           | `gpu.nvlink.count.active`                          |
-| ECC Errors               | Total count of uncorrected ECC errors.                                                                                                                                                                                  | `gpu.errors.ecc.uncorrected.total`                 |
-| XID Errors               | Count of NVIDIA XID errors, indicating hardware or driver-level issues.                                                                                                                                                 | `gpu.errors.xid.total`                             |
-| CPU Utilization          | % of time the CPU spent running user space processes.                                                                                                                                       | `system.cpu.user`                                  |
-| Host Uptime              | Time since the host was last started                                                                                                                                                                                    | `system.uptime`                                    |
-| Host I/O Utilization      | % of CPU time during which I/O requests were issued to the GPU device.                                                                                                                                                  | `system.io.util`                                   |
-| Host Memory              | % of usable memory in use.                                                                                                                                                                                    | `system.mem.pct_usable`                            |
-{{% /collapse-content %}} 
+{{< img src="gpu_monitoring/summary-graph-performance.jpg" alt="Summary Graph showing GPU Util, GPU Saturation, and GPU Memory breakdowns" style="width:90%;" >}}
 
-If you've selected an additional tag to group by—for example, _team_—every unique timeseries in the Summary Graph corresponds to a team's value for the selected metric.
+Expand the section below to see a table of the available options and what they represent.
+
+{{% collapse-content title="See full list of Performance Summary Graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
+| Option              | Definition                                                                                                                                                                                                              |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| CPU Util            | % of time the CPU spent running user space processes.                                                                                                                                                                 |
+| Host Memory         | % of usable memory in use.                                                                                                                                                                                             |
+| GPU Util            | Average % of time each streaming multiprocessor was active (lower values indicate idle time).                                                                                                                         |
+| GPU Saturation      | Measures how fully the GPU's parallel execution capacity is being used during the time frame (average ratio of active warps to the maximum warps supported per streaming multiprocessor across all SMs).            |
+| GPU Memory          | Ratio (%) of GPU memory used to total GPU memory limit.                                                                                                                                                                |
+| PCIe RX             | Bytes received through PCI from the GPU device per second.                                                                                                                                                             |
+| PCIe TX             | Bytes transmitted through PCI to the GPU device per second.                                                                                                                                                            |
+| NVLink RX           | Total RX of all NVLINK links.                                                                                                                                                                                          |
+| NVLink TX           | Total TX of all NVLINK links.                                                                                                                                                                                          |
+| Graphics Activity   | Fraction of time the GPU was performing any compute work during the interval. A coarse signal of whether the GPU is busy or idle.                                                                                     |
+| Power               | Power usage for the GPU device. On GA100 and previous architectures, this represents the instantaneous power at that moment. For newer architectures, it represents the average power draw (Watts) over one second. |
+| Temperature         | Temperature of a GPU device.                                                                                                                                                                                            |
+| SM Clock            | SM clock frequency in MHz.                                                                                                                                                                                             |
+| NVLink Active Links | Number of active NVLINK links for the device.                                                                                                                                                                          |
+| ECC Errors          | Total count of uncorrected ECC errors.                                                                                                                                                                                 |
+| XID Errors          | Count of NVIDIA XID errors, indicating hardware or driver-level issues.                                                                                                                                                |
+{{% /collapse-content %}}
 
 ## Inventory of your GPU-powered infrastructure
 
 This table breaks down your GPU-powered infrastructure by any tag of your choosing. If you haven't specified an additional tag in the {{< ui >}}Group by{{< /ui >}} field, results are grouped by your selected view: {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Device{{< /ui >}}.
 
-By default, the table of results displays the following columns: 
-
-- Device Name
-- Graphics Engine Activity 
-- GPU Utilization (Only if System Probe is enabled) 
-- Core Utilization 
-- GPU Memory
-- Idle Cost
-- Recommendation
-
 You can click on the gear icon to customize which metrics are displayed within the table. Expand the section below to see a full list of the available metrics. 
 
 {{% collapse-content title="See the full list of available metrics" level="h4" expanded=false id="metric-full-list" %}}
-| Category         | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        |
-| ---------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
-| —                | Device Name              | Type of GPU device.                                                                                                                                                                                                     | `gpu_device`                                       |
-| Hardware Health  | Total Errors             | Total count of errors for the resource.                                                                                                                                                                                 | `gpu.errors.total`                                 |
-| Hardware Health  | ECC Errors               | Total count of uncorrected ECC errors.                                                                                                                                                                                  | `gpu.errors.ecc.uncorrected.total`                 |
-| Hardware Health  | XID Errors               | Count of NVIDIA XID errors, indicating hardware or driver-level issues.                                                                                                                                                 | `gpu.errors.xid.total`                             |
-| Utilization      | Graphics Engine Activity | Fraction of time the GPU was performing any compute work during the interval. A coarse signal of whether the GPU is busy or idle.                                                                                       | `gpu.gr_engine_active`                             |
-| Utilization      | GPU Saturation           | Measures how fully the GPU's parallel execution capacity is being used during the time frame (average ratio of active warps to the maximum warps supported per streaming multiprocessor across all SMs).                 | `gpu.sm_occupancy`                                 |
-| Utilization      | Core Utilization         | (Only available if System Probe enabled) `Cores Used/Cores Limit` for GPU processes. Measure of Temporal Core Utilization.                                                                                              | `gpu_core_utilization`                             |
-| Utilization      | GPU Idle                 | % of time the GPU device is idle.                                                                                                                                                                              | `100-gpu.gr_engine_active`                         |
-| Provisioning     | Idle Cost                | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.                                                                                              |                                                    |
-| Provisioning     | Allocated Devices        | (Only available if using Kubernetes) Count of devices that have been allocated to a workload.                                                                                                                           | `gpu.device.total`                                 |
-| Provisioning     | Unallocated Devices      | Count of devices not allocated and available for use during time frame.                                                                                                                                                 |                                                    |
-| Provisioning     | Active Devices           | Count of devices that are actively used for a workload or are busy. If using Kubernetes: count of allocated devices that are actively used for a workload.                                                                   | `gpu.gr_engine_active`                             |
-| Provisioning     | Effective Devices        | Count of devices that are used and working for more than 50% of the selected time frame.                                                                                                                                         | `gpu.sm_active`                                    |
-| Performance      | CPU Utilization          | % of time the CPU spent running user space processes.                                                                                                                                       | `system.cpu.user`                                  |
-| Performance      | Host Uptime              | Time since the host was last started                                                                                                                                                                                    | `system.uptime`                                    |
-| Performance      | Host I/O Utilization      | % of CPU time during which I/O requests were issued to the GPU device.                                                                                                                                                  | `system.io.util`                                   |
-| Performance      | Host Memory              | % of usable memory in use.                                                                                                                                                                                    | `system.mem.pct_usable`                            |
-| Performance      | GPU Utilization          | Average % of time each streaming multiprocessor was active (lower values indicate idle time).                                                                                                                           | `gpu.sm_active`                                    |
-| Performance      | GPU Memory               | Ratio (%) of GPU memory used to total GPU memory limit.                                                                                                                                                                 | `100 - (gpu.memory.free / gpu.memory.limit * 100)` |
-| Performance      | Power                    | Power usage for the GPU device.<br>**Note**: On GA100 and previous architectures, this represents the instantaneous power at that moment.<br>For newer architectures, it represents the average power draw (Watts) over one second. | `gpu.power.usage`                                  |
-| Performance      | Temperature              | Temperature of a GPU device.                                                                                                                                                                                            | `gpu.temperature`                                  |
-| Performance      | SM Clock                 | SM clock frequency in MHz.                                                                                                                                                                                              | `gpu.clock_speed.sm`                               |
-| Performance      | PCIe RX Throughput       | Bytes received through PCI from the GPU device per second.                                                                                                                                                              | `gpu.pci.throughput.rx`                            |
-| Performance      | PCIe TX Throughput       | Bytes transmitted through PCI to the GPU device per second.                                                                                                                                                             | `gpu.pci.throughput.tx`                            |
-| Performance      | NVLink RX                | Total RX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.rx`                     |
-| Performance      | NVLink TX                | Total TX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.tx`                     |
-| Performance      | NVLink Active Links      | Number of active NVLINK links for the device.                                                                                                                                                                           | `gpu.nvlink.count.active`                          |
+| Category         | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        | Provisioning Tab | Performance Tab |
+| ---------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | --------------- |
+| Provisioning     | Idle Cost                | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.                                                                                              |                                                    | ✓                 | ✓               |
+| Provisioning     | Total Devices            | GPU devices with Datadog's GPU monitoring correctly configured and reporting metrics.                                                                                                                                    | `kubernetes_state.node.gpu_capacity`               |                   |                 |
+| Provisioning     | Kubernetes Available     | Healthy GPU devices that are powered on and available for allocation, according to the Kubernetes orchestrator.                                                                                                          | `kubernetes_state.node.gpu_allocatable`            |                   |                 |
+| Provisioning     | Allocated Devices        | (Only available if using Kubernetes) Count of devices that have been allocated to a workload.                                                                                                                           | `gpu.device.total`                                 | ✓                 |                 |
+| Provisioning     | Unallocated Devices      | Count of devices not allocated and available for use during time frame.                                                                                                                                                 |                                                    | ✓                 |                 |
+| Provisioning     | Active Devices           | Count of devices that are actively used for a workload or are busy. If using Kubernetes: count of allocated devices that are actively used for a workload.                                                                   | `gpu.gr_engine_active`                             | ✓                 |                 |
+| Provisioning     | Idle Devices             | GPU devices allocated to workloads but not doing any work during the time frame. A device is considered idle if `gpu.gr_engine_active` equals 0.                                                                        | `gpu.gr_engine_active`                             | ✓                 |                 |
+| Performance      | CPU Utilization          | % of time the CPU spent running user space processes.                                                                                                                                       | `system.cpu.user`                                  |                   | ✓               |
+| Performance      | Host Memory              | % of usable memory in use.                                                                                                                                                                                    | `system.mem.pct_usable`                            |                   | ✓               |
+| Performance      | GPU Utilization          | Average % of time each streaming multiprocessor was active (lower values indicate idle time).                                                                                                                           | `gpu.sm_active`                                    |                   | ✓               |
+| Utilization      | GPU Saturation           | Measures how fully the GPU's parallel execution capacity is being used during the time frame (average ratio of active warps to the maximum warps supported per streaming multiprocessor across all SMs).                 | `gpu.sm_occupancy`                                 |                   | ✓               |
+| Performance      | GPU Memory               | Ratio (%) of GPU memory used to total GPU memory limit.                                                                                                                                                                 | `100 - (gpu.memory.free / gpu.memory.limit * 100)` |                   | ✓               |
+| Performance      | PCIe RX Throughput       | Bytes received through PCI from the GPU device per second.                                                                                                                                                              | `gpu.pci.throughput.rx`                            |                   | ✓               |
+| Performance      | PCIe TX Throughput       | Bytes transmitted through PCI to the GPU device per second.                                                                                                                                                             | `gpu.pci.throughput.tx`                            |                   | ✓               |
+| Performance      | NVLink RX                | Total RX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.rx`                     |                   | ✓               |
+| Performance      | NVLink TX                | Total TX of all NVLINK links.                                                                                                                                                                                           | `gpu.nvlink.throughput.raw.tx`                     |                   | ✓               |
+| Performance      | Power                    | Power usage for the GPU device.<br>**Note**: On GA100 and previous architectures, this represents the instantaneous power at that moment.<br>For newer architectures, it represents the average power draw (Watts) over one second. | `gpu.power.usage`                                  |                   | ✓               |
+| Performance      | Temperature              | Temperature of a GPU device.                                                                                                                                                                                            | `gpu.temperature`                                  |                   | ✓               |
+| Performance      | SM Clock                 | SM clock frequency in MHz.                                                                                                                                                                                              | `gpu.clock_speed.sm`                               |                   | ✓               |
+| Performance      | NVLink Active Links      | Number of active NVLINK links for the device.                                                                                                                                                                           | `gpu.nvlink.count.active`                          |                   | ✓               |
+| Hardware Health  | ECC Errors               | Total count of uncorrected ECC errors.                                                                                                                                                                                  | `gpu.errors.ecc.uncorrected.total`                 |                   | ✓               |
+| Hardware Health  | XID Errors               | Count of NVIDIA XID errors, indicating hardware or driver-level issues.                                                                                                                                                 | `gpu.errors.xid.total`                             |                   | ✓               |
+| Utilization      | Graphics Engine Activity | Fraction of time the GPU was performing any compute work during the interval. A coarse signal of whether the GPU is busy or idle.                                                                                       | `gpu.gr_engine_active`                             |                   | ✓               |
 {{% /collapse-content %}} 
 
 ## Details side panel 
