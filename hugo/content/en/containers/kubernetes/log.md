@@ -268,7 +268,7 @@ spec:
 
 ### DatadogInstrumentation CRD
 
-You can configure log collection with a [`DatadogInstrumentation` custom resource][23], using `containerName` to select the container to collect logs from.
+Use `spec.config.logs` in a [`DatadogInstrumentation` custom resource][23] to configure log collection. Set `containerName` in each entry to the container name in the workload's Pod template.
 
 The following example configures log collection for the `app` container in the `example` Deployment:
 

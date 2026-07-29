@@ -110,7 +110,7 @@ If you define pods indirectly (with deployments, ReplicaSets, or ReplicationCont
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
+You can configure Autodiscovery checks and log collection for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove Autodiscovery configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1

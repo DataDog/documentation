@@ -114,9 +114,9 @@ You can target the following Kubernetes resources:
 - StatefulSet
 - CronJob
 - Job
-- Service. (See [Service targets](#service-targets))
+- Service (see the [Service targets](#service-targets) section)
 
-This example configures a [Redis integration][4] targeting a `Deplymend` named `redis` mirroring this [annotation-based example][2].
+This example configures a [Redis integration][4] for a `Deployment` named `redis`, mirroring the [annotation-based example][2].
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -170,7 +170,7 @@ Each entry in `checks` accepts the following fields:
 `instances`
 : Optional. Check instance settings. Each instance can use [Autodiscovery template variables][5], including `%%host%%`.
 
-Each entry in `logs` accepts the same log collection configuration options as Autodiscovery log annotations, like `tags`, `type`, and `path`. Each log config requires a `containerName` matching a container in the pod.
+Each entry in `logs` accepts the same log collection options as Autodiscovery log annotations, such as `tags`, `type`, and `path`. Each entry requires a `containerName` matching a container in the pod.
 
 ### Service targets
 
@@ -223,7 +223,7 @@ A workload or Service can be the target of only one `DatadogInstrumentation` res
 
 The resource status shows whether the Cluster Agent accepted the configuration. To verify that the checks are scheduled, run `agent configcheck` on the Node Agent where the target workload runs.
 
-Checks configured through a `DatadogInstrumentation` resource list `instrumentation-checks` as the configuration provider, and `datadoginstrumentation:<NAMESPACE>/<CR_NAME>` as the configuration source. The following example shows the output for a `redisdb` check scheduled from a resource that targets a Redis workload:
+Checks configured through a `DatadogInstrumentation` resource list `instrumentation-checks` as the configuration provider and `datadoginstrumentation:<NAMESPACE>/<CR_NAME>` as the configuration source. The following example shows the output for a `redisdb` check scheduled from a resource that targets a Redis workload:
 
 ```text
 > agent configcheck
@@ -236,32 +236,11 @@ Config for instance ID: redisdb:d5dd267b580bc10e
 host: 10.244.0.7
 password: "********"
 port: 6379
-tags:
-  - container_id:86fd26bd7ee8c8cd1864103b2a575cdac0d23b1d0961085c000cb96d0f4a2cc9
-  - container_name:redis
-  - display_container_name:redis_redis-6b4c7b565b-6dhfh
-  - env:staging
-  - image_id:********@sha256:0a972391db0b24ec336e35d1bc98b237237e26f82bf5120cf2f6b1688d1df973
-  - image_name:redis
-  - image_tag:latest
-  - kube_container_name:redis
-  - kube_deployment:redis
-  - kube_namespace:cache
-  - kube_ownerref_kind:replicaset
-  - kube_ownerref_name:redis-6b4c7b565b
-  - kube_qos:BestEffort
-  - kube_replica_set:redis-6b4c7b565b
-  - kube_service:redis
-  - pod_name:redis-6b4c7b565b-6dhfh
-  - pod_phase:running
-  - service:redis
-  - short_image:redis
-~
 Init Config:
 {}
 Log Config:
-- service: redis
-  source: redis
+- tags:
+  - env:demo
 Auto-discovery IDs:
 * redis
 ```

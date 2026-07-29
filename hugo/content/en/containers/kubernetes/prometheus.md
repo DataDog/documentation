@@ -54,8 +54,6 @@ This page explains the basic usage of these checks, which enable you to scrape c
 
 Configure your OpenMetrics or Prometheus check using Autodiscovery. Use pod annotations or `DatadogInstrumentation` custom resources.
 
-If you use the Prometheus Operator, `DatadogInstrumentation` provides a similar CRD-based workflow for Datadog Autodiscovery. See [Configure Autodiscovery with DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
-
 {{< tabs >}}
 {{% tab "Annotations (AD v2)" %}}
 
@@ -113,7 +111,7 @@ spec:
 {{% /tab %}}
 {{% tab "DatadogInstrumentation CRD" %}}
 
-Use a `DatadogInstrumentation` custom resource to configure an OpenMetrics check without adding pod annotations. For more information, see [Configure Autodiscovery with DatadogInstrumentation CRD](/containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/).
+Use a `DatadogInstrumentation` custom resource to configure an OpenMetrics check without adding pod annotations. For more information, see [Configure Autodiscovery with DatadogInstrumentation CRD][17].
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -137,6 +135,8 @@ spec:
             metrics:
               - "<METRIC_TO_FETCH>": "<NEW_METRIC_NAME>"
 ```
+
+[17]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -235,9 +235,9 @@ For a full list of available parameters for instances, including `namespace` and
    {{% /tab %}}
    {{% tab "DatadogInstrumentation CRD" %}}
 
-   **Note:** Configuring checks with the `DatadogInstrumentation` custom resource requires Datadog Agent and Cluster Agent version 7.82 or higher.
+   **Note:** This configuration requires Datadog Agent and Cluster Agent v7.82 or later. Enable the controller with Datadog Operator v1.29 or later, or Datadog Helm chart v2.223.0 or later. For setup instructions, see [Configure Autodiscovery with DatadogInstrumentation CRD][17].
 
-   The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation before applying this resource, because annotations take precedence over `DatadogInstrumentation` resources.
+   The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation because annotations take precedence over `DatadogInstrumentation` resources. Save the following resource as `prometheus-instrumentation.yaml`:
 
    ```yaml
    apiVersion: datadoghq.com/v1alpha1
@@ -264,6 +264,8 @@ For a full list of available parameters for instances, including `namespace` and
                  - "go_memory.*"
    ```
 
+   [17]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -271,6 +273,12 @@ For a full list of available parameters for instances, including `namespace` and
 
     ```shell
     kubectl create -f prometheus.yaml
+    ```
+
+   If you use a `DatadogInstrumentation` resource, apply it after creating the Deployment:
+
+    ```shell
+    kubectl apply -f prometheus-instrumentation.yaml
     ```
 
 3. Go into your [Fleet Automation][16] page and filter for the `openmetrics` integration to view detailed information about the status of your checks.
