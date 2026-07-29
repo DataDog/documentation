@@ -245,7 +245,7 @@ Open a prompt in the {{< ui >}}Prompts{{< /ui >}} page to:
 
 ### Use the Python SDK
 
-Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are Feature Flags environment IDs, which you can obtain from the [List environments API](/api/latest/feature-flags/list-environments/):
+Use `LLMObs.create_prompt()` to create a prompt and deploy its first version to one or more environments. The `env_ids` values are Feature Flags environment IDs, which you can obtain from the [List environments API][9]:
 
 ```python
 from ddtrace.llmobs import LLMObs
@@ -292,3 +292,4 @@ Use the Prompt Management API to create, retrieve, update, and delete prompts an
 [6]: /llm_observability/instrumentation/auto_instrumentation/?tab=python
 [7]: /llm_observability/instrumentation/sdk/?tab=python#manual-instrumentation
 [8]: /api/latest/llm-observability/
+[9]: /api/latest/feature-flags/list-environments/
