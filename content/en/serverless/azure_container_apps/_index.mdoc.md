@@ -56,6 +56,8 @@ further_reading:
 
 ## Setup
 
+**Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
+
 <!-- In-Container -->
 {% if equals($instrumentation_method, "in_container") %}
 
