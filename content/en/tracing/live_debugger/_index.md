@@ -82,7 +82,7 @@ For services running an updated SDK version, you can enable Live Debugger in one
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically.
 
-Use the manual configuration steps below only if an SDK update isn't possible or you prefer env-var configuration (for example, for bulk enablement across many services).
+Use the manual configuration steps below only if an SDK update isn't possible or you prefer env-var configuration.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs" >}}
 
@@ -250,7 +250,7 @@ On the [Live Debugger Settings page][26], you can check and update the enablemen
 - {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or SDK version.
 
-### Create a logs index (recommended)
+### Create a logs index
 
 Datadog recommends creating a dedicated logs index for Live Debugger to help ensure that Live Debugger logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11]. Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
 
@@ -260,7 +260,7 @@ To create a dedicated logs index:
 2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### Link your source code (recommended)
+### Link your source code
 
 Datadog recommends setting up [Source Code Integration][28] for the best experience with Live Debugger. Source Code Integration is optional when starting a Debug Session manually, but required when using [Bits Live Debugger][23].
 
