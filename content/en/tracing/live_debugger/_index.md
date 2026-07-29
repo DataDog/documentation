@@ -183,7 +183,7 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="php" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/php">Datadog PHP SDK (<code>dd-trace-php</code>)</a> version 1.21.0 or higher is strongly recommended. The minimum SDK version is 1.2.0, but it may result in unexpected errors and a degraded experience.
+**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/php">Datadog PHP SDK (<code>dd-trace-php</code>)</a> version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with the following environment variables set:
 
