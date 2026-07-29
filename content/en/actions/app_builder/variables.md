@@ -14,6 +14,12 @@ further_reading:
   text: "JavaScript Expressions"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 If you want to encapsulate logic within your app, you can use state variables.
 
 ## Create a state variable

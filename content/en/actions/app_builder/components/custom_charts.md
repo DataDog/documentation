@@ -14,6 +14,12 @@ further_reading:
   text: "Build Apps"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 This page provides an example of how to use the custom chart component in your App Builder apps.
 
 The basic workflow for creating a custom chart is as follows:

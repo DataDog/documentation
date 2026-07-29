@@ -23,7 +23,7 @@ It is recommended to use `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` to set `env`, 
 
 To configure the SDK using environment variables, set the variables before launching the instrumented application.
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

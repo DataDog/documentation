@@ -37,6 +37,8 @@ If your Databricks workspace restricts network access by IP, add the Datadog web
 
 ### Step 2 - Grant access
 
+In Databricks, open the {{< ui >}}SQL Editor{{< /ui >}} to run the following commands. Use the service principal's application (client) ID, not its display name, wherever `<application_id>` appears.
+
 First, grant access to system schemas for lineage:
 ```sql
 GRANT USE CATALOG ON CATALOG system TO `<application_id>`;
@@ -53,8 +55,8 @@ Use the full catalog access option for simpler setup. It automatically includes 
 
 
 ```sql
-GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
-GRANT USE_SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE SCHEMA ON CATALOG <catalog_name> TO `<application_id>`;
 GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
 ```
 
@@ -64,8 +66,8 @@ GRANT SELECT ON CATALOG <catalog_name> TO `<application_id>`;
 Use the specific tables option for least-privilege access or if you only need to monitor a subset of your data. You must update permissions when adding new tables.
 
 ```sql
-GRANT USE_CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
-GRANT USE_SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
+GRANT USE CATALOG ON CATALOG <catalog_name> TO `<application_id>`;
+GRANT USE SCHEMA ON SCHEMA <catalog_name>.<schema_name> TO `<application_id>`;
 GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application_id>`;
 ```
 
@@ -74,8 +76,8 @@ GRANT SELECT ON TABLE <catalog_name>.<schema_name>.<table_name> TO `<application
 
 These permissions are needed for the following reasons:
 
-- `GRANT USE_CATALOG` is required to navigate into the catalog and discover schemas.
-- `GRANT USE_SCHEMA` is required to enumerate tables and monitor schema-level health.
+- `GRANT USE CATALOG` is required to navigate into the catalog and discover schemas.
+- `GRANT USE SCHEMA` is required to enumerate tables and monitor schema-level health.
 - `GRANT SELECT` is required for data quality monitoring, such as custom SQL or distribution checks.
 
 ## Next steps

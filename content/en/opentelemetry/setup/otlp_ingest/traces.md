@@ -48,16 +48,14 @@ If you are using [OpenTelemetry automatic instrumentation][3], set the following
 ```shell
 export OTEL_EXPORTER_OTLP_TRACES_PROTOCOL="http/protobuf"
 export OTEL_EXPORTER_OTLP_TRACES_ENDPOINT="{{< region-param key="otlp_trace_endpoint" >}}"
-export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},dd-otlp-source=${YOUR_SITE},compute_stats=true"
+export OTEL_EXPORTER_OTLP_TRACES_HEADERS="dd-api-key=${DD_API_KEY},compute_stats=true"
 ```
-
-<div class="alert alert-info">The value for <code>dd-otlp-source</code> should be provided to you by Datadog after being allowlisted for the intake endpoint. This is a specific identifier assigned to your organization.</div>
 
 #### Manual instrumentation
 
 If you are using manual instrumentation with OpenTelemetry SDKs, configure the OTLP HTTP Protobuf exporter programmatically.
 
-<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}:<br><ul><li>Replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}}.<li>Replace <code>${YOUR_SITE}</code> with the organization name you received from Datadog. </div>
+<div class="alert alert-info">Based on your <a href="/getting_started/site/">Datadog site</a>, which is {{< region-param key=dd_datacenter code="true" >}}, replace <code>${YOUR_ENDPOINT}</code> with {{< region-param key="otlp_trace_endpoint" code="true" >}}.</div>
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}
@@ -72,7 +70,6 @@ const exporter = new OTLPTraceExporter({
   headers: {
     'dd-api-key': process.env.DD_API_KEY,
     'dd-otel-span-mapping': '{span_name_as_resource_name: true}',
-    'dd-otlp-source': '${YOUR_SITE}', // Replace with the specific value provided by Datadog for your organization
     'compute_stats': 'true',
   },
 });
@@ -92,7 +89,6 @@ OtlpHttpSpanExporter exporter = OtlpHttpSpanExporter.builder()
     .setEndpoint("${YOUR_ENDPOINT}") // Replace this with the correct endpoint
     .addHeader("dd-api-key", System.getenv("DD_API_KEY"))
     .addHeader("dd-otel-span-mapping", "{span_name_as_resource_name: true}")
-    .addHeader("dd-otlp-source", "${YOUR_SITE}") // Replace with the specific value provided by Datadog for your organization
     .addHeader("compute_stats", "true")
     .build();
 ```
@@ -115,7 +111,6 @@ traceExporter, err := otlptracehttp.New(
 		map[string]string{
 			"dd-api-key": os.Getenv("DD_API_KEY"),
 			"dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-			"dd-otlp-source": "${YOUR_SITE}", // Replace with the specific value provided by Datadog for your organization
 			"compute_stats": "true",
 		}),
 )
@@ -136,7 +131,6 @@ exporter = OTLPSpanExporter(
     headers={
         "dd-api-key": os.environ.get("DD_API_KEY"),
         "dd-otel-span-mapping": "{span_name_as_resource_name: true}",
-        "dd-otlp-source": "${YOUR_SITE}", # Replace with the specific value provided by Datadog for your organization
         "compute_stats": "true",
     },
 )
@@ -180,14 +174,12 @@ If you receive a `403 Forbidden` error when sending traces to the Datadog OTLP t
 
 - The API key belongs to an organization that is not allowed to access the Datadog OTLP traces intake endpoint.
    **Solution**: To request access, contact your Customer Success Manager.
-- The `dd-otlp-source` header is missing or has an incorrect value.
-   **Solution**: Ensure that the `dd-otlp-source` header is set with the proper value for your site. You should have received an allowlisted value for this header from Datadog if you are a platform partner.
 - The endpoint URL is incorrect for your organization.
    **Solution**: Use the correct endpoint URL for your organization. Your site is {{< region-param key=dd_datacenter code="true" >}}, so you need to use the {{< region-param key="otlp_trace_endpoint" code="true" >}} endpoint.
 
 ### Error: 413 Request Entity Too Large
 
-If you receive a `413 Request Entity Too Large` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog traces intake endpoint's limit of 3.2MB.
+If you receive a `413 Request Entity Too Large` error when sending traces to the Datadog OTLP traces intake endpoint, it indicates that the payload size sent by the OTLP exporter exceeds the Datadog traces intake endpoint's limit of 15 MiB (uncompressed).
 
 This error usually occurs when the OpenTelemetry SDK batches too much telemetry data in a single request payload.
 
@@ -200,7 +192,7 @@ CopyBatchSpanProcessor batchSpanProcessor =
         .setMaxExportBatchSize(10)  // Default is 512
         .build();
 ```
-Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 3.2MB limit.
+Adjust the `setMaxExportBatchSize` value according to your needs. A smaller value results in more frequent exports with smaller payloads, reducing the likelihood of exceeding the 15 MiB limit.
 
 ### Warning: "traces export: failed … 202 Accepted" in Go
 

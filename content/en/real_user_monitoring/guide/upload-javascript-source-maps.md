@@ -126,7 +126,7 @@ The [`datadog-ci` CLI][1] scans the `dist` directory and subdirectories to autom
 
 {{< site-region region="us" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DD_API_KEY`.
 3. Run the following command once per service in your application:
 
    ```bash
@@ -142,7 +142,7 @@ The [`datadog-ci` CLI][1] scans the `dist` directory and subdirectories to autom
 
 {{< site-region region="eu,us3,us5,gov,gov2,ap1,ap2,uk1" >}}
 1. Add `@datadog/datadog-ci` to your `package.json` file (make sure you're using the latest version).
-2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DATADOG_API_KEY`.
+2. [Create a dedicated Datadog API key][1] and export it as an environment variable named `DD_API_KEY`.
 3. Configure the CLI to upload files to the {{<region-param key="dd_site_name">}} site by exporting two environment variables: `export DATADOG_SITE=`{{<region-param key="dd_site" code="true">}} and `export DATADOG_API_HOST=api.`{{<region-param key="dd_site" code="true">}}.
 4. Run the following command once per service in your application:
    ```bash

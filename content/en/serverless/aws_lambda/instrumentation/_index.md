@@ -14,6 +14,9 @@ further_reading:
     - link: "https://learn.datadoghq.com/courses/visibility-aws-lambda"
       tag: "Learning Center"
       text: "Configure AWS Lambda for Serverless Monitoring with Datadog"
+    - link: "/mcp_server/tools/#serverless_onboarding"
+      tag: 'Documentation'
+      text: 'Datadog MCP Server: serverless_onboarding tool'
 ---
 
 ## Overview
@@ -29,14 +32,6 @@ To get started, [sign up for a Datadog account][1] if you don’t already have o
 A sample application is [available on GitHub][6] with instructions on how to deploy with multiple runtimes and infrastructure-as-code tools.
 
 The quick start process configures your Lambda functions on the fly. To instrument Lambda functions permanently, see the detailed instructions in the next section.
-
-## Use the Datadog MCP server
-
-Use the [Datadog MCP server][9] to set up monitoring for your AWS Lambda containers with AI assistance. After you connect, try a prompt like:
-
-```shell
-Help me monitor my AWS Lambda functions with Datadog
-```
 
 ## Instrumentation instructions
 
@@ -59,6 +54,36 @@ After you're done with instrumentation and you've set up telemetry collection, y
 - link errors of your Lambda functions to your source code
 - filter or scrub sensitive information from logs or traces
 
+## Set up with agentic onboarding
+
+Use agentic onboarding to set up monitoring for your Lambda functions with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+{{< tabs >}}
+{{% tab "AI Setup CLI" %}}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Lambda function:
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=aws-lambda
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{{% /tab %}}
+{{% tab "MCP server" %}}
+
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Lambda functions with AI assistance. After you connect, try a prompt like:
+
+```
+Help me monitor my AWS Lambda functions with Datadog.
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -69,4 +94,4 @@ After you're done with instrumentation and you've set up telemetry collection, y
 [5]: /serverless/aws_lambda/remote_instrumentation
 [6]: https://github.com/DataDog/serverless-sample-app
 [8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=lambda
-[9]: /agentic_onboarding/setup
+[9]: /mcp_server/tools/#serverless_onboarding

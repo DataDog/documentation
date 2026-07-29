@@ -50,22 +50,22 @@ Error Tracking Replay Snippets allows you to view a pixel-perfect recreation of 
    {{% tab "iOS" %}}
    Follow [these steps][4] to setup and configure your mobile application's error replay for this platform.
 
-   [4]: /session_replay/mobile/setup_and_configuration/?tab=ios
+   [4]: /session_replay/setup_and_configuration/?platform=ios
    {{% /tab %}}
    {{% tab "Android" %}}
    Follow [these steps][5] to setup and configure your mobile application's error replay for this platform.
 
-   [5]: /session_replay/mobile/setup_and_configuration/?tab=android
+   [5]: /session_replay/setup_and_configuration/?platform=android
    {{% /tab %}}
    {{% tab "Kotlin Multiplatform" %}}
    Follow [these steps][6] to setup and configure your mobile application's error replay for this platform.
 
-   [6]: /session_replay/mobile/setup_and_configuration/?tab=kotlinmultiplatform
+   [6]: /session_replay/setup_and_configuration/?platform=kotlin_multiplatform
    {{% /tab %}}
    {{% tab "React Native" %}}
    Follow [these steps][7] to setup and configure your mobile application's error replay for this platform.
 
-   [7]: /session_replay/mobile/setup_and_configuration/?tab=reactnative
+   [7]: /session_replay/setup_and_configuration/?platform=react_native
    {{% /tab %}}
    {{</tabs>}}
 

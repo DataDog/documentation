@@ -11,39 +11,63 @@ Datadog BYOC (Bring Your Own Cloud) Logs brings core Log Explorer capabilities t
 
 ## Supported features
 
-The following log features are supported:
+### Search and visualization
 
-**Search and visualization**
 - Full text search on any log attributes
 - List, Timeseries, Top List, Table, Tree Map, Pie Chart, Scatter Plot visualizations
-- Group by into Fields and Patterns (except monthly timeshift)
+- Group into Fields and Patterns (except monthly timeshift)
+- Group and sort, including group and sort with count unique
+- Flat group queries
 - Facet-based filtering and drill-down
 - Download CSV
+- Pagination
+- Notebooks (Preview)
 
-**Dashboards and monitors**
+### Dashboards and monitors
+
 - Dashboards with BYOC Logs data
 - Log monitors on BYOC Logs indexes
-- Bits Investigation
 
-**Index management**
+### Index management
+
 - Multiple indexes with independent retention periods and routing rules
 
-**Access control**
+### Access control
+
 - RBAC through [Log Restriction Queries][1]
 
-**Correlation**
+### Correlation
+
 - Correlation from a log in BYOC Logs to metrics sent to Datadog SaaS
 - Correlation from a log in BYOC Logs to traces sent to Datadog SaaS
+- Correlation from a log in BYOC Logs to processes sent to Datadog SaaS
+
+### Processing
+
+- Configurable processing pipelines through Observability Pipelines
+- Observability Pipeline connection
+
+### AI features
+
+- Bits Investigation (Preview)
+- MCP Server (Preview)
 
 ## Unsupported features
 
-Feature support is actively evolving. The following are not currently supported:
+BYOC Logs does not support the following features:
 
-- **SIEM**: Not available for BYOC Logs data.
-- **Watchdog**: Not available for BYOC Logs data.
-- **Notebooks**: Log data from BYOC Logs cannot be used in Notebooks.
-- **Federated search**: Searching across multiple BYOC Logs clusters from a single query is not supported.
-- **LiveTail**: Real-time log streaming is not available for BYOC Logs indexes.
-- **Log context view**: Viewing surrounding logs in context is not yet supported.
+- SIEM
+- Watchdog
+- Federated search
+- LiveTail
+- Log context view
+
+### Unsupported query capabilities
+
+- CIDR query
+- Group by transactions
+- Advanced query capabilities:
+  - Calculated fields
+  - Grok extraction (query-time parsing)
 
 [1]: /api/latest/logs-restriction-queries/

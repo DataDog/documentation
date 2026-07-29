@@ -594,6 +594,13 @@
       "description": "Update Confluent account returns \"OK\" response"
     }
   ],
+  "ListDORADeployments": [
+    {
+      "group": "dora_metrics",
+      "suffix": "_1654201709",
+      "description": "Get a list of deployment events returns deployments with date-time timestamps"
+    }
+  ],
   "CreateDORADeployment": [
     {
       "group": "dora_metrics",
@@ -1093,6 +1100,34 @@
       "description": "Update a personal access token returns \"OK\" response"
     }
   ],
+  "CreateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create a new LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "CreateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Create an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPromptVersion": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update a specific LLM Observability prompt version returns \"OK\" response"
+    }
+  ],
+  "UpdateLLMObsPrompt": [
+    {
+      "group": "llm_observability",
+      "suffix": "",
+      "description": "Update an LLM Observability prompt returns \"OK\" response"
+    }
+  ],
   "AggregateLogs": [
     {
       "group": "logs",
@@ -1270,6 +1305,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Create a tag indexing rule returns \"Created\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_2435129406",
+      "description": "Create a tag indexing rule with exclude-mode tag usage fields returns \"Created\" response"
     }
   ],
   "ReorderTagIndexingRules": [
@@ -1507,6 +1547,11 @@
       "group": "metrics",
       "suffix": "",
       "description": "Update a tag indexing rule returns \"OK\" response"
+    },
+    {
+      "group": "metrics",
+      "suffix": "_4127399471",
+      "description": "Update a tag indexing rule with exclude-mode tag usage fields returns \"OK\" response"
     }
   ],
   "CreateTenantBasedHandle": [

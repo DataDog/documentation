@@ -10,11 +10,6 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
- btn_hidden="false" header="Join the Preview!">}}
-Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Use Observability Pipelines' Datadog Metrics destination ({{< tooltip glossary="preview" case="title" >}}) to send metrics to Datadog. You can also use [AWS PrivateLink](#aws-privatelink) to send metrics from Observability Pipelines to Datadog.
@@ -50,6 +45,12 @@ There are no secret identifiers for this destination.
 {{< /tabs >}}
 
 ## How the destination works
+
+### Metrics aggregation
+
+The Datadog Metrics destination aggregates metrics that have the same metric name, tag values, and timestamp into a single metric before sending them to Datadog. The Datadog metrics intake accepts only one value per unique combination of metric name, tag values, and timestamp, so aggregating in the destination preserves values that the intake would otherwise discard.
+
+### Event batching
 
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 

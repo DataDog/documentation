@@ -23,7 +23,7 @@ further_reading:
 
 Lineage shows how data flows through your stack—from source systems and warehouse tables, through transformations and jobs, to the dashboards and applications that consume it. Use it to trace quality issues to their root cause, assess the blast radius of a failing job or a planned schema change, and route incidents to the right owner.
 
-Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Fivetran, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
+Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Fivetran, Hightouch, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
 
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
