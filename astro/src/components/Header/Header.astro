@@ -104,7 +104,13 @@ const logoPanelLabels = {
         </ul>
 
         {/* Logo */}
-        <div class="header__logo-slot">
+        {/* The download panel is a sibling of — not a child of — the logo
+            anchor: it renders its own "Download Media Assets" <a>, and nesting
+            an <a> inside the logo's <a> is invalid HTML. The browser's parser
+            reparents the nested anchor, which desyncs the SSR'd DOM from the
+            hydrated one and throws a Preact hydration mismatch. The slot is the
+            positioning context for the absolutely-positioned panel. */}
+        <div class={cl("header__logo-slot")}>
           <a href="/" id={logoTriggerId} class={cl("header__logo-column")}>
             <img
               height="75"
@@ -120,16 +126,16 @@ const logoPanelLabels = {
               srcset={`${textLogoUrl} 1x, ${textLogoUrl}&dpr=2 2x`}
               alt="Datadog"
             />
-            <LogoDownloadPanel
-              client:load
-              externalContext={{
-                scope: logoTriggerId,
-                entries: { trigger: logoTriggerId },
-              }}
-              labels={logoPanelLabels}
-              svgs={{ arrow: logoPanelArrowSvg }}
-            />
           </a>
+          <LogoDownloadPanel
+            client:load
+            externalContext={{
+              scope: logoTriggerId,
+              entries: { trigger: logoTriggerId },
+            }}
+            labels={logoPanelLabels}
+            svgs={{ arrow: logoPanelArrowSvg }}
+          />
         </div>
 
         <ul class={cl("header__right-list")}>

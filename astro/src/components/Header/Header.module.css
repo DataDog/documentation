@@ -154,6 +154,13 @@
 }
 
 /* Logo column */
+.header__logo-slot {
+  /* Positioning context for the absolutely-positioned logo download panel,
+     which is a sibling of the logo anchor (see Header.astro). The slot shrinks
+     to the logo's width, so the panel's `left: 50%` centers under the logo. */
+  position: relative;
+}
+
 .header__logo-column {
   display: flex;
   flex-direction: column;

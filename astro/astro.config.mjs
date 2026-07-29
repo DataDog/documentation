@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import markdoc from "@astrojs/markdoc";
 import preact from "@astrojs/preact";
+import node from "@astrojs/node";
 import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath } from "node:url";
 import { realpathSync } from "node:fs";
@@ -45,14 +46,15 @@ function deriveHugoDocsUrl() {
 export default defineConfig({
   site: deriveSiteUrl(),
   // On-demand rendering: cdocs resolve their filters at request time (reading
-  // URL params + cookie), so the site renders on the server. Existing static
-  // routes (API docs, etc.) opt back into build-time rendering with
-  // `export const prerender = true`. NOTE: the production `astro build` needs a
-  // server adapter (@astrojs/node); it is intentionally not installed yet — the
-  // Astro-5-compatible 9.x line carries two medium CVEs (fixed only in 10.x /
-  // Astro 7). The dev server does on-demand SSR without an adapter, which is
-  // enough to build and test the cdocs PoC.
+  // URL params + cookie), so those routes render on the server and cannot be
+  // prerendered. Static routes (API docs, etc.) opt back into build-time
+  // rendering with `export const prerender = true`; for the API docs the SSR
+  // capability is dormant and the output is fully static. The @astrojs/node
+  // adapter lets `astro build` + `astro preview` mirror a production server
+  // locally; the CVEs that once affected the Astro-5-era adapter are resolved
+  // in the current Astro 7 / adapter 11 line.
   output: "server",
+  adapter: node({ mode: "standalone" }),
   integrations: [markdoc(), preact()],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled
