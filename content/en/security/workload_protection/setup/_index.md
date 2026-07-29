@@ -23,9 +23,8 @@ Workload Protection relies on the Datadog Agent to monitor your workloads and co
 ### Requirements
 
 Workload Protection offers 3 different flavors depending on your environment and operating system:
-- On **Linux**, you can choose between:
-  - (recommended) **The eBPF agent** offers the best performance and feature support. When eBPF is available in your environment, this is what you should install.
-  - **The eBPF-less agent** is a fallback agent for environments without eBPF support. This agent covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring, network monitoring).
+- On **Linux**, install **the eBPF agent**. It offers the best performance and feature support.
+- On **AWS Fargate**, install **the eBPF-less agent**. Fargate does not provide eBPF access, so this agent uses ptrace instead. It covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring, network monitoring).
 - On **Windows**, the Workload Protection agent installs a Windows driver to collect events and telemetry.
 
 #### Supported Linux flavors
@@ -51,16 +50,6 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 - Custom kernel builds might modify critical hook points that the Agent requires to properly function. Support isn't guaranteed.
 - Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
 - For compatibility issues with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][2].
-
-##### Workload Protection's eBPF-less agent supports the following Linux distributions
-
-| Linux Distributions | Supported Versions       |
-|---------------------|--------------------------|
-| Any                 | Kernel 3.4.43 and higher |
-
-**Notes:**
- 
-- The Workload Protection eBPF-less solution for eBPF disabled environments uses a ptrace-based Datadog Agent.
 
 ##### Supported cloud environments
 
@@ -92,7 +81,7 @@ Use the following instructions to enable the eBPF agent of Workload Protection i
 
 {{< partial name="workload-protection/wp-ebpf-tiles.html" >}}
 
-#### Workload Protection's eBPF-less agent (Linux)
+#### Workload Protection's eBPF-less agent (AWS Fargate)
 
 Use the following instructions to enable the eBPF-less agent of Workload Protection in the Datadog Agent.
 
