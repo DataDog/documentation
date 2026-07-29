@@ -171,7 +171,7 @@ Admins with the `Logs Write Archives` permission can configure default controls 
 
 - {{< ui >}}Default Rehydration volume limit{{< /ui >}}: Define the default number of logs (in millions) that can be rehydrated per Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode. If the limit is reached, the Archive Search automatically stops, but already rehydrated logs remain accessible. Admins can also allow this limit to be overridden during Archive Search creation.
 
-- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog.
+- {{< ui >}}Rehydration retention periods{{< /ui >}}: Choose which retention periods are available when rehydrating results. Only the selected durations (for example, 3, 7, 15, 30, 45, 60, 90, or 180 days) appear in the dropdown menu when selecting how long logs should remain searchable in Datadog. If Flex Logs is enabled for your account, you can also select 30 days (flex) to rehydrate logs into the Flex Tier.
 
 When an Archive Search in {{< ui >}}Search & Rehydration{{< /ui >}} mode reaches the volume limit, its status changes to {{< ui >}}Limit reached{{< /ui >}}, indicating that not all logs matching your query and time range were rehydrated. To rehydrate the remaining logs, run a new Archive Search with a higher volume limit, or with a narrower query or time range.
 
