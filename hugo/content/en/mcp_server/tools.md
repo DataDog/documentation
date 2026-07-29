@@ -2139,23 +2139,33 @@ Retrieves the Flaky Tests Management policies configured for a repository, inclu
 - Show me the flaky test management policies for `github.com/my-org/my-repo`.
 - What auto-quarantine rules are configured for the checkout service repository?
 
-### `search_dora_deployments`
+### `search_dora_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `DORA Metrics Read`*\
-Searches DORA deployment events with filters, or fetches full details for a single deployment by ID.
+Searches DORA events with filters, or fetches full details for a single event by ID. Set the target to `deployment` (the default) or `pull_request` to choose which event type to search. The `pull_request` target returns only pull requests that were merged and deployed, so you can analyze the coding, review, merge, and deploy phases behind change lead time. It does not return open pull requests, review status, or CI results. For trends and aggregates, use `aggregate_dora_events`.
 
 - Show me deployments for the `checkout` service in the last 7 days.
-- Get details for DORA deployment `abc123`.
 - Find failed deployments in the production environment this month.
+- Show me all rollbacks across environments.
+- Which pull requests took the longest to review last month?
 
-### `aggregate_dora_deployments`
+### `aggregate_dora_events`
 *Toolset: **software-delivery***\
 *Permissions Required: `Timeseries`*\
-Returns DORA metrics (deployment frequency, change lead time, change failure rate, recovery time) for a service, team, or repo, as scalar values or timeseries. Use for questions about software delivery performance over a time window.
+Aggregates DORA events into scalar values or timeseries using composable queries and formulas, the same model as `get_datadog_metric`. Each query selects a DORA index (`deployment`, `commit`, `pull_request`, or `failure`), an optional measure to aggregate, an aggregation, an optional Lucene filter, and optional grouping facets. Reference queries by name in a formula to derive ratios such as change failure rate. Call `get_dora_fields` first to discover the valid measures, facets, and aggregations for an index.
 
-- What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
+- What is the change failure rate for the `checkout` service over the last 30 days?
 - Show me the change lead time trend for the `payments` service over the last quarter.
-- Get all four DORA metrics for the `auth-service` team.
+- Which team has the highest deployment frequency?
+- What is the median pull request cycle time for the `auth-service` repository?
+
+### `get_dora_fields`
+*Toolset: **software-delivery***\
+*Permissions Required: `DORA Metrics Read`*\
+Lists the measures, facets, aggregations, and cardinality fields that `aggregate_dora_events` accepts for each DORA index (`deployment`, `commit`, `pull_request`, and `failure`). Call this tool before `aggregate_dora_events` to pick a valid measure, grouping facet, or aggregation.
+
+- Which fields can I group DORA deployment metrics by?
+- What measures are available on the `pull_request` DORA index?
 
 ## Synthetics
 
