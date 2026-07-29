@@ -74,12 +74,6 @@ The `software-delivery` toolset includes the following tools:
 `aggregate_dora_deployments`
 : Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
 
-`get_prs_by_head_branch`
-: Find all pull requests for a repository that have a specific head branch, such as the pull request for the feature branch you are working on.
-
-`search_pr_insights`
-: Retrieve the issues blocking a pull request, including failed tests, flaky tests, code quality problems, security vulnerabilities, and failed CI jobs.
-
 `retry_datadog_ci_job`
 : Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per workflow run over seven days. For other CI providers, use the provider's UI to rerun.
 
@@ -95,7 +89,6 @@ After you are connected, try prompts like:
 - What's the code coverage on the `main` branch for `github.com/my-org/my-repo`?
 - Show me coverage metrics for commit `abc123abc123abc123abc123abc123abc123abcd`.
 - What is the deployment frequency and change failure rate for the `checkout` service over the last 30 days?
-- What's blocking the pull request for my branch?
 - Which test optimization features are enabled for the `auth-service`?
 - Quarantine all active flaky tests in the `checkout-service` repository.
 
