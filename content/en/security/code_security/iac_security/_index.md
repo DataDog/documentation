@@ -15,6 +15,9 @@ further_reading:
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
+  - link: "/security/code_security/iac_security/custom_rules/"
+    tag: "Documentation"
+    text: "IaC Security Custom Rules"
   - link: "/pr_gates/"
     tag: "Documentation"
     text: "PR Gates"
@@ -78,6 +81,10 @@ You can configure exclusions to prevent certain findings from appearing in scan 
 
 Exclusions are managed through a configuration file or inline comments in your IaC code. For supported formats and usage examples, see [Configure IaC Security][7].
 
+### Write custom rules
+
+In addition to Datadog's default rules, you can write your own rules for misconfigurations specific to your organization. See [IaC Security Custom Rules][14].
+
 ## Next steps
 
 1. [Set up IaC Security][1] in your environment.
@@ -101,3 +108,4 @@ Exclusions are managed through a configuration file or inline comments in your I
 [11]: /pr_gates/
 [12]: /pr_gates/setup
 [13]: /security/code_security/iac_security/iac_rules
+[14]: /security/code_security/iac_security/custom_rules/
