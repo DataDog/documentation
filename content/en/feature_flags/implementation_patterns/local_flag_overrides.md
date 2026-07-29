@@ -38,11 +38,11 @@ OpenFeature's Multi-Provider wraps multiple providers behind a single client. By
 
 Providers are evaluated in the order you register them. Place the `InMemoryProvider` **first** in the provider list so overrides take precedence over Datadog.
 
-For more detail on evaluation strategies and provider ordering, see the [OpenFeature Multi-Provider specification][1].
+For more detail on evaluation strategies, see [First Match strategy][2] in the OpenFeature specification.
 
 ## Client override examples
 
-<div class="alert alert-info">The Multi-Provider override pattern is supported on <a href="/feature_flags/client/javascript/">JavaScript</a>, <a href="/feature_flags/client/react/">React</a>, <a href="/feature_flags/client/angular/">Angular</a>, <a href="/feature_flags/client/reactnative/">React Native</a>, <a href="/feature_flags/client/ios/">iOS</a> and <a href="/feature_flags/client/android/">Android</a>. On iOS and Android SDKs, <code>MultiProvider</code> is available, but the OpenFeature SDKs do not ship a built-in in-memory provider — implement a small custom <code>FeatureProvider</code> instead, as shown in the <a href="/feature_flags/client/ios/#testing">iOS</a> and <a href="/feature_flags/client/android/#testing">Android</a> testing documentation.</div>
+<div class="alert alert-info">The Multi-Provider override pattern is supported on <a href="/feature_flags/client/javascript/">JavaScript</a>, <a href="/feature_flags/client/react/">React</a>, <a href="/feature_flags/client/angular/">Angular</a>, <a href="/feature_flags/client/reactnative/">React Native</a>, <a href="/feature_flags/client/ios/">iOS</a>, and <a href="/feature_flags/client/android/">Android</a>. On iOS and Android SDKs, <code>MultiProvider</code> is available, but the OpenFeature SDKs do not ship a built-in in-memory provider — implement a small custom <code>FeatureProvider</code> instead, as shown in the <a href="/feature_flags/client/ios/#testing">iOS</a> and <a href="/feature_flags/client/android/#testing">Android</a> testing documentation.</div>
 
 The examples below use browser JavaScript and show two common ways to populate overrides. Adapt the `loadOverrides` function to match how your team prefers to set overrides, or to the storage mechanism available on your platform (for example, <code>UserDefaults</code> on iOS or <code>SharedPreferences</code> on Android).
 
@@ -190,6 +190,19 @@ import tracer from 'dd-trace';
 
 const OVERRIDE_ENV_PREFIX = 'FF_';
 
+function buildInMemoryFlags(overrides) {
+  return Object.fromEntries(
+    Object.entries(overrides).map(([flagKey, value]) => [
+      flagKey,
+      {
+        variants: { forced: value },
+        defaultVariant: 'forced',
+        disabled: false,
+      },
+    ]),
+  );
+}
+
 function loadOverrides() {
   const overrides = {};
 
@@ -241,6 +254,44 @@ func loadOverrides() map[string]any {
 
     return overrides
 }
+
+func buildInMemoryFlags(overrides map[string]any) map[string]memprovider.InMemoryFlag {
+    flags := make(map[string]memprovider.InMemoryFlag, len(overrides))
+
+    for flagKey, value := range overrides {
+        flags[flagKey] = memprovider.InMemoryFlag{
+            State:          memprovider.Enabled,
+            DefaultVariant: "forced",
+            Variants:       map[string]any{"forced": value},
+        }
+    }
+
+    return flags
+}
+
+func initializeFeatureFlags() error {
+    tracer.Start()
+    defer tracer.Stop()
+
+    datadogProvider, err := ddopenfeature.NewDatadogProvider(ddopenfeature.ProviderConfig{})
+    if err != nil {
+        return err
+    }
+    defer datadogProvider.Shutdown()
+
+    overrideProvider := memprovider.NewInMemoryProvider(buildInMemoryFlags(loadOverrides()))
+
+    multiProvider, err := multi.NewProvider(
+        multi.StrategyFirstMatch,
+        multi.WithProvider("overrides", overrideProvider),
+        multi.WithProvider("datadog", datadogProvider),
+    )
+    if err != nil {
+        return err
+    }
+
+    return openfeature.SetProviderAndWait(multiProvider)
+}
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -266,6 +317,39 @@ private static Map<String, Object> loadOverrides() {
     }
 
     return overrides;
+}
+
+private static Map<String, Flag<?>> buildInMemoryFlags(Map<String, Object> overrides) {
+    Map<String, Flag<?>> flags = new HashMap<>();
+
+    for (Map.Entry<String, Object> entry : overrides.entrySet()) {
+        Object value = entry.getValue();
+        Flag.Builder<?> builder = Flag.builder().defaultVariant("forced");
+
+        if (value instanceof Boolean boolValue) {
+            builder.variant("forced", boolValue);
+        } else if (value instanceof Number numberValue) {
+            builder.variant("forced", numberValue.doubleValue());
+        } else {
+            builder.variant("forced", value.toString());
+        }
+
+        flags.put(entry.getKey(), builder.build());
+    }
+
+    return flags;
+}
+
+public static void initializeFeatureFlags() throws Exception {
+    InMemoryProvider overrideProvider = new InMemoryProvider(buildInMemoryFlags(loadOverrides()));
+    Provider datadogProvider = new Provider();
+
+    MultiProvider multiProvider = new MultiProvider(
+        List.of(overrideProvider, datadogProvider)
+    );
+
+    OpenFeatureAPI api = OpenFeatureAPI.getInstance();
+    api.setProviderAndWait(multiProvider);
 }
 {{< /code-block >}}
 
@@ -304,3 +388,4 @@ const isEnabled = await client.getBooleanValue('checkout_new', false, {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://openfeature.dev/specification/appendix-a/#multi-provider
+[2]: https://openfeature.dev/specification/appendix-a/#first-match-strategy
