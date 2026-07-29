@@ -12,6 +12,7 @@
     "build:en": "SKIP_TRANSLATIONS=true astro build",
     "preview": "astro preview --port 4322",
     "preview:proxied": "PROXIED=1 astro preview --port 4321",
+    "pretest": "node -e \"const [major] = process.versions.node.split('.').map(Number); if (major < 22) { console.error('Error: Node >=22 required (current: ' + process.version + '). Run: nvm use'); process.exit(1); }\"",
     "test": "yarn test:headless && yarn test:browser",
     "test:headless": "vitest run",
     "test:browser": "USE_DEV_SERVER=true playwright test",
