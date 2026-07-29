@@ -78,17 +78,17 @@ To preview or share your form:
 
 ## Form settings
 
-From the [Forms][2] page, click a form. In the {{< ui >}}Fields{{< /ui >}} panel, click the gear <i class="icon-cog-2"></i> icon to access the following settings:
+From the [Forms][2] page, click a form to open it in the editor. In the editor header, click the gear <i class="icon-cog-2"></i> icon to access the following settings:
 
 | Setting | Description |
 |---------|-------------|
-| Accepting Responses | Toggle to set the form as active or inactive. When inactive, the form does not accept new responses. You can also set an end date to automatically close the form on a specific date. |
+| Accepting Responses | Set the form as active or inactive. When inactive, the form does not accept new responses. You can also set an end date to automatically close the form on a specific date. Only available for published forms. |
 | Anonymous Responses | When enabled, respondent emails are not stored. |
-| Single Responses | When enabled, prevents the same person from submitting more than one response by tracking user identity. You can enable this setting together with Anonymous Responses. |
-| Manage Permissions | Configure who can view the form and submit responses. See [Manage access](#manage-access). |
-| Edit Theme | Change the form's color theme. |
+| Manage Permissions | Configure who can view and edit the form, and who can view submitted responses. See [Manage access](#manage-access). |
 | Clone Form | Create a copy of the form. |
-| Export Form | Download the form as a JSON file. |
+| Import Form | Import fields from a PDF or JSON file into the current form. |
+| Export Form (JSON) | Download the form as a JSON file. |
+<!-- | Limit to 1 response | When enabled, prevents the same person from submitting more than one response. | -->
 
 For more information on managing responses, see [Form responses][4].
 
@@ -103,13 +103,13 @@ The following sharing options are available:
 {{% collapse-content title="Share within Datadog" level="h4" expanded=false %}}
 Share the form with users in your Datadog organization.
 
-Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a new dashboard.
+Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
 
-Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][5] catalog, a central place where platform and infrastructure teams publish tools that the rest of the organization can discover and use without leaving Datadog.
+Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][5] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Share with external users" level="h4" expanded=false %}}
-Share the form with users outside your Datadog organization. You can configure an access expiration date for each sharing option, and create multiple sharing configurations with different settings and expiration dates.
+Share the form with users outside your Datadog organization. You can configure an access expiration date for each sharing option and create multiple sharing configurations with different settings and expiration dates.
 
 The following options are available:
 
@@ -122,7 +122,12 @@ To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then clic
 
 ## Add a form to a dashboard
 
-To embed a form directly in a dashboard as a widget:
+To add a form to a dashboard from the form editor:
+1. From the [Forms][2] page, click a form to open it in the editor.
+1. Click {{< ui >}}Share{{< /ui >}}.
+1. Under {{< ui >}}Add to Dashboard{{< /ui >}}, select an existing dashboard or create one, then click {{< ui >}}Add{{< /ui >}}.
+
+You can also add a form to a dashboard directly from the dashboard:
 1. Navigate to a [dashboard][6].
 1. Click **Add Widgets** to open the side panel.
 1. Click the **Apps** tab.
@@ -143,10 +148,11 @@ After creating a form, you can add an [action][7] or [workflow blueprint][8] tha
 ## Manage access
 
 By default, only the creator of a form can access it. To change the permissions on a form:
-1. From the [Forms][2] page, click a form.
-1. In the {{< ui >}}Fields{{< /ui >}} panel, click the gear <i class="icon-cog-2"></i> icon.
-1. To change who can see the form and submit answers, click {{< ui >}}Edit Form Permissions{{< /ui >}}.
-1. To change who can see the submitted responses, click {{< ui >}}Edit Response Permissions{{< /ui >}}.
+1. From the [Forms][2] page, click a form to open it in the editor.
+1. In the editor header, click the gear <i class="icon-cog-2"></i> icon.
+1. Click {{< ui >}}Manage Permissions{{< /ui >}}. A modal opens with two sections:
+   - **Form Access**: Controls who can view and edit the form.
+   - **Response Access**: Controls who can view submitted responses. This section is only available after the form receives its first submission.
 
 ## Further reading
 
