@@ -759,7 +759,7 @@ See [Connect Session Replay to your third-party tools][30].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
