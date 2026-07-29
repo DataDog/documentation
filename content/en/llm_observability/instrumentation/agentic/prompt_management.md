@@ -86,7 +86,7 @@ DD_LLMOBS_AGENTLESS_ENABLED=1
 
 If configuration is available before process startup, preserve the existing startup workflow and use `ddtrace-run` if needed for automatic instrumentation. If the application loads configuration in Python, load it before importing `ddtrace.auto`, then run the application's normal Python command. Do not combine application-level configuration loading with `ddtrace-run`.
 
-When documenting a shell-based startup, ensure that configuration reaches the child Python process by exporting the variables, assigning them inline on the launch command, or preserving the application's existing mechanism. Do not present bare, unexported shell assignments as runnable setup.
+When documenting a shell-based startup, confirm that configuration reaches the child Python process by exporting the variables, assigning them inline on the launch command, or preserving the application's existing mechanism. Do not present bare, unexported shell assignments as runnable setup.
 
 A write-capable application key used to promote a prompt is a one-time setup credential. Do not add it to the application's runtime configuration unless the user explicitly selected it for runtime use and it also has the required read permissions. Otherwise, use a separate, least-privilege runtime application key.
 
