@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in .NET Build Artifacts
 description: Embed Git information in .NET build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: dotnet
+code_lang_weight: 0
 ---
 
 ## Overview

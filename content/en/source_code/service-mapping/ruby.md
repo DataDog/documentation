@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Ruby Build Artifacts
 description: Embed Git information in Ruby build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: ruby
+code_lang_weight: 60
 ---
 
 ## Overview

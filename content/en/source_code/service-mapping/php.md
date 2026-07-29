@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in PHP Build Artifacts
 description: Embed Git information in PHP build artifacts for containers and host deployments.
+type: multi-code-lang
+code_lang: php
+code_lang_weight: 40
 ---
 
 ## Overview

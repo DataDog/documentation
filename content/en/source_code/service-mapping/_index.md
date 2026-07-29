@@ -1,6 +1,7 @@
 ---
 title: Service Mapping for Source Code Integration
 description: "Tag your APM telemetry with Git information to link services to source code."
+type: multi-code-lang
 further_reading:
 - link: "/tracing/"
   tag: "Documentation"
@@ -32,7 +33,7 @@ Select one of the following languages that support embedding Git information:
   {{< image-card href="/source_code/service-mapping/php/" src="integrations_logos/php.png" alt="PHP" tooltip="PHP" >}}
   {{< image-card href="/source_code/service-mapping/python/" src="integrations_logos/python.png" alt="Python" tooltip="Python" >}}
   {{< image-card href="/source_code/service-mapping/ruby/" src="integrations_logos/ruby.png" alt="Ruby" tooltip="Ruby" >}}
-  {{< image-card href="/source_code/service-mapping/other/" tooltip="Other Languages" >}}
+  {{< image-card href="/source_code/service-mapping/other/" title="Other Languages" tooltip="Other Languages" >}}
 {{< /card-grid >}}
 
 ## Build inside a Docker container

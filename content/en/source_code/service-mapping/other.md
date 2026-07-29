@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Build Artifacts
 description: Manually tag telemetry with Git information for languages that lack native support.
+type: multi-code-lang
+code_lang: other
+code_lang_weight: 70
 ---
 
 ## Overview

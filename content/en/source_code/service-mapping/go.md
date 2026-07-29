@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Go Build Artifacts
 description: Embed Git information in Go build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: go
+code_lang_weight: 10
 ---
 
 ## Overview

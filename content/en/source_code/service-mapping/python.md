@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Python Build Artifacts
 description: Embed Git information in Python build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: python
+code_lang_weight: 50
 ---
 
 ## Overview

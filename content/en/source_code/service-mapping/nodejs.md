@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Node.js Build Artifacts
 description: Embed Git information in Node.js build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: nodejs
+code_lang_weight: 30
 ---
 
 ## Overview

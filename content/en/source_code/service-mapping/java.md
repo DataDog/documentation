@@ -1,6 +1,9 @@
 ---
 title: Embed Git Information in Java Build Artifacts
 description: Embed Git information in Java build artifacts for containers, serverless, and host deployments.
+type: multi-code-lang
+code_lang: java
+code_lang_weight: 20
 ---
 
 ## Overview
