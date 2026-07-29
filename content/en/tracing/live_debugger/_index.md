@@ -73,6 +73,8 @@ Live Debugger enablement depends on your service's runtime language. See the lan
 
 Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
+You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
+
 #### Enable for Java, Python, .NET, and Node.js
 
 For services running an updated SDK version, you can enable Live Debugger in one of two ways:
