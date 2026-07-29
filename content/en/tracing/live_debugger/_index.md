@@ -273,8 +273,9 @@ After you integrate your source code manager with your Datadog account and link 
 A Debug Session lets you inspect running code using auto-expiring logpoints. To create and use a Debug Session:
 
 1. Start a Debug Session from one of the following locations:
+   - (Preview) On the [Live Debugger page][13], submit a question or investigation prompt to [Bits Live Debugger][29].
    - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}}.
-   - (Requires the [Code Origin][20] feature) In the [Trace Explorer][14], open a trace, locate the Code Origin section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
+   - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
 2. Add a logpoint to begin collecting diagnostic data.
 3. Add, remove, or modify logpoints as needed during the session.
 
@@ -299,7 +300,7 @@ Live Debugger data might contain sensitive information, especially when using th
 
 Live Debugger has two redaction modes:
 
-- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans. Bits Live Debugger is not available for service and environment combinations set to {{< ui >}}Strict Mode{{< /ui >}}.
+- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans. [Bits Live Debugger][23] is not available for service and environment combinations set to {{< ui >}}Strict Mode{{< /ui >}}.
 - {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, and IPs. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
 These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
@@ -318,13 +319,11 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 ### Bits Live Debugger
 
-{{< beta-callout url="https://www.datadoghq.com/product-preview/debug-with-bits/" >}}
-Bits Live Debugger is in Preview. Request access to join the waiting list.
-{{< /beta-callout >}}
+<div class="alert alert-info">Bits Live Debugger is currently in Preview. <a href="/tracing/live_debugger/bits-live-debugger/">Click here</a> to learn more and request access.</div>
 
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
-**Note**: Bits Live Debugger requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
+**Note**: [Bits Live Debugger][23] requires the service and environment to be in Targeted Mode. See [Mode-based redaction][24] for details.
 
 ## Limitations
 
@@ -351,7 +350,7 @@ The following constraints apply to Live Debugger usage and configuration:
 [10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 [11]: /logs/log_configuration/indexes/#exclusion-filters
 [12]: /logs/log_configuration/indexes/#add-indexes
-[13]: https://app.datadoghq.com/debugging/sessions
+[13]: https://app.datadoghq.com/debugging/
 [14]: https://app.datadoghq.com/apm/traces
 [15]: /dynamic_instrumentation/expression-language/
 [17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
@@ -364,3 +363,4 @@ The following constraints apply to Live Debugger usage and configuration:
 [26]: https://app.datadoghq.com/debugging/settings
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/
+[29]: /tracing/live_debugger/bits-live-debugger/#start-a-debugging-session

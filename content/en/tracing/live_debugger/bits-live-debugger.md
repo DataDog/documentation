@@ -82,7 +82,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [1]: /tracing/live_debugger/
 [2]: /tracing/live_debugger/#permissions
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/
-[4]: https://app.datadoghq.com/debugging/sessions
+[4]: https://app.datadoghq.com/debugging/
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
 [7]: /tracing/live_debugger/#requirements-and-setup
