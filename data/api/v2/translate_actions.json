@@ -71,6 +71,10 @@
     "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
     "summary": "List all fleet tracers"
   },
+  "ListLLMObsCustomEvalConfigs": {
+    "description": "List all custom LLM Observability evaluator configurations for the organization.",
+    "summary": "List custom evaluator configurations"
+  },
   "DeleteLLMObsCustomEvalConfig": {
     "description": "Delete a custom LLM Observability evaluator configuration by its name.",
     "summary": "Delete a custom evaluator configuration"
@@ -1139,6 +1143,16 @@
     "description": "Get all containers for your organization.",
     "summary": "Get All Containers"
   },
+  "GetCostAccountFilters": {
+    "description": "Get the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Get account filters"
+  },
+  "UpdateCostAccountFilters": {
+    "description": "Update the account filters for a cloud account (AWS CUR 1.0/2.0, OCI, and other clouds).",
+    "summary": "Update account filters",
+    "request_description": "",
+    "request_schema_description": "Account filters patch request."
+  },
   "ListCostAnomalies": {
     "description": "List detected Cloud Cost Management anomalies for the organization.",
     "summary": "List cost anomalies"
@@ -1261,6 +1275,10 @@
   "DeleteCustomForecast": {
     "description": "Delete the custom forecast for a budget.",
     "summary": "Delete a budget's custom forecast"
+  },
+  "GetCustomForecast": {
+    "description": "Get the custom forecast for a budget.",
+    "summary": "Get a budget's custom forecast"
   },
   "ListBudgets": {
     "description": "List budgets.",
@@ -1436,6 +1454,20 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "GetOwnershipSettings": {
+    "description": "Get ownership settings for the org. When settings are unset, the API returns the default opt-out configuration with `auto_tag` set to `true` and `confidence_level` set to `high`.",
+    "summary": "Get ownership settings for the org"
+  },
+  "PostOwnershipSettings": {
+    "description": "Update ownership settings for the org.",
+    "summary": "Update ownership settings for the org",
+    "request_description": "",
+    "request_schema_description": "The request body for updating ownership settings."
+  },
+  "GetOwnershipUntaggedFindings": {
+    "description": "Count findings with no team tag, grouped by ownership confidence level.",
+    "summary": "Count untagged findings by ownership confidence"
+  },
   "ListOwnershipInferences": {
     "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
     "summary": "List ownership inferences for a resource"
@@ -1605,6 +1637,18 @@
     "summary": "Edit a dataset",
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
+  },
+  "ExecuteDdsqlTabularQuery": {
+    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.",
+    "summary": "Execute a tabular DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query execution request."
+  },
+  "FetchDdsqlTabularQuery": {
+    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.",
+    "summary": "Fetch the result of a DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
   },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
@@ -1807,7 +1851,7 @@
     "request_schema_description": "Request to create a new feature flag."
   },
   "ListFeatureFlagsEnvironments": {
-    "description": "Returns a list of environments for the organization.\nSupports filtering by name and key.",
+    "description": "Returns a list of environments for the organization.\nSupports filtering by name, key, and DD_ENV.",
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
@@ -2174,6 +2218,30 @@
     "request_description": "Incident user-defined field update payload.",
     "request_schema_description": "Request body for updating an incident user-defined field."
   },
+  "ListIncidentUserDefinedRoles": {
+    "description": "List all user-defined roles for incidents.",
+    "summary": "List incident user-defined roles"
+  },
+  "CreateIncidentUserDefinedRole": {
+    "description": "Create a new user-defined role for incidents.",
+    "summary": "Create an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for creating an incident user-defined role."
+  },
+  "DeleteIncidentUserDefinedRole": {
+    "description": "Delete an existing user-defined role for incidents.",
+    "summary": "Delete an incident user-defined role"
+  },
+  "GetIncidentUserDefinedRole": {
+    "description": "Retrieve a single user-defined role for incidents.",
+    "summary": "Get an incident user-defined role"
+  },
+  "UpdateIncidentUserDefinedRole": {
+    "description": "Update an existing user-defined role for incidents.",
+    "summary": "Update an incident user-defined role",
+    "request_description": "",
+    "request_schema_description": "Request for updating an incident user-defined role."
+  },
   "ImportIncident": {
     "description": "Import an incident from an external system. This endpoint allows you to create incidents with\nhistorical data such as custom timestamps for detection, declaration, and resolution.\nImported incidents do not execute integrations or notification rules.",
     "summary": "Import an incident",
@@ -2327,6 +2395,16 @@
     "summary": "Create AWS CCM config",
     "request_description": "Create a Cloud Cost Management config for an AWS Account Integration Config.",
     "request_schema_description": "AWS CCM Config Create/Update Request body."
+  },
+  "GetAWSMetricNameFilterPreview": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the account's saved metric name filters.",
+    "summary": "Get AWS metric name filter preview"
+  },
+  "PreviewAWSMetricNameFilter": {
+    "description": "Preview which collected CloudWatch metrics would be filtered by the supplied metric name filters.\nThe filters are not persisted.",
+    "summary": "Preview AWS metric name filter",
+    "request_description": "The metric name filters to preview.",
+    "request_schema_description": "AWS metric name filter preview request body."
   },
   "ListAWSNamespaces": {
     "description": "Get a list of available AWS CloudWatch namespaces that can send metrics to Datadog.",
@@ -3083,6 +3161,50 @@
     "request_description": "Update project payload.",
     "request_schema_description": "Request to partially update an LLM Observability project."
   },
+  "ListLLMObsPrompts": {
+    "description": "List all LLM Observability prompts in the prompt registry for the organization.",
+    "summary": "List LLM Observability prompts"
+  },
+  "CreateLLMObsPrompt": {
+    "description": "Create a new prompt (and its first version) in the LLM Observability prompt registry.",
+    "summary": "Create an LLM Observability prompt",
+    "request_description": "Create prompt payload.",
+    "request_schema_description": "Request to create an LLM Observability prompt."
+  },
+  "DeleteLLMObsPrompt": {
+    "description": "Soft-delete an LLM Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.",
+    "summary": "Delete an LLM Observability prompt"
+  },
+  "GetLLMObsPrompt": {
+    "description": "Get the latest version of an LLM Observability prompt by prompt ID.",
+    "summary": "Get an LLM Observability prompt"
+  },
+  "UpdateLLMObsPrompt": {
+    "description": "Update the title, the description, or both, for an LLM Observability prompt.",
+    "summary": "Update an LLM Observability prompt",
+    "request_description": "Update prompt payload.",
+    "request_schema_description": "Request to update an LLM Observability prompt's metadata."
+  },
+  "ListLLMObsPromptVersions": {
+    "description": "List all versions of an LLM Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.",
+    "summary": "List versions of an LLM Observability prompt"
+  },
+  "CreateLLMObsPromptVersion": {
+    "description": "Create a new version of an existing LLM Observability prompt.",
+    "summary": "Create a new LLM Observability prompt version",
+    "request_description": "Create prompt version payload.",
+    "request_schema_description": "Request to create a new version of an LLM Observability prompt."
+  },
+  "GetLLMObsPromptVersion": {
+    "description": "Get the full template of a single, specific version of an LLM Observability prompt.",
+    "summary": "Get a specific LLM Observability prompt version"
+  },
+  "UpdateLLMObsPromptVersion": {
+    "description": "Update the description, the feature-flag environments, or both, for a specific version of an LLM Observability prompt.",
+    "summary": "Update a specific LLM Observability prompt version",
+    "request_description": "Update prompt version payload.",
+    "request_schema_description": "Request to update an LLM Observability prompt version's metadata or feature-flag environments."
+  },
   "ListLLMObsSpans": {
     "description": "List LLM Observability spans matching the specified filters.",
     "summary": "List LLM Observability spans"
@@ -3460,7 +3582,7 @@
     "request_schema_description": "Request body for creating a tag indexing rule."
   },
   "ReorderTagIndexingRules": {
-    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Reorder tag indexing rules",
     "request_description": "",
     "request_schema_description": "Request body for reordering tag indexing rules."
@@ -3850,8 +3972,12 @@
     "request_schema_description": "A top-level wrapper for a schedule update request, referring to the `data` object with the new details."
   },
   "GetScheduleOnCallUser": {
-    "description": "Retrieves the user who is on-call for the specified schedule at a given time.",
+    "description": "Retrieves the user who is on-call for the specified schedule at a given time. This endpoint does not support schedules with multiple concurrent on-call responders at a position. Deprecated. Use `Get on-call responders for a schedule` instead.",
     "summary": "Get scheduled on-call user"
+  },
+  "GetScheduleOnCallResponders": {
+    "description": "Retrieves the on-call responders for the specified schedule, grouped by position (previous, current, next), at a given time. Supports schedules with multiple concurrent on-call responders at a position, by returning a list of shifts per position.",
+    "summary": "Get on-call responders for a schedule"
   },
   "GetTeamOnCallUsers": {
     "description": "Get a team's on-call users at a given time",
@@ -4060,6 +4186,10 @@
     "summary": "Update an org group policy override",
     "request_description": "",
     "request_schema_description": "Request to update an org group policy override."
+  },
+  "ListOrgGroupPolicySuggestions": {
+    "description": "List suggested organization group policies. Requires a filter on org group ID.",
+    "summary": "List org group policy suggestions"
   },
   "ListOrgGroups": {
     "description": "List all organization groups that the requesting organization has access to.",
@@ -4447,6 +4577,16 @@
     "request_description": "",
     "request_schema_description": "Request body for updating a heatmap snapshot."
   },
+  "ListDatasetReportSchedules": {
+    "description": "Retrieve all report schedules for a given published dataset.\nReturns report schedules belonging to the authenticated user's organization that target the specified dataset.\nRequires the `generate_log_reports` or `manage_log_reports` permission.",
+    "summary": "List dataset report schedules"
+  },
+  "PrintReport": {
+    "description": "Initiate a one-off, print-only report for a dashboard or integration dashboard.\nThe report is rendered as a PDF and made available for download through the URL returned in the response.\nRequires a reporting permission appropriate to the targeted resource type.",
+    "summary": "Print a report",
+    "request_description": "",
+    "request_schema_description": "Request body for initiating a print-only report."
+  },
   "CreateReportSchedule": {
     "description": "Create a new scheduled report. A schedule renders a dashboard or integration dashboard\non a recurring cadence and delivers it to the configured recipients over email, Slack,\nor Microsoft Teams.\nRequires the `generate_dashboard_reports` permission.",
     "summary": "Create a report schedule",
@@ -4490,7 +4630,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -4500,7 +4640,7 @@
     "summary": "List roles"
   },
   "CreateRole": {
-    "description": "Create a new role for your organization.",
+    "description": "Create a new role for your organization.\n\nThe following read permissions are automatically added to every new role, even if they are not included in the request:\n\n- Dashboards Read\n- Notebooks Read\n- Monitors Read\n- APM Read\n- Vulnerability Management Read\n- RUM Apps Read\n- Incidents Read\n- SLOs Read\n- CI Visibility Read\n- CD Visibility Read",
     "summary": "Create role",
     "request_description": "",
     "request_schema_description": "Create a role."

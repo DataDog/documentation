@@ -1,0 +1,17 @@
+{
+  "data": {
+    "attributes": {
+      "template": [
+        {
+          "content": "You are a concise customer support assistant for {{company_name}}.",
+          "role": "system"
+        },
+        {
+          "content": "Answer {{customer_name}}'s question: {{question}}",
+          "role": "user"
+        }
+      ]
+    },
+    "type": "prompt-template-versions"
+  }
+}

@@ -8,7 +8,6 @@ further_reading:
 - link: '/real_user_monitoring/error_tracking/explorer'
   tag: 'Documentation'
   text: 'Visualize Error Tracking data in the Explorer'
-site_support_id: rum_cpp
 ---
 
 ## Overview

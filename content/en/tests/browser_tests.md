@@ -52,6 +52,8 @@ From Browser SDK v5.0.0, enable the <code>allowUntrustedEvents</code> initializa
 
 If you use Cypress, Selenium, or Playwright to run your browser tests and the application being tested is instrumented using [Real User Monitoring][2], your test results and their generated RUM browser sessions and session replays are automatically linked.
 
+If a test ends before its RUM session flushes, the session and test can appear unlinked. To give the session more time to flush, set the `DD_CIVISIBILITY_RUM_FLUSH_WAIT_MILLIS` environment variable to a value higher than the default of 500 milliseconds.
+
 A {{< ui >}}Browser Sessions{{< /ui >}} tab appears in the Test Optimization test details side panel.
 
 {{< img src="ci/ci-browser-session-tab.png" alt="Browser Session Tab in Test Detail" style="width:100%;">}}

@@ -9,15 +9,6 @@ aliases:
 - /real_user_monitoring/session_replay/browser/developer_tools
 - /product_analytics/session_replay/browser/developer_tools
 further_reading:
-- link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
-  tag: 'Blog'
-  text: 'Use Datadog Session Replay to view real-time user journeys'
-- link: 'https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/'
-  tag: 'Blog'
-  text: 'Use funnel analysis to understand and optimize key user flows'
-- link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
-  tag: 'Blog'
-  text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
@@ -27,6 +18,21 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/intro-to-rum"
   tag: "Learning Center"
   text: "Intro to Real User Monitoring (RUM)"
+- link: "https://www.datadoghq.com/blog/session-replay-custom-heatmap-backgrounds/"
+  tag: "Blog"
+  text: "Capture and analyze custom heatmaps in Session Replay"
+- link: "https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/"
+  tag: "Blog"
+  text: "Understand session replays faster with AI summaries and smart chapters"
+- link: 'https://www.datadoghq.com/blog/session-replay-datadog/'
+  tag: 'Blog'
+  text: 'Use Datadog Session Replay to view real-time user journeys'
+- link: 'https://www.datadoghq.com/blog/reduce-customer-friction-funnel-analysis/'
+  tag: 'Blog'
+  text: 'Use funnel analysis to understand and optimize key user flows'
+- link: 'https://www.datadoghq.com/blog/zendesk-session-replay-integration/'
+  tag: 'Blog'
+  text: 'Visually replay user-facing issues with Zendesk and Datadog Session Replay'
 
 ---
 
@@ -117,7 +123,7 @@ You can create a playlist of Session Replays to organize them by any patterns yo
 
 Dev Tools is a built-in debugging panel in Session Replay that exposes key information during playback. Use it to identify issues, trace requests, and understand performance bottlenecks—all without reproducing the issue yourself. Dev Tools are available for [RUM][1] sessions.
 
-Learn more about Dev Tools for [browser][11] and [mobile][12].
+Learn more about [Dev Tools][11].
 
 ## Further reading
 
@@ -133,5 +139,4 @@ Learn more about Dev Tools for [browser][11] and [mobile][12].
 [8]: /notebooks/
 [9]: /account_management/audit_trail/
 [10]: /rum/replay/playlists/my-watch-history
-[11]: /session_replay/browser/dev_tools/
-[12]: /session_replay/mobile/dev_tools/
+[11]: /session_replay/dev_tools

@@ -11,6 +11,9 @@ further_reading:
 - link: /security/cloud_siem/triage_and_investigate/ioc_explorer/
   tag: documentation
   text: IOC Explorer
+- link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
+  tag: "Blog"
+  text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
 ---
 
 ## Overview
