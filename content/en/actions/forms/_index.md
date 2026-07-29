@@ -23,27 +23,58 @@ Some ways you can use forms:
 
 ## Create a form
 
-When creating a form, you can use a blueprint, [import an existing form](#import-a-form), or start from scratch. Blueprints are starter forms that cover common use cases. They come loaded with a sample description and questions to help familiarize yourself with form elements, and some blueprints include a pre-configured automation. Blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
+On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}, then select a creation method:
 
-To create a form:
-1. On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}.
-1. Select a blueprint, import a form, or start with a blank form. Click {{< ui >}}Continue{{< /ui >}}.
-1. Optionally, name your form and give it a description. Click {{< ui >}}Continue{{< /ui >}}.
-1. To add a new component, click **Add Component**, or on the {{< ui >}}Fields{{< /ui >}} side panel, click the plus **+** icon. See [Form components][3] for the full list of component types and their options.
-1. Click {{< ui >}}Save{{< /ui >}}.
+{{< tabs >}}
+{{% tab "Create with AI" %}}
+1. Select {{< ui >}}Create with AI{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}. The form editor opens with [Bits Chat][100].
+1. Describe the form you want to build in the Bits Chat panel.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+[100]: /bits_ai/bits_chat/
+
+{{% /tab %}}
+
+{{% tab "Blank form" %}}
+1. Select {{< ui >}}Start with a blank form{{< /ui >}} and click {{< ui >}}Continue{{< /ui >}}.
+1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
+1. To add a component, click {{< ui >}}Add Component{{< /ui >}}, or in the {{< ui >}}Fields{{< /ui >}} panel, click the plus **+** icon. See [Form components][3] for the full list of component types and their options.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+[3]: /actions/forms/components/
+
+{{% /tab %}}
+
+{{% tab "Blueprint" %}}
+Blueprints are starter forms for common use cases, pre-loaded with sample questions. Some blueprints include a pre-configured automation. Available blueprints include Developer Experience Survey, IDP Feedback, Case Management Service Request, Report an Incident, Bug Report, On-Call Escalation, Post-Incident Review, and more.
+
+1. Select {{< ui >}}Create from blueprint{{< /ui >}} and browse the available templates.
+1. Select a blueprint and click {{< ui >}}Continue{{< /ui >}}.
+1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+To further customize your form, see [Form components][3].
+
+[3]: /actions/forms/components/
+{{% /tab %}}
+
+{{% tab "Import" %}}
+You can import an existing form from a PDF or JSON file.
+
+1. Select {{< ui >}}Import a form{{< /ui >}}. An import dialog opens.
+1. Choose a source and follow the prompts.
+1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
+1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
+
+To further customize your form, see [Form components][3].
+
+[3]: /actions/forms/components/
+{{% /tab %}}
+{{< /tabs >}}
 
 To preview or share your form:
 1. Click {{< ui >}}View{{< /ui >}} to display the form as it appears to respondents. Click {{< ui >}}Edit{{< /ui >}} to return to the creator view.
 1. Click {{< ui >}}Share{{< /ui >}} to copy the form link or configure sharing options.
-
-## Import a form
-
-You can import an existing form into Datadog from a PDF or JSON file.
-
-To import a form:
-1. On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}.
-1. Click {{< ui >}}Import a Form{{< /ui >}}.
-1. Choose a source to import your form fields, then follow the prompts.
 
 ## Form settings
 
@@ -131,3 +162,4 @@ By default, only the creator of a form can access it. To change the permissions 
 [8]: https://app.datadoghq.com/workflow/blueprints
 [9]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [10]: https://app.datadoghq.com/workflow
+[11]: /bits_ai/bits_chat/
