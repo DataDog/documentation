@@ -26,10 +26,11 @@ Agentless configuration delivery is available in:
 
 | SDK | Minimum version |
 |---|---|
-| Java `dd-java-agent` | 1.65.0 |
 | Java `dd-openfeature` provider | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
+
+Java CDN delivery requires `dd-openfeature`. It does not require the Java agent or a Lambda tracing layer.
 
 Other server SDKs and versions earlier than those listed require Agent Remote Configuration for flag delivery.
 
@@ -67,6 +68,8 @@ DD_AGENT_HOST=<PRIVATE_AGENT_HOSTNAME_OR_IP>
 DD_TRACE_AGENT_PORT=8126
 {{< /code-block >}}
 
+For Java, use compatible `dd-openfeature` and `dd-java-agent` versions. Use version 1.65.0 or later for both components.
+
 Configure the Agent with Remote Configuration and the API key:
 
 {{< code-block lang="bash" >}}
@@ -86,7 +89,7 @@ Explicitly selecting `remote_config` enables the Feature Flags Remote Configurat
 - **API key ownership**: In agentless mode, the application owns `DD_API_KEY`. In `remote_config` mode, the Agent owns the API key.
 - **Flag updates**: Delivery is eventually consistent. Allow for the SDK polling interval and application startup time when testing changes.
 - **Last-known-good behavior**: After a configuration has been accepted, temporary network failures or malformed responses do not replace it.
-- **Runtime support**: Agentless configuration removes the Agent requirement, but it does not make an otherwise unsupported Java or Node.js runtime compatible with the tracer. Check the tracer's compatibility requirements.
+- **Runtime support**: Java requires Java 11 or later. For Node.js, check the tracer's runtime compatibility requirements.
 - **Kill switch**: `DD_FEATURE_FLAGS_ENABLED` defaults to `true`. Set it to `false` to disable the provider and both configuration delivery paths. Evaluations then return caller-provided default values.
 
 Datadog-managed agentless delivery is not available for Datadog for Government in these versions. Use Agent Remote Configuration on that site.
@@ -97,15 +100,15 @@ If your deployment uses `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED`, see [Migrat
 
 ### AWS Lambda
 
-Java and Node.js Lambda functions can use agentless configuration delivery when they run a minimum SDK version and can reach Datadog over HTTPS. The Datadog Lambda Extension is not required for flag configuration, but you can continue to use it for supported serverless telemetry.
+Java and Node.js Lambda functions can use agentless configuration delivery when they run a minimum SDK version and can reach Datadog over HTTPS. Java requires `dd-openfeature`, but it does not require the Java agent or a Lambda tracing layer. The Datadog Lambda Extension is not required for flag configuration. You can continue to use these components for supported serverless telemetry.
 
 ### Google Cloud serverless environments
 
-Java and Node.js workloads can use agentless configuration delivery when the tracer is supported in the selected runtime and outbound HTTPS is available. This applies independently of in-container or sidecar telemetry instrumentation.
+Java workloads can use agentless configuration delivery on Java 11 or later. Node.js workloads require a supported tracer runtime. Both runtimes require outbound HTTPS access. This applies independently of in-container or sidecar telemetry instrumentation.
 
 ### Azure Functions
 
-Java and Node.js function apps can use agentless configuration delivery when the tracer is supported and outbound HTTPS is available. An external Agent is only required when `remote_config` is selected.
+Java function apps can use agentless configuration delivery on Java 11 or later. Node.js function apps require a supported tracer runtime. Both runtimes require outbound HTTPS access. An external Agent is only required when `remote_config` is selected.
 
 ### Edge runtimes
 

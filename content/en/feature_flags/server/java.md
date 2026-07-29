@@ -21,9 +21,9 @@ further_reading:
 
 ## Overview
 
-This page describes how to instrument a Java application with the Datadog Feature Flags SDK. Starting in version 1.65.0, the SDK loads flag configuration directly from the Datadog-managed CDN by default.
+This page describes how to add Datadog Feature Flags to a Java application. Starting in version 1.65.0, `dd-openfeature` loads flag configuration directly from the Datadog-managed CDN by default.
 
-The Java SDK integrates with the Datadog Java tracer (`dd-trace-java`) and implements the [OpenFeature](https://openfeature.dev/) standard.
+The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It can also integrate with the Datadog Java tracer (`dd-trace-java`).
 
 <div class="alert alert-warning">In agentless mode, Java 1.65.0 supports configuration delivery and local flag evaluation only. It does not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
@@ -32,23 +32,22 @@ The Java SDK integrates with the Datadog Java tracer (`dd-trace-java`) and imple
 For the default agentless setup, you need:
 
 - **Java 11 or higher**
-- **Datadog Java SDK** (`dd-java-agent`, added with `-javaagent`): Version **1.65.0** or later
 - **Datadog OpenFeature provider** (`com.datadoghq:dd-openfeature`, added as a build dependency): Version **1.65.0** or later
 - **OpenFeature SDK**: Version **1.20.1** or later
 - A Datadog [API key][7]
 - Your Datadog site
 
-Use the same version of `dd-java-agent` and `dd-openfeature`.
+CDN delivery does not require `dd-java-agent`. Remote Configuration requires `dd-java-agent` version 1.65.0 or later. Use the same version of `dd-java-agent` and `dd-openfeature`.
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
 ## Getting started
 
-Feature flagging is provided by Application Performance Monitoring (APM). Add the Java tracer to the JVM and install the OpenFeature dependencies.
+Install the OpenFeature dependencies. Add the Java tracer only when you need APM or Agent Remote Configuration.
 
 ## Installation
 
-Feature flagging is integrated into the Datadog Java SDK. You need the SDK JAR and the OpenFeature SDK dependencies.
+You need the Datadog OpenFeature provider and the OpenFeature SDK dependencies.
 
 {{< tabs >}}
 {{% tab "Gradle (Groovy)" %}}
@@ -119,18 +118,18 @@ export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_VERSION=<YOUR_APP_VERSION>
 
-java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
+java -jar your-application.jar
 {{< /code-block >}}
 
-No Feature Flags enablement or source setting is required. Initialize the Datadog OpenFeature provider to begin polling. Installing or initializing the tracer alone does not create Feature Flags CDN traffic.
+No Feature Flags enablement or source setting is required. Initialize the Datadog OpenFeature provider to begin polling. CDN delivery does not require the Java agent.
 
-### Add the Java tracer to the JVM
+### Optional: add the Java tracer to the JVM
 
-For instructions on how to add the `-javaagent` argument to your application server or framework, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
+Add the Java tracer when you need APM or Agent Remote Configuration. For instructions, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
 ## Initialize the OpenFeature provider
 
-Initialize the Datadog OpenFeature provider in your application startup code. The provider connects to the feature flagging system running in the Datadog Java tracer.
+Initialize the Datadog OpenFeature provider in your application startup code. The provider starts the selected configuration source.
 
 {{< code-block lang="java" >}}
 import dev.openfeature.sdk.OpenFeatureAPI;
@@ -156,7 +155,7 @@ public class App {
             logger.info("OpenFeature provider initialized successfully");
         } catch (ProviderNotReadyError e) {
             // Handle gracefully - app will use default flag values
-            logger.warn("Provider not ready (no tracer/config available), continuing with defaults", e);
+            logger.warn("Provider not ready (configuration unavailable), continuing with defaults", e);
             client = api.getClient("my-app");
             logger.info("App will use default flag values until provider is ready");
         } catch (Exception e) {
@@ -532,7 +531,7 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 #### Agentless
 
-1. Confirm that `dd-java-agent` and `dd-openfeature` are version 1.65.0 or later.
+1. Confirm that `dd-openfeature` is version 1.65.0 or later.
 2. Confirm that `DD_FEATURE_FLAGS_ENABLED` is not set to `false`.
 3. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=agentless` is set, or that the source and legacy provider settings are not set.
 4. Confirm that application code initializes the Datadog OpenFeature provider.
@@ -542,32 +541,22 @@ Before checking infrastructure, confirm the flag itself is set up correctly:
 
 #### Agent Remote Configuration
 
-1. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no source is set.
-2. Confirm that `DD_FEATURE_FLAGS_ENABLED` is not set to `false`.
-3. Confirm that Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
-4. Confirm that Remote Configuration is enabled on the Agent. If it is disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
-5. Confirm that `DD_API_KEY` is valid on the Agent and belongs to the target organization.
-6. Confirm that `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
-7. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
+1. Confirm that `dd-openfeature` and `dd-java-agent` are version 1.65.0 or later. Use the same version for both components.
+2. Confirm that `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no source is set.
+3. Confirm that `DD_FEATURE_FLAGS_ENABLED` is not set to `false`.
+4. Confirm that Agent 7.55 or later is running and reachable. See [APM Connection Errors][2].
+5. Confirm that Remote Configuration is enabled on the Agent. If it is disabled, set `remote_configuration.enabled: true` in `datadog.yaml` or `DD_REMOTE_CONFIGURATION_ENABLED=true`. See [Remote Configuration][1].
+6. Confirm that `DD_API_KEY` is valid on the Agent and belongs to the target organization.
+7. Confirm that `DD_SITE` is set correctly on the Agent. See [Agent Site Issues][3].
+8. Run `datadog-agent status` and review the Remote Configuration section. See [Agent Commands][6].
 
 ### 3. SDK: Verify Java SDK state
 
 #### Enable debug logging
 
-All Feature Flags startup messages are emitted at DEBUG level. Set `DD_TRACE_DEBUG=true`. For the default agentless source, check this startup sequence:
+Set `DD_TRACE_DEBUG=true` to enable Feature Flags startup messages. For the default agentless source, confirm that CDN polling starts after provider initialization.
 
-```
-[dd.trace] Feature Flagging system starting
-[dd.trace] Feature Flagging system awaiting application provider activation
-```
-
-After the application initializes the provider, confirm that the system starts:
-
-```
-[dd.trace] Feature Flagging system started
-```
-
-With `remote_config`, the system starts during tracer initialization and does not wait for provider activation. If the applicable messages are absent, confirm that `DD_FEATURE_FLAGS_ENABLED` is not `false`. Then verify the selected source.
+With `remote_config`, the provider uses the bridge in the Java agent. An older agent produces a provider initialization error that states the required agent version. It does not fall back to CDN delivery.
 
 #### Monitor provider state changes
 

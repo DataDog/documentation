@@ -45,10 +45,11 @@ To get started with agentless delivery, use one of these minimum versions:
 
 | SDK | Minimum version |
 |---|---|
-| Java `dd-java-agent` | 1.65.0 |
 | Java `dd-openfeature` provider | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
+
+Java CDN delivery requires `dd-openfeature`. It does not require `dd-java-agent`.
 
 Configure the API key, Datadog site, and environment in the application process:
 
@@ -126,6 +127,8 @@ Set the source to `remote_config` to use Agent-managed delivery:
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 {{< /code-block >}}
+
+For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java-agent` versions. Use version 1.65.0 or later for both components.
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 

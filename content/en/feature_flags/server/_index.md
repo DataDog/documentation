@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs integrate with the Datadog tracer for your language, receive flag configuration, and evaluate flags locally.
+Datadog Feature Flags for server-side applications allow you to remotely control feature availability, run experiments, and roll out new functionality with confidence. Server-side SDKs receive flag configuration and evaluate flags locally. Some SDKs use a Datadog tracer for configuration delivery or telemetry.
 
 Datadog Feature Flags is built on the [OpenFeature standard](https://openfeature.dev/docs/reference/intro/), an open source, vendor-neutral specification for feature flag APIs. If you're new to OpenFeature concepts like providers, evaluation context, and hooks, see the [OpenFeature concepts documentation](https://openfeature.dev/docs/category/concepts).
 
@@ -36,10 +36,11 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 | SDK | Minimum agentless version |
 |---|---|
-| Java `dd-java-agent` | 1.65.0 |
 | Java `dd-openfeature` provider | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
+
+Java CDN delivery requires `dd-openfeature`. It does not require `dd-java-agent`.
 
 <div class="alert alert-warning">The initial Java and Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
@@ -63,18 +64,19 @@ For serverless runtimes, see [Serverless Environments][5] for no-Agent setup, ve
 
 ## Prerequisites
 
-Default Datadog-managed server SDK setups require:
+Requirements depend on the selected SDK and configuration source. Standard requirements include:
 
-- **APM tracing** [enabled in your application][4]
-- The language-specific tracer and OpenFeature provider versions listed on the SDK page
+- The language-specific tracer or OpenFeature provider versions listed on the SDK page
 - A Datadog [API key][2]
+
+Java CDN delivery does not require [APM tracing][4] or the Java agent.
 
 Source-specific requirements are:
 
 | Source | Requirements |
 |---|---|
 | `agentless` (default where supported) | Configure `DD_API_KEY`, `DD_SITE`, and `DD_ENV` in the application process. No Agent is required for flag configuration. |
-| `remote_config` | Datadog Agent 7.55 or later with Remote Configuration enabled, the API key configured on the Agent, and Remote Configuration enabled for your organization in [{{< ui >}}Organization Settings{{< /ui >}}][3]. |
+| `remote_config` | Datadog Agent 7.55 or later with Remote Configuration enabled, the API key configured on the Agent, and Remote Configuration enabled for your organization in [{{< ui >}}Organization Settings{{< /ui >}}][3]. Java also requires compatible `dd-openfeature` and `dd-java-agent` versions. |
 
 ## Agentless configuration
 
