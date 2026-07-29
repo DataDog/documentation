@@ -107,6 +107,7 @@ After your application starts sending data, the traces automatically appear in t
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> version 0.47+ is supported. See the <a href="#using-openllmetry">OpenLLMetry example</a>.
 <li/> OpenInference spans are supported. See the <a href="#using-openinference">OpenInference example</a>.
+<li/> <a href="https://langfuse.com/integrations/native/opentelemetry">Langfuse</a> native OpenTelemetry instrumentation is supported. See the <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a>.
 <li/> There may be a 3-5 minute delay between sending traces and seeing them appear on the Agent Observability Traces page. If you have APM enabled, traces appear immediately in the APM Traces page.
 </ul>
 </div>
@@ -129,6 +130,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 | [LlamaIndex][32] | [`opentelemetry-instrumentation-llamaindex`][33] | >= 0.14.12 |
 | [Strands Agents][5] | Native | >= 1.11.0 |
 | [OpenLLMetry][34] | [`traceloop-sdk`][35] | >= 0.47.0 |
+| [Langfuse][37] | Native | >= 4.0.0 |
 
 [5]: https://pypi.org/project/strands-agents/
 [20]: https://platform.openai.com/docs/api-reference/introduction
@@ -148,6 +150,7 @@ These frameworks and libraries have been tested with Agent Observability. Framew
 [34]: https://www.traceloop.com/openllmetry
 [35]: https://pypi.org/project/traceloop-sdk/
 [36]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
+[37]: https://langfuse.com/integrations/native/opentelemetry
 {{% /tab %}}
 {{% tab "Node.js" %}}
 | Framework | Instrumentation | Supported Versions |
@@ -399,9 +402,9 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 ## Attribute mapping reference
 
-This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, and OpenInference to Datadog's Agent Observability span schema.
+This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
 
-<div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> and <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a> sections.</div>
+<div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
 
 ### OpenTelemetry 1.37+ attribute mappings
 
@@ -760,6 +763,89 @@ Image content maps to an image URI while preserving its position among other mes
 OpenInference attributes with `llm.*`, `retrieval.*`, `embedding.*`, and `reranker.*` prefixes are excluded from tags. Specifically mapped values such as `input.value`, `output.value`, `metadata`, `tag.tags`, and `tool.parameters` are also excluded from duplicate tags.
 
 Other non-empty OpenInference attributes with values of 256 characters or fewer are added as `key:value` tags. The `tag.tags` list is promoted directly to span tags.
+
+### Langfuse attribute mappings
+
+This section documents Langfuse-specific attribute mappings for applications using [Langfuse's native OpenTelemetry instrumentation][37].
+
+#### Detection
+
+A span is treated as a Langfuse span when it carries a non-empty `langfuse.observation.type` attribute. This attribute is also used as a fallback for span kind resolution when `gen_ai.operation.name` is absent.
+
+#### Span kind resolution
+
+| `langfuse.observation.type` | Agent Observability `span.kind` |
+|------------------------------|-------------------|
+| `generation` | `llm` |
+| `embedding` | `embedding` |
+| `tool` | `tool` |
+| `agent` | `agent` |
+| `retriever` | `retrieval` |
+| `span`, `event`, `chain`, `evaluator`, `guardrail`, *(default)* | `workflow` |
+
+#### Model information
+
+| Langfuse Attribute | Agent Observability Field | Notes |
+|---------------------|--------------|-------|
+| `langfuse.observation.metadata.ls_provider` | `meta.model_provider` | Fallback when `gen_ai.provider.name` and `gen_ai.system` are absent |
+| `langfuse.observation.model.name` | `meta.model_name` | Fallback when `gen_ai.response.model` and `gen_ai.request.model` are absent |
+
+#### Token usage metrics
+
+`langfuse.observation.usage_details` is a JSON object. Each key maps to an Agent Observability metric, used as a fallback for any metric not already set from `gen_ai.usage.*` attributes:
+
+| Langfuse Usage Key | Agent Observability Field |
+|----------------------|--------------|
+| `input`, `input_tokens` | `metrics.input_tokens` |
+| `output`, `output_tokens` | `metrics.output_tokens` |
+| `total`, `total_tokens` | `metrics.total_tokens` |
+| `prompt_tokens` | `metrics.prompt_tokens` |
+| `completion_tokens` | `metrics.completion_tokens` |
+| `cache_creation_input_tokens` | `metrics.cache_write_input_tokens` |
+| `cache_read_input_tokens`, `cached_tokens` | `metrics.cache_read_input_tokens` |
+| `reasoning_tokens` | `metrics.reasoning_output_tokens` |
+
+#### Input and output messages
+
+`langfuse.observation.input` and `langfuse.observation.output` carry a JSON-encoded value that can be a chat-message array, a single message object, or arbitrary JSON/string content. These are the lowest-priority source and are only used when no `gen_ai.*` message attributes exist.
+
+Each message is converted to the parts-based message shape:
+
+- A `content` string becomes a `text` part.
+- A `content` array of blocks converts `image_url` blocks to `uri` parts and `text` blocks to `text` parts; any other block is kept as serialized text.
+- A `tool_calls` array on a message becomes `tool_call` parts.
+- A message with `role: tool` and a `tool_call_id` becomes a `tool_result` part.
+
+##### Tool spans
+
+For `tool`, `agent`, and `workflow` spans, `langfuse.observation.input`/`langfuse.observation.output` are used directly as `input.value`/`output.value`, after the standard `gen_ai.tool.call.*` fallback.
+
+##### Retrieval spans
+
+For `retrieval` spans, `langfuse.observation.input` is used as the query value in `meta.input.value`. `langfuse.observation.output` is parsed as a document collection (an array of document objects, an array of strings, or a single document object) into `meta.output.documents`. Each document object's `text`, `content`, or `page_content` key (checked in that order) maps to `text`, along with any `id`, `score`, and `metadata` keys.
+
+##### Embedding spans
+
+For `embedding` spans, `langfuse.observation.input` is parsed the same way as retrieval documents into `meta.input.documents[].text`, keeping only documents that carry non-empty text.
+
+#### Session, user, metadata, and tags
+
+| Langfuse Attribute | Agent Observability Field | Notes |
+|-----------------------|--------------|-------|
+| `langfuse.session.id` | `session_id` | Fallback when `gen_ai.conversation.id` is absent |
+| `langfuse.user.id` | `user_id:` tag | Fallback when the standard user ID attribute is absent |
+| `langfuse.observation.model.parameters` | `meta.metadata.*` | JSON object, merged into metadata, skipping reserved keys (`model_name`, `model_provider`) |
+| `langfuse.trace.metadata.*`, `langfuse.observation.metadata.*` | `meta.metadata.*` | Prefix stripped, merged into metadata, skipping reserved keys |
+| `langfuse.trace.tags` | Appended to tags | JSON array of strings |
+
+#### Tags filtering
+
+The following Langfuse-specific attributes are filtered from tags because they're consumed elsewhere:
+
+- `langfuse.internal.*`, `langfuse.observation.metadata.*`, `langfuse.trace.metadata.*` (prefixes)
+- `langfuse.observation.input`, `langfuse.observation.output`, `langfuse.observation.model.name`, `langfuse.observation.model.parameters`, `langfuse.observation.usage_details`, `langfuse.observation.cost_details`, `langfuse.observation.completion_start_time`
+- `langfuse.trace.input`, `langfuse.trace.output`, `langfuse.trace.metadata`, `langfuse.trace.tags`
+- `langfuse.experiment.item.expected_output`, `langfuse.experiment.item.metadata`, `langfuse.experiment.metadata`
 
 ## Supported semantic conventions
 
