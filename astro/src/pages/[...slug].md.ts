@@ -11,24 +11,12 @@ export const prerender = false;
 
 import type { APIRoute } from 'astro';
 import { getEntry } from 'astro:content';
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
 import { resolveCdocRender } from '@lib/cdocs/resolveCdocRender';
 import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
 import { renderCdocPlaintext } from '@lib/cdocs/plaintext/renderCdocPlaintext';
-import { makeDiskPartialResolver } from '@lib/cdocs/plaintext/loadPartial';
+import { makeBundledPartialResolver } from '@lib/cdocs/plaintext/loadPartial';
 
-// Resolved once at module load. `import.meta.url` is this file under src/pages.
-// `path.resolve` drops the trailing slash so the traversal guard below can
-// compare against `DOCS_DIR + path.sep` without a doubled separator.
-const DOCS_DIR = path.resolve(
-  fileURLToPath(new URL('../content/docs/', import.meta.url)),
-);
-const PARTIALS_DIR = fileURLToPath(
-  new URL('../cdocs/partials/en/', import.meta.url),
-);
-const resolvePartial = makeDiskPartialResolver(PARTIALS_DIR);
+const resolvePartial = makeBundledPartialResolver();
 
 export const GET: APIRoute = async ({ params, url, cookies }) => {
   // `[...slug]` yields the path without the `.md` extension, which is exactly a
@@ -48,13 +36,10 @@ export const GET: APIRoute = async ({ params, url, cookies }) => {
     now: Date.now(),
   });
 
-  // Read the source from disk (parse ignores frontmatter). Guard against a
-  // slug that escapes the docs root.
-  const docPath = path.resolve(DOCS_DIR, `${slug}.mdoc`);
-  if (docPath !== DOCS_DIR && !docPath.startsWith(DOCS_DIR + path.sep)) {
-    return new Response(null, { status: 404 });
-  }
-  const body = readFileSync(docPath, 'utf8');
+  // The glob content loader exposes the raw `.mdoc` body (frontmatter stripped),
+  // so no disk read — or path-traversal guard — is needed: `getEntry` already
+  // scoped the lookup to the collection, and this works in the bundled server.
+  const body = entry.body ?? '';
 
   const text = renderCdocPlaintext({
     body,

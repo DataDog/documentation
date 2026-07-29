@@ -12,7 +12,9 @@
  * The resolved trait values (`valsByTraitId`) become Markdoc variables so the
  * built-in `if` tags drop non-matching content, and are persisted to the cookie.
  */
-import { fileURLToPath } from 'node:url';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
 import {
   loadCustomizationConfig,
   buildFiltersManifest,
@@ -34,20 +36,69 @@ export interface CdocContentFilter {
   hide_if?: Array<Record<string, string[]>>;
 }
 
+const DEFAULT_LANG = 'en';
+
 // The customization config lives alongside the cdocs content, mirroring Hugo's
 // top-level `customization_config/` (with per-language subdirectories).
-const CONFIG_DIR = fileURLToPath(
-  new URL('../../cdocs/customization_config', import.meta.url),
-);
+//
+// It is inlined at build time rather than read from disk relative to this
+// module: `loadCustomizationConfig` reads YAML off the filesystem, but in the
+// bundled prod server this module lives in `dist/server/chunks/`, so an
+// `import.meta.url`-relative path points at a `customization_config/` dir that
+// was never emitted — the loader then silently returns an empty config and
+// `buildFiltersManifest` throws on the missing traits. Vite's glob resolves the
+// source YAML in both dev and prod and ships it inside the bundle, decoupling
+// config loading from where the code happens to run.
+const CONFIG_ROOT_SEGMENT = 'customization_config/';
+const configYamlByGlobKey = import.meta.glob(
+  '../../cdocs/customization_config/**/*.{yaml,yml}',
+  { query: '?raw', import: 'default', eager: true },
+) as Record<string, string>;
 
-const DEFAULT_LANG = 'en';
+// TODO(cdocs-data): remove this materialize-to-temp-dir dance once cdocs-data
+// offers an in-memory config loader. The root problem is that
+// `loadCustomizationConfig` is filesystem-only — it can only read the config
+// from a directory tree on disk, with no way to pass already-loaded data. That
+// forces us to inline the YAML (above) and then write it back out to a temp dir
+// here just so the loader has files to read, which also adds a runtime
+// dependency on a writable `os.tmpdir()`.
+//
+// The right fix lives upstream in cdocs-data (which we own): add an in-memory
+// entry point — e.g. `loadCustomizationConfigFromRecords(yamlByRelPath)` or a
+// virtual-FS option on `loadCustomizationConfig` — that runs the same merge and
+// validation against provided data instead of reading disk. Then this file can
+// pass the glob-inlined YAML straight through, dropping the temp dir, the
+// `fs`/`os`/`path` imports, and `materializeConfigDir` entirely. The Hugo
+// integration has the same FS assumption and would benefit too. Not blocking:
+// the workaround is correct and portable, just not the clean shape.
+
+// Materialize the inlined YAML back into the `<lang>/{traits,options,
+// option_groups}` directory layout the loader expects, in a temp dir created
+// once per process. `os.tmpdir()` is writable on every Node deploy target.
+let materializedConfigDir: string | null = null;
+function materializeConfigDir(): string {
+  if (materializedConfigDir) return materializedConfigDir;
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'cdocs-config-'));
+  for (const [globKey, contents] of Object.entries(configYamlByGlobKey)) {
+    // e.g. '../../cdocs/customization_config/en/traits/general.yaml'
+    //   -> 'en/traits/general.yaml'
+    const relPath = globKey.slice(
+      globKey.indexOf(CONFIG_ROOT_SEGMENT) + CONFIG_ROOT_SEGMENT.length,
+    );
+    const dest = path.join(dir, relPath);
+    fs.mkdirSync(path.dirname(dest), { recursive: true });
+    fs.writeFileSync(dest, contents);
+  }
+  materializedConfigDir = dir;
+  return dir;
+}
 
 let configByLang: Record<string, CustomizationConfig> | null = null;
 
 function getCustomizationConfig(lang: string): CustomizationConfig {
   if (!configByLang) {
     configByLang = loadCustomizationConfig({
-      configDir: CONFIG_DIR,
+      configDir: materializeConfigDir(),
       langs: [DEFAULT_LANG],
     }).customizationConfigByLang;
   }

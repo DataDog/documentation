@@ -14,7 +14,7 @@ test.describe('cdocs plaintext (.md)', () => {
     page,
   }) => {
     await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
-    const link = page.locator('.cdoc__plaintext-link');
+    const link = page.locator('.cdoc-rightnav__plaintext-link');
     await expect(link).toHaveAttribute(
       'href',
       '/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python&api_type=dd_api',
