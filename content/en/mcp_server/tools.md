@@ -1739,19 +1739,21 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_data
 ### `get_datadog_security_findings_ticket_suggestions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
-Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, Linear, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 
 - What Jira projects can I use to create tickets for security findings?
 - Show me available ServiceNow projects for ticketing.
+- Which Linear projects can I file findings to?
 - Which Case Management projects are most used for findings?
 
 ### `create_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
-Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+Creates a Case Management case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 
 - Create a Jira ticket for these critical findings in project SECURITY.
 - Open a Case Management case for the findings from this rule.
+- Create a Linear issue for these high-severity findings.
 - Create a ServiceNow ticket for these library vulnerabilities.
 
 ### `detach_datadog_security_findings_ticket`

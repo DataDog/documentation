@@ -120,11 +120,11 @@ The `security` toolset exposes the following tools to your AI client. Each tool 
 : *Permissions required: `Security Monitoring Findings Read`*
 
 `get_datadog_security_findings_ticket_suggestions`
-: Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+: Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, Linear, and ServiceNow projects with usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 : *Permissions required: `Security Monitoring Findings Read`, `Cases Read`*
 
 `create_datadog_security_findings_ticket`
-: Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+: Creates a Case Management case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 : *Permissions required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*
 
 `detach_datadog_security_findings_ticket`
