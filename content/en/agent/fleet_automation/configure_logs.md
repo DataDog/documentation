@@ -30,6 +30,7 @@ Use [Fleet Automation][2] to manage [custom log collection][4] settings on your 
 - [Remote Configuration][1] enabled for your organization
 - Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][5].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
+- Log collection enabled on the target Agents (`logs_enabled: true` in `datadog.yaml`). Fleet Automation deploys the configuration file either way, but the Agent does not start collecting logs until log collection is enabled. See [Host Agent Log Collection][8].
 
 <div class="alert alert-info">
 Configuring custom logs on Agents in containerized workloads is not supported. For containerized environments, see <a href="/containers/kubernetes/log/">Kubernetes Log Collection</a>.
@@ -67,8 +68,8 @@ Each operation applies changes to custom log collection on an Agent differently:
 
 After you deploy a configuration:
 
-1. <TODO>
-2. ...
+1. In [Fleet Automation][9], open the details page for one of the targeted Agents.
+1. In the {{< ui >}}Configuration{{< /ui >}} tab, confirm that the new or updated custom log configuration file is listed with no error status. This means the configuration was pushed and applied successfully.
 
 If the deployment succeeded but no logs arrive, see the [Log Collection Troubleshooting Guide][7].
 
@@ -83,3 +84,5 @@ If the deployment succeeded but no logs arrive, see the [Log Collection Troubles
 [5]: /agent/fleet_automation/upgrade_agents/
 [6]: /getting_started/tagging/assigning_tags/
 [7]: /logs/guide/log-collection-troubleshooting-guide/
+[8]: /agent/logs/
+[9]: https://app.datadoghq.com/fleet
