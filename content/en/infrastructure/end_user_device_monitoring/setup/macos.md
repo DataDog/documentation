@@ -1,7 +1,6 @@
 ---
 title: Set up End User Device Monitoring on macOS
 description: Deploy the Datadog Agent on macOS devices for End User Device Monitoring.
-private: true
 further_reading:
    - link: "/infrastructure/end_user_device_monitoring/"
      tag: "Documentation"
@@ -78,7 +77,7 @@ Use this method to test a single machine or for devices that are not managed by 
     - **Status** is `Running`.
     - `infrastructure_mode: end_user_device` is set.
 
-1. In Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 15 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+1. In Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
 ### Enable Network Path (optional)
 
@@ -330,6 +329,12 @@ To confirm that the Agent installed on a device, use one of the following method
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+For detailed steps, see [Agent Troubleshooting][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/troubleshooting/

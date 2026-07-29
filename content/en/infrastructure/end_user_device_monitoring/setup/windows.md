@@ -1,7 +1,6 @@
 ---
 title: Set up End User Device Monitoring on Windows
 description: Deploy the Datadog Agent on Windows devices for End User Device Monitoring.
-private: true
 further_reading:
    - link: "/infrastructure/end_user_device_monitoring/"
      tag: "Documentation"
@@ -47,16 +46,16 @@ Use this method to test a single machine or for devices that are not managed by 
 
 1. To confirm that the Agent is running, run the following command in PowerShell:
 
-    {{< code-block lang="powershell" >}}
-    & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status
-    {{< /code-block >}}
+   ```powershell
+   & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
 
-    In the output, confirm the following:
-    - The Agent version is 7.80 or later.
-    - **Status** is `Running`.
-    - `infrastructure_mode: end_user_device` is set.
+   In the output, confirm the following:
+      - The Agent version is 7.80 or later.
+      - **Status** is `Running`.
+      - `infrastructure_mode: end_user_device` is set.
 
-1. In Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 15 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+1. In Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
 ### Enable Network Path (optional)
 
@@ -215,7 +214,7 @@ To confirm that the Agent installed on a device, use one of the following method
 - On a target device, open PowerShell and run `& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status`. In the output, confirm that **Status** is `Running` and `infrastructure_mode: end_user_device` is set.
 - In Datadog, go to [**Infrastructure** > **End User Devices**][206]. Enrolled devices appear within 5-10 minutes of the Agent starting.
 
-[201]: /agent/supported_platforms/windows/
+[201]: https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi
 [202]: /getting_started/site/
 [203]: /network_monitoring/network_path/setup/
 [204]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
@@ -225,6 +224,12 @@ To confirm that the Agent installed on a device, use one of the following method
 {{% /tab %}}
 {{< /tabs >}}
 
+## Troubleshooting
+
+For detailed steps, see [Agent Troubleshooting][1].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /agent/troubleshooting/
