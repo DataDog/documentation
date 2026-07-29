@@ -38,6 +38,8 @@ For the default agentless setup, you need:
 - A Datadog [API key][7]
 - Your Datadog site
 
+Use the same version of `dd-java-agent` and `dd-openfeature`.
+
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
 ## Getting started

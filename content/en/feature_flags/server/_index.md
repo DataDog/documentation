@@ -36,7 +36,8 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 | SDK | Minimum agentless version |
 |---|---|
-| Java tracer | 1.65.0 |
+| Java `dd-java-agent` | 1.65.0 |
+| Java `dd-openfeature` provider | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
