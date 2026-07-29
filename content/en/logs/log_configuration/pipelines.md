@@ -293,7 +293,7 @@ When multiple processors within matching pipelines set the same attribute, the o
 | Behavior | Description | Processors |
 | --- | --- | --- |
 | Last write wins | The value set by the later processor (further down the order) overrides the earlier value. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
-| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array processor |
+| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array Map processor |
 | First write wins | Only the first processor is applied (except Log date remapper, which uses the last one). Within a single pipeline, the first processor's value is used; across multiple matching pipelines, the first one encountered applies. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
 
 For details on each processor, see [Processors][3].
