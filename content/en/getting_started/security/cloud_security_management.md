@@ -86,7 +86,7 @@ For information on disabling Cloud Security, see the following:
 [17]: https://app.datadoghq.com/security/configuration/notification-rules
 [18]: /security/cloud_security_management/guide/tuning-rules/
 [19]: /security/cloud_security_management/misconfigurations/custom_rules
-[20]: /security/workload_protection/agent_expressions
+[20]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide
 [21]: /security/cloud_security_management/misconfigurations/frameworks_and_benchmarks
 [22]: /dashboards/#overview
 [25]: https://app.datadoghq.com/containers/images

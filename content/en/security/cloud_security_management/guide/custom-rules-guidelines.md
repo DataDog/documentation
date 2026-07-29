@@ -4,7 +4,7 @@ further_reading:
 - link: "/security/workload_protection/detect_and_monitor/detection_rules"
   tag: "Documentation"
   text: "Managing Workload Protection Rules"
-- link: "/security/workload_protection/agent_expressions"
+- link: "/security/workload_protection/detect_and_monitor/agent_rules/secl_guide"
   tag: "Documentation"
   text: "Agent Expression Syntax"
 ---
@@ -46,4 +46,4 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/workload_protection/detect_and_monitor/detection_rules
-[2]: /security/workload_protection/agent_expressions/#operators
+[2]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide#operators

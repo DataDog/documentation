@@ -5,7 +5,7 @@ further_reading:
   - link: "/security/workload_protection/investigate_and_triage/security_findings"
     tag: "Documentation"
     text: "Investigate and triage findings"
-  - link: "/security/workload_protection/agent_expressions"
+  - link: "/security/workload_protection/detect_and_monitor/agent_rules/secl_guide"
     tag: "Documentation"
     text: "SECL expression reference"
   - link: "/security/workload_protection/detect_and_monitor/detection_rules"
@@ -88,7 +88,7 @@ Configure the **name**, **description**, and **remediation guidance** that appea
 [2]: /security/workload_protection/investigate_and_triage/security_findings
 [3]: /security/workload_protection/detect_and_monitor/detection_rules
 [4]: https://app.datadoghq.com/security/configuration/findings-automation
-[5]: /security/workload_protection/agent_expressions
+[5]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide
 [6]: https://app.datadoghq.com/security/agent-events
 [7]: https://app.datadoghq.com/security/workload-protection/finding-rules
 [8]: /security/automation_pipelines/mute

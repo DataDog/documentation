@@ -25,10 +25,6 @@ further_reading:
     text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
-    path: /security/workload_protection/agent_expressions
-  aliases:
-    - /security/threats/agent_expressions
-- _target:
     path: /security/workload_protection/backend_linux
   aliases:
     - /security/threats/backend_linux
