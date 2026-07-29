@@ -12,12 +12,6 @@ aliases:
   - /security_platform/security_signal_management
   - /security/security_signal_management
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Security releases! (App login required)."
-  - link: "https://www.datadoghq.com/guided-tour/security/"
-    tag: "Guided Tour"
-    text: "See a Product Guided Tour"
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
@@ -27,12 +21,15 @@ further_reading:
   - link: "/security/workload_protection/"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
-  - link: "https://securitylabs.datadoghq.com/"
-    tag: "Security Labs"
-    text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://www.datadoghq.com/guided-tour/security/"
+    tag: "Guided Tour"
+    text: "See a Product Guided Tour"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to elevate your security and threat detection"
+  - link: "https://securitylabs.datadoghq.com/"
+    tag: "Security Labs"
+    text: "Read about security-related topics on Datadog's Security Labs blog"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -93,6 +90,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
     tag: "Blog"
     text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+  - link: "https://www.datadoghq.com/blog/ci-cd-threat-matrix/"
+    tag: "Blog"
+    text: "CI/CD security: threat modeling using a MITRE-style threat matrix"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
+  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Security releases! (App login required)."
 algolia:
   tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:

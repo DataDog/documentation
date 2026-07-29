@@ -5366,6 +5366,11 @@ menu:
       identifier: elt_integrations_fivetran
       parent: elt_integrations
       weight: 1000000
+    - name: Hightouch
+      url: data_observability/quality_monitoring/elt/hightouch
+      identifier: elt_integrations_hightouch
+      parent: elt_integrations
+      weight: 1500000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
