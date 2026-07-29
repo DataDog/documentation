@@ -23,29 +23,16 @@ There is **no additional charge** for Datadog Costs, and it is available for bot
 
 ## Required permissions
 
-Datadog Costs requires different permissions depending on whether you're enabling the feature or viewing the data:
-
-### To enable Datadog Costs (opt-in)
-To activate Datadog Costs for your organization, you must have the following permissions:
+### To view Datadog Costs
+Viewing Datadog costs in Cloud Cost Management requires both the `billing_read` and `usage_read` permissions: `billing_read` grants access to Datadog cost data, and `usage_read` grants access to Datadog usage data. This requirement applies everywhere Datadog cost data appears, including Cloud Cost Management, dashboards, and notebooks. The `cloud_cost_management_read` permission grants access to Cloud Cost Management and to your cloud and SaaS provider costs, but it does not grant access to Datadog cost data on its own.
 
 | Permission | Description | Available Roles |
 |------------|-------------|-----------------|
-| `billing_read` | Read access to billing information. | • Datadog Admin |
-| `usage_read` | Read access to usage data. | • Datadog Admin |
-| `cloud_cost_management_read` | Read access to Cloud Cost Management. | • Datadog Admin<br>• Datadog Read Only (default) |
+| `billing_read` | Read access to billing information. **Required to view Datadog cost data.** | • Datadog Admin |
+| `usage_read` | Read access to usage data. **Required to view Datadog usage data.** | • Datadog Admin |
+| `cloud_cost_management_read` | Read access to Cloud Cost Management. Grants access to Cloud Cost Management and to cloud and SaaS provider costs. | • Datadog Admin<br>• Datadog Read Only (default) |
 
-### To view Datadog Costs in Cloud Cost Management
-After Datadog Costs is enabled, users need the following permission to view the data:
-
-| Permission | Description | Available Roles |
-|------------|-------------|-----------------|
-| `cloud_cost_management_read` | Read access to Cloud Cost Management. **Required to view Datadog Costs data in Cloud Cost Management.** | • Datadog Admin<br>• Datadog Read Only (default) |
-
-## Enabling Datadog Costs
-
-To activate Datadog Costs, navigate to the [{{< ui >}}Plan & Usage{{< /ui >}} page][7] and click {{< ui >}}Get Started{{< /ui >}} in the modal to "View Datadog Costs in Cloud Cost Management". Alternatively, you can contact your account representative or [Datadog Support][8].
-
-After opting in to Datadog Costs, a confirmation message appears and cost data starts populating in the CCM Explorer within 2-3 hours.
+**Note**: A user with `cloud_cost_management_read` but without `billing_read` and `usage_read` can use Cloud Cost Management for their cloud and SaaS providers, but Datadog costs do not appear for them. To give a user access to Datadog cost data, assign them a role that includes the `billing_read` and `usage_read` permissions. For more information about managing roles, see [Role Based Access Control][14].
 
 ## Data availability to sub-organizations
 
@@ -89,3 +76,4 @@ You can use out-of-the-box tags to break down and allocate your Datadog cost dat
 [11]: /cloud_cost_management/planning/budgets?tab=basic
 [12]: /cloud_cost_management/reporting
 [13]: /cloud_cost_management/cost_changes/anomalies/
+[14]: /account_management/rbac/permissions/
