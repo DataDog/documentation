@@ -80,7 +80,7 @@ curl -X PATCH "{{< region-param key="dd_api" >}}/api/v2/org_configs/mcp_cross_ap
   }'
 ```
 
-To turn Cross-App Access off later, send the same request with `"value": false`. See [Update a specific Org Config][6].
+To turn Cross-App Access off later, send the same request with `"value": false`.
 
 ### Set your Okta issuer URL
 
@@ -103,7 +103,6 @@ curl -X PUT "{{< region-param key="dd_api" >}}/api/v2/login/org_configs/mcp_cros
 The issuer URL must meet all of the following, or the request returns `400`:
 
 - Use `https`.
-- Enter the bare host with no path, port, query string, fragment, username, or password.
 - Use a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not.
 
 Sending an empty string unsets the issuer and stops Datadog from accepting tokens.
@@ -112,7 +111,7 @@ Sending an empty string unsets the issuer and stops Datadog from accepting token
 
 Okta sends this value as the `aud_tenant` claim, which tells Datadog which organization a token targets when several organizations share one Okta tenant. It is not the same as the company ID that Okta asks for elsewhere.
 
-To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/current_user][7] with an active session in the target organization. The UUID is the `id` of the `orgs` entry in the `included` array.
+To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/current_user][6] with an active session in the target organization. The UUID is the `id` of the `orgs` entry in the `included` array.
 
 ### Note the Claude client ID
 
@@ -124,33 +123,16 @@ e645fb6b-4966-45c4-bf20-44866aa5efac
 
 You enter this in Okta as **Client ID at resource**.
 
-## Control what an agent can do
-
-You can restrict what Claude reaches in either place: on its OAuth client in Datadog, or on the resource connection in Okta. Both take effect, so you only need to set the restriction in one of them.
-
-Datadog recommends setting it in Datadog. Okta accepts scopes as free text, which makes them harder to discover and harder to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
-
-To set the scopes Claude is allowed:
-
-1. Navigate to [**Organization Settings > Mobile and Third-Party Access**][8].
-2. Select the Claude application, then select the **Scopes** tab.
-3. Use the **Allowed** checkbox for each scope to control what Claude reaches.
-4. Click **Enable** to save.
-
-Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][9].
-
-If you set scopes in Okta as well, Datadog grants the intersection of the scopes in the token and the scopes allowed for the OAuth client. Scopes set in Okta narrow what Claude reaches within what Datadog allows, and they do not widen it. Claude receives no access to a scope that is not allowed in Datadog, whatever the token requests.
-
 ## Finish the setup in Okta
 
-Complete the setup in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. For the full procedure, see [Okta's Cross-App Access documentation][10].
+Complete the setup in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. For the full procedure, see [Okta's Cross-App Access documentation][9].
 
 ### Configure the Datadog application as a resource server
 
 On your Datadog application, open the **Resource Server** tab and enable **Cross-app access (XAA)**. Set the following fields.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-The values below match your selected [Datadog site][11] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
+The values below match your selected [Datadog site][10] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
 
 | Okta field | Value |
 |------------|-------|
@@ -184,21 +166,38 @@ Add a resource connection from the Claude AI Agent to your Datadog application, 
 | Okta field | Value |
 |------------|-------|
 | **Client ID at resource** | `e645fb6b-4966-45c4-bf20-44866aa5efac` |
-| **Scope Condition** | **Allow all**, if you control scopes in Datadog as described in [Control what an agent can do](#control-what-an-agent-can-do). Otherwise, list the scopes Claude is allowed |
+| **Scope Condition** | **Allow all**, if you control scopes in Datadog. Otherwise, list the scopes Claude is allowed |
 
 Add the Claude SAML application as a delegated caller on the AI Agent, then activate the agent.
 
+#### Choose where to control scopes
+
+**Scope Condition** restricts what Claude reaches, and so does the Claude OAuth client in Datadog. Both take effect, so set the restriction in one of them.
+
+Datadog recommends setting it in Datadog and leaving **Scope Condition** set to **Allow all**. Okta accepts scopes as free text, which makes them harder to discover and harder to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
+
+To set the scopes Claude is allowed in Datadog:
+
+1. Navigate to [**Organization Settings > Mobile and Third-Party Access**][7].
+2. Select the Claude application, then select the **Scopes** tab.
+3. Use the **Allowed** checkbox for each scope to control what Claude reaches.
+4. Click **Enable** to save.
+
+Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][8].
+
+If you set scopes in both places, Datadog grants the intersection of the scopes in the token and the scopes allowed for the OAuth client. Scopes in **Scope Condition** narrow what Claude reaches within what Datadog allows, and they do not widen it. Claude receives no access to a scope that is not allowed in Datadog, whatever the token requests.
+
 ## Add Datadog as a connector in Claude
 
-Users reach Datadog through a connector in Claude. For Cross-App Access, add Datadog as a custom connector pointing at the resource URL for your [Datadog site][11].
+Users reach Datadog through a connector in Claude. For Cross-App Access, add Datadog as a custom connector pointing at the resource URL for your [Datadog site][10].
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Follow the Claude help center guide on [custom connectors][12] and enter this URL when prompted:
+Follow the Claude help center guide on [custom connectors][11] and enter this URL when prompted:
 
 <pre><code>{{< region-param key="mcp_xaa_resource_url" >}}</code></pre>
 {{< /site-region >}}
 
-For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][13].
+For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][12].
 
 ## Verify the configuration
 
@@ -215,11 +214,10 @@ If a user signed in before you enabled Cross-App Access, have them sign out of C
 [3]: /account_management/service-access-tokens/
 [4]: /account_management/api-app-keys/
 [5]: /account_management/rbac/permissions/
-[6]: /api/latest/organizations/#update-a-specific-org-config
-[7]: https://app.datadoghq.com/api/v2/current_user
-[8]: https://app.datadoghq.com/organization-settings/mobile-third-party-access
-[9]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
-[10]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
-[11]: /getting_started/site/
-[12]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
-[13]: /mcp_server/setup/
+[6]: https://app.datadoghq.com/api/v2/current_user
+[7]: https://app.datadoghq.com/organization-settings/mobile-third-party-access
+[8]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
+[9]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
+[10]: /getting_started/site/
+[11]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
+[12]: /mcp_server/setup/
