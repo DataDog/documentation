@@ -8373,11 +8373,26 @@ menu:
       parent: workload_protection_workload_security_rules
       identifier: workload_protection_ootb_rules
       weight: 100
-    - name: Coverage
+    - name: Assess Coverage
       url: security/workload_protection/inventory
       parent: workload_protection
       identifier: workload_protection_inventory
-      weight: 205
+      weight: 94
+    - name: Coverage
+      url: security/workload_protection/inventory/coverage
+      parent: workload_protection_inventory
+      identifier: workload_protection_inventory_coverage
+      weight: 1
+    - name: Hosts and Containers
+      url: security/workload_protection/inventory/hosts_and_containers
+      parent: workload_protection_inventory
+      identifier: workload_protection_inventory_hosts_and_containers
+      weight: 2
+    - name: Serverless
+      url: security/workload_protection/inventory/serverless
+      parent: workload_protection_inventory
+      identifier: workload_protection_inventory_serverless
+      weight: 3
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection

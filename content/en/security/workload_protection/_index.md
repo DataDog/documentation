@@ -107,9 +107,9 @@ See the [Investigate and Triage][3] pages to discover the explorers and in-app v
 
 The [Respond and Report][4] pages describe how to configure Workload Protection for automated response and team performance reporting. They include guidance on mitigating threats and tracking metrics like Mean Time to Remediation (MTTR).
 
-### Coverage
+### Assess coverage
 
-Use [Coverage][5] to get a unified, real-time view of Workload Protection posture across hosts, containers, and serverless workloads. Identify policy deployment issues, unprotected assets, and detection gaps before they become exploitable risks.
+Use [Inventory][5] to see where the Agent is deployed and which protections are enabled across hosts, containers, and serverless workloads. Identify policy deployment issues, unprotected assets, and detection gaps before they become exploitable risks.
 
 ### Guides
 
