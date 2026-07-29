@@ -8,6 +8,9 @@ further_reading:
   - link: "/security/code_security/iac_security/configuration"
     tag: "Documentation"
     text: "Configure IaC Security"
+  - link: "/security/code_security/iac_security/custom_rules/"
+    tag: "Documentation"
+    text: "IaC Security Custom Rules"
 ---
 
 {{% site-region region="gov,gov2" %}}
@@ -18,7 +21,10 @@ further_reading:
 
 <div class="alert alert-info">For Helm resolution to work correctly, each chart directory must include the charts it depends on. For details, see <a href="https://helm.sh/docs/topics/charts/#the-chart-file-structure">Chart File Structure</a> in the Helm documentation.</div>
 
+In addition to these default rules, you can write your own rules. See [IaC Security Custom Rules][2].
+
 [1]: /security/code_security/iac_security/
+[2]: /security/code_security/iac_security/custom_rules/
 
 ## Further reading
 
