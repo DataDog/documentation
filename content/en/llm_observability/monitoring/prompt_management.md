@@ -121,6 +121,8 @@ response = client.chat.completions.create(
 
 If retrieval fails and no fallback is provided, `get_prompt()` raises a `ValueError`. A fallback does not replace authentication: `DD_API_KEY` is always required, and `DD_APP_KEY` is also required when `DD_ENV` is set.
 
+Managed prompts cannot reference other managed prompts in their templates. To compose prompts, combine them in application code or manage the final provider-facing prompt as a single prompt.
+
 ### Select a version
 
 Without `DD_ENV`, `get_prompt()` retrieves the latest prompt version:
@@ -271,6 +273,8 @@ created_version = LLMObs.create_prompt_version(
     env_ids=["<FEATURE_FLAG_ENVIRONMENT_ID>"],
 )
 ```
+
+Treat prompt creation, versioning, and deployment as setup operations. Do not perform them during application startup or from a request path. At runtime, retrieve deployed prompts with `LLMObs.get_prompt()`.
 
 These methods require the API and application key permissions listed in [Prerequisites](#prerequisites).
 
