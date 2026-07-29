@@ -58,7 +58,7 @@ further_reading:
 
 **Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
 
-The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection.
+The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
 
 <!-- In-Container -->
 {% if equals($instrumentation_method, "in_container") %}
