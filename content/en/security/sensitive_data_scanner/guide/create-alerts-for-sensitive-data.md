@@ -28,7 +28,7 @@ After you configure Sensitive Data Scanner to detect sensitive information in yo
 - Track trends in sensitive data volume over time
 - Identify services or teams that need additional security guidance
 
-For log findings, Datadog recommends [security notification rules][8]. For APM and RUM, create monitors using the tags that Sensitive Data Scanner adds when it detects matches.
+For log findings, Datadog recommends security notification rules. For APM and RUM, create monitors using the tags that Sensitive Data Scanner adds when it detects matches.
 
 ## Prerequisites
 
@@ -36,7 +36,7 @@ Before creating alerts for sensitive data, verify you have:
 
 - Sensitive Data Scanner configured with scanning groups and scanning rules. See [Set up Sensitive Data Scanner][1] for more information.
 - The appropriate permissions in your Datadog account:
-    - For log finding alerts, Security Notification Rules Read and Write permissions. To view Sensitive Data Scanner findings, you also need the Data Scanner Read permission.
+    - For log finding alerts, [Security Notification Rules Read and Write permissions][2]. To view Sensitive Data Scanner findings, you also need the Data Scanner Read permission.
     - For APM and RUM monitors, [monitor creation permissions][6].
 - An understanding of which types of sensitive data is most critical for your organization to monitor.
 
@@ -46,7 +46,7 @@ Sensitive Data Scanner works across multiple Datadog products. The alerting flow
 
 ### Logs
 
-Although you can create log monitors for sensitive data, Security Notification Rules are recommended because they alert directly on findings and include finding context.
+Although you can create log monitors for sensitive data, notification rules are recommended because they alert directly on findings and include finding context.
 
 To create a notification rule for log findings:
 
@@ -132,6 +132,7 @@ For APM and RUM monitors, start with conservative thresholds and adjust based on
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/sensitive_data_scanner/setup/telemetry_data/
+[2]: /account_management/rbac/permissions/#cloud-security-platform
 [3]: https://app.datadoghq.com/monitors/create/apm
 [4]: https://app.datadoghq.com/monitors/create/rum
 [6]: /account_management/rbac/permissions/#monitors
