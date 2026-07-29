@@ -25,8 +25,10 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
+Bits Live Debugger functionality is only accessible from the Live Debugger page at this time. Support for using Live Debugger tools through Bits Chat, Bits Code, and the public MCP is coming soon.
+
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>, which may impact billing.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
 </div>
 
 ## Prerequisites
@@ -85,4 +87,4 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [4]: https://app.datadoghq.com/debugging/
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
-[7]: /tracing/live_debugger/#requirements-and-setup
+[7]: /tracing/live_debugger/#enable-live-debugger
