@@ -16,7 +16,7 @@ further_reading:
       text: "Investigate sensitive data findings"
     - link: "/security/sensitive_data_scanner/guide/create-alerts-for-sensitive-data/"
       tag: "Documentation"
-      text: "Create monitors for sensitive data"
+      text: "Create alerts for sensitive data"
 ---
 
 ## Overview
