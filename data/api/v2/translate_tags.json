@@ -251,6 +251,10 @@
     "name": "Incidents",
     "description": "Manage incident response, as well as associated attachments, metadata, and todos. See the [Incident Management page](https://docs.datadoghq.com/service_management/incident_management/) for more information."
   },
+  "integration-accounts": {
+    "name": "Integration Accounts",
+    "description": "Manage accounts for Datadog integrations served by the Account Management Service (AMS). The account payload is strongly typed per integration and interface."
+  },
   "integrations": {
     "name": "Integrations",
     "description": "The Integrations API is used to list available integrations\nand retrieve information about their installation status."

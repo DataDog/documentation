@@ -11198,8 +11198,7 @@ menu:
           - v2
         operationids:
           - FetchDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Execute a tabular DDSQL query
       url: /api/latest/ddsql/execute-a-tabular-ddsql-query/
@@ -11211,8 +11210,7 @@ menu:
           - v2
         operationids:
           - ExecuteDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
@@ -13721,6 +13719,75 @@ menu:
         unstable:
           - v2
         order: 50
+    - name: Integration Accounts
+      url: /api/latest/integration-accounts/
+      identifier: integration-accounts
+      generated: true
+    - name: Update an integration account
+      url: /api/latest/integration-accounts/update-an-integration-account/
+      identifier: integration-accounts-update-an-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIntegrationAccount
+        unstable:
+          - v2
+        order: 4
+    - name: Get an integration account
+      url: /api/latest/integration-accounts/get-an-integration-account/
+      identifier: integration-accounts-get-an-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIntegrationAccount
+        unstable:
+          - v2
+        order: 3
+    - name: Delete an integration account
+      url: /api/latest/integration-accounts/delete-an-integration-account/
+      identifier: integration-accounts-delete-an-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIntegrationAccount
+        unstable:
+          - v2
+        order: 5
+    - name: Create an integration account
+      url: /api/latest/integration-accounts/create-an-integration-account/
+      identifier: integration-accounts-create-an-integration-account
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIntegrationAccount
+        unstable:
+          - v2
+        order: 2
+    - name: List integration accounts
+      url: /api/latest/integration-accounts/list-integration-accounts/
+      identifier: integration-accounts-list-integration-accounts
+      parent: integration-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIntegrationAccounts
+        unstable:
+          - v2
+        order: 1
     - name: Integrations
       url: /api/latest/integrations/
       identifier: integrations
