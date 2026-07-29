@@ -1,6 +1,6 @@
 ---
 title: Cross-App Access
-description: Configure Okta Cross-App Access so Claude can call the Datadog API on behalf of users authorized in Okta.
+description: Configure Okta Cross-App Access so AI agents can call the Datadog API on behalf of users authorized in Okta.
 algolia:
   tags: ["cross-app access", "XAA", "Okta", "AI agent", "MCP", "ID-JAG"]
 further_reading:
@@ -19,11 +19,11 @@ further_reading:
 
 ## Overview
 
-Cross-App Access (XAA) lets Claude call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes Claude individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
+Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes the agent individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
 
-Okta issues Claude a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). Claude presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
+Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
 
-Cross-App Access supports Okta as the identity provider and Claude as the agent.
+In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent. Support for additional identity providers and agents is planned for a future release.
 
 ## How it works
 
@@ -54,7 +54,7 @@ The SAML application's **Name ID format** is set to `EmailAddress`, and the Name
 
 Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
 
-You have an API key and an application key belonging to a user with the `org_management` permission. See [API and application keys][2] and [Role permissions][3].
+You have a credential that authenticates as a user or service account holding the `org_management` permission. Datadog recommends a [Personal Access Token][2] (PAT) or a [Service Access Token][3] (SAT), because both are scoped and expire by default. An API key paired with an application key also works. See [API and application keys][4] and [Role permissions][5].
 
 Your Okta tenant has the **AI Agent Identity Assertion** and **Agent to Agent Connections** Early Access features enabled, and you have Okta Super Administrator access.
 
@@ -69,8 +69,7 @@ Set the `mcp_cross_app_access_enabled` org config to `true`. This applies to you
 ```shell
 curl -X PATCH "{{< region-param key="dd_api" >}}/api/v2/org_configs/mcp_cross_app_access_enabled" \
   -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -H "Authorization: Bearer ${DD_TOKEN}" \
   -d '{
     "data": {
       "type": "org_configs",
@@ -81,7 +80,7 @@ curl -X PATCH "{{< region-param key="dd_api" >}}/api/v2/org_configs/mcp_cross_ap
   }'
 ```
 
-To turn Cross-App Access off later, send the same request with `"value": false`. See [Update a specific Org Config][4].
+To turn Cross-App Access off later, send the same request with `"value": false`. See [Update a specific Org Config][6].
 
 ### Set your Okta issuer URL
 
@@ -90,8 +89,7 @@ Datadog derives the token signing keys location from this value, so it must be e
 ```shell
 curl -X PUT "{{< region-param key="dd_api" >}}/api/v2/login/org_configs/mcp_cross_app_access_issuer_url" \
   -H "Content-Type: application/json" \
-  -H "DD-API-KEY: ${DD_API_KEY}" \
-  -H "DD-APPLICATION-KEY: ${DD_APP_KEY}" \
+  -H "Authorization: Bearer ${DD_TOKEN}" \
   -d '{
     "data": {
       "type": "org_config",
@@ -114,7 +112,7 @@ Sending an empty string unsets the issuer and stops Datadog from accepting token
 
 Okta sends this value as the `aud_tenant` claim, which tells Datadog which organization a token targets when several organizations share one Okta tenant. It is not the same as the company ID that Okta asks for elsewhere.
 
-To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/current_user][5] with an active session in the target organization. The UUID is the `id` of the `orgs` entry in the `included` array.
+To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/current_user][7] with an active session in the target organization. The UUID is the `id` of the `orgs` entry in the `included` array.
 
 ### Note the Claude client ID
 
@@ -134,25 +132,25 @@ Datadog recommends setting it in Datadog. Okta accepts scopes as free text, whic
 
 To set the scopes Claude is allowed:
 
-1. Navigate to [**Organization Settings > Mobile and Third-Party Access**][6].
+1. Navigate to [**Organization Settings > Mobile and Third-Party Access**][8].
 2. Select the Claude application, then select the **Scopes** tab.
 3. Use the **Allowed** checkbox for each scope to control what Claude reaches.
 4. Click **Enable** to save.
 
-Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][7].
+Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][9].
 
 If you set scopes in Okta as well, Datadog grants the intersection of the scopes in the token and the scopes allowed for the OAuth client. Scopes set in Okta narrow what Claude reaches within what Datadog allows, and they do not widen it. Claude receives no access to a scope that is not allowed in Datadog, whatever the token requests.
 
 ## Finish the setup in Okta
 
-Complete the setup in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. For the full procedure, see [Okta's Cross-App Access documentation][8].
+Complete the setup in the Okta Admin Console as a Super Administrator. This section lists the values Datadog expects and the Okta fields they belong in. For the full procedure, see [Okta's Cross-App Access documentation][10].
 
 ### Configure the Datadog application as a resource server
 
 On your Datadog application, open the **Resource Server** tab and enable **Cross-app access (XAA)**. Set the following fields.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-The values below match your selected [Datadog site][9] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
+The values below match your selected [Datadog site][11] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
 
 | Okta field | Value |
 |------------|-------|
@@ -192,15 +190,15 @@ Add the Claude SAML application as a delegated caller on the AI Agent, then acti
 
 ## Add Datadog as a connector in Claude
 
-Users reach Datadog through a connector in Claude. For Cross-App Access, add Datadog as a custom connector pointing at the resource URL for your [Datadog site][9], rather than installing the directory connector, which uses the standard per-user OAuth flow.
+Users reach Datadog through a connector in Claude. For Cross-App Access, add Datadog as a custom connector pointing at the resource URL for your [Datadog site][11].
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Follow the Claude help center guide on [custom connectors][10] and enter this URL when prompted:
+Follow the Claude help center guide on [custom connectors][12] and enter this URL when prompted:
 
 <pre><code>{{< region-param key="mcp_xaa_resource_url" >}}</code></pre>
 {{< /site-region >}}
 
-For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][11].
+For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][13].
 
 ## Verify the configuration
 
@@ -213,13 +211,15 @@ If a user signed in before you enabled Cross-App Access, have them sign out of C
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/saml/
-[2]: /account_management/api-app-keys/
-[3]: /account_management/rbac/permissions/
-[4]: /api/latest/organizations/#update-a-specific-org-config
-[5]: https://app.datadoghq.com/api/v2/current_user
-[6]: https://app.datadoghq.com/organization-settings/mobile-third-party-access
-[7]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
-[8]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
-[9]: /getting_started/site/
-[10]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
-[11]: /mcp_server/setup/
+[2]: /account_management/personal-access-tokens/
+[3]: /account_management/service-access-tokens/
+[4]: /account_management/api-app-keys/
+[5]: /account_management/rbac/permissions/
+[6]: /api/latest/organizations/#update-a-specific-org-config
+[7]: https://app.datadoghq.com/api/v2/current_user
+[8]: https://app.datadoghq.com/organization-settings/mobile-third-party-access
+[9]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
+[10]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
+[11]: /getting_started/site/
+[12]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
+[13]: /mcp_server/setup/
