@@ -73,3 +73,4 @@ For further questions or issues not covered here, contact [Datadog support][5].
 [2]: https://app.datadoghq.com/logs/livetail
 [3]: https://app.datadoghq.com/apm/traces?query=operation_name%3Aazure.logicapps
 [4]: /tracing/trace_pipeline/trace_retention/#retention-filters
+[5]: /help/
