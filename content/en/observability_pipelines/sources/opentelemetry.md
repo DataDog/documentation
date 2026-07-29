@@ -5,6 +5,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
     text: Manage metric volume and tags in your environment with Observability Pipelines
+  - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+    tag: "Blog"
+    text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs

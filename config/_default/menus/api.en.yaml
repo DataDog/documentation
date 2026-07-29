@@ -2006,6 +2006,45 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: Get a historical metrics configuration
+      url: /api/latest/metrics/get-a-historical-metrics-configuration/
+      identifier: metrics-get-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 28
+    - name: Delete a historical metrics configuration
+      url: /api/latest/metrics/delete-a-historical-metrics-configuration/
+      identifier: metrics-delete-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 29
+    - name: Enable historical metrics ingestion
+      url: /api/latest/metrics/enable-historical-metrics-ingestion/
+      identifier: metrics-enable-historical-metrics-ingestion
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 27
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -11198,8 +11237,7 @@ menu:
           - v2
         operationids:
           - FetchDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Execute a tabular DDSQL query
       url: /api/latest/ddsql/execute-a-tabular-ddsql-query/
@@ -11211,8 +11249,7 @@ menu:
           - v2
         operationids:
           - ExecuteDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
@@ -14772,6 +14809,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List custom evaluator configurations
+      url: /api/latest/llm-observability/list-custom-evaluator-configurations/
+      identifier: llm-observability-list-custom-evaluator-configurations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsCustomEvalConfigs
+        unstable:
+          - v2
+        order: 73
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -17070,6 +17120,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Config
+      url: /api/latest/rum-config/
+      identifier: rum-config
+      generated: true
+    - name: Create the RUM configuration
+      url: /api/latest/rum-config/create-the-rum-configuration/
+      identifier: rum-config-create-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Update the RUM configuration
+      url: /api/latest/rum-config/update-the-rum-configuration/
+      identifier: rum-config-update-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get the RUM configuration
+      url: /api/latest/rum-config/get-the-rum-configuration/
+      identifier: rum-config-get-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumConfig
+        unstable:
+          - v2
+        order: 1
     - name: RUM Insights
       url: /api/latest/rum-insights/
       identifier: rum-insights

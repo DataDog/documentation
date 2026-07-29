@@ -5,6 +5,9 @@ further_reading:
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
   text: "Writing Effective Grok Parsing Rules with Regular Expressions"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs

@@ -14,6 +14,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
       tag: "Blog"
       text: "Introducing Bits Code for Code Security"
+    - link: "https://www.datadoghq.com/blog/open-source-ai-sast/"
+      tag: "Blog"
+      text: "Introducing our open source AI-native SAST"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.

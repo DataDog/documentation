@@ -237,6 +237,10 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
+`sample_rate`
+: optional - _float_
+<br />The fraction of traces retained by Agent Observability. Requires `ddtrace` 4.12.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
+
 `capture_intent`
 : optional - _boolean_ - **default**: `false`
 <br />When set to `True`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span. If not provided, this defaults to the value of `DD_MCP_CAPTURE_INTENT`.
@@ -277,7 +281,7 @@ const llmobs = tracer.llmobs;
 
 `sampleRate`
 : optional - _number_
-<br />The fraction of traces retained by Agent Observability. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
+<br />The fraction of traces retained by Agent Observability. Requires `dd-trace` 5.110.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
 
 **Options for general tracer configuration**:
 
@@ -379,7 +383,7 @@ After installing the SDK and running your application you should expect to see s
 
 ## Trace sampling
 
-<div class="alert alert-info">Trace sampling is available in the Python and Node.js SDKs.</div>
+<div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later) and the Node.js SDK (<code>dd-trace</code> 5.110.0 or later). The Java SDK does not support trace sampling.</div>
 
 Trace sampling sets the fraction of traces that Agent Observability retains. Use it to reduce ingestion volume and cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
@@ -388,7 +392,7 @@ This sampling happens client-side. It is independent of in-app controls such as 
 Configure the sample rate through either of two mechanisms:
 
 - **Environment variable** (`DD_LLMOBS_SAMPLE_RATE`): applies to both [command-line setup](#command-line-setup) and [in-code setup](#in-code-setup).
-- **In-code parameter** (`sampleRate`, Node.js only): passed under `llmobs` when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`.
+- **In-code parameter** (`sample_rate` in Python, `sampleRate` in Node.js): passed to `LLMObs.enable()` in Python, or under `llmobs` in Node.js, when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`.
 
 The sample rate is a float between `0.0` (retain no traces) and `1.0` (retain all traces). The default is `1.0`. Out-of-range values are ignored.
 
@@ -400,7 +404,16 @@ Set the sample rate with the environment variable:
 DD_LLMOBS_SAMPLE_RATE=0.5 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{< /code-block >}}
 
-The Python SDK does not yet support setting the sample rate in code.
+Or pass `sample_rate` to `LLMObs.enable()`, which takes precedence over the environment variable:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  sample_rate=0.5,
+)
+{{< /code-block >}}
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
