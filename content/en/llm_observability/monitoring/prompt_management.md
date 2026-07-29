@@ -15,6 +15,10 @@ further_reading:
 
 ---
 
+{{< callout url="https://www.datadoghq.com/" btn_hidden="true">}}
+Prompt Management is in Preview.
+{{< /callout >}}
+
 ## Overview
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
