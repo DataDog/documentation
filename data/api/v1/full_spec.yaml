@@ -1443,6 +1443,10 @@ components:
           format: date-time
           readOnly: true
           type: string
+        default_timeframe:
+          $ref: "#/components/schemas/DashboardDefaultTimeframeSetting"
+          description: The default timeframe applied when opening the dashboard. Set to `null` to clear.
+          nullable: true
         description:
           description: Description of the dashboard.
           nullable: true
@@ -1557,6 +1561,11 @@ components:
       required:
         - data
       type: object
+    DashboardDefaultTimeframeSetting:
+      description: The default timeframe applied when opening the dashboard. Set to `null` to clear the dashboard's default timeframe.
+      oneOf:
+        - $ref: "#/components/schemas/DashboardLiveTimeframe"
+        - $ref: "#/components/schemas/DashboardFixedTimeframe"
     DashboardDeleteResponse:
       description: Response from the delete dashboard call.
       properties:
@@ -1564,6 +1573,36 @@ components:
           description: ID of the deleted dashboard.
           type: string
       type: object
+    DashboardFixedTimeframe:
+      description: A fixed dashboard timeframe.
+      properties:
+        from:
+          description: Start time in milliseconds since epoch.
+          example: 1712080128000
+          format: int64
+          minimum: 0
+          type: integer
+        to:
+          description: End time in milliseconds since epoch.
+          example: 1712083128000
+          format: int64
+          minimum: 0
+          type: integer
+        type:
+          $ref: "#/components/schemas/DashboardFixedTimeframeType"
+      required:
+        - type
+        - from
+        - to
+      type: object
+    DashboardFixedTimeframeType:
+      description: Type of fixed timeframe.
+      enum:
+        - fixed
+      example: fixed
+      type: string
+      x-enum-varnames:
+        - FIXED
     DashboardGlobalTime:
       description: Object containing the live span selection for the dashboard.
       properties:
@@ -1672,6 +1711,32 @@ components:
             $ref: "#/components/schemas/DashboardList"
           type: array
       type: object
+    DashboardLiveTimeframe:
+      description: A live dashboard timeframe.
+      properties:
+        type:
+          $ref: "#/components/schemas/DashboardLiveTimeframeType"
+        unit:
+          $ref: "#/components/schemas/WidgetLiveSpanUnit"
+        value:
+          description: Value of the live timeframe span.
+          example: 4
+          format: int64
+          minimum: 1
+          type: integer
+      required:
+        - type
+        - value
+        - unit
+      type: object
+    DashboardLiveTimeframeType:
+      description: Type of live timeframe.
+      enum:
+        - live
+      example: live
+      type: string
+      x-enum-varnames:
+        - LIVE
     DashboardReflowType:
       description: |-
         Reflow type for a **new dashboard layout** dashboard. Set this only when layout type is 'ordered'.
@@ -6653,6 +6718,7 @@ components:
         - Select value from matching element
         - Compute array length
         - Append a value to an array
+        - Extract key-value pairs from an array
       properties:
         is_enabled:
           default: false
@@ -6675,6 +6741,7 @@ components:
         - $ref: "#/components/schemas/LogsArrayProcessorOperationAppend"
         - $ref: "#/components/schemas/LogsArrayProcessorOperationLength"
         - $ref: "#/components/schemas/LogsArrayProcessorOperationSelect"
+        - $ref: "#/components/schemas/LogsArrayProcessorOperationExtractKeyValue"
     LogsArrayProcessorOperationAppend:
       description: Operation that appends a value to a target array attribute.
       properties:
@@ -6704,6 +6771,44 @@ components:
       type: string
       x-enum-varnames:
         - APPEND
+    LogsArrayProcessorOperationExtractKeyValue:
+      description: Operation that extracts key-value pairs from a `source` array and stores the result in the `target` attribute.
+      properties:
+        key_to_extract:
+          description: Key of the attribute in each array element that holds the name to use for the extracted attribute.
+          example: name
+          type: string
+        override_on_conflict:
+          default: false
+          description: Whether to override the target element if it's already set.
+          type: boolean
+        source:
+          description: Attribute path of the array to extract key-value pairs from.
+          example: tags
+          type: string
+        target:
+          description: Attribute that receives the extracted key-value pairs. If not specified, the extracted attributes are added at the root level of the log.
+          example: extracted
+          type: string
+        type:
+          $ref: "#/components/schemas/LogsArrayProcessorOperationExtractKeyValueType"
+        value_to_extract:
+          description: Key of the attribute in each array element that holds the value to use for the extracted attribute.
+          example: value
+          type: string
+      required:
+        - type
+        - source
+        - key_to_extract
+        - value_to_extract
+      type: object
+    LogsArrayProcessorOperationExtractKeyValueType:
+      description: Operation type.
+      enum: [key-value]
+      example: key-value
+      type: string
+      x-enum-varnames:
+        - KEY_VALUE
     LogsArrayProcessorOperationLength:
       description: Operation that computes the length of a `source` array and stores the result in the `target` attribute.
       properties:
@@ -6788,7 +6893,7 @@ components:
           type: string
         override_on_conflict:
           default: false
-          description: Override or not the target element if already set,
+          description: Whether to override the target element if it's already set.
           type: boolean
         preserve_source:
           default: false
@@ -7954,7 +8059,7 @@ components:
           type: string
         override_on_conflict:
           default: false
-          description: Override or not the target element if already set.
+          description: Whether to override the target element if it's already set.
           type: boolean
         preserve_source:
           default: false
@@ -20565,7 +20670,7 @@ components:
           type: boolean
         ignore_certificate_validation:
           description: |-
-            For SSL tests, whether or not the test should ignore certificate validation.
+            For SSL tests, whether the test should ignore certificate validation.
           type: boolean
         initialNavigationTimeout:
           description: Timeout before declaring the initial step as failed (in seconds) for browser tests.
@@ -20808,6 +20913,10 @@ components:
           type: string
         httpVersion:
           $ref: "#/components/schemas/SyntheticsTestOptionsHTTPVersion"
+        ignore_certificate_validation:
+          description: |-
+            For SSL tests, whether the test should ignore certificate validation.
+          type: boolean
         isMessageBase64Encoded:
           description: Whether the message is base64 encoded.
           type: boolean
@@ -21936,6 +22045,12 @@ components:
       type: object
     TopologyMapWidgetDefinition:
       description: This widget displays a topology of nodes and edges for different data sources. It replaces the service map widget.
+      oneOf:
+        - $ref: "#/components/schemas/TopologyMapWidgetDefinitionDataStreams"
+        - $ref: "#/components/schemas/TopologyMapWidgetDefinitionServiceMap"
+    TopologyMapWidgetDefinitionDataStreams:
+      additionalProperties: false
+      description: Topology map widget backed by the data streams data source.
       properties:
         custom_links:
           description: List of custom links.
@@ -21946,11 +22061,47 @@ components:
           description: The description of the widget.
           type: string
         requests:
-          description: One or more Topology requests.
+          description: One Topology request.
           items:
-            $ref: "#/components/schemas/TopologyRequest"
+            $ref: "#/components/schemas/TopologyRequestDataStreams"
           minItems: 1
           type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/TopologyMapWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    TopologyMapWidgetDefinitionServiceMap:
+      additionalProperties: false
+      description: Topology map widget backed by the service map data source.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: One Topology request.
+          items:
+            $ref: "#/components/schemas/TopologyRequestServiceMap"
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
         title:
           description: Title of your widget.
           type: string
@@ -21974,11 +22125,47 @@ components:
       type: string
       x-enum-varnames:
         - TOPOLOGY_MAP
-    TopologyQuery:
-      description: Query to service-based topology data sources like the service map or data streams.
+    TopologyQueryDataStreams:
+      additionalProperties: false
+      description: Query to the data streams topology data source.
       properties:
         data_source:
-          $ref: "#/components/schemas/TopologyQueryDataSource"
+          $ref: "#/components/schemas/TopologyQueryDataStreamsDataSource"
+        filters:
+          description: Your environment and primary tag (or * if enabled for your account).
+          example: ["env:prod", "az:us-east"]
+          items:
+            description: Environment or primary tag, generally in a key:value format.
+            type: string
+          minItems: 1
+          type: array
+        query_string:
+          description: A search string for filtering services. When set, this replaces the `service` field.
+          example: "service:myservice"
+          type: string
+        service:
+          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          example: myservice
+          type: string
+      required:
+        - data_source
+        - filters
+        - service
+      type: object
+    TopologyQueryDataStreamsDataSource:
+      description: Name of the data source.
+      enum:
+        - data_streams
+      example: data_streams
+      type: string
+      x-enum-varnames:
+        - DATA_STREAMS
+    TopologyQueryServiceMap:
+      additionalProperties: false
+      description: Query to the service map topology data source.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/TopologyQueryServiceMapDataSource"
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["env:prod", "az:us-east"]
@@ -21987,25 +22174,40 @@ components:
             type: string
           minItems: 1
           type: array
-        service:
-          description: Name of the service
-          example: myService
+        query_string:
+          description: A search string for filtering services. When set, this replaces the `service` field.
+          example: "service:myservice"
           type: string
+        service:
+          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          example: myservice
+          type: string
+      required:
+        - data_source
+        - filters
+        - service
       type: object
-    TopologyQueryDataSource:
-      description: Name of the data source
+    TopologyQueryServiceMapDataSource:
+      description: Name of the data source.
       enum:
-        - data_streams
         - service_map
+      example: service_map
       type: string
       x-enum-varnames:
-        - DATA_STREAMS
         - SERVICE_MAP
-    TopologyRequest:
-      description: Request that will return nodes and edges to be used by topology map.
+    TopologyRequestDataStreams:
+      description: Request that returns nodes and edges from the data streams data source.
       properties:
         query:
-          $ref: "#/components/schemas/TopologyQuery"
+          $ref: "#/components/schemas/TopologyQueryDataStreams"
+        request_type:
+          $ref: "#/components/schemas/TopologyRequestType"
+      type: object
+    TopologyRequestServiceMap:
+      description: Request that returns nodes and edges from the service map data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/TopologyQueryServiceMap"
         request_type:
           $ref: "#/components/schemas/TopologyRequestType"
       type: object

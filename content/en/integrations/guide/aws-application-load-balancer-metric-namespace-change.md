@@ -13,21 +13,21 @@ further_reading:
 
 ## Overview
 
-This guide applies only to Datadog customers contacted by [Datadog Support][2] about a legacy behavior in the Datadog AWS integration. In your account, AWS Application Load Balancer (ALB) metrics are reported under both the `aws.applicationelb.*` and `aws.elb.*` namespaces. Datadog is removing this legacy dual-reporting so that ALB metrics are reported only under `aws.applicationelb.*`, which is the correct and intended namespace.
+This guide applies only to Datadog customers contacted by [Datadog Support][2] about a legacy behavior in the Datadog AWS integration. In your account, AWS Application Load Balancer (ALB) metrics were reported under both the `aws.applicationelb.*` and `aws.elb.*` namespaces. In June 2026, Datadog removed this legacy dual-reporting so that ALB metrics report only under `aws.applicationelb.*`, which is the correct and intended namespace.
 
-**Classic ELB metrics are not affected.** They continue to report under `aws.elb.*` as they do today.
+**Classic ELB metrics are not affected.** They continue to report under `aws.elb.*`.
 
-If you use ALB metrics in monitors, dashboards, or notebooks that reference the `aws.elb.*` namespace, update those queries before the change takes effect.
+If you have ALB metrics in monitors, dashboards, or notebooks that reference the `aws.elb.*` namespace, update those queries to use `aws.applicationelb.*` instead.
 
 ## Why this change
 
 When AWS introduced Application Load Balancers in 2016, Datadog began reporting ALB metrics under both `aws.applicationelb.*` and `aws.elb.*` to help customers migrating from Classic ELB to ALB. This dual-reporting has not been enabled for new customers since 2018.
 
-Classic ELB and ALB report different, overlapping sets of metrics. Having the same metric names appear under two namespaces has led to confusion about what each metric represents. Removing the legacy dual-reporting makes monitoring clearer and more consistent.
+Classic ELB and ALB report different, overlapping sets of metrics. Having the same metric names appear under two namespaces has led to confusion about what each metric represents. Removing the legacy dual-reporting made monitoring clearer and more consistent.
 
 ## Timeline
 
-The deprecation of legacy ALB metrics under `aws.elb.*` is scheduled for June 2026, no earlier than June 1. Use the time before then to review and update any affected monitors, dashboards, or notebooks.
+Datadog removed legacy ALB metrics from the `aws.elb.*` namespace in June 2026. If you haven't already, review and update any affected monitors, dashboards, or notebooks.
 
 ## Who is affected
 
@@ -79,11 +79,11 @@ The sections below list every metric under `aws.elb.*`: 68 to update, 9 to verif
 
 ### Metrics to update (Application Load Balancer)
 
-These metrics always originate from Application Load Balancers and never from Classic Load Balancers. They are duplicates of metrics already reported under `aws.applicationelb.*`. Today they are reported under both namespaces. After the change, they are reported only under `aws.applicationelb.*`. Update your queries to use the equivalent `aws.applicationelb.*` metric.
+These metrics always originate from Application Load Balancers and never from Classic Load Balancers. They were duplicates of metrics also reported under `aws.applicationelb.*`. They now report only under `aws.applicationelb.*`. Update your queries to use the equivalent `aws.applicationelb.*` metric.
 
 {{% collapse-content title="View all 68 metrics" level="h4" expanded=false %}}
 
-| Current metric (`aws.elb.*`) | Replacement metric (`aws.applicationelb.*`) |
+| Former metric (`aws.elb.*`) | Current metric (`aws.applicationelb.*`) |
 | --- | --- |
 | `aws.elb.active_connection_count` | `aws.applicationelb.active_connection_count` |
 | `aws.elb.active_zonal_shift_host_count` | `aws.applicationelb.active_zonal_shift_host_count` |
@@ -161,12 +161,12 @@ These metrics always originate from Application Load Balancers and never from Cl
 
 ### Metrics to verify (may be affected)
 
-These metric names exist in both Classic ELB and Application Load Balancer. Whether they are affected depends on which type of load balancer they originate from. Use the tag logic in [How to identify affected queries](#how-to-identify-affected-queries) to determine the source.
+These metric names exist in both Classic ELB and Application Load Balancer. Whether they were affected depended on which type of load balancer they originated from. Use the tag logic in [How to identify affected queries](#how-to-identify-affected-queries) to determine the source.
 
-**Note**: Three of the overlap metrics change behavior when migrated, beyond the namespace swap:
+**Note**: Three of the overlap metrics changed behavior when migrated, beyond the namespace swap:
 
 - **`aws.elb.request_count`** → `aws.applicationelb.request_count`: the legacy metric is a rate (divided by 60); the replacement is a count. After migrating, add `.as_rate()` or adjust the query to treat the metric as a count.
-- **`aws.elb.httpcode_elb_4xx`** and **`aws.elb.httpcode_elb_5xx`** → `aws.applicationelb.httpcode_elb_4xx` and `aws.applicationelb.httpcode_elb_5xx`: when sourced from an ALB today, the legacy metrics report values 60 times higher than the true rate. Datadog divides by 60 only for Classic ELB. The replacement metrics report correctly as counts. After migrating, expect different numbers; add `.as_rate()` or keep the query as a count.
+- **`aws.elb.httpcode_elb_4xx`** and **`aws.elb.httpcode_elb_5xx`** → `aws.applicationelb.httpcode_elb_4xx` and `aws.applicationelb.httpcode_elb_5xx`: when sourced from an ALB, the legacy metrics reported values 60 times higher than the true rate. Datadog divides by 60 only for Classic ELB. The replacement metrics report correctly as counts. After migrating, expect different numbers; add `.as_rate()` or keep the query as a count.
 
 | Metric name | Affected when source is |
 | --- | --- |

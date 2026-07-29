@@ -114,6 +114,19 @@ To convert a string timestamp to timestamp format:
     ```
     See [parse_timestamp][9] for more information.
 
+## Metrics
+
+For [component metrics][10] and [processor buffer metrics][11] emitted by all processors, see the [Pipelines Usage Metrics][12] documentation.
+
+### Generate Metrics metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `generate_metrics` for this processor's metrics.
+
+`pipelines.generated_metrics_from_logs_total`
+: **Description**: The number of metrics generated from log events by the processor.
+: **Metric type**: count
+
 [1]: /metrics/custom_metrics/
 [2]: /account_management/billing/custom_metrics/
 [3]: /metrics/types/
@@ -123,3 +136,6 @@ To convert a string timestamp to timestamp format:
 [7]: /observability_pipelines/destinations/?tab=metrics#destinations
 [8]: /observability_pipelines/processors/custom_processor/#setup
 [9]: /observability_pipelines/processors/custom_processor/#parse_timestamp
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[11]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[12]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -31,7 +31,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -41,6 +41,7 @@ To use AI Costs, you must have at least one of the following supported providers
 |---|---|
 | Amazon Bedrock | [AWS integration][2] |
 | Anthropic   | [SaaS integration][3] |
+| Azure Foundry Models   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
@@ -59,6 +60,7 @@ The AI cost summary page provides:
 - **Daily AI Cost**: Daily cost trends across the selected providers over the selected time frame. Use the **Filter to** dropdown to define which providers appear in the graph.
 - **Top Cost Drivers**: The models, projects, services, and users generating the most spend.
 - **Active AI Cost Anomalies**: Cost [anomalies][7] surfaced proactively across all connected providers. Select an anomaly to open a side panel with more details and options for further action.
+- **AI Cost Recommendations**: Cost [recommendations][17] and optimization opportunities surfaced across all connected providers. Select a recommendation to open a side panel with more details and options for further action.
 - **AI Cost Dashboards**: Out-of-the-box dashboard templates for each supported provider, combining cost data with usage signals such as token consumption, model distribution, and user analytics.
 
 ## Normalized AI tags
@@ -78,7 +80,8 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to sources
 
-[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI.
+[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
+
 
 The following tags are available through OOTB allocation rules:
 
@@ -145,3 +148,5 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [14]: /cloud_cost_management/reporting
 [15]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
+[17]: /cloud_cost_management/recommendations
+[18]: /cloud_cost_management/setup/azure/?tab=terraform

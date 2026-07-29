@@ -69,8 +69,8 @@ Learn more about [Session Replay for Mobile][8].
 [1]: https://github.com/DataDog/browser-sdk
 [2]: https://www.rrweb.io/
 [3]: https://github.com/DataDog/browser-sdk/blob/main/packages/rum/BROWSER_SUPPORT.md
-[4]: /session_replay/browser/setup_and_configuration
-[5]: /session_replay/browser/privacy_options
-[6]: /session_replay/#dev-tools
-[7]: /session_replay/browser/troubleshooting
+[4]: /session_replay/setup_and_configuration?platform=browser
+[5]: /session_replay/privacy_options?platform=browser
+[6]: /session_replay/dev_tools
+[7]: /session_replay/troubleshooting?platform=browser
 [8]: /session_replay/mobile/

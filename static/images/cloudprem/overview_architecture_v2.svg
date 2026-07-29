@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">BYOC Logs architecture</title>
+  <desc id="description">Datadog Agents, applications, and OpenTelemetry collectors send logs to Observability Pipelines workers. The workers forward processed logs to the BYOC Logs engine. The engine runs indexers, compactors on dedicated nodes, searchers, a control plane, a janitor, and a metastore. It stores indexed splits in object storage and metadata in PostgreSQL. Searchers connect to Datadog for queries and results.</desc>
+
+  <defs>
+    <linearGradient id="datadogGradient" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F00090"/>
+      <stop offset="1" stop-color="#8700FF"/>
+    </linearGradient>
+    <marker id="arrowBlack" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10Z" fill="#111111"/>
+    </marker>
+    <symbol id="node" viewBox="0 0 64 64">
+      <polygon points="20,3 44,3 61,20 61,44 44,61 20,61 3,44 3,20" fill="#2F6EE5"/>
+      <path d="M32 19L43 25L32 31L21 25Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M21 25V39L32 46V31Z" fill="#FFFFFF" fill-opacity="0.92" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M43 25V39L32 46V31Z" fill="#FFFFFF" fill-opacity="0.72" stroke="#FFFFFF" stroke-width="1.4" stroke-linejoin="round"/>
+    </symbol>
+    <style>
+      text { font-family: Arial, Helvetica, sans-serif; fill: #111111; }
+      .environment-title { font-size: 28px; font-weight: 800; }
+      .diagram-title { font-size: 20px; font-weight: 800; }
+      .subtitle { font-size: 14px; fill: #505050; }
+      .kubernetes-title { font-size: 25px; font-weight: 800; }
+      .panel-title { font-size: 22px; font-weight: 800; }
+      .section-label { font-size: 15px; font-weight: 800; fill: #2166F3; }
+      .node-label { font-size: 12px; font-weight: 750; fill: #2166F3; }
+      .small { font-size: 11px; fill: #333333; }
+      .small-bold { font-size: 11px; font-weight: 800; }
+      .source-title { font-size: 15px; font-weight: 800; fill: #FFFFFF; }
+      .source-label { font-size: 15px; font-weight: 800; fill: #FFFFFF; }
+      .flow-label { font-size: 11px; font-weight: 500; }
+      .store-title { font-size: 18px; font-weight: 800; }
+      .store-copy { font-size: 12px; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="#F4F4F4"/>
+
+  <!-- Environment and page context -->
+  <rect x="31" y="28" width="1327" height="842" rx="31" fill="#FFFFFF" stroke="#111111" stroke-width="3" stroke-dasharray="14 12"/>
+  <text x="58" y="72" class="environment-title">USER ENVIRONMENT</text>
+  <text x="58" y="112" class="diagram-title">BYOC LOGS ARCHITECTURE</text>
+  <text x="360" y="111" class="subtitle">Observability Pipelines and the BYOC engine process, store, and query logs in your infrastructure.</text>
+
+  <!-- Log sources -->
+  <rect x="65" y="173" width="210" height="364" rx="17" fill="url(#datadogGradient)"/>
+  <text x="170" y="229" text-anchor="middle" class="source-title">LOG SOURCES</text>
+  <line x1="105" y1="262" x2="235" y2="262" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+
+  <rect x="101" y="292" width="38" height="48" rx="5" fill="none" stroke="#FFFFFF" stroke-width="4"/>
+  <circle cx="120" cy="305" r="4" fill="#FFFFFF"/>
+  <path d="M109 324h22M109 332h16" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <text x="153" y="310" class="source-label">DATADOG</text>
+  <text x="153" y="333" class="source-label">AGENTS</text>
+
+  <circle cx="120" cy="405" r="21" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <circle cx="120" cy="405" r="5" fill="#FFFFFF"/>
+  <path d="M120 374v20M120 416v20M89 405h20M131 405h20" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <text x="153" y="397" class="source-label">APPS AND</text>
+  <text x="153" y="420" class="source-label">OTEL</text>
+  <text x="153" y="443" class="source-label">COLLECTORS</text>
+
+  <!-- Data-residency callout -->
+  <rect x="65" y="565" width="210" height="145" rx="16" fill="#FFF1F7" stroke="#FF0C64" stroke-width="2.5"/>
+  <text x="86" y="598" class="small-bold">DATA RESIDENCY</text>
+  <text x="86" y="626" class="small">Full log data stays in</text>
+  <text x="86" y="646" class="small">object storage in your</text>
+  <text x="86" y="666" class="small">environment.</text>
+  <line x1="86" y1="682" x2="253" y2="682" stroke="#FF0C64" stroke-width="1.5"/>
+  <text x="86" y="702" class="small-bold">Only query results leave.</text>
+
+  <!-- Kubernetes -->
+  <rect x="320" y="142" width="1010" height="565" rx="19" fill="#D8F2FF" stroke="#006EFF" stroke-width="3"/>
+  <text x="347" y="181" class="kubernetes-title">KUBERNETES</text>
+
+  <!-- Observability Pipelines -->
+  <rect x="350" y="204" width="330" height="451" rx="11" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="2"/>
+  <text x="374" y="244" class="panel-title">OBSERVABILITY PIPELINES</text>
+  <text x="374" y="270" class="section-label">INGESTION AND ROUTING</text>
+
+  <text x="423" y="307" text-anchor="middle" class="node-label">WORKER 0</text>
+  <text x="515" y="307" text-anchor="middle" class="node-label">WORKER 1</text>
+  <text x="607" y="307" text-anchor="middle" class="node-label">WORKER N</text>
+  <use href="#node" x="393" y="321" width="60" height="60"/>
+  <use href="#node" x="485" y="321" width="60" height="60"/>
+  <use href="#node" x="577" y="321" width="60" height="60"/>
+  <path d="M453 351H485M545 351H577" fill="none" stroke="#2166F3" stroke-width="2" stroke-dasharray="5 5"/>
+
+  <rect x="374" y="414" width="82" height="54" rx="7" fill="#F1E8FF" stroke="#7B3FC6" stroke-width="2"/>
+  <text x="415" y="438" text-anchor="middle" class="small-bold">COLLECT</text>
+  <text x="415" y="456" text-anchor="middle" class="small">Receive logs</text>
+  <rect x="474" y="414" width="82" height="54" rx="7" fill="#F1E8FF" stroke="#7B3FC6" stroke-width="2"/>
+  <text x="515" y="438" text-anchor="middle" class="small-bold">PROCESS</text>
+  <text x="515" y="456" text-anchor="middle" class="small">Apply rules</text>
+  <rect x="574" y="414" width="82" height="54" rx="7" fill="#F1E8FF" stroke="#7B3FC6" stroke-width="2"/>
+  <text x="615" y="438" text-anchor="middle" class="small-bold">ROUTE</text>
+  <text x="615" y="456" text-anchor="middle" class="small">Send onward</text>
+
+  <rect x="374" y="501" width="282" height="67" rx="8" fill="#DDF3FF" stroke="#006EFF" stroke-width="2"/>
+  <text x="394" y="527" class="small-bold">PIPELINE CONFIGURATION</text>
+  <text x="394" y="550" class="small">Managed in Datadog and executed by the Workers.</text>
+  <rect x="374" y="585" width="282" height="47" rx="8" fill="#DDF8E8" stroke="#00BE70" stroke-width="2"/>
+  <text x="394" y="614" class="small-bold">SCALES INDEPENDENTLY FROM THE ENGINE</text>
+
+  <!-- BYOC engine -->
+  <rect x="720" y="204" width="570" height="451" rx="11" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="2"/>
+  <text x="744" y="244" class="panel-title">BYOC LOGS ENGINE</text>
+  <text x="744" y="270" class="section-label">CLOUDPREM ENGINE ROLES</text>
+  <rect x="1147" y="225" width="119" height="31" rx="5" fill="#FFFFFF" stroke="#006EFF" stroke-width="2"/>
+  <text x="1206" y="245" text-anchor="middle" class="small-bold">datadog/cloudprem</text>
+
+  <!-- Compute roles -->
+  <text x="805" y="307" text-anchor="middle" class="node-label">INDEXERS</text>
+  <use href="#node" x="775" y="320" width="60" height="60"/>
+  <rect x="753" y="397" width="104" height="57" rx="7" fill="#DDF3FF" stroke="#006EFF" stroke-width="2"/>
+  <text x="805" y="421" text-anchor="middle" class="small-bold">CREATE SPLITS</text>
+  <text x="805" y="440" text-anchor="middle" class="small">Index logs</text>
+
+  <text x="1005" y="307" text-anchor="middle" class="node-label">COMPACTORS</text>
+  <use href="#node" x="953" y="320" width="60" height="60"/>
+  <use href="#node" x="997" y="344" width="60" height="60"/>
+  <rect x="944" y="414" width="122" height="57" rx="7" fill="#F1E8FF" stroke="#7B3FC6" stroke-width="2"/>
+  <text x="1005" y="438" text-anchor="middle" class="small-bold">MERGE SPLITS</text>
+  <text x="1005" y="457" text-anchor="middle" class="small">Dedicated nodes</text>
+
+  <text x="1205" y="307" text-anchor="middle" class="node-label">SEARCHERS</text>
+  <use href="#node" x="1175" y="320" width="60" height="60"/>
+  <rect x="1153" y="397" width="104" height="57" rx="7" fill="#DDF3FF" stroke="#006EFF" stroke-width="2"/>
+  <text x="1205" y="421" text-anchor="middle" class="small-bold">RUN QUERIES</text>
+  <text x="1205" y="440" text-anchor="middle" class="small">Read splits</text>
+
+  <!-- Supporting services -->
+  <text x="744" y="505" class="section-label">SUPPORTING SERVICES</text>
+  <rect x="744" y="525" width="157" height="88" rx="8" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="1.8"/>
+  <text x="762" y="551" class="small-bold">CONTROL PLANE</text>
+  <text x="762" y="574" class="small">Schedules indexing</text>
+  <text x="762" y="594" class="small">pipelines.</text>
+
+  <rect x="914" y="525" width="157" height="88" rx="8" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="1.8"/>
+  <text x="932" y="551" class="small-bold">JANITOR</text>
+  <text x="932" y="574" class="small">Applies retention and</text>
+  <text x="932" y="594" class="small">cleans expired splits.</text>
+
+  <rect x="1084" y="525" width="182" height="88" rx="8" fill="#FFFFFF" stroke="#BBBBBB" stroke-width="1.8"/>
+  <text x="1102" y="551" class="small-bold">METASTORE</text>
+  <text x="1102" y="574" class="small">Manages split locations</text>
+  <text x="1102" y="594" class="small">and index metadata.</text>
+
+  <!-- Main ingestion flow -->
+  <path d="M275 354H350" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="292" y="337" class="flow-label">LOGS</text>
+  <path d="M680 354H720" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="700" y="329" text-anchor="middle" class="flow-label">PROCESSED</text>
+  <text x="700" y="343" text-anchor="middle" class="flow-label">LOGS</text>
+
+  <!-- Datadog -->
+  <rect x="1414" y="230" width="150" height="354" rx="18" fill="url(#datadogGradient)"/>
+  <text x="1489" y="280" text-anchor="middle" class="source-title">DATADOG</text>
+  <line x1="1440" y1="300" x2="1538" y2="300" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+
+  <rect x="1455" y="331" width="68" height="49" rx="4" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M1455 345h68M1470 331v14" stroke="#FFFFFF" stroke-width="3"/>
+  <text x="1489" y="414" text-anchor="middle" class="source-label">LOG EXPLORER</text>
+
+  <path d="M1462 468h54v36h-54z" fill="none" stroke="#FFFFFF" stroke-width="3"/>
+  <path d="M1474 457h30M1474 516h30" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+  <text x="1489" y="542" text-anchor="middle" class="source-label">PIPELINE CONFIG</text>
+
+  <path d="M1290 354H1414" fill="none" stroke="#111111" stroke-width="3" marker-start="url(#arrowBlack)" marker-end="url(#arrowBlack)"/>
+  <rect x="1318" y="312" width="68" height="45" rx="5" fill="#F4F4F4"/>
+  <text x="1352" y="329" text-anchor="middle" class="flow-label">QUERIES</text>
+  <text x="1352" y="344" text-anchor="middle" class="flow-label">+ RESULTS</text>
+
+  <!-- Customer-owned data stores -->
+  <path d="M905 655V735" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <text x="918" y="701" class="flow-label">SPLITS</text>
+  <rect x="720" y="749" width="350" height="87" rx="13" fill="#FFDDEB" stroke="#FF0C64" stroke-width="2.5"/>
+  <text x="744" y="779" class="store-title">OBJECT STORAGE</text>
+  <g fill="#FF6A00">
+    <rect x="744" y="797" width="7" height="26"/><rect x="756" y="797" width="7" height="26"/>
+    <rect x="768" y="797" width="7" height="26"/><rect x="780" y="797" width="7" height="26"/>
+    <rect x="792" y="797" width="7" height="26"/><rect x="804" y="797" width="7" height="26"/>
+    <rect x="816" y="797" width="7" height="26"/><rect x="828" y="797" width="7" height="26"/>
+    <rect x="840" y="797" width="7" height="26"/><rect x="852" y="797" width="7" height="26"/>
+  </g>
+  <text x="880" y="817" class="store-copy">INDEXED LOG SPLITS</text>
+
+  <path d="M1175 655V735" fill="none" stroke="#111111" stroke-width="3" marker-end="url(#arrowBlack)"/>
+  <rect x="1090" y="749" width="240" height="87" rx="13" fill="#DDF8E8" stroke="#00BE70" stroke-width="2.5"/>
+  <polygon points="1114,779 1136,766 1158,779 1158,805 1136,818 1114,805" fill="#FFFFFF"/>
+  <ellipse cx="1136" cy="787" rx="13" ry="6" fill="none" stroke="#0F5B78" stroke-width="2.5"/>
+  <path d="M1123 787v18c0 3 6 6 13 6s13-3 13-6v-18" fill="none" stroke="#0F5B78" stroke-width="2.5"/>
+  <text x="1170" y="786" class="store-title">POSTGRESQL</text>
+  <text x="1170" y="811" class="store-title">METADATA</text>
+</svg>
