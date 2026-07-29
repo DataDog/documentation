@@ -56,9 +56,10 @@ To configure authentication tokens, enable the {{< ui >}}Configure authenticatio
 1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered prepended with `DD_OP_`.
 1. (Optional) Enter a field and value if you want to add additional information to logs that are successfully authenticated with this specific token.
 1. Select the path to the token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
-	- {{< ui >}}Header{{< /ui >}} for an authorization header (optionally, enter the header name)
-	- {{< ui >}}Address{{< /ui >}} for an IP address
-	- {{< ui >}}Path{{< /ui >}} for an endpoint path
+	- {{< ui >}}Header{{< /ui >}} for a custom header or an authorization header, such as `"Authorization: Basic ABCDEF1234567="`.
+		- Optionally, enter the header name. **Note**: The header name is case insensitive.
+	- {{< ui >}}Address{{< /ui >}} for an IP address.
+	- {{< ui >}}Path{{< /ui >}} for an endpoint path.
 
 ## Secret defaults
 
