@@ -33,6 +33,8 @@ Worker version 2.20.0 gives you access to the following:
 
 - The Split Array processor's performance has been improved.
 - The HTTP/S Server source now uses a case-insensitive match for the header name field when you configure authentication tokens.
+- The Splunk HEC source now supports the `enabled` field on `valid_tokens` entries. Disabled tokens are excluded from authentication and enrichment.
+- The Splunk HEC source now accepts an optional list of valid tokens for authenticating events.
 
 #### Fixes
 
@@ -127,7 +129,6 @@ Worker version 2.17.0 gives you access to the following:
 
 - The Generate Metrics processor's performance has been improved to reduce CPU overhead when using `group_by` tag labels.
 - For the Custom Processor, the performance of `parse_regex_all` has been improved by reusing the compiled regex across invocations.
-- The Splunk HEC source now supports the `enabled` field on `valid_tokens` entries. Disabled tokens are excluded from authentication and enrichment.
 
 #### Fixes
 
@@ -175,7 +176,6 @@ Worker version 2.16.0 gives you access to the following:
 #### New features
 
 - [Databricks Zerobus][47] destination: Send log data to Databricks Unity Catalog tables using the Zerobus ingestion service. The Databricks destination supports OAuth 2.0 authentication, automatic schema fetching from Unity Catalog, and protobuf batch encoding.
-- The Splunk HEC source now accepts an optional `valid_tokens` list for token-based authentication managed using environment variables or a configured secrets backend.
 - The Splunk HEC source now supports enriching incoming log events using the VRL decoder.
 - The Amazon S3 destination now supports Apache Parquet batch encoding with flexible schema definitions and configurable compression (Snappy, ZSTD, GZIP, LZ4, or none).
 - For the Custom Processor:
