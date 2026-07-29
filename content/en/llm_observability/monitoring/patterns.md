@@ -55,7 +55,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
    - **Account**
    - **Model**
 1. Click **Confirm** to save your changes and close the window.
-1. Under **Runs**:
+1. Under **Runs on**:
    1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications. For finer-grained scoping, click the filter icon next to the selector to open the **Advanced** popover, which exposes:
       - **Which spans do you want to cluster?:** The raw span filter query for scoping by environment, span type, or other tags.
       - **Time window:** The lookback period for interactions to analyze.
