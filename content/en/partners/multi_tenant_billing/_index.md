@@ -42,7 +42,7 @@ See [Requesting an Admin Org][1] to get started.
 | Customer org linking | Available | — | Automatic linking of customer orgs to your Admin Org, based on your active contract with them. |
 | Usage metrics roll-up | Preview | **Metrics** or **Usage** data source, filtered by `child_org_name` | Usage and estimated usage metrics (`datadog.usage.*`, `datadog.estimated_usage.*`) from all connected customer orgs roll up to your Admin Org, tagged by customer, so you can build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][5]. |
 | End-customer pricing management | Preview | {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Pricing** | Configure margins per customer and let customers view their own Datadog costs directly within their org. |
-| Customer contracts management | Preview | {{< ui >}}Plan & Usage{{< /ui >}} | A centralized view inside your Admin Org for managing your book of business: customers, contracts, invoices, renewal alerts, and margin visibility. |
+| Customer contracts management | Preview | {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Contracts** | A centralized view inside your Admin Org for managing your book of business: customers, contracts, invoices, renewal alerts, and margin visibility. |
 
 <!-- TODO: screenshot of the Plan & Usage > Usage & Cost tab in an Admin Org, showing cost/usage rolled up across customer orgs -->
 {{< img src="partners/multi_tenant_billing/plan_and_usage_admin_org.png" alt="Plan and Usage view inside an Admin Org" style="width:100%;" >}}
