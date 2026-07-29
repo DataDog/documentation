@@ -527,7 +527,7 @@ SECURITY DEFINER;
 ```
 
 
-5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the managed identity's Client ID (also called the Application (client) ID), found on the managed identity's **Overview** blade in the Azure Portal. This is different from the Object (principal) ID.
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the managed identity's Client ID, also called the Application (client) ID. This ID is found on the managed identity's **Overview** blade in the Azure Portal. This is different from the Object (principal) ID.
 
 
 ```yaml
@@ -592,7 +592,7 @@ CREATE USER <MANAGED_IDENTITY_NAME> FOR LOGIN <MANAGED_IDENTITY_NAME>;
 ```
 
 
-5. Update your instance config with the `managed_identity` config block, where `client_id` is the managed identity's Client ID (also called the Application (client) ID), found on the managed identity's **Overview** blade in the Azure Portal. This is different from the Object (principal) ID.
+5. Update your instance config with the `managed_identity` config block, where `client_id` is the managed identity's Client ID, also called the Application (client) ID. This ID is found on the managed identity's **Overview** blade in the Azure Portal. This is different from the Object (principal) ID.
 
 
 **Note**: [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
