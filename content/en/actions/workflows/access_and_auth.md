@@ -36,10 +36,10 @@ A workflow can run as one of the following identities:
 : The workflow runs as its owner, and any editor of the workflow can access the same resources as the owner. A new workflow runs as its owner by default.
 
 {{< ui >}}Initiator{{< /ui >}}
-: The workflow runs as the user who triggered the run, so each run is limited to the resources that user can access. Supported for triggers that have an end user.
+: The workflow runs as the user who triggered the run, so each run is limited to the resources that user can access. Supported for [triggers][4] that have an end user.
 
 {{< ui >}}Service Account{{< /ui >}}
-: The workflow runs as a service account associated with the workflow. Use a service account for workflows with [automated triggers][4], so that runs don't depend on the permissions of an individual user.
+: The workflow runs as a service account associated with the workflow. Use a service account to control the exact permissions a run has, with roles you choose for the workflow.
 
 ### Set the workflow identity
 
@@ -70,9 +70,11 @@ The initiator resolves the connections defined in the workflow actions. Each use
 
 ### Run as a service account
 
-When a workflow runs as a service account, every run uses that account's identity, whoever triggers it. Attach an existing service account to the workflow, or create a service account when you set the identity. A service account you create adopts your roles and permissions. For more information, see [Service accounts][2] or [Role based access control][3].
+When a workflow runs as a service account, every run uses that account's identity, whoever triggers it. Because you choose which roles the service account has, you control the exact permissions a run has, independently of any user's permissions.
 
-The service account resolves the connections defined in the workflow actions. It needs the `connections_resolve` permission, plus {{< ui >}}Resolver{{< /ui >}} access to each connection the workflow uses.
+Attach an existing service account to the workflow, or create a service account when you set the identity. When you create one, you select its roles. You can assign any subset of the roles you have. With the {{< ui >}}User Access Manage{{< /ui >}} permission, you can assign any role in your organization. For more information, see [Service accounts][2] or [Role based access control][3].
+
+The service account resolves the connections defined in the workflow actions. It needs a role with the `workflows_run` and `connections_resolve` permissions, plus {{< ui >}}Resolver{{< /ui >}} access to each connection the workflow uses.
 
 ## Action credentials
 
