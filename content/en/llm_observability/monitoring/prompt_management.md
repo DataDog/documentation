@@ -44,7 +44,7 @@ pip install --upgrade ddtrace
 
 Integrate a managed prompt with a coding agent of your choice by pasting in the following prompt:
 
-```bash
+```text
 Follow the instructions at https://docs.datadoghq.com/llm_observability/instrumentation/agentic.md to integrate the Datadog managed prompt <PROMPT_ID> into this application for environment <DEPLOYMENT_ENVIRONMENT> and track its use in Agent Observability.
 
 Prompt variables: <PROMPT_VARIABLES>
