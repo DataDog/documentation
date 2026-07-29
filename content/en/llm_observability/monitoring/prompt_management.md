@@ -30,7 +30,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
 - To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
 
-### Install the SDK
+## Install the SDK
 
 Install or upgrade the latest `ddtrace` package in the Python environment used by your application:
 
