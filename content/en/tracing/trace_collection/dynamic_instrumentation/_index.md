@@ -5,9 +5,6 @@ aliases:
     - /dynamic_instrumentation/how-it-works/
     - /dynamic_instrumentation/
     - /tracing/dynamic_instrumentation/
-    - /tracing/trace_collection/dynamic_instrumentation/enabling/
-    - /dynamic_instrumentation/enabling/
-    - /tracing/dynamic_instrumentation/enabling
 is_beta: false
 private: false
 further_reading:
