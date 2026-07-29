@@ -10,7 +10,7 @@ further_reading:
   text: "Bits Code"
 - link: "/bits_ai/bits_code/automations/"
   tag: "Documentation"
-  text: "Create Bits Code automations"
+  text: "Create Bits Code Automations"
 - link: "/security/cloud_security_management/review_remediate/workflows/"
   tag: "Documentation"
   text: "Automate remediation with Workflow Automation"
@@ -45,21 +45,15 @@ Bits Code usage is billed through [AI Credits][7].
 2. Search for `@code_location.filename:*` to limit the results to findings with a resolved [code location][6]. The fix is generated from that code location, so start from one of these findings.
 3. Select a finding to open its side panel.
 4. Under **Next Steps** > **Remediation**, click **Remediate with AI**.
-5. Choose **Coding agent** to copy the prompt and run it yourself, or **Bits Code** to have Datadog generate the fix.
-
-### Coding agent
-
-On the **Coding agent** tab, click **Copy** to copy the fix prompt to your clipboard, then paste it into the coding agent you already use. The prompt describes the finding and the change required, so the agent can make the fix in your repository.
+5. Do one of the following:
+   - On the **Coding agent** tab, click **Copy**, then paste the prompt into the coding agent you already use. The prompt describes the finding and the change required, so the agent can make the fix in your repository.
+   - On the **Bits Code** tab, click either button:
+     - **Fix with Bits**: Bits Code starts a [session][3], locates the code that defines the resource, generates the fix, and opens a pull or merge request in your source control provider for review.
+     - **Create Automation**: Bits Code fixes similar findings for you as they appear, without you opening each one. For more information, see [Bits Code Automations][4].
 
 {{< img src="security/csm/remediate_with_ai_coding_agent.png" alt="The Remediate with AI dialog on the Coding agent tab, showing a Copy fix prompt option" style="width:100%;" >}}
 
-### Bits Code
-
-On the **Bits Code** tab, click **Fix with Bits**. Bits Code starts a [session][3], locates the code that defines the resource, generates the fix, and opens a pull or merge request in your source control provider for review.
-
 {{< img src="security/csm/remediate_with_ai_bits_code.png" alt="The Remediate with AI dialog on the Bits Code tab, showing a Fix with Bits button and a Create Automation button" style="width:100%;" >}}
-
-To apply the same fix to future findings without opening each one, click **Create Automation**. For more information, see [Bits Code automations][4].
 
 ## Further reading
 
