@@ -2006,6 +2006,45 @@ menu:
         unstable:
           - v2
         order: 17
+    - name: Get a historical metrics configuration
+      url: /api/latest/metrics/get-a-historical-metrics-configuration/
+      identifier: metrics-get-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 28
+    - name: Delete a historical metrics configuration
+      url: /api/latest/metrics/delete-a-historical-metrics-configuration/
+      identifier: metrics-delete-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 29
+    - name: Enable historical metrics ingestion
+      url: /api/latest/metrics/enable-historical-metrics-ingestion/
+      identifier: metrics-enable-historical-metrics-ingestion
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 27
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -19846,66 +19885,6 @@ menu:
           - CreateMaintenance
         unstable: []
         order: 18
-    - name: Update maintenance template
-      url: /api/latest/status-pages/update-maintenance-template/
-      identifier: status-pages-update-maintenance-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateMaintenanceTemplate
-        unstable: []
-        order: 31
-    - name: Get maintenance template
-      url: /api/latest/status-pages/get-maintenance-template/
-      identifier: status-pages-get-maintenance-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetMaintenanceTemplate
-        unstable: []
-        order: 30
-    - name: Delete maintenance template
-      url: /api/latest/status-pages/delete-maintenance-template/
-      identifier: status-pages-delete-maintenance-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteMaintenanceTemplate
-        unstable: []
-        order: 32
-    - name: Create maintenance template
-      url: /api/latest/status-pages/create-maintenance-template/
-      identifier: status-pages-create-maintenance-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateMaintenanceTemplate
-        unstable: []
-        order: 28
-    - name: List maintenance templates
-      url: /api/latest/status-pages/list-maintenance-templates/
-      identifier: status-pages-list-maintenance-templates
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListMaintenanceTemplates
-        unstable: []
-        order: 29
     - name: Edit degradation update
       url: /api/latest/status-pages/edit-degradation-update/
       identifier: status-pages-edit-degradation-update
@@ -19990,66 +19969,6 @@ menu:
           - CreateDegradation
         unstable: []
         order: 13
-    - name: Update degradation template
-      url: /api/latest/status-pages/update-degradation-template/
-      identifier: status-pages-update-degradation-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - UpdateDegradationTemplate
-        unstable: []
-        order: 26
-    - name: Get degradation template
-      url: /api/latest/status-pages/get-degradation-template/
-      identifier: status-pages-get-degradation-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetDegradationTemplate
-        unstable: []
-        order: 33
-    - name: Delete degradation template
-      url: /api/latest/status-pages/delete-degradation-template/
-      identifier: status-pages-delete-degradation-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - DeleteDegradationTemplate
-        unstable: []
-        order: 34
-    - name: Create degradation template
-      url: /api/latest/status-pages/create-degradation-template/
-      identifier: status-pages-create-degradation-template
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateDegradationTemplate
-        unstable: []
-        order: 35
-    - name: List degradation templates
-      url: /api/latest/status-pages/list-degradation-templates/
-      identifier: status-pages-list-degradation-templates
-      parent: status-pages
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListDegradationTemplates
-        unstable: []
-        order: 27
     - name: Update component
       url: /api/latest/status-pages/update-component/
       identifier: status-pages-update-component
