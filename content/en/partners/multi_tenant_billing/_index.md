@@ -29,7 +29,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in y
 
 {{< img src="partners/multi_tenant_billing/plan_and_usage_admin_org.png" alt="Plan and Usage view inside an Admin Org, showing cost and usage rolled up across customer organizations" style="width:100%;" >}}
 
-The same data is available programmatically through the [Usage Metering API][2].
+The same data is available programmatically through the [Usage Metering API][2], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
 
 ## Provision trial orgs for your customers
 
@@ -37,7 +37,7 @@ If your Admin Org has the Trial Org Creator capability enabled, provision trial 
 
 {{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning dashboard inside an Admin Org" style="width:100%;" >}}
 
-## Monitor usage metrics across your customers (Preview)
+## Centralized Usage Metrics (Preview)
 
 Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][4] for the metrics reference.
 

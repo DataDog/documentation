@@ -23,7 +23,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in y
 
 The same data is available programmatically through the [Usage Metering API][2], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
 
-## Monitor usage metrics across your book of business (Preview)
+## Centralized Usage Metrics (Preview)
 
 Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][3] for the metrics reference.
 
