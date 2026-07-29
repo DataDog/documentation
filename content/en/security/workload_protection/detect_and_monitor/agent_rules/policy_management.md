@@ -1,5 +1,8 @@
 ---
 title: Policy management
+aliases:
+  - /security/workload_protection/workload_security_rules/custom_rules/
+  - /security/threats/workload_security_rules/custom_rules/
 disable_toc: false
 ---
 

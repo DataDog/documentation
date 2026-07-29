@@ -67,6 +67,6 @@ SECL expressions support several platforms. You can use the documentation below 
 * [Linux][2]
 * [Windows][3]
 
-[1]: /security/workload_protection/workload_security_rules/custom_rules
+[1]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [2]: /security/threats/linux_expressions
 [3]: /security/threats/windows_expressions

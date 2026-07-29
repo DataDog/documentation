@@ -1,5 +1,10 @@
 ---
 title: Detect and Monitor
+aliases:
+  - /security/workload_protection/workload_security_rules/
+  - /security_platform/cloud_workload_security/workload_security_rules/
+  - /security/cloud_workload_security/workload_security_rules/
+  - /security/threats/workload_security_rules/
 disable_toc: false
 ---
 
