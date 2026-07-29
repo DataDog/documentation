@@ -714,6 +714,8 @@ In versions 6.4.0 and above, the following attributes are available:
 | `usr.id`    | String | Yes | Unique user identifier.                                                                                  |
 | `usr.name`  | String | No | User friendly name, displayed by default in the RUM UI.                                                  |
 | `usr.email` | String | No | User email, displayed in the RUM UI if the user name is not present. It is also used to fetch Gravatars. |
+
+**Note**: 'Public User' is displayed in the RUM UI when `usr.name` is not set, even if `usr.email` and `usr.id` are defined.
 {% /if %}
 <!-- ends  6.4.0 -->
 

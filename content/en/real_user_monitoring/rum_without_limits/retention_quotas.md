@@ -16,10 +16,6 @@ further_reading:
     text: Retention Filter Best Practices
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/rum-retention-quotas/" btn_hidden="false" header="Join the Preview">}}
-Retention Quotas are in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Retention quotas let you cap the number of sessions retained per day across your retention filters.

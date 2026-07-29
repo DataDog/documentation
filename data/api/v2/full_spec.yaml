@@ -1009,6 +1009,32 @@ components:
       required: true
       schema:
         type: string
+    LLMObsPromptIDPathParameter:
+      description: The customer-provided identifier of the LLM Observability prompt.
+      example: "customer-support-assistant"
+      in: path
+      name: prompt_id
+      required: true
+      schema:
+        type: string
+    LLMObsPromptLabelQueryParameter:
+      description: >-
+        **Deprecated.** Optional label of the prompt version to return. Do not use this parameter for new integrations. If omitted, the latest version is returned. If the prompt has no labels, the latest version is returned even when a label is requested. If the prompt has labels but none match the requested label, a 404 response is returned.
+      in: query
+      name: label
+      required: false
+      schema:
+        type: string
+    LLMObsPromptVersionPathParameter:
+      description: The version number of the LLM Observability prompt.
+      example: 1
+      in: path
+      name: version
+      required: true
+      schema:
+        format: int64
+        minimum: 1
+        type: integer
     LinkIDPathParameter:
       description: "The UUID of the case link."
       in: path
@@ -1422,6 +1448,31 @@ components:
       required: false
       schema:
         $ref: "#/components/schemas/OrgGroupPolicySortOption"
+    PostmortemTemplateFilterIncidentTypeParameter:
+      description: Filter postmortem templates by the associated incident type ID.
+      in: query
+      name: filter[incident-type]
+      required: false
+      schema:
+        format: uuid
+        type: string
+    PostmortemTemplateIdParameter:
+      description: The ID of the postmortem template.
+      example: 00000000-0000-0000-0000-000000000000
+      in: path
+      name: template_id
+      required: true
+      schema:
+        type: string
+    PostmortemTemplateSortParameter:
+      description: The attribute to sort results by. Prefix with `-` for descending order.
+      in: query
+      name: sort
+      required: false
+      schema:
+        default: created_at
+        example: "-created_at"
+        type: string
     ProjectIDPathParameter:
       description: Project UUID.
       example: "e555e290-ed65-49bd-ae18-8acbfcf18db7"
@@ -1513,7 +1564,7 @@ components:
         type: string
     ResourceID:
       description: |-
-        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`.
+        Identifier, formatted as `type:id`. Supported types: `dashboard`, `integration-service`, `integration-webhook`, `notebook`, `powerpack`, `reference-table`, `security-rule`, `slo`, `synthetics-global-variable`, `synthetics-test`, `synthetics-private-location`, `monitor`, `workflow`, `app-builder-app`, `connection`, `connection-group`, `rum-application`, `cross-org-connection`, `spreadsheet`, `on-call-schedule`, `on-call-escalation-policy`, `on-call-team-routing-rules`, `logs-pipeline`, `case-management-project`, `monitor-notification-rule`, `status-page`, `feature-flag`.
       example: "dashboard:abc-def-ghi"
       in: path
       name: resource_id
@@ -9052,6 +9103,7 @@ components:
       enum:
         - server.db.statement
         - server.io.fs.file
+        - server.io.fs.file_write
         - server.io.net.url
         - server.sys.shell.cmd
         - server.request.method
@@ -9065,6 +9117,7 @@ components:
         - server.request.trailers
         - server.request.body
         - server.request.body.filenames
+        - server.request.body.files_content
         - server.response.status
         - server.response.headers.no_cookies
         - server.response.trailers
@@ -9086,6 +9139,7 @@ components:
       x-enum-varnames:
         - SERVER_DB_STATEMENT
         - SERVER_IO_FS_FILE
+        - SERVER_IO_FS_FILE_WRITE
         - SERVER_IO_NET_URL
         - SERVER_SYS_SHELL_CMD
         - SERVER_REQUEST_METHOD
@@ -9099,6 +9153,7 @@ components:
         - SERVER_REQUEST_TRAILERS
         - SERVER_REQUEST_BODY
         - SERVER_REQUEST_BODY_FILENAMES
+        - SERVER_REQUEST_BODY_FILES_CONTENT
         - SERVER_RESPONSE_STATUS
         - SERVER_RESPONSE_HEADERS_NO_COOKIES
         - SERVER_RESPONSE_TRAILERS
@@ -20759,6 +20814,26 @@ components:
       type: string
       x-enum-varnames:
         - SCHEDULE_TARGET
+    ConfluencePostmortemSettings:
+      description: Settings for a postmortem template stored in Confluence. Required when `location` is `confluence`.
+      properties:
+        account_id:
+          description: The ID of the Confluence integration account.
+          example: "123456"
+          type: string
+        parent_id:
+          description: The ID of the parent Confluence page under which postmortems are created.
+          example: "345678"
+          nullable: true
+          type: string
+        space_id:
+          description: The ID of the Confluence space where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - space_id
+      type: object
     ConfluentAccountCreateRequest:
       description: Payload schema when adding a Confluent account.
       properties:
@@ -30758,6 +30833,257 @@ components:
       example: 1722439510282
       format: int64
       type: integer
+    DdsqlTabularQueryColumn:
+      description: A single column of a DDSQL tabular query result.
+      properties:
+        name:
+          description: Name of the column as projected by the SQL statement.
+          example: service
+          type: string
+        type:
+          description: |-
+            DDSQL data type of the column's values, for example `VARCHAR`, `BIGINT`,
+            `DECIMAL`, `BOOLEAN`, `TIMESTAMP`, `JSON`, or an array variant such as
+            `VARCHAR[]`. See the
+            [DDSQL data-types reference](https://docs.datadoghq.com/ddsql_reference/#data-types)
+            for the full, up-to-date list.
+          example: VARCHAR
+          type: string
+        values:
+          description: |-
+            Column values in row order. The element type matches the column's `type`;
+            for example a `VARCHAR` column carries strings, a `TIMESTAMP` column carries
+            Unix-millisecond integers. `null` is allowed for missing values.
+          example:
+            - web-store
+            - checkout
+          items: {}
+          type: array
+      required:
+        - name
+        - type
+        - values
+      type: object
+    DdsqlTabularQueryColumns:
+      description: |-
+        Column-major result set. Each element carries one column's name, type, and values,
+        with one value per row of the result. Set when `state` is `completed`.
+      items:
+        $ref: "#/components/schemas/DdsqlTabularQueryColumn"
+      type: array
+    DdsqlTabularQueryFetchRequest:
+      description: Wrapper for a DDSQL tabular query fetch request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestData"
+      required:
+        - data
+      type: object
+    DdsqlTabularQueryFetchRequestAttributes:
+      description: Attributes describing which previously submitted DDSQL query to fetch.
+      properties:
+        query_id:
+          description: |-
+            Opaque token returned by an earlier execute or fetch response that carried
+            `state: running`. Identifies the query to poll for results.
+          example: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+          type: string
+      required:
+        - query_id
+      type: object
+    DdsqlTabularQueryFetchRequestData:
+      description: JSON:API resource object for a DDSQL tabular query fetch request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryFetchRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryFetchRequestType:
+      default: ddsql_query_fetch_request
+      description: JSON:API resource type for a DDSQL tabular query fetch request.
+      enum:
+        - ddsql_query_fetch_request
+      example: ddsql_query_fetch_request
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_FETCH_REQUEST
+    DdsqlTabularQueryRequest:
+      description: Wrapper for a DDSQL tabular query execution request.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestData"
+      required:
+        - data
+      type: object
+    DdsqlTabularQueryRequestAttributes:
+      description: Attributes describing the DDSQL query to execute.
+      properties:
+        query:
+          description: |-
+            The DDSQL statement to execute. DDSQL is Datadog's SQL dialect, which is a subset
+            of PostgreSQL, scoped to Datadog data sources.
+          example: "SELECT cloud_provider, count(*) FROM dd.hosts group by cloud_provider"
+          type: string
+        row_limit:
+          description: |-
+            Cap on the number of rows returned. Defaults to 5,000 when omitted. Must be
+            between 1 and 10,000 inclusive; values outside this range are rejected with 400.
+          example: 1000
+          format: int64
+          maximum: 10000
+          minimum: 1
+          type: integer
+        time:
+          $ref: "#/components/schemas/DdsqlTabularQueryTimeWindow"
+      required:
+        - query
+        - time
+      type: object
+    DdsqlTabularQueryRequestData:
+      description: JSON:API resource object for a DDSQL tabular query execution request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryRequestType"
+      required:
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryRequestType:
+      default: ddsql_query_request
+      description: JSON:API resource type for a DDSQL tabular query request.
+      enum:
+        - ddsql_query_request
+      example: ddsql_query_request
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_REQUEST
+    DdsqlTabularQueryResponse:
+      description: |-
+        Response envelope for both the execute and fetch DDSQL tabular query endpoints.
+        Carries the JSON:API primary resource and a top-level `meta` block with
+        request-scoped observability handles.
+      properties:
+        data:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseData"
+        meta:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseMeta"
+      required:
+        - data
+        - meta
+      type: object
+    DdsqlTabularQueryResponseAttributes:
+      description: |-
+        Attributes of a DDSQL tabular query response. `query_id` is set when
+        `state` is `running`; `columns` is set when `state` is `completed`.
+      properties:
+        columns:
+          $ref: "#/components/schemas/DdsqlTabularQueryColumns"
+        query_id:
+          description: |-
+            Opaque token to pass to the fetch endpoint to poll for results.
+            Set when `state` is `running` and absent when `state` is `completed`.
+          example: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+          type: string
+        state:
+          $ref: "#/components/schemas/DdsqlTabularQueryState"
+        warnings:
+          $ref: "#/components/schemas/DdsqlTabularQueryWarnings"
+      required:
+        - state
+      type: object
+    DdsqlTabularQueryResponseData:
+      description: JSON:API resource object for a DDSQL tabular query response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseAttributes"
+        id:
+          description: Stable identifier for the query response resource.
+          example: "00000000-0000-0000-0000-000000000000"
+          type: string
+        type:
+          $ref: "#/components/schemas/DdsqlTabularQueryResponseType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    DdsqlTabularQueryResponseMeta:
+      description: |-
+        Top-level JSON:API meta block accompanying every DDSQL tabular query response.
+        Carries standard observability handles for client-side correlation.
+      properties:
+        elapsed:
+          description: Server-side time spent serving this request, in milliseconds.
+          example: 87
+          format: int64
+          type: integer
+        request_id:
+          description: |-
+            Echo of the `DD-Request-ID` header assigned by Datadog's edge to this request,
+            for support correlation.
+          example: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+          type: string
+      required:
+        - elapsed
+        - request_id
+      type: object
+    DdsqlTabularQueryResponseType:
+      default: ddsql_query_response
+      description: JSON:API resource type for a DDSQL tabular query response.
+      enum:
+        - ddsql_query_response
+      example: ddsql_query_response
+      type: string
+      x-enum-varnames:
+        - DDSQL_QUERY_RESPONSE
+    DdsqlTabularQueryState:
+      description: |-
+        Lifecycle state of a DDSQL tabular query response.
+        `running` means the query is still executing and the client should poll
+        the fetch endpoint with the returned `query_id`. `completed` means the
+        result set is inlined in `columns` and no further polling is required.
+      enum:
+        - running
+        - completed
+      example: completed
+      type: string
+      x-enum-varnames:
+        - RUNNING
+        - COMPLETED
+    DdsqlTabularQueryTimeWindow:
+      description: |-
+        Time window scoping the underlying data sources, expressed in Unix milliseconds
+        since the epoch. Inclusive on `from_timestamp`, exclusive on `to_timestamp`.
+        Results from static tables (for example, `dd.hosts`) are not affected by the
+        time window, but the field must still be provided.
+      properties:
+        from_timestamp:
+          description: Start of the query window (inclusive), in Unix milliseconds since the epoch.
+          example: 1736942400000
+          format: int64
+          type: integer
+        to_timestamp:
+          description: End of the query window (exclusive), in Unix milliseconds since the epoch.
+          example: 1736946000000
+          format: int64
+          type: integer
+      required:
+        - from_timestamp
+        - to_timestamp
+      type: object
+    DdsqlTabularQueryWarnings:
+      description: Non-fatal messages emitted by the query engine while serving this response.
+      items:
+        description: A single non-fatal warning message.
+        example: "Query result was truncated at the configured row_limit."
+        type: string
+      type: array
     DefaultRulesetsPerLanguageData:
       description: The primary data object in the default rulesets per language response.
       properties:
@@ -43117,6 +43443,21 @@ components:
       required:
         - attributes
       type: object
+    GoogleDocsPostmortemSettings:
+      description: Settings for a postmortem template stored in Google Docs. Required when `location` is `google_docs`.
+      properties:
+        account_id:
+          description: The ID of the Google Drive integration account.
+          example: "123456"
+          type: string
+        parent_folder_id:
+          description: The ID of the Google Drive folder where postmortems are created.
+          example: "789012"
+          type: string
+      required:
+        - account_id
+        - parent_folder_id
+      type: object
     GoogleMeetConfigurationReference:
       description: A reference to a Google Meet Configuration resource.
       nullable: true
@@ -48177,7 +48518,6 @@ components:
           $ref: "#/components/schemas/IncidentUserDefinedRolePolicy"
       required:
         - name
-        - policy
       type: object
     IncidentUserDefinedRoleDataAttributesResponse:
       description: Attributes of an incident user-defined role.
@@ -52209,6 +52549,108 @@ components:
         $ref: "#/components/schemas/LLMObsContentBlock"
       minItems: 1
       type: array
+    LLMObsCreatePromptData:
+      description: Data object for creating an LLM Observability prompt.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsCreatePromptDataAttributes"
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsCreatePromptDataAttributes:
+      description: >-
+        Attributes for creating an LLM Observability prompt and its first version. `prompt_id` and `template` are required; all other attributes are optional.
+      properties:
+        description:
+          description: Optional description of the prompt.
+          type: string
+        env_ids:
+          description: >-
+            Optional feature-flag environment UUIDs the service attempts to enable and configure to use the first version as their default after creation.
+          items:
+            type: string
+          type: array
+        labels:
+          deprecated: true
+          description: >-
+            Optional labels to attach to the first version. Do not use this attribute for new integrations.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptVersionLabel"
+          type: array
+        prompt_id:
+          description: Customer-provided identifier for the new prompt.
+          example: "customer-support-assistant"
+          minLength: 1
+          type: string
+        template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
+        title:
+          description: Optional title of the prompt.
+          type: string
+        user_version:
+          description: Optional user-supplied version identifier for the first version.
+          type: string
+      required:
+        - prompt_id
+        - template
+      type: object
+    LLMObsCreatePromptRequest:
+      description: Request to create an LLM Observability prompt.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsCreatePromptData"
+      required:
+        - data
+      type: object
+    LLMObsCreatePromptVersionData:
+      description: Data object for creating an LLM Observability prompt version.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsCreatePromptVersionDataAttributes"
+        type:
+          $ref: "#/components/schemas/LLMObsPromptVersionType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsCreatePromptVersionDataAttributes:
+      description: >-
+        Attributes for creating a new version of an LLM Observability prompt. `template` is required; all other attributes are optional.
+      properties:
+        description:
+          description: Optional description of this version.
+          type: string
+        env_ids:
+          description: >-
+            Optional feature-flag environment UUIDs the service attempts to enable and configure to use this version as their default after creation.
+          items:
+            type: string
+          type: array
+        labels:
+          deprecated: true
+          description: Optional labels to attach to this version. Do not use this attribute for new integrations.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptVersionLabel"
+          type: array
+        template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
+        user_version:
+          description: Optional user-supplied version identifier for this version.
+          type: string
+      required:
+        - template
+      type: object
+    LLMObsCreatePromptVersionRequest:
+      description: Request to create a new version of an LLM Observability prompt.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsCreatePromptVersionData"
+      required:
+        - data
+      type: object
     LLMObsCursorMeta:
       description: Pagination cursor metadata.
       properties:
@@ -52287,6 +52729,10 @@ components:
     LLMObsCustomEvalConfigBedrockOptions:
       description: AWS Bedrock-specific options for LLM provider configuration.
       properties:
+        inference_profile:
+          description: Bedrock inference profile identifier, such as an application inference profile ARN.
+          example: "arn:aws:bedrock:us-east-1:123456789012:application-inference-profile/abc123"
+          type: string
         region:
           description: AWS region for Bedrock.
           example: "us-east-1"
@@ -52377,6 +52823,11 @@ components:
       properties:
         assessment_criteria:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigAssessmentCriteria"
+        context_query:
+          description: Query used to extract additional context for the evaluation.
+          example: "@input.context"
+          nullable: true
+          type: string
         inference_params:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigInferenceParams"
         last_used_library_prompt_template_name:
@@ -52401,6 +52852,15 @@ components:
           items:
             $ref: "#/components/schemas/LLMObsCustomEvalConfigPromptMessage"
           type: array
+        target_query:
+          description: Query used to extract the target value to evaluate.
+          example: "@output.value"
+          nullable: true
+          type: string
+        user_specified_json_post_processing_function:
+          description: User-provided function applied to post-process the JSON output of the LLM judge.
+          nullable: true
+          type: string
       required:
         - inference_params
       type: object
@@ -52422,16 +52882,29 @@ components:
         vertex_ai:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigVertexAIOptions"
       type: object
+    LLMObsCustomEvalConfigListResponse:
+      description: Response containing a list of custom LLM Observability evaluator configurations.
+      properties:
+        data:
+          description: List of custom evaluator configuration data objects.
+          items:
+            $ref: "#/components/schemas/LLMObsCustomEvalConfigData"
+          type: array
+      required:
+        - data
+      type: object
     LLMObsCustomEvalConfigParsingType:
       description: Output parsing type for a custom LLM judge evaluator.
       enum:
         - structured_output
         - json
+        - keyword_search
       example: "structured_output"
       type: string
       x-enum-varnames:
         - STRUCTURED_OUTPUT
         - JSON
+        - KEYWORD_SEARCH
     LLMObsCustomEvalConfigPromptContent:
       description: A content block within a prompt message.
       properties:
@@ -52538,6 +53011,13 @@ components:
         eval_scope:
           $ref: "#/components/schemas/LLMObsCustomEvalConfigEvalScope"
           nullable: true
+        experiment_project_ids:
+          description: Experiment project IDs this evaluator is scoped to.
+          items:
+            description: An experiment project ID.
+            format: uuid
+            type: string
+          type: array
         filter:
           description: Filter expression to select which spans to evaluate.
           example: "@service:my-service"
@@ -53681,6 +54161,53 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/LLMObsDeleteProjectsDataRequest"
+      required:
+        - data
+      type: object
+    LLMObsDeletedPromptData:
+      description: Data object confirming that an LLM Observability prompt was deleted.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsDeletedPromptDataAttributes"
+        id:
+          description: Unique identifier of the deleted prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsDeletedPromptDataAttributes:
+      description: Attributes confirming that an LLM Observability prompt was deleted.
+      properties:
+        deleted_at:
+          description: Timestamp when the prompt was deleted.
+          example: "2025-02-10T09:15:00Z"
+          format: date-time
+          type: string
+        prompt_id:
+          description: Customer-provided identifier of the deleted prompt.
+          example: "customer-support-assistant"
+          type: string
+      required:
+        - prompt_id
+        - deleted_at
+      type: object
+    LLMObsDeletedPromptResponse:
+      description: Response confirming that an LLM Observability prompt was deleted.
+      example:
+        data:
+          attributes:
+            deleted_at: "2025-02-10T09:15:00Z"
+            prompt_id: "customer-support-assistant"
+          id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: prompt-templates
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsDeletedPromptData"
       required:
         - data
       type: object
@@ -56778,6 +57305,521 @@ components:
       required:
         - data
       type: object
+    LLMObsPromptChatMessage:
+      description: A single chat message in a prompt template.
+      properties:
+        content:
+          description: Content of the message.
+          example: "You are a helpful customer support assistant for {{company_name}}."
+          type: string
+        role:
+          description: Role of the message (for example `system`, `user`, or `assistant`).
+          example: "system"
+          type: string
+      required:
+        - role
+        - content
+      type: object
+    LLMObsPromptChatTemplate:
+      description: A chat prompt template.
+      items:
+        $ref: "#/components/schemas/LLMObsPromptChatMessage"
+      minItems: 1
+      type: array
+      x-generate-alias-as-model: true
+    LLMObsPromptData:
+      description: Data object for an LLM Observability prompt.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsPromptDataAttributes"
+        id:
+          description: Unique identifier of the prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsPromptDataAttributes:
+      description: Attributes of an LLM Observability prompt registry entry.
+      properties:
+        author:
+          description: UUID of the user who authored the prompt.
+          type: string
+        created_at:
+          description: Timestamp when the prompt was created.
+          format: date-time
+          type: string
+        created_from:
+          description: >-
+            Source that created the prompt, such as `ui-registry`, `sdk-registry`, or `sdk-instrumentation`.
+          example: "sdk-registry"
+          type: string
+        datasets:
+          description: Datasets observed in runs associated with this prompt.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptDataset"
+          type: array
+        description:
+          description: Description of the prompt.
+          type: string
+        extracted_from:
+          description: Source prompt from which this prompt was extracted, when applicable.
+          type: string
+        in_registry:
+          description: Whether the prompt is a registry entry (as opposed to a code-discovered prompt).
+          example: true
+          type: boolean
+        last_seen_at:
+          description: Timestamp of the most recent observed run of this prompt.
+          format: date-time
+          type: string
+        last_version_created_at:
+          description: Timestamp when the most recent version of the prompt was created.
+          format: date-time
+          type: string
+        ml_app:
+          description: The ML application this prompt is associated with.
+          type: string
+        ml_apps:
+          description: ML applications observed running this prompt.
+          items:
+            type: string
+          type: array
+        num_versions:
+          description: Number of versions of the prompt.
+          example: 2
+          format: int64
+          type: integer
+        prompt_id:
+          description: Customer-provided identifier of the prompt.
+          example: "customer-support-assistant"
+          type: string
+        source:
+          $ref: "#/components/schemas/LLMObsPromptResponseSource"
+        tags:
+          description: Tags observed on runs of this prompt.
+          items:
+            type: string
+          type: array
+        title:
+          description: Title of the prompt.
+          type: string
+      required:
+        - prompt_id
+        - source
+        - num_versions
+        - in_registry
+        - created_from
+      type: object
+    LLMObsPromptDataset:
+      description: A dataset observed in runs associated with a prompt or prompt version.
+      properties:
+        id:
+          description: Unique identifier of the dataset.
+          example: ""
+          type: string
+        name:
+          description: Name of the dataset.
+          type: string
+      required:
+        - id
+      type: object
+    LLMObsPromptResponse:
+      description: Response containing a single LLM Observability prompt.
+      example:
+        data:
+          attributes:
+            author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+            created_at: "2025-01-15T10:00:00Z"
+            created_from: "sdk-registry"
+            description: "Answers customer questions using the company knowledge base."
+            in_registry: true
+            last_version_created_at: "2025-01-15T10:00:00Z"
+            num_versions: 1
+            prompt_id: "customer-support-assistant"
+            source: registry
+            title: "Customer Support Assistant"
+          id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: prompt-templates
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsPromptData"
+      required:
+        - data
+      type: object
+    LLMObsPromptResponseSource:
+      description: Whether the prompt was created from the registry or discovered from observed LLM calls.
+      enum:
+        - registry
+        - code
+      example: registry
+      type: string
+      x-enum-varnames:
+        - REGISTRY
+        - CODE
+    LLMObsPromptSDKData:
+      description: Data object for a flattened LLM Observability prompt version returned for SDK consumption.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsPromptSDKDataAttributes"
+        id:
+          description: Unique identifier of the prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsPromptSDKDataAttributes:
+      description: >-
+        Attributes of a flattened prompt version returned for SDK consumption. Exactly one of `template` and `chat_template` is returned.
+      properties:
+        chat_template:
+          description: >-
+            Chat template for this prompt version, as a list of role and content messages. Omitted for text templates.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptChatMessage"
+          type: array
+        labels:
+          deprecated: true
+          description: Labels attached to the selected version.
+          items:
+            type: string
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the prompt.
+          example: "customer-support-assistant"
+          type: string
+        prompt_version_uuid:
+          description: Unique identifier of this prompt version.
+          example: "d83ab666-61cc-5545-a83b-2424bb85467b"
+          type: string
+        template:
+          description: Text template for this prompt version. Omitted for chat templates.
+          type: string
+        version:
+          description: >-
+            Version identifier for this prompt version. This is the sequential version number unless a user-supplied version identifier was set, in which case that identifier is used instead.
+          example: "2"
+          type: string
+      type: object
+    LLMObsPromptSDKResponse:
+      description: Response containing a flattened LLM Observability prompt version for SDK consumption.
+      example:
+        data:
+          attributes:
+            chat_template:
+              - content: "You are a helpful customer support assistant for {{company_name}}."
+                role: "system"
+              - content: "Help {{customer_name}} with this question: {{question}}"
+                role: "user"
+            prompt_id: "customer-support-assistant"
+            prompt_version_uuid: "d83ab666-61cc-5545-a83b-2424bb85467b"
+            version: "2"
+          id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: prompt-templates
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsPromptSDKData"
+      required:
+        - data
+      type: object
+    LLMObsPromptTemplate:
+      description: A text template or a list of chat messages.
+      example: "You are a helpful assistant for {{audience}}."
+      oneOf:
+        - $ref: "#/components/schemas/LLMObsPromptTextTemplate"
+        - $ref: "#/components/schemas/LLMObsPromptChatTemplate"
+    LLMObsPromptTextTemplate:
+      description: A text prompt template.
+      minLength: 1
+      pattern: ".*\\S.*"
+      type: string
+    LLMObsPromptType:
+      description: Resource type of an LLM Observability prompt.
+      enum:
+        - prompt-templates
+      example: prompt-templates
+      type: string
+      x-enum-varnames:
+        - PROMPT_TEMPLATES
+    LLMObsPromptVersionData:
+      description: Data object for a specific version of an LLM Observability prompt.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsPromptVersionDataAttributes"
+        id:
+          description: Unique identifier of the prompt version.
+          example: "d83ab666-61cc-5545-a83b-2424bb85467b"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptVersionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsPromptVersionDataAttributes:
+      description: Attributes of a specific version of an LLM Observability prompt.
+      properties:
+        author:
+          description: UUID of the user who authored this version.
+          type: string
+        created_at:
+          description: Timestamp stored on this prompt version.
+          format: date-time
+          type: string
+        datasets:
+          description: Datasets observed in runs associated with this prompt version.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptDataset"
+          type: array
+        description:
+          description: Description of this version.
+          type: string
+        labels:
+          deprecated: true
+          description: Labels attached to this version (for example `development`, `staging`, `production`).
+          items:
+            type: string
+          type: array
+        last_seen_at:
+          description: Timestamp of the most recent observed run of this prompt version.
+          format: date-time
+          type: string
+        ml_app:
+          description: The ML application this prompt is associated with.
+          type: string
+        ml_apps:
+          description: ML applications observed running this prompt version.
+          items:
+            type: string
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the parent prompt.
+          example: "customer-support-assistant"
+          type: string
+        prompt_uuid:
+          description: Unique identifier of the parent prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        tags:
+          description: Tags observed on runs of this prompt version.
+          items:
+            type: string
+          type: array
+        template:
+          $ref: "#/components/schemas/LLMObsPromptTemplate"
+        user_version:
+          description: User-supplied identifier for this version.
+          type: string
+        version:
+          description: Sequential version number.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        version_created_at:
+          description: Timestamp when this version was created.
+          format: date-time
+          type: string
+      required:
+        - prompt_uuid
+        - prompt_id
+        - template
+        - version
+      type: object
+    LLMObsPromptVersionLabel:
+      description: A label attached to an LLM Observability prompt version.
+      enum:
+        - production
+        - development
+      type: string
+      x-enum-varnames:
+        - PRODUCTION
+        - DEVELOPMENT
+    LLMObsPromptVersionListData:
+      description: Data object for a prompt version returned in a list.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsPromptVersionListDataAttributes"
+        id:
+          description: Unique identifier of the prompt version.
+          example: "d83ab666-61cc-5545-a83b-2424bb85467b"
+          type: string
+        type:
+          $ref: "#/components/schemas/LLMObsPromptVersionType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    LLMObsPromptVersionListDataAttributes:
+      description: Attributes of a prompt version returned in a list, excluding its template.
+      properties:
+        author:
+          description: UUID of the user who authored this version.
+          type: string
+        created_at:
+          description: Timestamp stored on this prompt version.
+          format: date-time
+          type: string
+        datasets:
+          description: Datasets observed in runs associated with this prompt version.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptDataset"
+          type: array
+        description:
+          description: Description of this version.
+          type: string
+        labels:
+          deprecated: true
+          description: Labels attached to this version (for example `development`, `staging`, `production`).
+          items:
+            type: string
+          type: array
+        last_seen_at:
+          description: Timestamp of the most recent observed run of this prompt version.
+          format: date-time
+          type: string
+        ml_app:
+          description: The ML application this prompt is associated with.
+          type: string
+        ml_apps:
+          description: ML applications observed running this prompt version.
+          items:
+            type: string
+          type: array
+        prompt_id:
+          description: Customer-provided identifier of the parent prompt.
+          example: "customer-support-assistant"
+          type: string
+        prompt_uuid:
+          description: Unique identifier of the parent prompt.
+          example: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+          type: string
+        tags:
+          description: Tags observed on runs of this prompt version.
+          items:
+            type: string
+          type: array
+        user_version:
+          description: User-supplied identifier for this version.
+          type: string
+        version:
+          description: Sequential version number.
+          example: 1
+          format: int64
+          minimum: 1
+          type: integer
+        version_created_at:
+          description: Timestamp when this version was created.
+          format: date-time
+          type: string
+      required:
+        - prompt_uuid
+        - prompt_id
+        - version
+      type: object
+    LLMObsPromptVersionResponse:
+      description: Response containing a specific version of an LLM Observability prompt.
+      example:
+        data:
+          attributes:
+            author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+            created_at: "2025-02-01T14:30:00Z"
+            description: "Give concise answers and cite relevant help-center articles."
+            prompt_id: "customer-support-assistant"
+            prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+            template:
+              - content: "You are a helpful customer support assistant for {{company_name}}."
+                role: "system"
+              - content: "Help {{customer_name}} with this question: {{question}}"
+                role: "user"
+            version: 2
+            version_created_at: "2025-02-01T14:30:00Z"
+          id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+          type: prompt-template-versions
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsPromptVersionData"
+      required:
+        - data
+      type: object
+    LLMObsPromptVersionType:
+      description: Resource type of an LLM Observability prompt version.
+      enum:
+        - prompt-template-versions
+      example: prompt-template-versions
+      type: string
+      x-enum-varnames:
+        - PROMPT_TEMPLATE_VERSIONS
+    LLMObsPromptVersionsResponse:
+      description: Response containing the versions of an LLM Observability prompt.
+      example:
+        data:
+          - attributes:
+              author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+              created_at: "2025-02-01T14:30:00Z"
+              description: "Give concise answers and cite relevant help-center articles."
+              prompt_id: "customer-support-assistant"
+              prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+              version: 2
+              version_created_at: "2025-02-01T14:30:00Z"
+            id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+            type: prompt-template-versions
+          - attributes:
+              author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+              created_at: "2025-01-15T10:00:00Z"
+              description: "Initial customer support prompt."
+              prompt_id: "customer-support-assistant"
+              prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+              version: 1
+              version_created_at: "2025-01-15T10:00:00Z"
+            id: "20e5280b-c75d-5699-8a70-a2773a751428"
+            type: prompt-template-versions
+      properties:
+        data:
+          description: Prompt versions ordered from newest to oldest.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptVersionListData"
+          type: array
+      required:
+        - data
+      type: object
+    LLMObsPromptsResponse:
+      description: Response containing a list of LLM Observability prompts.
+      example:
+        data:
+          - attributes:
+              author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+              created_at: "2025-01-15T10:00:00Z"
+              created_from: "sdk-registry"
+              description: "Answers customer questions using the company knowledge base."
+              in_registry: true
+              last_version_created_at: "2025-02-01T14:30:00Z"
+              num_versions: 2
+              prompt_id: "customer-support-assistant"
+              source: registry
+              title: "Customer Support Assistant"
+            id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+            type: prompt-templates
+      properties:
+        data:
+          description: List of LLM Observability prompts.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptData"
+          type: array
+      required:
+        - data
+      type: object
     LLMObsRecordType:
       description: Resource type of LLM Observability dataset records.
       enum:
@@ -57271,6 +58313,79 @@ components:
         - TRACE
         - EXPERIMENT_TRACE
         - SESSION
+    LLMObsUpdatePromptData:
+      description: Data object for updating an LLM Observability prompt.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsUpdatePromptDataAttributes"
+        type:
+          $ref: "#/components/schemas/LLMObsPromptType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsUpdatePromptDataAttributes:
+      additionalProperties: false
+      description: >-
+        Attributes for updating an LLM Observability prompt. At least one of `title` or `description` must be provided; both attributes are optional individually.
+      minProperties: 1
+      properties:
+        description:
+          description: Optional new description for the prompt.
+          type: string
+        title:
+          description: Optional new title for the prompt.
+          type: string
+      type: object
+    LLMObsUpdatePromptRequest:
+      description: Request to update an LLM Observability prompt's metadata.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsUpdatePromptData"
+      required:
+        - data
+      type: object
+    LLMObsUpdatePromptVersionData:
+      description: Data object for updating an LLM Observability prompt version.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/LLMObsUpdatePromptVersionDataAttributes"
+        type:
+          $ref: "#/components/schemas/LLMObsPromptVersionType"
+      required:
+        - type
+        - attributes
+      type: object
+    LLMObsUpdatePromptVersionDataAttributes:
+      additionalProperties: false
+      description: >-
+        Attributes for updating an LLM Observability prompt version. At least one of `description`, `labels`, or `env_ids` must be provided; all three attributes are optional individually.
+      minProperties: 1
+      properties:
+        description:
+          description: Optional new description for this version.
+          type: string
+        env_ids:
+          description: >-
+            Optional feature-flag environment UUIDs the service attempts to enable and configure to use this version as their default.
+          items:
+            type: string
+          type: array
+        labels:
+          deprecated: true
+          description: Optional new labels for this version. Do not use this attribute for new integrations.
+          items:
+            $ref: "#/components/schemas/LLMObsPromptVersionLabel"
+          type: array
+      type: object
+    LLMObsUpdatePromptVersionRequest:
+      description: Request to update an LLM Observability prompt version's metadata or feature-flag environments.
+      properties:
+        data:
+          $ref: "#/components/schemas/LLMObsUpdatePromptVersionData"
+      required:
+        - data
+      type: object
     LLMObsUpsertAnnotationItem:
       description: |-
         A single annotation to create or update. The annotation is matched by
@@ -67028,6 +68143,32 @@ components:
       type: string
       x-enum-varnames:
         - CLICKHOUSE
+    ObservabilityPipelineClientTls:
+      description: Configuration for enabling TLS encryption between the pipeline component and external services.
+      properties:
+        ca_file:
+          description: Path to the Certificate Authority (CA) file used to validate the server’s TLS certificate.
+          type: string
+        crt_file:
+          description: Path to the TLS client certificate file used to authenticate the pipeline component with upstream or downstream services.
+          example: "/path/to/cert.crt"
+          type: string
+        key_file:
+          description: Path to the private key file associated with the TLS client certificate. Used for mutual TLS authentication.
+          type: string
+        key_pass_key:
+          description: Name of the environment variable or secret that holds the passphrase for the private key file.
+          example: TLS_KEY_PASSPHRASE
+          type: string
+        server_name:
+          description: Server name to use for Server Name Indication (SNI) and to verify against the certificate presented by the remote host. Use this when the address you connect to doesn't match the certificate's Common Name or Subject Alternative Name.
+          example: server.example.com
+          maxLength: 253
+          minLength: 1
+          type: string
+      required:
+        - crt_file
+      type: object
     ObservabilityPipelineCloudPremDestination:
       description: |-
         The `cloud_prem` destination sends logs to Datadog CloudPrem.
@@ -67052,7 +68193,7 @@ components:
             type: string
           type: array
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: Configuration for TLS encryption.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineCloudPremDestinationType"
@@ -68767,7 +69908,7 @@ components:
           example: HTTP_AUTH_PASSWORD
           type: string
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -68865,7 +70006,7 @@ components:
           format: int64
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         token_key:
           description: Name of the environment variable or secret that holds the bearer token (used when `auth_strategy` is `bearer`).
           example: HTTP_AUTH_TOKEN
@@ -70948,7 +72089,7 @@ components:
         mode:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationMode"
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
           description: TLS configuration. Relevant only when `mode` is `tcp`.
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSocketDestinationType"
@@ -71680,7 +72821,7 @@ components:
           minimum: 0
           type: integer
         tls:
-          $ref: "#/components/schemas/ObservabilityPipelineTls"
+          $ref: "#/components/schemas/ObservabilityPipelineClientTls"
         type:
           $ref: "#/components/schemas/ObservabilityPipelineSyslogNgDestinationType"
       required:
@@ -74866,6 +76007,18 @@ components:
       required:
         - data
       type: object
+    OwnershipConfidenceLevel:
+      description: The ownership confidence level.
+      enum:
+        - high
+        - medium
+        - low
+      example: high
+      type: string
+      x-enum-varnames:
+        - HIGH
+        - MEDIUM
+        - LOW
     OwnershipEvidenceAttributes:
       description: The attributes of an ownership evidence response.
       properties:
@@ -75429,6 +76582,152 @@ components:
         - TEAM
         - SERVICE
         - UNKNOWN
+    OwnershipSettingsAttributes:
+      description: The attributes of the ownership settings response.
+      properties:
+        auto_tag:
+          description: Whether automatic ownership tagging is enabled.
+          example: true
+          type: boolean
+        confidence_level:
+          $ref: "#/components/schemas/OwnershipConfidenceLevel"
+        version:
+          description: The current version of the ownership settings.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - version
+        - auto_tag
+        - confidence_level
+      type: object
+    OwnershipSettingsData:
+      description: The data wrapper for an ownership settings response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipSettingsAttributes"
+        id:
+          description: The identifier of the ownership settings resource.
+          example: settings
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipSettingsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipSettingsRequest:
+      description: The request body for updating ownership settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipSettingsRequestData"
+      required:
+        - data
+      type: object
+    OwnershipSettingsRequestAttributes:
+      description: The attributes of an ownership settings request.
+      properties:
+        auto_tag:
+          description: Whether automatic ownership tagging is enabled.
+          example: true
+          type: boolean
+        confidence_level:
+          $ref: "#/components/schemas/OwnershipConfidenceLevel"
+      required:
+        - auto_tag
+        - confidence_level
+      type: object
+    OwnershipSettingsRequestData:
+      description: The data wrapper for an ownership settings request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipSettingsRequestAttributes"
+        type:
+          $ref: "#/components/schemas/OwnershipSettingsType"
+      required:
+        - type
+        - attributes
+      type: object
+    OwnershipSettingsResponse:
+      description: The response returned when retrieving or updating ownership settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipSettingsData"
+      required:
+        - data
+      type: object
+    OwnershipSettingsType:
+      default: ownership_settings
+      description: The type of the ownership settings resource. The value should always be `ownership_settings`.
+      enum:
+        - ownership_settings
+      example: ownership_settings
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_SETTINGS
+    OwnershipUntaggedFindingsAttributes:
+      description: The counts of findings without a team tag by ownership confidence.
+      properties:
+        high_confidence:
+          description: The number of high confidence findings without a team tag.
+          example: 30
+          format: int64
+          type: integer
+        low_confidence:
+          description: The number of low confidence findings without a team tag.
+          example: 42
+          format: int64
+          type: integer
+        medium_confidence:
+          description: The number of medium confidence findings without a team tag.
+          example: 70
+          format: int64
+          type: integer
+        total:
+          description: The total number of findings without a team tag.
+          example: 142
+          format: int64
+          type: integer
+      required:
+        - total
+        - high_confidence
+        - medium_confidence
+        - low_confidence
+      type: object
+    OwnershipUntaggedFindingsData:
+      description: The data wrapper for an ownership untagged findings response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/OwnershipUntaggedFindingsAttributes"
+        id:
+          description: The identifier of the ownership untagged findings resource.
+          example: untagged
+          type: string
+        type:
+          $ref: "#/components/schemas/OwnershipUntaggedFindingsType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    OwnershipUntaggedFindingsResponse:
+      description: The response returned when counting findings without a team tag by ownership confidence.
+      properties:
+        data:
+          $ref: "#/components/schemas/OwnershipUntaggedFindingsData"
+      required:
+        - data
+      type: object
+    OwnershipUntaggedFindingsType:
+      default: ownership_untagged_findings
+      description: The type of the ownership untagged findings resource. The value should always be `ownership_untagged_findings`.
+      enum:
+        - ownership_untagged_findings
+      example: ownership_untagged_findings
+      type: string
+      x-enum-varnames:
+        - OWNERSHIP_UNTAGGED_FINDINGS
     PESymbolFileEvent:
       description: Metadata for a PE/PDB symbol file upload, sent as a JSON-encoded `event` field.
       properties:
@@ -76954,8 +78253,24 @@ components:
     PostmortemTemplateAttributesRequest:
       description: Attributes for creating or updating a postmortem template.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp. Set to `null` to unset.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
@@ -76964,30 +78279,61 @@ components:
     PostmortemTemplateAttributesResponse:
       description: Attributes of a postmortem template returned in a response.
       properties:
+        confluence_postmortem_settings:
+          $ref: "#/components/schemas/ConfluencePostmortemSettings"
+        content:
+          description: The templated content of the postmortem, supporting Markdown and incident template variables.
+          example: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
+          type: string
         createdAt:
-          description: When the template was created
+          description: When the template was created.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
+        google_docs_postmortem_settings:
+          $ref: "#/components/schemas/GoogleDocsPostmortemSettings"
+        is_default:
+          description: When set, marks this template as a default. The effective default for an incident type is the template with the most recent `is_default` timestamp.
+          example: "2024-01-01T00:00:00+00:00"
+          format: date-time
+          nullable: true
+          type: string
+        location:
+          $ref: "#/components/schemas/PostmortemTemplateLocation"
         modifiedAt:
-          description: When the template was last modified
+          description: When the template was last modified.
           example: "2026-01-13T17:15:53.208340Z"
           format: date-time
           type: string
         name:
-          description: The name of the template
+          description: The name of the template.
           example: "Standard Postmortem Template"
           type: string
       required:
         - name
+        - content
+        - is_default
+        - location
         - createdAt
         - modifiedAt
+      type: object
+    PostmortemTemplateCreateRelationships:
+      description: Relationships for a postmortem template. `incident_type` is required when creating a template and is immutable afterwards.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
       type: object
     PostmortemTemplateDataRequest:
       description: Data object for creating or updating a postmortem template.
       properties:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesRequest"
+        id:
+          description: The ID of the template. Required when updating.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateCreateRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -77000,9 +78346,11 @@ components:
         attributes:
           $ref: "#/components/schemas/PostmortemTemplateAttributesResponse"
         id:
-          description: The ID of the template
-          example: "template-456"
+          description: The ID of the template.
+          example: 00000000-0000-0000-0000-000000000000
           type: string
+        relationships:
+          $ref: "#/components/schemas/PostmortemTemplateResponseRelationships"
         type:
           $ref: "#/components/schemas/PostmortemTemplateType"
       required:
@@ -77010,6 +78358,43 @@ components:
         - type
         - attributes
       type: object
+    PostmortemTemplateIncidentTypeRelationship:
+      description: Relationship to the incident type this template belongs to.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateIncidentTypeRelationshipData:
+      description: Incident type relationship data.
+      properties:
+        id:
+          description: The incident type identifier.
+          example: 00000000-0000-0000-0000-000000000009
+          format: uuid
+          type: string
+        type:
+          description: The incident type resource type.
+          example: incident_types
+          type: string
+      required:
+        - id
+        - type
+      type: object
+    PostmortemTemplateLocation:
+      default: datadog_notebooks
+      description: The location where the postmortem is created and stored.
+      enum:
+        - datadog_notebooks
+        - confluence
+        - google_docs
+      example: datadog_notebooks
+      type: string
+      x-enum-varnames:
+        - DATADOG_NOTEBOOKS
+        - CONFLUENCE
+        - GOOGLE_DOCS
     PostmortemTemplateRequest:
       description: Request body for creating or updating a postmortem template.
       properties:
@@ -77026,14 +78411,48 @@ components:
       required:
         - data
       type: object
+    PostmortemTemplateResponseRelationships:
+      description: Relationships of a postmortem template returned in a response.
+      properties:
+        incident_type:
+          $ref: "#/components/schemas/PostmortemTemplateIncidentTypeRelationship"
+        last_modified_by_user:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationship"
+      type: object
     PostmortemTemplateType:
-      description: Postmortem template resource type
+      description: Postmortem template resource type.
       enum:
+        - postmortem_templates
         - postmortem_template
-      example: postmortem_template
+      example: postmortem_templates
       type: string
       x-enum-varnames:
+        - POSTMORTEM_TEMPLATES
         - POSTMORTEM_TEMPLATE
+    PostmortemTemplateUserRelationship:
+      description: Relationship to a user.
+      properties:
+        data:
+          $ref: "#/components/schemas/PostmortemTemplateUserRelationshipData"
+      required:
+        - data
+      type: object
+    PostmortemTemplateUserRelationshipData:
+      description: User relationship data.
+      properties:
+        id:
+          description: The user identifier.
+          example: 00000000-0000-0000-0000-000000000000
+          format: uuid
+          type: string
+        type:
+          description: The user resource type.
+          example: users
+          type: string
+      required:
+        - id
+        - type
+      type: object
     PostmortemTemplatesResponse:
       description: Response containing a list of postmortem templates.
       properties:
@@ -87680,6 +89099,8 @@ components:
     ScheduleTrigger:
       description: "Trigger a workflow from a Schedule. The workflow must be published."
       properties:
+        overlapBehavior:
+          $ref: "#/components/schemas/ScheduleTriggerOverlapBehavior"
         rruleExpression:
           description: "Recurrence rule expression for scheduling."
           example: ""
@@ -87687,6 +89108,17 @@ components:
       required:
         - rruleExpression
       type: object
+    ScheduleTriggerOverlapBehavior:
+      default: EXCLUSIVE_RUN
+      description: Controls whether a scheduled workflow run may start while another instance is still running.
+      enum:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
+      example: EXCLUSIVE_RUN
+      type: string
+      x-enum-varnames:
+        - EXCLUSIVE_RUN
+        - OVERLAP_ALLOWED
     ScheduleTriggerWrapper:
       description: "Schema for a Schedule-based trigger."
       properties:
@@ -89613,6 +91045,57 @@ components:
         - NEVER_ACTIVATED
         - ACTIVATED
         - DEACTIVATED
+    SecurityMonitoringContentPackAppSecDetails:
+      description: Details for an Application Security content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAppSecDetailsType:
+      description: Type for Application Security content pack details.
+      enum:
+        - appsec
+      example: appsec
+      type: string
+      x-enum-varnames:
+        - APPSEC
+    SecurityMonitoringContentPackAuditDetails:
+      description: Details for an audit trail content pack.
+      properties:
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetailsType"
+      required:
+        - type
+      type: object
+    SecurityMonitoringContentPackAuditDetailsType:
+      description: Type for audit trail content pack details.
+      enum:
+        - audit
+      example: audit
+      type: string
+      x-enum-varnames:
+        - AUDIT
+    SecurityMonitoringContentPackEntityDetails:
+      description: Details for an entity or identity content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetailsType"
+      required:
+        - type
+        - cp_activation
+      type: object
+    SecurityMonitoringContentPackEntityDetailsType:
+      description: Type for entity content pack details.
+      enum:
+        - entity
+      example: entity
+      type: string
+      x-enum-varnames:
+        - ENTITY
     SecurityMonitoringContentPackIntegrationStatus:
       description: The installation status of the related integration.
       enum:
@@ -89635,16 +91118,14 @@ components:
         - PARTIALLY_INSTALLED
         - DETECTED
         - ERROR
-    SecurityMonitoringContentPackStateAttributes:
-      description: Attributes of a content pack state
+    SecurityMonitoringContentPackLogsDetails:
+      description: Details for a logs-based content pack.
       properties:
-        cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect (only applies to certain pricing models)
-          example: false
-          type: boolean
         cp_activation:
           $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
-        filters_configured_for_logs:
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        filters_configured:
           description: |-
             Whether filters (Security Filters or Index Query depending on the pricing model) are
             present and correctly configured to route logs into Cloud SIEM.
@@ -89652,21 +91133,59 @@ components:
           type: boolean
         integration_installed_status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
-        logs_last_collected:
-          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
         logs_seen_from_any_index:
-          description: Whether logs for this content pack have been seen in any Datadog index within the last 72 hours.
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
           example: true
           type: boolean
-        state:
+        siem_index_incorrect:
+          description: Whether the Cloud SIEM index configuration is incorrect (only applies to certain pricing models).
+          example: false
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityFilterFilteredDataType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+        - filters_configured
+        - logs_seen_from_any_index
+        - siem_index_incorrect
+      type: object
+    SecurityMonitoringContentPackOnboardingDetails:
+      description: |-
+        Content pack details returned when Cloud SIEM is inactive for the requesting organization.
+      properties:
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        logs_seen_from_any_index:
+          description: Whether logs for this content pack have been seen in any Datadog index in the last 72 hours.
+          example: true
+          type: boolean
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetailsType"
+      required:
+        - type
+        - logs_seen_from_any_index
+      type: object
+    SecurityMonitoringContentPackOnboardingDetailsType:
+      description: Type for onboarding content pack details.
+      enum:
+        - onboarding
+      example: onboarding
+      type: string
+      x-enum-varnames:
+        - ONBOARDING
+    SecurityMonitoringContentPackStateAttributes:
+      description: Attributes of a content pack state.
+      properties:
+        details:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackStateDetails"
+        status:
           $ref: "#/components/schemas/SecurityMonitoringContentPackStatus"
       required:
-        - state
-        - cp_activation
-        - logs_seen_from_any_index
-        - logs_last_collected
-        - cloud_siem_index_incorrect
-        - filters_configured_for_logs
+        - status
+        - details
       type: object
     SecurityMonitoringContentPackStateData:
       description: Content pack state data.
@@ -89684,13 +91203,42 @@ components:
         - type
         - attributes
       type: object
+    SecurityMonitoringContentPackStateDetails:
+      description: |-
+        Type-specific details for a content pack state. The set of fields present depends
+        on the content pack's `type`. When Cloud SIEM is inactive for the requesting organization, `onboarding` is returned instead of the content pack's usual type, such as `logs` or `vulnerability`.`
+      discriminator:
+        mapping:
+          appsec: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+          audit: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+          entity: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+          logs: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+          onboarding: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
+          threat_intel: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+          vulnerability: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        propertyName: type
+      oneOf:
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackLogsDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackEntityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAuditDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackAppSecDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetails"
+        - $ref: "#/components/schemas/SecurityMonitoringContentPackOnboardingDetails"
     SecurityMonitoringContentPackStateMeta:
-      description: Metadata for content pack states
+      description: Metadata for content pack states.
       properties:
         cloud_siem_index_incorrect:
-          description: Whether the cloud SIEM index configuration is incorrect at the organization level
+          description: Whether the Cloud SIEM index configuration is incorrect for the organization.
           example: false
           type: boolean
+        retention_months:
+          description: |-
+            The number of months that standard logs are retained for organizations on the standalone_indexed` pricing model. This field is omitted for other pricing models.
+          example: 15
+          format: int32
+          maximum: 60
+          type: integer
         sku:
           $ref: "#/components/schemas/SecurityMonitoringSKU"
       required:
@@ -89728,6 +91276,7 @@ components:
         - active
         - warning
         - broken
+        - not_configured
       example: active
       type: string
       x-enum-descriptions:
@@ -89737,6 +91286,7 @@ components:
         - Activated; logs received within the last 24 hours.
         - Activated; integration not installed or logs last seen 24 to 72 hours ago.
         - Activated; no logs for over 72 hours, filter missing, or Cloud SIEM index incorrectly ordered.
+        - Activated, but no credentials are configured (entity content packs only).
       x-enum-varnames:
         - INSTALL
         - ACTIVATE
@@ -89744,6 +91294,32 @@ components:
         - ACTIVE
         - WARNING
         - BROKEN
+        - NOT_CONFIGURED
+    SecurityMonitoringContentPackThreatIntelDetails:
+      description: Details for a threat intelligence content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackThreatIntelDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackThreatIntelDetailsType:
+      description: Type for threat intelligence content pack details.
+      enum:
+        - threat_intel
+      example: threat_intel
+      type: string
+      x-enum-varnames:
+        - THREAT_INTEL
     SecurityMonitoringContentPackTimestampBucket:
       description: Timestamp bucket indicating when logs were last collected.
       enum:
@@ -89766,6 +91342,31 @@ components:
         - WITHIN_24_TO_72_HOURS
         - OVER_72H_TO_30D
         - OVER_30D
+    SecurityMonitoringContentPackVulnerabilityDetails:
+      description: Details for a vulnerability content pack.
+      properties:
+        cp_activation:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackActivation"
+        data_last_seen:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackTimestampBucket"
+        integration_installed_status:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackIntegrationStatus"
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringContentPackVulnerabilityDetailsType"
+      required:
+        - type
+        - cp_activation
+        - data_last_seen
+        - integration_installed_status
+      type: object
+    SecurityMonitoringContentPackVulnerabilityDetailsType:
+      description: Type for vulnerability content pack details.
+      enum:
+        - vulnerability
+      example: vulnerability
+      type: string
+      x-enum-varnames:
+        - VULNERABILITY
     SecurityMonitoringCriticalAsset:
       description: The critical asset's properties.
       properties:
@@ -91325,6 +92926,10 @@ components:
       properties:
         attributes:
           $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteAttributes"
+        id:
+          description: Request ID. This value is echoed back as the response's resource ID.
+          example: bulk_delete
+          type: string
         type:
           $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteRequestDataType"
       required:
@@ -91350,6 +92955,12 @@ components:
     SecurityMonitoringRuleBulkDeleteResponse:
       description: Response for bulk deleting security monitoring rules.
       properties:
+        data:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseData"
+      type: object
+    SecurityMonitoringRuleBulkDeleteResponseAttributes:
+      description: Attributes for the bulk delete response.
+      properties:
         deletedRules:
           description: List of successfully deleted rule IDs.
           items:
@@ -91361,6 +92972,25 @@ components:
             type: string
           type: array
       type: object
+    SecurityMonitoringRuleBulkDeleteResponseData:
+      description: Data for the bulk delete response.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseAttributes"
+        id:
+          description: The identifier of the bulk delete response.
+          type: string
+        type:
+          $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponseDataType"
+      type: object
+    SecurityMonitoringRuleBulkDeleteResponseDataType:
+      description: The resource type for a bulk delete response.
+      enum:
+        - bulk_delete_response
+      example: bulk_delete_response
+      type: string
+      x-enum-varnames:
+        - BULK_DELETE_RESPONSE
     SecurityMonitoringRuleBulkExportAttributes:
       description: Attributes for bulk exporting security monitoring rules.
       properties:
@@ -92137,12 +93767,16 @@ components:
         - per_gb_analyzed
         - per_event_in_siem_index_2023
         - add_on_2024
+        - standalone_indexed
+        - unknown
       example: add_on_2024
       type: string
       x-enum-varnames:
         - PER_GB_ANALYZED
         - PER_EVENT_IN_SIEM_INDEX_2023
         - ADD_ON_2024
+        - STANDALONE_INDEXED
+        - UNKNOWN
     SecurityMonitoringSchedulingOptions:
       description: Options for scheduled rules. When this field is present, the rule runs based on the schedule. When absent, it runs real-time on ingested logs.
       nullable: true
@@ -105322,8 +106956,29 @@ components:
           $ref: "#/components/schemas/TagIndexingRuleType"
       type: object
     TagIndexingRuleDynamicTags:
-      description: Configuration for including dynamically queried tags.
+      description: |-
+        Options for dynamic tag indexing applied per metric, such as tags filtered by query usage.
+
+        Before a tag key is dropped by this rule, two grace period conditions must be met:
+
+        1. The metric must be submitted for at least as long as the selected window.
+        2. A tag key must have been submitted for at least 15 days.
+
+        Any metric or tag key that does not meet these conditions are excluded from this
+        indexing rule. The `exclude_not_*` fields require `exclude_tags_mode` to be set to `true`.
       properties:
+        exclude_not_queried_window_seconds:
+          description: >-
+            Tags that have not been queried within this window are excluded from indexing. Maximum of `7776000` (90 days).
+          example: 3600
+          format: int64
+          maximum: 7776000
+          type: integer
+        exclude_not_used_in_assets:
+          description: >-
+            Tags not used in any dashboards,  monitors, notebooks, or SLOs are excluded from indexing.
+          example: false
+          type: boolean
         queried_tags_window_seconds:
           description: Window in seconds for evaluating queried tags.
           example: 3600
@@ -114455,6 +116110,7 @@ components:
             monitors_downtime: Set downtimes to suppress alerts from any monitor in an organization. Mute and unmute monitors. The ability to write monitors is not required to set downtimes.
             monitors_read: View monitors.
             monitors_write: Edit, delete, and resolve individual monitors.
+            network_connections_read: Read cloud network connections.
             org_connections_read: Read cross organization connections.
             org_connections_write: Create, edit, and delete cross organization connections.
             org_management: Edit org configurations, including authentication and certain security preferences such as configuring SAML, renaming an org, configuring allowed login methods, creating child orgs, subscribing & unsubscribing from apps in the marketplace, and enabling & disabling Remote Configuration for the entire organization.
@@ -115964,6 +117620,68 @@ paths:
           - hosts_read
       x-unstable: |-
         This endpoint is in Preview and may introduce breaking changes.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/unstable/llm-obs/config/evaluators/custom:
+    get:
+      description: List all custom LLM Observability evaluator configurations for the organization.
+      operationId: ListLLMObsCustomEvalConfigs
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          category: "Custom"
+                          created_at: "2024-01-15T10:30:00Z"
+                          created_by:
+                            email: "user@example.com"
+                          eval_name: "my-custom-evaluator"
+                          last_updated_by:
+                            email: "user@example.com"
+                          llm_judge_config:
+                            inference_params:
+                              max_tokens: 1024
+                              temperature: 0.7
+                            parsing_type: "structured_output"
+                          llm_provider:
+                            integration_provider: "openai"
+                            model_name: "gpt-4o"
+                          target:
+                            application_name: "my-llm-app"
+                            enabled: true
+                            sampling_percentage: 50.0
+                          updated_at: "2024-01-15T10:30:00Z"
+                        id: "my-custom-evaluator"
+                        type: "evaluator_config"
+              schema:
+                $ref: "#/components/schemas/LLMObsCustomEvalConfigListResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List custom evaluator configurations
+      tags:
+        - LLM Observability
+      x-menu-order: 73
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/unstable/llm-obs/config/evaluators/custom/{eval_name}:
     delete:
@@ -121897,9 +123615,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 27
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/bulk:
     post:
       description: Applies a single action (such as changing priority, status, assignment, or archiving) to multiple cases at once. The list of case IDs and the action type with its payload are specified in the request body.
@@ -121945,9 +123660,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 29
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/count:
     get:
       description: Returns case counts, optionally grouped by one or more fields (for example, status, priority). Supports a query filter to narrow the scope.
@@ -122011,9 +123723,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 28
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/link:
     get:
       description: Returns all links associated with a case. Links define relationships (for example, BLOCKS) between cases. Requires entity_type and entity_id query parameters.
@@ -122078,9 +123787,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 35
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a directional link between two cases (for example, case A blocks case B). The parent and child cases and their relationship type must be specified.
       operationId: CreateCaseLink
@@ -122140,9 +123846,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 36
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/link/{link_id}:
     delete:
       description: Deletes an existing link between cases by link ID.
@@ -122171,9 +123874,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 37
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects:
     get:
       description: >-
@@ -122303,9 +124003,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 30
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}:
     delete:
       description: Remove a project using the project's `id`.
@@ -122456,9 +124153,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 32
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Marks a case project as a favorite for the current authenticated user.
       operationId: FavoriteCaseProject
@@ -122486,9 +124180,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 31
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/notification_rules:
     get:
       description: >-
@@ -122755,9 +124446,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates an automation rule for a project. The rule defines a trigger event (for example, case created, status transitioned) and an action to execute.
       operationId: CreateCaseAutomationRule
@@ -122832,9 +124520,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}:
     delete:
       description: Permanently deletes an automation rule from a project.
@@ -122866,9 +124551,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Returns a single automation rule identified by its UUID, including its trigger, action, and current state (enabled/disabled).
       operationId: GetCaseAutomationRule
@@ -122923,9 +124605,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the trigger, action, name, or state of an existing automation rule.
       operationId: UpdateCaseAutomationRule
@@ -123001,9 +124680,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/disable:
     post:
       description: Disables an automation rule so it no longer triggers on case events. The rule configuration is preserved.
@@ -123059,9 +124735,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 7
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/projects/{project_id}/rules/{rule_id}/enable:
     post:
       description: Enables a previously disabled automation rule so it triggers on matching case events.
@@ -123117,9 +124790,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 6
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/types:
     get:
       description: Get all case types
@@ -123309,9 +124979,6 @@ paths:
       tags:
         - Case Management Type
       x-menu-order: 4
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/types/{case_type_id}/custom_attributes:
     get:
       description: Get all custom attribute config of case type
@@ -123489,9 +125156,6 @@ paths:
       tags:
         - Case Management Attribute
       x-menu-order: 5
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/views:
     get:
       description: Returns all saved case views for a given project. Views are saved search queries that allow quick access to filtered lists of cases.
@@ -123540,9 +125204,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 59
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a new saved case view with a name, filter query, and associated project. Optionally, a notification rule can be linked to the view.
       operationId: CreateCaseView
@@ -123598,9 +125259,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 60
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/views/{view_id}:
     delete:
       description: Permanently deletes a saved case view.
@@ -123629,9 +125287,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 63
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Returns a single saved case view identified by its UUID, including its query, associated project, and timestamps.
       operationId: GetCaseView
@@ -123673,9 +125328,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 61
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the name, query, or notification rule of an existing case view.
       operationId: UpdateCaseView
@@ -123731,9 +125383,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 62
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}:
     get:
       description: >-
@@ -124100,9 +125749,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 21
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/custom_attributes/{custom_attribute_key}:
     delete:
       description: Delete custom attribute from case
@@ -124346,9 +125992,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 25
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/insights:
     delete:
       description: Removes one or more previously added insights from a case by specifying their type and resource identifier in the request body.
@@ -124432,9 +126075,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 34
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: >-
         Adds one or more insights to a case. Insights are references to related Datadog resources (such as monitors, security signals, incidents, or error tracking issues) that provide investigative context. Up to 100 insights can be added per request. Each insight requires a type (see `CaseInsightType` for allowed values), a ref (URL path to the resource), and a resource_id.
@@ -124518,9 +126158,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 33
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/priority:
     post:
       description: Update case priority
@@ -124657,9 +126294,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 52
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/jira_issues:
     delete:
       description: Remove the link between a Jira issue and a case
@@ -124704,9 +126338,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 55
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     patch:
       description: Link an existing Jira issue to a case
       operationId: LinkJiraIssueToCase
@@ -124770,9 +126401,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 54
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Create a new Jira issue and link it to a case
       operationId: CreateCaseJiraIssue
@@ -124833,9 +126461,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 53
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/notebook:
     post:
       description: Create a new investigation notebook and link it to a case
@@ -124892,9 +126517,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 57
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/project:
     patch:
       description: Update the project associated with a case
@@ -124967,9 +126589,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 51
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/relationships/servicenow_tickets:
     post:
       description: Create a new ServiceNow incident ticket and link it to a case
@@ -125029,9 +126648,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 56
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/resolved_reason:
     post:
       description: Sets the resolved reason for a security case (for example, FALSE_POSITIVE, TRUE_POSITIVE). Applicable to security-type cases.
@@ -125096,9 +126712,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 26
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/status:
     post:
       description: Update case status
@@ -125230,9 +126843,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 58
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/title:
     post:
       description: Update case title
@@ -125464,9 +127074,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 64
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cases/{case_id}/watchers/{user_uuid}:
     delete:
       description: Removes a user from the watchers list of a case. The user no longer receives notifications about updates to the case.
@@ -125496,9 +127103,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 66
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Adds a user (identified by their UUID) as a watcher of a case. The user receives notifications about subsequent updates to the case.
       operationId: WatchCase
@@ -125527,9 +127131,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 65
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/catalog/entity:
     get:
       description: Get a list of entities from Software Catalog.
@@ -129971,9 +131572,6 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 67
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cost/budget/validate:
     post:
       description: Validate a budget configuration without creating or modifying it
@@ -130171,9 +131769,6 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 68
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     get:
       description: Get the custom forecast for a budget.
       operationId: GetCustomForecast
@@ -130222,9 +131817,6 @@ paths:
       tags:
         - Cloud Cost Management
       x-menu-order: 69
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/cost/budgets:
     get:
       description: List budgets.
@@ -132798,6 +134390,131 @@ paths:
       summary: Get all CSM Serverless Agents
       tags: ["CSM Agents"]
       x-menu-order: 4
+  /api/v2/csm/ownership/settings:
+    get:
+      description: Get ownership settings for the org. When settings are unset, the API returns the default opt-out configuration with `auto_tag` set to `true` and `confidence_level` set to `high`.
+      operationId: GetOwnershipSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        auto_tag: true
+                        confidence_level: high
+                        version: 1
+                      id: settings
+                      type: ownership_settings
+              schema:
+                $ref: "#/components/schemas/OwnershipSettingsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Get ownership settings for the org
+      tags: ["CSM Ownership"]
+      x-menu-order: 7
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Update ownership settings for the org.
+      operationId: PostOwnershipSettings
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      auto_tag: true
+                      confidence_level: high
+                    type: ownership_settings
+            schema:
+              $ref: "#/components/schemas/OwnershipSettingsRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        auto_tag: true
+                        confidence_level: high
+                        version: 1
+                      id: settings
+                      type: ownership_settings
+              schema:
+                $ref: "#/components/schemas/OwnershipSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Update ownership settings for the org
+      tags: ["CSM Ownership"]
+      x-menu-order: 8
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/csm/ownership/settings/untagged:
+    get:
+      description: Count findings with no team tag, grouped by ownership confidence level.
+      operationId: GetOwnershipUntaggedFindings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        high_confidence: 30
+                        low_confidence: 42
+                        medium_confidence: 70
+                        total: 142
+                      id: untagged
+                      type: ownership_untagged_findings
+              schema:
+                $ref: "#/components/schemas/OwnershipUntaggedFindingsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      summary: Count untagged findings by ownership confidence
+      tags: ["CSM Ownership"]
+      x-menu-order: 9
+      x-unstable: |-
+        **Note**: This endpoint is in Preview and may be subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/csm/ownership/{resource_id}:
     get:
       description: Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).
@@ -135230,6 +136947,233 @@ paths:
       x-unstable: |-
         **Note: Data Access is in preview. If you have any feedback,
         contact [Datadog support](https://docs.datadoghq.com/help/).**
+  /api/v2/ddsql/query/tabular:
+    post:
+      description: |-
+        Submit a DDSQL statement and return either a `running` state with an opaque `query_id`
+        for the client to poll, or a `completed` state with the column-major result set inlined
+        when the query finishes quickly enough to be served synchronously.
+      operationId: ExecuteDdsqlTabularQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      query: "SELECT cloud_provider, count(*) FROM dd.hosts group by cloud_provider"
+                      row_limit: 1000
+                      time:
+                        from_timestamp: 1736942400000
+                        to_timestamp: 1736946000000
+                    type: ddsql_query_request
+            schema:
+              $ref: "#/components/schemas/DdsqlTabularQueryRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                completed:
+                  summary: Query finished synchronously
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 318
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+                default:
+                  summary: Query finished synchronously
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 318
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+                running:
+                  summary: Query still executing
+                  value:
+                    data:
+                      attributes:
+                        query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                        state: running
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 42
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7081"
+              schema:
+                $ref: "#/components/schemas/DdsqlTabularQueryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Execute a tabular DDSQL query
+      tags:
+        - DDSQL
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/ddsql/query/tabular/fetch:
+    post:
+      description: |-
+        Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned
+        by a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that
+        returned `state: running`) and the server returns either a `running` state to poll again
+        or a `completed` state with the column-major result set inlined.
+      operationId: FetchDdsqlTabularQuery
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                    type: ddsql_query_fetch_request
+            schema:
+              $ref: "#/components/schemas/DdsqlTabularQueryFetchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                completed:
+                  summary: Query finished
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 87
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+                default:
+                  summary: Query finished
+                  value:
+                    data:
+                      attributes:
+                        columns:
+                          - name: service
+                            type: VARCHAR
+                            values:
+                              - web-store
+                              - checkout
+                          - name: count
+                            type: BIGINT
+                            values:
+                              - 1024
+                              - 512
+                        state: completed
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 87
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+                running:
+                  summary: Query still executing
+                  value:
+                    data:
+                      attributes:
+                        query_id: "eyJxdWVyeSI6ICJTRUxFQ1QgKiBGUk9NIGxvZ3MifQ=="
+                        state: running
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: ddsql_query_response
+                    meta:
+                      elapsed: 12
+                      request_id: "req-7f3e7d2c-1a0b-4d3e-9b2a-3c4d5e6f7082"
+              schema:
+                $ref: "#/components/schemas/DdsqlTabularQueryResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Internal Server Error
+      summary: Fetch the result of a DDSQL query
+      tags:
+        - DDSQL
+      x-menu-order: 2
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/deployment_gates:
     get:
       description: |-
@@ -137921,7 +139865,7 @@ paths:
     get:
       description: |-
         Returns a list of environments for the organization.
-        Supports filtering by name and key.
+        Supports filtering by name, key, and DD_ENV.
       operationId: ListFeatureFlagsEnvironments
       parameters:
         - description: Filter environments by name (partial matching).
@@ -137934,6 +139878,12 @@ paths:
           example: "env-partial"
           in: query
           name: key
+          schema:
+            type: string
+        - description: Filter environments by queries that contain the provided DD_ENV value.
+          example: "staging"
+          in: query
+          name: dd_env
           schema:
             type: string
         - description: Maximum number of results to return.
@@ -142169,6 +144119,9 @@ paths:
     get:
       description: Retrieve a list of all postmortem templates for incidents.
       operationId: ListIncidentPostmortemTemplates
+      parameters:
+        - $ref: "#/components/parameters/PostmortemTemplateFilterIncidentTypeParameter"
+        - $ref: "#/components/parameters/PostmortemTemplateSortParameter"
       responses:
         "200":
           content:
@@ -142178,11 +144131,19 @@ paths:
                   value:
                     data:
                       - attributes:
+                          content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                           createdAt: "2024-01-01T00:00:00+00:00"
+                          is_default: "2024-01-01T00:00:00+00:00"
+                          location: datadog_notebooks
                           modifiedAt: "2024-01-01T00:00:00+00:00"
                           name: Standard Postmortem Template
                         id: 00000000-0000-0000-0000-000000000001
-                        type: postmortem_template
+                        relationships:
+                          incident_type:
+                            data:
+                              id: 00000000-0000-0000-0000-000000000009
+                              type: incident_types
+                        type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplatesResponse"
           description: OK
@@ -142212,8 +144173,14 @@ paths:
                 value:
                   data:
                     attributes:
+                      content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    relationships:
+                      incident_type:
+                        data:
+                          id: 00000000-0000-0000-0000-000000000009
+                          type: incident_types
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -142226,11 +144193,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000002
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: Created
@@ -142260,13 +144235,7 @@ paths:
       description: Delete a postmortem template.
       operationId: DeleteIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "204":
           description: No Content
@@ -142295,13 +144264,7 @@ paths:
       description: Retrieve details of a specific postmortem template.
       operationId: GetIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       responses:
         "200":
           content:
@@ -142311,11 +144274,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000003
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
@@ -142344,13 +144315,7 @@ paths:
       description: Update an existing postmortem template.
       operationId: UpdateIncidentPostmortemTemplate
       parameters:
-        - description: The ID of the postmortem template
-          in: path
-          name: template_id
-          required: true
-          schema:
-            example: "template-456"
-            type: string
+        - $ref: "#/components/parameters/PostmortemTemplateIdParameter"
       requestBody:
         content:
           application/json:
@@ -142360,7 +144325,8 @@ paths:
                   data:
                     attributes:
                       name: Standard Postmortem Template
-                    type: postmortem_template
+                    id: 00000000-0000-0000-0000-000000000004
+                    type: postmortem_templates
             schema:
               $ref: "#/components/schemas/PostmortemTemplateRequest"
         required: true
@@ -142373,11 +144339,19 @@ paths:
                   value:
                     data:
                       attributes:
+                        content: "# Overview\n\n# What Happened\n\n# Timeline\n\n# Action Items"
                         createdAt: "2024-01-01T00:00:00+00:00"
+                        is_default:
+                        location: datadog_notebooks
                         modifiedAt: "2024-01-01T00:00:00+00:00"
                         name: Standard Postmortem Template
                       id: 00000000-0000-0000-0000-000000000004
-                      type: postmortem_template
+                      relationships:
+                        incident_type:
+                          data:
+                            id: 00000000-0000-0000-0000-000000000009
+                            type: incident_types
+                      type: postmortem_templates
               schema:
                 $ref: "#/components/schemas/PostmortemTemplateResponse"
           description: OK
@@ -153106,6 +155080,696 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/prompts:
+    get:
+      description: List all LLM Observability prompts in the prompt registry for the organization.
+      operationId: ListLLMObsPrompts
+      parameters:
+        - description: Optional filter for prompts by prompt ID.
+          example: "customer-support-assistant"
+          in: query
+          name: filter[prompt_id]
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                          created_at: "2025-01-15T10:00:00Z"
+                          created_from: "sdk-registry"
+                          description: "Answers customer questions using the company knowledge base."
+                          in_registry: true
+                          last_version_created_at: "2025-02-01T14:30:00Z"
+                          num_versions: 2
+                          prompt_id: "customer-support-assistant"
+                          source: registry
+                          title: "Customer Support Assistant"
+                        id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        type: prompt-templates
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List LLM Observability prompts
+      tags:
+        - LLM Observability
+      x-menu-order: 64
+      x-permission:
+        operator: OR
+        permissions:
+          - llm_observability_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new prompt (and its first version) in the LLM Observability prompt registry.
+      operationId: CreateLLMObsPrompt
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "Answers customer questions using the company knowledge base."
+                      prompt_id: "customer-support-assistant"
+                      template:
+                        - content: "You are a helpful customer support assistant for {{company_name}}."
+                          role: "system"
+                        - content: "Help {{customer_name}} with this question: {{question}}"
+                          role: "user"
+                      title: "Customer Support Assistant"
+                    type: prompt-templates
+            schema:
+              $ref: "#/components/schemas/LLMObsCreatePromptRequest"
+        description: Create prompt payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        created_at: "2025-01-15T10:00:00Z"
+                        created_from: "sdk-registry"
+                        description: "Answers customer questions using the company knowledge base."
+                        in_registry: true
+                        last_version_created_at: "2025-01-15T10:00:00Z"
+                        num_versions: 1
+                        prompt_id: "customer-support-assistant"
+                        source: registry
+                        title: "Customer Support Assistant"
+                      id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                      type: prompt-templates
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create an LLM Observability prompt
+      tags:
+        - LLM Observability
+      x-menu-order: 65
+      x-permission:
+        operator: AND
+        permissions:
+          - llm_observability_read
+          - llm_observability_write
+          - feature_flag_config_read
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/prompts/{prompt_id}:
+    delete:
+      description: >-
+        Soft-delete an LLM Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.
+      operationId: DeleteLLMObsPrompt
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        deleted_at: "2025-02-10T09:15:00Z"
+                        prompt_id: "customer-support-assistant"
+                      id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                      type: prompt-templates
+              schema:
+                $ref: "#/components/schemas/LLMObsDeletedPromptResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Delete an LLM Observability prompt
+      tags:
+        - LLM Observability
+      x-menu-order: 68
+      x-permission:
+        operator: AND
+        permissions:
+          - llm_observability_read
+          - llm_observability_write
+          - feature_flag_config_read
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    get:
+      description: Get the latest version of an LLM Observability prompt by prompt ID.
+      operationId: GetLLMObsPrompt
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+        - $ref: "#/components/parameters/LLMObsPromptLabelQueryParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        chat_template:
+                          - content: "You are a helpful customer support assistant for {{company_name}}."
+                            role: "system"
+                          - content: "Help {{customer_name}} with this question: {{question}}"
+                            role: "user"
+                        prompt_id: "customer-support-assistant"
+                        prompt_version_uuid: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                        version: "2"
+                      id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                      type: prompt-templates
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptSDKResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get an LLM Observability prompt
+      tags:
+        - LLM Observability
+      x-menu-order: 66
+      x-permission:
+        operator: OR
+        permissions:
+          - llm_observability_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: Update the title, the description, or both, for an LLM Observability prompt.
+      operationId: UpdateLLMObsPrompt
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "Answers customer questions using the company knowledge base."
+                      title: "Customer Support Assistant"
+                    type: prompt-templates
+            schema:
+              $ref: "#/components/schemas/LLMObsUpdatePromptRequest"
+        description: Update prompt payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        created_at: "2025-01-15T10:00:00Z"
+                        created_from: "sdk-registry"
+                        description: "Answers customer questions using the company knowledge base."
+                        in_registry: true
+                        last_version_created_at: "2025-01-15T10:00:00Z"
+                        num_versions: 1
+                        prompt_id: "customer-support-assistant"
+                        source: registry
+                        title: "Customer Support Assistant"
+                      id: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                      type: prompt-templates
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update an LLM Observability prompt
+      tags:
+        - LLM Observability
+      x-menu-order: 67
+      x-permission:
+        operator: AND
+        permissions:
+          - llm_observability_read
+          - llm_observability_write
+          - feature_flag_config_read
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/prompts/{prompt_id}/versions:
+    get:
+      description: >-
+        List all versions of an LLM Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.
+      operationId: ListLLMObsPromptVersions
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                          created_at: "2025-02-01T14:30:00Z"
+                          description: "Give concise answers and cite relevant help-center articles."
+                          prompt_id: "customer-support-assistant"
+                          prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                          version: 2
+                          version_created_at: "2025-02-01T14:30:00Z"
+                        id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                        type: prompt-template-versions
+                      - attributes:
+                          author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                          created_at: "2025-01-15T10:00:00Z"
+                          description: "Initial customer support prompt."
+                          prompt_id: "customer-support-assistant"
+                          prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                          version: 1
+                          version_created_at: "2025-01-15T10:00:00Z"
+                        id: "20e5280b-c75d-5699-8a70-a2773a751428"
+                        type: prompt-template-versions
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptVersionsResponse"
+          description: OK
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: List versions of an LLM Observability prompt
+      tags:
+        - LLM Observability
+      x-menu-order: 69
+      x-permission:
+        operator: OR
+        permissions:
+          - llm_observability_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    post:
+      description: Create a new version of an existing LLM Observability prompt.
+      operationId: CreateLLMObsPromptVersion
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "Give concise answers and cite relevant help-center articles."
+                      template:
+                        - content: "You are a helpful customer support assistant for {{company_name}}."
+                          role: "system"
+                        - content: "Help {{customer_name}} with this question: {{question}}"
+                          role: "user"
+                    type: prompt-template-versions
+            schema:
+              $ref: "#/components/schemas/LLMObsCreatePromptVersionRequest"
+        description: Create prompt version payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        created_at: "2025-02-01T14:30:00Z"
+                        description: "Give concise answers and cite relevant help-center articles."
+                        prompt_id: "customer-support-assistant"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful customer support assistant for {{company_name}}."
+                            role: "system"
+                          - content: "Help {{customer_name}} with this question: {{question}}"
+                            role: "user"
+                        version: 2
+                        version_created_at: "2025-02-01T14:30:00Z"
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptVersionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Create a new LLM Observability prompt version
+      tags:
+        - LLM Observability
+      x-menu-order: 70
+      x-permission:
+        operator: AND
+        permissions:
+          - llm_observability_read
+          - llm_observability_write
+          - feature_flag_config_read
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/llm-obs/v1/prompts/{prompt_id}/versions/{version}:
+    get:
+      description: Get the full template of a single, specific version of an LLM Observability prompt.
+      operationId: GetLLMObsPromptVersion
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+        - $ref: "#/components/parameters/LLMObsPromptVersionPathParameter"
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        created_at: "2025-02-01T14:30:00Z"
+                        description: "Give concise answers and cite relevant help-center articles."
+                        prompt_id: "customer-support-assistant"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful customer support assistant for {{company_name}}."
+                            role: "system"
+                          - content: "Help {{customer_name}} with this question: {{question}}"
+                            role: "user"
+                        version: 2
+                        version_created_at: "2025-02-01T14:30:00Z"
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptVersionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Get a specific LLM Observability prompt version
+      tags:
+        - LLM Observability
+      x-menu-order: 71
+      x-permission:
+        operator: OR
+        permissions:
+          - llm_observability_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: >-
+        Update the description, the feature-flag environments, or both, for a specific version of an LLM Observability prompt.
+      operationId: UpdateLLMObsPromptVersion
+      parameters:
+        - $ref: "#/components/parameters/LLMObsPromptIDPathParameter"
+        - $ref: "#/components/parameters/LLMObsPromptVersionPathParameter"
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: "Give concise answers and cite relevant help-center articles."
+                    type: prompt-template-versions
+            schema:
+              $ref: "#/components/schemas/LLMObsUpdatePromptVersionRequest"
+        description: Update prompt version payload.
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        author: "3b12f1df-14fd-4e12-bd6f-4a2f5c8b3d1e"
+                        created_at: "2025-02-01T14:30:00Z"
+                        description: "Give concise answers and cite relevant help-center articles."
+                        prompt_id: "customer-support-assistant"
+                        prompt_uuid: "4a1a28ff-8a25-5f0f-946f-f48264d772eb"
+                        template:
+                          - content: "You are a helpful customer support assistant for {{company_name}}."
+                            role: "system"
+                          - content: "Help {{customer_name}} with this question: {{question}}"
+                            role: "user"
+                        version: 2
+                        version_created_at: "2025-02-01T14:30:00Z"
+                      id: "d83ab666-61cc-5545-a83b-2424bb85467b"
+                      type: prompt-template-versions
+              schema:
+                $ref: "#/components/schemas/LLMObsPromptVersionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Update a specific LLM Observability prompt version
+      tags:
+        - LLM Observability
+      x-menu-order: 72
+      x-permission:
+        operator: AND
+        permissions:
+          - llm_observability_read
+          - llm_observability_write
+          - feature_flag_config_read
+          - feature_flag_config_write
+          - feature_flag_environment_config_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/llm-obs/v1/spans/events:
     get:
       description: List LLM Observability spans matching the specified filters.
@@ -157980,9 +160644,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 38
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: Creates a maintenance window for event management cases with a name, case filter query, and time range (start and end).
       operationId: CreateMaintenanceWindow
@@ -158040,9 +160701,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 39
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/maintenance_windows/{maintenance_window_id}:
     delete:
       description: Permanently deletes a maintenance window.
@@ -158071,9 +160729,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 41
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: Updates the name, query, start time, or end time of an existing maintenance window.
       operationId: UpdateMaintenanceWindow
@@ -158133,9 +160788,6 @@ paths:
       tags:
         - Case Management
       x-menu-order: 40
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/metrics:
     get:
       description: |-
@@ -158678,6 +161330,7 @@ paths:
       description: |-
         Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.
         The server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.
+        The UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.
         Requires the `Manage Tags for Metrics` permission.
       operationId: ReorderTagIndexingRules
       requestBody:
@@ -162548,12 +165201,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated connections
       tags:
         - Cloud Network Monitoring
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/network/dns/aggregate:
     get:
       description: Get all aggregated DNS traffic.
@@ -162620,12 +165284,23 @@ paths:
           description: OK
         "400":
           $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/ForbiddenResponse"
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - network_connections_read
       summary: Get all aggregated DNS traffic
       tags:
         - Cloud Network Monitoring
       x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - network_connections_read
   /api/v2/oauth2/.well-known/sites:
     get:
       description: Retrieve the list of public OAuth2 sites available for the current environment. This endpoint is used for OAuth2 discovery and returns sites where users can authenticate.
@@ -172945,6 +175620,7 @@ paths:
         - Case Management Projects: `case-management-project`
         - Monitor Notification Rules: `monitor-notification-rule`
         - Status Pages: `status-page`
+        - Feature Flags: `feature-flag`
 
         #### Supported relations for resources
         Resource Type               | Supported Relations
@@ -172975,6 +175651,7 @@ paths:
         Case Management Projects    | `viewer`, `contributor`, `manager`
         Monitor Notification Rules  | `viewer`, `editor`
         Status Pages                | `viewer`, `responder`, `manager`
+        Feature Flags               | `viewer`, `contributor`, `editor`
       operationId: UpdateRestrictionPolicy
       parameters:
         - $ref: "#/components/parameters/ResourceID"
@@ -180846,9 +183523,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: >-
         Create Linear issues for security findings.
@@ -180923,9 +183597,6 @@ paths:
         permissions:
           - security_monitoring_findings_write
           - appsec_vm_write
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/security/findings/mute:
     patch:
       description: >-
@@ -185023,12 +187694,15 @@ paths:
                   value:
                     data:
                       - attributes:
-                          cloud_siem_index_incorrect: false
-                          cp_activation: activated
-                          filters_configured_for_logs: true
-                          logs_last_collected: within_24_hours
-                          logs_seen_from_any_index: true
-                          state: active
+                          details:
+                            cp_activation: activated
+                            data_last_seen: within_24_hours
+                            filters_configured: true
+                            integration_installed_status: installed
+                            logs_seen_from_any_index: true
+                            siem_index_incorrect: false
+                            type: logs
+                          status: active
                         id: aws-cloudtrail
                         type: content_pack_state
                     meta:
@@ -186160,6 +188834,7 @@ paths:
                       ruleIds:
                         - abc-000-u7q
                         - abc-000-7dd
+                    id: bulk_delete
                     type: bulk_delete_rules
             schema:
               $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeletePayload"
@@ -186171,10 +188846,14 @@ paths:
               examples:
                 default:
                   value:
-                    deletedRules:
-                      - abc-000-u7q
-                      - abc-000-7dd
-                    failedRules: []
+                    data:
+                      attributes:
+                        deletedRules:
+                          - abc-000-u7q
+                          - abc-000-7dd
+                        failedRules: []
+                      id: bulk_delete_response
+                      type: bulk_delete_response
               schema:
                 $ref: "#/components/schemas/SecurityMonitoringRuleBulkDeleteResponse"
           description: OK
@@ -190365,6 +193044,7 @@ paths:
         Please check the documentation regularly for updates.
   /api/v2/slo/report:
     post:
+      deprecated: true
       description: |-
         Create a job to generate an SLO report. The report job is processed asynchronously and eventually results in a CSV report being available for download.
 
@@ -190428,10 +193108,12 @@ paths:
         operator: OR
         permissions:
           - slos_read
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/download:
     get:
+      deprecated: true
       description: |-
         Download an SLO report. This can only be performed after the report job has completed.
 
@@ -190478,10 +193160,12 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 103
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/report/{report_id}/status:
     get:
+      deprecated: true
       description: Get the status of the SLO report job.
       operationId: GetSLOReportJobStatus
       parameters:
@@ -190530,8 +193214,9 @@ paths:
       tags:
         - Service Level Objectives
       x-menu-order: 102
+      x-sunset: "2027-01-25"
       x-unstable: |-
-        **Note**: This feature is in private beta. To request access, use the request access form in the [Service Level Objectives](https://docs.datadoghq.com/service_management/service_level_objectives/#slo-csv-export) docs.
+        **Note**: This feature is in private beta and is no longer accepting requests for access.
   /api/v2/slo/{slo_id}/status:
     get:
       description: |-
@@ -205133,6 +207818,12 @@ tags:
       self-service organization lifecycle actions such as disabling the authenticated org.
     name: Customer Org
   - description: |-
+      Execute DDSQL queries against the Datadog data catalog and poll for their results.
+      Queries are dispatched asynchronously: the initial request may return a `running` state with
+      a `query_id`, and clients poll the fetch endpoint until the response transitions to
+      `completed` with a column-major result set.
+    name: DDSQL
+  - description: |-
       Search, send, or delete events for DORA Metrics to measure and improve your software delivery performance. See the [DORA Metrics page](https://docs.datadoghq.com/dora_metrics/) for more information.
 
       **Note**: DORA Metrics are not available in the US1-FED site.
@@ -205277,7 +207968,8 @@ tags:
       description: Find out more at
       url: "https://docs.datadoghq.com/account_management/api-app-keys/"
     name: Key Management
-  - description: Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, and annotations.
+  - description: >-
+      Manage LLM Observability spans, data, projects, datasets, dataset records, experiments, prompts, and annotations.
     name: LLM Observability
   - description: |-
       Search your logs and send them to your Datadog platform over HTTP. See the [Log Management page](https://docs.datadoghq.com/logs/) for more information.

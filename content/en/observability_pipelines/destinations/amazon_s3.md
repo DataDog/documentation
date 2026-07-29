@@ -140,6 +140,10 @@ You can route logs from Observability Pipelines to Snowflake using the Amazon S3
 1. [Set up a pipeline][5] to use Amazon S3 as the log destination. Use the configuration detailed in [Set up the destination for your pipeline](#set-up-the-destination-for-your-pipeline).
 1. Set up Snowpipe in Snowflake. See [Automating Snowpipe for Amazon S3][6] for instructions.
 
+## Metrics
+
+For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
+
 ## How the destination works
 
 ### AWS Authentication
@@ -163,10 +167,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------| ----------------| --------------------|
 | None           | 100,000,000     | 900                 |
-
-## Metrics
-
-For [component metrics][12] and [destination buffer metrics][13] emitted by all destinations, see the [Pipelines Usage Metrics][14] documentation. To filter or group by Amazon S3 destination metrics, use the tag `component_type:amazon_s3_generic`.
 
 [1]: /logs/log_configuration/rehydrating/
 [2]: /observability_pipelines/destinations/datadog_archives/
