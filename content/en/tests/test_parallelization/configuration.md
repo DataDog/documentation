@@ -13,10 +13,6 @@ further_reading:
     text: "Test Parallelization Best Practices"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
-Test Parallelization is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Environment variables
 
 Most `ddtest` settings can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables.

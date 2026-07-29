@@ -13,6 +13,7 @@ If you stop reporting data to Datadog, after a certain period of time metrics, t
 
 | Item                                            | Age Out  |
 |--------------------------------------           |----------|
+| Datadog Agents                                  | 1 hours  |
 | Hosts                                           | 2 hours  |
 | Metrics                                         | 24 hours |
 | Tags in non-template variable dropdown panels                   | 12 hours |
