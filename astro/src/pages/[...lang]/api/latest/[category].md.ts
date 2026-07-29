@@ -1,3 +1,4 @@
+export const prerender = true;
 /**
  * AST-based plaintext rendering of each category summary page.
  *

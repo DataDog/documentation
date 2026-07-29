@@ -1,3 +1,4 @@
+export const prerender = true;
 /**
  * AST-based plaintext rendering of the OAuth scopes page.
  *

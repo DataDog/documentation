@@ -1,3 +1,4 @@
+export const prerender = true;
 /**
  * Plaintext (`.md`) twin of each Markdoc component test page.
  *

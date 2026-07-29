@@ -1,3 +1,4 @@
+export const prerender = true;
 import type { APIRoute } from 'astro';
 import { getCategoriesView } from '@lib/api/viewsBuilder';
 import { renderLlmsTxt } from '@lib/api/llmsTxtRenderer';
