@@ -527,7 +527,9 @@ SECURITY DEFINER;
 ```
 
 
-5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity:
+5. Configure your instance config with the `azure.managed_authentication` YAML block, where the `CLIENT_ID` is the Client ID of the Managed Identity, found on the managed identity's **Overview** blade in the Azure Portal.
+
+   **Note**: The `CLIENT_ID` is **not** the managed identity's Object (principal) ID, and it is **not** an App Registration's Application (client) ID. Using either of those values instead of the managed identity's own Client ID results in an `AADSTS700016` error from Microsoft Entra ID.
 
 
 ```yaml
@@ -592,7 +594,7 @@ CREATE USER <MANAGED_IDENTITY_NAME> FOR LOGIN <MANAGED_IDENTITY_NAME>;
 ```
 
 
-5. Update your instance config with the `managed_identity` config block:
+5. Update your instance config with the `managed_identity` config block, where `client_id` is the Client ID of the Managed Identity, found on the managed identity's **Overview** blade in the Azure Portal. This is **not** the managed identity's Object (principal) ID, and it is **not** an App Registration's Application (client) ID. Using either of those values instead of the managed identity's own Client ID results in an `AADSTS700016` error from Microsoft Entra ID.
 
 
 **Note**: [ODBC Driver 17 for SQL Server][18] or greater is required to use this feature.
