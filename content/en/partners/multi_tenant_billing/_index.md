@@ -33,19 +33,48 @@ See [Requesting an Admin Org][1] to get started.
 
 ## Capabilities
 
-| Capability | Status | Where to find it | Description |
-|---|---|---|---|
-| Admin Org | Available | — | A dedicated partner org that provides centralized cost and usage visibility, and serves as the foundation for every other capability below. |
-| Cost and usage visibility | Available | {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} | Real-time and historical cost and billable usage data across all connected customer orgs. See [Plan and Usage Experience for Partners][2]. |
-| Usage Metering API | Available | [Usage Metering API][3] | Programmatic access to usage and cost data across all connected customer orgs. |
-| Trial Org Provisioning | Available | {{< ui >}}Dashboards{{< /ui >}} > **Trial Org Provisioning** | Provision trial Datadog organizations for prospective customers directly from your Admin Org. See [Trial Org Provisioning][4]. |
-| Customer org linking | Available | — | Automatic linking of customer orgs to your Admin Org, based on your active contract with them. |
-| Usage metrics roll-up | Preview | **Metrics** or **Usage** data source, filtered by `child_org_name` | Usage and estimated usage metrics (`datadog.usage.*`, `datadog.estimated_usage.*`) from all connected customer orgs roll up to your Admin Org, tagged by customer, so you can build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][5]. |
-| End-customer pricing management | Preview | {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Pricing** | Configure margins per customer and let customers view their own Datadog costs directly within their org. |
-| Customer contracts management | Preview | {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Contracts** | A centralized view inside your Admin Org for managing your book of business: customers, contracts, invoices, renewal alerts, and margin visibility. |
+### Cost and usage visibility
+
+In your Admin Org, go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} to view estimated, historical, and projected cost and billable usage data across all your connected customer organizations, with the option to group and filter by customer, product, and account. See [Plan and Usage Experience for Partners][2] for the full walkthrough of this view.
 
 <!-- TODO: screenshot of the Plan & Usage > Usage & Cost tab in an Admin Org, showing cost/usage rolled up across customer orgs -->
-{{< img src="partners/multi_tenant_billing/plan_and_usage_admin_org.png" alt="Plan and Usage view inside an Admin Org" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/plan_and_usage_admin_org.png" alt="Plan and Usage view inside an Admin Org, showing cost and usage rolled up across customer organizations" style="width:100%;" >}}
+
+### Usage Metering API
+
+Access the same cost and usage data programmatically through the [Usage Metering API][3], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family across all connected customer orgs.
+
+### Trial Org provisioning
+
+Provision trial Datadog organizations for prospective customers directly from your Admin Org, without contacting Datadog for each trial. Go to {{< ui >}}Dashboards{{< /ui >}} and open the **Trial Org Provisioning** dashboard. See [Trial Org Provisioning][4] for the full walkthrough.
+
+<!-- TODO: screenshot of the Trial Org Provisioning dashboard/form inside an Admin Org -->
+{{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning dashboard inside an Admin Org" style="width:100%;" >}}
+
+### Customer org linking
+
+Your customer organizations link to your Admin Org automatically, based on your active contract with them, giving you a unified view across all your customers without any manual setup per customer.
+
+### Usage metrics roll-up (Preview)
+
+Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from all connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` so you can attribute them to a specific customer. Use these metrics like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][5] for the metrics reference.
+
+<!-- TODO: screenshot of a dashboard querying rolled-up usage metrics filtered by child_org_name -->
+{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
+
+### End-customer pricing management (Preview)
+
+Configure margins per customer from {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Pricing**, and let customers view their own Datadog costs directly within their org.
+
+<!-- TODO: screenshot of the Customer Pricing tab under Plan & Usage in an Admin Org -->
+{{< img src="partners/multi_tenant_billing/customer_pricing.png" alt="Customer Pricing tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
+
+### Customer contracts management (Preview)
+
+A centralized view inside your Admin Org, under {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Contracts**, for managing your book of business: customers, contracts, invoices, renewal alerts, and margin visibility.
+
+<!-- TODO: screenshot of the Customer Contracts tab under Plan & Usage in an Admin Org -->
+{{< img src="partners/multi_tenant_billing/customer_contracts.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
 
 <div class="alert alert-info">
 Preview capabilities are available to a limited set of partners while Datadog validates them. Contact <a href="mailto:partner-support@datadoghq.com">partner-support@datadoghq.com</a> if you're interested in joining a preview.
