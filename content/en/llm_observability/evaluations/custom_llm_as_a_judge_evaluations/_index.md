@@ -516,6 +516,15 @@ Results are available across Agent Observability in near-real-time for published
 
 {{< img src="llm_observability/evaluations/custom_llm_judge_3-2.png" alt="The Evaluations tab of a trace, displaying custom evaluation results alongside managed evaluations." style="width:100%;" >}}
 
+### Health tab and Evaluation Traces table
+
+When evaluation tracing is enabled, the evaluation detail page includes a {{< ui >}}Health{{< /ui >}} tab for inspecting judge run volume, usage, cost, and failures.
+
+- Summary cards show {{< ui >}}Spans Evaluated{{< /ui >}}, {{< ui >}}Token Usage{{< /ui >}}, {{< ui >}}Cost{{< /ui >}}, and {{< ui >}}Errors{{< /ui >}}. The {{< ui >}}Evaluation Traces{{< /ui >}} table below uses the same columns for every selected card: Evaluated at, Evaluated Span (or Evaluated Session for session-scoped evaluations), Result, Duration, Input Tokens, Output Tokens, Total Tokens, and Cost. To show Content, Reasoning, and Model, open the {{< ui >}}Columns{{< /ui >}} manager in the table toolbar.
+- Select a summary card to sort the table by that card's primary metric. For example, {{< ui >}}Token Usage{{< /ui >}} sorts by total tokens, {{< ui >}}Cost{{< /ui >}} sorts by cost, and {{< ui >}}Errors{{< /ui >}} filters {{< ui >}}Run status{{< /ui >}} to errors only. The columns stay the same when you switch cards.
+- Above the table, use {{< ui >}}Run status{{< /ui >}} (All, OK, Error) to filter by whether the judge run succeeded or failed, and {{< ui >}}Judge result{{< /ui >}} (All, Pass, Fail) to filter by the judge's pass/fail assessment. A {{< ui >}}Reset filters{{< /ui >}} button appears after any filter changes from its default. {{< ui >}}Judge result{{< /ui >}} is disabled unless assessment criteria are configured for the evaluation.
+- The evaluated subject name in the {{< ui >}}Evaluated Span{{< /ui >}} or {{< ui >}}Evaluated Session{{< /ui >}} column is a link. Select it to open that span or session in the trace-detail side panel and navigate from a judge trace back to the subject it evaluated.
+
 Each evaluation result includes:
 
 - The evaluated value (for example `True`, `9`, or `Neutral`)
