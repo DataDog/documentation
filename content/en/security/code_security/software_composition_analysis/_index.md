@@ -8,9 +8,6 @@ aliases:
 - /security/application_security/vulnerability_management/
 
 further_reading:
-  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
-    tag: Blog
-    text: Detect and block exposed credentials with Datadog Secret Scanning
   - link: /security/code_security/software_composition_analysis/setup_static/
     tag: Documentation
     text: Set up Static SCA
@@ -26,6 +23,9 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
   - link: "https://www.datadoghq.com/blog/smart-vulnerability-remediation/"
     tag: "Blog"
     text: "Take a smarter approach to vulnerability remediation with Datadog"
@@ -35,6 +35,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
     tag: "Blog"
     text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
 
 ---
 ## Overview
