@@ -11198,8 +11198,7 @@ menu:
           - v2
         operationids:
           - FetchDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: Execute a tabular DDSQL query
       url: /api/latest/ddsql/execute-a-tabular-ddsql-query/
@@ -11211,8 +11210,7 @@ menu:
           - v2
         operationids:
           - ExecuteDdsqlTabularQuery
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
