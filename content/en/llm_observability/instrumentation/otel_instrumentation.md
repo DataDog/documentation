@@ -766,7 +766,7 @@ Other non-empty OpenInference attributes with values of 256 characters or fewer 
 
 ### Langfuse attribute mappings
 
-This section documents Langfuse-specific attribute mappings for applications using [Langfuse's native OpenTelemetry instrumentation][37].
+This section documents Langfuse-specific attribute mappings for applications using [Langfuse's native OpenTelemetry instrumentation][13].
 
 #### Detection
 
@@ -787,7 +787,7 @@ A span is treated as a Langfuse span when it carries a non-empty `langfuse.obser
 
 | Langfuse Attribute | Agent Observability Field | Notes |
 |---------------------|--------------|-------|
-| `langfuse.observation.metadata.ls_provider` | `meta.model_provider` | Fallback when `gen_ai.provider.name` and `gen_ai.system` are absent |
+| `langfuse.observation.metadata.ls_provider` | `meta.model_provider` | |
 | `langfuse.observation.model.name` | `meta.model_name` | Fallback when `gen_ai.response.model` and `gen_ai.request.model` are absent |
 
 #### Token usage metrics
@@ -807,7 +807,7 @@ A span is treated as a Langfuse span when it carries a non-empty `langfuse.obser
 
 #### Input and output messages
 
-`langfuse.observation.input` and `langfuse.observation.output` carry a JSON-encoded value that can be a chat-message array, a single message object, or arbitrary JSON/string content. These are the lowest-priority source and are only used when no `gen_ai.*` message attributes exist.
+`langfuse.observation.input` and `langfuse.observation.output` carry a JSON-encoded value that can be a chat-message array, a single message object, or arbitrary JSON/string content. These are the lowest-priority sources and are only used when no `gen_ai.*` message attributes exist.
 
 Each message is converted to the parts-based message shape:
 
@@ -896,3 +896,4 @@ with tracer.start_as_current_span("my-span") as span:
 [10]: /opentelemetry/compatibility/#feature-compatibility
 [11]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
+[13]: https://langfuse.com/integrations/native/opentelemetry
