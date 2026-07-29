@@ -16,7 +16,7 @@ further_reading:
   text: "Getting Started with Workflow Automation"
 - link: "/actions/workflows/access_and_auth/#workflow-identity"
   tag: "Documentation"
-  text: "Find out more about the identity a workflow runs as"
+  text: "Find out more about the identity used to run a workflow"
 - link: "dashboards"
   tag: "Documentation"
   text: "Find out more about setting up a dashboard"

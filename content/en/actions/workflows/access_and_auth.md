@@ -26,9 +26,9 @@ A few tools control access and authentication for workflows and their components
 ## Workflow identity
 
 Every run of a workflow uses a single Datadog identity, controlled by the workflow's {{< ui >}}Run as{{< /ui >}} setting. That identity determines:
-- which [connections][6] a run can resolve, including connections that use [private action runners][10]
-- which Datadog resources a run can read and modify
-- which user the actions in a run are attributed to, in [audit trails][1] and in the products those actions touch
+- Which [connections][6] a run can resolve, including connections that use [private action runners][10]
+- Which Datadog resources a run can read and modify
+- Which user a run's actions are attributed to, in [audit trails][1] and in the products those actions touch
 
 A workflow can run as one of the following identities:
 
@@ -36,7 +36,7 @@ A workflow can run as one of the following identities:
 : The workflow runs as its owner, and any editor of the workflow can access the same resources as the owner. A new workflow runs as its owner by default.
 
 {{< ui >}}Initiator{{< /ui >}}
-: The workflow runs as the user who triggered the run, so each run is limited to the resources that user can access. Supported for [triggers][4] that have an end user.
+: The workflow runs as the user who triggered the run, so each run is limited to the resources that user can access. The Initiator identity is only supported for [triggers][4] that have an end user.
 
 {{< ui >}}Service Account{{< /ui >}}
 : The workflow runs as a service account associated with the workflow. Use a service account to control the exact permissions a run has, with roles you choose for the workflow.
@@ -52,7 +52,7 @@ Select an identity when you publish a workflow, or change it at any time:
 
 The following restrictions apply:
 - Only the owner of the workflow can select {{< ui >}}Owner{{< /ui >}} or {{< ui >}}Initiator{{< /ui >}}.
-- To select {{< ui >}}Service Account{{< /ui >}}, you need either the Datadog admin role, or a custom role with the {{< ui >}}Service Account Write{{< /ui >}} permission.
+- To select {{< ui >}}Service Account{{< /ui >}}, you need either the Datadog Admin Role or a custom role with the {{< ui >}}Service Account Write{{< /ui >}} permission.
 
 To see the identity a workflow uses, hover over the workflow name in the editor and read the {{< ui >}}Run as{{< /ui >}} field.
 
