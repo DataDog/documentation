@@ -1,6 +1,6 @@
 ---
 title: Frustration Signals
-description: "Identify user friction in your .NET MAUI app with RUM frustration signals, including rage taps and error taps, to improve user experience."
+description: "Identify user friction in your .NET MAUI app with RUM frustration signals, including error taps, to improve user experience."
 further_reading:
 - link: /real_user_monitoring/explorer/
   tag: Documentation

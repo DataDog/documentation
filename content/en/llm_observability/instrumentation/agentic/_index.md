@@ -68,6 +68,17 @@ Follow the instructions for the detected language:
 | Java | [Java Application Agentic Instrumentation](/llm_observability/instrumentation/agentic/java.md) |
 | OpenTelemetry | [OpenTelemetry Instrumentation](/llm_observability/instrumentation/otel_instrumentation.md) |
 
+## Instrument prompts and offer Prompt Management
+
+Prompt Tracking is part of the default Agent Observability instrumentation. Identify the prompt-construction boundary for each selected LLM call and preserve the prompt template separately from its dynamic variables.
+
+1. If the user's request already specifies a Datadog managed prompt ID, follow the [Prompt Management agentic integration guide](/llm_observability/instrumentation/agentic/prompt_management.md). Do not ask whether to use Prompt Management again.
+2. Otherwise, identify the application's prompts and the dynamic variables used to format them. Preserve the existing provider, model, prompt content, and application behavior.
+3. For a supported Python application, tell the user which prompts you identified and ask whether they want to manage those prompts with Datadog. If they agree, follow the [Prompt Management agentic integration guide](/llm_observability/instrumentation/agentic/prompt_management.md) to promote the selected local prompts and replace their local construction with managed-prompt retrieval.
+4. If the user declines Prompt Management, or the application language is unsupported, instrument the selected prompts with structured prompt metadata by following the [Prompt Tracking instructions](/llm_observability/monitoring/prompt_tracking). Do not add runtime prompt retrieval.
+
+When Prompt Management replaces a local prompt, use the managed prompt's automatic tracking rather than attaching duplicate structured prompt metadata.
+
 ## Viewing traces
 
 Let the user know that they can hit their application and see data in Datadog.

@@ -13,9 +13,6 @@ further_reading:
 - link: "mcp_server/tools"
   tag: "Documentation"
   text: "Datadog MCP Server Tools"
-- link: "ide_plugins/vscode/?tab=cursor"
-  tag: "Documentation"
-  text: "Datadog Extension for Cursor"
 ---
 
 Learn how to set up and configure the Datadog MCP Server, which lets you retrieve telemetry insights and manage platform features directly from AI-powered clients. Select your client:
@@ -674,9 +671,11 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
+- `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
 - `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
+- `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
 - `dbm`: Tools for interacting with [Database Monitoring][33]
 - `ddsql`: Tools for querying Datadog data using [DDSQL][44], a SQL dialect with support for infrastructure resources, logs, metrics, RUM, spans, and other Datadog data sources
 - `error-tracking`: Tools for interacting with Datadog [Error Tracking][32]
@@ -742,6 +741,10 @@ Users with the {{< ui >}}Datadog Standard Role{{< /ui >}} have both MCP Server p
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 Organization administrators can manage global MCP access and write capabilities from [Organization Settings][27].
+
+### Restrict network access
+
+To control which networks can connect to the Datadog MCP Server, enable the [IP allowlist][68]. This prevents users from connecting to the MCP Server from unapproved origins, even if they have the required permissions.
 
 ## Authentication
 
@@ -924,13 +927,16 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
-[58]: https://partners.datadoghq.com/s/login/SelfRegister
+[58]: /getting_started/profiler/
 [59]: https://chatgpt.com/
 [60]: https://www.datadoghq.com/product-preview/mcp-codexec/
-[61]: /getting_started/profiler/
+[61]: https://partners.datadoghq.com/s/login/SelfRegister
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
 [65]: https://awesome-copilot.github.com/plugins/#file=plugins%2Fdatadog
 [66]: /account_management/personal-access-tokens/
 [67]: /account_management/service-access-tokens/
+[68]: /account_management/org_settings/ip_allowlist/
+[69]: /data_observability/
+[70]: /account_management/audit_trail/

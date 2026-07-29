@@ -19,6 +19,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-nlq"
     tag: "Blog"
     text: "How we cut our NLQ agent debugging time from hours to minutes with LLM Observability"
+  - link: "https://www.datadoghq.com/blog/offline-llm-evaluations/"
+    tag: "Blog"
+    text: "Offline evaluation for AI agents: Best practices"
+  - link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
+    tag: "Blog"
+    text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+  - link: "https://www.datadoghq.com/blog/llm-experimentation-autoresearch/"
+    tag: "Blog"
+    text: "How we made a SQL query optimization agent 59% more accurate using autoresearch and Agent Observability"
 ---
 
 {{< img src="llm_observability/experiments/Experiments_LLMO.png" alt="Agent Observability, Experiment view. Heading: 'Comparing 6 experiments across 9 fields'. Line graph visualization charting the accuracy, correctness, duration, estimated cost, and other metrics of various experiments." style="width:100%;" >}}

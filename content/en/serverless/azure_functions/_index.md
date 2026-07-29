@@ -62,9 +62,9 @@ If you haven't already, install the [Datadog-Azure integration][5] to collect me
 
    ```python
    from datadog_serverless_compat import start
-   import ddtrace.auto
-
    start()
+
+   import ddtrace.auto # noqa: E402, F401
    ```
 
 3. **Configure the Datadog Python SDK**

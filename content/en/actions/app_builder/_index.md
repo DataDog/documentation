@@ -39,7 +39,16 @@ further_reading:
   tag: "Learning Center"
   text: "Build Self-Serve Apps with App Builder for Third-Party Integrations"
 
+site_support_id: app_builder_override
+cascade:
+    site_support_id: app_builder_override
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 ## Overview 
 

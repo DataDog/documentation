@@ -4,6 +4,12 @@ description: Input parameters allow you to embed the same app in multiple dashbo
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App Builder is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Input parameters allow you to embed the same app in multiple dashboards or notebooks using different configurations for each instance. 
 
 ## Example app

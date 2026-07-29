@@ -10,6 +10,15 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
   tag: "Learning Center"
   text: "Investigate with LLM Observability"
+- link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
+  tag: "Blog"
+  text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+- link: "https://www.datadoghq.com/blog/offline-llm-evaluations/"
+  tag: "Blog"
+  text: "Offline evaluation for AI agents: Best practices"
+- link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
+  tag: "Blog"
+  text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
 - link: "https://www.datadoghq.com/blog/llm-observability-at-datadog-dashboards"
   tag: "Blog"
   text: "Building reliable dashboard agents with Datadog LLM Observability"
@@ -85,7 +94,7 @@ Monitor the cost, latency, performance, and usage trends for all your LLM applic
 
 Understand what users are asking your LLM application, identify coverage gaps, and monitor the quality of responses over time with [Patterns][10] — automated hierarchical topic clustering of your production traffic.
 
-{{< img src="llm_observability/topic-detail.png" alt="Topic detail view showing scatter plot of interaction embeddings alongside a table of interactions with topic labels and confidence score" style="width:100%;" >}}
+{{< img src="llm_observability/patterns_topic_details.png" alt="The topic detail view showing a summary of the topic, the total interaction count, and a table of interactions with child topic label, input text, and timestamp." style="width:100%;" >}}
 
 ## Safeguard sensitive data and identify malicious users
 

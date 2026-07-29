@@ -5,6 +5,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
     text: Manage metric volume and tags in your environment with Observability Pipelines
+  - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+    tag: "Blog"
+    text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs
@@ -16,14 +19,9 @@ products:
 
 {{< product-availability >}}
 
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
- btn_hidden="false" header="Join the Preview!">}}
-Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
-{{< /callout >}}
-
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics ({{< tooltip glossary="preview" case="title" >}}) from your OTel Collector through HTTP or gRPC.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).

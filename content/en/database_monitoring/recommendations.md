@@ -8,6 +8,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/database-monitoring-query-regressions/"
     tag: "Blog"
     text: "Detect and investigate query regressions with Datadog Database Monitoring"
+  - link: "https://www.datadoghq.com/blog/detect-inefficient-index-scans-with-dbm/"
+    tag: "Blog"
+    text: "Not all index scans are equal: How we cut query latency by over 99%"
 ---
 
 Database Monitoring (DBM) Recommendations draw attention to potential optimizations and problematic areas across your database fleet.

@@ -18,6 +18,12 @@ further_reading:
       text: "Monitor AWS WAF activity with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 App and API Protection integrates with AWS Web Application Firewall (WAF) by:
 
 1. Converting logs to traces to gain visibility into monitored and blocked requests

@@ -14,7 +14,3 @@ What this pack does:
 - Parses logs into structured fields
 - Extracts DNS response code and DHCP event metrics
 - Normalizes request data and samples high-volume events
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}

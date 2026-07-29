@@ -86,7 +86,11 @@ Configure automated Flaky Test Policies to govern how flaky tests are handled in
        </tr>
        <tr>
          <td>{{< ui >}}Fixed{{< /ui >}}</td>
-         <td>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</td>
+         <td>
+           <p>If a flaky test no longer flakes for 30 days, it is automatically moved to the Fixed state. This automation is default behavior and can't be customized.</p>
+           <p>Before Datadog automatically moves a flaky test to {{< ui >}}Fixed{{< /ui >}}, it checks whether the test may be broken rather than fixed. A broken test is a flaky test whose recent executions all failed, resulting in a 100% failure rate over the last 7 days. Datadog does not automatically mark these tests as fixed, which helps prevent quarantined tests that still fail from breaking CI again.</p>
+           <p>Use the {{< ui >}}Broken test{{< /ui >}} facet in the Flaky Tests Management explorer to identify these tests. Filter on <code>broken_test:true</code> to show tests with a 100% failure rate over the last 7 days.</p>
+         </td>
        </tr>
      </tbody>
    </table>
@@ -217,7 +221,7 @@ Notifications are bundled over a short period to reduce noise. The weekly digest
 | {{< ui >}}Fix successful{{< /ui >}} | A test passes all retries in the remediation flow and is marked as "fix in progress". |
 | {{< ui >}}Fix failed{{< /ui >}} | A test fails during the remediation flow. |
 | {{< ui >}}Manual state change{{< /ui >}} | A user manually changes the state of a flaky test. |
-| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured. This notification is currently available to a subset of customers. |
+| {{< ui >}}Weekly digest summary{{< /ui >}} | **Beta**: A weekly summary sent every Monday, reporting the current state of flaky tests and changes since the previous week, grouped by repository and code owner. Only sent to notification rules that have code owners configured, and can be turned off per rule from the rule's notification settings. |
 
 {{< img src="tests/flaky_management_notifications_settings-3.png" alt="Notifications settings UI." style="width:100%;" >}}
 
@@ -246,10 +250,6 @@ If you are using `@slack-CHANNEL` (without the account name), the notification i
 To find your account name, go to the [Slack integration tile][5] and check the
 {{< ui >}}Account Name{{< /ui >}} field for the workspace you want to use.
 
-### Weekly digest summary notifications cannot be disabled
-
-The weekly digest summary notification does not have a self-service opt-out. To disable it, contact [Datadog Support][14].
-
 ### Attempt-to-fix remediation does not trigger after linking a fix
 
 After you include the test key (for example, `DD_ABC123`) in a commit, Datadog scans the commit that triggered the test run and up to the 10 most recent commits before it. If the remediation flow does not start, check the following:
@@ -275,7 +275,6 @@ After you include the test key (for example, `DD_ABC123`) in a commit, Datadog s
 [11]: /tests/setup/ruby/
 [12]: /tests/setup/swift/
 [13]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[14]: /help/
 [16]: /bits_ai/bits_code/
 [17]: /integrations/guide/source-code-integration/
 [18]: /api/latest/test-optimization/

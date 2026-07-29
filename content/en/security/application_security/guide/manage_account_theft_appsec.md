@@ -3,6 +3,12 @@ title: Managing Account Theft with AAP
 disable_toc: false
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Users are trusted entities in your systems with access to sensitive information and the ability to perform sensitive actions. Malicious actors have identified users as an opportunity to target websites and steal valuable data and resources.
 
 Datadog App and API Protection (AAP) provides [built-in][1] detection and protection capabilities to help you manage this threat. 

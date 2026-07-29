@@ -14,18 +14,21 @@ further_reading:
   - link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting/
     tag: Documentation
     text: "Troubleshooting Single Step APM"
-  - link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
-    tag: Learning Center
-    text: Troubleshooting APM Instrumentation on a Host
   - link: /tracing/guide/local_sdk_injection
     tag: Documentation
     text: Instrument your applications using local SDK injection
+  - link: https://learn.datadoghq.com/courses/troubleshooting-apm-instrumentation-on-a-host
+    tag: Learning Center
+    text: Troubleshooting APM Instrumentation on a Host
   - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
     tag: "Blog"
     text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
   - link: "https://www.datadoghq.com/blog/rum-apm-single-step"
     tag: "Blog"
     text: "Enable end-to-end visibility into your Java apps with a single command"
+  - link: "https://www.datadoghq.com/blog/single-step-instrumentation-rules/"
+    tag: "Blog"
+    text: "Manage service tracing across hosts with Single Step Instrumentation rules"
 ---
 ## Overview
 

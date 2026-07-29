@@ -17,7 +17,7 @@ BYOC (Bring Your Own Cloud) Logs is Datadog's log management solution for organi
 {{< whatsnext desc="Follow our guides to get BYOC Logs up and running:">}}
   {{< nextlink href="/byoc-logs/introduction/" >}}What is BYOC Logs?{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/quickstart/" >}}Quickstart: Run BYOC Logs locally in 5 minutes{{< /nextlink >}}
-  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC Logs on AWS, Azure, or custom Kubernetes{{< /nextlink >}}
+  {{< nextlink href="/byoc-logs/install/" >}}Installation - Deploy BYOC Logs on AWS, GCP, or Azure{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/ingest/agent/" >}}Ingest Logs - Configure the Datadog Agent to send logs to BYOC Logs{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/operate/search_logs" >}}Search Logs - Explore your logs in the Datadog Log Explorer{{< /nextlink >}}
   {{< nextlink href="/byoc-logs/guides/" >}}Guides - Step-by-step guides for BYOC Logs features and integrations{{< /nextlink >}}
