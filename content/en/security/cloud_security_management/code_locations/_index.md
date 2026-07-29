@@ -20,7 +20,15 @@ products:
 
 ## Overview
 
-A Cloud Security misconfiguration finding starts from a live cloud resource—for example, a Google Kubernetes Engine node pool that fails the rule *Secure Boot for Shielded GKE Nodes should be enabled*. Code location connects that finding to the Terraform that defines the resource, so you can fix the problem where it originates instead of in the cloud console, where a manual change is reverted the next time your infrastructure-as-code is applied.
+A Cloud Security misconfiguration finding starts from a live cloud resource, such as an S3 bucket. The next question is usually where that bucket is defined in your codebase, so you can fix it at the source. Code location answers that by connecting the finding to the infrastructure as code (IaC) that created the resource, so the fix holds instead of being reverted the next time your IaC is applied.
+
+Code location applies only to resources defined in IaC. A resource created at runtime (through the CLI, the cloud console, or an SDK) has no code to link to.
+
+### Supported IaC formats
+
+- Terraform
+
+### What a code location shows
 
 When Datadog resolves a code location for a finding, the finding side panel shows the repository, file, and line that define the resource, a link to those lines in your source control provider, and the code owners responsible for the file.
 
@@ -31,9 +39,19 @@ When Datadog resolves a code location for a finding, the finding side panel show
 To see code locations on your misconfiguration findings, you need:
 
 - [Cloud Security Misconfigurations][1] enabled for the cloud accounts you want to scan, so that findings are generated.
-- [Source Code Integration][2] connected to the repositories that contain the Terraform for those resources. Datadog indexes the Terraform in your connected repositories to determine where each resource is defined.
+- [Source Code Integration][2] connected to the repositories that contain your IaC. Datadog indexes supported IaC files in your connected repositories to determine where each resource is defined.
 
 After both are configured, Datadog resolves code locations for supported resources automatically. Coverage increases as you connect more of the repositories that manage your cloud infrastructure.
+
+## Improve code location coverage
+
+Datadog resolves code locations most reliably when it can read the state your IaC tool maintains. State maps each resource in your cloud account to the block of code that declares it, which gives Datadog a definitive match. Without it, Datadog infers the match from resource names and attributes, and resolves code locations for fewer findings.
+
+### Terraform state files
+
+If you store Terraform state in Amazon S3, enable [Agentless Scanning][9]. Agentless Scanning already has the read access needed to locate state files in your S3 buckets, so no additional configuration is required. Datadog reads only the fields needed to resolve code locations from each state file.
+
+<div class="alert alert-info">State file scanning supports Terraform state stored in Amazon S3.</div>
 
 ## View the code location for a finding
 
@@ -44,7 +62,7 @@ After both are configured, Datadog resolves code locations for supported resourc
 
 ## Filter findings by code location
 
-To focus on findings that Datadog can trace to source code, search the Misconfigurations findings page for `@code_location.filename:*`. This returns every misconfiguration for which a code location is resolved—effectively a view of what you can currently remediate in code.
+To focus on findings that Datadog can trace to source code, search the Misconfigurations findings page for `@code_location.filename:*`. This returns every misconfiguration for which a code location is resolved—effectively a view of what you can remediate in code.
 
 Narrow the results further, for example:
 
@@ -55,7 +73,7 @@ Narrow the results further, for example:
 
 After you locate the code that defines a misconfigured resource, you can remediate it in several ways:
 
-- **Open a pull request.** For supported Terraform resources, Datadog can generate a pull request in your source control provider with the code changes that fix the underlying misconfiguration. Review and merge the pull request to remediate at the source.
+- **Remediate with AI.** Click **Remediate with AI** on the finding to hand the fix to [Bits Code][7], or to copy a fix prompt into the coding agent you already use. See [Remediate with AI][8].
 - **Route to the right team.** Use the code owners shown on the finding to assign the fix to the team that owns the file, or [create a ticket][4] in your ticketing tool.
 - **Automate remediation.** Use [Workflow Automation][5] to build automated remediation workflows, with or without human approval.
 
@@ -71,3 +89,6 @@ If a misconfiguration doesn't apply to your environment or is an accepted risk, 
 [4]: /security/ticketing_integrations/
 [5]: /security/cloud_security_management/review_remediate/workflows/
 [6]: /security/cloud_security_management/review_remediate/mute_issues/
+[7]: /bits_ai/bits_code/
+[8]: /security/cloud_security_management/review_remediate/remediate_with_ai/
+[9]: /security/cloud_security_management/setup/agentless_scanning/

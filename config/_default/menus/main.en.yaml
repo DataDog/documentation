@@ -8317,6 +8317,11 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
+    - name: Remediate with AI
+      url: security/cloud_security_management/review_remediate/remediate_with_ai
+      parent: csm_review_remediate
+      identifier: csm_remediate_with_ai
+      weight: 103
     - name: Triage and Prioritize
       url: security/cloud_security_management/triage_and_prioritize/
       parent: csm
