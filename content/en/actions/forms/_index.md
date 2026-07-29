@@ -88,7 +88,6 @@ From the [Forms][2] page, click a form to open it in the editor. In the editor h
 | Clone Form | Create a copy of the form. |
 | Import Form | Import fields from a PDF or JSON file into the current form. |
 | Export Form (JSON) | Download the form as a JSON file. |
-<!-- | Limit to 1 response | When enabled, prevents the same person from submitting more than one response. | -->
 
 For more information on managing responses, see [Form responses][4].
 
@@ -168,4 +167,3 @@ By default, only the creator of a form can access it. To change the permissions 
 [8]: https://app.datadoghq.com/workflow/blueprints
 [9]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [10]: https://app.datadoghq.com/workflow
-[11]: /bits_ai/bits_chat/
