@@ -1,5 +1,6 @@
 ---
 title: Code Locations
+description: Connect Cloud Security misconfiguration findings to the infrastructure as code (IaC) that defines the affected resource so you can remediate at the source.
 further_reading:
 - link: "/security/cloud_security_management/misconfigurations/"
   tag: "Documentation"
@@ -45,13 +46,11 @@ After both are configured, Datadog resolves code locations for supported resourc
 
 ## Improve code location coverage
 
-Datadog resolves code locations most reliably when it can read the state your IaC tool maintains. State maps each resource in your cloud account to the block of code that declares it, which gives Datadog a definitive match. Without it, Datadog infers the match from resource names and attributes, and resolves code locations for fewer findings.
+Datadog resolves code locations most reliably when it can read the state your IaC tool maintains. States map each resource in your cloud account to the block of code that declares it, which gives Datadog a definitive match. Without it, Datadog infers the match from resource names and attributes, and resolves code locations for fewer findings.
 
 ### Terraform state files
 
-If you store Terraform state in Amazon S3, enable [Agentless Scanning][9]. Agentless Scanning already has the read access needed to locate state files in your S3 buckets, so no additional configuration is required. Datadog reads only the fields needed to resolve code locations from each state file.
-
-<div class="alert alert-info">State file scanning supports Terraform state stored in Amazon S3.</div>
+If you store Terraform states in Amazon S3, enable [Agentless Scanning][9]. Agentless Scanning already has the read access needed to locate state files in your S3 buckets, so no additional configuration is required. Datadog reads only the fields needed to resolve code locations from each state file.
 
 ## View the code location for a finding
 
@@ -64,18 +63,18 @@ If you store Terraform state in Amazon S3, enable [Agentless Scanning][9]. Agent
 
 To focus on findings that Datadog can trace to source code, search the Misconfigurations findings page for `@code_location.filename:*`. This returns every misconfiguration for which a code location is resolved—effectively a view of what you can remediate in code.
 
-Narrow the results further, for example:
+You can narrow the results further. For example:
 
-- `@code_location.filename:*.tf` returns findings whose code location is in a Terraform file.
+- `@code_location.filename:*.tf` returns findings whose code locations are in Terraform files.
 - `@code_location.filename:*network*` returns findings defined in your network modules.
 
 ## Remediate in source code
 
 After you locate the code that defines a misconfigured resource, you can remediate it in several ways:
 
-- **Remediate with AI.** Click **Remediate with AI** on the finding to hand the fix to [Bits Code][7], or to copy a fix prompt into the coding agent you already use. See [Remediate with AI][8].
-- **Route to the right team.** Use the code owners shown on the finding to assign the fix to the team that owns the file, or [create a ticket][4] in your ticketing tool.
-- **Automate remediation.** Use [Workflow Automation][5] to build automated remediation workflows, with or without human approval.
+- **Remediate with AI**: Click **Remediate with AI** on the finding to hand off the fix to [Bits Code][7], or to copy a fix prompt into the coding agent you already use. See [Remediate with AI][8].
+- **Route to the right team**: Use the code owners shown on the finding to assign the fix to the team that owns the file, or [create a ticket][4] in your ticketing tool.
+- **Automate remediation**: Use [Workflow Automation][5] to build automated remediation workflows, with or without human approval.
 
 If a misconfiguration doesn't apply to your environment or is an accepted risk, you can [mute it][6] instead.
 
@@ -85,7 +84,7 @@ If a misconfiguration doesn't apply to your environment or is an accepted risk, 
 
 [1]: /security/cloud_security_management/misconfigurations/
 [2]: /integrations/guide/source-code-integration/
-[3]: /security/cloud_security_management/misconfigurations/findings/
+[3]: https://app.datadoghq.com/security/csm/misconfigurations-and-attack-paths
 [4]: /security/ticketing_integrations/
 [5]: /security/cloud_security_management/review_remediate/workflows/
 [6]: /security/cloud_security_management/review_remediate/mute_issues/

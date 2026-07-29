@@ -63,7 +63,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Bits Investigation][17]         | Generates code remediations based on Bits Investigations |
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
-| [Cloud Security][30]      | Remediates [misconfiguration findings][31] in the IaC that defines the affected resource |
+| [Cloud Security][34]      | Remediates [misconfiguration findings][35] in the IaC that defines the affected resource |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
 | [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26] (individually or in bulk)  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
@@ -141,8 +141,8 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [27]: /account_management/billing/ai_credits/
 [28]: /bits_ai/bits_code/automations/
 [29]: https://app.datadoghq.com/code/automations
-[30]: /security/cloud_security_management/
-[31]: /security/cloud_security_management/review_remediate/remediate_with_ai/
+[34]: /security/cloud_security_management/
+[35]: /security/cloud_security_management/review_remediate/remediate_with_ai/
 [30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
