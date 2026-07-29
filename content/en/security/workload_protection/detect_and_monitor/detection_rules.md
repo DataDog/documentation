@@ -1,5 +1,7 @@
 ---
 title: Detection rules
+aliases:
+  - /security/workload_protection/setup/ootb_rules/
 disable_toc: false
 ---
 
@@ -14,6 +16,8 @@ This page explains how out-of-the-box (OOTB) detection rules work and how to cre
 ## OOTB detection rules {#ootb-detection-rules}
 
 Workload Protection includes OOTB **threat detection** rules maintained by Datadog. They combine telemetry collected through Agent rules with backend expressions to raise security signals when activity looks suspicious. Browse the full catalog in [default detection rules][3], or review and tune them in the Workload Protection [detection rules][4] list in Datadog.
+
+Datadog develops new default rules on an ongoing basis. New rules are automatically imported into your account, your Workload Protection library, and the Agent, depending on your configuration.
 
 ## Create a custom detection rule
 
