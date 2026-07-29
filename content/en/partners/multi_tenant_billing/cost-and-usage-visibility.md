@@ -15,23 +15,19 @@ further_reading:
 
 ## Overview
 
-After your Admin Org is set up, your customers' Datadog organizations link to it automatically, based on their active contract with you. Linked organizations' usage and cost data becomes visible from your Admin Org, across all Datadog sites they use.
-
-## How customer orgs link to your Admin Org
-
-Linking happens automatically and requires no manual action on your part, as long as your customer's contract correctly references your partnership. A link is removed automatically if the underlying contract expires.
+Customer organizations link to your Admin Org automatically, based on their active contract with you, as long as the contract correctly references your partnership. A link is removed automatically if the underlying contract expires. After linking, a customer's usage and cost data becomes visible from your Admin Org, across all Datadog sites the customer uses.
 
 ## View cost and usage data
 
-In your Admin Org, go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} to view estimated, historical, and projected cost and billable usage data across all your connected customer organizations, with the option to group and filter by customer, product, and account. See [Plan and Usage Experience for Partners][1] for the full walkthrough of this view.
+Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in your Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][1] for details.
 
-You can also access the same data programmatically through the [Usage Metering API][2], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
+The same data is available programmatically through the [Usage Metering API][2], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
 
-## Monitor usage across your book of business (Preview)
+## Monitor usage metrics across your book of business (Preview)
 
-Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from all connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` so you can attribute them to a specific customer. Use these metrics like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][3] for the metrics reference.
+Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][3] for the metrics reference.
 
-This capability is in preview. Contact [partner-support@datadoghq.com][4] if you're interested in joining the preview.
+**Note**: This capability is in preview. Contact [partner-support@datadoghq.com][4] if you're interested in joining the preview.
 
 ## What's next
 
