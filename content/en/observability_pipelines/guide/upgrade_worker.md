@@ -33,8 +33,7 @@ Worker version 2.20.0 gives you access to the following:
 
 - The Split Array processor's performance has been improved.
 - The HTTP/S Server source now uses a case-insensitive match for the header name field when you configure authentication tokens.
-- The Splunk HEC source now supports the `enabled` field on `valid_tokens` entries. Disabled tokens are excluded from authentication and enrichment.
-- The Splunk HEC source now accepts an optional list of valid tokens for authenticating events.
+- The Splunk HEC source now accepts an optional list of tokens for authenticating events.
 
 #### Fixes
 
