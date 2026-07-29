@@ -17120,6 +17120,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Config
+      url: /api/latest/rum-config/
+      identifier: rum-config
+      generated: true
+    - name: Create the RUM configuration
+      url: /api/latest/rum-config/create-the-rum-configuration/
+      identifier: rum-config-create-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Update the RUM configuration
+      url: /api/latest/rum-config/update-the-rum-configuration/
+      identifier: rum-config-update-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get the RUM configuration
+      url: /api/latest/rum-config/get-the-rum-configuration/
+      identifier: rum-config-get-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumConfig
+        unstable:
+          - v2
+        order: 1
     - name: RUM Insights
       url: /api/latest/rum-insights/
       identifier: rum-insights
