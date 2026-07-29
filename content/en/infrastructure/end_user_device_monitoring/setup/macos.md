@@ -204,8 +204,10 @@ Use [Network Path][105] to trace network routes between your devices and destina
 [103]: /agent/supported_platforms/osx/#commands
 [104]: https://app.datadoghq.com/end-user-devices
 [105]: /network_monitoring/network_path/setup/
+
 {{% /tab %}}
-{{% tab "MDM deploy with Jamf Pro" %}}
+
+{{% tab "MDM deploy (example with Jamf Pro)" %}}
 
 This example method uses a Jamf Pro policy and shell script to install and configure the Datadog Agent across your fleet of managed Macs, with no manual steps on each device. The script performs the same actions as the manual install, but runs in the background when the policy triggers.
 
@@ -324,6 +326,7 @@ To confirm that the Agent installed on a device, use one of the following method
 [202]: /getting_started/site/
 [203]: /network_monitoring/network_path/setup/
 [204]: https://app.datadoghq.com/end-user-devices
+
 {{% /tab %}}
 {{< /tabs >}}
 

@@ -77,10 +77,12 @@ For a single device, enable Network Path through [Fleet Automation][105], Datado
 [103]: https://app.datadoghq.com/end-user-devices
 [104]: /network_monitoring/network_path/setup/
 [105]: /agent/fleet_automation/
-{{% /tab %}}
-{{% tab "MDM deploy with Microsoft Intune" %}}
 
-This method packages the Datadog Agent MSI and a PowerShell configuration script into an Intune Win32 app, which Intune pushes to enrolled Windows devices in the background. No manual steps are needed on each device.
+{{% /tab %}}
+
+{{% tab "MDM deploy (example with Microsoft Intune)" %}}
+
+This example method packages the Datadog Agent MSI and a PowerShell configuration script into an Intune Win32 app, which Intune pushes to enrolled Windows devices in the background. No manual steps are needed on each device.
 
 ### Prepare the install script and package files
 
@@ -219,6 +221,7 @@ To confirm that the Agent installed on a device, use one of the following method
 [204]: https://github.com/microsoft/Microsoft-Win32-Content-Prep-Tool
 [205]: https://intune.microsoft.com
 [206]: https://app.datadoghq.com/end-user-devices
+
 {{% /tab %}}
 {{< /tabs >}}
 
