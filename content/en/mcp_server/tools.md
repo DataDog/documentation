@@ -2084,6 +2084,30 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
 
+### `get_prs_by_head_branch`
+*Toolset: **software-delivery***\
+*Permissions Required: `Repository Info Read`*\
+Retrieves all pull requests for a repository that have a specific head branch. Use it to find the pull requests associated with a feature or development branch.
+
+- Is there an open pull request for my branch `feat/add-retry-logic`?
+- Show me the pull requests for the `release/1.x` branch of `github.com/my-org/my-repo`.
+
+### `search_pr_insights`
+*Toolset: **software-delivery***\
+*Permissions Required: `Repository Info Read`*\
+Retrieves the issues blocking a pull request, including failed tests, flaky tests, code quality problems, security vulnerabilities, and failed CI jobs.
+
+- What's blocking PR #123 in `github.com/my-org/my-repo`?
+- Show me the code quality and security violations on my pull request.
+
+### `retry_datadog_ci_job`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Write`*\
+Queues a retry for a failed CI job on GitHub Actions or GitLab. This is a write operation that requires explicit user approval. Server-side limits cap retries at two per workflow run over seven days. The response confirms that the retry was queued, not that it ran, so confirm the new run with `search_datadog_ci_pipeline_events`. On GitHub Actions, every failed job in the workflow run is retried, not only the job you specify. For other CI providers, use the provider's UI to rerun.
+
+- Retry the failed `integration-test` job on my branch.
+- The `build` job failed because of a network timeout; queue a retry.
+
 ## Synthetics
 
 Tools for interacting with Datadog [Synthetic tests][47].
