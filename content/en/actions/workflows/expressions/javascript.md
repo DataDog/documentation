@@ -27,7 +27,7 @@ The action uses the following inline expression in the {{< ui >}}From{{< /ui >}}
 ${ Math.floor(now() / 1000) - 60 }
 ```
 
-{{< img src="/service_management/workflows/timestamp.png" alt="An inline expression using the now() lowdash function" style="width:90%;" >}}
+{{< img src="/actions/workflows/expressions/javascript/timestamp.png" alt="An inline expression using the now() lowdash function" style="width:90%;" >}}
 
 #### Increment a value
 
@@ -38,7 +38,7 @@ The action uses the following inline expression in the {{< ui >}}Desired capacit
 ${ Steps.Describe_auto_scaling_group.autoScalingGroup.DesiredCapacity + 1 }
 ```
 
-{{< img src="/service_management/workflows/increment.png" alt="An inline expression that increments the desired capacity by one" style="width:90%;" >}}
+{{< img src="/actions/workflows/expressions/javascript/increment.png" alt="An inline expression that increments the desired capacity by one" style="width:90%;" >}}
 
 ## JavaScript expression actions
 
@@ -91,4 +91,4 @@ See the test and debug page to learn how to [test a workflow step][3].
 
 [1]: https://lodash.com/
 [2]: /actions/workflows/variables/
-[3]: /service_management/workflows/test_and_debug/#test-a-step
+[3]: /actions/workflows/test_and_debug/#test-a-step

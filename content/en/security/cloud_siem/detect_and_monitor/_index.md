@@ -39,7 +39,7 @@ You can edit OOTB detection rules and do the following:
 
 - Change the name of the rule.
 - Extend the query. The original query cannot be edited, but you can add a custom query to it.
-- Change the severity setting in the Set conditions section.
+- Change the severity setting in the {{< ui >}}Set conditions{{< /ui >}} section.
 - Modify the playbook.
 
 ### Custom detection rules
@@ -57,7 +57,7 @@ Regular audits of all out-of-the-box detection rules are performed to maintain h
 The rule deprecation process is as follows:
 
 1. There is a warning with the deprecation date on the rule. In the UI, the warning is shown in the:
-    - Signal side panel's **Rule Details > Playbook** section
+    - Signal side panel's {{< ui >}}Rule Details{{< /ui >}} > {{< ui >}}Playbook{{< /ui >}} section
     - [Rule editor][3] for that specific rule
 2. Once the rule is deprecated, there is a 15 month period before the rule is deleted. This is due to the signal retention period of 15 months. During this time, you can re-enable the rule by [cloning the rule][3] in the UI.
 3. Once the rule is deleted, you can no longer clone and re-enable it.

@@ -14,12 +14,12 @@ further_reading:
 
 Some implementations lead applications to render a certain way only when using a specific `User-Agent` string (for example, when using a mobile `User-Agent`). In these cases, you need to set the `User-Agent` header to a custom string to be able to record your browser tests' steps in your application. To do so:
 
-1. Open your application in a pop-up by clicking on **Open in Popup** in your browser test recorder.
+1. Open your application in a pop-up by clicking on {{< ui >}}Open in Popup{{< /ui >}} in your browser test recorder.
 2. Open your Chrome Developer Tools.
 3. Click on the menu button with the three vertical dots.
-4. Select the **More tools - Network conditions** option.
-5. Go to the **Network conditions** tab and disable the **Select automatically** option.
-6. Choose **Custom** and enter the `User-Agent` string of interest.
+4. Select the {{< ui >}}More tools - Network conditions{{< /ui >}} option.
+5. Go to the {{< ui >}}Network conditions{{< /ui >}} tab and disable the {{< ui >}}Select automatically{{< /ui >}} option.
+6. Choose {{< ui >}}Custom{{< /ui >}} and enter the `User-Agent` string of interest.
 
 **Note:** You can override the [default `User-Agent` string][1] at test execution time by adding it as a header in your test configuration. 
 

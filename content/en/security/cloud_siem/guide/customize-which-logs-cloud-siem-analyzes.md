@@ -93,22 +93,22 @@ The pre-enrichment evaluation applies to Security Filters only. Detection rules,
 
 <div class="alert alert-info">For most use cases, the easiest way to manage which logs Cloud SIEM analyzes is by enabling or disabling <a href="/security/cloud_siem/ingest_and_enrich/content_packs">Content Packs</a>. Each Content Pack manages its own Security Filter, so toggling a Content Pack adds or removes the corresponding filter automatically. The Security Filters UI described below is provided for fine tuning and custom log control beyond what Content Packs cover.</div>
 
-The Security Filters Configuration section lists every Security Filter, its query, its exclusions, and whether it is currently active. A Preview pane at the bottom of the section streams the logs that reach Cloud SIEM analysis after every enabled filter is applied. Use the Preview pane to validate that your filter configuration produces the expected result.
+The {{< ui >}}Security Filters Configuration{{< /ui >}} section lists every Security Filter, its query, its exclusions, and whether it is currently active. A {{< ui >}}Preview{{< /ui >}} pane at the bottom of the section streams the logs that reach Cloud SIEM analysis after every enabled filter is applied. Use the {{< ui >}}Preview{{< /ui >}} pane to validate that your filter configuration produces the expected result.
 
 {{< img src="security/cloud_siem/guide/siem_settings_page_security_filters.png" alt="The Security Filters Configuration section of the Cloud SIEM settings page, showing a list of configured filters with columns for Name, Filters, and Active, followed by a Preview pane streaming matching logs" style="width:100%;" >}}
 
 ### Create a Security Filter
 
-1. In Datadog, go to **Security** > **Cloud SIEM** > [**Settings**][4].
+1. In Datadog, go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Cloud SIEM{{< /ui >}} > [**Settings**][4].
 1. Scroll to the **Security Filters Configuration** section and click it to expand it.
-1. In the **Security Filters Configuration** section, click **+ New Security Filter**. The New Security Filter window opens.
+1. In the **Security Filters Configuration** section, click {{< ui >}}+ New Security Filter{{< /ui >}}. The {{< ui >}}New Security Filter{{< /ui >}} window opens.
 1. In the **New Security Filter** window, enter:
    - **Name:** A short, descriptive name (for example, `AWS CloudTrail`).
    - **Query:** The log query that selects the logs Cloud SIEM should analyze (for example, `source:cloudtrail`).
-   - **Exclusion filters** (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click **+ New Exclusion Filter** and enter an exclusion query.
-   - **Filter status:** Set to **Active** to enable the filter on save.
+   - **Exclusion filters** (optional): One or more exclusion queries that subtract logs from the filter's match. To add one, click {{< ui >}}+ New Exclusion Filter{{< /ui >}} and enter an exclusion query.
+   - **Filter status:** Set to {{< ui >}}Active{{< /ui >}} to enable the filter on save.
 1. Review the **Preview** pane to confirm the filter matches the logs you expect.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 {{< img src="security/cloud_siem/guide/siem_settings_add_security-filter_empty.png" alt="The New Security Filter dialog with empty Name and Query fields, no exclusion filters, Filter status set to Active, and a Preview pane showing live log ingestion statistics" style="width:100%;" >}}
 
@@ -116,7 +116,7 @@ The Security Filters Configuration section lists every Security Filter, its quer
 
 1. In the **Security Filters Configuration** section, click the **Edit** {{< img src="icons/pencil.png" inline="true" style="width:14px;">}} icon on the filter row.
 2. In the **Edit Security Filter** dialog, update the name, query, exclusions, or filter status.
-3. Click **Save**.
+3. Click {{< ui >}}Save{{< /ui >}}.
 
 To disable a filter without deleting it, set **Filter status** to inactive. The filter remains saved so you can re-enable it later.
 
@@ -334,7 +334,7 @@ If a log you expect Cloud SIEM to analyze is not producing signals, work through
    - A query against a field not present at filter-evaluation time returns zero matches.
    - A query against a field whose availability depends on Pipeline configuration returns matches only when the corresponding Pipeline processor is configured.
 3. **Validate the combined effect of all filters.**
-   - In the UI, expand the **Preview** pane in the Security Filters Configuration section to stream the logs that reach analysis after every enabled filter is applied.
+   - In the UI, expand the **Preview** pane in the {{< ui >}}Security Filters Configuration{{< /ui >}} section to stream the logs that reach analysis after every enabled filter is applied.
    - With the API, send a `GET` request to list all filters and review the combined `query` and `exclusion_filters` payloads.
 
 ## Useful tags and attributes for Security Filter queries

@@ -29,6 +29,9 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/monitor-aws-graviton3-with-datadog/'
       tag: 'Blog'
       text: 'Monitor your Graviton3-powered EC2 instances with Datadog'
+    - link: 'https://learn.datadoghq.com/courses/getting-started-with-the-datadog-aws-integration'
+      tag: 'Learning Center'
+      text: 'Getting Started with the Datadog AWS Integration'
 ---
 
 ## Overview
@@ -138,6 +141,23 @@ Datadog does not backfill historical metric data from before the integration was
 See the [Integrations page][13] for a full listing of the available sub-integrations. Many of these integrations are installed by default when Datadog recognizes data coming in from your AWS account.
 
 Use the {{< ui >}}Metric Collection{{< /ui >}} tab on the [AWS integration page][8] to configure which services the Datadog integration collects metrics from.
+
+### Filter metrics by metric name
+
+Use the {{< ui >}}Metric Collection{{< /ui >}} tab on the [AWS integration page][8] to filter CloudWatch metrics by namespace. Expand a namespace in the CloudWatch metric collection table and choose an **Include** or **Exclude** filter:
+
+- **Include**: Collect only Datadog metric names that match the configured patterns for that namespace.
+- **Exclude**: Collect all Datadog metric names for that namespace except those that match the configured patterns.
+
+Each namespace can use one filter mode at a time. Filter patterns support lowercase letters, numbers, `.`, `_`, and `*`. For example, `aws.ec2.network_*` matches EC2 network metrics. The table previews how many metrics match each pattern before you save changes.
+
+Metric name filters apply per namespace and are evaluated after the namespace is enabled for metric collection.
+
+<div class="alert alert-info">
+Metric name filters cannot remove <code>aws.ec2.cpuutilization</code> or <code>aws.lambda.invocations</code>. Datadog always collects these required metrics.
+</div>
+
+To manage metric name filters programmatically, see [Configure AWS metric name filters with the API][61].
 
 ### Add regions
 
@@ -294,3 +314,4 @@ If you encounter the error `Datadog is not authorized to perform sts:AssumeRole`
 [58]: /integrations/ecs_fargate/?tab=webui#installation-for-aws-batch
 [59]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-get-template.html
 [60]: /integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose/
+[61]: /integrations/guide/aws-metric-name-filters/

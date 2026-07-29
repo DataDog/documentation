@@ -39,7 +39,7 @@ BYOC Logs accepts logs as **JSON objects** sent to the `/api/v2/logs` endpoint. 
 The [Datadog Lambda Forwarder][1] can send AWS CloudWatch Logs to BYOC Logs by setting the `DD_URL` environment variable to your BYOC Logs endpoint:
 
 ```
-DD_URL=<CLOUDPREM_HOST>
+DD_URL=<BYOC_LOGS_HOST>
 ```
 
 The forwarder sends logs to `https://<DD_URL>:443/api/v2/logs`. 

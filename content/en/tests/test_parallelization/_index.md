@@ -3,10 +3,6 @@ title: Test Parallelization
 description: Reduce CI testing time by distributing test files across CI nodes or workers with Test Optimization data.
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
-Test Parallelization is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Overview
 
 Test Parallelization helps you reduce CI testing time by distributing test files across CI nodes or local workers. It uses Test Optimization data to detect which test files should run, estimate their duration, and create an execution plan.
@@ -23,11 +19,11 @@ Before setting up Test Parallelization, set up [Test Optimization][2]. Optionall
 
 Test Parallelization is supported for the following language and frameworks:
 
-| Language | Frameworks |
-| -------- | ---------- |
-| Ruby     | RSpec, Minitest |
-
-Ruby projects require the `datadog-ci` gem version `1.31.0` or later.
+| Language | Frameworks | Minimum library version |
+| -------- | ---------- | ----------------------- |
+| Ruby     | RSpec, Minitest | `datadog-ci` gem `1.31.0` or later |
+| Python   | pytest | `ddtrace` package `4.11.0` or later |
+| JavaScript | Jest | `dd-trace` package `5.111.0` or later for `v5` and `6.0.0` or later for `v6` |
 
 ## How it works
 

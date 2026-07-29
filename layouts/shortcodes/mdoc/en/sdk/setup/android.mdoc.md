@@ -402,6 +402,49 @@ public class SampleApplication extends Application {
 {% /tabs %}
 {% /site-region %}
 
+{% site-region region="uk1" %}
+{% tabs %}
+{% tab label="Kotlin" %}
+
+```kotlin
+class SampleApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        val configuration = Configuration.Builder(
+                clientToken = "<CLIENT_TOKEN>",
+                env = "<ENV_NAME>",
+                variant = "<APP_VARIANT_NAME>"
+            )
+            .useSite(DatadogSite.UK1)
+            .build()
+
+        Datadog.initialize(this, configuration, trackingConsent)
+    }
+}
+```
+
+{% /tab %}
+{% tab label="Java" %}
+
+```java
+public class SampleApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        Configuration configuration =
+                new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+                        .useSite(DatadogSite.UK1)
+                        .build();
+
+        Datadog.initialize(this, configuration, trackingConsent);
+    }
+}
+```
+
+{% /tab %}
+{% /tabs %}
+{% /site-region %}
+
 The initialization credentials require your application's variant name and use the value of `BuildConfig.FLAVOR`. With the variant, the SDK can match the errors reported from your application to the mapping files uploaded by the Gradle plugin. If you do not have variants, the credentials use an empty string.
 
 The Gradle plugin automatically uploads the appropriate ProGuard `mapping.txt` file at build time so you can view deobfuscated error stack traces. For more information, see the [Track Android Errors][12].

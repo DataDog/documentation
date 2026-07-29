@@ -31,6 +31,8 @@
 data-bs-spy="scroll" data-bs-target="#navbar-example2" data-bs-offset="5"
   class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
 
+  {{- partial "page-agent-hint-block.html" . -}}
+
   {{ partial "header/header.html" . }}
 
   <div class="container container__content">

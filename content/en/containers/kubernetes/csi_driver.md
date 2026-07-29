@@ -171,14 +171,20 @@ If you need configuration options not exposed through the `DatadogAgent` spec (f
 
 {{% /collapse-content %}}
 
+#### Upgrading to Datadog Operator v1.28.0+
+
 <div class="alert alert-warning">
-<strong>Migrating from Helm-based CSI Driver installation</strong>
-<p>If you previously installed the CSI Driver with the standalone Helm chart, Datadog recommends migrating to Operator-managed installation. Choose one of the following approaches:</p>
-<ul>
-<li><strong>Let the Operator manage the CSI Driver</strong>: Uninstall the Helm chart (<code>helm uninstall datadog-csi-driver</code>) and keep the default values for <code>csi.enabled</code> and <code>csi.autoManage</code>. The Operator automatically creates a new <code>DatadogCSIDriver</code> resource and deploys the driver.</li>
-<li><strong>Keep managing the CSI Driver with Helm</strong>: No action is required. The Operator detects the existing <code>k8s.csi.datadoghq.com</code> CSIDriver and defers to it, regardless of the <code>csi.autoManage</code> value. The Operator does not interfere with your existing Helm-managed driver. To make this intent explicit, set <code>csi.autoManage: false</code>.</li>
-</ul>
+<p>If you previously ran <code>v1.26.0</code> or <code>v1.27.0</code>, upgrading to Datadog Operator <code>v1.28.0</code> or later can leave the built-in Kubernetes <code>CSIDriver</code> object (not the <code>DatadogCSIDriver</code> custom resource) in a state that the Operator cannot reconcile. To resolve this issue, delete the object:</p>
+<pre><code>kubectl delete csidriver k8s.csi.datadoghq.com</code></pre>
+<p>The Operator recreates it automatically. Already-mounted volumes and running driver pods are unaffected.</p>
 </div>
+
+#### Migrating from a Helm-based installation
+
+If you previously installed the CSI Driver with the standalone Helm chart, Datadog recommends migrating to Operator-managed installation. Choose one of the following approaches:
+
+- **Let the Operator manage the CSI Driver**: Uninstall the Helm chart (`helm uninstall datadog-csi-driver`) and keep the default values for `csi.enabled` and `csi.autoManage`. The Operator automatically creates a new `DatadogCSIDriver` resource and deploys the driver.
+- **Keep managing the CSI Driver with Helm**: No action is required. The Operator detects the existing `k8s.csi.datadoghq.com` CSIDriver and defers to it, regardless of the `csi.autoManage` value. The Operator does not interfere with your existing Helm-managed driver. To make this intent explicit, set `csi.autoManage: false`.
 
 {{% collapse-content title="Legacy Helm-based installation (Operator < v1.26.0)" level="h4" id="legacy-helm-based-installation" %}}
 

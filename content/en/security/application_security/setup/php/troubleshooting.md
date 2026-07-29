@@ -12,6 +12,12 @@ further_reading:
     text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 This document provides diagnostic information for common issues and unexpected behavior with Datadog App and API Protection. If you continue to have trouble, reach out to [Datadog support][1] for further assistance.

@@ -12,12 +12,12 @@ Los parámetros de entrada te permiten insertar la misma aplicación en varios d
 
 Un case (incidencia) de uso común para los parámetros de entrada es reutilizar y personalizar una aplicación para diferentes entornos, como desarrollo, almacenamiento provisional y producción. En la siguiente captura de pantalla, una aplicación está insertada dos veces en un dashboard. La aplicación de la izquierda muestra los monitores en el entorno de demostración, mientras que la aplicación de la derecha muestra la misma información para los monitores en el entorno de almacenamiento provisional. Puedes jugar con esta aplicación clonando blueprint (esquema) [Cómo: Parámetros de entrada][3].
 
-{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-dashboard.png" alt="Dos aplicaciones insertadas con parámetros de entrada diferentes seleccionados" style="width:100%;" >}}
+{{< img src="/actions/app_builder/embedded_apps/example-input-parameters-dashboard.png" alt="Dos aplicaciones insertadas con parámetros de entrada diferentes seleccionados" style="width:100%;" >}}
 
 ## Crear un parámetro de entrada 
 
 1. En [Generador de aplicaciones][1], selecciona una aplicación y haz clic en **Edit** (Editar). 
-1. Haz clic en el icono **App Properties** (Propiedades de la aplicación) ({{< img src="service_management/app_builder/embedded_apps/app_properties_icon.png" inline="true" width="12px" style="position:relative; bottom:1px;">}}).
+1. Haz clic en el icono **App Properties** (Propiedades de la aplicación) ({{< img src="actions/app_builder/embedded_apps/app_properties_icon.png" inline="true" width="12px" style="position:relative; bottom:1px;">}}).
 1. Haz clic en el icono más (<i class="icon-plus-2" style="position:relative; top:2px;font-size: 12px; max-width: 12px"></i>) para añadir un parámetro de entrada. 
 1. Haz clic en el nuevo parámetro de entrada para configurar sus elementos: 
     - Nombre del parámetro
@@ -32,7 +32,7 @@ Un case (incidencia) de uso común para los parámetros de entrada es reutilizar
 
 Este parámetro de entrada de ejemplo muestra la misma aplicación en varios entornos de almacenamiento provisional:
 
-{{< img src="/service_management/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="Un ejemplo de los parámetros de entrada configurados en una aplicación" style="width:35%;" >}}
+{{< img src="/actions/app_builder/embedded_apps/example-input-parameters-configuration.png" alt="Un ejemplo de los parámetros de entrada configurados en una aplicación" style="width:35%;" >}}
 
 ## Utilizar parámetros de entrada 
 
@@ -46,7 +46,7 @@ Para insertar una aplicación con parámetros de entrada:
 1. Selecciona un dashboard y haga clic en **Save and Open** (Guardar y abrir).
 1. En el dashboard, sitúa el cursor sobre la aplicación y haz clic en el icono **Edit** (Editar) ({{< img src="icons/pencil.png" inline="true" style="width:14px;">}}).
 1. En la sección **Input Parameters** (Parámetros de entrada), selecciona un parámetro de entrada:
-{{< img src="/service_management/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="Un ejemplo de una aplicación en el modo de edición con los parámetros de entrada encerrados en un círculo" style="width:80%;" >}}
+{{< img src="/actions/app_builder/embedded_apps/example-input-params-configuring-in-dashboard.png" alt="Un ejemplo de una aplicación en el modo de edición con los parámetros de entrada encerrados en un círculo" style="width:80%;" >}}
 1. Haz clic en **Save** (Guardar).
 
 ## Reutilizar una aplicación

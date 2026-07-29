@@ -39,6 +39,13 @@ You can also create cases manually from the following products:
 | Cloud Cost Management | Click into a cost recommendation to open its side panel. Then, click **Create case**. |
 | Sensitive Data Scanner | Click **Create case** next to a Sensitive Data Scanner issue.  |
 | Slack  | Click the **Create Case** button under a monitor notification in Slack.  |
+| Continuous Profiler | Click into a profiling insight to open its detail panel. Then, click **Add Case**. |
+| APM Recommendations | Click into a recommendation to open its side panel. Then, click **Add Case**. |
+| Database Monitoring | Click into a database recommendation to open its side panel. Click the **Actions** dropdown menu and select **Create Case**. |
+| CI Visibility | In the flaky tests table, click a test's actions menu and select **Create Case**. |
+| Code Security | Click **Add Ticket** next to a vulnerability, and select **Case Management** from the ticketing app list. |
+| Cloud Network Monitoring | In Cloud Network, click into a table row (for example, under DNS, TLS Certificates, or Security Groups) to open its side panel. Then, click **Create Case**. |
+| Cloud SIEM | On the Cloud SIEM **Cases** page, click **New Case**. |
 
 ## Automatic case creation
 
@@ -80,5 +87,5 @@ Create a case through the [API endpoint][5].
 [3]: /monitors/notify/variables/?tab=is_alert#conditional-variables
 [4]: https://app.datadoghq.com/cases/settings
 [5]: /api/latest/case-management/#create-a-case
-[6]: /service_management/workflows/trigger/
+[6]: /actions/workflows/trigger/
 [7]: /incident_response/case_management/customization

@@ -35,7 +35,7 @@ La creación de flujos de trabajo útiles a veces requiere pasar datos de un pas
 
 La pestaña de **Context Variables** (variables de contexto) para cada paso proporciona un mapa de todas las variables de contexto disponibles para ese paso.
 
-{{< img src="service_management/workflows/context-variables5.png" alt="La pestaña Variables de contexto" >}}
+{{< img src="actions/workflows/variables/context-variables5.png" alt="La pestaña Variables de contexto" >}}
 
 Accede a una variable de contexto en un paso encerrándola entre llaves dobles (`{{`). Para acceder a campos dentro de variables de contexto, utiliza la [Sintaxis de expresión Handlebars][4].
 
@@ -49,7 +49,7 @@ Algunos pasos crean salidas que están disponibles para pasos posteriores en un 
 
 Si no estás seguro de qué variable buscas, Datadog te sugiere salidas de pasos existentes a medida que escribes. También puedes consultar la pestaña [Context Variables (variables de contexto)](#context-variables) para consultar lista de las variables disponibles.
 
-{{< img src="service_management/workflows/step-outputs2.png" alt="Datadog sugiere las salidas del paso existente mientras escribes." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/step-outputs2.png" alt="Datadog sugiere las salidas del paso existente mientras escribes." style="width:100%;" >}}
 
 ### Variables del objeto fuente
 
@@ -57,7 +57,7 @@ Las variables del objeto fuente son propiedades del evento desencadenante que se
 
 Todas las variables del objeto fuente son visibles en la pestaña de Variables de contexto.
 
-{{< img src="service_management/workflows/context-variables-tab-source-object-variables2.png" alt="Las variables objeto de origen en la pestaña de Variables de contexto" style="width:60%;">}}
+{{< img src="actions/workflows/variables/context-variables-tab-source-object-variables2.png" alt="Las variables objeto de origen en la pestaña de Variables de contexto" style="width:60%;">}}
 
 ## Parámetros de entrada
 
@@ -75,7 +75,7 @@ Para hacer referencia al parámetro de entrada en un paso, utiliza la sintaxis `
 
 La sección **Input Parameters** (Parámetros de entrada) muestra los nombres de todos los parámetros de entrada existentes junto con un contador. Pasa el cursor por encima de un contador para ver qué pasos utilizan el parámetro.
 
-{{< img src="service_management/workflows/input-parameter3.png" alt="Pasa sobre un contador para ver qué pasos están usando el parámetro." style="width:60%;">}}
+{{< img src="actions/workflows/variables/input-parameter3.png" alt="Pasa sobre un contador para ver qué pasos están usando el parámetro." style="width:60%;">}}
 
 Puedes añadir un parámetro de entrada implícito (un parámetro que aún no existe en el flujo de trabajo) escribiéndolo en un paso del flujo de trabajo utilizando la sintaxis `{{ Trigger.<parameter name> }}`. La próxima vez que guardes el flujo de trabajo, aparecerá un cuadro de diálogo que te permitirá convertir el parámetro en uno explícito. Para obtener más información sobre la activación de flujos de trabajo, consulta [Trigger a workflow (Activar un flujo de trabajo)][5].
 
@@ -124,7 +124,7 @@ Aquí hay un ejemplo de un flujo de trabajo que demuestra el paso **Set variable
 1. Añade un segundo paso **Set variable** (Establecer variable) y declara una variable llamada `evenList` con el valor `${Variables.intList.filter(number => number % 2 === 0)}`. Esta es una [expresión en línea de JavaScript][8] que filtra los números impares.
 1. Añade un paso **Echo** (Eco) para hacer eco del valor de `evenList` (`2,4`).
 
-{{< img src="service_management/workflows/set-variable-updated.png" alt="Este flujo de trabajo establece una variable para tener una lista de números, declara una segunda variable que filtra los números impares en la lista usando una expresión en línea y hace eco del valor de la segunda variable." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/set-variable-updated.png" alt="Este flujo de trabajo establece una variable para tener una lista de números, declara una segunda variable que filtra los números impares en la lista usando una expresión en línea y hace eco del valor de la segunda variable." style="width:100%;" >}}
 
 ### Acceder a una variable personalizada
 
@@ -136,7 +136,7 @@ Establecer una variable personalizada dentro de un bucle **For** te permite alma
 
 Para evitar un error de tipo resultante de una variable indefinida, asigna una variable personalizada antes de utilizarla en un bucle. En el ejemplo siguiente, la variable personalizada `evenList` se establece en una matriz vacía antes de utilizarla en el bucle.
 
-{{< img src="service_management/workflows/loop.png" alt="Este flujo de trabajo establece una variable antes de que se utilice en un bucle." style="width:100%;" >}}
+{{< img src="actions/workflows/variables/loop.png" alt="Este flujo de trabajo establece una variable antes de que se utilice en un bucle." style="width:100%;" >}}
 
 ## Referencias adicionales
 

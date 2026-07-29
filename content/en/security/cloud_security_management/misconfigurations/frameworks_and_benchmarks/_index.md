@@ -14,6 +14,9 @@ further_reading:
 - link: "security/cspm/findings"
   tag: "Documentation"
   text: "Search and explore misconfigurations"
+- link: "security/application_security/api_posture/compliance"
+  tag: "Documentation"
+  text: "App and API Protection Compliance"
 ---
 
 Cloud Security Misconfigurations comes with more than 1,300 out-of-the-box compliance rules that evaluate the configuration of your cloud resources and identify potential misconfigurations. Each [compliance rule][1] maps to one or more controls within a [compliance standard or industry benchmark][2]. You can also [create custom frameworks][30] to define and measure compliance against your own cloud security baseline.
@@ -28,7 +31,7 @@ View a high-level overview of your compliance posture for each framework on the 
 - **Failing Rules**: All the rules failing in the framework. Hover for more details.
 - **Resources Passing**: Of all the resources evaluated by rules in the framework, the percentage of which pass all the rules in the framework.
 - **Framework Overview**: A [detailed report](#explore-compliance-framework-reports) that gives you insight into how you score against a framework's requirements and rules.
-- **Explore Resources**: A filtered view of the **Misconfigurations** page that shows resources with misconfigurations for the selected framework.
+- **Explore Resources**: A filtered view of the {{< ui >}}Misconfigurations{{< /ui >}} page that shows resources with misconfigurations for the selected framework.
 - **Configure Rules**: Customize how your environment is scanned and set notification targets by modifying the compliance rules for each framework.
 
 {{< img src="security/cspm/frameworks_and_benchmarks/compliance_reports_5.png" alt="The compliance reports section of the Cloud Security Misconfigurations Compliance page provides a high-level overview of your compliance posture" style="width:100%;">}}
@@ -61,9 +64,9 @@ You can graph your organization's compliance data in dashboards using the `datad
 
 You can hide frameworks from the list on the [Compliance][20] page, so you can focus on the ones that are most relevant to your organization.
 
-To hide a framework, either on the Compliance page or on a page for a specific framework, click the **Options** button {{< img src="icons/kebab.png" alt="Options button" inline="true" style="height:1em">}}, then click **Hide framework**.
+To hide a framework, either on the Compliance page or on a page for a specific framework, click the {{< ui >}}Options{{< /ui >}} button {{< img src="icons/kebab.png" alt="Options button" inline="true" style="height:1em">}}, then click {{< ui >}}Hide framework{{< /ui >}}.
 
-Then, on the Compliance page, you can use the **Show hidden frameworks** toggle to show hidden frameworks at the bottom of the list, or hide them completely. When the toggle is on, you can click **Show** next to any hidden framework to add it back to the list.
+Then, on the Compliance page, you can use the {{< ui >}}Show hidden frameworks{{< /ui >}} toggle to show hidden frameworks at the bottom of the list, or hide them completely. When the toggle is on, you can click {{< ui >}}Show{{< /ui >}} next to any hidden framework to add it back to the list.
 
 ## Further reading
 
