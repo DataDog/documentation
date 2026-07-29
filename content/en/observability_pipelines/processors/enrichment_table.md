@@ -6,6 +6,12 @@ products:
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 further_reading:
+- link: "https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/"
+  tag: "Blog"
+  text: "Add dynamically updating context to logs with Reference Tables and Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-servicenow-cmdb-enrichment"
   tag: "Blog"
   text: "Enrich logs with ServiceNow CMDB context before routing to any SIEM or logging tool"
