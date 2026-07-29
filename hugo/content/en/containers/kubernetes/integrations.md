@@ -108,6 +108,38 @@ spec:
 If you define pods indirectly (with deployments, ReplicaSets, or ReplicationControllers) add pod annotations under `spec.template.metadata`.
 
 {{% /tab %}}
+{{% tab "DatadogInstrumentation CRD" %}}
+
+You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
+
+```yaml
+apiVersion: datadoghq.com/v1alpha1
+kind: DatadogInstrumentation
+metadata:
+  name: <CR_NAME>
+  namespace: default
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: <WORKLOAD_NAME>
+  config:
+    checks:
+      - integration: <INTEGRATION_NAME>
+        containerName: <CONTAINER_NAME>
+        initConfig:
+          <INIT_CONFIG>
+        instances:
+          - <INSTANCES_CONFIG>
+    logs:
+      - containerName: <CONTAINER_NAME>
+        <LOGS_CONFIG>
+```
+
+For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
+
+[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
+{{% /tab %}}
 {{% tab "Local file" %}}
 
 You can store Autodiscovery templates as local files inside the mounted `conf.d` directory (`/etc/datadog-agent/conf.d`). You must restart your Agent containers each time you change, add, or remove templates.
@@ -349,38 +381,6 @@ See [Cluster Checks][3] for more context.
 [1]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L315-L330
 [2]: https://github.com/DataDog/helm-charts/blob/92fd908e3dd7b7149ce02de1fe859ae5ac717d03/charts/datadog/values.yaml#L680-L689
 [3]: /agent/cluster_agent/clusterchecks
-{{% /tab %}}
-{{% tab "DatadogInstrumentation CRD" %}}
-
-You can configure Autodiscovery checks for a specific workload through the `DatadogInstrumentation` custom resource, instead of pod annotations. This lets you update or remove check configuration without editing pod specs or restarting your application pods. You can also target a Kubernetes `Service` to schedule endpoint checks for each endpoint of that Service.
-
-```yaml
-apiVersion: datadoghq.com/v1alpha1
-kind: DatadogInstrumentation
-metadata:
-  name: <CR_NAME>
-  namespace: default
-spec:
-  targetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: <WORKLOAD_NAME>
-  config:
-    checks:
-      - integration: <INTEGRATION_NAME>
-        containerName: <CONTAINER_NAME>
-        initConfig:
-          <INIT_CONFIG>
-        instances:
-          - <INSTANCES_CONFIG>
-    logs:
-      - containerName: <CONTAINER_NAME>
-        <LOGS_CONFIG>
-```
-
-For setup steps, the full resource schema, and precedence rules, see [Configure Autodiscovery with DatadogInstrumentation CRD][29].
-
-[29]: /containers/guide/configure-autodiscovery-with-the-datadoginstrumentation-crd/
 {{% /tab %}}
 
 {{< /tabs >}}
