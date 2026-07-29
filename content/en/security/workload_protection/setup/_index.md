@@ -1,5 +1,8 @@
 ---
 title: Setting up Workload Protection
+aliases:
+  - /security/workload_protection/guide/ebpf-free-agent/
+  - /security/cloud_security_management/guide/ebpf-free-agent/
 disable_toc: false
 ---
 
