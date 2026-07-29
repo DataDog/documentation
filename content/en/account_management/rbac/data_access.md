@@ -51,6 +51,8 @@ Select data to be included in this Dataset
 Grant access
 : Select one or more teams or roles that may access the content bound in the Restricted Dataset. Any users who are not members of these groups are blocked from accessing this data.
 
+**Note:** A maximum of 50 principals (roles or teams) can be tied to a given Restricted Dataset.
+
 You may create a maximum of 10 key:value pairs per Restricted Dataset. Consider defining an additional Restricted Dataset if you need additional pairs.
 
 After completing all the fields to define the dataset, click {{< ui >}}Create Restricted Dataset{{< /ui >}} to apply it to your organization.
