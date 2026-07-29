@@ -132,7 +132,7 @@ Complete the setup in the Okta Admin Console as a Super Administrator. This sect
 On your Datadog application, open the **Resource Server** tab and enable **Cross-app access (XAA)**. Set the following fields.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-The values below match your selected [Datadog site][10] ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
+The values below match your selected [Datadog site](/getting_started/site/) ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.
 
 | Okta field | Value |
 |------------|-------|
@@ -192,12 +192,12 @@ If you set scopes in both places, Datadog grants the intersection of the scopes 
 Users reach Datadog through a connector in Claude. For Cross-App Access, add Datadog as a custom connector pointing at the resource URL for your [Datadog site][10].
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
-Follow the Claude help center guide on [custom connectors][11] and enter this URL when prompted:
+Follow the Claude help center guide on [custom connectors](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) and enter this URL when prompted:
 
 <pre><code>{{< region-param key="mcp_xaa_resource_url" >}}</code></pre>
 {{< /site-region >}}
 
-For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][12].
+For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server][11].
 
 ## Verify the configuration
 
@@ -219,5 +219,4 @@ If a user signed in before you enabled Cross-App Access, have them sign out of C
 [8]: /account_management/org_settings/mobile_third_party_access/#application-scope-management
 [9]: https://help.okta.com/oie/en-us/content/topics/apps/apps-cross-app-access.htm
 [10]: /getting_started/site/
-[11]: https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp
-[12]: /mcp_server/setup/
+[11]: /mcp_server/setup/
