@@ -69,6 +69,6 @@ Workload Protection provides targeted, Datadog-crafted [Content Packs][10] built
 [5]: /security/workload_protection/investigate_and_triage/security_signals
 [6]: /security/workload_protection/investigate_and_triage/security_findings
 [7]: /security/workload_protection/detect_and_monitor/threat_intelligence
-[8]: /security/configuration/notification-rules
+[8]: /security/notifications/rules
 [9]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [10]: /security/workload_protection/detect_and_monitor/content_packs

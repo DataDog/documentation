@@ -1,5 +1,7 @@
 ---
 title: SecL guide
+aliases:
+  - /security/workload_protection/secl_auth_guide/
 disable_toc: false
 ---
 

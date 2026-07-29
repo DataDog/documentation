@@ -7694,6 +7694,11 @@ menu:
       identifier: security_platform
       parent: security_platform_heading
       weight: 10000
+    - name: Detection Rules
+      url: security/detection_rules/
+      parent: security_platform
+      identifier: security_rules
+      weight: 1
     - name: OOTB Rules
       url: security/default_rules/#all
       parent: security_rules
