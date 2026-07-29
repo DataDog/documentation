@@ -19,7 +19,7 @@ There are two ways to deploy the Datadog Agent on macOS devices for End User Dev
 - **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
 - **MDM deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
 
-Regardless of the method, the installer creates a dedicated system user named `ddagent`. This is expected: it allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
+Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This is expected: it allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
 <div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
@@ -43,7 +43,7 @@ Use this method to test a single machine or for devices that are not managed by 
 1. Open {{< ui >}}Terminal{{< /ui >}}. Find it in {{< ui >}}Applications{{< /ui >}} > {{< ui >}}Utilities{{< /ui >}} > {{< ui >}}Terminal{{< /ui >}}, or search for it with Spotlight (<kbd>⌘</kbd> + <kbd>Space</kbd>).
 1. Paste the installation command into the terminal and run it. Enter your Mac password when prompted.
 
-    The script installs the Agent, creates the `ddagent` system user, and registers the Agent as a background launch daemon. Installation takes one to two minutes.
+    The script installs the Agent, creates the `_dd-agent` system user, and registers the Agent as a background launch daemon. Installation takes one to two minutes.
 
 1. Launch the Datadog Agent Manager UI by running:
 
@@ -243,7 +243,7 @@ You can use other MDMs; however, this page walks through Jamf Pro as an example.
 
 1. To avoid storing your API key in the script body, pass it as a Jamf script parameter. In the **Options** tab, label parameter 4 as `DD_API_KEY`. The script reads this value from `$4`, and you enter the actual key when you [create the policy](#create-the-jamf-policy) in the next step.
 
-    The install script runs as root through Jamf, which provides the permissions needed to install the Agent and create the `ddagent` system user without user interaction.
+    The install script runs as root through Jamf, which provides the permissions needed to install the Agent and create the `_dd-agent` system user without user interaction.
 
 ### Enable Network Path (optional)
 
