@@ -364,6 +364,18 @@ The following metrics are not available for SQL Server 2014:
 
 Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL Server 2014. The collection query uses `AT TIME ZONE`, a T-SQL operator introduced in SQL Server 2016. Enabling this feature on SQL Server 2014 causes a query syntax error (`Incorrect syntax near 'AT'`) on every check run. To avoid this error, set `collect_deadlocks: enabled: false` in your instance configuration.
 
+### Query metrics are not collected on Azure SQL Database Basic, S0, and S1 tiers or elastic pools
+
+On Azure SQL Database Basic, S0, and S1 service objectives, and on databases in elastic pools, query metrics may fail to collect with the following response:
+
+```
+VIEW SERVER PERFORMANCE STATE permission was denied on object 'server', database 'master'.
+```
+
+Collecting query metrics requires reading the sys.dm_exec_plan_attributes dynamic management view. On these service tiers, Azure restricts that view to a server-level principal — the server administrator or the Microsoft Entra administrator as documented in the Microsoftsys.dm_exec_plan_attributes [permissions] [15]. 
+
+To continue collecting query metrics on affected databases, enable query_metrics.disable_secondary_tags for those instances.
+
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
 [3]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-sql-server-authentication
@@ -378,3 +390,4 @@ Deadlock collection (`collect_deadlocks: enabled: true`) is not supported on SQL
 [12]: https://learn.microsoft.com/en-us/sql/connect/odbc/download-odbc-driver-for-sql-server?view=sql-server-ver16
 [13]: https://learn.microsoft.com/en-us/sql/connect/oledb/oledb-driver-for-sql-server?view=sql-server-ver16
 [14]: https://github.com/DataDog/integrations-core/blob/master/sqlserver/assets/configuration/spec.yaml#L201-L208
+[15]: https://learn.microsoft.com/en-us/sql/relational-databases/system-dynamic-management-objects/sys-dm-exec-plan-attributes-transact-sql?view=sql-server-ver17#permissions
