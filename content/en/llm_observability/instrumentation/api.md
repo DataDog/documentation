@@ -209,7 +209,7 @@ An audio segment on a message. Provide exactly one of `content` or `attachment_k
 
 | Field | Type | Description |
 |-------|------|-------------|
-| mime_type [*required*] | string | The media type of the audio, for example `audio/wav` or `audio/pcm`. |
+| mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/pcm`. |
 | content | string | The base64-encoded audio, carried inline on the message. |
 | attachment_key | string | A reference to audio stored outside the span payload, in place of inline `content`. |
 
