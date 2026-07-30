@@ -5,7 +5,7 @@ further_reading:
 - link: "/security/workload_protection/detect_and_monitor/agent_rules/policy_management"
   tag: "Documentation"
   text: "Deploy Agent rules with policies"
-- link: "/security/workload_protection/detect_and_monitor/detection_rules"
+- link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
   tag: "Documentation"
   text: "Workload Protection detection rules"
 - link: "/security/workload_protection/investigate_and_triage/security_signals"
@@ -65,7 +65,7 @@ For more information about policy deployment, see [Policy management][4].
 
 [1]: https://app.datadoghq.com/security/workload-protection/overview#content-packs
 [2]: /security/workload_protection/detect_and_monitor/agent_rules
-[3]: /security/workload_protection/detect_and_monitor/detection_rules
+[3]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [4]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [5]: /security/workload_protection/investigate_and_triage/security_signals
 [6]: https://app.datadoghq.com/security/workload-protection/policies

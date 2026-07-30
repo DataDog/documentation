@@ -8398,26 +8398,31 @@ menu:
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_windows_expressions
       weight: 50
-    - name: Detection rules
-      url: security/workload_protection/detect_and_monitor/detection_rules
+    - name: Detection and finding rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules
       parent: workload_protection_detect_and_monitor
-      identifier: workload_protection_detect_and_monitor_detection_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules
+      weight: 20
+    - name: Detection rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_detection_rules
+      weight: 10
+    - name: Finding rules
+      url: security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_finding_rules
       weight: 20
     - name: Linux backend syntax
       url: security/workload_protection/backend_linux
-      parent: workload_protection_detect_and_monitor_detection_rules
-      identifier: workload_protection_detect_and_monitor_detection_rules_backend_linux
-      weight: 10
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_linux
+      weight: 30
     - name: Windows backend syntax
       url: security/workload_protection/backend_windows
-      parent: workload_protection_detect_and_monitor_detection_rules
-      identifier: workload_protection_detect_and_monitor_detection_rules_backend_windows
-      weight: 20
-    - name: Finding rules
-      url: security/workload_protection/detect_and_monitor/finding_rules
-      parent: workload_protection_detect_and_monitor
-      identifier: workload_protection_detect_and_monitor_finding_rules
-      weight: 30
+      parent: workload_protection_detect_and_monitor_detection_and_finding_rules
+      identifier: workload_protection_detect_and_monitor_detection_and_finding_rules_backend_windows
+      weight: 40
     - name: Threat intelligence
       url: security/workload_protection/detect_and_monitor/threat_intelligence
       parent: workload_protection_detect_and_monitor

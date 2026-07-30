@@ -1,6 +1,8 @@
 ---
 title: Finding Rules
 disable_toc: false
+aliases:
+  - /security/workload_protection/detect_and_monitor/finding_rules
 further_reading:
   - link: "/security/workload_protection/investigate_and_triage/security_findings"
     tag: "Documentation"
@@ -8,7 +10,7 @@ further_reading:
   - link: "/security/workload_protection/agent_expressions"
     tag: "Documentation"
     text: "SECL expression reference"
-  - link: "/security/workload_protection/detect_and_monitor/detection_rules"
+  - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
     tag: "Documentation"
     text: "Detection rules"
 ---
@@ -20,18 +22,6 @@ Finding rules describe the backend logic used to evaluate your runtime security 
 Unlike [detection rules][3], which surface point-in-time threats as security signals, finding rules track ongoing bad practices and misconfigurations. A finding represents a resource (a host or container) that is actively failing a security policy, not a single suspicious event.
 
 Finding rules use existing Agent events to surface practical security recommendations such as package manager usage in containers, IMDS access patterns, or unnecessary privilege configurations. This helps you address real-world risks that are not direct threats but represent risky practices in production environments.
-
-## Findings versus signals
-
-Detection rules and finding rules both analyze Agent events, but they serve different purposes:
-
-| | Detection rules | Finding rules |
-|---|---|---|
-| **Output** | Security signal | Finding |
-| **Represents** | A point-in-time threat event | A resource failing a security policy |
-| **Use case** | Threat detection and incident response | Runtime posture and hardening |
-
-For example, `Sudoers Policy File Modification Detection` flags modifications to `/etc/sudoers` and files in `/etc/sudoers.d/`. Modifying those files is a bad practice, but it can be part of a legitimate process. Treating it as a detection rule generates excessive noise. As a finding rule, it tracks which resources have this configuration without triggering a signal for every file write.
 
 ## OOTB finding rules {#ootb-finding-rules}
 
@@ -85,7 +75,7 @@ Configure the **name**, **description**, and **remediation guidance** that appea
 
 [1]: /security/workload_protection/investigate_and_triage/agent_events
 [2]: /security/workload_protection/investigate_and_triage/security_findings
-[3]: /security/workload_protection/detect_and_monitor/detection_rules
+[3]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [4]: https://app.datadoghq.com/security/configuration/findings-automation
 [5]: https://app.datadoghq.com/security/agent-events
 [6]: https://app.datadoghq.com/security/workload-protection/finding-rules

@@ -2,7 +2,7 @@
 title: Findings
 disable_toc: false
 further_reading:
-  - link: "/security/workload_protection/detect_and_monitor/finding_rules"
+  - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules"
     tag: "Documentation"
     text: "Learn about finding rules"
 ---
@@ -66,5 +66,5 @@ Use the triage section in the finding side panel to manage findings across your 
 - **Track status**: Update the triage state to reflect investigation progress.
 
 [1]: /security/workload_protection/
-[2]: /security/workload_protection/detect_and_monitor/finding_rules
+[2]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
 [3]: https://app.datadoghq.com/security/workload-protection/findings
