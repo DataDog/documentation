@@ -125,72 +125,66 @@ In Agent policy files, each rule includes an `id` and an `expression`. You can a
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: access_sensitive_files
-expression: >-
-  open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
-  process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
+  - id: access_sensitive_files
+    expression: >-
+      open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
+      process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
 {{< /code-block >}}
 
 #### NGINX or PHP spawning bash
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: nginx_php_spawn_bash
-expression: >-
-  exec.file.path == "/usr/bin/bash" &&
-  (
-  process.ancestors.file.name == "nginx" ||
-  process.ancestors.file.name =~ "php*"
-  )
+  - id: nginx_php_spawn_bash
+    expression: >-
+      exec.file.path == "/usr/bin/bash" &&
+      (
+        process.ancestors.file.name == "nginx" ||
+        process.ancestors.file.name =~ "php*"
+      )
 {{< /code-block >}}
 
 #### Suspicious IMDS access from container
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: suspicious_imds_access
-expression: >-
-  connect &&
-  network.destination.ip in ["169.254.169.254"] &&
-  container.id != ""
+  - id: suspicious_imds_access
+    expression: >-
+      connect &&
+      network.destination.ip in ["169.254.169.254"] &&
+      container.id != ""
 {{< /code-block >}}
 
 #### Kernel module loads outside maintenance window
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: kernel_module_load
-expression: >-
-  load_module &&
-  process.user != "root" &&
-  process.ancestors.file.name not in ["modprobe", "insmod"]
+  - id: kernel_module_load
+    expression: >-
+      load_module &&
+      process.user != "root" &&
+      process.ancestors.file.name not in ["modprobe", "insmod"]
 {{< /code-block >}}
 
 #### Sensitive file read shortly after start
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: sensitive_file_read_after_start
-expression: >-
-  open.file.path == "/etc/secret" &&
-  process.file.name == "java" &&
-  process.created_at > 5s
+  - id: sensitive_file_read_after_start
+    expression: >-
+      open.file.path == "/etc/secret" &&
+      process.file.name == "java" &&
+      process.created_at > 5s
 {{< /code-block >}}
 
 #### Outbound to non-corporate IPs (CIDR allowlist)
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: outbound_non_corporate_ips
-expression: >-
-  connect &&
-  network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
+  - id: outbound_non_corporate_ips
+    expression: >-
+      connect &&
+      network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
 {{< /code-block >}}
 
 ### Windows
@@ -199,23 +193,21 @@ expression: >-
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: registry_run_key_persistence
-expression: >-
-  set_key_value &&
-  open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
+  - id: registry_run_key_persistence
+    expression: >-
+      set_key_value &&
+      open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
 {{< /code-block >}}
 
 #### Unsigned binary launching PowerShell
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: unsigned_binary_powershell
-expression: >-
-  exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
-  process.parent.file.path !~ "*\\Program Files*" &&
-  process.user_sid != "S-1-5-18"
+  - id: unsigned_binary_powershell
+    expression: >-
+      exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
+      process.parent.file.path !~ "*\\Program Files*" &&
+      process.user_sid != "S-1-5-18"
 {{< /code-block >}}
 
 ### Cross-platform
@@ -224,11 +216,10 @@ expression: >-
 
 {{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
 rules:
-
-- id: crypto_miner_indicators
-expression: >-
-  exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
-  exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
+  - id: crypto_miner_indicators
+    expression: >-
+      exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
+      exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
 {{< /code-block >}}
 
 [1]: /security/workload_protection/linux_expressions
