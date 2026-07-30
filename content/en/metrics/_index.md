@@ -10,13 +10,6 @@ cascade:
     algolia:
         rank: 70
         tags: ["submit metrics", "metrics submission"]
-further_reading:
-- link: "https://www.datadoghq.com/blog/metrics-natural-language-queries/"
-  tag: "Blog"
-  text: "Explore Datadog metrics with Natural Language Queries"
-- link: "https://www.datadoghq.com/blog/ai/toto-2/"
-  tag: "Blog"
-  text: "Toto 2.0: Time series forecasting enters the scaling era"
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Metrics">}}
