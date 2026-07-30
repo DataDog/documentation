@@ -261,6 +261,26 @@ spark.driver.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.versio
 spark.executor.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.version=<VERSION>
 ```
 
+### Collect Spark lineage with OpenLineage
+
+Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLineage][8], so you can see the upstream and downstream tables of your jobs and visualize entire Spark pipelines. Setup has two steps: install the OpenLineage Spark provider, then enable the feature in the Java tracer.
+
+1. **Install the OpenLineage Spark provider.** Make the `openlineage-spark` JAR available on the classpath of your Spark driver and executors, following the [OpenLineage Spark installation guide][9]. Use OpenLineage version `1.29.0` or later, which is the first version that supports the run-tag facets that Data Observability: Jobs Monitoring relies on.
+
+   You do not need to set `spark.extraListeners` or configure any `spark.openlineage.transport.*` options. When the feature is enabled and the JAR is present, the Datadog Java tracer registers the OpenLineage listener and routes lineage events through the local Datadog Agent.
+
+2. **Enable OpenLineage collection.** Add `DD_DATA_JOBS_OPENLINEAGE_ENABLED` to the `ddTraceConfigs` of the `spark-driver` and `spark-executor` targets from [Enable Single Step Instrumentation](#enable-single-step-instrumentation):
+
+   ```yaml
+   ddTraceConfigs:
+     - name: DD_DATA_JOBS_ENABLED
+       value: "true"
+     - name: DD_DATA_JOBS_OPENLINEAGE_ENABLED
+       value: "true"
+   ```
+
+   Reapply your configuration and restart the targeted pods.
+
 ### Tag spans at runtime
 
 {{% djm-runtime-tagging %}}
@@ -275,3 +295,5 @@ spark.executor.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.vers
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+[8]: https://openlineage.io/
+[9]: https://openlineage.io/docs/integrations/spark/installation
