@@ -31,11 +31,13 @@ A heatmap (or heat map) is a visualization of your user's interactions overlaid 
 
 Use heatmaps to review complex data at a glance and gain insights around optimizing your user experience.
 
+**Note**: Heatmaps are only supported for Browser Session Replay.
+
 ## Prerequisites
 
 To get started with heatmaps:
 
-1. Verify your SDK version:
+1. Verify your Browser SDK version:
    - For Click maps, you must be on the latest version of the SDK (v4.40.0 or later).
    - For Scroll maps, you must be on (v4.50.0 or later).
 2. Enable [Session Replay][1].
