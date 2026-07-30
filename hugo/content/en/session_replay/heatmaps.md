@@ -7,10 +7,10 @@ aliases:
 - /product_analytics/session_replay/heatmaps
 - /product_analytics/heatmaps
 further_reading:
-- link: '/session_replay/browser/'
+- link: '/session_replay/'
   tag: 'Documentation'
   text: 'Session Replay for Browsers'
-- link: '/session_replay/mobile/'
+- link: '/session_replay/?platform=android'
   tag: 'Documentation'
   text: 'Session Replay for Mobile'
 - link: "https://www.datadoghq.com/blog/session-replay-custom-heatmap-backgrounds/"
