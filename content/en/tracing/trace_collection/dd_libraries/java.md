@@ -12,15 +12,18 @@ code_lang: java
 type: multi-code-lang
 code_lang_weight: 0
 further_reading:
-    - link: 'https://github.com/DataDog/dd-trace-java'
-      tag: "Source Code"
-      text: 'Datadog Java APM source code'
     - link: 'tracing/glossary/'
       tag: 'Documentation'
       text: 'Explore your services, resources, and traces'
     - link: "https://learn.datadoghq.com/courses/configure-manage-apm-sdk"
       tag: "Learning Center"
       text: "Configure and manage the APM SDK for your applications"
+    - link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
+      tag: "Blog"
+      text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
+    - link: 'https://github.com/DataDog/dd-trace-java'
+      tag: "Source Code"
+      text: 'Datadog Java APM source code'
 
 ---
 ## Compatibility requirements

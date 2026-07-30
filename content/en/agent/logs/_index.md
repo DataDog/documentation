@@ -63,6 +63,8 @@ Datadog Agent v6 can collect logs and forward them to Datadog from files, the ne
 
 If there are permission errors, see [Permission issues tailing log files][10] to troubleshoot.
 
+To deploy custom log collection configuration to multiple Agents at once without editing files on each host, see [Configure Custom Logs][15] with Fleet Automation.
+
 Below are examples of custom log collection setup:
 
 {{< tabs >}}
@@ -264,3 +266,4 @@ For both file and journald tailer types, if an `end` or `beginning` position is 
 [12]: /getting_started/tagging/unified_service_tagging
 [13]: /metrics/custom_metrics/#overview
 [14]: /getting_started/tagging/
+[15]: /agent/fleet_automation/configure_logs/

@@ -151,6 +151,32 @@ After your application is sending traces, you can see the correlation in the APM
 3. In the trace's flame graph, select a database span (for example, a span with `span.type: sql`)
 4. In the details panel, click the {{< ui >}}SQL Queries{{< /ui >}} tab. You should see performance metrics and execution plans for the query.
 
+## Correlation levels
+
+DBM correlation for OpenTelemetry traces works at two levels:
+
+- **Statement-level correlation**: Links a query sample or execution plan to the query signature computed from `db.statement`. This works automatically after you complete the setup steps above.
+- **Service-level correlation**: Populates the {{< ui >}}Databases{{< /ui >}} tab and {{< ui >}}Calling Services{{< /ui >}} list on a database instance page, linking a query to the service that issued it. This requires a SQL comment containing service metadata on the query.
+
+Datadog SDKs add this comment automatically. OpenTelemetry auto-instrumentation doesn't, so service-level correlation requires adding the comment manually:
+
+```sql
+/*dddbs='<service>',dde='<env>',ddps='<service>',ddpv='<version>'*/ SELECT * FROM users WHERE id = ?
+```
+
+| Field   | Description                       |
+|---------|------------------------------------|
+| `dddbs` | The name of the service issuing the query. |
+| `dde`   | The environment of the service.    |
+| `ddps`  | The parent service name.           |
+| `ddpv`  | The version of the service.        |
+
+Without this comment, a database instance shows no calling services. The APM service page shows no database section, even when statement-level correlation is working.
+
+### Stored procedures
+
+Correlation isn't supported for stored procedure calls (for example, `CALL my_procedure()`). The span records the procedure call itself, while DBM captures the individual SQL statements the procedure runs internally. These two representations don't match, so DBM can't link the span to the statements the procedure runs.
+
 ## Troubleshooting
 
 If you don't see the expected correlation between your APM traces and DBM, it's typically due to a missing or incorrect configuration. Check the following common causes:
@@ -159,6 +185,7 @@ If you don't see the expected correlation between your APM traces and DBM, it's 
 - **Incorrect unified service tagging**: The `service` tag on your database spans must be set. Verify that [unified service tagging][1] is configured correctly.
 - **The SQL query may not be parsable**: The correlation relies on Datadog's ability to parse the SQL query from the `db.statement` attribute. If the query uses non-standard or complex syntax, parsing may fail. If you suspect this is the case, [contact Datadog support][5] for assistance.
 - **The correct feature gates must be enabled** for your specific trace ingestion path as described in the setup steps.
+- **No calling services or empty database section on the APM service page**: OpenTelemetry doesn't inject SQL comments automatically. See [Correlation levels](#correlation-levels) to add them manually.
 
 ## Further reading
 

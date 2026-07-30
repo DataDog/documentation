@@ -57,7 +57,6 @@ Use the following environment variables to configure formats for reading and wri
 `restart`: The SDK will always start a new trace. If the incoming distributed tracing headers represent a valid trace context, that trace context will be represented as a span link on service entry spans (as opposed to the parent span in the `continue` configuration).<br>
 `ignore`: The SDK will always start a new trace and all incoming distributed tracing headers are ignored.<br>
 **Default**: `continue` <br>
-**Note**: This is only implemented in the .NET, Node.js, Python, and Java libraries.
 
 ### Advanced configuration
 
