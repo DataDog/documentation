@@ -45,11 +45,11 @@ To get started with agentless delivery, use one of these minimum versions:
 
 | SDK | Minimum version |
 |---|---|
-| Java `dd-openfeature` provider | 1.65.0 |
+| Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-Java CDN delivery requires `dd-openfeature`. It does not require `dd-java-agent`.
+Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
 Configure the API key, Datadog site, and environment in the application process:
 
@@ -72,7 +72,7 @@ Set `DD_SITE` to your organization's Datadog site. For the site selected on this
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Node.js caps values at 3600 seconds. Java does not apply this cap. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java does not limit attempts, while Node.js caps values at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:

@@ -36,11 +36,11 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 | SDK | Minimum agentless version |
 |---|---|
-| Java `dd-openfeature` provider | 1.65.0 |
+| Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
 
-Java CDN delivery requires `dd-openfeature`. It does not require `dd-java-agent`.
+Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
 <div class="alert alert-warning">The initial Java and Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
@@ -69,7 +69,7 @@ Requirements depend on the selected SDK and configuration source. Standard requi
 - The language-specific tracer or OpenFeature provider versions listed on the SDK page
 - A Datadog [API key][2]
 
-Java CDN delivery does not require [APM tracing][4] or the Java agent.
+Java CDN delivery requires the Java agent in the application process. It does not require APM tracing or a separate Datadog Agent service.
 
 Source-specific requirements are:
 
