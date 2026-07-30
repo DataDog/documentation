@@ -8715,11 +8715,6 @@ menu:
       parent: workload_protection
       identifier: workload_protection_respond_and_report
       weight: 93
-    - name: OOTB Rules
-      url: /security/workload_protection/setup/ootb_rules
-      parent: workload_protection_workload_security_rules
-      identifier: workload_protection_ootb_rules
-      weight: 100
     - name: Coverage
       url: security/workload_protection/inventory
       parent: workload_protection
