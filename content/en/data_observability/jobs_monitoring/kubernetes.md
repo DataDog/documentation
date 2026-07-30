@@ -18,7 +18,7 @@ further_reading:
 Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
-2. (Optional) [Collect Spark lineage with OpenLineage](#collect-spark-lineage-with-openlineage).
+2. (Optional) [Collect Spark Data Lineage with OpenLineage](#optional-collect-spark-data-lineage-with-openlineage).
 3. [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
 
 ### Install the Datadog Agent on your Kubernetes cluster
