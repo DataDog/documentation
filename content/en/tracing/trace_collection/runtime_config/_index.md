@@ -25,8 +25,9 @@ To make changes to a service's configuration at runtime:
 
 1. Go to the [Catalog][3] in APM.
 1. Open the service's {{< ui >}}Full Page{{< /ui >}}.
-1. Click {{< ui >}}Service Info{{< /ui >}}, then go to {{< ui >}}Service Config{{< /ui >}} > {{< ui >}}SDK & Agent Configurations{{< /ui >}}.
-1. Select an environment, then click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
+1. Click {{< ui >}}Service Info{{< /ui >}}, and then go to {{< ui >}}Service Config{{< /ui >}} > {{< ui >}}SDK & Agent Configurations{{< /ui >}}.
+1. Select an environment. 
+1. Click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
 1. Update the value in the edit modal and confirm.
 
 {{< img src="/tracing/runtime_config/config_at_runtime_success.png" alt="The SDK Configurations table showing logs injection disabled across one instance." style="width:100%;">}}
