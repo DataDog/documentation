@@ -31,7 +31,9 @@ A heatmap (or heat map) is a visualization of your user's interactions overlaid 
 
 Use heatmaps to review complex data at a glance and gain insights around optimizing your user experience.
 
-**Note**: Heatmaps are only supported for Browser Session Replay.
+{% alert level="info" %}
+Heatmaps are only supported for Browser Session Replay.
+{% /alert %}
 
 ## Prerequisites
 
