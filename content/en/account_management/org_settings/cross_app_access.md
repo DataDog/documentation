@@ -168,15 +168,17 @@ Add a resource connection from the Claude AI Agent to your Datadog application, 
 | Okta field | Value |
 |------------|-------|
 | **Client ID at resource** | `e645fb6b-4966-45c4-bf20-44866aa5efac` |
-| **Scope Condition** | **Allow all**. See [Control scopes in Datadog](#control-scopes-in-datadog) |
+| **Scope Condition** | **Allow all**, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 Add the Claude SAML application as a delegated caller on the AI Agent, then activate the agent.
 
 #### Control scopes in Datadog
 
-Set **Scope Condition** to **Allow all** in Okta, and control what Claude reaches from Datadog.
+**Allow all** is the only supported **Scope Condition** for Cross-App Access. Set it in Okta, then restrict what Claude reaches from Datadog.
 
-Okta does not filter scopes. With **Allow all**, Okta copies whatever Claude requests into the token, which makes Datadog the enforcement point. If you configure a specific list in Okta instead, Okta rejects any token request that contains a scope outside that list, and the integration fails with an error rather than falling back to narrower access.
+Okta does not filter scopes. With **Allow all**, Okta copies whatever Claude requests into the token, which makes Datadog the enforcement point.
+
+<div class="alert alert-warning">Do not enter a list of scopes in Okta. Okta rejects any token request that contains a scope outside the list, so the integration fails with an error instead of falling back to narrower access.</div>
 
 To set the scopes Claude is allowed:
 
