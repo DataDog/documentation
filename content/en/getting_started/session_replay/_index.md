@@ -2,10 +2,10 @@
 title: Getting Started with Session Replay
 description: Capture and analyze user sessions with video-like replays to understand customer interactions and troubleshoot issues.
 further_reading:
-    - link: '/session_replay/browser'
+    - link: '/session_replay/'
       tag: 'Documentation'
       text: 'Session Replay'
-    - link: '/session_replay/mobile/'
+    - link: '/session_replay/?platform=android'
       tag: 'Documentation'
       text: 'Mobile Session Replay'
     - link: 'https://www.datadoghq.com/knowledge-center/session-replay/'
@@ -132,7 +132,7 @@ You can share the replay with your team by selecting the {{< ui >}}Share{{< /ui 
 
 [1]: https://www.datadoghq.com/?_gl=1*2g30ya*_gcl_au*OTEwMTA2MjI5LjE2OTIxMDc1MzA.*_ga_KN80RDFSQK*MTY5NDAwODQ4OS40OC4xLjE2OTQwMDg2MzcuMC4wLjA.
 [2]: /real_user_monitoring/#get-started
-[3]: /session_replay/mobile/
+[3]: /session_replay/?platform=android
 [4]: https://app.datadoghq.com/rum/sessions
 [5]: /real_user_monitoring/explorer/search/#facets
 [6]: /real_user_monitoring/explorer/saved_views/
