@@ -7,6 +7,9 @@ products:
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 
 further_reading:
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
@@ -102,9 +105,16 @@ When a log is sent to the parser, library rules are automatically applied to the
 
 You can also add library rules when you create a custom rule. See [Create an AI-assisted or custom parsing rule](#create-an-ai-assisted-or-custom-parsing-rule) for more information.
 
+## Metrics
+
+For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
+
 [1]: /logs/log_configuration/parsing/
 [2]: /logs/log_configuration/parsing/?tab=matchers#using-helper-rules-to-reuse-common-patterns
 [3]: /observability_pipelines/search_syntax/logs/
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 
 ## Further reading
 

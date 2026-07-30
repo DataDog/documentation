@@ -8,6 +8,63 @@ content_filters:
 -->
 ## Setup
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To set up Session Replay for Browser:
+
+### Step 1 - Set up the Browser SDK
+
+Make sure you've set up the [RUM Browser SDK][30].
+
+### Step 2 - Enable Session Replay
+
+To enable Session Replay you have to specify the session replay sample rate. It must be a number between 0.0 and 100.0, where 0 indicates that no replays are recorded and 100 means that all sessions include a replay.
+
+This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
+See [Browser RUM & Session Replay sessions][31] for more information.
+
+{% tabs %}
+{% tab label="NPM" %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+   ...
+   sessionReplaySampleRate: 100,
+   ...
+});
+```
+{% /tab %}
+{% tab label="CDN async" %}
+```javascript
+<script>
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+      ...
+      sessionReplaySampleRate: 100,
+      ...
+    });
+  })
+</script>
+```
+{% /tab %}
+{% tab label="CDN sync" %}
+```javascript
+<script>
+    window.DD_RUM && window.DD_RUM.init({
+      ...
+      sessionReplaySampleRate: 100,
+      ...
+    });
+</script>
+```
+
+**Note**: Below version v5.0.0, Session Replay does not start automatically and you need to call [`startSessionReplayRecording()`][32] API.
+{% /tab %}
+{% /tabs %}
+{% /if %}
+<!-- end Browser -->
+
 <!-- Android -->
 {% if equals($platform, "android") %}
 All Session Replay SDK versions can be found in the [Maven Central Repository][4].
@@ -413,6 +470,12 @@ The sample rate is an optional parameter in the Session Replay configuration. It
 
 This sample rate is applied in addition to the RUM sample rate. For example, if RUM uses a sample rate of 80% and Session Replay uses a sample rate of 20%, it means that out of all user sessions, 80% are included in RUM, and within those sessions, only 20% have replays.
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+The sample rate is set through the `sessionReplaySampleRate` parameter passed to `datadogRum.init()`. See [Step 2 - Enable Session Replay](#step-2-enable-session-replay) above.
+{% /if %}
+<!-- end Browser -->
+
 <!-- Android -->
 {% if equals($platform, "android") %}
 ```kotlin {% filename="Application.kt" %}
@@ -479,6 +542,64 @@ final configuration = DatadogConfiguration(
 ### Start or stop the recording manually
 
 By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the optional `startRecordingImmediately` parameter as shown below, and later call `SessionReplay.startRecording()`. You can also use `SessionReplay.stopRecording()` to stop the recording anytime.
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+By default, Session Replay starts recording automatically. However, if you prefer to manually start recording at a specific point in your application, you can use the `startSessionReplayRecordingManually` parameter, and later call [`startSessionReplayRecording()`][32]. You can also use [`stopSessionReplayRecording()`][33] to stop the recording at any time.
+
+{% tabs %}
+{% tab label="NPM" %}
+```javascript
+import { datadogRum } from '@datadog/browser-rum';
+
+datadogRum.init({
+   ...
+   startSessionReplayRecordingManually: true,
+   ...
+});
+
+datadogRum.startSessionReplayRecording()
+// Do something
+datadogRum.stopSessionReplayRecording()
+```
+{% /tab %}
+{% tab label="CDN async" %}
+```javascript
+<script>
+  window.DD_RUM.onReady(function() {
+    window.DD_RUM.init({
+        ...
+        startSessionReplayRecordingManually: true,
+        ...
+    });
+
+    window.DD_RUM.startSessionReplayRecording()
+    // Do something
+    window.DD_RUM.stopSessionReplayRecording()
+  })
+</script>
+```
+{% /tab %}
+{% tab label="CDN sync" %}
+```javascript
+<script>
+    window.DD_RUM && window.DD_RUM.init({
+        ...
+        startSessionReplayRecordingManually: true,
+        ...
+    });
+
+    window.DD_RUM && window.DD_RUM.startSessionReplayRecording();
+    // Do something
+    window.DD_RUM && window.DD_RUM.stopSessionReplayRecording();
+</script>
+```
+{% /tab %}
+{% /tabs %}
+
+**Note**: In some scenarios, you may want to begin recording, even if it was initially sampled out of replay. To force Session Replay recording for the rest of the current session, call [`startSessionReplayRecording({ force: true })`][32].
+{% /if %}
+<!-- end Browser -->
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -613,8 +734,17 @@ DatadogSdk.instance.sdkVerbosity = CoreLoggerLevel.debug;
 
 See [Privacy Options][2].
 
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+### Connect Session Replay to your third-party tools
+
+You can access the Session Replay URL to use in integrations, live from the browser where the session is taking place.
+See [Connect Session Replay to your third-party tools][30].
+{% /if %}
+<!-- end Browser -->
+
 [1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
-[2]: /session_replay/mobile/privacy_options
+[2]: /session_replay/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
 [4]: https://central.sonatype.com/artifact/com.datadoghq/dd-sdk-kotlin-multiplatform-session-replay/versions
 [5]: /real_user_monitoring/android/?tab=kotlin
@@ -629,16 +759,21 @@ See [Privacy Options][2].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/mobile/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?tab=reactnative
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
-[21]: /session_replay/browser/#setup
+[21]: /session_replay/setup_and_configuration/?platform=browser#setup
 [22]: https://github.com/DataDog/dd-sdk-ios/releases/tag/2.13.0
 [23]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/?tab=ios#instrument-your-web-views
 [24]: /real_user_monitoring/application_monitoring/kotlin_multiplatform/web_view_tracking/?tab=kotlinmultiplatform#instrument-your-web-views
 [25]: /real_user_monitoring/application_monitoring/web_view_tracking/?tab=reactnative#instrument-your-web-views
-[26]: /session_replay/browser/#setup
+[26]: /session_replay/setup_and_configuration/?platform=browser#setup
 [27]: https://reactnative.dev/architecture/landing-page
 [28]: https://docs.datadoghq.com/real_user_monitoring/application_monitoring/flutter/setup?tab=rum
 [29]: https://pub.dev/packages/datadog_session_replay
+[30]: /real_user_monitoring/guide/connect-session-replay-to-your-third-party-tools
+[30]: /real_user_monitoring/browser/setup/
+[31]: /real_user_monitoring/guide/sampling-browser-plans/
+[32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
+[33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording

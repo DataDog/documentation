@@ -58,7 +58,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
             analyzers: ["os", "languages"]
 
           # Enables runtime package prioritization (Preview, Agent 7.79+)
-          # See Runtime Package Tracking section below.
+          # See Runtime Package Prioritization section below.
           enrichment:
             usage:
               enabled: true
@@ -99,7 +99,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
           analyzers: ["os", "languages"]
 
         # Enables runtime package prioritization (Preview, Agent 7.79+)
-        # See Runtime Package Tracking section below.
+        # See Runtime Package Prioritization section below.
         enrichment:
           usage:
             enabled: true
@@ -111,7 +111,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{% tab "DaemonSet" %}}
 
-1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Vulnerability Management, mount-based container image scanning, and runtime package tracking.
+1. Add the following environment variables to every Agent container in the `daemonset.yaml` file, including `agent`, `security-agent`, and `system-probe`. These variables enable Misconfigurations, Vulnerability Management, mount-based container image scanning, and runtime package prioritization.
 
     ```yaml
     - name: DD_COMPLIANCE_CONFIG_ENABLED
@@ -166,7 +166,7 @@ Use the following instructions to enable Misconfigurations and Vulnerability Man
 
 {{< /tabs >}}
 
-**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package tracking runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Tracking](#runtime-package-tracking-preview) section for more details.
+**Note**: `enrichment.usage.enabled: true` is in Preview and requires Datadog Agent **7.79.0 or later**. From 7.79.0, runtime package prioritization runs independently of [Workload Protection][8] and does not affect its usage. See the [Runtime Package Prioritization](#runtime-package-prioritization-preview) section for more details.
 
 **Note**: The `languages` analyzer requires Datadog Agent **7.70 or later**. When enabled, it detects vulnerabilities in application libraries managed by the package managers below, in addition to OS packages. When the `analyzers` field is omitted, Datadog only scans OS packages for container images.
 
@@ -190,9 +190,9 @@ The `languages` analyzer covers the following package ecosystems:
 | Elixir | Mix lock |
 | Julia | Julia |
 
-## Runtime Package Tracking (Preview)
+## Runtime Package Prioritization (Preview)
 
-Runtime package tracking enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+Runtime package prioritization enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
 
 Each vulnerability finding is enriched with the following signals:
 
@@ -208,7 +208,7 @@ These signals power vulnerability prioritization in Cloud Security, surfacing fi
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
 
-**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package tracking runs independently and does not affect its usage.
+**Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
 {{< tabs >}}
 

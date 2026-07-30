@@ -9,6 +9,9 @@ further_reading:
 - link: "/product_analytics/analytics_explorer/"
   tag: "Documentation"
   text: "Analytics Explorer"
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
 algolia:
   tags: ['funnel']
 ---

@@ -50,6 +50,8 @@ If you want to connect with a crawler or library based integration, navigate to 
 
 ### Configuring Agent integrations
 
+<div class="alert alert-info">You can configure Agent integrations remotely across your fleet from a central UI and API with <a href="/agent/fleet_automation/configure_integrations/">Fleet Automation</a>, instead of editing <code>conf.yaml</code> files on each host. Discover auto-detected services, scope a configuration to any subset of hosts by tag or host filter, and deploy to every matching Agent in one action. This requires Remote Configuration and Agent version 7.76 or later on Linux or Windows VMs.</div>
+
 Most configuration parameters are specific to the [individual integration][18]. Configure Agent integrations by navigating to the `conf.d` folder at the root of your Agent's configuration directory. Each integration has a folder named `<INTEGRATION_NAME>.d`, which contains the file `conf.yaml.example`. This example file lists all available configuration options for the particular integration.
 
 To activate a given integration:

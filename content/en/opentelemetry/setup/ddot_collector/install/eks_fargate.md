@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on EKS Fargate
 code_lang: eks_fargate
 type: multi-code-lang
-code_lang_weight: 6
+code_lang_weight: 7
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -136,7 +136,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [resourcedetection, infraattributes]
+      processors: [resourcedetection, infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
