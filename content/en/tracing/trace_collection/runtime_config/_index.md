@@ -29,7 +29,11 @@ To make changes to a service's configuration at runtime:
 1. Select an environment, then click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
 1. Update the value in the edit modal and confirm.
 
-An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
+{{< img src="/tracing/runtime_config/config_at_runtime_success.png" alt="The SDK Configurations table showing logs injection disabled across one instance." style="width:100%;">}}
+
+In this example, you can see that Log Injection is disabled for the test environment across one instance. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
+
+You can tell when the configuration changes have been successfully applied by referencing the {{< ui >}}Updates applied to X instances{{< /ui >}} text. In this example, the configuration applied successfully to one instance.
 
 <div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It now shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
 
