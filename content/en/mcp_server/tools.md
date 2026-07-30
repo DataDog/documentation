@@ -411,6 +411,8 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 
+<div class="alert alert-info">The <code>cases</code> toolset is in Preview and is not included in <code>toolsets=all</code>. Request it explicitly with <code>toolsets=cases</code>. No sign-up or access request is required.</div>
+
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\
