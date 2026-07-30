@@ -160,7 +160,7 @@ DBM correlation for OpenTelemetry traces works at two levels:
 
 Datadog SDKs add this comment automatically. OpenTelemetry auto-instrumentation doesn't, so service-level correlation requires adding the comment manually:
 
-```
+```sql
 /*dddbs='<service>',dde='<env>',ddps='<service>',ddpv='<version>'*/ SELECT * FROM users WHERE id = ?
 ```
 
