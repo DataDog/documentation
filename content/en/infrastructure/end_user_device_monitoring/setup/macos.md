@@ -67,18 +67,18 @@ Use this method to test a single machine or for devices that are not managed by 
 
 ### Verify the installation
 
-1. To confirm that the Agent is running, run the following command in Terminal:
+To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
-    ```shell
-    sudo datadog-agent status
-    ```
+Alternatively, you can run the following command in Terminal to verify the installation:
 
-    In the output, confirm the following:
-    - The Agent version is 7.80 or later.
-    - **Status** is `Running`.
-    - `infrastructure_mode: end_user_device` is set.
+```shell
+sudo datadog-agent status
+```
 
-1. In Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+In the output, confirm the following:
+- The Agent version is 7.80 or later.
+- **Status** is `Running`.
+- `infrastructure_mode: end_user_device` is set.
 
 ### Enable Network Path (optional)
 
