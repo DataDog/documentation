@@ -27,7 +27,7 @@ With flags, you can:
 - View coverage data filtered by a specific flag in the Datadog UI.
 - Configure [PR Gates][1] that evaluate coverage thresholds for specific flags.
 - Track coverage trends separately for different test suites or environments.
-- Enable [carryforward][6] to keep total coverage accurate when not every CI job runs for a commit.
+- Enable [carryforward][2] to keep total coverage accurate when not every CI job runs for a commit.
 
 ### Flags vs. monorepo support features
 
@@ -68,6 +68,8 @@ This allows you to answer questions like "What is my unit test coverage?" (`unit
 
 ## Add flags to coverage reports
 
+### Uploads with the CLI
+
 <div class="alert alert-info">The <code>--flags</code> argument is available in <code>datadog-ci</code> v5.6.0 and later.</div>
 
 To add flags to a coverage report, use the `--flags` option when uploading with the `datadog-ci` CLI:
@@ -84,15 +86,25 @@ datadog-ci coverage upload --flags unit-tests --flags jvm-21 coverage.xml
 
 In this example, the coverage data is available under both the `unit-tests` and `jvm-21` flags. You can filter by either flag in the UI.
 
+### Automatic uploads with Test Optimization libraries
+
+If a Test Optimization library [uploads your code coverage reports automatically][4], set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
+
+{{< code-block lang="shell" >}}
+export DD_CODE_COVERAGE_FLAGS=unit-tests,jvm-21
+{{< /code-block >}}
+
+This example attaches the same flags as `datadog-ci coverage upload --flags unit-tests --flags jvm-21`. The library removes whitespace around each flag and ignores empty entries.
+
 ### Limitations
 
-- Maximum of 32 flags per report. If a report is tagged with more than 32 flags, the first 32 are kept and the rest are ignored.
+- Maximum of 32 flags per report. When using `datadog-ci`, the first 32 flags are kept and the rest are ignored. When using a Test Optimization library, a report configured with more than 32 flags is uploaded without flags.
 - Maximum flag name length is 1000 characters. Flags longer than 1000 characters are ignored.
 - Flag names can contain alphanumeric characters, hyphens (`-`), underscores (`_`), periods (`.`), and colons (`:`).
 
 ## View coverage by flag
 
-In the [Code Coverage UI][4], select a repository and use the {{< ui >}}Flag{{< /ui >}} filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
+In the [Code Coverage UI][5], select a repository and use the {{< ui >}}Flag{{< /ui >}} filter to view coverage data for a specific flag. This filter appears alongside the Code Owner and Service filters.
 
 {{< img src="/code_coverage/flags_filter.png" alt="Code Coverage UI showing the flag filter dropdown" style="width:100%" >}}
 
@@ -104,14 +116,14 @@ You can configure [PR Gates][1] to enforce coverage thresholds for specific flag
 
 You can create flag-specific gates in one of two ways:
 
-- **Datadog UI**: Navigate to [PR Gates rule creation][2] and configure a rule with per-flag scope.
-- **YAML configuration file**: Define gates with the `flags` field in your [`code-coverage.datadog.yml`][5] file. This allows you to manage gates as code alongside your repository.
+- **Datadog UI**: Navigate to [PR Gates rule creation][1] and configure a rule with per-flag scope.
+- **YAML configuration file**: Define gates with the `flags` field in your [`code-coverage.datadog.yml`][6] file. This allows you to manage gates as code alongside your repository.
 
-Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][5] for YAML gate syntax and examples.
+Rules from both sources are evaluated when a pull request is opened or updated. See [Configuration][6] for YAML gate syntax and examples.
 
 ### Create a flag-specific gate in the Datadog UI
 
-1. Navigate to [PR Gates rule creation][2].
+1. Navigate to [PR Gates rule creation][1].
 2. Configure the coverage threshold (total or patch coverage).
 3. In the {{< ui >}}per flag{{< /ui >}} field, select one or more flags the gate should apply to.
 4. Save the rule.
@@ -178,8 +190,8 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
-[2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
+[2]: /code_coverage/carryforward
 [3]: /code_coverage/monorepo_support
-[4]: https://app.datadoghq.com/ci/code-coverage
-[5]: /code_coverage/configuration#pr-gates
-[6]: /code_coverage/carryforward
+[4]: /code_coverage/setup#upload-reports-automatically-with-test-optimization
+[5]: https://app.datadoghq.com/ci/code-coverage
+[6]: /code_coverage/configuration#pr-gates
