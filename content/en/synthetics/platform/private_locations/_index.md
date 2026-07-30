@@ -178,7 +178,9 @@ Launch your private location on:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
+Run this command to boot your private location worker by mounting your configuration file to the container. The `$PWD` in the command below refers to the directory you run the command from, so replace it with the path to wherever your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is stored. 
+
+The path before the colon (the location on your host machine) can be any directory; only the path after the colon (`/etc/datadog/synthetics-check-runner.json`) must match exactly, since that is where the worker expects to find its configuration inside the container:
 
 ```shell
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
