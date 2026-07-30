@@ -273,7 +273,7 @@ Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLinea
 
 2. **Enable OpenLineage collection.** Set the `DD_DATA_JOBS_OPENLINEAGE_ENABLED` environment variable to `true` on the Spark driver.
 
-   You can set the variable through any mechanism that adds environment variables to the driver. One way is the `ddTraceConfigs` of the `spark-driver` target from [Enable Single Step Instrumentation](#enable-single-step-instrumentation):
+   If using [Single Step Instrumentation](#enable-single-step-instrumentation), add it to the `ddTraceConfigs` of the `spark-driver` target:
 
    ```yaml
    ddTraceConfigs:
