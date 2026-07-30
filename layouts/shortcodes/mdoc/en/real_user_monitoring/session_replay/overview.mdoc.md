@@ -35,7 +35,6 @@ Datadog also reduces the load on a browser's UI thread by delegating most of the
 
 Heatmaps overlay click, top elements, and scroll data on top of your Session Replay recordings, helping you understand how users interact with your pages. Learn more about [Heatmaps][12].
 
-**Note**: Heatmaps are only supported for Browser Session Replay.
 {% /if %}
 <!-- end Browser -->
 
