@@ -2859,6 +2859,13 @@
       "description": "Update team notification rule returns \"OK\" response"
     }
   ],
+  "IngestStixThreatIntel": [
+    {
+      "group": "threat_intelligence",
+      "suffix": "",
+      "description": "Ingest STIX threat intelligence returns \"OK\" response"
+    }
+  ],
   "CreateUser": [
     {
       "group": "users",

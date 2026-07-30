@@ -21644,6 +21644,23 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: Threat Intelligence
+      url: /api/latest/threat-intelligence/
+      identifier: threat-intelligence
+      generated: true
+    - name: Ingest STIX threat intelligence
+      url: /api/latest/threat-intelligence/ingest-stix-threat-intelligence/
+      identifier: threat-intelligence-ingest-stix-threat-intelligence
+      parent: threat-intelligence
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - IngestStixThreatIntel
+        unstable:
+          - v2
+        order: 1
     - name: User Authorized Clients
       url: /api/latest/user-authorized-clients/
       identifier: user-authorized-clients
