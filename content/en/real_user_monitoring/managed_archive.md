@@ -72,7 +72,7 @@ To enable session storage for an application:
 1. In Datadog, navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}.
 2. Select your application.
 3. Go to {{< ui >}}Routing{{< /ui >}} > {{< ui >}}Managed Archive{{< /ui >}}.
-4. Toggle {{< ui >}}Enable Managed Archive{{< /ui >}} on and select the storage period: 1, 3, or 6 months.
+4. Toggle {{< ui >}}Enable Managed Archive{{< /ui >}} on and select the storage period.
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_setup.png" alt="The Managed Archive configuration panel showing the Store sessions toggle" style="width:70%;" >}}
 
