@@ -106,7 +106,7 @@ See [Data Collected][7] for details on what data is collected during code covera
 
 #### Supported libraries and versions
 
-As of July 30, 2026, automatic code coverage report upload is supported in the following Test Optimization library versions:
+Automatic code coverage report upload is supported in the following Test Optimization library versions:
 
 | Library | First supported version | Coverage source |
 |---|---|---|
@@ -115,10 +115,6 @@ As of July 30, 2026, automatic code coverage report upload is supported in the f
 | JavaScript `dd-trace` 6.x | `6.0.0` | Jest, Vitest, or NYC coverage |
 | Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
 | Java `dd-java-agent` | `1.53.0` | JaCoCo |
-| Go `dd-trace-go/v2` | `2.10.0-rc.1` | LCOV through Orchestrion |
-| .NET and Swift | Not supported by the SDK | — |
-
-Go does not have a stable `2.10.0` release. The latest stable release, `2.9.1`, does not contain the uploader.
 
 These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`](#uploading-coverage-reports) command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
 

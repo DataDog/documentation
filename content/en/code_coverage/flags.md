@@ -88,7 +88,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ### Add flags to automatically uploaded reports
 
-As of July 30, 2026, `DD_CODE_COVERAGE_FLAGS` is supported only in the following library versions:
+`DD_CODE_COVERAGE_FLAGS` is supported in the following library versions:
 
 | Library | First version with `DD_CODE_COVERAGE_FLAGS` |
 |---|---|
@@ -98,7 +98,6 @@ As of July 30, 2026, `DD_CODE_COVERAGE_FLAGS` is supported only in the following
 | Ruby `datadog-ci` | Unreleased (`main`); not included in `v1.35.0` |
 | Java `dd-java-agent` | Unreleased (`master`); not included in `v1.64.2` |
 | Go `dd-trace-go/v2` | Unreleased (`main`); not included in `v2.10.0-rc.5` |
-| .NET and Swift | Not implemented |
 
 For a supported version, set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
 
@@ -110,7 +109,7 @@ This example attaches the same flags as `datadog-ci coverage upload --flags unit
 
 ### Limitations
 
-- Maximum of 32 flags per report. When using `datadog-ci`, the first 32 flags are kept and the rest are ignored. When using a Test Optimization library, if more than 32 flags are configured, the report is uploaded with no flags at all.
+- Maximum of 32 flags per report. If a report is tagged with more than 32 flags, the first 32 are kept and the rest are ignored.
 - Maximum flag name length is 1000 characters. Flags longer than 1000 characters are ignored.
 - Flag names can contain alphanumeric characters, hyphens (`-`), underscores (`_`), periods (`.`), and colons (`:`).
 
