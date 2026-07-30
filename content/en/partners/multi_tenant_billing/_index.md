@@ -47,6 +47,8 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in y
 
 The same data is available programmatically through the [Usage Metering API][5], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
 
+**Note**: Standard GovCloud boundaries apply to this visibility. A non-GovCloud Admin Org cannot see cost and usage data for a GovCloud customer organization.
+
 ### Trial Org provisioning
 
 If your Admin Org has the Trial Org Creator capability enabled, provision trial Datadog organizations for prospective customers directly from {{< ui >}}Dashboards{{< /ui >}} > **Trial Org Provisioning**, without contacting Datadog for each trial. See [Trial Org Provisioning][3] for the full walkthrough.
