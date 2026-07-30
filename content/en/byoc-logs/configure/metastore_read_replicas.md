@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Indexers and searchers in a BYOC (Bring Your Own Cloud) Logs cluster all read index metadata from the same metastore database by default. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing, and isolates the search path from the indexing path.
+By default, indexers and searchers in a BYOC (Bring Your Own Cloud) Logs cluster all read index metadata from the same metastore database. You can deploy a read-only metastore backed by a database read replica so that searchers query the replica instead. This scales search requests independently of indexing and isolates the search path from the indexing path.
 
 ## Prerequisite: A read replica database
 
