@@ -1,5 +1,7 @@
 ---
 title: Setting up Workload Protection on ECS
+aliases:
+  - /security/workload_protection/setup/agent/ecs_ec2
 disable_toc: false
 ---
 

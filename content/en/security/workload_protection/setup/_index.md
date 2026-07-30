@@ -1,5 +1,9 @@
 ---
 title: Getting started with Workload Protection
+aliases:
+  - /security/workload_protection/setup/agent
+  - /security/workload_protection/supported_linux_distributions
+  - /security/threats/supported_linux_distributions
 disable_toc: false
 ---
 

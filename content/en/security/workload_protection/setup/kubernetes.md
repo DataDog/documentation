@@ -1,5 +1,7 @@
 ---
 title: Setting up Workload Protection on Kubernetes
+aliases:
+  - /security/workload_protection/setup/agent/kubernetes
 disable_toc: false
 ---
 
