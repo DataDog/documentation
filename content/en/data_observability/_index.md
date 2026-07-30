@@ -2,21 +2,6 @@
 title: Data Observability Overview
 description: "Monitor data quality, performance, and cost with Data Observability to detect anomalies, analyze data lineage, and prevent issues affecting downstream systems."
 further_reading:
- - link: '/data_observability/data_catalog/'
-   tag: 'Documentation'
-   text: 'Data Catalog'
- - link: '/data_observability/lineage/'
-   tag: 'Documentation'
-   text: 'Lineage'
- - link: '/data_observability/quality_monitoring/'
-   tag: 'Documentation'
-   text: 'Quality Monitoring'
- - link: '/data_observability/jobs_monitoring'
-   tag: 'Documentation'
-   text: 'Jobs Monitoring'
- - link: '/data_observability/cicd/'
-   tag: 'Documentation'
-   text: 'CI/CD'
  - link: 'https://www.datadoghq.com/about/latest-news/press-releases/datadog-metaplane-aquistion/'
    tag: 'Blog'
    text: 'Datadog Brings Observability to Data teams by Acquiring Metaplane'
