@@ -7,12 +7,6 @@ content_filters:
     label: "SDK"
 -->
 
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
-
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 ## Overview
