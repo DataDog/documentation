@@ -9,7 +9,7 @@ aliases:
   - /security/misconfigurations/signals_explorer
   - /security/cloud_security_management/misconfigurations/signals_explorer/
 further_reading:
-  - link: "/security/workload_protection/detect_and_monitor/detection_rules"
+  - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
     tag: "Documentation"
     text: "Explore Workload Protection detection rules"
   - link: "/security/notifications/"
@@ -40,6 +40,6 @@ Select a signal to open the side panel. From there, you can [investigate the thr
 [2]: https://app.datadoghq.com/security/workload-protection/signals
 [3]: /security/notifications/rules/
 [4]: /account_management/rbac/permissions/#cloud-security-platform
-[5]: /security/workload_protection/detect_and_monitor/detection_rules
+[5]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [6]: /security/workload_protection/investigate_and_triage/security_signals/investigate
 [7]: /security/workload_protection/investigate_and_triage/security_signals/actions

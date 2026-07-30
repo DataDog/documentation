@@ -61,7 +61,7 @@ When an Agent event matches a threat intelligence indicator, Workload Protection
 [1]: /security/workload_protection/investigate_and_triage/agent_events
 [2]: /security/threat_intelligence/
 [3]: /security/threat_intelligence/#entity-types
-[4]: /security/workload_protection/detect_and_monitor/detection_rules
+[4]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [5]: /security/threat_intelligence/#threat-intelligence-categories
 [6]: /security/threat_intelligence/#threat-intelligence-facets
 [7]: /security/workload_protection/investigate_and_triage/security_signals

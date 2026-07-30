@@ -1,6 +1,8 @@
 ---
 title: Detection rules
 disable_toc: false
+aliases:
+  - /security/workload_protection/detect_and_monitor/detection_rules
 ---
 
 ## Overview

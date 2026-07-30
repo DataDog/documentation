@@ -155,4 +155,4 @@ As an example of how to use Coverage to triage and respond to coverage issues, h
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/coverage
 [2]: /security/detection_rules/#mitre-attck-map
 [3]: /security/workload_protection/getting_started/
-[4]: /security/workload_protection/detect_and_monitor/detection_rules
+[4]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules

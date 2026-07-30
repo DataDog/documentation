@@ -20,7 +20,7 @@ Users retain full control over how and where these rules are applied within thei
 
 The scope of these rules spans a broad spectrum of security coverage. Some rules focus on collecting low-level telemetry that provides valuable context during threat investigations, while others are designed to detect high-confidence indicators of compromise that warrant immediate attention and response.
 
-To author a new Agent rule and its threat detection rule together (Assisted rule creator or manual flow), see [Create the custom Agent and detection rules together](/security/workload_protection/detect_and_monitor/detection_rules/#create-the-custom-agent-and-detection-rules-together) in the [Detection rules](/security/workload_protection/detect_and_monitor/detection_rules) documentation.
+To author a new Agent rule and its threat detection rule together (Assisted rule creator or manual flow), see [Create the custom Agent and detection rules together](/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-the-custom-agent-and-detection-rules-together) in the [Detection rules](/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules) documentation.
 
 ### 1) Writing custom agent rules in SecL
 
