@@ -53,18 +53,22 @@ Additionally, when you use Cloud SIEM notifications to send new signal alerts to
 
 Bits AI can run investigations on the following Security log sources:
 - Amazon GuardDuty
-  - [Finding categories][6] include anomalous IAM behavior, EC2 credential exfiltration and misuse, S3 data exposure, CloudTrail or S3 defense evasion, and attack sequences correlating IAM credential and S3 data compromise
+  - Supported [finding types][6] cover anomalous and compromised IAM credentials; EC2 and resource credential exfiltration and misuse; Bedrock logging changes, anomalous model invocation, cost harvesting, and direct prompt injection; compromised EKS and ECS cluster attack sequences; Kubernetes credential access, anomalous behavior, execution, privilege escalation, persistence, policy changes, and malicious callers; S3 anomalous behavior, data exposure, malicious callers, and penetration test activity; CloudTrail or S3 defense evasion; and attack sequences correlating IAM credential and S3 data compromise.
 - AWS CloudTrail
 - Azure
+- Cloudflare
 - GCP
 - Kubernetes
 - Microsoft Entra ID
 - Okta
 - Google Workspace
 - Microsoft 365
+- GitLab
 - GitHub
+- Slack
 - Snowflake
 - SentinelOne
+- Windows
 - Email phishing
 
 ## Set up Bits Security Analyst
