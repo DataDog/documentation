@@ -111,6 +111,50 @@ To update the SLO time window (for example, to 30 days) or target, click the {{<
 
    {{< img src="synthetics/test_suites/test_suite_slo_edit.png" alt="Edit SLO page for a test suite, showing the target and time window fields." style="width:90%;">}}
 
+## Reliability insights
+
+Reliability insights gives you a system-wide view of the health of all your test suites. Identify where reliability is degrading without reviewing suites one by one.
+
+1. Navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Test Suites{{< /ui >}} to open the reliability insights report by default. Click the {{< ui >}}Test Suites{{< /ui >}} tab to view the list of individual suites instead.
+2. Turn off the {{< ui >}}My Teams{{< /ui >}} filter, enabled by default, to view all suites.
+3. Select {{< ui >}}4 Weeks{{< /ui >}}, {{< ui >}}12 Weeks{{< /ui >}}, or {{< ui >}}24 Weeks{{< /ui >}} to change the reporting window. Only time ranges with available data appear; additional windows appear as more history accumulates.
+
+<!-- TODO: add screenshot of reliability insights report overview showing System Health, Root Cause Analysis, and Suite Performance tabs -->
+
+### View system health
+
+View an organization-wide snapshot of reliability to identify where to focus first.
+
+- **Top-breaching suites**: The suites that breached their SLO the most weeks.
+- **Top driving tests**: The tests responsible for the largest number of suite degradations.
+- **Top regional breaches**: The locations contributing most to SLO failures.
+- **Error budget and recovery time**: Median error budget consumed and median recovery time across suites, with the suites driving those metrics.
+
+<!-- TODO: add screenshot of System Health view -->
+
+### Investigate root causes
+
+Examine the tests and services most frequently associated with degraded suites to narrow your investigation.
+
+- **Failure-driving tests**: Tests ranked by the number of suites they affect.
+- **Services**: Services contributing most to suite degradation.
+
+Click a test or service to open its details page.
+
+<!-- TODO: add screenshot of Root Cause Analysis view -->
+
+### Review suite performance
+
+Review reliability across every test suite over time with a historical heatmap.
+
+1. Filter by team.
+2. Sort suites to surface the most relevant ones.
+3. Click {{< ui >}}Branches Only{{< /ui >}} to exclude non-main branches (enabled by default).
+
+Each row represents a suite, and each column represents a reporting period. Click a suite row to open its details page.
+
+<!-- TODO: add screenshot of Suite Performance view -->
+
 ## View and manage test suites
 
 After creating your suite, it appears in the {{< ui >}}Suites{{< /ui >}} tab on the [Synthetic Monitoring tests][1] page. You can also access test suites from {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Test Suites{{< /ui >}}.
