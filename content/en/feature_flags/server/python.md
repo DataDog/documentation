@@ -37,17 +37,12 @@ Set the following environment variables:
 # Required: Enable the feature flags provider
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
-
 # Required: Service identification
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
 <div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
-
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Installation
 
@@ -64,18 +59,56 @@ ddtrace>=3.19.0
 openfeature-sdk>=0.5.0
 {{< /code-block >}}
 
-If you enable flag evaluation metrics, you must also install the OpenTelemetry SDK and OTLP exporter:
+## Enable flag evaluation metrics
 
-{{< code-block lang="bash" >}}
-pip install opentelemetry-sdk opentelemetry-exporter-otlp-proto-grpc
-{{< /code-block >}}
+The Python SDK can emit the experimental `feature_flag.evaluations` metric through OTLP. This setup requires `ddtrace` version 4.7.0 or later.
 
-Or add them to your `requirements.txt`:
+1. Upgrade `ddtrace` and install the OpenTelemetry SDK and gRPC exporter:
 
-{{< code-block lang="text" filename="requirements.txt" >}}
-opentelemetry-sdk>=1.41.0
-opentelemetry-exporter-otlp-proto-grpc>=1.41.0
-{{< /code-block >}}
+   {{< code-block lang="bash" >}}
+   pip install "ddtrace>=4.7.0" "opentelemetry-sdk>=1.41.0" "opentelemetry-exporter-otlp-proto-grpc>=1.41.0"
+   {{< /code-block >}}
+
+   Or add the dependencies to your `requirements.txt`:
+
+   {{< code-block lang="text" filename="requirements.txt" >}}
+   ddtrace>=4.7.0
+   opentelemetry-sdk>=1.41.0
+   opentelemetry-exporter-otlp-proto-grpc>=1.41.0
+   {{< /code-block >}}
+
+1. Enable the gRPC OTLP receiver on the Datadog Agent. Add the following configuration to `datadog.yaml`:
+
+   {{< code-block lang="yaml" filename="datadog.yaml" >}}
+   otlp_config:
+     receiver:
+       protocols:
+         grpc:
+           endpoint: 0.0.0.0:4317
+   {{< /code-block >}}
+
+   For an Agent container, set `DD_OTLP_CONFIG_RECEIVER_PROTOCOLS_GRPC_ENDPOINT=0.0.0.0:4317` and expose port `4317`.
+
+1. Enable OpenTelemetry metrics in the application. Set the metrics endpoint to the Agent's gRPC receiver:
+
+   {{< code-block lang="bash" >}}
+   export DD_METRICS_OTEL_ENABLED=true
+   export OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://<AGENT_HOST>:4317
+   {{< /code-block >}}
+
+   Replace `<AGENT_HOST>` with the Agent hostname or IP address. You can omit the endpoint when `DD_AGENT_HOST` already points to the Agent.
+
+1. Start the application with `ddtrace-run`:
+
+   {{< code-block lang="bash" >}}
+   ddtrace-run python app.py
+   {{< /code-block >}}
+
+   If you do not use `ddtrace-run`, add `import ddtrace.auto` before the OpenFeature imports in your application.
+
+1. Evaluate a flag. Then confirm that `feature_flag.evaluations` appears in the [Metrics Explorer][6].
+
+For metric tags, retention, HTTP setup, and troubleshooting, see [Set Up Server-Side Flag Evaluation Metrics][4]. For graphing options, see [Feature Flag Graphs][5].
 
 ## Initialize the SDK
 
@@ -318,6 +351,7 @@ Verify the following to ensure that Remote Configuration is working:
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: https://app.datadoghq.com/metric/explorer
 
 ## Further reading
 
