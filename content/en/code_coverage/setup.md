@@ -64,7 +64,7 @@ Follow instructions in the [Gitlab Source Code integration documentation][1] on 
 
 See [Datadog Source Code Integration Guide][2] for additional context.
 
-
+[1]: /integrations/gitlab-source-code/
 [1]: /integrations/gitlab-source-code/
 [2]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
 {{% /tab %}}
@@ -73,7 +73,7 @@ See [Datadog Source Code Integration Guide][2] for additional context.
 Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Azure DevOps repositories to Datadog
 using [Azure DevOps Source Code integration][2].
 
-
+[1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [2]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 {{% /tab %}}
@@ -98,7 +98,7 @@ Rules from both sources are evaluated when a pull request is opened or updated. 
 
 ## Upload code coverage reports
 
-Upload code coverage report files to Datadog automatically with a supported Test Optimization library or by running the `datadog-ci` CLI in your CI environment.
+Upload code coverage report files to Datadog either automatically with a supported Test Optimization library or by running the `datadog-ci` CLI in your CI environment.
 
 See [Data Collected][7] for details on what data is collected during code coverage report upload.
 
@@ -116,7 +116,7 @@ Automatic code coverage report upload is supported in the following Test Optimiz
 | Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
 | Java `dd-java-agent` | `1.53.0` | JaCoCo |
 
-These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`](#uploading-coverage-reports) command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
+These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`][17] command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
 
 #### Enable automatic uploads
 

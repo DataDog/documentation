@@ -68,7 +68,7 @@ This allows you to answer questions like "What is my unit test coverage?" (`unit
 
 ## Add flags to coverage reports
 
-### Uploads with the CLI
+### Add flags with the CLI
 
 <div class="alert alert-info">The <code>--flags</code> argument is available in <code>datadog-ci</code> v5.6.0 and later.</div>
 
