@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import { realpathSync } from "node:fs";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
-import { isSitemapPage } from "./src/lib/api/sitemapFilter.ts";
+import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
