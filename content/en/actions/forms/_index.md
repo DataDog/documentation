@@ -51,9 +51,9 @@ Blueprints are starter forms for common use cases, pre-loaded with sample questi
 1. Select {{< ui >}}Create from blueprint{{< /ui >}} and browse the available templates.
 1. Select a blueprint and click {{< ui >}}Continue{{< /ui >}}.
 1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
+1. To further customize your form, see [Form components][3].
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
-To further customize your form, see [Form components][3].
 
 [3]: /actions/forms/components/
 {{% /tab %}}
@@ -64,16 +64,16 @@ You can import an existing form from a PDF or JSON file.
 1. Select {{< ui >}}Import a form{{< /ui >}}. An import dialog opens.
 1. Choose a source and follow the prompts.
 1. Name your form and optionally add a description and theme color. Click {{< ui >}}Continue{{< /ui >}}.
+1. To further customize your form, see [Form components][3].
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
-To further customize your form, see [Form components][3].
 
 [3]: /actions/forms/components/
 {{% /tab %}}
 {{< /tabs >}}
 
 To preview or share your form:
-1. Click {{< ui >}}View{{< /ui >}} to display the form as it appears to respondents. Click {{< ui >}}Edit{{< /ui >}} to return to the creator view.
+1. Click {{< ui >}}Preview{{< /ui >}} to view the form as it appears to respondents.
 1. Click {{< ui >}}Share{{< /ui >}} to copy the form link or configure sharing options.
 
 ## Form settings
@@ -123,7 +123,7 @@ To pause or remove external sharing, click {{< ui >}}Share{{< /ui >}}, then clic
 
 To add a form to a dashboard from the form editor:
 1. From the [Forms][2] page, click a form to open it in the editor.
-1. Click {{< ui >}}Share{{< /ui >}}.
+1. Click the {{< ui >}}Share{{< /ui >}} dropdown and select {{< ui >}}Share within Datadog{{< /ui >}} .
 1. Under {{< ui >}}Add to Dashboard{{< /ui >}}, select an existing dashboard or create one, then click {{< ui >}}Add{{< /ui >}}.
 
 You can also add a form to a dashboard directly from the dashboard:
