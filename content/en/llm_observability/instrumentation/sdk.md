@@ -1499,6 +1499,10 @@ def describe_image(image_bytes):
 
 {{< /code-block >}}
 
+Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view:
+
+{{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1519,11 +1523,11 @@ The `annotationOptions` object can contain the following:
 
 `inputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "...", audioParts: [...]}` (for LLM spans). `audioParts` is an optional list of audio objects for multimodal (voice) spans, each with a required `mimeType` and a base64-encoded `content` string. **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
 
 `outputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "...", audioParts: [...]}` (for LLM spans). `audioParts` is an optional list of audio objects for multimodal (voice) spans, each with a required `mimeType` and a base64-encoded `content` string. **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : optional - _object_
@@ -1594,7 +1598,31 @@ function similaritySearch () {
 }
 similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
+function voiceTurn (userAudioBytes) {
+  const resp = ... // multimodal (audio) llm call here
+  llmobs.annotate({
+    inputData: [
+      {
+        role: "user",
+        content: "Hey, how are you?", // transcript of the input audio
+        audioParts: [{ mimeType: "audio/wav", content: userAudioBytes.toString("base64") }]
+      }
+    ],
+    outputData: [
+      {
+        role: "assistant",
+        content: "Hey! I'm doing great, thanks for asking. How about you?",
+        audioParts: [{ mimeType: "audio/wav", content: resp.audioBuffer.toString("base64") }]
+      }
+    ]
+  })
+  return resp
+}
+voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'openai' }, voiceTurn)
+
 {{< /code-block >}}
+
+For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrumentation/auto_instrumentation/)—no manual annotation required.
 
 {{% /tab %}}
 {{% tab "Java" %}}
