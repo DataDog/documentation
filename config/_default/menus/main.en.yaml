@@ -6071,12 +6071,12 @@ menu:
       parent: cicd
       identifier: cicd_troubleshooting
       weight: 9
-    - name: Pipeline Troubleshooting
+    - name: CI Pipelines
       url: continuous_integration/troubleshooting/
       parent: cicd_troubleshooting
       identifier: cicd_troubleshooting_pipeline
       weight: 901
-    - name: Tests Troubleshooting
+    - name: Tests
       url: tests/troubleshooting/
       parent: cicd_troubleshooting
       identifier: cicd_troubleshooting_tests
