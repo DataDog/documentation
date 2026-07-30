@@ -226,7 +226,7 @@ If the Agent logs a warning starting with:
 ```
 No tables were found across any of the N databases.
 ```
-MySQL exposes a table in `INFORMATION_SCHEMA` only to users that hold a privilege on that table, so the `datadog` user sees no tables at all without one. The rest of the warning varies by Agent version. Resolve the warning by granting the `REFERENCES` privilege, which makes your table metadata visible without giving the Agent any ability to read your data:
+MySQL exposes a table in `INFORMATION_SCHEMA` only to users that hold a privilege on that table, so the `datadog` user sees no tables at all without one. Resolve the warning by granting the `REFERENCES` privilege, which makes your table metadata visible without giving the Agent any ability to read your data:
 
 ```sql
 GRANT REFERENCES ON *.* TO datadog@'%';
