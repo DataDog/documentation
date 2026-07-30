@@ -20,12 +20,6 @@ By enabling Session Replay, you can automatically mask sensitive elements from b
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
 
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
-
 <!-- Browser -->
 {% if equals($platform, "browser") %}
 ## Configuration
