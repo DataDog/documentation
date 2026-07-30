@@ -25,7 +25,7 @@ This page describes how to add Datadog Feature Flags to a Java application. Star
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
-<div class="alert alert-warning">Starting in version 1.65.0, in agentless mode, Java supports configuration delivery and local flag evaluation only. It does not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">Starting in version 1.65.0, agentless mode changes only flag configuration. Java still requires a supported Datadog Agent or serverless telemetry path to export evaluation metrics or exposure events. Without such a path, only configuration delivery and local flag evaluation work.</div>
 
 ## Compatibility requirements
 
@@ -106,7 +106,7 @@ Add the following dependencies to your `pom.xml`:
 
 The Gradle and Maven installation examples pin specific versions of `dd-openfeature` and the OpenFeature SDK. See [Compatibility requirements](#compatibility-requirements) for the minimum supported versions.
 
-Flag evaluation metrics require a supported Agent-backed configuration. See [Set Up Server-Side Flag Evaluation Metrics][8].
+Flag evaluation metrics use a separate telemetry path from flag configuration. See [Set Up Server-Side Flag Evaluation Metrics][8].
 
 ### Add the Java agent to the JVM
 
@@ -341,7 +341,7 @@ Use [Server SDK Configuration Sources][9] as the canonical reference for source 
 - [Use Agent Remote Configuration][13] to retain Agent-managed delivery
 - [Migrate an existing Remote Configuration setup][11] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
 
-Starting in version 1.65.0, Java does not support `feature_flag.evaluations`, exposure logging, or experimentation use cases in agentless mode. The [Server-Side Flag Evaluation Metrics][8] guide applies only to supported Agent-backed configurations. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
+Agentless mode changes only flag configuration. It does not configure or enable `feature_flag.evaluations`, exposure logging, or experimentation use cases. These features require a supported Datadog Agent or serverless telemetry path. For more information on available graphing, see [Feature Flag Graphs](/feature_flags/concepts/flag_graphs/).
 
 ### Custom initialization timeout
 
@@ -624,7 +624,7 @@ Review `reason` and `errorCode` to understand why the provider returned a given 
 
 ### 4. Flagging platform: Verify data appears in Datadog
 
-<div class="alert alert-warning">Starting in version 1.65.0, Java does not send exposure events or the <code>feature_flag.evaluations</code> metric without a Datadog Agent. Their absence in an agentless deployment is expected and does not indicate that configuration loading or local evaluation failed.</div>
+<div class="alert alert-warning">When no supported telemetry path is configured, Java does not export exposure events or the <code>feature_flag.evaluations</code> metric. Their absence does not indicate that configuration loading or local evaluation failed.</div>
 
 #### Flag evaluation metrics
 

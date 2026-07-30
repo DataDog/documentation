@@ -34,7 +34,7 @@ Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. The Java runtim
 
 Other server SDKs and versions earlier than those listed require Agent Remote Configuration for flag delivery.
 
-<div class="alert alert-warning">The initial Java and Node.js agentless releases load configuration and evaluate flags locally. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases load configuration and evaluate flags locally. They do not export evaluation metrics or exposure events. Java agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, Java also does not export these signals.</div>
 
 ## Agentless architecture
 
@@ -56,7 +56,7 @@ The SDK polls the Datadog-managed CDN every 30 seconds by default and uses ETags
 
 Tracer installation and initialization alone do not start CDN polling. Requests to the CDN contribute to server Feature Flags billing only after application code activates the provider.
 
-Agentless mode removes the Datadog Agent dependency for _flag configuration_. It does not remove language-specific tracer requirements. It also does not change your APM or serverless telemetry setup. You can continue to use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
+Agentless mode removes the Datadog Agent dependency for _flag configuration_. It does not remove language-specific tracer requirements. It also does not configure or enable APM and serverless telemetry. You can use the Datadog Lambda Extension, `serverless-init`, an Agent sidecar, or another supported telemetry path independently.
 
 ## Agent-backed Remote Configuration
 
@@ -130,7 +130,7 @@ Before enabling Feature Flags in production:
 3. Initialize the OpenFeature provider and check that it reaches a ready state.
 4. Change a non-production flag in Datadog and confirm that the workload receives the updated value after the polling interval.
 5. Confirm that your application handles caller-provided defaults if configuration is unavailable during a cold start.
-6. For the initial Java and Node.js agentless releases, do not plan experimentation workflows around evaluation metrics or exposure data. These uses are not supported.
+6. For Node.js, do not plan experimentation workflows around evaluation metrics or exposure data. For Java, configure a supported Datadog Agent or serverless telemetry path before you use these signals.
 
 ## Further reading
 

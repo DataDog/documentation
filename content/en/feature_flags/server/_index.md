@@ -42,7 +42,7 @@ The default source does not activate Feature Flags traffic for every tracer inst
 
 Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
-<div class="alert alert-warning">The initial Java and Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not export evaluation metrics or exposure events. Java agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, Java also does not export these signals.</div>
 
 Agentless delivery is available for the SDKs and versions listed. Other server SDKs use Agent Remote Configuration.
 
@@ -133,7 +133,7 @@ DD_VERSION=<YOUR_APP_VERSION>
 
 <div class="alert alert-info">In the Java and Node.js versions listed above, <code>DD_FEATURE_FLAGS_ENABLED</code> defaults to <code>true</code>, so you do not need to set it. Setting it to <code>false</code> disables the provider, CDN polling, and the Feature Flags Remote Configuration subscription. Other server SDKs continue to use the activation settings documented on their language pages.</div>
 
-For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Java and Node.js agentless releases do not support evaluation metrics, exposure logging, or experimentation use cases. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
+For SDKs and delivery modes that support it, see <a href="/feature_flags/guide/server_flag_evaluation_metrics/">Set Up Server-Side Flag Evaluation Metrics</a> to enable the <code>feature_flag.evaluations</code> metric. The initial Node.js agentless releases do not export evaluation metrics or exposure events. Java requires a supported Datadog Agent or serverless telemetry path to export these signals. See <a href="/feature_flags/concepts/flag_graphs/">Feature Flag Graphs</a> for more information on available graphing.
 
 ## Testing with in-memory providers
 
