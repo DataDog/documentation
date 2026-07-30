@@ -19,23 +19,19 @@ Before you can use configuration at runtime, you must set up Remote Configuratio
 
 ## Using configuration at runtime
 
+The primary entry point for editing configuration at runtime is the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab on the service page.
+
 To make changes to a service's configuration at runtime:
 
 1. Go to the [Catalog][3] in APM.
-1. Hover over the service for which you want to update configuration.
-1. Click {{< ui >}}Full Page{{< /ui >}} next to the service name.
-1. Click {{< ui >}}Service Info{{< /ui >}}.
-1. From the {{< ui >}}Setup Guidance{{< /ui >}} tab, click {{< ui >}}Edit{{< /ui >}}.
-1. Change the configuration options as needed. See [supported configuration options](#supported-configuration-options) for more details.
-1. Click {{< ui >}}Apply Configuration{{< /ui >}}.
+1. Open the service's {{< ui >}}Full Page{{< /ui >}}.
+1. Click {{< ui >}}Service Info{{< /ui >}}, then go to {{< ui >}}Service Config{{< /ui >}} > {{< ui >}}SDK & Agent Configurations{{< /ui >}}.
+1. Select an environment, then click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
+1. Update the value in the edit modal and confirm.
 
-In {{< ui >}}Active Library Configuration{{< /ui >}}, you can see which options are configured for this service and the selected environment:
+For a detailed walkthrough of the editing workflow, including how to track a change as it rolls out to your service instances, see [Edit configurations at runtime][8]. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
 
-{{< img src="/tracing/runtime_config/active-library-config.png" alt="From the Setup Guidance tab, you can see your active library configuration." style="width:100%;">}}
-
-In this example, you can see that Log Injection is enabled for the Staging environment across two instances. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
-
-You can tell when the configuration changes have been successfully applied by referencing the {{< ui >}}X Applied{{< /ui >}} text. In this example, the configuration applied successfully to all two instances.
+<div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It now shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
 
 ## Supported configuration options
 
@@ -61,3 +57,4 @@ The following options are supported with configuration at runtime. The required 
 [5]: /tracing/trace_explorer/trace_view
 [6]: https://app.datadoghq.com/organization-settings/remote-config
 [7]: /agent/configuration/network
+[8]: /tracing/troubleshooting/sdk_configurations/#edit-configurations-at-runtime
