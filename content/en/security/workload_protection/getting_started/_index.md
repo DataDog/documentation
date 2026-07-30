@@ -79,7 +79,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 
 #### Supported Windows flavors
 
-Workload Protection's Windows agent supports the following Windows Server 2019 and higher.
+Workload Protection's Windows agent supports Windows Server 2019 and higher.
 
 ### Deployment methods
 

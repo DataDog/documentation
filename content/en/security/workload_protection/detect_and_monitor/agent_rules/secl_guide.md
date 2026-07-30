@@ -117,81 +117,120 @@ SECL expressions support several platforms. You can use the documentation below 
 
 <div class="alert alert-info">You can find more in depth examples in the default policy shipped OOTB with the agent. See <a href="https://github.com/DataDog/security-agent-policies/blob/master/runtime/default.policy">Workload Protection default policy.</a></div>
 
+In Agent policy files, each rule includes an `id` and an `expression`. You can also add optional `actions`. See [Variables and actions][3] for more.
+
 ### Linux
 
 #### Access to sensitive files (allowlist safe tools)
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
-process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: access_sensitive_files
+expression: >-
+  open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
+  process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
 {{< /code-block >}}
 
 #### NGINX or PHP spawning bash
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-exec.file.path == "/usr/bin/bash" &&
-(
-process.ancestors.file.name == "nginx" ||
-process.ancestors.file.name =~ "php*"
-)
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: nginx_php_spawn_bash
+expression: >-
+  exec.file.path == "/usr/bin/bash" &&
+  (
+  process.ancestors.file.name == "nginx" ||
+  process.ancestors.file.name =~ "php*"
+  )
 {{< /code-block >}}
 
 #### Suspicious IMDS access from container
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-connect &&
-network.destination.ip in ["169.254.169.254"] &&
-container.id != ""
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: suspicious_imds_access
+expression: >-
+  connect &&
+  network.destination.ip in ["169.254.169.254"] &&
+  container.id != ""
 {{< /code-block >}}
 
 #### Kernel module loads outside maintenance window
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-load_module &&
-process.user != "root" &&
-process.ancestors.file.name not in ["modprobe", "insmod"]
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: kernel_module_load
+expression: >-
+  load_module &&
+  process.user != "root" &&
+  process.ancestors.file.name not in ["modprobe", "insmod"]
 {{< /code-block >}}
 
 #### Sensitive file read shortly after start
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-open.file.path == "/etc/secret" &&
-process.file.name == "java" &&
-process.created_at > 5s
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: sensitive_file_read_after_start
+expression: >-
+  open.file.path == "/etc/secret" &&
+  process.file.name == "java" &&
+  process.created_at > 5s
 {{< /code-block >}}
 
 #### Outbound to non-corporate IPs (CIDR allowlist)
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-connect &&
-network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: outbound_non_corporate_ips
+expression: >-
+  connect &&
+  network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
 {{< /code-block >}}
 
 ### Windows
 
 #### Registry persistence through a run key
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-set_key_value &&
-open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: registry_run_key_persistence
+expression: >-
+  set_key_value &&
+  open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
 {{< /code-block >}}
 
 #### Unsigned binary launching PowerShell
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
-process.parent.file.path !~ "*\\Program Files*" &&
-process.user_sid != "S-1-5-18"
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: unsigned_binary_powershell
+expression: >-
+  exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
+  process.parent.file.path !~ "*\\Program Files*" &&
+  process.user_sid != "S-1-5-18"
 {{< /code-block >}}
 
 ### Cross-platform
 
 #### Crypto-miner indicators
 
-{{< code-block lang="plaintext" disable_copy="true" collapsible="true" >}}
-exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
-exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
+{{< code-block lang="yaml" disable_copy="true" collapsible="true" >}}
+rules:
+
+- id: crypto_miner_indicators
+expression: >-
+  exec.args_flags in ["cpu-priority", "donate-level", ~"randomx-1gb-pages"] ||
+  exec.args in [~"*stratum+tcp*", ~"*nicehash*", ~"*yespower*"]
 {{< /code-block >}}
 
 [1]: /security/workload_protection/linux_expressions
 [2]: /security/workload_protection/windows_expressions
+[3]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions

@@ -36,8 +36,7 @@ Define the query that selects which [Agent events][1] the rule evaluates. The se
 
 You can:
 
-- Filter on **event types** (for example `exec`, `open`, `dns`, or `network`) to focus on specific runtime activity.
-- Filter on **specific fields** inside Agent events to refine the query and make the detection more precise. For example, filter on `@process.executable.path`, `@file.path`, or `@agent.rule_id`.
+- Filter on **specific fields** in Agent events to refine the query and make the detection more precise. For example, filter on `@process.executable.path`, `@file.path`, or `@agent.rule_id`. Detection rules can query any field from the backend event schema, which includes all Agent event fields plus additional enrichment such as infrastructure context, process ancestry, and threat intelligence. See [Linux backend syntax][13] and [Windows backend syntax][14] for the full set of available fields.
 - Combine multiple conditions to scope the rule to a subset of your infrastructure or workloads.
 
 For **threshold** rules, also define the **lookback window**—the period over which Datadog counts matching events before comparing the count to your rule conditions.
@@ -95,3 +94,5 @@ You can define a matching Agent rule and threat detection rule in one of these w
 [10]: /security/workload_protection/detect_and_monitor/agent_rules
 [11]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management#create-a-custom-agent-rule
 [12]: https://app.datadoghq.com/security/configuration/workload/agent-rules
+[13]: /security/workload_protection/backend_linux
+[14]: /security/workload_protection/backend_windows

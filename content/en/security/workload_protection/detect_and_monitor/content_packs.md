@@ -17,14 +17,14 @@ This topic explains how Workload Protection Content Packs help you deploy target
 
 ## Overview
 
-Not every detection rule is relevant to every workload. Some detections can be too noisy for environments with specific constraints, or may not apply to particular software stacks. At the same time, new threats emerge regularly, and Datadog security research continuously develops rules to detect novel attacks and vulnerabilities.
+Not every detection rule is relevant to every workload. Some detections can be too noisy for environments with specific constraints, or may not apply to particular software stacks. At the same time, new threats emerge regularly, and Datadog security research team continuously develops rules to detect novel attacks and vulnerabilities.
 
 Workload Protection [Content Packs][1] address both challenges. Each Content Pack is a Datadog-crafted bundle of optional [Agent rules][2], [detection rules][3], and supporting content built for a specific software stack, threat vector, or emerging vulnerability. You opt in to the Content Packs you need and deploy them only to the workloads where they apply.
 
 ## Why use Content Packs?
 
 - **Deploy targeted detections to relevant workloads:** Opt into policies built for specific workloads or environments, and deploy them only where they apply. This avoids unnecessary noise and performance impact on workloads where those detections do not apply.
-- **Stay ahead of emerging threats:** Get access to new rules as Datadog security research identifies novel threats and vulnerabilities, complementing the coverage provided by default policies.
+- **Stay ahead of emerging threats:** Get access to new rules as Datadog security research team identifies novel threats and vulnerabilities, complementing the coverage provided by default policies.
 
 ## What's included in a Content Pack?
 
