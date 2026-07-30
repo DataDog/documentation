@@ -146,7 +146,7 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 {{% /tab %}}
 {{< /tabs >}}
 
-### Collect Spark lineage with OpenLineage
+### (Optional) Collect Spark Data Lineage with OpenLineage
 
 Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLineage][8], so you can see the upstream and downstream tables of your jobs and visualize entire Spark pipelines. Setup has two steps: install the OpenLineage Spark provider, then enable the feature in the Java tracer.
 
