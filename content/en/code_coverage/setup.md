@@ -104,10 +104,31 @@ See [Data Collected][7] for details on what data is collected during code covera
 
 ### Upload reports automatically with Test Optimization
 
-A Test Optimization library that supports automatic code coverage report upload can upload reports without a separate `datadog-ci` step:
+#### Supported libraries and versions
 
-1. Enable code coverage upload in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8]. You can apply the setting at the organization, repository, or test service level.
-2. Run your tests with a supported coverage tool. The Test Optimization library uploads the report after the test session ends.
+As of July 30, 2026, automatic code coverage report upload is supported in the following Test Optimization library versions:
+
+| Library | First supported version | Coverage source |
+|---|---|---|
+| Ruby `datadog-ci` | `1.27.0` | SimpleCov |
+| JavaScript `dd-trace` 5.x | `5.85.0` | Jest, Vitest, or NYC coverage |
+| JavaScript `dd-trace` 6.x | `6.0.0` | Jest, Vitest, or NYC coverage |
+| Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
+| Java `dd-java-agent` | `1.53.0` | JaCoCo |
+| Go `dd-trace-go/v2` | `2.10.0-rc.1` | LCOV through Orchestrion |
+| .NET and Swift | Not supported by the SDK | — |
+
+Go does not have a stable `2.10.0` release. The latest stable release, `2.9.1`, does not contain the uploader.
+
+These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`](#uploading-coverage-reports) command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
+
+#### Enable automatic uploads
+
+The versions listed above contain the uploader code, but reports are uploaded only when the library receives the `coverage_report_upload_enabled` setting. Enable this setting by turning on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
+
+{{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings" style="width:100%" >}}
+
+You can apply the setting at the organization, repository, or test service level. Run your tests with the coverage source listed in the table. The Test Optimization library uploads the report after the test session ends.
 
 To organize and filter reports uploaded by the library, see [Add flags to automatically uploaded reports][9] for `DD_CODE_COVERAGE_FLAGS` library and version support.
 
@@ -515,7 +536,7 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/configuration#pr-gates
 [7]: /code_coverage/data_collected/#code-coverage-report-upload
-[8]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[8]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
 [9]: /code_coverage/flags#add-flags-to-automatically-uploaded-reports
 [10]: https://github.com/DataDog/datadog-ci/releases
 [11]: https://www.npmjs.com/package/@datadog/datadog-ci
