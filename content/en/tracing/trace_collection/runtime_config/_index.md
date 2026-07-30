@@ -29,7 +29,7 @@ To make changes to a service's configuration at runtime:
 1. Select an environment, then click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
 1. Update the value in the edit modal and confirm.
 
-For a detailed walkthrough of the editing workflow, including how to track a change as it rolls out to your service instances, see [Edit configurations at runtime][8]. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
+An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
 
 <div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It now shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
 
@@ -57,4 +57,3 @@ The following options are supported with configuration at runtime. The required 
 [5]: /tracing/trace_explorer/trace_view
 [6]: https://app.datadoghq.com/organization-settings/remote-config
 [7]: /agent/configuration/network
-[8]: /tracing/troubleshooting/sdk_configurations/#edit-configurations-at-runtime
