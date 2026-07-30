@@ -88,7 +88,7 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ### Automatic uploads with Test Optimization libraries
 
-If a Test Optimization library [uploads your code coverage reports automatically][4], set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
+If a Test Optimization library is configured to [upload code coverage reports automatically][4], set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
 
 {{< code-block lang="shell" >}}
 export DD_CODE_COVERAGE_FLAGS=unit-tests,jvm-21
@@ -98,7 +98,7 @@ This example attaches the same flags as `datadog-ci coverage upload --flags unit
 
 ### Limitations
 
-- Maximum of 32 flags per report. When using `datadog-ci`, the first 32 flags are kept and the rest are ignored. When using a Test Optimization library, a report configured with more than 32 flags is uploaded without flags.
+- Maximum of 32 flags per report. When using `datadog-ci`, the first 32 flags are kept and the rest are ignored. When using a Test Optimization library, if more than 32 flags are configured, the report is uploaded with no flags at all.
 - Maximum flag name length is 1000 characters. Flags longer than 1000 characters are ignored.
 - Flag names can contain alphanumeric characters, hyphens (`-`), underscores (`_`), periods (`.`), and colons (`:`).
 

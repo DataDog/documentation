@@ -111,10 +111,6 @@ See [Data Collected][7] for details on what data is collected during code covera
 
 To organize and filter reports uploaded by the library, see [Add flags to coverage reports][10].
 
-### Upload reports with the CLI
-
-Use `datadog-ci` to upload reports directly from your CI pipeline.
-
 ### Supported coverage report formats
 
 Datadog supports the following coverage data formats—expand for examples:
