@@ -295,4 +295,69 @@ test.describe('Cdocs closed stepper', () => {
             await expectActiveStep(page, 0);
         });
     });
+
+    test.describe('scroll behavior', () => {
+        // Install a spy on scrollIntoView before any page script runs so we can
+        // assert that the stepper calls it on the active step title after navigation.
+        test.beforeEach(async ({ page }) => {
+            await page.addInitScript(() => {
+                (window as any).__stepperScrollCalls = [];
+                const orig = Element.prototype.scrollIntoView;
+                Element.prototype.scrollIntoView = function (options?: ScrollIntoViewOptions | boolean) {
+                    if (this.classList && this.classList.contains('stepper__step-title')) {
+                        (window as any).__stepperScrollCalls.push({
+                            text: this.textContent?.trim(),
+                            options,
+                        });
+                    }
+                    orig.call(this, options);
+                };
+            });
+            await page.goto(PAGE_URL);
+            await page.evaluate(() => {
+                for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const key = localStorage.key(i);
+                    if (key?.startsWith('stepper-progress-')) {
+                        localStorage.removeItem(key);
+                    }
+                }
+            });
+            await page.reload();
+            await page.waitForSelector('.stepper--initialized');
+            await hideOverlays(page);
+        });
+
+        test('Next button scrolls the new active step title into view when it is off-screen', async ({ page }) => {
+            // Step 1 has long content, so activating step 2 leaves its title above
+            // the viewport — the stepper scrolls it back into view.
+            await clickNavBtn(page, NEXT_BTN);
+            const calls = await page.evaluate(() => (window as any).__stepperScrollCalls);
+            expect(calls).toHaveLength(1);
+            expect(calls[0].options).toEqual({ behavior: 'smooth', block: 'start' });
+            expect(calls[0].text).toBe('Configure the database');
+        });
+
+        test('Previous button does not scroll when the prior step title is already visible', async ({ page }) => {
+            // Advancing to step 2 collapses step 1's long content, so returning to
+            // step 1 leaves its title already in view — no scroll should fire.
+            await clickNavBtn(page, NEXT_BTN);
+            await page.evaluate(() => { (window as any).__stepperScrollCalls = []; });
+            await clickNavBtn(page, PREV_BTN);
+            await expectActiveStep(page, 0);
+            const calls = await page.evaluate(() => (window as any).__stepperScrollCalls);
+            expect(calls).toHaveLength(0);
+        });
+
+        test('clicking an already-visible step title does not scroll', async ({ page }) => {
+            // With step 2 active the page is short; scrolled to the top, step 1's
+            // title is still visible. Activating it must not trigger a scroll.
+            await clickNavBtn(page, NEXT_BTN);
+            await page.evaluate(() => window.scrollTo(0, 0));
+            await page.evaluate(() => { (window as any).__stepperScrollCalls = []; });
+            await clickStepTitle(page, 0);
+            await expectActiveStep(page, 0);
+            const calls = await page.evaluate(() => (window as any).__stepperScrollCalls);
+            expect(calls).toHaveLength(0);
+        });
+    });
 });
