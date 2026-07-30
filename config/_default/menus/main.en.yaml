@@ -8570,45 +8570,45 @@ menu:
       parent: security_platform_heading
       identifier: workload_protection
       weight: 70000
-    - name: Getting started
-      url: security/workload_protection/getting_started
+    - name: Setup
+      url: security/workload_protection/setup
       parent: workload_protection
-      identifier: workload_protection_getting_started
+      identifier: workload_protection_setup
       weight: 90
     - name: Docker
-      url: security/workload_protection/getting_started/docker
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_docker
+      url: security/workload_protection/setup/docker
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_docker
       weight: 10
     - name: Kubernetes
-      url: security/workload_protection/getting_started/kubernetes
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_kubernetes
+      url: security/workload_protection/setup/kubernetes
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_kubernetes
       weight: 20
     - name: ECS (EC2 compute)
-      url: security/workload_protection/getting_started/ecs_ec2
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_ecs_ec2
+      url: security/workload_protection/setup/ecs_ec2
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_ecs_ec2
       weight: 30
     - name: Linux
-      url: security/workload_protection/getting_started/linux_ebpf
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_linux_ebpf
+      url: security/workload_protection/setup/linux_ebpf
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_linux_ebpf
       weight: 40
     - name: Fargate
-      url: security/workload_protection/getting_started/fargate
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_fargate
+      url: security/workload_protection/setup/fargate
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_fargate
       weight: 50
     - name: Windows
-      url: security/workload_protection/getting_started/windows
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_windows
+      url: security/workload_protection/setup/windows
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_windows
       weight: 70
     - name: Advanced configuration
-      url: security/workload_protection/getting_started/advanced_configuration
-      parent: workload_protection_getting_started
-      identifier: workload_protection_getting_started_advanced_configuration
+      url: security/workload_protection/setup/advanced_configuration
+      parent: workload_protection_setup
+      identifier: workload_protection_setup_advanced_configuration
       weight: 80
     - name: Detect and Monitor
       url: security/workload_protection/detect_and_monitor

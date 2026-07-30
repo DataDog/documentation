@@ -117,7 +117,7 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Fine-tuning Workload Protection Security Signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/workload_protection/getting_started
+[1]: /security/workload_protection/setup
 [2]: /security/workload_protection/detect_and_monitor
 [3]: /security/workload_protection/investigate_and_triage
 [4]: /security/workload_protection/respond_and_report

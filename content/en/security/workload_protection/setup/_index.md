@@ -119,4 +119,4 @@ The [advanced Agent configuration page][5] describes how to configure and tune t
 [2]: /security/workload_protection/troubleshooting/threats
 [3]: https://github.com/DataDog/datadog-security-playground
 [4]: /security/workload_protection/respond_and_report/#automated-response
-[5]: /security/workload_protection/getting_started/advanced_configuration
+[5]: /security/workload_protection/setup/advanced_configuration
