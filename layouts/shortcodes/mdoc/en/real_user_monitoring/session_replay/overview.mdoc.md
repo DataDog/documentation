@@ -30,11 +30,6 @@ The Session Replay recorder supports all browsers supported by the RUM Browser S
 To reduce Session Replay's network impact and keep the recorder's overhead on your application's performance to a minimum, Datadog compresses the data before sending it.
 
 Datadog also reduces the load on a browser's UI thread by delegating most of the CPU-intensive work (such as compression) to a dedicated web worker. The expected network bandwidth impact is less than 100kB/min.
-
-### Heatmaps
-
-Heatmaps overlay click, top elements, and scroll data on top of your Session Replay recordings, helping you understand how users interact with your pages. Learn more about [Heatmaps][12].
-
 {% /if %}
 <!-- end Browser -->
 
@@ -190,6 +185,12 @@ To view your own playback history, check out the [{% ui %}My Watch History{% /ui
 ## Playlists
 
 You can create a playlist of Session Replays to organize them by any patterns you notice. Learn more about [Session Replay Playlists][7].
+
+{% if equals($platform, "browser") %}
+## Heatmaps
+
+Heatmaps overlay click, top elements, and scroll data on top of your Session Replay recordings, helping you understand how users interact with your pages. Learn more about [Heatmaps][12].
+{% /if %}
 
 ## Dev Tools
 
