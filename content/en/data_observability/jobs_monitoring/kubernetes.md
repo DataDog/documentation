@@ -271,7 +271,9 @@ Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLinea
 
    You do not need to set `spark.extraListeners` or configure any `spark.openlineage.transport.*` options. When the feature is enabled and the JAR is present, the Datadog Java tracer registers the OpenLineage listener and routes lineage events through the local Datadog Agent.
 
-2. **Enable OpenLineage collection.** Add `DD_DATA_JOBS_OPENLINEAGE_ENABLED` to the `ddTraceConfigs` of the `spark-driver` target from [Enable Single Step Instrumentation](#enable-single-step-instrumentation). Lineage collection runs on the Spark driver, so the `spark-executor` target does not need this setting:
+2. **Enable OpenLineage collection.** Set the `DD_DATA_JOBS_OPENLINEAGE_ENABLED` environment variable to `true` for your Spark driver. Lineage collection runs on the driver, so the executor does not need this setting.
+
+   You can set the variable through any mechanism that adds environment variables to the driver. One way is the `ddTraceConfigs` of the `spark-driver` target from [Enable Single Step Instrumentation](#enable-single-step-instrumentation):
 
    ```yaml
    ddTraceConfigs:
