@@ -118,7 +118,7 @@ To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/cu
 Claude uses one OAuth client ID in every Datadog organization:
 
 ```text
-e645fb6b-4966-45c4-bf20-44866aa5efac
+391e6845-8153-4de1-bbf0-c1b6ef7fdc14
 ```
 
 You enter this in Okta as **Client ID at resource**.
@@ -167,7 +167,7 @@ Add a resource connection from the Claude AI Agent to your Datadog application, 
 
 | Okta field | Value |
 |------------|-------|
-| **Client ID at resource** | `e645fb6b-4966-45c4-bf20-44866aa5efac` |
+| **Client ID at resource** | `391e6845-8153-4de1-bbf0-c1b6ef7fdc14` |
 | **Scope Condition** | **Allow all**, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 Add the Claude SAML application as a delegated caller on the AI Agent, then activate the agent.
