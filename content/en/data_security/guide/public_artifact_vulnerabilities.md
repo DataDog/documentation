@@ -1,6 +1,10 @@
 ---
 title: Public Artifact Vulnerabilities
 description: Look up CVE and vulnerability information for Datadog's publicly available artifacts.
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-public-artifact-vulnerabilities-openvex/"
+  tag: "Blog"
+  text: "Reduce CVE noise with OpenVEX assessments in Datadog"
 ---
 
 ## Overview
@@ -82,3 +86,7 @@ The **Image** dropdown is populated from the list of tracked public artifacts. P
 | {{< ui >}}Resizable columns{{< /ui >}} | You can resize column widths for readability. |
 
 [1]: /help
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
