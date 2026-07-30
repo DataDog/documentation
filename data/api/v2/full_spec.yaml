@@ -45427,7 +45427,7 @@ components:
         attributes:
           $ref: "#/components/schemas/IPAllowlistAttributes"
         id:
-          description: The unique identifier of the org.
+          description: The unique identifier of the organization.
           type: string
         type:
           $ref: "#/components/schemas/IPAllowlistType"
@@ -45452,6 +45452,9 @@ components:
           description: Creation time of the entry.
           format: date-time
           readOnly: true
+          type: string
+        label:
+          description: A label for the IP allowlist entry.
           type: string
         modified_at:
           description: Time of last entry modification.
