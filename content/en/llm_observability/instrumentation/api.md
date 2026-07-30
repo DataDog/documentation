@@ -172,6 +172,8 @@ If the request is successful, the API responds with a 202 network code and an em
 | role                 | string | The role of the entity.  |
 | tool_calls | [[ToolCall](#toolcall)] | List of tool calls made in this message. |
 | tool_results | [[ToolResult](#toolresult)] | List of tool execution results in this message. |
+| audio_parts | [[AudioPart](#audiopart)] | List of audio segments attached to this message. Use for multimodal (voice) LLM spans. |
+| image_parts | [[ImagePart](#imagepart)] | List of image segments attached to this message. Use for multimodal (vision) LLM spans. |
 
 #### Document
 | Field                | Type   | Description              |
@@ -200,6 +202,26 @@ If the request is successful, the API responds with a 202 network code and an em
 | result | string | The result returned by the tool. |
 | tool_id | string | Unique identifier matching the corresponding tool call. |
 | type | string | The type of tool result. |
+
+#### AudioPart
+
+An audio segment on a message. Provide exactly one of `content` or `attachment_key`.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| mime_type [*required*] | string | The media type of the audio, for example `audio/wav` or `audio/pcm`. |
+| content | string | The base64-encoded audio, carried inline on the message. |
+| attachment_key | string | A reference to audio stored outside the span payload, in place of inline `content`. |
+
+#### ImagePart
+
+An image on a message. Provide exactly one of `content` or `attachment_key`.
+
+| Field | Type | Description |
+|-------|------|-------------|
+| mime_type [*required*] | string | The media type of the image, for example `image/png` or `image/jpeg`. |
+| content | string | The base64-encoded image, carried inline on the message. |
+| attachment_key | string | A reference to an image stored outside the span payload, in place of inline `content`. |
 
 #### ToolDefinition
 

@@ -1371,11 +1371,11 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : optional - _list of dictionaries_
@@ -1450,6 +1450,33 @@ def similarity_search():
         tags={"host": "host_name"},
     )
     return
+
+@llm(model_name="gpt-realtime", model_provider="openai")
+def voice_turn(user_audio_bytes):
+    import base64
+    resp = ... # multimodal (audio) llm call here
+    LLMObs.annotate(
+        span=None,
+        input_data=[
+            {
+                "role": "user",
+                "content": "Hey, how are you?",  # transcript of the input audio
+                "audio_parts": [
+                    {"mime_type": "audio/wav", "content": base64.b64encode(user_audio_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+        output_data=[
+            {
+                "role": "assistant",
+                "content": "Hey! I'm doing great, thanks for asking. How about you?",
+                "audio_parts": [
+                    {"mime_type": "audio/wav", "content": base64.b64encode(resp.audio_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+    )
+    return resp
 
 {{< /code-block >}}
 
