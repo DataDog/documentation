@@ -8393,25 +8393,25 @@ menu:
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_linux_expressions
       weight: 40
-    - name: Linux backend syntax
-      url: security/workload_protection/backend_linux
-      parent: workload_protection_detect_and_monitor_agent_rules
-      identifier: workload_protection_detect_and_monitor_agent_rules_backend_linux
-      weight: 50
     - name: Windows syntax
       url: security/workload_protection/windows_expressions
       parent: workload_protection_detect_and_monitor_agent_rules
       identifier: workload_protection_detect_and_monitor_agent_rules_windows_expressions
-      weight: 60
-    - name: Windows backend syntax
-      url: security/workload_protection/backend_windows
-      parent: workload_protection_detect_and_monitor_agent_rules
-      identifier: workload_protection_detect_and_monitor_agent_rules_backend_windows
-      weight: 70
+      weight: 50
     - name: Detection rules
       url: security/workload_protection/detect_and_monitor/detection_rules
       parent: workload_protection_detect_and_monitor
       identifier: workload_protection_detect_and_monitor_detection_rules
+      weight: 20
+    - name: Linux backend syntax
+      url: security/workload_protection/backend_linux
+      parent: workload_protection_detect_and_monitor_detection_rules
+      identifier: workload_protection_detect_and_monitor_detection_rules_backend_linux
+      weight: 10
+    - name: Windows backend syntax
+      url: security/workload_protection/backend_windows
+      parent: workload_protection_detect_and_monitor_detection_rules
+      identifier: workload_protection_detect_and_monitor_detection_rules_backend_windows
       weight: 20
     - name: Finding rules
       url: security/workload_protection/detect_and_monitor/finding_rules
