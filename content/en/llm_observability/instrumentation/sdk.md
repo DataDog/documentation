@@ -1478,6 +1478,25 @@ def voice_turn(user_audio_bytes):
     )
     return resp
 
+@llm(model_name="gpt-4o", model_provider="openai")
+def describe_image(image_bytes):
+    import base64
+    resp = ... # multimodal (vision) llm call here
+    LLMObs.annotate(
+        span=None,
+        input_data=[
+            {
+                "role": "user",
+                "content": "What is in this image?",
+                "image_parts": [
+                    {"mime_type": "image/png", "content": base64.b64encode(image_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+        output_data=[{"role": "assistant", "content": "The image shows a golden retriever puppy."}],
+    )
+    return resp
+
 {{< /code-block >}}
 
 {{% /tab %}}
