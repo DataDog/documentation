@@ -17206,6 +17206,139 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: RUM Operations
+      url: /api/latest/rum-operations/
+      identifier: rum-operations
+      generated: true
+    - name: Update a RUM operation
+      url: /api/latest/rum-operations/update-a-rum-operation/
+      identifier: rum-operations-update-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperation
+        unstable:
+          - v2
+        order: 4
+    - name: Get a RUM operation
+      url: /api/latest/rum-operations/get-a-rum-operation/
+      identifier: rum-operations-get-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperation
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a RUM operation
+      url: /api/latest/rum-operations/delete-a-rum-operation/
+      identifier: rum-operations-delete-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperation
+        unstable:
+          - v2
+        order: 5
+    - name: Update a RUM operation strong link
+      url: /api/latest/rum-operations/update-a-rum-operation-strong-link/
+      identifier: rum-operations-update-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a RUM operation strong link
+      url: /api/latest/rum-operations/delete-a-rum-operation-strong-link/
+      identifier: rum-operations-delete-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 9
+    - name: Create a RUM operation strong link
+      url: /api/latest/rum-operations/create-a-rum-operation-strong-link/
+      identifier: rum-operations-create-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 8
+    - name: List RUM operation strong links
+      url: /api/latest/rum-operations/list-rum-operation-strong-links/
+      identifier: rum-operations-list-rum-operation-strong-links
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperationStrongLinks
+        unstable: []
+        order: 7
+    - name: Search RUM operations
+      url: /api/latest/rum-operations/search-rum-operations/
+      identifier: rum-operations-search-rum-operations
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperations
+        unstable:
+          - v2
+        order: 1
+    - name: Get a RUM operation by name
+      url: /api/latest/rum-operations/get-a-rum-operation-by-name/
+      identifier: rum-operations-get-a-rum-operation-by-name
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperationByName
+        unstable:
+          - v2
+        order: 6
+    - name: Create a RUM operation
+      url: /api/latest/rum-operations/create-a-rum-operation/
+      identifier: rum-operations-create-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperation
+        unstable:
+          - v2
+        order: 2
     - name: RUM Remote Config
       url: /api/latest/rum-remote-config/
       identifier: rum-remote-config
