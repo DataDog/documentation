@@ -29,17 +29,16 @@ Each rule can define multiple actions as a YAML list. Each list item must contai
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: my_rule
-expression: exec.file.name == "suspicious_binary"
-actions:
-  - set:
-    name: flagged_process
-    value: true
-    ttl: 5m
-  - kill:
-    signal: SIGKILL
-    scope: process
+  - id: my_rule
+    expression: exec.file.name == "suspicious_binary"
+    actions:
+      - set:
+          name: flagged_process
+          value: true
+          ttl: 5m
+      - kill:
+          signal: SIGKILL
+          scope: process
 
 {{< /code-block >}}
 
@@ -55,14 +54,13 @@ Every action supports an optional `filter` field: a SECL expression evaluated at
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: kill_container_process
-expression: exec.file.name == "malware"
-actions:
-  - filter: process.container.id != ""
-  kill:
-    signal: SIGTERM
-    scope: container
+  - id: kill_container_process
+    expression: exec.file.name == "malware"
+    actions:
+      - filter: process.container.id != ""
+        kill:
+          signal: SIGTERM
+          scope: container
 
 {{< /code-block >}}
 
@@ -102,33 +100,31 @@ Set a Boolean flag:
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: flag_suspicious_exec
-expression: exec.file.path in ["/tmp/evil"]
-actions:
-  - set:
-    name: suspicious
-    value: true
-    ttl: 10m
-- id: detect_follow_up
-expression: open.file.path == "/etc/shadow" && ${suspicious}
+  - id: flag_suspicious_exec
+    expression: exec.file.path in ["/tmp/evil"]
+    actions:
+      - set:
+          name: suspicious
+          value: true
+          ttl: 10m
+  - id: detect_follow_up
+    expression: open.file.path == "/etc/shadow" && ${suspicious}
 {{< /code-block >}}
 
 Collect DNS queries into a rolling list:
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: collect_dns_queries
-expression: dns.question.name != ""
-actions:
-  - set:
-    name: queried_domains
-    field: dns.question.name
-    append: true
-    size: 10
-    ttl: 10s
-    scope: process
+  - id: collect_dns_queries
+    expression: dns.question.name != ""
+    actions:
+      - set:
+          name: queried_domains
+          field: dns.question.name
+          append: true
+          size: 10
+          ttl: 10s
+          scope: process
 
 {{< /code-block >}}
 
@@ -177,15 +173,14 @@ Certain binaries can also be excluded from enforcement through `runtime_security
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: block_reverse_shell
-expression: >-
-  exec.file.name in ["nc", "ncat", "bash"] &&
-  process.ancestors.file.name not in ["sshd"]
-actions:
-  - kill:
-    signal: SIGKILL
-    scope: process
+  - id: block_reverse_shell
+    expression: >-
+      exec.file.name in ["nc", "ncat", "bash"] &&
+      process.ancestors.file.name not in ["sshd"]
+    actions:
+      - kill:
+          signal: SIGKILL
+          scope: process
 
 {{< /code-block >}}
 
@@ -244,14 +239,13 @@ In addition to defining `network_filter` actions in Agent policy files, you can 
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: test_iso
-expression: exec.file.name == "ls"
-actions:
-  - network_filter:
-    filter: "dst net 10.0.0.0/8 or dst net 172.16.0.0/12 or dst net 192.168.0.0/16 or dst net 169.254.0.0/16 or dst net 127.0.0.0/8"
-    policy: drop
-    scope: cgroup
+  - id: test_iso
+    expression: exec.file.name == "ls"
+    actions:
+      - network_filter:
+          filter: "dst net 10.0.0.0/8 or dst net 172.16.0.0/12 or dst net 192.168.0.0/16 or dst net 169.254.0.0/16 or dst net 127.0.0.0/8"
+          policy: drop
+          scope: cgroup
 
 {{< /code-block >}}
 
@@ -300,13 +294,12 @@ Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `S
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: hash_dropped_binary
-expression: exec.file.path startswith "/tmp/" && exec.file.name not in ["systemd"]
-actions:
-  - hash:
-    field: exec.file
-    max_file_size: 10485760  # 10 MB
+  - id: hash_dropped_binary
+    expression: exec.file.path startswith "/tmp/" && exec.file.name not in ["systemd"]
+    actions:
+      - hash:
+          field: exec.file
+          max_file_size: 10485760  # 10 MB
 
 {{< /code-block >}}
 
@@ -331,13 +324,12 @@ Use `log` to emit a structured message to the Runtime Security Agent log when a 
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: log_sensitive_file_access
-expression: open.file.path startswith "/etc/"
-actions:
-  - log:
-    level: warning
-    message: "Suspicious file access detected on sensitive path"
+  - id: log_sensitive_file_access
+    expression: open.file.path startswith "/etc/"
+    actions:
+      - log:
+          level: warning
+          message: "Suspicious file access detected on sensitive path"
 
 {{< /code-block >}}
 
@@ -371,15 +363,14 @@ At least one of `process`, `mount`, or `dentry` must be set to `true`.
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: capture_forensic_state
-expression: exec.file.path startswith "/tmp/" && process.container.id != ""
-actions:
-  - coredump:
-    process: true
-    mount: true
-    dentry: true
-    no_compression: false
+  - id: capture_forensic_state
+    expression: exec.file.path startswith "/tmp/" && process.container.id != ""
+    actions:
+      - coredump:
+          process: true
+          mount: true
+          dentry: true
+          no_compression: false
 
 {{< /code-block >}}
 
@@ -389,21 +380,20 @@ A single rule can chain multiple actions. They execute in list order when the ru
 
 {{< code-block lang="yaml" >}}
 rules:
-
-- id: detect_and_respond
-expression: exec.file.path == "/tmp/payload"
-actions:
-  - set:
-    name: payload_seen
-    value: true
-  - hash:
-    field: exec.file
-  - log:
-    level: info
-    message: "Payload executed, hashing and killing"
-  - kill:
-    signal: SIGKILL
-    scope: process
+  - id: detect_and_respond
+    expression: exec.file.path == "/tmp/payload"
+    actions:
+      - set:
+          name: payload_seen
+          value: true
+      - hash:
+          field: exec.file
+      - log:
+          level: info
+          message: "Payload executed, hashing and killing"
+      - kill:
+          signal: SIGKILL
+          scope: process
 
 {{< /code-block >}}
 
