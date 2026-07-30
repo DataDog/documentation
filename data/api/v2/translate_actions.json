@@ -2925,6 +2925,30 @@
     "request_description": "Confluent payload",
     "request_schema_description": "The JSON:API request for updating a Confluent resource."
   },
+  "ListElasticCloudIntegrationAccounts": {
+    "description": "List the Elastic Cloud integration accounts for a given interface.",
+    "summary": "List Elastic Cloud integration accounts"
+  },
+  "CreateElasticCloudIntegrationAccount": {
+    "description": "Create an Elastic Cloud integration account for a given interface.",
+    "summary": "Create an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an Elastic Cloud integration account."
+  },
+  "DeleteElasticCloudIntegrationAccount": {
+    "description": "Delete an Elastic Cloud integration account.",
+    "summary": "Delete an Elastic Cloud integration account"
+  },
+  "GetElasticCloudIntegrationAccount": {
+    "description": "Get a single Elastic Cloud integration account.",
+    "summary": "Get an Elastic Cloud integration account"
+  },
+  "UpdateElasticCloudIntegrationAccount": {
+    "description": "Update an Elastic Cloud integration account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.",
+    "summary": "Update an Elastic Cloud integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an Elastic Cloud integration account as a partial merge."
+  },
   "ListFastlyAccounts": {
     "description": "List Fastly accounts.",
     "summary": "List Fastly accounts"
@@ -2996,6 +3020,30 @@
     "summary": "Update Okta account",
     "request_description": "",
     "request_schema_description": "Payload schema when updating an Okta account."
+  },
+  "ListTwilioIntegrationAccounts": {
+    "description": "List the Twilio integration accounts for a given interface.",
+    "summary": "List Twilio integration accounts"
+  },
+  "CreateTwilioIntegrationAccount": {
+    "description": "Create a Twilio integration account for a given interface.",
+    "summary": "Create a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create a Twilio integration account."
+  },
+  "DeleteTwilioIntegrationAccount": {
+    "description": "Delete a Twilio integration account.",
+    "summary": "Delete a Twilio integration account"
+  },
+  "GetTwilioIntegrationAccount": {
+    "description": "Get a single Twilio integration account.",
+    "summary": "Get a Twilio integration account"
+  },
+  "UpdateTwilioIntegrationAccount": {
+    "description": "Update a Twilio integration account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full payload or write-only credentials.",
+    "summary": "Update a Twilio integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update a Twilio integration account as a partial merge."
   },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
