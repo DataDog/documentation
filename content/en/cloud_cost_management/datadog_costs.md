@@ -23,16 +23,14 @@ There is **no additional charge** for Datadog Costs, and it is available for bot
 
 ## Required permissions
 
-### To view Datadog Costs
 Viewing Datadog costs in Cloud Cost Management requires both the `billing_read` and `usage_read` permissions: `billing_read` grants access to Datadog cost data, and `usage_read` grants access to Datadog usage data. This requirement applies everywhere Datadog cost data appears, including Cloud Cost Management, dashboards, and notebooks. The `cloud_cost_management_read` permission grants access to Cloud Cost Management and to your cloud and SaaS provider costs, but it does not grant access to Datadog cost data on its own.
 
 | Permission | Description | Available Roles |
 |------------|-------------|-----------------|
 | `billing_read` | Read access to billing information. **Required to view Datadog cost data.** | • Datadog Admin |
 | `usage_read` | Read access to usage data. **Required to view Datadog usage data.** | • Datadog Admin |
-| `cloud_cost_management_read` | Read access to Cloud Cost Management. Grants access to Cloud Cost Management and to cloud and SaaS provider costs. | • Datadog Admin<br>• Datadog Read Only (default) |
 
-**Note**: A user with `cloud_cost_management_read` but without `billing_read` and `usage_read` can use Cloud Cost Management for their cloud and SaaS providers, but Datadog costs do not appear for them. To give a user access to Datadog cost data, assign them a role that includes the `billing_read` and `usage_read` permissions. For more information about managing roles, see [Role Based Access Control][14].
+**Note**: A user with `cloud_cost_management_read` but without `billing_read` and `usage_read` can use Cloud Cost Management for their cloud and SaaS providers, but Datadog costs do not appear for them. `cloud_cost_management_read` is not required to view Datadog costs. To give a user access to Datadog cost data, assign them a role that includes the `billing_read` and `usage_read` permissions. For more information about managing roles, see [Role Based Access Control][14].
 
 ## Data availability to sub-organizations
 
