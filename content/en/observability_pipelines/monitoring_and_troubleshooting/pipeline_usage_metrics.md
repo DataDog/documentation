@@ -16,6 +16,9 @@ further_reading:
 - link: "/getting_started/monitors/"
   tag: "Documentation"
   text: "Getting started with monitors"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 ---
 
 ## Overview
@@ -133,14 +136,6 @@ These metrics track Observability Pipelines Worker lifecycle events.
 Worker reloads
 : **Metric**: `pipelines.reloaded_total`
 : **Description:** The number of times the Worker instance has been reloaded, such as after a configuration change.
-
-Worker starts
-: **Metric**: `pipelines.started_total`
-: **Description:** The number of times the Worker instance has been started.
-
-Worker stops
-: **Metric**: `pipelines.stopped_total`
-: **Description:** The number of times the Worker instance has been stopped.
 
 ## Component metrics
 
