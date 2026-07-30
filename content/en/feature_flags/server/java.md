@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-This page describes how to add Datadog Feature Flags to a Java application. Starting in version 1.65.0, `dd-openfeature` loads flag configuration directly from the Datadog-managed CDN by default. This agentless source simplifies standard onboarding and supports serverless runtimes that cannot connect to a Datadog Agent.
+This page describes how to add Datadog Feature Flags to a Java application. Starting in version 1.65.0, `dd-openfeature` loads flag configuration directly from the Datadog-managed CDN by default. This agentless source simplifies onboarding for long-running servers and supports serverless runtimes that cannot connect to a Datadog Agent.
 
 The Datadog provider implements the [OpenFeature](https://openfeature.dev/) standard. It uses `dd-java-agent` for configuration delivery. Agentless delivery removes the external Datadog Agent requirement, but `dd-java-agent` must still load in the JVM.
 
@@ -40,7 +40,7 @@ For the default agentless setup, you need:
 
 Use the same version of `dd-java-agent` and `dd-openfeature`. Agentless delivery does not require a separate Datadog Agent service.
 
-<div class="alert alert-info">For serverless Java, the runtime must support the <code>-javaagent</code> JVM option. You can pass the option in the Java command or through <code>JAVA_TOOL_OPTIONS</code>. See the <a href="/serverless/google_cloud_run/containers/in_container/java/">Java Cloud Run setup</a> for an example.</div>
+<div class="alert alert-info">For serverless Java, the runtime must support the <code>-javaagent</code> JVM option. You can pass the option in the Java command or through <code>JAVA_TOOL_OPTIONS</code>. See the Java setup for <a href="/serverless/google_cloud_run/functions/java/?tab=maven">Cloud Run Functions</a> or <a href="/serverless/google_cloud_run/containers/in_container/java/">Cloud Run containers</a> for examples.</div>
 
 For a full list of Datadog's Java version and framework support, read [Compatibility Requirements](/tracing/trace_collection/compatibility/java/).
 
@@ -112,7 +112,7 @@ Flag evaluation metrics require a supported Agent-backed configuration. See [Set
 
 Load `dd-java-agent` with the `-javaagent` JVM option. For installation instructions, see [Add the Java SDK to the JVM](/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/#add-the-java-sdk-to-the-jvm).
 
-If the runtime controls the Java command, set the option through `JAVA_TOOL_OPTIONS`. The [Java Cloud Run setup][15] shows this configuration.
+If the runtime controls the Java command, set the option through `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][15] or [Cloud Run containers][16] for examples.
 
 ## Configuration
 
@@ -654,4 +654,5 @@ When the selected configuration path supports exposures, exposures appear only f
 [12]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
 [13]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration
 [14]: /getting_started/site/
-[15]: /serverless/google_cloud_run/containers/in_container/java/
+[15]: /serverless/google_cloud_run/functions/java/?tab=maven
+[16]: /serverless/google_cloud_run/containers/in_container/java/

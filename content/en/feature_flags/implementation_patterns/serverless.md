@@ -41,7 +41,7 @@ Other server SDKs and versions earlier than those listed require Agent Remote Co
 Use agentless delivery when the serverless runtime can make outbound HTTPS requests to Datadog. For Java, the runtime must also let you set the `-javaagent` JVM option:
 
 1. Use a [supported SDK version](#overview).
-2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the [Java Cloud Run setup][7] for an example.
+2. For Java, load `dd-java-agent` with `-javaagent` or `JAVA_TOOL_OPTIONS`. See the Java setup for [Cloud Run Functions][7] or [Cloud Run containers][8] for examples.
 3. Configure the API key, Datadog site, and environment in the serverless application:
 
    {{< code-block lang="bash" >}}
@@ -105,7 +105,7 @@ Java and Node.js Lambda functions can use agentless configuration delivery when 
 
 ### Google Cloud serverless environments
 
-Java workloads can use agentless configuration delivery on Java 11 or later when the runtime can load `dd-java-agent`. The [Java Cloud Run setup][7] uses `JAVA_TOOL_OPTIONS` to set `-javaagent`. Node.js workloads require a supported tracer runtime. Both runtimes require outbound HTTPS access.
+Java workloads can use agentless configuration delivery on Java 11 or later when the runtime can load `dd-java-agent`. The Java setup for [Cloud Run Functions][7] and [Cloud Run containers][8] uses `JAVA_TOOL_OPTIONS` to set `-javaagent`. Node.js workloads require a supported tracer runtime. Both runtimes require outbound HTTPS access.
 
 ### Azure Functions
 
@@ -142,4 +142,5 @@ Before enabling Feature Flags in production:
 [4]: /api/latest/feature-flags/
 [5]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
 [6]: /feature_flags/server/java/
-[7]: /serverless/google_cloud_run/containers/in_container/java/
+[7]: /serverless/google_cloud_run/functions/java/?tab=maven
+[8]: /serverless/google_cloud_run/containers/in_container/java/
