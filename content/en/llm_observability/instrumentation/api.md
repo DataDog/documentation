@@ -205,23 +205,23 @@ If the request is successful, the API responds with a 202 network code and an em
 
 #### AudioPart
 
-An audio segment on a message. Provide exactly one of `content` or `attachment_key`.
+An audio segment on a message. Provide either `content` or `attachment_key`.
 
 | Field | Type | Description |
 |-------|------|-------------|
 | mime_type [*required*] | string | The media type of the audio, such as `audio/wav` or `audio/pcm`. |
 | content | string | The base64-encoded audio, carried inline on the message. |
-| attachment_key | string | A reference to audio stored outside the span payload, in place of inline `content`. |
+| attachment_key | string | A reference to audio stored outside the span payload, instead of inline `content`. |
 
 #### ImagePart
 
-An image on a message. Provide exactly one of `content` or `attachment_key`.
+An image on a message. Provide either `content` or `attachment_key`.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| mime_type [*required*] | string | The media type of the image, for example `image/png` or `image/jpeg`. |
-| content | string | The base64-encoded image, carried inline on the message. |
-| attachment_key | string | A reference to an image stored outside the span payload, in place of inline `content`. |
+| mime_type [*required*] | string | The media type of the image, such as `image/png` or `image/jpeg`. |
+| content | string | The base64-encoded image, carried inline with the message. |
+| attachment_key | string | A reference to an image stored outside the span payload, instead of inline `content`. |
 
 #### ToolDefinition
 
