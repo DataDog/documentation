@@ -1,6 +1,10 @@
 ---
 title: Quick Graphs
 description: Create graphs quickly from anywhere in Datadog using the Quick Graphs editor with keyboard shortcuts or global search.
+further_reading:
+- link: "https://www.datadoghq.com/blog/metrics-natural-language-queries/"
+  tag: "Blog"
+  text: "Explore Datadog metrics with Natural Language Queries"
 ---
 
 ## Overview
@@ -78,3 +82,7 @@ Click {{< ui >}}Export{{< /ui >}} to save your work to a Dashboard or Notebook. 
 [14]: /dashboards/widgets/top_list/
 [15]: /dashboards/widgets/query_value/
 [16]: /dashboards/widgets/geomap/
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

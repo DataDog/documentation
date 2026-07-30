@@ -3,12 +3,15 @@ title: Monitor Quality
 description: "Identify and fix common monitor misconfigurations including high alert volumes, missing recipients, and stuck alert states."
 disable_toc: false
 further_reading:
-- link: "https://app.datadoghq.com/monitors/quality"
-  tag: "App"
-  text: "Datadog Monitor Quality"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Learn more about Datadog monitors"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
+- link: "https://app.datadoghq.com/monitors/quality"
+  tag: "App"
+  text: "Datadog Monitor Quality"
 ---
 
 ## Overview
