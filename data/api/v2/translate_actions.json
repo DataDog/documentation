@@ -71,6 +71,10 @@
     "description": "Retrieve a paginated list of all fleet tracers.\n\nThis endpoint returns telemetry-derived service names from the SDK telemetry pipeline.\nThese names may differ from span-derived names in APM and are useful for querying\nservice library configurations.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
     "summary": "List all fleet tracers"
   },
+  "ListLLMObsCustomEvalConfigs": {
+    "description": "List all custom LLM Observability evaluator configurations for the organization.",
+    "summary": "List custom evaluator configurations"
+  },
   "DeleteLLMObsCustomEvalConfig": {
     "description": "Delete a custom LLM Observability evaluator configuration by its name.",
     "summary": "Delete a custom evaluator configuration"
@@ -1450,6 +1454,20 @@
     "description": "Get the list of all CSM Serverless Agents running on your hosts and containers.",
     "summary": "Get all CSM Serverless Agents"
   },
+  "GetOwnershipSettings": {
+    "description": "Get ownership settings for the org. When settings are unset, the API returns the default opt-out configuration with `auto_tag` set to `true` and `confidence_level` set to `high`.",
+    "summary": "Get ownership settings for the org"
+  },
+  "PostOwnershipSettings": {
+    "description": "Update ownership settings for the org.",
+    "summary": "Update ownership settings for the org",
+    "request_description": "",
+    "request_schema_description": "The request body for updating ownership settings."
+  },
+  "GetOwnershipUntaggedFindings": {
+    "description": "Count findings with no team tag, grouped by ownership confidence level.",
+    "summary": "Count untagged findings by ownership confidence"
+  },
   "ListOwnershipInferences": {
     "description": "Get all current ownership inferences for a resource, one per owner type (`user`, `team`, `service`, `unknown`).",
     "summary": "List ownership inferences for a resource"
@@ -1619,6 +1637,18 @@
     "summary": "Edit a dataset",
     "request_description": "Dataset payload",
     "request_schema_description": "Edit request for a dataset."
+  },
+  "ExecuteDdsqlTabularQuery": {
+    "description": "Submit a DDSQL statement and return either a `running` state with an opaque `query_id`\nfor the client to poll, or a `completed` state with the column-major result set inlined\nwhen the query finishes quickly enough to be served synchronously.",
+    "summary": "Execute a tabular DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query execution request."
+  },
+  "FetchDdsqlTabularQuery": {
+    "description": "Poll a previously submitted DDSQL query for results. Pass the opaque `query_id` returned\nby a prior `ExecuteDdsqlTabularQuery` (or by a prior `FetchDdsqlTabularQuery` that\nreturned `state: running`) and the server returns either a `running` state to poll again\nor a `completed` state with the column-major result set inlined.",
+    "summary": "Fetch the result of a DDSQL query",
+    "request_description": "",
+    "request_schema_description": "Wrapper for a DDSQL tabular query fetch request."
   },
   "ListDeploymentGates": {
     "description": "Returns a paginated list of all deployment gates for the organization.\nUse `page[cursor]` and `page[size]` query parameters to paginate through results.",
@@ -1821,7 +1851,7 @@
     "request_schema_description": "Request to create a new feature flag."
   },
   "ListFeatureFlagsEnvironments": {
-    "description": "Returns a list of environments for the organization.\nSupports filtering by name and key.",
+    "description": "Returns a list of environments for the organization.\nSupports filtering by name, key, and DD_ENV.",
     "summary": "List environments"
   },
   "CreateFeatureFlagsEnvironment": {
@@ -2068,6 +2098,50 @@
     "request_description": "",
     "request_schema_description": "Request payload for updating global incident settings."
   },
+  "CreateIncidentGoogleChatConfiguration": {
+    "description": "Create a Google Chat configuration for incidents.",
+    "summary": "Create an incident Google Chat configuration",
+    "request_description": "Google Chat configuration payload.",
+    "request_schema_description": "Request payload for creating a Google Chat configuration."
+  },
+  "UpdateIncidentGoogleChatConfiguration": {
+    "description": "Update a Google Chat configuration for incidents.",
+    "summary": "Update an incident Google Chat configuration",
+    "request_description": "Google Chat configuration patch payload.",
+    "request_schema_description": "Request payload for patching a Google Chat configuration."
+  },
+  "CreateIncidentGoogleMeetConfiguration": {
+    "description": "Create a Google Meet configuration for incidents.",
+    "summary": "Create an incident Google Meet configuration",
+    "request_description": "Google Meet configuration payload.",
+    "request_schema_description": "Request payload for creating a Google Meet configuration."
+  },
+  "UpdateIncidentGoogleMeetConfiguration": {
+    "description": "Update a Google Meet configuration for incidents.",
+    "summary": "Update an incident Google Meet configuration",
+    "request_description": "Google Meet configuration patch payload.",
+    "request_schema_description": "Request payload for patching a Google Meet configuration."
+  },
+  "ListIncidentImpactFields": {
+    "description": "List all impact fields for incidents.",
+    "summary": "List incident impact fields"
+  },
+  "CreateIncidentImpactField": {
+    "description": "Create an impact field for incidents.",
+    "summary": "Create an incident impact field",
+    "request_description": "Impact field payload.",
+    "request_schema_description": "Request payload for creating an impact field."
+  },
+  "DeleteIncidentImpactField": {
+    "description": "Delete an impact field for incidents.",
+    "summary": "Delete an incident impact field"
+  },
+  "UpdateIncidentImpactField": {
+    "description": "Update an impact field for incidents.",
+    "summary": "Update an incident impact field",
+    "request_description": "Impact field update payload.",
+    "request_schema_description": "Request payload for creating an impact field."
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"
@@ -2140,6 +2214,30 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a postmortem template."
   },
+  "ListIncidentRules": {
+    "description": "List all incident rules.",
+    "summary": "List incident rules"
+  },
+  "CreateIncidentRule": {
+    "description": "Create an incident rule.",
+    "summary": "Create an incident rule",
+    "request_description": "Incident rule payload.",
+    "request_schema_description": "Request payload for creating an incident rule."
+  },
+  "DeleteIncidentRule": {
+    "description": "Delete an incident rule.",
+    "summary": "Delete an incident rule"
+  },
+  "GetIncidentRule": {
+    "description": "Get a single incident rule by ID.",
+    "summary": "Get an incident rule"
+  },
+  "UpdateIncidentRule": {
+    "description": "Update an incident rule.",
+    "summary": "Update an incident rule",
+    "request_description": "Incident rule patch payload.",
+    "request_schema_description": "Request payload for patching an incident rule."
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -2149,6 +2247,10 @@
     "summary": "Create an incident type",
     "request_description": "Incident type payload.",
     "request_schema_description": "Create request for an incident type."
+  },
+  "ListOrgSettings": {
+    "description": "List org settings for all incident types.",
+    "summary": "List incident type org settings"
   },
   "DeleteIncidentType": {
     "description": "Delete an incident type.",
@@ -2163,6 +2265,10 @@
     "summary": "Update an incident type",
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
+  },
+  "GetOrgSettingsByIncidentType": {
+    "description": "Get the org settings for a specific incident type.",
+    "summary": "Get org settings by incident type"
   },
   "ListIncidentUserDefinedFields": {
     "description": "Get a list of all incident user-defined fields.",
@@ -2236,6 +2342,10 @@
     "request_description": "Incident Payload.",
     "request_schema_description": "Update request for an incident."
   },
+  "GetIncidentAIPostmortem": {
+    "description": "Generate an AI postmortem for an incident.",
+    "summary": "Get an AI-generated incident postmortem"
+  },
   "ListIncidentAttachments": {
     "description": "List incident attachments.",
     "summary": "List incident attachments"
@@ -2260,6 +2370,24 @@
     "request_description": "",
     "request_schema_description": "Request to update an attachment."
   },
+  "CreatePageFromIncident": {
+    "description": "Create a page from an incident using the Cases service.",
+    "summary": "Create a page from an incident",
+    "request_description": "Page creation payload.",
+    "request_schema_description": "Request payload for creating a page from an incident."
+  },
+  "UpdateIncidentConfiguration": {
+    "description": "Update a configuration for an incident.",
+    "summary": "Update an incident configuration",
+    "request_description": "Incident configuration patch payload.",
+    "request_schema_description": "Request payload for patching an incident configuration."
+  },
+  "CreateIncidentConfiguration": {
+    "description": "Create a configuration for an incident.",
+    "summary": "Create an incident configuration",
+    "request_description": "Incident configuration payload.",
+    "request_schema_description": "Request payload for creating an incident configuration."
+  },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
     "summary": "List an incident's impacts"
@@ -2273,6 +2401,24 @@
   "DeleteIncidentImpact": {
     "description": "Delete an incident impact.",
     "summary": "Delete an incident impact"
+  },
+  "PatchIncidentImpact": {
+    "description": "Update an incident impact.",
+    "summary": "Update an incident impact",
+    "request_description": "Incident impact patch payload.",
+    "request_schema_description": "Patch request for an incident impact."
+  },
+  "CreateOnCallPageFromIncident": {
+    "description": "Create an on-call page directly from an incident.",
+    "summary": "Create an on-call page from an incident",
+    "request_description": "On-call page creation payload.",
+    "request_schema_description": "Request payload for creating an on-call page from an incident."
+  },
+  "LinkPageToIncident": {
+    "description": "Link an existing on-call page to an incident.",
+    "summary": "Link a page to an incident",
+    "request_description": "On-call page link payload.",
+    "request_schema_description": "Request payload for linking an on-call page to an incident."
   },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
@@ -2321,6 +2467,50 @@
     "summary": "Update an incident todo",
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
+  },
+  "ListIncidentResponders": {
+    "description": "List all responders for an incident.",
+    "summary": "List incident responders"
+  },
+  "CreateIncidentResponder": {
+    "description": "Add a responder to an incident.",
+    "summary": "Create an incident responder",
+    "request_description": "Incident responder payload.",
+    "request_schema_description": "Request payload for creating an incident responder."
+  },
+  "DeleteIncidentResponder": {
+    "description": "Remove a responder from an incident.",
+    "summary": "Delete an incident responder"
+  },
+  "GetIncidentResponder": {
+    "description": "Get a single responder for an incident.",
+    "summary": "Get an incident responder"
+  },
+  "CreateIncidentServiceNowRecord": {
+    "description": "Create a ServiceNow record for an incident.",
+    "summary": "Create an incident ServiceNow record",
+    "request_description": "ServiceNow record payload.",
+    "request_schema_description": "Request payload for creating a ServiceNow record for an incident."
+  },
+  "ListTimestampOverrides": {
+    "description": "List all timestamp overrides for an incident.",
+    "summary": "List incident timestamp overrides"
+  },
+  "CreateTimestampOverride": {
+    "description": "Create a timestamp override for an incident.",
+    "summary": "Create an incident timestamp override",
+    "request_description": "Timestamp override payload.",
+    "request_schema_description": "Request payload for creating a timestamp override."
+  },
+  "DeleteTimestampOverride": {
+    "description": "Delete a timestamp override for an incident.",
+    "summary": "Delete an incident timestamp override"
+  },
+  "UpdateTimestampOverride": {
+    "description": "Update a timestamp override for an incident.",
+    "summary": "Update an incident timestamp override",
+    "request_description": "Timestamp override patch payload.",
+    "request_schema_description": "Request payload for patching a timestamp override."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -3131,6 +3321,50 @@
     "request_description": "Update project payload.",
     "request_schema_description": "Request to partially update an LLM Observability project."
   },
+  "ListLLMObsPrompts": {
+    "description": "List all LLM Observability prompts in the prompt registry for the organization.",
+    "summary": "List LLM Observability prompts"
+  },
+  "CreateLLMObsPrompt": {
+    "description": "Create a new prompt (and its first version) in the LLM Observability prompt registry.",
+    "summary": "Create an LLM Observability prompt",
+    "request_description": "Create prompt payload.",
+    "request_schema_description": "Request to create an LLM Observability prompt."
+  },
+  "DeleteLLMObsPrompt": {
+    "description": "Soft-delete an LLM Observability prompt. The prompt's version rows are retained, but they are no longer accessible through the public prompt registry endpoints.",
+    "summary": "Delete an LLM Observability prompt"
+  },
+  "GetLLMObsPrompt": {
+    "description": "Get the latest version of an LLM Observability prompt by prompt ID.",
+    "summary": "Get an LLM Observability prompt"
+  },
+  "UpdateLLMObsPrompt": {
+    "description": "Update the title, the description, or both, for an LLM Observability prompt.",
+    "summary": "Update an LLM Observability prompt",
+    "request_description": "Update prompt payload.",
+    "request_schema_description": "Request to update an LLM Observability prompt's metadata."
+  },
+  "ListLLMObsPromptVersions": {
+    "description": "List all versions of an LLM Observability prompt, ordered newest to oldest. If the prompt does not exist, is not registered, or is archived, the response contains an empty list.",
+    "summary": "List versions of an LLM Observability prompt"
+  },
+  "CreateLLMObsPromptVersion": {
+    "description": "Create a new version of an existing LLM Observability prompt.",
+    "summary": "Create a new LLM Observability prompt version",
+    "request_description": "Create prompt version payload.",
+    "request_schema_description": "Request to create a new version of an LLM Observability prompt."
+  },
+  "GetLLMObsPromptVersion": {
+    "description": "Get the full template of a single, specific version of an LLM Observability prompt.",
+    "summary": "Get a specific LLM Observability prompt version"
+  },
+  "UpdateLLMObsPromptVersion": {
+    "description": "Update the description, the feature-flag environments, or both, for a specific version of an LLM Observability prompt.",
+    "summary": "Update a specific LLM Observability prompt version",
+    "request_description": "Update prompt version payload.",
+    "request_schema_description": "Request to update an LLM Observability prompt version's metadata or feature-flag environments."
+  },
   "ListLLMObsSpans": {
     "description": "List LLM Observability spans matching the specified filters.",
     "summary": "List LLM Observability spans"
@@ -3497,6 +3731,20 @@
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
+  "CreateHistoricalMetricsConfiguration": {
+    "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
+    "summary": "Enable historical metrics ingestion",
+    "request_description": "",
+    "request_schema_description": "Request body for enabling historical metrics ingestion for a metric."
+  },
+  "DeleteHistoricalMetricsConfiguration": {
+    "description": "Disable historical metrics ingestion for a metric. Idempotent: always returns 204,\nwhether or not the configuration existed or the metric itself still exists, so that\nTerraform destroy succeeds for a metric removed out-of-band.",
+    "summary": "Delete a historical metrics configuration"
+  },
+  "GetHistoricalMetricsConfiguration": {
+    "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
+    "summary": "Get a historical metrics configuration"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -3508,7 +3756,7 @@
     "request_schema_description": "Request body for creating a tag indexing rule."
   },
   "ReorderTagIndexingRules": {
-    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nRequires the `Manage Tags for Metrics` permission.",
+    "description": "Atomically re-sequence the tag indexing rules for an org to match the supplied list of rule UUIDs.\nThe server assigns `rule_order` 1, 2, … matching each rule UUID by position in the list.\nThe UUIDs of all active rules must be provided; omitting any active rule UUID returns a 400 error.\nRequires the `Manage Tags for Metrics` permission.",
     "summary": "Reorder tag indexing rules",
     "request_description": "",
     "request_schema_description": "Request body for reordering tag indexing rules."
@@ -4556,7 +4804,7 @@
     "summary": "Get a restriction policy"
   },
   "UpdateRestrictionPolicy": {
-    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`",
+    "description": "Updates the restriction policy associated with a resource.\n\n#### Supported resources\nRestriction policies can be applied to the following resources:\n- Dashboards: `dashboard`\n- Integration Services: `integration-service`\n- Integration Webhooks: `integration-webhook`\n- Notebooks: `notebook`\n- Powerpacks: `powerpack`\n- Reference Tables: `reference-table`\n- Security Rules: `security-rule`\n- Service Level Objectives: `slo`\n- Synthetic Global Variables: `synthetics-global-variable`\n- Synthetic Tests: `synthetics-test`\n- Synthetic Private Locations: `synthetics-private-location`\n- Monitors: `monitor`\n- Workflows: `workflow`\n- App Builder Apps: `app-builder-app`\n- Connections: `connection`\n- Connection Groups: `connection-group`\n- RUM Applications: `rum-application`\n- Cross Org Connections: `cross-org-connection`\n- Spreadsheets: `spreadsheet`\n- On-Call Schedules: `on-call-schedule`\n- On-Call Escalation Policies: `on-call-escalation-policy`\n- On-Call Team Routing Rules: `on-call-team-routing-rules`\n- Logs Pipelines: `logs-pipeline`\n- Case Management Projects: `case-management-project`\n- Monitor Notification Rules: `monitor-notification-rule`\n- Status Pages: `status-page`\n- Feature Flags: `feature-flag`\n\n#### Supported relations for resources\nResource Type               | Supported Relations\n----------------------------|--------------------------\nDashboards                  | `viewer`, `editor`\nIntegration Services        | `viewer`, `editor`\nIntegration Webhooks        | `viewer`, `editor`\nNotebooks                   | `viewer`, `editor`\nPowerpacks                  | `viewer`, `editor`\nSecurity Rules              | `viewer`, `editor`\nService Level Objectives    | `viewer`, `editor`\nSynthetic Global Variables  | `viewer`, `editor`\nSynthetic Tests             | `viewer`, `editor`\nSynthetic Private Locations | `viewer`, `editor`\nMonitors                    | `viewer`, `editor`\nReference Tables            | `viewer`, `editor`\nWorkflows                   | `viewer`, `runner`, `editor`\nApp Builder Apps            | `viewer`, `editor`\nConnections                 | `viewer`, `resolver`, `editor`\nConnection Groups           | `viewer`, `editor`\nRUM Application             | `viewer`, `editor`\nCross Org Connections       | `viewer`, `editor`\nSpreadsheets                | `viewer`, `editor`\nOn-Call Schedules           | `viewer`, `overrider`, `editor`\nOn-Call Escalation Policies | `viewer`, `editor`\nOn-Call Team Routing Rules  | `viewer`, `editor`\nLogs Pipelines              | `viewer`, `processors_editor`, `editor`\nCase Management Projects    | `viewer`, `contributor`, `manager`\nMonitor Notification Rules  | `viewer`, `editor`\nStatus Pages                | `viewer`, `responder`, `manager`\nFeature Flags               | `viewer`, `contributor`, `editor`",
     "summary": "Update a restriction policy",
     "request_description": "Restriction policy payload",
     "request_schema_description": "Update request for a restriction policy."
@@ -4701,6 +4949,22 @@
     "request_description": "",
     "request_schema_description": "RUM application update request."
   },
+  "GetRumConfig": {
+    "description": "Get the RUM configuration for your organization.",
+    "summary": "Get the RUM configuration"
+  },
+  "UpdateRumConfig": {
+    "description": "Update the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
+    "summary": "Update the RUM configuration",
+    "request_description": "New definition of the RUM configuration.",
+    "request_schema_description": "Request body for updating the RUM configuration."
+  },
+  "CreateRumConfig": {
+    "description": "Create the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
+    "summary": "Create the RUM configuration",
+    "request_description": "The definition of the RUM configuration to create.",
+    "request_schema_description": "Request body for creating the RUM configuration."
+  },
   "ListRumMetrics": {
     "description": "Get the list of configured RUM-based metrics with their definitions.",
     "summary": "Get all RUM-based metrics"
@@ -4748,6 +5012,54 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "CreateRUMOperation": {
+    "description": "Create a new RUM operation, defining the journey used to detect it from RUM events.",
+    "summary": "Create a RUM operation",
+    "request_description": "",
+    "request_schema_description": "The request body for creating a RUM operation."
+  },
+  "GetRUMOperationByName": {
+    "description": "Retrieve a specific RUM operation by its unique name.",
+    "summary": "Get a RUM operation by name"
+  },
+  "ListRUMOperations": {
+    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.",
+    "summary": "Search RUM operations"
+  },
+  "ListRUMOperationStrongLinks": {
+    "description": "List strong links between RUM operations and features. A strong link confirms that a feature\nbelongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;\nat least one is required.",
+    "summary": "List RUM operation strong links"
+  },
+  "CreateRUMOperationStrongLink": {
+    "description": "Create a strong link between a RUM operation and a feature, confirming that the feature\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
+    "summary": "Create a RUM operation strong link",
+    "request_description": "",
+    "request_schema_description": "The request body for creating a RUM operation strong link."
+  },
+  "DeleteRUMOperationStrongLink": {
+    "description": "Delete the strong link between a RUM operation and a feature.",
+    "summary": "Delete a RUM operation strong link"
+  },
+  "UpdateRUMOperationStrongLink": {
+    "description": "Update the status of a strong link between a RUM operation and a feature.",
+    "summary": "Update a RUM operation strong link",
+    "request_description": "",
+    "request_schema_description": "The request body for updating a RUM operation strong link."
+  },
+  "DeleteRUMOperation": {
+    "description": "Delete a RUM operation.",
+    "summary": "Delete a RUM operation"
+  },
+  "GetRUMOperation": {
+    "description": "Retrieve a specific RUM operation by its unique identifier.",
+    "summary": "Get a RUM operation"
+  },
+  "UpdateRUMOperation": {
+    "description": "Update an existing RUM operation. Fields omitted from the request body keep their existing value,\nwith the exception of `journey_rum`, which is required and fully replaced on every update.",
+    "summary": "Update a RUM operation",
+    "request_description": "",
+    "request_schema_description": "The request body for updating a RUM operation."
   },
   "QueryAggregatedLongTasks": {
     "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",

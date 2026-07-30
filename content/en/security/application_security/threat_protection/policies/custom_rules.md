@@ -23,6 +23,12 @@ further_reading:
   text: "Syntax for defining the AAP query"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 App and API Protection (AAP) comes with a set of [out-of-the-box detection rules][1] which aim to catch attack attempts, vulnerabilities found by attacker, and business logic abuse that impact your production systems.

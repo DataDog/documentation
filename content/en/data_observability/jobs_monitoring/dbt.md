@@ -117,6 +117,18 @@ Follow the steps below to connect dbt Core to Datadog.
 
    # Optional, for debugging purposes
    export OPENLINEAGE_CLIENT_LOGGING=DEBUG
+
+   # Required for CI/CD Drift Detection (requires openlineage-dbt >= 1.46.0).
+   # Attaches the sourceCodeLocation facet (repository URL, commit SHA, and pull
+   # request number) so Datadog can associate the dbt run with a pull request.
+   # Disabled by default; not required for job monitoring alone.
+   export OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__DISABLED=false
+   ```
+
+   For [CI/CD checks][8], the pull request number is detected automatically when the run exposes `GITHUB_REF` (GitHub Actions workflows triggered by a pull request) or `CI_MERGE_REQUEST_IID` (GitLab merge request pipelines). If neither variable is present, set the pull request number explicitly:
+
+   ```shell
+   export OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER=<PR_NUMBER>
    ```
 
 ## Update the dbt invocation
@@ -148,6 +160,7 @@ After your next dbt job run, you should start seeing job run and lineage data in
 [5]: https://openlineage.io/docs/client/python/#predefined-datadog-sites
 [6]: https://app.datadoghq.com/data-obs/catalog?integration=dbt
 [7]: https://docs.getdbt.com/docs/running-a-dbt-project/run-your-dbt-projects
+[8]: /data_observability/cicd/
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -21,7 +21,7 @@ After you set up the SDK with your code and configure the Agent to collect APM d
 
 For additional configuration options beyond the environment variables listed below, see [Additional Ruby configuration][2].
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

@@ -22,6 +22,11 @@ further_reading:
   text: "Detect and respond to evolving attacks with Attacker Clustering"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 ## Overview
 

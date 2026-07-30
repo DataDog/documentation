@@ -124,21 +124,44 @@ See the [librdkafka documentation][7] for more information and to ensure your va
 
 ## Metrics
 
-See the [Observability Pipelines Metrics][8] for a full list of available health metrics.
+For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation.
 
-### Worker health metrics
+### Kafka metrics
 
-#### Component metrics
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `kafka` for Kafka destination metrics.
 
-{{% observability_pipelines/metrics/component %}}
+`pipelines.kafka_produced_messages_total`
+: **Description**: The number of messages produced and sent to Kafka brokers.
+: **Metric type**: count
 
-### Buffer metrics (when enabled)
+`pipelines.kafka_produced_messages_bytes_total`
+: **Description**: The number of message bytes produced and sent to Kafka brokers.
+: **Metric type**: count
 
-{{% observability_pipelines/metrics/buffer/destinations %}}
+`pipelines.kafka_queue_messages`
+: **Description**: Current number of messages in the librdkafka producer queue.
+: **Metric type**: gauge
 
-#### Deprecated buffer metrics
+`pipelines.kafka_queue_messages_bytes`
+: **Description**: Current total size, in bytes, of messages in the librdkafka producer queue.
+: **Metric type**: gauge
 
-{{% observability_pipelines/metrics/buffer/deprecated_destination_metrics %}}
+`pipelines.kafka_requests_total`
+: **Description**: The number of requests sent to Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_requests_bytes_total`
+: **Description**: The number of bytes transmitted to Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_responses_total`
+: **Description**: The number of responses received from Kafka brokers.
+: **Metric type**: count
+
+`pipelines.kafka_responses_bytes_total`
+: **Description**: The number of bytes received from Kafka brokers.
+: **Metric type**: count
 
 ### Event batching
 
@@ -154,8 +177,10 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [4]: https://learn.microsoft.com/en-us/azure/event-hubs/azure-event-hubs-apache-kafka-overview
 [5]: https://app.datadoghq.com/observability-pipelines
 [7]: https://docs.confluent.io/platform/current/clients/librdkafka/html/md_CONFIGURATION.html
-[8]: /observability_pipelines/monitoring/metrics/
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [9]: /observability_pipelines/destinations/#event-batching
 [10]: /observability_pipelines/configuration/set_up_pipelines/
 [11]: /api/latest/observability-pipelines/
 [12]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics

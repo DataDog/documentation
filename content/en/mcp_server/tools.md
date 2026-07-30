@@ -378,6 +378,35 @@ Retrieves full details of a specific APM recommendation by ID.
 
 - Get the details of recommendation `abc123`.
 
+## Audit Trail
+
+Tools for [Audit Trail][71], including searching and retrieving Audit Trail events and forming Audit Trail search queries.
+
+### `search_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Searches for Audit Trail events using Datadog query syntax with support for pagination. Use when you need to find and filter events by specific attributes. Returns Audit Trail events without metadata and previous or new asset values unless requested.
+
+- Who deleted the monitor `abc123`?
+- Have there been any failed Datadog login attempts in the past week?
+- Search Audit Trail to see if there were any API key leak notifications this month.
+
+### `list_audit_events`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Lists Audit Trail events over a time window with support for pagination and an optional query. Use to scan recent Audit Trail events. Returns Audit Trail events without metadata and previous or new asset values unless requested.
+
+- Show me Audit Trail events for the past hour.
+
+### `build_audit_trail_query`
+*Toolset: **audit-trail***\
+*Permissions Required: `Audit Trail Read`*\
+Translates a natural-language description into an Audit Trail query string. If you are uncertain of query syntax when searching Audit Trail events, use this tool first with a description of the events you would like to retrieve, then pass the returned query and timestamps directly into `search_audit_events`.
+
+- Provide an Audit Trail query to see who created new monitors in the past 2 weeks.
+- Create an Audit Trail query to show when the dashboard `abc123` was deleted.
+- Generate an Audit Trail query to check which actions were executed through the Datadog MCP server.
+
 ## Cases
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
@@ -543,6 +572,171 @@ Ask a Datadog widget expert a question about widget configuration, schemas, quer
 - What's the schema for the scatterplot widget?
 - Help me debug why this widget is showing fractional values when it should be a count.
 - How do I configure a timeseries to show both bars and lines?
+
+## Data Observability
+
+Tools for [Data Observability][70], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs.
+
+### `search_data_entities`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Searches for data entities in the data catalog by name, full-text search, or filters (platform, schema, database, account).
+
+- Find tables named "orders" in Snowflake.
+- List all dbt models starting with `stg_`.
+- What schemas exist in my BigQuery project?
+
+### `get_data_catalog_schema`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Returns the entity type schema for every platform with data in the catalog: entity types, containment hierarchy, filterable attributes, and default metrics.
+
+- What platforms are connected to Data Observability?
+- What entity types exist for Databricks?
+- What metrics are available for a table entity?
+
+### `get_data_entity_details`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches full details and attributes (owner, tags, custom attributes, platform, schema, database, account) for one or more data entities by ID.
+
+- Get the full attributes for this table entity.
+- Who owns this dataset?
+
+### `get_data_entity_hierarchy`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches the containment hierarchy (ancestors and descendants) for one or more entities — for example, which database or schema a table belongs to, or which tables are in a schema.
+
+- What database does this table belong to?
+- What columns are in this table?
+- Show the full hierarchy around this entity.
+
+### `get_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Fetches the live reachable lineage subgraph (nodes and edges) from one or more anchor entities, upstream, downstream, or both.
+
+- What's downstream of this table?
+- Show me the upstream lineage for this column.
+- What would break if I dropped this table?
+
+### `summarize_data_entity_lineage`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Returns aggregate lineage statistics (node/edge counts, type breakdowns, depth distribution) for a large or unknown lineage graph, without the full payload. Use before `get_data_entity_lineage` on graphs of unknown size.
+
+- How many things depend on this table, broken down by type?
+- How deep does the lineage go from this table?
+
+### `rank_data_entities_by_lineage_degree`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` or `APM Read`*\
+Ranks entities by transitive lineage connectivity (upstream, downstream, or both), using a pre-built snapshot.
+
+- Which tables in my warehouse have the most dependencies?
+- Which raw ingestion tables have the deepest downstream chains?
+
+### `get_warehouse_query_history`
+*Toolset: **data-observability***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data`*\
+Fetches recent queries that touched specific entities, in reverse chronological order, including the SQL text, execution state, and query type.
+
+- Who has been querying this table recently?
+- What writes have happened to this table in the last week?
+
+**Note**: The `sql` field in results is raw, user-authored SQL from the warehouse and should be treated as untrusted data.
+
+### `get_popular_warehouse_tables_by_query_frequency`
+*Toolset: **data-observability***\
+*Permissions Required: `Logs Read Data` and `Logs Read Index Data` and `APM Read`*\
+Ranks tables by query activity, grouped by who's querying them: human users, BI tools, orchestrators, ETL tools, or internal service accounts.
+
+- What tables are most queried by BI tools?
+- Which tables get the most human analyst traffic?
+
+### `suggest_data_observability_monitor_filters`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read`*\
+Analyzes a set of entities to find common attributes and naming patterns, and suggests monitor filter expressions that group subsets of those entities.
+
+- What do my highest-priority tables have in common?
+- Suggest a filter that covers all my staging tables.
+
+### `rank_data_observability_monitor_candidates`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Ranks tables by monitoring priority, combining lineage impact and query activity into a single composite score. This is the primary entry point for "what should I monitor?" questions.
+
+- What tables should I set up data quality monitors for first?
+
+### `get_data_observability_monitor`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read` and `Timeseries` and `APM Read`*\
+Retrieves data quality metric timeseries for a given monitor ID, including anomaly-detection bounds when enabled.
+
+- Show me the metric history for monitor `12345`.
+- What are the anomaly bounds for this freshness monitor?
+
+### `get_data_observability_monitor_coverage`
+*Toolset: **data-observability***\
+*Permissions Required: `Monitors Read`*\
+Fetches all data quality monitors for the org and resolves each monitor's filter to the entities it covers. Use this to see which tables have no monitoring at all.
+
+- Which of my tables aren't covered by any data quality monitor?
+
+### `get_data_observability_monitor_group_statuses`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Queries the current alert and warn state of data quality monitor groups.
+
+- Which tables are currently failing their data quality checks?
+
+### `get_entity_tags` / `update_entity_tags`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
+Gets or sets custom user-defined tags on data entities.
+
+- What tags are on this table?
+- Tag this table with `owner:data-platform-team`.
+
+### `get_entity_descriptions` / `update_entity_description`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read` or `Monitors Read` (get); `Data Observability Catalog Write` (update)*\
+Gets or sets custom user-defined descriptions on data entities.
+
+- What's the description on this table?
+- Set a description explaining what this table is used for.
+
+### `get_spark_job_health`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves detailed health metrics (duration, executor CPU time, shuffle, spill, worst stages) for a single Spark or Databricks job run.
+
+- Why did this Spark job run slowly?
+- Show me the worst stages for the most recent run of this job.
+
+### `get_spark_sql_plan`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves the Spark SQL physical execution plan for a stage, including join strategies, shuffle information, and per-node metrics.
+
+- Show me the execution plan for this Spark stage.
+
+### `list_data_observability_recommendations`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Lists cost and performance optimization recommendations for data jobs and queries (Spark, Databricks, Snowflake, BigQuery), with estimated cost and duration savings. Returns lightweight summaries with cursor pagination.
+
+- What cost-saving recommendations do I have for my Databricks jobs?
+- Are there any recommendations for reducing data skew in my Spark jobs?
+
+### `get_data_observability_recommendation`
+*Toolset: **data-observability***\
+*Permissions Required: `APM Read`*\
+Retrieves full details of a specific Data Observability recommendation by ID, including its structured body describing the problem, evidence, and proposed change.
+
+- Get the details of recommendation `abc123`.
 
 ## Database Monitoring
 
@@ -1574,19 +1768,21 @@ Fallback tool for retrieving full security finding details. Prefer `analyze_data
 ### `get_datadog_security_findings_ticket_suggestions`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Read`, `Cases Read`*\
-Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
+Returns ranked project suggestions for ticketing security findings. Shows available Case Management, Jira, Linear, and ServiceNow projects with 30-day usage data. Call this before `create_datadog_security_findings_ticket` to discover which project to use.
 
 - What Jira projects can I use to create tickets for security findings?
 - Show me available ServiceNow projects for ticketing.
+- Which Linear projects can I file findings to?
 - Which Case Management projects are most used for findings?
 
 ### `create_datadog_security_findings_ticket`
 *Toolset: **security***\
 *Permissions Required: `Security Monitoring Findings Write`, `Cases Read`, `Cases Write`*\
-Creates a Case Management case, Jira issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
+Creates a Case Management case, Jira issue, Linear issue, or ServiceNow ticket for security findings. Requires specific finding IDs and a project ID. Use `get_datadog_security_findings_ticket_suggestions` first to discover available projects.
 
 - Create a Jira ticket for these critical findings in project SECURITY.
 - Open a Case Management case for the findings from this rule.
+- Create a Linear issue for these high-severity findings.
 - Create a ServiceNow ticket for these library vulnerabilities.
 
 ### `detach_datadog_security_findings_ticket`
@@ -1615,7 +1811,50 @@ Assigns or unassigns security findings to a user. Assignment cascades to any lin
 - Unassign findings that are no longer relevant.
 - Assign all findings from this rule to me.
 
-### `get_datadog_security_passlist`
+### `list_datadog_security_findings_automation_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Read`*\
+Lists security findings automation rules of a given type (`mute`, `due_date`, `ticket_creation`, or `severity_modifier`).
+
+- List all mute automation rules for security findings.
+- Show me the ticket-creation rules.
+- What due-date automation rules are configured?
+
+### `create_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write` and `Security Monitoring Findings Read`*\
+Creates a security findings automation rule. Choose a `rule_type`: `mute` (suppress findings), `due_date` (set remediation deadlines), `severity_modifier` (adjust finding severity), or `ticket_creation` (auto-create Jira or Case Management tickets).
+
+- Create a rule to automatically mute false-positive misconfiguration findings in staging.
+- Set 30-day remediation due dates for high-severity library vulnerabilities.
+- Auto-create Jira tickets for critical findings in the SECURITY project.
+
+### `update_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Updates an existing automation rule. Supports partial updates, so only the provided fields are changed. Use it to enable or disable rules, rename them, adjust filters, or change action parameters.
+
+- Enable the automation rule that mutes staging findings.
+- Change the due-date rule to give critical findings 14 days instead of 30.
+- Update the ticket-creation rule to target a different Jira project.
+
+### `delete_datadog_security_findings_automation_rule`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Permanently deletes a security findings automation rule by ID.
+
+- Delete the severity modifier rule `abc-123-def`.
+- Remove the mute rule that is no longer needed.
+
+### `reorder_datadog_security_findings_automation_rules`
+*Toolset: **security***\
+*Permissions Required: `Security Pipelines Write`*\
+Moves an automation rule up or down in the list. Rules are applied in order, so a rule's position sets its priority.
+
+- Move the mute rule `abc-123-def` to the top of the list.
+- Lower the priority of this due-date rule by two positions.
+
+### `get_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Returns all WAF exclusion filter (passlist) entries for the organization to review existing suppressions.
@@ -1624,7 +1863,7 @@ Returns all WAF exclusion filter (passlist) entries for the organization to revi
 - Show me active WAF exclusion filters.
 - Check existing passlist suppressions before I add a new one.
 
-### `upsert_datadog_security_passlist`
+### `upsert_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rules on a specific service or endpoint.
@@ -1633,7 +1872,7 @@ Creates or updates a WAF exclusion filter (passlist) entry to suppress noisy rul
 - Update the exclusion filter to suppress rule "xss-rule" for service "auth-api".
 - Create an AppSec passlist entry that matches rule ID "lfi-attack" on "/v1/users".
 
-### `delete_datadog_security_passlist`
+### `delete_datadog_security_trace_passlist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Deletes an existing WAF exclusion filter (passlist) entry.
@@ -1641,7 +1880,7 @@ Deletes an existing WAF exclusion filter (passlist) entry.
 - Delete WAF exclusion filter "passlist-abc-123".
 - Remove the passlist entry that matches rule "sqli-detection" on "/api/pay".
 
-### `get_datadog_security_denylist`
+### `get_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Read`*\
 Lists blocked IPs, users, and user agents (denylist entries), with optional filtering.
@@ -1650,7 +1889,7 @@ Lists blocked IPs, users, and user agents (denylist entries), with optional filt
 - Show me blocked IP addresses from yesterday.
 - Check if IP "198.51.100.42" is on the security denylist.
 
-### `upsert_datadog_security_denylist_entry`
+### `upsert_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Adds or updates a denylist block for an IP, user, or user agent with an expiration.
@@ -1659,13 +1898,47 @@ Adds or updates a denylist block for an IP, user, or user agent with an expirati
 - Add user "attacker_user_99" to the blocked entities denylist.
 - Create a denylist entry for user-agent "MaliciousScanner/1.0" with an expiration set to next week.
 
-### `delete_datadog_security_denylist_entry`
+### `unblock_datadog_security_aap_denylist`
 *Toolset: **security***\
 *Permissions Required: `Application Security Management Protect Write`*\
 Unblocks a previously denylisted entity by setting its expiration in the past.
 
 - Unblock IP "198.51.100.42" on the denylist.
 - Remove user "attacker_user_99" from the blocked entities list.
+
+### `get_datadog_security_aap_custom_rules`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves one App & API Protection (AAP) custom WAF rule by ID or lists custom rules. Supports filtering by category, status, service, and environment.
+
+- List custom WAF rules that apply to service "checkout-service" in production.
+- Get AAP custom rule "rule-xyz-123".
+
+### `upsert_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Creates or updates an AAP custom WAF rule in the attack attempt or business logic category. New rules cannot block traffic: create the rule in monitoring mode, then update it to blocking mode after confirming its matches.
+
+- Create a monitoring custom WAF rule for requests to path "/admin".
+- Update AAP custom rule "rule-xyz-123" to block matching traffic.
+- Disable custom rule "rule-xyz-123" without deleting it.
+
+### `delete_datadog_security_aap_custom_rule`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Write`*\
+Permanently deletes an AAP custom WAF rule by ID.
+
+- Delete custom WAF rule "rule-xyz-123".
+- Remove the AAP custom rule that monitors requests to "/admin".
+
+### `get_datadog_security_aap_blocking_config`
+*Toolset: **security***\
+*Permissions Required: `Application Security Management Protect Read`*\
+Retrieves the organization-wide AAP blocking and denylist enforcement settings.
+
+- Is AAP blocking enabled for the organization?
+- Is the AAP denylist enforced?
+- Show me the AAP blocking configuration.
 
 ## Session Replay
 
@@ -1990,3 +2263,5 @@ Adds an agent trigger to a workflow and publishes it, enabling the workflow to b
 [67]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
 [68]: /product_analytics/
 [69]: /session_replay/
+[70]: /data_observability/
+[71]: /account_management/audit_trail/

@@ -32,7 +32,7 @@ Assign these permissions through [Datadog roles][1].
 
 Restrict edit access on a specific flag by selecting **Settings > Permissions** on the flag details page:
 
-{{< img src="feature_flags/concepts/flag-grace-modal.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:65%;" >}}
+{{< img src="feature_flags/concepts/flag-grace-modal-2.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:65%;" >}}
 
 You can limit edit access to:
 

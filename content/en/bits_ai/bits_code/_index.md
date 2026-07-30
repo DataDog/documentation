@@ -26,15 +26,6 @@ To get started with Bits Code, [set up a source code integration][6] and complet
 
 Learn how your Bits Code usage is billed on [AI Credits][27].
 
-## Supported source code providers
-Bits Code supports the following source code providers:
-- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
-- **GitLab**: GitLab.com
-
-The following plans are not supported:
-- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
-- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
-
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
 
@@ -53,6 +44,15 @@ On **[Sessions][7]**, view your past sessions in the **My Sessions** panel. A se
 
 Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
 
+## Supported source code providers
+Bits Code supports the following source code providers:
+- **GitHub**: GitHub.com and [GitHub Enterprise Cloud][30]
+- **GitLab**: GitLab.com
+
+The following plans are not supported:
+- **Self-hosted plans**, such as GitHub Enterprise Server and GitLab Self-Managed.
+- **Cloud-hosted plans on dedicated domains**, such as [GitHub Enterprise Cloud with data residency][31] and [GitLab Dedicated][32]. Bits Code supports only providers on the standard GitHub.com and GitLab.com domains.
+
 ## Supported Datadog products
 
 Bits Code can suggest code improvements within several Datadog products, including the following:
@@ -63,6 +63,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Bits Investigation][17]         | Generates code remediations based on Bits Investigations |
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
+| [Cloud Security][34]      | Remediates [misconfiguration findings][35] in the IaC that defines the affected resource |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
 | [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26] (individually or in bulk)  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
@@ -89,11 +90,19 @@ Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on gen
 
 You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
 
+### Custom agent skills and instructions
+
+Bits Code can use custom skills defined in your repository. It discovers skills formatted like `<skill-name>/SKILL.md` in `.claude/skills/`, `.codex/skills/`, and `.gemini/skills/` directories. Skills should contain YAML `name` and `description` frontmatter keys.
+
+Bits Code automatically invokes appropriate skills based on their `name` and `description` values, and you can encourage use by mentioning skills in your [custom instructions file][33]. You can also prompt Bits Code to use a certain skill directly.
+
+Bits Code also [ingests custom instructions][33] defined in your repository and Bits Code settings.
+
 ### Pull or merge request collaboration
 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
-- Iterate on pull or merge requests in response to comments; mention `@Datadog` in a comment to prompt Bits for updates
+- Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
@@ -102,6 +111,7 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 
 - Bits Code is an AI product, which means it can make mistakes. Use best practices when reviewing and testing agent-generated code.  
 - Bits Code does not support multi-repository investigations.
+- When using GitLab, mentioning `@Datadog` in a comment to prompt Bits for updates is not supported.
 
 ## Further reading
 
@@ -131,6 +141,9 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [27]: /account_management/billing/ai_credits/
 [28]: /bits_ai/bits_code/automations/
 [29]: https://app.datadoghq.com/code/automations
+[34]: /security/cloud_security_management/
+[35]: /security/cloud_security_management/review_remediate/remediate_with_ai/
 [30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
+[33]: /bits_ai/bits_code/setup/#configure-custom-instructions

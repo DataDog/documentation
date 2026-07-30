@@ -3,6 +3,7 @@
     "id": "api-spec-test",
     "type": "gcp_scan_options",
     "attributes": {
+      "cloud_function": true,
       "vuln_containers_os": false
     }
   }

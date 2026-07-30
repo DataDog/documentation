@@ -17,65 +17,58 @@ further_reading:
 - link: "/feature_flags/concepts/flag_graphs/"
   tag: "Concept"
   text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and receives flag updates through Remote Configuration in the Datadog Node.js tracer (`dd-trace`).
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-## Prerequisites
+<div class="alert alert-warning">Node.js 5.116.0 and 6.5.0 support agentless configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-Before setting up the Node.js Feature Flags SDK, ensure you have:
+## Getting started
 
-- **Datadog Agent** version 7.55 or later with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
-- **Datadog [API key][3]** configured on the Agent
-- **Datadog Node.js SDK** `dd-trace` version 5.80.0 or later
+For the default agentless setup, you need:
+
+- **Datadog Node.js SDK** `dd-trace` version **5.116.0 or later on the v5 release line**, or **6.5.0 or later on the v6 release line**
+- A Datadog [API key][3]
+- Your Datadog site
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable the feature flagging provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and initialize the Datadog OpenFeature provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
 ```
 
-Enable the provider with environment variables:
+If your application stays on the v5 release line, use `dd-trace@^5.116.0`. On the v6 release line, use `dd-trace@^6.5.0`.
+
+### Configure agentless delivery
+
+Configure the API key, Datadog site, and environment in the application process:
 
 ```shell
-# Required: Enable the feature flags provider
-DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
-
-# Required: Enable Remote Configuration in the tracer
-DD_REMOTE_CONFIGURATION_ENABLED=true
-
-# Optional: Enable flag evaluation metrics
-DD_METRICS_OTEL_ENABLED=true
-
-# Required: Service identification
-DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 ```
 
-<div class="alert alert-info">The <code>EXPERIMENTAL_</code> prefix is retained for backwards compatibility; the provider itself is stable.</div>
+No Feature Flags enablement or source setting is required. Access `tracer.openfeature` and register it with OpenFeature, as shown below, to begin polling. Installing or initializing `dd-trace` alone does not create Feature Flags CDN traffic.
 
-To configure `feature_flag.evaluations`, including the required tracer version and Agent OTLP setup, see [Set Up Server-Side Flag Evaluation Metrics][4]. For more information on available graphing, see [Feature Flag Graphs][5].
-
-Or enable the provider in code:
+Initialize the provider in code:
 
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
 
-tracer.init({
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-    }
-  }
-});
+tracer.init();
 
-// setProviderAndWait resolves after Remote Configuration loads, so flags
+// Accessing tracer.openfeature activates the default agentless source.
+// setProviderAndWait resolves after the selected source loads, so flags
 // evaluate against real configuration data instead of default values.
 try {
   await OpenFeature.setProviderAndWait(tracer.openfeature);
@@ -107,7 +100,7 @@ Blocking startup until the provider is ready, as shown above, works well for mos
 
 ### Accepting default values before initialization
 
-When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until Remote Configuration loads in the background.
+When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until the selected configuration source loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
@@ -264,7 +257,7 @@ const priceMultiplier = await client.getNumberValue(
 
 ### Object flags
 
-For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
+For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful when multiple properties need to be provided together.
 
 ```javascript
 const defaultConfig = {
@@ -301,6 +294,17 @@ console.log(details.errorCode);    // The error that occurred during evaluation,
 console.log(details.errorMessage); // A more detailed message of the error that occurred, if any
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
+
+## Advanced configuration
+
+Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
+
+- [Configure agentless delivery][9], including polling, request timeout, and endpoint settings
+- [Use a custom agentless endpoint][7] for advanced testing, local development, or an operator-managed proxy
+- [Use Agent Remote Configuration][10] to retain Agent-managed delivery
+- [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
+
+The initial Node.js agentless releases do not support `feature_flag.evaluations`, exposure logging, or experimentation use cases. The [Server-Side Flag Evaluation Metrics][4] guide applies only to supported Agent-backed configurations. For more information on available graphing, see [Feature Flag Graphs][5].
 
 ## Testing
 
@@ -371,3 +375,8 @@ The snippet above uses Vitest for its first-class ESM support. The same pattern 
 [3]: /account_management/api-app-keys/#api-keys
 [4]: /feature_flags/guide/server_flag_evaluation_metrics/
 [5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/
+[7]: /feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint
+[8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[9]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
+[10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration

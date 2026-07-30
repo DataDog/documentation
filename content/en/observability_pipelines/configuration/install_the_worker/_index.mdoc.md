@@ -87,7 +87,7 @@ This page describes how you can set up the Observability Pipelines Worker in ECS
         datadog/observability-pipelines-worker run
     ```
 
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -114,16 +114,16 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
     datadog/observability-pipelines-worker run
 ```
 
-You must replace the placeholders with these values:
+Replace the placeholders with these values:
 - `<DATADOG_API_KEY>`: Your Datadog API key.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][11].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
     - See [Environment Variables][7] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
     - See [Environment Variables][7] for a list of destination environment variables.
 
 {% /if %}
@@ -165,7 +165,7 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set datadog.pipelineId=<PIPELINE_ID> \
     datadog/observability-pipelines-worker
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
 
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
@@ -188,16 +188,16 @@ See [Update Existing Pipelines][13] if you want to make changes to your pipeline
     --set service.ports[0].protocol=TCP,service.ports[0].port=<SERVICE_PORT>,service.ports[0].targetPort=<TARGET_PORT> \
     datadog/observability-pipelines-worker
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
 
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
     - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`
+        - For example: `--set env[0].name=DD_OP_SOURCE_DATADOG_AGENT_ADDRESS,env[0].value='0.0.0.0' \`.
         - See [Environment Variables][7] for a list of source environment variables.
     - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`
+        - For example: `--set env[1].name=DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL,env[1].value='https://hec.splunkcloud.com:8088' \`.
         - See [Environment Variables][7] for a list of destination environment variables.
 
 {% /if %}
@@ -215,7 +215,7 @@ Follow these steps if you want to use the one-line installation script to instal
     ```bash
     DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
     ```
-    You must replace the placeholders with the following values:
+    Replace the placeholders with the following values:
     - `<DATADOG_API_KEY>`: Your Datadog API key.
         - **Note**: The API key must be [enabled for Remote Configuration][10].
     - `<PIPELINE_ID>`: The ID of your pipeline.
@@ -240,16 +240,16 @@ Run this one-step command to install the Worker:
 ```bash
 DD_API_KEY=<DATADOG_API_KEY> DD_OP_PIPELINE_ID=<PIPELINE_ID> DD_SITE=<DATADOG_SITE> <SOURCE_ENV_VARIABLE> <DESTINATION_ENV_VARIABLE> bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_op_worker2.sh)"
 ```
-You must replace the placeholders with the following values:
+Replace the placeholders with the following values:
 - `<DATADOG_API_KEY>`: Your Datadog API key.
     - **Note**: The API key must be [enabled for Remote Configuration][10].
 - `<PIPELINE_ID>`: The ID of your pipeline.
 - `<DATADOG_SITE>`: The [Datadog site][11].
 - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
-    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`
+    - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
     - See [Environment Variables][7] for a list of source environment variables.
 - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
-    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`
+    - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
     - See [Environment Variables][7] for a list of destination environment variables.
 
 {% partial file="observability_pipelines/install_the_worker/install-script-notes.mdoc.md" /%}
@@ -643,6 +643,95 @@ An example task definition:
 
 Depending on your use case, configure either an [Application Load Balancer][22] or a [Network Load Balancer][23] to target the group of Fargate tasks you defined earlier. Configure the health check against the Observability Pipelines' API port that was set in the task definition.
 
+## Upgrade the Worker
+
+To upgrade the Worker, update the `image` field in your container definition, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+
+```json
+"image": "datadog/observability-pipelines-worker:<WORKER_VERSION>"
+```
+
+Restart the ECS tasks to use the updated image.
+
+**Note**: If your container definition doesn't specify a version, restarting the ECS tasks automatically upgrades the Worker to the latest available version.
+
+{% /if %}
+
+<!-- Docker - Upgrade Worker -->
+{% if equals($platform, "docker") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker:
+
+1. Run the following command, replacing `<WORKER_VERSION>` with the version you want to use, such as `2.17.0`:
+    ```
+    docker pull datadog/observability-pipelines-worker:<WORKER_VERSION>
+    ```
+2. Run the following commands to stop and remove the container:
+    ```
+    docker stop <CONTAINER_NAME>
+    ```
+    ```
+    docker rm <CONTAINER_NAME>
+    ```
+
+<!-- Docker - Upgrade Worker - Secrets Management -->
+{% if equals($secrets_source, "environment_variables") %}
+
+3. Run the following command to install the updated Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -e <SOURCE_ENV_VARIABLE> \
+        -e <DESTINATION_ENV_VARIABLE> \
+        -p 8088:8088 \
+        datadog/observability-pipelines-worker run
+    ```
+
+    Replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+    - `<SOURCE_ENV_VARIABLE>`: The environment variables required by the source you are using for your pipeline.
+        - For example: `DD_OP_SOURCE_DATADOG_AGENT_ADDRESS=0.0.0.0:8282`.
+        - See [Environment Variables][7] for a list of source environment variables.
+    - `<DESTINATION_ENV_VARIABLE>`: The environment variables required by the destinations you are using for your pipeline.
+        - For example: `DD_OP_DESTINATION_SPLUNK_HEC_ENDPOINT_URL=https://hec.splunkcloud.com:8088`.
+        - See [Environment Variables][7] for a list of destination environment variables.
+{% /if %}
+
+<!-- Docker - Upgrade Worker - Environment variables -->
+{% if equals($secrets_source, "secrets_management") %}
+
+3. Run the following command to install the updated Worker:
+    ```
+    docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
+        -e DD_OP_PIPELINE_ID=<PIPELINE_ID> \
+        -e DD_SITE=<DATADOG_SITE> \
+        -v /path/to/local/bootstrap.yaml:/etc/observability-pipelines-worker/bootstrap.yaml \
+        datadog/observability-pipelines-worker run
+    ```
+
+    Replace the placeholders with the following values:
+    - `<DATADOG_API_KEY>`: Your Datadog API key.
+        - **Note**: The API key must be [enabled for Remote Configuration][10].
+    - `<PIPELINE_ID>`: The ID of your pipeline.
+    - `<DATADOG_SITE>`: The [Datadog site][11].
+
+{% /if %}
+
+{% /if %}
+
+<!-- CloudFormation - Upgrade Worker -->
+{% if equals($platform, "cloudformation") %}
+
+## Upgrade the Worker
+
+To upgrade the Worker, update the Worker image version in your CloudFormation stack and redeploy it.
+
 {% /if %}
 
 <!-- UI, API, Terraform - Kubernetes -->
@@ -740,7 +829,7 @@ image:
 
 ### Upgrade with the chart's default image tag
 
-Run these commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
+Run the following commands to update the Helm repo and upgrade the release to the chart's default image, applying any overrides you previously set. Replace `<YOUR_VALUES_FILE>` with the name of your `values.yaml` file:
 
 ```shell
 helm repo update

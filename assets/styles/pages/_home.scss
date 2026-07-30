@@ -17,7 +17,7 @@
         }
 
         & .container.position-relative {
-            z-index: 1;
+            z-index: 2;
         }
     }
 
@@ -129,23 +129,6 @@
         }
     }
 
-}
-
-[data-home-variant-content="legacy"]:not([hidden]) {
-    margin-top: 10px;
-
-    @media (min-width: 768px) {
-        margin-top: 30px;
-    }
-}
-
-.home-content:has([data-home-variant-content="legacy"]:not([hidden])) .home-content__blobs {
-    display: none;
-}
-
-.home-content__variant-slot[data-variant-resolving] {
-    min-height: 100vh;
-    background-color: #ffffff;
 }
 
 .home-content {

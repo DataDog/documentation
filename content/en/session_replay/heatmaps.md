@@ -13,6 +13,9 @@ further_reading:
 - link: '/session_replay/?platform=android'
   tag: 'Documentation'
   text: 'Session Replay for Mobile'
+- link: "https://www.datadoghq.com/blog/session-replay-custom-heatmap-backgrounds/"
+  tag: "Blog"
+  text: "Capture and analyze custom heatmaps in Session Replay"
 - link: 'https://www.datadoghq.com/blog/visualize-behavior-datadog-scrollmaps/'
   tag: 'Blog'
   text: 'Visualize user interactions with your pages by using Scrollmaps in Datadog Heatmaps'

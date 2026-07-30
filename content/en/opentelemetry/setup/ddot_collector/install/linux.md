@@ -2,7 +2,7 @@
 title: Install the DDOT Collector on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 3
+code_lang_weight: 4
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
@@ -154,6 +154,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -168,7 +169,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
