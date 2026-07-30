@@ -46,6 +46,12 @@ There are no secret identifiers for this destination.
 
 ## How the destination works
 
+### Metrics aggregation
+
+The Datadog Metrics destination aggregates metrics that have the same metric name, tag values, and timestamp into a single metric before sending them to Datadog. The Datadog metrics intake accepts only one value per unique combination of metric name, tag values, and timestamp, so aggregating in the destination preserves values that the intake would otherwise discard.
+
+### Event batching
+
 A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |

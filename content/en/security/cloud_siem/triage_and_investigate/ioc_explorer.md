@@ -1,15 +1,18 @@
 ---
 title: IOC Explorer
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
-  tag: "Blog"
-  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 - link: /security/threat_intelligence/
   tag: documentation
   text: Threat Intelligence
 - link: /security/cloud_siem/ingest_and_enrich/threat_intelligence
   tag: documentation
   text: Bring Your Own Threat Intelligence
+- link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
+  tag: "Blog"
+  text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+  tag: "Blog"
+  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
 ---
 
 ## Overview

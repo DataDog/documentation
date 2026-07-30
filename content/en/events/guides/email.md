@@ -89,13 +89,22 @@ Body: This is a test message showing that env:test is at 50% CPU - #test
 The email body goes through several cleanup steps to enhance readability and security. The expected changes include:
 
 - **HTML to Markdown**: HTML content is converted to its markdown equivalent.
-- **HTML sanitization**: For security, email bodies are sanitized, allowing only specific HTML tags: `a`, `br`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `iframe`, `img`,
-`li`, `ol`, `p`, `pre`, `span`, `strong`, `ul`. Any other HTML tag, including strings enclosed in `<>`, are removed.
+- **HTML sanitization**: For security, email bodies are sanitized, allowing only specific HTML tags: `a`, `br`, `caption`, `code`, `div`, `em`, `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `hr`, `iframe`, `img`, `li`, `ol`, `p`, `pre`, `span`, `strong`, `table`, `tbody`, `td`, `tfoot`, `th`, `thead`, `tr`, `ul`. Any other HTML tag, including strings enclosed in `<>`, is removed.
 - **Strip reply/forward content**: Only the most recent email in a thread is retained, with older replies and forwards removed.
 
 ### Datadog event {#datadog-event-2}
 
-The subject of the email becomes the title of the event and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. Tags can be added by using `#` in message body. Example event sent with plain text:
+The subject of the email becomes the title of the event, and the body of the email becomes the event message. The sender of the email appears at the bottom of the event. You can add tags by using `#` in the message body.
+
+Datadog truncates values that exceed these default field limits:
+
+| Field   | Maximum         |
+|---------|-----------------|
+| Title   | 600 characters  |
+| Message | 4000 characters |
+| Tags    | 200 tags        |
+
+Example event sent with plain text:
 
 {{< img src="extend/events/plain-event.png" alt="plain event" >}}
 

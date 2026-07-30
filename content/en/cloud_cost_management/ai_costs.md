@@ -41,6 +41,7 @@ To use AI Costs, you must have at least one of the following supported providers
 |---|---|
 | Amazon Bedrock | [AWS integration][2] |
 | Anthropic   | [SaaS integration][3] |
+| Azure Foundry Models   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
 | Vertex AI  | [Google Cloud integration][4] |
@@ -148,3 +149,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [15]: /cloud_cost_management/setup/saas_costs/?tab=github#configure-your-saas-accounts
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
 [17]: /cloud_cost_management/recommendations
+[18]: /cloud_cost_management/setup/azure/?tab=terraform
