@@ -104,12 +104,12 @@ See [Data Collected][7] for details on what data is collected during code covera
 
 ### Upload reports automatically with Test Optimization
 
-[Supported Test Optimization libraries][8] can upload code coverage reports without a separate `datadog-ci` step:
+A Test Optimization library that supports automatic code coverage report upload can upload reports without a separate `datadog-ci` step:
 
-1. Enable code coverage upload in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][9]. You can apply the setting at the organization, repository, or test service level.
+1. Enable code coverage upload in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8]. You can apply the setting at the organization, repository, or test service level.
 2. Run your tests with a supported coverage tool. The Test Optimization library uploads the report after the test session ends.
 
-To organize and filter reports uploaded by the library, see [Add flags to coverage reports][10].
+To organize and filter reports uploaded by the library, see [Add flags to automatically uploaded reports][9] for `DD_CODE_COVERAGE_FLAGS` library and version support.
 
 ### Supported coverage report formats
 
@@ -307,7 +307,7 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 <div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
-Standalone binaries are provided with [Datadog CI releases][11]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
+Standalone binaries are provided with [Datadog CI releases][10]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -346,7 +346,7 @@ Start-Process -FilePath "./datadog-ci.exe" -ArgumentList version
 
 #### npm
 
-Alternatively, if Node.js is available in your CI environment, install the [`datadog-ci`][12] CLI globally using `npm`:
+Alternatively, if Node.js is available in your CI environment, install the [`datadog-ci`][11] CLI globally using `npm`:
 
 {{< code-block lang="shell" >}}
 npm install -g @datadog/datadog-ci
@@ -354,7 +354,7 @@ npm install -g @datadog/datadog-ci
 
 #### Docker image
 
-Alternatively, you can update your CI job to run in a container based on the [Datadog CI Docker image][13].
+Alternatively, you can update your CI job to run in a container based on the [Datadog CI Docker image][12].
 The image comes with `datadog-ci` preinstalled and ready to use.
 
 ### Uploading coverage reports
@@ -363,7 +363,7 @@ The image comes with `datadog-ci` preinstalled and ready to use.
 Datadog automatically aggregates all reports for the same commit on the backend. You don't need to merge coverage reports before uploading them.
 </div>
 
-To upload your code coverage reports to Datadog, run the following command. Provide a valid [Datadog API key][14] (`DD_API_KEY`), and one or more file paths to either the coverage report files directly or directories containing them:
+To upload your code coverage reports to Datadog, run the following command. Provide a valid [Datadog API key][13] (`DD_API_KEY`), and one or more file paths to either the coverage report files directly or directories containing them:
 
 {{< tabs >}}
 {{% tab "GitHub Actions" %}}
@@ -419,10 +419,10 @@ test:
 {{< /tabs >}}
 
 The command recursively searches the specified directories for supported coverage report files, so specifying the current directory (`.`) is usually sufficient.
-See the [`datadog-ci` documentation][15] for more details on the `datadog-ci coverage upload` command.
+See the [`datadog-ci` documentation][14] for more details on the `datadog-ci coverage upload` command.
 
 Shortly after the code coverage report upload is finished, Datadog adds a PR comment with code coverage percentage values.
-You can also view your coverage data aggregated by pull request in the [Code Coverage page][16] in Datadog, with the ability to examine individual files and lines of code.
+You can also view your coverage data aggregated by pull request in the [Code Coverage page][15] in Datadog, with the ability to examine individual files and lines of code.
 
 {{< img src="/code_coverage/pr_details.png" text="Code Coverage PR details page in Datadog" style="width:100%" >}}
 
@@ -500,7 +500,7 @@ You can control this behavior with the following options:
 Datadog automatically merges coverage reports for the same commit.
 As a result, the coverage percentage displayed in the Datadog UI may differ from the values in your individual coverage reports, especially if those reports contain overlapping or duplicate source code file entries.
 
-If you use an external tool (such as [ReportGenerator][17]) to merge coverage reports before uploading to Datadog,
+If you use an external tool (such as [ReportGenerator][16]) to merge coverage reports before uploading to Datadog,
 ensure your merged reports do not contain duplicate source code file entries.
 Datadog deduplicates overlapping files across reports, which can result in differences between your original coverage values and the merged values displayed in the Datadog UI.
 
@@ -515,13 +515,12 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [5]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [6]: /code_coverage/configuration#pr-gates
 [7]: /code_coverage/data_collected/#code-coverage-report-upload
-[8]: /tests/setup/
-[9]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
-[10]: /code_coverage/flags#add-flags-to-coverage-reports
-[11]: https://github.com/DataDog/datadog-ci/releases
-[12]: https://www.npmjs.com/package/@datadog/datadog-ci
-[13]: https://hub.docker.com/r/datadog/ci
-[14]: https://app.datadoghq.com/organization-settings/api-keys
-[15]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
-[16]: https://app.datadoghq.com/ci/code-coverage
-[17]: https://reportgenerator.io/
+[8]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
+[9]: /code_coverage/flags#add-flags-to-automatically-uploaded-reports
+[10]: https://github.com/DataDog/datadog-ci/releases
+[11]: https://www.npmjs.com/package/@datadog/datadog-ci
+[12]: https://hub.docker.com/r/datadog/ci
+[13]: https://app.datadoghq.com/organization-settings/api-keys
+[14]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
+[15]: https://app.datadoghq.com/ci/code-coverage
+[16]: https://reportgenerator.io/

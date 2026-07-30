@@ -86,15 +86,27 @@ datadog-ci coverage upload --flags unit-tests --flags jvm-21 coverage.xml
 
 In this example, the coverage data is available under both the `unit-tests` and `jvm-21` flags. You can filter by either flag in the UI.
 
-### Automatic uploads with Test Optimization libraries
+### Add flags to automatically uploaded reports
 
-If a Test Optimization library is configured to [upload code coverage reports automatically][4], set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
+As of July 30, 2026, `DD_CODE_COVERAGE_FLAGS` is supported only in the following library versions:
+
+| Library | First version with `DD_CODE_COVERAGE_FLAGS` |
+|---|---|
+| JavaScript `dd-trace` 5.x | `5.116.0` |
+| JavaScript `dd-trace` 6.x | `6.5.0` |
+| Python `ddtrace` | `4.13.0rc1` (not included in a stable release) |
+| Ruby `datadog-ci` | Unreleased (`main`); not included in `v1.35.0` |
+| Java `dd-java-agent` | Unreleased (`master`); not included in `v1.64.2` |
+| Go `dd-trace-go/v2` | Unreleased (`main`); not included in `v2.10.0-rc.5` |
+| .NET and Swift | Not implemented |
+
+For a supported version, set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
 
 {{< code-block lang="shell" >}}
 export DD_CODE_COVERAGE_FLAGS=unit-tests,jvm-21
 {{< /code-block >}}
 
-This example attaches the same flags as `datadog-ci coverage upload --flags unit-tests --flags jvm-21`. The library removes whitespace around each flag and ignores empty entries.
+This example attaches the same flags as `datadog-ci coverage upload --flags unit-tests --flags jvm-21`. The library splits the value on commas, removes whitespace around each flag, and ignores empty entries.
 
 ### Limitations
 
@@ -192,6 +204,5 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 [1]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [2]: /code_coverage/carryforward
 [3]: /code_coverage/monorepo_support
-[4]: /code_coverage/setup#upload-reports-automatically-with-test-optimization
-[5]: https://app.datadoghq.com/ci/code-coverage
-[6]: /code_coverage/configuration#pr-gates
+[4]: https://app.datadoghq.com/ci/code-coverage
+[5]: /code_coverage/configuration#pr-gates
