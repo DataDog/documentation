@@ -76,6 +76,10 @@ datadog-ci unity-symbols upload --android
 
 For a full list of options, see the `datadog-ci` [Unity Symbols documentation][5].
 
+### Upload symbol files manually
+
+You can also upload symbol files (dSYMs, `.so`, Android Proguard Mapping, and IL2CPP mapping files) manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][6] page or through the [API][7]. This is useful for one-off builds or environments without CI.
+
 ### List uploaded symbol files
 
 See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][6] page to view all uploaded symbols.
@@ -111,3 +115,4 @@ To verify your Unity Crash Reporting and Error Tracking configuration, issue an 
 [4]: https://www.npmjs.com/package/@datadog/datadog-ci
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/unity-symbols
 [6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

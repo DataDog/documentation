@@ -65,6 +65,10 @@ datadog-ci flutter-symbols upload --service-name <YOUR_SERVICE_NAME> --dart-symb
 
 For a full list of options, see the `datadog-ci` [Flutter Symbols documentation][6].
 
+### Upload symbol files manually
+
+You can also upload symbol files manually, without the `datadog-ci` CLI. This is useful for one-off uploads or CI pipelines that don't use `datadog-ci`. Upload symbol files from the [{{< ui >}}Debug Symbols{{< /ui >}}][11] page in Datadog, or programmatically through the [Debug Symbols Upload API][12].
+
 ## Advanced configuration - flavors and build numbers
 
 Datadog uses the combination of the `service-name`, `version`, and `flavor` to locate the correct symbols for deobfuscation, so the parameters sent to the `datadog-ci` command and the parameters set in [DdSdkConfiguration][7]
@@ -96,3 +100,5 @@ Note that Datadog uses tags for versions which do not allow `+`. All tooling aut
 [8]: https://docs.flutter.dev/deployment/flavors
 [9]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/flavor.html
 [10]: https://pub.dev/documentation/datadog_flutter_plugin/latest/datadog_flutter_plugin/DatadogConfiguration/version.html
+[11]: https://app.datadoghq.com/source-code/setup/rum
+[12]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

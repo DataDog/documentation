@@ -18,6 +18,8 @@ Datadog build plugins integrate with your JavaScript bundler to automate common 
 
 Build plugins are complementary to the RUM Browser SDK. You still need to configure the SDK as described in the [Browser Monitoring Setup][1].
 
+If a build plugin does not fit your workflow, you can also upload source maps manually from the [Debug Symbols][2] page in Datadog or with the [Debug Symbols Upload API][3].
+
 ## Installation
 
 Install the Datadog build plugin package for your bundler:
@@ -170,3 +172,5 @@ datadogWebpackPlugin({
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/application_monitoring/browser/setup/
+[2]: https://app.datadoghq.com/source-code/setup/rum
+[3]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/
