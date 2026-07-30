@@ -2997,6 +2997,30 @@
     "request_description": "",
     "request_schema_description": "Payload schema when updating an Okta account."
   },
+  "ListIntegrationAccounts": {
+    "description": "List the integration accounts for a given integration/interface.",
+    "summary": "List integration accounts"
+  },
+  "CreateIntegrationAccount": {
+    "description": "Create an integration account for a given integration/interface.",
+    "summary": "Create an integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to create an integration account."
+  },
+  "DeleteIntegrationAccount": {
+    "description": "Delete an integration account.",
+    "summary": "Delete an integration account"
+  },
+  "GetIntegrationAccount": {
+    "description": "Get a single integration account.",
+    "summary": "Get an integration account"
+  },
+  "UpdateIntegrationAccount": {
+    "description": "Update an integration account. The update is a partial merge: only the fields provided are changed, so a name-only or settings-only update does not need to resend the full integration payload or write-only credentials. When present, `type` selects the integration/interface variant. Top-level attributes and the contents of `authentication` and `settings` are merged one level deep; the `dataflows` array is merged by `id`.",
+    "summary": "Update an integration account",
+    "request_description": "",
+    "request_schema_description": "Request payload to update an integration account as a partial merge."
+  },
   "GetIPAllowlist": {
     "description": "Returns the IP allowlist and its enabled or disabled state.",
     "summary": "Get IP Allowlist"
