@@ -39,6 +39,10 @@ hugo/.yarnrc.yml                                             @DataDog/WebOps-Pla
 repository.datadog.yml                                  @Datadog/WebOps-Platform
 service.datadog.yaml                                    @DataDog/WebOps-Platform @DataDog/documentation
 
+# Astro API docs
+astro/                                                   @DataDog/WebOps-Platform
+astro_reorg/                                             @DataDog/WebOps-Platform
+
 # Scoped Docs/WebOps
 .github/                                                      @DataDog/WebOps-Platform
 /hugo/data/api/                                                    @DataDog/documentation

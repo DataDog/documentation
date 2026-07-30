@@ -257,6 +257,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@astrojs/sitemap@npm:^3.7.3":
+  version: 3.7.3
+  resolution: "@astrojs/sitemap@npm:3.7.3"
+  dependencies:
+    sitemap: "npm:^9.0.0"
+    stream-replace-string: "npm:^2.0.0"
+    zod: "npm:^4.3.6"
+  checksum: 10/e0820d0788abb7808a29ed013b6cd1f021e684d4065b4d92ba78293b8fcec5aec4faf73f8824087d7354010707e9ed16e411ed33ff0ee4dea2e34d5bd1f3df86
+  languageName: node
+  linkType: hard
+
 "@astrojs/telemetry@npm:3.3.3":
   version: 3.3.3
   resolution: "@astrojs/telemetry@npm:3.3.3"
@@ -1870,6 +1881,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^24.9.2":
+  version: 24.13.3
+  resolution: "@types/node@npm:24.13.3"
+  dependencies:
+    undici-types: "npm:~7.18.0"
+  checksum: 10/cfa6ed1e16c4624d1e83b09aeb72a2f50a7e17d837bf5a1259a52e346f33a693afd289402d3b6118ce3abea7aff35f2a4f13a0284b96bc5807a50f0e22e1ec77
+  languageName: node
+  linkType: hard
+
+"@types/sax@npm:^1.2.1":
+  version: 1.2.7
+  resolution: "@types/sax@npm:1.2.7"
+  dependencies:
+    "@types/node": "npm:*"
+  checksum: 10/7ece5fbb5d9c8fc76ab0de2f99d705edf92f18e701d4f9d9b0647275e32eb65e656c1badf9dfaa12f4e1ff3e250561c8c9cfe79e8b5f33dd1417ac0f1804f6cc
+  languageName: node
+  linkType: hard
+
 "@types/turndown@npm:^5.0.6":
   version: 5.0.6
   resolution: "@types/turndown@npm:5.0.6"
@@ -2184,6 +2213,13 @@ __metadata:
     normalize-path: "npm:^3.0.0"
     picomatch: "npm:^2.0.4"
   checksum: 10/3e044fd6d1d26545f235a9fe4d7a534e2029d8e59fa7fd9f2a6eb21230f6b5380ea1eaf55136e60cbf8e613544b3b766e7a6fa2102e2a3a117505466e3025dc2
+  languageName: node
+  linkType: hard
+
+"arg@npm:^5.0.0":
+  version: 5.0.2
+  resolution: "arg@npm:5.0.2"
+  checksum: 10/92fe7de222054a060fd2329e92e867410b3ea260328147ee3fb7855f78efae005f4087e698d4e688a856893c56bb09951588c40f2c901cf6996cd8cd7bcfef2c
   languageName: node
   linkType: hard
 
@@ -2706,6 +2742,7 @@ __metadata:
     "@astrojs/markdoc": "npm:^2.0.6"
     "@astrojs/node": "npm:^11.0.3"
     "@astrojs/preact": "npm:^6.0.2"
+    "@astrojs/sitemap": "npm:^3.7.3"
     "@astrojs/ts-plugin": "npm:^1.10.10"
     "@playwright/test": "npm:^1.62.0"
     "@testing-library/preact": "npm:^3.2.4"
@@ -5198,7 +5235,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"sax@npm:^1.5.0":
+"sax@npm:^1.4.1, sax@npm:^1.5.0":
   version: 1.6.1
   resolution: "sax@npm:1.6.1"
   checksum: 10/bf7e7f8293903548bd663d71e9300b20ee04df178399b8f54029b6559225de422235c8fb0a63ba088fcb90c1dbaf9b475f57c7f32c901bfb78d0196dceb3cc7f
@@ -5459,6 +5496,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sitemap@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "sitemap@npm:9.0.1"
+  dependencies:
+    "@types/node": "npm:^24.9.2"
+    "@types/sax": "npm:^1.2.1"
+    arg: "npm:^5.0.0"
+    sax: "npm:^1.4.1"
+  bin:
+    sitemap: dist/esm/cli.js
+  checksum: 10/c9da6d13745ff83fff3b0c6025df6a22575dea65e5fbc5eba652783e2b61d49298558eac177fa5b281354615b7af7178a5b1a4fe9f8385fb86f5bd3fed596a71
+  languageName: node
+  linkType: hard
+
 "smol-toml@npm:^1.6.0":
   version: 1.7.1
   resolution: "smol-toml@npm:1.7.1"
@@ -5522,6 +5573,13 @@ __metadata:
     es-errors: "npm:^1.3.0"
     internal-slot: "npm:^1.1.0"
   checksum: 10/ff36c4db171ee76c936ccfe9541946b77017f12703d4c446652017356816862d3aa029a64e7d4c4ceb484e00ed4a81789333896390d808458638f3a216aa1f41
+  languageName: node
+  linkType: hard
+
+"stream-replace-string@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "stream-replace-string@npm:2.0.0"
+  checksum: 10/dcf4b1bd3ee4e7a4d4468cc0b6bc1ee8bd0be1cb4c2dbcf171f981c4723ab577a62d5a4b25c728ff9379c98bec624924276758db0314d7e8c915a0331e230820
   languageName: node
   linkType: hard
 
@@ -5769,6 +5827,13 @@ __metadata:
   version: 6.21.0
   resolution: "undici-types@npm:6.21.0"
   checksum: 10/ec8f41aa4359d50f9b59fa61fe3efce3477cc681908c8f84354d8567bb3701fafdddf36ef6bff307024d3feb42c837cf6f670314ba37fc8145e219560e473d14
+  languageName: node
+  linkType: hard
+
+"undici-types@npm:~7.18.0":
+  version: 7.18.2
+  resolution: "undici-types@npm:7.18.2"
+  checksum: 10/e61a5918f624d68420c3ca9d301e9f15b61cba6e97be39fe2ce266dd6151e4afe424d679372638826cb506be33952774e0424141200111a9857e464216c009af
   languageName: node
   linkType: hard
 
