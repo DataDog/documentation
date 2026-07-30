@@ -162008,7 +162008,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - late_metrics_config_write
+            - historical_metrics_config_write
       summary: Enable historical metrics ingestion
       tags:
         - Metrics
@@ -162017,7 +162017,7 @@ paths:
       "x-permission":
         operator: OR
         permissions:
-          - late_metrics_config_write
+          - historical_metrics_config_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -162045,7 +162045,7 @@ paths:
         - apiKeyAuth: []
           appKeyAuth: []
         - AuthZ:
-            - late_metrics_config_write
+            - historical_metrics_config_write
       summary: Delete a historical metrics configuration
       tags:
         - Metrics
@@ -162053,7 +162053,7 @@ paths:
       "x-permission":
         operator: OR
         permissions:
-          - late_metrics_config_write
+          - historical_metrics_config_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
