@@ -733,14 +733,6 @@ See [Connect Session Replay to your third-party tools][30].
 {% /if %}
 <!-- end Browser -->
 
-## Disable Session Replay
-
-To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][6].
-
-{% alert level="danger" %}
-If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0`.
-{% /alert %}
-
 [1]: /real_user_monitoring/application_monitoring/ios/web_view_tracking
 [2]: /session_replay/privacy_options
 [3]: https://reactnative.dev/architecture/landing-page
