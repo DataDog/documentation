@@ -38,6 +38,7 @@ Use this method to test a single machine or for devices that are not managed by 
 ### Install the Agent
 
 1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}macOS{{< /ui >}}][102].
+1. Toggle on {{< ui >}}Enable End User Device Monitoring{{< /ui >}}.
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
 1. Copy the provided installation command beginning with `sudo DD_API_KEY=`.
 1. Open {{< ui >}}Terminal{{< /ui >}}. Find it in {{< ui >}}Applications{{< /ui >}} > {{< ui >}}Utilities{{< /ui >}} > {{< ui >}}Terminal{{< /ui >}}, or search for it with Spotlight (<kbd>⌘</kbd> + <kbd>Space</kbd>).

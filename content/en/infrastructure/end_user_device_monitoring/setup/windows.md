@@ -37,6 +37,7 @@ Use this method to test a single machine or for devices that are not managed by 
 ### Install the Agent
 
 1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}Windows{{< /ui >}}][102].
+1. Toggle on {{< ui >}}Enable End User Device Monitoring{{< /ui >}}.
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
 1. Copy the provided installation command beginning with `[System.Net.ServicePointManager]::SecurityProtocol =`.
 1. Right-click the **Start** menu and select **Windows PowerShell (Admin)** or **Terminal (Admin)**. Click **Yes** on the User Account Control prompt.
