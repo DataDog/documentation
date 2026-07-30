@@ -15,12 +15,12 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources" btn_hidden="false" header="Join the Preview!">}}
-The Analysis monitor is in Preview. You must have access to the Notebooks advanced querying feature to use this monitor.
+The Analysis monitor is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-Analysis monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:
+Analysis monitors offer full access to Notebook analysis and DDSQL features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:
 
 - Query multiple data sources
 - Chain data transformations
@@ -29,7 +29,7 @@ Analysis monitors offer full access to Notebook analysis features, allowing you 
 
 ## Supported data sources
 
-Analysis monitors support a subset of the data sources available in Notebook Analysis cells. Because monitors evaluate their queries frequently, each data source is enabled only after it's validated to handle monitor-level query load.
+Analysis monitors support a subset of the data sources available in Notebook Analysis cells and DDSQL queries. Because monitors evaluate their queries frequently, each data source is enabled only after it's validated to handle monitor-level query load.
 
 The following data sources are supported:
 
@@ -37,7 +37,7 @@ The following data sources are supported:
 - CI Pipelines
 - CI Tests
 - Events
-- LLM Observability
+- Agent Observability
 - Logs
 - Metrics
 - NetFlow
@@ -88,9 +88,7 @@ To create an Analysis monitor directly from the DDSQL Editor:
 
 ## Define the query
 
-Analysis monitors use the same query interface as Notebook Analysis cells.
-
-1. **Select your published analysis**: Select from available Notebook Analysis cells.
+1. **Select your published analysis**: Select from available Notebook or DDSQL published analyses.
 2. **Filter your published analysis**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 

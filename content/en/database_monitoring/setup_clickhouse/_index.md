@@ -4,6 +4,10 @@ description: Setting up Database Monitoring on a ClickHouse database
 disable_sidebar: true
 aliases:
   - /database_monitoring/guide/clickhouse/
+further_reading:
+- link: "https://www.datadoghq.com/blog/database-monitoring-for-clickhouse/"
+  tag: "Blog"
+  text: "Monitor ClickHouse query performance with Datadog Database Monitoring"
 ---
 
 <div class="alert alert-info">
@@ -26,3 +30,7 @@ To learn how to set up Database Monitoring on a ClickHouse database, select your
   {{< image-card href="/database_monitoring/setup_clickhouse/selfhosted" src="integrations_logos/clickhouse.png" alt="Self-hosted" title="Self-hosted" >}}
   {{< image-card href="/database_monitoring/setup_clickhouse/cloud" src="integrations_logos/clickhouse.png" alt="ClickHouse Cloud" title="ClickHouse Cloud" >}}
 {{< /card-grid >}}
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
