@@ -35,7 +35,7 @@ In this example, you can see that Log Injection is disabled for the test environ
 
 You can tell when the configuration changes have been successfully applied by referencing the {{< ui >}}Updates applied to X instances{{< /ui >}} text. In this example, the configuration applied successfully to one instance.
 
-<div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It now shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
+<div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
 
 ## Supported configuration options
 
