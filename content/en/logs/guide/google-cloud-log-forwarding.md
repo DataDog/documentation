@@ -260,6 +260,10 @@ New logging events delivered to the Cloud Pub/Sub topic appear in the [Datadog L
 
 **Note**: You can use the [Google Cloud Pricing Calculator][9] to calculate potential costs.
 
+## Tags
+
+Logs forwarded through the Datadog Dataflow template are enriched with resource tags collected by the Google Cloud integration, so you can correlate your Google Cloud logs with your Google Cloud metrics using the same tags. Tag enrichment support varies by resource type.
+
 ## Monitor the Cloud Pub/Sub log forwarding
 
 The [Google Cloud Pub/Sub integration][10] provides helpful metrics to monitor the status of the log forwarding:
