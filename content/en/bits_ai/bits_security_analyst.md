@@ -88,7 +88,7 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
    - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits Security Analyst only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click {{< ui >}}Edit credentials{{< /ui >}}. In the {{< ui >}}Select or Add Connection{{< /ui >}} window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
    
-   Some log sources require additional setup so you can create HTTP connections. Here's an example:
+   Some log sources require additional setup so you can create HTTP connections. Here are some examples:
    {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
    <ol>
      <li>In SentinelOne, ensure you have permission to create an API token. Create an S1 API service user, then assign the {{< ui >}}Viewer{{< /ui >}} role to that user.</li>
