@@ -1,7 +1,6 @@
 ---
 title: Set up End User Device Monitoring
 description: Set up End User Device Monitoring to collect performance and connectivity data from employee desktops and laptops.
-private: true
 further_reading:
    - link: "/infrastructure/end_user_device_monitoring/"
      tag: "Documentation"
