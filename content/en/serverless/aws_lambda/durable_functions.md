@@ -13,7 +13,7 @@ Datadog provides full visibility into the metrics, logs, and traces for AWS Lamb
 
 ### Instrument your Lambda function
 
-1. Follow [the steps for instrumenting a Lambda function][1], confirming that the Datadog Lambda Library is installed and tracing is enabled. Use the following versions:
+1. Follow [the steps for instrumenting a Lambda function][1], confirming that the Datadog Lambda Library is installed and that both tracing and [log collection][9] are enabled (log collection is enabled by default). Use the following versions:
 
     - Datadog Lambda Extension: v98+
     - Datadog Node.js Lambda layer: v141+
@@ -74,3 +74,4 @@ If you encounter an issue with the CloudFormation stack, open an issue in the [c
 [6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/cloudformation-template/tree/master/aws_durable_function_event_forwarder
+[9]: /serverless/aws_lambda/logs/#enable-log-collection
