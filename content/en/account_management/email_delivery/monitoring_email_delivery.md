@@ -1,6 +1,8 @@
 ---
 title: Monitoring Email Delivery
 description: Review delivery activity in the Email Delivery dashboard and alert on failures with Audit Trail monitors.
+private: true
+site_support_id: email_delivery
 further_reading:
 - link: "/account_management/email_delivery/troubleshooting_email_delivery/"
   tag: "Documentation"

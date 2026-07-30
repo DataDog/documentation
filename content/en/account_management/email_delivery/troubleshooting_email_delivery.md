@@ -1,6 +1,8 @@
 ---
 title: Troubleshooting Email Delivery
 description: Diagnose and resolve a Datadog email that a recipient did not receive.
+private: true
+site_support_id: email_delivery
 further_reading:
 - link: "/help/"
   tag: "Documentation"

@@ -1,6 +1,8 @@
 ---
 title: Ensuring Reliable Delivery
 description: Allowlist Datadog sending addresses and check sender authentication so Datadog email is not filtered or suppressed.
+private: true
+site_support_id: email_delivery
 further_reading:
 - link: "/account_management/email_delivery/troubleshooting_email_delivery/"
   tag: "Documentation"
@@ -21,7 +23,7 @@ To reliably receive Datadog email notifications, add the Datadog sending address
 | Site    | Sending addresses                                                                     |
 | ------- | ------------------------------------------------------------------------------------- |
 | US1     | `noreply@datadoghq.com`, `alert@datadoghq.com`, `alert@dtdg.co`, `no-reply@dtdg.co`    |
-| EU1     | `*@dtdg.eu`                                                                           |
+| EU      | `*@dtdg.eu`                                                                           |
 | US1-FED | `*@ddog-gov.com`                                                                      |
 
 ## Check your sender authentication

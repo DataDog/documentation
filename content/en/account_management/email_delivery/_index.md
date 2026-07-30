@@ -1,6 +1,8 @@
 ---
 title: Email Delivery
 description: Confirm delivery, monitor failures, and troubleshoot the email Datadog sends on your organization's behalf.
+private: true
+site_support_id: email_delivery
 further_reading:
 - link: "/account_management/audit_trail/"
   tag: "Documentation"

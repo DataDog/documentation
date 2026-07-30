@@ -1,6 +1,8 @@
 ---
 title: How Email Delivery Works
 description: Understand delivery outcomes, SMTP bounce codes, and suppressions for the email Datadog sends.
+private: true
+site_support_id: email_delivery
 further_reading:
 - link: "/account_management/email_delivery/troubleshooting_email_delivery/"
   tag: "Documentation"
