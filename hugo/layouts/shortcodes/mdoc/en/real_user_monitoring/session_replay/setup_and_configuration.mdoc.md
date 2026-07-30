@@ -98,6 +98,10 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 
 SessionReplay.enable(sessionReplayConfig)
 ```
+
+### Impact on App Performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Android -->
 
@@ -136,6 +140,10 @@ SessionReplay.enable(
   )
 )
 ```
+
+### Impact on App Performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end iOS -->
@@ -188,6 +196,10 @@ If your app uses Material on Android, add:
 ```kotlin
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
+
+### Impact on App Performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
@@ -303,6 +315,10 @@ cd ios && pod install
 
 Rebuild your iOS and Android apps
 
+### Impact on App Performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
+
 {% /if %}
 
 <!-- end React Native -->
@@ -389,6 +405,10 @@ class _MyAppState extends State<MyApp> {
 Flutter Session Replay relies on FFI, and some symbols may be stripped when building an iOS Archive or IPA. To prevent this, set the `Strip Style` setting in your XCode project to `Non-Global Symbols`.
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
+
+### Impact on App Performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end Flutter -->
@@ -747,3 +767,4 @@ See [Connect Session Replay to your third-party tools][30].
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
+[34]: /session_replay/app_performance/
