@@ -10,7 +10,7 @@ aliases:
   - /security/workload_protection/guide/active-protection
   - /security/cloud_security_management/guide/active-protection
 further_reading:
-- link: "security/workload_protection/detect_and_monitor/detection_rules"
+- link: "security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
   tag: "Documentation"
   text: "Workload Protection detection rules"
 - link: "security/workload_protection/getting_started"

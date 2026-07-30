@@ -17,7 +17,7 @@ Workload Protection uses the following pipeline to protect your workloads:
 
 1. The [Agent rules][1] evaluate system activity on the Agent host.
 2. When activity matches an Agent rule expression, the Agent generates an [Agent Event][2] and passes it to the Datadog backend.
-3. The Datadog backend evaluates the agent events to see if they match any threat [Detection rules][3] or [Finding rules][4].
+3. The Datadog backend evaluates the agent events to see if they match any threat [Detection rules][11] or [Finding rules][12].
 4. If a detection rule matches, a signal is generated and displayed in [Signals][5].
 5. If a finding rule matches, a finding is generated and displayed in [Findings][6].
 6. If the value of one of the attributes of an agent event matches a [threat intelligence indicator][7], a signal is generated and displayed in [Signals][5].
@@ -37,17 +37,12 @@ Datadog solves this problem by keeping the Agent lightweight with efficient rule
 - Use variables to build complex detections based on state machines
 - Configure actions to collect additional telemetry (like file hashes)
 
-## Detection rules
+## Detection and finding rules
 
-[Detection rules][3] describe the logic used to detect threats in your environment by analyzing [Agent Event][2]. The [Detection rules][3] page helps you:
-- Explore and configure Out Of The Box (OOTB) detection rules
-- Write custom detection rules
-
-## Finding rules
-
-[Finding rules][4] describe the logic used to track bad practices and evaluate your runtime security posture based upon the analysis of [Agent Event][2]. The [Finding rules][4] page helps you:
-- Explore and configure Out Of The Box (OOTB) finding rules
-- Write custom finding rules
+[Detection and finding rules][3] describe the backend logic used to analyze [Agent events][2] and generate [signals][5] or [findings][6]. The section covers:
+- [Detection rules][11] for threat detection and incident response
+- [Finding rules][12] for runtime posture and hardening
+- [Linux backend syntax][13] and [Windows backend syntax][14] for the full set of queryable event fields
 
 ## Threat intelligence
 
@@ -64,11 +59,15 @@ Workload Protection provides targeted, Datadog-crafted [Content Packs][10] built
 
 [1]: /security/workload_protection/detect_and_monitor/agent_rules
 [2]: /security/workload_protection/investigate_and_triage/agent_events
-[3]: /security/workload_protection/detect_and_monitor/detection_rules
-[4]: /security/workload_protection/detect_and_monitor/finding_rules
+[3]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules
+[4]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
 [5]: /security/workload_protection/investigate_and_triage/security_signals
 [6]: /security/workload_protection/investigate_and_triage/security_findings
 [7]: /security/workload_protection/detect_and_monitor/threat_intelligence
 [8]: /security/configuration/notification-rules
 [9]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
 [10]: /security/workload_protection/detect_and_monitor/content_packs
+[11]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+[12]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
+[13]: /security/workload_protection/backend_linux
+[14]: /security/workload_protection/backend_windows

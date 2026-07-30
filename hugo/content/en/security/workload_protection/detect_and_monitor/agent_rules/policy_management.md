@@ -187,8 +187,8 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [17]: #prioritize-policies
 [18]: #apply-tags
 [19]: https://app.datadoghq.com/fleet
-[21]: /security/workload_protection/detect_and_monitor/detection_rules
-[23]: /security/workload_protection/detect_and_monitor/detection_rules/#create-the-custom-agent-and-detection-rules-together
+[21]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+[23]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules/#create-the-custom-agent-and-detection-rules-together
 [24]: https://app.datadoghq.com/security/workload-protection/agent-rules
 [25]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
 [26]: https://app.datadoghq.com/security/workload-protection/deployments

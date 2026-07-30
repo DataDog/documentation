@@ -4,7 +4,7 @@ disable_toc: false
 aliases:
   - /security/threats/investigate_agent_events
 further_reading:
-  - link: "/security/workload_protection/detect_and_monitor/detection_rules"
+  - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
     tag: "Documentation"
     text: "Explore Workload Protection detection rules"
   - link: "/security/workload_protection/workload_security_rules"
