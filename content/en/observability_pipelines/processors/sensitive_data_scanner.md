@@ -5,6 +5,9 @@ further_reading:
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
   text: "Writing Effective Grok Parsing Rules with Regular Expressions"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs
@@ -288,6 +291,26 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 
 The Sensitive Data Scanner processor is CPU intensive. Use the following best practices to optimize performance.
 
+### View scanning rule usage with the Observability Pipelines Overview dashboard
+
+Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][16] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data.
+
+1. Navigate to Dashboards > [Observability Pipelines Overview][16].
+1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
+1. Use the time selector to scope to a wider time frame.
+
+Use the following widgets to evaluate your Sensitive Data Scanner processors' scanning rule usage:
+
+- **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively matching data. This is the primary widget to see which rules are in use.
+- **Total count of logs containing sensitive data**: Shows the total volume of sensitive data matched across all rules.
+- **Logs containing sensitive data by Pipeline**: Shows matching logs that contain sensitive data. You can scope matches down by `pipeline_id`, which helps you see whether logs containing sensitive data is found in all pipelines or only in specific pipelines.
+- **Logs containing sensitive data per host**: Breaks down sensitive data matches by Worker host. Use this widget to confirm coverage across your deployment.
+- **Patterns containing sensitive information** and **List of logs containing sensitive data**: Shows the log patterns and sample events where sensitive data was found.
+
+After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
+
+**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. 
+
 ### Only enable rules you need
 
 Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data Scanner processor to view how many matches each rule has had over the past 24 hours.
@@ -382,3 +405,4 @@ For [component metrics][13] and [processor buffer metrics][14] emitted by all pr
 [13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[16]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
