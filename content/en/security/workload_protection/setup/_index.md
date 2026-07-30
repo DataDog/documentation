@@ -1,5 +1,5 @@
 ---
-title: Getting started with Workload Protection
+title: Setting up Workload Protection
 aliases:
   - /security/workload_protection/setup/agent
   - /security/workload_protection/supported_linux_distributions

@@ -87,9 +87,9 @@ Using Remote Configuration, you can manage agent rule deployments and trigger re
 
 ## Next steps
 
-### Getting started
+### Setup
 
-Begin with the [Getting started][1] guide, which introduces the high-level architecture of Workload Protection. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
+Begin with the [Setup][1] guide, which introduces the high-level architecture of Workload Protection. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
 
 ### Detect and monitor
 

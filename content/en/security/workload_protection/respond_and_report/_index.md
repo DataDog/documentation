@@ -15,7 +15,7 @@ further_reading:
   text: "Workload Protection detection rules"
 - link: "security/workload_protection/setup"
   tag: "Documentation"
-  text: "Getting started with Workload Protection"
+  text: "Setting up Workload Protection"
 - link: "/security/workload_protection/setup/advanced_configuration"
   tag: "Documentation"
   text: "Workload Protection Agent configuration"
