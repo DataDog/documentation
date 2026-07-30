@@ -46,25 +46,6 @@ Use this method to test a single machine or for devices that are not managed by 
 
     The script installs the Agent, creates the `_dd-agent` system user, and registers the Agent as a background launch daemon. Installation takes one to two minutes.
 
-1. Launch the Datadog Agent Manager UI by running:
-
-    ```shell
-    sudo datadog-agent launch-gui
-    ```
-
-1. Navigate to {{< ui >}}Settings{{< /ui >}}.
-1. Add a new parameter to the end of the YAML file:
-
-    ```yaml
-    infrastructure_mode: end_user_device
-    ```
-
-1. Save your changes, then [restart the Agent][103]:
-
-    ```shell
-    sudo launchctl kickstart -k system/com.datadoghq.agent
-    ```
-
 ### Verify the installation
 
 To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
