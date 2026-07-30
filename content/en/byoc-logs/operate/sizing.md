@@ -134,19 +134,27 @@ Use standard-tier object storage (for example, S3 Standard, GCS Standard) for ac
 
 ## Helm chart sizing tiers
 
-The BYOC Logs Helm chart provides predefined sizing tiers through the `indexer.podSize` and `searcher.podSize` parameters. Each tier sets the vCPU and memory resource limits for a pod, and automatically configures component-specific settings.
+The BYOC Logs Helm chart provides predefined resource tiers through the `indexer.podSize` and `searcher.podSize` parameters. `podSize` selects the pod's resource requirements and related Quickwit tuning parameters. The default `podSize` is `xlarge` for both components. Each preset is designed to leave room on a matching node for Kubernetes system components, DaemonSets, and add-ons.
 
-| Size | vCPUs | Memory |
-|------|-------|--------|
-| medium | 1 | 4 GB |
-| large | 2 | 8 GB |
-| xlarge | 4 | 16 GB |
-| 2xlarge | 8 | 32 GB |
-| 4xlarge | 16 | 64 GB |
-| 6xlarge | 24 | 96 GB |
-| 8xlarge | 32 | 128 GB |
+The presets account for resources reserved for Kubernetes system components. The reservation amounts are based on the [GKE node reservation calculation](https://docs.cloud.google.com/kubernetes-engine/docs/concepts/plan-node-sizes#resource_reservations). An additional 250m CPU and 512Mi memory per node is reserved for DaemonSets and add-ons:
 
-Values defining the ingest queue sizes and search cache sizes are automatically applied when you set `indexer.podSize` in the [Helm chart](https://github.com/DataDog/helm-charts/blob/main/charts/cloudprem/sizing-map.yaml). For more details on each parameter, you can check the Quickwit documentation for [indexer parameters][2], [ingest api parameters][3] and [searcher parameters][3].
+```text
+Actual CPU request = (nominal pod CPU - Kubernetes system CPU reservation - 250m), rounded down to the nearest 100m
+Actual memory request/limit = (nominal pod memory - Kubernetes system memory reservation - 512Mi), rounded down to the nearest 100Mi
+```
+
+| `podSize` | Nominal CPU request | Actual CPU request | Nominal memory request/limit | Actual memory request/limit |
+|---|---:|---:|---:|---:|
+| `large` | 2 | 1600m | 8Gi | 5700Mi |
+| `xlarge` | 4 | 3600m | 16Gi | 13100Mi |
+| `2xlarge` | 8 | 7600m | 32Gi | 28500Mi |
+| `4xlarge` | 16 | 15600m | 64Gi | 59300Mi |
+| `6xlarge` | 24 | 23600m | 96Gi | 90100Mi |
+| `8xlarge` | 32 | 31600m | 128Gi | 120900Mi |
+
+The presets do not set a CPU limit, allowing a pod to use idle CPU on its node without being throttled. Memory requests and limits are equal to keep memory usage within the allocatable node capacity.
+
+Values defining the ingest queue sizes and search cache sizes are automatically applied for the selected tier. See the [Helm chart sizing map][1] for the complete configuration. For more details on each parameter, see the Quickwit documentation for [indexer parameters][2], [ingest API parameters][3], and [searcher parameters][4].
 
 ## Further reading
 

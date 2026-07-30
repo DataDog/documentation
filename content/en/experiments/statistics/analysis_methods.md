@@ -73,6 +73,14 @@ Use Bayesian analysis when:
 
 The prior matters most when sample sizes are small. With enough data, the posterior is driven mostly by observed experiment behavior, but empirically grounded priors are often strong enough to affect results even at large sample sizes. A poorly-specified prior can influence the lift estimate and interval enough to change the decision.
 
+### Choosing a prior
+
+Both priors shrink noisy lift estimates toward the prior mean. Each prior applies
+shrinkage in a different way:
+
+- **Normal prior**: For a fixed prior, the shrinkage factor depends on the lift estimate's standard error, not its magnitude. Highly certain estimates are shrunk less, whereas highly uncertain estimates are shrunk more. The posterior mean and variance have closed-form expressions, which makes this prior simple to use.
+- **Student's t prior**: The shrinkage depends on both the lift estimate's standard error and its magnitude. Small effects are shrunk similarly to the Normal model, whereas large effects are shrunk less aggressively. This approach is motivated by the possibility of rare, large effects discussed in [A/B Testing with Fat Tails][5].
+
 <div class="alert alert-info">Bayesian intervals are technically credible intervals, though Datadog may present them alongside confidence intervals in the experiment results UI. Unlike frequentist intervals, Bayesian intervals do not provide the same false positive rate guarantee.</div>
 
 ## Related settings
@@ -96,3 +104,4 @@ Confidence level
 [2]: /experiments/statistics/minimum_detectable_effect
 [3]: /experiments/statistics/multiple_testing_correction
 [4]: /experiments/statistics/cuped
+[5]: https://doi.org/10.1086/710607
