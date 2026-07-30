@@ -132,7 +132,7 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 1. Anchor on the asset you plan to change.
 2. Set downstream depth to `∞` and upstream depth to `0`.
 3. Filter to the asset types you care about—for example, leave dashboards and reports visible to identify affected BI consumers.
-4. Switch to {{< ui >}}List{{< /ui >}} view to view the full list of affected assets.
+4. Switch to {{< ui >}}List{{< /ui >}} view to see the full list of affected assets.
 
 {{< img src="data_observability/lineage/impact-analysis-list-view.png" alt="The List view showing every downstream asset that depends on a given Snowflake table, with type and source columns" style="width:100%;" >}}
 
