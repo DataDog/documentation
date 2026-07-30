@@ -53,7 +53,7 @@ Bits Code usage is billed through [AI Credits][7].
      - **Fix with Bits**: Bits Code starts a [session][3], locates the code that defines the resource, generates the fix, and opens a pull or merge request in your source control provider for review.
      - **Create Automation**: Bits Code fixes similar findings for you as they appear, without you opening each one. For more information, see [Bits Code Automations][4].
 
-{{< img src="security/csm/remediate_with_ai_coding_agent_2.png" alt="The Remediate with AI dialog on the Coding agent tab, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
+{{< img src="security/csm/remediate_with_ai_coding_agent_with_cursor.png" alt="The Remediate with AI dialog on the Coding agent tab, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
 
 {{< img src="security/csm/remediate_with_ai_bits_code.png" alt="The Remediate with AI dialog on the Bits Code tab, showing a Fix with Bits button and a Create Automation button" style="width:100%;" >}}
 
