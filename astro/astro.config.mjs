@@ -2,11 +2,13 @@ import { defineConfig } from "astro/config";
 import markdoc from "@astrojs/markdoc";
 import preact from "@astrojs/preact";
 import node from "@astrojs/node";
+import sitemap from "@astrojs/sitemap";
 import { visualizer } from "rollup-plugin-visualizer";
 import { fileURLToPath } from "node:url";
 import { realpathSync } from "node:fs";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
+import { isSitemapPage } from "./src/lib/api/sitemapFilter.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
@@ -55,7 +57,20 @@ export default defineConfig({
   // adapter are resolved in the current Astro 7 / adapter 11 line.
   output: "server",
   adapter: node({ mode: "standalone" }),
-  integrations: [markdoc(), preact()],
+  integrations: [
+    markdoc(),
+    preact(),
+    // Writes to dist/api/sitemap-index.xml and dist/api/sitemap-0.xml (not
+    // the dist/ root) since `filenameBase` is concatenated straight into the
+    // output path, and dist/api/ already exists by the time this runs. Only
+    // `.astro` page routes reach `filter` — Astro classifies `.ts` endpoint
+    // routes (llms.txt.ts, the `.md.ts` twins) as `endpoint`, not `page`, so
+    // they're excluded before this ever sees them.
+    sitemap({
+      filenameBase: "api/sitemap",
+      filter: isSitemapPage,
+    }),
+  ],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled
   // so dev output matches prod for tests; it isn't used in development anyway.
