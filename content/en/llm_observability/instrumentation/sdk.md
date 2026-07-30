@@ -1503,6 +1503,8 @@ Messages annotated with `audio_parts` or `image_parts` render as inline audio pl
 
 {{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
 
+{{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
