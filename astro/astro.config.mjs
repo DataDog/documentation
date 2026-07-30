@@ -60,12 +60,6 @@ export default defineConfig({
   integrations: [
     markdoc(),
     preact(),
-    // Writes to dist/api/sitemap-index.xml and dist/api/sitemap-0.xml (not
-    // the dist/ root) since `filenameBase` is concatenated straight into the
-    // output path, and dist/api/ already exists by the time this runs. Only
-    // `.astro` page routes reach `filter` — Astro classifies `.ts` endpoint
-    // routes (llms.txt.ts, the `.md.ts` twins) as `endpoint`, not `page`, so
-    // they're excluded before this ever sees them.
     sitemap({
       filenameBase: "api/sitemap",
       filter: isSitemapPage,
