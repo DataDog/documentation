@@ -168,17 +168,19 @@ Add a resource connection from the Claude AI Agent to your Datadog application, 
 | Okta field | Value |
 |------------|-------|
 | **Client ID at resource** | `e645fb6b-4966-45c4-bf20-44866aa5efac` |
-| **Scope Condition** | **Allow all**, if you control scopes in Datadog. Otherwise, list the scopes Claude is allowed |
+| **Scope Condition** | **Allow all**. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
 Add the Claude SAML application as a delegated caller on the AI Agent, then activate the agent.
 
-#### Choose where to control scopes
+#### Control scopes in Datadog
 
-**Scope Condition** restricts what Claude reaches, and so does the Claude OAuth client in Datadog. Both take effect, so set the restriction in one of them.
+Set **Scope Condition** to **Allow all** in Okta, and control what Claude reaches from Datadog.
 
-Datadog recommends setting it in Datadog and leaving **Scope Condition** set to **Allow all**. Okta accepts scopes as free text, which makes them harder to discover and harder to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
+Okta does not filter scopes. With **Allow all**, Okta copies whatever Claude requests into the token, which makes Datadog the enforcement point. If you configure a specific list in Okta instead, Okta rejects any token request that contains a scope outside that list, and the integration fails with an error rather than falling back to narrower access.
 
-To set the scopes Claude is allowed in Datadog:
+Okta also accepts scopes as free text and has no knowledge of the Datadog scope catalog, which makes a list in Okta harder to discover and harder to keep consistent across agents. Datadog treats scopes as a defined catalog tied to the OAuth client, so the same control applies to Cross-App Access and to standard OAuth authorizations.
+
+To set the scopes Claude is allowed:
 
 1. Navigate to [**Organization Settings > Mobile and Third-Party Access**][7].
 2. Select the Claude application, then select the **Scopes** tab.
@@ -187,7 +189,7 @@ To set the scopes Claude is allowed in Datadog:
 
 Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management][8].
 
-If you set scopes in both places, Datadog grants the intersection of the scopes in the token and the scopes allowed for the OAuth client. Scopes in **Scope Condition** narrow what Claude reaches within what Datadog allows, and they do not widen it. Claude receives no access to a scope that is not allowed in Datadog, whatever the token requests.
+Datadog grants the intersection of the scopes in the token and the scopes allowed for the Claude OAuth client. A scope that is not allowed in Datadog is never granted, whatever the token requests.
 
 ## Add Datadog as a connector in Claude
 
