@@ -38,39 +38,24 @@ Use this method to test a single machine or for devices that are not managed by 
 
 1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}Windows{{< /ui >}}][102].
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
-1. Copy the provided installation command and make the following changes:
-
-     * Add `$env:DD_INFRASTRUCTURE_MODE="end_user_device"` to the command.
-     * If your Datadog site is not US1, update `DD_SITE` to match. For the list of sites, see [Datadog sites][106].
-
-     The command looks like the following:
-
-    ```powershell
-    [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
-    $env:DD_API_KEY = '<YOUR_API_KEY>';
-    $env:DD_SITE = 'datadoghq.com';
-    $env:DD_INFRASTRUCTURE_MODE="end_user_device";
-    (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe');
-    C:\Windows\SystemTemp\datadog-installer-x86_64.exe
-    ```
-
+1. Copy the provided installation command beginning with `[System.Net.ServicePointManager]::SecurityProtocol =`.
 1. Right-click the **Start** menu and select **Windows PowerShell (Admin)** or **Terminal (Admin)**. Click **Yes** on the User Account Control prompt.
 1. Paste and run the command in PowerShell. The script downloads the installer, installs the Agent silently, and starts the Datadog Agent service. Installation takes two to three minutes.
 
 ### Verify the installation
 
-To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+1. To confirm that the Agent is running, run the following command in PowerShell:
 
-Alternatively, you can run the following command in PowerShell to verify the installation:
+   ```powershell
+   & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
 
-```powershell
-& "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status
-```
+   In the output, confirm the following:
+      - The Agent version is 7.80 or later.
+      - **Status** is `Running`.
+      - `infrastructure_mode: end_user_device` is set.
 
-In the output, confirm the following:
-- The Agent version is 7.80 or later.
-- **Status** is `Running`.
-- `infrastructure_mode: end_user_device` is set.
+1. In Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
 ### Enable Network Path (optional)
 
@@ -91,7 +76,6 @@ For a single device, enable Network Path through [Fleet Automation][105], Datado
 [103]: https://app.datadoghq.com/end-user-devices
 [104]: /network_monitoring/network_path/setup/
 [105]: /agent/fleet_automation/
-[106]: /getting_started/site/
 
 {{% /tab %}}
 

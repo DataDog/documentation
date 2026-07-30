@@ -39,36 +39,45 @@ Use this method to test a single machine or for devices that are not managed by 
 
 1. In Datadog, navigate to [{{< ui >}}Fleet Automation{{< /ui >}} > {{< ui >}}Install Agents{{< /ui >}} > {{< ui >}}macOS{{< /ui >}}][102].
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
-1. Copy the provided installation command and make the following changes:
-
-    * Add `DD_INFRASTRUCTURE_MODE="end_user_device"` to the command.
-    * If your Datadog site is not US1, update `DD_SITE` to match. For the list of sites, see [Datadog sites][106].
-
-    The command looks like the following:
-
-    ```shell
-    sudo DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" DD_INFRASTRUCTURE_MODE="end_user_device" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_mac_os.sh)" 
-    ```
-
+1. Copy the provided installation command beginning with `sudo DD_API_KEY=`.
 1. Open {{< ui >}}Terminal{{< /ui >}}. Find it in {{< ui >}}Applications{{< /ui >}} > {{< ui >}}Utilities{{< /ui >}} > {{< ui >}}Terminal{{< /ui >}}, or search for it with Spotlight (<kbd>⌘</kbd> + <kbd>Space</kbd>).
 1. Paste the installation command into the terminal and run it. Enter your Mac password when prompted.
 
     The script installs the Agent, creates the `_dd-agent` system user, and registers the Agent as a background launch daemon. Installation takes one to two minutes.
 
+1. Launch the Datadog Agent Manager UI by running:
+
+    ```shell
+    sudo datadog-agent launch-gui
+    ```
+
+1. Navigate to {{< ui >}}Settings{{< /ui >}}.
+1. Add a new parameter to the end of the YAML file:
+
+    ```yaml
+    infrastructure_mode: end_user_device
+    ```
+
+1. Save your changes, then [restart the Agent][103]:
+
+    ```shell
+    sudo launchctl kickstart -k system/com.datadoghq.agent
+    ```
+
 ### Verify the installation
 
-To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+1. To confirm that the Agent is running, run the following command in Terminal:
 
-Alternatively, you can run the following command in Terminal to verify the installation:
+    ```shell
+    sudo datadog-agent status
+    ```
 
-```shell
-sudo datadog-agent status
-```
+    In the output, confirm the following:
+    - The Agent version is 7.80 or later.
+    - **Status** is `Running`.
+    - `infrastructure_mode: end_user_device` is set.
 
-In the output, confirm the following:
-- The Agent version is 7.80 or later.
-- **Status** is `Running`.
-- `infrastructure_mode: end_user_device` is set.
+1. In Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
 ### Enable Network Path (optional)
 
@@ -194,7 +203,6 @@ Use [Network Path][105] to trace network routes between your devices and destina
 [103]: /agent/supported_platforms/osx/#commands
 [104]: https://app.datadoghq.com/end-user-devices
 [105]: /network_monitoring/network_path/setup/
-[106]: /getting_started/site/
 
 {{% /tab %}}
 
