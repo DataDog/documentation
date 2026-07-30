@@ -5761,7 +5761,7 @@ menu:
       identifier: ai_agents_console_setup
       weight: 1
     - name: CI/CD Optimization
-      url: continuous_integration/
+      url: cicd/
       pre: ci
       identifier: cicd
       parent: software_delivery_heading
@@ -5912,7 +5912,7 @@ menu:
       identifier: cicd_test_setup_containers
       weight: 211
     - name: Health
-      url: tests/test_health/
+      url: cicd/health/
       parent: cicd
       identifier: cicd_health
       weight: 3
@@ -5957,7 +5957,7 @@ menu:
       identifier: cicd_flaky_management_working_with
       weight: 501
     - name: Features
-      url: tests/ # TBD placeholder - no landing page yet
+      url: cicd/features/
       parent: cicd
       identifier: cicd_features
       weight: 6
@@ -6052,7 +6052,7 @@ menu:
       identifier: cicd_features_parallelization_troubleshooting
       weight: 60404
     - name: Legacy Features
-      url: tests/code_coverage/
+      url: cicd/features/legacy/
       parent: cicd_features
       identifier: cicd_features_legacy
       weight: 605
@@ -6067,7 +6067,7 @@ menu:
       identifier: cicd_guides
       weight: 8
     - name: Troubleshooting
-      url: continuous_integration/troubleshooting/ # TBD placeholder - parent group
+      url: cicd/troubleshooting/
       parent: cicd
       identifier: cicd_troubleshooting
       weight: 9
