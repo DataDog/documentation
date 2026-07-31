@@ -131,10 +131,6 @@ Pour configurer la numérisation des données d'observabilité LLM, accédez à 
 
 ## Numériser le stockage cloud {#scan-cloud-storage}
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Le support de numérisation pour les buckets Amazon S3 et les instances RDS est en avant-première. Pour vous inscrire, cliquez sur <strong>Demander l'accès</strong>.
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="La section du datastore de la page des résultats comportant trois findings Amazon S3." style="width:100%;" >}}
 
 Si vous avez activé le scanner de données sensibles, vous pouvez cataloguer et classer les données sensibles dans vos buckets Amazon S3. **Remarque** : Le scanner de données sensibles ne masque pas les données sensibles dans vos ressources de stockage cloud.

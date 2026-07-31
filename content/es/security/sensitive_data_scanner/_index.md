@@ -130,10 +130,6 @@ Para configurar el escaneo de datos de LLM Observability, navegue a la [LLM Obse
 
 ## Escanear almacenamiento en la nube {#scan-cloud-storage}
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  El soporte de escaneo para buckets de Amazon S3 e instancias de RDS está en vista previa. Para inscribirse, haga clic en <strong>Solicitar Acceso</strong>.
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="La sección de almacenamiento de la página de Hallazgos con tres hallazgos de Amazon S3" style="width:100%;" >}}
 
 Si tiene habilitado Sensitive Data Scanner, puede catalogar y clasificar datos sensibles en sus buckets de Amazon S3. **Nota**: Sensitive Data Scanner no redacta datos sensibles en sus recursos de almacenamiento en la nube.
