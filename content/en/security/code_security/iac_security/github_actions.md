@@ -11,6 +11,9 @@ further_reading:
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
+  - link: "https://www.datadoghq.com/blog/github-actions-iac-security/"
+    tag: "Blog"
+    text: "Spotting CI/CD misconfigurations before the bots do: Securing GitHub Actions with Datadog IaC Security"
 ---
 
 {{% site-region region="gov,gov2" %}}

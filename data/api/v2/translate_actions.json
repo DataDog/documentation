@@ -2098,6 +2098,50 @@
     "request_description": "",
     "request_schema_description": "Request payload for updating global incident settings."
   },
+  "CreateIncidentGoogleChatConfiguration": {
+    "description": "Create a Google Chat configuration for incidents.",
+    "summary": "Create an incident Google Chat configuration",
+    "request_description": "Google Chat configuration payload.",
+    "request_schema_description": "Request payload for creating a Google Chat configuration."
+  },
+  "UpdateIncidentGoogleChatConfiguration": {
+    "description": "Update a Google Chat configuration for incidents.",
+    "summary": "Update an incident Google Chat configuration",
+    "request_description": "Google Chat configuration patch payload.",
+    "request_schema_description": "Request payload for patching a Google Chat configuration."
+  },
+  "CreateIncidentGoogleMeetConfiguration": {
+    "description": "Create a Google Meet configuration for incidents.",
+    "summary": "Create an incident Google Meet configuration",
+    "request_description": "Google Meet configuration payload.",
+    "request_schema_description": "Request payload for creating a Google Meet configuration."
+  },
+  "UpdateIncidentGoogleMeetConfiguration": {
+    "description": "Update a Google Meet configuration for incidents.",
+    "summary": "Update an incident Google Meet configuration",
+    "request_description": "Google Meet configuration patch payload.",
+    "request_schema_description": "Request payload for patching a Google Meet configuration."
+  },
+  "ListIncidentImpactFields": {
+    "description": "List all impact fields for incidents.",
+    "summary": "List incident impact fields"
+  },
+  "CreateIncidentImpactField": {
+    "description": "Create an impact field for incidents.",
+    "summary": "Create an incident impact field",
+    "request_description": "Impact field payload.",
+    "request_schema_description": "Request payload for creating an impact field."
+  },
+  "DeleteIncidentImpactField": {
+    "description": "Delete an impact field for incidents.",
+    "summary": "Delete an incident impact field"
+  },
+  "UpdateIncidentImpactField": {
+    "description": "Update an impact field for incidents.",
+    "summary": "Update an incident impact field",
+    "request_description": "Impact field update payload.",
+    "request_schema_description": "Request payload for creating an impact field."
+  },
   "ListIncidentNotificationRules": {
     "description": "Lists all notification rules for the organization. Optionally filter by incident type.",
     "summary": "List incident notification rules"
@@ -2170,6 +2214,30 @@
     "request_description": "",
     "request_schema_description": "Request body for creating or updating a postmortem template."
   },
+  "ListIncidentRules": {
+    "description": "List all incident rules.",
+    "summary": "List incident rules"
+  },
+  "CreateIncidentRule": {
+    "description": "Create an incident rule.",
+    "summary": "Create an incident rule",
+    "request_description": "Incident rule payload.",
+    "request_schema_description": "Request payload for creating an incident rule."
+  },
+  "DeleteIncidentRule": {
+    "description": "Delete an incident rule.",
+    "summary": "Delete an incident rule"
+  },
+  "GetIncidentRule": {
+    "description": "Get a single incident rule by ID.",
+    "summary": "Get an incident rule"
+  },
+  "UpdateIncidentRule": {
+    "description": "Update an incident rule.",
+    "summary": "Update an incident rule",
+    "request_description": "Incident rule patch payload.",
+    "request_schema_description": "Request payload for patching an incident rule."
+  },
   "ListIncidentTypes": {
     "description": "Get all incident types.",
     "summary": "Get a list of incident types"
@@ -2179,6 +2247,10 @@
     "summary": "Create an incident type",
     "request_description": "Incident type payload.",
     "request_schema_description": "Create request for an incident type."
+  },
+  "ListOrgSettings": {
+    "description": "List org settings for all incident types.",
+    "summary": "List incident type org settings"
   },
   "DeleteIncidentType": {
     "description": "Delete an incident type.",
@@ -2193,6 +2265,10 @@
     "summary": "Update an incident type",
     "request_description": "Incident type payload.",
     "request_schema_description": "Patch request for an incident type."
+  },
+  "GetOrgSettingsByIncidentType": {
+    "description": "Get the org settings for a specific incident type.",
+    "summary": "Get org settings by incident type"
   },
   "ListIncidentUserDefinedFields": {
     "description": "Get a list of all incident user-defined fields.",
@@ -2266,6 +2342,10 @@
     "request_description": "Incident Payload.",
     "request_schema_description": "Update request for an incident."
   },
+  "GetIncidentAIPostmortem": {
+    "description": "Generate an AI postmortem for an incident.",
+    "summary": "Get an AI-generated incident postmortem"
+  },
   "ListIncidentAttachments": {
     "description": "List incident attachments.",
     "summary": "List incident attachments"
@@ -2290,6 +2370,24 @@
     "request_description": "",
     "request_schema_description": "Request to update an attachment."
   },
+  "CreatePageFromIncident": {
+    "description": "Create a page from an incident using the Cases service.",
+    "summary": "Create a page from an incident",
+    "request_description": "Page creation payload.",
+    "request_schema_description": "Request payload for creating a page from an incident."
+  },
+  "UpdateIncidentConfiguration": {
+    "description": "Update a configuration for an incident.",
+    "summary": "Update an incident configuration",
+    "request_description": "Incident configuration patch payload.",
+    "request_schema_description": "Request payload for patching an incident configuration."
+  },
+  "CreateIncidentConfiguration": {
+    "description": "Create a configuration for an incident.",
+    "summary": "Create an incident configuration",
+    "request_description": "Incident configuration payload.",
+    "request_schema_description": "Request payload for creating an incident configuration."
+  },
   "ListIncidentImpacts": {
     "description": "Get all impacts for an incident.",
     "summary": "List an incident's impacts"
@@ -2303,6 +2401,24 @@
   "DeleteIncidentImpact": {
     "description": "Delete an incident impact.",
     "summary": "Delete an incident impact"
+  },
+  "PatchIncidentImpact": {
+    "description": "Update an incident impact.",
+    "summary": "Update an incident impact",
+    "request_description": "Incident impact patch payload.",
+    "request_schema_description": "Patch request for an incident impact."
+  },
+  "CreateOnCallPageFromIncident": {
+    "description": "Create an on-call page directly from an incident.",
+    "summary": "Create an on-call page from an incident",
+    "request_description": "On-call page creation payload.",
+    "request_schema_description": "Request payload for creating an on-call page from an incident."
+  },
+  "LinkPageToIncident": {
+    "description": "Link an existing on-call page to an incident.",
+    "summary": "Link a page to an incident",
+    "request_description": "On-call page link payload.",
+    "request_schema_description": "Request payload for linking an on-call page to an incident."
   },
   "ListIncidentIntegrations": {
     "description": "Get all integration metadata for an incident.",
@@ -2351,6 +2467,50 @@
     "summary": "Update an incident todo",
     "request_description": "Incident todo payload.",
     "request_schema_description": "Patch request for an incident todo."
+  },
+  "ListIncidentResponders": {
+    "description": "List all responders for an incident.",
+    "summary": "List incident responders"
+  },
+  "CreateIncidentResponder": {
+    "description": "Add a responder to an incident.",
+    "summary": "Create an incident responder",
+    "request_description": "Incident responder payload.",
+    "request_schema_description": "Request payload for creating an incident responder."
+  },
+  "DeleteIncidentResponder": {
+    "description": "Remove a responder from an incident.",
+    "summary": "Delete an incident responder"
+  },
+  "GetIncidentResponder": {
+    "description": "Get a single responder for an incident.",
+    "summary": "Get an incident responder"
+  },
+  "CreateIncidentServiceNowRecord": {
+    "description": "Create a ServiceNow record for an incident.",
+    "summary": "Create an incident ServiceNow record",
+    "request_description": "ServiceNow record payload.",
+    "request_schema_description": "Request payload for creating a ServiceNow record for an incident."
+  },
+  "ListTimestampOverrides": {
+    "description": "List all timestamp overrides for an incident.",
+    "summary": "List incident timestamp overrides"
+  },
+  "CreateTimestampOverride": {
+    "description": "Create a timestamp override for an incident.",
+    "summary": "Create an incident timestamp override",
+    "request_description": "Timestamp override payload.",
+    "request_schema_description": "Request payload for creating a timestamp override."
+  },
+  "DeleteTimestampOverride": {
+    "description": "Delete a timestamp override for an incident.",
+    "summary": "Delete an incident timestamp override"
+  },
+  "UpdateTimestampOverride": {
+    "description": "Update a timestamp override for an incident.",
+    "summary": "Update an incident timestamp override",
+    "request_description": "Timestamp override patch payload.",
+    "request_schema_description": "Request payload for patching a timestamp override."
   },
   "ListAWSAccounts": {
     "description": "Get a list of AWS Account Integration Configs.",
@@ -3571,6 +3731,20 @@
     "request_description": "",
     "request_schema_description": "Wrapper object for a single bulk tag configuration request."
   },
+  "CreateHistoricalMetricsConfiguration": {
+    "description": "Enable historical metrics ingestion (late data ingestion) for a metric. Idempotent:\nenabling an already-enabled metric returns 200 instead of 201. Not supported for\ndistribution metrics, metrics with an existing tag configuration, or most standard\n(non-custom) metrics.",
+    "summary": "Enable historical metrics ingestion",
+    "request_description": "",
+    "request_schema_description": "Request body for enabling historical metrics ingestion for a metric."
+  },
+  "DeleteHistoricalMetricsConfiguration": {
+    "description": "Disable historical metrics ingestion for a metric. Idempotent: always returns 204,\nwhether or not the configuration existed or the metric itself still exists, so that\nTerraform destroy succeeds for a metric removed out-of-band.",
+    "summary": "Delete a historical metrics configuration"
+  },
+  "GetHistoricalMetricsConfiguration": {
+    "description": "Get the historical metrics ingestion configuration for a metric. Existence of the\nresource means historical metrics ingestion is enabled; returns 404 when it is not\nenabled for the metric.",
+    "summary": "Get a historical metrics configuration"
+  },
   "ListTagIndexingRules": {
     "description": "List tag indexing rules for an org, sorted by `rule_order`, with offset/limit pagination.",
     "summary": "List tag indexing rules"
@@ -4775,6 +4949,22 @@
     "request_description": "",
     "request_schema_description": "RUM application update request."
   },
+  "GetRumConfig": {
+    "description": "Get the RUM configuration for your organization.",
+    "summary": "Get the RUM configuration"
+  },
+  "UpdateRumConfig": {
+    "description": "Update the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
+    "summary": "Update the RUM configuration",
+    "request_description": "New definition of the RUM configuration.",
+    "request_schema_description": "Request body for updating the RUM configuration."
+  },
+  "CreateRumConfig": {
+    "description": "Create the RUM configuration for your organization.\nReturns the RUM configuration object from the request body when the request is successful.",
+    "summary": "Create the RUM configuration",
+    "request_description": "The definition of the RUM configuration to create.",
+    "request_schema_description": "Request body for creating the RUM configuration."
+  },
   "ListRumMetrics": {
     "description": "Get the list of configured RUM-based metrics with their definitions.",
     "summary": "Get all RUM-based metrics"
@@ -4822,6 +5012,54 @@
     "summary": "Search RUM events",
     "request_description": "",
     "request_schema_description": "The request for a RUM events list."
+  },
+  "CreateRUMOperation": {
+    "description": "Create a new RUM operation, defining the journey used to detect it from RUM events.",
+    "summary": "Create a RUM operation",
+    "request_description": "",
+    "request_schema_description": "The request body for creating a RUM operation."
+  },
+  "GetRUMOperationByName": {
+    "description": "Retrieve a specific RUM operation by its unique name.",
+    "summary": "Get a RUM operation by name"
+  },
+  "ListRUMOperations": {
+    "description": "Search RUM operations for your organization. Supports filtering by query, creator, team, feature, and application.",
+    "summary": "Search RUM operations"
+  },
+  "ListRUMOperationStrongLinks": {
+    "description": "List strong links between RUM operations and features. A strong link confirms that a feature\nbelongs to an operation. Provide `operation_id`, `feature_id`, or both to filter results;\nat least one is required.",
+    "summary": "List RUM operation strong links"
+  },
+  "CreateRUMOperationStrongLink": {
+    "description": "Create a strong link between a RUM operation and a feature, confirming that the feature\nbelongs to the operation. The operation can be identified by `operation_id` or `operation_name`;\nif `operation_name` does not match an existing operation, a stub operation is created.",
+    "summary": "Create a RUM operation strong link",
+    "request_description": "",
+    "request_schema_description": "The request body for creating a RUM operation strong link."
+  },
+  "DeleteRUMOperationStrongLink": {
+    "description": "Delete the strong link between a RUM operation and a feature.",
+    "summary": "Delete a RUM operation strong link"
+  },
+  "UpdateRUMOperationStrongLink": {
+    "description": "Update the status of a strong link between a RUM operation and a feature.",
+    "summary": "Update a RUM operation strong link",
+    "request_description": "",
+    "request_schema_description": "The request body for updating a RUM operation strong link."
+  },
+  "DeleteRUMOperation": {
+    "description": "Delete a RUM operation.",
+    "summary": "Delete a RUM operation"
+  },
+  "GetRUMOperation": {
+    "description": "Retrieve a specific RUM operation by its unique identifier.",
+    "summary": "Get a RUM operation"
+  },
+  "UpdateRUMOperation": {
+    "description": "Update an existing RUM operation. Fields omitted from the request body keep their existing value,\nwith the exception of `journey_rum`, which is required and fully replaced on every update.",
+    "summary": "Update a RUM operation",
+    "request_description": "",
+    "request_schema_description": "The request body for updating a RUM operation."
   },
   "QueryAggregatedLongTasks": {
     "description": "Get aggregated long task data for a RUM view, grouped by invoker type and sampled across multiple view instances.",

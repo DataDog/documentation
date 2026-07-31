@@ -84,6 +84,10 @@ Korean language support is available Monday to Friday from 9am to 5pm Korea Stan
 
 When support in your preferred language is not available, you can continue working with Datadog Support in English.
 
+## Ticket retention policy
+
+Our retention policy changed on June 12, 2026: closed tickets, including their attachments, are now deleted 15 months after their last update. Reach out to us with any questions.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

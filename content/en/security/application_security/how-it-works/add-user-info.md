@@ -4,6 +4,10 @@ aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
   - /security/application_security/threats/add-user-info/
+further_reading:
+- link: "https://www.datadoghq.com/blog/app-api-protection-python-lambda-monitoring/"
+  tag: "Blog"
+  text: "Detect runtime threats in Python Lambda functions with Datadog AAP"
 ---
 
 {{< site-region region="gov" >}}
@@ -1192,3 +1196,7 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
 [15]: /tracing/guide/remote_config
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

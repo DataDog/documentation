@@ -100,7 +100,7 @@ Datadog truncates values that exceed these default field limits:
 
 | Field   | Maximum         |
 |---------|-----------------|
-| Title   | 300 characters  |
+| Title   | 600 characters  |
 | Message | 4000 characters |
 | Tags    | 200 tags        |
 

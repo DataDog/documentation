@@ -17,6 +17,15 @@ further_reading:
 - link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
   tag: "documentation"
   text: "Strategies for Reducing Log Volume"
+- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
+  tag: "Learning Center"
+  text: "Getting Started with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/"
+  tag: "Blog"
+  text: "Add dynamically updating context to logs with Reference Tables and Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
   tag: "blog"
   text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
@@ -62,9 +71,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
-- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
-  tag: "Learning Center"
-  text: "Getting Started with Observability Pipelines"
 
 ---
 
