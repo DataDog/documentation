@@ -32,7 +32,7 @@ The instrumenter must be deployed to every region and account where you want to 
 
 ## Setup
 
-1. On the [Serverless > AWS Lambda][3] page, select {{< ui >}}Instrument Functions{{< /ui >}}.
+1. On the [Serverless > AWS Lambda][3] page, select {{< ui >}}Settings{{< /ui >}}. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
 
 1. On the {{< ui >}}Select AWS Region and Launch CloudFormation{{< /ui >}} modal:
    - Click {{< ui >}}Select API Key{{< /ui >}} to select the Datadog API key to use to send data to your AWS account.
