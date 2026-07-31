@@ -1,86 +1,115 @@
 ---
 title: Setting up Workload Protection
+aliases:
+  - /security/workload_protection/setup/agent
+  - /security/workload_protection/supported_linux_distributions
+  - /security/threats/supported_linux_distributions
 disable_toc: false
 ---
 
-To get started with Workload Protection, use the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
+{{< partial name="security-platform/WP-billing-note.html" >}}
+
+This page guides you through the process of enabling Workload Protection in your environment. Start by activating Workload Protection in Datadog, then deploy the Datadog Agent to begin collecting runtime telemetry. After setup is complete, you can explore Workload Protection's capabilities using the playground scripts. Optionally, you can also request access to enforcement capabilities to take automated response actions directly with the Datadog platform.
+
+## 1) Enable Workload Protection in Datadog
+
+To get started with Workload Protection, you need to enable the Workload Protection product in Datadog. To do so, log in to your Datadog account, and click [Get Started][1]. You can follow the Agent deployment steps in Datadog, or come back to this page for more details.
 
 <div class="alert alert-info">Activating Workload Protection requires the Org Management <a href="https://docs.datadoghq.com/account_management/rbac/permissions/">permission</a>.</div>
 
+## 2) Deploy the Datadog Agent
 
-## Remote configuration
+Workload Protection relies on the Datadog Agent to monitor your workloads and collect security relevant events for threats detection and security posture monitoring.
 
-You can enable [Remote Configuration][3] for Workload Protection. 
+### Requirements
 
-Remote Configuration can be used to:
-- Automatically stay up to date on the latest security detections
-- Block attackers and attacks
+Workload Protection offers 3 different flavors depending on your environment and operating system:
+- On **Linux**, install **the eBPF agent**. It offers the best performance and feature support.
+- On **AWS Fargate**, install **the eBPF-less agent**. Fargate does not provide eBPF access, so this agent uses ptrace instead. It covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring, network monitoring).
+- On **Windows**, the Workload Protection agent installs a Windows driver to collect events and telemetry.
 
-Remote Configuration can be set up using the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
+#### Supported Linux flavors
 
-<div class="alert alert-info">To enable Remote Configuration, ask your admin for the <strong>API Keys Write</strong> permission.</div>
+On Linux, you need to look at the Linux kernel version and distribution version, as well as the underlying Cloud environment (when applicable) since some Cloud computing services prevent access to eBPF.
 
-## Agent setup options for Workload Protection
+##### Workload Protection's eBPF agent supports the following Linux flavors
 
-Workload Protection supports **Agent-based-only deployments**.
-
-## Supported deployment types
-
-The following table summarizes Workload Protection relative to deployment types.
-
-|          | Docker    | Kubernetes | Linux     | Amazon ECS/EKS | Windows   | AWS Fargate ECS/EKS | AWS Account | Azure Account | GCP Account | Terraform |
-|------------------------|-----------|------------|-----------|----------------|-----------|---------------------|-------------|---------------|-------------|-----------|
-| Agent Required (7.46+) | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}}      | {{< X >}} | {{< X >}}           |             |               |             |           |
-| Workload Protection    | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}}      | {{< X >}} | {{< X >}}           |             |               |             |           |
-
-
-## Supported Linux distributions
-
-Workload Protection supports the following Linux distributions:
-
-| Linux Distributions                                           | Supported Versions      |
-|---------------------------------------------------------------|-------------------------|
-| Ubuntu LTS                                                    | 18.04, 20.04, 22.04, 24.04|
-| Debian                                                        | 10 or later             |
-| Amazon Linux 2                                                | Kernels 4.14 and higher |
-| Amazon Linux 2023                                             | All versions            |
-| SUSE Linux Enterprise Server                                  | 12 and 15               |
-| Red Hat Enterprise Linux                                      | 7, 8, and 9             |
-| Oracle Linux                                                  | 7, 8, and 9             |
-| CentOS                                                        | 7                       |
-| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher           |
+| Linux Distributions                                           | Supported Versions                    |
+|---------------------------------------------------------------|---------------------------------------|
+| Ubuntu LTS                                                    | 18.04, 20.04, 22.04, 24.04 and higher |
+| Debian                                                        | 10 and higher                         |
+| Amazon Linux 2                                                | Kernels 4.14 and higher               |
+| Amazon Linux 2023                                             | All versions                          |
+| SUSE Linux Enterprise Server                                  | 12 and 15                             |
+| Red Hat Enterprise Linux                                      | 7, 8, and 9                           |
+| Oracle Linux                                                  | 7, 8, and 9                           |
+| CentOS                                                        | 7                                     |
+| Google Container Optimized OS (default on GKE) (Preview)      | 93 and higher                         |
 
 **Notes:**
 
-- Custom kernel builds are not supported.
-- The [Workload Protection eBPF-less solution for eBPF disabled environments][13] uses a ptrace-based Datadog Agent. The ptrace-based Datadog Agent supports Linux kernel versions from 3.4.43 to 4.9.85.
-- For compatibility with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][14].
-- Data collection is done using eBPF, so Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
+- Custom kernel builds might modify critical hook points that the Agent requires to properly function. Support isn't guaranteed.
+- Datadog requires, at minimum, platforms that have underlying Linux kernel versions of 4.14.0+ or have eBPF features backported (for example, Centos/RHEL 7 with kernel 3.10 has eBPF features backported, so it is supported).
+- For compatibility issues with a custom Kubernetes network plugin like Cilium or Calico, see [Troubleshooting Workload Protection][2].
 
+##### Supported cloud environments
 
-## Deploy the Agent
+| Cloud environments                      | Supported | 
+|-----------------------------------------|----------------------|
+| Amazon Elastic Compute Cloud (EC2)      | ✅                    |
+| Amazon Elastic Kubernetes Service (EKS) | ✅                    |
+| Amazon Elastic Container Service (ECS)  | ✅                    |
+| AWS Fargate                             | ✅ (only using eBPF-less agent)                    |
+| Azure Virtual Machines (Azure VMs)      | ✅                    |
+| Azure Kubernetes Service (AKS)          | ✅                    | 
+| Google Compute Engine (GCE)             | ✅                    |
+| Google Kubernetes Engine (GKE)          | ✅                    | 
 
-You can enable Workload Protection on the Datadog Agent using [multiple tools and systems][6]:
+**Notes:**
 
-- [Kubernetes][8]
-- [Docker][9]
-- [ECS EC2][10]
-- [Windows][11]
-- [Linux][12]
+- The underlying Linux distribution and system configuration used by these cloud environments are the primary factors determining whether Workload Protection is supported.
+- For cloud environments where you can choose the Linux distribution and kernel version, select a configuration that meets the requirements listed above.
 
-## Workload Protection Agent variables
+#### Supported Windows flavors
 
-The Datadog Agent has several [environment variables][7] that can be enabled for Workload Protection. This article describes the purpose of each environment variable.
+Workload Protection's Windows agent supports Windows Server 2019 and higher.
+
+### Deployment methods
+
+#### Workload Protection's eBPF agent (Linux)
+
+Use the following instructions to enable the eBPF agent of Workload Protection in the Datadog Agent.
+
+{{< partial name="workload-protection/wp-ebpf-tiles.html" >}}
+
+#### Workload Protection's eBPF-less agent (AWS Fargate)
+
+Use the following instructions to enable the eBPF-less agent of Workload Protection in the Datadog Agent.
+
+{{< partial name="workload-protection/wp-ebpfless-tiles.html" >}}
+
+#### Workload Protection Windows agent
+
+Use the following instructions to enable the Windows agent of Workload Protection in the Datadog Agent.
+
+{{< partial name="workload-protection/wp-windows-tiles.html" >}}
+
+## 3) Discover and explore Workload Protection capabilities
+
+Datadog provides a testing playground for discovering Workload Protection and learning its capabilities. The playground offers various scenarios you can run safely in a test environment, simulating threats and real world attacks that Workload Protection can detect and protect you from. See the [playground repository][3] to get started.
+
+## 4) (Optional) Request access to enforcement capabilities
+
+<div class="alert alert-danger">Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> to enable Automated response.</div>
+
+After you are granted access to Automated response, see the [Automated response][4] page.
+
+## 5) (Optional) Advanced Agent configurations
+
+The [advanced Agent configuration page][5] describes how to configure and tune the Agent to better fit your environment and needs.
 
 [1]: https://app.datadoghq.com/security/workload-protection/onboarding
-[2]: /account_management/rbac/permissions/
-[3]: /agent/remote_config/?tab=configurationyamlfile
-[6]: /security/workload_protection/setup/agent
-[7]: /security/workload_protection/setup/agent_variables
-[8]: /security/workload_protection/setup/agent/kubernetes
-[9]: /security/workload_protection/setup/agent/docker
-[10]: /security/workload_protection/setup/agent/ecs_ec2
-[11]: /security/workload_protection/setup/agent/windows
-[12]: /security/workload_protection/setup/agent/linux
-[13]: /security/workload_protection/getting_started/linux_ebpfless
-[14]: /security/workload_protection/troubleshooting/threats
+[2]: /security/workload_protection/troubleshooting/threats
+[3]: https://github.com/DataDog/datadog-security-playground
+[4]: /security/workload_protection/respond_and_report/#automated-response
+[5]: /security/workload_protection/setup/advanced_configuration

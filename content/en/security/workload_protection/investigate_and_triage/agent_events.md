@@ -3,13 +3,11 @@ title: Agent Events
 disable_toc: false
 aliases:
   - /security/threats/investigate_agent_events
+  - /security/workload_protection/investigate_agent_events
 further_reading:
   - link: "/security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
     tag: "Documentation"
     text: "Explore Workload Protection detection rules"
-  - link: "/security/workload_protection/workload_security_rules"
-    tag: "Documentation"
-    text: "Learn how to manage Workload Protection detection rules"
   - link: "/security/notifications/"
     tag: "Documentation"
     text: "Learn more about security notifications"

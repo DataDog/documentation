@@ -13,10 +13,10 @@ further_reading:
 - link: "security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules"
   tag: "Documentation"
   text: "Workload Protection detection rules"
-- link: "security/workload_protection/getting_started"
+- link: "security/workload_protection/setup"
   tag: "Documentation"
-  text: "Getting started with Workload Protection"
-- link: "/security/workload_protection/getting_started/advanced_configuration"
+  text: "Setting up Workload Protection"
+- link: "/security/workload_protection/setup/advanced_configuration"
   tag: "Documentation"
   text: "Workload Protection Agent configuration"
 - link: "https://learn.datadoghq.com/courses/workload-protection-detect-compromises"
@@ -149,7 +149,7 @@ When a response action runs, the Agent reports a **status** for each action. The
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/workload-protection/agent-rules
 [3]: /agent/remote_config/?tab=configurationyamlfile
-[4]: /security/workload_protection/getting_started/advanced_configuration
+[4]: /security/workload_protection/setup/advanced_configuration
 [5]: /account_management/rbac/permissions
 [6]: /security/workload_protection/investigate_and_triage/security_signals
-[7]: /security/workload_protection/getting_started/kubernetes
+[7]: /security/workload_protection/setup/kubernetes

@@ -1,5 +1,7 @@
 ---
 title: Setting up Workload Protection on AWS Fargate
+aliases:
+  - /security/workload_protection/guide/ebpf-free-agent
 disable_toc: false
 ---
 

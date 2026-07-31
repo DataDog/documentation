@@ -1,9 +1,11 @@
 ---
 title: Workload Protection Agent configuration
+aliases:
+  - /security/workload_protection/setup/agent_variables
 description: Public Workload Protection Agent configuration settings
 disable_edit: true
 further_reading:
-- link: "/security/workload_protection/getting_started/"
+- link: "/security/workload_protection/setup/"
   tag: "Documentation"
   text: "Get started with Datadog Workload Protection"
 ---

@@ -1,5 +1,7 @@
 ---
 title: Setting up Workload Protection on Linux (with eBPF)
+aliases:
+  - /security/workload_protection/setup/agent/linux
 disable_toc: false
 ---
 
