@@ -27,24 +27,14 @@ Test Impact Analysis only takes into account the commit history and test code co
 
 ### Fewer tests skipped than expected
 
-For large applications with more than 50,000 tests, Datadog may return fewer skippable tests than expected. If you use Ruby and expect more tests to be skipped, switch to suite-level skipping by setting this environment variable before running tests:
+There are edge-cases where Test Impact Analysis will skip less tests than expected.
 
-{{< code-block lang="bash" >}}
-export DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite
-{{< /code-block >}}
-
-Other situations can also lead to fewer skipped tests. In all of them the extra tests run safely: Test Impact Analysis never skips a test that should have run.
-
-- A very large changeset may result in slightly fewer tests being skipped, because Datadog analyzes up to the 100 most recent commits.
-- A single commit that changes more than 5,000 files is not analyzed for impact, so its tests run rather than being skipped.
-- A test or suite that covers more than 16,000 files is not skipped.
+- A very large git history may result in slightly fewer tests being skipped, because Datadog analyzes up to the first 100 recent commits.
+- A commit that changed more than 5,000 files is not analyzed for impact, so it is expected the coverage information of that commit to be ignored.
+- A test or suite that covers more than 16,000 files is never skipped.
 - A very small fraction of tests (well under one percent) may run even when they could have been skipped.
 
 For more detail on these behaviors, see [Limitations and expected behavior][7].
-
-### Code coverage is incomplete or missing
-
-Per-test (line-level) code coverage is collected for Java, JavaScript, .NET, and Go. It is not collected for Ruby, Python, or Swift. For very large test suites, per-test coverage may occasionally be unavailable even in supported languages, and affected tests are marked with a missing-coverage indicator. Suite-level coverage remains reliable and is what Test Impact Analysis uses to decide which tests to skip.
 
 ### Synchronizing a fork through GitHub's UI
 

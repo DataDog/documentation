@@ -55,12 +55,6 @@ Test Impact Analysis decides which tests to skip by matching the files each test
 
 <div class="alert alert-info">All of the behaviors in this section are safe by design: they can only cause <strong>more</strong> tests to run, never cause a test to be skipped when it should have run. For code changes that Datadog cannot detect automatically, see <a href="#out-of-the-box-configuration-limitations">Out-of-the-box configuration limitations</a>.</div>
 
-### Code coverage
-
-Test Impact Analysis relies on code coverage collected from previous test runs. Suite-level coverage is reliable and is what Test Impact Analysis uses to decide which tests to skip. For very large test suites, per-test (line-level) coverage may occasionally be unavailable. When it is, Datadog marks the affected test with a missing-coverage indicator, so you can tell a test with no covered lines apart from one whose per-test coverage was not recorded.
-
-Per-test code coverage is collected for Java, JavaScript, .NET, and Go. It is not collected for Ruby, Python, or Swift. See [Code coverage backfilling](#code-coverage-backfilling) for how tests skipped by Test Impact Analysis are accounted for in your total reported coverage.
-
 ### Scale limits
 
 To keep analysis fast and predictable, Test Impact Analysis applies a few size limits. Each one is safe: it can only result in more tests running.
@@ -136,6 +130,8 @@ If you use [Code Coverage][10] and Test Impact Analysis together, reported overa
 Code coverage backfilling adjusts the total reported coverage to include tests or suites that were skipped, so Test Impact Analysis savings do not distort coverage totals.
 
 Code coverage backfilling is supported for Java, .NET, Go, and JavaScript. It is not supported for Ruby, Python, or Swift.
+
+Backfilling is best-effort. For very large test suites, the coverage of some tests skipped by Test Impact Analysis may not be backfilled, so the reported total coverage can be slightly lower than the true coverage. This does not affect which tests are skipped.
 
 ### Java, .NET, and Go
 
