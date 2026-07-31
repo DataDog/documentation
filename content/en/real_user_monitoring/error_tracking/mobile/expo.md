@@ -244,3 +244,4 @@ If you are using the `expo-dev-client` and already have the `expo-datadog` plugi
 [3]: /real_user_monitoring/application_monitoring/react_native/setup/expo/#usage
 [4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id
+[14]: https://github.com/DataDog/react-native-performance-limiter

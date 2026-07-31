@@ -9,6 +9,9 @@ further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
     text: Enable Runtime Metrics
+  - link: "https://www.datadoghq.com/blog/single-step-instrumentation-rules/"
+    tag: "Blog"
+    text: "Manage service tracing across hosts with Single Step Instrumentation rules"
 ---
 
 ## Overview

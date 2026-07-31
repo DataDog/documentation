@@ -15,17 +15,17 @@ Use Observability Pipelines' Socket destination to send logs to a socket endpoin
 
 ## Setup
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
+
 Configure the Socket destination when you [set up a pipeline][2]. You can set up a pipeline in the [UI][1], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
 After you select the Socket destination in the pipeline UI:
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the socket address and, if applicable, the key pass. Do <b>not</b> enter the actual values.</div>
-
-{{% observability_pipelines/secrets_env_var_note %}}
-
 1. Enter the identifier for your address. If you leave it blank, the [default](#secret-defaults) is used.
 1.  In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select the socket type to use.
 1.  In the {{< ui >}}Encoding{{< /ui >}} dropdown menu, select either {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw message{{< /ui >}} as the output format.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 

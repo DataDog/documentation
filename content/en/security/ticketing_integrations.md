@@ -28,6 +28,8 @@ further_reading:
   - link: "/api/latest/security-monitoring/#create-cases-for-security-findings"
     tag: "API"
     text: "Ticketing integration API"
+aliases:
+- /security/cloud_security_management/review_remediate/jira
 ---
 
 {{< product-availability >}}
@@ -147,6 +149,9 @@ If you do not see the {{< ui >}}Case Management ↔ ServiceNow Integration{{< /u
 
 {{% tab "Linear" %}}
 
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 The following steps set up bidirectional syncing with Linear and verify that setup is successful.
 
 1. Set up the following prerequisites in your Datadog account, or verify that they are set up already. The prerequisites are listed in their setup order.
@@ -221,6 +226,9 @@ The following steps create a bidirectional ticket for a Security finding.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Linear issue" level="h4" expanded=false %}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
+
 1. Open the {{< ui >}}Linear Issue{{< /ui >}} modal. You can use a new or existing issue.
 2. Complete the following settings:
    1. {{< ui >}}Linear account{{< /ui >}}:** select the Linear account where you want the issue created.
@@ -277,6 +285,9 @@ In {{< ui >}}Datadog Associated Case{{< /ui >}}, the related Datadog case is pro
 {{% /tab %}}
 
 {{% tab "Linear" %}}
+
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger">The Linear ticketing integration is not available on the {{< region-param key="dd_site_name" >}} site.</div>
+{{< /site-region >}}
 
 Existing bidirectional Linear issues are listed in the finding's {{< ui >}}Ticketing{{< /ui >}} or {{< ui >}}Next Steps{{< /ui >}} sections.
 

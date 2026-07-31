@@ -40,10 +40,7 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### Synthetic tests (Preview)
-
-<div class="alert alert-info">
-Bits investigations started from Synthetic Browser and API tests are in Preview.</div>
+### Synthetic tests
 
 When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
@@ -51,7 +48,7 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits inv
 
 1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the {{< ui >}}Timeline{{< /ui >}} section.
 1. Select the {{< ui >}}Alert Triggered{{< /ui >}} event for the failing test run.
-1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+1. Click {{< ui >}}Investigate with Bits{{< /ui >}}.
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
 

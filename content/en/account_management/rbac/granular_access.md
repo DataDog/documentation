@@ -15,6 +15,8 @@ Use the different principals to control access patterns in your organization and
 | Supported resources with granular access control | Team-based access | Role-based access | User / service account-based access |
 |--------------------------------------------------|-------------------|-------------------|-------------------------------------|
 | [Apps][13]                                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [AWS Accounts][11]                               | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Azure App Registrations][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Work Management projects][10]                   | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connections][14]                                | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Connection Groups][15]                          | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
@@ -23,6 +25,7 @@ Use the different principals to control access patterns in your organization and
 | [Dashboards][2]                                  | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Datastores][16]                                 | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Feature Flags][25]                              | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
+| [Google Service Accounts][11]                    | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Accounts][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Services][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |
 | [Integration Webhooks][11]                       | {{< X >}}         | {{< X >}}         | {{< X >}}                           |

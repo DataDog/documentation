@@ -4,21 +4,24 @@ description: Create metric monitors with threshold alerts and custom notificatio
 aliases:
   - /getting_started/application/monitors
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
-- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
-  tag: "Learning Center"
-  text: "Introduction to Observability"
 - link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
+  tag: "Learning Center"
+  text: "Introduction to Observability"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
+- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+  tag: "Blog"
+  text: "Monitoring 101: Alerting on what matters"
 ---
 
 ## Overview
