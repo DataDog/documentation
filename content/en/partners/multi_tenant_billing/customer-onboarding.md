@@ -22,7 +22,7 @@ To register a deal:
 3. Complete the required fields, including as much detail as possible: opportunity name, customer name, expected close date, use cases, key stakeholders, and estimated ARR.
 4. Click {{< ui >}}Submit{{< /ui >}}.
 
-After submitting, notify the assigned Partner Sales Manager (PSM) that a new opportunity was registered. Contact [partner-support@datadoghq.com][2] to identify the PSM if it isn't known.
+After submitting, notify the partner account team that a new opportunity was registered. Contact [partner-support@datadoghq.com][2] if unsure who to reach.
 
 ## Create a Trial Org
 
@@ -34,7 +34,7 @@ See [Trial Org Provisioning][4] for the full form walkthrough.
 
 ## Share the Trial Org with the account team
 
-A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's ID with the PSM so it can be associated with the registered opportunity. The customer organization becomes connected to the Admin Org, and its usage visible, once it has an active contract associated with the partnership.
+A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's ID with the partner account team so it can be associated with the registered opportunity. Continue working with the partner account team as the opportunity progresses to a signed contract; the customer organization connects to the Admin Org, and its usage becomes visible, once that contract is active and associated with the partnership.
 
 ## What's next
 

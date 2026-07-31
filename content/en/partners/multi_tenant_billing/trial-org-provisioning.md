@@ -28,9 +28,23 @@ If the {{< ui >}}Trial Org Provisioning{{< /ui >}} page isn't available in the A
 
 The Trial Org is created immediately. The result panel shows the new org's name, org ID, and status message.
 
+## Find the Trial Org ID
+
+If the org ID from the result panel wasn't captured, retrieve it by logging in to the Trial Org and opening the browser's JavaScript console:
+
+```javascript
+JSON.parse(document.querySelector('#_current_user_json').value).org.id
+```
+
+A bookmarklet works too: create a bookmark named `Get Datadog Org ID` with the following as its URL, then click it from any page in the Trial Org to display the ID in a browser alert:
+
+```javascript
+javascript:(function() {var orgId = JSON.parse(document.querySelector('#_current_user_json').value).org.id; alert("Datadog Org ID is " + orgId);})();
+```
+
 ## After provisioning
 
-A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's name and org ID with the PSM so it can be associated with the opportunity registered on the [Partner Portal][2]. The customer organization becomes connected to the Admin Org, and its usage visible, once it has an active contract associated with the partnership.
+A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's name and org ID with the partner account team so it can be associated with the opportunity registered on the [Partner Portal][2]. The customer organization becomes connected to the Admin Org, and its usage visible, once it has an active contract associated with the partnership.
 
 ## What's next
 

@@ -5,7 +5,7 @@ description: "Monitor cost and billable usage across all connected customer orga
 
 ## Overview
 
-A customer organization connects to the partner Admin Org automatically when its contract includes the partnership and is active. The connection is removed automatically if the contract expires. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses.
+A customer organization connects to the partner Admin Org automatically when its contract includes the partnership and is active. The connection is removed automatically if the contract expires. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses. A Trial Org's usage is not included here until its customer organization is connected this way; see [Trial Org Provisioning][4].
 
 ## View cost and usage data
 
@@ -23,6 +23,8 @@ Cost and usage data is also available programmatically through the following [Us
 | [Get Hourly Usage by Product Family][11] | Hourly usage broken down by product family | Requires `filter[include_connected_accounts]=true` |
 
 **Note**: Standard GovCloud boundaries apply to this visibility. A non-GovCloud Admin Org cannot see cost and usage data for a GovCloud customer organization.
+
+**Note**: Usage and cost views may include estimated or projected values during the billing period. Final invoices remain the authoritative source for billed amounts.
 
 ## What's next
 
