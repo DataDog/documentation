@@ -58,7 +58,7 @@ You can also ask a database question from anywhere in Datadog. Click {{< ui >}}A
 
 Bits Chat streams the response as it works through the investigation: it states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
 
-You can ask follow-up questions at any point to refine the analysis, or paste in external context, such as an execution plan captured outside of Datadog. Bits Chat factors the new information into its next steps.
+Bits Chat streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings.
 
 {{< img src="database_monitoring/database_investigator/investigator_action.png" alt="Bits Chat reporting the root cause of a database issue, with immediate mitigation and durable remediation steps" style="width:100%;" >}}
 
