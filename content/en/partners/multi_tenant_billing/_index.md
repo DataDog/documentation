@@ -18,12 +18,7 @@ See [Onboarding a New Customer][15] for how these pieces fit into the path from 
 
 ## Getting started
 
-Before requesting an Admin Org, confirm the following:
-
-- The organization is registered on the [Datadog Partner Portal][1].
-- The organization has signed the agreement to transact with Datadog as a resell, MSP, or systems integrator partner.
-
-Contact [partner-support@datadoghq.com][16] to request an Admin Org. To provision trial organizations for prospective customers, include the Trial Org Creator capability in the request.
+To request an Admin Org, contact [partner-support@datadoghq.com][16]. This requires registration on the [Datadog Partner Portal][1] and a signed agreement to transact with Datadog as a resell, MSP, or systems integrator partner. Partners planning to provision customer trials should request the Trial Org Creator capability at the same time.
 
 <div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
