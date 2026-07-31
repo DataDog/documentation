@@ -38,7 +38,7 @@ To start collecting logs from your AWS services:
 
 The Datadog Forwarder Lambda function supports any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group. The following table lists the services collected:
 
-- **AWS service**: The supported AWS service. Each service name links to its setup instructions to enable logging and sending logs to Datadog. Services without a link require no service-side setup.
+- **AWS service**: The AWS service that generates the logs. Each service name links to its log collection setup instructions. Services without a link require no service-side setup.
 - **Log source**: The `source` tag Datadog applies to the logs. Use it to find your logs in the [Log Explorer][40].
 - **Storage**: Where the AWS service can write logs that the Forwarder collects.
 - **Automatic collection**: Whether Datadog can [automatically set up the triggers](#automatically-set-up-triggers) for that log source. If not, [set up the triggers manually](#manually-set-up-triggers).
