@@ -24,6 +24,8 @@ further_reading:
 
 Database Monitoring contributes a set of tools and skills to [Bits Chat][1], so you can investigate the databases you monitor directly in chat. Bits Chat analyzes the telemetry Database Monitoring already collects. This includes health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For a database investigation, Bits Chat returns a structured root cause analysis with concrete remediation steps.
 
+Bits Chat supports investigating all databases monitored by Database Monitoring.
+
 Both database administrators and the platform or application teams that own database-backed services can investigate this way. Describe an issue in plain language and Bits Chat runs the investigation. Deep database expertise is not required.
 
 Use Bits Chat to answer questions like:
@@ -56,9 +58,9 @@ Each of these automatically launches a Bits Chat session and starts an investiga
 
 You can also ask a database question from anywhere in Datadog. Click {{< ui >}}Ask Bits{{< /ui >}} in the top-right of the navigation bar, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
-Bits Chat streams the response as it works through the investigation: it states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
+Bits Chat streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
 
-Bits Chat streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings.
+You can ask follow-up questions at any point to refine the analysis. You can also paste in external context, such as an execution plan captured outside of Datadog, and Bits Chat factors it into its next steps.
 
 {{< img src="database_monitoring/database_investigator/investigator_action.png" alt="Bits Chat reporting the root cause of a database issue, with immediate mitigation and durable remediation steps" style="width:100%;" >}}
 
