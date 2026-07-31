@@ -114,17 +114,13 @@ Automatic code coverage report upload is supported in the following Test Optimiz
 | Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
 | Java `dd-java-agent` | `1.53.0` | JaCoCo |
 
-These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`](#uploading-coverage-reports) command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
+These version requirements apply only to automatic uploads by Test Optimization libraries.
 
 #### Enable automatic uploads
 
-Complete the [Test Optimization setup][17] for your library before enabling automatic uploads.
-
-Upgrading to a supported version is necessary but not sufficient. Reports are uploaded only after you turn on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
+You can apply the {{< ui >}}Code Coverage{{< /ui >}} setting at the organization, repository, or test service level.
 
 {{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings." style="width:100%" >}}
-
-You can apply the setting at the organization, repository, or test service level.
 
 1. Complete the [Test Optimization setup][17] for your library.
 2. Upgrade to a supported library version.
@@ -331,7 +327,7 @@ example/notifications/notifier.go:104.3,104.10 1 3
 
 <div class="alert alert-info">If you use GitHub Actions, you can skip this installation step. The <a href="#uploading-coverage-reports">GitHub Actions upload method</a> below uses a dedicated action that handles <code>datadog-ci</code> installation automatically.</div>
 
-Standalone binaries are provided with [Datadog CI releases][10]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (MacOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
+Standalone binaries are provided with [Datadog CI releases][10]. The _linux-x64_, _linux-arm64_, _darwin-x64_, _darwin-arm64_ (macOS), and _win-x64_ (Windows) architectures are supported. To install, run the following from your terminal:
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -345,7 +341,7 @@ datadog-ci version
 {{< /code-block >}}
 {{% /tab %}}
 
-{{% tab "MacOS" %}}
+{{% tab "macOS" %}}
 {{< code-block lang="shell" >}}
 curl -L --fail "https://github.com/DataDog/datadog-ci/releases/latest/download/datadog-ci_darwin-x64" --output "/usr/local/bin/datadog-ci" && chmod +x /usr/local/bin/datadog-ci
 {{< /code-block >}}
@@ -549,3 +545,4 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [15]: https://app.datadoghq.com/ci/code-coverage
 [16]: https://reportgenerator.io/
 [17]: /tests/setup/
+[18]: /code_coverage/setup/#integrate-with-source-code-provider

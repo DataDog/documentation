@@ -88,14 +88,14 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ### Add flags to automatically uploaded reports
 
-`DD_CODE_COVERAGE_FLAGS` applies only to reports uploaded automatically by a Test Optimization library. See [Upload reports automatically with Test Optimization][4] for the libraries and versions that can upload reports.
-
-`DD_CODE_COVERAGE_FLAGS` is supported in the following library versions:
+[Automatic report uploads][4] are available in several Test Optimization libraries. Of those libraries, only the following stable versions support `DD_CODE_COVERAGE_FLAGS`:
 
 | Library | First version with `DD_CODE_COVERAGE_FLAGS` |
 |---|---|
 | JavaScript `dd-trace` 5.x | `5.116.0` |
 | JavaScript `dd-trace` 6.x | `6.5.0` |
+
+Stable releases of the Ruby, Python, and Java libraries do not support `DD_CODE_COVERAGE_FLAGS`. To add flags to reports from those libraries, upload the reports manually with `datadog-ci coverage upload --flags` instead.
 
 For a supported version, set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
 
@@ -106,6 +106,8 @@ export DD_CODE_COVERAGE_FLAGS=unit-tests,jvm-21
 This example attaches the same flags as `datadog-ci coverage upload --flags unit-tests --flags jvm-21`. The library splits the value on commas, removes whitespace around each flag, and ignores empty entries.
 
 ### Limitations
+
+The following limitations apply to both automatically uploaded reports and reports uploaded with `datadog-ci`:
 
 - Maximum of 32 flags per report. If a report is tagged with more than 32 flags, the first 32 are kept and the rest are ignored.
 - Maximum flag name length is 1000 characters. Flags longer than 1000 characters are ignored.
