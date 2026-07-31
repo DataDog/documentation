@@ -120,11 +120,12 @@ These version requirements apply only to automatic uploads by Test Optimization 
 
 You can apply the {{< ui >}}Code Coverage{{< /ui >}} setting at the organization, repository, or test service level.
 
-{{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings." style="width:100%" >}}
-
 1. Complete the [Test Optimization setup][17] for your library.
 2. Upgrade to a supported library version.
 3. Turn on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
+
+    {{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings." style="width:100%" >}}
+
 4. Run a test command that produces a coverage report from the source listed in [Supported libraries and versions](#supported-libraries-and-versions).
 
 The library uploads the report to Datadog after the command finishes.
