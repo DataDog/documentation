@@ -227,4 +227,4 @@ To customize your team, see [Team Management][3].
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
 [39]: https://docs.datadoghq.com/api/latest/teams/create-a-team-link/
-[40]: https://app.datadoghq.com/software?env=%2A&fromUser=true&refresh_mode=sliding&selectedComponent=team&start=1785444148521&end=1785447748521
+[39]: /api/latest/teams/create-a-team-link/
