@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, Azure, Google Cloud, Oracle Cloud, Datadog, Anthropic, and OpenAI and do not require any additional setup after CCM is set up.
+Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, Azure, Google Cloud, Oracle Cloud, Datadog, Anthropic, OpenAI, Cursor, and Amazon Bedrock and do not require any additional setup after CCM is set up.
 
 {{< img src="cloud_cost/anomalies/anomalies-overview.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:80;" >}}
 
@@ -33,6 +33,22 @@ To distinguish between true anomalies and expected fluctuations, Datadog's algor
 - Recognizes recurring cost spikes and dips, such as a cost increase every Monday, or a spike on the fourth day of every month
 - Focuses on engineering usage (excludes taxes, credits, refunds, and Reserved Instance fees)
 - Filters out low-impact anomalies to reduce noise
+
+## Customize anomaly detection
+
+By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
+
+To customize anomaly detection:
+
+1. On the [{{< ui >}}Anomalies{{< /ui >}} tab][1], click {{< ui >}}Configure{{< /ui >}}.
+1. In the {{< ui >}}Configure Cost Anomalies{{< /ui >}} panel, select a provider. A checkmark indicates that the provider uses custom settings, and an empty circle indicates that it uses Datadog's default settings.
+1. Adjust the following settings for the selected provider:
+   - **Detection dimension**: The dimension that Datadog detects cost anomalies on (for example, service or charge description). This setting is required.
+   - **Minimum daily cost**: The minimum daily cost a change must reach before it is flagged as an anomaly (at least 5, in your organization's currency). Increase this value to reduce noise from low-cost changes.
+   - **Breakdown tags**: Up to five additional tags used to break down detected anomalies, helping the [Cloud Cost skill in Bits Chat][5] identify what's driving each anomaly. A set of default tags is always included and cannot be removed.
+1. Click {{< ui >}}Save{{< /ui >}}. Changes apply to anomalies detected going forward.
+
+To return a provider to Datadog's default settings, select the provider, click {{< ui >}}Revert{{< /ui >}}, and then click {{< ui >}}Save{{< /ui >}}.
 
 ## View cost anomalies
 
@@ -87,7 +103,7 @@ As you investigate anomalies, you may find some that are not significant, were a
 To resolve an anomaly:
 
 1. Click {{< ui >}}Resolve Anomaly{{< /ui >}} to open the resolution popup.
-1. Select one of the following resolutions to help improve the algorithm:
+1. Select one of the following resolutions:
    - {{< ui >}}The anomaly amount was too small{{< /ui >}}
    - {{< ui >}}This is an unexpected increase{{< /ui >}}
    - {{< ui >}}This is an expected increase{{< /ui >}}
@@ -115,3 +131,4 @@ For more help, contact [Datadog Support][4].
 [2]: /dashboards/graph_insights/watchdog_explains
 [3]: /cloud_cost_management/setup/
 [4]: /help/
+[5]: /cloud_cost_management/cloud_cost_skill/

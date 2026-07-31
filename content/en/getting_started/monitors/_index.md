@@ -4,21 +4,24 @@ description: Create metric monitors with threshold alerts and custom notificatio
 aliases:
   - /getting_started/application/monitors
 further_reading:
-- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
-  tag: "Blog"
-  text: "Monitoring 101: Alerting on what matters"
-- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
-  tag: "Learning Center"
-  text: "Introduction to Observability"
 - link: "/monitors/types/metric/"
   tag: "Documentation"
   text: "Metric Monitors"
 - link: "/monitors/notify/"
   tag: "Documentation"
   text: "Monitor Notifications"
+- link: "https://learn.datadoghq.com/courses/introduction-to-observability"
+  tag: "Learning Center"
+  text: "Introduction to Observability"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session on creating effective monitors"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
+- link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
+  tag: "Blog"
+  text: "Monitoring 101: Alerting on what matters"
 ---
 
 ## Overview
@@ -158,7 +161,7 @@ You can view Monitor Saved Views from your mobile home screen or view and mute m
 [11]: /mobile/
 [12]: https://apps.apple.com/app/datadog/id1391380318
 [13]: https://play.google.com/store/apps/details?id=com.datadog.app
-[14]: /service_management/workflows/
+[14]: /actions/workflows/
 [15]: /incident_response/case_management/
 [16]: /account_management/teams/
 [17]: https://app.datadoghq.com/monitors/manage

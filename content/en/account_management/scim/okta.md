@@ -77,6 +77,8 @@ Datadog's SCIM role support follows the SCIM multi-valued attribute convention d
     - {{< ui >}}Data type{{< /ui >}}: **string**
     - {{< ui >}}Display name{{< /ui >}}: **Roles**
     - {{< ui >}}Variable name{{< /ui >}}: **roles**
+    - {{< ui >}}External name{{< /ui >}}: `roles.^[primary==true].value`
+    - {{< ui >}}External namespace{{< /ui >}}: `urn:ietf:params:scim:schemas:core:2.0:User`
     - For {{< ui >}}Enum{{< /ui >}}, select {{< ui >}}Define enumerated list of values{{< /ui >}} and add one entry per Datadog role, using the role name as the display name and the role UUID as the value. You can find a role's UUID in the role's URL on your [Organization Settings][9] page. Add any custom roles the same way.
 2. In your Datadog application's {{< ui >}}Provisioning{{< /ui >}} > {{< ui >}}To App{{< /ui >}} settings, map the Okta `roles` attribute to the Datadog `roles` attribute.
 3. In the app's {{< ui >}}Assignments{{< /ui >}} tab, assign each user the appropriate role from the dropdown.
@@ -106,7 +108,7 @@ To verify that the operation completed successfully, navigate to the [Teams list
 
 You can map an existing Datadog Team to an Okta group. Establishing a link from the Okta group to the Datadog Team causes the Datadog Team to be managed by Okta going forward.
 
-**Note:** In order to synchronize an existing Datadog Team with an Okta group, the two names must match exactly.
+**Note:** To synchronize an existing Datadog Team with an Okta group, the handle derived from the Okta group name must match the existing Datadog Team's handle exactly.
 
 1. In your Datadog application in Okta, navigate to the {{< ui >}}Push Groups{{< /ui >}} tab.
 1. Click the {{< ui >}}Push Groups{{< /ui >}} button. The pushed groups interface opens.

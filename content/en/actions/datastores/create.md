@@ -5,10 +5,10 @@ disable_toc: false
 aliases:
 - /actions/datastore/create
 further_reading:
-- link: "service_management/app_builder/build"
+- link: "actions/app_builder/build"
   tag: "Documentation"
   text: "Build Apps"
-- link: "service_management/workflows/build"
+- link: "actions/workflows/build"
   tag: "Documentation"
   text: "Build Workflows"
 - link: "https://www.datadoghq.com/blog/datadog-datastore/"
@@ -84,8 +84,7 @@ The {{< ui >}}Table Options{{< /ui >}} button allows you to:
 
 Datastores have the following limitations:
 
-- Your organization can have up to 50 datastores.
-- A datastore can contain up to 5,000 rows.
+- A datastore can contain up to 100,000 rows.
 - A primary key column of type `string` is required and must uniquely identify each row.
 - Each row can be up to 100 KB in size.
 - The primary-key value is immutable, it cannot be changed after the row is created.

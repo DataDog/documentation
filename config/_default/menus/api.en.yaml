@@ -83,6 +83,32 @@ menu:
           - ListAWSNamespaces
         unstable: []
         order: 1
+    - name: Preview AWS metric name filter
+      url: /api/latest/aws-integration/preview-aws-metric-name-filter/
+      identifier: aws-integration-preview-aws-metric-name-filter
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PreviewAWSMetricNameFilter
+        unstable:
+          - v2
+        order: 20
+    - name: Get AWS metric name filter preview
+      url: /api/latest/aws-integration/get-aws-metric-name-filter-preview/
+      identifier: aws-integration-get-aws-metric-name-filter-preview
+      parent: aws-integration
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetAWSMetricNameFilterPreview
+        unstable:
+          - v2
+        order: 19
     - name: Create AWS CCM config
       url: /api/latest/aws-integration/create-aws-ccm-config/
       identifier: aws-integration-create-aws-ccm-config
@@ -1800,7 +1826,8 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRulesForMetric
-        unstable: []
+        unstable:
+          - v2
         order: 23
     - name: Create a tag indexing rule exemption
       url: /api/latest/metrics/create-a-tag-indexing-rule-exemption/
@@ -1812,7 +1839,8 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 25
     - name: Get a tag indexing rule exemption
       url: /api/latest/metrics/get-a-tag-indexing-rule-exemption/
@@ -1824,7 +1852,8 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 24
     - name: Delete a tag indexing rule exemption
       url: /api/latest/metrics/delete-a-tag-indexing-rule-exemption/
@@ -1836,7 +1865,8 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRuleExemption
-        unstable: []
+        unstable:
+          - v2
         order: 26
     - name: Get tag key cardinality details
       url: /api/latest/metrics/get-tag-key-cardinality-details/
@@ -1908,7 +1938,8 @@ menu:
           - v2
         operationids:
           - UpdateTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 21
     - name: Get a tag indexing rule
       url: /api/latest/metrics/get-a-tag-indexing-rule/
@@ -1920,7 +1951,8 @@ menu:
           - v2
         operationids:
           - GetTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 20
     - name: Delete a tag indexing rule
       url: /api/latest/metrics/delete-a-tag-indexing-rule/
@@ -1932,7 +1964,8 @@ menu:
           - v2
         operationids:
           - DeleteTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 22
     - name: Reorder tag indexing rules
       url: /api/latest/metrics/reorder-tag-indexing-rules/
@@ -1944,7 +1977,8 @@ menu:
           - v2
         operationids:
           - ReorderTagIndexingRules
-        unstable: []
+        unstable:
+          - v2
         order: 19
     - name: Create a tag indexing rule
       url: /api/latest/metrics/create-a-tag-indexing-rule/
@@ -1956,7 +1990,8 @@ menu:
           - v2
         operationids:
           - CreateTagIndexingRule
-        unstable: []
+        unstable:
+          - v2
         order: 18
     - name: List tag indexing rules
       url: /api/latest/metrics/list-tag-indexing-rules/
@@ -1968,8 +2003,48 @@ menu:
           - v2
         operationids:
           - ListTagIndexingRules
-        unstable: []
+        unstable:
+          - v2
         order: 17
+    - name: Get a historical metrics configuration
+      url: /api/latest/metrics/get-a-historical-metrics-configuration/
+      identifier: metrics-get-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 28
+    - name: Delete a historical metrics configuration
+      url: /api/latest/metrics/delete-a-historical-metrics-configuration/
+      identifier: metrics-delete-a-historical-metrics-configuration
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 29
+    - name: Enable historical metrics ingestion
+      url: /api/latest/metrics/enable-historical-metrics-ingestion/
+      identifier: metrics-enable-historical-metrics-ingestion
+      parent: metrics
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateHistoricalMetricsConfiguration
+        unstable:
+          - v2
+        order: 27
     - name: Configure tags for multiple metrics
       url: /api/latest/metrics/configure-tags-for-multiple-metrics/
       identifier: metrics-configure-tags-for-multiple-metrics
@@ -3796,6 +3871,32 @@ menu:
           - SendSecurityMonitoringNotificationPreview
         unstable: []
         order: 130
+    - name: Deactivate an entity context sync integration
+      url: /api/latest/security-monitoring/deactivate-an-entity-context-sync-integration/
+      identifier: security-monitoring-deactivate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeactivateIntegration
+        unstable:
+          - v2
+        order: 156
+    - name: Activate an entity context sync integration
+      url: /api/latest/security-monitoring/activate-an-entity-context-sync-integration/
+      identifier: security-monitoring-activate-an-entity-context-sync-integration
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ActivateIntegration
+        unstable:
+          - v2
+        order: 155
     - name: Validate an entity context sync configuration
       url: /api/latest/security-monitoring/validate-an-entity-context-sync-configuration/
       identifier: security-monitoring-validate-an-entity-context-sync-configuration
@@ -3861,6 +3962,19 @@ menu:
         unstable:
           - v2
         order: 41
+    - name: Get Entra ID Azure App Registration prerequisites
+      url: /api/latest/security-monitoring/get-entra-id-azure-app-registration-prerequisites/
+      identifier: security-monitoring-get-entra-id-azure-app-registration-prerequisites
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetEntraIdAzureAppRegistrations
+        unstable:
+          - v2
+        order: 157
     - name: Create an entity context sync configuration
       url: /api/latest/security-monitoring/create-an-entity-context-sync-configuration/
       identifier: security-monitoring-create-an-entity-context-sync-configuration
@@ -4204,8 +4318,7 @@ menu:
           - v2
         operationids:
           - CreateServiceNowTickets
-        unstable:
-          - v2
+        unstable: []
         order: 22
     - name: Attach security findings to a ServiceNow ticket
       url: /api/latest/security-monitoring/attach-security-findings-to-a-servicenow-ticket/
@@ -4217,8 +4330,7 @@ menu:
           - v2
         operationids:
           - AttachServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 23
     - name: Search security findings
       url: /api/latest/security-monitoring/search-security-findings/
@@ -4244,6 +4356,30 @@ menu:
           - MuteSecurityFindings
         unstable: []
         order: 20
+    - name: Create Linear issues for security findings
+      url: /api/latest/security-monitoring/create-linear-issues-for-security-findings/
+      identifier: security-monitoring-create-linear-issues-for-security-findings
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLinearIssues
+        unstable: []
+        order: 153
+    - name: Attach security findings to a Linear issue
+      url: /api/latest/security-monitoring/attach-security-findings-to-a-linear-issue/
+      identifier: security-monitoring-attach-security-findings-to-a-linear-issue
+      parent: security-monitoring
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - AttachLinearIssue
+        unstable: []
+        order: 154
     - name: Create Jira issues for security findings
       url: /api/latest/security-monitoring/create-jira-issues-for-security-findings/
       identifier: security-monitoring-create-jira-issues-for-security-findings
@@ -6643,6 +6779,18 @@ menu:
       url: /api/latest/users/
       identifier: users
       generated: true
+    - name: Update identity provider overrides for a user
+      url: /api/latest/users/update-identity-provider-overrides-for-a-user/
+      identifier: users-update-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateUserIdentityProviders
+        unstable: []
+        order: 15
     - name: Get a user permissions
       url: /api/latest/users/get-a-user-permissions/
       identifier: users-get-a-user-permissions
@@ -6679,6 +6827,18 @@ menu:
           - DeleteUserInvitations
         unstable: []
         order: 11
+    - name: Get identity provider overrides for a user
+      url: /api/latest/users/get-identity-provider-overrides-for-a-user/
+      identifier: users-get-identity-provider-overrides-for-a-user
+      parent: users
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserIdentityProviders
+        unstable: []
+        order: 14
     - name: Get a user invitation
       url: /api/latest/users/get-a-user-invitation/
       identifier: users-get-a-user-invitation
@@ -8499,6 +8659,45 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: Count untagged findings by ownership confidence
+      url: /api/latest/csm-ownership/count-untagged-findings-by-ownership-confidence/
+      identifier: csm-ownership-count-untagged-findings-by-ownership-confidence
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipUntaggedFindings
+        unstable:
+          - v2
+        order: 9
+    - name: Update ownership settings for the org
+      url: /api/latest/csm-ownership/update-ownership-settings-for-the-org/
+      identifier: csm-ownership-update-ownership-settings-for-the-org
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PostOwnershipSettings
+        unstable:
+          - v2
+        order: 8
+    - name: Get ownership settings for the org
+      url: /api/latest/csm-ownership/get-ownership-settings-for-the-org/
+      identifier: csm-ownership-get-ownership-settings-for-the-org
+      parent: csm-ownership
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOwnershipSettings
+        unstable:
+          - v2
+        order: 7
     - name: CSM Settings
       url: /api/latest/csm-settings/
       identifier: csm-settings
@@ -8803,8 +9002,7 @@ menu:
           - v2
         operationids:
           - UpdateMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 40
     - name: Delete a maintenance window
       url: /api/latest/case-management/delete-a-maintenance-window/
@@ -8816,8 +9014,7 @@ menu:
           - v2
         operationids:
           - DeleteMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 41
     - name: Create a maintenance window
       url: /api/latest/case-management/create-a-maintenance-window/
@@ -8829,8 +9026,7 @@ menu:
           - v2
         operationids:
           - CreateMaintenanceWindow
-        unstable:
-          - v2
+        unstable: []
         order: 39
     - name: List maintenance windows
       url: /api/latest/case-management/list-maintenance-windows/
@@ -8842,8 +9038,7 @@ menu:
           - v2
         operationids:
           - ListMaintenanceWindows
-        unstable:
-          - v2
+        unstable: []
         order: 38
     - name: Watch a case
       url: /api/latest/case-management/watch-a-case/
@@ -8855,8 +9050,7 @@ menu:
           - v2
         operationids:
           - WatchCase
-        unstable:
-          - v2
+        unstable: []
         order: 65
     - name: Unwatch a case
       url: /api/latest/case-management/unwatch-a-case/
@@ -8868,8 +9062,7 @@ menu:
           - v2
         operationids:
           - UnwatchCase
-        unstable:
-          - v2
+        unstable: []
         order: 66
     - name: List case watchers
       url: /api/latest/case-management/list-case-watchers/
@@ -8881,8 +9074,7 @@ menu:
           - v2
         operationids:
           - ListCaseWatchers
-        unstable:
-          - v2
+        unstable: []
         order: 64
     - name: Unassign case
       url: /api/latest/case-management/unassign-case/
@@ -8930,8 +9122,7 @@ menu:
           - v2
         operationids:
           - ListCaseTimeline
-        unstable:
-          - v2
+        unstable: []
         order: 58
     - name: Update case status
       url: /api/latest/case-management/update-case-status/
@@ -8955,8 +9146,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseResolvedReason
-        unstable:
-          - v2
+        unstable: []
         order: 26
     - name: Create ServiceNow ticket for case
       url: /api/latest/case-management/create-servicenow-ticket-for-case/
@@ -8968,8 +9158,7 @@ menu:
           - v2
         operationids:
           - CreateCaseServiceNowTicket
-        unstable:
-          - v2
+        unstable: []
         order: 56
     - name: Update case project
       url: /api/latest/case-management/update-case-project/
@@ -8981,8 +9170,7 @@ menu:
           - v2
         operationids:
           - MoveCaseToProject
-        unstable:
-          - v2
+        unstable: []
         order: 51
     - name: Create investigation notebook for case
       url: /api/latest/case-management/create-investigation-notebook-for-case/
@@ -8994,8 +9182,7 @@ menu:
           - v2
         operationids:
           - CreateCaseNotebook
-        unstable:
-          - v2
+        unstable: []
         order: 57
     - name: Create Jira issue for case
       url: /api/latest/case-management/create-jira-issue-for-case/
@@ -9007,8 +9194,7 @@ menu:
           - v2
         operationids:
           - CreateCaseJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 53
     - name: Link existing Jira issue to case
       url: /api/latest/case-management/link-existing-jira-issue-to-case/
@@ -9020,8 +9206,7 @@ menu:
           - v2
         operationids:
           - LinkJiraIssueToCase
-        unstable:
-          - v2
+        unstable: []
         order: 54
     - name: Remove Jira issue link from case
       url: /api/latest/case-management/remove-jira-issue-link-from-case/
@@ -9033,8 +9218,7 @@ menu:
           - v2
         operationids:
           - UnlinkJiraIssue
-        unstable:
-          - v2
+        unstable: []
         order: 55
     - name: Link incident to case
       url: /api/latest/case-management/link-incident-to-case/
@@ -9046,8 +9230,7 @@ menu:
           - v2
         operationids:
           - LinkIncident
-        unstable:
-          - v2
+        unstable: []
         order: 52
     - name: Update case priority
       url: /api/latest/case-management/update-case-priority/
@@ -9071,8 +9254,7 @@ menu:
           - v2
         operationids:
           - AddCaseInsights
-        unstable:
-          - v2
+        unstable: []
         order: 33
     - name: Remove insights from a case
       url: /api/latest/case-management/remove-insights-from-a-case/
@@ -9084,8 +9266,7 @@ menu:
           - v2
         operationids:
           - RemoveCaseInsights
-        unstable:
-          - v2
+        unstable: []
         order: 34
     - name: Update case due date
       url: /api/latest/case-management/update-case-due-date/
@@ -9097,8 +9278,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseDueDate
-        unstable:
-          - v2
+        unstable: []
         order: 25
     - name: Update case description
       url: /api/latest/case-management/update-case-description/
@@ -9146,8 +9326,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseComment
-        unstable:
-          - v2
+        unstable: []
         order: 21
     - name: Delete case comment
       url: /api/latest/case-management/delete-case-comment/
@@ -9231,8 +9410,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 62
     - name: Get a case view
       url: /api/latest/case-management/get-a-case-view/
@@ -9244,8 +9422,7 @@ menu:
           - v2
         operationids:
           - GetCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 61
     - name: Delete a case view
       url: /api/latest/case-management/delete-a-case-view/
@@ -9257,8 +9434,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 63
     - name: Create a case view
       url: /api/latest/case-management/create-a-case-view/
@@ -9270,8 +9446,7 @@ menu:
           - v2
         operationids:
           - CreateCaseView
-        unstable:
-          - v2
+        unstable: []
         order: 60
     - name: List case views
       url: /api/latest/case-management/list-case-views/
@@ -9283,8 +9458,7 @@ menu:
           - v2
         operationids:
           - ListCaseViews
-        unstable:
-          - v2
+        unstable: []
         order: 59
     - name: Enable an automation rule
       url: /api/latest/case-management/enable-an-automation-rule/
@@ -9296,8 +9470,7 @@ menu:
           - v2
         operationids:
           - EnableCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 6
     - name: Disable an automation rule
       url: /api/latest/case-management/disable-an-automation-rule/
@@ -9309,8 +9482,7 @@ menu:
           - v2
         operationids:
           - DisableCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 7
     - name: Update an automation rule
       url: /api/latest/case-management/update-an-automation-rule/
@@ -9322,8 +9494,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Get an automation rule
       url: /api/latest/case-management/get-an-automation-rule/
@@ -9335,8 +9506,7 @@ menu:
           - v2
         operationids:
           - GetCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 3
     - name: Delete an automation rule
       url: /api/latest/case-management/delete-an-automation-rule/
@@ -9348,8 +9518,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Create an automation rule
       url: /api/latest/case-management/create-an-automation-rule/
@@ -9361,8 +9530,7 @@ menu:
           - v2
         operationids:
           - CreateCaseAutomationRule
-        unstable:
-          - v2
+        unstable: []
         order: 2
     - name: List automation rules
       url: /api/latest/case-management/list-automation-rules/
@@ -9374,8 +9542,7 @@ menu:
           - v2
         operationids:
           - ListCaseAutomationRules
-        unstable:
-          - v2
+        unstable: []
         order: 1
     - name: Update a notification rule
       url: /api/latest/case-management/update-a-notification-rule/
@@ -9435,8 +9602,7 @@ menu:
           - v2
         operationids:
           - FavoriteCaseProject
-        unstable:
-          - v2
+        unstable: []
         order: 31
     - name: Unfavorite a project
       url: /api/latest/case-management/unfavorite-a-project/
@@ -9448,8 +9614,7 @@ menu:
           - v2
         operationids:
           - UnfavoriteCaseProject
-        unstable:
-          - v2
+        unstable: []
         order: 32
     - name: Update a project
       url: /api/latest/case-management/update-a-project/
@@ -9497,8 +9662,7 @@ menu:
           - v2
         operationids:
           - ListUserCaseProjectFavorites
-        unstable:
-          - v2
+        unstable: []
         order: 30
     - name: Create a project
       url: /api/latest/case-management/create-a-project/
@@ -9534,8 +9698,7 @@ menu:
           - v2
         operationids:
           - DeleteCaseLink
-        unstable:
-          - v2
+        unstable: []
         order: 37
     - name: Create a case link
       url: /api/latest/case-management/create-a-case-link/
@@ -9547,8 +9710,7 @@ menu:
           - v2
         operationids:
           - CreateCaseLink
-        unstable:
-          - v2
+        unstable: []
         order: 36
     - name: List case links
       url: /api/latest/case-management/list-case-links/
@@ -9560,8 +9722,7 @@ menu:
           - v2
         operationids:
           - ListCaseLinks
-        unstable:
-          - v2
+        unstable: []
         order: 35
     - name: Count cases
       url: /api/latest/case-management/count-cases/
@@ -9573,8 +9734,7 @@ menu:
           - v2
         operationids:
           - CountCases
-        unstable:
-          - v2
+        unstable: []
         order: 28
     - name: Bulk update cases
       url: /api/latest/case-management/bulk-update-cases/
@@ -9586,8 +9746,7 @@ menu:
           - v2
         operationids:
           - BulkUpdateCases
-        unstable:
-          - v2
+        unstable: []
         order: 29
     - name: Aggregate cases
       url: /api/latest/case-management/aggregate-cases/
@@ -9599,8 +9758,7 @@ menu:
           - v2
         operationids:
           - AggregateCases
-        unstable:
-          - v2
+        unstable: []
         order: 27
     - name: Create a case
       url: /api/latest/case-management/create-a-case/
@@ -9640,8 +9798,7 @@ menu:
           - v2
         operationids:
           - UpdateCustomAttributeConfig
-        unstable:
-          - v2
+        unstable: []
         order: 5
     - name: Delete custom attributes config
       url: /api/latest/case-management-attribute/delete-custom-attributes-config/
@@ -9705,8 +9862,7 @@ menu:
           - v2
         operationids:
           - UpdateCaseType
-        unstable:
-          - v2
+        unstable: []
         order: 4
     - name: Delete a case type
       url: /api/latest/case-management-type/delete-a-case-type/
@@ -10405,6 +10561,18 @@ menu:
           - ListBudgets
         unstable: []
         order: 33
+    - name: Get a budget's custom forecast
+      url: /api/latest/cloud-cost-management/get-a-budgets-custom-forecast/
+      identifier: cloud-cost-management-get-a-budgets-custom-forecast
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCustomForecast
+        unstable: []
+        order: 69
     - name: Delete a budget's custom forecast
       url: /api/latest/cloud-cost-management/delete-a-budgets-custom-forecast/
       identifier: cloud-cost-management-delete-a-budgets-custom-forecast
@@ -10415,8 +10583,7 @@ menu:
           - v2
         operationids:
           - DeleteCustomForecast
-        unstable:
-          - v2
+        unstable: []
         order: 68
     - name: Get budget
       url: /api/latest/cloud-cost-management/get-budget/
@@ -10464,8 +10631,7 @@ menu:
           - v2
         operationids:
           - UpsertCustomForecast
-        unstable:
-          - v2
+        unstable: []
         order: 67
     - name: Validate CSV budget
       url: /api/latest/cloud-cost-management/validate-csv-budget/
@@ -10721,6 +10887,30 @@ menu:
         unstable:
           - v2
         order: 43
+    - name: Update account filters
+      url: /api/latest/cloud-cost-management/update-account-filters/
+      identifier: cloud-cost-management-update-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCostAccountFilters
+        unstable: []
+        order: 71
+    - name: Get account filters
+      url: /api/latest/cloud-cost-management/get-account-filters/
+      identifier: cloud-cost-management-get-account-filters
+      parent: cloud-cost-management
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetCostAccountFilters
+        unstable: []
+        order: 70
     - name: Cloud Network Monitoring
       url: /api/latest/cloud-network-monitoring/
       identifier: cloud-network-monitoring
@@ -11032,6 +11222,34 @@ menu:
           - DisableCustomerOrg
         unstable:
           - v2
+        order: 1
+    - name: DDSQL
+      url: /api/latest/ddsql/
+      identifier: ddsql
+      generated: true
+    - name: Fetch the result of a DDSQL query
+      url: /api/latest/ddsql/fetch-the-result-of-a-ddsql-query/
+      identifier: ddsql-fetch-the-result-of-a-ddsql-query
+      parent: ddsql
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - FetchDdsqlTabularQuery
+        unstable: []
+        order: 2
+    - name: Execute a tabular DDSQL query
+      url: /api/latest/ddsql/execute-a-tabular-ddsql-query/
+      identifier: ddsql-execute-a-tabular-ddsql-query
+      parent: ddsql
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ExecuteDdsqlTabularQuery
+        unstable: []
         order: 1
     - name: DORA Metrics
       url: /api/latest/dora-metrics/
@@ -12706,10 +12924,167 @@ menu:
           - GetIPAllowlist
         unstable: []
         order: 1
+    - name: Identity Providers
+      url: /api/latest/identity-providers/
+      identifier: identity-providers
+      generated: true
+    - name: List users with an identity provider override
+      url: /api/latest/identity-providers/list-users-with-an-identity-provider-override/
+      identifier: identity-providers-list-users-with-an-identity-provider-override
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviderUsers
+        unstable: []
+        order: 1
+    - name: Update an identity provider
+      url: /api/latest/identity-providers/update-an-identity-provider/
+      identifier: identity-providers-update-an-identity-provider
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIdentityProvider
+        unstable: []
+        order: 2
+    - name: List identity providers
+      url: /api/latest/identity-providers/list-identity-providers/
+      identifier: identity-providers-list-identity-providers
+      parent: identity-providers
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIdentityProviders
+        unstable: []
+        order: 3
     - name: Incidents
       url: /api/latest/incidents/
       identifier: incidents
       generated: true
+    - name: Update an incident timestamp override
+      url: /api/latest/incidents/update-an-incident-timestamp-override/
+      identifier: incidents-update-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTimestampOverride
+        unstable:
+          - v2
+        order: 85
+    - name: Delete an incident timestamp override
+      url: /api/latest/incidents/delete-an-incident-timestamp-override/
+      identifier: incidents-delete-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTimestampOverride
+        unstable:
+          - v2
+        order: 86
+    - name: Create an incident timestamp override
+      url: /api/latest/incidents/create-an-incident-timestamp-override/
+      identifier: incidents-create-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTimestampOverride
+        unstable:
+          - v2
+        order: 84
+    - name: List incident timestamp overrides
+      url: /api/latest/incidents/list-incident-timestamp-overrides/
+      identifier: incidents-list-incident-timestamp-overrides
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTimestampOverrides
+        unstable:
+          - v2
+        order: 83
+    - name: Create an incident ServiceNow record
+      url: /api/latest/incidents/create-an-incident-servicenow-record/
+      identifier: incidents-create-an-incident-servicenow-record
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentServiceNowRecord
+        unstable:
+          - v2
+        order: 89
+    - name: Get an incident responder
+      url: /api/latest/incidents/get-an-incident-responder/
+      identifier: incidents-get-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentResponder
+        unstable:
+          - v2
+        order: 81
+    - name: Delete an incident responder
+      url: /api/latest/incidents/delete-an-incident-responder/
+      identifier: incidents-delete-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentResponder
+        unstable:
+          - v2
+        order: 82
+    - name: Create an incident responder
+      url: /api/latest/incidents/create-an-incident-responder/
+      identifier: incidents-create-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentResponder
+        unstable:
+          - v2
+        order: 79
+    - name: List incident responders
+      url: /api/latest/incidents/list-incident-responders/
+      identifier: incidents-list-incident-responders
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentResponders
+        unstable:
+          - v2
+        order: 80
     - name: Update an incident todo
       url: /api/latest/incidents/update-an-incident-todo/
       identifier: incidents-update-an-incident-todo
@@ -12840,6 +13215,45 @@ menu:
         unstable:
           - v2
         order: 51
+    - name: Link a page to an incident
+      url: /api/latest/incidents/link-a-page-to-an-incident/
+      identifier: incidents-link-a-page-to-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkPageToIncident
+        unstable:
+          - v2
+        order: 92
+    - name: Create an on-call page from an incident
+      url: /api/latest/incidents/create-an-on-call-page-from-an-incident/
+      identifier: incidents-create-an-on-call-page-from-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageFromIncident
+        unstable:
+          - v2
+        order: 78
+    - name: Update an incident impact
+      url: /api/latest/incidents/update-an-incident-impact/
+      identifier: incidents-update-an-incident-impact
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchIncidentImpact
+        unstable:
+          - v2
+        order: 77
     - name: Delete an incident impact
       url: /api/latest/incidents/delete-an-incident-impact/
       identifier: incidents-delete-an-incident-impact
@@ -12876,6 +13290,45 @@ menu:
           - ListIncidentImpacts
         unstable: []
         order: 7
+    - name: Create an incident configuration
+      url: /api/latest/incidents/create-an-incident-configuration/
+      identifier: incidents-create-an-incident-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentConfiguration
+        unstable:
+          - v2
+        order: 87
+    - name: Update an incident configuration
+      url: /api/latest/incidents/update-an-incident-configuration/
+      identifier: incidents-update-an-incident-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentConfiguration
+        unstable:
+          - v2
+        order: 88
+    - name: Create a page from an incident
+      url: /api/latest/incidents/create-a-page-from-an-incident/
+      identifier: incidents-create-a-page-from-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePageFromIncident
+        unstable:
+          - v2
+        order: 90
     - name: Update incident attachment
       url: /api/latest/incidents/update-incident-attachment/
       identifier: incidents-update-incident-attachment
@@ -12941,6 +13394,19 @@ menu:
         unstable:
           - v2
         order: 34
+    - name: Get an AI-generated incident postmortem
+      url: /api/latest/incidents/get-an-ai-generated-incident-postmortem/
+      identifier: incidents-get-an-ai-generated-incident-postmortem
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentAIPostmortem
+        unstable:
+          - v2
+        order: 91
     - name: Update an existing incident
       url: /api/latest/incidents/update-an-existing-incident/
       identifier: incidents-update-an-existing-incident
@@ -13006,6 +13472,71 @@ menu:
         unstable:
           - v2
         order: 49
+    - name: Update an incident user-defined role
+      url: /api/latest/incidents/update-an-incident-user-defined-role/
+      identifier: incidents-update-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 60
+    - name: Get an incident user-defined role
+      url: /api/latest/incidents/get-an-incident-user-defined-role/
+      identifier: incidents-get-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 59
+    - name: Delete an incident user-defined role
+      url: /api/latest/incidents/delete-an-incident-user-defined-role/
+      identifier: incidents-delete-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 61
+    - name: Create an incident user-defined role
+      url: /api/latest/incidents/create-an-incident-user-defined-role/
+      identifier: incidents-create-an-incident-user-defined-role
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentUserDefinedRole
+        unstable:
+          - v2
+        order: 58
+    - name: List incident user-defined roles
+      url: /api/latest/incidents/list-incident-user-defined-roles/
+      identifier: incidents-list-incident-user-defined-roles
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentUserDefinedRoles
+        unstable:
+          - v2
+        order: 57
     - name: Update an incident user-defined field
       url: /api/latest/incidents/update-an-incident-user-defined-field/
       identifier: incidents-update-an-incident-user-defined-field
@@ -13071,6 +13602,19 @@ menu:
         unstable:
           - v2
         order: 52
+    - name: Get org settings by incident type
+      url: /api/latest/incidents/get-org-settings-by-incident-type/
+      identifier: incidents-get-org-settings-by-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgSettingsByIncidentType
+        unstable:
+          - v2
+        order: 76
     - name: Update an incident type
       url: /api/latest/incidents/update-an-incident-type/
       identifier: incidents-update-an-incident-type
@@ -13110,6 +13654,19 @@ menu:
         unstable:
           - v2
         order: 23
+    - name: List incident type org settings
+      url: /api/latest/incidents/list-incident-type-org-settings/
+      identifier: incidents-list-incident-type-org-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgSettings
+        unstable:
+          - v2
+        order: 75
     - name: Create an incident type
       url: /api/latest/incidents/create-an-incident-type/
       identifier: incidents-create-an-incident-type
@@ -13136,6 +13693,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update an incident rule
+      url: /api/latest/incidents/update-an-incident-rule/
+      identifier: incidents-update-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentRule
+        unstable:
+          - v2
+        order: 69
+    - name: Get an incident rule
+      url: /api/latest/incidents/get-an-incident-rule/
+      identifier: incidents-get-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentRule
+        unstable:
+          - v2
+        order: 68
+    - name: Delete an incident rule
+      url: /api/latest/incidents/delete-an-incident-rule/
+      identifier: incidents-delete-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentRule
+        unstable:
+          - v2
+        order: 70
+    - name: Create an incident rule
+      url: /api/latest/incidents/create-an-incident-rule/
+      identifier: incidents-create-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentRule
+        unstable:
+          - v2
+        order: 67
+    - name: List incident rules
+      url: /api/latest/incidents/list-incident-rules/
+      identifier: incidents-list-incident-rules
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentRules
+        unstable:
+          - v2
+        order: 66
     - name: Update postmortem template
       url: /api/latest/incidents/update-postmortem-template/
       identifier: incidents-update-postmortem-template
@@ -13331,6 +13953,110 @@ menu:
         unstable:
           - v2
         order: 29
+    - name: Update an incident impact field
+      url: /api/latest/incidents/update-an-incident-impact-field/
+      identifier: incidents-update-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentImpactField
+        unstable:
+          - v2
+        order: 73
+    - name: Delete an incident impact field
+      url: /api/latest/incidents/delete-an-incident-impact-field/
+      identifier: incidents-delete-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentImpactField
+        unstable:
+          - v2
+        order: 74
+    - name: Create an incident impact field
+      url: /api/latest/incidents/create-an-incident-impact-field/
+      identifier: incidents-create-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentImpactField
+        unstable:
+          - v2
+        order: 71
+    - name: List incident impact fields
+      url: /api/latest/incidents/list-incident-impact-fields/
+      identifier: incidents-list-incident-impact-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentImpactFields
+        unstable:
+          - v2
+        order: 72
+    - name: Update an incident Google Meet configuration
+      url: /api/latest/incidents/update-an-incident-google-meet-configuration/
+      identifier: incidents-update-an-incident-google-meet-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentGoogleMeetConfiguration
+        unstable:
+          - v2
+        order: 65
+    - name: Create an incident Google Meet configuration
+      url: /api/latest/incidents/create-an-incident-google-meet-configuration/
+      identifier: incidents-create-an-incident-google-meet-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentGoogleMeetConfiguration
+        unstable:
+          - v2
+        order: 64
+    - name: Update an incident Google Chat configuration
+      url: /api/latest/incidents/update-an-incident-google-chat-configuration/
+      identifier: incidents-update-an-incident-google-chat-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentGoogleChatConfiguration
+        unstable:
+          - v2
+        order: 63
+    - name: Create an incident Google Chat configuration
+      url: /api/latest/incidents/create-an-incident-google-chat-configuration/
+      identifier: incidents-create-an-incident-google-chat-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentGoogleChatConfiguration
+        unstable:
+          - v2
+        order: 62
     - name: Update global incident settings
       url: /api/latest/incidents/update-global-incident-settings/
       identifier: incidents-update-global-incident-settings
@@ -13953,6 +14679,123 @@ menu:
         unstable:
           - v2
         order: 34
+    - name: Update a specific LLM Observability prompt version
+      url: /api/latest/llm-observability/update-a-specific-llm-observability-prompt-version/
+      identifier: llm-observability-update-a-specific-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 72
+    - name: Get a specific LLM Observability prompt version
+      url: /api/latest/llm-observability/get-a-specific-llm-observability-prompt-version/
+      identifier: llm-observability-get-a-specific-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 71
+    - name: Create a new LLM Observability prompt version
+      url: /api/latest/llm-observability/create-a-new-llm-observability-prompt-version/
+      identifier: llm-observability-create-a-new-llm-observability-prompt-version
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPromptVersion
+        unstable:
+          - v2
+        order: 70
+    - name: List versions of an LLM Observability prompt
+      url: /api/latest/llm-observability/list-versions-of-an-llm-observability-prompt/
+      identifier: llm-observability-list-versions-of-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPromptVersions
+        unstable:
+          - v2
+        order: 69
+    - name: Update an LLM Observability prompt
+      url: /api/latest/llm-observability/update-an-llm-observability-prompt/
+      identifier: llm-observability-update-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateLLMObsPrompt
+        unstable:
+          - v2
+        order: 67
+    - name: Get an LLM Observability prompt
+      url: /api/latest/llm-observability/get-an-llm-observability-prompt/
+      identifier: llm-observability-get-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetLLMObsPrompt
+        unstable:
+          - v2
+        order: 66
+    - name: Delete an LLM Observability prompt
+      url: /api/latest/llm-observability/delete-an-llm-observability-prompt/
+      identifier: llm-observability-delete-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteLLMObsPrompt
+        unstable:
+          - v2
+        order: 68
+    - name: Create an LLM Observability prompt
+      url: /api/latest/llm-observability/create-an-llm-observability-prompt/
+      identifier: llm-observability-create-an-llm-observability-prompt
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateLLMObsPrompt
+        unstable:
+          - v2
+        order: 65
+    - name: List LLM Observability prompts
+      url: /api/latest/llm-observability/list-llm-observability-prompts/
+      identifier: llm-observability-list-llm-observability-prompts
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsPrompts
+        unstable:
+          - v2
+        order: 64
     - name: Update an LLM Observability project
       url: /api/latest/llm-observability/update-an-llm-observability-project/
       identifier: llm-observability-update-an-llm-observability-project
@@ -14369,6 +15212,19 @@ menu:
         unstable:
           - v2
         order: 27
+    - name: List custom evaluator configurations
+      url: /api/latest/llm-observability/list-custom-evaluator-configurations/
+      identifier: llm-observability-list-custom-evaluator-configurations
+      parent: llm-observability
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListLLMObsCustomEvalConfigs
+        unstable:
+          - v2
+        order: 73
     - name: Logs Archives
       url: /api/latest/logs-archives/
       identifier: logs-archives
@@ -15668,6 +16524,18 @@ menu:
           - GetTeamOnCallUsers
         unstable: []
         order: 12
+    - name: Get on-call responders for a schedule
+      url: /api/latest/on-call/get-on-call-responders-for-a-schedule/
+      identifier: on-call-get-on-call-responders-for-a-schedule
+      parent: on-call
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetScheduleOnCallResponders
+        unstable: []
+        order: 22
     - name: Get scheduled on-call user
       url: /api/latest/on-call/get-scheduled-on-call-user/
       identifier: on-call-get-scheduled-on-call-user
@@ -15940,6 +16808,94 @@ menu:
           - ListOpsgenieAccounts
         unstable: []
         order: 6
+    - name: Org Authorized Clients
+      url: /api/latest/org-authorized-clients/
+      identifier: org-authorized-clients
+      generated: true
+    - name: Delete a user authorization for a client
+      url: /api/latest/org-authorized-clients/delete-a-user-authorization-for-a-client/
+      identifier: org-authorized-clients-delete-a-user-authorization-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientUserAuthorization
+        unstable: []
+        order: 2
+    - name: List user authorizations for a client
+      url: /api/latest/org-authorized-clients/list-user-authorizations-for-a-client/
+      identifier: org-authorized-clients-list-user-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClientUserAuthorizations
+        unstable: []
+        order: 3
+    - name: Delete a user's authorizations for a client
+      url: /api/latest/org-authorized-clients/delete-a-users-authorizations-for-a-client/
+      identifier: org-authorized-clients-delete-a-users-authorizations-for-a-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClientAllUserAuthorizations
+        unstable: []
+        order: 1
+    - name: Update an org authorized client
+      url: /api/latest/org-authorized-clients/update-an-org-authorized-client/
+      identifier: org-authorized-clients-update-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateOrgAuthorizedClient
+        unstable: []
+        order: 5
+    - name: Get an org authorized client
+      url: /api/latest/org-authorized-clients/get-an-org-authorized-client/
+      identifier: org-authorized-clients-get-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgAuthorizedClient
+        unstable: []
+        order: 6
+    - name: Delete an org authorized client
+      url: /api/latest/org-authorized-clients/delete-an-org-authorized-client/
+      identifier: org-authorized-clients-delete-an-org-authorized-client
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteOrgAuthorizedClient
+        unstable: []
+        order: 4
+    - name: List org authorized clients
+      url: /api/latest/org-authorized-clients/list-org-authorized-clients/
+      identifier: org-authorized-clients-list-org-authorized-clients
+      parent: org-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgAuthorizedClients
+        unstable: []
+        order: 7
     - name: Org Connections
       url: /api/latest/org-connections/
       identifier: org-connections
@@ -16061,6 +17017,19 @@ menu:
         unstable:
           - v2
         order: 1
+    - name: List org group policy suggestions
+      url: /api/latest/org-groups/list-org-group-policy-suggestions/
+      identifier: org-groups-list-org-group-policy-suggestions
+      parent: org-groups
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgGroupPolicySuggestions
+        unstable:
+          - v2
+        order: 21
     - name: Update an org group policy override
       url: /api/latest/org-groups/update-an-org-group-policy-override/
       identifier: org-groups-update-an-org-group-policy-override
@@ -16554,6 +17523,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Config
+      url: /api/latest/rum-config/
+      identifier: rum-config
+      generated: true
+    - name: Create the RUM configuration
+      url: /api/latest/rum-config/create-the-rum-configuration/
+      identifier: rum-config-create-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Update the RUM configuration
+      url: /api/latest/rum-config/update-the-rum-configuration/
+      identifier: rum-config-update-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get the RUM configuration
+      url: /api/latest/rum-config/get-the-rum-configuration/
+      identifier: rum-config-get-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumConfig
+        unstable:
+          - v2
+        order: 1
     - name: RUM Insights
       url: /api/latest/rum-insights/
       identifier: rum-insights
@@ -16594,6 +17606,139 @@ menu:
           - v2
         operationids:
           - QueryAggregatedLongTasks
+        unstable:
+          - v2
+        order: 2
+    - name: RUM Operations
+      url: /api/latest/rum-operations/
+      identifier: rum-operations
+      generated: true
+    - name: Update a RUM operation
+      url: /api/latest/rum-operations/update-a-rum-operation/
+      identifier: rum-operations-update-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperation
+        unstable:
+          - v2
+        order: 4
+    - name: Get a RUM operation
+      url: /api/latest/rum-operations/get-a-rum-operation/
+      identifier: rum-operations-get-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperation
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a RUM operation
+      url: /api/latest/rum-operations/delete-a-rum-operation/
+      identifier: rum-operations-delete-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperation
+        unstable:
+          - v2
+        order: 5
+    - name: Update a RUM operation strong link
+      url: /api/latest/rum-operations/update-a-rum-operation-strong-link/
+      identifier: rum-operations-update-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a RUM operation strong link
+      url: /api/latest/rum-operations/delete-a-rum-operation-strong-link/
+      identifier: rum-operations-delete-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 9
+    - name: Create a RUM operation strong link
+      url: /api/latest/rum-operations/create-a-rum-operation-strong-link/
+      identifier: rum-operations-create-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 8
+    - name: List RUM operation strong links
+      url: /api/latest/rum-operations/list-rum-operation-strong-links/
+      identifier: rum-operations-list-rum-operation-strong-links
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperationStrongLinks
+        unstable: []
+        order: 7
+    - name: Search RUM operations
+      url: /api/latest/rum-operations/search-rum-operations/
+      identifier: rum-operations-search-rum-operations
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperations
+        unstable:
+          - v2
+        order: 1
+    - name: Get a RUM operation by name
+      url: /api/latest/rum-operations/get-a-rum-operation-by-name/
+      identifier: rum-operations-get-a-rum-operation-by-name
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperationByName
+        unstable:
+          - v2
+        order: 6
+    - name: Create a RUM operation
+      url: /api/latest/rum-operations/create-a-rum-operation/
+      identifier: rum-operations-create-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperation
         unstable:
           - v2
         order: 2
@@ -16850,6 +17995,47 @@ menu:
           - v2
         operationids:
           - CreateReportSchedule
+        unstable:
+          - v2
+        order: 1
+    - name: Print a report
+      url: /api/latest/report-schedules/print-a-report/
+      identifier: report-schedules-print-a-report
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PrintReport
+        unstable: []
+        order: 9
+    - name: List dataset report schedules
+      url: /api/latest/report-schedules/list-dataset-report-schedules/
+      identifier: report-schedules-list-dataset-report-schedules
+      parent: report-schedules
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDatasetReportSchedules
+        unstable: []
+        order: 8
+    - name: Reporting And Sharing
+      url: /api/latest/reporting-and-sharing/
+      identifier: reporting-and-sharing
+      generated: true
+    - name: Create a graph snapshot
+      url: /api/latest/reporting-and-sharing/create-a-graph-snapshot/
+      identifier: reporting-and-sharing-create-a-graph-snapshot
+      parent: reporting-and-sharing
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSnapshot
         unstable:
           - v2
         order: 1
@@ -20235,6 +21421,58 @@ menu:
           - UpdateFlakyTestsManagementPolicies
         unstable: []
         order: 7
+    - name: User Authorized Clients
+      url: /api/latest/user-authorized-clients/
+      identifier: user-authorized-clients
+      generated: true
+    - name: Get a user authorized client
+      url: /api/latest/user-authorized-clients/get-a-user-authorized-client/
+      identifier: user-authorized-clients-get-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetUserAuthorizedClient
+        unstable: []
+        order: 3
+    - name: Delete a user authorized client
+      url: /api/latest/user-authorized-clients/delete-a-user-authorized-client/
+      identifier: user-authorized-clients-delete-a-user-authorized-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClient
+        unstable: []
+        order: 2
+    - name: Delete all user authorized clients for a client
+      url: /api/latest/user-authorized-clients/delete-all-user-authorized-clients-for-a-client/
+      identifier: user-authorized-clients-delete-all-user-authorized-clients-for-a-client
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteUserAuthorizedClientsByClient
+        unstable: []
+        order: 1
+    - name: List user authorized clients
+      url: /api/latest/user-authorized-clients/list-user-authorized-clients/
+      identifier: user-authorized-clients-list-user-authorized-clients
+      parent: user-authorized-clients
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListUserAuthorizedClients
+        unstable: []
+        order: 4
     - name: Widgets
       url: /api/latest/widgets/
       identifier: widgets

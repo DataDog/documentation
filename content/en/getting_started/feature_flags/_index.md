@@ -45,6 +45,7 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/feature_flags/client/android/" src="integrations_logos/android_tv_large.svg" alt="Android TV" >}}
   {{< image-card href="/feature_flags/client/angular/" src="integrations_logos/angular_large.svg" alt="Angular" >}}
+  {{< image-card href="/feature_flags/client/flutter/" src="integrations_logos/flutter_large.svg" alt="Dart and Flutter" >}}
   {{< image-card href="/feature_flags/client/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
   {{< image-card href="/feature_flags/client/javascript/" src="integrations_logos/javascript_large.svg" alt="JavaScript" >}}
   {{< image-card href="/feature_flags/client/react/" src="integrations_logos/react_large.svg" alt="React" >}}
@@ -154,10 +155,10 @@ Add the OpenFeature SDK and Datadog OpenFeature provider dependencies:
 {{< code-block lang="groovy" filename="build.gradle" >}}
 dependencies {
     // OpenFeature SDK for flag evaluation
-    implementation 'dev.openfeature:sdk:1.18.2'
+    implementation 'dev.openfeature:sdk:1.20.1'
 
     // Datadog OpenFeature Provider
-    implementation 'com.datadoghq:dd-openfeature:1.57.0'
+    implementation 'com.datadoghq:dd-openfeature:1.63.0'
 }
 {{< /code-block >}}
 
@@ -168,11 +169,10 @@ Enable the provider and start your application with the Java tracer:
 # The EXPERIMENTAL_ prefix is historical; the provider is no longer experimental.
 export DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true
 
-# Optional: Enable flag evaluation metrics
-export DD_METRICS_OTEL_ENABLED=true
-
 java -javaagent:path/to/dd-java-agent.jar -jar your-application.jar
 {{< /code-block >}}
+
+To emit flag evaluation metrics, add the OpenTelemetry SDK dependencies and configure the OTLP endpoint. See [Set Up Server-Side Flag Evaluation Metrics][9].
 
 Register the Datadog OpenFeature provider:
 
@@ -226,7 +226,7 @@ client = api.get_client()
 {{% /tab %}}
 {{< /tabs >}}
 
-### Credentials at a glance
+#### Credentials at a glance
 
 | Credential | Used by | Where it goes | Sensitive? |
 | --- | --- | --- | --- |
@@ -243,14 +243,14 @@ More information about OpenFeature SDK configuration options can be found in its
 Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
+- **SDK distribution channels**: Control which SDKs receive your flag configuration; see [Distribution Channels][6]
 - **Variant type** and **variant values**: See [Variants and Flag Types][5]
-- **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
   {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}}, and {{< ui >}}variant values{{< /ui >}} should be considered public when sent to client SDKs.
 </div>
 
-{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/create-feature-flags-2.png" alt="Create Feature Flag" style="width:100%;" >}}
 
 ### Step 3: Evaluate the flag and write feature code
 
@@ -366,9 +366,9 @@ For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
 ### Step 5: Monitor your rollout
 
-Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-Time Metric Overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
+Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-time metric overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
 
-{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/real-time-flag-metrics-2.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
 For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9].
 

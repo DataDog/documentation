@@ -11,7 +11,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Datadog RUM
-site_support_id: rum_cpp
 ---
 
 {% partial file="sdk/advanced_config/cpp.mdoc.md" /%}

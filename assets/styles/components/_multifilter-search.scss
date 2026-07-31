@@ -1,10 +1,16 @@
+.announcement .multifilter-search-component {
+    #multifilter-search-nav {
+        top: 95px;
+    }
+}
+
 .multifilter-search-component {
     [x-cloak] {
         display: none !important;
     }
     #multifilter-search-nav {
         position: sticky;
-        top: 95px;
+        top: 65px;
         align-self: flex-start;
         z-index: 2;
         background-color: white;

@@ -11,7 +11,7 @@ further_reading:
 - link: "/api/latest/fleet-automation/"
   tag: "Documentation"
   text: "Fleet Automation API"
-site-support-id: fleet-automation-standard-features  
+site_support_id: fleet-automation-standard-features
 ---
 
 Fleet Automation can deploy, update, and remove [integration][1] configuration files (`conf.d`) on your Agents remotely. Select target Agents by host or tag, choose an integration, and Fleet Automation pushes the configuration change across your fleet.
@@ -19,7 +19,7 @@ Fleet Automation can deploy, update, and remove [integration][1] configuration f
 ## Prerequisites
 
 - [Remote Configuration][2] enabled for your organization
-- Agent version 7.76 or later
+- Agent version 7.76 or later. To upgrade your Agents, see [Upgrade Agents][6].
 - Linux VMs (installed with the install script or the Ansible Datadog Role) or Windows VMs
 
 <div class="alert alert-info">
@@ -34,7 +34,7 @@ Custom checks are **not** supported.
 
 ## Configure integrations across multiple Agents
 
-<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</a></div>
+<div class="alert alert-tip">As you step through the configuration wizard, the <strong>Configuration Summary</strong> panel shows your current selected scope of Agents. Use this to check how a change would affect an Agent by previewing configuration diffs on a specific Agent in scope.</div>
 
 1. In Fleet Automation, open the [{{< ui >}}Configuration{{< /ui >}}][3] tab and click {{< ui >}}Configure Agents{{< /ui >}}.
 1. Scope the configuration to the target Agents. Filter by host information or tags to target a specific group.
@@ -77,3 +77,4 @@ Each operation applies changes to the integration's `conf.d` configuration file 
 [3]: https://app.datadoghq.com/fleet/agent-management
 [4]: https://app.datadoghq.com/fleet/deployments
 [5]: https://www.rfc-editor.org/rfc/rfc7386
+[6]: /agent/fleet_automation/upgrade_agents/

@@ -7,10 +7,6 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/journey-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Operations Monitoring is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
@@ -130,7 +126,7 @@ m.global.datadogRumAgent@.startOperation(
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-warning">The Operation's name cannot contain any whitespaces.</div>
+<div class="alert alert-warning">The Operation's name may only contain letters, digits, or the characters <code>- _ . @ $</code>, and cannot contain any whitespaces.</div>
 
 ### Stop an operation with success
 

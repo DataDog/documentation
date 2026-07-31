@@ -139,10 +139,6 @@ To configure scanning for Agent Observability data, navigate to the [Agent Obser
 
 ### Cloud storage
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Scanning support for Amazon S3 buckets and RDS instances is in Preview. To enroll, click <strong>Request Access</strong>.
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="The Findings page's datastore section with three Amazon S3 findings" style="width:100%;" >}}
 
 If you have Sensitive Data Scanner enabled, you can catalog and classify sensitive data in your Amazon S3 buckets. **Note**: Sensitive Data Scanner does not redact sensitive data in your cloud storage resources.
@@ -167,7 +163,7 @@ See the [Secret Scanning documentation][21] for setup details.
 
 ### Investigate sensitive data findings
 
-{{< img src="sensitive_data_scanner/findings_20251014.png" alt="The Findings page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="Sensitive Data Scanner Findings explorer grouped by rule, with the US Passport Scanner rule expanded to show critical findings, match counts, and weekly trend charts." style="width:100%;" >}}
 
 Use the [Findings page][13] to see details of sensitive data findings identified by your scanning rules. These details include:
 
@@ -183,7 +179,7 @@ See [Investigate Sensitive Data Findings][14] for more information on triaging s
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to **Dashboards** > **Dashboards List** and search for "Sensitive Data Scanner Overview".
+When Sensitive Data Scanner is enabled, an [out-of-the-box dashboard][15] summarizing sensitive data findings is automatically installed in your account. To access this dashboard, navigate to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} and search for "Sensitive Data Scanner Overview".
 
 ## Further reading
 

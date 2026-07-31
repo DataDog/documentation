@@ -11,7 +11,7 @@ further_reading:
 
 ## Overview
 
-After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the **Test Runs** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+After selecting a time frame from the dropdown menu on the top right, you can search for test runs by clicking on the {{< ui >}}Test Runs{{< /ui >}} event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
 {{< img src="continuous_testing/explorer/explorer_test_runs_2.png" alt="Search and manage your test runs in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
@@ -22,7 +22,7 @@ You can use facets to accomplish the following actions:
 
 ## Explore facets
 
-The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with **Common**.
+The facets panel on the left lists several facets you can use to search through your test runs. To start customizing the search query, click through the list of facets starting with {{< ui >}}Common{{< /ui >}}.
 
 ### Common test run attributes
 
@@ -119,7 +119,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ## Timings attributes
 
-**Timings** facets allow you to filter on timing-related attributes for API test runs.
+{{< ui >}}Timings{{< /ui >}} facets allow you to filter on timing-related attributes for API test runs.
 
 | Facet          | Description                                                     |
 |----------------|-----------------------------------------------------------------|
@@ -133,7 +133,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### HTTP attributes
 
-**HTTP** facets allow you to filter on HTTP attributes.
+{{< ui >}}HTTP{{< /ui >}} facets allow you to filter on HTTP attributes.
 
 | Facet                  | Description                                 |
 |------------------------|---------------------------------------------|
@@ -141,7 +141,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### gRPC attributes
 
-**gRPC** facets are related to gRPC test runs.
+{{< ui >}}gRPC{{< /ui >}} facets are related to gRPC test runs.
 
 | Facet                   | Description                                                            |
 |-------------------------|------------------------------------------------------------------------|
@@ -149,7 +149,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### SSL attributes
 
-**SSL** facets are related to SSL test runs.
+{{< ui >}}SSL{{< /ui >}} facets are related to SSL test runs.
 
 | Facet     | Description                                                      |
 |-----------|------------------------------------------------------------------|
@@ -157,7 +157,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### TCP attributes
 
-**TCP** facets are related to TCP connections during test runs.
+{{< ui >}}TCP{{< /ui >}} facets are related to TCP connections during test runs.
 
 | Facet                 | Description                                                                           |
 |-----------------------|---------------------------------------------------------------------------------------|
@@ -165,7 +165,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Devices attributes
 
-**Devices** facets are related to the devices used during test runs.
+{{< ui >}}Devices{{< /ui >}} facets are related to the devices used during test runs.
 
 | Facet                    | Description                                                  |
 |--------------------------|--------------------------------------------------------------|
@@ -176,7 +176,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Browser attributes
 
-**Browser** facets are related to browser tests.
+{{< ui >}}Browser{{< /ui >}} facets are related to browser tests.
 
 | Facet                  | Description                                                     |
 |------------------------|-----------------------------------------------------------------|
@@ -186,7 +186,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### API attributes
 
-**API** facets are related to API test runs.
+{{< ui >}}API{{< /ui >}} facets are related to API test runs.
 
 | Facet                         | Description                                                 |
 |-------------------------------|-------------------------------------------------------------|
@@ -219,7 +219,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Mobile attributes
 
-**Mobile** facets are related to mobile tests.
+{{< ui >}}Mobile{{< /ui >}} facets are related to mobile tests.
 
 | Facet                     | Description                                                 |
 |---------------------------|-------------------------------------------------------------|
@@ -230,7 +230,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Continuous Testing attributes
 
-**Continuous Testing** facets are related to continuous testing.
+{{< ui >}}Continuous Testing{{< /ui >}} facets are related to continuous testing.
 
 | Facet                    | Description                                                                   |
 |--------------------------|-------------------------------------------------------------------------------|
@@ -251,7 +251,7 @@ The facets panel on the left lists several facets you can use to search through 
 
 ### Step attributes
 
-**Step** facets are related to test steps.
+{{< ui >}}Step{{< /ui >}} facets are related to test steps.
 
 | Facet         | Description                    |
 |---------------|--------------------------------|

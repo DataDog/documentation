@@ -13,6 +13,9 @@ further_reading:
   - link: '/data_observability/lineage/'
     tag: 'Documentation'
     text: 'Lineage'
+  - link: '/data_observability/cicd/'
+    tag: 'Documentation'
+    text: 'CI/CD'
 ---
 
 ## Overview
@@ -56,6 +59,7 @@ With Quality Monitoring, you can:
 {{< whatsnext desc="Trace lineage from these ELT tools:" >}}
    {{< nextlink href="data_observability/quality_monitoring/elt/airbyte" >}}Airbyte{{< /nextlink >}}
    {{< nextlink href="data_observability/quality_monitoring/elt/fivetran" >}}Fivetran{{< /nextlink >}}
+   {{< nextlink href="data_observability/quality_monitoring/elt/hightouch" >}}Hightouch{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Track downstream impact in these BI tools:" >}}

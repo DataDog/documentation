@@ -406,8 +406,6 @@ A Kubernetes Engine cluster (`gcp_kubernetes_engine_cluster`) is considered publ
 [40]: https://azure.microsoft.com/en-us/blog/network-security-groups/
 [41]: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/public-ip-addresses
 [42]: https://learn.microsoft.com/en-us/azure/virtual-network/ip-services/associate-public-ip-address-vm?tabs=azure-portal
-[43]: https://learn.microsoft.com/en-us/rest/api/compute/disks/create-or-update?view=rest-compute-2023-04-02&tabs=HTTP
-[44]: https://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-private-links-for-import-export-portal
 [45]: https://learn.microsoft.com/en-us/azure/storage/blobs/anonymous-read-access-configure?tabs=portal
 [46]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/
 [47]: https://azure.microsoft.com/en-us/updates/choose-to-allow-or-disallow-blob-public-access-on-azure-storage-accounts/

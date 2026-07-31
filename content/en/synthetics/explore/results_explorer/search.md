@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the **CI Batches** event type in the [Synthetic Monitoring & Testing Results Explorer][1].
+After selecting a time frame from the dropdown menu on the top right, you can search for batches of CI jobs by clicking on the {{< ui >}}CI Batches{{< /ui >}} event type in the [Synthetic Monitoring & Testing Results Explorer][1].
 
 {{< img src="continuous_testing/explorer/results_explorer.png" alt="CI batches in the Synthetic Monitoring & Testing Results Explorer" style="width:100%;">}}
 
@@ -24,7 +24,7 @@ You can use facets to accomplish the following actions:
 
 ## Explore facets
 
-The facets panel on the left lists several facets you can use to search through your batches. To start customizing the search query, click through the list of facets starting with **Batch**.
+The facets panel on the left lists several facets you can use to search through your batches. To start customizing the search query, click through the list of facets starting with {{< ui >}}Batch{{< /ui >}}.
 
 ### Batch attributes
 

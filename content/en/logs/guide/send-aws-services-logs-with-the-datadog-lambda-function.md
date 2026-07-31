@@ -38,7 +38,7 @@ To start collecting logs from your AWS services:
 
 Any AWS service that generates logs into a S3 bucket or a CloudWatch Log Group is supported. The following table lists the services collected with the Datadog Forwarder Lambda function:
 
-- **Log source**: The `source` tag Datadog applies to the logs. Use it to find your logs in the [Log Explorer][39].
+- **Log source**: The `source` tag Datadog applies to the logs. Use it to find your logs in the [Log Explorer][40].
 - **Storage**: Where the AWS service can write logs that the Forwarder collects.
 - **Automatic collection**: Whether Datadog can [automatically set up the triggers](#automatically-set-up-triggers) for that log source. If not, [set up the triggers manually](#manually-set-up-triggers).
 
@@ -58,28 +58,29 @@ Each service name links to its setup instructions for enabling logging and sendi
 | [DocumentDB][10]                   | `source:docdb`                | CloudWatch, S3 | Yes                  |
 | [ECS][11]                          | `source:ecs`                  | CloudWatch     | Yes                  |
 | [EKS][12]                          | `source:eks` <sup>1</sup>     | CloudWatch     | Yes                  |
-| [Elastic Load Balancing (ELB)][13] | `source:elb`                  | CloudWatch, S3 | Yes                  |
-| [FSx][14]                          | `source:aws.fsx`              | CloudWatch, S3 | No                   |
-| [Glue][15]                         | `source:glue`                 | CloudWatch, S3 | Yes                  |
-| [IoT][16]                          | `source:iot`                  | CloudWatch     | Partial <sup>2</sup> |
-| [Lambda][17]                       | `source:lambda`               | CloudWatch     | Yes                  |
+| [Elastic Beanstalk][13]            | `source:elasticbeanstalk`     | CloudWatch     | Yes                  |
+| [Elastic Load Balancing (ELB)][14] | `source:elb`                  | CloudWatch, S3 | Yes                  |
+| [FSx][15]                          | `source:aws.fsx`              | CloudWatch, S3 | No                   |
+| [Glue][16]                         | `source:glue`                 | CloudWatch, S3 | Yes                  |
+| [IoT][17]                          | `source:iot`                  | CloudWatch     | Partial <sup>2</sup> |
+| [Lambda][18]                       | `source:lambda`               | CloudWatch     | Yes                  |
 | Lambda@Edge                        | `source:lambda`               | CloudWatch     | Yes                  |
-| [MWAA][18]                         | `source:mwaa`                 | CloudWatch     | Yes                  |
-| [Network Firewall][19]             | `source:network-firewall`     | CloudWatch, S3 | Yes                  |
-| [OpenSearch][20]                   | `source:opensearch`           | CloudWatch     | No                   |
-| [PCS][21]                          | `source:pcs`                  | CloudWatch     | Partial <sup>3</sup> |
-| [RDS][22]                          | `source:rds` <sup>4</sup>     | CloudWatch     | Yes                  |
-| [Redshift][23]                     | `source:redshift`             | CloudWatch, S3 | Yes                  |
+| [MWAA][19]                         | `source:mwaa`                 | CloudWatch     | Yes                  |
+| [Network Firewall][20]             | `source:network-firewall`     | CloudWatch, S3 | Yes                  |
+| [OpenSearch][21]                   | `source:opensearch`           | CloudWatch     | No                   |
+| [PCS][22]                          | `source:pcs`                  | CloudWatch     | Partial <sup>3</sup> |
+| [RDS][23]                          | `source:rds` <sup>4</sup>     | CloudWatch     | Yes                  |
+| [Redshift][24]                     | `source:redshift`             | CloudWatch, S3 | Yes                  |
 | Redshift Serverless                | `source:redshift-serverless`  | CloudWatch     | Yes                  |
-| [Route 53][24]                     | `source:route53` <sup>5</sup> | CloudWatch     | Yes                  |
-| [S3][25]                           | `source:s3`                   | S3             | Yes                  |
+| [Route 53][25]                     | `source:route53` <sup>5</sup> | CloudWatch     | Yes                  |
+| [S3][26]                           | `source:s3`                   | S3             | Yes                  |
 | SSM                                | `source:ssm`                  | CloudWatch     | Yes                  |
-| [Step Functions][26]               | `source:stepfunction`         | CloudWatch     | Yes                  |
-| [Transit Gateway][27]              | `source:transitgateway`       | CloudWatch, S3 | No                   |
-| [Verified Access][28]              | `source:verified-access`      | CloudWatch, S3 | Yes                  |
-| [VPC][29]                          | `source:vpc`                  | CloudWatch, S3 | Yes                  |
-| [VPN][30]                          | `source:vpn`                  | CloudWatch, S3 | Yes <sup>6</sup>     |
-| [Web Application Firewall][31]     | `source:waf`                  | S3             | Yes                  |
+| [Step Functions][27]               | `source:stepfunction`         | CloudWatch     | Yes                  |
+| [Transit Gateway][28]              | `source:transitgateway`       | CloudWatch, S3 | No                   |
+| [Verified Access][29]              | `source:verified-access`      | CloudWatch, S3 | Yes                  |
+| [VPC][30]                          | `source:vpc`                  | CloudWatch, S3 | Yes                  |
+| [VPN][31]                          | `source:vpn`                  | CloudWatch, S3 | Yes <sup>6</sup>     |
+| [Web Application Firewall][32]     | `source:waf`                  | S3             | Yes                  |
 
 <sup>1</sup> EKS control plane logs also use the `kubernetes.audit`, `kube-scheduler`, `kube-apiserver`, `kube-controller-manager`, and `aws-iam-authenticator` sources.<br>
 <sup>2</sup> Automatic collection for IoT is available at the account level only.<br>
@@ -88,7 +89,7 @@ Each service name links to its setup instructions for enabling logging and sendi
 <sup>5</sup> Covers both DNS query logs and Resolver query logs.<br>
 <sup>6</sup> Automatic collection is available for CloudWatch log groups. For S3 buckets, [set up the trigger manually](#collecting-logs-from-s3-buckets).
 
-**Note**: [Subscription filters][42] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
+**Note**: [Subscription filters][43] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
 
 ### Services collected through another method
 
@@ -96,9 +97,9 @@ The following AWS services are supported for log collection, but do not use the 
 
 | AWS service    | How logs are collected                                                                                                                         |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| [DynamoDB][32] | DynamoDB does not generate its own logs. API activity is captured through CloudTrail. See [Send logs to Datadog][33].                           |
-| [EC2][34]      | Use the [Datadog Agent][34] to send your logs to Datadog.                                                                                      |
-| [SNS][35]      | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS service. See [Send logs to Datadog][36].  |
+| [DynamoDB][33] | DynamoDB does not generate its own logs. API activity is captured through CloudTrail. See [Send logs to Datadog][34].                           |
+| [EC2][35]      | Use the [Datadog Agent][35] to send your logs to Datadog.                                                                                      |
+| [SNS][36]      | SNS does not provide logs, but you can process logs and events that are transiting through to the SNS service. See [Send logs to Datadog][37].  |
 
 ## Set up triggers
 
@@ -114,7 +115,7 @@ Datadog can automatically configure triggers on the Datadog Forwarder Lambda fun
 To see which services support automatic collection, and the storage locations they support, see [Supported AWS services](#supported-aws-services).
 
 1. If you haven't already, set up the [Datadog log collection AWS Lambda function][1].
-2. Ensure the policy of the IAM role used for [Datadog-AWS integration][37] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
+2. Ensure the policy of the IAM role used for [Datadog-AWS integration][38] has the following permissions. Information on how these permissions are used can be found in the descriptions below:
 
     ```text
     "airflow:GetEnvironment",
@@ -135,6 +136,7 @@ To see which services support automatic collection, and the storage locations th
     "ecs:ListTaskDefinitionFamilies",
     "eks:DescribeCluster",
     "eks:ListClusters",
+    "elasticbeanstalk:DescribeEnvironments",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
     "elasticloadbalancing:DescribeLoadBalancers",
     "glue:BatchGetJobs",
@@ -199,6 +201,7 @@ To see which services support automatic collection, and the storage locations th
     | `glue:ListJobs`                                             | List all Glue job names.                                                     |
     | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
     | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `elasticbeanstalk:DescribeEnvironments`                     | List all Elastic Beanstalk environments.                                     |
     | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
     | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
     | `lambda:List*`                                              | List all Lambda functions.                                                   |
@@ -231,13 +234,13 @@ To see which services support automatic collection, and the storage locations th
     | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
 
 
-3. In the [AWS Integration page][38], select the AWS Account to collect logs from and click on the {{< ui >}}Log Collection{{< /ui >}} tab.
+3. In the [AWS Integration page][39], select the AWS Account to collect logs from and click on the {{< ui >}}Log Collection{{< /ui >}} tab.
 4. In the {{< ui >}}Datadog Forwarder Lambda{{< /ui >}} section, enter the ARN of the Lambda created in the previous section and click {{< ui >}}Add{{< /ui >}}. The Lambda function appears in the table below with its name, version, and region.
 5. In the {{< ui >}}Log Autosubscription{{< /ui >}} section, under {{< ui >}}Log Sources{{< /ui >}}, enable the services from which you'd like to collect logs by toggling them on. To stop collecting logs from a particular service, toggle the log source off.
 6. (Optional) In the {{< ui >}}Log Source Tag Filters{{< /ui >}} section, you can filter log collection by resource tags for each log source. Select a log source from the dropdown menu and add tags in `key:value` format to limit which resources' logs are collected. **Note**: Resource tags are automatically lowercased to match Datadog platform conventions. Define your tag filters in lowercase to avoid mismatches.
 7. If you have logs across multiple regions, you must create additional Lambda functions in those regions and add them in the **Datadog Forwarder Lambda** section.
 8. To stop collecting all AWS logs from a specific Lambda function, hover over the Lambda in the table and click the delete icon. All triggers for that function are removed.
-9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][39].
+9. Within a few minutes of this initial setup, your AWS Logs appear in the Datadog [Log Explorer][40].
 
 ### Manually set up triggers
 
@@ -371,8 +374,8 @@ Resources:
 
 ## Scrubbing and filtering
 
-You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][40].
-You can also exclude or send only those logs that match a specific pattern by using the [filtering option][41].
+You can scrub emails or IP address from logs sent by the Lambda function, or define a custom scrubbing rule [in the Lambda parameters][41].
+You can also exclude or send only those logs that match a specific pattern by using the [filtering option][42].
 
 ## Further reading
 
@@ -390,33 +393,34 @@ You can also exclude or send only those logs that match a specific pattern by us
 [10]: /integrations/amazon-documentdb/#send-logs-to-datadog
 [11]: /containers/amazon_ecs/logs/
 [12]: /integrations/amazon-eks/#log-collection
-[13]: /integrations/amazon_elb/#log-collection
-[14]: /integrations/amazon_fsx/#log-collection
-[15]: /integrations/amazon_glue/#log-collection
-[16]: /integrations/amazon-iot/#enable-logging
-[17]: /integrations/amazon_lambda/#log-collection
-[18]: /integrations/amazon_mwaa/#log-collection
-[19]: /integrations/amazon_network_firewall/#log-collection
-[20]: /integrations/amazon_es/#log-collection
-[21]: /integrations/amazon-pcs/
-[22]: /integrations/amazon_rds/#log-collection
-[23]: /integrations/amazon-redshift/#log-collection
-[24]: /integrations/amazon_route53/#send-logs-to-datadog
-[25]: /integrations/amazon_s3/#enable-s3-access-logs
-[26]: /integrations/amazon_step_functions/#log-collection
-[27]: /integrations/amazon_transit_gateway/#log-collection
-[28]: /integrations/amazon-verified-access/#log-collection
-[29]: /integrations/amazon_vpc/#log-collection
-[30]: /integrations/amazon-vpn/#send-logs-to-datadog
-[31]: /integrations/amazon_waf/#log-collection
-[32]: /integrations/amazon_dynamodb/
-[33]: /integrations/amazon_dynamodb/#send-logs-to-datadog
-[34]: /integrations/amazon_ec2/
-[35]: /integrations/amazon_sns/
-[36]: /integrations/amazon_sns/#send-logs-to-datadog
-[37]: /integrations/amazon_web_services/
-[38]: https://app.datadoghq.com/integrations/amazon-web-services
-[39]: https://app.datadoghq.com/logs
-[40]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
-[41]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
-[42]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters
+[13]: /integrations/amazon-elastic-beanstalk/
+[14]: /integrations/amazon_elb/#log-collection
+[15]: /integrations/amazon_fsx/#log-collection
+[16]: /integrations/amazon_glue/#log-collection
+[17]: /integrations/amazon-iot/#enable-logging
+[18]: /integrations/amazon_lambda/#log-collection
+[19]: /integrations/amazon_mwaa/#log-collection
+[20]: /integrations/amazon_network_firewall/#log-collection
+[21]: /integrations/amazon_es/#log-collection
+[22]: /integrations/amazon-pcs/
+[23]: /integrations/amazon_rds/#log-collection
+[24]: /integrations/amazon-redshift/#log-collection
+[25]: /integrations/amazon_route53/#send-logs-to-datadog
+[26]: /integrations/amazon_s3/#enable-s3-access-logs
+[27]: /integrations/amazon_step_functions/#log-collection
+[28]: /integrations/amazon_transit_gateway/#log-collection
+[29]: /integrations/amazon-verified-access/#log-collection
+[30]: /integrations/amazon_vpc/#log-collection
+[31]: /integrations/amazon-vpn/#send-logs-to-datadog
+[32]: /integrations/amazon_waf/#log-collection
+[33]: /integrations/amazon_dynamodb/
+[34]: /integrations/amazon_dynamodb/#send-logs-to-datadog
+[35]: /integrations/amazon_ec2/
+[36]: /integrations/amazon_sns/
+[37]: /integrations/amazon_sns/#send-logs-to-datadog
+[38]: /integrations/amazon_web_services/
+[39]: https://app.datadoghq.com/integrations/amazon-web-services
+[40]: https://app.datadoghq.com/logs
+[41]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-scrubbing-optional
+[42]: https://github.com/DataDog/datadog-serverless-functions/tree/master/aws/logs_monitoring#log-filtering-optional
+[43]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/SubscriptionFilters

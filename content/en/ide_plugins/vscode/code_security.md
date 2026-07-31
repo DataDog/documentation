@@ -29,7 +29,7 @@ Static Code Analysis supports many programming languages. For a complete list, s
 
 ### Get started with Static Code Analysis
 
-When you open a source file, the extension looks for [`static-analysis.datadog.yml`][3] at your repository root and prompts you to create one if it does not exist.
+When you open a source file, the extension looks for [`code-security.datadog.yaml`][3] at your repository root and prompts you to create one if it does not exist.
 
 {{< img src="/ide_plugins/vscode/static-analysis-onboard.png" alt="Onboarding banner for setting up Static Code Analysis with Python files" style="width:75%;" >}}
 
@@ -94,6 +94,6 @@ To toggle Secret Scanning, run the `Datadog: Turn on Secret Scanning` or `Datado
 
 [1]: /security/code_security/static_analysis/
 [2]: /security/code_security/static_analysis/static_analysis_rules/
-[3]: https://github.com/DataDog/datadog-static-analyzer/blob/main/doc/legacy_config.md
+[3]: /security/code_security/static_analysis/configuration/
 [4]: /security/code_security/static_analysis/custom_rules/
 [5]: /security/code_security/secret_scanning/

@@ -3,9 +3,6 @@ title: Infrastructure as Code (IaC) Security
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
-  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
-    tag: "Blog"
-    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
@@ -18,9 +15,15 @@ further_reading:
   - link: "/pr_gates/"
     tag: "Documentation"
     text: "PR Gates"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: https://www.datadoghq.com/blog/code-security-secret-scanning
     tag: Blog
     text: Detect and block exposed credentials with Datadog Secret Scanning
+  - link: "https://www.datadoghq.com/blog/github-actions-iac-security/"
+    tag: "Blog"
+    text: "Spotting CI/CD misconfigurations before the bots do: Securing GitHub Actions with Datadog IaC Security"
 ---
 
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in IaC configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. For more information, see [IaC Security Rules][13].
@@ -59,8 +62,8 @@ Use filters to narrow results by:
 
 Click any finding to open a side panel that shows:
 
-- **Details**: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
-- **Remediation**: If available, suggested code fixes are provided for findings that support remediation.
+- {{< ui >}}Details{{< /ui >}}: A description and the relevant code that triggered the finding. (To view code snippets, [install the GitHub App][9].)
+- {{< ui >}}Remediation{{< /ui >}}: If available, suggested code fixes are provided for findings that support remediation.
 
 ### Create Jira tickets from findings
 
@@ -68,9 +71,9 @@ You can create a bidirectional Jira ticket directly from any finding to track an
 
 ### Mute findings
 
-To suppress a finding, click **Mute** in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
+To suppress a finding, click {{< ui >}}Mute{{< /ui >}} in the finding details panel. This opens a workflow where you can [create a Muting Rule][10] for context-aware filtering by tag values (for example, by `service` or `environment`). Muting a finding hides it and excludes it from reports.
 
-To restore a muted finding, click **Unmute** in the details panel. You can also use the **Status** filter on the [Code Security Vulnerabilities][3] page to review muted findings.
+To restore a muted finding, click {{< ui >}}Unmute{{< /ui >}} in the details panel. You can also use the {{< ui >}}Status{{< /ui >}} filter on the [Code Security Vulnerabilities][3] page to review muted findings.
 
 ### Exclude specific rules, files, or resources
 

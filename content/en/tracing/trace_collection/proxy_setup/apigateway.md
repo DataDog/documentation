@@ -116,11 +116,11 @@ const api = new apigateway.RestApi(this, "MyApi", {
 {{% collapse-content title="AWS Console" level="h4" expanded=false id="aws-console" %}}
 
 
-1. In the AWS Management Console, navigate to API Gateway and go to your API's **Resources** page. 
+1. In the AWS Management Console, navigate to API Gateway and go to your API's {{< ui >}}Resources{{< /ui >}} page. 
 
-2. Go to **Integration request** and click **Edit**.
+2. Go to {{< ui >}}Integration request{{< /ui >}} and click {{< ui >}}Edit{{< /ui >}}.
 
-3. Under **Edit integration request**, go to **URL request headers parameters**. Click **Add request header parameter**.
+3. Under {{< ui >}}Edit integration request{{< /ui >}}, go to {{< ui >}}URL request headers parameters{{< /ui >}}. Click {{< ui >}}Add request header parameter{{< /ui >}}.
 
 {{< img src="tracing/trace_collection/apigateway/console_headers.png" alt="Your HTTP headers for your API in API Gateway, after you have added all six header parameters." style="width:100%;" >}}
 
