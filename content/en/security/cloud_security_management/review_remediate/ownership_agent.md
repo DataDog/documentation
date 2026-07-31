@@ -37,23 +37,24 @@ The Ownership Agent reads multiple data sources and combines them into a ranked 
 
 ## Supported resource types
 
-The Ownership Agent processes the following cloud resource types:
+The Ownership Agent processes the following resource types:
 
+**AWS**: `aws_cloudformation_stack`, `aws_cloudfront_distribution`, `aws_cognito_user_pool`, `aws_dynamodb`, `aws_ec2_instance`, `aws_ec2_settings`, `aws_ecr_repository`, `aws_ecs_cluster`, `aws_ecs_service`, `aws_elbv2_load_balancer`, `aws_iam_account`, `aws_iam_policy`, `aws_iam_role`, `aws_iam_role_inline_policy`, `aws_iam_user`, `aws_lambda_function`, `aws_rds_cluster`, `aws_rds_instance`, `aws_s3_bucket`, `aws_secretsmanager_secret`, `aws_security_group`, `aws_subnet`, `aws_vpc`
 
-| Cloud provider                    | Resource types |
-| --------------------------------- | -------------- |
-| AWS                               | `aws_cloudformation_stack`, `aws_cloudfront_distribution`, `aws_cognito_user_pool`, `aws_dynamodb`, `aws_ec2_instance`, `aws_ec2_settings`, `aws_ecr_repository`, `aws_ecs_cluster`, `aws_ecs_service`, `aws_elbv2_load_balancer`, `aws_iam_account`, `aws_iam_policy`, `aws_iam_role`, `aws_iam_role_inline_policy`, `aws_iam_user`, `aws_lambda_function`, `aws_rds_cluster`, `aws_rds_instance`, `aws_s3_bucket`, `aws_secretsmanager_secret`, `aws_security_group`, `aws_subnet`, `aws_vpc` |
-| Azure                             | `azure_virtual_machine_instance` |
-| GCP                               | `gcp_compute_instance` |
-| AWS, Azure, GCP                   | `host`, `host_image` |
-| Docker, ECR, and other registries | `image` (container) |
+**Azure**: `azure_virtual_machine_instance`
+
+**GCP**: `gcp_compute_instance`
+
+**AWS, Azure, GCP**: `host`, `host_image`
+
+**Container registries** (Docker, ECR, and others): `image`
 
 
 ## Review and correct ownership
 
 ### View a suggestion
 
-When you open a finding in the [Misconfigurations Explorer](https://app.datadoghq.com/security/compliance) or Vulnerabilities Explorer,  the side panel displays the suggested owner under **Ownership**. Each suggestion includes:
+When you open a finding in the [Misconfigurations Explorer](https://app.datadoghq.com/security/compliance) or Vulnerabilities Explorer, the side panel displays the suggested owner under **Ownership**. Each suggestion includes:
 
 - The suggested owner handle and type (team, user, or service)
 - A confidence score (high, medium, or low)
@@ -66,7 +67,7 @@ By clicking the "edit owner" pencil icon next to a suggested owner, you can upda
 
 ### Feedback
 
-You can provide richer feedback by clicking the "thumbs down" after hovering over the confidence score, including specifying incorrectness of incompletness of the explanation.
+You can provide richer feedback by clicking the "thumbs down" after hovering over the confidence score, including specifying incorrectness or incompleteness of the explanation.
 
 
 | Action          | What it does                                                                           |
@@ -78,13 +79,13 @@ You can provide richer feedback by clicking the "thumbs down" after hovering ove
 
 ### Impact on evaluation
 
-Corrections and feedback are vital for tuning the agent to correctly infer ownership in future, and affect how the Ownership Agent behaves for that resource going forward.
+Corrections and feedback are vital for tuning the agent. They also affect how the Ownership Agent behaves for that resource going forward.
 
 ## Automatic team assignment
 
-By default, high-confidence ownership inferences are applied to the `team` tag on Cloud Security findings. This makes inferred owners available in platform features, through the MCP server, and in automatic notification routing.
+By default, high-confidence ownership inferences are applied to the `team` tag on Cloud Security findings. Inferred owners then become available in other Datadog features, including the [Datadog MCP server](/mcp_server/) and automatic notification routing.
 
-To adjust the confidence threshold, or to turn off automatic team assignment entirely, use the [ownership settings page](https://app.datadoghq.com/security/configuration/csm/ownership-agent).
+To adjust the confidence threshold or turn off automatic team assignment, use the [ownership settings page](https://app.datadoghq.com/security/configuration/csm/ownership-agent).
 
 ## Query ownership in the explorer
 
@@ -96,7 +97,7 @@ You can filter findings by inferred owner in the [Misconfigurations Explorer](ht
 | `Ownership > Owner`       | The suggested or persisted owner handle         | `@_dd.ownership.inference.owner_handle:team-platform` |
 | `Ownership > Owner type`  | The type of owner: `team`, `service`, or `user` | `@_dd.ownership.inference.owner_type:team`            |
 | `Ownership > Confidence`  | The numeric confidence score (0 to 1)           | `@_dd.ownership.inference.confidence:>0.8`            |
-| `Ownership > Explanation` | The explanation for the inference               | `@_dd.ownership.inference.explanation:*tag`*          |
+| `Ownership > Explanation` | The explanation for the inference               | `@_dd.ownership.inference.explanation:*tag*`          |
 
 
 **Example queries**

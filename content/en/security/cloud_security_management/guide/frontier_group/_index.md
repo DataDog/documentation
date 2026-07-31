@@ -20,7 +20,7 @@ The frontier group is an opt-in program where you get access to the newest AI fe
 
 ### Ownership agent
 
-***Status:*** *available for frontier partners*<br>
+***Status:*** *generally available, 6 months after it was first tested by frontier partners*<br>
 Automated inference on who owns a particular resource and should be responsible for remediating it. See [Ownership Agent][1] for an overview of data sources, supported resource types, and the correction workflow, and [Set Up Ownership Preferences][2] to customize ownership rules with your own data.
 
 [1]: /security/cloud_security_management/review_remediate/ownership_agent/

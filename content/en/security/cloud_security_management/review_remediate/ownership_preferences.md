@@ -171,7 +171,7 @@ You can provide up to **three** prompt text entries, one for each priority level
 
 #### Tips for writing effective guidance
 
-- Be specific and actionable. "The `cost-center` tag is our most reliable ownership signal" is better than "Use tags".
+- Be specific and actionable. "The `cost-center` tag is the most reliable ownership signal" is better than "Use tags".
 - Explain your organization's conventions: team naming patterns, how to interpret specific tags, etc.
 - Call out accounts that should not be owners (also add these as exclusion rows for enforcement).
 - Use one entry per priority level to organize your guidance by importance.
@@ -300,7 +300,7 @@ The AI engine processes prompt text as organizational context. To help ensure yo
 
 #### Examples
 
-- "The cost-center tag is our most reliable ownership signal for all cloud resources."
+- "The cost-center tag is the most reliable ownership signal for all cloud resources."
 - "Team identifiers always use the team- prefix (for example, team-platform, team-data-eng)."
 - "Resources in the us-east-1/prod account are managed by team-sre."
 
@@ -310,7 +310,7 @@ Datadog stores your preferences as a [reference table][1]. The table must be nam
 
 There are several ways to create and update the table:
 
-### Option 1: Manual CSV upload (Datadog UI)
+### Option 1: manual CSV upload (Datadog UI)
 
 This approach is best for getting started or making occasional updates.
 
@@ -326,7 +326,7 @@ To update your reference table, upload a new CSV to the same table to fully repl
 
 Manual uploads support files up to 4 MB.
 
-### Option 2: Cloud storage sync (S3, Azure Blob, GCS)
+### Option 2: cloud storage sync (S3, Azure Blob, GCS)
 
 This approach is best for automated, recurring updates. Store your CSV in a cloud storage bucket so Datadog can periodically import it.
 
