@@ -75,6 +75,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
+| [Sensitive Data Scanner][36] | Generates code fixes for log statements causing sensitive data leaks |
 
 ## Key capabilities 
 
@@ -149,6 +150,7 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [29]: https://app.datadoghq.com/code/automations
 [34]: /security/cloud_security_management/
 [35]: /security/cloud_security_management/review_remediate/remediate_with_ai/
+[36]: /security/sensitive_data_scanner/
 [30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/

@@ -12,6 +12,9 @@ further_reading:
     - link: "sensitive_data_scanner/setup/cloud_storage/"
       tag: "Documentation"
       text: "Set up Sensitive Data Scanner for Cloud Storage"
+    - link: "bits_ai/bits_code/"
+      tag: "Documentation"
+      text: "Bits Code"
     - link: "https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/"
       tag: "Blog"
       text: "Discover, triage, and remediate sensitive data issues at scale with Sensitive Data Scanner"
@@ -56,8 +59,10 @@ To investigate a log finding:
 Additionally, you can:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
+- Use {{< ui >}}Generate Code Fix{{< /ui >}} to launch a [Bits Code][2] session that identifies the log statement causing the leak and proposes a fix. Review the fix and create a pull request directly from the session. The source repository must already be onboarded to Bits Code.
 
 [1]: /help
+[2]: /bits_ai/bits_code/
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}
