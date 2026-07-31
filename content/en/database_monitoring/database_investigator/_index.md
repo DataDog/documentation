@@ -1,7 +1,13 @@
 ---
-title: Database Investigator
-description: Diagnose database performance issues with AI-powered root cause analysis grounded in your Database Monitoring data.
+title: Database Investigations in Bits Chat
+description: Run database investigations in Bits Chat, with AI-powered root cause analysis grounded in your Database Monitoring data.
 further_reading:
+- link: "/bits_ai/bits_chat/"
+  tag: "Documentation"
+  text: "Bits Chat"
+- link: "/account_management/billing/ai_credits/"
+  tag: "Documentation"
+  text: "AI Credits"
 - link: "/database_monitoring/"
   tag: "Documentation"
   text: "Database Monitoring"
@@ -16,17 +22,13 @@ further_reading:
   text: "Exploring Query Samples"
 ---
 
-{{< callout url="#" btn_hidden="true" header="Database Investigator is in Preview" >}}
-Database Investigator is in Preview for all customers monitoring Postgres or SQL Server with Database Monitoring.
-{{< /callout >}}
+Database Monitoring contributes a set of tools and skills to [Bits Chat][1], so you can investigate the databases you monitor directly in chat. Bits Chat analyzes the telemetry Database Monitoring already collects. This includes health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For a database investigation, Bits Chat returns a structured root cause analysis with concrete remediation steps.
 
-## Overview
+Bits Chat supports investigating all databases monitored by Database Monitoring.
 
-Database Investigator is an AI agent inside Database Monitoring that helps you investigate, optimize, and understand the databases you monitor. It analyzes the telemetry Database Monitoring already collects including health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For investigations, it returns a structured root cause analysis with concrete remediation steps.
+Both database administrators and the platform or application teams that own database-backed services can investigate this way. Describe an issue in plain language and Bits Chat runs the investigation. Deep database expertise is not required.
 
-Both DBAs and the platform or application teams that own database-backed services can make use of Database Investigator. Describe an issue in plain language and it runs the investigation. Deep database expertise is not required.
-
-Use Database Investigator to answer questions like:
+Use Bits Chat to answer questions like:
 
 - `Why is this database slow?`
 - `What caused the latency spike on this query in the last hour?`
@@ -34,84 +36,70 @@ Use Database Investigator to answer questions like:
 - `Which upstream service is driving the workload change?`
 - `How can I reduce lock contention on this table?`
 
-{{< img src="database_monitoring/database_investigator/suggested_prompts.png" alt="Database Investigator opened with suggested prompts" style="width:100%;" >}}
+Database investigations are billed in [AI Credits][2].
 
-## Initiate Database Investigation
+{{< img src="database_monitoring/database_investigator/summary.png" alt="Bits Chat open alongside a database Summary page, starting an investigation scoped to that database instance" style="width:100%;" >}}
 
-Open Database Investigator from any of the following surfaces in Database Monitoring:
+## Start an investigation
 
-- The Investigate button on a **database Overview page**
+Start a database investigation from any of the following surfaces in Database Monitoring:
+
+- The **Investigate** button on a database **Overview** page
 - A metric in the **Metrics** tab of a database host
 - A **Blocking Queries** or **Deadlocks** panel
 - A normalized query in **Query Metrics**
 - A query sample in **Query Samples**
 
-{{< img src="database_monitoring/database_investigator/overview.png" alt="Investigate button on a database Overview page" style="width:100%;" >}}
+{{< img src="database_monitoring/database_investigator/investigate_instance.png" alt="The Investigate button highlighted on the Overview panel of a database Summary page" style="width:100%;" >}}
 
-{{< img src="database_monitoring/database_investigator/metrics_tab.png" alt="Investigate option on a metric in the Metrics tab of a database host" style="width:100%;" >}}
+{{< img src="database_monitoring/database_investigator/investigate_metrics.png" alt="The Investigate button highlighted on a graph in the Metrics tab of a database host" style="width:100%;" >}}
 
-Database Investigator opens with a suggested starting prompt based on your entry point. You can run that prompt or type your own.
+Each of these automatically launches a Bits Chat session and starts an investigation scoped to what you clicked from. You do not need to write a prompt.
 
-Database Investigator streams its response as it works through the investigation: it states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
+You can also ask a database question from anywhere in Datadog. Click {{< ui >}}Ask Bits{{< /ui >}} in the top-right of the navigation bar, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
-You can ask follow-up questions at any point to refine the analysis, or paste in external context, such as an execution plan captured outside of Datadog. Database Investigator factors the new information into its next steps.
+Bits Chat streams the response as it works through the investigation. It states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
 
-{{< img src="database_monitoring/database_investigator/mid_conversation.png" alt="Database Investigator running an investigation, showing tool steps and streaming findings" style="width:100%;" >}}
+You can ask follow-up questions at any point to refine the analysis. You can also paste in external context, such as an execution plan captured outside of Datadog, and Bits Chat factors it into its next steps.
 
-If a recommended fix involves a SQL change (a new index, a query rewrite), Database Investigator includes the SQL in its response. Database Investigator never connects to your database or runs SQL against it, as recommended changes are for you to review and apply.
+{{< img src="database_monitoring/database_investigator/investigator_action.png" alt="Bits Chat reporting the root cause of a database issue, with immediate mitigation and durable remediation steps" style="width:100%;" >}}
+
+If a recommended fix involves a SQL change (a new index, a query rewrite), Bits Chat includes the SQL in its response. Bits Chat never connects to your database or runs SQL against it, as recommended changes are for you to review and apply.
 
 ## Share, save, or escalate findings
 
 After an investigation completes, you can:
 
-- **Share the conversation**: copy the URL to deep-link any teammate with Database Monitoring access into the same conversation.
-- **Export to a notebook**: capture the investigation in a [Datadog notebook][1] for write-up, follow-up, or sharing in a postmortem.
-- **Create an incident**: escalate the findings into a new [Datadog incident][2].
-
-## Conversation history
-
-Past conversations are listed in the history view inside Database Investigator. Open a previous conversation to revisit its findings or continue investigating where you left off.
-
-{{< img src="database_monitoring/database_investigator/history.png" alt="Database Investigator conversation history list" style="width:100%;" >}}
+- **Share the conversation**: copy the URL to deep-link a teammate into the same conversation.
+- **Export to a notebook**: capture the investigation in a [Datadog notebook][3] for write-up, follow-up, or sharing in a postmortem.
+- **Create an incident**: escalate the findings into a new [Datadog incident][4].
 
 ## Permissions
 
-To use Database Investigator, your role must have the **Database Monitoring Read** permission. Database Investigator uses your Datadog role to fetch data, so it can only access the resources you have permission to view.
+To run database investigations, your role must have the **Bits Chat Access** and **Database Monitoring Read** permissions. Bits Chat uses your Datadog role to fetch data, so it can only access the resources you have permission to view.
 
-## FAQ
+## Programmatic access
 
-### What data does Database Investigator access?
+The data sources that Bits Chat uses for database investigations are also exposed through the [Datadog MCP server][5]. You can call them from your own AI tooling.
 
-Database Investigator reads the telemetry your account already collects, including query metrics, query samples, explain plans, instance and host metrics. It also reads related APM service dependencies, incidents, events, and metrics in your Datadog organization. It accesses only the resources permitted by your role.
+## Preview investigations
 
-### Is data sent to Database Investigator used to train AI models?
+Investigations you ran in Database Investigator during Preview, before database investigations moved into Bits Chat, are kept separately from your Bits Chat conversation history. They remain available until September 30, 2026.
 
-Database Investigator operates under zero-retention and zero-training agreements with the third-party AI service providers that power it. Data processed during an investigation is not retained by those providers and is not used to train or improve their models.
+To reach them, click the dropdown arrow next to the **Investigate** button in Database Monitoring, then select **View Preview Investigations**.
 
-### Does Database Investigator modify the database?
+{{< img src="database_monitoring/database_investigator/view_preview_investigations.png" alt="The dropdown next to the Investigate button, with the View Preview Investigations option" style="width:100%;" >}}
 
-No. Database Investigator reads observability data and produces recommendations. It does not connect to your database, run SQL against it, or change configuration. SQL changes in its responses are suggestions for you to review and apply.
+The Preview Investigations panel lists your past investigations. Open one to view it, share it, or export it to a [Datadog notebook][3].
 
-### Which databases are supported?
-
-Postgres and SQL Server are supported in Preview for all Database Monitoring customers.
-
-### Are there usage limits?
-
-Database Investigator is included with Database Monitoring. Each Datadog organization can run up to 100 investigations per month.
-
-### Does Database Investigator answer general database questions?
-
-Yes. Database Investigator covers diagnosing performance regressions, recommending indexes and optimizations, explaining execution plans, and answering questions about database features, configuration, and best practices. When a question is grounded in your environment, it pulls from the telemetry your account already collects.
-
-### Is programmatic access available?
-
-The data sources that Database Investigator uses are also exposed through the [Datadog MCP server][3]. You can call them from your own AI tooling.
+{{< img src="database_monitoring/database_investigator/preview_history.png" alt="The Preview Investigations panel listing past investigations, with a banner noting the September 30 cutoff" style="width:100%;" >}}
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /notebooks/
-[2]: /service_management/incident_management/
-[3]: /mcp_server/
+[1]: /bits_ai/bits_chat/
+[2]: /account_management/billing/ai_credits/
+[3]: /notebooks/
+[4]: /service_management/incident_management/
+[5]: /mcp_server/

@@ -5221,7 +5221,7 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
-    - name: Database Investigator
+    - name: Database Investigations in Bits Chat
       url: database_monitoring/database_investigator/
       parent: dbm
       identifier: dbm_database_investigator
