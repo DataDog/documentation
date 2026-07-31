@@ -13,8 +13,6 @@ Datadog Agent version 7.78 or later is required.
 
 ### ACL permissions
 
-The Datadog Agent needs read-only, describe-level access to your cluster's topics, consumer groups, and cluster metadata. How you grant this depends on whether your cluster authorizes with native Kafka ACLs or with Confluent Platform's role-based access control (RBAC).
-
 {{< tabs >}}
 {{% tab "ACLs" %}}
 
@@ -33,35 +31,11 @@ If your Kafka cluster uses ACLs, the Datadog Agent user requires the following m
 
 If your Confluent Platform cluster uses RBAC instead of native ACLs, grant the Datadog Agent's principal the following role bindings:
 
-| Role            | Resource scope                          |
-|-----------------|------------------------------------------|
-| `Operator`      | `Cluster` (the Kafka cluster)            |
-| `DeveloperRead` | `Topic` (the topics you want to monitor) |
-| `DeveloperRead` | `Group` (the consumer groups you want to monitor) |
-
-`Operator` on the `Cluster` resource covers cluster-level `Describe`/`DescribeConfigs`. `DeveloperRead` covers `Describe` on the scoped topics and consumer groups; it also grants `Read`, which is broader than what the Agent uses but is the narrowest predefined role available for this access.
-
-Create these role bindings with the Confluent CLI, for example:
-
-```shell
-confluent iam rbac role-binding create \
-  --principal User:<datadog-agent-principal> \
-  --role Operator \
-  --resource Cluster:kafka-cluster \
-  --kafka-cluster <cluster-id>
-
-confluent iam rbac role-binding create \
-  --principal User:<datadog-agent-principal> \
-  --role DeveloperRead \
-  --resource Topic:<topic-name> \
-  --kafka-cluster <cluster-id>
-
-confluent iam rbac role-binding create \
-  --principal User:<datadog-agent-principal> \
-  --role DeveloperRead \
-  --resource Group:<consumer-group-name> \
-  --kafka-cluster <cluster-id>
-```
+| Role            | Resource scope       |
+|-----------------|----------------------|
+| `Operator`      | `Cluster` (the Kafka cluster) |
+| `DeveloperRead` | All topics           |
+| `DeveloperRead` | All consumer groups  |
 
 {{% /tab %}}
 {{< /tabs >}}
