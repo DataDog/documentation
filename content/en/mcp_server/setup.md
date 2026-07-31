@@ -360,7 +360,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     <pre><code>{
       "mcpServers": {
         "datadog": {
-          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+          "url": "{{< region-param key="mcp_server_endpoint" >}}",
           "headers": {
             "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
             "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
