@@ -65,7 +65,6 @@ Follow instructions in the [Gitlab Source Code integration documentation][1] on 
 See [Datadog Source Code Integration Guide][2] for additional context.
 
 [1]: /integrations/gitlab-source-code/
-[1]: /integrations/gitlab-source-code/
 [2]: /integrations/guide/source-code-integration/?tab=gitlabsaasonprem#connect-your-git-repositories-to-datadog
 {{% /tab %}}
 {{% tab "Azure DevOps" %}}
@@ -73,7 +72,6 @@ See [Datadog Source Code Integration Guide][2] for additional context.
 Follow instructions in the [Datadog Source Code Integration Guide][1] on how to connect your Azure DevOps repositories to Datadog
 using [Azure DevOps Source Code integration][2].
 
-[1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [1]: /integrations/guide/source-code-integration/?tab=azuredevopssaasonly#connect-your-git-repositories-to-datadog
 [2]: https://app.datadoghq.com/integrations/azure-devops-source-code/
 {{% /tab %}}
@@ -116,15 +114,17 @@ Automatic code coverage report upload is supported in the following Test Optimiz
 | Python `ddtrace` | `4.4.0` | Default pytest plugin using `coverage.py` |
 | Java `dd-java-agent` | `1.53.0` | JaCoCo |
 
-These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`][17] command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
+These version requirements apply only to automatic uploads by Test Optimization libraries. The manual [`datadog-ci coverage upload`](#uploading-coverage-reports) command was introduced as beta in `datadog-ci` v3.0.0 and left beta in v3.4.0.
 
 #### Enable automatic uploads
+
+Complete the [Test Optimization setup][17] for your library before enabling automatic uploads.
 
 The versions listed above contain the uploader code, but reports are uploaded only when the library receives the `coverage_report_upload_enabled` setting. Enable this setting by turning on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
 
 {{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings" style="width:100%" >}}
 
-You can apply the setting at the organization, repository, or test service level. Run your tests with the coverage source listed in the table. The Test Optimization library uploads the report after the test session ends.
+You can apply the setting at the organization, repository, or test service level. Run a test command that produces a code coverage report using the source listed in the table. After the command finishes, the Test Optimization library automatically uploads the report to Datadog.
 
 To organize and filter reports uploaded by the library, see [Add flags to automatically uploaded reports][9] for `DD_CODE_COVERAGE_FLAGS` library and version support.
 
@@ -541,3 +541,4 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [14]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-coverage
 [15]: https://app.datadoghq.com/ci/code-coverage
 [16]: https://reportgenerator.io/
+[17]: /tests/setup/
