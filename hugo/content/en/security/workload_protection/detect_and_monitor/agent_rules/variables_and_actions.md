@@ -148,7 +148,7 @@ Both approaches require [Response](/security/workload_protection/respond_and_rep
 
 ### Requirements
 
-- Enforcement must be enabled in the Agent configuration (`runtime_security.enforcement.enabled`). See [Advanced configuration](/security/workload_protection/getting_started/advanced_configuration).
+- Enforcement must be enabled in the Agent configuration (`runtime_security.enforcement.enabled`). See [Advanced configuration](/security/workload_protection/setup/advanced_configuration).
 - Kill actions are rejected at policy load time if enforcement is globally disabled.
 - Supported signals include `SIGKILL`, `SIGTERM`, `SIGHUP`, `SIGINT`, and other standard POSIX signal names.
 
@@ -288,7 +288,7 @@ Use `hash` to enrich an event with cryptographic hashes of a file referenced in 
 
 ### Supported algorithms
 
-Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `SHA256`, and `SSDEEP`, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`). To change the algorithms used, update `runtime_security_config.hash_resolver.hash_algorithms` in `system-probe.yaml` or set `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS`. See [Workload Protection Agent configuration](/security/workload_protection/getting_started/advanced_configuration) for all hash resolver parameters.
+Hashes are computed by the Agent hash resolver and may include `MD5`, `SHA1`, `SHA256`, and `SSDEEP`, depending on Agent configuration. Results appear in the `*.hashes` field of the file event (for example, `exec.file.hashes`). To change the algorithms used, update `runtime_security_config.hash_resolver.hash_algorithms` in `system-probe.yaml` or set `DD_RUNTIME_SECURITY_CONFIG_HASH_RESOLVER_HASH_ALGORITHMS`. See [Workload Protection Agent configuration](/security/workload_protection/setup/advanced_configuration) for all hash resolver parameters.
 
 ### Example
 

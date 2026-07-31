@@ -1,11 +1,13 @@
 ---
 title: Setting up Workload Protection on ECS
+aliases:
+  - /security/workload_protection/setup/agent/ecs_ec2
 disable_toc: false
 ---
 
 Use the following instructions to enable Workload Protection.
 
-<div class="alert alert-info">If you wish to deploy Workload Protection on ECS configured with the Fargate compute option, we invite you to go to <a href="/security/workload_protection/getting_started/fargate/">the dedicated Fargate deployment page</a>.</div>
+<div class="alert alert-info">If you wish to deploy Workload Protection on ECS configured with the Fargate compute option, we invite you to go to <a href="/security/workload_protection/setup/fargate/">the dedicated Fargate deployment page</a>.</div>
 
 {{< partial name="security-platform/WP-billing-note.html" >}}
 

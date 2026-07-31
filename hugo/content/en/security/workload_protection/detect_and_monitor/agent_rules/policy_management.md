@@ -1,5 +1,8 @@
 ---
 title: Policy management
+aliases:
+  - /security/workload_protection/workload_security_rules/custom_rules
+  - /security/threats/workload_security_rules/custom_rules
 disable_toc: false
 ---
 
@@ -183,7 +186,7 @@ Here are some important [role and permissions][11] to use for custom rules RBAC:
 [13]: #disable-default-agent-rules
 [14]: #create-a-custom-agent-rule
 [15]: https://app.datadoghq.com/cost/settings/tags
-[16]: /security/workload_protection/agent_expressions/
+[16]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide/
 [17]: #prioritize-policies
 [18]: #apply-tags
 [19]: https://app.datadoghq.com/fleet
