@@ -27,22 +27,22 @@ To get started with Bits Code, [set up a source code integration][6] and complet
 Learn how your Bits Code usage is billed on [AI Credits][27].
 
 ## Sessions
-A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at **Bits AI** > **Bits Code** > [**Sessions**][7].
+A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
 {{< img src="bits_ai/dev_agent/code_fix.png" alt="A session showing a Bits AI summary and task list on the left and a code diff on the right" style="width:100%;" >}}
 
 ### Start a session
 After [completing setup][6], do one of the following to start a Bits Code session:
-- Enter a freeform prompt at [**Sessions**][7]: enter a custom prompt or generate one by clicking a suggested prompt card
+- Enter a freeform prompt at [{{< ui >}}Sessions{{< /ui >}}][7]: enter a custom prompt or generate one by clicking a suggested prompt card
 - Invoke Bits Code in a [supported Datadog product](#supported-datadog-products)
 - Set up a Bits Code [automation][28]
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
 ### View and manage sessions
-On **[Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR.
+On [{{< ui >}}Sessions{{< /ui >}}][7], view your past sessions in the {{< ui >}}My Sessions{{< /ui >}} panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR.
 
-Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
+Click a session to view its details and continue working with Bits Code. To remove a session from your {{< ui >}}My Sessions{{< /ui >}} list, click <i class="icon-archive-wui"></i> ({{< ui >}}Archive for everyone{{< /ui >}}) or <i class="icon-eye-slashed-wui"></i> ({{< ui >}}Unwatch session{{< /ui >}}).
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
@@ -82,13 +82,13 @@ You can manually prompt Bits Code to implement changes for a certain finding, or
 
 ### General coding tasks
 
-Use the freeform prompt field at [**Sessions**][7] to work with Bits Code on general coding tasks.
+Use the freeform prompt field at [{{< ui >}}Sessions{{< /ui >}}][7] to work with Bits Code on general coding tasks.
 
 ### Automations
 
 [Automations][28] run Bits Code sessions automatically, on a schedule or in response to signals from Datadog products like Error Tracking, APM, or Code Security. After a session completes, Bits Code delivers the results as a pull or merge request (optionally in draft mode) or a Slack notification.
 
-You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at **Bits AI** > **Bits Code** > [**Automations**][29].
+You can build automations from triggers (a product finding, a custom prompt, a schedule, or a combination) and configure one or more outputs. Datadog-provided templates are also available to help you get started. Create and manage automations at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][29].
 
 ### Custom agent skills and instructions
 
@@ -105,7 +105,7 @@ Bits Code integrates with [source code providers](#supported-source-code-provide
 - Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
 - Monitor CI logs and fix failures
 
-Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in **Bits AI** > **Bits Code** > **[Sessions][7]**.
+Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
 ## Limitations
 
