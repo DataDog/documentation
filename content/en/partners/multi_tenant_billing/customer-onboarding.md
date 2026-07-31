@@ -26,7 +26,7 @@ After submitting, notify the assigned Partner Sales Manager (PSM) that a new opp
 
 ## Create a Trial Org
 
-After the opportunity is registered, create a Trial Org for the prospect. This requires an Admin Org with the Trial Org Creator capability enabled; see [Requesting an Admin Org][3] if one isn't set up yet.
+After the opportunity is registered, create a Trial Org for the prospect. This requires an Admin Org with the Trial Org Creator capability enabled; see [Getting started][3] if one isn't set up yet.
 
 When selecting a region for the Trial Org, match the prospect's environment where possible: cloud provider, geography, and compliance needs. For example, a prospective Azure customer is a fit for the US3 (Azure) site. Default to US1 if there are no specific constraints, or align with a Partner Solutions Architect (PSA) when unsure.
 
@@ -42,7 +42,7 @@ See [Cost and Usage Visibility][5] for how usage and cost data appears from the 
 
 [1]: https://partners.datadoghq.com
 [2]: mailto:partner-support@datadoghq.com
-[3]: /partners/multi_tenant_billing/requesting-an-admin-org/
+[3]: /partners/multi_tenant_billing/#getting-started
 [4]: /partners/multi_tenant_billing/trial-org-provisioning/
 [5]: /partners/multi_tenant_billing/cost-and-usage-visibility/
 [6]: /partners/multi_tenant_billing/troubleshooting/

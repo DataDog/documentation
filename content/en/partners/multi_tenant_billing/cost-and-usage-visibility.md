@@ -11,7 +11,7 @@ A customer organization connects to the partner Admin Org automatically when its
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in the Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][1] for details.
 
-The same data is available programmatically through the following [Usage Metering API][2] endpoints:
+Cost and usage data is also available programmatically through the following [Usage Metering API][2] endpoints:
 
 | API | What it's for | Note |
 |---|---|---|
@@ -26,13 +26,12 @@ The same data is available programmatically through the following [Usage Meterin
 
 ## What's next
 
-See [Centralized Usage Metrics][3] for usage metrics rolled up across the book of business, [Requesting an Admin Org][4] to set one up, or [Trial Org Provisioning][5] to start provisioning trial organizations for prospective customers.
+See [Centralized Usage Metrics][3] for usage metrics rolled up across the book of business, or [Trial Org Provisioning][4] to start provisioning trial organizations for prospective customers.
 
 [1]: /account_management/plan_and_usage/partner_experience/
 [2]: /api/latest/usage-metering/
 [3]: /partners/multi_tenant_billing/centralized-usage-metrics/
-[4]: /partners/multi_tenant_billing/requesting-an-admin-org/
-[5]: /partners/multi_tenant_billing/trial-org-provisioning/
+[4]: /partners/multi_tenant_billing/trial-org-provisioning/
 [6]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
 [7]: /api/latest/usage-metering/#get-historical-cost-across-your-account
 [8]: /api/latest/usage-metering/#get-projected-cost-across-your-account

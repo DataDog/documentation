@@ -51,8 +51,7 @@ To match Plan & Usage totals, use a 1-hour rollup for host-style products and gr
 
 ## What's next
 
-See [Cost and Usage Visibility][2] for cost and billable usage data, or [Requesting an Admin Org][3] to set one up.
+See [Cost and Usage Visibility][2] for cost and billable usage data.
 
 [1]: /account_management/billing/usage_metrics/
 [2]: /partners/multi_tenant_billing/cost-and-usage-visibility/
-[3]: /partners/multi_tenant_billing/requesting-an-admin-org/

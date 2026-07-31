@@ -18,12 +18,16 @@ See [Onboarding a New Customer][15] for how these pieces fit into the path from 
 
 ## Getting started
 
-To request an Admin Org, see [Requesting an Admin Org][1].
+Before requesting an Admin Org, confirm the following:
+
+- The organization is registered on the [Datadog Partner Portal][1].
+- The organization has signed the agreement to transact with Datadog as a resell or MSP partner.
+
+Contact [partner-support@datadoghq.com][16] to request an Admin Org. To provision trial organizations for prospective customers, include the Trial Org Creator capability in the request.
 
 <div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
-  {{< nextlink href="/partners/multi_tenant_billing/requesting-an-admin-org">}}<u>Requesting an Admin Org</u>: Request an Admin Org for a partner account.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a live Trial Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/trial-org-provisioning">}}<u>Trial Org Provisioning</u>: Provision trial organizations for prospective customers directly from an Admin Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/cost-and-usage-visibility">}}<u>Cost and Usage Visibility</u>: Monitor cost and billable usage across all connected customer organizations.{{< /nextlink >}}
@@ -61,9 +65,10 @@ Review and manage the book of business from {{< ui >}}Plan & Usage{{< /ui >}} > 
 
 For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 
-[1]: /partners/multi_tenant_billing/requesting-an-admin-org/
+[1]: https://partners.datadoghq.com
 [2]: /partners/multi_tenant_billing/cost-and-usage-visibility/
 [3]: /partners/multi_tenant_billing/trial-org-provisioning/
 [7]: /partners/multi_tenant_billing/troubleshooting/
 [8]: /partners/multi_tenant_billing/centralized-usage-metrics/
 [15]: /partners/multi_tenant_billing/customer-onboarding/
+[16]: mailto:partner-support@datadoghq.com
