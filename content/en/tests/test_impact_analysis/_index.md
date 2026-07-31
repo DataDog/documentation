@@ -49,6 +49,32 @@ There are several configuration mechanisms that you can use in these scenarios t
 - If GitHub is your source code management provider, use the `ITR:NoSkip` label (case insensitive) to prevent Test Impact Analysis from skipping tests in pull requests. To use this feature, configure the GitHub App using the [GitHub integration tile][9] with the `Software Delivery: Collect Pull Request Information` feature enabled. This mechanism does not work with tests executed on GitHub actions triggered by `pull_request` events.
 - You can add a list of [excluded branches](#excluded-branches), which disables Test Impact Analysis in those branches.
 
+## Limitations and expected behavior
+
+Test Impact Analysis decides which tests to skip by matching the files each test covers against the files a commit changes. The behaviors below are the known cases where that matching is intentionally conservative, so you know what to expect.
+
+<div class="alert alert-info">All of the behaviors in this section are safe by design: they can only cause <strong>more</strong> tests to run, never cause a test to be skipped when it should have run. For code changes that Datadog cannot detect automatically, see <a href="#out-of-the-box-configuration-limitations">Out-of-the-box configuration limitations</a>.</div>
+
+### Code coverage
+
+Test Impact Analysis relies on code coverage collected from previous test runs. Suite-level coverage is reliable and is what Test Impact Analysis uses to decide which tests to skip. For very large test suites, per-test (line-level) coverage may occasionally be unavailable. When it is, Datadog marks the affected test with a missing-coverage indicator, so you can tell a test with no covered lines apart from one whose per-test coverage was not recorded.
+
+Per-test code coverage is collected for Java, JavaScript, .NET, and Go. It is not collected for Ruby, Python, or Swift. See [Code coverage backfilling](#code-coverage-backfilling) for how tests skipped by Test Impact Analysis are accounted for in your total reported coverage.
+
+### Scale limits
+
+To keep analysis fast and predictable, Test Impact Analysis applies a few size limits. Each one is safe: it can only result in more tests running.
+
+- Datadog analyzes up to the 100 most recent commits for a change. On very large changesets, some older commits may not be analyzed, so slightly fewer tests are skipped.
+- If a single commit changes more than 5,000 files, that commit is not analyzed for impact, and its tests are run rather than skipped.
+- If a single test or suite covers more than 16,000 files, it is not skipped.
+
+### Accuracy
+
+To check whether a test covers a changed file efficiently, Datadog uses a space-efficient probabilistic data structure (a Bloom filter). These structures have a small, inherent false-positive rate (approximately 0.04%), so a very small fraction of tests that could have been skipped may run anyway. This never causes a test to be skipped when it should have run.
+
+If Test Impact Analysis behaves unexpectedly, see the [Troubleshooting][12] page for symptom-based guidance.
+
 ## Set up a Datadog library
 
 Before setting up Test Impact Analysis, you must configure [Test Optimization][4] for your particular language. If you are reporting data through the Agent, use v6.40 or 7.40 and later.
@@ -154,3 +180,4 @@ The dashboard also tracks adoption of Test Impact Analysis throughout your organ
 [9]: /integrations/github/
 [10]: /code_coverage/
 [11]: https://app.datadoghq.com/ci/settings/ci-cd/repositories?tab=organization
+[12]: /tests/test_impact_analysis/troubleshooting/

@@ -33,6 +33,19 @@ For large applications with more than 50,000 tests, Datadog may return fewer ski
 export DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite
 {{< /code-block >}}
 
+Other situations can also lead to fewer skipped tests. In all of them the extra tests run safely: Test Impact Analysis never skips a test that should have run.
+
+- A very large changeset may result in slightly fewer tests being skipped, because Datadog analyzes up to the 100 most recent commits.
+- A single commit that changes more than 5,000 files is not analyzed for impact, so its tests run rather than being skipped.
+- A test or suite that covers more than 16,000 files is not skipped.
+- A very small fraction of tests (well under one percent) may run even when they could have been skipped.
+
+For more detail on these behaviors, see [Limitations and expected behavior][7].
+
+### Code coverage is incomplete or missing
+
+Per-test (line-level) code coverage is collected for Java, JavaScript, .NET, and Go. It is not collected for Ruby, Python, or Swift. For very large test suites, per-test coverage may occasionally be unavailable even in supported languages, and affected tests are marked with a missing-coverage indicator. Suite-level coverage remains reliable and is what Test Impact Analysis uses to decide which tests to skip.
+
 ### Synchronizing a fork through GitHub's UI
 
 [Synchronizing a fork through GitHub's UI][4] causes all tests to be run for the generated synchronization commit.
@@ -72,3 +85,4 @@ To avoid this issue in older versions of `dd-trace-py`, you can set the `DD_THIR
 [4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [5]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
 [6]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
+[7]: /tests/test_impact_analysis/#limitations-and-expected-behavior
