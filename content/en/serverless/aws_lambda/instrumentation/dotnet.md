@@ -26,7 +26,7 @@ You can instrument your .NET AWS Lambda application directly within Datadog. Nav
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
 [1]: /serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
+[2]: https://app.datadoghq.com/serverless/aws/lambda
 [3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
