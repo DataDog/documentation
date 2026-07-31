@@ -54,7 +54,7 @@ Start a database investigation from any of the following surfaces in Database Mo
 
 Each of these automatically launches a Bits Chat session and starts an investigation scoped to what you clicked from. You do not need to write a prompt.
 
-You can also ask a database question from anywhere in Datadog: click {{< ui >}}Ask Bits{{< /ui >}} in the top right of the navigation bar, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
+You can also ask a database question from anywhere in Datadog. Click {{< ui >}}Ask Bits{{< /ui >}} in the top-right of the navigation bar, or press <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>I</kbd>.
 
 Bits Chat streams the response as it works through the investigation: it states a plan, calls Datadog services to gather evidence, and shares interim findings. The investigation ends with a structured report covering what happened, why, the supporting evidence, the root cause, and recommended fixes.
 
