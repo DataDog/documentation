@@ -34,11 +34,11 @@ See [Trial Org Provisioning][4] for the full form walkthrough.
 
 ## Share the Trial Org with the account team
 
-Share the new Trial Org's ID with the PSM so it can be associated with the registered opportunity. The PSM (or the Datadog account team) updates the opportunity record with the Trial Org ID, so the opportunity and its usage are properly linked going forward.
+A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's ID with the PSM so it can be associated with the registered opportunity. The customer organization becomes connected to the Admin Org, and its usage visible, once it has an active contract associated with the partnership.
 
 ## What's next
 
-See [Cost and Usage Visibility][5] to monitor the prospect's usage after the Trial Org is active, or [Troubleshooting][6] for common issues along the way.
+See [Cost and Usage Visibility][5] for how usage and cost data appears from the Admin Org after a customer organization is connected, or [Troubleshooting][6] for common issues along the way.
 
 [1]: https://partners.datadoghq.com
 [2]: mailto:partner-support@datadoghq.com

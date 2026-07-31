@@ -8,11 +8,11 @@ cascade:
 
 ## Overview
 
-As a Datadog resell or managed service provider (MSP) partner, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and manage billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
+As a Datadog resell or managed service provider (MSP) partner, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
 
 {{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations" style="width:100%;" >}}
 
-A customer organization connects to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except US1-FED, which requires its own Admin Org for regulatory purposes.
+A customer organization is connected to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except US1-FED, which requires its own Admin Org for regulatory purposes.
 
 See [Onboarding a New Customer][15] for how these pieces fit into the path from a registered deal to a live Trial Org.
 
@@ -38,12 +38,12 @@ Discover some ways an Admin Org can help:
 | Use case | How an Admin Org helps |
 |---|---|
 | Monitor cost and usage across all customers in one place. | Use [Cost and Usage Visibility][2] to view estimated, historical, and projected cost and billable usage data. |
-| Provision Trial Orgs for prospective customers without contacting Datadog. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
+| Self-serve Trial Org creation for prospective customers. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
 | Track usage metrics across the book of business. | Use [Centralized Usage Metrics][8] to roll customer usage metrics up into an Admin Org. |
-| Let customers see their own estimated Datadog costs. (Preview) | Use [End-customer pricing management](#end-customer-pricing-management-preview) to configure per-customer pricing. |
+| Let customers see their own estimated Datadog costs. (Preview) | Use [Customer Pricing Management](#customer-pricing-management-preview) to configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | Use [Customer contracts management](#customer-contracts-management-preview) to track customers, contracts, invoices, and renewals. |
 
-### End-customer pricing management (Preview)
+### Customer Pricing Management (Preview)
 
 Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}} so customers can see their own estimated Datadog costs directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
 

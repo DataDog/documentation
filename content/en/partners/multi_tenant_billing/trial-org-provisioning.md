@@ -5,7 +5,7 @@ description: "Provision trial Datadog organizations for customers directly from 
 
 ## Overview
 
-An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers, without contacting Datadog for each trial. This is useful for running proof-of-concept engagements at scale. Trial Orgs created this way run for 30 days, instead of the standard 14-day trial period.
+An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly, without waiting on Datadog to create each one. This speeds up running proof-of-concept engagements at scale. The underlying opportunity should still be registered with Datadog, so the deal is tracked and credited to the partner; see [Onboarding a New Customer][4] for the full process. Trial Orgs created this way run for 30 days, instead of the standard 14-day trial period.
 
 {{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning page on the Admin Org homepage" style="width:100%;" >}}
 
@@ -30,12 +30,13 @@ The Trial Org is created immediately. The result panel shows the new org's name,
 
 ## After provisioning
 
-Share the new Trial Org's name and org ID with the PSM so it can be associated with the opportunity registered on the [Partner Portal][2], so usage from the Trial Org is tracked against the deal.
+A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's name and org ID with the PSM so it can be associated with the opportunity registered on the [Partner Portal][2]. The customer organization becomes connected to the Admin Org, and its usage visible, once it has an active contract associated with the partnership.
 
 ## What's next
 
-For an overview of how usage and cost data from Trial Orgs and other connected customer orgs roll up into the Admin Org, see [Cost and Usage Visibility][3].
+See [Cost and Usage Visibility][3] for how usage and cost data appears from the Admin Org after a customer organization is connected.
 
 [1]: mailto:partner-support@datadoghq.com
 [2]: https://partners.datadoghq.com
 [3]: /partners/multi_tenant_billing/cost-and-usage-visibility/
+[4]: /partners/multi_tenant_billing/customer-onboarding/
