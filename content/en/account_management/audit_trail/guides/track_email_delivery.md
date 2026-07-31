@@ -1,6 +1,6 @@
 ---
 title: Track Email Delivery in Your Organization
-description: Query Audit Trail for the delivery outcome of every email Datadog sends on your organization's behalf.
+description: Query Audit Trail for the delivery outcome of the email Datadog sends on your organization's behalf.
 private: true
 site_support_id: email_delivery
 further_reading:
@@ -23,7 +23,7 @@ further_reading:
 
 ## Overview
 
-Datadog sends transactional email on your organization's behalf, including user invitations, account verifications, password resets, scheduled reports, and monitor alert notifications. Audit Trail records an event for every send, with one of three statuses:
+Datadog sends transactional email on your organization's behalf, including user invitations, account verifications, password resets, scheduled reports, and monitor alert notifications. Each email delivery event in Audit Trail has one of three statuses:
 
 - **Delivered**: the recipient's mail server accepted the message.
 - **Bounced**: the recipient's mail server rejected the message.
@@ -42,7 +42,7 @@ Confirm what happened to a message and see its status. Click a situation to open
 | [A user did not receive an email][4]                 | `@evt.name:"Email Delivery" @metadata.email.recipient_address:user@example.com` |
 | [Mail to an entire domain is missing][5]             | `@evt.name:"Email Delivery" @metadata.email.recipient_domain:"@example.com"` |
 | [Check one kind of email, such as invitations][6]    | `@evt.name:"Email Delivery" @metadata.email.type:"Basic Invite"`           |
-| [See every email Datadog has sent][7]                | `@evt.name:"Email Delivery"`                                              |
+| [See all recorded delivery events][7]                | `@evt.name:"Email Delivery"`                                              |
 
 ## Investigate a delivery failure
 

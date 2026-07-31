@@ -1,6 +1,6 @@
 ---
 title: Ensuring Reliable Delivery
-description: Allowlist Datadog sending addresses and check sender authentication so Datadog email is not filtered or suppressed.
+description: Add Datadog to your organization's trusted email senders and check sender authentication so Datadog email is not filtered or suppressed.
 private: true
 site_support_id: email_delivery
 further_reading:
@@ -14,28 +14,33 @@ further_reading:
 
 ## Overview
 
-Prepare your mail environment to accept Datadog email so legitimate messages are not filtered or suppressed. Share these steps with whoever manages the email infrastructure for your organization.
+Datadog sends email from several addresses and domains. Share this page with whoever manages your organization's email infrastructure.
 
-## Allowlist Datadog senders
+## Add Datadog to your trusted senders
 
-To reliably receive Datadog email notifications, add the Datadog sending addresses for your site to the list of trusted senders for your organization. This helps keep Datadog email out of spam filters and suppression lists.
+Datadog sends email from the following addresses and domains, all of which are owned by Datadog. Add them to your organization's list of trusted email senders:
 
-| Site    | Sending addresses                                                                     |
-| ------- | ------------------------------------------------------------------------------------- |
-| US1     | `noreply@datadoghq.com`, `alert@datadoghq.com`, `alert@dtdg.co`, `no-reply@dtdg.co`    |
-| EU      | `*@dtdg.eu`                                                                           |
-| US1-FED | `*@ddog-gov.com`                                                                      |
+```text
+noreply@datadoghq.com
+no-reply@datadoghq.com
+no-reply@dtdg.co
+alert@datadoghq.com
+*@admin.dtdg.co
+*@dtdg-trial.co
+*@dtdg.eu
+*@admin.dtdg.eu
+*@dtdg-trial.eu
+*@ddog-gov.com
+```
+
+If you receive Datadog email from a sender that is not listed here, contact [Datadog Support][1].
 
 ## Check your sender authentication
 
-If your organization enforces strict mail security, confirm that your SPF, DKIM, and DMARC policies accept Datadog mail. A strict inbound policy that rejects the Datadog sender is a common cause of failures.
-
-If you forward Datadog email, make sure your forwarding setup and DNS records, especially SPF, account for it. A missing SPF update on a forwarding address often causes bounces.
-
-For failures that have already occurred, see [Common reasons email fails][1].
+Datadog publishes SPF and DKIM records for these domains, so Datadog email is expected to pass inbound authentication checks. If it does not, contact [Datadog Support][1] with the recipient address and the approximate send time.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/email_delivery/troubleshooting_email_delivery/#common-reasons-email-fails
+[1]: /help/

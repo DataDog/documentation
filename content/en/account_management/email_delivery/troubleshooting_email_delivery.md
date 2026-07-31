@@ -80,7 +80,7 @@ If Datadog email still does not arrive, contact your email security gateway prov
 
 [1]: /account_management/audit_trail/guides/track_email_delivery/
 [2]: https://app.datadoghq.com/dash/integration/email_delivery_tracking
-[3]: /account_management/email_delivery/ensuring_reliable_delivery/#allowlist-datadog-senders
+[3]: /account_management/email_delivery/ensuring_reliable_delivery/#add-datadog-to-your-trusted-senders
 [4]: #email-suppressions
 [5]: /help/
 [6]: /account_management/email_delivery/ensuring_reliable_delivery/#check-your-sender-authentication
