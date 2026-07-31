@@ -40,36 +40,13 @@ The Ownership Agent reads multiple data sources and combines them into a ranked 
 The Ownership Agent processes the following cloud resource types:
 
 
-| Resource type                     | Cloud provider                    |
-| --------------------------------- | --------------------------------- |
-| `aws_cloudformation_stack`        | AWS                               |
-| `aws_cloudfront_distribution`     | AWS                               |
-| `aws_cognito_user_pool`           | AWS                               |
-| `aws_dynamodb`                    | AWS                               |
-| `aws_ec2_instance`                | AWS                               |
-| `aws_ec2_settings`                | AWS                               |
-| `aws_ecr_repository`              | AWS                               |
-| `aws_ecs_cluster`                 | AWS                               |
-| `aws_ecs_service`                 | AWS                               |
-| `aws_elbv2_load_balancer`         | AWS                               |
-| `aws_iam_account`                 | AWS                               |
-| `aws_iam_policy`                  | AWS                               |
-| `aws_iam_role`                    | AWS                               |
-| `aws_iam_role_inline_policy`      | AWS                               |
-| `aws_iam_user`                    | AWS                               |
-| `aws_lambda_function`             | AWS                               |
-| `aws_rds_cluster`                 | AWS                               |
-| `aws_rds_instance`                | AWS                               |
-| `aws_s3_bucket`                   | AWS                               |
-| `aws_secretsmanager_secret`       | AWS                               |
-| `aws_security_group`              | AWS                               |
-| `aws_subnet`                      | AWS                               |
-| `aws_vpc`                         | AWS                               |
-| `azure_virtual_machine_instance`  | Azure                             |
-| `gcp_compute_instance`            | GCP                               |
-| `host`                            | AWS, Azure, GCP                   |
-| `host_image`                      | AWS, Azure, GCP                   |
-| `image` (container)               | Docker, ECR, and other registries |
+| Cloud provider                    | Resource types |
+| --------------------------------- | -------------- |
+| AWS                               | `aws_cloudformation_stack`, `aws_cloudfront_distribution`, `aws_cognito_user_pool`, `aws_dynamodb`, `aws_ec2_instance`, `aws_ec2_settings`, `aws_ecr_repository`, `aws_ecs_cluster`, `aws_ecs_service`, `aws_elbv2_load_balancer`, `aws_iam_account`, `aws_iam_policy`, `aws_iam_role`, `aws_iam_role_inline_policy`, `aws_iam_user`, `aws_lambda_function`, `aws_rds_cluster`, `aws_rds_instance`, `aws_s3_bucket`, `aws_secretsmanager_secret`, `aws_security_group`, `aws_subnet`, `aws_vpc` |
+| Azure                             | `azure_virtual_machine_instance` |
+| GCP                               | `gcp_compute_instance` |
+| AWS, Azure, GCP                   | `host`, `host_image` |
+| Docker, ECR, and other registries | `image` (container) |
 
 
 ## Review and correct ownership
