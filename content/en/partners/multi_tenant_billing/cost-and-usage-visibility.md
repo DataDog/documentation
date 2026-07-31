@@ -15,19 +15,12 @@ The same data is available programmatically through the [Usage Metering API][2],
 
 **Note**: Standard GovCloud boundaries apply to this visibility. A non-GovCloud Admin Org cannot see cost and usage data for a GovCloud customer organization.
 
-## Centralized Usage Metrics (Preview)
-
-Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to the Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across the book of business. See [Estimated Usage Metrics][3] for the metrics reference.
-
-**Note**: This capability is in preview. Contact [partner-support@datadoghq.com][4] to join the preview.
-
 ## What's next
 
-See [Requesting an Admin Org][5] to set one up, or [Trial Org Provisioning][6] to start provisioning trial organizations for prospective customers.
+See [Centralized Usage Metrics][3] for usage metrics rolled up across the book of business, [Requesting an Admin Org][4] to set one up, or [Trial Org Provisioning][5] to start provisioning trial organizations for prospective customers.
 
 [1]: /account_management/plan_and_usage/partner_experience/
 [2]: /api/latest/usage-metering/
-[3]: /account_management/billing/usage_metrics/
-[4]: mailto:partner-support@datadoghq.com
-[5]: /partners/multi_tenant_billing/requesting-an-admin-org/
-[6]: /partners/multi_tenant_billing/trial-org-provisioning/
+[3]: /partners/multi_tenant_billing/centralized-usage-metrics/
+[4]: /partners/multi_tenant_billing/requesting-an-admin-org/
+[5]: /partners/multi_tenant_billing/trial-org-provisioning/

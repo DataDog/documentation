@@ -24,6 +24,7 @@ To request an Admin Org, see [Requesting an Admin Org][1].
   {{< nextlink href="/partners/multi_tenant_billing/requesting-an-admin-org">}}<u>Requesting an Admin Org</u>: Request an Admin Org for a partner account.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/trial-org-provisioning">}}<u>Trial Org Provisioning</u>: Provision trial organizations for prospective customers directly from an Admin Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/cost-and-usage-visibility">}}<u>Cost and Usage Visibility</u>: Monitor cost and billable usage across all connected customer organizations.{{< /nextlink >}}
+  {{< nextlink href="/partners/multi_tenant_billing/centralized-usage-metrics">}}<u>Centralized Usage Metrics</u>: Monitor usage metrics across all connected customer organizations.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/troubleshooting">}}<u>Troubleshooting</u>: Resolve common issues with Admin Org and Trial Org provisioning.{{< /nextlink >}}
 {{< /whatsnext >}}
 
@@ -35,7 +36,7 @@ Discover some ways an Admin Org can help:
 |---|---|
 | Monitor cost and usage across all customers in one place. | Use [Cost and Usage Visibility][2] to view estimated, historical, and projected cost and billable usage data. |
 | Provision Trial Orgs for prospective customers without contacting Datadog. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
-| Track usage metrics across the book of business. (Preview) | Use [Centralized Usage Metrics](#centralized-usage-metrics-preview) to roll customer usage metrics up into an Admin Org. |
+| Track usage metrics across the book of business. | Use [Centralized Usage Metrics][8] to roll customer usage metrics up into an Admin Org. |
 | Let customers see their own estimated Datadog costs. (Preview) | Use [End-customer pricing management](#end-customer-pricing-management-preview) to configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | Use [Customer contracts management](#customer-contracts-management-preview) to track customers, contracts, invoices, and renewals. |
 
@@ -55,9 +56,9 @@ An Admin Org with the Trial Org Creator capability enabled can provision trial D
 
 {{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning dashboard inside an Admin Org" style="width:100%;" >}}
 
-### Centralized Usage Metrics (Preview)
+### Centralized Usage Metrics
 
-Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to the Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across the book of business. See [Estimated Usage Metrics][6] for the metrics reference.
+Usage and estimated usage metrics from connected customer orgs roll up to the Admin Org as ordinary Datadog metrics, tagged for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across the book of business. See [Centralized Usage Metrics][8] for the full walkthrough.
 
 {{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
 
@@ -84,5 +85,5 @@ For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 [3]: /partners/multi_tenant_billing/trial-org-provisioning/
 [4]: /account_management/plan_and_usage/partner_experience/
 [5]: /api/latest/usage-metering/
-[6]: /account_management/billing/usage_metrics/
 [7]: /partners/multi_tenant_billing/troubleshooting/
+[8]: /partners/multi_tenant_billing/centralized-usage-metrics/
