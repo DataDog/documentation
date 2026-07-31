@@ -1,6 +1,6 @@
 ---
 title: Cost and Usage Visibility
-description: "Monitor cost and billable usage across all your connected customer organizations from your Admin Org."
+description: "Monitor cost and billable usage across all connected customer organizations from an Admin Org."
 further_reading:
   - link: "/account_management/plan_and_usage/partner_experience/"
     tag: "Documentation"
@@ -19,7 +19,7 @@ A customer organization connects to the partner Admin Org automatically when its
 
 ## View cost and usage data
 
-Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in your Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][1] for details.
+Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in the Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][1] for details.
 
 The same data is available programmatically through the [Usage Metering API][2], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
 
@@ -27,13 +27,13 @@ The same data is available programmatically through the [Usage Metering API][2],
 
 ## Centralized Usage Metrics (Preview)
 
-Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to your Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across your book of business. See [Estimated Usage Metrics][3] for the metrics reference.
+Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usage.*`) from connected customer orgs roll up to the Admin Org as ordinary Datadog metrics, tagged with `child_org_name` for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across the book of business. See [Estimated Usage Metrics][3] for the metrics reference.
 
-**Note**: This capability is in preview. Contact [partner-support@datadoghq.com][4] if you're interested in joining the preview.
+**Note**: This capability is in preview. Contact [partner-support@datadoghq.com][4] to join the preview.
 
 ## What's next
 
-See [Requesting an Admin Org][5] if you haven't yet set one up, or [Trial Org Provisioning][6] to start provisioning trial organizations for prospective customers.
+See [Requesting an Admin Org][5] to set one up, or [Trial Org Provisioning][6] to start provisioning trial organizations for prospective customers.
 
 [1]: /account_management/plan_and_usage/partner_experience/
 [2]: /api/latest/usage-metering/
