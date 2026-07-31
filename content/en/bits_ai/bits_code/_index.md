@@ -75,7 +75,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
 | [Continuous Profiler][3]  | Provides code changes for [Automated Analysis][10] insights   |
 | [Containers][12]          | Provides code changes for [Kubernetes Remediations][13]  |
-| [Sensitive Data Scanner][36] | Generates code fixes for log statements causing sensitive data leaks |
+| [Sensitive Data Scanner][36] | Generates code fixes for logs causing sensitive data leaks |
 
 ## Key capabilities 
 
