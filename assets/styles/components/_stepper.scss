@@ -108,27 +108,29 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
 }
 
 .stepper__step-title {
-    // Clearance so scrollIntoView doesn't tuck the title under the fixed header.
+    // Clearance so scrollIntoView doesn't tuck the title under the fixed header,
+    // with extra breathing room so the scrolled-to title lands lower and more of
+    // the previous step stays in view.
     // 100px matches the convention used elsewhere for sticky-header offset
     // (see .collapsible-section and dt[id] in _collapsible-section.scss).
     // Applied to every stepper title, since a stepper can appear on both
     // customizable and non-customizable pages.
-    scroll-margin-top: 100px;
+    scroll-margin-top: 120px;
 
     // The announcement banner pushes the header down by 30px (see _header.scss),
     // so add matching clearance when the banner is present.
     .announcement & {
-        scroll-margin-top: 130px;
+        scroll-margin-top: 150px;
     }
 
     // Customizable pages also have a sticky Cdocs filter bar below the header,
     // which makes the sticky region at the top of the page deeper, so the title
     // needs extra clearance to land below both the header and the filters.
     #cdoc-content.customizable & {
-        scroll-margin-top: 175px;
+        scroll-margin-top: 205px;
 
         .announcement & {
-            scroll-margin-top: 205px;
+            scroll-margin-top: 235px;
         }
     }
 
@@ -136,7 +138,9 @@ $stepper-circle-center: $stepper-title-pad-top + 1px + ($stepper-circle-size * 0
     margin: 0;
     padding: $stepper-title-pad-top 0;
     font-size: 18px;
-    font-weight: 600;
+    // !important is needed to beat the global `h2 { font-weight: 200 !important }`
+    // rule in _bootstrap-custom.scss, so h2 step titles are bold like h3/h4.
+    font-weight: 600 !important;
     line-height: $stepper-circle-size;
     cursor: pointer;
     user-select: none;
