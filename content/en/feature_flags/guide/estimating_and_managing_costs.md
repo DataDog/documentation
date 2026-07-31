@@ -24,7 +24,7 @@ further_reading:
 
 ## Overview
 
-Feature Flags usage scales with how you deploy flags. It depends on the number of client applications and end users connecting to Datadog, and the number of backend services and environments polling for configuration. Two organizations with the same number of flags can generate different amounts of usage, depending on this deployment footprint. This guide helps you estimate usage and cost before you roll out broadly. It also covers the levers available to manage and reduce cost after you're live.
+Feature Flags usage scales with how you deploy flags. For client-side usage, it depends on the number of client applications and end users connecting to Datadog. For server-side usage, it depends on the number of backend services polling for configuration. Two organizations with the same number of flags can generate different amounts of usage, depending on this deployment footprint. This guide helps you estimate usage and cost before you roll out broadly. It also covers the levers available to manage and reduce cost after you're live.
 
 ## Estimate your Feature Flags usage and costs
 
@@ -32,9 +32,8 @@ Datadog bills Feature Flags usage in Monthly Flag Configuration Requests (MFCR).
 
 Because MFCR counts configuration requests, the number of flags you maintain and how often they're evaluated don't directly drive usage. The factors that do:
 
-- **Client-side (RUM-backed) usage**: A client-side SDK requests configuration when it initializes, which typically happens each time a user opens a browser tab or mobile app. Client-side MFCR closely tracks the total (unsampled) volume of sessions or app opens across the applications where you use flags.
-- **Server-side usage**: A server-side SDK polls Datadog (or the Datadog Agent, depending on the [configuration source][2] you choose) at a configurable interval, 30 seconds by default. Server-side MFCR tracks the number of hosts, services, or containers running the SDK, multiplied by how often each one polls.
-- **Number of environments**: Server-side polling volume multiplies with each [environment][3] that runs an instance of the SDK. Deploying the same service to development, staging, and production, for example, multiplies that service's request volume by three.
+- **Client-side usage**: A client-side SDK requests configuration when it initializes, which typically happens each time a user opens a browser tab or mobile app. Client-side MFCR closely tracks the total (unsampled) volume of sessions or app opens across the applications where you use flags.
+- **Server-side usage**: A server-side SDK polls Datadog (or the Datadog Agent, depending on the [configuration source][2] you choose) at a configurable interval, 30 seconds by default. Server-side MFCR tracks the total number of running hosts, services, or containers with the SDK deployed, multiplied by how often each one polls.
 - **Client- and server-side mix**: If you use flags on both the client and server, add the two estimates together.
 
 <div class="alert alert-info">Datadog bills server-side configuration requests at 10 times their raw count, because a single server-side request can serve variant assignments to many more end users than a single client-side request.</div>
@@ -45,12 +44,12 @@ Because MFCR counts configuration requests, the number of flags you maintain and
 1. For client-side usage, estimate with one of the following:
    - Your monthly volume of RUM sessions or daily active users across the applications where you plan to use flags, multiplied by 30 for a monthly estimate.
    - If flags cover a broader set of applications than your current RUM implementation, use daily active users or daily sessions across those applications instead.
-1. For server-side usage, count the number of hosts, services, or containers that run the SDK, multiplied by the number of environments where each is deployed. Multiply that total by the number of configuration requests per day at your polling interval, then by 30 for a monthly estimate, and apply the 10 times server-side multiplier.
+1. For server-side usage, count the total number of running hosts, services, or containers with the SDK deployed. Multiply that count by the number of configuration requests per day at your polling interval, then by 30 for a monthly estimate, and apply the 10 times server-side multiplier.
 1. Add the client-side and server-side estimates together for a combined monthly MFCR estimate.
 
 For example, an organization with 1.2 million daily active users on flagged client applications generates approximately 36 million MFCR per month (1.2 million x 30 days).
 
-For a server-side example, an organization running the SDK on 11 hosts across three environments has 33 total instances. At the default 30-second polling interval, each instance makes 2880 configuration requests per day (86,400 seconds per day / 30 seconds). That's 33 x 2880 x 30 days = 2,851,200 (approximately 2.85 million) MFCR before the server-side multiplier, or approximately 28.5 million MFCR after it.
+For a server-side example, an organization running the SDK on 33 hosts generates 2,880 configuration requests per host per day at the default 30-second polling interval (86,400 seconds per day / 30 seconds). That's 33 x 2,880 x 30 days = 2,851,200 (approximately 2.85 million) MFCR before the server-side multiplier, or approximately 28.5 million MFCR after it.
 
 Usage under 1 million MFCR per month is included at no cost. For current pricing tiers above that allotment, see the [Feature Flags pricing page][4].
 
