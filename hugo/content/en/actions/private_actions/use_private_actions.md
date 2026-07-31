@@ -762,6 +762,63 @@ When you see the {{< ui >}}Ready to use{{< /ui >}} status, you can create a new 
 
 See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 
+### Custom CA certificates
+
+If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA. Provide the runner with the `SSL_CERT_DIR` environment variable and mount your CA certificate into the container at that path.
+
+{{< tabs >}}
+{{% tab "Docker" %}}
+
+Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `PATH_TO_YOUR_CA_CERTIFICATE` with the path to your CA certificate file:
+
+```bash
+docker run -d \
+  -e SSL_CERT_DIR=/etc/dd-action-runner/config/ca-certificates \
+  -v PATH_TO_YOUR_CA_CERTIFICATE:/etc/dd-action-runner/config/ca-certificates/ca.crt \
+  ...
+```
+
+{{% /tab %}}
+
+{{% tab "Docker Compose" %}}
+
+Add the `SSL_CERT_DIR` environment variable and mount your certificate in your `docker-compose.yaml` file, replacing `PATH_TO_YOUR_CA_CERTIFICATE` with the path to your CA certificate file:
+
+```yaml
+runner:
+  environment:
+    SSL_CERT_DIR: /etc/dd-action-runner/config/ca-certificates
+  volumes:
+    - "PATH_TO_YOUR_CA_CERTIFICATE:/etc/dd-action-runner/config/ca-certificates/ca.crt"
+```
+
+{{% /tab %}}
+
+{{% tab "Kubernetes" %}}
+
+1. Create a ConfigMap containing your CA certificate:
+
+   ```bash
+   kubectl create configmap my-ca-cert --from-file=ca.crt=./my-custom-ca.pem
+   ```
+
+1. In your Helm `values.yaml` file, reference the ConfigMap:
+
+   ```yaml
+   runner:
+     customCaCert:
+       configMapName: my-ca-cert
+   ```
+
+1. Apply the updated values:
+
+   ```bash
+   helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
+   ```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Manage access
 
 Use [role-based access control (RBAC)][17] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][18].
