@@ -82,7 +82,7 @@ A team that is managed externally from an identity provider displays a **Managed
 
 ## Team hierarchies
 
-Build a Teams map to visualize team hierarchies that let you nest teams within each other (subteams) to mirror your company's actual structure, giving you a more complete and accurate ownership model instead of a flat, disconnected list of teams. A team's related teams, parent teams, sister teams, and subteams, appear in its Teams Page, in the Hierarchy section of its Info tab. To explore the full map of all teams in your organization, visit the [Teams Map][7] in the Datadog Internal Developer Portal (IDP).
+Build a Teams map to visualize team hierarchies, nesting teams within each other (subteams) to mirror your company's actual structure. The result is a more complete ownership model than a flat, disconnected list of teams. A team's related teams, parent teams, sister teams, and subteams appear on its team page, in the **Hierarchy** section of the **Info** tab. To explore the full map of all teams in your organization, see the [Teams Map][7] in the Datadog Internal Developer Portal.
 
 {{< img src="/account_management/teams/github/manage/teams-map.png" alt="Teams map showing a hierarchy of parent and child teams, with a selected team's details panel displaying its members and subteams" style="width:100%;" >}}
 
