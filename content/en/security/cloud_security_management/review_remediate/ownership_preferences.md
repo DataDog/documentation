@@ -310,7 +310,7 @@ Datadog stores your preferences as a [reference table][1]. The table must be nam
 
 There are several ways to create and update the table:
 
-### Option 1: manual CSV upload (Datadog UI)
+### Option 1: Manual CSV upload (Datadog UI)
 
 This approach is best for getting started or making occasional updates.
 
