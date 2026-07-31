@@ -36,8 +36,8 @@ Two fields act as join keys across all three entity types:
 
 - You must have [Database Monitoring configured][2].
 - You must have a **Datadog API key** and an **unscoped application key**. The DBM logs analytics endpoint requires the `built_in_features` scope, which is only available on unscoped application keys.
-  - Find or create your API keys at **Organization Settings > API Keys**.
-  - Find or create your application keys at **Organization Settings > Application Keys**.
+  - Find or create your API keys at {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}API Keys{{< /ui >}}.
+  - Find or create your application keys at {{< ui >}}Organization Settings{{< /ui >}} > {{< ui >}}Application Keys{{< /ui >}}.
 
 Set these environment variables before running the examples below:
 

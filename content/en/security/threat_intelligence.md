@@ -33,6 +33,10 @@ Datadog curates commercial, open-source, and in-house threat intelligence indica
 
 ## Bring your own threat intelligence
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
+
 Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 The amount of time threat intelligence persists as an available enrichment varies depending on source:
@@ -103,7 +107,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | App and API Protection, Workload Protection, and Cloud SIEM |
 | disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
-| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
+| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Cloud SIEM |
 | cryptomining | malicious | IP addresses | IP addresses associated with cryptomining activities | AAP, CWS, and Cloud SIEM |
 
 ### Threat intelligence intents

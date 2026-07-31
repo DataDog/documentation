@@ -21,7 +21,7 @@ further_reading:
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your .NET AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [{{< ui >}}Instrument Functions{{< /ui >}}][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -315,7 +315,7 @@ module "lambda-datadog" {
 
 ## Add custom spans
 
-When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET tracer is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
+When using the [Datadog Lambda tracing layer for .NET][9], ensure that a second version of the .NET SDK is not also packaged with your application code. Add the `ExcludeAssets` instruction to ensure this extra tracer is excluded.
 
 ```xml
 <PackageReference Include="Datadog.Trace" Version="3.26.3"/>

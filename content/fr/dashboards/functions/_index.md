@@ -17,43 +17,46 @@ aliases:
 - /fr/getting_started/from_the_query_to_the_graph
 - /fr/graphing/miscellaneous/from_the_query_to_the_graph
 - /fr/graphing/functions/
+description: Appliquez des fonctions mathématiques et statistiques pour modifier les
+  résultats des requêtes métriques dans les tableaux de bord et visualisations de
+  Datadog.
 further_reading:
-- link: /metrics/#interroger-des-metriques
+- link: /metrics/#querying-metrics
   tag: Documentation
   text: Interroger des métriques
 title: Fonctions
 ---
+## Aperçu {#overview}
 
-## Présentation
+Les fonctions peuvent modifier la manière dont les résultats d'une requête métrique sont retournés pour les visualisations. La plupart des fonctions sont appliquées après que les résultats de la requête métrique ont été retournés, mais les fonctions peuvent également changer les paramètres avant que la requête ne soit effectuée. 
 
-Les fonctions permettent de modifier la présentation des résultats d'une requête de métrique au sein des visualisations. La plupart des fonctions sont appliquées après que les résultats ont été renvoyés. Toutefois, les fonctions peuvent également modifier des paramètres avant l'envoi de la requête.
+Par exemple, la fonction Rollup change l'agrégation temporelle d'une requête avant que les résultats ne soient retournés. Alternativement, les fonctions arithmétiques appliquent des modifications aux résultats retournés de la requête métrique. Consultez la page [Métriques][3] pour en savoir plus sur les requêtes de métriques. Pour en savoir plus sur les différentes fonctions, consultez les [types de fonctions](#function-types).
 
-Par exemple, la fonction de cumul modifie l'agrégation temporelle d'une requête avant la transmission des résultats. Par ailleurs, les fonctions arithmétiques modifient les résultats renvoyés de la requête de métrique. Consultez la page [Métriques][3] pour en savoir plus sur l'interrogation de métriques. Pour vous familiariser davantage avec les différentes fonctions, consultez la rubrique [Types de fonctions](#types-de-fonctions).
+## Ajouter une fonction {#add-a-function}
 
-## Ajouter une fonction
+Les fonctions peuvent être appliquées à vos requêtes en cliquant sur l'icône Add Function `Σ` dans l'éditeur de graphiques. La plupart des fonctions sont appliquées après [agrégation temporelle][1] et [agrégation spatiale][2].
 
-Vous pouvez cliquer sur l'icône d'ajout de fonction `Σ` dans l'éditeur de graphiques pour appliquer des fonctions à vos métriques. La plupart des fonctions sont appliquées après les agrégations [temporelle][1] et [spatiale][2].
+{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Symbole Sigma majuscule pour Add Function" style="width:100%;" >}}
 
-{{< img src="dashboards/functions/sigmaaddingfunctions.png" alt="Symbole Sigma majuscule pour l'ajout de fonction" style="width:100%;" >}}
+## Types de fonctions {#function-types}
 
-## Types de fonctions
-
-{{< whatsnext desc="Choisissez un type de fonction :" >}}
-    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithme : mettez en place un système de détection d'anomalies ou de singularités.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/arithmetic" >}}Opérations arithmétiques : effectuez des opérations arithmétiques.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/count" >}}Nombre de valeurs : comptez les valeurs différentes de zéro ou de null.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : excluez certaines valeurs de votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : saisissez ou définissez des valeurs par défaut.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rank" >}}Rang : sélectionnez seulement un sous-ensemble de métriques. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rate" >}}Taux : calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/regression" >}}Régression : appliquez une fonction d'apprentissage automatique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/rollup" >}}Cumul : contrôlez le nombre de points de données bruts utilisés. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : lissez les variations de votre métrique.{{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : modifiez la période d'un point de données de votre métrique. {{< /nextlink >}}
-    {{< nextlink href="/dashboards/functions/beta" >}}Bêta : calculez la moyenne mobile d'une métrique.{{< /nextlink >}}
+{{< whatsnext desc="Choisissez un type de fonction :" >}}
+    {{< nextlink href="/dashboards/functions/algorithms" >}}Algorithmique : Implémentez la détection d'anomalies ou de valeurs aberrantes.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/arithmetic" >}}Arithmétique : Effectuez des opérations arithmétiques.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/count" >}}Compter : Comptez les valeurs différentes de zéro ou non nulles.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/exclusion" >}}Exclusion : Excluez certaines valeurs de votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/interpolation" >}}Interpolation : Remplissez ou définissez des valeurs par défaut.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rank" >}}Classement : Sélectionnez uniquement un sous-ensemble de métriques. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rate" >}}Taux : Calculez une dérivée personnalisée sur votre métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/regression" >}}Régression : Appliquez une fonction d'apprentissage automatique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/rollup" >}}Rollup : Contrôlez le nombre de points de données bruts utilisés. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/smoothing" >}}Lissage : Lissez vos variations de métrique.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/telemetry_source" >}}Source de télémétrie : Choisissez la source de télémétrie de vos données métriques.{{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/timeshift" >}}Décalage temporel : Déplacez votre point de données métriques le long de la chronologie. {{< /nextlink >}}
+    {{< nextlink href="/dashboards/functions/beta" >}}Bêta : Calculez la moyenne mobile d'une métrique.{{< /nextlink >}}
 {{< /whatsnext >}}
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 

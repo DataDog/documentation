@@ -1,6 +1,6 @@
 ---
 aliases:
-- /ko/service_management/events/guides/recommended_event_tags/
+- /ko/events/guides/recommended_event_tags/
 description: 권장 이벤트 태그 및 그 추가 방법에 대해 알아보세요.
 further_reading:
 - link: /getting_started/tagging/assigning_tags

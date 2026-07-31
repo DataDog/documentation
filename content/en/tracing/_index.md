@@ -2,37 +2,33 @@
 title: APM
 description: Instrument your code to improve performance
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=APM"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog APM releases! (App login required)"
-  - link: "https://www.datadoghq.com/blog/monitor-rust-otel/"
-    tag: "Blog"
-    text: "How to monitor your Rust applications with OpenTelemetry"
+  - link: "https://learn.datadoghq.com/courses/getting-started-apm"
+    tag: "Learning Center"
+    text: "Getting Started with APM Metrics and Traces"
+  - link: "https://dtdg.co/fe"
+    tag: "Foundation Enablement"
+    text: "Join an interactive session to boost your APM understanding"
   - link: "https://www.datadoghq.com/blog/span-based-metrics/"
     tag: "Blog"
     text: "Generate span-based metrics to track historical trends in application performance"
   - link: "https://www.datadoghq.com/blog/apm-security-view/"
     tag: "Blog"
     text: "Gain visibility into risks, vulnerabilities, and attacks with APM Security View"
-  - link: "https://www.datadoghq.com/blog/monitor-azure-app-service-linux/"
+  - link: "https://www.datadoghq.com/blog/pubsub-cloud-run-tracing"
     tag: "Blog"
-    text: "Monitor your Linux web apps on Azure App Service with Datadog"
-  - link: "https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/"
+    text: "Trace Google Pub/Sub workloads in Cloud Run with Datadog"
+  - link: "https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency"
     tag: "Blog"
-    text: "Manage API performance, security, and ownership with Datadog API Catalog"
-  - link: "https://www.datadoghq.com/blog/software-catalog/"
+    text: "Analyzing round trip query latency"
+  - link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
     tag: "Blog"
-    text: "Improve developer experience and collaboration with Software Catalog"
-  - link: "https://www.datadoghq.com/blog/datadog-csi-driver/"
+    text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
+  - link: "https://www.datadoghq.com/blog/dbm-supabase/"
     tag: "Blog"
-    text: "Bring high-performance observability to secure Kubernetes environments with Datadog's CSI driver"
-  - link: "https://dtdg.co/fe"
-    tag: "Foundation Enablement"
-    text: "Join an interactive session to boost your APM understanding"
-  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
-    tag: "Blog"
-    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
-
+    text: "Monitor and optimize Supabase query performance with Datadog Database Monitoring"
+  - link: "https://app.datadoghq.com/release-notes?category=APM"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog APM releases! (App login required)"
 aliases:
   - /tracing/faq/terminology
   - /tracing/guide/terminology
@@ -66,7 +62,7 @@ For an introduction to terminology used in Datadog APM, see [APM Terms and Conce
 
 To get started with APM, use [Single Step Instrumentation][27]. This installs the Datadog Agent and instruments your application in one step, enabling full distributed tracing with no additional configuration required.
 
-For more control, Datadog supports custom instrumentation with Datadog tracing libraries and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
+For setups that require more customization, Datadog supports custom instrumentation with Datadog SDKs and [Dynamic Instrumentation][30] in the Datadog UI. To learn more, read [Application Instrumentation][2].
 
 If some parts of your system are not instrumented—such as legacy systems, third-party services, or environments where instrumentation is impractical or unnecessary—[APM Basic][31] provides baseline service visibility by collecting RED metrics from network traffic. It is also suitable for staging or other environments where full instrumentation is not required.
 

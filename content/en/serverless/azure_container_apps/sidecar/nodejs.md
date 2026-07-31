@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Node.js tracer**.
+1. **Install the Datadog Node.js SDK**.
 
    1. In your main application, install the `dd-trace` package.
 
@@ -92,13 +92,13 @@ logger.info('Hello world!');
 
    <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for Azure Container Apps.</div>
 
-{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="cloudrun" %}}
+{{% serverless-init-env-vars-sidecar language="nodejs" defaultSource="containerapp" %}}
 
 {{% svl-tracing-env %}}
 
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Azure Container Apps" %}}
 
 ## Further reading
 

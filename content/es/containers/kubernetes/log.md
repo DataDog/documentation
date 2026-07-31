@@ -1,50 +1,52 @@
 ---
 aliases:
 - /es/agent/kubernetes/log
-description: Configura la recopilación de logs de las aplicaciones en contenedores
+description: Configura la recolección de registros de aplicaciones en contenedores
   que se ejecutan en Kubernetes utilizando el Datadog Agent
 further_reading:
 - link: https://www.datadoghq.com/blog/eks-fargate-logs-datadog
   tag: Blog
-  text: Monitorizar logs de Amazon EKS en Fargate con Datadog
+  text: Monitorea los registros de Amazon EKS en Fargate con Datadog
 - link: /agent/kubernetes/apm/
   tag: Documentación
-  text: Recopilar tus trazas (traces) de aplicaciones
+  text: Recoge las trazas de tu aplicación
 - link: /agent/kubernetes/prometheus/
   tag: Documentación
-  text: Recopilar tus métricas de Prometheus
+  text: Recoge tus métricas de Prometheus
 - link: /agent/kubernetes/integrations/
   tag: Documentación
-  text: Recopilar las métricas de tus aplicaciones y logs automáticamente
+  text: Recoge automáticamente las métricas y registros de tus aplicaciones
 - link: /agent/guide/autodiscovery-management/
   tag: Documentación
-  text: Limitar la recopilación de datos a un subconjunto de contenedores
+  text: Limita la recolección de datos a un subconjunto de contenedores solamente
 - link: /agent/kubernetes/tag/
   tag: Documentación
-  text: Asignar etiquetas (tags) a todos los datos emitidos por un contenedor
-title: Recopilación de logs de Kubernetes
+  text: Asigna etiquetas a todos los datos emitidos por un contenedor
+- link: /containers/troubleshooting/log-collection
+  tag: Documentación
+  text: Solución de problemas de recolección de registros de contenedor
+title: Recolección de registros de Kubernetes
 ---
+Esta página explica cómo recopilar registros desde los archivos de registro de Kubernetes.
 
-Esta página trata sobre la recopilación de logs a partir de los archivos de log de Kubernetes.
+Cuando tus aplicaciones en contenedores escriben sus registros en la salida estándar y de error (`stdout`/`stderr`), el runtime del contenedor y Kubernetes gestionan automáticamente los registros por ti. El patrón predeterminado es que [Kubernetes almacena estos flujos de registro como archivos][13] en el host en la carpeta `/var/log/pods` y subcarpetas para cada pod y contenedor.
 
-Cuando tus aplicaciones en contenedores escriben sus logs a la salida y al error (`stdout`/`stderr`) estándar, el tiempo de ejecución del contenedor y Kubernetes gestionan automáticamente los logs. El patrón por defecto consiste en que [Kubernetes almacene estos flujos (streams) de logs como archivos][13] en el host, en la carpeta `/var/log/pods` y las subcarpetas de cada pod y contenedor.
+El Datadog Agent puede recoger estos archivos de registro de Kubernetes para estos contenedores utilizando las instrucciones a continuación. Esta opción se adapta bien a la naturaleza efímera de los pods que crea Kubernetes y es más eficiente en recursos que recoger registros del socket de Docker. Datadog recomienda este método para la recolección de registros en Kubernetes.
 
-El Datadog Agent puede recopilar estos archivos de logs Kubernetes de estos contenedores siguiendo las instrucciones que se indican a continuación. Esta opción se adapta bien a la naturaleza efímera de los pods que crea Kubernetes y es más eficiente en cuanto a recursos que la recopilación de logs desde el socket Docker. Datadog recomienda este método para la recopilación de logs en Kubernetes.
+Alternativamente, el Datadog Agent también puede recoger registros mediante solicitudes repetidas a la API de Docker a través del socket de Docker. Sin embargo, esto requiere Docker como el tiempo de ejecución del contenedor para tu clúster de Kubernetes. Esto también es más intensivo en recursos que usar archivos de registro. Para ver cómo recolectar registros utilizando el socket de Docker, consulte [Recolección de registros con el socket de Docker][1]. Si tus aplicaciones en contenedores están escribiendo en archivos de registro almacenados en el contenedor, esto puede complicar la recolección de registros. Vea [la recolección de registros desde un archivo](#from-a-container-local-log-file).
 
-Alternativamente, el Datadog Agent también puede recopilar logs mediante solicitudes repetidas a la API Docker a través del socket Docker. Sin embargo, esto requiere que Docker sea el tiempo de ejecución del contenedor de tu clúster Kubernetes. Esto también consume más recursos que el uso de archivos de logs. Para saber cómo recopilar logs utilizando el socket Docker, consulta [Recopilación de logs con el socket Docker][1]. Si tus aplicaciones en contenedores escriben en archivos de logs almacenados en un contenedor, esto puede complicar la recopilación de logs. Consulta la [recopilación de logs a partir de un archivo](#from-a-container-local-log-file).
+## Configuración {#setup}
 
-## Configuración
+### Recolección de registros {#log-collection}
 
-### Recopilación de logs
+Antes de comenzar a recolectar los registros de la aplicación, asegúrate de que estás ejecutando el Datadog Agent en tu clúster de Kubernetes.
 
-Antes de empezar a recopilar logs de aplicación, asegúrate de que estás ejecutando el Datadog Agent en tu clúster Kubernetes.
-
-Para configurar la recopilación de logs manualmente con un DaemonSet, consulta [Recopilación de logs con DaemonSet][9]. De lo contrario, sigue las siguientes instrucciones:
+Para configurar la recolección de registros manualmente en el DaemonSet, consulta [Recolección de registros del DaemonSet][9]. De lo contrario, sigue las instrucciones a continuación:
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
+{{% tab "Operador de Datadog" %}}
 
-Actualiza tu manifiesto `datadog-agent.yaml` con:
+Actualiza tu `datadog-agent.yaml` manifiesto con:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -62,19 +64,19 @@ spec:
       containerCollectAll: true
 ```
 
-A continuación, aplica la nueva configuración:
+Luego, aplica la nueva configuración:
 
 ```shell
 kubectl apply -n $DD_NAMESPACE -f datadog-agent.yaml
 ```
 
-Consulta el ejemplo de [manifiesto con la recopilación de logs, métricas y APM activada][1] para ver un ejemplo adicional. Puedes configurar `features.logCollection.containerCollectAll` como `true` para recopilar logs de todos los contenedores detectados por defecto. Cuando se configura como `false` (por defecto), es necesario especificar configuraciones de log de Autodiscovery para habilitar la recopilación de logs. Para obtener más información, consulta [Detección de logs - Filtrado](#filtering).
+Consulta el ejemplo adicional en [manifiesto con registros, métricas y recolección de APM habilitada][1]. Puedes establecer `features.logCollection.containerCollectAll` en `true` para recolectar registros de todos los contenedores descubiertos por defecto. Cuando se establece en `false` (por defecto), necesitas especificar configuraciones de registro de Autodiscovery para habilitar la recolección de registros. Para más información, consulta [Descubrimiento de registros - Filtrado](#filtering).
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-logs-apm.yaml
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-Para habilitar la recopilación de logs con Helm, actualiza tu archivo [datadog-values.yaml][1] con la siguiente configuración para la recopilación de logs. Luego, actualiza tu Datadog Helm chart:
+Para habilitar la recolección de registros con Helm, actualiza tu archivo [datadog-values.yaml][1] con la siguiente configuración de recolección de registros. Luego, actualiza tu gráfico de Helm de Datadog:
 
 ```yaml
 datadog:
@@ -83,17 +85,17 @@ datadog:
     containerCollectAll: true
 ```
 
-Puedes configurar `datadog.logs.containerCollectAll` como `true` para recopilar logs de todos los contenedores detectados por defecto. Cuando se configura como `false` (por defecto), es necesario definir configuraciones de logs Autodiscovery para habilitar la recopilación de logs. Para obtener más información, consulta [Detección de logs - Filtrado](#filtering).
+Puedes establecer `datadog.logs.containerCollectAll` en `true` para recolectar registros de todos los contenedores descubiertos por defecto. Cuando se establece en `false` (por defecto), necesitas especificar configuraciones de registro de Autodiscovery para habilitar la recolección de registros. Para más información, consulta [Descubrimiento de registros - Filtrado](#filtering).
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-### Sin privilegios
+### Sin privilegios {#unprivileged}
 
 {{< tabs >}}
-{{% tab "Datadog Operator" %}}
-(Opcional) Para ejecutar una instalación sin privilegios, añade lo siguiente al [recurso personalizado DatadogAgent][1]:
+{{% tab "Operador de Datadog" %}}
+(Opcional) Para ejecutar una instalación sin privilegios, agrega lo siguiente al [recurso personalizado de DatadogAgent][1]:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -118,14 +120,14 @@ spec:
           - <DOCKER_GROUP_ID>
 ```
 
-- Sustituye `<USER_ID>` por el UID para ejecutar el Agent
-- Sustituye `<DOCKER_GROUP_ID>` por el ID del grupo al que pertenece el socket de Docker o containerd.
+- Reemplaza `<USER_ID>` con el UID para ejecutar el Agente
+- Reemplaza `<DOCKER_GROUP_ID>` con el ID de grupo que posee el socket de Docker o containerd.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/docs/configuration.v2alpha1.md#override
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-(Opcional) Para ejecutar una instalación sin privilegios, añade lo siguiente en el archivo `values.yaml`:
+(Opcional) Para ejecutar una instalación sin privilegios, agrega lo siguiente en el archivo `values.yaml`:
 
 ```yaml
 datadog:
@@ -135,8 +137,8 @@ datadog:
       - <DOCKER_GROUP_ID>
 ```
 
-- Sustituye `<USER_ID>` por el UID para ejecutar el Agent.
-- Sustituye `<DOCKER_GROUP_ID>` por el ID del grupo al que pertenece el socket de Docker o containerd.
+- Reemplaza `<USER_ID>` con el UID para ejecutar el Agente.
+- Reemplaza `<DOCKER_GROUP_ID>` con el ID de grupo que posee el socket de Docker o containerd.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -144,61 +146,61 @@ datadog:
 <div class="alert alert-danger">
 <strong>Advertencia para instalaciones sin privilegios</strong>
 <br/><br/>
-Cuando se ejecuta una instalación sin privilegios, el Agent debe poder leer archivos de log en <code>/var/log/pods</code>.
+Al ejecutar una instalación sin privilegios, el Agente necesita poder leer archivos de registro en <code>/var/log/pods</code>.
 <br/><br/>
-Si estás utilizando el tiempo de ejecución de containerd, los archivos de log en <code>/var/log/pods</code> son legibles por los miembros del grupo <code>raíz</code>. Con las instrucciones anteriores, el Agent se ejecuta con el grupo <code>raíz</code>. No es necesario realizar ninguna acción.
+Si estás utilizando el runtime de containerd, los archivos de registro en <code>/var/log/pods</code> son legibles por los miembros de la <code>root</code> grupo. Con las instrucciones anteriores, el Agente se ejecuta con el <code>root</code> grupo. No se requiere ninguna acción.
 <br/><br/>
-Si estás utilizando el tiempo de ejecución de Docker, los archivos de log en <code>/var/log/pods</code> son enlaces simbólicos a <code>/var/lib/docker/containers</code> que solo puede recorrer el usuario <code>raíz</code>. Consecuentemente, con el tiempo de ejecución de Docker, no es posible para un Agent que <code>no</code> raíz leer logs en <code>/var/log/pods</code>. El socket de Docker debe estar montado en contenedor del Agent, para que pueda obtener logs de pod a través del daemon de Docker.
+Si estás utilizando el runtime de Docker, los archivos de registro en <code>/var/log/pods</code> son enlaces simbólicos a <code>/var/lib/docker/containers</code>, que solo es accesible por el <code>root</code> usuario. Por lo tanto, con el tiempo de ejecución de Docker, no es posible que un no-<code>root</code> Agente lea registros en <code>/var/log/pods</code>. El socket de Docker debe estar montado en el contenedor del Agente, para que pueda obtener los registros de los Pods a través del demonio de Docker.
 <br/><br/>
-Para recopilar logs de <code>/var/log/pods/</code> cuando el socket de Docker está montado, establece la variable entorno <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (o <code>logs_config.k8s_container_use_file</code> en <code>datadog.yaml</code>) en <code>true</code>. Esto fuerza al Agent a utilizar el modo de recopilación de archivos.
+Para recopilar registros de <code>/var/log/pods</code> cuando el socket de Docker está montado, establece la variable de entorno <code>DD_LOGS_CONFIG_K8S_CONTAINER_USE_FILE</code> (o <code>logs_config.k8s_container_use_file</code> en <code>datadog.yaml</code>) a <code>true</code>. Esto obliga al Agente a usar el modo de recopilación de archivos.
 </div>
 
-## Detección de logs
+## Descubrimiento de registros {#log-discovery}
 
-El Datadog Agent en Kubernetes es desplegado por un DaemonSet (gestionado por el Datadog Operator o Helm). Este DaemonSet programa una réplica de pod del Agent en cada nodo del clúster. Cada pod del Agent es entonces responsable de informar de logs de los otros pods y contenedores en su nodo respectivo. Cuando la función "Contenedor recopilar todo" está activada, el Agent informa de los logs de cada contenedor detectado con un conjunto predeterminado de etiquetas (tags).
+El Agente de Datadog en Kubernetes se despliega mediante un DaemonSet (gestionado por el Operador de Datadog o Helm). Este DaemonSet programa una réplica del Pod del Agente en cada nodo del clúster. Cada Pod del Agente es responsable de reportar los registros de los otros Pods y contenedores en su respectivo nodo. Cuando "Container Collect All" está habilitado, el Agente informa los registros de cada contenedor descubierto con un conjunto de etiquetas predeterminado.
 
-### Filtrado
+### Filtrado {#filtering}
 
-Cuando "Contenedor recopilar todo" está activado, puedes configurar de qué contenedores quieres recopilar logs. Esto puede ser útil para evitar la recopilación de logs del Datadog Agent, si así lo prefieres. Puedes hacerlo pasando configuraciones al Datadog Agent para controlar lo que recopila o pasando configuraciones al pod Kubernetes para excluir ciertos logs más explícitamente.
+Cuando "Container Collect All" está habilitado, puedes configurar de qué contenedores deseas recopilar registros. Esto puede ser útil para evitar la recopilación de los registros del Agente de Datadog, si así se desea. Puedes hacer esto pasando configuraciones al Agente de Datadog para controlar lo que extrae, o pasando configuraciones al Pod de Kubernetes para excluir ciertos registros de manera más explícita.
 
-Cuando se filtran logs utilizando métodos como `DD_CONTAINER_EXCLUDE_LOGS` o `ad.datadoghq.com/logs_exclude`, el Agent ignora la recopilación de logs independientemente de las configuraciones para la recopilación de logs definidas explícitamente en [anotaciones de Autodiscovery][19] o [archivos de configuración de Autodiscovery][20].
+Al filtrar registros a través de métodos como `DD_CONTAINER_EXCLUDE_LOGS` o `ad.datadoghq.com/logs_exclude`, el Agente ignora la recopilación de registros independientemente de las configuraciones de recopilación de registros definidas explícitamente en [anotaciones de Autodescubrimiento][19] o [archivos de configuración de Autodescubrimiento][20].
 
-Cuando la opción "Contenedor recopilar todo" está desactivada (por defecto), no necesitas añadir ningún filtro, ya que todo está excluido por defecto. Para incluir la recopilación sólo para los pods seleccionados, puedes habilitar la configuración de logs mediante [anotaciones de Autodiscovery][19] o [archivos de configuración de Autodiscovery][20] para los pods elegidos.
+Cuando "Container Collect All" está deshabilitado (por defecto), no necesitas agregar ningún filtrado porque todo se excluye por defecto. Para incluir la colección solo para los pods seleccionados, puedes habilitar la configuración de registro mediante [anotaciones de Autodiscovery][19] o [archivos de configuración de Autodiscovery][20] para los pods deseados.
 
-Para obtener más información sobre el filtrado, consulta [Gestión de la detección de contenedores][8].
+Consulta [Gestión de Descubrimiento de Contenedores][8] para aprender más sobre el filtrado.
 
-### Etiquetado
+### Etiquetado {#tagging}
 
-El Datadog Agent etiqueta logs de contenedores Kubernetes con [etiquetas (tags) Kubernetes][14] predeterminadas, así como con cualquier etiqueta (tag) personalizada extraída. Cuando "Contenedor recopilar todo" está activado, el Agent informa de logs de un contenedor con una etiqueta (tag) `source` y `service` que coincida con el nombre de imagen corto del contenedor. Por ejemplo, los logs de un contenedor que utiliza la imagen de contenedor `gcr.io/owner/example-image:latest` tendría `example-image` como valor de etiqueta (tag) `source`, `service` y `short_image`.
+El Agente de Datadog etiqueta los registros de los contenedores de Kubernetes con las etiquetas por defecto de [Kubernetes][14], así como cualquier etiqueta extraída personalizada. Cuando "Container Collect All" está habilitado, el Agente informa los registros de un contenedor con las etiquetas `source` y `service` que coinciden con el nombre corto de la imagen del contenedor. Por ejemplo, los registros de un contenedor que utiliza la imagen de contenedor `gcr.io/owner/example-image:latest` tendrían `example-image` como el valor de las etiquetas `source`, `service` y `short_image`.
 
-La etiqueta (tag) `service` también puede definirse mediante la etiqueta (label) del pod de [Etiquetado unificado de servicios][4] `tags.datadoghq.com/service: "<SERVICE>"`. Para obtener más información sobre los atributos `source` y `service`, consulta los [atributos reservados][11].
+La etiqueta `service` también puede ser establecida por la etiqueta de Pod `tags.datadoghq.com/service: "<SERVICE>"` de [Unified Service Tagging][4]. Para más información sobre los atributos `source` y `service`, consulta [Atributos Reservados][11].
 
-La etiqueta (tag) `source` puede ser importante para tus logs, ya que los [pipelines de logs predefinidos][15] se filtran con esta etiqueta (tag). Sin embargo, estos pipelines se pueden personalizar completamente, si así lo prefieres. Para personalizar aún más las etiquetas (tags) de tus logs, consulta los pasos en la sección [Logs de integración](#integration-logs) más abajo.
+La etiqueta `source` puede ser importante para tus registros, ya que las [canalizaciones de registro listas para usar][15] se filtran utilizando esta etiqueta. Sin embargo, estas canalizaciones pueden ser completamente personalizadas según se desee. Puedes ver los pasos en la sección [Registros de Integración](#integration-logs) a continuación para personalizar aún más las etiquetas en tus registros.
 
-## Logs de integración
+## Registros de integración {#integration-logs}
 
-[Autodiscovery][10] te permite utilizar plantillas para configurar la recopilación de logs (y otras capacidades) en contenedores. Esta opción puede utilizarse para habilitar la recopilación de logs, personalizar el etiquetado y añadir reglas de recopilación avanzadas. Para configurar la recopilación de logs para una integración con Autodiscovery puedes:
+[Autodiscovery][10] te permite usar plantillas para configurar la recopilación de registros (y otras capacidades) en contenedores. Esto se puede usar para habilitar la recolección de registros, personalizar el etiquetado y agregar reglas de recolección avanzadas. Para configurar la recolección de registros para una integración con Autodiscovery, puedes optar por:
 
-- Especifica una configuración de log como anotaciones Autodiscovery en un pod concreto, para configurar las reglas de un contenedor concreto *(recomendado)*.
-- Especifica una configuración de log como archivo de configuración, para configurar las reglas de cada contenedor coincidente por imagen.
+- Especificar una configuración de registro como Anotaciones de Autodiscovery en un Pod dado, para configurar las reglas para un contenedor dado *(Recomendado)*
+- Especificar una configuración de registro como un archivo de configuración, para configurar las reglas para cada contenedor coincidente por imagen.
 
-Como mínimo, estas configuraciones de logs requieren una etiqueta (tag) `source` y `service`. Es posible que quieras hacer coincidir la etiqueta (tag) `source` con uno de los [pipelines de logs predefinidos][15] de Datadog para ayudarte a enriquecer automáticamente tus logs. También puedes encontrar una [biblioteca de pipelines en Datadog][16].
+Como mínimo, estas configuraciones de registro requieren una etiqueta `source` y `service`. Es posible que desees hacer coincidir la etiqueta `source` con una de las canalizaciones de registro listas para usar de Datadog para ayudar a enriquecer automáticamente tus registros. También puedes encontrar una [biblioteca de canalizaciones en Datadog][16].
 
-### Anotaciones de Autodiscovery
+### Anotaciones de Autodiscovery {#autodiscovery-annotations}
 
-Con Autodiscovery, el Agent busca automáticamente plantillas de integración en todas las anotaciones de pod.
+Con Autodiscovery, el Agent busca automáticamente todas las anotaciones de Pod para plantillas de integración.
 
-Para aplicar una configuración específica a un contenedor concreto, añade la anotación `ad.datadoghq.com/<CONTAINER_NAME>.logs` a tu pod con la configuración de log con formato JSON.
+Para aplicar una configuración específica a un contenedor dado, agrega la anotación `ad.datadoghq.com/<CONTAINER_NAME>.logs` a tu Pod con la configuración de registro en formato JSON. 
 
-**Nota**: Las anotaciones Autodiscovery identifican los contenedores por su nombre, **no** por su imagen. Intenta hacer coincidir el `<CONTAINER_NAME>` con el `.spec.containers[i].name`, no con la `.spec.containers[i].image`.
+**Nota**: Las anotaciones de Autodiscovery identifican contenedores por nombre, **no** por imagen. Intenta hacer coincidir `<CONTAINER_NAME>` con el `.spec.containers[i].name`, no con `.spec.containers[i].image`.
 
 <div class="alert alert-info">
-Si defines tus pods Kubernetes <i>directamente</i> (con <code>kind:Pod</code>), añade las anotaciones de cada pod en su sección de <code>metadatos</code>, como se muestra en la siguiente sección.
+Si defines tus Pods de Kubernetes <i>directamente</i> (con <code>kind:Pod</code>), agrega las anotaciones de cada Pod en su <code>metadata</code> sección, como se muestra en la siguiente sección.
 <br/><br/>
-Si defines tus pods Kubernetes <i>indirectamente</i> (con controladores de replicación, ReplicaSets o despliegues), añade anotaciones de pod a la plantilla de pod en <code>.spec.template.metadata</code>.</div>
+Si defines tus Pods de Kubernetes <i>indirectamente</i> (con controladores de replicación, ReplicaSets o Despliegues), agrega anotaciones de Pod a la plantilla de Pod bajo <code>.spec.template.metadata</code>.</div>
 
-#### Configurar un solo contenedor
-Para configurar la recopilación de logs de un contenedor concreto dentro de tu pod, añade las siguientes anotaciones a tu pod:
+#### Configura un solo contenedor {#configure-a-single-container}
+Para configurar la recolección de registros para un contenedor dado dentro de tu Pod, agrega las siguientes anotaciones a tu Pod:
 
 ```yaml
 apiVersion: v1
@@ -215,9 +217,9 @@ spec:
 # (...)
 ```
 
-#### Ejemplo de anotaciones de logs Autodiscovery
+#### Ejemplo de anotaciones de Autodiscovery de registros {#example-log-autodiscovery-annotations}
 
-La siguiente anotación de pod define la plantilla de integración para un ejemplo de contenedor. Se define dentro de las anotaciones de la plantilla de pod, en lugar de en el propio despliegue. Esta configuración de log configura todos los logs del contenedor `app` con las etiquetas (tags) `source:java` y `service:example-app`, y la etiqueta (tag) adicional `foo:bar`.
+La siguiente anotación de Pod define la plantilla de integración para un contenedor de ejemplo. Se define dentro de las anotaciones de la plantilla de Pod, en lugar de en el Despliegue mismo. Esta configuración de registro establece todos los registros del contenedor `app` con las etiquetas `source:java`, `service:example-app` y la etiqueta adicional `foo:bar`.
 
 ```yaml
 apiVersion: apps/v1
@@ -242,8 +244,8 @@ spec:
           image: owner/example-image:latest
 ```
 
-#### Configurar dos contenedores diferentes
-Para aplicar dos plantillas de integración diferentes a dos contenedores distintos dentro de tu pod, `<CONTAINER_NAME_1>` y `<CONTAINER_NAME_2>`, añade las siguientes anotaciones a tu pod:
+#### Configura dos contenedores diferentes {#configure-two-different-containers}
+Para aplicar dos plantillas de integración diferentes a dos contenedores diferentes dentro de tu Pod, `<CONTAINER_NAME_1>` y `<CONTAINER_NAME_2>`, agrega las siguientes anotaciones a tu Pod:
 
 ```yaml
 apiVersion: v1
@@ -263,12 +265,12 @@ spec:
 # (...)
 ```
 
-### Archivos de configuración de Autodiscovery
-Puedes proporcionar archivos de configuración al Datadog Agent para que ejecute una integración especificada cuando detecte un contenedor que utiliza el identificador de imagen coincidente. Esto permite crear una configuración de log genérica que se aplica a un conjunto de imágenes de contenedor.
+### Archivos de configuración de Autodiscovery {#autodiscovery-configuration-files}
+Puedes proporcionar al Agente de Datadog archivos de configuración para que el Agente ejecute una integración específica cuando descubra un contenedor utilizando el identificador de imagen correspondiente. Esto te permite crear una configuración de registro genérica que se aplica a un conjunto de imágenes de contenedor.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-Puede personalizar la colección Logs por integración con un override en el `override.nodeAgent.extraConfd.configDataMap`. Este método crea el ConfigMap y monta el archivo Configuración deseado en el Agent Contenedor .
+Puedes personalizar la recolección de registros por integración con una anulación en el `override.nodeAgent.extraConfd.configDataMap`. Este método crea el ConfigMap y monta el archivo de configuración deseado en el contenedor del Agent.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -284,19 +286,19 @@ spec:
           <INTEGRATION_NAME>.yaml: |-
             ad_identifiers:
             - <CONTAINER_IMAGE>
-
+        
             logs:
             - source: example-source
               service: example-service
 ```
 
-La `<CONTAINER_IMAGE>` debe coincidir con el nombre de imagen corto del contenedor al que quieres que se aplique. Para ver un ejemplo adicional, consulta el ejemplo de manifiesto [con la asignación ConfigMap][1].
+El `<CONTAINER_IMAGE>` debe coincidir con la imagen corta del contenedor a la que deseas que se aplique esto. Consulta el manifiesto de muestra [con el mapeo de ConfigMap][1] para un ejemplo adicional.
 
 [1]: https://github.com/DataDog/datadog-operator/blob/main/examples/datadogagent/datadog-agent-with-extraconfd.yaml
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-Puede personalizar la colección Logs por integración dentro de `datadog.confd`. Este método crea el ConfigMap y monta el archivo Configuración deseado en el Agent Contenedor .
+Puedes personalizar la recolección de registros por integración dentro de `datadog.confd`. Este método crea el ConfigMap y monta el archivo de configuración deseado en el contenedor del Agent.
 
 ```yaml
 datadog:
@@ -305,35 +307,35 @@ datadog:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
       - <CONTAINER_IMAGE>
-
+      
       logs:
       - source: example-source
         service: example-service
 ```
 
-La `<CONTAINER_IMAGE>` debe coincidir con el nombre de imagen corto del contenedor al que quieres que se aplique.
+El `<CONTAINER_IMAGE>` debe coincidir con la imagen corta del contenedor a la que deseas que se aplique esto.
 
 {{% /tab %}}
 
-{{% tab "Key-value store" %}}
-Los siguientes comandos etcd crean una plantilla de integración Redis con un parámetro `password` personalizado y etiqueta logs con los atributos `source` y `service` correctos:
+{{% tab "Almacén de clave-valor" %}}
+Los siguientes comandos de etcd crean una plantilla de integración de Redis con un parámetro `password` personalizado y etiquetan los registros con los atributos correctos `source` y `service`:
 
 ```conf
 etcdctl mkdir /datadog/check_configs/redis
 etcdctl set /datadog/check_configs/redis/logs '[{"source": "redis", "service": "redis", "tags": ["env:prod"]}]'
 ```
 
-Fíjate que cada uno de los tres valores es una lista. Autodiscovery agrupa los elementos de la lista en configuraciones de integraciones basadas en índices de lista compartidos. En este caso, define la primera (y única) configuración de checks a partir de `check_names[0]`, `init_configs[0]` y `instances[0]`.
+Observa que cada uno de los tres valores es una lista. La autodetección ensambla los elementos de la lista en las configuraciones de integración basándose en los índices de lista compartidos. En este caso, compone la primera (y única) configuración de verificación a partir de `check_names[0]`, `init_configs[0]` y `instances[0]`.
 
-A diferencia de los archivos de configuración automática, **los almacenes de clave-valor pueden utilizar el nombre corto O largo de la imagen como identificadores de contenedor**, por ejemplo, `redis` O `redis:latest`.
+A diferencia de los archivos de auto-conf, **los almacenes de clave-valor pueden usar la imagen corta o la imagen larga como identificadores de contenedor**, por ejemplo, `redis` O `redis:latest`.
 
-Autodiscovery puede utilizar [Consul][1], Etcd y Zookeeper como fuentes de plantillas de integración.
+La autodetección puede usar [Consul][1], Etcd y Zookeeper como fuentes de plantillas de integración.
 
-Para utilizar un almacén de clave-valor, configúralo en el archivo de configuración `datadog.yaml` del Agent y monta este archivo dentro del contenedor del Agent. Otra opción es pasar el almacén de clave-valor como variables de entorno al contenedor del Agent.
+Para usar un almacén de clave-valor, configúralo en el archivo de configuración del Agent `datadog.yaml` y monta este archivo dentro del Agent en contenedor. Alternativamente, pasa tu almacén de clave-valor como variables de entorno al Agent en contenedor.
 
-#### En `datadog.yaml`
+#### En `datadog.yaml` {#in-datadogyaml}
 
-En el archivo `datadog.yaml`, configura la dirección `<KEY_VALUE_STORE_IP>` y el`<KEY_VALUE_STORE_PORT>` de tu base de datos clave-valor:
+En el archivo `datadog.yaml`, establece la dirección `<KEY_VALUE_STORE_IP>` y `<KEY_VALUE_STORE_PORT>` de tu almacén de clave-valor:
 
   ```yaml
   config_providers:
@@ -364,11 +366,11 @@ En el archivo `datadog.yaml`, configura la dirección `<KEY_VALUE_STORE_IP>` y e
       password:
   ```
 
-Luego, [reinicia el Agent][2], para aplicar el cambio de configuración.
+Luego [reinicia el Agent][2] para aplicar el cambio de configuración.
 
-#### En variables de entorno
+#### En variables de entorno {#in-environment-variables}
 
-Si la base de datos clave-valor se ha activado como fuente de plantillas, el Agent busca plantillas con la clave `/datadog/check_configs`. Autodiscovery espera una jerarquía clave-valor como la siguiente:
+Con el almacén de clave-valor habilitado como fuente de plantillas, el Agent busca plantillas bajo la clave `/datadog/check_configs`. La autodetección espera una jerarquía de clave-valor como esta:
 
 ```yaml
 /datadog/
@@ -378,30 +380,32 @@ Si la base de datos clave-valor se ha activado como fuente de plantillas, el Age
     ...
 ```
 
-**Nota**: Para aplicar una configuración específica a un contenedor, cuando Autodiscovery utiliza los almacenes clave-valor, identifica los contenedores por **imagen**, intentando que `<CONTAINER_IMAGE>` coincida con `.spec.containers[0].image`.
+**Nota**: Para aplicar una configuración específica a un contenedor dado, la autodetección identifica los contenedores por **imagen** al usar los almacenes de clave-valor intentando hacer coincidir `<CONTAINER_IMAGE>` con `.spec.containers[0].image`.
 
 [1]: /es/integrations/consul/
 [2]: /es/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
-## Recopilación avanzada de logs
+Para hacer coincidir una configuración de registro a un conjunto de contenedores con más granularidad que la imagen corta del contenedor, consulta [Identificadores de Contenedor de Autodetección][22].
 
-Utiliza etiquetas (labels) de logs de Autodiscovery para aplicar la lógica de procesamiento de la recopilación avanzada de logs, por ejemplo:
+## Recolección avanzada de registros {#advanced-log-collection}
 
-* [Filtrar logs antes de enviarlos a Datadog][5].
-* [Borrar los datos confidenciales de tus logs][6].
-* [Proceder a la agregación multilínea][7].
+Utilice etiquetas de registro de Autodiscovery para aplicar lógica de procesamiento de recolección avanzada de registros, por ejemplo:
 
-### A partir de un archivo de log de contenedor local
+* [Filtrar registros antes de enviarlos a Datadog][5].
+* [Eliminar datos sensibles de tus registros][6].
+* [Proceder a la agregación de múltiples líneas][7].
 
-Datadog recomienda que utilices los flujos de salida `stdout` y `stderr` para aplicaciones en contenedores, de modo que puedas configurar más automáticamente la recopilación de logs.
+### Desde un archivo de registro local del contenedor {#from-a-container-local-log-file}
 
-Sin embargo, el Agent también puede recopilar directamente logs de un archivo basándose en una anotación. Para recopilar estos logs, utiliza `ad.datadoghq.com/<CONTAINER_NAME>.logs` con una configuración de `type: file` y `path`. Los logs recopilados de archivos con dicha anotación se etiquetan automáticamente con el mismo conjunto de etiquetas que los logs procedentes del propio contenedor. Datadog recomienda utilizar los flujos de salida `stdout` y `stderr` para las aplicaciones en contenedores, de modo que puedas configurar automáticamente la recopilación de logs. Para más información, consulta [Configuraciones recomendadas](#recommended-configurations).
+Datadog recomienda que utilices los flujos de salida `stdout` y `stderr` para aplicaciones en contenedores, para que puedas configurar automáticamente la recolección de registros.
 
-Estas rutas de archivo son **relativas** al contenedor del Agent. Por lo tanto, el directorio que contiene el archivo de log debe montarse tanto en la aplicación como en el contenedor del Agent para que éste pueda tener la visibilidad adecuada.
+Sin embargo, el Agent también puede recolectar registros directamente de un archivo basado en una anotación. Para recolectar estos registros, utiliza `ad.datadoghq.com/<CONTAINER_NAME>.logs` con una configuración de `type: file` y `path`. Los registros recolectados de archivos con tal anotación se etiquetan automáticamente con el mismo conjunto de etiquetas que los registros provenientes del contenedor mismo. Datadog recomienda que utilices los flujos de salida `stdout` y `stderr` para aplicaciones en contenedores, para que puedas configurar automáticamente la recolección de registros. Para más información, consulta las [Configuraciones recomendadas](#recommended-configurations).
 
-Por ejemplo, puedes hacerlo con un volumen `hostPath` compartido. El pod a continuación está emitiendo logs en el archivo `/var/log/example/app.log`. Esto se hace en el directorio `/var/log/example`, donde un volumen y volumeMount lo han establecido como `hostPath`.
+Estas rutas de archivo son **relativas** al contenedor del Agent. Por lo tanto, el directorio que contiene el archivo de registro debe montarse tanto en la aplicación como en el contenedor del Agent para que el Agent tenga la visibilidad adecuada.
+
+Por ejemplo, puedes hacer esto con un `hostPath` volumen compartido. El Pod a continuación está emitiendo registros en el archivo `/var/log/example/app.log`. Esto se realiza en el `/var/log/example` directorio, donde un volumen y un volumeMount han establecido esto como un `hostPath`.
 
 ```yaml
 apiVersion: v1
@@ -431,7 +435,7 @@ spec:
          path: /var/log/example
 ```
 
-El volumen equivalente y la ruta volumeMount deben establecerse en el contenedor del Agent para que pueda leer el mismo archivo de log.
+La ruta equivalente de volumen y volumeMount debe establecerse en el contenedor del Agent para que pueda leer ese mismo archivo de registro.
 
 ```yaml
   containers:
@@ -447,10 +451,10 @@ El volumen equivalente y la ruta volumeMount deben establecerse en el contenedor
       path: /var/log/example
     # (...)
 ```
-#### Configuraciones recomendadas
-- Esta estrategia puede funcionar para un pod concreto, pero puede resultar engorrosa cuando varias aplicaciones utilizan esta estrategia. También puedes tener problemas si varias réplicas utilizan la misma ruta de logs. Cuando sea posible, Datadog recomienda aprovechar la [variable de plantilla Autodiscovery][17] `%%kube_pod_name%%`. Por ejemplo, puedes configurar tu `path` para que haga referencia a esta variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. A continuación, tu pod de aplicación también debe escribir sus archivos de logs en función de esta nueva ruta. Puedes utilizar la [API descendente][18] para ayudar a tu aplicación a determinar su nombre de pod.
+#### Configuraciones recomendadas {#recommended-configurations}
+- Esta estrategia puede funcionar para un pod dado, pero puede volverse engorrosa con múltiples aplicaciones que utilizan esta estrategia. También puedes encontrar problemas si múltiples réplicas están utilizando la misma ruta de registro. Si es posible, Datadog recomienda aprovechar la [variable de plantilla de Autodiscovery][17] `%%kube_pod_name%%`. Por ejemplo, puedes configurar tu `path` para hacer referencia a esta variable: `"path": "/var/log/example/%%kube_pod_name%%/app.log"`. Tu pod de aplicación también necesita escribir sus archivos de registro con respecto a esta nueva ruta. Puedes usar la [API Descendente][18] para ayudar a tu aplicación a determinar su nombre de Pod.
 
-- Cuando se utiliza este tipo de anotación con un contenedor, los logs `stdout` y `stderr` no se recopilan automáticamente desde el contenedor. Si se necesita la recopilación tanto de flujos de salida del contenedor como de un archivo, esto debe habilitarse explícitamente en la anotación. Por ejemplo:
+- Al usar este tipo de anotación con un contenedor, `stdout` y `stderr` los registros no se recopilan automáticamente del contenedor. Si se necesita la recopilación de ambas corrientes de salida del contenedor y del archivo, habilita esto explícitamente en la anotación. Por ejemplo:
   ```yaml
   ad.datadoghq.com/<CONTAINER_IMAGE>.logs: |
     [
@@ -459,74 +463,13 @@ El volumen equivalente y la ruta volumeMount deben establecerse en el contenedor
     ]
   ```
 
-- Cuando se utiliza este tipo de combinación, `source` y `service` no tienen un valor por defecto para logs recopilados de un archivo y deben establecerse explícitamente en la anotación.
+- Al usar este tipo de combinación, `source` y `service` no tienen un valor predeterminado para los registros recopilados de un archivo y deben establecerse explícitamente en la anotación.
 
-## Solucionar problemas
+## Solución de problemas {#troubleshooting}
 
-#### Contenedores de corta duración
+Para los pasos de solución de problemas, consulta [Solución de problemas de recopilación de registros de contenedor][21].
 
-Por defecto, Agent busca nuevos contenedores cada 5 segundos.
-
-Para Agent v6.12+, los logs de contenedor de corta duración (detenidos o bloqueados) se recopilan automáticamente cuando se utiliza el método de recopilación de logs de archivos K8s (a través de `/var/log/pods`). Esto también incluye la recopilación de logs de contenedor init.
-
-#### Faltan etiquetas (tags) en los nuevos contenedores o pods
-
-Al enviar logs a Datadog desde contenedores o pods recién creados, es posible que el etiquetador interno del Datadog Agent aún no disponga de las etiquetas (tags) de contenedor/pod relacionadas. Como resultado, pueden faltar etiquetas (tags) en estos logs.
-
-Para solucionar este problema, puede utilizar la variable de entorno `DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION` para configurar una duración (en segundos) para que el Datadog Agent espere antes de empezar a enviar logs desde contenedores y pods recién creados. El valor por defecto es `0`.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-          value: "5"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_TAGGER_WARMUP_DURATION
-      value: "5"
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-#### Faltan etiquetas (tags) de nivel de host en los nuevos hosts o nodos
-
-Las etiquetas (tags) de nivel de host son las que aparecen en la lista de infraestructuras de un host determinado y proceden de un proveedor de nube o del Datadog Agent. Las etiquetas (tags) de nivel de host más frecuentes incluyen `kube_cluster_name`, `region`, `instance-type` y `autoscaling-group`.
-
-Cuando se envían logs a Datadog desde un nodo o host recién creado, pueden pasar algunos minutos hasta que se [hereden][12] las etiquetas (tags) de nivel de host. Como resultado, en estos logs pueden faltar las etiquetas (tags) de nivel de host.
-
-Para solucionar este problema, puedes utilizar la variable de entorno `DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION` para configurar una duración (en minutos). Durante este tiempo, el Datadog Agent adjunta manualmente las etiquetas (tags) de nivel de host que conoce a cada log enviado. Después de este tiempo, el Agent vuelve a confiar en las etiquetas (tags) heredadas durante la ingesta.
-
-{{< tabs >}}
-{{% tab "Datadog Operator" %}}
-```yaml
-spec:
-  override:
-    nodeAgent:
-      env:
-        - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-          value: "10m"
-```
-{{% /tab %}}
-{{% tab "Helm" %}}
-```yaml
-datadog:
-  env:
-    - name: DD_LOGS_CONFIG_EXPECTED_TAGS_DURATION
-      value: "10m"
-```
-{{% /tab %}}
-{{< /tabs >}}
-
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -550,3 +493,5 @@ datadog:
 [18]: https://kubernetes.io/docs/tasks/inject-data-application/environment-variable-expose-pod-information/
 [19]: /es/containers/kubernetes/log/?tab=helm#autodiscovery-annotations
 [20]: /es/containers/kubernetes/log/?tab=helm#autodiscovery-configuration-files
+[21]: /es/containers/troubleshooting/log-collection/?tab=datadogoperator
+[22]: /es/containers/guide/ad_identifiers/

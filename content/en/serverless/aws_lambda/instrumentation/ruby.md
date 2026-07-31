@@ -27,7 +27,7 @@ aliases:
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Ruby AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless > AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Instrument Functions{{< /ui >}}][3].
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
@@ -237,7 +237,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 1. Install the Datadog Lambda Library
 
-    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and tracing libraries within the image.
+    If you are deploying your Lambda function as a container image, you cannot use the Datadog Lambda library as a Lambda Layer. Instead, you must package the Datadog Lambda and SDKs within the image.
 
     Add the following to your Gemfile:
 

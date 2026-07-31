@@ -228,7 +228,10 @@ Instala los [complementos IDE Datadog][7] para ejecutar análisis de Static Anal
 
 Para empezar a ejecutar análisis de Static Analysis en tu IDE, consulta la documentación correspondiente al editor de código elegido.
 
-{{< partial name="code_analysis/ide-plugins.html" >}}
+{{< card-grid card_width="225px" image_width="50" >}}
+  {{< image-card href="/ide_plugins/idea/" src="integrations_logos/jetbrains-ides_avatar.svg" alt="jetbrains" >}}
+  {{< image-card href="/ide_plugins/vscode/" src="integrations_logos/vscode_avatar.svg" alt="visual studio code" >}}
+{{< /card-grid >}}
 
 </br>
 

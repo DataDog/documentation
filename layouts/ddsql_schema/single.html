@@ -14,6 +14,12 @@
     {{ partial "site_support_banner/site_support_banner.html" . }}
 
     <div class="ddsql-schema-single">
+        {{ if eq .Params.status "deprecated" }}
+        <div class="alert alert-warning">
+            <strong>Deprecated</strong>: This table is deprecated and may return no data.
+        </div>
+        {{ end }}
+
         <p>{{ .Params.summary | markdownify }}</p>
 
         {{ highlight .Params.id "" }}

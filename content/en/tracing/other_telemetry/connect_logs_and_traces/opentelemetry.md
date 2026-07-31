@@ -320,7 +320,7 @@ This approach works with any logging library or language. The key requirements a
 
 If you collect logs directly with the Datadog Agent (without sending them through the OpenTelemetry Collector), you must ensure the trace IDs are present in your logs.
 
-- **Trace ID format**: Datadog automatically detects the `dd.trace_id` and `dd.span_id` convention used by Datadog's tracing libraries, as well as the OpenTelemetry standards `trace_id` and `span_id`. See [OpenTelemetry Compatibility docs][6] for details on the standard.
+- **Trace ID format**: Datadog automatically detects the `dd.trace_id` and `dd.span_id` convention used by Datadog SDKs, as well as the OpenTelemetry standards `trace_id` and `span_id`. See [OpenTelemetry Compatibility docs][6] for details on the standard.
 
 <div class="alert alert-info">If your logging instrumentation uses a different attribute name for your trace/span IDs, you must ensure the attribute is added to the <a href="/logs/log_configuration/pipelines/?tab=traceid#preprocessing">Preprocessing for JSON logs</a> configuration so it is recognized as a valid Trace ID.</div>
 
@@ -332,22 +332,22 @@ After your application is sending traces, you can navigate between them in Datad
 
 ### From a trace to logs
 
-1. Navigate to [**APM** > **Traces**][3].
+1. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][3].
 2. Find and click on a trace from your instrumented service.
 3. Select any span in the flame graph to view its details.
-4. Click the **Logs** tab.
+4. Click the {{< ui >}}Logs{{< /ui >}} tab.
 
 Here, you can see all the logs generated during the execution of that specific span.
 
 ### From a log to a trace
 
-1. Navigate to [**Logs** > **Explorer**][4].
+1. Navigate to [{{< ui >}}Logs{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][4].
 2. Find and click a log entry from your instrumented service.
-3. Click the **Trace** tab.
+3. Click the {{< ui >}}Trace{{< /ui >}} tab.
 
 Here, you can see a flame graph of the associated trace, with the span that generated the log. 
 
-Click **View Trace in APM** to pivot directly to the full APM trace associated with that log event, allowing you to see the context of the entire request.
+Click {{< ui >}}View Trace in APM{{< /ui >}} to pivot directly to the full APM trace associated with that log event, allowing you to see the context of the entire request.
 
 ## Further reading
 

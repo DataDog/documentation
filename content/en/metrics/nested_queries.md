@@ -1,5 +1,6 @@
 ---
 title: Nested Queries
+description: "Apply additional layers of aggregation to metric queries for multilayer rollups, percentiles, and higher-resolution historical views."
 further_reading:
 - link: "/dashboards/querying/"
   tag: "Documentation"
@@ -74,9 +75,9 @@ This query first calculates the average CPU utilization for each EC2 instance gr
 
 ### Multilayer space aggregation
 
-After you specify tag(s) in your first layer of space aggregation to group by, access multilayer space aggregation with the `Group By` function. 
+After you specify tag(s) in your first layer of space aggregation to group by, access multilayer space aggregation with the {{< ui >}}Group By{{< /ui >}} function. 
 
-You can apply additional layers of space aggregation with subsequent `Group Bys`.
+You can apply additional layers of space aggregation with subsequent {{< ui >}}Group By{{< /ui >}}s.
 Note: if you do not specify tag(s) to group by in your initial space aggregation layer, multilayer space aggregation will not be available.
 
 The first layer of space aggregation supports the following aggregators:

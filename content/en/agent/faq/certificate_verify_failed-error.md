@@ -70,7 +70,7 @@ Delete `datadog-cert.pem`. You can locate this file in:
   * 64-bit Windows: `C:\Program Files (x86)\Datadog\Datadog Agent\files\`
   * 32-bit Windows: `C:\Program Files\Datadog\Datadog Agent\files\`
 
-After the file is removed, restart the Datadog Service from the Windows Service Manager.
+After the file is removed, restart the Datadog Service from the {{< ui >}}Windows Service Manager{{< /ui >}}.
 
 ### Fixing by upgrading to Agent 6 or 7
 
@@ -102,11 +102,11 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/DataDog/dd-agent/5.32.
 restart-service -Force datadogagent
 ```
 
-* Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf` using the `Datadog Agent Manager` program provided by the Agent or by directly editing the `datadog.conf` file:
+* Windows Agent v5, `<= 5.11.x`: set the following option in `datadog.conf` using the {{< ui >}}Datadog Agent Manager{{< /ui >}} program provided by the Agent or by directly editing the `datadog.conf` file:
   * 64-bit Windows: `ca_certs: C:\Program Files (x86)\Datadog\Datadog Agent\files\ca-certificates.crt`
   * 32-bit Windows: `ca_certs: C:\Program Files\Datadog\Datadog Agent\files\ca-certificates.crt`
 
-  After `datadog.conf` has been updated, restart the Datadog Service from the Windows Service Manager.
+  After `datadog.conf` has been updated, restart the Datadog Service from the {{< ui >}}Windows Service Manager{{< /ui >}}.
 
 
 [1]: https://s3.amazonaws.com/ddagent-windows-stable/ddagent-cli-latest.msi

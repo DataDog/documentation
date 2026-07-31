@@ -14,10 +14,16 @@ disable_sidebar: true
 | SQL Server 2017 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2019 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
 | SQL Server 2022 | {{< X >}}   | {{< X >}} | {{< X >}}  | {{< X >}}        |      |
+| SQL Server 2025 | {{< X >}}   | {{< X >}} |            | {{< X >}}        | Requires Datadog Agent 7.79+. |
 
 For setup instructions, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-sql-server" >}}
+{{< card-grid card_width="220px" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/selfhosted" src="integrations_logos/sqlserver.png" alt="Selfhosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/rds" src="integrations_logos/amazon_rds.png" alt="RDS" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/azure" src="integrations_logos/azure.png" alt="Aurora" >}}
+  {{< image-card href="/database_monitoring/setup_sql_server/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
+{{< /card-grid >}}
 
 <br>
 

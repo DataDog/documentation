@@ -1,6 +1,7 @@
 ---
 title: Stepper test (closed stepper)
 draft: true
+private: true
 ---
 
 ## Overview

@@ -52,7 +52,7 @@ The following table presents the list of collected features and the minimal requ
 | Feature | Requirements |
 |---|---|
 | Retrieve tags from labels of a query | GCP CCM costs must be setup. Supported without monitoring or reservations. |
-| Query-Level Cost Attribution | BigQuery monitoring enabled |
+| Query-Level Cost Attribution | BigQuery monitoring enabled with Data Observability |
 | Reservation Cost Allocation | BigQuery reservations configured |
 
 1. Configure the Google Cloud Cost Management integration on the [Cloud Cost Setup page][4].
@@ -88,9 +88,9 @@ You can identify BigQuery schedules to help connect costs to specific scheduled 
 
 To identify which BigQuery schedule a `DTS_CONFIG_ID` refers to:
 
-1.  Go to **BigQuery** in the [**GCP Console**][8].
-2.  Navigate to **Transfers > Schedules**.
-3.  Use the **search bar** or **Ctrl+F** to locate the `DTS_CONFIG_ID`.
+1.  Go to {{< ui >}}BigQuery{{< /ui >}} in the [GCP Console][8].
+2.  Navigate to {{< ui >}}Transfers{{< /ui >}} > {{< ui >}}Schedules{{< /ui >}}.
+3.  Use the {{< ui >}}search bar{{< /ui >}} or Ctrl+F to locate the `DTS_CONFIG_ID`.
 4.  Click the matched entry to view details about the query schedule, including source, frequency, and target dataset.
 
 #### Additional cost analysis tags
@@ -197,7 +197,7 @@ Learn more about [BigQuery storage and best practices][11].
 [2]: https://cloud.google.com/bigquery/pricing
 [3]: https://cloud.google.com/bigquery/docs/best-practices-performance-overview
 [4]: /cloud_cost_management/setup/google_cloud/
-[5]: /integrations/google-cloud-bigquery/
+[5]: /data_observability/quality_monitoring/data_warehouses/bigquery/
 [6]: https://cloud.google.com/bigquery/docs/reservations-get-started
 [7]: https://cloud.google.com/bigquery/docs/reservations-intro
 [8]: https://console.cloud.google.com

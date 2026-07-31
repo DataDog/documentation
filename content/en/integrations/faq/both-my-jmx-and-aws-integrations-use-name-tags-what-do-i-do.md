@@ -1,5 +1,6 @@
 ---
 title: Both my JMX and AWS integrations use "name" tags. What do I do?
+description: "Resolve name tag conflicts between the AWS integration and JMX-based integrations by renaming JMX bean tags."
 
 ---
 

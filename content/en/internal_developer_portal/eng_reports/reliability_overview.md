@@ -1,5 +1,6 @@
 ---
 title: Reliability Overview
+description: View aggregated SLO and incident data across services and teams to assess your organization's reliability, with historical trends and a summary score for leadership.
 aliases:
 - /software_catalog/eng_reports/reliability_overview/
 further_reading:

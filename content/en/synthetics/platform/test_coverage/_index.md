@@ -21,9 +21,9 @@ further_reading:
 
 ## Overview
 
-Explore your testing suite's Synthetic test coverage of RUM browser actions on the [**Test Coverage** page][1], which you can find under **Digital Experience** > **Synthetic Monitoring & Testing**.
+Explore your testing suite's Synthetic test coverage of RUM browser actions on the [{{< ui >}}Test Coverage{{< /ui >}} page][1], which you can find under {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}.
 
-The [**Test Coverage** page][1] provides actionable insight into the overall testing coverage of your [RUM applications][2]. It uses [data collected from the Browser RUM SDK][3] and [results from Synthetic browser tests][4].
+The [{{< ui >}}Test Coverage{{< /ui >}} page][1] provides actionable insight into the overall testing coverage of your [RUM applications][2]. It uses [data collected from the Browser RUM SDK][3] and [results from Synthetic browser tests][4].
 
 {{< img src="synthetics/test_coverage/browser_actions.png" alt="Test Coverage page with an Overview section, Untested Actions section, and a Tested Actions section" style="width:100%" >}}
 
@@ -41,17 +41,17 @@ Build a more comprehensive, accurate testing suite by identifying untested actio
 
 To identify areas in your application or views where you should create browser tests:
 
-1. Select a RUM application from the **Application** dropdown menu or a view from the **View Name** dropdown menu. 
-2. Click **Custom** to filter the data on [custom actions][5], which are unique and offer more accurate coverage results compared to generated actions. If you want to include generated actions in the test coverage analysis, select **All Actions**.
+1. Select a RUM application from the {{< ui >}}Application{{< /ui >}} dropdown menu or a view from the {{< ui >}}View Name{{< /ui >}} dropdown menu. 
+2. Click {{< ui >}}Custom{{< /ui >}} to filter the data on [custom actions][5], which are unique and offer more accurate coverage results compared to generated actions. If you want to include generated actions in the test coverage analysis, select {{< ui >}}All Actions{{< /ui >}}.
 3. Identify gaps in your test coverage by examining the information presented in the following sections: 
 
-   **Test Coverage Overview** 
+   {{< ui >}}Test Coverage Overview{{< /ui >}} 
    : Displays the percentage of actions being tested, the percentage of actions being tested weighted by the number of real user interactions, and a list of top views with their counts of user sessions and browser tests, and the percentage of actions being tested. 
 
-   **Untested Actions**
+   {{< ui >}}Untested Actions{{< /ui >}}
    : Displays the number of untested user actions, the number of total actions collected, and a list of top actions that real users most interact with but are _not_ being tested.
 
-   **Tested Actions**
+   {{< ui >}}Tested Actions{{< /ui >}}
    : Displays the number of browser tests covering user actions, the number of real user interactions, and a list of top actions that real users most interact with and _are_ being tested. 
 
 The [Test Coverage page][1] populates actions that are extensively used, and hides actions that are less commonly used in your application. For more information about the data displayed, see [Synthetic Monitoring Metrics][6].
@@ -67,7 +67,7 @@ Use the information on the [Test Coverage page][1] to answer the following quest
 
 ### View session replays
 
-Click on the **Play** icon next to an action in the **Untested Actions** table to examine a [recording of real user interaction][7] in [Session Replay][8]. 
+Click on the {{< ui >}}Play{{< /ui >}} icon next to an action in the {{< ui >}}Untested Actions{{< /ui >}} table to examine a [recording of real user interaction][7] in [Session Replay][8]. 
 
 ### Examine actions
 
@@ -77,7 +77,7 @@ Click on an action to access the number of tests, views, sessions, and a subset 
 
 Add the most popular sections of your application to a new or existing browser test so that you are alerted when key user journeys in your application are negatively impacted by a code change.
 
- To create a test, click **+ New Test** on the top right of the [Test Coverage page][1]. You can run tests [directly in your CI/CD pipelines][9] to ensure no regressions occur before releasing code in production.  
+ To create a test, click {{< ui >}}+ New Test{{< /ui >}} on the top right of the [Test Coverage page][1]. You can run tests [directly in your CI/CD pipelines][9] to ensure no regressions occur before releasing code in production.  
 
 [1]: https://app.datadoghq.com/synthetics/test-coverage/browser
 [2]: /synthetics/guide/explore-rum-through-synthetics/

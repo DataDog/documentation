@@ -10,10 +10,10 @@ description: Create custom grok rules to parse the full message or specific attr
 Create custom grok rules to parse the full message or a specific attribute of your raw event. As a best practice, it is recommended to use at most 10 parsing rules within a grok processor.
 
 
-{{< img src="service_management/events/grok-parser.png" alt="Parsing example 1" style="width:80%;">}}
+{{< img src="events/grok-parser.png" alt="Parsing example 1" style="width:80%;">}}
 
 
-Click **Parse My Events** to kickstart a set of three parsing rules for the events flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of events if needed. This feature requires that the corresponding events are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
+Click {{< ui >}}Parse My Events{{< /ui >}} to kickstart a set of three parsing rules for the events flowing through the underlying pipeline. Refine attribute naming from there, and add new rules for other type of events if needed. This feature requires that the corresponding events are being indexed, and actually flowing in—you can temporarily deactivate or sample down exclusion filters to make this work for you.
 
 Select a sample by clicking on it to trigger its evaluation against the parsing rule and display the result at the bottom of the screen.
 
@@ -199,13 +199,13 @@ Here is a list of all the matchers and filters natively implemented by Datadog:
 
 ## Advanced settings
 
-At the bottom of your Grok processor tiles, there is an **Advanced Settings** section:
+At the bottom of your Grok processor tiles, there is an {{< ui >}}Advanced Settings{{< /ui >}} section:
 
 {{< img src="logs/processing/parsing/advanced_settings.png" alt="Advanced Settings" style="width:80%;">}}
 
 ### Parsing a specific text attribute
 
-Use the **Extract from** field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
+Use the {{< ui >}}Extract from{{< /ui >}} field to apply your Grok processor on a given text attribute instead of the default `message` attribute.
 
 For example, consider an event containing a `command.line` attribute that should be parsed as a key-value. You could parse this event as follows:
 
@@ -213,7 +213,7 @@ For example, consider an event containing a `command.line` attribute that should
 
 ### Using helper rules to factorize multiple parsing rules
 
-Use the **Helper Rules** field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
+Use the {{< ui >}}Helper Rules{{< /ui >}} field to define tokens for your parsing rules. Helper rules help you to factorize Grok patterns across your parsing rules. This is useful when you have several rules in the same Grok parser that use the same tokens.
 
 Example for a classic unstructured event:
 

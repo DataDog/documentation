@@ -51,7 +51,7 @@ To create a billing conductor CUR, follow the [AWS Cost and Usage Reports user g
 Before starting, verify the following:
 
 **MSP access**  
-Access to the **management account** to configure Billing Conductor (Pricing Rules, Pricing Plans, Billing Groups).
+Access to the **management account** to configure Billing Conductor ({{< ui >}}Pricing Rules{{< /ui >}}, {{< ui >}}Pricing Plans{{< /ui >}}, {{< ui >}}Billing Groups{{< /ui >}}).
 
 **Customer permissions**  
 The customer must have permission to:
@@ -69,22 +69,22 @@ These steps **must be completed in the MSP’s management account**.
 
 ### Step 1 - Create a pricing rule
 
-Billing Conductor computes pro forma costs by adjusting **AWS public on‑demand rates** using a **Discount** or **Markup**.
+Billing Conductor computes pro forma costs by adjusting **AWS public on‑demand rates** using a {{< ui >}}Discount{{< /ui >}} or {{< ui >}}Markup{{< /ui >}}.
 
 You must explicitly choose between these options:
-- **Discount**: applies a percentage discount to public on-demand  
-- **Markup**: applies a percentage increase to public on-demand  
+- {{< ui >}}Discount{{< /ui >}}: applies a percentage discount to public on-demand  
+- {{< ui >}}Markup{{< /ui >}}: applies a percentage increase to public on-demand  
 
 <div class="alert alert-info">
-Entering 0% (whether Discount or Markup) results in public on-demand pricing. The allowed range is 0-100%.
+Entering 0% (whether {{< ui >}}Discount{{< /ui >}} or {{< ui >}}Markup{{< /ui >}}) results in public on-demand pricing. The allowed range is 0-100%.
 </div>
 
 For example:
 
 | Type | Calculation |
 |------|-------------|
-| Discount (20%) | public on-demand × 0.8 |
-| Markup (30%) | public on-demand × 1.3 |
+| {{< ui >}}Discount{{< /ui >}} (20%) | public on-demand × 0.8 |
+| {{< ui >}}Markup{{< /ui >}} (30%) | public on-demand × 1.3 |
 
 ### Step 2 - Create a pricing plan
 
@@ -119,35 +119,35 @@ Because of this limitation, the customer must modify the template before deploym
 ### Step 2 - Deploy the CloudFormation stack in AWS
 
 1. Use the template above and deploy a stack in the customer’s member account.
-2. To deploy the stack, follow the AWS documentation: [Create a stack from the CloudFormation][7]. When creating the stack, choose: **With new resources (standard)**.
+2. To deploy the stack, follow the AWS documentation: [Create a stack from the CloudFormation][7]. When creating the stack, choose: {{< ui >}}With new resources (standard){{< /ui >}}.
 
 ### Step 3 - Configure the Cost and Usage Report settings in AWS
 
 Enter the following information during deployment:
-- **Bucket Name**: S3 bucket where CUR files are stored  
-- **Bucket Region**: AWS region of that bucket (for example, `us-east-1`)  
-- **Export Path Prefix**: S3 path prefix for CUR files  
-- **Export Name**: Name of the Cost and Usage Report  
+- {{< ui >}}Bucket Name{{< /ui >}}: S3 bucket where CUR files are stored  
+- {{< ui >}}Bucket Region{{< /ui >}}: AWS region of that bucket (for example, `us-east-1`)  
+- {{< ui >}}Export Path Prefix{{< /ui >}}: S3 path prefix for CUR files  
+- {{< ui >}}Export Name{{< /ui >}}: Name of the Cost and Usage Report  
 
 These values define where AWS writes the CUR and where Datadog reads it.
 
 ### Step 4 - Enter the member account's CUR parameters in Datadog
 
-1. After deploying the CloudFormation stack, navigate to **Datadog → Cloud Cost → Settings → [Accounts][8]**.
+1. After deploying the CloudFormation stack, navigate to {{< ui >}}Datadog{{< /ui >}} → {{< ui >}}Cloud Cost{{< /ui >}} → {{< ui >}}Settings{{< /ui >}} → [{{< ui >}}Accounts{{< /ui >}}][8].
 
 
    {{< img src="partners/cloud_cost/select_aws_account_ccm.png" alt="Select AWS Account for CCM" style="width:100%;" >}}
 
 2. Select the member account and enter the following fields using the exact values from **Step 3**:
-   - Bucket Name  
-   - Bucket Region
-   - Export Path Prefix
-   - Export Name
+   - {{< ui >}}Bucket Name{{< /ui >}}  
+   - {{< ui >}}Bucket Region{{< /ui >}}
+   - {{< ui >}}Export Path Prefix{{< /ui >}}
+   - {{< ui >}}Export Name{{< /ui >}}
 
-3. Skip the **Create CloudFormation stack step** (the stack was already deployed in **Step 3**).
+3. Skip the {{< ui >}}Create CloudFormation stack step{{< /ui >}} (the stack was already deployed in **Step 3**).
 
 
-4. Click **Activate now** to activate CCM for the member account.
+4. Click {{< ui >}}Activate now{{< /ui >}} to activate CCM for the member account.
 
 
 {{< img src="partners/cloud_cost/configure_aws_ccm.png" alt="Configure AWS Cloud Cost Management" style="width:100%;" >}}
@@ -159,8 +159,8 @@ After configuration is complete, the account status updates as shown below.
 ## Validation
 
 After activation, verify that cost data is flowing into Datadog:
-1. Go to **[Cloud Cost > Cost Explorer][9]** in Datadog.
-2. Select **AWS** as the provider, then use filters such as **Product**, **Member Accoun Id**, or other dimensions to group and validate the data.
+1. Go to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Cost Explorer{{< /ui >}}][9] in Datadog.
+2. Select {{< ui >}}AWS{{< /ui >}} as the provider, then use filters such as {{< ui >}}Product{{< /ui >}}, {{< ui >}}Member Accoun Id{{< /ui >}}, or other dimensions to group and validate the data.
 3. Confirm that cost data appears for the expected time range.
 
 

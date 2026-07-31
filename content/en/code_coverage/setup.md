@@ -84,9 +84,9 @@ See [Data Collected][1] for details on what data is collected from your source c
 
 ## Data access permissions
 
-If you are using [custom roles][2] rather than [Datadog-managed roles][3], be sure to enable the `Code Coverage Read` permission for the roles that need to view code coverage data.
+If you are using [custom roles][2] rather than [Datadog-managed roles][3], be sure to enable the {{< ui >}}Code Coverage Read{{< /ui >}} permission for the roles that need to view code coverage data.
 
-Navigate to [Roles settings][4], click `Edit` on the role you need, add the `Code Coverage Read` permission to the role, and save the changes.
+Navigate to [Roles settings][4], click {{< ui >}}Edit{{< /ui >}} on the role you need, add the {{< ui >}}Code Coverage Read{{< /ui >}} permission to the role, and save the changes.
 
 ## PR Gates
 
@@ -456,7 +456,7 @@ datadog-ci coverage upload --skip-git-metadata-upload=1 .
 ### Datadog UI does not show changed files in the PR view
 
 By default, the "Changed files" table only contains executable source code files that are present in the uploaded coverage reports.
-Select **Non-executable files** or **All** in the table header to display all files that were changed in the PR, regardless of whether they are executable or not.
+Select {{< ui >}}Non-executable files{{< /ui >}} or {{< ui >}}All{{< /ui >}} in the table header to display all files that were changed in the PR, regardless of whether they are executable or not.
 
 {{< img src="/code_coverage/non_executable_files.png" text="In Changed files, you have the option to select Non-executable on the table header" style="width:100%" >}}
 

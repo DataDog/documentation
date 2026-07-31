@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128">
+    <defs>
+        <linearGradient id="a" x1="64" x2="64" y1="64" y2="128" gradientUnits="userSpaceOnUse">
+            <stop offset=".16" stop-color="#fff" stop-opacity=".39"/>
+            <stop offset=".66" stop-color="#fff" stop-opacity=".8"/>
+        </linearGradient>
+        <linearGradient id="b" x1="1343.77" x2="1232.57" y1="-441.65" y2="-506.86" gradientTransform="matrix(.5 0 0 -.5 -552.5 -189)" gradientUnits="userSpaceOnUse">
+            <stop offset=".18" stop-color="#fff" stop-opacity=".31"/>
+            <stop offset=".71" stop-color="#fff" stop-opacity="0"/>
+        </linearGradient>
+        <linearGradient id="c" x1="1233" x2="1121.8" y1="-378" y2="-570" gradientTransform="matrix(.5 0 0 -.5 -552.5 -189)" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#fff" stop-opacity=".6"/>
+            <stop offset=".67" stop-color="#fff" stop-opacity=".22"/>
+        </linearGradient>
+    </defs>
+    <path d="m64.05 128 55.55-32V32L64 0 8.4 32v64z" style="fill:#000;stroke-width:0"/>
+    <path d="M64.05 64v64L8.37 96zm27.84 16-27.84 48 55.57-32z" style="fill:url(#a);stroke-width:0"/>
+    <path d="M119.6 96V32L64 0v64z" style="fill:url(#b);stroke-width:0"/>
+    <path d="M64 0 8.4 32v64L64 64z" style="fill:url(#c);stroke-width:0"/>
+    <path d="M119.63 32 91.89 80l-27.84 48V64z" style="fill:#fff;opacity:.85;stroke-width:0"/>
+    <path d="M119.6 32 64 64 8.4 32z" style="fill:#fff;stroke-width:0"/>
+</svg>

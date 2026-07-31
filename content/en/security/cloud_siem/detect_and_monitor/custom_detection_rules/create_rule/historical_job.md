@@ -12,7 +12,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 ## Create a rule
 
 1. To create a threshold detection rule or job, navigate to the [Create a New Detection][1] page.
-1. Select **Historical Job**.
+1. Select {{< ui >}}Historical Job{{< /ui >}}.
 
 ## Define your historical job
 
@@ -24,9 +24,12 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {{< tabs >}}
 {{% tab "Threshold" %}}
 
+Choose the query language you want to use.
+
+{{% collapse-content title="Event Query" level="h4" expanded=false id="threshold-event-query" %}}
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/threshold_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -34,14 +37,44 @@ Historical jobs are one-time executable queries on historical logs used to backt
 {{% cloud_siem/unit_testing %}}
 
 [1]: /logs/search_syntax/
-[2]: https://app.datadoghq.com/logs
+{{% /collapse-content %}}
+{{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
+You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
+
+In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
+- Logs
+- Audit Trail logs
+- Events
+- Security signals
+- Spans
+- RUM events
+- Product Analytics events
+- Cloud Network data
+- NetFlow data
+- Reference tables
+- Infrastructure tables
+
+<!-- Markdown workaround - need to put something here so the image doesn't appear as part of the last list item -->
+
+{{< img src="security/security_monitoring/detection_rules/sql-ocsf-query-example.png" alt="Example of a SQL dataset and query" style="width:100%" >}}
+
+1. Under {{< ui >}}Define Datasets{{< /ui >}}, choose one or more datasets to use in your query. In the dropdown, you can select an existing published dataset to either use or clone, or click the {{< ui >}}New{{< /ui >}} icon to create a dataset from scratch.
+   - If you chose an existing dataset and made changes, click {{< ui >}}Update{{< /ui >}} to apply those changes to that dataset, or {{< ui >}}Clone With Changes{{< /ui >}} to create a dataset with your changes applied.
+   - If you created a dataset, click {{< ui >}}Create{{< /ui >}} to use it in your job.
+2. Under {{< ui >}}Write Queries{{< /ui >}}, enter one or more SQL queries. For more information, see [DDSQL Reference][1]. Click {{< ui >}}Preview{{< /ui >}} to see a list of matching results.
+
+Conditions are applied to the results returned by your SQL queries. Each query result is evaluated against the conditions you define in the {{< ui >}}Set Conditions{{< /ui >}} section, such as a count threshold or group-by attribute. A job result is generated when the query results meet those conditions.
+
+[1]: /ddsql_reference/
+[2]: https://app.datadoghq.com/security/configuration/datasets
+{{% /collapse-content %}}
 
 {{% /tab %}}
 {{% tab "New Value" %}}
 
 {{< img src="security/security_monitoring/detection_rules/new_value_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/new_value_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -56,7 +89,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 
 {{< img src="security/security_monitoring/detection_rules/anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/anomaly_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -71,7 +104,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 
 {{< img src="security/security_monitoring/detection_rules/content_anomaly_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/content_anomaly_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -86,7 +119,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 
 {{< img src="security/security_monitoring/detection_rules/impossible_travel_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a search query for your logs or events using the [Log Explorer search syntax][1].
 {{% cloud_siem/impossible_travel_query %}}
 {{% cloud_siem/add_calculated_fields %}}
@@ -103,16 +136,16 @@ Historical jobs are one-time executable queries on historical logs used to backt
 
 {{< img src="security/security_monitoring/detection_rules/third_party_query.png" alt="Define the search query" style="width:100%;" >}}
 
-1. To search Audit Trail events or events from Events Management, click the down arrow next to **Logs** and select **Audit Trail** or **Events**.
+1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
 1. Construct a root query for your logs or events using the [Log Explorer search syntax][1].
-1. In the **Trigger for each new** dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
+1. In the {{< ui >}}Trigger for each new{{< /ui >}} dropdown menu, select the attributes where each attribute generates a signal for each new attribute value over 24-hour roll-up period.
 {{% cloud_siem/add_calculated_fields %}}
     - See [Calculated Fields Expressions Language][3] for information on syntax and language constructs.
 {{% cloud_siem/add_calculated_fields %}}
 {{% cloud_siem/add_reference_tables %}}
 {{% cloud_siem/unit_testing %}}
 
-Click **Add Root Query** to add additional queries.
+Click {{< ui >}}Add Root Query{{< /ui >}} to add additional queries.
 
 [1]: /logs/search_syntax/
 [2]: https://app.datadoghq.com/logs
@@ -178,14 +211,14 @@ Click **Add Root Query** to add additional queries.
 
 {{< img src="security/security_monitoring/detection_rules/content_anomaly_historical_condition.png" alt="Set your condition, severity, and notification recipients" style="width:100%;" >}}
 
-1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
-1. In the **Anomaly count** field, enter the condition for how many anomalous logs within the specified window are required to trigger a signal.
+1. (Optional) Click the pencil icon next to {{< ui >}}Condition 1{{< /ui >}} if you want to rename the condition. This name is appended to the rule name when a signal is generated.
+1. In the {{< ui >}}Anomaly count{{< /ui >}} field, enter the condition for how many anomalous logs within the specified window are required to trigger a signal.
     - For example, if the condition is `a >= 3` where `a` is the query, a signal is triggered if there are at least three anomalous logs within the evaluation window.
     - All rule conditions are evaluated as condition statements. Thus, the order of the conditions affects which notifications are sent because the first condition to match generates the signal. Click and drag your rule conditions to change their ordering.
     - A rule condition contains logical operations (`>`, `>=`, `&&`, `||`) to determine if a signal should be generated based on the event counts in the previously defined queries.
     - The ASCII lowercase query labels are referenced in this section. An example rule condition for query `a` is `a > 3`.
     - **Note**: The query label must precede the operator. For example, `a > 3` is allowed; `3 < a` is not allowed.
-1. In the **within a window of** dropdown menu, select the time period during which a signal is triggered if the condition is met.
+1. In the {{< ui >}}within a window of{{< /ui >}} dropdown menu, select the time period during which a signal is triggered if the condition is met.
     - An `evaluation window` is specified to match when at least one of the cases matches true. This is a sliding window and evaluates cases in real time.
 
 ### Other parameters
@@ -219,8 +252,8 @@ Click **Add Root Query** to add additional queries.
 
 {{< img src="security/security_monitoring/detection_rules/set_condition_root_query.png" alt="Set your conditions, severity, and notification recipients" style="width:100%;" >}}
 
-1. (Optional) Click the pencil icon next to **Condition 1** if you want to rename the condition. This name is appended to the rule name when a signal is generated.
-1. In the **Query** field, enter the tags of a log that you want to trigger a signal.
+1. (Optional) Click the pencil icon next to {{< ui >}}Condition 1{{< /ui >}} if you want to rename the condition. This name is appended to the rule name when a signal is generated.
+1. In the {{< ui >}}Query{{< /ui >}} field, enter the tags of a log that you want to trigger a signal.
     - For example, if you want logs with the tag `dev:demo` to trigger signals with a severity of `INFO`, enter `dev:demo` in the query field. Similarly, if you want logs with the tag `dev:prod` to trigger signals with a severity of `MEDIUM`, enter `dev:prod` in the query field.
 
 ### Other parameters
@@ -232,7 +265,7 @@ Click **Add Root Query** to add additional queries.
 
 ## Notify when job is complete
 
-(Optional) Click **Add Recipient** to send notifications upon the completion of job analysis. See [Notification channels][2] for more information.
+(Optional) Click {{< ui >}}Add Recipient{{< /ui >}} to send notifications upon the completion of job analysis. See [Notification channels][2] for more information.
 
 ## Describe your playbook
 

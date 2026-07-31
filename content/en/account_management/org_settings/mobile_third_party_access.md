@@ -13,7 +13,7 @@ further_reading:
 ---
 ## Overview
 
-Use the **Mobile and Third-Party Access** page under [Organization Settings][1] to manage and gain visibility into your organization's OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it.
+Use the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page under [Organization Settings][1] to manage and gain visibility into your organization's OAuth applications, such as the scopes and permissions granted to an application and the users that have authorized access for it.
 
 {{< img src="account_management/mobile_third_party_access/org-management-page.png" alt="Mobile and Third-Party Access management page in Datadog" style="width:100%;">}}
 
@@ -33,10 +33,10 @@ Enabled OAuth applications allow users with necessary permissions to authorize a
 Disabling OAuth access for an application revokes access to this application for all users in your organization. While the application remains installed, users are no longer able to use the application and are prompted with an error if they attempt to authorize it.
 
 To disable an application from the Mobile and Third-Party Access page:
-1. Hover over your application in the apps table to reveal the **Disable** button on the right side of the row.
+1. Hover over your application in the apps table to reveal the {{< ui >}}Disable{{< /ui >}} button on the right side of the row.
 {{< img src="account_management/mobile_third_party_access/disable-app-table.png" alt="Apps table showing the Disable button on hover" style="width:100%;">}}
 
-2. Click on your application to open the detailed view of the application and click the **Disable Application** button.
+2. Click on your application to open the detailed view of the application and click the {{< ui >}}Disable Application{{< /ui >}} button.
 {{< img src="account_management/mobile_third_party_access/app-detail-scopes.png" alt="Application detail view showing scopes and Disable Application button" style="width:100%;">}}
 
 **Note**: When re-enabled, users that previously authorized the application are required to re-authorize the application to regain access.
@@ -53,11 +53,11 @@ Enable Application Scope Management to modify the allowed scopes for an applicat
 
 Only MCP applications support Application Scope Management.
 
-1. On the **Mobile and Third-Party Access page**, click an application to open its detail view.
+1. On the {{< ui >}}Mobile and Third-Party Access{{< /ui >}} page, click an application to open its detail view.
 
-2. Select the **Scopes** tab and use the **Allowed** checkbox for each scope to control whether to grant the application that scope.
+2. Select the {{< ui >}}Scopes{{< /ui >}} tab and use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control whether to grant the application that scope.
 
-3. Click **Enable** to save the scope configuration.
+3. Click {{< ui >}}Enable{{< /ui >}} to save the scope configuration.
 
 {{< img src="account_management/mobile_third_party_access/scope-restrictions-enable.png" alt="Application Scope Management view with Enable and Restore to Full Access buttons" style="width:100%;">}}
 

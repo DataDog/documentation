@@ -16,7 +16,7 @@ The following code security capabilities are supported in the Java library, for 
 
 The minimum tracer version to get all supported code security capabilities for Java is 1.15.0.
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listd above do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listd above do not apply to these two Code Security capabilities.
 
 ### Supported deployment types
 | Type              | Runtime Software Composition Analysis (SCA) | Runtime Code Analysis (IAST) |

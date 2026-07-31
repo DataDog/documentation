@@ -32,7 +32,6 @@ To complete this guide, you need the following:
 Install and set up the following on your machine:
 
 - A Kubernetes cluster (v1.29+)
-  - **Note**: EKS Fargate and GKE Autopilot environments are not supported
 - [Helm (v3+)][54]
 - [kubectl][5]
 
@@ -110,7 +109,11 @@ After deploying the Datadog Operator, create the `DatadogAgent` resource that tr
 {{< /code-block >}}
 
   - Replace `<CLUSTER_NAME>` with a name for your cluster.
-  - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct **DATADOG SITE** is selected on the right.)
+  - Replace `<DATADOG_SITE>` with your [Datadog site][1]. Your site is {{< region-param key="dd_site" code="true" >}}. (Ensure the correct {{< ui >}}DATADOG SITE{{< /ui >}} is selected on the right.)
+
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-info">For FED, also set <code>useFIPSAgent: true</code> under <code>spec.global</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+{{% /site-region %}}
 
 2. Enable the OpenTelemetry Collector:
 
@@ -149,7 +152,7 @@ When enabling additional Datadog features, always use the Datadog or OpenTelemet
 
 **Note**: As of operator `v1.22.0`, the DDOT container uses the `ddot-collector` image instead of the `-full` agent image.
 - When overriding the node agent image tag, use a tag >= `7.67.0` so the OTel container is scheduled (the `ddot-collector` image is only supported in >= `7.67.0`).
-- The `ddot-collector` image has no `-full` variant. If you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (for example, `gcr.io/datadoghq/agent:7.72.1-full`).
+- The `ddot-collector` image has no `-full` variant. If you need a `-full` image, set `spec.override.nodeAgent.image.name` to a full agent image (for example, `registry.datadoghq.com/agent:7.72.1-full`).
 
 [1]: /getting_started/site
 [2]: /containers/guide/changing_container_registry/
@@ -174,6 +177,10 @@ datadog:
 {{< /code-block >}}
 
 Set `<DATADOG_SITE>` to your [Datadog site][2]. Otherwise, it defaults to `datadoghq.com`, the US1 site.
+
+{{% site-region region="gov,gov2" %}}
+<div class="alert alert-info">For FED, also set <code>useFIPSAgent: true</code> at the root of your <code>datadog-values.yaml</code> to use the FIPS-compliant Agent image. See <a href="/agent/configuration/fips-compliance/">FIPS compliance</a>.</div>
+{{% /site-region %}}
 
 3. Enable the OpenTelemetry Collector and configure the essential ports:
 
@@ -329,6 +336,7 @@ In the snippet below, the Collector configuration is placed directly under the `
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -340,7 +348,7 @@ In the snippet below, the Collector configuration is placed directly under the `
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -421,6 +429,7 @@ spec:
           processors:
             infraattributes:
               cardinality: 2
+            cumulativetodelta:
           connectors:
             datadog/connector:
               traces:
@@ -432,7 +441,7 @@ spec:
                 exporters: [debug, datadog, datadog/connector]
               metrics:
                 receivers: [otlp, datadog/connector, prometheus]
-                processors: [infraattributes]
+                processors: [infraattributes, cumulativetodelta]
                 exporters: [debug, datadog]
               logs:
                 receivers: [otlp]
@@ -452,7 +461,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -484,6 +492,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -495,7 +504,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -573,7 +582,6 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: otel-agent-config-map
-  namespace: system
 data:
   # must be named otel-config.yaml
   otel-config.yaml: |-
@@ -605,6 +613,7 @@ data:
     processors:
       infraattributes:
         cardinality: 2
+      cumulativetodelta:
     connectors:
       datadog/connector:
         traces:
@@ -616,7 +625,7 @@ data:
           exporters: [debug, datadog, datadog/connector]
         metrics:
           receivers: [otlp, datadog/connector, prometheus]
-          processors: [infraattributes]
+          processors: [infraattributes, cumulativetodelta]
           exporters: [debug, datadog]
         logs:
           receivers: [otlp]
@@ -659,6 +668,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -670,7 +680,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -744,7 +754,7 @@ Deploy the Datadog Agent with the configuration file:
 kubectl apply -f datadog-agent.yaml
 ```
 
-This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
+This deploys the Datadog Agent as a DaemonSet with the DDOT OpenTelemetry Collector. The Collector runs on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/
@@ -770,7 +780,7 @@ Replace `<RELEASE_NAME>` with the Helm release name you are using.
 
 <div class="alert alert-info">You may see warnings during the deployment process. These warnings can be ignored.</div>
 
-This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. The [Gateway deployment pattern][2] is in Preview; for installation instructions, follow the [DDOT Kubernetes Gateway installation guide][3].
+This Helm chart deploys the Datadog Agent with OpenTelemetry Collector as a DaemonSet. The Collector is deployed on the same host as your application, following the [Agent deployment pattern][1]. For the [Gateway deployment pattern][2], follow the [DDOT Kubernetes Gateway installation guide][3].
 
 [1]: https://opentelemetry.io/docs/collector/deployment/agent/
 [2]: https://opentelemetry.io/docs/collector/deployment/gateway/

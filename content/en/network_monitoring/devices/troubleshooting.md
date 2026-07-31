@@ -256,7 +256,7 @@ Check for any rules blocking UDP traffic on your configured ports. For example:`
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_troubleshooting_dashboard.png" alt="The Network Device Monitoring page showing the Dashboard dropdown with the NDM Troubleshooting dashboard highlighed." style="width:80%;" >}}
 
-2. Scroll down to the Traps widget and observe the **Traps incorrectly formatted** graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match.
+2. Scroll down to the Traps widget and observe the {{< ui >}}Traps incorrectly formatted{{< /ui >}} graph. If this is non-zero it likely means that the authentication on the NDM collector and the device do not match.
 
    {{< img src="/network_device_monitoring/troubleshooting/ndm_traps_dashboard.png" alt="The NDM troubleshooting dashboard showing the Traps widget section." style="width:100%;" >}}
 

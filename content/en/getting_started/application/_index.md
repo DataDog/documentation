@@ -43,7 +43,7 @@ The [infrastructure list][2] serves as a central view of all your infrastructure
 - Arrange, filter, and visualize hosts based on tags and metrics.
 - Inspect hosts to review their tags, performance, health, and more.
 
-Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn more, read the [Infrastructure List documentation][2].
+Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Hosts{{< /ui >}}][3] in the app to get started. To learn more, read the [Infrastructure List documentation][2].
 
 ## Host and container maps
 
@@ -57,7 +57,7 @@ Navigate to [**Infrastructure > Hosts**][3] in the app to get started. To learn 
 - Color-code by a variety of metrics to help you spot performance issues, and filter and group by tags and metadata.
 - Drill down into individual hosts or containers to troubleshoot.
 
-Navigate to [**Infrastructure > Host Map**][5] in the app to get started. To learn more, read the [Host and Container Maps documentation][4].
+Navigate to [{{< ui >}}Infrastructure{{< /ui >}} > {{< ui >}}Host Map{{< /ui >}}][5] in the app to get started. To learn more, read the [Host and Container Maps documentation][4].
 
 ## Log Management
 
@@ -69,7 +69,7 @@ Navigate to [**Infrastructure > Host Map**][5] in the app to get started. To lea
 - View and search logs in real time and filter by things like service, host, and error type.
 - Choose which logs to keep and for how long, reducing storage costs.
 
-Navigate to [Logs][8] in the app to get started. To learn more, read the [Log Management documentation][6].
+Navigate to [{{< ui >}}Logs{{< /ui >}}][8] in the app to get started. To learn more, read the [Log Management documentation][6].
 
 ## APM
 
@@ -82,7 +82,7 @@ Navigate to [Logs][8] in the app to get started. To learn more, read the [Log Ma
 - Visualize service dependencies and data flows with the Service Map.
 - Correlate traces with corresponding logs, metrics, and user sessions for full-stack context.
 
-Navigate to [APM][10] in the app to get started. To learn more, read the [APM documentation][9].
+Navigate to [{{< ui >}}APM{{< /ui >}}][10] in the app to get started. To learn more, read the [APM documentation][9].
 
 ## RUM & Session Replay
 
@@ -95,7 +95,7 @@ Datadog [Real User Monitoring][11] (RUM) allows you to visualize and analyze rea
 - Monitor feature flag performance and adoption.
 - Correlate frontend issues with backend traces, logs, and infrastructure metrics for full-stack visibility.
 
-Navigate to the [RUM explorer][13] in the app to get started. To learn more, read the [RUM documentation][11].
+Navigate to the [{{< ui >}}RUM explorer{{< /ui >}}][13] in the app to get started. To learn more, read the [RUM documentation][11].
 
 ## Synthetic Monitoring
 
@@ -107,7 +107,7 @@ Datadog [Synthetic Monitoring][14] allows you to create and run API, browser, mo
 - Detect errors, identify regressions, and automate rollbacks to prevent issues from surfacing in production.
 - Find and alert on performance issues for users in various locations.
 
-Navigate to [Synthetic Monitoring & Testing][15] in the app to get started. To learn more, read the [Synthetic Monitoring documentation][14].
+Navigate to [{{< ui >}}Synthetic Monitoring & Testing{{< /ui >}}][15] in the app to get started. To learn more, read the [Synthetic Monitoring documentation][14].
 
 ## Integrations
 
@@ -121,7 +121,7 @@ Use Datadog's {{< translate key="integration_count" >}} [integrations][16] to br
 - After integrations have been configured, all data is treated the same throughout Datadog, whether it is living in a data center or in an online service.
 - Build your own integration using the [developer documentation][17].
 
-Navigate to [Integrations][18] in the app to get started, or browse the list of integrations in the [documentation][19].
+Navigate to [{{< ui >}}Integrations{{< /ui >}}][18] in the app to get started, or browse the list of integrations in the [documentation][19].
 
 ## Dashboards
 
@@ -134,7 +134,7 @@ Navigate to [Integrations][18] in the app to get started, or browse the list of 
 - Combine multiple data types (including metrics, logs, APM, and RUM) in one place and view data in real time.
 - Annotate your graphs with comments or events for your team's context.
 
-Navigate to the [Dashboard List][21] in the app to get started. To learn more, read the [Dashboards documentation][20].
+Navigate to the [{{< ui >}}Dashboard List{{< /ui >}}][21] in the app to get started. To learn more, read the [Dashboards documentation][20].
 
 ## Monitors
 
@@ -145,7 +145,7 @@ Navigate to the [Dashboard List][21] in the app to get started. To learn more, r
 - Send alerts to Slack, email, PagerDuty, and more, by adding`@` in alert messages to direct notifications to the right people.
 - Schedule downtimes to suppress notifications for system shutdowns, offline maintenance, and more.
 
-Navigate to the [Monitors List][23] in the app to get started. To learn more, read the [Monitors documentation][22].
+Navigate to the [{{< ui >}}Monitors List{{< /ui >}}][23] in the app to get started. To learn more, read the [Monitors documentation][22].
 
 ## Further Reading
 {{< partial name="whats-next/whats-next.html" >}}

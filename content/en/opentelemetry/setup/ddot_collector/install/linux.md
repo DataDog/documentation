@@ -2,16 +2,12 @@
 title: Install the DDOT Collector on Linux
 code_lang: linux
 type: multi-code-lang
-code_lang_weight: 3
+code_lang_weight: 4
 further_reading:
 - link: "/opentelemetry/setup/ddot_collector/custom_components"
   tag: "Documentation"
   text: "Use Custom OpenTelemetry Components with Datadog Agent"
 ---
-
-{{< callout header="false" btn_hidden="true">}}
-  Support for deploying the DDOT Collector on Linux-based bare-metal hosts and virtual machines is currently in Preview.
-{{< /callout >}}
 
 ## Overview
 
@@ -42,10 +38,15 @@ To complete this guide, you need the following:
 To install the DDOT Collector on a Linux host, use the following one-line installation command:
 
 ```shell
-DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 DD_AGENT_MINOR_VERSION=75.0-1 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
+DD_API_KEY=<DATADOG_API_KEY> DD_SITE="{{< region-param key="dd_site" >}}" DD_OTELCOLLECTOR_ENABLED=true DD_AGENT_MAJOR_VERSION=7 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
 This command installs both the core Datadog Agent package and the DDOT Collector that runs alongside it.
+
+**Note**: For Agent v7.78+, if the Datadog Agent is already installed on the host, you can install the DDOT Collector separately using the following command:
+```shell
+sudo datadog-agent otel install
+```
 
 ### Validation
 
@@ -72,7 +73,7 @@ Agent (v7.x.x)
   Log Level: info
 ```
 
-There will also be an **OTel Agent** status section that includes OpenTelemetry information:
+There will also be an {{< ui >}}OTel Agent{{< /ui >}} status section that includes OpenTelemetry information:
 
 ```text
 ==========
@@ -153,6 +154,7 @@ exporters:
 processors:
   infraattributes:
     cardinality: 2
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -167,7 +169,7 @@ service:
       exporters: [datadog, datadog/connector]
     metrics:
       receivers: [otlp, datadog/connector, prometheus]
-      processors: [infraattributes]
+      processors: [infraattributes, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]

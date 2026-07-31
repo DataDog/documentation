@@ -28,13 +28,13 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
   {{% /tab %}}
   {{< /tabs >}}
 1. Add a default escalation policy. 
-   {{< img src="service_management/oncall/escalation_policy_blank.png" alt="Setup view of a new escalation policy. Notifies three proposed schedules." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/teams/escalation_policy_blank.png" alt="Setup view of a new escalation policy. Notifies three proposed schedules." style="width:80%;" >}}
    - Datadog automatically proposes _Interrupt Handler_, _Primary_, and _Secondary_ schedules for your Team. You can define these schedules in the next step. 
    - You can also notify an existing schedule owned by another Team. 
 
    See [Escalation Policies][5] for more details.
 1. Define the schedules created in the previous step. 
-   {{< img src="service_management/oncall/schedule_blank.png" alt="Setup view of a new schedule." style="width:80%;" >}}
+   {{< img src="incident_response/on-call/teams/schedule_blank.png" alt="Setup view of a new schedule." style="width:80%;" >}}
    - **Schedule Time Zone**: Select the time zone you want to operate your schedule in. Other settings, such as handoff times, adhere to this selection.
    - **Schedule Rotations**: Add your desired rotations.
    See [Schedules][6] for more details.
@@ -43,7 +43,7 @@ On-Call Teams are an extension of [Datadog Teams][1]. On-Call Teams are listed o
 
 Configure your monitors, incidents, or other resources to send Pages to your On-Call Team. See [Send a Page][7].
 
-Ensure that your On-Call Team members have set up their [Profile Settings][8].
+Ensure that your On-Call Team members have set up their [Notification Preferences][8].
 
 ## Further Reading
 
@@ -56,4 +56,4 @@ Ensure that your On-Call Team members have set up their [Profile Settings][8].
 [5]: /incident_response/on-call/escalation_policies
 [6]: /incident_response/on-call/schedules
 [7]: /incident_response/on-call/pages/
-[8]: /incident_response/on-call/profile_settings
+[8]: /incident_response/on-call/notification_preferences

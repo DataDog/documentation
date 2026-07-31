@@ -404,7 +404,7 @@ Consultez la liste de liens ci-dessous pour accéder aux rubriques correspondant
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /fr/getting_started/tagging/assigning_tags/
-[2]: /fr/service_management/events/explorer
+[2]: /fr/events/explorer
 [3]: /fr/integrations/
 [4]: /fr/infrastructure/hostmap/
 [5]: /fr/infrastructure/

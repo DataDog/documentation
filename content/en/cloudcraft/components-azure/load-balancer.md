@@ -12,12 +12,12 @@ You can use the Load Balancer component to represent and visualize load balancer
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **SKU**: Select the service level tier for your load balancer.
-- **Tier**: Select the network tier for your load balancer. This option is not available for Basic and Gateway SKUs.
-- **Number of rules**: Enter the number of configured load-balancing rules. This option is not available for Gateway SKUs.
-- **Chains**: Enter the number of chain hours for the load balancer. This option is not available for Basic and Standard SKUs.
-- **Data processed (GB)**: Enter the total volume of data processed per month by your load balancer in gigabytes.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}SKU{{< /ui >}}: Select the service level tier for your load balancer.
+- {{< ui >}}Tier{{< /ui >}}: Select the network tier for your load balancer. This option is not available for Basic and Gateway SKUs.
+- {{< ui >}}Number of rules{{< /ui >}}: Enter the number of configured load-balancing rules. This option is not available for Gateway SKUs.
+- {{< ui >}}Chains{{< /ui >}}: Enter the number of chain hours for the load balancer. This option is not available for Basic and Standard SKUs.
+- {{< ui >}}Data processed (GB){{< /ui >}}: Enter the total volume of data processed per month by your load balancer in gigabytes.
 
 ## API
 

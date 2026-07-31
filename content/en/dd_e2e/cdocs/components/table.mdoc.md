@@ -1,6 +1,7 @@
 ---
 title: Table
 draft: true
+private: true
 ---
 
 ## Overview

@@ -43,7 +43,7 @@ Supported test frameworks:
 | Framework     | SDK version  | Support level                                     |
 | ------------- | ------------ | ------------------------------------------------- |
 | XCTest        | All versions | Full support                                      |
-| Swift Testing | >= 2.7.0     | Observation only; advanced features not supported |
+| Swift Testing | >= 2.7.0     | Full support from 2.7.1; observation only in 2.7.0 |
 
 ## Installing the Swift testing SDK
 
@@ -113,11 +113,42 @@ end
 
 ## Instrumenting your tests
 
+### Swift Testing framework
+
+The Datadog SDK supports the Swift Testing framework starting in version 2.7.0 (observation only) and fully supports all advanced features in version 2.7.1 and later.
+
+#### Setting up Swift Testing observation
+
+To enable observation for your Swift Testing tests:
+
+1. Import `DatadogSDKTesting` in your test source files:
+
+{{< code-block lang="swift" >}}
+import DatadogSDKTesting
+import Testing
+{{< /code-block >}}
+
+2. Add the `.datadogTesting` trait to your test suites or standalone test functions:
+
+{{< code-block lang="swift" >}}
+@Suite(.datadogTesting)
+struct MyTestSuite {
+    @Test func myTest() {
+        // ...
+    }
+}
+
+// For standalone test functions:
+@Test(.datadogTesting) func myStandaloneTest() {
+    // ...
+}
+{{< /code-block >}}
+
 ### Configuring SDK
 
 #### Using Xcode Project
 
-To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in `Expand variables based on` or `Target for Variable Expansion` if you are using test plans:
+To enable testing instrumentation, add the following environment variables to your test target or in the `Info.plist` file as [described below](#using-infoplist-for-configuration). You **must** select your main target in {{< ui >}}Expand variables based on{{< /ui >}} or {{< ui >}}Target for Variable Expansion{{< /ui >}} if you are using test plans:
 
 {{< img src="continuous_integration/swift_env.png" alt="Swift Environments" >}}
 
@@ -214,41 +245,6 @@ Environment variables need to be set only in the test target, because the framew
 If you don't use RUM, you can link your application target with the Test SDK. The SDK adds auto-instrumentation to your application, gathers network requests and logs, and attaches them to the test traces.
 
 Environment variables need to be set only in the test target, because the framework automatically injects these values to the application.
-
-## Swift Testing framework
-
-Starting from version 2.7.0, the Datadog SDK supports the Swift Testing framework for test observation. Only observation is supported; advanced Swift Testing features are not supported.
-
-### Setting up Swift Testing observation
-
-The dependency setup is the same as for XCTest. See [Installing the Swift testing SDK](#installing-the-swift-testing-sdk) for installation instructions.
-
-To enable observation for your Swift Testing tests:
-
-1. Import `DatadogSDKTesting` in your test source files:
-
-{{< code-block lang="swift" >}}
-import DatadogSDKTesting
-import Testing
-{{< /code-block >}}
-
-2. Add the `.datadogTesting` trait to your test suites or standalone test functions:
-
-{{< code-block lang="swift" >}}
-@Suite(.datadogTesting)
-struct MyTestSuite {
-    @Test func myTest() {
-        // ...
-    }
-}
-
-// For standalone test functions:
-@Test(.datadogTesting) func myStandaloneTest() {
-    // ...
-}
-{{< /code-block >}}
-
-The remaining configuration, including environment variables and CI provider setup, is the same as for XCTest. See [Instrumenting your tests](#instrumenting-your-tests) for details.
 
 ## Additional optional configuration
 
@@ -370,7 +366,7 @@ When code coverage is available, the Datadog SDK (v2.2.7+) reports it under the 
 
 In Xcode, you can enable gathering of code coverage in your Test Plan or Test Scheme, depending on your project configuration.
 
-You can see the evolution of the test coverage in the **Coverage** tab of a test session.
+You can see the evolution of the test coverage in the {{< ui >}}Coverage{{< /ui >}} tab of a test session.
 
 ## Using Info.plist for configuration
 

@@ -28,7 +28,7 @@ NOTE: Code-Level Vulnerability detection in Python is in Preview.
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -96,7 +96,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
+5. To see Code Security in action, browse your service and find code-level vulnerabilities in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 

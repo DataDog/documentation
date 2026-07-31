@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Go applic
 further_reading:
 - link: /tracing/trace_collection/library_config/go/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/go/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/go/
   tag: "Documentation"
   text: Supported Go frameworks for automatic instrumentation
@@ -45,14 +45,14 @@ See [Tracing Go Applications][2] for general comprehensive tracing setup documen
 
 ## Install the Agent
 
-If you haven't installed a Datadog Agent on your machine, go to [**Integrations > Agent**][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
+If you haven't installed a Datadog Agent on your machine, go to [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Agent{{< /ui >}}][5] and select your operating system. For example, on most Linux platforms, you can install the Agent by running the following script, replacing `<YOUR_API_KEY>` with your [Datadog API key][3]:
 
 {{< code-block lang="shell" >}}
 DD_AGENT_MAJOR_VERSION=7 DD_API_KEY=<YOUR_API_KEY> DD_SITE="datadoghq.com" bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script.sh)"{{< /code-block >}}
 
 To send data to a Datadog site other than `datadoghq.com`, replace the `DD_SITE` environment variable with [your Datadog site][6].
 
-Verify that the Agent is running and sending data to Datadog by going to [**Events > Explorer**][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
+Verify that the Agent is running and sending data to Datadog by going to [{{< ui >}}Events{{< /ui >}} > {{< ui >}}Explorer{{< /ui >}}][8], optionally filtering by the `Datadog` Source facet, and looking for an event that confirms the Agent installation on the host:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-host-agent-verify.png" alt="Event Explorer showing a message from Datadog indicating the Agent was installed on a host." style="width:70%;" >}}
 
@@ -105,7 +105,7 @@ Next, install the Go tracer. From your `apm-tutorial-golang` directory, run:
 go get github.com/DataDog/dd-trace-go/v2/ddtrace
 {{< /code-block >}}
 
-Now that the tracing library has been added to `go.mod`, enable tracing support.
+Now that the SDK has been added to `go.mod`, enable tracing support.
 
 Uncomment the following imports in `apm-tutorial-golang/cmd/notes/main.go`:
 {{< code-block lang="go" filename="cmd/notes/main.go" >}}
@@ -179,13 +179,13 @@ Use `curl` to again send requests to the application:
 `curl localhost:8080/notes`
 : `[{"id":1,"description":"hello"}]`
 
-Wait a few moments, and take a look at your Datadog UI. Navigate to [**APM > Traces**][11]. The Traces list shows something like this:
+Wait a few moments, and take a look at your Datadog UI. Navigate to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11]. The Traces list shows something like this:
 
 {{< img src="tracing/guide/tutorials/tutorial-go-host-traces2.png" alt="Traces view shows trace data coming in from host." style="width:100%;" >}}
 
 There are entries for the database (`db`) and the `notes` app. The traces list shows all the spans, when they started, what resource was tracked with the span, and how long it took.
 
-If you don't see traces, clear any filter in the **Traces** Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
+If you don't see traces, clear any filter in the {{< ui >}}Traces{{< /ui >}} Search field (sometimes it filters on an environment variable such as `ENV` that you aren't using).
 
 ### Examine a trace
 
@@ -203,7 +203,7 @@ A `GET /notes` trace looks something like this:
 
 ## Tracing configuration
 
-You can configure the tracing library to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
+You can configure the SDK to add tags to the telemetry it sends to Datadog. Tags help group, filter, and display data meaningfully in dashboards and graphs. To add tags, specify environment variables when running the application. The project `Makefile` includes the environment variables `DD_ENV`, `DD_SERVICE`, and `DD_VERSION`, which are set to enable [Unified Service Tagging][17]:
 
 {{< code-block lang="go" filename="Makefile" disable_copy="true" collapsible="true" >}}
 run: build
@@ -212,9 +212,9 @@ run: build
 
 <div class="alert alert-danger">The <code>Makefile</code> also sets the <code>DD_TRACE_SAMPLE_RATE</code> environment variable to <code>1</code>, which represents a 100% sample rate. A 100% sample rate ensures that all requests to the notes service are sent to the Datadog backend for analysis and display for the purposes of this tutorial. In an actual production or high-volume environment, you wouldn't specify this high of a rate. Setting a high sample rate with this variable in the application overrides the Agent configuration and results in a very large volume of data being sent to Datadog. For most use cases, allow the Agent to automatically determine the sampling rate.</div>
 
-For more information on available configuration options, see [Configuring the Go Tracing Library][14].
+For more information on available configuration options, see [Configuring the Go SDK][14].
 
-### Use automatic tracing libraries
+### Use automatic instrumentation
 
 Datadog has several fully supported libraries for Go that allow for automatic tracing when implemented in the code. In the `cmd/notes/main.go` file, you can see the `go-chi`, `sql`, and `http` libraries being aliased to the corresponding Datadog libraries: `chitrace`, `sqltrace`, and `httptrace` respectively:
 
@@ -355,7 +355,7 @@ To enable tracing in the calendar application, uncomment the following lines in 
 1. Send a POST request with the `add_date` parameter:
    {{< code-block lang="shell">}}curl -X POST 'localhost:8080/notes?desc=hello_again&add_date=y'{{< /code-block >}}
 
-1. In the Trace Explorer, click this latest `notes` trace to see a distributed trace between the two services:
+1. In the {{< ui >}}Trace Explorer{{< /ui >}}, click this latest `notes` trace to see a distributed trace between the two services:
    {{< img src="tracing/guide/tutorials/tutorial-go-host-distributed.png" alt="A flame graph for a distributed trace." style="width:100%;" >}}
 
 This flame graph combines interactions from multiple applications:

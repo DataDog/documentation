@@ -17,7 +17,7 @@ In order to invoice billable usage, included usage is first subtracted. Allotmen
 
 For example, an account can have a total Ingested Spans usage of 150 GB. From this, 140 GB is billable usage. If there is a prior commitment of 50 GB and an allotment of 30 GB, this 80 GB of usage is classified as included usage and subtracted from the 140 GB of billable usage. The remaining 60 GB of usage is classified as on-demand usage.
 
-- To view total usage and billable usage, see the **All** and **Billable** tabs within the [**Plan and Usage** page][2] in Datadog. 
+- To view total usage and billable usage, see the {{< ui >}}All{{< /ui >}} and {{< ui >}}Billable{{< /ui >}} tabs within the [**Plan and Usage** page][2] in Datadog. 
 - To view commitments, refer to your contract.
 
 ## Calculating included usage
@@ -48,9 +48,28 @@ On hourly metering, the monthly allotment is adjusted to an hourly allotment. Fo
 
 For a full list of default allotments by parent product, see the allotments table on the [Allotments Calculator][3] page. For custom or otherwise non-default allotments, review your contract for more information.
 
-If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. After that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are not carried over to subsequent hours; if an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period.
+If an organization's billable usage of the parent product exceeds their commitment, they receive an additional allotment from the on-demand parent product usage and are only billed for the parent product. After that additional allotment is exhausted, any additional usage of the child product may be billed at an on-demand rate. For either on-demand option, allotments are generally not carried over to subsequent hours. If an organization has a remainder at the end of their hourly or monthly metering period, it is not applicable in the next period (see the note below for an upcoming change).
 
 For example, if an organization with a monthly on-demand option is committed to 5 APM Pro Hosts, they have a default Ingested Spans allotment of `5 APM Pro Hosts * 150 GB Ingested Spans per host = 750 GB` for the month. If they use 6 APM Hosts and 800 GB of Ingested Spans, they are billed for the additional host usage but not for the additional _spans_ usage, since their Ingested Spans allotment increases to 900 GB. The 100 GB remainder is not applicable in the following month.
+
+**Note**: Beginning August 2026, some accounts start to see a change in how allotments are treated. The changes described below are applied to accounts on a rolling basis. A banner appears in Plan and Usage under Bill Overview when this change takes effect. Users can also contact their account representative to understand their current allotment application.
+
+Allotments for products where usage is cumulative over the month (for example, Ingested Spans or Indexed Spans) apply across the whole billing period instead of hour by hour, so unused allotment can carry over to other hours within the same billing period. This can lower on-demand cost.
+
+In the following example, the 50 units of allotment left unused in the first two hours carry over to cover the busier third hour, so no on-demand usage is billed:
+
+| Hour | Usage | Hourly allotment | On-demand cost billed |
+| --- | --- | --- | --- |
+| Hour 1 | 60 | 100 | 0 (40 added to the monthly pool) |
+| Hour 2 | 90 | 100 | 0 (10 added to the monthly pool) |
+| Hour 3 | 150 | 100 | 0 (covered by the 50 pooled earlier) |
+| **Total** | **300** | **300** | **0** |
+
+For products measured on a concurrent count, peak, or average (such as hosts, containers, and custom metrics), the allotment applies at each point in time rather than as a monthly budget. There is no unused amount to carry across hours, so behavior for these products is unchanged.
+
+This change does not apply to usage billed through an external marketplace (for example, AWS, Azure, or Google Cloud), where allotments continue to apply per hour.
+
+Until an account is transitioned, allotments still apply per hour as described above. In all cases, allotments do not carry over between billing periods: any remainder at the end of the metering period is not applicable in the next period.
 
 ## Usage aggregation function
 Aggregation functions are used to convert the hourly billable usage into a monthly usage value that can be used for billing. Each product can have up to two usage aggregation functions (one for each possible on-demand option). The available aggregation functions include sum, average, maximum, and high watermark plan (HWMP). 

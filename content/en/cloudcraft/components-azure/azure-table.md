@@ -12,10 +12,10 @@ You can use the Azure Table component to represent and visualize NoSQL key-value
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Redundancy**: Select how your data is replicated in the primary and secondary regions.
-- **Storage (GiB)**: Enter the total volume of data available for the key-value store.
-- **Request Units (10k)**: Enter the number requests in 10k request units.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Redundancy{{< /ui >}}: Select how your data is replicated in the primary and secondary regions.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the total volume of data available for the key-value store.
+- {{< ui >}}Request Units (10k){{< /ui >}}: Enter the number requests in 10k request units.
 
 ## API
 

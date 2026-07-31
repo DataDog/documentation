@@ -18,7 +18,7 @@ further_reading:
 
 ## Service provider details
 
-As a prerequisite, **IDP initiated SSO** must be checked on the Datadog [SAML configuration page][2].
+As a prerequisite, {{< ui >}}IDP initiated SSO{{< /ui >}} must be checked on the Datadog [SAML configuration page][2].
 
 Application Name
 : Can be anything
@@ -27,19 +27,19 @@ Description
 : Can be anything
 
 ACS URL
-: Use the URL shown under **Assertion Consumer Service URL** on the [SAML setup page][2] (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
+: Use the URL shown under {{< ui >}}Assertion Consumer Service URL{{< /ui >}} on the [SAML setup page][2] (the one containing `/id/`). If there is more than one value shown for Assertion Consumer Service URL, only enter one of them here.
 
 Entity ID
-: Use the URL shown under **Entity ID** on the [SAML setup page][2].
+: Use the URL shown under {{< ui >}}Entity ID{{< /ui >}} on the [SAML setup page][2].
 
 Start URL
-: Can be blank, or use the **Single Sign On Login URL** listed on the [SAML setup page][2].
+: Can be blank, or use the {{< ui >}}Single Sign On Login URL{{< /ui >}} listed on the [SAML setup page][2].
 
 Signed Response
 : Leave Unchecked
 
 Name ID
-: Select **Basic Information** and **Primary Email**
+: Select {{< ui >}}Basic Information{{< /ui >}} and {{< ui >}}Primary Email{{< /ui >}}
 
 ## Attribute mapping
 

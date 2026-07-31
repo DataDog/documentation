@@ -57,7 +57,7 @@ This table compares the differences between the memory and disk buffer.
 
 | Property                                                 | Memory Buffer             | Disk Buffer                          |
 | -------------------------------------------------------- | ------------------------- | ------------------------------------ |
-| Default size                                             | 500 events                | Configurable<br>Minimum buffer size: 256 MB<br> Maximum buffer size: 500 GB       |
+| Default size                                             | Configurable<br>Minimum buffer size: 1 MB<br>Maximum buffer size: 128 GB | Configurable<br>Minimum buffer size: 256 MB<br> Maximum buffer size: 500 GB       |
 | Performance                                              | Higher                    | Lower                                |
 | Durability through an unexpected Worker restart or crash | None                      | Events flushed to disk latest every 500 ms        |
 | Data loss due to an unexpected restart or crash          | All buffered data is lost | All buffered data is retained        |
@@ -77,17 +77,23 @@ If you enable disk buffering for destinations, you must enable Kubernetes [persi
 
 Use these metrics to analyze buffer performance. All metrics are emitted on a one-second interval, unless otherwise stated.
 
-### Source buffer metrics
+{{< tabs >}}
+{{% tab "Sources" %}}
 
 {{% observability_pipelines/metrics/buffer/sources %}}
 
-### Processor buffer metrics
+{{% /tab %}}
+{{% tab "Processors" %}}
 
 {{% observability_pipelines/metrics/buffer/processors %}}
 
-### Destination buffer metrics
+{{% /tab %}}
+{{% tab "Destinations" %}}
 
 {{% observability_pipelines/metrics/buffer/destinations %}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Deprecated buffer metrics
 

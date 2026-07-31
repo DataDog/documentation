@@ -8,7 +8,7 @@ title: 사례 보기 및 관리
 
 ## 개요
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="모든 사례 보기, 상태 선택 옵션 및 할당 번호 보기를 표시하는 사례 관리 폐이지" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="모든 사례 보기, 상태 선택 옵션 및 할당 번호 보기를 표시하는 사례 관리 폐이지" style="width:100%;" >}}
 
 [사례 관리 페이지][1]에서 사례를 생성 날짜, 상태 또는 우선순위별로 정렬할 수 있습니다. 기본값으로 사례는 생성 날짜별로 정렬됩니다. 
 
@@ -53,7 +53,7 @@ title: 사례 보기 및 관리
 
 ## 사례 세부 정보
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="에스컬레이션된 예시 사례의 세부 정보 보기" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="에스컬레이션된 예시 사례의 세부 정보 보기" style="width:100%;" >}}
 
 사례 세부 정보 페이지는 조사가 어떻게 진행되고 있는지를 알려주는 단일 정보 소스 역할을 합니다. 각 사례는 다음과 같은 속성을 갖습니다.
 
@@ -89,7 +89,7 @@ title: 사례 보기 및 관리
 
 ## 사례 분석
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="데이터 소스로 선택한 사례 옵션을 표시하는 그래프 편집기" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="데이터 소스로 선택한 사례 옵션을 표시하는 그래프 편집기" style="width:100%;" >}}
 
 Case Analytics는 집계된 케이스 통계에 대한 쿼리 가능한 데이터 소스입니다. [대시보드][7] 및 [노트북][3]의 다양한 그래프 위젯에서 이러한 분석을 통해 팀 생산성을 분석하고 이슈의 패턴을 파악할 수 있습니다. 
 

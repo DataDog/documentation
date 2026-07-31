@@ -74,6 +74,7 @@ processors:
       - include: system.cpu.usage
         action: insert
         new_name: host.cpu.utilization
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -85,7 +86,7 @@ service:
       exporters: [datadog/connector, datadog]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [metricstransform, infraattributes, batch]
+      processors: [metricstransform, infraattributes, batch, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -120,6 +121,7 @@ processors:
     cardinality: 2
   batch:
     timeout: 10s
+  cumulativetodelta:
 connectors:
   datadog/connector:
     traces:
@@ -131,7 +133,7 @@ service:
       exporters: [datadog/connector, datadog]
     metrics:
       receivers: [otlp, datadog/connector]
-      processors: [infraattributes, batch]
+      processors: [infraattributes, batch, cumulativetodelta]
       exporters: [datadog]
     logs:
       receivers: [otlp]
@@ -245,8 +247,8 @@ datadog:
      -f datadog-values.yaml \
      --set-file datadog.otelCollector.config=collector-config.yaml
    ```
-1. Navigate to **Integrations** > **Fleet Automation**.
-1. Select the **OTel Collector Version** facet.
+1. Navigate to {{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Fleet Automation{{< /ui >}}.
+1. Select the {{< ui >}}OTel Collector Version{{< /ui >}} facet.
 1. Select an Agent and inspect its configuration to verify the new Agent with OpenTelemetry Collector is installed successfully.
 
 ## Configure your application

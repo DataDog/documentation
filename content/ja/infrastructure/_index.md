@@ -15,34 +15,36 @@ cascade:
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=Infrastructure%20Monitoring
   tag: リリースノート
-  text: Datadog Infrastructure Monitoring の最新リリースをチェック！ (アプリログインが必要です)。
+  text: Datadog Infrastructure Monitoring の最新リリースをチェック！(アプリログインが必要です)
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
-  text: インフラストラクチャーモニタリングをパワーアップさせるインタラクティブなセッションに参加できます
+  text: インフラストラクチャー監視を強化するためのインタラクティブセッションに参加してください。
+- link: https://learn.datadoghq.com/courses/getting-started-infra-cnm
+  tag: ラーニングセンター
+  text: Infrastructure および Cloud Network Monitoring (CNM) の製品概要
 title: インフラストラクチャー
 ---
-
-{{< learning-center-callout header="イネーブルメントウェビナーセッションに参加" hide_image="true" btn_title="登録" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
-  Foundation Enablement セッションを調べて登録しましょう。Datadog の SaaS ベースのインフラストラクチャー監視が、メトリクスの提供、可視化、アラート機能を通じて、エンジニアリングチームがクラウドやハイブリッド環境を維持・最適化する方法を学べます。
+{{< learning-center-callout header="エンゲージメントウェビナーセッションに参加する" hide_image="true" btn_title="サインアップ" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Infrastructure+Monitoring">}}
+  Foundation Enablement セッションを探索し、登録してください。Datadog の SaaS ベース Infrastructure Monitoring を活用することにより、メトリクス、ビジュアライゼーション、およびアラートを提供して、エンジニアリングチームがクラウドまたはハイブリッド環境を維持および最適化できるする方法について、詳細をご確認ください。
 {{< /learning-center-callout >}}
 
 
-## 概要
+## 概要 {#overview}
 
-{{< img src="infrastructure/Hostmap-compressed.mp4" alt="ホストマップを Nginx ホストにフィルターするビデオ" video="true">}}
+{{< img src="infrastructure/Hostmap-compressed.mp4" alt="Nginx ホストに絞り込んだホストマップの動画" video="true">}}
 
 インフラストラクチャーモニタリングには、ホスト、コンテナ、プロセスのパフォーマンスを視覚化、監視、測定する Datadog のコア機能が含まれています。
 
-## コンポーネント
+## コンポーネント {#components}
 
-{{< whatsnext desc="このセクションには、以下のトピックがあります。">}}
-    {{< nextlink href="/infrastructure/list" >}}<u>インフラストラクチャーリスト</u> - Datadog が監視しているすべてのホストの一覧を表示します。{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/hostmap" >}}<u>ホストマップとコンテナマップ</u> - カスタマイズされたグループ化、フィルター、色や形によって理解しやすくなったメトリクスによって、ホストを 1 つの画面にまとめて視覚化します。{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/containers" >}}<u>コンテナビュー</u> - 環境全体のコンテナをリアルタイムに視覚化して監視します。{{< /nextlink >}}
-    {{< nextlink href="/infrastructure/process" >}}<u>プロセスビュー</u> - デプロイの最も細かい要素をリアルタイムに視覚化し、プロセスを監視します。{{< /nextlink >}}
+{{< whatsnext desc="このセクションには下記のトピックが含まれています。">}}
+    {{< nextlink href="/infrastructure/list" >}}<u>Infrastructure List</u> - Datadog の監視するすべてのホストのリストを表示します。{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/hostmap" >}}<u>ホストおよびコンテナのマップ</u> - カスタマイズされたグループ化、フィルタ、および色と形で理解しやすくしたメトリクスを使用して、1 つの画面でホストをまとめて視覚化します。{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/containers" >}}<u>コンテナビュー</u> - 環境全体を通じてコンテナをリアルタイムで監視します。{{< /nextlink >}}
+    {{< nextlink href="/infrastructure/process" >}}<u>プロセスビュー</u> - デプロイメント内の最も細かい要素を把握しながら、プロセスをリアルタイム監視します。{{< /nextlink >}}
 
 {{< /whatsnext >}}
 
-## その他の参考資料
+## 参考資料 {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

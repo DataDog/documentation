@@ -82,5 +82,5 @@ AAP に付属するデフォルト ルールを補完するために、アプリ
 [8]: /ja/security/workload_protection/security_signals/
 [9]: /ja/security/application_security/exploit-prevention/
 [10]: /ja/security/default_rules/?category=cat-application-security
-[11]: /ja/security/account_takeover_protection/
+[11]: /ja/security/application_security/account_takeover_protection/
 [12]: /ja/security/application_security/troubleshooting/#disabling-threat-management-and-protection
