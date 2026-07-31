@@ -19,14 +19,14 @@ There are two ways to deploy the Datadog Agent on macOS devices for End User Dev
 - **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
 - **MDM deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
 
-Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This is expected: it allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
+Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
 <div class="alert alert-danger">The <code>infrastructure_mode: end_user_device</code> setting is required. Without it, the device does not appear in the End User Devices view and is billed as a host.</div>
 
 {{< tabs >}}
 {{% tab "Manual install" %}}
 
-Use this method to test a single machine or for devices that are not managed by an MDM solution.
+Use this method to test a single machine, or for devices that are not managed by an MDM solution.
 
 ### Prerequisites
 
@@ -41,16 +41,15 @@ Use this method to test a single machine or for devices that are not managed by 
 1. Toggle on {{< ui >}}Enable End User Device Monitoring{{< /ui >}}.
 1. Click {{< ui >}}Select API Key{{< /ui >}} and choose an API key.
 1. Copy the provided installation command beginning with `sudo DD_API_KEY=`.
-1. Open {{< ui >}}Terminal{{< /ui >}}. Find it in {{< ui >}}Applications{{< /ui >}} > {{< ui >}}Utilities{{< /ui >}} > {{< ui >}}Terminal{{< /ui >}}, or search for it with Spotlight (<kbd>⌘</kbd> + <kbd>Space</kbd>).
-1. Paste the installation command into the terminal and run it. Enter your Mac password when prompted.
+1. Open Terminal, paste the installation command in and run it. Enter your Mac password when prompted.
 
     The script installs the Agent, creates the `_dd-agent` system user, and registers the Agent as a background launch daemon. Installation takes one to two minutes.
 
 ### Verify the installation
 
-To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
+To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][104]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key, confirm the configuration, and restart the Agent.
 
-Alternatively, you can run the following command in Terminal to verify the installation:
+Alternatively, run the following command in Terminal to verify the installation:
 
 ```shell
 sudo datadog-agent status
@@ -72,7 +71,7 @@ In the output, confirm the following:
 
 This example method uses a Jamf Pro policy and shell script to install and configure the Datadog Agent across your fleet of managed Macs, with no manual steps on each device. The script performs the same actions as the manual install, but runs in the background when the policy triggers.
 
-You can use other MDMs; however, this page walks through Jamf Pro as an example.
+You can use other MDMs; however, this procedure walks through Jamf Pro as an example.
 
 ### Prerequisites
 

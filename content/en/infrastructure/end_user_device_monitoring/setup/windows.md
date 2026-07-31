@@ -47,7 +47,7 @@ Use this method to test a single machine or for devices that are not managed by 
 
 To confirm that the Agent is running, in Datadog, go to [**Infrastructure** > **End User Devices**][103]. Your device appears within 5-10 minutes. If it does not appear after 10 minutes, verify your API key and confirm that the configuration was saved and the Agent was restarted.
 
-Alternatively, you can run the following command in PowerShell to verify the installation:
+Alternatively, run the following command in PowerShell to verify the installation:
 
 ```powershell
 & "C:\Program Files\Datadog\Datadog Agent\bin\agent.exe" status
@@ -125,13 +125,13 @@ IntuneWinAppUtil.exe `
   -o C:\DDPackage\output
 {{< /code-block >}}
 
-   This creates `Install.intunewin` in `C:\DDPackage\output`. This is the package you upload to Intune.
+   This creates `Install.intunewin` in `C:\DDPackage\output`. Upload this package to Intune.
 
 ### Create the Win32 app in Intune
 
 1. In the [Microsoft Intune admin center][204], go to **Apps** > **All apps** and click **Add**.
 1. Select **Windows app (Win32)** as the app type and click **Select**.
-1. Upload the `Install.intunewin` file and click **OK**.
+1. Upload the `Install.intunewin` package and click **OK**.
 1. Fill in the **App information** tab:
    - **Name**: `Datadog Agent EUDM`
    - **Description**: Datadog Agent for End User Device Monitoring
