@@ -51,8 +51,6 @@ Datadog Workload Protection provides real-time visibility and defense for your i
 
 Workload Protection relies on event correlation to surface contextualized and prioritized alerts. As part of the Datadog Security platform, Workload Protection correlates runtime threat detection with findings from misconfiguration scans, vulnerability assessments, and code security. This deep integration enables you to link runtime attacks with preexisting weaknesses, providing the complete context you need to investigate and remediate security incidents. Because Workload Protection is built on the Datadog platform, it also connects with your infrastructure telemetry, including metrics, traces, and logs, so you can understand the scope and impact of threats across your systems. Investigations are enriched with full context, so you can reconstruct the entire attack story from detection to resolution.
 
-{{< img src="security/workload_protection/workload_protection_signal.jpg" alt="Workload Protection signal with an investigation and a threat timeline" width="100%">}}
-
 ### Response and hardening capabilities
 
 You can also take action directly in Datadog to block malicious behaviors, trigger workflows, or integrate with your existing response pipelines. Whether your goal is to enforce compliance, strengthen your runtime security posture, or address workload hardening use cases, Workload Protection can take action on your behalf to keep your environments secure and resilient.
@@ -67,7 +65,7 @@ Workload Protection is not limited to runtime threat detection. Many organizatio
 
 - **Infrastructure Monitoring:** Acting as a Swiss army knife for runtime observability, Workload Protection enables teams to track any kind of runtime behavior, whether security-related or not. From debugging custom workloads to monitoring system-level processes and remote user sessions, Workload Protection offers deep, real-time visibility into how your environments operate.
 
-{{< img src="security/workload_protection/k8s_remote_access_image.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
+{{< img src="security/workload_protection/k8s_remote_access.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
 
 ### Detection rules, automation, and fleet management
 
@@ -83,7 +81,7 @@ Workload Protection is built on top of the Datadog Agent, which continuously col
 
 Using Remote Configuration, you can manage agent rule deployments and trigger response actions directly in Datadog. In addition, Workload Protection integrates with the Datadog Terraform provider, allowing you to define, version, and maintain your rules as code outside the app.
 
-{{< img src="security/workload_protection/workload_protection_architecture.png" alt="Workload Protection architecture overview" width="100%">}}
+{{< img src="security/workload_protection/architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
 ## Next steps
 

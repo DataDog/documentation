@@ -11,8 +11,6 @@ further_reading:
 
 Workload Protection evaluates resources against finding rules based on Agent events. Datadog generates a new finding as soon as a finding rule is triggered and stores a complete history of all findings for investigation and audit.
 
-{{< img src="security/workload_protection/findings_explorer.png" alt="Workload Protection Findings Explorer showing findings grouped by rule" width="100%">}}
-
 ## Findings Explorer
 
 The [Findings Explorer][3] lists findings across your infrastructure. Each entry shows the affected resource, the finding rule it is failing, when the issue was first reported, and the current triage state.
@@ -43,7 +41,7 @@ To save your current search and filter settings for future use, hover over **Vie
 
 Click any finding to open the side panel with detailed information about the resource and the rule it is failing.
 
-{{< img src="security/workload_protection/finding_side_panel.png" alt="Finding side panel showing What Happened section and triage controls" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/findings/findings_side_panel.png" alt="Finding side panel showing What Happened section and triage controls" width="100%">}}
 
 The **What Happened** section shows:
 
@@ -55,7 +53,7 @@ The **What Happened** section shows:
 
 Each OOTB finding rule includes remediation guidance authored by the Datadog security team. Scroll the side panel to review the remediation steps and address the underlying misconfiguration.
 
-{{< img src="security/workload_protection/finding_remediation.png" alt="Finding side panel showing remediation steps for a failing resource" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/findings/findings_remediation.png" alt="Finding side panel showing remediation steps for a failing resource" width="100%">}}
 
 ## Triage findings
 

@@ -16,7 +16,7 @@ further_reading:
 
 Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and take action on unprotected or misconfigured workloads.
 
-{{< img src="security/cws/workload_protection_coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
 
 ## Views
 
@@ -25,7 +25,7 @@ Coverage has two views. Use the toggle at the top of the page to switch between 
 - **Explorer**: A faceted table of your resources. Filter with the facet groups in the sidebar (**Agent**, **Rule**, **Policy**, **Infrastructure**, and **Container**), then open a resource to inspect its agent rules and policies deployment status.
 - **Map**: A visual map where each resource appears as a hexagon colored by its coverage status severity.
 
-{{< img src="security/cws/workload_protection_coverage_map_views.png" alt="Toggle between the Explorer and Map views on the Coverage page" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_explorer.png" alt="Explorer view of the Coverage page showing resources in a faceted table" width="100%">}}
 
 In both views, you can:
 
@@ -89,7 +89,7 @@ When a rule is filtered or in error, a **verdict** explains why:
 
 To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules. For each rule, it shows the expression, the status and verdict, and the error message reported by the agent.
 
-{{< img src="security/cws/workload_protection_coverage_map_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
 
 ## Use cases
 
@@ -109,7 +109,7 @@ To find and fix resources with rule errors:
 
 The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
 
-{{< img src="security/cws/workload_protection_coverage_map_top_widget.png" alt="Coverage page top widget showing the percentage of resources secured with Workload Protection" width="100%">}}
+{{< img src="security/workload_protection/coverage/coverage_top_widgets.png" alt="Coverage page top widgets showing resource coverage, rule loading status, Workload Protection adoption, and Remote Config deployment" width="100%">}}
 
 - **View outdated**: Resources running an agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
 - **View incomplete**: Resources reporting incomplete or invalid data.

@@ -33,7 +33,7 @@ When you select an Agent event in the [Agent Events explorer][13], the side pane
 
 The **Overview** tab summarizes the event and is often the best place to start your investigation.
 
-{{< img src="security/workload_protection/agent_events_overview.png" alt="Agent event side panel Overview tab showing What, Where, Agent rule, and Investigation graph sections" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_overview.png" alt="Agent event side panel Overview tab showing What, Where, Agent rule, and Investigation graph sections" width="100%">}}
 
 The Overview tab includes the following sections:
 
@@ -46,7 +46,7 @@ The Overview tab includes the following sections:
 
 The **Investigation graph** is an interactive visualization that maps the infrastructure and processes involved in the event. It provides a compact overview of the attack chain by highlighting the most relevant entities and processes.
 
-{{< img src="security/workload_protection/agent_events_investigation_graph.png" alt="Investigation graph showing host, Kubernetes pod, container, image, and main process execution path" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_investigation_graph.png" alt="Investigation graph showing host, Kubernetes pod, container, image, and main process execution path" width="100%">}}
 
 The graph traces the event from the host through the surrounding infrastructure—such as the Kubernetes pod, replica set, container, and container image—and into the process execution path. Main processes involved in the event are displayed individually, while less relevant processes are aggregated into grouped nodes (for example, **+7 processes**) to keep the view focused on the suspicious activity.
 
@@ -56,7 +56,7 @@ Use the investigation graph to understand how the detected activity fits into th
 
 The **Process tree** lists the complete process lineage from the system init process to the process that triggered the event.
 
-{{< img src="security/workload_protection/agent_events_process_tree.png" alt="Process tree listing the full process chain from systemd to the process that triggered the event" width="100%">}}
+{{< img src="security/workload_protection/investigate_and_triage/agent_events/agent_event_process_tree.png" alt="Process tree listing the full process chain from systemd to the process that triggered the event" width="100%">}}
 
 For each process in the chain, the process tree displays:
 
