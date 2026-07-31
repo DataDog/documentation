@@ -187,6 +187,10 @@
     "name": "Downtimes",
     "description": "**Note**: Downtime V2 is currently in private beta. To request access, contact [Datadog support](https://docs.datadoghq.com/help/).\n\n[Downtiming](https://docs.datadoghq.com/monitors/notify/downtimes) gives\nyou greater control over monitor notifications by allowing you to globally exclude\nscopes from alerting. Downtime settings, which can be scheduled with start and\nend times, prevent all alerting related to specified Datadog tags."
   },
+  "elastic-cloud-integration-accounts": {
+    "name": "Elastic Cloud Integration Accounts",
+    "description": "Manage Elastic Cloud accounts for the Elastic Cloud integration, served by the Account Management Service (AMS). The account payload is strongly typed to Elastic Cloud; the supported interfaces (monitoring and Cloud Cost Management) are modeled as a nested union."
+  },
   "entity-integration-configs": {
     "name": "Entity Integration Configs",
     "description": "Manage per-integration configurations for the Internal Developer Portal (IDP). These configurations control which external resources (for example, GitHub repositories, Jira projects, or PagerDuty services) are synced as entities into the Software Catalog."
@@ -534,6 +538,10 @@
   "test-optimization": {
     "name": "Test Optimization",
     "description": "Search and manage flaky tests through Test Optimization. See the [Test Optimization page](https://docs.datadoghq.com/tests/) for more information."
+  },
+  "twilio-integration-accounts": {
+    "name": "Twilio Integration Accounts",
+    "description": "Manage Twilio accounts for the Twilio integration, served by the Account Management Service (AMS). The account payload is strongly typed to Twilio; the Twilio interface and its authentication are modeled inline."
   },
   "usage-metering": {
     "name": "Usage Metering",
