@@ -29,9 +29,9 @@ Before you configure the ClickHouse destination, you must have:
 
 ## Setup
 
-Configure the ClickHouse destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">Only enter the identifiers for the ClickHouse endpoint URL and, if applicable, the username, password, and TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+Configure the ClickHouse destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][4], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 After you select the ClickHouse destination in the pipeline UI:
 
@@ -47,6 +47,8 @@ After you select the ClickHouse destination in the pipeline UI:
     - `arrow_stream`: Batches events using the Apache Arrow IPC streaming format. When you select this format, you must also configure [Enable batching](#enable-batching).
 
     **Note**: When you use `arrow_stream`, your ClickHouse server must be reachable when your worker loads the pipeline configuration from the remote configuration backend, or upon worker restart. The Clickhouse table schema is not persisted between restarts.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
