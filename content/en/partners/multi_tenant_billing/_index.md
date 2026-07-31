@@ -40,12 +40,12 @@ Discover some ways an Admin Org can help:
 | Monitor cost and usage across all customers in one place. | Use [Cost and Usage Visibility][2] to view estimated, historical, and projected cost and billable usage data. |
 | Self-serve Trial Org creation for prospective customers. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
 | Track usage metrics across the book of business. | Use [Centralized Usage Metrics][8] to roll customer usage metrics up into an Admin Org. |
-| Let customers see their own estimated Datadog costs. (Preview) | Use [Customer Pricing Management](#customer-pricing-management-preview) to configure per-customer pricing. |
+| Let customers see their estimated costs based on the partner's pricing. (Preview) | Use [Customer Pricing Management](#customer-pricing-management-preview) to configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | Use [Customer contracts management](#customer-contracts-management-preview) to track customers, contracts, invoices, and renewals. |
 
 ### Customer Pricing Management (Preview)
 
-Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}} so customers can see their own estimated Datadog costs directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
+Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}} so customers see their estimated costs based on the partner's pricing, directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
 
 {{< img src="partners/multi_tenant_billing/customer_pricing.png" alt="Customer Pricing tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
 
