@@ -122,10 +122,6 @@ LLM Observability 데이터 스캔을 구성하려면 Sensitive Data Scanner 설
 
 ## 클라우드 스토리지 스캔 {#scan-cloud-storage}
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Amazon S3 버킷 및 RDS 인스턴스에 대한 스캔 지원은 미리 보기 상태입니다. 등록하려면 <strong>Request Access</strong>를 클릭하세요.
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="세 가지 Amazon S3 발견이 있는 Findings 페이지의 데이터 저장소 섹션" style="width:100%;" >}}
 
 Sensitive Data Scanner를 활성화하면 Amazon S3 버킷에서 민감한 데이터를 분류하고 구분할 수 있습니다. **참고**: Sensitive Data Scanner는 클라우드 스토리지 리소스에서 민감한 데이터를 비식별화하지 않습니다.

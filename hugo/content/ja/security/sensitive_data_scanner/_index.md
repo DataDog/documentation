@@ -122,10 +122,6 @@ LLM Observability データのスキャンを構成するには、Sensitive Data
 
 ## クラウドストレージをスキャンする {#scan-cloud-storage}
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  Amazon S3 バケットおよび RDS インスタンスのスキャンのサポートはプレビュー版です。登録するには、<strong>Request Access</strong> をクリックしてください。
-{{< /callout >}}
-
 {{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="検出結果ページのデータストアのセクションに 3 件の Amazon S3 が表示" style="width:100%;" >}}
 
 Sensitive Data Scanner が有効になっている場合、Amazon S3 バケットにある機密データをカタログ化して分類できます。**注**: Sensitive Data Scanner は、クラウドストレージリソース内の機密データをマスキングしません。

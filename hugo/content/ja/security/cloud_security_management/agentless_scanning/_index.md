@@ -107,15 +107,7 @@ Datadog Agent がインストールされている場合、その Agent はク�
 
 ## Cloud Storage のスキャン
 
-{{< callout header="Limited Availability" url="https://www.datadoghq.com/private-beta/data-security" >}}
-Amazon S3 バケットおよび RDS インスタンスのスキャニングサポートは Limited Availability です。利用登録するには、<strong>アクセスリクエスト</strong>をクリックしてください。
-{{< /callout >}}
-
-[Sensitive Data Scanner][8] が有効な場合、Amazon S3 バケットおよび RDS インスタンス内の機密データをカタログ化および分類することができます。
-
-Sensitive Data Scanner は、[Agentless スキャナ][1]をクラウド環境にデプロイすることで機密データをスキャンします。これらのスキャナインスタンスは [Remote Configuration][10] を介してすべての S3 バケットと RDS インスタンスの一覧を取得し、各データストア内の CSV や JSON といったテキストファイル、およびテーブルを時間をかけてスキャンする指示が設定されています。Sensitive Data Scanner は[すべてのルールライブラリ][11]を活用して一致を検索します。一致が見つかった場合、その位置情報がスキャナインスタンスから Datadog に送信されます。データストアとそのファイルは環境内でのみ読み取られ、機密データが Datadog に送信されることはありません。
-
-Sensitive Data Scanner は機密データの一致を表示するとともに、[Cloud Security Management][9] が検出した機密データストアに影響するセキュリティ問題も表示します。任意の問題をクリックすると、Cloud Security Management 内でトリアージおよび修正を続行できます。
+[Sensitive Data Scanner][8] を Agentless Scanning リソースに対してデプロイ時またはセットアップ後に有効にできます。Sensitive Data Scanner はクラウドストレージ (Amazon S3 バケットなど) 内の機密データをカタログ化および分類します。データストアとそのファイルは環境内でのみ読み取られ、機密データが Datadog に送信されることはありません。
 
 ## クラウドサービスプロバイダーの費用
 

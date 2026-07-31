@@ -21,7 +21,7 @@ Esta guía te ayuda a elegir la topología de despliegue adecuada para Agentless
 Datadog recomienda las siguientes directrices:
 - Utiliza una cuenta de escáner dedicada para entornos multicuenta.
 - Despliega un escáner en cada región que contenga más de 150 hosts.
-- Si utilizas [Cloud Storage Scanning][1], despliega un escáner en cada región que contenga un almacén de datos (por ejemplo, buckets de S3 o instancias de RDS).
+- Si utilizas [Cloud Storage Scanning][1], despliega un escáner en cada región que contenga un almacén de datos (por ejemplo, buckets de S3).
 
 <div class="alert alert-info">Los escáneres solo envían la lista recopilada de paquetes y metadatos de host (nombres de host, identificadores de instancia de EC2/VM/Compute Engine) a Datadog. Todos los datos escaneados permanecen en tu infraestructura.</div>
 

@@ -26,7 +26,7 @@ Configure Sensitive Data Scanner para cada fuente de datos que desee escanear. C
 
 - **Datos de telemetría:** Escanee sus registros, tramos de APM, eventos de RUM y eventos de Event Management. Consulte [Datos de telemetría][1] para obtener instrucciones de configuración. Para escanear registros antes de que salgan de su red, utilice el [procesador de Sensitive Data Scanner para Observability Pipelines][5].
 - **Datos de Agent Observability:** Escanee las trazas de LLM, los prompts y las completaciones. Configure el escaneo desde la [Agent Observability Settings page][3].
-- **Datos de almacenamiento en la nube:** Escanee sus buckets de Amazon S3 e instancias de RDS. Consulte [Almacenamiento en la nube][2] para obtener instrucciones de configuración.
+- **Datos de almacenamiento en la nube:** Escanee sus buckets de Amazon S3. Consulte [Almacenamiento en la nube][2] para obtener instrucciones de configuración.
 - **Repositorios de código:** Detecte secretos expuestos en su código fuente. Consulte [Secret Scanning][4] para obtener instrucciones de configuración.
 - **Evaluaciones de AI Guard:** Escanee las conversaciones que AI Guard evalúa en busca de datos sensibles como credenciales e información de identificación personal (PII). Configure las reglas de escaneo desde la [AI Guard tab][6] de la página de configuración de Sensitive Data Scanner.
 

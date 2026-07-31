@@ -26,7 +26,7 @@ Configurez le Sensitive Data Scanner pour chaque source de données que vous sou
 
 - **Données de télémétrie :** Analysez vos logs, spans APM, événements RUM et événements issus d'Event Management. Consultez [Données de télémétrie][1] pour obtenir les instructions de configuration. Pour analyser les logs avant qu'ils ne quittent votre réseau, utilisez le [processeur Sensitive Data Scanner pour Observability Pipelines][5].
 - **Données d'observabilité des agents :** Analysez les traces, les prompts et les complétions LLM. Configurez l'analyse depuis la [page des paramètres d'observabilité des agents][3].
-- **Données de stockage cloud :** Analysez vos buckets Amazon S3 et vos instances RDS. Consultez [Stockage cloud][2] pour obtenir les instructions de configuration.
+- **Données de stockage cloud :** Analysez vos buckets Amazon S3. Consultez [Stockage cloud][2] pour obtenir les instructions de configuration.
 - **Dépôts de code :** Détectez les secrets exposés dans votre code source. Consultez [Secret Scanning][4] pour obtenir les instructions de configuration.
 - **Évaluations AI Guard :** Analysez les conversations évaluées par AI Guard pour détecter les données sensibles telles que les identifiants et les PII. Configurez les règles d'analyse depuis l'[onglet AI Guard][6] de la page de configuration du Sensitive Data Scanner.
 

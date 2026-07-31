@@ -23,10 +23,6 @@ title: Almacenamiento en la nube
 
 ## Información general
 
-{{< callout url="https://www.datadoghq.com/product-preview/data-security/" header="Join the Preview Program!"  >}}
-La compatibilidad de exploración para buckets Amazon S3 e instancias de RDS está en la vista previa. Para inscribirte, haz clic en Solicitar acceso.
-{{< /callout >}}
-
 Despliega escáneres sin el Agente de Datadog en tu entorno para buscar información confidencial en tus recursos de almacenamiento en la nube. Los escáneres sin el Agente son instancias de EC2 que tú controlas y ejecutas en tu entorno. Los escáneres utilizan [Configuración remota][1] para recuperar una lista de buckets S3, así como sus dependencias. Escanean muchos tipos de archivos de texto, como CSV y JSON en tus buckets S3.
 
 Cuando un escáner sin el Agent encuentra una coincidencia con cualquiera de las [reglas de la biblioteca de SDS][2], la instancia de análisis envía el tipo de regla y la ubicación de la coincidencia a Datadog. **Nota**: Los recursos de almacenamiento en la nube y sus archivos solo se leen en tu entorno: ningún dato confidencial que se haya analizado se envía de vuelta a Datadog.
