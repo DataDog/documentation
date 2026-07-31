@@ -37,7 +37,7 @@ Because MFCR counts configuration requests, the number of flags you maintain and
 - **Number of environments**: Server-side polling volume multiplies with each [environment][3] that runs an instance of the SDK. Deploying the same service to development, staging, and production, for example, multiplies that service's request volume by three.
 - **Client- and server-side mix**: If you use flags on both the client and server, add the two estimates together.
 
-<div class="alert alert-info">Server-side configuration requests are counted at 10 times the volume of client-side requests, because a single server-side request can serve variant assignments to many more end users than a single client-side request.</div>
+<div class="alert alert-info">Datadog bills server-side configuration requests at 10 times their raw count, because a single server-side request can serve variant assignments to many more end users than a single client-side request.</div>
 
 ### Estimate your usage before you roll out
 
