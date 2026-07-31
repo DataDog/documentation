@@ -149,7 +149,7 @@ On your Datadog application, open the **Resource Server** tab and enable **Cross
 
 The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches.
 
-**Note**: Changing the issuer URL later requires deleting and recreating the resource connection described below.
+**Note**: Changing the issuer URL later requires deleting and recreating the resource connection described in [Connect Claude to the Datadog application](#connect-claude-to-the-datadog-application).
 
 ### Register Claude as an AI Agent
 
