@@ -23,8 +23,8 @@ To request an Admin Org, see [Requesting an Admin Org][1].
 <div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
-  {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a live Trial Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/requesting-an-admin-org">}}<u>Requesting an Admin Org</u>: Request an Admin Org for a partner account.{{< /nextlink >}}
+  {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a live Trial Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/trial-org-provisioning">}}<u>Trial Org Provisioning</u>: Provision trial organizations for prospective customers directly from an Admin Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/cost-and-usage-visibility">}}<u>Cost and Usage Visibility</u>: Monitor cost and billable usage across all connected customer organizations.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/centralized-usage-metrics">}}<u>Centralized Usage Metrics</u>: Monitor usage metrics across all connected customer organizations.{{< /nextlink >}}
@@ -35,13 +35,13 @@ To request an Admin Org, see [Requesting an Admin Org][1].
 
 Discover some ways an Admin Org can help:
 
-| Use case | How an Admin Org helps |
+| Use case | Capability |
 |---|---|
-| Monitor cost and usage across all customers in one place. | Use [Cost and Usage Visibility][2] to view estimated, historical, and projected cost and billable usage data. |
-| Self-serve Trial Org creation for prospective customers. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
-| Track usage metrics across the book of business. | Use [Centralized Usage Metrics][8] to roll customer usage metrics up into an Admin Org. |
-| Let customers see their estimated costs based on the partner's pricing. (Preview) | Use [Customer Pricing Management](#customer-pricing-management-preview) to configure per-customer pricing. |
-| Manage the book of business in one place. (Preview) | Use [Customer contracts management](#customer-contracts-management-preview) to track customers, contracts, invoices, and renewals. |
+| Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: view estimated, historical, and projected cost and billable usage data. |
+| Self-serve Trial Org creation for prospective customers. | [Trial Org Provisioning][3]: create Trial Orgs directly from an Admin Org. |
+| Track usage metrics across the book of business. | [Centralized Usage Metrics][8]: roll customer usage metrics up into an Admin Org. |
+| Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing Management](#customer-pricing-management-preview): configure per-customer pricing. |
+| Manage the book of business in one place. (Preview) | [Customer contracts management](#customer-contracts-management-preview): track customers, contracts, invoices, and renewals. |
 
 ### Customer Pricing Management (Preview)
 
