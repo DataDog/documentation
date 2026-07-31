@@ -84,7 +84,7 @@ To turn Cross-App Access off later, send the same request with `"value": false`.
 
 ### Set your Okta issuer URL
 
-Datadog derives the token signing keys location from this value, so it must be exact.
+Datadog derives the location of the token signing keys from this value, so it must be exact.
 
 ```shell
 curl -X PUT "{{< region-param key="dd_api" >}}/api/v2/login/org_configs/mcp_cross_app_access_issuer_url" \
