@@ -93,6 +93,8 @@ See Databricks' [Add service principals to your account][4] and [Grant permissio
 
 ## Setup
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
+
 Configure the Databricks (Zerobus) destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][7], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
 **Note**: Log fields that are not present in the table schema are dropped. For example, if a log has the fields `id`, `name`, and `host`, and the table schema only contains the columns `name` and `host`, then the `id` field is dropped and not written to the table.
@@ -101,15 +103,13 @@ After you select the Databricks (Zerobus) destination in the pipeline UI:
 
 <div class="alert alert-warning">Databricks (Zerobus) doesn't convert timestamps in string format to Databricks' <a href="https://docs.databricks.com/aws/en/sql/language-manual/data-types/timestamp-type"><code>TIMESTAMP</code> type</a>. If your table uses a timestamp column, see <a href="#convert-string-timestamps-to-timestamp-format">Convert string timestamps to timestamp format</a> for more information.</div>
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the OAuth client secret. Do <b>not</b> enter the actual value.</div>
-
-{{% observability_pipelines/secrets_env_var_note %}}
-
 1. Enter the {{< ui >}}Ingestion Endpoint{{< /ui >}} for your Databricks workspace, such as `https://<workspace_id>.zerobus.<region>.cloud.databricks.com`. The Worker sends logs to this endpoint.
 1. Enter the {{< ui >}}Table Name{{< /ui >}} in the format `catalog.schema.table`, such as `main.obs_pipelines.apache_common_logs`.
 1. Enter the {{< ui >}}Unity Catalog Endpoint{{< /ui >}} for your Databricks workspace, such as `https://<workspace>.cloud.databricks.com`. The Worker uses this endpoint to read the table's schema.
 1. In the {{< ui >}}Auth - Client ID{{< /ui >}} field, enter the application ID of the service principal, such as `abcdefgh-1234-5678-abcd-ef0123456789`.
 1. In the {{< ui >}}Auth - Client Secret{{< /ui >}} field, enter the identifier for your OAuth client secret. If you leave it blank, the [default](#secret-defaults) is used.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 

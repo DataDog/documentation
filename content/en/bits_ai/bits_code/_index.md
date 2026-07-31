@@ -39,10 +39,16 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
-### View and manage sessions
-On **[Sessions][7]**, view your past sessions in the **My Sessions** panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR.
+### Session visibility
 
-Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click <i class="icon-archive-wui"></i> (**Archive for everyone**) or <i class="icon-eye-slashed-wui"></i> (**Unwatch session**).
+Bits Code sessions are shared across your Datadog organization by default. Anyone in your organization can open a session to review its analysis, actions, and code changes—or continue working with Bits Code in it. This makes it easy to share context and pick up a teammate's in-progress work.
+
+### View and manage sessions
+On **[Sessions][7]**, the **My Sessions** panel shows the sessions you're involved in. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR. **My Sessions** is a personalized view, not a privacy boundary—that is, other members of your organization can still access these sessions.
+
+Click a session to view its details and continue working with Bits Code. To remove a session from your **My Sessions** list, click one of the following:
+- <i class="icon-eye-slashed-wui"></i> (**Unwatch session**): removes the session from your own **My Sessions** list only. Other users are not affected.
+- <i class="icon-archive-wui"></i> (**Archive for everyone**): archives the session for all users in your organization.
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
@@ -63,6 +69,7 @@ Bits Code can suggest code improvements within several Datadog products, includi
 | [Bits Investigation][17]         | Generates code remediations based on Bits Investigations |
 | [Bits Chat][16]   | Suggests code changes arising from Bits Chat conversations |
 | [Cloud Cost][22]          | Generates code changes for [Cloud Cost Recommendations][23] |
+| [Cloud Security][34]      | Remediates [misconfiguration findings][35] in the IaC that defines the affected resource |
 | [Error Tracking][1]       | Diagnoses issues and generates code fixes on-demand or autonomously |
 | [Code Security][2]        | Remediates [SAST vulnerabilities][15], [IaC vulnerabilities][25], and [SCA vulnerabilities][26] (individually or in bulk)  |
 | [Test Optimization][4]    | Provides code fixes for [flaky tests][24] and verifies that tests remain stable  |
@@ -140,6 +147,8 @@ Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is
 [27]: /account_management/billing/ai_credits/
 [28]: /bits_ai/bits_code/automations/
 [29]: https://app.datadoghq.com/code/automations
+[34]: /security/cloud_security_management/
+[35]: /security/cloud_security_management/review_remediate/remediate_with_ai/
 [30]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud
 [31]: https://docs.github.com/en/enterprise-cloud@latest/admin/overview/about-github-enterprise-cloud#about-data-residency
 [32]: https://docs.gitlab.com/subscriptions/gitlab_dedicated/
