@@ -96,7 +96,7 @@ Rules from both sources are evaluated when a pull request is opened or updated. 
 
 ## Upload code coverage reports
 
-Upload code coverage report files to Datadog either automatically with a supported Test Optimization library or by running the `datadog-ci` CLI in your CI environment.
+Upload code coverage report files to Datadog either automatically, with a supported Test Optimization library, or manually, by running the `datadog-ci` CLI in your CI environment.
 
 See [Data Collected][7] for details on what data is collected during code coverage report upload.
 
@@ -120,13 +120,20 @@ These version requirements apply only to automatic uploads by Test Optimization 
 
 Complete the [Test Optimization setup][17] for your library before enabling automatic uploads.
 
-The versions listed above contain the uploader code, but reports are uploaded only when the library receives the `coverage_report_upload_enabled` setting. Enable this setting by turning on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
+Upgrading to a supported version is necessary but not sufficient. Reports are uploaded only after you turn on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
 
-{{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings" style="width:100%" >}}
+{{< img src="/code_coverage/automatic_code_coverage_upload_setting.png" alt="Code Coverage toggle in organization-level CI/CD Optimization settings." style="width:100%" >}}
 
-You can apply the setting at the organization, repository, or test service level. Run a test command that produces a code coverage report using the source listed in the table. After the command finishes, the Test Optimization library automatically uploads the report to Datadog.
+You can apply the setting at the organization, repository, or test service level.
 
-To organize and filter reports uploaded by the library, see [Add flags to automatically uploaded reports][9] for `DD_CODE_COVERAGE_FLAGS` library and version support.
+1. Complete the [Test Optimization setup][17] for your library.
+2. Upgrade to a supported library version.
+3. Turn on {{< ui >}}Code Coverage{{< /ui >}} in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][8].
+4. Run a test command that produces a coverage report from the source listed in [Supported libraries and versions](#supported-libraries-and-versions).
+
+The library uploads the report to Datadog after the command finishes.
+
+To organize and filter reports uploaded by the library, see [Add flags to automatically uploaded reports][9], which lists the libraries and versions that support `DD_CODE_COVERAGE_FLAGS`.
 
 ### Supported coverage report formats
 
@@ -472,7 +479,7 @@ datadog-ci coverage upload --format=cobertura reports/cobertura.xml
 ### Coverage upload outputs "Could not sync git metadata" error
 
 Git metadata upload is only required if you can't integrate your CI provider directly with Datadog.
-If you are using a [source code provider integration](#integrate-with-source-code-provider), such as Datadog GitHub app or Gitlab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
+If you are using a [source code provider integration][18], such as Datadog GitHub app or Gitlab integration, you can disable the git metadata upload by passing the `--skip-git-metadata-upload=1` flag to the `datadog-ci coverage upload` command, like this:
 
 {{< code-block lang="shell" >}}
 datadog-ci coverage upload --skip-git-metadata-upload=1 .
