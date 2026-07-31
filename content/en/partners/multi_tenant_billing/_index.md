@@ -33,13 +33,13 @@ Discover some ways an Admin Org can help:
 
 | Use case | How an Admin Org helps |
 |---|---|
-| Monitor cost and usage across all customers in one place. | Use [Cost and usage visibility][2] to view estimated, historical, and projected cost and billable usage data. |
-| Provision Trial Orgs for prospective customers without contacting Datadog. | Use [Trial Org provisioning][3] to create Trial Orgs directly from an Admin Org. |
+| Monitor cost and usage across all customers in one place. | Use [Cost and Usage Visibility][2] to view estimated, historical, and projected cost and billable usage data. |
+| Provision Trial Orgs for prospective customers without contacting Datadog. | Use [Trial Org Provisioning][3] to create Trial Orgs directly from an Admin Org. |
 | Track usage metrics across the book of business. (Preview) | Use [Centralized Usage Metrics](#centralized-usage-metrics-preview) to roll customer usage metrics up into an Admin Org. |
 | Let customers see their own estimated Datadog costs. (Preview) | Use [End-customer pricing management](#end-customer-pricing-management-preview) to configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | Use [Customer contracts management](#customer-contracts-management-preview) to track customers, contracts, invoices, and renewals. |
 
-### Cost and usage visibility
+### Cost and Usage Visibility
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in the Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][4] for details.
 
@@ -49,9 +49,9 @@ The same data is available programmatically through the [Usage Metering API][5],
 
 **Note**: Standard GovCloud boundaries apply to this visibility. A non-GovCloud Admin Org cannot see cost and usage data for a GovCloud customer organization.
 
-### Trial Org provisioning
+### Trial Org Provisioning
 
-An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly from {{< ui >}}Dashboards{{< /ui >}} > **Trial Org Provisioning**, without contacting Datadog for each trial. See [Trial Org Provisioning][3] for the full walkthrough.
+An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly from {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Trial Org Provisioning{{< /ui >}}, without contacting Datadog for each trial. See [Trial Org Provisioning][3] for the full walkthrough.
 
 {{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning dashboard inside an Admin Org" style="width:100%;" >}}
 
@@ -63,13 +63,13 @@ Usage and estimated usage metrics (`datadog.usage.*` and `datadog.estimated_usag
 
 ### End-customer pricing management (Preview)
 
-Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Pricing** so customers can see their own estimated Datadog costs directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
+Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}} so customers can see their own estimated Datadog costs directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
 
 {{< img src="partners/multi_tenant_billing/customer_pricing.png" alt="Customer Pricing tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
 
 ### Customer contracts management (Preview)
 
-Review and manage the book of business from {{< ui >}}Plan & Usage{{< /ui >}} > **Customer Contracts**: customers, contracts, invoices, renewal alerts, and margin visibility, in one place inside the Admin Org.
+Review and manage the book of business from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}}: customers, contracts, invoices, renewal alerts, and margin visibility, in one place inside the Admin Org.
 
 {{< img src="partners/multi_tenant_billing/customer_contracts.png" alt="Customer Contracts tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
 

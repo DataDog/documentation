@@ -12,7 +12,7 @@ If the {{< ui >}}Trial Org Provisioning{{< /ui >}} dashboard isn't available in 
 ## Provision a Trial Org
 
 1. Log in to the Admin Org.
-2. Go to {{< ui >}}Dashboards{{< /ui >}} and open the **Trial Org Provisioning** dashboard.
+2. Go to {{< ui >}}Dashboards{{< /ui >}} and open the {{< ui >}}Trial Org Provisioning{{< /ui >}} dashboard.
 3. Complete the form:
 
     | Field | Required | Description |
@@ -29,7 +29,7 @@ The Trial Org is created immediately. The result panel shows the new org's name,
 
 ## After provisioning
 
-Share the new Trial Org's name and org ID with the PSM so it can be associated with the opportunity registered on the [Partner Portal][2]. This ensures usage from the Trial Org is tracked against the deal.
+Share the new Trial Org's name and org ID with the PSM so it can be associated with the opportunity registered on the [Partner Portal][2], so usage from the Trial Org is tracked against the deal.
 
 ## What's next
 

@@ -1,16 +1,6 @@
 ---
 title: Cost and Usage Visibility
 description: "Monitor cost and billable usage across all connected customer organizations from an Admin Org."
-further_reading:
-  - link: "/account_management/plan_and_usage/partner_experience/"
-    tag: "Documentation"
-    text: "Plan and Usage Experience for Partners"
-  - link: "/account_management/billing/usage_metrics/"
-    tag: "Documentation"
-    text: "Estimated Usage Metrics"
-  - link: "/api/latest/usage-metering/"
-    tag: "Documentation"
-    text: "Usage Metering API reference"
 ---
 
 ## Overview
