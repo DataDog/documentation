@@ -88,7 +88,7 @@ To enable automated response on an Agent rule:
 2. Click **Edit**.
 3. In the Agent rule, in **Add actions for the agent to follow**, check **Automated Response**.
 
-   {{< img src="security/cws/guide/automated-response-activation.png" alt="An Agent rule Protection section displaying the Automated response action" style="width:100%;" >}}
+   {{< img src="security/workload_protection/respond_and_report/automated_response_activation.png" alt="An Agent rule Protection section displaying the Automated response action" style="width:100%;" >}}
 4. In **Link the rule to policies**, validate that the rule is active in at least one policy.
 5. Click **Update Agent Rule**.
 
@@ -96,9 +96,7 @@ To enable automated response on an Agent rule:
 
 After Automated response is enabled for an Agent rule, blocked threats appear in [Signals][1].
 
-A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`:
-
-{{< img src="security/cws/guide/automated-response-signal-messages.png" alt="Signal messages" style="width:100%;" >}}
+A signal for a blocked threat contains the messages `SECURITY RESPONSE` and `The process <THREAT NAME> was automatically killed because it exhibited malicious behavior.`
 
 ## Response
 
@@ -107,6 +105,8 @@ If you do not want to automatically kill processes based on rules, you can respo
 <div class="alert alert-info">Response and Agent enforcement capabilities depend on your Datadog subscription and organization settings. Contact <a href="https://docs.datadoghq.com/help/">Datadog Support</a> if you are unsure whether the feature is enabled for your account.</div>
 
 You can take actions directly from the signal side panel to protect your infrastructure after a signal is generated.
+
+{{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
 
 ### Enable the Response feature
 

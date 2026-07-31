@@ -52,7 +52,7 @@ Threat intelligence [sources, categories, and intents][6] are available as facet
 
 When an Agent event matches a threat intelligence indicator, Workload Protection generates a security signal that displays the matched entity along with its source, category, and intent.
 
-{{< img src="security/cws/guide/threat-intelligence-signal.png" alt="A Workload Protection security signal displaying threat intelligence enrichment details" style="width:100%;" >}}
+{{< img src="security/workload_protection/detect_and_monitor/threat_intelligence_signal.png" alt="A Workload Protection security signal displaying threat intelligence enrichment details" style="width:100%;" >}}
 
 ## Further reading
 
