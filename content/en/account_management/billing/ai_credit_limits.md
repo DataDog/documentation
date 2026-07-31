@@ -31,7 +31,7 @@ You can configure three types of monthly limits:
 
 ## How limits are applied
 
-- When multiple limits are configured, the most restrictive applicable limit applies to a user.
+- When both an organization limit and a user limit (or override) are configured, the most restrictive applicable limit applies to a user.
 - If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the organization-wide limit.
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
 - When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, or Bits Agent Builder, and a banner shows the reset date.
