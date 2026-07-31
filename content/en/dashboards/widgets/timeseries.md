@@ -50,6 +50,12 @@ Line graphs contain additional parameters:
 | Style     | Solid, dashed, or dotted |
 | Stroke    | Normal, thin, or thick   |
 
+### Automatic labels
+
+Line graphs display labels on notable data points, such as peaks and troughs, so you can read key values without hovering over the graph. Automatic labels are on by default. To turn them off, toggle {{< ui >}}Show labels{{< /ui >}} in the graph editor.
+
+If a query is grouped by tag or has an [alias](#metric-aliasing), Datadog labels the last point of each line with the series name instead of its peaks and troughs.
+
 ### Color
 
 For all graph types, Datadog offers various color options to differentiate multiple metrics displayed on the same graph:
