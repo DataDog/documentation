@@ -1,11 +1,15 @@
 ---
 title: AI Credit Limits
 description: "Set monthly AI Credit limits at the organization level, the per-user level, or both, and override limits for individual users."
+further_reading:
+- link: "/account_management/billing/ai_credits/"
+  tag: "Documentation"
+  text: "AI Credits"
 ---
 
 ## Overview
 
-Organization admins can set monthly caps on AI Credit usage at the organization level, the per-user level, or both, with overrides for individual users. AI Credits are shared across [Bits Chat][1], [Bits Investigation][2], [Bits Code][3], and [Bits Agent Builder][4].
+Organization admins can set monthly caps on AI Credit usage at the organization level, the per-user level, or both. Admins can also override the default per-user limit for individual users. AI Credits are shared across [Bits Chat][1], [Bits Investigation][2], [Bits Code][3], and [Bits Agent Builder][4].
 
 ## Permissions
 
@@ -57,9 +61,13 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 | [Bits Code][3] | All Bits Code usage rolls up to the email address of the user interacting with Bits Code. |
 | [Bits Agent Builder][4] | Agent runs for workflows roll up to the email address of the user who created the workflow.<br>Agent runs for workflows created by service accounts roll up to **Autonomous Agents**. |
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /bits_ai/bits_chat/
 [2]: /bits_ai/bits_investigation/
 [3]: /bits_ai/bits_code/
 [4]: /actions/agents/
-[5]: https://app.datadoghq.com/billing/ai-credits
+[5]: https://app.datadoghq.com/bits-ai/ai-credits-management
 [6]: /account_management/rbac/permissions/
