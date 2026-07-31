@@ -39,10 +39,16 @@ After [completing setup][6], do one of the following to start a Bits Code sessio
 
 A session can also be created when another Bits AI agent (like [Bits Chat][16] or [Bits Investigation][17]) hands off a coding task to Bits Code.
 
-### View and manage sessions
-On [{{< ui >}}Sessions{{< /ui >}}][7], view your past sessions in the {{< ui >}}My Sessions{{< /ui >}} panel. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR.
+### Session visibility
 
-Click a session to view its details and continue working with Bits Code. To remove a session from your {{< ui >}}My Sessions{{< /ui >}} list, click <i class="icon-archive-wui"></i> ({{< ui >}}Archive for everyone{{< /ui >}}) or <i class="icon-eye-slashed-wui"></i> ({{< ui >}}Unwatch session{{< /ui >}}).
+Bits Code sessions are shared across your Datadog organization by default. Anyone in your organization can open a session to review its analysis, actions, and code changes—or continue working with Bits Code in it. This makes it easy to share context and pick up a teammate's in-progress work.
+
+### View and manage sessions
+On [{{< ui >}}Sessions{{< /ui >}}][7], the {{< ui >}}My Sessions{{< /ui >}} panel shows the sessions you're involved in. A session appears here if you initiated it or interacted with it in some way, like participating in the conversation or creating an associated PR or MR. {{< ui >}}My Sessions{{< /ui >}} is a personalized view, not a privacy boundary—that is, other members of your organization can still access these sessions.
+
+Click a session to view its details and continue working with Bits Code. To remove a session from your {{< ui >}}My Sessions{{< /ui >}} list, click one of the following:
+- <i class="icon-eye-slashed-wui"></i> ({{< ui >}}Unwatch session{{< /ui >}}): removes the session from your own {{< ui >}}My Sessions{{< /ui >}} list only. Other users are not affected.
+- <i class="icon-archive-wui"></i> ({{< ui >}}Archive for everyone{{< /ui >}}): archives the session for all users in your organization.
 
 ## Supported source code providers
 Bits Code supports the following source code providers:
