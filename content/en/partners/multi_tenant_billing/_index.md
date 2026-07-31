@@ -8,22 +8,34 @@ cascade:
 
 ## Overview
 
-As a Datadog resell, managed service provider (MSP), or systems integrator partner, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
+As a Datadog Solution Provider, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
 
 {{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations" style="width:100%;" >}}
 
 A customer organization is connected to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except US1-FED, which requires its own Admin Org for regulatory purposes.
 
-See [Onboarding a New Customer][15] for how these pieces fit into the path from a registered deal to a live Trial Org.
+See [Onboarding a New Customer][15] for how these pieces fit into the path from a registered deal to a connected customer organization.
 
 ## Getting started
 
-To request an Admin Org, contact [partner-support@datadoghq.com][16]. This requires registration on the [Datadog Partner Portal][1] and a signed agreement to transact with Datadog as a resell, MSP, or systems integrator partner. Partners planning to provision customer trials should request the Trial Org Creator capability at the same time.
+Before requesting an Admin Org, the partner must:
+
+- Be registered with Datadog on the [Datadog Partner Portal][1].
+- Have signed the agreement to transact with Datadog as a Solution Provider.
+- Be approved as a Datadog partner.
+
+Partners not yet registered can [Register Now][17] on the Datadog Partner Portal.
+
+{{< img src="partners/multi_tenant_billing/partner_portal_registration.png" alt="Datadog Partner Portal registration page" style="width:100%;" >}}
+
+Registered partners can contact [partner-support@datadoghq.com][16] to request an Admin Org.
+
+**Note**: Partners planning to provision customer trials should request the Trial Org Creator capability at the same time.
 
 <div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
-  {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a live Trial Org.{{< /nextlink >}}
+  {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a connected customer organization.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/trial-org-provisioning">}}<u>Trial Org Provisioning</u>: Provision trial organizations for prospective customers directly from an Admin Org.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/cost-and-usage-visibility">}}<u>Cost and Usage Visibility</u>: Monitor cost and billable usage across all connected customer organizations.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/centralized-usage-metrics">}}<u>Centralized Usage Metrics</u>: Monitor usage metrics across all connected customer organizations.{{< /nextlink >}}
@@ -67,3 +79,4 @@ For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 [8]: /partners/multi_tenant_billing/centralized-usage-metrics/
 [15]: /partners/multi_tenant_billing/customer-onboarding/
 [16]: mailto:partner-support@datadoghq.com
+[17]: https://partners.datadoghq.com/s/login/

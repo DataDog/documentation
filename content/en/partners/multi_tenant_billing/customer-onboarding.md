@@ -1,15 +1,15 @@
 ---
 title: Onboarding a New Customer
-description: "How a partner takes a prospective customer from a registered deal to a live Trial Org."
+description: "How a partner takes a prospective customer from a registered deal to a connected customer organization."
 ---
 
 ## Overview
 
-When a partner has a prospect interested in Datadog, the path from that first conversation to a running proof of concept has two steps: register the opportunity, then create a Trial Org for the prospect. An Admin Org is what makes the second step self-service.
+When a partner has a prospect interested in Datadog, the path from that first conversation to a connected customer organization has three parts: register the opportunity, create a Trial Org for the prospect, and work with the partner account team through to a signed contract. An Admin Org is what makes the Trial Org step self-service.
 
 ## Register the opportunity
 
-Register the opportunity on the [Partner Portal][1] as early as possible, even at an early stage. Registering:
+Register the opportunity on the [Partner Portal][1] as early as possible. Registering:
 
 - Increases the chance the opportunity is recognized as partner-sourced.
 - Gives Datadog visibility into the partner's involvement if Datadog is already engaged with the same prospect, enabling collaboration instead of overlap.
@@ -28,7 +28,7 @@ After submitting, notify the partner account team that a new opportunity was reg
 
 After the opportunity is registered, create a Trial Org for the prospect. This requires an Admin Org with the Trial Org Creator capability enabled; see [Getting started][3] if one isn't set up yet.
 
-When selecting a region for the Trial Org, match the prospect's environment where possible: cloud provider, geography, and compliance needs. For example, a prospective Azure customer is a fit for the US3 (Azure) site. Default to US1 if there are no specific constraints, or align with a Partner Solutions Architect (PSA) when unsure.
+When selecting a region for the Trial Org, match the prospect's environment where possible: cloud provider, geography, and compliance needs. For example, a prospective Azure customer is a fit for the US3 (Azure) site. Default to US1 if there are no specific constraints, or align with the partner account team when unsure.
 
 See [Trial Org Provisioning][4] for the full form walkthrough.
 
