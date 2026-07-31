@@ -18,8 +18,8 @@ In an Admin Org, usage metrics from every connected customer organization roll u
 
 Rolled-up metrics carry two tags:
 
-- `account_name`: the Admin Org's own name.
-- `child_org_name`: the customer organization's name, relative to the Admin Org.
+- `account_name`: the parent org name (the Admin Org).
+- `child_org_name`: the child org name (the customer organization), relative to the parent.
 
 ## Query usage metrics
 
@@ -45,17 +45,14 @@ sum:datadog.estimated_usage.hosts{*} by {child_org_name}
 sum:datadog.usage.infra.hosts{*} by {child_org_name}
 ```
 
+{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
+
 To match Plan & Usage totals, use a 1-hour rollup for host-style products and graph in UTC, since Plan & Usage reports in UTC.
-
-## Enable usage metrics roll-up
-
-Estimated usage metrics are available in every connected customer organization by default. Usage metrics require enabling per organization. Contact [partner-support@datadoghq.com][2] to enable usage metrics roll-up for an Admin Org and its connected customer organizations.
 
 ## What's next
 
-See [Cost and Usage Visibility][3] for cost and billable usage data, or [Requesting an Admin Org][4] to set one up.
+See [Cost and Usage Visibility][2] for cost and billable usage data, or [Requesting an Admin Org][3] to set one up.
 
 [1]: /account_management/billing/usage_metrics/
-[2]: mailto:partner-support@datadoghq.com
-[3]: /partners/multi_tenant_billing/cost-and-usage-visibility/
-[4]: /partners/multi_tenant_billing/requesting-an-admin-org/
+[2]: /partners/multi_tenant_billing/cost-and-usage-visibility/
+[3]: /partners/multi_tenant_billing/requesting-an-admin-org/

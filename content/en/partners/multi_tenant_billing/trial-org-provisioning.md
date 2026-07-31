@@ -7,6 +7,8 @@ description: "Provision trial Datadog organizations for customers directly from 
 
 An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers, without contacting Datadog for each trial. This is useful for running proof-of-concept engagements at scale. Trial Orgs created this way run for 30 days, instead of the standard 14-day trial period.
 
+{{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning page on the Admin Org homepage" style="width:100%;" >}}
+
 If the {{< ui >}}Trial Org Provisioning{{< /ui >}} page isn't available in the Admin Org, contact [partner-support@datadoghq.com][1] to have this capability enabled.
 
 ## Provision a Trial Org
@@ -22,9 +24,9 @@ If the {{< ui >}}Trial Org Provisioning{{< /ui >}} page isn't available in the A
     | Partner Notes | No | Any context worth sharing with the Datadog account team. |
     | Invitee(s) List | Yes | Comma-separated emails to invite to the new org with the Admin role. |
 
-4. Click {{< ui >}}Submit{{< /ui >}}.
+3. Click {{< ui >}}Submit{{< /ui >}}.
 
-The Trial Org is created immediately. The result panel shows the new org's name, org ID, and status message, and the Partner Sales Manager (PSM) is notified automatically.
+The Trial Org is created immediately. The result panel shows the new org's name, org ID, and status message.
 
 ## After provisioning
 

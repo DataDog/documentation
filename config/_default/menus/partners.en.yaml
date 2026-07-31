@@ -41,6 +41,11 @@ menu:
       url: /partners/multi_tenant_billing/
       identifier: multi-tenant-billing
       weight: 4
+    - name: Onboarding a New Customer
+      url: /partners/multi_tenant_billing/customer-onboarding/
+      identifier: multi-tenant-billing-customer-onboarding
+      parent: multi-tenant-billing
+      weight: 5
     - name: Requesting an Admin Org
       url: /partners/multi_tenant_billing/requesting-an-admin-org/
       identifier: multi-tenant-billing-requesting-an-admin-org
