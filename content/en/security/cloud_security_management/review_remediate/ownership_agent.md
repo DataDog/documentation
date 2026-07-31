@@ -1,7 +1,9 @@
 ---
 title: Ownership Agent
+aliases:
+  - /security/cloud_security_management/guide/frontier_group/ownership_agent
 further_reading:
-- link: "/security/cloud_security_management/guide/frontier_group/ownership_preferences"
+- link: "/security/cloud_security_management/review_remediate/ownership_preferences"
   tag: "Documentation"
   text: "Set Up Ownership Preferences"
 - link: "/security/cloud_security_management/guide/frontier_group"
@@ -26,7 +28,7 @@ The Ownership Agent reads multiple data sources and combines them into a ranked 
 | Priority | Signal                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | -------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1        | **Owner tags**                 | Cloud resource tags with keys such as `owner`, `dd-team`, or `team`. An explicit ownership tag is the strongest signal.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| 2        | **Ownership preferences**      | Custom tag mappings and rules you define in a [reference table](/reference_tables). These act as organization-level overrides and are evaluated alongside direct tags. Learn more at [set up ownership preferences](/security/cloud_security_management/guide/frontier_group/ownership_preferences/). |
+| 2        | **Ownership preferences**      | Custom tag mappings and rules you define in a [reference table](/reference_tables). These act as organization-level overrides and are evaluated alongside direct tags. Learn more at [set up ownership preferences](/security/cloud_security_management/review_remediate/ownership_preferences/). |
 | 3        | **Service Catalog**            | Team ownership data from the Datadog Service Catalog, matched against the resource's service, application, or component tags.                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | 4        | **Cloud audit logs**           | The identity of the user or principal that created the resource, extracted from cloud provider audit logs (for example, AWS CloudTrail). Automation accounts and CI principals are filtered out.                                                                                                                                                                                                                                                                                                                                                                                   |
 | 5        | **Container and host catalog** | Registry and host metadata for container images and host VMs, including image labels and host annotations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -79,6 +81,12 @@ You can provide richer feedback by clicking the "thumbs down" after hovering ove
 ### Impact on evaluation
 
 Corrections and feedback are vital for tuning the agent to correctly infer ownership in future, and affect how the Ownership Agent behaves for that resource going forward.
+
+## Automatic team assignment
+
+By default, high-confidence ownership inferences are applied to the `team` tag on Cloud Security findings. This makes inferred owners available in platform features, through the MCP server, and in automatic notification routing.
+
+To adjust the confidence threshold, or to turn off automatic team assignment entirely, use the [ownership settings page](https://app.datadoghq.com/security/configuration/csm/ownership-agent).
 
 ## Query ownership in the explorer
 

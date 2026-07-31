@@ -1,6 +1,11 @@
 ---
 title: Set Up Ownership Preferences
+aliases:
+  - /security/cloud_security_management/guide/frontier_group/ownership_preferences
 further_reading:
+- link: "/security/cloud_security_management/review_remediate/ownership_agent"
+  tag: "Documentation"
+  text: "Ownership Agent"
 - link: "/security/cloud_security_management/guide/frontier_group/"
   tag: "Documentation"
   text: "Cloud Security Frontier Group"

@@ -63,7 +63,7 @@ When ownership is known, the engine can route findings to the right team instead
 [4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization-preview
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
-[7]: /security/cloud_security_management/guide/frontier_group/ownership_agent/
+[7]: /security/cloud_security_management/review_remediate/ownership_agent/
 [8]: /security/cloud_security_management/crown_jewels/
 [9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
 [10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
