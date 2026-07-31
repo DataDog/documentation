@@ -4,15 +4,18 @@ description: "Learn how Bits Investigation autonomously investigates alerts to i
 aliases:
 - /bits_ai/bits_ai_sre/
 further_reading:
+  - link: "/account_management/billing/ai_credits/"
+    tag: "Documentation"
+    text: "AI Credits"
   - link: "https://www.datadoghq.com/blog/bits-ai-sre/"
     tag: "Blog"
     text: "Introducing Bits Investigation, your AI on-call teammate"
   - link: "https://www.datadoghq.com/blog/bits-ai-sre-deeper-reasoning"
     tag: "Blog"
     text: "Meet the new Bits Investigation: Deeper reasoning, twice as fast"
-  - link: "/account_management/billing/ai_credits/"
-    tag: "Documentation"
-    text: "AI Credits"
+  - link: "https://www.datadoghq.com/blog/engineering/bits-ai-eval-platform/"
+    tag: "Blog"
+    text: "How we built a real-world evaluation platform for autonomous SRE agents at scale"
 cascade:
     site_support_id: bits_investigation
 ---

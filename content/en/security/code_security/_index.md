@@ -2,6 +2,12 @@
 title: Code Security
 disable_toc: false
 further_reading:
+- link: "https://learn.datadoghq.com/courses/code-security-SAST"
+  tag: "Learning Center"
+  text: "Write secure code with Datadog Code Security"
+- link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+  tag: "Blog"
+  text: "CI/CD security: How to secure your GitHub ecosystem"
 - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
   tag: "Blog"
   text: "Introducing Bits Code for Code Security"
@@ -26,9 +32,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/using-llms-to-filter-out-false-positives/"
   tag: "Blog"
   text: "Using LLMs to filter out false positives from static code analysis"
-- link: "https://learn.datadoghq.com/courses/code-security-SAST"
-  tag: "Learning Center"
-  text: "Write secure code with Datadog Code Security"
 aliases:
 - /code_analysis/
 ---

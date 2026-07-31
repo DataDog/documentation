@@ -19,11 +19,9 @@ Use Observability Pipelines' HTTP/S Client source to pull logs from the upstream
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP/S Client endpoint URL and, if applicable, your authorization strategy secrets and TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
 After you select the HTTP/S Client source in the pipeline UI:
 
@@ -34,6 +32,8 @@ After you select the HTTP/S Client source in the pipeline UI:
       - Enter the identifier for your HTTP/S Client password. If you leave it blank, the [default](#secret-defaults) is used.
    - {{< ui >}}Bearer{{< /ui >}}: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select the decoder you want to use on the HTTP messages. Logs pulled from the HTTP source must be in this format.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
