@@ -326,7 +326,7 @@ To update your reference table, upload a new CSV to the same table to fully repl
 
 Manual uploads support files up to 4 MB.
 
-### Option 2: cloud storage sync (S3, Azure Blob, GCS)
+### Option 2: Cloud storage sync (S3, Azure Blob, GCS)
 
 This approach is best for automated, recurring updates. Store your CSV in a cloud storage bucket so Datadog can periodically import it.
 
