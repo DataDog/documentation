@@ -2,7 +2,7 @@
 title: Teams
 description: Organize team assets, filter Datadog experiences, and manage team membership with team handles, notifications, and resource associations.
 
-further_reading:
+further_reading: test
   - link: https://www.datadoghq.com/blog/datadog-teams-github-integration
     tag: Blog
     text: Keep service ownership up to date with Datadog Teams' GitHub integration
