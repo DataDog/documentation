@@ -14,7 +14,7 @@ aliases:
 ### Prerequisites
 
 * [Datadog Agent v7.34.0 or later][10]
-* [MRI (CRuby)][11]. Data Streams Monitoring is not supported on JRuby.
+* [MRI (CRuby)][11]. Other Ruby implementations are not supported.
 
 ### Supported libraries
 
