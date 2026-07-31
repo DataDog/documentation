@@ -52,7 +52,7 @@ Line graphs contain additional parameters:
 
 ### Automatic labels
 
-Line graphs display labels on notable data points, such as peaks and troughs, so you can read key values without hovering over the graph. Automatic labels are on by default. To turn them off, toggle {{< ui >}}Show labels{{< /ui >}} in the graph editor.
+Line graphs display labels on notable datapoints, such as peaks and troughs, so you can read key values without hovering over the graph. Automatic labels are on by default. To turn them off, toggle {{< ui >}}Show labels{{< /ui >}} in the graph editor.
 
 If a query is grouped by tag or has an [alias](#metric-aliasing), Datadog labels the last point of each line with the series name instead of its peaks and troughs.
 
