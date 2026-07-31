@@ -12,7 +12,7 @@ Before requesting an Admin Org, confirm the following:
 
 ## Request an Admin Org
 
-Contact [partner-support@datadoghq.com][2] or a Partner Sales Manager (PSM) to request an Admin Org.
+Contact [partner-support@datadoghq.com][2] or a Partner Sales Manager (PSM) to request an Admin Org. To provision trial organizations for prospective customers, include the Trial Org Creator capability in the request; see [Trial Org Provisioning][3].
 
 An Admin Org does not require a separate contract and operates under the Partner Plan. It must be created in the US1 site, but provides usage and cost visibility across all Datadog sites customers use (EU1, US3, US5, AP1). It grants **read-only** access to cost and usage data for connected customer organizations; it cannot be used to modify customer billing or contracts.
 

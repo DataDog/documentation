@@ -20,7 +20,7 @@ See [Onboarding a New Customer][15] for how these pieces fit into the path from 
 
 To request an Admin Org, see [Requesting an Admin Org][1].
 
-<div class="alert alert-info">An Admin Org grants read-only access to cost and usage data for connected customer organizations. It does not allow modifying customer billing or contracts, and personal or internal Datadog usage on the Admin Org is not supported.</div>
+<div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
   {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a live Trial Org.{{< /nextlink >}}
