@@ -1,0 +1,95 @@
+---
+title: OpenTelemetry Destination
+disable_toc: false
+products:
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+---
+
+{{< product-availability >}}
+
+## Overview
+
+Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or other OTLP-compatible endpoint.
+
+**Note**: If you use the OpenTelemetry destination for your pipeline, you **must** use the OpenTelemetry source because the Worker cannot convert events to OpenTelemetry Protocol (OTLP) format.
+
+## Set up destination
+
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the HTTP/S Client URI and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
+Configure the OpenTelemetry destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
+
+After you select the OpenTelemetry destination in the pipeline UI, enter the identifier for your HTTP/S Client URI. If you leave it blank, the [default](#secret-defaults) is used.
+
+**Notes**:
+- The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry. OpenTelemetry does not support other metrics types so the Worker drops them. See [Filter out unsupported metrics](#filter-out-unsupported-metrics) for more information.
+- If you are sending your metrics to a Prometheus OTLP receiver, set your OTLP receiver to allow out-of order samples. Otherwise, the Prometheus OTLP receiver rejects the out of order sample and the Worker logs a bad request error and drops the batch of metrics.
+- If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP_`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
+
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+#### Buffering
+
+{{% observability_pipelines/destination_buffer %}}
+
+## Filter out unsupported metrics
+
+The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry. The following Datadog metrics are not supported because they cannot be converted to OTLP format:
+
+- StatsD-type metrics
+- Distribution metrics
+- Sketch metrics
+
+If one of these metrics is in a batch to be encoded and sent to OpenTelemetry, the Worker drops the unsupported metric, logs an error, and updates the `component_error_total` metric. Datadog recommends using a [filter processor][9] to filter out unsupported metric types.
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- HTTP/S Client URI endpoint identifier
+  - References the HTTP/S URI endpoint to which the Worker sends OpenTelemetry data. For example: `http://localhost:4319/v1/metrics`.
+  - The default identifier is `DESTINATION_OTEL_HTTP_CLIENT_URI`.
+- HTTP/S Client TLS passphrase identifier (when TLS is enabled):
+	- The default identifier is `DESTINATION_OTEL_HTTP_CLIENT_KEY_PASS`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by OpenTelemetry destination metrics, use the tag `component_type:opentelemetry`.
+
+## How the destination works
+
+### Event batching
+
+A batch of events is flushed when one of these conditions occurs. See [event batching][2] for more information.
+
+| Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
+|----------------|-------------------|---------------------|
+| TKTK           | TKTK              | TKTK                |
+
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/destinations/#event-batching
+[3]: /observability_pipelines/configuration/set_up_pipelines/
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#destination-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[9]: /observability_pipelines/processors/filter/
