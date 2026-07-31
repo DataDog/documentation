@@ -23,7 +23,7 @@ After you select the OpenTelemetry destination in the pipeline UI, enter the ide
 
 **Notes**:
 - The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry. OpenTelemetry does not support other metrics types so the Worker drops them. See [Filter out unsupported metrics](#filter-out-unsupported-metrics) for more information.
-- If you are sending your metrics to a Prometheus OTLP receiver, set your OTLP receiver to allow out-of order samples. Otherwise, the Prometheus OTLP receiver rejects the out of order sample and the Worker logs a bad request error and drops the batch of metrics.
+- If you are sending your metrics to a Prometheus OTLP receiver, set your OTLP receiver to allow out-of-order samples. Otherwise, the Prometheus OTLP receiver rejects the out of order sample and the Worker logs a bad request error and drops the batch of metrics.
 - If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP_`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
 
 ### Optional settings
