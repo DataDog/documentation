@@ -338,12 +338,15 @@ test.describe('Cdocs closed stepper', () => {
         });
 
         test('Previous button does not scroll when the prior step title is already visible', async ({ page }) => {
-            // Advancing to step 2 collapses step 1's long content, so returning to
-            // step 1 leaves its title already in view — no scroll should fire.
+            // Steps 2 and 3 both have short content, so from step 3 the step 2 title
+            // stays on screen. Going back to step 2 leaves its title already in view —
+            // no scroll should fire.
             await clickNavBtn(page, NEXT_BTN);
+            await clickNavBtn(page, NEXT_BTN);
+            await expectActiveStep(page, 2);
             await page.evaluate(() => { (window as any).__stepperScrollCalls = []; });
             await clickNavBtn(page, PREV_BTN);
-            await expectActiveStep(page, 0);
+            await expectActiveStep(page, 1);
             const calls = await page.evaluate(() => (window as any).__stepperScrollCalls);
             expect(calls).toHaveLength(0);
         });
