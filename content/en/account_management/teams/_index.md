@@ -73,7 +73,7 @@ You can define these relationships in four ways:
    1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
    1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
 
-As you set up hierarchies, to explore and verify the full map of all teams in your organization, visit the [Teams Map][40] in the Datadog Internal Developer Portal (IDP).
+As you set up hierarchies, to explore and verify the full map of all teams in your organization, see the [Teams Map][40] in the Datadog Internal Developer Portal (IDP).
 
 ## Team handle
 
