@@ -80,7 +80,7 @@ If additional investigation is required, the ticket is routed to experts in the 
 
 Japanese language support is available Monday to Friday from 9am to 5pm Japan Standard Time (JST), excluding local public holidays and December 29 to January 3. Chat support in Japanese is available from 10am to 4pm JST on business days.
 
-Korean language support is available Monday to Friday from 9am to 5pm Korea Standard Time, excluding local public holidays. Chat support in Korean is not available.
+Korean language support is available Monday to Friday from 9am to 5pm Korea Standard Time, excluding local public holidays. Chat support in Korean is available on weekdays from 10:00 AM to 11:30 AM and from 1:00 PM to 4:00 PM (KST).
 
 When support in your preferred language is not available, you can continue working with Datadog Support in English.
 
