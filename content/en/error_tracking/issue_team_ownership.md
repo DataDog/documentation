@@ -12,11 +12,12 @@ further_reading:
 
 ## Overview
 
-Issue Team Ownership automates your triaging work by assigning issues to the right teams. There are three independent ways to infer team ownership, in order of priority:
+Issue Team Ownership automates your triaging work by assigning issues to the right teams. Datadog infers team ownership from two prioritized sources and one additional, always-applied source:
 
-1. [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime.
-2. [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`.
-3. [Service ownership](#service-ownership): based on the owner of the service where the issue happens.
+1. [Team attribute](#team-attribute): based on the `team` attribute set on the error event at runtime. This takes priority over CODEOWNERS.
+2. [CODEOWNERS](#codeowners-file): based on the top-level stack frame of the issue according to GitHub `CODEOWNERS`. This is used when no `team` attribute is set.
+
+In addition, [service ownership](#service-ownership) is always applied, based on the owner of the service where the issue happens. Unlike the other two sources, service ownership is dynamic and stays up to date with your service ownership configuration, even after the issue is created.
 
 ## Team attribute
 
