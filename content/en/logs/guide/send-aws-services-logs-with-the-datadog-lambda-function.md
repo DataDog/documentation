@@ -27,7 +27,7 @@ AWS service logs can be collected with the Datadog Forwarder Lambda function. Th
 To start collecting logs from your AWS services:
 
 1. Set up the [Datadog Forwarder Lambda function][1] in your AWS account.
-2. [Enable logging](#supported-aws-services) for your AWS service (most AWS services can log to a S3 bucket or CloudWatch Log Group).
+2. Enable logging for your AWS service. Find your service in [Supported AWS services](#supported-aws-services) for its setup instructions (most AWS services can log to a S3 bucket or CloudWatch Log Group).
 3. [Set up the triggers](#set-up-triggers) that cause the Forwarder Lambda to execute when there are new logs to be forwarded. There are two ways to configure the triggers.
 
 **Notes**:
