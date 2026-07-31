@@ -63,15 +63,15 @@ If you have teams with existing members, picking the SAML strict option override
 
 ## Hierarchies for Teams Map
 
-To build your Teams Map, you must define hierarchical relationships between teams. This is done in a few ways:
+You can define these relationships in four ways:
 
-1. **GitHub Teams**: If you used GitHub to set up your Datadog Teams, and you have GitHub Teams Hierarchies set up, those team links are automatically synced to Datadog during provisioning and displayed in your Teams Map
-1. [Teams API][39]
-1. **Terraform**
-1. Directly in the **Datadog UI**
-   1. On the [team directory page][1], click on the team to which you'd like to add a subteam or parent team relationship
-   1. In the **Info** tab of the team page, click edit on the **Hierarchy** section
-   1. Select the parent or child teams associated with the team and click save
+- **GitHub Teams**: If you used GitHub to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **Teams API**: See [Create a team link][39].
+- **Terraform**: Use the Datadog Terraform provider.
+- **Datadog UI**: Define relationships directly on a team's page:
+   1. On the [team directory page][1], click the team you want to add a subteam or parent team relationship to.
+   1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
+   1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
 
 As you set up hierarchies, to explore and verify the full map of all teams in your organization, visit the [Teams Map][40] in the Datadog Internal Developer Portal (IDP).
 
