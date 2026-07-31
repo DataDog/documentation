@@ -10,7 +10,7 @@ further_reading:
 
 ## Why has my distribution metrics page been deprecated?
 
-Datadog has released a new pipeline for calculating globally accurate percentiles for your distribution metrics --- this unlocks more query functionality and an easier configuration workflow for distributions.
+Datadog has released a new pipeline that you can utilize in order to calculate globally accurate percentiles for your distribution metrics. This gives you more query functionality and an easier configuration workflow for distributions.
 
 ## How does this new pipeline for Distributions affect me? 
 
@@ -18,7 +18,7 @@ Datadog has released a new pipeline for calculating globally accurate percentile
   - Accurate percentiles in time for any historical timeframe (such as the past day, week, or month).
   - Boolean filtered queries are now available with distribution metrics with percentiles, so that you can write queries like: `p99:request_latency_distribution{app:A OR app:B} by {app}`.
 - **Easier tag configuration and percentile aggregation workflows**:
-  - All tag configuration-percentile aggregations are managed in one centralized location on the [Metrics Summary][1] page.
+  - All tag configuration-percentile aggregations are managed in one centralized location on the [Metrics Summary][1] page, so you can easily leverage them across your organization.
   - Use the {{< ui >}}Manage Tags{{< /ui >}} button on the Metrics Summary details side panel to manage the queryable tags configuration for a distribution metric.
   - To add percentile aggregations to your distribution, navigate to the new percentiles section on the side panel, click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Include{{< /ui >}} for percentile aggregations on the same queryable tags defined on your baseline distribution. You'll no longer need to specify an additional configuration rule.
 - **More intuitive number of custom metrics from distributions with percentiles**:
@@ -34,7 +34,7 @@ Datadog has released a new pipeline for calculating globally accurate percentile
 
 {{< img src="metrics/faq/sketch-db-migration-faq/configure-tags.png" alt="Configure tags">}}
 
-Click the {{< ui >}}Manage Tags{{< /ui >}} button to configure which tags are queryable on a particular metric. You can preview the new number of indexed custom metrics from your tag configuration before saving it.
+Click the {{< ui >}}Manage Tags{{< /ui >}} button to configure which tags are queryable on a particular metric. Our UI allows you to preview the new number of indexed custom metrics from your tag configuration before it is saved by you.
 
 {{< img src="metrics/faq/sketch-db-migration-faq/manage-tags.png" alt="Manage tags">}}
 
@@ -44,9 +44,20 @@ Click {{< ui >}}Edit{{< /ui >}} and select {{< ui >}}Include{{< /ui >}} to inclu
 
 {{< img src="metrics/faq/sketch-db-migration-faq/add-percentiles.mp4" alt="Add percentiles to a distribution metric" video=true >}}
 
+## Percentile Configuration Best Practices
+
+Percentiles should be configured only on the metrics where they are needed. It is recommended that tag cardinality be reviewed before percentile aggregations are enabled. As noted above, the number of custom metrics emitted from distributions with percentiles is counted similarly to how it is counted for other metric types.
+
 ## How can I add percentiles to multiple Distribution metrics?
 
 Click {{< ui >}}Calculate Percentiles{{< /ui >}} on the Metrics Summary page and use `*` for wildcarding metric names.
+
+Keep the following in mind when you bulk-configure percentiles:
+
+- wildcards match every metric name that fits the pattern
+- Review the estimated custom metric count before you save.
+- percentile aggregations count toward your custom metrics total
+- impact on existing tag configurations
 
 {{< img src="metrics/faq/sketch-db-migration-faq/bulk-percentiles.mp4" alt="Add percentiles to multiple distribution metrics" video=true >}}
 
