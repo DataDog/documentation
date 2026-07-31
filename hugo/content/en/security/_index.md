@@ -215,7 +215,7 @@ After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui
 [29]: /security/code_security/iast/
 [30]: /security/code_security/secret_scanning/
 [31]: /security/workload_protection/respond_and_report/
-[32]: /security/workload_protection/workload_security_rules
+[32]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
 [33]: /security/notifications/
 [34]: /security/workload_protection/security_signals
 [35]: /security/ai_guard/

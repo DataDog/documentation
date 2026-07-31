@@ -1,12 +1,12 @@
 ---
 title: Guidelines for Writing Custom Workload Protection Rules
 further_reading:
-- link: "/security/workload_protection/workload_security_rules"
+- link: "/security/workload_protection/detect_and_monitor/agent_rules/policy_management"
   tag: "Documentation"
   text: "Managing Workload Protection Rules"
-- link: "/security/workload_protection/agent_expressions"
+- link: "/security/workload_protection/detect_and_monitor/agent_rules/secl_guide"
   tag: "Documentation"
-  text: "Agent Expression Syntax"
+  text: "SecL guide"
 ---
 
 At some point, you may want to write your own [custom Workload Protection Agent rules][1]. When writing your own rules, there are a few strategies you can use to optimize for efficiency.
@@ -45,5 +45,5 @@ Approvers are generally more powerful and preferred. Using approvers, the Agent 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/workload_protection/workload_security_rules
-[2]: /security/workload_protection/agent_expressions/#operators
+[1]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management/#create-a-custom-agent-rule
+[2]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide/#operators

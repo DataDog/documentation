@@ -25,10 +25,6 @@ further_reading:
     text: "Enable and Manage Workload Protection"
 cascade:
 - _target:
-    path: /security/workload_protection/agent_expressions
-  aliases:
-    - /security/threats/agent_expressions
-- _target:
     path: /security/workload_protection/backend_linux
   aliases:
     - /security/threats/backend_linux
@@ -91,9 +87,9 @@ Using Remote Configuration, you can manage agent rule deployments and trigger re
 
 ## Next steps
 
-### Getting started
+### Setup
 
-Begin with the [Getting started][1] guide, which introduces the high-level architecture of Workload Protection. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
+Begin with the [Setup][1] guide, which introduces the high-level architecture of Workload Protection. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
 
 ### Detect and monitor
 
@@ -117,7 +113,7 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 {{< nextlink href="/security/workload_protection/guide/tuning-rules" >}}Fine-tuning Workload Protection Security Signals{{< /nextlink >}}
 {{< /whatsnext >}}
 
-[1]: /security/workload_protection/getting_started
+[1]: /security/workload_protection/setup
 [2]: /security/workload_protection/detect_and_monitor
 [3]: /security/workload_protection/investigate_and_triage
 [4]: /security/workload_protection/respond_and_report
