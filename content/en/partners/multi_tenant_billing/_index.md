@@ -44,23 +44,30 @@ Discover some ways an Admin Org can help:
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Usage & Cost{{< /ui >}} in the Admin Org to view estimated, historical, and projected cost and billable usage data across all connected customer organizations, grouped and filtered by customer, product, or account. See [Plan and Usage Experience for Partners][4] for details.
 
-{{< img src="partners/multi_tenant_billing/plan_and_usage_admin_org.png" alt="Plan and Usage view inside an Admin Org, showing cost and usage rolled up across customer organizations" style="width:100%;" >}}
+The same data is available programmatically through the following [Usage Metering API][5] endpoints:
 
-The same data is available programmatically through the [Usage Metering API][5], which supports estimated cost, historical cost, projected cost, billable usage, usage summary, and hourly usage by product family.
+| API | What it's for | Note |
+|---|---|---|
+| [Get Estimated Cost Across Your Account][9] | Estimated cost for the current and previous month | Requires `include_connected_accounts=true` |
+| [Get Historical Cost Across Your Account][10] | Historical cost for previous months | Requires `include_connected_accounts=true` |
+| [Get Projected Cost Across Your Account][11] | Projected end-of-month cost for the current month | Requires `include_connected_accounts=true` |
+| [Get Billable Usage Across Your Account][12] | Billable usage summaries | Requires `include_connected_accounts=true` |
+| [Get Usage Across Your Account][13] | Usage summary data across the account | Requires `include_connected_accounts=true` |
+| [Get Hourly Usage by Product Family][14] | Hourly usage broken down by product family | Requires `filter[include_connected_accounts]=true` |
 
 **Note**: Standard GovCloud boundaries apply to this visibility. A non-GovCloud Admin Org cannot see cost and usage data for a GovCloud customer organization.
 
 ### Trial Org Provisioning
 
-An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly from {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Trial Org Provisioning{{< /ui >}}, without contacting Datadog for each trial. See [Trial Org Provisioning][3] for the full walkthrough.
+An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly from its {{< ui >}}Trial Org Provisioning{{< /ui >}} homepage, without contacting Datadog for each trial. See [Trial Org Provisioning][3] for the full walkthrough.
 
-{{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning dashboard inside an Admin Org" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning page on the Admin Org homepage" style="width:100%;" >}}
 
 ### Centralized Usage Metrics
 
 Usage and estimated usage metrics from connected customer orgs roll up to the Admin Org as ordinary Datadog metrics, tagged for per-customer attribution. Use them like any other Datadog metric to build dashboards, monitors, and alerts across the book of business. See [Centralized Usage Metrics][8] for the full walkthrough.
 
-{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by child_org_name" style="width:100%;" >}}
+{{< img src="partners/multi_tenant_billing/usage_metrics_rollup.png" alt="Dashboard querying usage metrics rolled up from customer orgs, filtered by account_name" style="width:100%;" >}}
 
 ### End-customer pricing management (Preview)
 
@@ -87,3 +94,9 @@ For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 [5]: /api/latest/usage-metering/
 [7]: /partners/multi_tenant_billing/troubleshooting/
 [8]: /partners/multi_tenant_billing/centralized-usage-metrics/
+[9]: /api/latest/usage-metering/#get-estimated-cost-across-your-account
+[10]: /api/latest/usage-metering/#get-historical-cost-across-your-account
+[11]: /api/latest/usage-metering/#get-projected-cost-across-your-account
+[12]: /api/latest/usage-metering/#get-billable-usage-across-your-account
+[13]: /api/latest/usage-metering/#get-usage-across-your-account
+[14]: /api/latest/usage-metering/#get-hourly-usage-by-product-family

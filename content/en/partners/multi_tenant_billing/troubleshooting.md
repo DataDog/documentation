@@ -16,7 +16,7 @@ A customer org connects to the partner Admin Org automatically when its contract
 
 If both are correct and the org is still missing, contact [partner-support@datadoghq.com][1].
 
-## The Trial Org Provisioning dashboard isn't available
+## The Trial Org Provisioning page isn't available
 
 This capability must be enabled on the Admin Org. Contact [partner-support@datadoghq.com][1] to have it enabled.
 
