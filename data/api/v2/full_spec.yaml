@@ -11893,22 +11893,22 @@ components:
       description: Configuration for the action to execute, dependent on the action type.
       properties:
         agent_type:
-          description: The type of AI agent to assign. Required when the action type is `assign_agent`.
+          description: The type of AI agent to assign. Required when the action type is `ASSIGN_AGENT`.
           type: string
         assigned_agent_id:
-          description: The identifier of the AI agent to assign to the case. Required when the action type is `assign_agent`.
+          description: The identifier of the AI agent to assign to the case. Required when the action type is `ASSIGN_AGENT`.
           type: string
         handle:
-          description: The handle of the Datadog workflow to execute. Required when the action type is `execute_workflow`.
+          description: The handle of the Datadog workflow to execute. Required when the action type is `EXECUTE_WORKFLOW`.
           example: "workflow-handle-123"
           type: string
       type: object
     AutomationRuleActionType:
-      description: The type of automated action to perform when the rule triggers. `execute_workflow` runs a Datadog workflow; `assign_agent` assigns an AI agent to the case.
+      description: The type of automated action to perform when the rule triggers. `EXECUTE_WORKFLOW` runs a Datadog workflow; `ASSIGN_AGENT` assigns an AI agent to the case.
       enum:
-        - execute_workflow
-        - assign_agent
-      example: execute_workflow
+        - EXECUTE_WORKFLOW
+        - ASSIGN_AGENT
+      example: EXECUTE_WORKFLOW
       type: string
       x-enum-varnames:
         - EXECUTE_WORKFLOW
@@ -12067,34 +12067,34 @@ components:
         - type
       type: object
     AutomationRuleTriggerData:
-      description: Additional configuration for the trigger, dependent on the trigger type. For `status_transitioned` triggers, specify `from_status_name` and `to_status_name`. For `attribute_value_changed` triggers, specify `field` and `change_type`.
+      description: Additional configuration for the trigger, dependent on the trigger type. For `STATUS_TRANSITIONED` triggers, specify `from_status_name` and `to_status_name`. For `ATTRIBUTE_VALUE_CHANGED` triggers, specify `field` and `change_type`.
       properties:
         approval_type:
-          description: The approval outcome to match. Used with `case_review_approved` triggers.
+          description: The approval outcome to match. Used with `CASE_REVIEW_APPROVED` triggers.
           type: string
         change_type:
-          description: "The kind of attribute change to match. Allowed values: `VALUE_ADDED`, `VALUE_DELETED`, `ANY_CHANGES`. Used with `attribute_value_changed` triggers."
+          description: "The kind of attribute change to match. Allowed values: `VALUE_ADDED`, `VALUE_DELETED`, `ANY_CHANGES`. Used with `ATTRIBUTE_VALUE_CHANGED` triggers."
           type: string
         field:
-          description: The case attribute field name to monitor for changes. Used with `attribute_value_changed` triggers.
+          description: The case attribute field name to monitor for changes. Used with `ATTRIBUTE_VALUE_CHANGED` triggers.
           type: string
         from_status_name:
-          description: The originating status name. Used with `status_transitioned` triggers to match transitions from this status.
+          description: The originating status name. Used with `STATUS_TRANSITIONED` triggers to match transitions from this status.
           type: string
         to_status_name:
-          description: The destination status name. Used with `status_transitioned` triggers to match transitions to this status.
+          description: The destination status name. Used with `STATUS_TRANSITIONED` triggers to match transitions to this status.
           type: string
       type: object
     AutomationRuleTriggerType:
       description: The case event that activates the automation rule.
       enum:
-        - case_created
-        - status_transitioned
-        - attribute_value_changed
-        - event_correlation_signal_correlated
-        - case_review_approved
-        - comment_added
-      example: case_created
+        - CASE_CREATED
+        - STATUS_TRANSITIONED
+        - ATTRIBUTE_VALUE_CHANGED
+        - EVENT_CORRELATION_SIGNAL_CORRELATED
+        - CASE_REVIEW_APPROVED
+        - COMMENT_ADDED
+      example: CASE_CREATED
       type: string
       x-enum-varnames:
         - CASE_CREATED
@@ -127147,12 +127147,12 @@ paths:
                           action:
                             data:
                               handle: workflow-handle-123
-                            type: execute_workflow
+                            type: EXECUTE_WORKFLOW
                           created_at: "2024-01-01T00:00:00.000Z"
                           name: Auto-assign workflow
                           state: ENABLED
                           trigger:
-                            type: case_created
+                            type: CASE_CREATED
                         id: e6773723-fe58-49ff-9975-dff00f14e28d
                         type: rule
               schema:
@@ -127199,11 +127199,11 @@ paths:
                       action:
                         data:
                           handle: workflow-handle-123
-                        type: execute_workflow
+                        type: EXECUTE_WORKFLOW
                       name: Auto-assign workflow
                       state: ENABLED
                       trigger:
-                        type: case_created
+                        type: CASE_CREATED
                     type: rule
             schema:
               $ref: "#/components/schemas/AutomationRuleCreateRequest"
@@ -127221,12 +127221,12 @@ paths:
                         action:
                           data:
                             handle: workflow-handle-123
-                          type: execute_workflow
+                          type: EXECUTE_WORKFLOW
                         created_at: "2024-01-01T00:00:00.000Z"
                         name: Auto-assign workflow
                         state: ENABLED
                         trigger:
-                          type: case_created
+                          type: CASE_CREATED
                       id: e6773723-fe58-49ff-9975-dff00f14e28d
                       type: rule
               schema:
@@ -127306,12 +127306,12 @@ paths:
                         action:
                           data:
                             handle: workflow-handle-123
-                          type: execute_workflow
+                          type: EXECUTE_WORKFLOW
                         created_at: "2024-01-01T00:00:00.000Z"
                         name: Auto-assign workflow
                         state: ENABLED
                         trigger:
-                          type: case_created
+                          type: CASE_CREATED
                       id: e6773723-fe58-49ff-9975-dff00f14e28d
                       type: rule
               schema:
@@ -127359,11 +127359,11 @@ paths:
                       action:
                         data:
                           handle: workflow-handle-123
-                        type: execute_workflow
+                        type: EXECUTE_WORKFLOW
                       name: Auto-assign workflow
                       state: ENABLED
                       trigger:
-                        type: case_created
+                        type: CASE_CREATED
                     type: rule
             schema:
               $ref: "#/components/schemas/AutomationRuleUpdateRequest"
@@ -127381,12 +127381,12 @@ paths:
                         action:
                           data:
                             handle: workflow-handle-123
-                          type: execute_workflow
+                          type: EXECUTE_WORKFLOW
                         created_at: "2024-01-01T00:00:00.000Z"
                         name: Auto-assign workflow
                         state: ENABLED
                         trigger:
-                          type: case_created
+                          type: CASE_CREATED
                       id: e6773723-fe58-49ff-9975-dff00f14e28d
                       type: rule
               schema:
@@ -127436,12 +127436,12 @@ paths:
                         action:
                           data:
                             handle: workflow-handle-123
-                          type: execute_workflow
+                          type: EXECUTE_WORKFLOW
                         created_at: "2024-01-01T00:00:00.000Z"
                         name: Auto-assign workflow
                         state: DISABLED
                         trigger:
-                          type: case_created
+                          type: CASE_CREATED
                       id: e6773723-fe58-49ff-9975-dff00f14e28d
                       type: rule
               schema:
@@ -127491,12 +127491,12 @@ paths:
                         action:
                           data:
                             handle: workflow-handle-123
-                          type: execute_workflow
+                          type: EXECUTE_WORKFLOW
                         created_at: "2024-01-01T00:00:00.000Z"
                         name: Auto-assign workflow
                         state: ENABLED
                         trigger:
-                          type: case_created
+                          type: CASE_CREATED
                       id: e6773723-fe58-49ff-9975-dff00f14e28d
                       type: rule
               schema:
