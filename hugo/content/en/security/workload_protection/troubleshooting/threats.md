@@ -39,8 +39,6 @@ Runtime self test: OK
 
 You can now see events coming from the `runtime-security-agent` in the {{< ui >}}Log Explorer{{< /ui >}}.
 
-{{< img src="security/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
-
 ## Compatibility with custom Kubernetes network plugins
 
 The network based detections of Workload Protection rely on the traffic control sub-system of the Linux kernel. This sub-system is known to introduce race conditions if multiple vendors try to insert, replace, or delete filters on the "clsact" ingress qdisc. Follow the checklist below to ensure that Workload Protection is properly configured:

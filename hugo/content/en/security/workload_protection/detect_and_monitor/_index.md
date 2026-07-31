@@ -16,7 +16,7 @@ Workload Protection processes multiple feeds to detect threats, evaluate your ru
 
 Workload Protection is built on top of the Datadog Agent, which continuously collects runtime telemetry from your workloads. Depending on your environment, this telemetry is collected using eBPF, ptrace, or a Windows driver. Agent rules determine which security-relevant events are streamed to Datadog for centralized analysis. After they are ingested, these events are processed by backend detection and finding rules, which analyze the data to generate detailed and prioritized Signals or Findings.
 
-{{< img src="security/workload_protection/workload_protection_detection_architecture.png" alt="Workload Protection detection architecture overview" width="100%">}}
+{{< img src="security/workload_protection/detect_and_monitor/threat_detection_pipeline_2.png" alt="Workload Protection detection architecture overview" width="100%">}}
 
 Workload Protection uses the following pipeline to protect your workloads:
 

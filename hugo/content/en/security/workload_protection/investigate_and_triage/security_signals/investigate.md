@@ -18,6 +18,8 @@ The **What Happened** section gives you a summary of the current signal:
 
 The **Investigation** tab displays an interactive graph that maps processes, resources, and runtime events involved in the signal. The investigation graph helps you see how an attack unfolded step by step.
 
+{{< img src="security/workload_protection/investigate_and_triage/security_signals/signal_investigation_graph.png" alt="Investigation graph showing an attack chain from attacker to compromised container, with correlated processes and suspicious actions" width="100%">}}
+
 From the graph, you can pivot to other telemetry sources, such as Code Security or Infrastructure Monitoring, to validate code vulnerabilities or get more information about the specific resource.
 
 ### Correlated events

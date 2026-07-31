@@ -31,8 +31,6 @@ Browse and review finding rules deployed to your organization in the Workload Pr
 
 To reduce noise for expected configurations, use a findings automation to mute a rule without disabling it. See [Findings automation][7].
 
-{{< img src="security/workload_protection/default_finding_rule.png" alt="Default finding rule with read-only fields" width="100%">}}
-
 ## Create a custom finding rule
 
 Custom finding rules follow the same creation process as [detection rules][3], with one key difference: they target a specific resource type—host or container—rather than detecting a point-in-time event.
@@ -48,7 +46,7 @@ Select the type of resource the finding rule evaluates:
 - **Host**: The rule applies to hosts. Workload Protection automatically prepends `-@container.id:*` to your query to exclude container events.
 - **Container**: The rule applies to containers. Workload Protection automatically prepends `@container.id:*` to your query to include only container events.
 
-{{< img src="security/workload_protection/custom_rule_resource_type.png" alt="Resource type selector in the finding rule editor showing Host and Container options" width="100%">}}
+{{< img src="security/workload_protection/detect_and_monitor/finding_rules_editor.png" alt="Finding rule editor showing the Host and Container resource type selector and search query preview" width="100%">}}
 
 Define the query that selects which [Agent events][1] the rule evaluates. The search query determines which events are considered when deciding whether a resource is failing the rule.
 
