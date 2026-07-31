@@ -12,7 +12,7 @@ As a Datadog resell or managed service provider (MSP) partner, use an **Admin Or
 
 {{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations" style="width:100%;" >}}
 
-Customer organizations link to an Admin Org automatically, based on the active Datadog contract between the partner and the customer. After linking, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites the customer uses (EU1, US1, US3, US5, AP1). An Admin Org itself must be created in the US1 site.
+A customer organization connects to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites the customer uses (EU1, US1, US3, US5, AP1). An Admin Org itself must be created in the US1 site.
 
 ## Getting started
 

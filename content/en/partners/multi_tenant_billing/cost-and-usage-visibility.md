@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Customer organizations link to your Admin Org automatically, based on their active contract with you, as long as the contract correctly references your partnership. A link is removed automatically if the underlying contract expires. After linking, a customer's usage and cost data becomes visible from your Admin Org, across all Datadog sites the customer uses.
+A customer organization connects to the partner Admin Org automatically when its contract includes the partnership and is active. The connection is removed automatically if the contract expires. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses.
 
 ## View cost and usage data
 

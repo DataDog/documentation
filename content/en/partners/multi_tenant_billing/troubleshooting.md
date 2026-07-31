@@ -1,6 +1,6 @@
 ---
 title: Troubleshooting
-description: "Common issues partners encounter with Admin Org, Trial Org provisioning, and customer org linking."
+description: "Common issues partners encounter with Admin Org, Trial Org provisioning, and customer org connections."
 ---
 
 ## Trial Org creation fails or returns an error
@@ -9,7 +9,7 @@ Submit the {{< ui >}}Trial Org Provisioning{{< /ui >}} form again. If the error 
 
 ## A customer org isn't appearing under my Admin Org
 
-Customer orgs link to your Admin Org automatically, based on an active contract that references your partnership. If a customer's org is missing:
+A customer org connects to the partner Admin Org automatically when its contract includes the partnership and is active. If a customer's org is missing:
 
 - Confirm the customer has an active contract with Datadog.
 - Confirm the contract correctly references your partnership.
