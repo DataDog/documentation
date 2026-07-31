@@ -156,11 +156,9 @@ The table below summarizes the Azure and Microsoft Sentinel information you need
 
 ## Setup
 
-Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Microsoft Sentinel client secret and Data Collection Endpoint. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Set up the Microsoft Sentinel destination when you [set up a pipeline][10]. You can set up a pipeline in the [UI][1], using the [API][11], or with [Terraform][12]. The steps in this section are configured in the UI.
 
 After you select the Microsoft Sentinel destination in the pipeline UI:
 
@@ -170,6 +168,8 @@ After you select the Microsoft Sentinel destination in the pipeline UI:
 1. Enter the directory ID for your tenant, such as `72f988bf-86f1-41af-91ab-2d7cd011db47`. This is the Azure AD tenant ID.
 1. Enter the full table name to which you are sending logs. An example table name: `Custom-MyOPWLogs_CL`.
 1. Enter the Data Collection Rule (DCR) immutable ID, such as `dcr-000a00a000a00000a000000aa000a0aa`.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional buffering
 
