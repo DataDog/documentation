@@ -32,7 +32,7 @@ You can configure three types of monthly limits:
 ## How limits are applied
 
 - When multiple limits are configured, the most restrictive applicable limit applies to a user.
-- If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the org-wide limit.
+- If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the organization-wide limit.
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
 - When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, or Bits Agent Builder, and a banner shows the reset date.
 
@@ -44,7 +44,7 @@ You can configure three types of monthly limits:
 | 2,000 AI Credits | 200 AI Credits per user | 20 | 200 × 20 = 4,000 AI Credits<sup>*</sup> | 2,000 AI Credits | Each user can use up to 200 AI Credits until the organization-wide limit of 2,000 AI Credits is reached. |
 | Not set | 200 AI Credits per user | 20 | 200 × 20 = 4,000 AI Credits | 4,000 AI Credits | Each user can use up to 200 AI Credits without other restrictions. |
 
-<sup>*</sup> A configured org limit acts as the ceiling for the account, regardless of the sum of hypothetical per-user limits.
+<sup>*</sup> A configured organization limit acts as the ceiling for the organization, regardless of the sum of hypothetical per-user limits.
 
 ## Usage attribution
 
@@ -53,8 +53,8 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 | Product | Attribution |
 |---|---|
 | [Bits Chat][1] | All Bits Chat usage rolls up to the email address of the user interacting with Bits Chat. |
-| [Bits Investigation][2] | Manually started investigations roll up to the user email that initiated the action.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
-| [Bits Code][3] | All Bits Code usage rolls up to the user email interacting with Bits Code. |
+| [Bits Investigation][2] | Manually started investigations roll up to the email address of the user who initiated the action.<br>Automatically triggered investigations (for example, from a monitor firing) roll up to **Autonomous Agents**. |
+| [Bits Code][3] | All Bits Code usage rolls up to the email address of the user interacting with Bits Code. |
 | [Bits Agent Builder][4] | Agent runs for workflows roll up to the email address of the user who created the workflow.<br>Agent runs for workflows created by service accounts roll up to **Autonomous Agents**. |
 
 [1]: /bits_ai/bits_chat/
