@@ -33,17 +33,16 @@ You can configure three types of monthly limits:
 
 - When multiple limits are configured, the most restrictive applicable limit applies to a user.
 - If a user has both a default per-user limit and an override configured, the higher of the two applies, and the user's usage is still subject to the org-wide limit.
-- A configured org-wide limit acts as the ceiling for the organization, regardless of the sum of per-user limits.
 - Raising a limit unblocks users who reached the previous limit. Lowering a limit blocks users whose usage already exceeds the new value.
 - When a user or the organization reaches a limit, affected users can't use Bits Chat, Bits Investigation, Bits Code, or Bits Agent Builder, and a banner shows the reset date.
 
 ### Examples
 
-| Organization limit | Per-user limit | Users | Maximum hypothetical usage | Maximum billable Credits | Result |
+| Organization limit | Per-user limit | Users | Maximum hypothetical usage | Maximum billable AI Credits | Result |
 |---|---|---|---|---|---|
-| 2,000 Credits | 50 Credits per user | 20 | 50 × 20 = 1,000 Credits | 1,000 Credits | Each user can use up to 50 AI Credits without other restrictions. |
-| 2,000 Credits | 200 Credits per user | 20 | 200 × 20 = 4,000 Credits<sup>*</sup> | 2,000 Credits | Each user can use up to 200 AI Credits until the organization-wide limit of 2,000 Credits is reached. |
-| Not set | 200 Credits per user | 20 | 200 × 20 = 4,000 Credits | 4,000 Credits | Each user can use up to 200 AI Credits without other restrictions. |
+| 2,000 AI Credits | 50 AI Credits per user | 20 | 50 × 20 = 1,000 AI Credits | 1,000 AI Credits | Each user can use up to 50 AI Credits without other restrictions. |
+| 2,000 AI Credits | 200 AI Credits per user | 20 | 200 × 20 = 4,000 AI Credits<sup>*</sup> | 2,000 AI Credits | Each user can use up to 200 AI Credits until the organization-wide limit of 2,000 AI Credits is reached. |
+| Not set | 200 AI Credits per user | 20 | 200 × 20 = 4,000 AI Credits | 4,000 AI Credits | Each user can use up to 200 AI Credits without other restrictions. |
 
 <sup>*</sup> A configured org limit acts as the ceiling for the account, regardless of the sum of hypothetical per-user limits.
 
@@ -63,3 +62,4 @@ Attribution determines whose limit applies to a given unit of AI usage, and who 
 [3]: /bits_ai/bits_code/
 [4]: /actions/agents/
 [5]: https://app.datadoghq.com/billing/ai-credits
+[6]: /account_management/rbac/permissions/
