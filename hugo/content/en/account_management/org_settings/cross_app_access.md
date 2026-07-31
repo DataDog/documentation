@@ -103,7 +103,7 @@ curl -X PUT "{{< region-param key="dd_api" >}}/api/v2/login/org_configs/mcp_cros
 The issuer URL must meet all of the following, or the request returns `400`:
 
 - Use `https`.
-- Use a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not.
+- Use a subdomain of `.okta.com`, `.oktapreview.com`, or `.okta-emea.com`. Datadog rejects the apex domain, so `example.okta.com` works and `okta.com` does not work.
 
 Sending an empty string unsets the issuer and stops Datadog from accepting tokens.
 
