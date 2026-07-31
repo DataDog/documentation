@@ -79,19 +79,15 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 
 A team that is managed externally from an identity provider displays a **Managed** badge in its header.
 
-### Subteams (hierarchical teams)
 
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-warning">
-This feature is not supported for your selected Datadog site ({{< region-param key="dd_site_name" >}}).
-</div>
-{{< /site-region >}}
+## Team hierarchies
 
-With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
-    {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
+Build a Teams map to visualize team hierarchies that let you nest teams within each other (subteams) to mirror your company's actual structure, giving you a more complete and accurate ownership model instead of a flat, disconnected list of teams. A team's related teams, parent teams, sister teams, and subteams, appear in its Teams Page, in the Hierarchy section of its Info tab. To explore the full map of all teams in your organization, visit the [Teams Map][7] in the Datadog Internal Developer Portal (IDP).
 
-A team's subteams appear in the **Hierarchy** section of its Info tab.
-To automate subteam management based on your organization's hierarchical structure, use the [Teams APIs][5].
+With hierarchies defined, you can:
+
+- **Escalate issues**: When an issue needs to go beyond the owning team, hierarchy makes it easy to route it up to the parent team for broader visibility or faster resolution, without having to manually track down who's next in the chain
+- **Roll-up filtering**: select a parent team to instantly see all data connected to any of its subteams, without manually selecting each one. Useful for director/VP-level views where you care about an entire org's footprint, not just one team's.
 
 ## Manage teams through an identity provider
 
@@ -123,3 +119,4 @@ To enforce a strict membership model, configure your default team settings so {{
 [3]: /account_management/scim/
 [5]: /api/latest/teams/#add-a-member-team
 [6]: /incident_response/on-call/
+[7]: https://app.datadoghq.com/software?env=%2A&fromUser=true&refresh_mode=sliding&selectedComponent=team&start=1785444148521&end=1785447748521
