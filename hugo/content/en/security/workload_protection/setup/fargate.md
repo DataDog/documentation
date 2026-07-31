@@ -15,7 +15,7 @@ Use the following instructions to enable Workload Protection.
 - Access to AWS Management Console
 - AWS Fargate ECS or EKS workloads
 
-<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring with Cloud Security.</div>
+<div class="alert alert-info">For additional performance and reliability insights, Datadog recommends enabling Infrastructure Monitoring.</div>
 
 ## Images
 

@@ -25,7 +25,7 @@ Workload Protection relies on the Datadog Agent to monitor your workloads and co
 
 Workload Protection offers 3 different flavors depending on your environment and operating system:
 - On **Linux**, install **the eBPF agent**. It offers the best performance and feature support.
-- On **AWS Fargate**, install **the eBPF-less agent**. Fargate does not provide eBPF access, so this agent uses ptrace instead. It covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring, network monitoring).
+- On **AWS Fargate**, install **the eBPF-less agent**. Fargate does not provide eBPF access, so this agent uses ptrace instead. It covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring).
 - On **Windows**, the Workload Protection agent installs a Windows driver to collect events and telemetry.
 
 #### Supported Linux flavors

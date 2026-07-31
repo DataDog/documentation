@@ -16,7 +16,7 @@ This page explains how out-of-the-box (OOTB) detection rules work and how to cre
 
 ## OOTB detection rules {#ootb-detection-rules}
 
-Workload Protection includes OOTB **threat detection** rules maintained by Datadog. They combine telemetry collected through Agent rules with backend expressions to raise security signals when activity looks suspicious. Browse the full catalog in [default detection rules][3], or review and tune them in the Workload Protection [detection rules][4] list in Datadog.
+Workload Protection includes OOTB **detection rules** maintained by Datadog. They combine telemetry collected through Agent rules with backend expressions to raise security signals when activity looks suspicious. Browse the full catalog in [default detection rules][3], or review and tune them in the Workload Protection [detection rules][4] list in Datadog.
 
 ## Create a custom detection rule
 
@@ -39,7 +39,7 @@ Define the query that selects which [Agent events][1] the rule evaluates. The se
 
 You can:
 
-- Filter on **specific fields** in Agent events to refine the query and make the detection more precise. For example, filter on `@process.executable.path`, `@file.path`, or `@agent.rule_id`. Detection rules can query any field from the backend event schema, which includes all Agent event fields plus additional enrichment such as infrastructure context, process ancestry, and threat intelligence. See [Linux backend syntax][13] and [Windows backend syntax][14] for the full set of available fields.
+- Filter on **specific fields** in Agent events to refine the query and make the detection more precise. For example, filter on `@process.executable.path`, `@file.path`, or `@agent.rule_id`. Detection rules can query any field from the backend event schema. See [Linux backend syntax][13] and [Windows backend syntax][14] for the full set of available fields.
 - Combine multiple conditions to scope the rule to a subset of your infrastructure or workloads.
 
 For **threshold** rules, also define the **lookback window**—the period over which Datadog counts matching events before comparing the count to your rule conditions.
@@ -80,10 +80,10 @@ For more information on suppressions across detection rules, see [Suppressions][
 
 For how default Agent rules are packaged in policies and deployed, see the [Agent rules][10] overview and [Policy management][11].
 
-You can define a matching Agent rule and threat detection rule in one of these ways:
+You can define a matching Agent rule and detection rule in one of these ways:
 
-- **Assisted rule creator:** In Datadog, start a custom Workload Protection [detection rule][4] and use the wizard to configure both the Agent expression and the backend threat detection logic.
-- **Manual rule creator:** From [Agent Configuration][12], open or create a policy and choose **Manual rule creator** to author the Agent rule first, then add a threat detection rule that references it. For UI steps and deployment, see [Policy management][11].
+- **Assisted rule creator:** In Datadog, start a custom Workload Protection [detection rule][4] and use the wizard to configure both the Agent expression and the backend detection rule logic.
+- **Manual rule creator:** From [Agent Configuration][12], open or create a policy and choose **Manual rule creator** to author the Agent rule first, then add a detection rule that references it. For UI steps and deployment, see [Policy management][11].
 
 [1]: /security/workload_protection/investigate_and_triage/agent_events
 [2]: /security/workload_protection/investigate_and_triage/security_signals
