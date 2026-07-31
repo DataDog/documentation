@@ -7,17 +7,17 @@ disable_toc: false
 
 After the Agent forwards [Agent events][1] to Datadog, backend rules analyze that telemetry to produce security outcomes. Workload Protection provides two types of backend rules:
 
-- **[Detection rules][2]** detect threats and generate [security signals][3] when suspicious activity matches your criteria. They focus on point-in-time events—for example, a reverse shell or credential access attempt.
-- **[Finding rules][4]** evaluate runtime security posture and generate [findings][5] for resources that fail a policy. They track ongoing bad practices and misconfigurations on a host or container—for example, package manager usage in a production container.
+- **[Detection rules][2]** detect threats and generate [security signals][3] when suspicious activity matches your criteria. They surface real runtime security threats—for example, a reverse shell or credential access attempt.
+- **[Finding rules][4]** evaluate runtime security posture and generate [findings][5] with recommendations for resources that fail a policy. They track ongoing bad practices and misconfigurations on a host or container—for example, package manager usage in a production container.
 
-Both rule types query the same **backend event schema**. Each event includes all fields collected by the Agent, plus additional enrichment such as infrastructure context, process ancestry, and threat intelligence. When you write a search query for a detection or finding rule, you can filter on any field in this schema. See [Linux backend syntax][6] and [Windows backend syntax][7] for the full set of available fields.
+Both rule types query the same **backend event schema**. Each event includes all fields collected by the Agent, plus additional enrichment such as infrastructure context and threat intelligence. When you write a search query for a detection or finding rule, you can filter on any field in this schema. See [Linux backend syntax][6] and [Windows backend syntax][7] for the full set of available fields.
 
 ## Detection rules versus finding rules
 
 | | Detection rules | Finding rules |
 |---|---|---|
 | **Output** | Security signal | Finding |
-| **Represents** | A point-in-time threat event | A resource failing a security policy |
+| **Represents** | Real runtime security threats | Posture issues and security recommendations |
 | **Use case** | Threat detection and incident response | Runtime posture and hardening |
 
 For example, `Sudoers Policy File Modification Detection` flags modifications to `/etc/sudoers` and files in `/etc/sudoers.d/`. Modifying those files is a bad practice, but it can be part of a legitimate process. Treating it as a detection rule generates excessive noise. As a finding rule, it tracks which resources have this configuration without triggering a signal for every file write.

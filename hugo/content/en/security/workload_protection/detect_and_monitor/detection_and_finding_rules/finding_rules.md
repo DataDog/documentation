@@ -19,7 +19,7 @@ further_reading:
 
 Finding rules describe the backend logic used to evaluate your runtime security posture by analyzing [Agent events][1]. When a finding rule matches, Workload Protection generates a [finding][2] for the affected resource.
 
-Unlike [detection rules][3], which surface point-in-time threats as security signals, finding rules track ongoing bad practices and misconfigurations. A finding represents a resource (a host or container) that is actively failing a security policy, not a single suspicious event.
+Unlike [detection rules][3], which surface real runtime security threats, finding rules track ongoing bad practices and misconfigurations. A finding represents a resource (a host or container) that is actively failing a security policy, not a single suspicious activity.
 
 Finding rules use existing Agent events to surface practical security recommendations such as package manager usage in containers, IMDS access patterns, or unnecessary privilege configurations. This helps you address real-world risks that are not direct threats but represent risky practices in production environments.
 
