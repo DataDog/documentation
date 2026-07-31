@@ -45,7 +45,7 @@ This section covers three categories of variables:
 : Information about the request
 
 `synthetics.attributes.result.request.url`
-: The URL for the request (available for most test sub-types)
+: The URL for the request
 
 `synthetics.attributes.result.request.method`
 : The HTTP method
