@@ -374,7 +374,7 @@ Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kube
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [112]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 [113]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.0
-[114]: https://github.com/DataDog/opentelemetry-examples/tree/main/guides/kubernetes/configuration/kube-stack
+[114]: https://github.com/DataDog/opentelemetry-examples/blob/main/guides/kubernetes/configuration/opentelemetry-kube-stack/values.yaml
 
 {{% /tab %}}
 {{< /tabs >}}
