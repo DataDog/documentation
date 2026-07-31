@@ -88,14 +88,14 @@ In this example, the coverage data is available under both the `unit-tests` and 
 
 ### Add flags to automatically uploaded reports
 
-[Automatic report uploads][4] are available in several Test Optimization libraries. Of those libraries, only the following stable versions support `DD_CODE_COVERAGE_FLAGS`:
+[Automatic report uploads][4] are available in several Test Optimization libraries. Of those libraries, only the following versions support `DD_CODE_COVERAGE_FLAGS`:
 
 | Library | First version with `DD_CODE_COVERAGE_FLAGS` |
 |---|---|
 | JavaScript `dd-trace` 5.x | `5.116.0` |
 | JavaScript `dd-trace` 6.x | `6.5.0` |
 
-Stable releases of the Ruby, Python, and Java libraries do not support `DD_CODE_COVERAGE_FLAGS`. To add flags to reports from those libraries, upload the reports manually with `datadog-ci coverage upload --flags` instead.
+Ruby, Python, and Java libraries do not support `DD_CODE_COVERAGE_FLAGS`. To add flags to reports from those libraries, upload the reports manually with `datadog-ci coverage upload --flags` instead.
 
 For a supported version, set `DD_CODE_COVERAGE_FLAGS` to a comma-separated list of flags:
 
