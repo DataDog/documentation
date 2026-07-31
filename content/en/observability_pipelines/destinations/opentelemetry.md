@@ -13,8 +13,6 @@ products:
 
 Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or other OTLP-compatible endpoint.
 
-**Note**: If you use the OpenTelemetry destination for your pipeline, you **must** use the OpenTelemetry source because the Worker cannot convert events to OpenTelemetry Protocol (OTLP) format.
-
 ## Set up destination
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the HTTP/S Client URI and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
