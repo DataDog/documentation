@@ -46,8 +46,6 @@ Hover over each detection for options:
 
 Controls are organized by usage concern: security, cost optimization, and data hygiene.
 
-<div class="alert alert-info">The controls below are generated from the Governance Console control definitions, so this list always reflects the controls that are generally available. Controls still in development are not listed.</div>
-
 {{% collapse-content title="Security" level="h3" expanded=false id="security" %}}
 
 Security controls detect and correct configuration that could lead to increased risk of a security incident in your Datadog account.
