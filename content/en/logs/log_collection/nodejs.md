@@ -26,15 +26,22 @@ further_reading:
 
 ## Configure your logger
 
-To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use the [Winston][1] logging library to log from your Node.js application.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use a Node.js logging library, such as [Winston][1], [Bunyan][15], or [Pino][16], to log from your Node.js application.
 
-Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
+### Log to a file
+
+In your bootstrap file or in your code, declare the logger in the following way:
+
+{{< tabs >}}
+{{% tab "Winston 3.0" %}}
+
+Winston is available through [NPM][2]. Add the dependency to your code:
 
 ```text
 npm install --save winston
 ```
 
-`package.json` is updated with the corresponding dependencies:
+`package.json` is updated with the corresponding dependency:
 
 ```js
 {
@@ -48,13 +55,6 @@ npm install --save winston
   }
 }
 ```
-
-### Log to a file
-
-In your bootstrap file or in your code, declare the logger in the following way:
-
-{{< tabs >}}
-{{% tab "Winston 3.0" %}}
 
 ```js
 
@@ -76,8 +76,21 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
+Check the content of the `<FILE_NAME>.log` file to confirm that Winston is logging in JSON:
+
+```json
+{"level":"info","message":"Hello simple log!","timestamp":"2015-04-23T16:52:05.337Z"}
+{"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
+```
+
 {{% /tab %}}
 {{% tab "Winston 2.0" %}}
+
+Winston is available through [NPM][2]. Add the dependency to your code:
+
+```text
+npm install --save winston
+```
 
 ```js
 var winston = require('winston');
@@ -98,9 +111,6 @@ logger.log('info', 'Hello simple log!');
 logger.info('Hello log with metas',{color: 'blue' });
 ```
 
-{{% /tab %}}
-{{< /tabs >}}
-
 Check the content of the `<FILE_NAME>.log` file to confirm that Winston is logging in JSON:
 
 ```json
@@ -108,9 +118,72 @@ Check the content of the `<FILE_NAME>.log` file to confirm that Winston is loggi
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+{{% /tab %}}
+{{% tab "Bunyan" %}}
+
+Bunyan is available through [NPM][2]. Add the dependency to your code:
+
+```text
+npm install --save bunyan
+```
+
+```js
+const bunyan = require('bunyan');
+
+const logger = bunyan.createLogger({
+  name: '<SERVICE_NAME>',
+  streams: [
+    {
+      level: 'info',
+      path: `${appRoot}/logs/<FILE_NAME>.log`,
+    },
+  ],
+});
+
+// Example logs
+logger.info('Hello simple log!');
+logger.info({ color: 'blue' }, 'Hello log with metas');
+```
+
+Bunyan logs in JSON by default. Check the content of the `<FILE_NAME>.log` file to confirm:
+
+```json
+{"name":"<SERVICE_NAME>","hostname":"my-host","pid":1234,"level":30,"msg":"Hello simple log!","time":"2015-04-23T16:52:05.337Z","v":0}
+{"name":"<SERVICE_NAME>","hostname":"my-host","pid":1234,"level":30,"color":"blue","msg":"Hello log with metas","time":"2015-04-23T16:52:05.339Z","v":0}
+```
+
+{{% /tab %}}
+{{% tab "Pino" %}}
+
+Pino is available through [NPM][2]. Add the dependency to your code:
+
+```text
+npm install --save pino
+```
+
+```js
+const pino = require('pino');
+
+const logger = pino(pino.destination(`${appRoot}/logs/<FILE_NAME>.log`));
+
+// Example logs
+logger.info('Hello simple log!');
+logger.info({ color: 'blue' }, 'Hello log with metas');
+```
+
+Pino logs in JSON by default. Check the content of the `<FILE_NAME>.log` file to confirm:
+
+```json
+{"level":30,"time":1429807925337,"pid":1234,"hostname":"my-host","msg":"Hello simple log!"}
+{"level":30,"time":1429807925339,"pid":1234,"hostname":"my-host","color":"blue","msg":"Hello log with metas"}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Configure your Datadog Agent
 
-Once [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send new logs to Datadog.
+After [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send new logs to Datadog.
 
 1. Create a `nodejs.d/` folder in the `conf.d/` [Agent configuration directory][8].
 2. Create a `conf.yaml` file in `nodejs.d/` with the following content:
@@ -137,16 +210,16 @@ If logs are in JSON format, Datadog automatically [parses the log messages][11] 
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Node.js instructions][3].
+If APM is enabled for this application, connect your logs and traces by [following the APM Node.js instructions][3]. This automatically adds trace IDs, span IDs, `env`, `service`, and `version` to your logs.
 
 **Note**: If the Datadog SDK injects `service` into your logs, it overrides the value set in the Agent configuration.
 
 ## Agentless logging
 
-You can stream your logs from your application to Datadog without installing an Agent on your host. However, it is recommended that you use an Agent to forward your logs as it provides a native connection management.
+You can stream your logs from your application to Datadog without installing an Agent on your host. However, Datadog recommends you use an Agent to forward your logs as it provides a native connection management.
 
 Use the [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
+
 In your bootstrap file or in your code, declare the logger in the following way:
 
 ```javascript
@@ -176,6 +249,7 @@ logger.info('Hello log with metas',{color: 'blue' });
 
 **Note:** You can also use the community-supported [Datadog Transport][13].
 
+Bunyan and Pino don't include a built-in HTTP transport. To stream logs from these libraries directly to Datadog without an Agent, use a community-supported package or logging layer that adds Datadog HTTP support.
 
 ## Troubleshooting
 
@@ -208,3 +282,5 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [12]: /logs/explorer/#overview
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 [14]: /glossary/#tail
+[15]: https://github.com/trentm/node-bunyan
+[16]: https://github.com/pinojs/pino
