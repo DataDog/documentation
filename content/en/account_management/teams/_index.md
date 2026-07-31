@@ -65,7 +65,7 @@ If you have teams with existing members, picking the SAML strict option override
 
 To build your Teams Map, you must define hierarchical relationships between teams. This is done in a few ways:
 
-1. **Github Teams**: If you used GitHub to set up your Datadog Teams, and you have GitHub Teams Hierarchies set up, those team links are automatically synced to Datadog during provisioning and displayed in your Teams Map
+1. **GitHub Teams**: If you used GitHub to set up your Datadog Teams, and you have GitHub Teams Hierarchies set up, those team links are automatically synced to Datadog during provisioning and displayed in your Teams Map
 1. [Teams API][39]
 1. **Terraform**
 1. Directly in the **Datadog UI**
