@@ -5,6 +5,9 @@ further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn about RUM'
+- link: "https://www.datadoghq.com/blog/simplify-micro-frontend-observability-with-datadog-rum/"
+  tag: "Blog"
+  text: "Simplify micro-frontend observability with Datadog RUM"
 ---
 
 ## Overview
