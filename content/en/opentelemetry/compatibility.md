@@ -38,7 +38,8 @@ The following table shows feature compatibility across different setups:
 | [Database Monitoring][14] (DBM) | {{< X >}} | {{< X >}} |  |  |
 | [Infrastructure Host List][30] | {{< X >}} | {{< X >}} | {{< X >}} |  |
 | [Cloud Network Monitoring][21] (CNM) | {{< X >}} | {{< X >}} | | |
-| [Live Container Monitoring/Kubernetes Explorer][20] | {{< X >}} | {{< X >}} | {{< tooltip text="Preview" tooltip="Kubernetes Explorer support for the OSS Collector is in Preview. Contact your account representative to request access." >}} | |
+| [Kubernetes Monitoring][20] | {{< X >}} | {{< X >}} | {{< X >}} | |
+| [Live Container Monitoring][46] | {{< X >}} | {{< X >}} | | |
 | [Live Processes][16] | {{< X >}} | {{< X >}} | | |
 | [Universal Service Monitoring][17] (USM) | {{< X >}} | {{< X >}} | | |
 | [App and API Protection][11] (AAP) | {{< X >}} | | | |
@@ -135,7 +136,7 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [17]: /universal_service_monitoring/
 [18]: /security/cloud_siem/
 [19]: /opentelemetry/correlate/
-[20]: /containers/
+[20]: /containers/monitoring/kubernetes_explorer/
 [21]: /network_monitoring/performance/
 [22]: /opentelemetry/correlate/rum_and_traces/?tab=browserrum#opentelemetry-support
 [23]: /tracing/metrics/runtime_metrics/
@@ -161,3 +162,4 @@ When using Datadog and OpenTelemetry together, Datadog recommends the following 
 [43]: /opentelemetry/setup/ddot_collector/custom_components
 [44]: /opentelemetry/guide/instrument_unsupported_runtimes
 [45]: https://opentelemetry.io/community/
+[46]: /containers/

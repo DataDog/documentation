@@ -16,6 +16,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
     text: Manage metric volume and tags in your environment with Observability Pipelines
+  - link: "https://www.datadoghq.com/blog/metrics-natural-language-queries/"
+    tag: "Blog"
+    text: "Explore Datadog metrics with Natural Language Queries"
     
 ---
 
