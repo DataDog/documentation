@@ -32,7 +32,7 @@ The instrumenter must be deployed to every region and account where you want to 
 
 ## Setup
 
-1. On the [Serverless > AWS Lambda][3] page, select {{< ui >}}Settings{{< /ui >}}. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
+1. On the {{< ui >}}Serverless > AWS Lambda{{< /ui >}} page, select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
 
 1. On the {{< ui >}}Select AWS Region and Launch CloudFormation{{< /ui >}} modal:
    - Click {{< ui >}}Select API Key{{< /ui >}} to select the Datadog API key to use to send data to your AWS account.
@@ -112,7 +112,7 @@ If you see issues related to IAM roles, ensure that you have permission to creat
 
 [1]: /integrations/amazon_web_services
 [2]: https://app.datadoghq.com/integrations/amazon-web-services?panel=resource-collection
-[3]: https://app.datadoghq.com/functions?cloud=aws
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 [4]: /agent/remote_config/?tab=configurationyamlfile#setup
 [5]: https://console.aws.amazon.com/cloudformation/home#/stacks?filteringText=datadog-remote-instrument
 [6]: https://github.com/DataDog/serverless-remote-instrumentation/releases
