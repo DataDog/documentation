@@ -5,12 +5,12 @@ description: "Monitor usage metrics across all connected customer organizations 
 
 ## Overview
 
-Datadog produces two families of usage metrics:
+Datadog produces two kinds of usage metrics:
 
-- **Estimated Usage Metrics (EUM)**, in the `datadog.estimated_usage.*` namespace, update within minutes and provide a near real-time view of usage. EUM values are estimates and can differ from billable usage by roughly 10-20% on average, with larger variance for low-usage organizations. See [Estimated Usage Metrics][1] for the full metrics reference.
-- **Usage Metrics (UM)**, in the `datadog.usage.*` namespace, come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. UM is less immediate than EUM, but accurate enough for billing conversations.
+- **Estimated usage metrics**, in the `datadog.estimated_usage.*` namespace, update within minutes and provide a near real-time view of usage. Estimated usage metrics can differ from billable usage by roughly 10-20% on average, with larger variance for low-usage organizations. See [Estimated Usage Metrics][1] for the full metrics reference.
+- **Usage metrics**, in the `datadog.usage.*` namespace, come from the same metering and billing pipeline that produces the bill, so they track Plan & Usage closely. Usage metrics are less immediate than estimated usage metrics, but accurate enough for billing conversations.
 
-Use EUM to catch usage spikes early, and UM to report numbers that reconcile with the bill.
+Use estimated usage metrics to catch usage spikes early, and usage metrics to report numbers that reconcile with the bill.
 
 In an Admin Org, usage metrics from every connected customer organization roll up into one place, tagged by customer. This gives a single set of dashboards, monitors, and alerts across the entire book of business.
 
@@ -25,10 +25,10 @@ Rolled-up metrics carry two tags:
 
 When building a dashboard widget or monitor:
 
-- For EUM, select {{< ui >}}Metrics{{< /ui >}} as the source and use a `datadog.estimated_usage.*` metric.
-- For UM, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example Infra Hosts.
+- For estimated usage metrics, select {{< ui >}}Metrics{{< /ui >}} as the source and use a `datadog.estimated_usage.*` metric.
+- For usage metrics, select {{< ui >}}Usage{{< /ui >}} as the source and choose a usage type, for example Infra Hosts.
 
-| Product | EUM metric | UM metric |
+| Product | Estimated usage metric | Usage metric |
 |---|---|---|
 | Infrastructure hosts | `datadog.estimated_usage.hosts` | `datadog.usage.infra.hosts` |
 | APM hosts | `datadog.estimated_usage.apm_hosts` | `datadog.usage.apm.hosts` |
@@ -38,10 +38,10 @@ When building a dashboard widget or monitor:
 Scope a query to one customer with `child_org_name`, or break out every customer with `by {child_org_name}`:
 
 ```
-# EUM (Metrics source)
+# Estimated usage metric (Metrics source)
 sum:datadog.estimated_usage.hosts{*} by {child_org_name}
 
-# UM (Usage source)
+# Usage metric (Usage source)
 sum:datadog.usage.infra.hosts{*} by {child_org_name}
 ```
 
@@ -49,7 +49,7 @@ To match Plan & Usage totals, use a 1-hour rollup for host-style products and gr
 
 ## Enable usage metrics roll-up
 
-EUM is available in every connected customer organization by default. UM requires enabling per organization. Contact [partner-support@datadoghq.com][2] to enable UM roll-up for an Admin Org and its connected customer organizations.
+Estimated usage metrics are available in every connected customer organization by default. Usage metrics require enabling per organization. Contact [partner-support@datadoghq.com][2] to enable usage metrics roll-up for an Admin Org and its connected customer organizations.
 
 ## What's next
 
