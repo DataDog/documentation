@@ -76,6 +76,9 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
    ```yaml
    init_config:
+     ## To confirm a possible value of algorithms, see the constants described in the golang document.
+     ## https://pkg.go.dev/golang.org/x/crypto/ssh#pkg-constants
+     ##
      ## @param ciphers - list of strings - optional
      ## List of SSH encryption ciphers to use for the connection.
      ## If not specified, the SSH library will use its default ciphers.
