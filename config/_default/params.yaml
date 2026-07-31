@@ -311,6 +311,7 @@ unsupported_sites:
   application_security: [gov,gov2]
   application_security_override: [gov2] # docs (content/en/security/application_security and content/en/getting_started/security/application_security.md cascades) — AAP is in Preview on gov
   autocomplete_search: [gov,gov2]
+  bitbucket-source-code: [gov,gov2]
   azure-automated-log-forwarding: [gov,gov2]
   azure-devops-source-code: [gov, gov2]
   azure-private-link: [us,us5,eu,gov,gov2,ap1,ap2,uk1]

@@ -14,6 +14,9 @@ further_reading:
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session on creating effective monitors"
+  - link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
+    tag: "Learning Center"
+    text: "APM Monitors and Alerting"
   - link: "https://www.datadoghq.com/blog/monitoring-101-alerting/"
     tag: "Blog"
     text: "Monitoring 101: Alerting on what matters"
@@ -29,12 +32,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+    tag: "Blog"
+    text: "How to audit and clean up monitors effectively"
   - link: "https://app.datadoghq.com/release-notes?category=Alerting"
     tag: "Release Notes"
     text: "Check out the latest Datadog Alerting releases! (App login required)."
-  - link: "https://learn.datadoghq.com/courses/apm-monitors-and-alerting"
-    tag: "Learning Center"
-    text: "APM Monitors and Alerting"
 cascade:
     algolia:
         rank: 70

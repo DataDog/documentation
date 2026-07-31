@@ -17,6 +17,9 @@ further_reading:
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/"
+  tag: "Blog"
+  text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
 ---
 
 ## Overview
