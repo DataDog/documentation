@@ -8,11 +8,11 @@ cascade:
 
 ## Overview
 
-As a Datadog resell or managed service provider (MSP) partner, use an **Admin Org** to centrally manage cost and usage visibility, provision trial organizations, and monitor billing across the customer base. An Admin Org is separate from any customer organization, does not require its own contract, and operates under the Partner Plan.
+As a Datadog resell or managed service provider (MSP) partner, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and manage billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
 
 {{< img src="partners/multi_tenant_billing/admin_org_hierarchy.png" alt="An Admin Org connected to multiple customer organizations" style="width:100%;" >}}
 
-A customer organization connects to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites the customer uses (EU1, US1, US3, US5, AP1). An Admin Org itself must be created in the US1 site.
+A customer organization connects to an Admin Org automatically when its Datadog contract includes the partnership and is active. After connecting, a customer's usage and cost data is visible from the Admin Org, across all Datadog sites (for example, AP1, EU1, US1, US3, US5), except US1-FED, which requires its own Admin Org for regulatory purposes.
 
 ## Getting started
 
