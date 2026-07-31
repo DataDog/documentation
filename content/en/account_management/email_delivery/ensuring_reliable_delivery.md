@@ -18,22 +18,32 @@ Datadog sends email from several addresses and domains. Share this page with who
 
 ## Add Datadog to your trusted senders
 
-Datadog sends email from the following addresses and domains, all of which are owned by Datadog. Add them to your organization's list of trusted email senders:
+<div class="alert alert-warning">Allowed senders bypass spam and spoof filtering. Entries that also bypass sender authentication (SPF, DKIM, DMARC) create risk that an attacker can deliver email that would otherwise be filtered. Do not disable authentication checks for these entries. Monitor the exceptions you add.</div>
+
+If Datadog email is being filtered in your environment, add the senders below as trusted sources using the method that aligns with your organization's mail security policy.
+
+Add these as individual addresses:
 
 ```text
 noreply@datadoghq.com
-no-reply@datadoghq.com
-no-reply@dtdg.co
 alert@datadoghq.com
-*@admin.dtdg.co
-*@dtdg-trial.co
-*@dtdg.eu
-*@admin.dtdg.eu
-*@dtdg-trial.eu
-*@ddog-gov.com
+billing@datadoghq.com
+marketplace-subscriptions@datadoghq.com
 ```
 
-If you receive Datadog email from a sender that is not listed here, contact [Datadog Support][1].
+Add these as domains:
+
+```text
+dtdg.co
+dtdg.eu
+admin.dtdg.co
+dtdg-trial.co
+admin.dtdg.eu
+dtdg-trial.eu
+ddog-gov.com
+```
+
+**Note**: Datadog owns all of the above. This list may not be complete. If you receive Datadog email from a sender that is not listed here, contact [Datadog Support][1].
 
 ## Check your sender authentication
 
