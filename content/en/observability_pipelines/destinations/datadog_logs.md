@@ -60,8 +60,6 @@ Click {{< ui >}}Route to Multiple Organizations{{< /ui >}} to set up routing to 
 
 ## Secret defaults
 
-**Note**: If you entered identifiers for yours secrets and then choose to use environment variables, the environment variable is the identifier entered prepended with `DD_OP`. For example, if you entered `PASSWORD_1` for the a password identifier, the environment variable for the password is `DD_OP_PASSWORD_1`.
-
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
