@@ -58,7 +58,7 @@ When you add tags, Datadog displays how many agents the tags target as well the 
 
 ## Create a custom Agent rule {#create-a-custom-agent-rule}
 
-You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][21], you reference the custom Agent rule and add expression parameters. To combine Agent and detection rules in one flow, see [Create the custom Agent and detection rules together][23].
+You can create a custom Agent rule and deploy it as part of a custom policy. Later, when defining a custom [detection rule][21], you reference the custom Agent rule and add expression parameters.
 Custom Agent rules are deployed to the Agent in a custom policy separate from the default policies. The custom policy contains only custom Agent rules.
 
 1. Go to [Agent Configuration][6].
@@ -66,9 +66,8 @@ Custom Agent rules are deployed to the Agent in a custom policy separate from th
 3. With the policy open, in **Actions**, select **Manual rule creator** to open the Agent rule editor. The same editor is also available from the [Agent rules][24] page in Datadog. To use the **Assisted rule creator** wizard instead—which walks you through both the Agent rule and the threat detection rule—see [Create the custom Agent and detection rules together][23].
 4. Enter a **Name** and **Description** for the rule.
 5. In **Expression**, define the match using [Datadog Security Language (SECL)][16].
-6. For each policy that should include this rule, set the rule status: **Monitoring** or **Disabled**. If the rule supports enforcement, you can choose **Blocking** when [Automated response][12] is turned on and your user has the `security_monitoring_cws_agent_rules_actions` permission.
-7. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][25].
-8. Click **Create Agent Rule**. You are returned to the policy.
+6. (Optional) Add variables or actions that run when the rule matches an event. See [Variables and actions][25].
+7. Click **Create Agent Rule**. You are returned to the policy.
 
 After you create a custom Agent rule, the change is saved along with other pending rule updates. To apply the change to your environment, deploy the updated custom policy to the Agent.
 
@@ -159,7 +158,7 @@ To apply the changes, do **one** of the following:
 
 1. To disable an Agent rule, navigate to the [**Agent Configuration**][6] page and select the policy using the rule.
 2. In the policy, open the rule.
-3. Next to the rule's title, click **Monitoring**, and then select **Disable Rule**.
+3. Set the status to **Inactive**.
 4. Click **Save Changes**.
 
 Deleting a rule from [Rules configuration][24] removes it from **all policies** that included that rule.

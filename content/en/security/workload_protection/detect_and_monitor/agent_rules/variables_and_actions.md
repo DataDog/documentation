@@ -239,8 +239,8 @@ In addition to defining `network_filter` actions in Agent policy files, you can 
 
 {{< code-block lang="yaml" >}}
 rules:
-  - id: test_iso
-    expression: exec.file.name == "ls"
+  - id: block_malicious_container_network
+    expression: exec.container.id == "046f6a38c8b404a78fb9be56672d554ed5a326f4c568ffb137e16cf3e7e6be43"
     actions:
       - network_filter:
           filter: "dst net 10.0.0.0/8 or dst net 172.16.0.0/12 or dst net 192.168.0.0/16 or dst net 169.254.0.0/16 or dst net 127.0.0.0/8"

@@ -36,11 +36,11 @@ Datadog solves this problem by keeping the Agent lightweight with efficient rule
 
 ## Agent rules
 
-[Agent rules][1] define which system activity is sent to the Datadog backend for further analysis. The [Agent rules][1] page and its sub-pages help you:
-- Write custom agent rules
-- Deploy custom and default agent rules using [Policies][9]
-- Use variables to build complex detections based on state machines
-- Configure actions to collect additional telemetry (like file hashes)
+[Agent rules][1] define which system activity is sent to the Datadog backend for further analysis. The section covers:
+- [SecL guide][15] for writing custom agent rules with the SecL expression language
+- [Policy management][9] for deploying custom and default agent rules
+- [Variables and actions][16] for stateful detections and additional telemetry collection
+- [Linux expressions][17] and [Windows expressions][18] for the full set of queryable SecL fields
 
 ## Detection and finding rules
 
@@ -76,3 +76,7 @@ Workload Protection provides targeted, Datadog-crafted [Content Packs][10] built
 [12]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/finding_rules
 [13]: /security/workload_protection/backend_linux
 [14]: /security/workload_protection/backend_windows
+[15]: /security/workload_protection/detect_and_monitor/agent_rules/secl_guide
+[16]: /security/workload_protection/detect_and_monitor/agent_rules/variables_and_actions
+[17]: /security/workload_protection/linux_expressions
+[18]: /security/workload_protection/windows_expressions
