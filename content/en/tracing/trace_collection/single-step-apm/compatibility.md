@@ -1,9 +1,10 @@
 ---
 title: Compatibility
+description: "Review the supported operating systems, deployment environments, language runtimes, and limitations for Datadog Single Step Instrumentation."
 aliases:
 - /tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/
 further_reading:
-- link: /tracing/trace_collection/automatic_instrumentation/single-step-apm/
+- link: /tracing/trace_collection/single-step-apm/
   tag: "Documentation"
   text: "Single Step APM Instrumentation"
 ---
@@ -24,18 +25,20 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported operating systems**: See [Linux distributions reference][1]
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - Datadog Agent with APM Instrumentation enabled
-- A [supported Linux distribution](#linux-distributions-reference)
+- A [supported Linux distribution][1]
 
 ### Limitations
 
 - **SELinux**: Hardened SELinux environments are not supported.
 - **Small VM instances**: Very small instance types (for example, `t2.micro`) can experience timeouts. Use a larger instance type such as `t2.small` or higher.
+
+[1]: #linux-distributions-reference
 
 {{% /tab %}}
 
@@ -44,18 +47,20 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported operating systems**: See [Linux distributions reference](#linux-distributions-reference)
+- **Supported operating systems**: See [Linux distributions reference][1]
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - Datadog Agent with APM Instrumentation enabled
-- Docker running on a [supported Linux distribution](#linux-distributions-reference)
+- Docker running on a [supported Linux distribution][1]
 
 ### Limitations
 
 - **Rootless Docker mode**: When running Docker in rootless mode, update the socket path in `/etc/datadog-agent/inject/docker_config.yaml` so SSI can connect to Docker. The default path is `/run/user/$UID/docker.sock`, but your environment may differ.
 - **Custom `runc` shims**: If your environment uses custom `runc` shims (for example, for GPU workloads), update the `runtimes` entry in `/etc/datadog-agent/inject/docker_config.yaml` to include both your custom runtime and the Datadog runtime required for SSI.
+
+[1]: #linux-distributions-reference
 
 {{% /tab %}}
 
@@ -66,13 +71,13 @@ Select your environment to see compatibility requirements and limitations:
 ### Compatibility
 
 - **Status**: GA
-- **Supported node pools**: Linux nodes only (see [Linux distributions reference](#linux-distributions-reference))
+- **Supported node pools**: Linux nodes only (see [Linux distributions reference][2])
 - **Supported architectures**: x86_64, arm64
 
 ### Requirements
 
 - [Datadog Admission Controller][1] enabled
-- Kubernetes nodes running a [supported Linux distribution](#linux-distributions-reference)
+- Kubernetes nodes running a [supported Linux distribution][2]
 
 ### Limitations
 
@@ -80,6 +85,7 @@ Select your environment to see compatibility requirements and limitations:
 - **Windows pods**: For Kubernetes clusters with Windows pods, use namespace inclusion/exclusion or specify an annotation in the application to exclude them from library injection.
 
 [1]: /containers/cluster_agent/admission_controller/
+[2]: #linux-distributions-reference
 
 {{% /tab %}}
 
@@ -99,6 +105,30 @@ Select your environment to see compatibility requirements and limitations:
 ### Limitations
 
 - **IIS only**: Only .NET applications running in IIS are supported.
+
+{{% /tab %}}
+
+{{% tab "Windows Host-wide (Preview)" %}}
+
+### Compatibility
+
+- **Status**: Preview; enrollment is required
+- **Supported runtimes**: Java and .NET
+
+### Requirements
+
+- Datadog Agent v7.73 or higher
+- Access to the Windows host-wide instrumentation Preview
+- For .NET applications outside IIS, an instrumentation rule that identifies the process to instrument
+
+### Limitations
+
+- Host-wide instrumentation is available only to Preview participants.
+- Language support is limited to Java and .NET.
+
+For enrollment and setup instructions, see [Windows Single Step Instrumentation][1].
+
+[1]: /tracing/trace_collection/single-step-apm/windows/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -181,7 +211,7 @@ To mitigate:
 
 [1]: /tracing/trace_collection/compatibility/python
 [2]: https://github.com/DataDog/dd-trace-py/releases
-[3]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/#instrument-sdks-across-applications
+[3]: /tracing/trace_collection/single-step-apm/#instrument-sdks-across-applications
 [4]: /tracing/trace_collection/dd_libraries/python/
 
 {{< /programming-lang >}}
@@ -233,10 +263,6 @@ Supported Node.js versions are available by default only on:
 - Red Hat Enterprise Linux 9+
 
 For other distributions, you may need to install Node.js separately.
-
-### Limitations
-
-- **ESM modules**: Instrumentation of ESM (ECMAScript modules) is not supported.
 
 [1]: /tracing/trace_collection/compatibility/nodejs
 
