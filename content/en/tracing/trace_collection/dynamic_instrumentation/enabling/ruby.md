@@ -31,6 +31,7 @@ Before you begin, review the [Dynamic Instrumentation prerequisites][12]. Ruby a
 1. If you don't already have APM enabled, in your Agent configuration, set the `DD_APM_ENABLED` environment variable to `true` and listening to the port `8126/TCP`.
 2. Run your service with Dynamic Instrumentation enabled by setting the `DD_DYNAMIC_INSTRUMENTATION_ENABLED` environment variable to `true`. Specify `DD_SERVICE`, `DD_ENV`, and `DD_VERSION` Unified Service Tags so you can filter and group your instrumentations and target active clients across these dimensions.
 3. After starting your service with Dynamic Instrumentation enabled, you can start using Dynamic Instrumentation on the [APM > Dynamic Instrumentation page][3].
+4. For a better experience, Dynamic Instrumentation automatically enables [autocomplete and search (in Preview)][14].
 
 **Note**: Dynamic Instrumentation initializes when the application processes its first HTTP request. Ensure your application receives at least one request after startup before creating probes.
 
@@ -124,3 +125,4 @@ The following features available in other languages are not supported for Ruby:
 [11]: /dynamic_instrumentation/expression-language/
 [12]: /dynamic_instrumentation/#prerequisites
 [13]: https://github.com/DataDog/dd-trace-rb
+[14]: /dynamic_instrumentation/symdb/
