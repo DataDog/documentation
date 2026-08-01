@@ -13,6 +13,6 @@ CI/CD Optimization brings together pipeline visibility and test optimization. Mo
     {{< nextlink href="/tests/flaky_management/" >}}Flaky Test Management{{< /nextlink >}}
     {{< nextlink href="/cicd/features/" >}}Features{{< /nextlink >}}
     {{< nextlink href="/monitors/types/ci/?tab=pipelines" >}}Monitors{{< /nextlink >}}
-    {{< nextlink href="/continuous_integration/guides/" >}}Guides{{< /nextlink >}}
+    {{< nextlink href="/cicd/guides/" >}}Guides{{< /nextlink >}}
     {{< nextlink href="/cicd/troubleshooting/" >}}Troubleshooting{{< /nextlink >}}
 {{< /whatsnext >}}

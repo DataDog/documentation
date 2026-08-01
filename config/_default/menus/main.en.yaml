@@ -6062,7 +6062,7 @@ menu:
       identifier: cicd_monitors
       weight: 7
     - name: Guides
-      url: continuous_integration/guides/
+      url: cicd/guides/
       parent: cicd
       identifier: cicd_guides
       weight: 8
