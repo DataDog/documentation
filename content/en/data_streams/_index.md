@@ -91,6 +91,12 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
   {{< image-card href="/data_streams/setup/technologies/bullmq/" src="integrations_logos/bullmq2.png" alt="BullMQ" >}}
 {{< /card-grid >}}
 
+### AWS Lambda
+
+Serverless applications naturally gravitate towards event-driven architectures. If you're building applications using AWS Lambda, [per runtime Lambda specific instructions are available.][12]
+
+If you are using other AWS managed compute services like Amazon ECS, follow the [By language][13] or [By technology][14] instructions.
+
 <br/>
 
 ## Explore Data Streams Monitoring
@@ -162,3 +168,6 @@ Datadog can automatically detect your managed [Confluent Cloud][8] connectors an
 [9]: /integrations/confluent_cloud/
 [10]: https://app.datadoghq.com/data-streams/map
 [11]: /opentelemetry/compatibility
+[12]: /data_streams/setup/technologies/aws_serverless
+[13]: /data_streams/setup/#by-language
+[14]: /data_streams/setup/#by-technology

@@ -26,4 +26,20 @@ title: Setup Data Streams Monitoring
   {{< image-card href="/data_streams/setup/technologies/ibm_mq/" src="integrations_logos/ibm_mq.png" alt="IBM MQ" >}}
   {{< image-card href="/data_streams/setup/technologies/azure_service_bus/" src="integrations_logos/azure_service_bus.png" alt="Azure Service Bus" >}}
   {{< image-card href="/data_streams/setup/technologies/bullmq/" src="integrations_logos/bullmq2.png" alt="BullMQ" >}}
+  {{< image-card href="/data_streams/setup/technologies/amazon_event_bridge/" src="integrations_logos/amazon_event_bridge.png" alt="Amazon EventBridge" >}}
 {{< /card-grid >}}
+
+### AWS Serverless
+
+Serverless applications naturally gravitate towards event-driven architectures. If you're building applications using AWS Lambda, [per runtime Lambda specific instructions are available.][1]
+
+If you are using other AWS managed compute services like Amazon ECS, follow the [By language][2] or [By technology][3] instructions.
+
+### Azure Functions
+
+If you are deploying your applications to Azure Functions see the [Azure Function][4] specific documentation.
+
+[1]: /data_streams/setup/technologies/aws_serverless
+[2]: /data_streams/setup/#by-language
+[3]: /data_streams/setup/#by-technology
+[4]: /data_streams/setup/technologies/azure_serverless
