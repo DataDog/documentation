@@ -5960,6 +5960,11 @@ menu:
       parent: cicd
       identifier: cicd_features
       weight: 6
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_features
+      identifier: cicd_features_automatic_job_retries
+      weight: 600
     - name: Early Flake Detection
       url: tests/flaky_tests/early_flake_detection/
       parent: cicd_features
@@ -6086,11 +6091,6 @@ menu:
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
-    - name: CI/CD Optimization
-      url: continuous_integration/cicd_optimization/
-      parent: ci
-      identifier: cicd_optimization
-      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -6299,11 +6299,6 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
-    - name: CI/CD Optimization
-      url: continuous_integration/cicd_optimization/
-      parent: tests
-      identifier: tests_cicd_optimization
-      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
