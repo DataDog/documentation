@@ -7,10 +7,6 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Operations Monitoring is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
@@ -322,24 +318,46 @@ You may have cases where users are starting several journey operations in parall
 
 You can create an operation from either the operations catalog or a journey's details report:
 
-- **Operations catalog**: Navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}, then click {{< ui >}}New Operation{{< /ui >}}.
-- **Journey Monitoring**: Navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Journey Monitoring{{< /ui >}}, select a journey, navigate to its {{< ui >}}Details Report{{< /ui >}}, and click {{< ui >}}New Operation{{< /ui >}}.
+- **Operations catalog**: Navigate to {{< ui >}}RUM{{< /ui >}} > {{< ui >}}Operations{{< /ui >}}, then click {{< ui >}}New Operation{{< /ui >}}
+- **Journey Monitoring**: Navigate to {{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Journey Monitoring{{< /ui >}}, select a journey, navigate to its {{< ui >}}Details Report{{< /ui >}}, then click {{< ui >}}New Operation{{< /ui >}}
 
-<div class="alert alert-warning">Each RUM application supports up to 1000 operations created directly in Datadog. There is no organization-wide limit on operations created directly in Datadog.</div>
+{{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-web-ui.png" alt="Page for creating Operations from the Datadog UI" style="width:100%;" >}}
 
-After you click {{< ui >}}New Operation{{< /ui >}}:
+<div class="alert alert-warning">Each RUM application supports up to 1000 operations created from Datadog through the UI or API. There is no organization-wide limit on operations created directly in Datadog.</div>
 
-1. Enter a display name. Optionally, enter a description.
-2. Select a category. Datadog pre-fills the RUM event types that determine the start event, success conditions, and failure conditions. Alternatively, define a custom operation that uses any combination of supported RUM event types.
-3. Complete all required fields for the start event, success conditions, and failure conditions. Datadog uses these fields to determine the operation's outcome: success, or failure with an `error` or `abandoned` reason.
-4. Optionally, enable the {{< ui >}}Abandon{{< /ui >}} toggle. If the user navigates away from the operation's starting view before the operation finishes, Datadog marks the operation with the `abandoned` failure reason.
-5. Click {{< ui >}}Create Operation{{< /ui >}}.
+### Step 1 - Enter operation details and select the operation category
 
-<div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog.</div>
+Select the operation's RUM application and enter a display name. You may optionally add a description to the operation.
+
+Select the operation's <b>category</b> to determine the RUM event types compatible with the start, success, and failure conditions. 
+
+| Operation&nbsp;Category       | Summary  | Supported event types                                                                                                            |
+|----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------|
+| Component loeading | Measure how long a user-initiated action takes to complete  | Start: Action <br> Success: Resource or custom action <br> Failure: Resource, error, or custom action |
+| Form submission | Measure how long a form submit or mutation takes to succeed | Start: Action <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+| Page load | Measure how long a page takes to load and display data | Start: View <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+| Page navigation | Measure how long a navigation from one page to another takes to succeed | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+| Custom | Define a custom operaiton with any event type combination | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+
+### Step 2 - Define the start event
+
+Each operation must have a starting RUM event. Operations can begin with either an action or view event dpending on the selected operation category.
+
+### Step 3 - Define the success conditions
+
+Each operation must have a condition for ending in a success. Operations can end in a success as resource, view, or custom action event depending on the selected operation category.
+
+### Step 4 - Define the failure conditions
+
+Each operation must have a condition for ending in a failure:
+- <b>Error</b> failures can end as a resource, error, or custom action.
+- <b>Abandon</b> failures can be toggled on in case the user navigates away from the starting view before the operation finishes.
+
+<div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog through the UI or API.</div>
 
 ## Create operations with the Datadog API
 
-To create an operation programmatically, send a `POST` request to `/api/v2/rum/operations`. Authenticate the request with a Datadog API key and application key. For more information about authentication and calling Datadog API endpoints, see [Using the API][10].
+Operations can also be created through the [Datadog API][10].
 
 ## Edit operations
 
@@ -394,11 +412,10 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [3]: https://github.com/DataDog/dd-sdk-ios/releases/tag/3.1.0
 [4]: https://github.com/DataDog/dd-sdk-kotlin-multiplatform/releases/tag/1.4.0
 [5]: https://github.com/DataDog/dd-sdk-reactnative/releases/tag/3.0.0
-
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
 [8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
 [9]: /journey_monitoring/
-[10]: /api/latest/using-the-api/
+[10]: /api/latest/rum-operations/
 [11]: /real_user_monitoring/rum_without_limits/
 [12]: /real_user_monitoring/rum_without_limits/retention_filters/
