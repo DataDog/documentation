@@ -24,7 +24,9 @@ const span = tracer.scope().active()
 
 To learn more, read [API details for `Scope`][7].
 
-You can add tags to a span using the `setTag` or `addTags` method on a span. Supported value types are string, number, and object.
+You can add tags to a span using the `setTag` or `addTags` method. Supported tag values include strings, numbers, Boolean values, `Buffer` objects, and `URL` objects. Plain objects are supported when their direct properties use those types.
+
+Plain object tag values are flattened by one level. Nested objects and arrays are ignored. For nested data, use explicit dotted tag names.
 
 ```javascript
 // add a foo:bar tag
@@ -33,8 +35,11 @@ span.setTag('foo', 'bar')
 // add a user_id:5 tag
 span.setTag('user_id', 5)
 
-// add a obj.first:foo and obj.second:bar tags
+// add obj.first:foo and obj.second:bar tags
 span.setTag('obj', { first: 'foo', second: 'bar' })
+
+// add nested data with explicit dotted tag names
+span.setTag('process.payload.business_key', 'value')
 
 // add a foo:bar and baz:qux tags
 span.addTags({
@@ -46,6 +51,8 @@ span.addTags({
 ### Adding tags globally {% #adding-tags-globally-nodejs %}
 
 You can add tags to every span by configuring them directly on the tracer, either with the comma-separated `DD_TAGS` environment variable or with the `tags` option on the tracer initialization:
+
+Programmatic global tags support the same value types as local tags. Plain objects have the same one-level limit.
 
 ```javascript
 // equivalent to DD_TAGS=foo:bar,baz:qux
