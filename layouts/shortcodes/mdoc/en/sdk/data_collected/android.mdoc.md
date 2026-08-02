@@ -150,11 +150,21 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.is_active`      |    Boolean   | Indicates whether the view corresponding to this event is considered active.            |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by the `addViewLoadingTime(override:)` call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                |
+| `view.memory_average` | number (bytes) | Exact arithmetic mean of successful process resident memory samples collected during this view. |
+| `view.memory_max` | number (bytes) | Largest successful process resident memory sample collected during this view. |
 | `view.name` | string | Customizable name of the view corresponding to the event. |
 | `view.network_settled_time` | number (ns) | Time it took for a view to be fully loaded with all relevant network calls initiated at the start of the view. |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                 |
 | `view.time_spent`                             | number (ns) | Time spent on this view.                                    |
 | `view.url`                     | string | Canonical name of the class corresponding to the event.                                                           |
+
+#### View memory collection
+
+The Android SDK reads the `VmRSS` value from `/proc/self/status`. This value measures resident memory for the entire application process. It includes native memory, the JVM or Android Runtime (ART) heap, and resident shared pages.
+
+Each view tracks the exact running mean and maximum of successful samples. These calculations are neither exponential nor windowed. The SDK resets both calculations for each view.
+
+By default, the SDK samples memory every 500 ms (`VitalsUpdateFrequency.AVERAGE`) while the view is in the foreground. Use [`RumConfiguration.setVitalsUpdateFrequency`][14] to change the frequency or disable collection with `VitalsUpdateFrequency.NEVER`. If the SDK cannot read `/proc/self/status`, it skips that sample without reporting an error.
 
 ### View accessibility attributes
 
@@ -280,3 +290,4 @@ The RUM Android SDK allows you to get the data you need to Datadog while conside
 [11]: /data_security/real_user_monitoring/#ip-address
 [12]: https://source.android.com/security/app-sandbox
 [13]: https://developer.android.com/training/articles/direct-boot
+[14]: /real_user_monitoring/application_monitoring/android/advanced_configuration/#initialization-parameters
