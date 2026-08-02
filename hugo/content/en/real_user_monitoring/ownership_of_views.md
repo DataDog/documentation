@@ -18,6 +18,20 @@ Ownership of views lets you see only the RUM metrics and events for the parts of
 
 By default, the toggle is enabled, which filters metrics and event data to show only the one coming from views your team owns. If you belong to multiple teams, you can enable or disable specific team filters. The teams that own a view are also listed in the top-right corner of all event side panels.
 
+## Ownership rules
+
+There are two types of rules to configure ownership of views:
+
+1. <b>Exact rules</b>, which map one-to-one with a view name 
+2. <b> Prefix rules</b>, which capture all views that contain the prefix in their name
+
+<--INSERT PLACEHOLDER IMAGE HERE--->
+
+Every must also have at least one <b>team</b> and one <b>scope</b> defined. Two scope types are supported:
+- For the <b>current RUM application</b> across all services
+- For a <b>specific service</b> across all applications
+
+
 ## Setup
 
 <div class="alert alert-info">To use this feature, your organization must have teams enabled and configured. </div>
@@ -25,8 +39,9 @@ By default, the toggle is enabled, which filters metrics and event data to show 
 To configure team ownership for your application's views:
 
 1. In Datadog, navigate to the [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Manage Applications{{< /ui >}}][1] page and select your application.
-2. In the left navigation menu, select {{< ui >}}Team Ownership{{< /ui >}}.
-3. For each selected view, click {{< ui >}}Edit Teams{{< /ui >}} and select one or more teams. This attributes each view in your application to those teams.
+2. In the left navigation menu, select {{< ui >}}Ownership{{< /ui >}}.
+3. For each view, click {{< ui >}}Missing Ownership{{< /ui >}} and create a rule for the view. 
+4. Click on the {{< ui >}}All Rules{{< /ui >}} tab to review all created rules and their associated views.
 
 After you associate a view with a team, Datadog automatically attributes new event data to that team.
 
