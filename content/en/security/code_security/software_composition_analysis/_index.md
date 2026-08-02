@@ -151,7 +151,7 @@ Instead of Bits Code, you can generate a fix with an AI coding agent such as Cur
 
 To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
 
-You can start this flow from the {{< ui >}}Remediation{{< /ui >}} section of a vulnerability's side panel, or from the {{< ui >}}Repositories{{< /ui >}} table, where each row represents a repository or file that contains the vulnerable library.
+You can start this flow from the {{< ui >}}Remediation{{< /ui >}} section of a vulnerability's side panel, or from the {{< ui >}}Repositories{{< /ui >}} table. Each row in the table represents a repository or file that contains the vulnerable library.
 
 To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
 
