@@ -138,11 +138,6 @@ Every started operation must have a stop. Use `succeedOperation` to stop an oper
 {{% tab "Browser" %}}
 
 ```javascript
-DD_RUM.init({
-...,
-enableExperimentalFeatures: ["feature_operation_vital"], // this flag needs to be enabled for the API to work
-})
-
 succeedFeatureOperation: (
 name: string,
 options?: {
