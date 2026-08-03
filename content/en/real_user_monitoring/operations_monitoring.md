@@ -330,8 +330,8 @@ Select the operation's <b>category</b> to determine the RUM event types compatib
 |----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------|
 | Component loeading | Measure how long a user-initiated action takes to complete  | Start: Action <br> Success: Resource or custom action <br> Failure: Resource, error, or custom action |
 | Form submission | Measure how long a form submit or mutation takes to succeed | Start: Action <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
-| Page load | Measure how long a page takes to load and display data | Start: View <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
-| Page navigation | Measure how long a navigation from one page to another takes to succeed | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+| Page or screen load | Measure how long a page or screen takes to load and display data | Start: View <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
+| Page or screen navigation | Measure how long a navigation from one page or screen to another takes to succeed | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
 | Custom | Define a custom operaiton with any event type combination | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
 
 ### Step 2 - Define the start event
@@ -356,7 +356,7 @@ Operations can also be created through the [Datadog API][10].
 
 ## Edit operations
 
-In the operations catalog, click the pencil icon for an operation to edit it. You can edit any operation, regardless of whether you created it directly in Datadog, created it with the Datadog API, or instrumented it with the RUM SDK APIs.
+In the operations catalog, click the pencil icon to edit an operation. You can edit any operation's description regardless of the method used to create it. Operations created through the UI or the Datadog API can be fully edited through the UI.
 
 ## Monitor your availability on Datadog
 
