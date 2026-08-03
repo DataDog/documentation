@@ -56,7 +56,7 @@ The investigation opens in a new page, and you can also view it from the test de
 
 Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
 
-### General prompt (Preview)
+### General prompt
 
 Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
 - Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
