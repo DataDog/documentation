@@ -126,7 +126,7 @@ For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.i
 
 During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery).
 
-## Jest configuration
+## Configure Jest
 
 `ddtest` runs Jest through the local `node_modules/.bin/jest` executable when it exists, or through `npx jest` otherwise. Use `--command` when your project runs Jest through a package manager or wrapper:
 
@@ -136,7 +136,7 @@ bin/ddtest run --platform javascript --framework jest --command "pnpm jest --run
 
 Do not include test files or a `--` separator in the command. `ddtest` appends the file list and Jest flags itself.
 
-`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. `dd-trace` must be resolvable from the project where `ddtest` runs.
+`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs.
 
 `ddtest` discovers and splits test files and suites, not individual Jest tests.
 
