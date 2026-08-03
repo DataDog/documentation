@@ -202,15 +202,11 @@ A scope that is not allowed in Datadog is never granted, whatever the token requ
 
 ## Add Datadog as a connector in Claude
 
-Users reach Datadog through the [Datadog connector](https://claude.ai/directory/connectors/datadog) in the Claude Connectors Directory.
-
 1. In Claude, click the {{< ui >}}+{{< /ui >}} icon at the bottom of any prompt, then click {{< ui >}}Add Connector{{< /ui >}}.
 2. Find **Datadog** in the directory and enable the connector.
 3. Complete the sign-in flow when prompted.
 
-<div class="alert alert-warning">Do not add Datadog as a custom connector. A custom connector registers its own OAuth client, so its client ID stops matching the <strong>Client ID at resource</strong> value in Okta and token exchange fails. If you added Datadog as a custom connector before, remove it.</div>
-
-For the standard OAuth setup and the other clients Datadog supports, see [Set up the Datadog MCP Server](/mcp_server/setup/).
+Use the Datadog connector from the directory, not a custom connector. A custom connector uses a different client ID, and token exchange fails. See [Set up the Datadog MCP Server](/mcp_server/setup/).
 
 ## Verify the configuration
 
