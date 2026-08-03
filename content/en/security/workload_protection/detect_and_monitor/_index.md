@@ -10,7 +10,7 @@ disable_toc: false
 
 ## Overview
 
-Workload Protection evaluates your workload activity against several kinds of rules. Together they detect threats, assess your runtime security posture, and provide granular audit capabilities. Agent rules select which activity reaches Datadog. Detection rules and finding rules analyze that activity. Threat intelligence and Content Packs extend what those rules cover.
+Workload Protection evaluates your workload activity against several kinds of rules. Together they detect threats, assess your runtime security posture, and provide granular audit capabilities. Agent rules select which activity reaches Datadog. Detection rules and finding rules analyze that activity. Threat intelligence enriches it with reputation context, and Content Packs bundle optional rules for specific software stacks and threat vectors.
 
 For how these rules fit together in the detection pipeline, see [How Workload Protection works][19].
 

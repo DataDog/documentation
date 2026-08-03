@@ -24,7 +24,7 @@ further_reading:
   text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
-Workload Protection can act on the threats it detects. The Datadog Agent terminates processes and containers or blocks network traffic, either automatically when an Agent rule matches or manually when you respond to a signal. Both paths require enforcement to be enabled in the Agent.
+Workload Protection can act on the threats it detects. The Datadog Agent terminates processes and containers or blocks network traffic, either automatically when an Agent rule matches or manually when you respond to a signal. Both paths depend on enforcement in the Agent, which is enabled by default.
 
 For where response sits in the detection pipeline, see [How Workload Protection works][7].
 

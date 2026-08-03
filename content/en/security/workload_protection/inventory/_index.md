@@ -16,7 +16,7 @@ further_reading:
 
 Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and act on unprotected or misconfigured workloads.
 
-Coverage reflects which Agents are reporting and which policies reached them. For how policies are delivered, see [How Workload Protection works][5].
+Coverage reflects whether the policies and agent rules on each resource loaded successfully. For how policies reach your Agents, see [How Workload Protection works][5].
 
 {{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
 
