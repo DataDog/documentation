@@ -61,19 +61,9 @@ All sources
 
 If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][4].
 
-## Hierarchies for Teams Map
+## Team hierarchies
 
-You can define these relationships in four ways:
-
-- **GitHub Teams**: If you used GitHub to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
-- **Teams API**: See [Create a team link][39].
-- **Terraform**: Use the Datadog Terraform provider.
-- **Datadog UI**: Define relationships directly on a team's page:
-   1. On the [team directory page][1], click the team you want to add a subteam or parent team relationship to.
-   1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
-   1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
-
-As you set up hierarchies, to explore and verify the full map of all teams in your organization, see the [Teams Map][40] in the Datadog Internal Developer Portal (IDP).
+Nest teams within each other (subteams) to mirror your organization's structure, and visualize the result as a Teams map. To define hierarchical relationships between teams with GitHub Teams, the Teams API, Terraform, or the Datadog UI, see [Team hierarchies][39].
 
 ## Team handle
 
@@ -226,5 +216,4 @@ To customize your team, see [Team Management][3].
 [36]: https://app.datadoghq.com/security/configuration/suppressions
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
-[39]: https://docs.datadoghq.com/api/latest/teams/create-a-team-link/
-[39]: /api/latest/teams/create-a-team-link/
+[39]: /account_management/teams/manage/#team-hierarchies
