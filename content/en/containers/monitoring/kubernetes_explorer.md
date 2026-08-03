@@ -75,7 +75,7 @@ For manual setup, see [Set up Kubernetes Explorer with a DaemonSet][5].
 
 [5]: /infrastructure/faq/set-up-orchestrator-explorer-daemonset
 {{% /tab %}}
-{{% tab "OpenTelemetry" %}}
+{{% tab "OpenTelemetry Collector" %}}
 
 You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline instead of the Datadog Agent. This setup uses the [`k8sobjects`][100] receiver to collect Kubernetes resource data and forwards it through the [Datadog Exporter's][101] orchestrator explorer functionality.
 
@@ -89,8 +89,9 @@ You can populate the Kubernetes Explorer using a native OpenTelemetry pipeline i
 The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
 
 Recommendations:
-1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
-2. Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
+
+- Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
+- Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
 The following steps walk through the required components for Kubernetes Explorer. For a complete reference example that also collects Kubernetes infrastructure metrics, see [Kubernetes Metrics][111].
 
@@ -296,24 +297,27 @@ For a complete reference example, see the [DaemonSet collector configuration][10
 {{% /tab %}}
 {{% tab "OpenTelemetry Kube Stack" %}}
 
-The [`opentelemetry-kube-stack`][112] Helm chart installs the OpenTelemetry Operator and manages collectors as `OpenTelemetryCollector` CRs. Datadog maintains a reference [`values.yaml`][114] that configures two collectors:
+You can populate the Kubernetes Explorer using the `opentelemetry-kube-stack` Helm chart instead of the Datadog Agent.
 
-- **`cluster`** (Deployment): scrapes kube-state-metrics, watches Kubernetes objects, and enables `orchestrator_explorer` to populate Kubernetes Explorer.
-- **`daemon`** (DaemonSet): collects host and kubelet metrics, plus an OTLP endpoint for application telemetry.
+The [`opentelemetry-kube-stack`][112] Helm chart installs the OpenTelemetry Operator and manages collectors as `OpenTelemetryCollector` custom resources (CRs). Datadog maintains a reference [`values.yaml`][114] that configures two collectors:
+
+- **`cluster`** (Deployment): Scrapes kube-state-metrics, watches Kubernetes objects, and enables `orchestrator_explorer` to populate Kubernetes Explorer.
+- **`daemon`** (DaemonSet): Collects host and kubelet metrics, and exposes an OTLP endpoint for application telemetry data.
 
 #### Prerequisites
 
 - OpenTelemetry Kube Stack Helm chart [0.20.0][113] or later.
 - OpenTelemetry Collector Contrib [v0.154.0][102] or later (pinned by the reference values file).
-- cert-manager installed, for the operator's admission webhook.
+- cert-manager, which is required for the operator's admission webhook.
 
 #### Limitations
 
 The open source `k8sobjects` receiver can place significant load on a cluster's Kubernetes API server.
 
 Recommendations:
-1. Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
-2. Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
+
+- Use Kubernetes 1.33 or later, which includes [streaming list improvements][106] that reduce API server impact.
+- Start with smaller clusters. Limit the number of objects per resource type to fewer than 5,000 as a starting point, and scale up gradually while monitoring cluster health.
 
 #### 1. Install cert-manager (if not already present)
 
@@ -327,6 +331,8 @@ helm install cert-manager jetstack/cert-manager \
 ```
 
 #### 2. Create the Datadog secret
+
+Set `DD_SITE` to your [Datadog site][104]:
 
 ```sh
 export DD_API_KEY="<YOUR_DATADOG_API_KEY>"
@@ -352,7 +358,7 @@ helm upgrade --install opentelemetry-kube-stack open-telemetry/opentelemetry-kub
   --values values.yaml
 ```
 
-The required `k8s.cluster.name` is automatically detected on EKS, AKS, and GKE through the `resourceDetection` preset in the reference `values.yaml`. For other unsupported clouds, add a `resource/cluster` processor at the start of each pipeline:
+The required `k8s.cluster.name` is automatically detected on EKS, AKS, and GKE through the `resourceDetection` preset in the reference `values.yaml`. For other cloud providers or self-managed clusters, add a `resource/cluster` processor at the start of each pipeline:
 
 ```yaml
 processors:
@@ -363,14 +369,15 @@ processors:
         action: insert
 ```
 
-Both collectors default to `500m` CPU / `1Gi` memory limits and `200m` CPU / `500Mi` memory requests. Scale up for large clusters.
+Both collectors default to limits of `500m` CPU and `1Gi` memory, and requests of `200m` CPU and `500Mi` memory. Scale up for large clusters.
 
 #### 4. Verify the installation
 
-Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**.
+Open the [Kubernetes Explorer][1] and filter by your cluster name. All core Kubernetes resource sections should populate, along with **Custom Resources > CRD**. The **Custom Resources > Resources** section is not supported with this setup.
 
 [1]: https://app.datadoghq.com/orchestration/overview
 [102]: https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.154.0
+[104]: /getting_started/site/
 [106]: https://kubernetes.io/blog/2025/05/09/kubernetes-v1-33-streaming-list-responses/
 [112]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-kube-stack
 [113]: https://github.com/open-telemetry/opentelemetry-helm-charts/releases/tag/opentelemetry-kube-stack-0.20.0
