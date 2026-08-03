@@ -30,7 +30,7 @@ Typical use cases include:
 
 ## How local flag overrides work
 
-OpenFeature's Multi-Provider wraps multiple providers behind a single client. By default, it uses the **First Match** strategy:
+OpenFeature's Multi-Provider wraps multiple providers behind a single client. By default, it uses the _First Match_ strategy:
 
 1. If the first provider returns a value for the flag, that value is used and later providers are skipped.
 2. If the first provider returns `FLAG_NOT_FOUND`, evaluation continues to the next provider.
