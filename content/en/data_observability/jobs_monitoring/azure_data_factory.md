@@ -41,7 +41,8 @@ Grant the following three actions to the App Registration used by your Datadog A
 
 Without them, Datadog can list your factories and pipelines but collects no runs.
 
-### Option 1: Create a custom role (recommended)
+{{< tabs >}}
+{{% tab "Custom role (recommended)" %}}
 
 A custom role grants only the permissions Datadog uses. Save the following definition as `datadog-adf-reader.json`, replacing `<SUBSCRIPTION_ID>` with your subscription ID:
 
@@ -85,7 +86,8 @@ To assign the role across several subscriptions, set `AssignableScopes` to a man
 
 **Note**: Creating a role definition requires the **Owner** or **User Access Administrator** role at the assignable scope.
 
-### Option 2: Use a built-in role
+{{% /tab %}}
+{{% tab "Built-in role" %}}
 
 If your organization does not allow custom roles, assign the built-in **Data Factory Contributor** role, which includes the three actions:
 
@@ -99,6 +101,9 @@ az role assignment create \
 You can also assign it in the Azure portal under **Data Factory** > **Access control (IAM)** > **Add role assignment**.
 
 This role also grants write and delete access on factories, pipelines, datasets, and linked services. Datadog uses only the read and query permissions. Scope the assignment to individual factories rather than to the whole subscription to limit what the role covers.
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Configure the integration
 
@@ -119,7 +124,7 @@ Datadog monitors every data factory in the subscriptions you select.
 
 ## What Datadog collects
 
-After setup, Datadog refreshes your data factory inventory once a day: factories, pipelines, datasets, linked services, data flows, and triggers. New pipeline and activity runs are collected every few minutes.
+After setup, Datadog collects new pipeline and activity runs every few minutes. Runs from a pipeline you create after setup are collected on the same cadence.
 
 For each pipeline run, Datadog reports:
 
@@ -127,6 +132,7 @@ For each pipeline run, Datadog reports:
 - The run status, and the error message for failed runs.
 - The trigger that started the run.
 - An `env` tag set to the name of the data factory.
+- The annotations on the pipeline and the user properties on each activity, as tags. Tags you set in Data Factory are available for filtering and grouping in Datadog.
 
 ## Dataset lineage
 
@@ -134,7 +140,18 @@ Datadog derives dataset lineage from the activities in each pipeline run, using 
 
 For activities that move data, such as a copy, Datadog reports the source and sink datasets. For activities that run SQL, Datadog reports the tables the statement read and wrote.
 
-Datadog resolves datasets across the major warehouse, database, and object storage connectors, including Snowflake, Google BigQuery, Amazon Redshift, SQL Server and Azure SQL, Azure Databricks Delta Lake, Amazon S3, Azure Blob Storage, and Azure Data Lake Storage. Assets resolve to the same entities that Datadog's other Data Observability integrations report, so lineage connects across your data platforms.
+Datadog resolves datasets across the major warehouse, database, and object storage connectors, including:
+
+- Snowflake
+- Google BigQuery
+- Amazon Redshift
+- SQL Server and Azure SQL
+- Azure Databricks Delta Lake
+- Amazon S3
+- Azure Blob Storage
+- Azure Data Lake Storage
+
+Assets resolve to the same entities that Datadog's other Data Observability integrations report, so lineage connects across your data platforms.
 
 Activities that Datadog cannot resolve datasets for appear as job runs without dataset lineage.
 
