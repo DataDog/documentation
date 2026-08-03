@@ -35,7 +35,7 @@ The Feature Flags MCP Server can install the SDK and add the required code snipp
 
 - Help me set up Datadog Feature Flags in my app.
 
-The MCP server reviews your codebase, selects the appropriate SDK for your language and framework, and installs the required dependencies and initialization code.
+The MCP Server reviews your codebase, selects the appropriate SDK for your language and framework, and installs the required dependencies and initialization code.
 
 ### Create feature flags
 
