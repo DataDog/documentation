@@ -1,5 +1,5 @@
 ---
-title: Best Practices for Setting Up Operations
+title: Best Practices for Setting Up RUM Operations
 description: Learn how to define RUM operations that generate reliable availability and latency metrics for journeys.
 further_reading:
 # TODO: Replace this placeholder after the next guide is created.
