@@ -51,6 +51,8 @@ See [Worker Commands][13] for a list of commands and options.
 
 ## Enable debug logs
 
+If you are seeing error response codes such as `4xx` or `5xx`, check the debug logs for more information.
+
 To see debug logs, restart the Worker with the `VECTOR_LOG` environment variable set to `debug`. For example, if you are running the Worker in Docker, add `-e VECTOR_LOG=debug` to the `docker run` command:
 
 ```
