@@ -1,8 +1,9 @@
 ---
 title: Install the Datadog Agent through the AWS Integration
-description: "Deploy the Datadog Agent to your EC2 and EKS resources directly from the AWS integration."
+description: "Install and manage the Datadog Agent on your Amazon EC2 instances directly from the AWS integration, without connecting to each host or running per-host scripts."
 private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry in integrations/guide/_index.md at that time
 further_reading:
+# TODO(DOCS-14545): add a further_reading entry linking to the technical reference ("How Agent installation through the AWS integration works") once its URL is finalized.
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Documentation"
   text: "AWS Integration"
@@ -24,7 +25,9 @@ further_reading:
 
 The [AWS integration][1] collects metrics, events, and logs from Amazon CloudWatch without installing anything on your hosts. Installing the Datadog Agent adds telemetry from inside your AWS workloads that CloudWatch alone can't provide, including host-level metrics, distributed traces (APM), live processes, and detailed logs.
 
-You can deploy the Datadog Agent to your Amazon EC2 and Amazon EKS resources directly from Datadog, without connecting to each host or running per-host scripts. Enable Agent installation while you set up the AWS integration, or at any time afterward.
+You can deploy the Datadog Agent to your Amazon EC2 instances directly from Datadog, without connecting to each host or running per-host scripts. Enable Agent installation while you set up the AWS integration, or at any time afterward.
+
+Amazon EKS is not supported yet. Support for more AWS resource types is planned, starting with EKS.
 
 ## Prerequisites
 
@@ -32,24 +35,30 @@ Before you begin, make sure of the following:
 
 - You can approve a CloudFormation stack in the target AWS account. Installation deploys a CloudFormation stack in your account, so you (or a teammate) need permission to review and create it. For the required permissions and why they're needed, see the [Required AWS permissions](#required-aws-permissions) section.
 
-The following resource-specific requirements also apply:
+The following requirements also apply:
 
-- **Amazon EC2**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
-- **Amazon EKS**: <!-- TODO(DOCS-14545): eng to confirm exact networking prerequisite; private clusters may require additional access and can introduce a delay. -->
+- The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
+- Supported platforms: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
 
 ## Required AWS permissions
 
 {{% aws-agent-installation %}}
 
+For a per-permission explanation of why each permission is needed, see the AWS Agent installation technical reference.
+<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
+
 ## How it works
 
-When you install the Agent through the AWS integration, you choose the resources, and Datadog handles the deployment inside your own account:
+When you install the Agent through the AWS integration, you choose the instances, and Datadog handles the deployment inside your own account:
 
-1. Select the EC2 instances and EKS clusters where you want the Agent installed, or opt in to all eligible resources.
-1. Datadog deploys the Agent to those resources. On EC2, Datadog installs the Agent through AWS Systems Manager. If an instance is missing the IAM configuration required to install the Agent, Datadog sets it up automatically.
-1. Datadog maintains the installation on the resources you selected.
+1. Select the EC2 instances where you want the Agent installed, or opt in to all eligible instances.
+1. Datadog deploys the Agent to those instances through AWS Systems Manager. If an instance is missing the IAM configuration required to install the Agent, Datadog sets it up automatically.
+1. Datadog installs the Agent on the instances your rule covers and keeps them instrumented. New instances aren't added automatically until you update the rule.
 
 You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
+
+For the full technical and security details, including the AWS resources Datadog creates, the exact permissions, and the reconciliation model, see the AWS Agent installation technical reference.
+<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
@@ -57,20 +66,20 @@ You approve one CloudFormation stack, one time, during initial setup. After that
 
 <!-- TODO(DOCS-14545): at publish, add in-app deep links to both entry points — the AWS setup flow (https://app.datadoghq.com/integrations?category=AWS&integrationId=amazon-web-services) and the Fleet Automation Install Agents page (https://app.datadoghq.com/fleet/install-agent/latest?platform=aws). Confirm stable prod URLs once the rollout completes. -->
 
-You can start Agent installation from two entry points, depending on how much control you want over which resources are instrumented:
+You can start Agent installation from two entry points, depending on how much control you want over which instances are instrumented:
 
-- **AWS integration setup (install on all eligible resources)**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection. Choose to install on EC2 instances, EKS clusters, or both. The Agent installs on all eligible resources of the types you select.
-- **Fleet Automation (install on specific resources)**: Open the AWS Install Agents page at any time to select the specific EC2 instances and EKS clusters you want.
+- **AWS integration setup (install on all eligible instances)**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection. The Agent installs on all eligible EC2 instances.
+- **Fleet Automation (install on specific instances)**: Open the AWS Install Agents page at any time to select the specific EC2 instances you want.
 
 <!-- TODO(DOCS-14545): per AWS team, surfacing the Agent install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
 
 The Agent installation toggle appears during setup:
 
-{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) and Kubernetes (EKS) workload toggles turned on." style="width:80%;" >}}
+{{< img src="integrations/amazon_web_services/aws-agent-installation-setup-toggle.png" alt="The Install the Datadog Agent step in AWS setup, with the install toggle enabled and the Hosts (EC2) workload toggle turned on." style="width:80%;" >}}
 
 To install from the AWS Install Agents page:
 
-1. Opt in to all eligible resources, or select specific EC2 instances and EKS clusters from the resource list.
+1. Opt in to all eligible instances, or select specific EC2 instances from the resource list.
 1. Review the generated CloudFormation stack, then continue to AWS and create it. Datadog prompts you for this only once.
 1. Return to Datadog. The installation proceeds automatically, and Datadog reports progress as Agents come online.
 
@@ -92,10 +101,10 @@ Use the AWS Install Agents page in Fleet Automation to manage the Agents you've 
 From this page, you can:
 
 - View the installed Agents and their status.
-- Install the Agent on new resources in your AWS environment.
-- Uninstall Agents from resources you no longer want to monitor.
+- Install the Agent on new instances in your AWS environment.
+- Uninstall Agents from instances you no longer want to monitor.
 
-Manage Agent configuration and version upgrades through [Fleet Automation][4].
+To stop coverage, update the rule. If you manually remove the Agent from a covered instance, Datadog reinstalls it on the next reconciliation. Manage Agent configuration and version upgrades through [Fleet Automation][4].
 
 ## Troubleshooting
 
@@ -105,11 +114,8 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 ### A permission or IAM error occurs
 
-If installation can't complete because of missing permissions, Datadog shows a notification with a link to the relevant CloudFormation resource so you can resolve it. Confirm that the permissions in the [Required AWS permissions](#required-aws-permissions) section are in place.
-
-### EKS installation is delayed or fails on a private cluster
-
-<!-- TODO(DOCS-14545): eng to confirm networking requirements and the recommended resolution for private clusters. -->
+If installation can't complete because of missing permissions, Datadog shows a notification with a link to the relevant CloudFormation resource so you can resolve it. Confirm that the permissions in the [Required AWS permissions](#required-aws-permissions) section are in place. For the full list of required permissions and why each is needed, see the AWS Agent installation technical reference.
+<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
 
 ## Further reading
 
