@@ -32,11 +32,11 @@ There are edge cases where Test Impact Analysis skips fewer tests than expected.
 - A large Git history may result in slightly fewer tests being skipped, because Datadog analyzes up to the 100 most recent commits.
 - A commit that changes more than 5,000 files is not analyzed for impact, so the coverage information from that commit is ignored.
 - A test or suite that covers more than 16,000 files is never skipped.
-- A very small fraction of tests (well under 1%) may run even when they could have been skipped.
+- A small fraction of tests (approximately 0.04%) may run even when they could have been skipped.
+
+If you use Ruby, you can increase the number of tests skipped by switching to suite-level granularity: set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite`. See [Test Parallelization configuration][8] for details.
 
 For more detail on these behaviors, see [Scale and accuracy limits][7].
-
-If you use Ruby and want tests skipped at the suite level instead of the test level, set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite`. See [Test Parallelization configuration][8] for details.
 
 ### Synchronizing a fork through GitHub's UI
 
