@@ -23,8 +23,18 @@ multifiltersearch:
       id: us
   data:
     # Android devices
-    - device: Google Pixel 4a
-      os: Android 11
+    - device: Google Pixel 10
+      os: Android 16
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 10 Pro
+      os: Android 16
+      platform: Android
+      eu: 'Yes'
+      us: 'Yes'
+    - device: Google Pixel 10 Pro XL
+      os: Android 16
       platform: Android
       eu: 'Yes'
       us: 'Yes'
@@ -123,8 +133,8 @@ multifiltersearch:
       platform: Android
       eu: 'Yes'
       us: 'Yes'
-    - device: Google Pixel 3a XL
-      os: Android 11
+    - device: Google Pixel 10 Pro
+      os: Android 17
       platform: Android
       eu: 'No'
       us: 'Yes'

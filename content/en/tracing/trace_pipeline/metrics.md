@@ -17,8 +17,8 @@ further_reading:
 ## Overview
 
 The following in-app configuration pages allow you to set ingested and indexed volumes for APM:
-- Use the **[Ingestion Control Page][1]** to control ingested span volume.
-- Use the **[Retention Filters page][2]** to control the number of indexed spans.
+- Use the [{{< ui >}}Ingestion Control Page{{< /ui >}}][1] to control ingested span volume.
+- Use the [{{< ui >}}Retention Filters page{{< /ui >}}][2] to control the number of indexed spans.
 
 Both pages are powered by **usage metrics**.
 

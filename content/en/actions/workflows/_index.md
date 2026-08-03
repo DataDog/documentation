@@ -14,6 +14,9 @@ further_reading:
 - link: "https://learn.datadoghq.com/courses/automating-meaningful-actions"
   tag: "Learning Center"
   text: "Automating Meaningful Actions with Datadog Workflow Automation"
+- link: "https://www.datadoghq.com/blog/cloud-siem-cases/"
+  tag: "Blog"
+  text: "Turn security signals into structured investigations with Case Management in Datadog Cloud SIEM"
 - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
   tag: "Blog"
   text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
@@ -63,7 +66,7 @@ Trigger your workflows from monitors, security signals, or dashboards, or trigge
 
 The Workflows Overview dashboard provides a high-level overview of your Datadog workflows and executions. To find the dashboard, go to your [Dashboard list][3] and search for `Workflows Overview`.
 
-{{< img src="service_management/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
+{{< img src="actions/workflows/workflows-dashboard.png" alt="The Workflows Overview dashboard" style="width:100%;" >}}
 
 ## Examples
 

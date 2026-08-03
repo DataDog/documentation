@@ -367,6 +367,48 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
    {{< /tabs >}}
    {{< /site-region >}}
 
+   {{< site-region region="uk1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+
+   ```kotlin
+   class SampleApplication : Application() {
+     override fun onCreate() {
+       super.onCreate()
+       val configuration = Configuration.Builder(
+            clientToken = "<CLIENT_TOKEN>",
+            env = "<ENV_NAME>",
+            variant = "<APP_VARIANT_NAME>"
+       )
+         .useSite(DatadogSite.UK1)
+         .build()
+
+       Datadog.initialize(this, configuration, trackingConsent)
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{% tab "Java" %}}
+
+   ```java
+   public class SampleApplication extends Application {
+     @Override
+     public void onCreate() {
+       super.onCreate();
+       Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+         .useSite(DatadogSite.UK1)
+         .build();
+
+       Datadog.initialize(this, configuration, trackingConsent);
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    To be compliant with the GDPR regulation, the SDK requires the tracking consent value at
    initialization.
    The tracking consent can be one of the following values:
@@ -764,11 +806,11 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
      implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
    }
    ```
-2. Add `DatadogInterceptor` to your `OkHttpClient`:
+2. Add `DatadogInterceptor` to your `OkHttpClient`. Each host entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`). A wildcard may only match subdomains of a registrable domain, so patterns such as `"*.com"` are rejected:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-   val tracedHosts = listOf("example.com", "example.eu")
+   val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
    val okHttpClient = OkHttpClient.Builder()
      .addInterceptor(
        DatadogInterceptor.Builder(tracedHosts)
@@ -780,7 +822,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-   List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+   List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
      .addInterceptor(
        new DatadogInterceptor.Builder(tracedHosts)
@@ -801,7 +843,7 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracedHosts = listOf("example.com", "example.eu")
+val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
 val okHttpClient =  OkHttpClient.Builder()
   .addInterceptor(
     DatadogInterceptor.Builder(tracedHosts)
@@ -818,7 +860,7 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
   .addInterceptor(
     new DatadogInterceptor.Builder(tracedHosts)

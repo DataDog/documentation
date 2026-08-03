@@ -14,7 +14,7 @@ further_reading:
 
 ## Overview
 
-Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, Azure, Google Cloud, Oracle Cloud, Datadog, Anthropic, and OpenAI and do not require any additional setup after CCM is set up.
+Datadog Cloud Cost Management (CCM) continuously monitors your environment to detect and prioritize unexpected cost changes, enabling you to share, investigate, and resolve anomalies. Cost anomalies are available for AWS, Azure, Google Cloud, Oracle Cloud, Datadog, Anthropic, OpenAI, Cursor, and Amazon Bedrock and do not require any additional setup after CCM is set up.
 
 {{< img src="cloud_cost/anomalies/anomalies-overview.png" alt="List of cost anomalies showing service names, usage types, and cost impacts" style="width:80;" >}}
 
@@ -35,8 +35,6 @@ To distinguish between true anomalies and expected fluctuations, Datadog's algor
 - Filters out low-impact anomalies to reduce noise
 
 ## Customize anomaly detection
-
-<div class="alert alert-danger">Custom anomaly detection is in Preview.</div>
 
 By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
 
@@ -105,7 +103,7 @@ As you investigate anomalies, you may find some that are not significant, were a
 To resolve an anomaly:
 
 1. Click {{< ui >}}Resolve Anomaly{{< /ui >}} to open the resolution popup.
-1. Select one of the following resolutions to help improve the algorithm:
+1. Select one of the following resolutions:
    - {{< ui >}}The anomaly amount was too small{{< /ui >}}
    - {{< ui >}}This is an unexpected increase{{< /ui >}}
    - {{< ui >}}This is an expected increase{{< /ui >}}

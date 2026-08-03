@@ -8,6 +8,9 @@ further_reading:
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
   text: "Writing Effective Grok Parsing Rules with Regular Expressions"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs
@@ -78,6 +81,10 @@ To set up this processor:
 
 {{< vrl-functions >}}
 
+## Metrics
+
+For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Custom Processor metrics, use the tag `component_type:remap_vrl`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -85,3 +92,6 @@ To set up this processor:
 [1]: /observability_pipelines/guide/remap_reserved_attributes
 [2]: /observability_pipelines/guide/get_started_with_the_custom_processor
 [3]: /logs/guide/regex_log_parsing/
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

@@ -26,7 +26,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>, which may impact billing.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
 </div>
 
 ## Prerequisites
@@ -63,7 +63,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
    - It retrieves and analyzes the logs and variable snapshots from the active logpoints to validate its hypothesis and formulate its response.
 
 1. Review the response from Bits and, optionally, explore the details of the logpoints, captured data, and any code fixes suggested. Reply in the chat to continue the investigation as needed.
-1. To disable logpoints at any time, ask Bits or click the **Disable** button on an individual logpoint or the session.
+1. To disable logpoints at any time, ask Bits or click the {{< ui >}}Disable{{< /ui >}} button on an individual logpoint or the session.
 
 **Note**: Bits typically disables the logpoints it creates as soon as it retrieves the data it needs. Logpoints also expire automatically after the configured time limit.
 

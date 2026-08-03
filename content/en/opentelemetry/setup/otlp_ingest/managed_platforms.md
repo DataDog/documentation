@@ -57,7 +57,6 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Platform | Subdomain | Setup guide |
 |---|---|---|
 | AWX | `awx` | — |
-| Buildkite | `buildkite` | [Buildkite OpenTelemetry][10] |
 | Claude | `claude` | — |
 | Cloudflare | `cloudflare` | [Cloudflare Workers observability][11] |
 | Cribl | `cribl` | — |
@@ -66,7 +65,7 @@ All endpoints follow the pattern `https://{subdomain}.integrations.otlp.{{< regi
 | Heroku | `heroku` | [Heroku telemetry][13] |
 | IBM | `ibm` | — |
 | LangSmith | `langsmith` | — |
-| LiveCloudKit | `livecloudkit` | — |
+| LiveCloudKit | `livekit` | — |
 | Modal | `modal` | [Modal OpenTelemetry][14] |
 | MuleSoft | `mulesoft` | [MuleSoft Telemetry Exporter][15] |
 | Netlify | `netlify` | — |
@@ -114,7 +113,6 @@ Sampling controls available in the Collector (tail-based sampling, probabilistic
 [6]: /opentelemetry/setup/otlp_ingest/logs/
 [7]: /opentelemetry/setup/otlp_ingest/metrics/
 [8]: /infrastructure/list/
-[10]: https://buildkite.com/docs/pipelines/integrations/observability/opentelemetry
 [11]: https://developers.cloudflare.com/workers/observability/exporting-opentelemetry-data/
 [12]: https://grafbase.com/docs/gateway/observability
 [13]: https://devcenter.heroku.com/articles/heroku-telemetry

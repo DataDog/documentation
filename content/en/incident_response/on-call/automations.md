@@ -9,7 +9,7 @@ further_reading:
 - link: '/incident_response/on-call/schedules'
   tag: 'Documentation'
   text: 'On-Call Schedules'
-- link: '/service_management/workflows/'
+- link: '/actions/workflows/'
   tag: 'Documentation'
   text: 'Workflow Automation'
 - link: '/integrations/slack/'
@@ -141,7 +141,7 @@ If you need an action type that isn't listed, contact your account representativ
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/
+[1]: /actions/workflows/
 [2]: /integrations/slack/?tab=datadogforslack#install-the-datadog-app-in-your-slack-workspace
 [3]: /integrations/microsoft_teams/?tab=datadogapprecommended#overview
 [5]: https://app.datadoghq.com/on-call/teams

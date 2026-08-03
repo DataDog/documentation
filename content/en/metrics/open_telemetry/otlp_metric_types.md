@@ -17,9 +17,9 @@ aliases:
 
 ## Overview
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
+The Datadog Agent and the OpenTelemetry Collector OTLP Exporter can ingest metrics in the OpenTelemetry format (OTLP), which can be produced by OpenTelemetry-instrumented applications. 
 
-The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector Datadog exporter:
+The following OTLP metric types can be ingested by the Datadog Agent and the OpenTelemetry Collector OTLP Exporter:
 - Sums
 - Gauges
 - Histograms
@@ -30,6 +30,7 @@ These OTLP metric types are mapped to Datadog metric types:
 - COUNT
 - GAUGE
 - DISTRIBUTION
+- HISTOGRAM (Explicit, Exponential)
 
 A single OTLP metric may be mapped to several Datadog metrics with a suffix indicating their meaning.
 
@@ -66,47 +67,26 @@ OTLP Gauges are mapped to Datadog Gauges, since they do not provide an aggregati
 {{% /tab %}}
 {{% tab "Histogram" %}}
 
-An OTLP Histogram represents the statistical distribution of a set of values on a given time window, by storing certain aggregation metrics such as the population sum or count together with a series of bucket counts. Histograms have one feature that influences the mapping:
+OTLP defines two histogram types for representing value distributions:
+
+- **Explicit Bucket Histogram**: Uses fixed, user-defined or SDK-default bucket boundaries. Each bucket counts how many measured values fall within its bounds. Also stores sum, count, and optional min/max.
+- **Exponential Histogram**: Uses dynamically computed bucket boundaries based on a scale parameter (`base = 2^(2^(-scale))`), which allows high dynamic range with small relative error. Datadog supports scales in the range `[-4, 8]`.
+
+Both types have one feature that influences the mapping:
 
 - *Aggregation temporality*, which can be cumulative or delta. Delta metrics have no overlap in their time windows, while cumulative metrics represent a time window from a fixed start point in time.
 
-The default mapping is as follows:
-1. Delta histograms are reported as Datadog distributions. [Read more about distributions][1] to understand the available aggregations. Histograms with a count of 0 are dropped.
-2. For cumulative histograms, the delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported. You may use the [`cumsum` arithmetic function][2] on individual aggregations to recover the value in the OTLP payload.
+The default mapping for both histogram temporality types is as follows:
 
-**Note**: Histogram metrics in OTLP are mapped by default to Distribution metrics. Because of how OTLP sends this data, percentile aggregations and the max and min (if not available on the original OTLP data) are approximations, not accurate calculations.
+- **Delta (Default and Recommended)**: Explicit Bucket and Exponential Histograms are ingested natively and stored with their original bucket structure preserved. Histograms with a count of 0 are dropped.
+- **Cumulative**: The delta between consecutive points is calculated and reported to Datadog as a distribution. Deltas with a count of 0 are not reported.
 
-Datadog distributions are powered by the [DDSketch data structure][4]. See [Distributions][5] for details on enabling percentile aggregations and threshold queries on your mapped metrics.
+**Note**: See [Producing Delta Temporality Metrics with OpenTelemetry][3] for configuration instructions.
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter allow changing the Histogram export in the `histogram` subsection.
-- If the `mode` is set to `counters`, the following metrics are produced:
+Percentile aggregations are computed directly from the native bucket structure. Min and max are stored when provided; if not present in the original data, they are derived from the bucket boundaries.
 
-`<METRIC_NAME>.bucket`, tagged by `lower_bound` and `upper_bound`
-: Bucket count in the time window for the bucket with the specified lower and upper bounds.<br>
-**Datadog In-App Type**: COUNT
+[3]: /opentelemetry/guide/otlp_delta_temporality/
 
-- If the `send_aggregation_metrics` flag is enabled, the following metrics are produced:
-
-`<METRIC_NAME>.sum`
-: Sum of the values submitted during the time window.<br>
-**Datadog In-App Type**: COUNT
-
-`<METRIC_NAME>.count`
-: Number of values submitted during the time window.<br>
-**Datadog In-App Type**: COUNT
-
-`<METRIC_NAME>.min`
-: Minimum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0. <br>
-**Datadog In-App Type**: GAUGE
-
-`<METRIC_NAME>.max`
-: Maximum of values submitted during the time window. Only available for delta OTLP Histograms. Available since: Datadog exporter v0.75.0 and Datadog Agent v6.45.0 and v7.45.0.<br>
-**Datadog In-App Type**: GAUGE
-
-**Note**: `send_aggregation_metrics` is useful only when not using the distributions mode. Before the Datadog exporter v0.75.0 and the Datadog Agent v6.45.0 and v7.45.0 use `send_count_sum_metrics` instead.
-
-[1]: /metrics/distributions
-[2]: /dashboards/functions/arithmetic/#cumulative-sum
 {{% /tab %}}
 {{% tab "Summary" %}}
 
@@ -131,7 +111,7 @@ An OTLP Summary is a legacy type that conveys quantile information about a popul
 
 OTLP supports two kinds of attributes: datapoint-level attributes and resource attributes. These attributes may follow OpenTelemetry semantic conventions and have well-known semantics.
 
-The Datadog Agent and the OpenTelemetry Collector Datadog exporter map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
+The Datadog Agent and the OpenTelemetry Collector OTLP Exporter map the datapoints-level attributes as tags. Resource attributes following OpenTelemetry semantic conventions are mapped to the equivalent Datadog conventions if they exist.
 
 You may add all resource attributes as tags by using the `resource_attributes_as_tags` flag.
 

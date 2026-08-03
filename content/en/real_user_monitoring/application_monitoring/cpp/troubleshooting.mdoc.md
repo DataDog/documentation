@@ -8,7 +8,6 @@ further_reading:
 - link: /real_user_monitoring
   tag: Documentation
   text: Explore Real User Monitoring
-site_support_id: rum_cpp
 ---
 
 {% partial file="sdk/troubleshooting/cpp.mdoc.md" /%}

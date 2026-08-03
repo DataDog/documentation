@@ -6,6 +6,10 @@ aliases:
 - /incident_response/case_management/mcp_server/
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-danger">AI features for Case Management are not supported for your selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 Datadog Case Management lets you assign work to AI agents alongside people. It integrates with the Datadog MCP Server and custom agents built with Bits Agent Builder to automate case triage, assignment, and resolution.
 
 ## MCP Server

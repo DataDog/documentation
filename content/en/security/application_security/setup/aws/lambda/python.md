@@ -16,7 +16,16 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/datadog-security-google-cloud/"
       tag: "Blog"
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
+    - link: "https://www.datadoghq.com/blog/app-api-protection-python-lambda-monitoring/"
+      tag: "Blog"
+      text: "Detect runtime threats in Python Lambda functions with Datadog AAP"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 Configuring App and API Protection for AWS Lambda involves:
 

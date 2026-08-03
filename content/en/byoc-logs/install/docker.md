@@ -16,7 +16,7 @@ aliases:
 ## Overview
 
 <div class="alert alert-warning">
-<strong>This installation method is for local evaluation only.</strong> Docker is not supported for production deployments. For production workloads, deploy BYOC Logs on a <a href="/byoc-logs/install/">supported Kubernetes platform</a> (EKS, GKE, AKS, or self-managed Kubernetes).
+<strong>This installation method is for local evaluation only.</strong> Docker is not supported for production deployments. For production workloads, deploy BYOC Logs on a <a href="/byoc-logs/install/">supported Kubernetes platform</a> (EKS, GKE, or AKS).
 </div>
 
 This installation guide shows you how to run Datadog BYOC (Bring Your Own Cloud) Logs locally using either standalone Docker containers or Docker Compose. Follow these steps to deploy a minimal BYOC Logs environment on your machine, ideal for exploring BYOC Logs features and testing log ingestion with Datadog.
@@ -186,7 +186,7 @@ curl -X POST "http://localhost:7280/api/v2/logs" \
 
 ### Search your local logs from the Log Explorer
 
-After verifying that BYOC Logs is running, you can search and analyze your logs in the Logs Explorer by searching into the `cloudprem` index!
+Verify that BYOC Logs is running. In the Log Explorer, select your BYOC Logs index to search and analyze your logs.
 
 ## Further reading
 

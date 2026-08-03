@@ -5,6 +5,9 @@ further_reading:
   - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
     tag: Blog
     text: Manage metric volume and tags in your environment with Observability Pipelines
+  - link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+    tag: "Blog"
+    text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs
@@ -15,11 +18,6 @@ products:
 ---
 
 {{< product-availability >}}
-
-{{< callout url="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/"
- btn_hidden="false" header="Join the Preview!">}}
-Sending metrics to Observability Pipelines is in Preview. Fill out the form to request access.
-{{< /callout >}}
 
 ## Overview
 
@@ -43,16 +41,16 @@ If your forwarders are globally configured to enable SSL, you need the appropria
 
 ## Setup
 
-Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the source in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the OpenTelemetry HTTP and gRPC listener addresses and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Set up this source when you [set up a pipeline][6]. You can set up a pipeline in the [UI][10], using the [API][11], or with [Terraform][12]. The instructions in this section are for setting up the source in the UI.
 
 After you select the OpenTelemetry source in the pipeline UI:
 
 1. Enter the identifier for your HTTP listener address. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your gRPC listener address. If you leave it blank, the [default](#secret-defaults) is used.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional TLS settings
 

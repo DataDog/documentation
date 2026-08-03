@@ -1,10 +1,11 @@
 ---
 title: Controls
 description: How to use Governance Console Controls to enforce consistent configurations and organizational best practices across a Datadog environment.
+further_reading:
+- link: "https://www.datadoghq.com/blog/governance-console/"
+  tag: "Blog"
+  text: "Centralize observability management with Datadog Governance Console"
 ---
-
-{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
 
 ## Overview
 Governance Console Controls audit and enforce organizational standards. You can use these controls to automate hygiene and quality tasks that typically require manual effort, such as managing unused API keys or enforcing tagging standards.
@@ -131,3 +132,7 @@ Monitors with Broken Notification Handles
   {{% /collapse-content %}}
 
 [1]: https://app.datadoghq.com/governance/controls
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

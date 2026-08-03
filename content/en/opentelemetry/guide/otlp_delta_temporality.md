@@ -276,7 +276,7 @@ processors:
 
 Finally, add it to the `processors` list on your metrics pipelines.
 
-**Note**: The cumulative-to-delta processor does not support exponential histograms. Also, some fields, such as the minimum and maximum, can't be recovered with this approach. Instead, use the OpenTelemetry SDK approach whenever possible.
+**Note**: Some fields, such as the minimum and maximum, can't be recovered with this approach. Use the OpenTelemetry SDK approach whenever possible.
 
 ## Further reading
 

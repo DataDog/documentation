@@ -19,11 +19,11 @@ Use Observability Pipelines' Socket source to send logs to the Worker over a soc
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
+
+**Note**: The Worker can only receive logs over TCP or UDP. If your application writes to a UNIX domain socket, see [UNIX domain sockets](#unix-domain-sockets) for more information.
 
 After you select the Socket source in the pipeline UI:
 
@@ -63,11 +63,77 @@ After you select the Socket source in the pipeline UI:
         </tr>
     </table>
 
+{{% observability_pipelines/secrets_env_var_note %}}
+
 ### Optional TLS settings
 
 {{% observability_pipelines/tls_settings %}}
 
 {{% observability_pipelines/tls_settings_mtls %}}
+
+## UNIX domain sockets
+
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket, use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
+
+### Standalone bridge
+
+Run `socat` alongside your application to forward from the UNIX socket to the Worker:
+
+```
+socat UNIX-RECV:/var/run/app.sock TCP:<OPW_HOST>
+```
+
+Replace <OPW_HOST> with the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
+
+### Kubernetes sidecar
+
+In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it is not reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
+
+```yaml
+volumes:
+  - name: app-socket
+    emptyDir: {}
+
+initContainers:
+  # Remove any stale socket file before the sidecar starts
+  - name: socket-cleanup
+    image: busybox:1.36
+    command: ["sh", "-c", "rm -f /var/run/app/app.sock"]
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+containers:
+  # Your application container
+  - name: app
+    # ...
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+  # socat sidecar: bridges the UNIX socket to the Worker's Service
+  - name: socat-opw-bridge
+    image: alpine/socat:1.8.0.0
+    args:
+      - UNIX-RECV:/var/run/app/app.sock,fork
+      - TCP:<RELEASE_NAME>-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:5000
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+# Monitor and adjust resources as necessary
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+```
+
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost`. The Worker's StatefulSet pods aren't guaranteed to run on every node, so the Worker pod might not be reachable at `localhost`. This is especially true if you have dedicated node groups for the Worker and your workloads.
 
 ## Secret defaults
 

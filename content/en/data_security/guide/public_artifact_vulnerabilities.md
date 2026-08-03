@@ -1,11 +1,11 @@
 ---
 title: Public Artifact Vulnerabilities
 description: Look up CVE and vulnerability information for Datadog's publicly available artifacts.
+further_reading:
+- link: "https://www.datadoghq.com/blog/datadog-public-artifact-vulnerabilities-openvex/"
+  tag: "Blog"
+  text: "Reduce CVE noise with OpenVEX assessments in Datadog"
 ---
-
-{{< callout url="#">}}
-  Public Artifact Vulnerabilities is in Preview.
-{{< /callout >}} 
 
 ## Overview
 
@@ -74,7 +74,7 @@ After you search for a CVE, the table filter clears so all returned rows are vis
 
 ## Available artifacts (images)
 
-The **Image** dropdown is populated from the list of tracked public artifacts. If an expected artifact is missing, contact [Datadog Support][1] to request that it be added.
+The **Image** dropdown is populated from the list of tracked public artifacts. Public Artifact Vulnerabilities supports the **latest 10 versions** of tracked public images. If an expected artifact is missing, contact [Datadog Support][1] to request that it be added.
 
 ## Options and actions on the page
 
@@ -86,3 +86,7 @@ The **Image** dropdown is populated from the list of tracked public artifacts. I
 | {{< ui >}}Resizable columns{{< /ui >}} | You can resize column widths for readability. |
 
 [1]: /help
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

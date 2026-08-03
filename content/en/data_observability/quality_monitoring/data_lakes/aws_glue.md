@@ -218,8 +218,8 @@ After the sync completes, your tables appear in the [Data Catalog][3]. You can a
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /integrations/amazon-web-services/
-[2]: https://app.datadoghq.com/datasets/settings/integrations
-[3]: https://app.datadoghq.com/datasets/catalog?integration=awsglue%2Fdatabase_account
+[2]: https://app.datadoghq.com/data-obs/settings/integrations
+[3]: https://app.datadoghq.com/data-obs/catalog?integration=awsglue%2Fdatabase_account
 [4]: https://docs.aws.amazon.com/glue/latest/dg/security_iam_id-based-policy-examples.html
 [5]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-iceberg.html
 [6]: /integrations/amazon-glue/

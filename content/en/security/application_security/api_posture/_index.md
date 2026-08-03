@@ -7,6 +7,12 @@ further_reading:
   text: "From discovery to defense: Securing APIs with Datadog App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Use API Posture in [App and API Protection][1] (AAP) to discover your APIs, assess the risks they expose, and track your security posture.
 
 To get started, [set up AAP][2] on your services to discover endpoints from your live traffic. Other data sources, such as Amazon API Gateway and source code, require additional setup; see [API Endpoints][3] for details.
@@ -19,6 +25,7 @@ API Posture brings together several capabilities, all built on the same live API
 - Assess what each API exposes with [API Findings][5] and [Sensitive Data][6]. Findings aggregate the vulnerabilities and misconfigurations tied to your endpoints, and sensitive data tagging shows which endpoints process PII, credentials, or payment data.
 - Verify which endpoints are publicly accessible, and which require authentication, using [Endpoint Scanning][7]. Endpoint Scanning probes your endpoints from outside your environment, rather than inferring behavior from observed traffic.
 - Measure your organization-wide posture in the API Posture section of the [{{< ui >}}Overview{{< /ui >}} page][8]. It shows how your endpoints are discovered, which ones are exposed to attacks or process sensitive data, and your open findings by severity.
+- Track your security posture against industry-standard frameworks with [Compliance][9]. It maps API security detection rules to OWASP API Security Top 10 controls and shows a real-time score of passing and failing controls across your services.
 
 ## Further reading
 
@@ -32,3 +39,4 @@ API Posture brings together several capabilities, all built on the same live API
 [6]: /security/application_security/api_posture/sensitive_data/
 [7]: /security/application_security/api_posture/endpoint_scanning/
 [8]: https://app.datadoghq.com/security/appsec/overview/summary
+[9]: /security/application_security/api_posture/compliance/

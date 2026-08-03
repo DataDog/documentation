@@ -62,6 +62,60 @@ Remove filler words and unsupported claims:
 - quick, quickly
 - very
 
+**Case-sensitive terms** (use the exact capitalization shown—these are fixed, not inferable from surrounding text):
+
+| Don't use | Use instead |
+|-----------|--------------|
+| Availability Zone(s) | availability zone(s) |
+| boolean(s) | Boolean(s) |
+| Browser Test | browser test |
+| Distributed Tracing | distributed tracing |
+| ebook(s) / e-book(s) | eBook(s) |
+| ecommerce (any casing/hyphenation) | ecommerce |
+| Event Stream | event stream |
+| golden paths | Golden Paths |
+| heat map(s) (any casing/hyphenation) | heat map(s) |
+| host map(s) (any casing/hyphenation) | host map(s) |
+| Internet | internet |
+| i/o, I-O | I/O |
+| i-ops, I-OPS | IOPS |
+| Mean Time to Acknowledge | mean time to acknowledge |
+| Mean Time to Detect | mean time to detect |
+| Mean Time to Detection | mean time to detection |
+| Mean Time to Resolve | mean time to resolve |
+| Mean Time to Resolution | mean time to resolution |
+| Multistep API Test | multistep API test |
+| Once | After |
+| Performance Schema | performance schema |
+| Security Signal | security signal |
+| Shared Responsibility Model | shared responsibility model |
+| Sys Schema | sys schema |
+| X-axis | x-axis |
+| Y-axis | y-axis |
+| App Analytics | Tracing without Limits™ |
+| datadog (any casing) | Datadog |
+| Datadog agent | Datadog Agent |
+| dev ops, devops (any casing) | DevOps or DevSecOps (as appropriate) |
+| dogstatsd (any casing) | DogStatsD |
+| github (any casing) | GitHub |
+| Google Cloud Platform | Google Cloud |
+| JIRA, jira | Jira |
+| kubernetes, k8s (any casing) | Kubernetes |
+| map reduce (any casing/spacing) | MapReduce |
+| memcached | Memcached |
+| net flow (any casing/spacing) | NetFlow |
+| Network Performance Monitoring, NPM | Cloud Network Monitoring, CNM |
+| nginx, Nginx | NGINX |
+| node.js, nodejs, Node (any casing) | Node.js |
+| pager duty (any casing/spacing) | PagerDuty |
+| prometheus | Prometheus |
+| sql, Sql | SQL |
+| statsd (any casing) | StatsD |
+| Synthetics | Synthetic Monitoring |
+| Trace Search and Analytics | Tracing without Limits™ |
+| unix, Unix | UNIX |
+| \*NIX | Unix-like |
+
 Other style rules:
 - Use American English (en_US)
 - "See" should be lowercase after a comma

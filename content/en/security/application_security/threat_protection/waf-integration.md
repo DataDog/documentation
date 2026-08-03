@@ -10,6 +10,12 @@ further_reading:
   text: "Monitor AWS WAF activity with Datadog"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Protecting web applications and APIs requires a multi-layered approach that combines in-app monitoring and perimeter defenses. These complementary strategies enable you to have a *defense-in-depth* App and API Protection approach that leverages AWS Web Application Firewall (WAF) as the first line of defense, followed by Exploit Prevention for blocking attacks that slip by the WAF.
 
 For details on how Exploit Prevention differs from In-App WAF, see [Exploit Prevention vs. In-App WAF][5].

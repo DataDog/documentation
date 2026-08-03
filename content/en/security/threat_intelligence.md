@@ -10,6 +10,9 @@ further_reading:
   - link: "/security/cloud_siem/threat_intelligence/"
     tag: "documentation"
     text: "Cloud SIEM Threat Intelligence"
+  - link: "https://www.datadoghq.com/blog/cloud-security-investigation-ai/"
+    tag: "Blog"
+    text: "How to investigate cloud credential compromise with Bits Security Analyst"
 
 products:
 - name: Cloud SIEM
@@ -32,6 +35,10 @@ Threat Intelligence is reputation information that helps responders make informe
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
 ## Bring your own threat intelligence
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
 
 Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 

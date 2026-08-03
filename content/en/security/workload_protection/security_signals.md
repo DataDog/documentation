@@ -80,5 +80,5 @@ Use [Workflow Automation][8] to manually trigger a workflow for a security signa
 [5]: /incident_response/incident_management/
 [6]: /incident_response/case_management/
 [7]: /security/cloud_security_management/workflows
-[8]: /service_management/workflows
+[8]: /actions/workflows
 [9]: /security/workload_protection/

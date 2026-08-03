@@ -8,9 +8,6 @@ aliases:
 - /security/application_security/vulnerability_management/
 
 further_reading:
-  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
-    tag: Blog
-    text: Detect and block exposed credentials with Datadog Secret Scanning
   - link: /security/code_security/software_composition_analysis/setup_static/
     tag: Documentation
     text: Set up Static SCA
@@ -26,12 +23,21 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
+  - link: "https://www.datadoghq.com/blog/smart-vulnerability-remediation/"
+    tag: "Blog"
+    text: "Take a smarter approach to vulnerability remediation with Datadog"
   - link: "https://www.datadoghq.com/blog/remediate-faster-code-security"
     tag: "Blog"
     text: "Remediate transitive vulnerabilities faster with Datadog Software Composition Analysis"
   - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
     tag: "Blog"
     text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
 
 ---
 ## Overview
@@ -54,7 +60,7 @@ When Datadog ingests a new advisory, it is matched against your last known libra
 
 ## Vulnerability database
 
-Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research. 
+Datadog SCA draws from multiple public and private sources to build a curated proprietary database. These sources include the [National Vulnerability Database (NVD)][21], the [GitHub Advisory Database][22], [osv.dev][23], ecosystem-specific advisories such as [PyPA's Advisory Database][24] and the [Global Security Database][25], [Datadog GuardDog][26], and Datadog Security Research.
 
 Datadog uses these sources to identify known vulnerabilities, malicious packages, and emerging supply chain threats across supported ecosystems. There is a maximum of 1 hour between when a new vulnerability is published and when it appears in Datadog, with emerging vulnerabilities typically appearing in Datadog within minutes. Malicious packages are reported in Datadog within 6 hours.
 
@@ -99,6 +105,61 @@ Click on a library with a vulnerability to open a side panel that contains infor
 
 <!-- {{< img src="code_security/software_composition_analysis/sca-violation.png" alt="Side panel for a SCA violation" style="width:80%;">}} -->
 
+### Remediation
+
+Datadog SCA supports using coding agents and [Bits Code][31] to apply fixes for vulnerable libraries. You can also use [Bits Code Automation][32] to automatically generate fixes for vulnerabilities as they are found or on a schedule.
+
+<div class="alert alert-info">SCA remediations in Bits Code require internet access to apply library upgrades. To configure internet access, see <a href="/bits_ai/bits_code/setup/#configure-internet-access">Configure internet access</a>.</div>
+
+To view and remediate vulnerabilities:
+
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Code Security{{< /ui >}} > {{< ui >}}Vulnerabilities{{< /ui >}}][11], and select {{< ui >}}Libraries (SCA){{< /ui >}}.
+2. Select a vulnerability to open a side panel with details about the finding and the affected library.
+3. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}
+4. Select either Bits Code or another coding agent. With Bits Code, you can choose between:
+   - [{{< ui >}}Single fix{{< /ui >}}](#single-fix): Generates a fix for this vulnerable library
+     - If a fix has already been generated, select {{< ui >}}View fix and create PR{{< /ui >}} to view the existing [remediation session](#remediation-session-details).
+   - [{{< ui >}}Create automation{{< /ui >}}](#create-automation): Opens a pop-up modal where you can create a [Bits Code automation][32]
+
+#### Single fix
+
+Use **Single fix** to open a Bits Code session to fix this single vulnerability. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
+
+View all Bits Code sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][33].
+
+#### Create automation
+
+Use **Create automation** to create a [Bits Code automation][32] to generate fixes for SCA vulnerabilities automatically, either as they are found or on a schedule.
+
+Selecting this option opens an {{< ui >}}Automate with Bits{{< /ui >}} modal with the {{< ui >}}Remediate SCA vulnerabilities{{< /ui >}} action pre-filled. Complete the form, including specifying a trigger and output, then click {{< ui >}}Create Automation{{< /ui >}}. See [Automations][32] to learn more about actions, triggers, and outputs.
+
+View all Bits Code automations on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][34].
+
+#### Remediation session details
+
+Each Bits Code session shows the life cycle of an AI-generated fix so you can review and validate changes before merging. It includes:
+
+- The original security finding and proposed code change
+- An explanation of how and why Bits Code generated the fix
+- CI results (if enabled) to validate the patch is safe to deploy
+- Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
+
+You can also view all remediation sessions on [**Sessions**][33].
+
+#### Fix with Cursor
+Instead of Bits Code, you can generate a fix with an AI coding agent such as Cursor:
+
+1. In the {{< ui >}}Remediate with AI{{< /ui >}} dialog, select the {{< ui >}}Coding agent{{< /ui >}} tab.
+2. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored prompt that includes the recommended library upgrade for the vulnerability.
+
+To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+You can start this flow from the {{< ui >}}Remediation{{< /ui >}} section of a vulnerability's side panel, or from the {{< ui >}}Repositories{{< /ui >}} table. Each row in the table represents a repository or file that contains the vulnerable library.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/software_composition_analysis/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
+
 ### Automatically block risky changes with PR Gates
 
 Use [PR Gates][16] to enforce security standards for open source libraries before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies vulnerabilities or license violations that exceed your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.
@@ -113,7 +174,7 @@ PR Gates marks a PR check as failed only if the developer introduces a new viola
 
 The [Library Inventory][8] provides visibility into the third-party libraries detected across your codebase. Datadog collects this information from:
 
-* **Static SCA**, which identifies all libraries referenced in your repositories, and  
+* **Static SCA**, which identifies all libraries referenced in your repositories, and
 * **Runtime SCA**, which detects libraries that are actually loaded and used by your services at runtime.
 
 Use the Library Inventory to understand which dependencies you rely on, where they are used, and whether they contain known vulnerabilities or license risks.
@@ -250,3 +311,7 @@ You can exclude paths from Static SCA analysis by configuring `ignore-paths` in 
 [28]: /security/code_security/guides/configuration/
 [29]: /security/code_security/software_composition_analysis/library_inventory/#export-a-software-bill-of-materials-sbom
 [30]: /security/code_security/software_composition_analysis/configuration/
+[31]: /bits_ai/bits_code
+[32]: /bits_ai/bits_code/automations
+[33]: https://app.datadoghq.com/code
+[34]: https://app.datadoghq.com/code/automations

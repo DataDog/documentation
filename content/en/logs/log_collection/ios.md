@@ -380,6 +380,45 @@ DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCu
 {{< /tabs >}}
 {{< /site-region >}}
 
+{{< site-region region="uk1" >}}
+{{< tabs >}}
+{{% tab "Swift" %}}
+
+```swift
+import DatadogCore
+import DatadogLogs
+
+Datadog.initialize(
+	with: Datadog.Configuration(
+		clientToken: "<client token>",
+		env: "<environment>",
+		site: .uk1,
+		service: "<service name>"
+	),
+	trackingConsent: trackingConsent
+)
+
+Logs.enable()
+```
+{{% /tab %}}
+{{% tab "Objective-C" %}}
+```objective-c
+@import DatadogLogs;
+
+DDConfiguration *configuration = [[DDConfiguration alloc] initWithClientToken:@"<client token>" env:@"<environment>"];
+configuration.service = @"<service name>";
+configuration.site = [DDSite uk1];
+
+[DDDatadog initializeWithConfiguration:configuration
+                       trackingConsent:trackingConsent];
+
+DDLogsConfiguration *logsConfiguration = [[DDLogsConfiguration alloc] initWithCustomEndpoint:nil];
+[DDLogs enableWith:logsConfiguration];
+```
+{{% /tab %}}
+{{< /tabs >}}
+{{< /site-region >}}
+
 To be compliant with the GDPR regulation, the SDK requires the `trackingConsent` value at initialization.
 The `trackingConsent` can be one of the following values:
 

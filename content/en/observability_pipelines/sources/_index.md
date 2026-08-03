@@ -49,6 +49,7 @@ These are the available sources:
 - [Splunk Heavy or Universal Forwarders (TCP)][21]
 - [Sumo Logic Hosted Collector][22]
 - [Syslog][23]
+- [WebSocket][24]
 
 [1]: /observability_pipelines/sources/akamai_datastream/
 [2]: /observability_pipelines/sources/amazon_data_firehose/
@@ -73,6 +74,7 @@ These are the available sources:
 [21]: /observability_pipelines/sources/splunk_tcp/
 [22]: /observability_pipelines/sources/sumo_logic/
 [23]: /observability_pipelines/sources/syslog/
+[24]: /observability_pipelines/sources/websocket/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}

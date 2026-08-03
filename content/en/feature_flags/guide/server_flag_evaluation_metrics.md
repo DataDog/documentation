@@ -22,13 +22,15 @@ Flag evaluation metrics let you measure how often each variant of a feature flag
 
 <div class="alert alert-warning">The <code>feature_flag.evaluations</code> metric is experimental and may change or be removed in a future release.</div>
 
+<div class="alert alert-warning"><strong>Node.js agentless limitation:</strong> The initial agentless releases in <code>dd-trace</code> 5.116.0 and 6.5.0 support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases. Do not set <code>DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true</code> to enable these features in agentless mode. The setting is deprecated and preserves Agent Remote Configuration when no explicit configuration source is set; remove it when you <a href="/feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup">migrate to agentless delivery</a>.</div>
+
 ## Prerequisites
 
 Before setting up flag evaluation metrics, confirm the following:
 
 - [Server-side feature flags][1] are already configured.
 - Datadog Agent 7.32.0 or later is running.
-- `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application.
+- For Agent-backed configurations that use the legacy activation path, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` is set on your application. Do not use this setting for the initial Node.js agentless releases described above.
 - Your server-side tracer meets the minimum version for flag evaluation metrics support:
 
 | Language | Minimum tracer version |
@@ -41,6 +43,8 @@ Before setting up flag evaluation metrics, confirm the following:
 | Python   | 4.7.0                  |
 | Ruby     | 2.32.0                 |
 
+The Node.js minimum in this table applies to supported Agent-backed evaluation metrics. The initial Node.js agentless releases do not support this metric.
+
 ## Step 1: Enable the Agent OTLP receiver
 
 Flag evaluation metrics are emitted over OpenTelemetry (OTLP). The Datadog Agent includes an OTLP receiver that is off by default. For setup instructions, see [OTLP Ingestion by the Datadog Agent][2].
@@ -51,19 +55,88 @@ You only need to enable the protocol your application uses (gRPC on port 4317, o
 
 ## Step 2: Configure your application
 
-Set the following environment variable on your application, in addition to the standard [server-side feature flag configuration][1]:
+For supported tracer and delivery-mode combinations except Java, set the following environment variable in addition to the standard [server-side feature flag configuration][1]. For Java, `DD_METRICS_OTEL_ENABLED` has no effect; see the [Java: Add the OpenTelemetry SDK dependencies](#java-add-the-opentelemetry-sdk-dependencies) section instead.
 
 {{< code-block lang="bash" >}}
 # Enable flag evaluation metrics
 DD_METRICS_OTEL_ENABLED=true
 {{< /code-block >}}
 
+### Java: Add the OpenTelemetry SDK dependencies
+
+The Java provider records `feature_flag.evaluations` through the OpenTelemetry SDK and exports it over OTLP, so the `opentelemetry-sdk-metrics` and `opentelemetry-exporter-otlp` dependencies must be on your application's classpath. Add them alongside your [Java feature flag dependencies][6]. Import the OpenTelemetry BOM so the OpenTelemetry API and SDK stay on the same version:
+
+{{< tabs >}}
+{{% tab "Gradle (Groovy)" %}}
+{{< code-block lang="groovy" filename="build.gradle" >}}
+dependencies {
+    implementation platform('io.opentelemetry:opentelemetry-bom:1.47.0')
+    implementation 'io.opentelemetry:opentelemetry-sdk-metrics'
+    implementation 'io.opentelemetry:opentelemetry-exporter-otlp'
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Gradle (Kotlin)" %}}
+{{< code-block lang="kotlin" filename="build.gradle.kts" >}}
+dependencies {
+    implementation(platform("io.opentelemetry:opentelemetry-bom:1.47.0"))
+    implementation("io.opentelemetry:opentelemetry-sdk-metrics")
+    implementation("io.opentelemetry:opentelemetry-exporter-otlp")
+}
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Maven" %}}
+{{< code-block lang="xml" filename="pom.xml" >}}
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>io.opentelemetry</groupId>
+            <artifactId>opentelemetry-bom</artifactId>
+            <version>1.47.0</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
+<dependencies>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-sdk-metrics</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-exporter-otlp</artifactId>
+    </dependency>
+</dependencies>
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
+On the Java tracer, the provider starts its OTLP metrics exporter automatically when the OpenTelemetry SDK is on the classpath. If the dependencies are missing, no metrics are emitted and the tracer logs `OpenTelemetry SDK is not on the classpath`.
+
+<div class="alert alert-info">In Spring Boot applications, Spring Boot's OpenTelemetry autoconfiguration also creates an <code>OpenTelemetrySdk</code> bean. If the OpenTelemetry SDK version it resolves does not match the OpenTelemetry API version on the classpath, startup fails with a <code>BeanCreationException</code> for the <code>openTelemetry</code> bean and <code>NoClassDefFoundError: io/opentelemetry/sdk/internal/ScopeConfigurator</code>. Importing the <code>opentelemetry-bom</code> as shown above keeps the API and SDK on the same version and resolves the error.</div>
+
+### Ruby: Add the OpenTelemetry metrics gems
+
+For Ruby applications, add the OpenTelemetry metrics SDK and OTLP metrics exporter gems to your application bundle:
+
+{{< code-block lang="ruby" filename="Gemfile" >}}
+gem "opentelemetry-metrics-sdk", ">= 0.8"
+gem "opentelemetry-exporter-otlp-metrics", ">= 0.4"
+{{< /code-block >}}
+
+Install the gems with `bundle install`. These gems provide the OpenTelemetry meter provider and OTLP metrics exporter. The Ruby tracer uses them when `DD_METRICS_OTEL_ENABLED=true` is set. If the gems are missing, the Ruby tracer does not emit `feature_flag.evaluations` metrics and logs `Failed to load OpenTelemetry metrics gems`.
+
+### Endpoint configuration
+
 By default, most tracers send OTLP metrics to the Agent at `DD_AGENT_HOST` on port `4318` (HTTP). If your application already sets `DD_AGENT_HOST` to reach the Agent, no endpoint configuration is required.
 
 Set an OTLP endpoint explicitly in any of these cases:
 
 - The Agent is not reachable at `DD_AGENT_HOST` on the default OTLP port (for example, a remote Agent or a non-default port).
-- You use the **Java** tracer. The Java tracer does not derive the endpoint from `DD_AGENT_HOST`; it defaults to `localhost:4318`. Set the endpoint whenever the Agent is not on `localhost`.
+- You use the **Java** tracer. Its flag evaluation metrics exporter supports OTLP/HTTP only (gRPC is not supported) on port `4318`. The Java tracer does not derive the endpoint from `DD_AGENT_HOST` and defaults to `http://localhost:4318`. Set `OTEL_EXPORTER_OTLP_ENDPOINT` to the Agent's HTTP endpoint when the Agent is not on `localhost`.
 - You use the **Python** tracer. The Python tracer defaults to gRPC on port `4317`, not HTTP. Enable the gRPC OTLP receiver on the Agent, or override the protocol to use HTTP instead:
 
 {{< code-block lang="bash" >}}
@@ -151,3 +224,4 @@ The `feature_flag.evaluations` metric is a counter with the following tags:
 [3]: https://app.datadoghq.com/metric/explorer
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /dashboards/
+[6]: /feature_flags/server/java/#installation

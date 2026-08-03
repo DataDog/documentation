@@ -58,7 +58,7 @@ The following permissions are required to use Dynamic Instrumentation:
 - One of the following write permissions:
   - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify instrumentations in any environment.
   - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
-- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the **Capture method parameters and local variables** option.
+- **Dynamic Instrumentation Capture Variables** (`debugger_capture_variables`) - Required to use the {{< ui >}}Capture method parameters and local variables{{< /ui >}} option.
 
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
@@ -113,7 +113,7 @@ As a developer, you can also think of a probe as a "non-breaking breakpoint". In
 All probe types require the same initial setup:
 
 1. Go to the [Dynamic Instrumentation page][12].
-1. Click **Create Probe** in the top right, or click the three-dot menu on a service and select **Add a probe for this service**.
+1. Click {{< ui >}}Create Probe{{< /ui >}} in the top right, or click the three-dot menu on a service and select {{< ui >}}Add a probe for this service{{< /ui >}}.
 1. If they are not prefilled, choose service, runtime, environment, and version.
 1. In the source code, specify where to set the probe by selecting either a class and method or a source file and line. If you opted into the [autocomplete and search Preview][17], autocomplete shows suggestions for selecting a class or method.
 
@@ -122,10 +122,10 @@ See the individual probe types below for specific creation steps for each probe 
 Alternatively, you can create a probe from these other contexts:
 
 Profiling
-: On a profiler flame graph, you can create a probe for a method by selecting **Instrument this frame with a probe** from the frame's context menu.
+: On a profiler flame graph, you can create a probe for a method by selecting {{< ui >}}Instrument this frame with a probe{{< /ui >}} from the frame's context menu.
 
 Error Tracking
-: On a stack trace, mouse over a stack frame and click **Instrument**. This prefills the probe creation form with the Issue context.
+: On a stack trace, mouse over a stack frame and click {{< ui >}}Instrument{{< /ui >}}. This prefills the probe creation form with the Issue context.
 
 
 ### Creating log probes
@@ -134,7 +134,7 @@ A *log probe* emits a log when it executes.
 
 To create a log probe:
 
-1. Select **Log** as the probe type.
+1. Select {{< ui >}}Log{{< /ui >}} as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Define a log message template. You can use the Dynamic Instrumentation expression language to reference values from the execution context.
 1. (In Preview) Optionally enable extra data capturing from the probe.
@@ -148,7 +148,7 @@ You can also set a condition on a log probe using the [expression language][15].
 
 {{< img src="dynamic_instrumentation/log_probe.png" alt="Creating a Dynamic Instrumentation log probe" >}}
 
-(In Preview) If you enable **Capture method parameters and local variables** on the log probe, all execution context is added the log event:
+(In Preview) If you enable {{< ui >}}Capture method parameters and local variables{{< /ui >}} on the log probe, all execution context is added the log event:
   - **Method arguments**, **local variables**, and **fields**, with the following default limits:
     - Follow references three levels deep (configurable in the UI).
     - The first 100 items inside collections.
@@ -161,8 +161,8 @@ Probes with this setting enabled are rate-limited to one hit per second.
 
 <div class="alert alert-info"><p><strong>Warning: The captured data may contain sensitive information, including personal data, passwords, and secrets such as AWS keys.</strong></p><p>To ensure this information is properly redacted:<ul>
 <li>Datadog Dynamic Instrumentation employs several techniques to redact sensitive information. To learn more about the default mechanisms or how to extend the it to meet your needs, read <a href="/dynamic_instrumentation/sensitive-data-scrubbing/">Sensitive Data Scrubbing</a>.</li>
-<li>Turn off the <strong>Capture method parameters and local variables</strong> option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional sensitive data leaks. </li>
-<li>If you are the Administrator of your Datadog account and would like to prevent other users from being able to use the <strong>Capture method parameters and local variables</strong> option, you can revoke their Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
+<li>Turn off the {{< ui >}}Capture method parameters and local variables{{< /ui >}} option and explicitly select the variables you want to include in the log message template. Doing so ensures that log probes contain only data related to the variables that you specifically identify, thus reducing the risk of unintentional sensitive data leaks. </li>
+<li>If you are the Administrator of your Datadog account and would like to prevent other users from being able to use the {{< ui >}}Capture method parameters and local variables{{< /ui >}} option, you can revoke their Dynamic Instrumentation Capture Variables (<code>debugger_capture_variables</code>) permission. </li></ul></p><p>Alternatively, if you need to log this data but want to mitigate the risk associated with it being accessible in the Datadog product, you can limit which users in your organization can view the captured data by setting up a <a href="/logs/guide/logs-rbac/?tab=ui#restrict-access-to-logs">Restriction query</a> on <code>source:dd_debugger</code>.</p></div>
 
 ### Creating metric probes
 
@@ -170,7 +170,7 @@ A *metric probe* emits a metric when it executes.
 
 To create a metric probe:
 
-1. Select **Metric** as the probe type.
+1. Select {{< ui >}}Metric{{< /ui >}} as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
@@ -182,9 +182,9 @@ Metric probes are automatically enabled on all service instances that match the 
 
 Dynamic Instrumentation metric probes support the following metric types:
 
-- **Count**: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
-- **Gauge**: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
-- **Histogram**: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
+- {{< ui >}}Count{{< /ui >}}: Counts how many times a given method or line is executed. Can be combined with [metric expressions][15] to use the value of a variable to increment the count.
+- {{< ui >}}Gauge{{< /ui >}}: Generates a gauge based on the last value of a variable. This metric requires a [metric expression][15].
+- {{< ui >}}Histogram{{< /ui >}}: Generates a statistical distribution of a variable. This metric requires a [metric expression][15].
 
 ### Creating span probes
 
@@ -192,7 +192,7 @@ A *span probe* emits a span when a method is executed.
 
 To create a span probe:
 
-1. Select **Span** as the probe type.
+1. Select {{< ui >}}Span{{< /ui >}} as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 
 {{< img src="dynamic_instrumentation/span_probe.png" alt="Creating a Dynamic Instrumentation span probe" >}}
@@ -206,7 +206,7 @@ Keep in mind that internal spans are not indexed by default and so might not be 
 
 To create a span tag probe:
 
-1. Select **Span Tag** as the probe type.
+1. Select {{< ui >}}Span Tag{{< /ui >}} as the probe type.
 1. Complete the [generic probe setup](#creating-a-probe) (choose service, environment, version, and probe location).
 1. Specify a name for the tag.
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
