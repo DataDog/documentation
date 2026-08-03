@@ -8,6 +8,9 @@ further_reading:
 - link: "/feature_flags/concepts/traffic_splitting"
   tag: "Documentation"
   text: "Traffic Splitting and Randomization"
+- link: "/feature_flags/concepts/experiments"
+  tag: "Documentation"
+  text: "Feature Flags and Experiments"
 - link: "/feature_flags/concepts/environments"
   tag: "Documentation"
   text: "Environments"
@@ -28,7 +31,7 @@ Datadog supports different targeting rule types depending on your rollout strate
 |------|-------------|
 | **Feature gate** | Roll out immediately to a percentage of subjects matching your filter (randomized or not) |
 | **Progressive rollout** | Randomized rollout over a schedule with multiple steps |
-| **Experiment** | Randomized allocation associated with an experiment |
+| **Experiment** | Randomized allocation associated with an [experiment][2] |
 
 ## Configure targeting rules
 
@@ -145,3 +148,4 @@ Targeting rules are evaluated **in order** from top to bottom:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/saved_filters/
+[2]: /feature_flags/concepts/experiments/
