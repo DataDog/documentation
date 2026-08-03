@@ -1,13 +1,23 @@
 ---
-title: Stepper test (closed stepper)
+title: Stepper test (customizable page)
 draft: true
 private: true
+content_filters:
+  - trait_id: prog_lang
+    option_group_id: dd_e2e_backend_prog_lang_options
+  - trait_id: database
+    option_group_id: dd_e2e_database_options
 ---
 
 ## Overview
 
-This is a test page used to verify the behavior of a closed stepper (stepper with no `open` attribute).
+This is a test page used to verify stepper scroll behavior on a customizable
+page. Because the page defines `content_filters`, it renders the sticky Cdocs
+filter bar below the header. When you navigate between steps, the new step title
+must scroll clear of both the header and the sticky filter bar.
 
+The first step is intentionally long so that advancing to the next step forces a
+scroll, letting you confirm the title lands below the sticky region.
 
 ## Stepper component
 
@@ -95,41 +105,14 @@ You can then either stop the conflicting process or configure FakeDB to use a di
 {% /step %}
 
 {% step title="Configure the database" %}
-
 Create a configuration file for FakeDB:
 
-{% tabs %}
-
-{% tab label="YAML" %}
 ```yaml
 fakedb:
   host: localhost
   port: 5432
   database: mydb
-  username: admin
-  password: secret
-  max_connections: 100
-  timeout: 30s
 ```
-{% /tab %}
-
-{% tab label="JSON" %}
-```json
-{
-  "fakedb": {
-    "host": "localhost",
-    "port": 5432,
-    "database": "mydb",
-    "username": "admin",
-    "password": "secret",
-    "max_connections": 100,
-    "timeout": "30s"
-  }
-}
-```
-{% /tab %}
-{% /tabs %}
-
 {% /step %}
 
 {% step title="Connect to the database" %}
@@ -137,13 +120,7 @@ Start the FakeDB service and open a connection:
 
 ```shell
 fakedb start
-fakedb connect --host localhost --port 5432 --database mydb --username admin
-```
-
-To verify the connection is working, run a test query:
-
-```shell
-fakedb query "SELECT 1;"
+fakedb connect --host localhost --port 5432 --database mydb
 ```
 {% /step %}
 
