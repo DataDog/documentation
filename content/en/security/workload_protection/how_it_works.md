@@ -22,7 +22,7 @@ Workload Protection detects threats and evaluates runtime security posture by co
 The Datadog Agent collects runtime activity from your workloads. The collection mechanism depends on the platform:
 
 - **Linux**: the eBPF Agent, which offers the broadest feature support.
-- **AWS Fargate**: the eBPF-less Agent. Fargate does not provide eBPF access, so this Agent uses ptrace instead. It covers File Integrity Monitoring and process execution monitoring.
+- **AWS Fargate**: the eBPF-less Agent. Fargate does not provide eBPF access, so this Agent uses ptrace instead. It covers the major Workload Protection features, including File Integrity Monitoring and process execution monitoring.
 - **Windows**: a Windows driver.
 
 For the distributions, versions, and cloud environments each one supports, see [Setting up Workload Protection][9].
@@ -58,9 +58,14 @@ Both depend on enforcement being enabled in the Agent. See [Respond and Report][
 
 ## Managing rules and policies
 
-Agent rules are grouped into [policies][11]. Datadog delivers policies to your Agents using {{< tooltip glossary="Remote Configuration" case="title" >}}, so you can change which rules are active without redeploying the Agent. Datadog ships updates to its own threat definitions through the same channel.
+Agent rules are organized in [policies][11]. A policy is a set of rules that you deploy together and scope to specific infrastructure using tags.
 
-You can manage rules and policies from the Datadog UI, the CLI, or the Datadog Terraform provider. The Terraform provider lets you define and version your rules as code outside the app.
+You deploy a policy in one of two ways:
+
+- **{{< tooltip glossary="Remote Configuration" case="title" >}}**: Datadog delivers the policy to the Agents that its tags target, so you can change which rules are active without touching the host. Datadog ships updates to its own managed policies through the same channel.
+- **Manual deployment**: you install the policy file on each Agent yourself, then reload the runtime policies or restart the Agent.
+
+You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider. The Terraform provider lets you define and version your rules as code outside the app.
 
 ## Further reading
 
