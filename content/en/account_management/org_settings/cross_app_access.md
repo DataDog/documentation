@@ -156,21 +156,26 @@ The issuer URL identifies the Datadog authorization server, not the token endpoi
 Create an AI Agent entry for Claude in Okta, then exchange keys with Anthropic. Anthropic signs the requests Okta receives, so Okta needs Anthropic's public key before it issues any token.
 
 1. Create the AI Agent entry for Claude.
-2. Send the AI Agent ID that Okta generates to Anthropic.
-3. Add the public key that Anthropic returns to the AI Agent entry.
+2. Assign owners to the agent. Okta requires an owner before you can activate it.
+3. Send the AI Agent ID that Okta generates to Anthropic.
+4. Add the public key that Anthropic returns to the AI Agent entry, on the **Credentials** tab.
 
 Until the public key is in place, token exchange fails even though every other value is correct. This exchange is manual, so start it early.
 
 ### Connect Claude to the Datadog application
 
-Add a resource connection from the Claude AI Agent to your Datadog application, and set the following fields.
+On the Claude AI Agent, add the Claude SAML application as a delegated caller, then connect the agent to your Datadog application.
 
-| Okta field | Value |
-|------------|-------|
-| **Client ID at resource** | `391e6845-8153-4de1-bbf0-c1b6ef7fdc14` |
-| **Scope Condition** | **Allow all**, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
+1. On the **Delegations** tab, add the Claude SAML application as a caller.
+2. On the **Resource connections** tab, add a resource connection, select **Application** as the resource type, and select your Datadog application.
+3. Set the following fields.
 
-Add the Claude SAML application as a delegated caller on the AI Agent, then activate the agent.
+   | Okta field | Value |
+   |------------|-------|
+   | **Client ID at resource** | `391e6845-8153-4de1-bbf0-c1b6ef7fdc14` |
+   | **Scope Condition** | **Allow all**, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
+
+4. Activate the agent from the **Actions** menu.
 
 #### Control scopes in Datadog
 
