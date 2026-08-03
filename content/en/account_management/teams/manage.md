@@ -97,7 +97,7 @@ With hierarchies defined, you can:
 - **Escalate issues**: When an issue needs to go beyond the owning team, hierarchy routes it up to the parent team for broader visibility and faster resolution, without manually tracking down who's next in the chain.
 - **Roll-up filtering**: Select a parent team to see all data connected to any of its subteams, without selecting each one. Useful for director and VP-level views, where you care about an entire organization's footprint rather than one team's.
 
-{{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Team filter dropdown with a parent team expanded to show its subteams selected as checkboxes" style="width:50%;" >}}
+{{< img src="account_management/teams/teams_filter_hierarchies2.png" alt="Team filter dropdown with a parent team expanded to show its subteams selected as checkboxes" style="width:50%;" >}}
 
 ### Set up team hierarchies
 
