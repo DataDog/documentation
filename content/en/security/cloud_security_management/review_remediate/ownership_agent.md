@@ -96,7 +96,7 @@ You can filter findings by inferred owner in the [Misconfigurations Explorer](ht
 | ------------------------- | ----------------------------------------------- | ----------------------------------------------------- |
 | `Ownership > Owner`       | The suggested or persisted owner handle         | `@_dd.ownership.inference.owner_handle:team-platform` |
 | `Ownership > Owner type`  | The type of owner: `team`, `service`, or `user` | `@_dd.ownership.inference.owner_type:team`            |
-| `Ownership > Confidence`  | The numeric confidence score (0 to 1):<br>&bull; high: >0.85<br>&bull; medium: 0.60-0.84<br>&bull; low: &lt;0.60 | `@_dd.ownership.inference.confidence:>0.8`            |
+| `Ownership > Confidence`  | The numeric confidence score (0 to 1):<br>&bull; high: &ge;0.85<br>&bull; medium: &ge;0.60 and &lt;0.85<br>&bull; low: &lt;0.60 | `@_dd.ownership.inference.confidence:>=0.85`          |
 | `Ownership > Explanation` | The explanation for the inference               | `@_dd.ownership.inference.explanation:*tag*`          |
 
 
@@ -111,7 +111,7 @@ To find all findings owned by a specific team:
 To find high-confidence suggestions:
 
 ```
-@_dd.ownership.inference.confidence:>0.85
+@_dd.ownership.inference.confidence:>=0.85
 ```
 
 To find findings attributed to specific users:
