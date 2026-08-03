@@ -205,7 +205,7 @@ A scope that is not allowed in Datadog is never granted, whatever the token requ
 2. Find **Datadog** in the directory and enable the connector.
 3. Complete the sign-in flow when prompted.
 
-Use the Datadog connector from the directory, not a custom connector. A custom connector uses a different client ID, and token exchange fails. See [Set up the Datadog MCP Server](/mcp_server/setup/).
+Use the Datadog connector from the directory, not a custom connector.
 
 ## Verify the configuration
 
