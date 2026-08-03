@@ -81,7 +81,6 @@ Your organization likely already has pre-configured environments for Development
 <div class="alert alert-info">
 You can set up Feature Flags automatically with the <a href="/feature_flags/feature_flag_mcp_server/">Feature Flags MCP Server</a>. After connecting, prompt your AI agent: "Help me set up Datadog Feature Flags in my app." The MCP Server reviews your codebase and installs the required SDK and code snippets for your language and framework.
 </div>
-</div>
 
 ### Step 1: Import and initialize the SDK
 
