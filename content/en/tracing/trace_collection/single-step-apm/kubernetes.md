@@ -25,6 +25,17 @@ further_reading:
 
 In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
 
+<div class="alert alert-info">
+
+**Set up APM with your AI coding agent**
+
+The `dd-apm` agent skill guides AI coding agents, such as Claude Code and Cursor, through Datadog APM setup and instrumentation. To install the skill, run:
+```shell
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+```
+
+</div>
+
 ## Requirements
 
 - Kubernetes v1.20+.

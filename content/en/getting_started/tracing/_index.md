@@ -31,6 +31,17 @@ This guide demonstrates how to get started with APM and send your first trace to
 1. Run your application to generate data.
 1. Explore the collected data in Datadog.
 
+<div class="alert alert-info">
+
+**Set up APM with your AI coding agent**
+
+The `dd-apm` agent skill guides AI coding agents, such as Claude Code and Cursor, through Datadog APM setup and instrumentation. To install the skill, run:
+```shell
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+```
+
+</div>
+
 ## Prerequisites
 
 To complete this guide, you need the following:

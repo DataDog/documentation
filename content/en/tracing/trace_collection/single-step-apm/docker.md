@@ -15,6 +15,17 @@ further_reading:
 
 In a Docker Linux container, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][14] your applications in one step, with no additional configuration required. 
 
+<div class="alert alert-info">
+
+**Set up APM with your AI coding agent**
+
+The `dd-apm` agent skill guides AI coding agents, such as Claude Code and Cursor, through Datadog APM setup and instrumentation. To install the skill, run:
+```shell
+npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
+```
+
+</div>
+
 ## Enable APM on your applications
 
 <div class="alert alert-info">Before proceeding, confirm that your environment is compatible by reviewing the <a href="https://docs.datadoghq.com/tracing/trace_collection/automatic_instrumentation/single-step-apm/compatibility/">SSI compatibility guide.</a></div>
