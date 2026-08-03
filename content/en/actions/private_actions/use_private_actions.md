@@ -769,12 +769,8 @@ If your organization uses a custom certificate authority (CA) to issue certifica
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `PATH_TO_YOUR_CA_CERTIFICATE` with the path to your CA certificate file:
+Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
 
-```bash
-docker run -d \
-  -e SSL_CERT_DIR=/etc/dd-action-runner/config/ca-certificates \
-  -v PATH_TO_YOUR_CA_CERTIFICATE:/etc/dd-action-runner/config/ca-certificates/ca.crt \
   ...
 ```
 
@@ -782,14 +778,8 @@ docker run -d \
 
 {{% tab "Docker Compose" %}}
 
-Add the `SSL_CERT_DIR` environment variable and mount your certificate in your `docker-compose.yaml` file, replacing `PATH_TO_YOUR_CA_CERTIFICATE` with the path to your CA certificate file:
+Add the `SSL_CERT_DIR` environment variable and mount your certificate in your `docker-compose.yaml` file, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
 
-```yaml
-runner:
-  environment:
-    SSL_CERT_DIR: /etc/dd-action-runner/config/ca-certificates
-  volumes:
-    - "PATH_TO_YOUR_CA_CERTIFICATE:/etc/dd-action-runner/config/ca-certificates/ca.crt"
 ```
 
 {{% /tab %}}
