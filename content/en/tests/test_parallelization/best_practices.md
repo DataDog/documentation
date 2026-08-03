@@ -105,6 +105,19 @@ fi
 
 `ddtest` invalidates the cache when any test file changes. The set of test files is determined by `--tests-location` and `--tests-exclude-pattern`.
 
+### Use suite-level skipping for Ruby
+
+If Ruby test discovery remains a bottleneck after applying these optimizations, configure Test Impact Analysis to use suite-level skipping. This mode lets `ddtest plan` use test file discovery instead of discovering every individual test. It trades test-level skipping precision for lower planning overhead because Test Impact Analysis skips or runs an entire suite.
+
+Suite-level skipping requires `datadog-ci >= 1.34.0`. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` for both planning and test execution:
+
+{{< code-block lang="bash" >}}
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest plan
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest run
+{{< /code-block >}}
+
+If you execute tests with another command, set the same environment variable for that command. In CI workflows that plan and run tests in separate jobs, set the variable in both jobs.
+
 ## Configure pytest
 
 `ddtest` runs pytest as `python -m pytest` and appends the selected test files. It appends `--ddtrace` to `PYTEST_ADDOPTS`, preserving any existing value, so the `ddtrace` pytest plugin loads without changing your pytest config.
@@ -113,7 +126,7 @@ For test discovery, `ddtest` reads `testpaths` and `python_files` from `pytest.i
 
 During discovery, `DD_TEST_OPTIMIZATION_DISCOVERY_ENABLED` is set to `1`. Use this variable to skip expensive setup code during planning, similar to [skipping database setup during discovery](#skip-database-setup-during-discovery).
 
-## Configure Jest
+## Jest configuration
 
 `ddtest` runs Jest through the local `node_modules/.bin/jest` executable when it exists, or through `npx jest` otherwise. Use `--command` when your project runs Jest through a package manager or wrapper:
 
@@ -123,7 +136,7 @@ bin/ddtest run --platform javascript --framework jest --command "pnpm jest --run
 
 Do not include test files or a `--` separator in the command. `ddtest` appends the file list and Jest flags itself.
 
-`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. Ensure `dd-trace` is resolvable from the project where `ddtest` runs.
+`ddtest` prepends `-r dd-trace/ci/init` to `NODE_OPTIONS` for worker processes unless it is already present. `dd-trace` must be resolvable from the project where `ddtest` runs.
 
 `ddtest` discovers and splits test files and suites, not individual Jest tests.
 
