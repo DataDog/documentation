@@ -26,9 +26,9 @@ further_reading:
 
 ## Configure your logger
 
-To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use a Node.js logging library, such as [Winston][1], [Bunyan][15], or [Pino][16], to log from your Node.js application. The examples on this page use Winston.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use a logging library, such as [Winston][1], [Bunyan][15], or [Pino][16], to log from your Node.js application. The examples on this page use Winston.
 
-Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
+Winston is available through [NPM][2]. To get started, add the dependency to your code:
 
 ```text
 npm install --save winston
