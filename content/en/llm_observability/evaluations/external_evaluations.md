@@ -78,6 +78,26 @@ def llm_call():
     )
 {{< /code-block >}}
 
+### Reporting a failed or skipped evaluation
+
+When an evaluator fails or is skipped, pass `status` and `error` to `LLMObs.submit_evaluation()` instead of a typed value:
+
+- `status`: one of `"OK"`, `"WARN"`, or `"ERROR"`. `"OK"` is the default for a successful evaluation that carries a value. `"WARN"` means the evaluator was skipped, and `"ERROR"` means it failed.
+- `error`: a dict with the fields `type`, `message`, and optionally `stack`. It is required when `status` is `"WARN"` or `"ERROR"`.
+
+When `status` is `"WARN"` or `"ERROR"`, you do not need to provide a typed value such as `score_value` or `categorical_value`. The status and error appear in the **Evaluations** tab on the span.
+
+{{< code-block lang="python" >}}
+LLMObs.submit_evaluation(
+    span=span_context,
+    ml_app="chatbot",
+    label="harmfulness",
+    metric_type="score",
+    status="ERROR",
+    error={"type": "ValueError", "message": "Evaluator crashed"},
+)
+{{< /code-block >}}
+
 
 ## Submitting external evaluations with the API
 
@@ -110,6 +130,34 @@ To submit evaluations for <a href="/llm_observability/instrumentation/otel_instr
           "tags": ["source:otel"],
           "assessment": "pass",
           "reasoning": "it makes sense"
+        }
+      ]
+    }
+  }
+}
+{{< /code-block >}}
+
+For a failed or skipped evaluation, include the `status` and `error` fields instead of a typed value. `status` is one of `"OK"`, `"WARN"`, or `"ERROR"`, and `error` is an object with `type`, `message`, and optionally `stack`. The status and error appear in the **Evaluations** tab on the span.
+
+{{< code-block lang="json" >}}
+{
+  "data": {
+    "type": "evaluation_metric",
+    "id": "456f4567-e89b-12d3-a456-426655440000",
+    "attributes": {
+      "metrics": [
+        {
+          "id": "cdfc4fc7-e2f6-4149-9c35-edc4bbf7b525",
+          "join_on": { "span": { "trace_id": "123", "span_id": "456" } },
+          "ml_app": "weather-bot",
+          "timestamp_ms": 1765990800016,
+          "metric_type": "score",
+          "label": "Accuracy",
+          "status": "ERROR",
+          "error": {
+            "type": "ValueError",
+            "message": "Evaluator crashed before producing a score"
+          }
         }
       ]
     }
