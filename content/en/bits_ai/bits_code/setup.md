@@ -11,7 +11,7 @@ disable_toc: false
 
 ## Prerequisites
 
-To set up Bits Code, you need the `Bits Code Write` (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+To set up Bits Code, you need the [`Bits Code Write` (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
 
 If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
