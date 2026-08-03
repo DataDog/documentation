@@ -25,7 +25,7 @@ When selecting a container registry, Datadog recommends the following approach:
 
 3. **Datadog Container Registry**: Use `registry.datadoghq.com` for simplicity. This registry requires no additional setup and has very high rate limits. Ensure your firewall allows traffic to `us-docker.pkg.dev/datadog-prod/public-images`, as the registry may redirect requests to this URL.
 
-4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits. Only Docker Hub supports Notary for image signature verification.
+4. **Docker Hub**: Avoid unless you have a Docker Hub subscription, as it is subject to rate limits.
 
 <div class="alert alert-info">The Datadog Agent Helm chart determines the default Agent image registry from your Datadog site, cluster type, and <code>registryMigrationMode</code>. The Datadog Operator chart is included as a dependency of the Datadog Agent Helm chart by default. As of Datadog Operator chart version 2.19.0, when you install the Operator through that dependency, the Datadog Agent Helm chart's <code>registryMigrationMode</code> applies to Agent images managed by the Operator. The Operator Helm chart itself does not define <code>registryMigrationMode</code>; the Operator pod image is controlled separately by the Operator chart <code>image.repository</code> value.</div>
 
