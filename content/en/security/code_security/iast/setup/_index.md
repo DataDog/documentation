@@ -15,7 +15,7 @@ Before setting up Runtime Code Analysis (IAST), ensure the following prerequisit
 
 <div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>. 
 <br>
-If APM is disabled, some APM intake costs will still be present to support IAST features, including security traces and spans.</div>
+Even if APM is disabled, APM intake costs are still incurred for ingesting data, such as security traces and spans, to support IAST.</div>
 
 ## Using Datadog SDKs
 
