@@ -153,7 +153,8 @@ agent diagnose show-metadata agent-telemetry
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | **Checks**                                  |                                                                                                                        |
 | checks.execution_time                       | Check's execution time in milliseconds                                                                                 |
-| checks.max_returned_metrics_reached         | Number of check runs that reached the configured `max_returned_metrics` limit and dropped metrics                      |
+| checks.max_returned_metrics_reached         | Check runs exceeding `max_returned_metrics`, tagged by check name and effective limit type (`default` or `custom`)     |
+| checks.max_returned_metrics_dropped         | Metric contexts dropped past `max_returned_metrics`, tagged by check name and limit type (`default` or `custom`)       |
 | pymem.inuse                                 | Number of bytes allocated by the Python interpreter                                                                    |
 | **Logs and metrics**                        |                                                                                                                        |
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
