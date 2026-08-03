@@ -7,11 +7,11 @@ This guide outlines the process for migrating your feature flagging logic from S
 
 ## Summary checklist
 
-* Replace statsig-js with @datadog/openfeature-browser.
-* Swap statsig.initialize with OpenFeature.setProviderAndWait.
-* Convert checkGate to client.getBooleanValue.
-* Convert getConfig to client.getObjectValue or client.getStringValue.
-* Use targetingKey in the context to identify users.
+* Replace `statsig-js` with `@datadog/openfeature-browser`.
+* Swap `statsig.initialize` with `OpenFeature.setProviderAndWait`.
+* Convert `checkGate` to `client.getBooleanValue`.
+* Convert `getConfig` to `client.getObjectValue` or `client.getStringValue`.
+* Use `targetingKey` in the context to identify users.
 * For server-side apps, use `@openfeature/server-sdk` and pass a per-request evaluation context instead of a single global context.
 
 ## 1. Conceptual mapping
@@ -25,7 +25,7 @@ The core concepts between Statsig and Datadog are similar, but the terminology d
 | **Experiment** | **Feature Flag** (w/ Targeting) | A Datadog Flag can be configured with percentage-based rollouts and specific targeting rules to run experiments. |
 | **User/StatsigUser** | **Evaluation Context** | The context (attributes) passed to the SDK to evaluate flags. |
 
-## 2. SDK installation
+## 2. Install the SDK
 
 Datadog recommends using the **OpenFeature** standard for feature flagging SDKs. This provides a vendor-neutral API while using Datadog as the underlying provider.
 
@@ -175,7 +175,7 @@ In Datadog:
 
 ## 8. Server-side and dynamic context
 
-The previous sections cover browser and client-side migration, where the evaluation context is typically static for the length of a user's session. Server-side applications use a different SDK, authenticate with a Datadog API key instead of a client token, and usually build a new evaluation context for each incoming request.
+The previous sections cover browser and client-side migration, where the evaluation context is typically static for the length of a user's session. Server-side applications use a different SDK and authenticate with a Datadog API key instead of a client token. They also typically build a new evaluation context for each incoming request.
 
 Install the server-side SDK. This example uses the [Node.js Feature Flags SDK][3]:
 
@@ -213,7 +213,7 @@ app.get('/my-endpoint', async (req, res) => {
 });
 {{< /code-block >}}
 
-Unlike the browser SDK's single `OpenFeature.setContext()` call, the server SDK passes a new evaluation context into each flag evaluation call, since one server process handles requests for many different users at once.
+The browser SDK sets the context once with a single `OpenFeature.setContext()` call. The server SDK instead passes a new evaluation context into each flag evaluation call, since one process handles many different users.
 
 For other server languages, see the [Datadog Server SDK documentation][2].
 
