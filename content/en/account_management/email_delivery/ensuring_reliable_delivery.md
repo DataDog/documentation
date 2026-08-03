@@ -49,8 +49,11 @@ ddog-gov.com
 
 Datadog publishes SPF and DKIM records for these domains, so Datadog email is expected to pass inbound authentication checks. If it does not, contact [Datadog Support][1] with the recipient address and the approximate send time.
 
+For failures that have already occurred, see [Common reasons email fails][2].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /help/
+[2]: /account_management/email_delivery/troubleshooting_email_delivery/#common-reasons-email-fails

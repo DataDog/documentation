@@ -12,7 +12,7 @@ further_reading:
   text: "Status and suppression definitions"
 - link: "/account_management/email_delivery/ensuring_reliable_delivery/"
   tag: "Documentation"
-  text: "Prevent failures with allowlisting and authentication"
+  text: "Prevent failures with trusted senders and authentication"
 - link: "/account_management/audit_trail/guides/track_email_delivery/"
   tag: "Guide"
   text: "Query delivery events and set up alerts"
@@ -26,7 +26,7 @@ When a user reports that they did not receive a Datadog email, use this page to 
 
 1. Check the delivery outcome in [Email Delivery][2], filtering by the recipient's address:
    - **Delivered**: ask the recipient to check their spam or junk folder, along with any mailbox rules or blocklists that filter Datadog mail.
-   - **Bounced**: the receiving mail server rejected the message and returned a reason. Correct the address or mailbox if it is invalid or full. If the server filters or blocks Datadog mail, [allowlist the Datadog sending addresses][3] and share the reason and event timestamp with your email administrator.
+   - **Bounced**: the receiving mail server rejected the message and returned a reason. Correct the address or mailbox if it is invalid or full. If the server filters or blocks Datadog mail, [add Datadog to your trusted senders][3] and share the reason and event timestamp with your email administrator.
    - **Dropped**: the address is suppressed. See [Email suppressions][4] to have it cleared.
 2. If email is still missing, contact [Datadog Support][5] for review.
 
@@ -44,7 +44,7 @@ Trace a failure from the Email Delivery dashboard to the underlying audit event:
 | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Mailbox not found                             | The recipient address does not exist.                                                                                                                                  | Check for typos or a removed mailbox, then correct the address and send again.                                                                                                                       |
 | Full mailbox                                  | The recipient inbox is over quota.                                                                                                                                     | Ask the recipient to free up inbox space, then send again.                                                                                                                                           |
-| Sender not authenticated or blocked by policy | The recipient mail server or a group policy rejected the Datadog sender, often over authentication (SPF, DKIM, DMARC) or a rule requiring authenticated senders.        | Ask the recipient mail administrator to [allowlist the Datadog sending addresses][3]. If the response cites a [sender authentication][6] or DMARC failure, contact [Datadog Support][5], because resolving it can involve both parties. |
+| Sender not authenticated or blocked by policy | The recipient mail server or a group policy rejected the Datadog sender, often over authentication (SPF, DKIM, DMARC) or a rule requiring authenticated senders.        | Ask the recipient mail administrator to [add Datadog to their trusted senders][3]. If the response cites a [sender authentication][6] or DMARC failure, contact [Datadog Support][5], because resolving it can involve both parties. |
 | Suppressed (dropped)                          | A suppression rule, account setting, or system protection blocked the message, commonly after an earlier bounce.                                                        | See [Email suppressions][4].                                                                                                                                                                        |
 | Flagged as spam                               | The recipient mail server or security gateway classified the message as spam based on its content.                                                                     | See [Email security gateways][7].                                                                                                                                                                   |
 
@@ -70,7 +70,7 @@ Some failures never produce a delivery event, because Datadog does not attempt t
 
 ## Email security gateways
 
-If your organization routes inbound mail through an email security gateway or through built-in protection in your mail platform, it can quarantine or block Datadog email even when your allowlist and sender authentication are set up correctly. Gateways apply their own filtering, so a message can pass SPF, DKIM, and DMARC and still be held.
+If your organization routes inbound mail through an email security gateway or through built-in protection in your mail platform, it can quarantine or block Datadog email even when your trusted sender entries and sender authentication are set up correctly. Gateways apply their own filtering, so a message can pass SPF, DKIM, and DMARC and still be held.
 
 If Datadog email still does not arrive, contact your email security gateway provider. A gateway is often the cause when Email Delivery shows a message as Delivered but the recipient cannot find it, including in their spam or junk folder, or when messages are blocked for valid addresses. Share the timestamps from the Email Delivery event so the provider can locate the affected messages and confirm why they were quarantined or blocked.
 
