@@ -2,6 +2,9 @@
 title: Best Practices for Creating SLOs for RUM Operations
 description: Learn how to create availability and latency SLOs from RUM operation metrics.
 further_reading:
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up RUM operations'
 - link: '/real_user_monitoring/operations_monitoring/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
@@ -15,9 +18,9 @@ further_reading:
 
 ## Overview
 
-[RUM operations][1] measure the availability and latency of technical steps in a user journey. For example, an operation can track whether a checkout request succeeds and how long the request takes to complete.
+[RUM operations][1] measure the availability and latency of technical steps in a [user journey][2]. For example, an operation can track whether a checkout request succeeds and how long the request takes to complete.
 
-Use two operation metrics to create [metric-based SLOs][2]:
+Use two operation metrics to create [metric-based SLOs][3]:
 
 - Use `rum.measure.operation` to create an **availability SLO** based on the operation's success rate.
 - Use `rum.measure.operation.duration` to create a **latency SLO** based on the operation's time to completion.
@@ -28,8 +31,8 @@ Create separate availability and latency SLOs to measure these distinct aspects 
 
 ## Prerequisites
 
-- [RUM without Limits][3] is enabled for your organization.
-- You have [configured at least one RUM operation][4].
+- [RUM without Limits][4] is enabled for your organization.
+- You have [configured at least one RUM operation][5].
 
 ## Understand operation outcomes
 
@@ -79,13 +82,13 @@ An availability SLO measures whether the operation completes successfully:
 
 {{< img src="real_user_monitoring/guide/operations-monitoring/operations-monitoring-availability-slo-example.png" alt="Create SLO page showing a count-based availability SLO with good and bad event queries and preview graphs" style="width:100%;" >}}
 
-Use this query for good events:
+Use this raw query for good events:
 
 {{< code-block lang="text" >}}
 sum:rum.measure.operation{operation.name:<OPERATION_NAME> AND application.id:<APPLICATION_ID> AND operation.status:success}.as_count()
 {{< /code-block >}}
 
-Use this query for bad events:
+Use this raw query for bad events:
 
 {{< code-block lang="text" >}}
 sum:rum.measure.operation{operation.name:<OPERATION_NAME> AND application.id:<APPLICATION_ID> AND operation.status:failure AND NOT operation.failure_reason:abandoned}.as_count()
@@ -106,13 +109,13 @@ Replace `<LATENCY_THRESHOLD_NS>` with the threshold in nanoseconds, then configu
 - **Good events** include successful operations at or below the threshold.
 - **Bad events** include successful operations and abandoned operations above the threshold.
 
-Use this query for good events:
+Use this raw query for good events:
 
 {{< code-block lang="text" >}}
 count(v: v<=<LATENCY_THRESHOLD_NS>):rum.measure.operation.duration{operation.name:<OPERATION_NAME> AND application.id:<APPLICATION_ID> AND operation.status:success}.as_count()
 {{< /code-block >}}
 
-Define bad events as the sum of these two queries:
+Define bad events as the sum of these two raw queries:
 
 {{< code-block lang="text" >}}
 count(v: v><LATENCY_THRESHOLD_NS>):rum.measure.operation.duration{operation.name:<OPERATION_NAME> AND application.id:<APPLICATION_ID> AND operation.status:success}.as_count()
@@ -140,7 +143,7 @@ Validate the SLOs after you create them:
 1. Confirm that the good and bad event queries do not overlap.
 2. Verify that all queries use the same operation scope, filters, and groups.
 3. Compare SLO event counts with the operation volume on the {{< ui >}}Operations{{< /ui >}} page.
-4. Review [timed-out operations][5]. A high timeout rate can indicate that some application paths start an operation without recording its end.
+4. Review [timed-out operations][6]. A high timeout rate can indicate that some application paths start an operation without recording its end.
 5. Confirm that the latency threshold uses nanoseconds and represents an acceptable completion time for the operation.
 
 ## Further reading
@@ -148,7 +151,8 @@ Validate the SLOs after you create them:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /real_user_monitoring/operations_monitoring/?tab=browser
-[2]: /service_level_objectives/metric/
-[3]: /real_user_monitoring/rum_without_limits/
-[4]: /real_user_monitoring/guide/best-practices-for-operations-setup/
-[5]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
+[2]: /journey_monitoring/
+[3]: /service_level_objectives/metric/
+[4]: /real_user_monitoring/rum_without_limits/
+[5]: /real_user_monitoring/guide/best-practices-for-operations-setup/
+[6]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
