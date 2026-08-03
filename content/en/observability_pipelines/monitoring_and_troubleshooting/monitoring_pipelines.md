@@ -13,6 +13,9 @@ further_reading:
 - link: "/observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/"
   tag: "Documentation"
   text: "Observability Pipelines usage metrics"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 ---
 
 ## Overview

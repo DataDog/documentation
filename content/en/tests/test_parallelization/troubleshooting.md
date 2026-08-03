@@ -13,10 +13,6 @@ further_reading:
     text: "Troubleshooting Test Optimization"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
-Test Parallelization is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Missing or invalid plan artifacts
 
 If `ddtest run --ci-node <N>` cannot find assigned test files, confirm that the `.testoptimization/` directory from the planning job is available in the test job.
@@ -36,6 +32,7 @@ If `ddtest` selects more or fewer CI nodes than expected, review these settings:
 - `--min-parallelism`: Minimum CI node or worker count considered by `ddtest`.
 - `--max-parallelism`: Maximum CI node or worker count considered by `ddtest`.
 - `--ci-job-overhead`: Estimated overhead for launching an additional CI node.
+- `--target-time`: Target wall time for the selected split.
 
 Increase `--ci-job-overhead` to prefer fewer CI nodes. Decrease it to prefer faster wall-clock time.
 

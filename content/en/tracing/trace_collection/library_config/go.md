@@ -70,7 +70,7 @@ See all available options in the [configuration documentation][20] (or [configur
 
 The [APM environment name][7] may be configured [in the Agent][8] or using the [WithEnv][20] start option of the SDK.
 
-## Configurations keys
+## Configuration keys
 
 {{< partial name="apm/registry-config-list.html" >}}
 

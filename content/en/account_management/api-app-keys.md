@@ -87,12 +87,29 @@ To add a Datadog API key or client token:
 
 **Notes:**
 
-- Your org must have at least one API key and at most 50 API keys.
+- Your org must have at least one API key, and up to 50 API keys by default. If you need more, [contact Support][19] to request a higher limit. Managed API keys, marked with a {{< ui >}}Managed{{< /ui >}} label in the Name column, are created and controlled by a Datadog integration or service rather than by you, and don't count toward this limit. You can view that a managed API key exists and revoke it, but you can't see its value or edit its name.
 - Key names must be unique across your organization.
 
-## Remove API keys or client tokens
+## Revoke API keys or remove client tokens
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key or token you want to remove.
+To revoke a Datadog API key, navigate to the list of keys, and click the {{< ui >}}Revoke{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key. To remove a client token, navigate to the list of tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the token.
+
+A revoked API key stays in the list with a {{< ui >}}Revoked{{< /ui >}} status for 7 days, during which you can restore it. See [Unrevoke an API key](#unrevoke-an-api-key). Client tokens don't support this restoration window; after you remove a client token, it can't be recovered.
+
+## Unrevoke an API key
+
+If you revoke an API key by mistake, you can restore it within 7 days of revocation. After 7 days, a revoked API key is permanently removed and can't be recovered.
+
+To unrevoke an API key:
+
+1. Navigate to Organization settings, then click the [**API keys**][1] tab.
+2. In the {{< ui >}}Status{{< /ui >}} filter, select {{< ui >}}Revoked{{< /ui >}}.
+3. Locate the key you want to restore.
+4. Click the {{< ui >}}Unrevoke{{< /ui >}} icon next to the key.
+
+{{< img src="account_management/unrevoke-api-key.png" alt="The API Keys page filtered to Revoked status, with the Unrevoke icon highlighted next to a revoked key" style="width:80%;" >}}
+
+The key returns to {{< ui >}}Active{{< /ui >}} status with its original name, ID, and value unchanged.
 
 ## Add application keys
 
@@ -101,10 +118,14 @@ To add a Datadog application key, navigate to [**Organization Settings** > **App
 {{< img src="account_management/app-key.png" alt="Navigate to the Application Keys page for your organization in Datadog" style="width:80%;" >}}
 
 {{< site-region region="ap2,gov,gov2" >}}
-<div class="alert alert-danger">Make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+<div class="alert alert-danger">Make sure to securely store your application key immediately after creation. The key secret cannot be retrieved later.</div>
 {{< /site-region >}}
 
-<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation, as the key secret cannot be retrieved later.</div>
+{{< site-region region="us,us3,us5,eu,ap1" >}}
+<div class="alert alert-info">If your organization has One-Time Read (OTR) mode enabled, make sure to securely store your application key immediately after creation. The key secret cannot be retrieved later.</div>
+{{< /site-region >}}
+
+Because API keys and application keys are long-lived and have no built-in expiration, store them in a secrets manager, such as AWS Secrets Manager, HashiCorp Vault, or Azure Key Vault, instead of in source code or environment files. AWS Secrets Manager supports [managed rotation for Datadog API keys and application keys][24].
 
 **Notes:**
 
@@ -198,3 +219,4 @@ Need help? Contact [Datadog support][19].
 [21]: /api/latest/action-connection/#register-a-new-app-key
 [22]: /account_management/audit_trail/#setup
 [23]: /account_management/rbac/permissions/#compliance
+[24]: https://aws.amazon.com/about-aws/whats-new/2026/05/secrets-manager-managed-external-secrets-datadog-snowflake/

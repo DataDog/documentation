@@ -205,7 +205,7 @@ To get started, follow the instructions below.
 
 1. Deploy your updated `requirements.txt` and [Amazon MWAA startup script][3] to your Amazon S3 folder configured for your Amazon MWAA Environment.
 
-1. Optionally, set up Log Collection for correlating task logs to DAG run executions in DJM:
+1. Optionally, set up Log Collection for correlating task logs to DAG run executions in Jobs Monitoring:
    1. Configure Amazon MWAA to [send logs to CloudWatch][9].
    2. [Send the logs to Datadog][10].
 
@@ -378,6 +378,10 @@ To run an automated check of your OpenLineage setup, see [Troubleshoot Airflow S
 
 {{% /tab %}}
 {{< /tabs >}}
+
+## Known issues
+
+In Airflow 2.x, manually marking a DAG run or task as failed does not update its status in Data Observability: Jobs Monitoring. For affected runs, span durations and duration metrics may be inaccurate.
 
 ## OpenLineage provider version reference
 
@@ -639,4 +643,4 @@ With `user_defined_macros` set on the DAG, the `{{ lineage_*() }}` and `{{ linea
 [5]: https://airflow.apache.org/docs/apache-airflow-providers-apache-spark/stable/_api/airflow/providers/apache/spark/operators/spark_submit/index.html#airflow.providers.apache.spark.operators.spark_submit.SparkSubmitOperator
 [6]: https://openlineage.io/docs/integrations/dbt/
 [7]: https://docs.aws.amazon.com/mwaa/latest/userguide/samples-dbt.html
-[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/guides/user.html#passing-parent-job-information-to-spark-jobs
+[8]: https://airflow.apache.org/docs/apache-airflow-providers-openlineage/stable/spark.html#automatic-injection

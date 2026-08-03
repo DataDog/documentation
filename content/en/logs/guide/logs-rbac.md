@@ -54,7 +54,7 @@ For a comprehensive overview of tagging, see [Getting Started with Tags][3].
 
 ### Logging in as a Datadog Admin
 
-To perform the actions in this guide, you must have Datadog Admin permissions. Ensure your user account can create roles, assign users, and manage Log Pipelines, Log Indexes, and Log Archives. For more information on permissions, see [Datadog Role Permissions][4]
+To perform the actions in this guide, you must have Datadog Admin permissions. Ensure your user account can create roles, assign users, and manage log pipelines, log indexes, and log archives. For more information on permissions, see [Datadog Role Permissions][4]
 
 Navigate to the [Users list][8] to verify that you have all these permissions. If these permissions are missing, request them from a current Datadog Admin.
 
@@ -188,7 +188,7 @@ This section details how to:
 
 ## Restrict access to log assets
 
-Grant the `ACME Admin` role permissions to manage Log Pipelines, Log Indexes, and Log Archives without impacting other teams.
+Grant the `ACME Admin` role permissions to manage log pipelines, log indexes, and log archives without impacting other teams.
 
 This ensures that:
 * `ACME Admin` members (and only `ACME Admin` members) can interact with ACME Log Assets.
@@ -207,7 +207,7 @@ Create [indexes][15] for `team:acme` logs for detailed budget control. Grant the
 
 Create one or multiple [archives][17] for `team:acme` logs. Assign the [`logs_read_archives`][18] permission to `ACME Admin` members. For rehydration, assign the [`logs_write_historical_view`][19] permission to `ACME Admin`.
 
-Create one or multiple [archives][17] for `team:acme` logs. Assign the [Read Archives][18] permission to members of `ACME Admin`.
+Create one or multiple [archives][17] for `team:acme` logs. Assign the [Logs Read Archives][18] permission to members of `ACME Admin`.
 
 ## Further reading
 

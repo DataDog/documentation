@@ -25,40 +25,56 @@ A few tools control access and authentication for workflows and their components
 
 ## Workflow identity
 
-A workflow can run using the identity of the owner of the workflow, or a service account associated with the workflow. By default, a workflow uses the Datadog user identity of its author.
+Every run of a workflow uses a single Datadog identity, controlled by the workflow's {{< ui >}}Run as{{< /ui >}} setting. That identity determines:
+- Which [connections][6] a run can resolve, including connections that use [private action runners][10]
+- Which Datadog resources a run can read and modify
+- Which user a run's actions are attributed to, in [audit trails][1] and in the products those actions touch
 
-### Use a service account
+A workflow can run as one of the following identities:
 
-A service account can be associated with a workflow and act as the identity of the workflow when it runs. A service account can:
-- resolve the connections defined in the workflow actions at runtime
-- provide an identity for workflow executions
-- provide an identity for workflow [audit trails][1]
+{{< ui >}}Owner{{< /ui >}}
+: The workflow runs as its owner, and any editor of the workflow can access the same resources as the owner. A new workflow runs as its owner by default.
 
-To create a service account for a workflow, you must have either the Datadog admin role, or a custom role with the {{< ui >}}Service Account Write{{< /ui >}} permission. The service account you create adopts your role and permissions. For more information on service accounts and permissions, see [Service accounts][2] or [Role based access control][3].
+{{< ui >}}Initiator{{< /ui >}}
+: The workflow runs as the user who triggered the run, so each run is limited to the resources that user can access. The Initiator identity is only supported for [triggers][4] that have an end user.
 
-#### Associate a service account with a workflow
+{{< ui >}}Service Account{{< /ui >}}
+: The workflow runs as a service account associated with the workflow. Use a service account to control the exact permissions a run has, with roles you choose for the workflow.
 
-You can dynamically create a service account for your workflow when you [add an automatic trigger][4].
+### Set the workflow identity
 
-1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
-1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
-1. Click {{< ui >}}Run as Service Account{{< /ui >}}.
-1. Select a role for your service account user or select an existing Service Account.
-1. Click {{< ui >}}Save{{< /ui >}} to save the service account and apply the changes.
+Select an identity when you publish a workflow, or change it at any time:
 
-When you run a workflow, the service account user resolves the connections defined in the workflow actions. Therefore, the service account user needs the `connections_resolve` permission. The Datadog Admin Role and the Datadog Standard Role include the `connections_resolve` permission.
+1. In the workflow editor, click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Click {{< ui >}}Edit permissions{{< /ui >}}.
+1. Under {{< ui >}}Run as{{< /ui >}}, select {{< ui >}}Owner{{< /ui >}}, {{< ui >}}Initiator{{< /ui >}}, or {{< ui >}}Service Account{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-#### View service account details
+The following restrictions apply:
+- Only the owner of the workflow can select {{< ui >}}Owner{{< /ui >}} or {{< ui >}}Initiator{{< /ui >}}.
+- To select {{< ui >}}Service Account{{< /ui >}}, you need either the Datadog Admin Role or a custom role with the {{< ui >}}Service Account Write{{< /ui >}} permission.
 
-1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
-1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
-1. Click on your service account next to *Run As*.
+To see the identity a workflow uses, hover over the workflow name in the editor and read the {{< ui >}}Run as{{< /ui >}} field.
 
-#### Remove a service account associated with a workflow
+### Run as the owner
 
-1. Click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
-1. Click {{< ui >}}Manage ownership and identity{{< /ui >}}.
-1. Click {{< ui >}}Change service account{{< /ui >}}.
+When a workflow runs as its owner, every run uses the owner's identity, whoever triggers it. A run can use the connections and Datadog resources the owner can access, even when the user who triggered it cannot access them.
+
+The owner resolves the connections defined in the workflow actions. The owner needs the `connections_resolve` permission, plus {{< ui >}}Resolver{{< /ui >}} access to each connection the workflow uses.
+
+### Run as the initiator
+
+When a workflow runs as the initiator, each run uses the identity of the user who triggered it. A run can only use the connections and Datadog resources that this user can access, and the actions the workflow takes are attributed to them. For example, if the workflow declares an incident, the incident is created by the user who triggered the workflow.
+
+The initiator resolves the connections defined in the workflow actions. Each user who triggers the workflow needs the `connections_resolve` permission, plus {{< ui >}}Resolver{{< /ui >}} access to each connection the workflow uses.
+
+### Run as a service account
+
+When a workflow runs as a service account, every run uses that account's identity, whoever triggers it. Because you choose which roles the service account has, you control the exact permissions a run has, independently of any user's permissions.
+
+Attach an existing service account to the workflow, or create a service account when you set the identity. When you create one, you select its roles. You can assign any subset of the roles you have. With the {{< ui >}}User Access Manage{{< /ui >}} permission, you can assign any role in your organization. For more information, see [Service accounts][2] or [Role based access control][3].
+
+The service account resolves the connections defined in the workflow actions. It needs a role with the `workflows_run` and `connections_resolve` permissions, plus {{< ui >}}Resolver{{< /ui >}} access to each connection the workflow uses.
 
 ## Action credentials
 
@@ -120,7 +136,7 @@ You can restrict access on a specific workflow either from the workflow list pag
 
 **Restricting permissions from the workflow list page**
 1. Navigate to the [Workflow Automation page][8].
-1. Hover over the workflow on which you would like to set granular permissions. {{< ui >}}Edit{{< /ui >}}, {{< ui >}}Permissions{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} icons appear on the right.
+1. Hover over the workflow on which you would like to set granular permissions. Action icons, including {{< ui >}}Permissions{{< /ui >}}, appear on the right.
 1. Click the padlock ({{< ui >}}Permissions{{< /ui >}}) icon.
 1. Select {{< ui >}}Restrict Access{{< /ui >}}.
 1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
@@ -129,13 +145,14 @@ You can restrict access on a specific workflow either from the workflow list pag
 1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Restricting permissions from the workflow editor**
-1. In the workflow editor click on the cog ({{< ui >}}Settings{{< /ui >}}) icon.
-1. Select {{< ui >}}Edit Permissions{{< /ui >}} from the dropdown.
+1. In the workflow editor, click the cog ({{< ui >}}Settings{{< /ui >}}) icon.
+1. Select {{< ui >}}Edit permissions{{< /ui >}} from the dropdown.
+1. Under {{< ui >}}Who has access{{< /ui >}}, select {{< ui >}}Custom{{< /ui >}}.
 1. Select {{< ui >}}Restrict Access{{< /ui >}}.
 1. Select a role from the dropdown menu. Click {{< ui >}}Add{{< /ui >}}. The role you selected populates into the bottom of the dialog box.
 1. Next to the role name, select your desired permission from the dropdown menu.
 1. If you would like to remove access from a role, click the trash can icon to the right of the role name.
-1. Click {{< ui >}}Save{{< /ui >}}.
+1. Click {{< ui >}}Done{{< /ui >}}, then click {{< ui >}}Save{{< /ui >}}.
 
 ## Further Reading
 
@@ -146,9 +163,10 @@ You can restrict access on a specific workflow either from the workflow list pag
 [1]: /account_management/audit_trail/#overview
 [2]: /account_management/org_settings/service_accounts/
 [3]: /account_management/rbac/
-[4]: /service_management/workflows/trigger/
+[4]: /actions/workflows/trigger/
 [5]: /actions/actions_catalog/
-[6]: /service_management/workflows/connections/
+[6]: /actions/connections/
 [7]: /account_management/rbac/permissions/#workflow-automation
 [8]: https://app.datadoghq.com/workflow
 [9]: https://chat.datadoghq.com/
+[10]: /actions/private_actions/

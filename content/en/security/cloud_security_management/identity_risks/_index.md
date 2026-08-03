@@ -15,7 +15,7 @@ further_reading:
 - link: "/integrations/jira/"
   tag: "Documentation"
   text: "Learn more about the Jira integration"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Learn more about Workflow Automation"
 - link: "https://www.datadoghq.com/blog/datadog-ciem-aws-iam-access-analyzer/"
@@ -52,7 +52,7 @@ For detailed insights and remediation help, click the {{< ui >}}Remediation{{< /
   - For supported Terraform resources:
     - Locate the file and line the identity risk is in and identify the code owners.
     - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration.
-- To create a Jira issue and assign it to a team, click {{< ui >}}Add Jira issue{{< /ui >}}. See [Create Jira Issues for Cloud Security Issues][2] for more information.
+- To create a Jira issue and assign it to a team, click {{< ui >}}Add Jira issue{{< /ui >}}. See [Ticketing Integrations][2] for more information.
 - To view a suggested downsized policy based on the actual usage, click {{< ui >}}View Suggested Policy{{< /ui >}}. Then, you can click {{< ui >}}Edit Policy in \<cloud provider\>{{< /ui >}} to apply the suggested changes:
 
   {{< img src="security/identity_risks/downsized_policy_3.png" alt="Review suggestions for downsizing a policy on the Suggested downsized policy dialog" width="100%">}}
@@ -100,6 +100,6 @@ If you are enabling AWS IAM Access Analyzer for the first time:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/identities
-[2]: /security/cloud_security_management/guide/jira
+[2]: /security/ticketing_integrations/?tab=jira
 [3]: /security/cloud_security_management/workflows
 [4]: /integrations/iam-access-analyzer/

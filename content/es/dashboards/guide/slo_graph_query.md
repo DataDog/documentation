@@ -25,13 +25,13 @@ En primer lugar, crea un [SLO basado en métricas][2]. Este ejemplo utiliza mét
 ##### Total de eventos (denominador)
 `sum:trace.rack.request.hits{service:web-store} by {resource_name}.as_count()`
 
-{{< img src="service_management/service_level_objectives/slo_graph_query/trace_metrics_slo.png" alt="Configuración de SLO que muestra un ejemplo de métricas de rastreo" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_graph_query/trace_metrics_slo.png" alt="Configuración de SLO que muestra un ejemplo de métricas de rastreo" style="width:100%;" >}}
 
 ### Widget de SLO
 
 Selecciona el SLO en el [editor de widgets de SLO][1]. Puedes aplicar filtros adicionales en la configuración del widget para acotar aún más los resultados mostrados. Esto no modifica la definición original del SLO. En el ejemplo, añadimos las etiquetas (tags) `$env` y `$availability-zone` al campo **filter by** (filtrar por) del widget. 
 
-{{< img src="service_management/service_level_objectives/slo_graph_query/slo_filter_by.png" alt="Editor del resumen de SLOs con etiquetas dinámicas para $env y $availability-zone" style="width:100%;" >}}
+{{< img src="dashboards/guide/slo_graph_query/slo_filter_by.png" alt="Editor del resumen de SLOs con etiquetas dinámicas para $env y $availability-zone" style="width:100%;" >}}
 
 Con esta configuración, ¿qué sucede cuando la [variable de plantilla del dashboard][3] se cambia a `env:prod` y `availability-zone:northcentralus`?
 

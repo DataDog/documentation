@@ -11,6 +11,14 @@ rum_sdk_platform_options_v2:
   - id: react_native
   - id: flutter
 
+rum_sdk_platform_options_v3:
+  - id: browser
+    default: true
+  - id: android
+  - id: ios
+  - id: react_native
+  - id: flutter
+
 rum_sdk_profiling_options:
   - id: browser
     default: true
@@ -18,13 +26,19 @@ rum_sdk_profiling_options:
   - id: ios
 
 rum_session_replay_sdk_options:
-  - id: android
+  - id: browser
     default: true
+  - id: android
   - id: ios
   - id: kotlin_multiplatform
   - id: maui
   - id: react_native
   - id: flutter
+
+rum_session_replay_platform_options:
+  - id: browser
+    default: true
+  - id: mobile
 
 rum_mobile_proxy_protocol_options:
   - id: http_https

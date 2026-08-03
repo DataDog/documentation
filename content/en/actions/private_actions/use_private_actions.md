@@ -6,10 +6,10 @@ aliases:
 - service_management/workflows/private_actions/use_private_actions
 - service_management/app_builder/private_actions/use_private_actions
 further_reading:
-- link: "service_management/app_builder/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "App Builder Connections"
-- link: "service_management/workflows/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "Workflow Connections"
 - link: "actions/private_actions/"
@@ -29,6 +29,8 @@ For more information about how private actions work, see the full [overview page
 ## Supported private actions
 
 {{< partial name="actions/private_actions_list" >}}
+
+For the actions available to each type of private action runner, see [Available actions by runner type](#available-actions-by-runner-type).
 
 ## Prerequisites
 
@@ -78,7 +80,7 @@ Run the following command to install or upgrade the Agent and enable the private
 - `<API_KEY>`: Your [Datadog API key][103]
 - `<APP_KEY>`: The Application key you created
 - `DD_SITE`: Your [Datadog site][104] (for example, `datadoghq.com`)
-- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list.
+- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions by runner type](#available-actions-by-runner-type) for the full list.
 
 ```bash
 DD_API_KEY=<API_KEY> \
@@ -140,7 +142,7 @@ private_action_runner:
     - "com.datadoghq.http.request"
 ```
 
-See [Available actions](#available-actions) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows yet. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
+See [Available actions by runner type](#available-actions-by-runner-type) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows yet. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
 
 ### Restart the Agent
 
@@ -210,7 +212,7 @@ Create a `datadog-agent.yaml` file with the following content:
 - Set `clusterName` to a meaningful name for your cluster.
 - Update `site` to your [Datadog site][105] if you're not using `datadoghq.com`.
 - The `app-key` in the secret is required for the Private Action Runner.
-- Adjust `actions_allowlist` based on your needs. See [Available actions](#available-actions) for the full list.
+- Adjust `actions_allowlist` based on your needs. See [Available actions by runner type](#available-actions-by-runner-type) for the full list.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -824,6 +826,14 @@ To use a private action in your [Workflow Automation][10] workflow or [App Build
 
 From the {{< ui >}}Private Action Runner{{< /ui >}} page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click {{< ui >}}View Details{{< /ui >}}. Click the trash can icon to delete a runner.
 
+### Automatic deletion of inactive runners
+
+To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only configuration after an extended period of inactivity.
+
+If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
+
+This automatic cleanup doesn't apply to standalone runners or runners that use an Application key.
+
 ### Change the allowlist of a runner
 
 {{< tabs >}}
@@ -856,9 +866,9 @@ To edit the allowlist for a standalone private action runner:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Available actions
+### Available actions by runner type
 
-{{% collapse-content title="Available actions" level="p" %}}
+{{% collapse-content title="Available actions by runner type" level="p" %}}
 
 {{< partial name="actions/private_actions_allowlist.html" >}}
 
@@ -911,9 +921,9 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 [9]: /actions/private_actions/private_action_credentials
 [10]: https://app.datadoghq.com/workflow/
 [11]: https://app.datadoghq.com/app-builder/
-[12]: /service_management/workflows/build
-[13]: /service_management/app_builder/build
-[14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[12]: /actions/workflows/build
+[13]: /actions/app_builder/build
+[14]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [16]: /actions/private_actions/
 [17]: /account_management/rbac/
 [18]: /account_management/rbac/permissions/#app-builder--workflow-automations

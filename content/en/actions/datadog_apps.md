@@ -5,6 +5,9 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/internal-applications-datadog-apps/"
   tag: "Blog"
   text: "Ship internal applications from your AI Agent with Datadog Apps"
+- link: "https://www.youtube.com/watch?v=HEDjpMyqkSE"
+  tag: "Video"
+  text: "Datadog Apps Demo"
 - link: "/actions/app_builder/"
   tag: "Documentation"
   text: "App Builder"
@@ -109,6 +112,15 @@ Backend functions can call any action in Datadog's [Action Catalog][4] through t
 
 The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
+You can view backend utilities through the [@datadog/apps-backend][23] package. Use utilities to help with common actions.
+   ```
+import { getInitiatingUser, type User } from '@datadog/apps-backend/user';
+
+export async function getCurrentUser(): Promise<User> {
+    return getInitiatingUser();
+}
+   ```
+
 {{% collapse-content title="Example backend function" level="h4" expanded=false %}}
 
 Create a backend function that lists hosts through the Action Catalog:
@@ -209,7 +221,7 @@ CI/CD uploads require API and application key authentication. Create a Datadog A
 
 If your organization is not on US1 (`datadoghq.com`), set `auth.site` in `vite.config.ts` to your [Datadog site][15]. The build reads this configuration when uploading the app, so the same setting also applies to local development. Your Datadog site is `{{< region-param key="dd_site" >}}`.
 
-{{< site-region region="us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us3,us5,eu,ap1,ap2,uk1" >}}
 
 ```ts
 datadogVitePlugin({
@@ -303,3 +315,4 @@ The scaffolding tool requires Node.js 20.12.0 or later. If you see errors even o
 [20]: https://github.com/datadog-labs/agent-skills/tree/main/dd-apps/datadog-app
 [21]: https://github.com/datadog-labs/agent-skills/blob/main/README.md
 [22]: https://github.com/antfu/skills-cli
+[23]: https://www.npmjs.com/package/@datadog/apps-backend

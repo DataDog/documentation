@@ -34,9 +34,9 @@ After you select the Google Pub/Sub source in the pipeline UI:
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
-
 {{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ## Secret defaults
 
@@ -56,9 +56,16 @@ There are no default secret identifiers for this source.
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. To filter or group by Google Pub/Sub source metrics, use the tag `component_type:gcp_pubsub`.
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://cloud.google.com/kubernetes-engine/docs/concepts/workload-identity
 [4]: https://cloud.google.com/docs/authentication#auth-flowchart
 [5]: https://app.datadoghq.com/observability-pipelines
 [6]: /api/latest/observability-pipelines/
 [7]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[9]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[10]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

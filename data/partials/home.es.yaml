@@ -254,10 +254,6 @@ nav_sections:
         link: events/
         icon: events
         desc: Rastrea cambios notables y alertas en tus aplicaciones e infraestructura
-      - title: CoScreen
-        link: coscreen/
-        icon: coscreen
-        desc: Comparte e interactúa con las ventanas de la aplicación para la programación en pareja y la gestión de incidentes
       - title: OpenTelemetry
         link: opentelemetry/
         icon: open-telemetry

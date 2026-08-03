@@ -12,12 +12,6 @@ aliases:
   - /security_platform/security_signal_management
   - /security/security_signal_management
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Security releases! (App login required)."
-  - link: "https://www.datadoghq.com/guided-tour/security/"
-    tag: "Guided Tour"
-    text: "See a Product Guided Tour"
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
@@ -27,12 +21,15 @@ further_reading:
   - link: "/security/workload_protection/"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
-  - link: "https://securitylabs.datadoghq.com/"
-    tag: "Security Labs"
-    text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://www.datadoghq.com/guided-tour/security/"
+    tag: "Guided Tour"
+    text: "See a Product Guided Tour"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to elevate your security and threat detection"
+  - link: "https://securitylabs.datadoghq.com/"
+    tag: "Security Labs"
+    text: "Read about security-related topics on Datadog's Security Labs blog"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -93,6 +90,15 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
     tag: "Blog"
     text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+  - link: "https://www.datadoghq.com/blog/ci-cd-threat-matrix/"
+    tag: "Blog"
+    text: "CI/CD security: threat modeling using a MITRE-style threat matrix"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
+  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Security releases! (App login required)."
 algolia:
   tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:
@@ -109,6 +115,7 @@ Datadog Security includes:
 - [Code Security](#code-security)
 - [Cloud Security](#cloud-security)
 - [App and API Protection](#app-and-api-protection)
+- [AI Guard](#ai-guard)
 - [Workload Protection](#workload-protection)
 - [Sensitive Data Scanner](#sensitive-data-scanner)
  
@@ -151,6 +158,12 @@ To get started with Datadog Security, navigate to the [{{< ui >}}Security{{< /ui
 Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+
+## AI Guard
+
+[AI Guard][35] inspects, blocks, and governs AI behavior in real time. It sits inline with your AI app or agent to protect against prompt injection, jailbreaking, and sensitive data exfiltration attacks, using Prompt Protection, Tool Protection, and Sensitive Data Protection. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure.
+
+{{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" width="100%">}}
 
 ## Workload Protection
 
@@ -205,3 +218,4 @@ After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui
 [32]: /security/workload_protection/workload_security_rules
 [33]: /security/notifications/
 [34]: /security/workload_protection/security_signals
+[35]: /security/ai_guard/

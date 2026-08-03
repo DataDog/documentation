@@ -17,6 +17,15 @@ further_reading:
 - link: "/observability_pipelines/guide/strategies_for_reducing_log_volume/"
   tag: "documentation"
   text: "Strategies for Reducing Log Volume"
+- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
+  tag: "Learning Center"
+  text: "Getting Started with Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/"
+  tag: "Blog"
+  text: "Add dynamically updating context to logs with Reference Tables and Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-sensitive-data-redaction/"
   tag: "blog"
   text: "Redact sensitive data from your logs on-prem by using Observability Pipelines"
@@ -62,9 +71,6 @@ further_reading:
 - link: https://www.datadoghq.com/blog/manage-metrics-cost-control-with-observability-pipelines
   tag: Blog
   text: Manage metric volume and tags in your environment with Observability Pipelines
-- link: "https://learn.datadoghq.com/courses/course-getting-started-observability-pipelines"
-  tag: "Learning Center"
-  text: "Getting Started with Observability Pipelines"
 
 ---
 
@@ -72,7 +78,7 @@ further_reading:
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}
 
-Datadog Observability Pipelines allows you to collect and process logs and metrics ({{< tooltip glossary="preview" case="title" >}}) within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
+Datadog Observability Pipelines allows you to collect and process logs and metrics within your own infrastructure, and then route the data to different destinations. It gives you control over your observability data before it leaves your environment.
 
 With out-of-the-box templates, you can build pipelines that redact sensitive data, enrich data, filter out noisy events, and route data to destinations like Datadog, SIEM tools, or cloud storage.
 
@@ -130,9 +136,6 @@ Observability Pipelines includes prebuilt templates for common data routing and 
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
-
-<div class="alert alert-info">
-Metric Tag Governance is in Preview. Fill out the <a href="https://www.datadoghq.com/product-preview/metrics-ingestion-and-cardinality-control-in-observability-pipelines/">form</a> to request access.</div>
 
 | Template | Description |
 |----------|-------------|

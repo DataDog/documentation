@@ -88,12 +88,21 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
 
+`DD_LLMOBS_SAMPLE_RATE`
+: optional - _float_ - **default**: `1.0`
+<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
+
 `DD_API_KEY`
 : optional - _string_
 <br />Your Datadog API key. Only required if you are not using the Datadog Agent.
 
+`DD_MCP_CAPTURE_INTENT`
+: optional - _integer or string_ - **default**: `false`
+<br />When set to `1` or `true`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span.
+
 [1]: /getting_started/tagging/unified_service_tagging?tab=kubernetes#non-containerized-environment
 {{% /tab %}}
+
 
 {{% tab "Node.js" %}}
 Enable Agent Observability by running your application with `NODE_OPTIONS="--import dd-trace/initialize.mjs"` and specifying the required environment variables.
@@ -123,6 +132,10 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 `DD_LLMOBS_AGENTLESS_ENABLED`
 : optional - _integer or string_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `1` or `true`.
+
+`DD_LLMOBS_SAMPLE_RATE`
+: optional - _float_ - **default**: `1.0`
+<br />The fraction of traces retained by Agent Observability. See [Trace sampling](#trace-sampling).
 
 `DD_API_KEY`
 : optional - _string_
@@ -224,6 +237,14 @@ LLMObs.enable(
 : optional - _string_
 <br />The name of the service used for your application. If not provided, this defaults to the value of `DD_SERVICE`.
 
+`sample_rate`
+: optional - _float_
+<br />The fraction of traces retained by Agent Observability. Requires `ddtrace` 4.12.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
+
+`capture_intent`
+: optional - _boolean_ - **default**: `false`
+<br />When set to `True`, adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span. If not provided, this defaults to the value of `DD_MCP_CAPTURE_INTENT`.
+
 [1]: /llm_observability/instrumentation/auto_instrumentation/
 {{% /tab %}}
 
@@ -257,6 +278,10 @@ const llmobs = tracer.llmobs;
 `agentlessEnabled`
 : optional - _boolean_ - **default**: `false`
 <br />Only required if you are not using the Datadog Agent, in which case this should be set to `true`. This configures the `dd-trace` library to not send any data that requires the Datadog Agent. If not provided, this defaults to the value of `DD_LLMOBS_AGENTLESS_ENABLED`.
+
+`sampleRate`
+: optional - _number_
+<br />The fraction of traces retained by Agent Observability. Requires `dd-trace` 5.110.0 or later. When set, this takes precedence over `DD_LLMOBS_SAMPLE_RATE`. See [Trace sampling](#trace-sampling).
 
 **Options for general tracer configuration**:
 
@@ -355,6 +380,63 @@ export const handler = async (event) => {
 
 
 After installing the SDK and running your application you should expect to see some data in Agent Observability from auto-instrumentation. Manual instrumentation can be used to capture custom built frameworks or operations from libraries that are not yet supported.
+
+## Trace sampling
+
+<div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later) and the Node.js SDK (<code>dd-trace</code> 5.110.0 or later). The Java SDK does not support trace sampling.</div>
+
+Trace sampling sets the fraction of traces that Agent Observability retains. Use it to reduce ingestion volume and cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
+
+This sampling happens client-side. It is independent of in-app controls such as [automation rules](/llm_observability/monitoring/automation_rules/) and [APM trace sampling](/tracing/trace_pipeline/ingestion_mechanisms/), which apply after Datadog ingests your traces.
+
+Configure the sample rate through either of two mechanisms:
+
+- **Environment variable** (`DD_LLMOBS_SAMPLE_RATE`): applies to both [command-line setup](#command-line-setup) and [in-code setup](#in-code-setup).
+- **In-code parameter** (`sample_rate` in Python, `sampleRate` in Node.js): passed to `LLMObs.enable()` in Python, or under `llmobs` in Node.js, when you enable the SDK with [in-code setup](#in-code-setup). When set, it takes precedence over `DD_LLMOBS_SAMPLE_RATE`.
+
+The sample rate is a float between `0.0` (retain no traces) and `1.0` (retain all traces). The default is `1.0`. Out-of-range values are ignored.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Set the sample rate with the environment variable:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Or pass `sample_rate` to `LLMObs.enable()`, which takes precedence over the environment variable:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  sample_rate=0.5,
+)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+Set the sample rate with the environment variable:
+
+{{< code-block lang="shell" >}}
+DD_LLMOBS_SAMPLE_RATE=0.5 NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Or pass `sampleRate` under `llmobs` to `init()`, which takes precedence over the environment variable:
+
+{{< code-block lang="javascript" >}}
+const tracer = require('dd-trace').init({
+  llmobs: {
+    mlApp: "<YOUR_ML_APP_NAME>",
+    sampleRate: 0.5,
+  },
+});
+
+const llmobs = tracer.llmobs;
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Manual instrumentation
 
@@ -1289,11 +1371,11 @@ The `LLMObs.annotate()` method accepts the following arguments:
 
 `input_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "tool_results": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"`, and `"tool_results"` are an optional list of tool result dictionaries with required key: `"result"`, and optional keys: `"name"`, `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Embedding spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "..."}`.
 
 `output_data`
 : optional - _JSON serializable type or list of dictionaries_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{"content": "...", "role": "...", "tool_calls": ..., "audio_parts": ..., "image_parts": ...}`, where `"tool_calls"` are an optional list of tool call dictionaries with required keys: `"name"`, `"arguments"`, and optional keys: `"tool_id"`, `"type"` for function calling scenarios. `"audio_parts"` and `"image_parts"` are optional lists of media dictionaries for multimodal spans, each with a required `"mime_type"` and exactly one of `"content"` (base64-encoded media, carried inline) or `"attachment_key"`. **Note**: Retrieval spans are a special case and require a string or a dictionary (or a list of dictionaries) with this format: `{"text": "...", "name": "...", "score": float, "id": "..."}`.
 
 `tool_definitions`
 : optional - _list of dictionaries_
@@ -1369,7 +1451,59 @@ def similarity_search():
     )
     return
 
+@llm(model_name="gpt-realtime", model_provider="openai")
+def voice_turn(user_audio_bytes):
+    import base64
+    resp = ... # multimodal (audio) llm call here
+    LLMObs.annotate(
+        span=None,
+        input_data=[
+            {
+                "role": "user",
+                "content": "Hey, how are you?",  # transcript of the input audio
+                "audio_parts": [
+                    {"mime_type": "audio/wav", "content": base64.b64encode(user_audio_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+        output_data=[
+            {
+                "role": "assistant",
+                "content": "Hey! I'm doing great, thanks for asking. How about you?",
+                "audio_parts": [
+                    {"mime_type": "audio/wav", "content": base64.b64encode(resp.audio_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+    )
+    return resp
+
+@llm(model_name="gpt-4o", model_provider="openai")
+def describe_image(image_bytes):
+    import base64
+    resp = ... # multimodal (vision) llm call here
+    LLMObs.annotate(
+        span=None,
+        input_data=[
+            {
+                "role": "user",
+                "content": "What is in this image?",
+                "image_parts": [
+                    {"mime_type": "image/png", "content": base64.b64encode(image_bytes).decode("utf-8")}
+                ],
+            }
+        ],
+        output_data=[{"role": "assistant", "content": "The image shows a golden retriever puppy."}],
+    )
+    return resp
+
 {{< /code-block >}}
+
+Messages annotated with `audio_parts` or `image_parts` render as inline audio players and images in the trace view:
+
+{{< img src="llm_observability/instrumentation/audio_example.png" alt="An LLM span in the Agent Observability trace view. The input message from the USER shows an inline audio player with the transcript 'Hey, how are you?', and the output ASSISTANT message shows a 'Click to play audio' control with the transcript 'Hey! I'm doing great, thanks for asking. How about you?'." style="width:100%;" >}}
+
+{{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -1391,11 +1525,11 @@ The `annotationOptions` object can contain the following:
 
 `inputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "..."}` (for LLM spans).  **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of dictionaries with this format: `{role: "...", content: "...", audioParts: [...]}` (for LLM spans). `audioParts` is an optional list of audio objects for multimodal (voice) spans, each with a required `mimeType` and a base64-encoded `content` string. **Note**: Embedding spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "..."}`.
 
 `outputData`
 : optional - _JSON serializable type or list of objects_
-<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "..."}` (for LLM spans). **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
+<br />Either a JSON serializable type (for non-LLM spans) or a list of objects with this format: `{role: "...", content: "...", audioParts: [...]}` (for LLM spans). `audioParts` is an optional list of audio objects for multimodal (voice) spans, each with a required `mimeType` and a base64-encoded `content` string. **Note**: Retrieval spans are a special case and require a string or an object (or a list of objects) with this format: `{text: "...", name: "...", score: number, id: "..."}`.
 
 `metadata`
 : optional - _object_
@@ -1466,7 +1600,31 @@ function similaritySearch () {
 }
 similaritySearch = llmobs.wrap({ kind: 'retrieval', name: 'getRelevantDocs' }, similaritySearch)
 
+function voiceTurn (userAudioBytes) {
+  const resp = ... // multimodal (audio) llm call here
+  llmobs.annotate({
+    inputData: [
+      {
+        role: "user",
+        content: "Hey, how are you?", // transcript of the input audio
+        audioParts: [{ mimeType: "audio/wav", content: userAudioBytes.toString("base64") }]
+      }
+    ],
+    outputData: [
+      {
+        role: "assistant",
+        content: "Hey! I'm doing great, thanks for asking. How about you?",
+        audioParts: [{ mimeType: "audio/wav", content: resp.audioBuffer.toString("base64") }]
+      }
+    ]
+  })
+  return resp
+}
+voiceTurn = llmobs.wrap({ kind: 'llm', modelName: 'gpt-audio', modelProvider: 'openai' }, voiceTurn)
+
 {{< /code-block >}}
+
+For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrumentation/auto_instrumentation/)—no manual annotation required.
 
 {{% /tab %}}
 {{% tab "Java" %}}
@@ -1956,6 +2114,33 @@ The versioning system works as follows:
 - **Version history**: Both auto-generated and manual versions are maintained in the version history to track prompt evolution over time
 
 This gives you the flexibility to either rely on automatic version management based on template content changes, or maintain full control over versioning with your own version labels.
+
+## MCP intent capture
+
+To gain insight into why your MCP tools were called, enable intent capture on your MCP server. When enabled, the SDK adds an argument to every MCP server tool requesting that the calling model describe why it chose to call the tool. The intent is recorded on the tool span, helping you improve your tool definitions and descriptions.
+
+{{< tabs >}}
+{{% tab "Python" %}}
+
+Enable MCP intent capture with the `DD_MCP_CAPTURE_INTENT` environment variable:
+
+{{< code-block lang="shell" >}}
+DD_MCP_CAPTURE_INTENT=1 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
+DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+{{< /code-block >}}
+
+Or, enable it programmatically with the `capture_intent` parameter on `LLMObs.enable()`:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+LLMObs.enable(
+  ml_app="<YOUR_ML_APP_NAME>",
+  capture_intent=True,
+)
+{{< /code-block >}}
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ## Cost monitoring
 Attach token metrics (for automatic cost tracking) or cost metrics (for manual cost tracking) to your LLM/embedding spans. Token metrics allow Datadog to calculate costs using provider pricing, while cost metrics let you supply your own pricing when using custom or unsupported models. For more details, see [Costs][14].

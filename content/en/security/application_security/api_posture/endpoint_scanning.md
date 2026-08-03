@@ -3,6 +3,12 @@ title: Endpoint Scanning
 description: Verify whether discovered API endpoints are publicly accessible and require authentication.
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 <div class="alert alert-warning">Endpoint Scanning is in Preview and is subject to change.</div>
 
 Endpoint Scanning probes your API endpoints from outside your environment and records their HTTP responses, rather than inferring behavior from observed traffic. The results enrich the [API Inventory][2] with verified authentication and visibility data.

@@ -134,6 +134,10 @@ nav_sections:
         link: mobile_app_testing/
         icon: mobile
         desc: Monitor user journeys and business transactions in mobile applications
+      - title: Experiments
+        link: experiments/
+        icon: experiment-wui
+        desc: Plan, run, and analyze A/B tests to measure the impact of product changes
   - nav_section:
     - name: 'Software Delivery'
     - navtiles:
@@ -258,10 +262,6 @@ nav_sections:
         link: events/
         icon: events
         desc: Track notable changes and alerts in your applications and infrastructure
-      - title: CoScreen
-        link: coscreen/
-        icon: coscreen
-        desc: Share and interact with application windows for pair programming and incident management
       - title: OpenTelemetry
         link: opentelemetry/
         icon: open-telemetry

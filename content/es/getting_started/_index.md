@@ -41,7 +41,7 @@ La tabla siguiente enumera algunos ejemplos de productos de Datadog:
         <td>
         <ul>
         <li>Destaca las vulnerabilidades de código en tu editor de texto o en GitHub con <a href="/security/code_security/">Code Security</a>.</li>
-        <li>Facilita una sesión de programación en pareja remota con <a href="/coscreen/">CoScreen</a>.</li></ul>
+        </ul>
         </td>
     </tr>
     <tr>

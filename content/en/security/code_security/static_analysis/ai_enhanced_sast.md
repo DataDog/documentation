@@ -14,6 +14,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/bitsai-dev-agent-code-security"
       tag: "Blog"
       text: "Introducing Bits Code for Code Security"
+    - link: "https://www.datadoghq.com/blog/open-source-ai-sast/"
+      tag: "Blog"
+      text: "Introducing our open source AI-native SAST"
 ---
 
 Static Code Analysis (SAST) uses AI to help automate detection, validation, and remediation across the vulnerability management lifecycle.
@@ -84,6 +87,7 @@ AI-native SAST uses a two-phase approach:
 | Go         | Available   |
 | C#         | Available   |
 | JavaScript | Available   |
+| TypeScript | Available   |
 
 ### Detected vulnerability types
 
@@ -111,7 +115,7 @@ AI-native SAST detects the following vulnerability types:
 
 Code Security SAST provides AI-powered detection for vulnerabilities in source code. AI-powered detection is built on top of Datadog's default static analyzer tool, `datadog-static-analyzer`. The AI-powered layer enhances detection for semantically complex or cross-file vulnerabilities
 
-AI-powered detection is provided in [Vulernabilities][6] and [Repositories][7]. Use the query `@static_analysis.tool.name:datadog-saist` to use AI-powered detection.
+AI-powered detection is provided in [Vulnerabilities][6] and [Repositories][7]. Use the query `@static_analysis.tool.name:datadog-saist` to use AI-powered detection.
 
 ### How the AI layer works
 

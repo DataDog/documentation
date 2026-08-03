@@ -60,4 +60,4 @@ Datadog can summarize Scorecard results into automated reports and deliver them 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /api/latest/service-scorecards/
-[2]: /service_management/workflows/
+[2]: /actions/workflows/

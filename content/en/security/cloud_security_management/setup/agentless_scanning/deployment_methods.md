@@ -21,7 +21,7 @@ This guide helps you choose the right deployment topology for Agentless Scanning
 Datadog recommends the following guidelines:
 - Use a dedicated scanner account for multi-account environments.
 - Deploy a scanner in each region that contains more than 150 hosts.
-- If you use [Cloud Storage Scanning][1], deploy a scanner in each region that contains a data store (for example, S3 buckets or RDS instances).
+- If you use [Cloud Storage Scanning][1], deploy a scanner in each region that contains a data store (for example, S3 buckets).
 
 <div class="alert alert-info">Scanners only send the collected list of packages and host metadata (hostnames, EC2/VM/Compute Engine instance identifiers) to Datadog. All scanned data remains in your infrastructure.</div>
 
