@@ -1336,23 +1336,12 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoScreen
-      url: coscreen/
-      pre: coscreen
-      identifier: coscreen
-      parent: essentials_heading
-      weight: 150000
-    - name: Troubleshooting
-      url: coscreen/troubleshooting
-      identifier: coscreen_troubleshooting
-      parent: coscreen
-      weight: 1
     - name: CoTerm
       url: coterm/
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 160000
+      weight: 150000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -3226,6 +3215,21 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
+    - name: Setup
+      url: infrastructure/end_user_device_monitoring/setup/
+      identifier: eudm_setup
+      parent: end_user_device_monitoring
+      weight: 1
+    - name: macOS
+      url: infrastructure/end_user_device_monitoring/setup/macos/
+      identifier: eudm_setup_macos
+      parent: eudm_setup
+      weight: 1
+    - name: Windows
+      url: infrastructure/end_user_device_monitoring/setup/windows/
+      identifier: eudm_setup_windows
+      parent: eudm_setup
+      weight: 2
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -5221,7 +5225,7 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
-    - name: Database Investigator
+    - name: Database Investigations in Bits Chat
       url: database_monitoring/database_investigator/
       parent: dbm
       identifier: dbm_database_investigator
@@ -5468,6 +5472,11 @@ menu:
       identifier: jobs_monitoring_glue
       parent: data_jobs
       weight: 650000
+    - name: Azure Data Factory
+      url: data_observability/jobs_monitoring/azure_data_factory
+      identifier: jobs_monitoring_azure_data_factory
+      parent: data_jobs
+      weight: 660000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
@@ -6498,6 +6507,11 @@ menu:
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
       weight: 5
+    - name: Local Flag Overrides
+      url: feature_flags/implementation_patterns/local_flag_overrides
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_local_flag_overrides
+      weight: 500
     - name: OpenTelemetry
       url: feature_flags/implementation_patterns/opentelemetry
       parent: feature_flags_implementation_patterns
@@ -8382,6 +8396,16 @@ menu:
       parent: csm_review_remediate
       identifier: csm_remediate_with_ai
       weight: 103
+    - name: Ownership Agent
+      url: security/cloud_security_management/review_remediate/ownership_agent
+      parent: csm_review_remediate
+      identifier: csm_ownership_agent
+      weight: 104
+    - name: Set Up Ownership Preferences
+      url: security/cloud_security_management/review_remediate/ownership_preferences
+      parent: csm_review_remediate
+      identifier: csm_ownership_preferences
+      weight: 105
     - name: Triage and Prioritize
       url: security/cloud_security_management/triage_and_prioritize/
       parent: csm
@@ -10579,6 +10603,11 @@ menu:
       url: account_management/billing/ai_credits/
       parent: account_management_billing
       weight: 1521
+    - name: AI Credit Limits
+      identifier: account_management_billing_ai_credit_limits
+      url: account_management/billing/ai_credit_limits/
+      parent: account_management_billing
+      weight: 1522
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/

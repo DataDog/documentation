@@ -12268,6 +12268,126 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Get a schedule by ID
+      url: /api/latest/fleet-automation/get-a-schedule-by-id/
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetScheduleV2
+        unstable: []
+        order: 11
+    - name: List all schedules
+      url: /api/latest/fleet-automation/list-all-schedules/
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedulesV2
+        unstable: []
+        order: 9
+    - name: Cancel a deployment
+      url: /api/latest/fleet-automation/cancel-a-deployment/
+      identifier: fleet-automation-cancel-a-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelFleetDeploymentV2
+        unstable: []
+        order: 8
+    - name: Get a deployment by ID
+      url: /api/latest/fleet-automation/get-a-deployment-by-id/
+      identifier: fleet-automation-get-a-deployment-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetDeploymentV2
+        unstable: []
+        order: 7
+    - name: Upgrade hosts
+      url: /api/latest/fleet-automation/upgrade-hosts/
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgradeV2
+        unstable: []
+        order: 6
+    - name: Create a configuration deployment
+      url: /api/latest/fleet-automation/create-a-configuration-deployment/
+      identifier: fleet-automation-create-a-configuration-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentConfigureV2
+        unstable: []
+        order: 5
+    - name: List all deployments
+      url: /api/latest/fleet-automation/list-all-deployments/
+      identifier: fleet-automation-list-all-deployments
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetDeploymentsV2
+        unstable: []
+        order: 4
+    - name: Get detailed information about an agent
+      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentDetailV2
+        unstable: []
+        order: 3
+    - name: List all Datadog Agents
+      url: /api/latest/fleet-automation/list-all-datadog-agents/
+      identifier: fleet-automation-list-all-datadog-agents
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentsV2
+        unstable: []
+        order: 2
+    - name: List available Datadog Agent versions
+      url: /api/latest/fleet-automation/list-available-datadog-agent-versions/
+      identifier: fleet-automation-list-available-datadog-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersionsV2
+        unstable: []
+        order: 1
     - name: List all fleet tracers
       url: /api/latest/fleet-automation/list-all-fleet-tracers/
       identifier: fleet-automation-list-all-fleet-tracers
@@ -12307,19 +12427,6 @@ menu:
         unstable:
           - v2
         order: 12
-    - name: Get a schedule by ID
-      url: /api/latest/fleet-automation/get-a-schedule-by-id/
-      identifier: fleet-automation-get-a-schedule-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetSchedule
-        unstable:
-          - v2
-        order: 11
     - name: Delete a schedule
       url: /api/latest/fleet-automation/delete-a-schedule/
       identifier: fleet-automation-delete-a-schedule
@@ -12346,84 +12453,6 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: List all schedules
-      url: /api/latest/fleet-automation/list-all-schedules/
-      identifier: fleet-automation-list-all-schedules
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetSchedules
-        unstable:
-          - v2
-        order: 9
-    - name: Cancel a deployment
-      url: /api/latest/fleet-automation/cancel-a-deployment/
-      identifier: fleet-automation-cancel-a-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CancelFleetDeployment
-        unstable:
-          - v2
-        order: 8
-    - name: Get a configuration deployment by ID
-      url: /api/latest/fleet-automation/get-a-configuration-deployment-by-id/
-      identifier: fleet-automation-get-a-configuration-deployment-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetDeployment
-        unstable:
-          - v2
-        order: 7
-    - name: Upgrade hosts
-      url: /api/latest/fleet-automation/upgrade-hosts/
-      identifier: fleet-automation-upgrade-hosts
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentUpgrade
-        unstable:
-          - v2
-        order: 6
-    - name: Create a configuration deployment
-      url: /api/latest/fleet-automation/create-a-configuration-deployment/
-      identifier: fleet-automation-create-a-configuration-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentConfigure
-        unstable:
-          - v2
-        order: 5
-    - name: List all deployments
-      url: /api/latest/fleet-automation/list-all-deployments/
-      identifier: fleet-automation-list-all-deployments
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetDeployments
-        unstable:
-          - v2
-        order: 4
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
@@ -12437,45 +12466,6 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Get detailed information about an agent
-      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
-      identifier: fleet-automation-get-detailed-information-about-an-agent
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetAgentInfo
-        unstable:
-          - v2
-        order: 3
-    - name: List all Datadog Agents
-      url: /api/latest/fleet-automation/list-all-datadog-agents/
-      identifier: fleet-automation-list-all-datadog-agents
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgents
-        unstable:
-          - v2
-        order: 2
-    - name: List all available Agent versions
-      url: /api/latest/fleet-automation/list-all-available-agent-versions/
-      identifier: fleet-automation-list-all-available-agent-versions
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgentVersions
-        unstable:
-          - v2
-        order: 1
     - name: Forms
       url: /api/latest/forms/
       identifier: forms

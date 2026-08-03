@@ -70,9 +70,6 @@ attributes:
     data_type: |
        - **Résultats de batch** : 2 mois
        - **Résultats de tests** : 2 mois
-  - product: CoScreen
-    data_type: |
-       - **Sessions** : 15 mois
   - product: "Data Observability : surveillance des jobs"
     data_type: |
        - **Traces de jobs** : 90 jours

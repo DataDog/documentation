@@ -2,18 +2,21 @@
 title: Governance Console
 description: Provides a centralized, self-service view of Datadog usage and adoption.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-governance/"
-  tag: "Blog"
-  text: "Datadog governance 101: From chaos to consistency"
-- link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
-  tag: "Blog"
-  text: "Best practices for managing Datadog organizations at scale"
 - link: "https://docs.datadoghq.com/account_management/audit_trail/"
   tag: "Documentation"
   text: "Datadog Audit Trail"
 - link: "https://docs.datadoghq.com/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/governance-console/"
+  tag: "Blog"
+  text: "Centralize observability management with Datadog Governance Console"
+- link: "https://www.datadoghq.com/blog/datadog-governance/"
+  tag: "Blog"
+  text: "Datadog governance 101: From chaos to consistency"
+- link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+  tag: "Blog"
+  text: "Best practices for managing Datadog organizations at scale"
 ---
 
 {{< callout url="/help/" header="Get Started with Governance Console" >}}
