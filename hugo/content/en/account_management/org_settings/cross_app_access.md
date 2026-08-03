@@ -16,7 +16,7 @@ further_reading:
 ---
 
 {{< callout url="#" btn_hidden="true" header="false">}}
-  Cross-App Access is in Preview.
+  Cross-App Access is in Preview. Okta manages access to the preview and enables it for your Okta tenant. Any Datadog organization can enable Cross-App Access on the Datadog side.
 {{< /callout >}}
 
 ## Overview
