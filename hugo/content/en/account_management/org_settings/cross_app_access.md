@@ -27,39 +27,23 @@ Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion J
 
 In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent.
 
-## How it works
-
-1. A user signs in to Claude through Okta single sign-on.
-2. Claude requests an ID-JAG from Okta for the user.
-3. Claude presents the ID-JAG to Datadog.
-4. Datadog verifies the token signature against your Okta tenant, confirms the token targets your organization, and resolves the Okta user to a Datadog user.
-5. Datadog issues an access token, and Claude calls the Datadog API with it.
-
-Access tokens issued through this flow are short-lived. After one expires, Claude returns to Okta for a new token, which keeps Okta the central place to control agent access.
-
 ## Values you exchange
 
 Setup moves values in both directions between Datadog and Okta. Two of them are issuer URLs that name different systems, so confirm you enter each one in the correct place.
 
-
 | Value                               | Direction       | Where you enter it                                                                        |
 | ----------------------------------- | --------------- | ----------------------------------------------------------------------------------------- |
-| Datadog organization UUID           | Datadog to Okta | Datadog application in Okta, **Resource Server** tab, **Audience/tenant ID**              |
-| Claude client ID                    | Datadog to Okta | Okta AI Agent, **Resource Connection**, **Client ID at resource**                         |
-| Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta, **Resource Server** tab, **Resource URL** and **Issuer URL** |
+| Datadog organization UUID           | Datadog to Okta | Datadog application in Okta, {{< ui >}}Resource Server{{< /ui >}} tab, {{< ui >}}Audience/tenant ID{{< /ui >}}              |
+| Claude client ID                    | Datadog to Okta | Okta AI Agent, {{< ui >}}Resource Connection{{< /ui >}}, {{< ui >}}Client ID at resource{{< /ui >}}                         |
+| Datadog resource URL and issuer URL | Datadog to Okta | Datadog application in Okta, {{< ui >}}Resource Server{{< /ui >}} tab, {{< ui >}}Resource URL{{< /ui >}} and {{< ui >}}Issuer URL{{< /ui >}} |
 | Okta tenant issuer URL              | Okta to Datadog | Datadog API, `mcp_cross_app_access_issuer_url` org config                                 |
-
-
-
 
 ## Prerequisites
 
 - Your organization uses Okta for SAML single sign-on to Datadog. Cross-App Access resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on](/account_management/saml/).
 - Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
 - Configuration happens through the Datadog API, so you need the `org_management` permission and a [Personal Access Token](/account_management/personal-access-tokens/) (PAT), used as `DD_TOKEN` in the examples.
-- Your Okta tenant has the **AI Agent Identity Assertion** and **Agent to Agent Connections** Early Access features enabled, and you have Okta Super Administrator access.
-
-
+- Your Okta tenant has the {{< ui >}}AI Agent Identity Assertion{{< /ui >}} and {{< ui >}}Agent to Agent Connections{{< /ui >}} Early Access features enabled, and you have Okta Super Administrator access.
 
 ## Configure Cross-App Access in Datadog
 
@@ -124,7 +108,7 @@ Claude uses one OAuth client ID in every Datadog organization:
 391e6845-8153-4de1-bbf0-c1b6ef7fdc14
 {{< /code-block >}}
 
-You enter this in Okta as **Client ID at resource**.
+You enter this in Okta as {{< ui >}}Client ID at resource{{< /ui >}}.
 
 ## Finish the setup in Okta
 
@@ -132,22 +116,18 @@ Complete the setup in the Okta Admin Console as a Super Administrator. This sect
 
 ### Configure the Datadog application as a resource server
 
-On your Datadog application, open the **Resource Server** tab and enable **Cross-app access (XAA)**. Set the following fields.
+On your Datadog application, open the {{< ui >}}Resource Server{{< /ui >}} tab and enable {{< ui >}}Cross-app access (XAA){{< /ui >}}. Set the following fields.
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 <p>The values below match your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}). To see the values for another site, use the {{< ui >}}Datadog Site{{< /ui >}} selector on the right side of this page.</p>
 <table>
 <thead><tr><th>Okta field</th><th>Value</th></tr></thead>
 <tbody>
-<tr><td><strong>Resource URL</strong></td><td>{{< region-param key="mcp_xaa_resource_url" code="true" >}}</td></tr>
-<tr><td><strong>Issuer URL</strong></td><td>{{< region-param key="mcp_xaa_issuer_url" code="true" >}}</td></tr>
-<tr><td><strong>Audience/tenant ID</strong></td><td>Your Datadog organization UUID</td></tr>
+<tr><td>{{< ui >}}Resource URL{{< /ui >}}</td><td>{{< region-param key="mcp_xaa_resource_url" code="true" >}}</td></tr>
+<tr><td>{{< ui >}}Issuer URL{{< /ui >}}</td><td>{{< region-param key="mcp_xaa_issuer_url" code="true" >}}</td></tr>
+<tr><td>{{< ui >}}Audience/tenant ID{{< /ui >}}</td><td>Your Datadog organization UUID</td></tr>
 </tbody>
 </table>
-{{< /site-region >}}
-
-{{< site-region region="gov,gov2" >}}
-<div class="alert alert-danger">Cross-App Access is not supported for your selected <a href="/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 The issuer URL identifies the Datadog authorization server, not the token endpoint. Okta writes it into the `aud` claim of the tokens it issues, and Datadog accepts a token only when that claim matches.
@@ -161,7 +141,7 @@ Create an AI Agent entry for Claude in Okta, then exchange keys with Anthropic. 
 1. Create the AI Agent entry for Claude.
 2. Assign owners to the agent. Okta requires an owner before you can activate it.
 3. Send the AI Agent ID that Okta generates to Anthropic.
-4. Add the public key that Anthropic returns to the AI Agent entry, on the **Credentials** tab.
+4. Add the public key that Anthropic returns to the AI Agent entry, on the {{< ui >}}Credentials{{< /ui >}} tab.
 
 Until the public key is in place, token exchange fails even though every other value is correct. This exchange is manual, so start it early.
 
@@ -169,35 +149,35 @@ Until the public key is in place, token exchange fails even though every other v
 
 On the Claude AI Agent, add the Claude SAML application as a delegated caller, then connect the agent to your Datadog application.
 
-1. On the **Delegations** tab, add the Claude SAML application as a caller.
-2. On the **Resource connections** tab, add a resource connection. Select **Application** as the resource type, then select your Datadog application.
+1. On the {{< ui >}}Delegations{{< /ui >}} tab, add the Claude SAML application as a caller.
+2. On the {{< ui >}}Resource connections{{< /ui >}} tab, add a resource connection. Select {{< ui >}}Application{{< /ui >}} as the resource type, then select your Datadog application.
 3. Set the following fields.
 
-  | Okta field                | Value                                                                                                |
-  | ------------------------- | ---------------------------------------------------------------------------------------------------- |
-  | **Client ID at resource** | `391e6845-8153-4de1-bbf0-c1b6ef7fdc14`                                                               |
-  | **Scope Condition**       | **Allow all**, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
+   | Okta field                | Value                                                                                                |
+   | ------------------------- | ---------------------------------------------------------------------------------------------------- |
+   | {{< ui >}}Client ID at resource{{< /ui >}} | `391e6845-8153-4de1-bbf0-c1b6ef7fdc14`                                                               |
+   | {{< ui >}}Scope Condition{{< /ui >}}       | {{< ui >}}Allow all{{< /ui >}}, the only supported value. See [Control scopes in Datadog](#control-scopes-in-datadog) |
 
-4. Activate the agent from the **Actions** menu.
+4. Activate the agent from the {{< ui >}}Actions{{< /ui >}} menu.
 
-### Control scopes in Datadog
+## Control scopes in Datadog
 
-**Allow all** is the only supported **Scope Condition** for Cross-App Access. Set it in Okta, then restrict what Claude reaches from Datadog.
+{{< ui >}}Allow all{{< /ui >}} is the only supported {{< ui >}}Scope Condition{{< /ui >}} for Cross-App Access. Set it in Okta, then restrict what Claude reaches from Datadog.
 
-Okta does not filter scopes. With **Allow all**, Okta copies whatever Claude requests into the token, which makes Datadog the enforcement point.
+Okta does not filter scopes. With {{< ui >}}Allow all{{< /ui >}}, Okta copies whatever Claude requests into the token, which makes Datadog the enforcement point.
 
 <div class="alert alert-warning">Do not enter a list of scopes in Okta. Okta rejects any token request that contains a scope outside the list, so the integration fails with an error instead of falling back to narrower access.</div>
 
 To set the scopes Claude is allowed:
 
-1. Navigate to [**Organization Settings > Mobile and Third-Party Access**](https://app.datadoghq.com/organization-settings/mobile-third-party-access).
-2. Select the Claude application, then select the **Scopes** tab.
-3. Use the **Allowed** checkbox for each scope to control what Claude reaches.
-4. Click **Enable** to save.
+1. Navigate to [{{< ui >}}Organization Settings > Mobile and Third-Party Access{{< /ui >}}](https://app.datadoghq.com/organization-settings/mobile-third-party-access).
+2. Select the Claude application, then select the {{< ui >}}Scopes{{< /ui >}} tab.
+3. Use the {{< ui >}}Allowed{{< /ui >}} checkbox for each scope to control what Claude reaches.
+4. Click {{< ui >}}Enable{{< /ui >}} to save.
 
 Adding or removing a scope affects every user in your organization, and removing a scope revokes existing authorizations that rely on it. See [Application Scope Management](/account_management/org_settings/mobile_third_party_access/#application-scope-management).
 
-A scope that is not allowed in Datadog is never granted, whatever the token requests.
+A scope that is not allowed in Datadog is never granted, regardless of what the token requests.
 
 ## Add Datadog as a connector in Claude
 

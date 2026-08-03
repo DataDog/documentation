@@ -335,6 +335,7 @@ unsupported_sites:
   continuous_integration: [gov,gov2]
   correlation: [gov,gov2] #Event management correlation
   coterm: [gov,gov2]
+  cross_app_access: [gov,gov2]
   csm_jira: [us,us3,us5,eu,ap1,ap2,uk1]
   cpp_log_collection: [gov,gov2]
   data_jobs: [gov,gov2]
