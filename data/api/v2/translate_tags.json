@@ -371,9 +371,17 @@
     "name": "RUM",
     "description": "Manage your Real User Monitoring (RUM) applications, and search or aggregate your RUM events over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
   },
+  "rum-config": {
+    "name": "RUM Config",
+    "description": "Manage the [Real User Monitoring (RUM)](https://docs.datadoghq.com/real_user_monitoring/)\nconfiguration for your organization."
+  },
   "rum-insights": {
     "name": "RUM Insights",
     "description": "Get insights into the performance of your Real User Monitoring (RUM) applications over HTTP. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/) for more information"
+  },
+  "rum-operations": {
+    "name": "RUM Operations",
+    "description": "Manage [RUM Operations](https://docs.datadoghq.com/real_user_monitoring/), business\ntransactions detected from RUM events through a configurable journey, and their strong links\nto features. See the [RUM & Session Replay page](https://docs.datadoghq.com/real_user_monitoring/)\nfor more information."
   },
   "rum-remote-config": {
     "name": "RUM Remote Config",

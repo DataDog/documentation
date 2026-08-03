@@ -5221,7 +5221,7 @@ menu:
       parent: dbm
       identifier: dbm_recommendations
       weight: 16
-    - name: Database Investigator
+    - name: Database Investigations in Bits Chat
       url: database_monitoring/database_investigator/
       parent: dbm
       identifier: dbm_database_investigator
@@ -5366,6 +5366,11 @@ menu:
       identifier: elt_integrations_fivetran
       parent: elt_integrations
       weight: 1000000
+    - name: Hightouch
+      url: data_observability/quality_monitoring/elt/hightouch
+      identifier: elt_integrations_hightouch
+      parent: elt_integrations
+      weight: 1500000
     - name: Business Intelligence Integrations
       url: data_observability/quality_monitoring/business_intelligence
       identifier: business_intelligence_integrations
@@ -5558,16 +5563,21 @@ menu:
       parent: llm_obs_monitoring
       identifier: llm_obs_prompt_tracking
       weight: 306
+    - name: Prompt Management
+      url: llm_observability/monitoring/prompt_management
+      parent: llm_obs_monitoring
+      identifier: llm_obs_prompt_management
+      weight: 307
     - name: Metrics
       url: llm_observability/monitoring/metrics
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_metrics
-      weight: 307
+      weight: 308
     - name: Automation Rules
       url: llm_observability/monitoring/automation_rules
       parent: llm_obs_monitoring
       identifier: llm_obs_monitoring_automation_rules
-      weight: 308
+      weight: 309
     - name: Evaluations
       url: llm_observability/evaluations/
       parent: llm_obs
@@ -6433,21 +6443,26 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
       weight: 306
+    - name: Configuration Sources
+      url: feature_flags/concepts/configuration_sources
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_configuration_sources
+      weight: 307
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 307
+      weight: 308
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 308
+      weight: 309
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 309
+      weight: 310
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -6519,6 +6534,46 @@ menu:
       parent: source_code_integration
       identifier: sci_service_mapping
       weight: 2
+    - name: .NET
+      url: source_code/service-mapping/dotnet/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_dotnet
+      weight: 1
+    - name: Go
+      url: source_code/service-mapping/go/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_go
+      weight: 2
+    - name: Java
+      url: source_code/service-mapping/java/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_java
+      weight: 3
+    - name: Node.js
+      url: source_code/service-mapping/nodejs/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_nodejs
+      weight: 4
+    - name: PHP
+      url: source_code/service-mapping/php/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_php
+      weight: 5
+    - name: Python
+      url: source_code/service-mapping/python/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_python
+      weight: 6
+    - name: Ruby
+      url: source_code/service-mapping/ruby/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_ruby
+      weight: 7
+    - name: Other Languages
+      url: source_code/service-mapping/other/
+      parent: sci_service_mapping
+      identifier: sci_service_mapping_other
+      weight: 8
     - name: Resource Mapping
       url: source_code/resource-mapping/
       parent: source_code_integration
@@ -8322,6 +8377,11 @@ menu:
       parent: csm_review_remediate
       identifier: csm_workflow_automation
       weight: 102
+    - name: Remediate with AI
+      url: security/cloud_security_management/review_remediate/remediate_with_ai
+      parent: csm_review_remediate
+      identifier: csm_remediate_with_ai
+      weight: 103
     - name: Triage and Prioritize
       url: security/cloud_security_management/triage_and_prioritize/
       parent: csm
@@ -8337,16 +8397,21 @@ menu:
       parent: csm_triage_and_prioritize
       identifier: csm_severity_scoring
       weight: 102
+    - name: Code Locations
+      url: security/cloud_security_management/code_locations/
+      parent: csm
+      identifier: csm_code_locations
+      weight: 11
     - name: Guides
       url: security/cloud_security_management/guide/
       parent: csm
       identifier: csm_guides
-      weight: 11
+      weight: 12
     - name: Troubleshooting
       url: security/cloud_security_management/troubleshooting/
       parent: csm
       identifier: csm_troubleshooting
-      weight: 12
+      weight: 13
     - name: Vulnerabilities
       url: security/cloud_security_management/troubleshooting/vulnerabilities/
       parent: csm_troubleshooting

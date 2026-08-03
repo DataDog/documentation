@@ -3,9 +3,6 @@ title: Infrastructure as Code (IaC) Security
 aliases:
   - /security/cloud_security_management/iac_scanning/
 further_reading:
-  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
-    tag: "Blog"
-    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: "/security/code_security/iac_security/setup"
     tag: "Documentation"
     text: "Set up IaC Security"
@@ -18,9 +15,15 @@ further_reading:
   - link: "/pr_gates/"
     tag: "Documentation"
     text: "PR Gates"
+  - link: "https://www.datadoghq.com/blog/datadog-iac-security/"
+    tag: "Blog"
+    text: "Prevent cloud misconfigurations from reaching production with Datadog IaC Security"
   - link: https://www.datadoghq.com/blog/code-security-secret-scanning
     tag: Blog
     text: Detect and block exposed credentials with Datadog Secret Scanning
+  - link: "https://www.datadoghq.com/blog/github-actions-iac-security/"
+    tag: "Blog"
+    text: "Spotting CI/CD misconfigurations before the bots do: Securing GitHub Actions with Datadog IaC Security"
 ---
 
 Datadog Infrastructure as Code (IaC) Security detects misconfigurations in IaC configurations before they're deployed. It flags issues such as missing encryption or overly permissive access in files stored in your connected GitHub, GitLab, or Azure DevOps repositories. For more information, see [IaC Security Rules][13].
@@ -36,6 +39,20 @@ IaC Security integrates with your repositories to continuously scan for misconfi
 ### Review and fix violations in pull requests
 
 When a pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [Pull Request Comments][5].
+
+### Fix with Cursor
+You can hand off remediation for an IaC finding to an AI coding agent such as Cursor.
+
+1. On the [Code Security Vulnerabilities][3] page, click a finding to open its side panel.
+2. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}.
+3. Select the {{< ui >}}Coding agent{{< /ui >}} tab.
+4. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored remediation prompt for the misconfiguration.
+
+To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/iac_security/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
 
 ### Automatically block risky changes with PR Gates
 

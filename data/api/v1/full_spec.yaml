@@ -6182,6 +6182,9 @@ components:
         - rum_stream
         - llm_observability_stream
         - issue_stream
+        - security_runtime_stream
+        - security_signals_stream
+        - incidents_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6199,6 +6202,9 @@ components:
         - RUM_STREAM
         - LLM_OBSERVABILITY_STREAM
         - ISSUE_STREAM
+        - SECURITY_RUNTIME_STREAM
+        - SECURITY_SIGNALS_STREAM
+        - INCIDENTS_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -22045,6 +22051,12 @@ components:
       type: object
     TopologyMapWidgetDefinition:
       description: This widget displays a topology of nodes and edges for different data sources. It replaces the service map widget.
+      oneOf:
+        - $ref: "#/components/schemas/TopologyMapWidgetDefinitionDataStreams"
+        - $ref: "#/components/schemas/TopologyMapWidgetDefinitionServiceMap"
+    TopologyMapWidgetDefinitionDataStreams:
+      additionalProperties: false
+      description: Topology map widget backed by the data streams data source.
       properties:
         custom_links:
           description: List of custom links.
@@ -22055,11 +22067,47 @@ components:
           description: The description of the widget.
           type: string
         requests:
-          description: One or more Topology requests.
+          description: One Topology request.
           items:
-            $ref: "#/components/schemas/TopologyRequest"
+            $ref: "#/components/schemas/TopologyRequestDataStreams"
           minItems: 1
           type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
+        title:
+          description: Title of your widget.
+          type: string
+        title_align:
+          $ref: "#/components/schemas/WidgetTextAlign"
+        title_size:
+          description: Size of the title.
+          type: string
+        type:
+          $ref: "#/components/schemas/TopologyMapWidgetDefinitionType"
+      required:
+        - type
+        - requests
+      type: object
+    TopologyMapWidgetDefinitionServiceMap:
+      additionalProperties: false
+      description: Topology map widget backed by the service map data source.
+      properties:
+        custom_links:
+          description: List of custom links.
+          items:
+            $ref: "#/components/schemas/WidgetCustomLink"
+          type: array
+        description:
+          description: The description of the widget.
+          type: string
+        requests:
+          description: One Topology request.
+          items:
+            $ref: "#/components/schemas/TopologyRequestServiceMap"
+          minItems: 1
+          type: array
+        time:
+          $ref: "#/components/schemas/WidgetTime"
         title:
           description: Title of your widget.
           type: string
@@ -22083,11 +22131,47 @@ components:
       type: string
       x-enum-varnames:
         - TOPOLOGY_MAP
-    TopologyQuery:
-      description: Query to service-based topology data sources like the service map or data streams.
+    TopologyQueryDataStreams:
+      additionalProperties: false
+      description: Query to the data streams topology data source.
       properties:
         data_source:
-          $ref: "#/components/schemas/TopologyQueryDataSource"
+          $ref: "#/components/schemas/TopologyQueryDataStreamsDataSource"
+        filters:
+          description: Your environment and primary tag (or * if enabled for your account).
+          example: ["env:prod", "az:us-east"]
+          items:
+            description: Environment or primary tag, generally in a key:value format.
+            type: string
+          minItems: 1
+          type: array
+        query_string:
+          description: A search string for filtering services. When set, this replaces the `service` field.
+          example: "service:myservice"
+          type: string
+        service:
+          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          example: myservice
+          type: string
+      required:
+        - data_source
+        - filters
+        - service
+      type: object
+    TopologyQueryDataStreamsDataSource:
+      description: Name of the data source.
+      enum:
+        - data_streams
+      example: data_streams
+      type: string
+      x-enum-varnames:
+        - DATA_STREAMS
+    TopologyQueryServiceMap:
+      additionalProperties: false
+      description: Query to the service map topology data source.
+      properties:
+        data_source:
+          $ref: "#/components/schemas/TopologyQueryServiceMapDataSource"
         filters:
           description: Your environment and primary tag (or * if enabled for your account).
           example: ["env:prod", "az:us-east"]
@@ -22096,25 +22180,40 @@ components:
             type: string
           minItems: 1
           type: array
-        service:
-          description: Name of the service
-          example: myService
+        query_string:
+          description: A search string for filtering services. When set, this replaces the `service` field.
+          example: "service:myservice"
           type: string
+        service:
+          description: (deprecated) Name of the service. Leave this empty and use query_string instead.
+          example: myservice
+          type: string
+      required:
+        - data_source
+        - filters
+        - service
       type: object
-    TopologyQueryDataSource:
-      description: Name of the data source
+    TopologyQueryServiceMapDataSource:
+      description: Name of the data source.
       enum:
-        - data_streams
         - service_map
+      example: service_map
       type: string
       x-enum-varnames:
-        - DATA_STREAMS
         - SERVICE_MAP
-    TopologyRequest:
-      description: Request that will return nodes and edges to be used by topology map.
+    TopologyRequestDataStreams:
+      description: Request that returns nodes and edges from the data streams data source.
       properties:
         query:
-          $ref: "#/components/schemas/TopologyQuery"
+          $ref: "#/components/schemas/TopologyQueryDataStreams"
+        request_type:
+          $ref: "#/components/schemas/TopologyRequestType"
+      type: object
+    TopologyRequestServiceMap:
+      description: Request that returns nodes and edges from the service map data source.
+      properties:
+        query:
+          $ref: "#/components/schemas/TopologyQueryServiceMap"
         request_type:
           $ref: "#/components/schemas/TopologyRequestType"
       type: object

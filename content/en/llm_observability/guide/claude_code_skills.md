@@ -53,10 +53,14 @@ The skills are available in any Claude Code session after installing.
 
 To use the Datadog MCP server option, connect the Agent Observability MCP server to your Claude Code session:
 
-```shell
-claude mcp add --scope user --transport http datadog-llmo-mcp \
-  'https://mcp.datadoghq.com/v1/mcp?toolsets=llmobs'
-```
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+<pre><code>claude mcp add --scope user --transport http datadog-llmo-mcp \
+  '{{< region-param key="mcp_server_endpoint" >}}?toolsets=llmobs,core'</code></pre>
+{{< /site-region >}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected site ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
 
 All skills detect the MCP server automatically at startup and use it throughout.
 

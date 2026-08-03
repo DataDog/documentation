@@ -8,9 +8,6 @@ aliases:
 - /security/application_security/vulnerability_management/
 
 further_reading:
-  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
-    tag: Blog
-    text: Detect and block exposed credentials with Datadog Secret Scanning
   - link: /security/code_security/software_composition_analysis/setup_static/
     tag: Documentation
     text: Set up Static SCA
@@ -26,6 +23,9 @@ further_reading:
   - link: /pr_gates/
     tag: Documentation
     text: PR Gates
+  - link: https://www.datadoghq.com/blog/code-security-secret-scanning
+    tag: Blog
+    text: Detect and block exposed credentials with Datadog Secret Scanning
   - link: "https://www.datadoghq.com/blog/smart-vulnerability-remediation/"
     tag: "Blog"
     text: "Take a smarter approach to vulnerability remediation with Datadog"
@@ -35,6 +35,9 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
     tag: "Blog"
     text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
 
 ---
 ## Overview
@@ -142,6 +145,20 @@ Each Bits Code session shows the life cycle of an AI-generated fix so you can re
 - Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
 
 You can also view all remediation sessions on [**Sessions**][33].
+
+#### Fix with Cursor
+Instead of Bits Code, you can generate a fix with an AI coding agent such as Cursor:
+
+1. In the {{< ui >}}Remediate with AI{{< /ui >}} dialog, select the {{< ui >}}Coding agent{{< /ui >}} tab.
+2. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored prompt that includes the recommended library upgrade for the vulnerability.
+
+To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+You can start this flow from the {{< ui >}}Remediation{{< /ui >}} section of a vulnerability's side panel, or from the {{< ui >}}Repositories{{< /ui >}} table. Each row in the table represents a repository or file that contains the vulnerable library.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/software_composition_analysis/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
 
 ### Automatically block risky changes with PR Gates
 
