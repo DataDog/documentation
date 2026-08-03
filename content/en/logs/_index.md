@@ -7,9 +7,6 @@ aliases:
   - /en/logs
   - /logs/logging_without_limits
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Log Management releases (App login required)"
   - link: "/logs/log_collection/"
     tag: "Documentation"
     text: "Start collecting your logs"
@@ -40,15 +37,24 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/monitor-dns-logs-for-network-and-security-datadog/"
     tag: "Blog"
     text: "Monitor DNS logs for network and security analysis"
-  - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
-    tag: "Architecture Center"
-    text: "A guide to Log Management Indexing Strategies with Datadog"
   - link: "https://www.datadoghq.com/blog/archive-search/"
     tag: "Blog"
     text: "Search your historical logs more efficiently with Datadog Archive Search"
   - link: "https://www.datadoghq.com/blog/human-name-detection"
     tag: "Blog"
     text: "Detect human names in logs with ML in Sensitive Data Scanner"
+  - link: "https://www.datadoghq.com/blog/monitoring-load-balancer-logs"
+    tag: "Blog"
+    text: "Monitor your application and network load balancer logs"
+  - link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
+    tag: "Blog"
+    text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
+  - link: "https://app.datadoghq.com/release-notes?category=Log%20Management"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Log Management releases (App login required)"
+  - link: "https://www.datadoghq.com/architecture/a-guide-to-log-management-indexing-strategies-with-datadog/"
+    tag: "Architecture Center"
+    text: "A guide to Log Management Indexing Strategies with Datadog"
 cascade:
     algolia:
         rank: 70

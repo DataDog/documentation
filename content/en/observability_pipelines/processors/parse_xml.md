@@ -2,6 +2,9 @@
 title: Parse XML Processor
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
@@ -47,37 +50,22 @@ To set up this processor:
 1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 1. Enter the path to the log field on which you want to parse XML. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-parse-xml) below.
 1. Optionally, in the `Enter text key` field, input the key name to use for the text node when XML attributes are appended. See the [text key example](#text-key-example). If the field is left empty, `value` is used as the key name.
-1. Optionally, select `Always use text key` if you want to store text inside an object using the text key even when no attributes exist.
-1. Optionally, toggle `Include XML attributes` on if you want to include XML attributes. You can then choose to add the attribute prefix you want to use. See [attribute prefix example](#attribute-prefix-example). If the field is left empty, the original attribute key is used.
+1. Optionally, select {{< ui >}}Always use text key{{< /ui >}} if you want to store text inside an object using the text key even when no attributes exist.
+1. Optionally, toggle {{< ui >}}Include XML attributes{{< /ui >}} on if you want to include XML attributes. You can then choose to add the attribute prefix you want to use. See [attribute prefix example](#attribute-prefix-example). If the field is left empty, the original attribute key is used.
 1. Optionally, select if you want to convert data types into numbers, Booleans, or nulls.
-    - If **Numbers** is selected, numbers are parsed as integers and floats.
-    - If **Booleans** is selected, `true` and `false` are parsed as Booleans.
-    - If **Nulls** is selected, the string `null` is parsed as null.
+    - If {{< ui >}}Numbers{{< /ui >}} is selected, numbers are parsed as integers and floats.
+    - If {{< ui >}}Booleans{{< /ui >}} is selected, `true` and `false` are parsed as Booleans.
+    - If {{< ui >}}Nulls{{< /ui >}} is selected, the string `null` is parsed as null.
 
 ### Path notation example {#path-notation-example-parse-xml}
 
-For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to see the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to see the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 ### Always use text key example
 
-If **Always use text key** is selected, the text key is the default (`value`), and you have the following XML:
+If {{< ui >}}Always use text key{{< /ui >}} is selected, the text key is the default (`value`), and you have the following XML:
 
 ```xml
 <recipe>
@@ -121,7 +109,7 @@ The XML is converted to:
 
 ### Attribute prefix example
 
-If you enable **Include XML attributes**, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
+If you enable {{< ui >}}Include XML attributes{{< /ui >}}, the attribute is added as a prefix to each XML attribute. For example, if the attribute prefix is `@` and you have the following XML:
 
 ```xml
 <recipe type="pasta">Carbonara</recipe>
@@ -138,7 +126,14 @@ Then it is converted to the JSON:
 }
 ```
 
+## Metrics
+
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
+
 [1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 
 ## Further reading
 

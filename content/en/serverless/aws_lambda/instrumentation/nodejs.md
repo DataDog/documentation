@@ -26,13 +26,13 @@ aliases:
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Node.js AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
 [1]: /serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -183,7 +183,7 @@ The [Datadog CloudFormation macro][1] automatically transforms your SAM applicat
 
 1. Install the Datadog Lambda Library
 
-    Package the Datadog Lambda and tracing libraries within the image:
+    Package the Datadog Lambda and SDKs within the image:
 
     ```sh
     npm install datadog-lambda-js dd-trace
@@ -404,6 +404,10 @@ To configure Datadog using SST v3, follow these steps:
 ## AWS Lambda and VPC
 
 {{% svl-lambda-vpc %}}
+
+## Durable Function
+
+{{% svl-lambda-durable-function %}}
 
 ## What's next?
 

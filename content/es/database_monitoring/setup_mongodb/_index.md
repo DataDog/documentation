@@ -17,4 +17,7 @@ title: Configuración de MongoDB
 
 Para obtener instrucciones de configuración, selecciona tu tipo de alojamiento:
 
-{{< partial name="dbm/dbm-setup-mongodb" >}}
+{{< card-grid card_width="300px" >}}
+  {{< image-card href="/database_monitoring/setup_mongodb/selfhosted" src="integrations_logos/mongo.png" alt="Self-hosted" title="Self-hosted" >}}
+  {{< image-card href="/database_monitoring/setup_mongodb/mongodbatlas" src="integrations_logos/mongodb_atlas.png" alt="MongoDB Atlas" title="MongoDB Atlas" >}}
+{{< /card-grid >}}

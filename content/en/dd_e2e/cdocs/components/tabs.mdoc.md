@@ -1,6 +1,7 @@
 ---
 title: Tabs
 draft: true
+private: true
 ---
 
 ## Overview

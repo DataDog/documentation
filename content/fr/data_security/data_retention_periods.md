@@ -1,18 +1,10 @@
 ---
-title: Périodes de conservation des données
-disable_sidebar: true
-type: data_retention_periods
-aliases:
-  - /developers/faq/data-collection-resolution-retention/
-  - /developers/guide/data-collection-resolution-retention
-further_reading:
-    - link: /data_security/
-      tag: Documentation
-      text: Consulter les principales catégories de données envoyées à Datadog
 algolia:
-  tags: [data retention]
-filter_all: Tous
-content: "Le tableau suivant répertorie les périodes de rétention des données par défaut selon le type de données et le produit. Vous pouvez également effectuer une recherche par mot-clé ou description pour trouver le type de données ou le produit qui vous intéresse. Pour obtenir des informations sur l'intervalle de collecte et la résolution minimale, consultez la section [Collecte et résolution des données Datadog](/extend/guide/data-collection-resolution). Besoin d'aide supplémentaire ? Contactez l'[assistance Datadog](/help)."
+  tags:
+  - data retention
+aliases:
+- /fr/developers/faq/data-collection-resolution-retention/
+- /fr/developers/guide/data-collection-resolution-retention
 attributes:
   - product: APM
     data_type: |
@@ -170,8 +162,21 @@ attributes:
   - product: Automatisation de workflows
     data_type: |
        - **Workflows** : 30 jours
+content: Le tableau ci-dessous répertorie les périodes de conservation par défaut
+  des données en fonction du type et du produit. Optionnellement, effectuez une recherche
+  par mot-clé ou par texte descriptif pour trouver le type de données ou le produit
+  qui vous intéresse. Pour obtenir des informations sur l'intervalle de collecte et
+  la résolution minimale, consultez [Datadog Data Collection and Resolution](/extend/guide/data-collection-resolution).
+  Avez-vous encore besoin d'aide ? Contactez [Datadog support](/help).
+disable_sidebar: true
+filter_all: All
+further_reading:
+- link: /data_security/
+  tag: Documentation
+  text: Consulter les principales catégories de données envoyées à Datadog
+title: Périodes de conservation des données
+type: data_retention_periods
 ---
-
-### Pour aller plus loin
+### Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}

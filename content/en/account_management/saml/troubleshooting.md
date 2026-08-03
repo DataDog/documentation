@@ -27,7 +27,7 @@ To resolve, see the section below for the specific error.
 
 ### SAML is not enabled for this org
 
-SAML is turned off for your account. Navigate to [Login Methods][1]. In the SAML section, ensure that **Enabled by Default** is set to **On**.
+SAML is turned off for your account. Navigate to [Login Methods][1]. In the SAML section, ensure that {{< ui >}}Enabled by Default{{< /ui >}} is set to {{< ui >}}On{{< /ui >}}.
 
 **Note:** Configuring SAML requires the Datadog Admin Role or the Org Management (`org_management`) permission.
 
@@ -56,8 +56,8 @@ If you are having trouble updating your IdP metadata file, verify that the metad
 To validate your metadata file:
 
 1. Choose a SAML validation tool, such as the [SAML developer tool][5] by OneLogin.
-2. Paste your metadata into the XML field and select **Metadata** in the XSD (schema file) field.
-3. Click **Validate XML With the XSD Schema**.
+2. Paste your metadata into the XML field and select {{< ui >}}Metadata{{< /ui >}} in the XSD (schema file) field.
+3. Click {{< ui >}}Validate XML With the XSD Schema{{< /ui >}}.
 
 ## Roles errors
 
@@ -82,7 +82,7 @@ If you have group mappings set and are not able to see your roles, your group ma
   </saml2:Attribute>
   ```
 
-2. Navigate to your profile and select **Organization Settings** in the bottom left corner of Datadog.
+2. Navigate to your profile and select {{< ui >}}Organization Settings{{< /ui >}} in the bottom left corner of Datadog.
 3. Select [**SAML Group Mappings**][7].
 4. Compare the attributes provided by your IdP in your SAML assertion to the attributes set in the [**SAML Group Mappings**][7] tab.
 
@@ -90,7 +90,7 @@ If you have group mappings set and are not able to see your roles, your group ma
 
 5. Resolve any discrepancies in either the Datadog SAML Group Mappings settings, or within your IdP settings. For example, if `memberof` is a set attribute in Datadog, and it's `member_Of` in your SAML assertion, resolve accordingly.
 
-Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in **SAML Group Mappings**, you run into an issue because this pair is not included in the assertion sent over from your IdP.
+Discrepancies may occur when there is no match or a mismatch between the attribute key and value. For example, if you see a key value pair of `memberOf` and `name_of_your_group_goes_here` in {{< ui >}}SAML Group Mappings{{< /ui >}}, you run into an issue because this pair is not included in the assertion sent over from your IdP.
 
 If you are having trouble logging in because of a role-based error, contact your Administrator to complete the troubleshooting steps above.
 
@@ -98,7 +98,7 @@ If you are having trouble logging in because of a role-based error, contact your
 
 - Each IdP provides different types of attributes, and different ways to set attributes. For example, Azure uses [object IDs][8] for their attribute, or if you're using Okta, you must set attributes in [Okta settings][9]. Reference your IdP's attribute documentation for information.
 
-- When you disable **SAML Group Mappings**, users are allowed to log in with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
+- When you disable {{< ui >}}SAML Group Mappings{{< /ui >}}, users are allowed to log in with SAML and have the same roles they are assigned to—even if the group membership changed in your IdP.
 
 ## Identity provider (IdP) errors
 

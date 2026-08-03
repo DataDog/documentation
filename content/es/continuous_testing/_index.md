@@ -56,7 +56,15 @@ Para garantizar que tus usuarios tengan la mejor experiencia, puedes automatizar
 
 Acelera el desarrollo de tu aplicación mediante tests y al solucionar problemas en una sola plataforma. Selecciona entre los siguientes tipos de proveedores de CI y herramientas de colaboración como [Slack][18] o [Jira][19] para fusionar flujos de trabajo y evitar el cambio de contexto.
 
-{{< partial name="continuous_testing/ct-getting-started.html" >}}
+{{< card-grid card_width="115px" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/github_actions/" src="integrations_logos/github.png" alt="github actions" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/gitlab/" src="integrations_logos/gitlab.png" alt="gitlab" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/circleci_orb/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/azure_devops_extension/" src="integrations_logos/azure_devops.png" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_upload/" src="integrations_logos/bitrise_upload.png" alt="bitrise upload-tests step" >}}
+  {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
+{{< /card-grid >}}
 
 </br>
 

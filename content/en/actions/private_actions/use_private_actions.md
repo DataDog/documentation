@@ -6,10 +6,10 @@ aliases:
 - service_management/workflows/private_actions/use_private_actions
 - service_management/app_builder/private_actions/use_private_actions
 further_reading:
-- link: "service_management/app_builder/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "App Builder Connections"
-- link: "service_management/workflows/connections"
+- link: "actions/connections"
   tag: "Documentation"
   text: "Workflow Connections"
 - link: "actions/private_actions/"
@@ -30,6 +30,8 @@ For more information about how private actions work, see the full [overview page
 
 {{< partial name="actions/private_actions_list" >}}
 
+For the actions available to each type of private action runner, see [Available actions by runner type](#available-actions-by-runner-type).
+
 ## Prerequisites
 
 Choose your installation method based on your environment:
@@ -38,7 +40,7 @@ Choose your installation method based on your environment:
 : - Linux or Windows host with Datadog Agent version 7.77.0 or later
 : - Or Kubernetes cluster with Datadog Operator version 1.25.0
 : - Network access to Datadog: `https://{{< region-param key=dd_site >}}`
-: - An [Application key][20] with `on_prem_runner_write` scope and **Actions API Access** enabled
+: - An [Application key][20] with `on_prem_runner_write` scope and {{< ui >}}Actions API Access{{< /ui >}} enabled
 
 **Standalone installation**
 : - Linux host with 2GB of RAM
@@ -58,8 +60,8 @@ The recommended way to install a private action runner is through the Datadog Ag
 ### Using Fleet Automation (recommended)
 
 1. Go to the [Fleet Automation install page for Linux][100].
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
-1. In **Install the Agent**, add an API key and follow the instructions to run the installation command.
+1. In {{< ui >}}Customize your Agent coverage{{< /ui >}}, go to the {{< ui >}}Optimization & Remediation{{< /ui >}} section and enable the toggle {{< ui >}}Enable Agent to take action{{< /ui >}}. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
+1. In {{< ui >}}Install the Agent{{< /ui >}}, add an API key and follow the instructions to run the installation command.
 1. After installation, go to the [Private Action Runners][101] page to verify your runner appears on the list.
 
 ### Manual installation
@@ -67,10 +69,10 @@ The recommended way to install a private action runner is through the Datadog Ag
 #### Create an Application key
 
 1. Go to [Application Keys][102].
-1. Click **New Key** and enter a name.
-1. Under **Scopes**, select **on_prem_runner_write**.
-1. Enable **Actions API Access**.
-1. Click **Create Key** and copy the key value.
+1. Click {{< ui >}}New Key{{< /ui >}} and enter a name.
+1. Under {{< ui >}}Scopes{{< /ui >}}, select **on_prem_runner_write**.
+1. Enable {{< ui >}}Actions API Access{{< /ui >}}.
+1. Click {{< ui >}}Create Key{{< /ui >}} and copy the key value.
 
 #### Install or upgrade the Datadog Agent
 
@@ -78,7 +80,7 @@ Run the following command to install or upgrade the Agent and enable the private
 - `<API_KEY>`: Your [Datadog API key][103]
 - `<APP_KEY>`: The Application key you created
 - `DD_SITE`: Your [Datadog site][104] (for example, `datadoghq.com`)
-- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions](#available-actions) for the full list.
+- `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST`: Comma-separated list of actions to allow. See [Available actions by runner type](#available-actions-by-runner-type) for the full list.
 
 ```bash
 DD_API_KEY=<API_KEY> \
@@ -120,10 +122,10 @@ Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /l*v install.log /i dat
 ### Create an Application key
 
 1. Go to [Application Keys][103].
-1. Click **New Key** and enter a name.
-1. Under **Scopes**, select **on_prem_runner_write**.
-1. Enable **Actions API Access**.
-1. Click **Create Key** and copy the key value.
+1. Click {{< ui >}}New Key{{< /ui >}} and enter a name.
+1. Under {{< ui >}}Scopes{{< /ui >}}, select **on_prem_runner_write**.
+1. Enable {{< ui >}}Actions API Access{{< /ui >}}.
+1. Click {{< ui >}}Create Key{{< /ui >}} and copy the key value.
 
 ### Configure the Agent
 
@@ -140,7 +142,7 @@ private_action_runner:
     - "com.datadoghq.http.request"
 ```
 
-See [Available actions](#available-actions) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows yet. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
+See [Available actions by runner type](#available-actions-by-runner-type) for the full list of actions you can add to the allowlist. Not all actions are supported on Windows yet. Safe choices for Windows include HTTP and `runPredefinedPowershellScript`.
 
 ### Restart the Agent
 
@@ -168,10 +170,10 @@ Follow these steps to install the Private Action Runner on your [Datadog Node Ag
 ### Using Fleet Automation (recommended)
 
 1. Go to the [Fleet Automation install page][106].
-1. In **Select Agent install method**, choose **Datadog Operator**.
-1. In **Select your Kubernetes distribution**, choose the distribution that matches your environment.
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
-1. In **Add the Datadog Helm repository**, add an API key.
+1. In {{< ui >}}Select Agent install method{{< /ui >}}, choose {{< ui >}}Datadog Operator{{< /ui >}}.
+1. In {{< ui >}}Select your Kubernetes distribution{{< /ui >}}, choose the distribution that matches your environment.
+1. In {{< ui >}}Customize your Agent coverage{{< /ui >}}, go to the {{< ui >}}Optimization & Remediation{{< /ui >}} section and enable the toggle {{< ui >}}Enable Agent to take action{{< /ui >}}. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
+1. In {{< ui >}}Add the Datadog Helm repository{{< /ui >}}, add an API key.
 1. Follow the remaining Fleet instructions to complete the installation.
 
 ### Manual installation
@@ -184,7 +186,7 @@ Install the Datadog Operator version 1.25.0:
 helm repo add datadog https://helm.datadoghq.com
 helm repo update
 helm install datadog-operator datadog/datadog-operator \
-    --set image.repository=datadog/operator \
+    --set image.repository=registry.datadoghq.com/operator \
     --set image.tag=1.25.0
 ```
 
@@ -192,8 +194,8 @@ helm install datadog-operator datadog/datadog-operator \
 
 1. Create or choose an [API key][102].
 1. Go to [Application Keys][103] and create a new key:
-   - Under **Scopes**, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
-   - Enable **Actions API Access**.
+   - Under {{< ui >}}Scopes{{< /ui >}}, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
+   - Enable {{< ui >}}Actions API Access{{< /ui >}}.
 
 #### Create Kubernetes secrets
 
@@ -210,7 +212,7 @@ Create a `datadog-agent.yaml` file with the following content:
 - Set `clusterName` to a meaningful name for your cluster.
 - Update `site` to your [Datadog site][105] if you're not using `datadoghq.com`.
 - The `app-key` in the secret is required for the Private Action Runner.
-- Adjust `actions_allowlist` based on your needs. See [Available actions](#available-actions) for the full list.
+- Adjust `actions_allowlist` based on your needs. See [Available actions by runner type](#available-actions-by-runner-type) for the full list.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -305,8 +307,8 @@ Follow these steps to install the Private Action Runner on your [Datadog Node Ag
 
 1. Create or choose an [API key][102].
 1. Go to [Application Keys][103] and create a new key:
-   - Under **Scopes**, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
-   - Enable **Actions API Access**.
+   - Under {{< ui >}}Scopes{{< /ui >}}, select **on_prem_runner_write**. This scope is required to register the runner and automatically create connections.
+   - Enable {{< ui >}}Actions API Access{{< /ui >}}.
 
 ### Create the Terraform configuration
 
@@ -530,10 +532,10 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 ### Using Fleet Automation (recommended)
 
 1. Go to the [Fleet Automation install page][100].
-1. In **Select Agent install method**, choose **Helm Chart**.
-1. In **Select your Kubernetes distribution**, choose the distribution that matches your environment.
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable the toggle **Enable Agent to take action**. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
-1. In **Add the Datadog Helm repository**, add an API key.
+1. In {{< ui >}}Select Agent install method{{< /ui >}}, choose {{< ui >}}Helm Chart{{< /ui >}}.
+1. In {{< ui >}}Select your Kubernetes distribution{{< /ui >}}, choose the distribution that matches your environment.
+1. In {{< ui >}}Customize your Agent coverage{{< /ui >}}, go to the {{< ui >}}Optimization & Remediation{{< /ui >}} section and enable the toggle {{< ui >}}Enable Agent to take action{{< /ui >}}. This creates an Application key with the `on_prem_runner_write` scope and Actions API Access enabled.
+1. In {{< ui >}}Add the Datadog Helm repository{{< /ui >}}, add an API key.
 1. Follow the remaining Fleet instructions to complete the installation.
 
 ### Manual installation
@@ -545,7 +547,7 @@ Go to the [Private Action Runners][104] page. You should see a new runner on the
 
 #### Create a Kubernetes secret
 
-Create a secret containing your API key and Application key. The Application key must have the `on_prem_runner_write` scope and **Actions API Access** enabled.
+Create a secret containing your API key and Application key. The Application key must have the `on_prem_runner_write` scope and {{< ui >}}Actions API Access{{< /ui >}} enabled.
 
 ```bash
 kubectl create secret generic datadog-secret \
@@ -612,21 +614,21 @@ Go to the [Private Action Runners][101] page. You should see a new runner on the
 
 As an alternative to the agent-based installation, you can run the private action runner as a standalone Docker container or Kubernetes deployment.
 
-1. Go to [**Actions Catalog**][6] > **Private Action Runners**, and click **New Private Action Runner**.
+1. Go to {{< ui >}}Actions Catalog{{< /ui >}} > {{< ui >}}Private Action Runners{{< /ui >}}, and click {{< ui >}}New Private Action Runner{{< /ui >}}.
 1. Enter a name for your runner and select the allowed actions.
 1. Create a directory on your host where the runner can store its configuration, such as `./config`.
 1. Deploy your runner by following the steps for your container platform:
 
 {{< tabs >}}
 {{% tab "Docker" %}}
-1. Click **Docker**.
+1. Click {{< ui >}}Docker{{< /ui >}}.
 1. Run the provided `docker run` command on your host, replacing `./config` with the path to the directory you created for the runner configuration.
 
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 {{% /tab %}}
 
 {{% tab "Docker Compose" %}}
-1. Click **Docker Compose**.
+1. Click {{< ui >}}Docker Compose{{< /ui >}}.
 1. Create a `docker-compose.yaml` file and add the provided YAML, or add the `runner` stanza to an existing Docker Compose file. For information on creating a Docker Compose file, see the [official Compose documentation][101].
 1. Replace `./config` with the path to the directory you created for the runner configuration.
 1. Run `docker compose up -d`.
@@ -637,13 +639,13 @@ As an alternative to the agent-based installation, you can run the private actio
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
-1. Click **Kubernetes**.
+1. Click {{< ui >}}Kubernetes{{< /ui >}}.
 1. Confirm that you have installed `kubectl` on your machine: run `kubectl version` and verify that there is output.
 1. Confirm that you have installed `helm` on your machine: run `helm version` and verify that there is output.
 1. Confirm that you have sufficient permissions to create Kubernetes resources in your cluster.
 1. Follow the instructions provided in the app to:
     1. Enroll the runner and generate the config.
-    1. Add the **Private Action Runner** to your Helm repositories.
+    1. Add the {{< ui >}}Private Action Runner{{< /ui >}} to your Helm repositories.
     1. Install the Helm chart.
 1. Run `kubectl get pods -w` and verify that the status of the Private Action Runner pod becomes `Ready`.
 
@@ -662,7 +664,7 @@ The runner uses these credentials to register itself with your Datadog organizat
 
 #### Example commands
 
-Use the following commands to create an auto-enrollment script that can be rerun for automated deployments. After the runner enrolls successfully, it appears on the **Private Action Runners** page.
+Use the following commands to create an auto-enrollment script that can be rerun for automated deployments. After the runner enrolls successfully, it appears on the {{< ui >}}Private Action Runners{{< /ui >}} page.
 
 Before running the commands, update the following values:
 - `RUNNER_NAME`: A unique name for your runner.
@@ -754,9 +756,9 @@ helm upgrade --install datadog-par datadog/private-action-runner -f values.yaml
 {{% /tab %}}
 {{< /tabs >}}
 
-When you see the **Ready to use** status, you can create a new connection for the runner or see it on the **Private Action Runners** page:
-- To create a new connection for the runner, click **Link Runner to New Connection** and select an integration.
-- Click **View Runner** to see the runner on the **Private Action Runners** page.
+When you see the {{< ui >}}Ready to use{{< /ui >}} status, you can create a new connection for the runner or see it on the {{< ui >}}Private Action Runners{{< /ui >}} page:
+- To create a new connection for the runner, click {{< ui >}}Link Runner to New Connection{{< /ui >}} and select an integration.
+- Click {{< ui >}}View Runner{{< /ui >}} to see the runner on the {{< ui >}}Private Action Runners{{< /ui >}} page.
 
 See [Connect a runner](#connect-a-runner) for more information on pairing your runner with a connection.
 
@@ -764,39 +766,39 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 Use [role-based access control (RBAC)][17] to control access to your private action runner. To see the list of permissions that apply to private action runner, see [Datadog Role Permissions][18].
 
-You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include **Viewer**, **Contributor**, and **Editor**.
+You can set permissions on the runner to restrict modifications or prevent new connections from being attached. Available granular permissions include {{< ui >}}Viewer{{< /ui >}}, {{< ui >}}Contributor{{< /ui >}}, and {{< ui >}}Editor{{< /ui >}}.
 
-By default, only the runner's creator has **Editor** access. The creator can grant access to additional users, service accounts, roles, or teams.
+By default, only the runner's creator has {{< ui >}}Editor{{< /ui >}} access. The creator can grant access to additional users, service accounts, roles, or teams.
 
 ### Permission levels
 
-Viewer
+{{< ui >}}Viewer{{< /ui >}}
 : Can view the runner and the connections attached to it
 
-Contributor
+{{< ui >}}Contributor{{< /ui >}}
 : Can view and contribute to the runner by attaching new connections to it
 
-Editor
+{{< ui >}}Editor{{< /ui >}}
 : Can view, contribute (attach new connections), and edit the runner
 
 ### Set permissions on a runner
 
 1. Navigate to the Edit page of the runner.
-2. In the **Who Has Access?** section, click **Edit access**.
-3. Select a user, service account, role, or team from the dropdown menu, then click **Add**. The selected principal appears at the bottom of the dialog box.
+2. In the {{< ui >}}Who Has Access?{{< /ui >}} section, click {{< ui >}}Edit access{{< /ui >}}.
+3. Select a user, service account, role, or team from the dropdown menu, then click {{< ui >}}Add{{< /ui >}}. The selected principal appears at the bottom of the dialog box.
 4. Next to the principal name, select your desired permission from the dropdown menu.
-5. To remove access from a principal, select **Remove access** from the permissions dropdown menu.
-6. Click **Done** to finalize the permissions setup.
-7. Click **Save** to apply the new permissions to the runner.
+5. To remove access from a principal, select {{< ui >}}Remove access{{< /ui >}} from the permissions dropdown menu.
+6. Click {{< ui >}}Done{{< /ui >}} to finalize the permissions setup.
+7. Click {{< ui >}}Save{{< /ui >}} to apply the new permissions to the runner.
 
 ## Connect a runner
 
 Before you can use an action runner, you must pair it with one or more connections.
 
 To pair a runner to a connection:
-1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click **New Connection**.
+1. From the [Workflow Automation][7] or [App Builder][8] Connections page, click {{< ui >}}New Connection{{< /ui >}}.
 1. Select the integration you want to connect with your private action runner. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
-1. Add a **Connection Name** and select your runner from the **Private Action Runner** dropdown.
+1. Add a {{< ui >}}Connection Name{{< /ui >}} and select your runner from the {{< ui >}}Private Action Runner{{< /ui >}} dropdown.
 1. Add the paths to any required credential files. For more information on credentials, see [Handling Private Action Credentials][9].
 
 ## Use a private action
@@ -805,24 +807,32 @@ To use a private action in your [Workflow Automation][10] workflow or [App Build
 
 {{% collapse-content title="Workflow Automation" level="p" %}}
 1. From the [Workflow Automation][10] page, create a workflow, or open an existing workflow. For information on creating or editing a workflow, see [Build Workflows][12].
-1. Click **Add Step** and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
+1. Click {{< ui >}}Add Step{{< /ui >}} and search for the private action you want to add to your workflow. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
 1. Enter a name for the step.
-1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
-1. Complete any required fields and click **Save** to save your workflow.
+1. Select a {{< ui >}}Connection{{< /ui >}} from the dropdown or click the plus ({{< ui >}}+{{< /ui >}}) icon to add a new connection. Using a private action requires a private action runner that is paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Complete any required fields and click {{< ui >}}Save{{< /ui >}} to save your workflow.
 {{% /collapse-content %}}
 
 {{% collapse-content title="App Builder" level="p" %}}
 1. From the [App Builder][11] page, create an app, or open an existing app. For information on creating or editing an app, see [Build Apps][14].
-1. Click **New Query** and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
-1. Select a **Connection** from the dropdown or click the plus (**+**) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
-1. Complete any required fields and click **Save** to save your query.
+1. Click {{< ui >}}New Query{{< /ui >}} and search for the private action you want to add to your app. For a list of integrations that support private actions, see [Supported private actions](#supported-private-actions).
+1. Select a {{< ui >}}Connection{{< /ui >}} from the dropdown or click the plus ({{< ui >}}+{{< /ui >}}) icon to add a new connection. Using a private action requires a private action runner paired with a connection. See [Connect a runner](#connect-a-runner) for more information.
+1. Complete any required fields and click {{< ui >}}Save{{< /ui >}} to save your query.
 {{% /collapse-content %}}
 
 ## Edit private runners
 
 ### Edit connections or delete runners
 
-From the **Private Action Runner** page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click **View Details**. Click the trash can icon to delete a runner.
+From the {{< ui >}}Private Action Runner{{< /ui >}} page in [Actions Catalog][6], you can view all of your private runners together with the workflows or apps that use each runner. To edit the connection for a runner, click {{< ui >}}View Details{{< /ui >}}. Click the trash can icon to delete a runner.
+
+### Automatic deletion of inactive runners
+
+To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only configuration after an extended period of inactivity.
+
+If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
+
+This automatic cleanup doesn't apply to standalone runners or runners that use an Application key.
 
 ### Change the allowlist of a runner
 
@@ -856,9 +866,9 @@ To edit the allowlist for a standalone private action runner:
 {{% /tab %}}
 {{< /tabs >}}
 
-### Available actions
+### Available actions by runner type
 
-{{% collapse-content title="Available actions" level="p" %}}
+{{% collapse-content title="Available actions by runner type" level="p" %}}
 
 {{< partial name="actions/private_actions_allowlist.html" >}}
 
@@ -911,9 +921,9 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 [9]: /actions/private_actions/private_action_credentials
 [10]: https://app.datadoghq.com/workflow/
 [11]: https://app.datadoghq.com/app-builder/
-[12]: /service_management/workflows/build
-[13]: /service_management/app_builder/build
-[14]: /service_management/workflows/build/#build-a-workflow-with-the-workflow-builder
+[12]: /actions/workflows/build
+[13]: /actions/app_builder/build
+[14]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [16]: /actions/private_actions/
 [17]: /account_management/rbac/
 [18]: /account_management/rbac/permissions/#app-builder--workflow-automations

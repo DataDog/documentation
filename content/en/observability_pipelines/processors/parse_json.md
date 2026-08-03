@@ -7,6 +7,9 @@ products:
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
 
 further_reading:
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
@@ -62,10 +65,17 @@ This output contains the `message` field with the parsed JSON:
 ## Setup
 
 To set up this processor:
-1. Define a **filter query**. Only logs that match the specified filter query are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 2. Enter the name of the field you want to parse JSON on.<br>**Note**: The parsed JSON overwrites what was originally contained in the field.
 
+## Metrics
+
+For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
+
 [1]: /observability_pipelines/search_syntax/logs/
+[2]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 
 ## Further reading
 

@@ -29,7 +29,7 @@ The SLO List widget displays a subset of SLOs over their primary time window. Al
 3. Choose the maximum number of SLOs to display (the default is 100) and sort by either status or error budget.
 4. Optionally, give the widget a title.
 
-When you are ready to create the widget, click **Save**.
+When you are ready to create the widget, click {{< ui >}}Save{{< /ui >}}.
 
 ## API
 

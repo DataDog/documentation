@@ -11,9 +11,11 @@ products:
 
 ## Overview
 
-Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can [rehydrate][2] these logs later when you want to analyze and investigate them in Datadog.
+Use the Datadog Archives destination to send logs to Amazon S3 for [archiving][1] in Datadog-rehydratable format. You can then query these logs with [Archive Search][16]. Use Archive Search's {{< ui >}}Search & Rehydration{{< /ui >}} mode when you need to re-index results for full platform access.
 
-**Note**: Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
+**Notes**: 
+- The Datadog Archives destination compresses logs using gzip.
+- Use the [Amazon S3][12] destination if you want to send your logs to Amazon S3 in JSON or Parquet format.
 
 You can also [route logs to Snowflake using the Datadog Archives destination](#route-logs-to-snowflake-using-the-datadog-archives-destination).
 
@@ -85,7 +87,9 @@ If you already have Datadog Log Archives configured, skip to [Set up the destina
 
 ## Set up the destination for your pipeline
 
-Set up the Datadog Archives destination and its environment variables when you [set up an Archive Logs pipeline][4]. The information below is configured in the pipelines UI.
+Configure the Datadog Archives destination when you [set up an Archive Logs pipeline][4]. You can set up a pipeline in the [UI][13], using the [API][14], or with [Terraform][15]. The steps in this section are configured in the UI.
+
+After you select the Datadog Archives destination in the pipeline UI:
 
 1. Enter your S3 bucket name. If you configured Log Archives, it's the name of the bucket you created earlier.
 1. Enter the AWS region the S3 bucket is in.
@@ -93,7 +97,7 @@ Set up the Datadog Archives destination and its environment variables when you [
     - Prefixes are useful for partitioning objects. For example, you can use a prefix as an object key to store objects under a particular directory. If using a prefix for this purpose, it must end in `/` to act as a directory path; a trailing `/` is not automatically added.
     - See [template syntax][8] if you want to route logs to different object keys based on specific fields in your logs.
      - **Note**: Datadog recommends that you start your prefixes with the directory name and without a lead slash (`/`). For example, `app-logs/` or `service-logs/`.
-1. Select the storage class for your S3 bucket in the **Storage Class** dropdown menu. If you are going to archive and rehydrate your logs:
+1. Select the storage class for your S3 bucket in the {{< ui >}}Storage Class{{< /ui >}} dropdown menu. If you are going to archive and rehydrate your logs:
     - **Note**: Rehydration only supports the following [storage classes][9]:
         - Standard
         - Intelligent-Tiering, only if [the optional asynchronous archive access tiers][10] are both disabled.
@@ -106,7 +110,7 @@ Set up the Datadog Archives destination and its environment variables when you [
 
 #### AWS authentication
 
-Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select **Assume role**. Select **Assume role** only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select **Assume role**:
+Select an AWS authentication option. If you are only using the [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) for authentication, do not select {{< ui >}}Assume role{{< /ui >}}. Select {{< ui >}}Assume role{{< /ui >}} only if the user or role you created earlier needs to assume a different role to access the AWS resource. The assumed role's permissions must be explicitly defined.<br>If you select {{< ui >}}Assume role{{< /ui >}}:
 1. Enter the ARN of the IAM role you want to assume.
     - **Note:** The [user or role you created earlier](#set-up-an-iam-policy-that-allows-workers-to-write-to-the-s3-bucket) must have permission to assume this role so that the Worker can authenticate with AWS.
 1. (Optional) Enter the assumed role session name and external ID.
@@ -132,7 +136,7 @@ Then these are the values you enter for configuring the S3 bucket for Log Archiv
 
 {{< img src="observability_pipelines/setup/amazon_s3_archive.png" alt="The log archive configuration with the example values" style="width:70%;" >}}
 
-### Set secrets
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -191,3 +195,7 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 [10]: https://aws.amazon.com/s3/storage-classes/intelligent-tiering/
 [11]: https://console.aws.amazon.com/iam/
 [12]: /observability_pipelines/destinations/amazon_s3/
+[13]: https://app.datadoghq.com/observability-pipelines
+[14]: /api/latest/observability-pipelines/
+[16]: /logs/explorer/archive_search/
+[15]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

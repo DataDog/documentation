@@ -43,29 +43,29 @@ This format uses specific separators to structure each security control entry.
 
 ### Secure marks
 
-The available secure marks correspond to the codes associated with each injection-related vulnerability. These codes and their availability for each language can be found in [supported vulnerabilities][1].
+Secure marks correspond to injection-related vulnerability types. Use the code from the **Code** column when configuring the `SECURE_MARKS` field. Use `*` to apply a control to all supported vulnerability types.
 
-The injection-related vulnerabilities are:
-
-* Code Injection
-* Command Injection
-* Email HTML Injection
-* Header Injection
-* LDAP Injection
-* NoSQL Injection
-* Path Traversal
-* Reflection Injection
-* Server-Side Request Forgery (SSRF)
-* SQL Injection
-* Trust Boundary Violation
-* Untrusted Deserialization
-* Unvalidated Redirect
-* XPath Injection
-* Cross-Site Scripting (XSS)
+| Vulnerability type | Code | Java | .NET | Node.js | Python |
+|---|---|---|---|---|---|
+| Code Injection | `CODE_INJECTION` | | | TRUE | |
+| Command Injection | `COMMAND_INJECTION` | TRUE | TRUE | TRUE | TRUE |
+| Cross-Site Scripting (XSS) | `XSS` | TRUE | TRUE | | |
+| Email HTML Injection | `EMAIL_HTML_INJECTION` | TRUE | TRUE | TRUE | |
+| Header Injection | `HEADER_INJECTION` | TRUE | TRUE | TRUE | TRUE |
+| LDAP Injection | `LDAP_INJECTION` | TRUE | TRUE | TRUE | |
+| NoSQL Injection | `NOSQL_MONGODB_INJECTION` | | TRUE | TRUE | |
+| Path Traversal | `PATH_TRAVERSAL` | TRUE | TRUE | TRUE | TRUE |
+| Reflection Injection | `REFLECTION_INJECTION` | TRUE | TRUE | | |
+| Server-Side Request Forgery (SSRF) | `SSRF` | TRUE | TRUE | TRUE | TRUE |
+| SQL Injection | `SQL_INJECTION` | TRUE | TRUE | TRUE | TRUE |
+| Trust Boundary Violation | `TRUST_BOUNDARY_VIOLATION` | TRUE | TRUE | | |
+| Untrusted Deserialization | `UNTRUSTED_DESERIALIZATION` | TRUE | | | |
+| Unvalidated Redirect | `UNVALIDATED_REDIRECT` | TRUE | TRUE | TRUE | |
+| XPath Injection | `XPATH_INJECTION` | TRUE | TRUE | | |
 
 ## Compatibility requirements
 
-This feature is available starting from the following versions of each language's tracing library:
+This feature is available starting from the following versions of each language's SDK:
 
 * **Java**: 1.45.0+
 * **.NET**: 3.10.0+
@@ -449,5 +449,3 @@ The following security control definition affects the `sanitize_sql` method from
 `SANITIZER:SQL_INJECTION:secure_db.sanitizers:SQLSanitizer.sanitize_sql`
 
 {{% /collapse-content %}}
-
-[1]: /security/code_security/iast/#overview

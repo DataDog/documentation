@@ -1,5 +1,6 @@
 ---
 title: Cloud Metric Delay
+description: "Understand expected delays for AWS, Azure, Google Cloud, and other cloud integration metrics collected by API."
 
 aliases:
     - /integrations/faq/are-my-aws-cloudwatch-metrics-delayed/

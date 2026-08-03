@@ -105,7 +105,7 @@ El [check personalizado][11], también conocido como check personalizado del Age
 
 {{< whatsnext desc="Descubre los tipos de datos que puedes enviar a Datadog y aprende a enviarlos:" >}}
     {{< nextlink href="/metrics" >}}<u>Métricas personalizadas</u>: una profundización en las métricas personalizadas de Datadog. Esta sección describe los tipos de métricas, lo que estas representan, cómo enviarlas y cómo son utilizadas por Datadog.{{< /nextlink >}}
-    {{< nextlink href="service_management/events/guides/" >}}<u>Eventos</u>: descubre cómo enviar eventos a Datadog utilizando checks personalizados del Agent, DogStatsD o la API de Datadog.{{< /nextlink >}}
+    {{< nextlink href="events/guides/" >}}<u>Eventos</u>: descubre cómo enviar eventos a Datadog utilizando checks personalizados del Agent, DogStatsD o la API de Datadog.{{< /nextlink >}}
     {{< nextlink href="/developers/service_checks" >}}<u>Checks de servicios</u>: descubre cómo enviar los estados de ascenso y descenso de un servicio específico a Datadog.{{< /nextlink >}}
 {{< /whatsnext >}}
 

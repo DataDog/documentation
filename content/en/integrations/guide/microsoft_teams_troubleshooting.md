@@ -39,10 +39,6 @@ You can try to either:
 6. Re-add the {{< region-param key="microsoft_teams_app_name" >}} app by following the [setup steps][1].
 
 
-## Bot support for private channels
-
-Private channels are not supported by the bot, due to the private channel limitations in [Microsoft Teams][2]. If you want to send notifications to private channels, see [Microsoft Workflows Webhooks][3].
-
 ## Troubleshooting Incident features when using delegated permissions
 
 First, ensure that the service account user is a member of the team that the feature is being used in.

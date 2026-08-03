@@ -27,8 +27,8 @@ Datadog automatically deletes logs that exceed the longest retention period for 
 To check or change your log retention period:
 
 1. Navigate to the [Log Indexes][1] page.
-1. See the log retention period for each index in the **Retention** column.
-1. If you want to make logs age out faster, click the **Edit** icon on the right side of the index.
+1. See the log retention period for each index in the {{< ui >}}Retention{{< /ui >}} column.
+1. If you want to make logs age out faster, click the {{< ui >}}Edit{{< /ui >}} icon on the right side of the index.
 1. Update the **Set Index Retention** dropdown menu to a new retention period.
 
 ## Make logs with sensitive data un-queryable
@@ -40,8 +40,8 @@ If logs with sensitive data are within the log retention period, you can make th
 To delete an entire index:
 
 1. Navigate to the [Log Indexes][1] page.
-1. Click the **Delete** icon on the right side of the index you want to delete.
-1. Click **Confirm** to delete the index.
+1. Click the {{< ui >}}Delete{{< /ui >}} icon on the right side of the index you want to delete.
+1. Click {{< ui >}}Confirm{{< /ui >}} to delete the index.
 
 ## Redact sensitive data with Sensitive Data Scanner
 

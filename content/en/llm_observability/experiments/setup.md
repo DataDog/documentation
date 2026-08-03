@@ -1,21 +1,21 @@
 ---
 title: Setup and Usage
-description: How to set up LLM Observability Experiments and start running experiments.
+description: How to set up Agent Observability Experiments and start running experiments.
 ---
 
-This page describes how to set up and use LLM Observability Experiments with the Python SDK.
+This page describes how to set up and use Agent Observability Experiments with the Python SDK.
 
-## Set up LLM Observability
+## Set up Agent Observability
 
-If you have not already set up LLM Observability:
+If you have not already set up Agent Observability:
 
-1. Install Datadog's LLM Observability Python SDK:
+1. Install Agent Observability Python SDK:
 
    ```shell
    pip install ddtrace>=4.3.0
    ```
 
-2. Enable LLM Observability:
+2. Enable Agent Observability:
 
    ```python
    from ddtrace.llmobs import LLMObs
@@ -32,7 +32,7 @@ If you have not already set up LLM Observability:
 
 ### APM Trace correlation
 
-To correlate your Experiment spans with [APM Traces][5], run LLM Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
+To correlate your Experiment spans with [APM Traces][5], run Agent Observability through a Datadog Agent and keep `agentless_enabled` set to `False` (the default). The Agent forwards trace data to APM, which is what enables Experiment ↔ APM Trace correlation.
 
    ```python
    LLMObs.enable(
@@ -129,7 +129,48 @@ To create an experiment:
    ```
 
    You can trace the different parts of your Experiment task (workflow, tool calls, etc.) using the [same tracing decorators][2] you use in production.
-   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), LLM Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+   If you use a [supported framework][3] (OpenAI, Amazon Bedrock, etc.), Agent Observability automatically traces and annotates calls to LLM frameworks and libraries, giving you out-of-the-box observability for calls that your LLM application makes.
+
+   #### Using OpenTelemetry spans inside experiments
+
+   If your application uses [OpenTelemetry instrumentation][6], you can create OTel spans inside your experiment task. With `DD_TRACE_OTEL_ENABLED=1`, ddtrace acts as the OpenTelemetry TracerProvider, so OTel spans appear as children of the experiment span automatically.
+
+   ```python
+   import json
+   from opentelemetry import trace
+
+   tracer = trace.get_tracer(__name__)
+
+   def task(input_data: Dict[str, Any], config: Optional[Dict[str, Any]] = None) -> str:
+       question = input_data["question"]
+
+       # OTel gen_ai span — automatically becomes a child of the experiment span
+       with tracer.start_as_current_span("my-llm-call") as span:
+           span.set_attribute("gen_ai.operation.name", "chat")
+           span.set_attribute("gen_ai.system", "openai")
+           span.set_attribute("gen_ai.request.model", "gpt-4o")
+           span.set_attribute("gen_ai.usage.input_tokens", 25)
+           span.set_attribute("gen_ai.usage.output_tokens", 8)
+           span.set_attribute(
+               "gen_ai.input.messages",
+               json.dumps([{"role": "user", "parts": [{"type": "text", "content": question}]}]),
+           )
+
+           result = call_my_llm(question)
+
+           span.set_attribute(
+               "gen_ai.output.messages",
+               json.dumps([{"role": "assistant", "parts": [{"type": "text", "content": result}]}]),
+           )
+
+       return result
+   ```
+
+   To enable this, set the `DD_TRACE_OTEL_ENABLED` environment variable:
+
+   ```shell
+   DD_TRACE_OTEL_ENABLED=1 python my_experiment.py
+   ```
 
 
 ### 3. Define evaluators
@@ -147,7 +188,9 @@ To create an experiment:
    - **categorical**: returns a labeled category (string)
    - **json**: returns structured data (dict)
 
-   You can also return an `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+   You can also return:
+   - An `EvaluatorResult` to capture richer evaluation data, such as `reasoning`, `assessment` (`"pass"` or `"fail"`), `metadata`, and `tags`.
+   - A `MultiEvaluatorResult` to emit multiple named metrics from a single evaluator call. For details and examples, see the [Evaluation Developer Guide][4].
 
    #### Function-based evaluators
 
@@ -172,6 +215,19 @@ To create an experiment:
            assessment="pass", # or fail
            tags={"task": "judge_llm_call"},
        )
+
+   # Return multiple metrics from one evaluator call
+   from ddtrace.llmobs import MultiEvaluatorResult
+
+   def multi_metric_evaluator(input_data, output_data, expected_output):
+       correct = output_data == expected_output
+       return MultiEvaluatorResult(
+           {
+               "correct": EvaluatorResult(value=correct, assessment="pass" if correct else "fail"),
+               "length": len(str(output_data)),
+           }
+       )
+       # Emitted as: multi_metric_evaluator-correct, multi_metric_evaluator-length
    ```
 
    #### Class-based evaluators
@@ -287,3 +343,4 @@ Note: LLM Experiments traces are retained for 90 days.
 [3]: /llm_observability/instrumentation/auto_instrumentation?tab=python
 [4]: /llm_observability/guide/evaluation_developer_guide
 [5]: /llm_observability/monitoring/llm_observability_and_apm/
+[6]: /llm_observability/instrumentation/otel_instrumentation

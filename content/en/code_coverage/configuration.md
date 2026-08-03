@@ -11,6 +11,9 @@ further_reading:
   - link: "/code_coverage/flags"
     tag: "Documentation"
     text: "Organize coverage data with flags"
+  - link: "/code_coverage/carryforward"
+    tag: "Documentation"
+    text: "Keep total coverage accurate with carryforward"
 ---
 
 ## Overview
@@ -40,11 +43,13 @@ gates:
   - type: patch_coverage_percentage
     config:
       threshold: 95
+comments:
+  enabled: true
 ```
 
 ## Services configuration
 
-<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Software Catalog integration</a> is the recommended approach for defining services, as code locations configured in Software Catalog can be used by multiple Datadog products. Use manual configuration only when Software Catalog integration is not available.</div>
+<div class="alert alert-info">Using <a href="/code_coverage/monorepo_support#software-catalog-integration">Catalog integration</a> is the recommended approach for defining services, as code locations configured in Catalog can be used by multiple Datadog products. Use manual configuration only when Catalog integration is not available.</div>
 
 You can define services in your configuration file to split coverage data by service in monorepos. This is useful when multiple projects or teams share a single repository and you want to view coverage metrics for each service independently.
 
@@ -65,7 +70,7 @@ services:
   - `id` (required): Unique identifier for the service
   - `paths` (required): List of path patterns that belong to this service (see [Pattern syntax](#pattern-syntax))
 
-For complete details on monorepo support, including Software Catalog integration and code owner-based splitting, see [Monorepo Support][1].
+For complete details on monorepo support, including Catalog integration and code owner-based splitting, see [Monorepo Support][1].
 
 ### Examples
 
@@ -288,6 +293,53 @@ gates:
 {{< /code-block >}}
 {{% /collapse-content %}}
 
+## PR Comments
+
+By default, Datadog posts a code coverage summary comment on every pull request. You can suppress it on a per-repository basis with the `comments.enabled` field.
+
+PR Gate checks are not affected by this setting.
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+comments:
+  enabled: false
+{{< /code-block >}}
+
+## Carryforward
+
+{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}Carryforward is in Preview and is subject to change.{{< /callout >}}
+
+You can enable [carryforward][4] in the configuration file to reuse coverage data from ancestor commits when not every CI job runs for a commit. Carryforward operates on [flags][3], so every report involved must be tagged with `--flags`.
+
+To enable carryforward for every flag in the repository:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+carryforward: true
+{{< /code-block >}}
+
+To enable carryforward for specific flags only:
+
+{{< code-block lang="yaml" filename="code-coverage.datadog.yml" >}}
+schema-version: v1
+flags:
+  unit-tests:
+    carryforward: true
+  integration-tests:
+    carryforward: true
+{{< /code-block >}}
+
+The top-level `carryforward` field accepts the following values:
+
+- `true`: Carryforward is enabled for every flag, unless a flag overrides it with `carryforward: false` in the `flags` map.
+- `false` (default): Carryforward is disabled, unless a flag opts in with `carryforward: true` in the `flags` map.
+
+The `flags` map accepts a per-flag configuration block. The supported fields are:
+
+- `carryforward`: A Boolean that enables or disables carryforward for the named flag. Overrides the top-level `carryforward` value.
+
+For complete details, see [Code Coverage Carryforward][4].
+
 ## Pattern syntax
 
 Configuration options that accept file paths support three types of patterns:
@@ -333,3 +385,4 @@ Simple path prefixes without special characters are treated as prefix matches:
 [1]: /code_coverage/monorepo_support
 [2]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=code_coverage
 [3]: /code_coverage/flags
+[4]: /code_coverage/carryforward

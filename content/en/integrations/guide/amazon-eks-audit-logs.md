@@ -1,5 +1,6 @@
 ---
 title: Log Collection for Amazon EKS Audit Logs
+description: "Enable log collection for Amazon EKS audit logs to monitor cluster actions with Datadog Cloud SIEM."
 
 ---
 

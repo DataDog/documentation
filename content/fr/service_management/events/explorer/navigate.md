@@ -2,7 +2,7 @@
 title: Parcourir l'Events Explorer
 ---
 
-{{< img src="service_management/events/explorer/navigate.png" alt="Comment parcourir l'Events Explorer" style="width:100%;" >}}
+{{< img src="events/explorer/navigate.png" alt="Comment parcourir l'Events Explorer" style="width:100%;" >}}
 
 ## Présentation
 
@@ -14,7 +14,7 @@ Cliquez sur un événement de l'Events Explorer pour ouvrir le volet latéral d
 
 ### Onglet Event Attributes
 
-{{< img src="service_management/events/explorer/event-attribute.png" alt="Un exemple d'onglet Event Attributes" style="width:100%;" >}}
+{{< img src="events/explorer/event-attribute.png" alt="Un exemple d'onglet Event Attributes" style="width:100%;" >}}
 
 L'onglet Event Attributes du volet latéral répertorie les attributs de l'événement au format JSON. Cliquez sur un attribut pour l'ajouter à la requête existante, l'exclure ou ajouter une colonne pour cet attribut.
 

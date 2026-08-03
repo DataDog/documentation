@@ -1,5 +1,5 @@
 ---
-title: HTTP Server Source
+title: HTTP/S Server Source
 disable_toc: false
 products:
 - name: Logs
@@ -21,42 +21,62 @@ You can also [send AWS vended logs with Datadog Lambda Forwarder to Observabilit
 
 ## Setup
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the HTTP/S Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
 Set up this source when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-To configure your HTTP/S Server source, enter the following:
+After you select the HTTP/S Server source in the pipeline UI:
 
-<div class="alert alert-danger">Only enter the identifiers for the HTTP Server address and, if applicable, the username and password for plain (also known as basic) authorization and the TLS key pass. Do <b>not</b> enter the actual values.</div>
-
-1. Enter the identifier for your HTTP Server address. If you leave it blank, the [default](#set-secrets) is used.
+1. Enter the identifier for your HTTP/S Server address. If you leave it blank, the [default](#secret-defaults) is used.
     - **Note**: Only enter the identifier for the address. Do **not** enter the actual address.
-1. Select your authorization strategy. If you selected **Plain**:
-    - Enter the identifiers for your HTTP Server username and password. If you leave it blank, the [default](#set-secrets) is used.
+1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
+    - Enter the identifiers for your HTTP/S Server username and password. If you leave it blank, the [default](#secret-defaults) is used.
+1. (Optional) Set up authentication tokens. See [Configure authentication tokens](#configure-authentication-tokens) for details.
 1. Select the decoder you want to use on the HTTP messages. Your HTTP client logs must be in this format. **Note**: If you select `bytes` decoding, the raw log is stored in the `message` field.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
-Toggle the switch to **Enable TLS**. If you enable TLS, the following certificate and key files are required.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your HTTP Server key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+#### Enable TLS
 
-## Set secrets
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
+
+#### Configure authentication tokens
+
+If you store tokens as credentials in your HTTP request's authorization header, you can configure the Worker to check if incoming HTTP requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
+
+**Note**: You cannot configure authentication tokens with the {{< ui >}}Plain{{< /ui >}} authorization strategy.
+
+To configure authentication tokens, enable the {{< ui >}}Configure authentication tokens{{< /ui >}} toggle:
+
+1. Click {{< ui >}}Manage Tokens{{< /ui >}} and then {{< ui >}}Add Token{{< /ui >}}.
+1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered prepended with `DD_OP_`.
+1. (Optional) Enter a field and value if you want to add additional information to logs that are successfully authenticated with this specific token.
+1. Select the path to the token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
+	- {{< ui >}}Header{{< /ui >}} for a custom header or an authorization header, such as `"Authorization: Basic ABCDEF1234567="`.
+		- Optionally, enter the header name. **Note**: The header name is case insensitive.
+	- {{< ui >}}Address{{< /ui >}} for an IP address.
+	- {{< ui >}}Path{{< /ui >}} for an endpoint path.
+
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- HTTP Server address identifier:
+- HTTP/S Server address identifier:
 	- References the socket address, such as `0.0.0.0:9997`, on which the Observability Pipelines Worker listens for HTTP client logs.
 	- The default identifier is `SOURCE_HTTP_SERVER_ADDRESS`.
-- HTTP Server TLS passphrase identifier (when TLS is enabled):
+- HTTP/S Server TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `SOURCE_HTTP_SERVER_KEY_PASS`.
 - If you are using plain authentication:
-	- HTTP Server username identifier:
+	- HTTP/S Server username identifier:
 		- The default identifier is `SOURCE_HTTP_SERVER_USERNAME`.
-	- HTTP Server password identifier:
+	- HTTP/S Server password identifier:
 		- The default identifier is `SOURCE_HTTP_SERVER_PASSWORD`.
 
 {{% /tab %}}
@@ -86,7 +106,6 @@ To send AWS vended logs to Observability Pipelines with the HTTP/S Server source
 {{% observability_pipelines/lambda_forwarder/deploy_forwarder %}}
 
 [1]: https://app.datadoghq.com/observability-pipelines
-[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
 [3]: /observability_pipelines/configuration/set_up_pipelines/
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

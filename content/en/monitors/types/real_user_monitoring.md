@@ -27,14 +27,14 @@ After you enable RUM for your organization, you can create a RUM monitor to aler
 
 ## Create a RUM monitor
 
-To create a RUM monitor in Datadog, first navigate to [**Monitors** > **New Monitor** > **Real User Monitoring**][2].
+To create a RUM monitor in Datadog, first navigate to {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > [{{< ui >}}Real User Monitoring{{< /ui >}}][2].
 
 <div class="alert alert-info">There is a default limit of 1000 RUM monitors per account. If you are encountering this limit, consider using <a href="/monitors/configuration/?tab=thresholdalert#alert-grouping">multi alerts</a>, or <a href="/help/">Contact Support</a>.</div>
 
 Next, choose one of the following methods to create your monitor:
 
-- **Start with a template**: Datadog provides several pre-built templates for common RUM monitoring scenarios like error rates, performance vitals, or availability checks. Browse the [full template gallery][9] to get started.
-- **Build a custom monitor**: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views.
+- {{< ui >}}Start with a template{{< /ui >}}: Datadog provides several pre-built templates for common RUM monitoring scenarios like error rates, performance vitals, or availability checks. Browse the [full template gallery][9] to get started.
+- {{< ui >}}Build a custom monitor{{< /ui >}}: Choose from out-of-the-box metrics or custom metrics, then scope to your application, specific pages, or views.
 
 ### Define the search query
 
@@ -43,9 +43,9 @@ As you expand your search filters, the graph above the search bar updates.
 1. Construct a search query using the same logic as a [RUM Explorer search][3].
 2. Choose to monitor over [full traffic metrics or retained events][10].
 3. Choose to monitor over a RUM event count, [facet][4], or [measure][5].
-    * **Monitor over a RUM event count**: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of RUM events over a selected time frame, then compares it to the threshold conditions.
-    * **Monitor over a facet**: If you select a [facet][4], the monitor alerts over the `Unique value count` of the facet.
-    * **Monitor over measure**: If you select a [measure][5], the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
+    * {{< ui >}}Monitor over a RUM event count{{< /ui >}}: Use the search bar (optional) and do **not** select a facet or measure. Datadog evaluates the number of RUM events over a selected time frame, then compares it to the threshold conditions.
+    * {{< ui >}}Monitor over a facet{{< /ui >}}: If you select a [facet][4], the monitor alerts over the {{< ui >}}Unique value count{{< /ui >}} of the facet.
+    * {{< ui >}}Monitor over measure{{< /ui >}}: If you select a [measure][5], the monitor alerts over the numerical value of the RUM facet (similar to a metric monitor). Select an aggregation type (`min`, `avg`, `sum`, `median`, `pc75`, `pc90`, `pc95`, `pc98`, `pc99`, or `max`).
 4. Group RUM events by multiple dimensions (optional):
   All RUM events matching the query are aggregated into groups based on the value of up to four facets. When there are multiple dimensions, the top values are determined according to the first dimension, then according to the second dimension within the top values of the first dimension, and so on up to the last dimension. The dimensions limit depends on the total number of dimensions:
    * **1 facet**: 1000 top values
@@ -55,8 +55,8 @@ As you expand your search filters, the graph above the search bar updates.
 
 6. Add multiple queries and apply formulas and functions (optional):
 
-    * **Multiple queries**: Click **Add Query** to analyze multiple different sets of RUM data in relation to each other.
-    * **Formulas and functions**: After adding your desired queries, click the **Add Function** icon to add a mathematical computation. The example below calculates the error rate on a cart page using the formula `(a/b)*100`.
+    * **Multiple queries**: Click {{< ui >}}Add Query{{< /ui >}} to analyze multiple different sets of RUM data in relation to each other.
+    * **Formulas and functions**: After adding your desired queries, click the {{< ui >}}Add Function{{< /ui >}} icon to add a mathematical computation. The example below calculates the error rate on a cart page using the formula `(a/b)*100`.
 
    {{< img src="monitors/monitor_types/rum/rum_multiple_queries_3.png" alt="A monitor configured to alert on the error rate of a cart page. This monitor has two queries (a and b) and contains a formula: (a/b)*100." style="width:80%;" >}}
 
@@ -93,11 +93,11 @@ For more information about advanced alert options such as evaluation delay, see 
 
 ### Notifications
 
-For more information about the **Configure notifications and automations** section, see [Notifications][7].
+For more information about the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see [Notifications][7].
 
 ### Permissions and audit notifications
 
-For more information about the **Define permissions and audit notifications** section, see [Permissions][11].
+For more information about the {{< ui >}}Define permissions and audit notifications{{< /ui >}} section, see [Permissions][11].
 
 ## Further reading
 

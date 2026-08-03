@@ -5,10 +5,10 @@ description: Step-by-step tutorial to enable distributed tracing for a Python ap
 further_reading:
 - link: /tracing/trace_collection/library_config/python/
   tag: "Documentation"
-  text: Additional tracing library configuration options
+  text: Additional SDK configuration options
 - link: /tracing/trace_collection/dd_libraries/python/
   tag: "Documentation"
-  text: Detailed tracing library setup instructions
+  text: Detailed SDK setup instructions
 - link: /tracing/trace_collection/compatibility/python/
   tag: "Documentation"
   text: Supported Python frameworks for automatic instrumentation
@@ -34,7 +34,7 @@ See [Tracing Python Applications][2] for general comprehensive tracing setup doc
 
 - A Datadog account and [organization API key][3]
 - Git
-- Python that meets the [tracing library requirements][4]
+- Python that meets the [SDK requirements][4]
 
 ## Install the sample Dockerized Python application
 
@@ -179,7 +179,7 @@ To check that you've set things up correctly, compare your `docker-compose.yaml`
 
 ## Launch the containers to see automatic tracing
 
-Now that the Tracing Library is installed, restart your application and start receiving traces. Run the following commands:
+Now that the SDK is installed, restart your application and start receiving traces. Run the following commands:
 
 ```
 docker-compose -f docker/containers/exercise/docker-compose.yaml build notes_app
@@ -204,7 +204,7 @@ With the application running, send some curl requests to it:
 `curl -X DELETE 'localhost:8080/notes?id=1'`
 : `Deleted`
 
-Wait a few moments, and go to [**APM > Traces**][11] in Datadog, where you can see a list of traces corresponding to your API calls:
+Wait a few moments, and go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][11] in Datadog, where you can see a list of traces corresponding to your API calls:
 
 {{< img src="tracing/guide/tutorials/tutorial-python-container-traces.png" alt="Traces from the sample app in APM Trace Explorer" style="width:100%;" >}}
 

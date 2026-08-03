@@ -5,6 +5,9 @@ further_reading:
 - link: "/logs/guide/regex_log_parsing/"
   tag: "guide"
   text: "Writing Effective Grok Parsing Rules with Regular Expressions"
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 products:
 - name: Logs
   icon: logs
@@ -19,12 +22,14 @@ The Sensitive Data Scanner processor scans logs to detect and redact or hash sen
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 
+See [Best practices to optimize performance](#best-practices-to-optimize-performance) for tips on reducing resource usage.
+
 ## Set up the processor in the UI
 
 To set up the processor:
 
 1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query. See [Search Syntax][1] for more information.
-1. Click **Add Scanning Rule**.
+1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select one of the following:
 
 {{< tabs >}}
@@ -32,33 +37,33 @@ To set up the processor:
 
 1. In the dropdown menu, select the library rule you want to use.
 1. Recommended keywords are automatically added based on the library rule selected. After the scanning rule has been added, you can [add additional keywords or remove recommended keywords](#add-additional-keywords).
-1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
-1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
-    - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
-    - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
-    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
-1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
+1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
+    - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
+    - {{< ui >}}Partially Redact{{< /ui >}}: Replaces a specified portion of all matched data. In the {{< ui >}}Redact{{< /ui >}} section, specify the number of characters you want to redact and which part of the matched data to redact.
+    - {{< ui >}}Hash{{< /ui >}}: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match are hashed with the 64-bit fingerprint of FarmHash.
+1. Optionally, click {{< ui >}}Add Field{{< /ui >}} to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
-1. Click **Save**.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ### Add additional keywords
 
 After adding scanning rules from the library, you can edit each rule separately and add additional keywords to the keyword dictionary.
 
 1. Navigate to your [pipeline][1].
-1. In the Sensitive Data Scanner processor with the rule you want to edit, click **Manage Scanning Rules**.
-1. Toggle **Use recommended keywords** if you want the rule to use them. Otherwise, add your own keywords to the **Create keyword dictionary** field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. Click **Update**.
+1. In the Sensitive Data Scanner processor with the rule you want to edit, click {{< ui >}}Manage Scanning Rules{{< /ui >}}.
+1. Toggle {{< ui >}}Use recommended keywords{{< /ui >}} if you want the rule to use them. Otherwise, add your own keywords to the {{< ui >}}Create keyword dictionary{{< /ui >}} field. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. Click {{< ui >}}Update{{< /ui >}}.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 
 {{% /tab %}}
 {{% tab "Custom rules" %}}
 
-1. In the **Define match conditions** section, specify the regex pattern to use for matching against events in the **Define the regex** field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
+1. In the {{< ui >}}Define match conditions{{< /ui >}} section, specify the regex pattern to use for matching against events in the {{< ui >}}Define the regex{{< /ui >}} field. See [Writing Effective Grok Parsing Rules with Regular Expressions][1] for more information.
     Sensitive Data Scanner supports Perl Compatible Regular Expressions (PCRE), but the following patterns are not supported:
     - Backreferences and capturing sub-expressions (lookarounds)
     - Arbitrary zero-width assertions
@@ -70,45 +75,41 @@ After adding scanning rules from the library, you can edit each rule separately 
     - The `\K` start of match reset directive
     - Callouts and embedded code
     - Atomic grouping and possessive quantifiers
-1. Enter sample data in the **Add sample data** field to verify that your regex pattern is valid.
-1. For **Create keyword dictionary**, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
-1. In the **Define rule target and action** section, select if you want to scan the **Entire Event**, **Specific Attributes**, or **Exclude Attributes** in the dropdown menu.
+1. Enter sample data in the {{< ui >}}Add sample data{{< /ui >}} field to verify that your regex pattern is valid.
+1. For {{< ui >}}Create keyword dictionary{{< /ui >}}, add keywords to refine detection accuracy when matching regex conditions. For example, if you are scanning for a sixteen-digit Visa credit card number, you can add keywords like `visa`, `credit`, and `card`. You can also require that these keywords be within a specified number of characters of a match. By default, keywords must be within 30 characters before a matched value.
+1. In the {{< ui >}}Define rule target and conditions{{< /ui >}} section, select if you want to scan the {{< ui >}}Entire Event{{< /ui >}}, {{< ui >}}Specific Attributes{{< /ui >}}, or {{< ui >}}Exclude Attributes{{< /ui >}} in the dropdown menu.
     - If you are scanning the entire event, you can optionally exclude specific attributes from getting scanned. Use [path notation](#path-notation-example) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is excluded.
     - If you are scanning specific attributes, specify which attributes you want to scan. Use [path notation](#path-notation-example-custom) (`outer_key.inner_key`) to access nested keys. For specified attributes with nested data, all nested data is scanned.
-1. For **Define actions on match**, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
-    - **Redact**: Replaces all matching values with the text you specify in the **Replacement text** field.
-    - **Partially Redact**: Replaces a specified portion of all matched data. In the **Redact** section, specify the number of characters you want to redact and which part of the matched data to redact.
-    - **Hash**: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
-1. Optionally, click **Add Field** to add tags you want to associate with the matched events.
+1. For {{< ui >}}Define actions on match{{< /ui >}}, select the action you want to take for the matched information. **Note**: Redaction, partial redaction, and hashing are all irreversible actions.
+    - {{< ui >}}Redact{{< /ui >}}: Replaces all matching values with the text you specify in the {{< ui >}}Replacement text{{< /ui >}} field.
+    - {{< ui >}}Partially Redact{{< /ui >}}: Replaces a specified portion of all matched data. In the {{< ui >}}Redact{{< /ui >}} section, specify the number of characters you want to redact and which part of the matched data to redact.
+    - {{< ui >}}Hash{{< /ui >}}: Replaces all matched data with a unique identifier. The UTF-8 bytes of the match is hashed with the 64-bit fingerprint of FarmHash.
+1. Optionally, click {{< ui >}}Add Field{{< /ui >}} to add tags you want to associate with the matched events.
 1. Add a name for the scanning rule.
 1. Optionally, add a description for the rule.
-1. Click **Add Rule**.
+1. Click {{< ui >}}Add Rule{{< /ui >}}.
 
 [1]: /logs/guide/regex_log_parsing/
 
 {{% /tab %}}
 {{< /tabs >}}
 
+### Delete a rule
+
+To delete a rule in the Sensitive Data Scanner:
+
+1. Navigate to [Observability Pipelines][2].
+1. Select your pipeline.
+1. Click the Sensitive Data Scanner processor to expand it.
+1. Click {{< ui >}}Manage Scanning Rules{{< /ui >}}.
+1. Select the rule you want to delete.
+1. Click {{< ui >}}Delete{{< /ui >}}.
+
 ### Path notation example
 
- For the following message structure:
+{{% observability_pipelines/path_notation %}}
 
-```json
-{
-    "outer_key": {
-        "inner_key": "inner_value",
-        "a": {
-            "double_inner_key": "double_inner_value",
-            "b": "b value"
-        },
-        "c": "c value"
-    },
-    "d": "d value"
-}
-```
-
-- Use `outer_key.inner_key` to refer to the key with the value `inner_value`.
-- Use `outer_key.inner_key.double_inner_key` to refer to the key with the value `double_inner_value`.
+{{% observability_pipelines/path_notation_dots %}}
 
 ## Set up the processor using Terraform
 
@@ -286,6 +287,105 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 }
 {{< /code-block >}}
 
+## Best practices to optimize performance
+
+The Sensitive Data Scanner processor is CPU intensive. Use the following best practices to optimize performance.
+
+### View scanning rule usage with the Observability Pipelines Overview dashboard
+
+Observability Pipelines includes an out-of-the-box [Observability Pipelines Overview][16] dashboard with a **Sensitive data found by Observability Pipelines** section. Use the widgets in that section to see which scanning rules are matching data.
+
+1. Navigate to Dashboards > [Observability Pipelines Overview][16].
+1. Use the template variables (`pipeline_id`, `host`, `worker_uuid`, `component_type`, `component_kind`, `component_id`) at the top of the dashboard to scope the view to a specific pipeline or Worker.
+1. Use the time selector to scope to a wider time frame.
+
+Use the following widgets to evaluate your Sensitive Data Scanner processors' scanning rule usage:
+
+- **Logs containing sensitive data per scanning rule**: Lists each rule by name (for example, `visa_card_scanner_1x16_1x19_digits` or `redact_ipv4`) with the number of matches over the selected time frame. Rules with high counts are actively matching data. This is the primary widget to see which rules are in use.
+- **Total count of logs containing sensitive data**: Shows the total volume of sensitive data matched across all rules.
+- **Logs containing sensitive data by Pipeline**: Shows matching logs that contain sensitive data. You can scope matches down by `pipeline_id`, which helps you see whether logs containing sensitive data is found in all pipelines or only in specific pipelines.
+- **Logs containing sensitive data per host**: Breaks down sensitive data matches by Worker host. Use this widget to confirm coverage across your deployment.
+- **Patterns containing sensitive information** and **List of logs containing sensitive data**: Shows the log patterns and sample events where sensitive data was found.
+
+After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
+
+**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. 
+
+### Only enable rules you need
+
+Rules that are enabled but not used consume unnecessary resources. Check the Sensitive Data Scanner processor to view how many matches each rule has had over the past 24 hours.
+
+1. Navigate to [Observability Pipelines][2].
+1. Select your pipeline.
+1. Click the Sensitive Data Scanner processor to expand it.
+1. Click {{< ui >}}View Scanning Rules{{< /ui >}} to open the side panel and see {{< ui >}}Matches in the last 24 hours{{< /ui >}} for each rule.
+
+See [Delete a rule](#delete-a-rule) to delete an unused rule.
+
+### Only scan the events and fields that need to be scanned for sensitive data
+
+The time it takes the Sensitive Data Scanner to scan an event roughly scales with the size of the event. To optimize processor performance:
+
+- If you know the types of events you want to scan, define a processor query that only sends the events you want to the processor.
+
+- Reduce scanning time by targeting specific event attributes for scanning or excluding event attributes from being scanned. See the {{< ui >}}Define rule target and conditions{{< /ui >}} step in [Set up the processor](#set-up-the-processor-in-the-ui).
+
+### Evaluate and benchmark performance optimizations
+
+Use the `pipelines.component_latency_seconds` metric to:
+
+- Benchmark processor performance when you add a rule
+- Evaluate performance after making optimization changes, such as reducing the number of fields being scanned and removing unused rules
+
+To view the `pipelines.component_latency_seconds` metric:
+
+1. Navigate to [Metrics Explorer][11].
+1. In the metric field, enter `pipelines.component_latency_seconds`.
+1. In the {{< ui >}}from{{< /ui >}} field, enter the tag `component_id:<COMPONENT_ID>`, where `<COMPONENT_ID>` is the ID for your Sensitive Data Scanner processor.
+
+**Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
+
+## Metrics
+
+For [component metrics][13] and [processor buffer metrics][14] emitted by all processors, see the [Pipelines Usage Metrics][15] documentation.
+
+### Sensitive Data Scanner metrics
+
+- Use the `component_id` tag to filter or group by individual components.
+- The `component_type` tag is `sensitive_data_scanner` for Sensitive Data Scanner processor metrics.
+
+`pipelines.sds_rule_matched_total`
+: **Description**: The number of events that matched a Sensitive Data Scanner rule. Tagged with the matching rule name.
+: **Metric type**: count
+
+`pipelines.scanned_events`
+: **Description**: The number of events scanned by the Sensitive Data Scanner engine.
+: **Metric type**: count
+
+`pipelines.scanning.match_count`
+: **Description**: The number of matches found by the Sensitive Data Scanner.
+: **Metric type**: count
+
+`pipelines.scanning.suppressed_match_count`
+: **Description**: The number of matches suppressed by the Sensitive Data Scanner.
+: **Metric type**: count
+
+`pipelines.scanning.duration`
+: **Description**: Accumulated wall-clock time, in seconds, spent scanning events. Use this metric to benchmark processor performance and evaluate optimizations.
+: **Metric type**: count
+
+`pipelines.scanning.cpu_duration`
+: **Description**: Accumulated CPU time, in seconds, spent scanning events.
+: **Metric type**: count
+
+`pipelines.scanner.total_count`
+: **Description**: The number of Sensitive Data Scanner processors currently running.
+: **Metric type**: gauge
+
+`pipelines.scanner.total_regexes`
+: **Description**: The number of regexes held across all Sensitive Data Scanners.
+: **Metric type**: gauge
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -300,3 +400,9 @@ resource "datadog_observability_pipeline" "sensitive_data_pipeline" {
 [8]: /security/sensitive_data_scanner/scanning_rules/library_rules/?search=US+Social+Security+Number+Scanner
 [9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline#nested-schema-for-configprocessor_groupprocessorsensitive_data_scanner
 [10]: /api/latest/observability-pipelines/#create-a-new-pipeline
+[11]: https://app.datadoghq.com/metric/explorer
+[12]: /metrics/distributions/#enabling-advanced-query-functionality
+[13]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[16]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview

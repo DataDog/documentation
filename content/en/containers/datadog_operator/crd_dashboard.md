@@ -2,6 +2,9 @@
 title: DatadogDashboard CRD
 description: Deploy and manage Datadog dashboards using the DatadogDashboard custom resource definition with the Datadog Operator
 ---
+
+<div class="alert alert-info"><strong>Soft deprecation notice:</strong> For new dashboard resources, prefer <a href="/containers/datadog_operator/crd_ddgr/">DatadogGenericResource</a> with <code>type: dashboard</code>. <code>DatadogDashboard</code> remains supported for existing users, but <code>DatadogGenericResource</code> is the preferred path for new Datadog API capabilities.</div>
+
 To deploy a Datadog dashboard, you can use the Datadog Operator and `DatadogDashboard` custom resource definition (CRD).
 
 ### Prerequisites

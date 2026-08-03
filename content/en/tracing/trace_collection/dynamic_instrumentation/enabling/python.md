@@ -14,7 +14,7 @@ further_reading:
       text: 'Getting Started with Datadog Agent'
 ---
 
-Dynamic Instrumentation is a feature of the Datadog tracing library that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Python.
+Dynamic Instrumentation is a feature of the Datadog SDK that lets you add instrumentation to your application at runtime without code changes or redeployments. Follow these instructions to set up Dynamic Instrumentation for Python.
 
 ## Prerequisites
 
@@ -48,9 +48,11 @@ ddtrace-run python -m myapp.py
 {{% tab "In code" %}}
 
 ```python
-from ddtrace.debugging import DynamicInstrumentation
+import os
 
-DynamicInstrumentation.enable()
+os.environ["DD_DYNAMIC_INSTRUMENTATION_ENABLED"] = "true"
+
+import ddtrace.auto  # IMPORTANT: this must be imported as soon as possible.
 ```
 {{% /tab %}}
 {{< /tabs >}}

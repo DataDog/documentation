@@ -10,6 +10,9 @@ further_reading:
   - link: "/security/cloud_siem/threat_intelligence/"
     tag: "documentation"
     text: "Cloud SIEM Threat Intelligence"
+  - link: "https://www.datadoghq.com/blog/cloud-security-investigation-ai/"
+    tag: "Blog"
+    text: "How to investigate cloud credential compromise with Bits Security Analyst"
 
 products:
 - name: Cloud SIEM
@@ -32,6 +35,10 @@ Threat Intelligence is reputation information that helps responders make informe
 Datadog curates commercial, open-source, and in-house threat intelligence indicators of compromise into categories and intents. Threat intelligence is updated at least once per day, per source. This data is used to enrich your logs and traces with relevant reputation information.
 
 ## Bring your own threat intelligence
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
 
 Datadog Security supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
@@ -103,7 +110,7 @@ Sources, categories, and intents are available as facets and filters on relevant
 | hosting_proxy | suspicious | IP addresses | Datacenter IPs with a reputation of abuse, such as for distributed credential stuffing attacks | AAP and Cloud SIEM |
 | tor | suspicious | IP addresses  | Corporate policy violations for user activity | App and API Protection, Workload Protection, and Cloud SIEM |
 | disposable_email | suspicious | Domain  | Detect product usage from disposable email addresses | AAP |
-| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Client SIEM |
+| corp_vpn | benign | IP addresses | IPs associated to corporate VPNs | AAP and Cloud SIEM |
 | cryptomining | malicious | IP addresses | IP addresses associated with cryptomining activities | AAP, CWS, and Cloud SIEM |
 
 ### Threat intelligence intents

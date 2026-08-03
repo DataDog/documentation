@@ -120,6 +120,8 @@ Check your Ingress-NGINX Controller version and ensure you have the matching Dat
 The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
 For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
 
+<div class="alert alert-info">Version tags like <code>v1.11.3</code> are rolling tags. The underlying Datadog NGINX module may be updated while the tag stays the same. To pin an exact version, reference the image by its digest (for example, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
+
 **2. Modify your controller's pod specification**<br>
 Update the controller pod specification to include the init-container and configure the Datadog Agent host environment variable:
 
@@ -183,6 +185,8 @@ This configuration ensures that the Datadog module is loaded and ready to trace 
 Check your Ingress-NGINX Controller version and ensure you have the matching Datadog init-container available.
 The init-container version ([datadog/ingress-nginx-injection][1]) must exactly match your controller version to prevent startup issues.
 For example, if you're running Ingress-NGINX v1.11.3, you need [datadog/ingress-nginx-injection:v1.11.3][2].
+
+<div class="alert alert-info">Version tags like <code>v1.11.3</code> are rolling tags. The underlying Datadog NGINX module may be updated while the tag stays the same. To pin an exact version, reference the image by its digest (for example, <code>datadog/ingress-nginx-injection@sha256:...</code>).</div>
 
 **2. Overriding Helm chart values**<br>
 To customize the Ingress-NGINX Helm chart and load the required Datadog module, create a YAML file or modify an existing one with the following configuration:
@@ -410,24 +414,24 @@ By default, logs capture `dd.trace_id` and `dd.span_id` in hexadecimal format:
 
 To enable log and trace correlation in Datadog, configure a log processing pipeline to convert these IDs from hexadecimal to decimal. Follow the same steps regardless of the instrumentation method you use.
 
-1. In Datadog, navigate to the [**Log Configuration**][9] page.
-2. Hover over your active NGINX pipeline and click the **Clone** icon to create an editable version.
+1. In Datadog, navigate to the [{{< ui >}}Log Configuration{{< /ui >}}][9] page.
+2. Hover over your active NGINX pipeline and click the {{< ui >}}Clone{{< /ui >}} icon to create an editable version.
 3. Click the cloned pipeline.
-4. Click **Add Processor**.
+4. Click {{< ui >}}Add Processor{{< /ui >}}.
 5. Select [Grok Parser][11] as the processor type.
 6. Define the following parsing rule to extract the trace ID attribute from a log event. This rule works for both the Datadog module and OpenTelemetry outputs:
    ```text
    extract_correlation_ids %{data} dd.trace_id="%{notSpace:dd.trace_id:nullIf("-")}" dd.span_id="%{notSpace:dd.span_id:nullIf("-")}"
    ```
-7. Click **Create**.
-8. Click **Add Processor** again.
+7. Click {{< ui >}}Create{{< /ui >}}.
+8. Click {{< ui >}}Add Processor{{< /ui >}} again.
 9. Select [Trace ID Remapper][10] as the processor type. This processor associates the parsed ID with its corresponding APM trace.
-10. In the **Set trace id attribute(s)** field, enter `dd.trace_id`.
-11. Click **Create**.
-12. Click **Add Processor** again.
+10. In the {{< ui >}}Set trace id attribute(s){{< /ui >}} field, enter `dd.trace_id`.
+11. Click {{< ui >}}Create{{< /ui >}}.
+12. Click {{< ui >}}Add Processor{{< /ui >}} again.
 13. Select [Span ID Remapper][12] as the processor type. This processor associates the parsed ID with its corresponding APM span.
-14. In the **Set span id attribute(s)** field, enter `dd.span_id`.
-15. Click **Create**.
+14. In the {{< ui >}}Set span id attribute(s){{< /ui >}} field, enter `dd.span_id`.
+15. Click {{< ui >}}Create{{< /ui >}}.
 16. Save and enable your new pipeline.
 
 Once the pipeline is active, new NGINX logs are automatically correlated with their traces and spans.
@@ -444,7 +448,7 @@ Once the pipeline is active, new NGINX logs are automatically correlated with th
 [7]: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
 [8]: /logs/guide/ease-troubleshooting-with-cross-product-correlation
 [9]: https://app.datadoghq.com/logs/pipelines
-[10]: /logs/log_configuration/processors/?tab=ui#trace-remapper
-[11]: /logs/log_configuration/processors/?tab=ui#grok-parser
-[12]: /logs/log_configuration/processors/?tab=ui#span-remapper
+[10]: /logs/log_configuration/processors/trace_remapper/
+[11]: /logs/log_configuration/processors/grok_parser/
+[12]: /logs/log_configuration/processors/span_remapper/
 

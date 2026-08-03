@@ -36,7 +36,16 @@ Los tests de API te ayudan a **monitorizar de forma proactiva** tus servicios m�
 
 Genera solicitudes en las diferentes capas de red de tus sistemas con estos subtipos:
 
-{{< partial name="synthetics/network-layers.html" >}}
+{{< card-grid image_width="100">}}
+  {{< image-card href="/synthetics/api_tests/http_tests" src="synthetics/api_tests/http-test1.png" alt="HTTP" >}}
+  {{< image-card href="/synthetics/api_tests/ssl_tests" src="synthetics/api_tests/ssl-test1.png" alt="SSL" >}}
+  {{< image-card href="/synthetics/api_tests/dns_tests" src="synthetics/api_tests/dns-test1.png" alt="DNS" >}}
+  {{< image-card href="/synthetics/api_tests/websocket_tests" src="synthetics/api_tests/websocket-test1.png" alt="WebSocket" >}}
+  {{< image-card href="/synthetics/api_tests/tcp_tests" src="synthetics/api_tests/tcp-test1.png" alt="TCP" >}}
+  {{< image-card href="/synthetics/api_tests/udp_tests" src="synthetics/api_tests/udp-test1.png" alt="UDP" >}}
+  {{< image-card href="/synthetics/api_tests/icmp_tests" src="synthetics/api_tests/icmp-test1.png" alt="ICMP" >}}
+  {{< image-card href="/synthetics/api_tests/grpc_tests" src="synthetics/api_tests/grpc-test1.png" alt="gRPC" >}}
+{{< /card-grid >}}
 
 Si tu servicio comienza a responder más lentamente o de forma inesperada (como por ejemplo un cuerpo de respuesta inesperado o un registro A erróneo), tu test puede [alertar a tu equipo][1], [bloquear tu pipeline CI][2] y [revertir el despliegue defectuoso][2].
 

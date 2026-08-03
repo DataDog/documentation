@@ -2,21 +2,15 @@
 title: Getting Started with Logs
 description: Collect logs from multiple sources, process and analyze them, and correlate these logs with traces and metrics.
 further_reading:
-    - link: 'https://learn.datadoghq.com/courses/intro-to-log-management'
+    - link: 'https://learn.datadoghq.com/courses/log-explorer'
       tag: 'Learning Center'
-      text: 'Introduction to Log Management'
-    - link: 'https://learn.datadoghq.com/courses/going-deeper-with-logs-processing'
-      tag: 'Learning Center'
-      text: 'Going Deeper with Logs Processing'
-    - link: 'https://learn.datadoghq.com/courses/log-indexes'
-      tag: 'Learning Center'
-      text: 'Manage and Monitor Indexed Log Volumes'
-    - link: 'https://learn.datadoghq.com/courses/log-pipelines'
-      tag: 'Learning Center'
-      text: 'Build and Manage Log Pipelines'
+      text: 'Getting Started with Log Explorer'
     - link: 'https://learn.datadoghq.com/courses/integration-pipelines'
       tag: 'Learning Center'
       text: 'Process Logs Out of the Box with Integration Pipelines'
+    - link: 'https://learn.datadoghq.com/courses/log-indexes'
+      tag: 'Learning Center'
+      text: 'Manage and Monitor Indexed Log Volumes'
     - link: '/logs/log_collection/'
       tag: 'Documentation'
       text: 'Log Collection & Integrations'
@@ -36,7 +30,7 @@ This page shows you how to get started with Log Management in Datadog. If you ha
 
 ## Configure a logging source
 
-With Log Management, you can analyze and explore data in the Log Explorer, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Cloud SIEM][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
+With Log Management, you can analyze and explore data in the {{< ui >}}Log Explorer{{< /ui >}}, connect [Tracing][2] and [Metrics][3] to correlate valuable data across Datadog, and use ingested logs for Datadog [Cloud SIEM][4]. The lifecycle of a log within Datadog begins at ingestion from a logging source.
 
 {{< img src="/getting_started/logs/getting-started-overview.png" alt="Different types of log configurations">}}
 
@@ -105,15 +99,15 @@ To begin collecting logs from a cloud service, follow the [in-app instructions][
 
 Once a logging source is configured, your logs are available in the [Log Explorer][16]. This is where you can filter, aggregate, and visualize your logs.
 
-For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [Group into Patterns][17] to see which part of your service is logging the most errors.
+For example, if you have logs flowing in from a service that you wish to examine further, filter by `service`. You can further filter by `status`, such as `ERROR`, and select [{{< ui >}}Group into Patterns{{< /ui >}}][17] to see which part of your service is logging the most errors.
 
 {{< img src="/getting_started/logs/error-pattern-2024.png" alt="Filtering in the Log Explorer by error pattern">}}
 
-Aggregate your logs into `Fields` and visualize as **Top List** to see your top logging services. Select a source, such as `info` or `warn`, and select **View Logs** from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
+Aggregate your logs into `Fields` and visualize as {{< ui >}}Top List{{< /ui >}} to see your top logging services. Select a source, such as `info` or `warn`, and select {{< ui >}}View Logs{{< /ui >}} from the dropdown menu. The side panel populates logs based on error, so you quickly see which host and services require attention.
 
 {{< img src="/getting_started/logs/top-list-view-2024.png" alt="A top list in the Log Explorer">}}
 
-The Log Explorer offers the following features for log troubleshooting and exploration:
+The {{< ui >}}Log Explorer{{< /ui >}} offers the following features for log troubleshooting and exploration:
 - [Advanced search and filtering][31] with facets and queries
 - [Log Analytics][17] for grouping logs into patterns and aggregating data
 - [Visualizations][28] to display log data in various formats
@@ -124,7 +118,7 @@ For detailed information about all Log Explorer features, see the [Log Explorer 
 
 ## What's next?
 
-Once a logging source is configured, and your logs are available in the Log Explorer, you can begin to explore a few other areas of log management.
+Once a logging source is configured, and your logs are available in the {{< ui >}}Log Explorer{{< /ui >}}, you can begin to explore a few other areas of log management.
 
 ### Log configuration
 

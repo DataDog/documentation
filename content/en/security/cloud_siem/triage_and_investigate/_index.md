@@ -5,6 +5,10 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/risky-behavior-cloud-environments/"
   tag: "Blog"
   text: "Identify risky behavior in cloud environments"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-detect-investigate-threats"
+  tag: "Learning Center"
+  text: "Detect and Investigate Threats with Cloud SIEM"
+
 ---
 
 ## Overview

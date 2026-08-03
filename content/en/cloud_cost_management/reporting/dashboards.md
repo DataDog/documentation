@@ -44,7 +44,7 @@ You can add cost visualizations to your dashboards using several methods:
 
 1. Navigate to [**Cloud Cost > Analyze > Explorer**][7] in Datadog.
 2. Build your cost query using filters, groupings, and time ranges.
-3. Click **More** and select **Export to Dashboard**.
+3. Click {{< ui >}}More{{< /ui >}} and select {{< ui >}}Export to Dashboard{{< /ui >}}.
 4. Choose an existing dashboard or create one.
 5. Customize the widget title and settings.
 
@@ -56,7 +56,7 @@ The cost widget appears on your dashboard and updates automatically based on you
 
 1. Go to [**Cloud Cost > Analyze > Reports**][8] in Datadog.
 2. Open an existing saved report or create one.
-3. Click **More** and select **Export to Dashboard**.
+3. Click {{< ui >}}More{{< /ui >}} and select {{< ui >}}Export to Dashboard{{< /ui >}}.
 4. Choose an existing dashboard or create one.
 5. Customize the widget title and settings.
 
@@ -65,11 +65,11 @@ The cost widget appears on your dashboard and updates automatically based on you
 ### Create a cost widget directly on a dashboard
 
 1. Open any dashboard or create one.
-2. Click **Add Widgets** or **Edit Dashboard**.
+2. Click {{< ui >}}Add Widgets{{< /ui >}} or {{< ui >}}Edit Dashboard{{< /ui >}}.
 3. Search for and select a cost widget from the widget tray:
-   - **Cost Summary**: Visualize cost trends over time with customizable filters and groupings
-   - **Cost Budget**: Track spending against budget targets and forecast future costs
-   - **Cloud Cost**: Create custom cost queries with advanced filtering options
+   - {{< ui >}}Cost Summary{{< /ui >}}: Visualize cost trends over time with customizable filters and groupings
+   - {{< ui >}}Cost Budget{{< /ui >}}: Track spending against budget targets and forecast future costs
+   - {{< ui >}}Cloud Cost{{< /ui >}}: Create custom cost queries with advanced filtering options
 
    {{< img src="cloud_cost/reporting/dashboards/create-cost-widget-from-dashboard.png" alt="Dashboard widget tray displaying Cost Summary, Cost Budget, and Cloud Cost widget options" style="width:100%;" >}}
 4. Configure your cost query, filters, and visualization options.

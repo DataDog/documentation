@@ -16,7 +16,7 @@ On-Call schedules are structured in layers, where each layer covers different pa
 
 Consider the following example schedule:
 
-{{< img src="service_management/oncall/schedule.png" alt="A sample schedule, with multiple layers for JP, EU, and US business hours." style="width:100%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="A sample schedule, with multiple layers for JP, EU, and US business hours." style="width:100%;" >}}
 
 There are four layers:
 - **JP Business Hours**: A person named DM covers Japanese business hours, which begin (from a UTC perspective) each day. Repeats every day from Monday to Friday.
@@ -49,7 +49,7 @@ To send a Page to the on-call person for a given schedule, reference the schedul
 ### Overrides {#overrides}
 Overrides are modifications made to the scheduled on-call shifts. They can accommodate changes such as temporary shift adjustments and holidays.
 
-{{< img src="service_management/oncall/schedule_override.png" alt="When editing a schedule, a shift is selected. A dialog appears with an Override button." style="width:100%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override.png" alt="When editing a schedule, a shift is selected. A dialog appears with an Override button." style="width:100%;" >}}
 
 To completely or partially override a shift, select the shift and click **Override**.
 
@@ -57,7 +57,7 @@ To completely or partially override a shift, select the shift and click **Overri
 
 If you are part of an On-Call rotation, and you know that you will be out of office during your shift, you can request an override in Slack or Microsoft Teams. Type `/dd override`, select the timeframe to be overridden, and add a description. This sends a request to the channel:
 
-{{< img src="service_management/oncall/schedule_override_request.png" alt="In Slack, a message from Datadog Staging reads: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' A button labeled 'Take it' appears at the end of the message." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedules/schedule_override_request.png" alt="In Slack, a message from Datadog Staging reads: '@Daljeet has an override request. Schedule: [Primary] Payments & Transactions (payments-transactions). Start: Today, 1:00PM. End: Today, 3:00 PM. Duration: 2h. Note: Doctor's appointment. Will offer cookies for override.' A button labeled 'Take it' appears at the end of the message." style="width:80%;" >}}
 
 Other channel members can select **Take it** to schedule themselves to override your shift.
 
@@ -96,7 +96,7 @@ Your calendar is automatically updated if your on-call shifts change. To revoke 
 
 ##### 🔔 Get Notified
 
-Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call profile settings][6].
+Enable reminders for upcoming shifts in your calendar app. You can also configure custom shift notifications through SMS, push, or email in your [Datadog On-Call notification preferences][6].
 
 
 #### Troubleshooting schedule exports
@@ -121,4 +121,4 @@ When team members leave your organisation, they are not automatically removed fr
 [3]: https://support.google.com/calendar/answer/37100?hl=en&co=GENIE.Platform%3DDesktop
 [4]: https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-com-or-outlook-on-the-web-cff1429c-5af6-41ec-a5b4-74f2c278e98c
 [5]: https://support.apple.com/en-us/102301
-[6]: /incident_response/on-call/profile_settings/
+[6]: /incident_response/on-call/notification_preferences/

@@ -13,7 +13,7 @@ further_reading:
 
 If you experience issues with the [Datadog Code Security MCP Server][3], use the following solutions to diagnose and resolve common problems.
 
-<div class="alert alert-info">This MCP server is separate from the <a href="/bits_ai/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
+<div class="alert alert-info">This MCP server is separate from the <a href="/mcp_server">Datadog MCP Server</a>, which provides cloud-based access to Datadog features and data. The Code Security MCP Server runs locally and focuses on code-level security scanning.</div>
 
 ## Binary not found
 

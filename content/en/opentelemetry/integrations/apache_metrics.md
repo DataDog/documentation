@@ -27,7 +27,7 @@ See the [Apache receiver documentation][1] for detailed configuration options an
 
 {{< mapping-table resource="apache.csv">}}
 
-See [OpenTelemetry Metrics Mapping][2] for more information.
+For the full mapping between OpenTelemetry and Datadog metric names, see [OpenTelemetry Metrics Mapping][2].
 
 ## Further reading
 

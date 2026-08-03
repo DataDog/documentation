@@ -1,0 +1,31 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "queries": [
+        {
+          "data_source": "apm_dependency_stats",
+          "name": "a",
+          "env": "ci",
+          "service": "cassandra",
+          "stat": "avg_duration",
+          "operation_name": "cassandra.query",
+          "resource_name": "DELETE FROM monitor_history.monitor_state_change_history WHERE org_id = ? AND monitor_id IN ? AND group = ?",
+          "primary_tag_name": "datacenter",
+          "primary_tag_value": "edge-eu1.prod.dog"
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "scalar_request"
+  }
+}

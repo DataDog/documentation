@@ -12,6 +12,12 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 App and API Protection for Go installation requirements can be abstract and the Go toolchain
 cross-compilation and CGO capabilities can make precise installation steps difficult to understand.
 
@@ -244,8 +250,15 @@ docker run appsec-go-test-app
 To verify that App and API Protection is working correctly:
    
 To see App and API Protection threat detection in action, send known attack patterns to your application. For example, trigger the [Security Scanner Detected][9] rule by running a file that contains the following curl script:
-<div>
-<pre><code>for ((i=1;i<=250;i++)); <br>do<br># Target existing service’s routes<br>curl https://your-application-url/existing-route -A Arachni/v1.0;<br># Target non existing service’s routes<br>curl https://your-application-url/non-existing-route -A Arachni/v1.0;<br>done</code></pre></div>
+```bash
+for ((i=1;i<=250;i++));
+do
+  # Target existing service’s routes
+  curl https://your-application-url/existing-route -A Arachni/v1.0;
+  # Target non existing service’s routes
+  curl https://your-application-url/non-existing-route -A Arachni/v1.0;
+done
+```
 
 A few minutes after you enable your application and exercise it, **threat information appears in the [Application Trace and Signals Explorer][8] in Datadog**.
 

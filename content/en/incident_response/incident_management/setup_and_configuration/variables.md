@@ -1,6 +1,6 @@
 ---
 title: Incident Variables Reference
-description: "A reference for all available template variables in Incident Management used in notification, postmortem, and Jira templates."
+description: "A reference for all available template variables in Incident Management used in notification, postmortem, Jira, and channel name templates."
 further_reading:
 - link: "/incident_response/incident_management/setup_and_configuration/templates"
   tag: "Documentation"
@@ -15,13 +15,14 @@ further_reading:
 
 ## Overview
 
-Incident variables are template variables that dynamically inject incident data into notifications, postmortems, and Jira issues. Use them to automatically populate templates with relevant incident context, reducing manual effort during and after an incident.
+Incident variables are template variables that dynamically inject incident data into notifications, postmortems, Jira issues, and channel names. Use them to automatically populate templates with relevant incident context, reducing manual effort during and after an incident.
 
-Variables are available in three template types:
+Variables are available in four template types:
 
 - **Notifications**: Used in manual and automated incident notifications sent to email, Slack, or other channels.
 - **Postmortem templates**: Used to auto-populate Datadog Notebooks or Confluence pages when generating a postmortem.
 - **Jira templates**: Used to map incident fields to Jira issue fields when a Jira issue is created from an incident.
+- **Channel name templates**: Used to generate the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident.
 
 **Note**: In Jira templates, variables are displayed without their prefix. For example, `{{incident.title}}` appears as `{{ title }}` in the Jira template editor. The variables behave the same way.
 
@@ -78,8 +79,30 @@ The following variables work only in postmortem templates. They are not availabl
 | `{{incident.card}}` | Inserts a self-updating incident card into the postmortem. **Only available for postmortems created in Datadog Notebooks.** This variable does not work for postmortems created in third-party locations such as Confluence or Google Drive. |
 | `{{incident.timeline}}` | Copies all timeline events from the incident into the postmortem when used in a postmortem template. |
 
+## Variables available only in channel name templates
+
+Channel name templates configure the name of the Slack channel, Microsoft Teams channel, or Google Chat space that Datadog automatically creates for an incident. Configure these templates in the [Slack][3], [Microsoft Teams][4], or [Google Chat][5] integration settings.
+
+Channel name templates support a different, smaller set of variables than notification, postmortem, and Jira templates, and use a syntax without the `incident.` prefix.
+
+| Variable | Description |
+|---|---|
+| `{{public_id}}` | The incident's numeric ID. |
+| `{{title}}` | The incident title. |
+| `{{created}}` | The incident's creation date, in `MM_DD_YYYY` format, in the timezone you configure for the channel name template. |
+| `{{yyyy}}` | The four-digit year the incident was created, in the timezone you configure for the channel name template. |
+| `{{mm}}` | The two-digit month the incident was created, in the timezone you configure for the channel name template. |
+| `{{dd}}` | The two-digit day of month the incident was created, in the timezone you configure for the channel name template. |
+| `{{severity}}` | The incident's severity. |
+| `{{severity_number}}` | The incident's severity, as a number (for example, `1` for `SEV-1`). |
+| `{{random_adjective}}` | A random adjective. |
+| `{{random_noun}}` | A random noun. |
+| `{{slug}}` | A slug value. When the slug source is set to `servicenow`, this displays the ServiceNow record number. |
+
+**Note**: Because Slack, Microsoft Teams, and Google Chat enforce their own channel naming restrictions, Datadog converts the rendered channel name to lowercase and replaces unsupported characters.
+
 ## AI variables
-{{< site-region region="gov" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}<div class="alert alert-danger"> AI variables are not supported in {{< region-param key="dd_site_name" >}}.</div>{{< /site-region >}}
 
 AI variables are available in notification and postmortem templates. Your organization must have AI enabled.
 
@@ -109,3 +132,6 @@ AI variables are available in notification and postmortem templates. Your organi
 
 [1]: /incident_response/incident_management/setup_and_configuration/information#status-levels
 [2]: /incident_response/incident_management/setup_and_configuration/property_fields
+[3]: /incident_response/incident_management/setup_and_configuration/integrations/slack/#incident-channels
+[4]: /incident_response/incident_management/setup_and_configuration/integrations/microsoft_teams/#automatic-channel-creation
+[5]: /incident_response/incident_management/setup_and_configuration/integrations/google_chat/#incident-spaces

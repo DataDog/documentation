@@ -42,5 +42,5 @@ Watchdog intenta determinar si la nueva implementación es la causa verosímil d
 - La tasa de error de la nueva versión no ha sido significativamente superior a la de las versiones anteriores.
 - Este patrón de error es común durante las implementaciones del servicio, incluso cuando la nueva versión del código no presenta errores.
 
-[2]: /es/service_management/events/explorer
+[2]: /es/events/explorer
 [3]: https://app.datadoghq.com/monitors/create

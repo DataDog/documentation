@@ -13,9 +13,9 @@ Use the EKS Workload component to visualize Amazon EKS workloads from your Amazo
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a fill color for the top of the component and an accent color for the bottom. You can use the same colors for the 2D and 3D views or different colors for each.
-- **Name**: Enter a name for the workload.
-- **Type**: Select the type of workload to use.
+- {{< ui >}}Color{{< /ui >}}: Select a fill color for the top of the component and an accent color for the bottom. You can use the same colors for the 2D and 3D views or different colors for each.
+- {{< ui >}}Name{{< /ui >}}: Enter a name for the workload.
+- {{< ui >}}Type{{< /ui >}}: Select the type of workload to use.
 
 ## API
 

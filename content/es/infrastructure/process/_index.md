@@ -5,53 +5,51 @@ aliases:
 further_reading:
 - link: https://www.datadoghq.com/blog/live-process-monitoring/
   tag: Blog
-  text: Monitorizar los procesos con Datadog
+  text: Monitorea tus procesos con Datadog
 - link: /infrastructure/process/generate_process_metrics/
   tag: Documentación
-  text: Aumentar la retención de datos de procesos con métricas
+  text: Aumenta la retención de datos de procesos con métricas
 - link: /infrastructure/livecontainers
   tag: Documentación
-  text: Obtener visibilidad en tiempo real de todos los contenedores de tu entorno
+  text: Obtén visibilidad en tiempo real de todos los contenedores en tu entorno
 - link: https://www.datadoghq.com/blog/monitor-third-party-software-with-live-processes/
   tag: Blog
-  text: Correlacionar el rendimiento del software y el consumo de recursos con las
-    vistas guardadas
+  text: Correlaciona el rendimiento del software y el consumo de recursos con vistas
+    guardadas
 - link: https://www.datadoghq.com/blog/process-level-data/
   tag: Blog
-  text: Solucionar problemas con mayor rapidez con datos de red y aplicación a nivel
-    de proceso
+  text: Resuelve problemas más rápido con datos de aplicaciones y redes a nivel de
+    proceso
 - link: https://www.datadoghq.com/blog/watchdog-live-processes/
   tag: Blog
-  text: Solucionar problemas de anomalías en el rendimiento de la carga de trabajo
-    con Watchdog Insights para Live Processes
+  text: Soluciona anomalías en el rendimiento de la carga de trabajo con Watchdog
+    Insights for Live Processes.
 title: Live Processes
 ---
-
-
 <div class="alert alert-info">
-Live Processes se encuentra incluido en el plan Enterprise. Para todos los demás planes, ponte en contacto con la persona encargada de tu cuenta o escribe a <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> a fin de solicitar esta función.
+Live Processes and Live Process Monitoring están incluidos en el plan Enterprise. Para todos los demás planes, contacta a tu representante de cuenta o <a href="mailto:success@datadoghq.com">success@datadoghq.com</a> para solicitar esta función.
 </div>
 
-## Introducción
+## Introducción {#introduction}
 
-Live Processes de Datadog te brinda visibilidad en tiempo real de los procesos que se ejecutan en tu infraestructura. Utiliza Live Processes para:
+Live Processes de Datadog te brindan visibilidad en tiempo real de los procesos que se ejecutan en tu infraestructura. Utiliza Live Processes para:
 
 * Ver todos tus procesos en ejecución en un solo lugar
-* Desglosar el consumo de recursos en tus hosts y contenedores a nivel de proceso
-* Consultar procesos que se ejecutan en un host específico, en una zona específica o que ejecutan una carga de trabajo específica
-* Monitorizar el rendimiento del software interno y de terceros que ejecutas con métricas del sistema con una granularidad de dos segundos
-* Añadir contexto a tus dashboards y notebooks
+* Desglosa el consumo de recursos en tus servidores y contenedores a nivel de proceso.
+* Consulta los procesos que se ejecutan en un servidor específico, en una zona específica, o que ejecutan una carga de trabajo específica.
+* Monitorea el rendimiento del software interno y de terceros que utilizas mediante métricas del sistema con una granularidad de dos segundos
+* Agrega contexto a tus tableros y notebooks
 
-{{< img src="infrastructure/process/live_processes_main.png" alt="Información general sobre Live Processes" >}}
+{{< img src="infrastructure/process/live_processes_main.png" alt="Resumen de Procesos en Vivo" >}}
 
-## Instalación
+## Instalación {#installation}
 
-Si utilizas el Agent 5, sigue este [proceso de instalación específico][1]. Si utilizas el Agent 6 o 7, [consulta las instrucciones a continuación][2].
+Si estás utilizando Agent 5, sigue este [proceso de instalación específico][1]. Si estás utilizando Agent 6 o 7, [consulta las instrucciones a continuación][2].
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Una vez instalado el Datadog Agent, habilita la recopilación de Live Processes al editar el [archivo de configuración principal del Agent][1] al establecer el siguiente parámetro en `true`:
+Una vez que se haya instalado el Datadog Agent, habilita la recopilación de Live Processes editando el [Agent main configuration file][1] y estableciendo el siguiente parámetro en `true`:
 
 ```yaml
 process_config:
@@ -59,11 +57,11 @@ process_config:
     enabled: true
 ```
 
-Además, algunas opciones de configuración se pueden establecer como variables de entorno.
+Además, algunas opciones de configuración pueden establecerse como variables de entorno.
 
-**Nota**: Las opciones establecidas como variables de entorno anulan las configuraciones definidas en el archivo de configuración.
+**Nota**: Las opciones establecidas como variables de entorno anulan los ajustes definidos en el archivo de configuración.
 
-Una vez que se haya completado la configuración, [reinicia el Agent][2].
+Después de completar la configuración, [reinicia el Agent][2].
 
 
 [1]: /es/agent/configuration/agent-configuration-files/
@@ -71,7 +69,7 @@ Una vez que se haya completado la configuración, [reinicia el Agent][2].
 {{% /tab %}}
 {{% tab "Docker" %}}
 
-Sigue las instrucciones para el [Docker Agent][1], al introducir los siguientes atributos, además de cualquier otro ajuste personalizado que resulte apropiado:
+Sigue las instrucciones para el [Docker Agent][1], pasando los siguientes atributos, además de cualquier otra configuración personalizada según sea apropiado:
 
 ```text
 -v /etc/passwd:/etc/passwd:ro
@@ -80,8 +78,8 @@ Sigue las instrucciones para el [Docker Agent][1], al introducir los siguientes 
 
 **Nota**:
 
-- Para recopilar información sobre el contenedor en la instalación estándar, el usuario `dd-agent` debe tener permisos a fin de acceder a `docker.sock`.
-- La ejecución del Agent como contenedor aún te permite recopilar procesos del host.
+- Para recopilar información del contenedor en la instalación estándar, el usuario `dd-agent` debe tener permisos para acceder a `docker.sock`.
+- Ejecutar el Agent como un contenedor aún te permite recopilar procesos del servidor.
 
 
 [1]: /es/agent/docker/#run-the-docker-agent
@@ -98,13 +96,13 @@ datadog:
         processCollection: true
 ```
 
-Luego, actualiza tu Helm chart:
+Luego, actualiza tu gráfico de Helm:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog
 ```
 
-**Nota**: La ejecución del Agent como contenedor aún te permite recopilar procesos del host.
+Ejecutar el Agent como un contenedor aún permite recopilar procesos del servidor.
 
 [1]: https://github.com/DataDog/helm-charts/blob/master/charts/datadog/values.yaml
 {{% /tab %}}
@@ -129,12 +127,12 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-**Nota**: La ejecución del Agent como contenedor aún te permite recopilar procesos del host.
+Ejecutar el Agent como un contenedor aún permite recopilar procesos del servidor.
 
 {{% /tab %}}
 {{% tab "Kubernetes (Manual)" %}}
 
-En el manifiesto `datadog-agent.yaml` utilizado para crear el DaemonSet, añade las siguientes variables de entorno, montaje de volumen y volumen:
+En el manifiesto `datadog-agent.yaml` utilizado para crear el DaemonSet, agrega las siguientes variables ambientales, montaje de volumen y volumen:
 
 ```yaml
  env:
@@ -150,20 +148,20 @@ En el manifiesto `datadog-agent.yaml` utilizado para crear el DaemonSet, añade 
       name: passwd
 ```
 
-Consulta las páginas de información de la [Instalación de DaemonSet][1] estándar y el [Docker Agent][2] para obtener documentación adicional.
+Consulta la instalación estándar del [DaemonSet][1] y las páginas de información del [Docker Agent][2] para más documentación.
 
-**Nota**: La ejecución del Agent como contenedor aún te permite recopilar procesos del host.
+Ejecutar el Agent como un contenedor aún permite recopilar procesos del servidor.
 
 [1]: /es/containers/guide/kubernetes_daemonset
 [2]: /es/agent/docker/#run-the-docker-agent
 {{% /tab %}}
 {{% tab "AWS ECS Fargate" %}}
 
-<div class="alert alert-info">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza la versión del Datadog Agent 7.50.0 o una posterior.</div>
+<div class="alert alert-info">Puedes ver tus procesos de ECS Fargate en Datadog. Para ver su relación con los contenedores de ECS Fargate, utiliza el Datadog Agent v7.50.0 o posterior.</div>
 
-Para recopilar procesos, el Datadog Agent se debe ejecutar como un contenedor en la tarea.
+Para recopilar procesos, el Datadog Agent debe estar ejecutándose como un contenedor dentro de la tarea.
 
-Para habilitar la monitorización de procesos en ECS Fargate, establece la variable de entorno `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` en `true` en la definición de contenedor del Datadog Agent en la definición de tarea.
+Para habilitar la monitorización de procesos en ECS Fargate, establece la variable de entorno `DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED` en `true` en la definición del contenedor del Datadog Agent dentro de la definición de la tarea.
 
 Por ejemplo:
 
@@ -189,17 +187,17 @@ Por ejemplo:
 }
 ```
 
-Para comenzar a recopilar información sobre el proceso en ECS Fargate, añade el [parámetro `PidMode`][3] a la definición de tarea y establécela en `task` de la siguiente manera:
+Para comenzar a recopilar información de procesos en ECS Fargate, agrega el [`pidMode` parámetro][3] a la Definición de Tarea y configúralo en `task` de la siguiente manera:
 
 ```text
 "pidMode": "task"
 ```
 
-Una vez que se haya habilitado, utiliza la faceta de contenedores de `AWS Fargate` en la [página de Live Processes][1] para filtrar procesos por ECS, o ingresa `fargate:ecs` en la consulta de búsqueda.
+Una vez habilitado, utiliza la faceta `AWS Fargate` Containers en la [Live Processes page][1] para filtrar los procesos que se ejecutan en ECS, o ingresa `fargate:ecs` en la consulta de búsqueda.
 
 {{< img src="infrastructure/process/fargate_ecs.png" alt="Procesos en AWS Fargate" >}}
 
-Para obtener más información sobre la instalación del Datadog Agent con AWS ECS Fargate, consulta la [documentación de la integración de ECS Fargate][2].
+Para más información sobre la instalación del Datadog Agent con AWS ECS Fargate, consulta la [documentación de integración de ECS Fargate][2].
 
 [1]: https://app.datadoghq.com/process
 [2]: /es/integrations/ecs_fargate/#installation
@@ -208,17 +206,17 @@ Para obtener más información sobre la instalación del Datadog Agent con AWS E
 {{% /tab %}}
 {{< /tabs >}}
 
-### Estadísticas de E/S
+### Estadísticas de I/O {#io-stats}
 
-El sondeo del sistema de Datadog, que se ejecuta con privilegios elevados, puede recopilar estadísticas de E/S y archivos abiertos. Para habilitar el módulo de proceso del sondeo del sistema, utiliza la siguiente configuración:
+Las estadísticas de I/O y archivos abiertos pueden ser recopiladas por el sistema de sondeo de Datadog, que se ejecuta con privilegios elevados. Para recopilar estas estadísticas, habilita el módulo de procesos del sondeo del sistema:
 
-1. Copia la configuración de ejemplo del sondeo del sistema:
+1. Copia la configuración de ejemplo del sistema-probe:
 
    ```shell
    sudo -u dd-agent install -m 0640 /etc/datadog-agent/system-probe.yaml.example /etc/datadog-agent/system-probe.yaml
    ```
 
-2. Edita `/etc/datadog-agent/system-probe.yaml` para habilitar el módulo de proceso:
+2. Edita `/etc/datadog-agent/system-probe.yaml` para habilitar el módulo de procesos:
 
    ```yaml
    system_probe_config:
@@ -226,29 +224,72 @@ El sondeo del sistema de Datadog, que se ejecuta con privilegios elevados, puede
        enabled: true
    ```
 
-5. [Reinicia el Agent][12]:
+5. [Reiniciar el Agente][12]:
 
    ```shell
    sudo systemctl restart datadog-agent
    ```
 
-   **Nota**: Si el comando `systemctl` no se encuentra disponible en tu sistema, ejecuta el siguiente comando en su lugar: `sudo service datadog-agent restart`
+   **Nota**: Si el comando `systemctl` no está disponible en tu sistema, ejecuta el siguiente comando en su lugar: `sudo service datadog-agent restart`
 
 
-### Limpieza de argumentos de proceso
+### Huella optimizada para la recopilación de procesos {#optimized-process-collection-footprint}
 
-Para ocultar datos confidenciales en la página de Live Processes, el Agent limpia los argumentos confidenciales de la línea de comandos del proceso. Esta función se encuentra habilitada de manera predeterminada y cualquier argumento de proceso que coincida con una de las siguientes palabras tiene su valor oculto.
+En Linux, la huella general del Datadog Agent se reduce al ejecutar la recopilación de contenedores y procesos en el Datadog Agent principal (en lugar del Process Agent separado). En la versión v7.65.0+ del Datadog Agent, esto está habilitado por defecto.  **Nota**: el Process Agent sigue siendo necesario para [Cloud Network Monitoring][14].
+
+El estado del Agent para esta función se lista en la sección `Process Component`, por ejemplo:
+
+```text
+=================
+Process Component
+=================
+
+
+  Enabled Checks: [process rtprocess]
+  System Probe Process Module Status: Not running
+  Process Language Detection Enabled: False
+
+  =================
+  Process Endpoints
+  =================
+    https://process.datadoghq.com. - API Key ending with:
+        - *****
+
+  =========
+  Collector
+  =========
+    Last collection time: 2026-01-14 10:04:49
+    Docker socket: /var/run/docker.sock
+    Number of processes: 48
+    Number of containers: 0
+    Process Queue length: 0
+    RTProcess Queue length: 0
+    Connections Queue length: 0
+    Event Queue length: 0
+    Pod Queue length: 0
+    Process Bytes enqueued: 0
+    RTProcess Bytes enqueued: 0
+    Connections Bytes enqueued: 0
+    Event Bytes enqueued: 0
+    Pod Bytes enqueued: 0
+    Drop Check Payloads: []
+    Number of submission errors: 0
+```
+
+### Limpieza de argumentos de proceso {#process-arguments-scrubbing}
+
+Para ocultar datos sensibles en la página de Live Processes, el Agent elimina argumentos sensibles de la línea de comandos del proceso. Esta función está habilitada por defecto y cualquier argumento de proceso que coincida con una de las siguientes palabras tiene su valor oculto.
 
 ```text
 "password", "passwd", "mysql_pwd", "access_token", "auth_token", "api_key", "apikey", "secret", "credentials", "stripetoken"
 ```
 
-**Nota**: La coincidencia **no distingue entre mayúsculas y minúsculas**.
+**Nota**: La coincidencia es **insensible a mayúsculas**.
 
 {{< tabs >}}
 {{% tab "Linux/Windows" %}}
 
-Define tu propia lista para fusionarla con la predeterminada, con el campo `custom_sensitive_words` en el archivo `datadog.yaml` en la sección `process_config`. Utiliza comodines (`*`) para definir tu propio contexto coincidente. Sin embargo, no se admite un comodín único (`'*'`) como una palabra confidencial.
+Define tu propia lista para ser fusionada con la predeterminada, utilizando el campo `custom_sensitive_words` en el archivo `datadog.yaml` bajo la sección `process_config`. Usa comodines (`*`) para definir tu propio alcance de coincidencia. Sin embargo, un solo comodín (`'*'`) no es compatible como una palabra sensible.
 
 ```yaml
 process_config:
@@ -256,15 +297,15 @@ process_config:
     custom_sensitive_words: ['personal_key', '*token', 'sql*', '*pass*d*']
 ```
 
-**Nota**: Las palabras en `custom_sensitive_words` solo deben tener caracteres alfanuméricos, guiones bajos o comodines (`'*'`). No se admiten palabras confidenciales que solo contengan comodines.
+**Nota**: Las palabras en `custom_sensitive_words` deben contener solo caracteres alfanuméricos, guiones bajos o comodines (`'*'`). Una palabra sensible que contenga solo comodines no es compatible.
 
-En la siguiente imagen se muestra un proceso en la página de Live Processes cuyos argumentos se han ocultado con la configuración anterior.
+La siguiente imagen muestra un proceso en la página de Live Processes cuyos argumentos han sido ocultados utilizando la configuración anterior.
 
 {{< img src="infrastructure/process/process_arg_scrubbing.png" alt="Limpieza de argumentos de proceso" style="width:100%;">}}
 
-Establece `scrub_args` en `false` para deshabilitar por completo la limpieza de argumentos de proceso.
+Establezca `scrub_args` en `false` para deshabilitar completamente la limpieza de argumentos del proceso.
 
-También puedes limpiar **todos** los argumentos de los procesos al habilitar la marca `strip_proc_arguments` en tu archivo de configuración `datadog.yaml`:
+También puede limpiar **todos** los argumentos de los procesos habilitando la `strip_proc_arguments` bandera en su `datadog.yaml` archivo de configuración:
 
 ```yaml
 process_config:
@@ -275,7 +316,7 @@ process_config:
 
 {{% tab "Helm" %}}
 
-Puedes utilizar el Helm chart para definir tu propia lista, que se fusiona con la predeterminada. Añade las variables de entorno `DD_SCRUB_ARGS` y `DD_CUSTOM_SENSITIVE_WORDS` a tu archivo `datadog-values.yaml` y actualiza tu Datadog Helm chart:
+Puede usar el Helm chart para definir su propia lista, que se fusiona con la predeterminada. Agregue las variables de entorno `DD_SCRUB_ARGS` y `DD_CUSTOM_SENSITIVE_WORDS` a su `datadog-values.yaml` archivo, y actualice su Datadog Helm chart:
 
 ```yaml
 datadog:
@@ -294,11 +335,11 @@ datadog:
 ```
 
 
-Utiliza comodines (`*`) para definir tu propio contexto coincidente. Sin embargo, no se admite un solo comodín (`'*'`) como palabra confidencial.
+Utilice comodines (`*`) para definir su propio alcance de coincidencia. Sin embargo, un solo comodín (`'*'`) no es compatible como una palabra sensible.
 
-Establece `DD_SCRUB_ARGS` en `false` para deshabilitar por completo la limpieza de argumentos de proceso.
+Establezca `DD_SCRUB_ARGS` en `false` para deshabilitar completamente la limpieza de argumentos del proceso.
 
-De manera alternativa, puedes eliminar **todos** los argumentos de los procesos al habilitar la variable `DD_STRIP_PROCESS_ARGS` en tu archivo `datadog-values.yaml`:
+Alternativamente, puede limpiar **todos** los argumentos de los procesos habilitando la `DD_STRIP_PROCESS_ARGS` variable en su `datadog-values.yaml` archivo:
 
 ```yaml
 datadog:
@@ -318,153 +359,164 @@ agents:
 {{< /tabs >}}
 
 
-## Consultas
+## Consultas {#queries}
 
-### Procesos de contexto
+### Definir el alcance de procesos {#scoping-processes}
 
-Los procesos son, por naturaleza, objetos de cardinalidad extremadamente alta. Para refinar tu contexto y ver procesos relevantes, puedes utilizar filtros de texto y etiquetas.
+Los procesos son, por naturaleza, objetos de cardinalidad extremadamente alta. Para refinar tu alcance y ver procesos relevantes, puedes usar filtros de texto y etiquetas.
 
-#### Filtros de texto
+#### Filtros de texto {#text-filters}
 
-Cuando ingresas una cadena de texto en la barra de búsqueda, la búsqueda de cadenas difusas se utiliza para consultar procesos que contienen esa cadena de texto en sus líneas de comando o rutas. Ingresa una cadena de dos o más caracteres para ver los resultados. A continuación se muestra el entorno de demostración de Datadog, filtrado con la cadena `postgres /9.`.
+Cuando ingresa una cadena de texto en la barra de búsqueda, se utiliza la búsqueda de cadenas difusas para consultar procesos que contengan esa cadena de texto en sus líneas de comando o rutas. Ingrese una cadena de dos o más caracteres para ver resultados. A continuación se muestra el entorno de demostración de Datadog, filtrado con la cadena `postgres /9.`.
 
-**Nota**: `/9.` ha coincidido en la ruta del comando, y `postgres` coincide con el propio comando.
+**Nota**: `/9.` ha coincidido en la ruta del comando, y `postgres` coincide con el comando en sí.
 
 {{< img src="infrastructure/process/postgres.png" alt="Postgres" style="width:80%;">}}
 
-Para combinar varias búsquedas de cadenas en una consulta compleja, utiliza cualquiera de los siguientes operadores booleanos:
+Para combinar múltiples búsquedas de cadenas en una consulta compleja, use cualquiera de los siguientes operadores booleanos:
 
 `AND`
-: **Intersección**: ambos términos están en los eventos seleccionados (si no se añade nada, se toma AND de manera predeterminada)<br> **Ejemplo**: `java AND elasticsearch`
+: **Intersección**: ambos términos están en los eventos seleccionados (si no se agrega nada, se toma AND por defecto)<br> **Ejemplo**: `java AND elasticsearch`
 
 `OR`
-: **Unión**: cualquiera de los términos se encuentra en los eventos seleccionados <br> **Ejemplo**: `java OR python`
+: **Unión**: cualquiera de los términos está contenido en los eventos seleccionados <br> **Ejemplo**: `java OR python`
 
 `NOT` / `!`
-: **Exclusión**: el siguiente término NO está en el evento. Puedes utilizar la palabra `NOT` o el carácter `!` para realizar la misma operación<br> **Ejemplo**: `java NOT elasticsearch` o `java !elasticsearch`
+: **Exclusión**: el siguiente término NO está en el evento. Puede usar la palabra `NOT` o el carácter `!` para realizar la misma operación<br> **Ejemplo**: `java NOT elasticsearch` o `java !elasticsearch`
 
-Utiliza paréntesis para agrupar operadores. Por ejemplo, `(NOT (elasticsearch OR kafka) java) OR python`.
+Utilice paréntesis para agrupar operadores juntos. Por ejemplo, `(NOT (elasticsearch OR kafka) java) OR python` .
 
-#### Filtros de etiquetas
+#### Filtros de etiquetas {#tag-filters}
 
-También puedes filtrar los procesos mediante las [etiquetas][3] de Datadog, como `host`, `pod`, `user` y `service`. Ingresa filtros de etiquetas directamente en la barra de búsqueda o selecciónalos en el panel de facetas en la izquierda de la página.
+También puede filtrar sus procesos utilizando etiquetas de Datadog [tags][3], como `host`, `pod`, `user` y `service`. Introduzca filtros de etiquetas directamente en la barra de búsqueda, o selecciónelos en el panel de facetas a la izquierda de la página.
 
-Datadog genera de manera automática una etiqueta `command`, para que puedas filtrar por:
+Datadog genera automáticamente una etiqueta `command`, para que pueda filtrar por:
 
 - Software de terceros, por ejemplo: `command:mongod`, `command:nginx`
-- Software de gestión de contenedores, por ejemplo: `command:docker`, `command:kubelet`)
-- Cargas de trabajo habituales, por ejemplo: `command:ssh`, `command:CRON`)
+- Software de gestión de contenedores, por ejemplo: `command:docker`, `command:kubelet`
+- Cargas de trabajo comunes, por ejemplo: `command:ssh`, `command:CRON`
 
-### Agregación de procesos
+#### Etiquetas de entorno en contenedores {#containerized-environment-tags}
 
-El [etiquetado][3] mejora la navegación. Además de todas las etiquetas existentes a nivel de host, los procesos se encuentran etiquetados por `user`.
-
-Asimismo, los procesos en contenedores de ECS también se encuentran etiquetados por:
+Además, los procesos en contenedores ECS también están etiquetados por:
 
 - `task_name`
 - `task_version`
 - `ecs_cluster`
 
-Los procesos en los contenedores de Kubernetes se encuentran etiquetados por:
+Los procesos en contenedores de Kubernetes están etiquetados por:
 
 - `pod_name`
-- `kube_pod_ip`
 - `kube_service`
 - `kube_namespace`
 - `kube_replica_set`
 - `kube_daemon_set`
 - `kube_job`
 - `kube_deployment`
-- `Kube_cluster`
+- `kube_cluster_name`
 
-Si se ha configurado el [etiquetado de servicios unificado][4], `env`, `service` y `version` se seleccionan de manera automática.
-Contar con estas etiquetas te permite vincular APM, logs, métricas y datos de proceso.
-**Nota**: Esta configuración solo se aplica a entornos contenedorizados.
+Si tienes la configuración para [unified service tagging][4] en su lugar, `env`, `service` y `version` se recogen automáticamente.
+Tener estas etiquetas disponibles le permite vincular APM, registros, métricas y datos de procesos.
+**Nota**: Esta configuración se aplica solo a entornos en contenedores.
 
-## Diagrama de dispersión
+#### Reglas para crear etiquetas personalizadas {#rules-to-create-custom-tags}
+<div class="alert alert-info">
+Requiere el <code>Process Tags Read</code> y <code>Process Tag Write</code>  permisos de rol de Datadog<br/>
+</div>
 
-Utiliza la analítica del diagrama de dispersión para comparar dos métricas entre sí a fin de comprender mejor el rendimiento de tus contenedores.
+Puede crear definiciones de reglas para agregar etiquetas manuales a los procesos basadas en la línea de comandos.
 
-Para acceder a la analítica del diagrama de dispersión [en la página de Procesos][5], haz clic en el botón _Show Summary graph_ (Mostrar gráfica de resumen) y selecciona la pestaña «Scatter Plot» (Diagrama de dispersión):
+1. En la pestaña **Administrar Etiquetas de Proceso**, selecciona el botón _Nueva Regla de Etiqueta de Proceso_
+2. Selecciona un proceso para usar como referencia
+3. Define los criterios de parseo y coincidencia para tu etiqueta.
+4. Si la validación pasa, crea una nueva regla
 
-{{< img src="infrastructure/process/scatterplot_selection.png" alt="Selección de diagrama de dispersión" style="width:60%;">}}
+Después de que se crea una regla, las etiquetas están disponibles para todos los valores de la línea de comandos del proceso que coinciden con los criterios de la regla. Estas etiquetas están disponibles en la búsqueda y se pueden usar en la definición de [Live Process Monitors][6] y [Custom Metrics][13].
 
-De manera predeterminada, la gráfica se agrupa por la clave de etiqueta `command`. El tamaño de cada punto representa la cantidad de procesos en ese grupo y al hacer clic en un punto se muestran los pids y contenedores individuales que contribuyen al grupo.
+## Gráfico de dispersión {#scatter-plot}
 
-La consulta en la parte superior de la analítica del diagrama de dispersión te permite controlar la analítica del diagrama de dispersión:
+Utiliza el análisis de gráfico de dispersión para comparar dos métricas entre sí con el fin de comprender mejor el rendimiento de tus contenedores.
 
-- Selección de métricas para mostrar.
+Para acceder al análisis de gráfico de dispersión [en la página de Procesos][5], haz clic en el botón _Mostrar gráfico de resumen_ y luego selecciona la pestaña "Gráfico de Dispersión":
+
+{{< img src="infrastructure/process/scatterplot_selection.png" alt="Selección de gráfico de dispersión" style="width:60%;">}}
+
+Por defecto, el gráfico agrupa por la clave de etiqueta `command`. El tamaño de cada punto representa el número de procesos en ese grupo, y al hacer clic en un punto se muestran los procesos y contenedores individuales que contribuyen al grupo.
+
+Las opciones en la parte superior del gráfico te permiten controlar tu análisis de gráfico de dispersión:
+
+- Selección de métricas a mostrar.
 - Selección del método de agregación para ambas métricas.
-- Selección de la escala de los ejes X e Y (_Lineal_/_Log_).
+- Selección de la escala de ambos ejes X e Y (_Lineal_/_Log_).
 
-{{< img src="infrastructure/process/scatterplot.png" alt="Inspección del contenedor" style="width:80%;">}}
+{{< img src="infrastructure/process/scatterplot.png" alt="Inspección de contenedor" style="width:80%;">}}
 
-## Monitores de proceso
+## Monitores de procesos {#process-monitors}
 
-Utiliza el [Monitor de Live Process][6] para generar alertas basadas en el recuento de cualquier grupo de procesos en hosts o etiquetas. Puedes configurar alertas de proceso en la [página de Monitores][7]. Para obtener más información, consulta la [documentación del Monitor de Live Process][6].
+Utiliza el [Live Process Monitor][6] para generar alertas basadas en el conteo de cualquier grupo de procesos a través de hosts o etiquetas. Puedes configurar alertas de procesos en la [página de Monitores][7]. Para aprender más, consulta la [documentación del Live Process Monitor][6].
 
-{{< img src="infrastructure/process/process_monitor.png" alt="Monitor de proceso" style="width:80%;">}}
+{{< img src="infrastructure/process/process_monitor.png" alt="Monitor de Proceso" style="width:80%;">}}
 
-## Procesos en dashboards y notebooks
+## Procesos en tableros y notebooks {#processes-in-dashboards-and-notebooks}
 
-Puedes graficar las métricas de proceso en dashboards y notebooks mediante el [widget de series temporales][8]. Para configurar:
-1. Selecciona Processes (Procesos) como fuente de datos
-2. Filtra por cadenas de texto en la barra de búsqueda
+Puedes graficar métricas de procesos en tableros y notebooks utilizando el [Timeseries widget][8]. Para configurar:
+1. Selecciona Procesos como fuente de datos
+2. Filtra usando cadenas de texto en la barra de búsqueda
 3. Selecciona una métrica de proceso para graficar
 4. Filtra usando etiquetas en el campo `From`
 
-{{< img src="infrastructure/process/process_widget.png" alt="Widget de procesos" style="width:80%;">}}
+{{< img src="infrastructure/process/process_widget.png" alt="Widget de Procesos" style="width:80%;">}}
 
-## Monitorización de software de terceros
+## Monitoreo de software de terceros {#monitoring-third-party-software}
 
-### Integraciones detectadas de manera automática
+### Integraciones autodetectadas {#autodetected-integrations}
 
-Datadog utiliza la recopilación de procesos para detectar de manera automática las tecnologías que se ejecutan en tus hosts. Esto identifica las integraciones de Datadog que pueden ayudarte a monitorizar dichas tecnologías. Estas integraciones detectadas de manera automática se muestran en la [búsqueda de integraciones][1]:
+Datadog utiliza la recolección de procesos para autodetectar las tecnologías que se ejecutan en tus hosts. Esto identifica las integraciones de Datadog que pueden ayudarte a monitorear estas tecnologías. Estas integraciones autodetectadas se muestran en la búsqueda de [Integrations][1]:
 
-{{< img src="getting_started/integrations/ad_integrations.png" alt="Integraciones detectadas de manera automática" >}}
+{{< img src="getting_started/integrations/ad_integrations.png" alt="Integraciones autodetectadas" >}}
 
-Cada integración puede adoptar uno de estos estados:
+Cada integración tiene uno de dos tipos de estado:
 
-- **+ Detected** (Detectada): esta integración no se ha habilitado en ninguno de los hosts que la ejecutan.
-- **✓ Partial Visibility** (Visibilidad parcial): esta integración se ha habilitado en algunos hosts, pero no todos la ejecutan.
+- **+ Detectado**: Esta integración no está habilitada en ningún host que la ejecute.
+- **✓ Visibilidad Parcial**: Esta integración está habilitada en algunos, pero no en todos los hosts relevantes que la ejecutan.
 
-Puedes encontrar los hosts que ejecutan la integración, pero en los que no se encuentra habilitada, en la pestaña **Hosts** del cuadro de integraciones.
+Los hosts que están ejecutando la integración, pero donde la integración no está habilitada, se pueden encontrar en la pestaña **Hosts** del mosaico de integraciones.
 
-### Vistas de integración
+### Vistas de integración {#integration-views}
 
-{{< img src="infrastructure/process/integration_views.png" alt="Vistas de integración" >}}
+{{< img src="infrastructure/process/integration_views.png" alt="Vistas de Integración" >}}
 
-Una vez que se ha detectado un software de terceros, Live Processes ayuda a analizar el rendimiento de ese software.
-1. Para comenzar, haz clic en *Views* (Vistas) en la parte superior derecha de la página a fin de abrir una lista de opciones preestablecidas, incluidas Nginx, Redis y Kafka.
-2. Selecciona una vista para que la página solo abarque los procesos que ejecutan ese software.
-3. Al inspeccionar un proceso pesado, cambia a la pestaña *Integration Metrics* (Métricas de integración) para analizar el estado del software en el host subyacente. Si ya has habilitado la integración de Datadog relevante, puedes ver todas las métricas de rendimiento recopiladas de la integración para distinguir entre un problema a nivel de host y software. Por ejemplo, ver picos correlacionados en la CPU del proceso y la latencia de las consultas MySQL puede indicar que una operación intensiva, como un escaneo completo de la tabla, esté retrasando la ejecución de otras consultas MySQL que dependen de los mismos recursos subyacentes.
+Después de que se ha detectado un software de terceros, Live Processes ayuda a analizar el rendimiento de ese software.
+1. Para comenzar, haz clic en *Views* en la parte superior derecha de la página para abrir una lista de opciones preestablecidas, incluyendo Nginx, Redis y Kafka.
+2. Haz clic en una visualización para limitar la página únicamente a los procesos que ejecutan ese software.
+3. Al inspeccionar un proceso pesado, cambia a la pestaña *Métricas de Integración* para analizar la salud del software en el host subyacente. Si ya ha habilitado la integración relevante de Datadog, puede ver todas las métricas de rendimiento recopiladas de la integración para distinguir entre un problema a nivel de host y un problema a nivel de software. Por ejemplo, ver picos correlacionados en el CPU del proceso y la latencia de las consultas de MySQL puede indicar que una operación intensiva, como un escaneo completo de la tabla, está retrasando la ejecución de otras consultas de MySQL que dependen de los mismos recursos subyacentes.
 
-Puedes personalizar las vistas de integración (por ejemplo, al agregar una consulta para procesos de Nginx por host) y otras consultas personalizadas al hacer clic en el botón *+Save* (Guardar) en la parte superior de la página. Esto guarda tu consulta, selecciones de columnas de la tabla y configuraciones de visualización. Crea vistas guardadas para acceder con rapidez a los procesos que te interesen sin configuración adicional y compartir datos de procesos con tus compañeros de equipo.
+Puede personalizar las vistas de integración (por ejemplo, al agregar una consulta para procesos de Nginx por host) y otras consultas personalizadas haciendo clic en el botón *+Guardar* en la parte superior de la página. Esto guarda su consulta, las selecciones de columnas de tabla y configuraciones de visualización. Crea visualizaciones guardadas para acceder rápidamente a los procesos que te interesan sin configuración adicional y para compartir datos de procesos con tus compañeros de equipo.
 
-## Procesos en toda la plataforma
+## Procesos en toda la plataforma {#processes-across-the-platform}
 
-### Live Containers
+### Contenedores en Vivo {#live-containers}
 
-Live Processes añade visibilidad adicional a los despliegues de tus contenedores al monitorizar los procesos que se ejecutan en cada uno de los contenedores. Haz clic en un contenedor en la página de [Live Containers][9] para ver su árbol de procesos, incluidos los comandos que está ejecutando y su consumo de recursos. Utiliza estos datos junto con otras métricas de contenedores para determinar la causa raíz de los contenedores o despliegues fallidos.
+Los Procesos en Vivo añaden visibilidad adicional a sus implementaciones de contenedores al monitorear los procesos que se ejecutan en cada uno de sus contenedores. Haga clic en un contenedor en la página [Contenedores en Vivo][9] para ver su árbol de procesos, incluidos los comandos que está ejecutando y su consumo de recursos. Utilice estos datos junto con otras métricas de contenedores para determinar la causa raíz de los contenedores o implementaciones que fallan.
 
-### APM
+### APM {#apm}
 
-En las [trazas (traces) de APM][10], puedes hacer clic en el tramo (span) de un servicio para ver los procesos que se ejecutan en tu infraestructura subyacente. Los procesos de tramo de un servicio se correlacionan con los hosts o pods en los que se ejecuta el servicio en el momento de la solicitud. Analiza métricas de proceso como CPU y memoria RSS junto con errores a nivel de código para distinguir entre problemas de infraestructura específicos de la aplicación y más amplios. Al hacer clic en un proceso, accederás a la página de Live Processes. Los procesos relacionados no son compatibles con trazas de navegador y serverless.
+En [Trazas de APM][10], puede hacer clic en el span de un servicio para ver los procesos que se ejecutan en su infraestructura subyacente. Los procesos del span de un servicio están correlacionados con los hosts o pods en los que se ejecuta el servicio en el momento de la solicitud. Analice métricas de procesos como CPU y memoria RSS junto con errores a nivel de código para distinguir entre problemas específicos de la aplicación y problemas más amplios de infraestructura. Hacer clic en un proceso lo lleva a la página de Procesos en Vivo. Los procesos relacionados no son compatibles con trazas sin servidor y de navegador.
 
-### Network Performance Monitoring
+### Cloud Network Monitoring {#cloud-network-monitoring}
 
-Cuando inspeccionas una dependencia en la página de [Network Analytics][11], puedes ver los procesos que se ejecutan en la infraestructura subyacente de los endpoints, como los servicios que se comunican entre sí. Utiliza los metadatos del proceso para determinar si una conectividad de red deficiente (indicada por una gran cantidad de retransmisiones de TCP) o una latencia de llamada de red alta (indicada por un tiempo de ida y vuelta de TCP alto) podría deberse a cargas de trabajo pesadas que consumen los recursos de esos endpoints y, por lo tanto, afectan al estado y eficiencia de su comunicación.
+Cuando inspecciona una dependencia en la página [Network Analytics][11], puede ver procesos que se ejecutan en la infraestructura subyacente de los puntos de conexión, como servicios que se comunican entre sí. Utilice los metadatos del proceso para determinar si la mala conectividad de red (indicada por un alto número de retransmisiones TCP) o la alta latencia de llamadas de red (indicada por un alto tiempo de ida y vuelta TCP) podrían deberse a cargas de trabajo pesadas que consumen los recursos de esos puntos de conexión, afectando así la salud y eficiencia de su comunicación.
 
-## Monitorización en tiempo real
+## Monitoreo en tiempo real {#real-time-monitoring}
 
-Mientras se trabaja de manera activa con Live Processes, las métricas se recopilan con una resolución de 2 segundos. Esto es importante para métricas volátiles como la CPU. En segundo plano, para el contexto histórico, las métricas se recopilan con una resolución de 10 segundos.
+Los procesos se recopilan normalmente con una resolución de 10 segundos. Mientras se trabaja activamente en la página de Live Processes, las métricas se recopilan con una resolución de 2 segundos y se muestran en tiempo real, lo cual es importante para métricas volátiles como la CPU. Sin embargo, para contexto histórico, las métricas se ingieren a la resolución predeterminada de 10 segundos.
 
-## Información adicional
+## Información adicional {#additional-information}
 
-- La recopilación de datos en tiempo real (2 segundos) se desactiva después de 30 minutos. Para reanudar la recopilación en tiempo real, actualiza la página.
-- En los despliegues de contenedores, el archivo `/etc/passwd` montado en el `docker-dd-agent` es necesario a fin de recopilar nombres de usuario para cada proceso. Este es un archivo público y el Process Agent no utiliza ningún campo excepto el nombre de usuario. Todas las funciones, excepto el campo de metadatos `user`, funcionan sin acceso a este archivo. **Nota**: Live Processes solo utiliza el archivo `passwd` del host y no realiza la resolución de nombres de usuario para los usuarios creados dentro de contenedores.
+- La recopilación de datos en tiempo real (2s) se desactiva después de 30 minutos. Para reanudar la recopilación en tiempo real, actualice la página.
+- En implementaciones de contenedores, el archivo `/etc/passwd` montado en el `docker-dd-agent` es necesario para recopilar el nombre de usuario para cada proceso. Este es un archivo público y el Process Agent no utiliza ningún campo excepto el nombre de usuario. Si el Agent se está ejecutando sin privilegios, el montaje no ocurre. Incluso sin acceso al archivo `/etc/passwd`, todas las funciones excepto el campo de metadatos `user` siguen funcionando. **Nota**: Live Processes solo utiliza el archivo `passwd` del servidor y no realiza resolución de nombres de usuario para los usuarios creados dentro de contenedores.
 
-## Lectura adicional
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -474,9 +526,11 @@ Mientras se trabaja de manera activa con Live Processes, las métricas se recopi
 [4]: /es/getting_started/tagging/unified_service_tagging
 [5]: https://app.datadoghq.com/process
 [6]: /es/monitors/types/process/
-[7]: https://app.datadoghq.com/monitors#create/live_process
+[7]: https://app.datadoghq.com/monitors/create/live_process
 [8]: /es/dashboards/widgets/timeseries/#pagetitle
 [9]: /es/infrastructure/livecontainers/
 [10]: /es/tracing/
-[11]: /es/network_monitoring/performance/network_analytics
+[11]: /es/network_monitoring/cloud_network_monitoring/network_analytics
 [12]: /es/agent/configuration/agent-commands/#restart-the-agent
+[13]: /es/metrics/custom_metrics/
+[14]: /es/network_monitoring/cloud_network_monitoring/

@@ -1,0 +1,31 @@
+{
+  "data": {
+    "attributes": {
+      "formulas": [
+        {
+          "formula": "a",
+          "limit": {
+            "count": 10,
+            "order": "desc"
+          }
+        }
+      ],
+      "from": 1636625471000,
+      "interval": 5000,
+      "queries": [
+        {
+          "data_source": "apm_metrics",
+          "name": "a",
+          "stat": "hits",
+          "service": "web-store",
+          "query_filter": "env:prod",
+          "group_by": [
+            "resource_name"
+          ]
+        }
+      ],
+      "to": 1636629071000
+    },
+    "type": "timeseries_request"
+  }
+}

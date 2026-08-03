@@ -2,13 +2,14 @@
 title: Network Configuration Management
 description: "View and compare device configuration changes in NDM."
 further_reading:
+  - link: "/network_monitoring/devices/config_management_rollback"
+    tag: "Documentation"
+    text: "Network Configuration Management Rollbacks"
   - link: "/network_monitoring/devices/troubleshooting"
     tag: "Documentation"
     text: "NDM Troubleshooting"
 site_support_id: network_config_management
 ---
-
-<div class="alert alert-info">Network Configuration Management is in Preview. To request access and receive the custom Datadog Agent build, contact your Datadog representative.</div>
 
 ## Overview
 
@@ -17,15 +18,13 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 - Monitor how device configurations change over time
 - Compare two configuration versions side by side
 - Use AI-generated summaries to understand changes and their potential impact during incidents
+- [Roll back a device to a previous configuration][8]
 
 {{< img src="/network_device_monitoring/config_mgmt/network_device_config_ndm_view.png" alt="Network Device Management configuration tab, showing the most recent configuration and an AI summary of what changed." style="width:100%;" >}}
-
-**Note**: NCM is read-only in Preview. 
 
 ## Prerequisites
 
 - [Network Device Monitoring][3] (NDM) must be configured on your devices.
-- Install the custom Datadog Agent build provided by your Datadog representative.
 
 ## Setup
 
@@ -77,6 +76,9 @@ Network Configuration Management (NCM) extends [Network Device Monitoring (NDM)]
 
    ```yaml
    init_config:
+     ## To confirm a possible value of algorithms, see the constants described in the golang document.
+     ## https://pkg.go.dev/golang.org/x/crypto/ssh#pkg-constants
+     ##
      ## @param ciphers - list of strings - optional
      ## List of SSH encryption ciphers to use for the connection.
      ## If not specified, the SSH library will use its default ciphers.
@@ -94,14 +96,14 @@ Network Configuration Management is accessible from the NDM device view in Netwo
 
 1. Navigate to [Network Device Monitoring][3].
 2. Select a device from the device list or from any NDM visualization such as [Device Geomap][4] or the [Device Topology][5] map.
-3. Open the **Configuration** tab in the NDM device view.
+3. Open the {{< ui >}}Configuration{{< /ui >}} tab in the NDM device view.
 
    {{< img src="/network_device_monitoring/config_mgmt/config_tab.png" alt="The NDM device view, highlighting the Configuration tab." style="width:100%;" >}}
 
    On the Configuration tab, you can filter what the configuration list displays:
-   - **All**: Shows both running and startup configurations
-   - **Running**: The active, live configuration running on the device
-   - **Startup**: The saved configuration that loads when the device boots
+   - {{< ui >}}All{{< /ui >}}: Shows both running and startup configurations
+   - {{< ui >}}Running{{< /ui >}}: The active, live configuration running on the device
+   - {{< ui >}}Startup{{< /ui >}}: The saved configuration that loads when the device boots
 
 ### Time picker and retention
 
@@ -127,13 +129,19 @@ You can scroll through the configuration to investigate the device state during 
 To see what changed between configuration versions:
 
 1. Select two configurations from the history list or timeline using the checkboxes. 
-2. Click **Compare Two Configs** to open the comparison view.
+2. Click {{< ui >}}Compare Two Configs{{< /ui >}} to open the comparison view.
 
    {{< img src="/network_device_monitoring/config_mgmt/compare_two_configs_3.png" alt="Network Device Management configuration tab, highlighting the Compare Two Configs option." style="width:100%;" >}}
 
 The comparison view shows both configurations side by side with inline diffs that highlight changed lines. You can switch between different configuration pairs without closing the comparison view.
 
    {{< img src="/network_device_monitoring/config_mgmt/config_screen_split_3.png" alt="Network Device Management configuration tab, comparing two versions in split view" style="width:90%;" >}}
+
+### Roll back to a previous configuration
+
+If a configuration change causes an issue, you can restore a device to a previous configuration directly from Datadog. Rollbacks use a Private Action Runner to restore the selected configuration to the device.
+
+See [Network Configuration Management Rollbacks][8] for setup and usage instructions.
 
 ## AI summaries
 
@@ -143,6 +151,23 @@ When you compare two configuration versions, the AI summary automatically:
 
 - Describes changes in human-readable terms
 - Highlights changes that may be relevant for incident investigation or risk analysis
+
+## Supported device profiles
+
+NCM uses device profiles to collect configurations from network devices over SSH. Profiles are bundled with the Datadog Agent, matched automatically based on your device's operating system, and updated through Agent releases.
+
+| Vendor | OS | Profile | Min. Agent version | Running | Startup |
+|---|---|---|---|---|---|
+| Arista | EOS | `eos` | 7.77.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-CX | `aoscx` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Aruba | AOS-W | `aosw` | 7.75.0 | {{< X >}} | |
+| Cisco | IOS | `cisco-ios` | 7.73.0 | {{< X >}} | {{< X >}} |
+| Cisco | NX-OS | `nxos` | 7.76.0 | {{< X >}} | {{< X >}} |
+| Dell | DellOS10 | `dellos10` | 7.77.0 | {{< X >}} | {{< X >}} |
+| F5 | TMOS | `tmos` | 7.76.0 | {{< X >}} | |
+| FortiGate | FortiOS | `fortios` | 7.77.0 | {{< X >}} | |
+| Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
+| Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
 
 ## Further Reading
 
@@ -155,3 +180,4 @@ When you compare two configuration versions, the AI summary automatically:
 [5]: /network_monitoring/devices/topology
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
+[8]: /network_monitoring/devices/config_management_rollback

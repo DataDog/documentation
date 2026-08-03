@@ -2,22 +2,26 @@
 title: Governance Console
 description: Provides a centralized, self-service view of Datadog usage and adoption.
 further_reading:
-- link: "https://www.datadoghq.com/blog/datadog-governance/"
-  tag: "Blog"
-  text: "Datadog governance 101: From chaos to consistency"
-- link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
-  tag: "Blog"
-  text: "Best practices for managing Datadog organizations at scale"
 - link: "https://docs.datadoghq.com/account_management/audit_trail/"
   tag: "Documentation"
   text: "Datadog Audit Trail"
 - link: "https://docs.datadoghq.com/cloud_cost_management/"
   tag: "Documentation"
   text: "Cloud Cost Management"
+- link: "https://www.datadoghq.com/blog/governance-console/"
+  tag: "Blog"
+  text: "Centralize observability management with Datadog Governance Console"
+- link: "https://www.datadoghq.com/blog/datadog-governance/"
+  tag: "Blog"
+  text: "Datadog governance 101: From chaos to consistency"
+- link: "https://www.datadoghq.com/blog/volkswagen-organizations/"
+  tag: "Blog"
+  text: "Best practices for managing Datadog organizations at scale"
 ---
 
-{{< site-region region="gov" >}}<div class="alert alert-danger"> Governance Console is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
-{{< /site-region >}}
+{{< callout url="/help/" header="Get Started with Governance Console" >}}
+Governance Console is available for customers on an enterprise plan only. Request access by contacting support.
+{{< /callout >}}
 
 ## Overview
 
@@ -27,7 +31,7 @@ Governance Console provides centralized configuration and governance for multi-t
 
 The `governance_console_read` permission controls access to the Governance Console. Users with `governance_console_read` assigned to their role can view the Governance Console UI and associated reporting and insights.
 
-Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metrics_write` permission.
+Product-specific permissions restrict users' ability to change product-specific settings. For example, modifying or automating metrics configuration requires the `metric_tags_write` permission.
 
 ## Using Governance Console
 
@@ -39,7 +43,7 @@ The [Summary page][1] displays an overview of your organization's usage of Datad
 
 ### Products
 
-The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select **View Details** to see more information about your organization's usage of a particular product, including limits and quotas.
+The [Products page][2] displays the Datadog products used by your organization, with relevant metrics for each product. Select {{< ui >}}View Details{{< /ui >}} to see more information about your organization's usage of a particular product, including limits and quotas.
 
 ### Controls
 

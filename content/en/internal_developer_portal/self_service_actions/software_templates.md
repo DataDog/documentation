@@ -1,5 +1,6 @@
 ---
 title: Software Templates
+description: Create reusable Software Templates in Catalog to help developers provision infrastructure and scaffold microservices that align with your organization's best practices.
 aliases:
   - /service_catalog/software_templates
   - /software_catalog/software_templates
@@ -10,15 +11,15 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/app-builder-remediation/"
   tag: "Blog"
   text: "Remediate incidents faster with App Builder"
-- link: "/service_management/app_builder/"
+- link: "/actions/app_builder/"
   tag: "Documentation"
   text: "Learn about App Builder"
-- link: "/service_management/workflows/"
+- link: "/actions/workflows/"
   tag: "Documentation"
   text: "Learn about Workflows"
 ---
 
-Create Software Templates within Software Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
+Create Software Templates within Catalog to help developers quickly provision infrastructure and create microservices that align with your best practices. 
 
 ## Create a Software Template
 
@@ -89,7 +90,7 @@ Once your Software Template is configured and tested, publish it so your team ca
 
 ## Available templating actions
 
-The following actions are available for Software Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
+The following actions are available for Catalog in Datadog App Builder and Workflow Automation. For a complete list, see [Action Catalog][7].
 
 - **Templating**
   - "Apply template": Pass input parameters into a set of files.
@@ -105,7 +106,7 @@ The following actions are available for Software Catalog in Datadog App Builder 
 - **Azure DevOps**
   - "Run pipeline": Trigger a pipeline run in Azure DevOps.
 - **Retrieve Service Information**
-  - "List entity definitions": Retrieve all service definitions from Datadog Software Catalog (v3.0 and prior).
+  - "List entity definitions": Retrieve all service definitions from Datadog Catalog (v3.0 and prior).
   - "Get service dependencies": Retrieve a service's upstream and downstream dependencies.
 - **Approvals**
   - "Make a decision": Use Slack or Microsoft Teams to solicit an approval.
@@ -123,12 +124,12 @@ The following actions are available for Software Catalog in Datadog App Builder 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/workflows/
-[2]: /service_management/app_builder/
+[1]: /actions/workflows/
+[2]: /actions/app_builder/
 [3]: https://app.datadoghq.com/workflow
 [4]: https://www.cookiecutter.io/
 [5]: https://gist.github.com/enbashi/366c62ee8c5fc350d52ddabc867602d4#file-readme-md
-[6]: /service_management/workflows/build/#create-a-custom-workflow
+[6]: /actions/workflows/build/#create-a-custom-workflow
 [7]: /actions/actions_catalog/
 [9]: https://app.datadoghq.com/app-builder/blueprints
 [10]: https://app.datadoghq.com/app-builder/apps/edit?activeTab=queries&showActionCatalog=false&template=create-new-s3-bucket&viewMode=edit

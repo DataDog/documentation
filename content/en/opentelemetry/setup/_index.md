@@ -7,6 +7,13 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/otel-deployments/"
   tag: "Blog"
   text: "How to select your OpenTelemetry deployment"
+- link: "https://learn.datadoghq.com/courses/otel-with-datadog"
+  tag: "Learning Center"
+  text: "Introduction to OpenTelemetry with Datadog"
+- link: "https://learn.datadoghq.com/courses/using-ddot"
+  tag: "Learning Center"
+  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+
 ---
 
 This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog.
@@ -46,7 +53,7 @@ Alternative methods are available for specific use cases, such as maintaining a 
     Best for: Users on platforms other than Kubernetes Linux, or those who prefer a minimal configuration without managing Collector pipelines.
     {{< /nextlink >}}
     {{< nextlink href="/opentelemetry/setup/agentless" >}}
-    <h3>Direct OTLP Ingest (Preview)</h3>
+    <h3>Direct OTLP Ingest</h3>
     Best for: Situations requiring direct data transmission to Datadog's intake endpoint without any intermediary components.
     {{< /nextlink >}}
 {{< /whatsnext >}}

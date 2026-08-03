@@ -12,15 +12,15 @@ The Icon component is one of the basic available components. Along with Images**
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined background and icon color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Icon set**: Select the set of icons containing the icon needed. Available sets are AWS, AWS (Legacy), Azure, and Font Awesome.
-- **Icon name**: Name of the icon used in the diagram. The field can be used to search for available icons as well.
-- **Toggle 3D/2D projection**: Display the icon in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
-- **Toggle flat/standing projection**: Display the label flat or standing. Not available when 2D projection is toggled or on 2D diagrams.
-- **Size**: Increase or decrease the size of an icon.
-- **Rotate item**: Rotate an icon and change its direction.
-- **Raise**: Raise the icon component above other icons.
-- **Lower**: Lower the icon component below other icons.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined background and icon color or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- {{< ui >}}Icon set{{< /ui >}}: Select the set of icons containing the icon needed. Available sets are AWS, AWS (Legacy), Azure, and Font Awesome.
+- {{< ui >}}Icon name{{< /ui >}}: Name of the icon used in the diagram. The field can be used to search for available icons as well.
+- {{< ui >}}Toggle 3D/2D projection{{< /ui >}}: Display the icon in a 3D or 2D view when the diagram itself is in 3D view. Not available for 2D diagrams.
+- {{< ui >}}Toggle flat/standing projection{{< /ui >}}: Display the label flat or standing. Not available when 2D projection is toggled or on 2D diagrams.
+- {{< ui >}}Size{{< /ui >}}: Increase or decrease the size of an icon.
+- {{< ui >}}Rotate item{{< /ui >}}: Rotate an icon and change its direction.
+- {{< ui >}}Raise{{< /ui >}}: Raise the icon component above other icons.
+- {{< ui >}}Lower{{< /ui >}}: Lower the icon component below other icons.
 
 ## API
 

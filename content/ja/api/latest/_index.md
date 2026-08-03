@@ -236,7 +236,14 @@ async fn main() {
 
 または、ライブラリディテクトリを参照します。
 
-{{< partial name="api/sdk-languages.html" >}}
+{{< card-grid card_width="100px" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-go" src="integrations_logos/go-metro.png" alt="Go" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
+  {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
+{{< /card-grid >}}
 </br>
 代わりにアプリケーションのセットアップから始めたい場合は、Datadog の一般向け[「はじめに」ドキュメント][7]をご覧ください。
 

@@ -22,7 +22,9 @@ Before you begin, make sure you have:
 
 - Access to the `ACCOUNTADMIN` role in Snowflake.
 - An RSA key pair. For more information, see the [Snowflake key-pair authentication docs][1].
-- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of {{< region-param key="ip_ranges_url" link="true" text="IP ranges list" >}}.
+- If your Snowflake account restricts network access by IP, Datadog webhook IPs must be included in your network policy allowlist. For the list of IPs, see the `webhooks` section of the [IP Ranges][7] page.
+
+  <div class="alert alert-warning">IP ranges are different for each Datadog site. On the <a href="/api/latest/ip-ranges/">IP Ranges</a> page, use the site selector in the top right to confirm you are fetching IPs from the correct site-specific endpoint URL.</div>
 
 ## Set up your account in Snowflake
 
@@ -154,14 +156,28 @@ To set up your account in Snowflake:
 
 To configure the Snowflake integration in Datadog:
 
-1. Navigate to [**Datadog Data Observability** > **Settings**][3].
-2. Click the **Configure** button for the Snowflake option.
+1. Navigate to [{{< ui >}}Datadog Data Observability{{< /ui >}} > {{< ui >}}Settings{{< /ui >}}][3].
+2. Click the {{< ui >}}Configure{{< /ui >}} button for the Snowflake option.
 
    {{< img src="data_observability/data-obs-settings-integrations.png" alt="List of Data Observability integrations on the Settings page" style="width:100%;" >}}
 
 3. Follow the flow to enter your account details and upload a private key.
-4. Turn on **Enable Data Observability for Snowflake tables**.
-5. Click **Save & Test**.
+4. Turn on {{< ui >}}Enable Data Observability for Snowflake tables{{< /ui >}}.
+5. (Optional) Under {{< ui >}}Custom alias URLs{{< /ui >}}, register any additional names other tools use to reference this Snowflake account. Examples include the account identifier configured in dbt, the connection string used by a BI tool, or an AWS PrivateLink URL. See [Custom alias URLs](#custom-alias-urls) below for when this is needed.
+6. Click {{< ui >}}Save & Test{{< /ui >}}.
+
+### Custom alias URLs
+
+This field is optional. Use it when the Snowflake account name Datadog connects to does not match how other tools reference the same account.
+
+Lineage events from outside Datadog include OpenLineage emitters, dbt manifests, and query history from other tools. These events identify the warehouse using whatever name the upstream tool was configured with. If those names differ from the canonical account URL Datadog uses, lineage from those sources is not stitched to this Snowflake integration.
+
+Registering each alternative name as a {{< ui >}}Custom alias URL{{< /ui >}} tells Datadog to treat them as references to the same Snowflake account. Cross-tool lineage then resolves correctly. Common cases include:
+
+- The account is reached through an AWS PrivateLink URL.
+- A dbt project, BI tool, or other connector is configured with an account identifier that does not match the canonical URL.
+
+To add an alias, expand {{< ui >}}Configure Data Observability{{< /ui >}} during integration setup and click {{< ui >}}+ Add Alias{{< /ui >}} under {{< ui >}}Custom alias URLs{{< /ui >}}. Add one entry per alternative name. Aliases apply only to the Snowflake account being configured; each Snowflake integration manages its own alias list.
 
 ## Snowflake tasks and Snowpipes
 
@@ -174,10 +190,22 @@ Both features require the `GRANT MONITOR EXECUTION ON ACCOUNT` permission grante
 <div class="alert alert-info">Snowflake tasks traces are in preview. Contact your account representative to enable this feature.</div>
 
 When enabled, each task graph run appears as a trace in APM with individual tasks as spans, including execution details such as status, duration, and errors. To find them:
-1. In Datadog, go to **APM** > [**Trace Explorer**][4].
+1. In Datadog, go to {{< ui >}}APM{{< /ui >}} > [{{< ui >}}Trace Explorer{{< /ui >}}][4].
 2. Filter the Explorer:
    - For the top-level task graph span, filter by `operation_name:snowflake.task_graph`
    - For individual task spans, filter by `operation_name:snowflake.task`
+
+## Object tags
+
+Datadog ingests [Snowflake object tags][6] applied to your tables and attaches them to the corresponding table in Data Observability. Tags are read from `SNOWFLAKE.ACCOUNT_USAGE.TAG_REFERENCES` using the `SNOWFLAKE.GOVERNANCE_VIEWER` database role granted during setup, so no additional permissions are required.
+
+Ingested tags are available as attributes on the **Data Observability Metrics** data source, alongside `database`, `schema`, `table`, and `entity_id`. In the Metrics Explorer and dashboard widget editor, you can use them to:
+
+- Filter table metrics by a business dimension (for example, `data_source` or `data_domain`).
+- Group metrics by a tag value.
+- Drive template variables on dashboards.
+
+Datadog ingests up to 50 tags per table, which is Snowflake's documented limit. Tags are refreshed on each crawl, so changes in Snowflake appear after the next sync.
 
 ## Next steps
 
@@ -223,6 +251,8 @@ If Datadog is unable to see expected databases, schemas, or tables in your Snowf
 
 [1]: https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key
 [2]: https://docs.snowflake.com/en/developer-guide/logging-tracing/event-table-setting-up
-[3]: https://app.datadoghq.com/datasets/settings/integrations
+[3]: https://app.datadoghq.com/data-obs/settings/integrations
 [4]: https://app.datadoghq.com/apm/traces
 [5]: /monitors/types/data_observability/
+[6]: https://docs.snowflake.com/en/user-guide/object-tagging
+[7]: /api/latest/ip-ranges/

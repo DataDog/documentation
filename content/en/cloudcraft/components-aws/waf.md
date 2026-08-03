@@ -11,9 +11,9 @@ Use the WAF component to represent visualize web application firewalls from your
 
 Use the toolbar to configure and customize the component. The following options are available:
 
--  **Color**: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
--  **Rules & Groups**: Enter the number of rules and groups you want per web ACL.
--  **Requests (millions/mo)**: Enter the number of web requests your WAF receives per month, in millions.
+-  {{< ui >}}Color{{< /ui >}}: Select a fill color for the body of the component and an accent color for its symbol. You can use the same colors for the 2D and 3D views or different colors for each.
+-  {{< ui >}}Rules & Groups{{< /ui >}}: Enter the number of rules and groups you want per web ACL.
+-  {{< ui >}}Requests (millions/mo){{< /ui >}}: Enter the number of web requests your WAF receives per month, in millions.
 
 ## API
 

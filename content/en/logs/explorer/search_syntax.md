@@ -23,6 +23,10 @@ further_reading:
 - link: "/logs/explorer/calculated_fields/formulas"
   tag: "Documentation"
   text: "Learn more about Calculated Fields Formulas"
+- link: "https://learn.datadoghq.com/courses/log-explorer"
+  tag: "Learning Center"
+  text: "Getting Started with Log Explorer"
+
 ---
 
 ## Overview
@@ -73,7 +77,7 @@ Use the syntax `*:search_term` to perform a full-text search across all log attr
 
 ## Escape special characters and spaces
 
-The following characters are considered special and require escaping with the `\` character: `=` `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, and spaces.
+The following characters are considered special and require escaping with the `\` character: `-` `!` `&&` `||` `>` `>=` `<` `<=` `(` `)` `{` `}` `[` `]` `"` `*` `?` `:` `\` `#`, and spaces.
 - `/` is not considered a special character and doesn't need to be escaped.
 - `@` cannot be used in search queries within Logs Explorer because it is reserved for [Attribute Search](#attributes-search).
 

@@ -129,19 +129,19 @@ DD_MEASURES="test.memory.usage:1000" datadog-ci junit upload --service my-servic
 
 ## Create a facet
 
-Create a facet for the custom measure you added to the test by navigating to the [**Test Runs** page][2] and clicking **+ Add** on the facet list.
+Create a facet for the custom measure you added to the test by navigating to the [{{< ui >}}Test Runs{{< /ui >}} page][2] and clicking {{< ui >}}+ Add{{< /ui >}} on the facet list.
 
 {{< img src="/continuous_integration/facet_creation.png" text="Test Runs facet creation" style="width:100%" >}}
 
-Make sure that the type of facet is **Measure**, which represents a numerical value:
+Make sure that the type of facet is {{< ui >}}Measure{{< /ui >}}, which represents a numerical value:
 
 {{< img src="/continuous_integration/measure_creation.png" text="Test Runs measure creation" style="width:100%" >}}
 
-Click **Add** to start using your custom measure.
+Click {{< ui >}}Add{{< /ui >}} to start using your custom measure.
 
 ## Graph the evolution of your measure
 
-Plot the evolution of your measure across time by selecting the **Timeseries** visualization:
+Plot the evolution of your measure across time by selecting the {{< ui >}}Timeseries{{< /ui >}} visualization:
 
 {{< img src="/continuous_integration/plot_measure.png" text="Plot benchmark mean duration" style="width:100%" >}}
 
@@ -149,7 +149,7 @@ For example, you can use this visualization to track the evolution of the memory
 
 ## Export your graph
 
-You can export your graph to a [dashboard][3] or a [notebook][4], and create a [monitor][5] based on it by clicking the **Export** button.
+You can export your graph to a [dashboard][3] or a [notebook][4], and create a [monitor][5] based on it by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 {{< img src="/continuous_integration/export_measure.png" text="Export benchmark mean duration graph" style="width:100%" >}}
 

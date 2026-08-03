@@ -16,7 +16,7 @@ further_reading:
   text: Explore your services, resources, and traces
 title: Tracing Android Applications
 ---
-Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side tracing library][2] and leverage the following features:
+Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-sdk-android-trace` client-side SDK][2] and leverage the following features:
 
 * Create custom [spans][3] for operations in your application.
 * Add `context` and extra custom attributes to each span sent.
@@ -241,6 +241,48 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
    {{< /tabs >}}
    {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+
+   ```kotlin
+   class SampleApplication : Application() {
+     override fun onCreate() {
+       super.onCreate()
+       val configuration = Configuration.Builder(
+            clientToken = "<CLIENT_TOKEN>",
+            env = "<ENV_NAME>",
+            variant = "<APP_VARIANT_NAME>"
+       )
+         .useSite(DatadogSite.US2_FED)
+         .build()
+
+       Datadog.initialize(this, configuration, trackingConsent)
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{% tab "Java" %}}
+
+   ```java
+   public class SampleApplication extends Application {
+     @Override
+     public void onCreate() {
+       super.onCreate();
+       Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+         .useSite(DatadogSite.US2_FED)
+         .build();
+
+       Datadog.initialize(this, configuration, trackingConsent);
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    {{< site-region region="ap1" >}}
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -314,6 +356,48 @@ Send [traces][1] to Datadog from your Android applications with [Datadog's `dd-s
        super.onCreate();
        Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
          .useSite(DatadogSite.AP2)
+         .build();
+
+       Datadog.initialize(this, configuration, trackingConsent);
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="uk1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+
+   ```kotlin
+   class SampleApplication : Application() {
+     override fun onCreate() {
+       super.onCreate()
+       val configuration = Configuration.Builder(
+            clientToken = "<CLIENT_TOKEN>",
+            env = "<ENV_NAME>",
+            variant = "<APP_VARIANT_NAME>"
+       )
+         .useSite(DatadogSite.UK1)
+         .build()
+
+       Datadog.initialize(this, configuration, trackingConsent)
+     }
+   }
+   ```
+
+   {{% /tab %}}
+   {{% tab "Java" %}}
+
+   ```java
+   public class SampleApplication extends Application {
+     @Override
+     public void onCreate() {
+       super.onCreate();
+       Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+         .useSite(DatadogSite.UK1)
          .build();
 
        Datadog.initialize(this, configuration, trackingConsent);
@@ -722,15 +806,15 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
      implementation "com.datadoghq:dd-sdk-android-okhttp:x.x.x"
    }
    ```
-2. Add `DatadogInterceptor` to your `OkHttpClient`:
+2. Add `DatadogInterceptor` to your `OkHttpClient`. Each host entry accepts a plain hostname (for example, `"example.com"`) or a wildcard pattern with a single `*` (for example, `"*.example.com"`). A wildcard may only match subdomains of a registrable domain, so patterns such as `"*.com"` are rejected:
    {{< tabs >}}
    {{% tab "Kotlin" %}}
    ```kotlin
-   val tracedHosts = listOf("example.com", "example.eu")
+   val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
    val okHttpClient = OkHttpClient.Builder()
      .addInterceptor(
        DatadogInterceptor.Builder(tracedHosts)
-         .setTraceSampler(RateBasedSampler(20f))
+         .setTraceSampleRate(20f)
          .build()
      )
      .build()
@@ -738,11 +822,11 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    {{% /tab %}}
    {{% tab "Java" %}}
    ```java
-   List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+   List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
      .addInterceptor(
        new DatadogInterceptor.Builder(tracedHosts)
-         .setTraceSampler(new RateBasedSampler(20f))
+         .setTraceSampleRate(20f)
          .build()
      )
      .build();
@@ -759,16 +843,16 @@ The interceptor tracks requests at the application level. You can also add a `Tr
 {{< tabs >}}
 {{% tab "Kotlin" %}}
 ```kotlin
-val tracedHosts = listOf("example.com", "example.eu")
+val tracedHosts = listOf("example.com", "example.eu", "*.example.eu")
 val okHttpClient =  OkHttpClient.Builder()
   .addInterceptor(
     DatadogInterceptor.Builder(tracedHosts)
-      .setTraceSampler(RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .addNetworkInterceptor(
     TracingInterceptor.Builder(tracedHosts)
-      .setTraceSampler(RateBasedSampler(100f))
+      .setTraceSampleRate(100f)
       .build()
   )
   .build()
@@ -776,16 +860,16 @@ val okHttpClient =  OkHttpClient.Builder()
 {{% /tab %}}
 {{% tab "Java" %}}
 ```java
-List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
+List<String> tracedHosts = Arrays.asList("example.com", "example.eu", "*.example.eu");
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
   .addInterceptor(
     new DatadogInterceptor.Builder(tracedHosts)
-      .setTraceSampler(new RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .addNetworkInterceptor(
     new TracingInterceptor.Builder(tracedHosts)
-      .setTraceSampler(new RateBasedSampler(20f))
+      .setTraceSampleRate(20f)
       .build()
   )
   .build();
@@ -820,7 +904,7 @@ Request request = OkHttpRequestExtKt
 
 **Note**:
 * If you use multiple Interceptors, this one must be called first.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalDatadogTracer`, make sure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using an SDK registered with `GlobalDatadogTracer`, make sure the same tracing header types are set for the SDK in use.
 
 ### Cronet
 

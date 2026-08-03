@@ -25,16 +25,16 @@ Use AI-powered automatic parsing to generate Grok rules from your log data. Data
 
 There are two ways to access automatic parsing from the log side panel:
 
-1. Click the **AI** button <i class="icon-bits-ai"></i> next to the copy button.
-2. Highlight a specific portion of the log message and click the **AI** button <i class="icon-bits-ai"></i> in the popup menu.
+1. Click the {{< ui >}}AI{{< /ui >}} button <i class="icon-bits-ai"></i> next to the copy button.
+2. Highlight a specific portion of the log message and click the {{< ui >}}AI{{< /ui >}} button <i class="icon-bits-ai"></i> in the popup menu.
 
-When you click the **AI** button, Datadog automatically populates the Calculated Field form:
+When you click the {{< ui >}}AI{{< /ui >}} button, Datadog automatically populates the Calculated Field form:
 
-1. **Extract from**: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
-2. **Log sample**: Automatically populated with your selected log.
-3. **Parsing rule**: Automatically generated from the log sample.
+1. {{< ui >}}Extract from{{< /ui >}}: Defaults to the full log message. You can change the dropdown to parse individual attributes instead.
+2. {{< ui >}}Log sample{{< /ui >}}: Automatically populated with your selected log.
+3. {{< ui >}}Parsing rule{{< /ui >}}: Automatically generated from the log sample.
 
-Review and modify the generated rule as needed. You can edit it manually or click **Generate a new rule** for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
+Review and modify the generated rule as needed. You can edit it manually or click {{< ui >}}Generate a new rule{{< /ui >}} for Datadog to try again. You can also modify, insert, or replace the log sample to test your rule against different log formats.
 
 <div class="alert alert-tip">Use the thumbs up or thumbs down buttons to provide inline feedback and help improve the feature.</div>
 

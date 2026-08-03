@@ -4,12 +4,9 @@ description: "Parse, enrich, and manage your logs with Datadog pipelines and pro
 aliases:
   - /logs/processing/pipelines/
 further_reading:
-- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
-  tag: "Blog"
-  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
-- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
-  tag: Blog
-  text: How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system
+- link: "https://learn.datadoghq.com/courses/log-pipelines"
+  tag: "Learning Center"
+  text: "Build and Manage Log Pipelines"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Consult the full list of available Processors"
@@ -22,9 +19,12 @@ further_reading:
 - link: "/logs/troubleshooting/"
   tag: "Documentation"
   text: "Logs troubleshooting"
-- link: "https://learn.datadoghq.com/courses/going-deeper-with-logs-processing"
+- link: "https://learn.datadoghq.com/courses/debugging-log-pipelines"
   tag: "Learning Center"
-  text: "Going Deeper with Logs Processing"
+  text: "Debugging Log Pipelines"
+- link: "https://learn.datadoghq.com/courses/integration-pipelines"
+  tag: "Learning Center"
+  text: "Process Logs Out of the Box with Integration Pipelines"
 - link: "https://www.datadoghq.com/blog/monitor-cloudflare-zero-trust/"
   tag: "Blog"
   text: "Monitor Cloudflare Zero Trust with Datadog Cloud SIEM"
@@ -34,6 +34,12 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ocsf-common-data-model/"
   tag: "Blog"
   text: "Normalize your data with the OCSF Common Data Model in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/cloud-siem-ocsf-processor"
+  tag: "Blog"
+  text: "Normalize any logs for Cloud SIEM with Datadog's OCSF processor"
+- link: https://www.datadoghq.com/blog/internal-monitoring-email-delivery
+  tag: Blog
+  text: "How we use Datadog to get comprehensive, fine-grained visibility into our email delivery system"
 ---
 
 ## Overview
@@ -59,7 +65,7 @@ For each pipeline, administrators can choose the following edit scopes:
 - **Editor**: Only specified users, teams, or roles can edit pipeline configuration and processors.
 - **Processor Editor**: Only the processors (including nested pipelines) can be edited by specified users, teams, or roles. No one can modify the pipeline attributes, such as its filter query or its order in the global pipeline list.
 
-<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant  the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
+<div class="alert alert-warning">Granting a user access to a pipeline's restriction list does not automatically grant the <code>logs_write_pipelines</code> or <code>logs_write_processors</code> permissions. Administrators must grant those permissions separately.</div>
 
 You can manage these permissions programmatically through [**API**][14] and **Terraform**.
 
@@ -69,7 +75,7 @@ Preprocessing of JSON logs occurs before logs enter pipeline processing. Preproc
 
 JSON log preprocessing comes with a default configuration that works for standard log forwarders. To edit this configuration to adapt custom or specific log forwarding approaches:
 
-1. Navigate to [Pipelines][8] in Datadog and select [Preprocessing for JSON logs][9].
+1. Navigate to [Pipelines][8] in Datadog and select [{{< ui >}}Preprocessing for JSON logs{{< /ui >}}][9].
 
     **Note:** Preprocessing JSON logs is the only way to define one of your log attributes as `host` for your logs.
 
@@ -125,7 +131,7 @@ The recognized date formats are: <a href="https://www.iso.org/iso-8601-date-and-
 </div>
 
 
-[1]: /logs/log_configuration/processors/#log-date-remapper
+[1]: /logs/log_configuration/processors/log_date_remapper/
 {{% /tab %}}
 {{% tab "Message" %}}
 
@@ -142,7 +148,7 @@ Specify alternate attributes to use as the source of a log's message by setting 
 
 [1]: /logs/explorer/
 [2]: /logs/explorer/#filters-logs
-[3]: /logs/log_configuration/processors/#log-message-remapper
+[3]: /logs/log_configuration/processors/log_message_remapper/
 {{% /tab %}}
 {{% tab "Status" %}}
 
@@ -157,7 +163,7 @@ Each log entry may specify a status level which is made available for faceted se
 
 Specify alternate attributes to use as the source of a log's status by setting a [log status remapper processor][1].
 
-[1]: /logs/log_configuration/processors/#log-status-remapper
+[1]: /logs/log_configuration/processors/log_status_remapper/
 {{% /tab %}}
 {{% tab "Service" %}}
 
@@ -172,13 +178,13 @@ Using the Datadog Agent or the RFC5424 format automatically sets the service val
 Specify alternate attributes to use as the source of a log's service by setting a [log service remapper processor][1].
 
 
-[1]: /logs/log_configuration/processors/#service-remapper
+[1]: /logs/log_configuration/processors/service_remapper/
 {{% /tab %}}
 {{% tab "Trace ID" %}}
 
 #### Trace ID attribute
 
-By default, [Datadog tracers can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
+By default, [Datadog SDKs can automatically inject trace and span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `trace_id`:
 
 * `dd.trace_id`
 * `contextMap.dd.trace_id`
@@ -189,14 +195,14 @@ Specify alternate attributes to use as the source of a log's trace ID by setting
 
 
 [1]: /tracing/other_telemetry/connect_logs_and_traces/
-[2]: /logs/log_configuration/processors/#trace-remapper
+[2]: /logs/log_configuration/processors/trace_remapper/
 {{% /tab %}}
 
 {{% tab "Span ID" %}}
 
 #### Span ID attribute
 
-By default, Datadog tracers can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
+By default, Datadog SDKs can [automatically inject span IDs into your logs][1]. However, if a JSON formatted log includes the following attributes, Datadog interprets its value as the log's `span_id`:
 
 * `dd.span_id`
 * `contextMap.dd.span_id`
@@ -211,14 +217,14 @@ By default, Datadog tracers can [automatically inject span IDs into your logs][1
 ## Create a pipeline
 
 1. Navigate to [Pipelines][8] in Datadog.
-2. Select **New Pipeline**.
-3. Select a log from the live tail preview to apply a filter, or apply your own filter. Choose a filter from the dropdown menu or create your own filter query by selecting the **</>** icon. Filters let you limit what kinds of logs a pipeline applies to.
+2. Select {{< ui >}}New Pipeline{{< /ui >}}.
+3. Select a log from the live tail preview to apply a filter, or apply your own filter. Choose a filter from the dropdown menu or create your own filter query by selecting the {{< ui >}}</>{{< /ui >}} icon. Filters let you limit what kinds of logs a pipeline applies to.
 
     **Note**: The pipeline filtering is applied before any of the pipeline's processors. For this reason, you cannot filter on an attribute that is extracted in the pipeline itself.
 
 4. Name your pipeline.
 5. (Optional) Add a description and tags to the pipeline to indicate its purpose and ownership. Pipeline tags do not affect logs, but can be used to filter and search within the [Pipelines page][8].
-6. Press **Create**.
+6. Press {{< ui >}}Create{{< /ui >}}.
 
 An example of a log transformed by a pipeline:
 
@@ -258,13 +264,25 @@ It's also possible to copy an integration pipeline using the clone button.
 
 1. Navigate to [Pipelines][8] in Datadog.
 2. Hover over a pipeline and click the arrow next to it to expand processors and nested pipelines.
-3. Select **Add Processor** or **Add Nested Pipeline**.
+3. Select {{< ui >}}Add Processor{{< /ui >}} or {{< ui >}}Add Nested Pipeline{{< /ui >}}.
 
 ### Processors
 
 A processor executes within a pipeline to complete a data-structuring action. See the [Processors docs][3] to learn how to add and configure a processor by processor type, within the app or with the API.
 
 See [Parsing dates][12] to learn about custom date and time formats and the required `timezone` parameter for non-UTC timestamps.
+
+### Attribute precedence when multiple processors match {#attribute-precedence}
+
+When multiple processors within matching pipelines set the same attribute, the outcome depends on the processor type. There are three behaviors:
+
+| Behavior | Description | Processors |
+| --- | --- | --- |
+| Last write wins | The value set by the later processor (further down the order) overrides the earlier value. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
+| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array Map processor |
+| First write wins | Only the first processor is applied (except Log date remapper, which uses the last one). Within a single pipeline, the first processor's value is used; across multiple matching pipelines, the first one encountered applies. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
+
+For details on each processor, see [Processors][3].
 
 ### Nested pipelines
 
@@ -276,9 +294,26 @@ A pipeline can contain nested pipelines and processors whereas a nested pipeline
 
 Move a pipeline into another pipeline to make it into a nested pipeline:
 
-1. Hover over the pipeline you want to move, and click on the **Move to** icon.
+1. Hover over the pipeline you want to move, and click on the {{< ui >}}Move to{{< /ui >}} icon.
 1. Select the pipeline you want to move the original pipeline into. **Note**: Pipelines containing nested pipelines can only be moved to another top level position. They cannot be moved into another pipeline.
-1. Click **Move**.
+1. Click {{< ui >}}Move{{< /ui >}}.
+
+## Preview pipeline changes
+
+When creating or editing a pipeline or its processors, you can preview how your changes affect logs before applying them. The preview uses a live tail of your logs, processed with your proposed changes.
+
+{{< img src="logs/processing/pipelines/pipeline_simulation.png" alt="The pipeline simulation view showing the pipeline's processors on the left and the diff of a selected log on the right" >}}
+
+For each log, compare its before and after states. Select which change to compare against:
+
+- **Your changes**: compares the pipeline's current deployed version against the version with your changes.
+- **Entire pipeline**: compares the log entering the pipeline against the log after the entire pipeline runs.
+
+To narrow the log list, use the query filter or filter by impact:
+
+- **All logs**: every log in the live tail.
+- **Impacted logs**: only logs changed by your edits in this session.
+- **Not impacted logs**: only logs your edits leave unchanged.
 
 ## Manage your pipelines
 
@@ -286,7 +321,7 @@ Identify when the last change to a pipeline or processor was made and which user
 
 {{< img src="logs/processing/pipelines/log_pipeline_management.png" alt="How to manage your pipelines with faceted search, pipeline modificiation information, and the reordering modal" style="width:50%;">}}
 
-Reorder pipelines precisely with the `Move to` option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the `Move to` modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
+Reorder pipelines precisely with the {{< ui >}}Move to{{< /ui >}} option in the sliding option panel. Scroll and click on the exact position to move the selected pipeline to using the {{< ui >}}Move to{{< /ui >}} modal. Pipelines cannot be moved into other read-only pipelines. Pipelines containing nested pipelines can only be moved to other top level positions. They cannot be moved into other pipelines.
 
 {{< img src="logs/processing/pipelines/log_pipeline_move_to.png" alt="How to reorder your pipelines precisely using the move to modal" style="width:50%;">}}
 
@@ -310,7 +345,7 @@ Estimated usage metrics are displayed for each pipeline. This shows the volume a
 [3]: /logs/log_configuration/processors/
 [4]: /logs/explorer/facets/
 [5]: https://app.datadoghq.com/logs/pipelines
-[6]: /logs/log_configuration/processors/?tab=ui#grok-parser
+[6]: /logs/log_configuration/processors/grok_parser/
 [7]: /account_management/rbac/granular_access/
 [8]: https://app.datadoghq.com/logs/pipelines
 [9]: https://app.datadoghq.com/logs/pipelines/remapping
