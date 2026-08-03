@@ -39,6 +39,23 @@ Monitor messages in Synthetic Monitoring consist of:
 
 - If you have multiple layers of notifications (for example, notifying more teams the longer a Synthetic test is alerting), Datadog recommends enabling [renotification][5] on your Synthetic monitors.
 
+## Automatically added tags
+
+In addition to any custom tags you add, Datadog adds the following tags to a Synthetic test monitor based on the test's configuration. Use these tags to search and filter on the [{{< ui >}}Manage Monitors{{< /ui >}}][2] page or in the Synthetic Monitoring test list.
+
+| Tag key             | Available values                                                                 | What the tag captures                                                                                                    |
+|----------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `check_type`         | `api`, `browser`, `api-ssl`, `api-dns`, `api-tcp`, `api-icmp`, `api-grpc`, `api-udp`, `api-websocket`, `api-multi`, `mobile` | The test type and, if applicable, its subtype. The `http` subtype is left off `api` tests for brevity.        |
+| `check_status`       | `live`, `paused`                                                                   | Whether the test is active or paused.                                                                              |
+| `probe_dc`           | `aws:us-east-1`, `aws:eu-west-1`, and other managed or private locations          | The locations the test runs from. Multi-location tests have one `probe_dc` tag for each assigned location.         |
+| `ci_execution_rule`  | `blocking`, `non_blocking`                                                         | The test's CI/CD execution rule. The tag is added when the test is used as a quality gate in a CI/CD pipeline.              |
+
+These tags update automatically when you edit the test, so searches remain accurate as tests move locations, get paused, or change their CI/CD configuration. Search for tags using the `tag` facet and quoting the full `key:value` pair. For example:
+
+- `type:synthetics tag:"check_status:live"` finds all active Synthetic test monitors.
+- `type:synthetics tag:("probe_dc:aws:us-east-1" AND "probe_dc:aws:ap-northeast-1")` finds tests running from both locations.
+- `type:synthetics tag:"ci_execution_rule:blocking"` finds tests configured to block a CI/CD pipeline if they fail.
+
 ### Tailor monitor notifications
 
 Depending on your incident management strategy, you may want to involve multiple teams when a Synthetic test alerts. To notify Team B only on subsequent alerts after the first alert, surround the notification to Team B with `{{#is_renotify}}` and `{{/is_renotify}`. Use [conditional variables][3] to further characterize the notification message based on monitor attributes. 

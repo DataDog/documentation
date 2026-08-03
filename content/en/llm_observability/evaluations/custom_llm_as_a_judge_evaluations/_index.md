@@ -49,7 +49,7 @@ Learn more about the [compatibility requirements][6].
 1. Configure the model:
     1. Select the {{< ui >}}Account{{< /ui >}} dropdown menu to select the LLM provider and corresponding account to use for your LLM judge. To connect a new account, see [connect an LLM provider][2].
         - If you select an {{< ui >}}Amazon Bedrock{{< /ui >}} account, choose a region the account is configured for. You can then select a model name or provide the inference profile ARN.
-        - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location.
+        - If you select a {{< ui >}}Vertex{{< /ui >}} account, choose a project and location. The {{< ui >}}Location{{< /ui >}} dropdown includes single-region, multi-region, and global options. For details on each option, see [Google's Vertex AI locations documentation][18].
     1. Use the {{< ui >}}Model{{< /ui >}} dropdown menu to select a model.
 1. In {{< ui >}}Runs On{{< /ui >}}, select the application you want to evaluate, what you want to evaluate on (span, trace, or session), and the sampling rate. You can add more filtering criteria by selecting the button to the right of the sampling rate.
 1. In the {{< ui >}}Template{{< /ui >}} section, use the dropdown menu:
@@ -609,4 +609,5 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 [15]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/prompt_templating
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
+[18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
 

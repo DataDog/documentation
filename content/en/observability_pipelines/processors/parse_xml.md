@@ -2,6 +2,9 @@
 title: Parse XML Processor
 disable_toc: false
 further_reading:
+- link: "https://www.datadoghq.com/blog/otel-ai-observability-pipelines-clickhouse/"
+  tag: "Blog"
+  text: "Route OTel data from AI apps to ClickHouse and Datadog using Observability Pipelines"
 - link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
   tag: "Blog"
   text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"

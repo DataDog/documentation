@@ -37,6 +37,10 @@ Navigate to the [Findings][1] page to see all sensitive data findings within the
 {{< tabs >}}
 {{% tab "Logs" %}}
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The Logs Findings explorer is not available for the selected <a href="/getting_started/site">Datadog site</a> ({{< region-param key="dd_site_name" >}}).</div>
+{{< /site-region >}}
+
 The Logs Findings explorer is an updated experience for investigating log findings. If you have at least one log finding, this explorer opens by default. APM, RUM, and Events findings are not available in this explorer. To view those findings, click {{< ui >}}Go back{{< /ui >}} in the banner at the top of the page.
 
 To investigate a log finding:
@@ -52,8 +56,10 @@ To investigate a log finding:
 Additionally, you can:
 - Use {{< ui >}}Apply Targeted Obfuscation{{< /ui >}} to obfuscate future sensitive data matches in new logs for this finding, or extend obfuscation to the entire service. If redaction is already enabled, use this section to verify how matching logs are obfuscated.
 - Use {{< ui >}}Tune Detection Logic{{< /ui >}} to edit the scanning rule's keywords or apply suppressions for false positives or risk-accepted data.
+- Use {{< ui >}}Generate Code Fix{{< /ui >}} to launch a [Bits Code][2] session that identifies the log pattern causing the leak and proposes a fix. Review the fix and create a pull request directly from the session. The source repository must already be onboarded to Bits Code.
 
 [1]: /help
+[2]: /bits_ai/bits_code/
 
 {{% /tab %}}
 {{% tab "APM, RUM, and Events" %}}

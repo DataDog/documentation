@@ -3,6 +3,12 @@ title: Datadog Distribution of OpenTelemetry Collector
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
+- link: "https://learn.datadoghq.com/courses/using-ddot"
+  tag: "Learning Center"
+  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+- link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
+  tag: "Blog"
+  text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
   text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
@@ -12,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
-- link: "https://learn.datadoghq.com/courses/using-ddot"
-  tag: "Learning Center"
-  text: "Using the Datadog Distribution of OpenTelemetry Collector"
 
 ---
 
@@ -64,17 +67,21 @@ The DDOT Collector offers:
 The following table shows which OpenTelemetry Collector versions are included in each DDOT release:
 
 | DDOT version | Beta version | Stable version |
-|---|---|---|
-| 7.78.0 | v0.147.0 | v1.53.0 |
-| 7.77.0 | v0.145.0 | v1.51.1-0.20260205185216-81bc641f26c0 |
-| 7.76.0 | v0.144.0 | v1.50.0 |
-| 7.75.0 | v0.142.0 | v1.48.0 |
-| 7.74.0 | v0.140.0 | v1.46.0 |
-| 7.73.0 | v0.138.0 | v1.44.0 |
-| 7.72.0 | v0.136.0 | v1.42.0 |
-| 7.71.0 | v0.133.0 | v1.39.0 |
-| 7.70.0 | v0.131.0 | v1.37.0 |
-| 7.69.0 | v0.129.0 | v1.35.0 |
+|--------------|--------------|----------------|
+| 7.82.x       | v0.155.0     | v1.61.0        |
+| 7.81.x       | v0.154.0     | v1.60.0        |
+| 7.80.x       | v0.152.0     | v1.58.0        |
+| 7.79.x       | v0.150.0     | v1.56.0        |
+| 7.78.x       | v0.147.0     | v1.53.0        |
+| 7.77.x       | v0.145.0     | v1.51.0        |
+| 7.76.x       | v0.144.0     | v1.50.0        |
+| 7.75.x       | v0.142.0     | v1.48.0        |
+| 7.74.x       | v0.140.0     | v1.46.0        |
+| 7.73.x       | v0.138.0     | v1.44.0        |
+| 7.72.x       | v0.136.0     | v1.42.0        |
+| 7.71.x       | v0.133.0     | v1.39.0        |
+| 7.70.x       | v0.131.0     | v1.37.0        |
+| 7.69.x       | v0.129.0     | v1.35.0        |
 
 ### Support levels
 
@@ -86,11 +93,15 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 {{% collapse-content title="Receivers" level="p" %}}
 
+- [dockerstatsreceiver][58] (available since version 7.56.0)
 - [filelogreceiver][16]
 - [fluentforwardreceiver][17]
 - [hostmetricsreceiver][18]
 - [jaegerreceiver][19]
+- [k8sobjectsreceiver][59] (available since version 7.56.0)
+- [kubeletstatsreceiver][60] (available since version 7.56.0)
 - [otlpreceiver][20]
+- [podmanreceiver][61] (available since version 7.56.0)
 - [prometheusreceiver][21]
 - [receivercreator][22]
 - [zipkinreceiver][23]
@@ -138,9 +149,11 @@ By default, the DDOT Collector ships with the following Collector components. Yo
 
 {{% collapse-content title="Extensions" level="p" %}}
 
+- [datadogextension][62] (available since version 7.72.0)
 - [healthcheckextension][46]
 - [observer][47]
 - [pprofextension][48]
+- [storage/filestorage][63] (available since version 7.56.0)
 - [zpagesextension][49]
 
 {{% /collapse-content %}}
@@ -241,3 +254,9 @@ This guide helps you migrate from an existing OpenTelemetry Collector setup to t
 [55]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/exporter/loadbalancingexporter/README.md
 [56]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/connector/routingconnector/README.md
 [57]: /opentelemetry/compatibility/#support-levels
+[58]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/dockerstatsreceiver/README.md
+[59]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/k8sobjectsreceiver/README.md
+[60]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/kubeletstatsreceiver/README.md
+[61]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/podmanreceiver/README.md
+[62]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/datadogextension/README.md
+[63]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/extension/storage/filestorage/README.md

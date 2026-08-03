@@ -54,9 +54,9 @@ You can generate a public URL for any dashboard, making it viewable by anyone wi
 
 Public URLs can be revoked at any time. They provide read-only access to the dashboard as it was configured. Viewers cannot navigate to or edit other Datadog pages.
 
-### Authenticated sharing
+### Invite-only sharing
 
-For cases where you want to share a dashboard but require authentication, you can restrict shared dashboards to users who have authenticated through your organization's SAML provider. This provides the convenience of sharing without exposing the dashboard to the open internet.
+For cases where you want to share a dashboard without exposing it to the open internet, you can restrict access to specific email addresses or email domains. Invitees access the dashboard through a link sent to their email, without needing a Datadog account.
 
 ### Embedded dashboards
 
@@ -72,7 +72,7 @@ If your enterprise manages more than a handful of orgs and struggles with config
 
 - **Use Cross-Org Visibility for centralized dashboards.** If your leadership or operations team needs a unified view across orgs, Cross-Org Visibility is the right approach. Don't give users accounts in orgs they don't need to access directly.
 - **Be deliberate about public sharing.** Shared dashboards with public URLs are powerful but carry risk. Review which dashboards are shared publicly on a regular basis, and revoke URLs that are no longer needed.
-- **Use authenticated sharing for sensitive dashboards.** If the dashboard contains data that should not be publicly accessible, require SAML authentication.
+- **Use invite-only sharing for sensitive dashboards.** If the dashboard contains data that should not be publicly accessible, restrict access to specific email addresses or domains instead of using a public URL.
 - **Plan for cross-org governance.** If you manage many orgs, use Organization Groups to reduce configuration drift and centralize policy management.
 
 ## Further reading

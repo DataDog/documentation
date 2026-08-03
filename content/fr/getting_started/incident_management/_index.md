@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#utilisation-des-incidents-datadog
   tag: Documentation
   text: Intégration de Slack avec les incidents
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: Blog
-  text: Une programmation en binôme plus efficace avec Datadog CoScreen
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Pratiques recommandées pour la création de post-mortems d'incident

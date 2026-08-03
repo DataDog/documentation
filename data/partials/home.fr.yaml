@@ -294,11 +294,6 @@ nav_sections:
       icon: events
       link: events/
       title: Gestion des événements
-    - desc: Partager et interagir avec les fenêtres d'application pour le pair programming
-        et la gestion des incidents
-      icon: coscreen
-      link: coscreen/
-      title: CoScreen
     - desc: Acheminez vos métriques, logs et traces OpenTelemetry vers Datadog.
       icon: open-telemetry
       link: opentelemetry/
