@@ -23,7 +23,7 @@ With Bits Code automations, you can:
 
 ## Prerequisites
 To set up a Bits Code automation, each of the following must be true:
-- You have the **Bits Code Write** (`bits_dev_write`) permission in Datadog.
+- You have the `Bits Code Write` (`bits_dev_write`) permission in Datadog.
 - You have completed the Bits Code [setup][2].
 - If you plan to have your automations [output Slack notifications](#slack-message-output), you have set up the [Slack integration][4].
 
@@ -32,22 +32,22 @@ You can [create a custom automation](#create-a-custom-automation), or [use a Dat
 
 {{< img src="bits_ai/dev_agent/automations/custom_prompt_creation_form.png" alt="Under an 'Automate with Bits' title, a form with fields like 'Custom Prompt' and 'Every week on' is shown." style="width:100%;" >}}
 
-By default, newly created automations have an **Active** status, and appear in the **My Automations** list.
+By default, newly created automations have an {{< ui >}}Active{{< /ui >}} status, and appear in the {{< ui >}}My Automations{{< /ui >}} list.
 
 ### Create a custom automation
 To create a custom Bits Code automation:
-1. In Datadog, navigate to **Bits AI** > **Bits Code** > [**Automations**][3].
-1. Click **New Automation**.
-1. In the **Automation name** field, enter a descriptive name for the automation.
-1. In the **Trigger** section, configure a [trigger](#triggers).
-1. In the **Output** section, configure one or more [outputs](#outputs).
-1. Click **Create Automation** or **Create & run now**.
+1. In Datadog, navigate to {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Automations{{< /ui >}}][3].
+1. Click {{< ui >}}New Automation{{< /ui >}}.
+1. In the {{< ui >}}Automation name{{< /ui >}} field, enter a descriptive name for the automation.
+1. In the {{< ui >}}Trigger{{< /ui >}} section, configure a [trigger](#triggers).
+1. In the {{< ui >}}Output{{< /ui >}} section, configure one or more [outputs](#outputs).
+1. Click {{< ui >}}Create Automation{{< /ui >}} or {{< ui >}}Create & run now{{< /ui >}}.
 
 ### Create an automation from a template
-Find Datadog-provided automation templates in the **Automation Templates** section. These may include:
+Find Datadog-provided automation templates in the {{< ui >}}Automation Templates{{< /ui >}} section. These may include:
 
-- **Create PRs based on APM Recommendations**: Generates pull or merge requests based on APM Recommendations for a specific service.
-- **Fix frequent errors for a repo**: Uses the [**Custom Prompt**](#custom-prompt-trigger) trigger to instruct Bits Code to scan the last 24 hours of logs, find the most frequent error, and open a pull or merge request with a fix.
+- {{< ui >}}Create PRs based on APM Recommendations{{< /ui >}}: Generates pull or merge requests based on APM Recommendations for a specific service.
+- {{< ui >}}Fix frequent errors for a repo{{< /ui >}}: Uses the [{{< ui >}}Custom Prompt{{< /ui >}}](#custom-prompt-trigger) trigger to instruct Bits Code to scan the last 24 hours of logs, find the most frequent error, and open a pull or merge request with a fix.
 
 Click a template tile to be taken to the new automation form. You must configure an [output](#outputs) before creating the automation.
 
@@ -58,18 +58,18 @@ A trigger defines when an automation runs and what Bits Code acts on. A trigger 
 - [Custom prompt](#custom-prompt-trigger): a freeform instruction telling Bits Code what to do against a chosen repository
 - [Schedule](#schedule-trigger): a recurring time interval, such as daily or on specific days of the week
 
-Click **Add Trigger** to add a component. You can combine a product finding with a schedule, a custom prompt with a schedule, or use a product finding on its own.
+Click {{< ui >}}Add Trigger{{< /ui >}} to add a component. You can combine a product finding with a schedule, a custom prompt with a schedule, or use a product finding on its own.
 
-To limit how many Bits Code sessions the automation can create in a given period (for example, `5 runs per Week`), click **Add Trigger** > **Set max runs**. One automation execution may produce more than one session. Use this setting to control the volume of pull or merge requests, or Slack notifications, an automation produces.
+To limit how many Bits Code sessions the automation can create in a given period (for example, `5 runs per Week`), click {{< ui >}}Add Trigger{{< /ui >}} > {{< ui >}}Set max runs{{< /ui >}}. One automation execution may produce more than one session. Use this setting to control the volume of pull or merge requests, or Slack notifications, an automation produces.
 
 ### Product finding trigger
-A product finding trigger runs the automation in response to new issues in another Datadog product (for example, Error Tracking or Code Security). You can use a product finding trigger by itself, which runs the automation whenever there is a new finding, or with a [schedule](#schedule-trigger) and lookback window you define (in the **New findings within** field).
+A product finding trigger runs the automation in response to new issues in another Datadog product (for example, Error Tracking or Code Security). You can use a product finding trigger by itself, which runs the automation whenever there is a new finding, or with a [schedule](#schedule-trigger) and lookback window you define (in the {{< ui >}}New findings within{{< /ui >}} field).
 
 <div class="alert alert-info">While it's common to use a product finding trigger alone (to immediately remediate new findings), coupling it with a schedule and lookback window lets you monitor for new findings only during certain times. For example, if you deploy weekly on Wednesdays, you may want to configure an APM Recommendations trigger to run every Thursday, looking back 24 hours.</div>
 
 When setting up a product finding trigger, you can configure additional filters, which vary by product. For example:
-  - **Flaky Tests** supports filtering by **Repository**, **Branch** (defaults to the repository's default branch), and **Status**.
-  - **Code Security (SAST)** supports filtering by **Repository**, **Severity**, **Rule to remediate**, and a toggle to **Filter out findings identified as false positives by Bits AI**.
+  - {{< ui >}}Flaky Tests{{< /ui >}} supports filtering by {{< ui >}}Repository{{< /ui >}}, {{< ui >}}Branch{{< /ui >}} (defaults to the repository's default branch), and {{< ui >}}Status{{< /ui >}}.
+  - {{< ui >}}Code Security (SAST){{< /ui >}} supports filtering by {{< ui >}}Repository{{< /ui >}}, {{< ui >}}Severity{{< /ui >}}, {{< ui >}}Rule to remediate{{< /ui >}}, and a toggle to {{< ui >}}Filter out findings identified as false positives by Bits AI{{< /ui >}}.
 
 <div class="alert alert-warning">Each finding that triggers an automation must have its own session, and related pull or merge request. Multiple findings cannot be fixed in a single session.</div>
 
@@ -78,16 +78,16 @@ A custom prompt tells Bits Code what to do each time the automation runs, in fre
 
 ### Schedule trigger
 A schedule trigger controls when an automation runs. It can be used in combination with a [product finding](#product-finding-trigger) or a [custom prompt](#custom-prompt-trigger). When setting a schedule, you can choose from:
-  - **Every…**: Choose a preset interval (for example, `Every day at 09:00 am`).
-  - **Custom Schedule**: Choose specific days of the week and a time of day (for example, `Mo, We, Fr at 03:00 pm`).
+  - {{< ui >}}Every…{{< /ui >}}: Choose a preset interval (for example, `Every day at 09:00 am`).
+  - {{< ui >}}Custom Schedule{{< /ui >}}: Choose specific days of the week and a time of day (for example, `Mo, We, Fr at 03:00 pm`).
 
 ## Outputs
 An output defines what Bits Code does after a [session][1] completes. An automation can have one or more outputs, including [opening a pull or merge request](#pull-or-merge-request-output) and [generating a Slack notification](#slack-message-output).
 
 ### Pull or merge request output
 You can configure your automation to:
-- **Create a PR or MR**: Open a pull or merge request with the proposed changes
-- **Draft a PR or MR**: Open a draft pull or merge request with the proposed changes
+- {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
+- {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
 
 As the author of a Bits Code automation, you are the author of all pull or merge requests it generates.
 
@@ -97,7 +97,7 @@ You can configure your automation to send a Slack message summarizing the [sessi
 When you add a Slack message output, by default, Bits Code sends the message to the channel configured for the affected service in [Catalog][5]. You can set a fallback Slack channel, which is used when no channel is set in Catalog.
 
 ## Manage automations
-On [**Automations**][3], view the automations you created on the **My Automations** tab. Switch to **All** to see automations created by anyone in your organization.
+On [{{< ui >}}Automations{{< /ui >}}][3], view the automations you created on the {{< ui >}}My Automations{{< /ui >}} tab. Switch to {{< ui >}}All{{< /ui >}} to see automations created by anyone in your organization.
 
 You can pause or resume any automation, but you can only edit or delete automations you created.
 
