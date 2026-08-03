@@ -83,13 +83,17 @@ Many organizations use Workload Protection across a range of security and operat
 
 ## How it works
 
-Workload Protection is built on top of the Datadog Agent, which continuously collects real-time runtime telemetry from your workloads. Agent rules determine which security-relevant events are streamed to Datadog for centralized analysis. After they are ingested, these events are processed by backend detection and finding rules, which analyze the data to generate detailed, prioritized Signals or Findings.
-
-Using Remote Configuration, you can manage agent rule deployments and trigger response actions directly in Datadog. In addition, Workload Protection integrates with the Datadog Terraform provider, allowing you to define, version, and maintain your rules as code outside the app.
+Workload Protection evaluates runtime activity in two places. Agent rules decide which system activity the Datadog Agent sends to Datadog. Matching activity becomes an agent event. In Datadog, detection rules turn agent events into signals, and finding rules turn them into findings.
 
 {{< img src="security/workload_protection/architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
+For the full model, including how activity is collected on each platform and how response actions run, see [How Workload Protection works][6].
+
 ## Next steps
+
+### How it works
+
+Read [How Workload Protection works][6] for the complete model. It covers how the Agent collects activity on each platform, how the detection pipeline evaluates it, and how response actions run.
 
 ### Setup
 
@@ -122,3 +126,4 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 [3]: /security/workload_protection/investigate_and_triage
 [4]: /security/workload_protection/respond_and_report
 [5]: /security/workload_protection/inventory
+[6]: /security/workload_protection/how_it_works
