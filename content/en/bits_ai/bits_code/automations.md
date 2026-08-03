@@ -89,7 +89,7 @@ You can configure your automation to:
 - {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
 - {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
 
-As the author of a Bits Code automation, you are the author of the pull or merge requests it generates during user-initiated sessions. Autonomous runs that execute without a user in context (for example, scheduled automations running in the background) use the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) as the PR author.
+Pull or merge request authorship is controlled by the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][6], which a Datadog administrator can configure. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
 
 ### Slack message output
 You can configure your automation to send a Slack message summarizing the [session][1] and code changes. If you use a pull or merge request output in addition to a Slack output, Bits Code includes a link to the pull or merge request in the Slack message.
@@ -98,10 +98,6 @@ When you add a Slack message output, by default, Bits Code sends the message to 
 
 ## Manage automations
 On [{{< ui >}}Automations{{< /ui >}}][3], view the automations you created on the {{< ui >}}My Automations{{< /ui >}} tab. Switch to {{< ui >}}All{{< /ui >}} to see automations created by anyone in your organization.
-
-The automation list includes a {{< ui >}}Pull Requests{{< /ui >}} column showing the Draft, Open, and Merged pull request counts for each automation. Click the pull request summary to open the automation's details page. On narrow screens, the summary appears below the automation name.
-
-Use the {{< ui >}}Filter by Service{{< /ui >}} and {{< ui >}}Filter by Repository{{< /ui >}} dropdowns to narrow the list. Both filters persist in the URL for deep-linking, and you can use them individually or together. Selecting multiple values within a filter matches any of them.
 
 You can pause or resume any automation, but you can only edit or delete automations you created.
 
@@ -113,3 +109,4 @@ You can pause or resume any automation, but you can only edit or delete automati
 [3]: https://app.datadoghq.com/code/automations
 [4]: /integrations/slack/
 [5]: /internal_developer_portal/catalog/
+[6]: https://app.datadoghq.com/code/settings
