@@ -121,6 +121,19 @@ See [Metric Types][3] for more information.
 [4]: https://opentelemetry.io/docs/specs/otel/metrics/data-model/#temporality
 
 {{% /tab %}}
+
+{{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+Use the [Trace Sampling][1] template to create a trace pipeline.
+
+See [Set Up Pipelines][2] for more information on setting up a source, processors, and destinations.
+
+[1]: /observability_pipelines/configuration/explore_templates/?tab=traces#trace-sampling
+[2]: /observability_pipelines/configuration/set_up_pipelines/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading
