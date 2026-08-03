@@ -117,12 +117,12 @@ To customize tagging:
 
 Distribution metrics store data differently from non-distribution types (count, rate, gauge). If the same metric name receives both distribution and non-distribution data, Datadog's query system automatically gives preference to the distribution data. **This is called overshadowing.**
 
-No data is lost — both timeseries are stored — but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution data point arrives.
+No data is lost (both timeseries are stored) but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution datapoint arrives.
 
 ### Common symptoms
 
 * A metric's tags or data appear to change suddenly, without any configuration change on your end.
-* You receive this error when updating a tag configuration with the Metrics without Limits™ API:
+* You receive this error when updating a tag configuration with the Metrics without Limits API:
 
     ```
     New tag-configuration conflicts with existing configuration for <METRIC_NAME>
@@ -140,7 +140,7 @@ Metric names must be unique across types. Follow these practices to prevent conf
 
 ### Resolving overshadowing
 
-If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data — it is not possible to retain both under the same metric name.
+If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data. It is not possible to retain both under the same metric name.
 
 Contact [Datadog Support][6] with:
 
