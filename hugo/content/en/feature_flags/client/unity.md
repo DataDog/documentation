@@ -201,8 +201,12 @@ Flag details may help you debug evaluation behavior and understand why a user re
 
 The `DdFlags.Enable()` API accepts optional configuration with options listed below.
 
+By default, each assignment request attempt has a one-second timeout, and the SDK retries transient failures once. Transient failures include network errors, timeouts, HTTP 408, HTTP 429, and HTTP 5xx responses.
+
 {{< code-block lang="csharp" >}}
 DdFlags.Enable(new FlagsConfiguration(
+    assignmentRequestTimeoutSeconds: 2,
+    assignmentRequestRetryCount: 2,
     trackExposures: true,
     trackEvaluations: true,
     evaluationFlushIntervalSeconds: 10.0f
@@ -217,6 +221,12 @@ DdFlags.Enable(new FlagsConfiguration(
 
 `evaluationFlushIntervalSeconds`
 : The interval in seconds at which batched evaluation events are sent to Datadog. Accepted values are between `1` and `60`. Default is `10.0` seconds.
+
+`assignmentRequestTimeoutSeconds`
+: The timeout for each assignment request attempt, in seconds. The default is `1`. Values less than or equal to `0` use the default.
+
+`assignmentRequestRetryCount`
+: The number of retries after the first attempt. The default is `1`. Set this option to `0` to disable retries. Negative values are treated as `0`.
 
 `customFlagsEndpoint`
 : Configures a custom server URL for retrieving flag assignments.
