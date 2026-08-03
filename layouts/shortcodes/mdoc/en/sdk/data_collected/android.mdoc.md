@@ -150,6 +150,8 @@ RUM action, error, resource, and long task events contain information about the 
 | `view.is_active`      |    Boolean   | Indicates whether the view corresponding to this event is considered active.            |
 | `view.loading_time` | number (ns) | Time it took for the view to load, set by the `addViewLoadingTime(override:)` call. |
 | `view.long_task.count`        | number      | Count of all long tasks collected for this view.                                |
+| `view.memory_average` | number (bytes) | Average amount of resident memory (native and JVM/ART heap) used while this view was foregrounded. |
+| `view.memory_max` | number (bytes) | Peak amount of resident memory (native and JVM/ART heap) used while this view was foregrounded. |
 | `view.name` | string | Customizable name of the view corresponding to the event. |
 | `view.network_settled_time` | number (ns) | Time it took for a view to be fully loaded with all relevant network calls initiated at the start of the view. |
 | `view.resource.count`         | number      | Count of all resources collected for this view.                                 |
