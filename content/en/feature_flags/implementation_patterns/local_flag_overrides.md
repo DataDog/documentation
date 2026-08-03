@@ -28,7 +28,7 @@ Typical use cases include:
 
 <div class="alert alert-warning">Use local overrides only in non-production environments. Restrict or disable this pattern in production builds so end users cannot change flag behavior through local configuration.</div>
 
-## How it works
+## How local flag overrides work
 
 OpenFeature's Multi-Provider wraps multiple providers behind a single client. By default, it uses the **First Match** strategy:
 
