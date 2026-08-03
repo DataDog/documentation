@@ -113,6 +113,42 @@ To customize tagging:
 
 {{< img src="metrics/distributions/dist_manage.jpg" alt="Configuring tags on a distribution with the Manage Tags button" style="width:80%;">}}
 
+## Metric name conflicts and overshadowing
+
+Distribution metrics store data differently from non-distribution types (count, rate, gauge). If the same metric name receives both distribution and non-distribution data, Datadog's query system automatically gives preference to the distribution data. **This is called overshadowing.**
+
+No data is lost — both timeseries are stored — but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution data point arrives.
+
+### Common symptoms
+
+* A metric's tags or data appear to change suddenly, without any configuration change on your end.
+* You receive this error when updating a tag configuration with the Metrics without Limits™ API:
+
+    ```
+    New tag-configuration conflicts with existing configuration for <METRIC_NAME>
+    ```
+* A metric reports as a different type than expected (for example, you expect `distribution` but see `count`, or vice versa).
+* You submit a Logs-based metric with a name that matches an existing custom metric. Logs-based metrics always emit as distributions, which immediately triggers overshadowing.
+
+### How to avoid overshadowing
+
+Metric names must be unique across types. Follow these practices to prevent conflicts:
+
+* **Use distinct names for distribution metrics.** Never reuse a metric name across distribution and non-distribution submissions.
+* **Check for existing metrics before creating Logs-based metrics.** Since Logs-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, or rate metric.
+* **Do not reuse a retired distribution metric name.** If you stop submitting distribution data for a name, do not later use that name for a non-distribution metric, or vice versa.
+
+### Resolving overshadowing
+
+If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data — it is not possible to retain both under the same metric name.
+
+Contact [Datadog Support][6] with:
+
+* The metric name(s) affected
+* Which data type you want to preserve going forward
+
+After the conflict is resolved, rename any future submissions to help ensure the metric name is used for only one type.
+
 ## Audit events
 Any tag configuration or percentile aggregation changes create an event in the [event explorer][3]. This event explains the change and displays the user that made the change.
 
@@ -136,3 +172,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [3]: https://app.datadoghq.com/event/explorer
 [4]: https://app.datadoghq.com/metric/summary
 [5]: /metrics/open_telemetry/otlp_metric_types/
+[6]: https://www.datadoghq.com/support/
