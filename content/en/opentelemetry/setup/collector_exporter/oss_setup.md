@@ -28,9 +28,9 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 ## Prerequisites
 
-This setup supports bare metal, VMs, and Kubernetes, including managed distributions such as Amazon EKS and Google GKE. Standard EKS is tested; EKS auto mode is not. This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
+This setup supports bare metal, VMs, Docker, and Kubernetes, including the managed distributions Amazon EKS (standard clusters and Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (standard clusters and Automatic). This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
 
-- [OpenTelemetry Collector Contrib][1] v0.152.0 or later
+- [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
 - Your [Datadog site][3] (for example, `datadoghq.com` or `datadoghq.eu`)
 
@@ -61,7 +61,7 @@ receivers:
       http:
         endpoint: 0.0.0.0:4318
   # Collect host-level metrics for the Infrastructure List
-  hostmetrics:
+  host_metrics:
     collection_interval: 10s
     scrapers:
       cpu:
@@ -95,18 +95,18 @@ receivers:
 
 processors:
   # Detect host and cloud metadata for hostname resolution and tagging
-  resourcedetection:
+  resource_detection:
     detectors: [env, system]
     timeout: 2s
-    override: true
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
 
 connectors:
   # Separate trace processing from sampling so span metrics are computed on all traces
-  forward: {}
+  forward/traces_sample: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
-  spanmetrics:
+  span_metrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
     histogram:
@@ -173,7 +173,10 @@ exporters:
     compression_params:
       level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
-      batch: {}
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
 
 extensions:
   # Report Collector metadata to Datadog for host enrichment
@@ -189,22 +192,22 @@ service:
   pipelines:
     logs:
       receivers: [otlp]
-      processors: [resourcedetection]
+      processors: [resource_detection]
       exporters: [otlp_http]
     metrics:
-      receivers: [otlp, hostmetrics]
-      processors: [resourcedetection, cumulativetodelta]
+      receivers: [otlp, host_metrics]
+      processors: [resource_detection, cumulativetodelta]
       exporters: [otlp_http]
     traces:
       receivers: [otlp]
-      processors: [resourcedetection]
-      exporters: [forward, spanmetrics]
-    traces/sampling:
-      receivers: [forward]
+      processors: [resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
-    metrics/spanmetrics:
-      receivers: [spanmetrics]
+    metrics/span_metrics:
+      receivers: [span_metrics]
       exporters: [otlp_http]
   telemetry:
     # Route Collector self-monitoring metrics through its own pipelines
@@ -230,9 +233,12 @@ See the [full configuration files][500] for an optional config to gather additio
 
 {{% tab "Docker" %}}
 
-Use this configuration for a containerized Collector. The `hostmetrics` receiver requires mounting the host filesystem at `/hostfs`.
+Use this configuration for a containerized Collector. The `host_metrics` receiver requires mounting the host filesystem at `/hostfs`.
 
-Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+Set the following environment variables before starting the Collector:
+
+- `DD_API_KEY` and `DD_SITE`
+- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot detect host information from inside a container, so provide it here (for example, `host.name=<YOUR_HOST_NAME>`).
 
 ```yaml
 receivers:
@@ -245,7 +251,7 @@ receivers:
         endpoint: 0.0.0.0:4318
   # Collect host-level metrics for the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
-  hostmetrics:
+  host_metrics:
     root_path: /hostfs
     collection_interval: 10s
     scrapers:
@@ -280,7 +286,7 @@ receivers:
 
 processors:
   # Detect host and cloud metadata for hostname resolution and tagging
-  resourcedetection:
+  resource_detection:
     detectors: [env]
     timeout: 2s
     override: true
@@ -289,9 +295,9 @@ processors:
 
 connectors:
   # Separate trace processing from sampling so span metrics are computed on all traces
-  forward: {}
+  forward/traces_sample: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
-  spanmetrics:
+  span_metrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
     histogram:
@@ -358,7 +364,10 @@ exporters:
     compression_params:
       level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
-      batch: {}
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
 
 extensions:
   # Report Collector metadata to Datadog for host enrichment
@@ -374,22 +383,22 @@ service:
   pipelines:
     logs:
       receivers: [otlp]
-      processors: [resourcedetection]
+      processors: [resource_detection]
       exporters: [otlp_http]
     metrics:
-      receivers: [otlp, hostmetrics]
-      processors: [resourcedetection, cumulativetodelta]
+      receivers: [otlp, host_metrics]
+      processors: [resource_detection, cumulativetodelta]
       exporters: [otlp_http]
     traces:
       receivers: [otlp]
-      processors: [resourcedetection]
-      exporters: [forward, spanmetrics]
-    traces/sampling:
-      receivers: [forward]
+      processors: [resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
-    metrics/spanmetrics:
-      receivers: [spanmetrics]
+    metrics/span_metrics:
+      receivers: [span_metrics]
       exporters: [otlp_http]
   telemetry:
     # Route Collector self-monitoring metrics through its own pipelines
@@ -410,9 +419,10 @@ docker run \
     -p 4318:4318 \
     -e DD_API_KEY \
     -e DD_SITE \
+    -e OTEL_RESOURCE_ATTRIBUTES \
     -v /:/hostfs:ro \
     -v $(pwd)/collector.yaml:/etc/otelcol-contrib/config.yaml \
-    otel/opentelemetry-collector-contrib:0.152.0 \
+    otel/opentelemetry-collector-contrib:0.154.0 \
     --config /etc/otelcol-contrib/config.yaml
 ```
 
@@ -420,9 +430,16 @@ docker run \
 
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Use this configuration for a Collector deployed as a Kubernetes DaemonSet. This includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata.
+Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for pod and container metrics. For managed Kubernetes distributions, apply the changes described under **Managed Kubernetes distributions** after the configuration.
 
-Set the `DD_API_KEY` and `DD_SITE` environment variables before starting the Collector.
+Set the following environment variables before starting the Collector:
+
+- `DD_API_KEY` and `DD_SITE`
+- `K8S_NODE_NAME`: The name of the Kubernetes node, used by the `kubelet_stats` receiver. Set it from `spec.nodeName`.
+- `MY_POD_IP`: The pod IP, used by the `health_check` extension. Set it from `status.podIP`.
+- `OTEL_RESOURCE_ATTRIBUTES`: Host information, because no host detection is possible in this setup (for example, `k8s.node.name=$(K8S_NODE_NAME)`).
+
+Mount the host filesystem at `/hostfs` so the `host_metrics` receiver can collect host metrics.
 
 ```yaml
 receivers:
@@ -435,7 +452,7 @@ receivers:
         endpoint: 0.0.0.0:4318
   # Collect host-level metrics for the Infrastructure List
   # root_path maps to the host filesystem mounted at /hostfs
-  hostmetrics:
+  host_metrics:
     root_path: /hostfs
     collection_interval: 10s
     scrapers:
@@ -467,15 +484,36 @@ receivers:
       load: {}
       network: {}
       processes: {}
+  # Collect node, pod, container, and volume metrics from the kubelet
+  kubelet_stats:
+    collection_interval: 15s
+    auth_type: "serviceAccount"
+    endpoint: "${env:K8S_NODE_NAME}:10250"
+    node: "${env:K8S_NODE_NAME}"
+    insecure_skip_verify: true
+    metric_groups:
+      - node
+      - pod
+      - container
+      - volume
 
 processors:
   # Detect host and cloud metadata for hostname resolution and tagging
-  resourcedetection:
-    detectors: [env]
+  resource_detection:
+    detectors: [env, system]
     timeout: 2s
-    override: true
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false # Containers report inaccurate host names
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
+  # Convert selected delta metrics to rates
+  deltatorate:
+    metrics:
+      - k8s.pod.network.io
+      - k8s.pod.network.errors
   # Enrich telemetry with Kubernetes pod and container metadata
   k8s_attributes:
     extract:
@@ -516,9 +554,9 @@ processors:
 
 connectors:
   # Separate trace processing from sampling so span metrics are computed on all traces
-  forward: {}
+  forward/traces_sample: {}
   # Generate RED (Rate, Error, Duration) metrics from traces for APM
-  spanmetrics:
+  span_metrics:
     aggregation_temporality: AGGREGATION_TEMPORALITY_DELTA
     add_resource_attributes: true
     histogram:
@@ -585,7 +623,10 @@ exporters:
     compression_params:
       level: 3 # Must be set explicitly for zstd; the default uses the lowest compression level
     sending_queue:
-      batch: {}
+      batch:
+        sizer: bytes
+        min_size: 2097152 # Start flushing batches at 2MiB (2 * 1024 * 1024)
+        max_size: 4194304 # Split large batches at 4MiB (4 * 1024 * 1024)
 
 extensions:
   # Required for Kubernetes liveness/readiness probes
@@ -605,22 +646,22 @@ service:
   pipelines:
     logs:
       receivers: [otlp]
-      processors: [k8s_attributes, resourcedetection]
+      processors: [k8s_attributes, resource_detection]
       exporters: [otlp_http]
     metrics:
-      receivers: [otlp, hostmetrics]
-      processors: [k8s_attributes, resourcedetection, cumulativetodelta]
+      receivers: [otlp, host_metrics, kubelet_stats]
+      processors: [k8s_attributes, resource_detection, cumulativetodelta, deltatorate]
       exporters: [otlp_http]
     traces:
       receivers: [otlp]
-      processors: [k8s_attributes, resourcedetection]
-      exporters: [forward, spanmetrics]
-    traces/sampling:
-      receivers: [forward]
+      processors: [k8s_attributes, resource_detection]
+      exporters: [forward/traces_sample, span_metrics]
+    traces/sample:
+      receivers: [forward/traces_sample]
       # Add sampling processors here (for example, tail_sampling) before exporting traces
       exporters: [otlp_http]
-    metrics/spanmetrics:
-      receivers: [spanmetrics]
+    metrics/span_metrics:
+      receivers: [span_metrics]
       exporters: [otlp_http]
   telemetry:
     # Route Collector self-monitoring metrics through its own pipelines
@@ -633,30 +674,108 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-For EKS environments, add the `eks` and `ec2` detectors to the `resourcedetection` processor:
+The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions.
+
+**Managed Kubernetes distributions**
+
+On a managed Kubernetes distribution, replace the `resource_detection` processor in the previous configuration with the version for your environment. The cloud detectors provide host information, so you do not need to set `OTEL_RESOURCE_ATTRIBUTES`.
+
+**Amazon EKS**:
 
 ```yaml
 processors:
-  resourcedetection:
-    detectors: [eks, ec2, env]
-    timeout: 2s
+  resource_detection:
+    detectors: [eks, ec2, env, system]
+    timeout: 15s
     override: true
     eks:
       resource_attributes:
         k8s.cluster.name: { enabled: true }
     ec2:
       tags: ['^kubernetes\.io/cluster/.*$']
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
 ```
 
-The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions.
+The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
+
+**Amazon EKS Auto Mode**:
+
+```yaml
+processors:
+  resource_detection:
+    detectors: [eks, env, system]
+    timeout: 15s
+    override: true
+    eks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+        host.id: { enabled: true } # Required for host name inference
+        cloud.account.id: { enabled: true }
+        cloud.availability_zone: { enabled: true }
+        cloud.region: { enabled: true }
+        host.image.id: { enabled: true }
+        host.type: { enabled: true }
+      node_from_env_var: K8S_NODE_NAME
+    ec2:
+      tags: ['^kubernetes\.io/cluster/.*$']
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
+```
+
+The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
+
+**Google GKE**:
+
+```yaml
+processors:
+  resource_detection:
+    detectors: [gcp, env, system]
+    timeout: 2s
+    override: true
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
+```
+
+On unsupported GKE versions, you may need to supply the node name as `host.name` in `OTEL_RESOURCE_ATTRIBUTES`.
+
+**Azure AKS**:
+
+```yaml
+processors:
+  resource_detection:
+    detectors: [aks, azure, env, system]
+    timeout: 2s
+    override: true
+    aks:
+      resource_attributes:
+        k8s.cluster.name: { enabled: true }
+    system:
+      resource_attributes:
+        host.name:
+          enabled: false
+```
+
+**GKE Autopilot and AKS Automatic**
+
+These modes do not allow mounting `/hostfs` or using host ports. Use the `resource_detection` processor for GKE or AKS respectively, and also remove the `host_metrics` receiver from the configuration and from the `metrics` pipeline. Pod and container metrics still come from the `kubelet_stats` receiver.
+
+For the complete configuration file for each environment, see the [`opentelemetry-examples` repository][501].
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
+[501]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
 
 {{% /tab %}}
 
 {{% tab "Kubernetes (Helm chart)" %}}
 
-You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102].
+You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources for you.
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -670,7 +789,17 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
    helm repo add open-telemetry https://open-telemetry.github.io/opentelemetry-helm-charts
    ```
 
-1. Download the [example values file][103] and save it as `values.yaml`. This file configures the Collector as a DaemonSet with the recommended Datadog settings. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
+1. Download the example values file for your environment and save it as `values.yaml`. If your Datadog site is not `datadoghq.com`, update the `DD_SITE` value in `values.yaml` before installing.
+
+   | Environment | Values file |
+   |---|---|
+   | Kubernetes (non-cloud) | [`daemonset.yaml`][103] |
+   | Amazon EKS | [`daemonset-eks.yaml`][104] |
+   | Amazon EKS Auto Mode | [`daemonset-eks-auto.yaml`][105] |
+   | Google GKE | [`daemonset-gke.yaml`][106] |
+   | Google GKE Autopilot | [`daemonset-gke-autopilot.yaml`][107] |
+   | Azure AKS | [`daemonset-aks.yaml`][108] |
+   | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
 
 1. Install the Collector:
 
@@ -680,6 +809,12 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
 
 [102]: https://github.com/open-telemetry/opentelemetry-helm-charts/tree/main/charts/opentelemetry-collector
 [103]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset.yaml
+[104]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks.yaml
+[105]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-eks-auto.yaml
+[106]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke.yaml
+[107]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-gke-autopilot.yaml
+[108]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks.yaml
+[109]: https://github.com/DataDog/opentelemetry-examples/blob/experimental-oss-config/configurations/opentelemetry-collector/helm-values/daemonset-aks-automatic.yaml
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -747,9 +882,9 @@ After your application sends telemetry to the Collector, verify that data appear
 
 ### Span metrics connector
 
-The `spanmetrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
+The `span_metrics` connector generates RED metrics from trace data. These metrics power APM features including the Service Catalog, Service Page, and Resource Page. The connector is configured with dimensions that enable Datadog to compute host tags, peer services, and operation names from your traces.
 
-For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository.
+For a complete list of dimensions included in the recommended configuration, including those related to container tags, see the [full configuration files][5] in the `opentelemetry-examples` repository. Those files also show how to replace groups of container tag dimensions with glob patterns, such as `- glob: container.**`.
 
 ### OTLP HTTP exporter
 
@@ -757,6 +892,7 @@ The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints
 
 - **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
+- **Batching**: The `sending_queue.batch` settings flush batches at 2 MiB and split larger batches at 4 MiB, which keeps requests under the intake payload size limit.
 
 #### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
 
@@ -793,6 +929,10 @@ The `datadog` extension sends Collector metadata to Datadog for host enrichment.
 ### Cumulative-to-delta processor
 
 The `cumulativetodelta` processor converts cumulative metrics to delta temporality, which is [Datadog's recommended configuration][6] for OpenTelemetry metrics.
+
+### Kubelet stats receiver
+
+In Kubernetes deployments, the `kubelet_stats` receiver collects node, pod, container, and volume metrics from the kubelet on each node. The `deltatorate` processor converts the pod network metrics it produces to rates.
 
 ### Self-monitoring telemetry
 
