@@ -27,7 +27,7 @@ The core concepts between Statsig and Datadog are similar, but the terminology d
 
 ## 2. Install the SDK
 
-Datadog recommends using the **OpenFeature** standard for feature flagging SDKs. This provides a vendor-neutral API while using Datadog as the underlying provider.
+Datadog designs its feature flagging SDKs for use with **OpenFeature**. This provides a vendor-neutral API while using Datadog as the underlying provider.
 
 Remove Statsig:
 
