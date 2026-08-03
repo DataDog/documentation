@@ -120,9 +120,9 @@ To get your organization UUID, call [{{< region-param key="dd_api" >}}/api/v2/cu
 
 Claude uses one OAuth client ID in every Datadog organization:
 
-```text
+{{< code-block lang="text" >}}
 391e6845-8153-4de1-bbf0-c1b6ef7fdc14
-```
+{{< /code-block >}}
 
 You enter this in Okta as **Client ID at resource**.
 
