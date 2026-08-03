@@ -34,7 +34,7 @@ REPO = "DataDog/documentation"
 LABEL_STALE = "autolabeled-stale"
 
 CLOSE_COMMENT = (
-    "Closing this PR because it has had no activity for six months. "
+    "This PR was closed after six or more months of inactivity. "
     "If this was done in error, feel free to re-open the PR."
 )
 

@@ -25,55 +25,31 @@ Announce the reorg (see copy for various channels below).
 
 See link you saved above.
 
-### 2. Remind the docs on-call of the reorg
+### 2. Verify that the docs oncall folks have what they need
 
-- [ ] Post the message below in #docs-backroom, tagging the current on-call folks, and put the URL here: <LINK>
-
-```
-Hi <ONCALLS>,
-
-Tomorrow at about <X TIME>, I'll declare a code freeze in order to reorganize the docs repo. These are the steps I'll take:
-
-1. Start the code freeze.
-2. Reorg the repo and verify the build.
-3. Make any necessary last-minute fixes to GitHub actions, etc. broken by the reorg.
-4. Merge the reorg to master, and verify the build.
-5. Run a script that processes every open PR in the docs repo:
-    - PRs with no conflicts: Label them to avoid reprocessing them.
-    - PRs marked `WORK IN PROGRESS`: Skip, but leave a comment on them describing how to opt in to the auto fix.
-    - PRs with no recent activity (1 month): Skip, but leave a comment on them describing how to opt in to the auto fix.
-    - PRs with conflicts that can be automatically fixed: Close the original PR and link a new autofix PR.
-    - PRs with conflicts that CANNOT be automatically fixed: Put a label on it to prevent repeat processing, and comment on the PR to delegate conflict resolution to the author (with an escalation path if they need it).
-6. Lift the code freeze.
-
-Auto-fixable PRs are closed, manual-intervention PRs are automatically labeled `WORK IN PROGRESS`, and auto-created PRs are labeled `WORK IN PROGRESS` so their authors can review them. This means that your review queue will be strangely quiet at first, and should not ever contain weird noise from the reorg.
-
-Once an author has reviewed an auto-created PR and removed the `WORK IN PROGRESS` label, you can treat it as any other PR.
-
-**You are not expected to provide support for any issues arising from the reorg.** I'll be here to help all day, and for longer than that if needed. If someone raises an issue in #documentation, you can just tag me or cross-post it to #docs-repo-reorg-support.
-
-If you have questions, please ask them on this thread or reach out in #docs-repo-reorg-support.
-```
+Remind them of the reorg, link them to the Confluence page, and ask if they have any questions.
 
 ## The day of
 
 NOTE: This file will get deleted from your reorg branch, so don't edit it there. You can push what you have, then check it off [here](https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/astro_reorg/docs/reorg_execution_steps.md) instead.
 
-### 1. Bump the announcement in the #documentation channel
+### 1. In #docs-backroom, link the Confluence page and remind the team that you're about to get started
 
 See link you saved above.
 
-### 2. Bump the detailed message in #docs-backroom
+### 2. Bump the announcement in the #documentation channel, with a tracker
 
-See link you saved above.
+See link you saved above, and the tracker you composed in your DMs.
 
-### 3. Declare a code freeze
+### 3. Declare an incident
+
+### 4. Declare a code freeze
 
 See the [Confluence page](https://datadoghq.atlassian.net/wiki/spaces/WEB/pages/5286757291/Code+Freeze+Workflows).
 
 Announce the freeze in `#documentation` with a link to the reorg README.
 
-### 4. Create a reorged `master` branch
+### 5. Create a reorged `master` branch
 
 - [ ] Merge master into the scripts branch:
    ```bash
@@ -98,14 +74,14 @@ Announce the freeze in `#documentation` with a link to the reorg README.
    git commit -m "Create hugo site folder"
    ```
 
-### 5. Push and open a PR against master
+### 6. Push and open a PR against master
 
 ```bash
 git push -u origin jen.gilbert/hugo-site-folder &&
 gh pr create --base master --title "Create Hugo site folder" 
 ```
 
-### 6. Verify that the GitHub actions etc. are working, and make any necessary fixes
+### 7. Verify that the GitHub actions etc. are working, and make any necessary fixes
 
 - [ ] Verify that GitHub actions aren't erring out from bad paths.
 - [ ] While the preview is building, run some local checks:
@@ -114,14 +90,14 @@ gh pr create --base master --title "Create Hugo site folder"
    - [ ] API pages are working correctly.
    - [ ] Single sourced content is working correctly.
 
-### 7. Verify the preview build
+### 8. Verify the preview build
 
 - [ ] The GitLab artifacts for the preview build should be similar to those of the last build on `master`: same number of HTML files in `public`, for example.
 - [ ]
 
-### 7. Merge to master and verify the build
+### 9. Merge to master and verify the build
 
-### 8. Run the PR resolution script
+### 10. Run the PR resolution script
 
 Run the script in batches, building confidence before scaling up. The script defaults to a dry run against the mock base branch — pass `--live` to target real master, and `--no-dry-run` to apply changes.
 
@@ -142,11 +118,11 @@ Run the script in batches, building confidence before scaling up. The script def
 
 You can view [all processed PRs here](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-processed), regardless of their outcome.
 
-### 9. End the code freeze
+### 11. End the code freeze
 
-### 10. Post in #documentation and #docs-backroom
+### 12. Post in #documentation and #docs-backroom
 
-### 11. Monitor the queues
+### 13. Monitor the queues
 
 - [All processed PRs](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-processed)
 - [Fixed-and-closed PRs](https://github.com/DataDog/documentation/pulls?q=is%3Apr+label%3Aastro-reorg-autofixed)
