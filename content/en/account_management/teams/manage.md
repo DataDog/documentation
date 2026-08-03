@@ -103,7 +103,7 @@ With hierarchies defined, you can:
 
 You can define hierarchical relationships between teams in four ways:
 
-- **GitHub Teams**: If you used GitHub to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **GitHub Teams**: If you used [GitHub] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
 - **Teams API**: See [Create a team hierarchy link][5].
 - **Terraform**: Use the [`datadog_team_hierarchy_links`][8] resource.
 - **Datadog UI**: Define relationships directly on a team's page:
@@ -143,3 +143,4 @@ To enforce a strict membership model, configure your default team settings so {{
 [6]: /incident_response/on-call/
 [7]: https://app.datadoghq.com/software?selectedComponent=team
 [8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_hierarchy_links
+[9]: /account_management/teams/github/
