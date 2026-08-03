@@ -38393,6 +38393,17 @@ components:
           items:
             $ref: "#/components/schemas/FlakyTestHistory"
           type: array
+        impact_level:
+          $ref: "#/components/schemas/FlakyTestImpactLevel"
+          nullable: true
+        impact_score:
+          description: A score from 0 to 1 indicating the impact of this flaky test, based on factors such as how often it fails and how many pipelines it affects.
+          example: 0.78
+          format: double
+          maximum: 1
+          minimum: 0
+          nullable: true
+          type: number
         last_flaked_branch:
           description: The branch name where the test exhibited flakiness for the last time.
           example: main
@@ -38601,6 +38612,12 @@ components:
           nullable: true
           type: array
       type: object
+    FlakyTestImpactLevel:
+      description: The impact level of the flaky test, derived from its impact score.
+      enum: [low, medium, high]
+      example: medium
+      type: string
+      x-enum-varnames: [LOW, MEDIUM, HIGH]
     FlakyTestPipelineStats:
       description: CI pipeline related statistics for the flaky test. This information is only available if test runs are associated with CI pipeline events from CI Visibility.
       properties:
