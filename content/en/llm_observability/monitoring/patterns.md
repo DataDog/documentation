@@ -65,6 +65,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
    - **On demand** (default): Run the Pattern manually.
    - **Daily**, **Weekdays**, or **Weekly**: Run automatically at a time (and, for weekly, a day) you choose.
    - **Custom**: Run automatically every 1 to 7 days.
+1. (Optional) Under **Dataset coverage**, select one or more offline evaluation datasets to measure production traffic coverage against. To automatically fill coverage gaps, enable the **Automatic dataset curation** toggle. When enabled, Datadog creates a managed project (`Patterns-coverage`) and a per-pattern dataset (`{pattern-name}-pattern-curated`) to receive suggested interactions after each run. The toggle is **on** by default for new Patterns.
 1. Click **Create and Run Pattern**, or **Create Pattern** to create it without running it.
 
 ## Explore your Patterns
@@ -130,6 +131,10 @@ Use traffic percentage to identify your most common use cases. The parent-child 
 ### Find evaluation coverage gaps
 
 Compare your topic distribution against what your golden datasets actually cover. Look at topics that represent high production volume but have no corresponding evaluation cases: this is where your test coverage has gaps, and where model regressions are least likely to be caught before they reach users.
+
+### Automatically curate evaluation datasets
+
+When automatic dataset curation is enabled, each Patterns run adds suggested interactions for under-covered topics directly into a managed dataset (`{pattern-name}-pattern-curated` inside the `Patterns-coverage` project). After a run completes, open a topic's detail view and click **Access dataset** to review the curated records and use them as evaluation test cases.
 
 ### Diagnose failure patterns
 
