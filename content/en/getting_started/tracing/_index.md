@@ -31,9 +31,7 @@ This guide demonstrates how to get started with APM and send your first trace to
 1. Run your application to generate data.
 1. Explore the collected data in Datadog.
 
-{{< agent-skill skill="dd-apm" >}}
-If you use an AI coding agent such as Claude Code or Cursor, install the `dd-apm` skill to have your agent guide you through instrumenting your services, verifying that traces arrive, and investigating performance in Datadog.
-{{< /agent-skill >}}
+{{% dd-apm-skill %}}
 
 ## Prerequisites
 

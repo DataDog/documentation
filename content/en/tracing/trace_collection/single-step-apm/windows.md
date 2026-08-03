@@ -15,9 +15,7 @@ further_reading:
 
 With Single Step Instrumentation (SSI), you can enable APM for your Java and .NET applications on Windows VMs using a single Datadog Agent installation command.
 
-{{< agent-skill skill="dd-apm" >}}
-If you use an AI coding agent such as Claude Code or Cursor, install the `dd-apm` skill to have your agent guide you through installing the Datadog Agent, enabling SSI, and verifying that your applications are instrumented.
-{{< /agent-skill >}}
+{{% dd-apm-skill %}}
 
 ## Enable APM on Windows
 

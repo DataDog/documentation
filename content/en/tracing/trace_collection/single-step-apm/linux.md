@@ -18,9 +18,7 @@ further_reading:
 
 On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][14] your applications in one step, with no additional configuration required. 
 
-{{< agent-skill skill="dd-apm" >}}
-If you use an AI coding agent such as Claude Code or Cursor, install the `dd-apm` skill to have your agent guide you through installing the Datadog Agent, enabling SSI, and verifying that your applications are instrumented.
-{{< /agent-skill >}}
+{{% dd-apm-skill %}}
 
 ## Enable APM on your applications
 
