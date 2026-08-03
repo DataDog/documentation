@@ -36,7 +36,7 @@ OpenFeature's Multi-Provider wraps multiple providers behind a single client. By
 2. If the first provider returns `FLAG_NOT_FOUND`, evaluation continues to the next provider.
 3. Datadog serves as the fallback for any flag not present in the in-memory override set.
 
-Providers are evaluated in the order you register them. Place the `InMemoryProvider` **first** in the provider list so overrides take precedence over Datadog.
+Providers are evaluated in the order you register them. Place the `InMemoryProvider` _first_ in the provider list so overrides take precedence over Datadog.
 
 For more detail on evaluation strategies, see [First Match strategy][2] in the OpenFeature specification.
 
