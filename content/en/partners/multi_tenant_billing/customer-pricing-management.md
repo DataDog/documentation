@@ -34,7 +34,7 @@ After publishing, the customer sees their estimated month-to-date cost, a daily 
 
 This capability is in preview and does not support:
 
-- Legacy MSP contracts (many customers under a single contract).
+- Pricing per child org, for example for legacy MSP contracts, which have multiple customers under a single contract.
 - Customers procuring through two channel partners at once.
 - GovCloud customer organizations.
 - Cloud marketplace customers (AWS, Azure, or GCP Marketplace) without a drawdown agreement.
