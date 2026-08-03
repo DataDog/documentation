@@ -1052,8 +1052,7 @@ If you are using a firewall, these domains must be added to the allowlist:
 
 - `api.`{% region-param key="dd_site" code=true /%}
 - `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.`{% region-param key="dd_site" code=true /%}
-- `keys.`{% region-param key="dd_site" code=true /%}
+- `http-intake.logs.`{% region-param key="dd_site" code=true /%}
 - `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
@@ -1062,10 +1061,11 @@ If you are using a firewall, these domains must be added to the allowlist:
 
 - `api.`{% region-param key="dd_site" code=true /%}
 - `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.`{% region-param key="dd_site" code=true /%}
-- `keys.`{% region-param key="dd_site" code=true /%}
-- `install.`{% region-param key="dd_site" code=true /%}
-- `yum.`{% region-param key="dd_site" code=true /%}
+- `http-intake.logs.`{% region-param key="dd_site" code=true /%}
+- `keys.datadoghq.com`
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `apt.datadoghq.com`
 - `*.agent.`{% region-param key="dd_site" code=true /%}
 
 {% /if %}
