@@ -73,6 +73,61 @@ chmod +x bin/ddtest
 {{% /tab %}}
 {{< /tabs >}}
 
+## Validate the setup
+
+Validate test discovery and execution with one worker before distributing tests across workers or CI nodes:
+
+1. Run the test suite with its existing command. Record the exit status and expected test results.
+2. Run the test suite with Test Optimization enabled. Confirm that the test session appears in Datadog before adding `ddtest`.
+3. From the directory where the test command runs, remove any previous plan and generate a one-worker plan:
+
+   {{< code-block lang="bash" >}}
+   rm -rf .testoptimization
+   bin/ddtest plan \
+     --platform <PLATFORM> \
+     --framework <FRAMEWORK> \
+     --min-parallelism 1 \
+     --max-parallelism 1 \
+     --strict-discovery
+   {{< /code-block >}}
+
+   For example, use `ruby` and `rspec`, `python` and `pytest`, or `javascript` and `jest` for `<PLATFORM>` and `<FRAMEWORK>`.
+4. Inspect the generated plan:
+
+   {{< code-block lang="bash" >}}
+   cat .testoptimization/runner/parallel-runners.txt
+   sed -n '1,20p' .testoptimization/runner/test-files.txt
+   {{< /code-block >}}
+
+   Confirm that `parallel-runners.txt` contains `1` and that `test-files.txt` contains the expected runnable test files. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
+5. Run the one-worker plan:
+
+   {{< code-block lang="bash" >}}
+   bin/ddtest run \
+     --platform <PLATFORM> \
+     --framework <FRAMEWORK>
+   {{< /code-block >}}
+
+   Compare the exit status and results with the existing test command. Account for expected Test Impact Analysis skips, and confirm that the test session appears in Datadog.
+6. After the one-worker run succeeds, remove the validation plan or generate a fresh plan with the intended parallelism settings before distributing tests.
+
+## Manage plan artifacts
+
+Add the generated plan directory to `.gitignore`:
+
+{{< code-block lang="text" >}}
+.testoptimization/
+{{< /code-block >}}
+
+`ddtest run` uses an existing plan when `.testoptimization/runner/parallel-runners.txt` is present. Generate a fresh plan after changing the source revision, dependencies, platform, framework, test location, or working directory. To remove files from a previous plan before generating another plan, run:
+
+{{< code-block lang="bash" >}}
+rm -rf .testoptimization
+bin/ddtest plan --platform <PLATFORM> --framework <FRAMEWORK>
+{{< /code-block >}}
+
+In CI, generate one plan for each workflow run. Share the complete `.testoptimization/` directory only with test jobs for the same source revision. Run the plan and test jobs from the same working directory, with the same platform, framework, runtime, and dependencies. For details about the generated files, see [Plan artifacts][5].
+
 ## Run on a single CI node
 
 If you run your tests on a single CI node, run `ddtest run`:
