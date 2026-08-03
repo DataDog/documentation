@@ -1,8 +1,8 @@
-<div class="alert alert-info">
+<div class="alert alert-tip">
 
-**Install the dd-apm agent skill**
+**Get guided APM setup**
 
-To have an AI coding agent such as Claude Code or Cursor guide you through APM setup, run the following command, then restart your agent:
+Install the `dd-apm` skill in your AI coding agent. Run this command, then restart the agent:
 
 ```shell
 npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
