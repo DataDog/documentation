@@ -52,10 +52,6 @@ Discover some ways an Admin Org can help:
 | Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing Management][9]: configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | [Customer contracts management](#customer-contracts-management-preview): track customers, contracts, invoices, and renewals. |
 
-### Customer Pricing Management (Preview)
-
-Configure per-customer pricing so customers see their estimated costs based on the partner's pricing, directly within their org. See [Customer Pricing Management][9] for the full walkthrough.
-
 ### Customer contracts management (Preview)
 
 Review and manage the book of business from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}}: customers, contracts, invoices, renewal alerts, and margin visibility, in one place inside the Admin Org.
