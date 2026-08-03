@@ -36,16 +36,9 @@ Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with n
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
-<div class="alert alert-info">
-
-**Set up APM with your AI coding agent**
-
-The `dd-apm` agent skill guides AI coding agents, such as Claude Code and Cursor, through Datadog APM setup and instrumentation. To install the skill, run:
-```shell
-npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
-```
-
-</div>
+{{< agent-skill skill="dd-apm" >}}
+If you use an AI coding agent such as Claude Code or Cursor, install the `dd-apm` skill to have your agent guide you through installing the Datadog Agent, enabling SSI, and verifying that your applications are instrumented.
+{{< /agent-skill >}}
 
 ## Prerequisites
 

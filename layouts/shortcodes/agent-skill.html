@@ -1,0 +1,28 @@
+{{- /* Renders an info alert with the install command for a Datadog agent skill.
+
+Params:
+  skill  (required) Skill name passed to `--skill`, for example `dd-apm`.
+  repo   (optional) Skills repository. Defaults to the datadog-labs/agent-skills repository.
+  header (optional) Bold heading text. Defaults to "Install the <skill> agent skill".
+
+Inner text describes what the skill does, and is rendered as Markdown.
+
+Usage:
+  {{< agent-skill skill="dd-apm" >}}
+  Describe what the skill does here.
+  {{< /agent-skill >}}
+*/ -}}
+{{- $skill := .Get "skill" -}}
+{{- if not $skill -}}
+{{- errorf "agent-skill shortcode: missing required param 'skill': %s" .Position -}}
+{{- end -}}
+{{- $repo := .Get "repo" | default "https://github.com/datadog-labs/agent-skills" -}}
+{{- $header := .Get "header" | default (printf "Install the %s agent skill" $skill) -}}
+{{- $cmd := printf "npx skills add %s --skill %s --full-depth -y" $repo $skill -}}
+{{- /* Keep the output free of blank lines so the alert renders correctly inside other shortcodes. */ -}}
+<div class="alert alert-info">
+<p><strong>{{ $header }}</strong></p>
+{{ .Inner | markdownify | chomp }}
+{{ highlight $cmd "shell" "" | chomp }}
+<p>Installing requires <a href="https://nodejs.org/">Node.js</a>. Restart your coding agent afterward to load the skill. For the full list of Datadog agent skills, see the <a href="{{ $repo }}">agent-skills repository</a>.</p>
+</div>
