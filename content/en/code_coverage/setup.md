@@ -87,7 +87,7 @@ Navigate to [Roles settings][4], click {{< ui >}}Edit{{< /ui >}} on the role you
 
 For more granular control, use [Data Access Control][19] to restrict code coverage data by repository rather than across your entire organization. This prevents sensitive information in coverage reports, such as source paths and test names, from crossing team boundaries.
 
-In Datadog, go to **Organization Settings > Data Access Control**, create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict, then grant access to the roles or teams that should see it.
+In Datadog, go to **Organization Settings > Data Access Control** and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
 
 ## PR Gates
 
