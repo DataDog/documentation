@@ -44,5 +44,3 @@ further_reading:
   text: "Intro to Real User Monitoring (RUM)"
 
 ---
-
-{% partial file="real_user_monitoring/session_replay/overview.mdoc.md" /%}
