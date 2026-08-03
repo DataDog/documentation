@@ -211,7 +211,7 @@ await OpenFeature.setContext({
 
 ## Configure browser provider options
 
-The web provider also supports these optional settings:
+The web provider also supports these optional settings. Assignment request controls are advanced options.
 
 | Option | Default | Use |
 | --- | --- | --- |
@@ -223,6 +223,23 @@ The web provider also supports these optional settings:
 | `flaggingProxy` | unset | Fetch flags through a proxy instead of `site`. |
 | `customHeaders` | unset | Add headers to flag-fetch requests. |
 | `overwriteRequestHeaders` | `false` | Replace default request headers with `customHeaders`. |
+| `assignmentRequestTimeoutMs` | `1000` ms | Set the timeout for each assignment request attempt. |
+| `assignmentRequestRetryCount` | `1` | Set the number of retries after the first attempt. Set to `0` to disable retries. |
+
+By default, each assignment request attempt has a one-second timeout, and the SDK retries transient failures once. Transient failures include network errors, timeouts, HTTP 408, HTTP 429, and HTTP 5xx responses.
+
+To change these limits, set both options when you initialize the provider:
+
+{{< code-block lang="javascript" >}}
+const provider = new DatadogProvider({
+  applicationId: '<APPLICATION_ID>',
+  clientToken: '<CLIENT_TOKEN>',
+  site: '{{< region-param key="dd_site" code="true" >}}',
+  env: '<ENV_NAME>',
+  assignmentRequestTimeoutMs: 2000,
+  assignmentRequestRetryCount: 2,
+});
+{{< /code-block >}}
 
 ## Testing
 
