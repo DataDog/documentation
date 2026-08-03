@@ -77,7 +77,7 @@ Many organizations use Workload Protection across a range of security and operat
 
 - **Runtime Security Posture:** Workload Protection improves your security posture by identifying unsafe runtime practices and sensitive configuration drifts, helping you catch weaknesses before they can be exploited.
 
-- **Infrastructure Monitoring:** Acting as a Swiss army knife for runtime observability, Workload Protection enables teams to track any kind of runtime behavior, whether security-related or not. From debugging custom workloads to monitoring system-level processes and remote user sessions, Workload Protection offers deep, real-time visibility into how your environments operate.
+- **Infrastructure Monitoring:** Workload Protection tracks any kind of runtime behavior, whether security-related or not. From debugging custom workloads to monitoring system-level processes and remote user sessions, it offers real-time visibility into how your environments operate.
 
 {{< img src="security/workload_protection/k8s_remote_access.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
 
