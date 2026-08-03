@@ -208,4 +208,4 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 [14]: /glossary/#tail
 [15]: https://github.com/trentm/node-bunyan
-[16]: https://github.com/pinojs/pino
+[16]: https://getpino.io/
