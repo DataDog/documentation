@@ -135,6 +135,8 @@ The **Fix in Chat** button appears in several contexts when the extension identi
 
 {{< img src="/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Using Fix in Chat to fix an inline code error" style="width:100%" video=true >}}
 
+The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link used in Code Security. When you click {{< ui >}}Fix with Cursor{{< /ui >}} in the Datadog UI or in a pull request comment, the extension opens the workspace in Cursor. It then checks out the relevant repository, branch, and commit, and loads a tailored remediation prompt for the finding.
+
 ## Other features
 
 ### Logs
