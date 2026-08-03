@@ -85,6 +85,10 @@ If you are using [custom roles][2] rather than [Datadog-managed roles][3], be su
 
 Navigate to [Roles settings][4], click {{< ui >}}Edit{{< /ui >}} on the role you need, add the {{< ui >}}Code Coverage Read{{< /ui >}} permission to the role, and save the changes.
 
+For more granular control, use **Data Access Control** to restrict code coverage data by repository rather than across your entire organization. This prevents sensitive information in coverage reports, such as source paths and test names, from crossing team boundaries. 
+
+To set it up, go to **Organization Settings > Data Access Control**, create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict, and grant access to the roles or teams that should see it.
+
 ## PR Gates
 
 If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
