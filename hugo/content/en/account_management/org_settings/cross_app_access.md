@@ -167,7 +167,7 @@ Until the public key is in place, token exchange fails even though every other v
 On the Claude AI Agent, add the Claude SAML application as a delegated caller, then connect the agent to your Datadog application.
 
 1. On the **Delegations** tab, add the Claude SAML application as a caller.
-2. On the **Resource connections** tab, add a resource connection, select **Application** as the resource type, and select your Datadog application.
+2. On the **Resource connections** tab, add a resource connection. Select **Application** as the resource type, because Datadog is an application in the Okta catalog, then select your Datadog application.
 3. Set the following fields.
 
    | Okta field | Value |
