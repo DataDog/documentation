@@ -33,7 +33,7 @@ To have a supported Test Optimization library upload code coverage reports autom
 
 You can restrict Test Optimization data at the repository level to the appropriate teams and roles in Datadog. This helps prevent sensitive information, such as test names or source paths, from crossing team boundaries.
 
-To use Data Access Control, go to [Organization Settings > Data Access Control][7], create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict, then grant access to the roles or teams that should see it.
+To use Data Access Control, go to [Organization Settings > Data Access Control][7] and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
 
 [1]: /continuous_integration/tests
 [2]: /tests/setup/bazel/
