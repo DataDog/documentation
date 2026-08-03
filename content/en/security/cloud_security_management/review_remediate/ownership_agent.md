@@ -24,7 +24,6 @@ Ownership suggestions appear in the Cloud Security side panel when you view a mi
 
 The Ownership Agent reads multiple data sources and combines them into a ranked evidence set. It evaluates data sources in priority order: stronger, more explicit signals override weaker or inferred ones.
 
-
 | Priority | Signal                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | -------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1        | **Owner tags**                 | Cloud resource tags with keys such as `owner`, `dd-team`, or `team`. An explicit ownership tag is the strongest signal.                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
@@ -34,21 +33,15 @@ The Ownership Agent reads multiple data sources and combines them into a ranked 
 | 5        | **Container and host catalog** | Registry and host metadata for container images and host VMs, including image labels and host annotations.                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | 6        | **Naming patterns**            | Heuristics that infer ownership from resource names, service identifiers, or tag values that match known team naming conventions.                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
 
-
 ## Supported resource types
 
 The Ownership Agent processes the following resource types:
 
-**AWS**: `aws_cloudformation_stack`, `aws_cloudfront_distribution`, `aws_cognito_user_pool`, `aws_dynamodb`, `aws_ec2_instance`, `aws_ec2_settings`, `aws_ecr_repository`, `aws_ecs_cluster`, `aws_ecs_service`, `aws_elbv2_load_balancer`, `aws_iam_account`, `aws_iam_policy`, `aws_iam_role`, `aws_iam_role_inline_policy`, `aws_iam_user`, `aws_lambda_function`, `aws_rds_cluster`, `aws_rds_instance`, `aws_s3_bucket`, `aws_secretsmanager_secret`, `aws_security_group`, `aws_subnet`, `aws_vpc`
-
-**Azure**: `azure_virtual_machine_instance`
-
-**GCP**: `gcp_compute_instance`
-
-**AWS, Azure, GCP**: `host`, `host_image`
-
-**Container registries** (Docker, ECR, and others): `image`
-
+- **AWS**: `aws_cloudformation_stack`, `aws_cloudfront_distribution`, `aws_cognito_user_pool`, `aws_dynamodb`, `aws_ec2_instance`, `aws_ec2_settings`, `aws_ecr_repository`, `aws_ecs_cluster`, `aws_ecs_service`, `aws_elbv2_load_balancer`, `aws_iam_account`, `aws_iam_policy`, `aws_iam_role`, `aws_iam_role_inline_policy`, `aws_iam_user`, `aws_lambda_function`, `aws_rds_cluster`, `aws_rds_instance`, `aws_s3_bucket`, `aws_secretsmanager_secret`, `aws_security_group`, `aws_subnet`, `aws_vpc`
+- **Azure**: `azure_virtual_machine_instance`
+- **GCP**: `gcp_compute_instance`
+- **AWS, Azure, GCP**: `host`, `host_image`
+- **Container registries** (Docker, ECR, and others): `image`
 
 ## Review and correct ownership
 
@@ -69,13 +62,11 @@ By clicking the "edit owner" pencil icon next to a suggested owner, you can upda
 
 You can provide richer feedback by clicking the "thumbs down" after hovering over the confidence score, including specifying incorrectness or incompleteness of the explanation.
 
-
 | Action          | What it does                                                                           |
 | --------------- | -------------------------------------------------------------------------------------- |
 | **Thumbs up**   | Marks the suggestion as accurate. The positive signal is recorded for future tuning.   |
 | **Thumbs down** | Marks the suggestion as inaccurate. The negative signal is recorded for future tuning. |
 | **Add details** | The correction is recorded for future tuning.                                          |
-
 
 ### Impact on evaluation
 
@@ -91,14 +82,12 @@ To adjust the confidence threshold or turn off automatic team assignment, use th
 
 You can filter findings by inferred owner in the [Misconfigurations Explorer](https://app.datadoghq.com/security/compliance) or Vulnerabilities Explorer using the following facets:
 
-
 | Facet                     | Description                                     | Example                                               |
 | ------------------------- | ----------------------------------------------- | ----------------------------------------------------- |
 | `Ownership > Owner`       | The suggested or persisted owner handle         | `@_dd.ownership.inference.owner_handle:team-platform` |
 | `Ownership > Owner type`  | The type of owner: `team`, `service`, or `user` | `@_dd.ownership.inference.owner_type:team`            |
 | `Ownership > Confidence`  | The numeric confidence score (0 to 1):<br>&bull; high: &ge;0.85<br>&bull; medium: &ge;0.60 and &lt;0.85<br>&bull; low: &lt;0.60 | `@_dd.ownership.inference.confidence:>=0.85`          |
 | `Ownership > Explanation` | The explanation for the inference               | `@_dd.ownership.inference.explanation:*tag*`          |
-
 
 **Example queries**
 
