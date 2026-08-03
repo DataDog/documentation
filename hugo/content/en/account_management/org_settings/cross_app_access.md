@@ -15,7 +15,9 @@ further_reading:
       text: 'Configure SAML single sign-on'
 ---
 
-<div class="alert alert-info">Cross-App Access is in Preview. Configure it with the Datadog API. An interface in Organization Settings is planned for a future release.</div>
+{{< callout url="#" btn_hidden="true" header="false">}}
+  Cross-App Access is in Preview.
+{{< /callout >}}
 
 ## Overview
 
@@ -23,7 +25,7 @@ Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users yo
 
 Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
 
-In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent.
+In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent. Configure it with the Datadog API. An interface in Organization Settings is planned for a future release.
 
 ## How it works
 
@@ -48,15 +50,11 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 
 ## Prerequisites
 
-Your organization uses Okta for SAML single sign-on to Datadog. Cross-App Access resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on][1].
-
-The SAML application's **Name ID format** is set to `EmailAddress`, and the Name ID matches the user's Datadog handle. Datadog maps the Name ID in the token to a Datadog user handle. When these differ, token exchange fails for that user even though every other check passes.
-
-Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
-
-You have a credential that authenticates as a user or service account holding the `org_management` permission. Datadog recommends a [Personal Access Token][2] (PAT) or a [Service Access Token][3] (SAT), because both are scoped and expire by default. An API key paired with an application key also works. See [API and application keys][4] and [Role permissions][5].
-
-Your Okta tenant has the **AI Agent Identity Assertion** and **Agent to Agent Connections** Early Access features enabled, and you have Okta Super Administrator access.
+- Your organization uses Okta for SAML single sign-on to Datadog. Cross-App Access resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on][1].
+- The SAML application's **Name ID format** is set to `EmailAddress`, and the Name ID matches the user's Datadog handle. When the two differ, token exchange fails for that user even though every other check passes.
+- Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
+- You have a credential that authenticates as a user or service account holding the `org_management` permission. Datadog recommends a [Personal Access Token][2] (PAT) or a [Service Access Token][3] (SAT), because both are scoped and expire by default. An API key paired with an application key also works. See [API and application keys][4] and [Role permissions][5].
+- Your Okta tenant has the **AI Agent Identity Assertion** and **Agent to Agent Connections** Early Access features enabled, and you have Okta Super Administrator access.
 
 ## Configure Cross-App Access in Datadog
 
@@ -177,7 +175,7 @@ On the Claude AI Agent, add the Claude SAML application as a delegated caller, t
 
 4. Activate the agent from the **Actions** menu.
 
-#### Control scopes in Datadog
+### Control scopes in Datadog
 
 **Allow all** is the only supported **Scope Condition** for Cross-App Access. Set it in Okta, then restrict what Claude reaches from Datadog.
 
