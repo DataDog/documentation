@@ -84,7 +84,6 @@ En un caso individual:
 - [Declarar una incidencia][4]: escala un caso a incidencia e inicia tu proceso de respuesta a incidencias.
 - Crear una incidencia de Jira de manera manual: usa `Shift + J` para crear una incidencia de Jira. Para obtener más información sobre cómo configurar la creación automática de incidencias de Jira y la sincronización bidireccional, consulta la documentación de [configuración][5]. 
 - Crear una incidencia de ServiceNow de manera manual: usa `Shift + N` para crear una incidencia de ServiceNow. 
-- [Reunirse en CoScreen][6]: comparte pantallas para la depuración colaborativa. 
 - Cerrar el caso: informa al equipo que ya no es necesario realizar una acción. Actualiza el estado del caso a cerrado.
 
 ## Análisis de casos
@@ -104,5 +103,4 @@ Los siguientes widgets son compatibles con el análisis de casos: serie temporal
 [3]: /es/notebooks/
 [4]: /es/service_management/incident_management/#describing-the-incident
 [5]: /es/service_management/case_management/settings/#jira
-[6]: /es/coscreen/
 [7]: https://docs.datadoghq.com/es/dashboards/
