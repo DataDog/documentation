@@ -406,6 +406,8 @@ This section provides the mappings from OpenTelemetry GenAI semantic conventions
 
 <div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
 
+<div class="alert alert-info">If a span doesn't include an attribute that Agent Observability expects, or an attribute is present but can't be parsed, the Agent Observability UI flags the span with a <strong>Mapping warnings</strong> indicator. See <a href="#troubleshooting-mapping-warnings">Troubleshooting mapping warnings</a> for what each warning means and how to fix it.</div>
+
 ### OpenTelemetry 1.37+ attribute mappings
 
 #### Base span attributes
@@ -847,6 +849,41 @@ The following Langfuse-specific attributes are filtered from tags because they'r
 - `langfuse.trace.input`, `langfuse.trace.output`, `langfuse.trace.metadata`, `langfuse.trace.tags`
 - `langfuse.experiment.item.expected_output`, `langfuse.experiment.item.metadata`, `langfuse.experiment.metadata`
 
+## Troubleshooting mapping warnings
+
+Agent Observability detects certain span mapping problems at ingestion, such as a missing model name or a token count that can't be parsed, and flags the span instead of failing silently.
+
+Flagged spans display a **Mapping warnings** indicator in the span detail panel. Selecting the indicator opens a list of the span's mapping warnings, each with the affected attribute, a suggested fix, and a link to its section in the documentation.
+
+A trace containing any flagged spans also shows a summary indicator in its header that lists every affected span. Selecting a span from that list jumps to it.
+
+<div class="alert alert-info">Mapping warnings are detected at ingestion. They don't affect billing or span retention.</div>
+
+### Mapping warning reference
+
+| Warning | Attribute | Fix |
+|---------|-----------|-----|
+| Missing model name | Expected `gen_ai.request.model` | Set `gen_ai.response.model` or `gen_ai.request.model`. OpenInference `llm.model_name` and `embedding.model_name` are also accepted. |
+| Missing model provider | Expected `gen_ai.system` | Set `gen_ai.system` to the provider, for example `openai` or `anthropic`. OpenInference `llm.provider` and `llm.system` are also accepted. |
+| Missing input and output | Expected `input.value` | Set `gen_ai.input.messages` and `gen_ai.output.messages`, or the OpenInference `input.value` and `output.value` pair. |
+| Malformed input | On `input.value` | Emit valid JSON, or set `input.mime_type` to `text/plain`. |
+| Malformed output | On `output.value` | Emit valid JSON, or set `output.mime_type` to `text/plain`. |
+| Malformed message | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. Indexed OpenInference `llm.input_messages.*` attributes are also accepted. |
+| Missing embedding input | Expected `embedding.embeddings.*.embedding.text` | Set the indexed embedding text attributes, for example `embedding.embeddings.0.embedding.text`. |
+| Unreadable token counts | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
+| Invalid token counts | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
+| Malformed invocation parameters | On `llm.invocation_parameters` | Emit `llm.invocation_parameters` as a valid JSON object. |
+
+Each warning in the UI also includes a short description of its downstream effect, such as skipped evaluations or unavailable cost estimation. A span can display warnings that aren't listed here if Datadog adds new checks; these render with a generated title based on the underlying code.
+
+### Find the raw span data
+
+To find the raw attributes Datadog received for a flagged span:
+
+- If APM is enabled, the same data is also written to the corresponding APM trace. Open the linked APM trace to inspect the raw span attributes, and compare them against the expected attribute from the [mapping warning reference](#mapping-warning-reference) or the full [attribute mapping reference](#attribute-mapping-reference). See [Correlating Agent Observability and APM][14] for how the two views relate.
+- For a malformed input, output, or invocation parameters warning, check whether the attribute value is valid JSON. Common causes include double-encoding, truncation, and emitting a string or other non-object value where an object is expected.
+- For a missing attribute warning, check your instrumentation library version against the [Tested frameworks and libraries](#tested-frameworks-and-libraries) table, and confirm `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` is set if your library requires it.
+
 ## Supported semantic conventions
 
 Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
@@ -897,3 +934,4 @@ with tracer.start_as_current_span("my-span") as span:
 [11]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
 [13]: https://langfuse.com/integrations/native/opentelemetry
+[14]: /llm_observability/monitoring/llm_observability_and_apm/
