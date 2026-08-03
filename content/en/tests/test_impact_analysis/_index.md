@@ -49,25 +49,25 @@ There are several configuration mechanisms that you can use in these scenarios t
 - If GitHub is your source code management provider, use the `ITR:NoSkip` label (case insensitive) to prevent Test Impact Analysis from skipping tests in pull requests. To use this feature, configure the GitHub App using the [GitHub integration tile][9] with the `Software Delivery: Collect Pull Request Information` feature enabled. This mechanism does not work with tests executed on GitHub actions triggered by `pull_request` events.
 - You can add a list of [excluded branches](#excluded-branches), which disables Test Impact Analysis in those branches.
 
-## Limitations and expected behavior
+## Scale and accuracy limits
 
-Test Impact Analysis decides which tests to skip by matching the files each test covers against the files a commit changes. The behaviors below are the known cases where that matching is intentionally conservative, so you know what to expect.
+Test Impact Analysis decides which tests to skip by matching the files each test covers against the files a commit changes. The following behaviors are the known cases where that matching is intentionally conservative, so you know what to expect.
 
 <div class="alert alert-info">All of the behaviors in this section are safe by design: they can only cause <strong>more</strong> tests to run, never cause a test to be skipped when it should have run. For code changes that Datadog cannot detect automatically, see <a href="#out-of-the-box-configuration-limitations">Out-of-the-box configuration limitations</a>.</div>
 
 ### Scale limits
 
-To keep analysis fast and predictable, Test Impact Analysis applies a few size limits. Each one is safe: it can only result in more tests running.
+Test Impact Analysis applies the following size limits:
 
-- Datadog analyzes up to the 100 most recent commits for a change. On very large changesets, some older commits may not be analyzed, so slightly fewer tests are skipped.
+- Datadog analyzes up to the 100 most recent commits for a change. On large changesets, some older commits may not be analyzed, so slightly fewer tests are skipped.
 - If a single commit changes more than 5,000 files, that commit is not analyzed for impact, and its tests are run rather than skipped.
 - If a single test or suite covers more than 16,000 files, it is not skipped.
 
-### Accuracy
+### False positives in coverage matching
 
-To check whether a test covers a changed file efficiently, Datadog uses a space-efficient probabilistic data structure (a Bloom filter). These structures have a small, inherent false-positive rate (approximately 0.04%), so a very small fraction of tests that could have been skipped may run anyway. This never causes a test to be skipped when it should have run.
+To check whether a test covers a changed file, Datadog uses a space-efficient probabilistic data structure (a Bloom filter). These structures have a small inherent false-positive rate (approximately 0.04%), so a small fraction of tests that could have been skipped may run anyway.
 
-If Test Impact Analysis behaves unexpectedly, see the [Troubleshooting][12] page for symptom-based guidance.
+If Test Impact Analysis behaves unexpectedly, see the [Troubleshooting][12] page.
 
 ## Set up a Datadog library
 
@@ -131,7 +131,7 @@ Code coverage backfilling adjusts the total reported coverage to include tests o
 
 Code coverage backfilling is supported for Java, .NET, Go, and JavaScript. It is not supported for Ruby, Python, or Swift.
 
-Backfilling is best-effort. For very large test suites, the coverage of some tests skipped by Test Impact Analysis may not be backfilled, so the reported total coverage can be slightly lower than the true coverage. This does not affect which tests are skipped.
+Backfilling is best effort. For large test suites, the coverage of some tests skipped by Test Impact Analysis may not be backfilled. As a result, the reported total coverage can be slightly lower than the true coverage. Backfilling does not affect which tests are skipped.
 
 ### Java, .NET, and Go
 
@@ -147,7 +147,7 @@ You can explore the time savings you get from Test Impact Analysis by looking at
 
 {{< img src="continuous_integration/itr_commit.png" alt="Test commit page with Test Impact Analysis" style="width:80%;">}}
 
-{{< img src="continuous_integration/itr_savings.png" alt="ITest Impact Analysis enabled in a test session showing its time savings." style="width:80%;">}}
+{{< img src="continuous_integration/itr_savings.png" alt="Test Impact Analysis enabled in a test session showing its time savings." style="width:80%;">}}
 
 When Test Impact Analysis is active and skipping tests, purple text displays the amount of time saved on each test session or on each commit. The duration bar also changes color to purple so you can identify which test sessions are using Test Impact Analysis on the [Test Runs][7] page.
 
