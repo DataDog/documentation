@@ -35,7 +35,7 @@ In your bootstrap file or in your code, declare the logger in the following way:
 {{< tabs >}}
 {{% tab "Winston 3.0" %}}
 
-Winston is available through [NPM](https://www.npmjs.com). Add the dependency to your code:
+Winston is available through [NPM][101]. Add the dependency to your code:
 
 ```text
 npm install --save winston
@@ -83,10 +83,11 @@ Check the content of the `<FILE_NAME>.log` file to confirm that Winston is loggi
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+[101]: https://www.npmjs.com
 {{% /tab %}}
 {{% tab "Winston 2.0" %}}
 
-Winston is available through [NPM](https://www.npmjs.com). Add the dependency to your code:
+Winston is available through [NPM][101]. Add the dependency to your code:
 
 ```text
 npm install --save winston
@@ -118,10 +119,11 @@ Check the content of the `<FILE_NAME>.log` file to confirm that Winston is loggi
 {"color":"blue","level":"info","message":"Hello log with metas","timestamp":"2015-04-23T16:52:05.339Z"}
 ```
 
+[101]: https://www.npmjs.com
 {{% /tab %}}
 {{% tab "Bunyan" %}}
 
-Bunyan is available through [NPM](https://www.npmjs.com). Add the dependency to your code:
+Bunyan is available through [NPM][101]. Add the dependency to your code:
 
 ```text
 npm install --save bunyan
@@ -152,10 +154,11 @@ Bunyan logs in JSON by default. Check the content of the `<FILE_NAME>.log` file 
 {"name":"<SERVICE_NAME>","hostname":"my-host","pid":1234,"level":30,"color":"blue","msg":"Hello log with metas","time":"2015-04-23T16:52:05.339Z","v":0}
 ```
 
+[101]: https://www.npmjs.com
 {{% /tab %}}
 {{% tab "Pino" %}}
 
-Pino is available through [NPM](https://www.npmjs.com). Add the dependency to your code:
+Pino is available through [NPM][101]. Add the dependency to your code:
 
 ```text
 npm install --save pino
@@ -178,6 +181,7 @@ Pino logs in JSON by default. Check the content of the `<FILE_NAME>.log` file to
 {"level":30,"time":1429807925339,"pid":1234,"hostname":"my-host","color":"blue","msg":"Hello log with metas"}
 ```
 
+[101]: https://www.npmjs.com
 {{% /tab %}}
 {{< /tabs >}}
 
