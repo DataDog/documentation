@@ -97,13 +97,13 @@ With hierarchies defined, you can:
 - **Escalate issues**: When an issue needs to go beyond the owning team, hierarchy routes it up to the parent team for broader visibility and faster resolution, without manually tracking down who's next in the chain.
 - **Roll-up filtering**: Select a parent team to see all data connected to any of its subteams, without selecting each one. Useful for director and VP-level views, where you care about an entire organization's footprint rather than one team's.
 
-{{< img src="account_management/teams/teams_filter_hierarchies2.png" alt="Team filter dropdown with a parent team expanded to show its subteams selected as checkboxes" style="width:50%;" >}}
+{{< img src="account_management/teams/teams_filter_hierarchies2.png" alt="Team filter dropdown with a parent team expanded to show its subteams selected as checkboxes" style="width:35%;" >}}
 
 ### Set up team hierarchies
 
 You can define hierarchical relationships between teams in four ways:
 
-- **GitHub Teams**: If you used [GitHub] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **GitHub Teams**: If you used [GitHub][9] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
 - **Teams API**: See [Create a team hierarchy link][5].
 - **Terraform**: Use the [`datadog_team_hierarchy_links`][8] resource.
 - **Datadog UI**: Define relationships directly on a team's page:
