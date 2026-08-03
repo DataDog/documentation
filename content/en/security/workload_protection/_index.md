@@ -47,17 +47,31 @@ cascade:
 
 Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, helping you identify, investigate, and stop malicious behaviors before they impact your workloads.
 
-### Actionable, prioritized and contextualized threat detection in real-time
+## Key capabilities
+
+### Threat detection
 
 Workload Protection relies on event correlation to surface contextualized and prioritized alerts. As part of the Datadog Security platform, Workload Protection correlates runtime threat detection with findings from misconfiguration scans, vulnerability assessments, and code security. This deep integration enables you to link runtime attacks with preexisting weaknesses, providing the complete context you need to investigate and remediate security incidents. Because Workload Protection is built on the Datadog platform, it also connects with your infrastructure telemetry, including metrics, traces, and logs, so you can understand the scope and impact of threats across your systems. Investigations are enriched with full context, so you can reconstruct the entire attack story from detection to resolution.
 
-### Response and hardening capabilities
+### Out-of-the-box detections
+
+Workload Protection comes out of the box (OOTB) with a comprehensive set of security rules and visibility tools. It includes over 350 agent rules and 200 detection rules, carefully designed to cover most of the MITRE ATT&CK tactics and techniques used by attackers today. This extensive coverage allows teams to detect and mitigate threats across various stages of exploitation, even if they lack the time or specialized expertise to craft detection rules themselves. To complement these detections, the platform provides in-app coverage maps that help users visualize what's deployed, where it's active, and what's protected, for complete and transparent visibility across the entire infrastructure.
+
+### Custom detection logic
+
+For advanced detection and response capabilities, Workload Protection supports custom rule writing, correlation, and automated actions. It supports over 40 event types on Linux and Windows, spanning process, file system, kernel, and network activities. Security teams can define in-agent state machines, enabling contextualized detection logic that triggers alerts only on meaningful and complex indicators of compromise (IOCs).
+
+### Response and hardening
 
 You can also take action directly in Datadog to block malicious behaviors, trigger workflows, or integrate with your existing response pipelines. Whether your goal is to enforce compliance, strengthen your runtime security posture, or address workload hardening use cases, Workload Protection can take action on your behalf to keep your environments secure and resilient.
 
-### Beyond threat detection: expanded use cases
+### Rule and fleet management
 
-Workload Protection is not limited to runtime threat detection. Many organizations use it across a range of security and operational use cases:
+Managing and scaling protection across large environments is simplified with powerful agent fleet and rule management capabilities. Using {{< tooltip glossary="Remote Configuration" case="title" >}}, teams can push agent rules directly from the UI and receive automatic threat definition updates from Datadog to stay current with evolving attack techniques. The platform also offers flexible configuration and customization options through the UI, CLI, or Terraform, allowing security teams to tailor their detection strategy and deployment workflows to their specific operational needs.
+
+## Use cases
+
+Many organizations use Workload Protection across a range of security and operational use cases:
 
 - **Compliance Validation:** Workload Protection helps you validate compliance with regulatory frameworks such as PCI, FedRAMP, and SOC 2 by continuously monitoring runtime activity for policy violations, risky configurations, and unauthorized changes.
 
@@ -67,15 +81,7 @@ Workload Protection is not limited to runtime threat detection. Many organizatio
 
 {{< img src="security/workload_protection/k8s_remote_access.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
 
-### Detection rules, automation, and fleet management
-
-Workload Protection comes out of the box (OOTB) with a comprehensive set of security rules and visibility tools. It includes over 350 agent rules and 200 detection rules, carefully designed to cover most of the MITRE ATT&CK tactics and techniques used by attackers today. This extensive coverage allows teams to detect and mitigate threats across various stages of exploitation, even if they lack the time or specialized expertise to craft detection rules themselves. To complement these detections, the platform provides in-app coverage maps that help users visualize what's deployed, where it's active, and what's protected, for complete and transparent visibility across the entire infrastructure.
-
-For advanced detection and response capabilities, Workload Protection supports custom rule writing, correlation, and automated actions. It supports over 40 event types on Linux and Windows, spanning process, file system, kernel, and network activities. Security teams can define in-agent state machines, enabling contextualized detection logic that triggers alerts only on meaningful and complex indicators of compromise (IOCs).
-
-Managing and scaling protection across large environments is simplified with powerful agent fleet and rule management capabilities. Using {{< tooltip glossary="Remote Configuration" case="title" >}}, teams can push agent rules directly from the UI and receive automatic threat definition updates from Datadog to stay current with evolving attack techniques. The platform also offers flexible configuration and customization options through the UI, CLI, or Terraform, allowing security teams to tailor their detection strategy and deployment workflows to their specific operational needs.
-
-## High level architecture overview
+## How it works
 
 Workload Protection is built on top of the Datadog Agent, which continuously collects real-time runtime telemetry from your workloads. Agent rules determine which security-relevant events are streamed to Datadog for centralized analysis. After they are ingested, these events are processed by backend detection and finding rules, which analyze the data to generate detailed, prioritized Signals or Findings.
 
@@ -87,7 +93,7 @@ Using Remote Configuration, you can manage agent rule deployments and trigger re
 
 ### Setup
 
-Begin with the [Setup][1] guide, which introduces the high-level architecture of Workload Protection. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
+Begin with the [Setup][1] guide. It covers supported environments, how to deploy the Agent, and how to experiment with Workload Protection's features using the playground scripts.
 
 ### Detect and monitor
 
