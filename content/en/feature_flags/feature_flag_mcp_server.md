@@ -31,7 +31,7 @@ The MCP Server includes tools to help you manage feature flags in your codebase.
 
 ### Set up feature flags in your app
 
-The Feature Flags MCP server can install the SDK and add the required code snippets to your application automatically. After [connecting to the MCP server][2], prompt your AI agent:
+The Feature Flags MCP Server can install the SDK and add the required code snippets to your application automatically. After [connecting to the MCP Server][2], prompt your AI agent:
 
 - Help me set up Datadog Feature Flags in my app.
 
