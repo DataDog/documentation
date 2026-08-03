@@ -10593,6 +10593,11 @@ menu:
       url: account_management/billing/ai_credits/
       parent: account_management_billing
       weight: 1521
+    - name: AI Credit Limits
+      identifier: account_management_billing_ai_credit_limits
+      url: account_management/billing/ai_credit_limits/
+      parent: account_management_billing
+      weight: 1522
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
