@@ -24,6 +24,9 @@ further_reading:
 - link: "/metrics/reference_table_joins_with_metrics/"
   tag: "Documentation"
   text: "Learn about Reference Table joins with metrics"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-reference-tables-log-enrichment/"
+  tag: "Blog"
+  text: "Add dynamically updating context to logs with Reference Tables and Observability Pipelines"
 - link: 'https://www.datadoghq.com/blog/add-context-with-reference-tables/'
   tag: 'Blog'
   text: 'Add more context to your logs with Reference Tables'

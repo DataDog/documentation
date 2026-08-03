@@ -109,10 +109,6 @@ attributes:
 
     '
   product: Continuous Testing
-- data_type: '- **Sessions**: 15 months
-
-    '
-  product: CoScreen
 - data_type: '- **Job traces**: 90 days
 
     '

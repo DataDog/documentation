@@ -23,7 +23,7 @@ With Bits Code automations, you can:
 
 ## Prerequisites
 To set up a Bits Code automation, each of the following must be true:
-- You have the `Bits Code Write` (`bits_dev_write`) permission in Datadog.
+- You have the [`Bits Code Write` (`bits_dev_write`) permission][6] in Datadog.
 - You have completed the Bits Code [setup][2].
 - If you plan to have your automations [output Slack notifications](#slack-message-output), you have set up the [Slack integration][4].
 
@@ -109,3 +109,4 @@ You can pause or resume any automation, but you can only edit or delete automati
 [3]: https://app.datadoghq.com/code/automations
 [4]: /integrations/slack/
 [5]: /internal_developer_portal/catalog/
+[6]: /account_management/rbac/permissions/#bits-ai

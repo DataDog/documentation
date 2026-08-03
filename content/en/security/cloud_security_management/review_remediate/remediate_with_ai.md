@@ -32,7 +32,7 @@ A misconfiguration finding tells you what is wrong with a cloud resource. **Reme
 
 Copying a fix prompt for your own coding agent requires no setup. To have Bits Code generate the fix, you need:
 
-- The **Bits Code Write** (`bits_dev_write`) permission in Datadog.
+- The [`Bits Code Write` (`bits_dev_write`) permission][8] in Datadog.
 - Bits Code [set up][5] for your source control provider.
 
 Bits Code resolves fixes most reliably when Datadog knows where the affected resource is defined in your code. See [Code Locations][6] for how that mapping is established.
@@ -68,3 +68,4 @@ Bits Code usage is billed through [AI Credits][7].
 [5]: /bits_ai/bits_code/setup/
 [6]: /security/cloud_security_management/code_locations/
 [7]: /account_management/billing/ai_credits/
+[8]: /account_management/rbac/permissions/#bits-ai

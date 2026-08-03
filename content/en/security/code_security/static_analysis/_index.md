@@ -144,6 +144,20 @@ To commit a suggested fix:
 2. Click {{< ui >}}Fix Violation{{< /ui >}} in the side panel of the result.
 3. Click {{< ui >}}Commit to current branch{{< /ui >}}.
 
+### Fix with Cursor
+You can hand off remediation for a SAST finding to an AI coding agent such as Cursor.
+
+1. View a specific SAST result in Code Security.
+2. In the side panel's {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}.
+3. Select the {{< ui >}}Coding agent{{< /ui >}} tab.
+4. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored remediation prompt for the finding. Review the suggested changes before you commit them.
+
+To use a different AI coding agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/static_analysis/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
+
 ## Report false positives
 If you believe a specific violation is a false positive, you can flag it as a false positive with a reason for flagging, which sends a report directly to Datadog. Submissions are reviewed on a regular basis to improve ruleset quality over time.
 
