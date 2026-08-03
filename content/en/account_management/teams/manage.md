@@ -88,7 +88,7 @@ This feature is not supported for your selected Datadog site ({{< region-param k
 {{< /site-region >}}
 
 With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
-    {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
+    {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" style="width:50%;" >}}
 
 A team's subteams appear in the **Hierarchy** section of its Info tab.
 To automate subteam management based on your organization's hierarchical structure, use the [Teams APIs][5].
