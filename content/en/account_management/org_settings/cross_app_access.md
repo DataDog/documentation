@@ -57,7 +57,7 @@ Setup moves values in both directions between Datadog and Okta. Two of them are 
 - Your organization uses Okta for SAML single sign-on to Datadog. Cross-App Access resolves users through your existing SAML connection, so it does not work without one. See [Configure SAML single sign-on](/account_management/saml/).
 - The SAML application's **Name ID format** is set to `EmailAddress`, and the Name ID matches the user's Datadog handle. When the two differ, token exchange fails for that user even though every other check passes.
 - Each user who uses Claude exists in your Datadog organization and is assigned to both the Claude application and the Datadog application in Okta.
-- You have a credential that authenticates as a user or service account holding the `org_management` permission, used as `DD_TOKEN` in the examples below. Datadog recommends a [Personal Access Token](/account_management/personal-access-tokens/) (PAT) or a [Service Access Token](/account_management/service-access-tokens/) (SAT), because both are scoped and expire by default. An API key paired with an application key also works. See [API and application keys](/account_management/api-app-keys/) and [Role permissions](/account_management/rbac/permissions/).
+- Configuration happens through the Datadog API, so you need the `org_management` permission and a [Personal Access Token](/account_management/personal-access-tokens/) (PAT), used as `DD_TOKEN` in the examples.
 - Your Okta tenant has the **AI Agent Identity Assertion** and **Agent to Agent Connections** Early Access features enabled, and you have Okta Super Administrator access.
 
 
