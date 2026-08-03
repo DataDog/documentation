@@ -74,7 +74,8 @@ The table lists your active commitments. Columns vary depending on the product a
 
 | Column | Description |
 |---|---|
-| Savings Plan ARN or Reservation ARN | Unique identifier for the commitment. |
+| Savings Plan ARN, Reservation ARN, or Commitment ID | Unique identifier for the commitment (Commitment ID for Azure). |
+| Benefit Name | Name of the Azure savings plan or reservation benefit. |
 | Payment Model | Payment option (for example, No Upfront, Partial Upfront, All Upfront). |
 | Term | Duration of the commitment (for example, 1 Year, 3 Years). |
 | Type | The commitment type (for example, `ComputeSavingsPlans`). |
