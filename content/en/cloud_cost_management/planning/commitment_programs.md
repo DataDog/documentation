@@ -7,7 +7,7 @@ further_reading:
   text: "Learn about Cloud Cost Management"
 ---
 
-<div class="alert alert-info">CCM Commitment Programs supports Amazon EC2 and RDS Reserved Instances, Amazon EC2 Savings Plans, and Amazon ElastiCache Reserved Nodes.</div>
+<div class="alert alert-info">CCM Commitment Programs supports Reserved Instances and Savings Plans, for EC2, RDS, and ElastiCache on AWS, and Virtual Machines on Azure.</div>
 
 ## Overview
 
@@ -74,7 +74,8 @@ The table lists your active commitments. Columns vary depending on the product a
 
 | Column | Description |
 |---|---|
-| Savings Plan ARN or Reservation ARN | Unique identifier for the commitment. |
+| Savings Plan ARN, Reservation ARN, or Commitment ID | Unique identifier for the commitment (Commitment ID for Azure). |
+| Benefit Name | Name of the Azure savings plan or reservation benefit. |
 | Payment Model | Payment option (for example, No Upfront, Partial Upfront, All Upfront). |
 | Term | Duration of the commitment (for example, 1 Year, 3 Years). |
 | Type | The commitment type (for example, `ComputeSavingsPlans`). |

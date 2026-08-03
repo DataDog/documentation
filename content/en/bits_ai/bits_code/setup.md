@@ -11,7 +11,7 @@ disable_toc: false
 
 ## Prerequisites
 
-To set up Bits Code, you need the **Bits Code Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+To set up Bits Code, you need the [`Bits Code Write` (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
 
 If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
@@ -79,7 +79,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
-To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
+To enable auto-push, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6].
 
 
 #### Security considerations
@@ -99,7 +99,7 @@ Bits Code ingests custom instruction files from your repository, including:
 - `.windsurfrules`
 - `copilot-instructions.md`
 
-You can also define global custom instructions that apply to all Bits Code sessions in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
+You can also define global custom instructions that apply to all Bits Code sessions in {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], in the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
 
 A custom instruction file is a good place to mention [custom skills][12] you'd like Bits Code to use.
 
@@ -109,7 +109,7 @@ Configure Bits Code's runtime environment, including network access policies and
 
 ### Configure internet access
 
-By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits Code** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], and find the {{< ui >}}Internet Access{{< /ui >}} section. Choose from the following access policies: {{< ui >}}No Internet Access{{< /ui >}}, {{< ui >}}Default Allowlist{{< /ui >}}, {{< ui >}}Custom + Default Allowlist{{< /ui >}}, or {{< ui >}}Custom Allowlist{{< /ui >}}.
 
 The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
