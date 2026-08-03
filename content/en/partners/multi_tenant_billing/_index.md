@@ -32,8 +32,6 @@ Partners not yet registered can [Register Now][17] on the Datadog Partner Portal
 
 Registered partners can contact [partner-support@datadoghq.com][16] to request an Admin Org. Partners planning to provision customer trials should request the Trial Org Creator capability at the same time.
 
-<div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
-
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
   {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a connected customer organization.{{< /nextlink >}}
   {{< nextlink href="/partners/multi_tenant_billing/trial-org-provisioning">}}<u>Trial Org Provisioning</u>: Provision trial organizations for prospective customers directly from an Admin Org.{{< /nextlink >}}
@@ -51,14 +49,12 @@ Discover some ways an Admin Org can help:
 | Monitor cost and usage across all customers in one place. | [Cost and Usage Visibility][2]: view estimated, historical, and projected cost and billable usage data. |
 | Self-serve Trial Org creation for prospective customers. | [Trial Org Provisioning][3]: create Trial Orgs directly from an Admin Org. |
 | Track usage metrics across the book of business. | [Centralized Usage Metrics][8]: roll customer usage metrics up into an Admin Org. |
-| Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing Management](#customer-pricing-management-preview): configure per-customer pricing. |
+| Let customers see their estimated costs based on the partner's pricing. (Preview) | [Customer Pricing Management][9]: configure per-customer pricing. |
 | Manage the book of business in one place. (Preview) | [Customer contracts management](#customer-contracts-management-preview): track customers, contracts, invoices, and renewals. |
 
 ### Customer Pricing Management (Preview)
 
-Configure per-customer pricing from {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Pricing{{< /ui >}} so customers see their estimated costs based on the partner's pricing, directly within their org. Pricing is a one-time setup per customer that can be updated at any time; changes take effect within 24 hours of publishing.
-
-{{< img src="partners/multi_tenant_billing/customer_pricing.png" alt="Customer Pricing tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
+Configure per-customer pricing so customers see their estimated costs based on the partner's pricing, directly within their org. See [Customer Pricing Management][9] for the full walkthrough.
 
 ### Customer contracts management (Preview)
 
@@ -80,3 +76,4 @@ For help with common Admin Org and Trial Org issues, see [Troubleshooting][7].
 [15]: /partners/multi_tenant_billing/customer-onboarding/
 [16]: mailto:partner-support@datadoghq.com
 [17]: https://partners.datadoghq.com/s/login/
+[9]: /partners/multi_tenant_billing/customer-pricing-management/
