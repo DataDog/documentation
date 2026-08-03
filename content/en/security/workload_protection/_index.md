@@ -87,13 +87,9 @@ Workload Protection evaluates runtime activity in two places. Agent rules decide
 
 {{< img src="security/workload_protection/architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
-For the full model, including how activity is collected on each platform and how response actions run, see [How Workload Protection works][6].
+For the full model, see [How Workload Protection works][6].
 
 ## Next steps
-
-### How it works
-
-Read [How Workload Protection works][6] for the complete model. It covers how the Agent collects activity on each platform, how the detection pipeline evaluates it, and how response actions run.
 
 ### Setup
 
