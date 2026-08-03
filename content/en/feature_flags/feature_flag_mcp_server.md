@@ -29,7 +29,7 @@ The MCP Server includes tools to help you manage feature flags in your codebase.
   The code implementation tools, such as <code>check_datadog_flag_implementation</code>, target React applications. Other tools, such as <code>list_datadog_feature_flags</code> and <code>update_datadog_feature_flag_environment</code>, are framework-agnostic.
 </div>
 
-### Set up Feature Flags in your app
+### Set up feature flags in your app
 
 The Feature Flags MCP server can install the SDK and add the required code snippets to your application automatically. After [connecting to the MCP server][2], prompt your AI agent:
 
