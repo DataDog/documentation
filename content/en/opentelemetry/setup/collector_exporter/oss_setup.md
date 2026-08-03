@@ -28,7 +28,7 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 ## Prerequisites
 
-This setup supports bare metal, VMs, Docker, and Kubernetes, including the managed distributions Amazon EKS (standard clusters and Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (standard clusters and Automatic). This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
+This setup supports bare metal, VMs, Docker, and Kubernetes, including the managed distributions Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic). This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -289,7 +289,7 @@ processors:
   resource_detection:
     detectors: [env]
     timeout: 2s
-    override: true
+    override: true # Disable if incoming attributes (especially host.name) are verified correct
   # Convert cumulative metrics to delta temporality for Datadog
   cumulativetodelta: {}
 
@@ -430,14 +430,14 @@ docker run \
 
 {{% tab "Kubernetes (DaemonSet)" %}}
 
-Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for pod and container metrics. For managed Kubernetes distributions, apply the changes described under **Managed Kubernetes distributions** after the configuration.
+Use this configuration for a Collector deployed as a Kubernetes DaemonSet in a non-cloud environment. It includes the `k8s_attributes` processor for enriching telemetry with Kubernetes metadata and the `kubelet_stats` receiver for node, pod, container, and volume metrics. On a managed Kubernetes distribution, apply the changes described in [Managed Kubernetes distributions](#managed-kubernetes-distributions) after the configuration.
 
-Set the following environment variables before starting the Collector:
+Set the following environment variables in the Collector pod spec, using the Kubernetes downward API where noted:
 
 - `DD_API_KEY` and `DD_SITE`
-- `K8S_NODE_NAME`: The name of the Kubernetes node, used by the `kubelet_stats` receiver. Set it from `spec.nodeName`.
-- `MY_POD_IP`: The pod IP, used by the `health_check` extension. Set it from `status.podIP`.
-- `OTEL_RESOURCE_ATTRIBUTES`: Host information, because no host detection is possible in this setup (for example, `k8s.node.name=$(K8S_NODE_NAME)`).
+- `K8S_NODE_NAME`: The name of the Kubernetes node, used by the `kubelet_stats` receiver. Set it from the `spec.nodeName` field.
+- `MY_POD_IP`: The pod IP, used by the `health_check` extension. Set it from the `status.podIP` field.
+- `OTEL_RESOURCE_ATTRIBUTES`: The Collector cannot determine the host name from inside a container, so provide host information here (for example, `k8s.node.name=$(K8S_NODE_NAME)`). The `$(VAR)` syntax is expanded by Kubernetes, so set this in the pod spec rather than in a shell.
 
 Mount the host filesystem at `/hostfs` so the `host_metrics` receiver can collect host metrics.
 
@@ -674,13 +674,13 @@ service:
                 endpoint: http://localhost:4318
 ```
 
-The `k8s_attributes` processor requires a ServiceAccount with permissions to read pod metadata. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions.
+This configuration requires a ServiceAccount bound to a ClusterRole that grants `get`, `list`, and `watch` on `pods`, `namespaces`, `nodes`, `nodes/stats`, and `replicasets`. The `k8s_attributes` processor reads pod metadata, and the `kubelet_stats` receiver reads `nodes/stats`. See the [Kubernetes Attributes Processor documentation][101] for RBAC setup instructions, and add `nodes/stats` to the rules it lists.
 
-**Managed Kubernetes distributions**
+#### Managed Kubernetes distributions
 
-On a managed Kubernetes distribution, replace the `resource_detection` processor in the previous configuration with the version for your environment. The cloud detectors provide host information, so you do not need to set `OTEL_RESOURCE_ATTRIBUTES`.
+On a managed Kubernetes distribution, replace the `resource_detection` processor in the previous configuration with the variant for your environment. The cloud detectors provide host information, so you do not need to set `OTEL_RESOURCE_ATTRIBUTES`.
 
-**Amazon EKS**:
+##### Amazon EKS
 
 ```yaml
 processors:
@@ -699,9 +699,9 @@ processors:
           enabled: false
 ```
 
-The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
+The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings. The `timeout` is raised to `15s` to allow for IMDS latency.
 
-**Amazon EKS Auto Mode**:
+##### Amazon EKS Auto Mode
 
 ```yaml
 processors:
@@ -719,8 +719,6 @@ processors:
         host.image.id: { enabled: true }
         host.type: { enabled: true }
       node_from_env_var: K8S_NODE_NAME
-    ec2:
-      tags: ['^kubernetes\.io/cluster/.*$']
     system:
       resource_attributes:
         host.name:
@@ -729,7 +727,7 @@ processors:
 
 The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
 
-**Google GKE**:
+##### Google GKE
 
 ```yaml
 processors:
@@ -743,9 +741,9 @@ processors:
           enabled: false
 ```
 
-On unsupported GKE versions, you may need to supply the node name as `host.name` in `OTEL_RESOURCE_ATTRIBUTES`.
+On older GKE versions, the `gcp` detector may not return a host name. If that happens, supply the node name as `host.name` in `OTEL_RESOURCE_ATTRIBUTES`.
 
-**Azure AKS**:
+##### Azure AKS
 
 ```yaml
 processors:
@@ -762,11 +760,14 @@ processors:
           enabled: false
 ```
 
-**GKE Autopilot and AKS Automatic**
+##### GKE Autopilot and AKS Automatic
 
-These modes do not allow mounting `/hostfs` or using host ports. Use the `resource_detection` processor for GKE or AKS respectively, and also remove the `host_metrics` receiver from the configuration and from the `metrics` pipeline. Pod and container metrics still come from the `kubelet_stats` receiver.
+These modes do not allow mounting `/hostfs` or using host ports. Use the GKE or AKS `resource_detection` processor, then make these additional changes:
 
-For the complete configuration file for each environment, see the [`opentelemetry-examples` repository][501].
+- Remove the `host_metrics` receiver from the `receivers` block and from the `metrics` pipeline. Node, pod, container, and volume metrics still come from the `kubelet_stats` receiver.
+- Disable host ports on the Collector and expose it through a node-local Service instead. Point your applications at that Service rather than at the host IP shown in [Configure your application](#4-configure-your-application).
+
+For the complete configuration files for each environment, see the [`opentelemetry-examples` repository][501].
 
 [101]: https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/processor/k8sattributesprocessor#role-based-access-control
 [501]: https://github.com/DataDog/opentelemetry-examples/tree/experimental-oss-config/configurations/opentelemetry-collector
@@ -775,7 +776,7 @@ For the complete configuration file for each environment, see the [`opentelemetr
 
 {{% tab "Kubernetes (Helm chart)" %}}
 
-You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources for you.
+You can deploy the Collector as a DaemonSet in Kubernetes using the [official OpenTelemetry Collector Helm chart][102] v0.147.1 or later. The values files below set up the required mounts, environment variables, and RBAC resources.
 
 1. Create a Kubernetes secret with your Datadog API key:
 
@@ -920,7 +921,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OSS Collector configuration uses the <code>spanmetrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>spanmetrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">The recommended OSS Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
 
 ### Datadog extension
 
