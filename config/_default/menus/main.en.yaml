@@ -3226,6 +3226,21 @@ menu:
       identifier: end_user_device_monitoring
       parent: infrastructure_heading
       weight: 40000
+    - name: Setup
+      url: infrastructure/end_user_device_monitoring/setup/
+      identifier: eudm_setup
+      parent: end_user_device_monitoring
+      weight: 1
+    - name: macOS
+      url: infrastructure/end_user_device_monitoring/setup/macos/
+      identifier: eudm_setup_macos
+      parent: eudm_setup
+      weight: 1
+    - name: Windows
+      url: infrastructure/end_user_device_monitoring/setup/windows/
+      identifier: eudm_setup_windows
+      parent: eudm_setup
+      weight: 2
     - name: Hosts
       url: infrastructure/hostmap/
       identifier: hosts
@@ -5468,6 +5483,11 @@ menu:
       identifier: jobs_monitoring_glue
       parent: data_jobs
       weight: 650000
+    - name: Azure Data Factory
+      url: data_observability/jobs_monitoring/azure_data_factory
+      identifier: jobs_monitoring_azure_data_factory
+      parent: data_jobs
+      weight: 660000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
@@ -6498,6 +6518,11 @@ menu:
       parent: feature_flags
       identifier: feature_flags_implementation_patterns
       weight: 5
+    - name: Local Flag Overrides
+      url: feature_flags/implementation_patterns/local_flag_overrides
+      parent: feature_flags_implementation_patterns
+      identifier: feature_flags_implementation_patterns_local_flag_overrides
+      weight: 500
     - name: OpenTelemetry
       url: feature_flags/implementation_patterns/opentelemetry
       parent: feature_flags_implementation_patterns

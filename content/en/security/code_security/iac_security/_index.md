@@ -40,6 +40,20 @@ IaC Security integrates with your repositories to continuously scan for misconfi
 
 When a pull request includes infrastructure-as-code changes, Datadog adds inline comments to flag any violations. Where applicable, it also suggests code fixes that can be applied directly in the pull request. You can also open a new pull request from Datadog to remediate a finding. For more information, see [Pull Request Comments][5].
 
+### Fix with Cursor
+You can hand off remediation for an IaC finding to an AI coding agent such as Cursor.
+
+1. On the [Code Security Vulnerabilities][3] page, click a finding to open its side panel.
+2. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Remediate with AI{{< /ui >}}.
+3. Select the {{< ui >}}Coding agent{{< /ui >}} tab.
+4. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored remediation prompt for the misconfiguration.
+
+To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/iac_security/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
+
 ### Automatically block risky changes with PR Gates
 
 Use [PR Gates][11] to enforce security standards on infrastructure-as-code changes before they're merged. Datadog scans the IaC changes in each pull request, identifies any vulnerabilities above your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.

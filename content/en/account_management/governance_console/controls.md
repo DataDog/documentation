@@ -1,6 +1,10 @@
 ---
 title: Controls
 description: How to use Governance Console Controls to enforce consistent configurations and organizational best practices across a Datadog environment.
+further_reading:
+- link: "https://www.datadoghq.com/blog/governance-console/"
+  tag: "Blog"
+  text: "Centralize observability management with Datadog Governance Console"
 ---
 
 ## Overview
@@ -128,3 +132,7 @@ Monitors with Broken Notification Handles
   {{% /collapse-content %}}
 
 [1]: https://app.datadoghq.com/governance/controls
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
