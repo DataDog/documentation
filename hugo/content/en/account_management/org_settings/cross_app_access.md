@@ -23,9 +23,9 @@ further_reading:
 
 Cross-App Access (XAA) lets AI agents call the Datadog API on behalf of users your organization already authorized in Okta. Without it, every user authorizes the agent individually through a browser consent screen. With it, your Okta administrator grants that access once, centrally, and users skip the per-user consent step.
 
-Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token scoped to the user Okta named. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
+Okta issues the agent a short-lived token called an ID-JAG (Identity Assertion JWT Authorization Grant). The agent presents this token to Datadog, and Datadog exchanges it for an access token owned by the user who initiated the call. Because Okta mints the token, your administrators grant and revoke Datadog access for AI agents from Okta.
 
-In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent. Configure it with the Datadog API. An interface in Organization Settings is planned for a future release.
+In Preview, Cross-App Access supports Okta as the only identity provider and Claude as the only agent.
 
 ## How it works
 
