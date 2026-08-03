@@ -92,8 +92,6 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 ### PR Description Template
-The canonical template is `.github/PULL_REQUEST_TEMPLATE.md`. Read that file when
-drafting a PR description rather than relying on the copy below, which can drift.
 
 ```
 <!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
