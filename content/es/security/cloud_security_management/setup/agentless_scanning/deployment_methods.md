@@ -4,112 +4,111 @@ aliases:
 further_reading:
 - link: /security/cloud_security_management/agentless_scanning
   tag: Documentación
-  text: Cloud Security Agentless Scanning
+  text: Escaneo Agentless de Cloud Security
 - link: /security/cloud_security_management/setup/agentless_scanning/enable
   tag: Documentación
-  text: Activación de de Agentless Scanning
+  text: Habilitación de Agentless Scanning
 - link: /security/cloud_security_management/setup/agentless_scanning/update
   tag: Documentación
   text: Actualización de Agentless Scanning
-title: Despliegue de Agentless Scanning
+title: Implementación de Agentless Scanning
 ---
+Esta guía le ayuda a elegir la topología de implementación adecuada para Agentless Scanning según su entorno en la nube. Para obtener instrucciones de configuración, consulte [Habilitación de Agentless Scanning][3].
 
-Esta guía te ayuda a elegir la topología de despliegue adecuada para Agentless Scanning en función de tu entorno de nube. Para obtener instrucciones de configuración, consulta [Activación de Agentless Scanning][3].
+## Descripción general {#overview}
 
-## Información general
+Datadog recomienda las siguientes pautas:
+- Utilice una cuenta de escáner dedicada para entornos de varias cuentas.
+- Implemente un escáner en cada región que contenga más de 150 hosts.
+- Si utiliza [Cloud Storage Scanning][1], implemente un escáner en cada región que contenga un almacén de datos (por ejemplo, buckets de S3).
 
-Datadog recomienda las siguientes directrices:
-- Utiliza una cuenta de escáner dedicada para entornos multicuenta.
-- Despliega un escáner en cada región que contenga más de 150 hosts.
-- Si utilizas [Cloud Storage Scanning][1], despliega un escáner en cada región que contenga un almacén de datos (por ejemplo, buckets de S3 o instancias de RDS).
+<div class="alert alert-info">Los escáneres solo envían a Datadog la lista recopilada de paquetes y metadatos del host (nombres de host, identificadores de instancias de EC2/máquina virtual/Compute Engine). Todos los datos escaneados permanecen en su infraestructura.</div>
 
-<div class="alert alert-info">Los escáneres solo envían la lista recopilada de paquetes y metadatos de host (nombres de host, identificadores de instancia de EC2/VM/Compute Engine) a Datadog. Todos los datos escaneados permanecen en tu infraestructura.</div>
+## Configuración de cuenta y región en la nube {#cloud-account-and-region-configuration}
 
-## Configuración de cuentas y regiones en la nube
+La topología de implementación que utilice depende de cuántas cuentas en la nube (cuentas de AWS, suscripciones de Azure o proyectos de GCP) necesite escanear y qué regiones cubran.
 
-La topología de despliegue que utilices dependerá del número de cuentas en la nube (cuentas de AWS, suscripciones de Azure o proyectos GCP) que necesites escanear y de las regiones que cubran.
+- **Cuentas en la nube**: Si solo necesita escanear una única cuenta, implemente uno o más escáneres directamente en esa cuenta. De lo contrario, utilice una cuenta de escáner dedicada y utilice roles delegados para otorgarle acceso para escanear otras cuentas. Esto se denomina **escaneo entre cuentas**.
+- **Regiones**: Un solo escáner puede escanear hosts en cualquier región, incluidas regiones distintas a la suya. Sin embargo, el escaneo entre regiones genera costos de transferencia de datos. Si implementa escáneres adicionales depende de cuántos hosts tenga en cada región.
 
-- **Cuentas en la nube**: si solo necesitas escanear una única cuenta, despliega uno o varios escáneres directamente en esa cuenta. De lo contrario, utiliza una cuenta de escáner dedicada y utiliza roles delegados para concederte acceso para escanear otras cuentas. Esto se denomina **escaneado entre cuentas**.
-- **Regiones**: Un único escáner puede escanear hosts en cualquier región, incluyendo regiones distintas a la suya. Sin embargo, el escaneo entre regiones incurre en costes de transferencia de datos. El despliegue de escáneres adicionales depende del número de hosts que tengas en cada región.
-
-Estas pestañas contienen información sobre cómo configurar tu topología de despliegue. Selecciona la pestaña que describa cuántas cuentas necesitas escanear y, a continuación, obtén más información en función del número de regiones que necesites cubrir.
+Estas pestañas contienen información sobre cómo configurar su topología de implementación. Seleccione la pestaña que describe cuántas cuentas necesita escanear y, luego, obtenga más información según cuántas regiones necesite cubrir.
 
 {{< tabs >}}
-{{% tab "Single account" %}}
+{{% tab "Cuenta única" %}}
 
-Si solo necesitas escanear una única cuenta, despliega uno o varios escáneres directamente en esa cuenta.
+Si solo necesita escanear una cuenta única, implemente uno o más escáneres directamente en esa cuenta.
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagrama de Agentless Scanning que muestra el Agentless scanner aplicado en una cuenta que cubre varias regiones" width="40%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/single-account.png" alt="Diagrama de Agentless Scanning que muestra el Agentless scanner aplicado en una cuenta que cubre varias regiones." width="40%" >}}
 
-### Decidir cuántos escáneres desplegar
+### Decida cuántos escáneres implementar {#decide-how-many-scanners-to-deploy}
 
-Un único escáner puede escanear hosts en cualquier región, incluso en regiones distintas a la suya. El escaneado entre regiones incurre en costes de transferencia de datos, por lo que la decisión de dónde desplegar escáneres adicionales depende del número de hosts que tengas en cada región.
+Un solo escáner puede escanear hosts en cualquier región, incluidas regiones distintas a la suya. El escaneo entre regiones genera costos de transferencia de datos, por lo que la decisión de dónde implementar escáneres adicionales depende de cuántos hosts tenga en cada región.
 
-- **Menos de ~150 hosts en total en todas las regiones**: un único escáner en una región es la configuración más rentable. Los costes de transferencia de datos entre regiones para escanear hosts remotos son inferiores al coste fijo de ejecutar un escáner adicional.
-- **Más de ~150 hosts en una región específica**: despliega un escáner dedicado en esa región. A partir de este umbral, el ahorro que supone el escaneado local supera el coste de funcionamiento del escáner.
-- **Múltiples regiones por encima del umbral**: despliega un escáner en cada región que supere ~150 hosts. Las regiones por debajo del umbral pueden escanearse entre regiones desde el escáner más cercano.
+- **Menos de ~150 hosts en total en todas las regiones**: un solo escáner en una región es la configuración más rentable. Los costos de transferencia de datos entre regiones para escanear hosts remotos son menores que el costo fijo de ejecutar un escáner adicional.
+- **Más de ~150 hosts en una región específica**: Implemente un escáner dedicado en esa región. En este umbral, los ahorros de salida por escanear localmente superan el costo de ejecutar el escáner.
+- **Varias regiones por encima del umbral**: Implemente un escáner en cada región que supere los ~150 hosts. Las regiones por debajo del umbral pueden ser escaneadas de forma cruzada desde el escáner más cercano.
 
-Datadog dirige automáticamente los escaneos al escáner regional adecuado para minimizar los costes entre regiones.
+Datadog enruta automáticamente los escaneos al escáner regional apropiado para minimizar los costos entre regiones.
 
-#### Límites de capacidad del escáner
+#### Límites de capacidad del escáner {#scanner-capacity-limits}
 
-Cada escáner tiene límites de rendimiento regidos por las cuotas de la API del proveedor de la nube:
+Cada escáner tiene límites de rendimiento regidos por las cuotas de API del proveedor de la nube:
 
 | Límite | Valor |
 |-------|-------|
-| Número máximo de escáneres por cuenta y región | 4 (límite máximo; los proveedores de nube como AWS limitan las snapshots simultáneas a 100 por cuenta y región) |
+| Máximo de escáneres por cuenta por región | 4 (límite estricto; los proveedores de nube como AWS limitan las instantáneas simultáneas a 100 por cuenta por región) |
 | Intervalo de escaneo | Cada 12 horas |
 
-<div class="alert alert-danger">No aumentes el número deseado de grupos de autoescalado (ASG) más allá de cuatro escáneres por región. Los escáneres adicionales no pueden crear snapshots debido al límite de snapshots simultáneas de los proveedores de nube.</div>
+<div class="alert alert-danger">No aumente el conteo deseado del Grupo de Autoescalado (ASG) más allá de cuatro escáneres por región. Los escáneres adicionales no pueden crear instantáneas debido al límite de instantáneas simultáneas de los proveedores de nube.</div>
 
 {{% /tab %}}
-{{% tab "Multiple accounts" %}}
+{{% tab "Cuentas múltiples" %}}
 
-### Decidir en qué cuentas desplegar los escáneres
+### Decida en qué cuentas implementar los escáneres {#decide-which-accounts-to-deploy-scanners-in}
 
-Datadog recomienda utilizar una **cuenta de escáner dedicada** para desplegar los escáneres y utilizar **funciones de delegado entre cuentas** para conceder a los escáneres acceso a las cuentas de destino (incluida la cuenta del escáner).
+Datadog recomienda usar una **cuenta de escáner dedicada** para implementar escáneres y usar **roles delegados entre cuentas** para otorgar a los escáneres acceso a las cuentas de destino (incluida la cuenta del escáner).
 
-Para AWS Organizations, utiliza un [CloudFormation StackSet][1] para desplegar un rol de delegado en todas las cuentas miembro, automatizando la incorporación para el escaneo entre cuentas.
+Para AWS Organizations, utilice un [CloudFormation StackSet][1] para implementar un rol delegado en todas las cuentas miembro, automatizando la incorporación para el escaneo entre cuentas.
 
-El siguiente diagrama ilustra el escaneado entre cuentas desde una cuenta central (Cuenta 4):
+El siguiente diagrama ilustra el escaneo entre cuentas desde una cuenta central (Cuenta 4):
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagrama de Agentless Scanning que muestra el escáner sin agent desplegado en una cuenta central en la nube" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/central-scanner.png" alt="Diagrama de Agentless Scanning que muestra el Agentless scanner implementado en una cuenta de nube central." width="90%" >}}
 
-**Si no deseas conceder permisos entre cuentas**, despliega un escáner en cada cuenta. Esto incurre en costes más elevados porque cada escáner realiza escaneos entre regiones dentro de su cuenta.
+**Si no desea otorgar permisos entre cuentas**, implemente un escáner en cada cuenta en su lugar. Esto genera costos más altos porque cada escáner realiza escaneos entre regiones dentro de su cuenta.
 
-{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagrama de Agentless Scanning que muestra el escáner sin agent desplegado en cada cuenta en la nube" width="90%" >}}
+{{< img src="/sensitive_data_scanner/setup/cloud_storage/scanner-in-each-account.png" alt="Diagrama de Agentless Scanning que muestra el Agentless scanner implementado en cada cuenta de nube." width="90%" >}}
 
-### Decidir cuántos escáneres desplegar
+### Decida cuántos escáneres implementar {#decide-how-many-scanners-to-deploy-1}
 
-Un único escáner puede escanear hosts en cualquier región, incluso en regiones distintas a la suya. El escaneado entre regiones incurre en costes de transferencia de datos, por lo que la decisión de dónde desplegar escáneres adicionales depende del número de hosts que tengas en cada región.
+Un solo escáner puede escanear hosts en cualquier región, incluidas regiones distintas a la suya. El escaneo entre regiones genera costos de transferencia de datos, por lo que la decisión de dónde implementar escáneres adicionales depende de cuántos hosts tenga en cada región.
 
-- **Menos de ~150 hosts en total en todas las regiones**: un único escáner en una región es la configuración más rentable. Los costes de transferencia de datos entre regiones para escanear hosts remotos son inferiores al coste fijo de ejecutar un escáner adicional.
-- **Más de ~150 hosts en una región específica**: despliega un escáner dedicado en esa región. A partir de este umbral, el ahorro que supone el escaneado local supera el coste de funcionamiento del escáner.
-- **Múltiples regiones por encima del umbral**: despliega un escáner en cada región que supere ~150 hosts. Las regiones por debajo del umbral pueden escanearse entre regiones desde el escáner más cercano.
+- **Menos de ~150 hosts en total en todas las regiones**: un solo escáner en una región es la configuración más rentable. Los costos de transferencia de datos entre regiones para escanear hosts remotos son menores que el costo fijo de ejecutar un escáner adicional.
+- **Más de ~150 hosts en una región específica**: Implemente un escáner dedicado en esa región. En este umbral, los ahorros de salida por escanear localmente superan el costo de ejecutar el escáner.
+- **Varias regiones por encima del umbral**: Implemente un escáner en cada región que supere ~150 hosts. Las regiones por debajo del umbral pueden ser escaneadas de manera cruzada desde el escáner más cercano.
 
-Datadog dirige automáticamente los escaneos al escáner regional adecuado para minimizar los costes entre regiones.
+Datadog enruta automáticamente los escaneos al escáner regional apropiado para minimizar los costos entre regiones.
 
-#### Límites de capacidad del escáner
+#### Límites de capacidad del escáner {#scanner-capacity-limits-1}
 
-Cada escáner tiene límites de rendimiento regidos por las cuotas de la API del proveedor de la nube:
+Cada escáner tiene límites de rendimiento regidos por las cuotas de API del proveedor de la nube:
 
 | Límite | Valor |
 |-------|-------|
-| Número máximo de escáneres por cuenta y región | 4 (límite máximo; los proveedores de nube como AWS limitan las snapshots simultáneas a 100 por cuenta y región) |
+| Máximo de escáneres por cuenta por región | 4 (límite estricto; los proveedores de nube como AWS limitan las instantáneas simultáneas a 100 por cuenta por región) |
 | Intervalo de escaneo | Cada 12 horas |
 
-<div class="alert alert-danger">No aumentes el número deseado de grupos de autoescalado (ASG) más allá de cuatro escáneres por región. Los escáneres adicionales no pueden crear snapshots debido al límite de snapshots simultáneas de los proveedores de nube.</div>
+<div class="alert alert-danger">No aumente el conteo deseado del Grupo de Autoescalado (ASG) más allá de cuatro escáneres por región. Los escáneres adicionales no pueden crear instantáneas debido al límite de instantáneas simultáneas de los proveedores de nube.</div>
 
 [1]: /es/security/cloud_security_management/setup/agentless_scanning/enable#aws-cloudformation-stackset-setup
 
 {{% /tab %}}
 {{< /tabs >}}
 
-## Consideraciones sobre redes empresariales
+## Consideraciones de redes empresariales {#enterprise-networking-considerations}
 
-Por defecto, el escáner crea una nueva VPC durante el despliegue. Si tu organización utiliza Terraform y tiene políticas de control de servicios (SCP) que restringen la creación de VPC, utiliza la opción [**VPC personalizada**][2] durante la configuración para utilizar una VPC existente en lugar de crear una nueva.
+De forma predeterminada, el escáner crea una nueva VPC durante la implementación. Si su organización utiliza Terraform y tiene políticas de control de servicios (SCP) que restringen la creación de VPC, utilice la opción [{{< ui >}}custom VPC{{< /ui >}}][2] durante la configuración para usar una VPC existente en lugar de crear una nueva.
 
-## Referencias adicionales
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
