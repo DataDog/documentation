@@ -2727,7 +2727,7 @@ def call_openai():
 
 ### Example: redacting span metadata
 
-The `metadata` field exposes the span's top-level metadata dictionary. You can mutate, add, or remove keys. Internal Datadog fields are never exposed and cannot be modified.
+The `metadata` field exposes the span's top-level metadata dictionary. You can mutate, add, or remove keys.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
