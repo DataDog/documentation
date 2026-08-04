@@ -3,7 +3,7 @@
   "type": "module",
   "packageManager": "yarn@4.10.3",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=24.0.0"
   },
   "scripts": {
     "dev": "astro dev --port 4321",
@@ -12,7 +12,7 @@
     "build:en": "SKIP_TRANSLATIONS=true astro build",
     "preview": "astro preview --port 4322",
     "preview:proxied": "PROXIED=1 astro preview --port 4321",
-    "pretest": "node -e \"const [major] = process.versions.node.split('.').map(Number); if (major < 22) { console.error('Error: Node >=22 required (current: ' + process.version + '). Run: nvm use'); process.exit(1); }\"",
+    "pretest": "node -e \"const [major] = process.versions.node.split('.').map(Number); if (major < 24) { console.error('Error: Node >=24 required (current: ' + process.version + '). Run: nvm use'); process.exit(1); }\"",
     "test": "yarn test:headless && yarn test:browser",
     "test:headless": "vitest run",
     "test:browser": "USE_DEV_SERVER=true playwright test",
@@ -40,7 +40,7 @@
     "@playwright/test": "^1.62.0",
     "@testing-library/preact": "^3.2.4",
     "@testing-library/user-event": "^14.6.1",
-    "@types/node": "^22.20.1",
+    "@types/node": "^24.9.2",
     "@types/turndown": "^5.0.6",
     "cheerio": "^1.2.0",
     "happy-dom": "^20.11.1",
