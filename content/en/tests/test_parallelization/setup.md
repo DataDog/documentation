@@ -133,7 +133,7 @@ bin/ddtest run \
 
 #### Run workers on one CI node
 
-On a single CI node, the selected parallelism is the number of local worker processes that `ddtest` starts. The command does not require additional options.
+On a single CI node, `ddtest plan` is optional. Run `ddtest run` directly, or run `ddtest plan` and `ddtest run` back-to-back in the same job if you want to inspect the plan first. The selected parallelism is the number of local worker processes that `ddtest` starts. The command does not require additional options.
 
 #### Distribute tests across CI nodes
 

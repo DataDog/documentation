@@ -243,10 +243,7 @@ Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discover
 
 Use a `ddtest` plan when you want `ddtest` to select runnable test files, but another runner should execute them.
 
-| File | Use |
-| ---- | --- |
-| `.testoptimization/runner/test-files.txt` | All runnable test files after Test Impact Analysis skips are applied. |
-| `.testoptimization/runner/tests-split/runner-N` | Files assigned to CI node or worker `N`. |
+See [Plan artifacts](#plan-artifacts) for the `test-files.txt` and per-runner `tests-split/runner-N` files that another runner can consume.
 
 For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
 
