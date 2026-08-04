@@ -5409,6 +5409,20 @@
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
   },
+  "CreateSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Create a new severity modifier rule for the current organization.",
+    "summary": "Create a severity modifier rule",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule create request."
+  },
+  "DeleteSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Delete an existing severity modifier rule by ID.",
+    "summary": "Delete a severity modifier rule"
+  },
+  "GetSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Get the details of a severity modifier rule by ID.",
+    "summary": "Get a severity modifier rule"
+  },
   "ListSecurityFindingsAutomationTicketCreationRules": {
     "description": "Get all ticket creation rules for the current organization.",
     "summary": "Get all ticket creation rules"
