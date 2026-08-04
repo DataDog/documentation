@@ -70,7 +70,7 @@ Tables become available a few minutes after your first request. Enrichment appli
 
 ### Request body
 
-The body is a STIX 2.1 `bundle` that contains one or more `indicator` objects. Each request is one incremental batch, and a single bundle can contain indicators of different types.
+The body is a STIX 2.1 `bundle` of `indicator` objects. Each request is an incremental batch, and a bundle can mix indicators of different types.
 
 ```json
 {
