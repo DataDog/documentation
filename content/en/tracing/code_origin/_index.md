@@ -73,7 +73,7 @@ In Trace Explorer, select a span from an enabled service to see Code Origin deta
 | 5.54.0+ | Express |
 
 <div class="alert alert-info">
-  NestJS is not supported, even though the underlying framework is either Express or Fastify.
+  NestJS is not supported, even if the underlying framework is either Express or Fastify.
 </div>
 
 <div class="alert alert-info">
