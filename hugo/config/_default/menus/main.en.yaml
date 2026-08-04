@@ -5345,6 +5345,16 @@ menu:
       identifier: aws_glue_iceberg
       parent: data_lakes
       weight: 1000000
+    - name: Transactional Databases
+      url: data_observability/quality_monitoring/transactional_databases
+      identifier: transactional_databases
+      parent: quality_monitoring
+      weight: 260000
+    - name: PostgreSQL
+      url: data_observability/quality_monitoring/transactional_databases/postgres
+      identifier: data_obs_postgres
+      parent: transactional_databases
+      weight: 1000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
       identifier: elt_integrations
