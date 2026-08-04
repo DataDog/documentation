@@ -4,34 +4,33 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
+const DD_E2E_PREFIX = 'dd_e2e/';
+
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Skip cdocs (docs with content_filters): they render on demand at their own
-  // Hugo-matched URLs, resolving filters per request, so they must not be
-  // statically prerendered here under /docs/.
-  const docs = await getCollection('docs', (entry) => !entry.data.content_filters);
-  return docs.map((entry) => ({
-    params: { slug: entry.id },
+  const entries = await getCollection('en', (entry) =>
+    entry.id.startsWith(DD_E2E_PREFIX) && !entry.data.content_filters
+  );
+  return entries.map((entry) => ({
+    params: { slug: entry.id.slice(DD_E2E_PREFIX.length) },
     props: { entry },
   }));
 };
 
-const { entry } = Astro.props as { entry: CollectionEntry<'docs'> };
+const { entry } = Astro.props as { entry: CollectionEntry<'en'> };
 
-if (__CI_ENV__ === 'live' && entry.id.startsWith('dd_e2e/')) {
+if (__CI_ENV__ === 'live') {
   return new Response(null, { status: 404 });
 }
 
 const { Content } = await render(entry);
 
-// Only the Markdoc component pages ship a `.md` plaintext twin (see
-// dd_e2e/components/[component].md.ts).
 const isMarkdocComponentPage = entry.id.startsWith('dd_e2e/components/');
-const plaintextHref = `/docs/${entry.id}.md`;
+const plaintextHref = `/${entry.id}.md`;
 ---
 
 <BaseLayout title={entry.data.title}>
   <div class="docs-page">
-    <nav><a href="/docs/dd_e2e/">&larr; Test Pages</a></nav>
+    <nav><a href="/dd_e2e/">&larr; Test Pages</a></nav>
     {isMarkdocComponentPage && (
       <p class="plaintext-link">
         <a href={plaintextHref}>View this page as plaintext</a>

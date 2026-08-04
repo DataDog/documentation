@@ -19,7 +19,7 @@ import { renderMdocWithTwins } from '@lib/plaintext/twinTransform';
 const COMPONENTS_PREFIX = 'dd_e2e/components/';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const docs = await getCollection('docs');
+  const docs = await getCollection('en');
   return docs
     .filter((entry) => entry.id.startsWith(COMPONENTS_PREFIX))
     .map((entry) => ({

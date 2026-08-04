@@ -1,10 +1,10 @@
 ---
 // Catch-all on-demand cdoc route. Any URL whose path matches a filterable doc
-// (a `docs` collection entry with `content_filters`) is rendered here: filters
+// (an `en` collection entry with `content_filters`) is rendered here: filters
 // resolve per request (URL param > cookie > default) and non-matching content
 // is dropped server-side by vanilla Markdoc before the HTML is sent.
 //
-// This is the lowest-priority route, so more specific ones (`/`, `/docs/...`,
+// This is the lowest-priority route, so more specific ones (`/`, `/dd_e2e/...`,
 // `/[...lang]/api/...`) still win; only otherwise-unmatched paths reach here.
 // A path that isn't a filterable doc falls through to a 404.
 export const prerender = false;
@@ -18,10 +18,10 @@ import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
 import { DEFAULT_LOCALE } from '@lib/i18n/locale';
 
 // `[...slug]` yields the full path with no leading/trailing slash, which is
-// exactly a `docs` entry id (path under content/docs, without the extension).
+// exactly an `en` entry id (path under content/en, without the extension).
 const slug = Astro.params.slug ?? '';
 
-const entry = await getEntry('docs', slug);
+const entry = await getEntry('en', slug);
 // Only filterable docs (cdocs) render through this route; anything else 404s.
 if (!entry?.data.content_filters) {
   return new Response(null, { status: 404 });
@@ -55,7 +55,7 @@ for (const [traitId, value] of Object.entries(valsByTraitId)) {
 
 // Plaintext (`.md`) twin of this page, preserving the current filter query so
 // the plaintext reflects the same resolved state. Trailing slash is stripped so
-// the path matches a `docs` entry id. Testing aid for now.
+// the path matches an `en` entry id. Testing aid for now.
 const plaintextHref = `${Astro.url.pathname.replace(/\/$/, '')}.md${Astro.url.search}`;
 ---
 

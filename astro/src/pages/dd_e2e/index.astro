@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 import Alert from '@components/Alert/Alert.astro';
 
-const docs = await getCollection('docs');
+const docs = await getCollection('en');
 const markdocComponents = docs
   .filter((entry) => entry.id.startsWith('dd_e2e/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -125,11 +125,11 @@ const astroComponents: AstroTestPage[] = [
         </thead>
         <tbody>
           <tr>
-            <td><a href="/docs/dd_e2e/integration/typography/">Typography</a></td>
+            <td><a href="/dd_e2e/integration/typography/">Typography</a></td>
             <td>Verify vanilla Markdown elements such as headings and links.</td>
           </tr>
           <tr>
-            <td><a href="/docs/dd_e2e/integration/nested-content/">Nested content</a></td>
+            <td><a href="/dd_e2e/integration/nested-content/">Nested content</a></td>
             <td>Verify the rendering and hydration of components nested inside other components, such as a code block inside a tab.</td>
           </tr>
         </tbody>
@@ -176,7 +176,7 @@ const astroComponents: AstroTestPage[] = [
         <tbody>
           {astroComponents.map((entry) => (
             <tr>
-              <td><a href={`/docs/dd_e2e/components/${entry.slug}/`}>{entry.title}</a></td>
+              <td><a href={`/dd_e2e/components/${entry.slug}/`}>{entry.title}</a></td>
               <td>{entry.type}</td>
               <td>{componentsWithPlaintextTwin.has(entry.slug) ? '✅' : '❌'}</td>
               <td>{entry.description}</td>

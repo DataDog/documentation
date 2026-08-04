@@ -14,8 +14,8 @@ const contentFilterSchema = z.object({
   hide_if: z.array(z.record(z.string(), z.array(z.string()))).optional(),
 });
 
-const docs = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: './src/content/docs' }),
+const en = defineCollection({
+  loader: glob({ pattern: '**/*.mdoc', base: './src/content/en' }),
   schema: z.object({
     title: z.string(),
     description: z.string().optional(),
@@ -32,4 +32,4 @@ const docs = defineCollection({
   }),
 });
 
-export const collections = { docs };
+export const collections = { en };

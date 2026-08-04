@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('CodeBlock component', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/dd_e2e/components/codeblock');
+    await page.goto('/dd_e2e/components/codeblock');
   });
 
   test('renders all code blocks on the page', async ({ page }) => {

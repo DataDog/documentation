@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ApiEndpointSummary component', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/dd_e2e/components/api-endpoint-summary');
+    await page.goto('/dd_e2e/components/api-endpoint-summary');
   });
 
   test('renders a heading linking to the endpoint page', async ({ page }) => {
@@ -36,7 +36,7 @@ test.describe('ApiEndpointSummary component', () => {
 test.describe('ApiEndpointSummary region switching', () => {
   test('swapping the region swaps the visible endpoint URL', async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto('/docs/dd_e2e/components/api-endpoint-summary');
+    await page.goto('/dd_e2e/components/api-endpoint-summary');
 
     await expect(page.locator('.region-selector[data-hydrated="true"]').first()).toBeVisible();
     await page.locator('.region-selector .select__control').selectOption('eu');
