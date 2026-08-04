@@ -13,16 +13,22 @@ On the [Databases page][1], you can assess the health and activity of your datab
 
 In addition to a filterable graph of active connections for that host, the host details panel displays the following features.
 
-|                                                 | Postgres  | SQL Server | MySQL     | Oracle    |
-|-------------------------------------------------|-----------|------------|-----------|-----------|
-| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |
-| [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           |
-| [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           |
-| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |
-| [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           |
-| [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |
+|                                                 | Postgres  | SQL Server | MySQL     | Oracle    | MongoDB   | DocumentDB |
+|-------------------------------------------------|-----------|------------|-----------|-----------|-----------|------------|
+| [Top queries](#top-queries)                     | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} | {{< X >}}\* | {{< X >}}\* |
+| [Stored procedures](#stored-procedures)         |           | {{< X >}}  |           |           |           |            |
+| [Metrics](#metrics)                             | {{< X >}} | {{< X >}}  |           |           | {{< X >}} | {{< X >}}  |
+| [Active connections](#active-connections)       | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |           |            |
+| [Schema](#schema)                               | {{< X >}} | {{< X >}}  |           |           | {{< X >}}\*\* | {{< X >}}\*\* |
+| [Blocking queries](#blocking-queries)           | {{< X >}} | {{< X >}}  | {{< X >}} | {{< X >}} |           |            |
+| [Calling services](#calling-services)           | {{< X >}} | {{< X >}}  | {{< X >}} |           | {{< X >}}\*\*\* |            |
+| [Configuration details](#configuration-details) | {{< X >}} | {{< X >}}  | {{< X >}} |           |           |            |
+
+\* MongoDB and DocumentDB track slow operations 
+
+\*\* Accessed via the [Schema Explorer][2]
+
+\*\*\* MongoDB provides Calling Services on query Samples 
 
 ## Cluster grouping
 A {{< ui >}}Group into clusters{{< /ui >}} toggle appears with the list of database hosts if host tags indicate the presence of cluster topology. Enable this toggle to group hosts into clusters within the list.
@@ -181,3 +187,4 @@ The {{< ui >}}Configuration{{< /ui >}} tab of the host details panel provides a 
 {{< img src="database_monitoring/db-list-configuration.png" alt="The Configuration tab of the details panel for a single database host on the Databases page" style="width:90%;" >}}
 
 [1]: https://app.datadoghq.com/databases
+[2]: /database_monitoring/schema_explorer/
