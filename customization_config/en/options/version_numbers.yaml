@@ -43,3 +43,33 @@ options:
 # 6.4.0
 - label: ">=6.4.0"
   id: gte_6_4_0
+
+- label: 9.6
+  id: 9_6_0
+
+- label: 10
+  id: 10_0_0
+
+- label: 11
+  id: 11_0_0
+
+- label: 12
+  id: 12_0_0
+
+- label: 13
+  id: 13_0_0
+
+- label: 14
+  id: 14_0_0
+
+- label: 15
+  id: 15_0_0
+
+- label: 16
+  id: 16_0_0
+
+- label: 17
+  id: 17_0_0
+
+- label: 18
+  id: 18_0_0
