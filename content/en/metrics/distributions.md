@@ -130,7 +130,7 @@ No data is lost (both timeseries are stored) but queries return only the distrib
 * A metric reports as a different type than expected (for example, you expect `distribution` but see `count`, or vice versa).
 * You submit a Logs-based metric with a name that matches an existing custom metric. Logs-based metrics always emit as distributions, which immediately triggers overshadowing.
 
-### How to avoid overshadowing
+### Avoid overshadowing
 
 Metric names must be unique across types. Follow these practices to prevent conflicts:
 
