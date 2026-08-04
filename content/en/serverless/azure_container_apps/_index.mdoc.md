@@ -39,6 +39,9 @@ further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
     text: "Azure Integration"
+  - link: "/mcp_server/tools/#serverless_onboarding"
+    tag: "Documentation"
+    text: "Datadog MCP Server: serverless_onboarding tool"
 ---
 
 {% collapse-content title="In-Container vs. Sidecar" level="h5" %}
@@ -54,7 +57,37 @@ further_reading:
 
 {% /collapse-content %}
 
-## Setup
+## Set up with agentic onboarding
+
+Use agentic onboarding to set up monitoring for your Azure Container Apps with AI assistance. Agentic onboarding detects your project's frameworks, applies the required configuration in place, and verifies that data is flowing. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+{% tabs %}
+{% tab label="AI Setup CLI" %}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Azure Container Apps service:
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{% /tab %}
+{% tab label="MCP server" %}
+
+Use the Datadog MCP server's [`serverless_onboarding`](https://docs.datadoghq.com/agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server) tool to set up monitoring for your Azure Container Apps with AI assistance. After you connect, try a prompt like:
+
+```
+Help me monitor my Azure Container Apps services with Datadog
+```
+
+{% /tab %}
+{% /tabs %}
+
+## Manual instrumentation
 
 **Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
 
