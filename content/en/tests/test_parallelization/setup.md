@@ -99,14 +99,23 @@ Planning discovers tests, retrieves test duration and Test Impact Analysis data,
 
 ### 2. Inspect the plan
 
-Inspect the proposed runner count and test files in the CI logs:
+The following commands are one way to inspect the proposed runner count and test files in the CI logs:
 
 {{< code-block lang="bash" >}}
+# Show the number of runners selected by ddtest.
 cat .testoptimization/runner/parallel-runners.txt
+
+# Count the test files selected for execution.
 wc -l .testoptimization/runner/test-files.txt
+
+# Preview the first 20 test files to verify test discovery.
 sed -n '1,20p' .testoptimization/runner/test-files.txt
+
+# List the per-runner split files to verify that work was distributed.
 find .testoptimization/runner/tests-split -maxdepth 1 -type f -print
 {{< /code-block >}}
+
+Alternatively, download the `.testoptimization/` directory as a CI artifact and open the files in your editor.
 
 Confirm that `test-files.txt` contains the files your existing command should run and that the number of split files matches `parallel-runners.txt`. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
 
