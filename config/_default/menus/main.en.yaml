@@ -8396,6 +8396,16 @@ menu:
       parent: csm_review_remediate
       identifier: csm_remediate_with_ai
       weight: 103
+    - name: Ownership Agent
+      url: security/cloud_security_management/review_remediate/ownership_agent
+      parent: csm_review_remediate
+      identifier: csm_ownership_agent
+      weight: 104
+    - name: Set Up Ownership Preferences
+      url: security/cloud_security_management/review_remediate/ownership_preferences
+      parent: csm_review_remediate
+      identifier: csm_ownership_preferences
+      weight: 105
     - name: Triage and Prioritize
       url: security/cloud_security_management/triage_and_prioritize/
       parent: csm

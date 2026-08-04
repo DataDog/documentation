@@ -79,7 +79,8 @@ In some cases, a team's membership cannot be directly modified within Datadog by
 
 A team that is managed externally from an identity provider displays a **Managed** badge in its header.
 
-### Subteams (hierarchical teams)
+
+## Team hierarchies
 
 {{< site-region region="gov,gov2" >}}
 <div class="alert alert-warning">
@@ -87,11 +88,29 @@ This feature is not supported for your selected Datadog site ({{< region-param k
 </div>
 {{< /site-region >}}
 
-With subteams, you can nest teams within each other to mimic your company's hierarchy in Datadog, allowing for a more complete and accurate ownership model. Subteams also provide an enhanced filtering experience; select a larger team (like a director-level group) to find all the data connected to any of its subteams.
-    {{< img src="account_management/teams/teams_filter_hierarchies.png" alt="Filter Hierarchical Teams" >}}
+Build a Teams map to visualize team hierarchies, nesting teams within each other (subteams) to mirror your company's actual structure. The result is a more complete ownership model than a flat, disconnected list of teams. A team's related teams, parent teams, sister teams, and subteams appear on its team page, in the **Hierarchy** section of the **Info** tab. To explore the full map of all teams in your organization, see the [Teams map][7] in the Datadog Internal Developer Portal.
 
-A team's subteams appear in the **Hierarchy** section of its Info tab.
-To automate subteam management based on your organization's hierarchical structure, use the [Teams APIs][5].
+{{< img src="/account_management/teams/github/manage/teams-map.png" alt="Teams map showing a hierarchy of parent and child teams, with a selected team's details panel displaying its members and subteams" style="width:100%;" >}}
+
+With hierarchies defined, you can:
+
+- **Escalate issues**: When an issue needs to go beyond the owning team, hierarchy routes it up to the parent team for broader visibility and faster resolution, without manually tracking down who's next in the chain.
+- **Roll-up filtering**: Select a parent team to see all data connected to any of its subteams, without selecting each one. Useful for director and VP-level views, where you care about an entire organization's footprint rather than one team's.
+- **Simplify access control**: Grant access once at the parent team level to automatically apply consistent permissions to all subteams.
+
+{{< img src="account_management/teams/teams_filter_hierarchies2.png" alt="Team filter dropdown with a parent team expanded to show its subteams selected as checkboxes" style="width:35%;" >}}
+
+### Set up team hierarchies
+
+You can define hierarchical relationships between teams in four ways:
+
+- **GitHub Teams**: If you used [GitHub][9] to set up your Datadog Teams and have GitHub team hierarchies configured, those team links sync to Datadog automatically during provisioning and appear in your Teams map.
+- **Teams API**: See [Create a team hierarchy link][5].
+- **Terraform**: Use the [`datadog_team_hierarchy_links`][8] resource.
+- **Datadog UI**: Define relationships directly on a team's page:
+   1. On the [team directory page][1], click the team you want to add a subteam or parent team relationship to.
+   1. In the {{< ui >}}Info{{< /ui >}} tab of the team page, click {{< ui >}}Edit{{< /ui >}} in the {{< ui >}}Hierarchy{{< /ui >}} section.
+   1. Select the parent or child teams associated with the team, then click {{< ui >}}Save{{< /ui >}}.
 
 ## Manage teams through an identity provider
 
@@ -121,5 +140,8 @@ To enforce a strict membership model, configure your default team settings so {{
 [1]: https://app.datadoghq.com/organization-settings/teams
 [2]: /account_management/saml/mapping/#map-saml-attributes-to-teams
 [3]: /account_management/scim/
-[5]: /api/latest/teams/#add-a-member-team
+[5]: /api/latest/teams/create-a-team-hierarchy-link/
 [6]: /incident_response/on-call/
+[7]: https://app.datadoghq.com/software?selectedComponent=team
+[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/team_hierarchy_links
+[9]: /account_management/teams/github/

@@ -128,6 +128,11 @@ test.describe('Cdocs open stepper', () => {
         await expect(stepContent(page, 1)).toBeVisible();
         await expect(stepContent(page, 2)).toBeVisible();
 
+        // Clicking "Expand all" leaves the cursor hovering the now-"Collapse all"
+        // button, which underlines it on :hover. Move the mouse off so the
+        // screenshot captures the button's resting state deterministically.
+        await page.mouse.move(0, 0);
+
         await expect(page.locator(CONTENT_AREA)).toHaveScreenshot('stepper-open-re-expanded.png');
     });
 
