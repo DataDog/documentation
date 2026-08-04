@@ -1904,7 +1904,8 @@ To annotate session ID on auto-instrumented spans, provide the `session_id` tag:
 {{< code-block lang="javascript" >}}
 const { llmobs } = require('dd-trace');
 
-function runChat(userQuestion, sessionId) {
+async function runChat(userQuestion, sessionId) {
+    return llmobs.annotationContext({
     const completion = await llmobs.annotationContext({
       tags: {
         session_id: sessionId
