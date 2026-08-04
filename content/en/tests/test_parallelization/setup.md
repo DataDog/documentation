@@ -112,11 +112,14 @@ wc -l .testoptimization/runner/test-files.txt
 
 # Preview the first 20 test files to verify test discovery.
 sed -n '1,20p' .testoptimization/runner/test-files.txt
+
+# Optional: List the per-runner split files to see how ddtest distributed the tests.
+find .testoptimization/runner/tests-split -maxdepth 1 -type f -print
 {{< /code-block >}}
 
 Alternatively, download the `.testoptimization/` directory as a CI artifact and open the files in your editor.
 
-Confirm that `test-files.txt` contains a list of files to run. Optionally, inspect `.testoptimization/runner/tests-split/` to see how `ddtest` distributed the files across runners. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
+Confirm that `test-files.txt` contains a list of files to run. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
 
 ### 3. Replace the existing test command
 
