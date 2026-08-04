@@ -17,12 +17,12 @@ If you manage many Observability Pipelines deployments and want to reduce manual
 
 ## Prerequisites
 
-Before you begin, make sure you have the following:
+Before you begin, make sure you have:
 
 - Datadog API and application keys for authentication.<br>**Note**: The API key must be [enabled for Remote Configuration][1].
 - The latest version of Terraform installed on your machine.
-- Familiarity with [Datadog's Terraform Provider][2] and the available resources.
-- Familiarity with the latest [Observability Pipelines API][3] endpoint specifications and additional configuration parameters.
+- If you are going to use Terraform, reviewed the [Datadog's Terraform Provider][2] and [Observability Pipelines resource][3].
+- If you are going to use the API, reviewed the [Observability Pipelines API][4] endpoint specifications and additional configuration parameters.
 
 ## Manage pipelines with the API
 
@@ -36,7 +36,7 @@ The example payloads also include sample `id` values (such as `my-processor-grou
 
 ### Create a pipeline
 
-To [create a pipeline][4], send a `POST` request with a JSON payload that defines the pipeline's name and its main components: sources, processors, and destinations.
+To [create a pipeline][5], send a `POST` request with a JSON payload that defines the pipeline's name and its main components: sources, processors, and destinations.
 
 Example request:
 
@@ -80,7 +80,7 @@ curl -X POST "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipeli
 
 ### Retrieve a pipeline configuration
 
-To [audit or verify an existing pipeline configuration][5], send a `GET` request with the specific pipeline ID.
+To [audit or verify an existing pipeline configuration][6], send a `GET` request with the specific pipeline ID.
 
 Example request:
 
@@ -93,7 +93,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelin
 
 ### Update an existing pipeline
 
-To [update an existing pipeline's configuration][6], send a `PUT` request with the pipeline changes in the JSON payload.
+To [update an existing pipeline's configuration][7], send a `PUT` request with the pipeline changes in the JSON payload.
 
 Example request:
 
@@ -126,7 +126,7 @@ curl -X PUT "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelin
 
 ### Delete a pipeline
 
-To [delete a pipeline][7], send a `DELETE` request to the corresponding endpoint. A successful deletion results in a `204` status code indicating that the pipeline has been removed.
+To [delete a pipeline][8], send a `DELETE` request to the corresponding endpoint. A successful deletion results in a `204` status code indicating that the pipeline has been removed.
 
 **Note**: The delete operation is irreversible. Use this endpoint only when you're certain that the pipeline is no longer needed.
 
@@ -144,7 +144,7 @@ You can use Terraform resources to create and deploy a pipeline.
 
 ### Create a pipeline using Terraform
 
-Define a pipeline using the [datadog_observability_pipeline][8] resource. Maintain this file in your version control system to track changes.
+Define a pipeline using the [datadog_observability_pipeline][9] resource. Maintain this file in your version control system to track changes.
 
 Example Terraform pipeline configuration:
 
@@ -217,9 +217,10 @@ terraform apply
 
 [1]: https://app.datadoghq.com/organization-settings/remote-config/setup
 [2]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
-[3]: /api/latest/observability-pipelines/
-[4]: /api/latest/observability-pipelines/create-a-new-pipeline/
-[5]: /api/latest/observability-pipelines/get-a-specific-pipeline/
-[6]: /api/latest/observability-pipelines/update-a-pipeline/
-[7]: /api/latest/observability-pipelines/delete-a-pipeline/
-[8]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[3]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
+[4]: /api/latest/observability-pipelines/
+[5]: /api/latest/observability-pipelines/create-a-new-pipeline/
+[6]: /api/latest/observability-pipelines/get-a-specific-pipeline/
+[7]: /api/latest/observability-pipelines/update-a-pipeline/
+[8]: /api/latest/observability-pipelines/delete-a-pipeline/
+[9]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/observability_pipeline
