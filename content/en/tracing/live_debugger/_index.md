@@ -49,8 +49,8 @@ Live Debugger provides:
 
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
 
-- The [Datadog Agent][2], version 7.49.0 or later
-- An installed [Datadog SDK][3] (see [Enabling Live Debugger](#enable-live-debugger) for minimum SDK versions)
+- The [Datadog Agent][2], version 7.49.0 or higher
+- An installed [Datadog SDK][3] (see the [Enable Live Debugger](#enable-live-debugger) section for minimum SDK versions)
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
 - (Recommended) [Source Code Integration][28]
@@ -69,7 +69,7 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Live Debugger
 
-Live Debugger enablement depends on your service's runtime language. See the language-specific sections below for enablement instructions and minimum SDK versions.
+Live Debugger enablement depends on your service's runtime language. See the following language-specific sections for enablement instructions and minimum SDK versions.
 
 Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
@@ -244,11 +244,11 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 #### Enablement modes
 
-On the [Live Debugger Settings page][26], you can check and update the enablement status of each service and environment. Each is in one of three modes:
+On the [Live Debugger Settings page][26], you can check and update the enablement status of each service and environment. Each service and environment is in one of three modes:
 
 - {{< ui >}}Automatic{{< /ui >}}: Live Debugger has not been set to {{< ui >}}Enabled{{< /ui >}} or {{< ui >}}Disabled{{< /ui >}} yet on this service and environment. This setting changes to {{< ui >}}Enabled{{< /ui >}} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {{< ui >}}Enabled{{< /ui >}} in advance.
 - {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
-- {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or re-activated on a given service and environment. It applies regardless of runtime language or SDK version.
+- {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or reactivated on a given service and environment. It applies regardless of runtime language or SDK version.
 
 ### Create a logs index
 
@@ -264,7 +264,7 @@ To create a dedicated logs index:
 
 Datadog recommends setting up [Source Code Integration][28] for the best experience with Live Debugger. Source Code Integration is optional when starting a Debug Session manually, but required when using [Bits Live Debugger][23].
 
-After you integrate your source code manager with your Datadog account and link the service and environment to the corresponding repository and git commit SHA, you can view source code files directly in the Datadog UI. You can add new logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
+After you integrate your source code manager with your Datadog account and link the service and environment to the corresponding repository and Git commit SHA, you can view source code files directly in the Datadog UI. You can add new logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
 ## Using Live Debugger
 
