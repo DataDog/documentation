@@ -47,7 +47,7 @@ Each PR includes:
 - **Status** (Open / Draft / Merged)  
 - **Assignee / Reviewer**  
 
-Two setup steps control what appears in this section, in order: an administrator first connects the GitHub integration for the organization, then each user signs in with their own GitHub account. After you authorize access, the section loads your pull requests, grouped by status. 
+This section requires two setup steps, in order: an administrator connects the GitHub integration for the organization, and each user signs in with their own GitHub account. After you authorize access, the section loads your pull requests, grouped by status. 
 
 If your organization has not configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub integration tile][1]. To read PRs from GitHub, this integration requires the following permissions:
 
