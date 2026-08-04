@@ -77,18 +77,25 @@ You can disable Live Debugger for a service and environment from the [Live Debug
 
 #### Enable for Java, Python, .NET, and Node.js
 
-For services running an updated SDK version, you can enable Live Debugger in one of two ways:
+You can enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically.
 
-Use the manual configuration steps below only if an SDK update isn't possible or you prefer env-var configuration.
+Either option requires one of the following minimum SDK versions:
+
+| Language | Minimum SDK version |
+|----------|---------------------|
+| Java     | 1.48.0              |
+| Python   | 3.10.0              |
+| .NET     | 3.29.0              |
+| Node.js  | 5.84.0              |
+
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps. Each tab also lists the recommended SDK version and any language-specific requirements.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs" >}}
 
 {{< programming-lang lang="java" >}}
-<div class="alert alert-info">Recommended: Enable Live Debugger in-app from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a> (requires Java SDK version 1.48.0 or higher).</div>
-
 **SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Datadog Java SDK</a> version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
@@ -107,8 +114,6 @@ java \
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
-<div class="alert alert-info">Recommended: Enable Live Debugger in-app from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a> (requires Python SDK version 3.10.0 or higher).</div>
-
 **SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Datadog Python SDK (<code>ddtrace</code>)</a> version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
@@ -124,8 +129,6 @@ ddtrace-run python -m myapp.py
 {{< /programming-lang >}}
 
 {{< programming-lang lang=".NET" >}}
-<div class="alert alert-info">Recommended: Enable Live Debugger in-app from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a> (requires .NET SDK version 3.29.0 or higher).</div>
-
 **SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">Datadog .NET SDK</a> version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with the following environment variables set:
@@ -139,8 +142,6 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodejs" >}}
-<div class="alert alert-info">Recommended: Enable Live Debugger in-app from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a> (requires Node.js SDK version 5.84.0 or higher).</div>
-
 **SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/">Datadog Node.js SDK (<code>dd-trace-js</code>)</a> version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
 Start your service with the following environment variables set:
@@ -157,7 +158,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 #### Enable for Ruby, PHP, and Go
 
-Ruby and PHP require manual configuration through environment variables. Go requires an Agent-level configuration first, after which the service can be enabled in-app or through environment variables.
+Ruby and PHP require manual configuration through environment variables. Go requires an Agent-level configuration first, after which the service can be enabled in-app (Go SDK 2.6.0 or higher) or through environment variables.
 
 {{< programming-lang-wrapper langs="ruby,php,go" >}}
 
@@ -196,8 +197,6 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 {{< /programming-lang >}}
 
 {{< programming-lang lang="go" >}}
-<div class="alert alert-info">Recommended: After configuring the Datadog Agent (see below), enable Live Debugger in-app from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a> (requires Go SDK version 2.6.0 or higher).</div>
-
 Go services require enabling Live Debugger in both the Datadog Agent and the application.
 
 **SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go">Datadog Go SDK</a> version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line).
