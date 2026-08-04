@@ -650,14 +650,6 @@ To create dashboard widgets from feedback, create the widget as you would for an
 
 For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`, or `feedback_join_key`. If you provide `eval_scope`, it must match the target field: `span_id` maps to `"span"`, `trace_id` maps to `"trace"`, `session_id` maps to `"session"`, and `feedback_join_key` maps to `"external"`.
 
-#### EvalMetricError
-
-| Field   | Type   | Description                                                |
-|---------|--------|------------------------------------------------------------|
-| type    | string | The error or exception type (for example, `"ValueError"`). |
-| message | string | A human-readable description of the error.                 |
-| stack   | string | The stack trace, if available.                             |
-
 #### Submitter
 
 | Field | Type | Description |
@@ -693,6 +685,14 @@ For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`,
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
+
+#### EvalMetricError
+
+| Field   | Type   | Description                                                |
+|---------|--------|------------------------------------------------------------|
+| type    | string | The error or exception type (for example, `"ValueError"`). |
+| message | string | A human-readable description of the error.                 |
+| stack   | string | The stack trace, if available.                             |
 
 ## Further Reading
 
