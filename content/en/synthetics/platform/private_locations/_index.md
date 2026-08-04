@@ -89,7 +89,7 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
-**Note**: For Windows Private Locations to run browser tests, the browsers (for example, Chrome, Edge, or Firefox) must be installed on the Windows computer.
+**Note**: Windows Private Location version 1.71.0+ comes bundled with Chrome and Firefox, so only Edge needs to be installed separately on the Windows server. For versions 1.70.0 and lower, all browsers (Chrome, Edge, Firefox) must be installed on the Windows server to run browser tests."
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
