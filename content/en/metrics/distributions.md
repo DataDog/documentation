@@ -140,7 +140,7 @@ Metric names must be unique across types. Follow these practices to prevent conf
 
 ### Resolve overshadowing
 
-If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data. It is not possible to retain both under the same metric name.
+If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data. You cannot retain both under the same metric name.
 
 Contact [Datadog Support][6] with:
 
