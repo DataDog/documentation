@@ -764,7 +764,7 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 ### Custom CA certificates
 
-If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA. Provide the runner with the `SSL_CERT_DIR` environment variable and mount your CA certificate into the container at that path.
+If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure your private action runner to trust that CA.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
