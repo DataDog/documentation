@@ -150,5 +150,5 @@ Re-run your Pattern periodically and use the {{< ui >}}Compare to{{< /ui >}} dro
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
 [2]: /llm_observability/experiments/datasets/
-[3]: /llm_observability/evaluations/annotation_queues
+[3]: /llm_observability/evaluations/annotation_queues/
 [4]: https://app.datadoghq.com/llm/patterns
