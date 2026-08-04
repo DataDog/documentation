@@ -20,8 +20,6 @@ You can set up tracing to include collecting trace information about proxies.
   {{< image-card href="azure_apim/" src="integrations_logos/azure_api_management.png" alt="Azure API Management" >}}
 {{< /card-grid >}}
 
-<br>
-
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}

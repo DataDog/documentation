@@ -19,7 +19,6 @@ Select your platform to get started:
   {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/android/" src="integrations_logos/android_large.svg" alt="Android" >}}
   {{< image-card href="/tracing/trace_collection/custom_instrumentation/client-side/ios/" src="integrations_logos/ios_large.svg" alt="iOS" >}}
 {{< /card-grid >}}
-<br>
 
 ## Further reading
 

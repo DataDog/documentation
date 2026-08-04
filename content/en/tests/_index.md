@@ -76,8 +76,6 @@ Select an option to configure Test Optimization in Datadog:
   {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
 {{< /card-grid >}}
 
-</br>
-
 If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][10].
 
 In addition to tests, Test Optimization provides visibility over the whole testing phase of your project.

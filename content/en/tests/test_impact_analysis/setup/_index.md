@@ -18,6 +18,4 @@ For information about configuration options for [Test Impact Analysis][1], choos
   {{< image-card href="/tests/test_impact_analysis/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
 {{< /card-grid >}}
 
-<br>
-
 [1]: /tests/test_impact_analysis/

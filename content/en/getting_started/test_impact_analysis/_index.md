@@ -48,8 +48,6 @@ To set up Test Impact Analysis, see the following documentation for your program
   {{< image-card href="/tests/test_impact_analysis/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
 {{< /card-grid >}}
 
-</br>
-
 ## Enable Test Impact Analysis
 
 To enable Test Impact Analysis:

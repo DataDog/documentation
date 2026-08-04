@@ -41,8 +41,6 @@ Data Observability: Jobs Monitoring supports multiple job technologies. To get s
   {{< image-card href="/data_observability/jobs_monitoring/azure_data_factory/" src="integrations_logos/azure_data_factory.png" alt="Azure Data Factory" >}}
 {{< /card-grid >}}
 
-<br/>
-
 Data Observability: Jobs Monitoring also supports Apache Spark jobs on the following platforms:
 
 {{< card-grid >}}
@@ -50,8 +48,6 @@ Data Observability: Jobs Monitoring also supports Apache Spark jobs on the follo
   {{< image-card href="/data_observability/jobs_monitoring/emr" src="integrations_logos/amazon_emr.png" alt="Amazon EMR" >}}
   {{< image-card href="/data_observability/jobs_monitoring/dataproc/" src="integrations_logos/google_cloud_dataproc.png" alt="GCP Dataproc" >}}
 {{< /card-grid >}}
-
-<br/>
 
 ## Explore Data Observability: Jobs Monitoring
 
