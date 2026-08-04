@@ -40,7 +40,7 @@ Datadog provides a range of features for controlling which users can see and int
 [2]: /account_management/rbac/data_access
 [3]: /account_management/rbac/data_access/#supported-telemetry
 [4]: /account_management/rbac/granular_access/#manage-access-to-individual-resources
-[5]: /account_management/teams/manage/#subteams-hierarchical-teams
+[5]: /account_management/teams/manage/#team-hierarchies
 [6]: /account_management/rbac/granular_access/
 [7]: /account_management/teams/#team-filter
 [8]: /monitors/
