@@ -135,7 +135,7 @@ No data is lost, because both timeseries are stored. However, queries return onl
 Metric names must be unique across types. Follow these practices to prevent conflicts:
 
 * **Use distinct names for distribution metrics.** Never reuse a metric name across distribution and non-distribution submissions.
-* **Check for existing metrics before creating Logs-based metrics.** Since Logs-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, or rate metric.
+* **Log-based metrics**: Because log-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, rate, or histogram metric.
 * **Do not reuse a retired distribution metric name.** If you stop submitting distribution data for a name, do not later use that name for a non-distribution metric, or vice versa.
 
 ### Resolve overshadowing
