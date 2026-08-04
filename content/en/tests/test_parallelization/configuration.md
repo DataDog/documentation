@@ -239,9 +239,9 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 
 Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discovery/`, and `.testoptimization/cache/http/*.json` are implementation details. Use them only for troubleshooting.
 
-## Use plan artifacts with another test runner
+## Use a plan with another test runner
 
-Use `ddtest` plan files when you want `ddtest` to select runnable test files, but another runner should execute them.
+Use a `ddtest` plan when you want `ddtest` to select runnable test files, but another runner should execute them.
 
 | File | Use |
 | ---- | --- |

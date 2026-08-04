@@ -83,7 +83,7 @@ Adopt Test Parallelization in four steps. First, add planning without changing h
 
 After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
 
-Set the minimum to `1` and the maximum to the largest number of CI nodes or local workers that `ddtest` should consider:
+Choose the minimum and maximum parallelism for your CI environment. For example, the following values allow `ddtest` to choose between 1 and 8 CI nodes or local workers:
 
 {{< code-block lang="bash" >}}
 bin/ddtest plan \
@@ -93,7 +93,7 @@ bin/ddtest plan \
   --max-parallelism 8
 {{< /code-block >}}
 
-For example, use `ruby` with `rspec`, `ruby` with `minitest`, `python` with `pytest`, or `javascript` with `jest`. For all supported values and defaults, see [Configuration][4].
+`--platform` identifies the language platform, and `--framework` identifies the test framework. Supported combinations include `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with `jest`. For all supported values and defaults, see [Configuration][4].
 
 Planning discovers tests, retrieves test duration and Test Impact Analysis data, and chooses a parallelism level. It does not execute tests. The generated `.testoptimization/` directory contains the test files and splits selected for execution.
 
