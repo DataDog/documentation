@@ -684,7 +684,7 @@ multifiltersearch:
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud and AI spend by optimizing the usage of your cloud resources, AI agents, and LLMs. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, over-provisioned, and un-optimized cloud resources and AI usage.
+[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud and AI spend by optimizing the usage of your cloud resources and AI/LLM API usage. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, or over-provisioned cloud resources, as well as unoptimized AI usage.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
