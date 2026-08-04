@@ -1,0 +1,3 @@
+---
+title: Get integration account
+---
