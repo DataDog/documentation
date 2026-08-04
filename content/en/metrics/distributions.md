@@ -136,7 +136,7 @@ Metric names must be unique across types. Follow these practices to prevent conf
 
 * **Use distinct names for distribution metrics.** Never reuse a metric name across distribution and non-distribution submissions.
 * **Log-based metrics**: Because log-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, rate, or histogram metric.
-* **Do not reuse a retired distribution metric name.** If you stop submitting distribution data for a name, do not later use that name for a non-distribution metric, or vice versa.
+* **Retired names**: After a metric name has been used for one type, do not later reuse it for the other type, in either direction.
 
 ### Resolve overshadowing
 
