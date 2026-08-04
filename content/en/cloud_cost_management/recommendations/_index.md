@@ -684,7 +684,7 @@ multifiltersearch:
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, or over-provisioned cloud resources.
+[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud and AI spend by optimizing the usage of your cloud resources, AI agents, and LLMs. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, over-provisioned, and un-optimized cloud resources and AI usage.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
@@ -738,6 +738,8 @@ The following are requirements necessary to receive Cloud Cost recommendations:
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
 - [GCP integration and resource collection][10] (for GCP recommendations)
+- [OpenAI integration][17] (for OpenAI recommendations)
+- [Anthropic integration][18] (for Anthropic recommendations)
 - [Datadog Agent integration][5] (for Downsize recommendations)
 
 ## Setup
@@ -826,3 +828,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
 [16]: /mcp_server/tools/#cost_recommendations
+[17]: /integrations/openai/
+[18]: /integrations/anthropic/
