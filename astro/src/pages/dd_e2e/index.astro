@@ -10,6 +10,9 @@ const docs = await getCollection('en');
 const markdocComponents = docs
   .filter((entry) => entry.id.startsWith('dd_e2e/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
+const cdocPages = docs
+  .filter((entry) => entry.id.startsWith('dd_e2e/cdocs/'))
+  .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
 // A component has a plaintext twin if it ships a `plaintext/<Name>.ts` module.
 // The twin folder's kebab-cased name lines up with both the Markdoc tag name
@@ -132,6 +135,25 @@ const astroComponents: AstroTestPage[] = [
             <td><a href="/dd_e2e/integration/nested-content/">Nested content</a></td>
             <td>Verify the rendering and hydration of components nested inside other components, such as a code block inside a tab.</td>
           </tr>
+        </tbody>
+      </table>
+
+      <h2>Cdocs</h2>
+      <p>Filterable product docs rendered through the cdocs pipeline.</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Page</th>
+            <th>Purpose</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cdocPages.map((entry) => (
+            <tr>
+              <td><a href={`/${entry.id}/`}>{entry.data.title}</a></td>
+              <td>{entry.data.description ?? ''}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
 

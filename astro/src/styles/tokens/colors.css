@@ -6,6 +6,9 @@
   --color-brand-tint: rgba(99, 44, 166, 0.05);
   --color-brand-border: #d4bdfb;
   --color-brand-hover-bg: #eae2f8;
+  /* Text/icon color for content sitting on a brand-colored fill. The brand
+     purple stays dark enough for white in every theme, so this does not flip. */
+  --color-text-on-brand: #fff;
 
   /* Colors — Text */
   --color-text: #212529;
@@ -77,3 +80,4 @@
   --color-placeholder-outline: #632ca6;
   --color-placeholder-text: var(--color-placeholder-outline);
 }
+

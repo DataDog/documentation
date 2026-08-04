@@ -1,0 +1,16 @@
+---
+import styles from "./AgentOnly.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+const cl = classListFactory(styles);
+
+// `plaintext-section` and the title are carried over from Hugo: they mark the
+// block for plaintext/copy tooling. The block is hidden from human readers via
+// CSS; its content still reaches AI agents through the plaintext twin
+// (see ./plaintext/AgentOnly.ts).
+// TODO: i18n — Hugo has no key for "Instructions for AI agents" yet.
+---
+
+<div class={cl("agent-only", "plaintext-section")} title="Instructions for AI agents">
+  <slot />
+</div>

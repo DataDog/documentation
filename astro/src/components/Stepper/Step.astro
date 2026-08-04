@@ -1,0 +1,128 @@
+---
+import styles from "./Stepper.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import type { HeadingLevel } from "@lib/componentUtils/headingLevels";
+import SvgIcon from "../SvgIcon/SvgIcon.astro";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  title: string;
+  /** Parent stepper id; used to build this step's element ids. */
+  stepperId: string;
+  /** Zero-based position within the stepper. */
+  stepIndex: number;
+  isLastStep: boolean;
+  /** Whether the parent stepper opened expanded (controls initial visibility). */
+  open: boolean;
+  level?: HeadingLevel;
+}
+
+const {
+  title,
+  stepperId,
+  stepIndex,
+  isLastStep,
+  open,
+  level = "h3",
+} = Astro.props;
+
+const isFirstStep = stepIndex === 0;
+const id = `${stepperId}-step-${stepIndex + 1}`;
+const titleId = `${id}-title`;
+
+// First/last modifiers drive the connecting-line endpoints; both are known at
+// build time, so there's no need for the controller to add them.
+const stepClass = cl(
+  "stepper__step",
+  isFirstStep && "stepper__step--first",
+  isLastStep && "stepper__step--last",
+);
+
+// Non-first steps of a collapsed stepper start hidden to avoid a flash before
+// the controller applies the initial active-step state.
+const startsHidden = !open && !isFirstStep;
+
+const Heading = level;
+---
+
+<div
+  class={stepClass}
+  id={id}
+  data-step-index={stepIndex}
+  data-step-number={stepIndex + 1}
+  role="listitem"
+  aria-labelledby={titleId}
+  data-hidden={startsHidden ? "true" : undefined}
+>
+  {
+    isFirstStep ? (
+      <div class={cl("stepper__step-heading")}>
+        <Heading class={cl("stepper__step-title")} id={titleId}>
+          {title}
+        </Heading>
+        <div class={cl("stepper__viz-controls")}>
+          {/* TODO: translate "Expand all" / "Collapse all" once authoritative
+              Hugo i18n keys exist. */}
+          <button
+            class={cl("stepper__btn", "stepper__show-all-btn")}
+            type="button"
+            title="Expand all"
+            data-hidden={open ? "true" : undefined}
+          >
+            <SvgIcon src="expand-mdi.svg" class={cl("stepper__btn-icon")} />
+            <span class={cl("stepper__btn-label")}>Expand all</span>
+          </button>
+          <button
+            class={cl("stepper__btn", "stepper__collapse-btn")}
+            type="button"
+            title="Collapse all"
+            data-hidden={open ? undefined : "true"}
+          >
+            <SvgIcon src="collapse-mdi.svg" class={cl("stepper__btn-icon")} />
+            <span class={cl("stepper__btn-label")}>Collapse all</span>
+          </button>
+        </div>
+      </div>
+    ) : (
+      <Heading class={cl("stepper__step-title")} id={titleId}>
+        {title}
+      </Heading>
+    )
+  }
+  <div class={cl("stepper__step-content")}>
+    <slot />
+  </div>
+  <div class={cl("stepper__nav")}>
+    {
+      !isFirstStep && (
+        <button
+          class={cl("stepper__btn", "stepper__prev-btn")}
+          type="button"
+          aria-label="Go to previous step"
+        >
+          Previous
+        </button>
+      )
+    }
+    {
+      isLastStep ? (
+        <button
+          class={cl("stepper__btn", "stepper__finish-btn")}
+          type="button"
+          aria-label="Finish all steps"
+        >
+          Finish
+        </button>
+      ) : (
+        <button
+          class={cl("stepper__btn", "stepper__next-btn")}
+          type="button"
+          aria-label="Go to next step"
+        >
+          Next
+        </button>
+      )
+    }
+  </div>
+</div>

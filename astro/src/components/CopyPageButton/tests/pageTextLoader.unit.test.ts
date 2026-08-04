@@ -8,9 +8,17 @@ beforeEach(() => {
     delete document.documentElement.dataset.commitRef;
 });
 
-function setLocation({ origin, pathname }: { origin: string; pathname: string }) {
+function setLocation({
+    origin,
+    pathname,
+    search = '',
+}: {
+    origin: string;
+    pathname: string;
+    search?: string;
+}) {
     Object.defineProperty(window, 'location', {
-        value: { origin, pathname },
+        value: { origin, pathname, search },
         writable: true,
     });
 }
@@ -51,6 +59,17 @@ describe('getMdUrl', () => {
             pathname: '/api/latest/metrics/',
         });
         expect(getMdUrl()).toBe('https://preview.datadoghq.example/api/latest/metrics.md');
+    });
+
+    it('preserves the query string so filterable pages copy the selected filters', () => {
+        setLocation({
+            origin: 'https://docs.datadoghq.com',
+            pathname: '/dd_e2e/cdocs/custom_instrumentation/',
+            search: '?prog_lang=python&api_type=dd_api',
+        });
+        expect(getMdUrl()).toBe(
+            'https://docs.datadoghq.com/dd_e2e/cdocs/custom_instrumentation.md?prog_lang=python&api_type=dd_api',
+        );
     });
 });
 

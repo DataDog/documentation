@@ -1,0 +1,44 @@
+---
+import { StepperController } from "./StepperController";
+import styles from "./Stepper.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  /** Root element id; the controller scopes all its DOM lookups to it. */
+  id: string;
+  /** When true, all steps start expanded. Otherwise it behaves as an accordion. */
+  open?: boolean;
+}
+
+const { id, open = false } = Astro.props;
+
+const rootClass = open
+  ? cl("stepper", "stepper--open")
+  : cl("stepper", "stepper--collapsed");
+
+// TODO: translate "Start over" once an authoritative Hugo i18n key exists.
+const startOverLabel = "Start over";
+---
+
+<div
+  id={id}
+  class={rootClass}
+  data-step-open={open ? "true" : undefined}
+  role="region"
+  aria-label="Step-by-step guide"
+>
+  <div class={cl("stepper__steps")} id={`${id}-steps`} role="list">
+    <slot />
+  </div>
+  <div class={cl("stepper__reset")}>
+    <button class={cl("stepper__btn", "stepper__reset-btn")} type="button">
+      {startOverLabel}
+    </button>
+  </div>
+  <StepperController
+    client:load
+    externalContext={{ scope: id, entries: { stepperEl: id } }}
+  />
+</div>

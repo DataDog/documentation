@@ -1,0 +1,20 @@
+A partial begins here.
+
+## Creating spans {% #creating-spans-cpp %}
+
+To manually instrument a method, create a span from the tracer:
+
+```cpp
+auto root_span = tracer.create_span();
+root_span.set_name("get_ingredients");
+root_span.set_resource_name("bologna_sandwich");
+
+auto child_span = root_span.create_child();
+child_span.set_name("cache_lookup");
+```
+
+### Adding tags {% #adding-tags-cpp %}
+
+Add custom tags to a span by calling `Span::set_tag`.
+
+A partial ends here.

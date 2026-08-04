@@ -17,7 +17,14 @@
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { buildMarkdocStr, parse } from "@lib/plaintext/helpers";
+import type { HeadingLevel } from "@lib/componentUtils/headingLevels";
+import { collapseContentNode } from "@components/CollapseContent/plaintext/CollapseContent";
 import { alertNode, type AlertLevel } from "@components/Alert/plaintext/Alert";
+import { agentOnlyNode } from "@components/AgentOnly/plaintext/AgentOnly";
+import {
+  stepperNodes,
+  type StepInput,
+} from "@components/Stepper/plaintext/Stepper";
 
 /**
  * Adapts a parsed Markdoc tag node into its plaintext-twin equivalent. Most
@@ -30,11 +37,42 @@ const attr = (node: MarkdocNode, name: string): unknown =>
   node.attributes?.[name];
 
 const twinAdaptersByTag: Record<string, TwinAdapter> = {
+  "collapse-content": (node) =>
+    collapseContentNode(
+      String(attr(node, "title") ?? ""),
+      transformNodes(node.children),
+      { level: attr(node, "level") as HeadingLevel | undefined },
+    ),
+
   alert: (node) =>
     alertNode(
       (attr(node, "level") ?? "info") as AlertLevel,
       transformNodes(node.children),
     ),
+
+  "agent-only": (node) => agentOnlyNode(transformNodes(node.children)),
+
+  stepper: (node) => {
+    const steps: StepInput[] = [];
+    let finished: MarkdocNode[] | undefined;
+
+    for (const child of node.children) {
+      if (child.type !== "tag") continue;
+      if (child.tag === "step") {
+        steps.push({
+          title: String(attr(child, "title") ?? ""),
+          children: transformNodes(child.children),
+        });
+      } else if (child.tag === "stepper-finished") {
+        finished = transformNodes(child.children);
+      }
+    }
+
+    return stepperNodes(steps, {
+      level: attr(node, "level") as HeadingLevel | undefined,
+      finished,
+    });
+  },
 };
 
 /**
