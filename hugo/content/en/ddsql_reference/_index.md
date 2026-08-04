@@ -266,7 +266,7 @@ The following functions operate on arrays:
 | `ARRAY_AGG(expression e)` | array of input type | Aggregates values from multiple rows into an array. |
 | `UNNEST(array a [, array b...])` | rows of a [, b...] | Expands one or more arrays into a set of rows. Only valid in a `FROM` clause. |
 
-{{% collapse-content title="Examples" level="h3" %}}
+{{% collapse-content title="Examples" level="h4" %}}
 
 ### `CARDINALITY`
 {{< code-block lang="sql" >}}
@@ -748,7 +748,7 @@ All regular expression (regex) functions use the International Components for Un
 | `REGEXP_REPLACE(string input, string pattern, string replacement [, string flags ])`                             | string           | Replaces the substring that is the first match to the pattern, or all such matches if you use the [optional `g` flag](#function-level-flags).                                                                                                                              |
 | `REGEXP_REPLACE (string input, string pattern, string replacement, integer start, integer N [, string flags ] )` | string           | Replaces the substring that is the Nth match to the pattern, or all such matches if `N` is zero, starting from `start`.                                                                                                                                                    |
 
-{{% collapse-content title="Examples" level="h3" %}}
+{{% collapse-content title="Examples" level="h4" %}}
 
 ### `REGEXP_LIKE`
 {{< code-block lang="sql" >}}
@@ -799,7 +799,7 @@ You can use the following flags with [regular expression functions](#regular-exp
 `g`
 : Global; replace _all_ matching substrings rather than only the first one
 
-{{% collapse-content title="Examples" level="h3" %}}
+{{% collapse-content title="Examples" level="h4" %}}
 
 ### `i` flag
 
@@ -886,7 +886,7 @@ The `inet` type represents IPv4 and IPv6 network addresses with an optional CIDR
 | `inet a >>= inet b` | `BOOLEAN` | Returns `true` if `a` contains or equals `b`. |
 | `inet a && inet b` | `BOOLEAN` | Returns `true` if the subnets of `a` and `b` overlap. |
 
-{{% collapse-content title="Examples" level="h3" %}}
+{{% collapse-content title="Examples" level="h4" %}}
 
 ### `host`
 {{< code-block lang="sql" >}}

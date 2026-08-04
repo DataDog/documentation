@@ -251,7 +251,7 @@ The file you need to configure depends on how you enabled Single Step Instrument
 
 Review the following examples demonstrating how to select specific services:
 
-{{< collapse-content title="Example 1: Enable all namespaces except one" level="h4" >}}
+{{< collapse-content title="Example 1: Enable all namespaces except one" level="h5" >}}
 
 This configuration:
 - enables APM for all namespaces except the `jenkins` namespace.
@@ -273,7 +273,7 @@ This configuration:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 2: Instrument a subset of namespaces, matching on names and labels" level="h4" >}}
+{{< collapse-content title="Example 2: Instrument a subset of namespaces, matching on names and labels" level="h5" >}}
 
 This configuration creates two targets blocks:
 
@@ -309,7 +309,7 @@ This configuration creates two targets blocks:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 3: Instrument different workloads with different tracers" level="h4" >}}
+{{< collapse-content title="Example 3: Instrument different workloads with different tracers" level="h5" >}}
 
 This configuration does the following:
 - enables APM for pods with the following labels:
@@ -342,7 +342,7 @@ This configuration does the following:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 4: Instrument a pod within a namespace" level="h4" >}}
+{{< collapse-content title="Example 4: Instrument a pod within a namespace" level="h5" >}}
 
 This configuration:
 - enables APM for pods labeled `app:password-resolver` inside the `login-service` namespace.
@@ -370,7 +370,7 @@ This configuration:
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h4" >}}
+{{< collapse-content title="Example 5: Instrument a subset of pods using <code>matchExpressions</code>" level="h5" >}}
 
 This configuration enables APM for all pods except those that have either of the labels `app=app1` or `app=app2`.
 
@@ -391,7 +391,7 @@ This configuration enables APM for all pods except those that have either of the
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Example 6: Enable additional products with <code>ddTraceConfigs</code>" level="h4" >}}
+{{< collapse-content title="Example 6: Enable additional products with <code>ddTraceConfigs</code>" level="h5" >}}
 
 This configuration enables [App and API Protection (AAP)][12] and [Continuous Profiler][11] for services in the `web-apps` namespace, using `ddTraceConfigs` to set the required environment variables:
 
@@ -550,7 +550,7 @@ If you don't enable automatic instrumentation for specific pods using annotation
 
 The file you need to configure depends on if you enabled Single Step Instrumentation with Datadog Operator or Helm:
 
-{{< collapse-content title="Datadog Operator" level="h5" >}}
+{{< collapse-content title="Datadog Operator" level="h6" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-agent.yaml` file:
 
@@ -567,7 +567,7 @@ For example, to instrument .NET, Python, and Node.js applications, add the follo
 
 {{< /collapse-content >}}
 
-{{< collapse-content title="Helm" level="h5" >}}
+{{< collapse-content title="Helm" level="h6" >}}
 
 For example, to instrument .NET, Python, and Node.js applications, add the following configuration to your `datadog-values.yaml` file:
 

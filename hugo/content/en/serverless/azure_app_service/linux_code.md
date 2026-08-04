@@ -407,7 +407,7 @@ Recommended for scenarios with frequent log rotation. For example, setting `_def
 
 
 
-{{% collapse-content title=".NET: Additional required environment variables" level="h4" id="dotnet-additional-settings" %}}
+{{% collapse-content title=".NET: Additional required environment variables" level="h5" id="dotnet-additional-settings" %}}
 
 For .NET applications, the following environment variables are **required**. See the `Datadog.Tracer.Bundle` [Nuget package README file][1] for more details.
 

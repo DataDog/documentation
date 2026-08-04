@@ -101,7 +101,7 @@ To configure sharing for a form:
 
 The following sharing options are available:
 
-{{% collapse-content title="Share within Datadog" level="h4" expanded=false %}}
+{{% collapse-content title="Share within Datadog" level="h3" expanded=false %}}
 Share the form with users in your Datadog organization.
 
 Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to an existing dashboard or create a dashboard.
@@ -109,7 +109,7 @@ Under {{< ui >}}Add to Dashboard{{< /ui >}}, use the dropdown to add the form to
 Enable the {{< ui >}}Add to IDP Self-Service Actions{{< /ui >}} toggle to surface the form in the [Self-Service Actions][5] catalog. This is a central place where platform and infrastructure teams publish tools for the rest of the organization to discover and use.
 {{% /collapse-content %}}
 
-{{% collapse-content title="Share with external users" level="h4" expanded=false %}}
+{{% collapse-content title="Share with external users" level="h3" expanded=false %}}
 Share the form with users outside your Datadog organization. You can configure an access expiration date for each sharing option and create multiple sharing configurations with different settings and expiration dates.
 
 The following options are available:

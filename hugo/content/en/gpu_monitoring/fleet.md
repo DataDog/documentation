@@ -75,7 +75,7 @@ Metrics relevant for your performance workflow:
 
 After selecting {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Host{{< /ui >}}, or {{< ui >}}Device{{< /ui >}}, the {{< ui >}}Summary Graph{{< /ui >}} displays key resource telemetry across your entire GPU infrastructure grouped by that selection. Expand the section below to see a table of the available metrics and what they represent. 
 
-{{% collapse-content title="See the full list of GPU metrics" level="h4" expanded=false id="gpu-metrics-table" %}}
+{{% collapse-content title="See the full list of GPU metrics" level="h3" expanded=false id="gpu-metrics-table" %}}
 | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | Provisioned Devices      | Breakdown of provisioned devices by active and effective devices.                                                                                                                                                       | `gpu.device.total`                                 |
@@ -122,7 +122,7 @@ By default, the table of results displays the following columns:
 
 You can click on the gear icon to customize which metrics are displayed within the table. Expand the section below to see a full list of the available metrics. 
 
-{{% collapse-content title="See the full list of available metrics" level="h4" expanded=false id="metric-full-list" %}}
+{{% collapse-content title="See the full list of available metrics" level="h3" expanded=false id="metric-full-list" %}}
 | Category         | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        |
 | ---------------- | ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
 | —                | Device Name              | Type of GPU device.                                                                                                                                                                                                     | `gpu_device`                                       |

@@ -47,7 +47,7 @@ For more information, see [Configure Monitors - Multi alert][3].
 
 ## Use cases
 
-{{% collapse-content title="Simple Alert" level="h4" expanded=false %}}
+{{% collapse-content title="Simple Alert" level="h3" expanded=false %}}
 #### Scenario
 You're monitoring a Kafka-based logging system grouped by `error-logs` and `user-events`. If any partition gets a message lag of more than 500, you want to know about it, but you don't need multiple alerts if multiple partitions are lagging.  
 
@@ -57,7 +57,7 @@ However, if multiple partitions are lagging, you might not see every single affe
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Multi Alert" level="h4" expanded=false %}}
+{{% collapse-content title="Multi Alert" level="h3" expanded=false %}}
 Multi alerts are great for when a service is owned by multiple teams (each team is responsible for a dedicated component). Depending on which component is causing an issue, a different team should be notified.
 
 #### Scenario

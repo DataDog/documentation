@@ -22,7 +22,7 @@ further_reading:
 
 Use this guide to get started with monitoring your Oracle Cloud Infrastructure (OCI) environment. Datadog's QuickStart setup simplifies the integration process, automatically provisioning the infrastructure needed to collect metrics, logs, resource data, and OCI events from your OCI tenancy.
 
-{{% collapse-content title="Prerequisites" level="h4" expanded=false id="prerequisites" %}}
+{{% collapse-content title="Prerequisites" level="h3" expanded=false id="prerequisites" %}}
 
 ### In OCI
 

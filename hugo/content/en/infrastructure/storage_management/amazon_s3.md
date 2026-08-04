@@ -26,7 +26,7 @@ To start, navigate to **Infrastructure** > [**Storage Management**][1] and click
 
 [1]: https://app.datadoghq.com/storage-management
 
-{{% collapse-content title="1. Configure AWS account" level="h4" expanded=false id="datadog-ui-step1" %}}
+{{% collapse-content title="1. Configure AWS account" level="h3" expanded=false id="datadog-ui-step1" %}}
 
 In this step, set up the Datadog AWS integration with metric and resource collection enabled.
 
@@ -40,7 +40,7 @@ For a list of S3-related permissions used by resource collection, see [Resource 
 [2]: /integrations/amazon-web-services/#resource-collection
 {{% /collapse-content %}}
 
-{{% collapse-content title="2. Configure Storage Management" level="h4" expanded=false id="datadog-ui-step2" %}}
+{{% collapse-content title="2. Configure Storage Management" level="h3" expanded=false id="datadog-ui-step2" %}}
 
 In this step, select the buckets to monitor, set an inventory destination, and optionally enable access logs.
 
@@ -76,7 +76,7 @@ In this step, select the buckets to monitor, set an inventory destination, and o
 [3]: /logs/log_configuration/indexes/#exclusion-filters
 {{% /collapse-content %}}
 
-{{% collapse-content title="3. Finish setup" level="h4" expanded=false id="datadog-ui-step3" %}}
+{{% collapse-content title="3. Finish setup" level="h3" expanded=false id="datadog-ui-step3" %}}
 
 After the CloudFormation stack completes in AWS, return to Storage Management and click **Finish Setup**.
 
@@ -150,7 +150,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 
 [206]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/configure-inventory.html
 
-{{% collapse-content title="1. Create a destination bucket" level="h4" expanded=false id="manual-setup-step1" %}}
+{{% collapse-content title="1. Create a destination bucket" level="h3" expanded=false id="manual-setup-step1" %}}
 
 1. [Create an S3 bucket][201] to store your inventory files. This bucket acts as the central location for inventory reports.
    **Note**: Use only one destination bucket for all inventory files generated in an AWS account.
@@ -159,7 +159,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 [201]: https://console.aws.amazon.com/s3/bucket/create
 {{% /collapse-content %}}
 
-{{% collapse-content title="2. Configure the bucket and integration role policies" level="h4" expanded=false id="manual-setup-step2" %}}
+{{% collapse-content title="2. Configure the bucket and integration role policies" level="h3" expanded=false id="manual-setup-step2" %}}
 
 1. Confirm the Datadog AWS integration role has `s3:GetObject` and `s3:ListBucket` permissions on the destination bucket. These permissions allow Datadog to read the generated inventory files.
 
@@ -190,7 +190,7 @@ To manually set up the required [Amazon S3 Inventory][206] and related configura
 [202]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/add-bucket-policy.html
 {{% /collapse-content %}}
 
-{{% collapse-content title="3. Configure inventory generation" level="h4" expanded=false id="manual-setup-step3" %}}
+{{% collapse-content title="3. Configure inventory generation" level="h3" expanded=false id="manual-setup-step3" %}}
 
 For each bucket you want to monitor:
 1. Go to the [Amazon S3 buckets page][203] in the AWS console, and select the bucket.
@@ -219,7 +219,7 @@ For each bucket you want to monitor:
 [204]: https://aws.amazon.com/s3/pricing/
 {{% /collapse-content %}}
 
-{{% collapse-content title="4. Enable S3 access logs (optional)" level="h4" expanded=false id="manual-setup-step4" %}}
+{{% collapse-content title="4. Enable S3 access logs (optional)" level="h3" expanded=false id="manual-setup-step4" %}}
 
 To get prefix-level access metrics including request counts, server-side latency, and cold data identification, enable S3 server access logging on your source buckets and forward those logs to Datadog. For step-by-step instructions, see [Enable S3 access logs][208] in the Amazon S3 integration documentation.
 
