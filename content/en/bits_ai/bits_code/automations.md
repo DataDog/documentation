@@ -89,7 +89,7 @@ You can configure your automation to:
 - {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
 - {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
 
-Pull or merge request authorship is controlled by the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][6], which a Datadog administrator can configure. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
+Datadog administrators can configure pull or merge request authorship though the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][6]. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
 
 ### Slack message output
 You can configure your automation to send a Slack message summarizing the [session][1] and code changes. If you use a pull or merge request output in addition to a Slack output, Bits Code includes a link to the pull or merge request in the Slack message.
