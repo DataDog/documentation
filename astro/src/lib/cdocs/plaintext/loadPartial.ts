@@ -2,7 +2,7 @@
  * Partial resolver for the cdocs plaintext pipeline.
  *
  * Turns a `{% partial file="@partials/foo.mdoc" /%}` reference into raw source,
- * mirroring the `@partials` Vite alias (`src/cdocs/partials/en`). Kept separate
+ * mirroring the `@partials` Vite alias (`src/partials/en`). Kept separate
  * from the pure AST filter so tests can inject their own resolver.
  *
  * The partials are inlined at build time with Vite's glob rather than read from
@@ -20,7 +20,7 @@ const PARTIALS_ROOT_SEGMENT = 'partials/en/';
 // Every partial's raw source, keyed by its glob path (e.g.
 // '../../../cdocs/partials/en/opentelemetry/traces/java.mdoc').
 const partialSourceByGlobKey = import.meta.glob(
-  '../../../cdocs/partials/en/**/*.mdoc',
+  '../../../partials/en/**/*.mdoc',
   { query: '?raw', import: 'default', eager: true },
 ) as Record<string, string>;
 

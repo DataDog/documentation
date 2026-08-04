@@ -38,8 +38,8 @@ export interface CdocContentFilter {
 
 const DEFAULT_LANG = 'en';
 
-// The customization config lives alongside the cdocs content, mirroring Hugo's
-// top-level `customization_config/` (with per-language subdirectories).
+// The customization config mirrors Hugo's top-level `customization_config/`
+// (with per-language subdirectories).
 //
 // It is inlined at build time rather than read from disk relative to this
 // module: `loadCustomizationConfig` reads YAML off the filesystem, but in the
@@ -51,7 +51,7 @@ const DEFAULT_LANG = 'en';
 // config loading from where the code happens to run.
 const CONFIG_ROOT_SEGMENT = 'customization_config/';
 const configYamlByGlobKey = import.meta.glob(
-  '../../cdocs/customization_config/**/*.{yaml,yml}',
+  '../../customization_config/**/*.{yaml,yml}',
   { query: '?raw', import: 'default', eager: true },
 ) as Record<string, string>;
 
