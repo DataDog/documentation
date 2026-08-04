@@ -5,6 +5,14 @@ aliases:
 - '/ide_plugins/idea/live_debugger/'
 - '/developers/ide_plugins/idea/live_debugger/'
 - '/ide_plugins/vscode/live_debugger/'
+- '/tracing/trace_collection/dynamic_instrumentation/enabling/nodejs/'
+- '/dynamic_instrumentation/enabling/nodejs'
+- '/tracing/dynamic_instrumentation/enabling/nodejs'
+- '/tracing/trace_collection/dynamic_instrumentation/enabling/ruby/'
+- '/dynamic_instrumentation/enabling/ruby/'
+- '/tracing/dynamic_instrumentation/enabling/ruby'
+- '/tracing/trace_collection/dynamic_instrumentation/enabling/go/'
+- '/dynamic_instrumentation/enabling/go'
 further_reading:
 - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
   tag: "Blog"
