@@ -35,6 +35,8 @@ You can perform CRUD (Create, Read, Update, Delete) operations with the Observab
 
 The example payloads also include sample `id` values (such as `my-processor-group` and `datadog-agent-source`) for sources, processors, and destinations. These are names you choose and can rename to fit your own conventions. The `type` values (such as `datadog_agent`, `filter`, and `datadog_logs`) are fixed and must match a supported component type.
 
+The example payloads also include sample `id` values (such as `my-processor-group` and `datadog-agent-source`) for sources, processors, and destinations. These are names you choose and can rename to fit your own conventions. The `type` values (such as `datadog_agent`, `filter`, and `datadog_logs`) are fixed and must match a supported component type.
+
 ### Create a pipeline
 
 To [create a pipeline][5], send a `POST` request with a JSON payload that defines the pipeline's name and its main components: sources, processors, and destinations.
@@ -45,8 +47,8 @@ Example request:
 curl -X POST "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelines/pipelines" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--H "DD-API-KEY: ${<DD_API_KEY>}" \
--H "DD-APPLICATION-KEY: ${<DD_APP_KEY>}" \
+-H "DD-API-KEY: <DD_API_KEY>" \
+-H "DD-APPLICATION-KEY: <DD_APP_KEY>" \
 -d '{
   "data": {
     "attributes": {
