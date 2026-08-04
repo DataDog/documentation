@@ -1927,6 +1927,11 @@ def rag_workflow(user_question):
 
 To annotate session ID on auto-instrumented spans, provide the `session_id` tag:
 
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
 def run_chat(user_question, session_id):
     with LLMObs.annotation_context(
         tags = {
@@ -2000,6 +2005,8 @@ function runChat(userQuestion, sessionId) {
 }
 
 {{< /code-block >}}
+
+{{% /tab %}}
 
 {{< /tabs >}}
 
