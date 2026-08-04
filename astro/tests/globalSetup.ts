@@ -12,8 +12,8 @@ const baseURL =
     : "http://localhost:4322";
 
 const warmupRoutes = [
-  "/docs/test_pages/",
-  "/docs/test_pages/components/alert",
+  "/docs/dd_e2e/",
+  "/docs/dd_e2e/components/alert",
   "/api/latest/",
 ];
 

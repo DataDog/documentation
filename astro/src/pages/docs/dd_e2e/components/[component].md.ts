@@ -7,7 +7,7 @@ export const prerender = true;
  * what the twins emit — the same code path the API pages use, exercised here on
  * the free-form test-page source.
  *
- * Only the Markdoc component pages (`test_pages/components/*.mdoc`) get a twin;
+ * Only the Markdoc component pages (`dd_e2e/components/*.mdoc`) get a twin;
  * the standalone Astro component pages are ignored. Like the pages themselves,
  * these URLs 404 on the live build.
  */
@@ -16,7 +16,7 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { renderMdocWithTwins } from '@lib/plaintext/twinTransform';
 
-const COMPONENTS_PREFIX = 'test_pages/components/';
+const COMPONENTS_PREFIX = 'dd_e2e/components/';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const docs = await getCollection('docs');

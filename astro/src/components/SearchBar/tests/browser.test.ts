@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('SearchBar component — visual', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/test_pages/components/search-bar');
+    await page.goto('/docs/dd_e2e/components/search-bar');
   });
 
   // Scope to the standalone demo bar inside `.prose`; the header's mobile-nav
@@ -34,7 +34,7 @@ test.describe('SearchBar component — mobile-nav placement', () => {
   test.use({ viewport: { width: 480, height: 800 } });
 
   test('the mobile nav exposes a functional search bar when opened', async ({ page }) => {
-    await page.goto('/docs/test_pages/components/header');
+    await page.goto('/docs/dd_e2e/components/header');
 
     // The search bar is inside the closed (off-screen) overlay until opened.
     const mobileSearch = page.locator('.mobile-nav__search .search-bar').first();

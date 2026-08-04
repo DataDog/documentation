@@ -8,8 +8,8 @@ describe('isSitemapPage', () => {
     expect(isSitemapPage('https://docs.datadoghq.com/api/latest/using-the-api/')).toBe(true);
   });
 
-  it('excludes test_pages scaffolding under /docs/', () => {
-    expect(isSitemapPage('https://docs.datadoghq.com/docs/test_pages/components/alert/')).toBe(false);
+  it('excludes dd_e2e scaffolding under /docs/', () => {
+    expect(isSitemapPage('https://docs.datadoghq.com/docs/dd_e2e/components/alert/')).toBe(false);
   });
 
   it('excludes the root redirect stub', () => {
