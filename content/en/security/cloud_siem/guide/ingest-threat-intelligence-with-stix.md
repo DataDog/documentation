@@ -37,13 +37,13 @@ To start ingesting a feed, send a bundle to the ingestion endpoint. No configura
 4. Datadog registers each generated table and enables it for Cloud SIEM enrichment automatically.
 5. Later requests for the same `ti_vendor` update the existing tables and preserve the configuration choices you make.
 
-For example, a feed sent with `ti_vendor: my_tip` that contains IP address, domain, and SHA-256 indicators produces the following tables:
+For example, a feed sent with `ti_vendor: acme` that contains IP address, domain, and SHA-256 indicators produces the following tables:
 
 | Indicator type | Generated reference table |
 |---|---|
-| IP address | `threat_intel_stix_my_tip_ip_address` |
-| Domain | `threat_intel_stix_my_tip_domain` |
-| SHA-256 file hash | `threat_intel_stix_my_tip_sha256` |
+| IP address | `threat_intel_stix_acme_ip_address` |
+| Domain | `threat_intel_stix_acme_domain` |
+| SHA-256 file hash | `threat_intel_stix_acme_sha256` |
 
 Tables become available a few minutes after your first request. Enrichment applies to logs that Cloud SIEM receives after a table is enabled, so it does not apply to logs received earlier.
 
@@ -135,7 +135,7 @@ A successful request returns `200 OK` and a summary of how Datadog processed the
 {
   "data": {
     "type": "threat-intel-stix-ingest",
-    "id": "my_tip",
+    "id": "acme",
     "attributes": {
       "added": 3,
       "unsupported": 1,
@@ -160,7 +160,7 @@ curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/
   --header "DD-API-KEY: <DATADOG_API_KEY>" \
   --header "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
   --header "Content-Type: application/json" \
-  --header "ti_vendor: my_tip" \
+  --header "ti_vendor: acme" \
   --data '{
     "type": "bundle",
     "id": "bundle--0cde353c-ea5b-4668-9f68-9c3a0e2a0a0e",
