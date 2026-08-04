@@ -17,11 +17,12 @@ If you manage many Observability Pipelines deployments and want to reduce manual
 
 ## Prerequisites
 
-Before you begin, make sure you have:
+Before you begin, make sure you:
 
-- Datadog API and application keys for authentication.<br>**Note**: The API key must be [enabled for Remote Configuration][1].
-- The latest version of Terraform installed on your machine.
-- If you are going to use Terraform, reviewed the [Datadog's Terraform Provider][2] and [Observability Pipelines resource][3].
+- Have Datadog API and application keys for authentication.<br>**Note**: The API key must be [enabled for Remote Configuration][1].
+- If you are going to use Terraform:
+  - Have the latest version of Terraform installed on your machine.
+  - Reviewed the [Datadog's Terraform Provider][2] and [Observability Pipelines resource][3].
 - If you are going to use the API, reviewed the [Observability Pipelines API][4] endpoint specifications and additional configuration parameters.
 
 ## Manage pipelines with the API
