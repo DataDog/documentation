@@ -138,7 +138,7 @@ Metric names must be unique across types. Follow these practices to prevent conf
 * **Check for existing metrics before creating Logs-based metrics.** Since Logs-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, or rate metric.
 * **Do not reuse a retired distribution metric name.** If you stop submitting distribution data for a name, do not later use that name for a non-distribution metric, or vice versa.
 
-### Resolving overshadowing
+### Resolve overshadowing
 
 If your metric is already overshadowed, you must choose to keep either the **distribution** data or the **non-distribution** data. It is not possible to retain both under the same metric name.
 
