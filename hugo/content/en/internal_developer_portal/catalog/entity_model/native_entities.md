@@ -462,7 +462,7 @@ Learn more about [peer tags and inferred entities][4].
 In Catalog, a frontend (`kind:frontend`) represents a frontend application—such as a browser-based single-page application or mobile app—that interacts with services and APIs. Frontend entities offer a structured way to model user-facing applications in the same catalog alongside backend services.
 
 
-{{% collapse-content title="YAML for RUM app by name" level="h4" expanded=false id="rum-app-name" %}}
+{{% collapse-content title="YAML for RUM app by name" level="h3" expanded=false id="rum-app-name" %}}
 
 This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the name. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Catalog to autofill the ID.
 
@@ -501,7 +501,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="YAML for RUM app by ID" level="h4" expanded=false id="rum-app-id" %}}
+{{% collapse-content title="YAML for RUM app by ID" level="h3" expanded=false id="rum-app-id" %}}
 
 This example shows a `kind:frontend` definition for a frontend application in RUM, linked by the ID. You can find the name and ID under [Manage Applications][1], or you can click **Add Metadata** on an existing frontend app in Catalog to autofill the ID.
 
@@ -540,7 +540,7 @@ spec:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="YAML for manually defined frontend app" level="h4" expanded=false id="manually-created" %}}
+{{% collapse-content title="YAML for manually defined frontend app" level="h3" expanded=false id="manually-created" %}}
 
 This example shows a `kind:frontend` definition for a manually declared frontend app.
 

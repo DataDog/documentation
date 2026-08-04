@@ -628,7 +628,7 @@ def llm_call(prompt):
 {{% tab "Node.js" %}}
 To trace an LLM call, specify the span kind as `llm`, and optionally specify the following arguments on the options object.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="llm-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
 `modelName`
 : optional - _string_ - **default**: `"custom"`
@@ -677,7 +677,7 @@ import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startLLMSpan(spanName, modelName, modelProvider, mlApp, sessionID);
 ```
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="llm-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="llm-span-arguments" %}}
 
 `spanName`
 : optional - _String_
@@ -765,7 +765,7 @@ def process_message():
 
 To trace a workflow span, specify the span kind as `workflow`, and optionally specify arguments on the options object.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="workflow-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
 
 `name`
 : optional - _string_
@@ -800,7 +800,7 @@ import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startWorkflowSpan(spanName, mlApp, sessionID);
 ```
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="workflow-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="workflow-span-arguments" %}}
 
 `spanName`
 : optional - _String_
@@ -873,7 +873,7 @@ def react_agent():
 {{% tab "Node.js" %}}
 To trace an agent execution, specify the span kind as `agent`, and optionally specify arguments on the options object.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="agent-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
 `name`
 : optional - _string_
@@ -907,7 +907,7 @@ import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startAgentSpan(spanName, mlApp, sessionID);
 ```
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="agent-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="agent-span-arguments" %}}
 
 `spanName`
 : optional - _String_
@@ -964,7 +964,7 @@ def call_weather_api():
 {{% tab "Node.js" %}}
 To trace a tool call, specify the span kind as `tool`, and optionally specify arguments on the options object.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="tool-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `name`
 : optional - _string_
@@ -999,7 +999,7 @@ import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startToolSpan(spanName, mlApp, sessionID);
 ```
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="tool-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="tool-span-arguments" %}}
 
 `spanName`
 : optional - _String_
@@ -1056,7 +1056,7 @@ def sanitize_input():
 {{% tab "Node.js" %}}
 To trace a task span, specify the span kind as `task`, and optionally specify arguments on the options object.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="task-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
 `name`
 : optional - _string_
@@ -1091,7 +1091,7 @@ import datadog.trace.api.llmobs.LLMObs;
 LLMObs.startTaskSpan(spanName, mlApp, sessionID);
 ```
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="task-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="task-span-arguments" %}}
 
 `spanName`
 : optional - _String_
@@ -1160,7 +1160,7 @@ To trace an embedding operation, specify the span kind as `embedding`, and optio
 
 **Note**: Annotating an embedding span's input requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify embedding inputs.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="embedding-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="embedding-span-arguments" %}}
 
 `modelName`
 : optional - _string_ - **default**: `"custom"`
@@ -1247,7 +1247,7 @@ To trace a retrieval span, specify the span kind as `retrieval`, and optionally 
 
 **Note**: Annotating a retrieval span's output requires different formatting than other span types. See [Enriching spans](#enriching-spans) for more details on how to specify retrieval outputs.
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="retrieval-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="retrieval-span-arguments" %}}
 
 `name`
 : optional - _string_
@@ -1512,7 +1512,7 @@ The SDK provides the method `llmobs.annotate()` to annotate spans with inputs, o
 
 The `LLMObs.annotate()` method accepts the following arguments:
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="annotating-span-arguments" %}}
+{{% collapse-content title="Arguments" level="h3" expanded=false id="annotating-span-arguments" %}}
 `span`
 : optional - _Span_ - **default**: the current active span
 <br />The span to annotate. If `span` is not provided (as when using function wrappers), the SDK annotates the current active span.
@@ -1933,7 +1933,7 @@ The SDK's `llmobs.annotationContext()` accepts a callback function that can be u
 
 The `llmobs.annotationContext()` method accepts the following options on the first argument:
 
-{{% collapse-content title="Options" level="h5" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
+{{% collapse-content title="Options" level="h4" expanded=false id="annotating-autoinstrumented-span-arguments" %}}
 
 `name`
 : optional - _str_
@@ -2554,7 +2554,7 @@ def llm_call():
 
 The `llmobs.submitEvaluation()` method accepts the following arguments:
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="submit-evals-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="submit-evals-arguments" %}}
 
 `span_context`
 : required - _dictionary_
@@ -2620,7 +2620,7 @@ Use `LLMObs.SubmitEvaluation()` to submit your custom evaluation associated with
 
 The `LLMObs.SubmitEvaluation()` method accepts the following arguments:
 
-{{% collapse-content title="Arguments" level="h5" expanded=false id="submit-evals-arguments" %}}
+{{% collapse-content title="Arguments" level="h4" expanded=false id="submit-evals-arguments" %}}
 
 `llmObsSpan`
 : required - _LLMObsSpan_

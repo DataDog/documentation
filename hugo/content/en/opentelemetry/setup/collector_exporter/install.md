@@ -196,7 +196,7 @@ For Datadog Exporter versions 0.83.0 and later, the `service` field of OTel logs
 
 To get the `service` field correctly populated in your logs, you can specify `service.name` to be the source of a log's service by setting a [log service remapper processor][27].
 
-{{% collapse-content title="Optional: Using Kubernetes" level="h5" %}}
+{{% collapse-content title="Optional: Using Kubernetes" level="h4" %}}
 
 <div class="alert alert-warning">AWS EKS Fargate is not a supported environment for the OpenTelemetry Collector at this time. Deploying the Collector on EKS Fargate will result in incorrect infrastructure host billing.</div>
 
