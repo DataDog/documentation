@@ -57,36 +57,37 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 | [DocumentDB][10]                   | `source:docdb`                | CloudWatch, S3 | Yes                  |
 | [ECS][11]                          | `source:ecs`                  | CloudWatch     | Yes                  |
 | [EKS][12]                          | `source:eks` <sup>1</sup>     | CloudWatch     | Yes                  |
-| [Elastic Beanstalk][13]            | `source:elasticbeanstalk`     | CloudWatch     | Yes                  |
+| [Elastic Beanstalk][13]            | `-` <sup>2</sup>              | CloudWatch     | Yes                  |
 | [Elastic Load Balancing (ELB)][14] | `source:elb`                  | CloudWatch, S3 | Yes                  |
 | [FSx][15]                          | `source:aws.fsx`              | CloudWatch, S3 | No                   |
 | [Glue][16]                         | `source:glue`                 | CloudWatch, S3 | Yes                  |
-| [IoT][17]                          | `source:iot`                  | CloudWatch     | Partial <sup>2</sup> |
+| [IoT][17]                          | `source:iot`                  | CloudWatch     | Partial <sup>3</sup> |
 | [Lambda][18]                       | `source:lambda`               | CloudWatch     | Yes                  |
 | Lambda@Edge                        | `source:lambda`               | CloudWatch     | Yes                  |
 | [MWAA][19]                         | `source:mwaa`                 | CloudWatch     | Yes                  |
 | [Network Firewall][20]             | `source:network-firewall`     | CloudWatch, S3 | Yes                  |
 | [OpenSearch][21]                   | `source:opensearch`           | CloudWatch     | No                   |
-| [PCS][22]                          | `source:pcs`                  | CloudWatch     | Partial <sup>3</sup> |
-| [RDS][23]                          | `source:rds` <sup>4</sup>     | CloudWatch     | Yes                  |
+| [PCS][22]                          | `-` <sup>2</sup>              | CloudWatch     | Partial <sup>4</sup> |
+| [RDS][23]                          | `source:rds` <sup>5</sup>     | CloudWatch     | Yes                  |
 | [Redshift][24]                     | `source:redshift`             | CloudWatch, S3 | Yes                  |
 | Redshift Serverless                | `source:redshift-serverless`  | CloudWatch     | Yes                  |
-| [Route 53][25]                     | `source:route53` <sup>5</sup> | CloudWatch     | Yes                  |
+| [Route 53][25]                     | `source:route53` <sup>6</sup> | CloudWatch     | Yes                  |
 | [S3][26]                           | `source:s3`                   | S3             | Yes                  |
 | SSM                                | `source:ssm`                  | CloudWatch     | Yes                  |
 | [Step Functions][27]               | `source:stepfunction`         | CloudWatch     | Yes                  |
 | [Transit Gateway][28]              | `source:transitgateway`       | CloudWatch, S3 | No                   |
 | [Verified Access][29]              | `source:verified-access`      | CloudWatch, S3 | Yes                  |
 | [VPC][30]                          | `source:vpc`                  | CloudWatch, S3 | Yes                  |
-| [VPN][31]                          | `source:vpn`                  | CloudWatch, S3 | Yes <sup>6</sup>     |
+| [VPN][31]                          | `-` <sup>2</sup>              | CloudWatch, S3 | Yes <sup>7</sup>     |
 | [Web Application Firewall][32]     | `source:waf`                  | S3             | Yes                  |
 
 <sup>1</sup> EKS control plane logs also use the `kubernetes.audit`, `kube-scheduler`, `kube-apiserver`, `kube-controller-manager`, and `aws-iam-authenticator` sources.<br>
-<sup>2</sup> Automatic collection for IoT is available at the account level only.<br>
-<sup>3</sup> Automatic collection for PCS is available for CloudWatch log groups only.<br>
-<sup>4</sup> RDS engine logs also use the `postgresql`, `mariadb`, and `mysql` sources.<br>
-<sup>5</sup> Covers both DNS query logs and Resolver query logs.<br>
-<sup>6</sup> Automatic collection is available for CloudWatch log groups. For S3 buckets, [set up the trigger manually](#collecting-logs-from-s3-buckets).
+<sup>2</sup> Datadog does not apply a service-specific source tag to these logs.<br>
+<sup>3</sup> Automatic collection for IoT is available at the account level only.<br>
+<sup>4</sup> Automatic collection for PCS is available for CloudWatch log groups only.<br>
+<sup>5</sup> RDS engine logs also use the `postgresql`, `mariadb`, and `mysql` sources.<br>
+<sup>6</sup> Covers both DNS query logs and Resolver query logs.<br>
+<sup>7</sup> Automatic collection is available for CloudWatch log groups. For S3 buckets, [set up the trigger manually](#collecting-logs-from-s3-buckets).
 
 **Note**: [Subscription filters][43] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
 
