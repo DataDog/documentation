@@ -116,7 +116,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 <div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the [Trace Sampling][2] template.
+1. Select the [Trace Sampling][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Traces Pipeline{{< /ui >}}.
 1. Select and set up a [trace source][3].
 1. Select and set up [destinations][5] for your processed traces.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
