@@ -9228,6 +9228,11 @@ menu:
       parent: journey_monitoring
       identifier: journey_monitoring_uptime
       weight: 3
+    - name: Guides
+      url: journey_monitoring/guide/
+      parent: journey_monitoring
+      identifier: journey_monitoring_guides
+      weight: 4
     - name: Real User Monitoring
       url: real_user_monitoring/
       pre: rum
