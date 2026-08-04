@@ -29,9 +29,9 @@ Datadog sends transactional email on your organization's behalf, including user 
 - **Bounced**: the recipient's mail server rejected the message.
 - **Dropped**: Datadog did not send the message, because it was suppressed or blocked before delivery.
 
-Use these events to confirm what happened to a message, investigate failures, and get alerted when delivery breaks down. To run a query from this guide, click a situation to open it prefilled in the [Audit Trail Explorer][1], or query for email events manually using the attributes in [Event attributes][2].
+Use these events to confirm what happened to a message, investigate failures, and get alerted when delivery breaks down. To run a query from this guide, click a situation to open it prefilled in the [Audit Trail Explorer][1], or query for email events manually using the attributes in [Event attributes][2]. To diagnose and fix a specific reported failure, see [Troubleshoot email delivery][17].
 
-**Note**: Enable Audit Trail to keep email delivery events for 90 days and to build monitors and dashboards on them. Events are recorded from the date you enable Audit Trail and are not retroactive. To diagnose and fix a specific reported failure, see [Email suppressions][3].
+**Note**: Enable Audit Trail to keep email delivery events for 90 days and to build monitors and dashboards on them. Events are recorded from the date you enable Audit Trail and are not retroactive.
 
 ## Check whether an email was delivered
 
@@ -114,3 +114,4 @@ These attributes describe how the recipient mail server responded to the deliver
 [14]: https://app.datadoghq.com/audit-trail?query=%40evt.name%3A%22Email%20Delivery%22%20%40action%3Aemail_dropped
 [15]: /monitors/types/audit_trail/
 [16]: https://www.rfc-editor.org/info/rfc3463/
+[17]: /account_management/email_delivery/troubleshooting_email_delivery/
