@@ -57,7 +57,7 @@ Live Debugger provides:
 
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
 
-- The [Datadog Agent][2], version 7.49.0 or higher
+- The [Datadog Agent][2], version 7.49.0 or later
 - An installed [Datadog SDK][3] (see the [Enable Live Debugger](#enable-live-debugger) section for minimum SDK versions)
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
