@@ -110,7 +110,7 @@ java \
     -jar <YOUR_SERVICE>.jar
 ```
 
-**Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument.
+**Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument with the error `Method Parameters detected`.
 {{< /programming-lang >}}
 
 {{< programming-lang lang="python" >}}
@@ -318,7 +318,7 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 ### Bits Live Debugger
 
-<div class="alert alert-info">Bits Live Debugger is currently in Preview. <a href="/tracing/live_debugger/bits-live-debugger/">Click here</a> to learn more and request access.</div>
+<div class="alert alert-info">Bits Live Debugger is in Preview. <a href="/tracing/live_debugger/bits-live-debugger/">Learn more about Bits Live Debugger and request access</a>.</div>
 
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
@@ -341,22 +341,14 @@ The following constraints apply to Live Debugger usage and configuration:
 [2]: /agent/
 [3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [4]: /tracing/guide/remote_config
-[5]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
-[6]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
-[7]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
-[8]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
-[9]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
-[10]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
 [11]: /logs/log_configuration/indexes/#exclusion-filters
 [12]: /logs/log_configuration/indexes/#add-indexes
 [13]: https://app.datadoghq.com/debugging/
 [14]: https://app.datadoghq.com/apm/traces
 [15]: /dynamic_instrumentation/expression-language/
 [17]: /dynamic_instrumentation/sensitive-data-scrubbing/#redact-based-on-variable-values-with-sensitive-data-scanner
-[19]: /dynamic_instrumentation/
 [20]: /tracing/code_origin
 [21]: /account_management/rbac/permissions#apm
-[22]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
 [23]: /tracing/live_debugger/bits-live-debugger/
 [24]: #mode-based-redaction
 [26]: https://app.datadoghq.com/debugging/settings
