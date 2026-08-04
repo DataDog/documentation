@@ -127,7 +127,7 @@ No data is lost, because both timeseries are stored. However, queries return onl
     ```
     New tag-configuration conflicts with existing configuration for <METRIC_NAME>
     ```
-* A metric reports as a different type than expected (for example, you expect `distribution` but see `count`, or vice versa).
+* A metric reports as a different type than expected (for example, you expect `count` but see `distribution`).
 * You submit a log-based metric with a name that matches an existing custom metric. Log-based metrics always emit as distributions, which immediately triggers overshadowing.
 
 ### Avoid overshadowing
