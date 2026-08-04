@@ -38,6 +38,10 @@ further_reading:
 
 Use this guide to get started with monitoring your Google Cloud environment. This approach simplifies the setup for Google Cloud environments with multiple projects, allowing you to maximize your monitoring coverage.
 
+## How Google Cloud data reaches Datadog
+
+{{% google-cloud-data-collection-paths %}}
+
 ## Setup
 
 ### Prerequisites
