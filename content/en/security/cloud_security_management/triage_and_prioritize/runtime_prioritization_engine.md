@@ -57,7 +57,7 @@ When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime si
 | Accessed by root process | `@package.is_running_as_root:true` |
 | SUID binary present | `@package.has_suid:true` |
 
-A tag is set only for signals Datadog observed, so the absence of a tag is not evidence that a package is unused.
+Datadog sets a tag only for signals it observed; the absence of a tag does not mean a package is unused.
 
 Use the tags in the [Vulnerability Explorer][11], combined with any other criteria. For example, high and critical vulnerabilities that are running and have a fix available:
 
@@ -65,7 +65,7 @@ Use the tags in the [Vulnerability Explorer][11], combined with any other criter
 @risk.is_package_running:true @severity:(high OR critical) @remediation.is_available:true
 ```
 
-Signals persist for the lifetime of an image version: once a package is observed running in an image, findings for that image keep the signal. Because container images are immutable, this means "has been observed running in this image" rather than "is running right now". When the image is no longer deployed, its findings age out and close.
+Signals persist for the lifetime of an image version: after a package is observed running in an image, findings for that image keep the signal. Because container images are immutable, this means "has been observed running in this image" rather than "is running right now". When the image is no longer deployed, its findings age out and close.
 
 ## Get started
 
