@@ -411,6 +411,8 @@ Translates a natural-language description into an Audit Trail query string. If y
 
 Tools for [Case Management][38], including creating, searching, and updating cases; managing projects; and linking Jira issues.
 
+<div class="alert alert-info">The <code>cases</code> toolset is not enabled by default. See <a href="/mcp_server/setup">Set Up the Datadog MCP Server</a> for instructions on enabling toolsets.</div>
+
 ### `search_datadog_cases`
 *Toolset: **cases***\
 *Permissions Required: `Cases Read`*\

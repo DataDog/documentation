@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: 설명서
   text: 인시던트와 Slack 통합
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: 블로그
-  text: Datadog CoScreen과 더욱 효율적인 페어 프로그래밍
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 사후 분석 쓰기 모범 사례

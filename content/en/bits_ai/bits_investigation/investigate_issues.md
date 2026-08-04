@@ -40,10 +40,7 @@ To use the Slack integration, [connect your Slack workspace to Bits Investigatio
 
 In Slack, reply to a monitor notification with `@Datadog Investigate this alert`.
 
-### Synthetic tests (Preview)
-
-<div class="alert alert-info">
-Bits investigations started from Synthetic Browser and API tests are in Preview.</div>
+### Synthetic tests
 
 When a Synthetic Browser or API test monitor triggers, you can launch a Bits investigation to identify the root cause. Bits analyzes Synthetic test results and history alongside traces, logs, and metrics. It surfaces a likely root cause and identifies whether the failure reflects a real regression or a misconfiguration.
 
@@ -51,7 +48,7 @@ When a Synthetic Browser or API test monitor triggers, you can launch a Bits inv
 
 1. On the [Synthetic Tests][18] page, open the Synthetic test you want to investigate and go to the {{< ui >}}Timeline{{< /ui >}} section.
 1. Select the {{< ui >}}Alert Triggered{{< /ui >}} event for the failing test run.
-1. Click {{< ui >}}Investigate with Bits Investigation{{< /ui >}}.
+1. Click {{< ui >}}Investigate with Bits{{< /ui >}}.
 
 The investigation opens in a new page, and you can also view it from the test details page after it runs.
 
@@ -59,7 +56,7 @@ The investigation opens in a new page, and you can also view it from the test de
 
 Synthetic monitors support the same monitor-based entry points as other supported monitor types. See [Monitor alerts](#manual-monitor-alerts) for the available options, or toggle {{< ui >}}Auto-Investigate{{< /ui >}} on a Synthetic monitor to start investigations automatically. For details, see [Enable automatic investigations](#enable-automatic-investigations).
 
-### General prompt (Preview)
+### General prompt
 
 Click on [New Investigation][16] and describe the issue you want to troubleshoot. Include as much relevant context as possible:
 - Observed symptoms (e.g., errors, latency) including any links to Datadog telemetry that indicate this
@@ -77,8 +74,6 @@ Bad example:
 
 You can also trigger an investigation from Slack.  Mention Datadog in a message: `@Datadog Investigate high CPU in ai-gateway in prod over the last 30 minutes`. If invoked within a Slack thread, Bits Investigation automatically uses the entire thread as investigation context.
 
-<div class="alert alert-info">
-Starting Bits investigations from a prompt is in Preview for all customers. During this period, the number of investigations per day is rate-limited. This limit does not apply to generally available entry points, such as monitors.</div>
 
 ### Enable automatic investigations
 
