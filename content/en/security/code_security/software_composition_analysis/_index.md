@@ -146,6 +146,20 @@ Each Bits Code session shows the life cycle of an AI-generated fix so you can re
 
 You can also view all remediation sessions on [**Sessions**][33].
 
+#### Fix with Cursor
+Instead of Bits Code, you can generate a fix with an AI coding agent such as Cursor:
+
+1. In the {{< ui >}}Remediate with AI{{< /ui >}} dialog, select the {{< ui >}}Coding agent{{< /ui >}} tab.
+2. Under {{< ui >}}Generate your fix directly from Claude Code, Codex, or Cursor{{< /ui >}}, click {{< ui >}}Open{{< /ui >}} next to {{< ui >}}Fix with Cursor{{< /ui >}}. Datadog opens Cursor with a tailored prompt that includes the recommended library upgrade for the vulnerability.
+
+To use a different agent, click {{< ui >}}Copy{{< /ui >}} next to {{< ui >}}Copy fix prompt{{< /ui >}} and paste the prompt into the agent of your choice.
+
+You can start this flow from the {{< ui >}}Remediation{{< /ui >}} section of a vulnerability's side panel, or from the {{< ui >}}Repositories{{< /ui >}} table. Each row in the table represents a repository or file that contains the vulnerable library.
+
+To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+{{< img src="code_security/software_composition_analysis/fix-with-cursor.png" alt="The Remediate with AI dialog with the Coding agent tab selected, showing Fix with Cursor and Copy fix prompt options" style="width:100%;" >}}
+
 ### Automatically block risky changes with PR Gates
 
 Use [PR Gates][16] to enforce security standards for open source libraries before changes are merged. Datadog scans the dependencies introduced in each pull request, identifies vulnerabilities or license violations that exceed your configured severity threshold, and reports a pass or fail status to GitHub or Azure DevOps.

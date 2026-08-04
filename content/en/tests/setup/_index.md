@@ -20,15 +20,18 @@ For information about configuration options for [Test Optimization][1], choose y
 
 <br>
 
-If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][5].
+If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][2].
 
 If you run your tests in an environment with network restrictions,
-see the [Agent Network Traffic][2] or [Agentless Network Settings][3] guide for information on how to configure whitelisting.
+see the [Agent Network Traffic][3] or [Agentless Network Settings][4] guide for information on how to configure allowlisting.
 
-If you run your tests in a container, see the [Tests in Containers][4] guide for additional setup steps.
+If you run your tests in a container, see the [Tests in Containers][5] guide for additional setup steps.
+
+To have a supported Test Optimization library upload code coverage reports automatically, see [Upload reports automatically with Test Optimization][6].
 
 [1]: /continuous_integration/tests
-[2]: /agent/configuration/network/
-[3]: /tests/network/
-[4]: /tests/containers/
-[5]: /tests/setup/bazel/
+[2]: /tests/setup/bazel/
+[3]: /agent/configuration/network/
+[4]: /tests/network/
+[5]: /tests/containers/
+[6]: /code_coverage/setup/#upload-reports-automatically-with-test-optimization
