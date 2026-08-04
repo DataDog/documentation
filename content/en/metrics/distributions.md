@@ -119,7 +119,7 @@ Distribution metrics store data differently from non-distribution types (count, 
 
 No data is lost (both timeseries are stored) but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution datapoint arrives.
 
-### Common symptoms
+### Symptoms of overshadowing
 
 * A metric's tags or data appear to change suddenly, without any configuration change on your end.
 * You receive this error when updating a tag configuration with the Metrics without Limits API:
