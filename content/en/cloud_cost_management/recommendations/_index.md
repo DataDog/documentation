@@ -711,25 +711,6 @@ Below are the available cloud cost recommendation categories and their descripti
 | Purchase | Resources with on-demand charges and extended uptime. Purchasing a reservation or Savings Plan can reduce the amortized cost of the resource. |
 | Configure | Resources with configuration options that can be adjusted to reduce costs without changing capacity or terminating the resource. |
 
-## Risk and level of effort
-
-Each recommendation includes a **Risk** score and a **Level of Effort** score to help you prioritize which recommendations to act on first. Both scores use a scale of {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, and {{< ui >}}High{{< /ui >}}. They appear as the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns in the {{< ui >}}Active Recommendations{{< /ui >}} table and in each recommendation's side panel.
-
-| Risk | Description |
-|--------|-------------|
-| {{< ui >}}Low{{< /ui >}} | Safe and easily undone: no data at stake or fully recoverable, resource trivially recreatable, isolated, no runtime impact. |
-| {{< ui >}}Medium{{< /ui >}} | Recoverable but takes effort: data or resources restorable via snapshot or re-provisioning, impact scoped to one app or workload, only brief disruption. |
-| {{< ui >}}High{{< /ui >}} | Hard to undo or high-impact if wrong: irreversible data loss, a resource that can't be recreated, wide blast radius, or possible downtime to a live workload. |
-
-
-| Level of Effort | Description |
-|--------|-------------|
-| {{< ui >}}Low{{< /ui >}} | A quick change that takes minutes. Usually a single console toggle or API call, and fully automatable. |
-| {{< ui >}}Medium{{< /ui >}} | A moderate effort that takes hours to days. Needs some scripting, testing, or coordination with one other team. |
-| {{< ui >}}High{{< /ui >}} | A major effort that takes weeks. An architectural change or multi-team coordination.|
-
-Use the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns to prioritize recommendations that are low risk, low effort, or both. 
-
 ## Prerequisites
 
 The following are requirements necessary to receive Cloud Cost recommendations:
@@ -755,6 +736,25 @@ For each cloud account that you would like to receive recommendations for:
 1. Install the [Datadog Agent][5] (required for Downsize recommendations).
 
 **Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
+
+## Risk and level of effort
+
+Each recommendation includes a **Risk** score and a **Level of Effort** score to help you prioritize which recommendations to act on first. Both scores use a scale of {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, and {{< ui >}}High{{< /ui >}}. They appear as the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns in the {{< ui >}}Active Recommendations{{< /ui >}} table and in each recommendation's side panel.
+
+| Risk | Description |
+|--------|-------------|
+| {{< ui >}}Low{{< /ui >}} | Safe and easily undone: no data at stake or fully recoverable, resource trivially recreatable, isolated, no runtime impact. |
+| {{< ui >}}Medium{{< /ui >}} | Recoverable but takes effort: data or resources restorable via snapshot or re-provisioning, impact scoped to one app or workload, only brief disruption. |
+| {{< ui >}}High{{< /ui >}} | Hard to undo or high-impact if wrong: irreversible data loss, a resource that can't be recreated, wide blast radius, or possible downtime to a live workload. |
+
+
+| Level of Effort | Description |
+|--------|-------------|
+| {{< ui >}}Low{{< /ui >}} | A quick change that takes minutes. Usually a single console toggle or API call, and fully automatable. |
+| {{< ui >}}Medium{{< /ui >}} | A moderate effort that takes hours to days. Needs some scripting, testing, or coordination with one other team. |
+| {{< ui >}}High{{< /ui >}} | A major effort that takes weeks. An architectural change or multi-team coordination.|
+
+Use the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns to prioritize recommendations that are low risk, low effort, or both. 
 
 ## Recommendation statuses
 
