@@ -828,5 +828,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
 [16]: /mcp_server/tools/#cost_recommendations
-[17]: /integrations/openai/
-[18]: /integrations/anthropic/
+[17]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[18]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts
