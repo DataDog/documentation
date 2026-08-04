@@ -587,7 +587,7 @@ oc exec -it <datadog cluster agent pod> -n <datadog ns> -- agent clusterchecks
 ```
 #### Etcd
 
-{{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h4" %}}
+{{% collapse-content title="Etcd OpenShift 4.0 - 4.13" level="h5" %}}
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `kube-etcd-client-certs` in the `openshift-monitoring` namespace. To give the Datadog Agent access to these certificates, first copy them into the same namespace the Datadog Agent is running in:
 
 ```shell
@@ -667,7 +667,7 @@ The Datadog Cluster Agent schedules the checks as endpoint checks and dispatches
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Etcd OpenShift 4.14 and later" level="h4" %}}
+{{% collapse-content title="Etcd OpenShift 4.14 and later" level="h5" %}}
 
 Certificates are needed to communicate with the Etcd service, which can be found in the secret `etcd-metric-client` in the `openshift-etcd-operator` namespace. To give the Datadog Agent access to these certificates, copy them into the same namespace as the Datadog Agent:
 

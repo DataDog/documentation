@@ -58,7 +58,7 @@ Confirm that the following graph uses the expected colors coral and green:
 
 - The following script demonstrates how to loop through the `x, y` coordinates of the canvas to assert that at least one of its pixels matches the target color:
 
-{{% collapse-content title="Example JavaScript assertion" level="h4" expanded=false id="JavaScript_assertion" %}}
+{{% collapse-content title="Example JavaScript assertion" level="h3" expanded=false id="JavaScript_assertion" %}}
 {{< code-block lang="javascript" >}}
 
 // Defining the canvas element as a Variable
@@ -147,7 +147,7 @@ JavaScript allows you to programmatically trigger events on elements, enabling y
 
 After a listener is set up, you can dispatch (or trigger) a click event. With this approach, you can create a custom function to simulate a user click at specific coordinates:
 
-{{% collapse-content title="Custom function example" level="h4" expanded=false id="Custom_function" %}}
+{{% collapse-content title="Custom function example" level="h3" expanded=false id="Custom_function" %}}
 {{< code-block lang="javascript" >}}
 //Store the canvas in a variable using its selector
 const canvas = document.querySelector('canvas_selector')
@@ -191,7 +191,7 @@ Now that the key pieces are in place, you can build a complete flow that include
 - Scans the canvas for the first pixel matching a target color
 - Simulates a click at that location
 
-{{% collapse-content title="Canvas interaction" level="h4" expanded=false id="Canvas_interaction" %}}
+{{% collapse-content title="Canvas interaction" level="h3" expanded=false id="Canvas_interaction" %}}
 {{< code-block lang="javascript" >}}
 // Defining the canvas element as a Variable
 const canvas = document.querySelector('canvas_selector');

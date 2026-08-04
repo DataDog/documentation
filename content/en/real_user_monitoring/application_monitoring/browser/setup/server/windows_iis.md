@@ -35,7 +35,7 @@ The [Datadog Agent][2] is installed and configured.
 3. Configure your application parameters. See [guidance on configuring sampling][4].
 4. Set up the IIS module using either the GUI installer or command line as described below:
 
-{{% collapse-content title="Using the GUI installer (recommended)" level="h5" %}}
+{{% collapse-content title="Using the GUI installer (recommended)" level="h3" %}}
 
 1. Download the [Datadog RUM installer][5].
 2. Follow the installer as an administrator by opening the `.msi` file.
@@ -45,7 +45,7 @@ The [Datadog Agent][2] is installed and configured.
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Using the command line" level="h5" %}}
+{{% collapse-content title="Using the command line" level="h3" %}}
 
 1. Run the Powershell command line as an administrator.
 2. Set your Session and Session Replay sample rates. See [guidance on configuring sampling][4].

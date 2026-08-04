@@ -128,7 +128,7 @@ In your monitor configuration, the {{< ui >}}Recipient Summary{{< /ui >}} shows 
 
 {{< img src="/monitors/notifications/notification_rules/diagram_notification-rules.png" alt="Flowchart showing how Monitor notification rules match tags, combine recipients from monitors and rules, and remove duplicates before sending alerts" style="width:100%;" >}}
 
-{{% collapse-content title="Example: Notification Rule Matching" level="h4" expanded=false %}}
+{{% collapse-content title="Example: Notification Rule Matching" level="h3" expanded=false %}}
 
 The following table demonstrates how monitors with different tag combinations match notification rules and their resulting notifications. This table shows how:
 1. Multiple notification rules can match a single monitor notification based on its tags.

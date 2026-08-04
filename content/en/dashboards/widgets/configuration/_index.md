@@ -38,7 +38,7 @@ You can join multiple data sources together in the graph editor to enrich your v
 - Identify matching keys
 - Validate results before running the full query
 
-{{% collapse-content title="Example" level="h4" expanded=false %}}
+{{% collapse-content title="Example" level="h3" expanded=false %}}
 You could join your payment logs with a reference table (lookup table) containing product details to display sale price or release date alongside transaction data. Or, you could enrich RUM session data by joining it with customer information from an external source, such as Salesforce or Snowflake, to segment users by customer tier.
 
 Supported data sources for joins include (but are not limited to):

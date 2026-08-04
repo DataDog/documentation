@@ -100,7 +100,7 @@ Use this centralized page to:
 
 Resource Changes supports a wide array of resources across [AWS](#aws-resources), [Azure](#azure-resources), and [Google Cloud Platform](#gcp-resources).
 
-{{% collapse-content title="AWS" level="h4" expanded=false id="aws-resources" %}}
+{{% collapse-content title="AWS" level="h3" expanded=false id="aws-resources" %}}
 
 AWS resource types:
 
@@ -198,7 +198,7 @@ AWS resource types:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Azure" level="h4" expanded=false id="azure-resources" %}}
+{{% collapse-content title="Azure" level="h3" expanded=false id="azure-resources" %}}
 
 Azure resource types:
 
@@ -244,7 +244,7 @@ Azure resource types:
 
 {{% /collapse-content %}}
 
-{{% collapse-content title="Google Cloud Platform" level="h4" expanded=false id="gcp-resources" %}}
+{{% collapse-content title="Google Cloud Platform" level="h3" expanded=false id="gcp-resources" %}}
 
 Google Cloud Platform resource types:
 

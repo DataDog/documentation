@@ -37,7 +37,7 @@ Define the array map processor on the [{{< ui >}}Pipelines{{< /ui >}} page][2]:
 
 ## Before and after state of logs
 
-{{% collapse-content title="Example: Normalizing an array of network connections" level="h4" %}}
+{{% collapse-content title="Example: Normalizing an array of network connections" level="h3" %}}
 
 **Before:**
 

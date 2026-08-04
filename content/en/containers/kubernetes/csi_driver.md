@@ -98,7 +98,7 @@ By default, `csi.autoManage` is `true`, which means the Operator owns the life c
           effect: NoSchedule
 ```
 
-{{% collapse-content title="Advanced setup with DatadogCSIDriver CR" level="h4" %}}
+{{% collapse-content title="Advanced setup with DatadogCSIDriver CR" level="h3" %}}
 
 If you need configuration options not exposed through the `DatadogAgent` spec (for example, custom images, container resource limits, update strategies, or per-container environment variables), you can manage the `DatadogCSIDriver` custom resource directly:
 
@@ -186,7 +186,7 @@ If you previously installed the CSI Driver with the standalone Helm chart, Datad
 - **Let the Operator manage the CSI Driver**: Uninstall the Helm chart (`helm uninstall datadog-csi-driver`) and keep the default values for `csi.enabled` and `csi.autoManage`. The Operator automatically creates a new `DatadogCSIDriver` resource and deploys the driver.
 - **Keep managing the CSI Driver with Helm**: No action is required. The Operator detects the existing `k8s.csi.datadoghq.com` CSIDriver and defers to it, regardless of the `csi.autoManage` value. The Operator does not interfere with your existing Helm-managed driver. To make this intent explicit, set `csi.autoManage: false`.
 
-{{% collapse-content title="Legacy Helm-based installation (Operator < v1.26.0)" level="h4" id="legacy-helm-based-installation" %}}
+{{% collapse-content title="Legacy Helm-based installation (Operator < v1.26.0)" level="h5" id="legacy-helm-based-installation" %}}
 
 If the Datadog Agent is deployed using a Datadog Operator version earlier than v1.26.0, you must install the Datadog CSI Driver Helm chart separately before you activate Datadog CSI in the Datadog Agent.
 

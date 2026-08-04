@@ -26,7 +26,7 @@ Historical jobs are one-time executable queries on historical logs used to backt
 
 Choose the query language you want to use.
 
-{{% collapse-content title="Event Query" level="h4" expanded=false id="threshold-event-query" %}}
+{{% collapse-content title="Event Query" level="h3" expanded=false id="threshold-event-query" %}}
 {{< img src="security/security_monitoring/detection_rules/threshold_20250310.png" alt="Define the search query" style="width:100%;" >}}
 
 1. To search Audit Trail events or events from Events Management, click the down arrow next to {{< ui >}}Logs{{< /ui >}} and select {{< ui >}}Audit Trail{{< /ui >}} or {{< ui >}}Events{{< /ui >}}.
@@ -38,7 +38,7 @@ Choose the query language you want to use.
 
 [1]: /logs/search_syntax/
 {{% /collapse-content %}}
-{{% collapse-content title="SQL" level="h4" expanded=false id="threshold-sql" %}}
+{{% collapse-content title="SQL" level="h3" expanded=false id="threshold-sql" %}}
 You can use SQL syntax to write historical jobs for additional flexibility, consistency, and portability. For information on the available syntax, see [DDSQL Reference][1].
 
 In Datadog, SQL queries are compatible with data stored in [datasets][2]. You can create datasets to format data already stored in tables for the following data types:
