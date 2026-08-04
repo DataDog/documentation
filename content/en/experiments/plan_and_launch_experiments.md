@@ -126,7 +126,7 @@ To configure randomization:
 
 {{< img src="/product_analytics/experiment/exp_plan_launch_randomization_section.png" alt="The Randomization section with the environment set to prod, two targeting rule filters joined by OR (each containing an IF and AND condition with an Add Condition button), an Add Filter button below, a 50/50 equal split between Control (true) and Treatment (false) variants, and traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option." style="width:80%;" >}}
 
-{{% collapse-content title="Additional configuration settings (optional)" level="h5" expanded=false id="additional-configs" %}}
+{{% collapse-content title="Additional configuration settings (optional)" level="h4" expanded=false id="additional-configs" %}}
 
 ##### Schedule a staged rollout
 

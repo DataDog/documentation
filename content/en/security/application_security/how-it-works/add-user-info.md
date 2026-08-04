@@ -673,7 +673,7 @@ Starting in dd-trace-php v0.84.0, you can use the PHP tracer's API to track user
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h5" expanded="true" %}}
+{{% collapse-content title="Login success" level="h3" expanded="true" %}}
 ```php
 <?php
 $user = [
@@ -691,7 +691,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Login failure" level="h5" expanded="false" id="php-login-failure" %}}
+{{% collapse-content title="Login failure" level="h3" expanded="false" id="php-login-failure" %}}
 ```php
 <?php
 $login = 'user-id'; // the string used by the user to log in
@@ -706,7 +706,7 @@ $metadata = [ 'key' => 'value' ]; // you can add arbitrary fields to metadata
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Custom business logic" level="h5" expanded="false" id="php-custom-business" %}}
+{{% collapse-content title="Custom business logic" level="h3" expanded="false" id="php-custom-business" %}}
 ```php
 <?php
 $eventName = 'users.signup'; // custom event name
@@ -776,7 +776,7 @@ Starting in dd-trace-js v3.13.1, you can use the Node.js tracer API to track use
 
 The following examples show how to track login events or custom events (using signup as an example).
 
-{{% collapse-content title="Login success" level="h5" expanded="true" %}}
+{{% collapse-content title="Login success" level="h3" expanded="true" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -795,7 +795,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginSuccess(login, user, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Login failure" level="h5" expanded="false" id="nodejs-login-failure" %}}
+{{% collapse-content title="Login failure" level="h3" expanded="false" id="nodejs-login-failure" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -811,7 +811,7 @@ tracer.appsec.eventTrackingV2.trackUserLoginFailure(login, userExists, metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="Custom business logic" level="h5" expanded="false" id="nodejs-custom-business" %}}
+{{% collapse-content title="Custom business logic" level="h3" expanded="false" id="nodejs-custom-business" %}}
 ```javascript
 const tracer = require('dd-trace')
 
@@ -887,7 +887,7 @@ Starting in dd-trace-py v3.7, you can use the new Python tracer's SDK to track u
 
 The following examples show how to track login events, signup events, or custom events.
 
-{{% collapse-content title="User Tracking SDK" level="h5" expanded="true" id="python-business-logic-sdk" %}}
+{{% collapse-content title="User Tracking SDK" level="h3" expanded="true" id="python-business-logic-sdk" %}}
 
 Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 
@@ -968,7 +968,7 @@ track_user_sdk.track_custom_event("my_event_name", metadata)
 ```
 {{% /collapse-content %}}
 
-{{% collapse-content title="FastAPI Toy App with SDK" level="h5" expanded="false" id="python-business-logic-example" %}}
+{{% collapse-content title="FastAPI Toy App with SDK" level="h3" expanded="false" id="python-business-logic-example" %}}
 
 The following example is a fully functioning Toy application that uses the User Tracking SDK with a memory-based user database. This example illustrates the possible usage of the SDK but does not provide the necessary requirements of a real application, such as a persistent data model or a secure authentication system.
 
@@ -1076,7 +1076,7 @@ async def whoami(request: Request) -> User:
 {{% /collapse-content %}}
 
 
-{{% collapse-content title="Legacy API" level="h5" expanded="false" id="python-business-logic-legacy" %}}
+{{% collapse-content title="Legacy API" level="h3" expanded="false" id="python-business-logic-legacy" %}}
 
 The preferred method is to use the new User Tracking SDK (available since dd-trace-py v1.9) instead of the Legacy API.
 

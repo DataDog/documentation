@@ -60,7 +60,7 @@ To create a ServiceNow record from a monitor, you need to configure an @-handle 
 
 To use the new template, add `@servicenow-<TEMPLATE_NAME>` in a monitor description. When the monitor alerts, ServiceNow also creates a corresponding record, and automatically sets it to **Resolved** when the underlying alert recovers.
 
-{{% collapse-content title="Configure legacy monitor notifications" level="h5" expanded=false id="configure-legacy-monitor-notifications" %}}
+{{% collapse-content title="Configure legacy monitor notifications" level="h4" expanded=false id="configure-legacy-monitor-notifications" %}}
 To configure legacy monitor notifications using `@servicenow-<INSTANCE_NAME>`:
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
@@ -74,7 +74,7 @@ To configure legacy monitor notifications using `@servicenow-<INSTANCE_NAME>`:
 **Note**: `Impact` and `Urgency` in monitor descriptions work only for legacy monitor configurations. For templated monitors, configure instance priority mapping. The `priority` field in ServiceNow incidents is read-only, and can only be updated using [priority lookup rules][8].
 {{% /collapse-content %}}
 
-{{% collapse-content title="Templated monitor table fields and transform maps" level="h5" expanded=false id="templated-monitor-table-fields-transform-maps" %}}
+{{% collapse-content title="Templated monitor table fields and transform maps" level="h4" expanded=false id="templated-monitor-table-fields-transform-maps" %}}
 `action`
 : **Type**: String<br>
 The action being taken on the monitor: `create`, `update`, `acknowledge`, or `resolve`
