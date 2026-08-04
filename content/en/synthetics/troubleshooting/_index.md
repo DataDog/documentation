@@ -30,6 +30,7 @@ Use this table to find troubleshooting steps for common errors.
 | `401 Unauthorized`                           | [API and Browser Tests → Unauthorized](#api-and-browser-tests) |
 | `Element not found`                            | [Test execution → Element selection issues](#element-detection-warning-in-browser-test-steps) |
 | `Unsupported browser version`                  | [Private Locations → Browser compatibility](?tab=common#requirements-for-browser-tests-running-on-private-location) |
+| `Failed to load resource: ERR_INVALID_ARGUMENT`| [Private Locations → Chrome 149 issue](?tab=common#chrome-149-issue-on-private-locations) |
 
 
 ## API tests
@@ -251,6 +252,12 @@ Additionally, `ping` requires elevated privileges to create the raw socket. The 
 
 {{< img src="synthetics/timeout.png" alt="API test on private location timing out" style="width:70%;" >}}
 
+### Chrome 149 issue on private locations
+
+Chromium version 149 introduced stricter validation for request headers, which can cause sub‑resource requests to fail with `net::ERR_INVALID_ARGUMENT`. Earlier Chrome versions were more permissive.
+
+**Solution:** Upgrade your private location to [version 1.69.1 or later][18] to resolve this issue.
+
 [101]: /synthetics/private_locations/dimensioning
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
@@ -387,3 +394,4 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [14]: /synthetics/guide/step-duration
 [16]: /synthetics/network_path_tests/#agent-configuration
 [17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers
+[18]: https://hub.docker.com/r/datadog/synthetics-private-location-worker
