@@ -42,7 +42,7 @@ Distributions provide enhanced query functionality and configuration options tha
 
 * **Customization of tagging**: This functionality allows you to control the tagging scheme for custom metrics for which host-level granularity is not necessary (for example, transactions per second for a checkout service).
 
-**Note:** Because distributions metric data is stored differently from other types, any metric name used for a `distribution` should not be used for any other metric types.
+**Note:** Because distributions metric data is stored differently from other types, any metric name used for a `distribution` should not be used for any other metric types. See [Metric name conflicts and overshadowing](#metric-name-conflicts-and-overshadowing) for more information.
 
 ## Enabling advanced query functionality
 
