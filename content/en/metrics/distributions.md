@@ -122,7 +122,7 @@ No data is lost, because both timeseries are stored. However, queries return onl
 ### Symptoms of overshadowing
 
 * A metric's tags or data appear to change suddenly, without you making any configuration changes.
-* You receive this error when updating a tag configuration with the Metrics without Limits API:
+* You receive this error when updating a tag configuration through the metrics API:
 
     ```
     New tag-configuration conflicts with existing configuration for <METRIC_NAME>
