@@ -84,6 +84,7 @@ Use the Datadog MCP Server's [`serverless_onboarding`][1] tool. After you connec
 Help me monitor my Azure Container Apps services with Datadog
 ```
 
+[1]: /agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server
 {% /tab %}
 {% /tabs %}
 
