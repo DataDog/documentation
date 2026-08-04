@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-const PAGE_WITH_CONTENT = '/docs/dd_e2e/components/header/';
+const PAGE_WITH_CONTENT = '/dd_e2e/components/header/';
 
 test.describe('Header — Hugo-identical dimensions and behavior', () => {
   // PAGE_WITH_CONTENT carries no announcement banner, so the header sits at the

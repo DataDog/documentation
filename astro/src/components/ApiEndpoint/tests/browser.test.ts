@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('ApiEndpoint component', () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto('/docs/dd_e2e/components/api-endpoint');
+    await page.goto('/dd_e2e/components/api-endpoint');
   });
 
   test('renders at least one endpoint section', async ({ page }) => {
@@ -63,7 +63,7 @@ test.describe('ApiEndpoint component', () => {
 test.describe('ApiEndpoint region switching', () => {
   test('swapping the region swaps the visible endpoint URL', async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto('/docs/dd_e2e/components/api-endpoint');
+    await page.goto('/dd_e2e/components/api-endpoint');
 
     await expect(page.locator('.region-selector[data-hydrated="true"]').first()).toBeVisible();
     await page.locator('.region-selector .select__control').selectOption('eu');
@@ -79,7 +79,7 @@ test.describe('ApiEndpoint region switching', () => {
 
   test('swapping the region swaps the visible curl command', async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto('/docs/dd_e2e/components/api-endpoint');
+    await page.goto('/dd_e2e/components/api-endpoint');
 
     await expect(page.locator('.region-selector[data-hydrated="true"]').first()).toBeVisible();
     await page.locator('.region-selector .select__control').selectOption('eu');
