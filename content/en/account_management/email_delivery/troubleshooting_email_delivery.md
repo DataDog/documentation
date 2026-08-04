@@ -10,7 +10,7 @@ further_reading:
 - link: "/account_management/email_delivery/how_email_delivery_works/"
   tag: "Documentation"
   text: "Status and suppression definitions"
-- link: "/account_management/email_delivery/ensuring_reliable_delivery/"
+- link: "/account_management/email_delivery/setting_up_reliable_delivery/"
   tag: "Documentation"
   text: "Prevent failures with trusted senders and authentication"
 - link: "/account_management/audit_trail/guides/track_email_delivery/"
@@ -80,8 +80,8 @@ If Datadog email still does not arrive, contact your email security gateway prov
 
 [1]: /account_management/audit_trail/guides/track_email_delivery/
 [2]: https://app.datadoghq.com/dash/integration/email_delivery_tracking
-[3]: /account_management/email_delivery/ensuring_reliable_delivery/#add-datadog-to-your-trusted-senders
+[3]: /account_management/email_delivery/setting_up_reliable_delivery/#add-datadog-to-your-trusted-senders
 [4]: #email-suppressions
 [5]: /help/
-[6]: /account_management/email_delivery/ensuring_reliable_delivery/#check-your-sender-authentication
+[6]: /account_management/email_delivery/setting_up_reliable_delivery/#check-your-sender-authentication
 [7]: #email-security-gateways

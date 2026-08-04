@@ -30,7 +30,7 @@ This guide is for administrators who manage users, alerting, and email workflows
 | [How Email Delivery Works][4]       | Delivery outcomes, bounces, and suppressions explained |
 | [Monitoring Email Delivery][5]      | Reading the dashboard and alerting on failures         |
 | [Troubleshooting Email Delivery][6] | Diagnosing and resolving a failed email                |
-| [Ensuring Reliable Delivery][7]     | Trusted sender and sender authentication setup         |
+| [Setting Up Reliable Delivery][7]     | Trusted sender and sender authentication setup         |
 
 Start with [How Email Delivery Works][4] to understand delivery outcomes, then use [Monitoring Email Delivery][5] to see them in your organization.
 
@@ -58,4 +58,4 @@ Every paid plan includes the [Email Delivery dashboard][3] for recent activity. 
 [4]: /account_management/email_delivery/how_email_delivery_works/
 [5]: /account_management/email_delivery/monitoring_email_delivery/
 [6]: /account_management/email_delivery/troubleshooting_email_delivery/
-[7]: /account_management/email_delivery/ensuring_reliable_delivery/
+[7]: /account_management/email_delivery/setting_up_reliable_delivery/

@@ -1,5 +1,5 @@
 ---
-title: Ensuring Reliable Delivery
+title: Setting Up Reliable Delivery
 description: Add Datadog to your organization's trusted email senders and check sender authentication so Datadog email is not filtered or suppressed.
 private: true
 site_support_id: email_delivery
