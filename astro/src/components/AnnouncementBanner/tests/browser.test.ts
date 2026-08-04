@@ -4,7 +4,7 @@ test.describe('AnnouncementBanner component — visual', () => {
   test.describe('when a banner is configured', () => {
     test.beforeEach(async ({ page }) => {
       // This test page renders a configured banner via `override`.
-      await page.goto('/docs/test_pages/components/announcement-banner');
+      await page.goto('/docs/dd_e2e/components/announcement-banner');
     });
 
     test('renders at desktop viewport', async ({ page }) => {
@@ -42,7 +42,7 @@ test.describe('AnnouncementBanner component — visual', () => {
       // The Test Pages index has no banner override, so `BaseLayout` falls back
       // to the live site config — which carries no banner when no campaign is
       // active. Nothing should render (no empty banner shell).
-      await page.goto('/docs/test_pages/');
+      await page.goto('/docs/dd_e2e/');
       await expect(page.locator('.announcement-banner')).toHaveCount(0);
     });
   });

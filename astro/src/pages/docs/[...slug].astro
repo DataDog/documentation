@@ -17,21 +17,21 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { entry } = Astro.props as { entry: CollectionEntry<'docs'> };
 
-if (__CI_ENV__ === 'live' && entry.id.startsWith('test_pages/')) {
+if (__CI_ENV__ === 'live' && entry.id.startsWith('dd_e2e/')) {
   return new Response(null, { status: 404 });
 }
 
 const { Content } = await render(entry);
 
 // Only the Markdoc component pages ship a `.md` plaintext twin (see
-// test_pages/components/[component].md.ts).
-const isMarkdocComponentPage = entry.id.startsWith('test_pages/components/');
+// dd_e2e/components/[component].md.ts).
+const isMarkdocComponentPage = entry.id.startsWith('dd_e2e/components/');
 const plaintextHref = `/docs/${entry.id}.md`;
 ---
 
 <BaseLayout title={entry.data.title}>
   <div class="docs-page">
-    <nav><a href="/docs/test_pages/">&larr; Test Pages</a></nav>
+    <nav><a href="/docs/dd_e2e/">&larr; Test Pages</a></nav>
     {isMarkdocComponentPage && (
       <p class="plaintext-link">
         <a href={plaintextHref}>View this page as plaintext</a>

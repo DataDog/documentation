@@ -8,7 +8,7 @@ import Alert from '@components/Alert/Alert.astro';
 
 const docs = await getCollection('docs');
 const markdocComponents = docs
-  .filter((entry) => entry.id.startsWith('test_pages/components/'))
+  .filter((entry) => entry.id.startsWith('dd_e2e/components/'))
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 
 // A component has a plaintext twin if it ships a `plaintext/<Name>.ts` module.
@@ -125,11 +125,11 @@ const astroComponents: AstroTestPage[] = [
         </thead>
         <tbody>
           <tr>
-            <td><a href="/docs/test_pages/integration/typography/">Typography</a></td>
+            <td><a href="/docs/dd_e2e/integration/typography/">Typography</a></td>
             <td>Verify vanilla Markdown elements such as headings and links.</td>
           </tr>
           <tr>
-            <td><a href="/docs/test_pages/integration/nested-content/">Nested content</a></td>
+            <td><a href="/docs/dd_e2e/integration/nested-content/">Nested content</a></td>
             <td>Verify the rendering and hydration of components nested inside other components, such as a code block inside a tab.</td>
           </tr>
         </tbody>
@@ -149,7 +149,7 @@ const astroComponents: AstroTestPage[] = [
         </thead>
         <tbody>
           {markdocComponents.map((entry) => {
-            const tagName = entry.id.replace('test_pages/components/', '');
+            const tagName = entry.id.replace('dd_e2e/components/', '');
             return (
             <tr>
               <td><a href={`/docs/${entry.id}/`}><code>{tagName}</code></a></td>
@@ -176,7 +176,7 @@ const astroComponents: AstroTestPage[] = [
         <tbody>
           {astroComponents.map((entry) => (
             <tr>
-              <td><a href={`/docs/test_pages/components/${entry.slug}/`}>{entry.title}</a></td>
+              <td><a href={`/docs/dd_e2e/components/${entry.slug}/`}>{entry.title}</a></td>
               <td>{entry.type}</td>
               <td>{componentsWithPlaintextTwin.has(entry.slug) ? '✅' : '❌'}</td>
               <td>{entry.description}</td>

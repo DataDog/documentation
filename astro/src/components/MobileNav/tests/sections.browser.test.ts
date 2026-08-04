@@ -4,7 +4,7 @@ import { test, expect, type Page } from '@playwright/test';
 test.use({ viewport: { width: 390, height: 844 } });
 
 // Non-API page so the docs accordion (not the API category list) is shown.
-const DOCS_PAGE = '/docs/test_pages/components/header';
+const DOCS_PAGE = '/docs/dd_e2e/components/header';
 
 async function openMobileNav(page: Page) {
   await page.goto(DOCS_PAGE);
