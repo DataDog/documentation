@@ -57,21 +57,22 @@ docker run -d --name dd-agent \
 
 ## Runtime Package Prioritization (Preview)
 
-Runtime package prioritization enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+Most vulnerabilities Datadog detects are in packages that ship inside an image but never execute. Runtime package prioritization identifies the ones that actually run, so you can remediate those first.
 
-Each vulnerability finding is enriched with the following signals:
+When enabled, the Agent uses eBPF to observe file access on your workloads and records how each package in the image is used at runtime. Datadog adds these signals to every vulnerability finding for that image:
 
-| Signal | Description |
-|--------|-------------|
-| Package is running | The package files are actively being accessed by running processes. |
-| Accessed by root process | The package is being accessed by a process running as root (UID 0). |
+| Signal | What it tells you |
+|--------|-------------------|
+| Package is running | The package's files were observed being accessed by a running process. |
+| Accessed by root process | The package was accessed by a process running as root (UID 0). |
 | SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
 
-These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
+Together, these answer whether a vulnerability is reachable and how much damage it could do. They feed the **Reachability** dimension of the [Runtime Prioritization Engine][5]. Once enabled, you can filter and group findings by them — see [Filter findings by runtime signals][6].
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
+- Applies to container image vulnerability findings, for operating system packages
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][4] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
@@ -93,3 +94,5 @@ docker run -d --name dd-agent \
 [2]: /security/threats
 [3]: /security/cloud_security_management/setup#supported-deployment-types-and-features
 [4]: /security/workload_protection/
+[5]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
+[6]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals

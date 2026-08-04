@@ -47,6 +47,31 @@ Crown Jewels update continuously as your environment changes. You can also add y
 
 When ownership is known, the engine can route findings to the right team instead of leaving security teams to manually chase remediation owners.
 
+## Filter findings by runtime signals
+
+When [Runtime Package Prioritization][4] is enabled, every vulnerability finding for the affected image carries its runtime signals as tags, so you can search, filter, and group by them:
+
+| Signal | Tag |
+|---|---|
+| Package is running | `@risk.is_package_running:true` |
+| Accessed by root process | `@package.is_running_as_root:true` |
+| SUID binary present | `@package.has_suid:true` |
+
+Use these as a filter or facet in:
+
+- **[Vulnerability Explorer][11]** to focus remediation on vulnerabilities in code that actually runs.
+- **[Security Inbox][6]** to review the prioritized findings that carry runtime evidence.
+- **Notifications** to alert only when a vulnerable package is observed running.
+- **Findings Automation** to build remediation rules around runtime-confirmed risk.
+
+You can combine them with any other criteria. For example, to find the work most worth doing first — high or critical vulnerabilities, running in your environment, with a fix available:
+
+```
+@risk.is_package_running:true @severity:(high OR critical) @remediation.is_available:true
+```
+
+Signals persist for the lifetime of an image version: once a package is observed running in a given image, findings for that image keep the signal. Because container images are immutable, this reflects "has been observed running in this image" rather than "is running right now". When the image is no longer deployed, its findings age out and close.
+
 ## Get started
 
 1. Deploy the Datadog Agent version 7.79 or later with Cloud Security enabled. See [Setting Up Cloud Security][3].
@@ -67,3 +92,4 @@ When ownership is known, the engine can route findings to the right team instead
 [8]: /security/cloud_security_management/crown_jewels/
 [9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
 [10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
+[11]: https://app.datadoghq.com/security/csm/vm
