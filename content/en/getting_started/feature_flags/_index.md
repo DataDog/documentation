@@ -20,6 +20,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/guardrail-metrics"
       tag: "Blog"
       text: "Make use of guardrail metrics and stop babysitting your releases"
+    - link: "https://www.datadoghq.com/blog/ab-testing/"
+      tag: "Blog"
+      text: "Every team should be A/B testing"
+    - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
+      tag: "Blog"
+      text: "The product signal latency gap slowing your growth"
 site_support_id: getting_started_feature_flags
 ---
 

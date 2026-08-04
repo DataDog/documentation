@@ -1,6 +1,11 @@
 ---
 title: Set Up Ownership Preferences
+aliases:
+  - /security/cloud_security_management/guide/frontier_group/ownership_preferences
 further_reading:
+- link: "/security/cloud_security_management/review_remediate/ownership_agent"
+  tag: "Documentation"
+  text: "Ownership Agent"
 - link: "/security/cloud_security_management/guide/frontier_group/"
   tag: "Documentation"
   text: "Cloud Security Frontier Group"
@@ -166,7 +171,7 @@ You can provide up to **three** prompt text entries, one for each priority level
 
 #### Tips for writing effective guidance
 
-- Be specific and actionable. "The `cost-center` tag is our most reliable ownership signal" is better than "Use tags".
+- Be specific and actionable. "The `cost-center` tag is the most reliable ownership signal" is better than "Use tags".
 - Explain your organization's conventions: team naming patterns, how to interpret specific tags, etc.
 - Call out accounts that should not be owners (also add these as exclusion rows for enforcement).
 - Use one entry per priority level to organize your guidance by importance.
@@ -295,7 +300,7 @@ The AI engine processes prompt text as organizational context. To help ensure yo
 
 #### Examples
 
-- "The cost-center tag is our most reliable ownership signal for all cloud resources."
+- "The cost-center tag is the most reliable ownership signal for all cloud resources."
 - "Team identifiers always use the team- prefix (for example, team-platform, team-data-eng)."
 - "Resources in the us-east-1/prod account are managed by team-sre."
 

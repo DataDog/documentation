@@ -34,7 +34,6 @@ For a full overview of Google Chat configuration options in Datadog Incident Man
 In addition to integrating with Slack and Microsoft Teams, Incident Management also integrates with:
 
 - [PagerDuty][8] and [Opsgenie][9] to send incident notifications to your on-call engineers.
-- [CoScreen][10] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Jira][11] to create a Jira ticket for an incident.
 - [Webhooks][12] to send incident notifications using webhooks (for example, [sending SMS to Twilio][13]).
 - [Statuspage][14] to create and update Statuspage incidents.
@@ -54,7 +53,6 @@ In addition to integrating with Slack and Microsoft Teams, Incident Management a
 [7]: /incident_response/incident_management/setup_and_configuration/notification_rules
 [8]: /integrations/pagerduty/
 [9]: /integrations/opsgenie/
-[10]: /coscreen
 [11]: /integrations/jira/
 [12]: /integrations/webhooks/
 [13]: /integrations/webhooks/#sending-sms-through-twilio
