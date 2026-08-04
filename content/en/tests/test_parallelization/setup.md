@@ -73,60 +73,65 @@ chmod +x bin/ddtest
 {{% /tab %}}
 {{< /tabs >}}
 
-## Validate the setup
+## Adopt ddtest in CI
 
-Validate test discovery and execution with one worker before distributing tests across workers or CI nodes:
+Adopt Test Parallelization in two stages. First, add planning without changing how tests run. Then, replace the existing test command with `ddtest` to use the selected parallelism.
 
-1. Run the test suite with its existing command. Record the exit status and expected test results.
-2. Run the test suite with Test Optimization enabled. Confirm that the test session appears in Datadog before adding `ddtest`.
-3. From the directory where the test command runs, remove any previous plan and generate a one-worker plan:
+### 1. Validate test planning
 
-   {{< code-block lang="bash" >}}
-   rm -rf .testoptimization
-   bin/ddtest plan \
-     --platform <PLATFORM> \
-     --framework <FRAMEWORK> \
-     --min-parallelism 1 \
-     --max-parallelism 1 \
-     --strict-discovery
-   {{< /code-block >}}
-
-   For example, use `ruby` and `rspec`, `python` and `pytest`, or `javascript` and `jest` for `<PLATFORM>` and `<FRAMEWORK>`.
-4. Inspect the generated plan:
-
-   {{< code-block lang="bash" >}}
-   cat .testoptimization/runner/parallel-runners.txt
-   sed -n '1,20p' .testoptimization/runner/test-files.txt
-   {{< /code-block >}}
-
-   Confirm that `parallel-runners.txt` contains `1` and that `test-files.txt` contains the expected runnable test files. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
-5. Run the one-worker plan:
-
-   {{< code-block lang="bash" >}}
-   bin/ddtest run \
-     --platform <PLATFORM> \
-     --framework <FRAMEWORK>
-   {{< /code-block >}}
-
-   Compare the exit status and results with the existing test command. Account for expected Test Impact Analysis skips, and confirm that the test session appears in Datadog.
-6. After the one-worker run succeeds, remove the validation plan or generate a fresh plan with the intended parallelism settings before distributing tests.
-
-## Manage plan artifacts
-
-Add the generated plan directory to `.gitignore`:
-
-{{< code-block lang="text" >}}
-.testoptimization/
-{{< /code-block >}}
-
-`ddtest run` uses an existing plan when `.testoptimization/runner/parallel-runners.txt` is present. Generate a fresh plan after changing the source revision, dependencies, platform, framework, test location, or working directory. To remove files from a previous plan before generating another plan, run:
+After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Set the minimum to `1` and the maximum to the largest number of CI nodes or local workers you want `ddtest` to consider:
 
 {{< code-block lang="bash" >}}
-rm -rf .testoptimization
-bin/ddtest plan --platform <PLATFORM> --framework <FRAMEWORK>
+bin/ddtest plan \
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK> \
+  --min-parallelism 1 \
+  --max-parallelism 8 \
+  --strict-discovery
 {{< /code-block >}}
 
-In CI, generate one plan for each workflow run. Share the complete `.testoptimization/` directory only with test jobs for the same source revision. Run the plan and test jobs from the same working directory, with the same platform, framework, runtime, and dependencies. For details about the generated files, see [Plan artifacts][5].
+For example, use `ruby` and `rspec`, `python` and `pytest`, or `javascript` and `jest` for `<PLATFORM>` and `<FRAMEWORK>`.
+
+Planning discovers tests, retrieves test duration and Test Impact Analysis data, selects a parallelism level, and writes the test splits to `.testoptimization/`. It does not execute tests, so keep your existing test command unchanged while you validate the plan.
+
+Inspect the proposed runner count and test files in the CI logs:
+
+{{< code-block lang="bash" >}}
+cat .testoptimization/runner/parallel-runners.txt
+sed -n '1,20p' .testoptimization/runner/test-files.txt
+ls .testoptimization/runner/tests-split/
+{{< /code-block >}}
+
+Confirm that `test-files.txt` contains the files your existing command should run and that the number of split files matches `parallel-runners.txt`. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
+
+### 2. Replace the existing test command
+
+After the plan contains the expected tests, replace the existing test command with:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run \
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK>
+{{< /code-block >}}
+
+`ddtest run` reuses the plan generated earlier in the job. On a single CI node, the selected parallelism is the number of local worker processes that `ddtest` starts.
+
+To distribute tests across multiple CI nodes, run `ddtest plan` once in a planning job. Share the complete `.testoptimization/` directory with the test jobs, and expose the selected runner count to your CI matrix. On each node, run:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run \
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK> \
+  --ci-node <CI_NODE_INDEX>
+{{< /code-block >}}
+
+The CI examples on this page show how to pass the generated plan and selected runner count between jobs.
+
+### 3. Tune for CI savings
+
+Compare the test stage duration before and after the change. Use `--max-parallelism` to limit CI capacity. The planner accounts for the setup cost of each additional runner; adjust `--ci-job-overhead` if your jobs have significantly more or less setup time than the default. Increase the overhead to favor fewer CI nodes, or decrease it to favor shorter wall time. Enable [Test Impact Analysis][2] to exclude unaffected tests before `ddtest` creates the splits.
+
+Add `.testoptimization/` to `.gitignore`. Generate a fresh plan for each CI workflow run, and share it only between jobs for the same source revision and execution environment. Run planning and tests from the same working directory. For details about the generated files, see [Plan artifacts][5].
 
 ## Run on a single CI node
 
