@@ -117,7 +117,7 @@ To customize tagging:
 
 Distribution metrics store data differently from non-distribution types (count, rate, gauge, histogram). If the same metric name receives both distribution and non-distribution data, Datadog's query system prioritizes the distribution data. This behavior is called **overshadowing**.
 
-No data is lost (both timeseries are stored) but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution datapoint arrives.
+No data is lost, because both timeseries are stored. However, queries return only the distribution data, so the non-distribution timeseries is invisible. Overshadowing takes effect from the moment the first distribution datapoint arrives.
 
 ### Symptoms of overshadowing
 
