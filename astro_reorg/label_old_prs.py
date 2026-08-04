@@ -31,7 +31,7 @@ from datetime import datetime, timedelta, timezone
 
 REPO = "DataDog/documentation"
 
-INACTIVITY_DAYS = 180  # ~6 calendar months
+INACTIVITY_DAYS = 120  # ~4 calendar months
 
 LABEL_STALE = "autolabeled-stale"
 LABEL_COLOR = "e4e669"

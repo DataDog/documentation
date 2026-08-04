@@ -1,21 +1,18 @@
 #!/usr/bin/env python3
 """
-Close open PRs that carry the `autolabeled-stale` label.
-Posts a comment before closing. Defaults to a dry run where it just reports
-what would be done.
+One-off script: swap `autolabeled-stale` → `autoclosed` on every PR that carries
+the old label, regardless of whether the PR is open or closed.
 
-Use the GitHub label query to review which PRs are queued for closure:
-https://github.com/DataDog/documentation/pulls?q=is%3Aopen+label%3Aautolabeled-stale
+All stale PRs have already been processed. Any PR still open with `autolabeled-stale`
+was reopened by its contributor after being closed; swapping the label prevents the
+close script from closing it again on the next run.
 
 Usage:
-    python3 astro_reorg/close_stale_prs.py [--no-dry-run] [--pr NUMBER ...] [--limit N]
+    python3 astro_reorg/relabel_closed_prs.py [--no-dry-run] [--limit N]
 
 Flags:
-    --no-dry-run          Actually close PRs instead of just reporting what would be done.
-    --pr NUMBER ...       Only process the given PR number(s).
-    --limit N             Stop after closing N PRs. PRs that are skipped don't count toward
-                          the limit. Use it to roll out gradually: start with --limit 1, review
-                          the results, then raise it as you gain confidence.
+    --no-dry-run    Actually swap labels instead of just reporting what would be done.
+    --limit N       Stop after relabeling N PRs. Use it to roll out gradually.
 """
 from __future__ import annotations
 
@@ -23,7 +20,6 @@ import argparse
 import json
 import subprocess
 import sys
-from datetime import datetime, timedelta, timezone
 
 # ---------------------------------------------------------------------------
 # Configuration
@@ -34,11 +30,6 @@ REPO = "DataDog/documentation"
 LABEL_STALE = "autolabeled-stale"
 LABEL_CLOSED = "autoclosed"
 LABEL_CLOSED_COLOR = "d93f0b"
-
-CLOSE_COMMENT = (
-    "This PR was closed after six or more months of inactivity. "
-    "If this was done in error, feel free to re-open the PR."
-)
 
 # ---------------------------------------------------------------------------
 # Shell helpers
@@ -77,14 +68,6 @@ def ensure_label_exists(label: str, color: str, dry_run: bool) -> None:
     print(f"  Created label: {label!r}")
 
 
-def post_comment(pr_number: int, body: str, dry_run: bool) -> None:
-    if dry_run:
-        print(f"  [dry-run] would comment on PR #{pr_number}:\n    {body[:120]}")
-        return
-    gh_run("pr", "comment", str(pr_number), "--repo", REPO, "--body", body)
-    print(f"  Posted comment on PR #{pr_number}")
-
-
 def remove_label(pr_number: int, label: str, dry_run: bool) -> None:
     if dry_run:
         print(f"  [dry-run] would remove label {label!r} from PR #{pr_number}")
@@ -101,56 +84,21 @@ def add_label(pr_number: int, label: str, dry_run: bool) -> None:
     print(f"  Added label {label!r} to PR #{pr_number}")
 
 
-def close_pr(pr_number: int, dry_run: bool) -> None:
-    if dry_run:
-        print(f"  [dry-run] would close PR #{pr_number}")
-        return
-    gh_run("pr", "close", str(pr_number), "--repo", REPO)
-    print(f"  Closed PR #{pr_number}")
-
-
 # ---------------------------------------------------------------------------
-# Per-PR processing
+# Main
 # ---------------------------------------------------------------------------
 
-def process_pr(pr: dict, dry_run: bool) -> bool:
-    """Comment and close a labeled PR. Return True if we acted, False if we skipped."""
-    pr_number = pr["number"]
-    title = pr["title"]
-
-    print(f"\nPR #{pr_number}: {title}")
-    print(f"  Last updated: {pr.get('updatedAt', 'unknown')}")
-
-    post_comment(pr_number, CLOSE_COMMENT, dry_run)
-    remove_label(pr_number, LABEL_STALE, dry_run)
-    close_pr(pr_number, dry_run)
-    add_label(pr_number, LABEL_CLOSED, dry_run)
-    return True
-
-
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
-
-def get_labeled_prs(only: list[int] | None = None, fetch_limit: int = 1000) -> list[dict]:
-    """Return open PRs carrying the stale label, optionally filtered to specific numbers."""
-    fields = "number,title,updatedAt"
-    if only:
-        prs = []
-        for n in only:
-            pr = gh_json("pr", "view", str(n), "--repo", REPO, "--json", fields)
-            prs.append(pr)
-        return prs  # type: ignore[return-value]
+def get_stale_prs(state: str) -> list[dict]:
     return gh_json(  # type: ignore[return-value]
-        "pr", "list", "--repo", REPO, "--state", "open",
+        "pr", "list", "--repo", REPO, "--state", state,
         "--label", LABEL_STALE,
-        "--json", fields, "--limit", str(fetch_limit),
+        "--json", "number,title,state", "--limit", "1000",
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description=f"Close open PRs labeled {LABEL_STALE!r}.",
+        description=f"Swap {LABEL_STALE!r} → {LABEL_CLOSED!r} on all PRs.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -160,12 +108,8 @@ def main() -> None:
              "Use --no-dry-run to apply changes.",
     )
     parser.add_argument(
-        "--pr", type=int, action="append", dest="prs", metavar="NUMBER",
-        help="Only process this PR number (may be repeated).",
-    )
-    parser.add_argument(
         "--limit", type=int, default=None, metavar="N",
-        help="Stop after closing N PRs. Skipped PRs don't count toward the limit. "
+        help="Stop after relabeling N PRs. Skipped PRs don't count toward the limit. "
              "Use it to roll out gradually: start at 1, review, then raise it.",
     )
     args = parser.parse_args()
@@ -178,25 +122,28 @@ def main() -> None:
 
     ensure_label_exists(LABEL_CLOSED, LABEL_CLOSED_COLOR, args.dry_run)
 
-    prs = get_labeled_prs(args.prs)
-    print(f"Found {len(prs)} labeled PR(s) to close.")
+    prs = get_stale_prs("open") + get_stale_prs("closed")
+    print(f"Found {len(prs)} PR(s) with label {LABEL_STALE!r}.")
     if args.limit is not None:
-        print(f"Limit: will stop after closing {args.limit} PR(s).")
+        print(f"Limit: will stop after relabeling {args.limit} PR(s).")
 
     acted = 0
     for pr in prs:
         if args.limit is not None and acted >= args.limit:
-            print(f"\nReached --limit of {args.limit} closed PR(s) — stopping.")
+            print(f"\nReached --limit of {args.limit} relabeled PR(s) — stopping.")
             break
+        pr_number = pr["number"]
+        pr_state = pr["state"]
+        print(f"\nPR #{pr_number} ({pr_state}): {pr['title']}")
         try:
-            if process_pr(pr, args.dry_run):
-                acted += 1
+            remove_label(pr_number, LABEL_STALE, args.dry_run)
+            add_label(pr_number, LABEL_CLOSED, args.dry_run)
+            acted += 1
         except Exception as exc:
-            print(f"\nERROR processing PR #{pr.get('number', '?')}: {exc}",
-                  file=sys.stderr)
+            print(f"  ERROR: {exc}", file=sys.stderr)
             print("  Skipping to the next PR.", file=sys.stderr)
 
-    print(f"\nClosed {acted} PR(s). Done.")
+    print(f"\nRelabeled {acted} PR(s). Done.")
 
 
 if __name__ == "__main__":
