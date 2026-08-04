@@ -43,7 +43,7 @@ Learn more about the [compatibility requirements][6].
 
 1. In Datadog, navigate to the Agent Observability [Evaluations page][1]. Select {{< ui >}}Create Evaluation{{< /ui >}}, then select {{< ui >}}Create your own{{< /ui >}}.
    {{< img src="llm_observability/evaluations/EvalConfig_LLMO_1.png" alt="The Agent Observability Evaluations page after selecting Create Evaluation." style="width:100%;" >}}
-1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluation runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
+1. To enable tracing for evaluations, click the {{< ui >}}Tracing Disabled{{< /ui >}} button, then select the {{< ui >}}Trace Evaluations{{< /ui >}} toggle to enable tracing. When this evaluation runs, its traces appear under `datadog-evaluations`, giving you greater visibility into your evaluations. The {{< ui >}}Evaluate Span{{< /ui >}} action is not available on these judge traces because they are already the output of a judge run and are not intended to be re-evaluated. **Note**: Enabling tracing increases the number of billed spans sent to Datadog.
     {{< img src="llm_observability/evaluations/evaluation_tracing_enabled.png" alt="Trace Evaluations enabled after the toggle to enable evaluation tracing has been selected." >}}
 1. Provide a clear, descriptive {{< ui >}}evaluation name{{< /ui >}} (for example, `factuality-check` or `tone-eval`). You can use this name when querying evaluation results. The name must be unique within your application.
 1. Configure the model:
@@ -537,6 +537,7 @@ You can:
 - Filter by pass/fail assessment status (example, `@evaluation.helpfulness-check.assessment:fail`)
 - Use evaluation results as [facets][3]
 - View aggregate results in the Agent Observability Overview page's Evaluation section
+- Monitor evaluator performance in {{< ui >}}Evaluation Health{{< /ui >}}; charts on the {{< ui >}}Health{{< /ui >}}, {{< ui >}}Errors{{< /ui >}}, {{< ui >}}Cost{{< /ui >}}, and {{< ui >}}Token Usage{{< /ui >}} tabs can be expanded with {{< ui >}}View full screen{{< /ui >}} and exported to a dashboard with {{< ui >}}Save to Dashboard{{< /ui >}} using the controls above each chart.
 - Create [monitors][4] to alert on performance changes or regression
 
 ## Using in experiments
@@ -610,4 +611,3 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
-
