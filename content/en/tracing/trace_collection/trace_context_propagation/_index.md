@@ -629,7 +629,7 @@ void SetHeaderValues(MessageHeaders headers, string name, string value)
 
 The Datadog Rust SDK is built on the OpenTelemetry (OTel) SDK.
 
-Trace context propagation is handled by the OTel SDK, which is configured by `datadog-opentelemetry` to support both `datadog` and `tracecontext` (W3C) formats.
+Trace context propagation is handled by the OTel SDK, which is configured by `datadog-opentelemetry` to support `datadog`, `tracecontext` (W3C), and B3 formats.
 
 ### Supported formats
 
@@ -637,6 +637,8 @@ Trace context propagation is handled by the OTel SDK, which is configured by `da
 |---|---|
 | [Datadog][1] | `datadog` |
 | [W3C Trace Context][2] | `tracecontext` |
+| [B3 Single][3] | `b3` |
+| [B3 Multi][4] | `b3multi` |
 
 ### Configuration
 
@@ -645,8 +647,8 @@ You can control which propagation formats are used by setting the `DD_TRACE_PROP
 For example:
 
 ```bash
-# To support both W3C and Datadog
-export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog"
+# To support W3C, Datadog, and B3
+export DD_TRACE_PROPAGATION_STYLE="tracecontext,datadog,b3multi,b3"
 ```
 
 ### Manual injection and extraction
@@ -750,6 +752,8 @@ async fn hyper_handler(req: Request<Incoming>) -> Response<Full<Bytes>> {
 
 [1]: #datadog-format
 [2]: https://www.w3.org/TR/trace-context/
+[3]: https://github.com/openzipkin/b3-propagation#single-header
+[4]: https://github.com/openzipkin/b3-propagation#multiple-headers
 
 {{% /tab %}}
 
