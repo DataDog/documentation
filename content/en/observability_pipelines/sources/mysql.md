@@ -135,11 +135,9 @@ Store the SQL query that the Worker executes in a local file.
 
 ## Setup
 
-Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the MySQL URI connection string. Do <b>not</b> enter the actual value.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Ensure you have completed the [prerequisite steps](#prerequisites) first. Then, set up the MySQL source and its environment variables when you [set up a pipeline][1]. The information below is configured in the pipelines UI.
 
 After you select the MySQL source in the pipeline UI:
 
@@ -159,6 +157,8 @@ After you select the MySQL source in the pipeline UI:
     | At minute 45 of every hour | `45 * * * *`    |
     | Every 1 min                | `*/1 * * * *`   |
     | Once daily at 8 AM         | `0 8 * * *`     |
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ## Secret defaults
 

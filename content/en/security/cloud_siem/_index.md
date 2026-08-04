@@ -6,6 +6,18 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
+- link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+  tag: "Learning Center"
+  text: "Introduction to Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
+  tag: "Learning Center"
+  text: "Automate Threat Investigation and Remediation with Security Workflows"
+- link: "https://www.datadoghq.com/blog/cloud-siem-cases/"
+  tag: "Blog"
+  text: "Turn security signals into structured investigations with Case Management in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
+  tag: "Blog"
+  text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
 - link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
   tag: "Blog"
   text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
@@ -57,12 +69,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
-- link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
-  tag: "Learning Center"
-  text: "Introduction to Cloud SIEM"
-- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
-  tag: "Learning Center"
-  text: "Automate Threat Investigation and Remediation with Security Workflows"
 
 ---
 

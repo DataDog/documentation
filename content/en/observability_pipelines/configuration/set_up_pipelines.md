@@ -48,7 +48,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% tab "Logs" %}}
 
 1. Navigate to [Observability Pipelines][1].
-1. Select a [template][2] based on your use case or click {{< ui >}}New Pipeline{{< /ui >}} on the top right side of the page.
+1. Select a [template][2] based on your use case, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Logs Pipeline{{< /ui >}}.
 1. Select and set up a [log source][3].
 1. Select and set up [destinations][5] for your processed logs.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
@@ -88,7 +88,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 {{% tab "Metrics" %}}
 
 1. Navigate to [Observability Pipelines][1].
-1. Select the [Metric Tag Governance][2] template.
+1. Select the [Metric Tag Governance][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Metrics Pipeline{{< /ui >}}.
 1. Select and set up a [metrics source][3].
 1. Select and set up [destinations][5] for your processed metrics.
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
