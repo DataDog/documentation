@@ -893,7 +893,7 @@ The `otlp_http` exporter sends telemetry data to Datadog's OTLP intake endpoints
 
 - **Endpoint**: `https://otlp.<YOUR_DD_SITE>` for traces, logs, and metrics.
 - **Compression**: `zstd` is recommended for reduced bandwidth usage. When using `zstd`, set `compression_params.level` explicitly, because the default uses the lowest compression level.
-- **Batching**: The `sending_queue.batch` settings flush batches at 2 MiB and split larger batches at 4 MiB, which keeps requests under the intake payload size limit.
+- **Batching**: The `sending_queue.batch` settings begin flushing at 2 MiB and split serialized batches at 4 MiB. If you receive a 413 response, reduce these sizes.
 
 #### `dd-otel-metric-config` header {#dd-otel-metric-config-header}
 
