@@ -21,7 +21,7 @@ Data Observability for PostgreSQL is in Preview. Contact your Datadog representa
 
 The PostgreSQL integration for Datadog Data Observability tracks table metadata, providing visibility into schemas, table dimensions, and row volumes across your environment.
 
-Unlike the warehouse integrations, PostgreSQL is collected through the [Datadog Agent][1] rather than a direct cloud connection. This page covers only the configuration needed for Data Observability. To set up the full suite of Database Monitoring features, see the [DBM setup guide for PostgreSQL][2].
+PostgreSQL is collected through the [Datadog Agent][1] rather than through a direct cloud connection like the [data warehouse integrations][7]. This page covers only the configuration needed for Data Observability. To set up the full suite of Database Monitoring features, see the [DBM setup guide for PostgreSQL][2].
 
 ## Prerequisites
 
@@ -74,9 +74,15 @@ If [Database Monitoring][2] is already running against this database, most of th
    GRANT USAGE ON SCHEMA "<YOUR_SCHEMA>" TO datadog;
    GRANT SELECT ON ALL TABLES IN SCHEMA "<YOUR_SCHEMA>" TO datadog;
 
-   -- Automatically apply read access to new tables
-   ALTER DEFAULT PRIVILEGES IN SCHEMA "<YOUR_SCHEMA>"
+   -- Automatically apply read access to tables created later by <TABLE_OWNER_ROLE>
+   ALTER DEFAULT PRIVILEGES FOR ROLE <TABLE_OWNER_ROLE> IN SCHEMA "<YOUR_SCHEMA>"
      GRANT SELECT ON TABLES TO datadog;
+   ```
+
+   `ALTER DEFAULT PRIVILEGES` only affects tables created by the role named in `FOR ROLE`. Run it once for **each role that creates tables** in the schema; otherwise Data Observability loses access to new tables as your application creates them. To list the roles that own tables in a schema:
+
+   ```sql
+   SELECT DISTINCT tableowner FROM pg_tables WHERE schemaname = '<YOUR_SCHEMA>';
    ```
 
    Schema and table permissions are database-specific. Re-run these commands for **every database** and every schema you intend to track.
@@ -177,9 +183,9 @@ If your tables do not appear, verify that:
 
 ## Create data quality monitors
 
-Once your tables appear in the catalog, you can alert on their health.
+After your tables appear in the catalog, you can alert on their health.
 
-Navigate to a table in the [Data Observability catalog][3], select the {{< ui >}}Monitors{{< /ui >}} tab, and click {{< ui >}}Add Monitor{{< /ui >}}. The Preview supports:
+Navigate to a table in the [Data Observability catalog][3], select the {{< ui >}}Monitors{{< /ui >}} tab, and click {{< ui >}}Add Monitor{{< /ui >}}. In Preview, you can create:
 
 - **Row count**: Alert on volume fluctuations, such as sudden drops or plateauing trends.
 - **Column-level metrics**: Monitor column attributes such as null ratios, cardinalities, or distribution shifts.
@@ -201,3 +207,4 @@ Data Observability lists all PostgreSQL tables from instances where `dbm` and `c
 [4]: https://github.com/DataDog/integrations-core/blob/master/postgres/datadog_checks/postgres/data/conf.yaml.example
 [5]: /agent/configuration/agent-commands/#start-stop-and-restart-the-agent
 [6]: /agent/guide/upgrade_agent_fleet_automation/
+[7]: /data_observability/quality_monitoring/data_warehouses/
