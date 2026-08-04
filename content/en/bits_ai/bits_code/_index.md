@@ -26,6 +26,8 @@ To get started with Bits Code, [set up a source code integration][6] and complet
 
 Learn how your Bits Code usage is billed on [AI Credits][27].
 
+test
+
 ## Sessions
 A session captures a segment of work with Bits Code, including its analysis and code changes. Start, view, and manage your sessions at {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
