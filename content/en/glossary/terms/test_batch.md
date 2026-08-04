@@ -1,4 +1,5 @@
 ---
+id: test_batch
 # Glossary Term
 title: test batch
 core_product:

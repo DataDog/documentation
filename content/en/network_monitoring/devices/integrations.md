@@ -17,7 +17,7 @@ aliases:
 
 ## Overview
 
-Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the integration icons below to explore which integrations include built-in SNMP profiles or metadata that can be collected through NDM.
+Network Device Monitoring (NDM) supports a growing set of integrations for routers, switches, firewalls, SD-WAN platforms, and virtual infrastructure. Use the tables below to find which integrations support NDM collection and how each one connects to Datadog.
 
 <div class="alert alert-info">Beyond the integrations shown below, NDM includes built-in SNMP profiles for over 80 <a href="/network_monitoring/devices/supported_devices/">supported vendors</a>.</div>
 
@@ -25,25 +25,53 @@ Network Device Monitoring (NDM) supports a growing set of integrations for route
 
 The following integrations cover **software-defined and edge networking platforms** that support NDM collection. SD-WAN is a type of networking technology that uses software-defined networking (SDN) principles to manage and optimize the performance of wide area networks (WANs). They provide visibility into link health, throughput, and connectivity across distributed sites.
 
-{{< partial name="ndm/sd-wan.html" >}}
+{{< card-grid card_width="130px" >}}
+  {{< image-card href="/integrations/cisco-aci/" src="integrations_logos/cisco-aci_small.svg" alt="cisco-aci" >}}
+  {{< image-card href="/integrations/cisco-sdwan/" src="integrations_logos/cisco-sdwan_small.svg" alt="cisco-sdwan" >}}
+  {{< image-card href="/integrations/velocloud-sd-wan/" src="integrations_logos/velocloud-sd-wan_small.svg" alt="velocloud" >}}
+  {{< image-card href="/integrations/fortinet-fortimanager/" src="integrations_logos/fortinet-fortimanager_small.svg" alt="fortinet fortimanager" >}}
+  {{< image-card href="/integrations/versa/" src="integrations_logos/versa-networks-logo-small.svg" alt="versa" >}}
+{{< /card-grid >}}
 
-<br>
+| Integration | Summary | Collection type |
+|---|---|---|
+| [Cisco ACI](/integrations/cisco-aci/) | Monitors Cisco Application Centric Infrastructure (ACI) fabric topology, endpoint group health, and tenant policy status through the APIC REST API. | Agent-based |
+| [Cisco SD-WAN](/integrations/cisco-sdwan/) | Collects device health, tunnel status, and WAN link performance metrics from Cisco Catalyst SD-WAN (vManage) through the vManage REST API. | Agent-based |
+| [VMware VeloCloud SD-WAN](/integrations/velocloud-sd-wan/) | Monitors SD-WAN edge device health, link quality, and application performance from the VMware VeloCloud Orchestrator API. | Crawler-based |
+| [Fortinet FortiManager](/integrations/fortinet-fortimanager/) | Collects managed device inventory, policy deployment status, and system health metrics from Fortinet FortiManager through its JSON-RPC API. | Crawler-based |
+| [Versa Networks](/integrations/versa/) | Monitors Versa SD-WAN appliances for device health, SLA performance, and application-aware routing metrics through the Versa Director API. | Agent-based |
 
 ## Wireless Networking
 
 The following integrations cover **wireless networking platforms** that support NDM collection. These integrations provide visibility into wireless access points, client connections, and network performance across your wireless infrastructure.
 
-{{< partial name="ndm/wireless.html" >}}
+{{< card-grid card_width="200px">}}
+  {{< image-card href="/integrations/meraki/" src="integrations_logos/meraki.png" alt="meraki" >}}
+  {{< image-card href="/integrations/juniper-mist/" src="integrations_logos/juniper-mist_small.svg" alt="juniper-mist" >}}
+  {{< image-card href="/integrations/aruba-central/" src="integrations_logos/aruba-central_small.svg" alt="aruba-central" >}}
+{{< /card-grid >}}
 
-<br>
+| Integration | Summary | Collection type |
+|---|---|---|
+| [Cisco Meraki](/integrations/meraki/) | Collects network device status, client counts, and uplink performance from Cisco Meraki cloud-managed networks through the Meraki Dashboard API. | Crawler-based |
+| [Juniper Mist](/integrations/juniper-mist/) (Preview) | Provides end-to-end visibility into cloud-managed Juniper Mist wireless, wired, and WAN network infrastructure, including access points, switches, and gateways through the Juniper Mist API. | Crawler-based |
+| [Aruba Central](/integrations/aruba-central/) (Preview) | Monitors Aruba Central-managed network devices, including access points and switches for health and performance metrics through the Aruba Central API. | Crawler-based |
 
 ## Virtualization
 
 NDM can also monitor **virtualized environments** that expose network telemetry through SNMP or API-based integrations. These integrations help you correlate host-level performance with physical network metrics.
 
-{{< partial name="ndm/virtualization.html" >}}
+{{< card-grid card_width="200px">}}
+  {{< image-card href="/integrations/vsphere/" src="integrations_logos/vsphere.png" alt="vsphere" >}}
+  {{< image-card href="/integrations/openstack/" src="integrations_logos/openstack.png" alt="openstack" >}}
+  {{< image-card href="/integrations/proxmox/" src="integrations_logos/proxmox_small.svg" alt="proxmox" >}}
+{{< /card-grid >}}
 
-<br>
+| Integration | Summary | Collection type |
+|---|---|---|
+| [VMware vSphere](/integrations/vsphere/) | Monitors vSphere hosts, virtual machines, data stores, and clusters for resource utilization and network performance through the vCenter API. | Agent-based |
+| [OpenStack](/integrations/openstack/) | Collects hypervisor, VM, and virtual network metrics from OpenStack services including Nova, Neutron, and Cinder. | Agent-based |
+| [Proxmox VE](/integrations/proxmox/) | Monitors Proxmox Virtual Environment nodes, VMs, and containers for resource usage and cluster health through the Proxmox REST API. | Agent-based |
 
 ## Next steps
 

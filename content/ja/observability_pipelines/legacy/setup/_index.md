@@ -303,7 +303,10 @@ The Observability Pipelines Worker Docker image is published to Docker Hub [here
 
 クイックスタートでは、ワーカーのインストールとサンプルパイプライン構成のデプロイについて説明しました。データを受信して Datadog Agent から Datadog へ、または Splunk HEC から Splunk と Datadog へルーティングするためのワーカーのインストール方法については、特定のユースケースを選択してください。
 
-{{< partial name="observability_pipelines/use_cases.html" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="datadog/" src="integrations_logos/datadog.png" alt="Datadog" >}}
+  {{< image-card href="splunk/" src="integrations_logos/splunk.png" alt="Splunk" >}}
+{{< /card-grid >}}
 
 複数の Worker のデプロイとスケーリングに関する推奨事項については、こちらをご覧ください。
 

@@ -12,10 +12,10 @@ You can use the Block Blob component to represent and visualize block blobs from
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the storage tier for your blob.
-- **Redundancy**: Select how your data is replicated in the primary and secondary regions.
-- **Storage (GiB)**: Enter the total volume of data available for the blob in gibibytes.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the storage tier for your blob.
+- {{< ui >}}Redundancy{{< /ui >}}: Select how your data is replicated in the primary and secondary regions.
+- {{< ui >}}Storage (GiB){{< /ui >}}: Enter the total volume of data available for the blob in gibibytes.
 
 ## API
 

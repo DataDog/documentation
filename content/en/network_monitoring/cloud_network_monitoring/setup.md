@@ -121,6 +121,16 @@ To enable Cloud Network Monitoring with the Datadog Agent, use the following con
       enabled: true
     ```
 
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+      enabled: true
+      dns_monitoring_ports:
+        - 53
+        - 5353
+    ```
+
 4. **If you are running an Agent older than v6.18 or 7.18**, manually start the system-probe and enable it to start on boot (since v6.18 and v7.18 the system-probe starts automatically when the Agent is started):
 
     ```shell
@@ -190,12 +200,23 @@ To enable Cloud Network Monitoring for Windows hosts:
 
    [DEPRECATED] _(version 7.44 or below)_ During installation pass `ADDLOCAL="MainApplication,NPM"` to the `msiexec` command, or select "Cloud Network Monitoring" when running the Agent installation through the GUI.
 
-1. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
+2. Edit `C:\ProgramData\Datadog\system-probe.yaml` to set the enabled flag to `true`:
 
     ```yaml
     network_config:
         enabled: true
     ```
+
+    **Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dns_monitoring_ports` option:
+
+    ```yaml
+    network_config:
+        enabled: true
+        dns_monitoring_ports:
+            - 53
+            - 5353
+    ```
+
 3. [Restart the Agent][2].
 
     For PowerShell (`powershell.exe`):
@@ -224,6 +245,16 @@ To enable Cloud Network Monitoring with Kubernetes using Helm, add the below to 
       enabled: true
   ```
 
+**Optional**: To monitor DNS traffic on non-standard ports (Agent v7.76.0+), add the `dnsMonitoringPorts` option:
+
+  ```yaml
+  datadog:
+    networkMonitoring:
+      enabled: true
+      dnsMonitoringPorts:
+        - 53
+        - 5353
+  ```
 
 You may require one of the following additional steps depending on your environment:
 
@@ -573,7 +604,7 @@ To enable Cloud Network Monitoring on ECS Fargate, use the following instruction
 {{% /tab %}}
 {{< /tabs >}}
 
-{{< site-region region="us,us3,us5,eu" >}}
+{{< site-region region="us,us3,us5,eu,uk1" >}}
 ### Enhanced resolution
 
 Optionally, enable resource collection for cloud integrations to allow Cloud Network Monitoring to discover cloud-managed entities.
@@ -590,7 +621,7 @@ For additional information around these capabilities, see [Cloud service enhance
 
 ### Failed connections 
 
-Failed Connections allows collection and reporting of TCP failures including [resets, refusals, and timeouts][14]. This feature is enabled by default in Agent version `7.59+`, and it is accessible on the [CNM Analytics][15] page in the **Customize** menu by turning on the **Failures** toggle.
+Failed Connections allows collection and reporting of TCP failures including [resets, refusals, and timeouts][14]. This feature is enabled by default in Agent version `7.59+`, and it is accessible on the [CNM Analytics][15] page in the {{< ui >}}Customize{{< /ui >}} menu by turning on the {{< ui >}}Failures{{< /ui >}} toggle.
 
 **Note**: If some Agents in your infrastructure are running a version earlier than `7.59`, you might encounter failures being under-reported. CNM advises maintaining the same Agent version across _all_ hosts.
 

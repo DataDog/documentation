@@ -20,104 +20,121 @@ description: Instrumenter votre code pour améliorer ses performances
 further_reading:
 - link: https://app.datadoghq.com/release-notes?category=APM
   tag: Notes de version
-  text: Découvrez les dernières versions de la solution APM Datadog (connexion à l'application
+  text: Découvrez les dernières versions de Datadog APM ! (Connexion à l'application
     requise)
+- link: https://learn.datadoghq.com/courses/getting-started-apm
+  tag: Centre d'apprentissage
+  text: Commencer avec les métriques et les traces APM
 - link: https://www.datadoghq.com/blog/monitor-rust-otel/
   tag: Blog
   text: Comment surveiller vos applications Rust avec OpenTelemetry
 - link: https://www.datadoghq.com/blog/span-based-metrics/
   tag: Blog
-  text: Générer des métriques basées sur des spans pour suivre les tendances historiques
-    relatives aux performances des applications
+  text: Générez des métriques basées sur les spans pour suivre les tendances historiques
+    de la performance des applications.
 - link: https://www.datadoghq.com/blog/apm-security-view/
   tag: Blog
   text: Gagner en visibilité sur les risques, vulnérabilités et attaques avec la vue
     Security d'APM
 - link: https://www.datadoghq.com/blog/monitor-azure-app-service-linux/
   tag: Blog
-  text: Surveiller vos applications Web Linux sur Azure App Service avec Datadog
+  text: Surveillez vos applications web Linux sur Azure App Service avec Datadog.
 - link: https://www.datadoghq.com/blog/monitor-apis-datadog-api-catalog/
   tag: Blog
-  text: Gérez les performances, la sécurité et la propriété des API avec le catalogue
-    des API de Datadog
+  text: Gérez la performance, la sécurité et la propriété des API avec Datadog API
+    Catalog.
 - link: https://www.datadoghq.com/blog/software-catalog/
   tag: Blog
-  text: Améliorez l'expérience développeur et la collaboration avec Software Catalog
+  text: Améliorez l'expérience des développeurs et la collaboration grâce à Software
+    Catalog.
+- link: https://www.datadoghq.com/blog/datadog-csi-driver/
+  tag: Blog
+  text: Apportez une observabilité haute performance aux environnements Kubernetes
+    sécurisés avec Datadog's CSI driver.
 - link: https://dtdg.co/fe
   tag: Validation des bases
   text: Participer à une session interactive pour maîtriser la solution APM
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: Blog
+  text: Résolvez les problèmes plus rapidement avec l'intégration du code source GitLab
+    dans Datadog.
+- link: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing
+  tag: Blog
+  text: Tracez les charges de travail Google Pub/Sub dans Cloud Run avec Datadog.
+- link: https://www.datadoghq.com/blog/analyzing-roundtrip-query-latency
+  tag: Blog
+  text: Analyse de la latence des requêtes aller-retour
 title: APM
 ---
-
 {{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/381554158/rendition/1080p/file.mp4?loc=external&signature=e19b4e64632c3b1a42b11cb27fca2682dfadecd4690774c005ba2f5079b6a416" poster="/images/poster/tracing.png" >}}
 
 </br>
 
 
-{{< learning-center-callout header="Participez un webinar de formation" hide_image="true" btn_title="Inscrivez-vous" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
-  Participez à une session d'initiation ou intermédiaire pour découvrir comment la solution APM de Datadog fournit un traçage distribué au niveau du code, des applications web et mobiles jusqu'aux services back-end et bases de données, grâce à l'intelligence artificielle.
-{{< /learning-center-callout >}}"
+{{< learning-center-callout header="Participez à une session de webinaire de formation." hide_image="true" btn_title="Inscrivez-vous." btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=APM">}}
+  Participez à une session de formation d’introduction ou intermédiaire pour découvrir comment Datadog APM propose un traçage distribué au niveau du code, alimenté par l’IA, depuis les applications web et mobiles jusqu’aux services backend et aux bases de données.
+{{< /learning-center-callout >}}
 
-## Section Overview
+## Aperçu {#overview}
 
-La solution Application Performance Monitoring (APM) de Datadog vous permet dʼanalyser vos applications en détail, et ainsi d'identifier les goulets d'étranglement, de résoudre les problèmes et d'optimiser vos services. Grâce au tracing distribué, à des dashboards prêts à l'emploi et à la corrélation fluide avec d'autres données de télémétrie, la solution APM de Datadog vous permet de garantir les meilleures performances et la meilleure expérience utilisateur pour vos applications.
+La solution Application Performance Monitoring (APM) de Datadog vous permet dʼanalyser vos applications en détail, et ainsi d'identifier les goulets d'étranglement, de résoudre les problèmes et d'optimiser vos services. Avec le traçage distribué, des tableaux de bord prêts à l'emploi et une corrélation transparente avec d'autres données de télémétrie, Datadog APM aide à garantir la meilleure performance et expérience utilisateur possible pour vos applications.
 
 Pour découvrir la terminologie en lien avec la solution APM Datadog, consultez la section [Termes et concepts d'APM][1].
 
-## Prise en main
+## Commencer {#getting-started}
 
-Afin de bien débuter avec la solution APM de Datadog, essayez l'instrumentation en une seule étape. Cette approche consiste à installer l'Agent Datadog et à instrumenter votre application en une seule étape, sans aucune autre étape de configuration. Pour en savoir plus, référez-vous à la section relative à [l'instrumentation en une seule étape][27].
+La manière la plus simple de démarrer avec Datadog APM consiste à utiliser Single Step Instrumentation. Cette approche installe l'Agent Datadog et instrumente votre application en une seule étape, sans étapes de configuration supplémentaires requises. Pour en savoir plus, lisez [Single Step Instrumentation][27].
 
-Afin de s'adapter aux configurations qui nécessitent davantage de personnalisation, Datadog prend en charge l'instrumentation personnalisée avec les bibliothèques de tracing de Datadog. Pour en savoir plus, référez-vous à la section relative à [l'instrumentation d'application][2].
+Pour les configurations nécessitant davantage de personnalisation, Datadog prend en charge l'instrumentation personnalisée avec les Datadog SDKs et [Dynamic Instrumentation][30] dans l'interface utilisateur de Datadog. Pour en savoir plus, lisez [Application Instrumentation][2].
 
-<div class="alert alert-info">Si vous débutez avec la solution APM de Datadog, lisez <a href="https://docs.datadoghq.com/getting_started/tracing/">Débuter avec le tracing APM</a> pour apprendre à envoyer votre première trace vers Datadog.</div>
+<div class="alert alert-info">Si vous êtes nouveau dans Datadog APM, lisez <a href="https://docs.datadoghq.com/getting_started/tracing/">Getting Started with APM</a> pour apprendre à envoyer votre première trace à Datadog.</div>
 
-## Cas d'utilisation
+## Cas d'utilisation {#use-cases}
 
 Découvrez comment la solution APM de Datadog peut vous permettre de répondre à vos cas d'utilisation :
 
-| Vous voulez...| Ce que la solution APM de Datadog peut faire pour vous aider |
+| Vous souhaitez...| Comment Datadog APM peut aider |
 | ----------- | ----------- |
-| Comprenez comment les requêtes circulent dans votre système. | Utilisez le [Trace Explorer][21] pour interroger et visualiser les traces de bout en bout dans les services distribués. |
-| Surveillez la santé et les performances de chacun de vos services. | Référez-vous aux pages relatives aux [services][26] et aux [ressources][28] pour évaluer l'état de santé de vos services en analysant les métriques de performances, en suivant les déploiements et en identifiant les ressources problématiques. |
-| Corréler des traces avec DBM, RUM, les logs, synthetics et les profils. | [Corrélez les données de l'APM avec d'autres données télémétriques][20] pour donner un contexte à vos données en vue d'une analyse plus complète. |
-| Contrôlez la façon dont les données circulent dans Datadog. | Utilisez les [paramètres d'ingestion][6] pour régler la configuration et les taux d'échantillonnage de l'ingestion par service et par ressource. Utilisez les [filtres de rétention][7] pour choisir les spans à conserver pendant 15 jours. |
+| Comprendre comment les requêtes circulent dans votre système. | Utilisez le [Trace Explorer][21] pour interroger et visualiser les traces de bout en bout à travers des services distribués. |
+| Surveillez la santé et la performance des services individuels. | Utilisez les [pages de service][26] et [pages de ressources][28] pour évaluer la santé des services en analysant les métriques de performance, en suivant les déploiements et en identifiant les ressources problématiques. |
+| Corrélez les traces avec DBM, RUM, les journaux, les synthétiques et les profils. | Corrélation des traces avec d'autres données de télémétrie |
+| Contrôlez comment les données entrent dans Datadog. | Utilisez les [Contrôles d'Ingestion][6] pour ajuster la configuration d'ingestion et les taux d'échantillonnage par service et ressource. Utilisez les [Filtres de rétention][7] pour choisir quelles spans conserver pendant 15 jours. |
 
-### Trace Explorer
+### Trace Explorer {#trace-explorer}
 
-Le [Trace Explorer][21] vous permet de rechercher et d'analyser votre traces en temps réel. Identifiez les goulets d'étranglement en matière de performances, résolvez les erreurs et consultez les logs et les métriques pour comprendre le contexte complet d'un problème.
+Le [Trace Explorer][21] vous permet de rechercher et d'analyser vos traces en temps réel. Identifiez les goulets d'étranglement de performance, dépannez les erreurs et passez aux journaux et métriques connexes pour comprendre le contexte complet autour de tout problème.
 
-{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Vue du Trace explorer." style="width:100%;" >}}
+{{< img src="/tracing/trace_explorer/trace_explorer.png" alt="Vue de l'explorateur de traces." style="width:100%;" >}}
 
-### Page Service
+### Page de service {#service-page}
 
 La [page des services][26] vous aide à surveiller les performances de vos services et [comparer les versions lors des déploiements][15].
 
-{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions on the Service Page" style="width:100%;">}}
+{{< img src="tracing/deployment_tracking/VersionComparison.png" alt="Versions sur la page de service" style="width:100%;">}}
 
-### Corréler des traces avec dʼautres données de télémétrie
+### Corréler les traces avec d'autres télémetries {#correlating-traces-with-other-telemetry}
 
 La solution APM de Datadog s'intègre parfaitement aux logs, à la surveillance des utilisateurs réels (RUM), à la surveillance Synthetic, entre autres :
 
-- [Visualisez les logs de votre application côte à côte avec des traces][9] pour retrouver des logs correspondant à des requêtes, des services ou des versions spécifiques.
-- [Associer les sessions RUM aux traces du backend][10] pour comprendre comment les performances du backend affectent l'expérience de l'utilisateur.
-- [Associez les tests Synthetic à des traces][11] pour résoudre les problèmes liés aux requêtes du frontend et du backend.
+- [Affichez vos journaux d'application côte à côte avec les traces][9] pour trouver des journaux pour des requêtes, services ou versions spécifiques.
+- [Associez les sessions RUM avec les traces backend][10] pour comprendre comment la performance backend affecte l'expérience utilisateur.
+- [Associez les tests synthétiques avec les traces][11] pour résoudre les échecs à travers les requêtes frontend et backend.
 
-{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Associer vos logs à vos traces" style="width:100%;">}}
+{{< img src="tracing/index/ConnectLogsWithTraces.png" alt="Connectez les journaux et les traces." style="width:100%;">}}
 
-### Paramètres d'ingestion et filtres de rétention
+### Contrôles d'ingestion et filtres de rétention {#ingestion-controls-and-retention-filters}
 
 Les traces démarrent dans vos applications instrumentées et circulent dans Datadog.
 
-La solution APM de Datadog fournit des outils pour gérer le volume et la rétention de vos données de trace. Utilisez des [paramètres d'ingestion][6] pour ajuster les taux d’échantillonnage et des [filtres de rétention][7] pour contrôler les spans à stocker.
+Datadog APM fournit des outils pour gérer le volume et la rétention de vos données de trace. Utilisez [Contrôles d'ingestion][6] pour ajuster les taux d'échantillonnage et [filtres de rétention][7] pour contrôler quelles spans sont stockées.
 
-{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flux de données dans la solution APM de Datadog." style="width:100%;" >}}
+{{< img src="/tracing/apm_lifecycle/apm_lifecycle_0.png" alt="Flux de données à travers Datadog APM." style="width:100%;" >}}
 
-## Dépannage
+## Dépannage {#troubleshooting}
 
 En cas de problème, vous pouvez consulter le guide [Dépannage d'APM][29].
 
-## Pour aller plus loin
+## Lectures complémentaires {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -150,3 +167,4 @@ En cas de problème, vous pouvez consulter le guide [Dépannage d'APM][29].
 [27]: /fr/tracing/trace_collection/single-step-apm/
 [28]: /fr/tracing/services/resource_page/
 [29]: /fr/tracing/troubleshooting/
+[30]: /fr/tracing/dynamic_instrumentation/

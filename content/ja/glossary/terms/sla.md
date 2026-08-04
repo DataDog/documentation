@@ -1,4 +1,5 @@
 ---
+id: sla
 core_product:
 - slos
 title: サービスレベル契約 (SLA)

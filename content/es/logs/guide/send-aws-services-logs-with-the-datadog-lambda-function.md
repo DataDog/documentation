@@ -2,175 +2,304 @@
 further_reading:
 - link: /logs/explorer/
   tag: Documentación
-  text: Aprende a explorar tus logs
+  text: Aprende a explorar tus registros
 - link: /logs/explorer/#visualize
   tag: Documentación
-  text: Realizar análisis de los logs
+  text: Realizar análisis de registros
 - link: /logs/log_configuration/processors
   tag: Documentación
-  text: Aprende a procesar tus logs
-title: Enviar logs de servicios de AWS con la función Lambda de Datadog
+  text: Aprende a procesar tus registros
+- link: /logs/guide/reduce_data_transfer_fees
+  tag: Guía
+  text: Cómo enviar registros a Datadog mientras reduces las tarifas de transferencia
+    de datos
+- link: https://learn.datadoghq.com/courses/send-aws-logs
+  tag: Centro de Aprendizaje
+  text: Enviar registros de AWS
+title: Enviar registros de servicios de AWS con la función Lambda de Datadog
 ---
+Los registros de servicios de AWS se pueden recopilar con la función Lambda Forwarder de Datadog. Esta Lambda—que se activa en los buckets de S3, grupos de registros de CloudWatch y eventos de EventBridge—reenvía registros a Datadog.
 
-El servicio logs de AWS puede recopilarse con la función Lambda de Datadog Forwarder. Esta Lambda—que se activa en S3 Buckets, CloudWatch grupos log y eventos EventBridge—reenvía logs a Datadog.
+Para comenzar a recopilar registros de tus servicios de AWS:
 
-Para empezar a recoger logs de tus servicios AWS:
+1. Configura la [función Lambda Forwarder de Datadog][1] en tu cuenta de AWS.
+2. [Habilita el registro](#enable-logging-for-your-aws-service) para tu servicio de AWS (la mayoría de los servicios de AWS pueden registrar en un bucket de S3 o en un grupo de registros de CloudWatch).
+3. [Configura los disparadores](#set-up-triggers) que hacen que la función Lambda Forwarder se ejecute cuando hay nuevos registros que se deben reenviar. Hay dos formas de configurar los disparadores.
 
-1. Configura la [función Lambda de Datadog Forwarder][1] en tu cuenta AWS.
-2. [Habilita el registro](#enable-logging-for-your-AWS-servicio) para tu servicio AWS (la mayoría de los servicios AWS pueden loguear a un bucket S3 o CloudWatch Grupo log).
-3. [Configurar los disparadores](#set-up-triggers) que hacen que la Lambda Forwarder se ejecute cuando hay nuevos logs que reenviar. Hay dos maneras de Configurar los disparadores.
+**Notas**:
+   - Puedes usar [AWS PrivateLink][2] para enviar tus registros a través de una conexión privada.
+   - CloudFormation crea una política IAM que incluye `KMS:Decrypt` para todos los recursos, y no se alinea con las mejores prácticas de AWS Security Hub. Este permiso se utiliza para descifrar objetos de buckets de S3 cifrados con KMS para configurar la función Lambda, y la clave KMS utilizada para cifrar los buckets de S3 no se puede predecir. Puedes eliminar de forma segura este permiso después de que la instalación finalice con éxito.
 
-**Nota**: Si te encuentras en la región AWS `us-east-1`, aprovecha [Datadog-AWS Private Link][2].
+## Habilita el registro para tu servicio de AWS {#enable-logging-for-your-aws-service}
 
-**Nota**: Cloudformation crea una política IAM que incluye KMS:Decrypt para todos los recursos, y no se alinea con las mejores prácticas de AWS Security Hub. Este permiso se utiliza para descifrar objetos de buckets S3 cifrados con KMS para configurar la función Lambda, y no se puede predecir qué clave KMS se utiliza para cifrar los buckets S3. Puedes eliminar este permiso de forma segura una vez que la instalación haya finalizado correctamente.
+Cualquier servicio de AWS que genere registros en un bucket de S3 o en un grupo de registros de CloudWatch es compatible. Encuentra las instrucciones de configuración para los servicios más utilizados en la tabla a continuación:
 
-## Habilita el registro para tu servicio AWS
-
-Se admite cualquier servicio AWS que genere logs en un bucket S3 o un CloudWatch Grupo log. Encontrará instrucciones de configuración para los servicios en la siguiente tabla:
-
-| Servicio AWS                        | Activar generar logs del servicio AWS                                                                                    | Enviar AWS logs a Datadog                                                                                                     |
+| Servicio de AWS                        | Activar el registro del servicio de AWS                                                                                   | Enviar registros de AWS a Datadog                                                                                                     |
 | ---------------------------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| [API Gateway][3]                   | [Habilitar logs de Amazon API Gateway][4]                                                                            | Colección [manual][5] y [automática](#automatically-set-up-triggers) de log.                                                  |
-| [Cloudfront][6]                    | [Habilitar logs de Amazon CloudFront][7]                                                                             | Colección [manual][8] y [automática](#automatically-set-up-triggers) de log.                                                  |
-| [CloudTrail][9]                    | [Activar logs AWS CloudTrail][9]                                                                                | Colección [Manual][10] de log. Consulta [AWS Configuración para Cloud SIEM][11] si estás configurando AWS CloudTrail para Cloud SIEM. |
-| [DynamoDB][12]                     | [Habilitar logs de Amazon DynamoDB][13]                                                                              | Colección [Manual][14] de log.                                                                                                 |
-| [EC2][15]                          | `-`                                                                                                            | Utiliza [Datadog Agent ][15] para enviar tus logs a Datadog.                                                                    |
-| [ECS][16]                          | `-`                                                                                                            | [Utiliza la dirección Docker Agent para recoger tus logs][17].                                                                              |
-| [Elastic Balanceo de carga (ELB)][18] | [Habilitar logs de Amazon ELB][19]                                                                                   | Colección [manual][20] y [automática](#automatically-set-up-triggers) de log.                                                 |
-| [Lambda][21]                       | `-`                                                                                                            | Colección [manual][22] y [automática](#automatically-set-up-triggers) de log.                                                 |
-| [RDS][23]                          | [Habilitar logs de Amazon RDS][24]                                                                                   | Colección [Manual][25] de log.                                                                                                |
-| [Ruta 53][26]                     | [Habilitar logs de Amazon Ruta 53][27]                                                                              | Colección [Manual][28] de log.                                                                                                 |
-| [S3][29]                           | [Activar logs de Amazon S3][30]                                                                                    | Colección [manual][31] y [automática](#automatically-set-up-triggers) de log.                                                 |
-| [SNS] [32]                          | El SNS no proporciona logs, pero puede procesar logs y eventos que transitan por el servicio SNS. | Colección [Manual][33] de log.                                                                                                 |
-| [RedShift][34]                     | [Activar logs de Amazon Redshift][35]                                                                              | Colección [manual][36] y [automática](#automatically-set-up-triggers) de log.                                                 |
-| [Acceso verificado][37]              | [Activar logs del acceso verificado][38]                                                                              | Colección [Manual][39] de log.                                                                                                 |
-| [VPC][40]                          | [Habilitar logs de Amazon VPC][41]                                                                                   | Colección [Manual][42] de log.                                                                                                 |
-| [funciones Step][52]               | [Activar logs de funciones Amazon Step][53]                                                                        | Colección [Manual][54] de log.                                                                                                 |
-| [Cortafuegos de aplicaciones web][49]     | [Activar logs de Amazon WAF][50]                                                                                   | Colección [manual][51] y [automática](#automatically-set-up-triggers) de log.                                                                                               |
-| [MWAA][55]                         | [Activar logs de Amazon MWAA][56]                                                                                  | Colección [Manual][56] de log.                                                                                                 |
+| [API Gateway][3]                   | [Habilitar registros de Amazon API Gateway][4]                                                                            | [Manual][5] y recolección automática[ de registros](#automatically-set-up-triggers).                                                  |
+| [AppSync][64]                      | [Habilitar registros de AWS AppSync][65]                                                                                  | [Manual][65] y recolección automática[ de registros](#automatically-set-up-triggers).                                                  |
+| Lote                              | `-`                                                                                                            | [Recolección automática](#automatically-set-up-triggers) de registros.                                                  |
+| [Bedrock Agentcore][74]            | `-`                                                                                                            | [Recolección automática](#automatically-set-up-triggers) de registros.                                                  |
+| [Cloudfront][6]                    | [Habilitar registros de Amazon CloudFront][7]                                                                             | [Manual][8] y recolección automática[ de registros](#automatically-set-up-triggers).                                                  |
+| [CloudTrail][9]                    | [Habilitar registros de AWS CloudTrail][9]                                                                                | [Recolección manual y automática de registros][10]. Consulta [Configuración de AWS para Cloud SIEM][11] si estás configurando AWS CloudTrail para Cloud SIEM. |
+| [CodeBuild][66]                    | [Habilitar registros de AWS CodeBuild][67]                                                                                | [Recolección manual y automática de registros][67].                                                  |
+| [DMS][68]                          | [Habilitar los registros del Servicio de Migración de Bases de Datos de AWS][69]                                                               | [Recolección manual y automática de registros][69].                                                  |
+| [DocumentDB][70]                   | [Habilitar los registros de Amazon DocumentDB][71]                                                                            | [Recolección manual y automática de registros][71].                                                  |
+| [DynamoDB][12]                     | [Habilitar los registros de Amazon DynamoDB][13]                                                                              | [Recolección manual de registros][14].                                                                                                 |
+| [EC2][15]                          | `-`                                                                                                            | Utiliza el [Datadog Agent][15] para enviar tus registros a Datadog.                                                                    |
+| [ECS][16]                          | `-`                                                                                                            | Utiliza el Docker Agent para recopilar tus registros o [recolección manual y automática de registros.](#automatically-set-up-triggers)                                                                              |
+| [EKS][62]                          | [Habilitar los registros de Amazon EKS][63]                                                                                   | [Recolección manual y automática de registros][63].                                                 |
+| [Elastic Load Balancing (ELB)][18] | [Habilitar los registros de Amazon ELB][19]                                                                                   | [Recolección manual y automática de registros][20].                                                 |
+| [Glue][76]                         | [Habilitar los registros de AWS Glue][77]                                                                                     | [Recolección manual y automática de registros][77].                                                 |
+| [IoT Core][74]                     | [Habilitar los registros de Amazon IoT Core][75]                                                                              | [Recolección automática de registros.](#automatically-set-up-triggers)                                                                  |
+| [Lambda][21]                       | `-`                                                                                                            | [Recolección manual y automática de registros][22].                                                 |
+| [MWAA][55]                         | [Habilitar registros de Amazon MWAA][56]                                                                                  | [Recolección manual y automática de registros][56].                                                 |
+| [Network Firewall][57]             | [Habilitar registros de AWS Network Firewall][58]                                                                         | [Manual][58] y [recolección automática de registros.                                                 |
+| [PCS][75]                          | `-`                                                                                                            | [Colección](#automatically-set-up-triggers) automática de registros.                                                  |
+| [RDS][23]                          | [Habilitar registros de Amazon RDS][24]                                                                                   | [Recolección manual de registros][25].                                                                                                |
+| [RedShift][34]                     | [Habilitar registros de Amazon Redshift][35]                                                                              | [Manual][36] y [colección](#automatically-set-up-triggers) automática de registros.                                                 |
+| Redshift Serverless                | `-`                                                                                                            | [Colección](#automatically-set-up-triggers) automática de registros.                                                                  |
+| [Route 53][59]                     | Habilitar [registros de consultas DNS][60] de Amazon Route 53 y [registros de consultas de resolutor][73]                                                                                                                                                  | [Manual][61] y [colección](#automatically-set-up-triggers) automática de registros.                                                 |
+| [S3][29]                           | [Habilitar registros de Amazon S3][30]                                                                                    | [Manual][31] y [colección](#automatically-set-up-triggers) automática de registros.                                                 |
+| [SNS][32]                          | SNS no proporciona registros, pero puedes procesar registros y eventos que están transitando hacia el Servicio SNS. | [Manual][33] colección de registros.                                                                                                 |
+| SSM                                | `-`                                                                                                            | [Recolección](#automatically-set-up-triggers) automática de registros.                                                            |
+| [Step Functions][52]               | [Habilitar registros de Amazon Step Functions][53]                                                                        | [Recolección manual de registros][54].                                                                                                 |
+| [Verified Access][37]              | [Habilitar registros de Verified Access][38]                                                                              | [Manual][39] y [recolección automática de registros.](#automatically-set-up-triggers)                                                                                                 |
+| [VPC][40]                          | [Habilitar registros de Amazon VPC][41]                                                                                   | [Manual][42] y [recolección](#automatically-set-up-triggers) automática de registros.                                                                                                 |
+| [VPN][26]                          | [Habilitar registros de AWS VPN][72]                                                                                      | [Manual][27] y [recolección](#automatically-set-up-triggers) automática de registros.                                                                                                 |
+| [Web Application Firewall][49]     | [Habilitar registros de AWS WAF][50]                                                                                      | [Manual][51] y [recolección automática de registros.](#automatically-set-up-triggers)                                                 |
 
 
-## Establecer disparadores
 
-Existen dos opciones a la hora de configurar los disparadores en  la función Lambda de Datadog Forwarder:
+## Configurar disparadores {#set-up-triggers}
 
-- [Automáticamente](#automatically-set-up-triggers): Datadog recupera automáticamente los log de localización para el servicio AWS seleccionado y los añade como disparadores en la función Lambda de Datadog Forwarder. Datadog también mantiene actualizada la lista.
-- [Manualmente](#manually-set-up-triggers): Configura tu mismo cada disparador.
+Hay dos opciones al configurar disparadores en la función Lambda de Datadog Forwarder:
 
-### Configurar automáticamente los disparadores
+- [Automáticamente](#automatically-set-up-triggers): Datadog recupera automáticamente las ubicaciones de los registros para los servicios de AWS seleccionados y las agrega como disparadores en la función Lambda de Datadog Forwarder. Datadog también mantiene la lista actualizada.
+- [Manualmente](#manually-set-up-triggers): Configura cada disparador tú mismo.
 
-Datadog puede Configurar disparadores automáticamente la función Lambda de Datadog Forwarder para recopilar logs de AWS de las siguientes fuentes y localizaciones:
+### Configurar disparadores automáticamente {#automatically-set-up-triggers}
 
-| Origen                      | Localización       |
+Datadog puede configurar automáticamente disparadores en la función Lambda de Datadog Forwarder para recopilar registros de AWS. Sin embargo, la suscripción automática no admite la creación de disparadores en diferentes cuentas o regiones de AWS. Para escenarios donde los registros se publican en buckets de S3 en una cuenta separada, recomendamos crear manualmente un disparador en la misma cuenta que el bucket para sortear esta limitación.
+
+Las siguientes fuentes y ubicaciones son compatibles:
+
+| Fuente                      | Ubicación       |
 | --------------------------- | -------------- |
-| Logs de acceso a la API Gateway     | CloudWatch     |
-| Ejecución de logs de API Gateway  | CloudWatch     |
-| Logs de acceso de la aplicación ELB | S3             |
-| Logs de acceso a ELB clásico      | S3             |
-| Logs de acceso a CloudFront       | S3             |
-| Logs de Lambda                  | CloudWatch     |
-| Logs de Redshift               | S3             |
-| Logs de acceso S3              | S3             |
-| Funciones Step              | CloudWatch     |
-| Cortafuegos de aplicaciones web    | S3, CloudWatch |
+| Apache Airflow (MWAA)       | CloudWatch     |
+| Registros de Acceso de API Gateway     | CloudWatch     |
+| Registros de Ejecución de API Gateway  | CloudWatch     |
+| Registros de Acceso de ELB de Aplicación | S3             |
+| Registros de AppSync                | CloudWatch     |
+| Batch                       | CloudWatch     |
+| Registros de Bedrock Agentcore      | S3, CloudWatch |
+| Registros de Acceso de ELB Clásico     | S3             |
+| Registros de Acceso de CloudFront      | S3             |
+| Registros de Cloudtrail             | S3, CloudWatch |
+| Registros de CodeBuild              | S3, CloudWatch |
+| Registros de DMS                    | CloudWatch     |
+| Registros de DocumentDB             | CloudWatch     |
+| Registros de ECS                    | CloudWatch     |
+| Registros del Plano de Control de EKS      | CloudWatch     |
+| Registros de Insights de Contenedor de EKS | CloudWatch     |
+| Registros de Glue Jobs              | CloudWatch     |
+| Registros de Lambda                 | CloudWatch     |
+| Registros de Lambda@Edge            | CloudWatch     |
+| Registros de IoT Core                    | CloudWatch     |
+| Registros de Firewall de Red       | S3, CloudWatch |
+| Registros de PCS                    | CloudWatch     |
+| Registros de Redshift               | S3, CloudWatch |
+| Registros de Redshift Serverless    | CloudWatch     |
+| Registros de RDS                    | CloudWatch     |
+| Registros de Consultas DNS de Route53      | CloudWatch     |
+| Registros de consultas de Route53 Resolver | S3, CloudWatch |
+| Registros de Acceso a S3              | S3             |
+| Registros de Comandos de SSM            | CloudWatch     |
+| Step Functions              | CloudWatch     |
+| Registros de Acceso Verificado        | S3, CloudWatch |
+| Registros de Flujo de VPC               | S3, CloudWatch |
+| Registros de VPN                    | CloudWatch     |
+| Firewall de aplicaciones web    | S3, CloudWatch |
 
-**Nota**: Los [Filtros de suscripción][48] no son creados automáticamente por DatadogForwarder. Crealos directamente en un Grupo de Log.
+**Nota**: [Los filtros de suscripción][48] son creados automáticamente en los grupos de registros de CloudWatch por el DatadogForwarder, y se nombran en el formato `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
 
-1. Si aún no lo has hecho, configura la [función AWS Lambda de recopilación de logs de Datadog][6].
-2. Asegúrese de que la política de rol IAM utilizada para la [integración Datadog-AWS ][43] tiene los siguientes permisos. La información sobre cómo se utilizan estos permisos se puede encontrar en las descripciones a continuación:
+1. Si aún no lo has hecho, configura la [función Lambda de recopilación de registros de Datadog][1].
+2. Asegúrese de que la política del rol IAM utilizado para la [integración de Datadog-AWS][43] tenga los siguientes permisos. La información sobre cómo se utilizan estos permisos se puede encontrar en las descripciones a continuación:
 
     ```text
+    "airflow:GetEnvironment",
+    "airflow:ListEnvironments",
+    "appsync:ListGraphqlApis",
+    "batch:DescribeJobDefinitions",
     "cloudfront:GetDistributionConfig",
     "cloudfront:ListDistributions",
-    "elasticloadbalancing:DescribeLoadBalancers",
+    "cloudtrail:GetTrail",
+    "cloudtrail:ListTrails",
+    "codebuild:BatchGetProjects",
+    "codebuild:ListProjects",
+    "dms:DescribeReplicationInstances",
+    "ec2:DescribeFlowLogs",
+    "ec2:DescribeVerifiedAccessInstanceLoggingConfigurations",
+    "ec2:DescribeVpnConnections",
+    "ecs:DescribeTaskDefinition",
+    "ecs:ListTaskDefinitionFamilies",
+    "eks:DescribeCluster",
+    "eks:ListClusters",
     "elasticloadbalancing:DescribeLoadBalancerAttributes",
-    "lambda:List*",
+    "elasticloadbalancing:DescribeLoadBalancers",
+    "glue:BatchGetJobs",
+    "glue:GetJobs",
+    "glue:GetJob",
+    "glue:ListJobs",
+    "iot:GetV2LoggingOptions",
     "lambda:GetPolicy",
+    "lambda:InvokeFunction",
+    "lambda:List*",
+    "logs:DeleteSubscriptionFilter",
+    "logs:DescribeDeliveries",
+    "logs:DescribeDeliverySources",
+    "logs:DescribeLogGroups",
+    "logs:DescribeSubscriptionFilters",
+    "logs:GetDeliveryDestination",
+    "logs:PutSubscriptionFilter",
+    "network-firewall:DescribeLoggingConfiguration",
+    "network-firewall:ListFirewalls",
+    "rds:DescribeDBClusters",
+    "rds:DescribeDBInstances",
+    "redshift-serverless:ListNamespaces",
     "redshift:DescribeClusters",
     "redshift:DescribeLoggingStatus",
-    "s3:GetBucketLogging",
+    "route53:ListQueryLoggingConfigs",
+    "route53resolver:ListResolverQueryLogConfigs",
     "s3:GetBucketLocation",
+    "s3:GetBucketLogging",
     "s3:GetBucketNotification",
     "s3:ListAllMyBuckets",
     "s3:PutBucketNotification",
-    "states:ListStateMachines",
+    "ssm:GetServiceSetting",
+    "ssm:ListCommands",
     "states:DescribeStateMachine",
-    "wafv2:ListLoggingConfigurations",
-    "logs:PutSubscriptionFilter",
-    "logs:DeleteSubscriptionFilter",
-    "logs:DescribeSubscriptionFilters"
+    "states:ListStateMachines",
+    "wafv2:ListLoggingConfigurations"
     ```
 
-    | Permiso AWS | Descripción |
+    | AWS Permission                                              | Description                                                                  |
     | ----------------------------------------------------------- | ---------------------------------------------------------------------------- |
-    | `cloudfront:GetDistributionConfig` | Obtener el nombre del bucket de S3 que contiene los logs de acceso a CloudFront.             |
-    | `cloudfront:ListDistributions` | Lista todas las distribuciones de CloudFront.                                           |
-    | `elasticloadbalancing:`<br> `DescribeLoadBalancers` | Lista todos los equilibradores de carga.                                                     |
-    | `elasticloadbalancing:`<br> `DescribeLoadBalancerAttributes` | Obtener el nombre del bucket S3 que contiene los logs de acceso a ELB.                    |
-    | `lambda:List*` | Lista todas las funciones Lambda.                                                   |
-    | `lambda:GetPolicy` | Obtener la política de Lambda cuando los disparadores deben ser eliminados.                      |
-    | `redshift:DescribeClusters` | Lista todos los clústeres de Redshift.                                                  |
-    | `redshift:DescribeLoggingStatus` | Obtener el nombre del bucket S3 que contiene logs de Redshift.                      |
-    | `s3:GetBucketLogging` | Obtener el nombre del bucket S3 que contiene los logs de acceso S3.                     |
-    | `s3:GetBucketLocation` | Obtener la región del bucket S3 que contiene los logs de acceso S3.                   |
-    | `s3:GetBucketNotification` | Obtener las configuraciones de activación Lambda existentes.                                  |
-   {{< partial name="whats-next/whats-next.html" >}}
-    | `s3:PutBucketNotification` | Añadir o eliminar un disparador Lambda basado en el bucket S3 eventos.                    |
-    | `states:ListStateMachines` | Lista todas las funciones Step.                                                     |
-    | `states:DescribeStateMachine` | Obtener detalles de registro sobre una función Step.                                   |
-    | `wafv2:ListLoggingConfigurations` | Lista todas las configuraciones de registro del Cortafuegos de aplicaciones web.            |
-    | `logs:PutSubscriptionFilter` | Añadir un disparador Lambda basado en log de eventos de CloudWatch |
-    | `logs:DeleteSubscriptionFilter` | Eliminar un disparador Lambda basado en log de eventos de CloudWatch |
-    | `logs:DescribeSubscriptionFilters` | Lista los filtros de suscripción para el grupo log especificado.                  |
+    | `airflow:ListEnvironments`                                  | List all MWAA environment names.                                             |
+    | `airflow:GetEnvironment`                                    | Get information about a MWAA environment.                                    |
+    | `appsync:ListGraphqlApis`                                   | List all GraphQL Apis.                                                       |
+    | `batch:DescribeJobDefinitions`                              | List all Batch job definitions.                                              |
+    | `cloudfront:GetDistributionConfig`                          | Get the name of the S3 bucket containing CloudFront access logs.             |
+    | `cloudfront:ListDistributions`                              | List all CloudFront distributions.                                           |
+    | `cloudtrail:GetTrail`                                       | Get Trail logging information.                                               |
+    | `cloudtrail:ListTrails`                                     | List all Cloudtrail trails.                                                  |
+    | `codebuild:BatchGetProjects`                                | List all CodeBuild projects.                                                 |
+    | `codebuild:ListProjects`                                    | Get information on CodeBuild projects.                                       |
+    | `dms:DescribeReplicationInstances`                          | List all replication instances for DMS.                                      |
+    | `ec2:DescribeFlowLogs`                                      | List all Flow log configurations.                                            |
+    | `ec2:DescribeVerifiedAccessInstanceLoggingConfigurations`   | List all Verified Access instance logging configurations.                    |
+    | `ec2:DescribeVpnConnections`                                | List all VPN connections.                                                    |
+    | `ecs:DescribeTaskDefinition`                                | Describe ECS task definition.                                                |
+    | `ecs:ListTaskDefinitionFamilies`                            | List all task definition families.                                           |
+    | `elasticloadbalancing:`<br>`DescribeLoadBalancers`          | List all load balancers.                                                     |
+    | `elasticloadbalancing:`<br>`DescribeLoadBalancerAttributes` | Get the name of the S3 bucket containing ELB access logs.                    |
+    | `glue:BatchGetJobs`                                             | Get information about multiple Glue jobs.                                    |
+    | `glue:GetJob`                                               | Get information about a Glue job.                                            |
+    | `glue:GetJobs`                                              | List all Glue jobs.                                                          |
+    | `glue:ListJobs`                                             | List all Glue job names.                                                     |
+    | `eks:DescribeCluster`                                       | Describe an EKS cluster.                                                     |
+    | `eks:ListClusters`                                          | List all EKS clusters.                                                       |
+    | `iot:GetV2LoggingOptions`                                   | Get IoT V2 logging options.                                                  |
+    | `lambda:InvokeFunction`                                     | Invoke a Lambda function.                                                    |
+    | `lambda:List*`                                              | List all Lambda functions.                                                   |
+    | `lambda:GetPolicy`                                          | Get the Lambda policy when triggers are to be removed.                       |
+    | `logs:PutSubscriptionFilter`                                | Add a Lambda trigger based on CloudWatch Log events.                         |
+    | `logs:DeleteSubscriptionFilter`                             | Remove a Lambda trigger based on CloudWatch Log events.                      |
+    | `logs:DescribeLogGroups`                                    | Describe CloudWatch log groups.                                              |
+    | `logs:DescribeDeliveries`                                   | Describe CloudWatch log deliveries.                                          |
+    | `logs:DescribeDeliverySources`                              | Describe CloudWatch log delivery sources.                                    |
+    | `logs:DescribeSubscriptionFilters`                          | List the subscription filters for the specified log group.                   |
+    | `logs:GetDeliveryDestination`                               | Get a CloudWatch log delivery destination.                                   |
+    | `network-firewall:DescribeLoggingConfiguration`             | Get the logging configuration of a firewall.                                 |
+    | `network-firewall:ListFirewalls`                            | List all Network Firewall firewalls.                                         |
+    | `rds:DescribeDBClusters`                                    | List all RDS clusters.                                                       |
+    | `rds:DescribeDBInstances`                                   | List all RDS instances.                                                      |
+    | `redshift:DescribeClusters`                                 | List all Redshift clusters.                                                  |
+    | `redshift:DescribeLoggingStatus`                            | Get the name of the S3 bucket containing Redshift Logs.                      |
+    | `redshift-serverless:ListNamespaces`                        | List all Redshift Serverless namespaces.                                     |
+    | `route53:ListQueryLoggingConfigs`                           | List all DNS query logging configurations for Route 53.                      |
+    | `route53resolver:ListResolverQueryLogConfigs`               | List all Resolver query logging configurations for Route 53.                 |
+    | `s3:GetBucketLogging`                                       | Get the name of the S3 bucket containing S3 access logs.                     |
+    | `s3:GetBucketLocation`                                      | Get the region of the S3 bucket containing S3 access logs.                   |
+    | `s3:GetBucketNotification`                                  | Get existing Lambda trigger configurations.                                  |
+    | `s3:ListAllMyBuckets`                                       | List all S3 buckets.                                                         |
+    | `s3:PutBucketNotification`                                  | Add or remove a Lambda trigger based on S3 bucket events.                    |
+    | `ssm:GetServiceSetting`                                     | Get the SSM service setting for customer script log group name.              |
+    | `ssm:ListCommands`                                          | List all SSM commands.                                                       |
+    | `states:ListStateMachines`                                  | List all Step Functions.                                                     |
+    | `states:DescribeStateMachine`                               | Get logging details about a Step Function.                                   |
+    | `wafv2:ListLoggingConfigurations`                           | List all logging configurations of the Web Application Firewall.             |
 
-3. En la página [integración AWS][44], selecciona la cuenta AWS de la que desea recolectar logs y haga clic en la pestaña **Log Collection**.  
-   {{< img src="logs/AWS/aws_log_setup_step1.png" alt="La pestaña Log Collection de la página integración AWS para una cuenta AWS específica con instrucciones de enviar logs de servicio AWS y cuadro de texto para autosuscribir la función Lambda de Forwarder mediante el ingreso de ARN de la función Lambda de Forwarder" popup="true" style="width:90%;" >}}
-4. Introduzca el ARN de Lambda creada en la sección anterior y haga clic en **Add**.
-5. Seleccione los servicios de los que deseas recopilar logs y haz clic en **Save**. Para dejar de recopilar logs de un determinado servicio, anule la selección de la fuente de log.
-   {{< img src="logs/AWS/aws_log_setup_step2.png" alt="La pestaña Log Collection de la página integración AWS para una cuenta AWS específica con una función Lambda introdujó de manera exitosa Included ARNs y algunos de sus servicios habilitados en la fuente de log" popup="true" style="width:90%;" >}}
-6. Si tienes logs en varias regiones, debes crear funciones Lambda adicionales en esas regiones e introducirlas en esta página.
-7. Para dejar de recopilar todos los AWS logs , pase el ratón por encima de una Lambda y haga clic en el icono Eliminar. Se eliminarán todos los disparadores de esa función.
-8. A los pocos minutos de esta configuración inicial, tus AWS logs apareceran en el [log Explorer][45] de Datadog.
 
-### Configurar manualmente los disparadores
+3. En la [página de integración de AWS][44], selecciona la cuenta de AWS de la que deseas recopilar registros y haz clic en la pestaña **Recopilación de registros**.
+4. En la sección **Datadog Forwarder Lambda**, ingresa el ARN de la Lambda creada en la sección anterior y haz clic en **Agregar**. La función Lambda aparece en la tabla a continuación con su nombre, versión y región.
+5. En la sección **Autosuscripción de registros**, bajo **Fuentes de registros**, habilita los servicios de los cuales deseas recopilar registros activándolos. Para dejar de recopilar registros de un servicio en particular, desactiva la fuente de registro.
+6. (Opcional) En la sección **Filtros de etiquetas de fuente de registro**, puedes filtrar la recopilación de registros por etiquetas de recursos para cada fuente de registro. Selecciona una fuente de registro del menú desplegable y agrega etiquetas en el formato `key:value` para limitar qué registros de recursos se recopilan. **Nota**: Las etiquetas de recursos se convierten automáticamente a minúsculas para coincidir con las convenciones de la plataforma de Datadog. Define tus filtros de etiquetas en minúsculas para evitar desajustes.
+7. Si tienes registros en múltiples regiones, debes crear funciones Lambda adicionales en esas regiones y agregarlas en la sección **Datadog Forwarder Lambda**.
+8. Para dejar de recopilar todos los registros de AWS de una función Lambda específica, pasa el cursor sobre la Lambda en la tabla y haz clic en el ícono de eliminar. Se eliminan todos los disparadores para esa función.
+9. Dentro de unos minutos después de esta configuración inicial, tus registros de AWS aparecerán en el [Explorador de Registros de Datadog][45].
 
-#### Recopilar logs del grupo log de CloudWatch
+### Configura los disparadores manualmente {#manually-set-up-triggers}
 
-Si estas recopilando logs de un grupo log de CloudWatch, Configura el disparador de la [función Lambda de Datadog Forwarder][1] utilizando uno de los siguientes métodos:
+#### Recopilando registros del grupo de registros de CloudWatch {#collecting-logs-from-cloudwatch-log-group}
+
+Si estás recopilando registros de un grupo de registros de CloudWatch, configura el disparador para la [función Lambda de Datadog Forwarder][1] utilizando uno de los siguientes métodos:
 
 {{< tabs >}}
-{{% tab "AWS console" %}}
+{{% tab "Consola de AWS" %}}
 
-1. En la consola AWS, vaya a **Lambda**. 
-2. Haz clic en **Functions** y selecciona Datadog Forwarder .
-3. Haz clic en **Add trigger** y selecciona **CloudWatch Logs **.
-4. Selecciona el grupo log en el menú desplegable.
-5. Introduce un nombre para el filtro y, opcionalmente, especifique un patrón de filtrado.
-6. Haz clic en **Add** (Añadir).
-7. Ve a la [sección Datadog log][1] para explorar cualquier nuevo eventos log enviado a su grupo log.
+1. En la consola de AWS, ve a **Lambda**.
+2. Haz clic en **Funciones** y selecciona el Datadog Forwarder.
+3. Haz clic en **Agregar disparador** y selecciona **Registros de CloudWatch**.
+4. Selecciona el grupo de registros del menú desplegable.
+5. Ingresa un nombre para tu filtro y, opcionalmente, especifica un patrón de filtro.
+6. Haz clic en **Agregar**.
+7. Ve a la [sección de Registros de Datadog][1] para explorar cualquier nuevo evento de registro enviado a tu grupo de registros.
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Para los usuarios de Terraform, puedes aprovisionar y gestionar tus disparadores utilizando el recurso [aws_cloudwatch_log_subscription_filter][1]. Vea el código de ejemplo a continuación.
+Para los usuarios de Terraform, puedes aprovisionar y gestionar tus disparadores utilizando el recurso [aws_cloudwatch_log_subscription_filter][1]. Consulta el código de ejemplo a continuación.
 
 ```conf
+data "aws_cloudwatch_log_group" "some_log_group" {
+  name = "/some/log/group"
+}
+
+resource "aws_lambda_permission" "lambda_permission" {
+  action        = "lambda:InvokeFunction"
+  function_name = "datadog-forwarder" # this is the default but may be different in your case
+  principal     = "logs.amazonaws.com" # or logs.amazonaws.com.cn for China*
+  source_arn    = data.aws_cloudwatch_log_group.some_log_group.arn
+}
+
 resource "aws_cloudwatch_log_subscription_filter" "datadog_log_subscription_filter" {
-  name = "datadog_log_subscription_filter"
-  log_group_name = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /aws/lambda/my_lambda_name
-  destination_arn = <DATADOG_FORWARDER_ARN> # for example, arn:aws:lambda:us-east-1:123:function:datadog-forwarder
-  filter_pattern = ""
+  name            = "datadog_log_subscription_filter"
+  log_group_name  = <CLOUDWATCH_LOG_GROUP_NAME> # for example, /some/log/group
+  destination_arn = <DATADOG_FORWARDER_ARN> # for example,  arn:aws:lambda:us-east-1:123:function:datadog-forwarder
+  filter_pattern  = ""
 }
 ```
+\*{{% mainland-china-disclaimer %}}
 
 [1]: https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_subscription_filter
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-Para los usuarios de AWS CloudFormation, puedes aprovisionar y gestionar tus disparadores utilizando el recurso CloudFormation [AWS::logs::SubscriptionFilter][1]. Vea el código de ejemplo a continuación.
+Para los usuarios de AWS CloudFormation, pueden aprovisionar y gestionar sus disparadores utilizando el recurso de CloudFormation [AWS::Logs::SubscriptionFilter][1]. Consulta el código de ejemplo a continuación.
 
-El código de ejemplo también funciona para AWS [SAM][2] y [serverless Framework][3]. Para serverless Framework, coloque el código en la sección [resources][4] dentro de su `serverless.yml`.
+El código de muestra también funciona para AWS [SAM][2] y [Serverless Framework][3]. Para Serverless Framework, coloca el código en la sección [resources][4] dentro de tu `serverless.yml`.
 
 ```yaml
 Resources:
@@ -189,38 +318,38 @@ Resources:
 {{% /tab %}}
 {{< /tabs >}}
 
-#### Recopilación de logs de buckets S3
+#### Recopilando registros de buckets S3 {#collecting-logs-from-s3-buckets}
 
-Si estas recopilando logs de un bucket S3, Configurar el disparador a la [función Lambda de Datadog Forwarder][1] utilizando uno de los siguientes métodos:
+Si estás recolectando registros de un bucket S3, configura el disparador para la [función Lambda de Datadog Forwarder][1] utilizando uno de los siguientes métodos:
 
 {{< tabs >}}
-{{% tab "AWS Console" %}}
+{{% tab "Consola de AWS" %}}
 
-1. Una vez instalada  la función Lambda, añade manualmente un disparador en el bucket S3 que contiene tus logs en la consola AWS:
-  {{< img src="logs/aws/adding_trigger.png" alt="Añadir disparador" popup="true"style="width:80%;">}}
+1. Una vez que la función Lambda esté instalada, añade manualmente un disparador en el bucket S3 que contiene tus registros en la consola de AWS:
+  {{< img src="logs/aws/adding_trigger.png" alt="Añadiendo disparador" popup="true"style="width:80%;">}}
 
-2. Seleccione el bucket y siga las instrucciones de AWS:
-  {{< img src="logs/AWS/integration_lambda.png" alt="integración Lambda" popup="true" style="width:80%;">}}
+2. Selecciona el bucket y luego sigue las instrucciones de AWS:
+  {{< img src="logs/aws/integration_lambda.png" alt="Integration Lambda" popup="true" style="width:80%;">}}
 
-3. Establece el tipo correcto de evento en los buckets S3:
-  {{< img src="logs/AWS/object_created.png" alt="Objeto Creado" popup="true" style="width:80%;">}}
+3. Establece el tipo de evento correcto en los buckets S3:
+  {{< img src="logs/aws/object_created.png" alt="Objeto Creado" popup="true" style="width:80%;">}}
 
-¡Una vez hecho esto, entra en tu [sección Datadog Log][1] para empezar a explorar tus logs!
+Una vez hecho, ve a tu [sección de registros de Datadog][1] para comenzar a explorar tus registros.
 
 [1]: https://app.datadoghq.com/logs
 {{% /tab %}}
 {{% tab "Terraform" %}}
 
-Para los usuarios de Terraform, puedes aprovisionar y gestionar tus disparadores utilizando el recurso [aws_s3_bucket_notification][1]. Consulte el código de ejemplo a continuación.
+Para los usuarios de Terraform, pueden aprovisionar y gestionar sus disparadores utilizando el recurso [aws_s3_bucket_notification][1]. Consulta el código de muestra a continuación.
 
 ```conf
 resource "aws_s3_bucket_notification" "my_bucket_notification" {
   bucket = my_bucket
   lambda_function {
     lambda_function_arn = "<DATADOG_FORWARDER_ARN>"
-    events = ["s3:ObjectCreated:*"]
-    filter_prefix = "AWSLogs/"
-    filter_suffix = ".log"
+    events              = ["s3:ObjectCreated:*"]
+    filter_prefix       = "AWSLogs/"
+    filter_suffix       = ".log"
   }
 }
 ```
@@ -230,7 +359,7 @@ resource "aws_s3_bucket_notification" "my_bucket_notification" {
 {{% /tab %}}
 {{% tab "CloudFormation" %}}
 
-Para los usuarios de CloudFormation, puedes Configurar disparadores usando CloudFormation [NotificationConfiguration][1] para tu bucket S3. Consulte el código de ejemplo a continuación.
+Para los usuarios de CloudFormation, pueden configurar disparadores utilizando la [NotificationConfiguration][1] de CloudFormation para su bucket S3. Consulta el código de muestra a continuación.
 
 ```yaml
 Resources:
@@ -250,11 +379,14 @@ Resources:
 {{< /tabs >}}
 
 
+## Limpieza y filtrado {#scrubbing-and-filtering}
 
-## Depurar y filtrar
+Puedes limpiar correos electrónicos o direcciones IP de los registros enviados por la función Lambda, o definir una regla de limpieza personalizada [en los parámetros de Lambda][46].
+También puedes excluir o enviar solo aquellos registros que coincidan con un patrón específico utilizando la [opción de filtrado][47].
 
-Puedes depurar correos electrónicos o direcciones IP de logs enviados por la función Lambda, o definir una regla de depuración personalizada [en los parámetros de Lambda][46].
-También puedes excluir o enviar solo aquellos logs que coincidan con un patrón específico utilizando la [opción de filtrado][47].
+## Lectura adicional {#further-reading}
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /es/serverless/forwarder/
 [2]: /es/serverless/forwarder#aws-privatelink-support
@@ -281,8 +413,8 @@ También puedes excluir o enviar solo aquellos logs que coincidan con un patrón
 [23]: /es/integrations/amazon_rds/
 [24]: /es/integrations/amazon_rds/#enable-rds-logging
 [25]: /es/integrations/amazon_rds/#send-logs-to-datadog
-[26]: /es/integrations/amazon_route53/
-[27]: /es/integrations/amazon_route53/#enable-route53-logging
+[26]: /es/integrations/amazon-vpn/
+[27]: /es/integrations/amazon-vpn/#send-logs-to-datadog
 [28]: /es/integrations/amazon_route53/#send-logs-to-datadog
 [29]: /es/integrations/amazon_s3/
 [30]: /es/integrations/amazon_s3/#enable-s3-access-logs
@@ -290,11 +422,11 @@ También puedes excluir o enviar solo aquellos logs que coincidan con un patrón
 [32]: /es/integrations/amazon_sns/
 [33]: /es/integrations/amazon_sns/#send-logs-to-datadog
 [34]: /es/integrations/amazon_redshift/
-[35]: /es/integrations/amazon_redshift/#enable-aws-redshift-logging
-[36]: /es/integrations/amazon_redshift/#log-collection
-[37]: /es/integrations/aws_verified_access/
-[38]: /es/integrations/aws_verified_access/#enable-verified-access-logs
-[39]: /es/integrations/aws_verified_access/#log-collection
+[35]: /es/integrations/amazon-redshift/#enable-logging
+[36]: /es/integrations/amazon-redshift/#log-collection
+[37]: /es/integrations/amazon-verified-access/
+[38]: /es/integrations/amazon-verified-access/#enable-verified-access-logs
+[39]: /es/integrations/amazon-verified-access/#log-collection
 [40]: /es/integrations/amazon_vpc/
 [41]: /es/integrations/amazon_vpc/#enable-vpc-flow-log-logging
 [42]: /es/integrations/amazon_vpc/#log-collection
@@ -312,3 +444,26 @@ También puedes excluir o enviar solo aquellos logs que coincidan con un patrón
 [54]: /es/integrations/amazon_step_functions/#send-logs-to-datadog
 [55]: /es/integrations/amazon_mwaa/
 [56]: /es/integrations/amazon_mwaa/#log-collection
+[57]: /es/integrations/amazon_network_firewall/
+[58]: /es/integrations/amazon_network_firewall/#log-collection
+[59]: /es/integrations/amazon_route53/
+[60]: /es/integrations/amazon_route53/#enable-route53-dns-query-logging
+[61]: /es/integrations/amazon_route53/#send-logs-to-datadog
+[62]: /es/integrations/amazon-eks/
+[63]: /es/integrations/amazon-eks/#log-collection
+[64]: /es/integrations/amazon-appsync/
+[65]: /es/integrations/amazon-appsync/#send-logs-to-datadog
+[66]: /es/integrations/amazon-codebuild/
+[67]: /es/integrations/amazon-codebuild/#send-logs-to-datadog
+[68]: /es/integrations/amazon-dms/
+[69]: /es/integrations/amazon-dms/#send-logs-to-datadog
+[70]: /es/integrations/amazon-documentdb/
+[71]: /es/integrations/amazon-documentdb/#send-logs-to-datadog
+[72]: /es/integrations/amazon-vpn/#enable-logging
+[73]: /es/integrations/amazon_route53/#enable-route53-resolver-query-logging
+[74]: /es/integrations/amazon-iot/
+[75]: /es/integrations/amazon-iot/#enable-logging
+[74]: /es/integrations/amazon-bedrock/
+[75]: /es/integrations/amazon-pcs/
+[76]: /es/integrations/amazon_glue/
+[77]: /es/integrations/amazon_glue/#log-collection

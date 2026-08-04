@@ -1,4 +1,5 @@
 ---
+id: service_summary
 title: service summary
 core_product:
   - dashboards

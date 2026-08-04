@@ -19,7 +19,7 @@ Live diagrams provide real-time representation of your AWS or Azure infrastructu
 Snapshot diagrams offer a static view of your infrastructure that you can modify to suit your visual needs. Important characteristics include:
 
 - **Editable layout**: Allows you to move components and adjust the diagram's design.
-- **Custom additions**: You can add components from the Design tab.
+- **Custom additions**: You can add components from the {{< ui >}}Design{{< /ui >}} tab.
 - **Static representation**: The diagram doesn't update automatically to reflect infrastructure changes.
 
 ## Key differences

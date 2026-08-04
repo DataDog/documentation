@@ -21,11 +21,11 @@ further_reading:
 
 ## Overview
 
-By default, **Log Patterns** cluster logs with similar values for the `message` field, and group results by `Status` and `Service`. 
+By default, {{< ui >}}Log Patterns{{< /ui >}} cluster logs with similar values for the `message` field, and group results by `Status` and `Service`. 
 
 You can select different log attributes for clustering or grouping results.
 
-The **Patterns** view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues. The pattern detection is based on 10,000 log samples. Refine your search to see patterns limited to a specific subset of logs.
+The {{< ui >}}Patterns{{< /ui >}} view is helpful for detecting and filtering noisy error patterns that could cause you to miss other issues. The pattern detection is based on 10,000 log samples. Refine your search to see patterns limited to a specific subset of logs.
 
 {{< img src="logs/explorer/pattern_cluster.png" alt="The Log Explorer showing logs grouped by patterns" style="width:90%;" >}}
 
@@ -46,8 +46,8 @@ Use the Pattern Inspector to get a visual breakdown of the underlying values of 
 For example, if you are investigating an issue, you could see how many hosts are involved or what regions or data centers are impacted.
 
 1. Navigate to the [Log Explorer][3].
-2. Click **Patterns** in the **Group into** section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
-3. Click on an aggregate value to open the log pattern's side panel and see more details in the **Pattern Inspector** tab. 
+2. Click {{< ui >}}Patterns{{< /ui >}} in the {{< ui >}}Group into{{< /ui >}} section. In the list of patterns, the aggregate values in the message section are highlighted in yellow. Hover over an aggregate value to get a preview of the visual distribution of its values. 
+3. Click on an aggregate value to open the log pattern's side panel and see more details in the {{< ui >}}Pattern Inspector{{< /ui >}} tab. 
 
 {{< img src="logs/explorer/group/pattern_inspector_panel_1.png" alt="The pattern panel showing the Pattern Inspector tab" style="width:90%;" >}}
 
@@ -56,5 +56,5 @@ For example, if you are investigating an issue, you could see how many hosts are
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /logs/explorer/visualize/#list-aggregates-of-logs
-[2]: /logs/log_configuration/processors/#grok-parser
+[2]: /logs/log_configuration/processors/grok_parser/
 [3]: https://app.datadoghq.com/logs

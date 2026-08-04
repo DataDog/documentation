@@ -1,4 +1,5 @@
 ---
+id: service
 title: service
 core_product:
   - apm

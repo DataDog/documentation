@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "scheduled_description": "We will be performing maintenance on the API to improve performance for 40 minutes.",
+      "in_progress_description": "We are currently performing maintenance on the API to improve performance for 40 minutes."
+    },
+    "id": "6a167dcd-4975-9fda-c895-ee008c4256f9",
+    "type": "maintenances"
+  }
+}

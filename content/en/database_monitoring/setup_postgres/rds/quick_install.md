@@ -21,11 +21,11 @@ Database Monitoring Quick Install for RDS enables you to quickly set up Agents t
 ## Installation
 
 1. Navigate to the [Database Monitoring Setup][1] page.
-1. On the **Unmonitored Hosts** tab, click **Add Agent** for the RDS instance where you want to install the Agent.
-1. If you don't have an ECS cluster installed for your account and region, click **Create Cluster**.
-1. Select a security group from the **Security Group** dropdown list.
-1. Click **Select API Key**, select an API key from the list, and then click **Use API Key**.
-1. Click **Launch CloudFormation Stack in AWS Console**. A new page opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the configuration required to deploy the Agent to monitor your RDS instance.
+1. On the {{< ui >}}Unmonitored Hosts{{< /ui >}} tab, click {{< ui >}}Add Agent{{< /ui >}} for the RDS instance where you want to install the Agent.
+1. If you don't have an ECS cluster installed for your account and region, click {{< ui >}}Create Cluster{{< /ui >}}.
+1. Select a security group from the {{< ui >}}Security Group{{< /ui >}} dropdown list.
+1. Click {{< ui >}}Select API Key{{< /ui >}}, select an API key from the list, and then click {{< ui >}}Use API Key{{< /ui >}}.
+1. Click {{< ui >}}Launch CloudFormation Stack in AWS Console{{< /ui >}}. A new page opens, displaying the AWS CloudFormation screen. Use the provided CloudFormation template to create a stack. The template includes the configuration required to deploy the Agent to monitor your RDS instance.
 
 ## Further reading
 

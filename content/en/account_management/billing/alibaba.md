@@ -2,6 +2,11 @@
 title: Alibaba Integration Billing
 ---
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">This product is not supported for your selected <a href="https://docs.datadoghq.com/getting_started/site/">Datadog site</a> ({{< region-param key="dd_site_name" >}}).
+</div>
+{{< /site-region >}}
+
 ## Overview
 
 Datadog bills for all Alibaba Virtual Machines being monitored in Datadog. These machines are billable regardless of whether the Datadog Agent is installed. **You are not billed twice** if you are running the Agent on an Alibaba VM picked up by the Alibaba integration.
@@ -10,7 +15,7 @@ Other Alibaba resources (CDNs, Express Connect Instances, Aspara DBs, etc.) are 
 
 ## Alibaba VM exclusion
 
-Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the **Configuration** tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for **Optionally limit metrics collection to hosts with tag**:
+Use the [Datadog-Alibaba integration][1] tile to filter your VMs monitored by Datadog using [host tags][2]. Go to the {{< ui >}}Configuration{{< /ui >}} tab and edit an existing account or add a new one. Filtering for each account is controlled by clicking it and filling in the field for {{< ui >}}Optionally limit metrics collection to hosts with tag{{< /ui >}}:
 
 {{< img src="account_management/billing/alibaba_filter.png" alt="Alibaba VM Filter" >}}
 

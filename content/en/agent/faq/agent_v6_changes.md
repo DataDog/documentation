@@ -267,19 +267,19 @@ The major changes for Agent v6 on Windows are:
 
 The major changes for Agent v6 on MacOS are:
 
-* The _lifecycle commands_ (formerly `datadog-agent start`/`stop`/`restart`/`status`) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent systray app.
+* The _lifecycle commands_ (formerly `datadog-agent start`/`stop`/`restart`/`status`) are replaced by `launchctl` commands on the `com.datadoghq.agent` service, and should be run under the logged-in user. For these commands, you can also use the Datadog Agent {{< ui >}}systray app{{< /ui >}}.
 * All the other commands can still be run with the `datadog-agent` binary located in the `PATH` (`/usr/local/bin/`) by default.
 * The `info` command has been renamed to `status`.
-* The configuration GUI is a web-based application, which can be accessed by running the command `datadog-agent launch-gui` or using the systray app.
+* The configuration GUI is a web-based application, which can be accessed by running the command `datadog-agent launch-gui` or using the {{< ui >}}systray app{{< /ui >}}.
 
 **Example changes**:
 
 | Agent v5 Command                   | Agent v6 Command                                     | Description                    |
 |------------------------------------|------------------------------------------------------|--------------------------------|
-| `datadog-agent start`              | `launchctl start com.datadoghq.agent` or systray app | Start the Agent as a service   |
-| `datadog-agent stop`               | `launchctl stop com.datadoghq.agent` or systray app  | Stop the Agent service         |
-| `datadog-agent restart`            | _run `stop` then `start`_ or systray app             | Restart the Agent service      |
-| `datadog-agent status`             | `launchctl list com.datadoghq.agent` or systray app  | Print the Agent service status |
+| `datadog-agent start`              | `launchctl start com.datadoghq.agent` or {{< ui >}}systray app{{< /ui >}} | Start the Agent as a service   |
+| `datadog-agent stop`               | `launchctl stop com.datadoghq.agent` or {{< ui >}}systray app{{< /ui >}}  | Stop the Agent service         |
+| `datadog-agent restart`            | _run `stop` then `start`_ or {{< ui >}}systray app{{< /ui >}}             | Restart the Agent service      |
+| `datadog-agent status`             | `launchctl list com.datadoghq.agent` or {{< ui >}}systray app{{< /ui >}}  | Print the Agent service status |
 | `datadog-agent info`               | `datadog-agent status` or web GUI                    | Status page of a running Agent |
 | `datadog-agent flare`              | `datadog-agent flare` or web GUI                     | Send flare                     |
 | _not implemented_                  | `datadog-agent --help`                               | Display command usage          |

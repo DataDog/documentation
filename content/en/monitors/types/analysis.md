@@ -1,6 +1,7 @@
 ---
 title: Analysis Monitor
 description: "Alert on advanced log analysis with Analysis monitors that support querying multiple data sources, chaining data transformations, and running complex SQL queries."
+site_support_id: advanced_analysis
 further_reading:
 - link: "/notebooks/advanced_analysis/"
   tag: "Documentation"
@@ -14,47 +15,84 @@ further_reading:
 ---
 
 {{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources" btn_hidden="false" header="Join the Preview!">}}
-The Analysis monitor is in Preview. You must have access to the Notebooks advanced querying feature to use this monitor.
+The Analysis monitor is in Preview.
 {{< /callout >}}
 
 ## Overview
 
-<div class="alert alert-danger">Datasets that include Flex Logs are not supported.</div>
-
-Analysis monitors offer full access to Notebook analysis features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:
+Analysis monitors offer full access to Notebook analysis and DDSQL features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:
 
 - Query multiple data sources
 - Chain data transformations
 - Run complex SQL queries
 - Create sophisticated analysis workflows
 
+## Supported data sources
+
+Analysis monitors support a subset of the data sources available in Notebook Analysis cells and DDSQL queries. Because monitors evaluate their queries frequently, each data source is enabled only after it's validated to handle monitor-level query load.
+
+The following data sources are supported:
+
+- Audit
+- CI Pipelines
+- CI Tests
+- Events
+- Agent Observability
+- Logs
+- Metrics
+- NetFlow
+- Network
+- Reference Tables
+- RUM
+- Service Checks
+- Spans
+
+Published analyses are supported only when every data source they depend on is also supported.
+
+The following data sources are not supported:
+
+- Dora Metrics
+- Flex Logs
+- Infrastructure Resources
+
+
+If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source. For example:
+
+`Analysis is based on an unsupported datasource for monitoring: Infrastructure Resources`
+
 ## Monitor creation
 
-You can create an Analysis monitor in two ways:
+You can create an Analysis monitor in three ways:
 
 ### From the Monitors page
 
-To create an [Analysis monitor][1] in Datadog, use the main navigation: **Monitors > New Monitor > Analysis**.
+To create an [Analysis monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Analysis{{< /ui >}}.
 
 ### From a Notebook
 
 To create an Analysis monitor directly from a Notebook:
 
 1. Open a Notebook with an Analysis cell containing your desired query.
-2. In the Analysis cell, click the dropdown arrow next to **Save to Dashboard**.
-3. Select **Create monitor**.
+2. In the Analysis cell, click {{< ui >}}Send To{{< /ui >}}.
+3. Select {{< ui >}}Monitors{{< /ui >}}.
 
 This allows you to convert your exploratory analysis into an alerting monitor.
 
+### From the DDSQL Editor
+
+To create an Analysis monitor directly from the DDSQL Editor:
+
+1. Open the [DDSQL Editor][4] and select your desired query.
+2. Click the dropdown arrow next to {{< ui >}}Save to dashboard{{< /ui >}}.
+3. Select {{< ui >}}Create monitor{{< /ui >}}.
+
 ## Define the query
 
-Analysis monitors use the same query interface as Notebook Analysis cells.
-
-1. **Select your dataset**: Select from available Notebook Analysis cells.
-2. **Filter your dataset**: Filter your results by column.
+1. **Select your published analysis**: Select from available Notebook or DDSQL published analyses.
+2. **Filter your published analysis**: Filter your results by column.
 3. **Preview results**: View the output of your query before setting alert conditions.
 
-{{< img src="/monitors/monitor_types/dataset/dataset_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
+{{< img src="/monitors/monitor_types/analysis/analysis_monitor_config.png" alt="Analysis monitor configuration example" style="width:100%;" >}}
 
 ## Set alert conditions
 
@@ -68,7 +106,7 @@ For detailed instructions on alert messaging, see [Notifications][3].
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/monitors/create/dataset
+[1]: https://app.datadoghq.com/monitors/create/analysis
 [2]: /monitors/configuration/
 [3]: /monitors/notify/
-
+[4]: https://app.datadoghq.com/ddsql/editor

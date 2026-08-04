@@ -5,8 +5,9 @@
 {{ $lang := .lang }}
 {{ $api_version := .api_version }} {{/* "v1" or "v2" */}}
 {{ $endpoint_data := .endpoint_data }}
-{{ $api_v1_translate_actions := .api_v1_translate_actions }}
-{{ $api_v2_translate_actions := .api_v2_translate_actions }}
+{{ $endpoint_path := .endpoint_path }}
+{{ $method := .method }}
+{{ $translate_actions := .translate_actions }}
 
 {{/* Hugo page-level variables */}}
 {{ $type := $page.Type }}
@@ -14,29 +15,27 @@
 {{ $permalink := $page.Permalink }}
 {{ $relpermalink := $page.RelPermalink }}
 
-{{/* Get API action data from spec */}}
+{{/* Use localized text for search content, but the English OpenAPI summary for stable URLs. */}}
 {{ $operationId := $endpoint_data.operationId }}
-{{ $translate_actions_datafile := cond (eq $api_version "v1") $api_v1_translate_actions $api_v2_translate_actions }}
-{{ $action_data := index $translate_actions_datafile $operationId }}
-{{ $section_header := $action_data.summary }}
-{{ $section_content := $action_data.description }}
-{{ $full_url := print $permalink "#" ($section_header | anchorize) }}
-{{ $relpermalink = print $relpermalink "#" ($section_header | anchorize) }}
+{{ $localized_action := index ($translate_actions | default dict) $operationId | default dict }}
+{{ $canonical_summary := $endpoint_data.summary }}
+{{ $section_header := $localized_action.summary | default $canonical_summary }}
+{{ $section_content := $localized_action.description | default $endpoint_data.description }}
 
-{{/* API actions can have both v1 and v2 endpoints, which should be reflected in search results with updated links */}}
-{{ if eq $api_version "v1" }}
-    {{ $v2_version := index $api_v2_translate_actions $operationId }}
+{{/* Append "METHOD /path" so the endpoint's REST path is searchable. Kept at the end to stay out of the embedding's truncated input. */}}
+{{ $section_content = printf "%s\n\n%s %s" ($section_content | default "") (upper $method) $endpoint_path | strings.TrimSpace }}
 
-    {{ if ne $v2_version nil }}
-        {{ $hugo_context.Scratch.Add "duplicate_operation_ids" $operationId }}
-        {{ $full_url = print $full_url "-v1" }}
-        {{ $relpermalink = print $relpermalink "-v1" }}
-    {{ end }}
-{{ else if eq $api_version "v2" }}
-    {{ if in ($hugo_context.Scratch.Get "duplicate_operation_ids") $operationId }}
-        {{ $full_url = print $full_url "-v2" }}
-        {{ $relpermalink = print $relpermalink "-v2" }}
-    {{ end }}
+{{ $endpoint_slug := $canonical_summary | anchorize }}
+{{ $full_url := print $permalink $endpoint_slug "/" }}
+{{ $relpermalink = print $relpermalink $endpoint_slug "/" }}
+
+{{/* When the same operation exists in both versions, each record links to its version tab. */}}
+{{ $other_version := cond (eq $api_version "v1") "v2" "v1" }}
+{{ $other_endpoint := partial "api/load-specs.html" (dict "version" $other_version "lookup" $operationId) }}
+{{ if and $other_endpoint (eq ($other_endpoint.action.summary | anchorize) ($canonical_summary | anchorize)) }}
+    {{ $tab_anchor := (print $canonical_summary "-" $api_version) | anchorize }}
+    {{ $full_url = print $full_url "#" $tab_anchor }}
+    {{ $relpermalink = print $relpermalink "#" $tab_anchor }}
 {{ end }}
 
 {{/* Add the resulting object to the index */}}

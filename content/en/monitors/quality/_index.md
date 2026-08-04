@@ -3,12 +3,15 @@ title: Monitor Quality
 description: "Identify and fix common monitor misconfigurations including high alert volumes, missing recipients, and stuck alert states."
 disable_toc: false
 further_reading:
-- link: "https://app.datadoghq.com/monitors/quality"
-  tag: "App"
-  text: "Datadog Monitor Quality"
 - link: "/monitors/"
   tag: "Documentation"
   text: "Learn more about Datadog monitors"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
+- link: "https://app.datadoghq.com/monitors/quality"
+  tag: "App"
+  text: "Datadog Monitor Quality"
 ---
 
 ## Overview
@@ -17,7 +20,7 @@ The Monitor Quality feature in Datadog identifies common misconfigurations in mo
 
 ## View misconfigured monitors
 
-From the [**Manage Monitors**][8] page, click the [**Monitor Quality**][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor.
+From the [{{< ui >}}Manage Monitors{{< /ui >}}][8] page, click the [{{< ui >}}Monitor Quality{{< /ui >}}][7] tab to access a list of monitors that need improvement. Datadog automatically enables this feature after you create your first monitor.
 
 Filter and view the [Monitor Quality page][7] based on the teams, creators, services, or environments to organize and manage the list.
 

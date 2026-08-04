@@ -25,6 +25,19 @@ Due to these restrictions, the first time you enable Test Impact Analysis, you c
 
 Test Impact Analysis only takes into account the commit history and test code coverage information for the past month. Additionally, it does not take into account code coverage information that is generated more than one week after a commit was made.
 
+### Fewer tests skipped than expected
+
+There are edge cases where Test Impact Analysis skips fewer tests than expected.
+
+- A large Git history may result in slightly fewer tests being skipped, because Datadog analyzes up to the 100 most recent commits.
+- A commit that changes more than 5,000 files is not analyzed for impact, so the coverage information from that commit is ignored.
+- A test or suite that covers more than 16,000 files is never skipped.
+- A small fraction of tests (approximately 0.04%) may run even when they could have been skipped.
+
+If you use Ruby, you can increase the number of tests skipped by switching to suite-level granularity: set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite`. See [Test Parallelization configuration][8] for details.
+
+For more detail on these behaviors, see [Scale and accuracy limits][7].
+
 ### Synchronizing a fork through GitHub's UI
 
 [Synchronizing a fork through GitHub's UI][4] causes all tests to be run for the generated synchronization commit.
@@ -64,3 +77,5 @@ To avoid this issue in older versions of `dd-trace-py`, you can set the `DD_THIR
 [4]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/syncing-a-fork#syncing-a-fork-branch-from-the-web-ui
 [5]: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#pull_request
 [6]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits
+[7]: /tests/test_impact_analysis/#scale-and-accuracy-limits
+[8]: /tests/test_parallelization/configuration/#environment-variables

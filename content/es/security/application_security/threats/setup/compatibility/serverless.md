@@ -7,7 +7,11 @@ type: lenguaje de código múltiple
 
 App and API Protection proporciona funciones serverless para las siguientes plataformas y bibliotecas:
 
-{{< partial name="security-platform/appsec-libraries-serverless.html" >}}</br>
+{{< card-grid card_width="225px" image_width="200" >}}
+  {{< image-card href="/security/application_security/serverless/#aws-lambda" src="integrations_logos/amazon_lambda.png" alt="AWS Lambda" >}}
+  {{< image-card href="/security/application_security/serverless/#google-cloud-run" src="integrations_logos/google_cloud_run.png" alt="Google Cloud Run" >}}
+  {{< image-card href="/security/application_security/serverless/#azure-app-service" src="integrations_logos/azure_app_services.png" alt="Microsoft Azure App Service" >}}
+{{< /card-grid >}}</br>
 
 ## AWS Lambda
 **Nota**: La protección frente a amenazas no es compatible a través de la configuración remota. Utiliza los [flujos][5] para bloquear direcciones IP en tu [WAF][6].

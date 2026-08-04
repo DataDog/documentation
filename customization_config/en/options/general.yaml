@@ -16,6 +16,9 @@ options:
 - label: .NET
   id: dot_net
 
+- label: .NET MAUI
+  id: maui
+
 - label: Agent
   id: agent
 
@@ -331,8 +334,20 @@ options:
 - label: React Native
   id: react_native
 
+- label: Expo
+  id: expo
+  
+- label: CodePush
+  id: codepush
+
 - label: RedHat
   id: redhat
+
+- label: Roku
+  id: roku
+
+- label: Error Tracking
+  id: error_tracking
 
 - label: CentOS
   id: centos
@@ -412,6 +427,11 @@ options:
 - label: Traces
   id: traces
 
+- label: UI
+  id: ui
+- label: Unity
+  id: unity 
+
 - label: Wget
   id: wget
 
@@ -445,10 +465,46 @@ options:
 - label: Sumo Logic Hosted Collector
   id: sumo_logic_hosted_collector
 
+- label: Mobile
+  id: mobile
+
+- label: Multistep API
+  id: multistep
+
+- label: Test info
+  id: test_info
+
+- label: Test results
+  id: test_results
+
+- label: Step details
+  id: step_details
+
+- label: Local & Global
+  id: local_and_global
+
+- label: DNS
+  id: dns
+
+- label: SSL
+  id: ssl
+
+- label: WebSocket
+  id: websocket
+
+- label: UDP
+  id: udp
+
+- label: ICMP
+  id: icmp
+
+- label: gRPC
+  id: grpc
+
 - label: OpenTelemetry
   id: otel_api
 
-- label: Datadog
+- label: Datadog API
   id: dd_api
 
 - label: C++
@@ -456,3 +512,34 @@ options:
 
 - label: Elixir
   id: elixir
+
+- label: BigQuery
+  id: bigquery
+
+- label: Databricks
+  id: databricks
+
+- label: Redshift
+  id: redshift
+
+- label: Snowflake
+  id: snowflake
+
+- label: JVM
+  id: jvm
+
+- label: C
+  id: c
+
+- label: GraalVM Native Image
+  id: graalvm_native_image
+
+- label: Secrets Management
+  id: secrets_management
+
+- label: Environment Variables
+  id: environment_variables
+
+- label: ECS Fargate
+  id: ecs_fargate
+  

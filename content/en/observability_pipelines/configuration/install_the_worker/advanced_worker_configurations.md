@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
+This document explains [bootstrapping](#bootstrap-options) for the Observability Pipelines Worker, [other Worker configuration options](#other-worker-configuration-options), and how to [enable the health check endpoint and the liveness and readiness probes](#enable-the-health-check-endpoint-and-the-liveness-and-readiness-probes).
 
 ## Bootstrap Options
 
@@ -97,6 +97,10 @@ The following is a list of bootstrap options, their related pipeline environment
 : **Pipeline environment variable**: `DD_OP_THREADS`
 : **Priority**: `DD_OP_THREADS`
 : **Description**: The number of threads to use for processing (optional, default: the number of available cores).
+
+## Other Worker configuration options
+
+Use the `VECTOR_HOSTNAME` environment variable to assign a unique hostname and help you identify the Worker.
 
 ## Enable the health check endpoint and the liveness and readiness probes
 

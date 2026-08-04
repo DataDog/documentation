@@ -62,16 +62,7 @@ You can configure Incident Management to automatically create a dedicated Slack 
 
 To use incident channels, go to **[Incident Response > Incident Management > Settings > Integrations][3]** and enable **Create Slack channels for incidents**.
 
-The **channel name template** you define determines how Datadog names the incident channels it creates. The following variables are available in channel name templates:
-
-* `{{public_id}}`: Incident's numeric ID
-* `{{title}}`: Incident's title
-* `{{created}}`: Incident's creation date in format MM_DD_YYYY
-* `{{yyyy}}`: Incident's four-digit creation year
-* `{{mm}}`: Incident's two-digit creation month
-* `{{dd}}`: Incident's two-digit creation day of month
-* `{{random_adjective}}`: Random adjective
-* `{{random_noun}}`: Random noun
+The **channel name template** you define determines how Datadog names the incident channels it creates. For full descriptions, see [Variables available only in channel name templates][7].
 
 
 ### Message syncing (Slack mirroring)
@@ -114,6 +105,7 @@ Access all configuration options for Slack in Incident Management through the [*
 | **Send a Slack notification when a meeting starts**       | Notify the Slack channel when a meeting is started, with participants and a join link.<br><br>Provides convenient access to incident calls.     |
 | **Activate Bits AI in incident Slack channels**           | Enable AI features that use incident context from Datadog.<br><br>Applies to all incident types in the selected Slack workspace.                |
 | **Automatically archive Slack channels after resolution** | Archive incident Slack channels once the incident is resolved.<br><br>Helps reduce channel clutter.                                             |
+| **Customize incident action tray**                        | Customize which actions appear in the incident action tray.<br><br>Increases visibility of common actions.                                      |
 
 ## Global channel for incident updates
 
@@ -141,7 +133,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 
 ### Incident channel commands
 
-{{< site-region region="us,us3,us5,eu,ap1,ap2" >}}
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 | Command | Description |
 | ------- | ----------- |
 | `/datadog` | Open the incident action tray to perform common actions. |
@@ -156,7 +148,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 | `/datadog incident summary` | Get an AI-generated summary of the incident that is visible only to you. |
 {{< /site-region >}}
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 | Command | Description |
 | ------- | ----------- |
 | `/datadog` | Open the incident action tray to perform common actions. |
@@ -182,3 +174,4 @@ You can view the full list of available Slack commands at any time by typing `/d
 [4]: /integrations/jira/
 [5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
+[7]: /incident_response/incident_management/setup_and_configuration/variables/#variables-available-only-in-channel-name-templates

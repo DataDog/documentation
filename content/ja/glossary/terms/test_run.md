@@ -1,4 +1,5 @@
 ---
+id: test_run
 core_product:
 - synthetic monitoring
 - ci-cd

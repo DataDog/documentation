@@ -20,7 +20,6 @@ Test Impact Analysis is only supported in the following versions and testing fra
 
 * `datadog-ci >= 1.0`
 * `Ruby >= 2.7`
-  * JRuby is not supported.
 * `rspec >= 3.0.0`
 * `minitest >= 5.0.0`
 * `cucumber >= 3.0.0`
@@ -48,7 +47,6 @@ The following limitations apply to how code coverage is collected:
 * **Non-Ruby files are not tracked by default**: Changes to non-Ruby files such as fixtures, YAML configuration, i18n translation files, or other data files are not detected by code coverage. Tests that read data from these files may be incorrectly skipped when these files change.
 * **Suite-level hooks**: Code coverage for suite-level hooks (for example, `before(:all)` or `before(:context)` in RSpec) is attributed to the entire test suite rather than individual tests. This may affect skip decisions for tests that depend on setup performed in these hooks.
 * **Forked processes**: Per-test code coverage only collects coverage for the main process. Tests that spawn child processes or use forked execution do not have coverage collected for code running in those processes.
-* **Constant references across files**: Accessing a constant defined in another file does not count as covered code. If a test's behavior depends on constants defined elsewhere, changes to those constants may not trigger the test to run. This is supported as an experimental feature. See [Static dependencies analysis](#static-dependencies-analysis-experimental) for more information.
 
 ### External dependencies
 
@@ -62,41 +60,67 @@ Tests that interact with external systems may be incorrectly skipped:
 
 When you encounter these limitations, consider the following approaches:
 
-* **Mark tests as unskippable**: For tests that make external calls, fork processes, or depend on global shared state, [mark them as unskippable](#marking-tests-as-unskippable) to ensure they always run.
-* **Configure tracked files**: If your tests depend on non-Ruby files like fixtures, i18n files, or configuration files, add these files to your [tracked files configuration][2]. This causes all tests to run when these files change.
+* **Mark tests as unskippable**: For tests that make external calls, fork processes, or depend on global shared state, [mark them as unskippable](#marking-tests-as-unskippable) so they always run.
+* **Add custom impacted files**: If you can determine which non-Ruby files affect a test or suite, [associate those files with the test or suite](#add-custom-impacted-files). When one of the files changes, Test Impact Analysis runs the associated tests instead of running the entire test set.
+* **Configure tracked files**: If a non-Ruby file can affect many tests and you cannot associate it with specific tests or suites, add the file to your [tracked files configuration][2]. This causes all tests to run when the file changes.
+
+## Add custom impacted files
+
+Custom impacted files are supported in `datadog-ci >= 1.36.0`.
+
+Ruby code coverage cannot observe files executed outside the Ruby process. For example, a Capybara test can load JavaScript, TypeScript, or templates in a browser. If one of these files changes without a covered Ruby file changing, Test Impact Analysis might skip a test that the change affects.
+
+Register these dependencies as custom impacted files to associate them with a test or suite. This gives Test Impact Analysis more complete coverage data while preserving test-skipping savings for unrelated tests.
+
+### Add files for a test
+
+Call `Datadog::CI.active_test.add_impacted_files` from a `before` or `after` hook. Use this API for files that affect an individual test. The following RSpec example registers frontend files collected from the browser:
+
+```ruby
+RSpec.configure do |config|
+  config.after do
+    loaded_frontend_files = javascript_files_loaded_by_browser.map do |path|
+      File.expand_path(path, Dir.pwd)
+    end
+
+    Datadog::CI.active_test&.add_impacted_files(loaded_frontend_files)
+  end
+end
+```
+
+### Add files for a suite
+
+Call `Datadog::CI.active_test_suite.add_impacted_files` for files that affect every test in a suite, such as shared frontend setup:
+
+```ruby
+RSpec.configure do |config|
+  config.before(:context) do
+    Datadog::CI.active_test_suite&.add_impacted_files(
+      [
+        "app/frontend/test_setup.js",
+        "app/frontend/components/shared_layout.tsx"
+      ]
+    )
+  end
+end
+```
+
+Test Impact Analysis uses test-level skipping by default. In this mode, add suite-level files before the first test in the suite starts. For RSpec, use a `before(:context)` hook. Adding suite-level files after a test starts raises a `RuntimeError`.
+
+### File path requirements
+
+Pass an array of paths to `add_impacted_files`. Each call adds files to those already registered. Datadog removes duplicate paths when it sends the coverage data.
+
+Paths must resolve inside the Git repository and use one of these formats:
+
+* A relative path from the repository root, such as `app/frontend/components/checkout.tsx`.
+* An absolute path to a file inside the repository.
+
+Paths must not contain redundant `.` or `..` segments. If a collector returns paths relative to the process working directory, convert them to normalized absolute paths with `File.expand_path(path, Dir.pwd)`. Datadog ignores absolute paths outside the repository. Files do not need to exist when you register them.
 
 ## Rails system tests
 
 Test Impact Analysis supports Rails system tests that use `ActionDispatch::SystemTestCase` or `ApplicationSystemTestCase`, as long as the server runs in the same process as the test code. This is the default behavior in Rails system tests.
-
-## Static dependencies analysis (experimental)
-
-By default, Ruby's code coverage does not track constant references across files. When a test accesses a constant defined in another file, changes to that constant's file may not trigger the test to run.
-
-Static dependencies analysis addresses this limitation by analyzing Ruby's compiled bytecode to find constant references and resolve them to source files.
-
-### Compatibility
-
-Static dependencies analysis requires:
-
-* `datadog-ci >= 1.26.0`
-* `Ruby >= 3.2`
-
-### Enabling static dependencies analysis
-
-To enable this experimental feature, set the following environment variable in your CI configuration:
-
-`DD_TEST_OPTIMIZATION_TIA_STATIC_DEPS_COVERAGE_ENABLED` (Optional)
-: Enable static dependencies analysis to track constant references across files.<br/>
-**Default**: `false`
-
-### Limitations
-
-The following limitations apply to static dependencies analysis:
-
-* **Requires eager loading**: Only works when your code is eager loaded in tests. If constants are loaded dynamically, their source locations cannot be resolved correctly.
-* **Dynamic lookups not supported**: Constants accessed through metaprogramming (such as `const_get` or `constantize`) are not detected.
-* **Unqualified constant names**: Constants accessed without their full namespace path may not be resolved correctly (for example `MyConst` instead of `MyModule::MyConst`)
 
 ## Unskippable tests
 
@@ -106,7 +130,7 @@ You can override the Test Impact Analysis's behavior and prevent specific tests 
 
 {{< tabs >}}
 {{% tab "RSpec" %}}
-To ensure that RSpec tests within a specific block are not skipped, add the metadata key `datadog_itr_unskippable` with the value `true` to any `describe`, `context`, or `it` block. This marks all tests in that block as unskippable.
+To prevent RSpec from skipping tests in a specific block, add the metadata key `datadog_itr_unskippable` with the value `true`. Add the key to any `describe`, `context`, or `it` block. This marks all tests in that block as unskippable.
 
 ```ruby
 # mark the whole file as unskippable

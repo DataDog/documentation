@@ -24,7 +24,7 @@ further_reading:
 
 Datadog collects Real User Monitoring (RUM) events from browser and mobile RUM SDKs that you can use to build a quick graph and compute performance indicator metrics such as Apdex. 
 
-To compute your Apdex score, you can use service monitoring from APM or user monitoring data from the RUM SDKs. This guide provides instructions on computing Apdex for an application with RUM data and the **Query Value** widget in a [Quick Graph][1].
+To compute your Apdex score, you can use service monitoring from APM or user monitoring data from the RUM SDKs. This guide provides instructions on computing Apdex for an application with RUM data and the {{< ui >}}Query Value{{< /ui >}} widget in a [Quick Graph][1].
 
 For more information about computing Apdex with service monitoring data, see [Configure Apdex score by service][2].
 
@@ -39,31 +39,31 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 
 ### Create a quick graph
 
-1. Navigate to **Dashboards** > **Quick Graph**.
+1. Navigate to {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Quick Graph{{< /ui >}}.
 2. Create three RUM queries:
    * [Query `a`](#query-a) for all satisfying page loads (RUM views where Largest Contentful Paint takes less than 2 seconds to load).
    * [Query `b`](#query-b) for all tolerated page loads (RUM views where Largest Contentful Paint takes less than 8 seconds to load).
    * [Query `c`](#query-c) for all page loads (all RUM views).
-3. In the **Formula** field, enter the Apdex formula `(a + 0.5 * b) / c`.
-4. Under **Select a visualization**, click **Query Value**. A query value widget appears.
-5. In the time frame selector, select **Past 1 Day**. By default, the widget displays in Global Time.
+3. In the {{< ui >}}Formula{{< /ui >}} field, enter the Apdex formula `(a + 0.5 * b) / c`.
+4. Under {{< ui >}}Select a visualization{{< /ui >}}, click {{< ui >}}Query Value{{< /ui >}}. A query value widget appears.
+5. In the time frame selector, select {{< ui >}}Past 1 Day{{< /ui >}}. By default, the widget displays in Global Time.
 6. Enter a name for your graph, such as `Apdex Score`.
-7. Optionally, export or copy and paste the quick graph to a dashboard or notebook, or click **Export** > **New Dashboard** to create a dashboard with this quick graph. 
+7. Optionally, export or copy and paste the quick graph to a dashboard or notebook, or click {{< ui >}}Export{{< /ui >}} > {{< ui >}}New Dashboard{{< /ui >}} to create a dashboard with this quick graph. 
 
 #### Query A
 
-1. In **Graph your data**, select `RUM` as the data source for query `a` and enter `@view.largest_contentful_paint:<2s`.
+1. In {{< ui >}}Graph your data{{< /ui >}}, select `RUM` as the data source for query `a` and enter `@view.largest_contentful_paint:<2s`.
 2. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:<2s` query appears next to `RUM` for query `a`.
 
 #### Query B
 
-1. To create query `b`, click **+ Add Query**.
+1. To create query `b`, click {{< ui >}}+ Add Query{{< /ui >}}.
 2. Select `RUM` as the data source for query `b` and enter `@view.largest_contentful_paint:[2s TO 8s]`.
 3. Press Enter or click **Update query** in the dropdown menu. The `Largest Contentful Paint:[2s - 8s]` query appears next to `RUM` for query `b`.
 
 #### Query C
 
-1. To create query `c`, click **+ Add Query**.
+1. To create query `c`, click {{< ui >}}+ Add Query{{< /ui >}}.
 2. Select `RUM` as the data source for query `c` and enter `@Type:view`.
 3. Press Enter or click **Update query** in the dropdown menu. The `Type:view` query appears next to `RUM` for query `c`.
 
@@ -71,7 +71,7 @@ The example below calculates an Apdex score using the Largest Contentful Paint p
 
 ### JSON configuration
 
-To access the JSON code for this graph, click the **JSON** tab next to **Edit**.
+To access the JSON code for this graph, click the {{< ui >}}JSON{{< /ui >}} tab next to {{< ui >}}Edit{{< /ui >}}.
 
 Click the copy icon on the right hand corner to copy the quick graph JSON to your clipboard.
 
@@ -144,7 +144,7 @@ In the example above, the Apdex score is relevant to the View RUM events and Lar
 
 You can also calculate other Apdex scores with the following methods:
 
-- To see the Apdex score trend over time, select `Timeseries` instead of `Query Value` in **Select your visualization**.
+- To see the Apdex score trend over time, select {{< ui >}}Timeseries{{< /ui >}} instead of {{< ui >}}Query Value{{< /ui >}} in {{< ui >}}Select your visualization{{< /ui >}}.
 - To compute the Apdex score for a specific application, add an additional `@application.name` query and update your formula.
 - To compute the Apdex score with another RUM performance metric such as First Contentful Paint, replace `@view.LargestContentfulPaint` with `@view.FirstContentfulPaint` in the queries.
 

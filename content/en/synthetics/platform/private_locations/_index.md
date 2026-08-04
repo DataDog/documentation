@@ -50,7 +50,7 @@ To use private locations for [Continuous Testing tests][23], you need v1.27.0 or
 
 Private locations are Docker containers that you can install anywhere inside your private network. You can access the [private location worker image][101] on Docker hub. It can run on a Linux-based OS or Windows OS if the [Docker engine][102] is available on your host and can run in Linux containers mode.**\***
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 
 If you require FIPS support, use the [FIPS compliant image][26] on Docker hub.
 
@@ -85,11 +85,13 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 | System | Requirements |
 |---|---|
-| OS | Windows Server 2022, Windows Server 2019, Windows Server 2016, or Windows 10. |
+| OS | Windows Server 2025, Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows 11, or Windows 10. |
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
-**Note**: For Windows Private Locations to run browser tests, the browsers (for example, Chrome, Edge, or Firefox) must be installed on the Windows computer.
+**Note:** Browser tests require browsers installed on the Windows server:
+- Windows Private Location 1.71.0 and later: Chrome and Firefox are included. Install Edge separately.
+- Windows Private Location 1.70.0 and earlier: Install Chrome, Edge, and Firefox.
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
@@ -110,7 +112,7 @@ To pull test configurations and push test results, the private location worker n
 
 | Port | Endpoint                               | Description                                                   |
 | ---- | -------------------------------------- | ------------------------------------------------------------- |
-| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
+| 443  | {{< region-param key=synthetics_intake_endpoint code="true" >}} | Used by the private location to pull test configurations and push test results to Datadog using an in-house protocol based on [AWS Signature Version 4 protocol][1].{{< site-region region="gov,gov2" >}} For versions `1.32.0` and later, requests from **Linux containerized Private Locations** are Federal Information Processing Standards (FIPS) compliant. For **Windows Private Locations**, FIPS-compliant encryption is supported in version `1.63.0` and later.{{< /site-region >}} |
 
 [1]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
@@ -126,16 +128,16 @@ Only users with the **Synthetics Private Locations Write** role can create priva
 
 ### Create your private location
 
-Navigate to [**Synthetic Monitoring** > **Settings** > **Private Locations**][22] and click **Add Private Location**.
+Navigate to [{{< ui >}}Synthetic Monitoring{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Private Locations{{< /ui >}}][22] and click {{< ui >}}Add Private Location{{< /ui >}}.
 
 {{< img src="synthetics/private_locations/synthetics_pl_add_1.png" alt="Create a private location" style="width:90%;">}}
 
 Fill out your private location details:
 
-1. Specify your private location's **Name** and **Description**.
-2. Add any **Tags** you would like to associate with your private location.
-3. Choose one of your existing **API Keys**. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click **Generate API key** to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
-4. Set access for your private location and click **Save Location and Generate Configuration File**. Datadog creates your private location and generates the associated configuration file.
+1. Specify your private location's {{< ui >}}Name{{< /ui >}} and {{< ui >}}Description{{< /ui >}}.
+2. Add any {{< ui >}}Tags{{< /ui >}} you would like to associate with your private location.
+3. Choose one of your existing {{< ui >}}API Keys{{< /ui >}}. Selecting an API key allows communication between your private location and Datadog. If you don't have an existing API key, click {{< ui >}}Generate API key{{< /ui >}} to create one on the dedicated page. Only `Name` and `API key` fields are mandatory.
+4. Set access for your private location and click {{< ui >}}Save Location and Generate Configuration File{{< /ui >}}. Datadog creates your private location and generates the associated configuration file.
 
 {{< img src="synthetics/private_locations/pl_creation_1.png" alt="Add details to private location" style="width:85%;">}}
 
@@ -153,7 +155,7 @@ If the traffic between your private location and Datadog has to go through a pro
 
 #### Blocking reserved IPs
 
-By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the **Block reserved IPs** button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
+By default, Synthetic users can create Synthetic tests on endpoints using any IP. If you want to prevent users from creating tests on sensitive internal IPs in your network, toggle the {{< ui >}}Block reserved IPs{{< /ui >}} button to block a default set of reserved IP ranges ([IPv4 address registry][6] and [IPv6 address registry][7]) and set the associated `enableDefaultBlockedIpRanges` parameter to `true` in your generated configuration file.
 
 If some of the endpoints you are willing to test are located within one or several of the blocked reserved IP ranges, you can add their IPs and/or CIDRs to the allowed lists to add the associated `allowedIPRanges` parameters to your generated configuration file.
 
@@ -165,7 +167,7 @@ After adding the appropriate options to your private location configuration file
 
 {{< img src="synthetics/private_locations/pl_view_file_1.png" alt="Configure reserved IPs" style="width:90%;">}}
 
-Datadog does not store your secrets, so store them locally before clicking **View Installation Instructions**.
+Datadog does not store your secrets, so store them locally before clicking {{< ui >}}View Installation Instructions{{< /ui >}}.
 
 **Note:** You need to be able to reference these secrets again if you decide to add more workers or install workers on another host.
 
@@ -178,7 +180,7 @@ Launch your private location on:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
+Run this command to boot your private location worker by mounting your configuration file to the container. The `$PWD` in the command below refers to the directory you run the command from, so replace it with the path to wherever your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is stored. The path before the colon (the location on your host machine) can be any directory; only the path after the colon (`/etc/datadog/synthetics-check-runner.json`) must match exactly, since that is where the worker expects to find its configuration inside the container:
 
 ```shell
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest
@@ -534,8 +536,8 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
 {{% tab "Windows via GUI" %}}
 
 1. Download the [`datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi` file][101] and run this file from the machine you want to install the private location on.
-1. Click **Next** on the welcome page, read the EULA, and accept the terms and conditions. Click **Next**.
-1. Modify where the application will be installed, or leave the default settings. Click **Next**.
+1. Click {{< ui >}}Next{{< /ui >}} on the welcome page, read the EULA, and accept the terms and conditions. Click {{< ui >}}Next{{< /ui >}}.
+1. Modify where the application will be installed, or leave the default settings. Click {{< ui >}}Next{{< /ui >}}.
 1. To configure your Windows private location, you can either:
    - Paste and enter a JSON configuration for your Datadog Synthetics Private Location Worker. This file is generated by Datadog when you [create a private location][102].
    - Browse or type a file path to a file containing a JSON configuration for your Datadog Synthetics Private Location Worker.
@@ -565,9 +567,9 @@ Because Datadog already integrates with Kubernetes and AWS, it is ready-made to 
    Enable FIPS 140-2 cryptographic mode
    : Enable FIPS-compliant cryptographic modules for secure communications. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
-1. Click **Next** and **Install** to start the installation process.
+1. Click {{< ui >}}Next{{< /ui >}} and {{< ui >}}Install{{< /ui >}} to start the installation process.
 
-Once the process is complete, click **Finish** on the installation completion page.
+Once the process is complete, click {{< ui >}}Finish{{< /ui >}} on the installation completion page.
 
 <div class="alert alert-danger">If you entered your JSON configuration, the Windows Service starts running using that configuration. If you did not enter your configuration, run <code>C:\\Program Files\Datadog-Synthetics\Synthetics\synthetics-pl-worker.exe --config=< PathToYourConfiguration ></code> from a command prompt or use the <code>start menu</code> shortcut to start the Synthetics Private Location Worker.</div>
 
@@ -603,6 +605,14 @@ Additional parameters can be added:
 | LOGGING_VERBOSITY | Configures the logging verbosity for the program. This affects console and file logs. | This affects console and file logs. | `-vvv` | `-v`: Error<br>`-vv`: Warning<br>`-vvv`: Info<br>`vvvv`: Debug |
 | LOGGING_MAXDAYS | Number of days to keep file logs on the system before deleting them. Can be any number when running an unattended installation. | 7 | `--logFileMaxDays` | Integer |
 | CONFIG_FILEPATH | This should be changed to the path to your Synthetics Private Location Worker JSON configuration file. Wrap this path in quotes if your path contains spaces. | <None> | `--config` | String |
+
+To enable FIPS 140-2 cryptographic mode, set the `ENABLE_FIPS=1` environment variable before running the worker executable. The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
+
+Example:
+
+```cmd
+set ENABLE_FIPS=1 && .\synthetics-pl-worker.exe --config "<PathToYourConfiguration>"
+```
 
 [101]: https://ddsynthetics-windows.s3.amazonaws.com/datadog-synthetics-worker-{{< synthetics-worker-version "synthetics-windows-pl" >}}.amd64.msi
 
@@ -656,6 +666,14 @@ Example:
 ```text
 set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
 ```
+
+To enable FIPS 140-2 cryptographic mode, include `ENABLE_FIPS=1`:
+
+```text
+set ENABLE_FIPS=1 && set NODE_EXTRA_CA_CERTS=C:\Program Files\Datadog-Synthetics\Synthetics\CACert.pem && .\synthetics-private-location.exe --config "C:\ProgramData\Datadog-Synthetics\Synthetics\worker-config.json"
+```
+
+The Windows host must be running in Windows FIPS mode to use this option. Available in Private Location v1.63.0 and above.
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -891,7 +909,7 @@ livenessProbe:
 
 ### Upgrade a private location image
 
-To upgrade an existing private location, click the **Gear** icon on the private location side panel and click **Installation instructions**.
+To upgrade an existing private location, click the {{< ui >}}Gear{{< /ui >}} icon on the private location side panel and click {{< ui >}}Installation instructions{{< /ui >}}.
 
 {{< img src="synthetics/private_locations/pl_edit_config.png" alt="Access the setup workflow for a private location" style="width:90%;" >}}
 
@@ -905,7 +923,7 @@ Once at least one private location worker starts reporting to Datadog, the priva
 
 {{< img src="synthetics/private_locations/pl_reporting.png" alt="Private location reporting" style="width:90%;">}}
 
-You can see a `REPORTING` health status and an associated monitor status displayed on the Private Locations list in the **Settings** page.
+You can see a `REPORTING` health status and an associated monitor status displayed on the Private Locations list in the {{< ui >}}Settings{{< /ui >}} page.
 
 {{< img src="synthetics/private_locations/pl_monitoring_table_reporting_1.png" alt="Private location health and monitor status" style="width:100%;">}}
 
@@ -917,9 +935,9 @@ Start testing your first internal endpoint by launching a fast test on one of yo
 
 ## Launch Synthetic tests from your private location
 
-Create an API, multistep API, or browser test, and select your **Private Locations** of interest.
+Create an API, multistep API, or browser test, and select your {{< ui >}}Private Locations{{< /ui >}} of interest.
 
-{{< img src="synthetics/private_locations/assign-test-pl-2.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
+{{< img src="synthetics/private_locations/assign-test-pl_3.png" alt="Assign Synthetic test to private location" style="width:90%;">}}
 
 Use private locations just like your Datadog managed locations: assign [Synthetic tests][29] to private locations, visualize test results, retrieve [Synthetic metrics][11], and more.
 
@@ -954,13 +972,13 @@ If you are using the [custom role feature][21], add your user to a custom role t
 Use [granular access control][24] to limit who has access to your test based on roles, teams, or individual users:
 
 1. Open the permissions section of the form.
-2. Click **Edit Access**.
+2. Click {{< ui >}}Edit Access{{< /ui >}}.
   {{< img src="synthetics/settings/grace_2.png" alt="Set permissions for your test from Private Locations configuration form" style="width:100%;" >}}
-3. Click **Restrict Access**.
+3. Click {{< ui >}}Restrict Access{{< /ui >}}.
 4. Select teams, roles, or users.
-5. Click **Add**.
+5. Click {{< ui >}}Add{{< /ui >}}.
 6. Select the level of access you want to associate with each of them.
-7. Click **Done**.
+7. Click {{< ui >}}Done{{< /ui >}}.
 
 <div class="alert alert-info">You can view results from a Private Location even without Viewer access to that Private Location. <br><br>
 Restricting a Private Location may limit other users from adding it to a test or editing it, but they are still able to see the location's name if it was added to a test by an authorized user.</div>

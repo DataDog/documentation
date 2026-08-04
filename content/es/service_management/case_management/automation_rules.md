@@ -18,7 +18,7 @@ Para configurar reglas de automatización:
 1. Selecciona **Automatización**.
 1. Haz clic en **New Rule** (Nueva regla).
 
-{{< img src="/service_management/case_management/automation_rules/create_case_automation_rule.png" alt="Captura de pantalla del diálogo de la creación de reglas de automatización en un sistema de gestión de casos. El diálogo incluye pasos para configurar cuándo evaluar la regla, especificar un flujo de trabajo para la coincidencia de reglas, dar un nombre a la regla y configurar su estado." style="width:100%;" >}}
+{{< img src="/incident_response/case_management/automation_rules/create_case_automation_rule.png" alt="Captura de pantalla del diálogo de la creación de reglas de automatización en un sistema de gestión de casos. El diálogo incluye pasos para configurar cuándo evaluar la regla, especificar un flujo de trabajo para la coincidencia de reglas, dar un nombre a la regla y configurar su estado." style="width:100%;" >}}
 
 Añade lo siguiente a tu configuración:
 

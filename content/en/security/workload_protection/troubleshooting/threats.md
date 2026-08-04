@@ -37,7 +37,7 @@ The following response appears when rules are propagated.
 Runtime self test: OK
 ```
 
-You can now see events coming from the `runtime-security-agent` in the Log Explorer.
+You can now see events coming from the `runtime-security-agent` in the {{< ui >}}Log Explorer{{< /ui >}}.
 
 {{< img src="security/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
 

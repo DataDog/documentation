@@ -30,9 +30,9 @@ If you created your pipeline in the UI:
 
 1. [Upgrade to Observability Pipelines Worker][1] version 2.11.
 1. Navigate to the [Pipeline page][2] for that pipeline and update your filter queries to the new syntax. See the [What's new in the updated search syntax](#whats-new-in-the-updated-search-syntax) section for more information.
-1. On the pipeline editor page, by default **Legacy Search Syntax** is enabled because your pipeline is running the search syntax of Worker 2.10 or older.
+1. On the pipeline editor page, by default {{< ui >}}Legacy Search Syntax{{< /ui >}} is enabled because your pipeline is running the search syntax of Worker 2.10 or older.
 {{< img src="observability_pipelines/guide/legacy_search_syntax_toggle.png" alt="The pipelines editor showing the legacy search toggle enabled" style="width:85%;" >}}
-1. After you've updated all queries in that pipeline, toggle the switch to **New Search Syntax** and deploy your pipeline.
+1. After you've updated all queries in that pipeline, toggle the switch to {{< ui >}}New Search Syntax{{< /ui >}} and deploy your pipeline.
 
 ### Created the pipeline using the API or Terraform
 
@@ -78,7 +78,7 @@ The following examples show matched logs, along with the legacy syntax and new s
 `{"message": "hEllo world"}`
 : **Legacy syntax**: `HELLO OR hello OR Hello`
 : **New syntax**: `hello`
-: **Difference**: With the new syntax, [free text search][4] is case insensitive.
+: **Difference**: With the new syntax, [free text search][6] is case insensitive.
 
 `{"user": "name"}`
 : **Legacy syntax**: `@user:(name OR Name OR nAme)`
@@ -129,3 +129,4 @@ See [Reserved attributes][3] for more information.
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [4]: /observability_pipelines/search_syntax/logs/#attribute-search
 [5]: /observability_pipelines/live_capture/
+[6]: /observability_pipelines/search_syntax/logs/#free-text-search

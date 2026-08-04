@@ -20,23 +20,19 @@ aliases:
 
 <div class="alert alert-info">Version 67+ of the Datadog Lambda Extension is optimized to significantly reduce cold start duration. <a href="/serverless/aws_lambda/configuration/?tab=datadogcli#using-datadog-lambda-extension-v67">Read more</a>.</div>
 
-{{< callout url="https://www.datadoghq.com/product-preview/agentic-onboarding-for-serverless-applications/" btn_hidden="false" header="Agentically add Datadog to your Lambda Functions">}}
-Agentic onboarding for Datadog Serverless is in Preview. Use your favorite AI coding tool such as Cursor or Claude to bulk-add Datadog monitoring to your Lambda functions.
-{{< /callout >}}
-
 ## Setup
 
 **Note**: Datadog recommends using v2 of the Go tracer to instrument AWS Lambda functions. See the [migration instructions](https://github.com/DataDog/dd-trace-go/tree/main/contrib/aws/datadog-lambda-go) for guidance on upgrading from v1 to v2.
 
 {{< tabs >}}
 {{% tab "Datadog UI" %}}
-You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [Serverless > AWS Lambda][2] page and select [**Instrument Functions**][3].
+You can instrument your Go AWS Lambda application directly within Datadog. Navigate to the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}AWS Lambda{{< /ui >}}][2] page and select [{{< ui >}}Settings{{< /ui >}}][3]. In the {{< ui >}}Remote Instrumentation{{< /ui >}} section, select the {{< ui >}}AWS Lambda{{< /ui >}} tab.
 
 For more information, see [Remote instrumentation for AWS Lambda][1].
 
 [1]: /serverless/aws_lambda/remote_instrumentation
-[2]: https://app.datadoghq.com/functions?cloud=aws
-[3]: https://app.datadoghq.com/serverless/aws/lambda/setup
+[2]: https://app.datadoghq.com/serverless/aws/lambda
+[3]: https://app.datadoghq.com/serverless/settings?serverless__section=aws-lambda
 {{% /tab %}}
 {{% tab "Datadog CLI" %}}
 
@@ -316,6 +312,8 @@ Replace `<AWS_REGION>` with a valid AWS region, such as `us-east-1`.
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{< /tabs >}}
+
+{{% svl-tracing-env %}}
 
 ### Install the Datadog Lambda library
 

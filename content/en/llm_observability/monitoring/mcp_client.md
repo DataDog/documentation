@@ -1,6 +1,6 @@
 ---
 title: MCP Clients
-description: Learn how to instrument and monitor MCP clients with LLM Observability.
+description: Learn how to instrument and monitor MCP clients with Agent Observability.
 
 further_reading:
   - link: https://www.datadoghq.com/blog/mcp-client-monitoring
@@ -9,20 +9,23 @@ further_reading:
 
 ---
 
-You can monitor your MCP clients with Datadog LLM Observability in two ways:
+You can monitor your MCP clients with Agent Observability in two ways:
 
-- [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1]
-- [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using the official MCP Python SDK, or your MCP clients are written in Node.js or Java
+- [Automatic instrumentation](#automatically-instrument-your-mcp-client): If you are using the official [MCP Python SDK][1] or [MCP JavaScript SDK][3]
+- [Manual instrumentation](#manually-instrument-your-mcp-client): If you are not using an official MCP SDK, or your MCP clients are written in Java
 
 ## Automatically instrument your MCP client
 
+{{< tabs >}}
+
+{{% tab "Python" %}}
 If you are using the official MCP Python SDK to connect to an MCP server with an MCP client session, use the following steps to automatically instrument your MCP client application:
 
 1. Install `ddtrace`:
 
-   {{< code-block lang="shell">}}
-pip install ddtrace
-{{< /code-block >}}
+   ```shell
+   pip install ddtrace
+   ```
 
 2. Set the required environment variables:
 
@@ -36,15 +39,52 @@ pip install ddtrace
 
 3. Run your application with the `ddtrace-run` command:
 
-   {{< code-block lang="shell">}}
-ddtrace-run <YOUR_APP_STARTUP_COMMAND>
-{{< /code-block >}}
+   ```shell
+   ddtrace-run <YOUR_APP_STARTUP_COMMAND>
+   ```
+
+For additional configuration options, see the [Agent Observability SDK setup guide][1].
+
+[1]: /llm_observability/instrumentation/sdk?tab=python#setup
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+If you are using the official MCP JavaScript SDK to connect to an MCP server with an MCP client session, use the following steps to automatically instrument your MCP client application:
+
+1. Install `dd-trace`:
+
+   ```shell
+   npm install dd-trace
+   ```
+
+2. Set the required environment variables:
+
+   ```shell
+   export DD_LLMOBS_ENABLED=true
+   export DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
+   export DD_LLMOBS_AGENTLESS_ENABLED=true
+   export DD_API_KEY=<YOUR_API_KEY>
+   export DD_SITE={{< region-param key="dd_site" >}}
+   ```
+
+3. Run your application:
+
+   ```shell
+   NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
+   ```
+
+For additional configuration options, see the [Agent Observability SDK setup guide][1].
+
+[1]: /llm_observability/instrumentation/sdk?tab=nodejs#setup
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ## Manually instrument your MCP client
 
-You can also manually instrument your MCP client by using Datadog's [LLM Observability SDKs][2] for Python, Node.js, and Java. Use the following steps to add the required tags and spans:
+You can also manually instrument your MCP client by using the [Agent Observability SDKs][2] for Python, Node.js, and Java. Use the following steps to add the required tags and spans:
 
-1. Import the LLM Observability SDK:
+1. Import the Agent Observability SDK:
 
    {{< tabs >}}
 
@@ -401,7 +441,7 @@ ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 {{% tab "Node.js" %}}
 {{< code-block lang="shell">}}
-NODE_OPTIONS="--import dd-trace/initialize.mjs" <YOUR_APP_STARTUP_COMMAND>
+NODE_OPTIONS="--import dd-trace/initialize.mjs" node <YOUR_APP_ENTRYPOINT>
 {{< /code-block >}}
 {{% /tab %}}
 
@@ -419,3 +459,4 @@ java -javaagent:dd-java-agent.jar -Ddd.llmobs.enabled=true -Ddd.llmobs.ml-app=<Y
 
 [1]: https://github.com/modelcontextprotocol/python-sdk
 [2]: /llm_observability/instrumentation/sdk
+[3]: https://github.com/modelcontextprotocol/typescript-sdk

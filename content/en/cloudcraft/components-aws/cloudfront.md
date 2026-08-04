@@ -11,7 +11,7 @@ Use the CloudFront component to represent CloudFront from your Amazon Web Servic
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
+- {{< ui >}}Color{{< /ui >}}: Select a predefined color or enter the hexadecimal value of the color for the component and its accent. The component can use the same color for both the 2D and 3D view, or different colors for each.
 
 ## API
 

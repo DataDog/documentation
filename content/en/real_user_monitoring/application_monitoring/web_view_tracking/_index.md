@@ -28,7 +28,7 @@ further_reading:
   - link: /real_user_monitoring
     tag: Documentation
     text: Explore Datadog RUM
-  - link: /session_replay/mobile/setup_and_configuration#web-view-instrumentation
+  - link: /session_replay/setup_and_configuration#web-view-instrumentation
     tag: Documentation
     text: Web View Instrumentation
 ---
@@ -156,7 +156,7 @@ Add `DatadogWebViewTracking` library to your application by following the guide 
    WebViewTracking.enable(webView, allowedHosts)
    ```
 
-`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+`allowedHosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 **Note**:
 In order for instrumentation to work on the WebView component, it is very important that the JavaScript is enabled on the WebView. To enable it, you can use the following code snippet:
@@ -180,7 +180,7 @@ import WebKit
 import DatadogWebViewTracking
 
 let webView = WKWebView(...)
-WebViewTracking.enable(webView: webView, hosts: ["example.com"])
+WebViewTracking.enable(webView: webView, hosts: ["example.com", "*.example.com"])
 ```
 
 To disable Web View Tracking:
@@ -188,7 +188,7 @@ To disable Web View Tracking:
 WebViewTracking.disable(webView: webView)
 ```
 
-`allowedHosts` matches the given hosts and their subdomain. No regular expression is allowed.
+`hosts` accepts plain hostnames (for example, `"example.com"`, which also matches its subdomains) and wildcard patterns with a single `*` (for example, `"*.example.com"` or `"preview-*.example.com"`). Invalid entries are dropped with a warning.
 
 {{% /tab %}}
 {{% tab "Flutter" %}}
@@ -356,7 +356,7 @@ Your web views appear in the [RUM Explorer][5] with associated `service` and `so
 
 To access your web views:
 
-1. Navigate to **Digital Experiences > Real User Monitoring > (Sessions) Explorer**.
+1. Navigate to {{< ui >}}Digital Experiences{{< /ui >}} > {{< ui >}}Real User Monitoring{{< /ui >}} > {{< ui >}}(Sessions) Explorer{{< /ui >}}.
 2. Create a query to filter on the following:
    - Your Android and Android TV applications using either `application.id` or `application.name`
    - The web component using `service`
@@ -369,7 +369,7 @@ To access your web views:
 
    Any service with the web icon indicates a webview.
 
-From here, you can hover over a session event and click **Open View waterfall** to navigate from the session to a resource waterfall visualization in the view's **Performance** tab.
+From here, you can hover over a session event and click {{< ui >}}Open View waterfall{{< /ui >}} to navigate from the session to a resource waterfall visualization in the view's {{< ui >}}Performance{{< /ui >}} tab.
 
 ## Billing implications
 
@@ -379,7 +379,7 @@ See [RUM & Session Replay Billing][6] for details on how web views in mobile app
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /session_replay/mobile/setup_and_configuration/#web-view-instrumentation
+[1]: /session_replay/setup_and_configuration/#web-view-instrumentation
 [2]: /real_user_monitoring/application_monitoring/browser/setup/#npm
 [3]: /real_user_monitoring/application_monitoring/ios/setup
 [4]: /logs/log_collection/ios

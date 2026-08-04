@@ -1,4 +1,5 @@
 ---
+id: indexed
 title: indexed
 core_product:
   - log management

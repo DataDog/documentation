@@ -113,6 +113,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_4032568083",
+      "description": "Create a new dashboard with a live default_timeframe returns \"OK\" response"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2644712913",
       "description": "Create a new dashboard with a query value widget using the percentile aggregator"
     },
@@ -120,6 +125,11 @@
       "group": "dashboards",
       "suffix": "_765140092",
       "description": "Create a new dashboard with a query value widget using timeseries background"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_3767278442",
+      "description": "Create a new dashboard with a query_value widget containing a description"
     },
     {
       "group": "dashboards",
@@ -170,6 +180,11 @@
       "group": "dashboards",
       "suffix": "_798168180",
       "description": "Create a new dashboard with apm dependency stats widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2252738813",
+      "description": "Create a new dashboard with apm metrics widget"
     },
     {
       "group": "dashboards",
@@ -278,6 +293,16 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2780500284",
+      "description": "Create a new dashboard with hostmap DDSQL widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2882802132",
+      "description": "Create a new dashboard with hostmap infra widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_1200099236",
       "description": "Create a new dashboard with hostmap widget"
     },
@@ -338,6 +363,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_153558925",
+      "description": "Create a new dashboard with logs_transaction_stream list_stream widget and version"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2917274132",
       "description": "Create a new dashboard with manage_status widget"
     },
@@ -350,6 +380,11 @@
       "group": "dashboards",
       "suffix": "_417992286",
       "description": "Create a new dashboard with note widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2049446128",
+      "description": "Create a new dashboard with point_plot widget"
     },
     {
       "group": "dashboards",
@@ -385,6 +420,21 @@
       "group": "dashboards",
       "suffix": "_2610827685",
       "description": "Create a new dashboard with run-workflow widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2844071429",
+      "description": "Create a new dashboard with sankey widget and RUM data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_258152475",
+      "description": "Create a new dashboard with sankey widget and network data source"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_373890042",
+      "description": "Create a new dashboard with sankey widget and product analytics data source"
     },
     {
       "group": "dashboards",
@@ -453,6 +503,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_1705253330",
+      "description": "Create a new dashboard with timeseries widget using has_value_labels"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_416487533",
       "description": "Create a new dashboard with timeseries widget using order_by tags"
     },
@@ -475,6 +530,11 @@
       "group": "dashboards",
       "suffix": "_1213075383",
       "description": "Create a new dashboard with toplist widget"
+    },
+    {
+      "group": "dashboards",
+      "suffix": "_2815497946",
+      "description": "Create a new dashboard with topology_map data_streams widget"
     },
     {
       "group": "dashboards",
@@ -556,8 +616,8 @@
   "SendPublicDashboardInvitation": [
     {
       "group": "dashboards",
-      "suffix": "",
-      "description": "Send shared dashboard invitation email returns \"OK\" response"
+      "suffix": "_3435926116",
+      "description": "Send shared dashboard invitation email returns OK"
     }
   ],
   "UpdateDashboard": [
@@ -690,6 +750,26 @@
   "CreateLogsPipeline": [
     {
       "group": "logs_pipelines",
+      "suffix": "_3996915493",
+      "description": "Create a pipeline with Array Map Processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2402034476",
+      "description": "Create a pipeline with Array Map Processor using arithmetic sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_1185292896",
+      "description": "Create a pipeline with Array Map Processor using category sub-processor returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_104735144",
+      "description": "Create a pipeline with Array Map Processor with preserve_source false returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_1248402480",
       "description": "Create a pipeline with Array Processor Append Operation returns \"OK\" response"
     },
@@ -702,6 +782,16 @@
       "group": "logs_pipelines",
       "suffix": "_3314493032",
       "description": "Create a pipeline with Array Processor Append Operation with preserve_source true returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2595757342",
+      "description": "Create a pipeline with Array Processor Key Value Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_4041812833",
+      "description": "Create a pipeline with Array Processor Key Value Operation with target and override_on_conflict returns \"OK\" response"
     },
     {
       "group": "logs_pipelines",
@@ -732,6 +822,11 @@
       "group": "logs_pipelines",
       "suffix": "_2707101123",
       "description": "Create a pipeline with Span Id Remapper returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_2599033345",
+      "description": "Create a pipeline with nested pipeline processor returns \"OK\" response"
     },
     {
       "group": "logs_pipelines",
@@ -771,8 +866,18 @@
     },
     {
       "group": "monitors",
+      "suffix": "_2589528326",
+      "description": "Create a Data Jobs monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
       "suffix": "_3626832481",
       "description": "Create a Data Quality monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1532893480",
+      "description": "Create a Data Quality monitor with sensitivity returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -813,6 +918,16 @@
       "group": "monitors",
       "suffix": "",
       "description": "Create a monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2608995690",
+      "description": "Create a monitor with aggregate augmented query variables returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_2082938111",
+      "description": "Create a monitor with aggregate filtered query variables returns \"OK\" response"
     },
     {
       "group": "monitors",
@@ -903,6 +1018,11 @@
       "group": "service_level_objective_corrections",
       "suffix": "_1326388368",
       "description": "Create an SLO correction with rrule returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2888963657",
+      "description": "Create an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "UpdateSLOCorrection": [
@@ -910,9 +1030,19 @@
       "group": "service_level_objective_corrections",
       "suffix": "",
       "description": "Update an SLO correction returns \"OK\" response"
+    },
+    {
+      "group": "service_level_objective_corrections",
+      "suffix": "_2949191256",
+      "description": "Update an SLO correction with slo_query returns \"OK\" response"
     }
   ],
   "CreateSLO": [
+    {
+      "group": "service_level_objectives",
+      "suffix": "_707861409",
+      "description": "Create a new metric SLO object using bad events formula returns \"OK\" response"
+    },
     {
       "group": "service_level_objectives",
       "suffix": "_512760759",
@@ -1012,6 +1142,11 @@
       "group": "synthetics",
       "suffix": "_1072503741",
       "description": "Create an API SSL test returns \"OK - Returns the created test details.\" response"
+    },
+    {
+      "group": "synthetics",
+      "suffix": "_2547523542",
+      "description": "Create an API test with MCP steps returns \"OK - Returns the created test details.\" response"
     },
     {
       "group": "synthetics",

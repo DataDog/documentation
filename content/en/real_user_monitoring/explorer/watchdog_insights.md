@@ -28,25 +28,25 @@ The pink Watchdog Insights banner appears in the [RUM Explorer][2] and displays 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/overview.png" alt="Watchdog Insights banner cards in the RUM Explorer" style="width:100%;" >}}
 
-Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to interact with the visualizations embedded in the side panel and find views from the list of impacted events. Click **View all** to see all outstanding error outliers in a side panel. 
+Click on an [error](#error-outliers) or [latency outlier](#latency-outliers) to interact with the visualizations embedded in the side panel and find views from the list of impacted events. Click {{< ui >}}View all{{< /ui >}} to see all outstanding error outliers in a side panel. 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_m_card-3.png" alt="Error Outlier banner card and side panel card view in the RUM Explorer" style="width:100%;" >}}
 
-Hover over a card in the banner and click **Filter on Insight** to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
+Hover over a card in the banner and click {{< ui >}}Filter on Insight{{< /ui >}} to add the anomalous insight behavior to your search query. For example, you can hone in on a particular view path or a specific continent like `North America`. 
 
-Click **View in Analytics** to automatically set the `Group into fields` formulas and select the `Visualize as` type under the search query to reflect the card's outlier behavior. For example, you can create a timeseries graph about an unusually high error rate on a Synthetic test by using the `synthetics.test_id` in a search formula and export it into a monitor or dashboard.
+Click {{< ui >}}View in Analytics{{< /ui >}} to automatically set the {{< ui >}}Group into fields{{< /ui >}} formulas and select the {{< ui >}}Visualize as{{< /ui >}} type under the search query to reflect the card's outlier behavior. For example, you can create a timeseries graph about an unusually high error rate on a Synthetic test by using the `synthetics.test_id` in a search formula and export it into a monitor or dashboard.
 
 ## Error outliers
 
 Error outliers display fields such as [faceted tags or attributes][3] that contain characteristics of errors that match the current search query. Statistically overrepresented `key:value` pairs among errors can provide hints into the root cause of issues. Typical examples of error outliers include `env:staging`, `version:1234`, and `browser.name:Chrome`.
 
-In the **banner card** view, you can see:
+In the {{< ui >}}banner card{{< /ui >}} view, you can see:
 
 * The field name
 * The proportion of total errors and overall RUM events that the field contributes to
 * Related tags
 
-In the **full side panel**, you can see a timeseries graph about the total number of RUM errors with the field along with a impact pie charts and a list of RUM events that contain the field.
+In the {{< ui >}}full side panel{{< /ui >}}, you can see a timeseries graph about the total number of RUM errors with the field along with a impact pie charts and a list of RUM events that contain the field.
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/error_outlier_side_panel-1.png" alt="Error Outlier full side panel" style="width:100%;" >}}
 
@@ -56,12 +56,12 @@ Latency outliers display fields such as [faceted tags or attributes][3] that are
 
 Latency outliers are computed for [Core Web Vitals][4] such as First Contentful Paint, First Input Delay, Cumulative Layout Shift, and [Loading Time][5]. For more information, see [Monitoring Page Performance][4].
 
-In the **banner card** view, you can see:
+In the {{< ui >}}banner card{{< /ui >}} view, you can see:
 
 * The field name
 * The performance telemetry value containing the field and the baseline for the rest of the data
 
-In the **full side panel**, you can see a timeseries graph about the performance telemetry with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
+In the {{< ui >}}full side panel{{< /ui >}}, you can see a timeseries graph about the performance telemetry with an X axis of increments of `p50`, `p75`, `p99`, and `max`, along with a list of RUM events that contain the field. 
 
 {{< img src="real_user_monitoring/explorer/watchdog_insights/latency_outlier_side_panel-1.png" alt="Latency Outlier full side panel view" style="width:100%;" >}}
 

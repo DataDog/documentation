@@ -14,7 +14,7 @@ further_reading:
 
 <div class="alert alert-info">The processors outlined in this documentation are specific to on-premises logging environments. To parse, structure, and enrich cloud-based logs, see the <a href="https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics">Log Management</a> documentation.</div>
 
-Use Observability Pipelines' processors to parse, structure, and enrich your logs and metrics ({{< tooltip glossary="preview" case="title" >}}). When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
+Use Observability Pipelines' processors to parse, structure, and enrich your logs and metrics. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
 
 Processor groups are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
@@ -66,17 +66,23 @@ These are the available processors:
 [15]: /observability_pipelines/processors/sample/
 [16]: /observability_pipelines/processors/sensitive_data_scanner/
 [17]: /observability_pipelines/processors/split_array/
-[18]: /observability_pipelines/processors/tag_control/logs/
+[18]: /observability_pipelines/processors/tags/
 [19]: /observability_pipelines/processors/throttle/
 
 {{% /tab %}}
 {{% tab "Metrics" %}}
 
-- [Filter][1]
-- [Tag Control][2]
+- [Aggregate][1]
+- [Edit Tags][2]
+- [Filter][3]
+- [Tag Allow/Block List][4]
+- [Tag Cardinality Control][5]
 
-[1]: /observability_pipelines/processors/filter/
-[2]: /observability_pipelines/processors/tag_control/
+[1]: /observability_pipelines/processors/aggregate/
+[2]: /observability_pipelines/processors/edit_tags/
+[3]: /observability_pipelines/processors/filter/
+[4]: /observability_pipelines/processors/tag_allow_block_list/
+[5]: /observability_pipelines/processors/tag_cardinality_control/
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -91,7 +97,7 @@ You can organize your processors into logical groups to help you manage them. Ea
 
 Processor groups and the processors within each group are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To change the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
-**Note**: There is a limit of 25 processor groups for a pipeline canvas. For example, if you have a dual ship pipeline, where there are two destinations and each destination has its own set of processor groups, the combined number of processor groups from both sets is limited to 10.
+**Note**: There is a limit of 25 processor groups per pipeline canvas. For example, in a dual-ship pipeline with two destinations, the combined number of processor groups across both destinations cannot exceed 25. You can have the groups in any combination, such as 15 on one destination and 10 on the other.
 
 ## Further Reading
 

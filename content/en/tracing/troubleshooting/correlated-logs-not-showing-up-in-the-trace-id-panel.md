@@ -28,11 +28,11 @@ There are four types of logs that appear in a [trace][1]:
 
 {{< img src="tracing/troubleshooting/tracing_logs_display_option.png" alt="A trace's log dropdown menu showing the trace ID and host options" style="width:80%;">}}
 
-In some cases, the **Logs** section in the trace panel may appear empty. This guide walks you through how to fix this issue.
+In some cases, the {{< ui >}}Logs{{< /ui >}} section in the trace panel may appear empty. This guide walks you through how to fix this issue.
 
 ## Infrastructure options
 
-If the **Log** section is empty for the `host`, `container_id`, or `pod_name` options, navigate to the [Log Explorer][2] and ensure the following conditions:
+If the {{< ui >}}Log{{< /ui >}} section is empty for the `host`, `container_id`, or `pod_name` options, navigate to the [Log Explorer][2] and ensure the following conditions:
 
 1. Logs are being sent from the host/container/pod that emitted the trace.
 2. There are logs for that host within the trace's timeframe.
@@ -40,7 +40,7 @@ If the **Log** section is empty for the `host`, `container_id`, or `pod_name` op
 
 ## Trace ID option
 
-If the **Log** section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
+If the {{< ui >}}Log{{< /ui >}} section is empty for the `trace_id` option, ensure you have a standard `trace_id` attribute in your logs. If your logs do not contain `trace_id`, [correlate your traces and logs][4] in order to do the following:
 
 1. Extract the trace ID in a log attribute.
 2. Remap this attribute to the reserved `trace_id` attribute.
@@ -56,7 +56,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#remapper
+[3]: /logs/log_configuration/processors/remapper/
 [4]: https://app.datadoghq.com/logs/pipelines/remapping
    {{% /tab %}}
    {{% tab "With Log integration" %}}
@@ -84,7 +84,7 @@ If the **Log** section is empty for the `trace_id` option, ensure you have a sta
 
 [1]: /tracing/glossary/#trace
 [2]: /tracing/glossary/#spans
-[3]: /logs/log_configuration/processors/#trace-remapper
+[3]: /logs/log_configuration/processors/trace_remapper/
    {{% /tab %}}
    {{< /tabs >}}
 
@@ -92,7 +92,7 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 
 {{< img src="tracing/troubleshooting/trace_id_injection.png" alt="A trace page showing the logs section with correlated logs" style="width:90%;">}}
 
-**Note**: Trace IDs and span IDs are not displayed in your logs or log attributes in the UI.
+**Note**: Trace IDs are displayed in the log side panel. If a log has a trace ID but the associated trace was sampled out, the panel displays a message indicating the trace is missing. For more information, see [Log has a trace ID but the associated trace is missing][5].
 
 ## Further Reading
 
@@ -102,3 +102,4 @@ Once the IDs are properly injected and remapped to your logs, you can see the lo
 [2]: https://app.datadoghq.com/logs
 [3]: /logs/guide/logs-not-showing-expected-timestamp/
 [4]: /tracing/other_telemetry/connect_logs_and_traces/
+[5]: /logs/troubleshooting/#log-has-a-trace-id-but-the-associated-trace-is-missing

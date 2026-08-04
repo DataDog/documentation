@@ -17,7 +17,7 @@ Deployment tracking helps you to understand when a new version of code or a conf
 
 Datadog collects code and configuration change events for your AWS Lambda functions from AWS CloudTrail.
 
-To see deployment events for your serverless applications, select a function in the [Serverless view][1] to open a side panel, and click the **Deployments** tab.
+To see deployment events for your serverless applications, select a function in the [Serverless view][1] to open a side panel, and click the {{< ui >}}Deployments{{< /ui >}} tab.
 
 ### Setup
 
@@ -40,8 +40,8 @@ If you have already added the permission, but you still don't see events for any
 You can use [Resource Changes][4] for visibility and control over configuration changes to your AWS Lambda functions. To enable Resource Changes, enable resource collection in the Datadog-AWS integration:
 
 1. Navigate to the [Amazon Web Services integration tile][5] in Datadog.
-2. Select your AWS account and navigate to the **Resource Collection** tab.
-3. Toggle **Enable Resource Collection**.
+2. Select your AWS account and navigate to the {{< ui >}}Resource Collection{{< /ui >}} tab.
+3. Toggle {{< ui >}}Enable Resource Collection{{< /ui >}}.
 
 See the [Resource Changes][4] documentation for more information.
 

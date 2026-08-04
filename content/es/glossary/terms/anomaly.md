@@ -1,4 +1,5 @@
 ---
+id: anomaly
 core_product:
 - alertas
 - métricas

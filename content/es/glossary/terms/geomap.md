@@ -1,4 +1,5 @@
 ---
+id: geomap
 core_product:
 - dashboards
 - real user monitoring

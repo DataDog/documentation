@@ -49,6 +49,9 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://learn.datadoghq.com/courses/profiling-timeline"
+      tag: "Learning Center"
+      text: "Optimize Request Latency with Profiling Timeline"
 cascade:
     algolia:
         rank: 70
@@ -72,7 +75,19 @@ Profiling your service to visualize all your stack traces in one place takes jus
 
 ### Instrument your application
 
-{{< partial name="profiling/profiling-languages.html" >}}
+{{< card-grid image_width="400" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=go" src="integrations_logos/go-metro.png" alt="go" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=java&runtime=graalvm_native_image" src="integrations_logos/graalvm.png" alt="GraalVM" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=node_js" src="integrations_logos/nodejs.png" alt="Node.js" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=php" src="integrations_logos/php.png" alt="PHP" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=dot_net" src="integrations_logos/dotnet_text.png" alt=".NET" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=rust" src="integrations_logos/rust.png" alt="Rust" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=c" src="integrations_logos/c.png" alt="C" >}}
+  {{< image-card href="/profiler/enabling/?prog_lang=cpp" src="integrations_logos/cpp.png" alt="C++" >}}
+{{< /card-grid >}}
 
 ## Guide to using the profiler
 
@@ -82,7 +97,7 @@ The [Getting Started with Profiler][1] guide takes a sample service with a perfo
 
 After you configure your application to send profiles to Datadog, start getting insights into your code performance.
 
-By default, profiles are retained for seven days, and metrics generated from profile data are retained for one month.
+By default, profiles are retained for eight days, and metrics generated from profile data are retained for one month.
 
 {{< learning-center-callout header="Try Diagnose Code Performance Issues in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/continuous-profiler-course">}}
   The Datadog Learning Center is full of hands-on courses to help you learn about this topic. Enroll at no cost to investigate and improve application code performance in production with Datadog Continuous Profiler.
@@ -108,7 +123,7 @@ Obtain key profiling metrics from services such as top CPU usage by method, top 
 
 ### Connect traces to profiling data
 
-Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [Profiles tab][4] to find specific lines of code related to performance issues.
+Application processes that have both [APM distributed tracing][3] and continuous profiler enabled are automatically linked, so you can move directly from span information to profiling data on the [{{< ui >}}Profiles{{< /ui >}} tab][4] to find specific lines of code related to performance issues.
 
 {{< img src="profiler/profiles_tab.png" alt="Profiles tab shows profiling information for a APM trace span" >}}
 

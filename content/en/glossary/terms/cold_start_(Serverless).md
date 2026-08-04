@@ -1,4 +1,5 @@
 ---
+id: cold_start_serverless
 title: cold start
 core_product:
   - serverless monitoring

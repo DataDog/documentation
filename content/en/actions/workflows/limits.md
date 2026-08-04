@@ -7,7 +7,7 @@ aliases:
 - /service_management/workflows/limits
 disable_toc: false
 further_reading:
-- link: "/service_management/workflows/build"
+- link: "/actions/workflows/build"
   tag: "Documentation"
   text: "Build Workflows"
 ---
@@ -40,7 +40,7 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 ## Workflow-level limits
 
-* A workflow can contain up to 150 steps. If you need more than 150 steps in a workflow, you can use the **Trigger workflow** action to [call a child workflow][2]. Use output parameters to pass the output of a child workflow back to your main workflow.
+* A workflow can contain up to 150 steps. If you need more than 150 steps in a workflow, you can use the {{< ui >}}Trigger workflow{{< /ui >}} action to [call a child workflow][2]. Use output parameters to pass the output of a child workflow back to your main workflow.
 * A workflow can run for up to 7 days. Workflows terminate when they attempt to run for longer than 7 days.
 * A workflow can start up to 60 steps per minute. If you exceed this rate, steps are throttled and start at a rate of 60 per minute.
 * The sum of all step outputs for a workflow can be up to 150 MB.
@@ -61,6 +61,6 @@ When an organization exceeds a threshold, pending execution requests queue up to
 
 <br>Do you have questions or feedback? Join the **#workflows** channel on the [Datadog Community Slack][9].
 
-[1]: /service_management/workflows/actions/flow_control/#for-loop
-[2]: /service_management/workflows/trigger/#trigger-a-workflow-from-a-workflow
+[1]: /actions/workflows/actions/flow_control/#for-loop
+[2]: /actions/workflows/trigger/#trigger-a-workflow-from-a-workflow
 [9]: https://chat.datadoghq.com/

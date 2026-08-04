@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Node.js tracer**.
+1. **Install the Datadog Node.js SDK**.
 
    1. In your main application, install the `dd-trace` package.
 
@@ -82,7 +82,15 @@ logger.info('Hello world!');
 
    To send custom metrics, [view code examples][3]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
+6. **Enable profiling (preview)**.
+
+   To enable the [Continuous Profiler][6], set the environment variable `DD_PROFILING_ENABLED=true` in your application container.
+
+   <div class="alert alert-info">Datadog's Continuous Profiler is available in preview for 2nd gen Cloud Run functions.</div>
+
 {{% serverless-init-env-vars-sidecar language="nodejs" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Distributed tracing with Pub/Sub
 
@@ -161,4 +169,5 @@ gcloud pubsub subscriptions update \
 [3]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=nodejs#code-examples-5
 [4]: https://www.datadoghq.com/blog/pubsub-cloud-run-tracing/
 [5]: https://cloud.google.com/pubsub/docs/payload-unwrapping
+[6]: /profiler/
 

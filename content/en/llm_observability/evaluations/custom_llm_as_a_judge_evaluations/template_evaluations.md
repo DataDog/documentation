@@ -4,10 +4,13 @@ description: Learn how to create LLM-as-a-Judge evaluations from templates for y
 further_reading:
 - link: "/llm_observability/terms/"
   tag: "Documentation"
-  text: "Learn about LLM Observability terms and concepts"
+  text: "Learn about Agent Observability terms and concepts"
 - link: "/llm_observability/setup"
   tag: "Documentation"
-  text: "Learn how to set up LLM Observability"
+  text: "Learn how to set up Agent Observability"
+- link: "https://www.datadoghq.com/blog/llm-observability-hallucination-detection/"
+  tag: "Blog"
+  text: "Detect hallucinations in your RAG LLM applications with Datadog LLM Observability"
 aliases:
   - /llm_observability/evaluations/agent_evaluations
   - /llm_observability/evaluations/managed_evaluations/agent_evaluations
@@ -15,15 +18,15 @@ aliases:
   - /llm_observability/evaluations/managed_evaluations/session_level_evaluations
 ---
 
-Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
+Datadog provides LLM-as-a-judge templates for the following evaluations: [Failure to Answer][16], [Goal Completeness][22], [Hallucination][25], [Prompt Injection][14], [Sentiment][12], [Tool Argument Correctness][23], [Tool Selection][24], [Topic Relevancy][15], and [Toxicity][13]. After you select a template, you can modify any aspect of the evaluation. 
 
 For best practices and details on how to create LLM-as-a-judge evaluations, read [Create a custom LLM-as-a-judge evaluation][17].
 
 To select a template:
-1. In Datadog, navigate to the [LLM Observability Evaluations][11] page
-1. Click on the **Create Evaluation** button
+1. In Datadog, navigate to the [Agent Observability Evaluations][11] page
+1. Click on the {{< ui >}}Create Evaluation{{< /ui >}} button
 1. Select the template of your choice
-    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+    {{< img src="llm_observability/evaluations/template_llm_as_a_judge_evaluations_1.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 1. Select the integration provider, account, and model you want to use. 
     * Note: Some integration providers require additional steps (like selecting a region for Amazon Bedrock or a project and location for VertexAI.)
 1. (Optional) Select the application you would like the evaluation to run for and set any desired span filters.
@@ -34,7 +37,7 @@ To select a template:
 
 Failure to Answer evaluations identify instances where the LLM fails to deliver an appropriate response, which may occur due to limitations in the LLM's knowledge or understanding, ambiguity in the user query, or the complexity of the topic.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_6.png" alt="A Failure to Answer evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_6.png" alt="A Failure to Answer evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -52,11 +55,72 @@ Datadog provides the following categories of Failure to Answer, listed in the fo
 | Redirection Response | Redirects the user to another source or suggests an alternative approach | If you have additional details, I'd be happy to include them|
 | Refusal Response | Explicitly declines to provide an answer or to complete the request | Sorry, I can't answer this question |
 
+### Hallucination
+
+Hallucination evaluations identify instances where the LLM makes a claim that disagrees with the provided input context. This check helps ensure your RAG applications stay grounded in retrieved data and do not fabricate information.
+
+{{< img src="llm_observability/evaluations/hallucination_5.png" alt="A Hallucination evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
+
+| Evaluation Stage | Evaluation Definition |
+|---|---|
+| Evaluated on Output | Hallucination flags any output that disagrees with the context provided to the LLM. |
+
+#### Configure a Hallucination evaluation
+
+Use [Prompt Tracking][26] annotations to track your prompts and set them up for hallucination detection. Annotate your LLM spans with the user query and context so hallucination detection can evaluate model outputs against the retrieved data.
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.types import Prompt
+
+# if your llm call is auto-instrumented...
+with LLMObs.annotation_context(
+        prompt=Prompt(
+            id="generate_answer_prompt",
+            template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
+            variables={"user_question": user_question, "article": article},
+            rag_query_variables=["user_question"],
+            rag_context_variables=["article"]
+        ),
+        name="generate_answer"
+):
+    oai_client.chat.completions.create(...) # autoinstrumented llm call
+
+# if your llm call is manually instrumented ...
+@llm(name="generate_answer")
+def generate_answer():
+  ...
+  LLMObs.annotate(
+            prompt=Prompt(
+                id="generate_answer_prompt",
+                template="Generate an answer to this question :{user_question}. Only answer based on the information from this article : {article}",
+                variables={"user_question": user_question, "article": article},
+                rag_query_variables=["user_question"],
+                rag_context_variables=["article"]
+            ),
+  )
+{{< /code-block >}}
+
+The `variables` dictionary should contain the key-value pairs your app uses to construct the LLM input prompt (for example, the messages for an OpenAI chat completion request). Use `rag_query_variables` and `rag_context_variables` to specify which variables represent the user query and which represent the retrieval context. A list of variables is allowed to account for cases where multiple variables make up the context (for example, multiple articles retrieved from a knowledge base).
+
+Hallucination detection does not run if either the rag query, the rag context, or the span output is empty.
+
+Prompt Tracking is available on Python starting from version 3.15. It also requires an ID for the prompt and the template set up to monitor and track your prompt versions. You can find more examples of prompt tracking and instrumentation in the [SDK documentation][26].
+
+Hallucination detection makes a distinction between two types of hallucinations:
+
+| Configuration Option | Description |
+|---|---|
+| Contradiction | Claims made in the LLM-generated response that go directly against the provided context |
+| Unsupported Claim | Claims made in the LLM-generated response that are not grounded in the context |
+
+Contradictions are always detected, while Unsupported Claims can be optionally included. For sensitive use cases, we recommend including Unsupported Claims.
+
 ### Prompt Injection
 
 Prompt Injection evaluations identify attempts by unauthorized or malicious authors to manipulate the LLM's responses or redirect the conversation in ways not intended by the original author. This check maintains the integrity and authenticity of interactions between users and the LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_5.png" alt="A Prompt Injection evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_5.png" alt="A Prompt Injection evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -77,7 +141,7 @@ You can configure the prompt injection evaluation to use specific categories of 
 
 Sentiment evaluations help you understand the overall mood of the conversation, gauge user satisfaction, identify sentiment trends, and interpret emotional responses. This evaluation classifies the sentiment of the text, providing insights to improve user experiences and tailor responses to better meet user needs.
 
-{{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_6.png" alt="A Sentiment evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -87,7 +151,7 @@ Sentiment evaluations help you understand the overall mood of the conversation, 
 
 Topic Relevancy evaluations identify and flag user inputs that deviate from the configured acceptable input topics. This ensures that interactions stay pertinent to the LLM's designated purpose and scope.
 
-{{< img src="llm_observability/evaluations/topic_relevancy_4.png" alt="A topic relevancy evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/topic_relevancy_4.png" alt="A topic relevancy evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -101,7 +165,7 @@ Topics can contain multiple words and should be as specific and descriptive as p
 
 Toxicity evaluations evaluates each input and output prompt from the user and the response from the LLM application for toxic content. This evaluation identifies and flags toxic content to ensure that interactions remain respectful and safe.
 
-{{< img src="llm_observability/evaluations/toxicity_5.png" alt="A Toxicity evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_5.png" alt="A Toxicity evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -129,7 +193,7 @@ The toxicity categories in this table are informed by: [Banko et al. (2020)][6],
 
 An agent can call tools correctly but still fail to achieve the user’s intended goal. This evaluation checks whether your LLM chatbot can successfully carry out a full session by effectively meeting the user’s needs from start to finish. This completeness measure serves as a proxy for gauging user satisfaction over the course of a multi-turn interaction and is especially valuable for LLM chatbot applications.
 
-{{< img src="llm_observability/evaluations/goal_completeness_2.png" alt="A Goal Completeness evaluation detected by an LLM in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/goal_completeness_2.png" alt="A Goal Completeness evaluation detected by an LLM in Agent Observability" style="width:100%;" >}}
 
 | Evaluation Stage | Evaluation Definition |
 |---|---|
@@ -151,7 +215,7 @@ This evaluation checks whether the agent successfully selected the appropriate t
 |---|---|
 | Evaluated on spans with tool calls | Verifies that the tools chosen by the LLM align with the user’s request and the set of available tools. Flags irrelevant or incorrect tool calls. |
 
-{{< img src="llm_observability/evaluations/tool_selection_2.png" alt="A tool selection evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_selection_2.png" alt="A tool selection evaluation in Agent Observability" style="width:100%;" >}}
 
 #### Configure a Tool Selection evaluation
 
@@ -220,7 +284,7 @@ Even if the right tool is selected, the arguments passed to it must be valid and
 |---|---|
 | Evaluated on spans with tool calls | Verifies that arguments provided to a tool are correct and relevant based on the tool schema. Identifies invalid or irrelevant arguments. |
 
-{{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluation in LLM Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/tool_argument_correctness_2.png" alt="A tool argument correctness error detected by the evaluation in Agent Observability" style="width:100%;" >}}
 
 #### Configure a Tool Argument Correctness evaluation
 
@@ -342,3 +406,5 @@ result = triage_agent.run_sync(
 [22]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#goal-completeness
 [23]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-argument-correctness
 [24]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#tool-selection
+[25]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/template_evaluations#hallucination
+[26]: /llm_observability/instrumentation/sdk?tab=python#prompt-tracking

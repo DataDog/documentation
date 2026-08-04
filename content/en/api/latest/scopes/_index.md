@@ -3,7 +3,7 @@ title: Authorization Scopes
 type: api
 disable_sidebar: true
 ---
-## Authorization scopes for OAuth clients
+{{< h2-with-copy-btn >}}Authorization scopes for OAuth clients{{< /h2-with-copy-btn >}}
 
 Scopes are an authorization mechanism that allow you to limit and define the specific access applications have to an organization's Datadog data. When authorized to access data on behalf of a user or service account, applications can only access the information explicitly permitted by their assigned scopes.
 

@@ -32,6 +32,8 @@ cascade:
     {{< nextlink href="integrations/guide/cluster-monitoring-vmware-tanzu" tag=" VMWare Tanzu" >}}Datadog Cluster Monitoring for VMware Tanzu{{< /nextlink >}}
     {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/microsoft_teams_troubleshooting" tag=" Microsoft Teams" >}}Troubleshooting Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/microsoft_teams_migrate_legacy_connectors" tag=" Microsoft Teams" >}}Migrate from Office 365 Connectors in Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/slack-actions" tag=" Slack" >}}Slack Actions for Incidents, On-Call, Monitors, Dashboards, Workflows, and Accounts{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="AWS guides" >}}
@@ -40,6 +42,7 @@ cascade:
     {{< nextlink href="integrations/guide/aws-organizations-setup" tag=" AWS" >}}AWS integration multi-account setup for Organizations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-manual-setup" tag=" AWS" >}}AWS integration manual setup{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-integration-troubleshooting" tag=" AWS" >}}Troubleshooting the AWS integration{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/aws-metric-name-filters" tag=" AWS" >}}Configure AWS metric name filters with the API{{< /nextlink >}}
     {{< nextlink href="integrations/guide/monitor-your-aws-billing-details" tag=" AWS" >}}Monitor your AWS billing details{{< /nextlink >}}
     {{< nextlink href="integrations/guide/error-datadog-not-authorized-sts-assume-role" tag=" AWS" >}}Error: Datadog is not authorized to perform sts:AssumeRole{{< /nextlink >}}
     {{< nextlink href="integrations/guide/aws-cloudwatch-metric-streams-with-kinesis-data-firehose" tag=" AWS" >}}AWS CloudWatch Metric Streams with Amazon Data Firehose{{< /nextlink >}}

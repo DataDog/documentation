@@ -26,7 +26,7 @@ Outlier detection is an algorithmic feature that allows you to detect when a spe
 
 ## Monitor creation
 
-To create an outlier monitor in Datadog, navigate to [**Monitors > New Monitor > Outlier**][1].
+To create an outlier monitor in Datadog, navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Outlier{{< /ui >}}][1].
 
 ### Define the metric
 
@@ -44,7 +44,7 @@ The outlier monitor requires a metric with a group (hosts, availability zones, p
 
 When setting up an outlier monitor, the time window is an important consideration. If the time window is too large, you might not be alerted in time. If the time window is too short, the alerts are not as resilient to one-off spikes.
 
-To ensure your alert is properly calibrated, set the time window in the preview graph and use the reverse (<<) button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
+To ensure your alert is properly calibrated, set the time window in the preview graph and use the {{< ui >}}reverse (<<){{< /ui >}} button to look back in time at outliers that would have triggered an alert. Additionally, you can use this feature to tune your parameters to a specific outlier algorithm.
 
 {{< img src="monitors/monitor_types/outliers/outliers-new-monitor-graph-calibrate.png" alt="outliers new monitor graph calibrate" style="width:80%;">}}
 
@@ -101,7 +101,7 @@ For detailed instructions on the advanced alert options (auto resolve, new group
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][4] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][4] page.
 
 ## API
 

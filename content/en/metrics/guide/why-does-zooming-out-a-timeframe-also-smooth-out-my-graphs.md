@@ -1,5 +1,6 @@
 ---
 title: Why does zooming out a timeframe also smooth out my graphs?
+description: "Understand why graphs lose granularity and appear smoother as you increase the timeframe."
 further_reading:
 - link: "/metrics/types/"
   tag: "Documentation"

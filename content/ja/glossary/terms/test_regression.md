@@ -1,8 +1,9 @@
 ---
+id: test_regression
 core_product:
 - ci-cd
 related_terms:
-- パフォーマンスレグレッション
+- performance_regression_test_visibility
 short_definition: テスト実行は、その所要時間がデフォルトブランチにおける同一テストの平均の 5 倍で、かつ同一テストの最大所要時間を上回る場合にリグレッションとしてマークされます。さらに、そのテスト実行がリグレッションと見なされるには、所要時間が
   500 ミリ秒以上である必要があります。
 title: テスト回帰

@@ -18,10 +18,10 @@ further_reading:
 - link: /data_security/real_user_monitoring/
   tag: Documentation
   text: Sécurité des données RUM
-- link: /real_user_monitoring/session_replay/browser/privacy_options
+- link: /session_replay/browser/privacy_options
   tag: Documentation
   text: Options de confidentialité de Session Replay
-- link: /sensitive_data_scanner/
+- link: /security/sensitive_data_scanner/
   tag: Documentation
   text: Scanner de données sensibles
 title: Réduction des risques liés à vos données
@@ -71,7 +71,7 @@ Le scanner de données sensibles est un service de détection de patterns basés
 
 Les logs sont des enregistrements générés par vos systèmes et services, ainsi que par les opérations qu'ils effectuent. Pour en savoir plus sur les considérations relatives à la sécurité des données des logs, et notamment découvrir comment filtrer et obfusquer les données de vos logs, consultez la section [Sécurité des données de Log Management][11].
 
-Pour approfondir vos connaissances sur le contrôle des données des logs, consultez le guide [Contrôler les données de logs sensibles][12] et [Configurations avancées pour la collecte de logs][13].
+Explorez en détail le contrôle des données de logs avec le guide [Gérer l'accès aux données de logs sensibles][12] et la [Configuration avancée de l'Agent pour les logs][13].
 
 Le contrôle d'accès contribue grandement à la réduction des risqués liés à la sécurité des données des logs. Consultez les sections [Configuration du RBAC pour les logs][14] et [Autorisations RBAC pour les logs][15] pour découvrir les étapes à suivre dans Datadog.
 
@@ -83,10 +83,10 @@ Afin d'éviter toute fuite de données sensibles dans le cadre de la surveillanc
 
 Les bibliothèques de tracing Datadog servent à instrumenter vos applications, services, tests et pipelines. Elles permettent également d'envoyer des données de performance à Datadog via l'Agent. Les données des traces et des spans, entre autres, qui sont générées peuvent être utilisées par les produits suivants :
 
-- Application Security Monitoring (APM)
+- Application Performance Monitoring (APM)
 - Profileur en continu
-- CI Visibility
-- Application Security Management
+- CI Visibility
+- Protection des applications et des API
 
 Pour en savoir plus sur la gestion des données provenant de la bibliothèque de tracing, sur les paramètres de sécurité de base par défaut, ainsi que sur l'obfuscation, le nettoyage, l'exclusion et la modification personnalisés des éléments liés aux traces, consultez la section [Configurer l'Agent Datadog ou le traceur pour assurer la sécurité des données] [18].
 
@@ -143,16 +143,16 @@ Pipelines et tests d'intégration continue
 
 [1]: https://www.datadoghq.com/security/
 [2]: https://www.datadoghq.com/legal/privacy/
-[3]: /fr/developers/dogstatsd/
+[3]: /fr/extend/dogstatsd/
 [4]: /fr/data_security/agent/
 [5]: /fr/agent/configuration/secrets-management/
 [6]: /fr/integrations/amazon_web_services/
 [7]: https://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html#delegate-using-roles
 [8]: /fr/integrations/azure/
 [9]: /fr/integrations/google_cloud_platform/
-[10]: /fr/sensitive_data_scanner/
+[10]: /fr/security/sensitive_data_scanner/
 [11]: /fr/data_security/logs/
-[12]: /fr/logs/guide/control-sensitive-logs-data/
+[12]: /fr/logs/guide/manage-sensitive-logs-data-access/
 [13]: /fr/agent/logs/advanced_log_collection
 [14]: /fr/logs/guide/logs-rbac
 [15]: /fr/logs/guide/logs-rbac-permissions
@@ -161,8 +161,8 @@ Pipelines et tests d'intégration continue
 [18]: /fr/tracing/configure_data_security/
 [19]: /fr/serverless/distributed_tracing/collect_lambda_payloads#obfuscating-payload-contents
 [20]: /fr/data_security/synthetics/
-[21]: /fr/real_user_monitoring/browser/advanced_configuration/
-[22]: /fr/real_user_monitoring/session_replay/browser/privacy_options
+[21]: /fr/real_user_monitoring/application_monitoring/browser/advanced_configuration/
+[22]: /fr/session_replay/browser/privacy_options
 [23]: /fr/database_monitoring/data_collected/#sensitive-information
 [24]: /fr/getting_started/tagging/
 [25]: /fr/tracing/glossary/

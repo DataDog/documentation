@@ -11,46 +11,96 @@ further_reading:
 - link: "/tracing/"
   tag: "Documentation"
   text: "Learn about Application Performance Monitoring (APM)"
+- link: "/feature_flags/guide/server_flag_evaluation_metrics/"
+  tag: "Guide"
+  text: "Set Up Server-Side Flag Evaluation Metrics"
+- link: "/feature_flags/concepts/flag_graphs/"
+  tag: "Concept"
+  text: "Feature Flag Graphs"
+- link: "/feature_flags/concepts/configuration_sources/"
+  tag: "Concept"
+  text: "Server SDK Configuration Sources"
 ---
 
 ## Overview
 
-This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management, and uses the Datadog tracer's Remote Configuration to receive flag updates in real time.
+This page describes how to instrument your Node.js application with the Datadog Feature Flags SDK. The Node.js SDK integrates with [OpenFeature][2], an open standard for feature flag management. Starting in `dd-trace` 5.116.0 and 6.5.0, it loads flag configuration directly from the Datadog-managed CDN by default.
 
-## Prerequisites
+<div class="alert alert-warning">Node.js 5.116.0 and 6.5.0 support agentless configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
 
-Before setting up the Node.js Feature Flags SDK, ensure you have:
+## Getting started
 
-- **Datadog Agent** with [Remote Configuration](/agent/remote_config/) enabled. See [Agent Configuration](/feature_flags/server#agent-configuration) for details.
-- **Datadog Node.js tracer** `dd-trace` version 5.80.0 or later
+For the default agentless setup, you need:
+
+- **Datadog Node.js SDK** `dd-trace` version **5.116.0 or later on the v5 release line**, or **6.5.0 or later on the v6 release line**
+- A Datadog [API key][3]
+- Your Datadog site
 - **@openfeature/server-sdk** version ~1.20.0
 
 ## Installing and initializing
 
-Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and enable the feature flagging provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
+Feature Flagging is provided by Application Performance Monitoring (APM). To integrate APM into your application with feature flagging support, install `dd-trace` and initialize the Datadog OpenFeature provider. See [Tracing Node.js Applications][1] for detailed APM installation instructions.
 
 ```shell
 npm install dd-trace @openfeature/server-sdk
 ```
 
+If your application stays on the v5 release line, use `dd-trace@^5.116.0`. On the v6 release line, use `dd-trace@^6.5.0`.
+
+### Configure agentless delivery
+
+Configure the API key, Datadog site, and environment in the application process:
+
+```shell
+DD_API_KEY=<YOUR_API_KEY>
+DD_SITE={{< region-param key="dd_site" code="true" >}}
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
+No Feature Flags enablement or source setting is required. Access `tracer.openfeature` and register it with OpenFeature, as shown below, to begin polling. Installing or initializing `dd-trace` alone does not create Feature Flags CDN traffic.
+
+Initialize the provider in code:
+
 ```javascript
 import { OpenFeature } from '@openfeature/server-sdk'
 import tracer from 'dd-trace';
 
-tracer.init({
-  experimental: {
-    flaggingProvider: {
-      enabled: true,
-    }
-  }
-});
+tracer.init();
 
-OpenFeature.setProvider(tracer.openfeature);
+// Accessing tracer.openfeature activates the default agentless source.
+// setProviderAndWait resolves after the selected source loads, so flags
+// evaluate against real configuration data instead of default values.
+try {
+  await OpenFeature.setProviderAndWait(tracer.openfeature);
+} catch (err) {
+  // If initialization fails, evaluations return default values until the
+  // provider receives its first configuration. Log the error so it's visible.
+  console.error('Datadog feature flag provider failed to initialize', err);
+}
 ```
+
+These examples use ESM modules, where `await` is available at the top level. In CommonJS, wrap top-level `await` in an async function.
+
+Most applications also run other asynchronous startup tasks, such as opening database connections or loading configuration. Start their promises together with the provider promise and await them as a group, so total startup time stays close to the slowest task instead of the sum of all of them:
+
+```javascript
+// Start feature flag setup alongside your other startup tasks, then await them together.
+const [_, db] = await Promise.all([
+  // Catch here so a failed provider init does not reject the whole batch.
+  // Evaluations return default values until the provider receives its config.
+  OpenFeature.setProviderAndWait(tracer.openfeature).catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  }),
+  connectToDatabase(), // your application's other async startup work
+]);
+// db is connected and the server can start; flags evaluate against real configuration, or fall back to defaults if initialization failed.
+```
+
+Blocking startup until the provider is ready, as shown above, works well for most applications. If your application must start serving requests before initialization completes, choose one of the following strategies.
 
 ### Accepting default values before initialization
 
-When you call `setProvider` without waiting, the client returns default values until Remote Configuration loads in the background. This approach keeps your application responsive during startup but may serve defaults for early requests.
+When responsiveness during startup matters more than serving real values for the first few requests, you can call `setProvider` without waiting for initialization. `setProvider` is synchronous, so the client returns default values until the selected configuration source loads in the background.
 
 ```javascript
 OpenFeature.setProvider(tracer.openfeature);
@@ -80,10 +130,17 @@ app.get('/my-endpoint', async (req, res) => {
 
 ### Waiting for provider initialization
 
-Use `setProviderAndWait` to ensure the provider fully initializes before evaluating flags. This guarantees that flag evaluations use actual configuration data rather than defaults, at the cost of delaying requests during initialization.
+When you want the server to start listening immediately while still evaluating against real configuration data, you can defer the wait to request time. Store the initialization promise, then await it in each request handler before evaluating flags. Requests that arrive before initialization completes wait for it to finish.
 
 ```javascript
-const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature);
+// Attach the catch once, at creation. This logs a failed initialization a
+// single time and keeps the shared promise from rejecting on every request;
+// evaluations return default values until the provider receives its first
+// configuration.
+const initializationPromise = OpenFeature.setProviderAndWait(tracer.openfeature)
+  .catch((err) => {
+    console.error('Datadog feature flag provider failed to initialize', err);
+  });
 const client = OpenFeature.getClient();
 
 app.get('/my-endpoint', async (req, res) => {
@@ -95,7 +152,8 @@ app.get('/my-endpoint', async (req, res) => {
     companyID: req.session?.companyID
   };
 
-  // Wait for initialization if necessary
+  // Wait for initialization if necessary. The promise is already handled
+  // above, so awaiting it here never throws, even if initialization failed.
   await initializationPromise;
 
   // Note: evaluations are synchronous, but return a Promise type
@@ -114,6 +172,8 @@ app.get('/my-endpoint', async (req, res) => {
 ## Set the evaluation context
 
 Define who or what the flag evaluation applies to using an `EvaluationContext`. The evaluation context can include user or session information used to determine which flag variations should be returned. Call the `OpenFeature.setContext` method before evaluating flags to ensure proper targeting.
+
+<div class="alert alert-warning">Datadog Feature Flags requires evaluation context attributes to be flat primitive values: strings, numbers, and Booleans. Do not pass nested objects or arrays; they are not supported and can cause exposure data to be dropped.</div>
 
 ## Evaluate flags
 
@@ -197,7 +257,7 @@ const priceMultiplier = await client.getNumberValue(
 
 ### Object flags
 
-For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful for Remote Configuration scenarios where multiple properties need to be provided together.
+For structured JSON data, use `getObjectValue()`. This method returns an `object`, which can represent primitives, arrays, or dictionaries. Object flags are useful when multiple properties need to be provided together.
 
 ```javascript
 const defaultConfig = {
@@ -235,9 +295,88 @@ console.log(details.errorMessage); // A more detailed message of the error that 
 console.log(details.flagMetadata); // Additional information about the evaluation
 ```
 
+## Advanced configuration
+
+Use [Server SDK Configuration Sources][6] as the canonical reference for source selection and operational settings:
+
+- [Configure agentless delivery][9], including polling, request timeout, and endpoint settings
+- [Use a custom agentless endpoint][7] for advanced testing, local development, or an operator-managed proxy
+- [Use Agent Remote Configuration][10] to retain Agent-managed delivery
+- [Migrate an existing Remote Configuration setup][8] and remove the deprecated `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED` setting
+
+The initial Node.js agentless releases do not support `feature_flag.evaluations`, exposure logging, or experimentation use cases. The [Server-Side Flag Evaluation Metrics][4] guide applies only to supported Agent-backed configurations. For more information on available graphing, see [Feature Flag Graphs][5].
+
+## Testing
+
+You can test against a dedicated Datadog test environment with the real `tracer.openfeature` provider, or swap it for OpenFeature's `TypedInMemoryProvider` to control flag values directly in test code. This section shows the in-memory approach, which keeps tests hermetic and offline. `TypedInMemoryProvider` ships with `@openfeature/server-sdk`, so no additional dependency is required.
+
+When using the in-memory provider, do not call `tracer.init()` or set `tracer.openfeature` as the provider — that is the behavior being replaced.
+
+The OpenFeature API is a singleton per Node.js process. Reset it in `afterAll` with `OpenFeature.close()` or `OpenFeature.clearProviders()` to prevent state from one test file leaking into the next.
+
+```javascript
+// flags.test.js
+import { beforeAll, beforeEach, afterAll, expect, test } from 'vitest';
+import { OpenFeature, TypedInMemoryProvider } from '@openfeature/server-sdk';
+
+const flags = {
+  'new-checkout-flow': {
+    variants: { on: true, off: false },
+    defaultVariant: 'off',
+    disabled: false,
+    contextEvaluator: (ctx) => (ctx.companyID === 'beta-co' ? 'on' : 'off'),
+  },
+};
+
+let provider;
+
+beforeAll(async () => {
+  provider = new TypedInMemoryProvider(flags);
+  await OpenFeature.setProviderAndWait(provider);
+});
+
+beforeEach(() => {
+  // Reset flag state between tests to prevent cross-test pollution.
+  provider.putConfiguration(flags);
+});
+
+afterAll(async () => {
+  await OpenFeature.close();
+});
+
+test('beta company sees new checkout', async () => {
+  const client = OpenFeature.getClient();
+  const value = await client.getBooleanValue('new-checkout-flow', false, {
+    targetingKey: 'user-1',
+    companyID: 'beta-co',
+  });
+  expect(value).toBe(true);
+});
+
+test('non-beta company falls back to default', async () => {
+  const client = OpenFeature.getClient();
+  const details = await client.getBooleanDetails('new-checkout-flow', false, {
+    targetingKey: 'user-2',
+    companyID: 'acme',
+  });
+  expect(details.value).toBe(false);
+  expect(details.variant).toBe('off');
+});
+```
+
+The snippet above uses Vitest for its first-class ESM support. The same pattern works with Jest; Jest users may need `--experimental-vm-modules` if their project is ESM. The non-generic `InMemoryProvider` export is deprecated — prefer `TypedInMemoryProvider`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
 [2]: https://openfeature.dev/
+[3]: /account_management/api-app-keys/#api-keys
+[4]: /feature_flags/guide/server_flag_evaluation_metrics/
+[5]: /feature_flags/concepts/flag_graphs/
+[6]: /feature_flags/concepts/configuration_sources/
+[7]: /feature_flags/concepts/configuration_sources/#use-a-custom-agentless-endpoint
+[8]: /feature_flags/concepts/configuration_sources/#migrate-an-existing-remote-configuration-setup
+[9]: /feature_flags/concepts/configuration_sources/#configure-agentless-delivery
+[10]: /feature_flags/concepts/configuration_sources/#use-agent-remote-configuration

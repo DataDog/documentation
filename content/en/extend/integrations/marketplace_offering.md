@@ -69,7 +69,7 @@ Creating a developer sandbox may take up to one or two business days. Once your 
 
 ## Request access to Marketplace
 
-To request access to the private Marketplace repository, email <a href="mailto:marketplace@datadoghq.com">marketplace@datadoghq.com</a>. Once you have been granted access, you can review an [example pull request][12] in the Marketplace repository with annotations and best practices.
+To request access to the private Marketplace repository, email [marketplace@datadoghq.com][14]. Once you have been granted access, you can review an [example pull request][12] in the Marketplace repository with annotations and best practices.
 
 ## Coordinate go-to-market (GTM) opportunities
 
@@ -103,3 +103,4 @@ To get started with creating an integration, see [Build an Integration with Data
 [19]: https://docs.datadoghq.com/extend/integrations/agent_integration
 [20]: https://www.dashcon.io/
 [21]: https://www.datadoghq.com/blog/
+[14]: mailto:marketplace@datadoghq.com

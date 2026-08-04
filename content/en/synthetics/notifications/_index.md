@@ -156,7 +156,7 @@ Loop through all steps in a multistep API test and display variables extracted b
 {{% /tab %}}
 {{% tab "Browser and mobile test variables" %}}
 
-Loop through all steps in a browser or mobile test and display variables extracted by steps that use the "Extract variable" action.
+Loop through all steps in a browser or mobile test and display variables extracted by steps that use the {{< ui >}}Extract variable{{< /ui >}} action.
 
 ```shell
 {{#each synthetics.attributes.result.steps}}
@@ -224,11 +224,11 @@ See [Monitor Notifications][5] for more information.
 You can test your notification messages by sending simulated notifications. To do this:
 
 1. Add a notification handle to your monitor message
-2. Click the **Simulate Notifications** button:
+2. Click the {{< ui >}}Simulate Notifications{{< /ui >}} button:
 
   {{< img src="/synthetics/notifications/simulate_notifications.png" alt="Synthetics Monitor screen, highlighting the Simulate Notifications button" style="width:80%;" >}}
 
-3. Select the notification type you want to test and click **Send**:
+3. Select the notification type you want to test and click {{< ui >}}Send{{< /ui >}}:
 
    {{< img src="/synthetics/notifications/simulate_notifications_type.png" alt="Send a notification simulating a test failure or recovery." style="width:80%;" >}}
 

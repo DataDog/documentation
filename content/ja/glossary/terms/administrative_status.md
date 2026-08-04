@@ -1,4 +1,5 @@
 ---
+id: administrative_status
 synonyms:
 - 管理ステータス
 title: 管理ステータス

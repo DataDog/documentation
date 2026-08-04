@@ -26,16 +26,16 @@ Data Streams Monitoring (DSM) extracts transaction IDs from sync (like HTTP requ
 
 ## Create a transaction pipeline
 
-1. Navigate to [<span class="ui">Data Streams Monitoring > Transactions</span>][1]. You must [complete the form][2] to access this page.
-1. Select <span class="ui">Create Transaction Pipeline</span>.
+1. Navigate to [{{< ui >}}Data Streams Monitoring > Transactions{{< /ui >}}][1]. You must [complete the form][2] to access this page.
+1. Select {{< ui >}}Create Transaction Pipeline{{< /ui >}}.
 1. In the modal, define:
-   - <span class="ui">Pipeline Name</span>: A name for your pipeline
-   - Steps to track transactios across services. For each step, select a <span class="ui">Service</span>, an <span class="ui">Environment</span>, and an <span class="ui">Extractor Type</span>. Define a <span class="ui">Header Name</span>.
+   - {{< ui >}}Pipeline Name{{< /ui >}}: A name for your pipeline
+   - Steps to track transactios across services. For each step, select a {{< ui >}}Service{{< /ui >}}, an {{< ui >}}Environment{{< /ui >}}, and an {{< ui >}}Extractor Type{{< /ui >}}. Define a {{< ui >}}Header Name{{< /ui >}}.
    {{< img src="data_streams/btt-create-pipeline.png" alt="The Create Transaction Tracking Pipeline modal at step 1, Define. Fields include Pipeline Name and SLO Duration. Two steps are configured: a start step using the transaction-generator service with an HTTP Response Header extractor type, and an end step using the transaction-queuer service with an HTTP Request Header extractor type." style="width:100%;" >}}
-1. Click <span class="ui">Save and Continue</span>.
+1. Click {{< ui >}}Save and Continue{{< /ui >}}.
 1. Verify your checkpoints. If any checkpoints require configuration, copy and paste the provided environment variables into your service deployment.
    {{< img src="data_streams/btt-configure-verify.png" alt="The Configure and Verify Checkpoints modal at step 2. Two services are listed with Needs Configuration status: transaction-generator with a start checkpoint, and transaction-queuer with a queuer-in checkpoint. Each service displays a DD_DATA_STREAMS_TRANSACTION_EXTRACTORS environment variable to copy into the service deployment." style="width:100%;" >}}
-1. Click <span class="ui">Done</span>.
+1. Click {{< ui >}}Done{{< /ui >}}.
 
 
 [1]: https://app.datadoghq.com/data-streams/transactions

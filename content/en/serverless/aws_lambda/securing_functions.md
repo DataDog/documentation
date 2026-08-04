@@ -9,7 +9,7 @@ further_reading:
   text: "How App and API Protection Works"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">This feature is not supported for your selected Datadog site. ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 

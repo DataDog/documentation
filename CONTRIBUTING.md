@@ -175,8 +175,9 @@ See the documentation wiki to learn more about [image partials][6].
 
 ### Links
 
-Format links using numbered [reference-style links][8], and use relative paths for other pages published on the documentation site.
+Format links using numbered [reference-style links][8], and use relative paths for other pages published on the documentation site. Don't use word-based ID labels in reference-style links; numbered links are easier to maintain for localization.
 - **Not recommended**: `read the [Getting Started with Azure](/getting_started/azure/)`
+- **Not recommended**: `read the [Getting Started with Azure][azure-guide]`
 - **Recommended**: `read the [Getting Started with Azure][1]` with a link reference at the bottom of the file: `[1]: /getting_started/azure/`.
 
 Avoid vague link text; let readers know where you're sending them. This is particularly important for anyone using assistive technology to scroll through links; descriptive link text helps them find what they're looking for. Any sentence containing a link should read just as well if it didn't have the link.
@@ -212,6 +213,16 @@ Avoid adding overview sections that duplicate the page’s structure (for exampl
 
 If a page requires structured navigation (for example, a long multi-stage workflow), ensure any summary or jump list adds context or guidance beyond what the automatic table of contents already provides.
 
+
+## AI code assistants
+
+Contributors may use AI code assistants (such as Claude Code, GitHub Copilot, Cursor, and others) when working on documentation. If you do, keep the following in mind:
+
+**Transparency**: Note AI tool usage in your pull request description using the AI assistance section in the PR template. This helps reviewers calibrate their review.
+
+**Quality and accuracy**: AI-assisted contributions are held to the same quality bar as any other contribution. You are responsible for the accuracy of all content you submit, regardless of how it was produced.
+
+**Style compliance**: AI tools may not follow the Datadog documentation [style guide][4] or [Vale linting rules][4]. Run `vale` on your changes and fix any issues before submitting.
 
 [1]: https://github.com/DataDog/documentation/wiki
 [2]: https://tools.ietf.org/html/rfc2119

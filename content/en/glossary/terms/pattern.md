@@ -1,4 +1,5 @@
 ---
+id: pattern
 title: pattern
 core_product:
   - log management

@@ -1,4 +1,5 @@
 ---
+id: manifest
 core_product:
 - infrastructure monitoring
 title: マニフェスト (Kubernetes)

@@ -32,9 +32,9 @@ Create two monitors:
 
 | Monitor A | Monitor B | Composite Monitor C |
 |-----------|-----------|---------------------|
-| **Alert** Error rate above threshold | **Alert** Hits above threshold | **Alert** |
-| **Alert** Error rate above threshold | **OK** Hits below threshold | **OK** Only 1 condition met, no alert |
-| **OK** Error rate below threshold | **Alert** Hits above threshold | **OK** Only 1 condition met, no alert |
+| {{< ui >}}Alert{{< /ui >}} Error rate above threshold | {{< ui >}}Alert{{< /ui >}} Hits above threshold | {{< ui >}}Alert{{< /ui >}} |
+| {{< ui >}}Alert{{< /ui >}} Error rate above threshold | {{< ui >}}OK{{< /ui >}} Hits below threshold | {{< ui >}}OK{{< /ui >}} Only 1 condition met, no alert |
+| {{< ui >}}OK{{< /ui >}} Error rate below threshold | {{< ui >}}Alert{{< /ui >}} Hits above threshold | {{< ui >}}OK{{< /ui >}} Only 1 condition met, no alert |
 
 For more state combinations, see [Composite Monitor](https://docs.datadoghq.com/monitors/create/types/composite/#computing-trigger-conditions).
 
@@ -51,9 +51,9 @@ Create two monitors:
 
 | Monitor A | Monitor B | Composite Monitor C |
 |-----------|-----------|---------------------|
-| **Alert** Latency above threshold | **Alert** More than Y metrics | **Alert** |
-| **Alert** Latency above threshold | **OK** Less than Y metrics | **OK** Not enough metrics |
-| **OK** Latency below threshold | **Alert** More than Y metrics | **OK** Latency below threshold |
+| {{< ui >}}Alert{{< /ui >}} Latency above threshold | {{< ui >}}Alert{{< /ui >}} More than Y metrics | {{< ui >}}Alert{{< /ui >}} |
+| {{< ui >}}Alert{{< /ui >}} Latency above threshold | {{< ui >}}OK{{< /ui >}} Less than Y metrics | {{< ui >}}OK{{< /ui >}} Not enough metrics |
+| {{< ui >}}OK{{< /ui >}} Latency below threshold | {{< ui >}}Alert{{< /ui >}} More than Y metrics | {{< ui >}}OK{{< /ui >}} Latency below threshold |
 
 ## Step monitor
 
@@ -66,9 +66,9 @@ Trigger an alert in the absence of a paired metric. For example, log metrics for
 
 | Monitor A | Monitor B | Composite Monitor C |
 |-----------|-----------|---------------------|
-| **Alert** Action create above 0 | **Alert** Action resolve above 0 | **OK** |
-| **Alert** Action create above 0 | **OK** | **Alert** Action resolve not present |
-| **OK** | **Alert** Action resolve above 0 | **OK** |
+| {{< ui >}}Alert{{< /ui >}} Action create above 0 | {{< ui >}}Alert{{< /ui >}} Action resolve above 0 | {{< ui >}}OK{{< /ui >}} |
+| {{< ui >}}Alert{{< /ui >}} Action create above 0 | {{< ui >}}OK{{< /ui >}} | {{< ui >}}Alert{{< /ui >}} Action resolve not present |
+| {{< ui >}}OK{{< /ui >}} | {{< ui >}}Alert{{< /ui >}} Action resolve above 0 | {{< ui >}}OK{{< /ui >}} |
 
 ## Renotifying on recovery
 
@@ -81,9 +81,9 @@ Renotify on recovery using two monitors with a `timeshift`.
 
 | Monitor A | Monitor B | Composite Monitor C |
 |-----------|-----------|---------------------|
-| **Alert** Real-time metric | **Alert** Past metric | **OK** |
-| **Alert** Real-time metric | **OK** Metric not triggered | **OK** |
-| **OK** Metric not triggered | **Alert** Past metric | **Alert** |
+| {{< ui >}}Alert{{< /ui >}} Real-time metric | {{< ui >}}Alert{{< /ui >}} Past metric | {{< ui >}}OK{{< /ui >}} |
+| {{< ui >}}Alert{{< /ui >}} Real-time metric | {{< ui >}}OK{{< /ui >}} Metric not triggered | {{< ui >}}OK{{< /ui >}} |
+| {{< ui >}}OK{{< /ui >}} Metric not triggered | {{< ui >}}Alert{{< /ui >}} Past metric | {{< ui >}}Alert{{< /ui >}} |
 
 ## Delay on notification
 
@@ -96,9 +96,9 @@ Alert after errors persist for a set duration. For example, a set of errors trig
 
 | Monitor A | Monitor B (timeshifted) | Composite Monitor C |
 |-----------|--------------------------|---------------------|
-| **Alert** Real-time metric | **Alert** Past metric | **Alert** |
-| **Alert** Real-time metric | **OK** Metric not triggered | **OK** |
-| **OK** Metric not triggered | **Alert** Past metric | **OK** |
+| {{< ui >}}Alert{{< /ui >}} Real-time metric | {{< ui >}}Alert{{< /ui >}} Past metric | {{< ui >}}Alert{{< /ui >}} |
+| {{< ui >}}Alert{{< /ui >}} Real-time metric | {{< ui >}}OK{{< /ui >}} Metric not triggered | {{< ui >}}OK{{< /ui >}} |
+| {{< ui >}}OK{{< /ui >}} Metric not triggered | {{< ui >}}Alert{{< /ui >}} Past metric | {{< ui >}}OK{{< /ui >}} |
 
 ## Further reading
 

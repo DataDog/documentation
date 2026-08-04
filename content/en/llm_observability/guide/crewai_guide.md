@@ -1,8 +1,9 @@
 ---
-title: Datadog-CrewAI integration for LLM Observability
+title: Datadog-CrewAI integration for Agent Observability
+description: Learn how to integrate CrewAI with Agent Observability using auto-instrumentation to monitor and trace your CrewAI agent runs.
 ---
 
-This guide demonstrates how to integrate LLM Observability with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit LLM Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
+This guide demonstrates how to integrate Agent Observability with [CrewAI][1] using [auto-instrumentation][2]. This also includes how to submit Agent Observability traces to Datadog and view your CrewAI agent runs in Datadog's [Agentic Execution View][3].
 
 ## Getting started
 
@@ -18,7 +19,7 @@ pip install ddtrace crewai crewai-tools
 
 If you do not have a Datadog API key, create an account and [get your API key][4].
 
-You also need to specify an _ML application name_ in the following environment variables. An ML application is a grouping of LLM Observability traces associated with a specific LLM-based application. See [Application naming guidelines][5] for more information on limitations with ML application names.
+You also need to specify an _ML application name_ in the following environment variables. An ML application is a grouping of Agent Observability traces associated with a specific LLM-based application. See [Application naming guidelines][5] for more information on limitations with ML application names.
 
 ```shell 
 export DD_API_KEY=<YOUR_DD_API_KEY>
@@ -85,15 +86,15 @@ ddtrace-run python crewai_agent.py
 
 ### View the traces in Datadog
 
-After running the application, you can view the traces in [Datadog LLM Observability's Traces View][6], selecting the ML application name you chose from the top-left dropdown.
+After running the application, you can view the traces in [Agent Observability's Traces View][6], selecting the ML application name you chose from the top-left dropdown.
 
 Clicking on a trace shows you the details of the trace, including total tokens used, number of LLM calls, models used, and estimated cost. Clicking into a specific span narrows down these details and shows related input, output, and metadata.
 
-{{< img src="llm_observability/guides/crewai/trace_view.png" alt="A trace in LLM Observability, where the user has clicked into a CrewAI Crew workflow span. Toggled to 'Span Details' view. On the left, a tree view of tool calls and LLM calls in the span. Input, output, and metadata are displayed." style="width:100%;" >}}
+{{< img src="llm_observability/guides/crewai/trace_view.png" alt="A trace in Agent Observability, where the user has clicked into a CrewAI Crew workflow span. Toggled to 'Span Details' view. On the left, a tree view of tool calls and LLM calls in the span. Input, output, and metadata are displayed." style="width:100%;" >}}
 
 Additionally, you can view the execution graph view of the trace, which shows the control and data flow of the trace. This scales with larger agents to show handoffs and relationships between LLM calls, tool calls, and agent interactions.
 
-{{< img src="llm_observability/guides/crewai/execution_graph.png" alt="The same trace in LLM Observability, toggled to 'Execution Graph' view. Control and data flow of the trace is displayed." style="width:100%;" >}}
+{{< img src="llm_observability/guides/crewai/execution_graph.png" alt="The same trace in Agent Observability, toggled to 'Execution Graph' view. Control and data flow of the trace is displayed." style="width:100%;" >}}
 
 [1]: https://docs.crewai.com/en/introduction
 [2]: /llm_observability/instrumentation/auto_instrumentation

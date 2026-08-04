@@ -21,7 +21,7 @@ This guide walks through instrumenting a [Bun][2] application as an example. Bun
 ## Support level
 
 <div class="alert alert-info">
-This guide falls under the <strong>Custom Components</strong> <a href="/opentelemetry/setup/ddot_collector#support-levels">support level</a>. Datadog provides this documentation as a starting point, but does not directly support the runtime's functionality or the OpenTelemetry SDK's behavior within it. For runtime-specific issues, engage with the <a href="https://opentelemetry.io/community/">OpenTelemetry community</a> or the runtime maintainers.
+This guide falls under the <strong>Custom Components</strong> <a href="/opentelemetry/compatibility/#support-levels">support level</a>. Datadog provides this documentation as a starting point, but does not directly support the runtime's functionality or the OpenTelemetry SDK's behavior within it. For runtime-specific issues, engage with the <a href="https://opentelemetry.io/community/">OpenTelemetry community</a> or the runtime maintainers.
 </div>
 
 ## Prerequisites
@@ -163,7 +163,7 @@ For more manual instrumentation patterns, see the [OpenTelemetry JS instrumentat
 
 After your application handles a few requests:
 
-1. Go to [**APM** > **Traces**][6] in Datadog.
+1. Go to [{{< ui >}}APM{{< /ui >}} > {{< ui >}}Traces{{< /ui >}}][6] in Datadog.
 2. Search for your service name.
 3. Confirm that traces appear with the expected spans and metadata.
 

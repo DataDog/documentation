@@ -9,21 +9,27 @@ products:
 
 {{< product-availability >}}
 
-Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP). Select and set up this source when you [set up a pipeline][1].
+## Overview
+
+Use Observability Pipelines' Socket source to send logs to the Worker over a socket connection (TCP or UDP).
 
 ## Prerequisites
 
 {{% observability_pipelines/prerequisites/socket %}}
 
-## Set up the source in the pipeline UI
+## Setup
 
-Select and set up this source when you [set up a pipeline][1]. The information below is for the source settings in the pipeline UI.
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-<div class="alert alert-danger">Only enter the identifiers for the socket address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
-1.  Enter the identifier for your socket address. If you leave it blank, the [default](#set-secrets) is used.
-1. In the **Mode** dropdown menu, select the socket type to use.
-1. In the **Framing** dropdown menu, select how to delimit the stream of events.
+**Note**: The Worker can only receive logs over TCP or UDP. If your application writes to a UNIX domain socket, see [UNIX domain sockets](#unix-domain-sockets) for more information.
+
+After you select the Socket source in the pipeline UI:
+
+1.  Enter the identifier for your socket address. If you leave it blank, the [default](#secret-defaults) is used.
+1. In the {{< ui >}}Mode{{< /ui >}} dropdown menu, select the socket type to use.
+1. In the {{< ui >}}Framing{{< /ui >}} dropdown menu, select how to delimit the stream of events.
     <table>
         <colgroup>
             <col style="width:40%">
@@ -57,15 +63,79 @@ Select and set up this source when you [set up a pipeline][1]. The information b
         </tr>
     </table>
 
-### Optional settings
+{{% observability_pipelines/secrets_env_var_note %}}
 
-If you selected **TCP** mode, toggle the switch to **Enable TLS**. The following certificate and key files are required for TLS.<br>**Note**: All file paths are made relative to the configuration data directory, which is `/var/lib/observability-pipelines-worker/config/` by default. See [Advanced Worker Configurations][2] for more information. The file must be owned by the `observability-pipelines-worker group` and `observability-pipelines-worker` user, or at least readable by the group or user.
-- Enter the identifier for your socket key pass. If you leave it blank, the [default](#set-secrets) is used.
-- `Server Certificate Path`: The path to the certificate file that has been signed by your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `CA Certificate Path`: The path to the certificate file that is your Certificate Authority (CA) root file in DER or PEM (X.509).
-- `Private Key Path`: The path to the `.key` private key file that belongs to your Server Certificate Path in DER or PEM (PKCS #8) format.
+### Optional TLS settings
 
-## Set secrets
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
+
+## UNIX domain sockets
+
+The Socket source only supports receiving logs over TCP or UDP. If your application writes to a UNIX domain socket, use `socat` to bridge it to a TCP or UDP socket to send logs to the Worker.
+
+### Standalone bridge
+
+Run `socat` alongside your application to forward from the UNIX socket to the Worker:
+
+```
+socat UNIX-RECV:/var/run/app.sock TCP:<OPW_HOST>
+```
+
+Replace <OPW_HOST> with the host IP address or the load balancer URL associated with the Observability Pipelines Worker.
+
+### Kubernetes sidecar
+
+In Kubernetes, the Worker typically runs as a StatefulSet behind a Service, so it is not reachable over `localhost`. Run `socat` as a sidecar container in the same pod as your application, and share a volume for the socket file. For example:
+
+```yaml
+volumes:
+  - name: app-socket
+    emptyDir: {}
+
+initContainers:
+  # Remove any stale socket file before the sidecar starts
+  - name: socket-cleanup
+    image: busybox:1.36
+    command: ["sh", "-c", "rm -f /var/run/app/app.sock"]
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+containers:
+  # Your application container
+  - name: app
+    # ...
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+  # socat sidecar: bridges the UNIX socket to the Worker's Service
+  - name: socat-opw-bridge
+    image: alpine/socat:1.8.0.0
+    args:
+      - UNIX-RECV:/var/run/app/app.sock,fork
+      - TCP:<RELEASE_NAME>-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:5000
+    volumeMounts:
+      - name: app-socket
+        mountPath: /var/run/app
+
+# Monitor and adjust resources as necessary
+    resources:
+      requests:
+        cpu: 10m
+        memory: 16Mi
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1000
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
+```
+
+Point the `TCP` argument at the Worker's Kubernetes Service endpoint instead of `localhost`. The Worker's StatefulSet pods aren't guaranteed to run on every node, so the Worker pod might not be reachable at `localhost`. This is especially true if you have dedicated node groups for the Worker and your workloads.
+
+## Secret defaults
 
 {{% observability_pipelines/set_secrets_intro %}}
 
@@ -88,4 +158,6 @@ If you selected **TCP** mode, toggle the switch to **Enable TLS**. The following
 {{< /tabs >}}
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
-[2]: /observability_pipelines/configuration/install_the_worker/advanced_worker_configurations/
+[3]: https://app.datadoghq.com/observability-pipelines
+[4]: /api/latest/observability-pipelines/
+[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline

@@ -18,6 +18,12 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 <div class="alert alert-info">AAP support for Google Cloud Run is in Preview.</a></div>
 
 ## How it works

@@ -7,7 +7,7 @@ further_reading:
   text: "Managing Multiple-Organization Accounts"
 ---
 
-If you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them from the [**Organizations** page][1] in **Personal Settings**.
+If you belong to multiple Datadog organizations, the org switcher at the bottom left of the nav bar allows you to toggle between organizations. You can also view all organizations and switch between them from the [**Organizations** page][1] in {{< ui >}}Personal Settings{{< /ui >}}.
 
 {{< img src="account_management/org_switching_062024.png" alt="Two ways of switching organizations" style="width:90%;" >}}
 
@@ -16,6 +16,8 @@ For security purposes, you must have a valid session for each org you switch to.
 1. **Mixed auth approaches**: In cases where you have both SAML and username and password authentication, you must log in with the type required by the organization (username and password or SAML) as opposed to logging into one and getting access to all.
 
 2. **SAML Strict**: If your org is set for [SAML Strict][2], you must authenticate with SAML. You are required to re-authenticate each time you switch organizations. Since IdPs persist sessions, this is often a redirect.
+
+3. **Email verification**: If the organization uses SP-initiated SAML and does not have a custom subdomain, Datadog sends a one-time email verification code that you must enter to finish authenticating when you switch to that organization. This is the same verification code required at [login][4].
 
 ## Resetting passwords for multi-org users
 
@@ -42,3 +44,4 @@ If the above troubleshooting steps fail, contact the [Datadog support team][3] a
 [1]: https://app.datadoghq.com/personal-settings/organizations
 [2]: /account_management/saml/#saml-strict
 [3]: /help/
+[4]: /account_management/saml/#sp-initiated-login

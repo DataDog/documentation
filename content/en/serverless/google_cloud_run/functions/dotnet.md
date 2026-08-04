@@ -16,7 +16,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer**.
+1. **Install the Datadog .NET SDK**.
 
    Add the `Datadog.Trace.Bundle` [NuGet package][1] to your application.
 
@@ -81,6 +81,8 @@ logger.LogInformation("Hello World!");
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In Serverless Monitoring, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-sidecar language="csharp" function="true" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: ドキュメント
   text: インシデントと Slack のインテグレーション
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: ブログ
-  text: Datadog CoScreen でより効率的なペアプログラミングを実現
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
@@ -185,7 +182,7 @@ Incident Management をカスタマイズするには、[インシデント設�
 
 また、インシデントの宣言と編集、Slack や Zoom などとのインテグレーションにより、チームへの迅速なコミュニケーションも可能です。
 
-{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Datadog モバイル アプリの 2 つのビュー: 1 つは各インシデントの概要を示すインシデント リスト、もう 1 つは単一インシデントの詳細パネル" >}}
+{{< img src="incident_response/incident_management/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Datadog モバイル アプリの 2 つのビュー: 1 つは各インシデントの概要を示すインシデント リスト、もう 1 つは単一インシデントの詳細パネル" >}}
 
 ## その他の参考資料
 

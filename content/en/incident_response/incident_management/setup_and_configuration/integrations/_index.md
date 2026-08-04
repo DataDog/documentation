@@ -3,6 +3,7 @@ title: Incident Integrations
 description: "Learn how to connect Datadog Incident Management with third-party tools to automate workflows, sync communications, and streamline incident response."
 aliases:
 - /service_management/incident_management/integrations/
+- /service_management/incident_management/incident_settings/integrations/
 - /incident_response/incident_management/integrations
 ---
 
@@ -29,6 +30,7 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 {{< whatsnext desc="Set up and use the following integrations within the context of Datadog Incident Management:">}}
     {{< nextlink href="/incident_response/incident_management/integrations/slack" >}}Slack{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/microsoft_teams" >}}Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="/integrations/google-meet-incident-management" >}}Google Meet{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/google_chat" >}}Google Chat{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/jira" >}}Jira{{< /nextlink >}}
     {{< nextlink href="/incident_response/incident_management/integrations/servicenow" >}}ServiceNow{{< /nextlink >}}
@@ -41,7 +43,6 @@ Then, configure the integration for Incident Management by navigating to [**Inci
 Incident Management also integrates with:
 
 - [PagerDuty][3] and [Opsgenie][4] to send incident notifications to your on-call engineers.
-- [CoScreen][5] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Webhooks][6] to send incident notifications using webhooks (for example, [sending SMS to Twilio][7]).
 - [Zoom][8] to create Zoom meetings for an incident.
 
@@ -49,7 +50,6 @@ Incident Management also integrates with:
 [2]: https://app.datadoghq.com/incidents/settings#Integrations
 [3]: /integrations/pagerduty/
 [4]: /integrations/opsgenie/
-[5]: /coscreen
 [6]: /integrations/webhooks/
 [7]: /integrations/webhooks/#sending-sms-through-twilio
 [8]: /integrations/zoom_incident_management/

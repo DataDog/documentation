@@ -17,8 +17,8 @@ further_reading:
 ## Overview
 
 The following in-app configuration pages allow you to set ingested and indexed volumes for APM:
-- Use the **[Ingestion Control Page][1]** to control ingested span volume.
-- Use the **[Retention Filters page][2]** to control the number of indexed spans.
+- Use the [{{< ui >}}Ingestion Control Page{{< /ui >}}][1] to control ingested span volume.
+- Use the [{{< ui >}}Retention Filters page{{< /ui >}}][2] to control the number of indexed spans.
 
 Both pages are powered by **usage metrics**.
 
@@ -45,7 +45,7 @@ The following metrics are associated with ingested spans usage:
 
 To control usage, use `datadog.estimated_usage.apm.ingested_bytes`. Ingestion is metered by volume, not by the number of spans or traces. This metric is tagged with `env`, `service`, and`sampling_service`. These tags help identify which environments and services contribute to the ingestion volume. For more information about the `sampling_service` dimension, read [What is the sampling service?](#what-is-the-sampling-service).
 
-This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the tracing libraries of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
+This metric is also tagged by `ingestion_reason`, reflecting which [ingestion mechanisms][5] are responsible for sending spans to Datadog. These mechanisms are nested in the SDKs of the Datadog Agent. For more information about this dimension, see the [Ingestion Reasons dashboard][6].
 
 The `datadog.estimated_usage.apm.ingested_traces` metric measures the number of requests sampled per second, and only counts traces sampled by [head-based sampling][7]. This metric is also tagged by `env` and `service` so you can spot which services are starting the most traces.
 
@@ -78,7 +78,7 @@ In this dashboard, you can find information about:
 
 ## APM Ingestion Reasons dashboard
 
-The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or tracing library configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
+The [APM Ingestion Reasons dashboard][6] provides insights on each source of ingestion volume. Each ingestion usage metric is tagged with an `ingestion_reason` dimension, so you can see which configuration options (Datadog Agent configuration or SDK configuration) and products (such as RUM or Synthetic Testing) are generating the most APM data.
 
 {{< img src="tracing/trace_indexing_and_ingestion/usage_metrics/dashboard_ingestion_reasons.png" style="width:100%;" alt="APM Ingestion Reasons Dashboard" >}}
 

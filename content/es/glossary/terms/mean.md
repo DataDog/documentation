@@ -1,9 +1,10 @@
 ---
+id: mean
 core_product:
 - métricas
 related_terms:
-- moda
-- mediana
+- mode
+- median
 title: media
 ---
 La media es el número promedio de un conjunto de datos.

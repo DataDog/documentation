@@ -18,7 +18,7 @@ If the target of the remapper is an attribute, the remapper can also try to cast
 **Note**: The decimal separator for `Double` need to be `.`.
 
 
-Define the remapper processor on the [**Pipelines** page][1]. For example, remap `user` to `user.firstname`.
+Define the remapper processor on the [{{< ui >}}Pipelines{{< /ui >}} page][1]. For example, remap `user` to `user.firstname`.
 
 {{< img src="logs/log_configuration/processor/remapper.png" alt="Attribute remapper processor" style="width:80%;" >}}
 

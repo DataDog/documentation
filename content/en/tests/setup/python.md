@@ -36,6 +36,8 @@ Supported test frameworks:
 | `pytest-benchmark` | >= 3.1.0 |
 | `unittest` | >= 3.7 |
 
+<div class="alert alert-info">If you use Bazel to run Python tests, use the Datadog <a href="/tests/setup/bazel/python/">Bazel rules for Python tests</a>.</div>
+
 ## Configuring reporting method
 
 To report test results to Datadog, you need to configure the Datadog Python library:
@@ -171,7 +173,7 @@ For additional configurations, see [Configuration Settings][1].
 
 <div class="alert alert-warning">The Test Optimization manual testing API is in <strong>beta</strong> and subject to change.</div>
 
-As of version `2.13.0`, the [Datadog Python tracer][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
+As of version `2.13.0`, the [Datadog Python SDK][1] provides the Test Optimization API (`ddtrace.ext.test_visibility`) to submit test optimization results as needed.
 
 #### API execution
 
@@ -378,7 +380,7 @@ For additional configurations, see [Configuration Settings][2].
 
 ## Configuration settings
 
-The following is a list of the most important configuration settings that can be used with the tracer, either in code or using environment variables:
+The following is a list of the most important configuration settings that can be used with the SDK, either in code or using environment variables:
 
 `DD_TEST_SESSION_NAME`
 : Identifies a group of tests, such as `integration-tests`, `unit-tests` or `smoke-tests`.<br/>

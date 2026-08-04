@@ -1,9 +1,9 @@
 ---
 further_reading:
-- link: service_management/events/correlation/triage_and_notify
+- link: events/correlation/triage_and_notify
   tag: ドキュメント
   text: ケースのトリアージと通知について
-- link: service_management/events/correlation/analytics
+- link: events/correlation/analytics
   tag: ドキュメント
   text: ケースの分析
 title: 構成
@@ -20,8 +20,8 @@ title: 構成
 ### 相関の構成
 
 {{< whatsnext desc=" " >}}
-   {{< nextlink href="service_management/events/correlation/patterns" >}}パターンベース相関{{< /nextlink >}}
-   {{< nextlink href="service_management/events/correlation/intelligent" >}}インテリジェント相関{{< /nextlink >}}
+   {{< nextlink href="events/correlation/patterns" >}}パターンベース相関{{< /nextlink >}}
+   {{< nextlink href="events/correlation/intelligent" >}}インテリジェント相関{{< /nextlink >}}
 {{< /whatsnext >}}
 
 

@@ -18,7 +18,7 @@ further_reading:
 
 <div class="alert alert-info">A sample application is <a href="https://github.com/DataDog/serverless-gcp-sample-apps/tree/main/cloud-run/in-container/php">available on GitHub</a>.</div>
 
-1. **Install the Datadog PHP tracer** in your Dockerfile.
+1. **Install the Datadog PHP SDK** in your Dockerfile.
 
    {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 RUN curl -LO https://github.com/DataDog/dd-trace-php/releases/latest/download/datadog-setup.php \
@@ -59,9 +59,11 @@ apk add libgcc
 
 {{% serverless-init-env-vars-in-container language="php" defaultSource="cloudrun" %}}
 
+{{% svl-tracing-env %}}
+
 ## Troubleshooting
 
-{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" in_container="true" %}}
 
 ## Further reading
 

@@ -13,7 +13,7 @@ If you aren't already collecting logs with Datadog, see the [Log Management docu
 
 Ensure that the `source` tag (specifying language) is properly configured.
 
-{% if or(equals($platform, "server"), equals($platform, "show_all")) %}
+{% if includes($platform, ["server", "show_all"]) %}
 
 ### Server
 
@@ -41,7 +41,7 @@ In this case, `my-custom-grouping-material` is used to group these error logs in
 issue in Error Tracking.
 {% /if %}
 
-{% if or(equals($platform, "android"), equals($platform, "show_all")) %}
+{% if includes($platform, ["android", "show_all"]) %}
 ### Android
 
 {% alert level="info" %}
@@ -72,7 +72,7 @@ Logs.enable(logsConfiguration)
 ```
 {% /if %}
 
-{% if or(equals($platform, "flutter"), equals($platform, "show_all")) %}
+{% if includes($platform, ["flutter", "show_all"]) %}
 ### Flutter
 
 {% alert level="info" %}
@@ -111,7 +111,7 @@ final configuration = DatadogConfiguration(
 ```
 {% /if %}
 
-{% if or(equals($platform, "ios"), equals($platform, "show_all")) %}
+{% if includes($platform, ["ios", "show_all"]) %}
 ### iOS
 
 {% alert level="info" %}
@@ -147,7 +147,7 @@ Logs.enable(
 ```
 {% /if %}
 
-{% if or(equals($platform, "react_native"), equals($platform, "show_all")) %}
+{% if includes($platform, ["react_native", "show_all"]) %}
 ### React Native
 
 {% alert level="info" %}

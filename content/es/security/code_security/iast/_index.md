@@ -29,7 +29,7 @@ Para obtener una lista de los servicios compatibles, consulta los [requisitos de
 | Alto | Inyección HTML en correos electrónicos | EMAIL_HTML_INJECTION                            | VERDADERO  | VERDADERO  | VERDADERO    | FALSO  |
 | Alto | Secretos codificados                     | HARDCODED_SECRET            | VERDADERO | VERDADERO | VERDADERO | FALSO |
 | Alto | Contraseñas codificadas                   | HARDCODED_PASSWORD          | FALSO | FALSO | VERDADERO | FALSO |
-| Alto | Recorrido de la ruta                        | SENDERO_TRAVERSAL              | VERDADERO | VERDADERO | VERDADERO | VERDADERO |
+| Alto | Recorrido de la ruta                        | PATH_TRAVERSAL              | VERDADERO | VERDADERO | VERDADERO | VERDADERO |
 | Alto | Violación de los límites de confianza              | TRUST_BOUNDARY_VIOLATION    | VERDADERO | VERDADERO | FALSO | FALSO |
 | Alto | Cross-Site Scripting (XSS)            | XSS                         | VERDADERO | VERDADERO | FALSO | FALSO |
 | Alto | Deserialización no fiable             | UNTRUSTED_DESERIALIZATION   | VERDADERO | FALSO | FALSO | FALSO |

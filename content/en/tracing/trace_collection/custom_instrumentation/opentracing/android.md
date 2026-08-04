@@ -13,7 +13,7 @@ further_reading:
     text: Explore your services, resources, and traces
     title: Tracing Android Applications
 ---
-<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog Tracing Libraries</a>.</div>
+<div class="alert alert-info">OpenTracing support is based on a deprecated specification. If you want to instrument your code with an open spec, use OpenTelemetry instead. Try <a href="/tracing/trace_collection/otel_instrumentation/java/">processing data from OpenTelemetry instrumentation in Datadog SDKs</a>.</div>
 
 Datadog integrates with the [OpenTracing API][1].
 ## Setup
@@ -226,6 +226,43 @@ If it is not possible to add Open Telemetry to your project, you can use the int
    {{< /tabs >}}
    {{< /site-region >}}
 
+{{< site-region region="gov2" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+      override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder(
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.US2_FED)
+            .build()
+
+          Datadog.initialize(this, configuration, trackingConsent)
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+      @Override
+      public void onCreate() {
+          super.onCreate();
+          Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+               .useSite(DatadogSite.US2_FED)
+               .build();
+          Datadog.initialize(this, configuration, trackingConsent);
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
    {{< site-region region="ap1" >}}
    {{< tabs >}}
    {{% tab "Kotlin" %}}
@@ -292,6 +329,44 @@ If it is not possible to add Open Telemetry to your project, you can use the int
           super.onCreate();
           Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
                .useSite(DatadogSite.AP2)
+               .build();
+
+          Datadog.initialize(this, configuration, trackingConsent);
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{< /tabs >}}
+   {{< /site-region >}}
+
+   {{< site-region region="uk1" >}}
+   {{< tabs >}}
+   {{% tab "Kotlin" %}}
+   ```kotlin
+   class SampleApplication : Application() {
+      override fun onCreate() {
+          super.onCreate()
+          val configuration = Configuration.Builder(
+               clientToken = "<CLIENT_TOKEN>",
+               env = "<ENV_NAME>",
+               variant = "<APP_VARIANT_NAME>"
+          )
+            .useSite(DatadogSite.UK1)
+            .build()
+
+          Datadog.initialize(this, configuration, trackingConsent)
+      }
+   }
+   ```
+   {{% /tab %}}
+   {{% tab "Java" %}}
+   ```java
+   public class SampleApplication extends Application {
+      @Override
+      public void onCreate() {
+          super.onCreate();
+          Configuration configuration = new Configuration.Builder("<CLIENT_TOKEN>", "<ENV_NAME>", "<APP_VARIANT_NAME>")
+               .useSite(DatadogSite.UK1)
                .build();
 
           Datadog.initialize(this, configuration, trackingConsent);
@@ -724,7 +799,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    val okHttpClient = OkHttpClient.Builder()
            .addInterceptor(
                DatadogInterceptor.Builder(tracedHosts)
-                   .setTraceSampler(RateBasedSampler(20f))
+                   .setTraceSampleRate(20f)
                    .build()
            )
            .build()
@@ -736,7 +811,7 @@ If you want to trace your OkHttp requests, you can add the provided [Interceptor
    OkHttpClient okHttpClient = new OkHttpClient.Builder()
            .addInterceptor(
                new DatadogInterceptor.Builder(tracedHosts)
-                       .setTraceSampler(new RateBasedSampler(20f))
+                       .setTraceSampleRate(20f)
                        .build()
            )
            .build();
@@ -757,12 +832,12 @@ val tracedHosts = listOf("example.com", "example.eu")
 val okHttpClient =  OkHttpClient.Builder()
         .addInterceptor(
             DatadogInterceptor.Builder(tracedHosts)
-                .setTraceSampler(RateBasedSampler(20f))
+                .setTraceSampleRate(20f)
                 .build()
         )
         .addNetworkInterceptor(
             TracingInterceptor.Builder(tracedHosts)
-                .setTraceSampler(RateBasedSampler(100f))
+                .setTraceSampleRate(100f)
                 .build()
         )
         .build()
@@ -774,12 +849,12 @@ List<String> tracedHosts = Arrays.asList("example.com", "example.eu");
 OkHttpClient okHttpClient = new OkHttpClient.Builder()
         .addInterceptor(
             new DatadogInterceptor.Builder(tracedHosts)
-                    .setTraceSampler(new RateBasedSampler(20f))
+                    .setTraceSampleRate(20f)
                     .build()
         )
         .addNetworkInterceptor(
             new TracingInterceptor.Builder(tracedHosts)
-                    .setTraceSampler(new RateBasedSampler(20f))
+                    .setTraceSampleRate(20f)
                     .build()
         )
         .build();
@@ -813,7 +888,7 @@ Request request = OkHttpRequestExtKt
 
 **Note**:
 * If you use multiple Interceptors, this one must be called first.
-* If you define custom tracing header types in the Datadog configuration and are using a tracer registered with `GlobalTracer`, make sure the same tracing header types are set for the tracer in use.
+* If you define custom tracing header types in the Datadog configuration and are using an SDK registered with `GlobalTracer`, make sure the same tracing header types are set for the SDK in use.
 
 ### RxJava
 

@@ -13,6 +13,12 @@ further_reading:
   text: "Accelerate security investigations with Datadog Threat Intelligence"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Datadog App and API Protection monitors threats and provides protection against application-level attacks that aim to exploit code-level vulnerabilities. It leverages runtime code execution context, trace and error data, and user attribution.
 
 ## General App and API Protection terms
@@ -21,7 +27,7 @@ attack attempt
 : Which security rule was triggered by the trace.
 
 Datadog library
-: _also_ tracer, tracing library
+: _also_ tracer, SDK
 : A programming language-specific library embedded in web applications. Datadog App and API Protection uses the library to monitor and protect. APM uses the same library to instrument code for tracing telemetry.
 
 detection rule
@@ -90,7 +96,7 @@ attacker cluster
 
 ## Attacks and known vulnerabilities terms
 
-Open Web App and API Protection Project (OWASP)
+Open Web Application Security Project (OWASP)
 : A nonprofit foundation with several projects to enhance web application security. OWASP is best known for the [OWASP Top 10][2], a broad consensus about the most critical security risks to web applications.
 
 Cross-Site Scripting (XSS)

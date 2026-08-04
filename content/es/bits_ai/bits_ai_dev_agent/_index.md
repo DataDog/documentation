@@ -2,110 +2,96 @@
 further_reading:
 - link: https://www.datadoghq.com/blog/bits-ai-dev-agent/
   tag: Blog
-  text: Identificar automáticamente los problemas y generar correcciones con Bits
-    AI Dev Agent
-title: Bits AI Dev Agent
+  text: Identifica automáticamente problemas y genera soluciones con Bits Code
+- link: https://www.datadoghq.com/blog/bitsai-dev-agent-code-security
+  tag: Blog
+  text: Presentando Bits Code para Code Security
+- link: /account_management/billing/ai_credits/
+  tag: Documentación
+  text: Créditos de IA
+title: Bits Code
 ---
+## Resumen {#overview}
 
-{{< callout url="http://datadoghq.com/product-preview/bits-ai-dev-agent" >}}
-Bits AI Dev Agent está en vista previa. Para inscribirte, haz clic en <strong>Solicitar acceso</strong> y rellena el formulario.
-{{< /callout >}}
+Bits Code es un asistente de codificación de IA generativa que utiliza datos de observabilidad de Datadog para diagnosticar y solucionar automáticamente problemas en su código. Se integra con GitHub para crear solicitudes de extracción listas para producción, luego itera sobre los cambios utilizando registros de CI y comentarios de desarrolladores.
 
-## Información general
+{{< img src="bits_ai/dev_agent/sessions_overview.png" alt="Una pestaña titulada 'Sesiones' muestra un campo de texto con sugerencias debajo" style="width:100%;" >}}
 
-{{< img src="bits_ai/dev_agent/error_tracking_assistant.png" alt="Bits AI Dev Agent sugiriendo una corrección para un IndexError en una aplicación Django" style="width:100%;">}}
+Cada vez que Bits Code investiga un problema o genera una corrección, crea una [sesión](#sessions), que captura el análisis del agente, las acciones y cualquier cambio de código resultante en los productos compatibles de Datadog. Configura [automatizaciones][28] para que Bits Code ejecute sesiones en un horario o en respuesta a señales de otros productos de Datadog, como una nueva Recomendación de APM o una prueba inestable.
 
-Bits AI Dev Agent es un asistente de codificación de IA generativa que utiliza datos de observabilidad de Datadog para diagnosticar y corregir automáticamente problemas en el código. Se integra con GitHub para solicitudes de extracción listas para producción, itera sobre las correcciones utilizando logs de CI y opiniones de desarrolladores, y se basa en múltiples productos de Datadog para generar correcciones contextuales.
+Para comenzar con Bits Code, [configura la integración de GitHub][6] y completa cualquier configuración adicional. Luego, [inicie su primera sesión](#start-a-session).
 
-## Productos Datadog compatibles
+Aprenda cómo se factura su uso de Bits Code en [AI Credits][27].
 
-Bits AI Dev Agent está disponible para los siguientes productos Datadog:
+## Sesiones {#sessions}
+Una sesión captura un segmento de trabajo con Bits Code, incluyendo su análisis y cambios de código. Inicie, visualice y gestione sus sesiones en **Bits AI** > **Bits Code** > [**Sesiones**][7].
 
-| Producto                   | Disponibilidad         | Funcionalidades                                                       |
-|---------------------------|----------------------|--------------------------------------------------------------------|
-| [Error Tracking][1]       | Vista previa              | Diagnostica problemas y genera correcciones de código bajo demanda o de forma autónoma|
-| [Trace Explorer][11]      | Vista previa              | Analiza trazas (traces) y proporciona soluciones para errores y cuellos de botella de latencia |
-| [Code Security][2]        | Vista previa              | Soluciona vulnerabilidades del código de forma individual o en bloque    |
-| [Test Optimization][4]    | Vista previa              | Proporciona correcciones de código para tests defectuosos y comprueba si los tests permanecen estables                                                         |
-| [Continuous Profiler][3]  | Vista previa              | Proporciona cambios de código para conocimientos de [análisis automatizado][10]                  |
-| [Contenedores][12]          | Vista previa              | Proporcionar cambios de código para [Kubernetes Remediations][13]                  |
+{{< img src="bits_ai/dev_agent/code_fix.png" alt="Una sesión que muestra un resumen de Bits AI y una lista de tareas a la izquierda y un diff de código a la derecha" style="width:100%;" >}}
 
-**Nota**: La activación de Bits AI Dev Agent es específica de cada producto. Aunque esté activada para un producto Datadog, debe activarse por separado para cada producto adicional que utilices.
+### Inicie una sesión {#start-a-session}
+Después de [completar la configuración][6], realice una de las siguientes acciones para iniciar una sesión de Bits Code:
+- Ingrese un aviso libre en [**Sesiones**][7]: ingrese un aviso personalizado o genere uno haciendo clic en una tarjeta de aviso sugerida
+- Invoque Bits Code en un [producto de Datadog compatible](#supported-datadog-products)
+- Configure una [automatización][28] de Bits Code
 
-## Capacidades clave 
+También se puede crear una sesión cuando otro agente de Bits AI (como [Bits Chat][16] o [Bits Investigation][17]) transfiere una tarea de codificación a Bits Code.
 
-En las siguientes secciones se explica en detalle cómo Bits AI Dev Agent se integra con los productos Datadog para generar correcciones de código contextuales.
+### Visualice y gestione sesiones {#view-and-manage-sessions}
+En **[Sesiones][7]**, visualice sus sesiones pasadas en el panel de **Mis Sesiones**. Una sesión aparece aquí si usted la inició o interactuó con ella de alguna manera, como participar en la conversación o crear un PR asociado.
 
-### Asistencia para solicitudes de extracción
+Haga clic en una sesión para visualizar sus detalles y continuar trabajando con Bits Code. Para eliminar una sesión de su lista de **Mis Sesiones**, haga clic en <i class="icon-archive-wui"></i> (**Archivar para todos**) o <i class="icon-eye-slashed-wui"></i> (**Dejar de seguir sesión**).
 
-Bits AI Dev Agent se integra con GitHub para crear solicitudes de extracción, responder a comentarios, actualizar commits y corregir fallos de CI.
+## Productos de Datadog compatibles {#supported-datadog-products}
 
-- Genera títulos y descripciones de solicitudes de extracción basados en tu plantilla de solicitudes de extracción.
-- Abre las solicitudes de extracción como borradores, itera utilizando logs de CI y marca las solicitudes de extracción como listas para su revisión cuando se superan los checks.
-- Continúa iterando en respuesta a los mensajes de chat y a los comentarios de revisión.
+Bits Code puede sugerir mejoras de código dentro de varios productos de Datadog, incluyendo los siguientes:
 
-  **Nota**: Comentario `@Datadog` para solicitar a Bits actualizaciones de la solicitud de extracción. Bits Dev nunca auto-fusiona solicitudes de extracción.
+| Producto                   | Capacidades                                                       |
+|---------------------------|--------------------------------------------------------------------|
+| [APM][20]                 | Propone cambios de código para las [Recomendaciones de APM][21]|
+| [Bits Investigation][17]         | Genera remediaciones de código basadas en Investigaciones de Bits |
+| [Bits Chat][16]   | Sugiere cambios de código que surgen de las conversaciones de Bits Chat |
+| [Cloud Cost][22]          | Genera cambios de código para las [Recomendaciones de Cloud Cost][23] |
+| [Error Tracking][1]       | Diagnostica problemas y genera correcciones de código bajo demanda o de forma autónoma |
+| [Code Security][2]        | Remedia [vulnerabilidades SAST][15], [vulnerabilidades de IaC][25] y [vulnerabilidades de SCA][26] (individualmente o en bloque)  |
+| [Test Optimization][4]    | Proporciona correcciones de código para [flaky tests][24] y verifica que las pruebas permanezcan estables  |
+| [Continuous Profiler][3]  | Proporciona cambios de código para [Automated Analysis][10] insights   |
+| [Containers][12]          | Proporciona cambios de código para [Kubernetes Remediations][13]  |
 
-Ve a **Bits AI** > **Dev Agent** > **[Sesiones de código][7]** para ver todas las sesiones de código de Dev Agent y las solicitudes de extracción generadas. Puedea buscar sesiones y filtrar por servicio, origen del producto y estado.
+## Capacidades clave {#key-capabilities}
 
-### Auto-push
+### Correcciones de código y optimizaciones presentadas por los productos de Datadog {#code-fixes-and-optimizations-surfaced-by-datadog-products}
 
-Auto-push permite a Dev Agent crear ramas, enviar código y abrir solicitudes de extracción cuando detecta algo en lo que puede ayudarte. Por ejemplo, el Dev Agent puede:
-- Crear solicitudes de extracción automáticamente para errores de alto impacto (como 500s o cuelgues).
-- Actualizar las solicitudes de extracción en respuesta a tus comentarios en GitHub.
-- Actualizar las solicitudes de extracción para solucionar fallos de CI.
+A través de [productos de Datadog compatibles](#supported-datadog-products), utilice Bits Code para implementar optimizaciones y correcciones—por ejemplo, [Cloud Cost Recommendations][23], problemas de [Error Tracking][1] y [vulnerabilidades SAST][15]. En ciertos productos, [Bits Chat][16] explora e investiga problemas, luego entrega sus hallazgos a Bits Code para implementar un cambio de código.
 
-Auto-push solo abre solicitudes de extracción y envía los cambios, pero nunca fusiona código. Cuando Auto-push está desactivado, debes revisar el código en Datadog antes de enviarlo.
+{{< img src="bits_ai/dev_agent/fix_with_bits.png" alt="Un botón etiquetado con el texto \"Fix with Bits.\"" style="width:25%" >}}
 
-Auto-push está disponible para Error Tracking y Test Optimization. 
+Puede solicitar manualmente a Bits Code que implemente cambios para un hallazgo determinado, o configure una [automatización][28] para que lo haga de manera autónoma. 
 
-#### Cuestiones de seguridad
+### Tareas generales de codificación {#general-coding-tasks}
 
-Permitir que cualquier herramienta basada en IA lea datos no fiables puede permitir a los atacantes engañarla para que genere código malicioso u otros resultados. En algunos entornos, un atacante podría crear errores, trazas u otro tipo de telemetría que contenga cargas maliciosas que lea el Dev Agent. Datadog ejecuta análisis de seguridad en la salida del Dev Agent, pero no es infalible.
+Utilice el campo de solicitud libre en [**Sesiones**][7] para trabajar con Bits Code en tareas generales de codificación.
 
-### Rastreo de errores
+### Automations {#automations}
 
-En [Error Tracking][1], Bits AI Dev Agent diagnostica y soluciona problemas de código con correcciones contextuales, comprobadas por la unidad:
-- Determina si un error puede corregirse mediante código y genera una corrección con tests de la unidad.
-- Proporciona enlaces en el chat a los archivos y métodos relevantes para agilizar la navegación.
-- Analiza los errores de forma asíncrona a medida que llegan.
-- Marca los errores con el estado **Corrección disponible** y permite filtrarlos para exhibirlos.
+[Automations][28] ejecutan sesiones de Bits Code automáticamente, según un horario o en respuesta a señales de productos de Datadog como Error Tracking, APM o Code Security. Una vez completada una sesión, Bits Code entrega los resultados como una solicitud de extracción, un PR borrador o una notificación de Slack.
 
-[Auto-push](#auto-push) está disponible para esta función.
+Puede construir [Automations] a partir de disparadores (un hallazgo de producto, una solicitud personalizada, un horario o una combinación) y configure una o más salidas. Las plantillas proporcionadas por Datadog también están disponibles para ayudarte a comenzar. Cree y gestione [Automations] en **Bits AI** > **Bits Code** > [**Automations**][29].
 
-### Gestión de tests defectuosos
+### Colaboración en solicitudes de extracción {#pull-request-collaboration}
 
-Bits AI Dev Agent corrige los tests defectuosos que se detectan a través de Flaky Test Management en [Test Optimization][4] e intenta comprobar si los tests permanecen estables.
+Bits Code se integra con GitHub para:
+- Crear solicitudes de extracción, generando títulos y descripciones basados en la plantilla de solicitud de extracción de su repositorio
+- Itere en las solicitudes de extracción en respuesta a los comentarios; mencione `@Datadog` en un comentario para solicitar a Bits actualizaciones.
+- Monitoree los registros de CI y corrija fallas.
 
-[Auto-push](#auto-push) está disponible para esta función. 
+Bits Code nunca fusiona automáticamente las solicitudes de extracción. Vea todas las solicitudes de extracción en las que está trabajando Bits Code en **Bits AI** > **Bits Code** > **[Sesiones][7]**.
 
-### Investigación de trazas
+## Limitaciones {#limitations}
 
-Bits AI Dev Agent depura errores y latencia directamente a partir de las [trazas][11] mediante consultas en lenguaje natural:
-- Analiza y resume trazas de gran tamaño.
-- Determina las causas probables de los errores y la latencia.
-- Genera correcciones de código cuando se le solicita.
+- Bits Code es un producto de IA, lo que significa que puede cometer errores. Utilice las mejores prácticas al revisar y probar el código generado por el agente.  
+- Bits Code no soporta investigaciones en múltiples repositorios.
 
-### Recomendaciones de productos
-
-Bits AI Dev Agent aplica cambios automatizados en el código basándose en la información de Datadog, como las recomendaciones de CCM, las recomendaciones de APM y la información sobre generación de perfiles.
-
-### Code security
-
-Bits AI Dev Agent corrige vulnerabilidades a escala, desde problemas aislados hasta grandes backlogs. Puedes:
-- Crear lotes de solicitudes de extracción para corregir varias vulnerabilidades a la vez.
-- Utilizar la herramienta Campaña para enviar solicitudes de extracción de forma incremental y gestionar cargas de trabajo de revisión en los equipos.
-
-## Para empezar
-
-Para activar Bits AI Dev Agent, consulta [Configuración][6].
-
-## Limitaciones
-
-- Bits Dev es un producto de IA, lo que significa que puede cometer errores. Utiliza las prácticas recomendadas al revisar y probar código generado por el agente.
-- Bits AI Dev Agent no admite investigaciones en varios repositorios.
-
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -115,9 +101,22 @@ Para activar Bits AI Dev Agent, consulta [Configuración][6].
 [4]: /es/tests/
 [5]: https://app.datadoghq.com/integrations/github
 [6]: /es/bits_ai/bits_ai_dev_agent/setup/
-[7]: https://app.datadoghq.com/code?tab=my-sessions
+[7]: https://app.datadoghq.com/code
 [8]: /es/bits_ai/bits_ai_sre/
 [10]: /es/profiler/automated_analysis/
-[11]: /es/tracing/trace_explorer/
 [12]: /es/containers/
 [13]: /es/containers/bits_ai_kubernetes_remediation
+[14]: https://app.datadoghq.com/code/settings
+[15]: /es/security/code_security/static_analysis/ai_enhanced_sast/#remediation
+[16]: /es/bits_ai/bits_chat/
+[17]: /es/bits_ai/bits_ai_sre/
+[20]: /es/tracing/
+[21]: /es/tracing/recommendations/
+[22]: /es/cloud_cost_management/
+[23]: /es/cloud_cost_management/recommendations
+[24]: /es/tests/flaky_management#bits-ai-powered-flaky-test-fixes
+[25]: /es/security/code_security/iac_security/
+[26]: /es/security/code_security/software_composition_analysis/
+[27]: /es/account_management/billing/ai_credits/
+[28]: /es/bits_ai/bits_ai_dev_agent/automations/
+[29]: https://app.datadoghq.com/code/automations

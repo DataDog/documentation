@@ -12,12 +12,6 @@ aliases:
   - /security_platform/security_signal_management
   - /security/security_signal_management
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
-    tag: "Release Notes"
-    text: "Check out the latest Datadog Security releases! (App login required)."
-  - link: "https://www.datadoghq.com/guided-tour/security/"
-    tag: "Guided Tour"
-    text: "See a Product Guided Tour"
   - link: "/getting_started/cloud_siem"
     tag: "Documentation"
     text: "Begin detecting threats with Cloud SIEM"
@@ -27,12 +21,15 @@ further_reading:
   - link: "/security/workload_protection/"
     tag: "Documentation"
     text: "Uncover kernel-level threats with Workload Protection"
-  - link: "https://securitylabs.datadoghq.com/"
-    tag: "Security Labs"
-    text: "Read about security-related topics on Datadog's Security Labs blog"
+  - link: "https://www.datadoghq.com/guided-tour/security/"
+    tag: "Guided Tour"
+    text: "See a Product Guided Tour"
   - link: "https://dtdg.co/fe"
     tag: "Foundation Enablement"
     text: "Join an interactive session to elevate your security and threat detection"
+  - link: "https://securitylabs.datadoghq.com/"
+    tag: "Security Labs"
+    text: "Read about security-related topics on Datadog's Security Labs blog"
   - link: "https://www.datadoghq.com/blog/cyber-attack-simulation-with-stratus-red-team/"
     tag: "Blog"
     text: "Elevate AWS threat detection with Stratus Red Team"
@@ -84,6 +81,26 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/nodejs-vulnerability-apm"
     tag: "Blog"
     text: "Mitigation for Node.js denial-of-service vulnerability affecting Datadog APM"
+  - link: "https://www.datadoghq.com/blog/devsecops-2026-study-learnings"
+    tag: "Blog"
+    text: "Key learnings from the 2026 State of DevSecOps study"
+  - link: "https://www.datadoghq.com/blog/datadog-observability-data-and-security"
+    tag: "Blog"
+    text: "How Datadog uses observability data to secure its platform"
+  - link: "https://www.datadoghq.com/blog/ai-powered-threat-analysis"
+    tag: "Blog"
+    text: "AI in cloud security investigations: The role of UEBA and better telemetry"
+  - link: "https://www.datadoghq.com/blog/ci-cd-threat-matrix/"
+    tag: "Blog"
+    text: "CI/CD security: threat modeling using a MITRE-style threat matrix"
+  - link: "https://www.datadoghq.com/blog/secure-your-github-ecosystem/"
+    tag: "Blog"
+    text: "CI/CD security: How to secure your GitHub ecosystem"
+  - link: "https://app.datadoghq.com/release-notes?category=Security%20%26%20Compliance"
+    tag: "Release Notes"
+    text: "Check out the latest Datadog Security releases! (App login required)."
+algolia:
+  tags: ["security", "datadog security", "cloud siem", "cloud security", "application security", "threat detection"]
 cascade:
     algolia:
         rank: 70
@@ -98,6 +115,7 @@ Datadog Security includes:
 - [Code Security](#code-security)
 - [Cloud Security](#cloud-security)
 - [App and API Protection](#app-and-api-protection)
+- [AI Guard](#ai-guard)
 - [Workload Protection](#workload-protection)
 - [Sensitive Data Scanner](#sensitive-data-scanner)
  
@@ -133,13 +151,19 @@ Cloud Security includes [Workload Protection][12], [Misconfigurations][11], [Ide
 
 {{< img src="security/csm/csm_overview_3.png" alt="The Security Inbox on the Cloud Security overview shows a list of prioritized security issues" width="100%">}}
 
-To get started with Datadog Security, navigate to the [**Security** > **Setup**][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
+To get started with Datadog Security, navigate to the [{{< ui >}}Security{{< /ui >}} > {{< ui >}}Setup{{< /ui >}}][9] page in Datadog, which has detailed information for single or multi-configuration, or follow the getting started sections below to learn more about each area of the platform.
 
 ##  App and API Protection
 
 Datadog [App and API Protection (AAP)][1] provides observability into application-level attacks that aim to exploit code-level vulnerabilities, such as Server-Side-Request-Forgery (SSRF), SQL injection, Log4Shell, and Reflected Cross-Site-Scripting (XSS). AAP leverages [Datadog APM][2], the [Datadog Agent][3], and in-app detection rules to detect threats in your application environment. Check out the product [Guided Tour](https://www.datadoghq.com/guided-tour/security/application-security-management/) to see more.
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
+
+## AI Guard
+
+[AI Guard][35] inspects, blocks, and governs AI behavior in real time. It sits inline with your AI app or agent to protect against prompt injection, jailbreaking, and sensitive data exfiltration attacks, using Prompt Protection, Tool Protection, and Sensitive Data Protection. These protections work for any target AI model, including OpenAI, Anthropic, Bedrock, VertexAI, and Azure.
+
+{{< img src="security/ai_guard/ai_guard_detection_rules_1.png" alt="AI Guard Detection Rules Explorer" width="100%">}}
 
 ## Workload Protection
 
@@ -154,7 +178,7 @@ Datadog [App and API Protection (AAP)][1] provides observability into applicatio
 
 [Sensitive Data Scanner][24] can help prevent sensitive data leaks and limit non-compliance risks by discovering, classifying, and optionally redacting sensitive data. It can scan for sensitive data in your telemetry data, such as application logs, APM spans, RUM events, and events from Event Management. It can also scan for sensitive information within your cloud storage resources. 
 
-After you [set up Sensitive Data Scanner][25], use the Findings page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
+After you [set up Sensitive Data Scanner][25], use the {{< ui >}}Findings{{< /ui >}} page to see details of sensitive data findings that have been identified, so that you can triage, investigate, and remediate the findings.
 
 {{< img src="sensitive_data_scanner/sds_summary_20250203.png" alt="The summary page showing an overview of sensitive findings broken down by priority" style="width:100%;" >}}
 
@@ -194,3 +218,4 @@ After you [set up Sensitive Data Scanner][25], use the Findings page to see deta
 [32]: /security/workload_protection/workload_security_rules
 [33]: /security/notifications/
 [34]: /security/workload_protection/security_signals
+[35]: /security/ai_guard/

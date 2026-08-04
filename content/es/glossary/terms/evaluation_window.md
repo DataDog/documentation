@@ -1,8 +1,9 @@
 ---
+id: evaluation_window
 core_product:
 - alertas
 related_terms:
-- intervalo de evaluación
+- evaluation_window
 title: intervalo de evaluación
 ---
 El intervalo de evaluación es el marco temporal retrospectivo de los datos que el monitor agrega y utiliza para comparar con los umbrales definidos.

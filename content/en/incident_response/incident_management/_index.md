@@ -35,6 +35,13 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/incidents-ai-workbench-status-page/"
     tag: "Blog"
     text: "Unify remediation and communication with Datadog Incident Response"
+  - link: "https://www.datadoghq.com/blog/servicenow-datadog-incident-response"
+    tag: "Blog"
+    text: "Integrate ServiceNow ITSM with Datadog to Accelerate Incident Response"
+  - link: "https://learn.datadoghq.com/courses/getting-started-incident-management"
+    tag: "Learning Center"
+    text: "Getting Started with Incident Management"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Incidents">}}
@@ -87,7 +94,7 @@ Incident search uses the same event-based [search syntax][33] as Logs and Event 
 
 You can also view your Incidents list from your mobile device home screen and manage/create incidents by downloading the [Datadog Mobile App][3], available on the [Apple App Store][4] and [Google Play Store][5].
 
-{{< img src="service_management/mobile/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
+{{< img src="incident_response/incident_management/iOS_Incident_V2.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Two views in the Datadog Mobile App: one showing an incidents list with high-level details about each incident, and one showing a detailed panel for a single incident">}}
 
 ## Describing the incident
 
@@ -110,7 +117,7 @@ Incident Management integrates closely with other Datadog products, including:
 
 - [Datadog Status Pages][26] to create public or private status pages and connect them to incidents.
 - [Datadog On-Call][27] to escalate pages into incidents and manually or automatically page teams from an incident.
-- [Datadog Notebooks][28] to draft and review postmortems.
+- [Datadog Notebooks][28] to draft and review [postmortems][34].
 - [Datadog Workflow Automation][29] to build and execute automations.
 
 ### Third-party integrations
@@ -118,8 +125,7 @@ Incident Management integrates closely with other Datadog products, including:
 Incident Management integrates with third-party applications, including:
 
 - [Atlassian Statuspage][25] to create and update Statuspage incidents.
-- [Confluence][22] to generate incident postmortems.
-- [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
+- [Confluence][22] to generate incident [postmortems][34].
 - [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Microsoft Teams][23] to create channels and video meetings for incidents.
@@ -146,7 +152,6 @@ Incident Management integrates with third-party applications, including:
 [11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /integrations/pagerduty/
 [13]: /integrations/opsgenie/
-[14]: /coscreen
 [15]: /integrations/jira/
 [16]: /integrations/webhooks/
 [17]: /integrations/webhooks/#sending-sms-through-twilio
@@ -166,3 +171,4 @@ Incident Management integrates with third-party applications, including:
 [31]: https://www.datadoghq.com/pricing/?product=incident-response#products
 [32]: /account_management/billing/incident_response/
 [33]: /getting_started/search/#event-based-queries
+[34]: /incident_response/incident_management/post_incident/postmortems

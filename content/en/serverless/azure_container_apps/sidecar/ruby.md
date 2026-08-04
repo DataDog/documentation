@@ -14,7 +14,7 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog Ruby tracer**.
+1. **Install the Datadog Ruby SDK**.
 
    Add the `datadog` gem to your Gemfile:
    {{< code-block lang="gemfile" disable_copy="false" >}}
@@ -22,7 +22,7 @@ source 'https://rubygems.org'
 gem 'datadog'
 {{< /code-block >}}
 
-   See [Tracing Ruby applications][1] for additional information on how to configure the tracer and enable auto instrumentation.
+   See [Tracing Ruby applications][1] for additional information on how to configure the SDK and enable auto instrumentation.
 
 2. **Install serverless-init as a sidecar**.
 
@@ -76,6 +76,8 @@ logger.info "Hello World!"
    To send custom metrics, [install the DogStatsD client][3] and [view code examples][4]. In serverless, only the *distribution* metric type is supported.
 
 {{% serverless-init-env-vars-sidecar language="ruby" defaultSource="containerapp" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 

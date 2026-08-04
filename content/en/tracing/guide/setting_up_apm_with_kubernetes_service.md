@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-In Kubernetes, Datadog tracers can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data, the data arrives at a Datadog Agent pod on the same node. This strategy is meant to properly balance traffic and ensure the correct tagging of your data. Datadog recommends that you use UDS to send data. 
+In Kubernetes, Datadog SDKs can send data to the Datadog Agent in three ways: Unix Domain Socket (UDS), host IP, or a Kubernetes service. Each option ensures that when an application pod sends APM data, the data arrives at a Datadog Agent pod on the same node. This strategy is meant to properly balance traffic and ensure the correct tagging of your data. Datadog recommends that you use UDS to send data. 
 
 However, if the `hostPath` volumes required for UDS (and the `hostPort` ports required for using host IP) are not available, you can use a Kubernetes service as an alternative option. 
 
