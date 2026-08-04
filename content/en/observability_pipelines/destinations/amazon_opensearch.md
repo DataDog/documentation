@@ -15,11 +15,9 @@ Use Observability Pipelines' Amazon OpenSearch destination to send logs to Amazo
 
 ## Setup
 
-Configure the Amazon OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Amazon OpenSearch endpoint URL, and if applicable, username and password. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Configure the Amazon OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 After you select the Amazon OpenSearch destination in the pipeline UI:
 
@@ -48,6 +46,8 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 		1. (Optional) Select an AWS authentication option. The {{< ui >}}Assume role{{< /ui >}} option should only be used if the user or role you created earlier needs to assume a different role to access the specific AWS resource and that permission has to be explicitly defined.<br>If you select {{< ui >}}Assume role{{< /ui >}}:
 			1. Enter the ARN of the IAM role you want to assume.
 			1. Optionally, enter the assumed role session name and external ID.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 #### Optional buffering
 

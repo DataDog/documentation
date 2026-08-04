@@ -85,11 +85,13 @@ This machine's requirements are listed in the table below. PowerShell scripting 
 
 | System | Requirements |
 |---|---|
-| OS | Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows 11, or Windows 10. |
+| OS | Windows Server 2025, Windows Server 2022, Windows Server 2019, Windows Server 2016, Windows 11, or Windows 10. |
 | RAM | 4GB minimum. 8GB recommended. |
 | CPU | Intel or AMD processor with 64-bit support. 2.8 GHz or faster processor recommended. |
 
-**Note**: For Windows Private Locations to run browser tests, the browsers (for example, Chrome, Edge, or Firefox) must be installed on the Windows computer.
+**Note:** Browser tests require browsers installed on the Windows server:
+- Windows Private Location 1.71.0 and later: Chrome and Firefox are included. Install Edge separately.
+- Windows Private Location 1.70.0 and earlier: Install Chrome, Edge, and Firefox.
 
 You must install .NET version 4.7.2 or later on your computer before using the MSI installer.
 
@@ -178,7 +180,7 @@ Launch your private location on:
 {{< tabs >}}
 {{% tab "Docker" %}}
 
-Run this command to boot your private location worker by mounting your configuration file to the container. Ensure that your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is in `/etc/docker`, not the root home folder:
+Run this command to boot your private location worker by mounting your configuration file to the container. The `$PWD` in the command below refers to the directory you run the command from, so replace it with the path to wherever your `<MY_WORKER_CONFIG_FILE_NAME>.json` file is stored. The path before the colon (the location on your host machine) can be any directory; only the path after the colon (`/etc/datadog/synthetics-check-runner.json`) must match exactly, since that is where the worker expects to find its configuration inside the container:
 
 ```shell
 docker run -d --restart unless-stopped -v $PWD/<MY_WORKER_CONFIG_FILE_NAME>.json:/etc/datadog/synthetics-check-runner.json datadog/synthetics-private-location-worker:latest

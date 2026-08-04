@@ -34,9 +34,9 @@ After you select the Google Pub/Sub source in the pipeline UI:
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the TLS key pass. Do <b>not</b> enter the actual value.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
-
 {{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ## Secret defaults
 

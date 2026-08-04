@@ -91,6 +91,7 @@ Datadog assumes this role to collect data on your behalf.
 {{< /site-region >}}
 {{< site-region region="gov,gov2" >}}
 3. If the AWS account you want to integrate is a GovCloud account, enter {{< region-param key="aws_customer_access_govcloud_id" code="true" >}} as the `Account ID`, otherwise enter {{< region-param key="aws_customer_access_id" code="true" >}}. This is Datadog's account ID, and grants Datadog access to your AWS data.
+   **Note**: On US1-FED and US2-FED, Datadog assumes roles in commercial AWS accounts from a dedicated account operated by Datadog for Government in the AWS commercial partition. This account ID differs from the one used on Datadog commercial sites, so it appears as the assuming principal in your CloudTrail logs.
 {{< /site-region >}}
 **Note**: Ensure that the **DATADOG SITE** selector on the right of this documentation page is set to your Datadog site before copying the account ID above.
 

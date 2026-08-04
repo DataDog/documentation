@@ -272,6 +272,18 @@ A processor executes within a pipeline to complete a data-structuring action. Se
 
 See [Parsing dates][12] to learn about custom date and time formats and the required `timezone` parameter for non-UTC timestamps.
 
+### Attribute precedence when multiple processors match {#attribute-precedence}
+
+When multiple processors within matching pipelines set the same attribute, the outcome depends on the processor type. There are three behaviors:
+
+| Behavior | Description | Processors |
+| --- | --- | --- |
+| Last write wins | The value set by the later processor (further down the order) overrides the earlier value. | Grok parser, Category processor, Arithmetic processor, String builder processor, Lookup processor, URL parser, User-Agent parser, GeoIP parser, Decoder processor |
+| Depends on `override_on_conflict` | Follows the `override_on_conflict` parameter. By default (`false`), the target element is not overridden if it is already set. | Remapper, Array Map processor |
+| First write wins | Only the first processor is applied (except Log date remapper, which uses the last one). Within a single pipeline, the first processor's value is used; across multiple matching pipelines, the first one encountered applies. | Log status remapper, Service remapper, Log message remapper, Trace remapper, Span remapper |
+
+For details on each processor, see [Processors][3].
+
 ### Nested pipelines
 
 Nested pipelines are pipelines within a pipeline. Use nested pipelines to split the processing into two steps. For example, first use a high-level filter such as team and then a second level of filtering based on the integration, service, or any other tag or attribute.

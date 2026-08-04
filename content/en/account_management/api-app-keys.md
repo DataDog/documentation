@@ -90,9 +90,26 @@ To add a Datadog API key or client token:
 - Your org must have at least one API key, and up to 50 API keys by default. If you need more, [contact Support][19] to request a higher limit. Managed API keys, marked with a {{< ui >}}Managed{{< /ui >}} label in the Name column, are created and controlled by a Datadog integration or service rather than by you, and don't count toward this limit. You can view that a managed API key exists and revoke it, but you can't see its value or edit its name.
 - Key names must be unique across your organization.
 
-## Remove API keys or client tokens
+## Revoke API keys or remove client tokens
 
-To remove a Datadog API key or client token, navigate to the list of keys or tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key or token you want to remove.
+To revoke a Datadog API key, navigate to the list of keys, and click the {{< ui >}}Revoke{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the key. To remove a client token, navigate to the list of tokens, and click the {{< ui >}}Delete{{< /ui >}} {{< img src="icons/delete.png" inline="true" style="width:14px;">}} icon next to the token.
+
+A revoked API key stays in the list with a {{< ui >}}Revoked{{< /ui >}} status for 7 days, during which you can restore it. See [Unrevoke an API key](#unrevoke-an-api-key). Client tokens don't support this restoration window; after you remove a client token, it can't be recovered.
+
+## Unrevoke an API key
+
+If you revoke an API key by mistake, you can restore it within 7 days of revocation. After 7 days, a revoked API key is permanently removed and can't be recovered.
+
+To unrevoke an API key:
+
+1. Navigate to Organization settings, then click the [**API keys**][1] tab.
+2. In the {{< ui >}}Status{{< /ui >}} filter, select {{< ui >}}Revoked{{< /ui >}}.
+3. Locate the key you want to restore.
+4. Click the {{< ui >}}Unrevoke{{< /ui >}} icon next to the key.
+
+{{< img src="account_management/unrevoke-api-key.png" alt="The API Keys page filtered to Revoked status, with the Unrevoke icon highlighted next to a revoked key" style="width:80%;" >}}
+
+The key returns to {{< ui >}}Active{{< /ui >}} status with its original name, ID, and value unchanged.
 
 ## Add application keys
 

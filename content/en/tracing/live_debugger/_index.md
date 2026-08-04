@@ -6,9 +6,6 @@ aliases:
 - '/developers/ide_plugins/idea/live_debugger/'
 - '/ide_plugins/vscode/live_debugger/'
 further_reading:
-- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
-  tag: "Blog"
-  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 - link: "/dynamic_instrumentation/"
   tag: "Documentation"
   text: "Dynamic Instrumentation"
@@ -24,6 +21,12 @@ further_reading:
 - link: "/error_tracking/backend/exception_replay"
   tag: "Documentation"
   text: "Exception Replay"
+- link: "https://www.datadoghq.com/blog/azure-devops-source-code-integration/"
+  tag: "Blog"
+  text: "Identify and fix code issues faster with Datadog’s Azure DevOps Source Code integration"
+- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+  tag: "Blog"
+  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 ---
 
 ## Overview
