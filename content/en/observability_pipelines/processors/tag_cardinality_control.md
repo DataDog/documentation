@@ -103,35 +103,56 @@ You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a st
 
 The following tables show benchmarks for `exact` mode and `probabilistic` mode. As the number of unique values for each tag increases, `probabilistic` mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
 
-**50,000 metrics with 10 tags per metric**
+#### Benchmarks for 50,000 metrics tracked
 
-| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
-| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
-| 1                               | 0.26                                          | 0.26                                                  |
-| 10                              | 0.45                                          | 0.33                                                  |
-| 100                             | 0.99                                          | 0.44                                                  |
+The Worker's RSS memory usage for probabilistic and exact mode for 10,000 metrics tracked.
 
-**50,000 metrics with 50 tags per metric**
+**10 tags per metric**
 
-| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
-| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
-| 1                               | 0.91                                          | 0.83                                                  |
-| 10                              | 1.40                                          | 1.05                                                  |
-| 100                             | 4.12                                          | 1.39                                                  |
+| Unique values per tag | Probabilistic Mode (MB) | Exact Mode (MB) |
+|:-------------------------------:|:-----------------------:|:---------------:|
+| 100                             | 104                     | 218             |
+| 250                             | 136                     | 577             |
+| 500                             | 203                     | 1,065           |
 
-**100,000 metrics with 10 tags per metric**
+#### Benchmarks for 50,000 metrics tracked
 
-| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
-| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
-| 1                               | 0.49                                          | 0.45                                                  |
-| 10                              | 0.75                                          | 0.54                                                  |
-| 100                             | 1.78                                          | 0.75                                                  |
+The Worker's RSS memory usage for probabilistic and exact mode for 50,000 metrics tracked.
 
-**100,000 metrics with 50 tags per metric**
+**10 tags per metric**
 
-| Number of unique values per tag | Worker's RSS memory usage for exact mode (GB) | Worker's RSS memory usage for probabilistic mode (GB) |
-| :-----------------------------: | :-------------------------------------------: | :---------------------------------------------------: |
-| 1                               | 1.74                                          | 1.59                                                  |
-| 10                              | 2.65                                          | 1.81                                                  |
+| Unique values per tag | Probabilistic Mode (MB) | Exact Mode (MB) |
+|:-------------------------------:|:-----------------------:|:---------------:|
+| 100                             | 361                     | 943             |
+| 250                             | 552                     | 2,734           |
+| 500                             | 851                     | 5,181           |
+
+**50 tags per metric**
+
+| Unique values per tag | Probabilistic Mode (MB) | Exact Mode (MB) |
+|:-------------------------------:|:-----------------------:|:---------------:|
+| 100                             | 1,300                   | 4,076           |
+| 250                             | 2,130                   | 13,220          |
+| 500                             | 3,410                   | 25,467          |
+
+#### Benchmarks for 100,000 metrics tracked
+
+The Worker's RSS memory usage for probabilistic and exact mode for 100,000 metrics tracked.
+
+**10 tags per metric**
+
+| Unique values per tag | Probabilistic Mode (MB) | Exact Mode (MB) |
+|:-------------------------------:|:-----------------------:|:---------------:|
+| 100                             | 673                     | 1,833           |
+| 250                             | 1,044                   | 5,417           |
+| 500                             | 1,649                   | 10,353          |
+
+**50 tags per metric**
+
+| Unique values per tag | Probabilistic Mode (MB) | Exact Mode (MB) |
+|:-------------------------------:|:-----------------------:|:---------------:|
+| 100                             | 2,550                   | 8,049           |
+| 250                             | 4,178                   | 26,358          |
+| 500                             | 6,769                   | 48,282 (est)    |
 
 [1]: /observability_pipelines/search_syntax/metrics/
