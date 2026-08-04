@@ -20,7 +20,7 @@ Datadog's [RUM without Limits][1] provides an accurate, long-term overview of ap
 
 RUM Managed Archive acts as a **safety net**, enabling teams to:
 
-- **Store everything**: Store all sessions for several months automatically
+- **Store everything**: Store all sessions automatically for 1, 3, or 6 months
 - **Recover on demand**: Bring back specific sessions for full investigation
 - **Investigate in depth**: Explore recovered sessions like regularly retained sessions
 

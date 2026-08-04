@@ -6,5 +6,7 @@ aliases:
   - /faq/
   - /docs/
   - /guides/overview/
+  - /coscreen/
+  - /coscreen/troubleshooting
 disable_sidebar: true
 ---

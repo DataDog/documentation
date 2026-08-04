@@ -24,8 +24,6 @@ further_reading:
     - link: 'https://www.datadoghq.com/blog/datadog-cursor-extension/'
       tag: 'Blog'
       text: 'Debug live production issues with the Datadog Cursor extension'
-cascade:
-  site_support_id: ide_plugins_vscode
 ---
 
 <!-- TO CONTRIBUTORS: This content also exists in the extension's README file. Remember to update the README when you change anything in this file. -->
@@ -136,6 +134,8 @@ You can also use this feature to open your source files from an insight (such as
 The **Fix in Chat** button appears in several contexts when the extension identifies errors or issues. Click the button to generate an AI chat prompt that summarizes the problem, includes relevant details and context, and gives specific instructions for the agent.
 
 {{< img src="/ide_plugins/vscode/cursor_fix_in_chat.mp4" alt="Using Fix in Chat to fix an inline code error" style="width:100%" video=true >}}
+
+The extension also handles the {{< ui >}}Fix with Cursor{{< /ui >}} deep link used in Code Security. When you click {{< ui >}}Fix with Cursor{{< /ui >}} in the Datadog UI or in a pull request comment, the extension opens the workspace in Cursor. It then checks out the relevant repository, branch, and commit, and loads a tailored remediation prompt for the finding.
 
 ## Other features
 

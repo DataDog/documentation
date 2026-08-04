@@ -78,7 +78,7 @@ The following examples show matched logs, along with the legacy syntax and new s
 `{"message": "hEllo world"}`
 : **Legacy syntax**: `HELLO OR hello OR Hello`
 : **New syntax**: `hello`
-: **Difference**: With the new syntax, [free text search][4] is case insensitive.
+: **Difference**: With the new syntax, [free text search][6] is case insensitive.
 
 `{"user": "name"}`
 : **Legacy syntax**: `@user:(name OR Name OR nAme)`
@@ -129,3 +129,4 @@ See [Reserved attributes][3] for more information.
 [3]: /logs/log_configuration/attributes_naming_convention/#reserved-attributes
 [4]: /observability_pipelines/search_syntax/logs/#attribute-search
 [5]: /observability_pipelines/live_capture/
+[6]: /observability_pipelines/search_syntax/logs/#free-text-search

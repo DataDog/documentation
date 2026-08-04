@@ -162,8 +162,9 @@ Assertions define what an expected test result is. After you click {{< ui >}}Tes
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][6]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5], <br> [`jsonschema`][7] | _String_ <br> _[Regex][6]_ <br> _String_, _[Regex][6]_ <br> _String_ |
+| body hash     | `md5`, `sha1`, `sha256`                                                                                 | _String_                                                        |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> `does not exist`, <br> `is less than`, `is less than or equal`, `is more than`, `is more than or equal` | _String_ <br> _[Regex][6]_ <br> _None_ <br> _Integer_ |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][6]_                                                     |
 
@@ -184,6 +185,7 @@ If a test contains an assertion on the response body and the timeout limit is re
 [4]: https://restfulapi.net/json-jsonpath/
 [5]: https://www.w3schools.com/xml/xpath_syntax.asp
 [6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: https://json-schema.org/
 
 {{% /tab %}}
 {{% tab "JavaScript" %}}

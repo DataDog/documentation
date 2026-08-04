@@ -14,6 +14,12 @@ further_reading:
 - link: "/experiments/statistics/minimum_detectable_effect"
   tag: "Documentation"
   text: "Minimum Detectable Effects"
+- link: "/experiments/statistics/cuped"
+  tag: "Documentation"
+  text: "CUPED: Variance Reduction Technique"
+- link: "/experiments/statistics/multiple_testing_correction"
+  tag: "Documentation"
+  text: "Multiple Testing Correction"
 ---
 
 ## Overview
@@ -67,17 +73,25 @@ Use Bayesian analysis when:
 
 The prior matters most when sample sizes are small. With enough data, the posterior is driven mostly by observed experiment behavior, but empirically grounded priors are often strong enough to affect results even at large sample sizes. A poorly-specified prior can influence the lift estimate and interval enough to change the decision.
 
+### Choosing a prior
+
+Both priors shrink noisy lift estimates toward the prior mean. Each prior applies
+shrinkage in a different way:
+
+- **Normal prior**: For a fixed prior, the shrinkage factor depends on the lift estimate's standard error, not its magnitude. Highly certain estimates are shrunk less, whereas highly uncertain estimates are shrunk more. The posterior mean and variance have closed-form expressions, which makes this prior simple to use.
+- **Student's t prior**: The shrinkage depends on both the lift estimate's standard error and its magnitude. Small effects are shrunk similarly to the Normal model, whereas large effects are shrunk less aggressively. This approach is motivated by the possibility of rare, large effects discussed in [A/B Testing with Fat Tails][5].
+
 <div class="alert alert-info">Bayesian intervals are technically credible intervals, though Datadog may present them alongside confidence intervals in the experiment results UI. Unlike frequentist intervals, Bayesian intervals do not provide the same false positive rate guarantee.</div>
 
 ## Related settings
 
 Analysis methods are only one part of the statistical analysis plan. Datadog Experiments also supports modifying the following [settings][1]:
 
-CUPED
+[CUPED][4]
 : Uses pre-experiment data from each subject to reduce metric variance and improve experiment sensitivity. With CUPED enabled, displayed lift and metric values may differ from the naive estimates calculated from the raw data.
 
 Multiple testing correction
-: Adjusts for the increased false positive risk that comes from evaluating multiple metric comparisons. This produces more conservative results and is not available with Bayesian analysis.
+: Adjusts for the increased family-wise error rate that comes from evaluating multiple metrics and treatment-variant comparisons. This produces more conservative results and is not available with Bayesian analysis. For more information, see [Multiple Testing Correction][3].
 
 Confidence level
 : Controls the width of the interval around the lift estimate. Higher confidence levels produce wider intervals and require more data to reach statistical significance.
@@ -88,3 +102,6 @@ Confidence level
 
 [1]: /experiments/plan_and_launch_experiments/#choose-a-statistical-analysis-plan
 [2]: /experiments/statistics/minimum_detectable_effect
+[3]: /experiments/statistics/multiple_testing_correction
+[4]: /experiments/statistics/cuped
+[5]: https://doi.org/10.1086/710607

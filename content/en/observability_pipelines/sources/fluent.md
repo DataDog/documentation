@@ -19,13 +19,13 @@ Use Observability Pipelines' Fluentd or Fluent Bit source to receive logs from t
 
 ## Setup
 
-Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Fluent address and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The instructions in this section are for setting up the source in the UI.
 
 After you select the Fluent source in the pipeline UI, enter the identifier for your Fluent address. If you leave it blank, the [default](#secret-defaults) is used.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
@@ -59,7 +59,14 @@ After you select the Fluent source in the pipeline UI, enter the identifier for 
 
 {{% observability_pipelines/log_source_configuration/fluent %}}
 
+## Metrics
+
+For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Fluent source metrics, use the tag `component_type:fluent`.
+
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [3]: https://app.datadoghq.com/observability-pipelines
 [4]: /api/latest/observability-pipelines/
 [5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#source-buffer-metrics
+[8]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

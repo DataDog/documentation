@@ -92,4 +92,11 @@ To set up a custom mapping:
 
 {{% /collapse-content %}}
 
+## Metrics
+
+For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by OCSF Mapper processor metrics, use the tag `component_type:ocsf_mapper`.
+
 [1]: /observability_pipelines/search_syntax/logs/
+[3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
+[4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
+[5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/

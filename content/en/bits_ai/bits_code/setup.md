@@ -11,7 +11,7 @@ disable_toc: false
 
 ## Prerequisites
 
-To set up Bits Code, you need the **Bits Code Write** (`bits_dev_write`) permission. This permission is included in managed Datadog roles such as the Datadog Standard Role.
+To set up Bits Code, you need the [`Bits Code Write` (`bits_dev_write`) permission][1]. This permission is included in managed Datadog roles such as the Datadog Standard Role.
 
 If your organization uses custom roles, an admin must add this permission manually. For details, see [Access Control][1].
 
@@ -48,7 +48,9 @@ Set up Bits Code for one of the [supported source code providers][11].
 1. Install the [GitLab Source Code integration][1]. For full installation and configuration steps, see the [GitLab Source Code integration guide][2].
 1. Verify that the GitLab [service account][3] meets the following requirements:
    - The service account must have the [Developer role][4] on the project. This role can be inherited from a [group][5].
-   - The service account's personal access token must have the following [scopes][6]: `api`, `write_repository`, and `read_user`.
+   - The service account's [personal access token][7] must have the following [scopes][6]: `api`, `write_repository`, and `read_user`. 
+
+   <div class="alert alert-warning">You can't modify the scopes of an existing GitLab personal access token. If you need to create a token that includes the scopes above, add <a href="/integrations/gitlab-source-code/#required-gitlab-scopes">all scopes required</a> by other Datadog products that use the GitLab Source Code integration.</div>
 
 [1]: https://app.datadoghq.com/integrations/gitlab-source-code
 [2]: /integrations/gitlab-source-code/
@@ -56,6 +58,7 @@ Set up Bits Code for one of the [supported source code providers][11].
 [4]: https://docs.gitlab.com/user/permissions/#default-roles
 [5]: https://docs.gitlab.com/user/permissions/#groups
 [6]: https://docs.gitlab.com/user/profile/personal_access_tokens/#personal-access-token-scopes
+[7]: https://docs.gitlab.com/user/profile/personal_access_tokens/
 {{% /tab %}}
 
 {{< /tabs >}}
@@ -76,7 +79,7 @@ You can also configure service-to-repository mapping manually in Bits Code setti
 
 Auto-push allows Bits Code to create branches, push code, and open PRs or MRs when it detects something it can help you with. Auto-push only opens PRs or MRs and pushes changes; it never merges code. When auto-push is disabled, you must review code in Datadog before it gets pushed.
 
-To enable auto-push, navigate to **Bits Code** > **Settings** > [**General**][6].
+To enable auto-push, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6].
 
 
 #### Security considerations
@@ -88,14 +91,17 @@ To balance safety and automation, you can configure auto-push behavior in [Datad
 ### Configure custom instructions
 
 Bits Code ingests custom instruction files from your repository, including:
+
+- `AGENTS.md`
+- `CLAUDE.md`
+- `agent.md`
 - `.cursorrules`
 - `.windsurfrules`
 - `copilot-instructions.md`
-- `CLAUDE.md`
-- `AGENTS.md`
-- `agent.md`
 
-You can also define global custom instructions, which apply to all Bits Code sessions, in **Bits Code** > **Settings** > [**General**][6], in the **Global Agent Instructions** section.
+You can also define global custom instructions that apply to all Bits Code sessions in {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], in the {{< ui >}}Global Agent Instructions{{< /ui >}} section.
+
+A custom instruction file is a good place to mention [custom skills][12] you'd like Bits Code to use.
 
 ## Environment setup
 
@@ -103,7 +109,7 @@ Configure Bits Code's runtime environment, including network access policies and
 
 ### Configure internet access
 
-By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to **Bits Code** > **Settings** > [**General**][6], and find the **Internet Access** section. Choose from the following access policies: **No Internet Access**, **Default Allowlist**, **Custom + Default Allowlist**, or **Custom Allowlist**.
+By default, Bits Code has **no internet access** during agent execution. To configure which external domains agents can reach, navigate to {{< ui >}}Bits Code{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > [{{< ui >}}General{{< /ui >}}][6], and find the {{< ui >}}Internet Access{{< /ui >}} section. Choose from the following access policies: {{< ui >}}No Internet Access{{< /ui >}}, {{< ui >}}Default Allowlist{{< /ui >}}, {{< ui >}}Custom + Default Allowlist{{< /ui >}}, or {{< ui >}}Custom Allowlist{{< /ui >}}.
 
 The default allowlist includes the following domains. This list will evolve over time based on user feedback and ecosystem changes. To avoid changes, configure a custom allowlist.
 
@@ -155,3 +161,4 @@ In some cases, especially in repositories with many branches, GitHub does not ru
 [7]: /bits_ai/bits_code/#start-a-session
 [8]: /bits_ai/bits_code/
 [11]: /bits_ai/bits_code/#supported-source-code-providers
+[12]: /bits_ai/bits_code/#custom-agent-skills-and-instructions
