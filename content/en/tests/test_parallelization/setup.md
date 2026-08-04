@@ -79,6 +79,8 @@ These examples download the latest Linux AMD64 binary. For another operating sys
 
 Adopt Test Parallelization in four steps. First, add planning without changing how tests run. After validating the plan, replace the existing test command with `ddtest`, choose an execution mode, and measure the resulting CI savings.
 
+Make these changes on a feature branch. Commit and push each CI configuration change, then review the resulting CI run before continuing.
+
 ### 1. Add test planning
 
 After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
@@ -110,14 +112,11 @@ wc -l .testoptimization/runner/test-files.txt
 
 # Preview the first 20 test files to verify test discovery.
 sed -n '1,20p' .testoptimization/runner/test-files.txt
-
-# List the per-runner split files to verify that work was distributed.
-find .testoptimization/runner/tests-split -maxdepth 1 -type f -print
 {{< /code-block >}}
 
 Alternatively, download the `.testoptimization/` directory as a CI artifact and open the files in your editor.
 
-Confirm that `test-files.txt` contains the files your existing command should run and that the number of split files matches `parallel-runners.txt`. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
+Confirm that `test-files.txt` contains a list of files to run. Optionally, inspect `.testoptimization/runner/tests-split/` to see how `ddtest` distributed the files across runners. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
 
 ### 3. Replace the existing test command
 
@@ -152,7 +151,7 @@ The CI examples on this page show how to pass the generated plan and selected ru
 
 ### 4. Measure CI savings
 
-After replacing the test command, confirm that the expected tests complete and that the test session appears in Datadog. Compare the test stage duration and CI resource consumption with your previous workflow.
+After replacing the test command, confirm in the [Test Optimization Explorer][6] that the expected tests completed. Use the [CI Visibility Explorer][7] to compare test job durations and the number of test jobs between pipeline runs. If CI Visibility is not enabled, use the equivalent job metrics in your CI provider.
 
 If all workers run on one CI node, parallel execution shortens the test stage without changing the number of CI nodes. If each worker runs on a separate CI node, use the runner count in `parallel-runners.txt` to size the CI matrix. Because Test Impact Analysis removes unaffected tests before `ddtest` selects the runner count, smaller changes can result in fewer CI nodes being started.
 
@@ -649,3 +648,5 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 [3]: https://github.com/DataDog/ddtest/releases/latest
 [4]: /tests/test_parallelization/configuration/
 [5]: /tests/test_parallelization/configuration/#plan-artifacts
+[6]: https://app.datadoghq.com/ci/test-runs
+[7]: /continuous_integration/explorer/
