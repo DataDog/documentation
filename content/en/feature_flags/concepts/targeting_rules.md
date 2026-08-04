@@ -2,6 +2,9 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/evaluation_tester"
+  tag: "Documentation"
+  text: "Evaluation Tester"
 - link: "/feature_flags/concepts/saved_filters"
   tag: "Documentation"
   text: "Saved Filters"
