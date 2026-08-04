@@ -648,5 +648,5 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 [3]: https://github.com/DataDog/ddtest/releases/latest
 [4]: /tests/test_parallelization/configuration/
 [5]: /tests/test_parallelization/configuration/#plan-artifacts
-[6]: https://app.datadoghq.com/ci/test-runs
+[6]: /tests/explorer/
 [7]: /continuous_integration/explorer/
