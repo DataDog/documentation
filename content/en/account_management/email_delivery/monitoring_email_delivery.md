@@ -30,6 +30,10 @@ The dashboard shows requests by email type, a delivery timeline, and a breakdown
 - `email_status`
 - `smtp_reason`
 
+{{< img src="/account_management/email_delivery/email_delivery_dashboard.png" alt="An Email Delivery dashboard example." style="width:100%;" >}}
+
+static/images/account_management/email_delivery/email_delivery_dashboard.png
+
 To trace a single failure from the dashboard to its underlying audit event, see [Investigate a failed email][3].
 
 ## Create an Audit Trail monitor
