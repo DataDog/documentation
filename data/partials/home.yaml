@@ -262,10 +262,6 @@ nav_sections:
         link: events/
         icon: events
         desc: Track notable changes and alerts in your applications and infrastructure
-      - title: CoScreen
-        link: coscreen/
-        icon: coscreen
-        desc: Share and interact with application windows for pair programming and incident management
       - title: OpenTelemetry
         link: opentelemetry/
         icon: open-telemetry

@@ -1,47 +1,7 @@
 {
-  "ListFleetAgentVersions": {
-    "description": "Retrieve a list of all available Datadog Agent versions.\n\nThis endpoint returns the available Agent versions that can be deployed to your fleet.\nThese versions are used when creating deployments or configuring schedules for\nautomated Agent upgrades.",
-    "summary": "List all available Agent versions"
-  },
-  "ListFleetAgents": {
-    "description": "Retrieve a paginated list of all Datadog Agents.\nThis endpoint returns a paginated list of all Datadog Agents with support for pagination, sorting, and filtering.\nUse the `page_number` and `page_size` query parameters to paginate through results.",
-    "summary": "List all Datadog Agents"
-  },
-  "GetFleetAgentInfo": {
-    "description": "Retrieve detailed information about a specific Datadog Agent.\nThis endpoint returns comprehensive information about an agent including:\n- Agent details and metadata\n- Configured integrations organized by status (working, warning, error, missing)\n- Detected integrations\n- Configuration files and layers",
-    "summary": "Get detailed information about an agent"
-  },
   "ListFleetAgentTracers": {
     "description": "Retrieve a paginated list of tracers for a specific agent.\n\nThis endpoint returns tracers associated with a given agent key, identified by the\nagent's hostname. Use this to discover telemetry-derived service names for a particular host.",
     "summary": "List tracers for a specific agent"
-  },
-  "ListFleetDeployments": {
-    "description": "Retrieve a list of all deployments for fleet automation.\nUse the `page_size` and `page_offset` parameters to paginate results.",
-    "summary": "List all deployments"
-  },
-  "CreateFleetDeploymentConfigure": {
-    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.\n\nThis endpoint supports two types of configuration operations:\n- `merge-patch`: Merges the provided patch data with the existing configuration file,\n  creating the file if it doesn't exist\n- `delete`: Removes the specified configuration file from the target hosts\n\nThe deployment is created and started automatically. You can specify multiple configuration\noperations that will be executed in order on each target host. Use the filter query to target\nspecific hosts using the Datadog query syntax.",
-    "summary": "Create a configuration deployment",
-    "request_description": "Request payload containing the deployment details.",
-    "request_schema_description": "Request payload for creating a new configuration deployment."
-  },
-  "CreateFleetDeploymentUpgrade": {
-    "description": "Create and immediately start a new package upgrade\non hosts matching the specified filter query.\n\nThis endpoint allows you to upgrade the Datadog Agent to a specific version\non hosts matching the specified filter query.\n\nThe deployment is created and started automatically. The system will:\n1. Identify all hosts matching the filter query\n2. Validate that the specified version is available\n3. Begin rolling out the package upgrade to the target hosts",
-    "summary": "Upgrade hosts",
-    "request_description": "Request payload containing the package upgrade details.",
-    "request_schema_description": "Request payload for creating a new package upgrade deployment."
-  },
-  "GetFleetDeployment": {
-    "description": "Retrieve detailed information about a specific deployment using its unique identifier.\nThis endpoint returns comprehensive information about a deployment, including:\n- Deployment metadata (ID, type, filter query)\n- Total number of target hosts\n- Current high-level status (pending, running, succeeded, failed)\n- Estimated completion time\n- Configuration operations that were or are being applied\n- Detailed host list: A paginated array of hosts included in this deployment with individual\n  host status, current package versions, and any errors\n\nThe host list provides visibility into the per-host execution status, allowing you to:\n- Monitor which hosts have completed successfully\n- Identify hosts that are still in progress\n- Investigate failures on specific hosts\n- View current package versions installed on each host (including initial, target, and current\n  versions for each package)\n\nPagination: Use the `limit` and `page` query parameters to paginate through hosts. The response\nincludes pagination metadata in the `meta.hosts` field with information about the current page,\ntotal pages, and total host count. The default page size is 50 hosts, with a maximum of 100.",
-    "summary": "Get a configuration deployment by ID"
-  },
-  "CancelFleetDeployment": {
-    "description": "Cancel an active deployment and stop all pending operations.\nWhen you cancel a deployment:\n- All pending operations on hosts that haven't started yet are stopped\n- Operations currently in progress on hosts may complete or be interrupted, depending on their current state\n- Configuration changes or package upgrades already applied to hosts are not rolled back\n\nAfter cancellation, you can view the final state of the deployment using the GET endpoint to see which hosts\nwere successfully updated before the cancellation.",
-    "summary": "Cancel a deployment"
-  },
-  "ListFleetSchedules": {
-    "description": "Retrieve a list of all schedules for automated fleet deployments.\n\nSchedules allow you to automate package upgrades by defining maintenance windows\nand recurrence rules. Each schedule automatically creates deployments based on its\nconfiguration.",
-    "summary": "List all schedules"
   },
   "CreateFleetSchedule": {
     "description": "Create a new schedule for automated package upgrades.\n\nSchedules define when and how often to automatically deploy package upgrades to a fleet\nof hosts. Each schedule includes:\n- A filter query to select target hosts\n- A recurrence rule defining maintenance windows\n- A version strategy (e.g., always latest, or N versions behind latest)\n\nWhen the schedule triggers during a maintenance window, it automatically creates a\ndeployment that upgrades the Datadog Agent to the specified version on all matching hosts.",
@@ -52,10 +12,6 @@
   "DeleteFleetSchedule": {
     "description": "Delete a schedule permanently.\n\nWhen you delete a schedule:\n- The schedule is permanently removed and will no longer create deployments\n- Any deployments already created by this schedule are not affected\n- This action cannot be undone\n\nIf you want to temporarily stop a schedule from creating deployments, consider\nupdating its status to \"inactive\" instead of deleting it.",
     "summary": "Delete a schedule"
-  },
-  "GetFleetSchedule": {
-    "description": "Retrieve detailed information about a specific schedule using its unique identifier.\n\nThis endpoint returns comprehensive information about a schedule, including:\n- Schedule metadata (ID, name, creation/update timestamps)\n- Filter query for selecting target hosts\n- Recurrence rule defining when deployments are triggered\n- Version strategy for package upgrades\n- Current status (active or inactive)",
-    "summary": "Get a schedule by ID"
   },
   "UpdateFleetSchedule": {
     "description": "Partially update a schedule by providing only the fields you want to change.\n\nThis endpoint allows you to modify specific attributes of a schedule without\naffecting other fields. Common use cases include:\n- Changing the schedule status between active and inactive\n- Updating the maintenance window times\n- Modifying the filter query to target different hosts\n- Adjusting the version strategy\n\nOnly include the fields you want to update in the request body. All fields\nare optional in a PATCH request.",
@@ -1943,6 +1899,50 @@
     "summary": "Update a variant",
     "request_description": "",
     "request_schema_description": "Request to update an existing variant's name and value."
+  },
+  "ListFleetAgentVersionsV2": {
+    "description": "Retrieve the list of Datadog Agent versions available for deployment.\n\nReturns `200` with an empty `data` array if the Agent package exists in the catalog\nbut has no available versions, and `404` only if the Agent package itself is absent\nfrom the catalog.",
+    "summary": "List available Datadog Agent versions"
+  },
+  "ListFleetAgentsV2": {
+    "description": "Retrieve a paginated list of Datadog Agents.\n\nReturns agents with support for pagination, sorting, and filtering.\nUse `page_number` and `page_size` to navigate pages, `filter` to narrow by field values,\nand `tags` to filter by agent tags.",
+    "summary": "List all Datadog Agents"
+  },
+  "GetFleetAgentDetailV2": {
+    "description": "Retrieve detailed information about a specific Datadog Agent.\n\nBy default, only `agent_infos` is returned. Use the `include` query parameter to\nrequest additional data: `integrations` and/or `configuration_files`.",
+    "summary": "Get detailed information about an agent"
+  },
+  "ListFleetDeploymentsV2": {
+    "description": "Retrieve a paginated list of all deployments for fleet automation.",
+    "summary": "List all deployments"
+  },
+  "CreateFleetDeploymentConfigureV2": {
+    "description": "Create a new deployment to apply configuration changes\nto a fleet of hosts matching the specified filter query.\n\nThis endpoint supports two types of configuration operations:\n- `merge-patch`: Merges the provided patch data with the existing configuration file,\n  creating the file if it doesn't exist.\n- `delete`: Removes the specified configuration file from the target hosts.\n\nYou can optionally use `target_packages` to apply the configuration change only to specific package versions.\n\nThe deployment is created and started automatically. You can specify multiple configuration\noperations to execute in order on each target host. Use the filter query to target\nspecific hosts using the Datadog query syntax.\n\nSet `dry_run` to `true` to validate the configuration and resolve target hosts and packages without deploying anything. A dry run returns a 200 with the validation result instead of creating and starting a deployment.\n\nReturns a 400 if `filter_query` or `config_operations` is missing, a target package is missing a name or version or cannot be resolved, the configuration fails validation, or the filter query does not match any host eligible for the deployment.",
+    "summary": "Create a configuration deployment",
+    "request_description": "Request payload containing the deployment details.",
+    "request_schema_description": "Request payload for creating a new v2 configuration deployment."
+  },
+  "CreateFleetDeploymentUpgradeV2": {
+    "description": "Create and immediately start a new package upgrade\non hosts matching the specified filter query.\n\nThis endpoint allows you to upgrade the Datadog Agent to a specific version\non hosts matching the specified filter query.\n\nThe deployment is created and started automatically. The system:\n1. Identifies all hosts matching the filter query.\n2. Validates that the specified version is available.\n3. Begins rolling out the package upgrade to the target hosts.\n\nReturns a 400 if `filter_query` or `target_packages` is missing, a target package is missing a name or version, or the filter query does not match any host eligible for the upgrade. Returns a 409 if a conflicting upgrade is already running on one or more target hosts.",
+    "summary": "Upgrade hosts",
+    "request_description": "Request payload containing the package upgrade details.",
+    "request_schema_description": "Request payload for creating a new v2 package upgrade deployment."
+  },
+  "GetFleetDeploymentV2": {
+    "description": "Retrieve detailed information about a specific deployment, including its current status,\nconfiguration operations, and per-host execution status.\n\nReturns a 404 if no deployment matches the given ID or if you do not have access to it.",
+    "summary": "Get a deployment by ID"
+  },
+  "CancelFleetDeploymentV2": {
+    "description": "Cancel an active deployment and stop all pending operations.\nWhen you cancel a deployment:\n- All pending operations on hosts that haven't started yet are stopped.\n- Operations currently in progress on hosts may complete or be interrupted, depending on their current status.\n- Configuration changes or package upgrades already applied to hosts are not rolled back.\n\nAfter cancellation, you can view the final state of the deployment using the GET endpoint to see which hosts\nwere successfully updated before the cancellation.\n\nOnly deployments with a `pending` or `running` status can be canceled. Returns a 400 if the deployment is not in a cancelable status. Returns a 404 if no deployment matches the specified ID or if you do not have access to it.",
+    "summary": "Cancel a deployment"
+  },
+  "ListFleetSchedulesV2": {
+    "description": "Retrieve all upgrade schedules for the organization.\n\nSchedules automate package upgrades by defining maintenance windows and recurrence rules.\nEach schedule automatically creates deployments based on its configuration.",
+    "summary": "List all schedules"
+  },
+  "GetFleetScheduleV2": {
+    "description": "Retrieve detailed information about a specific schedule by its unique identifier.",
+    "summary": "Get a schedule by ID"
   },
   "ListForms": {
     "description": "Get all forms for the authenticated user's organization.",
