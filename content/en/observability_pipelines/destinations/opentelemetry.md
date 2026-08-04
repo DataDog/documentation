@@ -84,7 +84,7 @@ A batch of events is flushed when one of these conditions occurs. See [event bat
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
-| TKTK           | TKTK              | TKTK                |
+| N/A            | 10                | 1                   |
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching
