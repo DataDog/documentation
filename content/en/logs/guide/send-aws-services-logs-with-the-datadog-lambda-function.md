@@ -36,7 +36,7 @@ To start collecting logs from your AWS services:
 
 ## Supported AWS services
 
-The Datadog Forwarder Lambda function supports any AWS service that generates logs into a S3 bucket or a CloudWatch log group. The following table lists the services collected:
+The Datadog Forwarder Lambda function supports any AWS service that generates logs into a S3 bucket or a CloudWatch log group. The following table lists the services it can collect:
 
 - **AWS service**: The AWS service that generates the logs. Each service name links to its log collection setup instructions. Services without a link require no service-side setup.
 - **Log source**: The `source` tag Datadog applies to the logs. Use it to find your logs in the [Log Explorer][40].
@@ -57,7 +57,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 | [DocumentDB][10]                   | `source:docdb`                | CloudWatch, S3 | Yes                  |
 | [ECS][11]                          | `source:ecs`                  | CloudWatch     | Yes                  |
 | [EKS][12]                          | `source:eks` <sup>1</sup>     | CloudWatch     | Yes                  |
-| [Elastic Beanstalk][13]            | `-` <sup>2</sup>              | CloudWatch     | Yes                  |
+| [Elastic Beanstalk][13]            | - <sup>2</sup>                | CloudWatch     | Yes                  |
 | [Elastic Load Balancing (ELB)][14] | `source:elb`                  | CloudWatch, S3 | Yes                  |
 | [FSx][15]                          | `source:aws.fsx`              | CloudWatch, S3 | No                   |
 | [Glue][16]                         | `source:glue`                 | CloudWatch, S3 | Yes                  |
@@ -67,7 +67,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 | [MWAA][19]                         | `source:mwaa`                 | CloudWatch     | Yes                  |
 | [Network Firewall][20]             | `source:network-firewall`     | CloudWatch, S3 | Yes                  |
 | [OpenSearch][21]                   | `source:opensearch`           | CloudWatch     | No                   |
-| [PCS][22]                          | `-` <sup>2</sup>              | CloudWatch     | Partial <sup>4</sup> |
+| [PCS][22]                          | - <sup>2</sup>                | CloudWatch     | Partial <sup>4</sup> |
 | [RDS][23]                          | `source:rds` <sup>5</sup>     | CloudWatch     | Yes                  |
 | [Redshift][24]                     | `source:redshift`             | CloudWatch, S3 | Yes                  |
 | Redshift Serverless                | `source:redshift-serverless`  | CloudWatch     | Yes                  |
@@ -78,7 +78,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 | [Transit Gateway][28]              | `source:transitgateway`       | CloudWatch, S3 | No                   |
 | [Verified Access][29]              | `source:verified-access`      | CloudWatch, S3 | Yes                  |
 | [VPC][30]                          | `source:vpc`                  | CloudWatch, S3 | Yes                  |
-| [VPN][31]                          | `-` <sup>2</sup>              | CloudWatch, S3 | Yes <sup>7</sup>     |
+| [VPN][31]                          | - <sup>2</sup>                | CloudWatch, S3 | Yes <sup>7</sup>     |
 | [Web Application Firewall][32]     | `source:waf`                  | S3             | Yes                  |
 
 <sup>1</sup> EKS control plane logs also use the `kubernetes.audit`, `kube-scheduler`, `kube-apiserver`, `kube-controller-manager`, and `aws-iam-authenticator` sources.<br>
@@ -89,7 +89,7 @@ The Datadog Forwarder Lambda function supports any AWS service that generates lo
 <sup>6</sup> Covers both DNS query logs and Resolver query logs.<br>
 <sup>7</sup> Automatic collection is available for CloudWatch log groups. For S3 buckets, [set up the trigger manually](#collecting-logs-from-s3-buckets).
 
-**Note**: [Subscription filters][43] are automatically created on CloudWatch log groups by the DatadogForwarder, and are named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
+**Note**: The Datadog Forwarder automatically creates [subscription filters][43] on CloudWatch log groups. Each filter is named in the format `DD_LOG_SUBSCRIPTION_FILTER_<LOG_GROUP_NAME>`.
 
 ### Services collected through another method
 
