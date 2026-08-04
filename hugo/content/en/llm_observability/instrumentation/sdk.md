@@ -2001,7 +2001,6 @@ function runChat(userQuestion, sessionId) {
 
 {{< /code-block >}}
 
-{{% /tab %}}
 {{< /tabs >}}
 
 ## Prompt tracking
