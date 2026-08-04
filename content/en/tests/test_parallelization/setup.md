@@ -154,7 +154,7 @@ The CI examples on this page show how to pass the generated plan and selected ru
 
 After replacing the test command, confirm that the expected tests complete and that the test session appears in Datadog. Compare the test stage duration and CI resource consumption with your previous workflow.
 
-Local workers primarily reduce test stage duration. When you distribute tests across CI nodes, using the selected runner count can also avoid unnecessary CI nodes after Test Impact Analysis removes unaffected tests.
+If all workers run on one CI node, parallel execution shortens the test stage without changing the number of CI nodes. If each worker runs on a separate CI node, use the runner count in `parallel-runners.txt` to size the CI matrix. Because Test Impact Analysis removes unaffected tests before `ddtest` selects the runner count, smaller changes can result in fewer CI nodes being started.
 
 Use `--max-parallelism` to limit CI capacity. The planner accounts for the setup cost of each additional runner through `--ci-job-overhead`. For details about these settings, see [Configuration][4].
 
