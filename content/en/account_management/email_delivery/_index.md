@@ -48,8 +48,6 @@ Every paid plan includes the [Email Delivery dashboard][3] for recent activity. 
 | Monitors and alerts on events     | —                   | ✓                              |
 | Export for audit and compliance   | —                   | ✓                              |
 
-
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
