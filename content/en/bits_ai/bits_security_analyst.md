@@ -139,7 +139,7 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
      <li>Select scopes for the API client:
        <ul>
          <li>Set all scopes to <strong>Read Only</strong>, except <strong>NGSIEM</strong>.</li>
-         <li>Set the <strong>NGSIEM</strong> scope to <strong>Read and Write</strong>. Querying NG SIEM requires POST requests, which CrowdStrike classifies as a write action.</li>
+         <li>Set the <strong>NGSIEM</strong> scope to <strong>Read and Write</strong>. Querying NGSIEM requires POST requests, which CrowdStrike classifies as a write action.</li>
        </ul>
      </li>
      <li>After you create the API client, securely save the <strong>Client ID</strong>, <strong>Secret</strong>, and <strong>Base URL</strong>. The secret displays only once, and the base URL must match your CrowdStrike region.</li>
