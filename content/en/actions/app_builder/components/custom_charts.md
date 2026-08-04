@@ -50,7 +50,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 
 1. Click {{< ui >}}+ All Components{{< /ui >}} and select {{< ui >}}Custom Chart{{< /ui >}} to add a component called `customChart0`.
 1. Click {{< ui >}}Show Chart Examples{{< /ui >}}.
-1. Select {{< ui >}}Simple Histogram{{< /ui >}} and click {{< ui >}}Confirm{{< /ui >}}.<br>The following value populates in the Vega Specification:
+1. Select {{< ui >}}Simple Histogram{{< /ui >}} and click {{< ui >}}Confirm{{< /ui >}}.<br>The following value populates in the Vega-Lite Specification:
 
    {{< code-block lang="json" disable_copy="true" collapsible="true" >}}${{
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
@@ -75,7 +75,7 @@ The following example shows how to create a histogram chart illustrating Datadog
 
 ### Replace example values with your data
 
-Replace the auto-populated Vega Specification with the following to change the data source and the value being graphed on the x-axis:
+Replace the auto-populated Vega-Lite Specification with the following to change the data source and the value being graphed on the x-axis:
 
 {{< highlight json "hl_lines=4 12" >}}${{
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
