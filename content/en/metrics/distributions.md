@@ -115,7 +115,7 @@ To customize tagging:
 
 ## Metric name conflicts and overshadowing
 
-Distribution metrics store data differently from non-distribution types (count, rate, gauge). If the same metric name receives both distribution and non-distribution data, Datadog's query system automatically gives preference to the distribution data. **This is called overshadowing.**
+Distribution metrics store data differently from non-distribution types (count, rate, gauge, histogram). If the same metric name receives both distribution and non-distribution data, Datadog's query system prioritizes the distribution data. This behavior is called **overshadowing**.
 
 No data is lost (both timeseries are stored) but queries return only the distribution data, making the non-distribution timeseries invisible. Overshadowing takes effect from the moment the first distribution datapoint arrives.
 
