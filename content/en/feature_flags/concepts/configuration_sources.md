@@ -45,8 +45,11 @@ To get started with agentless delivery, use one of these minimum versions:
 
 | SDK | Minimum version |
 |---|---|
+| Java `dd-openfeature` and `dd-java-agent` | 1.65.0 |
 | Node.js `dd-trace` v5 | 5.116.0 |
 | Node.js `dd-trace` v6 | 6.5.0 |
+
+Java CDN delivery requires `dd-openfeature` and `dd-java-agent`. It does not require a Datadog Agent for flag configuration.
 
 Configure the API key, Datadog site, and environment in the application process:
 
@@ -56,11 +59,11 @@ DD_SITE={{< region-param key="dd_site" code="true" >}}
 DD_ENV=<YOUR_ENVIRONMENT>
 {{< /code-block >}}
 
-Then initialize or access the Datadog OpenFeature provider in application code. See the [Node.js setup instructions][2].
+Then initialize or access the Datadog OpenFeature provider in application code. See the [Java][4] or [Node.js][2] setup instructions.
 
 No configuration-source or provider-enable setting is required. Polling begins only when application code initializes or accesses the provider; installing or initializing the tracer alone does not create Feature Flags CDN traffic.
 
-<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not support evaluation metrics, exposure logging, or experimentation use cases.</div>
+<div class="alert alert-warning">The initial Node.js agentless releases support configuration delivery and local flag evaluation only. They do not export evaluation metrics or exposure events. Java agentless delivery changes only the configuration source. Without a supported Datadog Agent or serverless telemetry path, Java also does not export these signals.</div>
 
 ### Configure agentless delivery
 
@@ -69,7 +72,7 @@ Set `DD_SITE` to your organization's Datadog site. For the site selected on this
 | Environment variable | Default | Description |
 |---|---|---|
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_BASE_URL` | Datadog-managed endpoint | Overrides the agentless flag configuration endpoint or base URL. See [Use a custom agentless endpoint](#use-a-custom-agentless-endpoint). |
-| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts, capped at 3600 seconds. |
+| `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_POLL_INTERVAL_SECONDS` | `30` | Positive integer that sets the time between completed polling attempts. Java does not limit attempts, while Node.js caps values at 3600 seconds. |
 | `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE_AGENTLESS_REQUEST_TIMEOUT_SECONDS` | `5` | Positive integer that sets the timeout for an individual configuration request. |
 
 The SDK fetches configuration in the background and evaluates flags locally. Individual flag evaluations do not make network requests. The agentless source does the following:
@@ -115,7 +118,7 @@ To remain on Agent Remote Configuration temporarily, set `DD_FEATURE_FLAGS_CONFI
 
 If you set `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=false`, replace it with `DD_FEATURE_FLAGS_ENABLED=false`.
 
-Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, a Node.js application without an explicit source uses agentless delivery. Set `remote_config` explicitly before the deprecated legacy setting is removed if you want to remain on Agent delivery.
+Explicit `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE` values take precedence over the legacy setting. After the legacy setting is removed, applications without an explicit source use agentless delivery. Set `remote_config` explicitly before the deprecated legacy setting is removed if you want to remain on Agent delivery.
 
 ## Use Agent Remote Configuration
 
@@ -124,6 +127,8 @@ Set the source to `remote_config` to use Agent-managed delivery:
 {{< code-block lang="bash" >}}
 DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config
 {{< /code-block >}}
+
+For Java, Remote Configuration requires compatible `dd-openfeature` and `dd-java-agent` versions. Use version 1.65.0 or later for both components.
 
 Configure the API key on the Agent, not in the application process. If Remote Configuration has been disabled on the Agent, re-enable it. See [Remote Configuration][1] for Agent setup and network requirements.
 
@@ -164,3 +169,4 @@ Server Feature Flags billing is based on configuration requests made through Rem
 [1]: /remote_configuration/
 [2]: /feature_flags/server/nodejs/
 [3]: /feature_flags/server/
+[4]: /feature_flags/server/java/
