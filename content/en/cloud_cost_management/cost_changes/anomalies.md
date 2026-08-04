@@ -36,7 +36,7 @@ To distinguish between true anomalies and expected fluctuations, Datadog's algor
 
 ## Customize anomaly detection
 
-By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, and Oracle Cloud.
+By default, Datadog automatically detects cost anomalies for each cloud provider. If you have the `cloud_cost_management_write` permission, you can customize how Datadog detects anomalies per provider to better match your organization's cost structure. Custom anomaly detection is available for AWS, Azure, Google Cloud, Datadog, Oracle Cloud, Cursor, Amazon Bedrock, Vertex AI, and Gemini.
 
 To customize anomaly detection:
 
