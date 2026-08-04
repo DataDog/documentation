@@ -26,23 +26,23 @@ The domains depend on the [Datadog Site][1] you use. Replace `<DD_SITE>` with `{
 `http-intake.logs.<DD_SITE>:443`
 : **Description**: Used to send the Observability Pipelines Worker's operational logs to Datadog.
 
-`install.datadoghq.com:443`
-: **Description**: Used by the one-line install script to download and install the Worker package. This domain is not site-specific.
-
-`keys.datadoghq.com:443`
-: **Description**: Used to download and verify the Datadog package signing keys. This domain is not site-specific.
-
-`yum.datadoghq.com:443`
-: **Description**: Datadog RPM repo used to install and upgrade the Worker on RPM-based distributions. This domain is not site-specific.
-
-`apt.datadoghq.com:443`
-: **Description**: Datadog APT repo used to install and upgrade the Worker on Debian-based distributions. This domain is not site-specific.
-
 `*.agent.<DD_SITE>:443`
 : **Description**: Used to send Observability Pipelines Worker metrics (`pipelines.*`) to Datadog. A wildcard is required because the subdomain changes with each Worker version. For example for Worker version 2.15.1, the domain is `2-15-1-observability-pipelines.agent.datadoghq.com`. See [Pipeline Usage Metrics][1] for information about the metrics.
 
 `obpipeline-intake.<DD_SITE>:443`
 : **Description**: Used for Live Capture. See [Live Capture permissions][2] for more information.
+
+`install.datadoghq.com:443`
+: **Description**: Used by the one-line install script to download and install the Worker package.
+
+`keys.datadoghq.com:443`
+: **Description**: Used to download and verify the Datadog package signing keys.
+
+`apt.datadoghq.com:443`
+: **Description**: Datadog APT repo used to install and upgrade the Worker on Debian-based distributions.
+
+`yum.datadoghq.com:443`
+: **Description**: Datadog RPM repo used to install and upgrade the Worker on RPM-based distributions.
 
 ### Use wildcards in domains
 
@@ -55,7 +55,7 @@ Most enterprise firewalls support wildcard rules. If you prefer to allowlist by 
 : **Description**: Matches `http-intake.logs.<DD_SITE>`.
 
 `*.datadoghq.com:443`
-: **Description**: Matches the following domains:<br>- `install.datadoghq.com`<br>- `keys.datadoghq.com`<br>- `yum.datadoghq.com`<br>- `apt.datadoghq.com`
+: **Description**: Matches the following domains:<br>- `install.datadoghq.com:443`<br>- `keys.datadoghq.com:443`<br>- `yum.datadoghq.com:443`<br>- `apt.datadoghq.com:443`
 
 `*.agent.<DD_SITE>:443`
 : **Description**: Matches the version-prefixed Worker metrics domain, such as `2-15-1-observability-pipelines.agent.datadoghq.com`.
@@ -83,7 +83,7 @@ Most enterprise firewalls support wildcard rules. If you prefer to allowlist by 
 
 ### Use wildcards in domains
 
-Most enterprise firewalls support wildcard rules. If you prefer to allowlist by wildcard instead of listing each domain explicitly, add the following:
+Most enterprise firewalls support wildcard rules. If you prefer to allowlist by wildcard instead of listing each domain explicitly:
 
 `*.<DD_SITE>:443`
 : **Description**: Matches the following domains:<br>- `api.<DD_SITE>`<br>- `config.<DD_SITE>`<br>- `obpipeline-intake.<DD_SITE>`
