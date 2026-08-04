@@ -1,52 +1,76 @@
 ---
 title: Ingest Threat Intelligence with STIX
+description: Send your own threat intelligence to Cloud SIEM as STIX 2.1 bundles. Covers the ingestion endpoint, authentication, supported indicator types and patterns, the reference tables Datadog generates for each indicator type, and how to configure or remove them.
 disable_toc: false
 further_reading:
 - link: "/security/cloud_siem/ingest_and_enrich/threat_intelligence/"
   tag: "Documentation"
-  text: "Bring Your Own Threat Intelligence for Cloud SIEM"
+  text: "Bring your own threat intelligence to Cloud SIEM"
 - link: "/security/threat_intelligence/"
   tag: "Documentation"
-  text: "Threat Intelligence"
+  text: "Threat intelligence in Datadog Security"
 - link: "/security/cloud_siem/triage_and_investigate/ioc_explorer/"
   tag: "Documentation"
   text: "Investigate indicators with the IOC Explorer"
+- link: "/reference_tables/"
+  tag: "Documentation"
+  text: "Create and manage reference tables"
 ---
 
-<div class="alert alert-warning">STIX ingestion is in Preview.</div>
+{{< callout btn_hidden="true" >}}
+STIX ingestion is in Preview.
+{{< /callout >}}
 
 ## Overview
 
-The STIX ingestion endpoint lets you push your own threat intelligence to Cloud SIEM programmatically from any Threat Intelligence Platform (TIP) or script that emits [STIX 2.1][1]. You send a STIX 2.1 bundle of `indicator` objects, and Datadog normalizes them into [reference tables][2] that Cloud SIEM uses to [enrich logs][3] and that appear in the [IOC Explorer][4].
+If your organization maintains threat intelligence in a Threat Intelligence Platform (TIP), you can send it to Cloud SIEM as [STIX 2.1][1] bundles. Cloud SIEM uses the ingested indicators to [enrich your logs][2] and displays them in the [IOC Explorer][3].
 
-This complements the CSV and cloud-storage [Bring Your Own Threat Intelligence][3] workflow. Use STIX ingestion when your platform already emits STIX, or when you want to push incremental feed updates automatically instead of uploading files.
+Use STIX ingestion when your platform already produces STIX, or when you want a script or scheduled job to push incremental updates. To upload indicators as CSV files or sync them from cloud storage instead, see [Bring your own threat intelligence to Cloud SIEM][2].
+
+## How it works
+
+To start ingesting a feed, send a bundle to the ingestion endpoint. No configuration in Datadog is required beforehand.
+
+1. You send a STIX 2.1 bundle of `indicator` objects and identify the feed with the `ti_vendor` header.
+2. Datadog reads the STIX `pattern` on each indicator to determine its value and its type, such as an IP address, a domain, or a file hash.
+3. Datadog generates one [reference table][4] for each indicator type in your feed, named `threat_intel_stix_<TI_VENDOR>_<INDICATOR_TYPE>`. Because one bundle can contain several indicator types, a single request can populate several tables.
+4. The first time Datadog receives a bundle for a `ti_vendor`, it registers each generated table and enables it for Cloud SIEM enrichment automatically.
+5. Later requests for the same `ti_vendor` update the existing tables and preserve the configuration choices you make.
+
+For example, a feed sent with `ti_vendor: my_tip` that contains IP address, domain, and SHA-256 indicators produces the following tables:
+
+| Indicator type | Generated reference table |
+|---|---|
+| IP address | `threat_intel_stix_my_tip_ip_address` |
+| Domain | `threat_intel_stix_my_tip_domain` |
+| SHA-256 file hash | `threat_intel_stix_my_tip_sha256` |
+
+Tables become available a few minutes after your first request. Enrichment applies to logs that Cloud SIEM receives after a table is enabled, so it does not apply to logs received earlier.
 
 ## Prerequisites
 
 - Cloud SIEM is enabled for your organization.
-- A Datadog [API key][5] and an [application key][6]. The application key must have the **Reference Tables Write** permission.
+- A Datadog [API key][5] and an [application key][6]. The application key must have the Reference Tables Write permission.
 
-## Send a STIX bundle
+## Send indicators
 
-Send indicators by POSTing a STIX 2.1 bundle to the ingestion endpoint:
+`POST https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security/threat-intel/stix`
 
-`POST {{< region-param key="dd_api" >}}/api/v2/security/threat-intel/stix`
-
-<div class="alert alert-info">The endpoint URL varies by region. Ensure you're using the correct Datadog site for your organization.</div>
+<div class="alert alert-info">The endpoint URL varies by site. Use the correct Datadog site for your organization.</div>
 
 ### Headers
 
 | Header | Required | Description |
 |---|---|---|
 | `DD-API-KEY` | Yes | Your Datadog API key. |
-| `DD-APPLICATION-KEY` | Yes | An application key with the **Reference Tables Write** permission. |
-| `ti_vendor` | Yes | Names the source of the feed (for example, your TIP or team). The value is lowercased, non-alphanumeric characters are replaced with underscores, and it is limited to 64 characters. The normalized value names the generated reference tables and is stored as the indicator source. |
-| `Content-Type` | Yes | `application/json`. |
-| `Content-Encoding` | No | Set to `gzip` to send a gzip-compressed body. No other encodings are supported. |
+| `DD-APPLICATION-KEY` | Yes | An application key with the Reference Tables Write permission. |
+| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform or team. Datadog converts the value to lowercase, replaces any other character with an underscore, and truncates it to 64 characters. The converted value names the generated reference tables and is stored as the source of each indicator. |
+| `Content-Type` | Yes | `application/json` |
+| `Content-Encoding` | No | Set to `gzip` to send a compressed body. No other encodings are supported. |
 
 ### Request body
 
-The body is a STIX 2.1 `bundle` containing one or more `indicator` objects. Each request is one incremental batch, and a single bundle can mix indicators of different types.
+The body is a STIX 2.1 `bundle` that contains one or more `indicator` objects. Each request is one incremental batch, and a single bundle can contain indicators of different types.
 
 ```json
 {
@@ -67,15 +91,15 @@ The body is a STIX 2.1 `bundle` containing one or more `indicator` objects. Each
 }
 ```
 
-Requirements and limits:
+The endpoint has the following requirements and limits:
 
-- Only `indicator` objects are processed. Other STIX objects (such as `identity`, `malware`, `observed-data`, and `relationship`) are ignored.
-- The bundle must be STIX 2.1. If the bundle's `spec_version` is present and is not `2.1`, the request is rejected. An individual object whose `spec_version` is not `2.1` is skipped.
+- Datadog processes `indicator` objects only. It ignores other STIX objects, such as `identity`, `malware`, `observed-data`, and `relationship`.
+- The bundle must be STIX 2.1. If the bundle contains a `spec_version` other than `2.1`, Datadog rejects the request. If an individual object contains a `spec_version` other than `2.1`, Datadog skips that object.
 - The maximum request body size is 50 MB.
 
-### Supported indicators and patterns
+### Supported indicator types and patterns
 
-Datadog extracts the indicator type and value from each indicator's STIX `pattern`. The following observable types are supported:
+Datadog extracts the indicator type and value from the STIX `pattern` on each indicator. The following observable types are supported:
 
 | STIX pattern | Ingested as |
 |---|---|
@@ -84,29 +108,30 @@ Datadog extracts the indicator type and value from each indicator's STIX `patter
 | `[domain-name:value = '...']` | Domain |
 | `[file:hashes.'SHA-256' = '...']` | SHA-256 file hash |
 
-Supported pattern operators are `=`, `IN` (which fans out to one indicator per value), and `OR`.
+The supported pattern operators are `=`, `IN`, which produces one indicator for each value in the set, and `OR`.
 
-The following are accepted but skipped, and reported in the `unsupported` count: URLs (`url:value`), email addresses (`email-addr:value`), MD5 and SHA-1 file hashes, and patterns that use other operators or constructs (for example `!=`, `<`, `>`, `LIKE`, `MATCHES`, or `AND` across observations). Indicators whose pattern cannot be parsed are reported in the `invalid` count.
+Datadog accepts but skips indicators for URLs (`url:value`), email addresses (`email-addr:value`), MD5 file hashes, and SHA-1 file hashes. It also skips patterns that use other operators or constructs, such as `!=`, `<`, `>`, `LIKE`, `MATCHES`, or `AND` across observations. The response reports all skipped indicators in the `unsupported` count, and indicators with an unparseable pattern in the `invalid` count.
 
-### How STIX fields are mapped
+### How STIX fields map to reference table columns
 
-| Field in Datadog | Source |
+| Reference table column | Populated from |
 |---|---|
-| Indicator value | Extracted from the indicator's `pattern`. |
-| `intention` | Derived from `indicator_types`: `malicious-activity` maps to *malicious*, `benign` maps to *benign*, and anything else (or an absent value) maps to *suspicious*. |
-| `source` | The `ti_vendor` header, stored as `{"name": "<ti_vendor>"}`. |
+| Indicator value | The value extracted from the indicator's `pattern`. |
+| `intention` | The `indicator_types` field. `malicious-activity` maps to `malicious`, `benign` maps to `benign`, and any other value, or an absent field, maps to `suspicious`. |
+| `source` | The `ti_vendor` header, stored as `{"name": "<TI_VENDOR>"}`. |
 | `category` | Set to `custom`. |
-| Expiration | Set from `valid_until` when present. Without `valid_until`, the indicator does not expire automatically; it persists until it is revoked or removed. |
-| `additional_data` | A catch-all for STIX fields that are not mapped to a dedicated column, including `stix_id`, `created`, `modified`, `valid_from`, `confidence`, `labels`, `indicator_types`, `object_marking_refs`, `kill_chain_phases`, and `external_references`. |
+| `additional_data` | The STIX fields that have no dedicated column, including `stix_id`, `created`, `modified`, `valid_from`, `confidence`, `labels`, `indicator_types`, `object_marking_refs`, `kill_chain_phases`, and `external_references`. |
+
+The optional `valid_until` field sets an expiration for the indicator, and Datadog removes the indicator after that time. An indicator sent without `valid_until` does not expire automatically.
 
 ### Update and revoke indicators
 
-- Re-sending an indicator with the same STIX `id` updates the stored indicator only if the incoming object's `modified` timestamp is newer. This makes ingestion idempotent and order-independent, so the latest version always wins.
-- An indicator sent with `"revoked": true` is deleted.
+- To update an indicator, send it again with the same STIX `id` and a newer `modified` timestamp. Datadog applies the change only if that timestamp is newer than the stored one. Repeated requests are therefore idempotent, and the order in which they arrive does not matter.
+- To remove an indicator, send it with `"revoked": true`. Datadog deletes the indicator from the reference table.
 
 ### Response
 
-A successful request returns `200 OK` with a summary of how the bundle was processed:
+A successful request returns `200 OK` and a summary of how Datadog processed the bundle:
 
 ```json
 {
@@ -124,20 +149,20 @@ A successful request returns `200 OK` with a summary of how the bundle was proce
 
 | Attribute | Description |
 |---|---|
-| `added` | Indicator objects that were ingested. A single object can produce more than one indicator when its pattern uses `IN` or `OR`. |
-| `unsupported` | Indicator objects that were skipped because their type, pattern, or object-level version is not supported. |
-| `invalid` | Indicator objects whose pattern could not be parsed. |
+| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN` or `OR`. |
+| `unsupported` | The number of indicator objects that Datadog skipped because their type, pattern, or object-level STIX version is not supported. |
+| `invalid` | The number of indicator objects whose pattern Datadog could not parse. |
 
-A `200` response means the bundle was accepted. Indicators that are unsupported or invalid are reported in the counts rather than failing the request.
+A `200` response means that Datadog accepted the bundle. Unsupported and invalid indicators appear in these counts instead of causing the request to fail. Check the counts to confirm that your feed ingested as expected.
 
-### Example
+### Example request
 
 ```shell
 curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security/threat-intel/stix" \
-  -H "DD-API-KEY: <YOUR_API_KEY>" \
-  -H "DD-APPLICATION-KEY: <YOUR_APPLICATION_KEY>" \
-  -H "Content-Type: application/json" \
-  -H "ti_vendor: my_tip" \
+  --header "DD-API-KEY: <DATADOG_API_KEY>" \
+  --header "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+  --header "Content-Type: application/json" \
+  --header "ti_vendor: my_tip" \
   --data '{
     "type": "bundle",
     "id": "bundle--0cde353c-ea5b-4668-9f68-9c3a0e2a0a0e",
@@ -155,36 +180,56 @@ curl -X POST "https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/
   }'
 ```
 
-To send a large bundle more efficiently, gzip the body and set `Content-Encoding: gzip`.
+To send a large feed more efficiently, compress the body and set `Content-Encoding: gzip`.
 
 ### Rate limits
 
-The endpoint is rate limited to 10 requests per second per API key. Requests over the limit receive a `429 Too Many Requests` response.
+The endpoint accepts 10 requests per second for each API key. Requests beyond that limit receive a `429 Too Many Requests` response.
 
 ### Error responses
 
 | Status | Reason |
 |---|---|
-| `400 Bad Request` | The body is not valid JSON, the bundle's `spec_version` is not `2.1`, the `ti_vendor` header is missing, or the `Content-Encoding` is not supported. |
-| `401 Unauthorized` | The request is missing valid authentication. |
-| `403 Forbidden` | The application key does not have the **Reference Tables Write** permission. |
+| `400 Bad Request` | The body is not valid JSON, the bundle contains a `spec_version` other than `2.1`, the `ti_vendor` header is missing, or the `Content-Encoding` is not supported. |
+| `401 Unauthorized` | The request does not contain valid credentials. |
+| `403 Forbidden` | The application key does not have the Reference Tables Write permission. |
 | `413 Request Entity Too Large` | The request body is larger than 50 MB. |
-| `429 Too Many Requests` | The per-API-key rate limit was exceeded. |
+| `429 Too Many Requests` | The request exceeded the rate limit for the API key. |
 
-## After ingestion
+## Configure the generated reference tables
 
-Ingested indicators are written to per-type reference tables named `threat_intel_stix_<ti_vendor>_<type>`. Within a few minutes, Datadog materializes each reference table and, the first time it sees a new `ti_vendor`, registers the tables for Cloud SIEM log enrichment.
+Manage the tables that ingestion generates on the [Threat Intelligence][7] configuration page. Each table has a toggle that controls whether Cloud SIEM uses it to enrich logs. Use that page to review which feeds are active, to disable a feed temporarily, or to enable a table that ingestion left disabled.
 
-From then on, you own the feed: you can enable or disable each table on the [Threat Intelligence configuration page][7], and subsequent ingestion requests do not override that choice. Enabled indicators enrich matching Cloud SIEM logs and are searchable in the [IOC Explorer][4].
+Your configuration takes precedence over ingestion. After a table exists, later requests add and update indicators, but never change the toggle. A table that you disable stays disabled until you enable it again.
+
+To inspect the ingested indicators, open the table from [Reference Tables][8], or search for the indicators in the [IOC Explorer][3].
+
+### If you reach the reference table limit
+
+Cloud SIEM enriches logs with up to 10 threat intelligence reference tables at a time. If ingestion generates a table while your organization is already at that limit, Datadog still creates and populates the table. It does not enable the table for enrichment automatically, and the table appears on the [Threat Intelligence][7] page in a disabled state.
+
+To enable such a table, disable a table you no longer need on the [Threat Intelligence][7] page, then enable the new one.
+
+## Stop ingesting a feed
+
+Your requests drive ingestion, so removing a feed takes two steps, in this order:
+
+1. Stop sending bundles for that `ti_vendor`.
+2. Delete the reference tables that Datadog generated for the feed from [Reference Tables][8].
+
+Complete the steps in that order. If you delete a table while requests for the same `ti_vendor` are still arriving, the next request generates the table again.
+
+To stop enriching logs without deleting anything, disable the tables on the [Threat Intelligence][7] page instead. This keeps the ingested indicators available for the IOC Explorer and lets you resume enrichment later.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://docs.oasis-open.org/cti/stix/v2.1/os/stix-v2.1-os.html
-[2]: /integrations/guide/reference-tables/
-[3]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
-[4]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[2]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
+[3]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
+[4]: /reference_tables/
 [5]: https://app.datadoghq.com/organization-settings/api-keys
 [6]: https://app.datadoghq.com/organization-settings/application-keys
 [7]: https://app.datadoghq.com/security/configuration/threat-intel
+[8]: https://app.datadoghq.com/reference-tables
