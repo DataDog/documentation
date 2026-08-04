@@ -147,7 +147,7 @@ Contact [Datadog Support][6] with:
 * The affected metric names
 * Which data type you want to preserve
 
-After the conflict is resolved, rename any future submissions to help ensure the metric name is used for only one type.
+After the conflict is resolved, rename the metric in any future submissions to help ensure each metric name is used for only one type.
 
 ## Audit events
 Any tag configuration or percentile aggregation changes create an event in the [event explorer][3]. This event explains the change and displays the user that made the change.
