@@ -34,7 +34,7 @@ To start ingesting a feed, send a bundle to the ingestion endpoint. No configura
 1. You send a STIX 2.1 bundle of `indicator` objects and identify the feed with the `ti_vendor` header.
 2. Datadog reads the STIX `pattern` on each indicator to determine its value and its type, such as an IP address, a domain, or a file hash.
 3. Datadog generates one [reference table][4] for each indicator type in your feed, named `threat_intel_stix_<TI_VENDOR>_<INDICATOR_TYPE>`. Because one bundle can contain several indicator types, a single request can populate several tables.
-4. The first time Datadog receives a bundle for a `ti_vendor`, it registers each generated table and enables it for Cloud SIEM enrichment automatically.
+4. Datadog registers each generated table and enables it for Cloud SIEM enrichment automatically.
 5. Later requests for the same `ti_vendor` update the existing tables and preserve the configuration choices you make.
 
 For example, a feed sent with `ti_vendor: my_tip` that contains IP address, domain, and SHA-256 indicators produces the following tables:
@@ -64,33 +64,9 @@ Tables become available a few minutes after your first request. Enrichment appli
 |---|---|---|
 | `DD-API-KEY` | Yes | Your Datadog API key. |
 | `DD-APPLICATION-KEY` | Yes | An application key with the Reference Tables Write permission. |
-| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform or team. Datadog normalizes the value before using it, so use a short name of 10 characters or fewer that contains only lowercase letters and digits. See [Choose a ti_vendor value](#choose-a-ti_vendor-value). |
+| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform. Use 10 characters or fewer, with only lowercase letters and digits. Datadog lowercases the value, replaces any other character with an underscore, and truncates it to 10 characters. Feeds with values that match after this conversion write to the same reference tables. |
 | `Content-Type` | Yes | `application/json` |
 | `Content-Encoding` | No | Set to `gzip` to send a compressed body. No other encodings are supported. |
-
-### Choose a ti_vendor value
-
-Datadog accepts any `ti_vendor` value, of any length, and then normalizes it in the following order:
-
-1. Converts the value to lowercase.
-2. Replaces every character outside `a-z` and `0-9` with an underscore. This includes spaces, hyphens, dots, slashes, punctuation, and non-ASCII characters.
-3. Trims leading and trailing underscores.
-4. Truncates the result to 10 characters.
-
-The normalized value is durable, because it becomes part of the name of each generated reference table. Use a value of 10 characters or fewer that contains only lowercase letters and digits. Datadog applies the normalization silently, and returns the normalized value in the `id` field of the response.
-
-<div class="alert alert-warning">Two feeds with similar names can normalize to the same value and write to the same reference tables. For example, both <code>threatconnect-a</code> and <code>threatconnect-b</code> normalize to <code>threatconn</code>, so their indicators overwrite each other. Give each feed a value that is unique within its first 10 characters.</div>
-
-The following examples show how values are normalized:
-
-| `ti_vendor` sent | Value Datadog uses |
-|---|---|
-| `my_tip` | `my_tip` |
-| `MyTIP` | `mytip` |
-| `Acme Corp` | `acme_corp` |
-| `crowd-strike` | `crowd_stri` |
-
-If the normalized value is empty, the request fails with a `400 Bad Request` response. This happens when the header is missing, or when every character collapses to an underscore. Examples include `---` and a name written entirely in a non-Latin script.
 
 ### Request body
 
@@ -120,20 +96,19 @@ The endpoint has the following requirements and limits:
 - The bundle must be STIX 2.1. If the bundle contains a `spec_version` other than `2.1`, Datadog rejects the request. If an individual object contains a `spec_version` other than `2.1`, Datadog skips that object.
 - The maximum request body size is 50 MB.
 
-### Supported indicator types and patterns
+### Supported indicator types
 
-Datadog extracts the indicator type and value from the STIX `pattern` on each indicator. The following observable types are supported:
+Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests the following indicator types:
 
-| STIX pattern | Ingested as |
-|---|---|
-| `[ipv4-addr:value = '...']`, `[ipv6-addr:value = '...']` | IP address |
-| `[network-traffic:src_ref.value = '...']`, `[network-traffic:dst_ref.value = '...']` | IP address |
-| `[domain-name:value = '...']` | Domain |
-| `[file:hashes.'SHA-256' = '...']` | SHA-256 file hash |
+- IP addresses, both IPv4 and IPv6
+- Domains
+- SHA-256 file hashes
 
-The supported pattern operators are `=`, `IN`, which produces one indicator for each value in the set, and `OR`.
+```json
+"pattern": "[ipv4-addr:value = '198.51.100.1']"
+```
 
-Datadog accepts but skips indicators for URLs (`url:value`), email addresses (`email-addr:value`), MD5 file hashes, and SHA-1 file hashes. It also skips patterns that use other operators or constructs, such as `!=`, `<`, `>`, `LIKE`, `MATCHES`, or `AND` across observations. The response reports all skipped indicators in the `unsupported` count, and indicators with an unparseable pattern in the `invalid` count.
+Datadog skips indicators that it cannot map to one of these types, along with indicators that use pattern expressions it does not support. Skipped indicators appear in the `unsupported` count of the response, and indicators with an unparseable pattern appear in the `invalid` count. Check these counts to confirm how much of your feed ingested.
 
 ### How STIX fields map to reference table columns
 
@@ -149,7 +124,7 @@ The optional `valid_until` field sets an expiration for the indicator, and Datad
 
 ### Update and revoke indicators
 
-- To update an indicator, send it again with the same STIX `id` and a newer `modified` timestamp. Datadog applies the change only if that timestamp is newer than the stored one. Repeated requests are therefore idempotent, and the order in which they arrive does not matter.
+- To update an indicator, send it again with the same STIX `id`. Datadog keeps the most recent version of the indicator, so sending the same bundle more than once is safe.
 - To remove an indicator, send it with `"revoked": true`. Datadog deletes the indicator from the reference table.
 
 ### Response
@@ -213,7 +188,7 @@ The endpoint accepts 10 requests per second for each API key. Requests beyond th
 
 | Status | Reason |
 |---|---|
-| `400 Bad Request` | The body is not valid JSON, the bundle contains a `spec_version` other than `2.1`, the `ti_vendor` header is missing, or the `Content-Encoding` is not supported. |
+| `400 Bad Request` | The body is not valid JSON, the bundle contains a `spec_version` other than `2.1`, the `ti_vendor` header is missing or invalid, or the `Content-Encoding` is not supported. |
 | `401 Unauthorized` | The request does not contain valid credentials. |
 | `403 Forbidden` | The application key does not have the Reference Tables Write permission. |
 | `413 Request Entity Too Large` | The request body is larger than 50 MB. |
