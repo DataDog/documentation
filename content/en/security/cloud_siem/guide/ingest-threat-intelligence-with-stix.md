@@ -64,9 +64,33 @@ Tables become available a few minutes after your first request. Enrichment appli
 |---|---|---|
 | `DD-API-KEY` | Yes | Your Datadog API key. |
 | `DD-APPLICATION-KEY` | Yes | An application key with the Reference Tables Write permission. |
-| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform or team. Datadog converts the value to lowercase, replaces any other character with an underscore, and truncates it to 64 characters. The converted value names the generated reference tables and is stored as the source of each indicator. |
+| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform or team. Datadog normalizes the value before using it, so use a short name of 10 characters or fewer that contains only lowercase letters and digits. See [Choose a ti_vendor value](#choose-a-ti_vendor-value). |
 | `Content-Type` | Yes | `application/json` |
 | `Content-Encoding` | No | Set to `gzip` to send a compressed body. No other encodings are supported. |
+
+### Choose a ti_vendor value
+
+Datadog accepts any `ti_vendor` value, of any length, and then normalizes it in the following order:
+
+1. Converts the value to lowercase.
+2. Replaces every character outside `a-z` and `0-9` with an underscore. This includes spaces, hyphens, dots, slashes, punctuation, and non-ASCII characters.
+3. Trims leading and trailing underscores.
+4. Truncates the result to 10 characters.
+
+The normalized value is durable, because it becomes part of the name of each generated reference table. Use a value of 10 characters or fewer that contains only lowercase letters and digits. Datadog applies the normalization silently, and returns the normalized value in the `id` field of the response.
+
+<div class="alert alert-warning">Two feeds with similar names can normalize to the same value and write to the same reference tables. For example, both <code>threatconnect-a</code> and <code>threatconnect-b</code> normalize to <code>threatconn</code>, so their indicators overwrite each other. Give each feed a value that is unique within its first 10 characters.</div>
+
+The following examples show how values are normalized:
+
+| `ti_vendor` sent | Value Datadog uses |
+|---|---|
+| `my_tip` | `my_tip` |
+| `MyTIP` | `mytip` |
+| `Acme Corp` | `acme_corp` |
+| `crowd-strike` | `crowd_stri` |
+
+If the normalized value is empty, the request fails with a `400 Bad Request` response. This happens when the header is missing, or when every character collapses to an underscore. Examples include `---` and a name written entirely in a non-Latin script.
 
 ### Request body
 
@@ -93,7 +117,6 @@ The body is a STIX 2.1 `bundle` that contains one or more `indicator` objects. E
 
 The endpoint has the following requirements and limits:
 
-- Datadog processes `indicator` objects only. It ignores other STIX objects, such as `identity`, `malware`, `observed-data`, and `relationship`.
 - The bundle must be STIX 2.1. If the bundle contains a `spec_version` other than `2.1`, Datadog rejects the request. If an individual object contains a `spec_version` other than `2.1`, Datadog skips that object.
 - The maximum request body size is 50 MB.
 
