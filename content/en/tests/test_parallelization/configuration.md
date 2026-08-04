@@ -239,6 +239,30 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 
 Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discovery/`, and `.testoptimization/cache/http/*.json` are implementation details. Use them only for troubleshooting.
 
+## Use plan artifacts with another test runner
+
+Use `ddtest` plan files when you want `ddtest` to select runnable test files, but another runner should execute them.
+
+| File | Use |
+| ---- | --- |
+| `.testoptimization/runner/test-files.txt` | All runnable test files after Test Impact Analysis skips are applied. |
+| `.testoptimization/runner/tests-split/runner-N` | Files assigned to CI node or worker `N`. |
+
+For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
+
+{{< code-block lang="bash" >}}
+KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt bundle exec rake knapsack_pro:queue:rspec
+{{< /code-block >}}
+
+For pytest, enable the `ddtrace` plugin with `PYTEST_ADDOPTS` and pass the file list to `python -m pytest`:
+
+{{< code-block lang="bash" >}}
+export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:+$PYTEST_ADDOPTS }--ddtrace"
+if [ -s .testoptimization/runner/test-files.txt ]; then
+  xargs python -m pytest < .testoptimization/runner/test-files.txt
+fi
+{{< /code-block >}}
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}

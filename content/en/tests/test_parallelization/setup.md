@@ -73,38 +73,44 @@ chmod +x bin/ddtest
 {{% /tab %}}
 {{< /tabs >}}
 
+These examples download the latest Linux AMD64 binary. For another operating system or architecture, select the corresponding asset from [GitHub Releases][3].
+
 ## Adopt ddtest in CI
 
-Adopt Test Parallelization in two stages. First, add planning without changing how tests run. Then, replace the existing test command with `ddtest` to use the selected parallelism.
+Adopt Test Parallelization in four steps. First, add planning without changing how tests run. After validating the plan, replace the existing test command with `ddtest`, choose an execution mode, and measure the resulting CI savings.
 
-### 1. Validate test planning
+### 1. Add test planning
 
-After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Set the minimum to `1` and the maximum to the largest number of CI nodes or local workers you want `ddtest` to consider:
+After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
+
+Set the minimum to `1` and the maximum to the largest number of CI nodes or local workers that `ddtest` should consider:
 
 {{< code-block lang="bash" >}}
 bin/ddtest plan \
   --platform <PLATFORM> \
   --framework <FRAMEWORK> \
   --min-parallelism 1 \
-  --max-parallelism 8 \
-  --strict-discovery
+  --max-parallelism 8
 {{< /code-block >}}
 
-For example, use `ruby` and `rspec`, `python` and `pytest`, or `javascript` and `jest` for `<PLATFORM>` and `<FRAMEWORK>`.
+For example, use `ruby` with `rspec`, `ruby` with `minitest`, `python` with `pytest`, or `javascript` with `jest`. For all supported values and defaults, see [Configuration][4].
 
-Planning discovers tests, retrieves test duration and Test Impact Analysis data, selects a parallelism level, and writes the test splits to `.testoptimization/`. It does not execute tests, so keep your existing test command unchanged while you validate the plan.
+Planning discovers tests, retrieves test duration and Test Impact Analysis data, and chooses a parallelism level. It does not execute tests. The generated `.testoptimization/` directory contains the test files and splits selected for execution.
+
+### 2. Inspect the plan
 
 Inspect the proposed runner count and test files in the CI logs:
 
 {{< code-block lang="bash" >}}
 cat .testoptimization/runner/parallel-runners.txt
+wc -l .testoptimization/runner/test-files.txt
 sed -n '1,20p' .testoptimization/runner/test-files.txt
-ls .testoptimization/runner/tests-split/
+find .testoptimization/runner/tests-split -maxdepth 1 -type f -print
 {{< /code-block >}}
 
 Confirm that `test-files.txt` contains the files your existing command should run and that the number of split files matches `parallel-runners.txt`. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
 
-### 2. Replace the existing test command
+### 3. Replace the existing test command
 
 After the plan contains the expected tests, replace the existing test command with:
 
@@ -114,9 +120,15 @@ bin/ddtest run \
   --framework <FRAMEWORK>
 {{< /code-block >}}
 
-`ddtest run` reuses the plan generated earlier in the job. On a single CI node, the selected parallelism is the number of local worker processes that `ddtest` starts.
+`ddtest run` reuses the plan generated earlier in the workflow. Choose how to run the selected splits based on your CI architecture.
 
-To distribute tests across multiple CI nodes, run `ddtest plan` once in a planning job. Share the complete `.testoptimization/` directory with the test jobs, and expose the selected runner count to your CI matrix. On each node, run:
+#### Run workers on one CI node
+
+On a single CI node, the selected parallelism is the number of local worker processes that `ddtest` starts. The command does not require additional options.
+
+#### Distribute tests across CI nodes
+
+Run `ddtest plan` once in a planning job. Share the complete `.testoptimization/` directory with the test jobs, and use the selected parallelism to define the size of your CI matrix. On each node, run:
 
 {{< code-block lang="bash" >}}
 bin/ddtest run \
@@ -125,102 +137,19 @@ bin/ddtest run \
   --ci-node <CI_NODE_INDEX>
 {{< /code-block >}}
 
-The CI examples on this page show how to pass the generated plan and selected runner count between jobs.
-
-### 3. Tune for CI savings
-
-Compare the test stage duration before and after the change. Use `--max-parallelism` to limit CI capacity. The planner accounts for the setup cost of each additional runner; adjust `--ci-job-overhead` if your jobs have significantly more or less setup time than the default. Increase the overhead to favor fewer CI nodes, or decrease it to favor shorter wall time. Enable [Test Impact Analysis][2] to exclude unaffected tests before `ddtest` creates the splits.
-
-Add `.testoptimization/` to `.gitignore`. Generate a fresh plan for each CI workflow run, and share it only between jobs for the same source revision and execution environment. Run planning and tests from the same working directory. For details about the generated files, see [Plan artifacts][5].
-
-## Run on a single CI node
-
-If you run your tests on a single CI node, run `ddtest run`:
-
-{{< tabs >}}
-{{% tab "Ruby" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform ruby --framework rspec
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform python --framework pytest
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "JavaScript" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform javascript --framework jest
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-By default, `ddtest` can start one worker for each physical CPU core available on the node.
-
-## Run across multiple CI nodes
-
-For multiple CI nodes, run `ddtest plan` once, share the `.testoptimization/` directory with every CI node, and pass each node its zero-indexed CI node number:
-
-{{< tabs >}}
-{{% tab "Ruby" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest plan \
-  --platform ruby \
-  --framework rspec \
-  --min-parallelism 1 \
-  --max-parallelism 8
-
-bin/ddtest run \
-  --platform ruby \
-  --framework rspec \
-  --ci-node <CI_NODE_INDEX>
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest plan \
-  --platform python \
-  --framework pytest \
-  --min-parallelism 1 \
-  --max-parallelism 8
-
-bin/ddtest run \
-  --platform python \
-  --framework pytest \
-  --ci-node <CI_NODE_INDEX>
-{{< /code-block >}}
-
-{{% /tab %}}
-{{% tab "JavaScript" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest plan \
-  --platform javascript \
-  --framework jest \
-  --min-parallelism 1 \
-  --max-parallelism 8
-
-bin/ddtest run \
-  --platform javascript \
-  --framework jest \
-  --ci-node <CI_NODE_INDEX>
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
 In CI-node mode, `ddtest` uses one local worker by default. To start multiple workers in each CI node, set `--ci-node-workers` to a positive integer or `ncpu`.
 
-For a list of available environment variables, defaults, and examples, see [Configuration][4].
+The CI examples on this page show how to pass the generated plan and selected runner count between jobs.
+
+### 4. Measure CI savings
+
+After replacing the test command, confirm that the expected tests complete and that the test session appears in Datadog. Compare the test stage duration and CI resource consumption with your previous workflow.
+
+Local workers primarily reduce test stage duration. When you distribute tests across CI nodes, using the selected runner count can also avoid unnecessary CI nodes after Test Impact Analysis removes unaffected tests.
+
+Use `--max-parallelism` to limit CI capacity. The planner accounts for the setup cost of each additional runner through `--ci-job-overhead`. For details about these settings, see [Configuration][4].
+
+Add `.testoptimization/` to `.gitignore`. Generate a fresh plan for each CI workflow run, and share it only between jobs for the same source revision and execution environment. Run planning and tests from the same working directory. For details about the generated files, see [Plan artifacts][5].
 
 ## CI examples
 
@@ -701,32 +630,6 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 `ddtest` prepends `NODE_OPTIONS=-r dd-trace/ci/init` for Jest worker processes, so the project dependencies installed before `ddtest plan` must include `dd-trace`.
 
 {{< /collapse-content >}}
-
-## Use third-party test runners
-
-Use `ddtest` plan files when you want `ddtest` to choose which files should run, but another runner should execute them.
-
-To learn about the full contents of the plan directory, see [Plan artifacts][5].
-
-| File | Use |
-| ---- | --- |
-| `.testoptimization/runner/test-files.txt` | All runnable test files after Test Impact Analysis skips are applied. |
-| `.testoptimization/runner/tests-split/runner-N` | Files assigned to CI node or worker `N`. |
-
-For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
-
-{{< code-block lang="bash" >}}
-KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt bundle exec rake knapsack_pro:queue:rspec
-{{< /code-block >}}
-
-For pytest, enable the `ddtrace` plugin with `PYTEST_ADDOPTS` and pass the file list to `python -m pytest`:
-
-{{< code-block lang="bash" >}}
-export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:+$PYTEST_ADDOPTS }--ddtrace"
-if [ -s .testoptimization/runner/test-files.txt ]; then
-  xargs python -m pytest < .testoptimization/runner/test-files.txt
-fi
-{{< /code-block >}}
 
 ## Further reading
 
