@@ -68,7 +68,7 @@ To add specific tag overrides for this metric:
 The Tag Cardinality Control processor supports two modes for tracking tag cardinality:
 
 - **exact**: Stores tag values as an 8-byte hash to optimize memory usage, at the cost of an extremely small chance of two distinct values being hashed to the same fingerprint.
-- **probabilistic**: Uses bloom filters to track seen values, which can heavily optimize memory usage at the cost of occasional false positives. A false positive occurs when a value that has not been seen yet is incorrectly determined to have been seen, causing the processor to slightly exceed the specified cardinality limit.
+- **probabilistic**: Uses [bloom filters][2] to track seen values, which can heavily optimize memory usage at the cost of occasional false positives. A false positive occurs when a value that has not been seen yet is incorrectly determined to have been seen, causing the processor to slightly exceed the specified cardinality limit.
 
 #### Memory usage for `exact` mode
 
@@ -156,3 +156,4 @@ The Worker's RSS memory usage for probabilistic and exact mode for 100,000 metri
 | 500                             | 6,769                   | 48,282 (est)    |
 
 [1]: /observability_pipelines/search_syntax/metrics/
+[2]: https://en.wikipedia.org/wiki/Bloom_filter
