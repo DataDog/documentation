@@ -2,8 +2,6 @@
 
 Install the `dd-apm` skill in your AI coding agent for guided APM setup. Run this command, then restart the agent:
 
-```shell
-npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y
-```
+{{ partial "click-area.html" (dict "name" "copy_dd_apm_skill_install_cmd" "content" (highlight "npx skills add https://github.com/datadog-labs/agent-skills --skill dd-apm --full-depth -y" "shell" "")) }}
 
 </div>
