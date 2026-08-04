@@ -192,9 +192,9 @@ The `languages` analyzer covers the following package ecosystems:
 
 ## Runtime Package Prioritization (Preview)
 
-Most vulnerabilities Datadog detects are in packages that ship inside an image but never execute. Runtime package prioritization identifies the ones that actually run, so you can remediate those first.
+Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
 
-When enabled, the Agent uses eBPF to observe file access on your workloads and records how each package in the image is used at runtime. Datadog adds these signals to every vulnerability finding for that image:
+When enabled, the Agent uses eBPF to observe file access on your workloads and adds these signals to vulnerability findings for that image:
 
 | Signal | What it tells you |
 |--------|-------------------|
@@ -202,10 +202,10 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and r
 | Accessed by root process | The package was accessed by a process running as root (UID 0). |
 | SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
 
-Together, these answer whether a vulnerability is reachable and how much damage it could do. They feed the **Reachability** dimension of the [Runtime Prioritization Engine][9]. Once enabled, you can filter and group findings by them — see [Filter findings by runtime signals][10].
+*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][9]. To query the signals yourself, see [Filter findings by runtime signals][10].
 
 **Requirements**:
-- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later**: earlier versions can miss the *Package is running* signal on some kubelet-managed images.
+- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later**: earlier versions can miss runtime signals on some kubelet-managed images.
 - Linux only (eBPF dependency)
 - Applies to container image vulnerability findings, for operating system packages
 
