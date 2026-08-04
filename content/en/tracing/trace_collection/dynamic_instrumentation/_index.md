@@ -42,7 +42,7 @@ Dynamic Instrumentation requires the following:
 
 - [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
 - [Remote Configuration][2] is enabled in that Agent.
-- A supported Datadog SDK is installed and up to date. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for version requirements.
+- A supported Datadog SDK is installed and up to date. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
 - Recommended: [Source Code Integration][7] is set up for your service.
 
@@ -50,25 +50,28 @@ Dynamic Instrumentation requires the following:
 
 The following permissions are required to use Dynamic Instrumentation:
 
-- **Dynamic Instrumentation Read Configuration** (`debugger_read`) - Required to access the Dynamic Instrumentation page.
+- **Dynamic Instrumentation Read Configuration** (`debugger_read`): Required to access the Dynamic Instrumentation page.
 - One of the following write permissions:
-  - **Dynamic Instrumentation Write Configuration** (`debugger_write`) - Required to create or modify instrumentations in any environment.
-  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`) - Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
+  - **Dynamic Instrumentation Write Configuration** (`debugger_write`): Required to create or modify instrumentations in any environment.
+  - **Dynamic Instrumentation Write Pre-Prod** (`debugger_write_preprod`): Required to create or modify instrumentations in known pre-production environments only (such as staging or QA).
+
 For more information about roles and how to assign roles to users, see [Role Based Access Control][8].
 
 ### Enable Dynamic Instrumentation
 
-Dynamic Instrumentation supports Java, Python, .NET, and PHP. For Java, Python, and .NET services that meet the minimum SDK requirements, manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. For PHP and older SDK versions, use manual enablement.
+Dynamic Instrumentation supports Java, Python, .NET, and PHP.
 
-On supported SDK versions, Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
+<div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.</div>
 
 #### In-app enablement
 
-In-app enablement is supported on the following minimum SDK versions:
+For Java, Python, and .NET services that meet the minimum SDK requirements, manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. In-app enablement is supported on the following minimum SDK versions:
 
-- [Java][18] ≥ 1.64.0
-- [Python][19] ≥ 4.11.0
-- [.NET][20] ≥ 3.46.0
+- [Java][18] ≥ 1.48.0
+- [Python][19] ≥ 3.10.0
+- [.NET][20] ≥ 3.29.0
+
+If your SDK meets the minimum version, Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
 
 Datadog recommends keeping your SDK up to date to take advantage of in-app enablement.
 
@@ -86,12 +89,10 @@ Select your runtime for manual enablement instructions:
   {{< image-card href="/dynamic_instrumentation/enabling/php" src="integrations_logos/php.png" alt="PHP" >}}
 {{< /card-grid >}}
 
-<div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment. Enabling or disabling one also enables or disables the other for that service and environment, although the two products have separate permissions and Settings pages.</div>
-
 ### Limitations
 
 - Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
-- Not all instrumentation types are supported in every language. See the [language-specific setup instructions](#enable-dynamic-instrumentation) for supported features and limitations.
+- Not all instrumentation types are supported in every language. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for supported features and limitations.
 - The Java SDK does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
@@ -117,7 +118,7 @@ All instrumentation types require the same initial setup:
 
 For the best experience, set up [Source Code Integration][7] to view code directly in Datadog and select instrumentation locations as you would with breakpoints in an IDE.
 
-See the individual instrumentation types below for specific creation steps for each instrumentation type.
+For creation steps specific to each instrumentation type, see the following sections.
 
 <div class="alert alert-info">Dynamic log instrumentations are supported in <a href="/tracing/live_debugger/">Live Debugger</a>. Use Live Debugger to capture logs and variable snapshots in real time from running applications.</div>
 
