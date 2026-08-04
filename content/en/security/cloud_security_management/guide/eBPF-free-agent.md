@@ -109,7 +109,7 @@ docker run -d --name dd-agent \
   -e DD_RUNTIME_SECURITY_CONFIG_EBPFLESS_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 ```
 {{% /tab %}}
 
@@ -279,7 +279,7 @@ exit 0
 For Docker application deployments, you should modify your Dockerfile to wrap your application like this:
 
 ```shell
-FROM gcr.io/datadoghq/agent:7 AS datadogagent
+FROM registry.datadoghq.com/agent:7 AS datadogagent
 
 FROM ubuntu:latest
 
@@ -393,7 +393,7 @@ exit 0
 To attach the wrapper to a Docker image running an application, use the following Dockerfile:
 
 ```shell
-FROM gcr.io/datadoghq/agent:7
+FROM registry.datadoghq.com/agent:7
 
 ENTRYPOINT ["/opt/datadog-agent/embedded/bin/cws-instrumentation", "trace", "--pid", "$PID"]
 ```

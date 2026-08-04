@@ -3,6 +3,7 @@ title: Serverless Monitoring for Azure App Service
 aliases:
   - /infrastructure/serverless/azure_app_services/
   - /serverless/azure_app_services/
+  - /serverless/azure
 further_reading:
 - link: "/integrations/azure_app_services/"
   tag: "Documentation"
@@ -19,7 +20,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/deploy-dotnet-core-azure-app-service/"
   tag: "Blog"
   text: "Deploy ASP.NET Core applications to Azure App Service"
-- link: "https://www.datadoghq.com/pricing/?product=application-performance-monitoring#application-performance-monitoring-apm_faq-what-is-considered-as-a-host-for-azure-app-services"
+- link: "https://www.datadoghq.com/pricing/?product=serverless-monitoring&tab=azure-app-service#products"
   tag: "Pricing"
   text: "Azure App Service APM Pricing"
 ---
@@ -30,11 +31,11 @@ further_reading:
 
 {{< img src="serverless/azure_app_service/azure_app_service_top_2.png" alt="Datadog UI, Serverless Monitoring page with Azure App Service selected." style="width:100%;" >}}
 
-In Datadog, use the [Serverless > Azure][4] page to troubleshoot all your Azure resources.
+In Datadog, use the [{{< ui >}}Serverless{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][4] page to troubleshoot all your Azure resources.
 
 ### Azure metrics and logs
 
-Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service. 
+Install the [Azure integration][2] for [enriched metrics][3] and resource metadata for Azure App Service.
 
 Set up [Azure log forwarding][6] to automatically collect and send Azure App Service resource and application logs to Datadog.
 
@@ -64,9 +65,8 @@ Capabilities:
 [3]: /integrations/azure_app_services/#metrics
 [4]: https://app.datadoghq.com/serverless/azure/app-service-plan
 [5]: /integrations/azure/#setup
-[6]: /logs/guide/azure-logging-guide/
+[6]: /logs/guide/azure-automated-log-forwarding/
 [7]: /serverless/azure_app_service/linux_code
 [8]: /serverless/azure_app_service/linux_container
 [9]: /serverless/azure_app_service/windows_code
-[10]: /developers/dogstatsd/
-
+[10]: /extend/dogstatsd/

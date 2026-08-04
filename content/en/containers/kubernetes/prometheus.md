@@ -26,6 +26,12 @@ further_reading:
 - link: "/integrations/guide/prometheus-metrics/"
   tag: "Documentation"
   text: Mapping Prometheus Metrics to Datadog Metrics
+- link: "https://www.datadoghq.com/blog/migrate-to-gateway-api/"
+  tag: "Blog"
+  text: "Ingress NGINX is EOL: A practical guide for migrating to Kubernetes Gateway API"
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 ---
 
 ## Overview
@@ -424,7 +430,7 @@ Official integrations have their own dedicated directories. There's a default in
 [2]: /integrations/prometheus/
 [3]: https://github.com/DataDog/integrations-core/tree/master/openmetrics
 [4]: https://github.com/DataDog/integrations-core/tree/master/prometheus
-[5]: /developers/custom_checks/prometheus/
+[5]: /extend/custom_checks/prometheus/
 [6]: /integrations/guide/prometheus-metrics
 [7]: /agent/kubernetes/#installation
 [8]: /getting_started/tagging/

@@ -8,7 +8,7 @@ title: ケースの表示と管理
 
 ## 概要
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="すべてのケースを表示し、ステータスを選択でき、アサインされたメンバーが表示されているケース管理ページ" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_overview_cropped.png" alt="すべてのケースを表示し、ステータスを選択でき、アサインされたメンバーが表示されているケース管理ページ" style="width:100%;" >}}
 
 [Case Management ページ][1]では、ケースを作成日、ステータス、優先度で並べ替えることができます。デフォルトでは、ケースは作成日順に並べ替えられます。
 
@@ -53,7 +53,7 @@ title: ケースの表示と管理
 
 ## ケースの詳細
 
-{{< img src="/service_management/case_management/view_and_manage/case_details_overview.png" alt="エスカレーションされたケース例のケース詳細ビュー" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/case_details_overview.png" alt="エスカレーションされたケース例のケース詳細ビュー" style="width:100%;" >}}
 
 Case Details ページは、調査の進行に関する信頼できる唯一の情報源として機能します。各ケースには以下のプロパティがあります。
 
@@ -84,12 +84,11 @@ Activity timeline
 - [インシデントを宣言する][4]: ケースをインシデントにエスカレーションし、インシデント対応プロセスを開始します。
 - 手動で Jira 課題を作成する: Jira 課題を作成するには、`Shift + J` を使用します。Jira 課題の自動作成と双方向同期の構成方法の詳細については、[設定][5]ドキュメントを参照してください。
 - 手動で ServiceNow インシデントを作成する: ServiceNow インシデントを作成するには、`Shift + N` を使用します。
-- [CoScreen でミーティングする][6]: 共同デバッグのために画面を共有します
 - ケースをクローズする: これ以上のアクションが必要ないことをチームに知らせます。ケースのステータスをクローズに更新します。
 
 ## Case Analytics
 
-{{< img src="/service_management/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="データソースとしてケースのオプションが選択されているグラフエディター" style="width:100%;" >}}
+{{< img src="/incident_response/case_management/view_and_manage/view_and_manage_case_analytics.png" alt="データソースとしてケースのオプションが選択されているグラフエディター" style="width:100%;" >}}
 
 Case Analytics は、集計されたケース統計のクエリ可能なデータソースです。[ダッシュボード][7]と[ノートブック][3]の両方で、さまざまなグラフウィジェットを使用してこれらの分析をクエリし、チームの生産性を分析したり、問題のパターンを特定したりできます。
 
@@ -104,5 +103,4 @@ Case Analytics は、集計されたケース統計のクエリ可能なデー�
 [3]: /ja/notebooks/
 [4]: /ja/service_management/incident_management/#describing-the-incident
 [5]: /ja/service_management/case_management/settings/#jira
-[6]: /ja/coscreen/
 [7]: https://docs.datadoghq.com/ja/dashboards/

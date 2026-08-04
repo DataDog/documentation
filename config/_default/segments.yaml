@@ -2,3 +2,9 @@ websites_sources:
   includes:
     - lang: en
       path: '{/integrations,/integrations/**}'
+
+api:
+  includes:
+    - lang: en
+      path: '{/api,/api/**}'
+

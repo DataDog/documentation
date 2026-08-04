@@ -1,6 +1,8 @@
 ---
 aliases:
 - /es/getting_started/application/monitors
+description: Crea monitores de métricas con alertas de umbral y notificaciones personalizadas
+  para realizar un rastreo proactivo del estado del sistema y los problemas de rendimiento.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitoring-101-alerting/
   tag: Blog
@@ -13,9 +15,9 @@ further_reading:
   text: Monitores de métricas
 - link: /monitors/notify/
   tag: Documentación
-  text: Notificaciones de monitores
+  text: Notificaciones de monitor
 - link: https://dtdg.co/fe
-  tag: Habilitar los fundamentos
+  tag: Habilitación de los fundamentos
   text: Participa en una sesión interactiva sobre la creación de monitores eficaces
 title: Empezando con los monitores
 ---
@@ -24,7 +26,7 @@ title: Empezando con los monitores
 
 Con la función de alertas de Datadog, tienes la capacidad de crear monitores que comprueben forma activa las métricas, la disponibilidad de la integración y los endpoints de red, entre otros. Utiliza monitores para alertar sobre los sistemas que requieren observación, inspección e intervención.
 
-Esta página es una introducción a los monitores y describe las instrucciones para configurar un monitor de métricas. Un [monitor de métricas][1] ofrece alertas y notificaciones si alguna métrica concreta está por encima o por debajo de un determinado umbral. Por ejemplo, un monitor de métricas puede alertarte cuando el espacio en disco es bajo. 
+Esta page (página) es una introducción a los monitores y describe las instrucciones para configurar un monitor (noun) de métrica. Un [monitor (noun) de métrica][1] proporciona alertas y notificaciones si una métrica específica está por encima o por debajo de un determinado umbral. Por ejemplo, un monitor (noun) de métrica puede alertarte cuando el espacio en disco es bajo.
 
 Esta guía aborda lo siguiente:
 - Creación y configuración de monitores
@@ -38,6 +40,20 @@ Antes de comenzar, necesitas una cuenta de Datadog vinculada a un host con el Da
 
 Para verificar que el Datadog Agent se está ejecutando, comprueba que la [lista de infraestructuras][4] en Datadog contiene información.
 
+## Monitorización instantánea para nuevas organizaciones
+
+<div class="alert alert-info">Los monitores automáticos están disponibles para las <strong>nuevas</strong> organizaciones y se activan después de que se instala el Datadog Agent.</div>
+
+Cuando instalas el Datadog Agent, Datadog detecta automáticamente tu stack tecnológico y crea un conjunto personalizado de **monitores de línea de base**. Esto te proporciona una cobertura instantánea sin necesidad de instalación.
+
+Los monitores automáticos pueden incluir:
+- Monitores a nivel de host (utilización de CPU y memoria)
+- Monitores de Kubernetes (reinicios de pods, estado de los nodos)
+- Monitores de APM (tasas de error o latencia por servicio)
+
+Puedes ver estos monitores inmediatamente en la page (página) [**Monitors**][17] de Datadog.
+Desde allí, puedes editarlos, clonarlos o desactivarlos como cualquier otro monitor (noun).
+
 ## Crear un monitor
 
 Para crear un monitor, ve a **[Monitors > New Monitor][5]** (Monitores > Nuevo monitor) y selecciona **Metric** (Métrica).
@@ -48,9 +64,9 @@ Los principales ajustes de la configuración de un monitor son:
 
 - **Choose the detection method** (Elegir el método de detección): ¿Cómo vas a medir lo que se va a alertar? ¿Te preocupa que un valor de métrica supere un umbral, que un cambio en un valor supere un umbral, un valor anómalo u otra cosa?
 - **Definir la métrica**: ¿Qué valor vas a monitorizar para enviar alertas? ¿El espacio en disco de tu sistema? ¿El número de errores en los inicios de sesión?
-- **Set the alert conditions** (Configurar las condiciones de alerta): ¿Cuándo hay que despertar a un ingeniero? 
+- **Configurar las condiciones de alerta**: ¿Cuándo hay que despertar a un ingeniero?
 - **Configure notifications and automations** (Configurar notificaciones y automatizaciones): ¿Qué información debe figurar en la alerta?
-- **Define permissions and audit notifications** (Definir los permisos y notificaciones de auditoría**: ¿Quién tiene acceso a estas alertas y quién debe ser notificado si se modifica la alerta?
+- **Define permissions and audit notifications** (Definir los permisos y notificaciones de auditoría): ¿Quién tiene acceso a estas alertas y quién debe ser notificado si se modifica la alerta?
 
 ### Elegir el método de detección
 
@@ -126,7 +142,7 @@ Puedes consultar las vistas guardadas de monitores desde la pantalla de inicio d
 
 {{< img src="monitors/monitors_mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Incidencias en la aplicación móvil">}}
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,3 +162,4 @@ Puedes consultar las vistas guardadas de monitores desde la pantalla de inicio d
 [14]: /es/service_management/workflows/
 [15]: /es/service_management/case_management/
 [16]: /es/account_management/teams/
+[17]: https://app.datadoghq.com/monitors/manage

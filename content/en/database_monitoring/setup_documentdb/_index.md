@@ -15,4 +15,6 @@ disable_sidebar: true
 
 For setup instructions, select your hosting type:
 
-{{< partial name="dbm/dbm-setup-documentdb" >}}
+{{< card-grid card_width="300px">}}
+  {{< image-card href="/database_monitoring/setup_documentdb/amazon_documentdb" src="integrations_logos/amazon_documentdb.png" alt="Amazon DocumentDB" title="Amazon DocumentDB" >}}
+{{< /card-grid >}}

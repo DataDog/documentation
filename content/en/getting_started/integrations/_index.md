@@ -5,6 +5,9 @@ further_reading:
   - link: 'https://learn.datadoghq.com/courses/intro-to-integrations'
     tag: 'Learning Center'
     text: 'Introduction to Integrations'
+  - link: 'https://learn.datadoghq.com/courses/getting-started-integrations'
+    tag: 'Learning Center'
+    text: 'Getting Started with Integrations'
   - link: '/integrations/'
     tag: 'Documentation'
     text: 'See a list of Datadog integrations'
@@ -46,6 +49,8 @@ To [install the Datadog Agent][15], you need an [API key][16]. If the Agent is a
 If you want to connect with a crawler or library based integration, navigate to that provider on the [Integrations page][18] for specific instructions on how to connect. For other supported integrations, install the [Datadog Agent][15]. Most integrations are supported for the containerized Agents: [Docker][19] and [Kubernetes][20]. After you've downloaded the Agent, go to the [Integrations page][18] to find specific configuration instructions for individual integrations.
 
 ### Configuring Agent integrations
+
+<div class="alert alert-info">You can configure Agent integrations remotely across your fleet from a central UI and API with <a href="/agent/fleet_automation/configure_integrations/">Fleet Automation</a>, instead of editing <code>conf.yaml</code> files on each host. Discover auto-detected services, scope a configuration to any subset of hosts by tag or host filter, and deploy to every matching Agent in one action. This requires Remote Configuration and Agent version 7.76 or later on Linux or Windows VMs.</div>
 
 Most configuration parameters are specific to the [individual integration][18]. Configure Agent integrations by navigating to the `conf.d` folder at the root of your Agent's configuration directory. Each integration has a folder named `<INTEGRATION_NAME>.d`, which contains the file `conf.yaml.example`. This example file lists all available configuration options for the particular integration.
 
@@ -108,11 +113,11 @@ To better unify your environment, it is also recommended to configure the `env` 
 You can customize tag behavior for individual checks, overriding the global Agent-level settings:
 
 1. **Disable Autodiscovery tags**
-    
+
     By default, the metrics reported by integrations include tags automatically detected from the environment. For example, the metrics reported by a Redis check that runs inside a container include tags associated with the container, such as `image_name`. You can turn this behavior off by setting the `ignore_autodiscovery_tags` parameter to `true`.
 
 1. **Set tag cardinality per integration check**
-    
+
     You can define the level of tag cardinality (low, orchestrator, or high) on a per-check basis using the `check_tag_cardinality` parameter. This overrides the global tag cardinality setting defined in the Agent configuration.
 
 ```yaml
@@ -125,6 +130,8 @@ check_tag_cardinality: low
 
 # Rest of the config here
 ```
+
+For containerized environments, you can also set these parameters through [Kubernetes Autodiscovery annotations][47].
 
 ### Validation
 
@@ -142,10 +149,10 @@ If you set up [process collection][29], Datadog autodetects technologies running
 
 Each integration has one of four status types:
 
-- **Detected**: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the **Hosts** tab.
-- **Installed**: This integration is installed and configured on a host.
-- **Available**: All integrations that do not fall into the **Installed** and **Detected** categories.
-- **Missing Data**: Integration metrics have not been detected in the last 24 hours. 
+- {{< ui >}}Detected{{< /ui >}}: The technology is running on a host, but the integration has not been installed or configured and only partial metrics are being collected. Configure the integration for full coverage. To find a list of hosts that are running an autodetected technology, open the integrations tile and select the {{< ui >}}Hosts{{< /ui >}} tab.
+- {{< ui >}}Installed{{< /ui >}}: This integration is installed and configured on a host.
+- {{< ui >}}Available{{< /ui >}}: All integrations that do not fall into the {{< ui >}}Installed{{< /ui >}} and {{< ui >}}Detected{{< /ui >}} categories.
+- {{< ui >}}Missing Data{{< /ui >}}: Integration metrics have not been detected in the last 24 hours. 
 
 ## Security practices
 
@@ -157,24 +164,24 @@ By default, access to integration resources (accounts, services, webhooks) is un
 **Note**: The restricted access option is only visible if the integration supports granular access control. To verify if granular access control is supported for an integration, review that [integration's documentation][46].
 {{< img src="getting_started/integrations/GRACE integration-account-modal.png" alt="Granular access controls" style="width:70%;" >}}
 
-1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
-2. Click **Set Permissions**.
-3. By default, everyone in your org has full access. Click **Restrict Access**. 
-4. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. While viewing an integration, navigate to the {{< ui >}}Configure{{< /ui >}} tab and locate the resource (account, service, webhook) that should have granular access controls applied. 
+2. Click {{< ui >}}Set Permissions{{< /ui >}}.
+3. By default, everyone in your org has full access. Click {{< ui >}}Restrict Access{{< /ui >}}. 
+4. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 5. Use the dropdown to select one or more teams, roles, or users that may edit the monitor.
     **Note**: The [Integrations Manage][45] permission is also required to edit individual resources.  
-6. Click **Add**.
+6. Click {{< ui >}}Add{{< /ui >}}.
 7. The dialog box updates to show the updated permissions.
-8. Click **Save**. The integration page automatically refreshes with updated permissions. 
+8. Click {{< ui >}}Save{{< /ui >}}. The integration page automatically refreshes with updated permissions. 
 
 **Note:** To maintain edit access to the resource, the system requires you to include at least one role or team that you are a member of before saving.
 
 To restore general access to a integration resource with restricted access, follow the steps below:
 
-1. While viewing an integration, navigate to the **Configure** tab and locate the resource (account, service, webhook) that should have general access restored.
-2. Click **Set Permissions**.
-3. Click **Restore Full Access**.
-4. Click **Save**. The integration page automatically refreshes with updated permissions. 
+1. While viewing an integration, navigate to the {{< ui >}}Configure{{< /ui >}} tab and locate the resource (account, service, webhook) that should have general access restored.
+2. Click {{< ui >}}Set Permissions{{< /ui >}}.
+3. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+4. Click {{< ui >}}Save{{< /ui >}}. The integration page automatically refreshes with updated permissions. 
 
 ## What's next?
 
@@ -230,7 +237,7 @@ tagging
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/integrations/agent_integration/
+[1]: /extend/integrations/agent_integration/
 [2]: https://app.datadoghq.com/account/settings
 [3]: /integrations/slack/
 [4]: /integrations/amazon_web_services/
@@ -239,7 +246,7 @@ tagging
 [7]: /api/
 [8]: /integrations/node/
 [9]: /integrations/python/
-[10]: /developers/custom_checks/write_agent_check/
+[10]: /extend/custom_checks/write_agent_check/
 [11]: https://github.com/DataDog/integrations-core
 [12]: https://github.com/DataDog/integrations-extras
 [14]: /agent/guide/integration-management/
@@ -250,9 +257,9 @@ tagging
 [19]: https://app.datadoghq.com/account/settings/agent/latest?platform=docker
 [20]: https://app.datadoghq.com/account/settings/agent/latest?platform=kubernetes
 [21]: /agent/guide/agent-commands/#restart-the-agent
-[22]: /developers/integrations/check_references/#param-specification
+[22]: /extend/integrations/check_references/#param-specification
 [23]: https://github.com/DataDog/integrations-core/blob/master/apache/datadog_checks/apache/data/conf.yaml.example
-[24]: /developers/custom_checks/write_agent_check/#updating-the-collection-interval
+[24]: /extend/custom_checks/write_agent_check/#updating-the-collection-interval
 [25]: /getting_started/tagging/
 [26]: /getting_started/agent/#setup
 [27]: /getting_started/tagging/unified_service_tagging/
@@ -275,3 +282,4 @@ tagging
 [44]: /monitors/guide/visualize-your-service-check-in-the-datadog-ui/
 [45]: /account_management/rbac/permissions/#integrations
 [46]: /integrations/
+[47]: /containers/kubernetes/integrations/#tag-cardinality

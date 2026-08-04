@@ -17,7 +17,7 @@ title: On-Call
 
 Datadog On-Call integra la monitorización, la localización de personas y la respuesta a incidencias en una sola plataforma.
 
-{{< img src="service_management/oncall/oncall_overview.png" alt="Información general sobre cómo se enrutan los localizadores. Desde un monitor, incidente, señal de seguridad o llamada a la API, el localizador se envía a un equipo (por ejemplo, 'payments-team'), luego a reglas de enrutamiento (por ejemplo, según la prioridad), luego a una política de escalado. Entonces, se lo puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
+{{< img src="incident_response/on-call/oncall_overview.png" alt="Información general sobre cómo se enrutan los localizadores. Desde un monitor, incidente, señal de seguridad o llamada a la API, el localizador se envía a un equipo (por ejemplo, 'payments-team'), luego a reglas de enrutamiento (por ejemplo, según la prioridad), luego a una política de escalado. Entonces, se lo puede enviar a un cronograma o directamente a un usuario." style="width:100%;" >}}
 
 ## Conceptos
 
@@ -31,15 +31,15 @@ Datadog On-Call integra la monitorización, la localización de personas y la re
 
 Los **Equipos** son la unidad organizativa central de Datadog On-Call. Cuando se activa una notificación en Datadog, se envía un **localizador** al equipo de On-Call designado.
 
-{{< img src="service_management/oncall/notification_page.png" alt="Notificación que menciona un equipo de On-Call." style="width:80%;" >}}
+{{< img src="incident_response/on-call/notification_page.png" alt="Notificación que menciona un equipo de On-Call." style="width:80%;" >}}
 
 Cada Team posee **políticas de escalado** y **cronogramas**. Las políticas de escalado definen cómo se envía un localizador a varios cronogramas, como _Checkout Operations - Interrupt Handler_, _Primary_ y _Secondary_ en la siguiente captura de pantalla. Cada equipo también puede configurar **reglas de enrutamiento** para enrutar localizadores a diferentes políticas de escalado.
 
-{{< img src="service_management/oncall/escalation_policy.png" alt="Un ejemplo de política de escalada." style="width:80%;" >}}
+{{< img src="incident_response/on-call/escalation_policy.png" alt="Un ejemplo de política de escalada." style="width:80%;" >}}
 
 Un cronograma define las horas específicas en las que los miembros del equipo están asignados para responder a los localizadores. Los cronogramas organizan y gestionan la disponibilidad de los miembros del equipo en diferentes zonas horarias y turnos.
 
-{{< img src="service_management/oncall/schedule.png" alt="Un cronograma de ejempo, con múltiples capas para horas laborables de JP, UE y EE. UU." style="width:80%;" >}}
+{{< img src="incident_response/on-call/schedule.png" alt="Un cronograma de ejempo, con múltiples capas para horas laborables de JP, UE y EE. UU." style="width:80%;" >}}
 
 ## Control de acceso preciso
 
@@ -64,13 +64,13 @@ Para restringir el acceso a un recurso de On-Call:
 
 1. Ve al recurso de On-Call específico (cronograma, política de escalado, reglas de derivación a equipos
 1. Haz clic en **Manage** (Gestionar).
-1. Selecciona **Permisos** en el menú desplegable.
+1. Selecciona **Permissions** (Permisos) en el menú desplegable.
 1. Haz clic en **Restrict Access** (Restringir el acceso).
 1. Selecciona uno o varios roles, equipos o usuarios en el menú desplegable.
 1. Haz clic en **Add** (Añadir).
 1. Selecciona el nivel de acceso que quieres asociar a cada uno de ellos en el menú desplegable situado junto a su nombre:
-   - **Visor**: Acceso de sólo lectura para ver el recurso.
-   - **Anulación** (sólo cronogramas): Se pueden ver y crear anulaciones de cronogramas. 
+   - **Visor**: Acceso de solo lectura para ver el recurso.
+   - **Anulación** (solo cronogramas): Se pueden ver y crear anulaciones de cronogramas. 
    - **Editor**: Acceso total para ver y modificar el recurso.
 1. Haz clic en **Save** (Guardar).
 
@@ -78,7 +78,7 @@ Para restringir el acceso a un recurso de On-Call:
 
 ## Empiece a utilizar Datadog On-Call
 
-<div class="alert alert-danger">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como localizadores, políticas de escalado o cronogramas. Para probar On-Call sin afectar a tu entorno de producción, crea una organización de prueba como sandbox.</div>
+<div class="alert alert-danger">Para conservar el historial de incidentes, Datadog On-Call no admite la eliminación de recursos como páginas, políticas de escalado u horarios. Para testear On-Call sin afectar a tu entorno de producción, crea una organización de prueba como un entorno de pruebas.</div>
 
 Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que todos los miembros del equipo configuran sus [ajustes del perfil de On-Call][2] para recibir notificaciones.
 
@@ -90,6 +90,10 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
   {{< nextlink href="/service_management/on-call/profile_settings">}}<u>Parámetros de perfiles</u>: Configura tus métodos de contacto y tus preferencias de notificación para asegurarte de recibir localizadores oportunos y efectivos.{{< /nextlink >}}
 {{< /whatsnext >}}
 
+## Facturación
+
+On-Call es una SKU basada en asientos. Para obtener más información sobre cómo se factura el servicio de On-Call y cómo gestionar los asientos en Datadog, visita nuestra [página de precios][5] y la [documentación de facturación de respuestas a incidentes][6].
+
 ## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -98,3 +102,5 @@ Para empezar con On-Call [incorpora un equipo de On-Call][1] y asegúrate de que
 [2]: /es/service_management/on-call/profile_settings
 [3]: /es/account_management/rbac/granular_access/
 [4]: /es/account_management/rbac/#role-based-access-control
+[5]: https://www.datadoghq.com/pricing/?product=incident-response#products
+[6]: /es/account_management/billing/incident_response/

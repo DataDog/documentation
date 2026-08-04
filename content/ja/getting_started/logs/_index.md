@@ -1,4 +1,5 @@
 ---
+description: 複数のソースからログを収集し、処理・分析を行い、これらのログをトレースやメトリクスと関連付けます。
 further_reading:
 - link: https://learn.datadoghq.com/courses/intro-to-log-management
   tag: ラーニングセンター
@@ -133,7 +134,7 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 * [Logging without Limits*][26] の詳細
 * [RBAC 設定][27]による機密ログデータの管理
 
-## 参考資料
+## 関連情報
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -146,7 +147,7 @@ rsyslog、FluentD、Logstash などの既存のログサービスやユーティ
 [4]: /ja/security/cloud_siem/
 [5]: /ja/getting_started/integrations/
 [6]: /ja/agent/
-[7]: https://github.com/DataDog/datadog-agent/blob/main/docs/agent/changes.md#cli
+[7]: /ja/agent/configuration/agent-commands/#restart-the-agent
 [8]: https://app.datadoghq.com/logs/onboarding/server
 [9]: /ja/agent/logs/?tab=tailfiles#custom-log-collection
 [10]: /ja/agent/docker/log/?tab=containerinstallation

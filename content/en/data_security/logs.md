@@ -21,8 +21,6 @@ The Log Management product supports multiple [environments and formats][1], allo
 
 ## Information security
 
-The Datadog Agent submits logs to Datadog either through HTTPS or through TLS-encrypted TCP connection on port 10516, requiring outbound communication (see [Agent Transport for logs][2]).
-
 Datadog uses symmetric encryption at rest (AES-256) for indexed logs. Indexed logs are deleted from the Datadog platform once their retention period, as defined by you, expires.
 
 ## Logs filtering
@@ -45,8 +43,6 @@ Sensitive Data Scanner is also available as a [processor][8] in [Observability P
 
 All log submission endpoints are encrypted. These legacy endpoints are still supported:
 
-* `tcp-encrypted-intake.logs.datadoghq.com`
-* `lambda-tcp-encrypted-intake.logs.datadoghq.com`
 * `gcp-encrypted-intake.logs.datadoghq.com`
 * `http-encrypted-intake.logs.datadoghq.com`
 

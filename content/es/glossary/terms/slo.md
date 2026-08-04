@@ -1,4 +1,5 @@
 ---
+id: slo
 core_product:
 - slos
 title: Objetivo de nivel de servicio (SLO)

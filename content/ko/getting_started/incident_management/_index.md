@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: 설명서
   text: 인시던트와 Slack 통합
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: 블로그
-  text: Datadog CoScreen과 더욱 효율적인 페어 프로그래밍
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: 블로그
   text: 인시던트 사후 분석 쓰기 모범 사례
@@ -186,7 +183,7 @@ Incident Management를 맞춤 설정하려면 [Incident Settings 페이지][11]�
 
 또한 Slack, Zoom 등과의 통합을 통해 인시던트를 선언 및 편집하고, 팀과 빠르게 커뮤니케이션할 수 있습니다.
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="모바일 앱에서의 모니터링">}}
+{{< img src="incident_response/incident_management/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="모바일 앱에서의 모니터링">}}
 
 ## 참고 자료
 

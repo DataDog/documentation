@@ -1,0 +1,26 @@
+{
+  "data": {
+    "attributes": {
+      "enabled": true,
+      "last_version": 3611102,
+      "rules": [
+        {
+          "enabled": true,
+          "mapping": {
+            "destination_key": "team_owner",
+            "if_tag_exists": "replace",
+            "source_keys": [
+              "account_name",
+              "account_id"
+            ]
+          },
+          "name": "Account Name Mapping",
+          "query": null,
+          "reference_table": null
+        }
+      ]
+    },
+    "id": "New Ruleset",
+    "type": "update_ruleset"
+  }
+}

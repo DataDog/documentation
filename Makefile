@@ -2,7 +2,7 @@
 SHELL = /bin/bash
 # MAKEFLAGS := --jobs=$(shell nproc)
 # MAKEFLAGS += --output-sync --no-print-directory
-.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data
+.PHONY: help clean-all clean start-preserve-build dependencies server start start-no-pre-build start-docker stop-docker all-examples clean-examples placeholders update_pre_build config derefs vector_data websites_sources_data build-api-derefs
 .DEFAULT_GOAL := help
 PY3=$(shell if [ `which pyenv` ]; then \
 				if [ `pyenv which python3` ]; then \
@@ -64,6 +64,10 @@ server:
 	  yarn run prestart && yarn run start; \
 	fi;
 
+update-blog-links: hugpython
+	@. hugpython/bin/activate && \
+	./local/bin/py/blog_linker.py
+
 # compile .mdoc.md files to HTML
 # so Hugo can include them in the site
 build-cdocs:
@@ -75,11 +79,8 @@ watch-cdocs:
 	@echo "Compiling .mdoc files to HTML";
 	@node ./local/bin/js/cdocs-build.js --watch;
 
-# compile .mdoc.md files to HTML
-# so Hugo can include them in the site
-build-llms-txt:
-	@echo "Launching llms.txt build ...";
-	@node ./local/bin/js/llms-txt-build.js;
+build-api-derefs:
+	@node ./assets/scripts/build-api-derefs.js
 
 start:
 	@make setup-build-scripts ## Build and run docs including external content.
@@ -96,7 +97,7 @@ start-no-pre-build: node_modules  ## Build and run docs excluding external conte
 # This is useful for testing changes to the build scripts locally
 start-preserve-build: dependencies
 	@make server
-	
+
 # Run the site with websites_sources_data (integrations previews)
 start-sources: node_modules
 	@make setup-build-scripts
@@ -130,7 +131,7 @@ node_modules: package.json yarn.lock
 
 # All the requirements for a full build
 dependencies: clean
-	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-llms-txt
+	make hugpython all-examples update_pre_build node_modules build-cdocs websites_sources_data build-api-derefs
 
 # Download files from S3 bucket and add them to the file system.
 # Preview S3 content locally: add FF_S3_PATH env var when executing appropriate Make targets
@@ -154,13 +155,13 @@ vector_data: integrations_data/extracted/vector
 # only build placeholders in ci
 placeholders: hugpython update_pre_build
 	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml"
-	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/" 
+	@. hugpython/bin/activate && ./local/bin/py/placehold_translations.py -c "config/_default/languages.yaml" -f "./_vendor/content/en/"
 
 # create the virtual environment
 hugpython: local/etc/requirements3.txt
 	@${PY3} -m venv --clear $@ && . $@/bin/activate && $@/bin/pip install --upgrade pip wheel && $@/bin/pip install -r $<;\
 	if [[ "$(CI_COMMIT_REF_NAME)" != "" ]]; then \
-		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.72592276-py3-none-any.whl; \
+		$@/bin/pip install https://binaries.ddbuild.io/dd-source/python/assetlib-0.0.109858308-py3-none-any.whl; \
 	fi
 
 update_pre_build: hugpython
@@ -194,14 +195,15 @@ config:
 # master = always use tag from sdk version
 # branches = attempt to use an associated branch name on failure fallback to sdk version
 define EXAMPLES_template
-examples/$(1):
-	$(eval TAG := $(or $(shell grep -A1 $(1) data/sdk_versions.json | grep version | cut -f 2 -d ':' | tr -d '" '),$(BRANCH)))
-	@if [[ "$(BRANCH)" = "master" ]]; then \
-		echo "Cloning $(1) at $(TAG)"; \
-		git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+examples/$(1): | websites_sources_data
+	@TAG=$$$$(grep -A1 $(1) _vendor/data/sdk_versions.json 2>/dev/null | grep version | cut -f 2 -d ':' | tr -d '" '); \
+	TAG=$$$${TAG:-$(BRANCH)}; \
+	if [[ "$(BRANCH)" = "master" ]]; then \
+		echo "Cloning $(1) at $$$$TAG"; \
+		git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	else \
 		echo "Cloning $(1) at $(BRANCH)"; \
-		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch $(TAG) https://github.com/DataDog/$(1).git examples/$(1); \
+		git clone --depth 1 --branch $(BRANCH) https://github.com/DataDog/$(1).git examples/$(1) || git clone --depth 1 --branch "$$$$TAG" https://github.com/DataDog/$(1).git examples/$(1); \
 	fi
 
 .PHONY: examples/$(patsubst datadog-api-client-%,clean-%-examples,$(1)) examples/$(patsubst datadog-api-client-%,%,$(1))
@@ -315,6 +317,13 @@ setup-build-scripts: $(PY_PATH) backup-config clean-build-scripts
 	if [ -z "$(BUILD_SCRIPT_BRANCH)" ] || [ -z "$(BUILD_SCRIPT_REPO_URL)" ] || [ -z "$(BUILD_SCRIPT_SOURCE_DIR)" ]; then \
 		echo -e "\033[0;31mone or more build-script env vars are undefined, check your makefile.config \033[0m"; \
 		exit 1; \
+	fi;
+	@if [ "$(BUILD_SCRIPT_BRANCH)" != "main" ]; then \
+		echo -e "\n\033[0;31m##########################################################################"; \
+		echo -e "# WARNING: BUILD_SCRIPT_BRANCH is set to '$(BUILD_SCRIPT_BRANCH)'"; \
+		echo -e "# You are NOT using the main branch for build scripts."; \
+		echo -e "# If this is unintentional, update BUILD_SCRIPT_BRANCH in Makefile.config"; \
+		echo -e "##########################################################################\033[0m\n"; \
 	fi;
 	@tmp_dir=$$(mktemp -d) && \
 	git clone --depth 1 -b $(BUILD_SCRIPT_BRANCH) $(BUILD_SCRIPT_REPO_URL) $$tmp_dir && \

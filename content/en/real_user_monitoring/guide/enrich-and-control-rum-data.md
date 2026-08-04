@@ -5,6 +5,10 @@ further_reading:
 - link: '/real_user_monitoring/explorer'
   tag: 'Documentation'
   text: 'Visualize your RUM data in the Explorer'
+- link: "https://learn.datadoghq.com/courses/custom-data-rum-javascript"
+  tag: "Learning Center"
+  text: "Collect custom data with RUM for JavaScript web applications"
+
 ---
 
 ## Overview
@@ -52,9 +56,9 @@ For more information about the structure of context objects, see the [Browser SD
 
 ## Examples
 
-### Collect HTTP headers from a Fetch response
+### Track aborted requests
 
-Collect HTTP headers from a Fetch response with the following `beforeSend` configuration. Additional context attributes **must** be stored in the `event.context` object.
+Track aborted requests with the following `beforeSend` configuration. Additional context attributes **must** be stored in the `event.context` object.
 
 ```javascript
 import { datadogRum } from '@datadog/browser-rum';
@@ -62,9 +66,8 @@ import { datadogRum } from '@datadog/browser-rum';
 datadogRum.init({
     ...,
     beforeSend: (event, context) => {
-        // collect a RUM resource's response headers
-        if (event.type === 'resource' && event.resource.type === 'fetch') {
-            event.context.responseHeaders = Object.fromEntries(context.response.headers)
+        if (event.type === 'resource' && context.isAborted) {
+            event.context.aborted = true
         }
         return true
     },
@@ -123,6 +126,7 @@ The following tabs show the information contained in the `beforeSend` event and 
 {{% tab "Context" %}}
 ```json
 {
+    "isAborted": false,
     "performanceEntry": {
         "name": "https://api.shopist.io/products.json",
         "entryType": "resource",
@@ -272,8 +276,8 @@ The following tabs show the information contained in the `beforeSend` event and 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /real_user_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
-[2]: /real_user_monitoring/browser/data_collected/
+[1]: /real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#modify-the-content-of-a-rum-event
+[2]: /real_user_monitoring/application_monitoring/browser/data_collected/
 [3]: https://developer.mozilla.org/en-US/docs/Web/API/Location
 [4]: https://developer.mozilla.org/en-US/docs/Web/API/Event
 [5]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest

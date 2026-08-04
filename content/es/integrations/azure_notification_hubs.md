@@ -13,7 +13,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 298
-    source_type_name: Azure notificación Hubs
+    source_type_name: Azure Notification Hubs
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -29,12 +29,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_notification_hubs
 integration_id: azure-notificationhubs
-integration_title: Azure notificación Hubs
+integration_title: Azure Notification Hubs
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_notification_hubs
-public_title: Azure notificación Hubs
+public_title: Azure Notification Hubs
 short_description: Rastrea las métricas principales de Azure Notification Hubs.
 supported_os: []
 tile:
@@ -49,7 +49,7 @@ tile:
   media: []
   overview: README.md#Overview
   support: README.md#Support
-  title: Azure notificación Hubs
+  title: Azure Notification Hubs
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -68,7 +68,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-notificationhubs" }}
+{{< get-metrics-from-git "azure_notification_hubs" >}}
 
 
 ### Eventos

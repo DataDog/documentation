@@ -1,4 +1,5 @@
 ---
+id: job_log
 title: job log
 core_product:
   - ci-cd

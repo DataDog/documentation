@@ -44,19 +44,23 @@ If you see a sudden spike or overall increase in your API test [timing metrics][
 
 #### The website is not loading in the iframe
 
-If your website doesn't appear in the Browser Test recorder's iframe after installing the [Datadog extension][4], you may see the message `Your website does not support being loaded through an iframe`. This indicates that your application's security settings prevent iframe loading.
+If your website doesn't appear in the Browser Test recorder's iframe after installing the [Datadog extension][4], you may see the message `Your website does not support being loaded through an iframe`. This indicates that your application's security settings, like Content Security Policy (CSP) or related security headers like `X-Frame-Options`, prevent iframe loading.
 
-Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests.
+Similarly, if login attempts fail during iframe recording, your application may be blocking certain requests due to CSP rules or other security configurations. In some cases, login failures can also be caused by a CSRF token issue when the login flow originates from a web application loaded within an iframe, which can result in the CSRF token being dropped.
 
-**Solution**: Click **Open in Popup** to record your user journey in a separate window instead of the iframe.  
+**Solution**: Click {{< ui >}}Open in Popup{{< /ui >}} to record your user journey in a separate window instead of the iframe.  
 
 #### Only certain applications load in the iframe
 
-Different applications and environments have varying security restrictions. Some allow iframe loading while others block it for security reasons.
+Different applications and environments have CSP configurations and other varying security restrictions. Some allow iframe loading while others block it for security reasons.
+
+**Solution**: Click {{< ui >}}Open in Popup{{< /ui >}} to record your user journey in a separate window instead of the iframe.
 
 #### HTTP requests warning banner appears in iframe
 
-This warning appears when attempting to record on an `http` page. The recorder iframe only supports `https` pages. **Solution**: Either open your page in a pop-up window or change your URL to use `https`. 
+This warning appears when attempting to record on an `http` page. The recorder iframe only supports `https` pages.
+
+**Solution**: Either open your page in a pop-up window or change your URL to use `https`. 
 
 #### Website fails to load and recording doesn't work in iframe or pop-up
 
@@ -78,25 +82,25 @@ Chrome browser policies may prevent the extension from recording properly.
 
 The recorder iframe/pop-up uses your current browser session by default. If you're already logged into your application, it may skip the login page and go directly to the post-login view, preventing you from recording authentication steps.
 
-**Solution**: Use the recorder's **incognito mode** to record login steps without logging out of your current session:
+**Solution**: Use the recorder's {{< ui >}}incognito mode{{< /ui >}} to record login steps without logging out of your current session:
 
 {{< img src="synthetics/incognito_mode.mp4" alt="Using Incognito Mode Browser Tests" video="true" width="100%" >}}
 
-**Incognito mode** creates an isolated session that ignores your browser history, cookies, and login data. This allows you to record login steps from scratch, as if visiting your website for the first time.
+{{< ui >}}Incognito mode{{< /ui >}} creates an isolated session that ignores your browser history, cookies, and login data. This allows you to record login steps from scratch, as if visiting your website for the first time.
 
 ### Test results
 
 #### Mobile and tablet browser tests consistently fail
 
-**Responsive** websites may have significantly different DOM structures across devices. A website's DOM on `Laptop Large` can differ greatly from `Tablet` or `Mobile Small` viewports.
+**Responsive** websites may have significantly different DOM structures across devices. A website's DOM on {{< ui >}}Laptop Large{{< /ui >}} can differ greatly from {{< ui >}}Tablet{{< /ui >}} or {{< ui >}}Mobile Small{{< /ui >}} viewports.
 
-Steps recorded on `Laptop Large` may not work on smaller viewports, causing mobile and tablet tests to fail:
+Steps recorded on {{< ui >}}Laptop Large{{< /ui >}} may not work on smaller viewports, causing mobile and tablet tests to fail:
 
 {{< img src="synthetics/device_failures.png" alt="Mobile Tablet Device Failing" style="width:100%;" >}}
 
 **Solution**: Create device-specific tests where recorded steps match the target viewport.
 
-To record for mobile or tablet viewports, select `Mobile Small` or `Tablet` in the recorder dropdown before clicking **Start Recording**.
+To record for mobile or tablet viewports, select {{< ui >}}Mobile Small{{< /ui >}} or {{< ui >}}Tablet{{< /ui >}} in the recorder dropdown before clicking {{< ui >}}Start Recording{{< /ui >}}.
 
 {{< img src="synthetics/record_device.png" alt="Recording steps on mobile tablet" style="width:100%;" >}}
 
@@ -110,7 +114,7 @@ Browser Test steps may display a `None or multiple elements detected` warning:
 
 This indicates the user locator targets multiple elements or none at all, preventing the test from knowing which element to interact with.
 
-**Solution**: Edit your recording, open the problematic step's advanced options, navigate to the test page, and click `Test`. This highlights the located element or shows an error. Adjust your user locator to target a single, unique element:
+**Solution**: Edit your recording, open the problematic step's advanced options, navigate to the test page, and click {{< ui >}}Test{{< /ui >}}. This highlights the located element or shows an error. Adjust your user locator to target a single, unique element:
 
 {{< img src="synthetics/fix_user_locator.mp4" alt="Fixing User Locator error" video="true" width="100%" >}}
 
@@ -133,9 +137,9 @@ The synthetics worker uses hierarchical timeouts to balance speed and reliabilit
 A 401 error in Synthetic Monitoring tests typically indicates authentication failure. Use the same authentication method (outside of Datadog) you normally use for the endpoint and replicate it in your Synthetic test configuration.
 
 * Is your endpoint using **header-based authentication**?
-  * **Basic Authentication**: Specify the associated credentials in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
+  * **Basic Authentication**: Specify the associated credentials in the {{< ui >}}Advanced options{{< /ui >}} of your [HTTP][7] or [Browser Test][8].
   * **Token based authentication**: Extract your token with a first [HTTP test][7], create a [global variable][9] by parsing the response of that first test, and re-inject that variable in a second [HTTP][7] or [Browser Test][10] requiring the authentication token.
-  * **Session based authentication**: Add the required headers or cookies in the **Advanced options** of your [HTTP][7] or [Browser Test][8].
+  * **Session based authentication**: Add the required headers or cookies in the {{< ui >}}Advanced options{{< /ui >}} of your [HTTP][7] or [Browser Test][8].
   
 * Does your endpoint use **query parameter authentication** (such as adding an API key to URL parameters)?
 
@@ -163,10 +167,48 @@ IOS app features may not function properly during recording or execution due to 
 
 **Solution**: Use Ad Hoc or Development provisioning profiles when distributing your iOS app to minimize entitlement-related issues and improve compatibility.
 
+## Network Path tests
+
+### Datadog Agent not listed as an option in Locations & Agents
+
+If you do not see the Datadog Agent listed as a selectable option during test creation, verify that you meet all prerequisites and completed the setup steps. See [Agent configuration][16] for more information.
+
+### Scheduled tests from the Datadog Agent is not running at the expected schedule
+
+In large or high-volume environments, scheduled tests may not run at the expected intervals if the Datadog Agent does not have enough workers to handle concurrent executions. To optimize performance and maintain consistent scheduling, [increase the number of workers][17] to meet or exceed the total number of tests assigned to the Agent.
+
+### Missing test results executed from the Datadog Agent
+
+If you do not see test results in the Datadog UI, the Datadog Agent is not sending test results to the Synthetics intake (https://http-synthetics.datadoghq.com) that processes test results. Verify that outbound network traffic from the Datadog Agent to this intake is allowed.
+
+If the Datadog Agent is running behind a proxy, make sure the Synthetics forwarder is configured to send traffic through the proxy, for example:
+```
+synthetics: 
+  collector: 
+    enabled: true
+synthetics.forwarder.dd_url: http://my-proxy.com:<proxy-port>
+```
+Additionaly, ensure that the proxy itself is configured to allow outboud network traffic to the Synthetics intake.
+
 ## Private locations
 
 {{< tabs >}}
 {{% tab "Common" %}}
+
+### Private Location unable to fetch tests due to 403 error
+
+A Private Locations displays this error when it is attempting to fetch tests from Datadog:
+
+```
+Queue error - onFetchMessagesLongPolling - Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+Error: Got 403 in request - {"errors":["Expired/not yet valid signature"]}
+    at Function.QueueError.fromHTTPError (dist/build/index.js:259354:12)
+    at DatadogQueue.receiveMessages (dist/build/index.js:258914:48)
+```
+
+**Cause**: The log shows that the Private Location was able to successfully reach the Synthetics intake to fetch tests, but the request failed with a 403 response from Datadog due to an authentication issue. Specifically, the request signature was considered expired or not yet valid. Communication between the Private Location and Datadog is secured using Datadog Signature v1 (based on the same signing process as [AWS Signature v4][105]) which includes a timestamp in each request, ensuring both authentication and integrity). If the system clock on the server hosting the Private Location is out of sync, the timestamp can fall outside the allowed window, and the signature validation fails.
+
+**Solution**: Ensure the server hosting the Private Location has accurate time synchronization. If NTP (Network Time Protocol) services are in use, verify that these services are correctly configured and functioning properly, and address any misconfigurations that could prevent the system clock from syncing with its time sources.
 
 ### Browser tests show `Page crashed` errors
 
@@ -213,6 +255,7 @@ Additionally, `ping` requires elevated privileges to create the raw socket. The 
 [102]: https://docs.docker.com/config/containers/resource_constraints/
 [103]: /synthetics/private_locations/dimensioning#define-your-total-hardware-requirements
 [104]: /help/
+[105]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 
 {{% /tab %}}
 {{% tab "Docker" %}}
@@ -260,16 +303,16 @@ Ensure the private location was installed with a configuration specified at inst
 
 #### GUI method
 
-1. Search for **Services** in the **Start** menu.
-1. Open **Services** (works on any user account).
-1. Find `Datadog Synthetics Private Location` in **Services (Local)**.
-1. Right-click the service and select **Restart**.
+1. Search for {{< ui >}}Services{{< /ui >}} in the {{< ui >}}Start{{< /ui >}} menu.
+1. Open {{< ui >}}Services{{< /ui >}} (works on any user account).
+1. Find `Datadog Synthetics Private Location` in {{< ui >}}Services (Local){{< /ui >}}.
+1. Right-click the service and select {{< ui >}}Restart{{< /ui >}}.
 
-The worker runs under the **Local Service** account. Verify this by checking for the `synthetics-pl-worker` process in Task Manager's **Details** tab.
+The worker runs under the {{< ui >}}Local Service{{< /ui >}} account. Verify this by checking for the `synthetics-pl-worker` process in Task Manager's {{< ui >}}Details{{< /ui >}} tab.
 
 #### PowerShell method
 
-1. Open **Windows PowerShell** with script execution rights.
+1. Open {{< ui >}}Windows PowerShell{{< /ui >}} with script execution rights.
 1. Run: `Restart-Service -Name "Datadog Synthetics Private Location"`
 
 ### Maintaining Synthetics Private Location Worker uptime
@@ -278,7 +321,7 @@ The worker runs under the **Local Service** account. Verify this by checking for
 
 **Crash recovery**: Create a Windows scheduled task that runs a PowerShell script to restart the worker if it stops running. This ensures automatic recovery after crashes.
 
-**Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the **Services** tool—this service handles automatic restarts.
+**Automatic startup**: If you provided a configuration file during installation, the `Datadog Synthetics Private Location` Windows service starts automatically. Verify the service is running in the {{< ui >}}Services{{< /ui >}} tool—this service handles automatic restarts.
 
 ### Self-signed certificate errors 
 
@@ -342,3 +385,5 @@ Additionally, Private Location versions `>v1.27` depend the `clone3` system call
 [12]: /synthetics/api_tests/http_tests/?tab=requestoptions#configure-the-test-monitor
 [13]: https://docs.docker.com/engine/security/seccomp/
 [14]: /synthetics/guide/step-duration
+[16]: /synthetics/network_path_tests/#agent-configuration
+[17]: /network_monitoring/network_path/setup/?tab=linux#increase-the-number-of-workers

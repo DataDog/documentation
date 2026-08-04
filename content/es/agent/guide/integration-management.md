@@ -1,15 +1,18 @@
 ---
 algolia:
   tags:
-  - Gestión de integraciones
+  - Gestión de las integraciones
+description: Guía para gestionar las integraciones oficiales de Datadog mediante el
+  comando de integración datadog-agent, incluyendo las operaciones para instalar,
+  eliminar, mostrar y congelar.
 title: Gestión de integraciones
 ---
 
 ## Información general
 
-El Agent viene con una serie de integraciones oficiales de Datadog para que los usuarios puedan monitorizar sus aplicaciones de forma rápida. Estas integraciones están disponibles como paquetes individuales de Python y pueden actualizarse por separado.
+El Agent viene con una serie de integraciones oficiales de Datadog para que los usuarios puedan monitorizar sus aplicaciones de forma rápida. Estas integraciones están disponibles como paquetes Python individuales y pueden actualizarse por separado.
 
-**Nota**: Las integraciones Community, Partner y Marketplace no se conservan cuando se actualiza Agent. Estas integraciones deben volver a instalarse al actualizar la versión del Agent.
+**Nota**: A partir de la versión 7.69 de Agent, las integraciones de Community, Partner y Marketplace se conservan automáticamente durante las actualizaciones. Para desactivar esta función, crea un archivo vacío llamado `.skip_install_python_third_party_deps` en el directorio `/etc/datadog-agent/` antes de actualizar. Si este archivo está presente, las integraciones no se conservan y deben reinstalarse manualmente después de la actualización.
 
 Para el Agent 6.8 o versiones posteriores, el comando `datadog-agent integration` permite a los usuarios gestionar las integraciones oficiales de Datadog que están disponibles para el Agent. Incluye los siguientes subcomandos:
 

@@ -22,7 +22,7 @@ The following code security capabilities are supported in the PHP library, for t
 | Docker            | {{< X >}}                                   |                                     |
 | Kubernetes        | {{< X >}}                                   |                                     |
 | Amazon ECS        | {{< X >}}                                   |                                     |
-| AWS Fargate       |                                             |                                     |
+| AWS Fargate       | {{< X >}}                                   |                                     |
 | AWS Lambda        |                                             |                                     |
 
 ## Language and framework compatibility

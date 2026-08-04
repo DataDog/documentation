@@ -1,19 +1,19 @@
 ---
 further_reading:
 - link: /logs/log_configuration/processors
-  tag: ビデオ
+  tag: ドキュメント
   text: ログの処理方法について
 - link: /logs/log_configuration/parsing
-  tag: ビデオ
+  tag: ドキュメント
   text: パースの詳細
 - link: /logs/live_tail/
-  tag: ビデオ
+  tag: ドキュメント
   text: Datadog Live Tail 機能
 - link: /logs/explorer/
-  tag: ビデオ
+  tag: ドキュメント
   text: ログの調査方法
 - link: /logs/logging_without_limits/
-  tag: ビデオ
+  tag: ドキュメント
   text: 無制限のロギング*
 title: ページ区切りで複数のログを収集する
 ---
@@ -22,6 +22,8 @@ title: ページ区切りで複数のログを収集する
 
 [ログ API][1] によって返される最大 1000 個のログ制限より長いログリストを取得するには、ページ区切り機能を使用する必要があります。
 
+適切な API エンドポイントに POST リクエストを送信すると、Datadog サイトからログを取得できます。URL 内の `<DATADOG_SITE>` は、実際の Datadog サイト ドメイン (`{{< region-param key="dd_site" >}}`) に置き換えてください。
+
 {{< tabs >}}
 
 {{% tab "V1 API" %}}
@@ -29,7 +31,7 @@ title: ページ区切りで複数のログを収集する
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
@@ -62,7 +64,7 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 ログの次のページを取得するにはクエリを再送信しますが、今回は、前の呼び出しから `nextLogId` 値を取得する `startAt` パラメーターを使用します。
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
+curl -X POST "https://api.<DATADOG_SITE>/api/v1/logs-queries/list" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
@@ -99,20 +101,20 @@ curl -X POST https://api.datadoghq.com/api/v1/logs-queries/list \
 まず、クエリを作成して、特定のコンテキスト、たとえば設定されたタイムフレームでの特定のクエリのログを取得します。
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+curl -X POST "https://api.<DATADOG_SITE>/api/v2/logs/events/search" \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
-                  "limit":50   
+                  "limit":50
         }
 }'
 ```
@@ -142,21 +144,21 @@ curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
 ログの次のページを見るには、前の呼び出しから `after` 値を取得する `cursor` パラメーターを含めてクエリを再送信し続けます。`data` が `null` を返したら、クエリに関連付けられたログのすべてのページが返ったことになります。
 
 ```bash
-curl -X POST https://api.datadoghq.com/api/v2/logs/events/search \
+curl -X POST https://api.<DATADOG_SITE>/api/v2/logs/events/search \
 -H "Content-Type: application/json" \
 -H "DD-API-KEY: ${DD_CLIENT_API_KEY}" \
 -H "DD-APPLICATION-KEY: ${DD_CLIENT_APP_KEY}" \
 -d '{
-      "filter": 
+      "filter":
               {
                 "from": "2019-08-06T00:00:00Z",
                 "to": "2019-08-07T00:00:00Z",
                 "query": "@datacenter:us @role:db"
                },
-      "page":  
+      "page":
               {
                   "cursor": "eyJhZnRlciI6IkFRQUFBWE4tV0ZVbzZFRGRnZ0FBQUFCQldFNHRWMFpwVG1jelgwRTJURjlaVjBGQlFRIn0",
-                  "limit": 50   
+                  "limit": 50
         }
 }'
 ```

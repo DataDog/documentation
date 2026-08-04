@@ -1,0 +1,169 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "09c427f36471a9777800731d4c8fba9f": {
+            "string": "モバイルセッションリプレイの設定と構成"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "c11aab16f8a3104ac69f99734e4a7013": {
+            "string": "モバイルセッションリプレイの設定と構成"
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "/session_replay/mobile/",
+            "text": {
+              "itemTranslationData": {
+                "ce6c3c781d75059f7fbe7186661b96e0": {
+                  "string": "Mobile Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "/session_replay/mobile/app_performance",
+            "text": {
+              "itemTranslationData": {
+                "ab35b85db736ffd1e461c8485e401308": {
+                  "string": "モバイルセッションリプレイがアプリのパフォーマンスに与える影響"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "2": {
+            "link": "/session_replay/mobile/privacy_options",
+            "text": {
+              "itemTranslationData": {
+                "26506d24bb1c399504571e1615425fb5": {
+                  "string": "モバイルセッションリプレイのプライバシーオプション"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "3": {
+            "link": "/session_replay/mobile/troubleshooting",
+            "text": {
+              "itemTranslationData": {
+                "5615d411d465239fa5a76720ca89152c": {
+                  "string": "モバイルセッションリプレイのトラブルシューティング"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "4": {
+            "link": "/session_replay/",
+            "text": {
+              "itemTranslationData": {
+                "ab99140e610ac1c9552fe9f07fdff5ce": {
+                  "string": "Session Replay"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          },
+          "5": {
+            "link": "/real_user_monitoring/application_monitoring/android/web_view_tracking",
+            "text": {
+              "itemTranslationData": {
+                "16c1b8bece3356f2a9e5c6bc5d607bc7": {
+                  "string": "Web ビューのトラッキング"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "fd7fd4bbe708f2696924cb45bb55028c": {
+                  "string": "ドキュメント"
+                }
+              }
+            }
+          }
+        }
+      },
+      "content_filters": {
+        "listTranslationData": {
+          "0": {
+            "label": "SDK",
+            "trait_id": "platform",
+            "option_group_id": "rum_session_replay_sdk_options"
+          }
+        }
+      }
+    }
+  },
+  "children": {
+    "listTranslationData": {
+      "0": {
+        "$$mdtype": "Node",
+        "inline": false,
+        "attributes": {
+          "file": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+        },
+        "children": {
+          "listTranslationData": {}
+        },
+        "type": "tag",
+        "tag": "partial",
+        "annotations": {
+          "listTranslationData": {
+            "0": {
+              "type": "attribute",
+              "name": "file",
+              "value": "real_user_monitoring/session_replay/setup_and_configuration.mdoc.md"
+            }
+          }
+        },
+        "slots": {},
+        "location": "line 28-29"
+      }
+    }
+  },
+  "type": "document",
+  "annotations": {
+    "listTranslationData": {}
+  },
+  "slots": {}
+}

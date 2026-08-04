@@ -1,8 +1,16 @@
 ---
+description: Connecter les widgets de dashboard aux pages Datadog et aux applications
+  tierces en utilisant des liens contextuels personnalisables avec des variables.
 further_reading:
+- link: https://www.datadoghq.com/blog/datadog-executive-dashboards
+  tag: Blog
+  text: Concevoir des dashboards pour dirigeants efficaces avec Datadog
 - link: /dashboards/widgets
   tag: Documentation
   text: Liste des widgets pour les dashboards
+- link: /metrics/units
+  tag: Documentation
+  text: Unités de métriques
 title: Liens de contexte
 ---
 
@@ -10,16 +18,16 @@ title: Liens de contexte
 
 Les dashboards recueillent des données à partir d'une multitude de sources et les affichent sous forme de visualisations.
 
-Vous pouvez joindre des dashboards à des [notifications de monitor][1], les convertir en screenboards pour observer des mesures métiers ou techniques importantes ou encore y faire référence dans des [runbooks][2] afin de fournir davantage de contexte. Les dashboards offrent non seulement un aperçu de l'état actuel de votre plateforme, mais également des fonctions interactives vous permettant de consulter sans attendre vos problèmes et de les analyser en détail sur les pages dédiées.
+Vous pouvez joindre des dashboards aux [notifications de monitor][1], les utiliser comme screenboards pour observer des indicateurs techniques ou commerciaux clés, ou les référencer dans des [runbooks][2] pour fournir un contexte supplémentaire. Avec les dashboards, vous pouvez voir des instantanés de l'état actuel de votre plateforme ainsi que des interactions, afin de pouvoir anticiper les problèmes et les analyser plus en profondeur dans des pages spécialisées.
 
 Dans la vidéo ci-dessous, un utilisateur consulte un dashboard récapitulatif pour une application Web. Cet utilisateur identifie un pic pour une métrique technique, agrandit l'intervalle pertinent pour obtenir plus de détails et accède au dashboard du host sous-jacent pour découvrir les causes potentielles à l'origine de ce problème.
 
-{{< img src="dashboards/guide/context_links/overview.mp4" alt="Démonstration des liens de contexte" video="true" style="width:80%;" >}}
+{{< img src="dashboards/guide/context_links/overview.mp4" alt="Workflow de dépannage à partir d'un graphique de métrique de dashboard, utilisant des liens contextuels pour trouver la cause racine du problème" video="true" style="width:80%;" >}}
 
-Ce guide présente les **liens de contexte** disponibles dans les dashboards :
-1. Fonctionnement des liens et personnalisation en fonction de vos besoins (#fonctionnement-des-liens-de-contexte)
-2. Exemples de configuration des liens de contexte pour un scénario précis (#exemples-de-cas-d-utilisation)
+Ce guide présente les **liens contextuels** dans vos dashboards et couvre les points suivants :
 
+1. [Comment fonctionnent les liens contextuels et comment les adapter à vos besoins exacts](#introduction-aux-liens-contextuels).
+2. [Exemples de cas d'usage de la configuration des liens contextuels](#exemples-de-cas-dusage).
 
 ## Présentation des liens de contexte
 
@@ -53,20 +61,20 @@ Les liens de contexte incluent, le cas échéant, les éléments suivants :
 
 ### Personnaliser des liens de contexte
 
-Pour tous les [widgets génériques][16], ouvrez l'éditeur pour accéder à la section **Context Links**. Cette dernière vous permet de créer vos propres liens de contexte, de remplacer les liens par défaut et de mettre en avant ou de masquer des liens.
+Pour tout [widget générique][16], accédez à son mode de modification pour accéder à sa section **Context Links**. Vous pouvez créer vos propres liens contextuels, remplacer les liens par défaut et promouvoir ou masquer des liens.
 
 {{< img src="dashboards/guide/context_links/edit-links.png" alt="Modifier des liens" style="width:75%;" >}}
 
-Pour créer des liens personnalisés ou remplacer les liens par défaut, indiquez le nom du lien dans le champ **Label** et son chemin dans le champ **URL**. Vous pouvez vous servir de l'outil d'assistance pour définir la paire key/value du paramètre d'URL.
+Pour définir des liens personnalisés ou remplacer les liens par défaut, spécifiez le nom du lien dans le champ **Label** et le chemin du lien dans le champ **URL**. Cliquez sur **+ Add URL Parameter** pour utiliser l'assistant clé-valeur.
 
 
 #### Variables des liens de contexte
 
-{{< img src="dashboards/guide/context_links/custom-link.png" alt="Personnaliser un lien" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/custom-link.png" alt="Définir une paire clé-valeur pour un paramètre d'URL dans l'URL" style="width:75%;" >}}
 
 Vous pouvez utiliser les types de variables suivants pour les liens de contexte :
 
-* Les **variables d'intervalle** `{{timestamp_start}}` et `{{timestamp_end}}`. Ces variables correspondent à l'intervalle du widget. Pour les widgets Série temporelle et Carte thermique, elles correspondent à l'intervalle du compartiment de temps avec lequel l'utilisateur a interagi.
+* **Variables de plage temporelle** `{{timestamp_start}}` et `{{timestamp_end}}`. Ces variables correspondent à la plage temporelle du widget.
 * Les **variables de requête** (`{{@MerchantTier}}` et `{{@MerchantTier.value}}` dans l'exemple ci-dessus). Ces variables peuvent être utilisées pour les widgets comportant des requêtes groupées. Elles identifient le groupe avec lequel l'utilisateur a interagi.
 * Les **template variables de dashboard** (`{{$env}}` et `{{$env.value}}` dans l'exemple ci-dessus). Ces variables identifient la valeur actuelle d'une template variable avec laquelle l'utilisateur a interagi.
 * **`{{tags}}`**, la combinaison par défaut de toutes les variables ci-dessus.
@@ -75,13 +83,14 @@ Pour choisir entre la variable `{{exemple}}` et `{{exemple.value}}`, tenez compt
 
 * `{{exemple}}` renvoie la clé suivie de la valeur, par exemple `env:prod`.
 * `{{exemple.value}}` renvoie la valeur brute, par exemple `prod`.
+* Consultez l'[exemple de cas d'usage pour configurer plusieurs variables](#configurer-plusieurs-variables).
 
 
 Pour cet exemple, lorsque vous cliquez sur **View in Acme**, vous êtes redirigé vers `https://prod.acme.io/search?what=basic&when=1643021787564`.
 
-{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Personnaliser un lien" style="width:60%;" >}}
+{{< img src="dashboards/guide/context_links/view-in-acme.png" alt="Exemple de lien contextuel vers Acme" style="width:60%;" >}}
 
-Le lien de contexte :
+The context link:
 
 * remplace `{{env.value}}` par `prod` ;
 * remplace `{{@MerchantTier.value}}` par `basic` ; et
@@ -97,7 +106,7 @@ Pour utiliser des liens de contexte avancés qui encodent un grand nombre de par
 
 #### Encodage des URL
 
-{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Personnaliser le lien" style="width:75%;" >}}
+{{< img src="dashboards/guide/context_links/url-encoding.png" alt="Capture d'écran d'une URL et de paramètres clé-valeur" style="width:75%;" >}}
 
 Datadog prend en charge l'encodage des URL dans les liens de contexte.
 
@@ -142,11 +151,11 @@ Si vous cliquez sur le lien **Zendesk User Page**, vous êtes redirigé vers la 
 
 ### Ajouter à un dashboard des liens vers la console AWS
 
-L'exemple suivant décrit la procédure à suivre pour créer un lien dans un widget de dashboard entre un host et la page de l'instance AWS EC2 correspondante dans la console AWS.
+L'exemple suivant explique comment créer un lien depuis un host dans un widget de dashboard vers sa page d'instance Amazon EC2 correspondante dans la console AWS.
 
 #### Contexte
 
-Imaginons que votre plateforme est hébergée sur des instances [AWS EC2][19] et que vous utilisez principalement des procédures manuelles pour redimensionner votre plateforme.
+Votre plateforme est hébergée sur des instances [Amazon EC2][19], et les procédures pour augmenter et réduire l'échelle de votre plateforme sont principalement manuelles.
 
 Vous disposez d'un dashboard Datadog présentant des métriques de santé clés sur votre infrastructure.
 
@@ -154,7 +163,7 @@ Pour accélérer ce workflow opérationnel, vous souhaitez bénéficier d'un lie
 
 #### Approche
 
-Voici un exemple de lien de synthèse vers une instance AWS EC2 : `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`. Ce lien contient les éléments suivants :
+Un lien de résumé d'instance Amazon EC2 typique est `https://eu-west-3.console.aws.amazon.com/ec2/v2/home?region=eu-west-3#InstanceDetails:instanceId=i-04b737b9f8bf94a94`, où vous pouvez lire :
 
 * `eu-west-3` : la région du centre de données, affichée sous la forme d'un sous-domaine et d'un paramètre d'URL.
 * `i-04b737b9f8bf94a94` : l'ID du host, affiché sous la forme d'un paramètre de hachage.
@@ -165,21 +174,21 @@ Si votre plateforme s'exécute dans plusieurs régions, la configuration de votr
 
 * Si la région est intégrée dans l'agrégation de la requête (comme dans la capture d'écran ci-dessous), le lien du modèle correspond à `https://{{region.value}}.console.aws.amazon.com/ec2/v2/home?region={{region.value}}#InstanceDetails:instanceId={{host.value}}`. `{{region.value}}` est alors une variable de **requête**.
 
-{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Requête AWS EC2" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query.png" alt="Requête Amazon EC2" style="width:90%;" >}}
 
-* Si la région n'est pas intégrée à l'agrégation de la requête (comme dans la capture d'écran ci-dessous), le lien du modèle correspond à `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, `{{region.value}}` est alors une **template variable**.
+* Si la région est intégrée à l'agrégation de la requête (comme dans la capture d'écran ci-dessous), le lien du modèle correspond à `https://{{$region.value}}.console.aws.amazon.com/ec2/v2/home?region={{$region.value}}#InstanceDetails:instanceId={{host.value}}`, `{{region.value}}` est alors une **template variable**.
 
-{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Requête AWS EC2" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_query2.png" alt="Requête Amazon EC2" style="width:90%;" >}}
 
 #### Résultat
 
 Le widget de votre dashboard contient un lien redirigeant vers le host pertinent dans la console AWS.
 
-{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Interaction avec la requête AWS EC2" style="width:90%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_interaction.png" alt="Lien contextuel de requête Amazon EC2" style="width:90%;" >}}
 
-Lorsque vous cliquez sur le lien **AWS EC2 Instance Summary**, vous êtes redirigé vers la page de l'instance AWS EC2 dans la console AWS.
+Cliquer sur le lien **Amazon EC2 Instance Summary** vous dirige vers la page de l'instance Amazon EC2 dans la console AWS.
 
-{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Résultat de la requête AWS EC2" style="width:70%;" >}}
+{{< img src="dashboards/guide/context_links/ec2_result.png" alt="Résultat de requête Amazon EC2" style="width:70%;" >}}
 
 ### Ajouter à un dashboard des liens vers des vues enregistrées et des attributs remappés dans Datadog
 
@@ -207,15 +216,15 @@ Par exemple, le lien `https://app.datadoghq.com/logs?saved_view=305130&query=@so
 
 Si la navigation sur votre site Web est anonyme, vous pouvez utiliser une adresse IP comme proxy pour identifier vos utilisateurs.
 
-Imaginons que vous cherchiez à identifier l'attribut `@session.ip` de vos événements RUM avec l'attribut `@network.client.ip` de vos logs. Ces attributs ne possèdent pas le même nom, car ils n'ont pas la même signification. Toutefois, pour les logs d'authentification, vous pouvez les identifier tous les deux.
+Imaginons que vous cherchiez à identifier les utilisateurs pour l'attribut `@session.ip` de vos événements RUM avec l'attribut `@network.client.ip` de vos logs. Ces attributs ne possèdent pas le même nom, car ils n'ont pas la même signification. Toutefois, pour les logs d'authentification, vous pouvez identifier les utilisateurs pour les deux les deux.
 
 Pour ce faire, injectez l'attribut `@session.ip` dans un filtré basé sur `@network.client.ip`, puis créez le filtre `@network.client.ip:{{@session.ip.value}}` approprié.
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Résultat de la vue enregistrée des logs" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_query.png" alt="Exemple de requête de recherche pour les vues enregistrées" style="width:70%;">}}
 
 Si vous utilisez un widget de dashboard RUM qui présente des informations sur l'IP des sessions pour certains pays, utilisez la configuration suivante pour vos liens.
 
-{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Résultat de la vue enregistrée des logs" style="width:70%;">}}
+{{< img src="dashboards/guide/context_links/logs-saved-view_link.png" alt="Exemple de configuration d'URL pour les vues enregistrées" style="width:70%;">}}
 
 #### Résultat
 
@@ -223,6 +232,29 @@ Si l'équipe responsable des API Gateways modifie la vue enregistrée afin de t
 
 Le remappage de l'adresse IP crée un lien de contexte qui permet d'associer vos événements RUM aux logs correspondants.
 
+### Configurer plusieurs variables
+
+L'exemple suivant explique comment configurer plusieurs variables et conditions dans votre requête de lien contextuel.
+
+#### Contexte
+
+Ajoutez des liens contextuels pour investiguer des logs ou des conditions spécifiques.
+- Vous avez plusieurs valeurs de tag avec le même contexte (par exemple, `env:production OR env:prod`).
+- Vous souhaitez filtrer les logs selon plusieurs conditions (par exemple, `env:prod AND service:backend`)
+
+#### Approche
+
+Après avoir sélectionné les template variables que vous souhaitez dépanner, la configuration du lien contextuel prend ces template variables et les insère dans la requête. **Remarque** : la syntaxe et l'encadrement par des parenthèses impactent la requête.
+
+Par exemple, si vous souhaitez configurer un lien contextuel avec `service:backend` AND (`env:production` OR `env:prod`), utilisez la configuration suivante :
+
+```
+service:backend (env:{{$env.value}})
+```
+
+#### Résultat
+
+Les parenthèses traduisent le `(env:{{$env.value}})` en `(env:*)`, ce qui vous permet d'entrer plusieurs variables dans votre requête de liens contextuels.
 
 ## Pour aller plus loin
 
@@ -231,7 +263,7 @@ Le remappage de l'adresse IP crée un lien de contexte qui permet d'associer vos
 
 [1]: /fr/monitors/notify/
 [2]: /fr/notebooks/
-[3]: /fr/dashboards/#permissions
+[3]: /fr/dashboards/configure/#permissions
 [4]: https://app.datadoghq.com/apm/traces/
 [5]: https://app.datadoghq.com/logs
 [6]: https://app.datadoghq.com/rum/explorer/
@@ -242,11 +274,11 @@ Le remappage de l'adresse IP crée un lien de contexte qui permet d'associer vos
 [11]: /fr/infrastructure/process/?tab=linuxwindows
 [12]: /fr/tracing/trace_explorer/?tab=listview
 [13]: /fr/real_user_monitoring/explorer/
-[14]: /fr/tracing/profiler/search_profiles/
+[14]: /fr/profiler/profile_visualizations/
 [15]: /fr/logs/explorer/
 [16]: /fr/dashboards/widgets/
 [17]: /fr/real_user_monitoring/
-[18]: /fr/security_platform/cloud_siem/
+[18]: /fr/security/cloud_siem/
 [19]: /fr/integrations/amazon_ec2/
 [20]: https://aws.amazon.com/console/
 [21]: /fr/logs/

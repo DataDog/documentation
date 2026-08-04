@@ -3,6 +3,12 @@ title: Network Path
 description: Investigate network traffic paths
 is_beta: true
 further_reading:
+- link: "network_monitoring/network_path/glossary"
+  tag: "Documentation"
+  text: "Network Path terms and concepts"
+- link: "/monitors/types/network_path/"
+  tag: "Documentation"
+  text: Network Path Monitor
 - link: "https://www.datadoghq.com/blog/datadog-network-path-monitoring/"
   tag: "Blog"
   text: "Get end-to-end network visibility with Datadog Network Path"
@@ -15,8 +21,7 @@ further_reading:
 
 Network Path illustrates the route that network traffic follows from its origin to its destination. This provides network administrators with the capability to precisely identify the source of network problems, whether they're internal or from an Internet Service Provider (ISP), or due to other issues such as misrouting. Each row signifies a path from a source to its destination, as depicted in the `source` and `destination` facet panel.
 
-
-{{< img src="network_performance_monitoring/network_path/network_path_default_view_4.png" alt="The Network Path default view, showing the path from source to destination, with the legend expanded" >}}
+{{< img src="network_performance_monitoring/network_path/network_path_landing_page.png" alt="Network Path explorer showing a list of paths with source, destination, tags, protocol, port, average reachability, and average RTT columns" >}}
 
 ## How it works
 
@@ -26,7 +31,15 @@ The following diagram depicts the typical flow of a network path from a source (
 
 {{< img src="network_performance_monitoring/network_path/network_path_diagram.png" alt="Diagram of how Network path works" >}}
 
-**Note**: By default, Datadog executes a `traceroute` every five minutes.
+## Setup methods
+
+Network Path supports multiple Agent-based collection methods. You can use one method on its own or combine multiple methods:
+
+- **[Scheduled tests][6]**: Monitor specific network paths by defining source-destination pairs in the Agent configuration file. Use scheduled tests to continuously monitor a known set of endpoints, such as critical APIs or partner services.
+- **[Dynamic tests][7]**: Automatically discover and monitor network paths based on actual network traffic observed by [Cloud Network Monitoring][8]. Use dynamic tests for broad visibility without manually listing every destination.
+- **[Dynamic Tests for NetFlow][10]**: Automatically run Network Path tests from the Agent host to destination IPs observed in [NetFlow Monitoring][11]. Use Dynamic Tests for NetFlow to add hop-by-hop route visibility to NetFlow traffic without manually configuring individual destinations.
+
+To create Network Path tests in Synthetic Monitoring instead, see [Network Path Testing in Synthetic Monitoring][9].
 
 ## Next steps
 
@@ -46,3 +59,9 @@ Use the following views and tools to set up Network Path and investigate network
 [3]: /network_monitoring/network_path/path_view
 [4]: /network_monitoring/network_path/setup
 [5]: /network_monitoring/network_path/guide/traceroute_variants
+[6]: /network_monitoring/network_path/setup/#scheduled-tests
+[7]: /network_monitoring/network_path/setup/#dynamic-tests
+[8]: /network_monitoring/cloud_network_monitoring/
+[9]: /synthetics/network_path_tests/
+[10]: /network_monitoring/network_path/setup/#dynamic-tests-for-netflow-experimental
+[11]: /network_monitoring/netflow/

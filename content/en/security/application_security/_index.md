@@ -10,6 +10,9 @@ aliases:
   - /security/application_security/threats
   - /security/application_security/setup/standalone
 further_reading:
+- link: "https://www.datadoghq.com/blog/secure-api-with-datadog"
+  tag: "Blog"
+  text: "From discovery to defense: Securing APIs with Datadog App and API Protection"
 - link: "/security/application_security/how-it-works/"
   tag: "Documentation"
   text: "How App and API Protection Works"
@@ -31,9 +34,29 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/mitigate-account-takeovers/"
   tag: "Blog"
   text: "Mitigate account takeovers with Datadog App and API Protection"
+- link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
+  tag: "Learning Center"
+  text: "Block Application Attacks with Application & API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
+site_support_id: application_security_override
+cascade:
+    site_support_id: application_security_override
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
+{{% site-region region="us,us3,us5,eu,ap1,ap2,uk1" %}}
+
+<div class="alert alert-info">
+AI Guard is in Preview. Get real-time security guardrails for your AI apps and agents. AI Guard helps secure your AI apps and agents in real time against prompt injection, jailbreaking, tool misuse, and sensitive data exfiltration attacks. Fill out this <a href="https://www.datadoghq.com/product-preview/ai-security/">form</a> to request access.
+</div>
+
+{{% /site-region %}}
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
@@ -43,7 +66,6 @@ Whether you're defending public-facing APIs, internal services, or user-facing a
 
 <div class="alert alert-info">Formerly known as Application Security Monitoring (ASM), AAP now goes beyond runtime threat detection to include API discovery, posture management, and protection capabilities.</div>
 
-
 ## Key capabilities
 
 ### API discovery and posture management
@@ -52,6 +74,7 @@ Whether you're defending public-facing APIs, internal services, or user-facing a
 * Identify unprotected, undocumented, or overly permissive endpoints.  
 * Get detailed, contextual findings tied to specific endpoints, misconfigurations, and observed behavior.  
 * Evaluate API configurations against posture rules based on security best practices and compliance frameworks (e.g., OWASP API Top 10).
+* Actively verify endpoint reachability and authentication with [Endpoint Scanning][17].
 
 ### Runtime threat detection and protection
 
@@ -72,7 +95,7 @@ If you're curious how App and API Protection is structured and how it uses traci
 
 ## Configure your environment
 
-Powered by provided [out-of-the-box rules][4], AAP detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, setup only requires setting one environment variable to get started.
+Powered by provided [out-of-the-box rules][4], AAP detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, [setup][16] only requires setting one environment variable to get started.
 
 To start configuring your environment to detect and protect threats with AAP, follow the enabling documentation for each product. Once AAP is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
 
@@ -123,4 +146,5 @@ For information on disabling AAP or its features, see the following:
 [13]: /security/application_security/exploit-prevention/#library-compatibility
 [14]: /security/application_security/exploit-prevention/
 [15]: /security/application_security/waf-integration/
-
+[16]: /security/application_security/setup/
+[17]: /security/application_security/api_posture/endpoint_scanning/

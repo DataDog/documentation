@@ -1,7 +1,11 @@
 ---
 title: Bring Your Own Threat Intelligence
 disable_toc: false
+site_support_id: byoti
 further_reading:
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "logs/processing/pipelines"
   tag: "Documentation"
   text: "Log processing pipelines"
@@ -21,7 +25,7 @@ Threat intelligence is supported in the CSV format and requires the following co
 | additional_data  | json      | Additional data to enrich the trace. | false | `{"ref":"hxxp://example.org"}`
 | category         | text  | The threat intel [category][7]. This is used by some out of the box detection rules. | true | `residential_proxy` |
 | intention        | text | The threat intel [intent][8]. This is used by some out of the box detection rules.| true | malicious | |
-| source           | text  | The name of the source and the link to its site, such as your team and your teams wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
+| source           | json  | Fields representing where the threat intelligence originates, such as your team and your team's wiki. | true| `{"name":"internal_security_team", "url":"https://teamwiki.example.org"}` | | 
 
 
 
@@ -54,7 +58,7 @@ Datadog supports creating reference tables through a manual upload, or by period
 
 On a new [references table][4] page:
 
-1. Name the table. The table name is referenced in AAP's **Threat Intel** config.
+1. Name the table. The table name is referenced in AAP's {{< ui >}}Threat Intel{{< /ui >}} config.
 2. Upload a local CSV or import a CSV from a cloud storage bucket. The file is normalized and validated.
 3. Preview the table schema and choose the IP address as the Primary Key.
    
@@ -75,16 +79,16 @@ See the related reference table documentation for:
 
 ### Troubleshooting cloud imports
 
-If the reference tables are not refreshing, select the **View Change Events** link from the settings on the reference table detail page. 
+If the reference tables are not refreshing, select the {{< ui >}}View Change Events{{< /ui >}} link from the settings on the reference table detail page. 
 
-**View Change Events** opens a page in **Event Management** showing potential error events for the ingestion. You can also filter in **Event Management** using the reference table name.
+{{< ui >}}View Change Events{{< /ui >}} opens a page in {{< ui >}}Event Management{{< /ui >}} showing potential error events for the ingestion. You can also filter in {{< ui >}}Event Management{{< /ui >}} using the reference table name.
 
-<div class="alert alert-info">In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intellegence.</div>
+<div class="alert alert-info">In Datadog Event Management, it can look like the data is fetched from the cloud, but it can take a few more minutes to propagate those changes to Threat Intelligence.</div>
 
 Other useful cloud import details to remember:
 
 - The expected latency before updated enrichments are available when a source is uploaded or updated is 10 to 30 minutes.
-- How to know when the updates are applied: The changes are visible in the reference table or in the spans. Select the **View Change Events** link from settings on the reference table detail page to see the related events.
+- How to know when the updates are applied: The changes are visible in the reference table or in the spans. Select the {{< ui >}}View Change Events{{< /ui >}} link from settings on the reference table detail page to see the related events.
 - The update replaces the *entire table* with the new data. 
 - In case of a duplicated primary key, the rows with the duplicated key are not written, and an error is shown in the reference table detail page.
 
@@ -107,10 +111,10 @@ Examples:
 To join a trace with a Reference Table:
 
 1. Upload the Reference Table you want to use as described in [Uploading and enabling your own threat intel](#uploading-and-enabling-your-own-threat-intel).
-2. To join a trace with a Reference Table, in [Traces][9], select **Add**, and then select **Join with Reference Table**.
-3. In **Inner join with reference table**, select the Reference Table to use.
-4. In **where field**, select the Datadog traces field to use for the join.
-5. In **column**, select the Reference Table field to use for the join.
+2. To join a trace with a Reference Table, in [Traces][9], select {{< ui >}}Add{{< /ui >}}, and then select {{< ui >}}Join with Reference Table{{< /ui >}}.
+3. In {{< ui >}}Inner join with reference table{{< /ui >}}, select the Reference Table to use.
+4. In {{< ui >}}where field{{< /ui >}}, select the Datadog traces field to use for the join.
+5. In {{< ui >}}column{{< /ui >}}, select the Reference Table field to use for the join.
 
 <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_ref_join.png" alt="Your image description" style="width:100%;" >}} -->
 

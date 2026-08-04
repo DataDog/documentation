@@ -4,9 +4,21 @@ aliases:
   - /infrastructure/cloud_cost_management
   - /integrations/cloudability
 further_reading:
+  - link: "/monitors/types/cloud_cost/"
+    tag: "Documentation"
+    text: "Create a Cloud Cost monitor"
+  - link: "/cloud_cost_management/tags/"
+    tag: "Documentation"
+    text: "Learn about Tags in Cloud Cost Management"
+  - link: "/cloud_cost_management/cloud_cost_skill/"
+    tag: "Documentation"
+    text: "Use Cloud Cost skill in Bits Chat"
   - link: "https://www.datadoghq.com/blog/control-your-cloud-spend-with-datadog-cloud-cost-management/"
     tag: "Blog"
     text: "Gain visibility and control of your cloud spend with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/manage-ai-cost-and-performance-with-datadog/"
+    tag: "Blog"
+    text: "Driving AI ROI: How Datadog connects cost, performance, and infrastructure so you can scale responsibly"
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-container-support/"
     tag: "Blog"
     text: "Understand your Kubernetes and ECS spend with Datadog Cloud Cost Management"
@@ -16,12 +28,6 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/total-cost-of-service-ownership-ccm/"
     tag: "Blog"
     text: "Quickly and comprehensively analyze the cloud and SaaS costs behind your services"
-  - link: "/monitors/types/cloud_cost/"
-    tag: "Documentation"
-    text: "Create a Cloud Cost monitor"
-  - link: "/cloud_cost_management/tags/"
-    tag: "Documentation"
-    text: "Learn about Tags in Cloud Cost Management"
   - link: "https://www.datadoghq.com/blog/cloud-costs-study-learnings/"
     tag: "Blog"
     text: "Key learnings from the State of Cloud Costs study"
@@ -37,6 +43,12 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/cloud-cost-management-oci/"
     tag: "Blog"
     text: "Manage and optimize your OCI costs with Datadog Cloud Cost Management"
+  - link: "https://www.datadoghq.com/blog/cambia-health-cost-optimization"
+    tag: "Blog"
+    text: "How Cambia Health Solutions saved $30,000 monthly with Cloud Cost Management and the Datadog Resource Catalog"
+  - link: "https://www.datadoghq.com/blog/flexible-sheets-cloud-cost-management/"
+    tag: "Blog"
+    text: "Analyze cloud costs with flexible spreadsheets in Datadog Sheets"
 cascade:
     algolia:
       subcategory: 'Cloud Cost Management'
@@ -63,7 +75,7 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
   {{< nextlink href="/cloud_cost_management/setup/azure">}}<u>Azure</u>: Configure Cloud Cost Management for your Azure bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/google_cloud">}}<u>Google Cloud</u>: Configure Cloud Cost Management for your Google Cloud bill. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/oracle">}}<u>Oracle</u>: Configure Cloud Cost Management for your Oracle bill. {{< /nextlink >}}
-  {{< nextlink href="/cloud_cost_management/setup/saas_costs">}}<u>SaaS Cost Integrations</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
+  {{< nextlink href="/cloud_cost_management/setup/saas_costs">}}<u>SaaS and AI Costs</u>: Send cost data from a supported SaaS cost provider to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/setup/custom">}}<u>Custom Costs</u>: Upload any cost data source to Datadog. {{< /nextlink >}}
   {{< nextlink href="/cloud_cost_management/datadog_costs">}}<u>Datadog Costs</u>: Visualize daily Datadog spending and utilization metrics. {{< /nextlink >}}
  {{< /whatsnext >}}
@@ -72,7 +84,7 @@ Datadog ingests your cloud cost data and transforms it into metrics you can use 
 
 Visualize infrastructure spend alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities.
 
-When creating a dashboard, select **Cloud Cost** as the data source for your search query.
+When creating a dashboard, select {{< ui >}}Cloud Cost{{< /ui >}} as the data source for your search query.
 
 {{< img src="cloud_cost/cloud_cost_data_source-1.png" alt="Cloud Cost available as a data source in dashboard widget creation" style="width:80%;" >}}
 
@@ -82,7 +94,7 @@ Optionally, you can programmatically export a timeseries graph of your cloud cos
 
 Visualize daily Datadog spending alongside related utilization metrics with a retention period of 15 months to spot potential inefficiencies and savings opportunities. Learn more about [Datadog Costs][8].
 
-When creating a dashboard, select **Cloud Cost** as the data source, then choose **Datadog** from the available cost types.
+When creating a dashboard, select {{< ui >}}Cloud Cost{{< /ui >}} as the data source, then choose {{< ui >}}Datadog{{< /ui >}} from the available cost types.
 
 {{< img src="cloud_cost/datadog_costs/dashboard-updated.png" alt="Datadog costs as an option for the Cloud Cost data source in a dashboard" style="width:80%;" >}}
 
@@ -96,7 +108,7 @@ You can create tag rules to correct missing or incorrect tags, and add inferred 
 
 ## Create a cost monitor
 
-Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose **Cost Changes** or **Cost Threshold** to monitor your cloud expenses.
+Proactively manage and optimize your cloud spending by creating a [Cloud Cost Monitor][3]. You can choose {{< ui >}}Cost Changes{{< /ui >}} or {{< ui >}}Cost Threshold{{< /ui >}} to monitor your cloud expenses.
 
 {{< img src="cloud_cost/monitor.png" alt="Create a Cloud Cost monitor that alerts on cost changes" style="width:100%;" >}}
 
@@ -105,32 +117,31 @@ Proactively manage and optimize your cloud spending by creating a [Cloud Cost Mo
 Use [Container Cost Allocation metrics][4] to discover costs associated with clusters and workloads across Kubernetes, Amazon ECS, Azure, and Google Cloud. You can gain visibility into pod-level costs, identify idle resource costs, and analyze costs by resource type.
 
 ## Permissions
-Two permissions are available:
-1. Cloud Cost Management Read (`cloud_cost_management_read`)
-2. Cloud Cost Management Write (`cloud_cost_management_write`)
 
-The table below describes the impact of these permissions in both Cloud Cost Management and related pages.
+Cloud Cost Management uses the following permissions to control access to cost data and most CCM configurations:
+- `cloud_cost_management_read`
+- `cloud_cost_management_write`
 
-| Page/Functionality                            | Cloud Cost Management Read Permission       | Cloud Cost Management Write Permission            |
-|-----------------------------------------------|---------------------------------------------|---------------------------------------------------|
-| CCM Summary Page                              | Permission Required                         | N/A                                               |
-| CCM Containers Page                           | Permission Required                         | N/A                                               |
-| CCM Recommendations Page                      | Permission Required                         | N/A                                               |
-| CCM Explorer Page                             | Permission Required                         | N/A                                               |
-| CCM Plan Page                                 | Permission Required                         | Permission Required to modify or create Budgets   |
-| CCM Settings Page - Custom Costs              | Permission Required                         | Permission Required to upload custom costs        |
-| CCM Settings Page - Tag Pipelines             | Permission Required                         | Permission Required to create tag pipelines       |
-| CCM Settings Page - SaaS Integrations         | Permission Required                         | Permission Required to enable integration for CCM |
-| CCM Settings Page - Accounts                  | Permission Required                         | Permission Required to modify or create accounts  |
-| CCM Settings Page - Configure Recommendations | Permission Required                         | Permission Required to customize recommendations  |
-| Dashboards/Notebooks (external)               | Permission Required to create and view data | N/A                                               |
-| Monitors (external)                           | Permission Required to create CCM monitors  | N/A                                               |
-| Service Catalog (external)                    | Permission Required to view cost data       | N/A                                               |
-| Resource Catalog (external)                   | Permission Required to view cost data       | N/A                                               |
-| API Queries for Cost Data                     | Permission Required                         | N/A                                               |
+For a detailed breakdown of requirements by page, see [Permissions][9].
 
-### Data access control preview
-More granular tag-level restrictions are available as part of the [Data Access Control Preview][6]. To request preview access, fill out [this form][7].
+## Review data history
+
+{{< img src="cloud_cost/ccm-data-history.png" alt="View your Cloud Cost data history in Cloud Cost settings." style="width:100%;" >}}
+
+Monitor the freshness and processing status of your cloud cost data on the {{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Settings{{< /ui >}} > {{< ui >}}Data History{{< /ui >}} page.
+
+- {{< ui >}}Last Bill Received{{< /ui >}}: When your cloud or SaaS provider generated the billing data visible in CCM.
+- {{< ui >}}Last Processed{{< /ui >}}: When Datadog last processed billing data from your cloud provider, including:
+  - Tag pipeline rules (retroactively processes up to 3 months of historical data by default)
+  - Cost allocation rules (retroactively processes up to 1 month of historical data by default)
+
+Use this page to troubleshoot data delays or confirm that recent tag pipelines and cost allocation changes have taken effect.
+
+## Use AI for cost analysis
+
+Use the [Cloud Cost Skill in Bits Chat][10] to investigate cost changes, identify likely owners, compare spend against budgets, correlate cost with observability metrics, and create handoff notebooks for engineering teams.
+
+{{< img src="cloud_cost/cc_skill_cost_summary.png" alt="Bits Chat's investigation summary showing an initial analysis." style="width:60%;" >}}
 
 ## Further reading
 
@@ -144,3 +155,5 @@ More granular tag-level restrictions are available as part of the [Data Access C
 [6]: /account_management/rbac/data_access/
 [7]: https://www.datadoghq.com/product-preview/data-access-control/
 [8]: /cloud_cost_management/datadog_costs
+[9]: /cloud_cost_management/setup/permissions
+[10]: /cloud_cost_management/cloud_cost_skill/

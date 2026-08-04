@@ -4,6 +4,8 @@ algolia:
   - visibilidad de pipelines
   - usm
   - pipeline ci
+description: Monitoriza la salud y el rendimiento de los pipelines CI con trazas (traces),
+  métricas y análisis para optimizar la velocidad de desarrollo y reducir costes.
 further_reading:
 - link: https://www.datadoghq.com/blog/monitor-ci-pipelines/
   tag: Blog
@@ -25,7 +27,7 @@ title: Empezando con CI Visibility
 
 ## Información general
 
-CI Visibility, o CI Pipeline Visibility, te permite monitorizar el estado de tus pipelines CI y visualizar el rendimiento de las ejecuciones de tus pipelines en forma de trazas (traces), donde los tramos (spans) representan los diferentes niveles del pipeline. 
+CI Visibility, o CI Pipeline Visibility, te permite monitorizar el estado de tus pipelines CI y visualizar el rendimiento de las ejecuciones de tus pipelines en forma de trazas, donde los tramos (spans) representan los diferentes niveles del pipeline. 
 
 {{< img src="/getting_started/ci_visibility/pipelines_list.png" alt="Vista de lista de tus pipelines CI en Datadog CI Visibility" style="width:100%" >}}
 
@@ -43,7 +45,18 @@ CI Visibility realiza un seguimiento del rendimiento y de los resultados de tus 
 
 Para empezar a enviar métricas de pipelines, consulte la documentación de uno de los siguientes proveedores de CI compatibles con Datadog a continuación.
 
-{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="github actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="gitlab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -141,8 +154,8 @@ Para configurar un monitor que envía alertas sobre tu pipeline CI cuando la dur
 1. En la sección `Evaluate the query over the`, selecciona **last 1 day** (último día).
 1. Configura las condiciones de activación de las alertas cuando el valor evaluado esté **por encima** del umbral y especifica valores para los umbrales de alerta o advertencia, como `Alert threshold > 300000000000`.
 1. En la sección `Configure notifications and automations`, configura los parámetros de notificación de tu monitor.
-1. Define permisos para el monitor.
-1. Haz clic en **Crear**.
+1. Establece permisos para el monitor.
+1. Haz clic en **Create** (Crear).
 
 ## Referencias adicionales
 

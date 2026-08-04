@@ -188,7 +188,7 @@ Find out how to monitor individual client and aggregate usage of the Datadog pla
 [43]: /api/latest/embeddable-graphs/
 [44]: /dashboards/guide/embeddable-graphs-with-template-variables/
 [45]: https://www.datadoghq.com/blog/establishing-service-level-objectives/
-[46]: /service_management/service_level_objectives/guide/slo-checklist
+[46]: /service_level_objectives/guide/slo-checklist
 [47]: https://www.datadoghq.com/blog/define-and-manage-slos/
 [48]: https://www.datadoghq.com/blog/slo-monitoring-tracking/
 [49]: /api/latest/service-level-objectives/

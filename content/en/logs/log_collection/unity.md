@@ -114,5 +114,4 @@ logger.RemoveAttribute("user-status")
 [2]: /real_user_monitoring/application_monitoring/unity/setup
 [3]: /getting_started/tagging/
 [4]: https://www.newtonsoft.com/json/help/html/m_newtonsoft_json_jsonconvert_serializeobject.htm
-[5]: https://api.flutter.dev/flutter/services/StandardMessageCodec-class.html
 [6]: https://pub.dev/packages/logger

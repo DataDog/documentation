@@ -1,4 +1,5 @@
 {{ $dot := . }}
+{{ $spec := partial "api/load-specs.html" (dict "version" "v1") }}
 <style>
   .list-group-item.disabled, .list-group-item:disabled {
     background:#efefef;
@@ -6,7 +7,7 @@
 </style>
 <div class="whatsnext">
     <ul class="list-group">
-        {{ range $dot.Site.Data.api.v1.full_spec_deref.components.schemas.WidgetDefinition.oneOf }}
+        {{ range $spec.components.schemas.WidgetDefinition.oneOf }}
           {{ $s := .properties.type.default }}
           {{ $pageExists := false }}
           {{ $filename := (lower (replace (humanize $s) " " "_" )) }}

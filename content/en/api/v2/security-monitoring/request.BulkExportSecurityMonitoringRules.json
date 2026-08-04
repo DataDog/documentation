@@ -1,0 +1,10 @@
+{
+  "data": {
+    "attributes": {
+      "ruleIds": [
+        "string"
+      ]
+    },
+    "type": "security_monitoring_rules_bulk_export"
+  }
+}

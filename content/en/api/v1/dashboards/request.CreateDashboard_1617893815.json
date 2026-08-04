@@ -1,0 +1,55 @@
+{
+  "title": "Example-Dashboard",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "time": {},
+        "type": "distribution",
+        "requests": [
+          {
+            "response_format": "scalar",
+            "queries": [
+              {
+                "data_source": "logs",
+                "name": "query1",
+                "search": {
+                  "query": ""
+                },
+                "indexes": [
+                  "*"
+                ],
+                "compute": {
+                  "aggregation": "avg",
+                  "metric": "@duration"
+                },
+                "group_by": [
+                  {
+                    "facet": "service",
+                    "limit": 1000,
+                    "sort": {
+                      "aggregation": "count",
+                      "order": "desc"
+                    }
+                  }
+                ],
+                "storage": "hot"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}

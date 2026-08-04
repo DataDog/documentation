@@ -16,10 +16,10 @@ further_reading:
 
 ## Setup
 
-1. **Install the Datadog .NET tracer** in your Dockerfile.
+1. **Install the Datadog .NET SDK** in your Dockerfile.
 
    {{< tabs >}}
-   {{% tab "Linux/AMD64" %}}
+   {{% tab "Standard Linux (glibc)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 ARG TRACER_VERSION
 RUN curl -L -s "https://github.com/DataDog/dd-trace-dotnet/releases/download/v${TRACER_VERSION}/datadog-dotnet-apm_${TRACER_VERSION}_amd64.deb" --output datadog-dotnet-apm.deb && \
@@ -27,7 +27,7 @@ RUN curl -L -s "https://github.com/DataDog/dd-trace-dotnet/releases/download/v${
 {{< /code-block >}}
    {{% /tab %}}
 
-   {{% tab "Alpine" %}}
+   {{% tab "Alpine (musl)" %}}
 {{< code-block lang="dockerfile" filename="Dockerfile" disable_copy="false" collapsible="true" >}}
 # For alpine use datadog-dotnet-apm-2.57.0-musl.tar.gz
 ARG TRACER_VERSION
@@ -43,6 +43,8 @@ RUN mkdir -p /dd_tracer/dotnet/ && tar -xzvf /tmp/datadog-dotnet-apm.tar.gz -C /
    For more information, see [Tracing .NET applications][2].
 
 2. **Install serverless-init as a sidecar**.
+
+   {{% serverless-init-install mode="sidecar" %}}
 
    {{< tabs >}}
 
@@ -96,11 +98,13 @@ logger.LogInformation("Hello World!");
 
    To send custom metrics, [install the DogStatsD client][4] and [view code examples][5]. In serverless, only the *distribution* metric type is supported.
 
-{{% gcr-env-vars-sidecar language="csharp" %}}
+{{% serverless-init-env-vars-sidecar language="csharp" defaultSource="cloudrun" %}}
+
+{{% svl-tracing-env %}}
 
 ## Troubleshooting
 
-{{% gcr-troubleshooting sidecar="true" %}}
+{{% serverless-init-troubleshooting productNames="Cloud Run services" %}}
 
 ## Further reading
 
@@ -109,5 +113,5 @@ logger.LogInformation("Hello World!");
 [1]: https://github.com/DataDog/dd-trace-dotnet/releases/
 [2]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core/?tab=linux
 [3]: /tracing/other_telemetry/connect_logs_and_traces/dotnet/
-[4]: /developers/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
-[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples
+[4]: /extend/dogstatsd/?tab=dotnet#install-the-dogstatsd-client
+[5]: /metrics/custom_metrics/dogstatsd_metrics_submission/?tab=dotnet#code-examples-5

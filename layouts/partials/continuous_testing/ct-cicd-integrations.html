@@ -1,0 +1,59 @@
+{{ $root := . }}
+{{ $providers := slice
+    (dict "href" "/continuous_testing/cicd_integrations/azure_devops_extension/" "src" "integrations_logos/azuredevops_small.svg" "alt" "azure devops extension")
+    (dict "href" "/continuous_testing/cicd_integrations/circleci_orb/" "src" "integrations_logos/circleci.png" "alt" "circleci orb")
+    (dict "href" "/continuous_testing/cicd_integrations/github_actions/" "src" "integrations_logos/github_small.svg" "alt" "github actions")
+    (dict "href" "/continuous_testing/cicd_integrations/gitlab/" "src" "integrations_logos/gitlab_small.svg" "alt" "gitlab")
+    (dict "href" "/continuous_testing/cicd_integrations/jenkins/" "src" "integrations_logos/jenkins.png" "alt" "jenkins")
+    (dict "href" "/continuous_testing/cicd_integrations/bitrise_upload/" "src" "integrations_logos/bitrise_upload.png" "alt" "upload applications with bitrise")
+    (dict "href" "/continuous_testing/cicd_integrations/bitrise_run/" "src" "integrations_logos/bitrise_run.png" "alt" "run tests with bitrise")
+}}
+
+<div class="cd-and-ci-visibility-providers">
+  <div class="container cards-dd">
+    <!-- First row with 3 tiles -->
+    <div class="row g-2 g-xl-3 justify-content-center">
+      {{ range $index, $provider := $providers }}
+        {{ if lt $index 3 }}
+          <div class="col-md-4">
+            <a class="card h-100" href="{{ $provider.href }}">
+              <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
+                {{ partial "img.html" (dict "root" $root "src" $provider.src "class" "img-fluid" "alt" $provider.alt "width" "150") }}
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    <br>
+    <!-- Second row with 3 tiles -->
+    <div class="row g-2 g-xl-3 justify-content-center">
+      {{ range $index, $provider := $providers }}
+        {{ if and (ge $index 3) (lt $index 6) }}
+          <div class="col-md-4">
+            <a class="card h-100" href="{{ $provider.href }}">
+              <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
+                {{ partial "img.html" (dict "root" $root "src" $provider.src "class" "img-fluid" "alt" $provider.alt "width" "150") }}
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+    <br>
+    <!-- Third row with 1 tile -->
+    <div class="row g-2 g-xl-3 justify-content-center">
+      {{ range $index, $provider := $providers }}
+        {{ if eq $index 6 }}
+          <div class="col-md-4">
+            <a class="card h-100" href="{{ $provider.href }}">
+              <div class="card-body text-center py-2 px-1 d-flex align-items-center justify-content-center">
+                {{ partial "img.html" (dict "root" $root "src" $provider.src "class" "img-fluid" "alt" $provider.alt "width" "150") }}
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>

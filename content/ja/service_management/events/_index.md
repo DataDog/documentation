@@ -7,7 +7,7 @@ further_reading:
 - link: '#post-an-event'
   tag: Documentation
   text: Datadog イベント API
-- link: /service_management/events/guides/recommended_event_tags/
+- link: /events/guides/recommended_event_tags/
   tag: Documentation
   text: イベントへのタグ付けのベストプラクティス
 - link: https://www.datadoghq.com/blog/identify-sensitive-data-leakage-in-apm-rum-with-sensitive-data-scanner/
@@ -23,7 +23,7 @@ is_beta: true
 title: イベント管理
 ---
 
-{{< img src="service_management/events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
+{{< img src="events/correlation/event_management.png" alt="what is event management" style="width:100%;" >}}
 
 ## 概要
 
@@ -34,11 +34,11 @@ title: イベント管理
 ## コンポーネント
 
 {{< whatsnext desc="Event Management features:">}}
-    {{< nextlink href="/service_management/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
-     {{< nextlink href="/service_management/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
-    {{< nextlink href="/service_management/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
+    {{< nextlink href="/events/ingest/" >}}<u>Ingest events</u> - Learn how to send events to Datadog{{< /nextlink >}}
+     {{< nextlink href="/events/pipelines_and_processors/">}}<u>Pipelines and Processors</u> - Enrich and Normalize your events{{< /nextlink >}}
+    {{< nextlink href="/events/explorer/" >}}<u>Events Explorer</u> - View, search and send notifications from events coming into Datadog{{< /nextlink >}}
+    {{< nextlink href="/events/guides/usage/" >}}<u>Using events</u> - Analyze, investigate, and monitor events {{< /nextlink >}}
+    {{< nextlink href="/events/correlation/" >}}<u>Correlation</u> - reduce alert fatigure and the number of tickets/notifictions you recieve {{< /nextlink >}}
 
 {{< /whatsnext >}}
 

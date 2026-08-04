@@ -5,6 +5,9 @@ further_reading:
   - link: "/change_tracking/"
     tag: "Documentation"
     text: "Change Tracking"
+  - link: "/feature_flags/"
+    tag: "Documentation"
+    text: "Datadog Feature Flags"
   - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
     tag: "Documentation"
     text: "LaunchDarkly"
@@ -23,22 +26,45 @@ With feature flag tracking, you can:
 
 ## Track feature flags
 
-Datadog supports tracking LaunchDarkly flags using the [LaunchDarkly integration][1] or tracking feature flags from other feature flag providers using the [Events API][3].
+Datadog supports tracking [Datadog Feature Flags][8] automatically, [LaunchDarkly][1] flags using the LaunchDarkly integration, or flags from other providers using the [Events API][3].
+
+### Datadog Feature Flags
+
+Change tracking for [Datadog Feature Flags][8] is enabled automatically. No additional setup is required. When you update a flag's targeting, rollout, or status in an environment, Datadog emits a change tracking event that appears in your services' Change Tracking timelines.
+
+Each event includes:
+
+- The flag key and name
+- The environment where the change occurred (and whether it is a production environment)
+- The user who made the change
+- The previous and new values, including targeting rules and variants
+- A link back to the feature flag in Datadog
+
+To associate a Datadog Feature Flag change with a service, [instrument your flag evaluation code][4] with the Datadog tracing library. Datadog uses the resulting APM traces to automatically detect which services evaluate the flag. See [Automatically detect affected services](#automatically-detect-affected-services) for details.
 
 ### LaunchDarkly flags
 
 To track LaunchDarkly feature flags in your services' Change Tracking timeline:
 
-1. Enable the [LaunchDarkly integration][1] in Datadog.
-1. Go to **Flags > `<your-feature-flag-name>` > Settings** in LaunchDarkly.
-1. In **Custom properties**, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
-1. Click **Save changes**.
+1. Enable the [Datadog integration][1] in LaunchDarkly.
+1. Go to {{< ui >}}Flags{{< /ui >}} > `<your-feature-flag-name>` in LaunchDarkly.
+1. In {{< ui >}}Datadog tags{{< /ui >}}, add a tag with key `service` and value `<your-service-name>`, matching your Datadog service name exactly.
+1. Click {{< ui >}}Save changes{{< /ui >}}.
 
-For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Software Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
+For example, to link a flag to the `payments_api` service used in the examples below, you would set the tag value to `payments_api`. After you submit the event, you can navigate to the [Catalog][7], select the `payments_api` service, and see the `fallback_payments_test` feature flag event in the Change Tracking timeline.
 
 ### Custom feature flags
 
 Send feature flag events from any provider using the [Events API][3]. Create a `change` category event and include a service tag to link the event to your service.
+
+#### Recommended tags
+
+When sending custom feature flag change events, include the following fields to enable accurate filtering and cross-product correlation within Datadog:
+
+- `impacted_resources` (with type `service`): Add the relevant service name to the `impacted_resources` array to associate the feature flag change with the affected service.
+- `env` tag: Specify the environment where the change occurred (for example, production, staging, or development).
+
+If these tags cannot be added at event creation time, see the next section for guidance on automatic enrichment.
 
 Example request:
 
@@ -101,13 +127,16 @@ Example request:
 
 ## Automatically detect affected services
 
-In addition to tracking when a feature flag's configuration changes using the LaunchDarkly integration or the Events API, you can also automatically identify every service that evaluates a flag. This auto-enrichment provides deeper context by using APM traces to show the real-time impact of a flag, which is especially useful when a single flag is used by multiple services.
+In addition to tracking feature flag configuration changes through the LaunchDarkly integration or the Events API, Datadog can automatically detect which services evaluate a flag by using APM traces or metrics. This provides real-time visibility into flag usage across your system, especially when the same flag is evaluated by multiple services.
 
-### Setup
+### Trace-based enrichment
+Trace-based enrichment uses APM traces to automatically associate feature flag changes with the relevant Datadog services. The following section details how to implement it in your codebase.
 
-To automatically detect services using a feature flag, instrument your feature flag evaluation code with the APM tracing library. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
+#### Setup
 
-1. [Instrument your feature flag evaluation code][4] using the Datadog tracing library.
+To automatically detect services using a feature flag, instrument your feature flag evaluation code with the Datadog SDK. This allows Datadog to automatically detect all services that evaluate a specific flag, even if they weren't originally tagged.
+
+1. [Instrument your feature flag evaluation code][4] using the Datadog SDK.
 1. Create a custom span with the operation name `experiments.IsEnabled` to track feature flag evaluations.
 3. Tag the span with `experiment_id:<flag-id>`, where `<flag-id>` matches the feature flag ID.
 
@@ -122,6 +151,30 @@ with tracer.trace("experiments.IsEnabled") as span:
     span.set_tag("experiment_value", flag_value) # adds the evaluated flag value as a span tag
 ```
 
+### Metrics-based enrichment
+
+Metric-based enrichment uses Datadog metrics to enrich your feature flag changes with service context. The following section explains how to implement it in your codebase.
+
+#### Setup
+
+Send the `dd.dynamic_config.is_experiment_enabled` metric with your experiment status.
+
+```python
+from datadog import initialize, statsd
+
+initialize(statsd_host='localhost', statsd_port=8125)
+
+# Any metric type is supported
+statsd.gauge(
+    'dd.dynamic_config.is_experiment_enabled',
+    1,  # 1 if enabled, 0 if disabled
+    tags=[
+        'experiment.id:fallback_payments_test',
+        'service:payments_api'
+    ]
+)
+```
+
 ## Remediate feature flag changes with Workflow Automation
 
 When you identify that a feature flag change caused an issue, you can immediately toggle its state without leaving Datadog. This feature uses [Workflow Automation][2] to toggle LaunchDarkly flags directly from Change Tracking timelines.
@@ -134,18 +187,18 @@ To set up feature flag toggles using Workflow Automation:
 
 1. Go to [**Actions > Action Catalog > Connections**][6].
 1. Click **New Connection**.
-1. Choose *LaunchDarkly*.
-1. Complete the required information, then click **Next, Confirm Access**.
+1. Choose {{< ui >}}LaunchDarkly{{< /ui >}}.
+1. Complete the required information, then click {{< ui >}}Next, Confirm Access{{< /ui >}}.
 1. Set access permissions for the connection.
-1. Click **Create**.
+1. Click {{< ui >}}Create{{< /ui >}}.
 
 ### Use feature flag toggles
 
 To toggle feature flags on or off from inside Datadog:
 
 1. Click a LaunchDarkly feature flag change in the Change Tracking timeline.
-1. Click the **Toggle Feature Flag** button.
-1. Click **Run Action** to run the workflow and toggle the feature flag on or off.
+1. Click the {{< ui >}}Toggle Feature Flag{{< /ui >}} button.
+1. Click {{< ui >}}Run Action{{< /ui >}} to run the workflow and toggle the feature flag on or off.
 
 {{< img src="/change_tracking/toggle.png" alt="The details panel for a LaunchDarkly feature flag event, showing the 'Toggle Feature Flag' button." style="width:90%;" >}}
 
@@ -160,3 +213,4 @@ To toggle feature flags on or off from inside Datadog:
 [5]: https://app.datadoghq.com/apm/settings
 [6]: https://app.datadoghq.com/actions/connections
 [7]: https://app.datadoghq.com/software
+[8]: /feature_flags/

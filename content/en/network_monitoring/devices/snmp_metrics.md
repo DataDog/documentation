@@ -193,6 +193,25 @@ network_devices:
 
 **Note**: Make sure you are on Agent 7.54+ for this syntax. For previous versions, see the [previous config_template.yaml][9]
 
+### Override interface speed
+
+By default, the SNMP check reports interface speed as detected from the device. If the physical port speed differs from the actual circuit bandwidth, for example, a 1 Gbps physical port provisioned for a 50 Mbps circuit, you can override the inbound and outbound speed for specific interfaces using `interface_configs`.
+
+Add `interface_configs` to your instance configuration in `snmp.d/conf.yaml`:
+
+```yaml
+instances:
+  - ip_address: '1.2.3.4'
+    community_string: 'sample-string'
+    interface_configs:
+      - match_field: name      # match by interface name or ifIndex
+        match_value: eth0      # case-sensitive
+        in_speed: 50000000     # inbound speed in bytes per second (50 Mbps)
+        out_speed: 50000000    # outbound speed in bytes per second (50 Mbps)
+```
+
+For all available `interface_configs` options, see the [sample snmp.d/conf.yaml][4].
+
 ## Validation
 
 [Run the Agent's status subcommand][10] and look for `snmp` under the Checks section.

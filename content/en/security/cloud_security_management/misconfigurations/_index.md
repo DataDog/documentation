@@ -13,7 +13,7 @@ Cloud Security Misconfigurations makes it easier to assess and visualize the cur
 
 ## Detect misconfigurations across your cloud resources
 
-Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#maintain-compliance-with-industry-frameworks-and-benchmarks). 
+Strengthen your security posture and achieve continuous compliance by detecting, prioritizing, and remediating misconfigurations across all your cloud resources using Datadog's [out-of-the-box compliance rules](#maintain-compliance-with-industry-frameworks-and-benchmarks).
 
 View a high-level overview of your security posture on the [Overview page][1]. Examine the details of misconfigurations and analyze historical configurations with the [Misconfigurations Findings page][2].
 
@@ -43,9 +43,14 @@ Use template variables and Markdown to [customize notification messages][9]. Edi
 
 ## Review and remediate misconfigurations
 
-Investigate details using the [Misconfigurations Findings page][10]. View detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
+Investigate details using the [Misconfigurations Findings page][10], where you can view detailed information about a resource, such as configuration, compliance rules applied to the resource, and tags that provide additional context about who owns the resource and its location within your environment. If a misconfiguration does not match your business use case or is an accepted risk, you can [mute the misconfiguration][13] up to an indefinite period of time.
 
-You can also [create a Jira issue][15] and assign it to a team, use Terraform remediation to generate a pull request in GitHub with code changes that fix the underlying misconfiguration, and leverage [Workflow Automation][14] to create automated workflows (with or without human involvement).
+To remediate a misconfiguration, you can:
+- [Create a ticket][15] and assign it to a team
+- Use [Workflow Automation][14] to create automated remediation workflows (with or without human involvement)
+- For supported Terraform resources:
+  - Locate the file and line the misconfiguration is in and identify the code owners
+  - Generate a pull request in GitHub with code changes that fix the underlying misconfiguration
 
 ## Get started
 
@@ -78,4 +83,4 @@ You can also [create a Jira issue][15] and assign it to a team, use Terraform re
 [12]: https://www.pcisecuritystandards.org/pci_security/maintaining_payment_security
 [13]: /security/cloud_security_management/mute_issues
 [14]: /security/cloud_security_management/review_remediate/workflows/
-[15]: /security/cloud_security_management/review_remediate/jira?tab=csmmisconfigurations
+[15]: /security/ticketing_integrations

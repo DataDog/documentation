@@ -1,4 +1,7 @@
 ---
+description: Comprende los gráficos de la página de estado del monitor, incluidos
+  los datos evaluados, los datos fuente y las transiciones para analizar el comportamiento
+  del monitor.
 further_reading:
 - link: monitors/configuration/?tab=thresholdalert
   tag: Documentación
@@ -66,7 +69,7 @@ Para filtrar la vista de un grupo individual, pasa el cursor del ratón sobre el
 
 Al investigar los cambios de estado anteriores, el punto de color junto al título del grupo indica el estado actual del grupo.
 
-### Seguimiento de cambios
+### Rastreo de cambios
 El gráfico de seguimiento de cambios te permite ver y analizar los cambios relacionados con tu servicio y tus dependencias, que se produjeron más o menos al mismo tiempo que la alerta, ya que tales eventos son a menudo la causa de origen de los problemas.
 
 {{< img src="/monitors/status/change_tracking_monitor_status_page.png" alt="Ejemplo de despliegue que se muestra en la página de estado del monitor" style="width:100%;" >}}

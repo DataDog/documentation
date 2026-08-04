@@ -6,6 +6,9 @@ aliases:
   - /notebooks_new/
   - /notebooks_legacy/
 further_reading:
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "https://www.datadoghq.com/blog/collaborative-notebooks-datadog/"
   tag: "Blog"
   text: "Tell data-driven stories with Collaborative Notebooks"
@@ -21,22 +24,29 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/finops-at-datadog/"
   tag: "Blog"
   text: "How we've created a successful FinOps practice at Datadog"
+- link: "https://learn.datadoghq.com/courses/getting-started-with-notebooks"
+  tag: "Learning Center"
+  text: "Getting Started with Notebooks"
+- link: "https://learn.datadoghq.com/courses/using-datadog-notebooks-lab"
+  tag: "Learning Center"
+  text: "Using Datadog Notebooks for Centralized Reporting"
+
 ---
 
 ## Overview
 
-Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or postmortem featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
+Notebooks are collaborative rich text documents that give you all the power of Datadog graphs. Multiple users can work together to put together an investigation or [postmortem][8] featuring live data from your incident. Notebooks are also great for runbooks and documentation featuring real insights into your systems alongside your content.
 
 ## Creating a notebook
 
 You can create a notebook in two places:
 
-- From the left-hand navigation bar, click **Dashboards > New Notebook**.
-- On the upper-right-hand corner of the [Notebooks List page][1], click **New Notebook**.
+- From the left-hand navigation bar, click {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}New Notebook{{< /ui >}}.
+- On the upper-right-hand corner of the [Notebooks List page][1], click {{< ui >}}New Notebook{{< /ui >}}.
 
 ### Notebook templates
 
-In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response postmortem, an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
+In the [Template Gallery][2], see ready-to-use templates which you can create new notebooks from. Templates include an Incident Response [postmortem][8], an Incident Report, and SLO Specification. You can also create a new custom template to build reusable notebook structures.
 
 ## Editing a notebook
 
@@ -66,15 +76,15 @@ Notebooks support all widget types. For the full list, see [Widgets][3].
 
 Hover over the widget to display options for editing and configuring graphs.
 
-To edit the query or configure the graph's display, use the **Quick Edit** feature to make most changes inline. For more advanced configuration, click the pencil icon or hold down the <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> key and click on the graph to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.
+To edit the query or configure the graph's display, use the {{< ui >}}Quick Edit{{< /ui >}} feature to make most changes inline. For more advanced configuration, click the pencil icon or hold down the <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> key and click on the graph to open the full graph editor. You can adjust the local timeframe or link the graph to the global notebook time by clicking the clock icon.
 
 Additional graph configuration options are accessible under the three-dot ellipsis menu, depending on the graph type:
-- **Graph size**: Adjust the graph height by selecting XS, S, M (default), L, or XL.
-- **Graph legend**: Uncheck the box to hide the legend. Legends are automatically disabled for XS and S graphs.
+- {{< ui >}}Graph size{{< /ui >}}: Adjust the graph height by selecting XS, S, M (default), L, or XL.
+- {{< ui >}}Graph legend{{< /ui >}}: Uncheck the box to hide the legend. Legends are automatically disabled for XS and S graphs.
 
 ### Rich text features
 
-Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list. 
+Notebooks support commonly used rich text features like bold, italics, inline code, and headers. Notebooks also support a variety of list types such as bullet, numbered, or check list.
 
 | Feature       | Description                                                                                                                |
 |---------------|----------------------------------------------------------------------------------------------------------------------------|
@@ -83,7 +93,7 @@ Notebooks support commonly used rich text features like bold, italics, inline co
 | `Inline code` | For inline code, type <code>`</code> at the beginning and at the end of the text.                                          |
 | Codeblocks    | Insert a codeblock by typing <code>```</code> and pressing <kbd>Enter</kbd>, or by using the slash command menu.           |
 | Quotes        | Insert a quote block by typing `>`, or by using the slash command menu.                                                    |
-| Text tables   | Insert a table by typing `/table` or using the **Add Cell** menu.                                                          |
+| Text tables   | Insert a table by typing `/table` or using the {{< ui >}}Add Cell{{< /ui >}} menu.                                                          |
 | Callouts      | Insert a callout by typing `/table` or typing `!NOTE`, `!TIP`, `!WARNING`, `!IMPORTANT`, or `!CAUTION` and then pressing <kbd>Space</kbd>.   |
 
 ### Smart chips
@@ -100,7 +110,7 @@ Slash commands are an interface for creating graphs or inserting other content. 
 
 {{< img src="/notebooks/notebooks_new/slash_command_menu.png" alt="Slash command menu that appears when you type / into a notebook" style="width:70%;" >}}
 
-When you select a graph type, it opens the [graph editor][3]. After you click **Save**, the graph appears in your notebook.
+When you select a graph type, it opens the [graph editor][3]. After you click {{< ui >}}Save{{< /ui >}}, the graph appears in your notebook.
 
 ### Keyboard shortcuts
 
@@ -110,9 +120,9 @@ At the bottom-left corner of a notebook, click the keyboard icon to view a list 
 
 Additionally, you can use the following shortcuts to cut and paste widgets (<kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>X</kbd>, <kbd>Cmd</kbd>/<kbd>Ctrl</kbd> + <kbd>V</kbd>).
 
-### Table of contents 
+### Table of contents
 
-Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking **Header** in the toolbar.
+Notebooks automatically generate a table of contents from any headers or graphs you insert into your document. You can create a header using the markdown shortcut `#` or by selecting text and clicking {{< ui >}}Header{{< /ui >}} in the toolbar.
 
 ### Notebook tags
 
@@ -121,20 +131,20 @@ Notebooks automatically generate a table of contents from any headers or graphs 
 | Tag action                | Description                                                                                                          |
 |---------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **Favorite a Notebook**   | Favorite a notebook to pin it to the top of your results in the Notebook List page. To toggle a notebook as a favorite, click the star icon in the header of the notebook.                                                                     |
-| **Tag by Team**           | Tagging a notebook with a team allows you to use it as a filter when searching for a notebook. You can tag a notebook with up to 5 teams. To tag a notebook, click on the **Team** option in the notebook header and select the desired teams. |
-| **Tag by Type**           | You can tag your notebooks with type tags for easier searching, such as: Postmortem, Runbook, Investigation, Documentation, Report. To tag a notebook, click **Type** and select a type.                                                     |
+| **Tag by Team**           | Tagging a notebook with a team allows you to use it as a filter when searching for a notebook. You can tag a notebook with up to 5 teams. To tag a notebook, click on the {{< ui >}}Team{{< /ui >}} option in the notebook header and select the desired teams. |
+| **Tag by Type**           | You can tag your notebooks with type tags for easier searching, such as: Postmortem, Runbook, Investigation, Documentation, Report. To tag a notebook, click {{< ui >}}Type{{< /ui >}} and select a type.                                                     |
 
 ### Add images to notebooks
 
 <div class="alert alert-info">Only PNG, JPG, JPEG, and GIF file types are supported. Uploads have a max file size of 4MB.</a></div>
 
-You can add images to your notebook using `/image` or the **Add Cell** menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
+You can add images to your notebook using `/image` or the {{< ui >}}Add Cell{{< /ui >}} menu. This provides options for resizing, aligning, and captioning the image. Uploaded images are hosted by Datadog.
 
 <!-- TODO Add updated image from new notebooks -->
 
 You can use any of the following options to upload an image to be hosted by Datadog:
 - Drop an image file into the upload area
-- Click **Choose File** and locate the image in your file directory
+- Click {{< ui >}}Choose File{{< /ui >}} and locate the image in your file directory
 - Paste a publicly accessible URL for the image
 
 Click the icons on the image action tray to adjust the size, alignment, add a caption for the image, or view the image in full screen mode.
@@ -142,7 +152,7 @@ Click the icons on the image action tray to adjust the size, alignment, add a ca
 
 ## Adding comments to a notebook
 
-You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar. 
+You can add comments on content in the body of the notebook. To comment on text, highlight the text and click on the comment icon in the toolbar.
 
 <!-- TODO Add updated image from new notebooks -->
 
@@ -151,10 +161,10 @@ To comment on a graph or an image, click on the comment icon to the right of the
 | Feature                  | Description                                                                                                          |
 |--------------------------|----------------------------------------------------------------------------------------------------------------------|
 | **Navigating to Comments** | Saved comments appear in the right margin of the notebook. Click a comment highlight in the text to open it in the margin, or click a comment in the margin to scroll to its location. |
-| **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking **Resolve**. |
+| **Responding to Comments** | Respond to comments by clicking on them in the right margin, which opens a comment box. You can write text, `@mention` a Datadog user, or resolve a comment by clicking {{< ui >}}Resolve{{< /ui >}}. |
 | **Linking to Comments**    | Link to a specific comment by clicking the link icon in the top right corner of the comment to copy its link.      |
 | **Editing or Deleting Comments** | Edit or delete your comments by clicking the three-dot ellipsis menu in the top right corner of the comment.                 |
-| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the cog menu, select **Notifications**. |
+| **Comment Notifications** | By default, email notifications are sent to the notebook author for new comments by others. Users in a comment thread receive notifications for each reply. To adjust notifications, in the cog menu, select {{< ui >}}Notifications{{< /ui >}}. |
 
 ## Multiplayer experience in Notebooks
 
@@ -192,58 +202,63 @@ To view a different time frame, select an option in the global time picker, or s
 
 <!-- TODO Add updated image from new notebooks -->
 
-To save this time as the notebook's default, click **Set Default Time**. To reset your global time back to the previously saved default global time, click the reset button.
+To save this time as the notebook's default, click {{< ui >}}Set Default Time{{< /ui >}}. To reset your global time back to the previously saved default global time, click the reset button.
 
 Individual graphs can be unlinked from the global time and set to an independent time frame.
 
 <!-- TODO Add updated image from new notebooks -->
 
-To view a different time frame on a single graph, edit the graph and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click **Done**. To discard your changes, click **Cancel** instead of **Done**.
+To view a different time frame on a single graph, edit the graph and use the toggle to unlink it from Global Time. Change the time frame using the time picker or by scrubbing on the graph. Changes made in edit mode are saved automatically when you click {{< ui >}}Done{{< /ui >}}. To discard your changes, click {{< ui >}}Cancel{{< /ui >}} instead of {{< ui >}}Done{{< /ui >}}.
 
 ### Modes
 
 You can switch between modes from within the notebook by selecting the dropdown at the top right of your notebook.
 
-- **Editing**: Make changes to the notebook.
-- **Viewing**: Contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
+- {{< ui >}}Editing{{< /ui >}}: Make changes to the notebook.
+- {{< ui >}}Viewing{{< /ui >}}: Contents are Read Only, preventing users from making unwanted edits to existing configurations and information.
 
 ### Version history
 
-From a notebook, click the cog icon and click **Version history** to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
+From a notebook, click the cog icon and click {{< ui >}}Version history{{< /ui >}} to open the Version History side panel. You can preview, restore, or clone a previous version of your notebook. For more information, see the [Version History guide][6].
 
 ### Graph snapshots
 
-Notebooks can be set to automatically take snapshots of graphs that might expire. Enable this by clicking **Turn on snapshots** in the cog menu of any notebook. Use the cog menu to view snapshots or turn off automatic snapshots. Turn off automatic snapshots to remove access to existing snapshots.
+Notebooks automatically snapshot graphs with fixed time ranges to preserve the view before data retention limits apply. No setup is required. Use the kebab menu next to a graph to view or download a snapshot.
 
-{{< img src="notebooks/cog_snapshots.png" alt="Cog menu option to turn on snapshots" style="width:100%;">}}
+{{< img src="notebooks/kebab_snapshots.png" alt="Kebab menu option to view or download a snapshot" style="width:100%;">}}
 
- Notebooks with snapshots enabled automatically capture a static image of any graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). These snapshots update when the graph is updated, as long as the new graph also has a fixed time range. Changing the graph to a global time range (like `Past 1 Hour`) removes the snapshot.
+Snapshots are static images of graphs with a fixed time range (for example, `Aug 18, 12:00 am - Aug 19, 11:59 pm`). A snapshot updates when the graph is updated, as long as the graph continues to use a fixed time range. Switching the graph to a global time range (for example, `Past 1 hour`) removes the snapshot.
 
-You can preview the existing snapshot on any fixed-time graph by hovering over the camera icon while in edit mode.
+You can preview snapshot status for a notebook by hovering over the graph snapshot indicator under the notebook title. The preview shows the time of the most recent snapshot and the number of snapshots created.
 
-To share a version of your notebook with snapshots, from the cog menu, click **View snapshots**. Copy the URL, or append `&view=snapshots` to the URL of any notebook that has snapshots enabled.
+{{< img src="notebooks/hover_graph_snapshots.png" alt="Snapshot indicator showing how many snapshots have been generated" style="width:100%;">}}
+
+When a notebook contains a graph with data that is past its data retention limits, the notebook displays an inline snapshot of the graph. The snapshot is a static image, but it is replaced if you edit the underlying graph.
 
 ### Permissions
 
 By default, all users have full access to notebooks.
 
-Use granular access controls to limit the [roles][7] that may edit a particular notebook:
-1. While viewing a notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
-1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**.
+Use our access controls to restrict view and edit access to only yourself:
+1. While viewing a notebook, click the {{< ui >}}Share{{< /ui >}} button in the upper right.
+1. Select {{< ui >}}Private to me{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
-**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving. 
+Use granular access controls to limit the [roles][7] that may edit a particular notebook:
+1. While viewing a notebook, click the {{< ui >}}Share{{< /ui >}} button in the upper right.
+1. Select {{< ui >}}Custom{{< /ui >}}.
+1. Update the Organization access to {{< ui >}}Viewer{{< /ui >}} to revoke edit access from the rest of the organization.
+1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
+
+**Note:** To maintain your edit access to the notebook, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted notebook. Complete the following steps:
-1. While viewing the notebook, click on the cog in the upper right. The settings menu opens.
-1. Select **Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. While viewing a notebook, click the {{< ui >}}Share{{< /ui >}} button in the upper right.
+1. Select {{< ui >}}My Org{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Finding notebooks
 
@@ -260,10 +275,10 @@ The search field supports full-text search. Type your query to display the relev
 You can filter notebooks with the following methods:
 | Filter Type      | Description                                                                 |
 |------------------|-----------------------------------------------------------------------------|
-| **Author**       | To filter by author, select the author dropdown and enter names to filter by. |
-| **Team**         | To filter by team, select the team dropdown and enter team names to filter by. |
-| **Notebook Type**| Filter by investigation, postmortem, runbook, report, or documentation.     |
-| **Modified Date**| Filter based on how recently a notebook was edited using the modified date dropdown. |
+| {{< ui >}}Author{{< /ui >}}       | To filter by author, select the author dropdown and enter names to filter by. |
+| {{< ui >}}Team{{< /ui >}}         | To filter by team, select the team dropdown and enter team names to filter by. |
+| {{< ui >}}Notebook Type{{< /ui >}}| Filter by investigation, postmortem, runbook, report, or documentation.     |
+| {{< ui >}}Modified Date{{< /ui >}}| Filter based on how recently a notebook was edited using the modified date dropdown. |
 
 There are also quick filters to access your notebooks and notebooks tagged with your teams.
 
@@ -283,9 +298,10 @@ You can sort notebooks by selecting the ⭐, details, or modified headers to sor
 
 
 [1]: https://app.datadoghq.com/notebook/list
-[2]: https://app.datadoghq.com/notebook/template-gallery
+[2]: https://app.datadoghq.com/notebook/list?location=templates
 [3]: /dashboards/querying/#graphing-editor
 [4]: https://www.markdownguide.org/basic-syntax/#images-1
 [5]: /dashboards/template_variables/
 [6]: /notebooks/guide/version_history
 [7]: /account_management/rbac/
+[8]: /incident_response/incident_management/post_incident/postmortems

@@ -236,7 +236,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
     "username": "datadog",
     "password": "<UNIQUEPASSWORD>"
   }]' \
-  gcr.io/datadoghq/agent:${DD_AGENT_VERSION}
+  registry.datadoghq.com/agent:${DD_AGENT_VERSION}
 ```
 
 ### Dockerfile
@@ -244,7 +244,7 @@ docker run -e "DD_API_KEY=${DD_API_KEY}" \
 Labels can also be specified in a `Dockerfile`, so you can build and deploy a custom agent without changing any infrastructure configuration:
 
 ```Dockerfile
-FROM gcr.io/datadoghq/agent:7.36.1
+FROM registry.datadoghq.com/agent:<AGENT_VERSION>
 
 LABEL "com.datadoghq.ad.check_names"='["mysql"]'
 LABEL "com.datadoghq.ad.init_configs"='[{}]'
@@ -441,7 +441,7 @@ If you have installed and configured the integrations and Agent as described and
 
 
 [1]: /database_monitoring/agent_integration_overhead/?tab=mysql
-[2]: /containers/cluster_agent/clusterchecks/?tab=datadogoperator
+[2]: /database_monitoring/data_collected/#sensitive-information
 [3]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_WorkingWithParamGroups.html
 [4]: https://dev.mysql.com/doc/refman/5.7/en/creating-accounts.html
 [5]: https://app.datadoghq.com/account/settings/agent/latest

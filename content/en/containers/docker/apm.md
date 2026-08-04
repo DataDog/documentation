@@ -27,11 +27,11 @@ further_reading:
       text: "Assign tags to all data emitted by a container"
 ---
 
-As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `gcr.io/datadoghq/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
+As of Agent 6.0.0, the Trace Agent is enabled by default. If it has been turned off, you can re-enable it in the `registry.datadoghq.com/agent` container by passing `DD_APM_ENABLED=true` as an environment variable.
 
 The CLI commands on this page are for the Docker runtime. Replace `docker` with `nerdctl` for the containerd runtime, or `podman` for the Podman runtime.
 
-<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the tracing library into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
+<div class="alert alert-info">If you are collecting traces from a containerized app (your Agent and app running in separate containers), as an alternative to the following instructions, you can automatically inject the SDK into your application. Read <a href="/tracing/trace_collection/library_injection_local/?tab=agentandappinseparatecontainers">Injecting Libraries</a> for instructions.</div>
 
 ## Tracing from the host
 
@@ -54,7 +54,7 @@ docker run -d --cgroupns host \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
@@ -66,7 +66,7 @@ docker run -d -p 127.0.0.1:8126:8126/tcp \
               -e DD_API_KEY=<DATADOG_API_KEY> \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 ```
 Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (defaults to `datadoghq.com`).
 
@@ -187,7 +187,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \
@@ -210,7 +210,7 @@ docker run -d --name datadog-agent \
               -e DD_APM_ENABLED=true \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network "<NETWORK_NAME>" \
@@ -225,7 +225,7 @@ Where your `<DATADOG_SITE>` is {{< region-param key="dd_site" code="true" >}} (d
 This exposes the hostname `datadog-agent` in your `app` container.
 If you're using `docker-compose`, `<NETWORK_NAME>` parameters are the ones defined under the `networks` section of your `docker-compose.yml`.
 
-Your application tracers must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
+Your application SDKs must be configured to submit traces to this address. Set environment variables with the `DD_AGENT_HOST` as the Agent container name, and `DD_TRACE_AGENT_PORT` as the Agent Trace port in your application containers. The example above uses host `datadog-agent` and port `8126` (the default value so you don't have to set it).
 
 Alternately, see the examples below to set the Agent host manually in each supported language:
 
@@ -372,7 +372,7 @@ docker run -d --name datadog-agent \
               -e DD_SITE=<DATADOG_SITE> \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
               -e DD_APM_RECEIVER_SOCKET=/var/run/datadog/apm.socket \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 # Application
 docker run -d --name app \
               --network <NETWORK_NAME> \

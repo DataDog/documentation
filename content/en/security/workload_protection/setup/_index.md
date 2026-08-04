@@ -3,7 +3,7 @@ title: Setting up Workload Protection
 disable_toc: false
 ---
 
-To get started with Workload Protection, use the Workload Protection [Get Started][1] steps in your Datadog account.
+To get started with Workload Protection, use the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
 
 <div class="alert alert-info">Activating Workload Protection requires the Org Management <a href="https://docs.datadoghq.com/account_management/rbac/permissions/">permission</a>.</div>
 
@@ -16,7 +16,7 @@ Remote Configuration can be used to:
 - Automatically stay up to date on the latest security detections
 - Block attackers and attacks
 
-Remote Configuration can be set up using the Workload Protection [Get Started][1] steps in your Datadog account.
+Remote Configuration can be set up using the Workload Protection [{{< ui >}}Get Started{{< /ui >}}][1] steps in your Datadog account.
 
 <div class="alert alert-info">To enable Remote Configuration, ask your admin for the <strong>API Keys Write</strong> permission.</div>
 
@@ -40,7 +40,7 @@ Workload Protection supports the following Linux distributions:
 
 | Linux Distributions                                           | Supported Versions      |
 |---------------------------------------------------------------|-------------------------|
-| Ubuntu LTS                                                    | 18.04, 20.04, 22.04     |
+| Ubuntu LTS                                                    | 18.04, 20.04, 22.04, 24.04|
 | Debian                                                        | 10 or later             |
 | Amazon Linux 2                                                | Kernels 4.14 and higher |
 | Amazon Linux 2023                                             | All versions            |

@@ -2,7 +2,19 @@
 title: Threat Intelligence
 aliases:
   - /security/application_security/threats/threat-intelligence
+
+further_reading:
+  - link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+    tag: "Blog"
+    text: "Datadog Cloud SIEM: Driving innovation in security operations"
+
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -37,6 +49,10 @@ To query for all traces containing threat intelligence from any source, use the 
 
 ## Bring your own threat intelligence
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-warning">Bring your own threat intelligence is not supported in {{< region-param key="dd_site_name" >}}.</div>
+{{< /site-region >}}
+
 AAP supports enriching and searching traces with threat intelligence indicators of compromise stored in Datadog reference tables. [Reference Tables][2] allow you to combine metadata with information already in Datadog.
 
 For more information, see the [Bring Your Own Threat Intelligence][14] guide.
@@ -51,6 +67,10 @@ When viewing the traces in the AAP Traces Explorer, you can see threat intellige
 Under `@threat_intel.results` you can always see the full details of what was matched from which source.
 
  <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_generic.png" alt="Example of the threat_intel attribute containing threat intelligence data">}} -->
+
+ ## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/threat_intelligence/#threat-intelligence-sources
 [2]: /integrations/guide/reference-tables

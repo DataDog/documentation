@@ -1,19 +1,48 @@
 ---
+app_id: google-cloud-run
+app_uuid: 20ba733c-60a3-4c78-9c54-0f86025d6ea6
+assets:
+  dashboards:
+    gcp_cloudrun: assets/dashboards/gcp_cloudrun.json
+  integration:
+    auto_install: false
+    events:
+      creates_events: false
+    metrics:
+      check: gcp.run.container.cpu.allocation_time
+      metadata_path: metadata.csv
+      prefix: gcp.run.
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 233
+    source_type_name: Google Cloud Run
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com (日本語対応)
+  support_email: help@datadoghq.com
 categories:
 - cloud
 - コンテナ
 - google cloud
 - ログの収集
 - オーケストレーション
-custom_kind: integration
+custom_kind: インテグレーション
 dependencies: []
 description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析します。
+display_on_public_website: true
 doc_link: https://docs.datadoghq.com/integrations/google_cloud_run/
 draft: false
 further_reading:
-- link: https://www.datadoghq.com/blog/monitor-google-cloud-run-with-datadog/
+- link: https://www.datadoghq.com/blog/monitoring-cloud-run-datadog/
   tag: ブログ
-  text: Datadog を使用した Google Cloud Run の監視
+  text: Datadog で Cloud Run を監視する
+- link: https://www.datadoghq.com/blog/collecting-cloud-run-metrics/
+  tag: ブログ
+  text: Google Cloud Run メトリクスの収集方法
+- link: https://www.datadoghq.com/blog/key-metrics-for-cloud-run-monitoring/
+  tag: ブログ
+  text: Google Cloud Run を監視するための主要メトリクス
 - link: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
   tag: ドキュメント
   text: Google Cloud Run for Anthos
@@ -23,14 +52,39 @@ integration_id: google-cloud-run
 integration_title: Google Cloud Run
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: google_cloud_run
-public_title: Datadog-Google Cloud Run インテグレーション
-short_description: クラスターからメトリクス、トレース、ログを収集し、Datadog で分析します。
+public_title: Google Cloud Run
+short_description: マネージド コンピューティング プラットフォーム上で、 HTTP リクエストにより呼び出されるステートレス コンテナを実行します。
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Category::Cloud
+  - Category::Containers
+  - Category::Google Cloud
+  - Category::Log Collection
+  - Category::Orchestration
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: マネージド コンピューティング プラットフォーム上で、 HTTP リクエストにより呼び出されるステートレス コンテナを実行します。
+  media: []
+  overview: README.md#Overview
+  resources:
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/monitoring-cloud-run-datadog/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/collecting-cloud-run-metrics/
+  - resource_type: blog
+    url: https://www.datadoghq.com/blog/key-metrics-for-cloud-run-monitoring/
+  - resource_type: documentation
+    url: https://docs.datadoghq.com/integrations/google_cloud_run_for_anthos/
+  support: README.md#Support
+  title: Google Cloud Run
 version: '1.0'
 ---
 
-<!--  SOURCED FROM https://github.com/DataDog/dogweb -->
+<!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
 Cloud Run は、HTTP リクエストを使って呼び出し可能なステートレスコンテナを実行できるマネージド型のコンピューティングプラットフォームです。
@@ -47,7 +101,7 @@ Cloud Run for Anthos の詳細については、[Google Cloud Run for Anthos ド
 
 [Google Cloud Platform インテグレーション][2]をセットアップして、すぐに使えるメトリクスの収集を開始します。カスタムメトリクスを設定するには、[Serverless ドキュメント][3]を参照してください。
 
-### 収集データ
+### ログ収集
 
 #### インテグレーション
 Google Cloud Run は[監査ログ][4]も公開します。
@@ -73,7 +127,7 @@ Cloud Run サービスから Datadog へのアプリケーションの直接ロ�
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "google-cloud-run" >}}
+{{< get-metrics-from-git "google_cloud_run" >}}
 
 
 ### イベント
@@ -87,7 +141,7 @@ Google Cloud Functions インテグレーションには、サービスのチェ
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][8]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][8]までお問い合わせください。
 
 ## その他の参考資料
 

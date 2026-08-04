@@ -13,7 +13,7 @@ assets:
     service_checks:
       metadata_path: assets/service_checks.json
     source_type_id: 286
-    source_type_name: Información sobre los clientes de Azure
+    source_type_name: Azure Customer Insights
 author:
   homepage: https://www.datadoghq.com
   name: Datadog
@@ -28,12 +28,12 @@ display_on_public_website: true
 draft: false
 git_integration_title: azure_customer_insights
 integration_id: azure-customerinsights
-integration_title: Información sobre los clientes de Azure
+integration_title: Azure Customer Insights
 integration_version: ''
 is_public: true
 manifest_version: 2.0.0
 name: azure_customer_insights
-public_title: Información sobre los clientes de Azure
+public_title: Azure Customer Insights
 short_description: Rastrea las métricas clave de Azure Customer Insights.
 supported_os: []
 tile:
@@ -47,7 +47,7 @@ tile:
   media: []
   overview: README.md#Información general
   support: README.md#Soporte
-  title: Información sobre los clientes de Azure
+  title: Azure Customer Insights
 ---
 
 <!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
@@ -66,7 +66,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 ## Datos recopilados
 
 ### Métricas
-{{ get-metrics-from-git "azure-customerinsights" }}
+{{< get-metrics-from-git "azure_customer_insights" >}}
 
 
 ### Eventos

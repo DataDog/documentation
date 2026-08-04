@@ -14,6 +14,13 @@ further_reading:
     tag: "Documentation"
     text: "Troubleshooting App and API Protection"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% app_and_api_protection_python_setup_options platform="linux" %}}
 
 {{% app_and_api_protection_python_overview %}}
@@ -25,7 +32,7 @@ further_reading:
 - Root or sudo privileges
 - Systemd (for service management)
 - Your Datadog API key
-- Datadog Python tracing library (see [version requirements][1])
+- Datadog Python SDK (see [version requirements][1])
 
 ## 1. Installing the Datadog Agent
 
@@ -38,7 +45,7 @@ Install the Datadog Agent by following the [setup instructions for Linux hosts](
 
 ### Manually enabling App and API Protection monitoring
 
-Install the Datadog Python tracing library:
+Install the Datadog Python SDK:
 
 ```bash
 pip install ddtrace
@@ -80,7 +87,7 @@ ddtrace-run python app.py
 
 Start your Python application with the settings described above.
 
-{{% app_and_api_protection_verify_setup %}}
+{{% aap/aap_and_api_protection_verify_setup %}}
 
 ## Troubleshooting
 
@@ -90,5 +97,5 @@ If you encounter issues while setting up App and API Protection for your Python 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /security/application_security/setup/python/compatibility
+[1]: /security/application_security/setup/compatibility/python
 [2]: /security/application_security/setup/python/troubleshooting

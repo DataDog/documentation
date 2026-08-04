@@ -30,6 +30,9 @@ further_reading:
 - link: https://www.datadoghq.com/blog/watchdog-live-processes/
   tag: ブログ
   text: ライブプロセス用 Watchdog Insights によるワークロードのパフォーマンス異常に対するトラブルシューティング
+- link: https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/
+  tag: ブログ
+  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
 title: Datadog WatchdogTM
 ---
 ## 概要

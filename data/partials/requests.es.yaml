@@ -14,11 +14,11 @@ requests:
   link: /integrations/java
   name: Beans JMX
 - description: Envía métricas personalizadas para estadísticas empresariales utilizando
-    [DogStatsD](https://docs.datadoghq.com/developers/dogstatsd/) y la [API](https://docs.datadoghq.com/api/latest/metrics/).
+    [DogStatsD](https://docs.datadoghq.com/extend/dogstatsd/) y la [API](https://docs.datadoghq.com/api/latest/metrics/).
     Las integraciones del Datadog Agent son archivos de Python para la consulta de
     métricas. Todo el código del Agent es abierto, por lo que puedes escribir tu propio
-    [check del Agent personalizado](https://docs.datadoghq.com/developers/custom_checks/)
-    o tu propia [integración del Agent personalizada](https://docs.datadoghq.com/developers/integrations/).
+    [check del Agent personalizado](https://docs.datadoghq.com/extend/custom_checks/)
+    o tu propia [integración del Agent personalizada](https://docs.datadoghq.com/extend/integrations/).
     El [repositorio de integraciones adicionales de GitHub](https://github.com/DataDog/integrations-extras)
     contiene muchas integraciones personalizadas, desarrolladas por la comunidad.
   image: int_custom_metrics.png

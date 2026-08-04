@@ -6,6 +6,27 @@ aliases:
   - /security_platform/cloud_siem/
   - /security/cloud_siem/security_home/
 further_reading:
+- link: "https://learn.datadoghq.com/courses/intro-to-cloud-siem"
+  tag: "Learning Center"
+  text: "Introduction to Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-automated-remediation"
+  tag: "Learning Center"
+  text: "Automate Threat Investigation and Remediation with Security Workflows"
+- link: "https://www.datadoghq.com/blog/cloud-siem-cases/"
+  tag: "Blog"
+  text: "Turn security signals into structured investigations with Case Management in Datadog Cloud SIEM"
+- link: "https://www.datadoghq.com/blog/datadog-google-cloud-ai-stack/"
+  tag: "Blog"
+  text: "Evaluate, optimize, and secure your Google Cloud AI stack with Datadog"
+- link: "https://www.datadoghq.com/blog/cloud-siem-whats-new-rsa-2026"
+  tag: "Blog"
+  text: "What's new in Cloud SIEM: AI-powered investigations, enhanced threat intelligence, and scalable security operations"
+- link: "https://www.datadoghq.com/blog/observability-pipelines-mssp"
+  tag: "Blog"
+  text: "Simplify log collection and aggregation for MSSPs with Datadog Observability Pipelines"
+- link: "https://www.datadoghq.com/blog/cloud-siem-enterprise-security"
+  tag: "Blog"
+  text: "Datadog Cloud SIEM: Driving innovation in security operations"
 - link: "https://www.datadoghq.com/blog/track-issues-datadog-case-management/"
   tag: "Blog"
   text: "Proactively track, triage, and assign issues with Datadog Case Management"
@@ -48,6 +69,7 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/detection-as-code-cloud-siem/"
   tag: "Blog"
   text: "Build, test, and scale detections as code with Datadog Cloud SIEM"
+
 ---
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=Security">}}
@@ -68,7 +90,7 @@ Cloud SIEM embeds both cloud and on-premises telemetry directly into security wo
 
 ### Flexible cost control for security data
 
-As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs. 
+As your organization scales, controlling the ingestion cost of security logs without compromising visibility is critical. Cloud SIEM is integrated with Datadog Log Management so you can choose the appropriate retention and querying capability for  your security logs. This flexibility helps you balance cost efficiency with your threat detection needs.
 
 Store logs using one of the available options:
 - [Standard indexing][6] for logs that need to be queried frequently with the most compute.
@@ -91,8 +113,8 @@ Build searches in the Log Explorer using facets or by clicking fields directly i
 
 If you don't already have a Datadog account, sign up for a [free trial][2]. After you log in to your Datadog account:
 
-1. Navigate to [Cloud SIEM][3].
-1. Click **Enable Cloud SIEM**.
+1. Navigate to [Cloud SIEM][12].
+1. Click {{< ui >}}Enable Cloud SIEM{{< /ui >}}.
 1. Follow the onboarding steps.
 
 See the [Getting Started Guide][4] for more detailed setup instructions.
@@ -107,7 +129,7 @@ Navigate to the [Cloud SIEM Overview page][3]. Use this page to see key security
 - Track detection performance (Mean Time to Detect (MTTD), false‑positive rates).
 - Read the latest [Security Labs][1] research and release notes.
 
-Click **Customize Page** to reorder or hide modules so you can see what is important to you.
+Click {{< ui >}}Customize Page{{< /ui >}} to reorder or hide modules so you can see what is important to you.
 
 Learn more about each Cloud SIEM Overview page section below.
 
@@ -210,11 +232,11 @@ See how many techniques have high, medium, or low density or no rules at all. Cl
 
 #### Signals per tactic view
 
-See which MITRE ATT&CK tactics are generating signals. Click a pie chart wedge to view the Signal Explorer filtered by that tactic. Click the dropdown and select **Rules count** to see which tactics have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that tactic.
+See which MITRE ATT&CK tactics are generating signals. Click a pie chart wedge to view the Signal Explorer filtered by that tactic. Click the dropdown and select {{< ui >}}Rules count{{< /ui >}} to see which tactics have the most rules mapped to it. When viewing by rule count, clicking on a pie chart wedge creates a detection rule explorer view filtered by that tactic.
 
 #### Signals per technique view
 
-See which MITRE ATT&CK techniques are generating signals. Click on a pie chart wedge to view the Signal Explorer filtered by technique. Click the dropdown and select **Rules count** to see which techniques have the most rules mapped to it. When viewing by rule count, click on a pie chart wedge to see the detection rule explorer filtered by that technique.
+See which MITRE ATT&CK techniques are generating signals. Click on a pie chart wedge to view the Signal Explorer filtered by technique. Click the dropdown and select {{< ui >}}Rules count{{< /ui >}} to see which techniques have the most rules mapped to it. When viewing by rule count, click on a pie chart wedge to see the detection rule explorer filtered by that technique.
 
 ### Detection rules performance
 
@@ -260,7 +282,7 @@ See which rules are the noisiest by calculating the percentage of signals that a
 
 [1]: https://securitylabs.datadoghq.com/
 [2]: https://www.datadoghq.com/product/cloud-siem/
-[3]: https://app.datadoghq.com/security/home?
+[3]: https://app.datadoghq.com/security/siem/home?
 [4]: /getting_started/security/cloud_siem/
 [5]: /security/cloud_siem/investigate_security_signals/#case-management
 [6]: /logs/log_configuration/indexes
@@ -269,3 +291,4 @@ See which rules are the noisiest by calculating the percentage of signals that a
 [9]: /security/cloud_siem/content_packs/
 [10]: /logs/explorer/search_syntax/
 [11]: /logs/explorer/
+[12]: https://app.datadoghq.com/security/siem/intro

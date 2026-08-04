@@ -17,6 +17,9 @@ further_reading:
 - link: "/tracing/services/deployment_tracking/"
   tag: "Documentation"
   text: "Deployment Tracking"
+- link: "/feature_flags/"
+  tag: "Documentation"
+  text: "Datadog Feature Flags"
 - link: "/integrations/launchdarkly/#feature-flag-tracking-integration/"
   tag: "Documentation"
   text: "LaunchDarkly"
@@ -34,7 +37,7 @@ further_reading:
   text: "Unify visibility into changes to your services and dependencies"
 ---
 
-{{< site-region region="gov" >}}
+{{< site-region region="gov,gov2" >}}
 <div class="alert alert-danger">Change Tracking is not available in the selected site ({{< region-param key="dd_site_name" >}})</div>
 {{< /site-region >}}
 
@@ -47,6 +50,7 @@ Change Tracking streamlines troubleshooting and incident response by surfacing r
 Change Tracking supports monitoring of a range of modifications to your service and its dependencies including:
 - Deployments
 - [Feature Flags][14]
+- Traffic Spikes
 - Configuration Changes
 - Database Modifications
 - Schema Changes
@@ -96,10 +100,10 @@ View and analyze changes from the [service page][2].
 #### To analyze changes from the service page:
 
 1. Navigate to the service page you want to investigate.
-1. Locate the changes timeline in the **Service Summary** section.
+1. Locate the changes timeline in the {{< ui >}}Service Summary{{< /ui >}} section.
 1. Use the service and dependencies tabs to view either:
-   - Changes limited to the specific service (**Changes by Service**)
-   - Changes to the specific service and dependent services that might impact this service (**Changes by Service + Dependencies**)
+   - Changes limited to the specific service ({{< ui >}}Changes by Service{{< /ui >}})
+   - Changes to the specific service and dependent services that might impact this service ({{< ui >}}Changes by Service + Dependencies{{< /ui >}})
 1. Click the change indicator to view detailed information and take remediation actions.
 
 ### Dashboards
@@ -114,9 +118,33 @@ To see relevant changes within the timeline and as overlays on your dashboard, e
 #### To analyze changes from dashboards:
 
 1. Navigate to your dashboard.
-2. Click **Show Overlays** at the top of the page to enable the change timeline and change overlays on supported widgets.
+2. Click {{< ui >}}Show Overlays{{< /ui >}} at the top of the page to enable the change timeline and change overlays on supported widgets.
 3. Hover over any change indicator or overlay to view a summary of the change.
 4. Click the change indicator or overlay to view detailed information and take remediation actions.
+
+### Widgets
+
+In addition to the out-of-the-box integrations, Change Tracking is available as a data source for widgets across Datadog, including Dashboards and Notebooks.
+
+{{< img src="/change_tracking/change-tracking-datasource-examples.png" alt="Change Tracking datasource examples" style="width:100%;" >}}
+
+To configure a widget using Change Tracking data:
+
+1.	In a dashboard or notebook, add or edit a supported widget type (Timeseries, Query Value, Table, Tree Map, Top List, Pie, Change, or Bar Chart).
+3.	From the {{< ui >}}data source{{< /ui >}} dropdown, select {{< ui >}}Change Tracking{{< /ui >}}.
+4.	Configure your filters ({{< ui >}}Service{{< /ui >}} is required).
+5.	(Optional) For widgets that support grouping, use {{< ui >}}Group by{{< /ui >}} to split results.
+
+{{< img src="/change_tracking/change-tracking-datasource-edit-widget.png" alt="Change Tracking datasource widgets" style="width:100%;" >}}
+
+For Timeseries widgets, you can also enable Change Tracking as an {{< ui >}}Event Overlay{{< /ui >}}, which displays changes on top of the timeseries to help correlate them with metric behavior.
+
+{{< img src="/change_tracking/change-tracking-datasource-edit-overlay.png" alt="Change Tracking datasource as Event Overlay" style="width:100%;" >}}
+
+
+#### View change details
+
+To view information about a change or set of changes, click a datapoint in the widget and select {{< ui >}}View Changes{{< /ui >}}. This opens the Change Tracking side panel with additional details.
 
 ## Tracked changes
 Change Tracking follows these types of changes across your infrastructure:
@@ -128,6 +156,7 @@ Change Tracking follows these types of changes across your infrastructure:
 | Feature Flags                                                                    | Use the LaunchDarkly integration or send custom events using the Events API. See the [Feature Flag Tracking documentation][14] for setup and advanced options.                          |
 | Custom Configuration Change Events                                               | [Event Management API][6].                                                                                                                                                               |
 | Watchdog Alerts (Error Rate Spikes, Latency Spikes, Cloud and API Outages, etc.) | See [Watchdog][7] documentation to learn more about requirements for specific Watchdog Alerts.                                                                                          |
+| Traffic Spikes (APM)                                                             | [Application Performance Monitoring (APM)][15]
 | CrashLoopBackOff Kubernetes Pod Crashes                                          | Kubernetes Integration (Add service label to Kubernetes yaml file if possible).                                                                                                          |
 | PostgreSQL, SQL Server and MySQL Database Table (Schemas) Change                 | See [Exploring Database Schemas][12] documentation to learn more about tracking schemas using DBM, and [Correlate Database Monitoring and Traces][10] to set up APM and DBM correlation. |
 | MongoDB Index & SearchIndex Changes                                              | [Database Monitoring (DBM)][8], [Correlate Database Monitoring and Traces][10].                                                                                                          |
@@ -151,7 +180,8 @@ Change Tracking follows these types of changes across your infrastructure:
 [8]: /database_monitoring/
 [9]: /data_streams/
 [10]: /database_monitoring/connect_dbm_and_apm/
-[11]: /service_management/workflows/connections/#work-with-connections
+[11]: /actions/connections/#work-with-connections
 [12]: /database_monitoring/schema_explorer
 [13]: /infrastructure/resource_catalog/resource_changes/
 [14]: /change_tracking/feature_flags
+[15]: /tracing

@@ -1,65 +1,76 @@
 ---
+description: サンプリングルールとフィルタリングを使用してトレースから不要なリソース (健全性チェックなど) を除外し、ノイズを減らし、コストを管理する方法を説明します。
 title: APM で不要なリソースを無視する
 ---
+サービスでは、トレースから除外したいトラフィック (たとえば、健全性チェック) があるエンドポイントを扱うことがよくあります。このガイドでは、そのトラフィックを除外するために以下のアプローチを説明します。
 
-サービスは様々なリクエストを扱うことができますが、その中にはトレースから除外したい、またはトレースメトリクスに含めたくないものがあるかもしれません。例としては、Web アプリケーションのヘルスチェックなどが挙げられます。
+- **サンプリング**: トレースメトリクスにリクエストを表示させたいものの、トレースの取り込み量を減らしたい場合に使用します。
+- **Datadog Agent でのフィルタリング**: Agent に報告するすべてのサービスで、リクエストを完全に除外するために使用します (トレースメトリクスからも除外します)。
+- **トレーサーの構成**: フィルタリングロジックをサービスごとに適用する必要がある場合や、アプリケーション固有のコンテキストに依存する場合 (たとえば、リクエスト属性やランタイム状態) に使用します。
 
-次の 2 つの方法で、このようなエンドポイントをトレースせず、トレースメトリクスから除外するよう指定することができます。
+どのオプションがユーザーのユースケースに最も適しているか判断にお困りの場合は、[Datadog サポート][1] にご連絡ください。
 
-- [Trace Agent のコンフィギュレーション](#trace-agent-configuration-options) (Datadog Agent 内)、または
-- [トレーサーのコンフィギュレーション](#tracer-configuration-options).
+## サンプリング {#sampling}
 
-<div class="alert alert-danger"><strong>注</strong>: 以下のいずれかのオプションを使用してトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+トレースメトリクスにスパンを含めたいものの、トレースから除外したい場合は、サンプリングルールを使用します。サンプリングに関する詳細は、[Ingestion Control][4] を参照してください。
 
-ヘルプが必要な場合は、[Datadog のサポートチーム][1]までお問合せください。
+### サンプリングルールの使用 {#using-sampling-rules}
 
+推奨されるアプローチは、リソース名、サービス名、タグ、およびオペレーション名に基づいてトレースをサンプリングできるサンプリングルールを使用することです。
 
-## Trace Agent のコンフィギュレーションオプション
+```shell
+DD_TRACE_SAMPLING_RULES='[{"resource": "GET healthcheck", "sample_rate": 0.0}]'
+```
 
-Datadog Agent 内の Trace Agent コンポーネントには、特定のトレースを除外するために「スパンタグの無視」と「リソースの無視」という 2 つのメソッドが用意されています。これらの設定によりトレースが取り込まれなかった場合、トレースメトリクスはこれらのリクエストを除外します。
+または、HTTP URL タグに基づいてサンプリングします。
 
-特定のスパンやリソースを無視するよう Trace Agent を設定すると、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。アプリケーション固有の要件がある場合は、代わりに[トレーサーのコンフィギュレーション](#tracer-configuration)メソッドを使用してください。
+```shell
+DD_TRACE_SAMPLING_RULES='[{"tags": {"http.url": "http://.*/healthcheck$"}, "sample_rate": 0.0}]'
+```
 
-### スパンタグに基づいて無視する
+<div class="alert alert-info">サンプリングの決定は、トレース内の最初のスパンを使用して行われます。フィルタリングするタグを含む {{< tooltip glossary="スパンが trace_root_span ではない場合" case="sentence" >}}、このルールは適用されません。</div>
 
-Datadog Agent 6.27.0/7.27.0 より、**filter tags** オプションは、指定されたスパンタグにマッチするルートスパンを持つトレースを無視します。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。フィルタータグが原因で無視されたトレースは、トレースメトリクスに含まれません。
+## Datadog Agent でのフィルタリング{#filtering-in-the-datadog-agent}
 
-Datadog に送信したくないトレースのセットをプログラムで特定でき、このガイドの他のオプションで要件を解決することができない場合は、[カスタムスパンタグ][2]を追加してトレースを除外することを検討できます。[サポートにお問い合わせ][1]いただき、この機能を継続的に拡張するためのユースケースについてご相談ください。
+スパンが取り込まれないようにする場合、またはトレースメトリクスに反映されないようにする場合は、Datadog Agent でフィルタリングを使用します。
 
-フィルタータグオプションでは、文字列の完全一致が必要です。正規表現により除外したい場合は、「[リソースに基づいて無視する](#ignoring-based-on-resources)」を参照してください。
+Datadog Agent 内の Trace Agent コンポーネントには、特定のトレースが送信されないようにするための 2 つの方法が用意されています。スパンタグによるフィルタリングまたはリソースによるフィルタリングです。これらの設定によりトレースが削除される場合、トレースメトリクスはこれらのリクエストを除外します。
 
-環境変数でキーと値をスペースで区切ったリストを使うことで、require または reject するスパンタグを指定することができます。
+特定のトレースやリソースを無視するように Trace Agent を構成すると、この Datadog Agent にトレースを送信するすべてのサービスに適用されます。アプリケーション固有の要件がある場合は、代わりに[トレーサー構成](#tracer-configuration)を使用します。
+
+<div class="alert alert-info">
+このガイドのいずれのオプションもユーザーの要件を満たさない場合は、アプリケーションに<a href="/tracing/trace_collection/custom_instrumentation/otel_instrumentation/">カスタムスパンタグ</a>を追加し、それを使用して Agent でトレースを削除することを検討してください。
+</div>
+
+### スパンタグに基づいてトレースを無視する {#ignoring-traces-based-on-span-tags}
+
+Datadog Agent 6.27.0/7.27.0 以降では、**フィルタータグ**オプションによって、指定されたスパンタグに一致するルートスパンを伴うトレースを削除します。このオプションは、この Datadog Agent にトレースを送信するすべてのサービスに適用されます。フィルタータグのために削除されたトレースは、トレースメトリクスには含められません。
+
+<div class="alert alert-info">
+トレース内の個々のスパンを選択して削除することはできません。ルートスパンがフィルタリング基準に一致する場合、トレース全体が破棄されます。
+</div>
+
+**一致する動作:**
+
+フィルタータグオプションには、正確な文字列一致が必要です。正規表現に基づくフィルタリングについては、[Ignoring based on resources](#ignoring-traces-based-on-resources) を参照してください。
+
+複数のタグを指定すると、フィルターは **OR ロジック**を使用します: ルートスパンが**いずれか**のタグに一致する場合、トレースは削除されます。複数の条件を同時に一致させるには、それらの組み合わせ基準を表すカスタムタグを追加してください。
+
+**構成:**
+
+環境変数でキーと値をスペースで区切ったリストを使用して、require または reject するスパンタグを指定することができます。
 
 `DD_APM_FILTER_TAGS_REQUIRE`
-: 指定されたスパンタグとその値が完全に一致する root スパンを持つトレースのみを収集します。このルールに一致しないトレースは破棄されます。例えば、`DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"` です。Datadog Agent 7.49 以降では、正規表現は `DD_APM_FILTER_TAGS_REGEX_REQUIRE` で指定できます。
+: 指定されたスパンのタグと値が完全に一致するルートスパンがあるトレースのみを収集します。このルールに一致しない場合、トレースは削除されます。たとえば、`DD_APM_FILTER_TAGS_REQUIRE="key1:value1 key2:value2"` の場合です。Datadog Agent 7.49 以降では、正規表現を `DD_APM_FILTER_TAGS_REGEX_REQUIRE` で指定できます。
 
 `DD_APM_FILTER_TAGS_REJECT`
-: 指定されたスパンタグとその値が完全に一致する root スパンを持つトレースを拒否します。このルールに一致するトレースは破棄されます。例えば、`DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"` です。Datadog Agent 7.49 以降では、正規表現は `DD_APM_FILTER_TAGS_REGEX_REJECT` で指定できます。
-
+: 指定されたスパンのタグと値が完全に一致するルートスパンがあるトレースを拒否します。このルールに一致する場合、トレースは削除されます。たとえば、`DD_APM_FILTER_TAGS_REJECT="key1:value1 key2:value2"` の場合です。Datadog Agent 7.49 以降では、正規表現を `DD_APM_FILTER_TAGS_REGEX_REJECT` で指定できます。
 
 {{< tabs >}}
-{{% tab "datadog.yaml" %}}
 
-代わりに、Agent 構成でカンマ区切りのリストで設定することもできます。
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    require: ["db:sql", "db.instance:mysql"]
-    reject: ["outcome:success", "key2:value2"]
-{{< /code-block >}}
-
-たとえば、`http.url` がこのエンドポイントに一致するヘルスチェックを無視するには次のようにします。
-
-{{< code-block lang="yaml" filename="datadog.yaml" >}}
-apm_config:
-  filter_tags:
-    reject: ["http.url:http://localhost:5050/healthcheck"]
-{{< /code-block >}}
-
-{{% /tab %}}
 {{% tab "Kubernetes" %}}
-#### Datadog Operator
+
+#### Datadog Operator {#datadog-operator}
 
 {{< code-block lang="yaml" filename="datadog-agent.yaml" >}}
 apiVersion: datadoghq.com/v2alpha1
@@ -78,7 +89,7 @@ spec:
 
 {{% k8s-operator-redeploy %}}
 
-#### Helm
+#### Helm {#helm}
 
 {{< code-block lang="yaml" filename="datadog-values.yaml" >}}
 agents:
@@ -93,47 +104,73 @@ agents:
 {{% k8s-helm-redeploy %}}
 
 [1]: /ja/agent/kubernetes/?tab=helm#installation
+
 {{% /tab %}}
+
+{{% tab "datadog.yaml" %}}
+
+これらの値を Agent の構成ファイルでカンマで区切られたリストを使用して設定することもできます。
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    require: ["db:sql", "db.instance:mysql"]
+    reject: ["outcome:success", "key2:value2"]
+{{< /code-block >}}
+
+たとえば、`http.url` がこのエンドポイントと一致する健全性チェックを無視するように設定するには次のようにします。
+
+{{< code-block lang="yaml" filename="datadog.yaml" >}}
+apm_config:
+  filter_tags:
+    reject: ["http.url:http://localhost:5050/healthcheck"]
+{{< /code-block >}}
+
+{{% /tab %}}
+
 {{< /tabs >}}
 
-この方法でトレースをフィルターすると、[トレースメトリクス][3]からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込みを減らす方法については、[Ingestion Controls][4] を参照してください。
 
-バックエンドでは、Datadog は取り込み後に以下のスパンタグを作成し、スパンに追加します。なお、これらのタグは Datadog Agent レベルでトレースをドロップするためには使用できません。エージェントは取り込み前に利用可能なタグに基づいてのみフィルタリングを行うためです。
+#### 利用可能なスパンタグ {#available-span-tags}
 
+バックエンドでは、Datadog は取り込み後のスパンに次のスパンタグを作成します。
+
+**注**: これらのタグは、Datadog Agent レベルでトレースを削除するために使用することはできません。Agent は、取り込み前に利用可能なタグに基づいてのみフィルタリングを行います。
 
 | 名前                                    | 説明                                      |
 |-----------------------------------------|--------------------------------------------------|
-| `http.path_group`                       | `http.url` タグからの完全な URL パス。        |
-| `http.url_details.host`                 | `http.url` タグのホスト名部分。      |
-| `http.url_details.path`                 | HTTP リクエスト行で渡された完全なリクエスト対象、またはそれに相当するもの。 |
-| `http.url_details.scheme`               | `http.url` タグからのリクエストスキーム。       |
-| `http.url_details.queryString`          | `http.url` タグからのクエリ文字列部分。 |
-| `http.url_details.port`                 | `http.url` タグからの HTTP ポート。            |
-| `http.useragent_details.os.family`      | User-Agent によって報告された OS ファミリー。         |
-| `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー。    |
-| `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー。     |
+| `http.path_group`                       | `http.url` タグからの完全な URL パス       |
+| `http.url_details.host`                 | `http.url` タグのホスト名部分     |
+| `http.url_details.path`                 | HTTP リクエスト行で渡された完全なリクエスト対象、またはそれに相当するもの|
+| `http.url_details.scheme`               | `http.url` タグからのリクエストスキーム      |
+| `http.url_details.queryString`          | `http.url` タグからのクエリ文字列部分|
+| `http.url_details.port`                 | `http.url` タグからの HTTP ポート           |
+| `http.useragent_details.os.family`      | User-Agent によって報告された OS ファミリー        |
+| `http.useragent_details.browser.family` | User-Agent によって報告されたブラウザファミリー   |
+| `http.useragent_details.device.family`  | User-Agent によって報告されたデバイスファミリー     |
 
-<div class="alert alert-danger"><strong>注</strong>: 2022 年 10 月 1 日以降、Datadog バックエンドは、取り込まれたすべてのスパンについてトレーサー間で<a href="/tracing/trace_collection/tracing_naming_convention">スパンタグのセマンティクス</a>を適用するためにリマッピングを適用します。Datadog Agent レベルでタグに基づいてスパンをドロップしたい場合、<strong>Remap from</strong> 列でタグを使用します。</div>
+<div class="alert alert-danger">2022 年 10 月 1 日以降、Datadog のバックエンドでは <a href="/tracing/trace_collection/tracing_naming_convention"> スパンタグのセマンティック
+</a>を、すべての取り込まれたスパンにわたるすべてのトレーサーに適用するために再マッピングを実施します。Datadog Agent レベルでルートスパンタグに基づいてトレースを削除したい場合は、<strong>リマップ元</strong>列のタグを使用してください。</div>
 
-#### ネットワーク通信
+##### ネットワーク通信 {#network-communications}
 
-| **名前**                   | **Remap from**                                      |
+| **名前**                   | **リマップ元**                                      |
 |----------------------------|-----------------------------------------------------|
 | `network.host.ip`          | `tcp.local.address` - Node.js                       |
 | `network.destination.ip`   | `out.host` - すべての言語  |
 | `network.destination.port` | `grpc.port` - Python<br>`tcp.remote.port` - Node.js<br>`out.port` - すべての言語  |
 
-#### HTTP リクエスト
+##### HTTP リクエスト{#http-requests}
 
-| **名前**                       | **Remap from**                                                                                        |
+| **名前**                       | **リマップ元**                                                                                        |
 |--------------------------------|-------------------------------------------------------------------------------------------------------|
 | `http.route`                   | `aspnet_core.route` - .NET<br>`aspnet.route` - .NET<br>`laravel.route` - PHP<br>`symfony.route` - PHP |
 | `http.useragent`               | `user_agent` - Java、C++                                                                                   |
 | `http.url_details.queryString` | `http.query.string` - Python                                                                          |
 
-#### データベース
+##### データベース {#database}
 
-| **名前**                         | **Remap from**                                                                                                                                                                                                                  |
+| **名前**                         | **リマップ元**                                                                                                                                                                                                                  |
 |----------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `db.system`                      | `db.type` - Java、Python、Node.js、Go<br>`active_record.db.vendor` - Ruby<br>`sequel.db.vendor` - Ruby                                                                                                                          |
 | `db.instance`                    | `mongodb.db` - Python<br> `sql.db` - Python<br> `db.name` - すべての言語                                           |
@@ -146,16 +183,16 @@ agents:
 | `db.mongodb.collection`          | `mongodb.collection` - Python、.NET、Ruby、PHP                                                                                                                                                                                  |
 | `db.cosmosdb.container`          | `cosmosdb.container` - .NET                                                                                                                                                                                                     |
 
-#### メッセージキュー
+##### メッセージキュー {#message-queue}
 
-| **名前**                               | **Remap from**                                                                                             |
+| **名前**                               | **リマップ元**                                                                                             |
 |----------------------------------------|------------------------------------------------------------------------------------------------------------|
 | `messaging.destination`                | `amqp.destination` - Node.js<br>`amqp.queue` - .NET<br>`msmq.queue.path` - .NET<br>`aws.queue.name` - .NET |
 | `messaging.url`                        | `aws.queue.url` - .NET、Java                                                                               |
 | `messaging.message_id`                 | `server_id` - Go                                                                                           |
 | `messaging.message_payload_size`       | `message.size` - .NET、Java                                                                                |
 | `messaging.operation`                  | `amqp.command` - .NET<br>`msmq.command` - .NET                                                             |
-| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Nodes.js                                                  |
+| `messaging.rabbitmq.routing_key`       | `amqp.routing_key` - Java<br>`amqp.routingKey` - Node.js                                                  |
 | `messaging.rabbitmq.delivery_mode`     | `messaging.rabbitmq.exchange` - .NET                                                                       |
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 | `messaging.msmq.queue.transactional`   | `msmq.queue.transactional` - .NET                                                                          |
@@ -166,9 +203,9 @@ agents:
 | `messaging.msmq.message.transactional` | `msmq.message.transactional` - .NET                                                                        |
 
 
-#### リモートプロシージャコール
+##### リモートプロシージャコール{#remote-procedure-calls}
 
-| **名前**                       | **Remap from**                                                                                          |
+| **名前**                       | **リマップ元**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `rpc.service`                  | `grpc.method.service` - Python、.NET                                                                    |
 | `rpc.method`                   | `grpc.method.name` - Python、.NET、Go                                                                   |
@@ -176,40 +213,49 @@ agents:
 | `rpc.grpc.status_code`         | `grpc.code` - Go<br>`status.code` - Python、.NET、Node.js<br>`grpc.status.code` - Python、.NET、Node.js |
 | `rpc.grpc.kind`                | `grpc.method.kind` - Python、Node.js、Go、.NET                                                          |
 | `rpc.grpc.path`                | `rpc.grpc.path` - Python、Node.js、Go、.NET                                                             |
-| `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js<br>`rpc.grpc.request.metadata` - Go                         |
+| `rpc.grpc.request.metadata.*`  | `grpc.request.metadata.*` - Python、Node.js <br>`rpc.grpc.request.metadata` - Go |
 | `rpc.grpc.response.metadata.*` | `grpc.response.metadata.*` - Python、Node.js
 
-#### エラー
+##### エラー {#errors}
 
-| **名前**                       | **Remap from**                                                                                          |
+| **名前**                       | **リマップ元**                                                                                          |
 |--------------------------------|---------------------------------------------------------------------------------------------------------|
 | `error.message`                  | `error.msg` - すべての言語                      |
 
-### リソースに基づいて無視する
+### リソースに基づいてトレースを無視する {#ignoring-traces-based-on-resources}
 
-**ignore resources** オプションを使用すると、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外することができます。[リソースを収集から除外][5]を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。ignore resources により無視されたトレースは、トレースメトリクスに含まれません。
+**リソースを無視**オプションは、トレースのグローバルルートスパンが特定の基準に一致する場合にリソースを除外できるようにします。[リソースを収集から除外する][5] を参照してください。このオプションは、この特定の Datadog Agent にトレースを送信するすべてのサービスに適用されます。リソースを無視が原因で削除されたトレースは、トレースメトリクスに含まれません。
 
-無視するリソースは、Agent のコンフィギュレーションファイル、`datadog.yaml`、または `DD_APM_IGNORE_RESOURCES` 環境変数で指定します。以下の例を参照してください。
+無視するリソースは、Agent の構成ファイル `datadog.yaml` 内で指定するか、`DD_APM_IGNORE_RESOURCES` 環境変数で指定します。以下の例を参照してください。
+
+`datadog.yaml` を使用する。
 
 {{< code-block lang="yaml" filename="datadog.yaml" >}}
 apm_config:
 ## @param ignore_resources - list of strings - optional
-## 正規表現のリストを提供し、リソース名に基づいて特定のトレースを除外することができます。
-## すべての入力項目は二重引用符で囲み、カンマ区切りにする必要があります。
+## A list of regular expressions can be provided to exclude certain traces based on their resource name.
+## All entries must be surrounded by double quotes and separated by commas.
 
   ignore_resources: ["(GET|POST) /healthcheck","API::NotesController#index"]
 {{< /code-block >}}
 
+`DD_APM_IGNORE_RESOURCES` を使用する。
+
+```shell
+DD_APM_IGNORE_RESOURCES="(GET|POST) /healthcheck,API::NotesController#index"
+```
+
 **注**:
-- Trace Agent が許容する正規表現の構文は、Go の [regexp][6] によって評価されます。
-- デプロイ戦略によっては、特殊文字をエスケープして正規表現を調整しなければならない場合もあります。
+- 環境変数形式 (`DD_APM_IGNORE_RESOURCES`) を使用する場合、値はカンマ区切りの文字列のリストとして指定する必要があります。
+- Trace Agent が受け入れる正規表現の構文は、Go の [regexp][6] によって評価されます。
+- デプロイ戦略によっては、特殊文字をエスケープして正規表現を調整しなければならない場合があります。
 - Kubernetes で専用コンテナを使用している場合は、ignore resource オプションの環境変数が **trace-agent** コンテナに適用されていることを確認してください。
 
-#### 例
+#### 例 {#example}
 
-トレースを必要としない `/api/healthcheck` の呼び出しを含むトレースを考えてみましょう。
+トレースから除外する `/api/healthcheck` への呼び出しを含むトレースを考えてみましょう。
 
-{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="トレーサーに無視させたいリソースのフレームグラフ" style="width:90%;">}}
+{{< img src="tracing/guide/ignoring_apm_resources/ignoreresources.png" alt="SDK が無視するよう指定するリソースのフレームグラフ" style="width:90%;">}}
 
 グローバルルートスパンのリソース名に注意してください。
 
@@ -217,7 +263,7 @@ apm_config:
 - リソース名: `Api::HealthchecksController#index`
 - Http.url: `/api/healthcheck`
 
-ignore resource オプションを正しく使用するためには、記述された正規表現ルールがリソース名 `Api::HealthchecksController#index` に一致している必要があります。いくつかの正規表現オプションが利用できますが、このリソースからのトレースをそのままフィルタリングする場合は `Api::HealthchecksController#index{TX-PL-LABEL}#x60; を使用するのが良いでしょう。
+リソースを無視オプションを正しく使用するには、記載かれた正規表現ルールがリソース名 `Api::HealthchecksController#index` と一致する必要があります。いくつかの正規表現オプションが可能ですが、このリソースからトレースを現状のまま正確にフィルタリングする場合、使用可能な正規表現は、`Api::HealthchecksController#index$` です。
 
 デプロイ方法に応じて、構文は少しずつ異なります。
 
@@ -229,7 +275,7 @@ apm_config:
   ignore_resources: Api::HealthchecksController#index$
 {{< /code-block >}}
 
-複数の値の場合
+複数の値の場合:
 
 {{< code-block lang="yaml" >}}
 apm_config:
@@ -237,21 +283,21 @@ apm_config:
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Docker compose" %}}
+{{% tab "Docker Compose" %}}
 
-Datadog Agent コンテナの環境変数のリストに、以下の例のようなパターンで `DD_APM_IGNORE_RESOURCES` を追加します。Docker Compose には、独自の[変数の置換][1]機能があり、`$` などの特殊文字を使用する場合に考慮する必要があります。 
+Datadog Agent コンテナの環境変数リストに `DD_APM_IGNORE_RESOURCES` を追加し、以下の例のようなパターンを使用します。Docker Compose には、`$` などの特殊文字を使用する際に考慮すべき独自の [変数置換][1] があります。
 
 {{< code-block lang="yaml" >}}
     environment:
-      // その他の Datadog Agent の環境変数
+      // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES=Api::HealthchecksController#index$$
 {{< /code-block >}}
 
-複数の値の場合
+複数の値の場合:
 
 {{< code-block lang="yaml" >}}
     environment:
-      // その他の Datadog Agent の環境変数
+      // other Datadog Agent environment variables
       - DD_APM_IGNORE_RESOURCES="value1","Api::HealthchecksController#index$$"
 {{< /code-block >}}
 
@@ -259,7 +305,7 @@ Datadog Agent コンテナの環境変数のリストに、以下の例のよう
 {{% /tab %}}
 {{% tab "Docker run" %}}
 
-Datadog Agent をスピンアップするための docker run コマンドに、`DD_APM_IGNORE_RESOURCES` を追加します。
+Datadog Agent をスピンアップするための docker run コマンドに `DD_APM_IGNORE_RESOURCES` を追加します。
 
 {{< code-block lang="shell" >}}
 docker run -d --name datadog-agent \
@@ -272,23 +318,23 @@ docker run -d --name datadog-agent \
               -e DD_APM_IGNORE_RESOURCES="Api::HealthchecksController#index$" \
               -e DD_APM_ENABLED=true \
               -e DD_APM_NON_LOCAL_TRAFFIC=true \
-              gcr.io/datadoghq/agent:latest
+              registry.datadoghq.com/agent:latest
 {{< /code-block >}}
 
-複数の値の場合
+複数の値の場合:
 
 {{< code-block lang="yaml" >}}
               -e DD_APM_IGNORE_RESOURCES=["value1","Api::HealthchecksController#index$"] \
 {{< /code-block >}}
 
 {{% /tab %}}
-{{% tab "Kubernetes daemonset" %}}
+{{% tab "Kubernetes DaemonSet" %}}
 
-trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を追加します。
+trace-agent 専用コンテナに環境変数 `DD_APM_IGNORE_RESOURCES` を追加します。
 
 {{< code-block lang="yaml" >}}
     - name: trace-agent
-        image: "gcr.io/datadoghq/agent:latest"
+        image: "registry.datadoghq.com/agent:latest"
         imagePullPolicy: IfNotPresent
         command: ["trace-agent", "-config=/etc/datadog-agent/datadog.yaml"]
         resources: {}
@@ -325,7 +371,7 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
           value: "Api::HealthchecksController#index$"
 {{< /code-block >}}
 
-複数の値の場合
+複数の値の場合:
 
 {{< code-block lang="yaml" >}}
         - name: DD_APM_IGNORE_RESOURCES
@@ -335,25 +381,25 @@ trace-agent 専用コンテナに、環境変数 `DD_APM_IGNORE_RESOURCES` を�
 {{% /tab %}}
 {{% tab "Kubernetes Helm" %}}
 
-`values.yaml` ファイルの `traceAgent` セクションで、`env` セクションに `DD_APM_IGNORE_RESOURCES` を追加し、[通常通りに Helm をスピンアップ][1]します。
+`values.yaml` ファイルの `traceAgent` セクションで、`env` セクションに `DD_APM_IGNORE_RESOURCES` を追加し、その後 [通常通り helm をスピンアップします][1]。
 
 {{< code-block lang="yaml" filename="values.yaml" >}}
     traceAgent:
-      # agents.containers.traceAgent.env -- trace-agent コンテナ向けの追加の環境変数
+      # agents.containers.traceAgent.env -- Additional environment variables for the trace-agent container
       env:
         - name: DD_APM_IGNORE_RESOURCES
           value: Api::HealthchecksController#index$
 
 {{< /code-block >}}
 
-複数の値の場合
+複数の値の場合:
 
 {{< code-block lang="yaml" >}}
         - name: DD_APM_IGNORE_RESOURCES
           value: value1, Api::HealthchecksController#index$
 {{< /code-block >}}
 
-代わりに、`helm install` コマンドで `agents.containers.traceAgent.env` を設定することもできます。　
+または、`helm install` コマンドに `agents.containers.traceAgent.env` を設定することもできます。
 
 {{< code-block lang="shell" >}}
 helm install dd-agent -f values.yaml \
@@ -367,11 +413,11 @@ helm install dd-agent -f values.yaml \
 {{% /tab %}}
 {{% tab "Amazon ECS タスク定義" %}}
 
-Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent のコンテナ定義に環境変数 `DD_APM_IGNORE_RESOURCES` を追加し、その値が次のような JSON に評価されるようにします。
+Amazon ECS を使用している場合 (たとえば、EC2 上で)、Datadog Agent のコンテナ定義に環境変数 `DD_APM_IGNORE_RESOURCES` を追加し、その値が次のような JSON に評価されるようにします。
 
 {{< code-block lang="json" >}}
     "environment": [
-    // Datadog Agent 向けのその他の環境変数
+	// other environment variables for the Datadog Agent
         {
           "name": "DD_APM_IGNORE_RESOURCES",
           "value": "Api::HealthchecksController#index$"
@@ -382,22 +428,24 @@ Amazon ECS を使用している場合 (例えば、EC2 上で)、Datadog Agent 
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-danger"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
+<div class="alert alert-danger">この方法でトレースをフィルタリングすると、これらのリクエストが<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>から削除されます。トレースメトリクスに影響を与えずに取り込みを削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">Ingestion Control</a> を参照してください。</div>
 
-## トレーサーのコンフィギュレーションオプション
+## トレーサーの構成 {#tracer-configuration}
 
-言語固有のトレーサーの中には、Datadog Agent に送信する前にスパンを修正するオプションがあります。アプリケーション固有の要件があり、以下の言語を使用している場合にはこのオプションを使用してください。
+一部の言語トレーサーは、Datadog Agent に送信される前にトレースを除外する場合があります。アプリケーション固有の要件がある場合は、このオプションを使用してください。
 
-<div class="alert alert-warning"><strong>重要</strong>: リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。
+<div class="alert alert-warning">
+1. リクエストが分散されたトレースに関連付けられている場合、これらのフィルタリングルールを通じて部分的に除外すると、結果として得られるトレースのサンプリングが不正確になる場合があります。<br>
+2. この方法でトレースをフィルタリングすると、これらのリクエストが<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>から削除されます。トレースメトリクスに影響を与えずに取り込みを削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">Ingestion Control</a> を参照してください。</div>
 
 
 {{< programming-lang-wrapper langs="ruby,python,nodeJS,java" >}}
 
 {{< programming-lang lang="ruby" >}}
 
-Ruby トレーサーには、特定の条件を満たすトレースを除去する後処理パイプラインがあります。詳しい情報や例は[トレースの後処理][1]を参照してください。
+Ruby トレーサーには、特定の基準を満たすトレースを削除する後処理パイプラインがあります。詳細情報と例は、[トレースの後処理][1] を参照してください。
 
-たとえば、リソース名が `Api::HealthchecksController#index` である場合、そのリソース名を含むトレースを除去するために `Datadog::Tracing::Pipeline::SpanFilter` クラスを使用します。このフィルターは、[スパンオブジェクト][2]で利用可能な他のメタデータを照合するためにも使用できます。
+たとえば、リソース名が `Api::HealthchecksController#index` の場合、リソース名を含むトレースを削除するには `Datadog::Tracing::Pipeline::SpanFilter` クラスを使用します。このフィルターは、[スパンオブジェクト][2] に利用可能な他のメタデータに対して一致させる目的でも使用できます。
 
 ```
 Datadog::Tracing.before_flush(
@@ -411,36 +459,46 @@ Datadog::Tracing.before_flush(
 
 {{< programming-lang lang="python" >}}
 
-Pythonトレーサーには、特定のエンドポイントからのトレースを削除するように設定できる `FilterRequestsOnUrl` フィルターがあります。また、カスタムフィルターを書くこともできます。詳細は[トレースフィルター][1] を参照してください。
+Python トレーサーは、不要なトレースをフィルタリングするオプションを提供します。
 
-ルートスパンの `http.url` スパンタグの値が `http://<domain>/healthcheck` の場合の例を考えます。`healthcheck` で終わるすべてのエンドポイントに一致するよう、次の正規表現を使用します。
+### カスタムフィルターの使用 {#using-custom-filters}
 
+高度なユースケースでは、カスタムフィルターを作成できます。
+
+```py
+from ddtrace.trace import tracer
+from ddtrace.trace import TraceFilter
+import re
+
+class CustomFilter(TraceFilter):
+    def __init__(self, pattern):
+        self.pattern = re.compile(pattern)
+
+    def process_trace(self, trace):
+        for span in trace:
+            if span.get_tag('http.url') and self.pattern.match(span.get_tag('http.url')):
+                return None  # Drop the trace
+        return trace  # Keep the trace
+
+# Configure the SDK with your custom filter
+tracer.configure(trace_processors=[CustomFilter(r'http://.*/healthcheck$')])
 ```
-from ddtrace import tracer
-from ddtrace.filters import FilterRequestsOnUrl
-tracer.configure(settings={
-    'FILTERS': [
-        FilterRequestsOnUrl(r'http://.*/healthcheck$'),
-    ],
-})
-```
 
-[1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#ddtrace.filters.FilterRequestsOnUrl
 {{< /programming-lang >}}
 
 {{< programming-lang lang="nodeJS" >}}
 
-[Http][1] プラグインにブロックリストを設定します。ブロックリストが一致する対象については API ドキュメントを参照してください。例えば、受信 Http リクエストは URL パスに一致するため、トレースの `http.url` スパンタグが `http://<domain>/healthcheck` であれば、`healthcheck` URL に一致するルールを記述します。
+[Http][1] プラグインにブロックリストを構成します。API ドキュメントでブロックリストと一致するものをメモしてください。たとえば、受信する Http リクエストは URL パスと一致するため、トレースの `http.url` スパンタグが `http://<domain>/healthcheck` の場合、`healthcheck` URL に一致するルールを作成します。
 
 
 ```
 const tracer = require('dd-trace').init();
 tracer.use('http', {
-  // 受信 http リクエストはパスに一致する
+  // incoming http requests match on the path
   server: {
     blocklist: ['/healthcheck']
   },
-  // 発信 http リクエストは完全な URL で一致する
+  // outgoing http requests match on a full URL
   client: {
     blocklist: ['https://telemetry.example.org/api/v1/record']
   }
@@ -449,21 +507,21 @@ tracer.use('http', {
 //import http
 
 ```
-<div class="alert alert-info"><strong>注</strong>: インテグレーションのためのトレーサーコンフィギュレーションは、インスツルメントされたモジュールがインポートされる<em>前に</em>行う必要があります。</div>
+<div class="alert alert-info">統合する SDK 構成は、そのインスツルメンテーションモジュールがインポートされる<em>前</em>に行う必要があります。</div>
 
 [1]: https://datadoghq.dev/dd-trace-js/interfaces/export_.plugins.connect.html#blocklist
 {{< /programming-lang >}}
 
 {{< programming-lang lang="java" >}}
 
-Java トレーサーには、カスタム `TraceInterceptor` で特定のスパンをフィルタリングするオプションがあります。[トレーサーの拡張][1]を参照してください。
+Java トレーサーには、特定のスパンをフィルタリングするためのカスタム `TraceInterceptor` オプションがあります。[トレーサーの拡張][1] を参照してください。
 
-例えば、リソース名が `GET /healthcheck` であれば、このリソース名を含むトレースを無視するトレースインターセプターを記述します。ユースケースに合わせてロジックを調整してください。
+たとえば、リソース名が `GET /healthcheck` の場合、このリソース名を含むトレースを除外するトレースインターセプターを作成します。ユースケースに一致するようロジックを調整してください。
 
 ```
 public class GreetingController {
    static {
-       // クラスの static ブロックで複数回の初期化を回避。
+       // In a class static block to avoid initializing multiple times.
        GlobalTracer.get().addTraceInterceptor(new TraceInterceptor() {
            @Override
            public Collection<? extends MutableSpan> onTraceComplete(Collection<? extends MutableSpan> trace) {
@@ -487,7 +545,6 @@ public class GreetingController {
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-<div class="alert alert-danger"><strong>注</strong>: このようにトレースをフィルタリングすると、<a href="/tracing/guide/metrics_namespace/">トレースメトリクス</a>からこれらのリクエストが削除されます。トレースメトリクスに影響を与えずに取り込み量を削減する方法については、<a href="/tracing/trace_ingestion/ingestion_controls">取り込みコントロール</a>を参照してください。</div>
 
 [1]: /ja/help/
 [2]: /ja/tracing/trace_collection/custom_instrumentation/otel_instrumentation/

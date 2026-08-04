@@ -18,16 +18,16 @@ cascade:
     {{< nextlink href="monitors/guide/why-did-my-monitor-settings-change-not-take-effect" >}}Monitor settings changes not taking effect{{< /nextlink >}}
     {{< nextlink href="monitors/guide/recovery-thresholds" >}}Recovery thresholds{{< /nextlink >}}
     {{< nextlink href="monitors/guide/alert_aggregation" >}}Alert aggregation{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification message Best Practice{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/notification-message-best-practices" >}}Notification Message Best Practices{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Tutorial:" >}}
     {{< nextlink href="monitors/guide/create-cluster-alert" >}}Create cluster alerts for metric monitor{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/create-monitor-dependencies" >}}Create monitor dependencies{{< /nextlink >}}
     {{< nextlink href="monitors/types/synthetic_monitoring" >}}How to create monitors in synthetic tests{{< /nextlink >}}
     {{< nextlink href="monitors/guide/reduce-alert-flapping" >}}Reduce alert flapping{{< /nextlink >}}
-        {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Clean up monitor clutter{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/clean_up_monitor_clutter" >}}Clean up monitor clutter{{< /nextlink >}}
     {{< nextlink href="monitors/guide/troubleshooting-monitor-alerts" >}}Troubleshooting monitor alerts{{< /nextlink >}}
+    {{< nextlink href="monitors/guide/troubleshooting-no-data" >}}Troubleshooting No Data in monitors{{< /nextlink >}}
 {{< /whatsnext >}}
 
 {{< whatsnext desc="Monitor configuration:" >}}
@@ -62,6 +62,5 @@ cascade:
     {{< nextlink href="monitors/guide/integrate-monitors-with-statuspage" >}}Integrate monitors with Statuspage{{< /nextlink >}}
     {{< nextlink href="monitors/guide/github_gating" >}}Gating your GitHub Actions Deployments with Datadog Monitors{{< /nextlink >}}
     {{< nextlink href="monitors/guide/add-a-minimum-request-threshold-for-error-rate-alerts" >}}Add a minimum request threshold for error rate alerts{{< /nextlink >}}
-    {{< nextlink href="monitors/guide/export-monitor-alerts-to-csv" >}}Export monitor alerts to CSV{{< /nextlink >}}
     {{< nextlink href="monitors/guide/composite_use_cases" >}}Composite monitor use cases{{< /nextlink >}}
 {{< /whatsnext >}}

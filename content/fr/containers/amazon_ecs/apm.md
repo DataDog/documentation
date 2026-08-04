@@ -1,6 +1,8 @@
 ---
 aliases:
 - /fr/agent/amazon_ecs/apm
+description: Configurer la collecte de traces APM pour les applications conteneurisées
+  exécutées sur Amazon ECS
 further_reading:
 - link: /agent/amazon_ecs/logs/
   tag: Documentation
@@ -22,7 +24,7 @@ Une fois la collecte activée, le conteneur de l'Agent Datadog recueille les tra
 ## Configurer l'Agent Datadog pour qu'il accepte les traces
 1. Pour recueillir toutes les traces à partir de vos conteneurs ECS exécutés, mettez à jour la définition de tâche de votre Agent issue de la [configuration ECS d'origine][6] en spécifiant la configuration ci-dessous.
 
-   Utilisez [datadog-agent-ecs-apm.json][3] comme modèle de référence pour connaître la configuration de base requise. Dans la définition de tâche du conteneur de l'Agent Datadog, sous la section `portMappings`, définissez le port du host et le port du conteneur sur `8126` avec le protocole `tcp`.
+    Utilisez [datadog-agent-ecs-apm.json][3] comme modèle de référence pour connaître la configuration de base requise. Dans la définition de tâche du conteneur de l'Agent Datadog, sous la section `portMappings`, définissez le port du host et le port du conteneur sur `8126` avec le protocole `tcp`.
 
     ```json
     {
@@ -31,7 +33,7 @@ Une fois la collecte activée, le conteneur de l'Agent Datadog recueille les tra
           "name": "datadog-agent",
           "image": "public.ecr.aws/datadog/agent:latest",
           "cpu": 100,
-          "memory": 256,
+          "memory": 512,
           "essential": true,
           "portMappings": [
             {
@@ -117,31 +119,16 @@ Avec certains langages (Python, JavaScript, Ruby et Go), vous pouvez également 
 {{< programming-lang lang="python" >}}
 
 #### Variable au moment du lancement
-Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<commande de lancement Python>` :
+Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Python Startup Command>` :
 
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement Python>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Python Startup Command>"
 ]
 ```
 Pour Python, la commande de lancement correspond généralement à `ddtrace-run python my_app.py`. Elle peut toutefois varier en fonction du framework utilisé, notamment lorsque vous utilisez [uWSGI][1] ou que vous instrumentez votre [code manuellement avec `patch_all`][2].
-
-#### Code
-Vous pouvez également mettre à jour votre code afin que le traceur définisse le hostname de façon explicite :
-
-```python
-import requests
-from ddtrace import tracer
-
-
-def get_aws_ip():
-  r = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4')
-  return r.text
-
-tracer.configure(hostname=get_aws_ip())
-```
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
 [2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
@@ -150,12 +137,12 @@ tracer.configure(hostname=get_aws_ip())
 {{< programming-lang lang="nodeJS" >}}
 
 #### Variable au moment du lancement
-Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<commande de lancement Node.js>` :
+Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Node.js Startup Command> :
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement Node.js>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Node.js Startup Command>"
 ]
 ```
 
@@ -177,12 +164,12 @@ const axios = require('axios');
 {{< programming-lang lang="ruby" >}}
 
 #### Variable au moment du lancement
-Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Commande de lancement Ruby>` :
+Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Ruby Startup Command>` :
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement Ruby>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Ruby Startup Command>"
 ]
 ```
 
@@ -190,7 +177,7 @@ Mettez à jour la section `entryPoint` de la définition de tâche comme suit, e
 Vous pouvez également mettre à jour votre code afin que le traceur définisse le hostname de façon explicite :
 
 ```ruby
-require 'ddtrace'
+require 'datadog' # Use 'ddtrace' if you're using v1.x
 require 'net/http'
 
 Datadog.configure do |c|
@@ -200,21 +187,21 @@ end
 
 {{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
+{{< programming-lang lang="go">}}
 
 #### Variable au moment du lancement
-Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Commande de lancement Go>` :
+Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Go Startup Command>` :
 
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement Go>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Go Startup Command>"
 ]
 ```
 
 #### Code
-Vous pouvez également mettre à jour votre code afin que le traceur définisse le hostname de façon explicite :
+Vous pouvez également mettre à jour votre code pour que le traceur définisse explicitement le hostname. {{% tracing-go-v2 %}}
 
 ```go
 package main
@@ -222,7 +209,7 @@ package main
 import (
     "net/http"
     "io/ioutil"
-    "gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
+    "github.com/DataDog/dd-trace-go/v2/ddtrace/tracer"
 )
 
 func main() {
@@ -230,9 +217,9 @@ func main() {
     bodyBytes, err := ioutil.ReadAll(resp.Body)
     host := string(bodyBytes)
     if err == nil {
-        // définir la sortie de la commande curl avec la variable d'environnement DD_AGENT_HOST
+        //set the output of the curl command to the DD_AGENT_HOST env
         os.Setenv("DD_AGENT_HOST", host)
-        // indiquer à l'Agent de trace le host défini
+        // tell the trace agent the host setting
         tracer.Start(tracer.WithAgentAddr(host))
         defer tracer.Stop()
     }
@@ -245,13 +232,13 @@ func main() {
 {{< programming-lang lang="java" >}}
 
 #### Variable au moment du lancement
-Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Commande de lancement Java>` :
+Mettez à jour la section `entryPoint` de la définition de tâche comme suit, en spécifiant votre `<Java Startup Command>` :
 
 ```java
 "entryPoint": [
   "sh",
   "-c",
-  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement Java>"
+  "export DD_AGENT_HOST=$(curl http://169.254.169.254/latest/meta-data/local-ipv4); <Java Startup Command>"
 ]
 ```
 La commande de lancement Java doit inclure votre `-javaagent:/chemin/vers/dd-java-agent.jar`. Pour obtenir d'autres exemples, reportez-vous à la [documentation relative au tracing Java][1].
@@ -315,13 +302,13 @@ env[DD_VERSION] = $DD_VERSION
 {{< /programming-lang-wrapper >}}
 
 #### IMDSv2
-Si vous utilisez IMDSv2, la configuration `entryPoint` équivalente ressemble à ce qui suit. Remplacez `<Commande de lancement>` par la commande adéquate en fonction du langage utilisé, comme décrit dans les exemples ci-dessus.
+Si vous utilisez IMDSv2, la configuration `entryPoint` équivalente ressemble à ce qui suit. Remplacez `<Startup Command>` par la commande adéquate en fonction du langage utilisé, comme décrit dans les exemples ci-dessus.
 
 ```json
 "entryPoint": [
   "sh",
   "-c",
-  "export TOKEN=$(curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\"); export DD_AGENT_HOST=$(curl -H \"X-aws-ec2-metadata-token: $TOKEN\" http://169.254.169.254/latest/meta-data/local-ipv4); <Commande de lancement>"
+  "export TOKEN=$(curl -X PUT \"http://169.254.169.254/latest/api/token\" -H \"X-aws-ec2-metadata-token-ttl-seconds: 21600\"); export DD_AGENT_HOST=$(curl -H \"X-aws-ec2-metadata-token: $TOKEN\" http://169.254.169.254/latest/meta-data/local-ipv4); <Startup Command>"
 ]
 ```
 

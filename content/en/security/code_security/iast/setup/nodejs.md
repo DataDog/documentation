@@ -29,10 +29,10 @@ You can detect code-level vulnerabilities and monitor application security in No
 Follow these steps to enable Code Security in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Code Security. For details, see [Library Compatibility][3] page.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-   If you initialize the APM library on the command line using the `--require` option to Node.js:
+   If you initialize the Datadog SDK on the command line using the `--require` option to Node.js:
 
    ```shell
    node --require dd-trace/init app.js
@@ -96,7 +96,7 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 {{< /tabs >}}
 
 4. Restart your service.
-5. To see Code Security in action, browse your service and the code-level vulnerabilities appear in the [Vulnerability Explorer][5].
+5. To see Code Security in action, browse your service and the code-level vulnerabilities appear in the [{{< ui >}}Vulnerability Explorer{{< /ui >}}][5].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
 
@@ -104,7 +104,7 @@ If you need additional assistance, contact [Datadog support][6].
 
 ## Bundling with esbuild
 
-`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications.
+`dd-trace` provides an esbuild plugin. Starting in `dd-trace@5.69.0`, the plugin also supports IAST for CommonJS bundled applications. Starting in `dd-trace@5.78.0`, support is extended to applications using ESM.
 
 Here's an example of how one might use dd-trace with esbuild:
 
@@ -118,7 +118,7 @@ esbuild.build({
   entryPoints: ['app.js'],
   bundle: true,
   outfile: 'out.js',
-  sourcemap: true, // required for correct vulnearability location
+  sourcemap: true, // required for correct vulnerability location
   plugins: [ddPlugin],
   platform: 'node', // allows built-in modules to be required
   target: ['node18'],
@@ -137,7 +137,7 @@ To enable IAST during bundling, set the `DD_IAST_ENABLED` environment variable:
 DD_IAST_ENABLED=true node esbuild/esbuilder.js
 ```
 
-Because the tracer uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
+Because the SDK uses native modules, you must list them in `external` and ship a `node_modules` directory alongside the bundled app. Native modules used by `dd-trace` are published under the `@datadog/*` scope.
 
 To generate a minimal `node_modules` directory that contains only the required native modules and their dependencies:
 

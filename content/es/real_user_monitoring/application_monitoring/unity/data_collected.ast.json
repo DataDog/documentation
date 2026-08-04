@@ -1,0 +1,60 @@
+{
+  "$$mdtype": "Node",
+  "inline": false,
+  "attributes": {
+    "frontmatter": {
+      "title": {
+        "itemTranslationData": {
+          "375c5e84ca09d8c84fd8df1197df5b43": {
+            "string": "Datos recopilados de Unity"
+          }
+        }
+      },
+      "description": {
+        "itemTranslationData": {
+          "53789a0cc14fc24b8c254f315def61d6": {
+            "string": "Conoce los datos recopilados por la monitorización de Unity."
+          }
+        }
+      },
+      "further_reading": {
+        "listTranslationData": {
+          "0": {
+            "link": "https://github.com/DataDog/dd-sdk-unity",
+            "text": {
+              "itemTranslationData": {
+                "e3149cee15c03f22f7f148d3e3aab4e1": {
+                  "string": "Código fuente de dd-sdk-unity"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "e71776c17591b32ce376a434685d04f5": {
+                  "string": "Código fuente"
+                }
+              }
+            }
+          },
+          "1": {
+            "link": "real_user_monitoring/explorer/",
+            "text": {
+              "itemTranslationData": {
+                "074ab9df9528722dd668d1ad1a471918": {
+                  "string": "Aprender a explorar tus datos de RUM"
+                }
+              }
+            },
+            "tag": {
+              "itemTranslationData": {
+                "b44a7e6d9c5df7ecc4cd88baa827e409": {
+                  "string": "Documentación"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "document"}

@@ -24,7 +24,7 @@ The Go Datadog Trace Library has a [version support policy][2] defined for Go ve
 - Datadog Agent v5.21.1+.
 - Instrument your application before configuring integrations using one of the following methods:
   * [Automatically at compile time using `orchestrion`][78]
-  * [Manually add and initialize the Datadog Go tracer][77]
+  * [Manually add and initialize the Datadog Go SDK][77]
 
 ### Go Tracer support
 
@@ -103,6 +103,10 @@ The Go tracer includes support for the following data stores and libraries.
 | [Kubernetes][71]        | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/k8s.io/client-go/kubernetes/v2][111]       |
 | [Memcache][73]          | Fully Supported | [github.com/DataDog/dd-trace-go/contrib/bradfitz/gomemcache/memcache/v2][112]      |
 
+**Note**: Redis 6.0+ supports inline authentication in commands such as `HELLO`, `MIGRATE`, and `ACL SETUSER`.
+
+  - **Datadog Trace Agent**: The minimum required and recommended version is `7.76.1` to ensure authentication parameters are automatically obfuscated in trace metadata.
+  - **Datadog Lambda Extension** (Serverless environments): The minimum required version is `v28.0.0`.
 
 Packages must be imported with:
 

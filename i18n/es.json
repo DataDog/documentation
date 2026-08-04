@@ -292,6 +292,12 @@
   "available_for": {
     "other": "Disponible para"
   },
+  "join_now": {
+    "other": "Únete ahora"
+  },
+  "datadog_partner_network": {
+    "other": "Documentación sobre redes de socios de Datadog"
+  },
   "alert_note": {
     "other": "NOTA"
   },

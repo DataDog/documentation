@@ -14,6 +14,9 @@ further_reading:
     - link: 'logs/explorer/#list-of-logs'
       tag: 'Documentation'
       text: 'The list view of logs'
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 ## Overview
@@ -24,7 +27,7 @@ For example, Live Tail is specifically useful to check if a process has correctl
 
 ## Live Tail view
 
-In the [Log Explorer][3], choose the Live Tail option in the timerange to query logs as they flow into Datadog. See [Log Search Syntax][4] for more information on queries.
+In the [Log Explorer][3], choose the {{< ui >}}Live Tail{{< /ui >}} option in the timerange to query logs as they flow into Datadog. See [Log Search Syntax][4] for more information on queries.
 
 {{< img src="logs/explorer/live_tail/livetail.mp4" alt="Log Live Tail" video=true style="width:100%;" >}}
 

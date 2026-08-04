@@ -27,11 +27,11 @@ further_reading:
 
 JUnit test report files are XML files that contain test execution information, such as test and suite names, pass or fail status, duration, and sometimes error logs. Although introduced by the [JUnit][1] testing framework, many other popular frameworks are able to output results using this format.
 
-If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog tracers. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
+If your testing framework can generate JUnit XML test reports, you can use these as a lightweight alternative to [instrumenting your tests natively][2] using Datadog SDKs. Test results imported from JUnit XML reports appear alongside test data reported by tracers.
 
 ## Compatibility
 
-Supported Datadog tracing library:
+Supported Datadog SDK:
 
 | Datadog Library | Version |
 |---|---|
@@ -372,12 +372,12 @@ To automatically add the `test.codeowners` tag to your tests, you need to:
 The JUnit XML uses a private [GitHub App][12] to read the `CODEOWNERS` file.
 
 1. Go to the [GitHub integration tile][13].
-2. Click **Link GitHub Account**.
+2. Click {{< ui >}}Link GitHub Account{{< /ui >}}.
 3. Follow the instructions to configure the integration for a personal or organization account.
-4. In **Edit Permissions**, grant `Contents: Read` access.
-5. Click **Create App in GitHub** to finish the app creation process on GitHub.
+4. In {{< ui >}}Edit Permissions{{< /ui >}}, grant `Contents: Read` access.
+5. Click {{< ui >}}Create App in GitHub{{< /ui >}} to finish the app creation process on GitHub.
 6. Give the app a name, for example, `Datadog Test Optimization`.
-7. Click **Install GitHub App** and follow the instructions on GitHub.
+7. Click {{< ui >}}Install GitHub App{{< /ui >}} and follow the instructions on GitHub.
 
 #### Manually providing the `test.source.file` tag
 
@@ -541,10 +541,9 @@ The values that you send to Datadog are strings, so the facets are displayed in 
 
 ## Reporting code coverage
 
-{{< callout url="https://www.datadoghq.com/product-preview/code-coverage/" >}}
-This section covers the code coverage feature of the Test Optimization product.
-This feature is being deprecated and replaced by a new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product. Sign up for the Preview!
-{{< /callout >}}
+<div class="alert alert-warning">
+This Test Optimization feature is legacy. Use the new dedicated <a href="https://docs.datadoghq.com/code_coverage/">Code Coverage</a> product instead.
+</div>
 
 It is possible to report code coverage for a given JUnit report via the `--report-measures` option, by setting the `test.code_coverage.lines_pct` measure:
 

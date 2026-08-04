@@ -7,6 +7,10 @@ further_reading:
 - link: data_security/logs
   tag: ドキュメント
   text: ログ管理のためのデータセキュリティ
+- link: coterm
+  tag: ドキュメント
+  text: 'CoTerm: Monitor terminal sessions and sensitive activities on local and remote
+    systems'
 title: HIPAA コンプライアンス
 ---
 
@@ -16,7 +20,7 @@ title: HIPAA コンプライアンス
 
 組織は患者データを管理するためにクラウドベースのソリューションを使用しており、これは HIPAA 規制への遵守を必要とします。Datadog は HIPAA 準拠の可観測性を提供し、規制要件への準拠を確保します。
 
-## HIPAA 準拠のログ管理
+## HIPAA 準拠サービス
 
 {{% hipaa-customers %}}
 

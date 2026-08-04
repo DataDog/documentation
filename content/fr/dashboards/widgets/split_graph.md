@@ -1,4 +1,6 @@
 ---
+description: Décomposez les requêtes sur plusieurs valeurs de tags pour identifier
+  les valeurs aberrantes et les tendances dans les performances des métriques.
 further_reading:
 - link: /dashboards/guide/graphing_json/
   tag: Guide
@@ -7,7 +9,7 @@ title: Widget Graphique scindé
 widget_type: split_group
 ---
 
-<div class="alert alert-info">Les widgets Graphique scindé ne sont pas pris en charge sur les screenboards et les <a href="https://docs.datadoghq.com/dashboards/sharing/#share-a-dashboard-by-public-url">dashboards publics.</a></div>
+<div class="alert alert-info">Les widgets Split Graph ne sont pas pris en charge sur les screenboards et les <a href="/dashboards/sharing/shared_dashboards">dashboards partagés.</a></div>
 
 ## Présentation
 
@@ -22,17 +24,17 @@ Accédez au widget Graphique scindé dans la barre des widgets, sous la section 
 ### Créer un graphique scindé à partir d'un widget existant
 
 Vous pouvez également créer un graphique scindé en fractionnant un widget existant en fonction d'une valeur de tag depuis l'onglet **Split Graph**. Procédez comme suit pour ouvrir l'onglet **Split Graph** :
-- Ajoutez un nouveau widget à votre dashboard, puis cliquez sur l'onglet **Split Graph** situé en haut de l'éditeur de requête.
-- Ouvrez un widget en mode plein écran en sélectionnant l'icône de modification ou d'agrandissement depuis les options de contrôle du widget, puis cliquez sur l'onglet **Split Graph**.
-- Ouvrez le menu contextuel d'un widget sur votre dashboard, puis sélectionnez **Split Graph**.
+- Ajoutez un nouveau widget à votre dashboard et cliquez sur l'onglet **Split Graph** en haut de l'éditeur de requête.
+- Ouvrez un widget en mode plein écran en sélectionnant l'icône de modification ou d'agrandissement dans les options de contrôle du widget, puis cliquez sur l'onglet **Split Graph**.
+- Ouvrez le menu contextuel d'un widget dans votre dashboard et sélectionnez **Split Graph**.
 
 Depuis l'onglet **Split Graph**, vous pouvez configurer le mode de fractionnement de votre graphique, définir la limite du nombre de graphiques affichés, et préciser leur ordre d'affichage. 
-1. Vous pouvez modifier la configuration du fractionnement en ajustant la dimension fractionnée, le nombre de graphiques affichés et les options d'affichage. Pour en savoir plus sur les options de configuration, consultez la section [Configuration](#configuration).
+1. Apportez des modifications de configuration au fractionnement en modifiant la dimension de fractionnement, le nombre de graphiques affichés ou les options d'affichage. Pour plus d'informations sur les options de configuration, consultez la section [Configuration](#configuration).
 2. Cliquez sur **Save to Dashboard** pour créer un widget Graphique scindé en bas de votre dashboard. Aucune modification ne sera apportée au widget d'origine de votre dashboard.
 
 ### Créer un graphique scindé depuis un autre endroit dans Datadog
 
-Lorsqu'une visualisation présentant plusieurs valeurs est affichée dans l'application, vous pouvez l'exporter vers un dashboard en tant que widget.
+Chaque fois qu'un fractionnement sur plusieurs valeurs est affiché dans l'application, vous pouvez l'exporter en tant que widget vers un dashboard.
 1. Cliquez sur **Export to Dashboard**.
 1. Dans la fenêtre d'exportation qui s'affiche, vous pouvez rechercher un dashboard existant vers lequel exporter le widget ou créer un dashboard contenant ce widget.
 
@@ -60,7 +62,7 @@ Les modifications que vous apportez apparaissent immédiatement dans les graphiq
 
 Vous pouvez modifier le mode de fractionnement du graphique via plusieurs options de configuration, ainsi que certains paramètres propres au fractionnement choisi.
 
-| Option de configuration | Description    | 
+| Option de configuration | Rôle    | 
 | ---  | ----------- | 
 | One graph per | Ce menu déroulant définit la dimension utilisée pour le fractionnement de votre graphique d'origine. |
 | Limit to | Cette option permet de spécifier le nombre de graphiques à afficher ainsi que les valeurs à sélectionner. Par défaut, le widget Graphique scindé sélectionne automatiquement les valeurs moyennes les plus élevées. |
@@ -70,7 +72,7 @@ Vous pouvez modifier le mode de fractionnement du graphique via plusieurs option
 
 ## API
 
-Ce widget peut être utilisé avec l'[API Dashboards][2]. Le tableau ci-dessous définit le [schéma JSON du widget][3] :
+Ce widget peut être utilisé avec l'[API Dashboards][2]. Consultez le tableau suivant pour la [définition du schéma JSON du widget][3] :
 
 {{< dashboards-widgets-api >}}
 

@@ -6,9 +6,9 @@ further_reading:
 title: Seguridad de los datos de Kubernetes
 ---
 
-<div class="alert alert-info">En esta página, hablamos sobre la seguridad de los datos que se envían a Datadog. Si estás buscando productos y funciones para proteger las aplicaciones y las soluciones en la nube, consulta la sección <a href="/security/" target="_blank">Seguridad</a>.</div>
+<div class="alert alert-info">En esta página hablamos sobre la seguridad de los datos que se envían a Datadog. Si estás buscando productos y funciones para proteger las aplicaciones y las soluciones en la nube, consulta la sección <a href="/security/" target="_blank">Seguridad</a>.</div>
 
-Esta guía explica cómo navegar por los permisos y la seguridad en Kubernetes cuando se despliega y configura el Datadog Agent, de modo que puedas conservar tanto la seguridad de tu entorno Kubernetes como la funcionalidad necesaria de tus sistemas de monitorización.
+Esta guía explica cómo navegar por los permisos y la seguridad en Kubernetes cuando se despliega y configura el Datadog Agent, para que puedas conservar tanto la seguridad de tu entorno Kubernetes como la funcionalidad necesaria de tus sistemas de monitorización.
 
 ### Comparación entre permisos y necesidades operativas
 En el contexto de la seguridad de Kubernetes, el equilibrio entre el principio del menor privilegio y el funcionamiento fluido de componentes vitales como el Datadog Agent es esencial. Mientras que los estándares de seguridad del pod de Kubernetes y los puntos de referencia del CIS frecuentemente enfatizan la necesidad de minimizar los permisos para evitar violaciones de acceso elevadas, es necesario reconocer que las herramientas de monitorización, como el Datadog Agent, pueden demandar ciertos permisos para ofrecer un rendimiento óptimo.
@@ -18,12 +18,12 @@ En el contexto de la seguridad de Kubernetes, el equilibrio entre el principio d
 ### Nivel de seguridad restringido en la admisión de seguridad de pod de Kubernetes
 El estándar de seguridad de pod restringido es el nivel de seguridad más estricto aplicado por el controlador de admisión integrado. Su objetivo es aplicar las prácticas recomendadas de seguridad del pod a costa de la compatibilidad y la funcionalidad. Los casos de uso previstos incluyen aplicaciones que procesan información financiera sensible e informaciones de identificación personal. 
 
-Ejecutar el Datadog Agent con los estándares de pod restringidos impediría al Agent acceder a datos útiles y necesarios, lo que no es recomendado.
+Ejecutar el Datadog Agent con los estándares de pod restringidos impediría al Agent acceder a datos útiles y necesarios, algo que no es recomendado.
 
 ### Pod en ejecución con hostPID
 Un contenedor que se ejecuta en el espacio de nombres del ID de proceso (PID) puede inspeccionar procesos que se ejecutan fuera del contenedor. Si el contenedor también tiene acceso a las capacidades `ptrace`, esto se puede utilizar para escalar privilegios fuera del contenedor.
 
-DogStatsD puede configurarse para recibir métricas a través de un puerto UDP o un socket de dominio Unix. El uso del socket de dominio Unix ofrece algunas ventajas, incluyendo un mejor rendimiento, el manejo de errores y la detección del origen. Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el espacio de nombres del PID del host para que la detección del origen funcione de forma fiable. Es posible desactivar la detección del origen, pero [esto hace que las métricas recopiladas por DogStatsD ya no tengan el etiquetado a nivel de contenedor][1].
+DogStatsD puede configurarse para recibir métricas a través de un puerto UDP o un socket de dominio Unix. El uso del socket de dominio Unix ofrece algunas ventajas, incluyendo un mejor rendimiento, el manejo de errores y la detección del origen. Cuando se ejecuta dentro de un contenedor, DogStatsD necesita ejecutarse en el espacio de nombres del PID del host para que la detección del origen funcione de forma fiable. Es posible desactivar la detección del origen, pero [esto hace que las métricas recopiladas por DogStatsD ya no dispongan del etiquetado a nivel de contenedor][1].
 
 ### Volúmenes hostPath
 Utilizar volúmenes hostPath en Kubernetes puede introducir vulnerabilidades de seguridad potenciales, incluyendo la exposición involuntaria de credenciales del sistema y el acceso no autorizado a las API privilegiadas. Sin embargo, el Datadog Agent se apoya en el acceso directo al host para monitorizar de forma efectiva los recursos a nivel de host.
@@ -53,10 +53,10 @@ La configuración por defecto del Datadog Agent está diseñada para ser altamen
 * Para la recopilación, los logs generados por el kubelet deben ser accesibles por el usuario del Agent.
 * Algunas integraciones pueden fallar debido a la falta de acceso a comandos o archivos en el host.
 
-### Leer más
+### Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/developers/dogstatsd/unix_socket/?tab=host 
+[1]: /es/extend/dogstatsd/unix_socket/?tab=host 
 [2]: /es/containers/kubernetes/apm/ 
 [3]: https://kubernetes.io/docs/concepts/security/pod-security-standards/#restricted

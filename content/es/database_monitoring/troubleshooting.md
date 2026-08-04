@@ -19,11 +19,11 @@ Para solucionar los problemas de configuración de bases de datos, utiliza la p�
 En este momento, los parámetros de Bind Query sin procesar están ofuscados para Query Samples y Explain Plans, y se sustituyen por un carácter `?`.
 
 
-### Límite de hosts de DBM
+### Límite de instancia de DBM
 
 Dependiendo de lo complejas que sean las bases de datos que se están monitorizando, la presencia de demasiados hosts de DBM en un Agent podría sobrecargar el Agent y provocar retrasos en la recopilación de datos. Si el Agent se sobrecarga, es posible que aparezcan advertencias como `Job loop stopping due to check inactivity in the Agent logs`.
 
-Se recomienda tener un único monitor del Datadog Agent, como máximo 10 hosts de DBM. Si tienes más de 10 hosts de DBM, deberías considerar repartirlos en varios Datadog Agents.
+Se recomienda tener un único monitor del Datadog Agent con 30 instancias de base de datos como máxico. Si tienes más de 30 instancias de bases de datos, deberías repartirlas entre varios Datadog Agents.
 
 
 ### No hay datos de DBM visibles en Datadog: ¿Problemas de conexión?

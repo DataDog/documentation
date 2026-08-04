@@ -1,12 +1,12 @@
 ---
-title: API v1
 build:
-  render: never
-  list: always
+  list: toujours
   publishResources: false
+  render: jamais
 cascade:
   build:
-    render: never
-    list: always
+    list: toujours
     publishResources: false
+    render: jamais
+title: API v1
 ---

@@ -49,7 +49,7 @@ Los siguientes ejemplos muestran casos de uso de alertas con tus datos RUM.
 
 Con el [contexto global][6] de RUM, puedes enriquecer tus eventos RUM con atributos específicos de la empresa, como el importe de las compras de cada usuario.
 
-Suponiendo que la mayoría de los usuarios de la aplicación de ejemplo gastan entre 800 y 1.000 dólares, este ejemplo muestra un monitor RUM configurado para detectar desviaciones en los patrones de gasto de los usuarios semana a semana. 
+Suponiendo que la mayoría de los usuarios de la aplicación de ejemplo gastan entre 800 y 1000 dólares, este ejemplo muestra un monitor RUM configurado para detectar desviaciones en los patrones de gasto de los usuarios semana a semana. 
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-monitor.png" alt="Monitor RUM para reducciones de ingresos" style="width:100%;" >}}
 
@@ -57,7 +57,7 @@ Para comparar el gasto de esta semana con el de la semana pasada, añade una fun
 
 {{< img src="real_user_monitoring/guide/alerting-with-rum/revenue-dips-example-alerting-conditions.png" alt="Condiciones de alerta de un monitor RUM para reducciones de ingresos" style="width:100%;" >}}
 
-### Tasas de error
+### Tasas de errores
 
 La relación entre errores y solicitudes permite calcular qué porcentaje de solicitudes da lugar a errores.
 
@@ -84,6 +84,6 @@ Este ejemplo de monitor advierte cuando la métrica LCP tarda 2 segundos en carg
 [3]: /es/real_user_monitoring/guide/send-rum-custom-actions/#create-facets-and-measures-on-attributes
 [4]: /es/real_user_monitoring/explorer/export/
 [5]: /es/monitors/notify/
-[6]: /es/real_user_monitoring/browser/advanced_configuration/?tab=npm#global-context
-[7]: /es/real_user_monitoring/browser/monitoring_page_performance/#all-performance-metrics
+[6]: /es/real_user_monitoring/application_monitoring/browser/advanced_configuration/?tab=npm#global-context
+[7]: /es/real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#all-performance-metrics
 [8]: /es/real_user_monitoring/android/mobile_vitals/

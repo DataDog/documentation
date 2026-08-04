@@ -2,6 +2,9 @@
 aliases:
 - /es/agent/faq/agent-apm-metrics/
 - /es/tracing/send_traces/agent-apm-metrics/
+description: Lista de referencia de todas las métricas de APM enviadas por el Datadog
+  Agent para monitorizar el procesamiento de trazas (traces) y el rendimiento del
+  Agent.
 title: Métricas de APM enviadas por el Datadog Agent
 ---
 
@@ -46,7 +49,7 @@ Número de tramos (spans) con campos malformados que han tenido que ser modifica
 Número de llamadas GET en las que se ha encontrado un valor para la clave correspondiente.
 
 `datadog.trace_agent.obfuscation.sql_cache.misses`
-: **Tipo**: Count
+: **Tipo**: Count<br>
 Número de llamadas GET en las que no se ha encontrado un valor para la clave correspondiente.
 
 `datadog.trace_agent.panic`
@@ -103,7 +106,7 @@ Número de conexiones TCP que entran en el Agent.
 
 `datadog.trace_agent.receiver.trace`
 : **Tipo**: Count<br>
-Número de trazas (traces) recibidas y aceptadas.
+Número de trazas recibidas y aceptadas.
 
 `datadog.trace_agent.receiver.traces_bytes`
 : **Tipo**: Count<br>
@@ -155,7 +158,7 @@ Porcentaje de la cola ocupado.
 
 `datadog.trace_agent.stats_writer.retries`
 : **Tipo**: Count<br>
-Número de reintentos en caso de fallo en la API de Datadog
+Número de reintentos en caso de fallo en la API de Datadog 
 
 `datadog.trace_agent.stats_writer.splits`
 : **Tipo**: Count<br>

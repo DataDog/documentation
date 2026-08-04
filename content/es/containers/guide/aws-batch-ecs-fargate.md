@@ -2,6 +2,8 @@
 aliases:
 - /es/integrations/faq/aws-batch-ecs-fargate
 - /es/agent/guide/aws-batch-ecs-fargate-datadog-agent
+description: Implementa el Datadog Agent junto con trabajos de AWS Batch que se ejecutan
+  en ECS Fargate para una monitorización exhaustiva.
 further_reading:
 - link: integrations/ecs_fargate/?tab=webui#aws-batch-on-ecs-fargate
   tag: Documentación
@@ -37,10 +39,21 @@ Puedes ejecutar el Datadog Agent junto con tus contenedores de trabajos AWS Batc
         5. Añade otra variable de entorno utilizando la **Clave** `ECS_FARGATE` y el valor `true`. Haz clic en **Add** (Añadir) para añadir el contenedor.
         6. Añade otra variable entorno utilizando la **Clave** `DD_SITE` y el valor {{< region-param key="dd_site" code="true" >}}. El valor predeterminado es `datadoghq.com` si no se define.
     7. Añade tus otros contenedores de aplicaciones a la definición de trabajo.
-    8. Haz clic en **Create job definition** (Crear definición de trabajo) para crear la definición de trabajo.
+    8. AWS Batch es compatible con [Fluent Bit y Firelens][3]. Para habilitar la recopilación de logs para tus contenedores de aplicaciones con Datadog:
+       1. Crea un contenedor de enrutador de logs independiente en la definición del trabajo.
+       2. Configura la imagen `amazon/aws-for-fluent-bit:stable"` para el contenedor.
+       3. En la sección de configuración de Firelens:
+          - Configura el **Type** (Tipo) para que sea `fluentbit`.
+          - Configura las **Options** (Opciones) para incluir `enable-ecs-log-metadata` en `true` para el **Name** (Nombre) y el **Value** (Valor) respectivamente.
+       4. Para los contenedores de tu aplicación, en la sección Configuración de log:
+          - Configura el **Log Driver** (Controlador de logs) para `awsfirelens`
+          - Configura las **Options** (Opciones) para incluir los siguientes **Name** (Nombre) y **Value** (Valor) similares al Paso 2 de la sección [ECS Fargate Fluent Bit y Firelens][4]
+    10. Haz clic en **Create job definition** (Crear definición de trabajo) para crear la definición de trabajo.
 
 [1]: https://app.datadoghq.com/organization-settings/api-keys
 [2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
+[4]: https://docs.datadoghq.com/es/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 
 {{% /tab %}}
 {{% tab "CLI AWS" %}}
@@ -48,17 +61,46 @@ Puedes ejecutar el Datadog Agent junto con tus contenedores de trabajos AWS Batc
 1. Descarga [datadog-agent-aws-batch-ecs-fargate.json][1].
 
    **Nota**: Si utilizas Internet Explorer, es posible que se descargue como un archivo gzip, que contiene el archivo JSON mencionado a continuación.
-2. Actualiza el JSON con un `JOB_DEFINITION_NAME`, tu [clave de API Datadog][41] y el `DD_SITE` apropiado ({{< region-param key="dd_site" code="true" >}}).
+2. Actualiza el JSON con un `JOB_DEFINITION_NAME`, tu [clave de API de Datadog][2], y el `DD_SITE` apropiado ({{< region-param key="dd_site" code="true" >}}).
 
    **Nota**: La variable de entorno `ECS_FARGATE` ya está configurada como `"true"`.
-3. Añade tus otros contenedores de aplicaciones a la definición de trabajo. 
-4. Ejecute el siguiente comando para registrar la definición de trabajo:
+3. Añade tus otros contenedores de aplicaciones a la definición de trabajo.
+4. AWS Batch es compatible con [Fluent Bit y Firelens][3]. Para habilitar la recopilación de logs para tus contenedores de aplicaciones con Datadog:
+   - En el archivo JSON, añade un contenedor `log_router` adicional con lo siguiente en la sección `containers`:
+     ```json
+      {
+          "name": "log_router",
+          "image": "amazon/aws-for-fluent-bit:stable",
+          "essential": true,
+          "firelensConfiguration": {
+              "type": "fluentbit",
+              "options": {
+                  "enable-ecs-log-metadata": "true"
+              }
+          },
+          "resourceRequirements": [
+              {
+                  "value": "0.25",
+                  "type": "VCPU"
+              },
+              {
+                  "value": "512",
+                  "type": "MEMORY"
+              }
+          ]
+      }
+     ```
+   - En tus contenedores de aplicación, añade las opciones `logConfiguration` pertinentes similares al Paso 2 de la [sección ECS Fargate Fluent Bit y Firelens][4].
+5. Ejecute el siguiente comando para registrar la definición de trabajo:
 
    ```bash
    aws batch register-job-definition --cli-input-json file://<PATH_TO_FILE>/datadog-agent-aws-batch-ecs-fargate.json
    ```
 
 [1]: https://docs.datadoghq.com/resources/json/datadog-agent-aws-batch-ecs-fargate.json
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://aws.amazon.com/about-aws/whats-new/2025/04/aws-batch-amazon-elastic-container-service-exec-firelens-log-router/
+[4]: https://docs.datadoghq.com/es/integrations/ecs_fargate/?tab=webui#fluent-bit-and-firelens
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -93,6 +135,6 @@ aws batch submit-job --job-name <JOB_NAME> \
 {{% /tab %}}
 {{< /tabs >}}
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}

@@ -26,6 +26,8 @@ spec:
         - env:
             - name: DD_SERVICE
               value: '<SERVICE_NAME>'
+            - name: DD_LOGS_INJECTION
+              value: 'true'
           image: '<CONTAINER_IMAGE>'
           name: run-sidecar-1
           ports:
@@ -59,13 +61,11 @@ spec:
               value: '<VERSION>'
             - name: DD_LOG_LEVEL
               value: debug
-            - name: DD_LOGS_INJECTION
-              value: 'true'
             - name: DD_SOURCE
               value: '{{ .Get "language" }}'
             - name: DD_HEALTH_PORT
               value: '12345'
-          image: gcr.io/datadoghq/serverless-init:latest
+          image: gcr.io/datadoghq/serverless-init:<YOUR_TAG>
           name: serverless-init-1
           resources:
             limits:

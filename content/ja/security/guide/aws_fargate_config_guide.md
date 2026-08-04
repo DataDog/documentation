@@ -1,13 +1,13 @@
 ---
-aliases:
-- /ja/security/cloud_security_management/setup/fargate
-- /ja/security/cloud_security_management/setup/serverless
+title: Datadog Security を使用するための AWS Fargate 構成ガイド
 disable_toc: false
+aliases:
+  - /security/cloud_security_management/setup/fargate
+  - /security/cloud_security_management/setup/serverless
 further_reading:
-- link: https://www.datadoghq.com/blog/threat-detection-fargate/
+- link: "https://www.datadoghq.com/blog/threat-detection-fargate/"
   tag: ブログ
   text: Datadog Cloud Security により、AWS Fargate ECS および EKS 環境でリアルタイムの脅威検知を実現します。
-title: Datadog Security を使用するための AWS Fargate 構成ガイド
 ---
 
 このガイドでは、AWS Fargate 上で [Cloud Security][3]、[Software Composition Analysis (SCA)][22]、[Threat Detection and Protection (AAP)][4]、および [Cloud SIEM][5] を構成する手順を説明します。
@@ -243,14 +243,14 @@ aws ecs register-task-definition --cli-input-json file://<PATH_TO_FILE>/datadog-
 {{< /code-block >}}
 
 #### Datadog Cloud Security
-1. Datadog で、[Cloud Security > Setup > Cloud Integrations > AWS][9] に移動します。 
+1. Datadog で、[Cloud Security > Setup > Cloud Integrations > AWS][9] に移動します。
 2. Amazon ECR をホストする AWS アカウントに [Datadog Agentless scanner][10] をデプロイして、Vulnerability Management を有効化します。
 
-[6]: /ja/integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
-[8]: /ja/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/configuration/csm/setup?active_steps=cloud-accounts&active_sub_step=aws&vuln_container_enabled=true&vuln_host_enabled=true&vuln_lambda_enabled=true
-[10]: /ja/security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
+[10]: /security/cloud_security_management/setup/agentless_scanning/enable/?tab=existingawsaccount#set-up-aws-cloudformation
 
 
 {{% /tab %}}
@@ -335,7 +335,7 @@ spec:
      shareProcessNamespace: true
 ```
 
-[6]: /ja/integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
+[6]: /integrations/eks_fargate/?tab=manual#amazon-eks-fargate-rbac
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -417,26 +417,26 @@ AWS Fargate ECS または EKS で Cloud Security を有効化すると、Agent �
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /ja/integrations/ecs_fargate/
-[2]: /ja/integrations/eks_fargate/
-[3]: /ja/security/cloud_security_management/
-[4]: /ja/security/application_security/
-[5]: /ja/security/cloud_siem/
-[6]: /ja/integrations/eks_fargate/#amazon-eks-fargate-rbac
+[1]: /integrations/ecs_fargate/
+[2]: /integrations/eks_fargate/
+[3]: /security/cloud_security_management/
+[4]: /security/application_security/
+[5]: /security/cloud_siem/
+[6]: /integrations/eks_fargate/#amazon-eks-fargate-rbac
 [7]: /resources/json/datadog-agent-cws-ecs-fargate.json
-[8]: /ja/integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
+[8]: /integrations/faq/integration-setup-ecs-fargate/?tab=rediswebui
 [9]: https://app.datadoghq.com/security/agent-events
-[10]: /ja/security/application_security/setup/java/aws-fargate
-[11]: /ja/security/application_security/setup/dotnet/aws-fargate
-[12]: /ja/security/application_security/setup/aws/fargate
-[13]: /ja/security/application_security/setup/ruby/aws-fargate
-[14]: /ja/security/application_security/setup/nodejs/aws-fargate
-[15]: /ja/security/application_security/setup/python/aws-fargate
-[16]: /ja/security/application_security/
-[17]: /ja/security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
-[18]: /ja/security/code_security/iast/setup/java/
-[19]: /ja/security/code_security/iast/setup/dotnet/
-[20]: /ja/security/code_security/iast/setup/nodejs/
+[10]: /security/application_security/setup/java/aws-fargate
+[11]: /security/application_security/setup/dotnet/aws-fargate
+[12]: /security/application_security/setup/aws/fargate
+[13]: /security/application_security/setup/ruby/aws-fargate
+[14]: /security/application_security/setup/nodejs/aws-fargate
+[15]: /security/application_security/setup/python/aws-fargate
+[16]: /security/application_security/
+[17]: /security/cloud_siem/guide/aws-config-guide-for-cloud-siem/
+[18]: /security/code_security/iast/setup/java/
+[19]: /security/code_security/iast/setup/dotnet/
+[20]: /security/code_security/iast/setup/nodejs/
 [21]: https://app.datadoghq.com/security/configuration/siem/setup
-[22]: /ja/security/code_security/software_composition_analysis/
-[23]: /ja/security/code_security/software_composition_analysis/
+[22]: /security/code_security/software_composition_analysis/
+[23]: /security/code_security/software_composition_analysis/

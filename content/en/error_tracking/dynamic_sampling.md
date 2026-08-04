@@ -48,7 +48,7 @@ When Dynamic Sampling is applied, the following steps are recommended:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/events/
+[1]: /events/
 [2]: https://app.datadoghq.com/error-tracking/settings/rate-limits
 [3]: /logs/error_tracking/manage_data_collection#add-a-rule
 [4]: https://app.datadoghq.com/error-tracking/settings

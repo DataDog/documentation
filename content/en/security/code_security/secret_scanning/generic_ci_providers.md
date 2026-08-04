@@ -6,7 +6,7 @@ algolia:
   tags: ['static analysis', 'ci pipeline', 'SAST', 'secret scanning']
 ---
 
-{{% site-region region="gov" %}}
+{{% site-region region="gov,gov2" %}}
 <div class="alert alert-warning">
     Secret Scanning is not available for the {{< region-param key="dd_site_name" >}} site.
 </div>

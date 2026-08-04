@@ -48,7 +48,7 @@
     {{ end }}
 {{ end }}
 
-{{ $base_url := "https://app.datadoghq.com/workflow/action-catalog#" }}
+{{ $base_url := "https://app.datadoghq.com/actions/action-catalog#" }}
 
 {{ if lt (len $final_actions) 1}}
     {{ $err_msg := "On prem action list is empty" }}
@@ -67,7 +67,7 @@
 <p>The following integrations support private actions:</p>
 <ul>
 {{ range $fqn, $title := $final_actions -}}
-    {{ $full_url := print $base_url $fqn "/" $fqn -}}
+    {{ $full_url := print $base_url "/" $fqn -}}
     <li><a href="{{ $full_url }}">{{ $title}}</a></li>
 {{ end -}}
 </ul>

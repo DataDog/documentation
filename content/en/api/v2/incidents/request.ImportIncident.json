@@ -1,0 +1,9 @@
+{
+  "data": {
+    "type": "incidents",
+    "attributes": {
+      "title": "Example-Incident",
+      "visibility": "organization"
+    }
+  }
+}

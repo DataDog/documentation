@@ -1,12 +1,14 @@
 ---
 aliases:
 - /fr/graphing/functions/exclusion/
+description: Exclure les valeurs nulles et appliquer un filtrage basé sur des seuils
+  en utilisant les fonctions clamp et cutoff sur les métriques.
 title: Exclusion
 ---
 
 ## Exclude null
 
-| Fonction         | Description                                                    | Exemple                                        |
+| Fonction         | Rôle                                                    | Exemple                                        |
 | ---------------- | -------------------------------------------------------------- | ---------------------------------------------- |
 | `exclude_null()` | Supprime de votre graphique ou de votre Top List tous les groupes qui possèdent un tag avec la valeur N/A. | `exclude_null(avg:system.load.1{*} by {host})` |
 
@@ -16,31 +18,25 @@ Lorsque vous représentez cette métrique sous la forme d'une série temporelle,
 
 ## Clamp
 
-| Fonction      | Description                                                          | Exemple                                |
+| Fonction      | Rôle                                                          | Exemple                                |
 | ------------- | -------------------------------------------------------------------- | -------------------------------------- |
 | `clamp_min()` | Définit les valeurs d'une métrique _inférieures_ à un seuil sur la valeur de ce seuil. | `clamp_min(avg:system.load.1{*}, 100)` |
 | `clamp_max()` | Définit les valeurs d'une métrique _supérieures_ à un seuil sur la valeur de ce seuil.  | `clamp_max(avg:system.load.1{*}, 100)` |
 
-Les fonctions `clamp_min()` et `clamp_max()` comprennent un paramètre :
+Ajouter une valeur de seuil. La fonction `clamp_min()` définit tous les points de données en dessous du seuil pour qu'ils soient égaux à cette valeur, tandis que `clamp_max()` limite les points de données au-dessus du seuil.
 
--   `THRESHOLD` : la valeur du seuil que vous spécifiez.
-    -   `clamp_min()` définit la valeur de tous les points de données en dessous du seuil sur la valeur de ce seuil, tandis que la fonction `clamp_max()` limite les points de données au-dessus du seuil.
+Remarque : `clamp_min(values, threshold)` et `clamp_max(values, threshold)` définissent tout `NaN` dans les valeurs sur `threshold`.
+
+Pour éviter ce comportement, appliquez la fonction `default_zero()` avant la fonction `clamp_min()` / `clamp_max()`.
 
 ## Cutoff
 
-| Fonction       | Description                                     | Exemple                                 |
+| Fonction       | Rôle                                     | Exemple                                 |
 | -------------- | ----------------------------------------------- | --------------------------------------- |
-| `cutoff_min()` | Supprime les valeurs d'une métrique _inférieures_ à un seuil. | `cutoff_min(avg:system.load.1{*}, 100)` |
-| `cutoff_max()` | Supprime les valeurs d'une métrique _supérieures_ à un seuil.  | `cutoff_max(avg:system.load.1{*}, 100)` |
+| `cutoff_min()` | Remplacer les valeurs de métrique _en dessous_ d'une valeur de seuil par NaN. | `cutoff_min(avg:system.load.1{*}, 100)` |
+| `cutoff_max()` | Exclure les valeurs nulles et appliquer un filtrage basé sur des seuils en utilisant les fonctions clamp et cutoff sur les métriques.  | `cutoff_max(avg:system.load.1{*}, 100)` |
 
-Les fonctions `cutoff_min()` et `cutoff_max()` comprennent un paramètre :
-
-- `THRESHOLD` : la valeur du seuil que vous spécifiez.
-    - `cutoff_min()` supprime du graphique toutes les valeurs de métrique inférieures au seuil, tandis que `cutoff_max()` supprime toutes les valeurs de métrique supérieures au seuil.
-
-Les fonctions Cutoff ne suppriment pas les valeurs égales au seuil.
-
-De plus, les fonctions ne suppriment pas définitivement les points de données de Datadog : les valeurs sont uniquement retirées de votre visualisation. Si vous désactivez la fonction, les valeurs supprimées s'affichent à nouveau.
+Ajouter une valeur de seuil. La fonction `cutoff_min()` remplace toutes les valeurs de métrique inférieures à cette valeur de seuil par `NaN`, tandis que `cutoff_max()` remplace toutes les valeurs de métrique supérieures à cette valeur de seuil par `NaN`. Les fonctions cutoff ne remplacent pas les valeurs qui sont **égales à** la valeur de seuil.
 
 **Conseil** : pour les fonctions Clamp et Cutoff, il peut s'avérer utile de visualiser la valeur du seuil que vous avez défini. Vous pouvez [définir un indicateur horizontal][1] dans les dashboards pour représenter cette valeur.
 

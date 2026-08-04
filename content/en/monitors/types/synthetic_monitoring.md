@@ -20,24 +20,41 @@ When you create a Synthetic test, Datadog automatically creates an associated mo
 
 <div class="alert alert-info">You can only create <strong>Synthetic test monitors</strong> within the <a href="https://app.datadoghq.com/synthetics/tests">Synthetic Monitoring</a> section of the application. The general <a href="https://app.datadoghq.com/monitors">Monitors</a> page is used for creating other types of monitors, such as those based on metrics, logs, or processes.</div>
 
-Create a monitor in the **Monitor** section of a new or existing Synthetic test to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
+Create a monitor in the {{< ui >}}Monitor{{< /ui >}} section of a new or existing Synthetic test to send notifications when a Synthetic Monitoring test is failing. Monitors are associated with the Synthetic test you create and link to the alerting conditions set in your Synthetic test configuration. To use monitor attribute and tag variables, create a [metric monitor][1].
 
 Monitor messages in Synthetic Monitoring consist of:
 
-- **Title**: The name of the monitor.
-- **Custom message**: Optional text written when creating the monitor.
-- **Auto-appended summary**: Includes failing locations, error messages, and links to the test.
-- **Footer**: Includes details from the last failed test run. </br><br>
+- {{< ui >}}Title{{< /ui >}}: The name of the monitor.
+- {{< ui >}}Custom message{{< /ui >}}: Optional text written when creating the monitor.
+- {{< ui >}}Auto-appended summary{{< /ui >}}: Includes failing locations, error messages, and links to the test.
+- {{< ui >}}Footer{{< /ui >}}: Includes details from the last failed test run. </br><br>
 
 {{< img src="synthetics/guide/synthetics_test_monitors/configure_the_monitor_for_this_test_2.png" alt="Creating a monitor in your Synthetic test" style="width:90%;">}}
 
 ## View and manage Synthetic monitors
 
-- Customize the monitor name to search for it on the [**Manage Monitors**][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
+- Customize the monitor name to search for it on the [{{< ui >}}Manage Monitors{{< /ui >}}][2] page. To find a Synthetic test monitor, filter on `type:synthetics` in the search bar. You can use monitor [conditional variables][3] to characterize the notification message based on test state. 
 
 - The Synthetic test monitor integrates with notification channels such as email, Slack, Pagerduty, and Microsoft Teams. For more information, see [Notifications][4].
 
 - If you have multiple layers of notifications (for example, notifying more teams the longer a Synthetic test is alerting), Datadog recommends enabling [renotification][5] on your Synthetic monitors.
+
+## Automatically added tags
+
+In addition to any custom tags you add, Datadog adds the following tags to a Synthetic test monitor based on the test's configuration. Use these tags to search and filter on the [{{< ui >}}Manage Monitors{{< /ui >}}][2] page or in the Synthetic Monitoring test list.
+
+| Tag key             | Available values                                                                 | What the tag captures                                                                                                    |
+|----------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
+| `check_type`         | `api`, `browser`, `api-ssl`, `api-dns`, `api-tcp`, `api-icmp`, `api-grpc`, `api-udp`, `api-websocket`, `api-multi`, `mobile` | The test type and, if applicable, its subtype. The `http` subtype is left off `api` tests for brevity.        |
+| `check_status`       | `live`, `paused`                                                                   | Whether the test is active or paused.                                                                              |
+| `probe_dc`           | `aws:us-east-1`, `aws:eu-west-1`, and other managed or private locations          | The locations the test runs from. Multi-location tests have one `probe_dc` tag for each assigned location.         |
+| `ci_execution_rule`  | `blocking`, `non_blocking`                                                         | The test's CI/CD execution rule. The tag is added when the test is used as a quality gate in a CI/CD pipeline.              |
+
+These tags update automatically when you edit the test, so searches remain accurate as tests move locations, get paused, or change their CI/CD configuration. Search for tags using the `tag` facet and quoting the full `key:value` pair. For example:
+
+- `type:synthetics tag:"check_status:live"` finds all active Synthetic test monitors.
+- `type:synthetics tag:("probe_dc:aws:us-east-1" AND "probe_dc:aws:ap-northeast-1")` finds tests running from both locations.
+- `type:synthetics tag:"ci_execution_rule:blocking"` finds tests configured to block a CI/CD pipeline if they fail.
 
 ### Tailor monitor notifications
 
@@ -45,7 +62,9 @@ Depending on your incident management strategy, you may want to involve multiple
 
 {{< img src="synthetics/guide/synthetics_test_monitors/renotification_toggle_2.png" alt="Select the amount of time for the alerting monitor to renotify" style="width:90%;">}}
 
-To enable renotification, toggle **Enable renotification** and select a time interval from the dropdown menu.
+To enable renotification, toggle {{< ui >}}Enable renotification{{< /ui >}} and select a time interval from the dropdown menu.
+
+For more information on how Synthetic Monitoring notifications evaluate test results and trigger alerts, see [Understanding Synthetic Monitor Alerting][7].
 
 ## Enhanced notifications
 
@@ -81,3 +100,4 @@ For more information, see [Synthetic Monitoring notifications][6].
 [4]: /monitors/notify/#notification-recipients
 [5]: /monitors/notify/#renotify
 [6]: /synthetics/notifications
+[7]: /synthetics/guide/how-synthetics-monitors-trigger-alerts/

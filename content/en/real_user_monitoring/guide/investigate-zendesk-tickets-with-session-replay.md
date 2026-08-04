@@ -27,7 +27,7 @@ To view the session replays associated with a Zendesk ticket:
 
 {{< img src="real_user_monitoring/guide/zendesk/zendesk-sr-demo.mp4" alt="Accessing a session replay from Zendesk" video=true >}}
 
-From the replay page, you can view a list of the user's actions, along with the backend calls associated with each action. Hover over an event and click **Details** to view associated traces, errors, and more.
+From the replay page, you can view a list of the user's actions, along with the backend calls associated with each action. Hover over an event and click {{< ui >}}Details{{< /ui >}} to view associated traces, errors, and more.
 
 {{< img src="real_user_monitoring/guide/zendesk/session-replay-details-button.png" alt="Hover view of a session replay event with the Details button highlighted" style="width:60%;" >}}
 
@@ -35,5 +35,5 @@ You can also add the replay to a playlist to group related issues together for e
 
 [1]: /integrations/zendesk/#zendesk-rum-app-installation
 [2]: https://www.zendesk.com/sg/marketplace/apps/support/993138/datadog-rum/?queryID=fb54e1e367559c15de7e8a0f1eb8aa6f
-[3]: /real_user_monitoring/session_replay/browser/
-[4]: /real_user_monitoring/session_replay/playlists
+[3]: /session_replay/browser/
+[4]: /session_replay/playlists

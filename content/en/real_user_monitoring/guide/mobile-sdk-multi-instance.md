@@ -29,7 +29,7 @@ Datadog.setUserInfo(userInfo, sdkCore = namedSdkInstance)
 
 Logs.enable(logsConfig, namedSdkInstance)
 val logger = Logger.Builder(namedSdkInstance)
-    ...
+    // ...
     .build()
 
 Trace.enable(traceConfig, namedSdkInstance)
@@ -39,8 +39,8 @@ val tracer  = GlobalOpenTelemetry.get().getTracer("...")
 
 // Datadog API
 val tracer = DatadogTracing.newTracerBuilder(namedSdkInstance)
-// ...
-.build()
+    // ...
+    .build()
 
 Rum.enable(rumConfig, namedSdkInstance)
 GlobalRumMonitor.get(namedSdkInstance)

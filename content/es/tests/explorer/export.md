@@ -1,33 +1,33 @@
 ---
 further_reading:
-- link: /tests/search/
+- link: /tests/explorer/
   tag: Documentación
-  text: Buscar pruebas
+  text: Buscar tests
 - link: /tests/explorer/saved_views/
   tag: Documentación
   text: Información sobre Vistas guardadas
 - link: /monitors/types/ci/
   tag: Documentación
-  text: Más información sobre Monitores de pruebas de CI
-title: Exportar ejecuciones de prueba
+  text: Más información sobre Monitores de tests de CI
+title: Exportar ejecuciones de tests
 ---
 
 ## Información general
 
-Puedes utilizar la consulta de búsqueda y los gráficos de visualización de Visibilidad de pruebas en dashboards, monitores y notebooks, o puedes buscar eventos mediante programación con el [endpoint Buscar eventos de pruebas][1]. 
+Puedes utilizar tus gráficos de consulta y visualización de Test Optimization en dashboards, monitores y notebooks o buscar mediante programación eventos utilizando el [endpoint de eventos de tests de búsqueda][1].
 
 ## Exportar la consulta de búsqueda o visualización
 
-Puedes copiar, exportar o descargar tu consulta de búsqueda agregada y los gráficos de visualización en el [Explorador de visibilidad de pruebas][2].
+Puedes copiar, exportar o descargar tus gráficos agregados de consulta y visualización en el [Test Optimization Explorer][2].
 
-{{< img src="continuous_integration/explorer/test_export.png" alt="Vista de la exportación de ejecuciones de prueba en el Explorador de visibilidad de pruebas" style="width:100%;">}}
+{{< img src="/tests/explorer/export.png" text="Descargar la lista de resultados de tests consultados en Test Optimization como un archivo CSV" style="width:100%" >}}
 
 Haz clic en el botón **Export** (Exportar) de la esquina derecha y selecciona una opción del menú desplegable:
 
-- Comparte tu [vista guardada][6] del [Explorador de visibilidad de pruebas][3].
-- Exporta los resultados de tu búsqueda a un [monitor de pruebas de CI][4] que active alertas en función de umbrales predefinidos.
+- Comparte tu [vista guardada][6] del [Test Optimization Explorer][3].
+- Exporta los resultados de tu búsqueda a un [monitor de tests de CI][4] que active alertas en función de umbrales predefinidos.
 - Exporta los resultados de tu búsqueda a un [notebook existente][5] con fines de elaboración de informes o consolidación.
-- Descarga los resultados de tu búsqueda como archivo CSV para eventos de pruebas individuales de visibilidad de CI y agregaciones específicas.
+- Descarga los resultados de tu búsqueda como archivo CSV para eventos de tests individuales de CI Visibility y agregaciones específicas.
 
 Las opciones disponibles para algunos tipos de visualización no son compatibles con otros. Por ejemplo, no se puede descargar un gráfico de distribución como archivo CSV.
 

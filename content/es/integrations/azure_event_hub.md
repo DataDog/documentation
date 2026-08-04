@@ -1,28 +1,64 @@
 ---
+app_id: azure-event-hub
+app_uuid: e56f664a-0315-4b25-a8bf-39bd3eef6063
+assets:
+  dashboards:
+    azure_event_hub: assets/dashboards/azure_event_hub.json
+  integration:
+    auto_install: true
+    events:
+      creates_events: false
+    metrics:
+      check: azure.eventhub_namespaces.incoming_bytes_per_sec
+      metadata_path: metadata.csv
+      prefix: azure.eventhub
+    service_checks:
+      metadata_path: assets/service_checks.json
+    source_type_id: 160
+    source_type_name: Azure Event Hub
+author:
+  homepage: https://www.datadoghq.com
+  name: Datadog
+  sales_email: info@datadoghq.com
+  support_email: help@datadoghq.com
 categories:
 - azure
-- cloud
-- log collection
-- notifications
+- nube
+- recopilación de logs
+- notificaciones
 custom_kind: integración
 dependencies: []
-description: Rastrea las métricas principales de Azure Event Hub.
-doc_link: https://docs.datadoghq.com/integrations/azure_event_hub/
+display_on_public_website: true
 draft: false
 git_integration_title: azure_event_hub
-has_logo: true
 integration_id: azure-event-hub
-integration_title: Microsoft Azure Event Hub
+integration_title: Azure Event Hub
 integration_version: ''
 is_public: true
-manifest_version: '1.0'
+manifest_version: 2.0.0
 name: azure_event_hub
-public_title: Integración de Datadog y Microsoft Azure Event Hub
-short_description: Rastrea las métricas principales de Azure Event Hub.
-version: '1.0'
+public_title: Azure Event Hub
+short_description: Azure Events Hub es un servicio gestionado de flujo de datos a
+  gran escala
+supported_os: []
+tile:
+  changelog: CHANGELOG.md
+  classifier_tags:
+  - Categoría::Azure
+  - Category::Cloud
+  - Category::Log Collection
+  - Categoría::Notificaciones
+  - Offering::Integration
+  configuration: README.md#Setup
+  description: Azure Events Hub es un servicio gestionado de flujo de datos a gran
+    escala
+  media: []
+  overview: README.md#Overview
+  support: README.md#Support
+  title: Azure Event Hub
 ---
 
-<!--  EXTRAÍDO DE https://github.com/DataDog/dogweb -->
+<!--  EXTRAÍDO DE https://github.com/DataDog/integrations-internal-core -->
 ## Información general
 
 Azure Event Hub es un servicio gestionado de flujo (stream) de datos a gran escala.
@@ -42,7 +78,7 @@ Si aún no lo has hecho, primero configura la [integración Microsoft Azure][1].
 
 En el [cuadro de integración de Azure][1], asegúrate de que `Event Hub` esté marcado en la recopilación de métricas.
 
-### APM
+### Recopilación de logs
 
 Para recopilar logs de Event Hubs, sigue este proceso general:
 
@@ -55,18 +91,18 @@ Para obtener instrucciones detalladas, consulta la [documentación principal sob
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "azure-event-hub" >}}
+{{< get-metrics-from-git "azure_event_hub" >}}
 
 
 ### Eventos
 
 La integración Azure Event Hub no incluye eventos.
 
-### Checks de servicios
+### Checks de servicio
 
 La integración Azure Event Hub no incluye checks de servicios.
 
-## Resolución de problemas
+## Solucionar problemas
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][4].
 

@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "attributes": {
+        "title": "A title",
+        "description": "A description"
+      },
+      "relationships": {
+        "findings": {
+          "data": [
+            {
+              "id": "YmNlZmJhYTcyMDU5ZDk0ZDhiNjRmNGI0NDk4MDdiNzN-MDJlMjg0NzNmYzJiODY2MzJkNjU0OTI4NmVhZTUyY2U=",
+              "type": "findings"
+            }
+          ]
+        },
+        "project": {
+          "data": {
+            "id": "959a6f71-bac8-4027-b1d3-2264f569296f",
+            "type": "projects"
+          }
+        }
+      },
+      "type": "jira_issues"
+    }
+  ]
+}

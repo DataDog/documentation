@@ -1,18 +1,17 @@
 ---
 title: Configuration at Runtime
+site_support_id: configuration_at_runtime
 further_reading:
 - link: "/remote_configuration"
   tag: "Documentation"
   text: "Remote Configuration"
 ---
 
-<div class="alert alert-info">This feature is in Preview.</div>
-
 ## Overview
 
-Configuration at runtime lets you modify APM library configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.
+Configuration at runtime lets you modify Datadog SDK configuration from the Datadog UI, without needing to restart your application or service. You don't need to wait for a new deployment or code change to update your configuration. Instead, update it right away with configuration at runtime.
 
-{{< img src="/tracing/runtime_config/runtime-config-nav.mp4" alt="Walk through Software Catalog to use configuration at runtime." video="true" style="width:100%;">}}
+{{< img src="/tracing/runtime_config/config-at-runtime.mp4" alt="Edit a configuration value from the SDK and Agent Configurations tab." video="true" style="width:100%;">}}
 
 ## Setup
 
@@ -20,23 +19,24 @@ Before you can use configuration at runtime, you must set up Remote Configuratio
 
 ## Using configuration at runtime
 
+The primary entry point for editing configuration at runtime is the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab on the service page.
+
 To make changes to a service's configuration at runtime:
 
-1. Go to the [Software Catalog][3] in APM.
-1. Hover over the service for which you want to update configuration.
-1. Click **Full Page** next to the service name.
-1. Click **Service Info**.
-1. From the **Setup Guidance** tab, click **Edit**.
-1. Change the configuration options as needed. See [supported configuration options](#supported-configuration-options) for more details.
-1. Click **Apply Configuration**.
+1. Go to the [Catalog][3] in APM.
+1. Open the service's {{< ui >}}Full Page{{< /ui >}}.
+1. Click {{< ui >}}Service Info{{< /ui >}}, and then go to {{< ui >}}Service Config{{< /ui >}} > {{< ui >}}SDK & Agent Configurations{{< /ui >}}.
+1. Select an environment. 
+1. Click {{< ui >}}Edit{{< /ui >}} on the configuration row you want to change. See [supported configuration options](#supported-configuration-options) for more details.
+1. Update the value in the edit modal and confirm.
 
-In **Active Library Configuration**, you can see which options are configured for this service and the selected environment:
+{{< img src="/tracing/runtime_config/config_at_runtime_success.png" alt="The SDK Configurations table showing logs injection disabled across one instance." style="width:100%;">}}
 
-{{< img src="/tracing/runtime_config/active-library-config.png" alt="From the Setup Guidance tab, you can see your active library configuration." style="width:100%;">}}
+In this example, you can see that Log Injection is disabled for the test environment across one instance. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
 
-In this example, you can see that Log Injection is enabled for the Staging environment across two instances. An instance refers to an instance of the Remote Configuration client. There should be one instance per process of your application.
+You can tell when the configuration changes have been successfully applied by referencing the {{< ui >}}Updates applied to X instances{{< /ui >}} text. In this example, the configuration applied successfully to one instance.
 
-You can tell when the configuration changes have been successfully applied by referencing the **X Applied** text. In this example, the configuration applied successfully to all two instances.
+<div class="alert alert-info">The {{< ui >}}Setup Guidance{{< /ui >}} tab no longer includes an editing panel. It shows a banner that directs you to the {{< ui >}}SDK & Agent Configurations{{< /ui >}} tab.</div>
 
 ## Supported configuration options
 
@@ -57,7 +57,7 @@ The following options are supported with configuration at runtime. The required 
 
 [1]: /tracing/guide/remote_config/
 [2]: /agent/
-[3]: /tracing/software_catalog/
+[3]: /internal_developer_portal/catalog/
 [4]: /account_management/rbac/permissions/
 [5]: /tracing/trace_explorer/trace_view
 [6]: https://app.datadoghq.com/organization-settings/remote-config

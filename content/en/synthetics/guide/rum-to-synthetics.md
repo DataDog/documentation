@@ -8,7 +8,7 @@ further_reading:
   - link: 'synthetics/browser_tests'
     tag: 'Documentation'
     text: 'Configure a Browser Test'
-  - link: 'real_user_monitoring/browser'
+  - link: 'real_user_monitoring/application_monitoring/browser'
     tag: 'Documentation'
     text: 'RUM Browser Monitoring'
 
@@ -24,13 +24,13 @@ You can create Synthetic browser tests from your session replays in RUM to track
 
 ## Generate a test from a session replay
 
-Navigate to the [RUM Explorer][3] and select a session with an available [Session Replay][4] that you want to create a browser test from. Click **Generate Synthetic Browser Test** above the event timeline. 
+Navigate to the [RUM Explorer][3] and select a session with an available [Session Replay][4] that you want to create a browser test from. Click {{< ui >}}Generate Synthetic Browser Test{{< /ui >}} above the event timeline. 
 
 {{< img src="synthetics/guide/rum_to_synthetics/test_recording.png" alt="A user session in the RUM Explorer" style="width:100%" >}}
 
 This automatically clones the events captured within a session replay, such as user clicks and page loads, into individual steps for a new browser test. 
 
-For example, in the following screenshot, the generated browser test cloned a user's session on the shopping page, including them navigating to it and clicking the **Add to cart** button. 
+For example, in the following screenshot, the generated browser test cloned a user's session on the shopping page, including them navigating to it and clicking the {{< ui >}}Add to cart{{< /ui >}} button. 
 
 {{< img src="synthetics/guide/rum_to_synthetics/example_test.png" alt="Browser test recorder filled automatically with RUM data" style="width:100%" >}}
 
@@ -43,6 +43,6 @@ Further customize your tests and test steps to suit your needs, just as you woul
 [1]: /real_user_monitoring/
 [2]: /synthetics/browser_tests
 [3]: https://app.datadoghq.com/rum/sessions
-[4]: /real_user_monitoring/session_replay/browser/
-[5]: /synthetics/browser_tests/actions
+[4]: /session_replay/browser/
+[5]: /synthetics/browser_tests/test_steps
 [6]: /synthetics/browser_tests/?tab=requestoptions#test-configuration

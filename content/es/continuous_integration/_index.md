@@ -42,10 +42,14 @@ further_reading:
 - link: https://www.datadoghq.com/blog/datadog-detection-as-code/
   tag: Blog
   text: Cómo utilizamos Datadog para la detección como código
+- link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
+  tag: Blog
+  text: Patrones para una purga de caché segura y eficaz en pipelines de Continuous
+    Integration Continuous Delivery
 title: Continuous Integration Visibility
 ---
 
-<div class="alert alert-info">Esta página trata sobre traer tus métricas y datos de Continuous Integration (CI) a dashboards de Datadog. Si deseas ejecutar tests de Continuous Testing en tus pipelines de CI, consulta la sección <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing y CI/CD</a>.</div>
+<div class="alert alert-info">Esta página trata sobre traer tus métricas y datos de integración continua (CI) en dashboards de Datadog. Si deseas ejecutar tests de Continuous Testing en tus pipelines de CI, consulta la sección <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing y CI/CD</a>.</div>
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?etiquetas (tags).topics-0=CI">}}
   Únete a la sesión de Introducción a CI Visibility para comprender cómo Datadog CI Visibility mejora la eficiencia de los pipelines de CI y cómo configurar los productos de Testing Visibility y Pipeline Visibility. 
@@ -70,7 +74,18 @@ CI Visibility te ayuda a solucionar los problemas de los pipelines y las compila
 
 Datadog se integra con diversos proveedores de CI para recopilar métricas, que realiza un seguimiento del rendimiento de tus pipelines de CI desde la confirmación hasta el despliegue. Estas métricas se utilizan para identificar tendencias de rendimiento y oportunidades de mejora.
 
-{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="github actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="gitlab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
+{{< /card-grid >}}
 
 </br>
 

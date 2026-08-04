@@ -31,6 +31,10 @@ receivers:
         - targets: ['0.0.0.0:8888']
 ```
 
+<div class="alert alert-warning">
+Si tienes un Datadog Agent ejecutándose en el mismo host que un OpenTelemetry Collector o un DDOT Collector que utiliza un receptor de Prometheus para analizar métricas de estado del Collector, asegúrate de que la <a href="/integrations/openmetrics/">integración de OpenMetrics</a> del Agent está desactivada o que analiza un endpoint diferente al de las métricas de estado del Collector. De lo contrario, tanto el Agent como el Collector rastrean el mismo endpoint, lo que da como resultado métricas de salud del Collector duplicadas.
+</div>
+
 ## Datos recopilados
 
 | Métrica de OpenTelemetry | Descripción |

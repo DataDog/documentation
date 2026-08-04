@@ -28,5 +28,14 @@ menu:
       url: /partners/sales-enablement/
       identifier: sales-enablement
       weight: 2
+    - name: Cloud Cost Management
+      url: /partners/cloud_cost_management/
+      identifier: cloud-cost-management
+      weight: 3
+    - name: AWS
+      url: /partners/cloud_cost_management/aws/
+      identifier: cloud-cost-management-aws
+      parent: cloud-cost-management
+      weight: 50
 
 

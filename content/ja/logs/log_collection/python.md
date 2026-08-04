@@ -6,26 +6,26 @@ further_reading:
   tag: ブログ
   text: Python ログの収集、カスタマイズ、一元化方法
 - link: /logs/log_configuration/processors
-  tag: Documentation
+  tag: ドキュメント
   text: ログの処理方法
 - link: /logs/log_configuration/parsing
-  tag: Documentation
+  tag: ドキュメント
   text: パースの詳細
 - link: /logs/explorer/
-  tag: Documentation
+  tag: ドキュメント
   text: ログの調査方法
 - link: /logs/faq/log-collection-troubleshooting-guide/
-  tag: Documentation
+  tag: ドキュメント
   text: ログ収集のトラブルシューティングガイド
 - link: /glossary/#tail
   tag: 用語集
-  text: 用語集 "テール" の項目
+  text: 用語集の "tail" の項目
 title: Python ログ収集
 ---
 
 ## 概要
 
-Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを[テール][12]します。
+Python のログを Datadog に送信するには、Python ロガーを構成してホスト上のファイルにログを記録し、Datadog Agent でそのファイルを[追跡][12]します。
 
 ## ロガーの構成
 
@@ -84,7 +84,7 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 2019-01-07 15:20:15,972 DEBUG [flask.app] [app.py:100] [dd.trace_id=5688176451479556031 dd.span_id=4663104081780224235] - this is an example
 ```
 
-ログが JSON 形式の場合、値がトップレベル、またはトップレベルの `extra` または `record.extra` ブロックにある場合、トレース値は自動的に抽出されます。以下はトレース値が自動的にパースされる有効な JSON ログの例です。
+ログが JSON フォーマットの場合、値がトップ レベルまたはトップ レベルの `extra` や `record.extra` ブロックにあるときは、トレース値が自動的に抽出されます。以下に、トレース値が自動的にパースされる有効な JSON ログの例を示します。
 
 ```json
 {
@@ -125,12 +125,12 @@ APM が有効になっているアプリケーションの場合は、[APM Pytho
 }
 ```
 
-## その他の参考資料
+## 関連資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://pypi.python.org/pypi/JSON-log-formatter/
-[2]: https://github.com/madzak/python-json-logger
+[2]: https://github.com/nhairs/python-json-logger
 [3]: https://pypi.org/project/django-datadog-logger/
 [4]: /ja/tracing/other_telemetry/connect_logs_and_traces/python
 [5]: /ja/agent/configuration/agent-commands/

@@ -67,7 +67,13 @@ Datadog の [Query Metrics ページ][1]に移動します。
 
 収集されたメトリクスの完全なリストを表示するには、データベース製品のインテグレーションデータ収集ドキュメントを参照してください。
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 データベースモニタリングビューに使用されるメトリクスは、主に次のとおりです。

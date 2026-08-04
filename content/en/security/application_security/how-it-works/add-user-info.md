@@ -3,7 +3,18 @@ title: User Monitoring and Protection
 aliases:
   - /security_platform/application_security/add-user-info
   - /security/application_security/add-user-info
+  - /security/application_security/threats/add-user-info/
+further_reading:
+- link: "https://www.datadoghq.com/blog/app-api-protection-python-lambda-monitoring/"
+  tag: "Blog"
+  text: "Detect runtime threats in Python Lambda functions with Datadog AAP"
 ---
+
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 ## Overview
 
@@ -28,7 +39,7 @@ The custom user activity for which out-of-the-box detection rules are available 
 ## Adding authenticated user information to traces and enabling user blocking capability
 
 <div class="alert alert-info">
-<strong>Automated Detection of User Activity:</strong> Datadog Tracing Libraries attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
+<strong>Automated Detection of User Activity:</strong> Datadog SDKs attempt to detect and report user activity events automatically. For more information, see <a href="/security/application_security/how-it-works/add-user-info/?tab=set_user#disabling-automatic-user-activity-event-tracking">Disabling automatic user activity event tracking</a>.
 </div>
 
 You can [add custom tags to your root span][3], or use the instrumentation functions described below.
@@ -156,8 +167,8 @@ Datadog::Kit::Identity.set_user(
 
   # optional tags with known semantics
   name: 'Jean Example',
-  email:, 'jean.example@example.com',
-  session_id:, '987654321',
+  email: 'jean.example@example.com',
+  session_id: '987654321',
   role: 'admin',
   scope: 'read:message, write:files',
 
@@ -281,6 +292,21 @@ Starting in dd-trace-py v3.7, this example shows how to set user monitoring tags
 ```python
 from ddtrace.appsec.track_user_sdk import track_user
 
+# starting in dd-trace-py v3.17, you can use track_user_id
+# without login information, but user_id is required
+# this is the recommended API since it enables best product functionality with least room for mistakes
+track_user_id(
+    "some_user_id",
+    session_id="session_id",
+    metadata={
+        "name": "John",
+        "email": "test@test.com",
+        "scope": "some_scope",
+        "role": "manager",
+    },
+)
+
+# Alternatively, you can use track_user
 user_login = "some_login"
 # to enable all features (user_id and/or session_id monitoring and blocking), 
 # make sure you provide the corresponding optional arguments
@@ -378,8 +404,8 @@ public class LoginController {
         String userId = null;
         Map<String, String> metadata = new HashMap<>();
         metadata.put("usr.login", userName);
-        if (userExists != null) {
-            userId = getUserId(userName)
+        if (userExists) {
+            userId = getUserId(userName);
             metadata.put("email", user.getEmail());
         } else {
             userId = userName;
@@ -756,10 +782,10 @@ const tracer = require('dd-trace')
 
 // in a controller:
 const user = {
-id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
+  id: 'user-id', // id is mandatory. If no ID is available, any unique identifier works (username, email...)
   email: 'user@email.com' // other fields are optional
 }
-const user = 'user-id' // user could be just the ID
+// Alternatively: const user = 'user-id' (user can be just the ID string)
 const login = 'user@email.com'
 const metadata = { 'key': 'value' } // you can add arbitrary fields
 
@@ -870,6 +896,11 @@ Available since dd-trace-py v3.7, `track_user_sdk` provides 5 functions:
 - `track_signup`
 - `track_custom_event`
 - `track_user`
+
+Available since dd-trace-py v3.17, `track_user_sdk` provides this additional function:
+
+- `track_user_id`
+
 
 ```python
 from ddtrace.appsec import track_user_sdk
@@ -1081,11 +1112,11 @@ track_custom_event(tracer, event_name, metadata)
 
 If your service has AAP enabled and [Remote Configuration][1] enabled, you can create a custom WAF rule to flag any request it matches with a custom business logic tag. This doesn't require any modification to your application, and can be done entirely from Datadog.
 
-To get started, navigate to the [Custom WAF Rule page][2] and click on "Create New Rule".
+To get started, navigate to the [Custom WAF Rule page][2] and click on {{< ui >}}Create New Rule{{< /ui >}}.
 
 {{< img src="security/application_security/threats/custom-waf-rule-menu.png" alt="Access the Custom WAF Rule Menu from the AAP homepage by clicking on Protection, then In-App WAF and Custom Rules" style="width:100%;" >}}
 
-This will open a menu in which you may define your custom WAF rule. By selecting the "Business Logic" category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to AAP. If you don't need the condition, you may set a broad condition to match everything.
+This will open a menu in which you may define your custom WAF rule. By selecting the {{< ui >}}Business Logic{{< /ui >}} category, you will be able to configure an event type (for instance, `users.password_reset`). You can then select the service you want to track, and a specific endpoint. You may also use the rule condition to target a specific parameter to identify the codeflow you want to _instrument_. When the condition matches, the library tags the trace and flags it to be forwarded to AAP. If you don't need the condition, you may set a broad condition to match everything.
 
 {{< img src="security/application_security/threats/custom-waf-rule-form.png" alt="Screenshot of the form that appear when you click on the Create New Rule button" style="width:50%;" >}}
 
@@ -1097,7 +1128,7 @@ Once saved, the rule is deployed to instances of the service that have Remote Co
 
 ## Automatic user activity event tracking
 
-When AAP is enabled, Datadog Tracing Libraries attempt to detect user activity events automatically.
+When AAP is enabled, Datadog SDKs attempt to detect user activity events automatically.
 
 The events that can be automatically detected are:
 
@@ -1141,16 +1172,16 @@ For example, `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE=anon`.
 
 The following modes are deprecated:
 
-- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer library tries to collect the user ID, and only if the user ID is a valid [GUID][10]
+- `safe` mode: The trace library does not include any PII information on the events metadata. The tracer tries to collect the user ID, and only if the user ID is a valid [GUID][11]
 - `extended` mode: The trace library tries to collect the user ID, and the user email. In this mode, Datadog does not check the type for the user ID to be a GUID. The trace library reports whatever value can be extracted from the event.
 
 **Note**: There could be cases in which the trace library won't be able to extract any information from the user event. The event would be reported with empty metadata. In those cases, use the [SDK](#adding-business-logic-information-login-success-login-failure-any-business-logic-to-traces) to manually instrument the user events.
 
 ## Disabling user activity event tracking
 
-To disable automated user activity detection through your [AAP Software Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
+To disable automated user activity detection through your [AAP Catalog][14], change the automatic tracking mode environment variable `DD_APPSEC_AUTO_USER_INSTRUMENTATION_MODE` to `disabled` on the service you want to deactivate. All modes only affect automated instrumentation and require [Remote Configuration][15] to be enabled.
 
-For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog Tracing Library, and not on the Datadog Agent.
+For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMATED_USER_EVENTS_TRACKING_ENABLED` to `false` on your service and restart it. This must be set on the application hosting the Datadog SDK, and not on the Datadog Agent.
 
 [3]: /tracing/trace_collection/custom_instrumentation/
 [4]: /security/default_rules/bl-rate-limiting/
@@ -1165,3 +1196,7 @@ For manual configuration, you can set the environment variable `DD_APPSEC_AUTOMA
 [13]: /security/default_rules/distributed-ato-ua-asn/
 [14]: https://app.datadoghq.com/security/appsec/inventory/services?tab=capabilities
 [15]: /tracing/guide/remote_config
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}

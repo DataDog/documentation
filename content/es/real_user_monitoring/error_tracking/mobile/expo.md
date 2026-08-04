@@ -68,6 +68,72 @@ Ejecuta `eas secret:create` para definir `DATADOG_SITE` en el host de tu sitio D
 
 ## Obtener trazas de stack tecnológico desofuscadas
 
+### Utilizar la configuración de Datadog Expo
+
+A partir de `@datadog/mobile-react-native@2.10.0` y `@datadog/datadog-ci@v3.13.0`, el kit de desarrollo de software (SDK) exporta un complemento de Datadog Metro, que adjunta un ID de depuración único a tu paquete de aplicaciones y mapa fuente.
+
+Añádelo a tu `metro.config.js` para permitir una simbolización precisa de los stack traces en Datadog:
+
+```js
+// const { getDefaultConfig } = require("expo/metro-config");
+const { getDatadogExpoConfig } = require("@datadog/mobile-react-native/metro");
+// const config = getDefaultConfig(__dirname);
+const config = getDatadogExpoConfig(__dirname);
+module.exports = config;
+```
+
+### Cargar mapas fuente para las actualizaciones de EAS
+
+Al crear una [actualización de EAS](https://docs.expo.dev/eas-update/introduction/), es necesario cargar los mapas fuente correspondientes en Datadog. De este modo se garantiza la exactitud de Error Tracking y la simbología.
+
+#### 1. Crear la actualización del EAS
+
+Ejecuta el comando de actualización como de costumbre:
+
+```
+eas update --channel [channel-name] --message "[message]"
+```
+
+Esto genera una carpeta `dist` en la raíz de tu proyecto.
+
+#### 2. Localizar los mapas fuente
+
+Dentro de la carpeta `dist`, encuentra los paquetes generados y los mapas fuente:
+
+* Ejemplo de rutas:
+
+  * `./dist/_expo/static/js/ios`
+  * `./dist/_expo/static/js/android`
+
+* Pares de archivos que puedes ver:
+
+  * Hermes: `.hbc` (conjunto) y `.hbc.map` (mapa fuente)
+  * JSC: `.js` o `.jsbundle` (conjunto) y `*.map` (mapa fuente)
+
+#### 3. Cargar los mapas fuente
+
+Asegúrate de tener instalada la última versión de `datadog-ci`.
+Para cada plataforma (Android e iOS), carga los símbolos de depuración utilizando:
+
+```
+npx datadog-ci react-native upload \
+  --platform [ios OR android] \
+  --service com.example.service \
+  --bundle [BUNDLE_FILE] \
+  --sourcemap [SOURCEMAP_FILE] \
+  --release-version [YOUR_RELEASE_VERSION] \
+  --build-version [YOUR_BUILD_VERSION]
+```
+
+Los mapas fuente incluyen un ID de depuración único generado a partir del contenido del paquete.
+Este ID cambia con cada actualización del EAS. Como resultado, **aunque el servicio, la versión y la versión de compilación sigan siendo los mismos, Datadog siempre recibirá una nueva carga de mapa fuente**.
+
+### Utiliza el comando `datadog-ci react-native inject-debug-id` 
+
+Como alternativa a la configuración de Expo, a partir de `@datadog/mobile-react-native@2.10.0` y `@datadog/datadog-ci@v3.13.0`, puedes utilizar el comando `datadog-ci react-native inject-debug-id` para adjuntar manualmente un ID de depuración único a tu paquete de aplicaciones y mapa fuente.
+
+Las instrucciones de uso están disponibles en la [página de documentación del comando][5].
+
 ### Añade los datos del repositorio Git a tus archivos de asignación en Expo Application Services (EAS)
 
 Si estás utilizando EAS para crear tu aplicación Expo, configura `cli.requireCommit` como `true` en tu archivo `eas.json` para añadir los datos del repositorio Git a tus archivos de asignación.
@@ -79,21 +145,19 @@ Si estás utilizando EAS para crear tu aplicación Expo, configura `cli.requireC
     }
 }
 ```
+### Lista de los mapas fuente cargados
+
+Consulta la página [Símbolos de depuración RUM][4] para ver todos los símbolos cargados.
 
 ## Limitaciones
 
-{{< site-region region="us,us3,us5,eu,gov" >}}
-Los mapas de origen, los archivos de asignación y los archivos dSYM tienen un límite de **500** MB cada uno.
-{{< /site-region >}}
-{{< site-region region="ap1" >}}
-Los mapas de origen, los archivos de asignación y los archivos dSYM tienen un límite de **500** MB cada uno.
-{{< /site-region >}}
+El tamaño de los mapas fuente y los archivos de mapas está limitado a **500 MB** cada uno, mientras que los archivos dSYM pueden llegar a **2 GB** cada uno.
 
 ## Para probar tu implementación
 
 Para verificar la configuración de las notificaciones de fallos y el seguimiento de errores de Expo, necesitas generar un error en tu aplicación y confirmar que el error aparece en Datadog.
 
-Para probar tu aplicación:
+Para probar tu implementación
 
 1. Ejecuta tu aplicación en un simulador, emulador o dispositivo real. Si estás ejecutando en iOS, asegúrate de que el depurador no está conectado. De lo contrario, Xcode captura el fallo antes de que lo haga el SDK de Datadog.
 2. Ejecuta código que contenga un error o fallo. Por ejemplo:
@@ -107,7 +171,7 @@ Para probar tu aplicación:
 3. Para los informes de error ofuscados que no provocan un fallo, puedes verificar la simbolización y la desofuscación en [**Rastreo de errores**][1].
 4. Para los fallos, después de que se produzcan, reinicia tu aplicación y espera a que el SDK de React Native cargue el informe del fallo en [**Rastreo de errores**][1].
 
-Para asegurarte de que tus mapas de origen se envían y vinculan correctamente con tu aplicación, también puedes generar fallos con el paquete [`react-native-performance-limiter`][14].
+Para asegurarte de que tus mapas fuente se envían y enlazan correctamente con tu aplicación, también puedes generar fallos con el paquete [`react-native-performance-limiter`][14].
 
 Instálalo con yarn o npm y luego vuelve a instalar tus pods:
 
@@ -126,7 +190,7 @@ const crashApp = () => {
 };
 ```
 
-Vuelve a crear tu aplicación para que envíe los nuevos mapas de origen, activa el fallo y espera a que aparezca el error en la página [Rastreo de errores][1].
+Vuelve a compilar tu aplicación para la versión para enviar los nuevos mapas fuente, desencadenar el fallo y esperar en la página [Error Tracking][1] que aparezca el error.
 ```
 
 ## Opciones de configuración adicionales
@@ -157,7 +221,7 @@ Si quieres deshabilitar **cualquier carga de archivos**, elimina `expo-datadog` 
 
 ### Uso de Expo con Datadog y Sentry
 
-Los complementos de configuración de Datadog y Sentry utilizan expresiones regulares para modificar la fase de compilación de iOS "Empaquetar código e imágenes React Native" para enviar el mapa de origen. Esto puede hacer que las compilaciones de EAS fallen con un error `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context`.
+Los complementos de configuración de Datadog y Sentry utilizan expresiones regulares para modificar la fase de compilación de iOS "Empaquetar código e imágenes React Native" para enviar el mapa fuente. Esto puede hacer que las compilaciones de EAS fallen con un error `error: Found argument 'datadog-ci' which wasn't expected, or isn't valid in this context`.
 
 Para utilizar ambos complementos, asegúrate de añadir el complemento `expo-datadog` primero en orden en tu archivo `app.json`:
 
@@ -176,4 +240,6 @@ Si estás utilizando `expo-dev-client` y ya tienes el complemento `expo-datadog`
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://github.com/DataDog/expo-datadog
-[3]: /es/real_user_monitoring/mobile_and_tv_monitoring/setup/expo/#usage
+[3]: /es/real_user_monitoring/application_monitoring/react_native/setup/expo/#usage
+[4]: https://app.datadoghq.com/source-code/setup/rum
+[5]: https://github.com/DataDog/datadog-ci/blob/master/packages/datadog-ci/src/commands/react-native/README.md#inject-debug-id

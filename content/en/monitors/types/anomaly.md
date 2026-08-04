@@ -20,7 +20,7 @@ further_reading:
   text: Anomalies function
 - link: "https://www.datadoghq.com/blog/ai-powered-metrics-monitoring/"
   tag: "Blog"
-  text: Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring
+  text: "Anomaly detection, predictive correlations - Using AI-assisted metrics monitoring"
 algolia:
   rank: 70
   tags: ['anomaly', 'anomaly monitor']
@@ -34,7 +34,7 @@ For example, anomaly detection can help you discover when your web traffic is un
 
 ## Monitor creation
 
-To create an [anomaly monitor][1] in Datadog, use the main navigation: *Monitors --> New Monitor --> Anomaly*.
+To create an [anomaly monitor][1] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}} > {{< ui >}}Anomaly{{< /ui >}}.
 
 ### Define the metric
 
@@ -44,8 +44,8 @@ Any metric reporting to Datadog is available for monitors. For more information,
 After defining the metric, the anomaly detection monitor provides two preview graphs in the editor:
 {{< img src="monitors/monitor_types/anomaly/context.png" alt="historical context" style="width:80%;">}}
 
-* The **Historical View** allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
-* The **Evaluation Preview** is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
+* The {{< ui >}}Historical View{{< /ui >}} allows you to explore the monitored query at different time scales to better understand why data may be considered anomalous or non-anomalous.
+* The {{< ui >}}Evaluation Preview{{< /ui >}} is longer than the alerting window and provides insight on what the anomalies algorithm takes into account when calculating the bounds.
 
 ### Set alert conditions
 
@@ -58,9 +58,9 @@ Trigger window
 : How much time is required for the metric to be anomalous before the alert triggers. **Note**: If the alert window is too short, you might get false alarms due to spurious noise.
 
 Recovery window
-: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the **Recovery Window** to the same value as the **Trigger Window**. 
+: The amount of time required for the metric to no longer be considered anomalous, allowing the alert to recover. It is recommended to set the {{< ui >}}Recovery Window{{< /ui >}} to the same value as the {{< ui >}}Trigger Window{{< /ui >}}. 
 
-**Note**: The range of accepted values for the **Recovery Window** depends on the **Trigger Window** and the **Alert Threshold** to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
+**Note**: The range of accepted values for the {{< ui >}}Recovery Window{{< /ui >}} depends on the {{< ui >}}Trigger Window{{< /ui >}} and the {{< ui >}}Alert Threshold{{< /ui >}} to ensure the monitor can't both satisfy the recovery and the alert condition at the same time.
 Example:
 * `Threshold`: 50%
 * `Trigger window`: 4h
@@ -73,7 +73,7 @@ The range of accepted values for the recovery window is between 49 minutes (`4h*
 
 ### Advanced options
 
-Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under **Advanced Options**.
+Datadog automatically analyzes your chosen metric and sets several parameters for you. However, the options are available for you to edit under {{< ui >}}Advanced Options{{< /ui >}}.
 
 {{< img src="monitors/monitor_types/anomaly/advanced_options.png" alt="The Advanced Options menu in the Anomaly monitor configuration page with the configuration set to detect anomalies 2 deviations from the predicted data using the agile algorithm with weekly seasonality, to take daylight savings into effect, and to use a rollup interval of 60 seconds" style="width:80%;">}}
 
@@ -160,13 +160,11 @@ For detailed instructions on the advanced alert options (auto resolve, evaluatio
 
 ## Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][10] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][10] page.
 
 ## API
 
 Customers on an enterprise plan can create anomaly detection monitors using the [create-monitor API endpoint][11]. Datadog **strongly recommends** [exporting a monitor's JSON][12] to build the query for the API. By using the [monitor creation page][1] in Datadog, customers benefit from the preview graph and automatic parameter tuning to help avoid a poorly configured monitor.
-
-**Note**: Anomaly detection monitors are only available to customers on an enterprise plan. Customers on a pro plan interested in anomaly detection monitors should reach out to their customer success representative or email the [Datadog billing team][13].
 
 Anomaly monitors are managed using the [same API][14] as other monitors. These fields are unique for anomaly monitors:
 
@@ -179,7 +177,7 @@ avg(<query_window>):anomalies(<metric_query>, '<algorithm>', <deviations>, direc
 ```
 
 `query_window`
-: A timeframe like `last_4h` or `last_7d`. The time window displayed in graphs in notifications. Must be at least as large as the `alert_window` and is recommended to be around 5 times the `alert_window`.
+: A time frame like `last_4h` or `last_7d`. This parameter controls the time range of data shown in notification graphs. The `query_window` determines how much historical data appears in the visualization but does not affect alert evaluation. Datadog recommends the `query_window` to be around five times the `alert_window` to provide additional context. **Note**: The `query_window` must be at least as large as the `alert_window`. 
 
 `metric_query`
 : A standard Datadog metric query (for example, `sum:trace.flask.request.hits{service:web-app}.as_count()`).
@@ -213,6 +211,10 @@ Below is an example query for an anomaly detection monitor, which alerts when th
 ```text
 avg(last_1h):anomalies(avg:system.cpu.system{name:cassandra}, 'basic', 3, direction='above', alert_window='last_5m', interval=20, count_default_zero='true') >= 1
 ```
+
+This query uses `avg` in two places:
+- `avg(last_1h)` - Aggregates anomaly data points over the query window for notification graphs
+- `avg:system.cpu.system{name:cassandra}` - Aggregates the CPU metric across Cassandra nodes before anomaly detection
 
 ### `options`
 

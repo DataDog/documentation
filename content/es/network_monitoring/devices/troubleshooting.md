@@ -149,6 +149,8 @@ Si ves un error de permiso denegado mientras enlazas puertos en logs del Agent, 
 
 Si faltan trampas SNMP o tráfico NetFlow, una causa común son las reglas del cortafuegos que bloquean los paquetes UDP antes de que lleguen al Agent. Tanto las trampas SNMP como el tráfico NetFlow dependen de UDP y utilizan los puertos definidos en tu configuración de [datadog.yaml][9].
 
+<div class="alert alert-info">Los firewalls locales como Uncomplicated Firewall (UFW) pueden bloquear el tráfico incluso cuando están configurados con parámetros permisivos. Comprueba los logs del sistema en busca de entradas de paquetes bloqueados, que suelen indicar que el tráfico llegó a la interfaz de red pero se bloqueó antes de llegar al sistema operativo.</div>
+
 Utiliza los siguientes comandos específicos de la plataforma para buscar reglas de cortafuegos que puedan estar bloqueando el tráfico y evitando que llegue al Agent.
 
 {{< tabs >}}

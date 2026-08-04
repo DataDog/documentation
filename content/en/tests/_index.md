@@ -5,16 +5,9 @@ aliases:
   - /continuous_integration/guides/test_configurations/
   - /continuous_integration/integrate_tests/
   - /continuous_integration/tests/
+  - /tests/repositories/
+  - /tests/search/
 further_reading:
-    - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-      tag: "Release Notes"
-      text: "Check out the latest Software Delivery releases! (App login required)"
-    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
-      tag: "Blog"
-      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
-    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
-      tag: "Blog"
-      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
     - link: "/monitors/types/ci/"
       tag: "Documentation"
       text: "Learn about CI Test Monitors"
@@ -27,12 +20,42 @@ further_reading:
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
+    - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+      tag: "Learning Center"
+      text: "Getting Started with Test Optimization"
+    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
+    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+      tag: "Blog"
+      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
+    - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+      tag: "Blog"
+      text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+    - link: "https://www.datadoghq.com/blog/dbt-data-quality-testing"
+      tag: "Blog"
+      text: "Implement dbt data quality checks with dbt-expectations"
+    - link: "https://www.datadoghq.com/blog/platform-engineering-metrics/"
+      tag: "Blog"
+      text: "Success Metrics for Platform Engineering Teams"
+    - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+      tag: "Release Notes"
+      text: "Check out the latest Software Delivery releases! (App login required)"
 cascade:
     site_support_id: test_optimization
     algolia:
         rank: 70
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
+
+{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and Test Optimization experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization, and switch back to the original UI at any time.
+
+[1]: /continuous_integration/cicd_optimization/
+{{< /callout >}}
+
+{{< learning-center-callout header="Try Getting Started with Test Optimization in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
+  Learn how to accelerate your CI pipelines by setting up test monitoring, identifying flaky tests and using Test Impact Analysis to run only the tests that matter.
+{{< /learning-center-callout >}}
 
 ## Overview
 
@@ -42,9 +65,20 @@ cascade:
 
 Select an option to configure Test Optimization in Datadog:
 
-{{< partial name="continuous_integration/ci-tests-setup.html" >}}
+{{< card-grid card_width="75px" >}}
+  {{< image-card href="/tests/setup/dotnet/" src="integrations_logos/dotnet_avatar.svg" alt=".net" >}}
+  {{< image-card href="/tests/setup/java/" src="integrations_logos/java_avatar.svg" alt="java" >}}
+  {{< image-card href="/tests/setup/javascript/" src="integrations_logos/javascript.png" alt="javascript" >}}
+  {{< image-card href="/tests/setup/python/" src="integrations_logos/python_avatar.svg" alt="python" >}}
+  {{< image-card href="/tests/setup/ruby/" src="integrations_logos/ruby_avatar.svg" alt="ruby" >}}
+  {{< image-card href="/tests/setup/swift/" src="integrations_logos/swift_avatar.svg" alt="swift" >}}
+  {{< image-card href="/tests/setup/go/" src="integrations_logos/golang-avatar.png" alt="go" >}}
+  {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
+{{< /card-grid >}}
 
 </br>
+
+If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][10].
 
 In addition to tests, Test Optimization provides visibility over the whole testing phase of your project.
 
@@ -59,7 +93,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Test suite level visibility" >}}Visibility over the whole testing process, including session, module, suites, and tests.{{< /ci-details >}}                                                                 | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Manual API" >}}Ability to programmatically create CI Visibility events for test frameworks that are not supported by Datadog's automatic instrumentation.{{< /ci-details >}}                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |            |           |                        |
 | {{< ci-details title="Codeowner by test" >}}Automatic detection of the owner of a test file based on the CODEOWNERS file.{{< /ci-details >}}                                                                                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} | {{< X >}} (partially)  |
-| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} (only start)| {{< X >}} | {{< X >}} | {{< X >}} (only start) |
+| {{< ci-details title="Source code start/end" >}}Automatic report of the start and end lines of a test.{{< /ci-details >}}                                                                                                         | {{< X >}} |       {{< X >}}      | {{< X >}} (only start) | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} (only start) |
 | {{< ci-details title="CI and git info" >}}Automatic collection of git and CI environment metadata, such as CI provider, git commit SHA or pipeline URL.{{< /ci-details >}}                                                        | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Git metadata upload" >}}Automatic upload of git tree information used for <a href="/tests/test_impact_analysis">Test Impact Analysis</a>.{{< /ci-details >}}                                                | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |       {{< X >}}        |
 | {{< ci-details title="Test Impact Analysis *" >}}Capability to enable <a href="/tests/test_impact_analysis">Test Impact Analysis</a>, which intelligently skips tests based on code coverage and git metadata.{{< /ci-details >}} | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             | {{< X >}} | {{< X >}} |                        |
@@ -71,7 +105,7 @@ In addition to tests, Test Optimization provides visibility over the whole testi
 | {{< ci-details title="Failed test replay *" >}}<a href="/tests/flaky_test_management/auto_test_retries#failed-test-replay">Access local variable information</a> on retried failed tests.{{< /ci-details >}}                      | {{< X >}} |       {{< X >}}      |       {{< X >}}        |           |                       |           |           |                        |
 | {{< ci-details title="Selenium RUM integration" >}}Automatically <a href="/tests/browser_tests">link browser sessions to test cases</a> when testing RUM-instrumented applications.{{< /ci-details >}}                            | {{< X >}} |       {{< X >}}      |       {{< X >}}        | {{< X >}} | {{< X >}}             |           |           |                        |
 
-\* The feature is opt-in, and needs to be enabled on the [**Test Optimization Settings** page][2].
+\* The feature is opt-in, and needs to be enabled in [{{< ui >}}CI/CD Optimization settings{{< /ui >}}][2].
 
 ## Default configurations
 
@@ -153,14 +187,14 @@ When creating a [dashboard][4] or a [notebook][5], you can use CI test data in y
 
 ## Alert on test data
 
-When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the **Export** button.
+When you're evaluating failed or flaky tests, or the performance of a CI test, you can export your search query in the [Test Optimization Explorer][8] to a [CI Test monitor][9] by clicking the {{< ui >}}Export{{< /ui >}} button.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://app.datadoghq.com/ci/test-repositories
-[2]: https://app.datadoghq.com/ci/settings/test-optimization
+[1]: https://app.datadoghq.com/ci/test/health
+[2]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [3]: /continuous_integration/explorer/facets/
 [4]: https://app.datadoghq.com/dashboard/lists
 [5]: https://app.datadoghq.com/notebook/list
@@ -168,3 +202,4 @@ When you're evaluating failed or flaky tests, or the performance of a CI test, y
 [7]: /notebooks
 [8]: https://app.datadoghq.com/ci/test-runs
 [9]: /monitors/types/ci/
+[10]: /tests/setup/bazel/

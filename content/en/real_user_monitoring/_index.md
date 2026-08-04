@@ -6,12 +6,18 @@ aliases:
   - /real_user_monitoring/installation
   - /real_user_monitoring/faq/
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
-  tag: "Release Notes"
-  text: "Check out the latest Datadog RUM releases! (App login required)"
+- link: "/real_user_monitoring/application_monitoring/browser/data_collected/"
+  tag: "Documentation"
+  text: "RUM Browser Data Collected"
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to gain insights through Real User Monitoring"
+- link: "https://learn.datadoghq.com/courses/intro-to-rum"
+  tag: "Learning Center"
+  text: "Intro to Real User Monitoring (RUM)"
+- link: "https://www.datadoghq.com/blog/ai-summaries-and-smart-chapters/"
+  tag: "Blog"
+  text: "Understand session replays faster with AI summaries and smart chapters"
 - link: "https://www.datadoghq.com/blog/real-user-monitoring-with-datadog/"
   tag: "Blog"
   text: "Introducing Datadog Real User Monitoring"
@@ -42,12 +48,18 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
   tag: "Blog"
   text: "Best practices for monitoring static web applications"
-- link: "/real_user_monitoring/browser/data_collected/"
-  tag: "Documentation"
-  text: "RUM Browser Data Collected"
 - link: "https://www.datadoghq.com/blog/progressive-web-application-monitoring/"
   tag: "Blog"
   text: "Best practices for monitoring progressive web applications"
+- link: "https://www.datadoghq.com/blog/datadog-executive-dashboards"
+  tag: "Blog"
+  text: "Design effective executive dashboards with Datadog"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
+- link: "https://app.datadoghq.com/release-notes?category=Real%20User%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog RUM releases! (App login required)"
 algolia:
   tags: ['rum', 'real user monitoring']
 cascade:
@@ -71,7 +83,28 @@ Datadog's *Real User Monitoring (RUM)* gives you end-to-end visibility into the 
 * **Analytics / Usage**: Understand who is using your application (country, device, OS), monitor individual users journeys, and analyze how users interact with your application (most common page visited, clicks, interactions, and feature usage).
 * **Support**: Retrieve all of the information related to one user session to troubleshoot an issue (session duration, pages visited, interactions, resources loaded, and errors).
 
-A user session is a user journey on your web or mobile application lasting up to four hours. A session usually includes pageviews and associated telemetry. If a user does not interact with an application for 15 minutes, the session is considered complete. A new session starts when the user interacts with the application again.
+### Session definition
+
+A user session is a user journey on your web or mobile application. A session includes all related navigation events (RUM Views), user actions (RUM Actions), network requests (RUM Resources), crashes and errors (RUM Errors), and other events and signals that collectively produce a faithful representation of the user experience.
+
+A RUM session can last up to 4 hours, and expires after 15 minutes of inactivity. If the user interacts with the application after either limit, a new session starts automatically.
+
+### Technical limitations
+
+| Property                                   | Limitation               |
+| ------------------------------------------ | ------------------------ |
+| Maximum duration of a session              | 4 hours                  |
+| Timeout of a session                       | 15 minutes of inactivity |
+| Maximum number of events per session       | 10 million              |
+| Maximum number of attributes per event     | 1,000                    |
+| Maximum attribute depth per event          | 20                       |
+| Maximum event size                         | 1 MB                     |
+| Maximum intake payload size                | 5 MB                     |
+| Maximum source maps and mapping files size | 500 MB per file          |
+| Maximum dSYM files size                    | 2 GB per file            |
+| Maximum delay at ingestion                 | 24 hours                 |
+
+If an event goes beyond any of the technical limitations listed above, it is rejected by the Datadog intake.
 
 ## What is Session Replay?
 
@@ -83,7 +116,18 @@ Combined with RUM performance data, Session Replay is beneficial for error ident
 
 Select an application type to start collecting RUM data:
 
-{{< partial name="rum/rum-getting-started.html" >}}
+{{< card-grid card_width="210" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/browser/" src="integrations_logos/javascript_large.svg" alt="browser" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_large.svg" alt="android" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/ios_large.svg" alt="ios" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/react_native/setup" src="integrations_logos/react-native_large.svg" alt="react native" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/flutter/setup" src="integrations_logos/flutter_large.svg" alt="flutter" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/android/setup" src="integrations_logos/android_tv_large.svg" alt="android tv" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/ios/setup" src="integrations_logos/tv_os_large.svg" alt="tv OS" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/roku/setup" src="integrations_logos/roku_large.svg" alt="Roku" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/unity/setup" src="integrations_logos/rum-unity_large.svg" alt="rum-unity" >}}
+  {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
+{{< /card-grid >}}
 
 </br>
 
@@ -120,12 +164,32 @@ All Datadog SDKs traffic is transmitted over SSL (default 443) to the following 
 | US5  | `https://browser-intake-us5-datadoghq.com`    |
 | EU1  | `https://browser-intake-datadoghq.eu`         |
 | US1-FED  | `https://browser-intake-ddog-gov.com`     |
+| US2-FED  | `https://browser-intake-us2-ddog-gov.com` |
 | AP1  | `https://browser-intake-ap1-datadoghq.com`    |
 | AP2  | `https://browser-intake-ap2-datadoghq.com`    |
+| UK1  | `https://browser-intake-uk1-datadoghq.com`    |
+
+### Additional endpoints for Browser Profiling
+
+When [Browser Profiling][19] is enabled, the SDK also contacts a quota API to determine whether profiling is permitted for the current session. This uses a `quota.` subdomain of the standard intake origin:
+
+| Site | Quota API URL                                             |
+|------|-----------------------------------------------------------|
+| US1  | `https://quota.browser-intake-datadoghq.com`             |
+| US3  | `https://quota.browser-intake-us3-datadoghq.com`         |
+| US5  | `https://quota.browser-intake-us5-datadoghq.com`         |
+| EU1  | `https://quota.browser-intake-datadoghq.eu`              |
+| US1-FED  | `https://quota.browser-intake-ddog-gov.com`          |
+| US2-FED  | `https://quota.browser-intake-us2-ddog-gov.com`      |
+| AP1  | `https://quota.browser-intake-ap1-datadoghq.com`         |
+| AP2  | `https://quota.browser-intake-ap2-datadoghq.com`         |
+| UK1  | `https://quota.browser-intake-uk1-datadoghq.com`         |
+
+If you use a [proxy][20] or have a [Content Security Policy (CSP)][21], ensure these `quota.` domains are also allowed. See the [Browser Profiling setup][19] page for details.
 
 ## Explore Datadog RUM
 
-Access RUM by navigating to [**Digital Experience > Performance Summary**][1].
+Access RUM by navigating to [{{< ui >}}Digital Experience{{< /ui >}} > {{< ui >}}Performance Summary{{< /ui >}}][1].
 
 Select an application from the top navigation, or follow the setup instructions for [browser][15] or [mobile][16] to add your first application.
 
@@ -175,11 +239,11 @@ Get automated alerts on outliers and groups of errors, timeouts, and crashes to 
 
 ### Web and mobile vitals
 
-View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS and tvOS][8] or [Android and Android TV applications][9].
+View performance scores and telemetry for [browser applications][7] such as Core Web Vitals and Mobile Vitals for [iOS, iPadOS, tvOS, and visionOS][8] or [Android and Android TV applications][9].
 
 ### Web view tracking
 
-Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS and tvOS][10] or [Android and Android TV][11].
+Collect information from your native web applications and explore hybrid views with Web View Tracking for [iOS, iPadOS, and visionOS][10] or [Android and Android TV][11].
 
 {{< img src="real_user_monitoring/webview_tracking/webview_tracking_light.png" alt="Web Views captured in a user session in the RUM Explorer" >}}
 
@@ -199,22 +263,22 @@ Access triggered logs, errors, and performance information when troubleshooting 
 By default, all users can change an application's RUM configuration.
 
 Use granular access controls to limit the [roles][18] that may edit a particular application's RUM configuration:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
-1. Select **Manage App Permissions**.
-1. Click **Restrict Access**.
-1. The dialog box updates to show that members of your organization have **Viewer** access by default.
+1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
+1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restrict Access{{< /ui >}}.
+1. The dialog box updates to show that members of your organization have {{< ui >}}Viewer{{< /ui >}} access by default.
 1. Use the dropdown to select one or more roles, teams, or users that may edit the notebook.
-1. Click **Add**.
-1. The dialog box updates to show that the role you selected has the **Editor** permission.
-1. Click **Save**.
+1. Click {{< ui >}}Add{{< /ui >}}.
+1. The dialog box updates to show that the role you selected has the {{< ui >}}Editor{{< /ui >}} permission.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 **Note:** To maintain your edit access to the application, the system requires you to include at least one role that you are a member of before saving.
 
 You must have edit access to restore general access to a restricted application. Complete the following steps:
-1. While viewing an application's RUM configuration, click on the **Edit application** button at the top of the screen. A dropdown appears.
-1. Select **Manage App Permissions**.
-1. Click **Restore Full Access**.
-1. Click **Save**.
+1. While viewing an application's RUM configuration, click on the {{< ui >}}Edit application{{< /ui >}} button at the top of the screen. A dropdown appears.
+1. Select {{< ui >}}Manage App Permissions{{< /ui >}}.
+1. Click {{< ui >}}Restore Full Access{{< /ui >}}.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 
 ## Further reading
@@ -227,15 +291,18 @@ You must have edit access to restore general access to a restricted application.
 [4]: /monitors/types/real_user_monitoring/
 [5]: /real_user_monitoring/correlate_with_other_telemetry/apm/
 [6]: /real_user_monitoring/error_tracking/
-[7]: /real_user_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
-[8]: /real_user_monitoring/ios/mobile_vitals/
-[9]: /real_user_monitoring/android/mobile_vitals/
-[10]: /real_user_monitoring/ios/web_view_tracking/
-[11]: /real_user_monitoring/android/web_view_tracking/
-[12]: /real_user_monitoring/session_replay/browser/
-[13]: /real_user_monitoring/session_replay/browser/privacy_options/
-[14]: /real_user_monitoring/session_replay/browser/developer_tools/
-[15]: /real_user_monitoring/browser/setup/
+[7]: /real_user_monitoring/application_monitoring/browser/monitoring_page_performance/#event-timings-and-core-web-vitals
+[8]: /real_user_monitoring/application_monitoring/ios/mobile_vitals/
+[9]: /real_user_monitoring/application_monitoring/android/mobile_vitals/
+[10]: /real_user_monitoring/application_monitoring/ios/web_view_tracking/
+[11]: /real_user_monitoring/application_monitoring/android/web_view_tracking/
+[12]: /session_replay/browser/
+[13]: /session_replay/privacy_options?platform=browser
+[14]: /session_replay/dev_tools
+[15]: /real_user_monitoring/application_monitoring/browser/setup/
 [16]: /real_user_monitoring/application_monitoring/
 [17]: https://app.datadoghq.com/rum/optimization/inspect
 [18]: /account_management/rbac/
+[19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
+[20]: /real_user_monitoring/guide/proxy-rum-data
+[21]: /integrations/content_security_policy_logs

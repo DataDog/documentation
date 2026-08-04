@@ -7,7 +7,7 @@ assets:
     events:
       creates_events: false
     metrics:
-      check: aws.appstream.capacidad_actual
+      check: aws.appstream.actual_capacity
       metadata_path: assets/metrics/metric-spec.yaml
       prefix: ''
     service_checks:
@@ -39,8 +39,8 @@ is_public: true
 manifest_version: 2.0.0
 name: amazon_appstream
 public_title: Amazon AppStream
-short_description: Un servicio seguro y totalmente gestionado para transmitir aplicaciones
-  de escritorio desde AWS a un navegador web.
+short_description: Un servicio seguro y totalmente gestionado para la transmición
+  de aplicaciones de escritorio desde AWS a un navegador web.
 supported_os: []
 tile:
   changelog: CHANGELOG.md
@@ -51,7 +51,7 @@ tile:
   - Category::Log Collection
   - Offering::Integration
   configuration: README.md#Setup
-  description: Un servicio seguro y totalmente gestionado para transmitir aplicaciones
+  description: Un servicio seguro y totalmente gestionado para la transmición de aplicaciones
     de escritorio desde AWS a un navegador web.
   media: []
   overview: README.md#Overview
@@ -97,7 +97,7 @@ Configura Amazon AppStream para enviar logs a un bucket de S3 o a CloudWatch.
 ## Datos recopilados
 
 ### Métricas
-{{< get-metrics-from-git "amazon-appstream" >}}
+{{< get-metrics-from-git "amazon_appstream" >}}
 
 
 ### Eventos

@@ -191,7 +191,7 @@ sudo apt-get remove --purge datadog-iot-agent -y
 [3]: /integrations/network
 [4]: /integrations/systemd
 [5]: /integrations/ntp
-[6]: /developers/dogstatsd
+[6]: /extend/dogstatsd
 [7]: /agent/logs/?tab=tailfiles#custom-log-collection
 [8]: /agent/logs/?tab=tcpudp#custom-log-collection
 [9]: /agent/logs/?tab=journald#custom-log-collection

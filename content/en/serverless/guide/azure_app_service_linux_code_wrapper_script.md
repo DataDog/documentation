@@ -7,8 +7,7 @@ further_reading:
 ---
 
 <div class="alert alert-danger">
-The AAS Linux Wrapper is now deprecated. It will continue to receive layer bumps but no new features.
-It will be retired on January 1, 2026, at which point no further updates will be provided.
+The AAS Linux Wrapper is deprecated as of March 1, 2026. You can continue to use the wrapper; however, no further updates, fixes, security patches, or support will be provided.
 Datadog strongly recommends switching to the <a href="https://docs.datadoghq.com/serverless/azure_app_service/linux_code">sidecar instrumentation method</a> as soon as possible.
 </div>
 
@@ -26,7 +25,7 @@ This solution uses the startup command setting and Application Settings for Linu
 
 ### Setup
 #### Set application settings
-To instrument your application, begin by adding the following key-value pairs under **App settings** in your Azure "Environment variables" settings.
+To instrument your application, begin by adding the following key-value pairs under {{< ui >}}App settings{{< /ui >}} in your Azure "Environment variables" settings.
 
 {{< img src="serverless/azure_app_service/application-settings.jpg" alt="Azure App Service Configuration: the Application Settings, under the Configuration section of Settings in the Azure UI. Three settings are listed: DD_API_KEY, DD_SERVICE, and DD_START_APP." style="width:80%;" >}}
 
@@ -63,10 +62,10 @@ Set these values in the `DD_START_APP` environment variable. Examples below are 
 
 {{< tabs >}}
 {{% tab "Node, .NET, PHP, Python" %}}
-Go to **General settings** and add the following to the **Startup Command** field:
+Go to {{< ui >}}General settings{{< /ui >}} and add the following to the {{< ui >}}Startup Command{{< /ui >}} field:
 
 ```
-curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.13.0/datadog_wrapper | bash
+curl -s https://raw.githubusercontent.com/DataDog/datadog-aas-linux/v1.14.0/datadog_wrapper | bash
 ```
 
 {{< img src="serverless/azure_app_service/startup-command-1.jpeg" alt="Azure App Service Configuration: the Stack settings, under the Configuration section of Settings in the Azure UI. Underneath the stack, major version, and minor version fields is a 'Startup Command' field that is populated by the above curl command." style="width:100%;" >}}
@@ -106,22 +105,22 @@ To configure your application to submit metrics, follow the appropriate steps fo
 
 ## Troubleshooting
 
-If you are not receiving traces or custom metric data as expected, enable **App Service logs** to receive debugging logs.
+If you are not receiving traces or custom metric data as expected, enable {{< ui >}}App Service logs{{< /ui >}} to receive debugging logs.
 
 {{< img src="serverless/azure_app_service/app-service-logs.png" alt="Azure App Service Configuration: App Service logs, under the Monitoring section of Settings in the Azure UI. The 'Application logging' option is set to 'File System'." style="width:100%;" >}}
 
-Share the content of the **Log stream** with [Datadog Support][14].
+Share the content of the {{< ui >}}Log stream{{< /ui >}} with [Datadog Support][14].
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /developers/dogstatsd
+[1]: /extend/dogstatsd
 [2]: /getting_started/site/#access-the-datadog-site
 [3]: https://www.datadoghq.com/blog/azure-app-service-datadog-serverless-view/
 [4]: /tracing/services/service_page/
 [5]: https://github.com/brightcove/hot-shots
-[6]: /developers/dogstatsd/?tab=hostagent&code-lang=dotnet#code
-[9]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=java
-[10]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=php
-[11]: https://docs.datadoghq.com/developers/dogstatsd/?tab=hostagent&code-lang=python
+[6]: /extend/dogstatsd/?tab=hostagent&code-lang=dotnet#code
+[9]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=java
+[10]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=php
+[11]: https://docs.datadoghq.com/extend/dogstatsd/?tab=hostagent&code-lang=python
 [14]: /help

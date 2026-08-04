@@ -29,7 +29,7 @@ author:
   support_email: yaara@tyk.io
 categories:
 - métricas
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/integrations-extras/blob/master/tyk/README.md
 display_on_public_website: true
@@ -118,7 +118,7 @@ pump.conf:
    "dogstatsd": {
       "type": "dogstatsd",
       "meta": {
-        "address": "dd-agent:8126",
+        "address": "dd-agent:8125",
         "namespace": "tyk",
         "async_uds": true,
         "async_uds_write_timeout_seconds": 2,

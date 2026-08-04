@@ -4,12 +4,6 @@ aliases:
   - "/data_streams/guide/metrics-and-tags"
 ---
 
-{{% site-region region="gov" %}}
-<div class="alert alert-danger">
-    Data Streams Monitoring is not available for the {{< region-param key="dd_site_name" >}} site.
-</div>
-{{% /site-region %}}
-
 This document discusses the following Data Streams Monitoring metrics and their tags:
 
 - `data_streams.latency`
@@ -34,7 +28,7 @@ This metric measures latency between two points in the pipeline. The value can r
   - `partial_edge`: latency between a service and a queue, if the producer or consumer is not known (that is, not instrumented with Data Streams Monitoring)
      - `start` tag: the upstream producer service/queue
      - `end` tag: the downstream consumer service/queue
-  - `internal`: latency within the service. Measures time between _consume_ and the folllowing _produce_ operation.
+  - `internal`: latency within the service. Measures time between _consume_ and the following _produce_ operation.
 
 `start`
 : The name of the node where Data Streams Monitoring first detects the payload. This node can be a service (the original producer) or a queue (the original producer is not known to Data Streams Monitoring).

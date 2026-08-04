@@ -1,4 +1,7 @@
 ---
+description: Accédez aux rapports d'utilisation, aux paramètres du plan et à l'historique
+  de facturation de votre compte Datadog, y compris le suivi de l'utilisation multi-organisations
+  et l'analyse des coûts.
 title: Paramètres de formule et d'utilisation
 ---
 

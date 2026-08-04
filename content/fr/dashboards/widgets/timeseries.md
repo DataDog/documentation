@@ -12,7 +12,11 @@ further_reading:
 - link: /dashboards/graphing_json/
   tag: Documentation
   text: Créer des dashboards avec JSON
+- link: /dashboards/guide/slo_data_source
+  tag: Guide
+  text: Représenter graphiquement les données SLO historiques dans les dashboards
 title: Widget Série temporelle
+widget_type: timeseries
 ---
 
 La visualisation de séries temporelles vous permet de consulter l'évolution de plusieurs métriques, événements de log ou spans indexées. La période affichée dépend des éléments sélectionnés sur le [timeboard][1] ou le [screenboard][2] :
@@ -34,10 +38,12 @@ La visualisation de séries temporelles vous permet de consulter l'évolution de
 
 ## Options d'affichage
 
-Vous pouvez créer des graphiques en aires, à barres ou linéaires. Les graphiques linéaires contiennent des paramètres supplémentaires :
+Les graphiques peuvent être affichés sous forme de courbes, de surfaces et de barres. Datadog agrège les données sur des [intervalles][15] tels que la somme par heure. Par défaut, le dernier intervalle de temps incomplet dans un graphique de série temporelle est ombré et étiqueté comme « données partielles ».
 
-| Paramètre | Options               |
-|-----------|-----------------------|
+Les graphiques en courbes contiennent des paramètres supplémentaires :
+
+| Paramètre | Options                  |
+|-----------|--------------------------|
 | Style     | Solid, Dashed ou Dotted |
 | Stroke    | Normal, Thin ou Thick   |
 
@@ -45,42 +51,44 @@ Vous pouvez créer des graphiques en aires, à barres ou linéaires. Les graphiq
 
 Pour tous les types de graphiques, Datadog propose de nombreuses options en matière de couleurs pour différencier les diverses métriques affichées sur un même graphique :
 
-| Palette     | Description                                                                                                 |
+| Palette     | Rôle                                                                                                 |
 |-------------|-------------------------------------------------------------------------------------------------------------|
 | Classic     | Des couleurs simples : bleu clair, bleu foncé, violet clair, violet, jaune clair et jaune (les couleurs se répètent).    |
-| Categorical | Avec ce jeu de 16 couleurs, une palette cohérente est appliquée à chaque série de données sur l'ensemble des widgets Série temporelle. |
-| Purple      | Un dégradé de couleurs composé de tons violets.                                                                   |
-| Cool        | Un dégradé de couleurs composé de tons bleus et verts.                                                           |
-| Warm        | Un dégradé de couleurs composé de tons jaunes et orange.                                                        |
-| Orange      | Un dégradé de couleurs composé de tons orange.                                                                   |
-| Gray        | Un dégradé de couleurs composé de tons gris.                                                                     |
-| Red         | Un dégradé de couleurs composé de tons rouges.                                                                      |
-| Green       | Un dégradé de couleurs composé de tons verts.                                                                    |
-| Blue        | Un dégradé de couleurs composé de tons bleus.                                                                     |
+| Cohérent | En utilisant un ensemble de 16 couleurs, applique une couleur cohérente pour chaque série de données dans tous les widgets pour chaque groupe de tags. |
 
-Pour les graphiques linéaires, vous pouvez attribuer des palettes à différentes métriques en séparant les requêtes avec le format JSON.
+Pour les graphiques en courbes, différentes métriques peuvent se voir attribuer des palettes spécifiques en séparant les requêtes en JSON. Pour plus d'informations, consultez le guide de [sélection des bonnes couleurs pour vos graphiques][6].
+
+### Tri
+
+Classez le graphique par **Tags** ou par **Values** pour trier les légendes des séries temporelles et les graphiques empilés. Cela ne concerne que la visualisation du graphique et n'a pas d'impact sur la requête. Activez l'option **Reverse** pour trier par ordre alphabétique inverse ou par valeurs décroissantes.
 
 ### Alias de métrique
 
-Chaque requête, formule ou [tag de filtrage][6] peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique ou les longues listes de filtres. À la fin de votre requête ou formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
+Chaque requête, formule ou [tag de filtrage][7] peut avoir un alias. L'alias remplace le nom sur le graphique et la légende, ce qui est utile pour les longs noms de métrique ou les longues listes de filtres. À la fin de votre requête ou formule, cliquez sur **as...**, puis saisissez votre alias de métrique :
 
 {{< img src="dashboards/widgets/timeseries/metric_alias.png" alt="Ajout d'un alias à une requête de recherche dans l'éditeur du widget Série temporelle" style="width:100%;" >}}
 
 ### Superposition d'événements
 
+La superposition d'événements prend en charge toutes les sources de données. Vous pouvez ainsi facilement mettre en corrélation les événements commerciaux avec les données de n'importe quel service Datadog.
+
+Avec la superposition d'événements, vous pouvez voir comment les actions au sein de l'organisation impactent les performances des applications et de l'infrastructure. Voici quelques exemples de cas d'usage :
+- Affichage des taux d'erreurs RUM avec les événements de déploiement superposés
+- Mise en corrélation de la charge CPU avec les événements associés au provisionnement de serveurs supplémentaires
+- Mise en corrélation du trafic de sortie avec les activités de connexion suspectes
+- Mise en corrélation des données de séries temporelles avec les alertes de monitor pour vérifier que les alertes appropriées ont bien été configurées dans Datadog
+
+{{< img src="/dashboards/querying/event_overlay_example.png" alt="Widget Série temporelle affichant les taux d'erreurs RUM avec les événements de déploiement en superposition" style="width:100%;" >}}
+
 Vous pouvez ajouter des événements provenant de systèmes associés afin d'enrichir le contexte de votre graphique, par exemple des commits GitHub, des déploiements Jenkins et des événements de création Docker. Cliquez sur **Add Event Overlay** dans la section **Event Overlays** et saisissez une requête pour afficher ces événements.
 
-Utilisez le même format de requête que pour l'[Event Explorer][7], par exemple :
+Utilisez le même format de requête que pour l'[Event Explorer][8], par exemple :
 
-| Requête                       | Description                                                |
+| Requête                       | Rôle                                                |
 |-----------------------------|------------------------------------------------------------|
 | `sources:jenkins`           | Affiche tous les événements provenant de la source Jenkins.                  |
 | `tag:role:web`              | Affiche tous les événements avec le tag `role:web`.                  |
-| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements provenant de la [template variable][8] sélectionnée. |
-
-Une fois activés, les événements s'affichent en superposition sur vos graphiques avec des barres rouges :
-
-{{< img src="dashboards/widgets/timeseries/event_overlay.png" alt="Barre de superposition d'événements sur un graphique de série temporelle" style="width:100%;" >}}
+| `tags:$<TEMPLATE_VARIABLE>` | Affiche tous les événements de la [template variable][9] sélectionnée. |
 
 ### Marqueurs
 
@@ -95,12 +103,12 @@ Pour ajouter des marqueurs pour des ensembles de données supplémentaires, cliq
 Les commandes de l'axe des ordonnées sont disponibles dans l'interface et dans l'éditeur JSON. Vous pouvez définir la valeur et le type de l'axe des ordonnées afin de réaliser ce qui suit :
 
 * Régler l'axe des ordonnées sur un intervalle donné
-* Modifier automatiquement les limites de l'axe des ordonnées en fonction d'un seuil basé sur un pourcentage ou sur une valeur absolue ; pour supprimer les singularités, ce seuil peut être appliqué aux deux extrémités du graphique (limite inférieure et limite supérieure), ou à une seule d'entre elles
+* Modifiez automatiquement les limites de l'axe des abscisses en fonction d'un seuil basé sur une valeur absolue. Ce seuil peut être appliqué à une extrémité ou aux deux extrémités du graphique (inférieure et supérieure) pour supprimer les séries « aberrantes ».
 * Changer l'échelle de l'axe des ordonnées afin de passer d'une échelle linéaire à une échelle logarithmique, racine carrée ou puissance
 
 Les options de configuration suivantes sont disponibles :
 
-| Option                | Obligatoire | Description                                                                                                                                                                                                               |
+| Option                | Obligatoire | Rôle                                                                                                                                                                                                               |
 |-----------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `Min`                 | Non       | Spécifie la valeur minimale à afficher sur l'axe des ordonnées. Indiquez un nombre ou `Auto` (la valeur par défaut).                                                                                                                |
 | `Max`                 | Non       | Spécifie la valeur maximale à afficher sur l'axe des ordonnées. Indiquez un nombre ou `Auto` (la valeur par défaut).                                                                                                                        |
@@ -109,7 +117,7 @@ Les options de configuration suivantes sont disponibles :
 
 Comme la fonction log mathématique n'accepte pas les valeurs négatives, l'échelle log Datadog ne fonctionne que si les valeurs ont le même signe (toutes les valeurs positives ou toutes négatives). Si ce n'est pas le cas, un graphique vide s'affiche.
 
-### Configuration de légendes
+### Configuration de la légende
 
 Vous pouvez ajouter des légendes configurables à vos screenboards en sélectionnant l'une des options suivantes dans la section **Legend** :
 
@@ -124,19 +132,33 @@ Pour les timeboards, les légendes s'affichent automatiquement lorsque le format
 
 Pour ajouter un lien de contexte dans le menu déroulant qui s'affiche lorsque vous cliquez sur un widget de dashboard, cliquez sur **Add a Context Link** dans la section **Context Links**.
 
-Pour en savoir plus sur la modification et la suppression de liens de contexte, consultez la section [Liens de contexte][9].
+Pour en savoir plus sur la modification et la suppression de liens de contexte, consultez la section [Liens de contexte][10].
 
 ### Plein écran
 
-Outre les [options de plein écran standard][10], vous pouvez appliquer des fonctions rapides, effectuer des comparaisons par rapport à des périodes précédentes, régler l'échelle de l'axe des ordonnées, enregistrer des modifications ou enregistrer un nouveau graphique.
+En plus des [options standard en plein écran][11], vous pouvez appliquer des fonctions rapides, ajuster l'échelle Y, enregistrer les modifications ou enregistrer en tant que nouveau graphique.
 
-Pour en savoir plus, consultez l'article [Explorer des données sous la forme d'un graphique en plein écran][11] (en anglais).
+Pour en savoir plus, consultez l'article [Explorer des données sous la forme d'un graphique en plein écran][12] (en anglais).
+
+### Comparer les périodes
+
+L'onglet **Compare Time** vous permet de comparer les performances actuelles des métriques par rapport à une période précédente pour repérer les changements en un coup d'oeil. Utilisez cette option lors de l'investigation d'un pic de charge système ou pour valider l'impact d'un déploiement.
+
+Pour ouvrir l'onglet **Compare Time**, ouvrez un widget en mode inspection en cliquant sur l'icône d'agrandissement dans les options de contrôle du widget, puis cliquez sur **Compare Time**.
+
+L'onglet affiche deux graphiques :
+- **Current** : vos données de métriques pour la fenêtre de temps active. Utilisez le menu déroulant de l'intervalle de temps et les contrôles de lecture pour ajuster la fenêtre.
+- **Previous** : la période de comparaison. Sélectionnez **Period**, **Day**, **Week**, **Month** ou **Custom** pour définir le décalage.
+
+Pour afficher les deux périodes sur le même graphique, cliquez sur **Overlay**. Pour revenir à la vue côte à côte, cliquez sur **Grid**.
+
+### Informations sur les métriques
+
+Sur un graphique de métriques, cliquez sur le menu contextuel (trois points verticaux) pour trouver l'option **Metrics Info**. Cela ouvre un panneau avec une description de la métrique. Cliquer sur le nom de la métrique dans ce panneau ouvre la métrique dans la page de résumé des métriques pour une analyse ou des modifications supplémentaires.
 
 ## API
 
-Ce widget peut être utilisé avec l'**API Dashboards**. Consultez la [documentation à ce sujet][12] pour en savoir plus.
-
-Le [schéma JSON][13] utilisé pour le widget Série temporelle est le suivant :
+Ce widget peut être utilisé avec l'**[API Dashboards][13]**. Consultez le tableau suivant pour la [définition du schéma JSON du widget][14] :
 
 {{< dashboards-widgets-api >}}
 
@@ -144,16 +166,18 @@ Le [schéma JSON][13] utilisé pour le widget Série temporelle est le suivant 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /fr/dashboards/#timeboards
+[1]: /fr/dashboards/#get-started
 [2]: /fr/dashboards/#screenboards
 [3]: /fr/dashboards/querying/
 [4]: /fr/tracing/trace_explorer/query_syntax/#search-bar
 [5]: /fr/logs/search_syntax/
-[6]: /fr/dashboards/querying/#filter
-[7]: /fr/events/
-[8]: /fr/dashboards/template_variables/
-[9]: /fr/dashboards/guide/context-links/
-[10]: /fr/dashboards/widgets/#full-screen
-[11]: https://www.datadoghq.com/blog/full-screen-graphs
-[12]: /fr/api/v1/dashboards/
-[13]: /fr/dashboards/graphing_json/widget_json/
+[6]: /fr/dashboards/guide/widget_colors/
+[7]: /fr/dashboards/querying/#filter
+[8]: /fr/events/
+[9]: /fr/dashboards/template_variables/
+[10]: /fr/dashboards/guide/context-links/
+[11]: /fr/dashboards/widgets/#full-screen
+[12]: https://www.datadoghq.com/blog/full-screen-graphs
+[13]: /fr/api/latest/dashboards/
+[14]: /fr/dashboards/graphing_json/widget_json/
+[15]: /fr/dashboards/functions/rollup/

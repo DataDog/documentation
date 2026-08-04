@@ -29,7 +29,7 @@ Enable React Native Crash Reporting and Error Tracking to get comprehensive cras
 
 In order to symbolicate your stack traces, manually upload your source maps and native debug symbols into Datadog.
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -40,22 +40,28 @@ If you have not set up the React Native SDK yet, follow the [in-app setup instru
 Update your initialization snippet to enable native JavaScript crash reporting:
 
 ```javascript
-const config = new DdSdkReactNativeConfiguration(
+const config = new DatadogProviderConfiguration(
     '<CLIENT_TOKEN>',
     '<ENVIRONMENT_NAME>',
-    '<APPLICATION_ID>',
-    true,
-    true,
-    true // enable JavaScript crash reporting
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            trackInteractions: true,
+            trackResources: true,
+            trackErrors: true, // <-- Enable JavaScript Crash Reporting
+            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
+        },
+        logsConfiguration: {},
+        traceConfiguration: {}
+    }
 );
-config.nativeCrashReportEnabled = true; // enable native crash reporting
 ```
 
 ## Get deobfuscated stack traces
 
 Debug symbols are used to deobfuscate stack traces, which helps in debugging errors. Using a unique build ID that gets generated, Datadog automatically matches the correct stack traces with the corresponding debug symbols. This ensures that regardless of when the debug symbols were uploaded (either during pre-production or production builds), the correct information is available for efficient QA processes when reviewing crashes and errors reported in Datadog.
 
-For React Native applications, the matching of stack traces and source maps relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
+For React Native applications, the matching of stack traces and source maps relies on the `debug_id`. If not available, it relies on a combination of the `service`, `version`, `bundle_name`, and `platform` fields. Out of all source maps that match with these fields, Datadog uses the one with the highest `build_number` value.
 
 In order to make your application's size smaller, its code is minified when it is built for release. To link errors to your actual code, you need to upload the following symbolication files:
 
@@ -154,8 +160,8 @@ To test your implementation:
    }
    ```
 
-3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [**Error Tracking**][1].
-4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [**Error Tracking**][1].
+3. For obfuscated error reports that do not result in a crash, you can verify symbolication and deobfuscation in [{{< ui >}}Error Tracking{{< /ui >}}][1].
+4. For crashes, after the crash happens, restart your application and wait for the React Native SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 To make sure your source maps are correctly sent and linked to your application, you can also generate crashes with the [`react-native-performance-limiter`][14] package.
 
@@ -176,7 +182,7 @@ const crashApp = () => {
 };
 ```
 
-Re-build your application for release to send the new source maps, trigger the crash and wait on the [Error Tracking][1] page for the error to appear.
+Re-build your application for release to send the new source maps, trigger the crash and wait on the [{{< ui >}}Error Tracking{{< /ui >}}][1] page for the error to appear.
 
 To test your dSYMs and Proguard mapping files upload, crash the native main thread instead:
 
@@ -221,7 +227,7 @@ DATADOG_XCODE="../node_modules/.bin/datadog-ci react-native xcode"
 
 This script runs a command that takes care of uploading the source maps with all the correct parameters. For more information, see the [datadog-ci documentation][12].
 
-Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
+Open your `.xcworkspace` with Xcode, then select your project > {{< ui >}}Build Phases{{< /ui >}} > {{< ui >}}Bundle React Native code and images{{< /ui >}}. Edit the script to look like the following:
 
 ```shell
 set -e
@@ -248,7 +254,7 @@ You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SIT
 
 {{% collapse-content title="Automatically on each release build (React Native < 0.69)" level="h5" %}}
 
-Open your `.xcworkspace` with Xcode, then select your project > Build Phases > Bundle React Native code and images. Edit the script to look like the following:
+Open your `.xcworkspace` with Xcode, then select your project > {{< ui >}}Build Phases{{< /ui >}} > {{< ui >}}Bundle React Native code and images{{< /ui >}}. Edit the script to look like the following:
 
 ```shell
 set -e
@@ -274,11 +280,11 @@ You can also specify the Datadog site (such as `datadoghq.eu`) as a `DATADOG_SIT
 
 {{% collapse-content title="Manually on each build" level="h5" %}}
 
-To output a source map, you need to edit the Xcode build phase "Bundle React Native Code and Images".
+To output a source map, you need to edit the Xcode build phase {{< ui >}}Bundle React Native Code and Images{{< /ui >}}.
 
 1. Open the `ios/YourAppName.xcworkspace` file in Xcode.
-2. In the left panel, select the "File" icon and click on your project.
-3. In the central panel, select "Build Phases" from the top bar.
+2. In the left panel, select the {{< ui >}}File{{< /ui >}} icon and click on your project.
+3. In the central panel, select {{< ui >}}Build Phases{{< /ui >}} from the top bar.
 
 Change the script by adding this after the `set -e` line:
 
@@ -476,9 +482,9 @@ Find the loop on `applicationVariants` in the `android/app/build.gradle` file. I
 Inside the loop, add the following snippet:
 
 ```groovy
-        if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
-            tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
-        }
+if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
+    tasks["minify${variant.name.capitalize()}WithR8"].finalizedBy { tasks["uploadMapping${variant.name.capitalize()}"] }
+}
 ```
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.

@@ -130,26 +130,11 @@ Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituy
 ```
 Para Python, el comando de inicio suele ser `ddtrace-run python my_app.py`, aunque puede variar en función del marco utilizado; por ejemplo, utilizando [uWSGI][1] o instrumentando tu [código manualmente con `patch_all`][2].
 
-#### Código
-También puedes actualizar el código para que el rastreador configure el nombre de host explícitamente:
-
-```python
-import requests
-from ddtrace import tracer
-
-
-def get_aws_ip():
-  r = requests.get('http://169.254.169.254/latest/meta-data/local-ipv4')
-  return r.text
-
-tracer.configure(hostname=get_aws_ip())
-```
-
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#uwsgi
 [2]: https://ddtrace.readthedocs.io/en/stable/basic_usage.html#patch-all
 {{< /programming-lang >}}
 
-{{< programming-lang lang="nodeJS" >}}
+{{< programming-lang lenguaje="nodeJS" >}}
 
 #### Variable de momento de inicio
 Actualiza el `entryPoint` de la definición de tareas con lo siguiente, sustituyendo tu `<Node.js Startup Command>`:

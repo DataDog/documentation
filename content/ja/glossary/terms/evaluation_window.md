@@ -1,8 +1,9 @@
 ---
+id: evaluation_window
 core_product:
 - alerts
 related_terms:
-- 評価ウィンドウ
+- evaluation_window
 title: 評価ウィンドウ
 ---
 評価ウィンドウは、モニターが集計し、定義されたしきい値と比較するために使用するデータの振り返り時間枠です。

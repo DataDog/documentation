@@ -11,7 +11,7 @@ further_reading:
 title: Prise en main
 ---
 
-Cette page montre comment utiliser le SDK LLM Observability de Datadog pour instrumenter une application LLM en Python ou Node.js.
+Cette page montre comment utiliser le SDK LLM Observability de Datadog pour instrumenter une application LLM en Python, Node.js ou Java.
 
 ### Prérequis
 
@@ -65,6 +65,28 @@ LLM Observability nécessite une clé d'API Datadog si vous n’avez pas d'Agent
 [2]: /fr/getting_started/site/
 
 {{% /tab %}}
+{{% tab "Java" %}}
+1. Installez le SDK :
+
+   ```shell
+   wget -O dd-java-agent.jar 'https://dtdg.co/latest-java-tracer'
+   ```
+
+2. Ajoutez l'argument JVM `-javaagent` à votre commande de démarrage Java :
+   ```shell
+   java -javaagent:/path/to/dd-java-agent.jar \
+   -Ddd.llmobs.enabled=true \
+   -Ddd.llmobs.ml.app=quickstart-app \
+   -Ddd.api.key=<YOUR_DATADOG_API_KEY> \
+   -jar path/to/your/app.jar
+   ```
+
+   Remplacez `<YOUR_DATADOG_API_KEY>` par votre clé d'API Datadog.
+
+[1]: /fr/llm_observability/setup/sdk/java/#command-line-setup
+[2]: /fr/getting_started/site/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Afficher les traces
@@ -90,7 +112,7 @@ Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour c
 
 1. Installez OpenAI avec `pip install openai`.
 
-2. Enregistrez l'exemple de script `app.py`.
+2. Enregistrez l'exemple de script `app.py` :
 
    ```python
    import os
@@ -109,8 +131,9 @@ Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour c
 3. Exécutez l'application :
 
    ```shell
-   # Make sure you have the required environment variables listed above
-   DD_...= \
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    ddtrace-run app.py
    ```
 {{% /tab %}}
@@ -118,7 +141,7 @@ Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour c
 {{% tab "Node.js" %}}
 1. Installez OpenAI avec `npm install openai`.
 
-2. Enregistrez l'exemple de script sous `app.js`
+2. Enregistrez l'exemple de script `app.js` :
 
    ```js
    const { OpenAI } = require('openai');
@@ -138,12 +161,13 @@ Vous trouverez ci-dessous une application simple que vous pouvez utiliser pour c
    main().then(console.log)
 
 3. Exécutez l'application :
-
    ```
-   # Make sure you have the required environment variables listed above
-   DD_...= \
+   DD_LLMOBS_ENABLED=1 \
+   DD_LLMOBS_ML_APP=quickstart-app \
+   DD_API_KEY=<YOUR_DATADOG_API_KEY> \
    NODE_OPTIONS="--import dd-trace/initialize.mjs" node app.js
    ```
+
 {{% /tab %}}
 {{< /tabs >}}
 

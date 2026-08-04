@@ -1,4 +1,5 @@
 ---
+id: template_variable
 title: template variable
 ---
 Une template variable est un attribut utilisé pour personnaliser et transmettre des notifications de monitor basées sur les détails de l'alerte.

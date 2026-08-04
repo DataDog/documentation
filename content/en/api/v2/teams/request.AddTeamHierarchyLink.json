@@ -1,0 +1,19 @@
+{
+  "data": {
+    "relationships": {
+      "parent_team": {
+        "data": {
+          "id": "aeadc05e-98a8-11ec-ac2c-da7ad0900001",
+          "type": "team"
+        }
+      },
+      "sub_team": {
+        "data": {
+          "id": "7c47c39d-7740-6408-d686-7870a744701c",
+          "type": "team"
+        }
+      }
+    },
+    "type": "team_hierarchy_links"
+  }
+}

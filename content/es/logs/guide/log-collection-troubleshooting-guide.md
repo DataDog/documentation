@@ -24,37 +24,6 @@ Existen una serie de problemas comunes que pueden surgir al [enviar nuevos logs 
 
 Los cambios en la configuración del `datadog-agent` no se tendrán en cuenta hasta que [reinicies el Agent][3].
 
-## El tráfico saliente en el puerto 10516 está bloqueado
-
-El Datadog Agent envía sus logs a Datadog a través de TCP utilizando el puerto 10516. Si esa conexión no está disponible, los logs no se pueden enviar y se registra un error en el archivo `agent.log`.
-
-Puedes probar manualmente tu conexión utilizando OpenSSL, GnuTLS u otro cliente SSL/TLS. Para OpenSSL, ejecuta el siguiente comando:
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-Para GnuTLS, ejecuta el siguiente comando:
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-Y luego, enviando un log como el siguiente:
-
-```texto
-<API_KEY> este es un mensaje de prueba
-```
-
-- Si abrir el puerto 10516 no es una opción, es posible configurar el Datadog Agent para enviar logs a través de HTTPS, añadiendo lo siguiente en `datadog.yaml`:
-
-```yaml
-logs_config:
-  force_use_http: true
-```
-
-Para obtener más información, consulta la sección sobre el [reenvío HTTPS de logs][4].
-
 ## Comprobar el estado del Agent
 
 A menudo, comprobar los resultados del [comando de estado del Agent][5] te ayudará a solucionar lo que está ocurriendo.

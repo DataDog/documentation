@@ -1,4 +1,7 @@
 ---
+description: Configura el control de acceso basado en roles (RBAC) para monitores
+  con el fin de restringir los permisos de edición a roles específicos y evitar cambios
+  no autorizados.
 further_reading:
 - link: /account_management/rbac/permissions/#monitors
   tag: Documentación
@@ -133,7 +136,7 @@ Puedes actualizar la definición de los monitores que se gestionan mediante API 
 
 Para obtener más información, consulta [Editar un endpoint de API de monitor][3] y [API de políticas de restricción][4].
 
-### IU
+### Interfaz de usuario
 
 Todos los nuevos monitores creados desde la interfaz de usuario utilizan el parámetro `restricted_roles`. 
 Todos los monitores muestran también la opción de restricción de roles independientemente del mecanismo subyacente:

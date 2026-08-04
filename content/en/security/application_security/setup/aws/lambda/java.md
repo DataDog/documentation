@@ -18,9 +18,15 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].
 2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][9], [AWS CDK][10], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
@@ -52,7 +58,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    custom:
      datadog:
-       enableASM: true
+       appSecMode: on
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
@@ -60,8 +66,7 @@ To install and configure the Datadog Serverless Framework plugin:
    custom:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
-       enableDDTracing: true
-       enableASM: true
+       appSecMode: on
    ```
    See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 
@@ -140,29 +145,20 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 1. Install the Datadog CDK constructs library:
 
     ```sh
-    # For AWS CDK v1
-    npm install datadog-cdk-constructs --save-dev
-
-    # For AWS CDK v2
     npm install datadog-cdk-constructs-v2 --save-dev
     ```
 
 2. Instrument your Lambda functions
 
     ```typescript
-    // For AWS CDK v1
-    import { Datadog } from "datadog-cdk-constructs";
-    // NOT SUPPORTED IN V1
-
-    // For AWS CDK v2
-    import { Datadog } from "datadog-cdk-constructs-v2";
+    import { Datadog, DatadogAppSecMode } from "datadog-cdk-constructs-v2";
 
     const datadog = new Datadog(this, "Datadog", {
         java_layer_version: {{< latest-lambda-layer-version layer="dd-trace-java" >}},
         extension_layer_version: {{< latest-lambda-layer-version layer="extension" >}},
         site: "<DATADOG_SITE>",
         api_key_secret_arn: "<DATADOG_API_KEY_SECRET_ARN>", // or api_key
-        enable_asm: true,
+        datadog_app_sec_mode: DatadogAppSecMode.ON,
       });
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>]);
     ```
@@ -172,12 +168,13 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
     - Replace `<DATADOG_API_KEY_SECRET_ARN>` with the ARN of the AWS secret where your [Datadog API key][2] is securely stored. The key needs to be stored as a plaintext string (not a JSON blob). The `secretsmanager:GetSecretValue` permission is required. For quick testing, you can use `apiKey` instead and set the Datadog API key in plaintext.
 
     More information and additional parameters can be found on the [Datadog CDK documentation][1].
+
 [1]: https://github.com/DataDog/datadog-cdk-constructs
 [2]: https://app.datadoghq.com/organization-settings/api-keys
 {{% /tab %}}
 {{% tab "Custom" %}}
 
-1. Install the Datadog tracer by configuring the layer ARN that matches your deployment. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
+1. Install the Datadog SDK by configuring the layer ARN that matches your deployment. Replace `<AWS_REGION>` with a valid AWS region such as `us-east-1`:
    ```sh
    # In AWS commercial regions
    arn:aws:lambda:<AWS_REGION>:464622532012:layer:dd-trace-java:{{< latest-lambda-layer-version layer="dd-trace-java" >}}

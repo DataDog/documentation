@@ -3,215 +3,98 @@ aliases:
 - /es/graphing/dashboards/widgets
 - /es/graphing/faq/widgets
 - /es/graphing/widgets
+description: Bloques de construcción de Dashboard para visualizar y correlacionar
+  datos en la infraestructura con varios tipos de gráficos y displays.
 further_reading:
-- link: /dashboards/guide/context-links/
+- link: /dashboards/
   tag: Documentación
-  text: Enlaces personalizados
-- link: https://www.datadoghq.com/blog/observability-pipelines-transform-and-enrich-logs/
-  tag: Blog
-  text: Transformar y enriquecer tus logs con pipelines de observabilidad de datos
+  text: Aprenda más sobre Dashboards
+- link: /dashboards/widgets/configuration
+  tag: Documentación
+  text: Conozca las opciones de configuración de widgets y las mejores prácticas
+- link: /dashboards/widgets/types/
+  tag: Documentación
+  text: Explore todos los tipos de widgets disponibles
 title: Widgets
 ---
+## Resumen {#overview}
 
-## Información general
+Los Dashboard widgets son representaciones visuales de datos. Sirven como los bloques de construcción para sus [Dashboards][2] para visualizar y correlacionar sus datos a través de su infraestructura. Pueden contener diferentes tipos de información, como gráficos, imágenes, registros y estados, para darle una visión general de sus sistemas y entornos.
 
-Los widgets son componentes básicos de tus dashboards. Te permiten visualizar y correlacionar los datos en tu infraestructura.
+## Comience {#get-started}
 
-### Gráficos
-{{< whatsnext desc="Widgets genéricos para graficar datos a partir de productos Datadog: ">}}
-    {{< nextlink href="/dashboards/widgets/change" 
-        img="dashboards/widgets/icons/change_light_large.png">}} Cambio {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/distribution"
-        img="dashboards/widgets/icons/distribution_light_large.png">}} Distribución {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/funnel"
-        img="dashboards/widgets/icons/funnel_light_large.png">}} Embudo {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/geomap" 
-        img="dashboards/widgets/icons/geomap_light_large.png">}} Geomap {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/heat_map"
-        img="dashboards/widgets/icons/heatmap_light_large.png">}} Heatmap {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/pie_chart"
-        img="dashboards/widgets/icons/pie_light_large.png">}} Gráfico circular {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/query_value"
-        img="dashboards/widgets/icons/query-value_light_large.png">}} Valor de consulta {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/sankey" img="dashboards/widgets/icons/sankey_light_large.svg">}} Sankey{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/scatter_plot"
-        img="dashboards/widgets/icons/scatter-plot_light_large.png">}} Diagrama de dispersión {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/table"
-        img="dashboards/widgets/icons/table_light_large.png">}} Tabla {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/treemap"
-        img="dashboards/widgets/icons/treemap_light_large.png">}} Treemap {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/timeseries"
-        img="dashboards/widgets/icons/timeseries_light_large.png">}} Series temporales {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/top_list"
-        img="dashboards/widgets/icons/top-list_light_large.png">}} .Lista principal {{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/wildcard"
-        img="/dashboards/widgets/icons/wildcard_light_large.svg">}} Comodín {{< /nextlink >}}
+La forma más rápida de incorporar widgets relevantes a sus datos es clonar un Dashboard de la [lista preestablecida][1], que incluye Dashboards creados por otros miembros de su organización y plantillas listas para usar para sus integraciones instaladas. Después de clonar un Dashboard, puede personalizar los widgets para su caso de uso.
+
+
+{{< whatsnext desc="Guías y cursos adicionales para aprender sobre widgets:" >}}
+   {{< nextlink href="/getting_started/dashboards/" >}}<u>Introducción a Dashboards</u>: Guía para construir un Dashboard con widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/dashboard-graph-widgets" >}}<u>Dashboard Graph Widgets</u>: Curso del centro de aprendizaje que explica cómo crear, configurar y usar los Dashboard Graph Widgets{{< /nextlink >}}
+   {{< nextlink href="https://learn.datadoghq.com/courses/intro-dashboards" >}}<u>Introduction to Dashboards</u>: Curso del centro de aprendizaje que explica cómo construir un Dashboard en un entorno de pruebas{{< /nextlink >}}
 {{< /whatsnext >}}
 
-### Groups (grupos)
-{{< whatsnext desc="Muestra tus widgets en grupos: ">}}
-    {{< nextlink href="/dashboards/widgets/group"
-        img="dashboards/widgets/icons/group_default_light_large.svg">}} Grupo{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/powerpack"
-        img="dashboards/widgets/icons/group_powerpack_light_large.svg">}} Powerpack{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/split_graph"
-        img="dashboards/widgets/icons/group-split_light_small.svg">}} Gráfica dividida{{< /nextlink >}}
-{{< /whatsnext >}}
+### Agregue un widget a su Dashboard {#add-a-widget-to-your-dashboard}
 
-### Anotaciones y embeds
-{{< whatsnext desc="Widgets de decoración para estructurar y comentar dashboards de manera visual: ">}}
-    {{< nextlink href="/dashboards/widgets/free_text" 
-        img="dashboards/widgets/icons/free-text_light_large.png">}} Texto libre{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/iframe" 
-        img="dashboards/widgets/icons/iframe_light_large.png">}} Iframe{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/image" 
-        img="dashboards/widgets/icons/image_light_large.png">}} Imagen{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/note" 
-        img="dashboards/widgets/icons/notes_light_large.png">}} Notas y enlaces{{< /nextlink >}}
-{{< /whatsnext >}}
+Para comenzar a usar widgets en sus Dashboards:
 
-### Listas y flujos
-{{< whatsnext desc="Muestra una lista de eventos y problemas provenientes de diferentes fuentes: ">}}
-    {{< nextlink href="/dashboards/widgets/list"
-        img="dashboards/widgets/icons/change_light_large.png">}} Lista{{< /nextlink >}}
-{{< /whatsnext >}}
+1. Navegue a la [Dashboard List][1] en Datadog.
+2. Haga clic en {{< ui >}}New Dashboard{{< /ui >}} o seleccione un Dashboard existente para editar.
+3. Haga clic en {{< ui >}}Add Widget{{< /ui >}}. Elija entre una variedad de tipos de widgets, como series temporales, gráfico de barras, tabla o flujo de eventos.
+4. Configure su widget:
+    - Seleccione la fuente de datos: Elija métricas, registros, trazas u otras fuentes de datos.
+    - Personalice la visualización: Ajuste la configuración de visualización, unidades y períodos de tiempo para adaptarse a sus necesidades.
+    - Agregue contexto: Utilice enlaces personalizados, formato condicional y agrupación para obtener información mejorada.
+5. Guarde su Dashboard y compártalo con su equipo o externamente según sea necesario.
 
-### Alerta y respuesta
-{{< whatsnext desc="Widgets de resumen para mostrar información de monitorización: ">}}
-    {{< nextlink href="/dashboards/widgets/alert_graph" 
-        img="dashboards/widgets/icons/alert-graph_light_large.png">}} Gráfica de alertas{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/alert_value" 
-        img="dashboards/widgets/icons/alert-value_light_large.png">}}Valor de alerta{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/check_status" 
-        img="dashboards/widgets/icons/check-status_light_large.png">}} Estado del check{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/monitor_summary" 
-        img="dashboards/widgets/icons/monitor-summary_light_large.png">}} Resumen de monitores{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/run_workflow" 
-        img="dashboards/widgets/icons/run-workflow_light_small.svg">}} Ejecutar flujo de trabajo{{< /nextlink >}}
-{{< /whatsnext >}}
+Para más información, consulte [Widget Configuration][3] y explore los [Widget Types][4] disponibles.
 
-### Arquitectura
-{{< whatsnext desc="Visualiza los datos de la infraestructura y la arquitectura: ">}}
-    {{< nextlink href="/dashboards/widgets/hostmap" 
-        img="dashboards/widgets/icons/host-map_light_large.png">}} Mapa de host{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/topology_map" 
-        img="dashboards/widgets/icons/service-map_light_large.png">}} Mapa de topología{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/service_summary" 
-        img="dashboards/widgets/icons/service-summary_light_large.png">}} Resumen de servicio{{< /nextlink >}}
-{{< /whatsnext >}}
+### Organice los widgets con pestañas {#organize-widgets-with-tabs}
 
-### Rendimiento y fiabilidad
-{{< whatsnext desc="Visualizaciones de fiabilidad del sitio: ">}}
-    {{< nextlink href="/dashboards/widgets/profiling_flame_graph"
-        img="dashboards/widgets/icons/profiling_flame_graph.svg">}} Gráfica de llamas de perfiles{{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo" 
-        img="dashboards/widgets/icons/slo-summary_light_large.png">}} Resumen de objetivos de nivel de servicio (SLOs){{< /nextlink >}}
-    {{< nextlink href="/dashboards/widgets/slo_list" 
-        img="dashboards/widgets/icons/slo-list_light_large.png">}} Objetivo de nivel de servicio (SLO){{< /nextlink >}}
-{{< /whatsnext >}}
+A medida que los Dashboards crecen, utilice pestañas para agrupar los widgets en secciones nombradas. En modo de edición, abra el menú de compartir de un widget y seleccione **Mover a pestaña** para asignarlo a una pestaña existente o crear una nueva. Las pestañas aparecen como una barra de navegación en la parte superior del Dashboard, permitiendo a los usuarios navegar directamente a la sección que necesitan. Para más información, consulte [Pestañas][5].
 
-## Pantalla completa
+## Fuentes de datos {#data-sources}
 
-Puedes ver la mayoría de los widgets en el modo de pantalla completa y hacer lo siguiente:
+Los widgets pueden visualizar datos de múltiples fuentes de Datadog, incluyendo:
 
-* Cambiar los períodos
-* Retroceder o avanzar en función del período de tiempo seleccionado
-* Pausar la gráfica en el momento actual o visualizar la gráfica en directo
-* Restablecer el período de tiempo
-* Exportar la gráfica a un dashboard o notebook, o copiar la consulta
-* Descargar los datos que producen la gráfica en formato CSV
+- **APM Traces**: Datos de monitoreo del rendimiento de la aplicación.
+- **Eventos**: Eventos personalizados, implementaciones y anotaciones
+- **Registros**: Eventos de registro, análisis de registros y métricas basadas en registros
+- **Métricas**: Infraestructura, aplicación y métricas personalizadas
+- **RUM**: Real User Monitoring y datos de prueba Synthetic
+- **SLOs**: Service Level Objectives y error budgets
+- **Seguridad**: Señales de seguridad y datos de cumplimiento
 
-Para acceder directamente a la vista general del widget, haz clic en el botón de pantalla completa en la esquina superior derecha del widget.
+## Casos de uso comunes {#common-use-cases}
 
-Hay opciones adicionales disponibles para los [widgets de serie temporal][1].
+{{% collapse-content title="Infrastructure Monitoring" level="h4" expanded=false %}}
+- Utilice **widgets de series temporales** para métricas de CPU, memoria y red a lo largo del tiempo
+- Utilice **widgets de hostmap** para visualizar el uso de recursos en su infraestructura
+- Utilice **widgets de lista principal** para identificar los hosts o servicios más intensivos en recursos
+{{% /collapse-content %}}
 
-## Enlaces personalizados
+{{% collapse-content title="Rendimiento de Aplicaciones" level="h4" expanded=false %}}
+- Utilice **widgets de series temporales** para rastrear tiempos de respuesta, tasas de error y rendimiento
+- Utilice **widgets de Service Summary** para obtener una visión general de la salud del servicio a alto nivel.
+- Utilice **widgets de Topology Map** para visualizar las dependencias del servicio y el flujo de datos.
+{{% /collapse-content %}}
 
-Los enlaces personalizados conectan valores de datos a URLs, como una página de Datadog o tu consola de AWS.
+{{% collapse-content title="Inteligencia Empresarial" level="h4" expanded=false %}}
+- Utilice **widgets de Query Value** para indicadores clave de rendimiento y métricas empresariales.
+- Utilice **widgets de Funnel** para rastrear la conversión de usuarios a través de su aplicación.
+- Utilice **widgets de Retention** para analizar el compromiso y la deserción de usuarios.
+{{% /collapse-content %}}
 
-Para personalizar las interacciones con los datos en línea de tus widgets genéricos, consulta la sección de [Enlaces personalizados][2].
+{{% collapse-content title="Incident Response" level="h4" expanded=false %}}
+- Utilice **widgets de Alert Graph** para mostrar el historial y las tendencias de alertas.
+- Utilice **widgets de Monitor Summary** para el estado actual de alertas en su infraestructura.
+- Utilice **widgets de Event Stream** para el monitoreo de eventos en tiempo real.
+{{% /collapse-content %}}
 
-## Anulación de unidad
-
-Personaliza los valores de las unidades que se muestran en los widgets para añadir contexto a tus datos. Para obtener más información y casos de uso, consulta la sección de [Personalizar las visualizaciones con anulaciones de unidades][3].
-- **Anulación de unidad**: elige mostrar unidades en la familia de la «memoria» y haz que Datadog se encargue de mostrar la escala adecuada en función de los datos (como megabytes o gigabytes).
-- **Anulación de unidad y escala**: fija las unidades en una sola escala (muestra los datos en megabytes independientemente del valor).
-- **Definir unidades personalizadas**: define unidades completamente personalizadas (como «pruebas» en lugar de un recuento genérico).
-
-Esta no es una alternativa para asignar unidades a tus datos.
-{{< whatsnext desc="Establece unidades a nivel de la organización: ">}}
-    {{< nextlink href="/metrics/units/">}} Establecer unidades de métricas{{< /nextlink >}}
-    {{< nextlink href="/logs/explorer/facets/#units">}} Establecer unidades para consultas basadas en eventos{{< /nextlink >}}
-{{< /whatsnext >}}
-
-## Selector de hora global
-
-Para utilizar el selector de hora global, al menos un widget basado en la hora debe tener configurado el uso de `Global Time`. Para ello, selecciona el widget en el editor de widgets, en **Set display preferences** (Configurar las preferencias de visualización), o añade un widget (la configuración de hora por defecto es la hora global).
-
-El selector de tiempo general establece el mismo período de tiempo para todos los widgets mediante la opción `Global Time` en el mismo dashboard. Selecciona un intervalo móvil en el pasado (por ejemplo, `Past 1 Hour` o `Past 1 Day`) o un período fijo con la opción `Select from calendar...`, o [ingresa un período de tiempo personalizado][11]. Si se elige un intervalo móvil, los widgets se actualizan para moverse junto con dicho intervalo.
-
-Los widgets no vinculados a la hora global muestran los datos de su periodo de tiempo local aplicados a la ventana global. Por ejemplo, si el selector de hora global está configurado del 1 de enero de 2019 al 2 de enero de 2019, un widget configurado con el marco de hora local para `Past 1 Minute` muestra el último minuto del 2 de enero de 2019 a partir de las 23:59.
-
-## Copiar y pegar widgets
-
-<div class="alert alert-danger">Debes contar con los permisos <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#dashboards"><code>dashboard_public_share</code></a> y habilitar el <a href="https://app.datadoghq.com/organization-settings/public-sharing/settings"><strong>uso compartido de datos públicos estáticos</strong></a> en los parámetros de organización para utilizar esta característica.</div>
-
-Los widgets se pueden copiar en [dashboards][4], [notebooks][5], [servicios de APM][6] y la página de [recursos de APM][7] con `Ctrl + C` (`Cmd + C` para Mac), o al seleccionar el icono de compartir y elegir «Copy» (Copiar).
-
-Los widgets copiados se pueden pegar dentro de Datadog con `Ctrl + V` (`Cmd + V` para Mac) en:
-
-* **Dashboards**: añade un widget nuevo ubicado debajo del cursor del mouse.
-* **Notebooks**: añade una celda nueva al final del notebook.
-
-También puedes pegar el widget en tu programa de chat favorito que muestre previsualizaciones de enlaces (como Slack o Microsoft Teams). Esto muestra una imagen snapshot de tu gráfica junto con un enlace directo al widget.
-
-### Grupos de widgets
-
-Los widgets del grupo del timeboard se pueden copiar al colocar el cursor por encima de la zona del widget del grupo y al utilizar `Ctrl + C` (`Cmd + C` para Mac) o seleccionar el icono de compartir y elegir «Copy» (Copiar).
-
-**Nota**: Al pegar gráficas en screenboards o notebooks, se pegan widgets individuales en el grupo.
-
-Para copiar varios widgets de screenboard (solo en el modo de edición), pulsa `shift + click` en los widgets y utiliza `Ctrl + C` (`Cmd + C` para Mac).
-
-**Nota**: Esto solo funciona cuando se comparte dentro de Datadog. No genera una imagen de vista previa.
-
-## Gráficas de widget
-
-### Exportar
-
-| Formato | Instrucciones            |
-| -----  | ----------------------- |
-| PNG    | Para descargar un widget en formato PNG, haz clic en el botón de exportación en la parte superior derecha del widget y selecciona **Download as PNG** (Descargar como PNG). |
-| CSV    | Para descargar los datos de un widget de lista de principales, serie temporal o tabla en formato CSV, haz clic en el botón de exportación en la parte superior derecha del widget y selecciona **Download as CSV** (Descargar como CSV).|
-
-### Menú de gráficos
-
-Haz clic en cualquier gráfico del dashboard para abrir un menú de opciones:
-
-| Opción                 | Descripción                                                        |
-|------------------------|--------------------------------------------------------------------|
-| Send snapshot (Enviar snapshot)          | Crea y envía un snapshot de tu gráfico.                          |
-| Find correlated metrics (Encontrar métricas correlacionadas)| Encuentra correlaciones de servicios de APM, integraciones y dashboards. |
-| View in full screen (Ver en pantalla completa)    | Visualiza el gráfico en [modo pantalla completa][5].                           |
-| Lock cursor (Bloquear el cursor)            | Bloquea el cursor en la página.                              |
-| View related processes (Ver procesos relacionados) | Accede a la página [Live Processes][6] que se corresponde con tu gráfico.         |
-| View related hosts (Ver hosts relacionados)     | Accede a la página [Mapa del host][7] que se corresponde con tu gráfico.               |
-| View related logs (Ver logs relacionados)      | Accede a la página [Navegador de logs][8] que se corresponde con tu gráfico.           |
-| View related traces (Ver trazas relacionadas)    | Rellena un panel de [Trazas][9] que se corresponde con tu gráfico.                 |
-| View related profiles (Ver perfiles relacionados)  | Accede a la página [Elaboración de perfiles][7] que se corresponde con tu gráfico.             |
-
-## Referencias adicionales
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /es/dashboards/widgets/timeseries/#full-screen
-[2]: /es/dashboards/guide/context-links/
-[3]: /es/dashboards/guide/unit-override
-[4]: /es/dashboards/
-[5]: /es/notebooks/
-[6]: /es/tracing/services/service_page/
-[7]: /es/tracing/services/resource_page/
-[8]: /es/logs/explorer/
-[9]: /es/tracing/trace_explorer/
-[10]: /es/profiler/profile_visualizations/
-[11]: /es/dashboards/guide/custom_time_frames/
+[1]: https://app.datadoghq.com/dashboard/lists/preset/1
+[2]: /es/dashboards/
+[3]: /es/dashboards/widgets/configuration/
+[4]: /es/dashboards/widgets/types/
+[5]: /es/dashboards/configure/#tabs

@@ -9,6 +9,7 @@
    **注**: その他のパラメーターは、すべて Worker デプロイメントに適したデフォルト値に設定されていますが、スタックを作成する前に AWS コンソールで必要に応じてユースケースに合わせて調整できます。
 1. Worker のインストールに使用する AWS リージョンを選択します。
 1. **Select API key** をクリックして、使用する Datadog API キーを選択します。
+    - **Note**: The API key must be [enabled for Remote Configuration][7002].
 1. **Launch CloudFormation Template** をクリックして AWS コンソールに移動し、スタックの構成を確認してから起動します。CloudFormation パラメーターが想定通りであることを確認してください。
 1. Worker のインストールに使用する VPC とサブネットを選択します。
 1. IAM の必要な権限のチェックボックスを見直して確認します。**Submit** をクリックしてスタックを作成します。ここでは、CloudFormation がインストールを処理し、Worker インスタンスが起動され、必要なソフトウェアがダウンロードされ、Worker が自動的に開始します。
@@ -17,3 +18,4 @@
 パイプラインの構成を変更したい場合は、[既存のパイプラインの更新][7001]を参照してください。
 
 [7001]: /ja/observability_pipelines/update_existing_pipelines
+[7002]: https://app.datadoghq.com/organization-settings/remote-config/setup

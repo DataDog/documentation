@@ -8,7 +8,7 @@ title: Uso básico del Agent con Kubernetes en el Agent v5
 {{< img src="integrations/kubernetes/k8sdashboard.png" alt="Dashboard de Kubernetes" >}}
 
 <div class="alert alert-danger">
-El Datadog Agent v5 es compatible con Kubernetes hasta la versión 1.8. Si quieres usar una versión más reciente de Kubernetes, deberás pasarte al Datadog Agent v6.
+El Datadog Agent v5 es compatible con Kubernetes hasta la versión 1.8. Si quieres utilizar una versión más reciente de Kubernetes, debes pasarte al Datadog Agent v6.
 </div>
 
 ## Información general

@@ -8,6 +8,8 @@ title: コンテナの請求
 
 コンテナを追加した場合は、コンテナごとに 1 時間単位の[追加コスト][1]が課金されます。コンテナは事前に購入することも可能です。コンテナの詳細については、[営業担当者][2]または[カスタマーサクセス][3]マネージャーまでお問い合わせください。
 
+Datadog で監視対象とするコンテナを絞り込みたい場合は、 [コンテナ ディスカバリーの管理][8] を参照してください。
+
 ### Kubernetes
 
 Kubernetes は、ポッドの IP アドレスを取得し、そのポッドに加わる他のコンテナに使用されるネットワークネームスペースを設定するために、pause コンテナを作成します (Agent v5.8 以降が必要)。すべての pause コンテナはクオータから除外され、pause コンテナに対する課金はありません (AWS EKS pause コンテナの除外には Agent v7.20 以降が必要)。
@@ -62,3 +64,4 @@ Fargate は、ECS Fargate における監視対象タスクの同時数および
 [5]: /ja/agent/kubernetes/distributions/?tab=helm#autopilot
 [6]: /ja/integrations/google_kubernetes_engine/
 [7]: /ja/help/
+[8]: /ja/containers/guide/container-discovery-management

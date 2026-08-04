@@ -1,7 +1,7 @@
 ---
 description: RUM とセッションリプレイをソリューションまたはサポート組織に導入する方法について説明します。
 further_reading:
-- link: /real_user_monitoring/platform/connect_rum_and_traces/
+- link: /real_user_monitoring/correlate_with_other_telemetry/apm/
   tag: ドキュメント
   text: RUM と APM トレースとの接続方法について
 - link: /real_user_monitoring/session_replay/browser/

@@ -7,6 +7,10 @@ aliases:
   - /security/application_security/threats/setup/threat_detection/ruby
   - /security/application_security/threats_detection/ruby
   - /security/application_security/setup/aws/fargate/ruby
+  - /security/application_security/setup/standalone/ruby
+  - /security/application_security/setup/threat_detection/ruby
+  - /security/application_security/enabling/ruby
+  - /security/application_security/setup/ruby/compatibility
 further_reading:
     - link: "/security/application_security/add-user-info/"
       tag: "Documentation"
@@ -22,16 +26,24 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 {{% app-and-api-protection-ruby-overview showSetup="false" %}}
 
 ## Environments
+
+### Hosts
 
 {{< appsec-integrations >}}
   {{< appsec-integration name="Linux" avatar="linux" link="./linux" >}}
   {{< appsec-integration name="macOS" avatar="apple" link="./macos" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./docker" >}}
@@ -41,10 +53,23 @@ further_reading:
 ### AWS
 
 {{< appsec-integrations >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/ruby" >}}
 {{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/ruby" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+
+{{< appsec-integrations >}}
+{{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="../azure/app-service" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
 
-- [Compatibility Information](/security/application_security/setup/ruby/compatibility)
+- [Compatibility Information](/security/application_security/setup/compatibility/ruby)
 - [Troubleshooting Guide](/security/application_security/setup/ruby/troubleshooting)

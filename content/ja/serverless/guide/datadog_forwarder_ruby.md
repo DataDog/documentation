@@ -12,7 +12,7 @@ Datadog Serverless の新規ユーザーの場合、代わりに <a href="/serve
 
 [Datadog Forwarder Lambda 関数][1]は、AWS Lambda トレース、拡張メトリクス、カスタムメトリクス、ログの取り込みに必要です。
 
-## 構成
+## 設定
 
 {{< tabs >}}
 {{% tab "Datadog CLI" %}}
@@ -27,10 +27,10 @@ NPM または Yarn を使用して Datadog CLI をインストールします。
 
 ```sh
 # NPM
-npm install -g @datadog/datadog-ci
+npm install -g @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 
 # Yarn
-yarn global add @datadog/datadog-ci
+yarn global add @datadog/datadog-ci @datadog/datadog-ci-plugin-lambda
 ```
 
 ### インスツルメントする
@@ -176,7 +176,7 @@ end
 {{% /tab %}}
 {{< /tabs >}}
 
-### タグ
+### Tag
 
 オプションではありますが、Datadog では以下の[統合サービスタグ付けのドキュメント][2]に従いサーバーレスアプリケーションに `env`、`service`、`version` タグをタグ付けすることをお勧めします。
 
@@ -231,7 +231,7 @@ end
 
 カスタムメトリクス送信の詳細については、[Serverless Custom Metrics][4] を参照してください。カスタムインスツルメンテーションの詳細については、[カスタムインスツルメンテーション][5]の Datadog APM ドキュメントを参照してください。
 
-## その他の参考資料
+## 参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 

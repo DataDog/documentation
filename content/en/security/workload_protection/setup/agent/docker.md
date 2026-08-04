@@ -45,7 +45,7 @@ docker run -d --name dd-agent \
   -e DD_RUNTIME_SECURITY_CONFIG_REMOTE_CONFIGURATION_ENABLED=true \
   -e HOST_ROOT=/host/root \
   -e DD_API_KEY=<API KEY> \
-  gcr.io/datadoghq/agent:7
+  registry.datadoghq.com/agent:7
 
 {{< /code-block >}}
 

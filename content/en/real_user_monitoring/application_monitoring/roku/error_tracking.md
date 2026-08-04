@@ -17,14 +17,14 @@ site_support_id: rum_roku
 
 ## Overview
 
-Error Tracking processes errors collected from the Roku SDK. 
+Error Tracking processes errors collected from the Roku SDK.
 
 Enable Roku Crash Reporting and Error Tracking to get comprehensive crash reports and error trends with Real User Monitoring. With this feature, you can access:
 
 - Aggregated Roku crash dashboards and attributes
 - Trend analysis with Roku error tracking
 
-Your crash reports appear in [**Error Tracking**][1].
+Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
@@ -37,7 +37,7 @@ For any given error, you can access the file path, line number, and a code snipp
 
 ## Limitations
 
-Crash reporting on Roku doesn't yet support stacktraces. 
+The SDK supports stack trace in crash reporting on Roku OS 13+, while on Roku OS <13, the stack trace is empty.
 
 ## Test your implementation
 
@@ -54,7 +54,7 @@ To test your implementation:
        print x.foo
    ```
 
-3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [**Error Tracking**][1].
+3. After the crash happens, restart your application and wait for the Roku SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ### Forward errors to Datadog
 

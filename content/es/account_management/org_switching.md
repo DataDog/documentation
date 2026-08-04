@@ -1,4 +1,7 @@
 ---
+description: Navega entre varias organizaciones de Datadog utilizando el conmutador
+  de organizaciones con la autenticación y la gestión de sesiones adecuadas en las
+  distintas organizaciones.
 further_reading:
 - link: account_management/multi_organization/
   tag: Documentación
@@ -6,7 +9,7 @@ further_reading:
 title: Cambiar de una organización a otra
 ---
 
-Si perteneces a varias organizaciones de Datadog, el conmutador de organizaciones situado en la parte inferior izquierda de la barra de navegación te permite alternar entre ellas. También puedes ver todas las organizaciones y cambiar entre ellas desde la página [**Organizations**][1] (Organizaciones) en **Personal Settings** (Configuración personal).
+Si perteneces a varias organizaciones de Datadog, el conmutador de organizaciones situado en la parte inferior izquierda de la barra de navegación te permite alternar entre ellas. También puedes ver todas las organizaciones y cambiar entre ellas desde la página [**Organizations** (Organizaciones)][1] en **Personal Settings** (Parámetros personales).
 
 {{< img src="account_management/org_switching_062024.png" alt="Dos formas de conmutar entre organizaciones" style="width:90%;" >}}
 
@@ -34,7 +37,7 @@ Si tienes un problema y no puedes iniciar sesión, intenta lo siguiente:
 
 Si los pasos anteriores de solucionar problemas fallan, ponte en contacto con el [equipo de soporte de Datadog][3] e indícales el comportamiento esperado y lo que has intentado hasta ahora.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

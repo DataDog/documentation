@@ -72,12 +72,12 @@ Cuando compruebes que la configuración del Agent es correcta, [consulta los log
 También puedes realizar explícitamente un check ejecutando el comando CLI `check` en el Datadog Agent e inspeccionando el resultado en busca de errores:
 
 ```bash
-# Para instalaciones autoalojadas del Agent
+# For self-hosted installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true datadog-agent check sqlserver -t 2
 
-# Para instalaciones basadas en contenedores del Agent
+# For container-based installations of the Agent
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check postgres -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check mysql -t 2
 DD_LOG_LEVEL=debug DBM_THREADED_JOB_RUN_SYNC=true agent check sqlserver -t 2
@@ -154,6 +154,18 @@ Es posible que la consulta no haya sido muestreada para su selección porque no 
 
 Antes de seguir estos pasos para diagnosticar la falta de datos de métricas de consultas, asegúrate de que el Agent se está ejecutando correctamente y de que has seguido [los pasos para diagnosticar la falta de datos del Agent](#no-data-is-showing-after-configuring-database-monitoring). A continuación, se indican las posibles causas de la falta de métricas de consultas.
 
+### Faltan métricas de índice
+
+Si el Agent muestra este error:
+```
+Error querying mysql.innodb_index_stats: (1142, "SELECT command denied to user 'datadog'@'172.20.0.5' for table 'innodb_index_stats'")
+```
+Resuelve el error concediendo al usuario `datadog` el privilegio SELECT para recopilar métricas de índice:
+
+```sql
+GRANT SELECT ON mysql.innodb_index_stats TO datadog@'%';
+```
+
 #### `performance_schema` no está activado {#performance-schema-not-enabled}
 El Agent requiere que la opción `performance_schema` esté habilitada. Está habilitada por defecto por MySQL, pero puede estar deshabilitada en la configuración o por tu proveedor de nube. Sigue las [instrucciones de configuración][1] para habilitarla.
 
@@ -185,7 +197,7 @@ performance_schema_max_sql_text_length=4096
 
 ### Falta actividad de consulta
 
-<div class="alert alert-danger">La Actividad de consulta y la Recopilación de eventos de espera no son compatibles con Flexible Server, ya que estas características requieren la configuración de MySQL que no están disponibles en un host de Flexible Server.</div>
+<div class="alert alert-danger">La actividad de consulta y la recopilación de eventos de espera no son compatibles con Flexible Server, ya que estas funciones requieren la configuración de MySQL que no está disponible en un host de Flexible Server.</div>
 
 Antes de seguir estos pasos para diagnosticar la falta de actividad de consulta, asegúrate de que el Agent se está ejecutando correctamente y de que has seguido [los pasos para diagnosticar la falta de datos del Agent](#no-data-is-showing-after-configuring-database-monitoring). A continuación, se indican las posibles causas de la falta de actividad de consulta.
 

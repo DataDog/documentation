@@ -34,7 +34,7 @@ is_public: true
 manifest_version: 2.0.0
 name: edgecast_cdn
 public_title: Edgecast
-short_description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
+short_description: '[非推奨] Datadog メトリクスを使用した Edgecast CDN トラフィックの監視'
 supported_os:
 - linux
 - windows
@@ -49,7 +49,7 @@ tile:
   - Supported OS::Windows
   - Supported OS::macOS
   configuration: README.md#Setup
-  description: Datadog メトリクスを使用した Edgecast CDN トラフィックの監視
+  description: '[非推奨] Datadog メトリクスを使用した Edgecast CDN トラフィックの監視'
   media: []
   overview: README.md#Overview
   resources:
@@ -62,52 +62,31 @@ tile:
 <!--  SOURCED FROM https://github.com/DataDog/integrations-internal-core -->
 ## 概要
 
-Edgecast は、エッジコンピューティング、アプリケーションセキュリティ、オーバーザトップビデオストリーミングのためのコンテンツデリバリネットワーク (CDN) やその他のソリューションを提供するグローバルネットワークプラットフォームです。Edgecast のメトリクスを収集し、オリジン別に Web トラフィックを監視することができます。
+**_重要なお知らせ_**: Edgecast CDN インテグレーションは、Edgecast のサービス終了に伴い非推奨です。
+
+Edgecast (EdgeCast Networks, Inc.) は破産に伴い事業を停止しました。
+基盤となるサービスが終了したため、このインテグレーションは今後機能しません。
+直ちに代替の CDN プロバイダーへの移行を強く推奨します。
+一般的な代替案としては Cloudflare、Akamai、Fastly の CDN サービスなどがあります。タイルは 2025 年 7 月 7 日に削除されます。
 
 ## セットアップ
 
-
-### Edgecast クライアントの作成 
-
-1. [Edgecast VDMS アカウント][1]にログインし、**Clients** タブに移動します。
-2. **Create New Client** をクリックすると、New Client モーダルが表示されます。
-3. 識別するための一意のクライアント名を入力し、**Toggle all ec.analytics** をクリックして、このクライアントがメトリクスを収集できるようにします。
-4. **Settings** に移動し、**JWT Expiration in Seconds** を 600 に変更します。
-5. **Save** をクリックすると、このクライアントと変更した設定値が保存されます。
-
 ### 構成
-
-1. Datadog の [Edgecast インテグレーションタイル][2]内のコンフィギュレーションタブに移動します。
-2. Datadog でこのクライアントを識別するための一意の名前を入力します。
-3. 上記で作成した Edgecast クライアントからクライアント ID とクライアントシークレットを貼り付けます。
-   * 構成した Edgecast クライアントの **Quick Start** タブにある **Getting an access token** リクエストで、`client_id=` の後にあるクライアント ID を探します。
-   * 構成した Edgecast クライアントの **Client Secrets** タブで、クライアントシークレットを探します。
-4. オプションで、カスタムタグを追加して、このインテグレーションのために収集されたすべてのメトリクスに関連付けます。
-   * メトリクスには、オリジンに関連する Edgecast 名が自動的にタグ付けされます。
 
 ## 収集データ
 
 ### メトリクス
-{{< get-metrics-from-git "edgecast-cdn" >}}
-
 
 ### イベント
 
-Edgecast インテグレーションには、イベントは含まれません。
-
 ### サービスチェック
-
-Edgecast インテグレーションには、サービスのチェック機能は含まれません。
 
 ## トラブルシューティング
 
-ご不明な点は、[Datadog のサポートチーム][4]までお問合せください。
+ご不明な点は、[Datadog のサポートチーム][1]までお問合せください。
 
 ## その他の参考資料
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://id.vdms.io
-[2]: https://app.datadoghq.com/integrations/edgecast-cdn
-[3]: https://github.com/DataDog/dogweb/blob/prod/integration/edgecast_cdn/edgecast_cdn_metadata.csv
-[4]: https://docs.datadoghq.com/ja/help
+[1]: https://docs.datadoghq.com/ja/help

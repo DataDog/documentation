@@ -28,8 +28,9 @@
 {{ $ctx := . }}
 
 <body
-  class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">  
+  class="{{ .Site.Language.Lang }} {{ if .IsPage }} {{ replace $.Type "/" "-" }} {{ else }} {{ .Section }} {{ end }} {{ $bodyClass }} {{ if .Site.Params.announcement_banner }}announcement{{ end }}">
 
+  {{- partial "page-agent-hint-block.html" . -}}
 
   <div class="greyside">
     <div class="container container__content h-100">
@@ -70,6 +71,8 @@
   {{ partial "footer-scripts.html" . }}
   {{ partial "footer-js-dd-docs-methods" . }}
   {{ partial "preview_banner/preview_banner" . }}
+
+  {{ partial "conversational-search.html" . }}
 </body>
 
 </html>

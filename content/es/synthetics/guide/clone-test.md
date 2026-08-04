@@ -4,17 +4,17 @@ aliases:
 further_reading:
 - link: /synthetics/
   tag: Documentación
-  text: Más información sobre Synthetic Monitorig
-title: Clonar tests de Synthetics
+  text: Más información sobre la monitorización Synthetic
+title: Clonar tests de Synthetic Monitoring
 ---
 
 ## Información general
 
-Para clonar un test de Synthetics, utiliza la interfaz de usuario o los endpoints de API.
+Para clonar un test de Synthetic Monitoring, utiliza la interfaz de usuario o los endpoints de la API.
 
 ## En la interfaz de usuario
 
-1. En un test de Synthetics, haz clic en el icono de la rueda dentada situado a la derecha.  
+1. En un test de Synthetic Monitoring, haz clic en el icono **Gear** (Engranaje) de la derecha.  
 2. Haz clic en la opción **Clone** (Clonar) del menú desplegable.
 
 {{< img src="synthetics/faq/clone-test.mp4" alt="Clonación de tests de Synthetics" video="true" width="90%" >}}
@@ -25,7 +25,7 @@ Para clonar un test de Synthetics, utiliza la interfaz de usuario o los endpoint
 2. Haz los cambios necesarios (por ejemplo, modificar la URL o las etiquetas).
 3. Envía la nueva configuración del test con el endpoint pertinente. Consulta los artículos sobre cómo [crear un test de API][3] o un [test de navegador][4].
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

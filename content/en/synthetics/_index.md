@@ -1,22 +1,21 @@
 ---
 title: Synthetic Testing and Monitoring
 description: "Use automated testing to ensure the most critical parts of your systems and applications are up and running from various locations around the world."
-disable_sidebar: true
 aliases:
   - /integrations/synthetics/
 further_reading:
-- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
-  tag: "Release Notes"
-  text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
-- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
-  tag: 'Learning Center'
-  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "/synthetics/guide/"
   tag: "Documentation"
   text: "Synthetic Monitoring Guides"
+- link: 'https://learn.datadoghq.com/courses/getting-started-with-synthetic-browser-testing'
+  tag: 'Learning Center'
+  text: 'Datadog Learning Center: Getting started with Synthetic Browser Testing'
 - link: "https://dtdg.co/fe"
   tag: "Foundation Enablement"
   text: "Join an interactive session to enhance your synthetic testing capabilities"
+- link: "https://www.datadoghq.com/blog/network-test-protocols/"
+  tag: "Blog"
+  text: "Test network paths with TCP, UDP, and ICMP in Datadog"
 - link: "https://www.datadoghq.com/blog/http-security-headers-synthetic-tests/"
   tag: "Blog"
   text: "How to secure HTTP headers with synthetic tests"
@@ -35,17 +34,24 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/ambassador-browser-tests/"
   tag: "Blog"
   text: "How I helped my client scale their browser tests with Datadog"
+- link: "https://www.datadoghq.com/blog/datadog-terraform-synthetic-testing/"
+  tag: "Blog"
+  text: "Automating your synthetic test infrastructure with Datadog Synthetic Monitoring and Terraform"
+- link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
+  tag: "Blog"
+  text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
+- link: "https://www.datadoghq.com/blog/rum-product-analytics-bridging-teams"
+  tag: "Blog"
+  text: "From performance to impact: Bridging frontend teams through shared context"
+- link: "https://app.datadoghq.com/release-notes?category=Synthetic%20Monitoring"
+  tag: "Release Notes"
+  text: "Check out the latest Datadog Synthetic Monitoring releases! (App login required)"
 algolia:
   tags: ['synthetics']
 cascade:
     algolia:
         rank: 70
 ---
-
-{{< vimeo url="https://player.vimeo.com/progressive_redirect/playback/447241955/rendition/1080p/file.mp4?loc=external&signature=47f0bf6adc93cbbd62e4939228c964c19227a2e0aec2d61822417cd2af985c97" poster="/images/poster/synthetics.png" >}}
-
-<br/>
-
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/session/synthetics/">}}
   Explore and register for Foundation Enablement sessions. Learn how Datadog Synthetic Monitoring is a proactive monitoring solution that enables you to create code-free API, browser, and mobile tests to automatically simulate user flows and requests to your applications, key endpoints, and network layers.
@@ -61,7 +67,7 @@ You can create Synthetic tests in the [Datadog application][1], with the [API][2
 
 API tests allow you to launch [single][4] or [chained][5] requests to perform verifications on your key systems at various network levels: [HTTP test][6], [SSL test][7], [DNS test][8], [WebSocket test][9], [TCP test][10], [UDP test][11], [ICMP test][12], and [gRPC test][13]. 
 
-{{< img src="synthetics/api_test.png" alt="API tests" style="width:100%;">}}
+{{< img src="synthetics/api_tests/api_test_shopist.png" alt="HTTP API test details page showing the Activity tab with global uptime, an alert timeline, and a list of latest test runs" style="width:100%;">}}
 
 ## Record browser tests
 
@@ -75,6 +81,17 @@ Use [Synthetic mobile application tests][21] to monitor how your customers exper
 
 {{< img src="synthetics/mobile_app_tests.png" alt="Examples of the recording workflow for a Synthetic Mobile Test" style="width:100%;">}}
 
+## Create network path tests
+
+Create [Synthetic network path tests][25] from managed locations to perform TCP, UDP, and ICMP checks and visualize packet routes across global endpoints.
+
+{{< img src="synthetics/network_tests/syn_network_path.png" alt="Examples of a Synthetic TCP network test" style="width:100%;">}}
+## Test suites
+
+Use [Synthetic Test Suites][26] to organize multiple tests into logical collections grouped by user journey, environment, location, service, or team for streamlined management and troubleshooting. 
+
+{{< img src="synthetics/test_suites/test_suite_summary.png" alt="Synthetic Monitoring Test Suite summary page" style="width:100%;">}}
+
 ## Launch private locations
 
 Use [Synthetic private locations][15] to monitor internal APIs and websites or create custom locations in areas that are mission-critical to your business.
@@ -85,7 +102,7 @@ Use [Synthetic private locations][15] to monitor internal APIs and websites or c
 
 Use the [integration between Synthetic tests and APM traces][16] to find the root cause of failures across frontend, network, and backend requests.
 
-{{< img src="synthetics/synthetics_traces.mp4" alt="Synthetic Monitoring" video=true style="width:100%;">}}
+{{< img src="synthetics/apm/synthetics_apm_new.mp4" alt="A failed API test with the side panel open on the Trace tab, showing the APM trace generated by the test run with color-coded spans across services" video=true style="width:100%;">}}
 
 ## Access out-of-the-box dashboards
 
@@ -160,3 +177,5 @@ See [Getting Started with Synthetic Monitoring][18] for instructions on creating
 [22]: /synthetics/test_coverage
 [23]: /synthetics/guide/version_history/
 [24]: /synthetics/notifications/
+[25]: /synthetics/network_path_tests/
+[26]: /synthetics/test_suites/

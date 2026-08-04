@@ -1,5 +1,9 @@
 ---
 title: Estimated Usage Metrics
+further_reading:
+    - link: "https://www.datadoghq.com/blog/zendesk-cost-optimization/#measuring-the-impact-of-our-optimizations"
+      tag: "Blog"
+      text: "Optimizing Datadog at scale: Cost-efficient observability at Zendesk"
 ---
 
 <style>tbody code {word-break: break-word !important;}</style>
@@ -28,8 +32,15 @@ Estimated usage metrics are generally available for the following usage types:
 | Fargate Tasks                 | `datadog.estimated_usage.fargate_tasks`, `datadog.estimated_usage.fargate_tasks.by_tag`  | Unique Fargate Tasks seen in the last 5 minutes.<br/><br/>**Note**: This metric tracks both ECS Fargate and EKS Fargate usage. |
 | Indexed Custom Metrics        | `datadog.estimated_usage.metrics.custom`, `datadog.estimated_usage.metrics.custom.by_metric`, `datadog.estimated_usage.metrics.custom.by_tag`  | Unique indexed Custom Metrics seen in the last hour. |
 | Ingested Custom Metrics       | `datadog.estimated_usage.metrics.custom.ingested`, `datadog.estimated_usage.metrics.custom.ingested.by_metric`, `datadog.estimated_usage.metrics.custom.ingested.by_tag`  | Unique ingested Custom Metrics seen in the last hour. |
+| (Preview) Indexed Custom Metric Points | `datadog.estimated_usage.metrics.points.indexed`, `datadog.estimated_usage.metrics.points.indexed.by_tag`, `datadog.estimated_usage.metrics.points.indexed.hourly` | Estimated indexed points for custom metrics. |
+| (Preview) Ingested Custom Metric Points | `datadog.estimated_usage.metrics.points.ingested`, `datadog.estimated_usage.metrics.points.ingested.hourly` | Estimated ingested points for custom metrics. |
+| (Preview) Billable Metric Names | `datadog.estimated_usage.billable.metrics` | Count of metric names with more than 100 indexed points, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Billable Indexed Points | `datadog.estimated_usage.billable.points` | Sum of indexed points above the included 10M points per metric name, month-to-date. Applies to organizations on [Metric Name Pricing][7]. |
+| (Preview) Ingested-to-Indexed Points Ratio | `datadog.estimated_usage.metrics.points.ratio` | Comparison of total ingested points to total indexed points. Applies to organizations on [Metric Name Pricing][7]. |
 | Logs Ingested Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Total ingestion of logs in bytes. |
 | Logs Ingested Events          | `datadog.estimated_usage.logs.ingested_events` | Total number of ingested events, including excluded logs. |
+| Logs Pipelines Bytes           | `datadog.estimated_usage.logs.ingested_bytes` | Number of logs matched by pipelines in bytes. |
+| Logs Pipelines Events          | `datadog.estimated_usage.logs.ingested_events` | Number of events matched by pipelines in bytes, including excluded logs. |
 | Logs Drop Count               | `datadog.estimated_usage.logs.drop_count` | Total number of events dropped during ingestion. |
 | Logs Truncated Count          | `datadog.estimated_usage.logs.truncated_count` | Total number of events truncated at ingestion. |
 | Logs Truncated Bytes          | `datadog.estimated_usage.logs.truncated_bytes` | Volume of truncated events in bytes. |
@@ -41,6 +52,8 @@ Estimated usage metrics are generally available for the following usage types:
 | APM Ingested Spans            | `datadog.estimated_usage.apm.ingested_spans` | Total number of ingested spans. |
 | APM Fargate Tasks             | `datadog.estimated_usage.apm.fargate_tasks`, `datadog.estimated_usage.apm.fargate_tasks.by_tag` | Unique APM Fargate Tasks seen in last 5 minutes. |
 | RUM Sessions                  | `datadog.estimated_usage.rum.sessions` | Total number of RUM sessions. |
+| RUM Ingested Sessions         | `datadog.estimated_usage.rum.ingested_sessions` | Total number of ingested RUM sessions.<br /><br />**Note**: Applies to RUM without Limits. |
+| RUM Indexed Sessions          | `datadog.estimated_usage.rum.indexed_sessions` | Total number of RUM sessions indexed by retention filters.<br /><br />**Note**: Applies to RUM without Limits. |
 | Serverless Lambda Functions   | `datadog.estimated_usage.serverless.aws_lambda_functions`, `datadog.estimated_usage.serverless.aws_lambda_functions.by_tag` | Unique serverless functions seen in the last hour. |
 | Serverless Invocations        | `datadog.estimated_usage.serverless.invocations`| Sum of serverless invocations in the last hour. |
 | API test runs                 | `datadog.estimated_usage.synthetics.api_test_runs` | Estimated usage for API tests. |
@@ -60,12 +73,18 @@ Estimated usage metrics are generally available for the following usage types:
 | AAP Tasks                     | `datadog.estimated_usage.asm.tasks`, `datadog.estimated_usage.asm.tasks.by_tag` | Unique AAP Fargate Tasks seen in the last 5 minutes. |
 | CI Visibility Pipeline Committers | `datadog.estimated_usage.ci_visibility.pipeline.committers` | Pipeline committers seen from (calendar) month-to-date. |
 | CI Visibility Test Committers | `datadog.estimated_usage.ci_visibility.test.committers` | Test committers seen from (calendar) month-to-date. |
+| Code Coverage Committers | `datadog.estimated_usage.code_coverage.committers` | Code coverage committers seen from (calendar) month-to-date. |
 | IOT devices                   | `datadog.estimated_usage.iot.devices`, `datadog.estimated_usage.iot.devices.by_tag` | Unique IoT devices seen in the last hour. |
 | Observability Pipelines Ingested Bytes | `datadog.estimated_usage.observability_pipelines.ingested_bytes` | Volume of data ingested by Observability Pipelines. |
-| Custom Events                   | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
-| Events Ingested                        | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
+| Custom Events                 | `datadog.estimated_usage.events.custom_events` | Volume of custom events submitted. |
+| Events Ingested               | `datadog.estimated_usage.events.ingested_events` | Volume of data ingested by Events. |
 | Code Security SAST Committers | `datadog.estimated_usage.code_security.sast.committers` | SAST committers seen from (calendar) month-to-date. |
 | Code Security SCA Committers  | `datadog.estimated_usage.code_security.sca.committers`  | SCA committers seen from (calendar) month-to-date.  |
+| Code Security SCA Hosts       | `datadog.estimated_usage.asm.vulnerability_oss_host`, `datadog.estimated_usage.asm.vulnerability_oss_host.by_tag` | Unique SCA hosts seen in the last hour. |
+| Code Security Secret Scanning Committers  | `datadog.estimated_usage.code_security.secrets.committers`  | Secret Scanning committers seen from (calendar) month-to-date.  |
+| Code Security IaC Committers  | `datadog.estimated_usage.code_security.iac.committers`  | Infrastructure as Code (IaC) committers seen from (calendar) month-to-date.  |
+| Incident Management Seats  | `datadog.estimated_usage.incident_management.seats`  | User seats for standalone Incident Management.  |
+| Incident Management Monthly Active Users  | `datadog.estimated_usage.incident_management.monthly_active_users`  | Incident Management unique active users seen from (calendar) month-to-date (legacy billing).  |
 
 {{< img src="account_management/billing/usage-metrics-02.png" alt="Metric Names" >}}
 
@@ -90,10 +109,15 @@ For technical questions, contact [Datadog support][1].
 
 For billing questions, contact your [Customer Success][2] Manager.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /help/
 [2]: mailto:success@datadoghq.com
 [3]: /monitors/types/metric/?tab=threshold
 [4]: /logs/guide/best-practices-for-log-management/#alert-on-indexed-logs-volume-since-the-beginning-of-the-month
 [5]: https://app.datadoghq.com/dashboard/lists/preset/3?q=estimated%20usage
 [6]: /account_management/billing/usage_attribution/
+[7]: /account_management/billing/metric_name_pricing/
 

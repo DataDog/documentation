@@ -453,8 +453,4 @@ Configura Rsyslog para recopilar logs de tu host, contenedores y servicios.
 
 ¿Necesitas ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][1].
 
-## Referencias adicionales
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /es/help/

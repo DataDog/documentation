@@ -1,0 +1,9 @@
+{
+  "data": {
+    "attributes": {
+      "handle": "example-team",
+      "name": "Example Team updated"
+    },
+    "type": "team"
+  }
+}

@@ -1,4 +1,5 @@
 ---
+id: test_batch
 core_product:
 - 신서틱 모니터링
 title: 배치 테스트

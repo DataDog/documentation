@@ -14,7 +14,7 @@ further_reading:
   - link: '/synthetics/guide/browser-tests-passkeys'
     tag: 'Documentation'
     text: 'Learn about Passkeys in browser tests'
-  - link: '/synthetics/browser_tests/actions'
+  - link: '/synthetics/browser_tests/test_steps'
     tag: 'Documentation'
     text: 'Learn about browser test steps'
   - link: '/synthetics/guide/kerberos-authentication/'
@@ -52,7 +52,7 @@ Opening a pop-up in incognito mode allows you to start your test's recording fro
 
 ### SSO login
 
-If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default **Navigate to URL** step.
+If your website uses SSO for login, input your application's URL as the starting URL of your browser test. The test performs the required redirections as part of the first default {{< ui >}}Navigate to URL{{< /ui >}} step.
 
 Some SSO providers might detect Datadog's browser tests as bots and prevent them from logging in, for example, by adding a reCAPTCHA. If that is your case, consider reaching out to your SSO provider to see if it is possible to turn off bot detection when [identifying requests as coming from Synthetic browser tests][3] (such as for a specific set of credentials or Synthetic tests specific headers) for testing purposes.
 
@@ -96,7 +96,7 @@ You can manually apply these headers, cookies, and credentials to the recording 
 
 ### Secure your authentication data
 
-Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select **Hide and obfuscate variable value** to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
+Store your credentials as [global variables][7] (for example, one global variable for username, another one for password) and select {{< ui >}}Hide and obfuscate variable value{{< /ui >}} to hide their values from test results. You can restrict permissions on a browser test for individuals who have access to your instance of Datadog.
 
 After you create the obfuscated variables, you can then [import these global variables][8] into your browser tests and use them in your login steps.
 
@@ -108,13 +108,13 @@ For more information about account security, see [Synthetic Monitoring Data Secu
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /synthetics/browser_tests/actions/
-[2]: /synthetics/browser_tests/actions/#subtests
+[1]: /synthetics/browser_tests/test_steps/
+[2]: /synthetics/browser_tests/test_steps/#subtests
 [3]: /synthetics/guide/identify_synthetics_bots/
 [4]: /synthetics/guide/browser-tests-passkeys
 [5]: /synthetics/guide/browser-tests-totp
-[6]: /synthetics/browser_tests/actions/#test-your-ui-with-custom-javascript
+[6]: /synthetics/browser_tests/test_steps/#test-your-ui-with-custom-javascript
 [7]: /synthetics/settings/?tab=specifyvalue#global-variables
-[8]: /synthetics/browser_tests/actions#a-global-variable
+[8]: /synthetics/browser_tests/test_steps#a-global-variable
 [9]: /data_security/synthetics
 [10]: /synthetics/guide/authentication-protocols/?tab=basicaccess#authentication-methods

@@ -13,8 +13,8 @@ Follow the [main SAML configuration instructions][1], then see the [SafeNet Trus
 
 ## Datadog
 
-* The IdP metadata is available in the SafeNet Trusted Access console by clicking the **Download Metadata** button.
-* In Datadog, ensure the **Identity Provider (IdP) Initiated Login** box is checked.
+* The IdP metadata is available in the SafeNet Trusted Access console by clicking the {{< ui >}}Download Metadata{{< /ui >}} button.
+* In Datadog, ensure the {{< ui >}}Identity Provider (IdP) Initiated Login{{< /ui >}} box is checked.
 * Datadog's [Service Provider metadata][3] is needed.
 
 ## Verify authentication
@@ -23,7 +23,7 @@ Follow the [main SAML configuration instructions][1], then see the [SafeNet Trus
 
 Navigate to the Datadog login URL. Once redirected to the SafeNet Trusted Access sign-in page, enter your primary directory login information and approve the two-factor authentication. This redirects you back to Datadog after authentication.
 
-**Note**: For IdP initiated mode, enter the **Assertion Consumer Service URL** found in Datadog on the SafeNet Trusted Access console.
+**Note**: For IdP initiated mode, enter the {{< ui >}}Assertion Consumer Service URL{{< /ui >}} found in Datadog on the SafeNet Trusted Access console.
 
 ### Using STA user portal
 

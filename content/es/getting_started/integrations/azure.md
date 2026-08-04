@@ -1,180 +1,439 @@
 ---
+aliases:
+- /es/integrations/guide/azure-manual-setup/
+- /es/integrations/guide/azure-programmatic-management/
+description: Conecte Microsoft Azure con Datadog utilizando las opciones de integración
+  de registro de aplicación de Azure. Configure la recolección de métricas, el reenvío
+  de registros y la instalación del Datadog Agent.
 further_reading:
+- link: https://www.datadoghq.com/blog/azure-integration-onboarding/
+  tag: Blog
+  text: Acelere la configuración de su integración de Azure con un proceso de incorporación
+    guiado.
 - link: https://docs.datadoghq.com/integrations/azure/#overview
   tag: Documentación
   text: Integración de Microsoft Azure
-- link: https://docs.datadoghq.com/integrations/guide/azure-architecture-and-configuration/
-  tag: Guía
-  text: Arquitectura y configuración de la integración de Azure
 - link: https://docs.datadoghq.com/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
   tag: Guía
-  text: ¿Por qué debería instalar el Datadog Agent en mis instancias de nube?
-- link: https://docs.datadoghq.com/integrations/guide/azure-portal/?tab=vmextension
-  tag: Guía
-  text: Gestión de la integración nativa de Azure
-- link: https://www.datadoghq.com/blog/azure-integration-configuration/
-  tag: Blog
-  text: Ajusta las configuraciones de observabilidad para todas tus integraciones
-    de Azure en un solo lugar
-title: Empezando con Azure
+  text: ¿Por qué debería instalar el Agente de Datadog en mis instancias en la nube?
+title: Introducción a Azure
 ---
+## Descripción general {#overview}
 
+Datadog ofrece múltiples opciones de configuración para la integración de Azure. Esta guía proporciona una descripción general de las diversas opciones disponibles para comenzar con Azure, con enlaces a recursos y tutoriales de Azure que abordan casos de uso específicos.
 
+## Requisitos previos {#prerequisites}
 
-## Información general
+Si aún no lo ha hecho, cree una [cuenta de Datadog][2].
 
-Existen múltiples opciones de configuración a la hora de integrar Azure con Datadog. Esta guía proporciona información general sobre las distintas opciones disponibles para empezar a usar Azure, con enlaces a recursos y tutoriales de Azure que abordan casos de uso específicos.
+{{% collapse-content title="Permisos requeridos para la configuración de la integración" level="h4" expanded=false id="required-permissions" %}}
 
-## Requisitos previos
+### En Azure {#in-azure}
 
-Si aún no lo has hecho, crea una [cuenta de Datadog][2].
+Su usuario de Microsoft Entra ID necesita los siguientes permisos:
 
-## Decidir qué camino tomar 
-<br>
-{{< img src="/getting_started/integrations/azure/GSwAzure_addNewIntegration.mp4" alt="Añadir nueva integración" video=true >}}
+#### Permiso para crear un registro de aplicación {#permission-to-create-an-app-registration}
 
-Esta sección puede ayudarte a decidir qué opción de configuración se adapta mejor a tu organización y necesidades comerciales.
+**Debe cumplirse una de las siguientes condiciones para el usuario:**
 
-Si tu organización utiliza el [sitio US3][3], tienes la posibilidad de utilizar la **integración nativa de Azure** para optimizar la gestión y la recopilación de datos para tu entorno de Azure.
+- `Users can register applications` ha sido establecido en `Yes`
+- El usuario tiene el rol de [Desarrollador de Aplicaciones][38]
 
-Si estás en [cualquiera de los sitios disponibles][3], incluido el sitio US3, puedes usar la **integración estándar de Azure** que requiere lo siguiente:
-- El proceso de [credenciales de registro de aplicaciones][4] para desplegar la recopilación de métricas.
-- La [configuración del centro de eventos][5] para enviar logs de la plataforma Azure.
+##### Roles de administrador dentro de sus suscripciones {#admin-roles-within-your-subscriptions}
 
-También tienes la opción de configurar _manualmente_ o _programáticamente_ tu integración de Azure con Datadog.
+Dentro de las suscripciones que desea monitorear, debe tener ya sea:
 
-Consulta la siguiente tabla para obtener un resumen de las distintas opciones de configuración disponibles por sitio de la organización:
+- El rol de {{< ui >}}Owner{{< /ui >}}
+- Tanto el rol de {{< ui >}}Contributor{{< /ui >}} como el rol de {{< ui >}}User Access Admin{{< /ui >}}
 
-| SITIO DE LA ORGANIZACIÓN | INTEGRACIÓN NATIVA DE AZURE | INTEGRACIÓN ESTÁNDAR DE AZURE | CONFIGURACIÓN MANUAL | CONFIGURACIÓN AUTOMÁTICA |
-| --- | ---- |-------- |---| ----|
-| Sitio US3   | Sí    |Sí    |Sí<br><br> Puedes crear el `Datadog resource in Azure`, desplegar el Datadog Agent directamente en Azure con la `VM extension` o la `AKS Cluster extension` y la configuración opcional del inicio de sesión único (SSO).|Sí<br><br> Puedes utilizar `Terraform` para configurar la integración nativa de Azure de Datadog con el recurso de Datadog en Azure.  |
-| Todos los sitios   | No    | Sí    |Sí<br><br>Puedes utilizar `Azure portal` o `Azure CLI`, así como `deploying the Datadog Agent directly in Azure` con la extensión de VM o la extensión del clúster de AKS. |Sí<br><br> Puedes configurar la integración a través de `Terraform` o `Azure CLI`, desplegar el Datadog Agent de forma nativa en Azure a través de `Datadog Azure VM Extension` y ejecutar `automated scripts` para habilitar la recopilación de logs.|
+#### Permiso para agregar y otorgar consentimiento para los permisos de la API de Graph {#permission-to-add-and-grant-consent-for-graph-api-permissions}
 
-Las configuraciones ***_Todos los sitios_** se pueden utilizar en las organizaciones de sitios US3, pero solo las organizaciones de sitios US3 pueden utilizar la integración nativa de Azure.
+El rol de [Administrador de Roles Privilegiados][25] contiene los permisos requeridos.
 
-<div class="alert alert-danger"> <strong>Nota</strong>: La <a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">gestión de costes en la nube</a> y los <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">archivos de log</a> solo son compatibles con el registro de aplicaciones. Para los sitios de US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="">registro de aplicaciones</a> para acceder a estas funcionalidades.
+### En Datadog {#in-datadog}
+
+El `Datadog Admin Role`, o cualquier otro rol con el permiso de `azure_configurations_manage`.
+
+{{% /collapse-content %}}
+
+{{< site-region region="us3" >}}
+
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> y <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> requieren el método de configuración de registro de aplicación. Para cuentas de Datadog que utilizan la integración nativa de Azure, siga los pasos de configuración en esta página para crear un registro de aplicación. Si una suscripción está conectada a través de ambos métodos, aparece una advertencia de redundancia en el mosaico de integración de Azure. Esta advertencia se puede ignorar de manera segura para Cloud Cost Management y Log Archives.
 </div>
 
-## Configuración
-
-{{% site-region region="us,us5,eu,ap1,us-fed" %}}
-
-Sigue las instrucciones de esta página para configurar la **Integración estándar de Azure**, que está disponible para todos los sitios de Datadog.
-
-**Nota**: Si estás en el sitio US3, puedes usar la **integración nativa de Azure** para obtener una funcionalidad mejorada y una configuración optimizada. Cambia el selector de sitios ubicado en el lado derecho de esta página para obtener instrucciones sobre cómo configurarlo.
-
-{{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Selector de sitios para sitios US3" video=true >}}
-
-{{% /site-region %}}
+{{< /site-region >}}
 
 
-{{% site-region region="us3" %}}
+## Configuración {#setup}
 
-### Integración nativa de Azure
+Siga las instrucciones en esta página para configurar el {{< ui >}}Azure integration{{< /ui >}} a través de un registro de aplicación, disponible para todos los sitios de Datadog.
 
-Para la configuración automática de la integración nativa de Azure a través de Terraform, consulta la [Guía de gestión programática de la integración nativa de Azure][201].
+{{< img src="/getting_started/integrations/azure/GSwAzure_siteSelector.mp4" alt="Selector de sitio para el sitio US3" video=true >}}
 
-Para la configuración manual de la integración nativa de Azure a través de la creación del recurso de Datadog en Azure, consulta la [Guía de configuración manual de la integración nativa de Azure][202].
+{{% collapse-content title="Inicio rápido (recomendado)" level="h4" expanded=false id="quickstart-setup" %}}
 
-[201]: /es/integrations/guide/azure-native-programmatic-management/
-[202]: /es/integrations/guide/azure-native-manual-setup/
+### Elija el método de configuración de inicio rápido si... {#choose-the-quickstart-setup-method-if}
 
-{{% /site-region %}}
+- Está configurando Datadog por primera vez.
+- Prefiere un flujo de trabajo basado en UI y desea minimizar el tiempo que se necesita para crear un principal de servicio con los permisos de monitoreo requeridos.
+- Desea automatizar los pasos de configuración en scripts o en pipelines de CI/CD.
+
+### Instrucciones {#instructions}
+
+1. En el mosaico de integración de Azure, haga clic en {{< ui >}}+ Add New App registration{{< /ui >}}, luego seleccione {{< ui >}}Quickstart{{< /ui >}}.
+2. Copie el script de configuración y ejecútelo en Azure Cloud Shell.
+3. Regrese a la interfaz de usuario de Datadog. Deberá ver {{< ui >}}CONNECTED{{< /ui >}} en la esquina superior derecha del script de configuración.
+4. Seleccione las suscripciones y los grupos de administración de los cuales desea recopilar datos.
+5. Opcionalmente, haga clic en el interruptor de recopilación de métricas para deshabilitar toda la recopilación de métricas de Azure. También puede expandir el menú desplegable {{< ui >}}Advanced Configuration{{< /ui >}} para filtrar métricas por:
+   - Proveedor de recursos
+   - Etiquetas
+   - Servidores
+   - Planes de App Service
+   - Container Apps
+
+También puedes hacer clic para habilitar la recopilación de métricas personalizadas de [Azure Application Insights][36] y deshabilitar la recopilación de métricas de uso.
+
+6. Opcionalmente, haz clic en el interruptor de recopilación de recursos para deshabilitar la recopilación de información de configuración de tus recursos de Azure.
+7. Habilita la recopilación de registros para configurar y establecer los servicios y ajustes de diagnóstico necesarios para enviar registros a Datadog:
+   1. Si ya existe un reenvío de registros en el inquilino, se modifica para ampliar su alcance. Cualquier configuración cambiada se aplica a las suscripciones o grupos de administración existentes, así como a los recién seleccionados.
+   2. Si estás creando un nuevo reenvío de registros:
+      1. Ingresa un nombre de grupo de recursos para almacenar el plano de control del reenvío de registros.
+      2. Selecciona una suscripción del plano de control para la orquestación del reenvío de registros (LFO).
+      3. Selecciona una región para el plano de control.<br>
+   **Nota**: El nombre del grupo de recursos, la suscripción del plano de control y los campos de región solo aparecen al crear un nuevo reenvío de registros.
+   3. Opcionalmente, abre {{< ui >}}Log filtering options{{< /ui >}} para filtrar registros por etiquetas, o aplica filtrado para información específica (como PII) usando regex.
+
+   Consulta la [sección de Arquitectura][34] de la guía de reenvío automático de registros para más información sobre esta arquitectura.
+
+8. Haz clic en {{< ui >}}Confirm{{< /ui >}} para finalizar la configuración.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Terraform" expanded=false level="h4" id="terraform-setup" %}}
+
+### Elija el método de configuración de Terraform si... {#choose-the-terraform-setup-method-if}
+
+- Gestione infraestructura como código y mantenga la integración de Datadog Azure bajo control de versiones.
+- Necesita configurar múltiples inquilinos o suscripciones de manera consistente con bloques de proveedor reutilizables.
+- Desea un proceso de implementación repetible y auditable que se ajuste a su entorno gestionado por Terraform.
+
+### Instrucciones {#instructions-1}
+
+Siga estos pasos para implementar la integración de Datadog Azure a través de [Terraform][23].
+
+{{< tabs >}}
+{{% tab "Cree un registro de aplicación." %}}
+
+1. En el [mosaico de integración de Azure][100], haga clic en {{< ui >}}+ Add New App registration{{< /ui >}}, luego seleccione {{< ui >}}Terraform{{< /ui >}}.
+2. Seleccione las suscripciones y los grupos de administración de los cuales desea recopilar datos.
+3. Opcionalmente, haga clic en el interruptor de recopilación de métricas para deshabilitar toda la recopilación de métricas de Azure. También puede expandir el menú desplegable {{< ui >}}Advanced Configuration{{< /ui >}} para filtrar métricas por:
+   - Proveedor de recursos
+   - Etiquetas
+   - Servidores
+   - App Service Plans
+   - Aplicaciones de Contenedor
+
+   También puede hacer clic para habilitar la recopilación de métricas personalizadas desde [Azure Application Insights][101], y deshabilitar la recopilación de métricas de uso.
+4. Opcionalmente, haga clic en el interruptor de recopilación de recursos para deshabilitar la recopilación de información de configuración de sus recursos de Azure.
+5. Configure la recopilación de registros:
+   - Si ya existe un reenvío de registros en el inquilino, amplíe su alcance para incluir nuevas suscripciones o grupos de administración.
+   - Si está creando un nuevo reenvío de registros:
+     1. Ingrese un nombre de grupo de recursos para almacenar el plano de control del reenvío de registros.
+     1. Seleccione una suscripción del plano de control para la orquestación de reenvío de registros (LFO).
+     1. Seleccione una región para el plano de control.
+
+   Consulte la [sección de Arquitectura][102] de la guía de reenvío de registros automatizado para obtener más información sobre esta arquitectura.
+6. Copie y ejecute el comando bajo {{< ui >}}Initialize and apply the Terraform{{< /ui >}}.
+
+[100]: https://app.datadoghq.com/integrations/azure/
+[101]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
+[102]: /es/logs/guide/azure-automated-log-forwarding/#architecture
+{{% /tab %}}
+
+{{% tab "Utilice un registro de aplicación existente" %}}
 
 
 
-### integración estándar de Azure
+- Ya tiene un registro de aplicación configurado con el rol {{< ui >}}Monitoring Reader{{< /ui >}} para que Datadog monitoree el alcance proporcionado (suscripciones o grupos de administración), y no desea crear nuevos recursos.
 
-Para la configuración automática de la integración estándar de Azure, consulta la [Guía de gestión programática de la integración estándar de Azure][6] para obtener instrucciones paso a paso.
+1. Configure el [proveedor de Datadog Terraform][200] para interactuar con la API de Datadog a través de una configuración de Terraform.
+2. Configure su archivo de configuración de Terraform utilizando el ejemplo a continuación como plantilla base. Asegúrese de actualizar los siguientes parámetros antes de aplicar los cambios:
+    * `tenant_name`: Su ID de Azure Active Directory.
+    * `client_id`: Su ID de aplicación (cliente) de Azure.
+    * `client_secret`: Su clave secreta de aplicación web de Azure.
 
-Para la configuración manual de la integración estándar de Azure, consulta la [Guía de configuración manual de la integración estándar de Azure][7] a fin de obtener instrucciones específicas para el portal de Azure y la CLI.
+   Consulte la página de [integración de Datadog con Azure][201] en el registro de Terraform para obtener más ejemplos de uso y la lista completa de parámetros opcionales, así como recursos adicionales de Datadog.
 
+{{< code-block lang="hcl" filename="" disable_copy="false" collapsible="false" >}}
 
-## Recopilación de métricas
-La integración de Azure de Datadog está diseñada para recopilar todas las métricas de [Azure Monitor][8]. Consulta la [página Integraciones][9] para obtener una lista completa de las subintegraciones disponibles. Muchas de estas integraciones se instalan de forma predeterminada cuando Datadog reconoce los datos que llegan desde tu cuenta de Azure.
+resource "datadog_integration_azure" "sandbox" {
+  tenant_name   = "<AZURE_TENANT_NAME>"
+  client_id     = "<AZURE_CLIENT_ID>"
+  client_secret = "<AZURE_CLIENT_SECRET_KEY>"
+}
+
+{{< /code-block >}}
+
+3. Ejecute `terraform apply`. Espere hasta 10 minutos para que los datos comiencen a ser recolectados, y luego visualice el Azure overview dashboard para ver las métricas enviadas por sus recursos de Azure.
+
+[200]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs
+[201]: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/integration_azure
+{{% /tab %}}
+{{< /tabs >}}
+
+#### Gestionando múltiples suscripciones o inquilinos {#managing-multiple-subscriptions-or-tenants}
+
+Puede usar múltiples bloques de proveedor con alias para gestionar recursos de Terraform a través de múltiples suscripciones o inquilinos. Lea [Configuración del Proveedor][22] para obtener más información.
+
+### Monitoree el estado de la integración {#monitor-the-integration-status}
+
+Después de que la integración esté configurada, Datadog comienza a efectuar una serie continua de llamadas a las APIs de Azure para recolectar datos críticos de monitoreo de su entorno de Azure. A veces, estas llamadas devuelven errores (por ejemplo, si las credenciales proporcionadas han expirado). Estos errores pueden inhibir o bloquear la capacidad de Datadog para recolectar datos de monitoreo.
+
+Cuando se encuentran errores críticos, la integración de Azure genera eventos en el Explorador de Eventos de Datadog y los vuelve a publicar cada cinco minutos. Puedes configurar un Seguimiento de Eventos para que se active cuando se detecten estos eventos y notificar al equipo correspondiente.
+
+Datadog proporciona una plantilla de seguimiento para ayudarte a comenzar. Para usar la plantilla de seguimiento:
+
+1. En Datadog, ve a {{< ui >}}Monitors{{< /ui >}} y haz clic en el botón {{< ui >}}Browse Templates{{< /ui >}}.
+2. Busca y selecciona la plantilla de seguimiento titulada [[Azure] Errores de Integración][26].
+3. Realiza las modificaciones deseadas en la consulta de búsqueda o en las condiciones de alerta. Por defecto, el seguimiento se activa cada vez que se detecta un nuevo error y se resuelve cuando no se ha detectado el error en los últimos 15 minutos.
+4. Actualiza los mensajes de notificación y re-notificación según lo desees. Ten en cuenta que los eventos en sí contienen información pertinente sobre el evento y se incluyen automáticamente en la notificación. Esto incluye información detallada sobre el contexto, la respuesta de error y los pasos comunes para remediar.
+5. [Configura notificaciones][27] a través de tus canales preferidos (correo electrónico, Slack, PagerDuty u otros) para asegurarte de que tu equipo esté alerta sobre problemas que afecten la recolección de datos de Azure.
+
+{{% /collapse-content %}}
+
+{{% collapse-content title="Utilice un registro de aplicación existente" level="h4" expanded=false id="existing-app-registration-setup" %}}
+
+### Elige el método de configuración de registro de aplicación existente si.. {#choose-the-existing-app-registration-setup-method-if}
+
+- Ya tienes un registro de aplicación configurado con el rol {{< ui >}}Monitoring Reader{{< /ui >}} para que Datadog monitoree el alcance proporcionado (suscripciones o grupos de administración), y no deseas crear nuevos recursos.
+
+Si necesitas configurar un registro de aplicación para Datadog, consulta los métodos de configuración [Guía Rápida](#quickstart-setup) o [Terraform](#terraform-setup).
+
+### Instrucciones {#instructions-2}
+
+1. En el [mosaico de integración de Datadog Azure][20], selecciona {{< ui >}}Add Existing{{< /ui >}}.
+2. En el campo {{< ui >}}Tenant ID{{< /ui >}}, pega tu ID de Directorio (inquilino).
+3. En el campo {{< ui >}}Client ID{{< /ui >}}, pega el ID de la aplicación (cliente).
+4. En el campo {{< ui >}}Client Secret Value{{< /ui >}}, pega el valor del secreto del cliente del registro de la aplicación.
+5. Opcionalmente, haz clic en el interruptor {{< ui >}}Monitor Automuting{{< /ui >}} para desactivar la automatización del seguimiento.
+6. Opcionalmente, haz clic en el interruptor de recolección de métricas para desactivar toda la recolección de métricas de Azure. También puedes expandir el {{< ui >}}Advanced Configuration{{< /ui >}} menú desplegable para filtrar métricas por:
+   - Proveedor de recursos
+   - Etiquetas
+   - Hosts
+   - Planes de servicio de aplicaciones
+   - Aplicaciones de contenedor
+
+También puedes hacer clic para habilitar la recopilación de métricas personalizadas de [Azure Application Insights][36] y deshabilitar la recopilación de métricas de uso.
+
+6. Opcionalmente, haz clic en el interruptor de colección de recursos para desactivar la recopilación de información de configuración de tus recursos de Azure.
+7. Haz clic en {{< ui >}}Create Configuration{{< /ui >}}.
+
+{{% /collapse-content %}}
+
+## Recopilación de métricas {#metric-collection}
+
+La integración de Azure de Datadog está diseñada para recopilar todas las métricas de [Azure Monitor][8]. La [página de Integraciones][9] muestra una lista curada de sub-integraciones predefinidas que proporcionan paneles y monitores adicionales listos para usar para servicios específicos de Azure. Muchas de estas integraciones se instalan por defecto cuando Datadog reconoce datos provenientes de tu cuenta de Azure. Sin embargo, Datadog puede ingerir métricas de **cualquier recurso compatible con Azure Monitor**, incluso si no tiene un mosaico de sub-integración dedicado.
 
 Puedes encontrar tus métricas de Azure en la página de resumen de métricas en la plataforma de Datadog navegando a `Metrics > Summary` y buscando `Azure`.
 
 {{< img src="/getting_started/integrations/azure/GSwAzure_metricExplorer.png" alt="Imagen de resumen de métricas" style="width:100%;" >}}
 
+### Filtrado de etiquetas de recursos para métricas {#resource-tag-filtering-for-metrics}
 
+Utiliza filtros de etiquetas para controlar qué recursos de Azure tienen sus métricas recopiladas por Datadog. Configura filtros de etiquetas en la pestaña {{< ui >}}Configuration{{< /ui >}} del [mosaico de integración de Azure][20]. Un filtro de etiquetas es una lista de etiquetas separadas por comas en la forma `key:value`. Solo los recursos que coinciden con al menos una etiqueta en el filtro tienen sus métricas recopiladas.
 
-## Recopilación de logs
-{{% site-region region="us,us5,eu,ap1,us-fed" %}}
+Puedes usar comodines en tus filtros de etiquetas:
+- `?` coincide con un solo carácter.
+- `*` coincide con múltiples caracteres.
 
-Sigue las instrucciones de esta página para configurar la recopilación de logs a través de la **integración estándar de Azure**. 
-Si estás en el sitio US3 y usas la integración nativa de Azure, utiliza el selector de sitios en el lado derecho de esta página para seleccionar `US3` a fin de obtener instrucciones sobre la [recopilación de logs mediante la integración nativa de Azure][18].
+Para excluir recursos con una etiqueta dada, antepón la etiqueta con `!`. La exclusión tiene prioridad sobre la inclusión. Un recurso coincide con el filtro si coincide con alguna etiqueta en la lista.
 
- {{% /site-region %}}
+Por ejemplo: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
 
-{{% site-region region="us3" %}}
+Este filtro recopila métricas de recursos etiquetados con `datadog:monitored` o `env:production`, excluye recursos etiquetados con `plan_tier:basic`, e incluye recursos con una etiqueta `instance-type` que coincida con `c1.*`.
 
-### Integración nativa de Azure
-Si estás utilizando la integración nativa de Azure, consulta la guía [Enviar logs de Azure con el recurso de Datadog][18] para obtener instrucciones sobre cómo enviar tus logs de _nivel de suscripción_, _recurso de Azure_ y _Azure Active Directory_ a Datadog.
+Si no se establece un filtro de etiquetas, Datadog recopila métricas de todos los recursos de Azure.
 
-<div class="alert alert-danger"> <strong>Nota</strong>: Los<a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage"> archivos de logs</a> solo son compatibles con el registro de aplicaciones. Para los sitios US3 que han configurado la integración nativa de Azure de Datadog, debes crear un <a href="https://docs.datadoghq.com/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration">registro de aplicaciones</a> para acceder a estas funcionalidades.
+## Habilitar la recopilación de registros {#enable-log-collection}
+
+Puedes usar la función de reenvío automático de registros para configurar los servicios y los ajustes de diagnóstico necesarios para reenviar registros a Datadog. Si ya existe un plano de control de reenvío automático de registros en el inquilino, este flujo lo modifica y amplía su alcance para incluir las suscripciones o grupos de administración seleccionados. Para más detalles, consulta [Configuración de reenvío automático de registros de Azure][19].
+
+Datadog recomienda usar el Agente o DaemonSet para enviar registros desde Azure. Si el streaming directo no es posible, usa el flujo {{< ui >}}Configure Log Forwarding{{< /ui >}} en la [integración de Azure][20] para configurar y gestionar el reenvío automático de registros directamente en Datadog. También puedes implementar el reenvío de registros con una [plantilla de Administrador de Recursos de Azure (ARM)][19]. Ambos métodos gestionan y escalan automáticamente los servicios de reenvío de registros.
+
+{{% collapse-content title="Automatizado (recomendado)" level="h4" expanded=false id="automated-log-forwarding-setup" %}}
+
+### Elige el método de configuración de reenvío automático de registros si... {#choose-the-automated-log-forwarding-setup-method-if}
+
+- No has configurado ya los registros a través del método de configuración [Guía rápida](#azure-quickstart-setup).
+- Prefieres un flujo de trabajo basado en la interfaz de usuario y deseas minimizar el tiempo que toma crear un principal de servicio con los permisos de monitoreo requeridos.
+- Deseas automatizar los pasos de configuración en scripts o en pipelines de CI/CD.
+
+### Instrucciones {#instructions-3}
+
+#### Configura el reenvío de registros (recomendado) {#configure-log-forwarding-recommended}
+
+Utiliza el flujo {{< ui >}}Configure Log Forwarding{{< /ui >}} para configurar nuevos o gestionar los reenvíos de registros existentes directamente en Datadog:
+
+1. En Datadog, navega a [{{< ui >}}Integrations{{< /ui >}} > {{< ui >}}Azure{{< /ui >}}][20].
+1. Haz clic en {{< ui >}}Configure Log Forwarding{{< /ui >}}.
+1. Copia el comando proporcionado y pégalo en tu Azure Cloud Shell.
+1. Selecciona las suscripciones de las cuales deseas reenviar registros.
+1. Opcionalmente, agrega o quita filtros de registros.
+1. Haz clic en {{< ui >}}Confirm{{< /ui >}}.
+
+Para más detalles, consulta [Configuración de reenvío automático de registros de Azure][19].
+
+#### Plantilla ARM {#arm-template}
+
+Alternativamente, despliega el reenvío de registros con una plantilla de Administrador de Recursos de Azure (ARM):
+
+1. Abre la [plantilla ARM de reenvío automático de registros][29] en Azure.
+1. Configura los detalles de tu proyecto e instancia de Azure en la [pestaña Básicos][30].
+1. Ingresa tus credenciales de Datadog en la [pestaña de Configuración de Datadog][31].
+1. Reconoce las advertencias de despliegue en la [pestaña de Despliegue][32].
+1. Inicia el proceso de despliegue en la [pestaña Revisar + crear][33].
+
+{{< site-region region="us3" >}}
+
+<div class="alert alert-danger"><a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Los Archivos de Registros</a> requieren el método de configuración de registro de aplicación. Para cuentas de Datadog que utilizan la integración nativa de Azure, sigue los pasos en esta página para crear un registro de aplicación.
 </div>
 
-{{% /site-region %}}
+{{< /site-region >}}
 
+Consulte [Arquitectura de reenvío automático de registros de Azure][34] para más detalles.
 
-### integración estándar de Azure
-Si utilizas la integración estándar de Azure, consulta la [guía Enviar logs de Azure a Datadog][10] para obtener instrucciones sobre cómo enviar tus logs de Azure a Datadog con el centro de eventos. Puedes elegir entre un proceso automático o manual para habilitar la recopilación de logs.
+{{% /collapse-content %}}
 
-Puedes encontrar tus logs de Azure en la página del Explorador de logs en la plataforma de Datadog navegando al Explorador de logs y consultando `source:azure*`.
+{{% collapse-content title="Aplicación de Contenedor" level="h4" expanded=false id="container-app-log-forwarding-setup" %}}
 
-{{< img src="/getting_started/integrations/azure/GSwAzure_logExplorer.png" alt="Imagen del Explorador de logs" style="width:100%;" >}}
+### Elija el método de reenvío de registros de la Aplicación de Contenedor si... {#choose-the-container-app-log-forwarding-method-if}
 
+- Prefiere configurar manualmente los [ajustes de diagnóstico][53] en los recursos de los que desea reenviar registros.
 
+## Instrucciones {#instructions-4}
 
-## Obtén más información de la plataforma de Datadog
+1. Haz clic en el botón de abajo y completa el formulario en el Portal de Azure. Datadog despliega automáticamente los recursos de Azure necesarios para reenviar registros a tu cuenta de Datadog.
 
-### Instalación del Agent para una mayor visibilidad de tu aplicación
-Después de configurar tu integración de Azure, los rastreadores de Datadog recopilan automáticamente métricas de Azure, pero puedes obtener una visibilidad aún más profunda de tus instancias de Azure con el [Datadog Agent][1].
+   [![Desplegar en Azure](https://aka.ms/deploytoazurebutton)][52]
 
-#### Instalación del Agent nativo de Azure
+2. Después de que finalice el despliegue de la plantilla, configure los [ajustes de diagnóstico][53] para cada fuente de registro para enviar registros de la plataforma de Azure (incluidos los registros de recursos) a la Cuenta de Almacenamiento creada durante el despliegue.
 
-La forma más sencilla de instalar el Datadog Agent es directamente en Azure con la [extensión de VM][11] o [de forma nativa dentro de Azure AKS][12], evitando así la complejidad de las herramientas de gestión de terceros.
+**Nota**: Los recursos solo pueden transmitir a una Cuenta de Almacenamiento en la misma región de Azure.
 
-#### Instalación del Agent estándar de Azure
+{{% /collapse-content %}}
 
-Puedes utilizar la [extensión de Azure para instalar el Datadog Agent en tus máquinas virtuales Windows y Linux][13] o utilizar la [extensión de clúster de AKS para desplegar el Agent en tus clústeres de AKS][14].
+{{% azure-log-archiving %}}
 
-La instalación del Datadog Agent en tu entorno te permitirá recopilar datos adicionales que incluyen, entre otros:
-- **estado de la aplicación**
-- **utilización del proceso**
-- **métricas a nivel de sistema**
+### Filtrado de etiquetas de recursos para registros {#resource-tag-filtering-for-logs}
 
-También puedes utilizar el cliente StatsD integrado para enviar métricas personalizadas desde tu aplicación para correlacionar lo que sucede con tu aplicación, tus usuarios y tu sistema.
+Utilice filtros de etiquetas para controlar qué recursos de Azure tienen sus registros reenviados a Datadog. Para configurar filtros de etiquetas para registros, haga clic en {{< ui >}}Configure Log Forwarding{{< /ui >}} en el [mosaico de integración de Azure][20] y siga el flujo. Un filtro de etiquetas es una lista de etiquetas separadas por comas en la forma `key:value`. Solo los recursos que coinciden con al menos una etiqueta en el filtro tienen sus registros reenviados.
 
-Consulta la guía sobre [_¿Por qué debería instalar el Datadog Agent en mis instancias de nube?_][15] para obtener más información sobre los beneficios de instalar el Datadog Agent en tus instancias.
+Puede usar comodines en sus filtros de etiquetas:
+- `?` coincide con un solo carácter.
+- `*` coincide con múltiples caracteres.
 
+Para excluir recursos con una etiqueta dada, anteponga la etiqueta con `!`. La exclusión tiene prioridad sobre la inclusión. Un recurso coincide con el filtro si coincide con alguna etiqueta en la lista.
 
-## Solucionar problemas
-Consulta la [Guía para solucionar problemas de Azure][16].
+Por ejemplo: `datadog:monitored,env:production,!plan_tier:basic,instance-type:c1.*`
 
-¿Necesitas más ayuda? Ponte en contacto con el [servicio de asistencia de Datadog][17].
+Este filtro reenvía registros de recursos etiquetados con `datadog:monitored` o `env:production`, excluye recursos etiquetados con `plan_tier:basic`, e incluye recursos con una etiqueta `instance-type` que coincida con `c1.*`.
 
+Si no se establece ningún filtro de etiquetas, Datadog reenvía registros de todos los recursos de Azure.
 
-## Leer más
+## Obtenga más de la Plataforma de Datadog {#get-more-from-the-datadog-platform}
+
+### Instale el Agente para obtener mayor visibilidad en su aplicación {#install-the-agent-for-greater-visibility-into-your-application}
+
+Después de configurar su integración de Azure, los rastreadores de Datadog recopilan automáticamente métricas de Azure, pero puede obtener una visibilidad aún más profunda en sus instancias de Azure con el [Datadog Agent][1]. Instalar el Datadog Agent en su entorno le permite recopilar datos adicionales, incluyendo, pero no limitándose a:
+- **Salud de la aplicación**
+- **Utilización de procesos**
+- **Métricas a nivel de sistema**
+
+También puede utilizar el cliente StatsD integrado para enviar métricas personalizadas desde sus aplicaciones, para correlacionar lo que está sucediendo con sus aplicaciones, usuarios y sistema. Consulte la guía sobre [_¿Por qué debería instalar el Datadog Agent en mis instancias en la nube?_][15] para obtener más información sobre los beneficios de instalar el Datadog Agent en sus instancias.
+
+Utilice la extensión de Azure para instalar el Datadog Agent en VMs de Windows, VMs de Linux x64 y VMs de Linux basadas en ARM. También puede utilizar la Extensión de Clúster AKS para desplegar el Datadog Agent en sus Clústeres AKS.
+
+{{< tabs >}}
+{{% tab "Extensión de VM" %}}
+
+1. En el [portal de Azure][4], seleccione la VM apropiada.
+2. Desde la barra lateral izquierda, bajo {{< ui >}}Settings{{< /ui >}}, seleccione {{< ui >}}Extensions + applications{{< /ui >}}.
+3. Haga clic en {{< ui >}}+ Add{{< /ui >}}.
+4. Busque y seleccione la extensión {{< ui >}}Datadog Agent{{< /ui >}}.
+5. Haga clic en {{< ui >}}Next{{< /ui >}}.
+6. Ingrese su [clave de API de Datadog][2] y [sitio de Datadog][1], y haga clic en {{< ui >}}OK{{< /ui >}}.
+
+Para instalar el Datadog Agent según el sistema operativo o herramienta de CI o CD, consulte las [instrucciones de instalación del Datadog Agent][3].
+
+**Nota**: Los controladores de dominio no son compatibles al instalar el Datadog Agent con la extensión de Azure.
+
+[1]: /es/getting_started/site/
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: https://app.datadoghq.com/account/settings/agent/latest
+[4]: https://portal.azure.com
+{{% /tab %}}
+
+{{% tab "Extensión del Clúster AKS" %}}
+
+La Datadog AKS Cluster Extension permite desplegar el Datadog Agent de manera nativa dentro de Azure AKS, evitando la complejidad de las herramientas de gestión de terceros. Para instalar el Datadog Agent con la Extensión del Clúster AKS:
+
+1. Vaya a su clúster AKS en el portal de Azure.
+2. Desde la barra lateral izquierda del clúster AKS, seleccione {{< ui >}}Extensions + applications{{< /ui >}} bajo {{< ui >}}Settings{{< /ui >}}.
+3. Busque y seleccione el {{< ui >}}Datadog AKS Cluster Extension{{< /ui >}}.
+4. Haga clic en {{< ui >}}Create{{< /ui >}}, y siga las instrucciones en el mosaico usando sus [credenciales de Datadog][1] y [sitio de Datadog][2].
+
+[1]: /es/account_management/api-app-keys/
+[2]: /es/getting_started/site/
+{{% /tab %}}
+{{< /tabs >}}
+
+## Solución de Problemas {#troubleshooting}
+
+Consulte [Solución de Problemas][16] en la guía de Configuración Avanzada de Azure.
+
+¿Aún necesita ayuda? Contacte a [soporte de Datadog][17].
+
+## Lectura Adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: https://docs.datadoghq.com/es/getting_started/agent/
+[1]: /es/getting_started/agent/
 [2]: https://www.datadoghq.com/
-[3]: https://docs.datadoghq.com/es/getting_started/site/#access-the-datadog-site
-[4]: https://docs.datadoghq.com/es/integrations/guide/azure-manual-setup/?tab=manual#creating-the-app-registration
-[5]: https://learn.microsoft.com/en-us/azure/event-hubs/event-hubs-create
-[6]: https://docs.datadoghq.com/es/integrations/guide/azure-programmatic-management/?tab=windows
-[7]: https://docs.datadoghq.com/es/integrations/guide/azure-manual-setup/?tab=azurecli
-[8]: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/metrics-index
-[9]: https://docs.datadoghq.com/es/integrations/#cat-azure
-[10]: https://docs.datadoghq.com/es/logs/guide/azure-logging-guide/?tab=automatedinstallation
-[11]: https://docs.datadoghq.com/es/integrations/guide/azure-portal/?tab=vmextension#install
-[12]: https://docs.datadoghq.com/es/integrations/guide/azure-portal/?tab=aksclusterextension#install
-[13]: https://docs.datadoghq.com/es/integrations/guide/azure-manual-setup/?tab=vmextension#agent-installation
-[14]: https://docs.datadoghq.com/es/integrations/guide/azure-manual-setup/?tab=aksclusterextension#agent-installation
-[15]: https://docs.datadoghq.com/es/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
-[16]: https://docs.datadoghq.com/es/integrations/guide/azure-troubleshooting/
-[17]: https://docs.datadoghq.com/es/help/
-[18]: https://docs.datadoghq.com/es/logs/guide/azure-native-logging-guide/
+[5]: https://learn.microsoft.com/azure/event-hubs/event-hubs-create
+[8]: https://learn.microsoft.com/azure/azure-monitor/reference/supported-metrics/metrics-index
+[9]: /es/integrations/#cat-azure
+[15]: /es/agent/guide/why-should-i-install-the-agent-on-my-cloud-instances/
+[16]: /es/integrations/guide/azure-advanced-configuration/#azure-integration-troubleshooting
+[17]: /es/help/
+[19]: /es/logs/guide/azure-automated-log-forwarding/
+[20]: https://app.datadoghq.com/integrations/azure
+[21]: https://learn.microsoft.com/cli/azure/ad/sp?view=azure-cli-latest
+[22]: https://developer.hashicorp.com/terraform/language/providers/configuration
+[23]: https://www.terraform.io
+[25]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator
+[26]: https://app.datadoghq.com/monitors/templates?q=Azure%20%22integration%20errors%22&origination=all&p=1
+[27]: /es/monitors/notify/#configure-notifications-and-automations
+[28]: /es/integrations/guide/azure-advanced-configuration/#enable-diagnostics
+[29]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fazuredeploy.json/createUIDefinitionUri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2FcreateUiDefinition.json
+[30]: /es/logs/guide/azure-automated-log-forwarding/#basics
+[31]: /es/logs/guide/azure-automated-log-forwarding/#datadog-configuration
+[32]: /es/logs/guide/azure-automated-log-forwarding/#deployment
+[33]: /es/logs/guide/azure-automated-log-forwarding/#review--create
+[34]: /es/logs/guide/azure-automated-log-forwarding/#architecture
+[35]: /es/integrations/guide/azure-advanced-configuration/#automated-log-collection
+[36]: https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview
+[38]: https://learn.microsoft.com/entra/identity/role-based-access-control/permissions-reference#application-developer
+[39]: https://azure.microsoft.com/services/storage/blobs/
+[40]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-portal
+[41]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-storage-explorer
+[42]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-cli
+[43]: https://docs.microsoft.com/azure/storage/blobs/storage-quickstart-blobs-powershell
+[44]: https://learn.microsoft.com/training/modules/store-app-data-with-azure-blob-storage/
+[45]: https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Web%2Fsites/kind/functionapp
+[46]: https://learn.microsoft.com/azure/azure-functions/functions-bindings-storage-blob-trigger?tabs=python-v2%2Cisolated-process%2Cnodejs-v4%2Cextensionv5&pivots=programming-language-csharp
+[47]: https://learn.microsoft.com/azure/storage/common/storage-configure-connection-string#configure-a-connection-string-for-an-azure-storage-account
+[48]: https://learn.microsoft.com/azure/azure-functions/functions-get-started
+[49]: https://github.com/DataDog/datadog-serverless-functions/blob/master/azure/blobs_logs_monitoring/index.js
+[51]: https://app.datadoghq.com/logs
+[52]: https://portal.azure.com/#create/Microsoft.Template/uri/CustomDeploymentBlade/uri/https%3A%2F%2Fraw.githubusercontent.com%2FDataDog%2Fintegrations-management%2Fmain%2Fazure%2Flogging_install%2Fdist%2Fforwarder.json
+[53]: https://learn.microsoft.com/azure/azure-monitor/platform/diagnostic-settings

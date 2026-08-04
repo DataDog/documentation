@@ -30,7 +30,6 @@ title: Configuración de Cloud Security
 
 Para empezar con Cloud Security, revisa lo siguiente:
 
-- [Información general](#overview)
 - [Activar Agentless Scanning](#enable-agentless-scanning)
 - [Desplegar el Agent para una cobertura adicional](#deploy-the-agent-for-additional-coverage)
 - [Activar funciones adicionales](#enable-additional-features)
@@ -130,3 +129,4 @@ Para obtener información sobre cómo desactivar Cloud Security, consulta lo sig
 [7]: /es/security/cloud_security_management/setup/cloud_accounts
 [8]: /es/security/cloud_security_management/troubleshooting/vulnerabilities/#disable-cloud-security-vulnerabilities
 [9]: /es/security/workload_protection/troubleshooting/threats/#disable-csm-threats
+[10]: /es/security/cloud_security_management/setup/iac_scanning

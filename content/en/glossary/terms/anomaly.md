@@ -1,4 +1,5 @@
 ---
+id: anomaly
 title: anomaly
 core_product:
     - alerts

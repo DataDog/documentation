@@ -46,7 +46,7 @@ The following conditional variables are available:
 | `{{^is_recovery}}`         | The monitor does not recover from `ALERT`, `WARNING`, `UNKNOWN`, or `NO DATA` |
 | `{{#is_warning_recovery}}` | The monitor recovers from `WARNING` to `OK`                        |
 | `{{^is_warning_recovery}}` | The monitor does not recover from `WARNING` to `OK`                |
-| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `OK`                          |
+| `{{#is_alert_recovery}}`   | The monitor recovers from `ALERT` to `WARNING` or `OK`             |
 | `{{^is_alert_recovery}}`   | The monitor does not recover from an ALERT to OK                   |
 | `{{#is_alert_to_warning}}` | The monitor transitions from `ALERT` to `WARNING`                  |
 | `{{^is_alert_to_warning}}` | The monitor does not transition from `ALERT` to `WARNING`          |
@@ -60,7 +60,7 @@ The following conditional variables are available:
 
 ### Examples
 
-Conditional variable must have an opening and closing pair with the text and **@-notifications** in-between.
+Conditional variables must have an opening and closing pair with the text and **@-notifications** in-between. Variables based on monitor state (such as `is_alert` or `is_warning`), must have their own message block. Because a monitor can only be in one state at a time, you cannot combine these. However, you can nest conditionals that match on attributes, see the `is_renotify` examples.
 
 {{< tabs >}}
 {{% tab "is_alert" %}}
@@ -109,7 +109,7 @@ Search for a substring in a [tag variable](#attribute-and-tag-variables) with th
 To notify your DB team if a triggering host has the tag `role:db_cassandra` or `role:db_postgres`, use the following:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -118,7 +118,7 @@ To notify your DB team if a triggering host has the tag `role:db_cassandra` or `
 The `is_match` condition also supports matching multiple strings:
 
 ```text
-{{#is_match "role.name" "db" "database"}}
+{{#is_match "host.role.name" "db" "database"}}
   This displays if the host triggering the alert contains `db` or `database`
   in the role name. @db-team@company.com
 {{/is_match}}
@@ -127,7 +127,7 @@ The `is_match` condition also supports matching multiple strings:
 To send a different notification if the tag doesn't contain `db`, use the negation of the condition as follows:
 
 ```text
-{{^is_match "role.name" "db"}}
+{{^is_match "host.role.name" "db"}}
   This displays if the role tag doesn't contain `db`.
   @slack-example
 {{/is_match}}
@@ -136,7 +136,7 @@ To send a different notification if the tag doesn't contain `db`, use the negati
 Or use the `{{else}}` parameter in the first example:
 
 ```text
-{{#is_match "role.name" "db"}}
+{{#is_match "host.role.name" "db"}}
   This displays if the host triggering the alert contains `db`
   in the role name. @db-team@company.com
 {{else}}
@@ -240,9 +240,10 @@ This is the escalation message @dev-team@company.com
 ```
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
-If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, it is recommended to configure a corresponding `recovery` condition in order for a recovery notification to be sent to the handle.
+If you configure a conditional block for a state transition into `alert` or `warning` conditions with an **@-notifications** handle, Datadog recommends that you configure a corresponding `recovery` condition to send a recovery notification to the handle.
 
 **Note**: Any text or notification handle placed **outside** the configured conditional variables is invoked with every monitor state transition. Any text or notification handle placed **inside** of configured conditional variables is only invoked if the monitor state transition matches its condition.
 
@@ -314,7 +315,7 @@ If your facet has periods, use brackets around the facet, for example:
 
 #### Customize the notification based on the group
 
-When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click **Use message template variables** in the **Configure notifications & automations** section. See the following examples:
+When your query is grouped by specific dimensions, you can enrich notifications with dynamic metadata associated with the group. To see a list of tag variables based on your tag selection, click {{< ui >}}Use message template variables{{< /ui >}} in the {{< ui >}}Configure notifications & automations{{< /ui >}} section. See the following examples:
 
 {{% collapse-content title="Query group by host" level="h5" %}}
 
@@ -363,7 +364,7 @@ The following table contains all available attributes:
 
 {{% collapse-content title="Query group by service" level="h5" %}}
 
-If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Software Catalog][10].
+If your monitor triggers an alert for each `service`, then you can access some attribute of the service, as defined in the [Catalog][10].
 
 Service metadata variables:
 
@@ -379,11 +380,43 @@ For Docs and Links you can also access a specific item with the following syntax
 ```
 {{% /collapse-content %}}
 
+
+{{% collapse-content title="Query group by device_ip and device_namespace" level="h5" %}}
+
+If your monitor triggers an alert for each `device_ip` and `device_namespace`, then you can access any attribute of the network device.
+
+Network device metadata variables:
+- Canonical ID: `{{network_device.canonical_id}}`
+- Description: `{{network_device.description}}`
+- Device type: `{{network_device.device_type}}`
+- Device ID: `{{network_device.device_id}}`
+- ID tags: `{{network_device.id_tags}}`
+- Integrations: `{{network_device.integrations}}`
+- IP address: `{{network_device.ip_address}}`
+- location: `{{network_device.location}}`
+- model: `{{network_device.model}}`
+- name: `{{network_device.name}}`
+- namespace: `{{network_device.namespace}}`
+- OS hostname: `{{network_device.os_hostname}}`
+- OS name: `{{network_device.os_name}}`
+- OS version: `{{network_device.os_version}}`
+- Ping status: `{{network_device.ping_status}}`
+- Product name: `{{network_device.product_name}}`
+- Profile: `{{network_device.profile}}`
+- Serial number: `{{network_device.serial_number}}`
+- Status: `{{network_device.status}}`
+- Subnet: `{{network_device.subnet}}`
+- Sys object ID: `{{network_device.sys_object_id}}`
+- Tags: `{{network_device.tags}}`
+- Vendor: `{{network_device.vendor}}`
+- Version: `{{network_device.version}}`
+{{% /collapse-content %}}
+
 ### Matching attribute/tag variables
 
 You can include any attribute or tag from a log, trace span, RUM event, CI pipeline, or CI test event that matches the monitor query. The following table shows examples of attributes and variables you can add from different monitor types.
 
-<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click <strong>{{&nbsp;Add Variable</strong> and select from the expanded menu options.</div>
+<div class="alert alert-info">To see the full list of available variables for your monitor, at the bottom of your notification configuration click {{< ui >}}{{ Add Variable{{< /ui >}} and select from the expanded menu options.</div>
 
 | Monitor type             | Variable syntax                                         |
 |--------------------------|--------------------------------------------------------|
@@ -474,7 +507,27 @@ For instance, assume your composite monitor has a sub-monitor `a`, which is a Lo
 
 ### Character escape
 
-Variable content is escaped by default. To prevent content such as JSON or code from being escaped, use triple braces instead of double braces, for example: `{{{event.text}}}`.
+Variable content is HTML-encoded by default. To output raw, unencoded content, use triple curly braces instead of double curly braces.
+
+For example, when a variable's value contains a URL with query parameters, the `&` is treated differently depending on whether double or triple braces are used:
+
+| Syntax | Example output |
+--------|----------------|
+| `{{template_variable}}` (double braces) | `https://status.example.com/check?service=web&amp;region=us-east` |
+| `{{{template_variable}}}` (triple braces) | `https://status.example.com/check?service=web&region=us-east` |
+
+| Syntax | Output |
+|--------|--------|
+| `{{variable}}` | HTML-encoded (default) |
+| `{{{variable}}}` | Raw, unencoded |
+
+For example, to render the check message without HTML encoding:
+
+```text
+{{{check_message}}}
+```
+
+This is particularly relevant when `{{check_message}}` contains auto-generated URLs with query parameters (for example, on HTTP Check monitors). The `&` characters in those URLs are HTML-encoded by default, which can break clickable links in notifications. Use `{{{check_message}}}` to preserve the URLs as-is.
 
 ## Template variables
 
@@ -554,7 +607,7 @@ To avoid missed notifications when using dynamic handles with these variables, m
 {{#is_exact_match "kube_namespace.owner" ""}}
   @slack-example
   // This will notify @slack-example if the kube_namespace.owner variable is empty or does not exist.
-{{/is_match}}
+{{/is_exact_match}}
 ```
 
 
@@ -684,7 +737,7 @@ If `host.name` matches `<HOST_NAME>`, the template outputs:
 
 If your alert message includes information that needs to be encoded in a URL (for example, for redirections), use the `{{ urlencode "<variable>"}}` syntax.
 
-**Example**: If your monitor message includes a URL to the Software Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
+**Example**: If your monitor message includes a URL to the Catalog filtered to a specific service, use the `service` [tag variable](#attribute-and-tag-variables) and add the `{{ urlencode "<variable>"}}` syntax to the URL:
 
 ```
 https://app.datadoghq.com/services/{{urlencode "service.name"}}
@@ -703,8 +756,8 @@ https://app.datadoghq.com/services/{{urlencode "service.name"}}
 [7]: /monitors/guide/template-variable-evaluation/
 [8]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 [9]: /monitors/types/error_tracking/
-[10]: /software_catalog/service_definitions/
-[11]: https://docs.datadoghq.com/software_catalog/service_definitions/v2-2/#example-yaml
+[10]: /internal_developer_portal/catalog/entity_model/
+[11]: https://docs.datadoghq.com/internal_developer_portal/catalog/entity_model/
 [12]: /monitors/types/log/
 [13]: /monitors/types/apm/?tab=analytics
 [14]: /monitors/types/error_tracking/

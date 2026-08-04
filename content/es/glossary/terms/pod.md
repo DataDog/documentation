@@ -1,4 +1,5 @@
 ---
+id: pod
 core_product:
 - monitorización de la infraestructura
 title: Pod

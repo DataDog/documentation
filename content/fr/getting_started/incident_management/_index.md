@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#utilisation-des-incidents-datadog
   tag: Documentation
   text: Intégration de Slack avec les incidents
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: Blog
-  text: Une programmation en binôme plus efficace avec Datadog CoScreen
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Pratiques recommandées pour la création de post-mortems d'incident
@@ -185,7 +182,7 @@ Grâce à l'[application mobile Datadog][12], disponible sur l'[App Store d'App
 
 Vous avez également la possibilité de déclarer et de modifier des incidents, ainsi que d'échanger rapidement avec vos équipes via les intégrations Slack, Zoom, et plus encore.
 
-{{< img src="service_management/incidents/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors sur l'application mobile">}}
+{{< img src="incident_response/incident_management/incidents-list-mobile.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Monitors sur l'application mobile">}}
 
 ## Pour aller plus loin
 

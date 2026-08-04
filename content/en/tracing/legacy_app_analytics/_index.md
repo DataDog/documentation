@@ -15,7 +15,7 @@ This page describes deprecated features with configuration information relevant 
 
 Navigate to the [ingestion control page][1] to see services with legacy configurations. These are flagged with a `Legacy Setup` status.
 
-To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and tracing libraries' [sampling mechanisms][2] to send traces.
+To migrate to the new configuration options, remove all legacy App Analytics [configuration options](#app-analytics-setup) from the services flagged with `Legacy Setup`. Then, implement the Datadog Agent and SDKs' [sampling mechanisms][2] to send traces.
 
 ## App Analytics setup
 
@@ -163,7 +163,7 @@ Use this in addition to the global configuration for any integrations that submi
 * Tracer Configuration: `ddtrace.config.boto.analytics_enabled = True`
 * Environment Variable: `DD_BOTO_ANALYTICS_ENABLED=true`
 
-**Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the tracer. Consult the library documentation on [App Analytics][1] for details.
+**Note**: Several integrations require non-standard configuration due to the integration-specific implementation of the SDK. Consult the library documentation on [App Analytics][1] for details.
 
 [1]: https://ddtrace.readthedocs.io/en/stable/advanced_usage.html#trace_search_analytics
 {{< /programming-lang >}}

@@ -40,11 +40,17 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/content-anomaly-detection-cloud-siem/"
   tag: "Blog"
   text: "Detect anomalies beyond spikes and new values with Content Anomaly Detection in Cloud SIEM"
+- link: "https://learn.datadoghq.com/courses/cloud-siem-custom-rules"
+  tag: "Learning Center"
+  text: "Write Custom Cloud SIEM Detection Rules"
+
 ---
 
 ## Overview
 
 Out-of-the-box detection rules help you cover the majority of threat scenarios, but you can also create custom detection rules for your specific use cases. See [Create Rule][1] for instructions on how to create a custom rule.
+
+{{< img src="security/security_monitoring/detection_rules/custom_detection_rules_ui.png" alt="The create a rule page showing the detection types and methods you can create" style="width:100%;" >}}
 
 ## Rule types
 
@@ -85,12 +91,11 @@ Use unit testing to test your rules against sample logs and make sure the detect
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/create_rule/real_time_rule/
-[2]: https://app.datadoghq.com/security/rules
+[2]: https://app.datadoghq.com/security/siem/rules
 [3]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/threshold/
 [4]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/new_value/
 [5]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/anomaly/
 [6]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/content_anomaly/
 [7]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/impossible_travel/
 [8]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/third_party/
-[9]: /security/cloud_siem/detect_and_monitor/custom_detection_rules/signal_correlation_rules/
 [10]: /integrations/guide/reference-tables/

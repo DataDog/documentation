@@ -1,4 +1,5 @@
 ---
+id: job_log
 core_product:
 - ci-cd
 - 로그 관리

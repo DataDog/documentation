@@ -43,6 +43,7 @@
       },
       "category": "change",
       "integration_id": "custom-events",
+      "host": "test-host",
       "message": "payment_processed feature flag has been enabled",
       "tags": [
         "env:api_client_test"

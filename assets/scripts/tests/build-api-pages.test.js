@@ -1,4 +1,7 @@
 import * as bp from '../build-api-pages';
+import fs from 'fs';
+import yaml from 'js-yaml';
+import $RefParser from '@apidevtools/json-schema-ref-parser';
 
 describe(`updateMenu`, () => {
 
@@ -9,6 +12,72 @@ describe(`updateMenu`, () => {
 describe(`createPages`, () => {
 
 
+
+});
+
+describe(`createEndpointPages`, () => {
+
+  let writeSpy;
+  let mkdirSpy;
+  let logSpy;
+
+  beforeEach(() => {
+    writeSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+    mkdirSpy = jest.spyOn(fs, 'mkdirSync').mockImplementation(() => {});
+    logSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    writeSpy.mockRestore();
+    mkdirSpy.mockRestore();
+    logSpy.mockRestore();
+  });
+
+  const buildSpec = (operations) => ({
+    tags: [{name: 'Action Connection', description: 'Action Connection endpoints'}],
+    paths: operations.reduce((acc, op) => {
+      acc[op.path] = {[op.method]: {
+        operationId: op.operationId,
+        summary: op.summary,
+        tags: ['Action Connection'],
+      }};
+      return acc;
+    }, {}),
+  });
+
+  it('writes one index.md per endpoint under content/en/api/latest/', () => {
+    const specData = [
+      buildSpec([
+        {path: '/api/v2/actions/connections', method: 'post', operationId: 'CreateActionConnection', summary: 'Create an action connection'},
+      ]),
+    ];
+    const specs = ['./data/api/v2/full_spec.yaml'];
+
+    bp.createEndpointPages(specData, specs);
+
+    const writes = writeSpy.mock.calls.map(([path]) => path);
+    expect(writes).toEqual([
+      './content/en/api/latest/action-connection/create-an-action-connection/index.md',
+    ]);
+  });
+
+  it('shared v1+v2 endpoints (same summary) produce one page with both versions', () => {
+    const specData = [
+      buildSpec([
+        {path: '/api/v1/foo', method: 'get', operationId: 'ListFoosV1', summary: 'List foos'},
+      ]),
+      buildSpec([
+        {path: '/api/v2/foo', method: 'get', operationId: 'ListFoosV2', summary: 'List foos'},
+      ]),
+    ];
+    const specs = ['./data/api/v1/full_spec.yaml', './data/api/v2/full_spec.yaml'];
+
+    bp.createEndpointPages(specData, specs);
+
+    expect(writeSpy.mock.calls).toHaveLength(1);
+    const [path] = writeSpy.mock.calls[0];
+    expect(path).toBe('./content/en/api/latest/action-connection/list-foos/index.md');
+  });
 
 });
 
@@ -2489,7 +2558,7 @@ describe(`fieldColumn`, () => {
 
   const emptyResult = `
     <div class="col-4 column">
-      <p class="key"></p>
+      <p class="key table-cell"></p>
     </div>
   `.trim();
 
@@ -2507,7 +2576,7 @@ describe(`typeColumn`, () => {
   it('should show type value', () => {
     const obj = {description: ""};
     const actual = bp.typeColumn("type", "array", "");
-    const expected = `<div class="col-2 column"><p>array</p></div>`;
+    const expected = `<div class="col-2 column"><p class="table-cell">array</p></div>`;
     expect(actual).toEqual(expected);
   });
 
@@ -2538,7 +2607,7 @@ describe(`descColumn`, () => {
     const obj = "TODO";
     const key = "description";
     const actual = bp.descColumn(key, obj);
-    const expected = '<div class="col-6 column"><p>TODO</p></div>';
+    const expected = '<div class="col-6 column"><p class="table-cell">TODO</p></div>';
     expect(actual).toEqual(expected);
   });
 
@@ -2740,6 +2809,27 @@ describe(`schemaTable`, () => {
         </div>
       </div>`.trim();
     expect(actual).toEqual(expected);
+  });
+
+});
+
+describe(`getBestDiscriminant`, () => {
+
+  let schemas;
+  beforeAll(async () => {
+    const spec = yaml.safeLoad(fs.readFileSync('./data/api/v1/full_spec.yaml', 'utf8'));
+    const deref = await $RefParser.dereference(spec, { resolve: { external: false } });
+    schemas = deref.components.schemas;
+  });
+
+  it('discriminates WidgetDefinition on `type`', () => {
+    expect(bp.getBestDiscriminant(schemas.WidgetDefinition.oneOf)).toEqual('type');
+  });
+
+  it('discriminates timeseries requests[].queries[] on `data_source`', () => {
+    const queries = schemas.TimeseriesWidgetRequest.properties.queries.items;
+    expect(queries).toBe(schemas.FormulaAndFunctionQueryDefinition);
+    expect(bp.getBestDiscriminant(queries.oneOf)).toEqual('data_source');
   });
 
 });

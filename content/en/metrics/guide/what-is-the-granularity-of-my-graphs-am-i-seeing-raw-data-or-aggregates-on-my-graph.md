@@ -1,5 +1,6 @@
 ---
 title: What is the granularity of my graphs? Am I seeing raw data or aggregates on my graph?
+description: "Understand how Datadog rolls up metric data into aggregated buckets to render graphs across long time windows."
 aliases:
     - /graphing/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph
     - /dashboards/faq/what-is-the-granularity-of-my-graphs-am-i-seeing-raw-data-or-aggregates-on-my-graph

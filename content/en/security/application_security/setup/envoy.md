@@ -5,7 +5,8 @@ code_lang_weight: 50
 aliases:
   - /security/application_security/threats/setup/threat_detection/envoy
   - /security/application_security/threats_detection/envoy
-  - /security/application_security/setup/threat_detection/envoy/
+  - /security/application_security/setup/threat_detection/envoy
+  - /security/application_security/setup/standalone/envoy
 further_reading:
     - link: 'https://github.com/DataDog/dd-trace-go/tree/main/contrib/envoyproxy/go-control-plane/cmd/serviceextensions'
       tag: "Source Code"
@@ -18,9 +19,11 @@ further_reading:
       text: "Troubleshooting App and API Protection"
 ---
 
-{{< callout url="#" btn_hidden="true" header="App and API Protection for Envoy is in Preview" >}}
-To try the preview of App and API Protection for Envoy, use the following setup instructions.
-{{< /callout >}}
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
 
 You can enable App and API Protection for the Envoy proxy. The Datadog Envoy integration has support for threat detection and blocking.
 
@@ -153,7 +156,7 @@ The App and API Protection Envoy integration uses the Envoy external processing 
 
 ## Datadog Go Tracer and Envoy integration
 
-The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all of its environment variables. See [Configuring the Go Tracing Library][7] and [App and API Protection Library Configuration][8].
+The External Processor is built on top of the [Datadog Go Tracer][6] and inherits all environment variables from the tracer. See [Configuring the Go SDK][7] and [App and API Protection Library Configuration][8].
 
 <div class="alert alert-info">
   <strong>Note:</strong> As the Datadog External Processor is built on top of the Datadog Go Tracer, it generally follows the same release process as the tracer, and its Docker images are tagged with the corresponding tracer version (for example, <code>v2.2.2</code>). In some cases, early release versions might be published between official tracer releases, and these images are tagged with a suffix such as <code>-docker.1</code>.

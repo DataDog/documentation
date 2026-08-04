@@ -4,7 +4,7 @@ title: Azure Table 구성 요소
 
 ## 개요
 
-Azure Table 구성 요소를 사용해 Azure 환경에서 NoSQL 키값 스토어를 표현할 수 있습니다.
+Azure Table 구성 요소를 사용해 Azure 환경에서 NoSQL 키-값 스토어를 표현 및 시각화할 수 있습니다.
 
 {{< img src="cloudcraft/components-azure/azure-table/component-azure-table-diagram.png" alt="상호 연결된 Azure 구성 요소를 보여주는 등축도법 Cloudcraft 다이어그램 스크린샷" responsive="true" style="width:60%;">}}
 
@@ -46,7 +46,7 @@ Azure Table 구성 요소를 사용해 Azure 환경에서 NoSQL 키값 스토어
 ```
 
 - **type: string**: 구성 요소 유형. 이 구성 요소의 `azuretable` 값 문자열이어야 합니다.
-- **id: string, uuid**: 구성 요소의 고유 식별자입니다. API에서는 내부적으로 UUID v4를 사용하나 다른 고유 식별자도 사용할 수 있습니다/
+- **id: string, uuid**: 구성 요소의 고유 식별자입니다. API에서는 내부적으로 UUID v4를 사용하나 다른 고유 식별자도 사용할 수 있습니다.
 - **resourceId: string**: Azure 구성 요소 내 전역 고유 식별자
 - **region: string**: 구성 요소의 Azure 리전. API가 중국을 제외한 전역 리전을 지원합니다.
 - **mapPos: array**: 청사진에 있는 구성 요소 포지션. API에서는 포지션을 표현하기 위해 고유 X와 Y 좌표 쌍을 사용합니다.

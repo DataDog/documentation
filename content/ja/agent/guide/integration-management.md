@@ -2,6 +2,8 @@
 algolia:
   tags:
   - インテグレーション管理
+description: datadog-agent integration コマンドを使用して公式 Datadog インテグレーションを管理するためのガイドで、install、remove、show、freeze
+  操作などについて説明します。
 title: インテグレーション管理
 ---
 
@@ -9,7 +11,7 @@ title: インテグレーション管理
 
 Agent には Datadog インテグレーションの公式セットが付属しているため、ユーザーはアプリケーションの監視をすぐに開始できます。これらのインテグレーションは、それぞれ Python パッケージとして用意され、個別にアップグレードできます。
 
-**注**: コミュニティ、パートナー、および Marketplace インテグレーションは、Agent のアップグレード時に保持されません。Agent のバージョンアップ時にこれらのインテグレーションを再インストールする必要があります。
+**注**: Agent version 7.69 以降では、Community、Partner、Marketplace の各インテグレーションは、アップグレード時に自動的に保持されます。この動作を無効にするには、アップグレードの前に `/etc/datadog-agent/` ディレクトリ内に `.skip_install_python_third_party_deps` という空のファイルを作成してください。このファイルが存在する場合、インテグレーションは保持されず、アップグレード後に手動で再インストールする必要があります。
 
 Agent v6.8 以降では、`datadog-agent integration` コマンドを使用して、Agent で使用できる公式 Datadog インテグレーションを管理できます。このコマンドには、次のサブコマンドがあります。
 

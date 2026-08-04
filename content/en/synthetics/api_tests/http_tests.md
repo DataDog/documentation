@@ -42,28 +42,28 @@ You may create a test using one of the following options:
 
    - **Create a test from a template**:
    
-     1. Hover over one of the pre-populated templates and click **View Template**. This opens a side panel displaying pre-populated configuration information, including: Test Details, Request Details, Assertions, Alert Conditions, and Monitor Settings. 
-     2. Click **+Create Test** to open the **Define Request** page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
-     3. Click **Save Details** to submit your API test. <br /><br>
+     1. Hover over one of the pre-populated templates and click {{< ui >}}View Template{{< /ui >}}. This opens a side panel displaying pre-populated configuration information, including: {{< ui >}}Test Details{{< /ui >}}, {{< ui >}}Request Details{{< /ui >}}, {{< ui >}}Assertions{{< /ui >}}, {{< ui >}}Alert Conditions{{< /ui >}}, and {{< ui >}}Monitor Settings{{< /ui >}}. 
+     2. Click {{< ui >}}+Create Test{{< /ui >}} to open the {{< ui >}}Define Request{{< /ui >}} page, where you can review and edit the pre-populated configuration options. The fields presented are identical to those available when creating a test from scratch.
+     3. Click {{< ui >}}Save Details{{< /ui >}} to submit your API test. <br /><br>
 
         {{< img src="getting_started/synthetics/synthetics_templates_api_video.mp4" alt="Video of Synthetics API test landing page with templates" video="true" >}}
 
   - **Build a test from scratch**:
     
-     1. To build a test from scratch, click the **+ Start from scratch** template, then select the `HTTP` request type and specify the **URL** to query. 
+     1. To build a test from scratch, click the {{< ui >}}+ Start from scratch{{< /ui >}} template, then select the `HTTP` request type and specify the {{< ui >}}URL{{< /ui >}} to query. 
         Available methods are: `GET`, `POST`, `PATCH`, `PUT`, `HEAD`, `DELETE`, and `OPTIONS`. Both `http` and `https` URLs are supported.
 
         <div class="alert alert-info">See <a href=#advanced-options>Advanced options</a> for more options.</div>
 
-     2. **Name** your HTTP test.
+     2. {{< ui >}}Name{{< /ui >}} your HTTP test.
 
-     3. Add Environment **Tags** as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
+     3. Add Environment {{< ui >}}Tags{{< /ui >}} as well as any other tag to your HTTP test. You can then use these tags to filter through your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][3]. 
      
-     4. Click **Send** to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
+     4. Click {{< ui >}}Send{{< /ui >}} to try out the request configuration. A response preview is displayed on the right side of your screen.<br /><br>
 
        {{< img src="getting_started/synthetics/api-test-config-4.png" alt="Define HTTP request" style="width:90%;" >}}
 
-     5. Click **Create Test** to submit your API test.
+     5. Click {{< ui >}}Create Test{{< /ui >}} to submit your API test.
 
 ### Snippets
 
@@ -74,43 +74,51 @@ You may create a test using one of the following options:
    {{< tabs >}}
 
    {{% tab "Request Options" %}}
-   * **HTTP version**: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
-   * **Follow redirects**: Select to have your HTTP test follow up to ten redirects when performing the request.
-   * **Ignore server certificate error**: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
-   * **Timeout**: Specify the amount of time in seconds before the test times out.
-   * **Request headers**: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
-   * **Cookies**: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+   * {{< ui >}}HTTP version{{< /ui >}}: Select `HTTP/1.1 only`, `HTTP/2 only`, or `HTTP/2 fallback to HTTP/1.1`.
+
+     For endpoints fronted by a CDN (such as Akamai, CloudFront, or Fastly), set the HTTP version to `HTTP/2 only` or `HTTP/1.1 only` instead of the default `HTTP/2 with fallback to HTTP/1.1`. HTTP version support varies between probes, and the default setting can cause intermittent [HTTP errors][1] such as:
+     - `MALFORMED_RESPONSE: Unable to parse HTTP response`
+     - `Session closed without receiving a SETTINGS frame`
+     - `Error HTTP2: Error performing HTTP/2 request`
+   * {{< ui >}}Follow redirects{{< /ui >}}: Select to have your HTTP test follow up to ten redirects when performing the request.
+   * {{< ui >}}Ignore server certificate error{{< /ui >}}: Select to have your HTTP test go on with connection even if there are errors when validating the SSL certificate.
+   * {{< ui >}}Timeout{{< /ui >}}: Specify the amount of time in seconds before the test times out.
+   * {{< ui >}}Request headers{{< /ui >}}: Define headers to add to your HTTP request. You can also override the default headers (for example, the `user-agent` header).
+   * {{< ui >}}Cookies{{< /ui >}}: Define cookies to add to your HTTP request. Set multiple cookies using the format `<COOKIE_NAME1>=<COOKIE_VALUE1>; <COOKIE_NAME2>=<COOKIE_VALUE2>`.
+
+[1]: /synthetics/api_tests/errors/#http-errors
 
    {{% /tab %}}
 
    {{% tab "Authentication" %}}
 
-   * **Client Certificate**: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
+   * {{< ui >}}Client Certificate{{< /ui >}}: Authenticate through mTLS by uploading your client certificate (`.crt`) and the associated private key (`.key`) in `PEM` format. You can use the `openssl` library to convert your certificates. For example, convert a `PKCS12` certificate to `PEM` formatted private keys and certificates.
 
       ```
       openssl pkcs12 -in <CERT>.p12 -out <CERT_KEY>.key -nodes -nocerts
       openssl pkcs12 -in <CERT>.p12 -out <CERT>.cert -nokeys
       ```
 
-   * **HTTP Basic Auth**: Add HTTP basic authentication credentials.
-   * **Digest Auth**: Add Digest authentication credentials.
-   * **NTLM**: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
-   * **AWS Signature v4**: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.
+   * {{< ui >}}HTTP Basic Auth{{< /ui >}}: Add HTTP basic authentication credentials.
+   * {{< ui >}}Digest Auth{{< /ui >}}: Add Digest authentication credentials.
+   * {{< ui >}}NTLM{{< /ui >}}: Add NTLM authentication credentials. Support both NTLMv2 and NTLMv1.
+   * {{< ui >}}AWS Signature v4{{< /ui >}}: Enter your Access Key ID and Secret Access Key. Datadog generates the signature for your request. This option uses the basic implementation of SigV4. Specific signatures such as Amazon S3 are not supported out-of-the box.
      For "Single Chunk" transfer requests to Amazon S3 buckets, add `x-amz-content-sha256` containing the sha256-encoded body of the request as a header (for an empty body: `x-amz-content-sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`).
-   * **OAuth 2.0**: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected **Resource Owner Password**).
+   * {{< ui >}}OAuth 2.0{{< /ui >}}: Choose between granting client credentials or a resource owner password and enter an access token URL. Depending on your selection, enter a client ID and secret, or a username and password. From the dropdown menu, select an option to either send the API token as a basic authentication header, or send the client credentials in the body. Optionally, you can provide additional information such as the audience, resource, and scope (as well as the client ID and secret, if you selected {{< ui >}}Resource Owner Password{{< /ui >}}).
+   * {{< ui >}}JWT{{< /ui >}}: Generate a signed JWT Bearer Token for authentication. Select a signing algorithm (`HS256`, `RS256`, or `ES256`) and provide a signing key: enter a text secret for `HS256`, or upload a PEM-formatted private key for `RS256` and `ES256`. Both accept `{{ GLOBAL_VARIABLE }}` references. Enter payload claims as a JSON object; claims can be strings, numbers, Booleans, arrays, or nested objects. The `iat` (issued at) and `exp` (expiration) claims are auto-added by default. If you include `iat` or `exp` in the payload JSON, those values take precedence over the auto-generated ones. Optionally, set the expiration window in seconds (default: `3600`), add custom JWT header fields such as `kid` or `x5t`, and customize the token prefix in the `Authorization` header (default: `Bearer`).
 
    {{% /tab %}}
 
    {{% tab "Query Parameters" %}}
 
-   * **Encode parameters**: Add the name and value of query parameters that require encoding.
+   * {{< ui >}}Encode parameters{{< /ui >}}: Add the name and value of query parameters that require encoding.
 
    {{% /tab %}}
 
    {{% tab "Request Body" %}}
 
-   * **Body type**: Select the type of the request body (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL`, or `None`) you want to add to your HTTP request.
-   * **Request body**: Add the content of your HTTP request body.
+   * {{< ui >}}Body type{{< /ui >}}: Select the type of the request body (`application/json`, `application/octet-stream`, `application/x-www-form-urlencoded`, `multipart/form-data`, `text/html`, `text/plain`, `text/xml`, `GraphQL`, or `None`) you want to add to your HTTP request.
+   * {{< ui >}}Request body{{< /ui >}}: Add the content of your HTTP request body.
        * The request body is limited to a maximum size of 50 kilobytes for `application/json`, `application/x-www-form-urlencoded`, `text/html`, `text/plain`, `text/xml`, `GraphQL`.
        * The request body is limited to one file of 3 megabytes for `application/octet-stream`.
        * The request body is limited to three files of 3 megabytes each for `multipart/form-data`.
@@ -118,14 +126,14 @@ You may create a test using one of the following options:
 
    {{% tab "Proxy" %}}
 
-   * **Proxy URL**: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
-   * **Proxy header**: Add headers to include in the HTTP request to the proxy.
+   * {{< ui >}}Proxy URL{{< /ui >}}: Specify the URL of the proxy the HTTP request should go through (`http://<YOUR_USER>:<YOUR_PWD>@<YOUR_IP>:<YOUR_PORT>`).
+   * {{< ui >}}Proxy header{{< /ui >}}: Add headers to include in the HTTP request to the proxy.
 
    {{% /tab %}}
 
    {{% tab "Privacy" %}}
 
-   * **Do not save response body**: Select this option to prevent response body from being saved at runtime. This can be helpful to ensure no sensitive data gets featured in your test results. Use mindfully as it can make failures troubleshooting more difficult. For more security recommendations, see [Synthetic Monitoring Security][1].
+   * {{< ui >}}Do not save response body{{< /ui >}}: Select this option to prevent the response body from being saved at runtime and to truncate the error message of failed JavaScript assertions. This helps ensure no sensitive data is displayed in your test results, but it can make failure troubleshooting more difficult. For full security recommendations, see [Synthetic Monitoring Data Security][1].
 
 
 [1]: /data_security/synthetics
@@ -145,30 +153,163 @@ Define variables for your HTTP API tests with JavaScript:
 
 ### Define assertions
 
-Assertions define what an expected test result is. After you click **Test URL**, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+Assertions define what an expected test result is. After you click {{< ui >}}Test URL{{< /ui >}}, basic assertions on `response time`, `status code`, and `header` `content-type` are added based on the response that was obtained. You must define at least one assertion for your test to monitor.
+
+<div class="alert alert-info">The assertions header, body, and JavaScript sections are only for defining assertions. They cannot be used to make additional HTTP requests.</div>
+
+{{< tabs >}}
+{{% tab "Response Assertions" %}}
 
 | Type          | Operator                                                                                               | Value type                                                      |
 |---------------|--------------------------------------------------------------------------------------------------------|----------------------------------------------------------------|
-| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5] | _String_ <br> _[Regex][6]_ |
-| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`                       | _String_ <br> _[Regex][6]_                                      |
+| body          | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> [`jsonpath`][4], [`xpath`][5], <br> [`jsonschema`][7] | _String_ <br> _[Regex][6]_ <br> _String_, _[Regex][6]_ <br> _String_ |
+| body hash     | `md5`, `sha1`, `sha256`                                                                                 | _String_                                                        |
+| header        | `contains`, `does not contain`, `is`, `is not`, <br> `matches`, `does not match`, <br> `does not exist`, <br> `is less than`, `is less than or equal`, `is more than`, `is more than or equal` | _String_ <br> _[Regex][6]_ <br> _None_ <br> _Integer_ |
 | response time | `is less than`                                                                                         | _Integer (ms)_                                                  |
 | status code   | `is`, `is not`, <br> `matches`, `does not match`                                                                                         | _Integer_ <br> _[Regex][6]_                                                     |
 
 HTTP tests can decompress bodies with the following `content-encoding` headers: `br`, `deflate`, `gzip`, and `identity`.
 
-You can create up to 20 assertions per API test by clicking **New Assertion** or by clicking directly on the response preview:
+You can create up to 20 assertions per API test by clicking {{< ui >}}New Assertion{{< /ui >}} or by clicking directly on the response preview:
 
 {{< img src="synthetics/api_tests/assertions_http.png" alt="Define assertions for your HTTP test to succeed or fail on" style="width:90%;" >}}
 
-To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion.
+To perform `OR` logic in an assertion, use the `matches regex` comparator to define a regex with multiple expected values like `(200|302)`. For example, you may want your HTTP test to succeed when a server must respond with a `200` or `302` status code. The `status code` assertion succeeds if the status code is 200 or 302. You can also add `OR` logic on a `body` or `header` assertion with the `matches regex` comparator.
 
 If a test does not contain an assertion on the response body, the body payload drops and returns an associated response time for the request within the timeout limit set by the Synthetics Worker.
 
+The response body is only returned if you have added assertions on its content and these assertions have failed. If a test contains an assertion on the response body and succeeds, the body payload drops and only a snippet of the first 50 characters of the response body is shown.
+
 If a test contains an assertion on the response body and the timeout limit is reached, an `Assertions on the body/response cannot be run beyond this limit` error appears.
+
+[4]: https://restfulapi.net/json-jsonpath/
+[5]: https://www.w3schools.com/xml/xpath_syntax.asp
+[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+[7]: https://json-schema.org/
+
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+
+Use JavaScript assertions when standard response assertions don't meet your validation needs. Synthetic Monitoring uses the [Chai assertion library][20], which provides `dd.expect()`, `dd.should`, and `dd.assert()` for flexible assertion styles.
+
+When working with JSON responses, use `JSON.parse(dd.response.body)` to parse the response body before accessing its properties. This is required for all assertion methods (`dd.assert()`, `dd.expect()`, and `dd.should`) when validating JSON data.
+
+{{< img src="synthetics/api_tests/JS_assertion.png" alt="JavaScript assertion for HTTP API test" style="width:90%;" >}}
+
+<div class="alert alert-info">
+  <ul>
+    <li>JavaScript capabilities are not supported for API tests in Windows private locations.</li>
+    <li>If a failed JavaScript assertion's error message might include sensitive data, under {{< ui >}}Advanced Options{{< /ui >}} > {{< ui >}}Privacy{{< /ui >}}, enable {{< ui >}}Do not save response body{{< /ui >}}. This truncates the assertion error message.</li>
+  </ul>
+</div>
+
+#### Using dd.assert()
+
+Use `dd.assert()` for traditional assertion syntax:
+
+For example, to assert that a `status.code` field is one of several allowed values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+// Assert that the status code is 200, 210, 320, or 330
+dd.assert.include([200, 210, 320, 330], response.status.code);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "code": 200,
+    "message": "Success"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Checks that `status.code` is included in the array of allowed values (200, 210, 320, or 330)
+
+The test **passes** because `status.code` is `200`, which is included in the allowed values array.
+
+For more information on `assert.include()`, see the [Chai assert.include() documentation][21].
+
+#### Using dd.expect()
+
+Use `dd.expect()` for assertions with nested property validation.
+
+For example, to assert that a `status.indicator` field matches one of several expected values:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+const regex = /^(major|critical|minor|none)$/;
+
+dd.expect(response)
+  .to.have.nested.property('status.indicator')
+  .that.matches(regex);
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+This assertion:
+- Parses the JSON response body
+- Validates that the nested property `status.indicator` exists
+- Checks that the value matches the regex pattern (one of: `major`, `critical`, `minor`, or `none`)
+
+With the regex `/^(major|critical|minor|none)$/`, the test **passes** because `status.indicator` is `"none"`, which matches the pattern.
+
+With the regex `/^(major|critical|minor)$/`, the test **fails** because `"none"` is not included in the allowed values.
+
+For more information on `expect()`, see the [Chai expect() documentation][22].
+
+#### Using dd.should
+
+Use `dd.should` to write assertions with natural language syntax:
+
+For example, to assert that a `status.indicator` field exists and equals a specific value:
+
+{{< code-block lang="javascript" >}}
+const response = JSON.parse(dd.response.body);
+response.status.should.exist();
+const indicator = response.status.indicator;
+indicator.should.equal('none');
+{{< /code-block >}}
+
+Example response:
+```json
+{
+  "status": {
+    "indicator": "none"
+  }
+}
+```
+
+This assertion:
+- Parses the JSON response body
+- Verifies that the `status` property exists
+- Extracts the indicator value into a variable
+- Checks that `status.indicator` equals `"none"`
+
+The test **passes** because `status` exists and `status.indicator` is `"none"`.
+
+For more information on `should()`, see the [Chai should() documentation][23].
+
+[20]: https://www.chaijs.com/api/
+[21]: https://www.chaijs.com/api/assert/#method_include
+[22]: https://www.chaijs.com/guide/styles/#expect
+[23]: https://www.chaijs.com/guide/styles/#should
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Select locations
 
-Select the **Locations** to run your HTTP test from. HTTP tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
+Select the {{< ui >}}Locations{{< /ui >}} to run your HTTP test from. HTTP tests can run from both managed and [private locations][1] depending on your preference for running the test from outside or inside your network.
 
 {{% managed-locations %}}
 
@@ -182,12 +323,14 @@ HTTP tests can run:
 
 {{% synthetics-alerting-monitoring %}}
 
+{{% synthetics-downtimes %}}
+
 ## One-click
 
-API test creation suggests endpoints from the [Software Catalog][17] and existing API tests to prefill your test form with relevant options.
-Use existing Datadog data sources such as APM traces, Software Catalog endpoints discovery, and existing similar Synthetic tests created by users.
+API test creation suggests endpoints from the [Catalog][17] and existing API tests to prefill your test form with relevant options.
+Use existing Datadog data sources such as APM traces, Catalog endpoints discovery, and existing similar Synthetic tests created by users.
 
-Start typing in the API test **URL** input to get endpoint suggestions or similar tests in Synthetic Monitoring:
+Start typing in the API test {{< ui >}}URL{{< /ui >}} input to get endpoint suggestions or similar tests in Synthetic Monitoring:
 
    {{< img src="synthetics/api_tests/api-one-click.png" alt="HTTP API Test showing a GET search for an existing API test" style="width:90%;" >}}
 
@@ -199,7 +342,7 @@ Then, select a suggestion to prefill your test configuration (request options an
 
 ### Use variables
 
-You can use the [global variables defined on the **Settings** page][11] in the URL, advanced options, and assertions of your HTTP tests.
+You can use the [global variables defined on the {{< ui >}}Settings{{< /ui >}} page][11] in the URL, advanced options, and assertions of your HTTP tests.
 
 To display your list of variables, type `{{` in your desired field:
 
@@ -209,37 +352,19 @@ To display your list of variables, type `{{` in your desired field:
 
 A test is considered `FAILED` if it does not satisfy one or more assertions or if the request prematurely failed. In some cases, the test can fail without testing the assertions against the endpoint.
 
-The most common errors include the following:
+{{< img src="synthetics/api_tests/api_test_summary_updated.png" alt="HTTP API test details page showing the Activity tab with global uptime, alert timeline, and a list of recent test runs in alert state" style="width:100%;">}}
 
-`AUTHENTICATION_ERROR`
-: Synthetic Monitoring automatically disables test retries when authentication failures occur. This safety measure remains in effect until you update the test with valid credentials. This prevents unnecessary test executions that would generate false alerts and increase billable usage.
+### Timeline summary
 
-`CONNREFUSED`
-: No connection could be made because the target machine actively refused it.
+The {{< ui >}}Summary{{< /ui >}} panel identifies unique issues causing failures across test runs in the selected time frame. For each issue, the panel displays:
 
-`CONNRESET`
-: The connection was abruptly closed by the remote server. Possible causes include the web server encountering an error or crashing while responding, or loss of connectivity of the web server.
+- {{< ui >}}First seen{{< /ui >}}: When the issue first appeared in test runs.
+- {{< ui >}}Last seen{{< /ui >}}: When the issue most recently appeared in test runs.
+- {{< ui >}}Classification{{< /ui >}}: Whether the issue is a {{< ui >}}True failure{{< /ui >}} (a real problem with your application) or a {{< ui >}}Test Misconfiguration{{< /ui >}} (an issue with the test setup), based on the AI failure summary.
+- {{< ui >}}Description{{< /ui >}}: A brief description of the error.
+- {{< ui >}}Latest alerts{{< /ui >}}: A list of the most recent alerts related to the issue.
 
-`DNS`
-: DNS entry not found for the test URL. Possible causes include misconfigured test URL or the wrong configuration of your DNS entries.
-
-`Error performing HTTP/2 request`
-: The request could not be performed. See the dedicated [error][16] page for more information.
-
-`INVALID_REQUEST`
-: The configuration of the test is invalid (for example, a typo in the URL).
-
-`SSL`
-: The SSL connection couldn't be performed. [See the dedicated error page for more information][12].
-
-`TIMEOUT`
-: The request couldn't be completed in a reasonable time. Two types of `TIMEOUT` can happen:
-  - `TIMEOUT: The request couldn't be completed in a reasonable time.` indicates that the request duration hit the test defined timeout (default is set to 60s).
-  For each request only the completed stages for the request are displayed in the network waterfall. For example, in the case of `Total response time` only being displayed, the timeout occurred during the DNS resolution.
-  - `TIMEOUT: Overall test execution couldn't be completed in a reasonable time.` indicates that the test duration (request + assertions) hits the maximum duration (60.5s).
-
-`MALFORMED_RESPONSE`
-: The remote server responded with a payload that does not comply with HTTP specifications. This error can happen when remote servers differ in their HTTP support. To prevent issues, run tests with a consistent HTTP version: either HTTP/2 (if available) or HTTP/1.1.
+For a complete list of HTTP and SSL error codes, see [API Testing Errors][12].
 
 ## Permissions
 
@@ -258,15 +383,12 @@ If you are using the [custom role feature][14], add your user to any custom role
 [1]: /synthetics/private_locations
 [2]: /synthetics/cicd_integrations
 [3]: /synthetics/search/#search
-[4]: https://restfulapi.net/json-jsonpath/
-[5]: https://www.w3schools.com/xml/xpath_syntax.asp
-[6]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
 [7]: /monitors/notify/#configure-notifications-and-automations
 [8]: https://www.markdownguide.org/basic-syntax/
 [9]: /monitors/notify/?tab=is_recoveryis_alert_recovery#conditional-variables
 [10]: /synthetics/guide/synthetic-test-monitors
 [11]: /synthetics/settings/#global-variables
-[12]: /synthetics/api_tests/errors/#ssl-errors
+[12]: /synthetics/api_tests/errors/
 [13]: /account_management/rbac/
 [14]: /account_management/rbac#custom-roles
 [15]: /account_management/rbac/#create-a-custom-role

@@ -1,8 +1,9 @@
 ---
+id: powerpack
 core_product:
 - dashboards
 related_terms:
-- grupo
+- group
 - dashboard
 title: powerpack
 ---

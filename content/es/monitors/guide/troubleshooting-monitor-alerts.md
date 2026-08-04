@@ -1,4 +1,7 @@
 ---
+description: Soluciona los problemas habituales de las alertas de monitor, incluidos
+  los errores de estado, la verificación de datos, las condiciones de alerta y los
+  problemas de notificación.
 further_reading:
 - link: https://docs.datadoghq.com/monitors/guide/alert-on-no-change-in-value/
   tag: Guía
@@ -90,7 +93,7 @@ Si sospechas que las notificaciones no se están entregando correctamente, consu
 Si utilizas las notificaciones múltiples `@opsgenie-[...]` en tu monitor, enviamos esas notificaciones con el mismo alias Opsgenie.
 Debido a una [característica de Opsgenie][19], Opsgenie descartará lo que considere una duplicación.
 
-## Para leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

@@ -5,18 +5,15 @@ further_reading:
 - link: https://www.datadoghq.com/blog/monitor-apis-with-datadog/
   tag: Blog
   text: Monitorizar tus flujos de trabajo con los tests de API multipaso de Datadog
-- link: https://learn.datadoghq.com/courses/intro-to-synthetic-tests
-  tag: Centro de aprendizaje
-  text: Introducción a los tests Synthetic
-- link: /getting_started/synthetics/api_test
-  tag: Documentación
-  text: Comienza con los tests de API
+- link: /synthetics/guide/version_history/
+  tag: Guía
+  text: Historial de versiones de Synthetic Monitoring Monitoring
 - link: /synthetics/private_locations
   tag: Documentación
   text: Ejecutar tests de API multipaso en endpoints internos
 - link: /synthetics/guide/synthetic-test-monitors
   tag: Documentación
-  text: Más información sobre los monitores de test sintéticos
+  text: Más información sobre los monitores de test Synthetic
 - link: https://registry.terraform.io/providers/DataDog/datadog/latest/docs/resources/synthetics_test
   tag: Sitio externo
   text: Crear y gestionar tests de API multipaso Synthetic con Terraform
@@ -46,7 +43,7 @@ Los tests de API multipaso pueden ejecutarse desde Datadog [gestionado](#select-
 1. Dale un nombre a tu test de API multipaso.
 2. Añade `env` y otras etiquetas (tags) a tu test multipaso de API. Puedes utilizar estas etiquetas (tags) para filtrar a través de tus tests de Synthetic Monitoring en la [page (página) Synthetic Monitoring & Continuous Testing][5].
 
-### Selecciona las localizaciones
+### Seleccionar localizaciones
 
 Selecciona las **Localizaciones** para tu test de la API multipasos. Los tests de la API multipasos pueden ejecutarse tanto desde ubicaciones gestionadas como desde [ubicaciones privadas][4] según tu preferencia por ejecutar el test desde fuera o dentro de tu red.
 
@@ -129,7 +126,7 @@ De forma predeterminada, se pueden crear hasta 10 pasos de test. Para aumentar e
 
    {{% /tab %}}
 
-{{< /tabs >}}
+   {{< /tabs >}}
 
 ### Añadir configuración de ejecución
 
@@ -197,17 +194,19 @@ Para visualizar tu lista de variables, escribe `{{` en el campo de tu elección.
 
 ### Subtests
 
-Los tests de API multipaso admiten subtests, lo que te permite reutilizar tests de API existentes o extraer pasos en componentes reutilizables. Puedes anidar subtests hasta dos niveles de profundidad.
+Los tests de API de varios steps (UI) / pasos (generic) admiten subtests, lo que te permite reutilizar tests de API de varios pasos existentes o extraer pasos en componentes reutilizables. Puedes anidar subtests hasta dos niveles de profundidad.
 
-Para utilizar un test de API existente como subtest, haz clic en **Subtest**, ve a la pestaña **Desde test existente** y selecciona un test de API en el menú desplegable.
+Para utilizar un test de API de varios steps (UI) / pasos (generic) existente como subtest, haz clic en **Subtest**, ve a la pestaña **From Existing Test** (Desde un test existente) y selecciona un test de API de varios pasos en el menú desplegable.
 
-Para convertir pasos de tu test de API actual en un subtest, haz clic en la pestaña **Extraer de Pasos**, selecciona los pasos registrados que deseas extraer y haz clic en **Convertir en Subtest**. 
+Para convertir pasos de tu test de API de varios steps (UI) / pasos (generic) en un subtest, haz clic en la pestaña **Extract From Steps** (Extraer de pasos), selecciona los pasos grabados que desees extraer y haz clic en **Convert to Subtest** (Convertir en subtest).
 
 {{< img src="synthetics/multistep_tests/subtest.png" alt="Interfaz de usuario para añadir un subtest a un test de API multipaso" width="60%" >}}
 
 Para sustituir una variable de subtest en un test de API multipaso, defínela en el test matriz utilizando el mismo nombre. Una variable siempre utiliza el primer valor que se le asigna.
 
 Si no necesitas ejecutar un subtest de forma independiente, puedes pausarlo. Sigue ejecutándose como parte del test de API multipaso, pero no se ejecuta por sí solo.
+
+**Nota:** Solo se pueden añadir tstes de API de varios steps (UI) / pasos (generic) como subtests. No se admite el uso de [tests de API][1] como subtests.
 
 ## Fallo del test
 
@@ -265,7 +264,7 @@ Puedes restringir el acceso a un test de API multipaso en función de los roles 
 [9]: /es/monitors/notify/?tab=is_alert#configure-notifications-and-automations
 [10]: http://daringfireball.net/projects/markdown/syntax
 [11]: /es/monitors/notify/variables/?tab=is_alert#conditional-variables
-[12]: /es/synthetics/guide/synthetic-test-monitors
+[12]: /es/monitors/types/synthetic_monitoring/
 [13]: /es/synthetics/settings/#global-variables
 [14]: /es/synthetics/api_tests/http_tests?tab=requestoptions#test-failure
 [15]: /es/synthetics/api_tests/grpc_tests?tab=unarycall#test-failure

@@ -13,22 +13,24 @@ algolia:
 ---
 
 <div class="alert alert-info">
-SCIM is available with the Infrastructure Pro and Infrastructure Enterprise plans.
+SCIM is available with the Infrastructure Pro, Infrastructure Enterprise, and Startup plans.
 </div>
 
 ## Overview
 
-The System for Cross-domain Identity Management, or SCIM, is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in sync with your organization's identity provider (IdP).
+The System for Cross-domain Identity Management, or [SCIM][9], is an open standard that allows for the automation of user provisioning. Using SCIM, you can automatically provision and deprovision users in your Datadog organization in-sync with your organization's identity provider (IdP).
 
 ### Supported capabilities
 
-- Create users in Datadog (Email verification is required for first login, see [email verification][1])
+- Create users in Datadog
 - Remove users in Datadog when they no longer require access
-- Keep user attributes synchronized between the identity provider and Datadog
 - Single sign-on to Datadog (recommended)
 - Managed Teams: Create Datadog Teams from identity provider groups and keep membership of the Datadog Teams synchronized with group membership in the identity provider.
+- Role provisioning: Provision a user's Datadog role (built-in or custom) from an identity provider attribute, and keep it synchronized. When the attribute changes in your identity provider, the user's Datadog role updates in real time.
 
-Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. To configure SCIM, see the documentation for your IdP:
+Datadog implements the SCIM server protocol. Datadog supports using SCIM with the Microsoft Entra ID and Okta identity providers. Other identity providers may work, but are not explicitly supported.
+
+To configure SCIM for supported identity providers, see the documentation for your IdP:
 - [Microsoft Entra ID][2]
 - [Okta][3]
 
@@ -42,6 +44,14 @@ Datadog strongly recommends that you use a service account application key when 
 
 When using SAML and SCIM together, Datadog strongly recommends disabling SAML just-in-time (JIT) provisioning to avoid discrepancies in access. Manage user provisioning through SCIM only.
 
+### Role provisioning behavior
+
+When a SCIM request includes one or more roles, Datadog provisions only the roles that match a role in your organization. If none of the roles match, the user falls back to your organization's default role (Standard). Unmatched roles are logged to [Audit Trail][11].
+
+SCIM is the source of truth for role assignment and takes precedence over [SAML role mappings][12]. SCIM role provisioning events are recorded in Audit Trail and as StatsD metrics.
+
+Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][13]. Both Okta and Microsoft Entra ID support this mapping natively, with no custom scripting required. For setup instructions, see the documentation for your identity provider.
+
 ## Using a service account with SCIM
 
 To enable SCIM, you must use an [application key][5] to secure the connection between your identity provider and your Datadog account. A specific user or service account controls each application key.
@@ -50,9 +60,7 @@ If you use an application key tied to a user to enable SCIM and that user leaves
 
 To avoid losing access to your data, Datadog strongly recommends that you create a [service account][6] dedicated to SCIM. Within that service account, create an application key to use in the SCIM integration.
 
-## Email verification
-
-Creating a new user with SCIM triggers an email to the user. For first time access, you are required to log in through the invite link shared by email. The link is active for 2 days. If it expires, go to the [user settings page][7] and select a user to resend an invite link.
+The service account requires at minimum the `user_access_invite` and `user_access_manage` permissions. For the full list of required permissions, see the [SCIM API documentation][10].
 
 ## Further Reading
 
@@ -66,3 +74,8 @@ Creating a new user with SCIM triggers an email to the user. For first time acce
 [6]: /account_management/org_settings/service_accounts
 [7]: https://app.datadoghq.com/organization-settings/users
 [8]: /help/
+[9]: https://scim.cloud/
+[10]: /api/latest/scim/
+[11]: /account_management/audit_trail/
+[12]: /account_management/saml/mapping/#map-saml-attributes-to-datadog-roles
+[13]: https://www.rfc-editor.org/rfc/rfc7643.html#section-4.1.2

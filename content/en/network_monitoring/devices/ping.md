@@ -37,7 +37,7 @@ init_config:
   ping:
     enabled: true            # (default false) enable the ping check
     linux:                   # (optional) Linux specific configuration
-    use_raw_socket: true     # (optional, default false) send pings using a raw socket (see step 3 above)
+      use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 instances:
   - ip_address: '1.2.3.4'
     community_string: 'sample-string'
@@ -63,7 +63,7 @@ instances:
     ping:
       enabled: true            # (default false) enable the ping check
       linux:                   # (optional) Linux specific configuration
-      use_raw_socket: true     # (optional, default false) send pings using a raw socket 
+        use_raw_socket: true   # (optional, default false) send pings using a raw socket 
 
 {{< /highlight >}}
 
@@ -92,7 +92,7 @@ network_devices:
         ping:
           enabled: true            # (default false) enable the ping check
           linux:                   # (optional) Linux specific configuration
-          use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
+            use_raw_socket: true   # (optional, default false) send pings using a raw socket (see step 3 above)
 
 {{< /highlight >}}
 
@@ -114,11 +114,11 @@ ping:
 {{% /tab %}}
 {{< /tabs >}}
 
-After ping is enabled on your network devices, the **Ping State** column appears in [Network Device Monitoring][6], displaying the ping status for each device.
+After ping is enabled on your network devices, the {{< ui >}}Ping State{{< /ui >}} column appears in [Network Device Monitoring][6], displaying the ping status for each device.
 
 {{< img src="/network_device_monitoring/snmp/ping_state_status_2.png" alt="The status column in the NDM UI showing the Ping state toggle enabled with the ping state status column highlighted" style="width:100%;">}}
 
-The following are the status names in the **Ping State** column and their descriptions:
+The following are the status names in the {{< ui >}}Ping State{{< /ui >}} column and their descriptions:
 
 | Status name  | Description                                             |
 |--------------|------------------------------------------------------|

@@ -3,7 +3,7 @@ title: Use Custom JavaScript Assertions In Browser Tests
 
 description: Learn how to use custom JavaScript assertions in your Synthetic browser tests.
 further_reading:
-- link: '/synthetics/browser_tests/actions/'
+- link: '/synthetics/browser_tests/test_steps/'
   tag: 'Documentation'
   text: 'Learn about browser test steps'
 - link: '/synthetics/browser_tests/advanced_options/'
@@ -25,10 +25,10 @@ This guide describes how you can test a user interface (UI) using custom JavaScr
 
 To create an assertion using custom JavaScript:
 
-1. Click **Assertion** and select **Test custom JavaScript assertion**.
+1. Click {{< ui >}}Assertion{{< /ui >}} and select {{< ui >}}Test custom JavaScript assertion{{< /ui >}}.
 2. Write the body of your assertion.
 3. Optionally, select a target element in the UI. 
-4. Click **Apply**.
+4. Click {{< ui >}}Apply{{< /ui >}}.
 
 For more information about assertions, see [Browser Test Steps][2].
 
@@ -108,4 +108,4 @@ return await loadingTask.promise.then(function(pdf) {
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /synthetics/browser_tests/
-[2]: /synthetics/browser_tests/actions/?tab=testanelementontheactivepage#assertion
+[2]: /synthetics/browser_tests/test_steps/?tab=testanelementontheactivepage#assertion

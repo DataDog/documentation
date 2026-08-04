@@ -11,11 +11,11 @@ The Area component is one of the best components available to design and organiz
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Fill color**: Select a predefined color to fill the center of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Raise**: Raise the area component above other areas.
-- **Lower**: Lower the area component below other areas.
-- **Edge color**: Select a predefined color to fill the edges of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
-- **Add shadow**: Add or remove shadow from the edges to increase contrast.
+- {{< ui >}}Fill color{{< /ui >}}: Select a predefined color to fill the center of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- {{< ui >}}Raise{{< /ui >}}: Raise the area component above other areas.
+- {{< ui >}}Lower{{< /ui >}}: Lower the area component below other areas.
+- {{< ui >}}Edge color{{< /ui >}}: Select a predefined color to fill the edges of the area component, or enter the hexadecimal value for the color. Accepts the same color for both 2D and 3D view, or different colors for each.
+- {{< ui >}}Add shadow{{< /ui >}}: Add or remove shadow from the edges to increase contrast.
 
 ## API
 

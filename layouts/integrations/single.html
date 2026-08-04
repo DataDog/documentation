@@ -13,6 +13,7 @@
 
     {{ partial "integration-labels/integration-labels.html" . }}
     {{ partial "site_support_banner/site_support_banner.html" . }}
+    {{ partial "us2_fed_integration_banner/us2_fed_integration_banner.html" . }}
     {{ $dir := "" }}
     {{ with .File }}{{ $dir = .Dir }}{{ end }}
     {{ if and (eq $dir "integrations/") ($media | len) }}
@@ -24,7 +25,7 @@
     {{/* "We don't want to do this on integration guides/faqs for now" */}}
     {{- if and ($further_reading) (eq .Params.custom_kind "integration") -}}
 
-    <h2>Further Reading</h2>
+    <h2 id="{{ anchorize "further-reading" }}">Further Reading</h2>
         {{- partial "whats-next/whats-next.html" . -}}
     {{- end -}}
 

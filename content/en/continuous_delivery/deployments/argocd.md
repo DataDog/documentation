@@ -142,7 +142,7 @@ From the above snippet:
 3. You can use the `dd_service` annotation to configure the service of the application. Replace `YOUR_SERVICE` above with the service
    that the Argo CD application is deploying (for example: `transaction-service`). When this annotation is used, the service
    name is added to all the deployment executions generated from the application. Moreover, if your service is
-   registered in [Software Catalog][13], the team name is also added to all the deployment executions. If your Argo CD
+   registered in [Catalog][13], the team name is also added to all the deployment executions. If your Argo CD
    application is configured to deploy more than one service, see [Tag an Argo CD application deploying multiple services](#tag-an-argo-cd-application-deploying-multiple-services).
 4. You can use the `dd_customtags` annotation to optionally add custom tags to the deployment executions generated for this Argo CD application.
    The value should be set to a comma-separated list of tags, structured as `key:value` pairs.
@@ -213,7 +213,7 @@ This command correlates images from deployment resources. When Datadog receives 
 
 #### Validation
 
-If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new **Pipeline** tab representing the related CI pipeline trace.
+If the command has been correctly run, deployments contain Git metadata from the application repository instead of the configuration repository. Also, the deployment executions view now contains a new {{< ui >}}Pipeline{{< /ui >}} tab representing the related CI pipeline trace.
 
 ## Tag an Argo CD application deploying multiple services
 
@@ -225,7 +225,7 @@ Automatic service discovery is not supported when <a href="https://argo-cd.readt
 
 To enable automatic service tagging, you need to [monitor your Kubernetes infrastructure using the Datadog Agent][15] and your Kubernetes resources should have the following labels:
 - `tags.datadoghq.com/service` (required): specifies the Datadog service of this resource. For more information, see [Unified Service Tagging][18].
-- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Software Catalog][13] based on the service label.
+- `team` (optional): specifies the Datadog team of this resource. If this label is omitted, the team is automatically retrieved from [Catalog][13] based on the service label.
 
 Only the Kubernetes resources with the following kinds are eligible: `Deployment`, `Rollout`, `ReplicaSet`, `StatefulSet`, `Service`, `DaemonSet`, `Pod`, `Job`, and `CronJob`.
 
@@ -254,6 +254,12 @@ The [**Deployments**][6] and [**Executions**][7] pages populate with data after 
 If notifications are not sent, examine the logs of the `argocd-notification-controller` pod. The controller logs when it is sending a notification (for example: `Sending notification ...`) and when it fails to notify a recipient
 (for example: `Failed to notify recipient ...`). For additional troubleshooting scenarios, see the [official Argo CD documentation][8].
 
+### Status discrepancies between Argo CD and Datadog
+
+You might notice a discrepancy in how a deployment's status is reported, where it is successful in Argo CD but shown as an error in Datadog. The key difference lies in how each platform evaluates deployment success:
+- **Argo CD** considers a sync successful as long as it can apply the changes to the Kubernetes manifests, regardless of the runtime state of the resources.
+- **Datadog CD Visibility** evaluates the outcome of the deployment more comprehensively. If any of the resources modified during the sync end up in a degraded state (for example, due to a bad image or configuration issue), the deployment is marked as failed or degraded in Datadog, even though Argo CD reports it as successful.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -270,7 +276,7 @@ If notifications are not sent, examine the logs of the `argocd-notification-cont
 [10]: /continuous_delivery/explorer
 [11]: https://app.datadoghq.com/organization-settings/api-keys
 [12]: https://argo-cd.readthedocs.io/en/stable/operator-manual/notifications/subscriptions/
-[13]: /tracing/software_catalog
+[13]: /internal_developer_portal/catalog/
 [14]: https://github.com/DataDog/datadog-ci/tree/master/packages/plugin-deployment#correlate
 [15]: /containers/kubernetes
 [16]: https://app.datadoghq.com/orchestration/explorer

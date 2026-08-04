@@ -31,12 +31,20 @@ grant select on v_$dataguard_config to c##datadog ;
 grant select on v_$dataguard_stats to c##datadog ;
 grant select on v_$transaction to c##datadog;
 grant select on v_$locked_object to c##datadog;
+grant select on v_$lock to c##datadog;
+grant select on gv_$lock to c##datadog;
 grant select on dba_objects to c##datadog;
 grant select on cdb_data_files to c##datadog;
 grant select on dba_data_files to c##datadog;
 ```
 
-If you configured custom queries that run on a pluggable database (PDB), you must grant `set container` privilege to the `C##DATADOG` user:
+If you are unable to fetch data after granting the above permissions, you may not be using the Oracle default profile, and may need to grant the `execute` privilege on `dbms_lob`. To do so, run the following:
+
+```SQL
+grant execute on sys.dbms_lob to c##datadog;
+```
+
+If you configured custom queries that run on a pluggable database (PDB), you must grant the `set container` privilege to the `C##DATADOG` user:
 
 ```SQL
 connect / as sysdba

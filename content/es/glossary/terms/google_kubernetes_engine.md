@@ -1,4 +1,5 @@
 ---
+id: google_kubernetes_engine
 core_product:
 - monitorización de la infraestructura
 title: Google Kubernetes Engine (GKE)

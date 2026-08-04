@@ -1,4 +1,5 @@
 ---
+id: instrumentation
 title: instrumentation
 core_product:
   - apm

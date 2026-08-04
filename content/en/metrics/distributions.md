@@ -8,12 +8,17 @@ further_reading:
   - link: "/metrics/custom_metrics/dogstatsd_metrics_submission/"
     tag: "Documentation"
     text: "Using Distributions in DogStatsD"
+  - link: "/metrics/open_telemetry/otlp_metric_types/"
+    tag: "Documentation"
+    text: "OTLP Metric Types"
 ---
 ## Overview
 
 Distributions are a metric type that aggregate values sent from multiple hosts during a flush interval to measure statistical distributions across your entire infrastructure.
 
-Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2]. 
+Global distributions instrument logical objects, like services, independently from the underlying hosts. Unlike [histograms][1] which aggregate on the Agent-side, global distributions send all raw data collected during the flush interval and the aggregation occurs server-side using Datadog's [DDSketch data structure][2].
+
+If you use OpenTelemetry, OTLP Histogram metrics are mapped to Datadog distributions by default. See [OTLP Metric Types][5] for details on this mapping and available configuration options.
 
 Distributions provide enhanced query functionality and configuration options that aren't offered with other metric types (count, rate, gauge, histogram):
 * **Calculation of percentile aggregations**: Distributions are stored as DDSketch data structures that represent raw, unaggregated data such that globally accurate percentile aggregations (p50, p75, p90, p95, p99 or any percentile of your choosing with up to two decimal points) can be calculated across the raw data from all your hosts. Enabling percentile aggregations can unlock advanced query functionalities such as: 
@@ -67,10 +72,10 @@ You can use percentile aggregations in a variety of other widgets and for alerti
 
 You can enable or disable percentile aggregations for multiple metrics at once, rather than having to configure each one individually.
 
-1. Navigate to the [Metrics Summary Page][4] and click the **Configure Metrics** dropdown.
-1. Select **Enable percentiles**.
+1. Navigate to the [Metrics Summary Page][4] and click the {{< ui >}}Configure Metrics{{< /ui >}} dropdown.
+1. Select {{< ui >}}Enable percentiles{{< /ui >}}.
 1. Specify a metric namespace prefix to select all metrics that match that namespace.
-1. (Optional) To disable percentiles for all metrics in the namespace, click the **Percentile aggregations** toggle.
+1. (Optional) To disable percentiles for all metrics in the namespace, click the {{< ui >}}Percentile aggregations{{< /ui >}} toggle.
 
 {{< img src="metrics/summary/percentile_aggregations_toggle.png" alt="Toggle to manage percentile aggregations" style="width:100%;" >}}
 
@@ -83,14 +88,14 @@ With threshold queries for distributions with percentiles, you do not need to pr
 To use threshold queries: 
 
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Graph your chosen distribution metric using the "count values..." aggregator.
+2. Graph your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 
 {{< img src="metrics/distributions/threshold_queries.mp4" video=true alt="A timeseries graph being visualized using the count values aggregator, with a threshold of greater than 8 seconds" style="width:80%;" >}}
 
 You can similarly create a metric-based SLO using threshold queries: 
 1. Enable percentiles on your distribution metric on the Metrics Summary page.
-2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the "count values..." aggregator.
+2. Create a new Metric-Based SLO and define the numerator as the number of "good" events with a query on your chosen distribution metric using the {{< ui >}}count values...{{< /ui >}} aggregator.
 3. Specify a threshold value and comparison operator.
 {{< img src="metrics/distributions/threshold_SLO.png" alt="Threshold Queries for SLOs" style="width:80%;">}}
 
@@ -101,8 +106,8 @@ Distributions provide functionality that allows you to control the tagging for c
 To customize tagging:
 
 1. Click on your custom distribution metric name in the Metrics Summary table to open the metrics details sidepanel.
-2. Click the **Manage Tags** button to open the tag configuration modal.
-3. Click the **Custom...** tab to customize the tags you'd like to keep available for query. 
+2. Click the {{< ui >}}Manage Tags{{< /ui >}} button to open the tag configuration modal.
+3. Click the {{< ui >}}Custom...{{< /ui >}} tab to customize the tags you'd like to keep available for query. 
 
 **Note**: The exclusion of tags is not supported in the allowlist-based customization of tags. Adding tags starting with `!` is not accepted.
 
@@ -130,3 +135,4 @@ https://app.datadoghq.com/event/stream?tags_execution=and&per_page=30&query=tags
 [2]: https://www.datadoghq.com/blog/engineering/computing-accurate-percentiles-with-ddsketch/
 [3]: https://app.datadoghq.com/event/explorer
 [4]: https://app.datadoghq.com/metric/summary
+[5]: /metrics/open_telemetry/otlp_metric_types/

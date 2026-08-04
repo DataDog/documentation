@@ -16,9 +16,9 @@ Datadog API, Custom Agent Check, DogStatsD, 또는 Events Email API를 사용하
 
 {{< whatsnext desc="Datadog에 커스텀 이벤트 전송:">}}
     {{< nextlink href="/api/latest/events/#post-an-event" >}}Datadog API{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/email/" >}}이메일{{< /nextlink >}}
-    {{< nextlink href="/service_management/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
+    {{< nextlink href="/events/guides/agent/" >}}Custom Agent Check{{< /nextlink >}}
+    {{< nextlink href="/events/guides/email/" >}}이메일{{< /nextlink >}}
+    {{< nextlink href="/events/guides/dogstatsd/" >}}DogStatsD{{< /nextlink >}}
     {{< nextlink href="/integrations/guide/events-from-sns-emails/" >}}Amazon SNS 이메일{{< /nextlink >}}
     {{< nextlink href="/logs/guide/sending-events-and-logs-to-datadog-with-amazon-eventbridge-api-destinations/#configuration" >}}Amazon EventBridge API Destinations{{< /nextlink >}}
 {{< /whatsnext >}}

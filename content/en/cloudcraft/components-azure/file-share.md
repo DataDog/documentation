@@ -12,12 +12,12 @@ You can use the File Share component to represent and visualize file storage ser
 
 Use the toolbar to configure and customize the component. The following options are available:
 
-- **Color**: Select accent and fill colors for the body of the component in 3D view.
-- **Tier**: Select the storage tier for your file storage service.
-- **Redundancy**: Select how your data is replicated in the primary and secondary regions.
-- **Data at-rest (GB)**: Enter the provisioned size of the file service.
-- **Snapshots (GB)**: Enter the total volume of data available for snapshots.
-- **Metadata at-rest (GB)**: Enter the total volume of data used for file system metadata.
+- {{< ui >}}Color{{< /ui >}}: Select accent and fill colors for the body of the component in 3D view.
+- {{< ui >}}Tier{{< /ui >}}: Select the storage tier for your file storage service.
+- {{< ui >}}Redundancy{{< /ui >}}: Select how your data is replicated in the primary and secondary regions.
+- {{< ui >}}Data at-rest (GB){{< /ui >}}: Enter the provisioned size of the file service.
+- {{< ui >}}Snapshots (GB){{< /ui >}}: Enter the total volume of data available for snapshots.
+- {{< ui >}}Metadata at-rest (GB){{< /ui >}}: Enter the total volume of data used for file system metadata.
 
 ## API
 

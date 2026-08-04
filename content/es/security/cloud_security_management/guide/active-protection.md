@@ -1,17 +1,19 @@
 ---
 further_reading:
-- link: synthetics/
+- link: security/workload_protection/workload_security_rules
   tag: Documentación
-  text: Reglas de detección de amenazas de CSM
+  text: Reglas de detección de Workload Protection
 title: Bloquear de forma proactiva las amenazas de minería de criptomonedas con Active
   Protection
 ---
 
-<div class="alert alert-info">CSM Threats Active Protection está en fase beta.</div>
+<div class="alert alert-danger">Ponte en contacto con el <a href="https://docs.datadoghq.com/help/">servicio de asistencia de Datadog</a> para activar Active Protection.</div>
 
-En este tema, se explica cómo utilizar la función **Active Protection** contra amenazas de CSM para bloquear automáticamente las amenazas de minería de criptomonedas.
+<div class="alert alert-info">Active Protection de Workload Protection está en vista previa.</div>
 
-Por defecto, todas las [reglas de detección de amenazas][4] predefinidas del Agent están habilitadas y activas para la monitorización contra amenazas criptográficas. 
+En este tema se explica cómo utilizar la función **Active Protection** de Workload Protection para bloquear automáticamente las amenazas de minería de criptomonedas. 
+
+En forma predeterminada, todas las [reglas de detección de amenazas][4] predefinidas del Agent están habilitadas y activas para la monitorización contra amenazas criptográficas. 
 
 Active Protection te permite bloquear y terminar proactivamente las amenazas de minería de criptomonedas identificadas por las reglas de detección de amenazas de Datadog Agent.
 
@@ -22,14 +24,22 @@ Active Protection agiliza la detección de amenazas y la respuesta específica, 
 
 El resultado final es la detección de amenazas de minería de criptomonedas, seguida de una mitigación detallada inmediata contra ataques de alta confianza y verdaderos positivos.
 
+## RBAC para Active Protection
+
+A continuación se indican algunos [roles y permisos][11] importantes que se deben utilizar para las reglas personalizadas y Active Protection RBAC:
+
+- El permiso `security_monitoring_cws_agent_rules_actions` se puede utilizar para activar y configurar la función de Active Protection.
+  - Para utilizar el permiso `security_monitoring_cws_agent_rules_actions`, un usuario con el rol de Administrador de Datadog debe crear un rol que contenga el permiso `security_monitoring_cws_agent_rules_actions` y, a continuación, añadir a este rol solo a los usuarios que gestionan Active Protection.
+- El rol **Datadog Standard** permite a los usuarios crear/actualizar una regla personalizada predeterminada, siempre y cuando la operación no cambie la configuración de **protección** de la regla.
+
 ## Opciones de protección
 
-Dispone de tres opciones para las reglas del Agent:
+Dispones de tres opciones para las reglas del Agent:
 
-- **Monitorización:** esta es la configuración por defecto para las reglas habilitadas, independientemente de si Active Protection está activada. Agent monitoriza la regla activada y muestra las detecciones en [Señales][1].
+- **Monitorización:** esta es la configuración predeterminada para las reglas activadas, independientemente de si Active Protection está activada. El Agent monitoriza la regla activada y muestra las detecciones en [Señales][1].
 - **Bloqueo:** 
-  - El Bloqueo está disponible cuando Active Protection está activada. El Bloqueo está disponible en reglas predefinidas seleccionadas que tienen alta confianza, verdaderos positivos.
-  - Agent monitoriza la regla activada, finaliza las acciones correspondientes al instante y muestra las detecciones en [Señales][1].
+  - El bloqueo está disponible cuando Active Protection está activada. El bloqueo está disponible en reglas predefinidas seleccionadas que tienen alta confianza, verdaderos positivos.
+  - El Agent monitoriza la regla activada, finaliza las acciones correspondientes al instante y muestra las detecciones en [Señales][1].
 - **Desactivado:** el Agent no monitoriza los eventos de regla y no envía detecciones al backend de Datadog.
 
 <div class="alert alert-info">El bloqueo se aplica a todas las amenazas detectadas después de activar el bloqueo. El bloqueo no es retroactivo.</div>
@@ -40,7 +50,7 @@ Active Protection se activa a nivel de organización.
 
 <div class="alert alert-info">La funcionalidad de bloqueo de Active Protection solo está disponible en un subconjunto de reglas predefinidas del Agent. La monitorización de reglas del Agent se ejecuta independientemente de si Active Protection está activada.</div>
 
-Para comprobar si Active Protection ya está habilitada en tu organización, ve a [Agent Configuration][2] (Configuración del Agent). Si Active Protection está habilitada, aparecerá una columna **Protection** (Protección) en la lista de reglas del Agent.
+Para comprobar si Active Protection ya está activada en tu organización, ve a [Configuración del Agent][2] . Si Active Protection está activada, aparecerá una columna **Protection** (Protección) en la lista de reglas del Agent.
 
 {{< img src="security/cws/guide/protection-column.png" alt="La columna de protección indica que Active Protection está activada en la organización" style="width:100%;" >}}
 
@@ -57,7 +67,7 @@ Cuando Active Protection está activada y se aplica a una regla de minería de c
 
 Si Active Protection está activada y disponible para una regla de minería de criptomonedas del Agent, puedes verla al consultar la regla:
 
-1. En [Agent Configuration][2] (Configuración del Agent), selecciona una regla de minería de criptomonedas.
+1. En [Configuración del Agent][2], selecciona una regla de minería de criptomonedas.
 2. En la regla de minería de criptomonedas, si Active Protection está activada y disponible, hay una sección **Protection** (Protección).
 
 ## Activar Active Protection
@@ -70,14 +80,14 @@ En consecuencia, no debes preocuparte de que la activación de Active Protection
 
 Para activar Active Protection:
 
-1. Ve a las reglas de [Configuración del Agent][2] de CSM.
+1. Ve a a las reglas de [Configuración del Agent][2] de Cloud Security.
 2. Selecciona **Enable Active Protection** (Activar Active Protection).
 
     {{< img src="security/cws/guide/enable-active-protection.png" alt="Botón Activar Active Protection" style="width:100%;" >}}
 
-Una vez activada Active Protection, la lista de reglas de configuración del Agent contiene una columna **Protección**.
+Una vez activada Active Protection, la lista de reglas de configuración del Agent contiene una columna **Protección** (Protección).
 
-La columna **Protección** indica si una regla está en estado de **Monitorización** o **Bloqueo**. Cuando activas Active Protection por primera vez, las reglas solo están en estado de Monitorización. Debes configurar la opción de bloqueo manualmente.
+La columna **Protection** (Protección) indica si una regla está en estado de **Monitoring** (Monitorización) o **Blocking** (Bloqueo). Cuando activas Active Protection por primera vez, las reglas solo están en estado de monitorización. Debes configurar la opción de bloqueo manualmente.
 
 ### Desactivar Active Protection
 
@@ -85,11 +95,11 @@ Una vez activada Active Protection, puedes desactivarla en cada regla de configu
 
 ## Bloquear las amenazas detectadas por una regla del Agent 
 
-Una vez activada Active Protection, puedes configurar la opción **Bloqueo** en una regla de minería de criptomonedas del Agent, y el Agent terminará estas acciones correspondientes instantáneamente.
+Una vez activada Active Protection, puedes configurar la opción **Blocking** (Bloqueo) en una regla de minería de criptomonedas del Agent, y el Agent terminará estas acciones correspondientes instantáneamente.
 
 Para activar el bloqueo en una regla del Agent:
 
-1. En [Agent Configuration][2] (Configuración del Agent), abre una regla de minería de criptomonedas que tenga **Monitoring** (Monitorización) en la columna **Protection** (Protección). Si no está **Monitoring** (Monitorización) o **Blocking** (Bloqueo) en la columna **Protection** (Protección), entonces Active Protection aún no está disponible para esa regla.
+1. En [Configuración del Agent][2] , abre una regla de minería de criptomonedas que tenga **Monitoring** (Monitorización) en la columna **Protection** (Protección). Si no está **Monitoring** (Monitorización) o **Blocking** (Bloqueo) en la columna **Protection** (Protección), entonces Active Protection aún no está disponible para esa regla.
 2. En la regla del Agent, en **Protection** (Protección), selecciona **Blocking** (Bloqueo).
 
    {{< img src="security/cws/guide/protection-blocking-option.png" alt="La sección Protección de una regla del Agent que muestra la opción Bloqueo" style="width:100%;" >}}
@@ -126,7 +136,7 @@ Puedes utilizar servicios y etiquetas para generar una expresión. Datadog coinc
 
 ## Ejemplo de ataque bloqueado
 
-Una vez activada Active Protection y configurada como **Bloqueo** para una regla del Agent, las amenazas bloqueadas aparecen en [Señales][1].
+Una vez activada Active Protection y configurada como **Blocking** (Bloqueo) para una regla del Agent, las amenazas bloqueadas aparecen en [Señales][1].
 
 Una señal de amenaza bloqueada contiene los mensajes `SECURITY RESPONSE` y `The malicious process <THREAT NAME> has automatically been killed.`:
 
@@ -136,4 +146,4 @@ Una señal de amenaza bloqueada contiene los mensajes `SECURITY RESPONSE` y `The
 [1]: https://app.datadoghq.com/security
 [2]: https://app.datadoghq.com/security/configuration/workload/agent-rules
 [3]: #scoping-the-agent-rule
-[4]: /es/security/threats/workload_security_rules
+[4]: /es/security/workload_protection/workload_security_rules

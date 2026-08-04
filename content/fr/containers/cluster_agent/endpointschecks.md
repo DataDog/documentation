@@ -10,7 +10,7 @@ further_reading:
 - link: /containers/cluster_agent/clusterchecks/
   tag: Documentation
   text: Checks de cluster
-- link: /containers/cluster_agent/troubleshooting#checks-d-endpoint
+- link: /containers/troubleshooting/cluster-and-endpoint-checks
   tag: Documentation
   text: Dépannage des checks d'endpoint
 title: Checks d'endpoint avec Autodiscovery
@@ -79,7 +79,7 @@ Les checks d'endpoint ont été conçus pour être distribués aux Agents qui s'
 ## Configurer la distribution des checks d'endpoint
 
 {{< tabs >}}
-{{% tab "Operator" %}}
+{{% tab "Operator Datadog" %}}
 
 Pour activer la distribution des checks de d'endpoint dans le déploiement de l'Operator de l'Agent de cluster, utilisez la clé de configuration `features.clusterChecks.enabled` :
 ```yaml
@@ -159,7 +159,7 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 [Redémarrez l'Agent][2] pour prendre en compte le changement de configuration.
 
 [1]: /fr/agent/cluster_agent/clusterchecks/
-[2]: /fr/agent/guide/agent-commands/
+[2]: /fr/agent/configuration/agent-commands/
 {{% /tab %}}
 {{< /tabs >}}
 
@@ -175,6 +175,30 @@ DD_EXTRA_CONFIG_PROVIDERS="endpointschecks clusterchecks"
 Pour exécuter un [check HTTP][9] sur les endpoints d'un service Kubernetes, procédez comme suit :
 
 {{< tabs >}}
+{{% tab "Operator Datadog" %}}
+
+Utilisez la section `spec.override.clusterAgent.extraConfd.configDataMap` pour définir votre configuration de check :
+
+```yaml
+spec:
+#(...)
+  override:
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          <INTEGRATION_NAME>.yaml: |-
+            advanced_ad_identifiers:
+              - kube_endpoints:
+                  name: "<ENDPOINTS_NAME>"
+                  namespace: "<ENDPOINTS_NAMESPACE>"
+            cluster_check: true
+            init_config:
+            instances:
+              - url: "http://%%host%%"
+                name: "<EXAMPLE_NAME>"
+```
+
+{{% /tab %}}
 {{% tab "Helm" %}}
 Utilisez le champ `clusterAgent.confd` pour définir votre configuration de check :
 

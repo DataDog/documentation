@@ -3,9 +3,9 @@ aliases:
 - /es/logs/log_collection/kubernetes_audit_logs
 categories:
 - recopilación de logs
-- contenedores
+- rastreo
 - orquestación
-custom_kind: integration
+custom_kind: integración
 dependencies:
 - https://github.com/DataDog/documentation/blob/master/content/en/integrations/kubernetes_audit_logs.md
 description: Para realizar un seguimiento de todo lo que ocurre dentro de tus clústeres
@@ -14,7 +14,7 @@ doc_link: /integrations/kubernetes_audit_logs/
 further_reading:
 - link: logs/
   tag: Documentación
-  text: Gestión de logs
+  text: Gestión de Logs
 - link: https://www.datadoghq.com/blog/key-kubernetes-audit-logs-for-monitoring-cluster-security/
   tag: Blog
   text: Logs de auditoría de Kubernetes claves para la monitorización de la seguridad
@@ -39,7 +39,7 @@ Recopila [logs de auditoría de Kubernetes][1] para realizar un seguimiento de t
 
 Con la integración de los logs de auditoría de Kubernetes pueded diagnosticar problemas de permisos, identificar políticas RBAC que necesitan actualizarse y rastrear las solicitudes de API lentas que afectan a todo tu clúster. Profundiza en estos temas con la [charla de Datadog en KubeCon 2019][2].
 
-## Configuración
+## Instalación
 
 Esta integración está **disponible para el Agent v6.0 o posterior**
 
@@ -66,7 +66,7 @@ Para habilitar los logs de auditoría logs en Kubernetes:
 apiVersion: audit.k8s.io/v1
 kind: Policy
 rules:
-    # no registres solicitudes en los siguientes elementos
+    # do not log requests to the following
     - level: None
       nonResourceURLs:
           - '/healthz*'
@@ -75,7 +75,7 @@ rules:
           - '/swagger*'
           - '/version'
 
-    # limita el nivel a los Metadatos para que el token no se incluya en las especificaciones/el estado
+    # limit level to Metadata so token is not included in the spec/status
     - level: Metadata
       omitStages:
           - RequestReceived
@@ -84,7 +84,7 @@ rules:
             resources:
                 - tokenreviews
 
-    # auditoría extendida de la delegación de autenticación
+    # extended audit of auth delegation
     - level: RequestResponse
       omitStages:
           - RequestReceived
@@ -93,17 +93,17 @@ rules:
             resources:
                 - subjectaccessreviews
 
-    # registra los cambios en los pods a nivel de RequestResponse
+    # log changes to pods at RequestResponse level
     - level: RequestResponse
       omitStages:
           - RequestReceived
       resources:
-          # grupo de API central, añade servicios de API de terceros y tus servicios de API, si es necesario
+          # core API group; add third-party API services and your API services if needed
           - group: ''
             resources: ['pods']
             verbs: ['create', 'patch', 'update', 'delete']
 
-    # registra el resto de los elementos a nivel de los Metadatos
+    # log everything else at Metadata level
     - level: Metadata
       omitStages:
           - RequestReceived
@@ -182,11 +182,7 @@ En la última sección, para todo lo que no fue explícitamente configurado por 
 
 ## Solucionar problemas
 
-¿Necesitas ayuda? Ponte en contacto con el [soporte de Datadog][6].
-
-## Referencias adicionales
-
-{{< partial name="whats-next/whats-next.html" >}}
+¿Necesitas ayuda? Ponte en contacto con la [asistencia técnica de Datadog][6].
 
 [1]: /es/agent/kubernetes/#installation
 [2]: https://www.youtube.com/watch?v=raJRLmGb9Is&t=1s

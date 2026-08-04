@@ -9,6 +9,8 @@ aliases:
 - /es/agent/autodiscovery/auto_conf
 - /es/agent/faq/auto_conf
 - /es/agent/guide/auto_conf
+description: Gestionar la configuración automática de servicios populares en contenedores
+  mediante plantillas de configuración automática de Autodiscovery
 further_reading:
 - link: /contenedores/Kubernetes/integraciones/
   tag: Documentación

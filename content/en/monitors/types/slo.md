@@ -4,10 +4,10 @@ description: "Create SLO alerts to monitor error budget consumption and burn rat
 aliases :
   - /monitors/create/types/slo/
 further_reading:
-- link: "/service_management/service_level_objectives/burn_rate"
+- link: "/service_level_objectives/burn_rate"
   tag: "Documentation"
   text: "Burn Rate Alerts"
-- link: "/service_management/service_level_objectives/error_budget"
+- link: "/service_level_objectives/error_budget"
   tag: "Documentation"
   text: "Error Budget Alerts"
 ---
@@ -22,7 +22,7 @@ This monitor is available for the Metric-based SLOs, Time Slice SLOs, and Monito
 
 ## Monitor creation
 
-To create an [SLO alert][2] in Datadog, use the main navigation: *Monitors --> New Monitor --> SLO*.
+To create an [SLO alert][2] in Datadog, use the main navigation: {{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}SLO{{< /ui >}}.
 
 ### Select SLO
 
@@ -38,7 +38,7 @@ Two types of alerts are available:
 
 ### Notifications
 
-For detailed instructions on the **Configure notifications and automations** section, see the [Notifications][5] page.
+For detailed instructions on the {{< ui >}}Configure notifications and automations{{< /ui >}} section, see the [Notifications][5] page.
 
 In addition to the [standard template variables][6] available across all monitor types, SLO alerts also support the following variables: 
 
@@ -53,9 +53,9 @@ In addition to the [standard template variables][6] available across all monitor
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /service_management/service_level_objectives/
+[1]: /service_level_objectives/
 [2]: https://app.datadoghq.com/monitors/create/slo
-[3]: /service_management/service_level_objectives/error_budget/
-[4]: /service_management/service_level_objectives/burn_rate/
+[3]: /service_level_objectives/error_budget/
+[4]: /service_level_objectives/burn_rate/
 [5]: /monitors/notify/#overview
 [6]: /monitors/notify/variables/?tab=is_alert#template-variables

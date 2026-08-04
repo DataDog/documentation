@@ -1,0 +1,16 @@
+{
+  "data": {
+    "attributes": {
+      "role": "admin"
+    },
+    "relationships": {
+      "user": {
+        "data": {
+          "id": "string",
+          "type": "users"
+        }
+      }
+    },
+    "type": "team_memberships"
+  }
+}

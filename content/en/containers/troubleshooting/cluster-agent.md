@@ -110,6 +110,25 @@ root@datadog-cluster-agent-8568545574-x9tc9:/# agent status
       Service Checks: 3, Total Service Checks: 2193
 [...]
 ```
+### Datadog Operator health check failures
+
+If you use the Datadog Operator to manage your Cluster Agent deployment, the Operator may fail its health checks. If this happens, the debug logs display a message similar to the following error:
+
+```text
+{
+  "level": "DEBUG",
+  "ts": "<date and time>",
+  "logger": "controller-runtime.<name>",
+  "msg": "<name> check failed",
+  "checker": "goroutines-number",
+  "error": "too many goroutines: 443 > limit: 400"
+}
+```
+
+To resolve this, increase the `maximumGoroutines` setting in the Operator's `datadog-values.yaml` file to a value above the reported goroutine count:
+```yaml
+maximumGoroutines: 600
+```
 
 ## Node Agent
 

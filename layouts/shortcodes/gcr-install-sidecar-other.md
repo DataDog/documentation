@@ -1,7 +1,7 @@
 After deploying your Cloud Run app, you can manually modify your app's settings to enable Datadog monitoring.
 
 1. Create a **Volume** with `In-Memory` volume type.
-2. Add a **new container** with image URL: `gcr.io/datadoghq/serverless-init:latest`. See the [latest releases on Docker Hub][1001] to pin a specific version.
+2. Add a **new container** with image URL: `gcr.io/datadoghq/serverless-init:<YOUR_TAG>`. See the [latest releases on Docker Hub][1001] to pin a specific version.
 3. Add the volume mount to every container in your application. Choose a path such as `/shared-volume`, and remember it for the next step.
 4. Add the following environment variables to your `serverless-init` sidecar container:
    <ul>

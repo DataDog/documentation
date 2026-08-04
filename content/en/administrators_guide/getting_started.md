@@ -39,7 +39,7 @@ Get up to speed with the parts of Datadog that are most important to your use ca
 {{< whatsnext desc=" " >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/datadog-foundation" >}}Datadog Foundation{{< /nextlink >}}
     {{< nextlink href="https://learn.datadoghq.com/courses/tagging-best-practices" >}}Tagging Best Practices{{< /nextlink >}}
-    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Managing the Software Catalog{{< /nextlink >}}
+    {{< nextlink href="https://learn.datadoghq.com/courses/managing-software-catalog" >}}Managing the Catalog{{< /nextlink >}}
 {{< /whatsnext >}}
 
 **Administrators**:
@@ -116,7 +116,7 @@ To successfully create a new Datadog installation, review the [plan][11] page. Y
 [7]: /getting_started/tagging/
 [8]: https://app.datadoghq.com/logs/pipelines/pipeline/add
 [9]: https://app.datadoghq.com/apm/service-setup
-[10]: https://app.datadoghq.com/monitors/recommended
+[10]: https://app.datadoghq.com/monitors/templates
 [11]: /administrators_guide/plan
 [12]: /administrators_guide/plan/#resource-tagging
 [13]: https://github.com/DataDog/datadog-agent/tree/main/examples

@@ -1,0 +1,3 @@
+---
+title: List project favorites
+---

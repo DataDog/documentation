@@ -38,7 +38,7 @@ Clearing your DNS cache may help with Live Tail problems.
 To clear your DNS cache using Google Chrome:
 1. Launch the Google Chrome browser.
 1. Type `chrome://net-internals/#dns` in the address bar, then click Enter.
-1. Click **Clear host cache**.
+1. Click {{< ui >}}Clear host cache{{< /ui >}}.
 
 ## Check browser plugins and extensions
 
@@ -53,6 +53,20 @@ Verify that you have a role assigned to you which has the [`logs_live_tail`][3] 
 Determine whether an administrator configured a [logs restriction query (RBAC)][5] on your Datadog organization. If you lack the necessary permissions to access the logs you are querying in Live Tail, no logs are visible to you. If you believe you should have access to these logs, contact your Datadog account administrator to grant the required permissions.
 
 {{< img src="logs/explorer/live_tail/logs_rbac_page.png" alt="Logs RBAC page" style="width:100%;" >}}
+
+## Check log timestamps
+
+If you are expecting logs to appear in Live Tail which are not visible, verify whether the timestamps of the logs are within the 15 minute period of Live Tail's window.
+If log timestamps are aligned with UTC time, logs sent in real time should appear within the 15 minute period specified.
+
+Often, if timestamps are sent from hosts with a different local time than UTC, the offset of these timezones can cause discrepancies in how these logs are represented in Datadog.
+
+During processing, this may happen in two ways:
+- If using a Date Remapper processor in a Logs Pipeline, verify that the attribute referenced by the processor is reflective of UTC time.
+- If logs are sent as JSON, automatic parsing will extract the date attribute if it is reflected by a listed attribute in [JSON Preprocessing][10].
+
+If the attribute used to reflect the timestamp of the log is in a different timezone to UTC, see [Parsing dates][9] with a Grok Parser to shift the timezone.
+- This does not function for attributes parsed with JSON Preprocessing. These attributes must be modified outside of Preprocessing.
 
 ## Create a support ticket
 
@@ -83,3 +97,5 @@ Attach the HAR file to your support ticket.
 [6]: https://help.datadoghq.com/hc/en-us/requests/new
 [7]: https://support.google.com/admanager/answer/10358597?hl=en
 [8]: https://developer.chrome.com/docs/devtools/open
+[9]: /logs/log_configuration/parsing/?tab=matchers#parsing-dates
+[10]: /logs/log_configuration/pipelines/?tab=date#preprocessing

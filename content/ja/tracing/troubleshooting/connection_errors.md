@@ -1,6 +1,7 @@
 ---
 aliases:
 - /ja/tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
+description: さまざまなデプロイメント環境で、トレーシング ライブラリと Datadog Agent 間の接続エラーを診断し、解決します。
 title: APM 接続エラー
 ---
 
@@ -189,7 +190,7 @@ Datadog Agent が APM をリッスンしていない旨が表示された場合�
 
 #### ネットワークコンフィギュレーションを確認する
 
-コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注意**: Amazon ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
+コンテナ化された設定では、トレースを `localhost` または `127.0.0.1` に送信しても、Datadog Agent もコンテナ化されていて別の場所にあるため正しく動作しない場合があります。**注**: Amazon ECS on Fargate および AWS EKS on Fargate にはこのルールは適用されません。
 
 アプリケーションと Datadog Agent 間のネットワークが、その構成に必要なものと一致しているかどうかを判断します。
 

@@ -27,6 +27,12 @@ further_reading:
 - link: "/logs/logging_without_limits/"
   tag: "Documentation"
   text: "Logging Without Limits*"
+- link: "https://learn.datadoghq.com/courses/advanced-log-configuration"
+  tag: "Learning Center"
+  text: "Advanced Log Configuration"
+- link: "https://learn.datadoghq.com/courses/log-config-docker"
+  tag: "Learning Center"
+  text: "Configure Log Collection for a Containerized Application"
 algolia:
   tags: ["grok", "grok parser", "logs parsing", "Extracting Attributes", "Remapping attributes", "parsing"]
 ---
@@ -109,7 +115,7 @@ Datadog integrations and log collection are tied together. You can use an integr
 
 ## Reduce data transfer fees
 
-Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog’s [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
+Use Datadog's [Cloud Network Monitoring][7] to identify your organization's highest throughput applications. Connect to Datadog over supported private connections and send data over a private network to avoid the public internet and reduce your data transfer fees. After you switch to private links, use Datadog's [Cloud Cost Management][8] tools to verify the impact and monitor the reduction in your cloud costs.
 
 For more information, see [How to send logs to Datadog while reducing data transfer fees][9].
 
@@ -122,10 +128,32 @@ For more information, see [How to send logs to Datadog while reducing data trans
 [7]: /network_monitoring/cloud_network_monitoring/
 [8]: /cloud_cost_management/
 [9]: /logs/guide/reduce_data_transfer_fees/
- 
- 
+
+
+{{% /tab %}}
+
+{{% tab "Agent Check" %}}
+
+If you are developing a custom Agent integration, you can submit logs programmatically from within your Agent check using the `send_log` method. This allows your custom integration to emit logs alongside metrics, events, and service checks.
+
+To learn how to submit logs from your custom Agent check, see [Agent Integration Log Collection][15].
+
+[15]: /logs/log_collection/agent_checks/
 {{% /tab %}}
 {{< /tabs >}}
+
+### Limitations
+
+* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
+* A log event converted to JSON format should contain less than 2048 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
+* Only log events with a [timestamp][14] up to 18h in the past can be submitted. 
+  * <b>Preview available</b>: To submit logs from up to 7 days in the past, <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">register for the Preview</a>.
+* Log collection does not retain attributes with null values. 
+  * <b>Preview available</b>: To retain attributes with null values, <a href="https://www.datadoghq.com/product-preview/retain-attributes-with-null-values/">register for the Preview</a>.
+
+Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
+
+There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
 
 ## Additional configuration options
 
@@ -137,216 +165,40 @@ Datadog provides logging endpoints for both SSL-encrypted connections and unencr
 
 Use the [site][13] selector dropdown on the right side of the page to see supported endpoints by Datadog site.
 
-{{< site-region region="us" >}}
+| Site | Type  | Endpoint | Port | Description |
+|------|-------|----------|------|-------------|
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=http_endpoint >}}</code> | 443 | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][16]. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=agent_http_endpoint >}}</code> | 443 | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][17]. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>{{< region-param key=lambda_http_endpoint >}}</code> | 443 | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS. |
+| {{< region-param key=dd_datacenter >}} | HTTPS | <code>logs.{{< region-param key=browser_sdk_endpoint_domain >}}</code> | 443 | Used by the Browser SDK to send logs in JSON format over HTTPS. |
+
+### Custom log forwarding
+
+Any custom process or logging library able to forward logs through HTTP can be used in conjunction with Datadog Logs.
+
+You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][15] to get started.
+
+<div class="alert alert-info">
+The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, Datadog recommends that an individual log be no greater than 25 KB (25,000 bytes). If you use the Datadog Agent for logging, it is configured to split a log at 900 KB (900,000 bytes).
+</div>
+
+{{% collapse-content title="TCP" level="h3" expanded=false %}}
+
+{{% logs-tcp-disclaimer %}}
+
 
 | Site | Type        | Endpoint                                                                  | Port         | Description                                                                                                                                                                 |
 |------|-------------|---------------------------------------------------------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| US   | HTTPS       | `http-intake.logs.datadoghq.com`                                          | 443   | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1].                                                    |
-| US   | HTTPS       | `agent-http-intake.logs.datadoghq.com`                                    | 443   | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
-| US   | HTTPS       | `lambda-http-intake.logs.datadoghq.com`                                   | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| US   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443   | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
 | US   | TCP         | `agent-intake.logs.datadoghq.com`                                         | 10514 | Used by the Agent to send logs without TLS.
 | US   | TCP and TLS | `agent-intake.logs.datadoghq.com`                                         | 10516 | Used by the Agent to send logs with TLS.
 | US   | TCP and TLS | `intake.logs.datadoghq.com`                                               | 443   | Used by custom forwarders to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                 |
 | US   | TCP and TLS | `functions-intake.logs.datadoghq.com`                                     | 443   | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 | US   | TCP and TLS | `lambda-intake.logs.datadoghq.com`                                        | 443   | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-| Site | Type        | Endpoint                                                                  | Port | Description                                                                                                                                                                 |
-|------|-------------|---------------------------------------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| EU   | HTTPS       | `http-intake.logs.datadoghq.eu`                                           | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation.][1]                                                    |
-| EU   | HTTPS       | `agent-http-intake.logs.datadoghq.eu`                                     | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].                                                             |
-| EU   | HTTPS       | `lambda-http-intake.logs.datadoghq.eu`                                    | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                                                                            |
-| EU   | HTTPS       | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                                                                             |
 | EU   | TCP and TLS | `agent-intake.logs.datadoghq.eu`                                          | 443  | Used by the Agent to send logs in protobuf format over an SSL-encrypted TCP connection.                                                                                     |
 | EU   | TCP and TLS | `functions-intake.logs.datadoghq.eu`                                      | 443  | Used by Azure functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection. **Note**: This endpoint may be useful with other cloud providers. |
 | EU   | TCP and TLS | `lambda-intake.logs.datadoghq.eu`                                         | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over an SSL-encrypted TCP connection.                                                                  |
 
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------                              |------|--------------------------------------------------------------------------------------------------------------------------|
-| US3  | HTTPS | `http-intake.logs.us3.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US3  | HTTPS | `lambda-http-intake.logs.us3.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US3  | HTTPS | `agent-http-intake.logs.us3.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US3  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="us5" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US5  | HTTPS | `http-intake.logs.us5.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US5  | HTTPS | `lambda-http-intake.logs.us5.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US5  | HTTPS | `agent-http-intake.logs.us5.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US5  | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="ap1" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP1  | HTTPS | `http-intake.logs.ap1.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| AP1  | HTTPS | `lambda-http-intake.logs.ap1.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| AP1  | HTTPS | `agent-http-intake.logs.ap1.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP1  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="ap2" >}}
-
-| Site | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| AP2  | HTTPS | `http-intake.logs.ap2.datadoghq.com`                                      | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| AP2  | HTTPS | `lambda-http-intake.logs.ap2.datadoghq.com`                               | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| AP2  | HTTPS | `agent-http-intake.logs.ap2.datadoghq.com`                                | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| AP2  | HTTPS | {{< region-param key="browser_sdk_endpoint_domain" code="true" >}}        | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-{{< site-region region="gov" >}}
-
-| Site    | Type  | Endpoint                                                                  | Port | Description                                                                                                              |
-|---------|-------|---------------------------------------------------------------------------|------|--------------------------------------------------------------------------------------------------------------------------|
-| US1-FED | HTTPS | `http-intake.logs.ddog-gov.com`                                          | 443  | Used by custom forwarder to send logs in JSON or plain text format over HTTPS. See the [Logs HTTP API documentation][1]. |
-| US1-FED | HTTPS | `lambda-http-intake.logs.ddog-gov.com`                                   | 443  | Used by Lambda functions to send logs in raw, Syslog, or JSON format over HTTPS.                                         |
-| US1-FED | HTTPS | `agent-http-intake.logs.ddog-gov.com`                                    | 443  | Used by the Agent to send logs in JSON format over HTTPS. See the [Host Agent Log collection documentation][2].          |
-| US1-FED | HTTPS | `logs.`{{< region-param key="browser_sdk_endpoint_domain" code="true" >}} | 443  | Used by the Browser SDK to send logs in JSON format over HTTPS.                                                          |
-
-[1]: /api/latest/logs/#send-logs
-[2]: /agent/logs/#send-logs-over-https
-
-{{< /site-region >}}
-
-### Custom log forwarding
-
-Any custom process or logging library able to forward logs through **TCP** or **HTTP** can be used in conjunction with Datadog Logs.
-
-{{< tabs >}}
-{{% tab "HTTP" %}}
-
-You can send logs to Datadog platform over HTTP. Refer to the [Datadog Log HTTP API documentation][1] to get started.
-
-[1]: /api/latest/logs/#send-logs
-{{% /tab %}}
-{{% tab "TCP" %}}
-
-{{< site-region region="us" >}}
-
-You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
-
-```shell
-gnutls-cli intake.logs.datadoghq.com:10516
-```
-
-For OpenSSL, run the following command:
-
-```shell
-openssl s_client -connect intake.logs.datadoghq.com:10516
-```
-
-You must prefix the log entry with your [Datadog API Key][1] and add a payload.
-
-```
-<DATADOG_API_KEY> Log sent directly using TLS
-```
-
-Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
-
-```text
-<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
-
-[1]: /account_management/api-app-keys/#api-keys
-
-{{< /site-region >}}
-
-{{< site-region region="eu" >}}
-
-You can manually test your connection using OpenSSL, GnuTLS, or another SSL/TLS client. For GnuTLS, run the following command:
-
-```shell
-gnutls-cli tcp-intake.logs.datadoghq.eu:443
-```
-
-For OpenSSL, run the following command:
-
-```shell
-openssl s_client -connect tcp-intake.logs.datadoghq.eu:443
-```
-
-You must prefix the log entry with your [Datadog API Key][1] and add a payload.
-
-```
-<DATADOG_API_KEY> Log sent directly using TLS
-```
-
-Your payload, or `Log sent directly using TLS` as written in the example, can be in raw, Syslog, or JSON format. If your payload is in JSON format, Datadog automatically parses its attributes.
-
-```text
-<DATADOG_API_KEY> {"message":"json formatted log", "ddtags":"env:my-env,user:my-user", "ddsource":"my-integration", "hostname":"my-hostname", "service":"my-service"}
-```
-
-[1]: /account_management/api-app-keys/#api-keys
-
-{{< /site-region >}}
-
-{{< site-region region="us3" >}}
-The TCP endpoint is not recommended for this site. Contact [support][1] for more information.
-
-[1]: /help
-{{< /site-region >}}
-
-{{< site-region region="gov,us5,ap1,ap2" >}}
-
-The TCP endpoint is not supported for this site.
-
-[1]: /help
-{{< /site-region >}}
-
-
-[1]: https://app.datadoghq.com/organization-settings/api-keys
-[2]: https://app.datadoghq.com/logs/livetail
-{{% /tab %}}
-{{< /tabs >}}
-
-**Notes**:
-
-* The HTTPS API supports logs of sizes up to 1MB. However, for optimal performance, it is recommended that an individual log be no greater than 25K bytes. If you use the Datadog Agent for logging, it is configured to split a log at 900kB (900000 bytes).
-* A log event should not have more than 100 tags, and each tag should not exceed 256 characters for a maximum of 10 million unique tags per day.
-* A log event converted to JSON format should contain less than 256 attributes. Each of those attribute's keys should be less than 50 characters, nested in less than 20 successive levels, and their respective value should be less than 1024 characters if promoted as a facet.
-* Log events can be submitted with a [timestamp][14] that is up to 18h in the past.
-
-<div class="alert alert-info">
-<b>Preview available</b>: You can submit logs from the past 7 days, instead of the current 18-hour limit. <a href="https://www.datadoghq.com/product-preview/ingest-logs-up-to-7-days-old/">Register for the Preview</a>.
-</div>
-
-Log events that do not comply with these limits might be transformed or truncated by the system or not indexed if outside the provided time range. However, Datadog tries to preserve as much user data as possible.
-
-There is an additional truncation in fields that applies only to indexed logs: the value is truncated to 75 KiB for the message field and 25 KiB for non-message fields. Datadog still stores the full text, and it remains visible in regular list queries in the Logs Explorer. However, the truncated version will be displayed when performing a grouped query, such as when grouping logs by that truncated field or performing similar operations that display that specific field.
+{{% /collapse-content %}}
 
 ### Attributes and tags
 
@@ -374,7 +226,7 @@ For more information, see the complete [source code attributes documentation][11
 
 ## Next steps
 
-Once logs are collected and ingested, they are available in **Log Explorer**. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
+Once logs are collected and ingested, they are available in {{< ui >}}Log Explorer{{< /ui >}}. Log Explorer is where you can search, enrich, and view alerts on your logs. See the [Log Explorer][12] documentation to begin analyzing your log data, or see the additional log management documentation below.
 
 {{< img src="logs/explore.png" alt="Logs appearing in the Log Explorer" style="width:100%" >}}
 
@@ -398,3 +250,7 @@ Once logs are collected and ingested, they are available in **Log Explorer**. Lo
 [12]: /logs/explore/
 [13]: /getting_started/site/
 [14]: /logs/log_configuration/pipelines/?tab=date#date-attribute
+[15]: /api/latest/logs/#send-logs
+[16]: /api/latest/logs/#send-logs
+[17]: /agent/logs/#send-logs-over-https
+

@@ -1,4 +1,6 @@
 ---
+description: Aprende a crear dashboards y monitores que comparen las métricas de latencia
+  del servicio semana tras semana para identificar tendencias y problemas de rendimiento.
 further_reading:
 - link: /tracing/guide/alert_anomalies_p99_database/
   tag: 3 minutos
@@ -46,7 +48,7 @@ Datadog puede mostrarte la latencia de tu aplicación a lo largo del tiempo y c�
 
 **Nota**: A medida que realices tu análisis, puedes exportar este gráfico a cualquier dashboard desde la vista del servicio, y mostrar estos datos junto a cualquier otro gráfico generado en Datadog, incluyendo tus métricas personalizadas, información de nivel de host y logs.
 
-## Leer más
+## Referencias adicionales
 
 {{< partial name="whats-next/whats-next.html" >}}
 

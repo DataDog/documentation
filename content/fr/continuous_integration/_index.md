@@ -21,6 +21,9 @@ further_reading:
 - link: /continuous_integration/pipelines
   tag: Documentation
   text: Explorer les données de pipeline pour résoudre les problèmes liés aux builds
+- link: /account_management/billing/ci_visibility
+  tag: Documentation
+  text: En savoir plus sur les considérations relatives à la facturation de CI Visibility
 - link: /continuous_integration/tests/
   tag: Documentation
   text: Explorer les données de test pour identifier et résoudre les tests problématiques
@@ -36,10 +39,25 @@ further_reading:
 - link: https://www.datadoghq.com/blog/modernize-your-ci-cd-environment/
   tag: Blog
   text: Surveiller vos modernisations CI/CD avec Datadog CI Pipeline Visibility
+- link: https://www.datadoghq.com/blog/datadog-detection-as-code/
+  tag: Blog
+  text: Comment nous utilisons Datadog pour la détection en tant que code
+- link: https://www.datadoghq.com/blog/cache-purge-ci-cd/
+  tag: Blog
+  text: Patterns pour une purge du cache à la fois efficace et sûre dans les pipelines
+    de CI/CD
+- link: https://www.datadoghq.com/blog/gitlab-source-code-integration
+  tag: Blog
+  text: Dépannage plus rapide grâce à l'intégration du code source GitLab dans Datadog
 title: Continuous Integration Visibility
 ---
 
-<div class="alert alert-info">Cette page explique comment intégrer vos métriques et données d'intégration continue (CI) dans des dashboards Datadog. Si vous souhaitez exécuter des tests continus dans vos pipelines CI, consultez plutôt la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
+<div class="alert alert-info">Cette page concerne l'ajout de vos métriques et données de CI dans des dashboards Datadog. Si vous souhaitez exécuter des tests Continuous Testing dans vos pipelines de CI, consultez la section <a href="/continuous_testing/cicd_integrations/" target="_blank">Tests continus et CI/CD</a>.</div>
+
+{{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Participer" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
+  Participez à la session de présentation de CI Visibility pour mieux comprendre comment cette solution améliore l'efficacité des pipelines de CI et comment configurer les solutions Testing Visibility et Pipeline Visibility. 
+{{< /learning-center-callout >}}
+
 
 ## Présentation
 
@@ -59,7 +77,18 @@ CI Visibility vous aide à corriger les erreurs liées aux builds défectueux e
 
 Datadog s'intègre à une variété de fournisseurs de CI pour collecter des métriques qui suivent les performances de vos pipelines de CI, du commit au déploiement. Ces métriques sont utilisées pour identifier les tendances de performances et les opportunités d'amélioration.
 
-{{< partial name="continuous_integration/ci-pipelines-getting-started.html" >}}
+{{< card-grid >}}
+  {{< image-card href="/continuous_integration/pipelines/awscodepipeline/" src="integrations_logos/aws-codepipeline_small.svg" alt="aws codepipeline" >}}
+  {{< image-card href="/continuous_integration/pipelines/azure/" src="integrations_logos/azure-pipelines_small.svg" alt="azure devops extension" >}}
+  {{< image-card href="/continuous_integration/pipelines/buildkite/" src="integrations_logos/buildkite_small.svg" alt="buildkite" >}}
+  {{< image-card href="/continuous_integration/pipelines/circleci/" src="integrations_logos/circleci.png" alt="circleci orb" >}}
+  {{< image-card href="/continuous_integration/pipelines/codefresh/" src="integrations_logos/codefresh_small.svg" alt="codefresh" >}}
+  {{< image-card href="/continuous_integration/pipelines/github/" src="integrations_logos/github_small.svg" alt="github actions" >}}
+  {{< image-card href="/continuous_integration/pipelines/gitlab/" src="integrations_logos/gitlab-logo-100.svg" alt="gitlab" >}}
+  {{< image-card href="/continuous_integration/pipelines/jenkins/" src="integrations_logos/jenkins.png" alt="jenkins" >}}
+  {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
+  {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
+{{< /card-grid >}}
 
 </br>
 

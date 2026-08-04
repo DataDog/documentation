@@ -10,7 +10,13 @@ title: データベースモニタリングの収集データ
 
 収集されたメトリクスの完全なリストを表示するには、データベース製品のインテグレーション**データ収集**ドキュメントセクションを参照してください。
 
-{{< partial name="dbm/dbm-data-collected" >}}
+{{< card-grid card_width="225px" >}}
+  {{< image-card href="/integrations/postgres/#data-collected" src="integrations_logos/postgres.png" alt="Postgres" >}}
+  {{< image-card href="/integrations/mysql/#data-collected" src="integrations_logos/mysql.png" alt="MySQL" >}}
+  {{< image-card href="/integrations/sqlserver/#data-collected" src="integrations_logos/sqlserver.png" alt="SQL Server" >}}
+  {{< image-card href="/integrations/oracle/#data-collected" src="integrations_logos/oracle.png" alt="Oracle" >}}
+  {{< image-card href="/integrations/mongodb/#data-collected" src="integrations_logos/mongo.png" alt="Oracle" >}}
+{{< /card-grid >}}
 <p></p>
 
 データベースモニタリングビューに使用されるメトリクスは、主に次のとおりです。
@@ -73,12 +79,21 @@ Datadog データベースモニタリングでは、ホストでの実行にか
 
 クエリサンプルには、追跡される一意の正規化されたクエリ数の上限はありませんが、サンプリングには遅いまた頻度の高いクエリに対して偏りがあります。選択されたクエリサンプルに、関連するクエリメトリクスがない場合もあります。これは、短期間にクエリが遅かった、または頻度が高かったものの、トップクエリになるほど保持されなかった場合に見られます。
 
+## クエリの保持期間
+
+Datadog は、収集されるデータの種類に基づいて、Database Monitoring のクエリ データを保持します:
+
+- Query Metrics は 15 か月間保持されます。
+- Query Samples は 15 日間保持されます。
+
+詳細は、[データ保持期間][5] を参照してください。
+
 ## その他のクエリ
 
 _その他のクエリ_ とは、上位 200 件に表れなかったすべてのクエリのメトリクスのことです。クエリは、ある時間枠にトップクエリでも他ではトップクエリでないため、特定のクエリのメトリクスは別の正規化されたクエリとして追跡され、他の時間はその他のクエリとしてカウントされます。
-
 
 [1]: /ja/dashboards/
 [2]: /ja/monitors/
 [3]: /ja/notebooks/
 [4]: /ja/data_security/logs/
+[5]: /ja/data_security/data_retention_periods/

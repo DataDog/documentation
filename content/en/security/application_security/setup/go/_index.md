@@ -1,5 +1,9 @@
 ---
 title: Enabling App and API Protection for Go
+aliases:
+  - /security/application_security/setup/standalone/go
+  - /security/application_security/enabling/tracing_libraries/threat_detection/go
+  - /security/application_security/enabling/go
 further_reading:
 - link: "/security/application_security/add-user-info/"
   tag: "Documentation"
@@ -15,9 +19,15 @@ further_reading:
   text: "Troubleshooting App and API Protection"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 ## Overview
 
-App and API Protection (AAP) leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrates seamlessly into your workflow using [Orchestrion][6], an automatic compile-time instrumentation of Go code that does not require code changes. 
+App and API Protection (AAP) leverages the [Datadog Go library][5] to monitor and secure your Go service. The library integrates seamlessly into your workflow using [Orchestrion][6], an automatic compile-time instrumentation of Go code that does not require code changes.
 
 For detailed compatibility information, including supported Go versions, frameworks, and deployment environments, see [Go Compatibility Requirements][2].
 
@@ -29,7 +39,7 @@ For detailed compatibility information, including supported Go versions, framewo
   {{< appsec-integration name="macOS" avatar="apple" link="./setup?tab=environmentvariable" >}}
 {{< /appsec-integrations >}}
 
-### Cloud and Container Platforms
+### Container Platforms
 {{< appsec-integrations >}}
 {{< appsec-integration name="Docker" avatar="docker" link="./setup?tab=dockercli" >}}
 {{< appsec-integration name="Kubernetes" avatar="kubernetes" link="./setup?tab=kubernetes" >}}
@@ -37,7 +47,19 @@ For detailed compatibility information, including supported Go versions, framewo
 
 ### AWS
 {{< appsec-integrations >}}
-{{< appsec-integration name="AWS ECS" avatar="aws-fargate" link="./setup?tab=amazonecs" >}}
+{{< appsec-integration name="AWS Lambda" avatar="amazon-lambda" link="../aws/lambda/go" >}}
+{{< appsec-integration name="AWS Fargate" avatar="aws-fargate" link="./aws-fargate" >}}
+{{< appsec-integration name="AWS ECS" avatar="amazon-ecs" link="./setup?tab=amazonecs" >}}
+{{< /appsec-integrations >}}
+
+### Google Cloud Platform
+{{< appsec-integrations >}}
+{{< appsec-integration name="Google Cloud Run" avatar="google-cloud-run" link="../gcp/cloud-run/go" >}}
+{{< /appsec-integrations >}}
+
+### Microsoft Azure
+{{< appsec-integrations >}}
+  {{< appsec-integration name="Azure App Service" avatar="azure-appserviceenvironment" link="../azure/app-service" >}}
 {{< /appsec-integrations >}}
 
 ## Additional Resources
@@ -53,4 +75,3 @@ For detailed compatibility information, including supported Go versions, framewo
 [4]: /security/application_security/setup/go/sdk
 [5]: https://github.com/DataDog/dd-trace-go/
 [6]: https://datadoghq.dev/orchestrion/
-

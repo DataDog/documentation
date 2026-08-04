@@ -63,14 +63,14 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 2. Enable [Cloud SIEM][8].
 3. Select and configure [Content Packs][9], which provide out-of-the-box content for critical security log sources.
 4. Select and configure [additional log sources][10] you want Cloud SIEM to analyze.
-5. Click **Activate**. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
+5. Click {{< ui >}}Activate{{< /ui >}}. A custom Cloud SIEM log index (`cloud-siem-xxxx`) is created.
 6. If the Cloud SIEM setup page shows the warning "The Cloud SIEM index is not in the first position", follow the steps in the [Reorder the Cloud SIEM index](#reorder-the-cloud-siem-index) section.
 
 ### Reorder the Cloud SIEM index
 
 {{< img src="getting_started/cloud_siem/cloud-siem-setup-warning.png" alt="A yellow warning box saying that the index configuration needs attention" style="width:80%;">}}
 
-1. Click **Reorder index in Logs Configuration**.
+1. Click {{< ui >}}Reorder index in Logs Configuration{{< /ui >}}.
 
 2. Confirm the modal title says "Move cloud-siem-xxxx to..." and that the `cloud-siem-xxxx` text in the index column is light purple.
 
@@ -80,11 +80,11 @@ This guide walks you through best practices for getting started with Cloud SIEM.
 
 {{< img src="getting_started/cloud_siem/move-index-highlight.png" alt="The Move cloud-siem-xxxx modal showing a blue line at the top of the first index" style="width:65%;">}}
 
-4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click **Move**.
+4. The text confirms the position selected: "Select the new placement of your index: Position 1". Click {{< ui >}}Move{{< /ui >}}.
 
-5. Review the warning text. If you are satisfied with the change, click **Reorder**.
+5. Review the warning text. If you are satisfied with the change, click {{< ui >}}Reorder{{< /ui >}}.
 
-6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the **Move to** icon and follow steps 3 to 5.
+6. Review the index order and confirm that the `cloud-siem-xxxx` index is where you want it. If you want to move the index, click the {{< ui >}}Move to{{< /ui >}} icon and follow steps 3 to 5.
 
 7. Navigate back to the [Cloud SIEM setup page][11].
 
@@ -127,17 +127,17 @@ Contact [support][26] to disable Cloud SIEM.
 [6]: https://www.datadoghq.com/blog/monitoring-cloudtrail-logs/
 [7]: https://www.datadoghq.com/blog/how-to-monitor-authentication-logs/
 [8]: https://app.datadoghq.com/security/landing
-[9]: https://app.datadoghq.com/security/content-packs
+[9]: https://app.datadoghq.com/security/siem/content-packs
 [10]: https://app.datadoghq.com/security/configuration/siem/log-sources
 [11]: https://app.datadoghq.com/security/configuration/siem/setup
 [12]: /security/default_rules/#cat-cloud-siem-log-detection
 [13]: /security/detection_rules/
-[14]: https://app.datadoghq.com/security?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&product=siem&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
+[14]: https://app.datadoghq.com/security/siem/signals?query=%40workflow.rule.type%3A%28%22Log%20Detection%22%20OR%20%22Signal%20Correlation%22%29&column=time&order=desc&view=signal&viz=stream&start=1676321431953&end=1676407831953&paused=false
 [15]: /security/cloud_siem/triage_and_investigate/investigate_security_signals
 [16]: https://app.datadoghq.com/security/configuration/notification-rules
 [17]: /security/notifications/rules/
 [18]: https://app.datadoghq.com/security/configuration/reports
-[19]: https://app.datadoghq.com/security/investigator/
+[19]: https://app.datadoghq.com/security/siem/investigator/
 [20]: /security/cloud_siem/triage_and_investigate/investigator
 [21]: https://app.datadoghq.com/dashboard/lists/preset/100
 [22]: /dashboards/#overview

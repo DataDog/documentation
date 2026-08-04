@@ -1,11 +1,11 @@
 ---
 title: APM Connection Errors
-description: Diagnose and resolve connection errors between tracing libraries and the Datadog Agent in various deployment environments.
+description: Diagnose and resolve connection errors between SDKs and the Datadog Agent in various deployment environments.
 aliases:
   - /tracing/faq/why-am-i-getting-errno-111-connection-refused-errors-in-my-application-logs/
 ---
 
-If the application with the tracing library cannot reach the Datadog Agent, look for connection errors in the [tracer startup logs][1] or [tracer debug logs][2], which can be found with your application logs.
+If the application with the SDK cannot reach the Datadog Agent, look for connection errors in the [tracer startup logs][1] or [tracer debug logs][2], which can be found with your application logs.
 
 ## Errors that indicate an APM Connection problem
 
@@ -171,12 +171,14 @@ APM Agent
   Status: Not running or unreachable on localhost:8126.
 ```
 
+**Note**: On Linux, starting with Agent 7.80.0, the trace-agent starts only after receiving trace data. This reduces memory usage, but means `agent status` may show APM as not running or unreachable even when APM is correctly configured. If no traces have been sent yet, this is expected behavior. To disable this behavior, set `apm_config.socket_activation.enabled: false` in `datadog.yaml`, or set `DD_APM_SOCKET_ACTIVATION_ENABLED=false` in your environment.
+
 ## Troubleshooting the connection problem
-Whether it's the tracing library or the Datadog Agent displaying the error, there are a few ways to troubleshoot.
+Whether it's the SDK or the Datadog Agent displaying the error, there are a few ways to troubleshoot.
 
 ### Host-based setups
 
-If your application and the Datadog Agent are not containerized, the application with the tracing library should be trying to send traces to `localhost:8126` or `127.0.0.1:8126`, because that is where the Datadog Agent is listening.
+If your application and the Datadog Agent are not containerized, the application with the SDK should be trying to send traces to `localhost:8126` or `127.0.0.1:8126`, because that is where the Datadog Agent is listening.
 
 If the Datadog Agent shows that APM is not listening, check for port conflicts with port 8126, which is what the APM component of the Datadog Agent uses by default.
 
@@ -205,7 +207,7 @@ If this command fails, your container cannot access the Agent. Refer to the foll
 
 A great place to get started is the [APM in-app setup documentation][6].
 
-#### Review where your tracing library is trying to send traces
+#### Review where your SDK is trying to send traces
 
 Using the error logs listed above for each language, check to see where your traces are being directed.
 
@@ -225,7 +227,7 @@ See the table below for example setups. Some require setting up additional netwo
 
 **Note about web servers**: If the `agent_url` section in the [tracer startup logs][1] has a mismatch against the `DD_AGENT_HOST` environment variable that was passed in, review how environment variables are cascaded for that specific server. For example, in PHP, there's an additional setting to ensure that [Apache][18] or [Nginx][19] pick up the `DD_AGENT_HOST` environment variable correctly.
 
-If your tracing library is sending traces correctly based on your setup, then proceed to the next step.
+If your SDK is sending traces correctly based on your setup, then proceed to the next step.
 
 #### Review your Datadog Agent status and configuration
 
@@ -234,6 +236,8 @@ If your setup is not on Fargate, you can `exec` into the Datadog Agent container
 **Note**: If you use Kubernetes with dedicated containers, `exec` into the dedicated Trace Agent Container.
 
 Look for the APM Agent section to confirm whether it is running:
+
+**Note:** On Linux, starting with Agent 7.80.0, the trace-agent starts only after receiving trace data. This reduces memory usage, but means the APM Agent section may show as not running or unreachable even when APM is correctly configured. If no traces have been sent yet, this is expected behavior. To disable this behavior, set `apm_config.socket_activation.enabled: false` in `datadog.yaml`, or set `DD_APM_SOCKET_ACTIVATION_ENABLED=false` in your environment.
 
 ```text
 =========

@@ -1,13 +1,15 @@
 ---
 title: Campaigns
+site_support_id: idp
+description: Coordinate time-bound engineering initiatives by grouping Scorecard rules under a shared goal and tracking adoption across entities and teams.
 further_reading:
 - link: "/internal_developer_portal/scorecards/"
   tag: "Documentation"
   text: "Scorecards Documentation"
+- link: "https://www.datadoghq.com/blog/idp-campaigns/"
+  tag: "Blog"
+  text: "Coordinate large-scale engineering initiatives with IDP Campaigns"
 ---
-
-{{< callout url="https://www.datadoghq.com/product-preview/idp-preview-features/" d_target="#signupModal" btn_hidden="false" header="Join the Preview for Campaigns!" >}}
-{{< /callout >}}
 
 {{< img src="/tracing/software_catalog/campaign-manage.png" alt="List of Campaigns in Internal Developer Portal" style="width:90%;" >}}
 
@@ -22,11 +24,13 @@ Use the [**Campaigns** tab on the Scorecards page][2] to:
 - Track progress by rule, team, or status
 - Follow up with teams directly from the interface 
 
-If your service is part of a campaign, related rules and deadlines appear in the entity's **Scorecards** tab in Software Catalog, and on the entity page in the **Scorecards** section. This visibility lets teams act on campaign goals without relying on manual reminders or external documentation.
+If your service is part of a campaign, related rules and deadlines appear in the entity's **Scorecards** tab in Catalog, and on the entity page in the **Scorecards** section. This visibility lets teams act on campaign goals without relying on manual reminders or external documentation.
 
 ## Creating a campaign
 
 Create and manage campaigns from the [**Campaigns** tab in Scorecards][2]. 
+
+**Note:** Creating a campaign requires the Service Catalog Write and Case Management Write permissions. 
 
 {{< img src="/tracing/software_catalog/campaign-creation.png" alt="Campaign creation page with fields filled out" style="width:90%;" >}}
 

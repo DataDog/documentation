@@ -11,10 +11,11 @@ aliases:
 Before setting up Runtime Code Analysis (IAST), ensure the following prerequisites are met:
 
 1. **Datadog Agent Installation:** The Datadog Agent is installed and configured for your application's operating system or container, cloud, or virtual environment.
-2. **Datadog APM Configuration:** Datadog APM is configured for your application or service, and web traces (`type:web`) are being received by Datadog.
-3. **Supported Tracing Library:** The Datadog Tracing Library used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
+2. **Supported SDK:** The Datadog SDK used by your application or service supports Runtime Code Analysis (IAST) capabilities for the language of your application or service. For more details, see the **Compatibility Requirements** section below.
 
-## Using Datadog Tracing Libraries
+<div class="alert alert-info">The Datadog Agent and SDK are the only requirements for IAST. APM tracing and Infrastructure Monitoring are not required; IAST reports findings independently of both. To disable APM or Infrastructure Monitoring, see <a href="#disable-apm-and-infrastructure-monitoring">Disable APM and Infrastructure Monitoring</a>.</div>
+
+## Using Datadog SDKs
 
 Select your application language for details on how to enable Runtime Code Analysis (IAST) for your language and infrastructure types.
 
@@ -26,7 +27,7 @@ You can detect code-level vulnerabilities and monitor application security in Ja
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -87,6 +88,34 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+{{< tabs >}}
+{{% tab "Using system properties" %}}
+
+Start your Java application with the Datadog Agent and IAST enabled using system properties:
+
+```bash
+java -javaagent:/path/to/dd-java-agent.jar -Ddd.iast.enabled=true -Ddd.apm.tracing.enabled=false -Ddd.service=<MY_SERVICE> -Ddd.env=<MY_ENV> -jar path/to/app.jar
+```
+{{% /tab %}}
+
+{{% tab "Using environment variables" %}}
+
+Set the required environment variables:
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+
 [1]: https://github.com/DataDog/dd-trace-java/releases
 [2]: /security/code_security/iast/setup/
 [3]: /security/code_security/iast/setup/
@@ -104,7 +133,7 @@ You can detect code-level vulnerabilities and monitor application security in .N
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][3] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration. For example, on Windows self-hosted, run the following PowerShell snippet as part of your application start-up script:
 
    ```sh
@@ -199,6 +228,18 @@ Add the following line to your container Dockerfile:
 ENV DD_IAST_ENABLED=true
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
+
 To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
 
 {{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
@@ -220,10 +261,10 @@ You can detect code-level vulnerabilities and monitor application security in No
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][4] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
-   If you initialize the APM library on the command line using the `--require` option to Node.js:
+   If you initialize the Datadog SDK on the command line using the `--require` option to Node.js:
 
    ```shell
    node --require dd-trace/init app.js
@@ -280,6 +321,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
 [1]: https://github.com/DataDog/dd-trace-js/blob/master/MIGRATING.md
 [2]: /security/code_security/iast/setup/nodejs/
 [3]: /security/code_security/iast/setup/
@@ -291,14 +343,12 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 
 {{% collapse-content title="Python" level="h4" %}}
 
-You can detect code-level vulnerabilities and monitor application security in Python applicationss running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
-
-NOTE: Runtime Code Analysis (IAST) in Python is in Preview.
+You can detect code-level vulnerabilities and monitor application security in Python applications running in Docker, Kubernetes, Amazon ECS, and AWS Fargate.
 
 Follow these steps to enable Runtime Code Analysis (IAST) in your service:
 
 1. [Update your Datadog Agent][6] to at least version 7.41.1.
-2. Update your Datadog Tracing Library to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
+2. Update your Datadog SDK to at least the minimum version needed to turn on Runtime Code Analysis (IAST). For details, see the **Compatibility Requirements** below.
 3. Add the `DD_IAST_ENABLED=true` environment variable to your application configuration.
 
    From the command line:
@@ -357,6 +407,17 @@ Update your ECS task definition JSON file, by adding this in the environment sec
 ]
 ```
 
+#### APM tracing disabled
+
+To disable APM tracing while keeping IAST enabled, you must set the APM tracing variable to false.
+
+```Dockerfile
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+```
+
 #### Third-Party Library Compatibility Note
 
 Runtime Code Analysis (IAST) modifies Python code at runtime. This could cause conflicts with other third-party Python libraries that perform similar code transformations, particularly with the following, though not limited to them:
@@ -385,26 +446,47 @@ using the CPython API, or on intermediate language systems like Cython, the resu
 ### Finishing setup
 
 1. Restart your service.
-2. To see Runtime Code Analysis (IAST) in action, browse your service and find code-level vulnerabilities in the [Vulnerability Explorer][4].
-
-{{< img src="/security/application_security/Code-Level-Vulnerability-Details-New.mp4" alt="Video showing Code Vulnerabilities" video="true" >}}
+2. To see Runtime Code Analysis (IAST) in action, browse your service and find IAST vulnerabilities in the [Runtime Code (IAST) Vulnerability Explorer][4].
 
 If you need additional assistance, contact [Datadog support][5].
 
 [1]: /security/code_security/iast/setup/
-[4]: https://app.datadoghq.com/security/appsec/vm
+[4]: https://app.datadoghq.com/security/code-security/iast
 [5]: /help
+
+## Disable APM and Infrastructure Monitoring
+
+To run IAST without APM traces or infrastructure metrics, disable them with the environment variables below.
+
+### Disable APM tracing
+
+To disable APM tracing on the tracer while keeping IAST enabled, set `DD_APM_TRACING_ENABLED=false`:
+
+{{< code-block lang="bash" >}}
+DD_IAST_ENABLED=true
+DD_APM_TRACING_ENABLED=false
+DD_SERVICE=<YOUR_SERVICE_NAME>
+DD_ENV=<YOUR_ENVIRONMENT>
+{{< /code-block >}}
+
+### Disable infrastructure monitoring
+
+To disable infrastructure metrics collection on the Datadog Agent, set `DD_INFRASTRUCTURE_MODE=none` in your Agent configuration:
+
+{{< code-block lang="bash" >}}
+DD_INFRASTRUCTURE_MODE=none
+{{< /code-block >}}
 
 ## Compatibility Requirements
 
-The following code security capabilities are supported relative to each language's tracing library:
+The following code security capabilities are supported relative to each language's SDK:
 
 | Code Security capability                      | Java    | .NET     | Node.js    | Python      | Go             | Ruby          | PHP           |
 |-----------------------------------------------|---------|----------|------------|-------------|----------------|---------------|---------------|
 | Runtime Software Composition Analysis (SCA)   | 1.1.4   | 2.16.0   | 4.0.0      | 1.5.0       | 1.49.0         | 1.11.0        | 0.90.0        |
-| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | Preview     | not supported  | not supported | not supported |
+| Runtime Code Analysis (IAST)                  | 1.15.0  | 2.42.0   | 4.18.0     | 3.18.0      | not supported  | not supported | not supported |
 
-**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require Datadog's tracing library. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
+**Note**: **Static Software Composition Analysis (SCA)** and **Static Code Analysis (SAST)** capabilities do not require the Datadog SDK. Therefore, the requirements listed below do not apply to these two Code Security capabilities.
 
 Select your application language for details about framework compatibility and feature support.
 
@@ -753,7 +835,7 @@ The following code security capabilities are supported in the Python library, fo
 | Code Security capability                    | Minimum Python tracer version |
 | ------------------------------------------- |-------------------------------|
 | Runtime Software Composition Analysis (SCA) | 1.5.0                         |
-| Runtime Code Analysis (IAST)                | Preview (2.21.0)              |
+| Runtime Code Analysis (IAST)                | 3.18.0                        |
 
 #### Supported deployment types
 | Type        | Runtime Code Analysis (IAST)      |
@@ -773,26 +855,16 @@ The Python Application Security Client library follows a [versioning policy][3] 
 
 Two release branches are supported:
 
-| Release    | Support level                              | Minimum Datadog Agent |
-|------------|--------------------------------------------|-----------------------|
-| `>=3.0,<4` | General Availability   7.28                |
-| `>=2.0,<3` | Maintenance (End of Life October 31, 2025) | 7.28                  |
-|    `<2`    | End of Life                                |                       |
+{{< partial name="trace_collection/python/supported_versions.html" >}}
 
 And the library supports the following runtimes:
 
-| OS      | CPU                   | Runtime | Runtime version | Supported ddtrace versions |
-|---------|-----------------------|---------|-----------------|----------------------------|
-| Linux   | x86-64, i686, AArch64 | CPython | 3.8+            | `>=3,<4`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.8+            | `>=3,<4`                   |
-| Windows | 64bit, 32bit          | CPython | 3.8+            | `>=3,<4`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 3.7-3.13        | `>=2,<3`                   |
-| MacOS   | Intel, Apple Silicon  | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Windows | 64bit, 32bit          | CPython | 3.7-3.13        | `>=2,<3`                   |
-| Linux   | x86-64, i686, AArch64 | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| MacOS   | Intel, Apple Silicon  | CPython | 2.7, 3.5-3.11   | `<2`                       |
-| Windows | 64bit, 32bit          | CPython | 2.7, 3.5-3.11   | `<2`                       |
-
+| OS      | CPU                   | Runtime   | Runtime version | Supported ddtrace versions   |
+|---------|-----------------------|-----------|-----------------|------------------------------|
+| Linux   | x86-64, AArch64       | CPython   | 3.9+            | >=4, <5                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.9+            | >=4, <5                      |
+| Linux   | x86-64, i686, AArch64 | CPython   | 3.8+            | >=3, <4                      |
+| macOS   | Intel, Apple Silicon  | CPython   | 3.8+            | >=3, <4                      |
 
 #### Web framework compatibility
 ##### Code Security Capability Notes
@@ -801,13 +873,11 @@ And the library supports the following runtimes:
 
 #### Supported frameworks
 
-| Framework   | Versions     | Runtime Code Analysis (IAST)    |
-|-------------|--------------|---------------------------------|
-| Django      | 1.8          | <i class="icon-check-bold"></i> |
-| FastAPI     | 0.86         | <i class="icon-check-bold"></i> |
-| Flask       | 0.10         | <i class="icon-check-bold"></i> |
-
-Support for query strings is not available for Flask.
+| Framework   | Versions | Runtime Code Analysis (IAST)    |
+|-------------|----------|---------------------------------|
+| Django      | 2.2      | <i class="icon-check-bold"></i> |
+| FastAPI     | 0.86     | <i class="icon-check-bold"></i> |
+| Flask       | 1.1      | <i class="icon-check-bold"></i> |
 
 <div class="alert alert-info">If you don't see your framework of choice listed, let us know! Fill out <a href="https://forms.gle/gHrxGQMEnAobukfn7">this short form to send details</a>.</div>
 

@@ -36,11 +36,11 @@ A trace query is composed of two or more [span queries](#span-queries), joined b
 
 Query for spans from a specific environment, service, or endpoint using the [Span query syntax][1]. Use autocomplete suggestions to view facets and recent queries.
 
-Click **Add another span query** to add a span query and use it in the trace query statement.
+Click {{< ui >}}Add another span query{{< /ui >}} to add a span query and use it in the trace query statement.
 
 ### Trace query operators
 
-Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the **Traces matching** field, using operators between the letters that represent each span query:
+Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace query in the {{< ui >}}Traces matching{{< /ui >}} field, using operators between the letters that represent each span query:
 
 {{< img src="/tracing/trace_queries/traces_matching.png" alt="Span queries combined into a trace query" style="width:50%;" >}}
 
@@ -54,16 +54,16 @@ Combine multiple span queries, labeled `a`, `b`, `c`, and so on, into a trace qu
 
 ### Trace-level filters
 
-Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  **Where** statement:
+Filter the result set of traces further by applying filters on trace-level attributes like the number of spans or the end-to-end duration of the trace in the  {{< ui >}}Where{{< /ui >}} statement:
 
 {{< img src="/tracing/trace_queries/where_statement.png" alt="Trace-level filters example" style="width:100%;" >}}
 
 
 | Filter | Description | Example |
 |-----|-----|-----|
-| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- **queryA**:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- **Traces matching**:`a`<br/>- **Where**:`span_count(a):>10`|
-| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>**Where**`total_span_count:>1000` |
-| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>**Where**:`trace_duration:>2s` |
+| `span_count(a)` | Number of occurrences of a span | Traces that contain more than 10 calls to a mongo database: <br/>- {{< ui >}}queryA{{< /ui >}}:`service:web-store-mongo @db.statement:"SELECT * FROM stores`<br/>- {{< ui >}}Traces matching{{< /ui >}}:`a`<br/>- {{< ui >}}Where{{< /ui >}}:`span_count(a):>10`|
+| `total_span_count` | Number of spans in the trace | Traces that contain more than 1000 spans: <br/>{{< ui >}}Where{{< /ui >}}`total_span_count:>1000` |
+| `trace_duration` | End to end trace duration | Traces for which the end-to-end execution time is more than 5 seconds : <br/>{{< ui >}}Where{{< /ui >}}:`trace_duration:>5s` |
 
 ## Flow Map
 
@@ -101,26 +101,22 @@ For example, if you query for traces that contain a span from the service `web-s
 
 ## How Trace Queries source data
 
-Datadog uses the [Intelligent Retention Filter][3] to index data for Trace Queries. It does so by performing: 
+Trace Queries run on traces indexed by the [intelligent retention filter][3] and [trace-level retention filters][6].
 
-- [Flat sampling](#1-flat-sampling): A uniform 1% sample of ingested spans.
-- [Diversity sampling](#diversity-sampling): A representative, diverse selection of traces to keep visibility over each environment, service, operation, and resource.
+{{< img src="tracing/trace_queries/trace_queries_base_data.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="Flow showing where trace retention filters apply in the processing pipeline" >}}
 
-These two sampling mechanisms capture **complete traces**, meaning that all spans of a trace are always indexed to ensure that Trace Queries return accurate results.
+The intelligent retention filter is enabled by default and includes:
+- [Flat sampling][4]: Retains all traces correlated with 1% of ingested RUM sessions, plus a uniform 1% sample of ingested spans, ensuring correlation between frontend sessions and backend traces.
+- [Diversity sampling][5]: Retains a diverse set of traces to maintain visibility across environments, services, operations, and resources.
 
-{{< img src="tracing/trace_queries/trace_queries_new_dataset.png" style="width:100%; background:none; border:none; box-shadow:none;" alt="1% Flat Sampling & Diversity Sampling" >}}
+Both Flat sampling and Diversity sampling capture **complete traces**, meaning all spans within a trace are indexed to ensure accurate results in Trace Queries.
 
-**Note**: Spans indexed by flat sampling and diversity sampling do not count towards the usage of indexed spans, and therefore, **do not impact your bill**.
+Trace-level retention filters are configurable. Use a filter query to target spans by any tag or attribute and retain the most critical traces. Setting a trace rate ensures that the filter retains all spans of a trace so you can query those traces in Trace Queries.
 
-### 1% flat sampling
-`retained_by:flat_sampled`
 
-Flat 1% sampling is applied based on the `trace_id`, meaning that all spans belonging to the same trace share the same sampling decision. To learn more, read the [one percent flat sampling documentation][4].
 
-### Diversity sampling
-`retained_by:diversity_sampling`
 
-Every 15 minutes, diversity sampling retains at least one span and the associated trace for each combination of environment, service, operation, and resource. This occurs for the `p75`, `p90`, and `p95` percentile of latencies to ensure that you can always find example traces in service and resource pages, even for low traffic endpoints. To learn more, read the [diversity sampling documentation][5].
+
 
 
 ## Further Reading
@@ -132,3 +128,4 @@ Every 15 minutes, diversity sampling retains at least one span and the associate
 [3]: /tracing/trace_pipeline/trace_retention/#datadog-intelligent-retention-filter
 [4]: /tracing/trace_pipeline/trace_retention/#one-percent-flat-sampling
 [5]: /tracing/trace_pipeline/trace_retention/#diversity-sampling
+[6]: /tracing/trace_pipeline/trace_retention/#create-your-own-retention-filter 

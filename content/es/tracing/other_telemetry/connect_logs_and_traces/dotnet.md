@@ -3,107 +3,105 @@ aliases:
 - /es/tracing/connect_logs_and_traces/dotnet
 code_lang: dotnet
 code_lang_weight: 60
-description: Conecta tu logs y trazas (traces) de .NET para correlacionarlos en Datadog.
+description: Conecte sus registros y trazas de .NET para correlacionarlos en Datadog.
 further_reading:
 - link: tracing/trace_collection/custom_instrumentation
   tag: Documentación
-  text: Instrumenta tu aplicación de forma manual para crear trazas.
+  text: Instrumente manualmente su aplicación para crear trazas.
 - link: tracing/glossary/
   tag: Documentación
-  text: Explora tus servicios, recursos y trazas
+  text: Explore sus servicios, recursos y trazas.
 - link: https://www.datadoghq.com/blog/request-log-correlation/
   tag: Blog
-  text: Correlacionar automáticamente logs de solicitud con trazas
+  text: Correlacione automáticamente los registros de solicitudes con las trazas.
 - link: /logs/guide/ease-troubleshooting-with-cross-product-correlation/
   tag: Guía
-  text: Facilita la solución de problemas con una correlación entre productos.
-title: Correlación de logs y trazas de .NET
+  text: Facilite la solución de problemas con la correlación entre productos.
+title: Correlacionando Registros y Trazas de .NET
 type: multi-code-lang
 ---
+Puede configurar su biblioteca de registros y las configuraciones de trazado de .NET para que los ID de traza y de tramo se inyecten en los registros de la aplicación, proporcionándole datos de monitoreo del rendimiento de la aplicación correlacionados con los datos de registro.
 
-Puedes establecer tu biblioteca de registro y las configuraciones de rastreo de .NET para que los IDs de traza y tramo se inyecten en los logs de aplicación, lo que te proporcionará datos de monitorización del rendimiento de la aplicación correlacionados con los datos de log.
+Configure el .NET Tracer con [Unified Service Tagging][1] para la mejor experiencia y un contexto útil al correlacionar trazas y registros de la aplicación.
 
-Configura el .NET Tracer con el [etiquetado de servicios unificado][1] para obtener la mejor experiencia y un contexto útil al correlacionar las trazas y logs de aplicación.
-
-.NET Tracer admite las siguientes bibliotecas de registro:
+El .NET Tracer admite las siguientes bibliotecas de registros:
 - [Serilog][2] (v1.4+)
 - [log4net][3]
 - [NLog][4]
-- [Microsoft.Extensions.Logging][5] (añadido en v1.28.6)
+- [Microsoft.Extensions.Logging][5] (agregado en v1.28.6)
 
-## Configuración de la recopilación de logs
+## Configure la recolección de registros {#configure-log-collection}
 
-Asegúrate de que la recopilación de log está configurada en el Datadog Agent y que la [configuración del Logs Agent][15] para los archivos especificados a la cola esté establecida en `source: csharp`, de modo que los pipelines de log puedan analizar los archivos de log. Para obtener más información, consulta [Recopilación de logs de C#][7]. Si `source` se establece en un valor distinto de `csharp`, es posible que tengas que añadir un [reasignador de traza][8] al pipeline de procesamiento de log apropiado para que la correlación funcione correctamente.
+Asegúrese de que la recolección de registros esté configurada en el Agente de Datadog y que la [configuración del Agente de Registros][15] para los archivos especificados a seguir esté configurada en `source: csharp` para que las canalizaciones de registros puedan parsear los archivos de registro. Para más información, consulta [Recolección de Registros en C#][7]. Si el `source` está configurado a un valor diferente de `csharp`, es posible que necesites agregar un [remapeador de trazas][8] a la canalización de procesamiento de registros apropiada para que la correlación funcione correctamente.
 
-<div class="alert alert-danger"><strong>Nota:</strong> La recopilación automática de log solo funciona para logs con formato JSON. Como alternativa, utiliza reglas personalizadas de parseo.</div>
+<div class="alert alert-danger">La recolección automática de registros solo funciona para registros formateados como JSON. Alternativamente, utilice reglas de parseo personalizadas.</div>
 
-## Configuración de la inyección en logs
+## Configure la inyección en los registros {#configure-injection-in-logs}
 
-Para inyectar identificadores de correlación en tus mensajes de log, sigue las instrucciones de tu biblioteca de registro.
+Para inyectar identificadores de correlación en sus mensajes de registro, siga las instrucciones para su biblioteca de registro.
 
 <div class="alert alert-info">
-  <div class="alert-info">Consulta los <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">ejemplos en dd-trace-dotnet</a> para ver más ejemplos.</div>
-  </div>
+  Vea los <a href="https://github.com/DataDog/dd-trace-dotnet/tree/master/tracer/samples/AutomaticTraceIdInjection">ejemplos en dd-trace-dotnet</a> para más ejemplos.
 </div>
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de Serilog requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 2.0.1 del .NET Tracer, la inyección automática para la biblioteca de registro Serilog requiere que la aplicación esté instrumentada con instrumentación automática.
 </div>
 
-Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
+Para inyectar automáticamente identificadores de correlación en sus mensajes de registro:
 
-1. Configura el .NET Tracer con la siguiente configuración del rastreador:
+1. Configure el .NET Tracer con las siguientes configuraciones del Tracer:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Activa el rastreo de instrumentación automática de tu aplicación siguiendo las [instrucciones para instalar .NET Tracer][1].
+2. Habilite el trazado de instrumentación automática de su aplicación siguiendo las [instrucciones para instalar el .NET Tracer][1].
 
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/dd_libraries/dotnet-core/
 {{% /tab %}}
 {{% tab "log4net" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 1.29.0 de .NET Tracer, la inyección automática para la librería de registro log4net requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 1.29.0 del .NET Tracer, la inyección automática para la biblioteca de registro log4net requiere que la aplicación esté instrumentada con instrumentación automática.
 </div>
 
-Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
+Para inyectar automáticamente identificadores de correlación en sus mensajes de registro:
 
-1. Configura el .NET Tracer con la siguiente configuración del rastreador:
+1. Configure el .NET Tracer con las siguientes configuraciones del tracer:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Activa el rastreo de instrumentación automática de tu aplicación siguiendo las [instrucciones para instalar .NET Tracer][1].
+2. Habilite el trazado de instrumentación automática de su aplicación siguiendo las [instrucciones para instalar el .NET Tracer][1].
 
-3. Añade las propiedades de log `dd.env`, `dd.service`, `dd.version`, `dd.trace_id` y `dd.span_id` en tu salida de registro. Puedes hacer esto al incluir estas propiedades _individualmente_ o al incluir _todas_ las propiedades de log. Ambos enfoques se muestran en el siguiente código de ejemplo:
+3. Agregue `dd.env`, `dd.service`, `dd.version`, `dd.trace_id` y `dd.span_id` propiedades de registro en su salida. Esto se puede hacer incluyendo estas propiedades _individualmente_ o incluyendo _todas_ las propiedades de registro. Ambos enfoques se muestran en el siguiente código de ejemplo:
 
 ```xml
   <layout type="log4net.Layout.SerializedLayout, log4net.Ext.Json">
     <decorator type="log4net.Layout.Decorators.StandardTypesDecorator, log4net.Ext.Json" />
     <default />
-    <!--miembros explícitos por defecto-->
+    <!--explicit default members-->
     <remove value="ndc" />
-    <!--elimina el miembro del mensaje preformateado por defecto-->
+    <!--remove the default preformatted message member-->
     <remove value="message" />
-    <!--añade mensajes sin formato-->
+    <!--add raw message-->
     <member value="message:messageobject" />
 
-    <!-- Incluye propiedades de Datadog -->
-    <!-- Incluye propiedades individuales con value='<property_name>' -->
+    <!-- Include Datadog properties -->
+    <!-- EITHER Include individual properties with value='<property_name>' -->
     <member value='dd.env' />
     <member value='dd.service' />
     <member value='dd.version' />
     <member value='dd.trace_id' />
     <member value='dd.span_id' />
-    <!-- O incluye todas las propiedades con value='properties' -->
+    <!-- OR Include all properties with value='properties' -->
     <member value='properties'/>
   </layout>
 ```
-Para ver ejemplos adicionales, consulta [el proyecto de inyección automática de ID de traza de log4net][2] en GitHub.
+Para ejemplos adicionales, consulte [el proyecto de inyección automática de ID de traza log4net][2] en GitHub.
 
 
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -112,22 +110,22 @@ Para ver ejemplos adicionales, consulta [el proyecto de inyección automática d
 {{% tab "NLog" %}}
 
 <div class="alert alert-danger">
- <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la librería de registro de NLog requiere que la aplicación esté instrumentada con la instrumentación automática.
+  <strong>Nota: </strong>A partir de la versión 2.0.1 de .NET Tracer, la inyección automática para la biblioteca de registro NLog requiere que la aplicación esté instrumentada con instrumentación automática.
 </div>
 
-Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
+Para inyectar automáticamente identificadores de correlación en sus mensajes de registro:
 
-1. Configura el .NET Tracer con la siguiente configuración del rastreador:
+1. Configure el .NET Tracer con las siguientes configuraciones del tracer:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Activa el rastreo de instrumentación automática de tu aplicación siguiendo las [instrucciones para instalar .NET Tracer][1].
+2. Habilite el trazado de instrumentación automática de su aplicación siguiendo las [instrucciones para instalar el .NET Tracer][1].
 
-3. Habilita el contexto de diagnóstico asignado (MDC), como se muestra en el siguiente código de ejemplo para NLog versión 5.0+:
+3. Habilite el contexto de diagnóstico mapeado (MDC), como se muestra en el siguiente código de ejemplo para NLog versión 5.0+:
 
 ```xml
-  <!-- Añade includeScopeProperties="true" para emitir propiedades ScopeContext -->
+  <!-- Add includeScopeProperties="true" to emit ScopeContext properties -->
   <layout xsi:type="JsonLayout" includeScopeProperties="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -139,7 +137,7 @@ Para inyectar automáticamente identificadores de correlación en tus mensajes d
 Para NLog versión 4.6+:
 
 ```xml
-  <!-- Añade includeMdlc="true" para emitir propiedades MDC -->
+  <!-- Add includeMdlc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdlc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -151,7 +149,7 @@ Para NLog versión 4.6+:
 Para NLog versión 4.5:
 
 ```xml
-  <!-- Añade includeMdc="true" para emitir propiedades MDC -->
+  <!-- Add includeMdc="true" to emit MDC properties -->
   <layout xsi:type="JsonLayout" includeMdc="true">
     <attribute name="date" layout="${longdate}" />
     <attribute name="level" layout="${level:upperCase=true}"/>
@@ -159,7 +157,7 @@ Para NLog versión 4.5:
     <attribute name="exception" layout="${exception:format=ToString}" />
   </layout>
 ```
-Para ver ejemplos adicionales, consulta los proyectos de inyección automática de ID de traza utilizando [NLog 4.0][2], [NLog 4.5][3], o [NLog 4.6][4] en GitHub.
+Para ejemplos adicionales, consulte los proyectos de inyección automática de ID de traza utilizando [NLog 4.0][2], [NLog 4.5][3] o [NLog 4.6][4] en GitHub.
 
 
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -168,16 +166,16 @@ Para ver ejemplos adicionales, consulta los proyectos de inyección automática 
 [4]: https://github.com/DataDog/dd-trace-dotnet/blob/master/tracer/samples/AutomaticTraceIdInjection/NLog46Example/NLog.config
 {{% /tab %}}
 {{% tab "Microsoft.Extensions.Logging" %}}
-Para inyectar automáticamente identificadores de correlación en tus mensajes de log:
+Para inyectar automáticamente identificadores de correlación en sus mensajes de registro:
 
-1. Configura el .NET Tracer con la siguiente configuración del rastreador:
+1. Configure el .NET Tracer con las siguientes configuraciones del tracer:
     - `DD_ENV`
     - `DD_SERVICE`
     - `DD_VERSION`
 
-2. Activa el rastreo de instrumentación automática de tu aplicación siguiendo las [instrucciones para instalar .NET Tracer][1].
+2. Habilite el trazado de instrumentación automática de su aplicación siguiendo las [instrucciones para instalar el .NET Tracer][1].
 
-3. Activa [contextos de log][2] para tu proveedor de registro, como se muestra en el código de ejemplo. Solo los proveedores que admiten contextos de log tendrán identificadores de correlación inyectados.
+3. Habilite [los ámbitos de registro][2] para su proveedor de registro, como se muestra en el código de ejemplo. Solo los proveedores que admiten ámbitos de registro tendrán identificadores de correlación inyectados.
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -185,17 +183,17 @@ Host.CreateDefaultBuilder(args)
     {
         logging.AddFile(opts =>
         {
-            opts.IncludeScopes = true; // debes incluir contextos para que se añadan identificadores de correlación
+            opts.IncludeScopes = true; // must include scopes so that correlation identifiers are added
             opts.FormatterName = "json";
         });
     }
 ```
 
-Si hay una traza activa cuando se está escribiendo el log, los IDs de traza y tramo se inyectan automáticamente en la aplicación de logs con las propiedades `dd_trace_id` y `dd_span_id`. Si no hay una traza activa, solo se inyectan las propiedades `dd_env`, `dd_service` y `dd_version`.
+Si hay una traza activa cuando se está escribiendo el registro, los IDs de traza y de span se inyectan automáticamente en los registros de la aplicación con las propiedades `dd_trace_id` y `dd_span_id`. Si no hay una traza activa, solo se inyectan las propiedades `dd_env`, `dd_service` y `dd_version`.
 
-**Nota:** Si estás utilizando una biblioteca de registro que reemplaza el despliegue`LoggerFactory` por defecto como los paquetes [_Serilog.Extensions.Hosting_][3] o [_Serilog.Extensions.Logging_][4], sigue las instrucciones específicas del marco (en este ejemplo, ve **Serilog**).
+**Nota:** Si está utilizando una biblioteca de registro que reemplaza la implementación predeterminada de `LoggerFactory`, como los paquetes de [_Serilog.Extensions.Hosting_][3] o [_Serilog.Extensions.Logging_][4], siga las instrucciones específicas del marco (en este ejemplo, consulte **Serilog**).
 
-Para obtener ejemplos adicionales, consulta [el proyecto de inyección de ID de traza automática Microsoft.Extensions.Logging][5] en GitHub.
+Para ejemplos adicionales, consulte [el proyecto de inyección automática de ID de traza Microsoft.Extensions.Logging][5] en GitHub.
 
 
 [1]: https://docs.datadoghq.com/es/tracing/trace_collection/dd_libraries/dotnet-core/
@@ -206,63 +204,65 @@ Para obtener ejemplos adicionales, consulta [el proyecto de inyección de ID de 
 {{% /tab %}}
 {{< /tabs >}}
 
-A continuación, completa la configuración para la inyección automática o manual.
+A continuación, complete la configuración para la inyección automática o manual.
 
-## Inyección automática
+## Inyección automática {#automatic-injection}
 
-El último paso para activar la inyección automática de identificadores de correlación es:
+Para habilitar la inyección automática del identificador de correlación, asegúrese de que `DD_LOGS_INJECTION` esté habilitado.
 
-1. Activa `DD_LOGS_INJECTION=true` en las variables de entorno del .NET Tracer. Para configurar el .NET Tracer con un método diferente, consulta [Configuración de .NET Tracer][6].
+A partir de la versión 3.24.0, `DD_LOGS_INJECTION` está habilitado por defecto. Para versiones anteriores, configure `DD_LOGS_INJECTION=true` en las variables de entorno del .NET Tracer.
 
-Después de configurar la inyección del identificador de correlación, consulta [Recopilación de log de C#][7] para configurar tu recopilación de log.
+Para configurar el .NET Tracer con un método diferente, consulte [Configuración del .NET Tracer][6].
 
-**Nota:** Para correlacionar trazas con logs, puede que necesites configurar un [reasignador de ID de traza][8] para analizar `dd_trace_id` como el ID de traza del log. Consulta [Los logs correlacionados no aparecen en el panel de ID de traza][9] para obtener más información.
+Después de configurar la inyección del identificador de correlación, consulte [Recopilación de registros en C#][7] para configurar su recopilación de registros.
 
-<div class="alert alert-info"><strong>Fase beta</strong>: a partir de la versión 2.35.0, si <a href="/agent/remote_config/">la configuración remota del Agent</a> está habilitada donde se ejecuta este servicio, puedes establecer <code>DD_LOGS_INJECTION</code> en la interfaz de usuario del <a href="/tracing/service_catalog">Catálogo de servicios</a>.</div>
+**Nota:** Para correlacionar trazas con registros, es posible que necesite configurar un [remapeador de ID de traza][8] para analizar `dd_trace_id` como el ID de traza del registro. Consulte [Registros correlacionados que no aparecen en el panel de ID de traza][9] para más información.
 
-## Inyección manual
+<div class="alert alert-info">A partir de la versión 2.35.0, si <a href="/remote_configuration">Configuración Remota del Agente</a> está habilitada donde se ejecuta este servicio, puede configurar <code>DD_LOGS_INJECTION</code> en la interfaz de usuario del <a href="/internal_developer_portal/catalog/">Catálogo</a>.</div>
 
-Si prefieres correlacionar manualmente tus trazas con tus logs, puedes añadir identificadores de correlación a tus logs.
+## Inyección manual {#manual-injection}
+
+Si prefiere correlacionar manualmente sus trazas con sus registros, puede agregar identificadores de correlación a sus registros.
 
   | Clave requerida   | Descripción                                  |
   | -------------- | -------------------------------------------- |
-  | `dd.env`       | Configura globalmente el `env` para el rastreador. Por defecto es `""` si no se configura. |
-  | `dd.service`   | Configura globalmente el nombre raíz del servicio. Por defecto es el nombre de la aplicación o el nombre del sitio IIS si no está configurado.  |
-  | `dd.version`   | Configura globalmente `version` para el servicio. Por defecto es `""` si no se configura.  |
-  | `dd.trace_id`  | ID activo de traza durante la sentencia de log. Por defecto `0` si no hay traza.  |
-  | `dd.span_id`   | ID activo de tramo durante la sentencia de log. Por defecto `0` si no hay traza. |
+  | `dd.env`       | Configure globalmente el `env` para el SDK. Por defecto es `""` si no se establece. |
+  | `dd.service`   | Configure globalmente el nombre del servicio raíz. Por defecto es el nombre de la aplicación o el nombre del sitio de IIS si no se establece.  |
+  | `dd.version`   | Configure globalmente `version` para el servicio. Por defecto es `""` si no se establece.  |
+  | `dd.trace_id`  | ID de traza activa (representado como un número decimal de 64 bits) durante la declaración de registro. Por defecto, se establece en `0` si no hay traza.  |
+  | `dd.span_id`   | ID de tramo activo (representado como un número decimal de 64 bits) durante la declaración de registro. Por defecto, se establece en `0` si no hay traza. |
 
-**Nota:** Si no utilizas [la integración de log de Datadog][7] para analizar tus logs, las reglas personalizadas de parseo de log deben analizar `dd.trace_id` y `dd.span_id` como cadenas. Para obtener más información, consulta [Los Logs correlacionados no aparecen en el panel de ID de traza][10].
+**Nota:** Si no está utilizando una [Integración de Registro de Datadog][7] para analizar sus registros, las reglas de análisis de registros personalizadas deben analizar `dd.trace_id` y `dd.span_id` como cadenas. Para más información, consulte [Registros Correlacionados que No Aparecen en el Panel de ID de Traza][10].
 
-**Nota**: Si estás utilizando Serilog, Nlog o log4net a través de ILogger, consulta la sección Microsoft.Extensions.Logging para configurar estas propiedades con `BeginScope()`.
+**Nota**: Si está utilizando Serilog, Nlog o log4net a través de ILogger, consulte la sección Microsoft.Extensions.Logging para configurar estas propiedades utilizando `BeginScope()`.
 
-Después de completar los [pasos de introducción](#getting-started), termina tu configuración de mejora de log manual:
+Después de completar los [pasos iniciales](#getting-started), finalice su configuración manual de enriquecimiento de registros:
 
-1. Haz referencia al [paquete `Datadog.Trace` de NuGet][11] en tu proyecto.
+1. Agregue una referencia al [`Datadog.Trace` paquete NuGet][11] en su proyecto.
 
-2. Utiliza la API `CorrelationIdentifier` para recuperar identificadores de correlación y añadirlos al contexto de log mientras esté activo un tramo.
+2. Utilice la `CorrelationIdentifier` API para recuperar identificadores de correlación y agregarlos al contexto de registro mientras un tramo está activo.
 
-Por último, consulta [Recopilación de log de C#][7] para configurar tu recopilación de log.
+Por último, consulte [Colección de Registros en C#][7] para configurar su colección de registros.
 
 Ejemplos:
 
 {{< tabs >}}
 {{% tab "Serilog" %}}
 
-**Nota**: La librería de Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores C# válidos. Los nombres de propiedades obligatorios son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
+**Nota**: La biblioteca Serilog requiere que los nombres de las propiedades de los mensajes sean identificadores válidos de C#. Los nombres de propiedades requeridos son: `dd_env`, `dd_service`, `dd_version`, `dd_trace_id` y `dd_span_id`.
 
 ```csharp
 using Datadog.Trace;
 using Serilog.Context;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using (LogContext.PushProperty("dd_env", CorrelationIdentifier.Env))
 using (LogContext.PushProperty("dd_service", CorrelationIdentifier.Service))
 using (LogContext.PushProperty("dd_version", CorrelationIdentifier.Version))
 using (LogContext.PushProperty("dd_trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Loguear algo
+    // Log something
 }
 ```
 
@@ -273,7 +273,7 @@ using (LogContext.PushProperty("dd_span_id", CorrelationIdentifier.SpanId.ToStri
 using Datadog.Trace;
 using log4net;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 try
 {
     LogicalThreadContext.Properties["dd.env"] = CorrelationIdentifier.Env;
@@ -282,7 +282,7 @@ try
     LogicalThreadContext.Properties["dd.trace_id"] = CorrelationIdentifier.TraceId.ToString();
     LogicalThreadContext.Properties["dd.span_id"] = CorrelationIdentifier.SpanId.ToString();
 
-    // Loguear algo.
+    // Log something
 
 }
 finally
@@ -302,14 +302,14 @@ finally
 using Datadog.Trace;
 using NLog;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.env", CorrelationIdentifier.Env))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.service", CorrelationIdentifier.Service))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.version", CorrelationIdentifier.Version))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.trace_id", CorrelationIdentifier.TraceId.ToString()))
 using (MappedDiagnosticsLogicalContext.SetScoped("dd.span_id", CorrelationIdentifier.SpanId.ToString()))
 {
-    // Loguear algo.
+    // Log something
 }
 ```
 
@@ -322,7 +322,7 @@ using Microsoft.Extensions.Logging;
 
 ILogger _logger;
 
-// deben haber tramos iniciados y activos antes de este bloque.
+// there must be spans started and active before this block.
 using(_logger.BeginScope(new Dictionary<string, object>
 {
     {"dd.env", CorrelationIdentifier.Env},
@@ -332,19 +332,19 @@ using(_logger.BeginScope(new Dictionary<string, object>
     {"dd.span_id", CorrelationIdentifier.SpanId.ToString()},
 }))
 {
-    // Loguear algo.
+    // Log something
 }
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-Puedes obtener más información sobre el uso de BeginScope para crear mensajes estructurados de log para los siguientes proveedores de log:
-- Serilog: [la semántica de ILogger.BeginScope()][12]
-- NLog: [propiedades de NLog con Microsoft Extension Logging][13]
-- log4net: [con BeginScope][14]
+Puede leer más sobre el uso de BeginScope para crear mensajes de registro estructurados para los siguientes proveedores de registro:
+- Serilog: [La semántica de ILogger.BeginScope()][12]
+- NLog: [Propiedades de NLog con Microsoft Extension Logging][13]
+- log4net: [Usando BeginScope][14]
 
-## Leer más
+## Lectura adicional {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
@@ -355,7 +355,7 @@ Puedes obtener más información sobre el uso de BeginScope para crear mensajes 
 [5]: https://docs.microsoft.com/en-us/dotnet/core/extensions/logging
 [6]: /es/tracing/trace_collection/library_config/dotnet-core/#configuring-the-net-tracer
 [7]: /es/logs/log_collection/csharp/
-[8]: /es/logs/log_configuration/processors/?tab=ui#trace-remapper
+[8]: /es/logs/log_configuration/processors/trace_remapper/
 [9]: /es/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=withlogintegration
 [10]: /es/tracing/troubleshooting/correlated-logs-not-showing-up-in-the-trace-id-panel/?tab=custom
 [11]: https://www.nuget.org/packages/Datadog.Trace/

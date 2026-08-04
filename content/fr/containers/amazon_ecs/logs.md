@@ -1,6 +1,8 @@
 ---
 aliases:
 - /fr/agent/amazon_ecs/logs
+description: Configurer la collecte de logs à partir d'applications conteneurisées
+  exécutées sur Amazon ECS à l'aide de l'Agent Datadog
 further_reading:
 - link: /agent/amazon_ecs/apm/
   tag: Documentation
@@ -19,6 +21,10 @@ Une fois la collecte activée, le conteneur de l'Agent Datadog recueille les log
 
 - Si vos conteneurs génèrent des fichiers de log isolés *dans leurs propres conteneurs*, vous devrez effectuer quelques [étapes supplémentaires](#fichier-de-log-dans-un-conteneur) pour que le conteneur de l'Agent puisse voir ces fichiers.
 - Si vos conteneurs utilisent le [pilote de logging `awslogs` pour transmettre les logs à CloudWatch][9], l'Agent ne sera pas en mesure de voir ces logs. Vous devrez donc utiliser l'une des [intégrations de collecte de logs AWS][10] pour recueillir ces logs.
+
+#### AWS Fargate
+
+Pour configurer la collecte de logs pour AWS Fargate, consultez la section relative à la [collecte de logs AWS Fargate][13].
 
 ## Installation
 
@@ -164,8 +170,8 @@ Dans le cas d'ECS, cette configuration peut être ajoutée à l'étiquette `com.
 {
   "containerDefinitions": [
     {
-      "name": "<NOM_CONTENEUR>",
-      "image": "<IMAGE_CONTENEUR>",
+      "name": "<CONTAINER_NAME>",
+      "image": "<CONTAINER_IMAGE>",
       "dockerLabels": {
         "com.datadoghq.ad.logs": "[{\"source\": \"example-source\", \"service\": \"example-service\"}]"
       }
@@ -267,3 +273,4 @@ L'attribut `source` sert à identifier l'intégration à utiliser pour chaque co
 [10]: /fr/integrations/amazon_web_services/?tab=allpermissions#log-collection
 [11]: /fr/containers/amazon_ecs/?tab=awscli#setup
 [12]: /fr/containers/docker/log/?tab=dockerfile#log-integrations
+[13]: /fr/integrations/ecs_fargate/?tab=webui#log-collection

@@ -139,7 +139,7 @@ Datadog には全部で {{< translate key="integration_count" >}} を超える�
 [15]: /ja/tracing/trace_pipeline/generate_metrics/
 [16]: /ja/real_user_monitoring/platform/generate_metrics/
 [17]: /ja/infrastructure/process/increase_process_retention/#generate-a-process-based-metric
-[18]: /ja/service_management/events/guides/usage/#custom-metrics
+[18]: /ja/events/guides/usage/#custom-metrics
 [19]: /ja/metrics/metrics-without-limits/
 [20]: /ja/metrics/distributions/
 [21]: /ja/metrics/custom_metrics/historical_metrics/

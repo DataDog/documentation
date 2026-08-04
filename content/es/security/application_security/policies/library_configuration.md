@@ -3,6 +3,7 @@ aliases:
 - /es/security_platform/application_security/setup_and_configure
 - /es/security/application_security/setup_and_configure
 - /es/security/application_security/setup_and_configure
+- /es/security/application_security/threats/library_configuration
 further_reading:
 - link: /security/application_security/
   tag: Documentación
@@ -31,7 +32,7 @@ AAP intenta resolver automáticamente `http.client_ip` a partir de varios encabe
 
 Muchos ataques críticos son realizados por usuarios autenticados que pueden acceder a tus endpoints más confidenciales. Para identificar a los atacantes que generan actividades de seguridad sospechosas, añade información de usuario a trazas instrumentando tus servicios con las etiquetas de usuario estandarizadas. Puedes añadir etiquetas personalizadas a tu tramo raíz o utilizar funciones de instrumentación.
 
-La biblioteca de rastreo de Datadog intenta detectar eventos de inicio de sesión y registro de usuarios cuando se utilizan marcos de autenticación compatibles y AAP está activado.
+La biblioteca de rastreo de Datadog intenta detectar eventos de inicio de sesión y registro de usuarios cuando se utilizan frameworks de autenticación compatibles y AAP está activado.
 
 Consulta [Seguimiento de la actividad del usuario][1] para obtener más información sobre cómo realizar un seguimiento manual de la actividad del usuario, o [ve cómo desactivar][7] el seguimiento automático.
 
@@ -101,7 +102,7 @@ Consulta [Modos de rastreo automático de los eventos de actividad del usuario][
 
 {{% asm-protection-page-configuration %}}
 
-{{< img src="/security/application_security/asm-blocking-page-html.png" alt="La página muestra solicitudes de bloques de AAP que se originan de IPs bloqueadas" width="75%" >}}
+{{< img src="/security/application_security/asm-blocking-page-html.png" alt="Página que se muestra como AAP bloquea solicitudes originadas en IP bloqueadas" width="75%" >}}
 
 ## Referencias adicionales
 

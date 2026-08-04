@@ -1,4 +1,5 @@
 ---
+id: rule
 title: rule
 synonyms:
   - detection rule

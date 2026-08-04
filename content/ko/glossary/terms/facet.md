@@ -1,4 +1,5 @@
 ---
+id: facet
 core_product:
 - log management
 title: 패싯

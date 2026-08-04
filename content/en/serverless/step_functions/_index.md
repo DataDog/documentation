@@ -34,7 +34,7 @@ Datadog AWS Step Functions Monitoring makes use of CloudWatch metrics from the [
 <!-- {{< img src="serverless/step_functions/how_it_works.png" alt="Diagram showing two components of Datadog AWS Step Function monitoring: Cloudwatch metrics sent through the AWS Step Functions integration, and logs, traces, and enhanced metrics sent through the Datadog Lambda Forwarder or Amazon Data Firehose." style="width:100%;" >}} -->
 
 ### Monitor the overall health of Step Functions in the Serverless view
-The Serverless view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
+The {{< ui >}}Serverless{{< /ui >}} view shows key metrics for your Step Functions in one place to easily provide a snapshot of the health of your Step Functions. You can access a detailed view of each Step Function to see all associated metrics, logs, and traces within a certain time frame and set monitors for problematic executions. 
 
 {{< img src="serverless/step_functions/overview_trace_725.png" alt="An AWS Step Function visualization with span tags." style="width:100%;" >}}
 

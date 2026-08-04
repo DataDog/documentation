@@ -1,5 +1,6 @@
 ---
 title: Instrument Your Applications
+description: Instrument your applications with OpenTelemetry and Datadog SDKs to collect, visualize, and analyze traces across your services and infrastructure.
 aliases:
     - /opentelemetry/guide/otel_api_tracing_interoperability
 further_reading:
@@ -24,9 +25,10 @@ Datadog supports several approaches for instrumenting your applications with Ope
 
 Integrating Datadog with OpenTelemetry allows you to use Datadog's comprehensive observability platform while leveraging OpenTelemetry's vendor-agnostic instrumentation. This allows you to collect, visualize, and analyze traces from your applications and infrastructure.
 
-Use the OpenTelemetry Tracing APIs with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set.
+Use the OpenTelemetry Tracing APIs with Datadog's SDK to maintain vendor-neutral instrumentation while accessing Datadog's full feature set. Datadog SDKs can also export traces in OpenTelemetry Protocol (OTLP) format to an OTLP-compatible receiver.
 
 {{< whatsnext desc=" " >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/otlp_trace_export/" >}}Export traces from the Datadog SDK in OTLP format{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/instrument/api_support" >}}Use the Datadog SDK with OpenTelemetry API{{< /nextlink >}}
     {{< nextlink href="/opentelemetry/config/environment_variable_support/" >}}Configure the Datadog SDK with OpenTelemetry SDK environment variables{{< /nextlink >}}
 {{< /whatsnext >}}
@@ -38,7 +40,7 @@ Extend your observability with OpenTelemetry [instrumentation libraries][2] alon
 Datadog supports OpenTelemetry-compatible instrumentation libraries which provide observability for frameworks and technologies not covered by Datadog's native SDKs. This allows you to instrument additional frameworks and libraries while still sending data to Datadog's backend.
 
 {{< whatsnext desc=" " >}}
-    {{< nextlink href="/opentelemetry/instrument/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
+    {{< nextlink href="/opentelemetry/instrument/dd_sdks/instrumentation_libraries/" >}}Use OpenTelemetry Instrumentation Libraries with the Datadog SDK{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

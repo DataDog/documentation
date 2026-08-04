@@ -28,13 +28,13 @@ After enabling NetFlow Monitoring, you can create a NetFlow monitor to alert you
 
 ## Monitor creation
 
-To create a NetFlow monitor in Datadog, use the main navigation: [**Monitors** --> **New Monitor** --> **NetFlow**][3]. 
+To create a NetFlow monitor in Datadog, use the main navigation: [{{< ui >}}Monitors{{< /ui >}} --> {{< ui >}}New Monitor{{< /ui >}} --> {{< ui >}}NetFlow{{< /ui >}}][3]. 
 
 ### Define the search query
 
 As you define the search query, the top graph updates in real time.
 
-{{< img src="monitors/monitor_types/netflow/monitor.png" alt="Example monitor configuration using NetFlow data" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/netflow/monitor_2.png" alt="Example monitor configuration using NetFlow data" style="width:100%;" >}}
 
 1. Construct a search query using the same logic as the [NetFlow widgets][4] in your dashboards. 
 1. Select if you want to alert on bytes or packets for traffic.
@@ -44,7 +44,7 @@ As you define the search query, the top graph updates in real time.
 
 You can create NetFlow monitors using formulas and functions. This can be used, for example, to create monitors on the volume of traffic sent by source and device. 
 
-{{< img src="monitors/monitor_types/netflow/formula.png" alt="Example monitor configuration using NetFlow data and a formula" style="width:100%;" >}}
+{{< img src="monitors/monitor_types/netflow/formula_2.png" alt="Example monitor configuration using NetFlow data and a formula" style="width:100%;" >}}
 
 For more information, see the [Functions][5] documentation.
 
@@ -54,7 +54,7 @@ Configure monitors to trigger if the query value crosses a threshold, and custom
 
 ### Notifications
 
-For detailed instructions on the **Say what's happening** and **Notify your team** sections, see the [Notifications][7] page.
+For detailed instructions on the {{< ui >}}Say what's happening{{< /ui >}} and {{< ui >}}Notify your team{{< /ui >}} sections, see the [Notifications][7] page.
 
 ## Monitor NetFlow events
 

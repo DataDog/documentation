@@ -18,9 +18,15 @@ further_reading:
       text: "Datadog Security extends compliance and threat protection capabilities for Google Cloud"
 ---
 
+{{< site-region region="gov" >}}
+<div class="alert alert-info">
+App and API Protection is in Preview on Datadog Government site US1-FED.
+</div>
+{{< /site-region >}}
+
 Configuring App and API Protection for AWS Lambda involves:
 
-1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Software Catalog][1].
+1. Identifying functions that are vulnerable or are under attack, which would most benefit from App and API Protection. Find them on [the Security tab of your Catalog][1].
 2. Setting up App and API Protection instrumentation by using either the [Datadog CLI][8], [AWS CDK][9], [Datadog Serverless Framework plugin][2], or manually by using the Datadog tracing layers.
 3. Triggering security signals in your application and seeing how Datadog displays the resulting information.
 
@@ -51,7 +57,7 @@ To install and configure the Datadog Serverless Framework plugin:
    ```yaml
    custom:
      datadog:
-       enableASM: true
+       appSecMode: on
    ```
 
    Overall, your new `serverless.yml` file should contain at least:
@@ -59,8 +65,7 @@ To install and configure the Datadog Serverless Framework plugin:
    custom:
      datadog:
        apiKeySecretArn: "{Datadog_API_Key_Secret_ARN}" # or apiKey
-       enableDDTracing: true
-       enableASM: true
+       appSecMode: on
    ```
    See also the complete list of [plugin parameters][2] to further configure your lambda settings.
 
@@ -142,29 +147,20 @@ The [Datadog CDK Construct][1] automatically installs Datadog on your functions 
 1. Install the Datadog CDK constructs library:
 
     ```sh
-    # For AWS CDK v1
-    pip install datadog-cdk-constructs
-
-    # For AWS CDK v2
     pip install datadog-cdk-constructs-v2
     ```
 
 2. Instrument your Lambda functions
 
     ```python
-    # For AWS CDK v1
-    from datadog_cdk_constructs import Datadog
-    # NOT SUPPORTED IN V1
-
-    # For AWS CDK v2
-    from datadog_cdk_constructs_v2 import Datadog
+    from datadog_cdk_constructs_v2 import Datadog, DatadogAppSecMode
 
     datadog = Datadog(self, "Datadog",
         python_layer_version={{< latest-lambda-layer-version layer="python" >}},
         extension_layer_version={{< latest-lambda-layer-version layer="extension" >}},
         site="<DATADOG_SITE>",
         api_key_secret_arn="<DATADOG_API_KEY_SECRET_ARN>", // or api_key
-        enable_asm=True,
+        datadog_app_sec_mode=DatadogAppSecMode.ON,
       )
     datadog.add_lambda_functions([<LAMBDA_FUNCTIONS>])
     ```

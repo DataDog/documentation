@@ -1,4 +1,6 @@
 ---
+description: Ve e interpreta las alertas de Watchdog que detectan de forma proactiva
+  anomalías en tus sistemas y aplicaciones mediante una monitorización basada en IA.
 title: Alertas de Watchdog
 ---
 
@@ -116,7 +118,7 @@ Watchdog escanea todos los servicios y recursos para buscar anomalías en las si
 
   * Tasa de error
   * Latencia
-  * Aciertos (tasa de solicitudes)
+  * Aciertos (índice de solicitudes)
 
 Watchdog filtra los endpoints y servicios poco utilizados para reducir el ruido y evitar anomalías en pequeñas cantidades de tráfico. Además, si se detecta una anomalía en la tasa de aciertos pero no tiene impacto en la latencia o la tasa de errores, se ignora la anomalía. 
 
@@ -210,7 +212,7 @@ Haz clic en el icono de los prismáticos para ver una tarjeta de alerta de Watch
 
 Para archivar una alerta de Watchdog, abre el panel lateral y haz clic en el icono de la carpeta en la esquina superior derecha. Al archivarla, la alerta se oculta del explorador, así como de otras ubicaciones de Datadog, como por ejemplo la página de inicio. Si se archiva una alerta, el icono rosa de los prismáticos de Watchdog no aparece junto al servicio o al recurso correspondiente.
 
-Para ver las alertas archivadas, selecciona la opción **Show _N_ archived alerts** (Mostrar _N_ alertas archivadas) de la casilla de verificación, en la parte superior izquierda del [Explorador de alertas de Watchdog][1]. Esta opción sólo está disponible si hay al menos una alerta archivada. Puedes ver quién ha archivado cada alerta y cuándo lo ha hecho, y también puedes restaurar las alertas archivadas en tu fuente.
+Para ver las alertas archivadas, selecciona la opción **Show _N_ archived alerts** (Mostrar _N_ alertas archivadas) de la casilla de verificación, en la parte superior izquierda del [Explorador de alertas de Watchdog][1]. Esta opción solo está disponible si hay al menos una alerta archivada. Puedes ver quién ha archivado cada alerta y cuándo lo ha hecho, y también puedes restaurar las alertas archivadas en tu fuente.
 
 **Nota**: El archivado no impide que Watchdog etiquete futuros problemas relacionados con el servicio o el recurso.
 
