@@ -35,7 +35,7 @@ multifiltersearch:
     - name: Recommendation Category
       id: category
       filter_by: true
-    - name: Cloud Provider
+    - name: Provider
       id: cloud_provider
       filter_by: true
     - name: Resource Type
@@ -684,7 +684,7 @@ multifiltersearch:
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider billing data to identify orphaned, legacy, or over-provisioned cloud resources.
+[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, or over-provisioned cloud resources.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
@@ -734,7 +734,7 @@ Use the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns to pri
 
 The following are requirements necessary to receive Cloud Cost recommendations:
 
-- Cloud provider accounts (for all desired Cloud Cost recommendations)
+- Provider accounts (for all desired Cloud Cost recommendations)
 - [AWS integration and resource collection][3] (for AWS recommendations)
 - [Azure integration and resource collection][8] (for Azure recommendations)
 - [GCP integration and resource collection][10] (for GCP recommendations)
