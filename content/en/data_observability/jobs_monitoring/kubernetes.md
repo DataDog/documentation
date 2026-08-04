@@ -18,7 +18,8 @@ further_reading:
 Follow these steps to enable Data Observability: Jobs Monitoring for Spark on Kubernetes.
 
 1. [Install the Datadog Agent](#install-the-datadog-agent-on-your-kubernetes-cluster) on your Kubernetes cluster.
-2. [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
+2. (Optional) [Collect Spark Data Lineage with OpenLineage](#optional-collect-spark-data-lineage-with-openlineage).
+3. [Enable Single Step Instrumentation](#enable-single-step-instrumentation).
 
 ### Install the Datadog Agent on your Kubernetes cluster
 
@@ -144,6 +145,30 @@ You can install the Datadog Agent using the [Datadog Operator][3] or [Helm][4].
 [5]: /containers/kubernetes/log/?tab=helm#log-collection
 {{% /tab %}}
 {{< /tabs >}}
+
+### (Optional) Collect Spark Data Lineage with OpenLineage
+
+Data Observability: Jobs Monitoring can collect Spark lineage through [OpenLineage][8], so you can see the upstream and downstream tables of your jobs and visualize entire Spark pipelines. Setup has two steps: install the OpenLineage Spark provider, then enable the feature in the Java tracer.
+
+<div class="alert alert-info">OpenLineage lineage collection requires <a href="https://github.com/DataDog/dd-trace-java/releases" target="_blank">Java tracer</a> version 1.48.0 or later.</div>
+
+1. **Install the OpenLineage Spark provider.** Make the `openlineage-spark` JAR available on the classpath of your Spark driver and executors, following the [OpenLineage Spark installation guide][9]. Use OpenLineage version `1.29.0` or later, which is the first version that supports the run-tag facets that Data Observability: Jobs Monitoring relies on.
+
+   You do not need to set `spark.extraListeners` or configure any `spark.openlineage.transport.*` options. When the feature is enabled and the JAR is present, the Datadog Java tracer registers the OpenLineage listener and routes lineage events through the local Datadog Agent.
+
+2. **Enable OpenLineage collection.** Set the `DD_DATA_JOBS_OPENLINEAGE_ENABLED` environment variable to `true` on the Spark driver.
+
+   If using [Single Step Instrumentation](#enable-single-step-instrumentation), add it to the `ddTraceConfigs` section of the `spark-driver` target:
+
+   ```yaml
+   ddTraceConfigs:
+     - name: DD_DATA_JOBS_ENABLED
+       value: "true"
+     - name: DD_DATA_JOBS_OPENLINEAGE_ENABLED
+       value: "true"
+   ```
+
+   Reapply your configuration and restart the targeted pods.
 
 ### Enable Single Step Instrumentation
 
@@ -275,3 +300,5 @@ spark.executor.extraJavaOptions=-Ddd.service=<JOB_NAME> -Ddd.env=<ENV> -Ddd.vers
 [4]: https://helm.sh
 [5]: https://app.datadoghq.com/data-jobs/
 [6]: /data_jobs
+[8]: https://openlineage.io/
+[9]: https://openlineage.io/docs/integrations/spark/installation

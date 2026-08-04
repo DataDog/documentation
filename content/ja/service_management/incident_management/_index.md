@@ -12,9 +12,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Foundation Enablement
   text: インシデントマネジメントを向上させるためのインタラクティブなセッションに参加できます
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: ブログ
-  text: Datadog CoScreen でより効率的なペアプログラミングを実現
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: ブログ
   text: インシデントの事後分析を作成するためのベストプラクティス
@@ -181,7 +178,6 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [Slack][7] との統合に加えて、インシデント管理は以下とも統合されます。
 
 - [PagerDuty][13] と [OpsGenie][14] は、オンコールエンジニアにインシデント通知を送信します。
-- [CoScreen][21] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [Jira][15] は、インシデントの Jira チケットを作成します。
 - [Webhook][16] は、Webhook を使用してインシデント通知を送信します (たとえば、[SMS を Twilio に送信][17])。
 - [Statuspage][19] to create and update Statuspage incidents.
@@ -215,4 +211,3 @@ Slack をご利用の {{< region-param key="dd_site_name" >}} のお客様は、
 [18]: /ja/getting_started/incident_management
 [19]: /ja/integrations/statuspage/
 [20]: /ja/integrations/servicenow/
-[21]: /ja/coscreen

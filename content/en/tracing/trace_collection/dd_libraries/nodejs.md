@@ -183,7 +183,7 @@ esbuild.build({
     // required if you use Datadog security features
     '@datadog/native-appsec',
     '@datadog/native-iast-taint-tracking',
-    '@datadog/native-iast-rewriter',
+    '@datadog/wasm-js-rewriter',
   ]
 }).catch((err) => {
   console.error(err)
@@ -264,7 +264,7 @@ const nextConfig = {
       // required if you use Datadog security features
       '@datadog/native-appsec',
       '@datadog/native-iast-taint-tracking',
-      '@datadog/native-iast-rewriter',
+      '@datadog/wasm-js-rewriter',
     ];
     config.externals.push(...externals);
     return config;

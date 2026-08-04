@@ -19,10 +19,6 @@ products:
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
 ---
 
-{{< callout url="#" btn_hidden="true" header="Join the Preview!">}}
-Pipeline Simulation is in Preview. Reach out to your account manager to request access.
-{{< /callout >}}
-
 ## Overview
 
 When you configure or edit a pipeline in Observability Pipelines, you often have to update filter queries, sampling rules, or [Packs][12] that transform your telemetry. These changes can impact downstream monitors, dashboards, and detection rules. Therefore, it's important to test and validate how your changes affect your production data before you deploy those changes.

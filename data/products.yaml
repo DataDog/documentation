@@ -300,10 +300,6 @@ products:
                 link: mobile/
                 description: View Datadog alerts, incidents, and more on your mobile device
                 short_description: Mobile alerts and incidents
-              - title: CoScreen
-                link: coscreen/
-                description: Share and interact with application windows for pair programming and incident management
-                short_description: Collaborative screen sharing
       - subheaders:
           - title: Extend
             links:

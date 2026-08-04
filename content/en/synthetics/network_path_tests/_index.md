@@ -9,6 +9,12 @@ further_reading:
 - link: "/network_monitoring/network_path/"
   tag: "Documentation"
   text: "Learn more about Network Path"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
+- link: "https://www.datadoghq.com/blog/network-test-protocols/"
+  tag: "Blog"
+  text: "Test network paths with TCP, UDP, and ICMP in Datadog"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -18,9 +24,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
-- link: "/api/latest/synthetics/#create-or-clone-a-test"
-  tag: "API"
-  text: "Synthetics API"
 ---
 
 ## Overview
