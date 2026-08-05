@@ -30,21 +30,23 @@ Assign these permissions through [Datadog roles][1].
 
 ## Granular access on individual flags
 
-Restrict edit access on a specific flag by selecting **Settings > Permissions** on the flag details page:
+Restrict access on a specific flag by selecting **Settings > Permissions** on the flag details page:
 
 {{< img src="feature_flags/concepts/flag-grace-modal-2.png" alt="Permissions settings panel on a feature flag showing granular access controls for users, service accounts, roles, and teams." style="width:65%;" >}}
 
-You can limit edit access to:
+Grant one of the following access levels to individual users, service accounts, roles, or teams:
 
-- Individual users
-- Service accounts
-- Roles
-- Teams
+| Access level | Description |
+|--------------|-------------|
+| **Viewer** | View the flag. |
+| **Contributor** | View the flag and [submit change suggestions][2] for review. Can't approve or reject suggestions, or manage permissions on the flag. |
+| **Editor** | View the flag, submit change suggestions, and [approve or reject][2] suggested changes. Can also manage permissions on the flag. |
 
-Users without edit access can still view the flag if they have read permissions at the organization level.
+Users without any granular access can still view the flag if they have read permissions at the organization level.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/rbac/
+[2]: /feature_flags/concepts/approvals/#approve-reject-or-apply
