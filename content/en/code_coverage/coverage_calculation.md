@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-A commit usually has more than one coverage report. A CI pipeline might run unit tests, integration tests, and end-to-end tests in separate jobs, split a test suite across parallel workers, or run the same suite against several runtime versions. Each of those jobs uploads its own report.
+A commit usually has more than one coverage report. A CI pipeline might run unit, integration, and end-to-end tests in separate jobs. It might also split a test suite across parallel workers, or run the same suite against several runtime versions. Each of those jobs uploads its own report.
 
 Datadog merges all of the reports it receives for the same repository and commit into a single dataset. The total coverage and patch coverage of a commit are computed from that merged dataset, not from any individual report. You don't need to merge reports yourself before uploading them.
 
@@ -31,7 +31,7 @@ Because merging happens on the Datadog side, the coverage percentage shown in Da
 
 Merging is keyed on the repository and commit SHA pair. Every report uploaded for the same repository and commit contributes to the same merged dataset, regardless of which CI job, pipeline, or machine produced it.
 
-Merging is incremental: as each report arrives, its data is added to the merged dataset for the commit, and the coverage values for the commit are recomputed. A commit's coverage therefore reflects every report received for it so far, so wait until all of your CI jobs have finished uploading before comparing values.
+Merging is incremental. As each report arrives, its data is added to the merged dataset and the coverage values are recomputed. A commit's coverage reflects every report received for it so far. Wait until all of your CI jobs have finished uploading before comparing values.
 
 The merged dataset is also the basis for the following:
 
@@ -57,7 +57,7 @@ Non-executable lines, such as comments, blank lines, and closing brackets, are e
 
 ### Files present in multiple reports
 
-When the same file appears in more than one report for a commit, Datadog merges the file's line data instead of picking one report over another. An executable line is counted as covered when **any** of the reports containing that file marks it as covered.
+When the same file appears in more than one report, Datadog merges the file's line data instead of picking one report over another. An executable line is counted as covered when **any** of the reports containing that file marks it as covered.
 
 For example, consider a commit with two reports that both contain `src/checkout.go`:
 
@@ -67,7 +67,7 @@ For example, consider a commit with two reports that both contain `src/checkout.
 | 11 | Uncovered | Covered | Covered |
 | 12 | Uncovered | Uncovered | Uncovered |
 
-This is why the merged coverage of a commit is usually higher than the coverage of any single report, and why splitting a test suite across parallel CI jobs does not lower the reported coverage.
+The merged coverage of a commit is therefore usually higher than the coverage of any single report. Splitting a test suite across parallel CI jobs does not lower the reported coverage.
 
 ### Partial coverage
 
