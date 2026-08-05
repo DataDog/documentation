@@ -164,9 +164,9 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 
 ### Delivery stream contains data from other sources
 
-The delivery stream connected to Datadog must only receive data from your CloudWatch Metric Stream. If any other source of data, such as a CloudWatch log group subscription filter, interacts with the delivery stream, Datadog can't decode the mixed payload data.
+The delivery stream connected to Datadog must receive data only from your CloudWatch Metric Stream. If another source, such as a CloudWatch log group subscription filter, writes to the delivery stream, Datadog can't decode the mixed payload.
 
-To fix this, use a dedicated delivery stream for your CloudWatch Metric Stream, and remove any log subscription filters that target it.
+To fix this, use a dedicated delivery stream for your CloudWatch Metric Stream and remove any log group subscription filters that target it.
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
