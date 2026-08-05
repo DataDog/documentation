@@ -51,12 +51,9 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
 1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
-   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI. Depending on the provider you select, supply the additional fields it requires:
-      - **Amazon Bedrock**: the **Region** to run inference in.
-      - **Azure OpenAI**: the **Deployment**, **Resource**, and **Model version**.
-      - **Vertex AI**: the **Project** (the GCP project ID from the selected account's configured project IDs) and the **Location** (the Vertex AI region to run inference in, for example, `us-central1`).
-   - **Account**: The [connected LLM provider account][1] to use for inference. For Vertex AI, select a configured Vertex AI integration account.
-   - **Model**: The model used to generate summaries and topics. For Vertex AI, select a Gemini Flash model. Gemini Pro models are not supported for Patterns because of latency constraints. Other models available on Vertex AI, such as Anthropic Claude variants, are also supported.
+   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI.
+   - **Account**
+   - **Model**
 1. Click **Confirm** to save your changes and close the window.
 1. Under **Runs on**:
    1. Use the **Application** multi-selector to choose one or more LLM applications to include spans for. Selecting applications automatically updates the underlying span filter query, and editing the query updates the selected applications. For finer-grained scoping, click the filter icon next to the selector to open the **Advanced** popover, which exposes:
