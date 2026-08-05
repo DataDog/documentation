@@ -931,15 +931,16 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
         # Classify any files that have conflict markers.
         reorg_conflicts, other_conflicts = get_conflict_classification(worktree)
 
-        # Even if the merge succeeded cleanly (returncode 0), the PR may have
-        # added files at pre-reorg paths with no conflict marker.  Check for
-        # these "wrong path additions" in the staged result.
-        wrong_additions: list[str] = []
-        if merge.returncode == 0:
-            wrong_additions = get_wrong_path_additions(worktree)
-            # Treat wrong-path additions as reorg conflicts: the PR added a
-            # file at a pre-reorg path that should be under hugo/.
-            reorg_conflicts.extend(wrong_additions)
+        # The PR may have added files at pre-reorg paths with no conflict
+        # marker. Scan for these "wrong path additions" regardless of merge
+        # outcome: a non-conflicting reorg addition gets staged in the index
+        # even when the merge fails on an unrelated conflict elsewhere, and
+        # gating this scan on a clean merge would miss it — misclassifying a
+        # mixed PR as non-reorg-only.
+        wrong_additions = get_wrong_path_additions(worktree)
+        # Treat wrong-path additions as reorg conflicts: the PR added a
+        # file at a pre-reorg path that should be under hugo/.
+        reorg_conflicts.extend(wrong_additions)
 
         # Always abort the test merge before leaving the worktree.
         run(["git", "merge", "--abort"], cwd=worktree)
