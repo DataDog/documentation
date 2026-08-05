@@ -14,7 +14,7 @@ This integration depends on your runtime having a full SSL implementation. If yo
 RUN apt-get update && apt-get install -y ca-certificates
 ```
 
-To have your services appear in the [software catalog][2001], you must set the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables.
+To have your services appear in the [Catalog][2001], you must set the `DD_SERVICE`, `DD_VERSION`, and `DD_ENV` environment variables.
 
 <!-- Sidecar -->
 {% if equals($instrumentation_method, "sidecar") %}

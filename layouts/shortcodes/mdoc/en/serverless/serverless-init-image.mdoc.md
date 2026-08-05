@@ -3,7 +3,7 @@ Shared serverless-init image reference (registries + tag conventions).
 No content_filters required.
 -->
 
-Datadog publishes new releases of the `serverless-init` container image to Google's gcr.io, AWS's ECR, and on Docker Hub:
+Datadog publishes new releases of the `serverless-init` container image to Google Container Registry, Amazon ECR Public Gallery, and Docker Hub:
 
 | hub.docker.com | gcr.io | public.ecr.aws |
 | ---- | ---- | ---- |

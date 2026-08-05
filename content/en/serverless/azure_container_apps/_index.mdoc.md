@@ -94,8 +94,8 @@ Help me monitor my Azure Container Apps services with Datadog
 |--------|--------------|---------|
 | Deployment | One container (your app, wrapped with the Datadog Agent) | Two containers (your app, Datadog Agent) |
 | Image changes | Increases app image size. | No change to app image. |
-| Cost overhead | Less than sidecar (no extra container). | Extra vCPU/memory. Overallocating the sidecar wastes cost; underallocating leads to premature scaling. |
-| Logging | Direct stdout/stderr access. | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
+| Cost overhead | Less than sidecar (no extra container). | Extra vCPU/memory. Overallocating the sidecar wastes resources; underallocating leads to premature scaling. |
+| Logging | Direct stdout/stderr access. | Requires a shared volume and log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
 | Failure isolation | In rare cases, Datadog Agent bugs can affect your app. | Datadog Agent faults are isolated. |
 | Best for | Simpler setup, lower cost, and direct log piping. | Multiple containers per service, Agent isolation, and performance-sensitive workloads. |
 
