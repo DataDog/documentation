@@ -135,11 +135,10 @@ To confirm a metric's current type, see the [Metrics Summary page][4].
 
 ### Avoid overshadowing
 
-Metric names must be unique across types. Follow these practices to prevent conflicts:
+Metric names must be unique across types, in either direction. Two cases are easy to miss:
 
-* **Distinct names**: Never reuse a metric name across distribution and non-distribution submissions.
 * **Log-based metrics**: Because log-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, rate, or histogram metric.
-* **Retired names**: After a metric name has been used for one type, do not later reuse it for the other type, in either direction.
+* **Retired names**: A name that no longer receives data is still claimed by its original type. Do not reuse it for a different type.
 
 ### Resolve overshadowing
 
