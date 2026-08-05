@@ -39,10 +39,10 @@ Grant one of the following access levels to individual users, service accounts, 
 | Access level | Description |
 |--------------|-------------|
 | **Viewer** | View the flag. |
-| **Contributor** | View the flag and [submit change suggestions][2] for review. Can't approve or reject suggestions, or manage permissions on the flag. |
+| **Contributor** | View the flag and [submit change suggestions][2] for review. Cannot approve or reject suggestions, or manage permissions on the flag. |
 | **Editor** | View the flag, submit change suggestions for review, and [approve or reject][3] suggested changes. Can also manage permissions on the flag. |
 
-Users without any granular access can still view the flag if they have read permissions at the organization level.
+Users without granular access can still view the flag if they have read permissions at the organization level.
 
 ## Further reading
 
