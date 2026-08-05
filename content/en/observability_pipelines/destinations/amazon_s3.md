@@ -162,7 +162,7 @@ The Observability Pipelines Worker collects a batch of events, generates a schem
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][7] for more information.
 
 | Max Events     | Max Bytes       | Timeout (seconds)   |
 |----------------| ----------------| --------------------|

@@ -164,7 +164,7 @@ These are the batch parameters for each destination:
 
 {{% observability_pipelines/destination_batching %}}
 
-See [event batching][6] for more information.
+See [Destinations event batching][6] for more information.
 
 ## Component issues
 
