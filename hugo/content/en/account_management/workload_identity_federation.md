@@ -272,10 +272,45 @@ Workload Identity Federation for the Datadog Agent is available for customers on
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
-- Version `7.78.0` or later of the Datadog Agent.
-- The Agent runs in an AWS environment with access to AWS credentials (for example, an EC2 instance with an IAM role, ECS task, or EKS pod).
+- Version `7.78.0` or later of the Datadog Agent. The credential sources available to you depend on your Agent version and on which Agent component sends the data. See [Supported credential sources](#supported-credential-sources).
+- The Agent runs in an AWS environment with access to AWS credentials.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
+
+### Supported credential sources
+
+The Agent looks for AWS credentials in the following sources, in this order. The first source that provides credentials is used.
+
+| Credential source | Environment variables | Minimum Agent version |
+| --- | --- | --- |
+| [Static credentials][11] | `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` | `7.78.0` |
+| [EC2 instance role][7] (retrieved through IMDS) | None | `7.78.0` |
+| [EKS IAM roles for service accounts (IRSA)][8] | `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` | `7.82.0` |
+| [ECS task role][9] and [EKS Pod Identity][10] | `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` or `AWS_CONTAINER_CREDENTIALS_FULL_URI` | `7.82.0` |
+
+Shared AWS configuration files and named profiles (`AWS_PROFILE`, `~/.aws`) are not used.
+
+#### Agent component support
+
+In Agent `7.82.0` and earlier, only the following components can use the EC2 instance role, EKS IRSA, and ECS task role or EKS Pod Identity sources:
+
+- Core Agent (metrics, logs, and checks)
+- Cluster Agent
+- Process Agent
+- Security Agent
+- Datadog Installer
+
+The following components support Workload Identity Federation but are limited to static credentials supplied through environment variables:
+
+- APM (trace Agent)
+- Standalone DogStatsD
+- Private Action Runner
+- IoT Agent
+- Heroku Agent
+
+<div class="alert alert-warning">If you run APM on an EKS pod or an ECS task and do not supply static credentials through environment variables, the trace Agent cannot obtain a managed API key. It falls back to the <code>api_key</code> configured in <code>datadog.yaml</code>. See <a href="#fallback-behavior">Fallback behavior</a>.</div>
+
+Workload Identity Federation is not available in the OpenTelemetry Collector (DDOT) or the AWS Lambda extension. These require a statically configured `api_key`.
 
 Setting up Workload Identity Federation for the Agent involves two parts:
 1. [Configuring your AWS intake mapping in Datadog](#configure-aws-intake-mapping-in-datadog)
@@ -460,3 +495,8 @@ delegated_auth:
 [4]: https://app.datadoghq.com/integrations/amazon-web-services
 [5]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create.html
 [6]: https://app.datadoghq.com/organization-settings/workload-identity-federation
+[7]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html
+[8]: https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html
+[9]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
+[10]: https://docs.aws.amazon.com/eks/latest/userguide/pod-identities.html
+[11]: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html
