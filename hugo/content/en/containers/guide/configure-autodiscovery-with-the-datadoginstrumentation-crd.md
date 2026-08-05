@@ -18,7 +18,7 @@ further_reading:
 
 ## Overview
 
-The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks and logs with a single Kubernetes resource, instead of [pod annotations][2]. With this approach, you can enable, update, and remove integration configurations without editing your Agent or application and triggering a rollout.
+The `DatadogInstrumentation` custom resource (CR) lets you configure [Autodiscovery][1] checks and logs with a single Kubernetes resource instead of [pod annotations][2]. With this approach, you can enable, update, and remove integration configurations without editing your Agent or application and triggering a rollout.
 
 Use the `DatadogInstrumentation` CR when you want to:
 
@@ -226,10 +226,10 @@ spec:
 
 ## Precedence
 
-When more than one configuration source applies to a workload, Datadog resolves them in the following order (highest precedence first):
+When more than one configuration source applies to a workload, the Datadog Agent resolves them in the following order (highest precedence first):
 
 1. Pod annotations
-2. `DatadogInstrumentation` resources
+2. `DatadogInstrumentation` custom resource
 3. Static configuration, such as auto-configuration or mounted files
 
 If a workload already has annotation-based Autodiscovery configuration for a check or log collection, your `DatadogInstrumentation` configuration does not override it.
