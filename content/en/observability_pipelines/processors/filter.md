@@ -27,7 +27,7 @@ This processor sends all logs or metrics that match the filter query to the next
 
 To set up the filter processor:
 
-- Define a {{< ui >}}filter query{{< /ui >}}. See [Search Syntax for Logs][1] or [Search Syntax for Metrics][2] for more information.
+- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [Metrics Search Syntax][2] for more information.
     - Logs or metrics that match the query are sent to the next component.
     - Logs or metrics that don't match the query are dropped.
 

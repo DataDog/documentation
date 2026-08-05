@@ -17,7 +17,7 @@ The Deduplicate processor removes copies of data to reduce volume and noise. It 
 
 To set up the Deduplicate processor:
 
-1. Define a {{< ui >}}filter query{{< /ui >}}. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
     - Only logs that match the specified filter query are processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. In the {{< ui >}}Type of deduplication{{< /ui >}} dropdown menu, select whether you want to `Match` on or `Ignore` the fields specified below.
