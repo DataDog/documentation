@@ -21,7 +21,7 @@ Announce the reorg (see copy for various channels below).
 
 ## The day before
 
-### 1. Bump the announcement in the #documentation channel
+### 1. Bump the announcement in the #docs-backroom channel
 
 See link you saved above.
 
@@ -33,13 +33,17 @@ Remind them of the reorg, link them to the Confluence page, and ask if they have
 
 NOTE: This file will get deleted from your reorg branch, so don't edit it there. You can push what you have, then check it off [here](https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/astro_reorg/docs/reorg_execution_steps.md) instead.
 
-### 1. In #docs-backroom, link the Confluence page and remind the team that you're about to get started
+### 1. In #docs-backroom, post the reorg tracker
 
-See link you saved above.
+This is saved in your DMs.
 
-### 2. Bump the announcement in the #documentation channel, with a tracker
+### 2. Bump the announcement in the #documentation channel
 
-See link you saved above, and the tracker you composed in your DMs.
+See link you saved above. Add this to the thread, but also post to the channel, and add a link to the reorg:
+
+```
+Hi all, I'm about to begin work on the planned documentation repo reorg. We'll be in a code freeze for several hours at minimum. I'll update this thread when I lift the code freeze. Thanks!
+```
 
 ### 3. Declare an incident
 
