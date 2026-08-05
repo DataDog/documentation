@@ -20519,6 +20519,18 @@ menu:
           - PublishStatusPage
         unstable: []
         order: 6
+    - name: Edit maintenance update
+      url: /api/latest/status-pages/edit-maintenance-update/
+      identifier: status-pages-edit-maintenance-update
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchMaintenanceUpdate
+        unstable: []
+        order: 36
     - name: Update maintenance
       url: /api/latest/status-pages/update-maintenance/
       identifier: status-pages-update-maintenance
