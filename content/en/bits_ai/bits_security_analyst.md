@@ -73,6 +73,8 @@ Bits AI can run investigations on the following Security log sources:
 - Microsoft 365
 - GitLab
 - GitHub
+- JumpCloud
+- Salesforce
 - Slack
 - Snowflake
 - SentinelOne
