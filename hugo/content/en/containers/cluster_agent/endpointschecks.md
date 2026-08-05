@@ -407,7 +407,6 @@ spec:
   config:
     checks:
       - integration: nginx
-        initConfig: {}
         instances:
           - name: "My NGINX Service Endpoints"
             nginx_status_url: "http://%%host%%:%%port%%/status/"

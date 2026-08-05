@@ -128,7 +128,6 @@ spec:
     checks:
       - integration: openmetrics
         containerName: <CONTAINER_NAME>
-        initConfig: {}
         instances:
           - openmetrics_endpoint: "http://%%host%%:%%port%%/<PROMETHEUS_ENDPOINT>"
             namespace: "<METRICS_NAMESPACE_PREFIX_FOR_DATADOG>"
@@ -254,7 +253,6 @@ For a full list of available parameters for instances, including `namespace` and
        checks:
          - integration: openmetrics
            containerName: prometheus-example
-           initConfig: {}
            instances:
              - openmetrics_endpoint: "http://%%host%%:%%port%%/metrics"
                namespace: "documentation_example_kubernetes"

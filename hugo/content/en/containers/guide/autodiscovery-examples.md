@@ -155,7 +155,6 @@ spec:
     checks:
       - integration: redisdb
         containerName: redis
-        initConfig: {}
         instances:
           - host: "%%host%%"
             port: "6379"
@@ -468,13 +467,11 @@ spec:
     checks:
       - integration: apache
         containerName: apache
-        initConfig: {}
         instances:
           - apache_status_url: "http://%%host%%/server-status?auto"
             min_collection_interval: 30
       - integration: http_check
         containerName: apache
-        initConfig: {}
         instances:
           - name: "my_website_1"
             url: "http://%%host%%/website_1"
