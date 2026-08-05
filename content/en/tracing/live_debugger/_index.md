@@ -102,7 +102,7 @@ Either option requires one of the following minimum SDK versions:
 | .NET     | 3.29.0              |
 | Node.js  | 5.84.0              |
 
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps. 
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps.
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs" >}}
 
@@ -260,17 +260,17 @@ On the [Live Debugger Settings page][26], you can check and update the enablemen
 - {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or reactivated on a given service and environment. It applies regardless of runtime language or SDK version.
 
-### (Recommended) Create a logs index
+### (Recommended) Create a logs index {#create-a-logs-index}
 
-Create a dedicated logs index for Live Debugger to help ensure that Live Debugger logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11]. Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
+Live Debugger generates logs that are sent to Datadog and appear alongside your application logs. A dedicated logs index helps ensure these logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11].
 
-To create a dedicated logs index:
+To create the index:
 
 1. Create a logs index and [configure it][12] to the desired retention with **no sampling**.
 2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### (Recommended) Link your source code
+### (Recommended) Link your source code {#link-your-source-code}
 
 Set up [Source Code Integration][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 

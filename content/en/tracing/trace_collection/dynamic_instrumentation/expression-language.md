@@ -26,7 +26,7 @@ It does **not** support:
 * Calling methods. Dynamic Instrumentation does not permit executing code that may have side effects. However, you can access `private` fields directly.
 * Other native programming language syntax beyond what is described on this page.
 
-Try [autocomplete and search (in Preview)][6] for an improved user experience using the Expression Language.
+Try [autocomplete and search (in Preview)](/dynamic_instrumentation/symdb/) for an improved user experience using the Expression Language.
 
 ## Applications
 

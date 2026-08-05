@@ -65,7 +65,7 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 <div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.</div>
 
-#### (Recommended) In-app enablement
+#### (Recommended) In-app enablement {#in-app-enablement}
 
 Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. In-app enablement is supported on the following minimum SDK versions:
 
