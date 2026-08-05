@@ -8570,6 +8570,11 @@ menu:
       parent: security_platform_heading
       identifier: workload_protection
       weight: 70000
+    - name: How it works
+      url: security/workload_protection/how_it_works
+      parent: workload_protection
+      identifier: workload_protection_how_it_works
+      weight: 89
     - name: Setup
       url: security/workload_protection/setup
       parent: workload_protection
