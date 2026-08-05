@@ -58,7 +58,7 @@ Click **View all attributes** above the filter to go to the Targeting Attributes
 
 ## How data type affects operators
 
-Once you select an attribute in a targeting rule, the operators offered are filtered to match its data type:
+After you select an attribute in a targeting rule, the operators offered are filtered to match its data type:
 
 | Data type | Available operators |
 |-----------|---------------------|
