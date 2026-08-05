@@ -36,16 +36,28 @@ The configuration is reconciled by a controller in the [Datadog Cluster Agent][3
 To install the CRD and enable the controller, use one of the following:
 
 - Datadog Operator v1.29 or later.
-- Datadog Helm chart v2.223.0 or later.
+- Datadog Helm chart v3.236.0 or later.
 
-## Enable the controller
+## Setup
 
 The `DatadogInstrumentation` controller runs in the Cluster Agent and is disabled by default. Enable it with the Datadog Operator or Helm.
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
 
-Opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.82.0 or later.
+1. Update your Helm repositories:
+
+```shell
+helm repo update
+```
+
+2. Upgrade the Datadog Operator:
+
+```shell
+helm upgrade datadog-operator datadog/datadog-operator
+```
+
+3. Opt in by adding the `agent.datadoghq.com/instrumentation-crd-enabled` annotation to your `DatadogAgent` resource. The Cluster Agent must be v7.82.0 or later.
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -59,7 +71,7 @@ spec:
     [...]
 ```
 
-Apply the change:
+4. Apply the change:
 
 ```shell
 kubectl apply -f datadog-agent.yaml
@@ -70,7 +82,13 @@ The Operator sets the required Cluster Agent and Node Agent environment variable
 {{% /tab %}}
 {{% tab "Helm" %}}
 
-In your `datadog-values.yaml` file, enable the controller:
+1. Update your Helm repositories:
+
+```shell
+helm repo update
+```
+
+2. In your `datadog-values.yaml` file, enable the controller:
 
 ```yaml
 datadog:
@@ -78,7 +96,7 @@ datadog:
     enabled: true
 ```
 
-Upgrade your release:
+3. Upgrade your release:
 
 ```shell
 helm upgrade -f datadog-values.yaml <RELEASE_NAME> datadog/datadog

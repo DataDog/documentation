@@ -235,7 +235,7 @@ For a full list of available parameters for instances, including `namespace` and
    {{% /tab %}}
    {{% tab "DatadogInstrumentation CRD" %}}
 
-   **Note:** This configuration requires Datadog Agent and Cluster Agent v7.82 or later. Enable the controller with Datadog Operator v1.29 or later, or Datadog Helm chart v2.223.0 or later. For setup instructions, see [Configure Autodiscovery with DatadogInstrumentation CRD][17].
+   **Note:** This configuration requires Datadog Agent and Cluster Agent v7.82 or later. Enable the controller with Datadog Operator v1.29 or later, or Datadog Helm chart v3.236.0 or later. For setup instructions, see [Configure Autodiscovery with DatadogInstrumentation CRD][17].
 
    The example `prometheus.yaml` defines the same check as a pod annotation. Remove that annotation because annotations take precedence over `DatadogInstrumentation` resources. Save the following resource as `prometheus-instrumentation.yaml`:
 
