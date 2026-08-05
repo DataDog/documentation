@@ -148,7 +148,7 @@ To include a linked operation in the journey status, associate an SLO with the o
 
 <!-- Product note: Confirm whether Datadog plans to create these SLOs automatically. -->
 
-## Build the Journey Monitoring Synthetic test suite
+## Manage Journey testing coverage
 
 Datadog automatically creates a test suite and an editable uptime SLO with a default objective of 99.9% for each journey. Datadog also adds tests that cover the journey. For information about coverage, adding or removing tests, and the uptime SLO, see [Journey uptime][5].
 
@@ -166,7 +166,7 @@ Add a covering test when the suite is empty or when Datadog detects covering tes
 - To add existing tests, select **Manage journey coverage** and choose the tests to add.
 - To add new coverage, create a Synthetic test manually. See [Browser Testing][8] or [Mobile Application Testing][9], then organize the test into the journey's suite. For more information about suites, see [Test Suites][10].
 
-<div class="alert alert-info"><strong>Preview</strong>: When no test covers a journey, Bits Testing can generate a covering browser test to fill the gap. Bits Testing is in Preview. To request access, see the <a href="https://www.datadoghq.com/product-preview/bits-testing/">Bits Testing preview</a>.</div>
+<div class="alert alert-info"><strong>Preview</strong>: When no test covers a journey, <a href="https://www.datadoghq.com/blog/bits-testing-test-coverage/">Bits Testing</a> can generate a covering browser test to fill the gap. You can sign up to join the <a href="https://www.datadoghq.com/product-preview/bits-testing/">Bits Testing preview</a>.</div>
 
 ### Maintain coverage
 
