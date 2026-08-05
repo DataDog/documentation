@@ -123,7 +123,6 @@ Incident Management integrates with third-party applications, including:
 
 - [Atlassian Statuspage][25] to create and update Statuspage incidents.
 - [Confluence][22] to generate incident [postmortems][34].
-- [CoScreen][14] to launch collaborative meetings with multi-user screen sharing, remote control, and built-in audio and video chat.
 - [CoTerm][21] to follow terminal-based incident remediation activities in real time.
 - [Jira][15] to create a Jira ticket for an incident.
 - [Microsoft Teams][23] to create channels and video meetings for incidents.
@@ -150,7 +149,6 @@ Incident Management integrates with third-party applications, including:
 [11]: /integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /integrations/pagerduty/
 [13]: /integrations/opsgenie/
-[14]: /coscreen
 [15]: /integrations/jira/
 [16]: /integrations/webhooks/
 [17]: /integrations/webhooks/#sending-sms-through-twilio

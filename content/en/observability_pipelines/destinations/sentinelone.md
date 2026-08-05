@@ -19,16 +19,16 @@ Use Observability Pipelines' SentinelOne destination to send logs to SentinelOne
 
 ## Setup
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the token. Do <b>not</b> enter the actual value.</div>
+
 Configure the SentinelOne destination when you [set up a pipeline][4]. You can set up a pipeline in the [UI][1], using the [API][5], or with [Terraform][6]. The steps in this section are configured in the UI.
 
 After you select the SentinelOne destination in the pipeline UI:
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifier for the token. Do <b>not</b> enter the actual value.</div>
-
-{{% observability_pipelines/secrets_env_var_note %}}
-
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your SentinelOne logs environment in the dropdown menu.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional buffering
 

@@ -30,8 +30,6 @@ In addition to repeating the information in the alert overview card, the {{< ui 
 * {{< ui >}}Suggested Next Steps{{< /ui >}}: Describes steps for investigation and triage of the anomalous behavior.
 * {{< ui >}}Monitors{{< /ui >}}: Lists monitors associated with your alert. Each monitor displayed has the metric of the current alert and its associated tags included in its scope.
 
-Additionally, Watchdog suggests one or more monitors you can create to notify you if the anomaly happens again. These monitors do not exist yet, so the table lists their status as `suggested`. Click {{< ui >}}Enable Monitor{{< /ui >}} to enable the suggested monitor for your organization. A series of icons pops up allowing you to open, edit, clone, mute, or delete the new monitor.
- 
 ## Watchdog Alert Explorer
 
 You can use the time range, search bar, or facets to filter your Watchdog Alerts feed.

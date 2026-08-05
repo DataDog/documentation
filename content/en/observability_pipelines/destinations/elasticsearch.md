@@ -18,11 +18,9 @@ Use Observability Pipelines' Elasticsearch destination to send logs or metrics t
 
 ## Setup
 
-Configure the Elasticsearch destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Elasticsearch endpoint URL, username, and password. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Configure the Elasticsearch destination when you [set up a pipeline][7]. You can set up a pipeline in the [UI][1], using the [API][8], or with [Terraform][9]. The steps in this section are configured in the UI.
 
 After you select the Elasticsearch destination in the pipeline UI:
 
@@ -48,6 +46,8 @@ After you select the Elasticsearch destination in the pipeline UI:
 			- In the UI, there is a preview of the data stream name you configured. If the fields are left blank, the default data stream name used is `logs-generic-default` for logs and `metrics-generic-default` for metrics. With the above example inputs, the data stream name that the Worker writes to is:
 				- `logs-apache-production` for logs
 				- `metrics-apache-production` for metrics
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 #### Optional settings
 

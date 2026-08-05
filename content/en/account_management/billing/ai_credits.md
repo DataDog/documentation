@@ -4,6 +4,9 @@ description: "Understand how AI Credits work, which products consume them, prici
 aliases:
 - /bits_ai/ai_credits/
 further_reading:
+- link: "/account_management/billing/ai_credit_limits/"
+  tag: "Documentation"
+  text: "AI Credit Limits"
 - link: "/bits_ai/bits_chat/"
   tag: "Documentation"
   text: "Bits Chat"
@@ -55,12 +58,14 @@ If your usage exceeds your monthly Commit, additional credits are billed automat
 
 ## Admin controls
 
-All AI Credit management lives in [**Plan & Usage > AI Credits**][6]. From there, admins can:
+Usage tracking and product access are managed in [**Plan & Usage > AI Credits**][6]. From there, admins can:
 
 - **View usage**: See the current month's credit consumption, broken down by AI product.
 - **Enable or disable AI products powered by AI Credits**: A single org-level toggle controls all AI products powered by AI Credits. When disabled, users can still see product surfaces and view past results, but new requests are blocked.
 
 {{< img src="account_management/billing/view-ai-credit-usage.png" alt="The AI Credits page showing the AI Products toggle enabled, a Cost Overview section, and a Usage Overview section with a bar chart broken down by Bits Agent Builder, Bits Chat, Bits Code, and Bits Investigations AI Credits." >}}
+
+To cap AI Credit consumption at the organization or per-user level, see [AI Credit Limits][8].
 
 ### Disable specific products
 
@@ -102,3 +107,4 @@ AI Credits are available to all Datadog customers except:
 [5]: https://www.datadoghq.com/pricing/?site=us&product=ai-credits#products
 [6]: https://app.datadoghq.com/billing/ai-credits
 [7]: https://app.datadoghq.com/account/login?next=%2Forganization-settings%2Froles
+[8]: /account_management/billing/ai_credit_limits/

@@ -12268,6 +12268,126 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Get a schedule by ID
+      url: /api/latest/fleet-automation/get-a-schedule-by-id/
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetScheduleV2
+        unstable: []
+        order: 11
+    - name: List all schedules
+      url: /api/latest/fleet-automation/list-all-schedules/
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedulesV2
+        unstable: []
+        order: 9
+    - name: Cancel a deployment
+      url: /api/latest/fleet-automation/cancel-a-deployment/
+      identifier: fleet-automation-cancel-a-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelFleetDeploymentV2
+        unstable: []
+        order: 8
+    - name: Get a deployment by ID
+      url: /api/latest/fleet-automation/get-a-deployment-by-id/
+      identifier: fleet-automation-get-a-deployment-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetDeploymentV2
+        unstable: []
+        order: 7
+    - name: Upgrade hosts
+      url: /api/latest/fleet-automation/upgrade-hosts/
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgradeV2
+        unstable: []
+        order: 6
+    - name: Create a configuration deployment
+      url: /api/latest/fleet-automation/create-a-configuration-deployment/
+      identifier: fleet-automation-create-a-configuration-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentConfigureV2
+        unstable: []
+        order: 5
+    - name: List all deployments
+      url: /api/latest/fleet-automation/list-all-deployments/
+      identifier: fleet-automation-list-all-deployments
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetDeploymentsV2
+        unstable: []
+        order: 4
+    - name: Get detailed information about an agent
+      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentDetailV2
+        unstable: []
+        order: 3
+    - name: List all Datadog Agents
+      url: /api/latest/fleet-automation/list-all-datadog-agents/
+      identifier: fleet-automation-list-all-datadog-agents
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentsV2
+        unstable: []
+        order: 2
+    - name: List available Datadog Agent versions
+      url: /api/latest/fleet-automation/list-available-datadog-agent-versions/
+      identifier: fleet-automation-list-available-datadog-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersionsV2
+        unstable: []
+        order: 1
     - name: List all fleet tracers
       url: /api/latest/fleet-automation/list-all-fleet-tracers/
       identifier: fleet-automation-list-all-fleet-tracers
@@ -12307,19 +12427,6 @@ menu:
         unstable:
           - v2
         order: 12
-    - name: Get a schedule by ID
-      url: /api/latest/fleet-automation/get-a-schedule-by-id/
-      identifier: fleet-automation-get-a-schedule-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetSchedule
-        unstable:
-          - v2
-        order: 11
     - name: Delete a schedule
       url: /api/latest/fleet-automation/delete-a-schedule/
       identifier: fleet-automation-delete-a-schedule
@@ -12346,84 +12453,6 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: List all schedules
-      url: /api/latest/fleet-automation/list-all-schedules/
-      identifier: fleet-automation-list-all-schedules
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetSchedules
-        unstable:
-          - v2
-        order: 9
-    - name: Cancel a deployment
-      url: /api/latest/fleet-automation/cancel-a-deployment/
-      identifier: fleet-automation-cancel-a-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CancelFleetDeployment
-        unstable:
-          - v2
-        order: 8
-    - name: Get a configuration deployment by ID
-      url: /api/latest/fleet-automation/get-a-configuration-deployment-by-id/
-      identifier: fleet-automation-get-a-configuration-deployment-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetDeployment
-        unstable:
-          - v2
-        order: 7
-    - name: Upgrade hosts
-      url: /api/latest/fleet-automation/upgrade-hosts/
-      identifier: fleet-automation-upgrade-hosts
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentUpgrade
-        unstable:
-          - v2
-        order: 6
-    - name: Create a configuration deployment
-      url: /api/latest/fleet-automation/create-a-configuration-deployment/
-      identifier: fleet-automation-create-a-configuration-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentConfigure
-        unstable:
-          - v2
-        order: 5
-    - name: List all deployments
-      url: /api/latest/fleet-automation/list-all-deployments/
-      identifier: fleet-automation-list-all-deployments
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetDeployments
-        unstable:
-          - v2
-        order: 4
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
@@ -12437,45 +12466,6 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Get detailed information about an agent
-      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
-      identifier: fleet-automation-get-detailed-information-about-an-agent
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetAgentInfo
-        unstable:
-          - v2
-        order: 3
-    - name: List all Datadog Agents
-      url: /api/latest/fleet-automation/list-all-datadog-agents/
-      identifier: fleet-automation-list-all-datadog-agents
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgents
-        unstable:
-          - v2
-        order: 2
-    - name: List all available Agent versions
-      url: /api/latest/fleet-automation/list-all-available-agent-versions/
-      identifier: fleet-automation-list-all-available-agent-versions
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgentVersions
-        unstable:
-          - v2
-        order: 1
     - name: Forms
       url: /api/latest/forms/
       identifier: forms
@@ -12968,6 +12958,123 @@ menu:
       url: /api/latest/incidents/
       identifier: incidents
       generated: true
+    - name: Update an incident timestamp override
+      url: /api/latest/incidents/update-an-incident-timestamp-override/
+      identifier: incidents-update-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateTimestampOverride
+        unstable:
+          - v2
+        order: 85
+    - name: Delete an incident timestamp override
+      url: /api/latest/incidents/delete-an-incident-timestamp-override/
+      identifier: incidents-delete-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteTimestampOverride
+        unstable:
+          - v2
+        order: 86
+    - name: Create an incident timestamp override
+      url: /api/latest/incidents/create-an-incident-timestamp-override/
+      identifier: incidents-create-an-incident-timestamp-override
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateTimestampOverride
+        unstable:
+          - v2
+        order: 84
+    - name: List incident timestamp overrides
+      url: /api/latest/incidents/list-incident-timestamp-overrides/
+      identifier: incidents-list-incident-timestamp-overrides
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListTimestampOverrides
+        unstable:
+          - v2
+        order: 83
+    - name: Create an incident ServiceNow record
+      url: /api/latest/incidents/create-an-incident-servicenow-record/
+      identifier: incidents-create-an-incident-servicenow-record
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentServiceNowRecord
+        unstable:
+          - v2
+        order: 89
+    - name: Get an incident responder
+      url: /api/latest/incidents/get-an-incident-responder/
+      identifier: incidents-get-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentResponder
+        unstable:
+          - v2
+        order: 81
+    - name: Delete an incident responder
+      url: /api/latest/incidents/delete-an-incident-responder/
+      identifier: incidents-delete-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentResponder
+        unstable:
+          - v2
+        order: 82
+    - name: Create an incident responder
+      url: /api/latest/incidents/create-an-incident-responder/
+      identifier: incidents-create-an-incident-responder
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentResponder
+        unstable:
+          - v2
+        order: 79
+    - name: List incident responders
+      url: /api/latest/incidents/list-incident-responders/
+      identifier: incidents-list-incident-responders
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentResponders
+        unstable:
+          - v2
+        order: 80
     - name: Update an incident todo
       url: /api/latest/incidents/update-an-incident-todo/
       identifier: incidents-update-an-incident-todo
@@ -13098,6 +13205,45 @@ menu:
         unstable:
           - v2
         order: 51
+    - name: Link a page to an incident
+      url: /api/latest/incidents/link-a-page-to-an-incident/
+      identifier: incidents-link-a-page-to-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - LinkPageToIncident
+        unstable:
+          - v2
+        order: 92
+    - name: Create an on-call page from an incident
+      url: /api/latest/incidents/create-an-on-call-page-from-an-incident/
+      identifier: incidents-create-an-on-call-page-from-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateOnCallPageFromIncident
+        unstable:
+          - v2
+        order: 78
+    - name: Update an incident impact
+      url: /api/latest/incidents/update-an-incident-impact/
+      identifier: incidents-update-an-incident-impact
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - PatchIncidentImpact
+        unstable:
+          - v2
+        order: 77
     - name: Delete an incident impact
       url: /api/latest/incidents/delete-an-incident-impact/
       identifier: incidents-delete-an-incident-impact
@@ -13134,6 +13280,45 @@ menu:
           - ListIncidentImpacts
         unstable: []
         order: 7
+    - name: Create an incident configuration
+      url: /api/latest/incidents/create-an-incident-configuration/
+      identifier: incidents-create-an-incident-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentConfiguration
+        unstable:
+          - v2
+        order: 87
+    - name: Update an incident configuration
+      url: /api/latest/incidents/update-an-incident-configuration/
+      identifier: incidents-update-an-incident-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentConfiguration
+        unstable:
+          - v2
+        order: 88
+    - name: Create a page from an incident
+      url: /api/latest/incidents/create-a-page-from-an-incident/
+      identifier: incidents-create-a-page-from-an-incident
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreatePageFromIncident
+        unstable:
+          - v2
+        order: 90
     - name: Update incident attachment
       url: /api/latest/incidents/update-incident-attachment/
       identifier: incidents-update-incident-attachment
@@ -13199,6 +13384,19 @@ menu:
         unstable:
           - v2
         order: 34
+    - name: Get an AI-generated incident postmortem
+      url: /api/latest/incidents/get-an-ai-generated-incident-postmortem/
+      identifier: incidents-get-an-ai-generated-incident-postmortem
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentAIPostmortem
+        unstable:
+          - v2
+        order: 91
     - name: Update an existing incident
       url: /api/latest/incidents/update-an-existing-incident/
       identifier: incidents-update-an-existing-incident
@@ -13394,6 +13592,19 @@ menu:
         unstable:
           - v2
         order: 52
+    - name: Get org settings by incident type
+      url: /api/latest/incidents/get-org-settings-by-incident-type/
+      identifier: incidents-get-org-settings-by-incident-type
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetOrgSettingsByIncidentType
+        unstable:
+          - v2
+        order: 76
     - name: Update an incident type
       url: /api/latest/incidents/update-an-incident-type/
       identifier: incidents-update-an-incident-type
@@ -13433,6 +13644,19 @@ menu:
         unstable:
           - v2
         order: 23
+    - name: List incident type org settings
+      url: /api/latest/incidents/list-incident-type-org-settings/
+      identifier: incidents-list-incident-type-org-settings
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListOrgSettings
+        unstable:
+          - v2
+        order: 75
     - name: Create an incident type
       url: /api/latest/incidents/create-an-incident-type/
       identifier: incidents-create-an-incident-type
@@ -13459,6 +13683,71 @@ menu:
         unstable:
           - v2
         order: 20
+    - name: Update an incident rule
+      url: /api/latest/incidents/update-an-incident-rule/
+      identifier: incidents-update-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentRule
+        unstable:
+          - v2
+        order: 69
+    - name: Get an incident rule
+      url: /api/latest/incidents/get-an-incident-rule/
+      identifier: incidents-get-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetIncidentRule
+        unstable:
+          - v2
+        order: 68
+    - name: Delete an incident rule
+      url: /api/latest/incidents/delete-an-incident-rule/
+      identifier: incidents-delete-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentRule
+        unstable:
+          - v2
+        order: 70
+    - name: Create an incident rule
+      url: /api/latest/incidents/create-an-incident-rule/
+      identifier: incidents-create-an-incident-rule
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentRule
+        unstable:
+          - v2
+        order: 67
+    - name: List incident rules
+      url: /api/latest/incidents/list-incident-rules/
+      identifier: incidents-list-incident-rules
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentRules
+        unstable:
+          - v2
+        order: 66
     - name: Update postmortem template
       url: /api/latest/incidents/update-postmortem-template/
       identifier: incidents-update-postmortem-template
@@ -13654,6 +13943,110 @@ menu:
         unstable:
           - v2
         order: 29
+    - name: Update an incident impact field
+      url: /api/latest/incidents/update-an-incident-impact-field/
+      identifier: incidents-update-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentImpactField
+        unstable:
+          - v2
+        order: 73
+    - name: Delete an incident impact field
+      url: /api/latest/incidents/delete-an-incident-impact-field/
+      identifier: incidents-delete-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteIncidentImpactField
+        unstable:
+          - v2
+        order: 74
+    - name: Create an incident impact field
+      url: /api/latest/incidents/create-an-incident-impact-field/
+      identifier: incidents-create-an-incident-impact-field
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentImpactField
+        unstable:
+          - v2
+        order: 71
+    - name: List incident impact fields
+      url: /api/latest/incidents/list-incident-impact-fields/
+      identifier: incidents-list-incident-impact-fields
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListIncidentImpactFields
+        unstable:
+          - v2
+        order: 72
+    - name: Update an incident Google Meet configuration
+      url: /api/latest/incidents/update-an-incident-google-meet-configuration/
+      identifier: incidents-update-an-incident-google-meet-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentGoogleMeetConfiguration
+        unstable:
+          - v2
+        order: 65
+    - name: Create an incident Google Meet configuration
+      url: /api/latest/incidents/create-an-incident-google-meet-configuration/
+      identifier: incidents-create-an-incident-google-meet-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentGoogleMeetConfiguration
+        unstable:
+          - v2
+        order: 64
+    - name: Update an incident Google Chat configuration
+      url: /api/latest/incidents/update-an-incident-google-chat-configuration/
+      identifier: incidents-update-an-incident-google-chat-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateIncidentGoogleChatConfiguration
+        unstable:
+          - v2
+        order: 63
+    - name: Create an incident Google Chat configuration
+      url: /api/latest/incidents/create-an-incident-google-chat-configuration/
+      identifier: incidents-create-an-incident-google-chat-configuration
+      parent: incidents
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateIncidentGoogleChatConfiguration
+        unstable:
+          - v2
+        order: 62
     - name: Update global incident settings
       url: /api/latest/incidents/update-global-incident-settings/
       identifier: incidents-update-global-incident-settings
@@ -17120,6 +17513,49 @@ menu:
           - AggregateRUMEvents
         unstable: []
         order: 3
+    - name: RUM Config
+      url: /api/latest/rum-config/
+      identifier: rum-config
+      generated: true
+    - name: Create the RUM configuration
+      url: /api/latest/rum-config/create-the-rum-configuration/
+      identifier: rum-config-create-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRumConfig
+        unstable:
+          - v2
+        order: 2
+    - name: Update the RUM configuration
+      url: /api/latest/rum-config/update-the-rum-configuration/
+      identifier: rum-config-update-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRumConfig
+        unstable:
+          - v2
+        order: 3
+    - name: Get the RUM configuration
+      url: /api/latest/rum-config/get-the-rum-configuration/
+      identifier: rum-config-get-the-rum-configuration
+      parent: rum-config
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRumConfig
+        unstable:
+          - v2
+        order: 1
     - name: RUM Insights
       url: /api/latest/rum-insights/
       identifier: rum-insights
@@ -17160,6 +17596,139 @@ menu:
           - v2
         operationids:
           - QueryAggregatedLongTasks
+        unstable:
+          - v2
+        order: 2
+    - name: RUM Operations
+      url: /api/latest/rum-operations/
+      identifier: rum-operations
+      generated: true
+    - name: Update a RUM operation
+      url: /api/latest/rum-operations/update-a-rum-operation/
+      identifier: rum-operations-update-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperation
+        unstable:
+          - v2
+        order: 4
+    - name: Get a RUM operation
+      url: /api/latest/rum-operations/get-a-rum-operation/
+      identifier: rum-operations-get-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperation
+        unstable:
+          - v2
+        order: 3
+    - name: Delete a RUM operation
+      url: /api/latest/rum-operations/delete-a-rum-operation/
+      identifier: rum-operations-delete-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperation
+        unstable:
+          - v2
+        order: 5
+    - name: Update a RUM operation strong link
+      url: /api/latest/rum-operations/update-a-rum-operation-strong-link/
+      identifier: rum-operations-update-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 10
+    - name: Delete a RUM operation strong link
+      url: /api/latest/rum-operations/delete-a-rum-operation-strong-link/
+      identifier: rum-operations-delete-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 9
+    - name: Create a RUM operation strong link
+      url: /api/latest/rum-operations/create-a-rum-operation-strong-link/
+      identifier: rum-operations-create-a-rum-operation-strong-link
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperationStrongLink
+        unstable:
+          - v2
+        order: 8
+    - name: List RUM operation strong links
+      url: /api/latest/rum-operations/list-rum-operation-strong-links/
+      identifier: rum-operations-list-rum-operation-strong-links
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperationStrongLinks
+        unstable: []
+        order: 7
+    - name: Search RUM operations
+      url: /api/latest/rum-operations/search-rum-operations/
+      identifier: rum-operations-search-rum-operations
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListRUMOperations
+        unstable:
+          - v2
+        order: 1
+    - name: Get a RUM operation by name
+      url: /api/latest/rum-operations/get-a-rum-operation-by-name/
+      identifier: rum-operations-get-a-rum-operation-by-name
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetRUMOperationByName
+        unstable:
+          - v2
+        order: 6
+    - name: Create a RUM operation
+      url: /api/latest/rum-operations/create-a-rum-operation/
+      identifier: rum-operations-create-a-rum-operation
+      parent: rum-operations
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateRUMOperation
         unstable:
           - v2
         order: 2
@@ -19885,6 +20454,66 @@ menu:
           - CreateMaintenance
         unstable: []
         order: 18
+    - name: Update maintenance template
+      url: /api/latest/status-pages/update-maintenance-template/
+      identifier: status-pages-update-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenanceTemplate
+        unstable: []
+        order: 32
+    - name: Get maintenance template
+      url: /api/latest/status-pages/get-maintenance-template/
+      identifier: status-pages-get-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMaintenanceTemplate
+        unstable: []
+        order: 34
+    - name: Delete maintenance template
+      url: /api/latest/status-pages/delete-maintenance-template/
+      identifier: status-pages-delete-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMaintenanceTemplate
+        unstable: []
+        order: 35
+    - name: Create maintenance template
+      url: /api/latest/status-pages/create-maintenance-template/
+      identifier: status-pages-create-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenanceTemplate
+        unstable: []
+        order: 31
+    - name: List maintenance templates
+      url: /api/latest/status-pages/list-maintenance-templates/
+      identifier: status-pages-list-maintenance-templates
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenanceTemplates
+        unstable: []
+        order: 33
     - name: Edit degradation update
       url: /api/latest/status-pages/edit-degradation-update/
       identifier: status-pages-edit-degradation-update
@@ -19969,6 +20598,66 @@ menu:
           - CreateDegradation
         unstable: []
         order: 13
+    - name: Update degradation template
+      url: /api/latest/status-pages/update-degradation-template/
+      identifier: status-pages-update-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDegradationTemplate
+        unstable: []
+        order: 27
+    - name: Get degradation template
+      url: /api/latest/status-pages/get-degradation-template/
+      identifier: status-pages-get-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDegradationTemplate
+        unstable: []
+        order: 29
+    - name: Delete degradation template
+      url: /api/latest/status-pages/delete-degradation-template/
+      identifier: status-pages-delete-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDegradationTemplate
+        unstable: []
+        order: 30
+    - name: Create degradation template
+      url: /api/latest/status-pages/create-degradation-template/
+      identifier: status-pages-create-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDegradationTemplate
+        unstable: []
+        order: 26
+    - name: List degradation templates
+      url: /api/latest/status-pages/list-degradation-templates/
+      identifier: status-pages-list-degradation-templates
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDegradationTemplates
+        unstable: []
+        order: 28
     - name: Update component
       url: /api/latest/status-pages/update-component/
       identifier: status-pages-update-component

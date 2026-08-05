@@ -84,7 +84,6 @@ title: 사례 보기 및 관리
 - [인시던트 선언][4]을 클릭합니다: 케이스를 인시던트로 에스컬레이션하고 인시던트 대응 프로세스를 시작하세요.
 - 수동으로 Jira 이슈를 만듭니다: `Shift + J`를 사용하여 Jira 이슈를 생성합니다. 자동 Jira 이슈 생성 및 양방향 동기화를 설정하는 방법에 대한 자세한 내용은 [설정][5] 설명서를 참조하세요. 
 - 수동으로 ServiceNow 인시던트 생성: `Shift + N`을 사용하여 ServiceNow 인시던트를 생성합니다.
-- [CoScreen 회의][6]: 협력 디버깅을 위한 화면 공유
 - 사례 종료: 더 이상의 조치가 필요하지 않음을 팀에 알립니다. 사례 상태를 종결로 업데이트합니다.
 
 ## 사례 분석
@@ -104,5 +103,4 @@ Case Analytics는 집계된 케이스 통계에 대한 쿼리 가능한 데이�
 [3]: /ko/notebooks/
 [4]: /ko/service_management/incident_management/#describing-the-incident
 [5]: /ko/service_management/case_management/settings/#jira
-[6]: /ko/coscreen/
 [7]: https://docs.datadoghq.com/ko/dashboards/
