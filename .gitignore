@@ -285,7 +285,6 @@ static/jsconfig.json
 assets/jsconfig.json
 
 # Generated from GitHub actions
-.github/preview-links-template.md
 
 # yarn v2 or greater
 # Not using zero installs
@@ -301,6 +300,10 @@ assets/jsconfig.json
 # local build files
 .backup_path
 local/bin/py/build/*
+# Unignore configurations, so we can apply exceptions later within configurations
+!local/bin/py/build/configurations/
+# Ignore all of the contents of configurations, except for the files we add explicit exceptions for
+local/bin/py/build/configurations/*
 !local/bin/py/build/configurations/pull_config_preview.yaml
 !local/bin/py/build/configurations/pull_config.yaml
 !local/bin/py/build/configurations/integration_merge.yaml
@@ -335,6 +338,5 @@ playwright-report/
 !e2e/components/icon/
 
 # AI
-.claude/*local*
 .superpowers/
 data/site_region_usage.json
