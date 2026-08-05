@@ -14,6 +14,9 @@ further_reading:
 - link: "/security/cloud_siem/guide/ingest-stix-threat-intelligence/"
   tag: "Documentation"
   text: "Ingest STIX Threat Intelligence"
+- link: "https://www.datadoghq.com/blog/recorded-future-content-pack/"
+  tag: "Blog"
+  text: "Integrate Recorded Future threat intelligence with Datadog Cloud SIEM"
 ---
 
 ## Overview

@@ -15,11 +15,9 @@ Use Observability Pipelines' Amazon OpenSearch destination to send logs to Amazo
 
 ## Setup
 
-Configure the Amazon OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Amazon OpenSearch endpoint URL, and if applicable, username and password. Do <b>not</b> enter the actual values.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Configure the Amazon OpenSearch destination when you [set up a pipeline][6]. You can set up a pipeline in the [UI][1], using the [API][7], or with [Terraform][8]. The steps in this section are configured in the UI.
 
 After you select the Amazon OpenSearch destination in the pipeline UI:
 
@@ -49,6 +47,8 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 			1. Enter the ARN of the IAM role you want to assume.
 			1. Optionally, enter the assumed role session name and external ID.
 
+{{% observability_pipelines/secrets_env_var_note %}}
+
 #### Optional buffering
 
 {{% observability_pipelines/destination_buffer %}}
@@ -76,6 +76,10 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
+
 ## How the destination works
 
 ### Event batching
@@ -85,10 +89,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
-
-## Metrics
-
-For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

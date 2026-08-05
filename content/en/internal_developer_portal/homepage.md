@@ -27,7 +27,7 @@ With this view, you can:
 
 The Homepage aggregates data from your Datadog integrations. To populate the task sections, configure the following integrations and webhooks before using the Homepage:
 
-- **GitHub**: Install and configure the GitHub integration, and set up a GitHub webhook so that repository events (such as pull request activity) reach Datadog in real time. The **GitHub PRs** section requires this webhook to display current pull request data. For setup steps, see [GitHub][1].
+- **GitHub**: An administrator installs and configures the GitHub integration, and sets up a GitHub webhook so that repository events (such as pull request activity) reach Datadog in real time. The **GitHub PRs** section requires this webhook to display current pull request data. Each user also signs in with their own GitHub account to load the pull requests relevant to them. For setup steps, see [GitHub][1].
 - **Jira**: Configure the Jira integration, and set up a Jira webhook so that issue events reach Datadog. The **Jira** tab in the **Your Tickets** section requires this webhook to display your assigned issues. For setup steps, see [Configure a Jira webhook][2].
 
 ## GitHub PRs
@@ -47,6 +47,8 @@ Each PR includes:
 - **Status** (Open / Draft / Merged)  
 - **Assignee / Reviewer**  
 
+This section requires two setup steps, in order: an administrator connects the GitHub integration for the organization, and each user signs in with their own GitHub account. After you authorize access, the section loads your pull requests, grouped by status. 
+
 If your organization has not configured the GitHub integration, this section displays an empty state with a prompt to enable it from the [GitHub integration tile][1]. To read PRs from GitHub, this integration requires the following permissions:
 
 - Members: Read
@@ -56,7 +58,7 @@ If your organization has not configured the GitHub integration, this section dis
 - Statuses: Read
 - Checks: Read
 
-In addition to these permissions, the **GitHub PRs** section requires a configured GitHub webhook so that pull request events reach Datadog in real time. For setup steps, see [GitHub][1]. 
+The section also requires a configured GitHub webhook so that pull request events reach Datadog in real time. For setup steps, see [GitHub][1]. 
 
 If you have multiple GitHub orgs connected within Datadog, users must have the Datadog Integrations Read Permissions to toggle between orgs.
 

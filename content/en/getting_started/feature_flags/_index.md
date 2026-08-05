@@ -20,6 +20,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/guardrail-metrics"
       tag: "Blog"
       text: "Make use of guardrail metrics and stop babysitting your releases"
+    - link: "https://www.datadoghq.com/blog/ab-testing/"
+      tag: "Blog"
+      text: "Every team should be A/B testing"
+    - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
+      tag: "Blog"
+      text: "The product signal latency gap slowing your growth"
 site_support_id: getting_started_feature_flags
 ---
 
@@ -71,6 +77,10 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][4].
 
 ## Create your first feature flag
+
+<div class="alert alert-info">
+You can set up Feature Flags automatically with the <a href="/feature_flags/feature_flag_mcp_server/">Feature Flags MCP Server</a>. After connecting, prompt your AI agent: "Help me set up Datadog Feature Flags in my app." The MCP Server reviews your codebase and installs the required SDK and code snippets for your language and framework.
+</div>
 
 ### Step 1: Import and initialize the SDK
 
@@ -226,7 +236,7 @@ client = api.get_client()
 {{% /tab %}}
 {{< /tabs >}}
 
-### Credentials at a glance
+#### Credentials at a glance
 
 | Credential | Used by | Where it goes | Sensitive? |
 | --- | --- | --- | --- |
@@ -243,14 +253,14 @@ More information about OpenFeature SDK configuration options can be found in its
 Go to [{{< ui >}}Create Feature Flag{{< /ui >}}][2] in Datadog and configure the following:
 
 - **Name and key**: The flag's display name and the key referenced in code
+- **SDK distribution channels**: Control which SDKs receive your flag configuration; see [Distribution Channels][6]
 - **Variant type** and **variant values**: See [Variants and Flag Types][5]
-- **Distribution channels**: See [Distribution Channels][6]
 
 <div class="alert alert-warning">
   {{< ui >}}Flag keys{{< /ui >}}, {{< ui >}}variant keys{{< /ui >}}, and {{< ui >}}variant values{{< /ui >}} should be considered public when sent to client SDKs.
 </div>
 
-{{< img src="getting_started/feature_flags/create-feature-flags.png" alt="Create Feature Flag" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/create-feature-flags-2.png" alt="Create Feature Flag" style="width:100%;" >}}
 
 ### Step 3: Evaluate the flag and write feature code
 
@@ -366,9 +376,9 @@ For percentage rollouts, see [Traffic Splitting and Randomization][8].
 
 ### Step 5: Monitor your rollout
 
-Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-Time Metric Overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
+Monitor the feature rollout from the feature flag details page, which provides real-time exposure tracking and metrics such as {{< ui >}}error rate{{< /ui >}} and {{< ui >}}page load time{{< /ui >}}. As you incrementally release the feature with the flag, view the {{< ui >}}Real-time metric overview{{< /ui >}} panel in the Datadog UI to see how the feature impacts application performance.
 
-{{< img src="getting_started/feature_flags/real-time-flag-metrics.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
+{{< img src="getting_started/feature_flags/real-time-flag-metrics-2.png" alt="Real-time flag metrics panel" style="width:100%;" >}}
 
 For server-side applications, you can also enable flag evaluation metrics to track how often each variant is returned and graph the data on dashboards. See [Set Up Server-Side Flag Evaluation Metrics][9].
 

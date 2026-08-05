@@ -8,18 +8,6 @@ aliases:
   - /tests/repositories/
   - /tests/search/
 further_reading:
-    - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
-      tag: "Learning Center"
-      text: "Getting Started with Test Optimization"
-    - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-      tag: "Release Notes"
-      text: "Check out the latest Software Delivery releases! (App login required)"
-    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
-      tag: "Blog"
-      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
-    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
-      tag: "Blog"
-      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
     - link: "/monitors/types/ci/"
       tag: "Documentation"
       text: "Learn about CI Test Monitors"
@@ -32,12 +20,27 @@ further_reading:
     - link: "/tests/troubleshooting/"
       tag: "Documentation"
       text: "Learn how to troubleshoot Test Optimization"
+    - link: "https://learn.datadoghq.com/courses/getting-started-test-optimization"
+      tag: "Learning Center"
+      text: "Getting Started with Test Optimization"
+    - link: "https://www.datadoghq.com/blog/datadog-ci-visibility/"
+      tag: "Blog"
+      text: "Monitor your CI pipelines and tests with Datadog CI Visibility"
+    - link: "https://www.datadoghq.com/blog/ci-test-visibility-with-rum/"
+      tag: "Blog"
+      text: "Troubleshoot end-to-end tests with CI Visibility and RUM"
     - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
       tag: "Blog"
       text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
     - link: "https://www.datadoghq.com/blog/dbt-data-quality-testing"
       tag: "Blog"
       text: "Implement dbt data quality checks with dbt-expectations"
+    - link: "https://www.datadoghq.com/blog/platform-engineering-metrics/"
+      tag: "Blog"
+      text: "Success Metrics for Platform Engineering Teams"
+    - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+      tag: "Release Notes"
+      text: "Check out the latest Software Delivery releases! (App login required)"
 cascade:
     site_support_id: test_optimization
     algolia:
@@ -45,10 +48,14 @@ cascade:
         tags: ['ci test', 'ci tests', 'test optimization', 'test visibility', 'failed test', 'flaky test', 'supported features']
 ---
 
+{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and Test Optimization experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization, and switch back to the original UI at any time.
+
+[1]: /continuous_integration/cicd_optimization/
+{{< /callout >}}
+
 {{< learning-center-callout header="Try Getting Started with Test Optimization in the Learning Center" btn_title="Enroll Now" btn_url="https://learn.datadoghq.com/courses/getting-started-test-optimization">}}
   Learn how to accelerate your CI pipelines by setting up test monitoring, identifying flaky tests and using Test Impact Analysis to run only the tests that matter.
 {{< /learning-center-callout >}}
-
 
 ## Overview
 

@@ -17,11 +17,9 @@ The Observability Pipelines Worker uses standard Google authentication methods. 
 
 ## Setup
 
-Configure the Google SecOps destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][1], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the Google SecOps endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Configure the Google SecOps destination when you [set up a pipeline][8]. You can set up a pipeline in the [UI][1], using the [API][9], or with [Terraform][10]. The steps in this section are configured in the UI.
 
 After you select the Google SecOps destination in the pipeline UI:
 
@@ -32,6 +30,8 @@ After you select the Google SecOps destination in the pipeline UI:
     - The Worker uses standard [Google authentication methods][7].
 1. Select {{< ui >}}JSON{{< /ui >}} or {{< ui >}}Raw{{< /ui >}} encoding in the dropdown menu.
 1. Enter the log type. See [template syntax][4] if you want to route logs to different log types based on specific fields in your logs.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional buffering
 
@@ -58,6 +58,10 @@ After you select the Google SecOps destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
+
 ## How the destination works
 
 ### Event batching
@@ -67,10 +71,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 1                 | 15                  |
-
-## Metrics
-
-For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

@@ -35,7 +35,7 @@ After you enable approvals, subsequent changes that impact application behavior 
 
 When creating a flag, toggle **Require approval on changes to this flag for all production environments** to enable approvals for that flag in every production environment.
 
-{{< img src="feature_flags/concepts/configure-flag-approvals-on-creation.png" alt="Create feature flag flow showing Approvals and notifications with Require approval on changes to this flag for all production environments enabled." style="width:100%;" >}}
+{{< img src="feature_flags/concepts/configure-flag-approvals-on-creation-2.png" alt="Create feature flag flow showing Approvals and notifications with Require approval on changes to this flag for all production environments enabled." style="width:100%;" >}}
 
 ### Existing flag
 

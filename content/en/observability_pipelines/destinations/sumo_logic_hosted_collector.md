@@ -15,13 +15,13 @@ Use Observability Pipelines' Sumo Logic destination to send logs to your Sumo Lo
 
 ## Setup
 
-Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
-
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the endpoint URL. Do <b>not</b> enter the actual value.</div>
 
-{{% observability_pipelines/secrets_env_var_note %}}
+Configure the Sumo Logic destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
 After you select the Sumo Logic destination in the pipeline UI, enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
@@ -57,6 +57,10 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 {{% /tab %}}
 {{< /tabs >}}
 
+## Metrics
+
+For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
+
 ## How the destination works
 
 ### Event batching
@@ -66,10 +70,6 @@ A batch of events is flushed when one of these parameters is met. See [event bat
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|
 | None           | 10                | 1                   |
-
-## Metrics
-
-For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
 
 [1]: https://app.datadoghq.com/observability-pipelines
 [2]: /observability_pipelines/destinations/#event-batching

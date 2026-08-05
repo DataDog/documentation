@@ -41,7 +41,7 @@ Le tableau qui suit présente quelques-uns des produits Datadog :
         <td>
         <ul>
         <li>Mettez en évidence les vulnérabilités de code dans votre éditeur de texte ou sur GitHub avec <a href="/security/code_security/">Sécurité du code</a>.</li>
-        <li>Facilitez une session de pair-programming à distance avec <a href="/coscreen/">CoScreen</a>.</li></ul>
+        </ul>
         </td>
     </tr>
     <tr>
