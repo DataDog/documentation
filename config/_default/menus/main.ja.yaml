@@ -1331,17 +1331,6 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoScreen
-      url: coscreen/
-      pre: coscreen
-      identifier: coscreen
-      parent: essentials_heading
-      weight: 150000
-    - name: トラブルシューティング
-      url: coscreen/troubleshooting
-      identifier: coscreen_troubleshooting
-      parent: coscreen
-      weight: 1
     - name: CoTerm
       url: coterm/
       pre: coscreen

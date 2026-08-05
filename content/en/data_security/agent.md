@@ -157,6 +157,10 @@ agent diagnose show-metadata agent-telemetry
 | **Logs and metrics**                        |                                                                                                                        |
 | dogstatsd.udp_packets_bytes                 | DogStatsD UDP packets bytes                                                                                            |
 | dogstatsd.uds_packets_bytes                 | DogStatsD UDS packets bytes                                                                                            |
+| dogstatsd_client.bytes_sent                 | Total bytes sent by DogStatsD clients                                                                                  |
+| dogstatsd_client.bytes_dropped              | Total bytes dropped by DogStatsD clients                                                                               |
+| dogstatsd_client.bytes_dropped_queue        | Total bytes dropped because a DogStatsD client sender queue is full                                                    |
+| dogstatsd_client.bytes_dropped_writer       | Total bytes dropped because a DogStatsD client writer cannot send them                                                 |
 | logs.auto_multi_line_aggregator_flush       | Number of multi-line logs aggregated by the Agent                                                                       |
 | logs.auto_multi_line_default_total_lines    | Total log lines processed by the detecting aggregator for sources relying on the auto multi-line detection default           |
 | logs.auto_multi_line_default_would_combine  | Number of lines that would be combined if auto multi-line detection were enabled by default                              |
@@ -177,6 +181,8 @@ agent diagnose show-metadata agent-telemetry
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
 | transactions.input_bytes                    | Incoming transaction payload size in bytes                                                                             |
+| transactions.success                        | Successful transaction count                                                                                           |
+| transactions.success_bytes                  | Successful transaction payload size in bytes                                                                          |
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
 | **Database**                                |                                                                                                                        |
@@ -239,6 +245,7 @@ agent diagnose show-metadata agent-telemetry
 | agent_performance.containers_terminated     | Number of container terminations for the Cluster Agent and Cluster Checks Runner pods, tagged by reason                |
 | agent_performance.memory_usage              | Total container runtime memory usage, in bytes, for the Cluster Agent and Cluster Checks Runner pods                   |
 | agent_performance.memory_limit              | Total container runtime memory limits, in bytes, for the Cluster Agent and Cluster Checks Runner pods                  |
+| agent_performance.cpu_usage                 | Total container runtime CPU usage, in CPU cores, for the Cluster Agent and Cluster Checks Runner pods                  |
 | **eBPF**                                    |                                                                                                                        |
 | ebpf.core_load_success                      | Number of successful loads of an eBPF CO-RE program                                                                    |
 | ebpf.core_load_error                        | Number of errors loading an eBPF CO-RE program                                                                         |

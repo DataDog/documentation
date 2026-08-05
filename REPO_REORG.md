@@ -1,6 +1,6 @@
 # `documentation` repository reorg
 
-## Status
+## Reorg status
 
 Not yet merged. Scheduled to take effect on Thursday, August 6, 2026.
 
@@ -28,7 +28,7 @@ When an automatic fix is not possible, we'll defer to the author's best judgment
 
 ### Code freeze
 
-We'll institute a code freeze while the reorg is in progress, likely for a few hours on the morning of the reorg. We'll lift the freeze after the reorg changes have been merged, the build is confirmed to be operational, and the open PRs have been processed.
+We'll declare a code freeze while the reorg is in progress, likely for a few hours on the morning of the reorg. We'll lift the freeze after the reorg changes have been merged, the build is confirmed to be operational, and the open PRs have been processed.
 
 ## Owners
 

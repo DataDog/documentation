@@ -35,7 +35,7 @@ multifiltersearch:
     - name: Recommendation Category
       id: category
       filter_by: true
-    - name: Cloud Provider
+    - name: Provider
       id: cloud_provider
       filter_by: true
     - name: Resource Type
@@ -684,7 +684,7 @@ multifiltersearch:
 
 ## Overview
 
-[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud spending by optimizing the usage of your cloud resources. Datadog generates a set of recommendations by combining your observability data with your underlying cloud provider billing data to identify orphaned, legacy, or over-provisioned cloud resources.
+[Cloud Cost Recommendations][1] provides recommendations on reducing your cloud and AI spend by optimizing the usage of your cloud resources and AI/LLM API usage. Datadog generates a set of recommendations by combining your observability data with your underlying provider billing data to identify orphaned, legacy, or over-provisioned cloud resources, as well as unoptimized AI usage.
 
 Recommendations are run on a daily basis and are automatically refreshed in your account as soon as the recommendations are released.
 
@@ -711,6 +711,32 @@ Below are the available cloud cost recommendation categories and their descripti
 | Purchase | Resources with on-demand charges and extended uptime. Purchasing a reservation or Savings Plan can reduce the amortized cost of the resource. |
 | Configure | Resources with configuration options that can be adjusted to reduce costs without changing capacity or terminating the resource. |
 
+## Prerequisites
+
+The following are requirements necessary to receive Cloud Cost recommendations:
+
+- Provider accounts (for all desired Cloud Cost recommendations)
+- [AWS integration and resource collection][3] (for AWS recommendations)
+- [Azure integration and resource collection][8] (for Azure recommendations)
+- [GCP integration and resource collection][10] (for GCP recommendations)
+- [OpenAI integration][17] (for OpenAI recommendations)
+- [Anthropic integration][18] (for Anthropic recommendations)
+- [Datadog Agent integration][5] (for Downsize recommendations)
+
+## Setup
+
+For each cloud account that you would like to receive recommendations for:
+
+1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
+   - For Azure, this requires using the App Registration method to collect billing data.
+1. Enable [resource collection][3] for recommendations.
+   - For AWS, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [AWS integration tile][4].
+   - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
+   - For GCP, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [Google Cloud Platform integration tile][10].
+1. Install the [Datadog Agent][5] (required for Downsize recommendations).
+
+**Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
+
 ## Risk and level of effort
 
 Each recommendation includes a **Risk** score and a **Level of Effort** score to help you prioritize which recommendations to act on first. Both scores use a scale of {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, and {{< ui >}}High{{< /ui >}}. They appear as the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns in the {{< ui >}}Active Recommendations{{< /ui >}} table and in each recommendation's side panel.
@@ -729,30 +755,6 @@ Each recommendation includes a **Risk** score and a **Level of Effort** score to
 | {{< ui >}}High{{< /ui >}} | A major effort that takes weeks. An architectural change or multi-team coordination.|
 
 Use the {{< ui >}}Risk{{< /ui >}} and {{< ui >}}Effort{{< /ui >}} columns to prioritize recommendations that are low risk, low effort, or both. 
-
-## Prerequisites
-
-The following are requirements necessary to receive Cloud Cost recommendations:
-
-- Cloud provider accounts (for all desired Cloud Cost recommendations)
-- [AWS integration and resource collection][3] (for AWS recommendations)
-- [Azure integration and resource collection][8] (for Azure recommendations)
-- [GCP integration and resource collection][10] (for GCP recommendations)
-- [Datadog Agent integration][5] (for Downsize recommendations)
-
-## Setup
-
-For each cloud account that you would like to receive recommendations for:
-
-1. Configure [Cloud Cost Management][2] to send billing data to Datadog.
-   - For Azure, this requires using the App Registration method to collect billing data.
-1. Enable [resource collection][3] for recommendations.
-   - For AWS, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [AWS integration tile][4].
-   - For Azure, enable resource collection with the appropriate integration. If your organization is on the Datadog US3 site, the [Azure Native Integration][9] enables this automatically through metrics collection. For all other sites, enabling resource collection within the [Azure integration tile][8] is required.
-   - For GCP, enable resource collection in the {{< ui >}}Resource Collection{{< /ui >}} tab on the [Google Cloud Platform integration tile][10].
-1. Install the [Datadog Agent][5] (required for Downsize recommendations).
-
-**Note**: Cloud Cost Recommendations supports billing in customers' non-USD currencies.
 
 ## Recommendation statuses
 
@@ -826,3 +828,5 @@ You can act on recommendations to save money and optimize costs. Cloud Cost Reco
 [14]: /bits_ai/bits_code/
 [15]: /cloud_cost_management/recommendations/cost_optimization_automation/
 [16]: /mcp_server/tools/#cost_recommendations
+[17]: /cloud_cost_management/setup/saas_costs/?tab=openai#configure-your-saas-accounts
+[18]: /cloud_cost_management/setup/saas_costs/?tab=anthropic#configure-your-saas-accounts

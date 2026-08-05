@@ -24,9 +24,6 @@ further_reading:
 - link: /integrations/slack/?tab=slackapplicationus#using-datadog-incidents
   tag: Documentación
   text: Integración de Slack en las incidencias
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: Blog
-  text: Programación en pareja más eficaz con Datadog CoScreen
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Prácticas recomendadas para redactar informes retrospectivos de incidencias

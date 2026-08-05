@@ -1,0 +1,5 @@
+traits:
+- id: instrumentation_method
+  label: "Instrumentation method"
+  type: text
+  internal_notes: How the Datadog Agent is deployed alongside a serverless workload, such as in-container (single container) or sidecar (separate container).

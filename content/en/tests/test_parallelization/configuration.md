@@ -13,10 +13,6 @@ further_reading:
     text: "Test Parallelization Best Practices"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
-Test Parallelization is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Environment variables
 
 Most `ddtest` settings can be passed as a CLI flag or as an environment variable. CLI flags take precedence over environment variables.
@@ -242,6 +238,27 @@ Most integrations should treat `.testoptimization/` as a generated artifact. The
 | `.testoptimization/github/config` | GitHub Actions matrix output, written when `ddtest` detects GitHub Actions. |
 
 Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discovery/`, and `.testoptimization/cache/http/*.json` are implementation details. Use them only for troubleshooting.
+
+## Use a plan with another test runner
+
+Use a `ddtest` plan when you want `ddtest` to select runnable test files, but another runner executes them.
+
+See [Plan artifacts](#plan-artifacts) for the `test-files.txt` and per-runner `tests-split/runner-N` files that another runner can consume.
+
+For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
+
+{{< code-block lang="bash" >}}
+KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt bundle exec rake knapsack_pro:queue:rspec
+{{< /code-block >}}
+
+For pytest, enable the `ddtrace` plugin with `PYTEST_ADDOPTS` and pass the file list to `python -m pytest`:
+
+{{< code-block lang="bash" >}}
+export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:+$PYTEST_ADDOPTS }--ddtrace"
+if [ -s .testoptimization/runner/test-files.txt ]; then
+  xargs python -m pytest < .testoptimization/runner/test-files.txt
+fi
+{{< /code-block >}}
 
 ## Further reading
 

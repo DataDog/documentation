@@ -89,7 +89,6 @@ From an individual case:
 - [Declare an incident][4]: Escalate a case to an incident and kick off your incident response process.
 - Manually create a Jira issue: Use `Shift + J` to create a Jira issue. For more information on how to configure automatic Jira issue creation and bidirectional synchronization, see the [Settings][5] documentation.
 - Manually create a ServiceNow incident: Use `Shift + N` to create a ServiceNow incident.
-- [Meet on CoScreen][6]: Share screens for collaborative debugging.
 - Close out the case: Let the team know that no further action is needed. Update the status of the case to closed.
 - [Request approval][7]: Request sign-off from one or more team members before taking action on a case.
 
@@ -118,6 +117,5 @@ You can export cases directly from a case details page:
 [3]: /notebooks/
 [4]: /incident_response/incident_management/#describing-the-incident
 [5]: /incident_response/case_management/settings/#jira
-[6]: /coscreen/
 [7]: /incident_response/case_management/approvals
 [8]: https://docs.datadoghq.com/dashboards/

@@ -3,6 +3,12 @@ title: Datadog Distribution of OpenTelemetry Collector
 aliases:
 - "/opentelemetry/agent/"
 further_reading:
+- link: "https://learn.datadoghq.com/courses/using-ddot"
+  tag: "Learning Center"
+  text: "Using the Datadog Distribution of OpenTelemetry Collector"
+- link: "https://www.datadoghq.com/blog/boomi-observability-opentelemetry-datadog/"
+  tag: "Blog"
+  text: "Instrument and monitor Boomi integration flows with OpenTelemetry and Datadog"
 - link: https://www.datadoghq.com/blog/llm-otel-semantic-convention
   tag: Blog
   text: Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
@@ -12,9 +18,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/datadog-distribution-otel-collector/"
   tag: "Blog"
   text: "Unify OpenTelemetry and Datadog with the DDOT Collector"
-- link: "https://learn.datadoghq.com/courses/using-ddot"
-  tag: "Learning Center"
-  text: "Using the Datadog Distribution of OpenTelemetry Collector"
 
 ---
 
