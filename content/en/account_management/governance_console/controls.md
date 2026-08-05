@@ -33,6 +33,10 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
    For {{< ui >}}Select automated mitigation{{< /ui >}}, select a mitigation. If you select {{< ui >}}Manual{{< /ui >}} (default), the control detects noncompliant assets, and you can manually take actions based on these detections. See [manual mitigation](#manual-mitigation).
 
+   If you select {{< ui >}}Workflow{{< /ui >}}, search for and select an existing Datadog Workflow to run when the control detects noncompliant assets. See [workflow mitigation](#workflow-mitigation).
+
+   Once a workflow is selected, use {{< ui >}}Edit{{< /ui >}} to view the full workflow, or {{< ui >}}Change Associated Workflow{{< /ui >}} to select a different workflow from your account.
+
    To delay mitigation, enter a number of days under {{< ui >}}Remediation Delay{{< /ui >}}. You can delay remediation for up to 1 week. This grants additional time for administrators to take additional actions before automatic enforcement occurs.
 
 ## Manual mitigation
@@ -44,7 +48,22 @@ Use the {{< ui >}}Manual Mitigation{{< /ui >}} tab to view all detections.
 Hover over each detection for options:
 - {{< ui >}}Delay mitigation{{< /ui >}}: Delay mitigation of this asset for up to 1 week. This grants additional time for the administrator or owner to take additional actions before automated enforcement takes place.
 - {{< ui >}}Ignore detection{{< /ui >}}: Ignore this detection and remove it from consideration for mitigation.
-- {{< ui >}}Mitigate now{{< /ui >}}: Noncompliant assets are mitigated according to the configuration of the control. This action applies only once, and does not carry over to incoming detections. Mitigation requires the associated permission for modifying that asset.
+- {{< ui >}}Mitigate now{{< /ui >}}: Noncompliant assets are mitigated according to the configuration of the control. This action applies only once, and does not carry over to incoming detections. Mitigation requires the associated permission for modifying that asset. If the control is configured with a workflow mitigation, this opens a confirmation screen instead of mitigating immediately. See [workflow mitigation](#workflow-mitigation).
+
+## Workflow mitigation
+
+Use {{< ui >}}Workflow{{< /ui >}} as a mitigation type to connect a control to an existing Datadog Workflow. Instead of relying on Datadog's built-in automated actions, you can trigger your own remediation workflow when a control detects noncompliant assets.
+
+When a control is configured with a workflow, the workflow runs automatically if {{< ui >}}Enforce control{{< /ui >}} is enabled, or on demand from the {{< ui >}}Manual Mitigation{{< /ui >}} tab.
+
+To manually run a workflow mitigation:
+
+1. On the {{< ui >}}Manual Mitigation{{< /ui >}} tab, select one or more detections.
+2. Click {{< ui >}}Mitigate now{{< /ui >}}.
+3. Review the confirmation screen, which shows the selected detections and the workflow that will run.
+4. Confirm to run the workflow against the selected detections.
+
+Workflow run status appears alongside each detection in the {{< ui >}}Manual Mitigation{{< /ui >}} tab.
 
 ## All available controls
 
