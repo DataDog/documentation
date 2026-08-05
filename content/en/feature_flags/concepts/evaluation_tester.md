@@ -25,6 +25,8 @@ Evaluations run through the Evaluation Tester are a dry run: they do not emit ex
 2. Select the **Targeting Rules** tab and choose the environment you want to test against.
 3. Click **Test Rule Evaluation** to open the Evaluation Tester side panel.
 
+{{< img src="feature_flags/concepts/evaluation-tester-canvas.png" alt="Test Rule Evaluation button on the targeting rules canvas for a flag." style="width:100%;" >}}
+
 ## Provide a targeting context
 
 The Evaluation Tester evaluates your flag's targeting rules against a **targeting context**: a targeting key and, optionally, a set of attributes.
@@ -39,6 +41,8 @@ You can provide attributes in two modes:
 
 The evaluation result updates automatically as you edit the targeting key or attributes.
 
+{{< img src="feature_flags/concepts/evaluation-tester-panel.png" alt="Evaluation Tester side panel with a targeting key, an attribute, and a result." style="width:60%;" >}}
+
 ## Understand the result
 
 The **Result** section shows the variant that would be assigned for the provided targeting context, along with the name of the targeting rule that matched.
@@ -48,6 +52,8 @@ Expand **How did I get this result?** to see a rule-by-rule breakdown of the eva
 - Rules are listed in the order they are evaluated.
 - Each rule shows whether it **matched**, was **passed through** (the subject didn't match the rule's filter, so evaluation continued to the next rule), or was **skipped** (unreachable given the result of a prior rule).
 - For rules with a filter, the breakdown explains which condition matched or didn't match (for example, `country matched US` or `browser did not match is one of Chrome, Safari`).
+
+{{< img src="feature_flags/concepts/evaluation-tester-breakdown.png" alt="Expanded evaluation breakdown showing which rule matched and why." style="width:60%;" >}}
 
 The matched rule is also highlighted on the targeting rules canvas, so you can see the evaluation path visually.
 
