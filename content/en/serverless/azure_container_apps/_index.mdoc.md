@@ -46,9 +46,14 @@ further_reading:
 
 ## Overview
 
-**Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
+Azure Container Apps is a fully managed serverless platform for deploying and scaling
+containerized applications. Datadog monitors Container Apps in two layers:
 
-The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
+- The Azure Integration collects standard metrics and logs.
+- The Datadog `serverless-init` Agent adds distributed tracing, enhanced metrics, custom
+  metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
+
+First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs. Then, use the agentic onboarding tool (recommended) or the manual instructions below to instrument your application. 
 
 ## Set up with agentic onboarding
 
