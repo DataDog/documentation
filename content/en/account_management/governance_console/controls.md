@@ -35,7 +35,7 @@ Governance Console Controls audit and enforce organizational standards. You can 
 
    If you select {{< ui >}}Workflow{{< /ui >}}, search for and select an existing Datadog Workflow to run when the control detects noncompliant assets. See [workflow mitigation](#workflow-mitigation).
 
-   Once a workflow is selected, use {{< ui >}}Edit{{< /ui >}} to view the full workflow, or {{< ui >}}Change Associated Workflow{{< /ui >}} to select a different workflow from your account.
+   After you select a workflow, use {{< ui >}}Edit{{< /ui >}} to view or edit the full workflow, or {{< ui >}}Change Associated Workflow{{< /ui >}} to select a different workflow.
 
    To delay mitigation, enter a number of days under {{< ui >}}Remediation Delay{{< /ui >}}. You can delay remediation for up to 1 week. This grants additional time for administrators to take additional actions before automatic enforcement occurs.
 
