@@ -654,6 +654,8 @@ The default injection style is `tracecontext`, `Datadog`.
 ## How RUM resources are linked to traces
 
 Datadog uses the distributed tracing protocol and sets up the HTTP headers below. By default, both trace context and Datadog-specific headers are used.
+
+The headers documented below are only added when their corresponding propagator type is active. By default, RUM includes the `datadog` propagator alongside trace context; see [OpenTelemetry support](#opentelemetry-support) above to view or change which propagators are enabled.
 {{< tabs >}} {{% tab "Datadog" %}}
 `x-datadog-trace-id`
 : Generated from the Real User Monitoring SDK. Allows Datadog to link the trace with the RUM resource.
