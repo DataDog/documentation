@@ -171,12 +171,9 @@ Add a covering test when the suite is empty or when Datadog detects covering tes
 ### Maintain coverage
 
 - After you change a journey's start or end conditions, re-check its coverage, because the set of covering tests can change.
-- Keep at least one covering test in the suite so the journey reports uptime.
+- A journey reports uptime only while at least one covering test remains in its suite. If a journey loses its coverage, it stops reporting uptime.
 
-<!-- AUTHORING NOTE: The "seven-day covering-test rule" is not defined in the source design docs.
-Confirm the covering-test time window with the product team (it may be documented on
-/journey_monitoring/uptime/) before adding it here. Variant-level coverage detection is not yet
-built, so this section intentionally omits per-variant coverage. -->
+For more details on journey coverage, see [Journey uptime][5].
 
 Managing coverage acts on Synthetic tests, so it requires Synthetic Monitoring write access and a restriction policy on the suite. See [Roles and Permissions][11].
 

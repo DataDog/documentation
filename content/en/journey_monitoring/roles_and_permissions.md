@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-A journey connects assets from Synthetic Monitoring, RUM, SLOs, and monitors. Most actions require both a Journey Monitoring permission and the permission for the underlying asset the action touches.
+A journey connects assets from Product Analytics, RUM and Synthetic Monitoring. Most actions require both a Journey Monitoring permission and the permission for the underlying asset the action touches.
 
 <!-- AUTHORING NOTE: Confirm the final permission names before publishing. The target GA model
 introduces dedicated Journey Monitoring read/write permissions. Until those release, Synthetic
