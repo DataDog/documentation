@@ -1046,27 +1046,27 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 ## Add domains to firewall allowlist
 
-If you are using a firewall, these domains must be added to the allowlist:
+If you are using a firewall, these domains must be added to the allowlist, replacing `<DD_SITE>` with {% region-param key="dd_site" code=true /%}:
 
 {% if includes($platform, ["docker","kubernetes","cloudformation","ecs_fargate"]) %}
 
-- `api.`{% region-param key="dd_site" code=true /%}
-- `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.logs.`{% region-param key="dd_site" code=true /%}
-- `*.agent.`{% region-param key="dd_site" code=true /%}
+- `api.<DD_SITE>:443`
+- `config.<DD_SITE>:443`
+- `http-intake.logs.<DD_SITE>:443`
+- `*.agent.<DD_SITE>:443`
 
 {% /if %}
 
 {% if equals($platform, "linux") %}
 
-- `api.`{% region-param key="dd_site" code=true /%}
-- `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.logs.`{% region-param key="dd_site" code=true /%}
+- `api.<DD_SITE>:443`
+- `config.<DD_SITE>:443`
+- `http-intake.logs.<DD_SITE>:443`
 - `keys.datadoghq.com`
 - `install.datadoghq.com`
 - `yum.datadoghq.com`
 - `apt.datadoghq.com`
-- `*.agent.`{% region-param key="dd_site" code=true /%}
+- `*.agent.<DD_SITE>:443`
 
 {% /if %}
 
