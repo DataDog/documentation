@@ -1,6 +1,6 @@
 # Datadog documentation style guide
 
-This guide explains how to write and edit content for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
+This guide explains how to write and revise content for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
 
 The Datadog documentation [implementation of the Vale linter][4] has rules corresponding to some of these guidelines. After you make a PR, check its **Files changed** tab to see and fix warnings and errors it flagged.
 
