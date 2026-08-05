@@ -129,8 +129,6 @@ Select an application type to start collecting RUM data:
   {{< image-card href="/real_user_monitoring/application_monitoring/kotlin_multiplatform/setup" src="integrations_logos/kotlin-multiplatform_large.svg" alt="Kotlin Multiplatform" >}}
 {{< /card-grid >}}
 
-</br>
-
 ### Capabilities and platform support
 
 **Note**: The Datadog Flutter SDK is not supported for MacOS, Windows, or Linux.

@@ -32,8 +32,6 @@ For containerized environments, follow the links below to enable trace collectio
   {{< image-card href="/integrations/ecs_fargate/#trace-collection" src="integrations_logos/ecs_fargate.png" alt="ECS Fargate" >}}
 {{< /card-grid >}}
 
-</br>
-
 3. The trace client attempts to send traces to the Unix domain socket `/var/run/datadog/apm.socket` by default. If the socket does not exist, traces are sent to `http://localhost:8126`.
 
    If a different socket, host, or port is required, use the `DD_TRACE_AGENT_URL` environment variable. For example:
@@ -80,8 +78,6 @@ Set up your application to send [traces][2] using one of the following official 
   {{< image-card href="/tracing/trace_collection/dd_libraries/android" src="integrations_logos/android.png" alt="Android" >}}
   {{< image-card href="/tracing/trace_collection/dd_libraries/ios" src="integrations_logos/ios_large.svg" alt="iOS" >}}
 {{< /card-grid >}}
-
-<br>
 
 To instrument an application written in a language that does not have official library support, see the list of [community SDKs][1].
 
