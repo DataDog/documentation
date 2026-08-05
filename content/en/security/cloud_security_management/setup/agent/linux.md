@@ -87,21 +87,22 @@ The `languages` analyzer covers the following package ecosystems:
 
 ## Runtime Package Prioritization (Preview)
 
-Runtime package prioritization enriches each vulnerability finding with real-time signals from the running environment. When enabled, the Agent uses eBPF to monitor file access at runtime and records how packages are actually used by running processes.
+Runtime package prioritization identifies which packages in a container image are used at runtime, so you can prioritize vulnerabilities in code that runs over vulnerabilities in packages that are installed but never executed.
 
-Each vulnerability finding is enriched with the following signals:
+When enabled, the Agent uses eBPF to observe file access on your workloads and adds these signals to vulnerability findings for that image:
 
-| Signal | Description |
-|--------|-------------|
-| Package is running | The package files are actively being accessed by running processes. |
-| Accessed by root process | The package is being accessed by a process running as root (UID 0). |
+| Signal | What it tells you |
+|--------|-------------------|
+| Package is running | The package's files were observed being accessed by a running process. |
+| Accessed by root process | The package was accessed by a process running as root (UID 0). |
 | SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
 
-These signals power vulnerability prioritization in Cloud Security, surfacing findings where vulnerable code is confirmed running in production.
+*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][8]. To query these signals directly, see [Filter findings by runtime signals][9].
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
 - Linux only (eBPF dependency)
+- Applies to operating system packages in container image vulnerability findings
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][7] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
@@ -143,3 +144,5 @@ sudo chgrp dd-agent /etc/datadog-agent/security-agent.yaml
 [5]: /getting_started/agent/#installation
 [6]: /agent/?tab=Linux
 [7]: /security/workload_protection/
+[8]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/
+[9]: /security/cloud_security_management/triage_and_prioritize/runtime_prioritization_engine/#filter-findings-by-runtime-signals

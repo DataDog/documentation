@@ -2,15 +2,21 @@
 title: Experiments
 description: Plan, run, and analyze randomized experiments across your stack with Datadog Experiments.
 further_reading:
-- link: "https://www.datadoghq.com/blog/experiments"
-  tag: "Blog"
-  text: "Measure the business impact of every product change with Datadog Experiments"
 - link: "/feature_flags/"
   tag: "Documentation"
   text: "Feature Flags"
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
+- link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
+  tag: "Blog"
+  text: "The product signal latency gap slowing your growth"
+- link: "https://www.datadoghq.com/blog/ab-testing/"
+  tag: "Blog"
+  text: "Every team should be A/B testing"
+- link: "https://www.datadoghq.com/blog/experiments"
+  tag: "Blog"
+  text: "Measure the business impact of every product change with Datadog Experiments"
 ---
 
 ## Overview

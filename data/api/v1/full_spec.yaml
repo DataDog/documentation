@@ -6182,6 +6182,9 @@ components:
         - rum_stream
         - llm_observability_stream
         - issue_stream
+        - security_runtime_stream
+        - security_signals_stream
+        - incidents_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6199,6 +6202,9 @@ components:
         - RUM_STREAM
         - LLM_OBSERVABILITY_STREAM
         - ISSUE_STREAM
+        - SECURITY_RUNTIME_STREAM
+        - SECURITY_SIGNALS_STREAM
+        - INCIDENTS_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
@@ -9141,6 +9147,14 @@ components:
           type: array
         model_type_override:
           $ref: "#/components/schemas/MonitorFormulaAndFunctionDataQualityModelTypeOverride"
+        sensitivity:
+          description: |-
+            Sensitivity of the anomaly detection model, expressed as a multiplier on the width
+            of the predicted bounds. Higher values widen the bounds and produce fewer alerts;
+            lower values tighten them and produce more alerts. Defaults to `3.0`.
+          example: 3.0
+          format: double
+          type: number
       type: object
     MonitorFormulaAndFunctionDataQualityQueryDefinition:
       description: A formula and functions data quality query.

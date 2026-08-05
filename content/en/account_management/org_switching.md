@@ -17,6 +17,8 @@ For security purposes, you must have a valid session for each org you switch to.
 
 2. **SAML Strict**: If your org is set for [SAML Strict][2], you must authenticate with SAML. You are required to re-authenticate each time you switch organizations. Since IdPs persist sessions, this is often a redirect.
 
+3. **Email verification**: If the organization uses SP-initiated SAML and does not have a custom subdomain, Datadog sends a one-time email verification code that you must enter to finish authenticating when you switch to that organization. This is the same verification code required at [login][4].
+
 ## Resetting passwords for multi-org users
 
 A password is shared across organizations for each multi-org user. If you reset your password, the reset affects all the organizations you belong to.
@@ -42,3 +44,4 @@ If the above troubleshooting steps fail, contact the [Datadog support team][3] a
 [1]: https://app.datadoghq.com/personal-settings/organizations
 [2]: /account_management/saml/#saml-strict
 [3]: /help/
+[4]: /account_management/saml/#sp-initiated-login

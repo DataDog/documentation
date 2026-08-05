@@ -4,9 +4,6 @@ aliases:
   - /cloud_cost_management/tag_pipelines/
   - /cloud_cost_management/tags/tag_pipelines/
 further_reading:
-- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
-  tag: Blog
-  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 - link: "/cloud_cost_management/"
   tag: "Documentation"
   text: "Learn about Cloud Cost Management"
@@ -16,6 +13,12 @@ further_reading:
 - link: "/integrations/guide/reference-tables"
   tag: "Documentation"
   text: "Learn about Reference Tables"
+- link: "https://www.datadoghq.com/blog/cloud-cost-management-ai-costs/"
+  tag: "Blog"
+  text: "Attribute AI costs across providers with Datadog Cloud Cost Management"
+- link: https://www.datadoghq.com/blog/cloud-cost-management-oci
+  tag: Blog
+  text: Manage and optimize your OCI costs with Datadog Cloud Cost Management
 ---
 
 ## Overview

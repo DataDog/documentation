@@ -250,6 +250,12 @@ The default Agent configuration for Database Monitoring is conservative, but you
 The recommended value for `pg_stat_statements.max` is `10000`. Setting this configuration to a higher value
 may cause the collection query to take longer to run, which can lead to query timeouts and gaps in query metric collection. If the Agent reports this warning, make sure that `pg_stat_statements.max` is set to `10000` on the database.
 
+### Databases are missing or merged in the list
+
+Datadog tags database metrics with the `db` tag to identify which database each metric belongs to. Applying a custom `db` tag overrides this per-database value, so all metrics share a single `db` value. Your databases then collapse into one entry, and individual databases may not appear in the Databases list in Database Monitoring.
+
+To restore per-database `db` values, remove any custom `db` tags so that Datadog can populate the tag per database.
+
 
 [1]: /database_monitoring/setup_postgres/
 [2]: /agent/troubleshooting/

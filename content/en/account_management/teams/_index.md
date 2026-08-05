@@ -61,6 +61,10 @@ All sources
 
 If you have teams with existing members, picking the SAML strict option overrides your settings and removes team members from those teams. Picking the All Sources option preserves existing memberships. To manage teams and team membership using SAML attributes, see [Map SAML attributes to Teams][4].
 
+## Team hierarchies
+
+Nest teams within each other (subteams) to mirror your organization's structure, and visualize the result as a Teams map. To define hierarchical relationships between teams with GitHub Teams, the Teams API, Terraform, or the Datadog UI, see [Team hierarchies][39].
+
 ## Team handle
 
 A team handle links teams to Datadog resources. Team handles appear in search bars and facets in the format `team:<team-handle>` or `teams:<team-handle>`. 
@@ -212,3 +216,4 @@ To customize your team, see [Team Management][3].
 [36]: https://app.datadoghq.com/security/configuration/suppressions
 [37]: https://app.datadoghq.com/sheets
 [38]: https://app.datadoghq.com/workflow
+[39]: /account_management/teams/manage/#team-hierarchies

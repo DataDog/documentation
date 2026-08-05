@@ -74,6 +74,11 @@ On the Worker installation page:
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/logstash %}}
 
 {{% /tab %}}
+{{% tab "MySQL" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/mysql %}}
+
+{{% /tab %}}
 {{% tab "OpenTelemetry" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/source_env_vars/opentelemetry %}}
@@ -130,6 +135,11 @@ On the Worker installation page:
 {{% tab "CrowdStrike NG-SIEM" %}}
 
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/crowdstrike_ng_siem %}}
+
+{{% /tab %}}
+{{% tab "Databricks" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
 
 {{% /tab %}}
 {{% tab "Datadog Logs" %}}
