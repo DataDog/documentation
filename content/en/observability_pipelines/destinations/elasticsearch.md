@@ -40,9 +40,9 @@ After you select the Elasticsearch destination in the pipeline UI:
 			1. In the {{< ui >}}Type{{< /ui >}} field, enter the category of data being ingested, for example `logs` or `metrics`.
 			1. In the {{< ui >}}Dataset{{< /ui >}} field, specify the format or data source that describes the structure, for example `apache`.
 			1. In the {{< ui >}}Namespace{{< /ui >}} field, enter the grouping for organizing your data streams, for example `production`.
-			- You can use [template syntax][3] for the {{< ui >}}Type{{< /ui >}}, {{< ui >}}Dataset{{< /ui >}}, and {{< ui >}}Namespace{{< /ui >}} fields to dynamically construct the data stream name based on specific fields in your logs or metrics.
 			1. Enable the {{< ui >}}Auto routing{{< /ui >}} toggle to automatically route events to a data stream based on the event content.
 			1. Enable the {{< ui >}}Sync fields{{< /ui >}} toggle to synchronize data stream fields with the Elasticsearch index mapping.
+			- You can use [template syntax][3] for the {{< ui >}}Type{{< /ui >}}, {{< ui >}}Dataset{{< /ui >}}, and {{< ui >}}Namespace{{< /ui >}} fields to dynamically construct the data stream name based on specific fields in your logs or metrics.
 			- In the UI, there is a preview of the data stream name you configured. If the fields are left blank, the default data stream name used is `logs-generic-default` for logs and `metrics-generic-default` for metrics. With the above example inputs, the data stream name that the Worker writes to is:
 				- `logs-apache-production` for logs
 				- `metrics-apache-production` for metrics
