@@ -38837,10 +38837,6 @@ components:
           $ref: "#/components/schemas/FleetConfigurationLayer"
         application_monitoring_configuration:
           $ref: "#/components/schemas/FleetConfigurationLayer"
-        datadog_agent_key:
-          description: The unique agent key identifier.
-          example: "a1b2c3d4e5f67890a1b2c3d4e5f67890"
-          type: string
         otel_collectors_configuration:
           description: >-
             Configuration for OpenTelemetry collectors associated with the agent. Present only when the agent has associated OpenTelemetry collectors.
@@ -38851,9 +38847,6 @@ components:
           $ref: "#/components/schemas/FleetConfigurationLayer"
         system_probe_configuration:
           $ref: "#/components/schemas/FleetConfigurationLayer"
-        version:
-          description: The configuration version.
-          type: string
       type: object
     FleetAgentDetailV2:
       description: Detailed information about a specific Datadog Agent.
@@ -39013,9 +39006,6 @@ components:
             description: An OpenTelemetry collector distribution.
             type: string
           type: array
-        otel_collector_version:
-          description: OpenTelemetry collector version (if applicable).
-          type: string
         otel_collector_versions:
           description: List of OpenTelemetry collector versions (if applicable).
           items:
@@ -39199,10 +39189,6 @@ components:
             description: An OpenTelemetry collector distribution.
             type: string
           type: array
-        otel_collector_version:
-          description: The primary OpenTelemetry collector version, if applicable.
-          example: "0.91.0"
-          type: string
         otel_collector_versions:
           description: All OpenTelemetry collector versions associated with the agent.
           items:
@@ -39374,9 +39360,6 @@ components:
           description: Name of the configuration file.
           example: "postgres.yaml"
           type: string
-        fleet_hash:
-          description: Hash of the configuration file as applied by fleet management.
-          type: string
       type: object
     FleetConfigurationLayer:
       description: Configuration information organized by layers.
@@ -39389,9 +39372,6 @@ components:
           type: string
         file_configuration:
           description: Configuration from files.
-          type: string
-        parsed_configuration:
-          description: Parsed configuration output.
           type: string
         remote_configuration:
           description: Remote configuration settings.
@@ -39535,7 +39515,7 @@ components:
           example: "env:prod AND service:web"
           type: string
         total_hosts:
-          description: Total number of hosts targeted by the dry run.
+          description: Total number of hosts targeted by this deployment.
           example: 42
           format: int64
           type: integer
@@ -40159,25 +40139,16 @@ components:
     FleetIntegrationsByStatusV2:
       description: Integrations organized by their status.
       properties:
-        cluster_name:
-          description: The Kubernetes cluster name, if the agent runs in a cluster.
-          type: string
         configuration_files:
           description: Configuration files for integrations.
           items:
             $ref: "#/components/schemas/FleetConfigurationFileV2"
           type: array
-        datadog_agent_key:
-          description: The unique agent key identifier.
-          type: string
         error_integrations:
           description: Integrations with errors.
           items:
             $ref: "#/components/schemas/FleetIntegrationDetailsV2"
           type: array
-        k8s_cluster_key:
-          description: The Kubernetes cluster key, if the agent runs in a cluster.
-          type: string
         missing_integrations:
           description: Detected but not configured integrations.
           items:
@@ -40551,9 +40522,9 @@ components:
           type: integer
         start_maintenance_window:
           description: |-
-            Start time of the maintenance window in 24-hour clock format (HH:MM).
+            Start time of the maintenance window in 24-hour clock format (HHMM).
             Deployments are triggered at this time on the specified days.
-          example: "02:00"
+          example: "0200"
           type: string
         timezone:
           description: Timezone in IANA Time Zone Database format.
@@ -138971,7 +138942,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/dashboards/usage:
     get:
-      description: Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set. Use `filter[edited_before]` or `filter[viewed_before]` to narrow results by recency. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.
+      description: Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set. Use `filter[edited_before]` or `filter[viewed_before]` to narrow results by edit or view date. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM. **View counts are refreshed once per day** and **only reflect views recorded starting January 2025**; views prior to that date are not included.
       operationId: ListDashboardsUsage
       parameters:
         - description: Maximum number of dashboards to return per page. Server-side maximum is 500; values above 500 return a 400 Bad Request.
@@ -139087,7 +139058,7 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/dashboards/{dashboard_id}/usage:
     get:
-      description: Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.
+      description: Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM. **View counts are refreshed once per day** and **only reflect views recorded starting January 2025**; views prior to that date are not included.
       operationId: GetDashboardUsage
       parameters:
         - description: The ID of the dashboard.
@@ -144534,7 +144505,7 @@ paths:
                               - Wed
                             interval: 1
                             maintenance_window_duration: 120
-                            start_maintenance_window: "02:00"
+                            start_maintenance_window: "0200"
                             timezone: America/New_York
                           status: active
                           updated_at: "2023-11-14T22:13:19Z"
@@ -144601,7 +144572,7 @@ paths:
                             - Wed
                           interval: 1
                           maintenance_window_duration: 120
-                          start_maintenance_window: "02:00"
+                          start_maintenance_window: "0200"
                           timezone: America/New_York
                         status: active
                         updated_at: "2023-11-14T22:13:19Z"
