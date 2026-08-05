@@ -67,7 +67,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 | Accessed by root process | The package was accessed by a process running as root (UID 0). |
 | SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
 
-*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][5]. To query the signals yourself, see [Filter findings by runtime signals][6].
+*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][5]. To query these signals directly, see [Filter findings by runtime signals][6].
 
 **Requirements**:
 - Datadog Agent **7.79.0 or later**
