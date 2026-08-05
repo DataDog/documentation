@@ -41,7 +41,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 ### Prerequisites
 
-Dynamic Instrumentation requires the following:
+Dynamic Instrumentation supports Java, Python, .NET, and PHP. It requires the following:
 
 - [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
 - [Remote Configuration][2] is enabled in that Agent.
