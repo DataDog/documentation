@@ -46,7 +46,7 @@ The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry.
 
 If one of these metrics is in a batch to be encoded and sent to OpenTelemetry, the Worker drops the unsupported metric, logs an error, and updates the `component_error_total` metric. Datadog recommends using a [filter processor][9] to filter out unsupported metric types.
 
-### Allow out-of-order samples
+## Allow out-of-order samples
 
 The Worker doesn't always send metrics in the correct order for a given series because it doesn't reorder metrics. For example, if the first batch of metrics contains metrics with timestamps: `10:03`, `10:04`, `10:05` and the second batch contains metrics with timestamps: `10:01`, `10:02`, `10:06`, the Worker does not reorder those metrics before sending them out.
 
