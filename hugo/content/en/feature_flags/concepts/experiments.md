@@ -4,19 +4,19 @@ description: Learn how a feature flag's targeting rules randomize a Datadog Expe
 further_reading:
 - link: "/experiments/"
   tag: "Documentation"
-  text: "Experiments"
-- link: "/feature_flags/concepts/targeting_rules"
-  tag: "Documentation"
-  text: "Targeting Rules and Filters"
-- link: "/feature_flags/concepts/evaluation_context"
-  tag: "Documentation"
-  text: "Evaluation Context"
+  text: "Learn about Datadog Experiments"
 - link: "/experiments/plan_and_launch_experiments"
   tag: "Documentation"
   text: "Plan and Launch Experiments"
 - link: "/experiments/concepts/subject_types"
   tag: "Documentation"
-  text: "Subject Types"
+  text: "Subject Types in Experiments"
+- link: "/feature_flags/concepts/targeting_rules"
+  tag: "Documentation"
+  text: "Feature Flags Targeting Rules and Filters"
+- link: "/feature_flags/concepts/evaluation_context"
+  tag: "Documentation"
+  text: "Feature Flags Evaluation Context"
 ---
 
 ## Overview
