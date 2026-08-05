@@ -88,33 +88,6 @@ Each recommendation type has built-in safeguards. For example, the **Delete Unat
 
 If {{< ui >}}Require approval before execution{{< /ui >}} is enabled in the [automation setup](#set-up-an-automation), Datadog posts in the designated channel a summary of the resources targeted on each run. The automation only runs after a user approves the request in the channel.
 
-## Set up a notification rule
-
-A notification rule sends a recurring Slack summary of Cloud Cost Recommendations matching a scope you define, without taking any action on your resources. Use a notification rule when you want visibility into new savings opportunities without configuring Datadog to make changes automatically.
-
-**Prerequisite**: A Slack connection. See [Slack integration][8].
-
-To set up a notification rule:
-
-1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
-1. Select the {{< ui >}}Notification{{< /ui >}} tab.
-1. Click **Set New Notification**.
-1. In the {{< ui >}}Define scope{{< /ui >}} section, enter tags to restrict the notification to resources matching those tags. Leave this blank to include all resources.
-1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
-1. In the destination section, select a Slack workspace connection and channel. Optionally, select teammates to @-mention in the message.
-1. Enter a name for the notification rule.
-1. Use the {{< ui >}}Notification enabled{{< /ui >}} toggle to control whether the rule is active.
-1. (Optional) Click {{< ui >}}Test Notification{{< /ui >}} to send a sample message to the selected Slack channel before saving.
-1. Click **Save**.
-
-### Manage notification rules
-
-The {{< ui >}}Notification{{< /ui >}} tab lists every notification rule in your organization. From this page you can:
-
-- Toggle a rule on or off without deleting it
-- Edit a rule's scope, schedule, destination, or name
-- Delete a rule
-
 ## Manage automations
 
 The {{< ui >}}Remediation{{< /ui >}} tab lists every automation (labeled as a **policy** in this view) in your organization, grouped by recommendation type. Use the {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Resource Type{{< /ui >}}, and {{< ui >}}Recommendation Type{{< /ui >}} filters at the top of the page to narrow the list. From this page you can:
@@ -144,6 +117,33 @@ Datadog records a new version of an automation each time it's created, edited, e
 When an automation successfully acts on a resource, the corresponding recommendation moves to {{< ui >}}Completed{{< /ui >}} and is labeled as completed by automation. Its savings count toward the realized savings totals on the [Cloud Cost Recommendations][1] page.
 
 If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip it on future runs until the dismissal expires.
+
+## Set up a notification rule
+
+A notification rule sends a recurring Slack summary of Cloud Cost Recommendations matching a scope you define, without taking any action on your resources. Use a notification rule when you want visibility into new savings opportunities without configuring Datadog to make changes automatically.
+
+**Prerequisite**: A Slack connection. See [Slack integration][8].
+
+To set up a notification rule:
+
+1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
+1. Select the {{< ui >}}Notification{{< /ui >}} tab.
+1. Click **Set New Notification**.
+1. In the {{< ui >}}Define scope{{< /ui >}} section, enter tags to restrict the notification to resources matching those tags. Leave this blank to include all resources.
+1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
+1. In the destination section, select a Slack workspace connection and channel. Optionally, select teammates to @-mention in the message.
+1. Enter a name for the notification rule.
+1. Use the {{< ui >}}Notification enabled{{< /ui >}} toggle to control whether the rule is active.
+1. (Optional) Click {{< ui >}}Test Notification{{< /ui >}} to send a sample message to the selected Slack channel before saving.
+1. Click **Save**.
+
+## Manage notification rules
+
+The {{< ui >}}Notification{{< /ui >}} tab lists every notification rule in your organization. From this page you can:
+
+- Toggle a rule on or off without deleting it
+- Edit a rule's scope, schedule, destination, or name
+- Delete a rule
 
 ## Further reading
 
