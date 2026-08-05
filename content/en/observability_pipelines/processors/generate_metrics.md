@@ -117,7 +117,7 @@ To convert a string timestamp to timestamp format:
     ```
     See [parse_timestamp][9] for more information.
 
-## Metrics
+## Health metrics
 
 For [component metrics][10] and [processor buffer metrics][11] emitted by all processors, see the [Pipelines Usage Metrics][12] documentation.
 

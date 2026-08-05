@@ -56,7 +56,7 @@ There are no default secret identifiers for this source.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. To filter or group by Google Pub/Sub source metrics, use the tag `component_type:gcp_pubsub`.
 

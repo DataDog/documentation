@@ -62,7 +62,7 @@ After you've set up the pipeline to send logs to the SentinelOne destination, yo
 3. Make sure the filter next to the search bar is set to {{< ui >}}All Data{{< /ui >}}.
 4. This page shows the logs you sent from Observability Pipelines to SentinelOne.
 
-## Metrics
+## Health metrics
 
 For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Splunk HEC destination metrics, use the tag `component_type:splunk_hec_logs`.
 

@@ -128,7 +128,7 @@ Then it is converted to the JSON:
 }
 ```
 
-## Metrics
+## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
 

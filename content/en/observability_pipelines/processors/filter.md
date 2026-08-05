@@ -31,7 +31,7 @@ To set up the filter processor:
   - Logs or metrics that match the query are sent to the next component.
   - Logs or metrics that don't match the query are dropped.
 
-## Metrics
+## Health metrics
 
 For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Filter processor metrics, use the tag `component_type:opw_filter`.
 

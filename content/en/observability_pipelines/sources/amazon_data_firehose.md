@@ -73,7 +73,7 @@ Select an {{< ui >}}AWS authentication{{< /ui >}} option. If you select {{< ui >
 
 {{% observability_pipelines/aws_authentication/amazon_s3_source/permissions %}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Amazon Data Firehose source metrics, use the tag `component_type:aws_kinesis_firehose`.
 

@@ -60,7 +60,7 @@ After you select the BYOC Logs destination in the pipeline UI, you can configure
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation. To filter or group by Datadog Logs destination metrics, use the tag `component_type:datadog_logs`.
 
