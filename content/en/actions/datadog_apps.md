@@ -112,7 +112,7 @@ Backend functions can call any action in Datadog's [Action Catalog][4] through t
 
 The library is a fully typed TypeScript client that wraps integrations, including AWS, Azure, GCP, the Datadog API, GitHub, GitLab, Slack, Jira, PagerDuty, ServiceNow, OpenAI, Anthropic, and generic HTTP. Importing actions from `@datadog/action-catalog` gives you typed inputs and responses for each action.
 
-You can view backend utilities through the [@datadog/apps-backend][23] package. Use utilities to help with common actions.
+You can view backend utilities through the [@datadog/apps-backend][23] package. Use utilities to help with common actions such as retrieving the invoking user's information.
    ```
 import { getInitiatingUser, type User } from '@datadog/apps-backend/user';
 
