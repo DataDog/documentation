@@ -1,5 +1,9 @@
 menu:
   main:
+    - name: Example Feature
+      identifier: example_feature_heading
+      url: /getting_started/example_feature/
+      weight: 500000
     - name: Essentials
       identifier: essentials_heading
       weight: 1000000
