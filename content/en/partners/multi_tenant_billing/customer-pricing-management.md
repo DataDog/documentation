@@ -3,9 +3,13 @@ title: Customer Pricing Management
 description: "Configure per-customer pricing so customers can see their own estimated Datadog costs."
 ---
 
+{{< callout url="mailto:partner-support@datadoghq.com" >}}
+Customer Pricing Management is in Preview. Contact partner-support@datadoghq.com to request access.
+{{< /callout >}}
+
 ## Overview
 
-Customer Pricing Management lets a partner configure per-customer pricing so a customer can see their own estimated Datadog costs, based on the partner's rates, directly within their org. This capability is in preview.
+Customer Pricing Management lets a partner configure per-customer pricing so a customer can see their own estimated Datadog costs, based on the partner's rates, directly within their org.
 
 Partner-configured pricing powers the [Bill Overview][1] page in the customer's own org: an estimated month-to-date cost total, a daily cost breakdown, and the ability to break costs down by product and sub-org.
 
@@ -42,9 +46,4 @@ This capability is in preview and does not support:
 
 On-demand costs for off-contract ingest SKUs can run up to approximately 3% higher than actual cost.
 
-## What's next
-
-Contact [partner-support@datadoghq.com][2] to join the preview.
-
 [1]: /account_management/plan_and_usage/bill_overview/
-[2]: mailto:partner-support@datadoghq.com

@@ -3,9 +3,13 @@ title: Customer Contracts Management
 description: "Manage the partner's book of business - customers, contracts, and invoices - from an Admin Org."
 ---
 
+{{< callout url="mailto:partner-support@datadoghq.com" >}}
+Customer Contracts Management is in Preview. Contact partner-support@datadoghq.com to request access.
+{{< /callout >}}
+
 ## Overview
 
-Customer Contracts Management gives a partner a single place to manage their book of business with Datadog: customers, contracts, and invoices, without relying on the partner account team for routine lookups. This capability is in preview.
+Customer Contracts Management gives a partner a single place to manage their book of business with Datadog: customers, contracts, and invoices, without relying on the partner account team for routine lookups.
 
 Datadog works with partners under two contract models:
 
@@ -31,9 +35,3 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - Active sales opportunities.
 - An org hierarchy view across connected orgs.
 - API access to pull contract and invoice data programmatically; use the UI directly.
-
-## What's next
-
-Contact [partner-support@datadoghq.com][1] to join the preview.
-
-[1]: mailto:partner-support@datadoghq.com
