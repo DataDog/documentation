@@ -44,18 +44,11 @@ further_reading:
     text: "Datadog MCP Server: serverless_onboarding tool"
 ---
 
-{% collapse-content title="In-Container vs. Sidecar" level="h5" %}
+## Overview
 
-| Aspect | In-Container | Sidecar |
-|--------|--------------|---------|
-| Deployment | One container (your app, wrapped with the Datadog Agent) | Two containers (your app, Datadog Agent) |
-| Image changes | Increases app image size. | No change to app image. |
-| Cost overhead | Less than sidecar (no extra container). | Extra vCPU/memory. Overallocating the sidecar wastes cost; underallocating leads to premature scaling. |
-| Logging | Direct stdout/stderr access. | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
-| Failure isolation | In rare cases, Datadog Agent bugs can affect your app. | Datadog Agent faults are isolated. |
-| Best for | Simpler setup, lower cost, and direct log piping. | Multiple containers per service, Agent isolation, and performance-sensitive workloads. |
+**Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
 
-{% /collapse-content %}
+The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
 
 ## Set up with agentic onboarding
 
@@ -90,9 +83,18 @@ Help me monitor my Azure Container Apps services with Datadog
 
 ## Manual instrumentation
 
-**Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
+{% collapse-content title="In-Container vs. Sidecar" level="h5" %}
 
-The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
+| Aspect | In-Container | Sidecar |
+|--------|--------------|---------|
+| Deployment | One container (your app, wrapped with the Datadog Agent) | Two containers (your app, Datadog Agent) |
+| Image changes | Increases app image size. | No change to app image. |
+| Cost overhead | Less than sidecar (no extra container). | Extra vCPU/memory. Overallocating the sidecar wastes cost; underallocating leads to premature scaling. |
+| Logging | Direct stdout/stderr access. | Shared volume + log library routing to a log file. Uncaught errors require extra handling, since they are not automatically handled by your logging library. |
+| Failure isolation | In rare cases, Datadog Agent bugs can affect your app. | Datadog Agent faults are isolated. |
+| Best for | Simpler setup, lower cost, and direct log piping. | Multiple containers per service, Agent isolation, and performance-sensitive workloads. |
+
+{% /collapse-content %}
 
 <!-- In-Container -->
 {% if equals($instrumentation_method, "in_container") %}
