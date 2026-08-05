@@ -122,7 +122,7 @@ Configure the API key, Datadog site, and environment in the application process:
 
 {{< code-block lang="bash" >}}
 export DD_API_KEY=<YOUR_API_KEY>
-export DD_SITE={{< region-param key="dd_site" code="true" >}}
+export DD_SITE=<YOUR_DATADOG_SITE>
 export DD_ENV=<YOUR_ENVIRONMENT>
 export DD_SERVICE=<YOUR_SERVICE_NAME>
 export DD_VERSION=<YOUR_APP_VERSION>
