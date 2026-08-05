@@ -126,7 +126,7 @@ Overshadowing typically presents in one of the following ways:
 * A metric's tags or data appear to change suddenly, without you making any configuration changes.
 * You receive this error when updating a tag configuration through the metrics API:
 
-    ```
+    ```text
     New tag-configuration conflicts with existing configuration for <METRIC_NAME>
     ```
 * A metric reports as a different type than expected (for example, you expect `count` but see `distribution`).
