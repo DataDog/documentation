@@ -25,7 +25,7 @@ There are two types of rules to configure ownership of views:
 1. <b>Exact rules</b>, which map one-to-one with a view name 
 2. <b> Prefix rules</b>, which capture all views that contain the prefix in their name
 
-<--INSERT PLACEHOLDER IMAGE HERE--->
+{{< img src="/real_user_monitoring/ownership_of_views/ownership-rule-type.png" alt="Side panel displaying the two different types of rules to define ownership of views." >}}
 
 Every must also have at least one <b>team</b> and one <b>scope</b> defined. Two scope types are supported:
 - For the <b>current RUM application</b> across all services
