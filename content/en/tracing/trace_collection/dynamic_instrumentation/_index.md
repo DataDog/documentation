@@ -43,7 +43,7 @@ If you are interested in trying out the latest user experience improvements for 
 
 Dynamic Instrumentation supports Java, Python, .NET, and PHP. It requires the following:
 
-- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service (7.73.0 or higher for Go).
+- [Datadog Agent][1] 7.49.0 or higher is installed alongside your service.
 - [Remote Configuration][2] is enabled in that Agent.
 - A supported Datadog SDK is installed and up to date. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for version requirements.
 - [Unified Service Tagging][6] tags `service`, `env`, and `version` are applied to your deployment.
@@ -92,7 +92,7 @@ Select your runtime for manual enablement instructions:
 ### Limitations
 
 - Dynamic Instrumentation is not compatible with Azure App Services or serverless environments.
-- Not all instrumentation types are supported in every language. See the [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) section for supported features and limitations.
+- Not all instrumentation types are supported in every language. See the language-specific enabling pages linked from [Enable Dynamic Instrumentation](#enable-dynamic-instrumentation) for supported features and limitations.
 - The Java SDK does not support Kotlin coroutines.
 
 ## Explore Dynamic Instrumentation
@@ -126,10 +126,9 @@ For creation steps specific to each instrumentation type, see the following sect
 
 A dynamic metric emits a metric when it executes. To create a dynamic metric:
 
-
 1. Select {{< ui >}}Metric{{< /ui >}} as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, and location).
-1. Specify a name for the metric, which will be prefixed with `dynamic.instrumentation.metric.probe.`.
+1. Specify a name for the metric, which is prefixed with `dynamic.instrumentation.metric.probe.`.
 1. Select a metric type (count, gauge, or histogram).
 1. Choose the value of the metric using the [Dynamic Instrumentation expression language][15]. You can use any numeric value you'd like from the execution context, such as a method parameter, local variable, a class field, or an expression that yields a numeric value. For count metrics this is optional, and if you omit it, every invocation increments the count by one.
 
@@ -144,7 +143,6 @@ Dynamic Instrumentation supports the following metric types:
 ### Creating dynamic spans
 
 A dynamic span emits a span when a method is executed. To create a dynamic span:
-
 
 1. Select {{< ui >}}Span{{< /ui >}} as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
@@ -163,7 +161,7 @@ To create a dynamic span tag:
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
 1. Specify a name for the tag.
 1. Specify the value of the tag using the [Dynamic Instrumentation expression language][15].
-1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag will only be added when the expression evaluates to true.
+1. Optionally define a condition using the Dynamic Instrumentation expression language. The tag is added only when the expression evaluates to true.
 1. Optionally add additional tags, each with their own name, expression, and optional condition.
 
 You can use a *dynamic span tag* as an alternative to [using Custom Instrumentation to add tags in code][14].

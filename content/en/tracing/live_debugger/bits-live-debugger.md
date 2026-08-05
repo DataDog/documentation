@@ -35,7 +35,7 @@ Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the under
 
 Before using Bits Live Debugger:
 
-- [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][7] for details.
+- [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
