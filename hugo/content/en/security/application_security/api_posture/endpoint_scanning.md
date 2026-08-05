@@ -21,10 +21,10 @@ Endpoint Scanning sends only `GET` requests. It does not call `POST`, `PUT`, `PA
 
 For each scanned endpoint, Datadog records:
 
-- **Authentication status**: Whether the endpoint requires authentication.
-- **Public visibility**: Whether the endpoint is reachable without credentials.
-- **HTTP response status**: The status code returned by the endpoint.
-- **Last evaluation timestamp**: When the endpoint was last scanned.
+- {{< ui >}}Authentication status{{< /ui >}}: Whether the endpoint requires authentication.
+- {{< ui >}}Public visibility{{< /ui >}}: Whether the endpoint is reachable without credentials.
+- {{< ui >}}HTTP response status{{< /ui >}}: The status code returned by the endpoint.
+- {{< ui >}}Last evaluation timestamp{{< /ui >}}: When the endpoint was last scanned.
 
 Use this information to prioritize exposed endpoints, confirm whether important APIs enforce authentication, and investigate API findings with stronger evidence about how the endpoint behaves.
 
@@ -32,7 +32,7 @@ Use this information to prioritize exposed endpoints, confirm whether important 
 
 Endpoint Scanning is off by default. To enable it:
 
-1. In App and API Protection settings, go to [API Security Testing][3].
+1. In App and API Protection settings, go to [{{< ui >}}API Security Testing{{< /ui >}}][3].
 2. Toggle {{< ui >}}Enable Endpoint Scanning{{< /ui >}} on.
 
 After you enable it, Datadog scans eligible endpoints in the background in batches. Endpoints are retested approximately every seven days.

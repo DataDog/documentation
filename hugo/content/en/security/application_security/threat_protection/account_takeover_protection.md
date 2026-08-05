@@ -89,7 +89,7 @@ Those enrichment need to hold a user identifier (unique to a user, numeric or ot
 
 For steps on enabling tracking for events that are not automatically instrumented, go to [User Monitoring and Protection][1].
 
-For the latest list of relevant detections and instrumentation requirements, go to [Detection Rules][2] page.
+For the latest list of relevant detections and instrumentation requirements, go to the [{{< ui >}}Detection Rules{{< /ui >}}][2] page.
 
 [Automatic instrumentation][3] is a Datadog capability that automatically identifies user login success and failure for many authentication implementations.
 
@@ -112,17 +112,17 @@ AAP highlights the most relevant information and suggests actions to take based 
 
 **Compromised Users**
 
-Compromised and targeted users can be reviewed and blocked within **Signals** and **Traces**.
+Compromised and targeted users can be reviewed and blocked within {{< ui >}}Signals{{< /ui >}} and {{< ui >}}Traces{{< /ui >}}.
 
-**Signals**
+{{< ui >}}Signals{{< /ui >}}
 
-Individual users can be blocked in **Signals** using **Targeted Users**.
+Individual users can be blocked in {{< ui >}}Signals{{< /ui >}} using {{< ui >}}Targeted Users{{< /ui >}}.
 
 {{<img src="security/ato/compromised_users_signals2.png" alt="Compromised users shown on a security signal" style="width:100%;">}}
 
-**Traces**
+{{< ui >}}Traces{{< /ui >}}
 
-Individual users can be blocked on **Traces**, in **User**. Click on any user to show this option.
+Individual users can be blocked on {{< ui >}}Traces{{< /ui >}}, in {{< ui >}}User{{< /ui >}}. Click on any user to show this option.
 
 {{<img src="security/ato/traces_block_user.png" alt="Compromised users shown in the security trace explorer" style="width:100%;">}}
 
@@ -141,7 +141,7 @@ Identify trusted IPs, preventing them from being automatically blocked. This ste
 - Approved scanning sources that attempt to log in.
 - Corporate sites with large numbers of users behind single IP addresses.
 
-To configure trusted IPs, use [Passlist][12] and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
+To configure trusted IPs, use [{{< ui >}}Passlist{{< /ui >}}][12] and add a `Monitored` entry. Monitored entries are excluded from automated blocking.
 
 {{<img src="security/ato/passlist2.png" alt="Monitored passlist" style="width:100%;">}}
 
@@ -185,7 +185,7 @@ Here are three critical components for success in mitigating these attacks:
 
 ### Know your trends
 
-Use the [Threats Overview][11] to monitor business logic trends, such as spikes in failed logins against your services.
+Use the [{{< ui >}}Threats Overview{{< /ui >}}][11] to monitor business logic trends, such as spikes in failed logins against your services.
 
 {{<img src="security/ato/threats_overview2.png" alt="Threats Overview" style="width:100%;">}}
 
@@ -241,13 +241,13 @@ Review the following best practices for protection.
 
 Evaluate the managed ruleset to determine which rules fit your internal automated blocking policies.
 
-If you do not have a policy, review your existing detections and start with the suggested responses in **Signals**. Build your policy based on the most relevant actions taken over time.
+If you do not have a policy, review your existing detections and start with the suggested responses in {{< ui >}}Signals{{< /ui >}}. Build your policy based on the most relevant actions taken over time.
 
 #### Users
 
-In **Signals**, the **What Happened** and **Targeted Users** sections provide examples of the attempted usernames.
+In {{< ui >}}Signals{{< /ui >}}, the {{< ui >}}What Happened{{< /ui >}} and {{< ui >}}Targeted Users{{< /ui >}} sections provide examples of the attempted usernames.
 
-The **Traces** section identifies if the users exist. Understanding if users exist can influence your incident response decisions.
+The {{< ui >}}Traces{{< /ui >}} section identifies if the users exist. Understanding if users exist can influence your incident response decisions.
 
 Develop an incident response plan using the following post compromise steps:
 
@@ -263,7 +263,7 @@ Consider blocking compromised users in addition to blocking the attacker.
 To export a list of compromised or targeted users from a signal:
 
 1. Go to the notification settings in a detection rule condition. 
-2. Add a recipient and turn on _Notify for every new `@usr.id` detected_. This allows you to export the list when updates occur.
+2. Add a recipient and turn on {{< ui >}}Notify for every new `@usr.id` detected{{< /ui >}}. This allows you to export the list when updates occur.
 
 {{<img src="security/application_security/threats/notify-on-update.png" alt="Notify on update toggle on detection rule editor" style="width:100%;">}}
 

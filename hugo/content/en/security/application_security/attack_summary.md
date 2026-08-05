@@ -23,36 +23,36 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 The App and API Protection (AAP) [Attack Summary][2] provides a quick view of your application and API posture. It highlights trends, service exposure, attack traffic, and the impact on business logic. You can pivot from widgets to their related traces.
 
-Each section of **Attack Summary** focuses on a different aspect of security with supporting information.
+Each section of {{< ui >}}Attack Summary{{< /ui >}} focuses on a different aspect of security with supporting information.
 
 ## Sections
 
-Attack Surface Area
+{{< ui >}}Attack Surface Area{{< /ui >}}
 : This section provides insights into the exposed services, the tools attackers are using, and the commercial scanners that identify potential vulnerabilities.
 
-Attack Traffic
+{{< ui >}}Attack Traffic{{< /ui >}}
 : These graphs identify the classification of attacks, such as SSRF, LFI, SQL, and command injection. They allow users to identify spikes in malicious traffic and patterns.
 
-Business Logic
+{{< ui >}}Business Logic{{< /ui >}}
 : This section focuses on fraud and business logic abuse such as account takeover attempts or any custom business logic events tracked by your application.
 
-Attack Traffic Sources
+{{< ui >}}Attack Traffic Sources{{< /ui >}}
 : A global heatmap indicating the sources of attack traffic, providing a visual representation of threats by region.
 
 ## Best practices
 
 1. Review trends and adopt a protection policy that meets your posture needs.
-2. Regularly review the **Exposed Services** widget in **Attack Surface Area** to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
+2. Regularly review the {{< ui >}}Exposed Services{{< /ui >}} widget in {{< ui >}}Attack Surface Area{{< /ui >}} to ensure only the correct services are accessible and have a protection policy that meets your risk profile.
 3. Block attack tools and ensure that customer scanners are part of an authorized vulnerability management program.
 4. Monitor business logic for spikes in credential stuffing attacks or risky payment activity.
-5. Use **Attack Traffic Sources** to compare the attack traffic sources with your expected customer locations.
+5. Use {{< ui >}}Attack Traffic Sources{{< /ui >}} to compare the attack traffic sources with your expected customer locations.
 6. Use [Powerpacks](#using-powerpacks) to enhance your dashboards with the most relevant information.
 
 ### Using Powerpacks
 
-When adding a widget to a [new dashboard][1] in Datadog, choose the **Powerpacks** section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
+When adding a widget to a [new dashboard][1] in Datadog, choose the {{< ui >}}Powerpacks{{< /ui >}} section in the tray. Filter on `tag:attack_summary` or type `Attack Summary` in the search box.
  
-Each section in the **Attack Summary** page corresponds to a dedicated powerpack.
+Each section in the {{< ui >}}Attack Summary{{< /ui >}} page corresponds to a dedicated powerpack.
 
 ## Further reading
 

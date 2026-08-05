@@ -21,16 +21,16 @@ This topic describes how to use {{< ui >}}Attackers Explorer{{< /ui >}} to inves
 
 ## Overview
 
-Datadog App and API Protection (AAP) identifies attackers as suspicious and flagged. With [Attackers Explorer][1], you can investigate and take action against the attackers. 
+Datadog App and API Protection (AAP) identifies attackers as suspicious and flagged. With [{{< ui >}}Attackers Explorer{{< /ui >}}][1], you can investigate and take action against the attackers. 
 
 
 ### Definitions
 
-- **Suspicious Attackers:** IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
+- {{< ui >}}Suspicious Attackers{{< /ui >}}: IP addresses that have sent attack traffic in the last 24 hours up to a maximum threshold.
 
-- **Flagged Attackers:** IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be reviewed and blocked.
+- {{< ui >}}Flagged Attackers{{< /ui >}}: IP addresses that have sent attack traffic, exceeding the threshold of Suspicious Attackers, in the last 24 hours. Flagged Attackers should be reviewed and blocked.
 
-<div class="alert alert-info"><strong>Flagged Attackers</strong> and <strong>Suspicious Attackers</strong> are mutually exclusive. An IP cannot be in both states at the same time.</a></div>
+<div class="alert alert-info">{{< ui >}}Flagged Attackers{{< /ui >}} and {{< ui >}}Suspicious Attackers{{< /ui >}} are mutually exclusive. An IP cannot be in both states at the same time.</a></div>
 
 ### How Attackers Explorer differs from Signal and Trace explorers
 
@@ -43,14 +43,14 @@ To understand the difference between the different explorers, review these appro
 
 Each explorer focuses on a specific use case:
 
-- **Signal Explorer**: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
-- **Trace Explorer**: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Users Explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+- {{< ui >}}Signal Explorer{{< /ui >}}: List of actionable alerts such as Credential Stuffing Attack or Command Injection. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Trace Explorer.
+- {{< ui >}}Trace Explorer{{< /ui >}}: List of evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- {{< ui >}}Users Explorer{{< /ui >}}: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
   - Pivoting to other explorers
-- **Attackers Explorer**: List of Flagged and Suspicious Attackers. Interactions include: 
+- {{< ui >}}Attackers Explorer{{< /ui >}}: List of Flagged and Suspicious Attackers. Interactions include: 
   - Bulk actions for attacker analytics and blocking
   - Drill-down into the history of any attacker
   - Search
@@ -59,7 +59,7 @@ Each explorer focuses on a specific use case:
 
 ### Explore and filter attackers
 
-To start reviewing attackers, go to [Attackers Explorer][1].
+To start reviewing attackers, go to [{{< ui >}}Attackers Explorer{{< /ui >}}][1].
 
 <!-- {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_default_view2.png" alt="AAP Attackers Explorer"  >}} -->
 
@@ -83,7 +83,7 @@ An attacker can be blocked or added to the Passlist from its details.
 Details common to all attacker views:
 
 - {{< ui >}}Blocking Status{{< /ui >}}: Indicates whether the attacker IP is actively being blocked, helping you confirm if immediate action is needed.
-- {{< ui >}}Threat Intelligence{{< /ui >}}: Show Datadog definitions **Suspicious** or **Flagged**.
+- {{< ui >}}Threat Intelligence{{< /ui >}}: Show Datadog definitions {{< ui >}}Suspicious{{< /ui >}} or {{< ui >}}Flagged{{< /ui >}}.
 - {{< ui >}}Last Information{{< /ui >}}: Provides contextual network origin (for example, route, public/private status, geolocation), which helps you understand attacker infrastructure and scope.
 - {{< ui >}}Associated Users{{< /ui >}}: Shows which user accounts (if any) were affected or linked to the IP, assisting with lateral movement tracking and potential account compromise identification.
 - {{< ui >}}Security Traces{{< /ui >}}: Visualizes the timeline and volume of suspicious activity (for example, **151k AAP traces**), helping SOC teams correlate events and identify peaks in attack behavior.
@@ -161,13 +161,13 @@ When you select the {{< ui >}}Compare and Block{{< /ui >}} option, the {{< ui >}
 
 {{< img src="security/application_security/threats/attacker-explorer/attacker_explorer_review_groups2.png" alt="Screenshot of the AAP Attackers Explorer group blocking"  >}}
 
-<div class="alert alert-info">Metrics for <strong>Similarity Overview</strong> and <strong>Activity</strong> are scoped to the last 30 days.</a></div>
+<div class="alert alert-info">Metrics for {{< ui >}}Similarity Overview{{< /ui >}} and {{< ui >}}Activity{{< /ui >}} are scoped to the last 30 days.</a></div>
 
 The {{< ui >}}Block selected attackers{{< /ui >}} view metrics are explained in the following sections.
 
 ### Selected IPs
 
-Contains the IPs selected from the explorer. Deselecting an IP removes it from the metrics sections and **Block** action.
+Contains the IPs selected from the explorer. Deselecting an IP removes it from the metrics sections and {{< ui >}}Block{{< /ui >}} action.
 
 ### Similarity overview
 

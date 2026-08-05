@@ -37,7 +37,7 @@ Datadog recommends _against_ the following:
 
 ## Filtering on threat intelligence in AAP
 
-Users can filter threat intelligence on the Signals and Traces explorers using facets and the search bar.
+Users can filter threat intelligence on the {{< ui >}}Signals{{< /ui >}} and {{< ui >}}Traces{{< /ui >}} explorers using facets and the search bar.
 
 To search for all traces flagged by a specific source, use the following query with the source name:
 
@@ -60,7 +60,7 @@ For more information, see the [Bring Your Own Threat Intelligence][14] guide.
 
 ## Threat intelligence in the user interface
 
-When viewing the traces in the AAP Traces Explorer, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
+When viewing the traces in the AAP {{< ui >}}Traces Explorer{{< /ui >}}, you can see threat intelligence data under the `@appsec` attribute. The `category` and `security_activity` attributes are both set.
 
 <!-- {{< img src="security/application_security/threats/threat_intel/threat_intel_appsec.png" alt="Example of the appsec attribute containing threat intelligence data">}} -->
 

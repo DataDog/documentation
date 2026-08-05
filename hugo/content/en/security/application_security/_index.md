@@ -36,7 +36,7 @@ further_reading:
   text: "Mitigate account takeovers with Datadog App and API Protection"
 - link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
   tag: "Learning Center"
-  text: "Block Application Attacks with Application & API Protection"
+  text: "Block Application Attacks with App and API Protection"
 algolia:
   tags: ["asm", "App and API Protection"]
 site_support_id: application_security_override
@@ -60,7 +60,7 @@ AI Guard is in Preview. Get real-time security guardrails for your AI apps and a
 
 {{< img src="/security/application_security/app-sec-landing-page.png" alt="A security signal panel in Datadog, which displays attack flows and flame graphs" width="75%">}}
 
-**App & API Protection (AAP)** provides unified visibility and security for your applications and APIs, helping you detect, investigate, and prevent threats across modern workloads.
+**App and API Protection (AAP)** provides unified visibility and security for your applications and APIs, helping you detect, investigate, and prevent threats across modern workloads.
 
 Whether you're defending public-facing APIs, internal services, or user-facing applications, AAP equips your teams with realtime OOTB threat detection, posture assessment, and in-app protections.
 
@@ -97,11 +97,11 @@ If you're curious how App and API Protection is structured and how it uses traci
 
 Powered by provided [out-of-the-box rules][4], AAP detects threats without manual configuration. If you already have Datadog [APM][1] configured on a physical or virtual host, [setup][16] only requires setting one environment variable to get started.
 
-To start configuring your environment to detect and protect threats with AAP, follow the enabling documentation for each product. Once AAP is configured, you can begin investigating and remediating security signals in the [Security Signals Explorer][6].
+To start configuring your environment to detect and protect threats with AAP, follow the enabling documentation for each product. Once AAP is configured, you can begin investigating and remediating security signals in the [{{< ui >}}Security Signals Explorer{{< /ui >}}][6].
 
 ## Investigate and remediate security signals
 
-In the [Security Signals Explorer][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
+In the [{{< ui >}}Security Signals Explorer{{< /ui >}}][6], click on any security signal to see what happened and the suggested steps to mitigate the attack. In the same panel, view traces with their correlated attack flow and request information to gain further context.
 
 ## Exploit Prevention vs. In-App WAF
 

@@ -171,7 +171,7 @@ The actions covered in the next sections help you to identify and leverage detec
 
 1. Open [Create a new rule][18].  
 2. Enter a name for the rule.
-3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App and API Protection{{< /ui >}}.
+3. Select {{< ui >}}Signal{{< /ui >}} and remove all entries except {{< ui >}}App & API Protection{{< /ui >}}.
 4. Restrict the rule to `category:account_takeover`, and expand the severities to include `Medium`.
 5. Add notification recipients (Slack, Teams, PagerDuty).
    To learn more, see [Notification channels][19].  
