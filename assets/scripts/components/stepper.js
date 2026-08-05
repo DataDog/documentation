@@ -58,6 +58,18 @@ function setHidden(el, hidden) {
     }
 }
 
+// Returns true if the title is fully visible below the sticky region at the top
+// of the page. The title's scroll-margin-top is the height of that sticky region
+// (header, plus the Cdocs filter bar on customizable pages), so it doubles as the
+// top boundary of the unobstructed viewport. Used to skip a redundant scroll when
+// the title is already in view.
+function isTitleFullyVisible(title) {
+    const rect = title.getBoundingClientRect();
+    const topBoundary = parseFloat(getComputedStyle(title).scrollMarginTop) || 0;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top >= topBoundary && rect.bottom <= viewportHeight;
+}
+
 function initStepper(stepper) {
     const stepperId = stepper.id;
     const steps = stepper.querySelectorAll('.stepper__step');
@@ -140,6 +152,10 @@ function initStepper(stepper) {
         currentIndex = Math.max(0, Math.min(index, steps.length - 1));
         persist();
         render();
+        const title = steps[currentIndex].querySelector('.stepper__step-title');
+        if (title && !isTitleFullyVisible(title)) {
+            title.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     }
 
     function handleFinish() {
