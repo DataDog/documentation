@@ -66,9 +66,9 @@ Add tags to your network devices in Datadog populated with data from your Servic
 
 With device tagging, you can dynamically enrich network devices monitored by Datadog [Network Device Monitoring][5] with device metadata from your ServiceNow CMDB. This feature requires Datadog Agent 7.71+.
 
-Note that the device must exist in both Datadog's infrastructure and the ServiceNow topology for tag enrichment to occur.
-
-**Note**: Datadog recommends setting `use_device_id_as_hostname: true` under `init_config` in the Datadog Agent's [`snmp.d/conf.yaml`][6] file. This tags metrics and service checks from the SNMP check with `host:device:<DEVICE_ID>`. Dashboards, monitors, and queries can then associate each datapoint with the device that produced it.
+**Notes**:
+* The device must exist in both Datadog's infrastructure and the ServiceNow topology for tag enrichment to occur.
+* Datadog recommends setting `use_device_id_as_hostname: true` under `init_config` in the Datadog Agent's [`snmp.d/conf.yaml`][6] file. This tags metrics and service checks from the SNMP check with `host:device:<DEVICE_ID>`. Dashboards, monitors, and queries can then associate each datapoint with the device that produced it.
 
 To enable ingestion of device tags:
 
