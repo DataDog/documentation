@@ -57,7 +57,7 @@ After you select the Sumo Logic destination in the pipeline UI, enter the identi
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Sumo Logic destination metrics, use the tag `component_type:sumo_logic`.
 

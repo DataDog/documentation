@@ -54,7 +54,7 @@ To set up the rename field processor:
 
 {{% observability_pipelines/path_notation_dots %}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Edit Fields processor metrics, use the tag `component_type:add_fields`, `component_type:remove_fields`, or `component_type:rename_fields`, depending on the configured action.
 

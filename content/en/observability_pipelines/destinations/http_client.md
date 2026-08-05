@@ -80,7 +80,7 @@ Toggle the switch to {{< ui >}}Enable Compression{{< /ui >}}. If enabled:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][6] and [destination buffer metrics][7] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation. To filter or group by HTTP Client destination metrics, use the tag `component_type:http`.
 

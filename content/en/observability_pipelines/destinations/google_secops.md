@@ -58,7 +58,7 @@ After you select the Google SecOps destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][11] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google SecOps destination metrics, use the tag `component_type:gcp_chronicle_unstructured`.
 

@@ -103,7 +103,7 @@ To view metrics for a specific Datadog organization:
 
 Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination. Then, click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization.
 
-## Metrics
+## Health metrics
 
 For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation.
 

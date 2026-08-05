@@ -199,7 +199,7 @@ After you select the MySQL source in the pipeline UI:
 - Database users, roles, and permissions must be created and managed outside of Datadog.
 - Connection strings should reference environment variables for secrets.
 
-## Metrics
+## Health metrics
 
 For [component metrics][5] and [source buffer metrics][6] emitted by all sources, see the [Pipelines Usage Metrics][7] documentation. To filter or group by database source metrics, use the tag `component_type:database`.
 

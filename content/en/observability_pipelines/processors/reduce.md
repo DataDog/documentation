@@ -44,7 +44,7 @@ These are the available merge strategies for combining log events.
 | Shortest array | Keeps the shortest array that was received.                                                                        |
 | Sum            | Sums all numeric values that were received.                                                                        |
 
-## Metrics
+## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation.
 

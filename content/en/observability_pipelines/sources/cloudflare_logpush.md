@@ -84,7 +84,7 @@ Follow the [Cloudflare Logpush HTTP destination documentation][5] to set up Logp
 
 After your Logpush job has been successfully created, you can view your Cloudflare Logpush logs in Datadog [Log Explorer][6].
 
-## Metrics
+## Health metrics
 
 For [component metrics][8] and [source buffer metrics][9] emitted by all sources, see the [Pipelines Usage Metrics][10] documentation. Since you use the HTTP Server source to send logs from Cloudflare Logpush to Observability pipelines, use the `component_type:http_server` tag to filter the relevant metrics.
 

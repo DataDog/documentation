@@ -79,7 +79,7 @@ Select the {{< ui >}}Encoding{{< /ui >}} in the dropdown menu ({{< ui >}}JSON{{<
 
 {{% observability_pipelines/splunk_hec_unauthorized_error %}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation.
 

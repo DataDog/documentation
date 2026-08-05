@@ -103,7 +103,7 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][3] for more information and to ensure your values have the correct type and are within range.
 
-## Metrics
+## Health metrics
 
 For [component metrics][10] and [source buffer metrics][11] emitted by all sources, see the [Pipelines Usage Metrics][12] documentation.
 

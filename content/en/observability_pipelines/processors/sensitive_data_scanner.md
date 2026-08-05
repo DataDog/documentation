@@ -345,7 +345,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
-## Metrics
+## Health metrics
 
 For [component metrics][13] and [processor buffer metrics][14] emitted by all processors, see the [Pipelines Usage Metrics][15] documentation.
 

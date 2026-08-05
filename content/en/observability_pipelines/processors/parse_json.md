@@ -68,7 +68,7 @@ To set up this processor:
 1. Define a {{< ui >}}filter query{{< /ui >}}. Only logs that match the specified filter query are processed. All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
 2. Enter the name of the field you want to parse JSON on.<br>**Note**: The parsed JSON overwrites what was originally contained in the field.
 
-## Metrics
+## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
 
