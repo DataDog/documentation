@@ -53,7 +53,7 @@ The matched rule is also highlighted on the targeting rules canvas, so you can s
 
 ## Testing a disabled flag
 
-If the flag is disabled in the selected environment, the Evaluation Tester shows what a subject would receive if the flag were enabled, rather than returning the coded default. A warning banner reminds you that, while the flag remains disabled, your application receives the coded default value (and that client SDKs always resolve to the coded default, since only server SDKs evaluate targeting rules for disabled flags).
+If the flag is disabled in the selected environment, the Evaluation Tester shows what a subject would receive if the flag were enabled, rather than returning the coded default. A warning banner reminds you that your application receives the coded default value while the flag remains disabled. Client SDKs always resolve to the coded default for disabled flags; only server SDKs evaluate targeting rules for disabled flags.
 
 ## Further reading
 
