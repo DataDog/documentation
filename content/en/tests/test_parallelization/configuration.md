@@ -241,7 +241,7 @@ Files under `.testoptimization/runner/cache/`, `.testoptimization/tests-discover
 
 ## Use a plan with another test runner
 
-Use a `ddtest` plan when you want `ddtest` to select runnable test files, but another runner should execute them.
+Use a `ddtest` plan when you want `ddtest` to select runnable test files, but another runner executes them.
 
 See [Plan artifacts](#plan-artifacts) for the `test-files.txt` and per-runner `tests-split/runner-N` files that another runner can consume.
 
