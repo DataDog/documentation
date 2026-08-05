@@ -59,10 +59,12 @@ Then, use the guides below to instrument your application using agentic onboardi
 
 ## Set up with agentic onboarding
 
-Use [agentic onboarding](/agentic_onboarding/setup) to set up monitoring for your Azure Container Apps with AI assistance. Two complementary paths use the same Datadog account:
+Use [agentic onboarding][1] to set up monitoring for your Azure Container Apps with AI assistance. Two complementary paths use the same Datadog account:
 
 - **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+[1]: /agentic_onboarding/setup
 
 {% tabs %}
 {% tab label="AI Setup CLI" %}
@@ -78,13 +80,13 @@ Omit `--product` to run interactively, or add `--site` to target your Datadog si
 {% /tab %}
 {% tab label="MCP server" %}
 
-Use the Datadog MCP Server's [`serverless_onboarding`][1] tool. After you connect, try a prompt like:
+Use the Datadog MCP Server's [`serverless_onboarding`][2] tool. After you connect, try a prompt like:
 
 ```
 Help me monitor my Azure Container Apps services with Datadog
 ```
 
-[1]: /agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server
+[2]: /agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server
 {% /tab %}
 {% /tabs %}
 
