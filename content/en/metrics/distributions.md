@@ -129,6 +129,8 @@ No data is lost, because both timeseries are stored. However, queries return onl
     ```
 * A metric reports as a different type than expected (for example, you expect `count` but see `distribution`).
 
+To confirm a metric's current type, see the [Metrics Summary page][4].
+
 ### Avoid overshadowing
 
 Metric names must be unique across types. Follow these practices to prevent conflicts:
