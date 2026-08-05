@@ -103,7 +103,7 @@ You can calculate `cache_size_per_key` with a Bloom Filter Calculator using a st
 
 The following tables show benchmarks for `exact` mode and `probabilistic` mode. As the number of unique values for each tag increases, `probabilistic` mode becomes more memory-efficient. The metric names and tag names used for these benchmarks were randomly generated 20-byte strings.
 
-The machine type used for benchmarking is an AWS m6gd.4xlarge instance.
+The machine type used for benchmarking is an AWS M6gd.4xlarge instance.
 
 #### Benchmarks for 10,000 metrics tracked
 
@@ -113,9 +113,9 @@ The Worker's RSS memory usage for probabilistic and exact mode for 10,000 metric
 
 | Unique values per tag | Probabilistic Mode (GB) | Exact Mode (GB) |
 |:---------------------:|:-----------------------:|:---------------:|
-| 100                   | 0.10                    | 0.21            |
-| 250                   | 0.13                    | 0.56            |
 | 500                   | 0.20                    | 1.04            |
+| 250                   | 0.13                    | 0.56            |
+| 100                   | 0.10                    | 0.21            |
 
 #### Benchmarks for 50,000 metrics tracked
 
