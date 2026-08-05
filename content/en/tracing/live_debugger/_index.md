@@ -308,7 +308,7 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 
 Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
-After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. **Note**: If the selected code is not executed or the logpoint condition(s) are not met, then there are no log events generated.
+After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. **Note**: If the selected code is not executed or the logpoint condition(s) are not met, then no log events are generated.
 
 ### Protecting sensitive data
 
