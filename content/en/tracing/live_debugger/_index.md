@@ -91,7 +91,7 @@ You can disable Live Debugger for a service and environment from the [Live Debug
 You can enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically.
+- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
 
 Either option requires one of the following minimum SDK versions:
 
