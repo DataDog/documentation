@@ -85,6 +85,16 @@ You can search spans by the results of [evaluations][4]. For example, if you hav
 | `@evaluation.user_satisfaction.value:>5` | Spans or traces that scored higher than 5 according to an evaluation called `user_satisfaction` |
 | `@evaluation.user_mood.value:happy` | Spans or traces that were evaluated as `happy` according to an evaluation called `user_mood` that has the categorical values `happy`, `sad`, and `tired` |
 
+### Feedback queries
+
+Use the `@feedback` attribute to find spans or traces by [end-user feedback][8] submissions. For example, if your users are submitting feedback under the label `user_satisfaction` with categorical values `thumbs_up` or `thumbs_down`, you could use the query: `@feedback.user_satisfaction.value:thumbs_down`.
+
+| Query | Match |
+| ----- | ----- |
+| `@feedback.user_satisfaction.value:thumbs_down` | Spans or traces that received a thumbs down rating for a feedback label called `user_satisfaction` |
+| `@feedback.user_comment.assessment:fail` | Spans or traces with a failing assessment for a feedback label called `user_comment` |
+| `@feedback.user_score.value:<2` | Spans or traces with a score less than 2 for a feedback label called `user_score` |
+
 ### Metadata queries
 
 Use the `@meta` attribute to find spans by metadata information.
@@ -132,3 +142,4 @@ Use the `@trace` attribute to access trace-level information, such as estimated 
 [5]: /llm_observability/terms/#span-kinds
 [6]: /tracing/trace_explorer/query_syntax/
 [7]: /llm_observability/instrumentation/sdk/#annotating-metadata
+[8]: /llm_observability/evaluations/end_user_feedback

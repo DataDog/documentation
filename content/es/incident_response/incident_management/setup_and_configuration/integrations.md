@@ -34,7 +34,6 @@ Para obtener una descripción completa de las opciones de configuración de Goog
 Además de integrarse con Slack y Microsoft Teams, Incident Management también se integra con los siguientes:
 
 - [PagerDuty][8] y [Opsgenie][9] para enviar notificaciones de incident (incidente) a tus ingenieros de guardia.
-- [CoScreen][10] para poner en marcha reuniones de colaboración con pantalla compartida multiusuario, control remoto y chat de audio y vídeo integrado.
 - [Jira][11] para crear un ticket Jira para un incident (incidente).
 - [Webhooks][12] para enviar notificaciones de incident (incidente) mediante webhooks (por ejemplo, [envío de SMS a Twilio][13]).
 - [Statuspage][14] para crear y actualizar incidents (incidentes) de Statuspage.
@@ -54,7 +53,6 @@ Además de integrarse con Slack y Microsoft Teams, Incident Management también 
 [7]: /es/incident_response/incident_management/setup_and_configuration/notification_rules
 [8]: /es/integrations/pagerduty/
 [9]: /es/integrations/opsgenie/
-[10]: /es/coscreen
 [11]: /es/integrations/jira/
 [12]: /es/integrations/webhooks/
 [13]: /es/integrations/webhooks/#sending-sms-through-twilio

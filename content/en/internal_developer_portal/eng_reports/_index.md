@@ -43,6 +43,6 @@ Datadog's IDP supports two types of reports:
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/teams/manage/#subteams-hierarchical-teams
+[1]: /account_management/teams/manage/#team-hierarchies
 [2]: /internal_developer_portal/eng_reports/custom_reports
 

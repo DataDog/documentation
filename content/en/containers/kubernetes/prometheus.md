@@ -8,9 +8,6 @@ aliases:
     - /agent/prometheus
     - /agent/kubernetes/prometheus
 further_reading:
-- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
-  tag: Blog
-  text: Monitor your Kubernetes operators to keep applications running smoothly
 - link: "/agent/kubernetes/log/"
   tag: "Documentation"
   text: "Collect your application logs"
@@ -29,6 +26,12 @@ further_reading:
 - link: "/integrations/guide/prometheus-metrics/"
   tag: "Documentation"
   text: Mapping Prometheus Metrics to Datadog Metrics
+- link: "https://www.datadoghq.com/blog/migrate-to-gateway-api/"
+  tag: "Blog"
+  text: "Ingress NGINX is EOL: A practical guide for migrating to Kubernetes Gateway API"
+- link: https://www.datadoghq.com/blog/kubernetes-operator-performance
+  tag: Blog
+  text: Monitor your Kubernetes operators to keep applications running smoothly
 ---
 
 ## Overview

@@ -5,6 +5,9 @@ further_reading:
 - link: "/getting_started/search/"
   tag: "Documentation"
   text: "Getting Started with Search in Datadog"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
 ---
 
 To search your monitors, construct a query using the facet panel on the left and/or the search bar at the top. When you select attributes, the search bar updates with the equivalent query. Likewise, when you modify the search bar query (or write a new one), the attribute checkboxes update to reflect the change. In any case, query results update in real-time as you edit the query. **Note**: There is no *search* button to click.

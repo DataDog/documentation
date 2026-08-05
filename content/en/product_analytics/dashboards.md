@@ -5,6 +5,9 @@ further_reading:
 - link: "/product_analytics/"
   tag: "Documentation"
   text: "Product Analytics"
+- link: https://learn.datadoghq.com/courses/getting-started-product-analytics
+  tag: Learning Center
+  text: Getting Started with Product Analytics
 ---
 
 ## Overview

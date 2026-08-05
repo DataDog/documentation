@@ -84,7 +84,6 @@ Activity timeline
 - [インシデントを宣言する][4]: ケースをインシデントにエスカレーションし、インシデント対応プロセスを開始します。
 - 手動で Jira 課題を作成する: Jira 課題を作成するには、`Shift + J` を使用します。Jira 課題の自動作成と双方向同期の構成方法の詳細については、[設定][5]ドキュメントを参照してください。
 - 手動で ServiceNow インシデントを作成する: ServiceNow インシデントを作成するには、`Shift + N` を使用します。
-- [CoScreen でミーティングする][6]: 共同デバッグのために画面を共有します
 - ケースをクローズする: これ以上のアクションが必要ないことをチームに知らせます。ケースのステータスをクローズに更新します。
 
 ## Case Analytics
@@ -104,5 +103,4 @@ Case Analytics は、集計されたケース統計のクエリ可能なデー�
 [3]: /ja/notebooks/
 [4]: /ja/service_management/incident_management/#describing-the-incident
 [5]: /ja/service_management/case_management/settings/#jira
-[6]: /ja/coscreen/
 [7]: https://docs.datadoghq.com/ja/dashboards/

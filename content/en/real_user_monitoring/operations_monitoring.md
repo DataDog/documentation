@@ -7,10 +7,6 @@ further_reading:
   text: 'Learn about RUM'
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/operations-monitoring/" btn_hidden="false" header="Join the Preview!">}}
-Operations Monitoring is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 {{< img src="/real_user_monitoring/operations_monitoring/operations-monitoring-overview-1.png" alt="Operations tab under RUM > Performance Monitoring" style="width:100%;" >}}
@@ -33,7 +29,7 @@ The following table shows additional example features and their associated featu
 
 ## Prerequisites
 
-- [RUM without Limits][5] must be enabled in your organization.
+- [RUM without Limits][9] must be enabled in your organization.
 - Make sure you've downloaded a supported Datadog RUM SDK version with client-side APIs to define operations:
   - [Browser (6.20.0)][1]
   - [Android (3.1.0)][2]
@@ -369,3 +365,4 @@ Similarly to metrics, those events come with specific attributes you can use in 
 [6]: https://github.com/DataDog/dd-sdk-roku/releases/tag/1.4.0
 [7]: https://github.com/DataDog/dd-sdk-flutter/releases/tag/datadog_flutter_plugin%2Fv3.0.0
 [8]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
+[9]: /real_user_monitoring/rum_without_limits/
