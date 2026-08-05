@@ -635,7 +635,7 @@ As an alternative to the agent-based installation, you can run the private actio
 
    You can safely ignore the error `DATADOG TRACER DIAGNOSTIC - Agent Error: connect ECONNREFUSED`.
 
-[101]: https://docs.docker.com/compose/compose-application-model/
+[101]: https://docs.docker.com/compose/intro/compose-application-model/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -724,7 +724,7 @@ export DD_APP_KEY="<YOUR_APP_KEY>"
 DD_API_KEY=$DD_API_KEY DD_APP_KEY=$DD_APP_KEY docker compose up -d
 ```
 
-[101]: https://docs.docker.com/compose/compose-application-model/
+[101]: https://docs.docker.com/compose/intro/compose-application-model/
 {{% /tab %}}
 
 {{% tab "Kubernetes" %}}
@@ -764,14 +764,17 @@ See [Connect a runner](#connect-a-runner) for more information on pairing your r
 
 ### Custom CA certificates
 
-If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure your private action runner to trust that CA.
+If your organization uses a custom certificate authority (CA) to issue certificates for internal services, such as HTTP endpoints or Jenkins, you can configure a standalone private action runner to trust that CA.
 
 {{< tabs >}}
 {{% tab "Docker" %}}
 
 Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
 
-  ...
+```bash
+docker run -d \
+  -e SSL_CERT_DIR=/etc/dd-action-runner/config/ca-certificates \
+  -v <PATH_TO_YOUR_CA_CERTIFICATE>:/etc/dd-action-runner/config/ca-certificates/ca.crt \
 ```
 
 {{% /tab %}}
@@ -780,6 +783,12 @@ Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `d
 
 Add the `SSL_CERT_DIR` environment variable and mount your certificate in your `docker-compose.yaml` file, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
 
+```yaml
+runner:
+  environment:
+    SSL_CERT_DIR: /etc/dd-action-runner/config/ca-certificates
+  volumes:
+    - "<PATH_TO_YOUR_CA_CERTIFICATE>:/etc/dd-action-runner/config/ca-certificates/ca.crt"
 ```
 
 {{% /tab %}}
