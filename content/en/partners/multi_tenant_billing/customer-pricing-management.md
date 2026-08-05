@@ -3,13 +3,9 @@ title: Customer Pricing Management
 description: "Configure per-customer pricing so customers can see their own estimated Datadog costs."
 ---
 
-{{< callout url="mailto:partner-support@datadoghq.com" >}}
-Customer Pricing Management is in Preview. Contact partner-support@datadoghq.com to request access.
-{{< /callout >}}
-
 ## Overview
 
-Customer Pricing Management lets a partner configure per-customer pricing so a customer can see their own estimated Datadog costs, based on the partner's rates, directly within their org.
+Customer Pricing Management is in preview. It lets a partner configure per-customer pricing so a customer can see their own estimated Datadog costs, based on the partner's rates, directly within their org.
 
 {{< img src="partners/multi_tenant_billing/customer_pricing.png" alt="Customer Pricing tab under Plan & Usage in an Admin Org" style="width:100%;" >}}
 

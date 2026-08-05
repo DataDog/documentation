@@ -3,18 +3,9 @@ title: Customer Contracts Management
 description: "Manage the partner's book of business - customers, contracts, and invoices - from an Admin Org."
 ---
 
-{{< callout url="mailto:partner-support@datadoghq.com" >}}
-Customer Contracts Management is in Preview. Contact partner-support@datadoghq.com to request access.
-{{< /callout >}}
-
 ## Overview
 
-Customer Contracts Management gives a partner a single place to manage their book of business with Datadog: customers, contracts, and invoices, without relying on the partner account team for routine lookups.
-
-Datadog works with partners under two contract models:
-
-- **Resell**: one customer per contract.
-- **MSP (Managed Service Provider)**: multiple customers roll up into a single contract, for larger volume discounts.
+Customer Contracts Management is in preview. It gives a partner a single place to manage their book of business with Datadog: customers, contracts, and invoices, without relying on the partner account team for routine lookups.
 
 Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}} in the Admin Org.
 
