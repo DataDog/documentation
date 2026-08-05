@@ -31,7 +31,7 @@ Use STIX ingestion when your platform already produces STIX, or when you want a 
 
 To start ingesting a feed, send a bundle to the ingestion endpoint. No configuration in Datadog is required beforehand.
 
-1. You send a STIX 2.1 bundle of `indicator` objects and identify the feed with the `ti_vendor` header.
+1. You send a STIX 2.1 bundle and identify the feed with the `ti_vendor` header.
 2. Datadog reads the STIX `pattern` on each indicator to determine its value and its type, such as an IP address, a domain, or a file hash.
 3. Datadog generates one [reference table][4] for each indicator type in your feed, named `threat_intel_stix_<TI_VENDOR>_<INDICATOR_TYPE>`. Because one bundle can contain several indicator types, a single request can populate several tables.
 4. Datadog registers each generated table and enables it for Cloud SIEM enrichment automatically.
