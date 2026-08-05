@@ -802,7 +802,7 @@ You can deploy the Collector as a DaemonSet in Kubernetes using the [official Op
    | Azure AKS | [`daemonset-aks.yaml`][108] |
    | Azure AKS Automatic | [`daemonset-aks-automatic.yaml`][109] |
 
-   On Amazon EKS, the values files cannot configure host access to the instance metadata service. Apply the following outside of Helm:
+   On Amazon EKS, the values files cannot configure the required AWS-side settings. Apply the following outside of Helm:
 
    - **Amazon EKS**: The `ec2` and `eks` detectors need access to the IMDS endpoint from inside a container. Set the IMDS token hop limit to 2 in your node launch template or in your account settings.
    - **Amazon EKS Auto Mode**: The `eks` detector requires a Pod Identity association that assigns the Collector an IAM role with the `EC2:DescribeInstances` permission.
