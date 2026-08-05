@@ -2727,14 +2727,16 @@ def call_openai():
 
 ### Example: redacting span metadata
 
-The `metadata` field exposes the span's top-level metadata dictionary. You can mutate, add, or remove keys.
+Integrations and manual annotations can record sensitive values in a span's metadata, such as tool configuration or request parameters. A span processor can remove or redact those values before the span is emitted.
+
+Internal Datadog fields, such as cost data, are not exposed through `metadata` and cannot be modified by a processor.
 
 {{< code-block lang="python" >}}
 from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs import LLMObsSpan
 
 def redact_metadata_processor(span: LLMObsSpan) -> LLMObsSpan:
-    # Remove or redact sensitive keys recorded in span metadata
+    # Drop the tool config recorded by auto-instrumentation
     span.metadata.pop("tool_config", None)
     return span
 
