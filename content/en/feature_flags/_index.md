@@ -47,7 +47,7 @@ Feature flags enable you to toggle features on and off, conduct A/B/n testing, g
 
 If your flags are managed by LaunchDarkly, Split, ConfigCat, or another provider and you only want Datadog to record evaluated variants in RUM, see [RUM Feature Flag Tracking](/real_user_monitoring/feature_flag_tracking/) instead.
 
-Use a client-side SDK when the flag is evaluated in a browser, mobile app, or game client. Use a server-side SDK when the flag is evaluated in a backend service that receives flag configuration through the Datadog Agent and Remote Configuration.
+Use a client-side SDK when the flag is evaluated in a browser, mobile app, or game client. Use a server-side SDK when the flag is evaluated in a backend service. Supported server SDK versions receive configuration directly from Datadog by default or through Agent Remote Configuration when explicitly selected. See [Server SDK Configuration Sources][1].
 
 ### Credentials at a glance
 
@@ -55,7 +55,7 @@ Use a client-side SDK when the flag is evaluated in a browser, mobile app, or ga
 | --- | --- | --- | --- |
 | Client token | Browser, mobile, and game SDKs | Client application configuration | No — safe to ship in public client code |
 | Application ID | Browser and RUM-backed client SDKs | Client application configuration | No — public identifier |
-| API key | Datadog Agent for server-side Remote Configuration | Agent configuration only | Yes — keep server-side only |
+| API key | Server SDKs and the Datadog Agent | Application configuration for agentless delivery; Agent configuration for Remote Configuration | Yes — keep server-side only |
 
 Do not put API keys in browser, mobile, or game applications.
 
@@ -68,3 +68,5 @@ Feature Flags telemetry includes exposure events, flag evaluation metrics, and o
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/concepts/configuration_sources/

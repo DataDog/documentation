@@ -14,6 +14,10 @@ There are two types of PR comments:
 - **Inline comment**: Flags an individual Code Security finding on specific lines of code and suggests a remediation (if available).
         
     {{< img src="/code_security/github_inline_pr_comment_light.png" alt="A Datadog bot has posted an inline comment on a GitHub pull request flagging a \"Critical: Code Vulnerability\". The comment suggests replacing the code os.system(command) with os.system(shlex.quote(command)) to sanitize the process call." style="width:100%;" >}}
+
+    For SAST vulnerabilities and code quality violations that don't have an available suggested fix, the inline comment includes a {{< ui >}}Fix with Cursor{{< /ui >}} link. Click it to open the pull request's branch in Cursor with a tailored remediation prompt for the finding. When a suggested fix is available, the comment shows a committable suggestion instead. To handle the Cursor deep link, install the [Datadog extension for VS Code and Cursor](/ide_plugins/vscode/?tab=cursor).
+
+    {{< img src="code_security/dev_tool_int/pull_request_comments/fix-with-cursor.png" alt="A Datadog bot inline comment on a GitHub pull request flagging a code quality violation, with a Fix with Cursor link below the finding" style="width:100%;" >}}
 - **Summary comment**: Combines all findings from Datadog into a single comment. This comment appears only if your PR contains issues requiring attention. After those findings are addressed, the comment is automatically edited to confirm that your PR is now clear.
   
     {{< img src="/code_security/github_summary_comment_injections_light.png" alt="A Datadog bot has posted a summary comment on a GitHub pull request. The comment has a \"Warnings\" section that lists four critical code vulnerabilities, such as SQL and command injections, with links to the specific files and lines of code." style="width:100%;" >}}

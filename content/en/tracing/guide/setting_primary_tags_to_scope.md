@@ -89,14 +89,22 @@ If you change a previously set primary tag, be aware of the following:
 
 ## Container-based additional primary tags
 
-You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms. Container-based primary tags are available in Datadog Agent versions 7.35.0 and later.
+You can index your trace metrics based on the tags derived from Docker containers and Kubernetes pod metadata on Linux-based platforms.
 
-To enable container-based primary tags, install Agent version 7.35.0 or later, update the CID stats setting as described below, and restart the Agent. The procedure for enabling depends on how you installed the Agent:
+Container-based primary tags are enabled by default in Datadog Agent versions 7.65.0 and later. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect.
+
+You can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
+
+**Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
+
+### Disable container-based primary tags
+
+To turn off container-based primary tags, set the `disable_cid_stats` APM feature and restart the Agent. If `DD_APM_FEATURES` is already set, append `disable_cid_stats` to its comma-separated list. The procedure depends on how you installed the Agent:
 
 {{< tabs >}}
 {{% tab "Helm" %}}
 
-Using the Datadog Helm chart version 2.26.2 or later, add the following to your values file:
+Add the following to your values file:
 
 ```yaml
 #...
@@ -104,7 +112,7 @@ datadog:
   #...
   env:
     - name: DD_APM_FEATURES
-      value: 'enable_cid_stats'
+      value: 'disable_cid_stats'
 ```
 
 {{% /tab %}}
@@ -118,7 +126,7 @@ Use the following environment variable in the Agent DaemonSet. If you are runnin
   env:
     # (...)
     - name: DD_APM_FEATURES
-      value: 'enable_cid_stats'
+      value: 'disable_cid_stats'
 ```
 
 {{% /tab %}}
@@ -132,7 +140,7 @@ services:
   datadog:
     #...
     environment:
-     - DD_APM_FEATURES: 'enable_cid_stats'
+     - DD_APM_FEATURES=disable_cid_stats
 ```
 
 
@@ -140,20 +148,14 @@ services:
 {{% /tab %}}
 {{% tab "Environment variables" %}}
 
-If you configure the Agent with environment variables, as is common with Docker and ECS installations, pass the following environment variable to the trace Agent after upgrading the Docker image.
+If you configure the Agent with environment variables, as is common with Docker and ECS installations, pass the following environment variable to the trace Agent.
 
 ```
-DD_APM_FEATURES=enable_cid_stats
+DD_APM_FEATURES=disable_cid_stats
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
-
-Restart the Agent. Go to the [APM Settings][6] page and select the additional primary tag you want to use. It can take up to two hours for changes to this setting to take effect. 
-
-Now you can filter your services in the [Catalog][7] by the tag being sent by your containerized services. Trace metrics used by Dashboards and Monitors can also be aggregated by the container primary tag.
-
-**Note**: Primary tag values should not contain capital letters or special characters (aside from underscores, minuses, colons, periods, and slashes). If they do, some features may not work properly.
 
 ### Custom labels as tags
 

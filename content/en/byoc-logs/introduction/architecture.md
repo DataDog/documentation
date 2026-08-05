@@ -1,73 +1,104 @@
 ---
 title: Architecture
+description: Understand how Observability Pipelines and the BYOC Logs engine collect, store, maintain, and query logs in your environment.
 aliases:
 - /cloudprem/architecture/
 - /cloudprem/introduction/architecture/
 further_reading:
+- link: "/observability_pipelines/"
+  tag: "Documentation"
+  text: "Observability Pipelines"
 - link: "/byoc-logs/install/"
   tag: "Documentation"
   text: "BYOC Logs Installation Prerequisites"
+- link: "/byoc-logs/introduction/network/"
+  tag: "Documentation"
+  text: "Connect BYOC Logs to Datadog"
 ---
 
 ## Overview
 
-{{< img src="/cloudprem/overview_architecture.png" alt="BYOC Logs architecture showing Indexers, Searchers, Metastore, and Control Plane components interacting with object storage" style="width:100%;" >}}
+{{< img src="/cloudprem/overview_architecture_v2.png" alt="BYOC Logs architecture showing log sources sending data through Observability Pipelines to the BYOC Logs engine. The engine contains indexers, compactors, searchers, a control plane, a metastore, and a janitor, and uses object storage and PostgreSQL. Searchers connect to the Datadog UI." style="width:100%;" >}}
 
-BYOC (Bring Your Own Cloud) Logs uses a decoupled architecture which separates the compute (indexing and searching) and data on an object storage. This allows for independent scaling and optimization of different cluster components based on workload demands.
+BYOC (Bring Your Own Cloud) Logs consists of two main blocks:
 
-## Components
+- [**Observability Pipelines**][1] collects, processes, and routes logs.
+- The **BYOC Logs engine** indexes, stores, and queries logs. Datadog distributes the engine as the `datadog/cloudprem` Docker image.
 
-The BYOC Logs cluster, typically deployed on Kubernetes (EKS), consists of several components:
+The Observability Pipelines Worker and the BYOC Logs engine process log data in your environment. Datadog hosts the pipeline configuration UI and Log Explorer, and routes queries to the engine.
+
+The BYOC Logs engine separates compute from object storage. You can scale ingestion, compaction, and search independently based on workload demand while keeping log data in your object storage.
+
+## Architecture components
+
+### Observability Pipelines
+
+Observability Pipelines is the ingestion block for BYOC Logs. The Observability Pipelines Worker receives logs from Datadog Agents and other sources, applies the processing rules defined in your pipeline, and routes the processed logs to the BYOC Logs engine. You configure the pipeline in Datadog, and the Worker runs in your environment.
+
+### BYOC Logs engine
+
+The BYOC Logs engine runs in your environment. In Kubernetes deployments, the `datadog/cloudprem` image runs with different roles:
 
 **Indexers**
-: Responsible for receiving logs from Datadog Agents. Indexers process, index, and store logs in index files called _splits_ to the object storage (for example, Amazon S3).
+: Receive processed logs from Observability Pipelines, create index files called *splits*, and write the splits to object storage.
+
+**Compactors**
+: Read splits from object storage, merge them, and write the merged splits back. Compactors run on dedicated nodes to isolate merge work from indexing.
 
 **Searchers**
-: Handle search queries from the Datadog UI, reading metadata from Metastore and fetching data from the object storage.
+: Execute queries from Datadog, read index metadata through the metastore, and retrieve matching data from object storage.
 
 **Metastore**
-: Stores metadata about the indexes, including split locations on the object storage. BYOC Logs uses PostgreSQL for this purpose.
+: Provides access to index metadata, including the locations of splits in object storage. The metastore persists this metadata in PostgreSQL.
 
-**Control Plane**
-: Schedules indexing jobs called _indexing pipelines_ on indexers.
+**Control plane**
+: Schedules indexing jobs called *indexing pipelines* on indexers.
 
 **Janitor**
 : Performs maintenance tasks, applying retention policies, garbage collecting expired splits, and running delete query jobs.
 
+### Data stores
+
+The engine uses two data stores in your environment:
+
+- **Object storage** stores indexed log data as splits. Supported services include Amazon S3, Azure Blob Storage, Google Cloud Storage, and S3-compatible storage.
+- **PostgreSQL** stores index metadata used by the metastore.
 
 ## Data flow
 
-### Ingestion path (logs entering BYOC Logs)
+### Ingestion and compaction path
 
-Logs are ingested into BYOC Logs within your infrastructure. The typical flow is:
+Logs remain in your environment throughout ingestion:
 
-1. Your applications emit logs to the **Datadog Agent** or **Observability Pipelines Worker**.
-2. Logs are forwarded to BYOC Logs **indexers** running in your cluster.
-3. Indexers process and store logs as splits in your **object storage** (for example, Amazon S3 or Google Cloud Storage).
+1. Applications and other sources send logs to an **Observability Pipelines Worker**.
+2. The Worker processes the logs and routes them to the BYOC Logs engine.
+3. **Indexers** create splits in object storage and register their metadata through the metastore.
+4. **Compactors** asynchronously merge splits on dedicated nodes and write the merged splits back to object storage.
 
 **No log data leaves your environment during ingestion.** Logs are stored exclusively in your own object storage.
 
-### Query path (searching logs from Datadog UI)
+### Query path
 
-When you search BYOC Logs data from the Datadog UI (for example, in the Log Explorer), the query flows through a secure connection between Datadog and your cluster:
+When you search BYOC Logs data in Log Explorer, the query travels over a secure connection between Datadog and the BYOC Logs engine:
 
 1. The Datadog UI sends the search query to Datadog's backend.
-2. Datadog's backend forwards the query to your BYOC Logs cluster through the established connection (reverse connection or ingress).
-3. **Searchers** in your cluster execute the query against your object storage.
-4. Only the **matching log results** are sent back to Datadog for display in the UI.
+2. Datadog forwards the query to the engine through a reverse connection or ingress.
+3. **Searchers** use metadata from PostgreSQL to retrieve matching data from object storage.
+4. The engine returns only the matching results to Datadog for display.
 
-**Only query results travel between your cluster and Datadog.** The full dataset remains in your object storage and is never transferred to Datadog.
+**Only query results travel between your environment and Datadog.** The full dataset remains in your object storage and is never transferred to Datadog.
 
 ## Connection to Datadog UI
 
-There are two ways to connect the Datadog UI to BYOC Logs:
-- [**Reverse connection**][1]: Let BYOC Logs initiate bi-directional gRPC requests to Datadog.
-- [**Accept external requests from Datadog**][2]: Provide Datadog with a DNS endpoint for gRPC requests and configure a public Ingress to accept those requests.
+Connect the Datadog UI to the BYOC Logs engine in one of two ways:
 
+- **[Reverse connection][2]**: Let the engine initiate a secure connection to Datadog.
+- **[External requests from Datadog][3]**: Provide Datadog with a DNS endpoint and configure a public ingress to accept requests.
 
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /byoc-logs/introduction/network/
-[2]: /byoc-logs/configure/ingress/
+[1]: /observability_pipelines/
+[2]: /byoc-logs/introduction/network/
+[3]: /byoc-logs/configure/ingress/

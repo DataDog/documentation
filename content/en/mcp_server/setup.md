@@ -360,7 +360,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
     <pre><code>{
       "mcpServers": {
         "datadog": {
-          "url": "{{< region-param key="mcp_server_endpoint" >}}"
+          "url": "{{< region-param key="mcp_server_endpoint" >}}",
           "headers": {
             "DD_API_KEY": "&lt;YOUR_API_KEY&gt;",
             "DD_APPLICATION_KEY": "&lt;YOUR_APP_KEY&gt;"
@@ -671,7 +671,7 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 - `core`: The default toolset for logs, metrics, traces, dashboards, monitors, incidents, hosts, services, events, and notebooks
 - `alerting`: Tools for validating and creating monitors, searching monitor groups, retrieving monitor templates, analyzing monitor coverage, and searching SLOs
-- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues
+- `audit-trail`: Tools for [Audit Trail][70], including searching and retrieving Audit Trail events and forming Audit Trail search queries
 - `cost`: Tools for [Cloud Cost Management][63], including listing cost-saving recommendations ranked by estimated potential daily savings
 - `dashboards`: Tools for retrieving, creating, updating, and deleting [dashboards][46], plus widget schema reference and validation
 - `data-observability`: Tools for [Data Observability][69], including data catalog search, lineage analysis, data quality monitoring, and cost and performance recommendations for data warehouses and Spark jobs
@@ -695,8 +695,9 @@ These toolsets are generally available. See [Datadog MCP Server Tools][49] for a
 
 ### Preview toolsets
 
-These toolsets are in Preview. Sign up for a toolset by completing the Product Preview form or contact [Datadog support][47] to request access.
+These toolsets are in Preview and are not included in the `all` alias; request them explicitly by name. Access requirements vary by toolset, as noted below. Where a Product Preview form is listed, sign up through it or contact [Datadog support][47] to request access.
 - `apm`: ([Sign up][45]) Tools for in-depth [APM][34] trace analysis, span search, Watchdog insights, and performance investigation
+- `cases`: Tools for [Case Management][42], including creating, searching, and updating cases; managing projects; and linking Jira issues. No sign-up or access request required.
 - `code-exec`: ([Sign up][60]) A single tool that runs agent-authored TypeScript in a Datadog-managed sandbox with direct access to Datadog APIs, for multi-signal investigation and ad-hoc data exploration in one call
 - `remote-actions`: ([Sign up][62]) Tools for on-host diagnostics, including reading files, listing directories, and running safe read-only shell commands directly on instrumented hosts through the Agent
 
@@ -926,10 +927,10 @@ Local authentication is recommended for Cline and when remote authentication is 
 [55]: https://claude.com/plugins/datadog
 [56]: https://claude.ai/directory/connectors/datadog
 [57]: /real_user_monitoring/
-[58]: https://partners.datadoghq.com/s/login/SelfRegister
+[58]: /getting_started/profiler/
 [59]: https://chatgpt.com/
 [60]: https://www.datadoghq.com/product-preview/mcp-codexec/
-[61]: /getting_started/profiler/
+[61]: https://partners.datadoghq.com/s/login/SelfRegister
 [62]: https://www.datadoghq.com/product-preview/datadog-agent-mcp/
 [63]: /cloud_cost_management/
 [64]: https://github.com/features/copilot/cli
@@ -938,3 +939,4 @@ Local authentication is recommended for Cline and when remote authentication is 
 [67]: /account_management/service-access-tokens/
 [68]: /account_management/org_settings/ip_allowlist/
 [69]: /data_observability/
+[70]: /account_management/audit_trail/
