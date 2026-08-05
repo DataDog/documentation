@@ -28,7 +28,10 @@ Click {{< ui >}}Manage Metrics{{< /ui >}} to create new metrics or edit existing
 
 <div class="alert alert-warning">The Generate Metrics processor uses the <code>timestamp</code> field on a log to set the metric's timestamp. If the log <code>timestamp</code> field is a string value, the log's processing time is used instead. See <a href="#convert-string-timestamp-to-timestamp-format">Convert string timestamp to timestamp format</a> for more information.</div>
 
- 1. Enter a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][5] for more information. **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
+1. Enter a filter query. See [Logs Search Syntax][5] for more information. 
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+   - **Note**: Since a single processor can generate multiple metrics, you can define a different filter query for each metric.
 1. Enter a name for the metric.
 1. In the {{< ui >}}Define parameters{{< /ui >}} section, select the metric type (count, gauge, or distribution). See the [Count metric example](#count-metric-example) and [Distribution metric example](#distribution-metric-example). Also see [Metrics Types](#metrics-types) for more information.
     - For gauge and distribution metric types, select a log field which has a numeric (or parseable numeric string) value that is used for the value of the generated metric.

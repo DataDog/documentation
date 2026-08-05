@@ -67,7 +67,9 @@ When you set up a custom mapping, if you try to close or exit the modal, you are
 To set up a custom mapping:
 
 1. Optionally, add a name for the mapping. The default name is `Custom Authentication`.
-1. Define a filter query. Only logs that match the specified filter query are remapped. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are remapped.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Select the OCSF event category from the dropdown menu.
 1. Select the OCSF event class from the dropdown menu.
 1. Enter a log sample so that you can reference it when you add fields.

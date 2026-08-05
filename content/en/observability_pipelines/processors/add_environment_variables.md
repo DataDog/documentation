@@ -17,7 +17,9 @@ Use this processor to add an environment variable field name and value to the lo
 
 To set up this processor:
 
-1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Enter the field name for the environment variable.
 1. Enter the environment variable name.
 1. Click {{< ui >}}Add Environment Variable{{< /ui >}} if you want to add another environment variable.
