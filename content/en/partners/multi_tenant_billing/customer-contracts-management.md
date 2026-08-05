@@ -29,9 +29,3 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 - Renewal reminders ahead of contract expiration.
 - Discount and margin visibility per contract.
 - Drawdown contract tracking: amount used, remaining balance, and depletion alerts.
-
-## Not yet included
-
-- Active sales opportunities.
-- An org hierarchy view across connected orgs.
-- API access to pull contract and invoice data programmatically; use the UI directly.
