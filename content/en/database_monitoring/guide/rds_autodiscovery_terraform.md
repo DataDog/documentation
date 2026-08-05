@@ -123,7 +123,7 @@ resource "aws_iam_role" "agent" {
 }
 
 # -------------------------------------------------------
-# Allow Connect from SSM Session Manager 
+# Grant SSM Session Manager connectivity
 # -------------------------------------------------------
 
 resource "aws_iam_role_policy_attachment" "ssm_core" {
