@@ -101,8 +101,9 @@ Bits is able to run investigations on the following monitor types:
   - Logs
   - APM (`APM Metrics` type only; `Trace Analytics` is not supported)
   - Composites
-  - SLOs (Preview)
-  - Synthetics API and Browser tests (Preview)
+  - SLOs
+  - Synthetics API and Browser tests
+  - RUM
 
 ## How Bits investigates
 When Bits investigates an issue, it operates in a continuous loop of observation, reasoning, and action. It begins by forming hypotheses about the potential root cause, then uses its tools to query telemetry data to validate or invalidate those hypotheses. Each step builds on prior findings. As new evidence emerges, Bits updates its understanding, refines its reasoning, and chains together additional investigative steps—adapting and course-correcting until it converges on the most likely root cause.
