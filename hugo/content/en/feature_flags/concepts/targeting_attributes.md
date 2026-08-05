@@ -24,7 +24,7 @@ Each targeting attribute has:
 - **Distribution channel**: Which SDKs report this attribute in their evaluation context: **Client and Server**, **Client Only**, or **Server Only**. Semver attributes are only available for client SDKs.
 - **Description** (optional): Notes for other users about what the attribute represents.
 
-Targeting attributes are organization-wide: once defined, an attribute is available to targeting rules across all flags and environments.
+Targeting attributes are organization-wide: after they're defined, an attribute is available to targeting rules across all flags and environments.
 
 ## Manage targeting attributes
 
