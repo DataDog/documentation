@@ -16,8 +16,8 @@ End User Device Monitoring is in Preview. To enroll, click <b>Request Access</b>
 
 There are two ways to deploy the Datadog Agent on macOS devices for End User Device Monitoring. Choose the method that fits your environment:
 
-- **Manual install**: Run a one-line script directly on the device. Best for testing a single machine or devices not managed by a mobile device management (MDM) solution.
-- **MDM deploy**: Push the Agent to a fleet of managed Macs. This example uses a Jamf Pro policy and shell script to install the Agent in the background with no interaction on each device.
+- [**Manual install**](?tab=manualinstall): Run a one-line script directly on the device.
+- [**MDM deploy**](?tab=mdmdeployexamplewithjamfpro): Push the Agent to a fleet of managed Macs.
 
 Regardless of the method, the installer creates a dedicated system user named `_dd-agent`. This allows the Agent to run as a background service with the appropriate system permissions. You do not need to manage this user.
 
@@ -26,7 +26,7 @@ Regardless of the method, the installer creates a dedicated system user named `_
 {{< tabs >}}
 {{% tab "Manual install" %}}
 
-Use this method to test a single machine, or for devices that are not managed by an MDM solution.
+Use this method to test a single machine, or for devices that are not managed by a mobile device management (MDM) solution.
 
 ### Prerequisites
 
