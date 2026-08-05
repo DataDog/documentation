@@ -92,6 +92,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
@@ -1169,6 +1170,7 @@ def main() -> None:
     print(f"Limit: will stop after acting on {args.limit} PR(s).")
 
     acted = 0
+    start_time = time.monotonic()
     for pr in prs:
         if acted >= args.limit:
             print(f"\nReached --limit of {args.limit} acted-on PR(s) — stopping.")
@@ -1188,7 +1190,10 @@ def main() -> None:
                   file=sys.stderr)
             print("  Skipping to the next PR.", file=sys.stderr)
 
-    print(f"\nActed on {acted} PR(s). Done.")
+    elapsed = time.monotonic() - start_time
+    minutes, seconds = divmod(int(elapsed), 60)
+    duration = f"{minutes}m {seconds}s" if minutes else f"{seconds}s"
+    print(f"\nActed on {acted} PR(s) in {duration}. Done.")
     print(
         "\nView auto-fix PRs:\n"
         "  https://github.com/DataDog/documentation/pulls"
