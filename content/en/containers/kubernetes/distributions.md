@@ -275,7 +275,7 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 ### Standard
 
-Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`) except when using COS (Container Optimized OS) with the **Helm chart** (Datadog Operator automatically detect GKE COS).
+Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`) except when using COS (Container Optimized OS) with the **Helm chart** (Datadog Operator automatically detects GKE COS).
 
 {{< tabs >}}
 {{% tab "Helm" %}}
