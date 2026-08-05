@@ -162,6 +162,12 @@ Once the resources are deleted, wait for five minutes for Datadog to recognize t
 
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
 
+### Delivery stream contains data from other sources
+
+The delivery stream connected to Datadog must only receive data from your CloudWatch Metric Stream. If any other source of data, such as a CloudWatch log group subscription filter, interacts with the delivery stream, Datadog can't decode the mixed payload data.
+
+To fix this, use a dedicated delivery stream for your CloudWatch Metric Stream, and remove any log subscription filters that target it.
+
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
 
