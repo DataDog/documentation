@@ -258,8 +258,8 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 On the [Live Debugger Settings page][26], you can check and update the enablement status of each service and environment. Each service and environment can be in one of three modes:
 
 - {{< ui >}}Automatic{{< /ui >}}: Live Debugger has not been set to {{< ui >}}Enabled{{< /ui >}} or {{< ui >}}Disabled{{< /ui >}} yet on this service and environment. This setting changes to {{< ui >}}Enabled{{< /ui >}} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {{< ui >}}Enabled{{< /ui >}} in advance.
-- {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
-- {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or reactivated on a given service and environment. It applies regardless of runtime language or SDK version.
+- {{< ui >}}Enabled{{< /ui >}}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
+- {{< ui >}}Disabled{{< /ui >}}: Logpoints cannot be created or reactivated on the given service and environment. It applies regardless of runtime language or SDK version.
 
 ### (Recommended) Create a logs index {#create-a-logs-index}
 
