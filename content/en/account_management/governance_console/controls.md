@@ -54,7 +54,7 @@ Hover over each detection for options:
 
 Use {{< ui >}}Workflow{{< /ui >}} as a mitigation type to connect a control to an existing Datadog Workflow. Instead of relying on Datadog's built-in automated actions, you can trigger your own remediation workflow when a control detects noncompliant assets.
 
-When a control is configured with a workflow, the workflow runs automatically if {{< ui >}}Enforce control{{< /ui >}} is enabled, or on demand from the {{< ui >}}Manual Mitigation{{< /ui >}} tab.
+When a control is configured with a workflow, the workflow runs automatically if {{< ui >}}Enforce control{{< /ui >}} is enabled. You can also run the workflow on demand from the {{< ui >}}Manual Mitigation{{< /ui >}} tab.
 
 To manually run a workflow mitigation:
 
