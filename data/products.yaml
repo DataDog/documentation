@@ -59,6 +59,10 @@ products:
                 link: profiler/
                 description: Compare performance snapshots and investigate bottlenecks
                 short_description: Performance bottlenecks
+              - title: Live Debugger
+                link: tracing/live_debugger/
+                description: Capture new debug logs from running applications without redeploying
+                short_description: Real-time production debugging
           - title: Data
             links:
               - title: Database Monitoring
