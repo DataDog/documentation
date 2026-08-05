@@ -289,7 +289,7 @@ A Debug Session lets you inspect running code using auto-expiring logpoints. To 
 2. Select a code location to add the first logpoint and begin capturing log events.
 3. Add, remove, or modify logpoints as needed during the session.
 4. Log events captured by the logpoints appear in the Debug Session view as they are ingested and indexed. You can also view, query, and analyze these logs in Logs Explorer and other Datadog tools that reference log data.
-5. View active and inactive debug sessions created by users in your organization in the Live Debugger Sessions list. A debug session's log events are visible only during the retention period defined for [the logs index](#create-a-logs-index).
+5. View active and inactive Debug Sessions created by users in your organization in the Live Debugger Sessions list. A Debug Session's log events are visible only during the retention period defined for [the logs index](#create-a-logs-index).
 
 Debug Sessions expire automatically. You can also manually disable or re-enable a session, as well as individual logpoints, at any time.
 
