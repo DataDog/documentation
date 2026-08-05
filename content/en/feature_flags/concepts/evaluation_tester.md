@@ -17,7 +17,7 @@ further_reading:
 
 The **Evaluation Tester** lets you simulate how a feature flag would evaluate for a given targeting key and set of attributes, without calling your application's SDK. Use it to answer questions like "Which variant would this user see?" or "Why didn't this targeting rule match?" before you roll out a change.
 
-Evaluations run through the Evaluation Tester are a dry run: they do not emit exposure events, do not count towards evaluation metrics or graphs, and do not affect experiment statistics.
+Evaluations run through the Evaluation Tester are a dry run: they do not emit exposure events, do not count toward evaluation metrics or graphs, and do not affect experiment statistics.
 
 ## Open the Evaluation Tester
 
