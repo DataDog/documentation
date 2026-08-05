@@ -211,6 +211,9 @@ options:
 - label: SOCKS
   id: socks
 
+- label: In-Container
+  id: in_container
+
 - label: iOS
   id: ios
 
@@ -387,6 +390,9 @@ options:
 
 - label: Show all
   id: show_all
+
+- label: Sidecar
+  id: sidecar
 
 - label: Splunk HEC
   id: splunk_hec

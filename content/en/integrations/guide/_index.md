@@ -33,6 +33,7 @@ cascade:
     {{< nextlink href="integrations/guide/fips-integrations" tag=" fips" >}}FIPS Verified Agent Integrations{{< /nextlink >}}
     {{< nextlink href="integrations/guide/microsoft_teams_troubleshooting" tag=" Microsoft Teams" >}}Troubleshooting Microsoft Teams{{< /nextlink >}}
     {{< nextlink href="integrations/guide/microsoft_teams_migrate_legacy_connectors" tag=" Microsoft Teams" >}}Migrate from Office 365 Connectors in Microsoft Teams{{< /nextlink >}}
+    {{< nextlink href="integrations/guide/slack-actions" tag=" Slack" >}}Slack Actions for Incidents, On-Call, Monitors, Dashboards, Workflows, and Accounts{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="AWS guides" >}}
@@ -68,7 +69,6 @@ cascade:
 
 {{< header-list header="OCI guides" >}}
     {{< nextlink href="integrations/guide/oci-integration-troubleshooting" tag=" oci" >}}OCI Integration Troubleshooting{{< /nextlink >}}
-    {{< nextlink href="integrations/guide/oracle-fusion-integration-setup" tag=" oci" >}}Oracle Fusion Integration Setup{{< /nextlink >}}
 {{< /header-list >}}
 
 {{< header-list header="JMX guides" >}}

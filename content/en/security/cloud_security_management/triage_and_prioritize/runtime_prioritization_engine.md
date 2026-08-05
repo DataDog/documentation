@@ -47,13 +47,31 @@ Crown Jewels update continuously as your environment changes. You can also add y
 
 When ownership is known, the engine can route findings to the right team instead of leaving security teams to manually chase remediation owners.
 
+## Filter findings by runtime signals
+
+When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime signals it observes to your vulnerability findings as tags, so you can search, filter, and group by them:
+
+| Signal | Tag |
+|---|---|
+| Package is running | `@risk.is_package_running:true` |
+| Accessed by root process | `@package.is_running_as_root:true` |
+| SUID binary present | `@package.has_suid:true` |
+
+Datadog adds a tag when it observes a signal. An absent tag means Datadog did not observe the signal; it does not mean the package is unused. Use the tags to prioritize what to fix first, not to rule findings out.
+
+Use the tags in the [Vulnerability Explorer][11], combined with any other criteria. For example, high and critical vulnerabilities that are running and have a fix available:
+
+```
+@risk.is_package_running:true @severity:(high OR critical) @remediation.is_available:true
+```
+
+Signals persist for the lifetime of an image version: after a package is observed running, findings for that image keep the signal. Because container images are immutable, the signal reflects what has run in that image. When the image is no longer deployed, its findings age out and close.
 
 ## Get started
 
 1. Deploy the Datadog Agent version 7.79 or later with Cloud Security enabled. See [Setting Up Cloud Security][3].
-2. Enable [Runtime Package Tracking][4] on the Agent to surface the *package in use* signal on vulnerability findings.
+2. Enable Runtime Package Prioritization on the Agent to surface the *Package is running* signal on vulnerability findings. See the instructions to do so for [Kubernetes][4], [Docker][9], or [Linux][10] deployments.
 3. Open the [{{< ui >}}Cloud Security Summary{{< /ui >}}][5] in Datadog. Prioritized findings are surfaced at the top of each funnel and in the [{{< ui >}}Security Inbox{{< /ui >}}][6].
-
 
 ## Further reading
 
@@ -62,8 +80,11 @@ When ownership is known, the engine can route findings to the right team instead
 [1]: https://www.cisa.gov/known-exploited-vulnerabilities-catalog
 [2]: https://www.first.org/epss/
 [3]: /security/cloud_security_management/setup/
-[4]: /security/cloud_security_management/setup/agent/
+[4]: /security/cloud_security_management/setup/agent/kubernetes/#runtime-package-prioritization-preview
 [5]: https://app.datadoghq.com/security/csm
 [6]: /security/security_inbox/
-[7]: /security/cloud_security_management/guide/frontier_group/ownership_agent/
+[7]: /security/cloud_security_management/review_remediate/ownership_agent/
 [8]: /security/cloud_security_management/crown_jewels/
+[9]: /security/cloud_security_management/setup/agent/docker/#runtime-package-prioritization-preview
+[10]: /security/cloud_security_management/setup/agent/linux/#runtime-package-prioritization-preview
+[11]: https://app.datadoghq.com/security/csm/vm

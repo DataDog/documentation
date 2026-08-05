@@ -533,6 +533,11 @@
     },
     {
       "group": "dashboards",
+      "suffix": "_2815497946",
+      "description": "Create a new dashboard with topology_map data_streams widget"
+    },
+    {
+      "group": "dashboards",
       "suffix": "_2652180930",
       "description": "Create a new dashboard with topology_map widget"
     },
@@ -780,6 +785,16 @@
     },
     {
       "group": "logs_pipelines",
+      "suffix": "_2595757342",
+      "description": "Create a pipeline with Array Processor Key Value Operation returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
+      "suffix": "_4041812833",
+      "description": "Create a pipeline with Array Processor Key Value Operation with target and override_on_conflict returns \"OK\" response"
+    },
+    {
+      "group": "logs_pipelines",
       "suffix": "_1271012410",
       "description": "Create a pipeline with Array Processor Length Operation returns \"OK\" response"
     },
@@ -858,6 +873,11 @@
       "group": "monitors",
       "suffix": "_3626832481",
       "description": "Create a Data Quality monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1532893480",
+      "description": "Create a Data Quality monitor with sensitivity returns \"OK\" response"
     },
     {
       "group": "monitors",

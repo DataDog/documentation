@@ -36,9 +36,27 @@ helm show chart datadog/cloudprem --version <CHART_VERSION> | grep appVersion
 
 ### Upgrade
 
-Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the chart upgrade command for your platform.
+Binary upgrades ship through the Helm chart. See [Install BYOC Logs](/byoc-logs/install/) for the chart upgrade command for your platform.
 
 ## Releases
+
+### v0.1.32 — 2026-07-21
+
+*Bundled in chart: `0.4.6`.*
+*Validated with Observability Pipelines Worker: `2.20.0` (`datadog/observability-pipelines-worker` Helm chart `2.20.0`).*
+
+#### Changed
+- Adds opt-in PostgreSQL metastore read replica support for search and analytics read paths.
+- Adds an opt-in standalone compactor service to run merge work outside indexer nodes.
+- Reduces S3 DNS lookup churn by caching DNS resolution for S3 clients.
+- Improves control plane stability after actor restarts and metastore overload responses.
+
+#### Helm chart changes
+- Adds `metastore_ro` values to deploy a read-only metastore replica pool for scaling metastore reads independently of the writer.
+- Adds `enableStandaloneCompactors` to run compaction on dedicated workers instead of indexer nodes.
+- Disables ingest v1 by default with `QW_DISABLE_INGEST_V1=true`; override it with `environment`.
+- Routes BYOC service traces to the Datadog telemetry intake when `datadog.byocTelemetry.enabled` is enabled.
+- Uses the dedicated `health` port for liveness and startup probes.
 
 ### v0.1.31 — 2026-07-08
 
@@ -47,6 +65,7 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 #### Changed
 - Fixes single-token phrase prefix queries on raw fields so `match_phrase_prefix` searches return all matching prefix terms instead of being capped by `max_expansions`.
 - Up to 3x faster intersection for selective terms queries with time range.
+
 #### Helm chart changes
 - Adds `indexer.volumeAttributesClass` and `searcher.volumeAttributesClass` values to provision Kubernetes `VolumeAttributesClass` resources for indexer and searcher persistent volumes. Use these values to tune volume attributes such as IOPS and throughput. This feature is disabled by default, requires Kubernetes 1.31 or later, and requires `driverName` when enabled.
 - Fixes the Kubernetes advertise address by setting `KUBERNETES_POD_IP` from the pod IP instead of the pod name.
@@ -85,8 +104,6 @@ Binary upgrades ship through the Helm chart. See [Install BYOC Logs][2] for the 
 
 #### Changed
 - Up to 4x faster term aggregations with order by sub aggregation and up to 1.5x faster cardinality aggregations.
-
-[2]: /byoc-logs/install/
 
 ## Further reading
 

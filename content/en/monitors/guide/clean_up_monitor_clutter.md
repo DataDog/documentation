@@ -8,6 +8,9 @@ further_reading:
 - link: "monitors/quality"
   tag: "Documentation"
   text: "Monitor Quality"
+- link: "https://www.datadoghq.com/blog/how-to-audit-and-clean-up-monitors/"
+  tag: "Blog"
+  text: "How to audit and clean up monitors effectively"
 ---
 
 ## Overview

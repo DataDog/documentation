@@ -13,9 +13,6 @@ further_reading:
 - link: https://dtdg.co/fe
   tag: Habilitar los fundamentos
   text: Participa en una sesión interactiva para mejorar tu Incident Management
-- link: https://www.datadoghq.com/blog/pair-programming-coscreen-datadog/
-  tag: Blog
-  text: Programación en pareja más eficaz con Datadog CoScreen
 - link: https://www.datadoghq.com/blog/incident-postmortem-process-best-practices/
   tag: Blog
   text: Prácticas recomendadas para redactar informes retrospectivos de incidencias
@@ -99,7 +96,6 @@ Incident Management se integra con aplicaciones de terceros, como:
 
 - [Atlassian Statuspage][25] para crear y actualizar incidentes de Statuspage.
 - [Confluence][22] para generar informes retrospectivos de incidentes.
-- [CoScreen][14] para poner en marcha reuniones de colaboración multiusuario de pantalla compartida, control remoto, y chat de audio y vídeo integrado.
 - [CoTerm][21] para seguir en tiempo real las actividades de corrección de incidentes basadas en terminales.
 - [Jira][15] para crear un ticket de Jira para una incidencia.
 - [Microsoft Teams][23] para crear canales y reuniones de vídeo para incidencias.
@@ -130,7 +126,6 @@ Incident Management es una SKU basada en asientos. Para obtener más informació
 [11]: /es/integrations/slack/?tab=slackapplicationbeta#using-the-slack-app
 [12]: /es/integrations/pagerduty/
 [13]: /es/integrations/opsgenie/
-[14]: /es/coscreen
 [15]: /es/integrations/jira/
 [16]: /es/integrations/webhooks/
 [17]: /es/integrations/webhooks/#sending-sms-through-twilio

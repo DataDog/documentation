@@ -18,7 +18,7 @@ further_reading:
 
 ## Agent actor and delegation fields
 
-In addition to product-specific events, Audit Trail events can carry actor and delegation metadata that identifies actions taken by a Datadog AI agent, such as Bits SRE, Bits Dev, Bits Assistant, Bits Security Analyst, and Bits Agent Builder.
+In addition to product-specific events, Audit Trail events can carry actor and delegation metadata that identifies actions taken by a Datadog AI agent, such as Bits SRE, Bits Chat, Bits Security Analyst, and Bits Agent Builder.
 
 | Field               | Description                                                                                                                                                                    |
 | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

@@ -3,15 +3,6 @@ title: Continuous Integration Visibility
 aliases:
   - /ci
 further_reading:
-  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
-    tag: "Release Notes"
-    text: "Check out the latest Software Delivery releases! (App login required)"
-  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
-    tag: "Blog"
-    text: "Monitor your CircleCI environment with Datadog"
-  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
-    tag: "Blog"
-    text: "Configure pipeline alerts with Datadog CI monitors"
   - link: "/continuous_integration/pipelines/"
     tag: "Documentation"
     text: "Explore pipeline data to resolve build problems"
@@ -21,6 +12,12 @@ further_reading:
   - link: "/continuous_integration/tests/"
     tag: "Documentation"
     text: "Explore test data to find and fix problem tests"
+  - link: "https://www.datadoghq.com/blog/circleci-monitoring-datadog/"
+    tag: "Blog"
+    text: "Monitor your CircleCI environment with Datadog"
+  - link: "https://www.datadoghq.com/blog/configure-pipeline-alerts-with-ci-monitors/"
+    tag: "Blog"
+    text: "Configure pipeline alerts with Datadog CI monitors"
   - link: "https://www.datadoghq.com/blog/static-web-application-monitoring-best-practices/"
     tag: "Blog"
     text: "Best practices for monitoring static web applications"
@@ -42,20 +39,30 @@ further_reading:
   - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
     tag: "Blog"
     text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+  - link: "https://www.datadoghq.com/blog/platform-engineering-metrics/"
+    tag: "Blog"
+    text: "Success Metrics for Platform Engineering Teams"
+  - link: "https://app.datadoghq.com/release-notes?category=Software%20Delivery"
+    tag: "Release Notes"
+    text: "Check out the latest Software Delivery releases! (App login required)"
 cascade:
     algolia:
         rank: 70
         tags: ['ci/cd', 'continuous integration']
 ---
 
-<div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
+{{< callout url=# btn_hidden="true" header="Try the new CI/CD Optimization experience!">}}[CI/CD Optimization][1] combines Datadog's CI Visibility and Test Optimization experiences into one unified interface. Click {{< ui >}}Try It Now{{< /ui >}} at the top of any page in CI Visibility or Test Optimization, and switch back to the original UI at any time.
+
+[1]: /continuous_integration/cicd_optimization/
+{{< /callout >}}
 
 {{< learning-center-callout header="Join an enablement webinar session" hide_image="true" btn_title="Sign Up" btn_url="https://www.datadoghq.com/technical-enablement/sessions/?tags.topics-0=CI">}}
   Join the Introduction to CI Visibility session to understand how Datadog CI Visibility enhances the efficiency of CI pipelines and how to configure the Testing Visibility and Pipeline Visibility products. 
 {{< /learning-center-callout >}}
 
-
 ## Overview
+
+<div class="alert alert-info">This page is about bringing your continuous integration (CI) metrics and data into Datadog dashboards. If you want to run Continuous Testing tests in your CI pipelines, see the <a href="/continuous_testing/cicd_integrations/" target="_blank">Continuous Testing and CI/CD</a> section.</div>
 
 Datadog Continuous Integration (CI) Visibility provides a unified view of pipeline results, performance, trends, and reliability across your CI environments. By integrating Datadog with your CI pipelines, you can create monitors, display data within [Datadog dashboards][1] and [notebooks][2], and create visualizations for your organization's CI health.
 

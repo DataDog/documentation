@@ -167,6 +167,8 @@ To review recommendations that need your attention:
 
 After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 
+**Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}Error Tracking{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the Error Tracking {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
+
 ## Supported recommendations
 
 <!-- The table below is auto-generated. Add new entries in multifiltersearch with new recommendations as they become available. -->
@@ -183,3 +185,4 @@ After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{
 [2]: /database_monitoring/recommendations/
 [3]: /bits_ai/bits_code/
 [4]: /bits_ai/bits_code/setup/
+[5]: https://app.datadoghq.com/apm/home
