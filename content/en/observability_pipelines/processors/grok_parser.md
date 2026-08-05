@@ -44,9 +44,7 @@ The Grok Parser processor does the following:
 
 To set up the Grok Parser processor:
 
-1. Define a processor-level filter query. See [Logs Search Syntax][3] for information on creating queries.
-    - Only logs that match this filter query are sent to the parser.
-    - All logs, regardless of whether they are parsed by the processor, are sent to the next step in the pipeline.
+1. . Define a processor-level filter query. Only logs that match this filter query are sent to the parser. All logs, regardless of whether they are parsed by the processor, are sent to the next step in the pipeline. See [Logs Search Syntax][3] for information on creating queries.
 1. Enter the log field to parse on. For example, if you enter `logmessage`, the content of the `logmessage` attribute is parsed. If no field is specified, `message` is the default field used.
 1. Toggle {{< ui >}}Enable Library Rules{{< /ui >}} off to disable all library parsing rules.
    <br>**Notes**:
