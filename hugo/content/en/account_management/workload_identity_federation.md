@@ -309,9 +309,9 @@ Which credential sources you can use depends on the Agent version and on the com
 | IoT Agent | `7.78.0` | `7.83.0` | `7.83.0` |
 | Heroku Agent | `7.78.0` | `7.83.0` | `7.83.0` |
 
-<div class="alert alert-warning">Agent <code>7.83.0</code> has not been released yet. Entries referencing it describe expected behavior in an upcoming release and may change before it ships.</div>
+<div class="alert alert-warning">Agent <code>7.83.0</code> is not released yet. These entries describe expected behavior and may change.</div>
 
-If you run APM on an EKS pod or an ECS task on Agent `7.82.0` or earlier, and you do not supply static credentials through environment variables, the trace Agent cannot obtain a managed API key. It falls back to the `api_key` configured in `datadog.yaml`. See [Fallback behavior](#fallback-behavior).
+On Agent `7.82.0` and earlier, APM on an EKS pod or ECS task requires static credentials in environment variables. Without them, the trace Agent falls back to the `api_key` in `datadog.yaml`. See [Fallback behavior](#fallback-behavior).
 
 Workload Identity Federation is not available in the OpenTelemetry Collector (DDOT) or the AWS Lambda extension. These require a statically configured `api_key`.
 
