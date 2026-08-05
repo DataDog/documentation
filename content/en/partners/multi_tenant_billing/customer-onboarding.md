@@ -5,7 +5,9 @@ description: "How a partner takes a prospective customer from a registered deal 
 
 ## Overview
 
-When a partner has a prospect interested in Datadog, the path from that first conversation to a connected customer organization has three parts: register the opportunity, create a Trial Org for the prospect, and work with the partner account team through to a signed contract. An Admin Org is what makes the Trial Org step self-service.
+When a partner has a prospect interested in Datadog, the path from that first conversation to a connected customer organization has three parts: register the opportunity, create a Trial Org for the proof of value, and work with the partner account team through the opportunity to establish and size a contract. 
+
+Each step below matters: it keeps the opportunity properly registered with Datadog and, after the contract is established, gives the partner visibility into the customer's billing information in the Admin Org.
 
 ## Register the opportunity
 

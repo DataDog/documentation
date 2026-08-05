@@ -9,12 +9,7 @@ Submit the {{< ui >}}Trial Org Provisioning{{< /ui >}} form again. If the error 
 
 ## A customer org isn't appearing under an Admin Org
 
-A customer org connects to the partner Admin Org automatically when its contract includes the partnership and is active. If a customer's org is missing:
-
-- Confirm the customer has an active contract with Datadog.
-- Confirm the contract correctly references the partnership.
-
-If both are correct and the org is still missing, contact [partner-support@datadoghq.com][1].
+A customer org connects to the partner Admin Org automatically when its contract includes the partnership and is active. If a customer's org is missing, contact [partner-support@datadoghq.com][1] for support.
 
 ## The Trial Org Provisioning page isn't available
 
@@ -22,6 +17,6 @@ This capability must be enabled on the Admin Org. Contact [partner-support@datad
 
 ## Further help
 
-For any issue not covered above, contact [partner-support@datadoghq.com][1]. Include the Admin Org ID and, where relevant, the affected Trial Org name or customer org ID.
+For any issue not covered above, contact [partner-support@datadoghq.com][1]. Include the Admin Org ID or name and, where relevant, the Trial Org ID or customer org ID.
 
 [1]: mailto:partner-support@datadoghq.com

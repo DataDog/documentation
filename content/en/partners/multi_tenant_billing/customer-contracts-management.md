@@ -20,13 +20,7 @@ Go to {{< ui >}}Plan & Usage{{< /ui >}} > {{< ui >}}Customer Contracts{{< /ui >}
 
 - All customers connected to the Admin Org, and their current and historical contracts.
 - Contract details: start and end dates, rates per product, and order form PDFs.
-
-{{< img src="partners/multi_tenant_billing/customer_contracts_details.png" alt="Contract detail view showing start and end dates, rates per product, and the order form PDF" style="width:100%;" >}}
-
 - Past invoices per customer.
-
-{{< img src="partners/multi_tenant_billing/customer_contracts_invoices.png" alt="Past invoices view for a customer" style="width:100%;" >}}
-
 - For MSP contracts, which customers belong to each contract.
 - Renewal reminders ahead of contract expiration.
 - Discount and margin visibility per contract.
