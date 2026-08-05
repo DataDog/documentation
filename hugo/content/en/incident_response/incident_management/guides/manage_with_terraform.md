@@ -123,12 +123,12 @@ resource "datadog_incident_notification_template" "sev1_alert" {
 }
 
 resource "datadog_incident_notification_rule" "sev1_sev2_created" {
-  enabled                = true
-  trigger                = "incident_created_trigger"
-  visibility              = "organization"
-  handles                = ["@pagerduty-on-call"]
-  incident_type           = datadog_incident_type.customer_impacting.id
-  notification_template   = datadog_incident_notification_template.sev1_alert.id
+  enabled               = true
+  trigger               = "incident_created_trigger"
+  visibility            = "organization"
+  handles               = ["@pagerduty-on-call"]
+  incident_type         = datadog_incident_type.customer_impacting.id
+  notification_template = datadog_incident_notification_template.sev1_alert.id
 
   conditions {
     field  = "severity"
