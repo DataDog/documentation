@@ -57,7 +57,7 @@ When [Runtime Package Prioritization][4] is enabled, Datadog adds the runtime si
 | Accessed by root process | `@package.is_running_as_root:true` |
 | SUID binary present | `@package.has_suid:true` |
 
-Datadog adds a tag when it observes the signal. Use the tags to prioritize what to fix first, rather than to rule findings out.
+Datadog adds a tag when it observes the signal. An absent tag means the signal was not observed, not that the package is unused, so use the tags to prioritize what to fix first rather than to rule findings out.
 
 Use the tags in the [Vulnerability Explorer][11], combined with any other criteria. For example, high and critical vulnerabilities that are running and have a fix available:
 
