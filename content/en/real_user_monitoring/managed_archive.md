@@ -35,7 +35,7 @@ Common use cases include:
 
 After you enable Managed Archive, all ingested sessions (excluding Synthetic Monitoring sessions) are stored automatically for the configured storage period. These sessions are accessible in a dedicated {{< ui >}}Managed Archive{{< /ui >}} UI, separate from the [RUM Explorer][2].
 
-<div class="alert alert-info">Session Replays from these sessions will follow their own <a href="/data_security/data_retention_periods/">data retention periods</a> (30 days by default, 15 months with <a href="/session_replay/playlists/#keeping-replays-in-a-playlist-for-longer-than-the-default-30-day-session-replay-retention-period">extended retention</a>).</div>
+<div class="alert alert-info">Session Replays from these sessions follow their own <a href="/data_security/data_retention_periods/">data retention periods</a> (30 days by default, and up to 15 months with <a href="/session_replay/playlists/#keeping-replays-in-a-playlist-for-longer-than-the-default-30-day-session-replay-retention-period">extended retention</a>).</div>
 
 {{< img src="real_user_monitoring/managed_archive/managed_archive_ui.png" alt="The Managed Archive UI showing a table of stored sessions with light-indexed attributes" style="width:100%;" >}}
 
