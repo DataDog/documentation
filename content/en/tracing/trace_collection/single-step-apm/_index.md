@@ -36,6 +36,8 @@ Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with n
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
+{{% dd-apm-skill %}}
+
 ## Prerequisites
 
 1. Remove any custom instrumentation code from your application and restart it. SSI is automatically disabled if custom instrumentation is detected.

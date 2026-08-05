@@ -35,17 +35,17 @@ Categories for usage are determined by tags. Before setting up your RUM usage at
 To set tags for **browser sessions**, set the RUM global context at the start of the session (right after calling `datadogRum.init`) using the [`setGlobalContextProperty`][3] method. For example, here's how you could tag sessions so they can be tracked for the marketing department: 
 
 ```javascript
-datadogRum.setGlobalContextProperty('department', 'marketing');
+datadogRum.setGlobalContextProperty('team', 'marketing');
 ```
 
 To set tags for **mobile sessions**, use the [`addAttribute`][5] method. Here's an example:
 
 ```
 //Android
-GlobalRumMonitor.get().addAttribute("department", "marketing")
+GlobalRumMonitor.get().addAttribute("team", "marketing")
 
 //iOS
-RumMonitor.shared().addAttribute(forKey: "department", value: "marketing")
+RumMonitor.shared().addAttribute(forKey: "team", value: "marketing")
 ```
 
 **Note**: A few tags are included by default (`service`, `env`, `version`, `application.id`, and `application.name`). For anything else, set the global context using the method above.
