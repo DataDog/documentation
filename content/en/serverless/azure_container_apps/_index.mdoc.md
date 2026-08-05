@@ -53,7 +53,9 @@ containerized applications. Datadog monitors Container Apps in two layers:
 - The Datadog `serverless-init` Agent adds distributed tracing, enhanced metrics, custom
   metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
 
-**Prerequisite**: First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs. 
+First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs. 
+
+Then, use the guides below to instrument your application using agentic onboarding or manual instrumentation. 
 
 ## Set up with agentic onboarding
 
