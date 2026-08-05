@@ -12796,14 +12796,131 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
-    - name: Governance Controls
-      url: /api/latest/governance-controls/
-      identifier: governance-controls
+    - name: Governance Console
+      url: /api/latest/governance-console/
+      identifier: governance-console
       generated: true
-    - name: Update a governance control
-      url: /api/latest/governance-controls/update-a-governance-control/
-      identifier: governance-controls-update-a-governance-control
-      parent: governance-controls
+    - name: Update notification settings
+      url: /api/latest/governance-console/update-notification-settings/
+      identifier: governance-console-update-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 13
+    - name: Get notification settings
+      url: /api/latest/governance-console/get-notification-settings/
+      identifier: governance-console-get-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 12
+    - name: List insights
+      url: /api/latest/governance-console/list-insights/
+      identifier: governance-console-list-insights
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceInsights
+        unstable:
+          - v2
+        order: 2
+    - name: Update a detection
+      url: /api/latest/governance-console/update-a-detection/
+      identifier: governance-console-update-a-detection
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceDetection
+        unstable:
+          - v2
+        order: 8
+    - name: Get a detection
+      url: /api/latest/governance-console/get-a-detection/
+      identifier: governance-console-get-a-detection
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceDetection
+        unstable:
+          - v2
+        order: 7
+    - name: Mitigate detections
+      url: /api/latest/governance-console/mitigate-detections/
+      identifier: governance-console-mitigate-detections
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MitigateGovernanceDetections
+        unstable:
+          - v2
+        order: 9
+    - name: Update control notification settings
+      url: /api/latest/governance-console/update-control-notification-settings/
+      identifier: governance-console-update-control-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 11
+    - name: Get control notification settings
+      url: /api/latest/governance-console/get-control-notification-settings/
+      identifier: governance-console-get-control-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 10
+    - name: List control detections
+      url: /api/latest/governance-console/list-control-detections/
+      identifier: governance-console-list-control-detections
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControlDetections
+        unstable:
+          - v2
+        order: 6
+    - name: Update a control
+      url: /api/latest/governance-console/update-a-control/
+      identifier: governance-console-update-a-control
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12812,11 +12929,11 @@ menu:
           - UpdateGovernanceControl
         unstable:
           - v2
-        order: 4
-    - name: Get a governance control
-      url: /api/latest/governance-controls/get-a-governance-control/
-      identifier: governance-controls-get-a-governance-control
-      parent: governance-controls
+        order: 5
+    - name: Get a control
+      url: /api/latest/governance-console/get-a-control/
+      identifier: governance-console-get-a-control
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12825,11 +12942,11 @@ menu:
           - GetGovernanceControl
         unstable:
           - v2
-        order: 3
-    - name: List governance controls
-      url: /api/latest/governance-controls/list-governance-controls/
-      identifier: governance-controls-list-governance-controls
-      parent: governance-controls
+        order: 4
+    - name: List controls
+      url: /api/latest/governance-console/list-controls/
+      identifier: governance-console-list-controls
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12838,21 +12955,17 @@ menu:
           - ListGovernanceControls
         unstable:
           - v2
-        order: 2
-    - name: Governance Insights
-      url: /api/latest/governance-insights/
-      identifier: governance-insights
-      generated: true
-    - name: List governance insights
-      url: /api/latest/governance-insights/list-governance-insights/
-      identifier: governance-insights-list-governance-insights
-      parent: governance-insights
+        order: 3
+    - name: Get the Governance Console configuration
+      url: /api/latest/governance-console/get-the-governance-console-configuration/
+      identifier: governance-console-get-the-governance-console-configuration
+      parent: governance-console
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListGovernanceInsights
+          - GetGovernanceConfig
         unstable:
           - v2
         order: 1
