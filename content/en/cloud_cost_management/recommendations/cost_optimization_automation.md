@@ -80,7 +80,7 @@ To set up an automation on a recurring schedule for a recommendation type:
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the automation frequency and execution time.
 1. (Optional) Enable the {{< ui >}}Require approval before execution{{< /ui >}} toggle to require human review before execution. If enabled, select {{< ui >}}Slack{{< /ui >}} or {{< ui >}}Microsoft Teams{{< /ui >}}, and fill out the channel notification fields. See [Safeguards](#safeguards).
 1. Enter a name for the automation.
-1. Click {{< ui >}}Save Policy{{< /ui >}}.
+1. Click {{< ui >}}Save Automation{{< /ui >}}.
 
 ### Safeguards
 
