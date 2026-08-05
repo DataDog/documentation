@@ -5239,6 +5239,12 @@
     "request_description": "",
     "request_schema_description": "Definition of a user."
   },
+  "CreateSCIMIntegration": {
+    "description": "Initialize an Azure Entra SCIM integration for the organization.\nProvisions a managed service account and an OAuth client, records the\nEntra tenant mapping, and returns the OAuth client ID to configure in Azure.\nThis operation is idempotent: repeated calls for the same tenant return the\nexisting OAuth client without creating duplicate managed identities or clients.",
+    "summary": "Create SCIM integration",
+    "request_description": "",
+    "request_schema_description": "Request to initialize an Azure Entra SCIM integration for the organization."
+  },
   "ListScorecardCampaigns": {
     "description": "Fetches all scorecard campaigns.",
     "summary": "List all campaigns"

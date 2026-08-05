@@ -18831,6 +18831,18 @@ menu:
       url: /api/latest/scim/
       identifier: scim
       generated: true
+    - name: Create SCIM integration
+      url: /api/latest/scim/create-scim-integration/
+      identifier: scim-create-scim-integration
+      parent: scim
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateSCIMIntegration
+        unstable: []
+        order: 17
     - name: Update user
       url: /api/latest/scim/update-user/
       identifier: scim-update-user

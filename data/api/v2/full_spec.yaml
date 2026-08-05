@@ -25065,6 +25065,30 @@ components:
       type: string
       x-enum-varnames:
         - CREATE_RULESET
+    CreateSCIMIntegrationRequest:
+      description: Request to initialize an Azure Entra SCIM integration for the organization.
+      properties:
+        object_id_pattern:
+          description: The Azure service principal object ID pattern to authorize. Defaults to `*`, matching any service principal in the tenant.
+          example: "*"
+          type: string
+        tenant_id:
+          description: The Azure Entra tenant ID to authorize for SCIM provisioning.
+          example: 00000000-0000-0000-0000-000000000000
+          type: string
+      required:
+        - tenant_id
+      type: object
+    CreateSCIMIntegrationResponse:
+      description: Response containing the OAuth client to configure in Azure.
+      properties:
+        client_id:
+          description: The Datadog OAuth client UUID to configure in the Azure Entra SCIM application for workload identity federation.
+          example: 00000000-0000-0000-0000-000000000001
+          type: string
+      required:
+        - client_id
+      type: object
     CreateServiceNowTicketRequestArray:
       description: List of requests to create ServiceNow tickets for security findings.
       properties:
@@ -186265,6 +186289,51 @@ paths:
       summary: Update user
       tags: ["SCIM"]
       x-menu-order: 4
+      "x-permission":
+        operator: AND
+        permissions:
+          - user_access_invite
+          - user_access_manage
+  /api/v2/scim/integrations:
+    post:
+      description: |-
+        Initialize an Azure Entra SCIM integration for the organization.
+        Provisions a managed service account and an OAuth client, records the
+        Entra tenant mapping, and returns the OAuth client ID to configure in Azure.
+        This operation is idempotent: repeated calls for the same tenant return the
+        existing OAuth client without creating duplicate managed identities or clients.
+      operationId: CreateSCIMIntegration
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  object_id_pattern: "*"
+                  tenant_id: 00000000-0000-0000-0000-000000000000
+            schema:
+              $ref: "#/components/schemas/CreateSCIMIntegrationRequest"
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    client_id: 00000000-0000-0000-0000-000000000001
+              schema:
+                $ref: "#/components/schemas/CreateSCIMIntegrationResponse"
+          description: Created
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - bearerAuth: []
+      summary: Create SCIM integration
+      tags: ["SCIM"]
+      x-menu-order: 17
       "x-permission":
         operator: AND
         permissions:
