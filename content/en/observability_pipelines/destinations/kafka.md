@@ -165,7 +165,7 @@ For [component metrics][13] and [destination buffer metrics][14] emitted by all 
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][9] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

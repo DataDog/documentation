@@ -78,7 +78,7 @@ Toggle **Enable batching** for batch encoding.
 1. In the **Max events** field, enter the maximum number of events per batch. Must be `1` or greater.
 1. In the **Timeout (secs)** field, enter the maximum time, in seconds, before a partial batch is flushed. Must be between `1` and `65535`. If left unset, the default is 1 second.
 
-See [Event batching](#event-batching) for more information.
+See [Destinations event batching](#event-batching) for more information.
 
 ## Secret defaults
 
@@ -110,7 +110,7 @@ See [Event batching](#event-batching) for more information.
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. Batching is also configurable for this destination. See [event batching][12] for more information.
+A batch of events is flushed when one of these parameters is met. Batching is also configurable for this destination. See [Destinations event batching][12] for more information.
 
 | Maximum Events | Maximum Bytes | Timeout (seconds) |
 |----------------|---------------|-------------------|
