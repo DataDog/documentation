@@ -139,7 +139,7 @@ ignore:
 test:
   # Stand-in for post-reorg master: the branch that has the reorg applied. Test
   # PRs target it, and resolve_pr_conflicts.py treats it as the base by default.
-  mock_reorged_master_branch: jen.gilbert/mock-reorged-master-7-23-1046
+  mock_reorged_master_branch: jen.gilbert/mock-reorged-master-8-5-1222
   # Frozen snapshot of master that test PRs branch off, so each PR's diff stays
   # small (a PR shows every commit in its head that isn't in the base branch).
   mock_authors_branch_from: jen.gilbert/astro-reorg-scripts
