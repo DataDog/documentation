@@ -38,7 +38,7 @@ Before creating alerts for sensitive data, verify you have:
 - The appropriate permissions in your Datadog account:
     - For log finding alerts, [Security Notification Rules Read and Write permissions][2]. To view Sensitive Data Scanner findings, you also need the Data Scanner Read permission.
     - For APM and RUM monitors, [monitor creation permissions][6].
-- An understanding of which types of sensitive data is most critical for your organization to monitor.
+- An understanding of which types of sensitive data are most critical for your organization to monitor.
 
 ## Create alerts by data type
 
@@ -50,7 +50,7 @@ Although you can create log monitors for sensitive data, notification rules are 
 
 To create a notification rule for log findings:
 
-1. On the [Log Findings explorer][9], filter findings to the scope you want to alert on. For example, filter by severity, `service`, `env`, `team`, `category`, or scanning rule.
+1. On the [Log Findings explorer][8], filter findings to the scope you want to alert on. For example, filter by severity, `service`, `env`, `team`, `category`, or scanning rule.
 1. Click {{< ui >}}Create Notification Rule{{< /ui >}} from the explorer or from a finding side panel.
 1. Review or adjust the prefilled filters. The {{< ui >}}Preview of Matching Findings{{< /ui >}} panel shows which findings match the rule.
 1. Choose whether to aggregate matching findings over a time frame or trigger immediately for each individual finding.
@@ -137,5 +137,4 @@ For APM and RUM monitors, start with conservative thresholds and adjust based on
 [4]: https://app.datadoghq.com/monitors/create/rum
 [6]: /account_management/rbac/permissions/#monitors
 [7]: /monitors/notify/
-[8]: /security/notifications/rules/
-[9]: https://app.datadoghq.com/sensitive-data-scanner/findings
+[8]: https://app.datadoghq.com/sensitive-data-scanner/findings
