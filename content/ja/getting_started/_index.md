@@ -39,7 +39,7 @@ Datadog は、テクノロジースタックの種類を問わず、ソフトウ
         <td>
         <ul>
         <li><a href="/security/code_security/">Code Security</a> を使用して、テキストエディターまたは GitHub でコードの脆弱性を強調表示します。</li>
-        <li><a href="/coscreen/">CoScreen</a> を使用して、リモートペアプログラミングセッションを円滑に実施します。</li></ul>
+        </ul>
         </td>
     </tr>
     <tr>

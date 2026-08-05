@@ -20,6 +20,12 @@ further_reading:
     - link: "https://www.datadoghq.com/blog/guardrail-metrics"
       tag: "Blog"
       text: "Make use of guardrail metrics and stop babysitting your releases"
+    - link: "https://www.datadoghq.com/blog/ab-testing/"
+      tag: "Blog"
+      text: "Every team should be A/B testing"
+    - link: "https://www.datadoghq.com/blog/product-signal-latency-gap/"
+      tag: "Blog"
+      text: "The product signal latency gap slowing your growth"
 site_support_id: getting_started_feature_flags
 ---
 
@@ -71,6 +77,10 @@ This guide uses the JavaScript browser SDK as an example. You can integrate Data
 Your organization likely already has pre-configured environments for Development, Staging, and Production. For details on environment queries, production marking, and managing environments, see [Environments][4].
 
 ## Create your first feature flag
+
+<div class="alert alert-info">
+You can set up Feature Flags automatically with the <a href="/feature_flags/feature_flag_mcp_server/">Feature Flags MCP Server</a>. After connecting, prompt your AI agent: "Help me set up Datadog Feature Flags in my app." The MCP Server reviews your codebase and installs the required SDK and code snippets for your language and framework.
+</div>
 
 ### Step 1: Import and initialize the SDK
 

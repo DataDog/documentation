@@ -13,20 +13,20 @@ Use Observability Pipelines' Splunk HTTP Event Collector (HEC) destination to se
 
 ## Setup
 
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
+
 Configure the Splunk HEC destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][3], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
 **Notes**:
 - The Splunk index you send your metrics to must be a metrics index. If you send your metrics to an events index, you can't view them in Splunk using any metrics type queries, such as `mcatalog` and `mstats`.
 - If you don't attach your index to the Splunk authentication token you are using for Observability Pipelines, you must enter the name of the [index](#splunk-index) when you set up the destination.
 
-<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Splunk HEC token, endpoint, and if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
-
-{{% observability_pipelines/secrets_env_var_note %}}
-
 After you select the Splunk HEC destination in the pipeline UI:
 
 1. Enter the identifier for your token. If you leave it blank, the [default](#secret-defaults) is used.
 1. Enter the identifier for your endpoint URL. If you leave it blank, the [default](#secret-defaults) is used.
+
+{{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
 
