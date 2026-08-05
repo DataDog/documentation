@@ -61,7 +61,7 @@ To manually run a workflow mitigation:
 1. On the {{< ui >}}Manual Mitigation{{< /ui >}} tab, select one or more detections.
 2. Click {{< ui >}}Mitigate now{{< /ui >}}.
 3. Review the confirmation screen, which shows the selected detections and the workflow that will run.
-4. Confirm to run the workflow against the selected detections.
+4. Type `Mitigate Detections` into the text box, then click {{< ui >}}Mitigate Detections{{< /ui >}} to run the workflow against the selected detections.
 
 Workflow run status appears alongside each detection in the {{< ui >}}Manual Mitigation{{< /ui >}} tab.
 
