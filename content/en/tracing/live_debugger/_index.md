@@ -301,11 +301,11 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 2. Click {{< ui >}}Create Debug Session{{< /ui >}}.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [expression language][15].
-5. (Optional) Use the capture variables option to collect all execution context or specific variables as part of the log event metadata (this feature is rate-limited to 1 execution per second). To capture only a log message string, remove the capture variables option from the logpoint definition.
+5. (Optional) Use the {{< ui >}}Capture Variables{{< /ui >}} option to collect all execution context or specific variables as part of the log event metadata (this feature is rate-limited to 1 execution per second). To capture only a log message string, remove the capture variables option from the logpoint definition.
 6. (Optional) Define a condition for when the logs should be emitted.
 7. Click {{< ui >}}Apply changes{{< /ui >}} to save modifications to existing logpoint definitions.
 
-Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or debug session should be created in this case).
+Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
 After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. **Note**: If the selected code is not executed or the logpoint condition(s) are not met, then there are no log events generated.
 
