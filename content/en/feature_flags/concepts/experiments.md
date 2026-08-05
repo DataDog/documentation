@@ -21,24 +21,24 @@ further_reading:
 
 ## Overview
 
-Datadog Feature Flags is the default way to randomize a [Datadog Experiment][1]. When you link a flag to an experiment, Datadog adds an **Experiment** targeting rule to the flag. Evaluations of that rule assign subjects to a variant and record an exposure event that Datadog uses to analyze the experiment.
+Datadog Feature Flags is the default way to randomize a [Datadog Experiment][1]. When you link a flag to an experiment, Datadog adds an Experiment targeting rule to the flag. Evaluations of that rule assign subjects to a variant and record an exposure event that Datadog uses to analyze the experiment.
 
 ## Link a flag to an experiment
 
 Link a flag to an experiment from either side of the workflow:
 
-- From [Product Analytics > Experiments][1], create an experiment and [add an existing feature flag][2] to it.
-- From a flag's detail page, click **Create New Experiment** in the **Targeting Rules & Rollouts** section to create an experiment pre-filled with that flag.
+- From [{{< ui >}}Product Analytics > Experiments{{< /ui >}}][1], create an experiment and [add an existing feature flag][2] to it.
+- From a flag's detail page, click {{< ui >}}Create New Experiment{{< /ui >}} in the {{< ui >}}Targeting Rules & Rollouts{{< /ui >}} section to create an experiment pre-filled with that flag.
 
 ## Experiment targeting rules
 
-An **Experiment** targeting rule works like any other [targeting rule][3]: it can include a filter, and it uses the same [deterministic randomization][4] to assign subjects to a variant. Randomization is based on the `targetingKey` in your [evaluation context][5], so the same subject consistently receives the same variant for the life of the experiment.
+An experiment targeting rule works like any other [targeting rule][3]: it can include a filter, and it uses the same [deterministic randomization][4] to assign subjects to a variant. Randomization is based on the `targetingKey` in your [evaluation context][5], so the same subject consistently receives the same variant for the life of the experiment.
 
 If multiple experiments share the same flag, Datadog evaluates their targeting rules in order, top to bottom. Reorder the rules before you launch an experiment to control which one takes priority for a given subject.
 
 ## Exposures
 
-Each time the SDK evaluates a flag's **Experiment** targeting rule for a subject, Datadog records an **exposure**: the subject, the variant served, and a timestamp. Datadog joins exposures to metric events to calculate the lift between variants. Those metric events can come from Product Analytics, Real User Monitoring, or your data warehouse.
+Each time the SDK evaluates a flag's experiment targeting rule for a subject, Datadog records an _exposure_: the subject, the variant served, and a timestamp. Datadog joins exposures to metric events to calculate the lift between variants. Those metric events can come from Product Analytics, Real User Monitoring, or your data warehouse.
 
 Datadog joins exposures and metrics by subject identifier. The `targetingKey` your SDK sets in the [evaluation context][5] must match the [subject type attribute][6] configured for the experiment, such as `@usr.id`, or Datadog can't associate metric events with the correct exposure.
 
