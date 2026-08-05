@@ -23,7 +23,7 @@ With Bits Code automations, you can:
 
 ## Prerequisites
 To set up a Bits Code automation, each of the following must be true:
-- You have the `Bits Code Write` (`bits_dev_write`) permission in Datadog.
+- You have the [`Bits Code Write` (`bits_dev_write`) permission][6] in Datadog.
 - You have completed the Bits Code [setup][2].
 - If you plan to have your automations [output Slack notifications](#slack-message-output), you have set up the [Slack integration][4].
 
@@ -89,7 +89,7 @@ You can configure your automation to:
 - {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
 - {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
 
-As the author of a Bits Code automation, you are the author of all pull or merge requests it generates.
+Datadog administrators can configure pull or merge request authorship through the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][7]. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
 
 ### Slack message output
 You can configure your automation to send a Slack message summarizing the [session][1] and code changes. If you use a pull or merge request output in addition to a Slack output, Bits Code includes a link to the pull or merge request in the Slack message.
@@ -109,3 +109,5 @@ You can pause or resume any automation, but you can only edit or delete automati
 [3]: https://app.datadoghq.com/code/automations
 [4]: /integrations/slack/
 [5]: /internal_developer_portal/catalog/
+[6]: /account_management/rbac/permissions/#bits-ai
+[7]: https://app.datadoghq.com/code/settings

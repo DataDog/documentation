@@ -254,10 +254,6 @@ nav_sections:
         link: events/
         icon: events
         desc: アプリケーションとインフラストラクチャーの注目すべき変化やアラートを追跡
-      - title: CoScreen
-        link: coscreen/
-        icon: coscreen
-        desc: ペアプログラミングやインシデント管理のために、アプリケーションウィンドウを共有し、相互作用します。
       - title: OpenTelemetry
         link: opentelemetry/
         icon: open-telemetry

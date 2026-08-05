@@ -25,6 +25,8 @@ further_reading:
 
 In a Kubernetes environment, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][3] your applications with the Datadog SDKs in one step.
 
+{{% dd-apm-skill %}}
+
 ## Requirements
 
 - Kubernetes v1.20+.

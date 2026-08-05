@@ -39,7 +39,7 @@ Datadog은 스택에 관계없이 소프트웨어 개발의 모든 단계를 지
         <td>
         <ul>
         <li>텍스트 편집기나 GitHub에서 <a href="/security/code_security/">Code Security</a>로 코드 취약성을 강조 표시합니다.</li>
-        <li><a href="/coscreen/">CoScreen</a>을 사용해 원격 페어 프로그래밍 세션을 쉽게 진행합니다.</li></ul>
+        </ul>
         </td>
     </tr>
     <tr>

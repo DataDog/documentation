@@ -1336,23 +1336,12 @@ menu:
       identifier: ddsql_reference_data_directory
       parent: ddsql_reference
       weight: 1
-    - name: CoScreen
-      url: coscreen/
-      pre: coscreen
-      identifier: coscreen
-      parent: essentials_heading
-      weight: 150000
-    - name: Troubleshooting
-      url: coscreen/troubleshooting
-      identifier: coscreen_troubleshooting
-      parent: coscreen
-      weight: 1
     - name: CoTerm
       url: coterm/
       pre: coscreen
       identifier: coterm
       parent: essentials_heading
-      weight: 160000
+      weight: 150000
     - name: Install
       url: coterm/install
       identifier: coterm_install
@@ -8407,6 +8396,16 @@ menu:
       parent: csm_review_remediate
       identifier: csm_remediate_with_ai
       weight: 103
+    - name: Ownership Agent
+      url: security/cloud_security_management/review_remediate/ownership_agent
+      parent: csm_review_remediate
+      identifier: csm_ownership_agent
+      weight: 104
+    - name: Set Up Ownership Preferences
+      url: security/cloud_security_management/review_remediate/ownership_preferences
+      parent: csm_review_remediate
+      identifier: csm_ownership_preferences
+      weight: 105
     - name: Triage and Prioritize
       url: security/cloud_security_management/triage_and_prioritize/
       parent: csm
@@ -10604,6 +10603,11 @@ menu:
       url: account_management/billing/ai_credits/
       parent: account_management_billing
       weight: 1521
+    - name: AI Credit Limits
+      identifier: account_management_billing_ai_credit_limits
+      url: account_management/billing/ai_credit_limits/
+      parent: account_management_billing
+      weight: 1522
     - name: Multi-org Accounts
       identifier: account_management_multi_org_accounts
       url: account_management/multi_organization/
