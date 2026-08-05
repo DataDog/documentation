@@ -121,6 +121,8 @@ No data is lost, because both timeseries are stored. However, queries return onl
 
 ### Symptoms of overshadowing
 
+Overshadowing typically presents in one of the following ways:
+
 * A metric's tags or data appear to change suddenly, without you making any configuration changes.
 * You receive this error when updating a tag configuration through the metrics API:
 
