@@ -1,6 +1,6 @@
 # Datadog documentation style guide
 
-This guide explains how to write and edit content for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
+This guide explains how to author and edit content for the [Datadog documentation][7]. While it's helpful for standardizing large bodies of work with multiple contributors, a style guide can't tell you how to write for your specific context. If you find that these guidelines get in the way of writing clearly, break the rules! Just do so thoughtfully.
 
 The Datadog documentation [implementation of the Vale linter][4] has rules corresponding to some of these guidelines. After you make a PR, check its **Files changed** tab to see and fix warnings and errors it flagged.
 
@@ -56,7 +56,7 @@ Avoid using Latin abbreviations to introduce examples:
 
 ### Active voice
 
-Use active instead of passive voice. If you think your sentence is in passive voice, add the phrase "by zombies" to the end. If it still makes grammatical sense, it's in passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`".
+Use active voice instead of passive. If you think your sentence is in passive voice, add the phrase "by zombies" to the end. If it still makes grammatical sense, it's in passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`".
 - **Not recommended**: With Datadog infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent.
 - **Recommended**: With infrastructure monitoring, the Datadog Agent receives metrics and forwards them to Datadog. Similarly, the Datadog Agent can also receive tracing metrics.
 
