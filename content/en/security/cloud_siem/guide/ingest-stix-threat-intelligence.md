@@ -32,10 +32,9 @@ Use STIX ingestion when your platform already produces STIX, or when you want a 
 To start ingesting a feed, send a bundle to the ingestion endpoint. No configuration in Datadog is required beforehand.
 
 1. You send a STIX 2.1 bundle and identify the feed with the `ti_vendor` header.
-2. Datadog reads the STIX `pattern` on each indicator to determine its value and its type, such as an IP address, a domain, or a file hash.
-3. Datadog generates one [reference table][4] for each indicator type in your feed, named `threat_intel_stix_<TI_VENDOR>_<INDICATOR_TYPE>`. Because one bundle can contain several indicator types, a single request can populate several tables.
-4. Datadog registers each generated table and enables it for Cloud SIEM enrichment automatically.
-5. Later requests for the same `ti_vendor` update the existing tables and preserve the configuration choices you make.
+2. Datadog generates one [reference table][4] for each indicator type in your feed, named `threat_intel_stix_<TI_VENDOR>_<INDICATOR_TYPE>`. Because one bundle can contain several indicator types, a single request can populate several tables.
+3. Datadog registers each generated table and enables it for Cloud SIEM enrichment automatically.
+4. Later requests for the same `ti_vendor` update the existing tables and preserve the configuration choices you make.
 
 For example, a feed sent with `ti_vendor: acme` that contains IP address, domain, and SHA-256 indicators produces the following tables:
 
@@ -64,13 +63,13 @@ Tables become available a few minutes after your first request. Enrichment appli
 |---|---|---|
 | `DD-API-KEY` | Yes | Your Datadog API key. |
 | `DD-APPLICATION-KEY` | Yes | An application key with the Reference Tables Write permission. |
-| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform. Use 10 characters or fewer, with only lowercase letters and digits. Datadog lowercases the value, replaces any other character with an underscore, and truncates it to 10 characters. Feeds with values that match after this conversion write to the same reference tables. |
+| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform. Use 10 characters or fewer, with only lowercase letters and digits. |
 | `Content-Type` | Yes | `application/json` |
 | `Content-Encoding` | No | Set to `gzip` to send a compressed body. No other encodings are supported. |
 
 ### Request body
 
-The body is a STIX 2.1 `bundle` of `indicator` objects. Each request is an incremental batch, and a bundle can mix indicators of different types.
+The body is a STIX 2.1 `bundle` of STIX objects. Each request is an incremental batch, and a bundle can mix indicators of different types.
 
 ```json
 {
@@ -98,17 +97,13 @@ The endpoint has the following requirements and limits:
 
 ### Supported indicator types
 
-Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests the following indicator types:
-
-- IP addresses, both IPv4 and IPv6
-- Domains
-- SHA-256 file hashes
+Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests IP addresses (both IPv4 and IPv6), domains, and file hashes.
 
 ```json
 "pattern": "[ipv4-addr:value = '198.51.100.1']"
 ```
 
-Datadog skips indicators that it cannot map to one of these types, along with indicators that use pattern expressions it does not support. Skipped indicators appear in the `unsupported` count of the response, and indicators with an unparseable pattern appear in the `invalid` count. Check these counts to confirm how much of your feed ingested.
+Datadog skips indicators with unsupported types or pattern expressions. The response counts these as `unsupported` or `invalid`. Check these counts to confirm how much of your feed ingested.
 
 ### How STIX fields map to reference table columns
 
