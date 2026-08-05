@@ -56,7 +56,7 @@ Avoid using Latin abbreviations to introduce examples:
 
 ### Active voice
 
-Use active instead of passive voice. If you think your sentence is in passive voice, add the phrase "by zombies" to the end. If it still makes grammatical sense, it's in passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`".
+Use active rather than passive voice. If you think your sentence is in passive voice, add the phrase "by zombies" to the end. If it still makes grammatical sense, it's in passive voice. For example, "metrics are sent to the Datadog Agent `by zombies`".
 - **Not recommended**: With Datadog infrastructure monitoring, metrics are sent to the Datadog Agent, which then forwards them to Datadog. Similarly, tracing metrics are also sent to the Datadog Agent.
 - **Recommended**: With infrastructure monitoring, the Datadog Agent receives metrics and forwards them to Datadog. Similarly, the Datadog Agent can also receive tracing metrics.
 
