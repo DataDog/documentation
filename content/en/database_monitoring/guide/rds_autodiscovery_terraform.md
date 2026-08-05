@@ -122,6 +122,15 @@ resource "aws_iam_role" "agent" {
   })
 }
 
+# -------------------------------------------------------
+# Grant SSM Session Manager connectivity
+# -------------------------------------------------------
+
+resource "aws_iam_role_policy_attachment" "ssm_core" {
+  role       = aws_iam_role.agent.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+}
+
 resource "aws_iam_role_policy" "rds_autodiscovery" {
   name = "dd-dbm-agent-rds-autodiscovery"
   role = aws_iam_role.agent.id
