@@ -283,34 +283,35 @@ Workload Identity Federation for the Agent allows you to authenticate your Agent
 
 The Agent looks for AWS credentials in the following sources, in this order. The first source that provides credentials is used.
 
-| Credential source | Environment variables | Minimum Agent version |
-| --- | --- | --- |
-| [Static credentials][11] | `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` | `7.78.0` |
-| [EC2 instance role][7] (retrieved through IMDS) | None | `7.78.0` |
-| [EKS IAM roles for service accounts (IRSA)][8] | `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` | `7.82.0` |
-| [ECS task role][9] and [EKS Pod Identity][10] | `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` or `AWS_CONTAINER_CREDENTIALS_FULL_URI` | `7.82.0` |
+| Credential source | Environment variables |
+| --- | --- |
+| [Static credentials][11] | `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY` |
+| [EC2 instance role][7] (retrieved through IMDS) | None |
+| [EKS IAM roles for service accounts (IRSA)][8] | `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` |
+| [ECS task role][9] and [EKS Pod Identity][10] | `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` or `AWS_CONTAINER_CREDENTIALS_FULL_URI` |
 
 The Agent does not read shared AWS configuration files or named profiles (`AWS_PROFILE`, `~/.aws`). This differs from the Terraform provider, which does support AWS credential files.
 
-#### Agent component support
+#### Agent version support by component
 
-In Agent `7.82.0` and earlier, only the following components can use the EC2 instance role, EKS IRSA, and ECS task role or EKS Pod Identity sources:
+Which credential sources you can use depends on the Agent version and on the component that sends the data. Each cell is the first Agent version in which that combination works.
 
-- Core Agent (metrics, logs, and checks)
-- Cluster Agent
-- Process Agent
-- Security Agent
-- Datadog Installer
+| Agent component | Static credentials | EC2 instance role | EKS IRSA, ECS task role, EKS Pod Identity |
+| --- | --- | --- | --- |
+| Core Agent (metrics, logs, and checks) | `7.78.0` | `7.78.0` | `7.82.0` |
+| Cluster Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Process Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Security Agent | `7.78.0` | `7.78.0` | `7.82.0` |
+| Datadog Installer | `7.78.0` | `7.78.0` | `7.82.0` |
+| APM (trace Agent) | `7.78.0` | `7.83.0` | `7.83.0` |
+| Standalone DogStatsD | `7.78.0` | `7.83.0` | `7.83.0` |
+| Private Action Runner | `7.78.0` | `7.83.0` | `7.83.0` |
+| IoT Agent | `7.78.0` | `7.83.0` | `7.83.0` |
+| Heroku Agent | `7.78.0` | `7.83.0` | `7.83.0` |
 
-The following components support Workload Identity Federation but are limited to static credentials supplied through environment variables:
+<div class="alert alert-warning">Agent <code>7.83.0</code> has not been released yet. Entries referencing it describe expected behavior in an upcoming release and may change before it ships.</div>
 
-- APM (trace Agent)
-- Standalone DogStatsD
-- Private Action Runner
-- IoT Agent
-- Heroku Agent
-
-<div class="alert alert-warning">If you run APM on an EKS pod or an ECS task and do not supply static credentials through environment variables, the trace Agent cannot obtain a managed API key. It falls back to the <code>api_key</code> configured in <code>datadog.yaml</code>. See <a href="#fallback-behavior">Fallback behavior</a>.</div>
+If you run APM on an EKS pod or an ECS task on Agent `7.82.0` or earlier, and you do not supply static credentials through environment variables, the trace Agent cannot obtain a managed API key. It falls back to the `api_key` configured in `datadog.yaml`. See [Fallback behavior](#fallback-behavior).
 
 Workload Identity Federation is not available in the OpenTelemetry Collector (DDOT) or the AWS Lambda extension. These require a statically configured `api_key`.
 
