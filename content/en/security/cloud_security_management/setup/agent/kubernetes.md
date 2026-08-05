@@ -202,12 +202,12 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 | Accessed by root process | The package was accessed by a process running as root (UID 0). |
 | SUID binary present | The package contains a binary with the SUID bit set, which can enable privilege escalation. |
 
-*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][9]. To query the signals yourself, see [Filter findings by runtime signals][10].
+*Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][9]. To query these signals directly, see [Filter findings by runtime signals][10].
 
 **Requirements**:
-- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later**: earlier versions can miss runtime signals on some kubelet-managed images.
-- Linux only (eBPF dependency)
-- Applies to operating system packages in container image vulnerability findings
+- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
+- Linux only (eBPF dependency).
+- Applies to operating system packages in container image vulnerability findings.
 
 **Note**: Use Datadog Agent **7.79.0 or later**. Earlier Agent versions enable this feature through [Workload Protection][8] and can affect its usage. From 7.79.0, runtime package prioritization runs independently and does not affect its usage.
 
