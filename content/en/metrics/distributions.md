@@ -135,7 +135,7 @@ To confirm a metric's current type, see the [Metrics Summary page][4].
 
 ### Avoid overshadowing
 
-Metric names must be unique across types, in either direction. Two cases are easy to miss:
+Metric names must be unique across types, in either direction. Two cases are often overlooked:
 
 * **Log-based metrics**: Because log-based metrics always submit as distributions, verify the metric name you choose does not already exist as a count, gauge, rate, or histogram metric.
 * **Retired names**: A name that no longer receives data is still claimed by its original type. Do not reuse it for a different type.
