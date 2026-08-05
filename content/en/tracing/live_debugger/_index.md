@@ -284,10 +284,12 @@ A Debug Session lets you inspect running code using auto-expiring logpoints. To 
 
 1. Start a Debug Session from one of the following locations:
    - (Preview) On the [Live Debugger page][13], submit a question or investigation prompt to [Bits Live Debugger][29].
-   - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}}.
+   - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}} or {{< ui >}}New Session{{< /ui >}}.
    - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
-2. Add a logpoint to begin collecting diagnostic data.
+2. Select a code location to add the first logpoint and begin capturing log events.
 3. Add, remove, or modify logpoints as needed during the session.
+4. Log events captured by the logpoints will appear in the debug session view as they are ingested and indexed. These logs can also be viewed, queried, and analyzed in Logs Explorer or any other Datadog tools that reference logs data. 
+5. View active and inactive debug sessions created by users in your organization in the Live Debugger Sessions list. A debug session's log events are only visible during the retention period defined for [the logs index](#recommended-create-a-logs-index).
 
 Debug Sessions expire automatically. You can also manually disable or re-enable a session, as well as individual logpoints, at any time.
 
@@ -299,8 +301,13 @@ Logpoints are "non-breaking breakpoints" that specify where in the code to captu
 2. Click {{< ui >}}Create Debug Session{{< /ui >}}.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [expression language][15].
-5. (Optional) Enable "Capture Variables" to collect all execution context (this feature is rate-limited to 1 execution per second).
+5. (Optional) Use the capture variables option to collect all execution context or specific variables as part of the log event metadata (this feature is rate-limited to 1 execution per second). To capture only a log message string, remove the capture variables option from the logpoint definition.
 6. (Optional) Define a condition for when the logs should be emitted.
+7. Click "Apply changes" to save modifications to existing logpoint definitions.
+
+Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or debug session should be created in this case).
+
+After a logpoint is created, modified, or re-activated, it can take a couple of minutes to instrument the code and begin capturing log events. Note: If the selected code is not executed or the logpoint condition(s) are not met, then there will be no log events generated. 
 
 ### Protecting sensitive data
 
