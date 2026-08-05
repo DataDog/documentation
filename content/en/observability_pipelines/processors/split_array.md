@@ -52,9 +52,9 @@ Click {{< ui >}}Manage arrays to split{{< /ui >}} to add an array to split or ed
 
 ### Add a new array
 
-1. Define a filter query. See [Logs Search Syntax][1] for more information.
-    - Only logs matching the filter are processed.
-    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Enter the path to the array field. Use the path notation `<OUTER_FIELD>.<INNER_FIELD>` to match subfields. See the [Path notation example](#path-notation-example-split-array) below.
 1. Click {{< ui >}}Save{{< /ui >}}.
 

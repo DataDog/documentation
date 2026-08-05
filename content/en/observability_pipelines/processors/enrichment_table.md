@@ -81,8 +81,8 @@ To set up the Enrichment Table processor:
 
 1. Click {{< ui >}}Add enrichment{{< /ui >}}.
 1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][8] for more information.
-    - Only logs matching the filter are sent through the processor.
-    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+   - Only logs matching the filter are sent through the processor.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. In the {{< ui >}}Set lookup mapping{{< /ui >}} section, select the type of lookup dataset you want to use.
   {{< tabs >}}
   {{% tab "Reference Table" %}}

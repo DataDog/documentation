@@ -28,7 +28,7 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 
 To set up the processor:
 
-1. Define a filter query. See [Logs Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
     - Only logs matching the filter are scanned and processed.
     - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.

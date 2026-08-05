@@ -17,7 +17,7 @@ This processor adds a field with the name of the host that sent the log. For exa
 
 To set up this processor:
 - Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
-    - Only logs that match the specified filter query are processed.
-    - All logs, regardless of whether they do or do not match the filter query, are sent to the next step in the pipeline.
+  - Only logs that match the specified filter query are processed.
+  - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 
 [1]: /observability_pipelines/search_syntax/logs/
