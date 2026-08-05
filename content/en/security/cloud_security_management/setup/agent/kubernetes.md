@@ -205,7 +205,7 @@ When enabled, the Agent uses eBPF to observe file access on your workloads and a
 *Package is running* feeds the **Reachability** dimension of the [Runtime Prioritization Engine][9]. To query these signals directly, see [Filter findings by runtime signals][10].
 
 **Requirements**:
-- Datadog Agent **7.79.0 or later**
+- Datadog Agent **7.79.0 or later**. On Kubernetes, use **7.81.0 or later** for the most complete signal coverage.
 - Linux only (eBPF dependency)
 - Applies to operating system packages in container image vulnerability findings
 
