@@ -37,7 +37,7 @@ This section covers the five types of programmatic credentials in Datadog, best 
 | :---- | :---- | :---- | :---- |
 | **API Key** | Submitting data to Datadog (metrics, logs, traces, events). Used by Agents, integrations, and data submission pipelines. | Org-wide. Any data submitted with an API key is associated with the org. | Long-lived. No built-in expiration. |
 | **Personal Access Token (PAT)** | Short-lived token for individual user API access. Tied to the user's identity and permissions. | Scoped to the creating user's permissions. | Short-lived. Configurable expiration. |
-| **Service Account Token (SAT)** | Short-lived (optional) token for service-to-service API access. Tied to a service account's identity and permissions. | Scoped to the service account's permissions. | Short-lived (optional). Configurable expiration. |
+| **Service Access Token (SAT)** | Short-lived (optional) token for service-to-service API access. Tied to a service account's identity and permissions. | Scoped to the service account's permissions. | Short-lived (optional). Configurable expiration. |
 | **Application Key** | Accessing Datadog's API to read data, manage resources, and perform administrative actions. | Scoped to the permissions of the user or service account that created it. Can be further restricted with [scopes][1]. | Long-lived. No built-in expiration. |
 | **RUM Client Token** | Used to match data from the end user's browser to a specific RUM application. | Scoped to a specific RUM application. | Long-lived. No built-in expiration. |
 
