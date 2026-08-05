@@ -272,12 +272,14 @@ Workload Identity Federation for the Datadog Agent is available for customers on
 Workload Identity Federation for the Agent allows you to authenticate your Agent using AWS credentials instead of managing static API keys. The Agent exchanges an AWS authentication proof for a managed API key that Datadog automatically rotates.
 
 **Requirements**:
-- Version `7.78.0` or later of the Datadog Agent. The credential sources available to you depend on your Agent version and on which Agent component sends the data. See [Supported credential sources](#supported-credential-sources).
+- Version `7.78.0` or later of the Datadog Agent. The credential sources available to you depend on your Agent version and on which Agent component sends the data. See [Supported credential sources for the Agent](#supported-credential-sources-for-the-agent).
 - The Agent runs in an AWS environment with access to AWS credentials.
 - You have configured the [Datadog-AWS integration][4] and added your AWS account. See the [AWS Integration docs][3].
 - Your account has the `workload_identity_federation_config_read` and `workload_identity_federation_config_write` permissions.
 
-### Supported credential sources
+### Supported credential sources for the Agent
+
+<div class="alert alert-info">This section applies to the Datadog Agent only. The Datadog Terraform provider and the Datadog API clients resolve AWS credentials differently, and support a different set of sources.</div>
 
 The Agent looks for AWS credentials in the following sources, in this order. The first source that provides credentials is used.
 
@@ -288,7 +290,7 @@ The Agent looks for AWS credentials in the following sources, in this order. The
 | [EKS IAM roles for service accounts (IRSA)][8] | `AWS_ROLE_ARN` and `AWS_WEB_IDENTITY_TOKEN_FILE` | `7.82.0` |
 | [ECS task role][9] and [EKS Pod Identity][10] | `AWS_CONTAINER_CREDENTIALS_RELATIVE_URI` or `AWS_CONTAINER_CREDENTIALS_FULL_URI` | `7.82.0` |
 
-Shared AWS configuration files and named profiles (`AWS_PROFILE`, `~/.aws`) are not used.
+The Agent does not read shared AWS configuration files or named profiles (`AWS_PROFILE`, `~/.aws`). This differs from the Terraform provider, which does support AWS credential files.
 
 #### Agent component support
 
