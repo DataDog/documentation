@@ -181,6 +181,8 @@ agent diagnose show-metadata agent-telemetry
 | point.sent                                  | Total number of sent metrics                                                                                           |
 | transactions.input_count                    | Incoming transaction count                                                                                             |
 | transactions.input_bytes                    | Incoming transaction payload size in bytes                                                                             |
+| transactions.success                        | Successful transaction count                                                                                           |
+| transactions.success_bytes                  | Successful transaction payload size in bytes                                                                          |
 | transactions.requeued                       | Transaction requeue count                                                                                              |
 | transactions.retries                        | Transaction retry count                                                                                                |
 | **Database**                                |                                                                                                                        |

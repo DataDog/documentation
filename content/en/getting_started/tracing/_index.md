@@ -31,6 +31,8 @@ This guide demonstrates how to get started with APM and send your first trace to
 1. Run your application to generate data.
 1. Explore the collected data in Datadog.
 
+{{% dd-apm-skill %}}
+
 ## Prerequisites
 
 To complete this guide, you need the following:

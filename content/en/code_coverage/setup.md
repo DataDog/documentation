@@ -85,6 +85,10 @@ If you are using [custom roles][2] rather than [Datadog-managed roles][3], be su
 
 Navigate to [Roles settings][4], click {{< ui >}}Edit{{< /ui >}} on the role you need, add the {{< ui >}}Code Coverage Read{{< /ui >}} permission to the role, and save the changes.
 
+For more granular control, use [Data Access Control][19] to restrict code coverage data by repository rather than across your entire organization. This prevents sensitive information in coverage reports, such as source paths and test names, from crossing team boundaries.
+
+In Datadog, go to **Organization Settings > Data Access Control** and create a Restricted Dataset scoped to Software Delivery and the repository you want to restrict. Grant access to the roles or teams that should see it.
+
 ## PR Gates
 
 If you wish to gate on PR coverage, you can configure PR Gates rules in one of two ways:
@@ -525,7 +529,7 @@ If you use an external tool (such as [ReportGenerator][16]) to merge coverage re
 ensure your merged reports do not contain duplicate source code file entries.
 Datadog deduplicates overlapping files across reports, which can result in differences between your original coverage values and the merged values displayed in the Datadog UI.
 
-For a description of how reports are merged and how each line status is counted, see [Code Coverage Calculation][19].
+For a description of how reports are merged and how each line status is counted, see [Code Coverage Calculation][20].
 
 ## Further reading
 
@@ -549,4 +553,5 @@ For a description of how reports are merged and how each line status is counted,
 [16]: https://reportgenerator.io/
 [17]: /tests/setup/
 [18]: /code_coverage/setup/#integrate-with-source-code-provider
-[19]: /code_coverage/coverage_calculation
+[19]: https://app.datadoghq.com/organization-settings/data-access-controls
+[20]: /code_coverage/coverage_calculation
