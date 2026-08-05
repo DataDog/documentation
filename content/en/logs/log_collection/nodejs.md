@@ -26,9 +26,9 @@ further_reading:
 
 ## Configure your logger
 
-To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use the [Winston][1] logging library to log from your Node.js application.
+To send your logs to Datadog, log to a file and [tail][14] that file with your Datadog Agent. Use a logging library, such as [Winston][1], [Bunyan][15], or [Pino][16], to log from your Node.js application. The examples on this page use Winston.
 
-Winston is available through [NPM][2], to get started, you want to add the dependency to your code:
+Winston is available through [NPM][2]. To get started, add the dependency to your code:
 
 ```text
 npm install --save winston
@@ -110,7 +110,7 @@ Check the content of the `<FILE_NAME>.log` file to confirm that Winston is loggi
 
 ## Configure your Datadog Agent
 
-Once [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send new logs to Datadog.
+After [log collection is enabled][6], set up [custom log collection][7] to tail your log files and send new logs to Datadog.
 
 1. Create a `nodejs.d/` folder in the `conf.d/` [Agent configuration directory][8].
 2. Create a `conf.yaml` file in `nodejs.d/` with the following content:
@@ -137,14 +137,13 @@ If logs are in JSON format, Datadog automatically [parses the log messages][11] 
 
 ## Connect your service across logs and traces
 
-If APM is enabled for this application, connect your logs and traces by automatically adding trace IDs, span IDs,
-`env`, `service`, and `version` to your logs by [following the APM Node.js instructions][3].
+If APM is enabled for this application, connect your logs and traces by [following the APM Node.js instructions][3]. This automatically adds trace IDs, span IDs, `env`, `service`, and `version` to your logs.
 
 **Note**: If the Datadog SDK injects `service` into your logs, it overrides the value set in the Agent configuration.
 
 ## Agentless logging
 
-You can stream your logs from your application to Datadog without installing an Agent on your host. However, it is recommended that you use an Agent to forward your logs as it provides a native connection management.
+You can stream your logs from your application to Datadog without installing an Agent on your host. However, Datadog recommends you use an Agent to forward your logs as it provides a native connection management.
 
 Use the [Winston HTTP transport][4] to send your logs directly through the [Datadog Log API][5].
 In your bootstrap file or in your code, declare the logger in the following way:
@@ -208,3 +207,5 @@ Make sure that the parameter `max_connect_retries` is not set to `1` (the defaul
 [12]: /logs/explorer/#overview
 [13]: https://github.com/winstonjs/winston/blob/master/docs/transports.md#datadog-transport
 [14]: /glossary/#tail
+[15]: https://github.com/trentm/node-bunyan
+[16]: https://getpino.io/

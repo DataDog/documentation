@@ -13,10 +13,6 @@ further_reading:
     text: "Troubleshooting Test Parallelization"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/test-parallelization/" btn_hidden="false" header="Join the Preview!" >}}
-Test Parallelization is in Preview. Complete the form to request access.
-{{< /callout >}}
-
 ## Optimize the planning step
 
 Test Parallelization adds a planning step that discovers tests before execution. For example, RSpec projects use dry-run discovery, pytest projects use collection, and Jest projects use `--listTests`. Keep this step lightweight so the time saved by parallel execution is not offset by planning overhead.
@@ -108,6 +104,19 @@ fi
 {{< /code-block >}}
 
 `ddtest` invalidates the cache when any test file changes. The set of test files is determined by `--tests-location` and `--tests-exclude-pattern`.
+
+### Use suite-level skipping for Ruby
+
+If Ruby test discovery remains a bottleneck after applying these optimizations, configure Test Impact Analysis to use suite-level skipping. This mode lets `ddtest plan` use test file discovery instead of discovering every individual test. It trades test-level skipping precision for lower planning overhead because Test Impact Analysis skips or runs an entire suite.
+
+Suite-level skipping requires `datadog-ci >= 1.34.0`. Set `DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite` for both planning and test execution:
+
+{{< code-block lang="bash" >}}
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest plan
+DD_TESTOPTIMIZATION_TIA_TEST_SKIPPING_MODE=suite ddtest run
+{{< /code-block >}}
+
+If you execute tests with another command, set the same environment variable for that command. In CI workflows that plan and run tests in separate jobs, set the variable in both jobs.
 
 ## Configure pytest
 

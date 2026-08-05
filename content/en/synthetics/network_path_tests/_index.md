@@ -9,6 +9,12 @@ further_reading:
 - link: "/network_monitoring/network_path/"
   tag: "Documentation"
   text: "Learn more about Network Path"
+- link: "/api/latest/synthetics/#create-or-clone-a-test"
+  tag: "API"
+  text: "Synthetics API"
+- link: "https://www.datadoghq.com/blog/network-test-protocols/"
+  tag: "Blog"
+  text: "Test network paths with TCP, UDP, and ICMP in Datadog"
 - link: "https://www.datadoghq.com/blog/simplifying-troubleshooting-with-synthetic-monitoring"
   tag: "Blog"
   text: "Simplifying troubleshooting across the user journey with Datadog Synthetic Monitoring"
@@ -18,9 +24,6 @@ further_reading:
 - link: "https://www.datadoghq.com/blog/synthetic-monitoring-network-path/"
   tag: "Blog"
   text: "Understand user experience through network performance with Datadog Synthetic Monitoring"
-- link: "/api/latest/synthetics/#create-or-clone-a-test"
-  tag: "API"
-  text: "Synthetics API"
 ---
 
 ## Overview
@@ -42,7 +45,7 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
 
 ## Test configuration
 
-1. Choose your {{< ui >}}request type{{< /ui >}} (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional for UDP and ICMP tests.  
+1. Choose your {{< ui >}}request type{{< /ui >}} (TCP, UDP, or ICMP) and specify the host or URL to query. Port information is optional for UDP and ICMP tests.
 2. Name your test.  
 3. Optional: Configure advanced options:  
    1. {{< ui >}}Source service{{< /ui >}}: The label displayed for the source host in the Network Path visualization.  
@@ -51,11 +54,12 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    4. {{< ui >}}E2E Queries{{< /ui >}}: Number of packets sent to the destination to measure {{< tooltip text="packet loss" tooltip="The percentage of data packets that fail to reach their destination" >}}, latency, and {{< tooltip text="jitter" tooltip="The variation in latency between consecutive packets" >}}. Defaults to 50.
    5. {{< tooltip text="Traceroute" tooltip="The mechanism that Network Path uses to determine intermediate hops and latency" >}} {{< ui >}}Queries{{< /ui >}}: Number of traceroute path tracings to perform. Results are aggregated in each test run details panel. Defaults to 3.
    6. {{< ui >}}TCP traceroute strategy{{< /ui >}} (TCP tests only): Choose between {{< tooltip text="Selective Acknowledgement (SACK)" tooltip="A TCP option that allows receivers to acknowledge non-contiguous data blocks, improving retransmission efficiency" >}} and Synchronize (SYN) traceroute strategies. SACK and Force SACK more closely mimic modern application traffic.
-4. Optional: Add {{< ui >}}Tags{{< /ui >}} to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
+4. To preview the host response, select {{< ui >}}Test Host{{< /ui >}}.
+5. Optional: Add {{< ui >}}Tags{{< /ui >}} to your test, including environment tags. Use tags to filter your Synthetic tests on the [Synthetic Monitoring & Continuous Testing page][1].
 
-  {{< img src="synthetics/network_tests/new_network_path_test.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
+  {{< img src="synthetics/network_tests/new_network_path_test-1.png" alt="Network Path test creation form with Advanced options displayed." style="width:80%;">}}
 
-5. Define {{< ui >}}assertions{{< /ui >}} to determine the expected results for your test. At least one assertion is required.
+6. Define {{< ui >}}assertions{{< /ui >}} to determine the expected results for your test. At least one assertion is required.
 
    {{< img src="synthetics/network_tests/network_path_assertions.png" alt="Network Path test creation form with assertions drop down." style="width:80%;">}}
 
@@ -66,13 +70,13 @@ Running Network Path tests from managed locations lets you perform TCP, UDP, and
    | jitter |  | `is`, `<`, `<=`, `>`, `>=` | float |
    | network {{< tooltip text="hops" tooltip="The number of intermediate network devices (routers, switches) a packet passes through between source and destination" >}}  | avg, max, min | `is`, `<`, `<=`, `>`, `>=` | int |
 
-6. Select the {{< ui >}}locations{{< /ui >}} from which to run your test. You can run Network Path tests from managed locations to test public endpoints, or from a [Datadog Agent](#agent-configuration) to test private environments.
+7. Select the {{< ui >}}locations{{< /ui >}} from which to run your test. You can run Network Path tests from managed locations to test public endpoints, or from a [Datadog Agent](#agent-configuration) to test private environments.
 
    {{% managed-locations-network-path %}}
 
-7. Set the {{< ui >}}test frequency{{< /ui >}} to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
+8. Set the {{< ui >}}test frequency{{< /ui >}} to determine how often Datadog runs your Network Path test. Scheduled tests ensure your most important endpoints remain accessible to your users.
 
-8. [Define alert conditions][4] and [configure the test monitor][5] for your Network Path test.
+9. [Define alert conditions][4] and [configure the test monitor][5] for your Network Path test.
 
 {{% synthetics-alerting-monitoring-network-path %}}
 
@@ -124,8 +128,10 @@ Click on a Network Path test on the [Synthetic Tests page][1] to view the Test D
 
 - Test properties and configuration
 - Test activity
-- Individual test runs
 - Aggregated Network Path visualizations across all test runs
+- Individual test runs
+
+Select {{< ui >}}Run Test Now{{< /ui >}} to manually run the test at any time.
 
 The Network Path visualization shows the routes packets take to complete queries during each test run. Drag the [health bar][3] handles to adjust the time frame and view a snapshot of end-to-end latency and packet loss for a specific time interval. For more information about how Network Path visualizations are built, see the [Network Path documentation][2].
 

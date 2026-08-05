@@ -22,6 +22,7 @@ If you don't see the BYOC Logs entry in the Logs menu, it means BYOC Logs is not
    {{< nextlink href="/byoc-logs/configure/indexes/" >}}Configure indexes{{< /nextlink >}}
    {{< nextlink href="/byoc-logs/configure/ingress/" >}}Configure Ingress{{< /nextlink >}}
    {{< nextlink href="/byoc-logs/configure/lambda/" >}}Lambda Search Offloading{{< /nextlink >}}
+   {{< nextlink href="/byoc-logs/configure/metastore_read_replicas/" >}}Metastore Read Replicas{{< /nextlink >}}
 {{< /whatsnext >}}
 
 ## Further reading

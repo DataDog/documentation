@@ -9,11 +9,16 @@ further_reading:
   - link: /tracing/metrics/runtime_metrics/
     tag: Documentation
     text: Enable Runtime Metrics
+  - link: "https://www.datadoghq.com/blog/single-step-instrumentation-rules/"
+    tag: "Blog"
+    text: "Manage service tracing across hosts with Single Step Instrumentation rules"
 ---
 
 ## Overview
 
 On a Linux host or VM, use Single Step Instrumentation (SSI) for APM to install the Datadog Agent and [instrument][14] your applications in one step, with no additional configuration required. 
+
+{{% dd-apm-skill %}}
 
 ## Enable APM on your applications
 

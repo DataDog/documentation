@@ -23,7 +23,7 @@ further_reading:
 
 Lineage shows how data flows through your stack—from source systems and warehouse tables, through transformations and jobs, to the dashboards and applications that consume it. Use it to trace quality issues to their root cause, assess the blast radius of a failing job or a planned schema change, and route incidents to the right owner.
 
-Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Fivetran, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
+Datadog builds lineage automatically from metadata collected through your [Quality Monitoring][1] and [Jobs Monitoring][2] integrations (Snowflake, BigQuery, Databricks, dbt, Airflow, Azure Data Factory, Fivetran, Hightouch, Looker, Tableau, and others). Anything in the Data Observability Catalog can appear in the graph.
 
 {{< img src="data_observability/lineage/lineage-overview.png" alt="The Lineage page showing upstream and downstream dependencies for an anchored Snowflake table" style="width:100%;" >}}
 
@@ -81,7 +81,7 @@ The {{< ui >}}Lineage Controls{{< /ui >}} panel on the left configures the shape
 
 ### Map, List, and Find
 
-Toggle between {{< ui >}}Map{{< /ui >}} (the default graph view) and {{< ui >}}List{{< /ui >}} (a flat, sortable list of every asset in the current slice). Use {{< ui >}}List{{< /ui >}} to export, copy, or scan a large lineage; use {{< ui >}}Map{{< /ui >}} to understand structure visually.
+Toggle between {{< ui >}}Map{{< /ui >}} (the default graph view) and {{< ui >}}List{{< /ui >}} (a flat, sortable list of every asset in the current slice). Use {{< ui >}}List{{< /ui >}} to scan a large lineage; use {{< ui >}}Map{{< /ui >}} to understand structure visually.
 
 The magnifying-glass icon next to the toggle fits the graph to the viewport.
 
@@ -132,7 +132,7 @@ Before changing or dropping a column, table, or model, use lineage to see what d
 1. Anchor on the asset you plan to change.
 2. Set downstream depth to `∞` and upstream depth to `0`.
 3. Filter to the asset types you care about—for example, leave dashboards and reports visible to identify affected BI consumers.
-4. Switch to {{< ui >}}List{{< /ui >}} view to export the full list of affected assets or share it with the owning teams.
+4. Switch to {{< ui >}}List{{< /ui >}} view to see the full list of affected assets.
 
 {{< img src="data_observability/lineage/impact-analysis-list-view.png" alt="The List view showing every downstream asset that depends on a given Snowflake table, with type and source columns" style="width:100%;" >}}
 
