@@ -252,8 +252,9 @@ may cause the collection query to take longer to run, which can lead to query ti
 
 ### Databases are missing or merged in the list
 
-Datadog tags database metrics with the `db` tag to identify which database each metric belongs to. If you apply a custom `db` tag, it overrides this per-database value, and all metrics will share a single `db` value. As a result, your databases collapse into one entry and individual databases may not appear in the Database list in Database Monitoring.
-To resolve this, remove any custom `db` tags so that Datadog can populate it per database.
+Datadog tags database metrics with the `db` tag to identify which database each metric belongs to. Applying a custom `db` tag overrides this per-database value, so all metrics share a single `db` value. Your databases then collapse into one entry, and individual databases may not appear in the Databases list in Database Monitoring.
+
+To restore per-database `db` values, remove any custom `db` tags so that Datadog can populate the tag per database.
 
 
 [1]: /database_monitoring/setup_postgres/
