@@ -64,6 +64,7 @@ Bits AI can run investigations on the following Security log sources:
 - AWS CloudTrail
 - Azure
 - Cloudflare
+- CrowdStrike
 - GCP
 - Kubernetes
 - Microsoft Entra ID
@@ -72,6 +73,8 @@ Bits AI can run investigations on the following Security log sources:
 - Microsoft 365
 - GitLab
 - GitHub
+- JumpCloud
+- Salesforce
 - Slack
 - Snowflake
 - SentinelOne
@@ -100,7 +103,7 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
    - Click {{< ui >}}Query Filter{{< /ui >}} to write a signal query filter, so Bits Security Analyst only investigates signals that match your filter.
 1. Some log sources require credentials to run or enhance investigations by accessing logs, telemetry, or other data that isn't in Datadog. To add credentials, click {{< ui >}}Edit credentials{{< /ui >}}. In the {{< ui >}}Select or Add Connection{{< /ui >}} window that opens, follow the prompts to select an [existing connection][4] from Actions Catalog, or add a connection. Datadog securely stores and restricts all credentials using Actions Catalog.
    
-   Some log sources require additional setup so you can create HTTP connections. Here's an example:
+   Some log sources require additional setup so you can create HTTP connections. Here are some examples:
    {{< collapse-content title="Configure SentinelOne" level="h4" expanded=false id="sentinelone" >}}
    <ol>
      <li>In SentinelOne, ensure you have permission to create an API token. Create an S1 API service user, then assign the {{< ui >}}Viewer{{< /ui >}} role to that user.</li>
@@ -131,6 +134,76 @@ Rule eligibility depends on whether Datadog has built the investigation capabili
                </table>
              </li>
            </ol>
+       </ul>
+     </li>
+     <li>Click {{< ui >}}Next, Confirm Access{{< /ui >}} to verify your connection.</li>
+   </ol>
+   {{< /collapse-content >}}
+
+   {{< collapse-content title="Configure CrowdStrike" level="h4" expanded=false id="crowdstrike" >}}
+   <ol>
+     <li>In CrowdStrike, go to <strong>Support and resources</strong>, then click <strong>API clients and keys</strong>.</li>
+     <li>Click <strong>Create API client</strong>.</li>
+     <li>Select scopes for the API client:
+       <ul>
+         <li>Set all scopes to <strong>Read Only</strong>, except <strong>NGSIEM</strong>.</li>
+         <li>Set the <strong>NGSIEM</strong> scope to <strong>Read and Write</strong>. Querying NGSIEM requires POST requests, which CrowdStrike classifies as a write action.</li>
+       </ul>
+     </li>
+     <li>After you create the API client, securely save the <strong>Client ID</strong>, <strong>Secret</strong>, and <strong>Base URL</strong>. The secret displays only once, and the base URL must match your CrowdStrike region.</li>
+     <li>In Datadog, in the {{< ui >}}Select or Add Connection{{< /ui >}} window, in the dropdown, select {{< ui >}}New Connection{{< /ui >}}, then click the {{< ui >}}HTTP{{< /ui >}} tile.</li>
+     <li>Add the following information:
+       <ul>
+         <li>In the {{< ui >}}Base URL{{< /ui >}} field, enter your CrowdStrike management URL.</li>
+         <li>For {{< ui >}}Authentication Type{{< /ui >}}, select {{< ui >}}2 Step Auth{{< /ui >}}.</li>
+       </ul>
+     </li>
+     <li>Under {{< ui >}}Query your access token{{< /ui >}}:
+       <ul>
+         <li>For {{< ui >}}Secret Type{{< /ui >}}, select {{< ui >}}Token Auth{{< /ui >}}, then add two tokens:
+           <table>
+             <thead>
+               <tr>
+                 <th>Token name</th>
+                 <th>Token value</th>
+               </tr>
+             </thead>
+             <tr>
+               <td><code>secret</code></td>
+               <td>Your CrowdStrike secret</td>
+             </tr>
+             <tr>
+               <td><code>clientid</code></td>
+               <td>Your CrowdStrike client ID</td>
+             </tr>
+           </table>
+         </li>
+         <li>In the {{< ui >}}Request URL{{< /ui >}} field, enter <code>{your_base_url}/oauth2/token</code> (for example, <code>https://api.crowdstrike.com/oauth2/token</code>).</li>
+         <li>In the {{< ui >}}Body{{< /ui >}} field, add your <code>client_id</code> and <code>client_secret</code>. The content type must be <code>application/x-www-form-urlencoded</code>.</li>
+       </ul>
+     </li>
+     <li>Under {{< ui >}}Get Access Token from Response{{< /ui >}}:
+       <ul>
+         <li>Set {{< ui >}}Variable Path to Access Token{{< /ui >}} to <code>body.access_token</code>.</li>
+         <li>Set {{< ui >}}Refresh Interval{{< /ui >}} to <code>1700</code>.</li>
+         <li>Under {{< ui >}}Request Headers{{< /ui >}}, add the following two headers:
+           <table>
+             <thead>
+               <tr>
+                 <th>Name</th>
+                 <th>Value</th>
+               </tr>
+             </thead>
+             <tr>
+               <td><code>Authorization</code></td>
+               <td><code>Bearer</code> followed by a space, then <code>{{accessToken}}</code></td>
+             </tr>
+             <tr>
+               <td><code>Accept</code></td>
+               <td><code>application/json</code></td>
+             </tr>
+           </table>
+         </li>
        </ul>
      </li>
      <li>Click {{< ui >}}Next, Confirm Access{{< /ui >}} to verify your connection.</li>

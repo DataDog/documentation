@@ -43,7 +43,6 @@ Set up your application to capture handled errors using one of the following off
   {{< image-card href="/error_tracking/backend/capturing_handled_errors/python" src="integrations_logos/python.png" alt="Python" >}}
   {{< image-card href="/error_tracking/backend/capturing_handled_errors/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
 {{< /card-grid >}}
-<br />
 
 ## Further reading
 

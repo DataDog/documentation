@@ -109,6 +109,7 @@
 /*/tracing/trace_collection/custom_instrumentation/server-side/_index.md
 /*/dd_e2e/cdocs/components/card_grid.md
 /*/real_user_monitoring/application_monitoring/browser/setup/_index.md
+/en/serverless/azure_container_apps/_index.md
 /*/real_user_monitoring/application_monitoring/cpp/advanced_configuration.md
 /*/real_user_monitoring/application_monitoring/cpp/data_collected.md
 /*/real_user_monitoring/application_monitoring/cpp/setup.md
@@ -117,3 +118,5 @@
 /*/session_replay/privacy_options.md
 /*/session_replay/setup_and_configuration.md
 /*/session_replay/troubleshooting.md
+/*/dd_e2e/cdocs/components/stepper_customizable.md
+/*/serverless/azure_container_apps/_index.md

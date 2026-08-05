@@ -141,8 +141,6 @@ You can start collecting feature flag data with [custom feature flag management 
   {{< image-card href="/real_user_monitoring/feature_flag_tracking/setup/?tab=npm#statsig-integration" src="integrations_logos/statsig_large.svg" alt="statsig" >}}
 {{< /card-grid >}}
 
-</br>
-
 ### Amplitude integration
 
 Before you initialize this feature flag integration, make sure you've [set up RUM monitoring](#set-up-rum-monitoring).

@@ -41,7 +41,6 @@ Select your CI provider to set up CI Visibility in Datadog:
   {{< image-card href="/continuous_integration/pipelines/teamcity/" src="integrations_logos/teamcity_small.svg" alt="teamcity" >}}
   {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
 {{< /card-grid >}}
-<br />
 
 {{< whatsnext desc="For customization options, see the following sections:" >}}
     {{< nextlink href="continuous_integration/pipelines/custom_commands" >}}Custom Commands{{< /nextlink >}}

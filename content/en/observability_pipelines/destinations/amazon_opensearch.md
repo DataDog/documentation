@@ -35,6 +35,7 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 			- In the {{< ui >}}Type{{< /ui >}} field, enter the category of data being ingested, for example `logs`.
 			- In the {{< ui >}}Dataset{{< /ui >}} field, specify the format or data source that describes the structure, for example `apache`.
 			- In the {{< ui >}}Namespace{{< /ui >}} field, enter the grouping for organizing your data streams, for example `production`.
+			- You can use [template syntax][3] for the {{< ui >}}Type{{< /ui >}}, {{< ui >}}Dataset{{< /ui >}}, and {{< ui >}}Namespace{{< /ui >}} fields to dynamically construct the data stream name based on specific fields in your logs.
 			- In the UI, there is a preview of the data stream name you configured. With the above example inputs, the data stream name that the Worker writes to is `logs-apache-production`.
 1. Optionally, enter the name of the Amazon OpenSearch index. See [template syntax][3] if you want to route logs to different indexes based on specific fields in your logs.
 1. Select an authentication strategy, {{< ui >}}Basic{{< /ui >}} or {{< ui >}}AWS{{< /ui >}}. If you selected:
@@ -84,7 +85,7 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

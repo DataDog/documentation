@@ -637,11 +637,13 @@ To create dashboard widgets from feedback, create the widget as you would for an
 | ml_app [*required*]                                                | string              | The name of your LLM application. See [Application naming guidelines](#application-naming-guidelines). |
 | metric_type [*required*]                                           | string              | The value type: `"categorical"`, `"score"`, `"boolean"`, `"json"`, or `"text"`. The `"text"` type is supported only for feedback events. |
 | label [*required*]                                                 | string              | The unique name or label for the provided evaluation or feedback.                                      |
-| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category value.                                                              |
-| score_value [*required if the metric_type is "score"*]             | number              | A score value.                                                                                         |
-| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value.                                                                                       |
-| json_value [*required if the metric_type is "json"*]               | Dict[key (string), value] | A JSON object value.                                                                              |
+| categorical_value [*required if the metric_type is "categorical"*] | string              | A string representing the category value. Not required when `status` is `"WARN"` or `"ERROR"`. |
+| score_value [*required if the metric_type is "score"*]             | number              | A score value. Not required when `status` is `"WARN"` or `"ERROR"`. |
+| boolean_value [*required if the metric_type is "boolean"*]         | boolean             | A boolean value. Not required when `status` is `"WARN"` or `"ERROR"`. |
+| json_value [*required if the metric_type is "json"*]               | Dict[key (string), value] | A JSON object value. Not required when `status` is `"WARN"` or `"ERROR"`. |
 | text_value [*required if the metric_type is "text"*]               | string              | A text value. This is supported only for feedback events and is useful for free-text feedback.          |
+| status                                                             | string              | The evaluator run outcome. Accepted values are `"OK"`, `"WARN"`, and `"ERROR"`. When `"WARN"` or `"ERROR"`, the evaluator was skipped or failed, and no typed value field (`categorical_value`, `score_value`, and so on) is required. |
+| error                                                              | [EvalMetricError](#evalmetricerror) | Structured error details. Required when `status` is `"WARN"` or `"ERROR"`. |
 | assessment                                                         | string              | An assessment of this evaluation. Accepted values are `pass` and `fail`.                               |
 | reasoning                                                          | string              | A text explanation of the evaluation result.                                                           |
 | tags                                                               | [[Tag](#tag)]       | A list of tags to apply to this particular evaluation metric.                                          |
@@ -683,6 +685,14 @@ For feedback events, provide exactly one of `span_id`, `trace_id`, `session_id`,
 |------------|-----------------|--------------|
 | type [*required*]      | string | Identifier for the request. Set to `evaluation_metric`. |
 | attributes [*required*] | [[Attributes](#attributes)] | The body of the request. |
+
+#### EvalMetricError
+
+| Field   | Type   | Description                                                |
+|---------|--------|------------------------------------------------------------|
+| type    | string | The error or exception type (for example, `"ValueError"`). |
+| message | string | A human-readable description of the error.                 |
+| stack   | string | The stack trace, if available.                             |
 
 ## Further Reading
 

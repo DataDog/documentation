@@ -58,7 +58,7 @@ If your usage exceeds your monthly Commit, additional credits are billed automat
 
 ## Admin controls
 
-All AI Credit management lives in [**Plan & Usage > AI Credits**][6]. From there, admins can:
+Usage tracking and product access are managed in [**Plan & Usage > AI Credits**][6]. From there, admins can:
 
 - **View usage**: See the current month's credit consumption, broken down by AI product.
 - **Enable or disable AI products powered by AI Credits**: A single org-level toggle controls all AI products powered by AI Credits. When disabled, users can still see product surfaces and view past results, but new requests are blocked.

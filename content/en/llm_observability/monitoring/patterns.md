@@ -51,7 +51,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
 1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
-   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, and Azure OpenAI
+   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI.
    - **Account**
    - **Model**
 1. Click **Confirm** to save your changes and close the window.
@@ -150,5 +150,5 @@ Re-run your Pattern periodically and use the {{< ui >}}Compare to{{< /ui >}} dro
 
 [1]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/connect_to_account/
 [2]: /llm_observability/experiments/datasets/
-[3]: /llm_observability/annotation_queues/
+[3]: /llm_observability/evaluations/annotation_queues/
 [4]: https://app.datadoghq.com/llm/patterns
