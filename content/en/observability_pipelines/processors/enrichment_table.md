@@ -186,7 +186,7 @@ For this example, enter `Splunk HEC token (secret)` as the column name when you 
 
 You can filter and route logs based on `token_value: hec_token_one`.
 
-## Metrics
+## Health metrics
 
 ### Processor metrics
 
