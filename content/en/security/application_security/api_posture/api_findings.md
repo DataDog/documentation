@@ -13,11 +13,11 @@ The [API Findings][1] explorer provides a central triage view of the API risks d
 
 **API Findings** columns:
 
-- **Severity:** Each issue is ranked by risk.
-- **Endpoints:** Shows how many endpoints are affected and their services.
-- **Status and Ticketing:** `Open` or `In Progress` tracks remediation progress and workflow integration.
+- {{< ui >}}Severity{{< /ui >}}: Each issue is ranked by risk.
+- {{< ui >}}Endpoints{{< /ui >}}: Shows how many endpoints are affected and their services.
+- {{< ui >}}Status and Ticketing{{< /ui >}}: `Open` or `In Progress` tracks remediation progress and workflow integration.
 
-Use the **Service** facet to see each service's endpoints to identify ownership and prioritize by business impact.
+Use the {{< ui >}}Service{{< /ui >}} facet to see each service's endpoints to identify ownership and prioritize by business impact.
 
 ## Common operations
 
@@ -40,12 +40,12 @@ Click a finding to view its details and perform a workflow such as Validate > In
 
 Datadog API Posture uses [Bits Code][3] to generate code fixes for vulnerabilities.
 
-1. In Datadog, navigate to [**Security** > **App & API Protection** > **Findings**][1].
+1. In Datadog, navigate to [{{< ui >}}Security{{< /ui >}} > {{< ui >}}App & API Protection{{< /ui >}} > {{< ui >}}Findings{{< /ui >}}][1].
 2. Select a finding to open a side panel with details about the finding and the affected endpoint.
-3. In the **Next Steps** > **Remediation** section, click **Fix with Bits**.
+3. In the {{< ui >}}Next Steps{{< /ui >}} > {{< ui >}}Remediation{{< /ui >}} section, click {{< ui >}}Fix with Bits{{< /ui >}}.
 
 This opens a Bits Code session to fix this single API finding. You can review the proposed diff, ask follow-up questions, edit the patch, and create a pull request to apply the remediation to your source code repository.
-View all Bits Code sessions on **Bits AI** > **Bits Code** > [**Sessions**][4].
+View all Bits Code sessions on {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][4].
 
 ### Remediation session details
 
@@ -54,11 +54,11 @@ Each Bits Code session shows the life cycle of an AI-generated fix so you can re
 - The original security finding and proposed code change
 - An explanation of how and why Bits Code generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
-- Options to refine the fix or **Create PR** to apply the changes to your source code repository
+- Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
 
-To open the remediation session, select the API finding from the [**Findings**][1] page to open the side panel, scroll to the **Remediation** section, and select **Expand & Chat**.
+To open the remediation session, select the API finding from the [{{< ui >}}Findings{{< /ui >}}][1] page to open the side panel, scroll to the {{< ui >}}Remediation{{< /ui >}} section, and select {{< ui >}}Expand & Chat{{< /ui >}}.
 
-You can also view all remediation sessions on [**Sessions**][4].
+You can also view all remediation sessions on [{{< ui >}}Sessions{{< /ui >}}][4].
 
 [1]: https://app.datadoghq.com/security/appsec/inventory/finding
 [2]: /security/application_security/policies/custom_rules/

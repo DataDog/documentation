@@ -51,11 +51,11 @@ See the section below to see how to configure your rules.
 
 ## Configuration
 
-To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [Detection Rules][2] and select a rule. Scroll to the bottom of the rule and click the {{< ui >}}Clone Rule{{< /ui >}} button. This now enables you to edit the existing rule.
+To customize an OOTB detection rule, you must first clone an existing rule. Navigate to your [{{< ui >}}Detection Rules{{< /ui >}}][2] and select a rule. Scroll to the bottom of the rule and click the {{< ui >}}Clone Rule{{< /ui >}} button. This now enables you to edit the existing rule.
 
 ### Define an AAP query
 
-Construct an AAP query using the [same query syntax as in the AAP Trace Explorer][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
+Construct an AAP query using the [same query syntax as in the AAP {{< ui >}}Trace Explorer{{< /ui >}}][3]. For example, create a query to monitor login successes from outside of the United States: `@appsec.security_activity:business_logic.users.login.success -@actor.ip_details.country.iso_code:US`.
 
 Optionally, define a unique count and signal grouping. Count the number of unique values observed for an attribute in a given timeframe. The defined group-by generates a signal for each group-by value. Typically, the group-by is an entity (like user, IP, or service). The group-by is also used to [join the queries together](#joining-queries).
 

@@ -28,7 +28,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 ## Overview
 
-The **Datadog AppSec Gateway API Request Mirror** enhances application security by leveraging the **RequestMirror** functionality in Kubernetes Gateway APIs to duplicate traffic to a Datadog App &API Protection endpoint. This enables real-time detection and analysis of potential application-level attacks, API endpoint discovery, and more, all without impacting the primary request flow.
+The **Datadog AppSec Gateway API Request Mirror** enhances application security by leveraging the **RequestMirror** functionality in Kubernetes Gateway APIs to duplicate traffic to a Datadog App and API Protection endpoint. This enables real-time detection and analysis of potential application-level attacks, API endpoint discovery, and more, all without impacting the primary request flow.
 
 ## Prerequisites
 
@@ -162,7 +162,7 @@ The Gateway API integration uses the [Datadog Go Tracer][6] and inherits all env
 
 ## Enabling APM tracing
 
-By default, the request mirror traces won't enable Datadog's APM product. If you want to use Application & API Protection without APM tracing functionality, this is the default behavior. 
+By default, the request mirror traces won't enable Datadog's APM product. If you want to use Application and API Protection without APM tracing functionality, this is the default behavior. 
 
 To enable APM tracing, set the environment variable `DD_APM_TRACING_ENABLED=true` in the request mirror deployment.
 

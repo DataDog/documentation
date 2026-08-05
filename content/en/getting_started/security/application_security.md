@@ -19,7 +19,7 @@ further_reading:
   text: "Security research, reports, tips, and videos from Datadog"
 - link: "https://learn.datadoghq.com/courses/app-protection-block-attacks"
   tag: "Learning Center"
-  text: "Block Application Attacks with Application & API Protection"
+  text: "Block Application Attacks with App and API Protection"
 site_support_id: application_security_override
 
 ---

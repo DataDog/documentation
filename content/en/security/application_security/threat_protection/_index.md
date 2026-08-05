@@ -21,7 +21,7 @@ To get started, [set up AAP][2] on your services so they report security traces.
 
 Threat Protection brings together several capabilities, all built on live application traffic data. With Threat Protection, you can:
 
-- Detect and investigate threats with [Security Signals][3]. Datadog creates a security signal when it detects a threat from a detection rule, so you can triage, filter, and investigate attacks in the Signals Explorer.
+- Detect and investigate threats with [Security Signals][3]. Datadog creates a security signal when it detects a threat from a detection rule, so you can triage, filter, and investigate attacks in the {{< ui >}}Signals Explorer{{< /ui >}}.
 - Block attacks and attackers with [Policies][4]. Block malicious IP addresses and users in real time from the Datadog UI, manually or through automated rules.
 - Stop exploit attempts in code with [Exploit Prevention][5]. Detect and block attempts to exploit vulnerabilities, including zero-day attacks, from within the running application.
 - Extend protection to the perimeter with [WAF Integrations][6]. Combine in-app protection with edge defenses such as AWS WAF for a defense-in-depth approach.

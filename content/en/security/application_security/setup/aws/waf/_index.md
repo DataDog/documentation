@@ -49,7 +49,7 @@ First, **enable** the conversion of logs to traces on the [Settings page][4].
 
 Then, ensure the web ACLs table contains request metrics as well as logs and traces.
 
-Security traces are reported in the [AAP Traces Explorer][5] with service name `aws.waf`.
+Security traces are reported in the [AAP {{< ui >}}Traces Explorer{{< /ui >}}][5] with service name `aws.waf`.
 
 ## Block with AWS WAF IPsets
 
@@ -123,7 +123,7 @@ Ensure the AWS role attached to the [Connection][3] has the following permission
 {{% /tab %}}
 {{< /tabs >}}
 
-After setup is complete, click **Block New Attackers** on the App & API Protection [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
+After setup is complete, click {{< ui >}}Block New Attackers{{< /ui >}} on the {{< ui >}}App & API Protection{{< /ui >}} [denylist page][6]. Select the web ACL and associated AWS connection to block IP addresses.
 
 [1]: /integrations/amazon-web-services/
 [2]: /integrations/amazon_waf/

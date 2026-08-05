@@ -27,15 +27,15 @@ AAP traces are rate-limited to 100 traces per second. Traces sent after the limi
 
 ## No security traces detected by AAP
 
-There are a series of steps that must run successfully for threat information to appear in the AAP [Trace and Signals Explorer][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
+There are a series of steps that must run successfully for threat information to appear in the AAP [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][2]. It is important to check each step when investigating this issue. Additional troubleshooting steps for specific languages are in the language tab at the end.
 
 ### Confirm AAP is enabled
 
 You can use the metric `datadog.apm.appsec_host` to check if AAP is running.
 
-1. Go to **Metrics > Summary** in Datadog.
+1. Go to {{< ui >}}Metrics{{< /ui >}} > {{< ui >}}Summary{{< /ui >}} in Datadog.
 2. Search for the metric `datadog.apm.appsec_host`. If the metric doesn't exist, then there are no services running AAP. If the metric exists, the services are reported with the metric tags `host` and `service`.
-3. Select the metric, and in the **Tags** section, search for `service` to see which services are running AAP.
+3. Select the metric, and in the {{< ui >}}Tags{{< /ui >}} section, search for `service` to see which services are running AAP.
 
 If you are not seeing `datadog.apm.appsec_host`, check the [in-app instructions][3] to confirm that all steps for the initial setup are complete.
 
@@ -146,7 +146,7 @@ done
 {{< /programming-lang >}}
 {{< /programming-lang-wrapper >}}
 
-A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [Trace and Signals Explorer][2].
+A few minutes after you enable your application and exercise it, and if it's successful, threat information appears in the [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][2].
 
 {{< img src="/security/security_monitoring/explorer/signal_panel_v2.png" alt="Security Signal details page showing tags, metrics, suggested next steps, and attacker IP addresses associated with a threat." style="width:100%;" >}}
 
@@ -379,7 +379,7 @@ Enable debug logs with the environment variable `DD_TRACE_DEBUG=1`. The AAP libr
 
 Use this [migration guide][1] to assess any breaking changes if you upgraded your Node.js library from 1.x to 2.x.
 
-If you don't see AAP threat information in the [Trace and Signals Explorer][2] for your Node.js application, follow these steps to troubleshoot the issue:
+If you don't see AAP threat information in the [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][2] for your Node.js application, follow these steps to troubleshoot the issue:
 
 1. Confirm the latest version of AAP is running by checking that `appsec_enabled` is `true` in the [startup logs][3].
    1. If you don't see startup logs after a request has been sent, add the environment variable `DD_TRACE_STARTUP_LOGS=true` to enable startup logs. Check the startup logs for `appsec_enabled` is `true`.
@@ -405,7 +405,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][2] f
 {{< /programming-lang >}}
 {{< programming-lang lang="python" >}}
 
-If you don't see AAP threat information in the [Trace and Signals Explorer][1] for your Python application, check that AAP is running and that your tracer is working.
+If you don't see AAP threat information in the [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][1] for your Python application, check that AAP is running and that your tracer is working.
 
 1. Set your application's log level to `DEBUG` to confirm that AAP is running:
 
@@ -432,7 +432,7 @@ If you don't see AAP threat information in the [Trace and Signals Explorer][1] f
 {{< /programming-lang >}}
 {{< programming-lang lang="ruby" >}}
 
-For Ruby, if you don't see AAP threat information in the [Trace and Signals Explorer][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
+For Ruby, if you don't see AAP threat information in the [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][1] after a few minutes, enable tracer diagnostics for [debug logs][2]. For example:
 
 ```ruby
 Datadog.configure do |c|
@@ -525,7 +525,7 @@ Metrics: [
    _sampling_priority_v1 => 2.0]]
 ```
 
-Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as security traces in the AAP [Trace and Signals Explorer][1].
+Wait a minute for the agent to forward the traces, then check that the traces show up in the APM dashboard. The security information in the traces may take additional time to be processed by Datadog before showing up as security traces in the AAP [{{< ui >}}Trace and Signals Explorer{{< /ui >}}][1].
 
 [1]: https://app.datadoghq.com/security/appsec/
 [2]: /tracing/troubleshooting/#tracer-debug-logs
@@ -545,7 +545,7 @@ Ensure the `DD_INSTRUMENTATION_TELEMETRY_ENABLED` environment variable (`DD_TRAC
 To disable AAP, use one of the following methods.
 
 If you enabled AAP using the `DD_APPSEC_ENABLED=true` environment variable, use the DD_APPSEC_ENABLED section below.
-If you enabled AAP using [Remote Configuration][16], use the Remote Configuration method below.
+If you enabled AAP using [{{< ui >}}Remote Configuration{{< /ui >}}][16], use the Remote Configuration method below.
 
 ### DD_APPSEC_ENABLED
 
@@ -555,22 +555,22 @@ If your service is a PHP service, explicitly set the environment variable to `DD
 
 ### Remote Configuration
 
-If AAP was activated using [Remote Configuration][16], do the following: 
-  1. Go to [Services][15].
-  2. Select **App & API Protection in Monitoring Mode**.
-  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+If AAP was activated using [{{< ui >}}Remote Configuration{{< /ui >}}][16], do the following: 
+  1. Go to [{{< ui >}}Services{{< /ui >}}][15].
+  2. Select {{< ui >}}App & API Protection in Monitoring Mode{{< /ui >}}.
+  3. In the {{< ui >}}App & API Protection{{< /ui >}} facet, enable {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}}, and {{< ui >}}Ready to block{{< /ui >}}.
   4. Click on a service.
-  5. In the service details, in **App & API Protection**, click **Deactivate**.
+  5. In the service details, in {{< ui >}}App & API Protection{{< /ui >}}, click {{< ui >}}Deactivate{{< /ui >}}.
 
-<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">Remote Configuration</a>, you can use a <strong>Deactivate</strong> button. If AAP was activated using local configuration, the <strong>Deactivate</strong> button is not an option.</div>
+<div class="alert alert-info">If AAP was activated using <a href="https://app.datadoghq.com/organization-settings/remote-config">{{< ui >}}Remote Configuration{{< /ui >}}</a>, you can use a {{< ui >}}Deactivate{{< /ui >}} button. If AAP was activated using local configuration, the {{< ui >}}Deactivate{{< /ui >}} button is not an option.</div>
 
 ### Bulk disable
 
 To disable AAP on your services in bulk, do the following: 
-  1. Go to [Services][15].
-  3. In the **App & API Protection** facet, enable **Monitoring Only**, **No data**, and **Ready to block**.
+  1. Go to [{{< ui >}}Services{{< /ui >}}][15].
+  3. In the {{< ui >}}App & API Protection{{< /ui >}} facet, enable {{< ui >}}Monitoring Only{{< /ui >}}, {{< ui >}}No data{{< /ui >}}, and {{< ui >}}Ready to block{{< /ui >}}.
   3. Select the check boxes for the services where you want to disable threat detection.
-  4. In **Bulk Actions**, select **Deactivate Threat detection on (number of) services**.
+  4. In {{< ui >}}Bulk Actions{{< /ui >}}, select {{< ui >}}Deactivate Threat detection on (number of) services{{< /ui >}}.
 
   
 ## Need more help?

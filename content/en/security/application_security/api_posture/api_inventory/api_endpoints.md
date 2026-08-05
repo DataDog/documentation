@@ -11,15 +11,15 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 The [API Endpoints][1] explorer monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
-- **Authentication**: Whether the API enforces authentication.
-- **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
-- **Public Exposure**: Whether the API is processing traffic from the internet.
-- **Sensitive data flows**: Sensitive data handled by the API, and the flows between APIs.
-- **Attack Exposure**: If the endpoint is targeted by attacks.
-- **Business Logic**: Business logic and associated business logic suggestions for this API.
-- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
-- **Findings**: Security findings identified on this API.
-- **Dependencies**: APIs and Databases the API depends on.
+- {{< ui >}}Authentication{{< /ui >}}: Whether the API enforces authentication.
+- {{< ui >}}Authentication Method{{< /ui >}}: Type of authentication used, such as Basic Auth and API key.
+- {{< ui >}}Public Exposure{{< /ui >}}: Whether the API is processing traffic from the internet.
+- {{< ui >}}Sensitive data flows{{< /ui >}}: Sensitive data handled by the API, and the flows between APIs.
+- {{< ui >}}Attack Exposure{{< /ui >}}: If the endpoint is targeted by attacks.
+- {{< ui >}}Business Logic{{< /ui >}}: Business logic and associated business logic suggestions for this API.
+- {{< ui >}}Vulnerabilities{{< /ui >}}: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
+- {{< ui >}}Findings{{< /ui >}}: Security findings identified on this API.
+- {{< ui >}}Dependencies{{< /ui >}}: APIs and Databases the API depends on.
 
 Using API Endpoints you can:
 
@@ -141,13 +141,13 @@ API Posture builds an OpenAPI schema for each endpoint from the traffic it obser
 
 ### View an endpoint's schema
 
-In [API Endpoints][1], click an endpoint to open its detail panel. The **Definition** section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
+In [API Endpoints][1], click an endpoint to open its detail panel. The {{< ui >}}Definition{{< /ui >}} section displays the endpoint's request parameters, request body, and responses. Fields that contain sensitive data are marked with the type of sensitive data observed.
 
 {{< img src="/security/application_security/api/api_endpoint_definition_schema_cropped.png" alt="The Definition section of an endpoint's detail panel, showing its request parameters and the View Raw Schema and View Inferred Schemas buttons" style="width:100%;" >}}
 
-When the endpoint is associated with an API in Datadog Software Catalog, the **Definition** section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
+When the endpoint is associated with an API in Datadog Software Catalog, the {{< ui >}}Definition{{< /ui >}} section displays the declared OpenAPI specification. Otherwise, it displays the schema inferred from live traffic.
 
-In the **Definition** section, you can:
+In the {{< ui >}}Definition{{< /ui >}} section, you can:
 
 - {{< ui >}}View Raw Schema{{< /ui >}}: View the displayed schema as raw YAML.
 - {{< ui >}}View Inferred Schemas{{< /ui >}}: View the schema inferred from live traffic as a preview or YAML, even when a declared schema is available. The inferred schema can be exported as an OpenAPI file in YAML or JSON.

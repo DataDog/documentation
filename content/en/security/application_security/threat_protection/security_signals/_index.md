@@ -23,13 +23,13 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 ## Overview
 
-AAP security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [Signals Explorer][2], or configure [Notification Rules][8] to send signals to third-party tools.
+AAP security signals are created when Datadog detects a threat based on a detection rule. View, search, filter, and investigate security signals in the [{{< ui >}}Signals Explorer{{< /ui >}}][2], or configure [Notification Rules][8] to send signals to third-party tools.
 
 <!-- {{< img src="security/application_security/threats/security_signals/appsec-threat-signals.png" alt="Overview of investigating threats in signals explorer with details side panel">}} -->
 
 ## Signals Explorer columns
 
-The Signals Explorer displays the following columns.
+The {{< ui >}}Signals Explorer{{< /ui >}} displays the following columns.
 
 {{< ui >}}Severity{{< /ui >}}
 : There are five severity states: {{< ui >}}Info{{< /ui >}}, {{< ui >}}Low{{< /ui >}}, {{< ui >}}Medium{{< /ui >}}, {{< ui >}}High{{< /ui >}}, and {{< ui >}}Critical{{< /ui >}}. {{< ui >}}High{{< /ui >}} and {{< ui >}}Critical{{< /ui >}} indicate a major impact to service availability or active compromise.
@@ -51,13 +51,13 @@ The Signals Explorer displays the following columns.
 
 ## Filter security signals
 
-To filter the security signals in the [Signals Explorer][2], use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the {{< ui >}}Signal State{{< /ui >}} facet on the facet panel.
+To filter the security signals in the [{{< ui >}}Signals Explorer{{< /ui >}}][2], use the search query `@workflow.triage.state:<status>`, where `<status>` is the state you want to filter on (`open`, `under_review`, or `archived`). You can also use the {{< ui >}}Signal State{{< /ui >}} facet on the facet panel.
 
 ## Triage a signal
 
 You can triage a signal by assigning it to a user for further investigation. The assigned user can then track their review by updating the signal's status.
 
-1. On the [Signals Explorer][2] page, click the user profile icon in the {{< ui >}}Triage State{{< /ui >}} column.
+1. On the [{{< ui >}}Signals Explorer{{< /ui >}}][2] page, click the user profile icon in the {{< ui >}}Triage State{{< /ui >}} column.
 2. Select a user to assign the signal.
 3. To update the status of the security signal, click the triage status dropdown menu and select a status. The default status is {{< ui >}}Open{{< /ui >}}.
     - {{< ui >}}Open{{< /ui >}}: The signal has not yet been resolved.
@@ -77,7 +77,7 @@ Declare an incident if:
 
 If you don't know whether you should declare an incident, notify other users and increase severity appropriately.
 
-1. On the [Signals Explorer][2] page, select a security signal to open its details panel.
+1. On the [{{< ui >}}Signals Explorer{{< /ui >}}][2] page, select a security signal to open its details panel.
 2. On the signal panel, click {{< ui >}}Declare Incident{{< /ui >}} or select the dropdown arrow and select {{< ui >}}Add to an existing incident{{< /ui >}}.
 3. When you declare a new incident, in the {{< ui >}}Declare Incident{{< /ui >}} settings, configure the incident by specifying details such as the severity level and incident commander.
    1. Estimate impact. Severity levels go from SEV-1 (critical) to SEV-5 (minor impact). When in doubt, always choose the higher severity.
@@ -88,7 +88,7 @@ If you don't know whether you should declare an incident, notify other users and
 Use [Workflow Automation][5] to manually trigger a workflow for a security signal.
 
 1. Make sure the workflow you want to run has a security trigger.
-2. On the [Signals Explorer][2] page, open a security signal.
+2. On the [{{< ui >}}Signals Explorer{{< /ui >}}][2] page, open a security signal.
 3. In the {{< ui >}}Respond{{< /ui >}} section, click {{< ui >}}Run Workflow{{< /ui >}}.
 4. In {{< ui >}}Run a workflow{{< /ui >}}, select the workflow you want to run or click {{< ui >}}New Workflow{{< /ui >}}.
    - Depending on the workflow you select, you might be required to enter additional input parameters.
@@ -97,7 +97,7 @@ Use [Workflow Automation][5] to manually trigger a workflow for a security signa
 
 ## Review and remediate
 
-1. On the [Signals Explorer][2] page, open a security signal.
+1. On the [{{< ui >}}Signals Explorer{{< /ui >}}][2] page, open a security signal.
 2. In the signal details, view each of the sections, such as {{< ui >}}What Happened{{< /ui >}}, {{< ui >}}Activity Summary{{< /ui >}}, and {{< ui >}}Detection Rule{{< /ui >}}.
 3. Review the {{< ui >}}Next Steps{{< /ui >}} and take action:
     -  Click {{< ui >}}Block all Attacking IPs{{< /ui >}} (by specific duration or permanently).
@@ -122,7 +122,7 @@ Select {{< ui >}}Remove all assignments{{< /ui >}} to reset the signal assignmen
 
 Datadog [Case Management][6] offers a centralized place to triage, track, and remediate issues detected by Datadog and third-party integrations.
 
-1. On the [Signals Explorer][2] page, select a security signal.
+1. On the [{{< ui >}}Signals Explorer{{< /ui >}}][2] page, select a security signal.
 2. In {{< ui >}}Bulk Actions{{< /ui >}}, select {{< ui >}}Create a case{{< /ui >}}.
 3. Select {{< ui >}}Create a case{{< /ui >}} or {{< ui >}}Add to an existing case{{< /ui >}} to add the signal to an existing case.
 4. Enter a title and optional description.
@@ -132,7 +132,7 @@ When you click {{< ui >}}Create Case{{< /ui >}}, you are directed to Case Manage
 
 ## Saved views
 
-You can save different configurations of the Signals Explorer as views. For example, you could filter the explorer to show all unassigned signals and then save that as a view.
+You can save different configurations of the {{< ui >}}Signals Explorer{{< /ui >}} as views. For example, you could filter the explorer to show all unassigned signals and then save that as a view.
 
 When a configuration is saved as a view, you and your teammates can use it later.
 

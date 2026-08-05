@@ -19,7 +19,7 @@ Datadog App and API Protection (AAP) provides observability into application and
 
 - Detects and monitors application and API-level attacks
 - Flags traces containing attack attempts using APM data
-- Highlights exposed services in security views (Catalog, Service Page, Traces)
+- Highlights exposed services in security views ({{< ui >}}Catalog{{< /ui >}}, {{< ui >}}Service Page{{< /ui >}}, {{< ui >}}Traces{{< /ui >}})
 - Identifies bad actors by collecting client IPs and user info
 - Provides automatic threat pattern updates and security signals
 - Supports built-in protection and attack qualification
@@ -30,7 +30,7 @@ Datadog App and API Protection (AAP) provides observability into application and
 
 Datadog App and API Protection Threat Management uses the information APM is already collecting to flag traces containing attack attempts. While APM collects a sample of your application traffic, enabling App and API Protection in the SDK is necessary to effectively monitor and protect your services.
 
-Services exposed to application attacks are highlighted directly in the security views embedded in APM ([Catalog][2], [Service Page][3], [Traces][4]).
+Services exposed to application attacks are highlighted directly in the security views embedded in APM ([{{< ui >}}Catalog{{< /ui >}}][2], [{{< ui >}}Service Page{{< /ui >}}][3], [{{< ui >}}Traces{{< /ui >}}][4]).
 
 Datadog Threat Monitoring and Detection identifies bad actors by collecting client IP addresses, login account info (for example, user account/ID), and manually-added user tags on all requests.
 
@@ -117,7 +117,7 @@ Datadog App and API Protection includes over 100 attack signatures that help pro
 
 <div class="alert alert-info">API security is in Preview.</div>
 
-Datadog App and API Protection provides visibility into threats targeting your APIs. Use the [Endpoints list][27] in Catalog to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both App and API Protection and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
+Datadog App and API Protection provides visibility into threats targeting your APIs. Use the [{{< ui >}}Endpoints{{< /ui >}} list][27] in {{< ui >}}Catalog{{< /ui >}} to monitor API health and performance metrics, where you can view attacks targeting your APIs. This view includes the attacker's IP and authentication information, as well as request headers showing details about how the attack was formed. Using both App and API Protection and API management, you can maintain a comprehensive view of your API attack surface, and respond to mitigate threats.
 
 ## How Datadog App and API Protection protects against Log4Shell
 

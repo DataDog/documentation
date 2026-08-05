@@ -24,7 +24,7 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 {{< /site-region >}}
 
 {{< callout url="https://www.datadoghq.com/product-preview/haproxy-integration/">}}
-App and API Protection for HAProxy is in Preview. To sign up, click <strong>Request Access</strong> and complete the form.
+App and API Protection for HAProxy is in Preview. To sign up, click {{< ui >}}Request Access{{< /ui >}} and complete the form.
 {{< /callout >}}
 
 You can enable App and API Protection for your HAProxy instances. The Datadog HAProxy integration leverages HAProxy's Stream Processing Offload Engine (SPOE) to inspect and protect traffic for threat detection at the edge of your infrastructure.

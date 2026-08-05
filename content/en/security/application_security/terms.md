@@ -36,7 +36,7 @@ detection rule
 
 passlist (formerly exclusion filter)
 : A mechanism for discarding security traces flagged through the Datadog App and API Protection library and the In-App WAF rules. Passlist is applied as requests are ingested into Datadog (intake). Passlist helps manage false positives and intake costs.
-: See [Exclusion filters][11] in the app.
+: See [{{< ui >}}Exclusion filters{{< /ui >}}][11] in the app.
 
 In-App WAF rules (formerly event rules)
 : A set of rules executed in the Datadog libraries to catch security activity. These include Web Application Firewall (WAF) patterns that monitor for attempts to exploit known vulnerabilities.
@@ -51,7 +51,7 @@ service
 
 signal
 : A detection of an application attack that impacts your services. Signals identify meaningful threats for you to review, and should be triaged with a high priority.
-: See [Signals Explorer][13] in the app.
+: See [{{< ui >}}Signals Explorer{{< /ui >}}][13] in the app.
 
 severity
 : An indicator of how quickly an attack attempt should be triaged and addressed. Based on a combination of factors, including the attack's potential impact and risk. Values are Critical, High, Medium, Low, Info.

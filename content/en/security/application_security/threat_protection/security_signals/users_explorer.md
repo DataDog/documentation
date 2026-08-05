@@ -11,40 +11,40 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 </div>
 {{< /site-region >}}
 
-This topic describes how to use the App and API Protection [Users explorer][1] to investigate the risks associated with the users tracked by security [traces][3].
+This topic describes how to use the App and API Protection [{{< ui >}}Users explorer{{< /ui >}}][1] to investigate the risks associated with the users tracked by security [{{< ui >}}traces{{< /ui >}}][3].
 
 ## Overview
 
-Datadog populates the Users explorer by associating users with security traces from events like login attempts. This makes the Users explorer an inventory of tracked users. Users are identified by user ID (`@usr.id`) and, when available, user name and email address. See [Adding authenticated user information to traces and enabling user blocking capability][8].
+Datadog populates the {{< ui >}}Users explorer{{< /ui >}} by associating users with security traces from events like login attempts. This makes the {{< ui >}}Users explorer{{< /ui >}} an inventory of tracked users. Users are identified by user ID (`@usr.id`) and, when available, user name and email address. See [Adding authenticated user information to traces and enabling user blocking capability][8].
 
-Typically, users in the Users explorer are not a risk. However, the explorer helps you identify user accounts that are at risk or are actively being attacked (for example, through attempts to compromise an account).
+Typically, users in the {{< ui >}}Users explorer{{< /ui >}} are not a risk. However, the explorer helps you identify user accounts that are at risk or are actively being attacked (for example, through attempts to compromise an account).
 
-With the Users explorer, you can investigate and take action on the user accounts flagged as risks using **risk categories**.
+With the {{< ui >}}Users explorer{{< /ui >}}, you can investigate and take action on the user accounts flagged as risks using **risk categories**.
 
 ### Risk categories
 
-The Users explorer assigns one or more of the following risk categories to a user identified as a risk:
+The {{< ui >}}Users explorer{{< /ui >}} assigns one or more of the following risk categories to a user identified as a risk:
 
-- **New Geolocation:** User activity from an unfamiliar location might indicate unauthorized access or legitimate travel requiring verification.
-- **Impossible Travel:** Occurs when a user logs in from two distant locations in an unrealistically short time, indicating possible credential compromise. A caveat with this category is it can falsely identify users on the same VPN as impossible travel.
-- **Compromised User:** A user's credentials are stolen or hacked, allowing attackers to perform malicious activities with their identity.
-- **Disposable Email:** A disposable email is an email address that is temporary.
+- {{< ui >}}New Geolocation{{< /ui >}}: User activity from an unfamiliar location might indicate unauthorized access or legitimate travel requiring verification.
+- {{< ui >}}Impossible Travel{{< /ui >}}: Occurs when a user logs in from two distant locations in an unrealistically short time, indicating possible credential compromise. A caveat with this category is it can falsely identify users on the same VPN as impossible travel.
+- {{< ui >}}Compromised User{{< /ui >}}: A user's credentials are stolen or hacked, allowing attackers to perform malicious activities with their identity.
+- {{< ui >}}Disposable Email{{< /ui >}}: A disposable email is an email address that is temporary.
 
-<div class="alert alert-info">When a user ID, email, or name is associated with a trace, but does not match a risk category, it still appears in the Users explorer.</div>
+<div class="alert alert-info">When a user ID, email, or name is associated with a trace, but does not match a risk category, it still appears in the {{< ui >}}Users explorer{{< /ui >}}.</div>
 
 ### How the Users explorer differs from other explorers
 
 To understand the difference between the different explorers, review these security approaches they support:
 
 - **Protect:** Automatically block attackers (IPs and authenticated users) using App and API Protection [Policies][2]. Customers should block attack tools as their first automated blocking action. Blocking attack tools reduces common vulnerability discovery for OWASP threats such as SQLi, command injection, and SSRF.
-- **React:** Blocking attackers in response to observed threats using the [Signals][9], [Traces][3], Users, [Attackers][4] explorers.
+- **React:** Blocking attackers in response to observed threats using the [{{< ui >}}Signals{{< /ui >}}][9], [{{< ui >}}Traces{{< /ui >}}][3], {{< ui >}}Users{{< /ui >}}, [{{< ui >}}Attackers{{< /ui >}}][4] explorers.
 
 Each explorer focuses on a specific use case:
 
-- **Signals explorer**: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to Traces Explorer.
-- **Traces explorer**: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
-- **Attackers explorer**: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
-- **Users explorer**: Lists authenticated users associated with one or more traces. Interactions include: 
+- {{< ui >}}Signals explorer{{< /ui >}}: Provides a list of actionable alerts such as `Credential Stuffing Attack` or `Command Injection`. Signals have workflow capabilities, a description, severity, and correlated Traces. Interactions include user assignment workflows, automated protection, analytics, search, and pivoting to {{< ui >}}Traces Explorer{{< /ui >}}.
+- {{< ui >}}Traces explorer{{< /ui >}}: Lists evidence for business logic events, such as logins, or attack payloads. Interactions include analytics and search.
+- {{< ui >}}Attackers explorer{{< /ui >}}: Identifies attackers as `suspicious` (IP addresses that have attacked in the last 24 hours up to a threshold) and `flagged` (IP addresses that have exceeded that threshold).
+- {{< ui >}}Users explorer{{< /ui >}}: Lists authenticated users associated with one or more traces. Interactions include: 
   - Bulk actions for user analytics and blocking
   - Drill-down into the history of any user
   - Search
@@ -52,31 +52,31 @@ Each explorer focuses on a specific use case:
 
 ## Explore and filter users
 
-To start reviewing users, go to the [Users explorer][1].
+To start reviewing users, go to the [{{< ui >}}Users explorer{{< /ui >}}][1].
 
-The main sections in the Users explorer are:
+The main sections in the {{< ui >}}Users explorer{{< /ui >}} are:
 
 - Facets and search. These enable you to filter users by multiple user attributes.
 - The list of users with security metrics. 
   - Click a user to examine their risks, IPs, locations, endpoints, and signals. 
   - You can block an individual user from the list or its details drawer.
-  - To block multiple users, select one or more users and click **Compare and Block**.
+  - To block multiple users, select one or more users and click {{< ui >}}Compare and Block{{< /ui >}}.
 
 ## Block a user
 
 To block an individual user, do the following: 
 
-1. Click **Block** in the user's row, and choose a blocking duration.
-2. In **Select Security Responses**, select **Block with Datadog's Library**.
+1. Click {{< ui >}}Block{{< /ui >}} in the user's row, and choose a blocking duration.
+2. In {{< ui >}}Select Security Responses{{< /ui >}}, select {{< ui >}}Block with Datadog's Library{{< /ui >}}.
    
-   Permanently or temporarily blocked authenticated users are added to the [Denylist][6]. Manage the list on the Datadog [Denylist][7] page.
+   Permanently or temporarily blocked authenticated users are added to the [Denylist][6]. Manage the list on the Datadog [{{< ui >}}Denylist{{< /ui >}}][7] page.
 
 
 ## Compare and block multiple users
 
-When you select two or more users, you can use the **Compare and Block** button to compare datapoints across potentially compromised users.
+When you select two or more users, you can use the {{< ui >}}Compare and Block{{< /ui >}} button to compare datapoints across potentially compromised users.
 
-When you click **Compare and Block**, several metrics are displayed in **Block selected users**. These metrics help you detect whether you are dealing with **a single attacker**, **a larger coordinated campaign**, or **widespread credential exposure**.
+When you click {{< ui >}}Compare and Block{{< /ui >}}, several metrics are displayed in {{< ui >}}Block selected users{{< /ui >}}. These metrics help you detect whether you are dealing with **a single attacker**, **a larger coordinated campaign**, or **widespread credential exposure**.
 
 Here's a breakdown of the benefits of comparing each datapoint across two (or more) compromised users.
 
