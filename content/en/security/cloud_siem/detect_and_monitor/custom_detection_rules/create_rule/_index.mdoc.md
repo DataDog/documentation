@@ -36,42 +36,53 @@ aliases:
 
 ## Overview
 
-### How rule creation works
-The languages you can use to write a query in a new rule vary, depending on the detection method and the rule type. Click a detection method or rule type to apply it as a filter to this page, then choose a query language above from the available options.
+### Understand rule creation options
+
+Before creating a rule, you have to choose three options:
+- **Detection method**: The event to monitor for (for example, select Threshold to create a signal when the number of detections exceeds a certain value).
+- **Rule type**: When you want to analyze incoming or indexed events.
+- **Query language**: The language used to write your query.
+
+The options you choose impact the steps required to create the rule. Use the filters at the top of this page to specify your rule creation options, so the relevant instructions populate on the rest of the page.
 
 {% table %}
 * **Detection method**
 * **Rule Types** {% colspan=3 %}
 ---
 * 
-* **[Real-time rule](?cloud_siem_detection_rule_type=real_time_rule)**
-* **[Scheduled rule](?cloud_siem_detection_rule_type=scheduled_rule)**
-* **[Historical job](?cloud_siem_detection_rule_type=historical_job)**
+* **Real-time rule**
+* **Scheduled rule**
+* **Historical job**
 ---
-* **[Threshold](?cloud_siem_detection_rule_detection_method=threshold)**
+* **Threshold**
 * Event query
 * Event query, SQL {% colspan=2 %}
 ---
-* **[New Value](?cloud_siem_detection_rule_detection_method=new_value)**
+* **New Value**
 * Event query {% rowspan=5 %} {% colspan=3 %}
 ---
-* **[Anomaly](?cloud_siem_detection_rule_detection_method=anomaly)**
+* **Anomaly**
 ---
-* **[Content anomaly](?cloud_siem_detection_rule_detection_method=content_anomaly)**
+* **Content anomaly**
 ---
-* **[Impossible travel](?cloud_siem_detection_rule_detection_method=impossible_travel)**
+* **Impossible travel**
 ---
-* **[Third party](?cloud_siem_detection_rule_detection_method=third_party)**
+* **Third party**
 ---
-* **[Sequence](?cloud_siem_detection_rule_detection_method=sequence)**
+* **Sequence**
 * Event/rule query
 * *Not supported*
 * Event/rule query
 ---
-* **[Signal correlation](?cloud_siem_detection_rule_detection_method=signal_correlation)**
+* **Signal correlation**
 * Rule query {% colspan=2 %}
 * *Not supported*
 {% /table %}
+
+If you're getting started, you can click these links to automatically apply common filter combinations to this page:
+- [Threshold/Real-time rule/Event query](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=real_time_rule&cloud_siem_detection_threshold_rule_query_language=event_query)
+- [Threshold/Scheduled rule/SQL](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=scheduled_rule&cloud_siem_detection_threshold_sql_rule_query_language=sql)
+- [Threshold/Historical job/SQL](?cloud_siem_detection_rule_detection_method=threshold&cloud_siem_detection_rule_type=historical_job&cloud_siem_detection_threshold_sql_rule_query_language=sql)
 
 {% if equals($cloud_siem_detection_rule_type, "real_time_rule") %}
 ### Real-time rules
