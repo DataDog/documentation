@@ -35,7 +35,6 @@ You can perform CRUD (Create, Read, Update, Delete) operations with the Observab
 
 The example payloads also include sample `id` values (such as `my-processor-group` and `datadog-agent-source`) for sources, processors, and destinations. These are names you choose and can rename to fit your own conventions. The `type` values (such as `datadog_agent`, `filter`, and `datadog_logs`) are fixed and must match a supported component type.
 
-The example payloads also include sample `id` values (such as `my-processor-group` and `datadog-agent-source`) for sources, processors, and destinations. These are names you choose and can rename to fit your own conventions. The `type` values (such as `datadog_agent`, `filter`, and `datadog_logs`) are fixed and must match a supported component type.
 
 ### Create a pipeline
 
