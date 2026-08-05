@@ -3609,66 +3609,71 @@ menu:
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_managed_instances
       weight: 102
+    - name: Durable Functions
+      url: serverless/aws_lambda/durable_functions
+      parent: serverless_aws_lambda
+      identifier: serverless_aws_lambda_durable_functions
+      weight: 103
     - name: Lambda Metrics
       url: serverless/aws_lambda/metrics
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_metrics
-      weight: 103
+      weight: 104
     - name: Distributed Tracing
       url: serverless/aws_lambda/distributed_tracing
       identifier: serverless_distributed_tracing
       parent: serverless_aws_lambda
-      weight: 104
+      weight: 105
     - name: Log Collection
       url: serverless/aws_lambda/logs
       identifier: serverless_aws_lambda_logs
       parent: serverless_aws_lambda
-      weight: 105
+      weight: 106
     - name: Remote Instrumentation
       url: serverless/aws_lambda/remote_instrumentation
       identifier: serverless_aws_lambda_remote_instrumentation
       parent: serverless_aws_lambda
-      weight: 106
+      weight: 107
     - name: Advanced Configuration
       url: serverless/aws_lambda/configuration
       parent: serverless_aws_lambda
       identifier: serverless_configuration
-      weight: 107
+      weight: 108
     - name: Continuous Profiler
       url: serverless/aws_lambda/profiling
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_continuous_profiler
-      weight: 108
+      weight: 109
     - name: Securing Functions
       url: /serverless/aws_lambda/securing_functions
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_securing_functions
-      weight: 109
+      weight: 110
     - name: Deployment Tracking
       url: serverless/aws_lambda/deployment_tracking
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_deployment_tracking
-      weight: 110
+      weight: 111
     - name: OpenTelemetry
       url: serverless/aws_lambda/opentelemetry
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_opentelemetry
-      weight: 111
+      weight: 112
     - name: Troubleshooting
       url: serverless/aws_lambda/troubleshooting
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_troubleshooting
-      weight: 112
+      weight: 113
     - name: Lambda Web Adapter
       url: serverless/aws_lambda/lwa
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_lwa
-      weight: 113
+      weight: 114
     - name: FIPS Compliance
       url: serverless/aws_lambda/fips-compliance
       parent: serverless_aws_lambda
       identifier: serverless_aws_lambda_fips_compliance
-      weight: 114
+      weight: 115
     - name: AWS Step Functions
       url: serverless/step_functions
       parent: serverless_aws
@@ -3739,16 +3744,6 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
-    - name: In-Container
-      url: serverless/azure_container_apps/in_container
-      parent: serverless_container_apps
-      weight: 501
-      identifier: serverless_container_apps_in_container
-    - name: Sidecar
-      url: serverless/azure_container_apps/sidecar
-      parent: serverless_container_apps
-      weight: 502
-      identifier: serverless_container_apps_sidecar
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure

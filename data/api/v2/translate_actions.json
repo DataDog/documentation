@@ -1555,11 +1555,11 @@
     "request_schema_description": "Request to update a secure embed shared dashboard."
   },
   "ListDashboardsUsage": {
-    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set. Use `filter[edited_before]` or `filter[viewed_before]` to narrow results by recency. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
+    "description": "Get paginated usage statistics for every dashboard in the caller's organization. Use `page[limit]` and `page[offset]` to walk the result set. Use `filter[edited_before]` or `filter[viewed_before]` to narrow results by edit or view date. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM. **View counts are refreshed once per day** and **only reflect views recorded starting January 2025**; views prior to that date are not included.",
     "summary": "Get usage stats for all dashboards"
   },
   "GetDashboardUsage": {
-    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM.",
+    "description": "Get usage statistics for a single dashboard. The response includes view counts, the most recent view and edit times, widget counts, and the dashboard quality score. View-count fields depend on Real User Monitoring (RUM) and are `null` or `0` in orgs without RUM. **View counts are refreshed once per day** and **only reflect views recorded starting January 2025**; views prior to that date are not included.",
     "summary": "Get usage stats for a dashboard"
   },
   "GetDataObservabilityMonitorRunStatus": {
@@ -6508,6 +6508,30 @@
     "request_description": "",
     "request_schema_description": "Request object for updating a component."
   },
+  "ListDegradationTemplates": {
+    "description": "Lists all degradation templates for a status page.",
+    "summary": "List degradation templates"
+  },
+  "CreateDegradationTemplate": {
+    "description": "Creates a new degradation template.",
+    "summary": "Create degradation template",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a degradation template."
+  },
+  "DeleteDegradationTemplate": {
+    "description": "Deletes a degradation template by its ID (soft delete).",
+    "summary": "Delete degradation template"
+  },
+  "GetDegradationTemplate": {
+    "description": "Retrieves a specific degradation template by its ID.",
+    "summary": "Get degradation template"
+  },
+  "UpdateDegradationTemplate": {
+    "description": "Updates an existing degradation template's attributes.",
+    "summary": "Update degradation template",
+    "request_description": "",
+    "request_schema_description": "Request object for updating a degradation template."
+  },
   "CreateDegradation": {
     "description": "Creates a new degradation.",
     "summary": "Create degradation",
@@ -6543,6 +6567,30 @@
     "summary": "Edit degradation update",
     "request_description": "",
     "request_schema_description": "Request object for editing a degradation update."
+  },
+  "ListMaintenanceTemplates": {
+    "description": "Lists all maintenance templates for a status page.",
+    "summary": "List maintenance templates"
+  },
+  "CreateMaintenanceTemplate": {
+    "description": "Creates a new maintenance template.",
+    "summary": "Create maintenance template",
+    "request_description": "",
+    "request_schema_description": "Request object for creating a maintenance template."
+  },
+  "DeleteMaintenanceTemplate": {
+    "description": "Deletes a maintenance template by its ID (soft delete).",
+    "summary": "Delete maintenance template"
+  },
+  "GetMaintenanceTemplate": {
+    "description": "Retrieves a specific maintenance template by its ID.",
+    "summary": "Get maintenance template"
+  },
+  "UpdateMaintenanceTemplate": {
+    "description": "Updates an existing maintenance template's attributes.",
+    "summary": "Update maintenance template",
+    "request_description": "",
+    "request_schema_description": "Request object for updating a maintenance template."
   },
   "CreateMaintenance": {
     "description": "Schedules a new maintenance.",

@@ -73,94 +73,94 @@ chmod +x bin/ddtest
 {{% /tab %}}
 {{< /tabs >}}
 
-## Run on a single CI node
+These examples download the latest Linux AMD64 binary. For another operating system or architecture, select the corresponding asset from [GitHub Releases][3].
 
-If you run your tests on a single CI node, run `ddtest run`:
+## Adopt ddtest in CI
 
-{{< tabs >}}
-{{% tab "Ruby" %}}
+Adopt Test Parallelization in four steps. First, add planning without changing how tests run. After validating the plan, replace the existing test command with `ddtest`, choose an execution mode, and measure the resulting CI savings.
 
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform ruby --framework rspec
-{{< /code-block >}}
+Make these changes on a feature branch. Commit and push each CI configuration change, then review the resulting CI run before continuing.
 
-{{% /tab %}}
-{{% tab "Python" %}}
+### 1. Add test planning
 
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform python --framework pytest
-{{< /code-block >}}
+After setting up dependencies and Test Optimization, add `ddtest plan` before your existing test step. Keep the existing test command in place during this step.
 
-{{% /tab %}}
-{{% tab "JavaScript" %}}
-
-{{< code-block lang="bash" >}}
-bin/ddtest run --platform javascript --framework jest
-{{< /code-block >}}
-
-{{% /tab %}}
-{{< /tabs >}}
-
-By default, `ddtest` can start one worker for each physical CPU core available on the node.
-
-## Run across multiple CI nodes
-
-For multiple CI nodes, run `ddtest plan` once, share the `.testoptimization/` directory with every CI node, and pass each node its zero-indexed CI node number:
-
-{{< tabs >}}
-{{% tab "Ruby" %}}
+Choose the minimum and maximum parallelism for your CI environment. For example, the following values allow `ddtest` to choose between 1 and 8 CI nodes or local workers:
 
 {{< code-block lang="bash" >}}
 bin/ddtest plan \
-  --platform ruby \
-  --framework rspec \
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK> \
   --min-parallelism 1 \
   --max-parallelism 8
-
-bin/ddtest run \
-  --platform ruby \
-  --framework rspec \
-  --ci-node <CI_NODE_INDEX>
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "Python" %}}
+`--platform` identifies the language platform, and `--framework` identifies the test framework. Supported combinations include `ruby` with `rspec` or `minitest`, `python` with `pytest`, and `javascript` with `jest`. For all supported values and defaults, see [Configuration][4].
+
+Planning discovers tests, retrieves test duration and Test Impact Analysis data, and chooses a parallelism level. It does not execute tests. The generated `.testoptimization/` directory contains the test files and splits selected for execution.
+
+### 2. Inspect the plan
+
+The following commands are one way to inspect the proposed runner count and test files in the CI logs:
 
 {{< code-block lang="bash" >}}
-bin/ddtest plan \
-  --platform python \
-  --framework pytest \
-  --min-parallelism 1 \
-  --max-parallelism 8
+# Show the number of runners selected by ddtest.
+cat .testoptimization/runner/parallel-runners.txt
 
-bin/ddtest run \
-  --platform python \
-  --framework pytest \
-  --ci-node <CI_NODE_INDEX>
+# Count the test files selected for execution.
+wc -l .testoptimization/runner/test-files.txt
+
+# Preview the first 20 test files to verify test discovery.
+sed -n '1,20p' .testoptimization/runner/test-files.txt
+
+# Optional: List the per-runner split files to see how ddtest distributed the tests.
+find .testoptimization/runner/tests-split -maxdepth 1 -type f -print
 {{< /code-block >}}
 
-{{% /tab %}}
-{{% tab "JavaScript" %}}
+Alternatively, download the `.testoptimization/` directory as a CI artifact and open the files in your editor.
+
+Confirm that `test-files.txt` contains a list of files to run. If Test Impact Analysis is enabled, files whose tests are all skipped are absent from the plan.
+
+### 3. Replace the existing test command
+
+After the plan contains the expected tests, replace the existing test command with:
 
 {{< code-block lang="bash" >}}
-bin/ddtest plan \
-  --platform javascript \
-  --framework jest \
-  --min-parallelism 1 \
-  --max-parallelism 8
-
 bin/ddtest run \
-  --platform javascript \
-  --framework jest \
-  --ci-node <CI_NODE_INDEX>
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK>
 {{< /code-block >}}
 
-{{% /tab %}}
-{{< /tabs >}}
+`ddtest run` reuses the plan generated earlier in the workflow. Choose how to run the selected splits based on your CI architecture.
+
+#### Run workers on one CI node
+
+On a single CI node, `ddtest plan` is optional. Run `ddtest run` directly, or run `ddtest plan` and `ddtest run` back-to-back in the same job if you want to inspect the plan first. The selected parallelism is the number of local worker processes that `ddtest` starts. The command does not require additional options.
+
+#### Distribute tests across CI nodes
+
+Run `ddtest plan` once in a planning job. Share the complete `.testoptimization/` directory with the test jobs, and use the selected parallelism to define the size of your CI matrix. On each node, run:
+
+{{< code-block lang="bash" >}}
+bin/ddtest run \
+  --platform <PLATFORM> \
+  --framework <FRAMEWORK> \
+  --ci-node <CI_NODE_INDEX>
+{{< /code-block >}}
 
 In CI-node mode, `ddtest` uses one local worker by default. To start multiple workers in each CI node, set `--ci-node-workers` to a positive integer or `ncpu`.
 
-For a list of available environment variables, defaults, and examples, see [Configuration][4].
+The CI examples on this page show how to pass the generated plan and selected runner count between jobs.
+
+### 4. Measure CI savings
+
+After replacing the test command, confirm in the [Test Optimization Explorer][6] that the expected tests completed. Use the [CI Visibility Explorer][7] to compare test job durations and the number of test jobs between pipeline runs. If CI Visibility is not enabled, use the equivalent job metrics in your CI provider.
+
+If all workers run on one CI node, parallel execution shortens the test stage without changing the number of CI nodes. If each worker runs on a separate CI node, use the runner count in `parallel-runners.txt` to size the CI matrix. Because Test Impact Analysis removes unaffected tests before `ddtest` selects the runner count, smaller changes can result in fewer CI nodes being started.
+
+Use `--max-parallelism` to limit CI capacity. The planner accounts for the setup cost of each additional runner through `--ci-job-overhead`. For details about these settings, see [Configuration][4].
+
+Add `.testoptimization/` to `.gitignore`. Generate a fresh plan for each CI workflow run, and share it only between jobs for the same source revision and execution environment. Run planning and tests from the same working directory. For details about the generated files, see [Plan artifacts][5].
 
 ## CI examples
 
@@ -642,32 +642,6 @@ Keep the `ddtest` download, plan, cache, and continuation steps from the CircleC
 
 {{< /collapse-content >}}
 
-## Use third-party test runners
-
-Use `ddtest` plan files when you want `ddtest` to choose which files should run, but another runner should execute them.
-
-To learn about the full contents of the plan directory, see [Plan artifacts][5].
-
-| File | Use |
-| ---- | --- |
-| `.testoptimization/runner/test-files.txt` | All runnable test files after Test Impact Analysis skips are applied. |
-| `.testoptimization/runner/tests-split/runner-N` | Files assigned to CI node or worker `N`. |
-
-For example, use `.testoptimization/runner/test-files.txt` with Knapsack Pro:
-
-{{< code-block lang="bash" >}}
-KNAPSACK_PRO_TEST_FILE_LIST_SOURCE_FILE=.testoptimization/runner/test-files.txt bundle exec rake knapsack_pro:queue:rspec
-{{< /code-block >}}
-
-For pytest, enable the `ddtrace` plugin with `PYTEST_ADDOPTS` and pass the file list to `python -m pytest`:
-
-{{< code-block lang="bash" >}}
-export PYTEST_ADDOPTS="${PYTEST_ADDOPTS:+$PYTEST_ADDOPTS }--ddtrace"
-if [ -s .testoptimization/runner/test-files.txt ]; then
-  xargs python -m pytest < .testoptimization/runner/test-files.txt
-fi
-{{< /code-block >}}
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -677,3 +651,5 @@ fi
 [3]: https://github.com/DataDog/ddtest/releases/latest
 [4]: /tests/test_parallelization/configuration/
 [5]: /tests/test_parallelization/configuration/#plan-artifacts
+[6]: /tests/explorer/
+[7]: /continuous_integration/explorer/

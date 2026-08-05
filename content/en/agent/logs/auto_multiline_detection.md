@@ -12,26 +12,42 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>.</div>
+<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, Auto multi-line Detection is disabled by default.</div>
 
 ## Overview
 
 Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically.
+For example, the Agent receives the following lines separately:
+```
+2024-08-13 17:15:17 INFO Starting request handler
+Exception in thread "main" java.lang.NullPointerException
+    at com.example.MyClass.doSomething(MyClass.java:42)
+    at com.example.MyClass.main(MyClass.java:20)
+2024-08-13 17:15:18 INFO Request handler stopped
+```
+With Auto multi-line detection enabled, the stack trace is aggregated into a single log:
+```
+2024-08-13 17:15:17 INFO Starting request handler
+Exception in thread "main" java.lang.NullPointerException
+    at com.example.MyClass.doSomething(MyClass.java:42)
+    at com.example.MyClass.main(MyClass.java:20)
+2024-08-13 17:15:18 INFO Request handler stopped
+```
 
 ## Getting started
 
-To enable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection`  to `true` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true` environment variable:
+Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
 ```yaml
 logs_config:
-  auto_multi_line_detection: true
+  auto_multi_line_detection: false
 ```
 {{% /tab %}}
 {{% tab "Environment Variable" %}}
 ```shell
-DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=true
+DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false
 ```
 {{% /tab %}}
 {{< /tabs >}}
