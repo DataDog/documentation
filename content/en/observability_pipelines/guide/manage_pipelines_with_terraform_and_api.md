@@ -89,8 +89,8 @@ Example request:
 ```bash
 curl -X GET "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelines/pipelines/<PIPELINE_ID>" \
 -H "Accept: application/json" \
--H "DD-API-KEY: ${<DD_API_KEY>}" \
--H "DD-APPLICATION-KEY: ${<DD_APP_KEY>}"
+-H "DD-API-KEY: <DD_API_KEY>" \
+-H "DD-APPLICATION-KEY: <DD_APP_KEY>"
 ```
 
 ### Update an existing pipeline
@@ -103,8 +103,8 @@ Example request:
 curl -X PUT "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelines/pipelines/<PIPELINE_ID>" \
 -H "Accept: application/json" \
 -H "Content-Type: application/json" \
--H "DD-API-KEY: ${<DD_API_KEY>}" \
--H "DD-APPLICATION-KEY: ${<DD_APP_KEY>}" \
+-H "DD-API-KEY: <DD_API_KEY>" \
+-H "DD-APPLICATION-KEY: <DD_APP_KEY>" \
 -d '{
   "data": {
     "attributes": {
@@ -136,8 +136,8 @@ Example request:
 
 ```bash
 curl -X DELETE "https://api.datadoghq.com/api/v2/remote_config/products/obs_pipelines/pipelines/<PIPELINE_ID>" \
--H "DD-API-KEY: ${<DD_API_KEY>}" \
--H "DD-APPLICATION-KEY: ${<DD_APP_KEY>}"
+-H "DD-API-KEY: <DD_API_KEY>" \
+-H "DD-APPLICATION-KEY: <DD_APP_KEY>"
 ```
 
 ## Manage pipelines with Terraform
