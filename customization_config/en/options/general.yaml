@@ -540,6 +540,20 @@ options:
 - label: Environment Variables
   id: environment_variables
 
-- label: ECS Fargate
-  id: ecs_fargate
-  
+- label: Aurora
+  id: aurora
+
+- label: Cloud SQL
+  id: cloud_sql
+
+- label: AlloyDB
+  id: alloydb
+
+- label: Supabase
+  id: supabase
+
+- label: Heroku
+  id: heroku
+
+- label: Cloud
+  id: cloud

@@ -67,3 +67,13 @@ traits:
   label: Secrets source
   type: text
   internal_notes: The location of the user's sensitive information, such as API keys or other credentials. For example, Secrets Management or environment variables.
+
+- id: agent_env
+  label: "Agent install"
+  type: text
+  internal_notes: The Agent installation location, such as self-hosted, Docker, or Kubernetes. Useful for Agent-specific applications and when the `host` trait is in use for product-level hosting options.
+
+- id: k8s_install
+  label: "Kubernetes install"
+  type: text
+  internal_notes: The Kubernetes installation method, such as Helm or Operator.
