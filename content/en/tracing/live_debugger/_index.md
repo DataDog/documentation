@@ -57,7 +57,7 @@ Live Debugger provides:
 
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
 
-- The [Datadog Agent][2], version 7.49.0 or later
+- The [Datadog Agent][2], version 7.49.0 or higher
 - An installed [Datadog SDK][3] (see the [Enable Live Debugger](#enable-live-debugger) section for minimum SDK versions)
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
@@ -99,7 +99,7 @@ Either option requires one of the following minimum SDK versions:
 | .NET     | 3.29.0              |
 | Node.js  | 5.84.0              |
 
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps. Each tab also lists the recommended SDK version and any language-specific requirements.
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps. 
 
 {{< programming-lang-wrapper langs="java,python,.NET,nodejs" >}}
 
@@ -257,9 +257,9 @@ On the [Live Debugger Settings page][26], you can check and update the enablemen
 - {{< ui >}}Enabled{{< /ui >}}: For eligible services, this setting means Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
 - {{< ui >}}Disabled{{< /ui >}}: This setting blocks logpoints from being created or reactivated on a given service and environment. It applies regardless of runtime language or SDK version.
 
-### Create a logs index
+### (Recommended) Create a logs index
 
-Datadog recommends creating a dedicated logs index for Live Debugger to help ensure that Live Debugger logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11]. Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
+Create a dedicated logs index for Live Debugger to help ensure that Live Debugger logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11]. Live Debugger generates logs that are sent to Datadog and appear alongside your application logs.
 
 To create a dedicated logs index:
 
@@ -267,11 +267,11 @@ To create a dedicated logs index:
 2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### Link your source code
+### (Recommended) Link your source code
 
-Datadog recommends setting up [Source Code Integration][28] for the best experience with Live Debugger. Source Code Integration is optional when starting a Debug Session manually, but required when using [Bits Live Debugger][23].
+Set up [Source Code Integration][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
-After you integrate your source code manager with your Datadog account and link the service and environment to the corresponding repository and Git commit SHA, you can view source code files directly in the Datadog UI. You can add new logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
+**Note**: Source Code Integration is optional when starting a Debug Session manually, but it is required when using [Bits Live Debugger][23].
 
 ## Using Live Debugger
 

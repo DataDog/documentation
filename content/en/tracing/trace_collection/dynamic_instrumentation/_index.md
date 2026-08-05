@@ -62,25 +62,22 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Dynamic Instrumentation
 
-Dynamic Instrumentation supports Java, Python, .NET, and PHP.
 
 <div class="alert alert-info">Dynamic Instrumentation and <a href="/tracing/live_debugger/">Live Debugger</a> share the same enablement state per service and environment: enabling or disabling one also enables or disables the other. The two products have separate permissions and Settings pages.</div>
 
-#### In-app enablement
+#### (Recommended) In-app enablement
 
-For Java, Python, and .NET services that meet the minimum SDK requirements, manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. In-app enablement is supported on the following minimum SDK versions:
+Manage Dynamic Instrumentation for each service and environment from the [Dynamic Instrumentation Settings page][16]. In-app enablement is supported on the following minimum SDK versions:
 
 - [Java][18] ≥ 1.48.0
 - [Python][19] ≥ 3.10.0
 - [.NET][20] ≥ 3.29.0
 
-If your SDK meets the minimum version, Datadog automatically attempts to enable the service the first time you create an instrumentation for it, as long as all prerequisites are met.
-
-Datadog recommends keeping your SDK up to date to take advantage of in-app enablement.
+If your SDK meets the minimum version and all prerequisites are met, Datadog automatically attempts to enable the service the first time you create an instrumentation for it.
 
 #### Manual enablement
 
-Manual enablement is required for PHP, and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables, for example, to enable Dynamic Instrumentation in bulk across many services.
+Manual enablement is required for PHP and for older SDK versions of Java, Python, and .NET. You can also choose manual enablement on supported SDK versions if you prefer to manage enablement through environment variables (for example, to enable Dynamic Instrumentation in bulk across many services).
 
 Select your runtime for manual enablement instructions:
 
@@ -127,9 +124,8 @@ For creation steps specific to each instrumentation type, see the following sect
 
 ### Creating dynamic metrics
 
-A dynamic metric emits a metric when it executes.
+A dynamic metric emits a metric when it executes. To create a dynamic metric:
 
-To create a dynamic metric:
 
 1. Select {{< ui >}}Metric{{< /ui >}} as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, and location).
@@ -147,19 +143,19 @@ Dynamic Instrumentation supports the following metric types:
 
 ### Creating dynamic spans
 
-A *dynamic span* emits a span when a method is executed.
+A dynamic span emits a span when a method is executed. To create a dynamic span:
 
-To create a dynamic span:
 
 1. Select {{< ui >}}Span{{< /ui >}} as the instrumentation type.
 1. Complete the [generic instrumentation setup](#creating-an-instrumentation) (choose service, environment, version, and location).
 
-You can use a *dynamic span* as an alternative to [creating new spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
+You can use a dynamic span as an alternative to [creating spans with Custom Instrumentation][13]. If the method throws an exception, the details of the exception are associated with the newly created span's `error` tag.
 
 ### Creating dynamic span tags
 
-A *dynamic span tag* adds a tag value to an existing span. You can add a tag either to the _active_ span or to the _service entry_ span.
-Keep in mind that internal spans are not indexed by default and so might not be searchable in APM.
+A dynamic span tag adds a tag value to an existing span. You can add a tag to either the _active_ span or the _service entry_ span.
+
+**Note**: Internal spans are not indexed by default and so might not be searchable in APM.
 
 To create a dynamic span tag:
 

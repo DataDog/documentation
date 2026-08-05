@@ -25,7 +25,7 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
-Bits Live Debugger functionality is only accessible from the Live Debugger page at this time. Support for using Live Debugger tools through Bits Chat, Bits Code, and the public MCP is coming soon.
+Bits Live Debugger functionality is only accessible from the Live Debugger page.
 
 <div class="alert alert-info">
 Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
