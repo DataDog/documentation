@@ -347,6 +347,7 @@ unsupported_sites:
   dora_metrics: [gov,gov2]
   dynamic_instrumentation: [gov,gov2]
   dynamic_quotas: [gov,gov2]
+  email_delivery: [us3,us5,eu,ap1,ap2,gov,gov2,uk1] # US1 only
   events_from_sns_emails: [gov,gov2]
   exception_replay: [gov,gov2]
   experiments: [gov,gov2]
