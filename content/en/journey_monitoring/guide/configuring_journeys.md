@@ -24,7 +24,14 @@ Before using this guide, review the [Journey Monitoring overview and prerequisit
 
 ### Permissions and roles
 
-> [PLACEHOLDER: Describe the Datadog roles and permissions required to create and edit journeys, operations, SLOs, and test suites.]
+Journey Monitoring draws on several products, so access to a journey and to its linked assets depends on the permissions for each product. Before you create or view journeys, check the following:
+
+**Before you create journeys:**
+
+- You need write access to Journey Monitoring to create and edit journeys.
+- Creating a journey's Synthetic test suite also requires Synthetic Monitoring write access. Without it, Datadog creates the journey without a test suite, and you can add one later.
+
+For more details about viewing and editing journeys and their linked assets, see [Roles and Permissions][11].
 
 ## Choose the right user flows for journeys
 
@@ -131,7 +138,7 @@ If Datadog does not suggest a relevant operation, create an operation in Datadog
 
 For information about executions, success rate, latency, breached SLOs, monitors, and backend dependencies, see [RUM operations][4].
 
-## Set SLOs on key RUM operations
+### Set SLOs on key RUM operations
 
 <!-- Confirm this behavior before publishing. -->
 
@@ -145,7 +152,33 @@ To include a linked operation in the journey status, associate an SLO with the o
 
 Datadog automatically creates a test suite and an editable uptime SLO with a default objective of 99.9% for each journey. Datadog also adds tests that cover the journey. For information about coverage, adding or removing tests, and the uptime SLO, see [Journey uptime][5].
 
-> [PLACEHOLDER: Explain how to evaluate whether the automatically selected tests cover the journey and its variants, when to add tests, and how to maintain coverage under the seven-day covering-test rule.]
+### Evaluate journey coverage
+
+Datadog infers which Synthetic tests cover a journey from RUM data and highlights them on the journey details page and on the Synthetic test suite page. To evaluate coverage:
+
+- Review the tests that Datadog marks as covering the journey.
+- If covering tests exist in your organization but are not in the suite, Datadog displays an indicator for the additional covering tests. Use it to find coverage you have not added yet.
+
+### Add tests to a journey
+
+Add a covering test when the suite is empty or when Datadog detects covering tests that are not in the suite:
+
+- To add existing tests, select **Manage journey coverage** and choose the tests to add.
+- To add new coverage, create a Synthetic test manually. See [Browser Testing][8] or [Mobile Application Testing][9], then organize the test into the journey's suite. For more information about suites, see [Test Suites][10].
+
+<div class="alert alert-info"><strong>Preview</strong>: When no test covers a journey, Bits Testing can generate a covering browser test to fill the gap. Bits Testing is in Preview. To request access, see the <a href="https://www.datadoghq.com/product-preview/bits-testing/">Bits Testing preview</a>.</div>
+
+### Maintain coverage
+
+- After you change a journey's start or end conditions, re-check its coverage, because the set of covering tests can change.
+- Keep at least one covering test in the suite so the journey reports uptime.
+
+<!-- AUTHORING NOTE: The "seven-day covering-test rule" is not defined in the source design docs.
+Confirm the covering-test time window with the product team (it may be documented on
+/journey_monitoring/uptime/) before adding it here. Variant-level coverage detection is not yet
+built, so this section intentionally omits per-variant coverage. -->
+
+Managing coverage acts on Synthetic tests, so it requires Synthetic Monitoring write access and a restriction policy on the suite. See [Roles and Permissions][11].
 
 ## Understand and monitor Journey Monitoring status
 
@@ -227,3 +260,7 @@ AUTHORING NOTES:
 [5]: /journey_monitoring/uptime/
 [6]: /journey_monitoring/map/
 [7]: /journey_monitoring/map/suggested_journeys/
+[8]: /synthetics/browser_tests/
+[9]: /synthetics/mobile_app_testing/
+[10]: /synthetics/test_suites/
+[11]: /journey_monitoring/roles_and_permissions/
