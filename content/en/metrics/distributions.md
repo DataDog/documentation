@@ -148,7 +148,7 @@ If your metric is already overshadowed, you must choose to keep either the **dis
 Contact [Datadog Support][6] with:
 
 * The affected metric names
-* Which data type you want to preserve
+* The data type you want to preserve
 
 After the conflict is resolved, rename the metric in any future submissions to help ensure each metric name is used for only one type.
 
