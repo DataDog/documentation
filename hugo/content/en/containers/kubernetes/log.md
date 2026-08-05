@@ -182,7 +182,7 @@ The `source` tag can be important for your logs, as the [out of box log pipeline
 [Autodiscovery][10] enables you to use templates to configure log collection and other capabilities on containers. Use one of the following methods to configure log collection:
 
 - [Autodiscovery annotations](#autodiscovery-annotations) (recommended)
-- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd)
+- [`DatadogInstrumentation` CRD](#datadoginstrumentation-crd) (new)
 - [Autodiscovery configuration files](#autodiscovery-configuration-files)
 
 Setting a `source` and `service` tag on these log configurations is strongly recommended. Match the `source` tag to one of Datadog's [out-of-the-box log pipelines][15] so your logs are automatically enriched; you can also find a [library of pipelines in Datadog][16]. The `service` tag powers [Unified Service Tagging][4], linking your logs with metrics and traces from the same service. If `source` and `service` are omitted, the Agent falls back to the `service` tag from Unified Service Tagging (when set), and otherwise to the container's short image name.
@@ -268,9 +268,7 @@ spec:
 
 ### DatadogInstrumentation CRD
 
-Use `spec.config.logs` in a [`DatadogInstrumentation` custom resource][23] to configure log collection. Set `containerName` in each entry to the container name in the workload's Pod template.
-
-The following example configures log collection for the `app` container in the `example` Deployment:
+Instead of annotating your pods or deployments, you can use a [`DatadogInstrumentation` custom resource][23] to configure log collection. The following examples is for the `app` container part of the `example` Deployment:
 
 ```yaml
 apiVersion: datadoghq.com/v1alpha1
@@ -334,7 +332,6 @@ datadog:
     <INTEGRATION_NAME>.yaml: |-
       ad_identifiers:
       - <CONTAINER_IMAGE>
-
       logs:
       - source: example-source
         service: example-service
