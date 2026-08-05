@@ -768,44 +768,29 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
     existing_fix_pr = find_open_fix_pr(fix_branch)
     branch_pushed = existing_fix_pr is not None or fix_branch_on_origin(fix_branch)
 
-    if dry_run:
-        if existing_fix_pr:
+    # Finish an interrupted run without rebuilding (and never force-pushing) the
+    # branch, so a fix already in review is never clobbered.
+    if existing_fix_pr:
+        if dry_run:
             print(f"  [dry-run] fix PR #{existing_fix_pr['number']} already exists — "
                   f"would finish the interrupted auto-fix: label it, close "
                   f"#{pr_number} pointing to it, and label it {LABEL_AUTOFIXED!r}.")
             return True
-        if branch_pushed:
-            print(f"  [dry-run] fix branch {fix_branch!r} exists on origin with no open "
-                  f"PR — would open a PR from it and finish the auto-fix.")
-            return True
-        # Count patches and show per-patch file summaries.
-        subjects = [l[len("Subject: "):] for l in transformed.splitlines()
-                    if l.startswith("Subject: ")]
-        print(f"  [dry-run] would apply {len(subjects)} commit(s) to {fix_branch}:")
-        for s in subjects[:10]:
-            print(f"    {s}")
-        if len(subjects) > 10:
-            print(f"    ... and {len(subjects) - 10} more")
-        would_be_title = f"[reorg fix] {pr['title']}"
-        print(f"  [dry-run] would open PR: {would_be_title!r}")
-        print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
-        if IS_TEST_MODE:
-            print(f"  [dry-run] would label fix PR {LABEL_DO_NOT_MERGE!r} (test mode)")
-        print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR, "
-              f"and label it {LABEL_AUTOFIXED!r}")
-        return True
-
-    # Finish an interrupted run without rebuilding (and never force-pushing) the
-    # branch, so a fix already in review is never clobbered.
-    if existing_fix_pr:
         print(f"  Fix PR #{existing_fix_pr['number']} already exists — "
               f"finishing the interrupted auto-fix.")
         return finalize_autofix(pr, fix_branch, existing_fix_pr)
     if branch_pushed:
+        if dry_run:
+            print(f"  [dry-run] fix branch {fix_branch!r} exists on origin with no open "
+                  f"PR — would open a PR from it and finish the auto-fix.")
+            return True
         print(f"  Fix branch {fix_branch!r} exists on origin but has no open PR — "
               f"opening it and finishing the interrupted auto-fix.")
         return finalize_autofix(pr, fix_branch, None)
 
+    # Build the fix branch and test git am in BOTH dry-run and live modes so
+    # the dry-run accurately reflects whether the auto-fix would succeed. Only
+    # the push and PR-creation steps are skipped in dry-run.
     tmpdir = tempfile.mkdtemp(prefix=f"reorg_fix_{pr_number}_")
     try:
         # A stale LOCAL branch can linger when a prior run's worktree was cleaned
@@ -837,6 +822,24 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
             run(["git", "am", "--abort"], cwd=worktree)
             return False
 
+        if dry_run:
+            # git am succeeded — report what the live run would do next.
+            subjects = [l[len("Subject: "):] for l in transformed.splitlines()
+                        if l.startswith("Subject: ")]
+            print(f"  [dry-run] would apply {len(subjects)} commit(s) to {fix_branch}:")
+            for s in subjects[:10]:
+                print(f"    {s}")
+            if len(subjects) > 10:
+                print(f"    ... and {len(subjects) - 10} more")
+            would_be_title = f"[reorg fix] {pr['title']}"
+            print(f"  [dry-run] would open PR: {would_be_title!r}")
+            print(f"  [dry-run] would label fix PR {LABEL_WIP!r}, {LABEL_AUTO_PR!r}")
+            if IS_TEST_MODE:
+                print(f"  [dry-run] would label fix PR {LABEL_DO_NOT_MERGE!r} (test mode)")
+            print(f"  [dry-run] would close PR #{pr_number} with comment pointing to fix PR, "
+                  f"and label it {LABEL_AUTOFIXED!r}")
+            return True
+
         push = run(["git", "push", "origin", fix_branch], cwd=worktree)
         if push.returncode != 0:
             # The branch appeared on origin since our earlier check (a concurrent
@@ -853,6 +856,10 @@ def attempt_fix(pr: dict, dry_run: bool) -> bool:
     finally:
         git("worktree", "remove", "--force", tmpdir)
         shutil.rmtree(tmpdir, ignore_errors=True)
+        if dry_run:
+            # Clean up the local branch created during the dry-run test (it was
+            # never pushed, so deleting it here leaves no trace).
+            git("branch", "-D", fix_branch)
 
 
 # ---------------------------------------------------------------------------
@@ -940,8 +947,11 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
         # mixed PR as non-reorg-only.
         wrong_additions = get_wrong_path_additions(worktree)
         # Treat wrong-path additions as reorg conflicts: the PR added a
-        # file at a pre-reorg path that should be under hugo/.
-        reorg_conflicts.extend(wrong_additions)
+        # file at a pre-reorg path that should be under hugo/. Deduplicate
+        # to avoid double-counting files that appear in both lists (e.g. an
+        # AA conflict at a pre-reorg path is already in reorg_conflicts).
+        reorg_set = set(reorg_conflicts)
+        reorg_conflicts.extend(p for p in wrong_additions if p not in reorg_set)
 
         # Always abort the test merge before leaving the worktree.
         run(["git", "merge", "--abort"], cwd=worktree)
