@@ -14,10 +14,6 @@ further_reading:
   text: "Configure your monitor notifications"
 ---
 
-{{< callout url="https://www.datadoghq.com/product-preview/additional-advanced-querying-data-sources" btn_hidden="false" header="Join the Preview!">}}
-The Analysis monitor is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Analysis monitors offer full access to Notebook analysis and DDSQL features, allowing you to alert on complex data patterns that standard monitors may miss. With Analysis monitors, you can:

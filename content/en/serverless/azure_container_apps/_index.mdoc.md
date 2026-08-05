@@ -39,7 +39,58 @@ further_reading:
   - link: "/integrations/azure/"
     tag: "Documentation"
     text: "Azure Integration"
+  - link: "/mcp_server/tools/#serverless_onboarding"
+    tag: "Documentation"
+    text: "Datadog MCP Server: serverless_onboarding tool"
 ---
+
+## Overview
+
+Azure Container Apps is a fully managed serverless platform for deploying and scaling
+containerized applications. Datadog monitors Container Apps in two layers:
+
+- The Azure Integration collects standard metrics and logs.
+- The Datadog `serverless-init` Agent adds distributed tracing, enhanced metrics, custom
+  metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
+
+First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs. 
+
+Then, use the guides below to instrument your application using agentic onboarding or manual instrumentation. 
+
+## Set up with agentic onboarding
+
+Use [agentic onboarding][1] to set up monitoring for your Azure Container Apps with AI assistance. Two complementary paths use the same Datadog account:
+
+- **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
+- **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
+
+[1]: /agentic_onboarding/setup
+
+{% tabs %}
+{% tab label="AI Setup CLI" %}
+
+Run the CLI in your project directory (requires Node.js 22+). It links your Datadog account, then instruments your Azure Container Apps service:
+
+```shell
+npx @datadog/ai-setup-cli --product serverless --serverless-compute-type=azure-container-apps
+```
+
+Omit `--product` to run interactively, or add `--site` to target your Datadog site.
+
+{% /tab %}
+{% tab label="MCP server" %}
+
+Use the Datadog MCP Server's [`serverless_onboarding`][2] tool. After you connect, try a prompt like:
+
+```
+Help me monitor my Azure Container Apps services with Datadog
+```
+
+[2]: /agentic_onboarding/setup/?tab=serverlessmonitoring#mcp-server
+{% /tab %}
+{% /tabs %}
+
+## Manual instrumentation
 
 {% collapse-content title="In-Container vs. Sidecar" level="h5" %}
 
@@ -53,12 +104,6 @@ further_reading:
 | Best for | Simpler setup, lower cost, and direct log piping. | Multiple containers per service, Agent isolation, and performance-sensitive workloads. |
 
 {% /collapse-content %}
-
-## Setup
-
-**Prerequisite**: Set up the [Azure Integration](/integrations/azure/) to collect metrics and logs from Azure Container Apps.
-
-The setup below instruments your application with the Datadog `serverless-init` Agent to enable tracing, enhanced metrics, custom metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
 
 <!-- In-Container -->
 {% if equals($instrumentation_method, "in_container") %}
