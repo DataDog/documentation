@@ -36,11 +36,11 @@ See [Trial Org Provisioning][4] for the full form walkthrough.
 
 ## Share the Trial Org with the account team
 
-A Trial Org's usage is not visible from the Admin Org on its own. Share the new Trial Org's ID with the partner account team so it can be associated with the registered opportunity. Continue working with the partner account team as the opportunity progresses to a signed contract; the customer organization connects to the Admin Org, and its usage becomes visible, once that contract is active and associated with the partnership.
+Share the new Trial Org information with the partner account team, so it can be associated with the registered opportunity. Continue working with the partner account team as the opportunity progresses to a signed contract.
 
 ## What's next
 
-See [Cost and Usage Visibility][5] for how usage and cost data appears from the Admin Org after a customer organization is connected, or [Troubleshooting][6] for common issues along the way.
+See [Cost and Usage Visibility][5] for how usage and cost data appears from the Admin Org after a customer organization's contract is activated, or [Troubleshooting][6] for common issues along the way.
 
 [1]: https://partners.datadoghq.com
 [2]: mailto:partner-support@datadoghq.com
