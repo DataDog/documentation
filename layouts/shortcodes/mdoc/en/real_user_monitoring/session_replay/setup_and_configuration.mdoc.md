@@ -99,7 +99,7 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 SessionReplay.enable(sessionReplayConfig)
 ```
 
-### Impact on App Performance
+### Impact on app performance
 
 See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
@@ -141,7 +141,7 @@ SessionReplay.enable(
 )
 ```
 
-### Impact on App Performance
+### Impact on app performance
 
 See [How Mobile Session Replay Impacts App Performance][34].
 
@@ -197,7 +197,7 @@ If your app uses Material on Android, add:
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
 
-### Impact on App Performance
+### Impact on app performance
 
 See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
@@ -315,7 +315,7 @@ cd ios && pod install
 
 Rebuild your iOS and Android apps
 
-### Impact on App Performance
+### Impact on app performance
 
 See [How Mobile Session Replay Impacts App Performance][34].
 
@@ -406,7 +406,7 @@ Flutter Session Replay relies on FFI, and some symbols may be stripped when buil
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
 
-### Impact on App Performance
+### Impact on app performance
 
 See [How Mobile Session Replay Impacts App Performance][34].
 

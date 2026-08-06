@@ -4,6 +4,7 @@ description: Learn about how to capture and visually replay your users' web brow
 aliases:
 - /real_user_monitoring/guide/session-replay-getting-started/
 - /real_user_monitoring/session_replay/
+- /getting_started/session_replay/
 - /product_analytics/session_replay/
 - /real_user_monitoring/session_replay/developer_tools
 - /real_user_monitoring/session_replay/browser/developer_tools
