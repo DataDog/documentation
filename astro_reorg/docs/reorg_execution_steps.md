@@ -33,7 +33,7 @@ Remind them of the reorg, link them to the Confluence page, and ask if they have
 
 NOTE: This file will get deleted from your reorg branch, so don't edit it there. You can push what you have, then check it off [here](https://github.com/DataDog/documentation/blob/jen.gilbert/astro-reorg-scripts/astro_reorg/docs/reorg_execution_steps.md) instead.
 
-### 1. In #docs-backroom, post the reorg tracker
+### 1. In #docs-announcements, post the reorg tracker
 
 This is saved in your DMs.
 
