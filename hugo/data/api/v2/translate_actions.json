@@ -1949,13 +1949,13 @@
     "summary": "List forms"
   },
   "CreateForm": {
-    "description": "Create a new form. The form is created in draft mode and must be published before it can be used. This also creates a new datastore for form responses and links it to the form.",
+    "description": "Create a new form. The form is created in draft mode and must be published before it can be used. This\nalso creates a new datastore for form responses and links it to the form.",
     "summary": "Create a form",
     "request_description": "",
     "request_schema_description": "A request to create a form."
   },
   "CreateAndPublishForm": {
-    "description": "Creates a new form and immediately publishes its initial version. This also creates a new datastore for form responses and links it to the form.",
+    "description": "Creates a new form and immediately publishes its initial version. This also creates a new datastore for\nform responses and links it to the form.",
     "summary": "Create and publish a form",
     "request_description": "",
     "request_schema_description": "A request to create a form."
@@ -1986,11 +1986,19 @@
     "request_description": "",
     "request_schema_description": "A request to publish a form version."
   },
+  "ListFormVersions": {
+    "description": "List all versions of a form.",
+    "summary": "List form versions"
+  },
   "UpsertFormVersion": {
     "description": "Create or update the latest draft version of a form. The `upsert_params` field controls\noptimistic concurrency behavior.",
     "summary": "Create or update a form version",
     "request_description": "",
     "request_schema_description": "A request to create or update a form version."
+  },
+  "RevertFormVersion": {
+    "description": "Revert a form to a prior version by creating a new draft version copied from it.",
+    "summary": "Revert a form to a prior version"
   },
   "UpsertAndPublishFormVersion": {
     "description": "Upsert the latest form version and publish it in a single atomic transaction.",
