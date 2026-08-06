@@ -2,6 +2,7 @@
 
 title: How Agent Installation through the AWS Integration Works  
 description: "Understand how Datadog installs and maintains the Datadog Agent on Amazon EC2 through the AWS integration: the AWS resources created, IAM permissions required, the installation mechanism, the security model, and the Agent lifecycle."
+private: true # TODO(DOCS-14545): remove at v1 rollout to publish, at the same time as the setup guide this page links to
 
 ---
 
@@ -43,24 +44,15 @@ For the permissions required and why each is needed, see [Required AWS permissio
 
 ## How Agent installation works
 
-**Requirements:** Supported instance OS (Linux or Windows, see below) | SSM Agent running on the instance | **Agent Install** permission in Datadog to create or edit rules.
+After you save an installation rule, Datadog resolves your query into a fixed list of covered instances, then runs the following sequence against each one. For the prerequisites, including supported platforms, and for how to create a rule, see the [setup guide](https://docs.datadoghq.com/integrations/guide/aws-agent-installation/).
 
-1. Create an installation rule in Datadog: an AWS account and a query describing which instances to cover, for example `env:prod NOT team:legacy`. Preview exactly which instances are included, excluded, or ineligible before you save.
-2. When you save the rule, Datadog resolves your query into a specific list of instances and records it. That list is what the rule covers from then on.
-3. Datadog checks that each covered instance is running, on a supported platform, and reachable by AWS Systems Manager.
-4. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
-5. Datadog checks whether an Agent is already present. When an Agent is present that Datadog did not install, Datadog stops and leaves the instance alone.
-6. Datadog calls `ssm:SendCommand`, one instance at a time, running the `datadog-ec2-instrumenter` document.
-7. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role, then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled. The command times out after 6 minutes.
+1. Datadog checks that each covered instance is running, on a supported platform, and reachable by AWS Systems Manager.
+2. When an instance has no IAM instance profile, Datadog creates one so Systems Manager can reach it. When an instance already has one, Datadog adds the SSM policy and the scoped secret-read policy to the existing role.
+3. Datadog checks whether an Agent is already present. When an Agent is present that Datadog did not install, Datadog stops and leaves the instance alone.
+4. Datadog calls `ssm:SendCommand`, one instance at a time, running the `datadog-ec2-instrumenter` document.
+5. On the instance, the document fetches the API key from Secrets Manager using the instance's own IAM role, then runs Datadog's standard Agent installer (`install_script_agent7.sh` on Linux, or the standard MSI on Windows) with log collection and APM host instrumentation enabled. The command times out after 6 minutes.
 
 Datadog does not reboot or restart your instances. The only service Datadog touches is the Datadog Agent itself, which is started on install and stopped on uninstall. Your applications and other services are untouched.
-
-### Supported platforms
-
-- Linux (x86_64 and arm64)
-- Windows (x86_64)
-
-macOS and Windows on arm64 are not supported.
 
 ### Instances that Datadog excludes
 

@@ -3,7 +3,9 @@ title: Install the Datadog Agent through the AWS Integration
 description: "Install and manage the Datadog Agent on your Amazon EC2 instances directly from the AWS integration, without connecting to each host or running per-host scripts."
 private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry in integrations/guide/_index.md at that time
 further_reading:
-# TODO(DOCS-14545): add a further_reading entry linking to the technical reference ("How Agent installation through the AWS integration works") once its URL is finalized.
+- link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/"
+  tag: "Documentation"
+  text: "How Agent installation through the AWS integration works"
 - link: "https://docs.datadoghq.com/integrations/amazon_web_services/"
   tag: "Documentation"
   text: "AWS Integration"
@@ -44,7 +46,7 @@ The following requirements also apply:
 
 {{% aws-agent-installation %}}
 
-These permissions are additional to the [AWS integration IAM policy][1]. Each permission maps to a specific task:
+Each permission maps to a specific task:
 
 | Permission | Why Datadog needs it |
 |---|---|
@@ -70,8 +72,7 @@ When you install the Agent through the AWS integration, you choose the instances
 
 You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
 
-For the full technical and security details, including the AWS resources Datadog creates, the exact permissions, and the reconciliation model, see the AWS Agent installation technical reference.
-<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
+For the full technical and security details, including the AWS resources Datadog creates, the installation mechanism, and the reconciliation model, see [How Agent installation through the AWS integration works][6].
 
 {{< img src="integrations/amazon_web_services/aws-agent-installation-how-it-works.png" alt="Flowchart of the AWS Agent installation process, showing which steps happen in Datadog and which run inside your AWS account." style="width:70%;" >}}
 
@@ -127,8 +128,7 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 ### A permission or IAM error occurs
 
-If installation can't complete because of missing permissions, Datadog shows a notification with a link to the relevant CloudFormation resource so you can resolve it. Confirm that the permissions in the [Required AWS permissions](#required-aws-permissions) section are in place. For the full list of required permissions and why each is needed, see the AWS Agent installation technical reference.
-<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
+If installation can't complete because of missing permissions, Datadog shows a notification with a link to the relevant CloudFormation resource so you can resolve it. Confirm that the permissions in the [Required AWS permissions](#required-aws-permissions) section are in place.
 
 ## Further reading
 
@@ -139,3 +139,4 @@ If installation can't complete because of missing permissions, Datadog shows a n
 [3]: https://app.datadoghq.com/infrastructure
 [4]: https://docs.datadoghq.com/agent/fleet_automation/
 [5]: https://docs.datadoghq.com/getting_started/integrations/aws/
+[6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/

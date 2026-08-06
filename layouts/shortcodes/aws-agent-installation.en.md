@@ -4,7 +4,6 @@ Agent installation requires permissions beyond the base [AWS integration IAM pol
 - Create and attach the IAM role used to install the Agent (IAM).
 - Install the Agent on your EC2 instances (AWS Systems Manager).
 - Maintain the Agent's presence (Amazon EventBridge).
-- Provision supporting infrastructure for EKS installations (AWS Lambda).
 
 <div class="alert alert-info">All write actions run inside your own AWS account through the role created by the CloudFormation stack. Datadog holds no persistent write credentials to your account.</div>
 
