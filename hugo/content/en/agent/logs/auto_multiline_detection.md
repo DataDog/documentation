@@ -12,7 +12,7 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">auto Multi-line detection and aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, auto multi-line Detection is disabled by default.</div>
+<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">(Legacy) Automatic Multi-line Detection and Aggregation</a>. For Agent versions older than <strong>7.82.0</strong>, auto multi-line detection is disabled by default.</div>
 
 ## Overview
 
