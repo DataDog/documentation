@@ -116,7 +116,7 @@ attributes:
   - product: Log Management
     data_type: |
        - **Logs**: Determined by customer plan
-       - <span class="d-none site-region-container" data-region="gov,gov2">**SDS example findings**: 7 days</span>
+       - <span class="d-none site-region-container" data-region="gov,gov2">**Sensitive Data Scanner Findings (Example Logs)**: 7 days</span>
   - product: Metrics
     data_type: |
        - **Tags and values**: 15 months
