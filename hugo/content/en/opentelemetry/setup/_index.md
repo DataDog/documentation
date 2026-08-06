@@ -18,6 +18,19 @@ further_reading:
 
 This page describes all of the ways you can send OpenTelemetry (OTel) data to Datadog.
 
+## Choose your setup path
+
+Datadog supports several ways to send OpenTelemetry data. The right choice depends on your platform, how much of the telemetry pipeline you want to manage, and which Datadog features you need. Use the table below to compare your options at a glance, then follow the links for setup instructions.
+
+| Setup path | Best when | Trade-offs |
+|---|---|---|
+| [**DDOT Collector**][7] (Recommended) | You want OpenTelemetry pipelines *and* Datadog Agent-based features such as Fleet Automation, Live Container Monitoring, and {{< translate key="integration_count" >}}+ integrations. | Deployed on the same host as your applications (Agent deployment pattern); the Gateway-only pattern is not supported. |
+| [**Standalone OpenTelemetry Collector**][2] | You want a completely vendor-neutral pipeline or advanced processing such as tail-based sampling and data transformations. | You install, configure, and maintain the Collector yourself; some Agent-based features are unavailable. |
+| [**OTLP Ingest in the Agent**][6] | You run on a platform other than Kubernetes or Linux, or you want minimal configuration without managing Collector pipelines. | The ingesting Agent must be local to each app or Collector; fewer pipeline processing options. |
+| [**Direct OTLP Intake Endpoint**][3] (Preview) | Deploying a Collector or Agent isn't feasible, such as serverless functions, managed platforms, or resource-constrained environments. | No metadata enrichment, signal normalization, or centralized sampling; host metadata does not populate the Infrastructure Host List. |
+
+<div class="alert alert-info">For a feature-by-feature breakdown of what each path unlocks, see the <a href="/opentelemetry/compatibility/">Feature Compatibility</a> table.</div>
+
 ## DDOT Collector (Recommended)
 
 The Datadog Distribution of OpenTelemetry (DDOT) Collector is an open source solution that combines the flexibility of OpenTelemetry with the comprehensive observability capabilities of Datadog.
@@ -70,3 +83,4 @@ Alternative methods are available for specific use cases, such as maintaining a 
 [4]: /opentelemetry/ingestion_sampling#tail-based-sampling
 [5]: /opentelemetry/agent
 [6]: /opentelemetry/setup/otlp_ingest_in_the_agent
+[7]: /opentelemetry/setup/ddot_collector/
