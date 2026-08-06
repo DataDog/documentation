@@ -1,14 +1,12 @@
 ---
-
-title: How Agent Installation through the AWS Integration Works  
-description: "Understand how Datadog installs and maintains the Datadog Agent on Amazon EC2 through the AWS integration: the AWS resources created, IAM permissions required, the installation mechanism, the security model, and the Agent lifecycle."
+title: How Agent Installation through the AWS Integration Works
+description: "Understand how Datadog installs and maintains the Datadog Agent on Amazon EC2 through the AWS integration: the AWS resources created, the installation mechanism, the security model, and the Agent lifecycle."
 private: true # TODO(DOCS-14545): remove at v1 rollout to publish, at the same time as the setup guide this page links to
-
 ---
 
 This page explains how Datadog installs and maintains the Agent on Amazon EC2 through the AWS integration.
 
-{% alert level="info" %} This page covers the Amazon EC2 experience only. Support for more AWS resource types will be released as a fast follow starting with EKS{% /alert %}
+<div class="alert alert-info">This page covers the Amazon EC2 experience only. Support for more AWS resource types is planned, starting with EKS.</div>
 
 ## AWS resources that Datadog creates
 
@@ -127,9 +125,9 @@ Datadog detects terminated instances on the next hourly pass and cleans up the I
 
 Datadog retries with a growing delay (1 hour, then 2 hours, up to once per day) and does not give up. Missing-permission problems appear as an issue on the **AWS integration tile** and on the Fleet install page.
 
-{% alert level="warning" %}
+<div class="alert alert-warning">
 When someone manually removes the Agent from a covered instance, the next reconciliation reinstalls it. The rule is the source of truth. To stop coverage, change the rule.
-{% /alert %}
+</div>
 
 ## Uninstall the Agent
 
