@@ -23,6 +23,9 @@ Flags:
                           not-yet-computed — don't count toward the limit. Use it
                           to roll out gradually: start with --limit 1, review the
                           results, then raise it as you gain confidence.
+    --skip-stale          Exclude PRs already labeled astro-reorg-stale from the
+                          query entirely. Useful when stale PRs would otherwise
+                          consume --limit slots before older active PRs are reached.
 
 Background:
     The reorg moves every entry in `moves_to_hugo` (astro_reorg/config.yaml)
@@ -151,11 +154,13 @@ LABEL_HELP_REQUESTED = "astro-reorg-help-requested"
 LABEL_SKIP = "astro-reorg-skip"
 LABEL_COLOR = "e4e669"
 LABEL_DESCRIPTION = "Needs manual conflict resolution after replatforming reorg"
+LABEL_ERROR_DESCRIPTION = "An error was encountered while syncing this PR with the docs repo reorg"
 # Applied to every PR the script acts on, regardless of outcome (auto-fixed,
 # manual review, WIP, stale, ...). Purely a visibility aid so all affected PRs
 # can be found in GitHub with one label filter — it is NOT used for idempotency
 # and is deliberately absent from the get_open_prs query.
 LABEL_PROCESSED = "astro-reorg-processed"
+LABEL_ERROR = "astro-reorg-error"
 
 # PRs with no activity in this many days are treated as stale and receive a
 # comment + label instead of an auto-fix attempt.
@@ -551,7 +556,7 @@ def transform_diff_paths(diff_text: str) -> str:
 # GitHub label helpers
 # ---------------------------------------------------------------------------
 
-def ensure_label_exists(label: str, dry_run: bool) -> None:
+def ensure_label_exists(label: str, dry_run: bool, description: str = LABEL_DESCRIPTION) -> None:
     """Create the GitHub label if it doesn't already exist."""
     existing = gh_json("label", "list", "--repo", REPO, "--search", label, "--json", "name")
     if any(l["name"] == label for l in existing):  # type: ignore[index]
@@ -560,7 +565,7 @@ def ensure_label_exists(label: str, dry_run: bool) -> None:
         print(f"  [dry-run] would create label: {label!r}")
         return
     gh_run("label", "create", label, "--repo", REPO,
-           "--color", LABEL_COLOR, "--description", LABEL_DESCRIPTION)
+           "--color", LABEL_COLOR, "--description", description)
     print(f"  Created label: {label!r}")
 
 
@@ -1056,7 +1061,7 @@ def analyze_pr(pr: dict, dry_run: bool) -> bool:
 # Entry point
 # ---------------------------------------------------------------------------
 
-def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
+def get_open_prs(only: list[int] | None = None, limit: int = 300, skip_stale: bool = False) -> list[dict]:
     """Return open PRs targeting BASE_BRANCH, optionally filtered to specific numbers.
 
     The --base filter is what keeps a run scoped: in test mode only PRs opened
@@ -1088,7 +1093,8 @@ def get_open_prs(only: list[int] | None = None, limit: int = 50) -> list[dict]:
         "--base", BASE_BRANCH,
         "--search", f"-label:{LABEL_NO_CONFLICTS} -label:{LABEL_MANUAL_REVIEW} "
                     f"-label:{LABEL_HELP_REQUESTED} -label:{LABEL_SKIP} "
-                    f"-label:{LABEL_AUTO_PR}",
+                    f"-label:{LABEL_AUTO_PR} -label:{LABEL_ERROR}"
+                    + (f" -label:{LABEL_STALE}" if skip_stale else ""),
         "--json", fields, "--limit", str(limit),
     )
 
@@ -1123,6 +1129,12 @@ def main() -> None:
         help="Run against the real master. Without this the script defaults to "
              "the mock base branch from config.yaml (the same branch "
              "create_test_prs.py opens its test PRs against) for safety.",
+    )
+    parser.add_argument(
+        "--skip-stale", action="store_true",
+        help=f"Exclude PRs already labeled {LABEL_STALE!r} from the query. "
+             "Useful when stale PRs would otherwise consume --limit slots "
+             "before older active PRs are reached.",
     )
     args = parser.parse_args()
 
@@ -1168,6 +1180,7 @@ def main() -> None:
     ensure_label_exists(LABEL_NO_CONFLICTS, args.dry_run)
     ensure_label_exists(LABEL_SKIP, args.dry_run)
     ensure_label_exists(LABEL_PROCESSED, args.dry_run)
+    ensure_label_exists(LABEL_ERROR, args.dry_run, description=LABEL_ERROR_DESCRIPTION)
 
     existing_labels = gh_json("label", "list", "--repo", REPO, "--search", LABEL_WIP, "--json", "name")
     if not any(l["name"] == LABEL_WIP for l in existing_labels):  # type: ignore[index]
@@ -1175,7 +1188,7 @@ def main() -> None:
               f"Check that the label name is correct.", file=sys.stderr)
         sys.exit(1)
 
-    prs = get_open_prs(args.prs)
+    prs = get_open_prs(args.prs, skip_stale=args.skip_stale)
     print(f"Found {len(prs)} open PR(s) to check.")
     print(f"Limit: will stop after acting on {args.limit} PR(s).")
 
@@ -1196,8 +1209,14 @@ def main() -> None:
                 add_label(pr["number"], LABEL_PROCESSED, args.dry_run)
                 acted += 1
         except Exception as exc:
-            print(f"\nERROR processing PR #{pr.get('number', '?')}: {exc}",
+            pr_number = pr.get("number")
+            print(f"\nERROR processing PR #{pr_number or '?'}: {exc}",
                   file=sys.stderr)
+            if pr_number:
+                try:
+                    add_label(pr_number, LABEL_ERROR, args.dry_run)
+                except Exception as label_exc:
+                    print(f"  Could not apply error label: {label_exc}", file=sys.stderr)
             print("  Skipping to the next PR.", file=sys.stderr)
 
     elapsed = time.monotonic() - start_time
@@ -1209,6 +1228,7 @@ def main() -> None:
         "  https://github.com/DataDog/documentation/pulls"
         "?q=is%3Apr+is%3Aopen+label%3Aastro-reorg-auto-pr"
     )
+    subprocess.run(["afplay", "/System/Library/Sounds/Glass.aiff"], check=False)
 
 
 if __name__ == "__main__":
