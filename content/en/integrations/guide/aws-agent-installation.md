@@ -44,8 +44,21 @@ The following requirements also apply:
 
 {{% aws-agent-installation %}}
 
-For a per-permission explanation of why each permission is needed, see the AWS Agent installation technical reference.
-<!-- TODO(DOCS-14545): link "the AWS Agent installation technical reference" to the technical reference page once published. -->
+These permissions are additional to the [AWS integration IAM policy][1]. Each permission maps to a specific task:
+
+| Permission | Why Datadog needs it |
+|---|---|
+| `ec2:DescribeInstances` | Find your instances and check which ones match your rule (state, tags, OS, architecture) |
+| `ssm:DescribeInstanceInformation` | Confirm the SSM Agent is running before Datadog attempts anything |
+| `ssm:GetDocument`, `ssm:CreateDocument`, `ssm:UpdateDocument`, `ssm:UpdateDocumentDefaultVersion` | Publish the install script in your account and keep it up to date |
+| `ssm:SendCommand`, `ssm:ListCommandInvocations` | Run the install and confirm when it finishes |
+| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret` | Store the API key so it is never passed in a command |
+| `iam:CreateRole`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:AttachRolePolicy`, `iam:PutRolePolicy`, `iam:PassRole`, `ec2:AssociateIamInstanceProfile`, and the matching `Get` and `List` reads | Give an instance the minimum access it needs in case it does not have an IAM role: reachable by Systems Manager, and able to read its own API key secret |
+| `iam:Detach*`, `iam:Delete*`, `iam:RemoveRoleFromInstanceProfile`, `ec2:Disassociate*`, `ec2:DescribeIamInstanceProfileAssociations` | Cleanly undo the resources above when you uninstall |
+| `ecs:ListClusters`, `ecs:ListContainerInstances` | Recognize ECS container instances so Datadog skips them (they are handled at the cluster level) |
+| `events:PutRule`, `events:PutTargets`, `events:RemoveTargets`, `events:DeleteRule` | Set up the change notifications that let Datadog react quickly |
+
+`iam:CreateRole` and `iam:PassRole` are the most sensitive grants. `iam:CreateRole` is restricted to role names matching `datadog-ec2-instrumenter/datadog-ssm-*` in your account, and `iam:PassRole` is further restricted to the Amazon EC2 service.
 
 ## How it works
 

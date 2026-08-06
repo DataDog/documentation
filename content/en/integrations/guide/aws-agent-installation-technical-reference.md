@@ -5,11 +5,7 @@ description: "Understand how Datadog installs and maintains the Datadog Agent on
 
 ---
 
-## Overview
-
-Agent installation through the AWS integration lets Datadog install and maintain the Datadog Agent on your Amazon EC2 instances for you, based on a rule you define. This page explains what Datadog creates in your AWS account, which permissions Datadog uses and why, how installation runs, and how the system is secured, audited, and maintained. It is intended for platform, cloud, and security teams who want to review exactly what happens in their AWS account.
-
-You choose an AWS account and a query describing which instances to cover. Datadog installs the Agent on the covered instances and keeps them in the state you define.
+This page explains how Datadog installs and maintains the Agent on Amazon EC2 through the AWS integration.
 
 {% alert level="info" %} This page covers the Amazon EC2 experience only. Support for more AWS resource types will be released as a fast follow starting with EKS{% /alert %}
 
@@ -43,23 +39,7 @@ Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, 
 
 ## Required AWS permissions
 
-These permissions are additional to the read-only [AWS integration IAM policy](https://docs.datadoghq.com/integrations/amazon_web_services/). Each permission maps to a specific task:
-
-
-| Permission                                                                                                                                                                                                             | Why Datadog needs it                                                                                                                                     |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ec2:DescribeInstances`                                                                                                                                                                                                | Find your instances and check which ones match your rule (state, tags, OS, architecture)                                                                 |
-| `ssm:DescribeInstanceInformation`                                                                                                                                                                                      | Confirm the SSM Agent is running before Datadog attempts anything                                                                                        |
-| `ssm:GetDocument`, `ssm:CreateDocument`, `ssm:UpdateDocument`, `ssm:UpdateDocumentDefaultVersion`                                                                                                                      | Publish the install script in your account and keep it up to date                                                                                        |
-| `ssm:SendCommand`, `ssm:ListCommandInvocations`                                                                                                                                                                        | Run the install and confirm when it finishes                                                                                                             |
-| `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret`                                                                                                                                                         | Store the API key so it is never passed in a command                                                                                                     |
-| `iam:CreateRole`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:AttachRolePolicy`, `iam:PutRolePolicy`, `iam:PassRole`, `ec2:AssociateIamInstanceProfile`, and the matching `Get` and `List` reads | Give an instance the minimum access it needs in case it does not have an IAM role: reachable by Systems Manager, and able to read its own API key secret |
-| `iam:Detach*`, `iam:Delete*`, `iam:RemoveRoleFromInstanceProfile`, `ec2:Disassociate*`, `ec2:DescribeIamInstanceProfileAssociations`                                                                                   | Cleanly undo the resources above when you uninstall                                                                                                      |
-| `ecs:ListClusters`, `ecs:ListContainerInstances`                                                                                                                                                                       | Recognize ECS container instances so Datadog skips them (they are handled at the cluster level)                                                          |
-| `events:PutRule`, `events:PutTargets`, `events:RemoveTargets`, `events:DeleteRule`                                                                                                                                     | Set up the change notifications that let Datadog react quickly                                                                                           |
-
-
-`iam:CreateRole` and `iam:PassRole` are the most sensitive grants. `iam:CreateRole` is restricted to role names matching `datadog-ec2-instrumenter/datadog-ssm-*` in your account, and `iam:PassRole` is further restricted to the Amazon EC2 service.
+For the permissions required and why each is needed, see [Required AWS permissions](https://docs.datadoghq.com/integrations/guide/aws-agent-installation/#required-aws-permissions) in the setup guide.
 
 ## How Agent installation works
 
