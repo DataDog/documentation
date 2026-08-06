@@ -21,7 +21,7 @@ Ce guide vous aide à choisir la bonne topologie de déploiement pour Agentless 
 Datadog recommande de suivre les directives suivantes :
 - Utilisez un compte de scanner dédié pour les environnements multi-comptes.
 - Déployez un scanner dans chaque région contenant plus de 150 hosts.
-- Si vous utilisez [Cloud Storage Scanning][1], déployez un scanner dans chaque région contenant un datastore (par exemple, des compartiments S3 ou des instances RDS).
+- Si vous utilisez [Cloud Storage Scanning][1], déployez un scanner dans chaque région contenant un datastore (par exemple, des compartiments S3).
 
 <div class="alert alert-info">Les scanners envoient uniquement à Datadog la liste collectée de packages et les métadonnées du host (hostnames, identifiants d'instances EC2/VM/Compute Engine). Toutes les données scannées restent dans votre infrastructure.</div>
 

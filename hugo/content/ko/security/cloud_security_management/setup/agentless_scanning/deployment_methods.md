@@ -21,7 +21,7 @@ title: Agentless Scanning 배포하기
 Datadog는 다음 가이드라인을 추천합니다.
 - 여러 계정이 있는 환경에서는 전용 스캐너 계정을 사용하세요.
 - 호스트가 150개 이상인 각 리전에 스캐너를 배포하세요.
-- [Cloud Storage Scanning][1]을 사용하는 경우, 데이터 스토어(예: S3 버킷 또는 RDS 인스턴스)가 있는 각 리전에 스캐너를 배포하세요.
+- [Cloud Storage Scanning][1]을 사용하는 경우, 데이터 스토어(예: S3 버킷)가 있는 각 리전에 스캐너를 배포하세요.
 
 <div class="alert alert-info">스캐너는 수집된 패키지 목록과 호스트 메타데이터(호스트이름, EC2/VM/Compute Engine 인스턴스 식별자)만 Datadog으로 전송합니다. 스캐닝한 모든 데이터는 인프라에 머물러 있습니다.</div>
 
