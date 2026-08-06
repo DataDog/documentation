@@ -566,12 +566,6 @@ To stop session recordings, set the sample rate shown in [Set the sample rate fo
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
-
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
