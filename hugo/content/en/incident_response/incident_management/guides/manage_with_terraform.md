@@ -1,6 +1,6 @@
 ---
 title: Manage Incident Management with Terraform
-description: "Use Terraform to manage Incident Management configuration, including incident types, property fields, responder types, notification rules, postmortem templates, and notification templates.
+description: Use Terraform to manage Incident Management configuration, including incident types, property fields, responder types, notification rules, postmortem templates, and notification templates.
 disable_toc: false
 further_reading:
 - link: "/incident_response/incident_management/"
