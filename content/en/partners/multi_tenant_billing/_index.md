@@ -8,7 +8,7 @@ cascade:
 
 ## Overview
 
-As a Datadog Solution Provider, use a **partner admin organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog, but partners are invited with a Partner Role.
+As a Datadog Solution Provider, you can use a **Partner Admin Organization** (Admin Org) to view and monitor cost and usage across customer organizations, provision trial organizations, and view billing across the customer base. An Admin Org is separate from any customer organization and is owned by Datadog; partners are invited to it with a Partner Role.
 
 <div class="alert alert-info">By default, an Admin Org grants read-only access to cost and usage data for connected customer organizations, and personal or internal Datadog usage on the Admin Org is not supported. The Preview capabilities below add supported pricing and contract-management workflows.</div>
 
@@ -18,7 +18,7 @@ A customer organization is connected to an Admin Org automatically when its Data
 
 See [Onboarding a New Customer][15] for how these pieces fit into the path from a registered deal to a connected customer organization.
 
-## Getting started
+## Requesting an Admin Org
 
 Before requesting an Admin Org, the partner must:
 
@@ -30,7 +30,9 @@ Partners not yet registered can [Register Now][17] on the Datadog Partner Portal
 
 {{< img src="partners/multi_tenant_billing/partner_portal_registration.png" alt="Datadog Partner Portal registration page" style="width:100%;" >}}
 
-Registered partners can contact [partner-support@datadoghq.com][16] to request an Admin Org. Partners planning to provision customer trials should request the Trial Org Creator capability at the same time.
+Registered partners can request an Admin Org by contacting [partner-support@datadoghq.com][16]. Include in the request whether the partner also needs the Trial Org Provisioner capability enabled, for self-serve trial organization creation.
+
+## Getting started
 
 {{< whatsnext desc="To get started with an Admin Org, see the following documentation.">}}
   {{< nextlink href="/partners/multi_tenant_billing/customer-onboarding">}}<u>Onboarding a New Customer</u>: Take a prospective customer from a registered deal to a connected customer organization.{{< /nextlink >}}
@@ -40,7 +42,7 @@ Registered partners can contact [partner-support@datadoghq.com][16] to request a
 
 ## Use cases
 
-Discover some ways an Admin Org can help:
+Here are some ways an Admin Org can help:
 
 | Use case | Capability |
 |---|---|

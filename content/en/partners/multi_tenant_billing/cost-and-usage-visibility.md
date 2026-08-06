@@ -5,7 +5,7 @@ description: "Monitor cost and billable usage across all connected customer orga
 
 ## Overview
 
-A customer organization connects to the partner Admin Org automatically when its contract includes the partnership and is active. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses. The connection is removed automatically 30 days after the contract expires.
+A customer organization connects to the Partner Admin Org (Admin Org) automatically when its contract includes the partnership and is active. After connecting, a customer's usage and cost data becomes visible from the Admin Org, across all Datadog sites the customer uses. The connection is removed automatically 30 days after the contract expires.
 
 **Note**: A Trial Org's usage is not included here until its customer organization is connected this way; see [Trial Org Provisioning][4].
 
@@ -24,9 +24,10 @@ Cost and usage data is also available programmatically through the following [Us
 | [Get Usage Across Your Account][10] | Usage summary data across the account | Requires `include_connected_accounts=true` |
 | [Get Hourly Usage by Product Family][11] | Hourly usage broken down by product family | Requires `filter[include_connected_accounts]=true` |
 
-## What's next
+## Related pages
 
-See [Centralized Usage Metrics][3] for usage metrics rolled up across the book of business, or [Trial Org Provisioning][4] to start provisioning trial organizations for prospective customers.
+- [Centralized Usage Metrics][3]: usage metrics rolled up from every connected customer org.
+- [Trial Org Provisioning][4]: provision trial organizations for prospective customers.
 
 [1]: /account_management/plan_and_usage/partner_experience/
 [2]: /api/latest/usage-metering/

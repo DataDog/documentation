@@ -5,7 +5,7 @@ description: "Provision trial Datadog organizations for customers directly from 
 
 ## Overview
 
-An Admin Org with the Trial Org Creator capability enabled can provision trial Datadog organizations for prospective customers directly, without waiting on Datadog to create each one. This speeds up running proof-of-concept engagements at scale. The underlying opportunity should still be registered with Datadog, so the deal is tracked and credited to the partner; see [Onboarding a New Customer][4] for the full process. Trial Orgs created this way run for 30 days, instead of the standard 14-day trial period.
+An Admin Org with the Trial Org Provisioner capability enabled can provision trial Datadog organizations for prospective customers directly. This speeds up running proof-of-concept engagements at scale. The underlying opportunity should still be registered with Datadog, so the deal is tracked and credited to the partner; see [Onboarding a New Customer][4] for the full process. Trial Orgs created this way run for 30 days, instead of the standard 14-day trial period.
 
 {{< img src="partners/multi_tenant_billing/trial_org_provisioning.png" alt="Trial Org Provisioning page on the Admin Org homepage" style="width:100%;" >}}
 

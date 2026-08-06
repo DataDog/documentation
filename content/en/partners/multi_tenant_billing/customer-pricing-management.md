@@ -1,5 +1,5 @@
 ---
-title: Customer Pricing Management
+title: Customer Pricing Management (Preview)
 description: "Configure per-customer pricing so customers can see their own estimated Datadog costs."
 ---
 
