@@ -28,7 +28,7 @@ The Software Delivery MCP tools unlock AI-assisted workflows for:
 - **Identifying flaky tests**: Query for flaky tests in your repository and get prioritized recommendations for which to fix first.
 - **Analyzing CI performance**: Get aggregated statistics on pipeline durations, failure rates, and trends over time.
 - **Triaging test failures**: Understand which tests are failing, their ownership, and historical patterns.
-- **Reviewing code coverage**: Get coverage summaries for branches or commits, including patch coverage and breakdowns by service or code owner.
+- **Reviewing code coverage**: Get coverage summaries for branches, commits, or pull requests, including patch coverage, per-file line data, and breakdowns by service or code owner.
 - **Measuring DORA metrics**: Query deployment frequency, change lead time, change failure rate, and recovery time by service or team.
 - **Checking test optimization settings**: See which Test Optimization features are active for a service, including Test Impact Analysis, Early Flake Detection, and Auto Test Retries.
 - **Retrying failed CI jobs**: Queue a retry for a failed GitHub Actions or GitLab job without leaving the agent session.
@@ -61,6 +61,12 @@ The `software-delivery` toolset includes the following tools:
 
 `get_datadog_code_coverage_commit_summary`
 : Fetch aggregated code coverage summary metrics for a repository commit, including total coverage, patch coverage, and service/codeowner breakdowns.
+
+`get_datadog_code_coverage_pr_summary`
+: Fetch aggregated code coverage summary metrics for a pull request, including total coverage, patch coverage, and service or codeowner breakdowns.
+
+`get_datadog_code_coverage_files`
+: Fetch per-file code coverage line data for a repository commit, branch, or pull request, including executable lines, covered lines, and added lines for each file.
 
 `get_datadog_test_optimization_settings`
 : Retrieve which Test Optimization features are enabled for a service, including Test Impact Analysis (ITR), Early Flake Detection (EFD), Auto Test Retries (ATR), Failed Test Replay, Code Coverage collection, and PR Comments.
