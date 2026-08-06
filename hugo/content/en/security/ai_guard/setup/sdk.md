@@ -88,6 +88,7 @@ The method returns an `Evaluation` object containing:
 - `reason`: natural language summary of the decision.
 - `tags`: list of attack category tags detected (for example, `["indirect-prompt-injection", "destructive-tool-call"]`).
 - `sds`: list of Sensitive Data Scanner findings.
+- `messages`: the evaluated conversation, with sensitive values redacted when redaction is enabled for the service. See [Example: Redact sensitive data](#python-example-redact-sensitive-data).
 
 ### Example: Evaluate a user prompt with content parts {#python-example-evaluate-user-prompt-content-parts}
 
@@ -134,7 +135,57 @@ result = client.evaluate(
 )
 ```
 
+### Example: Redact sensitive data {#python-example-redact-sensitive-data}
+
+<!-- TODO: v4.14.0 is tentative. Confirm the release that includes redaction once https://github.com/DataDog/dd-trace-py/pull/19360 is merged. -->
+<div class="alert alert-info">
+Message redaction requires dd-trace-py v4.14.0 or later.
+</div>
+
+When [sensitive data detection][2] is enabled for your service, AI Guard can also redact the sensitive values it finds. Redaction rules and placeholders are configured in Datadog, per service: go to {{< ui >}}Security{{< /ui >}} > {{< ui >}}Sensitive Data Scanner{{< /ui >}} > {{< ui >}}Configuration{{< /ui >}} > [{{< ui >}}AI Guard{{< /ui >}}][3]. The SDK never chooses a placeholder itself; it applies what the service returns.
+
+To use redaction, send the conversation to `evaluate` as usual, then pass the `messages` field of the result to your LLM provider instead of the list you started with:
+
+```py
+messages = [
+    Message(role="system", content="You are an AI Assistant"),
+    Message(role="user", content="My SSN is 123-45-6789, is that a valid one?"),
+]
+
+result = client.evaluate(messages=messages)
+
+# Sensitive values are replaced with the placeholder configured for your service:
+# [{"role": "system", "content": "You are an AI Assistant"},
+#  {"role": "user", "content": "My SSN is <REDACTED>, is that a valid one?"}]
+# llm_client is your LLM provider client, for example openai.OpenAI()
+response = llm_client.chat.completions.create(
+    model="gpt-4o",
+    messages=result["messages"],
+)
+```
+
+The SDK never modifies the list you passed in. When there is nothing to redact, `result["messages"]` is that same list, so you can always forward it without checking whether redaction happened.
+
+When blocking is enabled and the evaluation blocks the conversation, no `Evaluation` is returned. The redacted conversation is available on the exception instead, which lets you log or store it without leaking the original values:
+
+```py
+from ddtrace.appsec.ai_guard import AIGuardAbortError
+
+try:
+    result = client.evaluate(messages=messages, options=Options(block=True))
+    messages = result["messages"]
+except AIGuardAbortError as e:
+    # e.messages holds the redacted conversation
+    logger.warning("AI Guard blocked the request: %s", e.reason)
+```
+
+The messages AI Guard reports to Datadog are redacted as well, so the original values do not appear in traces or in the AI Guard UI.
+
+To turn the transformation off without changing your code, set `DD_AI_GUARD_REDACTION_ENABLED=false`. Evaluations still run and sensitive data findings are still reported, but no message is modified.
+
 [1]: https://github.com/DataDog/dd-trace-py/releases/tag/v3.18.0
+[2]: /security/ai_guard/setup/#sensitive-data-scanning
+[3]: https://app.datadoghq.com/sensitive-data-scanner/configuration/ai-guard
 {{% /tab %}}
 {{% tab "Javascript" %}}
 The JavaScript SDK ([dd-trace-js v5.69.0][1] or later) offers a simplified interface for interacting with the REST API directly from JavaScript applications.
