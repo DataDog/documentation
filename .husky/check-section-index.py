@@ -35,12 +35,12 @@ def get_staged_files():
 def get_top_level_dir(file_path):
     """Extract the top-level directory under content/en/ from a file path.
 
-    For example, 'content/en/new_section/sub/page.md' returns 'new_section'.
+    For example, 'hugo/content/en/new_section/sub/page.md' returns 'new_section'.
     """
     parts = Path(file_path).parts
-    # parts: ('content', 'en', 'new_section', ...)
-    if len(parts) > 2:
-        return parts[2]
+    # parts: ('hugo', 'content', 'en', 'new_section', ...)
+    if len(parts) > 3:
+        return parts[3]
     return None
 
 
@@ -83,7 +83,7 @@ def has_index_file(repo_root, dir_name):
         return True
     # Also check if either variant is staged (new but not yet on disk)
     for name in ('_index.md', '_index.mdoc.md'):
-        relative = f'hugo/hugo/content/en/{dir_name}/{name}'
+        relative = f'hugo/content/en/{dir_name}/{name}'
         try:
             subprocess.run(
                 ['git', 'show', f':{relative}'],
