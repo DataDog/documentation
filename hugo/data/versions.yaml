@@ -1,0 +1,9 @@
+# Core versions
+agent_version: "7.80.4"
+agent_branch: "7.80.x"
+collector_version: "0.156.0"
+
+ddot_gateway_version: "7.80.4"
+
+# Tags
+agent_tag: "7.80.4-full"

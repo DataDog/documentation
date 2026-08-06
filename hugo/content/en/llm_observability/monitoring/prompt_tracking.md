@@ -1,0 +1,127 @@
+---
+title: Prompt Tracking
+description: Use Prompt Tracking to track your prompt templates and versions.
+
+further_reading:
+  - link: https://www.datadoghq.com/blog/llm-prompt-tracking
+    tag: Blog
+    text: Track, compare, and optimize your LLM prompts with Datadog LLM Observability
+  - link: "https://learn.datadoghq.com/courses/llm-obs-investigations"
+    tag: "Learning Center"
+    text: "Investigate with LLM Observability"
+
+---
+
+## Overview
+
+Prompt Tracking links prompt templates and versions to LLM calls. Prompt Tracking works alongside Agent Observability's traces, spans, and Playground, as well as [Prompt Management][8], which provides a centralized registry for creating and versioning prompts.
+
+Prompt Tracking enables you to:
+- See all prompts used by your LLM application or agent, with call volume and latency over time
+- Compare prompts or versions by calls, latency, tokens used, and cost
+- See detailed information about a prompt: review its version history, view a text diff, and jump to traces using a specific version
+- Filter [Trace Explorer][1] by prompt name, ID, or version to isolate impacted requests
+- Reproduce a run by populating [Agent Observability Playground][2] with the exact template and variables from any span
+
+{{< img src="llm_observability/monitoring/llm-prompt-tracking-hero.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+
+## Set up Prompt Tracking
+
+When Agent Observability is enabled, prompts fetched from the [Prompt Management][8] registry with `LLMObs.get_prompt()` are tracked automatically if the value returned by `prompt.format()` is passed directly to a supported, automatically instrumented LLM call. If the formatted value is copied or transformed, use `LLMObs.annotation_context()` as described in the Prompt Management documentation. The following setup options apply to prompts defined outside the registry.
+
+### With structured prompt metadata
+To use Prompt Tracking, you can submit structured prompt metadata (ID, optional version, template, variables).
+
+#### Agent Observability Python SDK
+If you are using the Agent Observability Python SDK (`dd-trace` v3.16.0+), attach prompt metadata to the LLM span using the `prompt` argument or helper. See the [Agent Observability Python SDK documentation][3].
+
+#### Agent Observability Node.js SDK
+If you are using the Agent Observability Node.js SDK (`dd-trace` v5.83.0+), attach prompt metadata to the LLM span using the `prompt` option. See the [Agent Observability Node.js SDK documentation][6].
+
+#### Agent Observability API
+If you are using the Agent Observability API intake, submit prompt metadata to the Spans API endpoint. See the [Agent Observability HTTP API reference documentation][4].
+
+#### OpenTelemetry instrumentation
+If you are using [OpenTelemetry instrumentation][7], you can attach prompt metadata to your LLM spans by setting the `_dd.ml_obs.prompt_tracking` attribute with a JSON string containing your prompt information.
+
+Set the attribute on any LLM span:
+
+{{< tabs >}}
+{{% tab "Python" %}}
+```python
+import json
+
+span.set_attribute("_dd.ml_obs.prompt_tracking", json.dumps({
+    "name": "greeting-prompt",
+    "version": "v1",
+    "template": "Hello {{name}}, tell me about {{topic}}",
+    "variables": {"name": "Alice", "topic": "weather"}
+}))
+```
+{{% /tab %}}
+{{% tab "JavaScript" %}}
+```javascript
+span.setAttribute("_dd.ml_obs.prompt_tracking", JSON.stringify({
+    name: "greeting-prompt",
+    version: "v1",
+    template: "Hello {{name}}, tell me about {{topic}}",
+    variables: { name: "Alice", topic: "weather" }
+}));
+```
+{{% /tab %}}
+{{% tab "Go" %}}
+```go
+span.SetAttributes(attribute.String("_dd.ml_obs.prompt_tracking",
+    `{"name":"greeting-prompt","version":"v1","template":"Hello {{name}}, tell me about {{topic}}","variables":{"name":"Alice","topic":"weather"}}`,
+))
+```
+{{% /tab %}}
+{{< /tabs >}}
+
+The following fields are supported in the prompt tracking JSON:
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `template` | string | Yes (or `chat_template`) | Template string for single-message prompts |
+| `chat_template` | array | Yes (or `template`) | List of `{"role": "...", "content": "..."}` message templates |
+| `id` | string | No | Unique identifier for the prompt. Defaults to `{ml_app}_unnamed-prompt` if omitted |
+| `name` | string | No | Prompt name. Used as a fallback for `id` if `id` is omitted |
+| `version` | string | No | User-supplied version tag |
+| `variables` | object | No | Template variable substitutions |
+| `rag_context_variables` | array of strings | No | Names of variables in `variables` that contain RAG context (ground truth). Used by RAG evaluators |
+| `rag_query_variables` | array of strings | No | Names of variables in `variables` that contain the user query. Used by RAG evaluators |
+
+<div class="alert alert-info">If you are using prompt templates, Agent Observability can automatically attach version information based on prompt content.</div>
+
+### With LangChain templates
+If you are using LangChain prompt templates, Datadog automatically captures prompt metadata without code changes. IDs are derived from module or template names. To override these IDs, see [Agent Observability Auto-instrumentation: LangChain][5].
+
+## Use Prompt Tracking in Agent Observability
+
+View your app in Agent Observability and select {{< ui >}}Prompts{{< /ui >}} on the left. The _Prompts view_ features the following information:
+
+- {{< ui >}}Prompt Call Count{{< /ui >}}: A timeseries chart displaying calls per prompt (or per version) over time
+- {{< ui >}}Recent Prompt Updates{{< /ui >}}: Information about recent prompt updates, including time of last update, call count, average latency, and average tokens per call
+- {{< ui >}}Most Tokens Used{{< /ui >}}: Prompts ranked by total (input or output) tokens
+- {{< ui >}}Highest Latency Prompts{{< /ui >}}: Prompts ranked by average duration
+
+{{< img src="llm_observability/monitoring/prompt_details.png" alt="Detail view for a single prompt." style="width:100%;" >}}
+
+Click on a prompt to open a detailed side-panel view that features information about version activity and various metrics. You can also see a diff view of two versions, open Trace Explorer pre-filtered to spans that use a selected version, or start a Playground session pre-populated with the selected version's template and variables.
+
+{{< img src="llm_observability/monitoring/prompt_tracking_trace_explorer3.png" alt="Prompts view for an app in Agent Observability." style="width:100%;" >}}
+
+You can use the Agent Observability Trace Explorer to locate requests by prompt usage. You can use a prompt's name, ID, and version as facets for both trace-level and span-level search. Click any LLM span to see the prompt that generated it.
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: https://app.datadoghq.com/llm/traces
+[2]: https://app.datadoghq.com/llm/playground
+[3]: /llm_observability/instrumentation/sdk/?tab=python#prompt-tracking
+[4]: /llm_observability/instrumentation/api/?tab=model#prompt
+[5]: /llm_observability/instrumentation/auto_instrumentation?tab=python#langchain
+[6]: /llm_observability/instrumentation/sdk/?tab=nodejs#prompt-tracking
+[7]: /llm_observability/instrumentation/otel_instrumentation
+[8]: /llm_observability/monitoring/prompt_management
