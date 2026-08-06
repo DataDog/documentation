@@ -9,7 +9,7 @@ Agent installation requires permissions beyond the base [AWS integration IAM pol
 
 Add the following permissions to your AWS integration IAM policy:
 
-<!-- TODO(DOCS-14545): replace the placeholder block below with the final policy from eng (Grant), formatted to match the other JSON policy blocks on the AWS integration page. -->
+<!-- TODO(DOCS-14545): replace the placeholder block below with the final policy from eng (Grant), formatted to match the other JSON policy blocks on the AWS integration page. The actions below are derived from the permissions table in the setup guide; the guide also requires "the matching Get and List reads" for the IAM actions, which eng still needs to enumerate. -->
 
 ```json
 {
@@ -19,15 +19,34 @@ Add the following permissions to your AWS integration IAM policy:
       "Sid": "DatadogAgentInstall",
       "Effect": "Allow",
       "Action": [
-        "secretsmanager:CreateSecret",
-        "secretsmanager:PutSecretValue",
-        "iam:CreateRole",
-        "iam:AttachRolePolicy",
-        "iam:PassRole",
+        "ec2:DescribeInstances",
+        "ec2:AssociateIamInstanceProfile",
+        "ec2:Disassociate*",
+        "ec2:DescribeIamInstanceProfileAssociations",
+        "ssm:DescribeInstanceInformation",
+        "ssm:GetDocument",
+        "ssm:CreateDocument",
+        "ssm:UpdateDocument",
+        "ssm:UpdateDocumentDefaultVersion",
         "ssm:SendCommand",
-        "ssm:ListCommands",
+        "ssm:ListCommandInvocations",
+        "secretsmanager:DescribeSecret",
+        "secretsmanager:CreateSecret",
+        "iam:CreateRole",
+        "iam:CreateInstanceProfile",
+        "iam:AddRoleToInstanceProfile",
+        "iam:AttachRolePolicy",
+        "iam:PutRolePolicy",
+        "iam:PassRole",
+        "iam:Detach*",
+        "iam:Delete*",
+        "iam:RemoveRoleFromInstanceProfile",
+        "ecs:ListClusters",
+        "ecs:ListContainerInstances",
         "events:PutRule",
-        "events:PutTargets"
+        "events:PutTargets",
+        "events:RemoveTargets",
+        "events:DeleteRule"
       ],
       "Resource": "*"
     }

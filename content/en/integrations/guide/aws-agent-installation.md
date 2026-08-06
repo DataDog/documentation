@@ -33,20 +33,17 @@ Amazon EKS is not supported yet. Support for more AWS resource types is planned,
 
 ## Prerequisites
 
-Before you begin, make sure of the following:
+Before you begin, confirm the following:
 
-- You can approve a CloudFormation stack in the target AWS account. Installation deploys a CloudFormation stack in your account, so you (or a teammate) need permission to review and create it. For the required permissions and why they're needed, see the [Required AWS permissions](#required-aws-permissions) section.
-
-The following requirements also apply:
-
-- The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
-- Supported platforms: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
+- **CloudFormation access**: You can approve a CloudFormation stack in the target AWS account. Installation deploys a stack in your account, so you (or a teammate) need permission to review and create it. For the required permissions and why they're needed, see the [Required AWS permissions](#required-aws-permissions) section.
+- **SSM Agent**: The [AWS Systems Manager (SSM) Agent][2] must already be present on the target instances. Datadog installs the Agent through SSM and can't install the SSM Agent for you, so instances built from custom AMIs without the SSM Agent are not eligible. Datadog flags these instances so you can address them.
+- **Supported platforms**: Linux (x86_64 and arm64) and Windows (x86_64). macOS and Windows on arm64 are not supported.
 
 ## Required AWS permissions
 
 {{% aws-agent-installation %}}
 
-Each permission maps to a specific task:
+Datadog uses each of these permissions for a specific task:
 
 | Permission | Why Datadog needs it |
 |---|---|
@@ -57,18 +54,19 @@ Each permission maps to a specific task:
 | `secretsmanager:DescribeSecret`, `secretsmanager:CreateSecret` | Store the API key so it is never passed in a command |
 | `iam:CreateRole`, `iam:CreateInstanceProfile`, `iam:AddRoleToInstanceProfile`, `iam:AttachRolePolicy`, `iam:PutRolePolicy`, `iam:PassRole`, `ec2:AssociateIamInstanceProfile`, and the matching `Get` and `List` reads | Give an instance the minimum access it needs in case it does not have an IAM role: reachable by Systems Manager, and able to read its own API key secret |
 | `iam:Detach*`, `iam:Delete*`, `iam:RemoveRoleFromInstanceProfile`, `ec2:Disassociate*`, `ec2:DescribeIamInstanceProfileAssociations` | Cleanly undo the resources above when you uninstall |
-| `ecs:ListClusters`, `ecs:ListContainerInstances` | Recognize ECS container instances so Datadog skips them (they are handled at the cluster level) |
-| `events:PutRule`, `events:PutTargets`, `events:RemoveTargets`, `events:DeleteRule` | Set up the change notifications that let Datadog react quickly |
+| `ecs:ListClusters`, `ecs:ListContainerInstances` | Recognize Amazon Elastic Container Service (ECS) container instances so Datadog skips them (they are handled at the cluster level) |
+| `events:PutRule`, `events:PutTargets`, `events:RemoveTargets`, `events:DeleteRule` | Set up the change notifications that let Datadog react to instance changes |
 
 `iam:CreateRole` and `iam:PassRole` are the most sensitive grants. `iam:CreateRole` is restricted to role names matching `datadog-ec2-instrumenter/datadog-ssm-*` in your account, and `iam:PassRole` is further restricted to the Amazon EC2 service.
 
 ## How it works
 
-When you install the Agent through the AWS integration, you choose the instances, and Datadog handles the deployment inside your own account:
+Agent installation is based on an **installation rule**: an AWS account paired with a query that describes which EC2 instances to cover. Saving a rule resolves the query into a fixed list of instances. Datadog then installs the Agent on each one, inside your own account:
 
-1. Select the EC2 instances where you want the Agent installed, or opt in to all eligible instances.
-1. Datadog deploys the Agent to those instances through AWS Systems Manager. If an instance is missing the IAM configuration required to install the Agent, Datadog sets it up automatically.
-1. Datadog installs the Agent on the instances your rule covers and keeps them instrumented. New instances aren't added automatically until you update the rule.
+1. You select the EC2 instances to cover, or opt in to all eligible instances.
+1. Datadog resolves your selection into a list of covered instances and records it.
+1. Datadog installs the Agent on each covered instance through AWS Systems Manager, adding any missing IAM configuration automatically.
+1. Datadog keeps the covered instances instrumented. Instances launched later aren't added until you update the rule.
 
 You approve one CloudFormation stack, one time, during initial setup. After that, installations run automatically from Datadog, with no new CloudFormation template to launch for each installation.
 
