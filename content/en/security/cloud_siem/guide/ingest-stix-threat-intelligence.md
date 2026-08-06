@@ -99,7 +99,7 @@ The endpoint has the following requirements and limits:
 
 Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests IP addresses (both IPv4 and IPv6), domains, and SHA-256 file hashes.
 
-Datadog extracts string values from supported object paths using `=` or `IN`. Within one bracketed observation, comparisons can be joined with `AND` or `OR`. Separate bracketed observations can be joined with `OR`, but not `AND`. Datadog imports each extracted value as a separate indicator and does not preserve the relationship between comparisons.
+Datadog extracts exact values from `=` and `IN` comparisons. It also accepts `OR` expressions and imports each value as a separate indicator. `AND` between bracketed expressions is not supported.
 
 ```json
 "pattern": "[ipv4-addr:value = '198.51.100.1'] OR [domain-name:value IN ('example.com', 'example.net')]"
@@ -146,7 +146,7 @@ A successful request returns `200 OK` and a summary of how Datadog processed the
 
 | Attribute | Description |
 |---|---|
-| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN`, contains multiple comparisons within an observation, or joins observations with `OR`. |
+| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN` or `OR`. |
 | `unsupported` | The number of indicator objects that Datadog skipped because their type, pattern, or object-level STIX version is not supported. |
 | `invalid` | The number of indicator objects whose pattern Datadog could not parse. |
 
