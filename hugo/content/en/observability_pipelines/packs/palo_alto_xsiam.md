@@ -7,7 +7,7 @@ description: Learn more about the Palo Alto Networks - XSIAM pack.
 
 {{< img src="observability_pipelines/packs/palo_alto_xsiam.png" alt="The Palo Alto Networks - XSIAM pack" style="width:25%;" >}}
 
-PAN-OS logs remapped to the Cortex XSIAM flat JSON schema.
+This pack remaps PAN-OS logs to the Cortex XSIAM flat JSON schema.
 
 What this pack does:
 

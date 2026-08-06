@@ -7,7 +7,7 @@ description: Learn more about the MITRE ATT&CK Windows Enrichment pack.
 
 {{< img src="observability_pipelines/packs/mitre_attack_windows_enrichment.png" alt="The MITRE ATT&CK Windows Enrichment pack" style="width:25%;" >}}
 
-Windows event logs tagged with MITRE ATT&CK tactics and techniques.
+This pack tags Windows event logs with MITRE ATT&CK tactics and techniques.
 
 What this pack does:
 

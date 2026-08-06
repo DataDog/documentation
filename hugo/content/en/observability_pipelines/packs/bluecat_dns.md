@@ -7,7 +7,7 @@ description: Learn more about the BlueCat DNS pack.
 
 {{< img src="observability_pipelines/packs/bluecat_dns.png" alt="The BlueCat DNS pack" style="width:25%;" >}}
 
-BlueCat BDDS syslog for DNS queries and DHCP leases.
+BlueCat BDDS syslog captures DNS queries and DHCP leases.
 
 What this pack does:
 

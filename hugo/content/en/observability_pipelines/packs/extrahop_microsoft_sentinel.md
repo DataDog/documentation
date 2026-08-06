@@ -7,7 +7,7 @@ description: Learn more about the ExtraHop - Microsoft Sentinel pack.
 
 {{< img src="observability_pipelines/packs/extrahop_microsoft_sentinel.png" alt="The ExtraHop - Microsoft Sentinel pack" style="width:25%;" >}}
 
-ExtraHop Reveal(x) network detections tagged with severity and IPs for Microsoft Sentinel ingestion.
+This pack tags ExtraHop Reveal(x) network detections with severity and IPs for Microsoft Sentinel ingestion.
 
 What this pack does:
 

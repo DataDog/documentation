@@ -7,7 +7,7 @@ description: Learn more about the Cisco IOS pack.
 
 {{< img src="observability_pipelines/packs/cisco_ios.png" alt="The Cisco IOS pack" style="width:25%;" >}}
 
-Cisco IOS syslog for security, auth, and routing events.
+Cisco IOS syslog captures security, auth, and routing events.
 
 What this pack does:
 

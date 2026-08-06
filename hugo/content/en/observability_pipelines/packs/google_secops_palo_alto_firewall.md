@@ -7,7 +7,7 @@ description: Learn more about the Google SecOps - Palo Alto Firewall pack.
 
 {{< img src="observability_pipelines/packs/google_secops_palo_alto_firewall.png" alt="The Google SecOps - Palo Alto Firewall pack" style="width:25%;" >}}
 
-PAN-OS logs remapped to the UDM schema in Google Security Operations.
+This pack remaps PAN-OS logs to the UDM schema in Google Security Operations.
 
 What this pack does:
 

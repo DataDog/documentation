@@ -7,7 +7,7 @@ description: Learn more about the GCP Firewall pack.
 
 {{< img src="observability_pipelines/packs/gcp_firewall.png" alt="The GCP Firewall pack" style="width:25%;" >}}
 
-GCP VPC Firewall logs traffic allowed and denied.
+GCP VPC Firewall logs record allowed and denied traffic.
 
 What this pack does:
 

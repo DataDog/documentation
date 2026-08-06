@@ -7,7 +7,7 @@ description: Learn more about the MITRE ATT&CK FortiGate Enrichment pack.
 
 {{< img src="observability_pipelines/packs/mitre_attack_fortigate_enrichment.png" alt="The MITRE ATT&CK FortiGate Enrichment pack" style="width:25%;" >}}
 
-FortiGate logs tagged with MITRE ATT&CK tactics and techniques.
+This pack tags FortiGate logs with MITRE ATT&CK tactics and techniques.
 
 What this pack does:
 

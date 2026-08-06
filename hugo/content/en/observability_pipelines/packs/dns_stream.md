@@ -7,7 +7,7 @@ description: Learn more about the DNS Stream pack.
 
 {{< img src="observability_pipelines/packs/dns_stream.png" alt="The DNS Stream pack" style="width:25%;" >}}
 
-Vendor-neutral DNS query/response stream with tunneling and DGA beaconing indicators.
+This vendor-neutral DNS query/response stream includes tunneling and DGA beaconing indicators.
 
 What this pack does:
 

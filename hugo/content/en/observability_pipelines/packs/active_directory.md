@@ -7,7 +7,7 @@ description: Learn more about the Active Directory pack.
 
 {{< img src="observability_pipelines/packs/active_directory.png" alt="The Active Directory pack" style="width:25%;" >}}
 
-AD DS Kerberos authentication, directory-service changes, and DCSync replication abuse events.
+This pack processes Active Directory Domain Services events, including Kerberos authentication, directory-service changes, and DCSync replication abuse.
 
 What this pack does:
 

@@ -7,7 +7,7 @@ description: Learn more about the Cisco ASA - Microsoft Sentinel pack.
 
 {{< img src="observability_pipelines/packs/cisco_asa_microsoft_sentinel.png" alt="The Cisco ASA - Microsoft Sentinel pack" style="width:25%;" >}}
 
-Maps parsed Cisco ASA syslog events to the CommonSecurityLog schema in Microsoft Sentinel.
+This pack maps parsed Cisco ASA syslog events to the CommonSecurityLog schema in Microsoft Sentinel.
 
 What this pack does:
 

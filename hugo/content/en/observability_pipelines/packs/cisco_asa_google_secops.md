@@ -7,7 +7,7 @@ description: Learn more about the Cisco ASA - Google SecOps pack.
 
 {{< img src="observability_pipelines/packs/cisco_asa_google_secops.png" alt="The Cisco ASA - Google SecOps pack" style="width:25%;" >}}
 
-Maps syslog events to the UDM schema in Google Security Operations.
+This pack maps Cisco ASA syslog events to the UDM schema in Google Security Operations.
 
 What this pack does:
 

@@ -7,7 +7,7 @@ description: Learn more about the Google SecOps - AWS VPC pack.
 
 {{< img src="observability_pipelines/packs/google_secops_aws_vpc.png" alt="The Google SecOps - AWS VPC pack" style="width:25%;" >}}
 
-Maps flow records to the UDM schema in Google Security Operations.
+This pack maps AWS VPC flow records to the UDM schema in Google Security Operations.
 
 What this pack does:
 

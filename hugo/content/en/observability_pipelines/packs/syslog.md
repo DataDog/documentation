@@ -7,7 +7,7 @@ description: Learn more about the Syslog pack.
 
 {{< img src="observability_pipelines/packs/syslog.png" alt="The Syslog pack" style="width:25%;" >}}
 
-Generic RFC 3164/5424 syslog parsing with severity mapping and a log-volume metric.
+This pack parses generic RFC 3164/5424 syslog with severity mapping and a log-volume metric.
 
 What this pack does:
 

@@ -12,5 +12,5 @@ Cisco ASA firewall logs sent to Exabeam, filtered by ASA code to drop non-action
 What this pack does:
 
 - Normalizes ASA codes
-- Dedupes repeated logs
+- Deduplicates repeated logs
 - Drops non-actionable syslog noise

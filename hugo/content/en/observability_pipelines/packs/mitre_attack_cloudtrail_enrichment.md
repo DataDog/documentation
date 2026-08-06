@@ -7,7 +7,7 @@ description: Learn more about the MITRE ATT&CK CloudTrail Enrichment pack.
 
 {{< img src="observability_pipelines/packs/mitre_attack_cloudtrail_enrichment.png" alt="The MITRE ATT&CK CloudTrail Enrichment pack" style="width:25%;" >}}
 
-CloudTrail logs tagged with MITRE ATT&CK tactics and techniques.
+This pack tags CloudTrail logs with MITRE ATT&CK tactics and techniques.
 
 What this pack does:
 

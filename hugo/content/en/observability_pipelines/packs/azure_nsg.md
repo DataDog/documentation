@@ -7,7 +7,7 @@ description: Learn more about the Azure NSG pack.
 
 {{< img src="observability_pipelines/packs/azure_nsg.png" alt="The Azure NSG pack" style="width:25%;" >}}
 
-Azure Network Security Group v2 flow logs, expanded per-connection with decision and byte counts.
+Azure Network Security Group v2 flow logs record per-connection decisions and byte counts.
 
 What this pack does:
 

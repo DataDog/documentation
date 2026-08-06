@@ -7,7 +7,7 @@ description: Learn more about the Google Cloud Audit pack.
 
 {{< img src="observability_pipelines/packs/google_cloud_audit.png" alt="The Google Cloud Audit pack" style="width:25%;" >}}
 
-Google Cloud Audit logs for admin activity and policy violations.
+Google Cloud Audit logs capture admin activity and policy violations.
 
 What this pack does:
 

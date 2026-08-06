@@ -7,7 +7,7 @@ description: Learn more about the Orca Security pack.
 
 {{< img src="observability_pipelines/packs/orca_security.png" alt="The Orca Security pack" style="width:25%;" >}}
 
-Orca Security cloud findings normalized for SIEM and data lake routing.
+This pack normalizes Orca Security cloud findings for SIEM and data lake routing.
 
 What this pack does:
 

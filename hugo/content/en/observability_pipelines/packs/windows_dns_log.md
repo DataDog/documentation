@@ -7,7 +7,7 @@ description: Learn more about the Windows DNS Log pack.
 
 {{< img src="observability_pipelines/packs/windows_dns_log.png" alt="The Windows DNS Log pack" style="width:25%;" >}}
 
-Windows DNS Server analytic log covering queries, zone transfers, and dynamic updates.
+The Windows DNS Server analytic log covers queries, zone transfers, and dynamic updates.
 
 What this pack does:
 

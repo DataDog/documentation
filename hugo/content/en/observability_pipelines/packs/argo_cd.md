@@ -7,7 +7,7 @@ description: Learn more about the Argo CD pack.
 
 {{< img src="observability_pipelines/packs/argo_cd.png" alt="The Argo CD pack" style="width:25%;" >}}
 
-Argo CD sync, health, and RBAC events from the application controller and API server.
+This pack processes Argo CD sync, health, and RBAC events from the application controller and API server.
 
 What this pack does:
 

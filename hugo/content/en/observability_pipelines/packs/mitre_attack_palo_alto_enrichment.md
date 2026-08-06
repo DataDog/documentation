@@ -7,7 +7,7 @@ description: Learn more about the MITRE ATT&CK Palo Alto Enrichment pack.
 
 {{< img src="observability_pipelines/packs/mitre_attack_palo_alto_enrichment.png" alt="The MITRE ATT&CK Palo Alto Enrichment pack" style="width:25%;" >}}
 
-Palo Alto logs tagged with MITRE ATT&CK tactics and techniques.
+This pack tags Palo Alto logs with MITRE ATT&CK tactics and techniques.
 
 What this pack does:
 
