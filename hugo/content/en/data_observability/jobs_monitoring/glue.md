@@ -55,6 +55,7 @@ The Data Observability crawler requires additional permissions to monitor Glue j
         "glue:GetJobs",
         "glue:GetTable",
         "glue:GetTables",
+        "glue:GetTags",
         "glue:ListJobs",
         "s3:ListBucket",
         "kms:Decrypt",
@@ -78,6 +79,8 @@ The Data Observability crawler requires additional permissions to monitor Glue j
 ```
 
 Some of these permissions are related to monitoring Iceberg tables in Glue. For more details on dataset-related IAM permissions, see the [AWS Glue Data Quality Monitoring documentation][7].
+
+**Note**: If the connected role is missing `glue:GetTags`, jobs still sync, but without their AWS tags — you can spot this by a crawler warning stating "Access denied fetching tags for Glue job... Grant glue:GetTags to the integration role." Add the permission and it's picked up on the next crawl.
 
 ## Configure the crawler
 
