@@ -59806,6 +59806,10 @@ components:
           example: "2024-01-15T10:30:00Z"
           format: date-time
           type: string
+        curation_enabled:
+          description: Whether automatic dataset curation is enabled for this configuration.
+          example: true
+          type: boolean
         evp_query:
           description: Query that selects the spans the patterns run analyzes.
           example: "@ml_app:support-bot"
@@ -59878,6 +59882,10 @@ components:
           example: "2024-01-15T10:30:00Z"
           format: date-time
           type: string
+        curation_enabled:
+          description: Whether automatic dataset curation is enabled for this configuration.
+          example: true
+          type: boolean
         evp_query:
           description: Query that selects the spans the patterns run analyzes.
           example: "@ml_app:support-bot"
@@ -60035,6 +60043,13 @@ components:
           description: The ID of an existing configuration to update. If omitted, a new configuration is created.
           example: "a7c8d9e0-1234-5678-9abc-def012345678"
           type: string
+        curation_enabled:
+          description: |-
+            When true, Datadog automatically provisions a managed project and dataset
+            (`{pattern-name}-pattern-curated`) to receive suggested interactions after
+            each run. Defaults to true for new patterns.
+          example: true
+          type: boolean
         evp_query:
           description: Query that selects the spans the patterns run analyzes.
           example: "@ml_app:support-bot"
@@ -163113,6 +163128,7 @@ paths:
                       attributes:
                         configs:
                           - created_at: "2024-01-15T10:30:00Z"
+                            curation_enabled: true
                             evp_query: "@ml_app:support-bot"
                             hierarchy_depth: 2
                             id: a7c8d9e0-1234-5678-9abc-def012345678
@@ -163193,6 +163209,7 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
+                        curation_enabled: true
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
                         name: Support chatbot topics
@@ -163229,6 +163246,12 @@ paths:
               schema:
                 $ref: "#/components/schemas/JSONAPIErrorResponse"
           description: Not Found
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
         "500":
@@ -163261,6 +163284,7 @@ paths:
                     data:
                       attributes:
                         created_at: "2024-01-15T10:30:00Z"
+                        curation_enabled: true
                         evp_query: "@ml_app:support-bot"
                         hierarchy_depth: 2
                         name: Support chatbot topics
