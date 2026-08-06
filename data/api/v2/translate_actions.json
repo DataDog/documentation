@@ -2002,23 +2002,67 @@
     "description": "Returns organizations across regions for the authenticated user. The `user_handle` query parameter must match the authenticated user's handle.",
     "summary": "List global orgs"
   },
+  "GetGovernanceConfig": {
+    "description": "Retrieve the Governance Console configuration for the organization, including whether the\nConsole is enabled, whether assignment notifications are enabled, and whether usage\nattribution is configured.",
+    "summary": "Get the Governance Console configuration"
+  },
   "ListGovernanceControls": {
     "description": "Retrieve the list of governance controls configured for the organization. Each control pairs a\ndetection definition with the organization's current detection, notification, and mitigation\nconfiguration, along with counts of active and mitigated detections.",
-    "summary": "List governance controls"
+    "summary": "List controls"
   },
   "GetGovernanceControl": {
     "description": "Retrieve a single governance control by its detection type, including the organization's current\ndetection, notification, and mitigation configuration and detection counts.",
-    "summary": "Get a governance control"
+    "summary": "Get a control"
   },
   "UpdateGovernanceControl": {
     "description": "Update the detection, notification, and mitigation configuration of a governance control. Only\nthe attributes present in the request are modified. Changing the mitigation type or its\nparameters may require additional permissions.",
-    "summary": "Update a governance control",
+    "summary": "Update a control",
     "request_description": "",
     "request_schema_description": "A request to update a governance control."
   },
+  "ListGovernanceControlDetections": {
+    "description": "Retrieve the detections produced by the governance control with the given detection type.\nResults can be filtered by state and free-text query, sorted, and paginated.",
+    "summary": "List control detections"
+  },
+  "GetGovernanceControlNotificationSettings": {
+    "description": "Retrieve the notification settings for the governance control with the given detection type,\nincluding, for each supported event type, whether notifications are enabled and which\ndestinations receive them.",
+    "summary": "Get control notification settings"
+  },
+  "UpdateGovernanceControlNotificationSettings": {
+    "description": "Replace the notification settings for the governance control with the given detection type,\nsetting, for each supported event type, whether notifications are enabled and which\ndestinations receive them.",
+    "summary": "Update control notification settings",
+    "request_description": "",
+    "request_schema_description": "A request to update the notification settings for a governance control."
+  },
+  "MitigateGovernanceDetections": {
+    "description": "Apply a mitigation to a set of governance detections of a given detection type. When the\nmitigation type is omitted, the control's configured mitigation is used. The request is\naccepted for asynchronous processing.",
+    "summary": "Mitigate detections",
+    "request_description": "",
+    "request_schema_description": "A request to mitigate a set of governance detections."
+  },
+  "GetGovernanceDetection": {
+    "description": "Retrieve a single governance detection by its unique identifier.",
+    "summary": "Get a detection"
+  },
+  "UpdateGovernanceDetection": {
+    "description": "Update a governance detection by its unique identifier. Only the attributes present in the\nrequest are modified, allowing a detection to be acknowledged as an exception, reopened,\nreassigned, or deferred for mitigation.",
+    "summary": "Update a detection",
+    "request_description": "",
+    "request_schema_description": "A request to update a governance control detection."
+  },
   "ListGovernanceInsights": {
-    "description": "Retrieve the list of governance insights available to the organization. By default, only\ninsight metadata is returned; pass `withValues=true` to also compute and include each\ninsight's current and previous values. Insights can be filtered by product.",
-    "summary": "List governance insights"
+    "description": "Retrieve the list of governance insights available to the organization. Each insight\nreports the query used to compute it, so that the value can be computed client-side.\nInsights can be filtered by product.",
+    "summary": "List insights"
+  },
+  "GetGovernanceNotificationSettings": {
+    "description": "Retrieve the organization-wide governance notification settings, including whether users are\nnotified when detections are assigned to them.",
+    "summary": "Get notification settings"
+  },
+  "UpdateGovernanceNotificationSettings": {
+    "description": "Update the organization-wide governance notification settings. Only the attributes present in\nthe request are modified.",
+    "summary": "Update notification settings",
+    "request_description": "",
+    "request_schema_description": "A request to update the organization-wide governance notification settings."
   },
   "GetHamrOrgConnection": {
     "description": "Retrieve the High Availability Multi-Region (HAMR) organization connection details for the authenticated organization.\nThis endpoint returns information about the HAMR connection configuration, including the target organization,\ndatacenter, status, and whether this is the primary or secondary organization in the HAMR relationship.",

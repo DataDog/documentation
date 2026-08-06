@@ -21934,6 +21934,125 @@ components:
         - IDENTITY
         - GZIP
         - DEFLATE
+    ControlNotificationEventSetting:
+      description: The notification settings for a single event type on a control.
+      properties:
+        enabled:
+          description: Whether notifications are enabled for this event type.
+          example: true
+          type: boolean
+        event_type:
+          description: The event type the notification settings apply to, such as `new_detection`.
+          example: "new_detection"
+          type: string
+        targets:
+          $ref: "#/components/schemas/ControlNotificationTargetArray"
+      required:
+        - event_type
+        - enabled
+        - targets
+      type: object
+    ControlNotificationEventSettingsArray:
+      description: The notification settings for each supported event type on the control.
+      items:
+        $ref: "#/components/schemas/ControlNotificationEventSetting"
+      type: array
+    ControlNotificationSettingsAttributes:
+      description: The attributes of a governance control's notification settings.
+      properties:
+        event_settings:
+          $ref: "#/components/schemas/ControlNotificationEventSettingsArray"
+      required:
+        - event_settings
+      type: object
+    ControlNotificationSettingsData:
+      description: A control notification settings resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ControlNotificationSettingsAttributes"
+        id:
+          description: The detection type the notification settings apply to.
+          example: "unused_api_keys"
+          type: string
+        type:
+          $ref: "#/components/schemas/ControlNotificationSettingsResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    ControlNotificationSettingsResourceType:
+      description: Control notification settings resource type.
+      enum:
+        - control_notification_settings
+      example: "control_notification_settings"
+      type: string
+      x-enum-varnames:
+        - CONTROL_NOTIFICATION_SETTINGS
+    ControlNotificationSettingsResponse:
+      description: The notification settings for a governance control.
+      properties:
+        data:
+          $ref: "#/components/schemas/ControlNotificationSettingsData"
+      required:
+        - data
+      type: object
+    ControlNotificationSettingsUpdateAttributes:
+      description: The attributes of a governance control's notification settings that can be updated.
+      properties:
+        event_settings:
+          $ref: "#/components/schemas/ControlNotificationEventSettingsArray"
+      type: object
+    ControlNotificationSettingsUpdateData:
+      description: The data of a control notification settings update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/ControlNotificationSettingsUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/ControlNotificationSettingsResourceType"
+      required:
+        - type
+      type: object
+    ControlNotificationSettingsUpdateRequest:
+      description: A request to update the notification settings for a governance control.
+      properties:
+        data:
+          $ref: "#/components/schemas/ControlNotificationSettingsUpdateData"
+      required:
+        - data
+      type: object
+    ControlNotificationTarget:
+      description: A destination that receives notifications for an event type.
+      properties:
+        handle:
+          description: The destination handle, such as an email address, Slack channel, or user handle.
+          example: "#governance-alerts"
+          type: string
+        type:
+          $ref: "#/components/schemas/ControlNotificationTargetType"
+      required:
+        - type
+        - handle
+      type: object
+    ControlNotificationTargetArray:
+      description: The destinations that receive notifications for an event type.
+      items:
+        $ref: "#/components/schemas/ControlNotificationTarget"
+      type: array
+    ControlNotificationTargetType:
+      description: The type of notification destination.
+      enum:
+        - email
+        - slack
+        - at_mention
+        - case
+      example: "slack"
+      type: string
+      x-enum-varnames:
+        - EMAIL
+        - SLACK
+        - AT_MENTION
+        - CASE
     ConvertJobResultsToSignalsAttributes:
       description: Attributes for converting historical job results to signals.
       properties:
@@ -44704,91 +44823,68 @@ components:
         - id
         - type
       type: object
-    GovernanceBestPracticeDefinition:
-      description: |-
-        The best practice associated with an insight. Populated with the first active best practice
-        matched to the insight; `null` when no best practice is attached.
+    GovernanceConfigAttributes:
+      description: The attributes of a Governance Console configuration.
       properties:
-        category:
+        assignment_notifications_enabled:
+          description: Whether notifications are sent to users when detections are assigned to them.
+          example: true
+          type: boolean
+        enabled:
+          description: Whether the Governance Console is enabled for the organization.
+          example: true
+          type: boolean
+        usage_attribution_configured:
+          description: Whether usage attribution is configured for the organization.
+          example: true
+          type: boolean
+        xorg_insights_enabled:
           description: |-
-            The value driver the best practice is grouped under, such as `access_governance`,
-            `security`, `compliance`, or `operational_hygiene`.
-          example: "access_governance"
-          type: string
-        deep_link:
-          description: A relative link to the configuration page where the best practice can be acted upon.
-          example: "/organization-settings/users?status=inactive"
-          type: string
-        description:
-          description: The full rationale and guidance for the best practice.
-          example: "Review and deactivate users who have not logged in within the last 90 days."
-          type: string
-        detection_type:
-          description: An optional association to a control's detection type. `null` when not associated with a control.
-          example:
-          nullable: true
-          type: string
+            Whether the organization has opted in to sharing governance data with a managing org
+            for cross-org insights.
+          example: true
+          type: boolean
+      required:
+        - enabled
+        - assignment_notifications_enabled
+        - usage_attribution_configured
+        - xorg_insights_enabled
+      type: object
+    GovernanceConfigData:
+      description: A Governance Console configuration resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceConfigAttributes"
         id:
-          description: The unique identifier of the best practice.
-          example: "bp_monitor_inactive_users"
-          type: string
-        impact:
-          description: The expected impact of following the best practice.
-          example: "Reduces unauthorized access risk."
-          type: string
-        impact_hint:
           description: |-
-            A priority hint for ordering best practices by expected impact. Lower values indicate
-            higher priority.
-          example: 1
-          format: int64
-          type: integer
-        permissions:
-          description: The permissions required for the user to act on the best practice.
-          example:
-            - "user_access_manage"
-          items:
-            description: A permission required to act on the best practice.
-            type: string
-          type: array
-        status:
-          description: Whether the best practice is currently `active` or `deprecated`.
-          example: "active"
+            The unique identifier of the organization the Governance Console configuration applies
+            to. May be the nil UUID (`00000000-0000-0000-0000-000000000000`) when the configuration
+            is not tied to a specific organization record.
+          example: "00000000-0000-0000-0000-000000000000"
           type: string
-        summary:
-          description: A one-line explanation of why this best practice matters.
-          example: "Inactive users with access increase your security surface area."
-          type: string
-        title:
-          description: A short, human-readable name for the best practice.
-          example: "Monitor inactive users"
-          type: string
-        trigger_condition:
-          description: |-
-            The condition that surfaces the best practice. For an `insight` trigger, the insight
-            slug; for a `static` trigger, a descriptive condition key.
-          example: "active_users"
-          type: string
-        trigger_type:
-          description: |-
-            How the best practice is surfaced. `insight` ties it to an insight; `static` surfaces it
-            unless its condition is met.
-          example: "insight"
-          type: string
+        type:
+          $ref: "#/components/schemas/GovernanceConsoleConfigResourceType"
       required:
         - id
-        - title
-        - summary
-        - description
-        - category
-        - impact
-        - trigger_type
-        - trigger_condition
-        - deep_link
-        - permissions
-        - impact_hint
-        - status
+        - type
+        - attributes
       type: object
+    GovernanceConfigResponse:
+      description: The Governance Console configuration for an organization.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceConfigData"
+      required:
+        - data
+      type: object
+    GovernanceConsoleConfigResourceType:
+      description: Governance console config resource type.
+      enum:
+        - governance_console_config
+      example: "governance_console_config"
+      type: string
+      x-enum-varnames:
+        - GOVERNANCE_CONSOLE_CONFIG
     GovernanceControlAttributes:
       description: The attributes of a governance control.
       properties:
@@ -44821,17 +44917,6 @@ components:
         detection_parameters:
           $ref: "#/components/schemas/GovernanceControlParametersMap"
           nullable: true
-        detection_type:
-          description: The detection type that uniquely identifies the control.
-          example: "unused_api_keys"
-          type: string
-        feature_flags:
-          description: The feature flags that gate the control.
-          example: []
-          items:
-            description: A feature flag that gates the control.
-            type: string
-          type: array
         insights:
           description: The insight slugs associated with the control.
           example: []
@@ -44863,21 +44948,6 @@ components:
           description: Human-readable name of the control.
           example: "Unused API Keys"
           type: string
-        next_steps:
-          description: Guidance on the next steps to remediate detections for the control.
-          example: "Review and revoke API keys that are no longer in use to maintain a secure authentication posture."
-          type: string
-        notification_frequency:
-          description: The configured notification frequency for the control. Empty when not configured.
-          example: ""
-          type: string
-        notification_parameters:
-          $ref: "#/components/schemas/GovernanceControlParametersMap"
-          nullable: true
-        notification_type:
-          description: The configured notification type for the control. Empty when not configured.
-          example: ""
-          type: string
         priority:
           description: The priority of the control, such as `High`.
           example: "High"
@@ -44885,10 +44955,6 @@ components:
         product:
           description: The product the control belongs to.
           example: "api_keys"
-          type: string
-        release_status:
-          description: The release status of the control, such as `prod` or `beta`.
-          example: "prod"
           type: string
         resource_type:
           description: The type of resource the control evaluates.
@@ -44900,44 +44966,24 @@ components:
           type: string
         supported_detection_parameters:
           $ref: "#/components/schemas/GovernanceControlParameterDefinitionArray"
-        supported_notification_parameters:
-          $ref: "#/components/schemas/GovernanceControlParameterDefinitionArray"
-        task:
-          description: A short description of the remediation task for the control.
-          example: "Review and revoke unused API keys."
-          type: string
         type:
           description: The control type, such as `Proactive` or `Detection`.
           example: "Proactive"
           type: string
-        usage_concern:
-          description: The usage concern the control addresses, such as `Security` or `Cost Optimization`.
-          example: "Security"
-          type: string
       required:
         - name
         - description
-        - detection_type
         - supported_detection_parameters
-        - supported_notification_parameters
         - resource_type
         - resource_type_display_name
         - product
         - category
         - insights
         - mitigations
-        - task
-        - next_steps
-        - release_status
-        - feature_flags
         - type
         - priority
-        - usage_concern
         - detection_parameters
         - detection_frequency
-        - notification_type
-        - notification_parameters
-        - notification_frequency
         - mitigation_type
         - mitigation_parameters
         - created_at
@@ -44952,8 +44998,8 @@ components:
         attributes:
           $ref: "#/components/schemas/GovernanceControlAttributes"
         id:
-          description: The unique identifier of the control.
-          example: "0d4e6f8a-1b2c-3d4e-5f6a-7b8c9d0e1f2a"
+          description: The detection type that uniquely identifies the control.
+          example: "unused_api_keys"
           type: string
         type:
           $ref: "#/components/schemas/GovernanceControlResourceType"
@@ -44962,13 +45008,217 @@ components:
         - type
         - attributes
       type: object
+    GovernanceControlDetectionAssignmentSource:
+      description: How the detection's current assignment was determined. Possible values are `auto_resolved`, `manual`, `reassigned`, and `cleared`.
+      enum:
+        - auto_resolved
+        - manual
+        - reassigned
+        - cleared
+      example: "manual"
+      type: string
+      x-enum-varnames:
+        - AUTO_RESOLVED
+        - MANUAL
+        - REASSIGNED
+        - CLEARED
+    GovernanceControlDetectionAttributes:
+      description: The attributes of a governance control detection.
+      properties:
+        assigned_team:
+          description: The identifier of the team the detection is assigned to, if any.
+          example: "platform-security"
+          type: string
+        assigned_to:
+          description: The identifier of the user the detection is assigned to, if any.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        assignment_source:
+          $ref: "#/components/schemas/GovernanceControlDetectionAssignmentSource"
+        control_id:
+          deprecated: true
+          description: |-
+            DEPRECATED: mirrors `detection_type` for backward compatibility; use `detection_type`
+            instead.
+          example: "unused_api_keys"
+          type: string
+        created_at:
+          description: The date and time when the detection was created.
+          example: "2024-03-01T12:00:00Z"
+          format: date-time
+          type: string
+        detection_type:
+          description: The type of detection, which determines what condition was detected.
+          example: "unused_api_keys"
+          type: string
+        display_name:
+          description: The human-readable name of the detected resource.
+          example: "CI Deploy Key"
+          type: string
+        exception_at:
+          description: The date and time when the detection was marked as an exception, if applicable.
+          example: "2024-03-05T09:00:00Z"
+          format: date-time
+          type: string
+        exception_by:
+          description: The identifier of the user who marked the detection as an exception, if applicable.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        metadata:
+          description: Free-form metadata associated with the detection.
+          example:
+            region: "us-east-1"
+        mitigate_after:
+          description: The date and time after which the detection is scheduled to be mitigated, if applicable.
+          example: "2024-03-15T00:00:00Z"
+          format: date-time
+          type: string
+        mitigated_at:
+          description: The date and time when the detection was mitigated, if applicable.
+          example: "2024-03-10T15:30:00Z"
+          format: date-time
+          type: string
+        priority:
+          description: The priority of the detection, if set.
+          example: 1
+          format: int64
+          type: integer
+        resource_id:
+          description: The identifier of the resource the detection applies to.
+          example: "api-key-12345"
+          type: string
+        resource_type:
+          description: The type of resource the detection applies to, for example `api_key` or `dashboard`.
+          example: "api_key"
+          type: string
+        state:
+          $ref: "#/components/schemas/GovernanceControlDetectionState"
+      required:
+        - state
+        - control_id
+        - resource_id
+        - detection_type
+        - resource_type
+        - display_name
+        - created_at
+        - assignment_source
+        - priority
+      type: object
+    GovernanceControlDetectionData:
+      description: A governance control detection resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceControlDetectionAttributes"
+        id:
+          description: The unique identifier of the detection.
+          example: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+          type: string
+        type:
+          $ref: "#/components/schemas/GovernanceControlDetectionResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GovernanceControlDetectionResourceType:
+      description: Governance control detection resource type.
+      enum:
+        - governance_control_detection
+      example: "governance_control_detection"
+      type: string
+      x-enum-varnames:
+        - GOVERNANCE_CONTROL_DETECTION
+    GovernanceControlDetectionResponse:
+      description: A single governance control detection.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceControlDetectionData"
+      required:
+        - data
+      type: object
+    GovernanceControlDetectionState:
+      description: The current state of the detection. Possible values are `active`, `exception`, `mitigated`, `inactive`, `obsolete`, `resolved_externally`, and `mitigation_in_progress`.
+      enum:
+        - active
+        - exception
+        - mitigated
+        - inactive
+        - obsolete
+        - resolved_externally
+        - mitigation_in_progress
+      example: "active"
+      type: string
+      x-enum-varnames:
+        - ACTIVE
+        - EXCEPTION
+        - MITIGATED
+        - INACTIVE
+        - OBSOLETE
+        - RESOLVED_EXTERNALLY
+        - MITIGATION_IN_PROGRESS
+    GovernanceControlDetectionUpdateAttributes:
+      description: The attributes of a governance control detection that can be updated. Only the attributes present in the request are modified.
+      properties:
+        assigned_team:
+          description: The handle of the team the detection is assigned to. Set to an empty string to clear the assignment.
+          example: "platform-security"
+          type: string
+        assigned_to:
+          description: The UUID of the user the detection is assigned to. Set to an empty string to clear the assignment.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        mitigate_after:
+          description: The timestamp after which the detection becomes eligible for mitigation. Used to defer mitigation to a later time.
+          example: "2024-03-15T00:00:00Z"
+          format: date-time
+          type: string
+        state:
+          $ref: "#/components/schemas/GovernanceControlDetectionUpdateState"
+      type: object
+    GovernanceControlDetectionUpdateData:
+      description: The data of a governance control detection update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceControlDetectionUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/GovernanceControlDetectionResourceType"
+      required:
+        - type
+      type: object
+    GovernanceControlDetectionUpdateRequest:
+      description: A request to update a governance control detection.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceControlDetectionUpdateData"
+      required:
+        - data
+      type: object
+    GovernanceControlDetectionUpdateState:
+      description: The new state to set for the detection. Set to `exception` to acknowledge the detection and exclude it from active counts, or `active` to reopen it.
+      enum:
+        - exception
+        - active
+      example: "exception"
+      type: string
+      x-enum-varnames:
+        - EXCEPTION
+        - ACTIVE
+    GovernanceControlDetectionsDataArray:
+      description: An array of governance control detection resources.
+      items:
+        $ref: "#/components/schemas/GovernanceControlDetectionData"
+      type: array
+    GovernanceControlDetectionsResponse:
+      description: A list of governance control detections.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceControlDetectionsDataArray"
+      required:
+        - data
+      type: object
     GovernanceControlMitigationDefinition:
       description: The definition of a mitigation available for a control.
       properties:
-        action_verb:
-          description: The verb describing the mitigation action, such as `revoke` or `delete`.
-          example: "revoke"
-          type: string
         description:
           description: A human-readable description of the mitigation.
           example: "Automatically identifies and revokes inactive API keys to improve security and reduce potential attack surface."
@@ -44982,20 +45232,9 @@ components:
             description: An execution mode the mitigation supports.
             type: string
           type: array
-        feature_flags:
-          description: The feature flags that gate the mitigation.
-          example: []
-          items:
-            description: A feature flag that gates the mitigation.
-            type: string
-          type: array
         id:
           description: The unique identifier of the mitigation.
           example: "revoke_api_key"
-          type: string
-        manual_mitigation_warning:
-          description: A warning shown to the user before applying the mitigation manually.
-          example: "These API keys will be revoked immediately upon confirmation. To revoke future API keys, you must go through this flow again."
           type: string
         permissions:
           description: The permissions required to apply the mitigation.
@@ -45006,10 +45245,6 @@ components:
             description: A permission required to apply the mitigation.
             type: string
           type: array
-        requires_ai:
-          description: Whether the mitigation requires AI to be enabled.
-          example: false
-          type: boolean
         supported_parameters:
           $ref: "#/components/schemas/GovernanceControlParameterDefinitionArray"
         title:
@@ -45020,12 +45255,9 @@ components:
         - id
         - title
         - description
-        - action_verb
         - supported_parameters
         - permissions
-        - manual_mitigation_warning
-        - feature_flags
-        - requires_ai
+        - execution_modes
       type: object
     GovernanceControlMitigationDefinitionArray:
       description: The mitigations available for a control.
@@ -45046,10 +45278,6 @@ components:
           description: The human-readable name of the parameter.
           example: "Unused API Key Threshold"
           type: string
-        hidden:
-          description: Whether the parameter is hidden from the UI.
-          example: false
-          type: boolean
         name:
           description: The machine-readable name of the parameter.
           example: "api_key_threshold"
@@ -45070,7 +45298,6 @@ components:
         - description
         - type
         - required
-        - hidden
         - supported_values
         - default_value
       type: object
@@ -45136,31 +45363,12 @@ components:
           description: The mitigation type to configure for the control.
           example: "revoke_api_key"
           type: string
-        name:
-          description: A new human-readable name for the control.
-          example: "Unused API Keys"
-          type: string
-        notification_frequency:
-          description: The notification frequency to configure for the control.
-          example: "daily"
-          type: string
-        notification_parameters:
-          $ref: "#/components/schemas/GovernanceControlParametersMap"
-          nullable: true
-        notification_type:
-          description: The notification type to configure for the control.
-          example: "slack"
-          type: string
       type: object
     GovernanceControlUpdateData:
       description: The data of a governance control update request.
       properties:
         attributes:
           $ref: "#/components/schemas/GovernanceControlUpdateAttributes"
-        id:
-          description: The unique identifier of the control.
-          example: "0d4e6f8a-1b2c-3d4e-5f6a-7b8c9d0e1f2a"
-          type: string
         type:
           $ref: "#/components/schemas/GovernanceControlResourceType"
       required:
@@ -45188,18 +45396,14 @@ components:
         - data
       type: object
     GovernanceInsightAttributes:
-      description: The attributes of a governance insight.
+      description: |-
+        The attributes of a governance insight. Exactly one of `metric_query`, `event_query`,
+        `usage_query`, `audit_query`, or `percentage_query` is populated, depending on the data
+        source the insight is computed from; the rest are `null`.
       properties:
         audit_query:
           $ref: "#/components/schemas/GovernanceInsightAuditQuery"
           nullable: true
-        best_practice:
-          $ref: "#/components/schemas/GovernanceBestPracticeDefinition"
-          nullable: true
-        deep_link:
-          description: A relative link to the product surface where the insight can be acted upon.
-          example: ""
-          type: string
         description:
           description: A human-readable description of what the insight measures.
           example: "Number of users who have used the Dashboard in the last 30 days"
@@ -45214,14 +45418,6 @@ components:
         metric_query:
           $ref: "#/components/schemas/GovernanceInsightMetricQuery"
           nullable: true
-        old_value:
-          description: |-
-            The value of the insight over the previous comparison window. `null` when values were
-            not requested or could not be computed.
-          example: 3274
-          format: double
-          nullable: true
-          type: number
         percentage_query:
           $ref: "#/components/schemas/GovernanceInsightPercentageQuery"
           nullable: true
@@ -45232,17 +45428,6 @@ components:
         query_config:
           $ref: "#/components/schemas/GovernanceInsightQueryConfig"
           nullable: true
-        sort_order:
-          description: The relative order in which the insight should be displayed.
-          example: 1
-          format: int64
-          type: integer
-        state:
-          description: |-
-            The state of the insight. A `critical` insight receives extra UI treatment to draw
-            attention to it.
-          example: "critical"
-          type: string
         sub_product:
           description: The sub-product the insight belongs to, if any.
           example: "Indexes"
@@ -45258,29 +45443,13 @@ components:
         usage_query:
           $ref: "#/components/schemas/GovernanceInsightUsageQuery"
           nullable: true
-        value:
-          description: The current value of the insight. `null` when values were not requested or could not be computed.
-          example: 3601
-          format: double
-          nullable: true
-          type: number
       required:
         - display_name
         - product
-        - best_practice
         - sub_product
         - unit_name
         - description
         - time_range
-        - state
-        - deep_link
-        - value
-        - old_value
-        - metric_query
-        - event_query
-        - usage_query
-        - audit_query
-        - percentage_query
       type: object
     GovernanceInsightAuditCompute:
       description: The aggregation applied to an audit log query.
@@ -45350,6 +45519,18 @@ components:
         - type
         - attributes
       type: object
+    GovernanceInsightDirectionality:
+      description: Whether an increase in the insight's value is good, bad, or neutral.
+      enum:
+        - neutral
+        - increase_better
+        - decrease_better
+      example: "neutral"
+      type: string
+      x-enum-varnames:
+        - NEUTRAL
+        - INCREASE_BETTER
+        - DECREASE_BETTER
     GovernanceInsightEventCompute:
       description: The aggregation applied to an event query.
       properties:
@@ -45420,14 +45601,14 @@ components:
         - denominator_query
       type: object
     GovernanceInsightQueryConfig:
-      description: Query execution context that allows the frontend to execute insight queries directly.
+      description: Query execution context for running insight queries directly.
       properties:
         chart_type:
-          description: The chart type the frontend should use to render the insight.
+          description: The chart type used to render the insight.
           example: "line"
           type: string
         comparison_shift:
-          description: The window used for the previous value comparison, for example `week` or `month`.
+          description: The window used for the previous value comparison; for example, `week` or `month`.
           example: "month"
           type: string
         default_value:
@@ -45436,11 +45617,7 @@ components:
           format: int64
           type: integer
         directionality:
-          description: |-
-            Whether an increase in the value is good, bad, or neutral. One of `neutral`,
-            `increase_better`, or `decrease_better`.
-          example: "neutral"
-          type: string
+          $ref: "#/components/schemas/GovernanceInsightDirectionality"
         effective_time_window_days:
           description: The number of days the insight value is computed over.
           example: 30
@@ -45483,6 +45660,118 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/GovernanceInsightsDataArray"
+      required:
+        - data
+      type: object
+    GovernanceMitigationRequest:
+      description: A request to mitigate a set of governance detections.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceMitigationRequestData"
+      required:
+        - data
+      type: object
+    GovernanceMitigationRequestAttributes:
+      description: The attributes of a governance mitigation request.
+      properties:
+        detection_ids:
+          description: The identifiers of the detections to mitigate in this request.
+          example:
+            - "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+          items:
+            description: The identifier of a detection to mitigate in this request.
+            type: string
+          type: array
+        detection_type:
+          description: The detection type whose detections should be mitigated.
+          example: "unused_api_keys"
+          type: string
+        mitigation_parameters:
+          $ref: "#/components/schemas/GovernanceControlParametersMap"
+          nullable: true
+        mitigation_type:
+          description: The mitigation to apply to the selected detections. Defaults to the control's configured mitigation when omitted.
+          example: "revoke_api_key"
+          type: string
+      required:
+        - detection_type
+        - detection_ids
+      type: object
+    GovernanceMitigationRequestData:
+      description: The data of a governance mitigation request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceMitigationRequestAttributes"
+        type:
+          $ref: "#/components/schemas/GovernanceControlDetectionResourceType"
+      required:
+        - type
+      type: object
+    GovernanceNotificationSettingsAttributes:
+      description: The attributes of the organization-wide governance notification settings.
+      properties:
+        assignment_notifications_enabled:
+          description: Whether notifications are sent to users when detections are assigned to them.
+          example: true
+          type: boolean
+      required:
+        - assignment_notifications_enabled
+      type: object
+    GovernanceNotificationSettingsData:
+      description: A governance notification settings resource.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsAttributes"
+        id:
+          description: The unique identifier of the organization the notification settings apply to.
+          example: "11111111-2222-3333-4444-555555555555"
+          type: string
+        type:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsResourceType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    GovernanceNotificationSettingsResourceType:
+      description: Governance notification settings resource type.
+      enum:
+        - governance_notification_settings
+      example: "governance_notification_settings"
+      type: string
+      x-enum-varnames:
+        - GOVERNANCE_NOTIFICATION_SETTINGS
+    GovernanceNotificationSettingsResponse:
+      description: The organization-wide governance notification settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsData"
+      required:
+        - data
+      type: object
+    GovernanceNotificationSettingsUpdateAttributes:
+      description: The attributes of the governance notification settings that can be updated. Only the attributes present in the request are modified.
+      properties:
+        assignment_notifications_enabled:
+          description: Whether notifications are sent to users when detections are assigned to them.
+          example: true
+          type: boolean
+      type: object
+    GovernanceNotificationSettingsUpdateData:
+      description: The data of a governance notification settings update request.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsUpdateAttributes"
+        type:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsResourceType"
+      required:
+        - type
+      type: object
+    GovernanceNotificationSettingsUpdateRequest:
+      description: A request to update the organization-wide governance notification settings.
+      properties:
+        data:
+          $ref: "#/components/schemas/GovernanceNotificationSettingsUpdateData"
       required:
         - data
       type: object
@@ -146246,6 +146535,62 @@ paths:
         operator: OR
         permissions:
           - user_access_read
+  /api/v2/governance/config:
+    get:
+      description: |-
+        Retrieve the Governance Console configuration for the organization, including whether the
+        Console is enabled, whether assignment notifications are enabled, and whether usage
+        attribution is configured.
+      operationId: GetGovernanceConfig
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        assignment_notifications_enabled: true
+                        enabled: true
+                        usage_attribution_configured: true
+                        xorg_insights_enabled: true
+                      id: "00000000-0000-0000-0000-000000000000"
+                      type: "governance_console_config"
+              schema:
+                $ref: "#/components/schemas/GovernanceConfigResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get the Governance Console configuration
+      tags:
+        - Governance Console
+      x-menu-order: 1
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/governance/control:
     get:
       description: |-
@@ -146270,60 +146615,37 @@ paths:
                           detection_frequency: "daily"
                           detection_parameters:
                             api_key_threshold: 30
-                          detection_type: "unused_api_keys"
-                          feature_flags: []
                           insights: []
                           last_detection_at: "2024-03-01T12:00:00Z"
                           mitigated_detections_count: 3
                           mitigation_parameters: {}
                           mitigation_type: ""
                           mitigations:
-                            - action_verb: "revoke"
-                              description: "Automatically identifies and revokes inactive API keys to improve security and reduce potential attack surface."
+                            - description: "Automatically identifies and revokes inactive API keys to improve security and reduce potential attack surface."
                               execution_modes:
                                 - "manual"
                                 - "automatic"
-                              feature_flags: []
                               id: "revoke_api_key"
-                              manual_mitigation_warning: "These API keys will be revoked immediately upon confirmation. To revoke future API keys, you must go through this flow again."
                               permissions:
                                 - "api_keys_write"
                                 - "api_keys_delete"
-                              requires_ai: false
                               supported_parameters: []
                               title: "Revoke Unused API Keys"
                           name: "Unused API Keys"
-                          next_steps: "Review and revoke API keys that are no longer in use to maintain a secure authentication posture."
-                          notification_frequency: ""
-                          notification_parameters: {}
-                          notification_type: ""
                           priority: "High"
                           product: "api_keys"
-                          release_status: "prod"
                           resource_type: "api_key"
                           resource_type_display_name: "API Key"
                           supported_detection_parameters:
                             - default_value: 30
                               description: "Number of days of inactivity before an API key is considered unused."
                               display_name: "Unused API Key Threshold"
-                              hidden: false
                               name: "api_key_threshold"
                               required: false
                               supported_values: []
                               type: "integer"
-                          supported_notification_parameters:
-                            - default_value: false
-                              description: "Enables the Governance Console to automatically assign ownership of detections based off of tagging and other internal heuristics."
-                              display_name: "Automatic Ownership Assignment"
-                              hidden: false
-                              name: "governance_auto_assignment"
-                              required: false
-                              supported_values: []
-                              type: "boolean"
-                          task: "Review and revoke unused API keys."
                           type: "Proactive"
-                          usage_concern: "Security"
-                        id: "0d4e6f8a-1b2c-3d4e-5f6a-7b8c9d0e1f2a"
+                        id: "unused_api_keys"
                         type: "governance_control"
               schema:
                 $ref: "#/components/schemas/GovernanceControlsResponse"
@@ -146348,10 +146670,18 @@ paths:
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List governance controls
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List controls
       tags:
-        - Governance Controls
-      x-menu-order: 2
+        - Governance Console
+      x-menu-order: 3
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -146386,8 +146716,6 @@ paths:
                         detection_frequency: "daily"
                         detection_parameters:
                           api_key_threshold: 30
-                        detection_type: "unused_api_keys"
-                        feature_flags: []
                         insights: []
                         last_detection_at: "2024-03-01T12:00:00Z"
                         mitigated_detections_count: 3
@@ -146395,29 +146723,20 @@ paths:
                         mitigation_type: "revoke_api_key"
                         mitigations: []
                         name: "Unused API Keys"
-                        next_steps: "Review and revoke API keys that are no longer in use to maintain a secure authentication posture."
-                        notification_frequency: ""
-                        notification_parameters: {}
-                        notification_type: ""
                         priority: "High"
                         product: "api_keys"
-                        release_status: "prod"
                         resource_type: "api_key"
                         resource_type_display_name: "API Key"
                         supported_detection_parameters:
                           - default_value: 30
                             description: "Number of days of inactivity before an API key is considered unused."
                             display_name: "Unused API Key Threshold"
-                            hidden: false
                             name: "api_key_threshold"
                             required: false
                             supported_values: []
                             type: "integer"
-                        supported_notification_parameters: []
-                        task: "Review and revoke unused API keys."
                         type: "Proactive"
-                        usage_concern: "Security"
-                      id: "0d4e6f8a-1b2c-3d4e-5f6a-7b8c9d0e1f2a"
+                      id: "unused_api_keys"
                       type: "governance_control"
               schema:
                 $ref: "#/components/schemas/GovernanceControlResponse"
@@ -146448,10 +146767,18 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get a governance control
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get a control
       tags:
-        - Governance Controls
-      x-menu-order: 3
+        - Governance Console
+      x-menu-order: 4
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -146501,8 +146828,6 @@ paths:
                         detection_frequency: "daily"
                         detection_parameters:
                           api_key_threshold: 60
-                        detection_type: "unused_api_keys"
-                        feature_flags: []
                         insights: []
                         last_detection_at: "2024-03-01T12:00:00Z"
                         mitigated_detections_count: 3
@@ -146510,21 +146835,13 @@ paths:
                         mitigation_type: "revoke_api_key"
                         mitigations: []
                         name: "Unused API Keys"
-                        next_steps: "Review and revoke API keys that are no longer in use to maintain a secure authentication posture."
-                        notification_frequency: ""
-                        notification_parameters: {}
-                        notification_type: ""
                         priority: "High"
                         product: "api_keys"
-                        release_status: "prod"
                         resource_type: "api_key"
                         resource_type_display_name: "API Key"
                         supported_detection_parameters: []
-                        supported_notification_parameters: []
-                        task: "Review and revoke unused API keys."
                         type: "Proactive"
-                        usage_concern: "Security"
-                      id: "0d4e6f8a-1b2c-3d4e-5f6a-7b8c9d0e1f2a"
+                      id: "unused_api_keys"
                       type: "governance_control"
               schema:
                 $ref: "#/components/schemas/GovernanceControlResponse"
@@ -146555,40 +146872,546 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Update a governance control
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Update a control
       tags:
-        - Governance Controls
-      x-menu-order: 4
+        - Governance Console
+      x-menu-order: 5
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+          - governance_console_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/control/{detection_type}/detections:
+    get:
+      description: |-
+        Retrieve the detections produced by the governance control with the given detection type.
+        Results can be filtered by state and free-text query, sorted, and paginated.
+      operationId: ListGovernanceControlDetections
+      parameters:
+        - description: The detection type that identifies the control; for example, `unused_api_keys`.
+          example: "unused_api_keys"
+          in: path
+          name: detection_type
+          required: true
+          schema:
+            type: string
+        - description: Restrict the results to detections in the given state.
+          example: "active"
+          in: query
+          name: filter[state]
+          required: false
+          schema:
+            type: string
+        - description: Restrict the results to detections matching the given free-text query.
+          example: "production"
+          in: query
+          name: filter[query]
+          required: false
+          schema:
+            type: string
+        - description: |-
+            A comma-separated list of attributes to sort detections by. Prefix an attribute with
+            `-` for descending order.
+
+            The attributes available for sorting are `id`, `created_at`, `assigned_to`,
+            `detection_type`, `display_name`, `exception_at`, `mitigate_after`, `mitigated_at`,
+            `priority`, `resource_id`, and `state`. Defaults to `created_at,-id`.
+          example: "-created_at,-id"
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+        - description: "The zero-based index of the page to return; the first page is 0."
+          example: 0
+          in: query
+          name: page[number]
+          required: false
+          schema:
+            default: 0
+            format: int64
+            type: integer
+        - description: The number of detections to return per page.
+          example: 50
+          in: query
+          name: page[size]
+          required: false
+          schema:
+            format: int64
+            type: integer
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          assigned_team: "platform-security"
+                          assigned_to: "11111111-2222-3333-4444-555555555555"
+                          assignment_source: "manual"
+                          control_id: "unused_api_keys"
+                          created_at: "2024-03-01T12:00:00Z"
+                          detection_type: "unused_api_keys"
+                          display_name: "CI Deploy Key"
+                          metadata:
+                            region: "us-east-1"
+                          priority: 1
+                          resource_id: "api-key-12345"
+                          resource_type: "api_key"
+                          state: "active"
+                        id: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+                        type: "governance_control_detection"
+              schema:
+                $ref: "#/components/schemas/GovernanceControlDetectionsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: List control detections
+      tags:
+        - Governance Console
+      x-menu-order: 6
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/control/{detection_type}/notification_settings:
+    get:
+      description: |-
+        Retrieve the notification settings for the governance control with the given detection type,
+        including, for each supported event type, whether notifications are enabled and which
+        destinations receive them.
+      operationId: GetGovernanceControlNotificationSettings
+      parameters:
+        - description: The detection type that identifies the control; for example, `unused_api_keys`.
+          example: "unused_api_keys"
+          in: path
+          name: detection_type
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        event_settings:
+                          - enabled: true
+                            event_type: "new_detection"
+                            targets:
+                              - handle: "#governance-alerts"
+                                type: "slack"
+                      id: "unused_api_keys"
+                      type: "control_notification_settings"
+              schema:
+                $ref: "#/components/schemas/ControlNotificationSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get control notification settings
+      tags:
+        - Governance Console
+      x-menu-order: 10
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    put:
+      description: |-
+        Replace the notification settings for the governance control with the given detection type,
+        setting, for each supported event type, whether notifications are enabled and which
+        destinations receive them.
+      operationId: UpdateGovernanceControlNotificationSettings
+      parameters:
+        - description: The detection type that identifies the control; for example, `unused_api_keys`.
+          example: "unused_api_keys"
+          in: path
+          name: detection_type
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      event_settings:
+                        - enabled: true
+                          event_type: "new_detection"
+                          targets:
+                            - handle: "#governance-alerts"
+                              type: "slack"
+                    type: "control_notification_settings"
+            schema:
+              $ref: "#/components/schemas/ControlNotificationSettingsUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        event_settings:
+                          - enabled: true
+                            event_type: "new_detection"
+                            targets:
+                              - handle: "#governance-alerts"
+                                type: "slack"
+                      id: "unused_api_keys"
+                      type: "control_notification_settings"
+              schema:
+                $ref: "#/components/schemas/ControlNotificationSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Update control notification settings
+      tags:
+        - Governance Console
+      x-menu-order: 11
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+          - governance_console_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/detections/mitigate:
+    post:
+      description: |-
+        Apply a mitigation to a set of governance detections of a given detection type. When the
+        mitigation type is omitted, the control's configured mitigation is used. The request is
+        accepted for asynchronous processing.
+      operationId: MitigateGovernanceDetections
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      detection_ids:
+                        - "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+                      detection_type: "unused_api_keys"
+                      mitigation_parameters: {}
+                      mitigation_type: "revoke_api_key"
+                    type: "governance_control_detection"
+            schema:
+              $ref: "#/components/schemas/GovernanceMitigationRequest"
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Mitigate detections
+      tags:
+        - Governance Console
+      x-menu-order: 9
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/detections/{detection_id}:
+    get:
+      description: Retrieve a single governance detection by its unique identifier.
+      operationId: GetGovernanceDetection
+      parameters:
+        - description: The unique identifier of the detection.
+          example: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+          in: path
+          name: detection_id
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        assigned_team: "platform-security"
+                        assigned_to: "11111111-2222-3333-4444-555555555555"
+                        assignment_source: "manual"
+                        control_id: "unused_api_keys"
+                        created_at: "2024-03-01T12:00:00Z"
+                        detection_type: "unused_api_keys"
+                        display_name: "CI Deploy Key"
+                        metadata:
+                          region: "us-east-1"
+                        priority: 1
+                        resource_id: "api-key-12345"
+                        resource_type: "api_key"
+                        state: "active"
+                      id: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+                      type: "governance_control_detection"
+              schema:
+                $ref: "#/components/schemas/GovernanceControlDetectionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get a detection
+      tags:
+        - Governance Console
+      x-menu-order: 7
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Update a governance detection by its unique identifier. Only the attributes present in the
+        request are modified, allowing a detection to be acknowledged as an exception, reopened,
+        reassigned, or deferred for mitigation.
+      operationId: UpdateGovernanceDetection
+      parameters:
+        - description: The unique identifier of the detection.
+          example: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+          in: path
+          name: detection_id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      assigned_to: "11111111-2222-3333-4444-555555555555"
+                      state: "exception"
+                    type: "governance_control_detection"
+            schema:
+              $ref: "#/components/schemas/GovernanceControlDetectionUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        assigned_team: "platform-security"
+                        assigned_to: "11111111-2222-3333-4444-555555555555"
+                        assignment_source: "manual"
+                        control_id: "unused_api_keys"
+                        created_at: "2024-03-01T12:00:00Z"
+                        detection_type: "unused_api_keys"
+                        display_name: "CI Deploy Key"
+                        metadata:
+                          region: "us-east-1"
+                        priority: 1
+                        resource_id: "api-key-12345"
+                        resource_type: "api_key"
+                        state: "active"
+                      id: "3f9b2c1a-8d4e-4a6b-9c2f-1e7d5a0b3c4d"
+                      type: "governance_control_detection"
+              schema:
+                $ref: "#/components/schemas/GovernanceControlDetectionResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Not Found
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Update a detection
+      tags:
+        - Governance Console
+      x-menu-order: 8
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/governance/insights:
     get:
       description: |-
-        Retrieve the list of governance insights available to the organization. By default, only
-        insight metadata is returned; pass `withValues=true` to also compute and include each
-        insight's current and previous values. Insights can be filtered by product.
+        Retrieve the list of governance insights available to the organization. Each insight
+        reports the query used to compute it, so that the value can be computed client-side.
+        Insights can be filtered by product.
       operationId: ListGovernanceInsights
       parameters:
-        - description: |-
-            Whether to compute and include the current and previous value of each insight.
-            Defaults to `false`, in which case only insight metadata is returned.
-          example: true
-          in: query
-          name: withValues
-          required: false
-          schema:
-            type: boolean
-        - description: |-
-            The UUID of the organization to compute insights for. Defaults to the organization of
-            the authenticated user. Used to retrieve insights for a child organization from a
-            parent organization.
-          example: "11111111-2222-3333-4444-555555555555"
-          in: query
-          name: orgUuid
-          required: false
-          schema:
-            type: string
         - description: |-
             Restrict the results to insights belonging to the given products. May be repeated to
             filter by multiple products. Matching is case-insensitive.
@@ -146612,54 +147435,51 @@ paths:
                     data:
                       - attributes:
                           audit_query:
-                          best_practice:
-                          deep_link: ""
-                          description: ""
-                          display_name: "Active Dashboards"
+                          description: "Number of custom metrics submitted by the organization."
+                          display_name: "Custom Metrics"
                           event_query:
                           metric_query:
-                          old_value: 3274
+                            query: "sum:datadog.estimated_usage.metrics.custom{*}"
+                            reducer: "sum"
+                            source: "metrics"
                           percentage_query:
                           product: "Usage"
-                          state: ""
+                          query_config:
+                            chart_type: "line"
+                            comparison_shift: "month"
+                            directionality: "decrease_better"
+                            effective_time_window_days: 30
                           sub_product: ""
-                          time_range: ""
-                          unit_name: "active dashboards"
+                          time_range: "month"
+                          unit_name: "custom metrics"
                           usage_query:
-                          value: 3601
                         id: "498ee21f-8037-48b8-a961-a488692902f4"
                         type: "insight"
                       - attributes:
                           audit_query:
-                          best_practice:
-                            category: "access_governance"
-                            deep_link: "/organization-settings/users?status=inactive"
-                            description: "Review and deactivate users who have not logged in within the last 90 days."
-                            detection_type:
-                            id: "bp_monitor_inactive_users"
-                            impact: "Reduces unauthorized access risk."
-                            impact_hint: 1
-                            permissions:
-                              - "user_access_manage"
-                            status: "active"
-                            summary: "Inactive users with access increase your security surface area."
-                            title: "Monitor inactive users"
-                            trigger_condition: "active_users"
-                            trigger_type: "insight"
-                          deep_link: ""
+                            compute:
+                              aggregation: "cardinality"
+                              interval: 86400000
+                              metric: "@usr.id"
+                            indexes:
+                              - "main"
+                            query: "@evt.name:Dashboard"
+                            source: "audit"
                           description: "Number of users who have used the Dashboard in the last 30 days"
                           display_name: "Active Users"
                           event_query:
                           metric_query:
-                          old_value: 1173
                           percentage_query:
                           product: "Usage"
-                          state: ""
+                          query_config:
+                            chart_type: "line"
+                            comparison_shift: "month"
+                            directionality: "neutral"
+                            effective_time_window_days: 30
                           sub_product: ""
                           time_range: "month"
                           unit_name: "active users"
                           usage_query:
-                          value: 1291
                         id: "a3248d1b-5578-4345-a34e-fe9657300f22"
                         type: "insight"
               schema:
@@ -146685,10 +147505,148 @@ paths:
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: List governance insights
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - events_read
+            - metrics_read
+      summary: List insights
       tags:
-        - Governance Insights
-      x-menu-order: 1
+        - Governance Console
+      x-menu-order: 2
+      "x-permission":
+        operator: OR
+        permissions:
+          - metrics_read
+          - events_read
+          - audit_logs_read
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/governance/notification_settings:
+    get:
+      description: |-
+        Retrieve the organization-wide governance notification settings, including whether users are
+        notified when detections are assigned to them.
+      operationId: GetGovernanceNotificationSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        assignment_notifications_enabled: true
+                      id: "11111111-2222-3333-4444-555555555555"
+                      type: "governance_notification_settings"
+              schema:
+                $ref: "#/components/schemas/GovernanceNotificationSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Get notification settings
+      tags:
+        - Governance Console
+      x-menu-order: 12
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+    patch:
+      description: |-
+        Update the organization-wide governance notification settings. Only the attributes present in
+        the request are modified.
+      operationId: UpdateGovernanceNotificationSettings
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      assignment_notifications_enabled: true
+                    type: "governance_notification_settings"
+            schema:
+              $ref: "#/components/schemas/GovernanceNotificationSettingsUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        assignment_notifications_enabled: true
+                      id: "11111111-2222-3333-4444-555555555555"
+                      type: "governance_notification_settings"
+              schema:
+                $ref: "#/components/schemas/GovernanceNotificationSettingsResponse"
+          description: OK
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Unauthorized
+        "403":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Forbidden
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ: []
+      summary: Update notification settings
+      tags:
+        - Governance Console
+      x-menu-order: 13
+      "x-permission":
+        operator: AND
+        permissions:
+          - governance_console_read
+          - governance_console_write
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209187,10 +210145,18 @@ paths:
           description: Forbidden
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: List tag policies
       tags:
         - Tag Policies
       x-menu-order: 1
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209279,10 +210245,17 @@ paths:
           description: Conflict
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: Create a tag policy
       tags:
         - Tag Policies
       x-menu-order: 2
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209337,10 +210310,17 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: Delete a tag policy
       tags:
         - Tag Policies
       x-menu-order: 5
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209450,10 +210430,18 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: Get a tag policy
       tags:
         - Tag Policies
       x-menu-order: 3
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209542,10 +210530,17 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: Update a tag policy
       tags:
         - Tag Policies
       x-menu-order: 4
+      "x-permission":
+        operator: AND
+        permissions:
+          - telemetry_rules_create
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -209625,10 +210620,18 @@ paths:
           description: Not Found
         "429":
           $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
       summary: Get a tag policy compliance score
       tags:
         - Tag Policies
       x-menu-order: 6
+      "x-permission":
+        operator: OR
+        permissions:
+          - telemetry_rules_read
+          - metrics_read
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
@@ -215546,17 +216549,20 @@ tags:
       url: https://docs.datadoghq.com/integrations/google-hangouts-chat/
     name: Google Chat Integration
   - description: |-
-      Governance Controls pair a detection definition with an organization's detection, notification,
-      and mitigation configuration within the Governance Console. Each control reports how a class of
-      governance issue (such as unused API keys or unqueried metrics) is detected and remediated, along
-      with counts of active and mitigated detections.
-    name: Governance Controls
-  - description: |-
-      Governance Insights surface key usage, configuration, and best-practice signals for an
-      organization within the Governance Console. Each insight reports a current value (and,
-      optionally, a previous value for comparison) along with the query used to compute it, so
-      that the Console can render trends and highlight areas that need attention.
-    name: Governance Insights
+      The Governance Console finds issues that build up across a Datadog organization over time,
+      such as API keys nobody uses, users who no longer need access, or custom metrics that are
+      never queried, and tracks them through to a fix.
+
+      These endpoints allow you to:
+
+      - Read insights: measures of how your organization uses Datadog, each with the query behind it.
+      - Configure controls: the rules deciding how one kind of issue is found and what is done about it.
+      - Act on detections: the issues a control found. Assign, defer, accept as an exception, or fix.
+      - Manage settings: organization-wide configuration and notification destinations.
+
+      See the [Governance Console page](https://docs.datadoghq.com/account_management/governance_console/)
+      for more information.
+    name: Governance Console
   - description: |-
       Configure High Availability Multi-Region (HAMR) connections between Datadog organizations.
       HAMR provides disaster recovery capabilities by maintaining synchronized data between primary
