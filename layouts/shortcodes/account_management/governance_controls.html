@@ -4,9 +4,7 @@
 
     Note:
     - json file mounted from websites-sources: https://github.com/ddoghq/websites-sources/tree/main/data/governance_controls.json
-    - the generator publishes only controls with release_status "prod", and only
-      mitigations that are not feature flagged, so everything here is available
-      to every org.
+    - the generator publishes controls with release_status != "dev".
     - call this once per section. The intro prose for each section stays in
       controls.md; only the control entries are generated.
 
