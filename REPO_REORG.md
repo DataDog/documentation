@@ -2,7 +2,7 @@
 
 ## Reorg status
 
-Not yet merged. Scheduled to take effect on Thursday, August 6, 2026.
+Merged.
 
 ## Project overview
 
