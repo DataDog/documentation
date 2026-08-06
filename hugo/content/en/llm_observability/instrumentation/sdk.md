@@ -1925,6 +1925,24 @@ def rag_workflow(user_question):
 
 {{< /code-block >}}
 
+To annotate session ID on auto-instrumented spans, provide the `session_id` tag:
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import workflow
+
+@workflow
+def run_chat(user_question, session_id):
+    with LLMObs.annotation_context(
+        tags = {
+            "session_id": session_id
+        },
+    ):
+        completion = openai_client.chat.completions.create(...)
+    return completion.choices[0].message.content
+
+{{< /code-block >}}
+
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
@@ -1963,7 +1981,26 @@ function ragWorkflow(userQuestion) {
       },
       name: "augmented_generation"
     }, async () => {
-      const completion = await openai_client.chat.completions.create(...);
+      const completion = await openaiClient.chat.completions.create(...);
+      return completion.choices[0].message.content;
+    });
+}
+
+{{< /code-block >}}
+
+To annotate session ID on auto-instrumented spans, provide the `session_id` tag:
+
+{{< code-block lang="javascript" >}}
+const { llmobs } = require('dd-trace');
+
+async function runChat(userQuestion, sessionId) {
+    return llmobs.annotationContext({
+    const completion = await llmobs.annotationContext({
+      tags: {
+        session_id: sessionId
+      }
+    }, async () => {
+      const completion = await openaiClient.chat.completions.create(...);
       return completion.choices[0].message.content;
     });
 }
@@ -1971,6 +2008,7 @@ function ragWorkflow(userQuestion) {
 {{< /code-block >}}
 
 {{% /tab %}}
+
 {{< /tabs >}}
 
 ## Prompt tracking
