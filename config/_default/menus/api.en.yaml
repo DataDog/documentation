@@ -12268,6 +12268,126 @@ menu:
       url: /api/latest/fleet-automation/
       identifier: fleet-automation
       generated: true
+    - name: Get a schedule by ID
+      url: /api/latest/fleet-automation/get-a-schedule-by-id/
+      identifier: fleet-automation-get-a-schedule-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetScheduleV2
+        unstable: []
+        order: 11
+    - name: List all schedules
+      url: /api/latest/fleet-automation/list-all-schedules/
+      identifier: fleet-automation-list-all-schedules
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetSchedulesV2
+        unstable: []
+        order: 9
+    - name: Cancel a deployment
+      url: /api/latest/fleet-automation/cancel-a-deployment/
+      identifier: fleet-automation-cancel-a-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CancelFleetDeploymentV2
+        unstable: []
+        order: 8
+    - name: Get a deployment by ID
+      url: /api/latest/fleet-automation/get-a-deployment-by-id/
+      identifier: fleet-automation-get-a-deployment-by-id
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetDeploymentV2
+        unstable: []
+        order: 7
+    - name: Upgrade hosts
+      url: /api/latest/fleet-automation/upgrade-hosts/
+      identifier: fleet-automation-upgrade-hosts
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentUpgradeV2
+        unstable: []
+        order: 6
+    - name: Create a configuration deployment
+      url: /api/latest/fleet-automation/create-a-configuration-deployment/
+      identifier: fleet-automation-create-a-configuration-deployment
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateFleetDeploymentConfigureV2
+        unstable: []
+        order: 5
+    - name: List all deployments
+      url: /api/latest/fleet-automation/list-all-deployments/
+      identifier: fleet-automation-list-all-deployments
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetDeploymentsV2
+        unstable: []
+        order: 4
+    - name: Get detailed information about an agent
+      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
+      identifier: fleet-automation-get-detailed-information-about-an-agent
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetFleetAgentDetailV2
+        unstable: []
+        order: 3
+    - name: List all Datadog Agents
+      url: /api/latest/fleet-automation/list-all-datadog-agents/
+      identifier: fleet-automation-list-all-datadog-agents
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentsV2
+        unstable: []
+        order: 2
+    - name: List available Datadog Agent versions
+      url: /api/latest/fleet-automation/list-available-datadog-agent-versions/
+      identifier: fleet-automation-list-available-datadog-agent-versions
+      parent: fleet-automation
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListFleetAgentVersionsV2
+        unstable: []
+        order: 1
     - name: List all fleet tracers
       url: /api/latest/fleet-automation/list-all-fleet-tracers/
       identifier: fleet-automation-list-all-fleet-tracers
@@ -12307,19 +12427,6 @@ menu:
         unstable:
           - v2
         order: 12
-    - name: Get a schedule by ID
-      url: /api/latest/fleet-automation/get-a-schedule-by-id/
-      identifier: fleet-automation-get-a-schedule-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetSchedule
-        unstable:
-          - v2
-        order: 11
     - name: Delete a schedule
       url: /api/latest/fleet-automation/delete-a-schedule/
       identifier: fleet-automation-delete-a-schedule
@@ -12346,84 +12453,6 @@ menu:
         unstable:
           - v2
         order: 10
-    - name: List all schedules
-      url: /api/latest/fleet-automation/list-all-schedules/
-      identifier: fleet-automation-list-all-schedules
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetSchedules
-        unstable:
-          - v2
-        order: 9
-    - name: Cancel a deployment
-      url: /api/latest/fleet-automation/cancel-a-deployment/
-      identifier: fleet-automation-cancel-a-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CancelFleetDeployment
-        unstable:
-          - v2
-        order: 8
-    - name: Get a configuration deployment by ID
-      url: /api/latest/fleet-automation/get-a-configuration-deployment-by-id/
-      identifier: fleet-automation-get-a-configuration-deployment-by-id
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetDeployment
-        unstable:
-          - v2
-        order: 7
-    - name: Upgrade hosts
-      url: /api/latest/fleet-automation/upgrade-hosts/
-      identifier: fleet-automation-upgrade-hosts
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentUpgrade
-        unstable:
-          - v2
-        order: 6
-    - name: Create a configuration deployment
-      url: /api/latest/fleet-automation/create-a-configuration-deployment/
-      identifier: fleet-automation-create-a-configuration-deployment
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - CreateFleetDeploymentConfigure
-        unstable:
-          - v2
-        order: 5
-    - name: List all deployments
-      url: /api/latest/fleet-automation/list-all-deployments/
-      identifier: fleet-automation-list-all-deployments
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetDeployments
-        unstable:
-          - v2
-        order: 4
     - name: List tracers for a specific agent
       url: /api/latest/fleet-automation/list-tracers-for-a-specific-agent/
       identifier: fleet-automation-list-tracers-for-a-specific-agent
@@ -12437,45 +12466,6 @@ menu:
         unstable:
           - v2
         order: 16
-    - name: Get detailed information about an agent
-      url: /api/latest/fleet-automation/get-detailed-information-about-an-agent/
-      identifier: fleet-automation-get-detailed-information-about-an-agent
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - GetFleetAgentInfo
-        unstable:
-          - v2
-        order: 3
-    - name: List all Datadog Agents
-      url: /api/latest/fleet-automation/list-all-datadog-agents/
-      identifier: fleet-automation-list-all-datadog-agents
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgents
-        unstable:
-          - v2
-        order: 2
-    - name: List all available Agent versions
-      url: /api/latest/fleet-automation/list-all-available-agent-versions/
-      identifier: fleet-automation-list-all-available-agent-versions
-      parent: fleet-automation
-      generated: true
-      params:
-        versions:
-          - v2
-        operationids:
-          - ListFleetAgentVersions
-        unstable:
-          - v2
-        order: 1
     - name: Forms
       url: /api/latest/forms/
       identifier: forms
@@ -12806,14 +12796,131 @@ menu:
           - ListGoogleChatOrganizations
         unstable: []
         order: 7
-    - name: Governance Controls
-      url: /api/latest/governance-controls/
-      identifier: governance-controls
+    - name: Governance Console
+      url: /api/latest/governance-console/
+      identifier: governance-console
       generated: true
-    - name: Update a governance control
-      url: /api/latest/governance-controls/update-a-governance-control/
-      identifier: governance-controls-update-a-governance-control
-      parent: governance-controls
+    - name: Update notification settings
+      url: /api/latest/governance-console/update-notification-settings/
+      identifier: governance-console-update-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 13
+    - name: Get notification settings
+      url: /api/latest/governance-console/get-notification-settings/
+      identifier: governance-console-get-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceNotificationSettings
+        unstable:
+          - v2
+        order: 12
+    - name: List insights
+      url: /api/latest/governance-console/list-insights/
+      identifier: governance-console-list-insights
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceInsights
+        unstable:
+          - v2
+        order: 2
+    - name: Update a detection
+      url: /api/latest/governance-console/update-a-detection/
+      identifier: governance-console-update-a-detection
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceDetection
+        unstable:
+          - v2
+        order: 8
+    - name: Get a detection
+      url: /api/latest/governance-console/get-a-detection/
+      identifier: governance-console-get-a-detection
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceDetection
+        unstable:
+          - v2
+        order: 7
+    - name: Mitigate detections
+      url: /api/latest/governance-console/mitigate-detections/
+      identifier: governance-console-mitigate-detections
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - MitigateGovernanceDetections
+        unstable:
+          - v2
+        order: 9
+    - name: Update control notification settings
+      url: /api/latest/governance-console/update-control-notification-settings/
+      identifier: governance-console-update-control-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 11
+    - name: Get control notification settings
+      url: /api/latest/governance-console/get-control-notification-settings/
+      identifier: governance-console-get-control-notification-settings
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetGovernanceControlNotificationSettings
+        unstable:
+          - v2
+        order: 10
+    - name: List control detections
+      url: /api/latest/governance-console/list-control-detections/
+      identifier: governance-console-list-control-detections
+      parent: governance-console
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListGovernanceControlDetections
+        unstable:
+          - v2
+        order: 6
+    - name: Update a control
+      url: /api/latest/governance-console/update-a-control/
+      identifier: governance-console-update-a-control
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12822,11 +12929,11 @@ menu:
           - UpdateGovernanceControl
         unstable:
           - v2
-        order: 4
-    - name: Get a governance control
-      url: /api/latest/governance-controls/get-a-governance-control/
-      identifier: governance-controls-get-a-governance-control
-      parent: governance-controls
+        order: 5
+    - name: Get a control
+      url: /api/latest/governance-console/get-a-control/
+      identifier: governance-console-get-a-control
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12835,11 +12942,11 @@ menu:
           - GetGovernanceControl
         unstable:
           - v2
-        order: 3
-    - name: List governance controls
-      url: /api/latest/governance-controls/list-governance-controls/
-      identifier: governance-controls-list-governance-controls
-      parent: governance-controls
+        order: 4
+    - name: List controls
+      url: /api/latest/governance-console/list-controls/
+      identifier: governance-console-list-controls
+      parent: governance-console
       generated: true
       params:
         versions:
@@ -12848,21 +12955,17 @@ menu:
           - ListGovernanceControls
         unstable:
           - v2
-        order: 2
-    - name: Governance Insights
-      url: /api/latest/governance-insights/
-      identifier: governance-insights
-      generated: true
-    - name: List governance insights
-      url: /api/latest/governance-insights/list-governance-insights/
-      identifier: governance-insights-list-governance-insights
-      parent: governance-insights
+        order: 3
+    - name: Get the Governance Console configuration
+      url: /api/latest/governance-console/get-the-governance-console-configuration/
+      identifier: governance-console-get-the-governance-console-configuration
+      parent: governance-console
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListGovernanceInsights
+          - GetGovernanceConfig
         unstable:
           - v2
         order: 1
@@ -20464,6 +20567,66 @@ menu:
           - CreateMaintenance
         unstable: []
         order: 18
+    - name: Update maintenance template
+      url: /api/latest/status-pages/update-maintenance-template/
+      identifier: status-pages-update-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateMaintenanceTemplate
+        unstable: []
+        order: 32
+    - name: Get maintenance template
+      url: /api/latest/status-pages/get-maintenance-template/
+      identifier: status-pages-get-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetMaintenanceTemplate
+        unstable: []
+        order: 34
+    - name: Delete maintenance template
+      url: /api/latest/status-pages/delete-maintenance-template/
+      identifier: status-pages-delete-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteMaintenanceTemplate
+        unstable: []
+        order: 35
+    - name: Create maintenance template
+      url: /api/latest/status-pages/create-maintenance-template/
+      identifier: status-pages-create-maintenance-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateMaintenanceTemplate
+        unstable: []
+        order: 31
+    - name: List maintenance templates
+      url: /api/latest/status-pages/list-maintenance-templates/
+      identifier: status-pages-list-maintenance-templates
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListMaintenanceTemplates
+        unstable: []
+        order: 33
     - name: Edit degradation update
       url: /api/latest/status-pages/edit-degradation-update/
       identifier: status-pages-edit-degradation-update
@@ -20548,6 +20711,66 @@ menu:
           - CreateDegradation
         unstable: []
         order: 13
+    - name: Update degradation template
+      url: /api/latest/status-pages/update-degradation-template/
+      identifier: status-pages-update-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateDegradationTemplate
+        unstable: []
+        order: 27
+    - name: Get degradation template
+      url: /api/latest/status-pages/get-degradation-template/
+      identifier: status-pages-get-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - GetDegradationTemplate
+        unstable: []
+        order: 29
+    - name: Delete degradation template
+      url: /api/latest/status-pages/delete-degradation-template/
+      identifier: status-pages-delete-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - DeleteDegradationTemplate
+        unstable: []
+        order: 30
+    - name: Create degradation template
+      url: /api/latest/status-pages/create-degradation-template/
+      identifier: status-pages-create-degradation-template
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - CreateDegradationTemplate
+        unstable: []
+        order: 26
+    - name: List degradation templates
+      url: /api/latest/status-pages/list-degradation-templates/
+      identifier: status-pages-list-degradation-templates
+      parent: status-pages
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListDegradationTemplates
+        unstable: []
+        order: 28
     - name: Update component
       url: /api/latest/status-pages/update-component/
       identifier: status-pages-update-component

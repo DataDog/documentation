@@ -25,6 +25,4 @@ For setup instructions, select your hosting type:
   {{< image-card href="/database_monitoring/setup_sql_server/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
 {{< /card-grid >}}
 
-<br>
-
 [1]: /database_monitoring/setup_sql_server/troubleshooting/#known-limitations

@@ -36,6 +36,8 @@ Single Step Instrumentation (SSI) automatically installs the Datadog SDKs with n
 
 To learn more about how it works, see the [injector guide for Single Step Instrumentation][8].
 
+{{% dd-apm-skill %}}
+
 ## Prerequisites
 
 1. Remove any custom instrumentation code from your application and restart it. SSI is automatically disabled if custom instrumentation is detected.
@@ -57,8 +59,6 @@ Click on one of the following tiles to learn how to set up SSI for your deployme
   {{< image-card href="kubernetes/" src="integrations_logos/kubernetes.png" alt="kubernetes" >}}
   {{< image-card href="windows/" src="integrations_logos/windows.png" alt="windows" >}}
 {{< /card-grid >}}
-
-<br>
 
 ## Troubleshooting
 

@@ -46,8 +46,6 @@ SaaS and AI Costs allow you to send cost data **directly from your providers** b
   {{< image-card href="/cloud_cost_management/setup/saas_costs/?tab=twilio#configure-your-saas-accounts" src="integrations_logos/twilio_small.svg" alt="twilio" >}}
 {{< /card-grid >}}
 
-</br>
-
 If your provider is not supported, use [Custom Costs][1] to upload any cost data source to Datadog and understand the total cost of your services. Only SaaS costs in USD are supported at this time.
 
 ## Setup

@@ -122,7 +122,7 @@ These are the available librdkafka options:
 
 See the [librdkafka documentation][7] for more information and to ensure your values have the correct type and are within range.
 
-## Metrics
+## Health metrics
 
 For [component metrics][13] and [destination buffer metrics][14] emitted by all destinations, see the [Pipelines Usage Metrics][8] documentation.
 
@@ -165,7 +165,7 @@ For [component metrics][13] and [destination buffer metrics][14] emitted by all 
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][9] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][9] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

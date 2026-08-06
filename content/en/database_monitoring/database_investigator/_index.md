@@ -20,6 +20,9 @@ further_reading:
 - link: "/database_monitoring/query_samples/"
   tag: "Documentation"
   text: "Exploring Query Samples"
+- link: "https://www.datadoghq.com/blog/database-investigator/"
+  tag: "Blog"
+  text: "Diagnose and resolve database performance issues faster with Database Investigator"
 ---
 
 Database Monitoring contributes a set of tools and skills to [Bits Chat][1], so you can investigate the databases you monitor directly in chat. Bits Chat analyzes the telemetry Database Monitoring already collects. This includes health signals, query metrics, explain plans, instance and infrastructure metrics, calling APM services, related incidents, and recent events. For a database investigation, Bits Chat returns a structured root cause analysis with concrete remediation steps.

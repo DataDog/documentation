@@ -52,8 +52,6 @@ To start instrumenting and running tests, see the documentation for one of the f
   {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
 {{< /card-grid >}}
 
-</br>
-
 Test Optimization is compatible with any CI provider and is not limited to those supported by CI Visibility. For more information about supported features, see [Test Optimization][3].
 
 ## Use CI test data

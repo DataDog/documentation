@@ -842,7 +842,7 @@ export default {
     ap1: 'https://mcp.ap1.datadoghq.com/v1/mcp',
     ap2: 'https://mcp.ap2.datadoghq.com/v1/mcp',
     gov2: 'The MCP Server endpoint for US2-FED is not supported.',
-    uk1: 'https://mcp.uk1.datadoghq.com/api/unstable/mcp-server/mcp',
+    uk1: 'https://mcp.uk1.datadoghq.com/v1/mcp',
     gov: 'The MCP Server endpoint for GOV is not supported.'
   },
   cursor_mcp_install_deeplink: {

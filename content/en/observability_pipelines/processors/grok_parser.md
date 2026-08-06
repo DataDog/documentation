@@ -105,7 +105,7 @@ When a log is sent to the parser, library rules are automatically applied to the
 
 You can also add library rules when you create a custom rule. See [Create an AI-assisted or custom parsing rule](#create-an-ai-assisted-or-custom-parsing-rule) for more information.
 
-## Metrics
+## Health metrics
 
 For [component metrics][4] and [processor buffer metrics][5] emitted by all processors, see the [Pipelines Usage Metrics][6] documentation. To filter or group by Parse processor metrics, use the tag `component_type:parse`.
 

@@ -40,7 +40,9 @@ Click {{< ui >}}Add tag rule{{< /ui >}}.
 
 {{< img src="observability_pipelines/processors/tag_control_settings.png" alt="The Tag Block and Allow List settings panel" style="width:55%;" >}}
 
-1. Define a filter query. Only matching metrics are processed by this processor, but all metrics continue to the next step in the pipeline. See [Search Syntax][2] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Metrics Search Syntax][2] for information on creating queries.
+   - Only metrics matching the filter are processed.
+   - All metrics, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. In the {{< ui >}}Configure tags{{< /ui >}} section, choose whether to {{< ui >}}Include tags{{< /ui >}} or {{< ui >}}Exclude tags{{< /ui >}}.
 1. Optionally, input a sample tags object to help you select the tags you want to include or exclude in the next step.
     - The supported input formats are `{"key1":"value1", "key2":"value2"}`.

@@ -50,6 +50,7 @@ export async function hideOverlays(page: Page) {
       body > header { display: none !important; }
       .announcement-banner { display: none !important; }
       nav.main-nav { display: none !important; }
+      * { scroll-behavior: auto !important; }
     `
     });
 }

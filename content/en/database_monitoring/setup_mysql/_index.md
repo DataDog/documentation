@@ -26,5 +26,3 @@ For setup instructions, select your hosting type:
   {{< image-card href="/database_monitoring/setup_mysql/gcsql" src="integrations_logos/google_cloudsql.png" alt="Google Cloud SQL" >}}
   {{< image-card href="/database_monitoring/setup_mysql/azure" src="integrations_logos/azure_db_for_mysql.png" alt="MySQL" >}}
 {{< /card-grid >}}
-
-<br>

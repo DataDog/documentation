@@ -49,10 +49,7 @@ See [Dynamic Instrumentation][5] for information about adding instrumentations a
 
 ### Supported features
 
-- Dynamic Logs, Metrics, Spans, and Span Tags
-- Local variable capture for Dynamic Logs
-- Dynamic Log conditions
-- Expression evaluation in Dynamic Log templates
+- Metrics, Spans, and Span Tags
 - [PII redaction][8] based on variable/property names and classes
 - [Source code integration][9]
 

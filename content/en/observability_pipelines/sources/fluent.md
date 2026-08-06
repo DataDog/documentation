@@ -59,7 +59,7 @@ After you select the Fluent source in the pipeline UI, enter the identifier for 
 
 {{% observability_pipelines/log_source_configuration/fluent %}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][6] and [source buffer metrics][7] emitted by all sources, see the [Pipelines Usage Metrics][8] documentation. To filter or group by Fluent source metrics, use the tag `component_type:fluent`.
 

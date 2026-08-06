@@ -103,7 +103,7 @@ To view metrics for a specific Datadog organization:
 
 Alternatively, click {{< ui >}}Review Configured Organizations{{< /ui >}} in the Datadog Logs destination. Then, click the graph icon in the {{< ui >}}Metrics{{< /ui >}} column for the organization.
 
-## Metrics
+## Health metrics
 
 For [component metrics][7] and [destination buffer metrics][8] emitted by all destinations, see the [Pipelines Usage Metrics][9] documentation.
 
@@ -191,7 +191,7 @@ Because the reserved `status` attribute already exists, the destination renames 
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

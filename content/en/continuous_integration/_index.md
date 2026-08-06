@@ -93,8 +93,6 @@ Datadog integrates with a variety of CI providers to collect metrics that track 
   {{< image-card href="/continuous_integration/pipelines/custom/" src="integrations_logos/docs_other_ci_providers.png" alt="other ci providers" >}}
 {{< /card-grid >}}
 
-</br>
-
 You can use the `datadog-ci` CLI to [trace commands][8] and add [custom tags and measures][9], which allows you to add user-defined text and numerical tags in your pipeline traces.
 
 ## Ready to start?

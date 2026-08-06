@@ -82,7 +82,7 @@ If you are partitioning by `service` and have two services: `a` and `b`, you can
 |  `a`    | Bytes  | 5,000 |
 |  `b`    | Events | 50    |
 
-## Metrics
+## Health metrics
 
 For [component metrics][7] and [processor buffer metrics][8] emitted by all processors, see the [Pipelines Usage Metrics][9] documentation.
 

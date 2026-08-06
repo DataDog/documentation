@@ -1,6 +1,6 @@
 ---
 title: Upgrade the Worker Guide
-description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.19.
+description: Learn about new features, enhancements, and fixes for Worker versions 2.7 to 2.20.
 disable_toc: false
 aliases:
     - /observability_pipelines/guide/upgrade_worker_2_7/
@@ -13,6 +13,32 @@ Datadog recommends updating the Observability Pipelines Worker (OPW) with every 
 </div>
 
 This guide goes over how to upgrade to a specific Worker version and the updates for that version.
+
+## Worker version 2.20.0
+
+To upgrade to Worker version 2.20.0:
+
+- Docker: Run the `docker pull` command for the [2.20.0 image][50].
+- Kubernetes: See the [Helm chart][2] and [Upgrade the Worker][37].
+- APT: Run the command `apt-get install observability-pipelines-worker=2.20.0`.
+- RPM: Run the command `sudo yum install observability-pipelines-worker-2.20.0`.
+
+Worker version 2.20.0 gives you access to the following:
+
+#### New features
+
+- The OpenTelemetry and Splunk HEC sources now support hot-reloading TLS certificates, so certificate rotations are applied without restarting the Worker.
+
+#### Enhancements
+
+- The Split Array processor's performance has been improved.
+- The HTTP/S Server source now uses a case-insensitive match for the header name field when you configure authentication tokens.
+- The Splunk HEC source now accepts an optional list of tokens for authenticating events.
+
+#### Fixes
+
+- The Add Fields processor now increments the `component_errors_total` metric when it fails to update an event.
+- Fixed TLS certificate hostname verification issue for destinations with a configured server name, so that the server name is used for verification.
 
 ## Worker version 2.19.0
 
@@ -102,7 +128,6 @@ Worker version 2.17.0 gives you access to the following:
 
 - The Generate Metrics processor's performance has been improved to reduce CPU overhead when using `group_by` tag labels.
 - For the Custom Processor, the performance of `parse_regex_all` has been improved by reusing the compiled regex across invocations.
-- The Splunk HEC source now supports the `enabled` field on `valid_tokens` entries. Disabled tokens are excluded from authentication and enrichment.
 
 #### Fixes
 
@@ -150,7 +175,6 @@ Worker version 2.16.0 gives you access to the following:
 #### New features
 
 - [Databricks Zerobus][47] destination: Send log data to Databricks Unity Catalog tables using the Zerobus ingestion service. The Databricks destination supports OAuth 2.0 authentication, automatic schema fetching from Unity Catalog, and protobuf batch encoding.
-- The Splunk HEC source now accepts an optional `valid_tokens` list for token-based authentication managed using environment variables or a configured secrets backend.
 - The Splunk HEC source now supports enriching incoming log events using the VRL decoder.
 - The Amazon S3 destination now supports Apache Parquet batch encoding with flexible schema definitions and configurable compression (Snappy, ZSTD, GZIP, LZ4, or none).
 - For the Custom Processor:
@@ -658,3 +682,4 @@ Worker version 2.7.0 gives you access to the following:
 [47]: /observability_pipelines/destinations/databricks/
 [48]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.18.0
 [49]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.19.0
+[50]: https://hub.docker.com/r/datadog/observability-pipelines-worker/tags?name=2.20.0
