@@ -1831,19 +1831,19 @@
     "request_schema_description": "Request to update an environment."
   },
   "PauseExposureSchedule": {
-    "description": "Pauses a progressive rollout while preserving rollout state.",
+    "description": "Pauses a progressive rollout while preserving rollout state.\n\nThis operation requires the **Feature Flag Write** permission. If the rollout's allocation has\na non-empty `experiment_id` or guardrail metrics, it also requires the\n**Product Analytics Experiments Write** permission.",
     "summary": "Pause a progressive rollout"
   },
   "ResumeExposureSchedule": {
-    "description": "Resumes progression for a previously paused progressive rollout.",
+    "description": "Resumes progression for a previously paused progressive rollout.\n\nThis operation requires the **Feature Flag Write** permission. If the rollout's allocation has\na non-empty `experiment_id` or guardrail metrics, it also requires the\n**Product Analytics Experiments Write** permission.",
     "summary": "Resume a progressive rollout"
   },
   "StartExposureSchedule": {
-    "description": "Starts a progressive rollout and begins progression.",
+    "description": "Starts a progressive rollout and begins progression.\n\nThis operation requires the **Feature Flag Write** permission. If the rollout's allocation has\na non-empty `experiment_id` or guardrail metrics, it also requires the\n**Product Analytics Experiments Write** permission.",
     "summary": "Start a progressive rollout"
   },
   "StopExposureSchedule": {
-    "description": "Stops a progressive rollout and marks it as aborted.",
+    "description": "Stops a progressive rollout and marks it as aborted.\n\nThis operation requires the **Feature Flag Write** permission. If the rollout's allocation has\na non-empty `experiment_id` or guardrail metrics, it also requires the\n**Product Analytics Experiments Write** permission.",
     "summary": "Stop a progressive rollout"
   },
   "GetFeatureFlag": {
@@ -1861,13 +1861,13 @@
     "summary": "Archive a feature flag"
   },
   "CreateAllocationsForFeatureFlagInEnvironment": {
-    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.",
+    "description": "Creates a new targeting rule (allocation) for a specific feature flag in a specific environment.\n\nThis operation requires the **Feature Flag Write** permission. Creating experiment-owned allocation\nstate also requires the **Product Analytics Experiments Write** permission. An allocation is\nexperiment-owned when it has a non-empty `experiment_id` or `guardrail_metrics`. A standalone\n`CANARY` allocation or progressive `exposure_schedule` requires only the **Feature Flag Write**\npermission.",
     "summary": "Create targeting rules for a flag env",
     "request_description": "",
     "request_schema_description": "Request to create targeting rules (allocations) for a feature flag in an environment."
   },
   "UpdateAllocationsForFeatureFlagInEnvironment": {
-    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.",
+    "description": "Updates targeting rules (allocations) for a specific feature flag in a specific environment.\nThis operation replaces the existing allocation set with the request payload.\n\nThis operation requires the **Feature Flag Write** permission. Updating or removing experiment-owned\nallocation state also requires the **Product Analytics Experiments Write** permission. An allocation is\nexperiment-owned when it has a non-empty `experiment_id` or `guardrail_metrics`. A standalone `CANARY`\nallocation or progressive `exposure_schedule` requires only the **Feature Flag Write** permission.\nBecause this operation replaces the complete allocation set, the additional permission is required when\neither the request or the existing allocation set contains experiment-owned state.",
     "summary": "Update targeting rules for a flag",
     "request_description": "",
     "request_schema_description": "Request to overwrite targeting rules (allocations) for a feature flag in an environment."

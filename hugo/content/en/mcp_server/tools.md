@@ -1098,7 +1098,7 @@ Lists allocations for a feature flag in a specific environment.
 
 ### `update_datadog_feature_flag_environment`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Environment Read` and `Feature Flag Write`. `Product Analytics Experiments Write` is also required when the environment contains an allocation with a non-empty `experiment_id` or guardrail metrics. Standalone canary allocations and progressive rollout exposure schedules require only `Feature Flag Write`.*\
 Updates a feature flag configuration in a specific environment.
 
 - Enable the `dark-mode` flag in the staging environment.
@@ -1113,7 +1113,7 @@ Checks if a feature flag is implemented in code.
 
 ### `sync_datadog_feature_flag_allocations`
 *Toolset: **feature-flags***\
-*Permissions Required: `Feature Flag Write`*\
+*Permissions Required: `Feature Flag Write`. `Product Analytics Experiments Write` is also required when the request or the existing environment contains an allocation with a non-empty `experiment_id` or guardrail metrics. Standalone canary allocations and progressive rollout exposure schedules require only `Feature Flag Write`.*\
 Syncs feature flag allocations for a specific environment.
 
 - Sync the allocations for flag `new-checkout-flow` in production.
