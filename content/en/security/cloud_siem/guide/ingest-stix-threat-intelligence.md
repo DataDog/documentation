@@ -95,15 +95,19 @@ The endpoint has the following requirements and limits:
 - The bundle must be STIX 2.1. If the bundle contains a `spec_version` other than `2.1`, Datadog rejects the request. If an individual object contains a `spec_version` other than `2.1`, Datadog skips that object.
 - The maximum request body size is 50 MB.
 
-### Supported indicator types
+### Supported indicator types and patterns
 
-Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests IP addresses (both IPv4 and IPv6), domains, and file hashes.
+Datadog reads the STIX `pattern` on each indicator to determine its type and value. Cloud SIEM ingests IP addresses (both IPv4 and IPv6), domains, and SHA-256 file hashes.
+
+Datadog extracts string values from supported object paths using `=` or `IN`. Within one bracketed observation, comparisons can be joined with `AND` or `OR`. Separate bracketed observations can be joined with `OR`, but not `AND`. Datadog imports each extracted value as a separate indicator and does not preserve the relationship between comparisons.
 
 ```json
-"pattern": "[ipv4-addr:value = '198.51.100.1']"
+"pattern": "[ipv4-addr:value = '198.51.100.1'] OR [domain-name:value IN ('example.com', 'example.net')]"
 ```
 
-Datadog skips indicators with unsupported types or pattern expressions. The response counts these as `unsupported` or `invalid`. Check these counts to confirm how much of your feed ingested.
+Patterns that use negation, ranges, wildcard matching, regular expression matching, subnet relations, existence checks, temporal qualifiers, or `FOLLOWEDBY` are unsupported. If any part of a pattern uses an unsupported expression, Datadog skips the indicator object.
+
+The response counts unsupported objects as `unsupported` and unparseable patterns as `invalid`. Check these counts to confirm how much of your feed ingested.
 
 ### How STIX fields map to reference table columns
 
@@ -142,7 +146,7 @@ A successful request returns `200 OK` and a summary of how Datadog processed the
 
 | Attribute | Description |
 |---|---|
-| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN` or `OR`. |
+| `added` | The number of indicator objects that Datadog ingested. One object can produce more than one indicator when its pattern uses `IN`, contains multiple comparisons within an observation, or joins observations with `OR`. |
 | `unsupported` | The number of indicator objects that Datadog skipped because their type, pattern, or object-level STIX version is not supported. |
 | `invalid` | The number of indicator objects whose pattern Datadog could not parse. |
 
