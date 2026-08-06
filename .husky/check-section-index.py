@@ -83,7 +83,7 @@ def has_index_file(repo_root, dir_name):
         return True
     # Also check if either variant is staged (new but not yet on disk)
     for name in ('_index.md', '_index.mdoc.md'):
-        relative = f'hugo/hugo/content/en/{dir_name}/{name}'
+        relative = f'hugo/content/en/{dir_name}/{name}'
         try:
             subprocess.run(
                 ['git', 'show', f':{relative}'],
