@@ -173461,6 +173461,7 @@ paths:
                 - coral.oncall.datadoghq.com
                 - teal.oncall.datadoghq.com
                 - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
               x-enum-varnames:
                 - LAVA
                 - SAFFRON
@@ -173468,11 +173469,28 @@ paths:
                 - CORAL
                 - TEAL
                 - BEIGE
+                - SCARLET
         - url: "{protocol}://{name}"
           variables:
             name:
-              default: api.datadoghq.com
-              description: Full site DNS name.
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
             protocol:
               default: https
               description: The protocol for accessing the API.
@@ -173480,10 +173498,32 @@ paths:
           variables:
             site:
               default: datadoghq.com
-              description: Any Datadog deployment.
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
             subdomain:
-              default: api
-              description: The subdomain where the API is deployed.
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
       summary: Create On-Call Page
       tags:
         - On-Call Paging
@@ -173524,6 +173564,7 @@ paths:
                 - coral.oncall.datadoghq.com
                 - teal.oncall.datadoghq.com
                 - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
               x-enum-varnames:
                 - LAVA
                 - SAFFRON
@@ -173531,11 +173572,28 @@ paths:
                 - CORAL
                 - TEAL
                 - BEIGE
+                - SCARLET
         - url: "{protocol}://{name}"
           variables:
             name:
-              default: api.datadoghq.com
-              description: Full site DNS name.
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
             protocol:
               default: https
               description: The protocol for accessing the API.
@@ -173543,10 +173601,32 @@ paths:
           variables:
             site:
               default: datadoghq.com
-              description: Any Datadog deployment.
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
             subdomain:
-              default: api
-              description: The subdomain where the API is deployed.
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
       summary: Acknowledge On-Call Page
       tags:
         - On-Call Paging
@@ -173587,6 +173667,7 @@ paths:
                 - coral.oncall.datadoghq.com
                 - teal.oncall.datadoghq.com
                 - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
               x-enum-varnames:
                 - LAVA
                 - SAFFRON
@@ -173594,11 +173675,28 @@ paths:
                 - CORAL
                 - TEAL
                 - BEIGE
+                - SCARLET
         - url: "{protocol}://{name}"
           variables:
             name:
-              default: api.datadoghq.com
-              description: Full site DNS name.
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
             protocol:
               default: https
               description: The protocol for accessing the API.
@@ -173606,10 +173704,32 @@ paths:
           variables:
             site:
               default: datadoghq.com
-              description: Any Datadog deployment.
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
             subdomain:
-              default: api
-              description: The subdomain where the API is deployed.
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
       summary: Escalate On-Call Page
       tags:
         - On-Call Paging
@@ -173650,6 +173770,7 @@ paths:
                 - coral.oncall.datadoghq.com
                 - teal.oncall.datadoghq.com
                 - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
               x-enum-varnames:
                 - LAVA
                 - SAFFRON
@@ -173657,11 +173778,28 @@ paths:
                 - CORAL
                 - TEAL
                 - BEIGE
+                - SCARLET
         - url: "{protocol}://{name}"
           variables:
             name:
-              default: api.datadoghq.com
-              description: Full site DNS name.
+              default: navy.oncall.datadoghq.com
+              description: The full DNS name of the On-Call paging endpoint.
+              enum:
+                - lava.oncall.datadoghq.com
+                - saffron.oncall.datadoghq.com
+                - navy.oncall.datadoghq.com
+                - coral.oncall.datadoghq.com
+                - teal.oncall.datadoghq.com
+                - beige.oncall.datadoghq.eu
+                - scarlet.oncall.datadoghq.com
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
             protocol:
               default: https
               description: The protocol for accessing the API.
@@ -173669,10 +173807,32 @@ paths:
           variables:
             site:
               default: datadoghq.com
-              description: Any Datadog deployment.
+              description: The Datadog site where the On-Call paging endpoint is deployed.
+              enum:
+                - datadoghq.com
+                - datadoghq.eu
+              x-enum-varnames:
+                - DATADOGHQ_COM
+                - DATADOGHQ_EU
             subdomain:
-              default: api
-              description: The subdomain where the API is deployed.
+              default: navy.oncall
+              description: The On-Call paging subdomain.
+              enum:
+                - lava.oncall
+                - saffron.oncall
+                - navy.oncall
+                - coral.oncall
+                - teal.oncall
+                - beige.oncall
+                - scarlet.oncall
+              x-enum-varnames:
+                - LAVA
+                - SAFFRON
+                - NAVY
+                - CORAL
+                - TEAL
+                - BEIGE
+                - SCARLET
       summary: Resolve On-Call Page
       tags:
         - On-Call Paging
