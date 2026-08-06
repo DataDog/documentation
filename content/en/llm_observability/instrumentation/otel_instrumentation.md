@@ -857,22 +857,35 @@ Flagged spans display a **Mapping warnings** indicator in the span detail panel.
 
 A trace containing any flagged spans also shows a summary indicator in its header that lists every affected span. Selecting a span from that list jumps to it.
 
-<div class="alert alert-info">Mapping warnings are detected at ingestion. They don't affect billing or span retention.</div>
+<div class="alert alert-info">Warnings are detected at ingestion. They don't affect billing or span retention.</div>
 
 ### Mapping warning reference
 
 | Warning | Attribute | Fix |
 |---------|-----------|-----|
-| Missing model name | Expected `gen_ai.request.model` | Set `gen_ai.response.model` or `gen_ai.request.model`. OpenInference `llm.model_name` and `embedding.model_name` are also accepted. |
-| Missing model provider | Expected `gen_ai.system` | Set `gen_ai.system` to the provider, for example `openai` or `anthropic`. OpenInference `llm.provider` and `llm.system` are also accepted. |
-| Missing input and output | Expected `input.value` | Set `gen_ai.input.messages` and `gen_ai.output.messages`, or the OpenInference `input.value` and `output.value` pair. |
-| Malformed input | On `input.value` | Emit valid JSON, or set `input.mime_type` to `text/plain`. |
-| Malformed output | On `output.value` | Emit valid JSON, or set `output.mime_type` to `text/plain`. |
-| Malformed message | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. Indexed OpenInference `llm.input_messages.*` attributes are also accepted. |
-| Missing embedding input | Expected `embedding.embeddings.*.embedding.text` | Set the indexed embedding text attributes, for example `embedding.embeddings.0.embedding.text`. |
+| Missing model name | Expected `gen_ai.request.model` | Set `gen_ai.response.model` or `gen_ai.request.model`. |
+| Malformed model identifier | On `gen_ai.request.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
+| Missing input and output | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` and `gen_ai.output.messages`. |
+| Malformed input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
+| Malformed output | On `gen_ai.output.messages` | Emit `gen_ai.output.messages` as a valid JSON array of messages. |
+| Malformed message | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. |
+| Empty message content | On `gen_ai.output.messages` | Emit a `content` string, or `parts` entries with a recognized `type`, for example `text`, `tool_call`, `tool_call_response`. |
+| Missing embedding input | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` to the embedded text. |
+| Malformed embedding input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
 | Unreadable token counts | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
 | Invalid token counts | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
-| Malformed invocation parameters | On `llm.invocation_parameters` | Emit `llm.invocation_parameters` as a valid JSON object. |
+| Unreadable cost metrics | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
+| Invalid cost metrics | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Malformed invocation parameters | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (`temperature`, `top_p`, `max_tokens`, and so on). |
+| Malformed tool definitions | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
+| Malformed tool definition | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
+| Missing tool name | Expected `gen_ai.tool.name` | Set `gen_ai.tool.name` on tool spans. |
+| Missing tool call name | On `gen_ai.output.messages` | Give each tool call a `name`. |
+| Missing operation name | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` to one of `chat`, `text_completion`, `embeddings`, `execute_tool`, `invoke_agent`, or `retriever`. |
+| Malformed span events | On `events` | Emit valid JSON in span events, or set `gen_ai.input.messages` and `gen_ai.output.messages` directly. |
+| Unreadable document score | On `output.documents` | Emit each document score as a number. |
+| Malformed document metadata | On `output.documents` | Emit each document's metadata as a JSON object. |
+| Unrecognized instrumentation | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` and `gen_ai.system` so Datadog can identify the instrumentation. |
 
 Each warning in the UI also includes a short description of its downstream effect, such as skipped evaluations or unavailable cost estimation. A span can display warnings that aren't listed here if Datadog adds new checks; these render with a generated title based on the underlying code.
 
@@ -881,7 +894,7 @@ Each warning in the UI also includes a short description of its downstream effec
 To find the raw attributes Datadog received for a flagged span:
 
 - If APM is enabled, the same data is also written to the corresponding APM trace. Open the linked APM trace to inspect the raw span attributes, and compare them against the expected attribute from the [mapping warning reference](#mapping-warning-reference) or the full [attribute mapping reference](#attribute-mapping-reference). See [Correlating Agent Observability and APM][14] for how the two views relate.
-- For a malformed input, output, or invocation parameters warning, check whether the attribute value is valid JSON. Common causes include double-encoding, truncation, and emitting a string or other non-object value where an object is expected.
+- For a malformed warning, check whether the attribute value is valid JSON. Common causes include double-encoding, truncation, and emitting a string or other non-object value where an object is expected.
 - For a missing attribute warning, check your instrumentation library version against the [Tested frameworks and libraries](#tested-frameworks-and-libraries) table, and confirm `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` is set if your library requires it.
 
 ## Supported semantic conventions
