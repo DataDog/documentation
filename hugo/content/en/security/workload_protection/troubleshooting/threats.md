@@ -6,6 +6,7 @@ If you experience issues with Workload Protection, use the following troubleshoo
 
 ## Security Agent flare
 
+<div class="alert alert-warning">From Agent <code>7.77</code>, the <code>security-agent</code> runtime component for Workload Protection is deprecated and is no longer required. The standalone <code>security-agent flare</code> command does not work when the Security Agent process is not running. Use the core Agent <code>flare</code> command instead.</div>
 Similar to the [Agent flare][1], you can send necessary troubleshooting information to the Datadog support team with one flare command.
 
 The flare asks for confirmation before upload, so you may review the content before the Security Agent sends it.
@@ -22,13 +23,13 @@ If you don't have a case ID, just enter your email address used to login in Data
 
 ## Agent Self tests
 
-In order to ensure that the communication between the `security-agent` and the `system-probe` is working as expected and that Workload Protection is able to detect system events, you can manually trigger self tests by running the following command:
+In order to ensure that Workload Protection is able to detect system events, you can manually trigger self tests by running the following command:
 
 | Platform     | Command                                                                             |
 | --------     | -------                                                                             |
-| Docker       | `docker exec -it datadog-agent security-agent runtime self-test`                    |
-| Kubernetes   | `kubectl exec -it <POD_NAME> -c security-agent -- security-agent runtime self-test` |
-| Host         | `sudo /opt/datadog-agent/embedded/bin/security-agent runtime self-test`             |
+| Docker       | `docker exec -it datadog-agent system-probe runtime self-test`                    |
+| Kubernetes   | `kubectl exec -it <POD_NAME> -c system-probe -- system-probe runtime self-test` |
+| Host         | `sudo /opt/datadog-agent/embedded/bin/system-probe runtime self-test`             |
 
 The self-test procedure creates some temporary files and rules to monitor them, and then triggers those rules to ensure that events are correctly propagated.
 
@@ -37,9 +38,7 @@ The following response appears when rules are propagated.
 Runtime self test: OK
 ```
 
-You can now see events coming from the `runtime-security-agent` in the {{< ui >}}Log Explorer{{< /ui >}}.
-
-{{< img src="security/cws/self_test_logs.png" alt="Self test events in the Log Explorer" style="width:90%;">}}
+You can now see events coming in the {{< ui >}}Event Explorer{{< /ui >}}.
 
 ## Compatibility with custom Kubernetes network plugins
 
