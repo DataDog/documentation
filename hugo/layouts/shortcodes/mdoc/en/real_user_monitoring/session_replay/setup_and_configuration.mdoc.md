@@ -538,6 +538,51 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+### Disable Session Replay
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][34].
+
+**Note**: If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0` instead.
+{% /if %}
+<!-- end Browser -->
+
+<!-- Android -->
+{% if equals($platform, "android") %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end Android -->
+
+<!-- iOS -->
+{% if equals($platform, "ios") %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end iOS -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
+<!-- .NET MAUI -->
+{% if equals($platform, "maui") %}
+Session Replay support for .NET MAUI is not yet available.
+{% /if %}
+<!-- end .NET MAUI -->
+
+<!-- React Native -->
+{% if equals($platform, "react_native") %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end React Native -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end Flutter -->
 
 ### Start or stop the recording manually
 
@@ -777,3 +822,4 @@ See [Connect Session Replay to your third-party tools][30].
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
+[34]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
