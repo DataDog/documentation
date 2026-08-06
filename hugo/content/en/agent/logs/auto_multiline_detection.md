@@ -21,7 +21,7 @@ Automatic multi-line detection allows the Agent to detect and aggregate common m
 For example, an application writes the following five lines. Without Auto multi-line detection, the Agent sends each line as its own log, splitting the exception away from the message that introduced it:
 
 ```text
-2024-08-13 17:15:17 INFO Starting request handler             -> log 1
+2024-08-13 17:15:17 ERROR Starting request handler            -> log 1
 Exception in thread "main" java.lang.NullPointerException     -> log 2
     at com.example.MyClass.doSomething(MyClass.java:42)       -> log 3
     at com.example.MyClass.main(MyClass.java:20)              -> log 4
@@ -31,7 +31,7 @@ Exception in thread "main" java.lang.NullPointerException     -> log 2
 With Auto multi-line detection enabled, only lines that begin with a datetime start a new log. The exception and its stack trace are aggregated into the log that precedes them, so the same five lines are sent as two logs:
 
 ```text
-2024-08-13 17:15:17 INFO Starting request handler          --+
+2024-08-13 17:15:17 ERROR Starting request handler         --+
 Exception in thread "main" java.lang.NullPointerException    |
     at com.example.MyClass.doSomething(MyClass.java:42)      |-> log 1
     at com.example.MyClass.main(MyClass.java:20)           --+
