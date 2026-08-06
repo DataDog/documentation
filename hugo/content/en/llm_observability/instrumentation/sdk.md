@@ -385,7 +385,7 @@ After installing the SDK and running your application you should expect to see s
 
 <div class="alert alert-info">Trace sampling is available in the Python SDK (<code>ddtrace</code> 4.12.0 or later) and the Node.js SDK (<code>dd-trace</code> 5.110.0 or later). The Java SDK does not support trace sampling.</div>
 
-Trace sampling sets the fraction of traces that Agent Observability retains. Because Agent Observability billing is based on the volume of spans you send, lowering the sample rate is one way to control your Agent Observability cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
+Trace sampling sets the fraction of traces that Agent Observability retains. Because Agent Observability billing is based on the volume of spans you send, setting a sample rate is one way to control your Agent Observability cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
 Sampling does not affect your [cost metrics](/llm_observability/monitoring/cost/). Unsampled spans are dropped after Datadog ingests your traces, so token counts and LLM cost data remain complete regardless of the sample rate you set.
 
