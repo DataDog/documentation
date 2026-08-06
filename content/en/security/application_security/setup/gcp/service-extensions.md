@@ -153,7 +153,7 @@ The App and API Protection Service Extension deployment requires several compone
      required_providers {
        google-beta = {
          source  = "hashicorp/google-beta"
-         version = "~> 6.0"
+         version = ">= 7.39.0"
        }
      }
    }
@@ -351,7 +351,8 @@ The App and API Protection Service Extension deployment requires several compone
    #----------------------------------------------------------
 
     # GCP Service Extension configuration for traffic interception
-    resource "google_beta_network_services_lb_traffic_extension" "default" {
+    resource "google_network_services_lb_traffic_extension" "default" {
+      provider    = google-beta
       name        = "${var.project_prefix}-service-extension"
       description = "Datadog App and API Protection Service Extension"
       location    = "global"
