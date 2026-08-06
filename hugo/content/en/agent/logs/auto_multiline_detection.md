@@ -12,13 +12,13 @@ algolia:
   tags: ['advanced log filter']
 ---
 
-<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">Auto Multi-line Detection and Aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, Auto multi-line Detection is disabled by default.</div>
+<div class="alert alert-danger">This feature is available for Agent version <strong>7.65.0+</strong> and above. For older Agent versions or to explicitly enable the legacy implementation, see <a href="/agent/logs/auto_multiline_detection_legacy">auto Multi-line detection and aggregation (Legacy)</a>. For Agent versions older than <strong>7.82.0</strong>, auto multi-line Detection is disabled by default.</div>
 
 ## Overview
 
 Automatic multi-line detection allows the Agent to detect and aggregate common multi-line logs automatically.
 
-For example, an application writes the following five lines. Without Auto multi-line detection, the Agent sends each line as its own log, splitting the exception away from the message that introduced it:
+For example, an application writes the following five lines. Without auto multi-line detection, the Agent sends each line as its own log, splitting the exception away from the message that introduced it:
 
 ```text
 2024-08-13 17:15:17 ERROR Starting request handler            -> log 1
@@ -41,7 +41,7 @@ Exception in thread "main" java.lang.NullPointerException    |
 
 ## Getting started
 
-Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the Auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
+Auto multi-line detection is enabled by default starting with Agent version `7.82.0`. To disable the auto multi-line feature in your Agent configuration, set `auto_multi_line_detection` to `false` in your configuration file, or set the `DD_LOGS_CONFIG_AUTO_MULTI_LINE_DETECTION=false` environment variable:
 
 {{< tabs >}}
 {{% tab "Configuration file" %}}
