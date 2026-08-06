@@ -540,6 +540,21 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+### Disable Session Replay
+
+<!-- Browser -->
+{% if equals($platform, "browser") %}
+To stop session recordings, set `sessionReplaySampleRate` to `0`. This stops collecting data for the [Browser RUM & Session Replay plan][35].
+
+**Note**: If you're using a version of the RUM Browser SDK earlier than v5.0.0, set `replaySampleRate` to `0` instead.
+{% /if %}
+<!-- end Browser -->
+
+<!-- Mobile -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
+To stop session recordings, set the sample rate shown in [Set the sample rate for recorded sessions to appear](#set-the-sample-rate-for-recorded-sessions-to-appear) to `0`.
+{% /if %}
+<!-- end Mobile -->
 
 ### Start or stop the recording manually
 
@@ -768,3 +783,4 @@ See [Connect Session Replay to your third-party tools][30].
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
 [34]: /session_replay/app_performance/
+[35]: https://www.datadoghq.com/pricing/?product=real-user-monitoring--session-replay#real-user-monitoring--session-replay
