@@ -224,9 +224,9 @@ See [Merge Step Functions traces with Lambda traces][11]. Ensure that you have a
 
 ### Sample traces
 
-To manage the APM traced invocation sampling rate for serverless functions, set the `DD_TRACE_SAMPLE_RATE` environment variable on the function to a value between 0.00 (no tracing of Step Function invocations) and 1.00 (trace all Step Function invocations). 
+To manage the APM traced invocation sampling rate, set the `DD_TRACE_SAMPLE_RATE` tag on the state machine to a value between 0.00 (no tracing of Step Function invocations) and 1.00 (trace all Step Function invocations).
 
-The dropped traces are not ingested into Datadog. 
+The dropped traces are not ingested into Datadog. Sampling applies to traces only. [Enhanced metrics][8] are generated for every Step Function execution, regardless of the sampling rate.
 
 ### Enable enhanced metrics (without tracing)
 
