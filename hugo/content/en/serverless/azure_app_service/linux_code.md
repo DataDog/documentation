@@ -442,8 +442,10 @@ Path to the instrumentation library loaded by the .NET runtime.<br>
       - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
       - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
       - {{< ui >}}Port{{< /ui >}}: 8126
-      - {{< ui >}}Environment Variables{{< /ui >}}: Include all previously configured Datadog environment variables.
    1. Select {{< ui >}}Apply{{< /ui >}}.
+   1. On the sidecar container's settings, enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
+
+      {{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
 
 3. **Restart your application**.
 
