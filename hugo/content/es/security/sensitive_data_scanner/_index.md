@@ -2,179 +2,197 @@
 aliases:
 - /es/account_management/org_settings/sensitive_data_detection
 - /es/sensitive_data_scanner/
+description: Descubra, clasifique y, opcionalmente, redacte datos confidenciales como
+  PII, credenciales y números de tarjetas de crédito en los logs de Datadog, spans
+  de APM, eventos de RUM, trazas de Agent Observability, eventos y buckets de Amazon
+  S3 con Sensitive Data Scanner.
 disable_toc: false
 further_reading:
 - link: /security/sensitive_data_scanner/setup/telemetry_data
   tag: Documentación
-  text: Configurar Sensitive Data Scanner para Datos de Telemetría
+  text: Configure Sensitive Data Scanner para datos de telemetría
 - link: /security/sensitive_data_scanner/setup/cloud_storage
   tag: Documentación
-  text: Configurar Sensitive Data Scanner para Almacenamiento en la Nube
+  text: Configure Sensitive Data Scanner para almacenamiento en la nube
 - link: coterm
   tag: Documentación
-  text: 'CoTerm: Monitorear sesiones de terminal y actividades sensibles en sistemas
+  text: 'CoTerm: monitoree sesiones de terminal y actividades confidenciales en sistemas
     locales y remotos'
 - link: /data_security/
   tag: Documentación
-  text: Reduciendo riesgos relacionados con datos
+  text: Reducción de riesgos relacionados con los datos
 - link: https://www.datadoghq.com/blog/scaling-sensitive-data-scanner/
   tag: Blog
-  text: Descubrir, clasificar y remediar problemas de datos sensibles a gran escala
+  text: Descubra, clasifique y remedie problemas de datos confidenciales a escala
     con Sensitive Data Scanner
 - link: https://www.datadoghq.com/blog/sensitive-data-scanner/
   tag: Blog
-  text: Construir una estrategia moderna de cumplimiento de datos con Sensitive Data
-    Scanner de Datadog
+  text: Construya una estrategia moderna de cumplimiento de datos con Sensitive Data
+    Scanner de Datadog.
 - link: https://www.datadoghq.com/blog/sensitive-data-management-best-practices/
   tag: Blog
-  text: Mejores prácticas para la gestión de datos sensibles
+  text: Mejores prácticas para la gestión de datos confidenciales
 - link: https://www.datadoghq.com/blog/data-security/
   tag: Blog
-  text: Descubrir datos sensibles en sus almacenes de datos en la nube con Data Security
+  text: Descubra datos confidenciales en sus almacenes de datos en la nube con Data
+    Security.
 - link: https://www.datadoghq.com/blog/hipaa-compliance-sensitive-data-scanner/
   tag: Blog
-  text: Cómo las empresas sujetas a los requisitos de HIPAA gestionan datos sensibles
+  text: Cómo las empresas sujetas a los requisitos de HIPAA gestionan datos confidenciales
     con Datadog
 - link: https://www.datadoghq.com/blog/sds-dlp-for-financial-service-companies/
   tag: Blog
   text: Cómo las empresas de servicios financieros descubren, clasifican y gestionan
-    datos sensibles con Datadog
+    datos confidenciales con Datadog
 - link: https://www.datadoghq.com/blog/sds-for-insurance-companies/
   tag: Blog
   text: Cómo las compañías de seguros descubren, clasifican y actúan sobre los riesgos
-    de datos sensibles con Datadog
+    de datos confidenciales con Datadog
 - link: https://www.datadoghq.com/blog/llm-aws-strands
   tag: Blog
-  text: Obtener visibilidad en los flujos de trabajo de Strands Agents con Datadog
+  text: Obtenga visibilidad de los flujos de trabajo de los Strands Agents con Datadog
     LLM Observability
 - link: https://www.datadoghq.com/blog/observability-pipelines-mssp
   tag: Blog
-  text: Simplificar la recolección y agregación de registros para MSSPs con Datadog
-    Observability Pipelines
+  text: Simplifique la recopilación y agregación de logs para MSSP con Datadog Observability
+    Pipelines
 - link: https://www.datadoghq.com/blog/datadog-cloud-security-compliance
   tag: Blog
-  text: Escalar el cumplimiento a través de marcos globales con Datadog Cloud Security
+  text: Escale el cumplimiento en marcos globales con Datadog Cloud Security
 title: Sensitive Data Scanner
 ---
-## Visión General {#overview}
+## Descripción general {#overview}
 
-Los datos sensibles, como números de tarjetas de crédito, claves de API, direcciones IP e información personal identificable (PII), a menudo se filtran de manera no intencionada, lo que puede exponer a su organización a riesgos de seguridad y cumplimiento. Los datos sensibles se pueden encontrar en:
+Los datos confidenciales, como números de tarjetas de crédito, claves de API, direcciones IP e información de identificación personal (PII), a menudo se filtran involuntariamente, lo que puede exponer a su organización a riesgos de seguridad y cumplimiento. Los datos confidenciales se pueden encontrar en:
  
-- Tramos de APM
+- Spans de APM
 - Repositorios de código
 - Eventos de Event Management
-- Trazas de LLM Observability
+- Trazas de Agent Observability
 - Eventos de RUM
-- Datos de telemetría, como registros de aplicaciones
+- Datos de telemetría, como logs de aplicaciones
 
-Los datos sensibles también pueden ser trasladados involuntariamente a recursos de almacenamiento en la nube cuando los equipos de ingeniería mueven sus cargas de trabajo a la nube. El escáner de datos sensibles de Datadog puede ayudar a prevenir filtraciones de datos sensibles y limitar los riesgos de incumplimiento al descubrir, clasificar y, opcionalmente, redactar datos sensibles.
+Los datos confidenciales también pueden trasladarse involuntariamente a recursos de almacenamiento en la nube cuando los equipos de ingeniería mueven sus cargas de trabajo a la nube. Sensitive Data Scanner de Datadog puede ayudar a prevenir fugas de datos confidenciales y limitar los riesgos de cumplimiento mediante el descubrimiento, la clasificación y la redacción opcional de datos confidenciales.
 
-**Nota**: Las herramientas y políticas de Datadog cumplen con PCI v4.0. Para más información, consulte [Cumplimiento de PCI DSS][1].
+**Nota**: Las herramientas y políticas de Datadog cumplen con PCI v4.0. Para obtener más información, consulte [PCI DSS Compliance][1].
 
-## Escanear datos de telemetría {#scan-telemetry-data}
+## Fuentes de datos admitidas {#supported-data-sources}
+
+Sensitive Data Scanner analiza datos de telemetría (logs, spans de APM, eventos de RUM y eventos), trazas de Agent Observability, almacenamiento en la nube y repositorios de código.
+
+La acción que puede aplicar a los datos sensibles detectados depende de la fuente de datos. La siguiente tabla muestra qué acciones de ofuscación son compatibles para cada fuente de telemetría y para Agent Observability:
+
+| Acción           | Logs | APM | RUM | Eventos | Agent Observability |
+|------------------|------|-----|-----|--------|---------------------|
+| Redactar           | Sí  | Sí | Sí | Sí    | Sí                 |
+| Redactar parcialmente | Sí  | Sí | Sí | Sí    | Sí                 |
+| Hashear             | Sí  | Sí | Sí | Sí    | Sí                 |
+| Enmascarar             | Sí  | Sí | Sí | No     | No                  |
+
+<div class="alert alert-info">Para el almacenamiento en la nube y los repositorios de código (Secret Scanning), Sensitive Data Scanner puede detectar datos confidenciales, pero no puede aplicarles acciones de ofuscación.</div>
+
+### Datos de telemetría {#telemetry-data}
 
 {{< img src="sensitive_data_scanner/telemetry_data_issues.png" alt="Se detectaron cinco hallazgos sensibles diferentes, donde dos tienen prioridad crítica, uno tiene prioridad media y dos son informativos." style="width:100%;" >}}
 
-El escáner de datos sensibles puede escanear sus datos [en la nube](#in-the-cloud) o [dentro de su entorno](#in-your-environment).
+Sensitive Data Scanner puede escanear sus datos [en la nube](#in-the-cloud) o [dentro de su entorno](#in-your-environment).
 
-### En la nube  {#in-the-cloud}
+#### En la nube {#in-the-cloud}
 
-Con Sensitive Data Scanner en la nube, envía registros y eventos al backend de Datadog, por lo que los datos salen de su entorno antes de ser redactados. Los registros y eventos se escanean y se redactan en el backend de Datadog durante el procesamiento, por lo que los datos sensibles se redactan antes de que los eventos sean indexados y mostrados en Datadog UI.
+Con Sensitive Data Scanner en la nube, usted envía logs y eventos al backend de Datadog, por lo que los datos salen de su entorno antes de ser redactados. Los logs y eventos se escanean y redactan en el backend de Datadog durante el procesamiento, por lo que los datos confidenciales se redactan antes de que los eventos sean indexados y mostrados en la interfaz de usuario de Datadog.
 
-Los datos que pueden ser escaneados y redactados son:
+Los datos que se pueden escanear y redactar son:
 
-- **Registros**: Todo el contenido de registro estructurado y no estructurado, incluyendo mensajes de registro y valores de atributos
-- **APM**: Solo valores de atributos de tramos
+- **Logs**: Todo el contenido de logs estructurado y no estructurado, incluyendo el mensaje del log y los valores de los atributos
+- **APM**: Solo valores de atributos de span
 - **RUM**: Solo valores de atributos de eventos
 - **Eventos**: Solo valores de atributos de eventos
 
-Opcionalmente, las tasas de muestreo pueden establecerse entre el 10% y el 99% para cada producto. Esto ayuda a gestionar los costos cuando comienza, al reducir la cantidad de datos que se escanean en busca de información sensible.
+Opcionalmente, se pueden establecer tasas de muestreo entre el 10% y el 99% para cada producto. Esto ayuda a gestionar los costos al comenzar, al reducir la cantidad de datos que se escanean en busca de información sensible.
 
 Para cada [regla de escaneo][17], se puede aplicar una de las siguientes acciones a los datos sensibles coincidentes:
 
-- **Redactar**: Reemplace todos los datos coincidentes con un solo token que elija, como `[sensitive_data]`.
-- **Redactar parcialmente**: Reemplace una porción específica de todos los valores coincidentes.
+- **Redactar**: Reemplazar todos los datos coincidentes con un único token que usted elija, como `[sensitive_data]`.
+- **Redactar parcialmente**: Reemplazar una porción específica de todos los valores coincidentes.
+- **Hash**: Reemplazar todos los datos coincidentes con un identificador único no reversible.
+- **Enmascarar** (disponible para logs, spans de APM y eventos de RUM): Ofuscar todos los valores coincidentes. Los usuarios con el permiso `Data Scanner Unmask` pueden desofuscar (desenmascarar) y ver estos datos en Datadog. Consulte [Acción de enmascarar][16] para obtener más información.
+
+**Nota**: Al escanear datos muestreados, no podrá seleccionar acciones que ofusquen los datos que escanea.
+
+Para utilizar Sensitive Data Scanner, configure un grupo de escaneo para definir qué datos escanear y luego configure reglas de escaneo para determinar qué información confidencial debe coincidir dentro de los datos. Para las reglas de escaneo puede:
+- Añadir reglas de escaneo predefinidas de la [Biblioteca de reglas de escaneo][2] de Datadog. Estas reglas detectan patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, información de red y dispositivos, y más.
+- [Cree sus propias reglas utilizando patrones de regex][3].
+
+Consulte [Configurar Sensitive Data Scanner para datos de telemetría][4] para obtener detalles de configuración.
+
+#### En su entorno {#in-your-environment}
+
+Utilice [Observability Pipelines][5] para recopilar y procesar sus logs dentro de su entorno, y luego dirija los datos a sus integraciones descendentes. Cuando configure un pipeline en Observability Pipelines, añada el [Sensitive Data Scanner processor][6] para redactar datos confidenciales en sus logs antes de que salgan de sus instalaciones. Puede añadir reglas de escaneo predefinidas de la Biblioteca de reglas, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, direcciones IP y más. También puede crear sus propias reglas utilizando patrones de regex.
+
+Consulte [Configurar pipelines][7] para obtener más información.
+
+### Agent Observability {#agent-observability}
+
+Sensitive Data Scanner puede escanear Trazas de Agent Observability, incluyendo entradas y salidas de aplicaciones LLM. Esto ayuda a evitar la exposición de datos confidenciales como PII, claves de API o información propietaria en prompts, completaciones y metadatos de flujo de trabajo de LLM.
+
+El escaneo de Agent Observability utiliza un modelo de configuración administrado que difiere del escaneo de datos de telemetría, donde el escaneo de Agent Observability tiene:
+
+- **Un grupo de escaneo administrado**: Se crea automáticamente un grupo de escaneo predeterminado para su organización cuando accede por primera vez a la [página de configuración de Agent Observability][18]. No puede crear grupos de escaneo adicionales ni eliminar el grupo administrado.
+- **Reglas personalizables**: Puede modificar las reglas existentes, deshabilitar las reglas que no necesita o añadir reglas de escaneo personalizadas para detectar patrones de datos confidenciales adicionales.
+
+Para cada regla de escaneo, se puede aplicar una de las siguientes acciones a los datos confidenciales coincidentes:
+
+- **Redact**: Reemplace todos los datos coincidentes con un único token que usted elija, como `[sensitive_data]`.
+- **Redact**: Reemplace una porción específica de todos los valores coincidentes.
 - **Hash**: Reemplace todos los datos coincidentes con un identificador único no reversible.
-- **Enmascarar** (disponible solo para registros): Ofusque todos los valores coincidentes. Los usuarios con el permiso `Data Scanner Unmask` pueden desofuscar (desenmascarar) y ver estos datos en Datadog. Consulte [Acción de enmascarar][16] para más información.
 
-**Nota**: Al escanear datos muestreados, no podrás seleccionar acciones que ofusquen los datos que escanea.
+Para configurar el escaneo de datos de Agent Observability, navegue a la [página de configuración de Agent Observability][18] en la configuración de Sensitive Data Scanner. Para obtener más información sobre Agent Observability, consulte la [documentación de Agent Observability][20].
 
-Para usar Sensitive Data Scanner, configure un grupo de escaneo para definir qué datos escanear y luego establezca reglas de escaneo para determinar qué información sensible identificar dentro de los datos. Para las reglas de escaneo puedes:
-- Agregue reglas de escaneo predefinidas de la [Biblioteca de Reglas de Escaneo][2]. Estas reglas detectan patrones comunes como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, información de red y dispositivo, y más.
-- [Cree sus propias reglas utilizando patrones regex][3].
+### Almacenamiento en la nube {#cloud-storage}
 
-Consulte [Configura el Escáner de Datos Sensibles para Datos de Telemetría][4] para detalles de configuración.
+{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="La sección de almacén de datos de la página de hallazgos con tres hallazgos de Amazon S3" style="width:100%;" >}}
 
-### En su entorno {#in-your-environment}
+Si tiene habilitado Sensitive Data Scanner, puede catalogar y clasificar sensitive data en sus buckets de Amazon S3. **Nota**: Sensitive Data Scanner no redacta sensitive data en sus recursos de almacenamiento en la nube.
 
-Utiliza [Observability Pipelines][5] para recopilar y procesar tus registros dentro de tu entorno, y luego enruta los datos a sus integraciones de destino. Cuando configure una canalización en Observability Pipelines, agregue el [procesador de Sensitive Data Scanner][6] para redactar datos sensibles en sus registros antes de que salgan de sus instalaciones. Puedes agregar reglas de escaneo predefinidas de la Biblioteca de Reglas, como direcciones de correo electrónico, números de tarjetas de crédito, claves de API, tokens de autorización, direcciones IP, y más. También puedes crear tus propias reglas utilizando patrones regex.
+Sensitive Data Scanner escanea sensitive data mediante la implementación de [Agentless scanners][8] en sus entornos de nube. Estas instancias de escaneo recuperan una lista de todos los buckets de S3 a través de [Remote Configuration][9] y tienen instrucciones establecidas para escanear archivos de texto, como CSV y JSON, a lo largo del tiempo.
 
-Consulta [Configurar Pipelines][7] para más información.
+Sensitive Data Scanner aprovecha su [biblioteca completa de reglas][10] para encontrar coincidencias. Cuando se encuentra una coincidencia, la instancia de escaneo envía la ubicación de la misma a Datadog. **Nota**: Los almacenes de datos y sus archivos solo se leen en su entorno; no se envía a Datadog ningún sensitive data que haya sido escaneado.
 
-## Escanear datos de Observabilidad de LLM {#scan-llm-observability-data}
+Además de mostrar las coincidencias de sensitive data, Sensitive Data Scanner muestra cualquier problema de seguridad detectado por [Cloud Security][11] que afecte a los almacenes de sensitive data. Puede hacer clic en cualquier problema para continuar con la evaluación y la corrección dentro de Cloud Security.
 
-El Escáner de Datos Sensibles puede escanear trazas de [Observabilidad de LLM de Datadog][20], incluyendo entradas y salidas de aplicaciones de LLM. Esto ayuda a prevenir la exposición de datos sensibles como PII, claves de API o información propietaria en solicitudes, completaciones y metadatos de flujo de trabajo de LLM.
+Consulte [Configurar Sensitive Data Scanner para almacenamiento en la nube][12] para obtener detalles sobre la configuración.
 
-El escaneo de Observabilidad de LLM utiliza un modelo de configuración gestionada que difiere del escaneo de datos de telemetría, donde el escaneo de Observabilidad de LLM tiene:
+### Repositorios de código {#code-repositories}
 
-- **Un grupo de escaneo gestionado**: Se crea automáticamente un grupo de escaneo predeterminado para su organización cuando accede por primera vez a la [LLM Observability Settings page][18]. No puede crear grupos de escaneo adicionales ni eliminar el grupo gestionado.
-- **Reglas personalizables**: Puede modificar reglas existentes, desactivar las que no necesite o agregar reglas de escaneo personalizadas para detectar patrones adicionales de datos sensibles.
-
-Para cada regla de escaneo, se puede aplicar una de las siguientes acciones a los datos sensibles coincidentes:
-
-- **Redactar**: Reemplace todos los datos coincidentes con un solo token que elija, como `[sensitive_data]`.
-- **Redactar parcialmente**: Reemplace una porción específica de todos los valores coincidentes.
-- **Hash**: Reemplace todos los datos coincidentes con un identificador único no reversible.
-
-Para configurar el escaneo de datos de LLM Observability, navegue a la [LLM Observability Settings page][18] en la configuración de Sensitive Data Scanner. Para más información sobre LLM Observability, consulte la [LLM Observability documentation][20].
-
-## Escanear almacenamiento en la nube {#scan-cloud-storage}
-
-{{< callout url="https://www.datadoghq.com/product-preview/data-security" >}}
-  El soporte de escaneo para buckets de Amazon S3 e instancias de RDS está en vista previa. Para inscribirse, haga clic en <strong>Solicitar Acceso</strong>.
-{{< /callout >}}
-
-{{< img src="sensitive_data_scanner/cloud_storage_issues.png" alt="La sección de almacenamiento de la página de Hallazgos con tres hallazgos de Amazon S3" style="width:100%;" >}}
-
-Si tiene habilitado Sensitive Data Scanner, puede catalogar y clasificar datos sensibles en sus buckets de Amazon S3. **Nota**: Sensitive Data Scanner no redacta datos sensibles en sus recursos de almacenamiento en la nube.
-
-Sensitive Data Scanner escanea en busca de datos sensibles al desplegar [scáneres sin agente][8] en tus entornos en la nube. Estas instancias de escaneo recuperan una lista de todos los S3 buckets a través de [Remote Configuration][9] y tienen instrucciones establecidas para escanear archivos de texto, como CSV y JSON, a lo largo del tiempo.
-
-Sensitive Data Scanner aprovecha su [completa biblioteca de reglas][10] para encontrar coincidencias. Cuando se encuentra una coincidencia, la ubicación de la coincidencia se envía a Datadog por la instancia de escaneo. **Nota**: Los almacenes de datos y sus archivos solo se leen en su entorno; no se envían datos sensibles escaneados de vuelta a Datadog.
-
-Además de mostrar coincidencias de datos sensibles, Sensitive Data Scanner muestra cualquier problema de seguridad detectado por [Cloud Security][11] que afecte a los almacenes de datos sensibles. Puede hacer clic en cualquier problema para continuar con la triage y la remediación dentro de Cloud Security.
-
-Consulte [Set up Sensitive Data Scanner for Cloud Storage][12] para detalles de configuración.
-
-## Escanear repositorios de código {#scan-code-repositories}
-
-Datadog [Secret Scanning][21] escanea repositorios de código para detectar secretos expuestos en el código fuente. Secret Scanning es impulsado por Sensitive Data Scanner y utiliza todas las reglas de la [categoría de secretos y credenciales][19] de la biblioteca SDS para encontrar coincidencias.
+[Secret Scanning][21] de Datadog escanea repositorios de código para detectar secretos expuestos en el código fuente. Secret Scanning funciona con Sensitive Data Scanner y utiliza todas las reglas de la [categoría de secretos y credenciales][19] de la biblioteca de SDS para encontrar coincidencias.
 
 A diferencia del escaneo de datos de telemetría, Secret Scanning opera en sus pipelines de CI/CD o directamente en Datadog con escaneo alojado (compatible con GitHub, Azure DevOps y GitLab). Cuando se detectan secretos en el código, los hallazgos se muestran en la interfaz de Code Security.
 
-Consulte [Secret Scanning documentation][21] para detalles de configuración.
+Consulte la [documentación de Secret Scanning][21] para obtener detalles de configuración.
 
-## Investigar hallazgos de datos sensibles {#investigate-sensitive-data-findings}
+## Capacidades clave {#key-capabilities}
 
-{{< img src="sensitive_data_scanner/findings_20251014.png" alt="La página de Hallazgos muestra una visión general de los hallazgos sensibles desglosados por prioridad." style="width:100%;" >}}
+### Investigar hallazgos de sensitive data {#investigate-sensitive-data-findings}
 
-Utilice la [página de Hallazgos][13] para ver detalles de los hallazgos de datos sensibles identificados por sus reglas de escaneo. Estos detalles incluyen:
+{{< img src="sensitive_data_scanner/sds_findings_explorer.png" alt="Explorador de hallazgos de Sensitive Data Scanner agrupado por regla, con la regla US Passport Scanner expandida para mostrar hallazgos críticos, recuentos de coincidencias y gráficos de tendencias semanales." style="width:100%;" >}}
+
+Utilice la [página de hallazgos][13] para ver los detalles de los hallazgos de sensitive data identificados por sus reglas de escaneo. Estos detalles incluyen:
 
 - La regla de escaneo específica que detectó las coincidencias, para que pueda determinar qué reglas modificar según sea necesario.
-- El grupo de escaneo en el que ha ocurrido el hallazgo, para que pueda determinar el radio de explosión de cualquier fuga.
-- El número de eventos asociados con el hallazgo para ayudarle a evaluar su alcance y gravedad.
-- Un gráfico de los eventos asociados con el hallazgo para ayudarle a identificar cuándo comenzó y cómo ha progresado.
-- Incidencias relacionadas creadas para el hallazgo.
+- El grupo de escaneo en el que ocurrió el hallazgo, para que pueda determinar el radio de impacto de cualquier filtración.
+- La cantidad de eventos asociados con el hallazgo para ayudarle a gauge su alcance y gravedad.
+- Un gráfico de los eventos asociados con el hallazgo para ayudarle a identificar cuándo comenzó un hallazgo y ver cómo ha progresado.
+- Casos relacionados creados para el hallazgo.
 
-Consulte [Investigar hallazgos de datos sensibles][14] para obtener más información sobre cómo clasificar datos sensibles utilizando la página de Hallazgos.
+Consulte [Investigar hallazgos de datos confidenciales][14] para obtener más información sobre cómo clasificar datos confidenciales mediante la página de hallazgos.
 
-## Revise las tendencias de datos sensibles {#review-sensitive-data-trends}
+### Revisar tendencias de sensitive data {#review-sensitive-data-trends}
 
 {{<img src="sensitive_data_scanner/sdslight.png" alt="Sensitive Data Scanner Overview dashboard" style="width:80%;">}}
 
-Cuando Sensitive Data Scanner está habilitado, se instala automáticamente en su cuenta un [out-of-the-box dashboard][15] que resume los hallazgos de datos sensibles. Para acceder a este dashboard, navegue a **Dashboards** > **Dashboard List** y busque "Sensitive Data Scanner Overview".
+Cuando Sensitive Data Scanner está habilitado, se instala automáticamente en su cuenta un [out-of-the-box dashboard][15] que resume los sensitive data findings. Para acceder a este dashboard, navegue a {{< ui >}}Dashboards{{< /ui >}} > {{< ui >}}Dashboards List{{< /ui >}} y busque "Sensitive Data Scanner Overview".
 
-## Lectura adicional {#further-reading}
+## Lecturas adicionales {#further-reading}
 
 {{< partial name="whats-next/whats-next.html" >}}
 
