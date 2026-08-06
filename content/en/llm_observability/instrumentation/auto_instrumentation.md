@@ -574,7 +574,7 @@ The MCP integration instruments the following methods:
 {{% collapse-content title="MistralAI" level="h3" expanded=false id="mistralai" %}}
 {{< tabs >}}
 {{% tab "Python" %}}
-The MistralAI integration provides automatic tracing for the [MistralAI Python SDK's](https://docs.mistral.ai/api/) chat completion and embedding calls.
+The MistralAI integration provides automatic tracing for the [MistralAI Python SDK's][1] chat completion and embedding calls.
 
 **Package name:** `mistralai`\
 **Integration name:** `mistralai`
@@ -583,12 +583,16 @@ The MistralAI integration provides automatic tracing for the [MistralAI Python S
 
 The MistralAI integration instruments the following methods:
 
-- [Chat completions](https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post):
+- [Chat completions][2]:
   - `Chat.complete()`, `Chat.complete_async()`
-- [Streamed chat completions](https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post):
+- [Streamed chat completions][2]:
   - `Chat.stream()`, `Chat.stream_async()`
-- [Embeddings](https://docs.mistral.ai/api/#tag/embeddings/operation/embeddings_v1_embeddings_post):
+- [Embeddings][3]:
   - `Embeddings.create()`, `Embeddings.create_async()`
+
+[1]: https://docs.mistral.ai/api/
+[2]: https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post
+[3]: https://docs.mistral.ai/api/#tag/embeddings/operation/embeddings_v1_embeddings_post
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
