@@ -2157,6 +2157,14 @@ Returns DORA metrics (deployment frequency, change lead time, change failure rat
 - Show me the change lead time trend for the `payments` service over the last quarter.
 - Get all four DORA metrics for the `auth-service` team.
 
+### `retry_datadog_ci_job`
+*Toolset: **software-delivery***\
+*Permissions Required: `CI Visibility Write`*\
+Queues a retry for a failed CI job on GitHub Actions or GitLab. This is a write operation that requires explicit user approval. Server-side limits cap retries at two per workflow run over seven days. The response confirms that the retry was queued, not that it ran, so confirm the new run with `search_datadog_ci_pipeline_events`. On GitHub Actions, every failed job in the workflow run is retried, not only the job you specify. For other CI providers, use the provider's UI to rerun.
+
+- Retry the failed `integration-test` job on my branch.
+- The `build` job failed because of a network timeout; queue a retry.
+
 ## Synthetics
 
 Tools for interacting with Datadog [Synthetic tests][47].

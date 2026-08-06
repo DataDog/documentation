@@ -75,7 +75,7 @@ The `software-delivery` toolset includes the following tools:
 : Aggregate DORA metrics—deployment frequency, change lead time, change failure rate, and recovery time—as scalar values or timeseries. For a complete DORA summary, call this tool four times in parallel, once per metric.
 
 `retry_datadog_ci_job`
-: Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per job over seven days. For other CI providers, use the provider's UI to rerun.
+: Queue a retry for a failed CI job on GitHub Actions or GitLab. A write operation that modifies CI state, requiring `CiVisibilityWrite` permission. Server-side limits cap retries at two per workflow run over seven days. For other CI providers, use the provider's UI to rerun.
 
 ## Example prompts
 
