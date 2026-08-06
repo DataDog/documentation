@@ -21,7 +21,7 @@ Guide:
 
 eci: 
 # Emerging Cloud Integrations team
-- hugo/integrations-internal-core/oracle_cloud_infrastructure/**/*
+- integrations-internal-core/oracle_cloud_infrastructure/**/*
 
 cdocs:
 - hugo/customization_config/
