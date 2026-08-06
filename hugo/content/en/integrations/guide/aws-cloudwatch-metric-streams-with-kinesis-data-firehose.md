@@ -160,7 +160,39 @@ Once the resources are deleted, wait for five minutes for Datadog to recognize t
 
 ## Troubleshooting
 
-To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
+If you encounter issues while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6]. If CloudWatch metrics stop appearing after Metric Streams has been running successfully, see [Persistent Firehose destination errors](#persistent-firehose-destination-errors) below.
+
+### Persistent Firehose destination errors
+
+If CloudWatch metrics stop appearing in Datadog, the CloudWatch Metric Stream and Amazon Data Firehose delivery stream may still show a `running` state. This can happen even when Firehose is no longer delivering records.
+
+This can happen when Firehose cannot deliver records to the Datadog HTTP endpoint within its [retry period][8], nor write the records to its S3 backup. When both delivery paths fail, the delivery stream may not automatically resume HTTP delivery after the endpoint becomes available again.
+
+To diagnose and restore delivery:
+
+1. Locate the Firehose delivery stream associated with the affected CloudWatch Metric Stream. Run the following AWS CLI command to find the `FirehoseArn` in the response:
+
+   ```shell
+   aws cloudwatch get-metric-stream \
+     --name <METRIC_STREAM_NAME> \
+     --region <AWS_REGION>
+   ```
+
+2. Review the [Firehose delivery error logs][9] in CloudWatch Logs. If delivery error logging is not enabled, enable it so future delivery errors are captured. Relevant errors include `HttpEndpoint.DestinationException` (such as HTTP 408 responses) and `S3.AccessDenied`.
+3. Inspect the [Firehose CloudWatch metrics][10] in the CloudWatch console (Datadog may not show these metrics while delivery is interrupted). Check `DeliveryToHttpEndpoint.Success`, `DeliveryToHttpEndpoint.DataFreshness`, `DeliveryToHttpEndpoint.Records`, and `IncomingRecords`.
+4. If Firehose receives records but does not deliver them, verify the S3 backup configuration and IAM role:
+   - Confirm that Firehose can assume the configured role and write to the backup bucket.
+   - Check that the bucket policy, permissions boundary, service control policies (SCPs), and KMS key policy do not deny the required access.
+5. Check whether records are reaching S3 by looking in the backup bucket under the prefix configured in your Firehose delivery stream's S3 backup settings. If no objects are being written, it confirms a permissions or configuration issue with the S3 backup path. If the delivery error logs from step 2 show an S3 permissions error, correct it before continuing.
+6. Update the Firehose HTTP destination configuration using the Firehose [UpdateDestination API][11], for example by changing its retry duration. A configuration update like this can restart a stalled destination.
+
+If delivery does not recover, contact [Datadog Support][12] and provide:
+   - The AWS account ID and region
+   - The CloudWatch Metric Stream and Firehose delivery stream ARNs
+   - The approximate time delivery stopped
+   - Relevant Firehose error logs
+
+**Note**: Restarting delivery affects new records only and does not backfill records that failed during the outage. Records written to the S3 backup are not automatically ingested into Datadog.
 
 ## Further Reading
  {{< partial name="whats-next/whats-next.html" >}}
@@ -172,3 +204,8 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
 [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+[8]: https://docs.aws.amazon.com/firehose/latest/dev/retry.html
+[9]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-logs.html
+[10]: https://docs.aws.amazon.com/firehose/latest/dev/monitoring-with-cloudwatch-metrics.html#fh-http-metrics
+[11]: https://docs.aws.amazon.com/firehose/latest/APIReference/API_UpdateDestination.html
+[12]: /help/
