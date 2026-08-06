@@ -1,0 +1,36 @@
+{
+  "title": "Example-Dashboard",
+  "description": "",
+  "widgets": [
+    {
+      "layout": {
+        "x": 0,
+        "y": 0,
+        "width": 47,
+        "height": 15
+      },
+      "definition": {
+        "title": "",
+        "title_size": "16",
+        "title_align": "left",
+        "type": "topology_map",
+        "requests": [
+          {
+            "request_type": "topology",
+            "query": {
+              "data_source": "data_streams",
+              "service": "",
+              "filters": [
+                "env:prod"
+              ],
+              "query_string": "service:myservice"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "template_variables": [],
+  "layout_type": "free",
+  "notify_list": []
+}
