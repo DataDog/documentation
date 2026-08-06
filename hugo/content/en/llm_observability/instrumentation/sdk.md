@@ -387,7 +387,7 @@ After installing the SDK and running your application you should expect to see s
 
 Trace sampling sets the fraction of traces that Agent Observability retains. Because Agent Observability billing is based on the volume of spans you send, setting a sample rate is one way to control your Agent Observability cost. The SDK makes the sampling decision on the root span and applies it to all of that root span's child spans, including spans created in downstream services through [distributed tracing](#distributed-tracing).
 
-Sampling does not affect your [cost metrics](/llm_observability/monitoring/cost/). Unsampled spans are dropped after Datadog ingests your traces, so token counts and LLM cost data remain complete regardless of the sample rate you set. Trace sampling is also independent of in-app controls such as [automation rules](/llm_observability/monitoring/automation_rules/) and [APM trace sampling](/tracing/trace_pipeline/ingestion_mechanisms/), which apply after ingestion.
+Sampling does not affect your [token and cost metrics](/llm_observability/monitoring/metrics/). Unsampled spans are dropped after Datadog ingests your traces, so the `ml_obs.*` metrics that Agent Observability emits remain based on 100% of your application's traffic, regardless of the sample rate you set. Trace sampling is also independent of in-app controls such as [automation rules](/llm_observability/monitoring/automation_rules/) and [APM trace sampling](/tracing/trace_pipeline/ingestion_mechanisms/), which apply after ingestion.
 
 Configure the sample rate through either of two mechanisms:
 
