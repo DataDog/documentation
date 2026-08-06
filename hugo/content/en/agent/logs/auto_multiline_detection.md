@@ -31,12 +31,12 @@ Exception in thread "main" java.lang.NullPointerException     -> log 2
 With Auto multi-line detection enabled, only lines that begin with a datetime start a new log. The exception and its stack trace are aggregated into the log that precedes them, so the same five lines are sent as two logs:
 
 ```text
-2024-08-13 17:15:17 INFO Starting request handler         --+
-Exception in thread "main" java.lang.NullPointerException   |
-    at com.example.MyClass.doSomething(MyClass.java:42)     |-> log 1
-    at com.example.MyClass.main(MyClass.java:20)          --+
+2024-08-13 17:15:17 INFO Starting request handler          --+
+Exception in thread "main" java.lang.NullPointerException    |
+    at com.example.MyClass.doSomething(MyClass.java:42)      |-> log 1
+    at com.example.MyClass.main(MyClass.java:20)           --+
 
-2024-08-13 17:15:18 INFO Request handler stopped             -> log 2
+2024-08-13 17:15:18 INFO Request handler stopped              -> log 2
 ```
 
 ## Getting started
