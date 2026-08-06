@@ -54,6 +54,12 @@ The `Datadog Admin Role`, or any other role with the `azure_configurations_manag
 
 {{% /collapse-content %}}
 
+{{% collapse-content title="Enterprise environment considerations" level="h4" expanded=false id="enterprise-considerations" %}}
+
+{{% azure-enterprise-prerequisites %}}
+
+{{% /collapse-content %}}
+
 {{< site-region region="us3" >}}
 
 <div class="alert alert-danger"><a href="https://docs.datadoghq.com/cloud_cost_management/setup/azure/?tab=billingaccounts&site=us3#overview">Cloud Cost Management</a> and <a href="https://docs.datadoghq.com/logs/log_configuration/archives/?tab=azurestorage">Log Archives</a> require the app registration setup method. For Datadog accounts using the Azure Native integration, follow the setup steps on this page to create an app registration. If a subscription is connected through both methods, a redundancy warning appears in the Azure integration tile. This warning can be safely ignored for Cloud Cost Management and Log Archives.
