@@ -31,13 +31,13 @@ Because merging happens on the Datadog side, the coverage percentage shown in Da
 
 Merging is keyed on the repository and commit SHA pair. Every report uploaded for the same repository and commit contributes to the same merged dataset, regardless of which CI job, pipeline, or machine produced it.
 
-Merging is incremental. As each report arrives, its data is added to the merged dataset and the coverage values are recomputed. A commit's coverage reflects every report received for it so far. Wait until all of your CI jobs have finished uploading before comparing values.
+Merging is incremental. As each report arrives, its data is added to the merged dataset and the coverage values are recomputed. A commit's coverage reflects every report received for it so far. Wait until all of your CI jobs have finished uploading before comparing coverage percentages to PR Gate thresholds or to values from a single local report.
 
 The merged dataset is also the basis for the following:
 
 - The total and patch coverage displayed for a commit and for its pull request
 - [PR Gate][2] evaluation
-- Per-service and per-code-owner coverage in [monorepo support][3]
+- Per-service and per-code-owner coverage in [Monorepo Support][3]
 
 [Flags][4] add a second layer on top of this. Reports sharing a flag are merged together into that flag's own dataset, while the unflagged view merges every report for the commit. For details, see [How flags work with report merging][5].
 

@@ -10,7 +10,7 @@ further_reading:
     text: "Configure Code Coverage"
   - link: "/code_coverage/coverage_calculation"
     tag: "Documentation"
-    text: "Learn how coverage reports are merged and how coverage is calculated"
+    text: "Learn how Datadog calculates coverage"
   - link: "/code_coverage/flags"
     tag: "Documentation"
     text: "Organize coverage data with flags"
