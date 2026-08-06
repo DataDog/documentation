@@ -91,8 +91,6 @@ Data Streams Monitoring supports OpenTelemetry. If you have set up Datadog APM t
   {{< image-card href="/data_streams/setup/technologies/bullmq/" src="integrations_logos/bullmq2.png" alt="BullMQ" >}}
 {{< /card-grid >}}
 
-<br/>
-
 ## Explore Data Streams Monitoring
 
 ### Visualize the architecture of your streaming data pipelines

@@ -177,7 +177,7 @@ The Observability Pipelines Worker requires these policy permissions to send log
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][7] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][7] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

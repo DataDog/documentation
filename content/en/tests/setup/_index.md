@@ -18,8 +18,6 @@ For information about configuration options for [Test Optimization][1], choose y
   {{< image-card href="/tests/setup/junit_xml/" src="integrations_logos/junit_xml.png" alt="upload junit tests to datadog" >}}
 {{< /card-grid >}}
 
-<br>
-
 If you use Bazel to run Go, Java, or Python tests, use the Datadog [Bazel rules for Test Optimization][2].
 
 If you run your tests in an environment with network restrictions,

@@ -27,12 +27,11 @@ This processor sends all logs or metrics that match the filter query to the next
 
 To set up the filter processor:
 
-- Define a {{< ui >}}filter query{{< /ui >}}.<br>**Notes**:
+- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [Metrics Search Syntax][2] for more information.
   - Logs or metrics that match the query are sent to the next component.
   - Logs or metrics that don't match the query are dropped.
-  - For more information, see [Search Syntax for Logs][1] or [Search Syntax for Metrics][2].
 
-## Metrics
+## Health metrics
 
 For [component metrics][3] and [processor buffer metrics][4] emitted by all processors, see the [Pipelines Usage Metrics][5] documentation. To filter or group by Filter processor metrics, use the tag `component_type:opw_filter`.
 

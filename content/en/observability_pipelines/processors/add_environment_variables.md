@@ -17,7 +17,9 @@ Use this processor to add an environment variable field name and value to the lo
 
 To set up this processor:
 
-1. Define a filter query. Only logs that match the specified filter query are processed. All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+   - Only logs matching the filter are processed.
+   - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Enter the field name for the environment variable.
 1. Enter the environment variable name.
 1. Click {{< ui >}}Add Environment Variable{{< /ui >}} if you want to add another environment variable.
@@ -50,7 +52,7 @@ After you have added processors to your pipeline and clicked {{< ui >}}Next: Ins
 
 The allowlist is stored in the environment variable `DD_OP_PROCESSOR_ADD_ENV_VARS_ALLOWLIST`.
 
-## Metrics
+## Health metrics
 
 For [component metrics][2] and [processor buffer metrics][3] emitted by all processors, see the [Pipelines Usage Metrics][4] documentation. To filter or group by Add Environment Variables processor metrics, use the tag `component_type:add_env_vars`.
 

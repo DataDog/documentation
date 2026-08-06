@@ -31,6 +31,8 @@ On the [Forms][2] page, click {{< ui >}}New Form{{< /ui >}}, then select a creat
 1. Describe the form you want to build in the Bits Chat panel.
 1. Click {{< ui >}}Publish{{< /ui >}} or {{< ui >}}Publish Changes{{< /ui >}} to make the form available to respondents.
 
+You can also ask Bits Chat to create a form from anywhere in Datadog, not only from the Forms editor. See [Create and manage forms with MCP](#create-and-manage-forms-with-mcp).
+
 [100]: /bits_ai/bits_chat/
 
 {{% /tab %}}
@@ -144,6 +146,10 @@ After creating a form, you can add an [action][7] or [workflow blueprint][8] tha
 
 **Note**: Automations triggered by forms appear under [Workflow Automation][10].
 
+## Create and manage forms with MCP
+
+Connect an external AI agent to the [Datadog MCP Server][11] to create, update, publish, and read forms and their responses. Enable the `forms` toolset (or `all`) when you [connect to the MCP Server][12]. You can also ask [Bits Chat][13] to build a form from anywhere in Datadog. See [Forms][14] in the Datadog MCP Server tools reference for the full list of available tools.
+
 ## Manage access
 
 By default, only the creator of a form can access it. To change the permissions on a form:
@@ -167,3 +173,7 @@ By default, only the creator of a form can access it. To change the permissions 
 [8]: https://app.datadoghq.com/workflow/blueprints
 [9]: /actions/workflows/build/#build-a-workflow-with-the-workflow-builder
 [10]: https://app.datadoghq.com/workflow
+[11]: /mcp_server/
+[12]: /mcp_server/setup/#toolsets
+[13]: /bits_ai/bits_chat/
+[14]: /mcp_server/tools/#forms

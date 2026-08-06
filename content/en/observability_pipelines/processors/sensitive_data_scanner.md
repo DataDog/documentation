@@ -28,7 +28,9 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 
 To set up the processor:
 
-1. Define a filter query. Only logs that match the specified filter query are scanned and processed. All logs are sent to the next step in the pipeline, regardless of whether they match the filter query. See [Search Syntax][1] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
+    - Only logs matching the filter are scanned and processed.
+    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select one of the following:
 
@@ -345,7 +347,7 @@ To view the `pipelines.component_latency_seconds` metric:
 
 **Note**: `pipelines.component_latency_seconds` is a distribution metric so you must enable percentiles for that metric. See [Enabling advanced query functionality][12] for instructions.
 
-## Metrics
+## Health metrics
 
 For [component metrics][13] and [processor buffer metrics][14] emitted by all processors, see the [Pipelines Usage Metrics][15] documentation.
 

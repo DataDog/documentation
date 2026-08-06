@@ -25,15 +25,17 @@ Bits Live Debugger brings a conversational interface to Live Debugger for invest
 
 All debugging activity runs through [Live Debugger][1], so the same [permissions][2], rate limits, auto-expiry behavior, and [sensitive data scrubbing][3] apply.
 
+Bits Live Debugger functionality is only accessible from the Live Debugger page.
+
 <div class="alert alert-info">
-Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a>. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
+Bits Live Debugger uses <a href="/bits_ai/bits_code/">Bits Code</a> as the underlying agent. During the Bits Live Debugger Preview phase, Bits Code AI Credits are not charged when sessions are started through Live Debugger.
 </div>
 
 ## Prerequisites
 
 Before using Bits Live Debugger:
 
-- [Live Debugger][1] must be enabled for the target service. See [Requirements and setup][7] for details.
+- [Live Debugger][1] must be enabled for the target service. See [Enable Live Debugger][7] for details.
 - Your account must have the [permissions][2] required to use Live Debugger, including read, write, and variable-capture permissions for the target environment.
 - [Bits Code][5] must be available in your organization.
 - [Source Code Integration][6] must be set up for the target service.
@@ -82,7 +84,7 @@ Logpoints created by Bits follow the same rules as manually created logpoints. T
 [1]: /tracing/live_debugger/
 [2]: /tracing/live_debugger/#permissions
 [3]: /dynamic_instrumentation/sensitive-data-scrubbing/
-[4]: https://app.datadoghq.com/debugging/sessions
+[4]: https://app.datadoghq.com/debugging/
 [5]: /bits_ai/bits_code/
 [6]: /source_code/source-code-management/
-[7]: /tracing/live_debugger/#requirements-and-setup
+[7]: /tracing/live_debugger/#enable-live-debugger

@@ -70,8 +70,6 @@ Fast-track your application development by testing and troubleshooting in one pl
   {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
 {{< /card-grid >}}
 
-</br>
-
 You can use the [Datadog Terraform provider][10] to control test creation and state management. Leverage your Synthetic tests as [integration and end-to-end tests][11] for your staging, pre-prod, and canary deployments, or run them directly in your [CI pipelines][11].
 
 ## Accelerate troubleshooting

@@ -77,7 +77,7 @@ After you select the Amazon OpenSearch destination in the pipeline UI:
 {{% /tab %}}
 {{< /tabs >}}
 
-## Metrics
+## Health metrics
 
 For [component metrics][9] and [destination buffer metrics][10] emitted by all destinations, see the [Pipelines Usage Metrics][11] documentation. To filter or group by Elasticsearch destination metrics, use the tag `component_type:elasticsearch`.
 
@@ -85,7 +85,7 @@ For [component metrics][9] and [destination buffer metrics][10] emitted by all d
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][2] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

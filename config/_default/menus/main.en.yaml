@@ -4413,11 +4413,6 @@ menu:
       identifier: dyninst
       parent: tracing_trace_collection
       weight: 204
-    - name: Enabling
-      url: tracing/trace_collection/dynamic_instrumentation/enabling/
-      identifier: dyninst_enable
-      parent: dyninst
-      weight: 2041
     - name: Autocomplete and Search
       url: tracing/trace_collection/dynamic_instrumentation/symdb
       identifier: dyninst_symdb

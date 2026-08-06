@@ -36,7 +36,6 @@ Select a platform to start collecting RUM data on your application:
   {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/apache" src="integrations_logos/apache_large.svg" alt="apache" >}}
   {{< image-card href="/real_user_monitoring/application_monitoring/browser/setup/server/ibm" src="integrations_logos/ibm_http_large.svg" alt="ibm" >}}
 {{< /card-grid >}}
-<br>
 
 {{% rum-browser-auto-instrumentation-limitations %}}
 

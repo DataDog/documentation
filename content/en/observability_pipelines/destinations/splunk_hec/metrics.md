@@ -88,7 +88,7 @@ Set the `sourcetype` to override Splunk's default value, which is `httpevent` fo
 
 ### Event batching
 
-A batch of events is flushed when one of the following parameters is met. See [event batching][2] for more information.
+A batch of events is flushed when one of the following parameters is met. See [Destinations event batching][2] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds) |
 |----------------|-------------------|-------------------|

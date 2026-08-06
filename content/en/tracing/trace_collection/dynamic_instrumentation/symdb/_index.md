@@ -47,16 +47,11 @@ Select your runtime below:
 
 ## Explore autocomplete and search
 
-With autocomplete and search, the user experience of Dynamic Instrumentation is improved to behave more like an IDE.
+Autocomplete and search make Dynamic Instrumentation behave more like an IDE:
 
-Dynamic Instrumentation provides search for class and method names:
-{{< img src="dynamic_instrumentation/symdb_method_search.png" alt="Search for methods when creating a Dynamic Instrumentation log probe" style="width:60%;" >}}
-
-When you select a method in the Dynamic Instrumentation configuration, the code for that method is displayed:
-{{< img src="dynamic_instrumentation/symdb_method_highlight.png" alt="Autocomplete and search highlights the selected method" >}}
-
-Dynamic Instrumentation also provides autocomplete for log templates and other templates that use the [Dynamic Instrumentation expression language][5]:
-{{< img src="dynamic_instrumentation/symdb_completion.png" alt="Autocomplete suggestions for log templates" style="width:80%;" >}}
+- **Class and method search**: Find where to add instrumentation.
+- **Code display**: When you select a method in the Dynamic Instrumentation configuration, Datadog displays the code for that method.
+- **Expression autocomplete**: Get suggestions for expression templates that use the [Dynamic Instrumentation expression language][5].
 
 ## Further Reading
 

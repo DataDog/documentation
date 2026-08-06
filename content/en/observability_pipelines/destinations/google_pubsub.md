@@ -159,13 +159,13 @@ Common issues and fixes:
 - No logs are arriving
 	- In your Google Pub/Sub destination setup, double-check the topic name, project, and Pub/Sub endpoint (global vs regional).
 
-## Metrics
+## Health metrics
 
 For [component metrics][8] and [destination buffer metrics][12] emitted by all destinations, see the [Pipelines Usage Metrics][13] documentation. To filter or group by Google Pub/Sub destination metrics, use the tag `component_type:gcp_pubsub`.
 
 ### Event batching
 
-A batch of events is flushed when one of these parameters is met. See [event batching][6] for more information.
+A batch of events is flushed when one of these parameters is met. See [Destinations event batching][6] for more information.
 
 | Maximum Events | Maximum Size (MB) | Timeout (seconds)   |
 |----------------|-------------------|---------------------|

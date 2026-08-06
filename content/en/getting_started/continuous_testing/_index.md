@@ -80,8 +80,6 @@ To integrate with a CI provider or a collaboration tool like [Slack][28] or [Jir
   {{< image-card href="/continuous_testing/cicd_integrations/bitrise_run/" src="integrations_logos/bitrise_run.png" alt="bitrise run-tests step" >}}
 {{< /card-grid >}}
 
-</br>
-
 ## Run your Continuous Testing tests
 
 To improve your development workflow, you can use `datadog-ci` in your CLI as a CI environment to configure your test. 

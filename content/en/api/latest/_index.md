@@ -246,7 +246,6 @@ Or check out the libraries directly:
   {{< image-card href="https://github.com/DataDog/datadog-api-client-typescript" src="integrations_logos/typescript.png" alt="Typescript" >}}
   {{< image-card href="https://github.com/DataDog/datadog-api-client-rust" src="integrations_logos/rust.png" alt="Rust" >}}
 {{< /card-grid >}}
-</br>
 Trying to get started with the application instead? Check out Datadog's general [Getting Started docs][7].
 
 ## Further reading

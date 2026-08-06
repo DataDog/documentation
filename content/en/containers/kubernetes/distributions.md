@@ -275,10 +275,21 @@ Depending on the operation mode of your cluster, the Datadog Agent needs to be c
 
 ### Standard
 
-Since Agent 7.26, no specific configuration is required for GKE (whether you run `Docker` or `containerd`).
+In Agent 7.26 and later, GKE requires no additional configuration, whether you run `Docker` or `containerd`. The one exception is Container-Optimized OS (COS) with the Helm chart. The Datadog Operator detects GKE COS automatically.
 
-**Note**: When using COS (Container Optimized OS), the eBPF-based `OOM Kill` and `TCP Queue Length` checks are supported starting from the version 3.0.1 of the Helm chart. To enable these checks, configure the following setting:
-- `datadog.systemProbe.enableDefaultKernelHeadersPaths` to `false`.
+{{< tabs >}}
+{{% tab "Helm" %}}
+
+Custom `datadog-values.yaml`:
+
+```yaml
+providers:
+  gke:
+    cos: true
+```
+
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Autopilot
 
