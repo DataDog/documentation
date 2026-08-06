@@ -63,11 +63,11 @@ def get_staged_files():
             check=True
         )
         staged_files = [f for f in result.stdout.strip().split('\n') 
-                       if f.endswith('.md') and f.startswith('content/en/')]
+                       if f.endswith('.md') and f.startswith('hugo/content/en/')]
         return staged_files if staged_files != [''] else []
     except subprocess.CalledProcessError:
         # Fallback to all markdown files for testing
-        content_dir = Path('content/en')
+        content_dir = Path('hugo/content/en')
         if content_dir.exists():
             return [str(f) for f in content_dir.rglob('*.md')]
         return []
@@ -100,10 +100,10 @@ def check_circular_aliases():
             # Calculate expected location path
             if file_path.endswith('/_index.md'):
                 # For _index.md files: content/en/foo/bar/_index.md -> foo/bar
-                expected_location = file_path.replace('content/en/', '').replace('/_index.md', '')
+                expected_location = file_path.replace('hugo/content/en/', '').replace('/_index.md', '')
             else:
                 # For regular .md files: content/en/foo/bar.md -> foo/bar
-                expected_location = file_path.replace('content/en/', '').replace('.md', '')
+                expected_location = file_path.replace('hugo/content/en/', '').replace('.md', '')
             
             # Check each alias for circular reference
             for alias in aliases:

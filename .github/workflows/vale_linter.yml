@@ -2,8 +2,8 @@ name: Vale
 on:
   pull_request:
     paths:
-    - 'content/en/**/*'
-    - 'layouts/shortcodes/**/*.md'
+    - 'hugo/content/en/**/*'
+    - 'hugo/layouts/shortcodes/**/*.md'
     - '!**/*.json'
 
 permissions:
@@ -50,12 +50,12 @@ jobs:
         CHANGED_FILES: ${{ steps.changed_lines.outputs.changed_files }}
       run: |
         vale "${CHANGED_FILES}" \
-          --output=local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
+          --output=hugo/local/bin/py/vale/vale_template.tmpl --no-exit > vale_output.log
 
     - name: Parse Vale output
       if: steps.changed_lines.outputs.changed_files
       env:
         CHANGED_LINES: ${{ steps.changed_lines.outputs.changed_lines }}
       run: |
-        python local/bin/py/vale/vale_annotations.py \
+        python hugo/local/bin/py/vale/vale_annotations.py \
           --git_data="${CHANGED_LINES}"
