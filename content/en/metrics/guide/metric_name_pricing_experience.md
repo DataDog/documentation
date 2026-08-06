@@ -81,7 +81,7 @@ Use these metrics to estimate your month-to-date billable usage:
 * **What it represents:** Count of metric names with more than 100 indexed points, month-to-date.
 * **Billing question answered:** How many metric names are billable so far this month?
 
-{{< img src="/metrics/custom_metrics/mnp_eum_billable_metrics_example_08042026.png" alt="Example showing the number of billable metric names month-to-date" >}}
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_metrics_example_08042026.png" alt="Example showing the number of billable metric names month-to-date" >}}
 
 #### `datadog.estimated_usage.billable.points`
 
@@ -90,16 +90,16 @@ Use these metrics to estimate your month-to-date billable usage:
   * What is my total billable indexed-point volume so far this month?
   * Which metric names are contributing to my billable indexed-point volume, and by how much?
 
-{{< img src="/metrics/custom_metrics/mnp_eum_billable_points_example_08042026.png" alt="Example showing total billable indexed-point volume month-to-date" >}}
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_points_example_08042026.png" alt="Example showing total billable indexed-point volume month-to-date" >}}
 
-{{< img src="/metrics/custom_metrics/mnp_eum_billable_points_bymetric_example_08042026.png" alt="Example showing billable indexed-point volume broken down by metric name" >}}
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_billable_points_bymetric_example_08042026.png" alt="Example showing billable indexed-point volume broken down by metric name" >}}
 
 #### `datadog.estimated_usage.metrics.points.ratio`
 
 * **What it represents:** Comparison of total ingested points to total indexed points.
 * **Billing question answered:** What is the ratio of ingested points to indexed points?
 
-{{< img src="/metrics/custom_metrics/mnp_eum_points_ratio_example_08042026.png" alt="Example showing the ratio of ingested points to indexed points" >}}
+{{< img src="/metrics/guide/metric_name_pricing_experience/mnp_eum_points_ratio_example_08042026.png" alt="Example showing the ratio of ingested points to indexed points" >}}
 
 ### Points-volume usage metrics
 
