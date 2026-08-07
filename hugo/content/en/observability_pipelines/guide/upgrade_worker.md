@@ -57,7 +57,7 @@ Worker version 2.20.2 gives you access to the following:
 
 #### Fixes
 
-- Fixed an issue where non-finite (NaN/Infinity) gauge, counter delta, and histogram delta-sum values, and zero-count histograms, could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
+- Fixed an issue where non-finite (NaN/Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms, could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
 
 ## Worker version 2.20.0
 
