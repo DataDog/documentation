@@ -8417,6 +8417,34 @@ menu:
         unstable:
           - v2
         order: 2
+    - name: CI Visibility GitHub Accounts
+      url: /api/latest/ci-visibility-github-accounts/
+      identifier: ci-visibility-github-accounts
+      generated: true
+    - name: Update GitHub CI Visibility status
+      url: /api/latest/ci-visibility-github-accounts/update-github-ci-visibility-status/
+      identifier: ci-visibility-github-accounts-update-github-ci-visibility-status
+      parent: ci-visibility-github-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - UpdateCIAppGitHubAccount
+        unstable: []
+        order: 2
+    - name: List GitHub CI Visibility status
+      url: /api/latest/ci-visibility-github-accounts/list-github-ci-visibility-status/
+      identifier: ci-visibility-github-accounts-list-github-ci-visibility-status
+      parent: ci-visibility-github-accounts
+      generated: true
+      params:
+        versions:
+          - v2
+        operationids:
+          - ListCIAppGitHubAccounts
+        unstable: []
+        order: 1
     - name: CI Visibility Pipelines
       url: /api/latest/ci-visibility-pipelines/
       identifier: ci-visibility-pipelines
