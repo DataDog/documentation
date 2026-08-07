@@ -136,10 +136,6 @@ To scope a span query to one function, filter on the function ARN:
 
 The tracer creates one `aws.durable.execute` span per invocation and stitches an execution's invocations into a single trace.
 
-```text
-operation_name:aws.durable.execute
-```
-
 | Span tag | Description |
 |---|---|
 | `@aws.durable.execution_arn` | The full durable execution ARN, which contains the execution name. This span does not carry the execution name as a separate tag. |
