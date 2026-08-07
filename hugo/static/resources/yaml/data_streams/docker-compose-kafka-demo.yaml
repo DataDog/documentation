@@ -230,6 +230,7 @@ configs:
       instances:
         - kafka_connect_str: "kafka:19092"
           enable_cluster_monitoring: true
+          kafka_connect_url: http://kafka-connect:8083
           schema_registry_url: http://schema-registry:8081
           tags:
             - env:demo
