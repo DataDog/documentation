@@ -1,6 +1,6 @@
 ---
-title: Manual Instrumentation
-description: "Manually instrument Azure Container Apps with the Datadog serverless-init Agent using in-container or sidecar instrumentation."
+title: Azure Container Apps Instrumentation
+description: "Instrument Azure Container Apps with the Datadog Agent and Tracer using the in-container or sidecar approach."
 content_filters:
   - trait_id: instrumentation_method
     option_group_id: aca_instrumentation_method_options
