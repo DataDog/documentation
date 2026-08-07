@@ -11,7 +11,7 @@ aliases:
   - /product_analytics/session_replay/mobile/troubleshooting
 content_filters:
   - trait_id: platform
-    option_group_id: rum_session_replay_platform_options
+    option_group_id: rum_session_replay_sdk_options
     label: "SDK"
 further_reading:
   - link: 'https://github.com/DataDog/browser-sdk'

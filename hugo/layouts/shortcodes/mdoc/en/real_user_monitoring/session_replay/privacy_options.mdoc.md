@@ -3,7 +3,7 @@ Pages using this partial must declare these filters:
 
 content_filters:
   - trait_id: platform
-    option_group_id: rum_sdk_platform_options_v3
+    option_group_id: rum_session_replay_sdk_options
     label: "SDK"
 -->
 
@@ -16,7 +16,7 @@ Default privacy options for Session Replay protect end user privacy and prevent 
 {% if equals($platform, "browser") %}
 By enabling Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Browser SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
-{% if includes($platform, ["android", "ios", "react_native", "flutter"]) %}
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
 By enabling Mobile Session Replay, you can automatically mask sensitive elements from being recorded through the RUM Mobile SDK. When data is masked, that data is not collected in its original form by Datadog's SDKs and thus is not sent to the backend.
 {% /if %}
 
@@ -134,8 +134,8 @@ Datadog is working to add more privacy features to RUM & Session Replay. Have so
 {% /if %}
 <!-- end Browser -->
 
-<!-- Android, iOS, React Native, or Flutter -->
-{% if includes($platform, ["android", "ios", "react_native", "flutter"]) %}
+<!-- Android, iOS, Kotlin Multiplatform, React Native, or Flutter -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "react_native", "flutter"]) %}
 ## Fine-grained masking
 
 Using the masking modes below, you can override the default setup on a per-application basis. Masking is fine-grained, which means you can override masking for text and inputs, images, and touches individually to create a custom configuration that suits your needs.
@@ -210,6 +210,17 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 #### Mask all inputs
 With the `mask_all_inputs` setting enabled, all inputs fields are masked in the replay.
 
@@ -273,6 +284,17 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL_INPUTS)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 #### Mask all
 With the `mask_all` setting enabled, all text and input fields are masked in the replay.
 
@@ -335,6 +357,17 @@ final configuration = DatadogConfiguration(
 ```
 {% /if %}
 <!-- end Flutter -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setTextAndInputPrivacy(TextAndInputPrivacy.MASK_ALL)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 ### Image masking
 
@@ -409,6 +442,17 @@ final configuration = DatadogConfiguration(
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setImagePrivacy(ImagePrivacy.MASK_ALL)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 #### Mask content images
 You can manage content masking while still allowing system or bundled images to be visible.
 
@@ -427,6 +471,22 @@ Select the `mask_large_only` setting, which replaces images with dimensions that
 
 **Note**: These dimensions refer to the drawable resource, not the view's size.
 {% /if %}
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+Select the `MASK_LARGE_ONLY` setting, which replaces images considered to be content images with a "Content Image" placeholder:
+
+- On Android, images with dimensions that exceed 100x100dp. These dimensions refer to the drawable resource, not the view's size.
+- On iOS, non-bundled images. In SwiftUI, the SDK uses a heuristic instead: if an image exceeds 100×100 points, it is assumed to be non-bundled and is masked.
+
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setImagePrivacy(ImagePrivacy.MASK_LARGE_ONLY)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 <!-- Android -->
 {% if equals($platform, "android") %}
@@ -542,6 +602,33 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setImagePrivacy(ImagePrivacy.MASK_NONE)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
+```dart {% collapsible=true %}
+final configuration = DatadogConfiguration(
+    // ...
+)..enableSessionReplay(
+    DatadogSessionReplayConfiguration(
+        imagePrivacyLevel: ImagePrivacyLevel.maskNone,
+        replaySampleRate: replay,
+    ),
+);
+
+```
+{% /if %}
+<!-- end Flutter -->
+
 ### Touch masking
 By default, the `hide` setting is enabled for all touches. With this setting enabled, all touches on screen are hidden.
 
@@ -592,6 +679,17 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setTouchPrivacy(TouchPrivacy.HIDE)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 ```dart {% collapsible=true %}
@@ -599,7 +697,7 @@ final configuration = DatadogConfiguration(
     // ...
 )..enableSessionReplay(
     DatadogSessionReplayConfiguration(
-        imagePrivacyLevel: ImagePrivacyLevel.maskNone,
+        touchPrivacyLevel: TouchPrivacyLevel.hide,
         replaySampleRate: replay,
     ),
 );
@@ -655,9 +753,18 @@ SessionReplay.enable(config)
 {% /if %}
 <!-- end React Native -->
 
-<!-- Flutter -->
-Bundled images are those that use `AssetImage` as their image provider.
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+```kotlin {% filename="Application.kt" collapsible=true %}
+val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
+  .setTouchPrivacy(TouchPrivacy.SHOW)
+  .build()
+SessionReplay.enable(sessionReplayConfig)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
+<!-- Flutter -->
 {% if equals($platform, "flutter") %}
 ```dart {% collapsible=true %}
 final configuration = DatadogConfiguration(
@@ -684,8 +791,14 @@ Privacy overrides affect views and their descendants. This means that even if an
 Overrides operate using a "nearest parent" principle: if a view has an override, it uses that setting. Otherwise, it inherits the privacy level from the closest parent in the hierarchy with an override. If no parent has an override, the view defaults to the application's general masking level.
 
 
-<!-- Android, iOS, or Flutter -->
-{% if includes($platform, ["android", "ios", "flutter"]) %}
+<!-- Android, iOS, Kotlin Multiplatform, or Flutter -->
+{% if includes($platform, ["android", "ios", "kotlin_multiplatform", "flutter"]) %}
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+The Kotlin Multiplatform SDK exposes view-level overrides for iOS targets. To apply view-level overrides on Android targets, call the [Android SDK override APIs][5] from your Android source set.
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 ### Text and input override
 
@@ -767,6 +880,19 @@ class MyWidget: StatelessWidget {
 ```
 {% /if %}
 <!-- end Flutter -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+To override text and input privacy on iOS, use `setSessionReplayTextAndInputPrivacy` on a `UIView` instance and pass a value from the `TextAndInputPrivacy` enum. Passing `null` removes the override.
+
+```kotlin {% filename="MainViewController.kt" collapsible=true %}
+// Set a text and input override on your view
+myView.setSessionReplayTextAndInputPrivacy(TextAndInputPrivacy.MASK_SENSITIVE_INPUTS)
+// Remove a text and input override from your view
+myView.setSessionReplayTextAndInputPrivacy(null)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 ### Image override
 
@@ -852,6 +978,19 @@ class MyWidget: StatelessWidget {
 ```
 {% /if %}
 <!-- end Flutter -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+To override image privacy on iOS, use `setSessionReplayImagePrivacy` on a `UIView` instance and pass a value from the `ImagePrivacy` enum. Passing `null` removes the override.
+
+```kotlin {% filename="MainViewController.kt" collapsible=true %}
+// Set an image override on your view
+myView.setSessionReplayImagePrivacy(ImagePrivacy.MASK_ALL)
+// Remove an image override from your view
+myView.setSessionReplayImagePrivacy(null)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 ### Touch override
 
@@ -939,6 +1078,19 @@ class MyWidget: StatelessWidget {
 ```
 {% /if %}
 <!-- end Flutter -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+To override touch privacy on iOS, use `setSessionReplayTouchPrivacy` on a `UIView` instance and pass a value from the `TouchPrivacy` enum. Passing `null` removes the override.
+
+```kotlin {% filename="MainViewController.kt" collapsible=true %}
+// Set a touch override on your view
+myView.setSessionReplayTouchPrivacy(TouchPrivacy.HIDE)
+// Remove a touch override from your view
+myView.setSessionReplayTouchPrivacy(null)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 ### Hidden elements override
 
@@ -1102,9 +1254,21 @@ class MyWidget: StatelessWidget {
 {% /if %}
 <!-- end Flutter -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+On iOS, use `setSessionReplayHidden` on a `UIView` instance to hide the element. Setting it to `false` removes the override.
+
+```kotlin {% filename="MainViewController.kt" collapsible=true %}
+// Mark a view as hidden
+myView.setSessionReplayHidden(true)
+// Remove the override from the view
+myView.setSessionReplayHidden(false)
+```
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 {% /if %}
-<!-- end iOS or Android of Flutter -->
+<!-- end Android, iOS, Kotlin Multiplatform, or Flutter -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -1348,8 +1512,39 @@ Sensitive text can be detected in the following components.
 - iOS
 {% /table %}
 {% /if %}
+<!-- end React Native -->
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+Sensitive text can be detected in the following components.
 
 {% table %}
+- Component
+- Platform(s)
+---
+- Text Field
+- iOS
+---
+- Text View
+- iOS
+---
+- Edit Text
+- Android
+---
+- Address information
+- iOS, Android
+---
+- Credit card numbers
+- iOS
+---
+- One-time codes
+- iOS
+{% /table %}
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
+<!-- Flutter -->
+{% if equals($platform, "flutter") %}
 Sensitive text is detected by checking the `obscureText` and `keyboardType` members of the `EditableText` widget,
 which are provided by most `TextField`-like Widgets.
 
@@ -1361,7 +1556,8 @@ The following `TextInputType`s are considered sensitive:
 - `TextInputType.streetAddress`
 - `TextInputType.twitter`
 - `TextInputType.visiblePassword`
-{% /table %}
+{% /if %}
+<!-- end Flutter -->
 
 #### Input and option text
 
@@ -1411,6 +1607,23 @@ This includes the below.
   - Month, day, and year labels in Date Picker (generic values)
 {% /if %}
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+- User-entered text in:
+  - Text Field (iOS)
+  - Text View (iOS)
+  - Edit Text (Android)
+- User-selected options in:
+  - Value Picker (iOS, Android)
+  - Segment (iOS)
+  - Drop Down List (Android)
+- Notable exclusions:
+  - Placeholder (hint) texts in Text Field, Text View, and Edit Text (not entered by the user)
+  - Non-editable texts in Text View (iOS)
+  - Month, day, and year labels in Date Picker (generic values)
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 - User-entered text in EditableText, which is used in:
@@ -1453,6 +1666,16 @@ All texts in:
 - Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
 {% /if %}
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+- Checkbox and Radio Button titles (Android)
+- Texts in non-editable Text View (iOS)
+- Month, day, and year labels in the date and time picker
+- Values updated in response to gesture interaction with input elements, such as the current value of the Slider
+- Other controls, not considered as "user input elements", such as Labels, Tab Bar, and Navigation Bar (iOS), or Tabs (Android)
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 - Checkbox and Radio Button titles
@@ -1482,6 +1705,14 @@ Hint text is static text in editable text elements or option selectors that is d
 - Hints in Edit Text (Android)
 - Prompts in Drop Down lists (Android)
 {% /if %}
+
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+- Placeholders in Text Field (iOS), Text View (iOS)
+- Hints in Edit Text (Android)
+- Prompts in Drop Down lists (Android)
+{% /if %}
+<!-- end Kotlin Multiplatform -->
 
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
@@ -1561,6 +1792,42 @@ This includes:
 {% /if %}
 <!-- end React Native -->
 
+<!-- Kotlin Multiplatform -->
+{% if equals($platform, "kotlin_multiplatform") %}
+**Shapes**
+
+{% table %}
+- Type
+- Platform(s)
+---
+- Background of selected option in Segment
+- iOS
+---
+- Circle surrounding the selected date in Date Picker
+- iOS
+---
+- Selection mark in Checkbox
+- Android
+---
+- Thumb of a Slider
+- iOS, Android
+{% /table %}
+
+**Text attributes**
+
+{% table %}
+- Type
+- Platform(s)
+---
+- The color of a label rendering the selected date in Date Picker
+- iOS
+---
+- The position of the first and last option in Value Picker
+- iOS, Android
+{% /table %}
+{% /if %}
+<!-- end Kotlin Multiplatform -->
+
 <!-- Flutter -->
 {% if equals($platform, "flutter") %}
 **Shapes**
@@ -1592,7 +1859,9 @@ The following chart shows how we apply different image masking strategies:
 -
   {% if equals($platform, "android") %}Mask Large Only{% /if %}
   {% if equals($platform, "ios") %}Mask Non Bundled Only{% /if %}
-  {% if equals($platform, "react_native") %}Mark Large Only (Android) / Mask Non Bundled Only (iOS){% /if %}
+  {% if equals($platform, "kotlin_multiplatform") %}Mask Large Only{% /if %}
+  {% if equals($platform, "react_native") %}Mask Large Only (Android) / Mask Non Bundled Only (iOS){% /if %}
+  {% if equals($platform, "flutter") %}Mask Non Assets Only{% /if %}
 - Mask All
 ---
 - Content Image
@@ -1612,3 +1881,4 @@ The following chart shows how we apply different image masking strategies:
 [2]: https://github.com/DataDog/dd-sdk-reactnative
 [3]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes
 [4]: /help
+[5]: /session_replay/privacy_options/?platform=android#privacy-overrides
