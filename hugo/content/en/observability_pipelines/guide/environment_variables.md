@@ -125,6 +125,9 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenSearch
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opensearch %}}
 
+### Prometheus
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/prometheus %}}
+
 ### SentinelOne
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/sentinelone %}}
 
