@@ -181,8 +181,6 @@ Each operation called on the durable context produces a child span:
 | `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed, whether that stored result was a success or a failure. |
 | `@aws.durable.invoke.function_name` | The target function, on `aws.durable.invoke` spans. |
 
-Cross-invocation trace propagation adds synthetic `_datadog_<N>` step operations carrying the trace headers to your durable execution log. To turn it off, set `DD_DURABLE_CROSS_INVOCATION_TRACING_ENABLED=false`.
-
 ### Metrics
 
 AWS publishes these durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5], not the Datadog Lambda Extension, and are tagged with `functionname`.
