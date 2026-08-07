@@ -105,6 +105,8 @@ Refer to the below diagram to understand what data is retained with extended ret
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention-1.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
 
+To set the default retention period for all Session Replays to longer than 30 days, contact your account team.
+
 ## Playback history
 
 You can see who has watched a given session replay by clicking the **watched** count displayed on the player page. This feature allows you to check whether someone you'd like to share the recording with has already watched it.
