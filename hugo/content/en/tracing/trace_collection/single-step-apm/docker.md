@@ -52,7 +52,9 @@ To install the Datadog Agent and enable SSI in a Docker Linux environment, run t
 
    **Note**: Run only one Datadog Agent per node. If a Datadog Agent container already exists, update its definition (or your Docker Compose file) with these settings and recreate it, rather than starting a second Agent. For rootless Docker, set the correct Docker socket in `docker_config.yaml`.
 
-1. Restart your applications.
+1. Recreate your application containers.
+
+   Instrumentation is applied when a container is created, so restarting an existing container with `docker stop` and `docker start` does not instrument it. Remove your application containers and run them again.
 
 <div class="alert alert-info">SSI adds a small amount of startup time to instrumented applications. If this overhead is not acceptable for your use case, contact <a href="/help/">Datadog Support</a>.</div>
 
@@ -81,6 +83,14 @@ You can also select versions from dropdowns in Datadog: on the [Install the Data
 
 ## Verify the installation
 
+1. Confirm the Docker daemon is using the Datadog runtime:
+
+   ```shell
+   docker system info --format '{{.DefaultRuntime}}'
+   ```
+
+   The output must be `dd-shim`. If it is `runc` or anything else, the instrumentation components did not install successfully, and your applications are not instrumented regardless of whether the Agent is healthy. Re-run the installation command, and confirm that the Docker daemon was running when you ran it.
+
 1. Confirm the Agent container is running:
 
    ```shell
@@ -94,6 +104,12 @@ You can also select versions from dropdowns in Datadog: on the [Install the Data
    ```
 
    Check the **APM Agent** section of the output.
+
+1. Confirm that an application container is using the Datadog runtime. Replace `<CONTAINER_NAME>` with the name of one of your application containers:
+
+   ```shell
+   docker inspect <CONTAINER_NAME> --format '{{.HostConfig.Runtime}}'
+   ```
 
 1. After your applications receive traffic, confirm your services appear on the [APM Services page][18]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][17].
 
