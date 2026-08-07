@@ -183,7 +183,7 @@ Each operation called on the durable context produces a child span:
 
 ### Metrics
 
-AWS publishes these durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5], not the Datadog Lambda Extension, and are tagged with `functionname`.
+AWS publishes these durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5] and are tagged with `functionname`.
 
 | Metric | Description | Aggregation |
 |---|---|---|
