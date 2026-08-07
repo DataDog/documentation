@@ -67,16 +67,17 @@ The **Executions** tab on the Lambda function page lists durable executions. Use
 
 ### Query reference
 
-| Purpose | Query |
-|---|---|
-| Scope to a function | `@lambda.arn:"<FUNCTION_ARN>"` in logs, `@function_arn:"<FUNCTION_ARN>"` in spans |
-| One execution | `@lambda.durable_function.execution_name:<EXECUTION_NAME>` |
-| Terminal status | `@lambda.durable_function.execution_status:<SUCCEEDED\|FAILED\|TIMED_OUT\|STOPPED>` |
-| Authoritative status events | `@detail-type:"Durable Execution Status Change"` |
-| Execution start | `"START RequestId:" @lambda.durable_function.first_invocation:true` |
-| Execution end | `"END RequestId:" OR "REPORT RequestId:"` |
-| Execution trace | `operation_name:aws.durable.execute` |
-| Execution counts and duration | The `aws.lambda.durable_execution_*` metrics, tagged `functionname` |
+| Purpose | Search in | Query |
+|---|---|---|
+| Scope to a function | Logs | `@lambda.arn:"<FUNCTION_ARN>"` |
+| Scope to a function | Traces | `@function_arn:"<FUNCTION_ARN>"` |
+| One execution | Logs | `@lambda.durable_function.execution_name:<EXECUTION_NAME>` |
+| Terminal status | Logs | `@lambda.durable_function.execution_status:<SUCCEEDED\|FAILED\|TIMED_OUT\|STOPPED>` |
+| Authoritative status events | Logs | `@detail-type:"Durable Execution Status Change"` |
+| Execution start | Logs | `"START RequestId:" @lambda.durable_function.first_invocation:true` |
+| Execution end | Logs | `"END RequestId:" OR "REPORT RequestId:"` |
+| Execution trace | Traces | `operation_name:aws.durable.execute` |
+| Execution counts and duration | Metrics | `aws.lambda.durable_execution_*`, tagged `functionname` |
 
 ### Execution identifiers
 
