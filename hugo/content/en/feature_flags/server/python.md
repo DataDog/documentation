@@ -332,7 +332,7 @@ Verify the following:
 
 - `DD_FEATURE_FLAGS_CONFIGURATION_SOURCE=remote_config` is set. During the migration window, `DD_EXPERIMENTAL_FLAGGING_PROVIDER_ENABLED=true` also selects Remote Configuration when no explicit source is set.
 - Datadog Agent is version 7.55 or later.
-- Remote Configuration is enabled on the Agent.
+- [Remote Configuration][2] is enabled on the Agent.
 - The Agent has a valid API key for the target organization.
 - `DD_SERVICE` and `DD_ENV` are configured in the application process.
 - The SDK can communicate with the Agent.
