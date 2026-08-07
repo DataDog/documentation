@@ -73,7 +73,23 @@ Default: `true`. Set to `false` to disable.
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed
 
-RUM integration can also use the current RUM user as defaults for feature flag evaluation context. For attribute mapping, precedence, user changes, and opt-out behavior, see [RUM Integration][1].
+### Use RUM user context for evaluation
+
+For SDKs that support RUM user context, enabling RUM integration also uses attributes from the current RUM user as defaults for evaluation context:
+
+- The RUM user ID supplies the `targetingKey` when the OpenFeature context does not define one.
+- Flat string, number, and Boolean user attributes supply evaluation attributes. Nested objects, arrays, `null`, and other values are excluded rather than flattened.
+- Fields explicitly supplied through OpenFeature take precedence over fields from the RUM user.
+
+Set the RUM user before registering the Feature Flags provider. Changing the RUM user after provider initialization does not automatically update the effective evaluation context. After a login, logout, or account switch, call the platform's evaluation context update API with the existing OpenFeature context. This causes the provider to read the latest RUM user while preserving explicitly supplied fields.
+
+For the Web and React Native providers, reconcile the context with:
+
+```javascript
+await OpenFeature.setContext(OpenFeature.getContext())
+```
+
+Until reconciliation completes, the provider continues to use the previous effective context for assignment requests, evaluations, and telemetry. Disabling RUM integration also disables RUM user context enrichment.
 
 ## Testing with in-memory providers
 
@@ -128,5 +144,3 @@ const evaluationContext = {
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
 
 {{< partial name="whats-next/whats-next.html" >}}
-
-[1]: /feature_flags/client/rum_integration/
