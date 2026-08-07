@@ -28,7 +28,7 @@ Exception in thread "main" java.lang.NullPointerException     -> log 2
 2024-08-13 17:15:18 INFO Request handler stopped              -> log 5
 ```
 
-With auto multi-line detection enabled, only lines that begin with a datetime start a new log. The exception and its stack trace are aggregated into the log that precedes them, so the same five lines are sent as two logs:
+With auto multi-line detection enabled, by default, only lines that begin with a datetime start a new log. The exception and its stack trace are aggregated into the log that precedes them, so the same five lines are sent as two logs:
 
 ```text
 2024-08-13 17:15:17 ERROR Request handler failed           --+
