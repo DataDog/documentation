@@ -611,5 +611,5 @@ You can use basic CRUD operations to manipulate managed evaluation configs, afte
 [16]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/trace_level_evaluations
 [17]: /llm_observability/evaluations/custom_llm_as_a_judge_evaluations/session_level_evaluations
 [18]: https://docs.cloud.google.com/gemini-enterprise-agent-platform/resources/locations
-[19]: /api/latest/llm-observability/#list-custom-evaluator-configurations
+[19]: /api/latest/llm-observability/list-custom-evaluator-configurations/
 
