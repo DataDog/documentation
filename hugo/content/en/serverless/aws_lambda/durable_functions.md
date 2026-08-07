@@ -112,7 +112,7 @@ Example queries:
 
 ### Status change events
 
-The events forwarded by the CloudFormation stack arrive as logs with `@detail-type` set to `Durable Execution Status Change`:
+The events forwarded by the CloudFormation stack arrive as logs, matched by:
 
 ```text
 @detail-type:"Durable Execution Status Change"
@@ -132,7 +132,7 @@ A terminal status change event is timestamped from `detail.endTimestamp`, when t
 
 ### Traces
 
-To scope a span query to one function, filter on `@function_arn`:
+To scope a span query to one function, filter on the function ARN:
 
 ```text
 @function_arn:"arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>"
