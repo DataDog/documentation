@@ -104,14 +104,6 @@ Example queries:
 
     Lambda Managed Instances emit no `END` log, so query both.
 
-- Executions with a given status:
-
-    ```text
-    @lambda.durable_function.execution_status:FAILED
-    ```
-
-    `TIMED_OUT` and `STOPPED` come only from the status change events described below.
-
 ### Status change events
 
 The events forwarded by the CloudFormation stack arrive as logs, matched by:
