@@ -60,7 +60,9 @@ Pour commencer à recueillir des logs à partir d'un serveur :
 
 2. La collecte de logs n'est **pas activée** par défaut dans l'Agent Datadog. Pour activer la collecte de logs, définissez `logs_enabled` sur `true` dans votre fichier `datadog.yaml`.
 
-    {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
+    ```yaml
+    logs_enabled: true
+    ```
 
 3. Redémarrez l'[Agent Datadog][7].
 

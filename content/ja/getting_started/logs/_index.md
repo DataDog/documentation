@@ -61,7 +61,9 @@ logs:
 
 2. Datadog Agent では、ログの収集はデフォルトで**有効になっていません**。ログ収集を有効にするには、`datadog.yaml` ファイルで `logs_enabled` を `true` に設定してください。
 
-    {{< agent-config type="log collection configuration" filename="datadog.yaml" collapsible="true">}}
+    ```yaml
+    logs_enabled: true
+    ```
 
 3. [Datadog Agent を再起動][7]します。
 
