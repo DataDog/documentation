@@ -6367,6 +6367,11 @@ menu:
       parent: feature_flags_client
       identifier: feature_flags_client_unity
       weight: 108
+    - name: RUM Integration
+      url: feature_flags/client/rum_integration
+      parent: feature_flags_client
+      identifier: feature_flags_client_rum_integration
+      weight: 109
     - name: Server SDKs
       url: feature_flags/server
       parent: feature_flags

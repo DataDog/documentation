@@ -73,6 +73,8 @@ Default: `true`. Set to `false` to disable.
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed
 
+RUM integration can also use the current RUM user as defaults for feature flag evaluation context. For attribute mapping, precedence, user changes, and opt-out behavior, see [RUM Integration][1].
+
 ## Testing with in-memory providers
 
 Datadog supports these testing approaches:
@@ -126,3 +128,5 @@ const evaluationContext = {
 For percentage-based rollouts and deterministic bucketing, see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/).
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /feature_flags/client/rum_integration/
