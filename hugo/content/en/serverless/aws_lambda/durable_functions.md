@@ -178,7 +178,7 @@ Each operation called on the durable context produces a child span:
 | `@aws.durable.operation_name` | The operation's name. |
 | `@aws.durable.operation_id` | A hash of the operation's step ID. |
 | `@aws.durable.operation_attempt` | The attempt number, on the retryable operations `aws.durable.step` and `aws.durable.wait_for_condition`. `0` is the original attempt, `1` the first retry. |
-| `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed. Failed checkpoints count as well as successful ones. |
+| `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed, whether that stored result was a success or a failure. |
 | `@aws.durable.invoke.function_name` | The target function, on `aws.durable.invoke` spans. |
 
 Cross-invocation trace propagation adds synthetic `_datadog_<N>` step operations carrying the trace headers to your durable execution log. To turn it off, set `DD_DURABLE_CROSS_INVOCATION_TRACING_ENABLED=false`.
