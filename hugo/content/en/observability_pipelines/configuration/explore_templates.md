@@ -76,6 +76,15 @@ Metrics capture signals about your environment and offer insight into your syste
 To help you manage the quality and volume of your metrics, use the Metric Tag Governance template to process them in Observability Pipelines before sending them to your destinations. You can use processors to keep only the metrics you need, standardize metrics tagging, and remove unwanted tags to prevent high cardinality.
 
 {{% /tab %}}
+{{% tab "Traces" %}}
+
+### Trace Sampling
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+Ingesting and storing every trace can be costly at scale. Use the Trace Sampling template to ingest, process, and route your traces telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Further reading

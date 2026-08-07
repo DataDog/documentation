@@ -111,6 +111,33 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 [11]: /observability_pipelines/search_syntax/metrics/
 
 {{% /tab %}}
+{{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+1. Navigate to [Observability Pipelines][1].
+1. Select the [Trace Sampling][2] template, or click {{< ui >}}New Pipeline{{< /ui >}} and select {{< ui >}}Traces Pipeline{{< /ui >}}.
+1. Select and set up a [trace source][3].
+1. Select and set up [destinations][5] for your processed traces.
+1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
+    - **Notes**:
+      - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
+      - To copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows or Linux).
+
+#### Add another processor group
+
+{{< img src="observability_pipelines/setup/another_processor_group.png" alt="The Pipelines page showing two processor groups sending logs to the same destination" style="width:100%;" >}}
+
+{{% observability_pipelines/set_up_pipelines/add_another_processor_group %}}
+
+[1]: https://app.datadoghq.com/observability-pipelines
+[2]: /observability_pipelines/configuration/explore_templates/?tab=traces#trace-sampling
+[3]: /observability_pipelines/sources/?tab=traces#sources
+[4]: /observability_pipelines/processors/?tab=traces#processors
+[5]: /observability_pipelines/destinations/?tab=traces#destinations
+[6]: /observability_pipelines/configuration/pipeline_simulation/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ### Install the Worker and deploy the pipeline

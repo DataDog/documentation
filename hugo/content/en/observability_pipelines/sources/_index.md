@@ -86,6 +86,17 @@ These are the available sources:
 [2]: /observability_pipelines/sources/opentelemetry/
 
 {{% /tab %}}
+{{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+- [Datadog Agent][1]
+- [OpenTelemetry][2]
+
+[1]: /observability_pipelines/sources/datadog_agent/
+[2]: /observability_pipelines/sources/opentelemetry/
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Standard metadata fields
