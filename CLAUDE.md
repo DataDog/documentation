@@ -92,19 +92,27 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 ### PR Description Template
+
 ```
 <!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
-
 ### What does this PR do? What is the motivation?
 
 Fixes DOCS-XXXXX
 
 [Brief description of changes]
 
-### Merge instructions
+### Merge readiness
 
-Merge readiness:
 - [ ] Ready for merge
+
+## For Datadog employees:
+
+- ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
+- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
+
+### AI assistance
+
+[If AI tools were used, briefly note how. Leave blank if not applicable.]
 
 ### Additional notes
 
