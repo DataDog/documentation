@@ -8,7 +8,11 @@
 {{ $collapsible := .Get "collapsible" }}
 {{ $disable_copy := .Get "disable_copy" }}
 {{ $config_data := index $agent_config_data $type }}
-{{ $config_data_string := trim $config_data "\n" }}
+
+{{/* Temporary fallback for translated pages until localization removes the shortcode call. */}}
+{{ if and (eq $config_data nil) (eq $type "log collection configuration") }}
+  {{ $config_data = "logs_enabled: true" }}
+{{ end }}
 
 {{ if eq $config_data nil }}
   {{ if eq $.Site.Params.environment "development" }}
@@ -17,6 +21,8 @@
     {{ errorf "Agent Config shortcode error: given 'type' param was not found in Agent config template.  Check agent_config_types_list.txt for list of available configuration types." }}
   {{ end }}
 {{ end }}
+
+{{ $config_data_string := trim $config_data "\n" }}
 
 <div class="code-snippet-wrapper">
   <div class="code-filename-wrapper d-flex justify-content-between {{ if $collapsible }}collapsible{{ end }}">
