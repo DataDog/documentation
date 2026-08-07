@@ -142,7 +142,7 @@ operation_name:aws.durable.execute
 
 | Span tag | Description |
 |---|---|
-| `@aws.durable.execution_arn` | The full durable execution ARN, which contains the execution name. This span does not carry the name as a separate tag. |
+| `@aws.durable.execution_arn` | The full durable execution ARN, which contains the execution name. This span does not carry the execution name as a separate tag. |
 | `@aws.durable.invocation_status` | The execution's state when this invocation ended: `succeeded`, `failed`, or `pending`. `pending` means the execution suspended and resumes in a later invocation. |
 | `@aws.durable.replayed` | `false` on the invocation that starts an execution, `true` on each later invocation that resumes it after a suspend. |
 
