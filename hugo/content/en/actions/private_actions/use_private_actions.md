@@ -771,11 +771,20 @@ If your organization uses a custom certificate authority (CA) to issue certifica
 
 Add the `SSL_CERT_DIR` environment variable and mount your certificate to the `docker run` command, replacing `<PATH_TO_YOUR_CA_CERTIFICATE>` with the path to your CA certificate file:
 
-```bash
+{{< highlight bash "hl_lines=8 10" >}}
 docker run -d \
+  -e DD_BASE_URL=<YOUR_DD_SITE> \
+  -e DD_PRIVATE_RUNNER_CONFIG_DIR=/etc/dd-action-runner/config \
+  -e DD_API_KEY="$DD_API_KEY" \
+  -e DD_APP_KEY="$DD_APP_KEY" \
+  -e RUNNER_NAME=<YOUR_RUNNER_NAME> \
+  -e 'ACTIONS_ALLOWLIST=com.datadoghq.http.request' \
   -e SSL_CERT_DIR=/etc/dd-action-runner/config/ca-certificates \
+  -v ./config:/etc/dd-action-runner/config \
   -v <PATH_TO_YOUR_CA_CERTIFICATE>:/etc/dd-action-runner/config/ca-certificates/ca.crt \
-```
+  gcr.io/datadoghq/private-action-runner:v1.17.1 \
+  --with-api-key
+{{< /highlight >}}
 
 {{% /tab %}}
 
