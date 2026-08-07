@@ -63,7 +63,7 @@ Create a [trace retention filter][6] with the retention query `operation_name:aw
 
 ## Querying durable executions in Datadog
 
-The **Executions** tab on the Lambda function page lists durable executions. Use these queries to search the underlying logs and traces directly, or to build dashboards and monitors.
+The **Executions** tab on the Lambda function page lists durable executions. Use these queries to search the logs and traces, or to build dashboards and monitors.
 
 ### Query reference
 
