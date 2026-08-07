@@ -67,18 +67,13 @@ The **Executions** tab on the Lambda function page lists durable executions. Use
 
 ### Execution identifiers
 
-A durable execution ARN has the format:
+Logs, traces, and status events all identify an execution by its execution name. Spans carry it inside the execution ARN:
 
 ```text
 arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>:<VERSION>/durable-execution/<EXECUTION_NAME>/<EXECUTION_ID>
 ```
 
-| Identifier | Description |
-|---|---|
-| `<EXECUTION_NAME>` | A random UUID identifying one durable execution. The correlation key across logs and traces. |
-| `<EXECUTION_ID>` | A deterministic, name-based UUID for the same execution. It differs from the execution name; do not use it to correlate telemetry. |
-
-One durable execution spans many Lambda invocations, so every log and span for that execution shares the same execution name.
+The execution ID is a different value. Both are UUIDs, and correlating on the execution ID returns no matches.
 
 ### Logs
 
