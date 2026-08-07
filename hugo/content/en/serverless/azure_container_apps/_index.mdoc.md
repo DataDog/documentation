@@ -69,6 +69,6 @@ Help me monitor my Azure Container Apps services with Datadog
 
 ## Manual instrumentation
 
-To instrument your application yourself, see [Manual instrumentation][3]. It covers the in-container and sidecar approaches, with per-runtime setup steps, environment variables, and troubleshooting.
+To instrument your application yourself, see [Manual instrumentation][3]. It covers the tradeoffs for in-container and sidecar approaches, with per-runtime setup steps, environment variables, and troubleshooting.
 
 [3]: /serverless/azure_container_apps/manual_instrumentation/
