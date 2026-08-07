@@ -690,6 +690,8 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 
 3. After the crash happens, restart your application and wait for the iOS SDK to upload the crash report in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
+**Note**: Only one crash reporting tool can capture native crashes on iOS at a time. If another tool is also configured to capture native crashes, one tool intercepts the crash before the other can capture it. The tool that does not capture the crash does not report it. If you don't see expected crash data in Error Tracking, confirm no other tool is also configured for native iOS crash capture.
+
 ## Advanced Error Tracking features
 
 {{% collapse-content title="Set tracking consent (GDPR compliance)" level="h4" expanded=false id="set-tracking-consent" %}}
