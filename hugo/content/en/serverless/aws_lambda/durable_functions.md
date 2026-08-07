@@ -128,7 +128,7 @@ The AWS Lambda integration pipeline maps these events onto the same `@lambda.dur
 
 Treat these events as the source of truth for terminal status, as `END` and `REPORT` logs cannot report `TIMED_OUT` or `STOPPED`.
 
-A terminal status change event is timestamped from `detail.endTimestamp`, when the execution finished. A time range therefore selects executions that *finished* within it; in-flight executions fall outside it regardless of when they started. To find those, query the `START` logs.
+These events are timestamped when the execution finished, so a time range selects executions that finished within it, never in-flight ones.
 
 ### Traces
 
