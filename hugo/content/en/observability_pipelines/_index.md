@@ -73,7 +73,6 @@ further_reading:
   text: Manage metric volume and tags in your environment with Observability Pipelines
 
 ---
-{{< tooltip text="term" tooltip="Additional information here" case="title" >}}
 ## Overview
 
 {{< img src="observability_pipelines/op_marketecture_06042025.png" alt="A graphic showing data being aggregated from a variety of sources, processed and enriched by the observability pipelines worker in your own environment, and then being routed to the security, analytics, and storage destinations of your choice" style="width:100%;" >}}

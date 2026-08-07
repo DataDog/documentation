@@ -122,7 +122,7 @@ See [Export a Pipeline Configuration to JSON or Terraform][14] if you want to pr
 1. Click {{< ui >}}Edit{{< /ui >}} on a processor group to add, update, and validate your [processors][4] using [Pipeline Simulation][6].
     - **Notes**:
       - For a pipeline canvas, there is a limit of 25 processor groups and a total of 150 processors.
-      - If you want to copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows/Linux).
+      - To copy a processor, click the copy icon for that processor and then paste it (`Cmd+V` on Mac, `Ctrl+V` on Windows or Linux).
 
 #### Add another processor group
 
