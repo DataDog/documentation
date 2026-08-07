@@ -16,9 +16,10 @@ In Datadog Real User Monitoring (RUM), a [journey][9] represents a major user-fa
 - Business teams use **journeys** to track and improve user conversion.
 - Engineering teams use **operations** to monitor and minimize technical failures that impact key user moments.
 
+You can create operations with the RUM SDK APIs, directly in Datadog, or programmatically with the Datadog API.
+
 For example, the checkout experience of an ecommerce platform is a journey. Within it, operations might include entering payment details, saving a payment method, and completing a purchase. After you create operations, Datadog RUM measures each operation's performance, including execution volume, completion rate, and failure rate. Measuring operations' health enables you to identify exactly when and why users may not convert in your journey.
 
-You can create operations with the RUM SDK APIs, directly in Datadog, or programmatically with the Datadog API.
 
 The following table shows additional example journeys and their associated journey operations by industry.
 
@@ -320,13 +321,13 @@ You can create an operation from either the operations catalog or a journey's de
 
 <div class="alert alert-warning">Each RUM application supports up to 1000 operations created from Datadog through the UI or API. There is no organization-wide limit on operations created directly in Datadog.</div>
 
-### Step 1 - Enter operation details and select the operation category
+### Step 1: Enter operation details and select the operation category
 
 Select the operation's RUM application and enter a display name. You may optionally add a description to the operation.
 
-Select the operation's <b>category</b> to determine the RUM event types compatible with the start, success, and failure conditions. 
+Select the operation's **category** to determine the RUM event types compatible with the start, success, and failure conditions. 
 
-| Operation&nbsp;Category       | Summary  | Supported event types                                                                                                            |
+| Operation category       | Summary  | Supported event types                                                                                                            |
 |----------------------------------|----------|----------------------------------------------------------------------------------------------------------------------|
 | Component loading | Measure how long a user-initiated action takes to complete  | Start: Action <br> Success: Resource or custom action <br> Failure: Resource, error, or custom action |
 | Form submission | Measure how long a form submit or mutation takes to succeed | Start: Action <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
@@ -334,19 +335,19 @@ Select the operation's <b>category</b> to determine the RUM event types compatib
 | Page or screen navigation | Measure how long a navigation from one page or screen to another takes to succeed | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
 | Custom | Define a custom operation with any event type combination | Start: Action or view <br> Success: Resource, view, or custom action <br> Failure: Resource, error, or custom action |
 
-### Step 2 - Define the start event
+### Step 2: Define the start event
 
 Each operation must have a starting RUM event. Operations can begin with either an action or view event depending on the selected operation category.
 
-### Step 3 - Define the success conditions
+### Step 3: Define the success conditions
 
-Each operation must have a condition for ending in a success. Operations can end in a success as resource, view, or custom action event depending on the selected operation category.
+Each operation must have a condition for ending in a success. Operations can end in success with a resource, view, or custom action event, depending on the selected operation category.
 
-### Step 4 - Define the failure conditions
+### Step 4: Define the failure conditions
 
 Each operation must have a condition for ending in a failure:
-- <b>Error</b> failures can end as a resource, error, or custom action.
-- <b>Abandon</b> failures can be toggled on in case the user navigates away from the starting view before the operation finishes.
+- **Error** failures can end as a resource, error, or custom action.
+- **Abandon** failures can be toggled on in case the user navigates away from the starting view before the operation finishes.
 
 <div class="alert alert-danger">Allow up to 15 minutes for metrics to appear in the operations catalog after you create an operation in Datadog through the UI or API.</div>
 
@@ -356,7 +357,7 @@ Operations can also be created through the [Datadog API][10].
 
 ## Edit operations
 
-In the operations catalog, click the pencil icon to edit an operation. You can edit any operation's description regardless of the method used to create it. Operations created through the UI or the Datadog API can be fully edited through the UI.
+In the operations catalog, click the pencil icon to edit an operation. You can edit the description of any operation, regardless of how it was created. Operations created through the UI or API can be fully edited (not just the description).
 
 ## Monitor your availability on Datadog
 
