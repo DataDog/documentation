@@ -117,7 +117,7 @@ These configurations can be applied through either the <code>docker</code> comma
               grpc:
                 enabled: true
     ```
-
+    
     For HTTP:
     ```yaml
     apiVersion: datadoghq.com/v2alpha1
