@@ -81,9 +81,11 @@ These are the available sources:
 
 - [Datadog Agent][1]
 - [OpenTelemetry][2]
+- [Prometheus][25]
 
 [1]: /observability_pipelines/sources/datadog_agent/
 [2]: /observability_pipelines/sources/opentelemetry/
+[25]: /observability_pipelines/sources/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}

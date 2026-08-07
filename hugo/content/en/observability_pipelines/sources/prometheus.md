@@ -1,0 +1,91 @@
+---
+title: Prometheus Source
+disable_toc: false
+products:
+- name: Metrics
+  icon: metrics
+  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+---
+
+{{< product-availability >}}
+
+## Overview
+
+Use Observability Pipelines' Prometheus source to receive metrics pushed by your Prometheus clients.
+
+## Setup
+
+<div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the Prometheus address and, if applicable, the username and password for plain (also known as basic) authorization. Do <b>not</b> enter the actual values.</div>
+
+Set up this source when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The instructions in this section are for setting up the source in the UI.
+
+After you select the Prometheus source in the pipeline UI:
+
+1. Enter the identifier for your Prometheus address. If you leave it blank, the [default](#secret-defaults) is used.
+1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
+    - Enter the identifiers for your Prometheus username and password. If you leave it blank, the [default](#secret-defaults) is used.
+1. (Optional) Set up authentication tokens. See [Configure authentication tokens](#configure-authentication-tokens) for details.
+1. (Optional) Select {{< ui >}}Aggregate metrics{{< /ui >}} to combine metrics that share the same name, tags, and timestamp before they are sent downstream.
+1. (Optional) Configure keepalive settings. See [Configure keepalive](#configure-keepalive) for details.
+
+{{% observability_pipelines/secrets_env_var_note %}}
+
+### Optional settings
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
+
+#### Configure authentication tokens
+
+If you store tokens as credentials in your Prometheus client's authorization header, you can configure the Worker to check if incoming requests have a valid token. Request events that do not have a valid token are dropped. The Worker can also look up an endpoint path or an IP address instead of a header.
+
+To configure authentication tokens, enable the {{< ui >}}Configure authentication tokens{{< /ui >}} toggle:
+
+1. Click {{< ui >}}Manage Tokens{{< /ui >}} and then {{< ui >}}Add Token{{< /ui >}}.
+1. Enter the identifier for your token key.<br>**Note**: If you are using environment variables, the environment variable for this token is the identifier you entered prepended with `DD_OP_`.
+1. (Optional) Enter a field and value if you want to add additional information to metrics that are successfully authenticated with this specific token.
+1. Select the path to the token in the {{< ui >}}Path to Token{{< /ui >}} dropdown menu:
+	- {{< ui >}}Header{{< /ui >}} for a custom header or an authorization header, such as `"Authorization: Basic ABCDEF1234567="`.
+		- Optionally, enter the header name. **Note**: The header name is case insensitive.
+	- {{< ui >}}Address{{< /ui >}} for an IP address.
+	- {{< ui >}}Path{{< /ui >}} for an endpoint path.
+
+#### Configure keepalive
+
+To configure keepalive settings for connections to the source, enable the {{< ui >}}Configure keepalive{{< /ui >}} toggle:
+
+- {{< ui >}}Max connection age{{< /ui >}}: The maximum number of seconds after which a connection is closed. The default is `300` seconds.
+- {{< ui >}}Max connection age jitter factor{{< /ui >}}: The factor used to randomize the max connection age, so all connections don't close simultaneously. The default is `0.1`.
+
+## Secret defaults
+
+{{% observability_pipelines/set_secrets_intro %}}
+
+{{< tabs >}}
+{{% tab "Secrets Management" %}}
+
+- Prometheus address identifier:
+	- References the socket address, such as `0.0.0.0:9091`, on which the Observability Pipelines Worker listens for Prometheus metrics.
+	- The default identifier is `SOURCE_PROMETHEUS_ADDRESS`.
+- If you are using plain authentication:
+	- Prometheus username identifier:
+		- The default identifier is `SOURCE_PROMETHEUS_USERNAME`.
+	- Prometheus password identifier:
+		- The default identifier is `SOURCE_PROMETHEUS_PASSWORD`.
+
+{{% /tab %}}
+
+{{% tab "Environment Variables" %}}
+
+{{% observability_pipelines/configure_existing_pipelines/source_env_vars/prometheus %}}
+
+{{% /tab %}}
+{{< /tabs >}}
+
+[1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
