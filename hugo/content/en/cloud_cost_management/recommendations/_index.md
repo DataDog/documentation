@@ -50,21 +50,21 @@ multifiltersearch:
   data:
     - category: Configure
       cloud_provider: Anthropic
-      resource_type: Anthropic API Key
-      recommendation_type: Enable Anthropic Prompt Caching
+      resource_type: API Key
+      recommendation_type: Enable Prompt Caching
       recommendation_description: Identifies Anthropic API keys with no prompt caching usage and recommends enabling prompt caching to reduce input token costs.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Anthropic
-      resource_type: Anthropic API Key
-      recommendation_type: Optimize Anthropic Prompt Caching
+      resource_type: API Key
+      recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies Anthropic API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Anthropic
       resource_type: Enterprise User
-      recommendation_type: Reduce Anthropic Top-Tier Model Usage
-      recommendation_description: Identifies Anthropic API keys where spend is concentrated on the most expensive (top-tier) models and recommends evaluating whether a lower-cost model would suffice.
+      recommendation_type: Reduce Top-Tier Model Usage
+      recommendation_description: Identifies Enterprise Users where spend is concentrated on the most expensive models and recommends using a lower-cost model.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -293,7 +293,7 @@ multifiltersearch:
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance
       recommendation_description: RDS Instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
-      recommendation_prerequisites: ""
+      recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
     - category: Downsize
       cloud_provider: AWS
       resource_type: RDS Instance
@@ -382,13 +382,13 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: SageMaker Endpoint
       recommendation_type: Downsize SageMaker Endpoint
-      recommendation_description: SageMaker real-time inference endpoints whose CPU and memory utilization fit within the resources of the next smallest instance in the family. Endpoints using GPU/accelerator instances or managed scaling are excluded.
+      recommendation_description: SageMaker real-time inference endpoints whose CPU and memory utilization fit within the resources of the next smallest instance in the family. Endpoints using GPU or accelerator instances, or managed scaling, are excluded.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: AWS
       resource_type: SageMaker Training Job
       recommendation_type: Enable SageMaker Managed Spot Training
-      recommendation_description: SageMaker training jobs that can use managed spot training to reduce training costs when training scripts support checkpointing.
+      recommendation_description: SageMaker training jobs that can use managed spot training to reduce costs when the training scripts support checkpointing.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -490,7 +490,7 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Database for PostgreSQL
       recommendation_type: Delete Database for PostgreSQL
-      recommendation_description: Database server with no connections, which can be terminated.
+      recommendation_description: Azure Database for PostgreSQL server with no connections, which can be terminated.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -704,9 +704,9 @@ multifiltersearch:
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Configure
       cloud_provider: OpenAI
-      resource_type: OpenAI API Key
-      recommendation_type: Optimize OpenAI Prompt Caching
-      recommendation_description: Flags OpenAI API keys caching below target and recommends prompt changes to cut input token costs.
+      resource_type: API Key
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
       recommendation_prerequisites: ""
 ---
 
