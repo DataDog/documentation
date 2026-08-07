@@ -63,21 +63,7 @@ Create a [trace retention filter][6] with the retention query `operation_name:aw
 
 ## Querying durable executions in Datadog
 
-The **Executions** tab on the Lambda function page lists durable executions. Use these queries to search the logs and traces, or to build dashboards and monitors.
-
-### Query reference
-
-| Purpose | Search in | Query |
-|---|---|---|
-| Scope to a function | Logs | `@lambda.arn:"<FUNCTION_ARN>"` |
-| Scope to a function | Traces | `@function_arn:"<FUNCTION_ARN>"` |
-| One execution | Logs | `@lambda.durable_function.execution_name:<EXECUTION_NAME>` |
-| Terminal status | Logs | `@lambda.durable_function.execution_status:<SUCCEEDED\|FAILED\|TIMED_OUT\|STOPPED>` |
-| Authoritative status events | Logs | `@detail-type:"Durable Execution Status Change"` |
-| Execution start | Logs | `"START RequestId:" @lambda.durable_function.first_invocation:true` |
-| Execution end | Logs | `"END RequestId:" OR "REPORT RequestId:"` |
-| Execution trace | Traces | `operation_name:aws.durable.execute` |
-| Execution counts and duration | Metrics | `aws.lambda.durable_execution_*`, tagged `functionname` |
+The **Executions** tab on the Lambda function page lists durable executions. Use the following attributes to query the logs, traces, and metrics directly, or to build dashboards and monitors.
 
 ### Execution identifiers
 
@@ -133,7 +119,7 @@ Example queries:
 
     Only one carries `execution_status`: `END` for most executions, `REPORT` for executions on Lambda Managed Instances, which emit no `END` log.
 
-- Failed executions:
+- Executions that reached a given terminal status, one of `SUCCEEDED`, `FAILED`, `TIMED_OUT`, or `STOPPED`:
 
     ```text
     @lambda.durable_function.execution_status:FAILED
