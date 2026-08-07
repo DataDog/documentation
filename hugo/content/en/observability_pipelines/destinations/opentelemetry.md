@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTEL) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
+Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
 
 ## Set up destination
 
@@ -22,7 +22,7 @@ Configure the OpenTelemetry destination when you [set up a pipeline][3]. You can
 After you select the OpenTelemetry destination in the pipeline UI, enter the identifier for your HTTP/S Client URI. If you leave it blank, the [default](#secret-defaults) is used.
 
 **Notes**:
-- The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry. OpenTelemetry does not support other metrics types so the Worker drops them. See [Filter out unsupported metrics](#filter-out-unsupported-metrics) for more information.
+- The Worker can only send counter, gauge, and histogram metrics to OpenTelemetry. OpenTelemetry does not support other metrics types, so the Worker drops them. See [Filter out unsupported metrics](#filter-out-unsupported-metrics) for more information.
 - Datadog recommends setting your OTLP receiver to allow out-of-order samples because the Worker doesn't reorder metrics and some OTLP receivers reject out-of-order samples. See [Allow out-of-order samples](#allow-out-of-order-samples) for more information.
 - If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP_`. For example, if you entered `PASSWORD_1` for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
 
@@ -50,7 +50,7 @@ If one of these metrics is in a batch to be encoded and sent to OpenTelemetry, t
 
 The Worker doesn't always send metrics in the correct order for a given series because it doesn't reorder metrics. For example, if the first batch of metrics contains metrics with timestamps: `10:03`, `10:04`, `10:05` and the second batch contains metrics with timestamps: `10:01`, `10:02`, `10:06`, the Worker does not reorder those metrics before sending them out.
 
-Since some OTLP receivers, such as the Prometheus OTLP receiver, rejects out-of-order samples, the second batch of metrics gets rejected by the receiver. As a result, the Worker logs a Bad Request (`400`) error and the entire batch that was rejected gets dropped, even if the OTLP receiver accepted some of the valid metrics in the batch.
+Because some OTLP receivers, such as the Prometheus OTLP receiver, reject out-of-order samples, the second batch of metrics gets rejected by the receiver. As a result, the Worker logs a Bad Request (`400`) error and the entire batch that was rejected gets dropped, even if the OTLP receiver accepted some of the valid metrics in the batch.
 
 Datadog recommends setting your OTLP receiver to allow out-of-order samples to prevent out-of-order samples from getting dropped.
 
