@@ -30,7 +30,7 @@ To set up a notification rule:
 
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][4].
 1. Select the {{< ui >}}Notification{{< /ui >}} tab.
-1. In the {{< ui >}}Define scope{{< /ui >}} section, enter tags to restrict the notification to resources matching those tags. Leave this blank to include all resources.
+1. In the {{< ui >}}Define scope{{< /ui >}} section, use the {{< ui >}}Team{{< /ui >}}, {{< ui >}}Recommendation Type{{< /ui >}}, and {{< ui >}}Env{{< /ui >}} filters to restrict the notification to matching resources. Click {{< ui >}}+ Filter{{< /ui >}} to add more filters. Leave the filters empty to include all resources.
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
 1. In the destination section, select a Slack workspace connection and channel.
 1. Enter a name for the notification rule.
