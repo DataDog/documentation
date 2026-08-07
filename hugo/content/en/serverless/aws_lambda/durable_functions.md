@@ -212,7 +212,6 @@ The execution name joins the three sources, but its attribute name differs:
 |---|---|---|
 | Execution name | `@lambda.durable_function.execution_name` | `@aws.durable.execution_name` |
 | Execution ID | `@lambda.durable_function.execution_id` | `@aws.durable.execution_id` |
-| Full execution ARN | — | `@aws.durable.execution_arn` |
 
 ## Limitations and feedback
 
