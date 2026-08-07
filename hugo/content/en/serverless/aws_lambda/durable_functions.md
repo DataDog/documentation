@@ -80,7 +80,7 @@ The Datadog Lambda Extension adds these attributes to a durable function's logs:
 | `@lambda.durable_function.execution_name` | The execution name. Groups all logs from one execution. |
 | `@lambda.durable_function.execution_id` | The execution ID. |
 | `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
-| `@lambda.durable_function.execution_status` | The execution status, on the `END` log, or on the `REPORT` log for executions on Lambda Managed Instances. |
+| `@lambda.durable_function.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`, where `PENDING` means the execution suspended and resumes in a later invocation. On the `END` log, or on the `REPORT` log for executions on Lambda Managed Instances. |
 
 Example queries:
 
@@ -104,11 +104,13 @@ Example queries:
 
     Lambda Managed Instances emit no `END` log, so query both.
 
-- Executions that reached a given terminal status, one of `SUCCEEDED`, `FAILED`, `TIMED_OUT`, or `STOPPED`:
+- Executions with a given status:
 
     ```text
     @lambda.durable_function.execution_status:FAILED
     ```
+
+    `TIMED_OUT` and `STOPPED` come only from the status change events described below.
 
 ### Status change events
 
@@ -161,7 +163,7 @@ Each invocation also produces the standard `aws.lambda` span, tagged with the du
 | `@aws.durable.execution_name` | The execution name. |
 | `@aws.durable.execution_id` | The execution ID. |
 | `@aws.durable.first_invocation` | `true` on the first invocation of an execution. |
-| `@aws.durable.execution_status` | The execution status. |
+| `@aws.durable.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`. |
 
 **Operation spans**
 
