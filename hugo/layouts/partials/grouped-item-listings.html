@@ -46,7 +46,7 @@
             {{ if $int_logo }}
               <img src="{{ $int_logo }}" height="17" alt="{{ htmlEscape .Params.Source }}"/>
             {{ else }}
-              <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}?w=80&auto-enhance 2x" />
+              <img height="17" src="{{ partial "img-resource.html" (dict "context" $ctx "src" (print "images/svg-icons/agent.svg")) }}&w=80&auto-enhance 2x" />
             {{ end }}
           {{ end }}
         </div>
