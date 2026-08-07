@@ -27,7 +27,7 @@ When the scanner detects sensitive data, it tags the API endpoint with the categ
 
 To create an API data scanner and view its results, do the following:
 
-1. In App and API Protection {{< ui >}}Policies{{< /ui >}}, go to [{{< ui >}}Sensitive Data Detection{{< /ui >}}][3].
+1. In App & API Protection {{< ui >}}Policies{{< /ui >}}, go to [{{< ui >}}Sensitive Data Detection{{< /ui >}}][3].
 2. Click {{< ui >}}New Scanner{{< /ui >}}.
 3. In {{< ui >}}Select your scanner tags{{< /ui >}}, define the category and type to classify the sensitive data. The scanner tags API endpoints with the format `category:type`.
 4. In {{< ui >}}Define conditions on JSON keys and values{{< /ui >}}, define the JSON key or value conditions to trigger the scanner.

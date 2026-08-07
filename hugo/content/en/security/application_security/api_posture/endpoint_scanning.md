@@ -21,10 +21,10 @@ Endpoint Scanning sends only `GET` requests. It does not call `POST`, `PUT`, `PA
 
 For each scanned endpoint, Datadog records:
 
-- {{< ui >}}Authentication status{{< /ui >}}: Whether the endpoint requires authentication.
-- {{< ui >}}Public visibility{{< /ui >}}: Whether the endpoint is reachable without credentials.
-- {{< ui >}}HTTP response status{{< /ui >}}: The status code returned by the endpoint.
-- {{< ui >}}Last evaluation timestamp{{< /ui >}}: When the endpoint was last scanned.
+- **Authentication status**: Whether the endpoint requires authentication.
+- **Public visibility**: Whether the endpoint is reachable without credentials.
+- **HTTP response status**: The status code returned by the endpoint.
+- **Last evaluation timestamp**: When the endpoint was last scanned.
 
 Use this information to prioritize exposed endpoints, confirm whether important APIs enforce authentication, and investigate API findings with stronger evidence about how the endpoint behaves.
 

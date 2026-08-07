@@ -54,7 +54,7 @@ Each Bits Code session shows the life cycle of an AI-generated fix so you can re
 - The original security finding and proposed code change
 - An explanation of how and why Bits Code generated the fix
 - CI results (if enabled) to validate the patch is safe to deploy
-- Options to refine the fix or {{< ui >}}Create PR{{< /ui >}} to apply the changes to your source code repository
+- Options to refine the fix or create a PR to apply the changes to your source code repository
 
 To open the remediation session, select the API finding from the [{{< ui >}}Findings{{< /ui >}}][1] page to open the side panel, scroll to the {{< ui >}}Remediation{{< /ui >}} section, and select {{< ui >}}Expand & Chat{{< /ui >}}.
 

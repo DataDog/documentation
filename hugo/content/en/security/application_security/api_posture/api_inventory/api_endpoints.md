@@ -11,15 +11,15 @@ App and API Protection is in Preview on Datadog Government site US1-FED.
 
 The [API Endpoints][1] explorer monitors your API traffic to provide visibility into the security posture of your APIs, including:
 
-- {{< ui >}}Authentication{{< /ui >}}: Whether the API enforces authentication.
-- {{< ui >}}Authentication Method{{< /ui >}}: Type of authentication used, such as Basic Auth and API key.
-- {{< ui >}}Public Exposure{{< /ui >}}: Whether the API is processing traffic from the internet.
-- {{< ui >}}Sensitive data flows{{< /ui >}}: Sensitive data handled by the API, and the flows between APIs.
-- {{< ui >}}Attack Exposure{{< /ui >}}: If the endpoint is targeted by attacks.
-- {{< ui >}}Business Logic{{< /ui >}}: Business logic and associated business logic suggestions for this API.
-- {{< ui >}}Vulnerabilities{{< /ui >}}: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
-- {{< ui >}}Findings{{< /ui >}}: Security findings identified on this API.
-- {{< ui >}}Dependencies{{< /ui >}}: APIs and Databases the API depends on.
+- **Authentication**: Whether the API enforces authentication.
+- **Authentication Method**: Type of authentication used, such as Basic Auth and API key.
+- **Public Exposure**: Whether the API is processing traffic from the internet.
+- **Sensitive data flows**: Sensitive data handled by the API, and the flows between APIs.
+- **Attack Exposure**: If the endpoint is targeted by attacks.
+- **Business Logic**: Business logic and associated business logic suggestions for this API.
+- **Vulnerabilities**: If the endpoint contains a vulnerability (powered by [Code Security][2] and [Software Composition Analysis][3]).
+- **Findings**: Security findings identified on this API.
+- **Dependencies**: APIs and Databases the API depends on.
 
 Using API Endpoints you can:
 
