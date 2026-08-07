@@ -4227,11 +4227,16 @@ menu:
       parent: cloud_cost_recommendations
       identifier: cloud_cost_optimization_automation
       weight: 700
+    - name: Automated Notifications
+      url: cloud_cost_management/recommendations/automated_notifications
+      parent: cloud_cost_recommendations
+      identifier: cloud_cost_automated_notifications
+      weight: 701
     - name: Custom Recommendations
       url: cloud_cost_management/recommendations/custom_recommendations
       parent: cloud_cost_recommendations
       identifier: cloud_cost_custom_recommendations
-      weight: 701
+      weight: 702
     - name: Planning
       url: cloud_cost_management/planning
       parent: cloud_cost
