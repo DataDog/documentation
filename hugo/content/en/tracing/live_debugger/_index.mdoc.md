@@ -90,17 +90,28 @@ You can disable Live Debugger for a service and environment from the [Live Debug
 
 **Note**: Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
-<!-- Java -->
-{% if equals($prog_lang, "java") %}
+{% if includes($prog_lang, ["java", "python", "dot_net", "node_js"]) %}
 
 You can enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
 
-Either option requires Datadog Java SDK version 1.48.0 or higher.
+Either option requires the following minimum SDK version:
+
+| Language | Minimum SDK version |
+|----------|---------------------|
+| Java     | 1.48.0              |
+| Python   | 3.10.0              |
+| .NET     | 3.29.0              |
+| Node.js  | 5.84.0              |
 
 If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+
+{% /if %}
+
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
 
 **SDK version**: [Datadog Java SDK][30] version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
 
@@ -124,15 +135,6 @@ java \
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 
-You can enable Live Debugger in-app in one of two ways:
-
-- On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
-
-Either option requires Datadog Python SDK version 3.10.0 or higher.
-
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
-
 **SDK version**: [Datadog Python SDK (`ddtrace`)][31] version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
@@ -152,15 +154,6 @@ ddtrace-run python -m myapp.py
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-You can enable Live Debugger in-app in one of two ways:
-
-- On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
-
-Either option requires Datadog .NET SDK version 3.29.0 or higher.
-
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
-
 **SDK version**: [Datadog .NET SDK][32] version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with the following environment variables set:
@@ -177,15 +170,6 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-
-You can enable Live Debugger in-app in one of two ways:
-
-- On the [Live Debugger Settings page][26], enable the service and environment.
-- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
-
-Either option requires Datadog Node.js SDK version 5.84.0 or higher.
-
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
 
 **SDK version**: [Datadog Node.js SDK (`dd-trace-js`)][33] version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
