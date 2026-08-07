@@ -1046,29 +1046,31 @@ sudo apt-get remove --purge observability-pipelines-worker
 
 ## Add domains to firewall allowlist
 
-If you are using a firewall, these domains must be added to the allowlist:
+If you are using a firewall, these domains must be added to the allowlist, replacing `<DD_SITE>` with {% region-param key="dd_site" code=true /%}:
 
 {% if includes($platform, ["docker","kubernetes","cloudformation","ecs_fargate"]) %}
 
-- `api.`{% region-param key="dd_site" code=true /%}
-- `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.`{% region-param key="dd_site" code=true /%}
-- `keys.`{% region-param key="dd_site" code=true /%}
-- `*.agent.`{% region-param key="dd_site" code=true /%}
+- `api.<DD_SITE>:443`
+- `config.<DD_SITE>:443`
+- `http-intake.logs.<DD_SITE>:443`
+- `*.agent.<DD_SITE>:443`
 
 {% /if %}
 
 {% if equals($platform, "linux") %}
 
-- `api.`{% region-param key="dd_site" code=true /%}
-- `config.`{% region-param key="dd_site" code=true /%}
-- `http-intake.`{% region-param key="dd_site" code=true /%}
-- `keys.`{% region-param key="dd_site" code=true /%}
-- `install.`{% region-param key="dd_site" code=true /%}
-- `yum.`{% region-param key="dd_site" code=true /%}
-- `*.agent.`{% region-param key="dd_site" code=true /%}
+- `api.<DD_SITE>:443`
+- `config.<DD_SITE>:443`
+- `http-intake.logs.<DD_SITE>:443`
+- `keys.datadoghq.com`
+- `install.datadoghq.com`
+- `yum.datadoghq.com`
+- `apt.datadoghq.com`
+- `*.agent.<DD_SITE>:443`
 
 {% /if %}
+
+See [Network Traffic][26] for more information.
 
 ## Index your Worker logs
 
@@ -1093,3 +1095,4 @@ Make sure your Worker logs are [indexed][9] in Log Management for optimal functi
 [23]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-network-load-balancer.html
 [24]: /observability_pipelines/scaling_and_performance/best_practices_for_scaling_observability_pipelines/
 [25]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data-tutorial.html
+[26]: /observability_pipelines/configuration/network_traffic/
