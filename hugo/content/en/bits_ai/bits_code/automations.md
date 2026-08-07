@@ -88,13 +88,16 @@ An output defines what Bits Code does after a [session][1] completes. An automat
 You can configure your automation to:
 - {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
 - {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
+- {{< ui >}}Auto-fix CI for pull requests{{< /ui >}}: When creating a pull request, use CI logs to fix CI failures automatically; requires [CI logs in Datadog][8] and [auto-push][9]
 
 Datadog administrators can configure pull or merge request authorship through the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][7]. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
 
 ### Slack message output
 You can configure your automation to send a Slack message summarizing the [session][1] and code changes. If you use a pull or merge request output in addition to a Slack output, Bits Code includes a link to the pull or merge request in the Slack message.
 
-When you add a Slack message output, by default, Bits Code sends the message to the channel configured for the affected service in [Catalog][5]. You can set a fallback Slack channel, which is used when no channel is set in Catalog.
+When you add a Slack message output, choose one of the following destinations:
+- {{< ui >}}Notify the owning team{{< /ui >}} (default): Send the message to the affected service's Slack channel in [Catalog][5], or to the configured fallback Slack channel when no Catalog channel is set.
+- {{< ui >}}Send to a specific channel{{< /ui >}}: Send the message to the Slack destination you select.
 
 ## Manage automations
 On [{{< ui >}}Automations{{< /ui >}}][3], view the automations you created on the {{< ui >}}My Automations{{< /ui >}} tab. Switch to {{< ui >}}All{{< /ui >}} to see automations created by anyone in your organization.
@@ -111,3 +114,5 @@ You can pause or resume any automation, but you can only edit or delete automati
 [5]: /internal_developer_portal/catalog/
 [6]: /account_management/rbac/permissions/#bits-ai
 [7]: https://app.datadoghq.com/code/settings
+[8]: /bits_ai/bits_code/setup/#setup
+[9]: /bits_ai/bits_code/setup/#enable-auto-push
