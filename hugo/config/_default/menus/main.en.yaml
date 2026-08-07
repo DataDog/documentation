@@ -5759,17 +5759,338 @@ menu:
       parent: ai_agents_console
       identifier: ai_agents_console_setup
       weight: 1
+    - name: CI/CD Optimization
+      url: cicd/
+      pre: ci
+      identifier: cicd
+      parent: software_delivery_heading
+      weight: 5000
+    - name: CI Pipeline Setup
+      url: continuous_integration/pipelines/
+      parent: cicd
+      identifier: cicd_pipeline_setup
+      weight: 1
+    - name: AWS CodePipeline
+      url: continuous_integration/pipelines/awscodepipeline/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_awscodepipeline
+      weight: 101
+    - name: Azure Pipelines
+      url: continuous_integration/pipelines/azure/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_azure
+      weight: 102
+    - name: Buildkite
+      url: continuous_integration/pipelines/buildkite/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_buildkite
+      weight: 103
+    - name: CircleCI
+      url: continuous_integration/pipelines/circleci/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_circleci
+      weight: 104
+    - name: Codefresh
+      url: continuous_integration/pipelines/codefresh/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_codefresh
+      weight: 105
+    - name: GitHub Actions
+      url: continuous_integration/pipelines/github/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_github
+      weight: 106
+    - name: GitLab
+      url: continuous_integration/pipelines/gitlab/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_gitlab
+      weight: 107
+    - name: Jenkins
+      url: continuous_integration/pipelines/jenkins/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_jenkins
+      weight: 108
+    - name: TeamCity
+      url: continuous_integration/pipelines/teamcity/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_teamcity
+      weight: 109
+    - name: Other CI Providers
+      url: continuous_integration/pipelines/custom/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom
+      weight: 110
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_automatic_retries
+      weight: 111
+    - name: Custom Commands
+      url: continuous_integration/pipelines/custom_commands/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_commands
+      weight: 112
+    - name: Custom Tags and Measures
+      url: continuous_integration/pipelines/custom_tags_and_measures/
+      parent: cicd_pipeline_setup
+      identifier: cicd_pipeline_custom_tags_and_measures
+      weight: 113
+    - name: Test Suite Setup
+      url: tests/setup/
+      parent: cicd
+      identifier: cicd_test_setup
+      weight: 2
+    - name: .NET
+      url: tests/setup/dotnet/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_dotnet
+      weight: 201
+    - name: Go
+      url: tests/setup/go/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_go
+      weight: 202
+    - name: Java and JVM Languages
+      url: tests/setup/java/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_java
+      weight: 203
+    - name: JavaScript and TypeScript
+      url: tests/setup/javascript/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_javascript
+      weight: 204
+    - name: Python
+      url: tests/setup/python/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_python
+      weight: 205
+    - name: Ruby
+      url: tests/setup/ruby/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_ruby
+      weight: 206
+    - name: Swift
+      url: tests/setup/swift/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_swift
+      weight: 207
+    - name: JUnit Report Uploads
+      url: tests/setup/junit_xml/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_junit_xml
+      weight: 208
+    - name: Bazel
+      url: tests/setup/bazel/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_bazel
+      weight: 209
+    - name: Bazel Rules for Go Tests
+      url: tests/setup/bazel/go/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_go
+      weight: 20901
+    - name: Bazel Rules for Java Tests
+      url: tests/setup/bazel/java/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_java
+      weight: 20902
+    - name: Bazel Rules for Python Tests
+      url: tests/setup/bazel/python/
+      parent: cicd_test_setup_bazel
+      identifier: cicd_test_setup_bazel_python
+      weight: 20903
+    - name: Network Settings
+      url: tests/network/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_network
+      weight: 210
+    - name: Tests in Containers
+      url: tests/containers/
+      parent: cicd_test_setup
+      identifier: cicd_test_setup_containers
+      weight: 211
+    - name: Health
+      url: cicd/health/
+      parent: cicd
+      identifier: cicd_health
+      weight: 3
+    - name: Explorer
+      url: continuous_integration/explorer/
+      parent: cicd
+      identifier: cicd_explorer
+      weight: 4
+    - name: Search Syntax
+      url: continuous_integration/explorer/search_syntax/
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_syntax
+      weight: 401
+    - name: Search Pipeline Executions
+      url: continuous_integration/explorer/facets/
+      parent: cicd_explorer
+      identifier: cicd_explorer_facets
+      weight: 402
+    - name: Export
+      url: continuous_integration/explorer/export/
+      parent: cicd_explorer
+      identifier: cicd_explorer_export
+      weight: 403
+    - name: Saved Views
+      url: continuous_integration/explorer/saved_views/
+      parent: cicd_explorer
+      identifier: cicd_explorer_saved_views
+      weight: 404
+    - name: Search and Manage
+      url: continuous_integration/search/
+      parent: cicd_explorer
+      identifier: cicd_explorer_search_and_manage
+      weight: 405
+    - name: Flaky Test Management
+      url: tests/flaky_management/
+      parent: cicd
+      identifier: cicd_flaky_management
+      weight: 5
+    - name: Working with Flaky Tests
+      url: tests/flaky_tests/
+      parent: cicd_flaky_management
+      identifier: cicd_flaky_management_working_with
+      weight: 501
+    - name: Features
+      url: cicd/features/
+      parent: cicd
+      identifier: cicd_features
+      weight: 6
+    - name: Automatic Job Retries
+      url: continuous_integration/pipelines/automatic_retries/
+      parent: cicd_features
+      identifier: cicd_features_automatic_job_retries
+      weight: 600
+    - name: Early Flake Detection
+      url: tests/flaky_tests/early_flake_detection/
+      parent: cicd_features
+      identifier: cicd_features_early_flake_detection
+      weight: 601
+    - name: Auto Test Retries
+      url: tests/flaky_tests/auto_test_retries/
+      parent: cicd_features
+      identifier: cicd_features_auto_test_retries
+      weight: 602
+    - name: Test Impact Analysis
+      url: tests/test_impact_analysis/
+      parent: cicd_features
+      identifier: cicd_features_tia
+      weight: 603
+    - name: How It Works
+      url: tests/test_impact_analysis/how_it_works/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_how_it_works
+      weight: 60301
+    - name: Troubleshooting
+      url: tests/test_impact_analysis/troubleshooting/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_troubleshooting
+      weight: 60302
+    - name: Setup
+      url: tests/test_impact_analysis/setup/
+      parent: cicd_features_tia
+      identifier: cicd_features_tia_setup
+      weight: 60303
+    - name: .NET
+      url: tests/test_impact_analysis/setup/dotnet/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_dotnet
+      weight: 6030301
+    - name: JavaScript and TypeScript
+      url: tests/test_impact_analysis/setup/javascript/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_javascript
+      weight: 6030302
+    - name: Python
+      url: tests/test_impact_analysis/setup/python/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_python
+      weight: 6030303
+    - name: Swift
+      url: tests/test_impact_analysis/setup/swift/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_swift
+      weight: 6030304
+    - name: Java
+      url: tests/test_impact_analysis/setup/java/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_java
+      weight: 6030305
+    - name: Ruby
+      url: tests/test_impact_analysis/setup/ruby/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_ruby
+      weight: 6030306
+    - name: Go
+      url: tests/test_impact_analysis/setup/go/
+      parent: cicd_features_tia_setup
+      identifier: cicd_features_tia_setup_go
+      weight: 6030307
+    - name: Test Parallelization
+      url: tests/test_parallelization/
+      parent: cicd_features
+      identifier: cicd_features_parallelization
+      weight: 604
+    - name: Setup
+      url: tests/test_parallelization/setup/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_setup
+      weight: 60401
+    - name: Configuration
+      url: tests/test_parallelization/configuration/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_configuration
+      weight: 60402
+    - name: Best Practices
+      url: tests/test_parallelization/best_practices/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_best_practices
+      weight: 60403
+    - name: Troubleshooting
+      url: tests/test_parallelization/troubleshooting/
+      parent: cicd_features_parallelization
+      identifier: cicd_features_parallelization_troubleshooting
+      weight: 60404
+    - name: Legacy Features
+      url: cicd/features/legacy/
+      parent: cicd_features
+      identifier: cicd_features_legacy
+      weight: 605
+    - name: Monitors
+      url: monitors/types/ci/?tab=pipelines
+      parent: cicd
+      identifier: cicd_monitors
+      weight: 7
+    - name: Guides
+      url: cicd/guides/
+      parent: cicd
+      identifier: cicd_guides
+      weight: 8
+    - name: Troubleshooting
+      url: cicd/troubleshooting/
+      parent: cicd
+      identifier: cicd_troubleshooting
+      weight: 9
+    - name: CI Pipelines
+      url: cicd/troubleshooting/pipelines/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_pipeline
+      weight: 901
+    - name: Tests
+      url: cicd/troubleshooting/tests/
+      parent: cicd_troubleshooting
+      identifier: cicd_troubleshooting_tests
+      weight: 902
     - name: CI Visibility
       url: continuous_integration/
       pre: ci
       identifier: ci
       parent: software_delivery_heading
       weight: 10000
-    - name: CI/CD Optimization
-      url: continuous_integration/cicd_optimization/
-      parent: ci
-      identifier: cicd_optimization
-      weight: 1
     - name: Pipeline Visibility
       url: continuous_integration/pipelines/
       parent: ci
@@ -5978,11 +6299,6 @@ menu:
       parent: software_delivery_heading
       identifier: tests
       weight: 40000
-    - name: CI/CD Optimization
-      url: continuous_integration/cicd_optimization/
-      parent: tests
-      identifier: tests_cicd_optimization
-      weight: 1
     - name: Setup
       url: tests/setup/
       parent: tests
