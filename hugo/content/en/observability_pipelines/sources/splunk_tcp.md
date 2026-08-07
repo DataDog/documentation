@@ -26,7 +26,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 After you select the Splunk TCP source in the pipeline UI, enter the identifier for your Splunk TCP address. If you leave it blank, the [default](#secret-defaults) is used.
 
 **Notes**:
-- By default, the Splunk TCP source doesn't limit the size of an event. To prevent unbounded memory growth, such as from malformed connections or connections that remain open indefinitely, use the environment variable `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` to set a maximum frame length in bytes.
+- By default, the Splunk TCP source doesn't limit the size of an event. To prevent unbounded memory consumption, such as from malformed connections or connections that remain open indefinitely, use the environment variable `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` to set a maximum frame length in bytes.
 - If you enter secret identifiers and then choose to use environment variables, the environment variable is the identifier entered and prepended with `DD_OP_`. For example, if you entered <code>PASSWORD_1</code> for a password identifier, the environment variable for that password is `DD_OP_PASSWORD_1`.
 
 ### Optional TLS settings
