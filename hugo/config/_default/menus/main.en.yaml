@@ -3292,7 +3292,7 @@ menu:
       parent: containers
       identifier: containers_autoscaling
       weight: 2
-    - name: Cluster 
+    - name: Cluster
       url: containers/autoscaling/cluster
       parent: containers_autoscaling
       identifier: containers_autoscaling_cluster
@@ -3497,41 +3497,51 @@ menu:
       identifier: containers_datadog_operator_configuration
       parent: containers_datadog_operator
       weight: 803
+    - name: Datadog Agent Profiles
+      url: containers/datadog_operator/datadog_agent_profiles
+      identifier: containers_datadog_operator_agent_profiles
+      parent: containers_datadog_operator
+      weight: 804
+    - name: Providers
+      url: containers/datadog_operator/providers
+      identifier: containers_datadog_operator_providers
+      parent: containers_datadog_operator
+      weight: 805
     - name: Custom Checks
       url: containers/datadog_operator/custom_check
       identifier: containers_datadog_operator_customchecks
       parent: containers_datadog_operator
-      weight: 804
+      weight: 806
     - name: Data Collected
       url: containers/datadog_operator/data_collected
       identifier: containers_datadog_operator_datacollected
       parent: containers_datadog_operator
-      weight: 805
+      weight: 807
     - name: Secret Management
       url: containers/datadog_operator/secret_management
       identifier: containers_datadog_operator_secretmanagement
       parent: containers_datadog_operator
-      weight: 806
+      weight: 808
     - name: DatadogDashboard CRD
       url: containers/datadog_operator/crd_dashboard
       identifier: containers_datadog_operator_crd_dashboard
       parent: containers_datadog_operator
-      weight: 807
+      weight: 809
     - name: DatadogGenericResource CRD
       url: containers/datadog_operator/crd_ddgr
       identifier: containers_datadog_operator_crd_ddgr
       parent: containers_datadog_operator
-      weight: 808
+      weight: 810
     - name: DatadogMonitor CRD
       url: containers/datadog_operator/crd_monitor
       identifier: containers_datadog_operator_crd_monitor
       parent: containers_datadog_operator
-      weight: 809
+      weight: 811
     - name: DatadogSLO CRD
       url: containers/datadog_operator/crd_slo
       identifier: containers_datadog_operator_crd_slo
       parent: containers_datadog_operator
-      weight: 810
+      weight: 812
     - name: Troubleshooting
       url: containers/troubleshooting/
       parent: containers

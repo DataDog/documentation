@@ -484,7 +484,7 @@
               dest_path: '/containers/datadog_operator/'
               file_name: 'datadog_agent_profiles.md'
               front_matters:
-                title: Managing Multiple Agent Instances using Datadog Agent Profiles
+                title: Manage Multiple Agent Configurations with Datadog Agent Profiles
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md"]
           - action: pull-and-push-file
             branch: main
@@ -494,7 +494,7 @@
               dest_path: '/containers/datadog_operator/'
               file_name: 'providers.md'
               front_matters:
-                title: Apply Provider-specific Variations
+                title: Configure Providers with the Datadog Operator
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/providers.md"]
 
 
