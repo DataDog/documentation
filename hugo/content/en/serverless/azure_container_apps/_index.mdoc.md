@@ -30,13 +30,16 @@ containerized applications. Datadog monitors Container Apps in two layers:
 - The Datadog `serverless-init` Agent adds distributed tracing, enhanced metrics, custom
   metrics, and direct log collection. [Enhanced metrics](/integrations/azure-container-apps/#metrics) are distinguished with the `azure.app_containerapps.enhanced.*` namespace.
 
-First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs. 
+First, set up the [Azure Integration](/integrations/azure/) to collect metrics and logs.
 
-Then, use the guides below to instrument your application using agentic onboarding or manual instrumentation. 
+Then, choose one of two paths to instrument your application with the `serverless-init` Agent:
+
+- **[Set up with agentic onboarding](#set-up-with-agentic-onboarding)**: An AI assistant instruments your service for you, using the AI Setup CLI or the Datadog MCP Server.
+- **[Set up with manual instrumentation][3]**: Instrument your service yourself, with per-runtime steps for the in-container and sidecar approaches. 
 
 ## Set up with agentic onboarding
 
-Use [agentic onboarding][1] to set up monitoring for your Azure Container Apps with AI assistance. Two complementary paths use the same Datadog account:
+Two complementary paths use the same Datadog account:
 
 - **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
@@ -67,8 +70,5 @@ Help me monitor my Azure Container Apps services with Datadog
 {% /tab %}
 {% /tabs %}
 
-## Manual instrumentation
-
-To instrument your application yourself, see [Manual instrumentation][3]. It covers the tradeoffs for in-container and sidecar approaches, with per-runtime setup steps, environment variables, and troubleshooting.
-
 [3]: /serverless/azure_container_apps/manual_instrumentation/
+
