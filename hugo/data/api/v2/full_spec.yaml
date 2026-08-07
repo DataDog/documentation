@@ -39541,34 +39541,10 @@ components:
           description: The operating system version.
           example: "Ubuntu 20.04"
           type: string
-        otel_collector_deployment_types:
-          description: OpenTelemetry collector deployment types associated with the agent.
-          items:
-            description: An OpenTelemetry collector deployment type.
-            type: string
-          type: array
-        otel_collector_distributions:
-          description: OpenTelemetry collector distributions associated with the agent.
-          items:
-            description: An OpenTelemetry collector distribution.
-            type: string
-          type: array
-        otel_collector_versions:
-          description: List of OpenTelemetry collector versions (if applicable).
-          items:
-            description: An OpenTelemetry collector version string.
-            type: string
-          type: array
         otel_collectors:
           description: OpenTelemetry collectors associated with the agent (if applicable).
           items:
             $ref: "#/components/schemas/FleetOtelCollector"
-          type: array
-        otel_resource_attributes:
-          description: OpenTelemetry resource attributes reported by the agent.
-          items:
-            description: An OpenTelemetry resource attribute.
-            type: string
           type: array
         pod_name:
           description: Kubernetes pod name (if applicable).
@@ -44910,10 +44886,6 @@ components:
           description: A human-readable description of what the control detects.
           example: "Identifies API keys that have not been used within your specified time threshold, helping reduce security risks from dormant credentials."
           type: string
-        detection_frequency:
-          description: How often detections are evaluated for the control.
-          example: "daily"
-          type: string
         detection_parameters:
           $ref: "#/components/schemas/GovernanceControlParametersMap"
           nullable: true
@@ -44983,7 +44955,6 @@ components:
         - type
         - priority
         - detection_parameters
-        - detection_frequency
         - mitigation_type
         - mitigation_parameters
         - created_at
@@ -45342,17 +45313,14 @@ components:
         - label
       type: object
     GovernanceControlSupportedValueArray:
-      description: The supported values for an enumerated parameter.
+      description: The supported values for an enumerated parameter. `null` when the parameter is not an enumerated type.
       items:
         $ref: "#/components/schemas/GovernanceControlSupportedValue"
+      nullable: true
       type: array
     GovernanceControlUpdateAttributes:
       description: The attributes of a governance control that can be updated. Only the attributes present in the request are modified.
       properties:
-        detection_frequency:
-          description: How often detections should be evaluated for the control.
-          example: "daily"
-          type: string
         detection_parameters:
           $ref: "#/components/schemas/GovernanceControlParametersMap"
           nullable: true
@@ -146612,7 +146580,6 @@ paths:
                           created_at: "2024-01-15T09:30:00Z"
                           created_by: "11111111-2222-3333-4444-555555555555"
                           description: "Identifies API keys that have not been used within your specified time threshold, helping reduce security risks from dormant credentials."
-                          detection_frequency: "daily"
                           detection_parameters:
                             api_key_threshold: 30
                           insights: []
@@ -146642,7 +146609,7 @@ paths:
                               display_name: "Unused API Key Threshold"
                               name: "api_key_threshold"
                               required: false
-                              supported_values: []
+                              supported_values:
                               type: "integer"
                           type: "Proactive"
                         id: "unused_api_keys"
@@ -146713,7 +146680,6 @@ paths:
                         created_at: "2024-01-15T09:30:00Z"
                         created_by: "11111111-2222-3333-4444-555555555555"
                         description: "Identifies API keys that have not been used within your specified time threshold, helping reduce security risks from dormant credentials."
-                        detection_frequency: "daily"
                         detection_parameters:
                           api_key_threshold: 30
                         insights: []
@@ -146733,7 +146699,7 @@ paths:
                             display_name: "Unused API Key Threshold"
                             name: "api_key_threshold"
                             required: false
-                            supported_values: []
+                            supported_values:
                             type: "integer"
                         type: "Proactive"
                       id: "unused_api_keys"
@@ -146825,7 +146791,6 @@ paths:
                         created_at: "2024-01-15T09:30:00Z"
                         created_by: "11111111-2222-3333-4444-555555555555"
                         description: "Identifies API keys that have not been used within your specified time threshold, helping reduce security risks from dormant credentials."
-                        detection_frequency: "daily"
                         detection_parameters:
                           api_key_threshold: 60
                         insights: []
