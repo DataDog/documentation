@@ -41,6 +41,7 @@ Agent Observability can automatically trace and annotate calls to supported LLM 
 | [LangGraph](#langgraph)                         | >= 0.2.23          | >= 3.10.1      |
 | [LiteLLM](#litellm)                             | >= 1.65.4          | >= 3.9.0       |
 | [MCP](#mcp)                                     | >= 1.10.0          | >= 3.11.0      |
+| [MistralAI](#mistralai)                         | >= 2.0.0           | >= 4.12.0      |
 | [OpenAI](#openai), [Azure OpenAI](#openai)      | >= 1.0.0           | >= 2.9.0       |
 | [OpenAI Agents](#openai-agents)                 | >= 0.0.2           | >= 3.5.0       |
 | [Pydantic AI](#pydantic-ai)                     | >= 0.3.0           | >= 3.11.0      |
@@ -585,6 +586,32 @@ The MCP integration instruments the following methods:
 
 [1]: https://github.com/modelcontextprotocol/typescript-sdk
 [2]: https://github.com/modelcontextprotocol/typescript-sdk/blob/main/docs/client.md#tools
+{{% /tab %}}
+{{< /tabs >}}
+{{% /collapse-content %}}
+
+{{% collapse-content title="MistralAI" level="h3" expanded=false id="mistralai" %}}
+{{< tabs >}}
+{{% tab "Python" %}}
+The MistralAI integration provides automatic tracing for the [MistralAI Python SDK's][1] chat completion and embedding calls.
+
+**Package name:** `mistralai`\
+**Integration name:** `mistralai`
+
+### Traced methods
+
+The MistralAI integration instruments the following methods:
+
+- [Chat completions][2]:
+  - `Chat.complete()`, `Chat.complete_async()`
+- [Streamed chat completions][2]:
+  - `Chat.stream()`, `Chat.stream_async()`
+- [Embeddings][3]:
+  - `Embeddings.create()`, `Embeddings.create_async()`
+
+[1]: https://docs.mistral.ai/api/
+[2]: https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post
+[3]: https://docs.mistral.ai/api/#tag/embeddings/operation/embeddings_v1_embeddings_post
 {{% /tab %}}
 {{< /tabs >}}
 {{% /collapse-content %}}
