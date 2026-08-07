@@ -20,8 +20,7 @@ def get_staged_files():
     """Get staged markdown files under content/en/ that are newly added."""
     try:
         result = subprocess.run(
-            ['git', '-c', 'diff.renameLimit=999999', 'diff', '--cached', '-M',
-             '--name-only', '--diff-filter=A'],
+            ['git', 'diff', '--cached', '--name-only', '--diff-filter=A'],
             capture_output=True,
             text=True,
             check=True
