@@ -9985,16 +9985,21 @@ menu:
       parent: rum
       identifier: rum_ownership_of_views
       weight: 14
+    - name: Remote Configuration
+      url: real_user_monitoring/remote_configuration/
+      parent: rum
+      identifier: rum_remote_configuration
+      weight: 15
     - name: Guides
       url: real_user_monitoring/guide/
       parent: rum
       identifier: rum_guides
-      weight: 15
+      weight: 16
     - name: Data Security
       identifier: real_user_monitoring_data_security
       url: data_security/real_user_monitoring/
       parent: rum
-      weight: 16
+      weight: 17
     - name: Product Analytics
       url: product_analytics/
       pre: product-analytics
