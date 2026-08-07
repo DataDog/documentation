@@ -374,7 +374,7 @@ env:
  - name: OTEL_EXPORTER_OTLP_ENDPOINT
    value: "http://$(HOST_IP):4318" # sends to HTTP receiver on port 4318
 ```
-**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute to the pod's UID.
+**Note**: To enrich container tags for custom metrics, set the appropriate resource attributes in the application code where your OTLP metrics are generated. For example, set the `container.id` resource attribute using a container resource detector.
 
 {{% /tab %}}
 {{< /tabs >}}
