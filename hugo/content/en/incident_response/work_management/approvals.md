@@ -13,7 +13,7 @@ further_reading:
 
 ## Overview
 
-Work item approvals let you request sign-off from one or more team members before taking action on a work item, supporting change management workflows. This feature is available on all standard and custom work item types. All approval activity is tracked in the work item's activity timeline.
+Work item approvals let you request sign-off from one or more team members before taking action on a work item, supporting change management workflows. This feature is available on all standard and custom work types. All approval activity is tracked in the work item's activity timeline.
 
 ## Requesting approvals
 

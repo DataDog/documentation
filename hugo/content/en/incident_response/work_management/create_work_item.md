@@ -15,7 +15,7 @@ further_reading:
 
 ## Overview
 
-Work items can be created [manually](#manual-work-item-creation), [automatically](#automatic-work-item-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of work items: standard and security. Work items created from security signals and Sensitive Data Scanner are automatically made security cases. The security work item type has all the features of the standard work item type, along with a mandatory field for specifying the reason for closing a work item (testing, false positive, or one time exception).
+Work items can be created [manually](#manual-work-item-creation), [automatically](#automatic-work-item-creation) from across Datadog, or [programmatically](#api) with the API. There are two types of work items: standard and security. Work items created from security signals and Sensitive Data Scanner are automatically made security cases. The security work type has all the features of the standard work type, along with a mandatory field for specifying the reason for closing a work item (testing, false positive, or one time exception).
 
 ## Manual work item creation
 
@@ -23,7 +23,7 @@ Work items can be created [manually](#manual-work-item-creation), [automatically
 1. Select a project to create the work item in. **Note**: A work item can only belong to a single project.
 1. Click **New Work Item**.
 1. Fill in a title for the work item.
-1. Select a [work item type](#work-item-types).
+1. Select a [work type](#work-types).
 1. (Optional) Add a description.
 1. Click **Create Work Item** to complete.
 
@@ -50,20 +50,20 @@ Configure the following products to automatically create work items:
 | Workflow Automation | 1. In a new or existing workflow, add a step in the Workflow builder and search for "Case Management."<br> 2. Select the **Create Case** action.<br> 3. If the workflow is configured to run based on a monitor or security signal trigger, add the relevant workflow triggers and ensure that you've added the workflow handle to the desired resources. For more information, see [Trigger a workflow][6].|
 | Error Tracking | In Error Tracking, work items are automatically created when an issue is commented on or assigned. |
 
-## Work item types
+## Work types
 
-Add work item types when you are creating a work item. Not all work item types are available for configuration between manual and automatic creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating work items manually.
+Add work types when you are creating a work item. Not all work types are available for configuration between manual and automatic creation. For example, only `Standard`, `Security` and `Change Request`, `Event Management` types are available when creating work items manually.
 
-To add and enable custom work item types, see [Work Management Customization][7].
+To add and enable custom work types, see [Work Management Customization][7].
 
-| Work Item Type  | Description                                                                 |
+| Work Type  | Description                                                                 |
 |------------------|-----------------------------------------------------------------------------|
 | Standard         | A general-purpose work item for operational tasks, investigations, and more.     |
 | Change Request   | Used in change management workflows to track planned or approved changes.   |
 | Event Management | Integrated with the Event Management product to house correlated events.    |
 | Security         | Used by security teams and products to manage investigations or alerts.     |
 | Error Tracking   | Linked to the Error Tracking product to track and remediate application issues. |
-| Custom Type      | Add a custom work item type. For more information, see [Work Management Customization][7]. |
+| Custom Type      | Add a custom work type. For more information, see [Work Management Customization][7]. |
 
 ## API
 

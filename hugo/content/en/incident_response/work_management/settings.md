@@ -45,9 +45,9 @@ Project handles can be used in monitors to automatically create work items. In t
 ### Third party integrations
 To configure third party integrations, navigate to [Create notifications and tickets ][3].
 
-## Custom work item types and attributes
+## Custom work types and attributes
 
-Add custom work item types and attributes to projects so that you can tailor your work items to fit your organizational needs. For more information, see [Work Management Customization][4].
+Add custom work types and attributes to projects so that you can tailor your work items to fit your organizational needs. For more information, see [Work Management Customization][4].
 
 
 ## Further Reading
