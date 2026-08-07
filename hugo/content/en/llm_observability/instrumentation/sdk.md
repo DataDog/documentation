@@ -1646,7 +1646,7 @@ Messages annotated with `audioParts` or `imageParts` render as inline audio play
 
 {{< img src="llm_observability/instrumentation/image_example.png" alt="An LLM span in the Agent Observability trace view. The input USER message shows the prompt 'What is in this image?' with an inline photo of a black puppy, and the output ASSISTANT message describes it as a black Labrador Retriever puppy on a wooden surface." style="width:100%;" >}}
 
-For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrumentation/auto_instrumentation/)—no manual annotation required. `imageParts` require manual annotation.
+For OpenAI audio chat completions, `audioParts` are also captured automatically by [Datadog's LLM integrations](/llm_observability/instrumentation/auto_instrumentation/)—no manual annotation required. Unlike `audioParts`, `imageParts` are not currently captured automatically and must be annotated manually; automatic capture is planned for a future release.
 
 {{% /tab %}}
 {{% tab "Java" %}}
