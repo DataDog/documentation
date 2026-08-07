@@ -26,6 +26,7 @@ To set up a Bits Code automation, each of the following must be true:
 - You have the [`Bits Code Write` (`bits_dev_write`) permission][6] in Datadog.
 - You have completed the Bits Code [setup][2].
 - If you plan to have your automations [output Slack notifications](#slack-message-output), you have set up the [Slack integration][4].
+- If you plan to use [{{< ui >}}Auto-fix CI for pull requests{{< /ui >}}](#pull-or-merge-request-output), you have set up [CI logs in Datadog][8] and enabled [auto-push][9].
 
 ## Create an automation
 You can [create a custom automation](#create-a-custom-automation), or [use a Datadog-provided automation template](#create-an-automation-from-a-template).
@@ -88,7 +89,7 @@ An output defines what Bits Code does after a [session][1] completes. An automat
 You can configure your automation to:
 - {{< ui >}}Create a PR or MR{{< /ui >}}: Open a pull or merge request with the proposed changes
 - {{< ui >}}Draft a PR or MR{{< /ui >}}: Open a draft pull or merge request with the proposed changes
-- {{< ui >}}Auto-fix CI for pull requests{{< /ui >}}: When creating a pull request, use CI logs to fix CI failures automatically; requires [CI logs in Datadog][8] and [auto-push][9]
+- {{< ui >}}Auto-fix CI for pull requests{{< /ui >}}: When creating a pull request, use CI logs to fix CI failures automatically
 
 Datadog administrators can configure pull or merge request authorship through the {{< ui >}}Create pull and merge requests as Bits Code{{< /ui >}} setting in [Bits Code settings][7]. When this setting is enabled, the Bits Code integration identity for the source control provider (for example, the `datadog[bot]` GitHub App account) is the author. When it's disabled, the session creator's connected source control account is the author.
 
