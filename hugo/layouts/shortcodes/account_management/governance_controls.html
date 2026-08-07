@@ -31,7 +31,7 @@
 {{- range $controls }}
 <dt>{{ .name }}</dt>
 <dd>{{ .description }}<br/><br/>
-{{ if .enforcement }}{{ range .enforcement }}<p>Enforcement: {{ . }}</p>
+{{ if .enforcement }}{{ range .enforcement }}<p><strong>Enforcement</strong>: {{ . }}</p>
 {{ end }}{{ else }}<p><em>This control does not support enforcement.</em></p>
 {{ end -}}
 </dd>
