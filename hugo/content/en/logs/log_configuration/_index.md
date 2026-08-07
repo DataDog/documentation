@@ -38,6 +38,10 @@ Datadog Logging without Limits* decouples log ingestion and indexing. Choose whi
 - [Search an archive][12] with Archive Search to query logs in real time directly from storage. Use **Search & Rehydration** mode when you need full platform access or longer retention.
 - Restrict [logs data access][10] with restriction queries.
 
+## Configure Agent log collection
+
+To configure how the Agent detects when a log file rotates or is truncated, see [File Fingerprinting for Log Rotation][13].
+
 ## Log Explorer
 
 Once you've completed configuration, start investigating and troubleshooting logs in the [Log Explorer][11].
@@ -60,3 +64,4 @@ Once you've completed configuration, start investigating and troubleshooting log
 [10]: /logs/guide/logs-rbac/
 [11]: /logs/explorer/
 [12]: /logs/explorer/archive_search/
+[13]: /agent/logs/file_fingerprinting/
