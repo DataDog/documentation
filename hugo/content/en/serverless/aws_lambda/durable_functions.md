@@ -70,7 +70,7 @@ The **Executions** tab on the Lambda function page lists durable executions. Use
 To scope a log query to one function, filter on the function ARN:
 
 ```text
-@lambda.arn:"arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>"
+@lambda.arn:"<FUNCTION_ARN>"
 ```
 
 The Datadog Lambda Extension adds these attributes to a durable function's logs:
@@ -135,7 +135,7 @@ Terminal events are timestamped when the execution finished, so a time range sel
 To scope a span query to one function, filter on the function ARN:
 
 ```text
-@function_arn:"arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>"
+@function_arn:"<FUNCTION_ARN>"
 ```
 
 **The durable execution span**
