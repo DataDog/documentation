@@ -477,10 +477,31 @@
               front_matters:
                 title: Migrate DatadogAgent CRDs to v2alpha1
                 dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/v2alpha1_migration.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/datadog_agent_profiles.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'datadog_agent_profiles.md'
+              front_matters:
+                title: Manage Multiple Agent Configurations with Datadog Agent Profiles
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/datadog_agent_profiles.md"]
+          - action: pull-and-push-file
+            branch: main
+            globs:
+              - 'docs/providers.md'
+            options:
+              dest_path: '/containers/datadog_operator/'
+              file_name: 'providers.md'
+              front_matters:
+                title: Configure Providers with the Datadog Operator
+                dependencies: ["https://github.com/DataDog/datadog-operator/blob/main/docs/providers.md"]
+
 
       - repo_name: helm-charts
         contents:
-          - action: pull-and-push-file 
+          - action: pull-and-push-file
             branch: main
             globs:
               - 'charts/datadog/docs/Migration_Helm_to_Operator.md'
