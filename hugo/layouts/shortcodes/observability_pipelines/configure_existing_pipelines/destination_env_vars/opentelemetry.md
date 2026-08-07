@@ -1,0 +1,5 @@
+- HTTP/S client URI endpoint:
+	- The HTTP/S URI endpoint to which the Worker sends OpenTelemetry data. For example: `http://localhost:4319/v1/metrics`.
+	- The default environment variable is `DD_OP_DESTINATION_OTEL_HTTP_CLIENT_URI`.
+- HTTP/S Client TLS passphrase (when enabled):
+	- The default environment variable is `DD_OP_DESTINATION_OTEL_HTTP_CLIENT_KEY_PASS`.
