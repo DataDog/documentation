@@ -133,9 +133,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (use `X-Datadog-MCP-Toolsets = "all"` to enable all generally available toolsets, best for clients that support tool filtering):
 
-   <pre><code>http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs"}</code></pre>
+   <pre><code>http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs" }</code></pre>
 
 1. Log in to the Datadog MCP Server:
 
@@ -626,7 +626,7 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
 
 The Datadog MCP Server supports _toolsets_, which allow you to use only the [MCP tools][49] you need, saving valuable context window space. To use a toolset, include the `toolsets` query parameter in the endpoint URL when connecting to the MCP Server ([remote authentication](#authentication) only). Use `toolsets=all` to enable all generally available toolsets at once.
 
-<div class="alert alert-info">For the Codex CLI, use the `X-Datadog-MCP-Toolsets` header config described in the previous section, not the query parameter described here.</div>
+<div class="alert alert-info">For the Codex CLI, use the <code>X-Datadog-MCP-Toolsets</code> header described in the <a href="?tab=codex">Codex setup instructions</a>, not the query parameter described here.</div>
 
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 For example, based on your selected [Datadog site][17] ({{< region-param key="dd_site_name" >}}):
