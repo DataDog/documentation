@@ -204,8 +204,6 @@ For example, to graph failed executions for one function:
 sum:aws.lambda.durable_execution_failed{functionname:<FUNCTION_NAME>}.as_count()
 ```
 
-These metrics count whole executions and do not depend on the durable log enrichment described under [Setup](#setup). They come from a different source than `aws.lambda.enhanced.invocations`, which the Datadog Lambda Extension generates per invocation.
-
 ### Correlating logs and traces
 
 The execution name joins the three sources, but its attribute name differs:
