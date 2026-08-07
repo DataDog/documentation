@@ -12,10 +12,10 @@ parser.add_argument('--added', help="A list of added files")
 
 args=parser.parse_args()
 
-comment_template = Template(filename='local/bin/py/preview-links-template.mako')
+comment_template = Template(filename='hugo/local/bin/py/preview-links-template.mako')
 
-pattern1 = re.compile('content/en/(.*?).md')
-pattern2 = re.compile('content/en/glossary/terms/(.*?).md')
+pattern1 = re.compile('(hugo/)?content/en/(.*?).md')
+pattern2 = re.compile('(hugo/)?content/en/glossary/terms/(.*?).md')
 
 # Grab YAML frontmatter from markdown file
 def grab_glossary_title(filename):
@@ -29,9 +29,9 @@ def compile_filename(filename):
     if pattern2.match(filename):
         return grab_glossary_title(filename)
     elif pattern1.match(filename):
+        filename = filename.split('content/en/', 1)[-1]
         filename = filename.replace(
-            'content/en/', ''
-            ).replace('_index', ''
+            '_index', ''
             ).replace('.mdoc', ''
             ).replace('.md', '')
         return filename
