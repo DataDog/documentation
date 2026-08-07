@@ -112,7 +112,7 @@ The events forwarded by the CloudFormation stack arrive as logs, matched by:
 @detail-type:"Durable Execution Status Change"
 ```
 
-The AWS Lambda integration pipeline maps these events onto the same `@lambda.durable_function.*` attributes, plus two timestamps:
+The AWS Lambda integration pipeline maps these events onto the following attributes:
 
 | Log attribute | Description |
 |---|---|
