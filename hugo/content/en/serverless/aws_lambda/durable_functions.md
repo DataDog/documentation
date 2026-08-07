@@ -65,16 +65,6 @@ Create a [trace retention filter][6] with the retention query `operation_name:aw
 
 The **Executions** tab on the Lambda function page lists durable executions. Use the log attributes, span tags, and metrics below to query this data directly, or to build dashboards and monitors.
 
-### Execution identifiers
-
-Logs, traces, and status events all identify an execution by its execution name. Spans carry it inside the execution ARN:
-
-```text
-arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>:<VERSION>/durable-execution/<EXECUTION_NAME>/<EXECUTION_ID>
-```
-
-The execution name is the first segment after `/durable-execution/` and the execution ID is the second. The two are different values, so searching for one in the other's attribute returns no results.
-
 ### Logs
 
 To scope a log query to one function, filter on the function ARN:
