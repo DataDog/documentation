@@ -27,7 +27,7 @@ algolia:
 
 ## Overview
 
-Each metric submitted to Datadog should have a type. A metric's type affects how the metric values are displayed when queried, as well as the associated graphing possibilities within Datadog using additional [modifiers][1] and [functions][2]. A metric's type is displayed on the details side panel for the given metric on the [Metrics Summary page][3].
+A type should be given to each metric that is submitted to Datadog by our users. Note that the type of a metric will affect how the metric values are going to be displayed by Datadog when they are queried, and it is also going to affect the graphing possibilities that are currently available to you when additional [modifiers][1] and [functions][2] are utilized. The type of a metric can be seen in the details side panel that is shown for the given metric on the [Metrics Summary page][3], as illustrated in the screenshot below.
 
 **Note**: Changing the metric type in this details side panel can change metric behavior in all existing visualizations and monitors, potentially rendering historical data as nonsensical.
 
