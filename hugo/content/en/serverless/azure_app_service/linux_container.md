@@ -487,9 +487,7 @@ See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descr
 
 #### Application settings
 
-In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables on your main container and enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
-
-{{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
+In your main container's {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables.
 
 - `DD_API_KEY`: Your [Datadog API key][701]
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
@@ -498,6 +496,10 @@ In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environmen
 - `DD_SERVERLESS_LOG_PATH`: Where you write your logs. For example, `/home/LogFiles/*.log` or `/home/LogFiles/myapp/*.log`
 - `DD_AAS_INSTANCE_LOGGING_ENABLED`: When `true`, log collection is automatically configured for an additional file path: `/home/LogFiles/*$COMPUTERNAME*.log`
 - `DD_AAS_INSTANCE_LOG_FILE_DESCRIPTOR`: An optional file descriptor used for more precise file tailing. Recommended for scenarios with frequent log rotation. For example, setting `_default_docker` configures the log tailer to ignore rotated files and focus only on Azure's active log file.
+
+On the Datadog sidecar container's settings, enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
+
+{{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
 
 
    <div class="alert alert-info">If your application has multiple instances, make sure that your application's log filename includes the <code>$COMPUTERNAME</code> variable. This ensures that log tailing does not create duplicated logs from multiple instances reading the same file.</div>
