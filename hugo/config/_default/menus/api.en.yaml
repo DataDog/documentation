@@ -21059,85 +21059,85 @@ menu:
           - UpsertSyncConfig
         unstable: []
         order: 1
-    - name: Tag Policies
-      url: /api/latest/tag-policies/
-      identifier: tag-policies
+    - name: Tag Rules
+      url: /api/latest/tag-rules/
+      identifier: tag-rules
       generated: true
-    - name: Get a tag policy compliance score
-      url: /api/latest/tag-policies/get-a-tag-policy-compliance-score/
-      identifier: tag-policies-get-a-tag-policy-compliance-score
-      parent: tag-policies
+    - name: Get a tag rule compliance score
+      url: /api/latest/tag-rules/get-a-tag-rule-compliance-score/
+      identifier: tag-rules-get-a-tag-rule-compliance-score
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetTagPolicyScore
+          - GetTagRuleScore
         unstable:
           - v2
         order: 6
-    - name: Update a tag policy
-      url: /api/latest/tag-policies/update-a-tag-policy/
-      identifier: tag-policies-update-a-tag-policy
-      parent: tag-policies
+    - name: Update a tag rule
+      url: /api/latest/tag-rules/update-a-tag-rule/
+      identifier: tag-rules-update-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - UpdateTagPolicy
+          - UpdateTagRule
         unstable:
           - v2
         order: 4
-    - name: Get a tag policy
-      url: /api/latest/tag-policies/get-a-tag-policy/
-      identifier: tag-policies-get-a-tag-policy
-      parent: tag-policies
+    - name: Get a tag rule
+      url: /api/latest/tag-rules/get-a-tag-rule/
+      identifier: tag-rules-get-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - GetTagPolicy
+          - GetTagRule
         unstable:
           - v2
         order: 3
-    - name: Delete a tag policy
-      url: /api/latest/tag-policies/delete-a-tag-policy/
-      identifier: tag-policies-delete-a-tag-policy
-      parent: tag-policies
+    - name: Delete a tag rule
+      url: /api/latest/tag-rules/delete-a-tag-rule/
+      identifier: tag-rules-delete-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - DeleteTagPolicy
+          - DeleteTagRule
         unstable:
           - v2
         order: 5
-    - name: Create a tag policy
-      url: /api/latest/tag-policies/create-a-tag-policy/
-      identifier: tag-policies-create-a-tag-policy
-      parent: tag-policies
+    - name: Create a tag rule
+      url: /api/latest/tag-rules/create-a-tag-rule/
+      identifier: tag-rules-create-a-tag-rule
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - CreateTagPolicy
+          - CreateTagRule
         unstable:
           - v2
         order: 2
-    - name: List tag policies
-      url: /api/latest/tag-policies/list-tag-policies/
-      identifier: tag-policies-list-tag-policies
-      parent: tag-policies
+    - name: List tag rules
+      url: /api/latest/tag-rules/list-tag-rules/
+      identifier: tag-rules-list-tag-rules
+      parent: tag-rules
       generated: true
       params:
         versions:
           - v2
         operationids:
-          - ListTagPolicies
+          - ListTagRules
         unstable:
           - v2
         order: 1
