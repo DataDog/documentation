@@ -5453,6 +5453,36 @@
     "request_description": "",
     "request_schema_description": "The body of a mute rule update request."
   },
+  "ListSecurityFindingsAutomationSeverityModifierRules": {
+    "description": "Get all severity modifier rules for the current organization.",
+    "summary": "Get all severity modifier rules"
+  },
+  "CreateSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Create a new severity modifier rule for the current organization.",
+    "summary": "Create a severity modifier rule",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule create request."
+  },
+  "ReorderSecurityFindingsAutomationSeverityModifierRules": {
+    "description": "Reorder the list of severity modifier rules for the current organization.",
+    "summary": "Reorder severity modifier rules",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule reorder request."
+  },
+  "DeleteSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Delete an existing severity modifier rule by ID.",
+    "summary": "Delete a severity modifier rule"
+  },
+  "GetSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Get the details of a severity modifier rule by ID.",
+    "summary": "Get a severity modifier rule"
+  },
+  "UpdateSecurityFindingsAutomationSeverityModifierRule": {
+    "description": "Update an existing severity modifier rule by ID.",
+    "summary": "Update a severity modifier rule",
+    "request_description": "",
+    "request_schema_description": "The body of a severity modifier rule update request."
+  },
   "ListSecurityFindingsAutomationTicketCreationRules": {
     "description": "Get all ticket creation rules for the current organization.",
     "summary": "Get all ticket creation rules"

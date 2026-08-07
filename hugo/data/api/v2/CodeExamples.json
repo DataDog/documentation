@@ -2259,6 +2259,13 @@
       "description": "Create a security filter returns \"OK\" response"
     }
   ],
+  "CreateSecurityFindingsAutomationSeverityModifierRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Create a severity modifier rule returns \"Successfully created the severity modifier rule\" response"
+    }
+  ],
   "CreateSecurityMonitoringSuppression": [
     {
       "group": "security_monitoring",
@@ -2377,6 +2384,13 @@
       "description": "Reorder mute rules returns \"Successfully reordered the mute rules\" response"
     }
   ],
+  "ReorderSecurityFindingsAutomationSeverityModifierRules": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Reorder severity modifier rules returns \"Successfully reordered the severity modifier rules\" response"
+    }
+  ],
   "ReorderSecurityFindingsAutomationTicketCreationRules": [
     {
       "group": "security_monitoring",
@@ -2462,6 +2476,13 @@
       "group": "security_monitoring",
       "suffix": "",
       "description": "Update a security filter returns \"OK\" response"
+    }
+  ],
+  "UpdateSecurityFindingsAutomationSeverityModifierRule": [
+    {
+      "group": "security_monitoring",
+      "suffix": "",
+      "description": "Update a severity modifier rule returns \"Successfully updated the severity modifier rule\" response"
     }
   ],
   "UpdateSecurityMonitoringSuppression": [
