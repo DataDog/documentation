@@ -204,15 +204,6 @@ For example, to graph failed executions for one function:
 sum:aws.lambda.durable_execution_failed{functionname:<FUNCTION_NAME>}.as_count()
 ```
 
-### Correlating logs and traces
-
-The execution name joins the three sources, but its attribute name differs:
-
-| Concept | Logs and status events | Spans |
-|---|---|---|
-| Execution name | `@lambda.durable_function.execution_name` | `@aws.durable.execution_name` |
-| Execution ID | `@lambda.durable_function.execution_id` | `@aws.durable.execution_id` |
-
 ## Limitations and feedback
 
 Runtimes other than Node.js and Python are not supported. If you encounter an issue with another runtime, open an issue in the [datadog-lambda-extension GitHub repository][7].
