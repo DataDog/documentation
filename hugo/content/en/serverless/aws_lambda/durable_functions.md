@@ -161,17 +161,17 @@ Each invocation also produces the standard `aws.lambda` span, tagged with the du
 
 Each operation called on the durable context produces a child span:
 
-| Operation name | Durable context method |
-|---|---|
-| `aws.durable.step` | `step` |
-| `aws.durable.invoke` | `invoke` |
-| `aws.durable.wait` | `wait` |
-| `aws.durable.wait_for_condition` | `waitForCondition` |
-| `aws.durable.wait_for_callback` | `waitForCallback` |
-| `aws.durable.create_callback` | `createCallback` |
-| `aws.durable.map` | `map` |
-| `aws.durable.parallel` | `parallel` |
-| `aws.durable.child_context` | `runInChildContext` |
+| Operation name | Node.js method | Python method |
+|---|---|---|
+| `aws.durable.step` | `step` | `step` |
+| `aws.durable.invoke` | `invoke` | `invoke` |
+| `aws.durable.wait` | `wait` | `wait` |
+| `aws.durable.wait_for_condition` | `waitForCondition` | `wait_for_condition` |
+| `aws.durable.wait_for_callback` | `waitForCallback` | `wait_for_callback` |
+| `aws.durable.create_callback` | `createCallback` | `create_callback` |
+| `aws.durable.map` | `map` | `map` |
+| `aws.durable.parallel` | `parallel` | `parallel` |
+| `aws.durable.child_context` | `runInChildContext` | `run_in_child_context` |
 
 | Span tag | Description |
 |---|---|
