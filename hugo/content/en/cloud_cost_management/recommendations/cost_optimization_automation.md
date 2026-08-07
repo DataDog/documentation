@@ -8,7 +8,7 @@ further_reading:
 - link: "/cloud_cost_management/recommendations/"
   tag: "Documentation"
   text: "Cloud Cost Recommendations"
-- link: "/cloud_cost_management/recommendations/automated_notifications/"
+- link: "/cloud_cost_management/recommendations/notifications/"
   tag: "Documentation"
   text: "Notifications"
 - link: "/actions/workflows/"
@@ -132,4 +132,4 @@ If you set a recommendation to {{< ui >}}Dismissed{{< /ui >}}, automations skip 
 [5]: /actions/connections/
 [6]: https://app.datadoghq.com/cost/optimize/automations
 [7]: /actions/connections/#connection-groups
-[8]: /cloud_cost_management/recommendations/automated_notifications/
+[8]: /cloud_cost_management/recommendations/notifications/
