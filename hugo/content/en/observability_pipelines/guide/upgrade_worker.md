@@ -27,7 +27,8 @@ Worker version 2.20.4 gives you access to the following:
 
 #### Fixes
 
-- The Splunk TCP source previously enforced a hardcoded maximum frame length of 10,000 bytes, silently rejecting larger events. The source now no longer limits the frame length by default. To prevent unbounded memory consumption, use the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` environment variable to set a maximum frame length.
+- The Splunk TCP source previously enforced a hardcoded maximum frame length of 10,000 bytes, silently rejecting larger events. The source no longer limits the frame length by default. To prevent unbounded memory consumption, use the `DD_OP_SPLUNK_TCP_MAX_FRAME_LENGTH` environment variable to set a maximum frame length.
+
 
 ## Worker version 2.20.3
 
@@ -57,7 +58,8 @@ Worker version 2.20.2 gives you access to the following:
 
 #### Fixes
 
-- Fixed an issue where non-finite (NaN/Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms, could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
+- Fixed an issue where non-finite (NaN or Infinity) gauge, counter delta, histogram delta-sum values, and zero-count histograms could be serialized into malformed OTLP metrics payloads. These values are now dropped before OTLP encoding.
+
 
 ## Worker version 2.20.0
 
