@@ -126,7 +126,7 @@ The AWS Lambda integration pipeline maps these events onto the same `@lambda.dur
 | `@lambda.durable_function.execution_start_time` | When the execution started, in UNIX milliseconds. |
 | `@lambda.durable_function.execution_end_time` | When the execution reached a terminal status, in UNIX milliseconds. |
 
-Treat these events as the source of truth for terminal status. The `END` log reports `FAILED` for an execution that timed out or was stopped. The status change event distinguishes `TIMED_OUT` from `STOPPED`. An execution that times out or is stopped while no runtime is active emits no `END` log, leaving the event as the only record.
+Treat these events as the source of truth for terminal status. An execution that timed out or was stopped may have no `END` or `REPORT` log at all. When it does, that log can report `FAILED` instead of `TIMED_OUT` or `STOPPED`.
 
 A terminal status change event is timestamped from `detail.endTimestamp`, when the execution finished. A time range therefore selects executions that *finished* within it; in-flight executions fall outside it regardless of when they started. To find those, query the `START` logs.
 
