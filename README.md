@@ -2,6 +2,11 @@
 
 Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
 
+> [!IMPORTANT]
+> **Upcoming repo reorg**
+>
+> On August 6, 2026, the `documentation` repo will be reorganized into a monorepo to support a Hugo-to-Astro migration. The resulting conflicts in open PRs will be automatically resolved where possible. We'll declare a code freeze in order to complete this work. See [REPO_REORG.md](REPO_REORG.md) for details.
+
 ## Contribute to the docs
 
 Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request (PR) in this repo for the Documentation team to review. The Documentation team is added as a PR reviewer automatically.
