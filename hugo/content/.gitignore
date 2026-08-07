@@ -115,9 +115,10 @@
 /*/real_user_monitoring/application_monitoring/cpp/setup.md
 /*/real_user_monitoring/application_monitoring/cpp/troubleshooting.md
 /*/observability_pipelines/configuration/install_the_worker/_index.md
+/*/session_replay/_index.md
 /*/session_replay/privacy_options.md
 /*/session_replay/setup_and_configuration.md
 /*/session_replay/troubleshooting.md
 /*/dd_e2e/cdocs/components/stepper_customizable.md
 /*/serverless/azure_container_apps/_index.md
-/*/session_replay/_index.md
+
