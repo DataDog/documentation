@@ -73,6 +73,23 @@ Default: `true`. Set to `false` to disable.
 - **React Native**: `rumIntegrationEnabled`
 - **Unity**: Not exposed
 
+### Use RUM user context for evaluation
+
+For client SDKs that support RUM user context, enabling RUM integration also uses attributes from the current RUM user as defaults for evaluation context:
+
+- The RUM user ID supplies the targeting key when the application evaluation context does not define one.
+- Flat string, number, and Boolean user attributes supply evaluation attributes. Nested objects, arrays, `null`, and other values are excluded rather than flattened.
+- Fields explicitly supplied through the application evaluation context take precedence over fields from the RUM user.
+
+Initialize RUM and set the RUM user before creating the Feature Flags client or provider. This lets the SDK include RUM user attributes in its initial assignment request.
+
+Changing the RUM user after Feature Flags initialization does not automatically update the effective evaluation context. After a login, logout, or account switch:
+
+1. Update the user through the platform's RUM user API.
+2. Trigger an evaluation context update through the platform's Feature Flags API. Reuse the application's explicit evaluation context so those fields remain intact.
+
+The user and context APIs differ by client SDK. Select your platform from the cards at the top of this page for API details. Until the context update completes, the client or provider continues to use the previous effective context for assignment requests, evaluations, and telemetry. On platforms that expose a RUM integration setting, disabling RUM integration also disables RUM user context enrichment.
+
 ## Testing with in-memory providers
 
 Datadog supports these testing approaches:
