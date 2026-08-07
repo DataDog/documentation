@@ -65,10 +65,70 @@ Live Debugger provides:
 Live Debugger supports Python, Java, .NET, Ruby, Node.js, PHP, and Go. It requires:
 
 - The [Datadog Agent][2], version 7.49.0 or higher
-- An installed [Datadog SDK][3] (see the [Enable Live Debugger](#enable-live-debugger) section for minimum SDK versions)
 - [Unified Service Tagging][27] configured with `service`, `env`, and `version` tags on your deployment
 - [Remote Configuration][4] enabled in the Agent
 - (Recommended) [Source Code Integration][28]
+
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
+
+- [Datadog Java SDK][30] version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0 for manual enablement, or 1.48.0 for in-app enablement. Versions below 1.64.0 may result in unexpected errors and a degraded experience.
+
+{% /if %}
+<!-- end Java -->
+
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+
+- [Datadog Python SDK (`ddtrace`)][31] version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0 for manual enablement, or 3.10.0 for in-app enablement. Versions below 4.11.0 may result in unexpected errors and a degraded experience.
+
+{% /if %}
+<!-- end Python -->
+
+<!-- .NET -->
+{% if equals($prog_lang, "dot_net") %}
+
+- [Datadog .NET SDK][32] version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0 for manual enablement, or 3.29.0 for in-app enablement. Versions below 3.46.0 may result in unexpected errors and a degraded experience.
+
+{% /if %}
+<!-- end .NET -->
+
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
+
+- [Datadog Node.js SDK (`dd-trace-js`)][33] version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0 for manual enablement, or 5.84.0 for in-app enablement. Versions below 5.109.0 may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+
+{% /if %}
+<!-- end Node.js -->
+
+<!-- Ruby -->
+{% if equals($prog_lang, "ruby") %}
+
+- [Datadog Ruby SDK (`ddtrace`)][34] version 2.38.0 or higher is strongly recommended. The minimum SDK version is 2.37.0. Versions below 2.38.0 may result in unexpected errors and a degraded experience.
+- Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
+- A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
+- `RAILS_ENV` or `RACK_ENV` set to `production`
+
+{% /if %}
+<!-- end Ruby -->
+
+<!-- PHP -->
+{% if equals($prog_lang, "php") %}
+
+- [Datadog PHP SDK (`dd-trace-php`)][35] version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0. Versions below 1.23.0 may result in unexpected errors and a degraded experience.
+
+{% /if %}
+<!-- end PHP -->
+
+<!-- Go -->
+{% if equals($prog_lang, "go") %}
+
+- [Datadog Go SDK][36] version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line). Go SDK 2.6.0 or higher is required for in-app enablement.
+- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
+- Linux kernel 5.17 or higher
+
+{% /if %}
+<!-- end Go -->
 
 ### Permissions
 
@@ -84,8 +144,6 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Live Debugger
 
-Live Debugger enablement depends on your service's runtime language. Select your language from the dropdown above for enablement instructions and minimum SDK versions.
-
 You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
 **Note**: Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
@@ -97,23 +155,12 @@ You can enable Live Debugger in-app in one of two ways:
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
 
-Either option requires the following minimum SDK version:
-
-| Language | Minimum SDK version |
-|----------|---------------------|
-| Java     | 1.48.0              |
-| Python   | 3.10.0              |
-| .NET     | 3.29.0              |
-| Node.js  | 5.84.0              |
-
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+If your SDK version is lower than the in-app minimum listed in [Requirements](#requirements), or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
 
 {% /if %}
 
 <!-- Java -->
 {% if equals($prog_lang, "java") %}
-
-**SDK version**: [Datadog Java SDK][30] version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
 
@@ -135,8 +182,6 @@ java \
 <!-- Python -->
 {% if equals($prog_lang, "python") %}
 
-**SDK version**: [Datadog Python SDK (`ddtrace`)][31] version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
-
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
 
 ```shell
@@ -154,8 +199,6 @@ ddtrace-run python -m myapp.py
 <!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
 
-**SDK version**: [Datadog .NET SDK][32] version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
-
 Start your service with the following environment variables set:
 
 ```shell
@@ -171,8 +214,6 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 <!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
 
-**SDK version**: [Datadog Node.js SDK (`dd-trace-js`)][33] version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
-
 Start your service with the following environment variables set:
 
 ```shell
@@ -187,16 +228,6 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 
 <!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
-
-Ruby requires manual configuration through environment variables.
-
-**SDK version**: [Datadog Ruby SDK (`ddtrace`)][34] version 2.38.0 or higher is strongly recommended. The minimum SDK version is 2.37.0, but it may result in unexpected errors and a degraded experience.
-
-**Additional requirements:**
-
-- Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
-- A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
-- `RAILS_ENV` or `RACK_ENV` set to `production`
 
 Start your service with the following environment variables set:
 
@@ -215,10 +246,6 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 <!-- PHP -->
 {% if equals($prog_lang, "php") %}
 
-PHP requires manual configuration through environment variables.
-
-**SDK version**: [Datadog PHP SDK (`dd-trace-php`)][35] version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0, but it may result in unexpected errors and a degraded experience.
-
 Start your service with the following environment variables set:
 
 ```shell
@@ -234,14 +261,7 @@ DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 <!-- Go -->
 {% if equals($prog_lang, "go") %}
 
-Go services require enabling Live Debugger in both the Datadog Agent and the application. After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26] (Go SDK 2.6.0 or higher) or through environment variables.
-
-**SDK version**: [Datadog Go SDK][36] version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line).
-
-**Additional requirements:**
-
-- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
-- Linux kernel 5.17 or higher
+Go services require enabling Live Debugger in both the Datadog Agent and the application. After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26] or through environment variables.
 
 **Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
 
@@ -381,7 +401,6 @@ The following constraints apply to Live Debugger usage and configuration:
 
 [1]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [2]: /agent/
-[3]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/
 [4]: /tracing/guide/remote_config
 [11]: /logs/log_configuration/indexes/#exclusion-filters
 [12]: /logs/log_configuration/indexes/#add-indexes
