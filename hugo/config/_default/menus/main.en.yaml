@@ -10712,11 +10712,16 @@ menu:
       url: studio/quickstart/
       parent: studio
       weight: 2
+    - name: Workboard
+      identifier: studio_workboard
+      url: studio/workboard/
+      parent: studio
+      weight: 3
     - name: Core Concepts
       identifier: studio_core_concepts
       url: studio/core_concepts/
       parent: studio
-      weight: 3
+      weight: 4
     - name: How Studio works
       identifier: studio_how_studio_works
       url: studio/core_concepts/how_studio_works/
