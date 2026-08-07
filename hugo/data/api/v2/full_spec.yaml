@@ -39541,34 +39541,10 @@ components:
           description: The operating system version.
           example: "Ubuntu 20.04"
           type: string
-        otel_collector_deployment_types:
-          description: OpenTelemetry collector deployment types associated with the agent.
-          items:
-            description: An OpenTelemetry collector deployment type.
-            type: string
-          type: array
-        otel_collector_distributions:
-          description: OpenTelemetry collector distributions associated with the agent.
-          items:
-            description: An OpenTelemetry collector distribution.
-            type: string
-          type: array
-        otel_collector_versions:
-          description: List of OpenTelemetry collector versions (if applicable).
-          items:
-            description: An OpenTelemetry collector version string.
-            type: string
-          type: array
         otel_collectors:
           description: OpenTelemetry collectors associated with the agent (if applicable).
           items:
             $ref: "#/components/schemas/FleetOtelCollector"
-          type: array
-        otel_resource_attributes:
-          description: OpenTelemetry resource attributes reported by the agent.
-          items:
-            description: An OpenTelemetry resource attribute.
-            type: string
           type: array
         pod_name:
           description: Kubernetes pod name (if applicable).
