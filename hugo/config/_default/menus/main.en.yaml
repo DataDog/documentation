@@ -10293,6 +10293,11 @@ menu:
       parent: organization_settings
       identifier: account_management_org_settings_smtp_configuration
       weight: 309
+    - name: Cross-App Access
+      url: account_management/org_settings/cross_app_access
+      parent: organization_settings
+      identifier: account_management_org_settings_cross_app_access
+      weight: 310
     - name: Access Control
       url: account_management/rbac/
       parent: account_management
