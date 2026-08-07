@@ -80,7 +80,7 @@ The Datadog Lambda Extension adds these attributes to a durable function's logs:
 | `@lambda.durable_function.execution_name` | The execution name. Groups all logs from one execution. |
 | `@lambda.durable_function.execution_id` | The execution ID. |
 | `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
-| `@lambda.durable_function.execution_status` | The execution status, on logs that report one, such as the `END` log. |
+| `@lambda.durable_function.execution_status` | The execution status, on the `END` log, or on the `REPORT` log for executions on Lambda Managed Instances. |
 
 Example queries:
 
@@ -102,7 +102,7 @@ Example queries:
     "END RequestId:" OR "REPORT RequestId:"
     ```
 
-    Only one carries `execution_status`: `END` for most executions, `REPORT` for executions on Lambda Managed Instances, which emit no `END` log.
+    Lambda Managed Instances emit no `END` log, so query both.
 
 - Executions that reached a given terminal status, one of `SUCCEEDED`, `FAILED`, `TIMED_OUT`, or `STOPPED`:
 
