@@ -88,7 +88,7 @@ Changing the RUM user after Feature Flags initialization does not automatically 
 1. Update the user through the platform's RUM user API.
 2. Trigger an evaluation context update through the platform's Feature Flags API. Reuse the application's explicit evaluation context so those fields remain intact.
 
-The user and context APIs differ across Web, Android, Dart/Flutter, iOS, React Native, and Unity. See the client SDK guide for your platform. Until the context update completes, the client or provider continues to use the previous effective context for assignment requests, evaluations, and telemetry. On platforms that expose a RUM integration setting, disabling RUM integration also disables RUM user context enrichment.
+The user and context APIs differ by client SDK. Select your platform from the cards at the top of this page for API details. Until the context update completes, the client or provider continues to use the previous effective context for assignment requests, evaluations, and telemetry. On platforms that expose a RUM integration setting, disabling RUM integration also disables RUM user context enrichment.
 
 ## Testing with in-memory providers
 
