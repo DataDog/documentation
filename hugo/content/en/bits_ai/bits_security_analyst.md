@@ -36,6 +36,7 @@ When you click a row with a Bits AI investigation, the Bits AI Investigation sid
 In the side panel, you can see Bits AI's investigative findings, including:
 - Overall conclusion
 - Key evidence used to come to that conclusion
+- Suggested next steps to remediate the issue, or refine or suppress the detection rule to reduce noise
 - Investigative steps showing Bits AI's data queries, including embedded results and links to full queries
 - Analysis on each investigative step
 
