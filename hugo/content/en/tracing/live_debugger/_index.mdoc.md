@@ -90,33 +90,209 @@ You can disable Live Debugger for a service and environment from the [Live Debug
 
 **Note**: Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
+<!-- Java -->
 {% if equals($prog_lang, "java") %}
-{% partial file="tracing/live_debugger/enabling/java.mdoc.md" /%}
-{% /if %}
 
+You can enable Live Debugger in-app in one of two ways:
+
+- On the [Live Debugger Settings page][26], enable the service and environment.
+- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
+
+Either option requires Datadog Java SDK version 1.48.0 or higher.
+
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+
+**SDK version**: [Datadog Java SDK][30] version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
+
+Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+java \
+    -javaagent:dd-java-agent.jar \
+    -jar <YOUR_SERVICE>.jar
+```
+
+**Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument with the error `Method Parameters detected`.
+
+{% /if %}
+<!-- end Java -->
+
+<!-- Python -->
 {% if equals($prog_lang, "python") %}
-{% partial file="tracing/live_debugger/enabling/python.mdoc.md" /%}
-{% /if %}
 
+You can enable Live Debugger in-app in one of two ways:
+
+- On the [Live Debugger Settings page][26], enable the service and environment.
+- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
+
+Either option requires Datadog Python SDK version 3.10.0 or higher.
+
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+
+**SDK version**: [Datadog Python SDK (`ddtrace`)][31] version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
+
+Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
+
+```shell
+pip install ddtrace
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+ddtrace-run python -m myapp.py
+```
+
+{% /if %}
+<!-- end Python -->
+
+<!-- .NET -->
 {% if equals($prog_lang, "dot_net") %}
-{% partial file="tracing/live_debugger/enabling/dotnet.mdoc.md" /%}
-{% /if %}
 
+You can enable Live Debugger in-app in one of two ways:
+
+- On the [Live Debugger Settings page][26], enable the service and environment.
+- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
+
+Either option requires Datadog .NET SDK version 3.29.0 or higher.
+
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+
+**SDK version**: [Datadog .NET SDK][32] version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+{% /if %}
+<!-- end .NET -->
+
+<!-- Node.js -->
 {% if equals($prog_lang, "node_js") %}
-{% partial file="tracing/live_debugger/enabling/nodejs.mdoc.md" /%}
-{% /if %}
 
+You can enable Live Debugger in-app in one of two ways:
+
+- On the [Live Debugger Settings page][26], enable the service and environment.
+- Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
+
+Either option requires Datadog Node.js SDK version 5.84.0 or higher.
+
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
+
+**SDK version**: [Datadog Node.js SDK (`dd-trace-js`)][33] version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+{% /if %}
+<!-- end Node.js -->
+
+<!-- Ruby -->
 {% if equals($prog_lang, "ruby") %}
-{% partial file="tracing/live_debugger/enabling/ruby.mdoc.md" /%}
-{% /if %}
 
+Ruby requires manual configuration through environment variables.
+
+**SDK version**: [Datadog Ruby SDK (`ddtrace`)][34] version 2.38.0 or higher is strongly recommended. The minimum SDK version is 2.37.0, but it may result in unexpected errors and a degraded experience.
+
+**Additional requirements:**
+
+- Ruby 2.6 or higher (MRI/CRuby only; JRuby is not supported)
+- A Rack-based framework (Rails, Sinatra, or other Rack-compatible frameworks). Background workers (such as Sidekiq or Resque) are not supported.
+- `RAILS_ENV` or `RACK_ENV` set to `production`
+
+Start your service with the following environment variables set:
+
+```shell
+export DD_SERVICE=<YOUR_SERVICE>
+export DD_ENV=<YOUR_ENV>
+export DD_VERSION=<YOUR_VERSION>
+export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+**Note**: Live Debugger initializes on the first HTTP request. Your service must receive at least one request before you can create a logpoint.
+
+{% /if %}
+<!-- end Ruby -->
+
+<!-- PHP -->
 {% if equals($prog_lang, "php") %}
-{% partial file="tracing/live_debugger/enabling/php.mdoc.md" /%}
-{% /if %}
 
-{% if equals($prog_lang, "go") %}
-{% partial file="tracing/live_debugger/enabling/go.mdoc.md" /%}
+PHP requires manual configuration through environment variables.
+
+**SDK version**: [Datadog PHP SDK (`dd-trace-php`)][35] version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0, but it may result in unexpected errors and a degraded experience.
+
+Start your service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
 {% /if %}
+<!-- end PHP -->
+
+<!-- Go -->
+{% if equals($prog_lang, "go") %}
+
+Go services require enabling Live Debugger in both the Datadog Agent and the application. After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26] (Go SDK 2.6.0 or higher) or through environment variables.
+
+**SDK version**: [Datadog Go SDK][36] version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line).
+
+**Additional requirements:**
+
+- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
+- Linux kernel 5.17 or higher
+
+**Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
+
+- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][37].
+
+  ```yaml
+  dynamic_instrumentation:
+    enabled: true
+  ```
+
+- **Environment variable**: Add the following to your Datadog Agent manifest:
+
+  ```text
+  DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+  ```
+
+- **Helm**: Add the following to your Helm chart:
+
+  ```yaml
+  datadog:
+    dynamicInstrumentationGo:
+      enabled: true
+  ```
+
+**Configure your service**: After the Agent is configured, start the service with the following environment variables set:
+
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+{% /if %}
+<!-- end Go -->
 
 #### Enablement modes
 
@@ -237,3 +413,11 @@ The following constraints apply to Live Debugger usage and configuration:
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/
 [29]: /tracing/live_debugger/bits-live-debugger/#start-a-debugging-session
+[30]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[31]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
+[32]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[33]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[34]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
+[35]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
+[36]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[37]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
