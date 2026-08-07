@@ -84,27 +84,25 @@ instances:
 ```
 **Note**: For Agent v7.68 and below, use `schemas_collection` instead of `collect_schemas`.
 
-**Note**: To collect schemas for a table, MySQL requires that the Datadog Agent has SELECT access for it. This is a [MySQL-enforced restriction](https://dev.mysql.com/doc/refman/8.4/en/information-schema-introduction.html#information-schema-privileges). Without SELECT access, the table will not appear in metadata queries.
+**Note**: To collect schemas for a table, MySQL requires that the Datadog Agent holds a privilege on that table. This is a [MySQL-enforced restriction](https://dev.mysql.com/doc/refman/8.4/en/information-schema-introduction.html#information-schema-privileges): a table that the Agent has no privilege on does not appear in metadata queries at all.
 
-The Agent does not use SELECT to access or read your table data. This permission is needed solely to retrieve schema details, due to how MySQL handles metadata visibility.
+Datadog recommends granting the `REFERENCES` privilege. It satisfies MySQL's metadata visibility requirement without granting any ability to read the contents of your tables. The Agent never reads your table data; it only needs your tables to be visible in `INFORMATION_SCHEMA`.
 
-To grant SELECT permissions to a Datadog user, use one or a combination of the following commands:
-- **All databases**:
+Use one or a combination of the following commands:
+- **All databases** (recommended, since databases and tables created later are picked up automatically):
     ```sql
-    GRANT SELECT ON *.* TO datadog@'%';
+    GRANT REFERENCES ON *.* TO datadog@'%';
     ```
 - **Per database basis**:
     ```sql
-    GRANT SELECT ON [database name].* TO datadog@'%';
+    GRANT REFERENCES ON [database name].* TO datadog@'%';
     ```
 - **Per table basis**:
     ```sql
-    GRANT SELECT ON [database name].[table name] TO datadog@'%';
+    GRANT REFERENCES ON [database name].[table name] TO datadog@'%';
     ```
-- **Per column basis**:
-    ```sql
-    GRANT SELECT ([column name1], [column name 2]) ON [database name].[table name] TO datadog@'%';
-    ```
+
+**Note**: Explain plan collection relies on the `explain_statement` procedure being present in each schema you collect from, as described in the setup instructions for your hosting type. With `REFERENCES` in place of `SELECT`, the Agent can no longer run `EXPLAIN` directly as a fallback, so create the procedure in every schema you want explain plans from.
 
 ### Working with hosts through a proxy
 If the Agent must connect through a proxy such as the [Cloud SQL Auth proxy](https://cloud.google.com/sql/docs/mysql/connect-admin-proxy), all telemetry is tagged with the hostname of the proxy rather than the database instance. Use the `reported_hostname` option to set a custom override of the hostname detected by the Agent.
