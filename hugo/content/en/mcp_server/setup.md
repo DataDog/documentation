@@ -133,9 +133,9 @@ Selected endpoint ({{< region-param key="dd_site_name" >}}): <code>{{< region-pa
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+   To enable [product-specific tools](#toolsets), define a header `X-Datadog-MCP-Toolsets` in the `config.toml` file on the line after the URL. For example, this header enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
-   <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
+   <pre><code>http_headers = { "X-Datadog-MCP-Toolsets" = "apm,llmobs"}</code></pre>
 
 1. Log in to the Datadog MCP Server:
 
