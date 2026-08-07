@@ -10,7 +10,7 @@ further_reading:
   text: "Cloud Cost Recommendations"
 - link: "/cloud_cost_management/recommendations/automated_notifications/"
   tag: "Documentation"
-  text: "Automated Notifications"
+  text: "Notifications"
 - link: "/actions/workflows/"
   tag: "Documentation"
   text: "Workflow Automation"
@@ -32,7 +32,7 @@ Recommendations acted on by an automation move to {{< ui >}}Completed{{< /ui >}}
 
 Remediation automations are different from the 1-click Workflow Automation actions described in [Recommendation action-taking][2]. 1-click actions execute a single change on demand from the recommendation side panel. Automations execute on a recurring schedule and act on every matching resource in scope.
 
-Remediation automations are also different from [Automated Notifications][8], which send a recurring Slack summary of matching recommendations but don't take any action.
+Remediation automations are also different from [Notifications][8], which send a recurring Slack summary of matching recommendations but don't take any action.
 
 **Note**: Remediation automations use Datadog Workflows and incur additional costs. For detailed pricing information, see the [Workflow Automation pricing page][3].
 

@@ -1,5 +1,5 @@
 ---
-title: Automated Notifications
+title: Notifications
 description: Set up notification rules that send a recurring Slack summary of Cloud Cost Recommendations matching a scope you define.
 further_reading:
 - link: "/cloud_cost_management/"
