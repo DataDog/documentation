@@ -38,15 +38,16 @@ You can manage your time zone, time format, visual accessibility preference, and
 
 #### Email subscriptions
 
-Under email subscriptions, you have access to the following reports:
+Under email subscriptions, you can enable or disable the following emails:
 {{< site-region region="us3,us5,gov,gov2,ap1,ap2,uk1" >}}
 <div class="alert alert-danger">Email digests are not available in the selected site ({{< region-param key="dd_site_name" >}}).</div>
 {{< /site-region >}}
 
 * Daily Digest
 * Weekly Digest
+* Agent Observability annotation assignments: emails for newly assigned [annotation tasks][17]
 
-If you are unsure if an email digest is relevant to you, you can view an example by clicking the {{< ui >}}Example{{< /ui >}} link next to each email subscription. You can also use the {{< ui >}}Unsubscribe From All{{< /ui >}} button to unsubscribe from all email subscriptions.
+If you are unsure if an email digest is relevant to you, you can view an example by clicking the {{< ui >}}Example{{< /ui >}} link next to each digest subscription. You can also use the {{< ui >}}Unsubscribe From All{{< /ui >}} button to unsubscribe from all email subscriptions.
 {{% /site-region %}}
 
 
@@ -158,3 +159,4 @@ To disable your Datadog organization account, contact [Datadog support][10].
 [14]: https://app.datadoghq.com/personal-settings/apps
 [15]: /account_management/organization_topology/
 [16]: /getting_started/access_for_enterprises/
+[17]: /llm_observability/evaluations/annotation_queues/
