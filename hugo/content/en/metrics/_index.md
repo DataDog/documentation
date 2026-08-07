@@ -16,7 +16,7 @@ cascade:
   Explore and register for Foundation Enablement sessions for custom metrics. Learn how custom metrics help you track your application KPIs, such as the number of visitors, average customer basket size, request latency, or performance distribution for a custom algorithm.
 {{< /learning-center-callout >}}
 
-This is an introduction to Metrics in Datadog and why they're useful. This section includes the following topics: 
+In this section, we will introduce you to Metrics in Datadog and explain why they're useful. Please note that the topics below will walk you through everything that you need in order to utilize metrics, and it is very easy to simply get started with them right away. 
 
 {{< whatsnext desc="Submit metrics to Datadog" >}}
     {{< nextlink href="/metrics/custom_metrics">}}<u>Submit Custom Metrics</u> - Learn what custom metrics are and how to submit them.{{< /nextlink >}}
