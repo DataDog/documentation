@@ -89,7 +89,7 @@ To find replays that need your attention, use the {{< ui >}}All mentions to me{{
 
 ## Extend data retention
 
-By default, Session Replay data is retained for 30 days.
+By default, Session Replay data is retained for 30 days. To set the default retention period for all Session Replays to longer than 30 days, contact your account team.
 
 To extend Session Replay data retention to 15 months, you can enable {{< ui >}}Extended Retention{{< /ui >}} on individual session replays. These sessions must be non-active (the user has completed their experience).
 
@@ -104,8 +104,6 @@ You can disable Extended Retention at any time. If the session replay is still w
 Refer to the below diagram to understand what data is retained with extended retention.
 
 {{< img src="real_user_monitoring/session_replay/replay-extended-retention-1.png" alt="Diagram of what data is retained with extended retention" style="width:100%;" >}}
-
-To set the default retention period for all Session Replays to longer than 30 days, contact your account team.
 
 ## Playback history
 
