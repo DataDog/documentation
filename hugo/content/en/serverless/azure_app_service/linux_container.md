@@ -487,7 +487,7 @@ See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descr
 
 #### Application settings
 
-In your main container's {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables.
+In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables on your main container.
 
 - `DD_API_KEY`: Your [Datadog API key][701]
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
