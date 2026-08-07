@@ -63,7 +63,7 @@ Create a [trace retention filter][6] with the retention query `operation_name:aw
 
 ## Querying durable executions in Datadog
 
-The **Executions** tab on the Lambda function page lists durable executions. Use the queries below to search the underlying logs and traces directly, or to build dashboards and monitors.
+The **Executions** tab on the Lambda function page lists durable executions. Use these queries to search the underlying logs and traces directly, or to build dashboards and monitors.
 
 ### Query reference
 
@@ -78,9 +78,9 @@ The **Executions** tab on the Lambda function page lists durable executions. Use
 | Execution trace | `operation_name:aws.durable.execute` |
 | Execution counts and duration | The `aws.lambda.durable_execution_*` metrics, tagged `functionname` |
 
-### The durable execution ARN and its identifiers
+### Execution identifiers
 
-A durable execution ARN has the following format:
+A durable execution ARN has the format:
 
 ```text
 arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>:<VERSION>/durable-execution/<EXECUTION_NAME>/<EXECUTION_ID>
@@ -88,10 +88,10 @@ arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>:<VERSION>/durable-
 
 | Identifier | Description |
 |---|---|
-| `<EXECUTION_NAME>` | A random UUID that uniquely identifies one durable execution. This is the correlation key across logs and traces. |
-| `<EXECUTION_ID>` | A deterministic, name-based UUID for the same execution. It differs from the execution name. Do not use it to correlate telemetry. |
+| `<EXECUTION_NAME>` | A random UUID identifying one durable execution. The correlation key across logs and traces. |
+| `<EXECUTION_ID>` | A deterministic, name-based UUID for the same execution. It differs from the execution name; do not use it to correlate telemetry. |
 
-One durable execution spans many Lambda invocations. The SDK suspends and resumes the execution across invocations, so every log and span for a single execution shares the same execution name.
+One durable execution spans many Lambda invocations, so every log and span for that execution shares the same execution name.
 
 ### Logs
 
@@ -101,14 +101,14 @@ To scope a log query to one function, filter on the function ARN:
 @lambda.arn:"arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>"
 ```
 
-The Datadog Lambda Extension adds the following attributes to the logs of a durable function:
+The Datadog Lambda Extension adds these attributes to a durable function's logs:
 
 | Log attribute | Description |
 |---|---|
-| `@lambda.durable_function.execution_name` | The execution name. Use this to group all logs from one durable execution. |
+| `@lambda.durable_function.execution_name` | The execution name. Groups all logs from one execution. |
 | `@lambda.durable_function.execution_id` | The execution ID. |
-| `@lambda.durable_function.first_invocation` | `true` on the logs of the first invocation of an execution, `false` otherwise. |
-| `@lambda.durable_function.execution_status` | The execution status. Present on the logs that report a status, such as the `END` log. |
+| `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
+| `@lambda.durable_function.execution_status` | The execution status, on logs that report one, such as the `END` log. |
 
 Example queries:
 
@@ -118,19 +118,19 @@ Example queries:
     @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
     ```
 
-- The `START` log of each execution, which marks when the execution began:
+- Each execution's `START` log, which marks when it began:
 
     ```text
     "START RequestId:" @lambda.durable_function.first_invocation:true
     ```
 
-- The last log of each execution, which marks when the execution ended:
+- Each execution's last log, which marks when it ended:
 
     ```text
     "END RequestId:" OR "REPORT RequestId:"
     ```
 
-    Only one of the two carries `execution_status`: the `END` log for most executions, and the `REPORT` log for executions on Lambda Managed Instances, which emit no `END` log.
+    Only one carries `execution_status`: `END` for most executions, `REPORT` for executions on Lambda Managed Instances, which emit no `END` log.
 
 - Failed executions:
 
@@ -140,13 +140,13 @@ Example queries:
 
 ### Status change events
 
-The events forwarded by the CloudFormation stack arrive as logs with the `@detail-type` attribute set to `Durable Execution Status Change`:
+The events forwarded by the CloudFormation stack arrive as logs with `@detail-type` set to `Durable Execution Status Change`:
 
 ```text
 @detail-type:"Durable Execution Status Change"
 ```
 
-The AWS Lambda integration pipeline maps these events onto the same `@lambda.durable_function.*` attributes as the logs above, plus two timestamps:
+The AWS Lambda integration pipeline maps these events onto the same `@lambda.durable_function.*` attributes, plus two timestamps:
 
 | Log attribute | Description |
 |---|---|
@@ -154,9 +154,9 @@ The AWS Lambda integration pipeline maps these events onto the same `@lambda.dur
 | `@lambda.durable_function.execution_start_time` | When the execution started, in UNIX milliseconds. |
 | `@lambda.durable_function.execution_end_time` | When the execution reached a terminal status, in UNIX milliseconds. |
 
-Treat these events as the source of truth for terminal status. The `END` log reports `FAILED` for an execution that timed out or was stopped. The status change event distinguishes `TIMED_OUT` from `STOPPED`. An execution that times out or is stopped while no runtime is active emits no `END` log at all. The status change event is then the only record.
+Treat these events as the source of truth for terminal status. The `END` log reports `FAILED` for an execution that timed out or was stopped. The status change event distinguishes `TIMED_OUT` from `STOPPED`. An execution that times out or is stopped while no runtime is active emits no `END` log, leaving the event as the only record.
 
-The timestamp of a terminal status change event is the time the execution finished, taken from the event's `detail.endTimestamp`. A time range therefore selects the executions that *finished* within it. Executions still in flight fall outside the range entirely, no matter when they started. To find them, query the `START` logs instead.
+A terminal status change event is timestamped from `detail.endTimestamp`, when the execution finished. A time range therefore selects executions that *finished* within it; in-flight executions fall outside it regardless of when they started. To find those, query the `START` logs.
 
 ### Traces
 
@@ -168,7 +168,7 @@ To scope a span query to one function, filter on `@function_arn`:
 
 **The durable execution span**
 
-The tracer creates one `aws.durable.execute` span per invocation of a durable execution, and stitches the invocations of an execution into a single trace.
+The tracer creates one `aws.durable.execute` span per invocation and stitches an execution's invocations into a single trace.
 
 ```text
 operation_name:aws.durable.execute
@@ -176,13 +176,13 @@ operation_name:aws.durable.execute
 
 | Span tag | Description |
 |---|---|
-| `@aws.durable.execution_arn` | The full durable execution ARN. This span carries no bare execution name, so parse the name out of the ARN: it is the segment after `/durable-execution/`. |
+| `@aws.durable.execution_arn` | The full durable execution ARN. This span carries no bare execution name; parse it from the segment after `/durable-execution/`. |
 | `@aws.durable.invocation_status` | The outcome of the execution: `succeeded`, `failed`, or `pending`. |
 | `@aws.durable.replayed` | `true` when the invocation replayed results from a prior checkpoint. |
 
 **The Lambda invocation span**
 
-Each invocation of a durable function also produces the standard `aws.lambda` span, tagged with the durable execution context:
+Each invocation also produces the standard `aws.lambda` span, tagged with the durable execution context:
 
 | Span tag | Description |
 |---|---|
@@ -209,17 +209,17 @@ Each operation called on the durable context produces a child span:
 
 | Span tag | Description |
 |---|---|
-| `@aws.durable.operation_name` | The name given to the operation. |
+| `@aws.durable.operation_name` | The operation's name. |
 | `@aws.durable.operation_id` | A hash of the operation's step ID. |
-| `@aws.durable.operation_attempt` | The attempt number, on the retryable operations `aws.durable.step` and `aws.durable.wait_for_condition`. It is numeric and counts prior failed attempts, so `0` is the original attempt and `1` is the first retry. |
-| `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed. A checkpoint counts as replayable when it is terminal, which includes a failed operation as well as a successful one. |
+| `@aws.durable.operation_attempt` | The attempt number, on the retryable operations `aws.durable.step` and `aws.durable.wait_for_condition`. It counts prior failed attempts, so `0` is the original attempt and `1` the first retry. |
+| `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed. Failed checkpoints count as well as successful ones. |
 | `@aws.durable.invoke.function_name` | The target function, on `aws.durable.invoke` spans. |
 
-Cross-invocation trace propagation adds synthetic `_datadog_<N>` step operations to your durable execution log. They carry the trace propagation headers. To turn this off, set `DD_DURABLE_CROSS_INVOCATION_TRACING_ENABLED=false`.
+Cross-invocation trace propagation adds synthetic `_datadog_<N>` step operations carrying the trace headers to your durable execution log. To turn it off, set `DD_DURABLE_CROSS_INVOCATION_TRACING_ENABLED=false`.
 
 ### Metrics
 
-AWS publishes the following durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5], not the Datadog Lambda Extension, and are tagged with `functionname`.
+AWS publishes these durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5], not the Datadog Lambda Extension, and are tagged with `functionname`.
 
 | Metric | Description | Aggregation |
 |---|---|---|
@@ -234,17 +234,17 @@ AWS publishes the following durable execution metrics to CloudWatch. They reach 
 | `aws.lambda.approximate_running_durable_executions` | Number of durable executions in the `RUNNING` state. | `avg` |
 | `aws.lambda.approximate_running_durable_executions_utilization` | Percentage of the durable execution quota in use. | `avg` |
 
-For example, to graph the rate of failed executions for one function:
+For example, to graph failed executions for one function:
 
 ```text
 sum:aws.lambda.durable_execution_failed{functionname:<FUNCTION_NAME>}.as_count()
 ```
 
-These metrics count whole executions, so they do not need the durable log enrichment described under [Setup](#setup). They come from a different source than `aws.lambda.enhanced.invocations`, which the Datadog Lambda Extension generates per invocation.
+These metrics count whole executions and do not depend on the durable log enrichment described under [Setup](#setup). They come from a different source than `aws.lambda.enhanced.invocations`, which the Datadog Lambda Extension generates per invocation.
 
 ### Correlating logs and traces
 
-The execution name is the key that joins the three sources, but the attribute name differs by source:
+The execution name joins the three sources, but its attribute name differs:
 
 | Concept | Logs and status events | Spans |
 |---|---|---|
