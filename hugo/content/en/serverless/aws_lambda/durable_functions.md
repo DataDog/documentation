@@ -73,7 +73,7 @@ Logs, traces, and status events all identify an execution by its execution name.
 arn:aws:lambda:<REGION>:<ACCOUNT_ID>:function:<FUNCTION_NAME>:<VERSION>/durable-execution/<EXECUTION_NAME>/<EXECUTION_ID>
 ```
 
-The execution ID is a different value. Both are UUIDs, and correlating on the execution ID returns no matches.
+The execution name is the first segment after `/durable-execution/` and the execution ID is the second. The two are different values, so searching for one in the other's attribute returns no results.
 
 ### Logs
 
