@@ -6098,6 +6098,10 @@ components:
           type: array
         data_source:
           $ref: "#/components/schemas/ListStreamSource"
+        env:
+          description: Filter by APM environment. Usable only with `apm_recommendations_stream`.
+          example: "staging"
+          type: string
         event_size:
           $ref: "#/components/schemas/WidgetEventSize"
         group_by:
@@ -6118,12 +6122,30 @@ components:
           description: Widget query.
           example: "@service:app"
           type: string
+        recommendation_types:
+          description: Filter by recommendation types. Usable only with `apm_recommendations_stream`.
+          items:
+            description: Recommendation type.
+            type: string
+          type: array
+        services:
+          description: Filter by service names. Usable only with `apm_recommendations_stream`.
+          items:
+            description: Service name.
+            type: string
+          type: array
         sort:
           $ref: "#/components/schemas/WidgetFieldSort"
         states:
           description: Filter by issue states. Usable only with `issue_stream`.
           items:
             $ref: "#/components/schemas/ListStreamIssueState"
+          type: array
+        statuses:
+          description: Filter by recommendation statuses. Usable only with `apm_recommendations_stream`.
+          items:
+            description: Recommendation status.
+            type: string
           type: array
         storage:
           description: Option for storage location. Feature in Private Beta.
@@ -6137,6 +6159,12 @@ components:
           type: array
         team_handles:
           description: Filter by team handles. Usable only with `issue_stream`.
+          items:
+            description: Team handle.
+            type: string
+          type: array
+        teams:
+          description: Filter by team handles. Usable only with `apm_recommendations_stream`.
           items:
             description: Team handle.
             type: string
@@ -6166,7 +6194,7 @@ components:
         - EVENT_LIST
     ListStreamSource:
       default: logs_stream
-      description: Source from which to query items to display in the stream. apm_issue_stream, rum_issue_stream, and logs_issue_stream are deprecated. Use issue_stream instead.
+      description: Source from which to query items to display in the stream. apm_issue_stream, rum_issue_stream, and logs_issue_stream are deprecated. Use issue_stream instead. apm_recommendations_stream is used to query APM recommendations, and supports filtering by environment, services, teams, recommendation types, and status.
       enum:
         - logs_stream
         - audit_stream
@@ -6185,6 +6213,7 @@ components:
         - security_runtime_stream
         - security_signals_stream
         - incidents_stream
+        - apm_recommendations_stream
       example: logs_stream
       type: string
       x-enum-varnames:
@@ -6205,6 +6234,7 @@ components:
         - SECURITY_RUNTIME_STREAM
         - SECURITY_SIGNALS_STREAM
         - INCIDENTS_STREAM
+        - APM_RECOMMENDATIONS_STREAM
     ListStreamWidgetDefinition:
       description: |-
         The list stream visualization displays a table of recent events in your application that
