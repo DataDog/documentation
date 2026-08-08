@@ -12,13 +12,15 @@ further_reading:
 
 ## Overview
 
-The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame. This page answers key questions such as:
-- Am I using my existing GPU fleet effectively?
-- How can I better provision these devices to match workload demand?
-- How can I get more value from my existing GPU spend?
+The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highlights unified insights across your on-prem and cloud devices under the selected time frame. This page answers key questions such as:
+- How much of your fleet is being used effectively or sitting completely idle?
+- Which teams, services or clusters are the most wasteful based on idle hours?
+- How can you better provision these devices to match workload demand and quota usage efficiency?
+- What optimization actions can you take to get more value out of your existing GPU fleet?
 
 Click on the section titles below to access the corresponding section:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
@@ -41,7 +43,7 @@ The steps of the funnel are defined as follows:
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-### Understand your GPU spend
+## Cost & Utilization
 
 See your total spend on GPU infrastructure, and identify the subset of those costs that are wasted on idle GPU devices.
 
