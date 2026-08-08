@@ -47,6 +47,8 @@ If you use Kubernetes and have enabled the Kubernetes integration, you'll see ad
 
 ## Cost & Utilization
 
+{{< img src="gpu_monitoring/cost-and-utilization.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
+
 Use this section to help you track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
 
 **Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
