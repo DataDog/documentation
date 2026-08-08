@@ -99,20 +99,6 @@ If you have Kubernetes clusters with a large number of unmet GPU requests, you c
 
 Cost optimization of your GPU workloads is crucial, as GPUs are often the most costly items in a team's infrastructure budget. This section uncovers workloads with inefficient GPU utilization, linking wasted costs to specific workloads and their resource usage.
 
-### Most expensive clusters (Kubernetes required)
-
-**Note**: This section is only available for Kubernetes users.
-
-This table is sorted by {{< ui >}}Total Cost{{< /ui >}}, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
-
-{{< img src="gpu_monitoring/expensive_clusters.png" alt="Table of the most expensive Kubernetes clusters." style="width:90%;" >}}
-
-Click into any of these clusters to investigate the workloads contributing to its costs, by either pods or processes, on the [GPU Fleet page][1]. This opens a side panel with details of that specific cluster and its connected entities.
-
-For example, if you see a related pod with low core utilization, that pod is ineffectively using its associated GPU device. You can then contact the pod owner to terminate the pod or move it to a smaller GPU.
-
-{{< img src="gpu_monitoring/cluster_entities.png" alt="A details side panel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:90%;" >}}
-
 ### Ineffective pods (Kubernetes required)
 
 **Note**: This section is only available for Kubernetes users. 
