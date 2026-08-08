@@ -163,7 +163,7 @@ To review recommendations that need your attention:
 3. Select a recommendation from the list to see a detailed description of the issue.
 4. Review the problem, impact, and Datadog's recommendation for resolving it.
 5. (Optional) To use [Bits Code][3] to generate a code fix, under {{< ui >}}Next Steps{{< /ui >}}, click {{< ui >}}Fix with Bits{{< /ui >}}.
-6. (Optional) To track the fix in Jira or Case Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Case{{< /ui >}}.
+6. (Optional) To track the fix in Jira or Work Management, under {{< ui >}}Triage{{< /ui >}}, click {{< ui >}}Add Jira Ticket{{< /ui >}} or {{< ui >}}Add Work Item{{< /ui >}}.
 
 After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{< /ui >}} dropdown to change the recommendation status to {{< ui >}}REVIEWED{{< /ui >}}, {{< ui >}}IGNORED{{< /ui >}}, or {{< ui >}}RESOLVED{{< /ui >}}.
 

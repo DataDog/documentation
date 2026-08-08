@@ -6,14 +6,14 @@ further_reading:
   text: "ServiceNow integration"
 ---
 
-ServiceNow's ITOM/ITSM integration allows you to send alerts, cases, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
+ServiceNow's ITOM/ITSM integration allows you to send alerts, work items, and incidents generated in Datadog to ServiceNow as records in the Incident or Event tables. The integration relies on interim tables and transform maps.
 
 To use the integration, follow the instructions to install it, and then configure it for each product:
 1. [Configure the ServiceNow tile](#tile)
 1. [Install the ITOM/ITSM integration](#install)
 1. Configure the integration
    1. [Configure Datadog templated monitor notifications](#monitor-notifications)
-   1. [Configure Datadog Case Management](#case-management)
+   1. [Configure Datadog Work Management](#case-management)
    1. [Configure Datadog Incident Management](#incident-management)
 1. [Customize data with transform maps](#transform-maps)
 
@@ -229,23 +229,23 @@ sys_id from the templated handle passed in for user.
 
 {{% /collapse-content %}}
 
-### Configure Datadog Case Management {#case-management}
+### Configure Datadog Work Management {#case-management}
 
 {{% site-region region="gov2" %}}
 <div class="alert alert-warning">
-Case Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
+Work Management integration is not supported in the {{< region-param key=dd_datacenter code="true" >}} site.
 </div>
 {{% /site-region %}}
 
-Send cases from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
+Send work items from Datadog to the Datadog Cases ITSM table in ServiceNow. ServiceNow stores incoming records and uses the installed update set to transform the records in the Incident table. Datadog doesn't support custom payloads for this table.
 
 <div class="alert alert-info">The user configuring the settings in ServiceNow must have both the <code>x_datad_datadog.user</code> and <code>admin</code> roles.</a></div>
 
 1. In Datadog, go to the [ServiceNow integration settings][4] page.
-1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Case Management** tab.
-1. Under **Sync ServiceNow with Case Management**, open the settings for your ServiceNow instance.
-1. Beside **Case Table**, choose to send cases to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Case Management.
-1. Navigate to the [**Case Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
+1. Go to the **Configure** tab, then the **ITOM/ITSM** tab, then the **Work Management** tab.
+1. Under **Sync ServiceNow with Work Management**, open the settings for your ServiceNow instance.
+1. Beside **Case Table**, choose to send work items to **Datadog Cases ITSM**. **Note**: ITOM is not supported for Work Management.
+1. Navigate to the [**Work Management > Settings**][5] page, and expand your project. Then, [set up the ServiceNow integration][6] for that project.
 
 ### Configure Datadog Incident Management {#incident-management}
 
@@ -255,9 +255,9 @@ After installing the integration, in Datadog, go to the [Integration Settings][9
 
 For step-by-step instructions on setting up and configuring this integration for incident management, see [Integrate ServiceNow with Datadog Incident Management][12].
 
-## Sync data bidirectionally between ServiceNow and Case/Incident Management {#sync-bidirectionally}
+## Sync data bidirectionally between ServiceNow and Work/Incident Management {#sync-bidirectionally}
 
-In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Case Management and Incident Management.
+In ServiceNow, you can sync state, impact, and urgency bidirectionally with both Work Management and Incident Management.
 
 **Note**: Data only syncs from ServiceNow back to Datadog if the change is made by a user with the ITIL role who is **not** the user configured in the ServiceNow integration tile in Datadog.
 
@@ -385,7 +385,7 @@ The ServiceNow user needs `rest_service` and `x_datad_datadog.user` roles so tha
 {{% /collapse-content %}}
 
 {{% collapse-content title="No updates from ServiceNow to Datadog" level="h4" expanded=false id="troubleshooting-no-updates" %}}
-If you're seeing updates from Datadog Case Management to ServiceNow, but not seeing updates from ServiceNow to Datadog, this is expected behavior for ServiceNow ITOM. Bidirectional syncing with Case Management is only supported for ServiceNow ITSM.
+If you're seeing updates from Datadog Work Management to ServiceNow, but not seeing updates from ServiceNow to Datadog, this is expected behavior for ServiceNow ITOM. Bidirectional syncing with Work Management is only supported for ServiceNow ITSM.
 {{% /collapse-content %}}
 
 {{% collapse-content title="Monitors duplicating incidents" level="h4" expanded=false id="troubleshooting-monitors-duplicating-incidents" %}}
@@ -402,8 +402,8 @@ Need additional help? Contact [Datadog support][10].
 [2]: /resources/xml/Datadog-Snow_Update_Set_v2.7.9.xml
 [3]: /integrations/servicenow/#configure-the-servicenow-tile-in-datadog
 [4]: https://app.datadoghq.com/integrations?integrationId=servicenow
-[5]: https://app.datadoghq.com/cases/settings
-[6]: /incident_response/case_management/notifications_integrations/#servicenow
+[5]: https://app.datadoghq.com/work/settings
+[6]: /incident_response/work_management/notifications_integrations/#servicenow
 [7]: /account_management/org_settings/service_accounts/#create-or-revoke-application-keys
 [8]: https://docs.servicenow.com/en-US/bundle/sandiego-it-service-management/page/product/incident-management/task/def-prio-lookup-rules.html
 [9]: https://app.datadoghq.com/incidents/settings?section=integrations
