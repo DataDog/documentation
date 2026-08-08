@@ -30,24 +30,26 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 ### GPU fleet funnel visualization
 
+Datadog's GPU Monitoring product provides observability for both on-prem and cloud devices within a single, unified view.
+
 This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
-{{< img src="gpu_monitoring/funnel-3-k8s.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-4.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
-- {{< ui >}}Total{{< /ui >}}: Any GPU device that is sending data during the selected time frame
-- {{< ui >}}Active{{< /ui >}}: How many of your GPU devices are actively used for a workload
-- {{< ui >}}Effective{{< /ui >}}: How many GPU devices are used and working more than 50% of their lifespan
+- {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with Datadog's GPU monitoring correctly configured and reporting metrics
+- {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and busy providing value
+- {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are actively working for more than 50% of the selected time frame
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
 ## Cost & Utilization
 
-See your total spend on GPU infrastructure, and identify the subset of those costs that are wasted on idle GPU devices.
+Use this section to help you track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
 
-**Note**: Total cloud costs from AWS and Google Cloud are calculated over the selected time frame. As this data is only available at a delay, the selected time frame must be greater than or equal to two days. Idle costs are the subset of the total cost attributed to idle GPUs.
+**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
 
 ## Allocation and Provisioning
 
@@ -136,3 +138,7 @@ Zombie processes are often the primary source of wasted GPU spend, as they inapp
 [0]: https://app.datadoghq.com/gpu-monitoring
 [1]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=fleet
 [2]: /infrastructure/process/?tab=linuxwindows
+[3]: /getting_started/integrations/aws/
+[4]: /getting_started/integrations/google_cloud/?tab=orglevel
+[5]: /getting_started/integrations/azure/?tab=createanappregistration
+[6]: /getting_started/integrations/oci/
