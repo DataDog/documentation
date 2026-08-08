@@ -25,9 +25,9 @@ GPU Fleet Explorer gives you visibility from your AI workloads down to the AI in
 
 {{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
 
-Use quick filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
+Use the filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
-You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, with {{< ui >}}Host{{< /ui >}} selected, group by `Team` to view a table entry for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the hosts used by that team and the GPU devices accelerating those hosts.
+You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices by that service.
 
 You can click on the {{< ui >}}>{{< /ui >}} button next to each table row entry to view the group's respective devices.
 
@@ -52,15 +52,15 @@ For each detected issue, Datadog recommends step-by-step remediation actions to 
 
 {{< img src="gpu_monitoring/critical-xid-recommendation.jpg" alt="Recommended remediation actions for a critical XID error" style="width:60%;" >}}
 
-#### Summary Graph
+#### Summary graph
 
-The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Provisioning use case, this breaks down your Provisioned, Allocated, and Active devices so you can reclaim wasted idle spend and rediscover available devices that can be allocated to workloads.
+The summary graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Provisioning use case, this breaks down your Provisioned, Allocated, and Active devices so you can reclaim wasted idle spend and rediscover available devices that can be allocated to workloads.
 
-{{< img src="gpu_monitoring/summary-graph.jpg" alt="Summary Graph showing Provisioned Devices, Allocated Devices, and Active Devices breakdowns" style="width:90%;" >}}
+{{< img src="gpu_monitoring/summary-graph.jpg" alt="Summary graph showing Provisioned Devices, Allocated Devices, and Active Devices breakdowns" style="width:90%;" >}}
 
 Expand this section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Provisioning Summary Graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
+{{% collapse-content title="See full list of Provisioning summary graph options" level="h4" expanded=false id="provisioning-summary-graph-table" %}}
 | Option              | Definition                                                |
 | -------------------- | ---------------------------------------------------------- |
 | Provisioned Devices  | Breakdown of provisioned devices and active devices.       |
@@ -77,15 +77,15 @@ For each detected issue, Datadog recommends step-by-step remediation actions to 
 
 {{< img src="gpu_monitoring/power-cap-recommendation.jpg" alt="Recommended remediation actions for a GPU power cap throttling issue" style="width:60%;" >}}
 
-#### Summary Graph
+#### Summary graph
 
-The Summary Graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Performance use case, this breaks down key resource utilization metrics like GPU Utilization or GPU Saturation alongside network fabric metrics, power, temperature, and more.
+The summary graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Performance use case, this breaks down key resource utilization metrics like GPU Utilization or GPU Saturation alongside network fabric metrics, power, temperature, and more.
 
-{{< img src="gpu_monitoring/summary-graph-performance.jpg" alt="Summary Graph showing GPU Util, GPU Saturation, and GPU Memory breakdowns" style="width:90%;" >}}
+{{< img src="gpu_monitoring/summary-graph-performance.jpg" alt="Summary graph showing GPU Util, GPU Saturation, and GPU Memory breakdowns" style="width:90%;" >}}
 
 Expand the section below to see a table of the available options and what they represent.
 
-{{% collapse-content title="See full list of Performance Summary Graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
+{{% collapse-content title="See full list of Performance summary graph options" level="h4" expanded=false id="performance-summary-graph-table" %}}
 | Option              | Definition                                                                                                                                                                                                              |
 | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | CPU Util            | % of time the CPU spent running user space processes.                                                                                                                                                                 |
@@ -144,9 +144,9 @@ You can click on the gear icon to customize which metrics are displayed within t
 
 Clicking any row in the Fleet table opens a side panel with more details for the selected cluster, host, or device.
 
-### Connected Entities 
+### Connected entities 
 
-Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}Connected Entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}connected entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
 
 **Note**: The {{< ui >}}Pods{{< /ui >}} tab is only available if you're using Kubernetes.
 
@@ -169,11 +169,11 @@ Within this side panel, you have a cluster-specific funnel that identifies:
 
 Within this side panel, you have a host-specific view that identifies:
 
-- Host-related metadata such as provider, instance type, CPU utilization, system memory used, system memory total, system IO util, SM activity, and temperature
+- Host-related metadata such as provider, instance type, CPU utilization, system memory used, system memory total, system I/O util, SM activity, and temperature
 - (only available for Kubernetes users) The specific GPU devices allocated to that host sorted by Graphics Engine Activity
-- Connected Entities of that host: pods, processes, and Slurm jobs
+- Connected entities of that host: pods, processes, and Slurm jobs
 
-{{< img src="gpu_monitoring/host_sidepanel.png" alt="Host specific side panel that displays the GPU devices tied to that host and Connected Entities" style="width:100%;" >}}
+{{< img src="gpu_monitoring/host_sidepanel.png" alt="Host specific side panel that displays the GPU devices tied to that host and connected entities" style="width:100%;" >}}
 
 {{% /tab %}}
 
@@ -184,7 +184,7 @@ Within this side panel, you have a device-specific view that identifies:
 - Recommendations (if any) for how to use this device more effectively 
 - Device-related details: device type, SM activity, and temperature
 - Four key metrics tied to GPUs: SM Activity, Memory Utilization, Power, and Graphics Engine Activity 
-- Connected Entities of that cluster: pods and processes
+- Connected entities of that cluster: pods and processes
 
 {{< img src="gpu_monitoring/device_sidepanel.png" alt="Device specific side panel that displays recommendations for how to use the device more effectively and other key telemetry." style="width:100%;" >}}
 
