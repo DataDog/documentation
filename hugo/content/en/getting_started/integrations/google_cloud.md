@@ -86,7 +86,7 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
 
 **Note**: Your [Google Cloud Identity][408] user account must have the `Admin` role assigned to it at the desired scope to complete the setup in Google Cloud (for example, `Organization Admin`).
 
-{{% collapse-content title="1. Create a Google Cloud service account in the default project" level="h5" %}}
+{{% collapse-content title="1. Create a Google Cloud service account in the default project" level="h4" %}}
 1. Open your [Google Cloud console][401].
 2. Navigate to {{< ui >}}IAM & Admin{{< /ui >}} > {{< ui >}}Service Accounts{{< /ui >}}.
 3. Click {{< ui >}}Create service account{{< /ui >}} at the top.
@@ -96,7 +96,7 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
 [401]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
-{{% collapse-content title="2. Add the service account at the organization or folder level" level="h5" %}}
+{{% collapse-content title="2. Add the service account at the organization or folder level" level="h4" %}}
 1. In the Google Cloud console, go to the {{< ui >}}IAM{{< /ui >}} page.
 2. Select a folder or organization.
 3. To grant a role to a principal that does not already have other roles on the resource, click {{< ui >}}Grant Access{{< /ui >}}, then enter the email of the service account you created earlier.
@@ -118,7 +118,7 @@ Organization-level monitoring is recommended for comprehensive coverage of all p
 [406]: https://cloud.google.com/service-usage/docs/access-control#serviceusage.serviceUsageConsumer
 {{% /collapse-content %}}
 
-{{% collapse-content title="3. Add the Datadog principal to your service account" level="h5" %}}
+{{% collapse-content title="3. Add the Datadog principal to your service account" level="h4" %}}
 **Note**: If you previously configured access using a shared Datadog principal, you can revoke the permission for that principal after you complete these steps.
 
 1. In Datadog, navigate to {{< ui >}}Integrations{{< /ui >}} > [{{< ui >}}Google Cloud Platform{{< /ui >}}][407].
@@ -143,7 +143,7 @@ If you have no configured projects, you are automatically redirected to this pag
 [409]: https://console.cloud.google.com/
 {{% /collapse-content %}}
 
-{{% collapse-content title="4. Complete the integration setup in Datadog" level="h5" %}}
+{{% collapse-content title="4. Complete the integration setup in Datadog" level="h4" %}}
 1. In your Google Cloud console, navigate to the {{< ui >}}Service Account{{< /ui >}} > {{< ui >}}Details{{< /ui >}} tab. On this page, find the email associated with this Google service account. It has the format `<SA_NAME>@<PROJECT_ID>.iam.gserviceaccount.com`.
 2. Copy this email.
 3. Return to the integration configuration tile in Datadog (where you copied your Datadog principal in the previous section).
@@ -281,13 +281,13 @@ To view your metrics, use the left menu to navigate to {{< ui >}}Metrics{{< /ui 
 
 The Google Cloud integration collects all available [Google Cloud metrics][12] from your projects through the Google Cloud Monitoring API. Integrations are installed automatically when Datadog recognizes data being ingested from your Google Cloud account, such as BigQuery.
 
-{{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h5" %}}
+{{% collapse-content title="See the Google Cloud integrations Datadog collects metrics from" level="h4" %}}
 {{% google-cloud-integrations %}}
 {{% /collapse-content %}}
 
 For deep dives into monitoring many of the more popular services, check out the blogs linked below.
 
-{{% collapse-content title="Integration blogs" level="h5" %}}
+{{% collapse-content title="Integration blogs" level="h4" %}}
 [Cloud Armor][20]
 : Google Cloud Armor is a network security service protecting against DDoS and application attacks.
 

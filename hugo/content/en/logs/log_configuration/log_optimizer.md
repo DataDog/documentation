@@ -60,7 +60,7 @@ The change takes effect immediately in your configuration. However, the Log Opti
 
 Additionally, create a ticket to start a review with other teams in your organization. Open a Jira ticket or create a Case with Datadog Case Management. For recommendations that you have addressed, mark them as resolved to hide from the recommendations feed.
 
-{{% collapse-content title="Case Study: Exclude repetitive log data using the Log Optimizer" level="h4" expanded=false %}}
+{{% collapse-content title="Case Study: Exclude repetitive log data using the Log Optimizer" level="h3" expanded=false %}}
 
 {{< img src="/logs/log_configuration/log_optimizer/log_recommendation_side_panel.png" alt="Log Optimizer recommendation side panel showing actions and pattern details" style="width:100%;" >}}
 
