@@ -106,6 +106,11 @@ async function normalize(html: string): Promise<string> {
     '/_astro/$1.HASH.$2',
   );
 
+  // Astro unconditionally injects absolute file paths as component-url attributes
+  // on astro-island elements (for dev tooling / HMR). Strip them so snapshots
+  // are stable across machines.
+  out = out.replace(/\s+component-url="[^"]*"/g, '');
+
   const tokenMap = new Map<string, string>();
   const canonicalize = (raw: string): string => {
     let mapped = tokenMap.get(raw);
