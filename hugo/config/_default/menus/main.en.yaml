@@ -3156,6 +3156,11 @@ menu:
       parent: private_actions
       identifier: authorize_private_actions
       weight: 5
+    - name: Execution Policies
+      url: actions/private_actions/execution_policies/
+      parent: private_actions
+      identifier: execution_policies
+      weight: 6
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
