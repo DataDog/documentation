@@ -2251,7 +2251,7 @@ Renders tabular data as an interactive visualization (sunburst, treemap, or top 
 
 ## Workflows
 
-Tools for [Workflow Automation][39], including listing, inspecting, executing, and configuring workflows for agent use.
+Tools for [Workflow Automation][39], including finding actions, creating and managing workflows, and managing workflow executions.
 
 ### `list_datadog_workflows`
 *Toolset: **workflows***\
@@ -2271,6 +2271,57 @@ Retrieves detailed information about a specific workflow, including its triggers
 - Show me the input parameters and steps for the deployment rollback workflow.
 - What triggers are configured for this workflow?
 
+### `search_datadog_workflow_actions`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Searches the Workflow Automation action catalog. Actions are the building blocks of workflow steps. Find an action ID, then use `get_datadog_workflow_action` to retrieve its schemas.
+
+- Find workflow actions for sending a Slack message.
+- Search for an action that lists Amazon S3 buckets.
+- List the available control-flow actions.
+
+### `get_datadog_workflow_action`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Retrieves the full definition of a Workflow Automation action. The definition includes input and output schemas, keywords, and instructions for building a workflow step.
+
+- Get the definition of the `com.datadoghq.http.request` action.
+- List the required inputs for this workflow action.
+- What outputs does this action return?
+
+### `validate_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Validates a workflow specification and returns any validation errors.
+
+- Validate this workflow specification before creating the workflow.
+- Check whether all of the steps and connections in this workflow are valid.
+
+### `create_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Creates a [Workflow Automation][39] workflow from a workflow specification. Workflows are created as unpublished drafts unless specified otherwise.
+
+- Create a workflow that sends a Slack message when a deployment fails.
+- Create an unpublished incident escalation workflow with these steps.
+
+### `update_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Updates a workflow's name, description, publication status, tags, or specification. Only provided fields are changed.
+
+- Add an agent trigger to the deployment rollback workflow and publish it.
+- Add a notification step to the incident escalation workflow.
+- Update this workflow's tags to include `team:platform`.
+
+### `delete_datadog_workflow`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Write`*\
+Permanently deletes a workflow by ID. This tool requires confirmation before deleting the workflow.
+
+- Delete the obsolete deployment notification workflow.
+- Permanently delete workflow `00000000-0000-0000-0000-000000000000`.
+
 ### `execute_datadog_workflow`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Run`*\
@@ -2280,24 +2331,33 @@ Executes a published workflow that has an agent trigger, with optional input par
 - Execute the deployment rollback workflow for the payments service.
 - Trigger the On-Call notification workflow with the context from this investigation.
 
-**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow_with_agent_trigger` to add one if needed.
+**Note**: The workflow must be published and have an agent trigger configured. Use `update_datadog_workflow` to add a trigger or publish the workflow.
+
+### `list_datadog_workflow_instances`
+*Toolset: **workflows***\
+*Permissions Required: `Workflows Read`*\
+Lists a workflow's execution history. Supports filtering by execution status and returns a summary of each instance.
+
+- List the most recent executions of this workflow.
+- List all failed instances of the deployment workflow.
+- Find the latest successful execution and its instance ID.
 
 ### `get_datadog_workflow_instance`
 *Toolset: **workflows***\
 *Permissions Required: `Workflows Read`*\
-Retrieves the status and details of a workflow execution instance, including step results and outputs.
+Retrieves the status and timestamps of a workflow execution instance. It can also return workflow outputs, the trigger payload, and step details.
 
 - What's the status of the workflow execution I triggered?
 - Did the incident escalation workflow complete successfully?
 - Show me the detailed outputs from workflow instance `00000000-0000-0000-0000-000000000000`.
 
-### `update_datadog_workflow_with_agent_trigger`
+### `cancel_datadog_workflow_instance`
 *Toolset: **workflows***\
-*Permissions Required: `Workflows Write`*\
-Adds an agent trigger to a workflow and publishes it, enabling the workflow to be executed by AI agents.
+*Permissions Required: `Workflows Run`*\
+Cancels a running workflow execution instance. A canceled execution cannot be resumed, but the workflow can be run again.
 
-- Add an agent trigger to the deployment rollback workflow so I can run it from here.
-- Configure the incident response workflow to be triggerable by an agent.
+- Cancel the running deployment workflow execution.
+- Stop workflow instance `00000000-0000-0000-0000-000000000000`.
 
 [1]: /mcp_server/setup#toolsets
 [15]: /api/latest/events/
