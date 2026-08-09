@@ -3146,16 +3146,16 @@ menu:
       parent: private_actions
       identifier: set_up_agent_based
       weight: 2
+    - name: Set Up a Standalone Runner
+      url: actions/private_actions/set_up_standalone/
+      parent: private_actions
+      identifier: set_up_standalone
+      weight: 3
     - name: Run a Script
       url: actions/private_actions/run_script/
       parent: private_actions
       identifier: run_script
       weight: 202
-    - name: Update the Private Action Runner
-      url: actions/private_actions/update_private_action_runner/
-      parent: private_actions
-      identifier: update_private_action_runner
-      weight: 203
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
