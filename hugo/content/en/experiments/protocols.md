@@ -17,7 +17,7 @@ further_reading:
 
 A protocol is a reusable template for experiment setup. It stores the metrics, randomization settings, duration, and statistical analysis plan that your team applies to a type of experiment.
 
-Most teams run the same kinds of experiments over and over. A product team measures the same set of metrics for every feature rollout. A search team tests ranking changes with the same statistical method each time. Protocols capture these choices once. Experimenters then select a protocol instead of configuring each setting again.
+Most teams run the same kinds of experiments repeatedly. A product team measures the same set of metrics for every feature rollout. A search team tests ranking changes with the same statistical method each time. Protocols capture these choices once. Experimenters then select a protocol instead of configuring each setting again.
 
 Use protocols to:
 
@@ -44,7 +44,7 @@ To create a protocol:
 1. (Optional) Enter a {{< ui >}}Description{{< /ui >}} that explains when to use the protocol.
 1. Click {{< ui >}}Create Protocol{{< /ui >}}.
 
-Datadog creates the protocol as a draft and opens its setup page. Continue to [Configure the protocol](#configure-the-protocol).
+Datadog creates the protocol as a draft and opens its setup page. Continue to [Configure the protocol][10].
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_list.png" alt="The Protocols page showing a Create Protocol button, a filter field, a Status filter set to Draft and Published, and a table of 22 protocols with columns for protocol name, status, subject type, primary metric, experiment count, and last updated time. Rows include published protocols such as Pricing and promotions test and Backend migration guardrail, and a draft protocol named Search Engine Optimization." style="width:90%;" >}}
 
@@ -140,7 +140,7 @@ The available triggers are:
 | {{< ui >}}Experiment winner rolled out{{< /ui >}} | A team rolls out the winning variant. |
 | {{< ui >}}Sample size calculator run completed{{< /ui >}} | A sample size calculation finishes. |
 
-Datadog copies these notification settings to each experiment created from the protocol; experimenters can then adjust the recipients. The copy runs in the background, so the settings may take a moment to appear.
+Datadog copies these notification settings to each experiment created from the protocol, and experimenters can then adjust the recipients.
 
 To remove notifications from the protocol, clear all recipients or clear all triggers.
 
@@ -148,7 +148,7 @@ To remove notifications from the protocol, clear all recipients or clear all tri
 
 For guidance on choosing a method, see [Analysis Methods][4].
 
-1. Select a method from the {{< ui >}}Confidence interval method{{< /ui >}} dropdown: {{< ui >}}Sequential{{< /ui >}}, {{< ui >}}Fixed Sample{{< /ui >}}, {{< ui >}}Sequential hybrid{{< /ui >}}, or {{< ui >}}Bayesian{{< /ui >}}.
+1. Select a method from the {{< ui >}}Confidence interval method{{< /ui >}} dropdown: {{< ui >}}Sequential{{< /ui >}}, {{< ui >}}Fixed Sample{{< /ui >}}, {{< ui >}}Sequential Hybrid{{< /ui >}}, or {{< ui >}}Bayesian{{< /ui >}}.
 1. Select a percentage from the {{< ui >}}Confidence level{{< /ui >}} dropdown.
 1. Toggle {{< ui >}}Enable CUPED calculation{{< /ui >}} on or off. [CUPED][5] uses pre-experiment data from each subject to reduce metric variance.
 1. To control the family-wise error rate, toggle on {{< ui >}}Enable multiple testing correction{{< /ui >}}. For details, see [Multiple Testing Correction][6].
@@ -214,7 +214,7 @@ To change a published protocol:
 1. Update the settings.
 1. Click {{< ui >}}Save Changes{{< /ui >}}, or click {{< ui >}}Cancel{{< /ui >}} to discard your edits.
 
-Your changes apply to experiments created after you save. Experiments created earlier keep the settings from the protocol version they were created with.
+Your changes apply to experiments created after you save. Existing experiments keep the settings from the protocol version they used at creation time.
 
 ## Manage protocols
 
@@ -249,3 +249,4 @@ You cannot delete a protocol that experiments reference. Archive it instead.
 [7]: /experiments/metric_property_breakouts
 [8]: https://app.datadoghq.com/product-analytics/experiments
 [9]: /experiments/plan_and_launch_experiments
+[10]: /experiments/protocols/#configure-the-protocol
