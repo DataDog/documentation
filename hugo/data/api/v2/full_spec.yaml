@@ -20397,6 +20397,7 @@ components:
         - times
       type: object
     CompletionCondition:
+      additionalProperties: false
       description: The definition of `CompletionCondition` object.
       properties:
         operand1:
@@ -20440,6 +20441,7 @@ components:
         - OPERATOR_IS_EMPTY
         - OPERATOR_IS_NOT_EMPTY
     CompletionGate:
+      additionalProperties: false
       description: Used to create conditions before running subsequent actions.
       properties:
         completionCondition:
@@ -35895,6 +35897,7 @@ components:
           type: integer
       type: object
     ErrorHandler:
+      additionalProperties: false
       description: Used to handle errors in an action.
       properties:
         fallbackStepName:
@@ -52199,6 +52202,7 @@ components:
         name:
           description: The `InputSchemaParameters` `name`.
           example: ""
+          minLength: 1
           type: string
         type:
           $ref: "#/components/schemas/InputSchemaParametersType"
@@ -79343,11 +79347,13 @@ components:
       properties:
         branchName:
           description: The `OutboundEdge` `branchName`.
-          example: ""
+          example: main
+          minLength: 1
           type: string
         nextStepName:
           description: The `OutboundEdge` `nextStepName`.
-          example: ""
+          example: Step2
+          minLength: 1
           type: string
       required:
         - nextStepName
@@ -80567,6 +80573,7 @@ components:
         name:
           description: The `Parameter` `name`.
           example: ""
+          minLength: 1
           type: string
         value:
           description: The `Parameter` `value`.
@@ -85883,6 +85890,7 @@ components:
         - attributes
       type: object
     ReadinessGate:
+      additionalProperties: false
       description: Used to merge multiple branches into a single branch.
       properties:
         thresholdType:
@@ -88423,6 +88431,7 @@ components:
         - data
       type: object
     RetryStrategy:
+      additionalProperties: false
       description: The definition of `RetryStrategy` object.
       properties:
         kind:
@@ -88431,6 +88440,7 @@ components:
           $ref: "#/components/schemas/RetryStrategyLinear"
       required:
         - kind
+        - linear
       type: object
     RetryStrategyKind:
       description: The definition of `RetryStrategyKind` object.
@@ -88441,17 +88451,21 @@ components:
       x-enum-varnames:
         - RETRY_STRATEGY_LINEAR
     RetryStrategyLinear:
+      additionalProperties: false
       description: The definition of `RetryStrategyLinear` object.
       properties:
         interval:
           description: The `RetryStrategyLinear` `interval`. The expected format is the number of seconds ending with an s. For example, 1 day is 86400s
           example: ""
+          pattern: ^[1-9][0-9]*s$
           type: string
         maxRetries:
           description: The `RetryStrategyLinear` `maxRetries`.
-          example: 0.0
-          format: double
-          type: number
+          example: 0
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
       required:
         - interval
         - maxRetries
@@ -105212,7 +105226,7 @@ components:
           type: string
       type: object
     Spec:
-      description: The spec defines what the workflow does.
+      description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
           description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
@@ -105330,11 +105344,12 @@ components:
         - type
       type: object
     StartStepNames:
-      description: "A list of steps that run first after a trigger fires."
+      description: "Names of existing workflow steps that run first after a trigger fires."
       example:
         - ""
       items:
         description: The `StartStepNames` `items`.
+        minLength: 1
         type: string
       type: array
     State:
@@ -106610,6 +106625,7 @@ components:
         actionId:
           description: The unique identifier of an action.
           example: ""
+          minLength: 1
           type: string
         completionGate:
           $ref: "#/components/schemas/CompletionGate"
@@ -106626,9 +106642,10 @@ components:
         name:
           description: Name of the step.
           example: ""
+          minLength: 1
           type: string
         outboundEdges:
-          description: A list of subsequent actions to run.
+          description: A list of subsequent actions to run. This list is empty for a terminal step.
           items:
             $ref: "#/components/schemas/OutboundEdge"
           type: array
@@ -106644,7 +106661,9 @@ components:
         - actionId
       type: object
     StepDisplay:
-      description: The definition of `StepDisplay` object.
+      description: |-
+        The position of a step on the workflow canvas. Omit `display` from every step to use
+        automatic layout, or provide it for every step to preserve a manual layout.
       properties:
         bounds:
           $ref: "#/components/schemas/StepDisplayBounds"
@@ -120264,7 +120283,7 @@ components:
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
         workflowTrigger:
-          description: "Trigger a workflow from the Datadog UI. Only required if no other trigger exists."
+          description: "Trigger a workflow from the Datadog UI. When present, this must be the workflow's only trigger."
           type: object
       required:
         - workflowTrigger
