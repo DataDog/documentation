@@ -40,12 +40,12 @@ To validate languages other than JavaScript, or to validate the full Prevention,
 
 ## Set up validation
 
-Configure the following three settings for the repository. Scope the service features, quarantine policy, and PR gate to the validation service, branch, and repository so your default branches and existing services stay untouched:
+Configure the following three settings for the repository. Use the validation service, branch, and repository as their respective scopes so your default branches and existing services stay untouched:
 
 1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can create this service entry before any tests have reported data under that name.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
-   - Disable [Test Impact Analysis][13].
+   - Disable [Test Impact Analysis][13] so it does not skip the validation test.
 2. Enable [Flaky Test Policies][6], then create a quarantine policy with a branch rule for `validate-test-optimization`.
 3. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
@@ -63,7 +63,7 @@ Create the validation branch:
 git checkout -b validate-test-optimization
 ```
 
-<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Do not create another branch between sections.</div>
+<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase relies on the flaky test state Datadog recorded on this branch in the previous phase, so do not create another branch between sections.</div>
 
 ## Prevention
 
@@ -230,7 +230,12 @@ Click the failing GitHub check and confirm that the test is included in the list
 
 {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, `@test.retry_reason:early_flake_detection`, and `@test.test_management.is_new_flaky:true`.
+In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query uses the following filters:
+
+- `@test.name:*flaky*validation*`
+- `@git.branch:validate-test-optimization`
+- `@test.retry_reason:early_flake_detection`
+- `@test.test_management.is_new_flaky:true`
 
 ## Mitigation
 
@@ -287,7 +292,7 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
    ```java
    @Test
    void flakyValidationTest() {
-       // intentionally empty — the test passes
+       // intentionally empty - the test passes
    }
    ```
 
