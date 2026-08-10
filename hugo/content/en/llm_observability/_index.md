@@ -113,6 +113,10 @@ Outlier detection is performed across key dimensions:
 
 These outliers are analyzed over the past week and automatically surfaced in the corresponding time window selected by the user. This enables teams to proactively detect regressions, performance drifts, or unexpected behavior in their LLM applications.
 
+In an Agent Insight's **Next Steps**, use the **Triage** area to track follow-up work in Jira or Linear. Create a Linear issue or Jira ticket, or link an existing one. After you create or link a work item, the link remains accessible from the Insight. Jira and Linear actions do not change the Insight's status or the other tracker.
+
+To create or link Linear issues or Jira tickets, configure Jira or Linear in [Case Management notifications and integrations][11]. Case Management read access is required to view linked work items. Case Management read and write access is required to create or link them.
+
 {{< img src="llm_observability/Overview_LLMO.png" alt="An 'Insights' banner across the top of the Agent Observability Monitor page. The banner displays 8 insights and has a View Insights button that leads to a side panel with further details." style="width:100%;" >}}
 
 ## Use integrations with Agent Observability
@@ -141,3 +145,4 @@ See the [Setup documentation][5] for instructions on instrumenting your LLM appl
 [8]: /llm_observability/setup/auto_instrumentation
 [9]: /llm_observability/evaluations/managed_evaluations
 [10]: /llm_observability/monitoring/patterns
+[11]: /incident_response/case_management/notifications_integrations
