@@ -107,7 +107,7 @@ The `rum.measure.operation.duration` metric uses nanoseconds. Multiply seconds b
 Replace `<LATENCY_THRESHOLD_NS>` with the threshold in nanoseconds, then configure the following events:
 
 - **Good events** include successful operations at or below the threshold.
-- **Bad events** include successful operations and abandoned operations above the threshold.
+- **Bad events** include successful and abandoned operations above the threshold.
 
 Use this raw query for good events:
 
@@ -143,7 +143,7 @@ Validate the SLOs after you create them:
 1. Confirm that the good and bad event queries do not overlap.
 2. Verify that all queries use the same operation scope, filters, and groups.
 3. Compare SLO event counts with the operation volume on the {{< ui >}}Operations{{< /ui >}} page.
-4. Review [timed-out operations][6]. A high timeout rate can indicate that some application paths start an operation without recording its end.
+4. Review [timed-out operations][6] (see the note under **Parallelization**). A high timeout rate can indicate that some application paths start an operation without recording its end.
 5. Confirm that the latency threshold uses nanoseconds and represents an acceptable completion time for the operation.
 
 ## Further reading

@@ -2,10 +2,9 @@
 title: Best Practices for Setting Up RUM Operations
 description: Learn how to define RUM operations that generate reliable availability and latency metrics for journeys.
 further_reading:
-# TODO: Replace this placeholder after the next guide is created.
-- link: '#'
+- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
   tag: 'Guide'
-  text: 'Next guide'
+  text: 'Best practices for creating SLOs on RUM operations'
 - link: '/real_user_monitoring/operations_monitoring/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
@@ -45,21 +44,21 @@ Use the Datadog API to create operations in bulk after you determine which exist
 
 ### Measure application-controlled work
 
-Define an operation around a technical step that your application performs and that users expect to complete quickly and reliably. For example, an operation might measure the time required to load search results or submit a form. Slow or failed operations can frustrate users and prevent them from completing the journey.
+Define an operation around a technical step that your application performs and that users expect to complete reliably. For example, an operation might measure the time required to load search results or submit a form. Slow or failed operations can frustrate users and prevent them from completing the journey.
 
 Exclude time spent waiting for user input, such as reading content or deciding what to select. User-controlled time increases the measured latency even when the application performs as expected, making it harder to identify application performance issues.
 
 ### Keep the timeout rate at or below 1%
 
-Each operation must have a recorded start and end. The end indicates whether the operation succeeded or failed. If RUM records the start but not the corresponding end, the [operation times out][4], and Datadog cannot determine its outcome. A high timeout rate makes availability metrics less reliable and can indicate incomplete instrumentation.
+Each operation must have a recorded start and end. The end indicates whether the operation succeeded or failed. If RUM records the start but not the corresponding end, the [operation times out][4] (see the note under **Parallelization**), and Datadog cannot determine its outcome. A high timeout rate makes availability metrics less reliable and can indicate incomplete instrumentation.
 
 ### Link operations to journeys
 
 Link an operation to a journey when you create it so that the operation contributes to the journey's status. Linking is optional during operation creation, and you can later link the operation to additional journeys or remove existing links.
 
-### Create SLOs to your journey
+### Create SLOs for your journey
 
-For a full breakdown of this, visit this guide <-link will be inserted->
+For a full breakdown, see [Best practices for creating SLOs on RUM operations][7].
 
 ### Prioritize the final operation in a journey
 
@@ -87,3 +86,4 @@ Use the following tools to investigate unexpected operation outcomes or verify t
 [4]: /real_user_monitoring/operations_monitoring/?tab=browser#parallelization
 [5]: /real_user_monitoring/ai_investigations/operation_ai_investigation/
 [6]: /real_user_monitoring/explorer/
+[7]: /real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/
