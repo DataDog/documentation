@@ -73,7 +73,7 @@ The rule remains inactive until the scheduled time arrives, at which point it ac
 
 <div class="alert alert-info">
 
-If the flag is disabled in the environment, a message indicates that you must enable the flag before the scheduled rollout for it to take effect.
+If the flag is disabled in the environment, a message appears. Enable the flag before the scheduled rollout for it to take effect.
 
 </div>
 
