@@ -5,9 +5,6 @@ further_reading:
 - link: "/feature_flags/concepts/targeting_rules"
   tag: "Documentation"
   text: "Targeting Rules and Filters"
-- link: "/feature_flags/concepts/evaluation_tester"
-  tag: "Documentation"
-  text: "Evaluation Tester"
 - link: "/feature_flags/concepts/environments"
   tag: "Documentation"
   text: "Environments"
@@ -17,7 +14,7 @@ further_reading:
 
 A **targeting attribute** is a reusable definition for a value your application sends in its evaluation context, such as `country` or `user_role`. Defining an attribute once lets you reuse it across targeting rules with autocomplete suggestions and type-aware operators, instead of retyping the attribute name and manually picking a compatible operator every time.
 
-Each targeting attribute has:
+Each targeting attribute includes the following:
 
 - **Attribute key**: The identifier you reference in targeting rules, for example `country` or `user.plan`. Keys are unique within your organization and are case-sensitive.
 - **Data type**: `Boolean`, `String`, `Number`, or `Semver`. The data type determines which operators are available when you use the attribute in a targeting rule.
@@ -37,7 +34,7 @@ For each attribute, configure:
 
 - **Attribute key**: A short, descriptive identifier. Datadog automatically removes unsupported characters when you save.
 - **Data type**: Choose Boolean, String, Number, or Semver.
-- **Which SDKs include this attribute in their evaluation context?**: Choose Client and Server, Client Only, or Server Only.
+- **Distribution channel (which SDKs include this attribute in their evaluation context?)**: Choose Client and Server, Client Only, or Server Only.
 - **Description** (optional): Add context so other users know what the attribute represents and how it's populated.
 
 You can't create two attributes with the same key in your organization. Archiving an attribute (instead of deleting it) removes it from future autocomplete suggestions, but doesn't change any targeting rules that already reference it.
@@ -52,7 +49,7 @@ When you build a filter on a targeting rule and start typing in the attribute fi
 
 {{< img src="feature_flags/concepts/targeting-attributes-autocomplete.png" alt="Attribute field in a targeting rule showing autocomplete suggestions and a Create new attribute option." style="width:70%;" >}}
 
-Creating an attribute this way saves it to your organization's catalog with the **Client and Server** distribution channel and no data type set. Edit the attribute afterward from **Settings** > **Targeting Attributes** to set its data type.
+Creating an attribute this way saves it to your organization's catalog with the **Client and Server** distribution channel and no data type. You can leave the data type unset, or edit the attribute from **Settings** > **Targeting Attributes** to set one later.
 
 Click **View all attributes** above the filter to go to the Targeting Attributes settings page.
 
