@@ -10102,26 +10102,31 @@ menu:
       parent: pa_experiments_metrics
       identifier: pa_experiments_metric_sync
       weight: 1
+    - name: Standardize Experiments with Protocols
+      url: experiments/protocols
+      parent: pa_experiments
+      identifier: pa_experiments_protocols
+      weight: 2
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
       parent: pa_experiments
       identifier: pa_experiments_plan
-      weight: 2
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 4
+      weight: 5
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 5
+      weight: 6
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10146,7 +10151,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 6
+      weight: 7
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10176,7 +10181,7 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 6
+      weight: 8
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
