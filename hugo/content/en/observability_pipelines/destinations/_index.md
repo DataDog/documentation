@@ -106,8 +106,10 @@ The following table lists the destinations and fields that support template synt
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
-| Prometheus        | Tenant ID                           | The Worker drops the metric.                                                                                                |
+| Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
+
+*The template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}`, is rejected.
 
 #### Example
 

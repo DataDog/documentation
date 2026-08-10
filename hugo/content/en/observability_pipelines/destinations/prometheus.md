@@ -36,7 +36,7 @@ Enter the default namespace for any metrics sent. This namespace is only used if
 
 #### Tenant ID
 
-Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must start with a static prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. A template that doesn't start with a static prefix, such as `{{ tenant_id }}`, is rejected.
+Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. A template that doesn't have a literal prefix, such as `{{ tenant_id }}`, is rejected.
 
 #### Enable TLS
 
