@@ -2956,6 +2956,11 @@ menu:
       parent: workflows
       identifier: workflows_limits
       weight: 11
+    - name: Workflow Automation MCP Tools
+      url: actions/workflows/mcp_tools/
+      parent: workflows
+      identifier: workflows_mcp_tools
+      weight: 12
     - name: Apps
       url: actions/datadog_apps/
       pre: dev-code
