@@ -32,7 +32,7 @@ After you select the Prometheus destination in the pipeline UI:
 
 #### Default namespace
 
-Enter the default namespace for any metrics sent. This namespace is only used if a metric has no existing namespace and is used as a prefix to the metric name, separated by an underscore (`_`). It should follow the Prometheus naming conventions.
+Enter the default namespace for any metrics sent. This namespace is only used if a metric has no existing namespace. It is added as a prefix to the metric name, separated by an underscore (`_`). The namespace must follow the Prometheus naming convention.
 
 #### Tenant ID
 
@@ -41,7 +41,7 @@ Enter the tenant ID to add to outgoing requests. This field supports [template s
 #### Enable TLS
 
 {{% observability_pipelines/tls_settings %}}
-- (Optional) Enter the server name to use for certificate validation with Server Name Indication (SNI). If left blank, the hostname from the endpoint URL is used.
+- (Optional) Enter the server name to use for certificate validation. If left blank, the hostname from the endpoint URL is used.
 
 #### Buffering
 
