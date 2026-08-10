@@ -1,0 +1,23 @@
+{
+  "filter": {
+    "query": "source:python"
+  },
+  "name": "testPipelineArrayMapArithmetic",
+  "processors": [
+    {
+      "type": "array-map-processor",
+      "is_enabled": true,
+      "name": "double counts",
+      "source": "items",
+      "target": "out",
+      "processors": [
+        {
+          "type": "arithmetic-processor",
+          "expression": "$sourceElem.count * 2",
+          "target": "$targetElem.doubled"
+        }
+      ]
+    }
+  ],
+  "tags": []
+}

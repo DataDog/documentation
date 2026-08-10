@@ -1,0 +1,30 @@
+{{- $title := .Title | default .Params.title | default .Site.Params.meta_title -}}
+{{- $description := .Description | default .Params.description | default .Site.Params.meta_description -}}
+{{- $lang := cond (eq .Site.Language.Lang "en") "en-US" .Site.Language.Lang -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "name": "{{ $title | safeJS }}",
+  "headline": "{{ $title | safeJS }}",
+  "description": "{{ $description | safeJS }}",
+  "inLanguage": "{{ $lang | safeJS }}",
+  "isFamilyFriendly": true,
+  "url": "{{ .Permalink | safeJS }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ .Permalink | safeJS }}"
+  },
+  "author": { "@id": "https://www.datadoghq.com/#organization" },
+  "publisher": { "@id": "https://www.datadoghq.com/#organization" }
+  {{- with .Date }},
+  "datePublished": "{{ .UTC.Format "2006-01-02T15:04:05Z" }}"
+  {{- end }}
+  {{- with .Lastmod }},
+  "dateModified": "{{ .UTC.Format "2006-01-02T15:04:05Z" }}"
+  {{- end }}
+  {{- if gt .WordCount 0 }},
+  "wordCount": {{ .WordCount }}
+  {{- end }}
+}
+</script>

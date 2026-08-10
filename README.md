@@ -2,6 +2,11 @@
 
 Welcome to the Datadog documentation repository. The markdown stored in this repo is published to the [Datadog documentation site][17] using [hugo][1], a static website generation tool.
 
+> [!IMPORTANT]
+> **Upcoming repo reorg**
+>
+> On August 6, 2026, the `documentation` repo will be reorganized into a monorepo to support a Hugo-to-Astro migration. The resulting conflicts in open PRs will be automatically resolved where possible. We'll declare a code freeze in order to complete this work. See [REPO_REORG.md](REPO_REORG.md) for details.
+
 ## Contribute to the docs
 
 Contributions are encouraged! If you notice something on one of the pages that needs an edit, open a pull request (PR) in this repo for the Documentation team to review. The Documentation team is added as a PR reviewer automatically.
@@ -15,7 +20,7 @@ For more information on contributing, see the [contribution guidelines][18].
 >[!NOTE]
 >**AI and content quality**
 >
->The docs team are huge fans of AI tools like Claude Code and use them to generate content all the time. That said, we will always rely on human review to ensure that the content we publish continues to meet the high standard for quality we set for ourselves. If you submit a large AI-generated PR, remember that it takes time for us to think through how people take in and use information, and plan your timelines accordingly so we can give your PR the attention it deserves.
+>The docs team are huge fans of AI tools like Claude Code and use them to generate content all the time. That said, we will always rely on human review to ensure that the content we publish continues to meet the high standard for quality we set for ourselves. If you submit a large AI-generated PR, remember that it takes time for us to think through how people take in and use information. It helps us if you can validate your content independently before submitting it, and plan your timelines accordingly so we can give your PR the attention it deserves.
 
 ## Working on Docs
 
