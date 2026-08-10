@@ -9,6 +9,7 @@ import { realpathSync } from "node:fs";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
 import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
+import { deriveSiteUrl } from "./src/lib/site/siteUrl.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
@@ -21,16 +22,8 @@ const astroSite = fileURLToPath(new URL(".", import.meta.url));
 const proxied = process.env.PROXIED === "1";
 const proxyPort = 1314;
 
-function deriveSiteUrl() {
-  const env = process.env.CI_ENVIRONMENT_NAME;
-  if (env === "preview") {
-    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
-  }
-  if (env === "live") {
-    return "https://docs.datadoghq.com";
-  }
-  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:4321";
-}
+// `deriveSiteUrl` lives in src/lib/site/siteUrl.ts so routes (llms.txt tree)
+// can share the exact origin this config sets as Astro's `site`.
 
 // The Hugo docs site may be on a different origin than the Astro site in local
 // dev (Hugo: 1313, Astro: 4321). In CI and proxied dev they share an origin.

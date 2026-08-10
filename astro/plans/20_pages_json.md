@@ -357,19 +357,44 @@ Run the full `yarn test-ai` once at the end for regressions.
   not run the prod build here) and confirm `dist/client/pages.json` exists, is
   valid JSON, and every key ends in `.md`.
 
-## Related llms.txt fixes
+## llms.txt: rebuilt on the same page-source registry (implemented)
 
-Tracked here because they share the privacy/page-source concerns. `llms.txt` today
-is `src/pages/llms.txt.ts` + `src/lib/api/llmsTxtRenderer.ts`, driven directly by
-`getCategoriesView()` (API-only) with no filtering beyond skipping empty
-categories. The user expects llms.txt to change, so these are correctness fixes,
-not a redesign.
+`llms.txt` is now driven by the shared `PlaintextPageSource` registry — not
+`getCategoriesView()` directly — so page enumeration and the privacy filter are
+shared with `pages.json`.
 
-1. **Private pages must never appear in llms.txt.** No active leak today (no API
-   page is private), but once content sources with `private` frontmatter exist,
-   the renderer must drop `isPrivate` pages. Cleanest long-term: rebuild llms.txt
-   on the same page-source registry so the privacy filter is shared with
-   pages.json rather than duplicated.
+**Sections are first-class on the source.** `PlaintextPageSource` gained
+`title`, `listRootPages()`, and `listSections()`. A `PlaintextSection` is
+`{ title, llmsTxtPath, pages }` — the unit of chunking + indexing for llms.txt.
+The API source uses **one section per category** (each section = the category
+overview page + its operation pages); landing + the three static pages are
+`rootPages`. `pages.json` ignores sections and flattens everything (via
+`collectPages`).
+
+**Tree output, mirroring Hugo's `writeLlmsTxtTree` (`corp-node-packages`).**
+`buildLlmsTree(sources, siteOrigin, hardCharLimit=50_000)` in
+`src/lib/pagesListing/llmsTree.ts` produces:
+
+- **Index** at `/llms.txt`: intro + per-source `## {title}` heading, listing
+  root pages (direct `.md` links) and one link per section to its detail file.
+- **Detail file** per section at `section.llmsTxtPath`
+  (`/api/latest/{category}/llms.txt`): `# {title}` + a bullet per page.
+- **Splitting**: a detail file over `hardCharLimit` becomes an index of
+  numbered `part_N/llms.txt` files. Dormant today — the largest single category
+  is ~29K chars (< 50K) — but exercised by unit tests and guarded by an
+  integration test asserting no generated file exceeds the limit.
+
+Routes: `src/pages/llms.txt.ts` (index) and the catch-all
+`src/pages/[...llmsSection]/llms.txt.ts` (detail + parts). The detail route's
+`getStaticPaths` rebuilds the tree with `deriveSiteOrigin()` (extracted to
+`src/lib/site/siteUrl.ts`, shared with `astro.config.mjs`) so build-time paths
+match the per-request `site.origin` and split boundaries agree. A browser test
+confirms both routes resolve through Astro's router (not shadowed by
+`[...slug].astro`).
+
+**Private pages are dropped everywhere in llms.txt** (index + detail), and a
+section left empty by the filter is omitted entirely. No active leak today (no
+API page is private); the filter is in place before any private content flows in.
 
 ## Out of scope / follow-ups
 
@@ -381,9 +406,13 @@ not a redesign.
   key). Astro's file is standalone for now. When blended, note the current Hugo
   aggregator schema is `.strict()` and expects `htmlHash`/`astIsValid`; the blend
   step (or a relaxed schema) handles the difference. Not building that now.
-- **llms.txt** — deliberately not aligned to. The user expects llms.txt to change;
-  the route-based build pattern (from `plans/11_llms_txt.md`) is reused, its schema
-  expectations are not.
+- **llms.txt tree at web root** — the section detail files live under Astro's own
+  `/api/latest/{category}/llms.txt`, so they don't collide with Hugo's own
+  `llms.txt` tree. The top-level `/llms.txt` index, however, shares the web-root
+  path with Hugo's — same precedence concern as `pages.json`, resolve before a
+  shared-origin deploy.
+- **Sitemap** — the new `…/llms.txt` files are not excluded from the sitemap
+  (`isSitemapPage`); revisit if they should be.
 - **Non-English locales** — excluded now; add locale entries by looping `LOCALES`
   in the API source if/when translated API plaintext is wanted.
 ```

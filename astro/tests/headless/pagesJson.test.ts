@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { PagesListingSchema } from "@lib/pagesListing/schema";
-import { apiPageSource } from "@lib/pagesListing/apiPageSource";
+import { collectPages } from "@lib/pagesListing/collectPages";
+import { pageSources } from "@lib/pagesListing/pageSources";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 
 import { GET as pagesJsonGET } from "../../src/pages/pages.json.ts";
@@ -40,7 +41,7 @@ describe("GET /pages.json", () => {
     const op = cat.operations[0];
 
     // What the API source hashes:
-    const pages = await apiPageSource.listPages();
+    const pages = await collectPages(pageSources);
     const opPage = pages.find(
       (p) => p.urlPath === `/api/latest/${cat.slug}/${op.slug}.md`,
     )!;

@@ -1,78 +1,87 @@
 import { describe, it, expect, vi } from 'vitest';
-import type { PlaintextPage } from '@lib/pagesListing/types';
+import type { PlaintextPage, PlaintextPageSource } from '@lib/pagesListing/types';
 
-const pages: PlaintextPage[] = [
-  {
-    urlPath: '/api/latest.md',
-    metadata: { title: 'API Reference', description: 'Reference docs.', breadcrumbs: ['Docs'], isPrivate: false },
+function page(
+  urlPath: string,
+  title: string,
+  extra: Partial<PlaintextPage['metadata']> = {},
+): PlaintextPage {
+  return {
+    urlPath,
+    metadata: { title, description: '', breadcrumbs: ['Docs'], isPrivate: false, ...extra },
     buildBody: async () => '',
-  },
-  {
-    urlPath: '/api/latest/action-connection.md',
-    metadata: { title: 'Action Connection', description: '', breadcrumbs: ['Docs', 'API Reference'], isPrivate: false },
-    buildBody: async () => '',
-  },
-  {
-    urlPath: '/api/latest/action-connection/get-a-connection.md',
-    metadata: {
-      title: 'Get a connection',
-      description: 'Get the connection.',
-      breadcrumbs: ['Docs', 'API Reference', 'Action Connection'],
-      isPrivate: false,
+  };
+}
+
+const source: PlaintextPageSource = {
+  title: 'API Reference',
+  listRootPages: async () => [
+    page('/api/latest.md', 'API Reference', { description: 'Reference docs.' }),
+  ],
+  listSections: async () => [
+    {
+      title: 'Metrics',
+      llmsTxtPath: '/api/latest/metrics/llms.txt',
+      pages: [
+        page('/api/latest/metrics.md', 'Metrics', { description: 'Metric endpoints.' }),
+        page('/api/latest/metrics/get-a-metric.md', 'Get a metric', { description: 'Fetch a metric.' }),
+        page('/api/latest/metrics/secret.md', 'Secret op', { isPrivate: true }),
+      ],
     },
-    buildBody: async () => '',
-  },
-  {
-    urlPath: '/api/latest/action-connection/secret-op.md',
-    metadata: {
-      title: 'Secret op',
-      description: '',
-      breadcrumbs: ['Docs', 'API Reference', 'Action Connection'],
-      isPrivate: true,
-    },
-    buildBody: async () => '',
-  },
-];
+  ],
+};
 
-vi.mock('@lib/pagesListing/pageSources', () => ({
-  pageSources: [{ listPages: vi.fn(async () => pages) }],
-}));
+vi.mock('@lib/pagesListing/pageSources', () => ({ pageSources: [source] }));
 
-const { GET } = await import('../../src/pages/llms.txt.ts');
+const { GET: indexGET } = await import('../../src/pages/llms.txt.ts');
+const { GET: detailGET } = await import('../../src/pages/[...llmsSection]/llms.txt.ts');
 
-describe('GET /llms.txt', () => {
-  const ctx = { site: new URL('https://docs.datadoghq.com') } as Parameters<typeof GET>[0];
+const SITE = new URL('https://docs.datadoghq.com');
 
-  it('returns text/plain with utf-8', async () => {
-    const res = (await GET(ctx)) as Response;
+describe('GET /llms.txt (index)', () => {
+  const ctx = { site: SITE } as Parameters<typeof indexGET>[0];
+
+  it('returns text/plain and starts with the intro heading', async () => {
+    const res = (await indexGET(ctx)) as Response;
     expect(res.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
+    const body = await res.text();
+    expect(body.startsWith('# Datadog documentation\n')).toBe(true);
   });
 
-  it('starts with the top-level heading', async () => {
-    const res = (await GET(ctx)) as Response;
-    const body = await res.text();
-    expect(body.startsWith('# Datadog Documentation\n\n')).toBe(true);
-  });
-
-  it('groups by breadcrumb and links to each page .md', async () => {
-    const res = (await GET(ctx)) as Response;
-    const body = await res.text();
+  it('lists the source heading, root pages, and section links', async () => {
+    const body = await ((await indexGET(ctx)) as Response).text();
     expect(body).toContain('## API Reference\n');
-    expect(body).toContain('## API Reference > Action Connection\n');
-    expect(body).toMatch(
-      /- \[Get a connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\/get-a-connection\.md\): Get the connection\./,
-    );
-  });
-
-  it('excludes private pages', async () => {
-    const res = (await GET(ctx)) as Response;
-    const body = await res.text();
-    expect(body).not.toContain('Secret op');
-    expect(body).not.toContain('secret-op.md');
+    expect(body).toContain('- [API Reference](https://docs.datadoghq.com/api/latest.md): Reference docs.');
+    expect(body).toContain('- [Metrics](https://docs.datadoghq.com/api/latest/metrics/llms.txt): Metric endpoints.');
   });
 
   it('throws when site is not configured', async () => {
-    const noSite = {} as Parameters<typeof GET>[0];
-    await expect(async () => await GET(noSite)).rejects.toThrow(/site/);
+    const noSite = {} as Parameters<typeof indexGET>[0];
+    await expect(async () => await indexGET(noSite)).rejects.toThrow(/site/);
+  });
+});
+
+describe('GET /{section}/llms.txt (detail)', () => {
+  const call = (llmsSection: string) =>
+    detailGET({ params: { llmsSection }, site: SITE } as unknown as Parameters<typeof detailGET>[0]);
+
+  it('serves a section detail file with its pages', async () => {
+    const res = (await call('api/latest/metrics')) as Response;
+    expect(res.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
+    const body = await res.text();
+    expect(body.startsWith('# Metrics\n')).toBe(true);
+    expect(body).toContain('- [Metrics](https://docs.datadoghq.com/api/latest/metrics.md)');
+    expect(body).toContain('- [Get a metric](https://docs.datadoghq.com/api/latest/metrics/get-a-metric.md): Fetch a metric.');
+  });
+
+  it('excludes private pages from the detail file', async () => {
+    const body = await ((await call('api/latest/metrics')) as Response).text();
+    expect(body).not.toContain('Secret op');
+    expect(body).not.toContain('secret.md');
+  });
+
+  it('404s for an unknown section', async () => {
+    const res = (await call('api/latest/does-not-exist')) as Response;
+    expect(res.status).toBe(404);
   });
 });

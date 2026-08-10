@@ -29,7 +29,11 @@ function page(
 }
 
 function source(pages: PlaintextPage[]): PlaintextPageSource {
-  return { listPages: async () => pages };
+  return {
+    title: "Test",
+    listRootPages: async () => pages,
+    listSections: async () => [],
+  };
 }
 
 describe("buildPagesListing", () => {

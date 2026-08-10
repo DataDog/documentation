@@ -1,14 +1,19 @@
 /**
  * The API plaintext page source.
  *
- * Enumerates every English API `.md` page — the landing page, the three static
- * special pages, each category page, and each operation page — and provides the
- * metadata plus a `buildBody` that reuses the same shared builders the `.md`
- * routes serve. API docs carry no privacy concept, so `isPrivate` is always
- * `false`; content sources added later read `private` from frontmatter.
+ * Root pages are the landing page and the three static special pages. Sections
+ * are the API categories: each section holds its category overview page plus one
+ * page per operation, and becomes its own detail `llms.txt`. Every `buildBody`
+ * reuses the shared builders the `.md` routes serve. API docs carry no privacy
+ * concept, so `isPrivate` is always `false`; content sources added later read
+ * `private` from frontmatter.
  */
 
-import type { PlaintextPage, PlaintextPageSource } from "./types";
+import type {
+  PlaintextPage,
+  PlaintextPageSource,
+  PlaintextSection,
+} from "./types";
 import type { PageMetadata } from "./schema";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
@@ -123,25 +128,33 @@ async function operationPage(
   };
 }
 
-async function listApiPages(): Promise<PlaintextPage[]> {
+async function listRootPages(): Promise<PlaintextPage[]> {
+  const categories = await getCategoriesView(LANG);
+  return [landingPage(categories), ...staticSpecialPages()];
+}
+
+async function listSections(): Promise<PlaintextSection[]> {
   const categories = await getCategoriesView(LANG);
 
-  const pages: PlaintextPage[] = [
-    landingPage(categories),
-    ...staticSpecialPages(),
-  ];
-
+  const sections: PlaintextSection[] = [];
   for (const category of categories) {
-    pages.push(categoryPage(category));
+    const pages: PlaintextPage[] = [categoryPage(category)];
     for (const operation of category.operations) {
       const page = await operationPage(category, operation);
       if (page) pages.push(page);
     }
+    sections.push({
+      title: category.name,
+      llmsTxtPath: `/api/latest/${category.slug}/llms.txt`,
+      pages,
+    });
   }
 
-  return pages;
+  return sections;
 }
 
 export const apiPageSource: PlaintextPageSource = {
-  listPages: listApiPages,
+  title: API_REFERENCE,
+  listRootPages,
+  listSections,
 };
