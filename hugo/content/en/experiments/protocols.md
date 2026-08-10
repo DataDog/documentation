@@ -98,7 +98,7 @@ Metric groups organize related metrics on the experiment results page.
 
 Set how Datadog splits traffic for experiments created from this protocol.
 
-1. Select an {{< ui >}}Environment{{< /ui >}} from the dropdown.
+1. (Optional) Select an {{< ui >}}Environment{{< /ui >}} from the dropdown.
 1. (Optional) Under {{< ui >}}Targeting rules{{< /ui >}}, add filters to limit the experiment audience by custom attributes, such as user role or subscription tier.
 1. Under {{< ui >}}Traffic exposure{{< /ui >}}, set the percentage of matching users to include in the experiment. You can also define rollout steps to ramp traffic up over time.
 1. (Optional) Toggle on {{< ui >}}Require splitting traffic equally between variants{{< /ui >}}. This records that experiments created from the protocol should use an equal variant split.
