@@ -12,7 +12,7 @@ further_reading:
 
 ## Overview
 
-The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highlights unified insights across your on-prem and cloud devices under the selected time frame. This page answers key questions such as:
+The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highlights unified insights across your on-premises and cloud devices for the selected time frame. This page answers key questions such as:
 - How much of your fleet is being used effectively or sitting completely idle?
 - Which teams, services, or clusters are the most wasteful based on idle hours?
 - How can you better provision these devices to match workload demand and quota usage efficiency?
@@ -30,7 +30,7 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 ### GPU fleet funnel visualization
 
-Datadog GPU Monitoring provides observability for both on-prem and cloud devices within a single, unified view.
+Datadog GPU Monitoring provides observability for both on-premises and cloud devices within a single, unified view.
 
 This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
@@ -41,7 +41,7 @@ The funnel also highlights any performance issues or provisioning inefficiencies
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
 - {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and are providing value
-- {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are actively working for more than 50% of the selected time frame
+- {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are working for more than 50% of the selected time frame
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
@@ -49,11 +49,11 @@ If you use Kubernetes and have enabled the Kubernetes integration, you'll see ad
 
 {{< img src="gpu_monitoring/cost-and-utilization.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
 
-Use this section to help you track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
+Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
 
 **Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
 
-Click on either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can additionally break these down by key tags like service or cluster over the time frames of 1 week, 1 month, or 3 months. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click on any entity to open it in the [Fleet Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Fleet Explorer][1] page to shut down pods or resize your cluster.
+Click on either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags like service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click on any entity to open it in the [Fleet Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Fleet Explorer][1] page to shut down pods or resize your cluster.
 
 ## Allocation and Provisioning
 
