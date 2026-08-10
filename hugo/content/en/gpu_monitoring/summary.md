@@ -14,7 +14,7 @@ further_reading:
 
 The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highlights unified insights across your on-prem and cloud devices under the selected time frame. This page answers key questions such as:
 - How much of your fleet is being used effectively or sitting completely idle?
-- Which teams, services or clusters are the most wasteful based on idle hours?
+- Which teams, services, or clusters are the most wasteful based on idle hours?
 - How can you better provision these devices to match workload demand and quota usage efficiency?
 - What optimization actions can you take to get more value out of your existing GPU fleet?
 
