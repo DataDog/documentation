@@ -43,6 +43,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | AI provider | Setup method |
 |---|---|
 | Amazon Bedrock | [AWS integration][2] |
+| Amazon SageMaker | [AWS integration][2] |
 | Anthropic   | [SaaS integration][3] |
 | Azure Foundry Models   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
