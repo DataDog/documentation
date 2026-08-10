@@ -175,7 +175,7 @@ observability_pipelines_worker:
 
 **Note**: If the Worker is listening for logs or metrics on ports 8282 or 8383, you must use another port for traces, such as 8484.
 
-After you [restart the Agent][2], your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
+After you [restart the Agent][2], your observability data is sent to the Worker, processed by the pipeline, and delivered to Datadog.
 
 [1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
