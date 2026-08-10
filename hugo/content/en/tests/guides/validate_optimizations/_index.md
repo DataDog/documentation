@@ -26,7 +26,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 ## Validate locally with a coding agent
 
-Local coding agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package.
+Local coding agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
 
 Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility, supported advanced features, and CI configuration without changing Datadog settings or sending validation results to Datadog.
 
@@ -63,7 +63,7 @@ Create the validation branch:
 git checkout -b validate-test-optimization
 ```
 
-Use this branch for all three validation phases.
+<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Do not create another branch between sections.</div>
 
 ## Prevention
 
@@ -260,86 +260,84 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 1. In [Flaky Test Management][9], open the quarantined validation test.
 2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated key (it starts with `DD_`).
 
-{{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
+   {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
 
 3. Replace the flaky test with the passing version for your language:
 
-{{< tabs >}}
-{{% tab "JavaScript" %}}
+   {{< tabs >}}
+   {{% tab "JavaScript" %}}
 
-```javascript
-test('flaky validation test', () => {
-    expect(true).toBe(true);
-});
-```
+   ```javascript
+   test('flaky validation test', () => {
+       expect(true).toBe(true);
+   });
+   ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+   {{% /tab %}}
+   {{% tab "Python" %}}
 
-```python
-def test_flaky_validation_test():
-    assert True
-```
+   ```python
+   def test_flaky_validation_test():
+       assert True
+   ```
 
-{{% /tab %}}
-{{% tab "Java" %}}
+   {{% /tab %}}
+   {{% tab "Java" %}}
 
-```java
-@Test
-void flakyValidationTest() {
-    // intentionally empty — the test passes
-}
-```
+   ```java
+   @Test
+   void flakyValidationTest() {
+       // intentionally empty — the test passes
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Ruby" %}}
+   {{% /tab %}}
+   {{% tab "Ruby" %}}
 
-```ruby
-it 'flaky validation test' do
-  expect(true).to be(true)
-end
-```
+   ```ruby
+   it 'flaky validation test' do
+     expect(true).to be(true)
+   end
+   ```
 
-{{% /tab %}}
-{{% tab ".NET" %}}
+   {{% /tab %}}
+   {{% tab ".NET" %}}
 
-```csharp
-[Fact]
-public void FlakyValidationTest()
-{
-    Assert.True(true);
-}
-```
+   ```csharp
+   [Fact]
+   public void FlakyValidationTest()
+   {
+       Assert.True(true);
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Go" %}}
+   {{% /tab %}}
+   {{% tab "Go" %}}
 
-```go
-func TestFlakyValidationTest(t *testing.T) {
-}
-```
+   ```go
+   func TestFlakyValidationTest(t *testing.T) {
+   }
+   ```
 
-{{% /tab %}}
-{{% tab "Swift" %}}
+   {{% /tab %}}
+   {{% tab "Swift" %}}
 
-```swift
-func testFlakyValidationTest() {
-    XCTAssertTrue(true)
-}
-```
+   ```swift
+   func testFlakyValidationTest() {
+       XCTAssertTrue(true)
+   }
+   ```
 
-{{% /tab %}}
-{{< /tabs >}}
+   {{% /tab %}}
+   {{< /tabs >}}
 
 4. Commit the fix with the generated key in the commit body. Replace `<DD_KEY>` with the key you copied:
 
-```bash
-git add -A
-git commit -m "Fix flaky validation test
-
-<DD_KEY>"
-git push origin validate-test-optimization
-```
+   ```bash
+   git add -A
+   git commit -m "Fix flaky validation test" -m "<DD_KEY>"
+   git push origin validate-test-optimization
+   ```
 
 5. Wait for CI to finish, then confirm the following results:
 
