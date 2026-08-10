@@ -63,7 +63,7 @@ Find failures and their causes across your organization. Click a situation to op
 To be notified when delivery degrades, create an [Audit Trail monitor][15] on these events:
 
 - Alert when the number of `email_bounced` or `email_dropped` events crosses a threshold over a rolling window.
-- Alert when any monitor alert notification is dropped or bounces.
+- Alert when any monitor alert notification is dropped or bounced.
 
 **Note**: Removing an email suppression is not self-serve. After you identify the dropped email events, see [Email suppressions][3] to have the address cleared.
 

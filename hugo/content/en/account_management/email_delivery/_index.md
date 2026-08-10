@@ -16,7 +16,7 @@ further_reading:
 
 Datadog sends email for critical workflows such as user invitations, account verifications, password resets, scheduled reports, and monitor alert notifications. Email Delivery gives organization administrators visibility into what happens to those messages after they leave Datadog, so you can confirm an email was delivered, monitor and investigate failures, and set up your organization to receive Datadog mail reliably.
 
-This guide is for administrators who manage users, alerting, and email workflows in a Datadog organization.
+This documentation is for administrators who manage users, alerting, and email workflows in a Datadog organization.
 
 ## Prerequisites
 
@@ -30,7 +30,7 @@ This guide is for administrators who manage users, alerting, and email workflows
 | [How Email Delivery Works][4]       | Delivery outcomes, bounces, and suppressions explained |
 | [Monitoring Email Delivery][5]      | Reading the dashboard and alerting on failures         |
 | [Troubleshooting Email Delivery][6] | Diagnosing and resolving a failed email                |
-| [Setting Up Reliable Delivery][7]     | Trusted sender and sender authentication setup         |
+| [Setting Up Reliable Delivery][7]   | Trusted sender and sender authentication setup         |
 
 Start with [How Email Delivery Works][4] to understand delivery outcomes, then use [Monitoring Email Delivery][5] to see them in your organization.
 
