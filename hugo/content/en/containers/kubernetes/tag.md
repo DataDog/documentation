@@ -883,7 +883,7 @@ kubernetesResourcesLabelsAsTags:
 
 </div>
 
-Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace. Starting with Agent/Cluster Agent 7.70+, this also applies to `kubernetes_state.*` (KSM) metrics: namespace labels are attached as tags to any namespaced KSM metric, for example `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), since that's normally where the KSM check runs:
+Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace. Starting with Agent or Cluster Agent v7.70+, this also applies to `kubernetes_state.*` (KSM) metrics. Namespace labels are attached as tags to any namespaced KSM metric, for example `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), which is where the KSM check runs:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
