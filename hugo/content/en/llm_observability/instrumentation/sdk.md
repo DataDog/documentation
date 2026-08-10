@@ -1289,7 +1289,7 @@ getRelevantDocs = llmobs.wrap({ kind: 'retrieval' }, getRelevantDocs)
 
 ## Nesting spans
 
-Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it.
+Starting a new span before the current span is finished automatically traces a parent-child relationship between the two spans. The parent span represents the larger operation, while the child span represents a smaller nested sub-operation within it. For Node.js traces, Agent Observability associates each span beneath an agent span with its nearest ancestor agent span. In multi-agent traces, Agent Observability associates a nested agent span with its enclosing agent span and associates the nested agent's descendants with the nested agent.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2987,7 +2987,7 @@ def server_process_request(request):
 {{% /tab %}}
 {{% tab "Node.js" %}}
 
-The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, but you can disable them optionally with:
+The `dd-trace` library provides out-of-the-box integrations that support distributed tracing for popular [web frameworks][1]. Requiring the tracer automatically enables these integrations, so spans in downstream instrumented services stay associated with their nearest ancestor agent span in Agent Observability. Optionally, disable these integrations with:
 
 {{< code-block lang="javascript">}}
 const tracer = require('dd-trace').init({
