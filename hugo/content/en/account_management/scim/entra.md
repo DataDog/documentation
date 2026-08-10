@@ -59,15 +59,13 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 {{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click {{< ui >}}Test Connection{{< /ui >}}, and wait for the message confirming that the credentials are authorized to enable provisioning.
-6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears.
-
-## Configure app roles
-
-Before configuring attribute mapping, define an app role in the Microsoft Entra app registration for each Datadog role you want to provision. Assign the relevant users or groups to those app roles. Set each app role's **Value** to the corresponding Datadog role UUID. Do not use the Datadog role name or SAML role claim value. You can find a role's UUID in the role's URL on your [Organization Settings][11] page. For configuration instructions, see [Microsoft's app-role documentation][12].
+6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears. See the following section to configure mapping.
 
 ## Attribute mapping
 
 ### User attributes
+
+Before configuring attribute mapping, define an app role in the Microsoft Entra app registration for each Datadog role you want to provision. Assign the relevant users or groups to those app roles. Set each app role's **Value** to the corresponding Datadog role UUID. Do not use the Datadog role name or SAML role claim value. You can find a role's UUID in the role's URL on your [Organization Settings][11] page. For configuration instructions, see [Microsoft's app-role documentation][12].
 
 1. Expand the {{< ui >}}Mappings{{< /ui >}} section
 2. Click {{< ui >}}Provision Azure Active Directory Users{{< /ui >}}. The Attribute Mapping page appears.
