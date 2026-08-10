@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add tags to your logs, spans, trace metrics, and data jobs (more telemetry coming soon) without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
+Use tag enrichment rules to add tags to your logs, APM spans, trace metrics, and Data Jobs Monitoring (DJM) telemetry without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
 
 ## Prerequisites
 
