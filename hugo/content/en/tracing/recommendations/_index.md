@@ -169,6 +169,16 @@ After you've reviewed the recommendation, you can use the {{< ui >}}FOR REVIEW{{
 
 **Note**: On the [APM Home page][5], the {{< ui >}}Watchdog{{< /ui >}} and {{< ui >}}Error Tracking{{< /ui >}} sections also respect the selected service filter (or your personalized services when no filter is set), matching how recommendations are scoped. When a service is selected and no alerts or issues match, the section shows an empty state with a {{< ui >}}Clear filter{{< /ui >}} button, and the Error Tracking {{< ui >}}View all{{< /ui >}} link is pre-filtered to that service.
 
+## Viewing recommendations on a dashboard
+
+Add a List widget with APM Recommendations as its data source to review recommendations alongside your team's performance metrics.
+
+{{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="A List widget configured with APM Recommendations as the data source, showing recommendations by priority, service, summary, issue, and status" style="width:100%;" >}}
+
+1. On any dashboard, create a new widget and select {{< ui >}}List{{< /ui >}} as the visualization.
+2. Select {{< ui >}}APM Recommendations{{< /ui >}} as the data source.
+3. Filter by environment, service, team, recommendation type, and status.
+
 ## Supported recommendations
 
 <!-- The table below is auto-generated. Add new entries in multifiltersearch with new recommendations as they become available. -->
