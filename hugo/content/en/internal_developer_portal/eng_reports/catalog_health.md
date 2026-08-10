@@ -30,7 +30,7 @@ Access the Catalog Health report by navigating to **Reports** in your Internal D
 
 {{< img src="tracing/eng_reports/catalog-health-landing.png" alt="Default view of the Catalog Health report, showing the summary information section" style="width:100%;" >}} 
 
-## Interact with your Catalog Health Report 
+## Interact with your Catalog Health report 
 
 ### Adjust your view
 
