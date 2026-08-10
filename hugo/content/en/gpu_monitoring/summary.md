@@ -40,7 +40,7 @@ The funnel also highlights any performance issues or provisioning inefficiencies
 
 The steps of the funnel are defined as follows:
 - {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with Datadog's GPU monitoring correctly configured and reporting metrics
-- {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and busy providing value
+- {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and are providing value
 - {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are actively working for more than 50% of the selected time frame
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
