@@ -377,6 +377,8 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 
 After validation is complete, close the pull request without merging and delete the `validate-test-optimization` branch.
 
+The [New Flaky Test PR Gate][2] remains active for the entire repository. The gate is non-blocking by default, but notify the team that owns the repository before leaving it active. You can also enable the Test Optimization features configured for the `validate-test-optimization` service at the repository level.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
