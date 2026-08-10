@@ -197,7 +197,9 @@ The endpoint accepts 10 requests per second for each API key. Requests beyond th
 
 Manage the tables that ingestion generates on the [Threat Intelligence][7] configuration page. Each table has a toggle that controls whether Cloud SIEM uses it to enrich logs. Use that page to review which feeds are active, to disable a feed temporarily, or to enable a table that ingestion left disabled.
 
-Your configuration takes precedence over ingestion. After a table exists, later requests add and update indicators, but never change the toggle. A table that you disable stays disabled until you enable it again.
+Your enrichment settings take precedence over ingestion. After a table exists, later requests add and update indicators, but never change the enrichment toggle. A table that you disable stays disabled until you enable it again.
+
+STIX ingestion manages the rows in generated reference tables. Manual changes to those rows are not preserved and are overwritten by later ingestion requests. To add, update, or remove indicators, send the changes through the STIX ingestion endpoint.
 
 To inspect the ingested indicators, open the table from [Reference Tables][8], or search for the indicators in the [IOC Explorer][3].
 
