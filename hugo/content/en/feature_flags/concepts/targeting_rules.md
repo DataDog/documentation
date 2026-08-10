@@ -2,6 +2,9 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/scheduled_rollouts"
+  tag: "Documentation"
+  text: "Scheduled Rollouts"
 - link: "/feature_flags/concepts/saved_filters"
   tag: "Documentation"
   text: "Saved Filters"
@@ -26,8 +29,8 @@ Datadog supports different targeting rule types depending on your rollout strate
 
 | Type | Description |
 |------|-------------|
-| **Feature gate** | Roll out immediately to a percentage of subjects matching your filter (randomized or not) |
-| **Progressive rollout** | Randomized rollout over a schedule with multiple steps |
+| **Feature gate** | Roll out to a percentage of subjects matching your filter (randomized or not), immediately or at a [scheduled start time](/feature_flags/concepts/scheduled_rollouts/) |
+| **Progressive rollout** | Randomized rollout over a schedule with multiple steps, started manually or at a [scheduled start time](/feature_flags/concepts/scheduled_rollouts/) |
 | **Experiment** | Randomized allocation associated with an experiment |
 
 ## Configure targeting rules
@@ -46,10 +49,11 @@ For each targeting rule, configure the following:
 - **Define a filter** (optional): If you do not define a filter, the rule matches all subjects in that environment. To reuse the same conditions across multiple flags, add a [saved filter][1] instead of redefining them on each flag.
 - **Select variants**: Choose which variants to serve to matching subjects. Click **Split Traffic** to randomize across multiple variants (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
 - **Set the traffic exposure** (optional): Serve the variant to a percentage of matching subjects (see [Traffic Splitting and Randomization](/feature_flags/concepts/traffic_splitting/)).
+- **Schedule a start time** (optional): Activate the rule automatically at a future date and time instead of immediately (see [Scheduled Rollouts](/feature_flags/concepts/scheduled_rollouts/)).
 
-{{< img src="feature_flags/concepts/configure-targeting-rule-2.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
+{{< img src="feature_flags/concepts/configure-targeting-rule-3.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
-After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
+After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules.
 
 <div class="alert alert-info">
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
