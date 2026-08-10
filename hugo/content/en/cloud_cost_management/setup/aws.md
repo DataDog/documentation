@@ -28,7 +28,7 @@ To set up Cloud Cost Management in Datadog, you need:
 
 ## Setup
 
-You can setup using the [API][21], [Terraform][22], or directly in Datadog by following the instructions below.
+You can setup using the [API][21], [Terraform][22], the **Set up with AI Agent** guided flow, or directly in Datadog by following the instructions below.
 
 ### Configure the AWS integration
 
@@ -225,6 +225,30 @@ Attach the new S3 policy to the Datadog integration role.
 [204]: https://docs.aws.amazon.com/cur/latest/userguide/dataexports-view.html
 [205]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html
 [210]: https://docs.aws.amazon.com/cur/latest/userguide/enabling-split-cost-allocation-data.html
+
+{{% /tab %}}
+
+{{% tab "AI Agent" %}}
+
+The **Set up with AI Agent** flow guides you through creating or importing a Cost and Usage Report and generates Terraform for you to review before applying. The AWS account must already be connected to Datadog through a role-based integration.
+
+### Choose a Cost and Usage Report format
+
+The flow asks you to choose a report format:
+
+* **CUR 2.0**: Recommended and selected by default for new reports.
+* **Legacy CUR**: Available for an existing legacy report or as a fallback.
+
+### Select the resources to create
+
+The flow checks for an existing Cost and Usage Report before creating a new one. You can:
+
+* Create a Cost and Usage Report and its S3 bucket
+* Use an existing report and S3 bucket
+
+### Review and apply the generated Terraform
+
+The flow generates Terraform for the format you selected. Review the configuration, then apply it to finish setting up the account.
 
 {{% /tab %}}
 
