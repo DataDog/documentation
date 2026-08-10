@@ -36,16 +36,16 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-To validate other languages, or to validate the full Prevention, Mitigation, and Remediation workflow, follow the guided steps on this page.
+To validate other languages, or to validate the full Prevention, Mitigation, and Remediation workflow, follow the steps below.
 
 ## Set up validation
 
-Validation needs three settings on this repository. Scope each setting to validation so your default branches and existing services stay untouched:
+Configure the following three settings for the repository. Scope each setting to validation so your default branches and existing services stay untouched:
 
 1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service:
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
-   - Disable Intelligent Test Runner.
+   - Disable [Intelligent Test Runner][13].
 2. Enable [Flaky Test Policies][6], then create a quarantine policy with a branch rule for `validate-test-optimization`.
 3. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
@@ -236,7 +236,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Modify the same flaky test that you added for Prevention. Add a comment that reads `trigger Auto Test Retries` using your language's comment syntax so CI runs the test on the next commit.
+Make a nonfunctional change to the same flaky test that you added for Prevention. For example, add a comment that reads `trigger Auto Test Retries` using your language's comment syntax. The comment is not a Datadog command; changing the test file causes CI to run it on the next commit. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
@@ -258,7 +258,7 @@ Wait for CI to run, then confirm the following results:
 Test Optimization supports the remediation of test flakiness with Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
 
 1. In [Flaky Test Management][9], open the quarantined validation test.
-2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated `DD_...` key.
+2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated key (it starts with `DD_`).
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
 
@@ -341,7 +341,7 @@ git commit -m "Fix flaky validation test
 git push origin validate-test-optimization
 ```
 
-Wait for CI to finish. In [Test Runs][10], confirm that Attempt to Fix retried the fix candidate and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`. In Flaky Test Management, confirm that the test is marked {{< ui >}}Fix In Progress{{< /ui >}}.
+Wait for CI to finish. In [Test Runs][10], confirm that Attempt to Fix retried the fix candidate and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`. In [Flaky Test Management][9], confirm that the test is marked {{< ui >}}Fix In Progress{{< /ui >}}.
 
 Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
 
@@ -361,3 +361,4 @@ Do not merge the validation pull request. Close the pull request and delete the 
 [10]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.test_management.is_attempt_to_fix%3Atrue
 [11]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=test_optimization
 [12]: /tests/
+[13]: /tests/test_impact_analysis/
