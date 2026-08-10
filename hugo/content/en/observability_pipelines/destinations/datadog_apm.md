@@ -15,7 +15,7 @@ Use Observability Pipelines' Datadog APM destination to send traces to Datadog.
 
 ## Setup
 
-Configure the Datadog APM destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
+Configure the Datadog APM destination when you [set up a pipeline][1] in the UI.
 
 ### Optional buffering
 
