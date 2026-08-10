@@ -16,13 +16,13 @@ further_reading:
       text: 'Learn about Flaky Test Management'
 ---
 
-This page explains how to check that the optimizations offered by Test Optimization are working as intended. The guide assumes that [Test Optimization][13] already works for the repository under validation, and it shows the steps to validate optimizations for a **single repository**.
+This page explains how to check that the optimizations offered by Test Optimization are working as intended. The guide assumes that [Test Optimization][12] already works for the repository under validation, and it shows the steps to validate optimizations for a **single repository**.
 
 <div class="alert alert-warning">Run these validations in a feature branch only, and do not merge them into your default or main branch.</div>
 
 ## Prerequisites
 
-These optimizations require a [supported native library][13]. JUnit XML uploads are not supported.
+These optimizations require a [supported native library][12]. JUnit XML uploads are not supported.
 
 ## Validate locally with an agent
 
@@ -47,7 +47,7 @@ Validation needs three settings on this repository. Scope each setting to valida
    - Enable [Auto Test Retries][4].
    - Disable Intelligent Test Runner.
 2. Enable [Flaky Test Policies][6], then create a quarantine policy with a branch rule for `validate-test-optimization`.
-3. Create a [New Flaky Test PR Gate][12] and scope it to the repository you are validating.
+3. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
 {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
@@ -230,7 +230,7 @@ Click the failing GitHub check and confirm that the test is included in the list
 
 {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as new and flaky. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_new_flaky:true`.
+In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as new and flaky. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, `@test.retry_reason:early_flake_detection`, and `@test.test_management.is_new_flaky:true`.
 
 ## Mitigation
 
@@ -256,14 +256,14 @@ Wait for CI to run, then confirm the following results:
 
 - Auto Test Retries reruns the test after its first failed attempt and recovers it to a pass.
 - Flaky Test Management quarantines the test so its failures do not block the test job.
-- The test appears as {{< ui >}}QUARANTINED{{< /ui >}} in [Flaky Test Management][10].
-- The retry attempts appear in [Test Runs][9].
+- The test appears as {{< ui >}}QUARANTINED{{< /ui >}} in [Flaky Test Management][9]. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `flaky_test_state:quarantined`.
+- The retry attempts appear in [Test Runs][8]. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.retry_reason:auto_test_retry`.
 
 ## Remediation
 
 Test Optimization supports the remediation of test flakiness with Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
 
-1. In [Flaky Test Management][10], open the quarantined validation test.
+1. In [Flaky Test Management][9], open the quarantined validation test.
 2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated `DD_…` key.
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
@@ -347,7 +347,7 @@ git commit -m "Fix flaky validation test
 git push origin validate-test-optimization
 ```
 
-Wait for CI to finish. In [Test Runs][11], confirm that Attempt to Fix retried the fix candidate and every attempt passed. In Flaky Test Management, confirm that the test is marked {{< ui >}}Fix In Progress{{< /ui >}}.
+Wait for CI to finish. In [Test Runs][10], confirm that Attempt to Fix retried the fix candidate and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`. In Flaky Test Management, confirm that the test is marked {{< ui >}}Fix In Progress{{< /ui >}}.
 
 Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
 
@@ -362,8 +362,8 @@ Do not merge the validation pull request. Close the pull request and delete the 
 [5]: /tests/flaky_management
 [6]: /tests/flaky_management/#configure-policies-to-automate-the-flaky-test-lifecycle
 [7]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.retry_reason%3Aearly_flake_detection%20%40test.test_management.is_new_flaky%3Atrue
-[9]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.retry_reason%3Aauto_test_retry
-[10]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20flaky_test_state%3Aquarantined
-[11]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.test_management.is_attempt_to_fix%3Atrue
-[12]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=test_optimization
-[13]: /tests/
+[8]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.retry_reason%3Aauto_test_retry
+[9]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20flaky_test_state%3Aquarantined
+[10]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.test_management.is_attempt_to_fix%3Atrue
+[11]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=test_optimization
+[12]: /tests/
