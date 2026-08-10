@@ -177,7 +177,7 @@ observability_pipelines_worker:
 
 After you [restart the Agent][2], your observability data should be going to the Worker, processed by the pipeline, and delivered to Datadog.
 
-[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[1]: /agent/configuration/agent-configuration-files/
 [2]: /agent/configuration/agent-commands/#restart-the-agent
 
 {{% /collapse-content %}}
