@@ -9,7 +9,7 @@ further_reading:
   text: "Troubleshoot delivery failures"
 - link: "/account_management/email_delivery/monitoring_email_delivery/"
   tag: "Documentation"
-  text: "Monitor email delivery"
+  text: "Monitor Email Delivery"
 - link: "/account_management/audit_trail/"
   tag: "Documentation"
   text: "Set up Audit Trail"

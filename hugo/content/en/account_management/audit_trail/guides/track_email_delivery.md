@@ -6,7 +6,7 @@ site_support_id: email_delivery
 further_reading:
 - link: "/account_management/email_delivery/troubleshooting_email_delivery/"
   tag: "Documentation"
-  text: "Troubleshoot email delivery"
+  text: "Troubleshoot Email Delivery"
 - link: "/account_management/email_delivery/how_email_delivery_works/"
   tag: "Documentation"
   text: "How Email Delivery works"

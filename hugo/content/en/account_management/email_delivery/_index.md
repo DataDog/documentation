@@ -9,7 +9,7 @@ further_reading:
   text: "Set up Audit Trail"
 - link: "/account_management/audit_trail/guides/track_email_delivery/"
   tag: "Guide"
-  text: "Track email delivery in your organization"
+  text: "Track Email Delivery in your organization"
 ---
 
 ## Overview
