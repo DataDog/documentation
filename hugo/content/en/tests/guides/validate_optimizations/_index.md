@@ -36,13 +36,15 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method verifies local setup only. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
+The coding-agent method is a local check that does not exercise the full Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
 
 ## Set up validation
 
 Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
 
-1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You do not need prior test data to create this service entry.
+<div class="alert alert-info">Use the same branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase builds on the flaky test state that Datadog recorded during the previous phase, so do not create another branch between phases.</div>
+
+1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can create the service entry before it has any test data.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
@@ -62,8 +64,6 @@ Create the validation branch:
 ```bash
 git checkout -b validate-test-optimization
 ```
-
-<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase builds on the flaky test state that Datadog recorded during the previous phase, so do not create another branch between phases.</div>
 
 ## Prevention
 
@@ -241,7 +241,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Make a small edit to the same flaky test that you added for Prevention—for example, add a comment. The edit exists only to trigger a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
+Make a small edit to the same flaky test that you added for Prevention—for example, add a comment. The edit exists only to trigger a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during the Prevention step, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
