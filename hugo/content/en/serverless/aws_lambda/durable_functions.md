@@ -87,19 +87,19 @@ Example queries:
 - All logs for one durable execution:
 
     ```text
-    @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
+    @lambda.arn:"<FUNCTION_ARN>" @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
     ```
 
 - Each execution's `START` log, which marks when it began:
 
     ```text
-    "START RequestId:" @lambda.durable_function.first_invocation:true
+    @lambda.arn:"<FUNCTION_ARN>" "START RequestId:" @lambda.durable_function.first_invocation:true
     ```
 
 - Each execution's last log, which marks when it ended:
 
     ```text
-    "END RequestId:" OR "REPORT RequestId:"
+    @lambda.arn:"<FUNCTION_ARN>" ("END RequestId:" OR "REPORT RequestId:")
     ```
 
     Lambda Managed Instances emit no `END` log, so query both.
