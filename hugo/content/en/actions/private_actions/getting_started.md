@@ -1,0 +1,149 @@
+---
+title: Getting started with private actions
+description: Deploy a private action runner in the Datadog Agent with the Datadog Operator and run your first private action, with authorization handled for you by Datadog's default Execution Policies.
+disable_toc: false
+further_reading:
+- link: "actions/private_actions/execution_policies"
+  tag: "Documentation"
+  text: "Execution Policies"
+- link: "actions/private_actions/set_up_agent_based"
+  tag: "Documentation"
+  text: "Set up a private action runner in the Datadog Agent"
+- link: "actions/private_actions/enroll_runner"
+  tag: "Documentation"
+  text: "Enrollment and ownership"
+---
+
+This guide takes you from zero to running a private action. You deploy a private action runner inside the Datadog Agent with the Datadog Operator, and then run a read-only action that Datadog authorizes for you automatically.
+
+The path in this guide is the fastest way to get running. It makes these choices for you:
+
+- **Run the runner in the Datadog Agent**, the recommended form for new deployments.
+- **Enroll with an API key**, so the runner is authorized with Execution Policies.
+- **Install with the Datadog Operator** on Kubernetes.
+- **Rely on Datadog's default Execution Policies**, which Datadog provisions for you, to authorize read-only Kubernetes and Remote Action actions across your runners with no setup.
+
+When you finish, you have a fully functioning runner and a working read-only action. To run write-capable actions or to scope access for specific teams, you create your own Execution Policy as a next step.
+
+## Prerequisites
+
+- A Kubernetes cluster managed by the **[Datadog Operator][11] v1.28.0 or later**, running **Datadog Agent 7.81.0 or later**.
+- [Remote Configuration][1] enabled for your organization.
+- Permission to create API keys in [Organization Settings][2].
+- Network access to Datadog at `https://{{< region-param key=dd_site >}}`.
+
+## Step 1: Create an API key with the Private Action Runner capability
+
+An ownerless runner enrolls with an API key that carries the Private Action Runner capability. It does not need an application key.
+
+1. In [Organization Settings][2] > **API Keys**, create or select an API key.
+1. On the key, next to **PAR** (the Private Action Runner capability), click **Enable**.
+
+{{< img src="actions/private_actions/getting_started/api_key_par_capability.png" alt="An API key details panel with the PAR capability being enabled, next to the Remote Config setting" style="width:40%;" >}}
+
+Then store the key value in a Kubernetes secret that the Agent reads:
+
+```bash
+kubectl create secret generic datadog-secret \
+  --from-literal api-key=<DD_API_KEY>
+```
+
+## Step 2: Deploy the runner with the Datadog Operator
+
+Enable the runner on your `DatadogAgent` resource through Operator annotations. This example enables the runner in both the node Agent and the Cluster Agent, enrolls it as ownerless with your API key, and allows a small set of read-only Kubernetes actions.
+
+```yaml
+apiVersion: datadoghq.com/v2alpha1
+kind: DatadogAgent
+metadata:
+  name: datadog
+  annotations:
+    agent.datadoghq.com/private-action-runner-enabled: "true"
+    agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        api_key_only_enrollment: true
+        actions_allowlist:
+          - "com.datadoghq.remoteaction.*"
+          - "com.datadoghq.script.*"
+    cluster-agent.datadoghq.com/private-action-runner-enabled: "true"
+    cluster-agent.datadoghq.com/private-action-runner-configdata: |
+      private_action_runner:
+        enabled: true
+        api_key_only_enrollment: true
+        actions_allowlist:
+          - "com.datadoghq.kubernetes.*"
+          - "com.datadoghq.script.*"
+spec:
+  global:
+    clusterName: <YOUR_CLUSTER_NAME>
+    site: {{< region-param key=dd_site >}}
+    credentials:
+      apiSecret:
+        secretName: datadog-secret
+        keyName: api-key
+```
+
+Apply the manifest:
+
+```bash
+kubectl apply -f datadog-agent.yaml
+```
+
+Because `api_key_only_enrollment` is set and you provide only an API key, each runner self-enrolls as **ownerless** on startup, which means it is authorized with Execution Policies. For the other deployment options and install methods, see [Set up a private action runner in the Datadog Agent][3]. For how enrollment sets ownership, see [Enrollment and ownership][4].
+
+The `actions_allowlist` entries above use bundle wildcards to allow the actions this guide uses. To rely on the runner's built-in read-only actions instead, leave `actions_allowlist` empty: the runner then enables its default action set (read-only Remote Action network and shell actions, plus a set of read-only Kubernetes actions on the Cluster Agent).
+
+## Step 3: Confirm the runner is enrolled
+
+Go to [Private Action Runners][7] in Datadog. Your new runner appears in the list once it enrolls.
+
+You can also check the Agent logs:
+
+```bash
+# Cluster Agent runner
+kubectl logs deployment/datadog-cluster-agent -c cluster-agent | grep -i private
+# Node Agent runner
+kubectl logs daemonset/datadog-agent -c agent | grep -i private
+```
+
+Datadog provisions **default Execution Policies** in your organization. Their target selector is `*`, so they automatically cover every Agent that runs a private action runner, including the one you deployed. This is what authorizes read-only actions with no Execution Policy setup of your own. See [Datadog Default Execution Policies][8].
+
+## Step 4: Run your first action
+
+Run a read-only Kubernetes action against your new runner from the Action Catalog. The Action Catalog runs an action the same way a workflow step does: you choose a target Agent, provide inputs, and run.
+
+1. Open [List Pods][9] (`com.datadoghq.kubernetes.core.listPod`) in the Action Catalog.
+1. Under **Configure connection**, select the **Target** tab (instead of **Connection**).
+1. Set **Orch Cluster ID** to the orchestration cluster ID of the cluster where your runner is deployed.
+1. Under **Configure inputs**, enter the **Namespace** to list pods from. You can also set Field selector, Label selector, or Limit.
+1. Click **Run**. The results appear in the panel.
+
+{{< img src="actions/private_actions/getting_started/run_action_action_catalog.png" alt="The List Pods action in the Action Catalog, with the connection set to Target and an Orch Cluster ID, namespace inputs, and a Run button" style="width:58%;" >}}
+
+The action runs on your runner and returns its result.
+
+To run the same action from a workflow instead, add a private action step in Workflow Automation and choose **Target** in its connection picker. See [Use an Execution Policy in a workflow][10].
+
+## Next steps
+
+- **Run write-capable actions or scope access:** create your own Execution Policy. See [Execution Policies][5].
+- **Use other deployment options or install methods** (host process, node Agent only, Helm): see [Set up a private action runner in the Datadog Agent][3].
+- **Understand enrollment and ownership:** see [Enrollment and ownership][4].
+- **See all runner configuration keys:** see the [private action runner reference][6].
+
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /remote_configuration
+[2]: https://app.datadoghq.com/organization-settings/api-keys
+[3]: /actions/private_actions/set_up_agent_based/
+[4]: /actions/private_actions/enroll_runner/
+[5]: /actions/private_actions/execution_policies/
+[6]: /actions/private_actions/reference/
+[7]: https://app.datadoghq.com/actions/private-action-runners
+[8]: /actions/private_actions/execution_policies/#datadog-default-execution-policies
+[9]: https://app.datadoghq.com/actions/action-catalog#com.datadoghq.kubernetes/com.datadoghq.kubernetes.core/com.datadoghq.kubernetes.core.listPod
+[10]: /actions/private_actions/execution_policies/#use-an-execution-policy-in-a-workflow
+[11]: /getting_started/containers/datadog_operator/
