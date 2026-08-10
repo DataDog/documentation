@@ -13,7 +13,17 @@ further_reading:
 
 ## Detect issues with out-of-the-box monitors
 
-Datadog provides several out-of-the-box (OOTB) monitor templates that detect common GPU issues in real time, including temperature spikes, power cap throttling, unmet GPU requests, XID errors, ECC errors, bursty workloads, and idle devices. You can customize any monitor's thresholds to fit your organization's needs.
+Datadog provides several out-of-the-box (OOTB) monitor templates that detect common GPU issues in real time, including:
+
+- Temperature spikes
+- Power cap throttling
+- Unmet GPU requests
+- XID errors
+- ECC errors
+- Bursty workloads
+- Idle devices
+
+You can customize any monitor's thresholds to fit your organization's needs.
 
 To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in the top-right corner of the page.
 
@@ -21,17 +31,17 @@ To access these templates, click the {{< ui >}}Monitors{{< /ui >}} dropdown in t
 
 ## Break down your fleet by any tag
 
-GPU Fleet Explorer gives you visibility from your AI workloads down to the AI infrastructure they rely on, letting you pivot between workload entities like pods and training runs, and infrastructure entities like devices, hosts, and clusters.
+GPU Fleet Explorer gives you visibility from your AI workloads down to the underlying AI infrastructure. You can switch between workload entities like pods and training runs, and infrastructure entities such as devices, hosts, and clusters.
 
 {{< img src="gpu_monitoring/gpu-fleet-sidenav.jpg" alt="Side navigation bar showing AI Infrastructure entities (Devices, Hosts, Kube Clusters, Ray Clusters) and AI Workloads entities (Pods, Kube Containers, Training Runs)" style="width:30%;" >}}
+
+**Note**: Kube Clusters, Pods, and Kube Containers options in the side navigation are only available if you use Kubernetes.
 
 Use the filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
 You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices for that service.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
-
-**Note**: Kube Clusters, Pods, and Kube Containers options in the side navigation are only available if you use Kubernetes.
 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
@@ -42,7 +52,7 @@ GPU Monitoring's Fleet Explorer page provides two dedicated use case-driven view
 - **Performance**: Optimize workload efficiency and throughput.
 
 ### Provisioning
-The {{< ui >}}Provisioning{{< /ui >}} tab detects any hardware health issues impacting the allocation of your devices to workloads and provides guidance to all users, regardless of their hardware familiarity, on how to remediate those issues.
+The {{< ui >}}Provisioning{{< /ui >}} tab detects any hardware health issues impacting the allocation of your devices to workloads and provides guidance on how to remediate them.
 
 {{< img src="gpu_monitoring/provisioning-tab-3.jpg" alt="The Provisioning use case-driven view" style="width:90%;" >}}
 
@@ -50,7 +60,7 @@ For each detected issue, Datadog recommends step-by-step remediation actions to 
 
 {{< img src="gpu_monitoring/critical-xid-recommendation.jpg" alt="Recommended remediation actions for a critical XID error" style="width:60%;" >}}
 
-#### Summary graph
+#### Provisioning summary graph
 
 The summary graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Provisioning use case, this breaks down your Provisioned, Allocated, and Active devices so you can reclaim wasted idle spend and rediscover available devices that can be allocated to workloads.
 
@@ -67,7 +77,7 @@ Expand this section below to see a table of the available options and what they 
 {{% /collapse-content %}}
 
 ### Performance
-The {{< ui >}}Performance{{< /ui >}} tab detects any hardware health or workload issues that are stalling the workloads running on your GPU devices and provides a single source of truth and guidance to platform engineers and AI/ML teams on how to remediate those issues.
+The {{< ui >}}Performance{{< /ui >}} tab detects any hardware health or workload issues that are stalling the workloads running on your GPU devices. This provides a single source of truth and guidance to platform engineers and AI/ML teams on how to remediate those issues.
 
 {{< img src="gpu_monitoring/performance-tab-3.jpg" alt="The Performance use case-driven view" style="width:90%;" >}}
 
@@ -75,7 +85,7 @@ For each detected issue, Datadog recommends step-by-step remediation actions to 
 
 {{< img src="gpu_monitoring/power-cap-recommendation.jpg" alt="Recommended remediation actions for a GPU power cap throttling issue" style="width:60%;" >}}
 
-#### Summary graph
+#### Performance summary graph
 
 The summary graph provides out-of-the-box (OOTB) visualizations for key telemetry tied to your selected use case-driven view. For the Performance use case, this breaks down key resource utilization metrics like GPU Utilization or GPU Saturation alongside network fabric metrics, power, temperature, and more.
 
