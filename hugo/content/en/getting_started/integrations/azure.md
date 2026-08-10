@@ -70,12 +70,8 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 
 ### Authentication methods
 
-{{< site-region region="gov" >}}
-<div class="alert alert-info">Secretless Auth is not supported on the US1-FED site. Use the <strong>Client Secret</strong> method to authenticate.</div>
-{{< /site-region >}}
-
-{{< site-region region="gov2" >}}
-<div class="alert alert-info">Secretless Auth is not supported on the US2-FED site. Use the <strong>Client Secret</strong> method to authenticate.</div>
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-info">Secretless Auth is not supported on the US1-FED and US2-FED sites. Use the <strong>Client Secret</strong> method to authenticate.</div>
 {{< /site-region >}}
 
 The Azure integration supports two authentication methods:
