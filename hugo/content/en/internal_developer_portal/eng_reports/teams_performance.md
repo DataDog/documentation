@@ -8,7 +8,7 @@ further_reading:
 - link: "/incident_response/incident_management/"
   tag: "Documentation"
   text: "Incident Management"
-- link: "/delivery_performance/dora_metrics/
+- link: "/delivery_performance/dora_metrics/"
   tag: "Documentation"
   text: "DORA Metrics" 
 ---
