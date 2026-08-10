@@ -3131,6 +3131,11 @@ menu:
       parent: action_catalog
       identifier: private_actions
       weight: 2
+    - name: Get Started
+      url: actions/private_actions/getting_started/
+      parent: private_actions
+      identifier: getting_started
+      weight: 1
     - name: Set Up in the Datadog Agent
       url: actions/private_actions/set_up_agent_based/
       parent: private_actions
