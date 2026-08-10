@@ -59,7 +59,11 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 {{< img src="/account_management/scim/admin-credentials-entra-flag.png" alt="Azure AD Admin Credentials configuration screen">}}
 
 5. Click {{< ui >}}Test Connection{{< /ui >}}, and wait for the message confirming that the credentials are authorized to enable provisioning.
-6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears. See the following section to configure mapping.
+6. Click {{< ui >}}Save{{< /ui >}}. The mapping section appears.
+
+## Configure app roles
+
+Before configuring attribute mapping, define an app role in the Microsoft Entra app registration for each Datadog role you want to provision. Assign the relevant users or groups to those app roles. Set each app role's **Value** to the corresponding Datadog role UUID. Do not use the Datadog role name or SAML role claim value. You can find a role's UUID in the role's URL on your [Organization Settings][11] page. For configuration instructions, see [Microsoft's app-role documentation][12].
 
 ## Attribute mapping
 
@@ -85,8 +89,6 @@ When using SAML and SCIM together, Datadog strongly recommends disabling SAML ju
 7. After you set your mappings, click {{< ui >}}Save{{< /ui >}}.
 
 To provision a user's Datadog role (built-in or custom), map the `roles` attribute as shown above. Use the `AppRoleAssignmentsComplex([appRoleAssignments])` expression for the Microsoft Entra ID attribute. If `roles` is not available in the target attribute dropdown, add it as a **multi-valued** string attribute. For configuration instructions, see [Microsoft's attribute-mapping documentation][10].
-
-Before configuring this mapping, define an app role in the Microsoft Entra app registration for each Datadog role you want to provision. Assign the relevant users or groups to those app roles. Set each app role's **Value** to the corresponding Datadog role UUID. Do not use the Datadog role name or SAML role claim value. You can find a role's UUID in the role's URL on your [Organization Settings][11] page. For configuration instructions, see [Microsoft's app-role documentation][12].
 
 Roles follow the SCIM multi-valued attribute convention defined in [RFC 7643][9]. If a SCIM request sends multiple roles, Datadog provisions only the roles that match a role in your organization. If none match and the organization has a default role, the user falls back to that role. If the organization has no default role, Datadog skips the role update and preserves the user's existing roles. Unmatched roles are logged to Audit Trail. For more details, see [SCIM][1].
 
