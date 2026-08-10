@@ -27,13 +27,11 @@ GPU Fleet Explorer gives you visibility from your AI workloads down to the AI in
 
 Use the filter dropdowns at the top of the page to filter by a specific {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Device Type{{< /ui >}}, {{< ui >}}Cluster{{< /ui >}}, {{< ui >}}Region{{< /ui >}}, {{< ui >}}Service{{< /ui >}}, {{< ui >}}Data Center{{< /ui >}}, {{< ui >}}Environment{{< /ui >}}, or {{< ui >}}Team{{< /ui >}}.
 
-You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique team. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices by that service.
-
-You can click on the {{< ui >}}>{{< /ui >}} button next to each table row entry to view the group's respective devices.
+You can also {{< ui >}}Search{{< /ui >}} or {{< ui >}}Group{{< /ui >}} by other tags using the search and group-by fields. For example, you can group by {{< ui >}}Service{{< /ui >}} to view a row in the table for each unique service. Click the {{< ui >}}>{{< /ui >}} button next to any entry to see the devices for that service.
 
 {{< img src="gpu_monitoring/host_row_expansion-2.png" alt="GPU Fleet table showing services with their device types, with the row expand button highlighted" style="width:90%;" >}}
 
-**Note**: Kube Clusters, Pods, and Containers options in the side navigation are only available if you use Kubernetes.
+**Note**: Kube Clusters, Pods, and Kube Containers options in the side navigation are only available if you use Kubernetes.
 
 {{< img src="gpu_monitoring/filters_and_groupings-3.png" alt="Filter dropdowns and Group by selector at the top of the GPU Fleet page" style="width:90%;" >}}
 
@@ -116,7 +114,7 @@ You can click on the gear icon to customize which metrics are displayed within t
 | Metric                   | Definition                                                                                                                                                                                                              | Metric Name                                        | Provisioning Tab | Performance Tab |
 | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------- | ---------------- | --------------- |
 | Idle Cost                | (Only nonzero for time frames longer than 2 days) The cost of GPU resources that are reserved and allocated, but not used.                                                                                              | `gpu_monitoring.estimated_idle_cost`               | ✓                 | ✓               |
-| Total Devices            | GPU devices with Datadog's GPU monitoring correctly configured and reporting metrics.                                                                                                                                    | `kubernetes_state.node.gpu_capacity`               | ✓                 |                 |
+| Total Devices            | GPU devices with Datadog's GPU Monitoring correctly configured and reporting metrics.                                                                                                                                    | `kubernetes_state.node.gpu_capacity`               | ✓                 |                 |
 | Kubernetes Available     | Healthy GPU devices that are powered on and available for allocation, according to the Kubernetes orchestrator.                                                                                                          | `kubernetes_state.node.gpu_allocatable`            | ✓                 |                 |
 | Allocated Devices        | (Only available if using Kubernetes) Count of devices that have been allocated to a workload.                                                                                                                           | `gpu.device.total`                                 | ✓                 |                 |
 | Unallocated Devices      | Count of devices not allocated and available for use during time frame.                                                                                                                                                 |                                                    | ✓                 |                 |
@@ -141,7 +139,7 @@ Clicking any row in the Fleet table opens a side panel with more details for the
 
 ### Connected entities 
 
-Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}connected entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
+Datadog's GPU Monitoring doesn't need to rely on NVIDIA'S DCGM Exporter. It uses the Datadog Agent to observe GPUs directly, providing insight into GPU usage and costs for pods and processes. Under the {{< ui >}}Connected Entities{{< /ui >}} section in any detail view, you can see SM activity, GPU core utilization (only if System Probe is enabled), and the memory usage of pods, processes, and Slurm jobs. This helps you identify which workloads to cut or optimize to decrease total spend. 
 
 **Note**: The {{< ui >}}Pods{{< /ui >}} tab is only available if you're using Kubernetes.
 
@@ -188,7 +186,9 @@ Within this side panel, you have a device-specific view that identifies:
 
 ## Installation recommendations
 
-Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you can find installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts. Datadog advises against using v7.82.0 to avoid a bug that causes unexpected kernel panics.
+Datadog actively surveys your infrastructure and detects installation gaps that may diminish the value you get out of GPU Monitoring. In this modal, you can find installation update recommendations to get the optimal value of GPU Monitoring. For example, making sure your hosts have the [latest version][1] of the Datadog Agent installed, installing the latest version of the NVIDIA driver, and checking for misconfigured hosts.
+
+**Note**: Do not use Datadog Agent v7.82.0, which can cause unexpected kernel panics.
 
 To view advanced GPU Monitoring features such as attribution of GPU resources by related processes or SLURM jobs, you must enable [Live Processes][3] and the [Slurm][4] integration, respectively.
 
