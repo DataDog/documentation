@@ -17,7 +17,7 @@ further_reading:
 
 Instead of activating a targeting rule immediately, you can schedule it to start automatically at a future date and time. This is available for both [feature gates](/feature_flags/concepts/targeting_rules/#targeting-rule-types) and [progressive rollouts](/feature_flags/concepts/targeting_rules/#targeting-rule-types).
 
-A feature gate normally starts as soon as you save it. A [progressive rollout](/feature_flags/use_cases/progressive_rollouts/#start-and-control-the-rollout) normally requires you to click **Start Rollout** to begin. When you schedule a start time on either rule type instead, it activates automatically at that time, you don't need to click **Start Rollout** (for a progressive rollout) when the scheduled time arrives.
+A feature gate normally starts as soon as you save it. A [progressive rollout](/feature_flags/use_cases/progressive_rollouts/#start-and-control-the-rollout) normally requires you to click **Start Rollout** to begin. When you schedule a start time on either rule type instead, it activates automatically at that time.
 
 The flag still needs to be enabled in the environment for the rule to take effect once it starts. If the flag is already enabled, no further action is required.
 
@@ -35,7 +35,7 @@ To schedule a start time for a targeting rule:
 {{< img src="feature_flags/concepts/schedule-a-rollout-start.png" alt="Targeting Rule editor side panel on a feature flag with a scheduled start." style="width:70%;" >}}
 
 <div class="alert alert-info">
-If the flag is disabled in the environment, a message appears. Enable the flag before the scheduled rollout for it to take effect.
+If the flag is disabled in the environment, the rule does not run. Enable the flag before the scheduled rollout for it to take effect.
 </div>
 
 ## Change or cancel a scheduled start
@@ -52,7 +52,7 @@ A [feature gate](/feature_flags/concepts/targeting_rules/#targeting-rule-types) 
 
 ## Approve a rollout whose start time has passed
 
-If a scheduled rule change requires [approval](/feature_flags/concepts/approvals/), the rollout does not start automatically while the change is still pending. If the scheduled start time passes before a reviewer approves it, the rollout does not start silently, see [Approve, reject, or apply](/feature_flags/concepts/approvals/#approve-reject-or-apply) for details.
+If a scheduled rule change requires [approval](/feature_flags/concepts/approvals/), the rollout does not start automatically while the change is still pending. If the scheduled start time passes before a reviewer approves it, the rollout does not start. See [Approve, reject, or apply](/feature_flags/concepts/approvals/#approve-reject-or-apply) for details.
 
 ## Further reading
 
