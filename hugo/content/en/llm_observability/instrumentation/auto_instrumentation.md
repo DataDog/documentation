@@ -609,7 +609,7 @@ The MistralAI integration instruments the following methods:
 - [Embeddings][3]:
   - `Embeddings.create()`, `Embeddings.create_async()`
 
-[1]: https://docs.mistral.ai/api/
+[1]: https://docs.mistral.ai/getting-started/clients
 [2]: https://docs.mistral.ai/api/#tag/chat/operation/chat_completion_v1_chat_completions_post
 [3]: https://docs.mistral.ai/api/#tag/embeddings/operation/embeddings_v1_embeddings_post
 {{% /tab %}}
