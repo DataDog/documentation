@@ -70,8 +70,6 @@ Follow the instructions on this page to set up the {{< ui >}}Azure integration{{
 
 ### Authentication methods
 
-<div class="alert alert-info">Secretless Auth is in Preview.</div>
-
 The Azure integration supports two authentication methods:
 
 | Method | How it works | What you manage |
