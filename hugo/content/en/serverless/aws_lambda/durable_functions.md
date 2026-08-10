@@ -82,24 +82,24 @@ The Datadog Lambda Extension adds these attributes to a durable function's logs:
 | `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
 | `@lambda.durable_function.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`, where `PENDING` means the execution suspended and resumes in a later invocation. On the `END` log, or on the `REPORT` log for executions on Lambda Managed Instances. |
 
-Example queries:
+Example queries (add `@lambda.arn:"<FUNCTION_ARN>"` to scope to one function):
 
 - All logs for one durable execution:
 
     ```text
-    @lambda.arn:"<FUNCTION_ARN>" @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
+    @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
     ```
 
 - Each execution's `START` log, which marks when it began:
 
     ```text
-    @lambda.arn:"<FUNCTION_ARN>" "START RequestId:" @lambda.durable_function.first_invocation:true
+    "START RequestId:" @lambda.durable_function.first_invocation:true
     ```
 
 - Each execution's last log, which marks when it ended:
 
     ```text
-    @lambda.arn:"<FUNCTION_ARN>" ("END RequestId:" OR "REPORT RequestId:")
+    "END RequestId:" OR "REPORT RequestId:"
     ```
 
     Lambda Managed Instances emit no `END` log, so query both.
