@@ -49,7 +49,7 @@ For each targeting rule, configure the following:
 
 {{< img src="feature_flags/concepts/configure-targeting-rule-3.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
-After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
+After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules.
 
 <div class="alert alert-info">
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
@@ -65,7 +65,7 @@ To schedule a start time:
 
 2. Choose a date and time for the rule to begin. The picker defaults to the next full hour, and past dates and times cannot be selected.
 
-3. Click **Save Changes**.
+3. Click **Save**.
 
 {{< img src="feature_flags/concepts/schedule-a-rollout-start.png" alt="Targeting Rule editor side panel on a feature flag with a scheduled start." style="width:70%;" >}}
 
@@ -73,11 +73,11 @@ The rule remains inactive until the scheduled time arrives, at which point it ac
 
 <div class="alert alert-info">
 
-If the flag is disabled in the environment, a message appears: "This flag is disabled in this environment. Enable it before the scheduled rollout, or the rollout won't take effect."
+If the flag is disabled in the environment, a message indicates that you must enable the flag before the scheduled rollout for it to take effect.
 
 </div>
 
-You can change your mind at any time before the scheduled start and reschedule to a new time, or uncheck **Schedule a start time** to cancel it.
+You can reschedule to a new time at any time before the scheduled start. To cancel it, uncheck **Schedule a start time**.
 
 ## Filters and evaluation context
 
