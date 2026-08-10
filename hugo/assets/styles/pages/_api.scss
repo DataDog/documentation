@@ -320,16 +320,18 @@ $ddpurple: #632ca6;
     .api-changelog-intro {
         max-width: 720px;
         color: $gray-dark;
+        font-size: 16px;
+        line-height: 1.6;
     }
 
     .api-changelog-note {
-        max-width: 720px;
+        width: 100%;
         padding: 14px 16px;
         margin-bottom: 28px;
         background: #eef6fc;
         border-left: 3px solid $brand-info;
         border-radius: 4px;
-        font-size: 13px;
+        font-size: 16px;
         line-height: 1.6;
         color: $gray-dark;
     }
@@ -361,7 +363,7 @@ $ddpurple: #632ca6;
     }
 
     .api-changelog-filter-label {
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.06em;
         color: $gray-darkish;
@@ -384,13 +386,13 @@ $ddpurple: #632ca6;
     .api-changelog-tab {
         display: inline-flex;
         align-items: center;
-        height: 28px;
+        height: 32px;
         padding: 0 14px;
         border: none;
         border-right: 1px solid $gray-border;
         background: $white;
         color: $gray-darkish;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         cursor: pointer;
         transition: all .12s ease;
@@ -410,13 +412,13 @@ $ddpurple: #632ca6;
     }
 
     .api-changelog-select {
-        height: 28px;
+        height: 32px;
         padding: 0 8px;
         border: 1px solid $gray-border;
         border-radius: 4px;
         background: $white;
         color: $gray-dark;
-        font-size: 12px;
+        font-size: 14px;
         font-weight: 600;
         cursor: pointer;
     }
@@ -426,7 +428,7 @@ $ddpurple: #632ca6;
         align-items: center;
         justify-content: space-between;
         margin: 16px 0;
-        font-size: 12px;
+        font-size: 16px;
         color: $gray-darkish;
 
         strong {
@@ -443,12 +445,12 @@ $ddpurple: #632ca6;
     .api-changelog-clear {
         display: inline-flex;
         align-items: center;
-        height: 24px;
+        height: 30px;
         padding: 0 10px;
         border: 1px solid $gray-border;
         border-radius: 4px;
         background: $white;
-        font-size: 12px;
+        font-size: 14px;
         color: $gray-dark;
         cursor: pointer;
 
@@ -520,10 +522,10 @@ $ddpurple: #632ca6;
     .api-changelog-badge {
         display: inline-flex;
         align-items: center;
-        height: 22px;
+        height: 26px;
         padding: 0 10px;
         border-radius: 4px;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.03em;
 
@@ -551,13 +553,13 @@ $ddpurple: #632ca6;
     }
 
     .api-changelog-why-upgrade {
-        max-width: 720px;
+        width: 100%;
         padding: 12px 16px;
         margin-bottom: 14px;
         background: #f5f0fc;
         border-left: 3px solid $ddpurple;
         border-radius: 4px;
-        font-size: 13px;
+        font-size: 16px;
         line-height: 1.6;
         color: $gray-dark;
 
@@ -586,12 +588,12 @@ $ddpurple: #632ca6;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 84px;
-        height: 22px;
+        width: 96px;
+        height: 26px;
         padding: 0 9px;
         border-radius: 4px;
         color: $white;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
         letter-spacing: 0.02em;
         white-space: nowrap;
@@ -608,10 +610,10 @@ $ddpurple: #632ca6;
         align-items: center;
         gap: 8px;
         margin-bottom: 6px;
-        font-size: 12px;
+        font-size: 14px;
 
         code {
-            font-size: 12px;
+            font-size: 14px;
         }
     }
 
@@ -630,14 +632,14 @@ $ddpurple: #632ca6;
         padding: 0 6px;
         border-radius: 3px;
         font-family: monospace;
-        font-size: 11px;
+        font-size: 13px;
         font-weight: 700;
     }
 
     .api-changelog-entry p {
         margin: 0;
-        font-size: 13px;
-        line-height: 1.55;
+        font-size: 16px;
+        line-height: 1.6;
         color: $gray-dark;
     }
 
@@ -650,13 +652,13 @@ $ddpurple: #632ca6;
 
         .api-changelog-empty-title {
             margin: 0 0 4px;
-            font-size: 15px;
+            font-size: 18px;
             font-weight: 600;
         }
 
         .api-changelog-empty-subtitle {
             margin: 0 0 16px;
-            font-size: 13px;
+            font-size: 16px;
             color: $gray-darkish;
         }
     }
