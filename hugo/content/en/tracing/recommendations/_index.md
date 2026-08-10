@@ -175,7 +175,7 @@ Add a List widget with APM Recommendations as its data source to review recommen
 
 {{< img src="tracing/recommendations/apm_recommendations_dashboard_widget.png" alt="A List widget configured with APM Recommendations as the data source, showing recommendations by priority, service, summary, issue, and status" style="width:100%;" >}}
 
-1. On any dashboard, create a new widget and select {{< ui >}}List{{< /ui >}} as the visualization.
+1. On any dashboard, create a widget and select {{< ui >}}List{{< /ui >}} as the visualization.
 2. Select {{< ui >}}APM Recommendations{{< /ui >}} as the data source.
 3. Filter by environment, service, team, recommendation type, and status.
 
