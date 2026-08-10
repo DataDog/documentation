@@ -483,13 +483,15 @@ See the [{{< ui >}}Manual{{< /ui >}} tab](?tab=manual#instrumentation) for descr
    - {{< ui >}}Registry server URL{{< /ui >}}: `index.docker.io`
    - {{< ui >}}Image and tag{{< /ui >}}: `datadog/serverless-init:latest`
    - {{< ui >}}Port{{< /ui >}}: 8126
+   - Under {{< ui >}}Environment variables{{< /ui >}}, enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
+
+     {{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
+
 3. Select {{< ui >}}Apply{{< /ui >}}.
 
 #### Application settings
 
-In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables on both your main container and the sidecar container. Alternatively, set these variables on your main container and enable the {{< ui >}}Allow access to all app settings{{< /ui >}} option.
-
-{{< img src="serverless/azure_app_service/app_settings.png" alt="In Azure, an Environment Variables section. An 'Allow access to all app settings' option is enabled with a checkbox." >}}
+In your {{< ui >}}App settings{{< /ui >}} in Azure, set the following environment variables on your main container.
 
 - `DD_API_KEY`: Your [Datadog API key][701]
 - `DD_SERVICE`: How you want to tag your service. For example, `sidecar-azure`
