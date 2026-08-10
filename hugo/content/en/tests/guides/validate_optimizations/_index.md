@@ -236,7 +236,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Make a trivial edit to the same flaky test that you added for Prevention. For example, add a comment using your language's syntax. The edit is only there to re-trigger CI; it is not a Datadog command. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
+Make a trivial edit to the same flaky test that you added for Prevention—for example, add a comment. The edit only re-triggers CI; no Datadog annotation is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
@@ -262,7 +262,7 @@ Test Optimization supports the remediation of test flakiness with Attempt to Fix
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
 
-Replace the flaky test with the passing version for your language:
+3. Replace the flaky test with the passing version for your language:
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}
@@ -331,7 +331,7 @@ func testFlakyValidationTest() {
 {{% /tab %}}
 {{< /tabs >}}
 
-Commit the fix with the generated key in the commit body. Replace `<DD_KEY>` with the key you copied:
+4. Commit the fix with the generated key in the commit body. Replace `<DD_KEY>` with the key you copied:
 
 ```bash
 git add -A
@@ -341,7 +341,10 @@ git commit -m "Fix flaky validation test
 git push origin validate-test-optimization
 ```
 
-Wait for CI to finish. In [Test Runs][10], confirm that Attempt to Fix retried the fix candidate and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`. In [Flaky Test Management][14], confirm that the test is marked {{< ui >}}Fix in progress{{< /ui >}}. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `fix_in_progress:true`.
+5. Wait for CI to finish, then confirm the following results:
+
+   - In [Test Runs][10], Attempt to Fix retried the fix candidate and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`.
+   - In [Flaky Test Management][14], the test is marked {{< ui >}}Fix in progress{{< /ui >}}. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `fix_in_progress:true`.
 
 Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
 
