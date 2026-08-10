@@ -40,7 +40,7 @@ The coding-agent method verifies setup but does not exercise the end-to-end Prev
 
 ## Set up validation
 
-Complete the following configuration steps for the repository. Use the validation service, branch, and repository as their respective scopes so your default branch and existing services stay untouched:
+Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
 
 1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. Datadog lets you create this service entry before any tests have reported under that name.
    - Enable [Early Flake Detection][1].
@@ -63,7 +63,7 @@ Create the validation branch:
 git checkout -b validate-test-optimization
 ```
 
-<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase relies on the flaky test state Datadog recorded on this branch in the previous phase, so do not create another branch between phases.</div>
+<div class="alert alert-info">Use this branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase builds on the flaky test state that Datadog recorded during the previous phase, so do not create another branch between phases.</div>
 
 ## Prevention
 
@@ -241,7 +241,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Make a trivial edit to the same flaky test that you added for Prevention—for example, add a comment. The edit exists only to trigger a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
+Make a small edit to the same flaky test that you added for Prevention—for example, add a comment. The edit exists only to trigger a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
@@ -336,11 +336,11 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
    {{% /tab %}}
    {{< /tabs >}}
 
-4. Commit the fix with the generated key in the commit body. Replace `<DD_KEY>` with the key you copied:
+4. Commit the fix with the generated key in the commit body. Replace `<YOUR_DD_KEY>` with the key you copied:
 
    ```bash
    git add -A
-   git commit -m "Fix flaky validation test" -m "<DD_KEY>"
+   git commit -m "Fix flaky validation test" -m "<YOUR_DD_KEY>"
    git push origin validate-test-optimization
    ```
 
