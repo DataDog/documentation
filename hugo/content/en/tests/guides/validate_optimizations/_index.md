@@ -28,7 +28,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 Local coding agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package.
 
-Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method does not provision Datadog settings or report validation progress to Datadog.
+Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility, supported advanced features, and CI configuration without changing Datadog settings or sending validation results to Datadog.
 
 Pass this prompt to your local coding agent:
 
@@ -40,9 +40,9 @@ To validate languages other than JavaScript, or to validate the full Prevention,
 
 ## Set up validation
 
-Configure the following three settings for the repository. Scope each setting to validation so your default branches and existing services stay untouched:
+Configure the following three settings for the repository. Scope the service features, quarantine policy, and PR gate to the validation service, branch, and repository so your default branches and existing services stay untouched:
 
-1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can configure this service before tests report data under that name.
+1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can create this service entry before any tests have reported data under that name.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13].
@@ -248,7 +248,7 @@ git push origin validate-test-optimization
 
 Wait for CI to run, then confirm the following results:
 
-- Auto Test Retries reruns the test after its first failed attempt and recovers it to a pass.
+- Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry.
 - Flaky Test Management quarantines the test so its failures do not block the test job.
 - The test appears as {{< ui >}}QUARANTINED{{< /ui >}} in [Flaky Test Management][9]. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `flaky_test_state:quarantined`.
 - The retry attempts appear in [Test Runs][8]. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.retry_reason:auto_test_retry`.
