@@ -1759,23 +1759,6 @@ components:
       required: true
       schema:
         $ref: "#/components/schemas/RumPermanentRetentionFilterID"
-    RumRateLimitScopeIDParameter:
-      description: |-
-        The identifier of the scope the rate limit configuration applies to.
-        For the `application` scope, this is the RUM application ID.
-      in: path
-      name: scope_id
-      required: true
-      schema:
-        example: cd73a516-a481-4af5-8352-9b577465c77b
-        type: string
-    RumRateLimitScopeTypeParameter:
-      description: The type of scope the rate limit configuration applies to.
-      in: path
-      name: scope_type
-      required: true
-      schema:
-        $ref: "#/components/schemas/RumRateLimitScopeType"
     RumRetentionFilterIDParameter:
       description: Retention filter ID.
       in: path
@@ -39541,34 +39524,10 @@ components:
           description: The operating system version.
           example: "Ubuntu 20.04"
           type: string
-        otel_collector_deployment_types:
-          description: OpenTelemetry collector deployment types associated with the agent.
-          items:
-            description: An OpenTelemetry collector deployment type.
-            type: string
-          type: array
-        otel_collector_distributions:
-          description: OpenTelemetry collector distributions associated with the agent.
-          items:
-            description: An OpenTelemetry collector distribution.
-            type: string
-          type: array
-        otel_collector_versions:
-          description: List of OpenTelemetry collector versions (if applicable).
-          items:
-            description: An OpenTelemetry collector version string.
-            type: string
-          type: array
         otel_collectors:
           description: OpenTelemetry collectors associated with the agent (if applicable).
           items:
             $ref: "#/components/schemas/FleetOtelCollector"
-          type: array
-        otel_resource_attributes:
-          description: OpenTelemetry resource attributes reported by the agent.
-          items:
-            description: An OpenTelemetry resource attribute.
-            type: string
           type: array
         pod_name:
           description: Kubernetes pod name (if applicable).
@@ -65444,6 +65403,126 @@ components:
         - type
         - id
       type: object
+    MaintenanceUpdate:
+      description: Response object for a maintenance update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateData"
+      type: object
+    MaintenanceUpdateData:
+      description: The data object for a maintenance update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MaintenanceUpdateDataAttributes"
+        id:
+          description: The ID of the maintenance update.
+          example: "1234abcd-12ab-34cd-56ef-123456abcdef"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationships"
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataType"
+      required:
+        - id
+        - type
+      type: object
+    MaintenanceUpdateDataAttributes:
+      description: Attributes of a maintenance update resource.
+      properties:
+        components_affected:
+          description: Components affected at the time of the update.
+          items:
+            $ref: "#/components/schemas/CreateMaintenanceRequestDataAttributesComponentsAffectedItems"
+          type: array
+        created_at:
+          description: The date and time the update was created.
+          format: date-time
+          type: string
+        description:
+          description: The message body of the update.
+          type: string
+        manual_transition:
+          description: Whether the update was applied manually by a user (true) or automatically by the system (false).
+          type: boolean
+        modified_at:
+          description: The date and time the update was last modified.
+          format: date-time
+          type: string
+        started_at:
+          description: The date and time the update started.
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/MaintenanceUpdateDataAttributesStatus"
+      type: object
+    MaintenanceUpdateDataAttributesStatus:
+      description: The status of the maintenance update.
+      enum:
+        - scheduled
+        - in_progress
+        - completed
+        - canceled
+      type: string
+      x-enum-varnames:
+        - SCHEDULED
+        - IN_PROGRESS
+        - COMPLETED
+        - CANCELED
+    MaintenanceUpdateDataRelationships:
+      description: Relationships of a maintenance update resource.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUser"
+        last_modified_by_user:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUser"
+        maintenance:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsMaintenance"
+      type: object
+    MaintenanceUpdateDataRelationshipsMaintenance:
+      description: The parent maintenance of the update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsMaintenanceData"
+      required:
+        - data
+      type: object
+    MaintenanceUpdateDataRelationshipsMaintenanceData:
+      description: The maintenance linked to a maintenance update.
+      properties:
+        id:
+          description: The ID of the maintenance.
+          example: ""
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceUpdateDataRelationshipsUser:
+      description: A user relationship of a maintenance update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUserData"
+      required:
+        - data
+      type: object
+    MaintenanceUpdateDataRelationshipsUserData:
+      description: The data object identifying a Datadog user linked to a maintenance update.
+      properties:
+        id:
+          description: The ID of the Datadog user.
+          example: ""
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
     MaintenanceWindow:
       description: A maintenance window that defines a scheduled time period during which case-related notifications and automation rules are suppressed. Each maintenance window applies to cases matching a specified query.
       properties:
@@ -81124,6 +81203,9 @@ components:
     PatchMaintenanceRequestDataAttributes:
       description: The supported attributes for updating a maintenance.
       properties:
+        canceled_description:
+          description: The description shown when the maintenance is canceled.
+          type: string
         completed_date:
           description: Timestamp of when the maintenance was completed.
           format: date-time
@@ -81272,6 +81354,50 @@ components:
       type: string
       x-enum-varnames:
         - MAINTENANCE_TEMPLATES
+    PatchMaintenanceUpdateRequest:
+      description: Request object for editing a maintenance update.
+      example:
+        data:
+          attributes:
+            description: We have completed maintenance on the API to improve performance.
+          id: 00000000-0000-0000-0000-000000000000
+          type: maintenance_updates
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestData"
+      type: object
+    PatchMaintenanceUpdateRequestData:
+      description: The data object for editing a maintenance update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataAttributes"
+        id:
+          description: The ID of the maintenance update to edit. Must match the `update_id` path parameter.
+          example: "1234abcd-12ab-34cd-56ef-123456abcdef"
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataType"
+      required:
+        - id
+        - type
+      type: object
+    PatchMaintenanceUpdateRequestDataAttributes:
+      description: Attributes for editing a maintenance update.
+      properties:
+        description:
+          description: The message body of the update.
+          example: ""
+          type: string
+      type: object
+    PatchMaintenanceUpdateRequestDataType:
+      default: maintenance_updates
+      description: Maintenance updates resource type.
+      enum:
+        - maintenance_updates
+      example: maintenance_updates
+      type: string
+      x-enum-varnames:
+        - MAINTENANCE_UPDATES
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
       properties:
@@ -90468,179 +90594,6 @@ components:
             $ref: "#/components/schemas/RumPermanentRetentionFilterData"
           type: array
       type: object
-    RumRateLimitAdaptiveConfig:
-      description: The configuration used when `mode` is `adaptive`.
-      properties:
-        max_retention_rate:
-          description: The maximum fraction of sessions to retain, in the range `(0, 1]`.
-          example: 0.5
-          exclusiveMinimum: true
-          format: double
-          maximum: 1
-          minimum: 0
-          type: number
-      required:
-        - max_retention_rate
-      type: object
-    RumRateLimitConfigAttributes:
-      description: The RUM rate limit configuration properties.
-      properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRateLimitAdaptiveConfig"
-        custom:
-          $ref: "#/components/schemas/RumRateLimitCustomConfig"
-        mode:
-          $ref: "#/components/schemas/RumRateLimitMode"
-        org_id:
-          description: The ID of the organization the rate limit configuration belongs to.
-          example: 2
-          format: int64
-          type: integer
-        updated_at:
-          description: The date the rate limit configuration was last updated.
-          example: "2026-03-04T15:37:54.951447Z"
-          type: string
-        updated_by:
-          description: The handle of the user who last updated the rate limit configuration.
-          example: test@example.com
-          type: string
-      required:
-        - mode
-        - org_id
-      type: object
-    RumRateLimitConfigData:
-      description: The RUM rate limit configuration object.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RumRateLimitConfigAttributes"
-        id:
-          description: The identifier of the scope the rate limit configuration applies to.
-          example: cd73a516-a481-4af5-8352-9b577465c77b
-          type: string
-        type:
-          $ref: "#/components/schemas/RumRateLimitConfigType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    RumRateLimitConfigResponse:
-      description: The RUM rate limit configuration response.
-      properties:
-        data:
-          $ref: "#/components/schemas/RumRateLimitConfigData"
-      required:
-        - data
-      type: object
-    RumRateLimitConfigType:
-      default: rum_rate_limit_config
-      description: The type of the resource, always `rum_rate_limit_config`.
-      enum:
-        - rum_rate_limit_config
-      example: rum_rate_limit_config
-      type: string
-      x-enum-varnames: ["RUM_RATE_LIMIT_CONFIG"]
-    RumRateLimitConfigUpdateAttributes:
-      description: The RUM rate limit configuration properties to create or update.
-      properties:
-        adaptive:
-          $ref: "#/components/schemas/RumRateLimitAdaptiveConfig"
-        custom:
-          $ref: "#/components/schemas/RumRateLimitCustomConfig"
-        mode:
-          $ref: "#/components/schemas/RumRateLimitMode"
-      required:
-        - mode
-      type: object
-    RumRateLimitConfigUpdateData:
-      description: The RUM rate limit configuration to create or update.
-      properties:
-        attributes:
-          $ref: "#/components/schemas/RumRateLimitConfigUpdateAttributes"
-        id:
-          description: |-
-            The identifier of the scope the rate limit configuration applies to.
-            Must match `scope_id` in the path.
-          example: cd73a516-a481-4af5-8352-9b577465c77b
-          type: string
-        type:
-          $ref: "#/components/schemas/RumRateLimitConfigType"
-      required:
-        - id
-        - type
-        - attributes
-      type: object
-    RumRateLimitConfigUpdateRequest:
-      description: The body of a request to create or update a RUM rate limit configuration.
-      properties:
-        data:
-          $ref: "#/components/schemas/RumRateLimitConfigUpdateData"
-      required:
-        - data
-      type: object
-    RumRateLimitCustomConfig:
-      description: The configuration used when `mode` is `custom`.
-      properties:
-        daily_reset_time:
-          description: The time of day when the daily quota resets, in `HH:MM` 24-hour format.
-          example: "08:00"
-          pattern: "^([01]\\d|2[0-3]):[0-5]\\d$"
-          type: string
-        daily_reset_timezone:
-          description: The timezone offset used for the daily reset time, in `±HH:MM` format.
-          example: "+09:00"
-          pattern: "^[+-](0\\d|1[0-4]):[0-5]\\d$"
-          type: string
-        quota_reached_action:
-          $ref: "#/components/schemas/RumRateLimitQuotaReachedAction"
-        session_limit:
-          description: The maximum number of sessions allowed within the window.
-          example: 1000000
-          format: int64
-          minimum: 1
-          type: integer
-        window_type:
-          $ref: "#/components/schemas/RumRateLimitWindowType"
-      required:
-        - window_type
-        - session_limit
-        - daily_reset_time
-        - daily_reset_timezone
-        - quota_reached_action
-      type: object
-    RumRateLimitMode:
-      description: |-
-        The rate limit mode. `custom` enforces a fixed session limit, while
-        `adaptive` dynamically adjusts retention.
-      enum:
-        - custom
-        - adaptive
-      example: custom
-      type: string
-      x-enum-varnames: ["CUSTOM", "ADAPTIVE"]
-    RumRateLimitQuotaReachedAction:
-      description: The action to take when the session quota is reached.
-      enum:
-        - stop
-        - slowdown
-      example: stop
-      type: string
-      x-enum-varnames: ["STOP", "SLOWDOWN"]
-    RumRateLimitScopeType:
-      default: application
-      description: The type of scope the rate limit configuration applies to.
-      enum:
-        - application
-      example: application
-      type: string
-      x-enum-varnames: ["APPLICATION"]
-    RumRateLimitWindowType:
-      description: The window type over which the session limit is enforced.
-      enum:
-        - daily
-      example: daily
-      type: string
-      x-enum-varnames: ["DAILY"]
     RumRetentionFilterAttributes:
       description: The object describing attributes of a RUM retention filter.
       properties:
@@ -184917,145 +184870,6 @@ paths:
         - Rum Metrics
       x-codegen-request-body-name: body
       x-menu-order: 4
-  /api/v2/rum/config/rate-limit/{scope_type}/{scope_id}:
-    delete:
-      description: Delete the RUM rate limit configuration for a given scope.
-      operationId: DeleteRumRateLimitConfig
-      parameters:
-        - $ref: "#/components/parameters/RumRateLimitScopeTypeParameter"
-        - $ref: "#/components/parameters/RumRateLimitScopeIDParameter"
-      responses:
-        "204":
-          description: No Content
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Delete a RUM rate limit configuration
-      tags:
-        - Rum Rate Limit
-      x-menu-order: 3
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    get:
-      description: Get the RUM rate limit configuration for a given scope.
-      operationId: GetRumRateLimitConfig
-      parameters:
-        - $ref: "#/components/parameters/RumRateLimitScopeTypeParameter"
-        - $ref: "#/components/parameters/RumRateLimitScopeIDParameter"
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        custom:
-                          daily_reset_time: "08:00"
-                          daily_reset_timezone: "+09:00"
-                          quota_reached_action: stop
-                          session_limit: 1000000
-                          window_type: daily
-                        mode: custom
-                        org_id: 2
-                        updated_at: "2026-03-04T15:37:54.951447Z"
-                        updated_by: test@example.com
-                      id: cd73a516-a481-4af5-8352-9b577465c77b
-                      type: rum_rate_limit_config
-              schema:
-                $ref: "#/components/schemas/RumRateLimitConfigResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Get a RUM rate limit configuration
-      tags:
-        - Rum Rate Limit
-      x-menu-order: 1
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
-    put:
-      description: |-
-        Create or update the RUM rate limit configuration for a given scope.
-        Returns the rate limit configuration object when the request is successful.
-      operationId: UpdateRumRateLimitConfig
-      parameters:
-        - $ref: "#/components/parameters/RumRateLimitScopeTypeParameter"
-        - $ref: "#/components/parameters/RumRateLimitScopeIDParameter"
-      requestBody:
-        content:
-          application/json:
-            examples:
-              default:
-                value:
-                  data:
-                    attributes:
-                      custom:
-                        daily_reset_time: "08:00"
-                        daily_reset_timezone: "+09:00"
-                        quota_reached_action: stop
-                        session_limit: 1000000
-                        window_type: daily
-                      mode: custom
-                    id: cd73a516-a481-4af5-8352-9b577465c77b
-                    type: rum_rate_limit_config
-            schema:
-              $ref: "#/components/schemas/RumRateLimitConfigUpdateRequest"
-        description: The definition of the RUM rate limit configuration to create or update.
-        required: true
-      responses:
-        "200":
-          content:
-            application/json:
-              examples:
-                default:
-                  value:
-                    data:
-                      attributes:
-                        custom:
-                          daily_reset_time: "08:00"
-                          daily_reset_timezone: "+09:00"
-                          quota_reached_action: stop
-                          session_limit: 1000000
-                          window_type: daily
-                        mode: custom
-                        org_id: 2
-                        updated_at: "2026-03-04T21:52:53.526022Z"
-                        updated_by: test@example.com
-                      id: cd73a516-a481-4af5-8352-9b577465c77b
-                      type: rum_rate_limit_config
-              schema:
-                $ref: "#/components/schemas/RumRateLimitConfigResponse"
-          description: OK
-        "400":
-          $ref: "#/components/responses/BadRequestResponse"
-        "403":
-          $ref: "#/components/responses/NotAuthorizedResponse"
-        "404":
-          $ref: "#/components/responses/NotFoundResponse"
-        "429":
-          $ref: "#/components/responses/TooManyRequestsResponse"
-      summary: Create or update a RUM rate limit configuration
-      tags:
-        - Rum Rate Limit
-      x-codegen-request-body-name: body
-      x-menu-order: 2
-      x-unstable: |-
-        **Note**: This endpoint is in preview and is subject to change.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
   /api/v2/rum/events:
     get:
       description: |-
@@ -206261,7 +206075,7 @@ paths:
       summary: List degradation templates
       tags:
         - Status Pages
-      x-menu-order: 28
+      x-menu-order: 29
     post:
       description: Creates a new degradation template.
       operationId: CreateDegradationTemplate
@@ -206330,7 +206144,7 @@ paths:
       summary: Create degradation template
       tags:
         - Status Pages
-      x-menu-order: 26
+      x-menu-order: 27
   /api/v2/statuspages/{page_id}/degradation_templates/{template_id}:
     delete:
       description: Deletes a degradation template by its ID (soft delete).
@@ -206363,7 +206177,7 @@ paths:
       summary: Delete degradation template
       tags:
         - Status Pages
-      x-menu-order: 30
+      x-menu-order: 31
     get:
       description: Retrieves a specific degradation template by its ID.
       operationId: GetDegradationTemplate
@@ -206419,7 +206233,7 @@ paths:
       summary: Get degradation template
       tags:
         - Status Pages
-      x-menu-order: 29
+      x-menu-order: 30
     patch:
       description: Updates an existing degradation template's attributes.
       operationId: UpdateDegradationTemplate
@@ -206490,7 +206304,7 @@ paths:
       summary: Update degradation template
       tags:
         - Status Pages
-      x-menu-order: 27
+      x-menu-order: 28
   /api/v2/statuspages/{page_id}/degradations:
     post:
       description: Creates a new degradation.
@@ -207002,7 +206816,7 @@ paths:
       summary: List maintenance templates
       tags:
         - Status Pages
-      x-menu-order: 33
+      x-menu-order: 34
     post:
       description: Creates a new maintenance template.
       operationId: CreateMaintenanceTemplate
@@ -207069,7 +206883,7 @@ paths:
       summary: Create maintenance template
       tags:
         - Status Pages
-      x-menu-order: 31
+      x-menu-order: 32
   /api/v2/statuspages/{page_id}/maintenance_templates/{template_id}:
     delete:
       description: Deletes a maintenance template by its ID (soft delete).
@@ -207102,7 +206916,7 @@ paths:
       summary: Delete maintenance template
       tags:
         - Status Pages
-      x-menu-order: 35
+      x-menu-order: 36
     get:
       description: Retrieves a specific maintenance template by its ID.
       operationId: GetMaintenanceTemplate
@@ -207157,7 +206971,7 @@ paths:
       summary: Get maintenance template
       tags:
         - Status Pages
-      x-menu-order: 34
+      x-menu-order: 35
     patch:
       description: Updates an existing maintenance template's attributes.
       operationId: UpdateMaintenanceTemplate
@@ -207229,7 +207043,7 @@ paths:
       summary: Update maintenance template
       tags:
         - Status Pages
-      x-menu-order: 32
+      x-menu-order: 33
   /api/v2/statuspages/{page_id}/maintenances:
     post:
       description: Schedules a new maintenance.
@@ -207532,6 +207346,82 @@ paths:
       tags:
         - Status Pages
       x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/maintenances/{maintenance_id}/updates/{update_id}:
+    patch:
+      description: Edits the message of a specific maintenance update. Editing is allowed regardless of the parent maintenance's status, including completed and canceled maintenances.
+      operationId: PatchMaintenanceUpdate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the maintenance.
+          in: path
+          name: maintenance_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the maintenance update.
+          in: path
+          name: update_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: We have completed maintenance on the API to improve performance.
+                    id: 00000000-0000-0000-0000-000000000000
+                    type: maintenance_updates
+            schema:
+              $ref: "#/components/schemas/PatchMaintenanceUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        components_affected: []
+                        created_at: "2026-04-27T13:37:31+00:00"
+                        description: We have completed maintenance on the API to improve performance.
+                        manual_transition: true
+                        modified_at: "2026-04-27T14:37:31+00:00"
+                        started_at: "2026-04-27T13:37:31+00:00"
+                        status: completed
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: maintenance_updates
+              schema:
+                $ref: "#/components/schemas/MaintenanceUpdate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_incident_write
+      summary: Edit maintenance update
+      tags:
+        - Status Pages
+      x-menu-order: 26
       x-permission:
         operator: AND
         permissions:
@@ -216972,9 +216862,6 @@ tags:
       description: Find out more at
       url: https://docs.datadoghq.com/real_user_monitoring/platform/generate_metrics/
     name: Rum Metrics
-  - description: |-
-      Manage RUM rate limit configurations for your organization's RUM applications.
-    name: Rum Rate Limit
   - description: Manage heatmap snapshots for RUM replay sessions. Create, update, delete, and retrieve snapshots to visualize user interactions on specific views.
     name: Rum Replay Heatmaps
   - description: Create and manage playlists of RUM replay sessions. Organize, categorize, and share collections of replay sessions for analysis and collaboration.
