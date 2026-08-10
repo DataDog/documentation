@@ -42,5 +42,9 @@ Set up scheduled reports for your stakeholders that are delivered as PDFs throug
 
 To schedule reports, click **Schedule Report** in the top-right corner (or **Manage Reports** if you have already set up reports). For more information, see [Dashboards Scheduled Reports][2].
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]:/internal_developer_portal/catalog
 [2]:/dashboards/sharing/scheduled_reports

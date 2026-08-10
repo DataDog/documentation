@@ -37,8 +37,11 @@ You can update your Teams Performance report view in the following ways:
 - **Filter by team**: Scope the report to one or more teams. Managers and directors can filter by [team hierarchy][1] to view aggregated metrics for their organization or focus on specific subteams.
 - **Change the time range**: Set the lookback window for statuses and trends using the time selector in the top-right corner.
 
-**Note**: Incidents, SLOs, and services that are not associated with a team appear in the **without teams** and **N/A** groupings. Assign [teams][5] to include them in the per-team breakdown. 
+**Note**: Incidents, SLOs, and services that are not associated with a team appear in the **without teams** and **N/A** groupings. Assign [teams][5] to include them in the per-team breakdown.
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /account_management/teams/manage/#subteams-hierarchical-teams
 [2]: /incident_response/incident_management/
