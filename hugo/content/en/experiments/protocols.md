@@ -17,7 +17,7 @@ further_reading:
 
 A protocol is a reusable template for experiment setup. It stores the metrics, randomization settings, duration, and statistical analysis plan that your team applies to a type of experiment.
 
-Most teams run the same kinds of experiments over and over. A product team measures the same set of metrics for every feature rollout. A search team tests ranking changes with the same statistical method each time. Protocols capture these repeated choices one time. Experimenters then select a protocol instead of configuring each setting again.
+Most teams run the same kinds of experiments over and over. A product team measures the same set of metrics for every feature rollout. A search team tests ranking changes with the same statistical method each time. Protocols capture these choices once. Experimenters then select a protocol instead of configuring each setting again.
 
 Use protocols to:
 
@@ -81,7 +81,7 @@ If you change the subject type after you select metrics, Datadog opens the {{< u
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_decision_metrics.png" alt="The Decision metric defaults step of a protocol, showing a Calculate metrics by dropdown set to User, a primary metric of Add to Cart Conversion, and two secondary metrics for Checkout Conversion and Revenue." style="width:80%;" >}}
 
-### Step 3: Additional metrics to auto-add to the experiment
+### Step 3: Additional metrics to add to every experiment
 
 Add metrics that Datadog attaches to every experiment in addition to the decision metrics.
 
@@ -103,7 +103,7 @@ Set how Datadog splits traffic for experiments created from this protocol.
 1. Under {{< ui >}}Traffic exposure{{< /ui >}}, set the percentage of matching users to include in the experiment. You can also define rollout steps to ramp traffic up over time.
 1. (Optional) Toggle on {{< ui >}}Require splitting traffic equally between variants{{< /ui >}}. This records that experiments created from the protocol should use an equal variant split.
 
-The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog feature flags only. Select an environment if you set targeting rules or traffic exposure.
+The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog Feature Flags only. Select an environment if you set targeting rules or traffic exposure.
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 
@@ -140,7 +140,7 @@ The available triggers are:
 | {{< ui >}}Experiment winner rolled out{{< /ui >}} | A team rolls out the winning variant. |
 | {{< ui >}}Sample size calculator run completed{{< /ui >}} | A sample size calculation finishes. |
 
-Datadog copies these notification settings to each experiment created from the protocol. Experimenters can then adjust the recipients on their own experiment. Copying happens in the background shortly after the experiment is created, so the settings may take a moment to appear.
+Datadog copies these notification settings to each experiment created from the protocol; experimenters can then adjust the recipients. The copy runs in the background, so the settings may take a moment to appear.
 
 To remove notifications from the protocol, clear all recipients or clear all triggers.
 
@@ -196,7 +196,7 @@ When you create an experiment from a protocol, Datadog applies these settings:
 | Primary and secondary metrics | Attaches the decision metrics to the experiment. |
 | Metric groups | Attaches the additional metric groups to the experiment. |
 | Statistical analysis plan | Sets the confidence interval method, confidence level, CUPED, and multiple testing correction. |
-| Duration | Sets the target duration from the default duration, and sets the minimum duration. Datadog converts a minimum duration set in weeks to days. |
+| Duration | Sets the experiment's target duration from the protocol default and applies the minimum duration. Datadog converts a minimum duration set in weeks to days. |
 | Randomization defaults | Pre-fills the environment, targeting rules, and traffic exposure on the experiment setup page. |
 | Notifications | Copies the protocol's notification recipients and triggers to the experiment. |
 | Dimensional analysis properties | Makes the selected properties available for breaking out results. |
@@ -214,7 +214,7 @@ To change a published protocol:
 1. Update the settings.
 1. Click {{< ui >}}Save Changes{{< /ui >}}, or click {{< ui >}}Cancel{{< /ui >}} to discard your edits.
 
-Your changes apply to experiments created after you save. Experiments created before you save keep the settings from the version of the protocol they were created with.
+Your changes apply to experiments created after you save. Experiments created earlier keep the settings from the protocol version they were created with.
 
 ## Manage protocols
 
