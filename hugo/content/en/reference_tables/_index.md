@@ -261,7 +261,7 @@ To be alerted on errors encountered during imports, use [Event Monitors][4] for 
 You can create monitors from the {{< ui >}}Monitors{{< /ui >}} tab, or click on the Settings icon next to {{< ui >}}New Reference Table +{{< /ui >}} to generate a pre-filled monitor.
 
 ## Reference Table limits
-- A reference table can have up to 50 columns
+- A reference table can have up to 200 columns
 - A single row cannot be larger than 500KiB
 - The size of a reference table file uploaded through the UI can be up to 200 MB
 - The size of a reference table file uploaded through a cloud bucket file can be up to 200 MB
