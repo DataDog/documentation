@@ -23,7 +23,7 @@ This documentation is for administrators who manage users, alerting, and email w
 - A [paid plan][1] (Pro or Enterprise)
 - The `org_management` permission, included in the default [Datadog Admin role][2]
 
-## Learn about email delivery
+## Learn about Email Delivery
 
 | Page                                | Information                                            |
 | ----------------------------------- | ------------------------------------------------------ |

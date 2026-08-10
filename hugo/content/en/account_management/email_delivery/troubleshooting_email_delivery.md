@@ -20,7 +20,7 @@ further_reading:
 
 ## Overview
 
-When a user reports that they did not receive a Datadog email, use this page to diagnose and fix the problem. To audit delivery events across your organization or set up alerts, see [Track email delivery in your organization][1].
+When a user reports that they did not receive a Datadog email, use this page to diagnose and fix the problem. To audit delivery events across your organization or set up alerts, see [Track Email Delivery in your organization][1].
 
 ## Troubleshooting steps
 
