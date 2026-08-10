@@ -30,7 +30,7 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 ### GPU fleet funnel visualization
 
-Datadog's GPU Monitoring product provides observability for both on-prem and cloud devices within a single, unified view.
+Datadog GPU Monitoring provides observability for both on-prem and cloud devices within a single, unified view.
 
 This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
