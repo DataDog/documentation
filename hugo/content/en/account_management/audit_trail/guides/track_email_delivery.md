@@ -25,8 +25,8 @@ further_reading:
 
 Datadog sends transactional email on your organization's behalf, including user invitations, account verifications, password resets, scheduled reports, and monitor alert notifications. Each email delivery event in Audit Trail has one of three statuses:
 
-- **Delivered**: the recipient's mail server accepted the message.
-- **Bounced**: the recipient's mail server rejected the message.
+- **Delivered**: The recipient's mail server accepted the message.
+- **Bounced**: The recipient's mail server rejected the message.
 - **Dropped**: Datadog did not send the message, because it was suppressed or blocked before delivery.
 
 Use these events to confirm what happened to a message, investigate failures, and get alerted when delivery breaks down. To run a query from this guide, click a situation to open it prefilled in the [Audit Trail Explorer][1], or query for email events manually using the attributes in [Event attributes][2]. To diagnose and fix a specific reported failure, see [Troubleshoot Email Delivery][17].
@@ -88,10 +88,10 @@ These attributes describe how the recipient mail server responded to the deliver
 
 | Name                      | Event attribute                              | Description                                                            | Values                                                        |
 | ------------------------- | -------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------- |
-| SMTP code                 | `@metadata.transport.smtp_code`              | The status code from the server. Group bounces by it to spot top failure reasons. | String, such as `250`, `550`, `554`                 |
+| SMTP code                 | `@metadata.transport.smtp_code`              | The status code from the server. Group bounces by status code to spot top failure reasons. | String, such as `250`, `550`, `554`                 |
 | Enhanced SMTP code        | `@metadata.transport.smtp_enhanced_code`     | A more precise status code ([RFC 3463][16]), such as `5.1.1` for an unknown mailbox. | String, such as `2.0.0`, `5.1.1`, `5.7.1`         |
 | Rejection reason          | `@metadata.transport.smtp_reason`            | A short, readable reason for a bounce.                                  | String, such as `Policy/spam rejection`                       |
-| Enhanced rejection reason | `@metadata.transport.smtp_reason_enhanced`   | A longer explanation of the reason, with guidance on how to resolve it.  | Sentence, such as `The recipient mail server did not respond. This is often a temporary connectivity or throttling issue on the receiving side; retry later.` |
+| Enhanced rejection reason | `@metadata.transport.smtp_reason_enhanced`   | A longer explanation of the reason, with guidance on how to resolve the rejection.  | Sentence, such as `The recipient mail server did not respond. This is often a temporary connectivity or throttling issue on the receiving side; retry later.` |
 | Raw SMTP response         | `@metadata.transport.smtp_response`          | The full, unedited server reply behind the code and reason.             | String, such as `550 5.7.1 Message rejected due to spam content` |
 
 ## Further reading

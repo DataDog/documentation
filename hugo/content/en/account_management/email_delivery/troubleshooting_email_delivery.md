@@ -25,9 +25,9 @@ When a user reports that they did not receive a Datadog email, use this page to 
 ## Troubleshooting steps
 
 1. Check the delivery outcome in [Email Delivery][2], filtering by the recipient's address:
-   - **Delivered**: ask the recipient to check their spam or junk folder, along with any mailbox rules or blocklists that filter Datadog mail.
-   - **Bounced**: the receiving mail server rejected the message and returned a reason. Correct the address or mailbox if it is invalid or full. If the server filters or blocks Datadog mail, [add Datadog to your trusted senders][3] and share the reason and event timestamp with your email administrator.
-   - **Dropped**: the address is suppressed. See [Email suppressions][4] to have it cleared.
+   - **Delivered**: Ask the recipient to check their spam or junk folder, along with any mailbox rules or blocklists that filter Datadog mail.
+   - **Bounced**: The receiving mail server rejected the message and returned a reason. Correct the address or mailbox if it is invalid or full. If the server filters or blocks Datadog mail, [add Datadog to your trusted senders][3] and share the reason and event timestamp with your email administrator.
+   - **Dropped**: The address is suppressed. See [Email suppressions][4] for how to have it cleared.
 2. If email is still missing, contact [Datadog Support][5] for review.
 
 ## Investigate a failed email
@@ -65,8 +65,8 @@ Contact [Datadog Support][5] and provide these items to remove the suppression:
 
 Some failures never produce a delivery event, because Datadog does not attempt the send. If you cannot find any event for a recipient, check whether the account is in one of these states:
 
-- **Unverified users**: invited, but have not accepted the invitation yet.
-- **Disabled users**: deactivated users do not receive notifications.
+- **Unverified users**: Invited, but have not accepted the invitation yet.
+- **Disabled users**: Deactivated users do not receive notifications.
 
 ## Email security gateways
 

@@ -37,10 +37,10 @@ Email Delivery reports the delivery outcome of each email event:
 
 ## Bounces and suppressions
 
-Two concepts explain most failures:
+Most email delivery failures are due to one of the following:
 
-- **Bounce**: the recipient's mail server rejected the message. This usually means the address is invalid, the mailbox is full, or the server rejected Datadog's sender.
-- **Suppression**: after a message to an address bounces, Datadog adds the address to a suppression list and stops sending to it until the suppression is cleared. A message skipped for this reason has a Dropped status.
+- **Bounce**: The recipient's mail server rejected the message. This usually means the address is invalid, the mailbox is full, or the server rejected Datadog's sender.
+- **Suppression**: After a message to an address bounces, Datadog adds the address to a suppression list and stops sending to it until the suppression is cleared. A message skipped for this reason has a Dropped status.
 
 To clear a suppression, see [Email suppressions][3].
 
