@@ -54,7 +54,7 @@ To get a command pre-filled with your API key and site, go to the [Install the D
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 To select SDK versions from dropdowns, click {{< ui >}}Customize Library Versions{{< /ui >}}.
 
-{{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' drop-down in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
+{{< img src="tracing/trace_collection/customize_library_versions.png" alt="The 'Customize library versions' dropdown in the instructions for installing the Datadog Agent on Linux" style="width:100%;" >}}
 {{< /site-region >}}
 
 Then copy and run the generated command.
