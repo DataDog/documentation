@@ -4,6 +4,9 @@ further_reading:
   - link: "/serverless/guide/disable_serverless"
     tag: "Documentation"
     text: "Disable Serverless Monitoring"
+  - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#azure-functions"
+    tag: "Documentation"
+    text: "Send Azure Functions traces to Datadog with OTLP"
   - link: 'http://datadoghq.com/blog/azure-well-architected-serverless-applications-best-practices/'
     tag: 'Blog'
     text: 'Build secure and scalable Azure serverless applications with the Well-Architected Framework'

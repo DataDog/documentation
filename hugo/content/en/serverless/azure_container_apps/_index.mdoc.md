@@ -42,6 +42,9 @@ further_reading:
   - link: "/mcp_server/tools/#serverless_onboarding"
     tag: "Documentation"
     text: "Datadog MCP Server: serverless_onboarding tool"
+  - link: "/opentelemetry/setup/otlp_ingest/serverless/?tab=azure#container-apps"
+    tag: "Documentation"
+    text: "Send Azure Container Apps traces to Datadog with OTLP"
 ---
 
 ## Overview
