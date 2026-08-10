@@ -46,7 +46,7 @@ The Agent's main configuration file is `datadog.yaml`. The required parameters a
 - Your [Datadog API key][16], which is used to associate the Agent's data with your organization. 
 - Your [Datadog site][41] ({{< region-param key="dd_site" code="true" >}}).
 
-See the [sample `config_template.yaml` file][23] for all available configuration options. You can adjust the Agent configuration files to take advantage of other Datadog features.
+You can adjust the Agent configuration files to take advantage of other Datadog features.
 
 
 ## Installation
@@ -282,7 +282,6 @@ For help troubleshooting the Agent:
 [20]: https://app.datadoghq.com/event/explorer
 [21]: /extend/service_checks/#visualize-your-service-check-in-datadog
 [22]: https://app.datadoghq.com/metric/summary
-[23]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [24]: /getting_started/tagging/
 [25]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [26]: /agent/configuration/agent-commands/#restart-the-agent
