@@ -1654,9 +1654,9 @@ The SDK provides several methods to annotate spans with inputs, outputs, metrics
 
 ### Annotating inputs and outputs
 
-Use the `annotateIO()` member method of the `LLMObsSpan` interface to add structured input and output data to an `LLMObsSpan`. This includes optional arguments and LLM message objects.
+The `LLMObsSpan` interface provides three methods for annotating span inputs and outputs. Use `annotateIO()` for LLM, task, agent, workflow, and tool spans. Use `annotateEmbeddingIO()` to annotate an embedding span's inputs with document objects, and `annotateRetrievalIO()` to annotate a retrieval span's outputs with document objects. `annotateEmbeddingIO()` and `annotateRetrievalIO()` require `dd-trace-java` 1.66.0 or later.
 
-#### Arguments
+#### annotateIO() arguments
 
 If an argument is null or empty, nothing happens. For example, if `inputData` is a non-empty string while `outputData` is null, then only `inputData` is recorded.
 
@@ -1667,6 +1667,30 @@ If an argument is null or empty, nothing happens. For example, if `inputData` is
 `outputData`
 : optional - _String_ or _List<LLMObs.LLMMessage>_
 <br />Either a string (for non-LLM spans) or a list of `LLMObs.LLMMessage`s for LLM spans.
+
+#### annotateEmbeddingIO() arguments
+
+If an argument is null or empty, nothing happens.
+
+`inputDocuments`
+: optional - _List<LLMObs.Document>_
+<br />A list of documents passed to the embedding model as input.
+
+`outputData`
+: optional - _String_
+<br />The embedding output as a string.
+
+#### annotateRetrievalIO() arguments
+
+If an argument is null or empty, nothing happens.
+
+`inputData`
+: optional - _String_
+<br />The retrieval query as a string.
+
+`outputDocuments`
+: optional - _List<LLMObs.Document>_
+<br />A list of documents returned by the retrieval operation.
 
 #### LLM Messages
 LLM spans must be annotated with LLM Messages using the `LLMObs.LLMMessage` object.
@@ -1681,7 +1705,28 @@ The `LLMObs.LLMMessage` object can be instantiated by calling `LLMObs.LLMMessage
 : required - _String_
 <br />A string containing the content of the message.
 
-#### Example
+#### Documents
+Embedding and retrieval spans use the `LLMObs.Document` class to represent individual documents.
+
+The `LLMObs.Document` object can be instantiated by calling `LLMObs.Document.from()` with the following arguments:
+
+`text`
+: required - _String_
+<br />The text content of the document.
+
+`name`
+: optional - _String_
+<br />A name for the document.
+
+`id`
+: optional - _String_
+<br />A unique identifier for the document.
+
+`score`
+: optional - _Double_
+<br />A relevance score for the document.
+
+#### Examples
 
 ```java
 import datadog.trace.api.llmobs.LLMObs;
@@ -1702,6 +1747,42 @@ public class MyJavaClass {
     );
     llmSpan.finish();
     return chatResponse;
+  }
+}
+```
+
+```java
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public float[] performEmbedding(String inputText) {
+    LLMObsSpan embeddingSpan = LLMObs.startEmbeddingSpan("embed-text", "text-embedding-3", "openai", null, "session-141");
+    float[] embeddings = ... // user application logic to generate embeddings
+    embeddingSpan.annotateEmbeddingIO(
+      Arrays.asList(LLMObs.Document.from(inputText, null, null, null)),
+      null
+    );
+    embeddingSpan.finish();
+    return embeddings;
+  }
+}
+```
+
+```java
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public List<Document> retrieveDocuments(String query) {
+    LLMObsSpan retrievalSpan = LLMObs.startRetrievalSpan("retrieve-docs", null, "session-141");
+    List<Document> docs = ... // user application logic to retrieve documents
+    retrievalSpan.annotateRetrievalIO(
+      query,
+      Arrays.asList(
+        LLMObs.Document.from(docs.get(0).text, docs.get(0).name, docs.get(0).id, docs.get(0).score)
+      )
+    );
+    retrievalSpan.finish();
+    return docs;
   }
 }
 ```
