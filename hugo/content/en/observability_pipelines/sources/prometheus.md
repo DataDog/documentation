@@ -24,19 +24,10 @@ After you select the Prometheus source in the pipeline UI:
 1. Enter the identifier for your Prometheus address. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for your Prometheus username and password. If you leave it blank, the [default](#secret-defaults) is used.
-1. (Optional) Set up authentication tokens. See [Configure authentication tokens](#configure-authentication-tokens) for details.
-1. (Optional) Select {{< ui >}}Aggregate metrics{{< /ui >}} to combine metrics that share the same name, tags, and timestamp before they are sent downstream.
-1. (Optional) Configure keepalive settings. See [Configure keepalive](#configure-keepalive) for details.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
 ### Optional settings
-
-#### Enable TLS
-
-{{% observability_pipelines/tls_settings %}}
-
-{{% observability_pipelines/tls_settings_mtls %}}
 
 #### Configure authentication tokens
 
@@ -53,12 +44,22 @@ To configure authentication tokens, enable the {{< ui >}}Configure authenticatio
 	- {{< ui >}}Address{{< /ui >}} for an IP address.
 	- {{< ui >}}Path{{< /ui >}} for an endpoint path.
 
+#### Aggregate metrics
+
+Select {{< ui >}}Aggregate metrics{{< /ui >}} to combine metrics that share the same name, tags, and timestamp before they are sent downstream.
+
 #### Configure keepalive
 
 To configure keepalive settings for connections to the source, enable the {{< ui >}}Configure keepalive{{< /ui >}} toggle:
 
 - {{< ui >}}Max connection age{{< /ui >}}: The maximum number of seconds after which a connection is closed. The default is `300` seconds.
 - {{< ui >}}Max connection age jitter factor{{< /ui >}}: The factor used to randomize the max connection age, so all connections don't close simultaneously. The default is `0.1`.
+
+#### Enable TLS
+
+{{% observability_pipelines/tls_settings %}}
+
+{{% observability_pipelines/tls_settings_mtls %}}
 
 ## Secret defaults
 
