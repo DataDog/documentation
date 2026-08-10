@@ -110,7 +110,7 @@ Bits Code also [ingests custom instructions][33] defined in your repository and 
 Bits Code integrates with [source code providers](#supported-source-code-providers) to:
 - Create pull or merge requests, generating titles and descriptions based on your repository's pull or merge request template
 - Iterate on pull requests in response to comments (GitHub only); mention `@Datadog` in a comment to prompt Bits for updates
-- Monitor CI logs and fix failures
+- Monitor CI logs, fix failures, and attempt to resolve conflicts when a monitored GitHub pull request or GitLab merge request conflicts with its base branch. If conflicts and CI failures are both present, Bits Code can address them in the same run.
 
 Bits Code never auto-merges PRs or MRs. See all the PRs or MRs that Bits Code is working on in {{< ui >}}Bits AI{{< /ui >}} > {{< ui >}}Bits Code{{< /ui >}} > [{{< ui >}}Sessions{{< /ui >}}][7].
 
