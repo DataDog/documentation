@@ -28,7 +28,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 Local coding-agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
 
-Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility, supported advanced features, and CI configuration without changing Datadog settings or sending validation results to Datadog.
+Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
 
 Pass this prompt to your local coding agent:
 
@@ -36,17 +36,17 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method verifies setup but does not exercise the end-to-end Prevention, Mitigation, and Remediation workflows. To validate languages other than JavaScript, or to validate the full workflow, complete the following steps.
+The coding-agent method verifies local setup only. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
 
 ## Set up validation
 
 Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
 
-1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. Datadog lets you create this service entry before any tests report under that name.
+1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You do not need prior test data to create this service entry.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
-2. Enable [Flaky Test Policies][6], then create a quarantine policy with a branch rule for `validate-test-optimization`.
+2. Enable [Flaky Test Policies][6], then create a quarantine policy and set its branch rule to `validate-test-optimization`.
 3. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
 {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
@@ -253,10 +253,14 @@ git push origin validate-test-optimization
 
 Wait for CI to run, then confirm the following results:
 
-- Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry.
-- Flaky Test Management quarantines the test so its failures do not block the test job.
-- The test appears as {{< ui >}}QUARANTINED{{< /ui >}} in [Flaky Test Management][9]. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `flaky_test_state:quarantined`.
-- The retry attempts appear in [Test Runs][8]. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.retry_reason:auto_test_retry`.
+- In [Test Runs][8], Auto Test Retries reruns the test after its first failed attempt, and the test passes on retry. Use the following filters:
+  - `@test.name:*flaky*validation*`
+  - `@git.branch:validate-test-optimization`
+  - `@test.retry_reason:auto_test_retry`
+- In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}, and its failures do not block the test job. Use the following filters:
+  - `@test.name:*flaky*validation*`
+  - `first_flaked_branch:validate-test-optimization`
+  - `flaky_test_state:quarantined`
 
 ## Remediation
 
@@ -346,8 +350,14 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 
 5. Wait for CI to finish, then confirm the following results:
 
-   - In [Test Runs][10], Attempt to Fix retried the fix candidate (the test with your proposed fix), and every attempt passed. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_attempt_to_fix:true`.
-   - In [Flaky Test Management][14], the test is marked {{< ui >}}Fix in progress{{< /ui >}}. The query filters on `@test.name:*flaky*validation*`, `first_flaked_branch:validate-test-optimization`, and `fix_in_progress:true`.
+   - In [Test Runs][10], Attempt to Fix retried the fix candidate (the test with your proposed fix), and every attempt passed. Use the following filters:
+     - `@test.name:*flaky*validation*`
+     - `@git.branch:validate-test-optimization`
+     - `@test.test_management.is_attempt_to_fix:true`
+   - In [Flaky Test Management][14], the test is marked {{< ui >}}Fix in progress{{< /ui >}}. Use the following filters:
+     - `@test.name:*flaky*validation*`
+     - `first_flaked_branch:validate-test-optimization`
+     - `fix_in_progress:true`
 
 Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
 
