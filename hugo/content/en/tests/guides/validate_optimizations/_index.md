@@ -36,7 +36,7 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method is a local check that does not exercise the full Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
+The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
 
 ## Set up validation
 
@@ -44,7 +44,7 @@ Complete the following configuration steps for the repository. Scope each config
 
 <div class="alert alert-info">Use the same branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase builds on the flaky test state that Datadog recorded during the previous phase, so do not create another branch between phases.</div>
 
-1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can create the service entry before it has any test data.
+1. In the [Test Optimization settings][3], create the `validate-test-optimization` service entry before it has any test data.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
@@ -257,7 +257,7 @@ Wait for CI to run, then confirm the following results:
   - `@test.name:*flaky*validation*`
   - `@git.branch:validate-test-optimization`
   - `@test.retry_reason:auto_test_retry`
-- In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}, and its failures do not block the test job. Use the following filters:
+- In [Flaky Test Management][9], the test appears as {{< ui >}}QUARANTINED{{< /ui >}}. Its failures no longer block the test job. Use the following filters:
   - `@test.name:*flaky*validation*`
   - `first_flaked_branch:validate-test-optimization`
   - `flaky_test_state:quarantined`
