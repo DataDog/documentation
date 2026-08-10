@@ -5,7 +5,7 @@ description: Use Studio's Workboard to track your coding agent sessions, pull re
 
 ## Overview
 
-Workboard brings together your [coding sessions][1], pull requests, and tickets in a single view. You might run multiple coding agents, such as Claude Code or Codex, across the desktop app and the terminal. Workboard helps you track what each one is doing in one place.
+Workboard brings together your [coding sessions][1], pull requests, and tickets in a single view, and shows when a session or pull request is blocked and waiting on you. If you use multiple coding agents, such as Claude Code or Codex, across Studio and your terminal, every session appears here without switching tools.
 
 Workboard addresses three common problems for engineers working with coding agents:
 
