@@ -9,11 +9,9 @@ export const prerender = true;
  */
 
 import type { APIRoute, GetStaticPaths } from "astro";
-import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import { LOCALES, parseLangParam } from "@lib/i18n/locale";
-import { buildMarkdocStr, heading } from "@lib/plaintext/helpers";
-import { apiEndpointNodes } from "@components/ApiEndpoint/plaintext/ApiEndpoint";
+import { apiOperationBody } from "@lib/plaintext/pages/apiPageBodies";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -50,14 +48,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const contents: MarkdocNode[] = [heading(1, operation.summary)];
-  for (const [i, variant] of operation.variants.entries()) {
-    const label = i === 0 ? `${variant.version} (latest)` : variant.version;
-    contents.push(heading(2, label));
-    contents.push(...apiEndpointNodes(variant));
-  }
-
-  const body = buildMarkdocStr(contents);
+  const body = apiOperationBody(operation);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },

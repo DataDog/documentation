@@ -1,26 +1,41 @@
 import { describe, it, expect, vi } from 'vitest';
+import type { PlaintextPage } from '@lib/pagesListing/types';
 
-vi.mock('@lib/api/viewsBuilder', () => ({
-  getCategoriesView: vi.fn(async () => [
-    {
-      slug: 'action-connection',
-      name: 'Action Connection',
-      description: '',
-      operations: [
-        { operationId: 'GetConnection', summary: 'Get a connection', slug: 'get-a-connection', menuOrder: 1, version: 'v2', method: 'GET' },
-      ],
-      deprecated: false,
+const pages: PlaintextPage[] = [
+  {
+    urlPath: '/api/latest.md',
+    metadata: { title: 'API Reference', description: 'Reference docs.', breadcrumbs: ['Docs'], isPrivate: false },
+    buildBody: async () => '',
+  },
+  {
+    urlPath: '/api/latest/action-connection.md',
+    metadata: { title: 'Action Connection', description: '', breadcrumbs: ['Docs', 'API Reference'], isPrivate: false },
+    buildBody: async () => '',
+  },
+  {
+    urlPath: '/api/latest/action-connection/get-a-connection.md',
+    metadata: {
+      title: 'Get a connection',
+      description: 'Get the connection.',
+      breadcrumbs: ['Docs', 'API Reference', 'Action Connection'],
+      isPrivate: false,
     },
-    {
-      slug: 'aws-integration',
-      name: 'AWS Integration',
+    buildBody: async () => '',
+  },
+  {
+    urlPath: '/api/latest/action-connection/secret-op.md',
+    metadata: {
+      title: 'Secret op',
       description: '',
-      operations: [
-        { operationId: 'CreateRole', summary: 'Create role', slug: 'create-role', menuOrder: 1, version: 'v1', method: 'POST' },
-      ],
-      deprecated: false,
+      breadcrumbs: ['Docs', 'API Reference', 'Action Connection'],
+      isPrivate: true,
     },
-  ]),
+    buildBody: async () => '',
+  },
+];
+
+vi.mock('@lib/pagesListing/pageSources', () => ({
+  pageSources: [{ listPages: vi.fn(async () => pages) }],
 }));
 
 const { GET } = await import('../../src/pages/llms.txt.ts');
@@ -33,19 +48,27 @@ describe('GET /llms.txt', () => {
     expect(res.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
   });
 
-  it('starts with the API Reference heading', async () => {
+  it('starts with the top-level heading', async () => {
     const res = (await GET(ctx)) as Response;
     const body = await res.text();
-    expect(body.startsWith('## Datadog API Reference\n\n')).toBe(true);
+    expect(body.startsWith('# Datadog Documentation\n\n')).toBe(true);
   });
 
-  it('includes a heading per category and a bullet per operation', async () => {
+  it('groups by breadcrumb and links to each page .md', async () => {
     const res = (await GET(ctx)) as Response;
     const body = await res.text();
-    expect(body).toContain('### Action Connection');
-    expect(body).toMatch(/- \[Get a connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\/get-a-connection\.md\)/);
-    expect(body).toContain('### AWS Integration');
-    expect(body).toMatch(/- \[Create role\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/aws-integration\/create-role\.md\)/);
+    expect(body).toContain('## API Reference\n');
+    expect(body).toContain('## API Reference > Action Connection\n');
+    expect(body).toMatch(
+      /- \[Get a connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\/get-a-connection\.md\): Get the connection\./,
+    );
+  });
+
+  it('excludes private pages', async () => {
+    const res = (await GET(ctx)) as Response;
+    const body = await res.text();
+    expect(body).not.toContain('Secret op');
+    expect(body).not.toContain('secret-op.md');
   });
 
   it('throws when site is not configured', async () => {

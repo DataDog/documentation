@@ -9,20 +9,12 @@ export const prerender = true;
  */
 
 import type { APIRoute, GetStaticPaths } from "astro";
-import type { Node as MarkdocNode } from "@markdoc/markdoc";
-import type { ApiOperationStub } from "@lib/api/schemas/views";
 import {
   getCategoryStubsView,
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
-import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import { alertNode } from "@components/Alert/plaintext/Alert";
-import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
-import {
-  buildMarkdocStr,
-  heading,
-  nodesFromMd,
-} from "@lib/plaintext/helpers";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import { apiCategoryBody } from "@lib/plaintext/pages/apiPageBodies";
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -55,34 +47,9 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
-
-  const contents: MarkdocNode[] = [heading(1, category.name)];
-
-  if (category.deprecated) {
-    contents.push(
-      alertNode("warning", nodesFromMd("This endpoint is deprecated.")),
-    );
-  }
-
-  if (category.description) {
-    contents.push(...nodesFromMd(category.description.trim()));
-  }
-
-  for (const operation of category.operations) {
-    contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
-  }
-
-  const body = buildMarkdocStr(contents);
+  const body = apiCategoryBody(category, lang);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };
-
-function endpointSummaryNodes(
-  operation: ApiOperationStub,
-  baseHref: string,
-): MarkdocNode[] {
-  return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
-}

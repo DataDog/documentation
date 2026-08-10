@@ -7,18 +7,9 @@ export const prerender = true;
  */
 
 import type { APIRoute, GetStaticPaths } from "astro";
-import type { Node as MarkdocNode } from "@markdoc/markdoc";
 import { getCategoryStubsView } from "@lib/api/viewsBuilder";
-import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
-import {
-  buildMarkdocStr,
-  heading,
-  inline,
-  link,
-  list,
-  listItem,
-  paragraphFromText,
-} from "@lib/plaintext/helpers";
+import { LOCALES, parseLangParam } from "@lib/i18n/locale";
+import { apiLandingBody } from "@lib/plaintext/pages/apiPageBodies";
 
 export const getStaticPaths: GetStaticPaths = () => {
   return LOCALES.map((lang) => ({
@@ -33,22 +24,7 @@ export const GET: APIRoute = async ({ params }) => {
   }
 
   const categories = await getCategoryStubsView(lang);
-
-  const items = categories.map((cat) => {
-    const href = localizedHref(lang, `/api/latest/${cat.slug}/`);
-    return listItem([inline([link(href, cat.name)])]);
-  });
-  const listNode = list("unordered", items);
-
-  const contents: MarkdocNode[] = [
-    heading(1, "API Reference"),
-    paragraphFromText(
-      "Welcome to the Datadog API Reference. Select a category to get started.",
-    ),
-    listNode,
-  ];
-
-  const body = buildMarkdocStr(contents);
+  const body = apiLandingBody(categories, lang);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
