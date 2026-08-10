@@ -24,29 +24,67 @@ This page explains how to check that the optimizations offered by Test Optimizat
 
 These optimizations require a [supported native library][13]. JUnit XML uploads are not supported.
 
-## Prevention
+## Validate locally with an agent
 
-Prevention is achieved through [Early Flake Detection][1] and [New Flaky Test PR Gates][2], which help detect new flaky tests and block them from reaching your default branch.
+Local agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package.
 
-To validate prevention is working, follow these steps:
+Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method does not provision Datadog settings or report validation progress to Datadog.
 
-1. Enable Early Flake Detection in the [settings page][3].
-2. Create a [New Flaky Test PR gate][12] and define its scope to the repository you are validating.
+Pass this prompt to your local agent:
+
+```text
+Locate the installed dd-trace package, then read and execute its ci/runbook.md.
+```
+
+To validate other languages, or to validate the full Prevention, Mitigation, and Remediation workflow, follow the guided steps on this page.
+
+## Set up validation
+
+Validation needs three settings on this repository. Scope each setting to validation so your default branches and existing services stay untouched:
+
+1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service:
+   - Enable [Early Flake Detection][1].
+   - Enable [Auto Test Retries][4].
+   - Disable Intelligent Test Runner.
+2. Enable [Flaky Test Policies][6], then create a quarantine policy with a branch rule for `validate-test-optimization`.
+3. Create a [New Flaky Test PR Gate][12] and scope it to the repository you are validating.
 
 {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
-3. Add a new flaky test.
+Set `DD_SERVICE` in your test run command so tests on the validation branch report under the dedicated service:
 
-This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
+```bash
+export DD_SERVICE=validate-test-optimization
+```
 
-Here are some simple examples of flaky tests. The test name must include the string `flaky`:
+Create the validation branch:
+
+```bash
+git checkout -b validate-test-optimization
+```
+
+Use this branch for all three validation phases.
+
+## Prevention
+
+[Early Flake Detection][1] detects new flaky tests. [New Flaky Test PR Gates][2] block them from reaching your default branch.
+
+To validate prevention, add a test that fails on the first attempt and passes on retries. The test name must contain both `flaky` and `validation` so you can identify it in Datadog.
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}
 
 ```javascript
-test('flaky test', () => {
-    expect(Math.random()).toBeGreaterThan(0.5);
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+
+test('flaky validation test', () => {
+    const marker = path.join(os.tmpdir(), 'dd-validation-flaky');
+    if (!fs.existsSync(marker)) {
+        fs.writeFileSync(marker, '1');
+        throw new Error('first attempt fails so Datadog can retry it');
+    }
 });
 ```
 
@@ -54,19 +92,41 @@ test('flaky test', () => {
 {{% tab "Python" %}}
 
 ```python
-import random
+from pathlib import Path
+from tempfile import gettempdir
 
-def test_flaky():
-    assert random.random() > 0.5
+
+def test_flaky_validation_test():
+    marker = Path(gettempdir()) / "dd-validation-flaky"
+    if not marker.exists():
+        marker.write_text("1")
+        raise AssertionError("first attempt fails so Datadog can retry it")
 ```
 
 {{% /tab %}}
 {{% tab "Java" %}}
 
 ```java
-@Test
-public void flakyTest() {
-    assertTrue(Math.random() > 0.5);
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
+
+class ValidationFlakyTest {
+    @Test
+    void flakyValidationTest() throws IOException {
+        Path marker = Paths.get(
+            System.getProperty("java.io.tmpdir"),
+            "dd-validation-flaky"
+        );
+        if (Files.notExists(marker)) {
+            Files.writeString(marker, "1");
+            fail("first attempt fails so Datadog can retry it");
+        }
+    }
 }
 ```
 
@@ -74,8 +134,16 @@ public void flakyTest() {
 {{% tab "Ruby" %}}
 
 ```ruby
-it 'is flaky' do
-  expect(rand).to be > 0.5
+require 'tmpdir'
+
+RSpec.describe 'validation flaky tests' do
+  it 'flaky validation test' do
+    marker = File.join(Dir.tmpdir, 'dd-validation-flaky')
+    unless File.exist?(marker)
+      File.write(marker, '1')
+      raise 'first attempt fails so Datadog can retry it'
+    end
+  end
 end
 ```
 
@@ -83,10 +151,21 @@ end
 {{% tab ".NET" %}}
 
 ```csharp
-[Fact]
-public void FlakyTest()
+using System.IO;
+using Xunit;
+
+public class ValidationFlakyTests
 {
-    Assert.True(new Random().NextDouble() > 0.5);
+    [Fact]
+    public void FlakyValidationTest()
+    {
+        var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky");
+        if (!File.Exists(marker))
+        {
+            File.WriteAllText(marker, "1");
+            throw new System.Exception("first attempt fails so Datadog can retry it");
+        }
+    }
 }
 ```
 
@@ -94,9 +173,22 @@ public void FlakyTest()
 {{% tab "Go" %}}
 
 ```go
-func TestFlaky(t *testing.T) {
-    if rand.Float64() <= 0.5 {
-        t.Fail()
+package validation
+
+import (
+    "errors"
+    "os"
+    "path/filepath"
+    "testing"
+)
+
+func TestFlakyValidationTest(t *testing.T) {
+    marker := filepath.Join(os.TempDir(), "dd-validation-flaky")
+    if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
+        if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
+            t.Fatal(writeErr)
+        }
+        t.Fatal("first attempt fails so Datadog can retry it")
     }
 }
 ```
@@ -105,254 +197,84 @@ func TestFlaky(t *testing.T) {
 {{% tab "Swift" %}}
 
 ```swift
-func testFlaky() {
-    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
+import XCTest
+
+final class ValidationFlakyTests: XCTestCase {
+    func testFlakyValidationTest() throws {
+        let marker = FileManager.default.temporaryDirectory
+            .appendingPathComponent("dd-validation-flaky")
+        if !FileManager.default.fileExists(atPath: marker.path) {
+            try "1".write(to: marker, atomically: true, encoding: .utf8)
+            XCTFail("first attempt fails so Datadog can retry it")
+        }
+    }
 }
 ```
 
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Create a new branch `validate-test-optimization-prevention`, commit the changes to add a new flaky test, and push the changes to open a pull request.
+Commit and push the test, then open a pull request from the validation branch:
 
 ```bash
-git checkout -b validate-test-optimization-prevention
 git add -A
-git commit -m "Validate Test Optimization's Prevention"
-git push origin validate-test-optimization-prevention
+git commit -m "Validate Test Optimization prevention"
+git push origin validate-test-optimization
 ```
 
-5. Wait for CI to run.
-6. In the GitHub checks of your pull request, the New Flaky Test PR Gate should be failing:
+Wait for CI to run. Early Flake Detection retries the new test, and the New Flaky Test PR Gate evaluates the result. In the GitHub checks for your pull request, confirm that the New Flaky Test PR Gate fails:
 
-{{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub Pull Request check failing because a new flaky test is detected" style="width:100%" >}}
+{{< img src="pr_gates/setup/failed_pr_gate.png" alt="GitHub pull request check failing because a new flaky test is detected" style="width:100%" >}}
 
-7. Click on the failing GitHub check:
+Click the failing GitHub check and confirm that the test is included in the list of new flaky tests:
 
 {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-The test you added is included in the list of new flaky tests. Click it to be redirected to [Flaky Test Management][14].
-
-8. Additionally check that the test is detected as new flaky in [Test Runs][7]. Check that the filter parameters include `@test.name:*flaky*`, `@git.branch:validate-test-optimization-prevention` and `@test.test_management.is_new_flaky:true`.
+In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as new and flaky. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, and `@test.test_management.is_new_flaky:true`.
 
 ## Mitigation
 
-Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These optimizations allow you to automatically retry flaky tests and apply policies on them, such as quarantining or disabling.
+Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-To validate mitigation is working, follow these steps:
+Modify the same flaky test that you added for Prevention. Add the appropriate comment inside the test file so CI runs the test on the next commit:
 
-1. Enable Auto Test Retries in the [settings page][3].
-2. Enable Flaky Test Policies in the [Flaky Tests Policies settings page][8].
-3. Create a flaky test policy that disables the flaky test if it flakes on `validate-test-optimization-mitigation`.
-
-{{< img src="pr_gates/setup/flaky_test_policy_disable.png" alt="Flaky test policy for disabling a test" style="width:100%" >}}
-
-4. Add a new flaky test.
-
-This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
-
-Here are some simple examples of flaky tests. The test name must include the string `flaky`:
-
-{{< tabs >}}
-{{% tab "JavaScript" %}}
-
-```javascript
-test('flaky test', () => {
-    expect(Math.random()).toBeGreaterThan(0.5);
-});
+```text
+// trigger Auto Test Retries
 ```
 
-{{% /tab %}}
-{{% tab "Python" %}}
+For Python and Ruby, use `# trigger Auto Test Retries`.
 
-```python
-import random
-
-def test_flaky():
-    assert random.random() > 0.5
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-@Test
-public void flakyTest() {
-    assertTrue(Math.random() > 0.5);
-}
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-it 'is flaky' do
-  expect(rand).to be > 0.5
-end
-```
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-[Fact]
-public void FlakyTest()
-{
-    Assert.True(new Random().NextDouble() > 0.5);
-}
-```
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-```go
-func TestFlaky(t *testing.T) {
-    if rand.Float64() <= 0.5 {
-        t.Fail()
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Swift" %}}
-
-```swift
-func testFlaky() {
-    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-5. Create a new branch `validate-test-optimization-mitigation`, commit the changes to add a new flaky test, and push the changes to open a pull request.
+Commit and push the change on the same branch:
 
 ```bash
-git checkout -b validate-test-optimization-mitigation
 git add -A
-git commit -m "Validate Test Optimization's mitigation"
-git push origin validate-test-optimization-mitigation
+git commit -m "Validate Test Optimization mitigation"
+git push origin validate-test-optimization
 ```
 
-6. Wait for CI to run.
-7. Confirm that the newly added flaky test does not cause CI to fail.
-8. Go to [Flaky Test Management][10] and check that the newly added flaky test shows up.
+Wait for CI to run, then confirm the following results:
 
-**Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-mitigation`.
-
-Click on the only test in the list and verify that it shows as {{< ui >}}DISABLED{{< /ui >}}. This confirms that the flaky test policy was triggered.
-
-9. Go to [Test Runs][9] and check that the newly added flaky test shows up.
-
-**Important**: Check that the filter parameters include `@test.name:*flaky*`, `@git.branch:validate-test-optimization-mitigation` and `@test.is_flaky:true`.
+- Auto Test Retries reruns the test after its first failed attempt and recovers it to a pass.
+- Flaky Test Management quarantines the test so its failures do not block the test job.
+- The test appears as {{< ui >}}QUARANTINED{{< /ui >}} in [Flaky Test Management][10].
+- The retry attempts appear in [Test Runs][9].
 
 ## Remediation
 
-Test Optimization helps with the remediation of test flakiness with attempt to fix and Bits AI auto fixes. This section focuses on the validation of the attempt to fix workflow.
+Test Optimization supports the remediation of test flakiness with Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
 
-To validate attempt to fix, follow these steps:
+1. In [Flaky Test Management][10], open the quarantined validation test.
+2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated `DD_…` key.
 
-1. Enable Auto Test Retries in the [settings page][3].
-2. Add a new flaky test.
+{{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
 
-This test is flaky by design. **It is not intended to be committed to the default branch**. Run the validation in a feature branch, and do not merge it.
-
-Here are some simple examples of flaky tests. The test name must include the string `flaky`:
+Replace the flaky test with the passing version for your language:
 
 {{< tabs >}}
 {{% tab "JavaScript" %}}
 
 ```javascript
-test('flaky test', () => {
-    expect(Math.random()).toBeGreaterThan(0.5);
-});
-```
-
-{{% /tab %}}
-{{% tab "Python" %}}
-
-```python
-import random
-
-def test_flaky():
-    assert random.random() > 0.5
-```
-
-{{% /tab %}}
-{{% tab "Java" %}}
-
-```java
-@Test
-public void flakyTest() {
-    assertTrue(Math.random() > 0.5);
-}
-```
-
-{{% /tab %}}
-{{% tab "Ruby" %}}
-
-```ruby
-it 'is flaky' do
-  expect(rand).to be > 0.5
-end
-```
-
-{{% /tab %}}
-{{% tab ".NET" %}}
-
-```csharp
-[Fact]
-public void FlakyTest()
-{
-    Assert.True(new Random().NextDouble() > 0.5);
-}
-```
-
-{{% /tab %}}
-{{% tab "Go" %}}
-
-```go
-func TestFlaky(t *testing.T) {
-    if rand.Float64() <= 0.5 {
-        t.Fail()
-    }
-}
-```
-
-{{% /tab %}}
-{{% tab "Swift" %}}
-
-```swift
-func testFlaky() {
-    XCTAssertTrue(Double.random(in: 0..<1) > 0.5)
-}
-```
-
-{{% /tab %}}
-{{< /tabs >}}
-
-3. Create a new branch `validate-test-optimization-attempt-to-fix`, commit the changes to add a new flaky test, and push the changes to open a pull request.
-
-```bash
-git checkout -b validate-test-optimization-attempt-to-fix
-git add -A
-git commit -m "Validate Test Optimization's attempt to fix"
-git push origin validate-test-optimization-attempt-to-fix
-```
-
-4. Wait for CI to run.
-5. Confirm that the newly added flaky test does not cause CI to fail.
-6. Go to [Flaky Test Management][11] and check that the newly added flaky test shows up as {{< ui >}}Active{{< /ui >}}.
-
-**Important**: Check that the filter parameters include `@test.name:*flaky*`, `first_flaked_branch:validate-test-optimization-attempt-to-fix`.
-
-7. Fix the flaky test by removing its randomness:
-
-{{< tabs >}}
-{{% tab "JavaScript" %}}
-
-```javascript
-test('flaky test', () => {
+test('flaky validation test', () => {
     expect(true).toBe(true);
 });
 ```
@@ -361,7 +283,7 @@ test('flaky test', () => {
 {{% tab "Python" %}}
 
 ```python
-def test_flaky():
+def test_flaky_validation_test():
     assert True
 ```
 
@@ -370,8 +292,8 @@ def test_flaky():
 
 ```java
 @Test
-public void flakyTest() {
-    assertTrue(true);
+void flakyValidationTest() {
+    // intentionally empty — the test now passes
 }
 ```
 
@@ -379,8 +301,8 @@ public void flakyTest() {
 {{% tab "Ruby" %}}
 
 ```ruby
-it 'is flaky' do
-  expect(true).to be true
+it 'flaky validation test' do
+  expect(true).to be(true)
 end
 ```
 
@@ -389,7 +311,7 @@ end
 
 ```csharp
 [Fact]
-public void FlakyTest()
+public void FlakyValidationTest()
 {
     Assert.True(true);
 }
@@ -399,7 +321,7 @@ public void FlakyTest()
 {{% tab "Go" %}}
 
 ```go
-func TestFlaky(t *testing.T) {
+func TestFlakyValidationTest(t *testing.T) {
 }
 ```
 
@@ -407,7 +329,7 @@ func TestFlaky(t *testing.T) {
 {{% tab "Swift" %}}
 
 ```swift
-func testFlaky() {
+func testFlakyValidationTest() {
     XCTAssertTrue(true)
 }
 ```
@@ -415,24 +337,19 @@ func testFlaky() {
 {{% /tab %}}
 {{< /tabs >}}
 
-8. In [Flaky Test Management][11], click the flaky test, then click on the {{< ui >}}Actions{{< /ui >}} button and select {{< ui >}}Link commit to Flaky Test fix{{< /ui >}}. This opens a modal that provides a test key and sample Git command:
-
-{{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to fix modal" style="width:50%" >}}
-
-Copy the git commit command.
-
-9. Commit and push the flaky test fixes:
+Commit the fix with the generated key in the commit body. Replace `<DD_KEY>` with the key you copied:
 
 ```bash
 git add -A
-git commit -m "Fix flaky test DD_ABC123"
-git push origin validate-test-optimization-attempt-to-fix
+git commit -m "Fix flaky validation test
+
+<DD_KEY>"
+git push origin validate-test-optimization
 ```
 
-10. Wait for CI to finish.
-11. After CI has finished, go back to [Flaky Test Management][11]. The test now shows up as {{< ui >}}Fix In Progress{{< /ui >}}. This means that the attempt to fix has worked. The test automatically moves to {{< ui >}}Fixed{{< /ui >}} when the PR is merged.
+Wait for CI to finish. In [Test Runs][11], confirm that Attempt to Fix retried the fix candidate and every attempt passed. In Flaky Test Management, confirm that the test is marked {{< ui >}}Fix In Progress{{< /ui >}}.
 
-**Important**: Do not merge the PR, as it was just purely for validation purposes. Close the pull request without merging.
+Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
 
 ## Further reading
 
@@ -444,11 +361,9 @@ git push origin validate-test-optimization-attempt-to-fix
 [4]: /tests/flaky_tests/auto_test_retries
 [5]: /tests/flaky_management
 [6]: /tests/flaky_management/#configure-policies-to-automate-the-flaky-test-lifecycle
-[7]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2A%20%40git.branch%3Avalidate-test-optimization-prevention%20%40test.test_management.is_new_flaky%3Atrue
-[8]: https://app.datadoghq.com/ci/settings/test-optimization/flaky-test-management
-[9]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2A%20%40git.branch%3Avalidate-test-optimization-mitigation%20%40test.is_flaky%3Atrue
-[10]: https://app.datadoghq.com/ci/test/flaky?query=%40test.name%3A%2Aflaky%2A%20first_flaked_branch%3Avalidate-test-optimization-mitigation
-[11]: https://app.datadoghq.com/ci/test/flaky?query=%40test.name%3A%2Aflaky%2A%20first_flaked_branch%3Avalidate-test-optimization-attempt-to-fix
+[7]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.retry_reason%3Aearly_flake_detection%20%40test.test_management.is_new_flaky%3Atrue
+[9]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.retry_reason%3Aauto_test_retry
+[10]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20flaky_test_state%3Aquarantined
+[11]: https://app.datadoghq.com/ci/test/runs?query=test_level%3Atest%20%40test.name%3A%2Aflaky%2Avalidation%2A%20%40git.branch%3Avalidate-test-optimization%20%40test.test_management.is_attempt_to_fix%3Atrue
 [12]: https://app.datadoghq.com/ci/pr-gates/rule/create?dataSource=test_optimization
 [13]: /tests/
-[14]: https://app.datadoghq.com/ci/test/flaky?query=%40test.name%3A%2Aflaky%2A%20first_flaked_branch%3Avalidate-test-optimization-prevention
