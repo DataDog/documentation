@@ -855,17 +855,25 @@ To trace an agent execution, use the function decorator `ddtrace.llmobs.decorato
 `ml_app`
 : optional - _string_
 <br/>The name of the ML application that the operation belongs to. See [Tracing multiple applications](#tracing-multiple-applications) for more information.
+
+`version`
+: optional - _string_
+<br/>The version of the agent. Applies only to this agent span and does not propagate to child spans.
 {{% /collapse-content %}}
 
 #### Example
 
 {{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
 from ddtrace.llmobs.decorators import agent
 
-@agent
+@agent(version="v3")
 def react_agent():
     ... # user application logic
     return
+
+with LLMObs.agent(name="react_agent", version="v3") as agent_span:
+    ... # user application logic
 {{< /code-block >}}
 
 {{% /tab %}}
@@ -1397,6 +1405,10 @@ The `LLMObs.annotate()` method accepts the following arguments:
 : optional - _list of strings_
 <br />A list of tag keys (already set with `tags` or annotated previously on the same span) to propagate as custom tags on the generated LLM cost and token metrics. Entries that don't reference an existing tag key are skipped. See [Cost monitoring](#cost-monitoring) for details.
 
+`agent`
+: optional - _dictionary_
+<br />A dictionary for annotating agent spans. Accepts `{"version": "..."}`, where the `"version"` key is a string that identifies the agent version. You can also pass a `ddtrace.llmobs.Agent` object. Applies only to agent spans.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1915,6 +1927,10 @@ The `LLMObs.annotation_context()` method accepts the following arguments:
 : optional - _list of strings_
 <br />A list of tag keys to propagate as custom tags on the generated LLM cost and token metrics. Each entry must reference a key present in `tags` at span start (supplied to the same context or a parent context); tag keys added later with `LLMObs.annotate()` are not retained. See [Cost monitoring](#cost-monitoring) for details.
 
+`agent`
+: optional - _dictionary_
+<br />A dictionary for annotating agent spans started within the context. Accepts `{"version": "..."}`, where the `"version"` key is a string that identifies the agent version. You can also pass a `ddtrace.llmobs.Agent` object. Applies only to agent spans.
+
 {{% /collapse-content %}}
 
 #### Example
@@ -1940,7 +1956,8 @@ def rag_workflow(user_question):
         tags = {
             "retrieval_strategy": "semantic_similarity"
         },
-        name = "augmented_generation"
+        name = "augmented_generation",
+        agent = {"version": "v3"},
     ):
         completion = openai_client.chat.completions.create(...)
     return completion.choices[0].message.content
