@@ -26,9 +26,11 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 ## Validate locally with a coding agent
 
-Local coding-agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
+Local coding-agent validation is in the Preview release stage and supports only JavaScript projects that use the npm `dd-trace` package. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
 
 Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
+
+The runbook is at `ci/runbook.md` relative to the installed `dd-trace` package root.
 
 Pass this prompt to your local coding agent:
 
@@ -42,9 +44,9 @@ The coding-agent method is a local check that does not exercise the entire Datad
 
 Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
 
-<div class="alert alert-info">Use the same branch for all three validation phases: Prevention, Mitigation, and Remediation. Each phase builds on the flaky test state that Datadog recorded during the previous phase, so do not create another branch between phases.</div>
+<div class="alert alert-info">Use the same branch for all three validation phases: Prevention, Mitigation, and Remediation. Mitigation and Remediation each build on the flaky test state recorded in the previous phase, so do not create another branch between phases.</div>
 
-1. In the [Test Optimization settings][3], create the `validate-test-optimization` service entry before it has any test data.
+1. In the [Test Optimization settings][3], add a service named `validate-test-optimization`. You can add it before tests report under that name.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
@@ -241,7 +243,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Make a small edit to the same flaky test that you added for Prevention—for example, add a comment. The edit exists only to trigger a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during the Prevention step, Auto Test Retries and Flaky Test Management handle it during this run.
+Change the marker filename in the same flaky test that you added for Prevention, but keep the test name unchanged. This change triggers a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during the Prevention step, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
@@ -350,7 +352,7 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
 
 5. Wait for CI to finish, then confirm the following results:
 
-   - In [Test Runs][10], Attempt to Fix retried the fix candidate (the test with your proposed fix), and every attempt passed. Use the following filters:
+   - In [Test Runs][10], Attempt to Fix retried the fix candidate, and every attempt passed. Use the following filters:
      - `@test.name:*flaky*validation*`
      - `@git.branch:validate-test-optimization`
      - `@test.test_management.is_attempt_to_fix:true`
@@ -359,7 +361,7 @@ Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI
      - `first_flaked_branch:validate-test-optimization`
      - `fix_in_progress:true`
 
-Do not merge the validation pull request. Close the pull request and delete the `validate-test-optimization` branch after validation is complete.
+After validation is complete, close the pull request without merging and delete the `validate-test-optimization` branch.
 
 ## Further reading
 
