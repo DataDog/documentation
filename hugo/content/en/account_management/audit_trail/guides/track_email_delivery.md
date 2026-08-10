@@ -73,11 +73,11 @@ Every Email Delivery event includes the attributes below. Use them to filter and
 
 | Name              | Event attribute                        | Description                                                                | Values                                                |
 | ----------------- | -------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------- |
-| Delivery outcome  | `@action`                              | The final result of the send attempt, and the field you filter on most often. | `email_delivered`, `email_bounced`, `email_dropped` |
-| Status            | `@metadata.email_status`               | The outcome as a plain status word, the short form of the action.           | `delivered`, `bounced`, `dropped`                     |
+| Delivery outcome  | `@action`                              | The final result of the send attempt.                                         | `email_delivered`, `email_bounced`, `email_dropped` |
+| Status            | `@metadata.email_status`               | The outcome as a plain status word, which is the short form of the action.           | `delivered`, `bounced`, `dropped`                     |
 | Timestamp         | `@metadata.event_timestamp`            | When the delivery outcome was recorded.                                    | Timestamp, such as `2026-07-11T18:30:24Z`             |
 | Email type        | `@metadata.email.type`                 | The kind of email sent. Filter to focus on one workflow.                    | String, such as `Basic Invite`                        |
-| Recipient address | `@metadata.email.recipient_address`    | The address the message was sent to. Filter to trace the mail for one person. | String, such as `john.doe@example.com`              |
+| Recipient address | `@metadata.email.recipient_address`    | The address the message was sent to. Filter to trace every message sent to one recipient. | String, such as `john.doe@example.com`              |
 | Recipient domain  | `@metadata.email.recipient_domain`     | The recipient domain, including the leading `@`. Filter to check a whole organization at once. | String, such as `@example.com`      |
 | Subject           | `@metadata.email.subject`              | The subject line of the email, for identifying a specific message.          | String                                                |
 | Message ID        | `@metadata.email.email_message_id`     | Unique ID for the message. Share it with Datadog Support to find the exact send. | String                                           |
