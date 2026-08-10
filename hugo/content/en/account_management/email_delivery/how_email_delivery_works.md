@@ -19,7 +19,7 @@ further_reading:
 
 Email delivery involves more than one system: Datadog sends the message, and the recipient's mail server decides whether to accept or reject it. Email Delivery reports one outcome for each message, based on the response the recipient's mail server returns. If the address is suppressed, Datadog does not send the message.
 
-When a receiving server rejects a message, it returns a standardized SMTP response code, such as `550` for an unavailable mailbox. These codes are an industry standard ([RFC 5321][1]) that every mail system uses, including Datadog. Because each mail server applies them differently, a code is a strong signal but not always an exact reason. For the failures you are most likely to encounter, see [Common reasons email fails][2].
+When a receiving server rejects a message, it returns a standardized SMTP response code, such as `550` for an unavailable mailbox. These codes are an industry standard ([RFC 5321][1]) that every mail system uses, including Datadog. Because each mail server applies them differently, a code is a strong signal but not always an exact explanation. For the failures you are most likely to encounter, see [Common reasons email fails][2].
 
 ## What Email Delivery tracks
 

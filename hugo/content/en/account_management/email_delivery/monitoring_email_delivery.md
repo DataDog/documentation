@@ -18,7 +18,7 @@ Email Delivery provides a dashboard for reviewing delivery activity, and it lets
 
 ## Access Email Delivery
 
-Navigate to [**Organization Settings**][1] > [**Email Delivery**][2]. The Email Delivery dashboard opens in a new tab. Access requires the `org_management` permission.
+Navigate to [**Organization Settings**][1] > [**Email Delivery**][2]. Access requires the `org_management` permission.
 
 ## Email Delivery dashboard
 

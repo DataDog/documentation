@@ -43,7 +43,7 @@ dtdg-trial.eu
 ddog-gov.com
 ```
 
-**Note**: Datadog owns all of the above. This list may not be complete. If you receive Datadog email from a sender that is not listed here, contact [Datadog Support][1].
+**Note**: Datadog owns all of these addresses and domains. This list may not be complete. If you receive Datadog email from a sender that is not listed here, contact [Datadog Support][1].
 
 ## Check your sender authentication
 
