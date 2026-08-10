@@ -10,6 +10,7 @@ import { realpathSync } from "node:fs";
 import { LOCALES } from "./src/lib/i18n/locale.ts";
 import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
 import { deriveSiteUrl } from "./src/lib/site/siteUrl.ts";
+import { pagesJson } from "./src/integrations/pagesJson.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
@@ -57,6 +58,10 @@ export default defineConfig({
       filenameBase: "api/sitemap",
       filter: isSitemapPage,
     }),
+    // Emits dist/client/pages.json after the build by hashing each emitted .md
+    // from disk (no page body is built twice). Must come after sitemap so the
+    // sidecar is deleted only once every build:done consumer has run.
+    pagesJson(),
   ],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled

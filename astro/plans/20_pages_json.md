@@ -110,25 +110,50 @@ string (not a boolean) leaves room for finer-grained provenance later.
   encodes "which routes are real production routes" (excludes `/dd_e2e/`, root
   redirect). Reuse the same exclusion intent.
 
-## Approach: a static route at `src/pages/pages.json.ts`
+## Approach: metadata route + build-time hashing integration (implemented)
 
-Astro routes by filename, so `src/pages/pages.json.ts` with an exported `GET`
-prerenders to `dist/client/pages.json`, served at `/pages.json`. This mirrors the
-existing `llms.txt.ts` and `*.md.ts` routes — no new integration or
-`astro:build:done` hook needed, and it stays testable as an ordinary handler.
+`pages.json` is built in two halves so that **no page body is ever built twice**
+— a real concern at the eventual ~30K-page scale, where building every body once
+for the `.md` route and again for `pages.json` would double build time, and
+holding all bodies in memory to dedupe would blow up memory.
 
-The route is **English-only and web-root**, so it lives at
-`src/pages/pages.json.ts` (outside the `[...lang]` tree).
+1. **`src/pages/pages-index.json.ts`** (prerendered route) — emits a cheap
+   metadata *sidecar*: `[{ key, file, metadata }]` for every page, via
+   `buildPageIndex(pageSources, site.origin)`. It **never calls `buildBody`**.
+   `file` is the disk-relative path of the emitted `.md` (the `urlPath` minus its
+   leading slash).
+2. **`src/integrations/pagesJson.ts`** (`astro:build:done`) — reads the sidecar,
+   streams each already-emitted `.md` from `dist/client` through md5 one at a
+   time (`buildListingFromIndex` + `assemblePagesListing`), writes the final
+   `dist/client/pages.json`, and deletes the sidecar.
 
-### Why a route, not an `astro:build:done` hook
+The result: each body is materialized exactly once (by its `.md` route during the
+static build), peak memory is one body regardless of page count, and the
+`mdocHash` is the md5 of the exact bytes on disk — so it *cannot* drift from
+served content (physics, not a shared-builder convention).
 
-- Matches the established repo pattern (`llms.txt`, `.md` routes are all routes).
-- No dependency on integration lifecycle or on reading already-emitted files from
-  the output dir.
-- The `mdocHash` must hash *exactly the plaintext each `.md` route serves*. The
-  route can compute this by calling the **same body-building functions** the
-  `.md.ts` routes use — see the shared-builder refactor below — so the hash can't
-  drift from served content.
+`pages.json` is **English-only and web-root** (`/pages.json`).
+
+### Consequence: build-only artifact
+
+Because hashing happens in `astro:build:done`, `pages.json` exists in
+`astro build` / `astro preview` / production, **but not in `astro dev`**. It is a
+machine-consumption artifact, so this is acceptable (confirmed with the owner).
+`llms.txt` is unaffected — it only reads metadata, never bodies, so it stays a
+live route in dev (see below).
+
+### Why not a plain `pages.json.ts` route
+
+A prerendered route can't reliably read other routes' emitted files (Astro gives
+no route-ordering guarantee, and dev renders on demand), so a route would have to
+build every body itself — the double-build we're avoiding. And an
+`astro:build:done` hook runs in **Node, outside Vite's module graph**, so it
+cannot resolve `@lib`/`@components` aliases: the integration and everything it
+imports (`buildListingFromIndex` → `assemblePagesListing` → `schema` → zod) must
+stay **alias-free** (relative + npm only). Metadata, which *does* need the
+alias-laden source tree, is therefore produced by the route (in Vite's graph) and
+handed to the integration through the on-disk sidecar. The sidecar is excluded
+from the sitemap (`isSitemapPage`) and deleted every build.
 
 ## The Cdocs-extensible seam: a "plaintext page source" registry
 

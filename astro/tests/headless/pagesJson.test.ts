@@ -1,58 +1,81 @@
 import { describe, it, expect } from "vitest";
-import { PagesListingSchema } from "@lib/pagesListing/schema";
+import { createHash } from "node:crypto";
 import { collectPages } from "@lib/pagesListing/collectPages";
 import { pageSources } from "@lib/pagesListing/pageSources";
+import type { PageIndexEntry } from "@lib/pagesListing/pageIndex";
+import { buildListingFromIndex } from "@lib/pagesListing/buildListingFromIndex";
+import { PagesListingSchema } from "@lib/pagesListing/schema";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 
-import { GET as pagesJsonGET } from "../../src/pages/pages.json.ts";
+import { GET as pageIndexGET } from "../../src/pages/pages-index.json.ts";
 import { GET as operationGET } from "../../src/pages/[...lang]/api/latest/[category]/[operation].md.ts";
 
 const ctx = (site?: URL) =>
-  ({ site }) as unknown as Parameters<typeof pagesJsonGET>[0];
+  ({ site }) as unknown as Parameters<typeof pageIndexGET>[0];
 
-describe("GET /pages.json", () => {
+async function readIndex(): Promise<PageIndexEntry[]> {
+  const res = (await pageIndexGET(
+    ctx(new URL("https://docs.datadoghq.com")),
+  )) as Response;
+  return JSON.parse(await res.text());
+}
+
+describe("GET /pages-index.json (metadata sidecar)", () => {
   it("returns application/json", async () => {
-    const res = (await pagesJsonGET(ctx(new URL("https://docs.datadoghq.com")))) as Response;
+    const res = (await pageIndexGET(
+      ctx(new URL("https://docs.datadoghq.com")),
+    )) as Response;
     expect(res.headers.get("Content-Type")).toBe("application/json; charset=utf-8");
   });
 
-  it("emits a schema-valid listing whose keys are absolute .md URLs", async () => {
-    const res = (await pagesJsonGET(ctx(new URL("https://docs.datadoghq.com")))) as Response;
-    const listing = JSON.parse(await res.text());
-    expect(() => PagesListingSchema.parse(listing)).not.toThrow();
-
-    const keys = Object.keys(listing);
-    expect(keys.length).toBeGreaterThan(0);
-    for (const key of keys) {
-      expect(key.startsWith("https://docs.datadoghq.com/")).toBe(true);
-      expect(key.endsWith(".md")).toBe(true);
+  it("emits sorted entries with absolute .md keys and disk-relative files", async () => {
+    const index = await readIndex();
+    expect(index.length).toBeGreaterThan(0);
+    for (const entry of index) {
+      expect(entry.key.startsWith("https://docs.datadoghq.com/")).toBe(true);
+      expect(entry.key.endsWith(".md")).toBe(true);
+      expect(entry.file).toBe(entry.key.replace("https://docs.datadoghq.com/", ""));
+      expect(entry.file.startsWith("/")).toBe(false);
     }
-    // Keys are sorted.
+    const keys = index.map((entry) => entry.key);
     expect(keys).toEqual([...keys].sort());
   });
 
   it("throws when site is not configured", async () => {
-    await expect(async () => await pagesJsonGET(ctx(undefined))).rejects.toThrow(/site/);
+    await expect(async () => await pageIndexGET(ctx(undefined))).rejects.toThrow(/site/);
   });
+});
 
-  it("mdocHash matches the plaintext the .md route serves (no drift)", async () => {
+describe("pages.json assembly (hash from emitted plaintext)", () => {
+  it("hashes the exact plaintext the .md route serves (no drift)", async () => {
+    // The build hashes each .md file on disk; that file is byte-identical to
+    // what the source's buildBody produces, so hashing either yields the same
+    // mdocHash. Verify the chain with buildBody standing in for the disk read.
+    const pages = await collectPages(pageSources);
+    const bodyByFile = new Map<string, string>();
+    for (const page of pages) {
+      bodyByFile.set(page.urlPath.replace(/^\//, ""), await page.buildBody());
+    }
+
+    const index = await readIndex();
+    const listing = await buildListingFromIndex(index, async (file) =>
+      bodyByFile.get(file)!,
+    );
+    expect(() => PagesListingSchema.parse(listing)).not.toThrow();
+
+    // Spot-check one operation against an independent hash of the served body.
     const categories = await getCategoriesView("en");
     const cat = categories.find((c) => c.operations.length > 0)!;
     const op = cat.operations[0];
+    const key = `https://docs.datadoghq.com/api/latest/${cat.slug}/${op.slug}.md`;
 
-    // What the API source hashes:
-    const pages = await collectPages(pageSources);
-    const opPage = pages.find(
-      (p) => p.urlPath === `/api/latest/${cat.slug}/${op.slug}.md`,
-    )!;
-    const sourceBody = await opPage.buildBody();
+    const servedBody = await (
+      (await operationGET({
+        params: { lang: undefined, category: cat.slug, operation: op.slug },
+      } as unknown as Parameters<typeof operationGET>[0])) as Response
+    ).text();
+    const expectedHash = createHash("md5").update(servedBody, "utf8").digest("hex");
 
-    // What the .md route actually serves:
-    const res = (await operationGET({
-      params: { lang: undefined, category: cat.slug, operation: op.slug },
-    } as unknown as Parameters<typeof operationGET>[0])) as Response;
-    const servedBody = await res.text();
-
-    expect(sourceBody).toBe(servedBody);
+    expect(listing[key].mdocHash).toBe(expectedHash);
   });
 });

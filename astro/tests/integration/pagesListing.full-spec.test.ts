@@ -8,7 +8,9 @@
  */
 
 import { describe, it, expect } from "vitest";
-import { buildPagesListing } from "@lib/pagesListing/buildPagesListing";
+import { buildPageIndex } from "@lib/pagesListing/pageIndex";
+import { buildListingFromIndex } from "@lib/pagesListing/buildListingFromIndex";
+import { collectPages } from "@lib/pagesListing/collectPages";
 import { pageSources } from "@lib/pagesListing/pageSources";
 import { PagesListingSchema } from "@lib/pagesListing/schema";
 import { buildLlmsTree, DEFAULT_HARD_CHAR_LIMIT } from "@lib/pagesListing/llmsTree";
@@ -16,9 +18,20 @@ import { getCategoriesView } from "@lib/api/viewsBuilder";
 
 const SITE = "https://docs.datadoghq.com";
 
+/** Builds the full pages.json the way the integration does, hashing bodies. */
+async function buildFullListing() {
+  const pages = await collectPages(pageSources);
+  const bodyByFile = new Map<string, string>();
+  for (const page of pages) {
+    bodyByFile.set(page.urlPath.replace(/^\//, ""), await page.buildBody());
+  }
+  const index = await buildPageIndex(pageSources, SITE);
+  return buildListingFromIndex(index, async (file) => bodyByFile.get(file)!);
+}
+
 describe("pages.json coverage against full spec", () => {
   it("emits landing + specials + one entry per category and per operation", { timeout: 60_000 }, async () => {
-    const listing = await buildPagesListing(pageSources, SITE);
+    const listing = await buildFullListing();
     expect(() => PagesListingSchema.parse(listing)).not.toThrow();
 
     const keys = new Set(Object.keys(listing));
@@ -56,7 +69,7 @@ describe("pages.json coverage against full spec", () => {
   });
 
   it("gives every entry a 32-char mdocHash and source 'astro'", { timeout: 60_000 }, async () => {
-    const listing = await buildPagesListing(pageSources, SITE);
+    const listing = await buildFullListing();
     for (const entry of Object.values(listing)) {
       expect(entry.mdocHash).toHaveLength(32);
       expect(entry.source).toBe("astro");
