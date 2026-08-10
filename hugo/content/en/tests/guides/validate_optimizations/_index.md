@@ -24,13 +24,13 @@ This page explains how to check that the optimizations offered by Test Optimizat
 
 These optimizations require a [supported native library][12]. JUnit XML uploads are not supported.
 
-## Validate locally with an agent
+## Validate locally with a coding agent
 
-Local agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package.
+Local coding agent validation is in Preview and supports only JavaScript projects that use the npm `dd-trace` package.
 
 Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method does not provision Datadog settings or report validation progress to Datadog.
 
-Pass this prompt to your local agent:
+Pass this prompt to your local coding agent:
 
 ```text
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
@@ -236,13 +236,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Modify the same flaky test that you added for Prevention. Add the appropriate comment inside the test file so CI runs the test on the next commit:
-
-```text
-// trigger Auto Test Retries
-```
-
-For Python and Ruby, use `# trigger Auto Test Retries`.
+Modify the same flaky test that you added for Prevention. Add a comment that reads `trigger Auto Test Retries` using your language's comment syntax so CI runs the test on the next commit.
 
 Commit and push the change on the same branch:
 
@@ -264,7 +258,7 @@ Wait for CI to run, then confirm the following results:
 Test Optimization supports the remediation of test flakiness with Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
 
 1. In [Flaky Test Management][9], open the quarantined validation test.
-2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated `DD_…` key.
+2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated `DD_...` key.
 
 {{< img src="pr_gates/setup/attempt_to_fix_modal.png" alt="Attempt to Fix modal" style="width:50%" >}}
 
