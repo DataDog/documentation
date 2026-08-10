@@ -1,7 +1,6 @@
 ---
 title: Catalog Health
 description: Assess IDP Catalog completeness across entity types, lifecycle, tier, definition version, and ownership.
-- /software_catalog/eng_reports/reliability_overview/
 further_reading:
 - link: "/internal_developer_portal/catalog"
   tag: "Documentation"
