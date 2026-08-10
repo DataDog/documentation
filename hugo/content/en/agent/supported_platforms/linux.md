@@ -58,7 +58,7 @@ The Datadog Agent configuration file is located in `/etc/datadog-agent/datadog.y
 - `proxy`: HTTP/HTTPS proxy endpoints for outbound traffic (see [Datadog Agent Proxy Configuration][8])
 - Default tags, log level, and Datadog configurations
 
-A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste. Alternatively, see the sample `config_template.yaml` file for all available configuration options.
+A fully commented reference file, located in `/etc/datadog-agent/datadog.yaml.example`, lists every available option for comparison or to copy and paste.
 
 ### Integration files
 Configuration files for integrations live in `/etc/datadog-agent/conf.d/`. Each integration has its own sub-directory, `<INTEGRATION>.d/`, that contains:
