@@ -257,7 +257,7 @@ In [Test Runs][7], confirm that Early Flake Detection retried the test and detec
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Change the marker filename in the same flaky test that you added for Prevention, but keep the test name unchanged. This change triggers a new CI run; no additional Datadog configuration is required. Because Datadog identified the test as flaky during the Prevention step, Auto Test Retries and Flaky Test Management handle it during this run.
+In the same test that you added for Prevention, change the marker filename from `dd-validation-flaky` to `dd-validation-flaky-mitigation`. Do not rename the test function or test case. The new marker causes another intentional first-attempt failure. Keeping the test name unchanged lets Datadog associate the run with the flaky test detected during Prevention. No additional Datadog configuration is required; Auto Test Retries and Flaky Test Management handle the test during this run.
 
 Commit and push the change on the same branch:
 
