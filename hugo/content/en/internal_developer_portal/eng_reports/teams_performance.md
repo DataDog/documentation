@@ -25,7 +25,7 @@ With this report, you can:
 
 The Teams Performance report pulls data from Datadog [Incident Management][2], [Service Level Objectives][3], and [DORA Metrics][4]. Each domain populates after its source is set up. 
 
-Access the Teams Performance report by navigating to **Reports** in your Internal Developer Portal and selecting **Teams Performance** in the left-hand emnu. . 
+To access the Teams Performance report, navigate to **Reports** in your Internal Developer Portal and select **Teams Performance** in the left-hand menu.
 
 {{< img src="tracing/eng_reports/teams-performance-landing.png" alt="Default view of the Teams Performance report, showing the Incident Response section" style="width:100%;" >}} 
 
