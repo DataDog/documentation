@@ -10712,16 +10712,36 @@ menu:
       url: studio/quickstart/
       parent: studio
       weight: 2
+    - name: Home page and signals
+      identifier: studio_home
+      url: studio/home/
+      parent: studio
+      weight: 3
+    - name: Out-of-the-box pages
+      identifier: studio_pages
+      url: studio/pages/
+      parent: studio
+      weight: 4
+    - name: Bits AI in Studio
+      identifier: studio_bits_ai
+      url: studio/bits_ai/
+      parent: studio
+      weight: 5
+    - name: Loops
+      identifier: studio_loops
+      url: studio/loops/
+      parent: studio
+      weight: 6
     - name: Workboard
       identifier: studio_workboard
       url: studio/workboard/
       parent: studio
-      weight: 3
+      weight: 7
     - name: Core Concepts
       identifier: studio_core_concepts
       url: studio/core_concepts/
       parent: studio
-      weight: 4
+      weight: 8
     - name: How Studio works
       identifier: studio_how_studio_works
       url: studio/core_concepts/how_studio_works/
@@ -10742,3 +10762,13 @@ menu:
       url: studio/core_concepts/coding_sessions_and_trajectories/
       parent: studio_core_concepts
       weight: 4
+    - name: Guides
+      identifier: studio_guide
+      url: studio/guide/
+      parent: studio
+      weight: 9
+    - name: Investigate an issue from a signal
+      identifier: studio_guide_investigate_an_issue
+      url: studio/guide/investigate_an_issue/
+      parent: studio_guide
+      weight: 1
