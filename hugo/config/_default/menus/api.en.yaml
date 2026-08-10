@@ -18,11 +18,6 @@ menu:
       parent: API overview
       weight: 7
       identifier: rate-limits
-    - name: Changelog
-      url: /api/changelog/
-      parent: API overview
-      weight: 8
-      identifier: api-changelog
     - name: AWS Integration
       url: /api/latest/aws-integration/
       identifier: aws-integration
