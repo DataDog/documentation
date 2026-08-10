@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-[GPU Fleet Explorer][0] provides a detailed breakdown across AI infrastructure (like GPU devices, hosts, or Ray clusters) and AI workloads (Pods, Kube Containers, or Training Runs) for a specified time frame. Use this page to uncover provisioning inefficiencies and workload performance optimizations through rich resource telemetry covering GPU utilization, host-level metrics, and costs. This page also surfaces Datadog's proactive real-time detection of any issues impacting your fleet and workloads, alongside guidance on how to remediate those issues, to help you maximize the value of your GPU spend.
+[GPU Fleet Explorer][0] provides a detailed breakdown across AI infrastructure (such as GPU devices, hosts, or Ray clusters) and AI workloads (such as Pods, Kube Containers, or Training Runs) for a specified time frame. This page helps you uncover provisioning inefficiencies and workload performance optimizations through resource telemetry, including GPU utilization, host-level metrics, and costs. It also surfaces Datadog's real-time detection of issues impacting your fleet and workloads, with guidance on how to remediate them.
 
 ## Detect issues with out-of-the-box monitors
 
