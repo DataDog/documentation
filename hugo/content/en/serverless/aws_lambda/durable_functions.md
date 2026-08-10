@@ -80,7 +80,7 @@ The Datadog Lambda Extension adds these attributes to a durable function's logs:
 | `@lambda.durable_function.execution_name` | The execution name. Groups all logs from one execution. |
 | `@lambda.durable_function.execution_id` | The execution ID. |
 | `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
-| `@lambda.durable_function.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`, where `PENDING` means the execution suspended and resumes in a later invocation. On the `END` log, or on the `REPORT` log for executions on Lambda Managed Instances. |
+| `@lambda.durable_function.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`, where `PENDING` means the execution suspended and resumes in a later invocation. On the `END` log, or on the `REPORT` log for executions on [Lambda Managed Instances][10]. |
 
 Example queries (add `@lambda.arn:"<FUNCTION_ARN>"` to scope to one function):
 
@@ -215,3 +215,4 @@ If you encounter an issue with the CloudFormation stack, open an issue in the [c
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/cloudformation-template/tree/master/aws_durable_function_event_forwarder
 [9]: /serverless/aws_lambda/logs/#enable-log-collection
+[10]: /serverless/aws_lambda/managed_instances/
