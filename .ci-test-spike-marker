@@ -1,0 +1,5 @@
+Throwaway marker for the documentation-ci dynamic-build spike (documentation-ci#229).
+
+Exists only to give change detection a non-empty diff against master on the
+ci-test/dynamic-build-spike branch. Delete this file and the branch once the
+spike questions are answered. Do not merge to master.
