@@ -39,7 +39,7 @@ The funnel also highlights any performance issues or provisioning inefficiencies
 {{< img src="gpu_monitoring/funnel-4.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
-- {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with Datadog's GPU monitoring correctly configured and reporting metrics
+- {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
 - {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and are providing value
 - {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are actively working for more than 50% of the selected time frame
 
