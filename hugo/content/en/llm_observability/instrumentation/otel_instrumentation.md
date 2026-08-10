@@ -851,11 +851,9 @@ The following Langfuse-specific attributes are filtered from tags because they'r
 
 ## Troubleshooting mapping warnings
 
-At ingestion, Agent Observability detects span mapping problems such as a missing model name or an unparsable token count. It flags affected spans instead of failing silently.
+At ingestion, Agent Observability detects span mapping problems such as missing input messages or an unparsable token count. It flags affected spans instead of failing silently.
 
-Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute, a suggested fix, and a link to the relevant section in this page.
-
-A trace containing any flagged spans also shows a summary indicator in its header that lists every affected span. Selecting a span from that list jumps to that span.
+Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute and a suggested fix. The panel also includes a link to the [attribute mapping reference](#attribute-mapping-reference).
 
 <div class="alert alert-info">Warnings are detected at ingestion. They don't affect billing or span retention.</div>
 
@@ -863,7 +861,6 @@ A trace containing any flagged spans also shows a summary indicator in its heade
 
 | Warning | Attribute | Fix |
 |---------|-----------|-----|
-| Missing model name | Expected `gen_ai.request.model` | Set `gen_ai.response.model` or `gen_ai.request.model`. |
 | Malformed model identifier | On `gen_ai.request.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
 | Missing input and output | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` and `gen_ai.output.messages`. |
 | Malformed input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
