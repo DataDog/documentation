@@ -63,14 +63,14 @@ In general, use the following rules:
 
 ### Exceptions
 
-- Not all `datadog.yaml` options are available with environment variables. See [config.go][4] in the Datadog Agent GitHub repo. Options with environment variables start with `config.BindEnv*`.
+- Not all `datadog.yaml` options are available with environment variables. See [common_settings.go][4] in the Datadog Agent GitHub repo (for Agent 7.50 and earlier, see [config.go on the 7.50.x branch][9] instead). Options with environment variables start with `config.BindEnv*`.
 
-- Component-specific environment variables not listed in [config.go][4] may also be supported.
+- Component-specific environment variables not listed in [common_settings.go][4] may also be supported.
  
   - **APM Trace Agent**
 
       - [Docker APM Agent Environment Variables][5]
-      - [trace-agent config/apm.go][6]
+      - [trace-agent config/apm_settings.go][6]
       - example
 
           ```yaml
@@ -83,7 +83,7 @@ In general, use the following rules:
 
   - **Live Process Agent**
 
-      - [process-agent config/process.go][7]
+      - [process-agent config/process_settings.go][7]
       - example
 
           ```yaml
@@ -94,6 +94,22 @@ In general, use the following rules:
              # DD_PROCESS_AGENT_PROCESS_COLLECTION_ENABLED=true
              # DD_PROCESS_AGENT_URL=https://process.datadoghq.com
           ```
+
+  - **OTLP Ingest**
+
+      - [config/otlp_settings.go][10]
+
+  - **System Probe**
+
+      - [config/system_probe_settings.go][11]
+
+  - **Private Action Runner**
+
+      - [config/privateactionrunner_settings.go][12]
+
+  - **Multi-Region Failover**
+
+      - [config/multi_region_failover_settings.go][13]
 
 ## Using environment variables in systemd units
 
@@ -117,8 +133,13 @@ From Datadog Agent 7.45, the Datadog Agent service (`datadog-agent.service` unit
 [1]: /agent/configuration/agent-configuration-files/#agent-main-configuration-file
 [2]: /getting_started/tagging/unified_service_tagging
 [3]: /agent/configuration/proxy/#environment-variables
-[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/config.go
+[4]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/common_settings.go
 [5]: https://docs.datadoghq.com/agent/docker/apm/#docker-apm-agent-environment-variables
-[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm.go
-[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process.go
+[6]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/apm_settings.go
+[7]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/process_settings.go
 [8]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment
+[9]: https://github.com/DataDog/datadog-agent/blob/7.50.x/pkg/config/config.go
+[10]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/otlp_settings.go
+[11]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/system_probe_settings.go
+[12]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/privateactionrunner_settings.go
+[13]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/setup/multi_region_failover_settings.go
