@@ -65403,6 +65403,126 @@ components:
         - type
         - id
       type: object
+    MaintenanceUpdate:
+      description: Response object for a maintenance update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateData"
+      type: object
+    MaintenanceUpdateData:
+      description: The data object for a maintenance update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/MaintenanceUpdateDataAttributes"
+        id:
+          description: The ID of the maintenance update.
+          example: "1234abcd-12ab-34cd-56ef-123456abcdef"
+          format: uuid
+          type: string
+        relationships:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationships"
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataType"
+      required:
+        - id
+        - type
+      type: object
+    MaintenanceUpdateDataAttributes:
+      description: Attributes of a maintenance update resource.
+      properties:
+        components_affected:
+          description: Components affected at the time of the update.
+          items:
+            $ref: "#/components/schemas/CreateMaintenanceRequestDataAttributesComponentsAffectedItems"
+          type: array
+        created_at:
+          description: The date and time the update was created.
+          format: date-time
+          type: string
+        description:
+          description: The message body of the update.
+          type: string
+        manual_transition:
+          description: Whether the update was applied manually by a user (true) or automatically by the system (false).
+          type: boolean
+        modified_at:
+          description: The date and time the update was last modified.
+          format: date-time
+          type: string
+        started_at:
+          description: The date and time the update started.
+          format: date-time
+          type: string
+        status:
+          $ref: "#/components/schemas/MaintenanceUpdateDataAttributesStatus"
+      type: object
+    MaintenanceUpdateDataAttributesStatus:
+      description: The status of the maintenance update.
+      enum:
+        - scheduled
+        - in_progress
+        - completed
+        - canceled
+      type: string
+      x-enum-varnames:
+        - SCHEDULED
+        - IN_PROGRESS
+        - COMPLETED
+        - CANCELED
+    MaintenanceUpdateDataRelationships:
+      description: Relationships of a maintenance update resource.
+      properties:
+        created_by_user:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUser"
+        last_modified_by_user:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUser"
+        maintenance:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsMaintenance"
+      type: object
+    MaintenanceUpdateDataRelationshipsMaintenance:
+      description: The parent maintenance of the update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsMaintenanceData"
+      required:
+        - data
+      type: object
+    MaintenanceUpdateDataRelationshipsMaintenanceData:
+      description: The maintenance linked to a maintenance update.
+      properties:
+        id:
+          description: The ID of the maintenance.
+          example: ""
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceRequestDataType"
+      required:
+        - type
+        - id
+      type: object
+    MaintenanceUpdateDataRelationshipsUser:
+      description: A user relationship of a maintenance update.
+      properties:
+        data:
+          $ref: "#/components/schemas/MaintenanceUpdateDataRelationshipsUserData"
+      required:
+        - data
+      type: object
+    MaintenanceUpdateDataRelationshipsUserData:
+      description: The data object identifying a Datadog user linked to a maintenance update.
+      properties:
+        id:
+          description: The ID of the Datadog user.
+          example: ""
+          format: uuid
+          type: string
+        type:
+          $ref: "#/components/schemas/StatusPagesUserType"
+      required:
+        - type
+        - id
+      type: object
     MaintenanceWindow:
       description: A maintenance window that defines a scheduled time period during which case-related notifications and automation rules are suppressed. Each maintenance window applies to cases matching a specified query.
       properties:
@@ -81083,6 +81203,9 @@ components:
     PatchMaintenanceRequestDataAttributes:
       description: The supported attributes for updating a maintenance.
       properties:
+        canceled_description:
+          description: The description shown when the maintenance is canceled.
+          type: string
         completed_date:
           description: Timestamp of when the maintenance was completed.
           format: date-time
@@ -81231,6 +81354,50 @@ components:
       type: string
       x-enum-varnames:
         - MAINTENANCE_TEMPLATES
+    PatchMaintenanceUpdateRequest:
+      description: Request object for editing a maintenance update.
+      example:
+        data:
+          attributes:
+            description: We have completed maintenance on the API to improve performance.
+          id: 00000000-0000-0000-0000-000000000000
+          type: maintenance_updates
+      properties:
+        data:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestData"
+      type: object
+    PatchMaintenanceUpdateRequestData:
+      description: The data object for editing a maintenance update.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataAttributes"
+        id:
+          description: The ID of the maintenance update to edit. Must match the `update_id` path parameter.
+          example: "1234abcd-12ab-34cd-56ef-123456abcdef"
+          type: string
+        type:
+          $ref: "#/components/schemas/PatchMaintenanceUpdateRequestDataType"
+      required:
+        - id
+        - type
+      type: object
+    PatchMaintenanceUpdateRequestDataAttributes:
+      description: Attributes for editing a maintenance update.
+      properties:
+        description:
+          description: The message body of the update.
+          example: ""
+          type: string
+      type: object
+    PatchMaintenanceUpdateRequestDataType:
+      default: maintenance_updates
+      description: Maintenance updates resource type.
+      enum:
+        - maintenance_updates
+      example: maintenance_updates
+      type: string
+      x-enum-varnames:
+        - MAINTENANCE_UPDATES
     PatchNotificationRuleParameters:
       description: Body of the notification rule patch request.
       properties:
@@ -205908,7 +206075,7 @@ paths:
       summary: List degradation templates
       tags:
         - Status Pages
-      x-menu-order: 28
+      x-menu-order: 29
     post:
       description: Creates a new degradation template.
       operationId: CreateDegradationTemplate
@@ -205977,7 +206144,7 @@ paths:
       summary: Create degradation template
       tags:
         - Status Pages
-      x-menu-order: 26
+      x-menu-order: 27
   /api/v2/statuspages/{page_id}/degradation_templates/{template_id}:
     delete:
       description: Deletes a degradation template by its ID (soft delete).
@@ -206010,7 +206177,7 @@ paths:
       summary: Delete degradation template
       tags:
         - Status Pages
-      x-menu-order: 30
+      x-menu-order: 31
     get:
       description: Retrieves a specific degradation template by its ID.
       operationId: GetDegradationTemplate
@@ -206066,7 +206233,7 @@ paths:
       summary: Get degradation template
       tags:
         - Status Pages
-      x-menu-order: 29
+      x-menu-order: 30
     patch:
       description: Updates an existing degradation template's attributes.
       operationId: UpdateDegradationTemplate
@@ -206137,7 +206304,7 @@ paths:
       summary: Update degradation template
       tags:
         - Status Pages
-      x-menu-order: 27
+      x-menu-order: 28
   /api/v2/statuspages/{page_id}/degradations:
     post:
       description: Creates a new degradation.
@@ -206649,7 +206816,7 @@ paths:
       summary: List maintenance templates
       tags:
         - Status Pages
-      x-menu-order: 33
+      x-menu-order: 34
     post:
       description: Creates a new maintenance template.
       operationId: CreateMaintenanceTemplate
@@ -206716,7 +206883,7 @@ paths:
       summary: Create maintenance template
       tags:
         - Status Pages
-      x-menu-order: 31
+      x-menu-order: 32
   /api/v2/statuspages/{page_id}/maintenance_templates/{template_id}:
     delete:
       description: Deletes a maintenance template by its ID (soft delete).
@@ -206749,7 +206916,7 @@ paths:
       summary: Delete maintenance template
       tags:
         - Status Pages
-      x-menu-order: 35
+      x-menu-order: 36
     get:
       description: Retrieves a specific maintenance template by its ID.
       operationId: GetMaintenanceTemplate
@@ -206804,7 +206971,7 @@ paths:
       summary: Get maintenance template
       tags:
         - Status Pages
-      x-menu-order: 34
+      x-menu-order: 35
     patch:
       description: Updates an existing maintenance template's attributes.
       operationId: UpdateMaintenanceTemplate
@@ -206876,7 +207043,7 @@ paths:
       summary: Update maintenance template
       tags:
         - Status Pages
-      x-menu-order: 32
+      x-menu-order: 33
   /api/v2/statuspages/{page_id}/maintenances:
     post:
       description: Schedules a new maintenance.
@@ -207179,6 +207346,82 @@ paths:
       tags:
         - Status Pages
       x-menu-order: 19
+      x-permission:
+        operator: AND
+        permissions:
+          - status_pages_incident_write
+  /api/v2/statuspages/{page_id}/maintenances/{maintenance_id}/updates/{update_id}:
+    patch:
+      description: Edits the message of a specific maintenance update. Editing is allowed regardless of the parent maintenance's status, including completed and canceled maintenances.
+      operationId: PatchMaintenanceUpdate
+      parameters:
+        - description: The ID of the status page.
+          in: path
+          name: page_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the maintenance.
+          in: path
+          name: maintenance_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+        - description: The ID of the maintenance update.
+          in: path
+          name: update_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      description: We have completed maintenance on the API to improve performance.
+                    id: 00000000-0000-0000-0000-000000000000
+                    type: maintenance_updates
+            schema:
+              $ref: "#/components/schemas/PatchMaintenanceUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        components_affected: []
+                        created_at: "2026-04-27T13:37:31+00:00"
+                        description: We have completed maintenance on the API to improve performance.
+                        manual_transition: true
+                        modified_at: "2026-04-27T14:37:31+00:00"
+                        started_at: "2026-04-27T13:37:31+00:00"
+                        status: completed
+                      id: 00000000-0000-0000-0000-000000000000
+                      type: maintenance_updates
+              schema:
+                $ref: "#/components/schemas/MaintenanceUpdate"
+          description: OK
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - status_pages_incident_write
+      summary: Edit maintenance update
+      tags:
+        - Status Pages
+      x-menu-order: 26
       x-permission:
         operator: AND
         permissions:
