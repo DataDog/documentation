@@ -36,13 +36,13 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-To validate other languages, or to validate the full Prevention, Mitigation, and Remediation workflow, complete the following steps.
+To validate languages other than JavaScript, or to validate the full Prevention, Mitigation, and Remediation workflow, complete the following steps.
 
 ## Set up validation
 
 Configure the following three settings for the repository. Scope each setting to validation so your default branches and existing services stay untouched:
 
-1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service:
+1. In the [Test Optimization settings][3], configure the `validate-test-optimization` service. You can configure this service before tests report data under that name.
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13].
@@ -230,13 +230,13 @@ Click the failing GitHub check and confirm that the test is included in the list
 
 {{< img src="pr_gates/setup/pr_gate_detail.png" alt="Datadog PR gate detail view" style="width:100%" >}}
 
-In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as new and flaky. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, `@test.retry_reason:early_flake_detection`, and `@test.test_management.is_new_flaky:true`.
+In [Test Runs][7], confirm that Early Flake Detection retried the test and detected it as a new flaky test. The query filters on `@test.name:*flaky*validation*`, `@git.branch:validate-test-optimization`, `@test.retry_reason:early_flake_detection`, and `@test.test_management.is_new_flaky:true`.
 
 ## Mitigation
 
 Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5], and [Flaky Test Policies][6]. These features retry flaky tests and quarantine known flaky failures so they do not block CI.
 
-Make a trivial edit to the same flaky test that you added for Prevention—for example, add a comment. The edit only re-triggers CI; no Datadog annotation is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
+Make a trivial edit to the same flaky test that you added for Prevention—for example, add a comment. The edit only re-runs CI; no additional Datadog configuration is required. Because Datadog identified the test as flaky during Prevention, Auto Test Retries and Flaky Test Management handle it during this run.
 
 Commit and push the change on the same branch:
 
@@ -255,7 +255,7 @@ Wait for CI to run, then confirm the following results:
 
 ## Remediation
 
-Test Optimization supports the remediation of test flakiness with Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
+Test Optimization helps remediate flaky tests through Attempt to Fix and Bits AI auto fixes. This section validates the Attempt to Fix workflow by fixing the same test used for Prevention and Mitigation.
 
 1. In [Flaky Test Management][9], open the quarantined validation test.
 2. Click {{< ui >}}Actions{{< /ui >}}, select {{< ui >}}Link commit to fix{{< /ui >}}, and copy the generated key (it starts with `DD_`).
