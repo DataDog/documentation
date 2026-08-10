@@ -1323,6 +1323,8 @@ function extractData (document) {
 }
 extractData = llmobs.wrap({ kind: 'workflow' }, extractData)
 {{< /code-block >}}
+
+When spans are nested inside an `agent` span, the SDK automatically associates each descendant span with its nearest enclosing agent, including spans that continue in a downstream service through distributed tracing. A nested `agent` span is associated with its enclosing agent, while spans nested beneath it are associated with that nested agent.
 {{% /tab %}}
 {{% tab "Java" %}}
 {{< code-block lang="java" >}}
