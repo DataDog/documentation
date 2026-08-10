@@ -3161,6 +3161,11 @@ menu:
       parent: private_actions
       identifier: run_script
       weight: 7
+    - name: Reference
+      url: actions/private_actions/reference/
+      parent: private_actions
+      identifier: private_actions_reference
+      weight: 8
     - name: Cloudcraft
       url: datadog_cloudcraft/
       pre: cloudcraft
