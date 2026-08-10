@@ -40,7 +40,7 @@ Use the filters at the top of the report to scope the data by owner, lifecycle, 
 
 Set up scheduled reports for your stakeholders that are delivered as PDFs through email, Slack, or Microsoft Teams on a recurring basis. 
 
-To schedule reports, click **Schedule Report** in the top-right corner (or **Manage Reports** if you have already set up reports). See the [Sdheduled Reports documentation][2] for more information.
+To schedule reports, click **Schedule Report** in the top-right corner (or **Manage Reports** if you have already set up reports). For more information, see [Dashboards Scheduled Reports][2].
 
 [1]:/internal_developer_portal/catalog
 [2]:/dashboards/sharing/scheduled_reports
