@@ -287,7 +287,7 @@ def test_flaky_validation_test():
 ```java
 @Test
 void flakyValidationTest() {
-    // intentionally empty — the test now passes
+    // intentionally empty — the test passes
 }
 ```
 
