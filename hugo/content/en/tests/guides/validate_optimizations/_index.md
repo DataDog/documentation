@@ -44,28 +44,42 @@ The coding-agent method is a local check that does not exercise the entire Datad
 
 Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
 
-<div class="alert alert-info">Use the same branch for all three validation phases: Prevention, Mitigation, and Remediation. Mitigation and Remediation each build on the flaky test state recorded in the previous phase, so do not create another branch between phases.</div>
+1. Configure your CI test job to set `DD_SERVICE` before it runs the test command:
 
-1. In the [Test Optimization settings][3], add a service named `validate-test-optimization`. You can add it before tests report under that name.
+   ```bash
+   export DD_SERVICE=validate-test-optimization
+   ```
+
+2. Create the validation branch:
+
+   ```bash
+   git checkout -b validate-test-optimization
+   ```
+
+3. Create and push an empty commit to trigger a test execution. Datadog detects the `validate-test-optimization` service when the tests report under that name:
+
+   ```bash
+   git commit --allow-empty -m "Detect Test Optimization validation service"
+   git push -u origin validate-test-optimization
+   ```
+
+4. After CI finishes, go to the [CI/CD Repositories settings][3] and select the repository you are validating.
+5. Click {{< ui >}}Test Services{{< /ui >}} in the upper-right corner.
+
+   {{< img src="pr_gates/setup/repository_settings_test_services.png" alt="Repository Settings with the Test Services button in the upper-right corner" style="width:100%" >}}
+
+6. In {{< ui >}}Test service overrides{{< /ui >}}, select the `validate-test-optimization` service.
+
+   {{< img src="pr_gates/setup/test_service_overrides.png" alt="Test service overrides showing detected test services for a repository" style="width:100%" >}}
+
+7. Configure the following service overrides:
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
-2. Enable [Flaky Test Policies][6], then create a quarantine policy and set its branch rule to `validate-test-optimization`.
-3. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
+8. Enable [Flaky Test Policies][6], then create a quarantine policy and set its branch rule to `validate-test-optimization`.
+9. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
-{{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
-
-Set `DD_SERVICE` in your test run command so tests on the validation branch report under the dedicated service:
-
-```bash
-export DD_SERVICE=validate-test-optimization
-```
-
-Create the validation branch:
-
-```bash
-git checkout -b validate-test-optimization
-```
+   {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
 ## Prevention
 
@@ -369,7 +383,7 @@ After validation is complete, close the pull request without merging and delete 
 
 [1]: /tests/flaky_tests/early_flake_detection
 [2]: /tests/guides/setup_new_flaky_pr_gate
-[3]: https://app.datadoghq.com/ci/settings/test-optimization/advanced-features
+[3]: https://app.datadoghq.com/ci/settings/ci-cd/repositories
 [4]: /tests/flaky_tests/auto_test_retries
 [5]: /tests/flaky_management
 [6]: /tests/flaky_management/#configure-policies-to-automate-the-flaky-test-lifecycle
