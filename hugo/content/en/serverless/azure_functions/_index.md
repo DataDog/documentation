@@ -232,6 +232,10 @@ You can collect [debug logs][6] for troubleshooting. To configure debug logs, us
 
   **Values**: `trace`, `debug`, `info`, `warn`, `error`, `critical`, `off`
 
+## Further reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
 [1]: /account_management/api-app-keys/#add-an-api-key-or-client-token
 [2]: /getting_started/site
 [3]: https://app.datadoghq.com/apm/traces
