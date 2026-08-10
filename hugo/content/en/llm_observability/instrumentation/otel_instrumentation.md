@@ -404,7 +404,7 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
 
-When a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
+If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
 
 <div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
 
