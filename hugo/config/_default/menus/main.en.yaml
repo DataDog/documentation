@@ -5476,6 +5476,12 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Integration Overhead
+      url: data_observability/integration_overhead
+      pre: data-observability-wui
+      identifier: data_observability_integration_overhead
+      parent: data_observability_heading
+      weight: 90000
     - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
@@ -6243,31 +6249,36 @@ menu:
       parent: code_coverage
       identifier: code_coverage_configuration
       weight: 2
+    - name: Coverage Calculation
+      url: code_coverage/coverage_calculation/
+      parent: code_coverage
+      identifier: code_coverage_coverage_calculation
+      weight: 3
     - name: Monorepo Support
       url: code_coverage/monorepo_support/
       parent: code_coverage
       identifier: code_coverage_monorepo_support
-      weight: 3
+      weight: 4
     - name: Flags
       url: code_coverage/flags/
       parent: code_coverage
       identifier: code_coverage_flags
-      weight: 4
+      weight: 5
     - name: Carryforward
       url: code_coverage/carryforward/
       parent: code_coverage
       identifier: code_coverage_carryforward
-      weight: 5
+      weight: 6
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 5
+      weight: 7
     - name: Dashboards
       url: code_coverage/dashboards/
       parent: code_coverage
       identifier: code_coverage_dashboards
-      weight: 6
+      weight: 8
     - name: PR Gates
       url: pr_gates/
       pre: ci
