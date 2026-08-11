@@ -67,6 +67,61 @@ To prevent variables from crowding the header, the dashboard displays a small su
 If you need to see all variables at once as you scroll, click **Expand template variables**. 
 
 
+## Team filter
+
+A template variable whose tag key is `team` renders as the [team filter][5] rather than as a plain tag value selector. This applies to both dashboards and notebooks.
+
+The team filter adds:
+
+- One list covering both the Datadog Teams in your organization and `team` tag values that have no matching team.
+- Hierarchy-aware selection. Selecting a team also selects the teams beneath it. Shift+click a team to select it without its subteams, or its subteams without the team.
+- Search across both team handles and team display names.
+
+Hierarchy-aware selection appears only when the variable's tag key is `team`. A variable built on any other tag key renders as a plain tag value selector with no notion of team hierarchy. If the team variable on one dashboard offers hierarchy and the one on another dashboard does not, compare the tag key behind each variable.
+
+For a `team` variable, the filter lists every team in your organization. Values set in {{< ui >}}Available Values{{< /ui >}} are added to that list rather than restricting it.
+
+### Use the team filter with a different tag key
+
+Some data records team ownership under a tag key other than `team`, such as `team_attribution`, `attributes.team`, or `usr.team`. A template variable defined on one of those keys gives you a flat list of tag strings and no hierarchy.
+
+To get hierarchy-aware team selection for that data, define the template variable on the `team` tag key. Then reference the selected value against your own tag key in each widget query with `$team.value`.
+
+The variable's tag key determines the selector you get. The tag key a widget query filters on is separate, and does not have to match.
+
+1. Add a template variable with the tag key `team`. It renders as the team filter.
+1. In each widget query, filter on the tag key your data uses, and put `$team.value` where the value goes.
+
+For a widget querying cases on an `attributes.team` attribute:
+
+| | Query |
+|---|---|
+| Before | `attributes.team:payments-platform` |
+| After | `attributes.team:$team.value` |
+
+For a Cloud Cost widget querying a `team_attribution` tag:
+
+| | Query |
+|---|---|
+| Before | `sum:all.cost{team_attribution:payments-platform} by {team_attribution}` |
+| After | `sum:all.cost{team_attribution:$team.value} by {team_attribution}` |
+
+#### How selections resolve
+
+`$team.value` expands to every selected team handle, combined with `OR`, using the tag key you wrote in the query. Selecting the teams `payments-platform` and `payments-fraud` resolves the two examples above to:
+
+```text
+attributes.team:(payments-platform OR payments-fraud)
+```
+
+```text
+sum:all.cost{team_attribution:payments-platform OR team_attribution:payments-fraud} by {team_attribution}
+```
+
+Selecting a parent team expands to the parent and every team beneath it, each as its own handle. A hierarchy selection therefore reaches your data the same way it reaches a `team`-tagged widget. Selecting a team without its subteams, or its subteams without the team, expands the same way. Only the handles in that selection are included.
+
+The expansion is a list of team handles. For a widget to return results, your data must be tagged with those handles.
+
 ## Add a template variable
 To add a template variable in a dashboard:
 1. Click {{< ui >}}Add Variable{{< /ui >}} (or {{< ui >}}+{{< /ui >}} if there are existing template variables)
@@ -210,3 +265,4 @@ For example, enter `$region` in the event overlays search box. This searches for
 [2]: /logs/explorer/facets/
 [3]: /real_user_monitoring/explorer/?tab=facets#setup-facets-measures
 [4]: /dashboards/faq/historical-data/
+[5]: /account_management/teams/#team-filter
