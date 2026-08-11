@@ -260,11 +260,11 @@ Your operating system caps how much can be passed in a command-line argument or 
 
 On Linux, exceeding the limit produces an error from the shell, such as `Argument list too long`, rather than a message from `datadog-ci`.
 
-<div class="alert alert-warning">On Windows, an oversized value can fail silently. <code>cmd.exe</code> drops an inherited environment variable that exceeds its 8,191-character limit. <code>datadog-ci</code> then receives nothing and behaves as though the option was never set. The <code>ignore</code> field of <code>code-coverage.datadog.yml</code> applies instead, and your coverage is computed against that list. No error appears.</div>
+<div class="alert alert-warning">On Windows, confirm that a large list reached the CLI. A value that exceeds a command-line or environment limit may not arrive, and <code>datadog-ci</code> then behaves as though the option was never set. The <code>ignore</code> field of <code>code-coverage.datadog.yml</code> applies instead, and no error appears. After your first upload, check in Datadog that the files you meant to exclude are absent from the coverage data.</div>
 
 For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. That is the only option with no size ceiling.
 
-The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable is not a way around these limits. On Linux the same per-value ceiling applies to environment variables, however your CI provider sets them. On Windows, a `set` command in `cmd.exe` counts against the command-line cap, and an oversized inherited value is dropped. Use the environment variable for convenience, such as newline-separated formatting, rather than for size.
+The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable is not a way around these limits. On Linux the same per-value ceiling applies to environment variables, however your CI provider sets them. On Windows, a `set` command in `cmd.exe` counts against the command-line cap. Use the environment variable for convenience, such as newline-separated formatting, rather than for size.
 
 ## PR Gates
 
