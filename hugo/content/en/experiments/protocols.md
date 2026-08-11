@@ -29,7 +29,7 @@ Use protocols to:
 
 Before you begin, make sure you have:
 
-- Access to the right permissions. The `product_analytics_experiments_read` permission grants read access. The `product_analytics_experiments_write` permission grants access to create, edit, publish, archive, and delete protocols.
+- Access to the right [permissions][11]. The `product_analytics_experiments_read` permission grants read access. The `product_analytics_experiments_write` permission grants access to create, edit, publish, archive, and delete protocols.
 - A [subject type][3] to set the level at which Datadog randomizes experiments.
 - (Optional) One or more [experiment metrics][2], if you want the protocol to set the decision metrics for every experiment.
 
