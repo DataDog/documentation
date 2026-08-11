@@ -23,7 +23,7 @@ After you select the Prometheus source in the pipeline UI:
 
 1. Enter the identifier for your Prometheus address. If you leave it blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
-    - Enter the identifiers for your Prometheus username and password. If you leave it blank, the [default](#secret-defaults) is used.
+    - Enter the identifiers for your Prometheus username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -44,7 +44,7 @@ Select {{< ui >}}Aggregate metrics{{< /ui >}} to combine metrics that share the 
 To configure keepalive settings for connections to the source, enable the {{< ui >}}Configure keepalive{{< /ui >}} toggle:
 
 - {{< ui >}}Max connection age{{< /ui >}}: The maximum number of seconds after which a connection is closed. The default is `300` seconds.
-- {{< ui >}}Max connection age jitter factor{{< /ui >}}: The factor used to randomize the max connection age, so all connections don't close simultaneously. The default is `0.1`.
+- {{< ui >}}Max connection age jitter factor{{< /ui >}}: The factor used to randomize the max connection age, so connections don't all close simultaneously. The default is `0.1`.
 
 #### Enable TLS
 
