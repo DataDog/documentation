@@ -114,7 +114,7 @@ The response counts unsupported objects as `unsupported` and unparseable pattern
 | Reference table column | Populated from |
 |---|---|
 | Indicator value | The value extracted from the indicator's `pattern`. |
-| `intention` | The `indicator_types` field. `malicious-activity` maps to `malicious`, `benign` maps to `benign`, and any other value, or an absent field, maps to `suspicious`. |
+| `intention` | The `indicator_types` field. `malicious-activity` maps to `malicious`; `benign` maps to `benign`; and any other value, or an absent field, maps to `suspicious`. |
 | `source` | The `ti_vendor` header, stored as `{"name": "<TI_VENDOR>"}`. |
 | `category` | Set to `custom`. |
 | `additional_data` | The STIX fields that have no dedicated column, including `stix_id`, `created`, `modified`, `valid_from`, `confidence`, `labels`, `indicator_types`, `object_marking_refs`, `kill_chain_phases`, and `external_references`. |
