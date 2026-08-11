@@ -5,6 +5,9 @@ further_reading:
   - link: /actions/forms/
     tag: Documentation
     text: Forms
+  - link: /actions/forms/prefill/
+    tag: Documentation
+    text: Prefill form fields
 ---
 
 ## Overview
@@ -38,7 +41,7 @@ Each component has a set of configurable elements in the component editor:
 |-----|-------------|
 | {{< ui >}}Add a description{{< /ui >}} | An optional description displayed below the component question. |
 | {{< ui >}}Required{{< /ui >}} | Toggle to determine whether the question requires an answer. Required questions are marked with a red asterisk. |
-| {{< ui >}}Advanced{{< /ui >}} | Configure the placeholder text and default value for the component. |
+| {{< ui >}}Advanced{{< /ui >}} | Configure the field name, placeholder text, default value, and option values for the component. See [Prefill form fields](/actions/forms/prefill/). |
 | {{< ui >}}Rules{{< /ui >}} | Configure validation rules to restrict the values respondents can submit. See [Validation rules](#validation-rules). |
 | {{< ui >}}Conditions{{< /ui >}} | Configure conditional logic to show or hide the component based on a respondent's previous answers. See [Conditional fields](#conditional-fields). |
 | {{< ui >}}Style{{< /ui >}} | Change the component type while preserving its existing options. For example, switch a dropdown to checkboxes without removing and recreating the component. |
@@ -50,6 +53,14 @@ You can configure validation rules on individual components to restrict the valu
 For short answer and paragraph components, you can set a minimum and maximum character length, or restrict input to a specific pattern: email, URL, alphanumeric, or a custom regex.
 
 For number input components, you can set a minimum and maximum value.
+
+## Default values
+
+A default value prefills a component with the same answer for every respondent. To set one, click a component, click {{< ui >}}Advanced{{< /ui >}}, and enter a value in the {{< ui >}}Default Value{{< /ui >}} field.
+
+Default values are available on short answer, paragraph, number input, dropdown, rating, and toggle components.
+
+To prefill values that vary by respondent, use URL query parameters instead. See [Prefill form fields](/actions/forms/prefill/).
 
 ## Conditional fields
 
