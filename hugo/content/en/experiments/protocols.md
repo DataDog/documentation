@@ -27,7 +27,7 @@ Use protocols to:
 
 ## Prerequisites
 
-<div class="alert alert-info">You must have the appropriate <a href="https://docs.datadoghq.com/account_management/rbac/permissions/#product-analytics">Product Analytics</a> permissions to work with protocols. The <code>product_analytics_experiments_read</code> permission grants read access. The <code>product_analytics_experiments_write</code> permission grants access to create, edit, publish, archive, and delete protocols.</div>
+<div class="alert alert-info">You must have the appropriate <a href="/account_management/rbac/permissions/#product-analytics">Product Analytics</a> permissions to work with protocols. The <code>product_analytics_experiments_read</code> permission grants read access. The <code>product_analytics_experiments_write</code> permission grants access to create, edit, publish, archive, and delete protocols.</div>
 
 Before you begin, make sure you have:
 
@@ -85,7 +85,7 @@ If you change the subject type after you select metrics, Datadog opens the {{< u
 
 Add metrics that Datadog attaches to every experiment in addition to the decision metrics.
 
-1. (Optional) Toggle on {{< ui >}}Set maximum number of metrics on the experiment to:{{< /ui >}} and enter a positive whole number. This records the metric budget you expect experiments to stay within.
+1. (Optional) Toggle on {{< ui >}}Set maximum number of metrics on the experiment to:{{< /ui >}} and enter a positive whole number. This sets a maximum number of metrics that experiments created from this protocol can have.
 1. (Optional) Add a metric group:
    1. Click {{< ui >}}Add metric group{{< /ui >}} to open the metric picker, then select the metrics to include. Datadog creates the group after you select the metrics.
    1. Enter a name for the group in the field that appears.
@@ -103,7 +103,7 @@ Set how Datadog splits traffic for experiments created from this protocol.
 1. Under {{< ui >}}Traffic exposure{{< /ui >}}, set the percentage of matching users to include in the experiment. You can also define rollout steps to ramp traffic up over time.
 1. (Optional) Toggle on {{< ui >}}Require splitting traffic equally between variants{{< /ui >}}. This records that experiments created from the protocol should use an equal variant split.
 
-The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog Feature Flags only. Select an environment if you set targeting rules or traffic exposure.
+The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog Feature Flags only. You must select an environment before you can configure targeting rules or traffic exposure.
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 
@@ -214,7 +214,7 @@ To change a published protocol:
 1. Update the settings.
 1. Click {{< ui >}}Save Changes{{< /ui >}}, or click {{< ui >}}Cancel{{< /ui >}} to discard your edits.
 
-Your changes apply to experiments created after you save. Existing experiments keep the settings from the protocol version they used at creation time.
+Your changes apply to experiments created after you save. Existing experiments keep the protocol settings they were created with.
 
 ## Manage protocols
 
@@ -222,13 +222,13 @@ Open a protocol and use the actions menu, where the actions are {{< ui >}}Duplic
 
 ### Duplicate a protocol
 
-Duplicating copies the settings into a new draft and opens it. Datadog names the copy for you, so rename it in step 1 if you want a different name. Duplicating is useful when you need a variation of an approved design.
+Duplicating copies the settings into a new draft and opens it. Datadog assigns a default name to the copy; rename it in step 1 if you want a different name. Duplicating is useful when you need a variation of an approved design.
 
 ### Archive a protocol
 
-Archive a protocol and confirm to hide it from the protocol picker, so that experimenters cannot select it for new experiments. Experiments that already use the protocol keep their settings and continue to run.
+Archive a protocol to hide it from the protocol picker so that experimenters cannot select it for new experiments. Experiments that already use the protocol keep their settings and continue to run.
 
-Archiving cannot be undone.
+**Note**: Archiving cannot be undone.
 
 ### Delete a protocol
 
