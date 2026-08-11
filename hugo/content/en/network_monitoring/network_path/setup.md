@@ -68,6 +68,7 @@ Agent `v7.59+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
+     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
@@ -114,6 +115,7 @@ Agent `v7.75+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
+     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
@@ -160,6 +162,7 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
+     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
@@ -205,6 +208,7 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
           ## optional configs:
+          #
           # max_ttl: 30 # max traceroute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
           # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
@@ -349,12 +353,14 @@ Agent `v7.73+` is required.
 
         #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
         # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        #
         # pathtest_interval: 10m
 
         # @param pathtest_ttl - integer - optional - default: 35m
         # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
         # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
         # The TTL is reset each time the connection is seen again.
+        #
         # pathtest_ttl: 35m
 
         ## @param monitor_ip_without_domain - boolean - optional - default: false
@@ -424,12 +430,14 @@ Agent `v7.73+` is required.
 
        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+       #
        # pathtest_interval: 10m
 
        # @param pathtest_ttl - integer - optional - default: 35m
        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
        # The TTL is reset each time the connection is seen again.
+       #
        # pathtest_ttl: 35m
 
        ## @param monitor_ip_without_domain - boolean - optional - default: false
