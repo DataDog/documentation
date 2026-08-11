@@ -251,16 +251,25 @@ Observed value {{observed}} is within the expected range.
 
 <div class="alert alert-info">Source to target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
 
-A source to target monitor compares the same metric on two data assets and alerts when the two values diverge. Use it to validate that the data arriving in a destination matches the data that left its source, for example after a replication, a transformation, or a migration.
+A source to target monitor compares the same metric on two data assets and alerts when the two values diverge. Other Data Observability monitors track whether a single asset is fresh or complete. A source to target monitor tracks whether the copy that landed in a destination matches what left the source.
 
-Partial failures in data movement are difficult to catch with a single-asset monitor. If 100,000 rows leave a source table and 99,850 rows arrive in the destination, a row count monitor on the destination alone sees a plausible value. Comparing the two assets surfaces the gap.
+When a pipeline moves data between systems, partial failures rarely look like failures. If 100,000 rows leave a source table and 99,850 rows arrive in the destination, a row count monitor on the destination alone sees a plausible value. Comparing the two assets surfaces the gap.
+
+Use a source to target monitor to:
+
+- Validate replication from Postgres into Databricks.
+- Reconcile two databases inside the same Snowflake account, for example a quality database against production.
+- Verify a migration from Redshift to BigQuery before cutover, by running both systems side by side and confirming that they match.
+- Confirm that a transformation does not drop rows between its input and its output.
+
+Source to target monitors are available in all regions except GovCloud.
 
 ### Create a source to target monitor
 
 1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
 2. Under {{< ui >}}Choose source{{< /ui >}}, select the warehouse that holds the source data, then select the data to compare.
 3. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
-4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including {{< ui >}}Custom SQL{{< /ui >}}.
+4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
 5. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
     - {{< ui >}}Difference{{< /ui >}}: the absolute difference between the source and target values.
     - {{< ui >}}% Difference{{< /ui >}}: the difference expressed as a percentage.
@@ -276,7 +285,10 @@ When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for th
 
 ### Evaluation
 
-- Both sides are measured on the same schedule, so the two values are captured together rather than following each warehouse's default collection cadence.
+The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
+
+The following conditions apply:
+
 - The comparison runs when both the source and the target measurements succeed. If either measurement fails, the monitor skips that evaluation.
 - The source and target measurements must be captured within 30 minutes of each other. If the gap between them is larger, the monitor skips that evaluation.
 
