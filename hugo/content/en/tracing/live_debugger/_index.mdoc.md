@@ -1,40 +1,44 @@
 ---
 title: Live Debugger
 description: Debug running applications in real time using non-breaking logpoints that collect information without stopping execution or redeploying code.
+content_filters:
+  - trait_id: prog_lang
+    option_group_id: live_debugger_language_options
+    label: "Language"
 aliases:
-- '/ide_plugins/idea/live_debugger/'
-- '/developers/ide_plugins/idea/live_debugger/'
-- '/ide_plugins/vscode/live_debugger/'
-- '/tracing/trace_collection/dynamic_instrumentation/enabling/nodejs/'
-- '/dynamic_instrumentation/enabling/nodejs'
-- '/tracing/dynamic_instrumentation/enabling/nodejs'
-- '/tracing/trace_collection/dynamic_instrumentation/enabling/ruby/'
-- '/dynamic_instrumentation/enabling/ruby/'
-- '/tracing/dynamic_instrumentation/enabling/ruby'
-- '/tracing/trace_collection/dynamic_instrumentation/enabling/go/'
-- '/dynamic_instrumentation/enabling/go'
+  - /ide_plugins/idea/live_debugger/
+  - /developers/ide_plugins/idea/live_debugger/
+  - /ide_plugins/vscode/live_debugger/
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/nodejs/
+  - /dynamic_instrumentation/enabling/nodejs
+  - /tracing/dynamic_instrumentation/enabling/nodejs
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/ruby/
+  - /dynamic_instrumentation/enabling/ruby/
+  - /tracing/dynamic_instrumentation/enabling/ruby
+  - /tracing/trace_collection/dynamic_instrumentation/enabling/go/
+  - /dynamic_instrumentation/enabling/go
 further_reading:
-- link: "/dynamic_instrumentation/"
-  tag: "Documentation"
-  text: "Dynamic Instrumentation"
-- link: "/dynamic_instrumentation/expression-language/"
-  tag: "Documentation"
-  text: "Dynamic Instrumentation Expression Language"
-- link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
-  tag: "Documentation"
-  text: "Sensitive Data Scrubbing"
-- link: "/dynamic_instrumentation/symdb/"
-  tag: "Documentation"
-  text: "Autocomplete and Search"
-- link: "/error_tracking/backend/exception_replay"
-  tag: "Documentation"
-  text: "Exception Replay"
-- link: "https://www.datadoghq.com/blog/azure-devops-source-code-integration/"
-  tag: "Blog"
-  text: "Identify and fix code issues faster with Datadog’s Azure DevOps Source Code integration"
-- link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
-  tag: "Blog"
-  text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
+  - link: "/dynamic_instrumentation/"
+    tag: "Documentation"
+    text: "Dynamic Instrumentation"
+  - link: "/dynamic_instrumentation/expression-language/"
+    tag: "Documentation"
+    text: "Dynamic Instrumentation Expression Language"
+  - link: "/dynamic_instrumentation/sensitive-data-scrubbing/"
+    tag: "Documentation"
+    text: "Sensitive Data Scrubbing"
+  - link: "/dynamic_instrumentation/symdb/"
+    tag: "Documentation"
+    text: "Autocomplete and Search"
+  - link: "/error_tracking/backend/exception_replay"
+    tag: "Documentation"
+    text: "Exception Replay"
+  - link: "https://www.datadoghq.com/blog/azure-devops-source-code-integration/"
+    tag: "Blog"
+    text: "Identify and fix code issues faster with Datadog’s Azure DevOps Source Code integration"
+  - link: "https://www.datadoghq.com/blog/gitlab-source-code-integration"
+    tag: "Blog"
+    text: "Troubleshoot faster with the GitLab Source Code integration in Datadog"
 ---
 
 ## Overview
@@ -80,21 +84,20 @@ For more information about roles and how to assign roles to users, see [Role Bas
 
 ### Enable Live Debugger
 
-Live Debugger enablement depends on your service's runtime language. See the following language-specific sections for enablement instructions and minimum SDK versions.
+Live Debugger enablement depends on your service's runtime language. Select your language from the dropdown above for enablement instructions and minimum SDK versions.
 
 You can disable Live Debugger for a service and environment from the [Live Debugger Settings page][26], regardless of runtime language or SDK version.
 
 **Note**: Live Debugger can work on older SDK versions through manual enablement, but you may encounter missing capabilities, unexpected errors, or a degraded experience. Datadog recommends keeping your SDK up to date.
 
-
-#### Enable for Java, Python, .NET, and Node.js
+{% if includes($prog_lang, ["java", "python", "dot_net", "node_js"]) %}
 
 You can enable Live Debugger in-app in one of two ways:
 
 - On the [Live Debugger Settings page][26], enable the service and environment.
 - Start a Debug Session. Live Debugger is enabled automatically on the selected service and environment.
 
-Either option requires one of the following minimum SDK versions:
+Either option requires the following minimum SDK version:
 
 | Language | Minimum SDK version |
 |----------|---------------------|
@@ -103,12 +106,14 @@ Either option requires one of the following minimum SDK versions:
 | .NET     | 3.29.0              |
 | Node.js  | 5.84.0              |
 
-If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration steps.
+If your SDK version is lower, or you prefer to configure Live Debugger with environment variables, use the following manual configuration.
 
-{{< programming-lang-wrapper langs="java,python,.NET,nodejs" >}}
+{% /if %}
 
-{{< programming-lang lang="java" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/java/">Datadog Java SDK</a> version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
+<!-- Java -->
+{% if equals($prog_lang, "java") %}
+
+**SDK version**: [Datadog Java SDK][30] version 1.64.0 or higher is strongly recommended, running on JDK 8 or higher. The minimum SDK version is 1.42.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true`, along with `DD_SERVICE`, `DD_ENV`, and `DD_VERSION`. The `-javaagent` argument must come before `-jar`:
 
@@ -123,10 +128,14 @@ java \
 ```
 
 **Note**: On JDK 18 and earlier, classes compiled with the `-parameters` flag (default in Spring 6+, Spring Boot 3+, and Scala) may fail to instrument with the error `Method Parameters detected`.
-{{< /programming-lang >}}
 
-{{< programming-lang lang="python" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/python/">Datadog Python SDK (<code>ddtrace</code>)</a> version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
+{% /if %}
+<!-- end Java -->
+
+<!-- Python -->
+{% if equals($prog_lang, "python") %}
+
+**SDK version**: [Datadog Python SDK (`ddtrace`)][31] version 4.11.0 or higher is strongly recommended. The minimum SDK version is 2.9.0, but it may result in unexpected errors and a degraded experience.
 
 Install `ddtrace`, then start your service with `DD_DYNAMIC_INSTRUMENTATION_ENABLED=true` and `ddtrace-run`:
 
@@ -138,23 +147,14 @@ export DD_VERSION=<YOUR_VERSION>
 export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ddtrace-run python -m myapp.py
 ```
-{{< /programming-lang >}}
 
-{{< programming-lang lang=".NET" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core">Datadog .NET SDK</a> version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
+{% /if %}
+<!-- end Python -->
 
-Start your service with the following environment variables set:
+<!-- .NET -->
+{% if equals($prog_lang, "dot_net") %}
 
-```shell
-DD_SERVICE=<YOUR_SERVICE>
-DD_ENV=<YOUR_ENV>
-DD_VERSION=<YOUR_VERSION>
-DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
-```
-{{< /programming-lang >}}
-
-{{< programming-lang lang="nodejs" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/">Datadog Node.js SDK (<code>dd-trace-js</code>)</a> version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
+**SDK version**: [Datadog .NET SDK][32] version 3.46.0 or higher is strongly recommended. The minimum SDK version is 3.9.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with the following environment variables set:
 
@@ -164,18 +164,33 @@ DD_ENV=<YOUR_ENV>
 DD_VERSION=<YOUR_VERSION>
 DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ```
-{{< /programming-lang >}}
 
-{{< /programming-lang-wrapper >}}
+{% /if %}
+<!-- end .NET -->
 
-#### Enable for Ruby, PHP, and Go
+<!-- Node.js -->
+{% if equals($prog_lang, "node_js") %}
 
-Ruby and PHP require manual configuration through environment variables. Go requires an Agent-level configuration first, after which the service can be enabled in-app (Go SDK 2.6.0 or higher) or through environment variables.
+**SDK version**: [Datadog Node.js SDK (`dd-trace-js`)][33] version 5.109.0 or higher is strongly recommended. The minimum SDK version is 5.39.0, but it may result in unexpected errors and a degraded experience. If your source code is transpiled or bundled (for example, TypeScript, Babel, or Webpack), publish source maps with the deployed application so that logpoints map to the correct lines.
 
-{{< programming-lang-wrapper langs="ruby,php,go" >}}
+Start your service with the following environment variables set:
 
-{{< programming-lang lang="ruby" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/">Datadog Ruby SDK (<code>ddtrace</code>)</a> version 2.38.0 or higher is strongly recommended. The minimum SDK version is 2.37.0, but it may result in unexpected errors and a degraded experience.
+```shell
+DD_SERVICE=<YOUR_SERVICE>
+DD_ENV=<YOUR_ENV>
+DD_VERSION=<YOUR_VERSION>
+DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
+```
+
+{% /if %}
+<!-- end Node.js -->
+
+<!-- Ruby -->
+{% if equals($prog_lang, "ruby") %}
+
+Ruby requires manual configuration through environment variables.
+
+**SDK version**: [Datadog Ruby SDK (`ddtrace`)][34] version 2.38.0 or higher is strongly recommended. The minimum SDK version is 2.37.0, but it may result in unexpected errors and a degraded experience.
 
 **Additional requirements:**
 
@@ -193,10 +208,16 @@ export DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ```
 
 **Note**: Live Debugger initializes on the first HTTP request. Your service must receive at least one request before you can create a logpoint.
-{{< /programming-lang >}}
 
-{{< programming-lang lang="php" >}}
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/php">Datadog PHP SDK (<code>dd-trace-php</code>)</a> version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0, but it may result in unexpected errors and a degraded experience.
+{% /if %}
+<!-- end Ruby -->
+
+<!-- PHP -->
+{% if equals($prog_lang, "php") %}
+
+PHP requires manual configuration through environment variables.
+
+**SDK version**: [Datadog PHP SDK (`dd-trace-php`)][35] version 1.23.0 or higher is strongly recommended. The minimum SDK version is 1.5.0, but it may result in unexpected errors and a degraded experience.
 
 Start your service with the following environment variables set:
 
@@ -206,21 +227,25 @@ DD_ENV=<YOUR_ENV>
 DD_VERSION=<YOUR_VERSION>
 DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ```
-{{< /programming-lang >}}
 
-{{< programming-lang lang="go" >}}
-Go services require enabling Live Debugger in both the Datadog Agent and the application.
+{% /if %}
+<!-- end PHP -->
 
-**SDK version**: <a href="/tracing/trace_collection/automatic_instrumentation/dd_libraries/go">Datadog Go SDK</a> version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line).
+<!-- Go -->
+{% if equals($prog_lang, "go") %}
+
+Go services require enabling Live Debugger in both the Datadog Agent and the application. After the Agent is configured, services on the same host can be enabled from the [Live Debugger Settings page][26] (Go SDK 2.6.0 or higher) or through environment variables.
+
+**SDK version**: [Datadog Go SDK][36] version 2.9.0 or higher is strongly recommended (or 1.74.6 or higher on the v1 line).
 
 **Additional requirements:**
 
-- <a href="/agent/">Datadog Agent</a> version 7.73.0 or higher, running on the same host as your application
+- [Datadog Agent][2] version 7.73.0 or higher, running on the same host as your application
 - Linux kernel 5.17 or higher
 
 **Configure the Datadog Agent** using one of the following methods, depending on how you deploy the Agent:
 
-- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see <a href="/agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file">Agent configuration files</a>.
+- **Configuration YAML file**: Update `system-probe.yaml` (located alongside `datadog.yaml`) with the following. For more information, see [Agent configuration files][37].
 
   ```yaml
   dynamic_instrumentation:
@@ -229,7 +254,7 @@ Go services require enabling Live Debugger in both the Datadog Agent and the app
 
 - **Environment variable**: Add the following to your Datadog Agent manifest:
 
-  ```
+  ```text
   DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
   ```
 
@@ -241,7 +266,7 @@ Go services require enabling Live Debugger in both the Datadog Agent and the app
       enabled: true
   ```
 
-**Configure your service**: After the Agent is configured, services on the same host can be enabled from the <a href="https://app.datadoghq.com/debugging/settings">Live Debugger Settings page</a>, or by starting the service with the following environment variables set:
+**Configure your service**: After the Agent is configured, start the service with the following environment variables set:
 
 ```shell
 DD_SERVICE=<YOUR_SERVICE>
@@ -249,19 +274,19 @@ DD_ENV=<YOUR_ENV>
 DD_VERSION=<YOUR_VERSION>
 DD_DYNAMIC_INSTRUMENTATION_ENABLED=true
 ```
-{{< /programming-lang >}}
 
-{{< /programming-lang-wrapper >}}
+{% /if %}
+<!-- end Go -->
 
 #### Enablement modes
 
 On the [Live Debugger Settings page][26], you can check and update the enablement status of each service and environment. Each service and environment can be in one of three modes:
 
-- {{< ui >}}Automatic{{< /ui >}}: Live Debugger has not been set to {{< ui >}}Enabled{{< /ui >}} or {{< ui >}}Disabled{{< /ui >}} yet on this service and environment. This setting changes to {{< ui >}}Enabled{{< /ui >}} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {{< ui >}}Enabled{{< /ui >}} in advance.
-- {{< ui >}}Enabled{{< /ui >}}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
-- {{< ui >}}Disabled{{< /ui >}}: Logpoints cannot be created or reactivated on the given service and environment. It applies regardless of runtime language or SDK version.
+- {% ui %}Automatic{% /ui %}: Live Debugger has not been set to {% ui %}Enabled{% /ui %} or {% ui %}Disabled{% /ui %} yet on this service and environment. This setting changes to {% ui %}Enabled{% /ui %} automatically the first time a Debug Session is started. For a faster first-time debugging experience, switch the setting to {% ui %}Enabled{% /ui %} in advance.
+- {% ui %}Enabled{% /ui %}: Live Debugger is activated on the selected service and environment, including debug symbol uploads and faster delivery of new logpoints.
+- {% ui %}Disabled{% /ui %}: Logpoints cannot be created or reactivated on the given service and environment. It applies regardless of runtime language or SDK version.
 
-### (Recommended) Create a logs index {#create-a-logs-index}
+### (Recommended) Create a logs index {% #create-a-logs-index %}
 
 Live Debugger generates logs that are sent to Datadog and appear alongside your application logs. A dedicated logs index helps ensure these logs aren't unintentionally filtered out, especially if you use [Exclusion filters][11].
 
@@ -271,7 +296,7 @@ To create the index:
 2. Set the filter to match on the `source:dd_debugger` tag. All Live Debugger logs have this source.
 3. Make sure the new index takes precedence over any other with filters that match that tag, because the first match wins.
 
-### (Recommended) Link your source code {#link-your-source-code}
+### (Recommended) Link your source code {% #link-your-source-code %}
 
 Set up [Source Code Integration][28] to view source code files directly in Live Debugger. After you link the service and environment to the corresponding repository and Git commit SHA, you can add logpoints and see existing ones in the source code as you would with breakpoints in an IDE. This helps you confirm logpoints are placed accurately and avoid capturing unintended data or generating invalid results.
 
@@ -285,8 +310,8 @@ A Debug Session lets you inspect running code using auto-expiring logpoints. To 
 
 1. Start a Debug Session from one of the following locations:
    - (Preview) On the [Live Debugger page][13], submit a question or investigation prompt to [Bits Live Debugger][29].
-   - On the [Live Debugger page][13], click {{< ui >}}Create Debug Session{{< /ui >}} or {{< ui >}}New Session{{< /ui >}}.
-   - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {{< ui >}}Start Debug Session{{< /ui >}}.
+   - On the [Live Debugger page][13], click {% ui %}Create Debug Session{% /ui %} or {% ui %}New Session{% /ui %}.
+   - In the [Trace Explorer][14], open a trace, locate the [Code Origin][20] section in the side panel, and click {% ui %}Start Debug Session{% /ui %}.
 2. Select a code location to add the first logpoint and begin capturing log events.
 3. Add, remove, or modify logpoints as needed during the session.
 4. Log events captured by the logpoints appear in the Debug Session view as they are ingested and indexed. You can also view, query, and analyze these logs in Logs Explorer and other Datadog tools that reference log data.
@@ -299,12 +324,12 @@ Debug Sessions expire automatically. You can also manually disable or re-enable 
 Logpoints are "non-breaking breakpoints" that specify where in the code to capture information, what data to include, and under what conditions. To add a logpoint for debugging:
 
 1. Go to the [Live Debugger page][13].
-2. Click {{< ui >}}Create Debug Session{{< /ui >}}.
+2. Click {% ui %}Create Debug Session{% /ui %}.
 3. Choose your service, environment, and select where in your code to place the first logpoint.
 4. Define a logpoint message template using the [expression language][15].
-5. (Optional) Use the {{< ui >}}Capture Variables{{< /ui >}} option to collect all execution context or specific variables as part of the log event metadata (this feature is rate-limited to 1 execution per second). To capture only a log message string, remove the capture variables option from the logpoint definition.
+5. (Optional) Use the {% ui %}Capture Variables{% /ui %} option to collect all execution context or specific variables as part of the log event metadata (this feature is rate-limited to 1 execution per second). To capture only a log message string, remove the capture variables option from the logpoint definition.
 6. (Optional) Define a condition for when the logs should be emitted.
-7. Click {{< ui >}}Apply changes{{< /ui >}} to save modifications to existing logpoint definitions.
+7. Click {% ui %}Apply changes{% /ui %} to save modifications to existing logpoint definitions.
 
 Most logpoint settings can be modified after creation, even if the logpoint already started capturing log events. However, the logpoint's originally selected service, environment, and code location cannot be modified (a new logpoint or Debug Session should be created in this case).
 
@@ -312,14 +337,14 @@ After a logpoint is created, modified, or re-activated, it can take a couple of 
 
 ### Protecting sensitive data
 
-Live Debugger data might contain sensitive information, especially when using the {{< ui >}}Capture Variables{{< /ui >}} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
+Live Debugger data might contain sensitive information, especially when using the {% ui %}Capture Variables{% /ui %} option. Live Debugger automatically applies mode-based and identifier-based redaction to help protect this data.
 
 #### Mode-based redaction
 
 Live Debugger has two redaction modes:
 
-- {{< ui >}}Strict Mode{{< /ui >}}: Redacts all values except numbers and Booleans. [Bits Live Debugger][23] is not available for service and environment combinations set to {{< ui >}}Strict Mode{{< /ui >}}.
-- {{< ui >}}Targeted Mode{{< /ui >}}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
+- {% ui %}Strict Mode{% /ui %}: Redacts all values except numbers and Booleans. [Bits Live Debugger][23] is not available for service and environment combinations set to {% ui %}Strict Mode{% /ui %}.
+- {% ui %}Targeted Mode{% /ui %}: Redacts known sensitive patterns such as credit card numbers, API keys, IPs, and other PII. It also runs a high-entropy secrets scanner that automatically redacts likely secrets, which appear as `[REDACTED:HIGH_ENTROPY]` in captured data.
 
 These redaction modes cannot be disabled, only switched. Targeted Mode is applied automatically in common pre-production environments such as `staging` or `preprod`. Changing the redaction mode requires the **Live Debugger Redaction Write** permission.
 
@@ -337,7 +362,9 @@ See the [sensitive data scrubbing][1] instructions and [Sensitive Data Scanner][
 
 ### Bits Live Debugger
 
-<div class="alert alert-info">Bits Live Debugger is in Preview. <a href="/tracing/live_debugger/bits-live-debugger/">Learn more about Bits Live Debugger and request access</a>.</div>
+{% alert %}
+Bits Live Debugger is in Preview. [Learn more about Bits Live Debugger and request access](/tracing/live_debugger/bits-live-debugger/).
+{% /alert %}
 
 [Bits Live Debugger][23] lets you investigate a running service by describing the issue in plain language. Bits Code handles logpoint placement, captures variable snapshots, and helps interpret the results.
 
@@ -351,10 +378,6 @@ The following constraints apply to Live Debugger usage and configuration:
 - **Rate limits:**
    - Logpoints with variable capture: Limited to 1 execution per second.
    - Logpoints without variable capture: Limited to 5000 executions per second, per service instance.
-
-## Further Reading
-
-{{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /dynamic_instrumentation/sensitive-data-scrubbing/
 [2]: /agent/
@@ -374,3 +397,11 @@ The following constraints apply to Live Debugger usage and configuration:
 [27]: /getting_started/tagging/unified_service_tagging/
 [28]: /integrations/guide/source-code-integration/
 [29]: /tracing/live_debugger/bits-live-debugger/#start-a-debugging-session
+[30]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/java/
+[31]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/python/
+[32]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/dotnet-core
+[33]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/
+[34]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/ruby/
+[35]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/php
+[36]: /tracing/trace_collection/automatic_instrumentation/dd_libraries/go
+[37]: /agent/configuration/agent-configuration-files/?tab=agentv6v7#agent-main-configuration-file
