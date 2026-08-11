@@ -15,6 +15,9 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
@@ -27,7 +30,7 @@ This processor sends all logs or metrics that match the filter query to the next
 
 To set up the filter processor:
 
-- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [Metrics Search Syntax][2] for more information.
+- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1], [Metrics Search Syntax][2], or [APM Query Syntax][6] for more information.
   - Logs or metrics that match the query are sent to the next component.
   - Logs or metrics that don't match the query are dropped.
 
@@ -40,6 +43,7 @@ For [component metrics][3] and [processor buffer metrics][4] emitted by all proc
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[6]: https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/
 
 
 ## Further reading

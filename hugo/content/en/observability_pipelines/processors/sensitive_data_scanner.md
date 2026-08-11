@@ -12,6 +12,9 @@ products:
 - name: Logs
   icon: logs
   url: /observability_pipelines/configuration/?tab=logs#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
