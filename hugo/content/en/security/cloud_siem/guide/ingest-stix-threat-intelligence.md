@@ -63,7 +63,7 @@ Tables become available a few minutes after your first request. Enrichment appli
 |---|---|---|
 | `DD-API-KEY` | Yes | Your Datadog API key. |
 | `DD-APPLICATION-KEY` | Yes | An application key with the Reference Tables Write permission. |
-| `ti_vendor` | Yes | Identifies the feed, for example the name of your platform. Use 10 characters or fewer, with only lowercase letters and digits. |
+| `ti_vendor` | Yes | Identifies the feed; for example, the name of your platform. Use 10 characters or fewer, with only lowercase letters and digits. |
 | `Content-Type` | Yes | `application/json` |
 | `Content-Encoding` | No | Set to `gzip` to send a compressed body. No other encodings are supported. |
 
