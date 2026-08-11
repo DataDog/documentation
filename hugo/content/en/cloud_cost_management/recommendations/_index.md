@@ -292,7 +292,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: RDS Instance
       recommendation_type: Downsize RDS Instance
-      recommendation_description: RDS Instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
+      recommendation_description: RDS instances that AWS Compute Optimizer suggests downsizing to a smaller instance type.
       recommendation_prerequisites: '[AWS Cost Optimization Hub permissions](/cloud_cost_management/setup/aws/#permissions-for-aws-cost-optimization-hub-recommendations)'
     - category: Downsize
       cloud_provider: AWS
