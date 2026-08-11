@@ -2225,26 +2225,36 @@ menu:
       parent: internal_developer_portal
       identifier: idp_eng_reports
       weight: 4
+    - name: Teams Performance
+      url: internal_developer_portal/eng_reports/teams_performance
+      parent: idp_eng_reports
+      identifier: eng_reports_teams_performance
+      weight: 401
     - name: Reliability Overview
       url: internal_developer_portal/eng_reports/reliability_overview
       parent: idp_eng_reports
       identifier: eng_reports_reliability_overview
-      weight: 401
+      weight: 402
+    - name: Catalog Health
+      url: internal_developer_portal/eng_reports/catalog_health
+      parent: idp_eng_reports
+      identifier: eng_reports_catalog_health
+      weight: 403
     - name: Scorecards Performance
       url: internal_developer_portal/eng_reports/scorecards_performance
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
-      weight: 402
+      weight: 404
     - name: DORA Metrics
       url: internal_developer_portal/eng_reports/dora_metrics
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
-      weight: 403
+      weight: 405
     - name: Custom Reports
       url: internal_developer_portal/eng_reports/custom_reports
       parent: idp_eng_reports
       identifier: eng_reports_custom
-      weight: 404
+      weight: 406
     - name: Homepage
       url: internal_developer_portal/homepage
       parent: internal_developer_portal
