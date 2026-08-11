@@ -9,17 +9,24 @@ export const prerender = true;
  */
 
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { getEntry } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { LOCALES, parseLangParam } from '@lib/i18n/locale';
 import { format, parse } from '@lib/plaintext/helpers';
-import { HAND_WRITTEN_PLAINTEXT_PAGE_SLUGS, handWrittenPageEntryId } from '@lib/api/handWrittenPages';
 
-export const getStaticPaths: GetStaticPaths = () => {
+const CONTENT_DIR = 'api/latest';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  // The API root (entry id `api/latest`, from index.mdoc) has no plaintext
+  // twin -- it never did -- so only its descendants get a route here.
+  const entries = await getCollection('en', (entry) => entry.id.startsWith(`${CONTENT_DIR}/`));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
-    for (const pageSlug of HAND_WRITTEN_PLAINTEXT_PAGE_SLUGS) {
+    for (const entry of entries) {
       paths.push({
-        params: { lang: lang === 'en' ? undefined : lang, page: pageSlug },
+        params: {
+          lang: lang === 'en' ? undefined : lang,
+          page: entry.id.slice(`${CONTENT_DIR}/`.length),
+        },
       });
     }
   }
@@ -37,7 +44,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const entry = await getEntry('en', handWrittenPageEntryId(pageSlug));
+  const entry = await getEntry('en', `${CONTENT_DIR}/${pageSlug}`);
   if (!entry) {
     return new Response(null, { status: 404 });
   }

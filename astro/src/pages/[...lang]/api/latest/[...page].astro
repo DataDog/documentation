@@ -1,22 +1,36 @@
 ---
 export const prerender = true;
-import { getEntry, render } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import ApiLayout from '@layouts/ApiLayout.astro';
 import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
-import { HAND_WRITTEN_PAGE_SLUGS, handWrittenPageEntryId } from '@lib/api/handWrittenPages';
 import type { GetStaticPaths } from 'astro';
 
-export const getStaticPaths: GetStaticPaths = () => {
+// Hand-written API pages -- authored as content files in
+// src/content/en/api/latest/, not generated from the OpenAPI spec. The routes
+// are derived from whatever is in that folder, so the documentation team can
+// add a page by adding a file.
+//
+// Astro's glob loader strips a trailing `/index` from entry ids, so
+// `api/latest/index.mdoc` is stored as `api/latest` and serves the API root at
+// /api/latest/, where the `page` param is empty.
+//
+// The literal is repeated inside getStaticPaths below because Astro extracts
+// that function into its own module context, where this scope is not visible.
+const CONTENT_DIR = 'api/latest';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const CONTENT_DIR = 'api/latest';
+  const entries = await getCollection('en', (entry) => entry.id.startsWith(CONTENT_DIR));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
-    for (const pageSlug of HAND_WRITTEN_PAGE_SLUGS) {
+    for (const entry of entries) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
-          page: pageSlug === 'index' ? undefined : pageSlug,
+          page: entry.id === CONTENT_DIR ? undefined : entry.id.slice(`${CONTENT_DIR}/`.length),
         },
       });
     }
@@ -29,10 +43,10 @@ if (!lang) {
   return new Response(null, { status: 404 });
 }
 
-// The API root renders at /api/latest/, so its `page` param is empty.
-const pageSlug = Astro.params.page || 'index';
+const pageSlug = Astro.params.page;
+const isRootPage = !pageSlug;
 
-const entry = await getEntry('en', handWrittenPageEntryId(pageSlug));
+const entry = await getEntry('en', isRootPage ? CONTENT_DIR : `${CONTENT_DIR}/${pageSlug}`);
 if (!entry) {
   return new Response(null, { status: 404 });
 }
@@ -40,10 +54,10 @@ if (!entry) {
 const categories = await getCategoryStubsView(lang);
 const { Content } = await render(entry);
 
-const pageTitle = pageSlug === 'index' ? 'Datadog API Reference' : `${entry.data.title} - Datadog API`;
+const pageTitle = isRootPage ? 'Datadog API Reference' : `${entry.data.title} - Datadog API`;
 
 const breadcrumbs =
-  pageSlug === 'index'
+  isRootPage
     ? [
         { label: i18n('docs', lang), href: localizedHref(lang, '/') },
         { label: i18n('api', lang) },
