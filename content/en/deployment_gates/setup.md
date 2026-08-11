@@ -98,6 +98,7 @@ The analysis is automatically done for all APM-instrumented services, and no pri
 * **Operation Name**: Auto-populated from the service's [APM primary operation][3] settings.
 * **Duration**: Enter the period of time (in seconds) for which the analysis should be done. For optimal analysis confidence, this value should be at least 900 seconds (15 minutes) after a deployment starts.
 * **Excluded Resources**: Enter a comma-separated list of [APM resources][2] to ignore (such as low-volume or low-priority endpoints).
+* **Allowed Resources**: Enter a comma-separated list of [APM resources][2] to restrict the analysis to. Mutually exclusive with **Excluded Resources**.
 
 ##### Notes
 - The rule is evaluated for each [additional primary tag][4] value as well as an aggregate analysis. If you only want to consider a single primary tag, you can specify it when [requesting a gate evaluation](#evaluate-deployment-gates) (see below).
