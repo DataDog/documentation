@@ -221,6 +221,8 @@ datadog-ci coverage upload .
 
 Surrounding whitespace is removed from each pattern, and empty entries are dropped.
 
+Because commas are separators, a pattern cannot contain a literal comma outside a brace group. Use the `ignore` field of `code-coverage.datadog.yml` for such a pattern.
+
 #### Difference from `--ignored-paths`
 
 `datadog-ci coverage upload` accepts two options with similar names that do different things:
@@ -228,13 +230,13 @@ Surrounding whitespace is removed from each pattern, and empty entries are dropp
 | Option | What it excludes | Where it applies |
 |---|---|---|
 | `--ignored-source-paths` | **Source files**, from the coverage computation. Replaces the `ignore` field. | In Datadog, after the upload |
-| `--ignored-paths` | **Coverage report files**, from the search for reports to upload. | In the CLI, before the upload |
+| `--ignored-paths` | **Coverage report files**, while the directories you pass are searched for reports. It does not apply to report files you pass explicitly. | In the CLI, before the upload |
 
-Use `--ignored-source-paths` to keep generated or vendored source code out of your coverage percentage. Use `--ignored-paths` to stop the CLI from picking up a coverage report file that you do not want to send.
+Use `--ignored-source-paths` to keep generated or vendored source code out of your coverage percentage. Use `--ignored-paths` to stop the CLI from picking up an unwanted coverage report file while it searches a directory.
 
 #### Limits
 
-A single `--ignored-source-paths` value accepts up to 2,000 patterns and 256 KB. Larger values fail with an error. Above 1,000 patterns or 100 KB, the CLI uploads the list and logs a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
+A single `--ignored-source-paths` value accepts up to 2,000 patterns and up to 256 KB. Exceeding either limit fails the command, and nothing is uploaded. Above 1,000 patterns or 100 KB, the CLI uploads the list and logs a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
 
 #### Long lists on Windows
 
