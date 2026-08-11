@@ -7086,31 +7086,36 @@ menu:
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_opensearch
       weight: 420
+    - name: OpenTelemetry Traces
+      url: observability_pipelines/destinations/opentelemetry_traces/
+      parent: observability_pipelines_destinations
+      identifier: observability_pipelines_destinations_opentelemetry_traces
+      weight: 421
     - name: SentinelOne
       url: observability_pipelines/destinations/sentinelone
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sentinelone
-      weight: 421
+      weight: 422
     - name: Socket
       url: observability_pipelines/destinations/socket
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_socket
-      weight: 422
+      weight: 423
     - name: Splunk HEC
       url: observability_pipelines/destinations/splunk_hec/logs/
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_splunk_hec
-      weight: 423
+      weight: 424
     - name: Sumo Logic Hosted Collector
       url: observability_pipelines/destinations/sumo_logic_hosted_collector
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_sumo_logic_hosted_collector
-      weight: 424
+      weight: 425
     - name: Syslog
       url: observability_pipelines/destinations/syslog
       parent: observability_pipelines_destinations
       identifier: observability_pipelines_syslog
-      weight: 425
+      weight: 426
     - name: Packs
       url: observability_pipelines/packs/
       parent: observability_pipelines
