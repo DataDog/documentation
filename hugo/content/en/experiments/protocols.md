@@ -46,7 +46,7 @@ To create a protocol:
 
 Datadog creates the protocol as a draft and opens its setup page. Continue to [Configure the protocol][10].
 
-{{< img src="/product_analytics/experiment/protocols/exp_protocols_list.png" alt="The Protocols page showing a Create Protocol button, a filter field, a Status filter set to Draft and Published, and a table of 22 protocols with columns for protocol name, status, subject type, primary metric, experiment count, and last updated time. Rows include published protocols such as Pricing and promotions test and Backend migration guardrail, and a draft protocol named Search Engine Optimization." style="width:90%;" >}}
+{{< img src="/product_analytics/experiment/protocols/exp_protocols_list.png" alt="The Protocols page showing a Create Protocol button, a filter field, a Status filter set to Draft and Published, and a table listing published and draft protocols with columns for protocol name, status, subject type, primary metric, experiment count, and last updated time. Rows include published protocols such as Pricing and promotions test and Backend migration guardrail, and a draft protocol named Search Engine Optimization." style="width:90%;" >}}
 
 ## Configure the protocol
 
@@ -96,14 +96,13 @@ Metric groups organize related metrics on the experiment results page.
 
 ### Step 4: Randomization defaults
 
-Set how Datadog splits traffic for experiments created from this protocol.
+Set how Datadog splits traffic for experiments created from this protocol. The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog Feature Flags only.
 
-1. (Optional) Select an {{< ui >}}Environment{{< /ui >}} from the dropdown.
+1. (Optional) Select an {{< ui >}}Environment{{< /ui >}} from the dropdown. You must select an environment before you can configure targeting rules or traffic exposure.
 1. (Optional) Under {{< ui >}}Targeting rules{{< /ui >}}, add filters to limit the experiment audience by custom attributes, such as user role or subscription tier.
 1. Under {{< ui >}}Traffic exposure{{< /ui >}}, set the percentage of matching users to include in the experiment. You can also define rollout steps to ramp traffic up over time.
 1. (Optional) Toggle on {{< ui >}}Require splitting traffic equally between variants{{< /ui >}}. This records that experiments created from the protocol should use an equal variant split.
 
-The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} settings apply to Datadog Feature Flags only. You must select an environment before you can configure targeting rules or traffic exposure.
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 
