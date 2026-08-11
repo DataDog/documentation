@@ -70,7 +70,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: Auto Scaling Group
       recommendation_type: Downsize Auto Scaling Group
-      recommendation_description: Auto Scaling groups with non-containerized workloads that have low CPU and memory usage and can be downsized by reviewing their scaling strategies.
+      recommendation_description: Auto Scaling groups with non-containerized workloads that have low CPU and memory usage and can be downsized by adjusting their scaling strategies.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: AWS
@@ -382,7 +382,7 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: SageMaker Endpoint
       recommendation_type: Downsize SageMaker Endpoint
-      recommendation_description: SageMaker real-time inference endpoints whose CPU and memory utilization fit within the resources of the next smallest instance in the family. Endpoints using GPU or accelerator instances, or managed scaling, are excluded.
+      recommendation_description: SageMaker real-time inference endpoints with CPU and memory utilization that fits within the resources of the next smallest instance in the family. Endpoints using GPU or accelerator instances, or managed scaling, are excluded.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: AWS
@@ -436,13 +436,13 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Container App
       recommendation_type: Scale to Zero Azure Container App Replicas
-      recommendation_description: Azure Container App has no requests in the configured lookback period.
+      recommendation_description: An Azure Container App has no requests in the configured lookback period.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: Container Registry
       recommendation_type: Delete Container Registry
-      recommendation_description: A container registry that has never received successful pulls.
+      recommendation_description: A Container Registry that has never received successful pulls.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -634,7 +634,7 @@ multifiltersearch:
       cloud_provider: GCP
       resource_type: Compute Instance Group
       recommendation_type: Downsize Compute Instance Group
-      recommendation_description: Compute Instance Groups with non-containerized workloads that have low CPU and memory usage and can be downsized by reviewing their scaling strategies.
+      recommendation_description: Compute Instance Groups with non-containerized workloads that have low CPU and memory usage and can be downsized by adjusting their scaling strategies.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: GCP
