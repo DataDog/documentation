@@ -300,7 +300,7 @@ The following conditions apply:
 Detect a significant decrease in row count that could indicate a pipeline failure or missing data.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Row Count{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.EVENTS`).
-1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
+2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method. The monitor triggers when the row count deviates from its historical baseline.
 
 {{% /tab %}}
 {{% tab "Stale table" %}}
@@ -308,8 +308,8 @@ Detect a significant decrease in row count that could indicate a pipeline failur
 Alert when a critical table has not been updated within the expected time window.
 
 1. Select {{< ui >}}Table{{< /ui >}} > {{< ui >}}Freshness{{< /ui >}} and choose the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
-1. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
+2. Select {{< ui >}}Threshold{{< /ui >}} as the detection method.
+3. Set the {{< ui >}}Alert threshold{{< /ui >}} to **6 hours** and optionally a {{< ui >}}Warning threshold{{< /ui >}} at **4 hours**.
 
 {{% /tab %}}
 {{% tab "Null percentage spike" %}}
@@ -317,7 +317,7 @@ Alert when a critical table has not been updated within the expected time window
 Detect when a column's null percentage exceeds normal levels, which may indicate data ingestion issues.
 
 1. Select {{< ui >}}Column{{< /ui >}} > {{< ui >}}Nullness{{< /ui >}} and choose the target column (for example, `ANALYTICS_DB.PROD.USERS.EMAIL`).
-1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+2. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{% tab "Rows lost between source and target" %}}
@@ -325,8 +325,8 @@ Detect when a column's null percentage exceeds normal levels, which may indicate
 Detect rows dropped between a source table and its destination after a replication or migration.
 
 1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
-1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
+2. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
+3. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
 
 {{% /tab %}}
 {{< /tabs >}}
