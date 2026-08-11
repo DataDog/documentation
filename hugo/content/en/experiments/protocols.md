@@ -27,10 +27,9 @@ Use protocols to:
 
 ## Prerequisites
 
-**Note**: You must have the appropriate [Product Analytics][11] permissions to work with protocols. The `product_analytics_experiments_read` permission grants read access. The `product_analytics_experiments_write` permission grants access to create, edit, publish, archive, and delete protocols.
-
 Before you begin, make sure you have:
 
+- Access to the right permissions. The `product_analytics_experiments_read` permission grants read access. The `product_analytics_experiments_write` permission grants access to create, edit, publish, archive, and delete protocols.
 - A [subject type][3] to set the level at which Datadog randomizes experiments.
 - (Optional) One or more [experiment metrics][2], if you want the protocol to set the decision metrics for every experiment.
 
@@ -103,15 +102,13 @@ Set how Datadog splits traffic for experiments created from this protocol. The {
 1. Under {{< ui >}}Traffic exposure{{< /ui >}}, set the percentage of matching users to include in the experiment. You can also define rollout steps to ramp traffic up over time.
 1. (Optional) Toggle on {{< ui >}}Require splitting traffic equally between variants{{< /ui >}}. This records that experiments created from the protocol should use an equal variant split.
 
-
-{{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 
 ### Step 5: Duration default
 
 Set how long experiments created from this protocol run.
 
-1. (Optional) Click {{< ui >}}Add a duration{{< /ui >}}, then enter a number and select a unit. This value becomes the target duration of the experiment. If you want to set a minimum experiment duration, this default duration will need to be set.
+1. (Optional) Click {{< ui >}}Add a duration{{< /ui >}}, then enter a number and select a unit. This value becomes the target duration of the experiment. To set a minimum experiment duration, you must first set this default duration.
 1. Under {{< ui >}}Enforcements{{< /ui >}}, set expectations for the duration of the experiment:
    - Toggle on {{< ui >}}Enforce a minimum experiment duration of{{< /ui >}}, then enter a number and select {{< ui >}}days{{< /ui >}} or {{< ui >}}weeks{{< /ui >}}. Set a default duration first, because the minimum duration cannot exceed it.
    - Toggle on {{< ui >}}Require a duration to start the experiment{{< /ui >}} to record that experiments created from the protocol need a duration.
@@ -222,7 +219,7 @@ Open a protocol and use the actions menu. The available actions are {{< ui >}}Du
 
 ### Duplicate a protocol
 
-Duplicating copies the settings into a new draft and opens it. Datadog assigns a default name to the copy; rename it in [Step 1: Protocol details](#step-1-protocol-details) if you want a different name. Duplicating is useful when you need a variation of an approved design.
+Duplicating copies the settings into a new draft and opens it. Datadog assigns a default name to the copy; rename it in [Step 1: Protocol details][12] if you want a different name. Duplicating is useful when you need a variation of an approved design.
 
 ### Archive a protocol
 
@@ -251,3 +248,4 @@ You cannot delete a protocol that experiments reference. Archive it instead.
 [9]: /experiments/plan_and_launch_experiments
 [10]: #configure-the-protocol
 [11]: /account_management/rbac/permissions/#product-analytics
+[12]: #step-1-protocol-details
