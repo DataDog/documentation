@@ -24268,6 +24268,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/CreateDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for creating a degradation.
       type: object
     CreateDegradationRequestData:
       description: The data object for creating a degradation.
@@ -31964,6 +31967,15 @@ components:
       oneOf:
         - $ref: "#/components/schemas/StatusPagesUser"
         - $ref: "#/components/schemas/StatusPageAsIncluded"
+    DegradationRequestMeta:
+      description: The supported metadata for a degradation request.
+      properties:
+        idempotency_key:
+          description: A unique key used to ensure idempotent requests.
+          example: 1e6a4b8e-4c2f-4a3d-8f1a-9c7d2e5b6f10
+          format: uuid
+          type: string
+      type: object
     DegradationTemplate:
       description: Response object for a single degradation template.
       properties:
@@ -81050,6 +81062,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PatchDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for updating a degradation.
       type: object
     PatchDegradationRequestData:
       description: The data object for updating a degradation.
