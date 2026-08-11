@@ -105,12 +105,13 @@ Set how Datadog splits traffic for experiments created from this protocol. The {
 
 
 {{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
+{{< img src="/product_analytics/experiment/protocols/exp_protocols_randomization.png" alt="The Randomization defaults step of a protocol, showing an Environment dropdown set to Production, a Targeting rules section with Add Filter and Add Saved Filter options, Traffic exposure set to 100% of targeted traffic with an Add Rollout Steps option, and a toggle to require splitting traffic equally between variants." style="width:80%;" >}}
 
 ### Step 5: Duration default
 
-Set how long experiments created from this protocol run. The heading for this step updates to reflect the confidence interval method you select in step 6, because some methods require a duration.
+Set how long experiments created from this protocol run.
 
-1. (Optional) Click {{< ui >}}Add a duration{{< /ui >}}, then enter a number and select a unit. This value becomes the target duration of the experiment.
+1. (Optional) Click {{< ui >}}Add a duration{{< /ui >}}, then enter a number and select a unit. This value becomes the target duration of the experiment. If you want to set a minimum experiment duration, this default duration will need to be set.
 1. Under {{< ui >}}Enforcements{{< /ui >}}, set expectations for the duration of the experiment:
    - Toggle on {{< ui >}}Enforce a minimum experiment duration of{{< /ui >}}, then enter a number and select {{< ui >}}days{{< /ui >}} or {{< ui >}}weeks{{< /ui >}}. Set a default duration first, because the minimum duration cannot exceed it.
    - Toggle on {{< ui >}}Require a duration to start the experiment{{< /ui >}} to record that experiments created from the protocol need a duration.
@@ -217,11 +218,11 @@ Your changes apply to experiments created after you save. Existing experiments k
 
 ## Manage protocols
 
-Open a protocol and use the actions menu, where the actions are {{< ui >}}Duplicate protocol{{< /ui >}}, {{< ui >}}Archive protocol{{< /ui >}}, and {{< ui >}}Delete protocol{{< /ui >}}. The same actions appear as {{< ui >}}Duplicate{{< /ui >}}, {{< ui >}}Archive{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} in the actions menu on each row of the [{{< ui >}}Protocols{{< /ui >}}][1] list. On a list row, {{< ui >}}Archive{{< /ui >}} appears for published protocols only.
+Open a protocol and use the actions menu. The available actions are {{< ui >}}Duplicate protocol{{< /ui >}}, {{< ui >}}Archive protocol{{< /ui >}}, and {{< ui >}}Delete protocol{{< /ui >}}. The same actions appear as {{< ui >}}Duplicate{{< /ui >}}, {{< ui >}}Archive{{< /ui >}}, and {{< ui >}}Delete{{< /ui >}} in the actions menu on each row of the [{{< ui >}}Protocols{{< /ui >}}][1] list, where {{< ui >}}Archive{{< /ui >}} appears for published protocols only.
 
 ### Duplicate a protocol
 
-Duplicating copies the settings into a new draft and opens it. Datadog assigns a default name to the copy; rename it in step 1 if you want a different name. Duplicating is useful when you need a variation of an approved design.
+Duplicating copies the settings into a new draft and opens it. Datadog assigns a default name to the copy; rename it in [Step 1: Protocol details](#step-1-protocol-details) if you want a different name. Duplicating is useful when you need a variation of an approved design.
 
 ### Archive a protocol
 
