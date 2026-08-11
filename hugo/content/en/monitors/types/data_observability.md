@@ -270,10 +270,6 @@ The {{< ui >}}Preview Monitor Evaluation{{< /ui >}} panel shows the identified s
 
 The monitored asset is the target, so the monitor appears on the target's status page.
 
-### Choose a format
-
-Use {{< ui >}}Difference{{< /ui >}} for large assets, where a small percentage change can represent a large number of rows. Use {{< ui >}}Percent Difference{{< /ui >}} for smaller assets, where a small number of missing rows does not move a percentage much.
-
 ### Compare a custom metric
 
 When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for the source and one query for the target. A {{< ui >}}WHERE{{< /ui >}} clause is not accepted for this metric type. Include any filtering in each query.
