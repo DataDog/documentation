@@ -238,20 +238,29 @@ Use `--ignored-source-paths` to keep generated or vendored source code out of yo
 
 #### Limits
 
-A single `--ignored-source-paths` value accepts up to 2,000 patterns, up to 1,000 characters per pattern, and up to 256 KB in total. Exceeding any of the three fails the command, and nothing is uploaded. The error names the limit that was exceeded.
+A realistic list stays well clear of every limit below. 500 patterns of 80 characters is roughly 40 KB, which every platform accepts.
+
+The CLI accepts up to 2,000 patterns, and up to 1,000 characters per pattern. Exceeding either fails the command, and nothing is uploaded. The error names the limit that was exceeded.
+
+A serialized total above 256 KB fails the same way. Treat that ceiling as a backstop rather than a limit you meet. On most systems, the operating system rejects a value that large before `datadog-ci` starts. See [Operating system limits](#operating-system-limits).
 
 Above 1,000 patterns or 100 KB, the upload still happens and the command prints a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
 
 The per-pattern limit matches the one Datadog applies. An over-long pattern is rejected up front rather than discarded later. A pattern discarded later could leave the list empty, which would silently bring back the `ignore` field of `code-coverage.datadog.yml`.
 
-#### Long lists on Windows
+#### Operating system limits
 
-`cmd.exe` caps a whole command line at about 8191 characters, and the npm `.cmd` wrapper for `datadog-ci` runs through `cmd.exe`. A long list of patterns can exceed that cap, which is far lower than the 256 KB the option itself accepts.
+Your operating system caps how much can be passed in a command-line argument or an environment variable. These ceilings are reached before the 256 KB limit of the option itself, and they differ by platform:
 
-Two alternatives keep the list off the command line:
+| Platform | Limit |
+|---|---|
+| Linux | About 128 KB (131,072 bytes) for any single argument or environment variable. For an environment variable, the `NAME=` prefix counts toward it. |
+| macOS | No per-value limit, but a single combined limit covers all arguments and the entire environment, so a large CI environment reduces the room available. |
+| Windows | 32,767 characters for the whole command line, and 8,191 through `cmd.exe`. The npm and Yarn `.cmd` wrappers run through `cmd.exe`. |
 
-- The `ignore` field of `code-coverage.datadog.yml`.
-- The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable, when your CI provider sets it directly in the job environment. Setting it with a `set` command in `cmd.exe` is subject to the same cap.
+Exceeding an operating system limit produces an error from the shell, such as `Argument list too long`, rather than a message from `datadog-ci`.
+
+For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable helps only in part. On Linux it faces the same per-value ceiling, and a `set` command in `cmd.exe` counts against the command-line cap. It avoids the cap only when your CI provider adds the variable to the job environment.
 
 ## PR Gates
 
