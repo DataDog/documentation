@@ -17,10 +17,6 @@ further_reading:
   text: "Create and manage reference tables"
 ---
 
-{{< callout btn_hidden="true" >}}
-STIX ingestion is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 If your organization maintains threat intelligence in a Threat Intelligence Platform (TIP), you can send it to Cloud SIEM as [STIX 2.1][1] bundles. Cloud SIEM uses the ingested indicators to [enrich your logs][2] and displays them in the [IOC Explorer][3].
