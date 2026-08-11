@@ -357,6 +357,12 @@ Agent `v7.73+` is required.
         # The TTL is reset each time the connection is seen again.
         # pathtest_ttl: 35m
 
+        ## @param monitor_ip_without_domain - boolean - optional - default: false
+        ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
+        ## Monitor IP-only destinations that do not have an associated domain.
+        ## Requires Agent v7.81+.
+        # monitor_ip_without_domain: false
+
         ## @param filters - list - optional
         ## Include or exclude specific domains or IP ranges from dynamic monitoring.
         ## Filters are applied sequentially, with later filters taking precedence.
@@ -425,6 +431,12 @@ Agent `v7.73+` is required.
        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
        # The TTL is reset each time the connection is seen again.
        # pathtest_ttl: 35m
+
+       ## @param monitor_ip_without_domain - boolean - optional - default: false
+       ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
+       ## Monitor IP-only destinations that do not have an associated domain.
+       ## Requires Agent v7.81+.
+       # monitor_ip_without_domain: false
 
        ## @param filters - list - optional
        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
