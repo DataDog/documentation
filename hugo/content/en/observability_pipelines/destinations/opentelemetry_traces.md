@@ -66,6 +66,7 @@ See [Enable debug logs][6] for instruction on enabling full debug logs.
 {{% tab "Secrets Management" %}}
 
 - HTTP/S Client URI endpoint identifier:
+  - References the HTTP/S URI endpoint, such as `http://localhost:4319/v1/traces`, to which the Worker sends OpenTelemetry data.
 	- The default identifier is `DESTINATION_OTEL_HTTP_CLIENT_URI`.
 - OpenTelemetry Traces TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_OTEL_KEY_PASS`.
