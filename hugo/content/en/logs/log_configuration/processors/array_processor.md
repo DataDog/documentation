@@ -14,10 +14,10 @@ Use the array processor to extract, aggregate, or transform values from JSON arr
 
 Supported operations include:
 
-- **Select value from a matching element**
-- **Compute the length of an array**
-- **Append a value to an array**
-- **Extract key-value pairs from an array**
+- Select value from a matching element
+- Compute the length of an array
+- Append a value to an array
+- Extract key-value pairs from an array
 
 Each operation is configured through a dedicated processor.
 
