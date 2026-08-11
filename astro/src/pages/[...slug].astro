@@ -5,7 +5,11 @@ import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const docs = await getCollection('en');
+  // api/latest/* entries have their own dedicated route
+  // (src/pages/[...lang]/api/latest/[...page].astro), which renders them with
+  // ApiLayout instead of BaseLayout. Exclude them here so the two routes
+  // don't both claim the same URL.
+  const docs = await getCollection('en', (entry) => !entry.id.startsWith('api/latest'));
   return docs.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },

@@ -1,0 +1,66 @@
+---
+export const prerender = true;
+import { getEntry, render } from 'astro:content';
+import ApiLayout from '@layouts/ApiLayout.astro';
+import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
+import { getCategoryStubsView } from '@lib/api/viewsBuilder';
+import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
+import { i18n } from '@lib/i18n/i18n';
+import { HAND_WRITTEN_PAGE_SLUGS, handWrittenPageEntryId } from '@lib/api/handWrittenPages';
+import type { GetStaticPaths } from 'astro';
+
+export const getStaticPaths: GetStaticPaths = () => {
+  const paths: ReturnType<GetStaticPaths> = [];
+  for (const lang of LOCALES) {
+    for (const pageSlug of HAND_WRITTEN_PAGE_SLUGS) {
+      paths.push({
+        params: {
+          lang: lang === 'en' ? undefined : lang,
+          page: pageSlug === 'index' ? undefined : pageSlug,
+        },
+      });
+    }
+  }
+  return paths;
+};
+
+const lang = parseLangParam(Astro.params.lang);
+if (!lang) {
+  return new Response(null, { status: 404 });
+}
+
+// The API root renders at /api/latest/, so its `page` param is empty.
+const pageSlug = Astro.params.page || 'index';
+
+const entry = await getEntry('en', handWrittenPageEntryId(pageSlug));
+if (!entry) {
+  return new Response(null, { status: 404 });
+}
+
+const categories = await getCategoryStubsView(lang);
+const { Content } = await render(entry);
+
+const pageTitle = pageSlug === 'index' ? 'Datadog API Reference' : `${entry.data.title} - Datadog API`;
+
+const breadcrumbs =
+  pageSlug === 'index'
+    ? [
+        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
+        { label: i18n('api', lang) },
+      ]
+    : [
+        { label: i18n('docs', lang), href: localizedHref(lang, '/') },
+        { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
+        { label: entry.data.title },
+      ];
+---
+
+<ApiLayout
+  title={pageTitle}
+  description={entry.data.description}
+  categories={categories}
+  breadcrumbs={breadcrumbs}
+>
+  <ApiPageHeader title={entry.data.title} lang={lang} />
+  <Content />
+</ApiLayout>

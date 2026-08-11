@@ -6,10 +6,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { format as prettierFormat } from 'prettier';
 
-import IndexPage from '../../src/pages/[...lang]/api/latest/index.astro';
-import UsingTheApiPage from '../../src/pages/[...lang]/api/latest/using-the-api.astro';
-import RateLimitsPage from '../../src/pages/[...lang]/api/latest/rate-limits.astro';
-import ScopesPage from '../../src/pages/[...lang]/api/latest/scopes.astro';
+import HandWrittenPage from '../../src/pages/[...lang]/api/latest/[...page].astro';
 import CategoryPage from '../../src/pages/[...lang]/api/latest/[category].astro';
 import OperationPage from '../../src/pages/[...lang]/api/latest/[category]/[operation].astro';
 
@@ -39,10 +36,10 @@ interface AuditPage {
  */
 const AUDIT_PAGES: AuditPage[] = [
   // 1-4: Static pages (no operations)
-  { name: '01-api-latest-index', component: IndexPage, params: {}, urlPath: '/api/latest/' },
-  { name: '02-using-the-api', component: UsingTheApiPage, params: {}, urlPath: '/api/latest/using-the-api/' },
-  { name: '03-rate-limits', component: RateLimitsPage, params: {}, urlPath: '/api/latest/rate-limits/' },
-  { name: '04-scopes', component: ScopesPage, params: {}, urlPath: '/api/latest/scopes/' },
+  { name: '01-api-latest-index', component: HandWrittenPage, params: { page: undefined }, urlPath: '/api/latest/' },
+  { name: '02-using-the-api', component: HandWrittenPage, params: { page: 'using-the-api' }, urlPath: '/api/latest/using-the-api/' },
+  { name: '03-rate-limits', component: HandWrittenPage, params: { page: 'rate-limits' }, urlPath: '/api/latest/rate-limits/' },
+  { name: '04-scopes', component: HandWrittenPage, params: { page: 'scopes' }, urlPath: '/api/latest/scopes/' },
 
   // 5-12: One landing page + one representative operation per dynamic category.
   { name: '05-authentication-landing', component: CategoryPage, params: { category: 'authentication' }, urlPath: '/api/latest/authentication/' },
