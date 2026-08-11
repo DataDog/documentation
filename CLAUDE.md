@@ -74,6 +74,7 @@ These repositories are dependencies of or closely related to this project. They 
 - **NEVER push directly to `master`.** Always create a PR and go through the review process. Direct pushes bypass branch protection and code review.
 - **Obey the git hooks set up in .husky.** Do not use `--no-verify` or other workarounds to skip repository git hooks.
 - **NEVER force-push any branch.** Do not use `git push --force`, `git push -f`, or `--force-with-lease`. Force-pushing rewrites history and destroys commit history in open PRs.
+- **The rules above are enforced mechanically.** A `PreToolUse` hook (`.claude/hooks/block-master-git.py`) blocks commits and pushes that target `master`, along with `--no-verify`, `HUSKY=0`, and force-push flags. The `.husky` git hooks enforce the same rules for commits made outside Claude Code. A block from either layer is intentional. Do not work around it.
 - **This is a PUBLIC repository. NEVER include internal or sensitive information in documentation content, commit messages, PR titles, PR descriptions, or code comments.** This includes: customer names, incident details (Sev 1s, outages, etc.), internal URLs, internal Slack conversations, Jira ticket details beyond the ticket key, internal bugs or implementation details, or any context that isn't appropriate for public visibility. Documentation should describe how to use features, not reference internal issues (e.g., not "there's currently a bug in the backend that processes this"). PR descriptions should describe *what changed in the docs*, not *why internally* (e.g., not "a customer hit a Sev 1 because..."). Keep all content concise and focused on the user-facing documentation change itself.
 
 ## Branch and PR Guidelines
@@ -91,19 +92,27 @@ CRITICAL: Always use format `<name>/<description>` with forward slash. Without t
 Use the Jira ticket key in square brackets: `[DOCS-XXXXX] Brief description`
 
 ### PR Description Template
+
 ```
 <!-- *Note: Please remember to review the Datadog Documentation [Contribution Guidelines](https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md) if you have not yet done so.* -->
-
 ### What does this PR do? What is the motivation?
 
 Fixes DOCS-XXXXX
 
 [Brief description of changes]
 
-### Merge instructions
+### Merge readiness
 
-Merge readiness:
 - [ ] Ready for merge
+
+## For Datadog employees:
+
+- ⚠️ Your branch name **MUST** follow the `<name>/<description>` convention and include the forward slash (`/`). If you've already created your PR with an incorrect branch name, please rename your branch and open a fresh PR.
+- 🤖 **New**: Comment with `/review` to run an automated check that catches common issues before a Documentation team member reviews your PR.
+
+### AI assistance
+
+[If AI tools were used, briefly note how. Leave blank if not applicable.]
 
 ### Additional notes
 
