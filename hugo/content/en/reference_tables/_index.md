@@ -188,8 +188,127 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 
 **Note**: The API supports the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
 
+#### Example: create, update, and delete a Reference Table from a local file
+
+This example demonstrates the complete workflow for managing a Reference Table backed by a local CSV file with the API: create an upload, push the CSV data to the returned URLs, create the table, patch it with new data, and delete it.
+
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and application keys, and `<DATADOG_SITE>` with your [Datadog site][11].
+
+1. Create a reference table upload. Provide the CSV `headers`, the number of parts you plan to upload in `part_count`, and the maximum size of each part in bytes in `part_size`.
+
+   ```shell
+   curl -X POST "https://api.<DATADOG_SITE>/api/v2/reference-tables/uploads" \
+   -H "Content-Type: application/json" \
+   -H "DD-API-KEY: <DATADOG_API_KEY>" \
+   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+   -d '{
+     "data": {
+       "type": "upload",
+       "attributes": {
+         "table_name": "my_products_table",
+         "headers": ["product_id", "product_name", "price"],
+         "part_count": 1,
+         "part_size": 10000000
+       }
+     }
+   }'
+   ```
+
+   The response contains an upload `id` and a `part_urls` array with one URL for each part:
+
+   ```json
+   {
+     "data": {
+       "id": "00000000-0000-0000-0000-000000000000",
+       "type": "upload",
+       "attributes": {
+         "part_urls": ["https://example.com/upload-part-1"]
+       }
+     }
+   }
+   ```
+
+2. Upload the CSV data (not the file itself) to each part URL with a `PUT` request. If your data spans multiple parts, split the CSV rows evenly and `PUT` each chunk to its corresponding URL from `part_urls`.
+
+   ```shell
+   curl -X PUT "https://example.com/upload-part-1" \
+   -H "Content-Type: text/csv" \
+   --data-binary $'product_id,product_name,price\n1,Widget,9.99\n2,Gadget,19.99'
+   ```
+
+3. Create the Reference Table, referencing the upload `id` from step 1 in `file_metadata.upload_id`.
+
+   ```shell
+   curl -X POST "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables" \
+   -H "Content-Type: application/json" \
+   -H "DD-API-KEY: <DATADOG_API_KEY>" \
+   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+   -d '{
+     "data": {
+       "type": "reference_table",
+       "attributes": {
+         "table_name": "my_products_table",
+         "description": "Product catalog uploaded via local file",
+         "source": "LOCAL_FILE",
+         "file_metadata": {
+           "upload_id": "00000000-0000-0000-0000-000000000000"
+         },
+         "schema": {
+           "fields": [
+             {"name": "product_id", "type": "STRING"},
+             {"name": "product_name", "type": "STRING"},
+             {"name": "price", "type": "DOUBLE"}
+           ],
+           "primary_keys": ["product_id"]
+         },
+         "tags": ["team:ecommerce"]
+       }
+     }
+   }'
+   ```
+
+   The response contains the new table's `id`, which you use in the following steps.
+
+4. To update the table's data, repeat steps 1 and 2 to upload a new CSV file, then call the [Update Reference Table endpoint][12] with the new `upload_id`. The upserted CSV replaces matching rows, adds new rows, and removes rows no longer present in the file.
+
+   ```shell
+   curl -X PATCH "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables/<TABLE_ID>" \
+   -H "Content-Type: application/json" \
+   -H "DD-API-KEY: <DATADOG_API_KEY>" \
+   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
+   -d '{
+     "data": {
+       "type": "reference_table",
+       "attributes": {
+         "file_metadata": {
+           "upload_id": "11111111-1111-1111-1111-111111111111"
+         },
+         "schema": {
+           "fields": [
+             {"name": "product_id", "type": "STRING"},
+             {"name": "product_name", "type": "STRING"},
+             {"name": "price", "type": "DOUBLE"}
+           ],
+           "primary_keys": ["product_id"]
+         }
+       }
+     }
+   }'
+   ```
+
+5. To delete the table, call the [Delete Reference Table endpoint][13] with the table's `id`.
+
+   ```shell
+   curl -X DELETE "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables/<TABLE_ID>" \
+   -H "DD-API-KEY: <DATADOG_API_KEY>" \
+   -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
+   ```
+
 [8]: /api/latest/reference-tables/
 [10]: /api/latest/reference-tables/#create-reference-table
+[11]: /getting_started/site/
+[12]: /api/latest/reference-tables/#update-reference-table
+[13]: /api/latest/reference-tables/#delete-table
 
 {{% /tab %}}
 {{% tab "Integrations" %}}
