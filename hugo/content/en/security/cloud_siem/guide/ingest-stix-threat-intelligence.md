@@ -211,7 +211,7 @@ To enable such a table, disable a table you no longer need on the [Threat Intell
 
 ## Stop ingesting a feed
 
-Your requests drive ingestion, so removing a feed takes two steps, in this order:
+Your requests drive ingestion, so removing a feed requires two steps, in this order:
 
 1. Stop sending bundles for that `ti_vendor`.
 2. Delete the reference tables that Datadog generated for the feed from [Reference Tables][8].
