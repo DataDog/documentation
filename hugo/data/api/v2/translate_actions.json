@@ -6519,7 +6519,7 @@
     "summary": "Get status page"
   },
   "UpdateStatusPage": {
-    "description": "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead.",
+    "description": "Updates an existing status page's attributes. To publish and unpublish status pages, use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints.",
     "summary": "Update status page",
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
