@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("CollapseContent component", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/docs/test_pages/components/collapse-content");
+    await page.goto("/dd_e2e/components/collapse-content");
   });
 
   test("hydrates its Preact controller", async ({ page }) => {
@@ -45,7 +45,7 @@ test.describe("CollapseContent component", () => {
 
   test("opens the section whose id matches the URL hash", async ({ page }) => {
     await page.goto(
-      "/docs/test_pages/components/collapse-content#deep-linkable",
+      "/dd_e2e/components/collapse-content#deep-linkable",
     );
     const section = page.locator("#deep-linkable");
     await expect(section).toHaveAttribute("open", "");

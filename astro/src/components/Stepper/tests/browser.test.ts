@@ -5,7 +5,7 @@ const accordion = ".stepper--collapsed";
 
 test.describe("Stepper component", () => {
   test.beforeEach(async ({ page }) => {
-    await page.goto("/docs/test_pages/components/stepper");
+    await page.goto("/dd_e2e/components/stepper");
   });
 
   test("hydrates and becomes visible", async ({ page }) => {
