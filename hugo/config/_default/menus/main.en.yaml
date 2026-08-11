@@ -10509,11 +10509,21 @@ menu:
       url: account_management/plan_and_usage/usage_details/
       parent: account_management_plan_and_usage
       weight: 1402
+    - name: End Customer Cost Visibility
+      identifier: account_management_end_customer_cost_visibility
+      url: account_management/plan_and_usage/end_customer_cost_visibility/
+      parent: account_management_plan_and_usage
+      weight: 1403
     - name: Partner Experience
       identifier: account_management_partner_experience
       url: account_management/plan_and_usage/partner_experience/
       parent: account_management_plan_and_usage
-      weight: 1403
+      weight: 1404
+    - name: Customer Pricing
+      identifier: account_management_customer_pricing
+      url: account_management/plan_and_usage/customer_pricing/
+      parent: account_management_plan_and_usage
+      weight: 1405
     - name: Billing
       identifier: account_management_billing
       url: account_management/billing/
