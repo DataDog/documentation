@@ -12,11 +12,6 @@ further_reading:
   text: "Sensitive Data Scanner"
 ---
 
-{{< callout url=https://www.datadoghq.com/product-preview/runtime-prioritization-engine/
- btn_hidden="false" header="Join the Preview!">}}
-Crown Jewels is in Preview. Use this form to submit your request today.
-{{< /callout >}}
-
 ## Overview
 
 Crown Jewels is an inventory of your most critical cloud resources, automatically detected from the telemetry you already send to Datadog. The list is the starting point for prioritizing remediation work across Cloud Security: you can sort, filter and route vulnerabilities, misconfigurations, and identity risks that are linked to a crown jewel differently from the rest of your findings.

@@ -24268,6 +24268,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/CreateDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for creating a degradation.
       type: object
     CreateDegradationRequestData:
       description: The data object for creating a degradation.
@@ -25861,9 +25864,6 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
-        enabled:
-          description: Whether the status page is enabled.
-          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
@@ -31964,6 +31964,15 @@ components:
       oneOf:
         - $ref: "#/components/schemas/StatusPagesUser"
         - $ref: "#/components/schemas/StatusPageAsIncluded"
+    DegradationRequestMeta:
+      description: The supported metadata for a degradation request.
+      properties:
+        idempotency_key:
+          description: A unique key used to ensure idempotent requests.
+          example: 1e6a4b8e-4c2f-4a3d-8f1a-9c7d2e5b6f10
+          format: uuid
+          type: string
+      type: object
     DegradationTemplate:
       description: Response object for a single degradation template.
       properties:
@@ -81050,6 +81059,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PatchDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for updating a degradation.
       type: object
     PatchDegradationRequestData:
       description: The data object for updating a degradation.
@@ -81597,7 +81609,6 @@ components:
             company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
             domain_prefix: status-page-us1-east
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            enabled: false
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
             subscriptions_enabled: false
@@ -81641,10 +81652,6 @@ components:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
-        enabled:
-          description: Whether the status page is enabled.
-          example: true
-          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
@@ -205677,7 +205684,7 @@ paths:
                       attributes:
                         components: []
                         domain_prefix: status-page-us1
-                        enabled: true
+                        enabled: false
                         name: Status Page US1
                         subscriptions_enabled: true
                         type: public
@@ -205943,7 +205950,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
+      description: "Updates an existing status page's attributes. To publish and unpublish status pages, use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -205976,7 +205983,6 @@ paths:
                       company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
                       domain_prefix: status-page-us1-east
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      enabled: false
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
                       subscriptions_enabled: false
