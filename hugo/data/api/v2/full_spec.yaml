@@ -33025,6 +33025,13 @@ components:
     DeploymentGatesFDDRuleOptions:
       description: Options for a `faulty_deployment_detection` rule.
       properties:
+        allowed_resources:
+          description: APM resource names to include in analysis. Mutually exclusive with `excluded_resources`.
+          example:
+            - "GET /healthcheck"
+          items:
+            type: string
+          type: array
         duration:
           description: Evaluation window in seconds. Maximum 7200 (2 hours).
           example: 900
@@ -33193,6 +33200,13 @@ components:
       additionalProperties: false
       description: Faulty deployment detection options for deployment rules.
       properties:
+        allowed_resources:
+          description: Resources to include in faulty deployment detection. Mutually exclusive with `excluded_resources`.
+          example: ["resource1", "resource2"]
+          items:
+            description: A resource name to include in faulty deployment detection.
+            type: string
+          type: array
         duration:
           description: The duration for faulty deployment detection.
           example: 3600
