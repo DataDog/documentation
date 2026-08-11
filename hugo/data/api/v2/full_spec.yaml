@@ -188611,8 +188611,8 @@ paths:
       x-menu-order: 7
       x-sunset: "2026-04-01"
       x-unstable: |-
-        **Note**: This endpoint is in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+        **Note**: This endpoint is deprecated. To update outcomes, use the
+        [Update Scorecard outcomes](https://docs.datadoghq.com/api/latest/scorecards/update-scorecard-outcomes/) endpoint.
   /api/v2/scorecard/rules:
     get:
       description: Fetch all rules.
