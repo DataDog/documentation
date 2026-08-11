@@ -60,6 +60,8 @@ The configuration applies only when both of the following are true:
 
 The same requirement applies to every later change. Editing a gate threshold or an `ignore` pattern takes effect for a commit only after that edit is committed and pushed.
 
+Configuration is not applied retroactively. A file added or changed in a later commit does not affect coverage already reported at an earlier commit. The configuration that applies to a report is the one present at the commit the report was attached to.
+
 If your configuration appears to have no effect, check that `git status` reports no uncommitted changes to the file. Then confirm that the commit that adds or modifies it is present on your remote.
 
 ## Services configuration
