@@ -50,7 +50,9 @@ Exclude time spent waiting for user input, such as reading content or deciding w
 
 ### Keep the timeout rate at or below 1%
 
-Each operation must have a recorded start and end. The end indicates whether the operation succeeded or failed. If RUM records the start but not the corresponding end, the [operation times out][4] (see the note under **Parallelization**), and Datadog cannot determine its outcome. A high timeout rate makes availability metrics less reliable and can indicate incomplete instrumentation.
+Each operation must have a recorded start and end. The end indicates whether the operation succeeded or failed. If RUM records the start but not the corresponding end, the [operation times out][4] (see the note under **Parallelization**), and Datadog cannot determine its outcome.
+
+Timed-out operations reduce the sample of operations with meaningful outcome data and can conceal errors or user abandonment. Keep the timeout rate at or below 1% so Datadog can classify at least 99% of started operations as successes or failures. A higher timeout rate makes operation performance metrics less representative and can indicate incomplete instrumentation.
 
 ### Link operations to journeys
 
