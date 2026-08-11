@@ -1,8 +1,10 @@
-// Catch-all `.md` endpoint: the plaintext twin of the `[...slug].astro` cdoc
-// route. A URL like `some/cdoc/path.md?prog_lang=python` resolves the same
-// filters as the HTML page (URL param > cookie > default, via the shared
-// `resolveCdocRender`), renders the `.mdoc` to plaintext Markdoc, and returns
-// it as `text/markdown`. Non-cdoc paths 404.
+// Catch-all `.md` endpoint: the plaintext twin of the `[...slug].astro` route.
+// Serves a plaintext version of every `content/en` page. Cdocs (pages with
+// `content_filters`) resolve their filters — URL param > cookie > default, via
+// the shared `resolveCdocRender` — and render through the cdocs plaintext
+// pipeline; every other page renders through the component plaintext twins.
+// Either way the frontmatter title is prepended as an H1, mirroring the HTML
+// page. A path with no matching entry 404s.
 //
 // Filters resolve identically to the HTML page even without query params: the
 // HTML route sets the `cdocs_prefs` cookie on load, and this same-origin fetch
@@ -15,38 +17,52 @@ import { resolveCdocRender } from '@lib/cdocs/resolveCdocRender';
 import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
 import { renderCdocPlaintext } from '@lib/cdocs/plaintext/renderCdocPlaintext';
 import { makeBundledPartialResolver } from '@lib/cdocs/plaintext/loadPartial';
+import { renderMdocWithTwins } from '@lib/plaintext/twinTransform';
 
 const resolvePartial = makeBundledPartialResolver();
 
 export const GET: APIRoute = async ({ params, url, cookies }) => {
-  // `[...slug]` yields the path without the `.md` extension, which is exactly a
-  // `docs` entry id.
+  // `[...slug]` yields the path without the `.md` extension, which is exactly an
+  // `en` entry id.
   const slug = params.slug ?? '';
 
-  const entry = await getEntry('docs', slug);
-  // Only filterable docs (cdocs) render plaintext here; anything else 404s.
-  if (!entry?.data.content_filters) {
+  // dd_e2e/* are test pages; hidden in the live build like the HTML route.
+  if (slug.startsWith('dd_e2e/') && __CI_ENV__ === 'live') {
     return new Response(null, { status: 404 });
   }
 
-  const { valsByTraitId } = resolveCdocRender({
-    contentFilters: entry.data.content_filters,
-    searchParams: url.searchParams,
-    cookieRaw: cookies.get(COOKIE_NAME)?.value,
-    now: Date.now(),
-  });
+  const entry = await getEntry('en', slug);
+  if (!entry) {
+    return new Response(null, { status: 404 });
+  }
 
   // The glob content loader exposes the raw `.mdoc` body (frontmatter stripped),
   // so no disk read — or path-traversal guard — is needed: `getEntry` already
   // scoped the lookup to the collection, and this works in the bundled server.
   const body = entry.body ?? '';
+  const { title, content_filters: contentFilters } = entry.data;
 
-  const text = renderCdocPlaintext({
-    body,
-    variables: valsByTraitId,
-    title: entry.data.title,
-    resolvePartial,
-  });
+  let text: string;
+  if (contentFilters) {
+    // Cdoc: resolve filters and render through the cdocs plaintext pipeline,
+    // which prepends the title itself.
+    const { valsByTraitId } = resolveCdocRender({
+      contentFilters,
+      searchParams: url.searchParams,
+      cookieRaw: cookies.get(COOKIE_NAME)?.value,
+      now: Date.now(),
+    });
+    text = renderCdocPlaintext({
+      body,
+      variables: valsByTraitId,
+      title,
+      resolvePartial,
+    });
+  } else {
+    // Non-cdoc: render component plaintext twins and prepend the title as an H1
+    // to mirror the HTML page.
+    text = `# ${title}\n\n${renderMdocWithTwins(body)}`;
+  }
 
   return new Response(text, {
     headers: { 'Content-Type': 'text/markdown; charset=utf-8' },

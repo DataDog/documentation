@@ -1,12 +1,13 @@
 ---
-// Catch-all on-demand cdoc route. Any URL whose path matches a filterable doc
-// (an `en` collection entry with `content_filters`) is rendered here: filters
-// resolve per request (URL param > cookie > default) and non-matching content
-// is dropped server-side by vanilla Markdoc before the HTML is sent.
+// Catch-all on-demand route for every `en` collection entry. Whether or not a
+// doc is filterable, it renders here on the server. Filterable docs (those with
+// `content_filters`) additionally resolve their filters per request (URL param
+// > cookie > default) so non-matching content is dropped by vanilla Markdoc
+// before the HTML is sent; non-filterable docs simply render their content.
 //
-// This is the lowest-priority route, so more specific ones (`/`, `/dd_e2e/...`,
+// This is the lowest-priority route, so more specific ones (`/`,
 // `/[...lang]/api/...`) still win; only otherwise-unmatched paths reach here.
-// A path that isn't a filterable doc falls through to a 404.
+// A path with no matching `en` entry falls through to a 404.
 export const prerender = false;
 
 import { getEntry, render } from 'astro:content';
@@ -21,26 +22,43 @@ import { DEFAULT_LOCALE } from '@lib/i18n/locale';
 // exactly an `en` entry id (path under content/en, without the extension).
 const slug = Astro.params.slug ?? '';
 
-const entry = await getEntry('en', slug);
-// Only filterable docs (cdocs) render through this route; anything else 404s.
-if (!entry?.data.content_filters) {
+// dd_e2e/* are test pages; hidden in the live build like every other dd_e2e
+// route (which each carry their own `__CI_ENV__ === 'live'` guard).
+if (slug.startsWith('dd_e2e/') && __CI_ENV__ === 'live') {
   return new Response(null, { status: 404 });
 }
 
-const { resolvedFilters, valsByTraitId, cookieValue } = resolveCdocRender({
-  contentFilters: entry.data.content_filters,
-  searchParams: Astro.url.searchParams,
-  cookieRaw: Astro.cookies.get(COOKIE_NAME)?.value,
-  now: Date.now(),
-});
+const entry = await getEntry('en', slug);
+// Any en entry renders here; a path with no entry 404s.
+if (!entry) {
+  return new Response(null, { status: 404 });
+}
 
-// Persist the resolved values (trait-keyed, oldest evicted past the cap) so a
-// selection survives navigation to other cdocs.
-Astro.cookies.set(COOKIE_NAME, cookieValue, {
-  path: '/',
-  sameSite: 'lax',
-  maxAge: 60 * 60 * 24 * 365,
-});
+const contentFilters = entry.data.content_filters;
+const isFilterable = contentFilters !== undefined;
+
+// Filterable docs resolve their filters (and persist the selection); plain docs
+// render with no filter state.
+let resolvedFilters: ReturnType<typeof resolveCdocRender>['resolvedFilters'] = [];
+let valsByTraitId: ReturnType<typeof resolveCdocRender>['valsByTraitId'] = {};
+if (isFilterable) {
+  const resolved = resolveCdocRender({
+    contentFilters,
+    searchParams: Astro.url.searchParams,
+    cookieRaw: Astro.cookies.get(COOKIE_NAME)?.value,
+    now: Date.now(),
+  });
+  resolvedFilters = resolved.resolvedFilters;
+  valsByTraitId = resolved.valsByTraitId;
+
+  // Persist the resolved values (trait-keyed, oldest evicted past the cap) so a
+  // selection survives navigation to other cdocs.
+  Astro.cookies.set(COOKIE_NAME, resolved.cookieValue, {
+    path: '/',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 365,
+  });
+}
 
 // The resolved values become Markdoc variables ($prog_lang, ...), which the
 // built-in `if` tags evaluate to drop non-matching content at render time.
@@ -68,15 +86,18 @@ const plaintextHref = `${Astro.url.pathname.replace(/\/$/, '')}.md${Astro.url.se
   <div class="cdoc-layout">
     <main class="cdoc">
       <h1 transition:name="cdoc-title">{entry.data.title}</h1>
-      <CdocsFilterBar client:load filters={resolvedFilters} />
+      {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
       <div class="cdoc__content" transition:name="cdoc-content">
         <Content {...valsByTraitId} />
       </div>
     </main>
     <nav class="cdoc-rightnav">
       <CopyPageButtonIsland lang={DEFAULT_LOCALE} />
-      {/* TODO: temporary testing link to the plaintext (.md) version. */}
-      <a class="cdoc-rightnav__plaintext-link" href={plaintextHref}>View as plaintext</a>
+      {/* TODO: temporary testing link to the plaintext (.md) version. Only
+          filterable docs currently have a working `.md` twin. */}
+      {isFilterable && (
+        <a class="cdoc-rightnav__plaintext-link" href={plaintextHref}>View as plaintext</a>
+      )}
     </nav>
   </div>
 </BaseLayout>

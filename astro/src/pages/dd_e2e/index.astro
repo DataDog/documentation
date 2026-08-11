@@ -174,7 +174,7 @@ const astroComponents: AstroTestPage[] = [
             const tagName = entry.id.replace('dd_e2e/components/', '');
             return (
             <tr>
-              <td><a href={`/docs/${entry.id}/`}><code>{tagName}</code></a></td>
+              <td><a href={`/${entry.id}/`}><code>{tagName}</code></a></td>
               <td>{entry.data.type ?? ''}</td>
               <td>{componentsWithPlaintextTwin.has(tagName) ? '✅' : '❌'}</td>
               <td>{entry.data.description ?? ''}</td>

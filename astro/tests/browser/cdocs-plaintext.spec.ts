@@ -39,8 +39,8 @@ test.describe('cdocs plaintext (.md)', () => {
     expect(body).not.toContain('<!--');
   });
 
-  test('a non-cdoc .md path 404s', async ({ request }) => {
-    const response = await request.get('/this/is/not/a/cdoc.md');
+  test('a .md path with no matching entry 404s', async ({ request }) => {
+    const response = await request.get('/this/is/not/a/page.md');
     expect(response.status()).toBe(404);
   });
 
