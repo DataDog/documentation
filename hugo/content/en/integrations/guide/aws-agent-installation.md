@@ -124,10 +124,7 @@ Agent installation on EC2 relies on the AWS Systems Manager (SSM) Agent, which D
 
 ### A permission or IAM error occurs
 
-If installation can't complete because of missing permissions, Datadog shows a notification with a link to the relevant CloudFormation resource so you can resolve it. Update the stack to grant the [required permissions](#required-aws-permissions).
-
-<!-- TODO(DOCS-14545): confirm with eng whether remediation is a stack update or a re-run of the original stack, and name the exact action here. -->
-
+If installation can't complete because of missing permissions, Datadog shows a notification linking to the CloudFormation resource that needs the new permission. Update your existing stack to grant the [required permissions](#required-aws-permissions). You don't need to create a new stack.
 
 ## Further reading
 
