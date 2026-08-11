@@ -26,7 +26,7 @@ These optimizations require a [supported native library][12]. JUnit XML uploads 
 
 ## Validate locally with a coding agent
 
-Local coding-agent validation is in the Preview release stage and supports only JavaScript projects that use the npm `dd-trace` package. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
+Local coding-agent validation is in the Preview release stage and supports only JavaScript and TypeScript projects that use the npm [`dd-trace` package][15]. A local coding agent is an AI assistant that can inspect and run commands in your local repository.
 
 Ask a local coding agent to inspect your installed `dd-trace` package and run its Test Optimization validation runbook. This method checks local library compatibility and CI configuration. It also checks Early Flake Detection, Auto Test Retries, and Test Management without changing Datadog settings or sending validation results to Datadog.
 
@@ -38,11 +38,11 @@ Pass this prompt to your local coding agent:
 Locate the installed dd-trace package, then read and execute its ci/runbook.md.
 ```
 
-The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript, complete the following steps.
+The coding-agent method is a local check that does not exercise the entire Datadog workflow. To validate the full Prevention, Mitigation, and Remediation workflows, or to validate a language other than JavaScript or TypeScript, complete the following steps.
 
 ## Set up validation
 
-Complete the following configuration steps for the repository. Scope each configuration to the validation service, branch, or repository so your default branch and existing services stay untouched:
+This guide walks you through making local changes and committing them for CI to run. It uses a dedicated test service and branch to minimize the validation workflow's impact on other developers in the repository.
 
 1. Configure your CI test job to set `DD_SERVICE` before it runs the test command:
 
@@ -64,6 +64,9 @@ Complete the following configuration steps for the repository. Scope each config
    ```
 
 4. After CI finishes, go to the [CI/CD Repositories settings][3] and select the repository you are validating.
+
+   {{< img src="pr_gates/setup/ci_cd_repositories_settings.png" alt="CI/CD Repositories settings filtered to the repository being validated" style="width:100%" >}}
+
 5. Click {{< ui >}}Test Services{{< /ui >}} in the upper-right corner.
 
    {{< img src="pr_gates/setup/repository_settings_test_services.png" alt="Repository Settings with the Test Services button in the upper-right corner" style="width:100%" >}}
@@ -259,6 +262,158 @@ Mitigation is achieved through [Auto Test Retries][4], [Flaky Test Management][5
 
 In the same test that you added for Prevention, change the marker filename from `dd-validation-flaky` to `dd-validation-flaky-mitigation`. Do not rename the test function or test case. The new marker causes another intentional first-attempt failure. Keeping the test name unchanged lets Datadog associate the run with the flaky test detected during Prevention. No additional Datadog configuration is required; Auto Test Retries and Flaky Test Management handle the test during this run.
 
+Update the test for your language:
+
+{{< tabs >}}
+{{% tab "JavaScript" %}}
+
+```javascript
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+
+test('flaky validation test', () => {
+    // Changed from dd-validation-flaky.
+    const marker = path.join(os.tmpdir(), 'dd-validation-flaky-mitigation');
+    if (!fs.existsSync(marker)) {
+        fs.writeFileSync(marker, '1');
+        throw new Error('first attempt fails so Datadog can retry it');
+    }
+});
+```
+
+{{% /tab %}}
+{{% tab "Python" %}}
+
+```python
+from pathlib import Path
+from tempfile import gettempdir
+
+
+def test_flaky_validation_test():
+    # Changed from dd-validation-flaky.
+    marker = Path(gettempdir()) / "dd-validation-flaky-mitigation"
+    if not marker.exists():
+        marker.write_text("1")
+        raise AssertionError("first attempt fails so Datadog can retry it")
+```
+
+{{% /tab %}}
+{{% tab "Java" %}}
+
+```java
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import org.junit.jupiter.api.Test;
+
+class ValidationFlakyTest {
+    @Test
+    void flakyValidationTest() throws IOException {
+        // Changed from dd-validation-flaky.
+        Path marker = Paths.get(
+            System.getProperty("java.io.tmpdir"),
+            "dd-validation-flaky-mitigation"
+        );
+        if (Files.notExists(marker)) {
+            Files.writeString(marker, "1");
+            fail("first attempt fails so Datadog can retry it");
+        }
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Ruby" %}}
+
+```ruby
+require 'tmpdir'
+
+RSpec.describe 'validation flaky tests' do
+  it 'flaky validation test' do
+    # Changed from dd-validation-flaky.
+    marker = File.join(Dir.tmpdir, 'dd-validation-flaky-mitigation')
+    unless File.exist?(marker)
+      File.write(marker, '1')
+      raise 'first attempt fails so Datadog can retry it'
+    end
+  end
+end
+```
+
+{{% /tab %}}
+{{% tab ".NET" %}}
+
+```csharp
+using System.IO;
+using Xunit;
+
+public class ValidationFlakyTests
+{
+    [Fact]
+    public void FlakyValidationTest()
+    {
+        // Changed from dd-validation-flaky.
+        var marker = Path.Combine(Path.GetTempPath(), "dd-validation-flaky-mitigation");
+        if (!File.Exists(marker))
+        {
+            File.WriteAllText(marker, "1");
+            throw new System.Exception("first attempt fails so Datadog can retry it");
+        }
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Go" %}}
+
+```go
+package validation
+
+import (
+    "errors"
+    "os"
+    "path/filepath"
+    "testing"
+)
+
+func TestFlakyValidationTest(t *testing.T) {
+    // Changed from dd-validation-flaky.
+    marker := filepath.Join(os.TempDir(), "dd-validation-flaky-mitigation")
+    if _, err := os.Stat(marker); errors.Is(err, os.ErrNotExist) {
+        if writeErr := os.WriteFile(marker, []byte("1"), 0600); writeErr != nil {
+            t.Fatal(writeErr)
+        }
+        t.Fatal("first attempt fails so Datadog can retry it")
+    }
+}
+```
+
+{{% /tab %}}
+{{% tab "Swift" %}}
+
+```swift
+import XCTest
+
+final class ValidationFlakyTests: XCTestCase {
+    func testFlakyValidationTest() throws {
+        // Changed from dd-validation-flaky.
+        let marker = FileManager.default.temporaryDirectory
+            .appendingPathComponent("dd-validation-flaky-mitigation")
+        if !FileManager.default.fileExists(atPath: marker.path) {
+            try "1".write(to: marker, atomically: true, encoding: .utf8)
+            XCTFail("first attempt fails so Datadog can retry it")
+        }
+    }
+}
+```
+
+{{% /tab %}}
+{{< /tabs >}}
+
 Commit and push the change on the same branch:
 
 ```bash
@@ -397,3 +552,4 @@ The [New Flaky Test PR Gate][2] remains active for the entire repository. The ga
 [12]: /tests/
 [13]: /tests/test_impact_analysis/
 [14]: https://app.datadoghq.com/ci/test/flaky/explorer?query=%40test.name%3A%2Aflaky%2Avalidation%2A%20first_flaked_branch%3Avalidate-test-optimization%20fix_in_progress%3Atrue
+[15]: https://www.npmjs.com/package/dd-trace
