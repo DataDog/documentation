@@ -27,7 +27,7 @@ Use protocols to:
 
 ## Prerequisites
 
-**Note**: You must have the appropriate <a href="/account_management/rbac/permissions/#product-analytics">Product Analytics</a> permissions to work with protocols. The <code>product_analytics_experiments_read</code> permission grants read access. The <code>product_analytics_experiments_write</code> permission grants access to create, edit, publish, archive, and delete protocols.
+**Note**: You must have the appropriate [Product Analytics][11] permissions to work with protocols. The `product_analytics_experiments_read` permission grants read access. The `product_analytics_experiments_write` permission grants access to create, edit, publish, archive, and delete protocols.
 
 Before you begin, make sure you have:
 
@@ -85,7 +85,7 @@ If you change the subject type after you select metrics, Datadog opens the {{< u
 
 Add metrics that Datadog attaches to every experiment in addition to the decision metrics.
 
-1. (Optional) Toggle on {{< ui >}}Set maximum number of metrics on the experiment to:{{< /ui >}} and enter a positive whole number. This sets a maximum number of metrics that experiments created from this protocol can have.
+1. (Optional) Toggle on {{< ui >}}Set maximum number of metrics on the experiment to:{{< /ui >}} and enter a positive whole number. Datadog blocks experimenters from exceeding this limit on experiments created from the protocol.
 1. (Optional) Add a metric group:
    1. Click {{< ui >}}Add metric group{{< /ui >}} to open the metric picker, then select the metrics to include. Datadog creates the group after you select the metrics.
    1. Enter a name for the group in the field that appears.
@@ -109,7 +109,7 @@ The {{< ui >}}Environment{{< /ui >}} and {{< ui >}}Targeting rules{{< /ui >}} se
 
 ### Step 5: Duration default
 
-Set how long experiments created from this protocol run. The step heading includes the confidence interval method from step 6, because some methods require a duration.
+Set how long experiments created from this protocol run. The heading for this step updates to reflect the confidence interval method you select in step 6, because some methods require a duration.
 
 1. (Optional) Click {{< ui >}}Add a duration{{< /ui >}}, then enter a number and select a unit. This value becomes the target duration of the experiment.
 1. Under {{< ui >}}Enforcements{{< /ui >}}, set expectations for the duration of the experiment:
@@ -232,7 +232,7 @@ Archive a protocol to hide it from the protocol picker so that experimenters can
 
 ### Delete a protocol
 
-Delete a protocol and confirm to remove it permanently. Deleting frees its name for reuse.
+Delete a protocol to remove it permanently. Datadog prompts you to confirm before deletion. Deleting frees its name for reuse.
 
 You cannot delete a protocol that experiments reference. Archive it instead.
 
@@ -250,3 +250,4 @@ You cannot delete a protocol that experiments reference. Archive it instead.
 [8]: https://app.datadoghq.com/product-analytics/experiments
 [9]: /experiments/plan_and_launch_experiments
 [10]: #configure-the-protocol
+[11]: /account_management/rbac/permissions/#product-analytics
