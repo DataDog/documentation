@@ -153,6 +153,8 @@ ignore:
 
 **Important**: Negative patterns take precedence over positive patterns. If any negative pattern matches a file path, that path is _not_ ignored.
 
+<div class="alert alert-warning">A <code>!</code> pattern is an exception to the positive patterns beside it, not a standalone rule. A list containing only <code>!</code> patterns ignores everything those patterns do not match. For example, an ignore list containing only <code>!src/keep/</code> ignores your entire repository apart from <code>src/keep/</code>. Pair every <code>!</code> pattern with the positive pattern it excepts.</div>
+
 ### Examples
 
 {{% collapse-content title="Exclude test files and generated code" level="h4" %}}
@@ -197,7 +199,11 @@ The option accepts the same [pattern syntax](#pattern-syntax) and the same `!` [
 
 <div class="alert alert-warning">The option <strong>replaces</strong> the <code>ignore</code> field instead of adding to it. When an upload supplies <code>--ignored-source-paths</code>, Datadog applies only those patterns to that upload and disregards the <code>ignore</code> field of <code>code-coverage.datadog.yml</code>. The two lists are not merged, so the option value needs to contain every pattern you want applied.</div>
 
+A supplied list replaces the `ignore` field even when none of its patterns compile. Nothing is excluded in that case, rather than the `ignore` field taking effect again.
+
 The list is scoped to the reports uploaded by that single command. Other uploads for the same commit keep their own lists, or fall back to the `ignore` field when they do not set the option.
+
+Datadog merges every upload for the same commit and flag. A file excluded by one upload still appears in that commit's coverage if another upload includes it. To exclude a file from every upload, use the `ignore` field of `code-coverage.datadog.yml`.
 
 An empty or whitespace-only value is treated as though the option was not passed, and the `ignore` field applies as usual. This keeps an unset CI variable from silently disabling the ignore list of a repository.
 
