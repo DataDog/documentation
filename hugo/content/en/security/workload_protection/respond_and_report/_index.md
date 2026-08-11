@@ -24,7 +24,9 @@ further_reading:
   text: "Detect Host and Container Compromises with Workload Protection"
 ---
 
-After Workload Protection surfaces runtime risk through Agent events, signals, and findings, **Respond and Report** is where you configure enforcement, drive response, and measure outcomes.
+Workload Protection can act on the threats it detects. The Datadog Agent terminates processes and containers, or blocks network traffic. It acts automatically when an agent rule matches, or manually when you respond to a signal. Both paths depend on enforcement in the Agent, which is enabled by default.
+
+For where response sits in the detection pipeline, see [How Workload Protection works][7].
 
 ## Enable enforcement
 
@@ -152,4 +154,4 @@ When a response action runs, the Agent reports a **status** for each action. The
 [4]: /security/workload_protection/setup/advanced_configuration
 [5]: /account_management/rbac/permissions
 [6]: /security/workload_protection/investigate_and_triage/security_signals
-[7]: /security/workload_protection/setup/kubernetes
+[7]: /security/workload_protection/#responding-to-threats

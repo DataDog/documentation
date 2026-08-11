@@ -3,7 +3,9 @@ title: Investigate and Triage
 disable_toc: false
 ---
 
-Use the explorers and in-app views in Workload Protection to investigate runtime activity, triage threats, and review security posture findings.
+As Workload Protection evaluates runtime activity, it produces agent events, signals, and findings. Use the explorers and in-app views to investigate that activity, triage threats, and review security posture findings.
+
+For how each one is produced, see [How Workload Protection works][4].
 
 ## Agent events
 
@@ -25,3 +27,4 @@ Use the explorers and in-app views in Workload Protection to investigate runtime
 [1]: /security/workload_protection/investigate_and_triage/agent_events
 [2]: /security/workload_protection/investigate_and_triage/security_signals
 [3]: /security/workload_protection/investigate_and_triage/security_findings
+[4]: /security/workload_protection/#evaluating-activity
