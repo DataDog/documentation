@@ -211,7 +211,7 @@ datadog-ci coverage upload --ignored-source-paths "**/*.{js,ts},vendor/" .
 
 This example supplies two patterns: `**/*.{js,ts}` and `vendor/`. The same applies to regex quantifiers such as `.{2,4}`.
 
-Newlines separate patterns as well, which is convenient for long lists supplied through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable:
+Newlines separate patterns as well, which is convenient for multi-line lists supplied through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable:
 
 {{< code-block lang="shell" >}}
 export DD_COVERAGE_IGNORED_SOURCE_PATHS="test/**/*
@@ -223,7 +223,7 @@ datadog-ci coverage upload .
 
 Surrounding whitespace is removed from each pattern, and empty entries are dropped.
 
-Because commas are separators, a pattern cannot contain a literal comma outside a brace group. Use the `ignore` field of `code-coverage.datadog.yml` for such a pattern.
+Because commas are separators, a pattern cannot contain a literal comma outside a brace group. A regex character class is a common case: `^src/[a,b]/.*$` splits into two patterns. Write it as `^src/[ab]/.*$`, or keep the pattern in the `ignore` field of `code-coverage.datadog.yml`.
 
 #### Difference from `--ignored-paths`
 
@@ -260,7 +260,9 @@ Your operating system caps how much can be passed in a command-line argument or 
 
 Exceeding an operating system limit produces an error from the shell, such as `Argument list too long`, rather than a message from `datadog-ci`.
 
-For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable helps only in part. On Linux it faces the same per-value ceiling, and a `set` command in `cmd.exe` counts against the command-line cap. It avoids the cap only when your CI provider adds the variable to the job environment.
+For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. That is the only option with no size ceiling.
+
+The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable is not a way around these limits. On Linux the same per-value ceiling applies to environment variables, however your CI provider sets them. On Windows, a `set` command in `cmd.exe` counts against the command-line cap. Use the environment variable for convenience, such as newline-separated formatting, rather than for size.
 
 ## PR Gates
 
