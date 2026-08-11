@@ -873,7 +873,7 @@ DD_KUBERNETES_POD_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 
 <div class="alert alert-info">
 
-If you are on agent version 7.58.0+, Datadog recommends using <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Kubernetes resources labels as tags</a> to configure namespace labels as tags. `namespaceLabelsAsTags` is equivalent to setting `kubernetesResourcesLabelsAsTags` with a `namespaces` key. For example:
+If you are on Agent version 7.58.0+, Datadog recommends using <a href="/containers/kubernetes/tag/#kubernetes-resources-labels-as-tags">Kubernetes resources labels as tags</a> to configure namespace labels as tags. `namespaceLabelsAsTags` is equivalent to setting `kubernetesResourcesLabelsAsTags` with a `namespaces` key. For example:
 
 ```yaml
 kubernetesResourcesLabelsAsTags:
@@ -883,7 +883,7 @@ kubernetesResourcesLabelsAsTags:
 
 </div>
 
-Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace. Starting with Agent or Cluster Agent v7.70+, this also applies to `kubernetes_state.*` (KSM) metrics. Namespace labels are attached as tags to any namespaced KSM metric, for example `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), which is where the KSM check runs:
+Starting with Agent 7.55.0+, the Agent can collect labels for a given namespace and use them as tags on all metrics, traces, and logs emitted by pods in that namespace. Starting with Agent or Cluster Agent v7.70+, namespace labels are also attached as tags to namespaced KSM metrics (`kubernetes_state.*`), such as `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), which is where the KSM check runs:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
@@ -977,7 +977,7 @@ DD_KUBERNETES_NAMESPACE_LABELS_AS_TAGS='{"*":"<PREFIX>_%%label%%"}'
 
 <div class="alert alert-info">
 
-If you are on agent version 7.58.0+, you are advised to use <a href="/containers/kubernetes/tag/#kubernetes-resources-annotations-as-tags">Kubernetes resources annotations as tags</a> to configure namespace annotations as tags. `namespaceAnnotationsAsTags` is equivalent to setting `kubernetesResourcesAnnotationsAsTags` with a `namespaces` key, for example:
+If you are on Agent version 7.58.0+, Datadog recommends using <a href="/containers/kubernetes/tag/#kubernetes-resources-annotations-as-tags">Kubernetes resources annotations as tags</a> to configure namespace annotations as tags. `namespaceAnnotationsAsTags` is equivalent to setting `kubernetesResourcesAnnotationsAsTags` with a `namespaces` key, for example:
 
 ```yaml
 kubernetesResourcesAnnotationsAsTags:
@@ -987,11 +987,11 @@ kubernetesResourcesAnnotationsAsTags:
 
 </div>
 
-Starting with Agent 7.55.0+, the Agent can collect annotations for a given namespace and use them as tags to attach to all metrics, traces, and logs emitted by all pods in this namespace. Starting with Agent or Cluster Agent v7.70+, this also applies to `kubernetes_state.*` (KSM) metrics. Namespace annotations are attached as tags to any namespaced KSM metric, for example `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), which is where the KSM check runs:
+Starting with Agent 7.55.0+, the Agent can collect annotations for a given namespace and use them as tags on all metrics, traces, and logs emitted by pods in that namespace. Starting with Agent or Cluster Agent v7.70+, namespace annotations are also attached as tags to namespaced KSM metrics (`kubernetes_state.*`), such as `deployment`, `replicaset`, `pod`, and `container` metrics. Set this option on the Cluster Agent (or a dedicated Cluster Check Runner, if you use one), which is where the KSM check runs:
 
 {{< tabs >}}
 {{% tab "Datadog Operator" %}}
-To extract a given namespace annotation `<NAMESPACE_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
+To extract a given namespace annotation `<NAMESPACE_ANNOTATION>` and map it to the tag key `<TAG_KEY>` within Datadog, add the following configuration to your Operator's `DatadogAgent` configuration in `datadog-agent.yaml`:
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -1016,22 +1016,10 @@ spec:
       app: kube_app
 ```
 
-Use the following configuration to add all namespace annotations as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
-
-```yaml
-apiVersion: datadoghq.com/v2alpha1
-kind: DatadogAgent
-metadata:
-  name: datadog
-spec:
-  global:
-    namespaceAnnotationsAsTags:
-      "*": <PREFIX>_%%annotation%%
-```
 {{% /tab %}}
 
 {{% tab "Helm" %}}
-To extract a given namespace annotation `<NAMESPACE_ANNOTATION>` and transform it as a tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
+To extract a given namespace annotation `<NAMESPACE_ANNOTATION>` and map it to the tag key `<TAG_KEY>` within Datadog, add the following configuration to your Helm `datadog-values.yaml` file:
 
 ```yaml
 datadog:
@@ -1045,18 +1033,10 @@ datadog:
   namespaceAnnotationsAsTags:
     app: kube_app
 ```
-
-Use the following configuration to add all namespace annotations as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
-
-```yaml
-datadog:
-  namespaceAnnotationsAsTags:
-    "*": <PREFIX>_%%annotation%%
-```
 {{% /tab %}}
 
 {{% tab "Manual (DaemonSet)" %}}
-To extract a namespace label `<NAMESPACE_LABEL>` and map it to the tag key `<TAG_KEY>`, add the following environment variable to the Cluster Agent (required for `kubernetes_state.*` metrics). Set the same variable on the Agent if you also want the tag on Agent-collected metrics, traces, and logs:
+To extract a namespace annotation `<NAMESPACE_ANNOTATION>` and map it to the tag key `<TAG_KEY>`, add the following environment variable to the Cluster Agent (required for `kubernetes_state.*` metrics). Set the same variable on the Agent if you also want the tag on Agent-collected metrics, traces, and logs:
 
 ```bash
 DD_KUBERNETES_NAMESPACE_ANNOTATIONS_AS_TAGS='{"<NAMESPACE_ANNOTATION>": "<TAG_KEY>"}'
@@ -1066,12 +1046,6 @@ For example, to map the `app` annotation to the `kube_app` tag:
 
 ```bash
 DD_KUBERNETES_NAMESPACE_ANNOTATIONS_AS_TAGS='{"app":"kube_app"}'
-```
-
-Use the following configuration to add all namespace annotations as tags to your metrics. In this example, the tags' names are prefixed with `<PREFIX>_`:
-
-```bash
-DD_KUBERNETES_NAMESPACE_ANNOTATIONS_AS_TAGS='{"*":"<PREFIX>_%%annotation%%"}'
 ```
 {{% /tab %}}
 {{< /tabs >}}
