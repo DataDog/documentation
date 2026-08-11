@@ -230,21 +230,22 @@ Attach the new S3 policy to the Datadog integration role.
 
 {{% tab "AI Agent" %}}
 
-The **Set up with AI Agent** flow guides you through creating or importing a Cost and Usage Report and generates Terraform for you to review before applying. Datadog gives you a setup prompt to run in your own coding agent, such as Claude Code or Cursor, and the agent walks you through the rest.
+The **Set up with AI Agent** flow creates or imports a Cost and Usage Report and generates Terraform for you to review before applying. Datadog provides a setup prompt that you run in your own coding agent, such as Claude Code or Cursor.
 
-Before you begin:
-- The AWS account must already be connected to Datadog through a role-based integration. Accounts that authenticate with an access key pair are not supported, because the Cost and Usage Report read policy must be attached to an IAM role.
-- You need the {{< ui >}}AWS Configurations Manage{{< /ui >}} permission.
-- You need a coding agent installed locally. Datadog provides instructions for Claude Code and Cursor.
+### Prerequisites
+
+- An AWS account already connected to Datadog through a role-based integration. Accounts that authenticate with an access key pair are not supported, because the report read policy must attach to an IAM role.
+- The **AWS Configurations Manage** permission.
+- A coding agent installed locally. Datadog provides instructions for Claude Code and Cursor.
 
 ### Start the flow in Datadog
 
 1. Navigate to [Setup & Configuration][300], find {{< ui >}}Amazon Web Services{{< /ui >}}, and click {{< ui >}}Add Account{{< /ui >}}.
-2. Select {{< ui >}}Set up with AI agent{{< /ui >}}. Datadog generates a Datadog-managed API key and application key for the session.
+2. Select {{< ui >}}Set up with AI agent{{< /ui >}}. Datadog generates a managed API key and application key for the session.
 3. Start your agent:
     - **Claude Code**: Copy the generated command and run it in your terminal.
     - **Cursor**: Click {{< ui >}}Open in Cursor{{< /ui >}} to download your credentials and open Cursor with the prompt prefilled.
-4. Leave the Datadog setup page open. It waits for the agent and shows {{< ui >}}Setup complete{{< /ui >}} when it detects your new configuration.
+4. Leave the Datadog setup page open while the agent works. After Datadog detects your new configuration, the {{< ui >}}Waiting for agent{{< /ui >}} button changes to {{< ui >}}Setup complete{{< /ui >}}. Click it to finish.
 
 ### Complete the setup with the agent
 
