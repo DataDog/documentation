@@ -29,7 +29,7 @@ The [AWS integration][1] collects metrics, events, and logs from Amazon CloudWat
 
 You can deploy the Datadog Agent to your Amazon EC2 instances directly from Datadog, without connecting to each host or running per-host scripts. Enable Agent installation while you set up the AWS integration, or at any time afterward.
 
-Amazon EKS is not supported yet. Support for more AWS resource types is planned, starting with EKS.
+Amazon EKS is not supported.
 
 ## Prerequisites
 

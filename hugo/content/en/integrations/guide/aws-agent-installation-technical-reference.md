@@ -16,7 +16,7 @@ further_reading:
 
 This page explains how Datadog installs and maintains the Agent on Amazon EC2 through the AWS integration. For setup instructions and the permissions Datadog requires, see [Install the Datadog Agent through the AWS Integration][1].
 
-<div class="alert alert-info">This page covers the Amazon EC2 experience only. Support for more AWS resource types is planned, starting with EKS.</div>
+<div class="alert alert-info">This page covers the Amazon EC2 experience only.</div>
 
 ## AWS resources that Datadog creates
 
