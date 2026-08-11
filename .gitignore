@@ -195,3 +195,5 @@ __pycache__/
 # AI
 .claude/*local*
 .superpowers/
+.codex/
+AGENTS.md
