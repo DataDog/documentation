@@ -107,7 +107,7 @@ The filter combines two kinds of values in one control:
 - **Teams**: Datadog Teams defined in your organization. The filter offers every team in your organization, not only the teams you belong to.
 - **Team tags**: `team` tag values found on your data that have no matching Datadog Team. These appear in a section below the teams.
 
-{{< img src="account_management/teams/teams_filter_hierarchies2.png" alt="Team filter dropdown showing a team hierarchy at the top and an All Teams section below, with a search box above both" style="width:35%;" >}}
+{{< img src="account_management/teams/team-filter.png" alt="Team filter showing a search box, a team hierarchy with a parent team expanded and two subteams selected, and an All Teams section below" style="width:35%;" >}}
 
 The team filter works by adding team-based search terms to the search query. After you make a selection, you can see the team-based search terms it adds in the search bar. To stop filtering by team, clear your selection.
 
@@ -132,6 +132,10 @@ To select a team without cascading to the whole branch, shift+click the team. Tw
 
 - **The team on its own**: selects the team and excludes its subteams. Use this to see the data attributed to one team node without the aggregate of everything below it.
 - **The subteams without the team**: selects everything beneath the team and excludes the team itself. Teams added to that branch later are included automatically.
+
+After you shift+click, the team appears in its own branch with a `(self)` label. Select `(self)` to include the team itself, and clear it to include only the subteams.
+
+{{< img src="account_management/teams/team-filter-subteam-selection.png" alt="Team filter with a parent team expanded after a shift+click, showing a row labeled self that is cleared while two subteams below it are selected" style="width:35%;" >}}
 
 The first few times you open the team filter, a hint in the dropdown points out shift+click.
 

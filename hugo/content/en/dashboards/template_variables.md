@@ -77,6 +77,8 @@ The team filter adds:
 - Hierarchy-aware selection. Selecting a team also selects the teams beneath it. Shift+click a team to select it without its subteams, or its subteams without the team.
 - Search across both team handles and team display names.
 
+{{< img src="dashboards/template_variables/team-template-variable.png" alt="Dashboard header where the cluster, env, and region template variables are plain value selectors, and the team template variable is open as the team filter showing a team hierarchy and an All Teams section" style="width:100%;" >}}
+
 Hierarchy-aware selection appears only when the variable's tag key is `team`. A variable built on any other tag key renders as a plain tag value selector with no notion of team hierarchy. If the team variable on one dashboard offers hierarchy and the one on another dashboard does not, compare the tag key behind each variable.
 
 For a `team` variable, the filter lists every team in your organization. Values set in {{< ui >}}Available Values{{< /ui >}} are added to that list rather than restricting it.
