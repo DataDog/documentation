@@ -8,7 +8,6 @@ import SearchBar, {
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
 
-/** A hand-written API page (src/content/en/api/latest/*.mdoc). */
 export interface OverviewPage {
   title: string;
   slug: string;
@@ -18,11 +17,8 @@ interface Props {
   categories: ApiCategoryStub[];
   activeCategory?: ApiCategory;
   currentOperationSlug?: string;
-  /** Sub pages of the API root, excluding the root itself. */
   overviewPages?: OverviewPage[];
-  /** True when the current page is the API root or one of its sub pages. */
   isOverviewSection?: boolean;
-  /** Set only when a sub page is the current page, not on the root. */
   activeOverviewPageSlug?: string;
   lang?: Locale;
 }
@@ -38,9 +34,6 @@ const {
 } = Astro.props;
 const cl = classListFactory(styles);
 
-// TODO: replace with i18n('overview', lang) once the Astro translation strategy
-// is settled. The key already exists in the Hugo bundle, so this is a one-line
-// swap. Matches how searchLabels below is handled.
 const overviewLabel = "Overview";
 const overviewHref = localizedHref(lang, "/api/latest/");
 
@@ -64,11 +57,6 @@ const searchLabels: SearchBarLabels = {
     <SearchBar client:load labels={searchLabels} />
   </div>
   <ul class={cl("api-side-nav__list")}>
-    {/*
-      The hand-written pages are pinned above the spec categories, which are
-      themselves alphabetical. Reuses the category/operation classes so the
-      active styling and ScrollActiveIntoView apply without new CSS.
-    */}
     {overviewPages.length > 0 && (
       <li>
         <a

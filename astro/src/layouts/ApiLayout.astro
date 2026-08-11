@@ -34,13 +34,8 @@ const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
 );
 const hreflang = buildHreflangAlternates(unprefixedPath);
 
-// The hand-written API pages (src/content/en/api/latest/*.mdoc) form the
-// "Overview" section of the side nav. Resolved here rather than in each route
-// because the section renders on every API page, and all three API routes go
-// through this layout.
-//
-// Astro's glob loader strips a trailing `/index`, so the API root itself is the
-// entry with id exactly `api/latest`; its sub pages are the descendants.
+// Astro's glob loader strips a trailing `/index`, so the API root is the entry
+// with id exactly `api/latest` and its sub pages are the descendants.
 const API_CONTENT_DIR = "api/latest";
 const overviewEntries = await getCollection(
   "en",
