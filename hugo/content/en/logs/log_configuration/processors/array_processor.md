@@ -17,6 +17,7 @@ Supported operations include:
 - **Select value from a matching element**
 - **Compute the length of an array**
 - **Append a value to an array**
+- **Extract key-value pairs from an array**
 
 Each operation is configured through a dedicated processor.
 
@@ -228,6 +229,83 @@ Use the [Datadog Log Pipeline API endpoint][100] with the following array proces
 | `operation.source`           | String     | Yes      | Attribute to append.                                               |
 | `operation.target`           | String     | Yes      | Array attribute to append to.                                      |
 | `operation.preserve_source`  | Boolean    | No      | Whether to preserve the original source after remapping. Default: `false`.   |
+
+[100]: /api/v1/logs-pipelines/
+{{% /tab %}}
+{{< /tabs >}}
+
+### Extract key-value pairs
+
+Flatten an array of key-value objects into individual attributes, creating one attribute per element. Use this operation when a log carries data as a list of `{key, value}` objects, such as the request headers in AWS WAF and HTTP logs. Each entry becomes its own searchable, facetable attribute. Keys are handled automatically, even when they differ from one log to the next.
+
+{{< tabs >}}
+{{% tab "UI" %}}
+
+{{< img src="logs/log_configuration/processor/array_processor_key_value.png" alt="Array processor - Extract key-value pairs" style="width:80%;" >}}
+
+**Example input:**
+
+```json
+{
+  "httpRequest": {
+    "headers": [
+      {"name": "host", "value": "api.example.com"},
+      {"name": "user-agent", "value": "curl/8.4.0"},
+      {"name": "x-forwarded-for", "value": "203.0.113.7"}
+    ]
+  }
+}
+```
+
+**Configuration steps:**
+
+- {{< ui >}}Array path{{< /ui >}}: `httpRequest.headers`
+- {{< ui >}}Key attribute{{< /ui >}}: `name`
+- {{< ui >}}Value attribute{{< /ui >}}: `value`
+- {{< ui >}}Target attribute{{< /ui >}}: Leave blank to add the extracted attributes at the root level of the log.
+
+**Result:**
+
+```json
+{
+  "httpRequest": {
+    "headers": [...]
+  },
+  "host": "api.example.com",
+  "user-agent": "curl/8.4.0",
+  "x-forwarded-for": "203.0.113.7"
+}
+```
+{{% /tab %}}
+{{% tab "API" %}}
+
+Use the [Datadog Log Pipeline API endpoint][100] with the following array processor JSON payload:
+
+```json
+{
+  "type": "array-processor",
+  "name": "Extract HTTP headers",
+  "is_enabled": true,
+  "operation" : {
+    "type" : "key-value",
+    "source": "httpRequest.headers",
+    "key_to_extract": "name",
+    "value_to_extract": "value"
+  }
+}
+```
+
+| Parameter                      | Type    | Required | Description                                                                                    |
+|---------------------------------|---------|----------|--------------------------------------------------------------------------------------------------|
+| `type`                          | String  | Yes      | Type of the processor.                                                                          |
+| `name`                          | String  | No       | Name of the processor.                                                                           |
+| `is_enabled`                    | Boolean | No       | Whether the processor is enabled. Default: `false`.                                           |
+| `operation.type`                | String  | Yes      | Type of array processor operation.                                                               |
+| `operation.source`              | String  | Yes      | Attribute path of the array to extract key-value pairs from.                                     |
+| `operation.target`              | String  | No       | Attribute that receives the extracted key-value pairs. If not specified, the extracted attributes are added at the root level of the log. |
+| `operation.key_to_extract`      | String  | Yes      | Key of the attribute in each array element that holds the name to use for the extracted attribute. |
+| `operation.value_to_extract`    | String  | Yes      | Key of the attribute in each array element that holds the value to use for the extracted attribute. |
+| `operation.override_on_conflict`| Boolean | No       | Whether to override the target attribute if it's already set. Default: `false`.               |
 
 [100]: /api/v1/logs-pipelines/
 {{% /tab %}}
