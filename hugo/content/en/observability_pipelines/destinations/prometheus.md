@@ -17,7 +17,7 @@ Use Observability Pipelines' Prometheus destination to send metrics to Prometheu
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifiers for the endpoint URL and, if applicable, the username and password for basic authorization, the bearer token, and the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-Configure the Prometheus destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
+Configure the Prometheus destination when you [set up a pipeline][1]. You can set up a pipeline in the [UI][2], using the [API][3], or with [Terraform][4]. The steps in this section are configured in the UI.
 
 After you select the Prometheus destination in the pipeline UI:
 
@@ -32,11 +32,11 @@ After you select the Prometheus destination in the pipeline UI:
 
 #### Default namespace
 
-Enter the default namespace for any metrics sent. This namespace is only used if a metric has no existing namespace. It is added as a prefix to the metric name, separated by an underscore (`_`). The namespace must follow the Prometheus naming convention.
+Enter the default namespace for any metrics sent. This namespace is only used if a metric has no existing namespace. It is added as a prefix to the metric name, separated by an underscore (`_`). The namespace must follow the [Prometheus naming convention][5].
 
 #### Tenant ID
 
-Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. A template that doesn't have a literal prefix, such as `{{ tenant_id }}`, is rejected.
+Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. A template such as `{{ tenant_id }} doesn't have a literal prefix and is rejected; the Worker logs an error, and the pipeline isn't started.
 
 #### Enable TLS
 
@@ -68,7 +68,7 @@ docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
    datadog/observability-pipelines-worker run
 ```
 
-See [Enable debug logs][8] for instruction on enabling full debug logs.
+See [Enable debug logs][7] for instruction on enabling full debug logs.
 
 ## Secret defaults
 
@@ -99,9 +99,10 @@ See [Enable debug logs][8] for instruction on enabling full debug logs.
 {{% /tab %}}
 {{< /tabs >}}
 
-[1]: https://app.datadoghq.com/observability-pipelines
-[3]: /observability_pipelines/configuration/set_up_pipelines/
-[4]: /api/latest/observability-pipelines/
-[5]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[1]: /observability_pipelines/configuration/set_up_pipelines/
+[2]: https://app.datadoghq.com/observability-pipelines
+[3]: /api/latest/observability-pipelines/
+[4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
+[5]: https://prometheus.io/docs/practices/naming/
 [6]: /observability_pipelines/destinations/#template-syntax
-[8]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#enable-debug-logs
+[7]: /observability_pipelines/monitoring_and_troubleshooting/troubleshooting/#enable-debug-logs
