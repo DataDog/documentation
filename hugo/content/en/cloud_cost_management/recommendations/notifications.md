@@ -23,6 +23,7 @@ Notification rules are different from [Cost Optimization Automations][2], which 
 ## Prerequisites
 
 - A Slack connection. See [Slack integration][3].
+- The **Cloud Cost Management - Cloud Cost Management Write** permission to create or edit a notification rule.
 
 ## Set up a notification rule
 
@@ -34,8 +35,8 @@ To set up a notification rule:
 1. In the {{< ui >}}Set schedule{{< /ui >}} section, select the notification frequency, execution day, execution time, and timezone.
 1. In the {{< ui >}}Destination{{< /ui >}} section, select a Slack workspace connection and channel.
 1. Enter a name for the notification rule.
-1. Use the {{< ui >}}Notification enabled{{< /ui >}} toggle to control whether the rule is active.
-1. Click **Save**.
+1. (Optional) Turn off the {{< ui >}}Notification enabled{{< /ui >}} toggle to create the rule without activating it.
+1. Click {{< ui >}}Save{{< /ui >}}.
 
 ## Manage notification rules
 

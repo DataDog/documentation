@@ -42,8 +42,8 @@ The {{< ui >}}Remediation{{< /ui >}} tab supports the following recommendation t
 
 | Provider | Recommendation type | Built-in safeguards |
 |----------|---------------------|---------------------|
-| AWS | Delete unattached EBS volume | Optional: takes an EBS snapshot before each volume is deleted. |
-| AWS | Migrate EBS volume from gp2 to gp3 | Reversible, in-place migration with no data loss. |
+| AWS | Delete unattached EBS volume | (Optional) Takes an EBS snapshot before each volume is deleted. |
+| AWS | Migrate EBS volume from gp2 to gp3 | Reversible. The migration causes no data loss. |
 | AWS | Delete unused EBS snapshots | Snapshots referenced by an AMI are skipped. |
 | AWS | Delete extra on-demand backups (DynamoDB) | The two most recent backups are preserved on every run. |
 | AWS | Migrate DynamoDB table to Infrequent Access table class | Reversible. The table class can be changed back at any time. |
@@ -51,15 +51,15 @@ The {{< ui >}}Remediation{{< /ui >}} tab supports the following recommendation t
 | AWS | Set CloudWatch logs retention policy | Reversible. The retention period can be adjusted or removed at any time. |
 | AWS | Delete unused RDS instance | A final RDS snapshot is taken before each instance is deleted. |
 | AWS | Delete unused NAT gateway | None. Deletion is irreversible. |
-| AWS | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering | Existing lifecycle rules are preserved rather than overwritten. |
-| AWS | Delete unused EC2 instance | Optional: creates an AMI before each instance is deleted. |
+| AWS | Transition S3 Standard objects to Amazon S3 Intelligent-Tiering | Reversible. Existing lifecycle rules are preserved, and the added rule can be removed at any time. |
+| AWS | Delete unused EC2 instance | (Optional) Creates an AMI before each instance is deleted. |
 | AWS | Delete unused Redshift cluster | A final snapshot is taken before each cluster is deleted. |
-| GCP | Delete unattached Compute Engine disk | Optional: takes a snapshot before each disk is deleted. |
+| GCP | Delete unattached Compute Engine disk | (Optional) Takes a snapshot before each disk is deleted. |
 | GCP | Enable Autoclass on a Cloud Storage bucket | Reversible. Autoclass can be disabled at any time. |
-| Azure | Delete unattached managed disk | Optional: takes a snapshot before each disk is deleted. |
+| Azure | Delete unattached managed disk | (Optional) Takes a snapshot before each disk is deleted. |
 | Azure | Delete unused SQL database | None. Deletion is irreversible. |
 
-Safeguards marked "Optional" are enabled by default and can be turned off in the automation form. All other listed safeguards are always applied and can't be disabled.
+Safeguards marked (Optional) are enabled by default and can be turned off in the automation form. All other listed safeguards are always applied and can't be disabled.
 
 ## Prerequisites
 
@@ -75,7 +75,7 @@ To set up an automation on a recurring schedule for a recommendation type:
 1. Navigate to [{{< ui >}}Cloud Cost{{< /ui >}} > {{< ui >}}Optimize{{< /ui >}} > {{< ui >}}Automations{{< /ui >}}][6].
 1. Select the {{< ui >}}Remediation{{< /ui >}} tab.
 1. On the left side of the page, select the recommendation type.
-1. Click **Create New Automation**.
+1. Click {{< ui >}}Create New Automation{{< /ui >}}.
 1. In the {{< ui >}}Connection{{< /ui >}} dropdown menu, select a connection or connection group configured in [{{< ui >}}Manage Connections{{< /ui >}}][5].
 1. In the {{< ui >}}Define scope{{< /ui >}} section:
     1. Enter tags to restrict the automation to resources matching those tags, such as `env`, `service`, and `team`.
@@ -87,13 +87,13 @@ To set up an automation on a recurring schedule for a recommendation type:
 
 ### Safeguards
 
-Each recommendation type has built-in safeguards. For example, the **Delete Unattached EBS Volume** automation takes an EBS snapshot before deleting each volume. Review the safeguards listed in the automation form and toggle the ones that are optional for your environment.
+Each recommendation type has built-in safeguards. For example, the **Delete Unattached EBS Volume** automation can take an EBS snapshot before deleting each volume. See [Supported recommendation types](#supported-recommendation-types) for the full list of safeguards by recommendation type.
 
 If {{< ui >}}Require approval before execution{{< /ui >}} is enabled in the [automation setup](#set-up-an-automation), Datadog posts in the designated channel a summary of the resources targeted on each run. The automation only runs after a user approves the request in the channel.
 
 ## Manage automations
 
-The {{< ui >}}Remediation{{< /ui >}} tab lists every automation (labeled as a **policy** in this view) in your organization, grouped by recommendation type. Use the {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Resource Type{{< /ui >}}, and {{< ui >}}Recommendation Type{{< /ui >}} filters at the top of the page to narrow the list. From this page you can:
+The {{< ui >}}Remediation{{< /ui >}} tab lists every automation in your organization, grouped by recommendation type. Automations are labeled **policies** in this view. Use the {{< ui >}}Provider{{< /ui >}}, {{< ui >}}Resource Type{{< /ui >}}, and {{< ui >}}Recommendation Type{{< /ui >}} filters at the top of the page to narrow the list. From this page you can:
 
 - Pause or resume an automation
 - Edit an automation's scope, schedule, or safeguards
