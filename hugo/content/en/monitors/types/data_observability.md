@@ -47,7 +47,7 @@ Datadog collects metrics such as row count and freshness from warehouse system m
 
 Data Observability monitors require [Quality Monitoring][2] to be set up with at least one supported data warehouse (for example, [Snowflake][3], [Databricks][4], or [BigQuery][5]).
 
-To compare a metric across two data assets instead of tracking a single one, see [Source-to-Target monitors](#source-to-target-monitors).
+To compare a metric across two data assets instead of tracking a single one, see [Source to Target monitors](#source-to-target-monitors).
 
 ## Monitor creation
 
@@ -247,29 +247,32 @@ Observed value {{observed}} is within the expected range.
 {{% /tab %}}
 {{< /tabs >}}
 
-## Source-to-Target monitors
+## Source to Target monitors
 
-<div class="alert alert-info">Source-to-Target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
+<div class="alert alert-info">Source to Target monitors are in Preview. Contact your Datadog representative or <a href="/help/">support</a> to request access.</div>
 
-A Source-to-Target monitor compares the same metric on two data assets and alerts when the two values diverge. Use it to validate that the data arriving in a destination matches the data that left its source, for example after a replication, a transformation, or a migration.
+A Source to Target monitor compares the same metric on two data assets and alerts when the two values diverge. Use it to validate that the data arriving in a destination matches the data that left its source, for example after a replication, a transformation, or a migration.
 
 Partial failures in data movement are difficult to catch with a single-asset monitor. If 100,000 rows leave a source table and 99,850 rows arrive in the destination, a row count monitor on the destination alone sees a plausible value. Comparing the two assets surfaces the gap.
 
-### Create a Source-to-Target monitor
+### Create a Source to Target monitor
 
-1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source-to-Target{{< /ui >}}.
-1. Select the source asset and the target asset. The two assets can be in different data warehouses or in the same one.
-1. Select the metric type to compare. Source-to-Target monitors support the same metric types as other Data Observability monitors, including {{< ui >}}Custom SQL{{< /ui >}}.
-1. Select how to compare the two values:
+1. Navigate to [{{< ui >}}Monitors{{< /ui >}} > {{< ui >}}New Monitor{{< /ui >}}][6] and select {{< ui >}}Source to Target{{< /ui >}}.
+1. Under {{< ui >}}Choose source{{< /ui >}}, select the warehouse that holds the source data, then select the data to compare.
+1. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
+1. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to Target monitors support the same metric types as other Data Observability monitors, including {{< ui >}}Custom SQL{{< /ui >}}.
+1. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
     - {{< ui >}}Difference{{< /ui >}}: the absolute difference between the source and target values.
-    - {{< ui >}}Percent difference{{< /ui >}}: the difference expressed as a percentage of the source value.
-1. Configure the detection method, schedule, and alert conditions as described in [Configure monitor](#configure-monitor).
+    - {{< ui >}}Percent Difference{{< /ui >}}: the difference expressed as a percentage.
+1. Configure the detection method, schedule, and notifications as described in [Configure monitor](#configure-monitor).
+
+The {{< ui >}}Preview Monitor Evaluation{{< /ui >}} panel shows the identified source and target, along with a preview of the selected metric.
 
 The monitored asset is the target, so the monitor appears on the target's status page.
 
-### Choose a comparison type
+### Choose a format
 
-Use {{< ui >}}Difference{{< /ui >}} for large assets, where a small percentage change can represent a large number of rows. Use {{< ui >}}Percent difference{{< /ui >}} for smaller assets, where a small number of missing rows does not move a percentage much.
+Use {{< ui >}}Difference{{< /ui >}} for large assets, where a small percentage change can represent a large number of rows. Use {{< ui >}}Percent Difference{{< /ui >}} for smaller assets, where a small number of missing rows does not move a percentage much.
 
 ### Compare a custom metric
 
@@ -313,8 +316,8 @@ Detect when a column's null percentage exceeds normal levels, which may indicate
 
 Detect rows dropped between a source table and its destination after a replication or migration.
 
-1. Select {{< ui >}}Source-to-Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
-1. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and {{< ui >}}Difference{{< /ui >}} as the comparison type.
+1. Select {{< ui >}}Source to Target{{< /ui >}}, then choose the source table (for example, `POSTGRES_DB.PUBLIC.ORDERS`) and the target table (for example, `ANALYTICS_DB.PROD.ORDERS`).
+1. Select {{< ui >}}Row Count{{< /ui >}} as the metric type and set {{< ui >}}Format{{< /ui >}} to {{< ui >}}Difference{{< /ui >}}.
 1. Select {{< ui >}}Anomaly{{< /ui >}} as the detection method.
 
 {{% /tab %}}
