@@ -250,7 +250,7 @@ The per-pattern limit matches the one Datadog applies. An over-long pattern is r
 
 #### Operating system limits
 
-Your operating system caps how much can be passed in a command-line argument or an environment variable. These ceilings are reached before the 256 KB limit of the option itself, and they differ by platform:
+Your operating system caps how much can be passed in a command-line argument or an environment variable. On Linux and Windows, that cap is reached before the 256 KB limit of the option itself. The ceilings differ by platform:
 
 | Platform | Limit |
 |---|---|
