@@ -137,6 +137,8 @@ ignore:
   - "vendor/"             # Exclude vendor directory
 ```
 
+You can also supply this list at upload time with the `--ignored-source-paths` option of `datadog-ci coverage upload`. See [Override the ignore list from the CLI](#override-the-ignore-list-from-the-cli).
+
 ### Exceptions
 
 Add `!` before a pattern to create an exception to your ignore rules. This lets you include specific files or folders that would otherwise be excluded.
@@ -180,6 +182,59 @@ ignore:
   - ".*\\.pb\\.go$"       # Regex: exclude protobuf files
 ```
 {{% /collapse-content %}}
+
+### Override the ignore list from the CLI
+
+Instead of committing the list to `code-coverage.datadog.yml`, you can supply it when uploading. Pass `--ignored-source-paths` to `datadog-ci coverage upload` with a comma-separated list of patterns:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --ignored-source-paths "test/**/*,**/*.pb.go,vendor/" .
+{{< /code-block >}}
+
+The option accepts the same [pattern syntax](#pattern-syntax) and the same `!` [exceptions](#exceptions) as the `ignore` field. Datadog excludes the matching source files from the coverage computation in the same way.
+
+<div class="alert alert-warning">The option <strong>replaces</strong> the <code>ignore</code> field instead of adding to it. When an upload supplies <code>--ignored-source-paths</code>, Datadog applies only those patterns to that upload and disregards the <code>ignore</code> field of <code>code-coverage.datadog.yml</code>. The two lists are not merged, so the option value needs to contain every pattern you want applied.</div>
+
+The list is scoped to the reports uploaded by that single command. Other uploads for the same commit keep their own lists, or fall back to the `ignore` field when they do not set the option.
+
+An empty or whitespace-only value is treated as though the option was not passed, and the `ignore` field applies as usual. This keeps an unset CI variable from silently disabling the ignore list of a repository.
+
+#### Separating patterns
+
+Patterns are separated by commas. A comma inside a brace group is part of the pattern, so `**/*.{js,ts}` stays a single pattern:
+
+{{< code-block lang="shell" >}}
+datadog-ci coverage upload --ignored-source-paths "**/*.{js,ts},vendor/" .
+{{< /code-block >}}
+
+This example supplies two patterns: `**/*.{js,ts}` and `vendor/`. The same applies to regex quantifiers such as `.{2,4}`.
+
+Newlines separate patterns as well, which is convenient for long lists supplied through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable:
+
+{{< code-block lang="shell" >}}
+export DD_COVERAGE_IGNORED_SOURCE_PATHS="test/**/*
+**/*.pb.go
+vendor/"
+
+datadog-ci coverage upload .
+{{< /code-block >}}
+
+Surrounding whitespace is removed from each pattern, and empty entries are dropped.
+
+#### Difference from `--ignored-paths`
+
+`datadog-ci coverage upload` accepts two options with similar names that do different things:
+
+| Option | What it excludes | Where it applies |
+|---|---|---|
+| `--ignored-source-paths` | **Source files**, from the coverage computation. Replaces the `ignore` field. | In Datadog, after the upload |
+| `--ignored-paths` | **Coverage report files**, from the search for reports to upload. | In the CLI, before the upload |
+
+Use `--ignored-source-paths` to keep generated or vendored source code out of your coverage percentage. Use `--ignored-paths` to stop the CLI from picking up a coverage report file that you do not want to send.
+
+#### Long lists on Windows
+
+`cmd.exe` caps a whole command line at about 8191 characters, and the npm `.cmd` wrapper for `datadog-ci` runs through `cmd.exe`. A long list of patterns can exceed that cap. On Windows, supply long lists through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable or the `ignore` field of `code-coverage.datadog.yml` instead.
 
 ## PR Gates
 
