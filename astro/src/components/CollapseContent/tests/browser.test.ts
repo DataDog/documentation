@@ -11,14 +11,14 @@ test.describe("CollapseContent component", () => {
   });
 
   test("renders and is collapsed by default", async ({ page }) => {
-    const section = page.locator(".collapse-content").first();
+    const section = page.locator("#collapse-collapsed-h4");
     await expect(section).toBeVisible();
     await expect(section).not.toHaveAttribute("open", "");
     await expect(section.locator(".collapse-content__body")).toBeHidden();
   });
 
   test("clicking the header reveals and hides the body", async ({ page }) => {
-    const section = page.locator(".collapse-content").first();
+    const section = page.locator("#collapse-collapsed-h4");
     const body = section.locator(".collapse-content__body");
 
     await section.locator(".collapse-content__header").click();
@@ -35,7 +35,7 @@ test.describe("CollapseContent component", () => {
   });
 
   test("syncs aria-expanded on toggle", async ({ page }) => {
-    const section = page.locator(".collapse-content").first();
+    const section = page.locator("#collapse-collapsed-h4");
     const header = section.locator(".collapse-content__header");
 
     await expect(header).toHaveAttribute("aria-expanded", "false");
