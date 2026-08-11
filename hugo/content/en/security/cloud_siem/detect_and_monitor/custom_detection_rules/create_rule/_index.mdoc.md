@@ -1171,7 +1171,7 @@ To write a custom RRULE for your detection rule:
 
 ## Describe your playbook
 
-{% partial file="security/security-rule-say-whats-happening.mdoc.md" /%}
+{% partial file="security/cloud_siem/security-rule-say-whats-happening.mdoc.md" /%}
 
 <!-- Real-time and scheduled rules: Create a suppression section -->
 {% if or(equals($cloud_siem_detection_rule_type, "real_time_rule"),equals($cloud_siem_detection_rule_type, "scheduled_rule")) %}
