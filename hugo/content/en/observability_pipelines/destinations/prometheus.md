@@ -36,7 +36,7 @@ Enter the default namespace for any metrics sent. This namespace is only used if
 
 #### Tenant ID
 
-Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. A template such as `{{ tenant_id }} doesn't have a literal prefix and is rejected; the Worker logs an error, and the pipeline isn't started.
+Enter the tenant ID to add to outgoing requests. This field supports [template syntax][6], but the template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}, are rejected; the Worker logs an error, and the pipeline isn't started.
 
 #### Enable TLS
 

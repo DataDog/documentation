@@ -109,7 +109,7 @@ The following table lists the destinations and fields that support template synt
 | Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
 
-*The template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}`, are rejected.
+*The template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}, are rejected; the Worker logs an error, and the pipeline isn't started.
 
 #### Example
 
