@@ -14,8 +14,8 @@ args=parser.parse_args()
 
 comment_template = Template(filename='hugo/local/bin/py/preview-links-template.mako')
 
-pattern1 = re.compile('(hugo/)?content/en/(.*?).md')
-pattern2 = re.compile('(hugo/)?content/en/glossary/terms/(.*?).md')
+pattern1 = re.compile('hugo/content/en/(.*?).md')
+pattern2 = re.compile('hugo/content/en/glossary/terms/(.*?).md')
 
 # Grab YAML frontmatter from markdown file
 def grab_glossary_title(filename):
