@@ -2,6 +2,9 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/targeting_attributes"
+  tag: "Documentation"
+  text: "Targeting Attributes"
 - link: "/feature_flags/concepts/saved_filters"
   tag: "Documentation"
   text: "Saved Filters"
@@ -58,6 +61,8 @@ SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>over
 ## Filters and evaluation context
 
 Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
+
+When you build a filter, the attribute field suggests attributes your organization has already defined or that your SDKs have sent recently. See [Targeting Attributes][2] to define reusable attributes with a data type, which also determines the operators available for that attribute.
 
 ### Example evaluation contexts and filters
 
@@ -145,3 +150,4 @@ Targeting rules are evaluated **in order** from top to bottom:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/saved_filters/
+[2]: /feature_flags/concepts/targeting_attributes/

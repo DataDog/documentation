@@ -115,8 +115,6 @@ The log page displays the Agent logs being output to `agent.log`. Logs can be so
 
 The settings page displays the contents of the Agent's main configuration file `datadog.yaml`. You can edit this file directly from the Datadog Agent Manager. After making a change, click {{< ui >}}Save{{< /ui >}} in the upper right then [restart the Agent](#restart-agent).
 
-See the [sample config_template.yaml][2] for all available configuration options.
-
 ### Checks
 
 #### Manage checks
@@ -142,7 +140,6 @@ Clicking {{< ui >}}Restart Agent{{< /ui >}} from the left navigation bar restart
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /agent/basic_agent_usage/windows/#installation
-[2]: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
 [3]: /integrations/
 [4]: /help/
 [5]: /agent/troubleshooting/send_a_flare/
