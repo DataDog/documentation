@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { getCollection } from "astro:content";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
+import type { OverviewPage } from "@components/ApiSideNav/ApiSideNav.astro";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
@@ -31,6 +33,36 @@ const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
   Astro.url.pathname,
 );
 const hreflang = buildHreflangAlternates(unprefixedPath);
+
+// The hand-written API pages (src/content/en/api/latest/*.mdoc) form the
+// "Overview" section of the side nav. Resolved here rather than in each route
+// because the section renders on every API page, and all three API routes go
+// through this layout.
+//
+// Astro's glob loader strips a trailing `/index`, so the API root itself is the
+// entry with id exactly `api/latest`; its sub pages are the descendants.
+const API_CONTENT_DIR = "api/latest";
+const overviewEntries = await getCollection(
+  "en",
+  (entry) => entry.id.startsWith(`${API_CONTENT_DIR}/`),
+);
+const overviewPages: OverviewPage[] = overviewEntries
+  .map((entry) => ({
+    title: entry.data.title,
+    slug: entry.id.slice(`${API_CONTENT_DIR}/`.length),
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title));
+
+const apiRootPath = `/${API_CONTENT_DIR}/`;
+const pathWithinApiRoot = unprefixedPath.startsWith(apiRootPath)
+  ? unprefixedPath.slice(apiRootPath.length).replace(/\/$/, "")
+  : undefined;
+const activeOverviewPageSlug = overviewPages.some(
+  (page) => page.slug === pathWithinApiRoot,
+)
+  ? pathWithinApiRoot
+  : undefined;
+const isOverviewSection = pathWithinApiRoot === "" || Boolean(activeOverviewPageSlug);
 ---
 
 <BaseLayout
@@ -44,6 +76,9 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
       categories={categories}
       activeCategory={activeCategory}
       currentOperationSlug={currentOperationSlug}
+      overviewPages={overviewPages}
+      isOverviewSection={isOverviewSection}
+      activeOverviewPageSlug={activeOverviewPageSlug}
     />
     <main class="api-main">
       <div class="api-toolbar">
