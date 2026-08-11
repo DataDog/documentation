@@ -484,6 +484,8 @@ Simple path prefixes without special characters are treated as prefix matches:
 - `"third_party/"` - Matches third-party code
 - `"generated/"` - Matches generated code
 
+**Note**: A prefix matches complete path segments, not any leading substring. `src/module` matches `src/module/foo.js`, but `src/mod` matches nothing under `src/module/`. A partial segment name matches no files and reports no error. To match part of a directory name, use a glob such as `src/mod*/**/*`.
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
