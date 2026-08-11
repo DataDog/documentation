@@ -306,23 +306,17 @@ To configure this:
 
 1. On the prompt's version list, open the environment's options menu and select {{< ui >}}Targeting Rules{{< /ui >}}.
 
-   {{< img src="llm_observability/monitoring/prompt-targeting-rules-entry.png" alt="An environment panel showing the environment currently serving one prompt version, with an Advanced targeting notice linking to Targeting Rules." style="width:60%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-environment-targeting-rules-link.png" alt="An environment panel showing the environment currently serving one prompt version, with a link to Targeting Rules." style="width:60%;" >}}
 
 2. Click {{< ui >}}Add Targeting Rule{{< /ui >}}.
 
-   {{< img src="llm_observability/monitoring/prompt-targeting-rules-panel.png" alt="The Targeting Rules panel for an environment, showing the default version served when no rules match and an Add Targeting Rule button." style="width:100%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-targeting-rules-default-version.png" alt="The Targeting Rules panel for an environment, showing the default version served when no rules match and an Add Targeting Rule button." style="width:100%;" >}}
 
 3. Define the rule filter. For example, match calls to `get_prompt()` that pass the attribute `tag=unstable`, and set the resulting variant to the unstable prompt version.
 
-   {{< img src="llm_observability/monitoring/prompt-targeting-rule-filter.png" alt="The targeting rule filter builder, matching a tag attribute and mapping it to a prompt version." style="width:100%;" >}}
+   {{< img src="llm_observability/monitoring/prompt-targeting-rule-tag-filter.png" alt="The targeting rule filter builder, matching a tag attribute set to unstable." style="width:100%;" >}}
 
 4. Save the rule. Calls with `tag=unstable` resolve to the matched version; all other calls fall back to the default version.
-
-   {{< img src="llm_observability/monitoring/prompt-targeting-rules-tree.png" alt="The Targeting Rules panel showing a saved rule that routes tag=unstable to one version, with all other calls falling back to another version." style="width:100%;" >}}
-
-The environment panel shows that the environment can serve more than one version:
-
-{{< img src="llm_observability/monitoring/prompt-targeting-rules-warning.png" alt="An environment panel with an Advanced targeting notice indicating that another version may be served under advanced targeting rules." style="width:60%;" >}}
 
 Pass the attributes referenced by your targeting rules as keyword arguments to `get_prompt()`. Calls that don't pass a matching attribute continue to resolve to the environment's default version.
 
