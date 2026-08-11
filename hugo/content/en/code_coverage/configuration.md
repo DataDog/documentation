@@ -260,7 +260,7 @@ Your operating system caps how much can be passed in a command-line argument or 
 
 On Linux, exceeding the limit produces an error from the shell, such as `Argument list too long`, rather than a message from `datadog-ci`.
 
-<div class="alert alert-warning">On Windows, confirm that a large list reached the CLI. A value that exceeds a command-line or environment limit may not arrive, and <code>datadog-ci</code> then behaves as though the option was never set. The <code>ignore</code> field of <code>code-coverage.datadog.yml</code> applies instead, and no error appears. After your first upload, check in Datadog that the files you meant to exclude are absent from the coverage data.</div>
+<div class="alert alert-warning">On Windows, an oversized value can fail silently. <code>cmd.exe</code> ignores an inherited environment variable longer than its 8,191-character limit. <code>datadog-ci</code> then receives nothing and behaves as though the option was never set. The <code>ignore</code> field of <code>code-coverage.datadog.yml</code> applies instead, and no error appears. After your first upload, check in Datadog that the files you meant to exclude are absent from the coverage data.</div>
 
 For a list large enough to approach these ceilings, use the `ignore` field of `code-coverage.datadog.yml`. That is the only option with no size ceiling.
 
