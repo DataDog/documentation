@@ -1570,14 +1570,14 @@ menu:
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
       weight: 104
-    - name: Bits Detection
-      url: bits_ai/bits_detection
-      identifier: bits_detection
-      parent: bits_ai
-      weight: 2
     - name: Bits Remediation
       url: bits_ai/bits_remediation
       identifier: bits_remediation
+      parent: bits_ai
+      weight: 2
+    - name: Bits Detection
+      url: bits_ai/bits_detection
+      identifier: bits_detection
       parent: bits_ai
       weight: 3
     - name: Bits Code
