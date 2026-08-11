@@ -232,9 +232,18 @@ Surrounding whitespace is removed from each pattern, and empty entries are dropp
 
 Use `--ignored-source-paths` to keep generated or vendored source code out of your coverage percentage. Use `--ignored-paths` to stop the CLI from picking up a coverage report file that you do not want to send.
 
+#### Limits
+
+A single `--ignored-source-paths` value accepts up to 2,000 patterns and 256 KB. Larger values fail with an error. Above 1,000 patterns or 100 KB, the CLI uploads the list and logs a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
+
 #### Long lists on Windows
 
-`cmd.exe` caps a whole command line at about 8191 characters, and the npm `.cmd` wrapper for `datadog-ci` runs through `cmd.exe`. A long list of patterns can exceed that cap. On Windows, supply long lists through the `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable or the `ignore` field of `code-coverage.datadog.yml` instead.
+`cmd.exe` caps a whole command line at about 8191 characters, and the npm `.cmd` wrapper for `datadog-ci` runs through `cmd.exe`. A long list of patterns can exceed that cap, which is far lower than the 256 KB the option itself accepts.
+
+Two alternatives keep the list off the command line:
+
+- The `ignore` field of `code-coverage.datadog.yml`.
+- The `DD_COVERAGE_IGNORED_SOURCE_PATHS` environment variable, when your CI provider sets it directly in the job environment. Setting it with a `set` command in `cmd.exe` is subject to the same cap.
 
 ## PR Gates
 
