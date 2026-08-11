@@ -238,7 +238,11 @@ Use `--ignored-source-paths` to keep generated or vendored source code out of yo
 
 #### Limits
 
-A single `--ignored-source-paths` value accepts up to 2,000 patterns and up to 256 KB. Exceeding either limit fails the command, and nothing is uploaded. Above 1,000 patterns or 100 KB, the CLI uploads the list and logs a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
+A single `--ignored-source-paths` value accepts up to 2,000 patterns, up to 1,000 characters per pattern, and up to 256 KB in total. Exceeding any of the three fails the command, and nothing is uploaded. The error names the limit that was exceeded.
+
+Above 1,000 patterns or 100 KB, the upload still happens and the command prints a warning. A list that large is usually better kept in `code-coverage.datadog.yml`.
+
+The per-pattern limit matches the one Datadog applies. An over-long pattern is rejected up front rather than discarded later. A pattern discarded later could leave the list empty, which would silently bring back the `ignore` field of `code-coverage.datadog.yml`.
 
 #### Long lists on Windows
 
