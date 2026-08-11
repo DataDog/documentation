@@ -16,7 +16,7 @@ Tag enrichment is in Preview. To request access, fill out this form.
 
 ## Overview
 
-Use tag enrichment rules to add tags to your Logs and APM spans without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
+Use tag enrichment rules to add tags to your logs, APM spans, trace metrics, and Data Jobs Monitoring (DJM) telemetry without code changes or redeployment. You can use values from service metadata you've already defined in Catalog, the value of another tag, or a fixed value.
 
 ## Prerequisites
 
@@ -61,7 +61,7 @@ Click {{< ui >}}Add Tags{{< /ui >}} to open the tag enrichment rule modal pre-po
 
 ## Tag enrichment behavior
 
-- **Impacted telemetry**: Tag enrichment applies to Logs and APM spans only.
+- **Impacted telemetry**: Tag enrichment applies to Logs, APM, and Data Jobs Monitoring (DJM). Support for additional telemetry types, including Metrics, Database Monitoring, Profiling, Kubernetes, Universal Service Monitoring, and Events, is planned.
 - **Historical data**: Tag enrichment rules apply only to telemetry ingested while a rule is active. Past data is not updated retroactively. Deleting or modifying a rule stops it from applying to new telemetry, but does not update previously ingested data.
 - **Metadata updates**: Updating or adding Entity Metadata to services while enrichment rules are enabled, including the default rules, automatically updates those tags.
 - **Rule processing order**: Tag enrichment rules are applied in the order in which they were created. Rules at the top of the list take precedence over rules below them.
