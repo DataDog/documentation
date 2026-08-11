@@ -53,7 +53,7 @@ Tables become available a few minutes after your first request. Enrichment appli
 
 ## Send indicators
 
-`POST https://api.{{< region-param key="dd_site" code="true" >}}/api/v2/security/threat-intel/stix`
+`POST https://api.{{< region-param key="dd_site" >}}/api/v2/security/threat-intel/stix`
 
 <div class="alert alert-info">The endpoint URL varies by site. Use the correct Datadog site for your organization.</div>
 
