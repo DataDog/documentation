@@ -14262,6 +14262,150 @@ components:
         test_level:
           $ref: "#/components/schemas/CIAppTestLevel"
       type: object
+    CIAppGitHubAccountAttributes:
+      description: Attributes describing a GitHub account's CI Visibility opt-in status.
+      properties:
+        account:
+          description: The GitHub account (organization or user) name.
+          example: datadog
+          type: string
+        enabled:
+          description: Whether CI Visibility is enabled at the account level.
+          example: true
+          type: boolean
+        host:
+          description: The GitHub host (`github.com` or a GitHub Enterprise Server (GHES) hostname) this account belongs to.
+          example: github.com
+          type: string
+        repo_count:
+          description: The number of repositories known for this account.
+          example: 12
+          format: int64
+          type: integer
+        repositories:
+          description: The repositories belonging to this account, with their individual opt-in status.
+          items:
+            $ref: "#/components/schemas/CIAppGitHubAccountRepository"
+          type: array
+      type: object
+    CIAppGitHubAccountData:
+      description: Data object for a GitHub account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CIAppGitHubAccountAttributes"
+        id:
+          description: |-
+            The account's unique identifier, in the form `<host>/<account name>`
+            (for example `github.com/datadog`).
+          example: github.com/datadog
+          type: string
+        type:
+          $ref: "#/components/schemas/CIAppGitHubAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CIAppGitHubAccountRepository:
+      description: A GitHub repository within a GitHub account, and its CI Visibility opt-in status.
+      properties:
+        enabled:
+          description: Whether CI Visibility is enabled for this repository.
+          example: true
+          type: boolean
+        name:
+          description: The repository name.
+          example: shopist
+          type: string
+      type: object
+    CIAppGitHubAccountResponse:
+      description: Response object containing a single GitHub account's CI Visibility opt-in status.
+      properties:
+        data:
+          $ref: "#/components/schemas/CIAppGitHubAccountData"
+      required:
+        - data
+      type: object
+    CIAppGitHubAccountType:
+      description: |-
+        JSON:API type for the GitHub account resource.
+        The value must always be `ci_github_account`.
+      enum:
+        - ci_github_account
+      example: ci_github_account
+      type: string
+      x-enum-varnames:
+        - CI_GITHUB_ACCOUNT
+    CIAppGitHubAccountUpdateRequest:
+      description: Request object for updating a GitHub account's CI Visibility opt-in status.
+      properties:
+        data:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestData"
+      required:
+        - data
+      type: object
+    CIAppGitHubAccountUpdateRequestAttributes:
+      description: |-
+        Attributes for updating a GitHub account's CI Visibility opt-in status.
+        At least one of `enabled` or `repository.enabled` must be provided.
+      properties:
+        account:
+          description: The GitHub account (organization or user) name to update, identified by name.
+          example: datadog
+          minLength: 1
+          type: string
+        enabled:
+          description: Whether to enable or disable CI Visibility at the account level.
+          example: true
+          type: boolean
+        host:
+          description: |-
+            The GitHub host (`github.com` or a GHES hostname) the account belongs to. Required to disambiguate
+            when the same account name exists on more than one host.
+          example: github.com
+          type: string
+        repository:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestRepository"
+      required:
+        - account
+      type: object
+    CIAppGitHubAccountUpdateRequestData:
+      description: Data object for updating a GitHub account's CI Visibility opt-in status.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CIAppGitHubAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    CIAppGitHubAccountUpdateRequestRepository:
+      description: Repository-level opt-in change to apply, identified by name.
+      properties:
+        enabled:
+          description: Whether to enable or disable CI Visibility for this repository.
+          example: true
+          type: boolean
+        name:
+          description: The repository name to update.
+          example: shopist
+          minLength: 1
+          type: string
+      required:
+        - name
+        - enabled
+      type: object
+    CIAppGitHubAccountsResponse:
+      description: Response object containing a list of GitHub accounts and their CI Visibility opt-in status.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/CIAppGitHubAccountData"
+          type: array
+      required:
+        - data
+      type: object
     CIAppGitInfo:
       description: |-
         If pipelines are triggered due to actions to a Git repository, then all payloads must contain this.
@@ -20397,6 +20541,7 @@ components:
         - times
       type: object
     CompletionCondition:
+      additionalProperties: false
       description: The definition of `CompletionCondition` object.
       properties:
         operand1:
@@ -20440,6 +20585,7 @@ components:
         - OPERATOR_IS_EMPTY
         - OPERATOR_IS_NOT_EMPTY
     CompletionGate:
+      additionalProperties: false
       description: Used to create conditions before running subsequent actions.
       properties:
         completionCondition:
@@ -35895,6 +36041,7 @@ components:
           type: integer
       type: object
     ErrorHandler:
+      additionalProperties: false
       description: Used to handle errors in an action.
       properties:
         fallbackStepName:
@@ -52199,6 +52346,7 @@ components:
         name:
           description: The `InputSchemaParameters` `name`.
           example: ""
+          minLength: 1
           type: string
         type:
           $ref: "#/components/schemas/InputSchemaParametersType"
@@ -79463,11 +79611,13 @@ components:
       properties:
         branchName:
           description: The `OutboundEdge` `branchName`.
-          example: ""
+          example: main
+          minLength: 1
           type: string
         nextStepName:
           description: The `OutboundEdge` `nextStepName`.
-          example: ""
+          example: Step2
+          minLength: 1
           type: string
       required:
         - nextStepName
@@ -80687,6 +80837,7 @@ components:
         name:
           description: The `Parameter` `name`.
           example: ""
+          minLength: 1
           type: string
         value:
           description: The `Parameter` `value`.
@@ -86050,6 +86201,7 @@ components:
         - attributes
       type: object
     ReadinessGate:
+      additionalProperties: false
       description: Used to merge multiple branches into a single branch.
       properties:
         thresholdType:
@@ -88590,6 +88742,7 @@ components:
         - data
       type: object
     RetryStrategy:
+      additionalProperties: false
       description: The definition of `RetryStrategy` object.
       properties:
         kind:
@@ -88598,6 +88751,7 @@ components:
           $ref: "#/components/schemas/RetryStrategyLinear"
       required:
         - kind
+        - linear
       type: object
     RetryStrategyKind:
       description: The definition of `RetryStrategyKind` object.
@@ -88608,17 +88762,21 @@ components:
       x-enum-varnames:
         - RETRY_STRATEGY_LINEAR
     RetryStrategyLinear:
+      additionalProperties: false
       description: The definition of `RetryStrategyLinear` object.
       properties:
         interval:
           description: The `RetryStrategyLinear` `interval`. The expected format is the number of seconds ending with an s. For example, 1 day is 86400s
           example: ""
+          pattern: ^[1-9][0-9]*s$
           type: string
         maxRetries:
           description: The `RetryStrategyLinear` `maxRetries`.
-          example: 0.0
-          format: double
-          type: number
+          example: 0
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
       required:
         - interval
         - maxRetries
@@ -105379,7 +105537,7 @@ components:
           type: string
       type: object
     Spec:
-      description: The spec defines what the workflow does.
+      description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
           description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
@@ -105497,11 +105655,12 @@ components:
         - type
       type: object
     StartStepNames:
-      description: "A list of steps that run first after a trigger fires."
+      description: "Names of existing workflow steps that run first after a trigger fires."
       example:
         - ""
       items:
         description: The `StartStepNames` `items`.
+        minLength: 1
         type: string
       type: array
     State:
@@ -106777,6 +106936,7 @@ components:
         actionId:
           description: The unique identifier of an action.
           example: ""
+          minLength: 1
           type: string
         completionGate:
           $ref: "#/components/schemas/CompletionGate"
@@ -106793,9 +106953,10 @@ components:
         name:
           description: Name of the step.
           example: ""
+          minLength: 1
           type: string
         outboundEdges:
-          description: A list of subsequent actions to run.
+          description: A list of subsequent actions to run. This list is empty for a terminal step.
           items:
             $ref: "#/components/schemas/OutboundEdge"
           type: array
@@ -106811,7 +106972,9 @@ components:
         - actionId
       type: object
     StepDisplay:
-      description: The definition of `StepDisplay` object.
+      description: |-
+        The position of a step on the workflow canvas. Omit `display` from every step to use
+        automatic layout, or provide it for every step to preserve a manual layout.
       properties:
         bounds:
           $ref: "#/components/schemas/StepDisplayBounds"
@@ -120431,7 +120594,7 @@ components:
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
         workflowTrigger:
-          description: "Trigger a workflow from the Datadog UI. Only required if no other trigger exists."
+          description: "Trigger a workflow from the Datadog UI. When present, this must be the workflow's only trigger."
           type: object
       required:
         - workflowTrigger
@@ -131672,6 +131835,129 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/ci/github/accounts:
+    get:
+      description: |-
+        Retrieve the list of GitHub accounts (organizations or users) available to this Datadog organization
+        through its GitHub App installation, along with each account's and repository's CI Visibility opt-in status.
+      operationId: ListCIAppGitHubAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account: datadog
+                          enabled: true
+                          host: github.com
+                          repo_count: 2
+                          repositories:
+                            - enabled: true
+                              name: shopist
+                            - enabled: false
+                              name: dd-source
+                        id: github.com/datadog
+                        type: ci_github_account
+              schema:
+                $ref: "#/components/schemas/CIAppGitHubAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - integrations_read
+      summary: List GitHub CI Visibility status
+      tags: ["CI Visibility GitHub Accounts"]
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - integrations_read
+    patch:
+      description: |-
+        Enable or disable CI Visibility for a GitHub account, one of its repositories, or both in the same request.
+        The account (and, optionally, repository) are identified by name. Account-level and repository-level
+        changes are independent and may both be supplied in the same request. At least one of `enabled` or
+        `repository.enabled` must be provided. If the account name matches installations on more than one host,
+        `host` must be supplied to disambiguate, otherwise a 409 is returned. Returns a 404 if the CI Visibility
+        GitHub integration is not enabled for this organization, or if the given account or repository cannot be
+        found by name.
+      operationId: UpdateCIAppGitHubAccount
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account: datadog
+                      enabled: true
+                      host: github.com
+                      repository:
+                        enabled: true
+                        name: shopist
+                    type: ci_github_account
+            schema:
+              $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account: datadog
+                        enabled: true
+                        host: github.com
+                        repo_count: 2
+                        repositories:
+                          - enabled: true
+                            name: shopist
+                          - enabled: false
+                            name: dd-source
+                      id: github.com/datadog
+                      type: ci_github_account
+              schema:
+                $ref: "#/components/schemas/CIAppGitHubAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ci_provider_settings_write
+      summary: Update GitHub CI Visibility status
+      tags: ["CI Visibility GitHub Accounts"]
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - ci_provider_settings_write
   /api/v2/ci/pipeline:
     post:
       description: |-
@@ -188611,8 +188897,8 @@ paths:
       x-menu-order: 7
       x-sunset: "2026-04-01"
       x-unstable: |-
-        **Note**: This endpoint is in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+        **Note**: This endpoint is deprecated. To update outcomes, use the
+        [Update Scorecard outcomes](https://docs.datadoghq.com/api/latest/scorecards/update-scorecard-outcomes/) endpoint.
   /api/v2/scorecard/rules:
     get:
       description: Fetch all rules.
@@ -216403,6 +216689,11 @@ tags:
   - description: |-
       Use the Bits AI endpoints to retrieve AI-powered investigations.
     name: Bits AI
+  - description: |-
+      Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the
+      [CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)
+      for more information.
+    name: CI Visibility GitHub Accounts
   - description: |-
       Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information.
     name: CI Visibility Pipelines

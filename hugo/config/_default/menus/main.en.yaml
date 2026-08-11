@@ -2225,26 +2225,36 @@ menu:
       parent: internal_developer_portal
       identifier: idp_eng_reports
       weight: 4
+    - name: Teams Performance
+      url: internal_developer_portal/eng_reports/teams_performance
+      parent: idp_eng_reports
+      identifier: eng_reports_teams_performance
+      weight: 401
     - name: Reliability Overview
       url: internal_developer_portal/eng_reports/reliability_overview
       parent: idp_eng_reports
       identifier: eng_reports_reliability_overview
-      weight: 401
+      weight: 402
+    - name: Catalog Health
+      url: internal_developer_portal/eng_reports/catalog_health
+      parent: idp_eng_reports
+      identifier: eng_reports_catalog_health
+      weight: 403
     - name: Scorecards Performance
       url: internal_developer_portal/eng_reports/scorecards_performance
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
-      weight: 402
+      weight: 404
     - name: DORA Metrics
       url: internal_developer_portal/eng_reports/dora_metrics
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
-      weight: 403
+      weight: 405
     - name: Custom Reports
       url: internal_developer_portal/eng_reports/custom_reports
       parent: idp_eng_reports
       identifier: eng_reports_custom
-      weight: 404
+      weight: 406
     - name: Homepage
       url: internal_developer_portal/homepage
       parent: internal_developer_portal
@@ -6438,41 +6448,46 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
       weight: 303
+    - name: Targeting Attributes
+      url: feature_flags/concepts/targeting_attributes
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_attributes
+      weight: 304
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 304
+      weight: 305
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 305
+      weight: 306
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 306
+      weight: 307
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 307
+      weight: 308
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 308
+      weight: 309
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 309
+      weight: 310
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 310
+      weight: 311
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
