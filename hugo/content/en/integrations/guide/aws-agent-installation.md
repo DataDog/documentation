@@ -1,7 +1,7 @@
 ---
 title: Install the Datadog Agent through the AWS Integration
 description: "Install and manage the Datadog Agent on your Amazon EC2 instances directly from the AWS integration, without connecting to each host or running per-host scripts."
-private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry in integrations/guide/_index.md at that time
+private: true # TODO(DOCS-14545): remove at v1 rollout to publish; also add the nextlink entry under "AWS guides" in hugo/content/en/integrations/guide/_index.md at that time
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/"
   tag: "Documentation"
@@ -76,12 +76,10 @@ For the full technical and security details, including the AWS resources Datadog
 
 ## Install the Agent
 
-<!-- TODO(DOCS-14545): at publish, add in-app deep links to both entry points — the AWS setup flow (https://app.datadoghq.com/integrations?category=AWS&integrationId=amazon-web-services) and the Fleet Automation Install Agents page (https://app.datadoghq.com/fleet/install-agent/latest?platform=aws). Confirm stable prod URLs once the rollout completes. -->
-
 You can start Agent installation from two entry points, depending on how much control you want over which instances are instrumented:
 
-- **AWS integration setup (install on all eligible instances)**: When you [set up the AWS integration][5], enable the Agent installation toggle, shown alongside log and resource collection. The Agent installs on all eligible EC2 instances.
-- **Fleet Automation (install on specific instances)**: Open the AWS Install Agents page at any time to select the specific EC2 instances you want.
+- **AWS integration setup (install on all eligible instances)**: When you [set up the AWS integration][5], enable the Agent installation toggle on the [AWS integration page][7], shown alongside log and resource collection. The Agent installs on all eligible EC2 instances.
+- **Fleet Automation (install on specific instances)**: Open the [AWS Install Agents page][8] at any time to select the specific EC2 instances you want.
 
 <!-- TODO(DOCS-14545): per AWS team, surfacing the Agent install flow in the main AWS setup flow for non-first-time users is still rolling out; confirm it's live before publish. -->
 
@@ -108,7 +106,7 @@ After the installation completes:
 
 ## Manage installed Agents
 
-Use the AWS Install Agents page in Fleet Automation to manage the Agents you've installed through the AWS integration.
+Use the [AWS Install Agents page][8] in Fleet Automation to manage the Agents you've installed through the AWS integration.
 
 From this page, you can:
 
@@ -141,3 +139,5 @@ If installation can't complete because of missing permissions, Datadog shows a n
 [4]: https://docs.datadoghq.com/agent/fleet_automation/
 [5]: https://docs.datadoghq.com/getting_started/integrations/aws/
 [6]: https://docs.datadoghq.com/integrations/guide/aws-agent-installation-technical-reference/
+[7]: https://app.datadoghq.com/integrations/amazon-web-services
+[8]: https://app.datadoghq.com/fleet/install-agent/latest?platform=aws

@@ -1,7 +1,7 @@
 ---
 title: How Agent Installation through the AWS Integration Works
 description: "Understand how Datadog installs and maintains the Datadog Agent on Amazon EC2 through the AWS integration: the AWS resources created, the installation mechanism, the security model, and the Agent lifecycle."
-private: true # TODO(DOCS-14545): remove at v1 rollout to publish, at the same time as the setup guide this page links to; also add the nextlink entry in integrations/guide/_index.md at that time
+private: true # TODO(DOCS-14545): remove at v1 rollout to publish, at the same time as the setup guide this page links to; also add the nextlink entry under "AWS guides" in hugo/content/en/integrations/guide/_index.md at that time
 further_reading:
 - link: "https://docs.datadoghq.com/integrations/guide/aws-agent-installation/"
   tag: "Documentation"
