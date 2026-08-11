@@ -828,7 +828,7 @@ From the {{< ui >}}Private Action Runner{{< /ui >}} page in [Actions Catalog][6]
 
 ### Automatic deletion of inactive runners
 
-To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only configuration after an extended period of inactivity.
+To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only configuration after 35 days of inactivity.
 
 If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
 
