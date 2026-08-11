@@ -75,13 +75,24 @@ A form to create a new app registration is displayed:
 
 ## Next steps
 
-- Check out the [Azure Overview dashboard][3] to start getting insights into your Azure environment
-- Check out [Azure monitor templates][4] to start getting alerts for the data that's important to your organization
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+- [Migrate this app registration to Secretless Auth](/getting_started/integrations/azure/#secretless-migration-setup) to remove the client secret
+- Check out the [Azure Overview dashboard][101] to start getting insights into your Azure environment
+- Check out [Azure monitor templates][102] to start getting alerts for the data that's important to your organization
+
+[101]: https://app.datadoghq.com/dash/integration/71/azure-overview
+[102]: https://app.datadoghq.com/monitors/templates?q=azure
+{{< /site-region >}}
+{{< site-region region="gov,gov2" >}}
+- Check out the [Azure Overview dashboard][101] to start getting insights into your Azure environment
+- Check out [Azure monitor templates][102] to start getting alerts for the data that's important to your organization
+
+[101]: https://app.datadoghq.com/dash/integration/71/azure-overview
+[102]: https://app.datadoghq.com/monitors/templates?q=azure
+{{< /site-region >}}
 
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://learn.microsoft.com/azure/azure-resource-manager/management/overview
 [2]: /security/cloud_security_management/
-[3]: https://app.datadoghq.com/dash/integration/71/azure-overview
-[4]: https://app.datadoghq.com/monitors/templates?q=azure
