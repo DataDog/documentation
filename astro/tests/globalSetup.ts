@@ -12,8 +12,8 @@ const baseURL =
     : "http://localhost:4322";
 
 const warmupRoutes = [
-  "/docs/dd_e2e/",
-  "/docs/dd_e2e/components/alert",
+  "/dd_e2e/",
+  "/dd_e2e/components/alert",
   "/api/latest/",
 ];
 
@@ -27,13 +27,21 @@ export default async function globalSetup() {
     const deadline = Date.now() + 120_000;
     for (const route of warmupRoutes) {
       while (Date.now() < deadline) {
+        let status: number;
         try {
-          const response = await ctx.get(route, { timeout: 90_000 });
-          if (response.ok()) break;
+          status = (await ctx.get(route, { timeout: 90_000 })).status();
         } catch {
-          // Server not ready yet (or route still compiling) — retry shortly.
+          // No response at all: the server isn't listening yet — retry shortly.
+          await sleep(1000);
+          continue;
         }
-        await sleep(1000);
+        // Any HTTP response means the server is up and the route has compiled,
+        // so stop either way. Retrying a 404 would just burn the whole deadline
+        // on a route that does not exist, starving the routes that do.
+        if (status !== 200) {
+          console.warn(`[warmup] ${route} returned ${status} — stale route?`);
+        }
+        break;
       }
     }
   } catch {

@@ -1,28 +1,54 @@
 export const prerender = true;
 /**
- * AST-based plaintext rendering of each category summary page.
+ * Plaintext rendering of each category summary page.
  *
  * Builds the page as Markdoc nodes — heading, optional deprecation alert,
  * description paragraph, and one summary block per endpoint (heading linking
- * to the endpoint page, plus its method + URL) — then runs the result through
- * `format()`. Mirrors the HTML category page in `[category].astro`.
+ * to the endpoint page, plus its method + URL) — then emits markdown via
+ * `buildMarkdocStr`. Mirrors the HTML category page in `[category].astro`.
  */
 
-import type { APIRoute, GetStaticPaths } from "astro";
 import type { Node as MarkdocNode } from "@markdoc/markdoc";
-import type { ApiOperationStub } from "@lib/api/schemas/views";
+import type { APIRoute, GetStaticPaths } from "astro";
+import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
 import {
   getCategoryStubsView,
   getCategoryViewBySlug,
 } from "@lib/api/viewsBuilder";
-import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
+import type { Locale } from "@lib/i18n/locale";
+import { LOCALES, localizedHref, parseLangParam } from "@lib/i18n/locale";
 import { alertNode } from "@components/Alert/plaintext/Alert";
 import { apiEndpointSummaryNodes } from "@components/ApiEndpointSummary/plaintext/ApiEndpointSummary";
-import {
-  buildMarkdocStr,
-  heading,
-  nodesFromMd,
-} from "@lib/plaintext/helpers";
+import { buildMarkdocStr, heading, nodesFromMd } from "@lib/plaintext/helpers";
+
+function apiCategoryBody(category: ApiCategory, lang: Locale): string {
+  const categoryBaseHref = localizedHref(lang, `/api/latest/${category.slug}/`);
+
+  const contents: MarkdocNode[] = [heading(1, category.name)];
+
+  if (category.deprecated) {
+    contents.push(
+      alertNode("warning", nodesFromMd("This endpoint is deprecated.")),
+    );
+  }
+
+  if (category.description) {
+    contents.push(...nodesFromMd(category.description.trim()));
+  }
+
+  for (const operation of category.operations) {
+    contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
+  }
+
+  return buildMarkdocStr(contents);
+}
+
+function endpointSummaryNodes(
+  operation: ApiOperationStub,
+  baseHref: string,
+): MarkdocNode[] {
+  return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: ReturnType<GetStaticPaths> = [];
@@ -55,34 +81,9 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
-
-  const contents: MarkdocNode[] = [heading(1, category.name)];
-
-  if (category.deprecated) {
-    contents.push(
-      alertNode("warning", nodesFromMd("This endpoint is deprecated.")),
-    );
-  }
-
-  if (category.description) {
-    contents.push(...nodesFromMd(category.description.trim()));
-  }
-
-  for (const operation of category.operations) {
-    contents.push(...endpointSummaryNodes(operation, categoryBaseHref));
-  }
-
-  const body = buildMarkdocStr(contents);
+  const body = apiCategoryBody(category, lang);
 
   return new Response(body, {
     headers: { "Content-Type": "text/markdown; charset=utf-8" },
   });
 };
-
-function endpointSummaryNodes(
-  operation: ApiOperationStub,
-  baseHref: string,
-): MarkdocNode[] {
-  return apiEndpointSummaryNodes(operation, `${baseHref}${operation.slug}/`);
-}
