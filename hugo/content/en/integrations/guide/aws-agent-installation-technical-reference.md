@@ -38,7 +38,7 @@ Datadog creates the following resources as needed, at install time:
 | Secrets Manager secret | `/datadog/ec2-instrumenter/<ACCOUNT_ID>/<INSTANCE_ID>` | Holds the Datadog API key so the instance can fetch it itself. Encrypted with the default AWS-managed key. |
 | IAM role and instance profile | `datadog-ssm-<INSTANCE_ID>` and `datadog-ssm-profile-<INSTANCE_ID>` | Created only when the instance has no instance profile, under the IAM path `/datadog-ec2-instrumenter/` so they are identifiable. Receives the AWS-managed `AmazonSSMManagedInstanceCore` policy so Systems Manager can reach the instance. |
 | Inline IAM policy | `datadog-ec2-instrumenter-secrets` | Added to the instance's role. Grants read access only to secrets under `/datadog/ec2-instrumenter/`. |
-| EventBridge rules in your other regions | Same names as the primary-region resources | Forward change events to your primary region |
+| EventBridge rules in your other regions | Same names as the primary-region resources | Forward change events to your primary region. |
 
 Datadog does not create S3 buckets, event buses, log groups, or SSM parameters, and does not tag your instances.
 
@@ -67,11 +67,11 @@ Datadog automatically excludes:
 
 ### How Datadog gets access
 
-Datadog uses the same cross-account IAM role as the AWS integration, authenticated with an external ID. Datadog receives short-lived, temporary credentials, and each type of work (reading EC2, managing IAM, sending commands) uses a separately scoped credential session rather than one broad session. Datadog stores no long-lived AWS keys.
+Datadog uses the same cross-account IAM role as the AWS integration, authenticated with an external ID. Datadog receives short-lived, temporary credentials, and each type of work (reading EC2, managing IAM, sending commands) uses a separately scoped credential session rather than one broad session. Datadog does not store any long-lived AWS keys.
 
 ### Auditing Datadog's actions
 
-Every action Datadog takes is a standard AWS API call, so all actions appear in AWS CloudTrail. Everything Datadog creates is identifiable by name: resources are prefixed with `datadog-`, secrets live under `/datadog/ec2-instrumenter/`, and IAM roles use the immutable path `/datadog-ec2-instrumenter/`. Because an IAM path cannot be edited after creation, the path cannot be silently changed. On-instance command results appear in the Systems Manager Run Command history.
+Every action Datadog takes is a standard AWS API call, so all actions appear in AWS CloudTrail. Everything Datadog creates is identifiable by name: resources are prefixed with `datadog-`, secrets are stored under `/datadog/ec2-instrumenter/`, and IAM roles use the immutable path `/datadog-ec2-instrumenter/`. Because an IAM path cannot be edited after creation, the path cannot be silently changed. On-instance command results appear in the Systems Manager Run Command history.
 
 ### How the API key is handled
 
@@ -85,14 +85,14 @@ The API key is stored in your own Secrets Manager, encrypted at rest. Only the s
 ### Guardrails
 
 - Datadog never removes an Agent it did not install.
-- Datadog tracks which instances it installed on, so it cleans up only its own work.
+- Datadog tracks which instances it installed an Agent on, so it cleans up only its own work.
 - When some regions cannot be listed, Datadog skips cleanup for that pass rather than risk uninstalling in bulk.
 
 ## Agent lifecycle and reconciliation
 
 ### Rule coverage is fixed at save time
 
-A rule covers the list of instances it resolved to when you saved it, and Datadog instruments nothing outside that list. Instances launched later are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
+A rule covers the list of instances it resolved to when you saved it, and Datadog does not instrument anything outside that list. Instances launched later are not picked up automatically. To cover them, update the rule, which re-resolves your query against your current fleet.
 
 ### How Datadog keeps covered instances in sync
 
