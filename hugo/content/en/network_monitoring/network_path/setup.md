@@ -360,7 +360,6 @@ Agent `v7.73+` is required.
         ## @param monitor_ip_without_domain - boolean - optional - default: false
         ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
         ## Monitor IP-only destinations that do not have an associated domain.
-        ## Requires Agent v7.81+.
         # monitor_ip_without_domain: false
 
         ## @param filters - list - optional
@@ -435,7 +434,6 @@ Agent `v7.73+` is required.
        ## @param monitor_ip_without_domain - boolean - optional - default: false
        ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
        ## Monitor IP-only destinations that do not have an associated domain.
-       ## Requires Agent v7.81+.
        # monitor_ip_without_domain: false
 
        ## @param filters - list - optional
