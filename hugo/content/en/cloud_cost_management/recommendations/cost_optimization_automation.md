@@ -64,7 +64,7 @@ Safeguards marked (Optional) are enabled by default and can be turned off in the
 ## Prerequisites
 
 - An AWS, GCP, or Azure account configured with [Cloud Cost Recommendations][4] and actively generating recommendations.
-- The **App Builder & Workflow Automation - Workflows Write** permission to create or edit an automation.
+- The **Cloud Cost Management - Cloud Cost Management Write** permission to access the {{< ui >}}Automations{{< /ui >}} page, and the **App Builder & Workflow Automation - Workflows Write** permission to create or edit an automation.
 - A connection to each account you want an automation to act on, set up from {{< ui >}}Manage Connections{{< /ui >}} on the {{< ui >}}Automations{{< /ui >}} page. Datadog uses this connection to assume a role with the write permissions needed for the recommended action, and grants only the permissions required for the selected recommendation type. To act across multiple accounts with one automation, create a [connection group][7].
 - (Optional) A Slack or Microsoft Teams connection if you want approval messages routed to a channel.
 
