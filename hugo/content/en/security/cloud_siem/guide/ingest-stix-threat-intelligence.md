@@ -123,8 +123,10 @@ The optional `valid_until` field sets an expiration for the indicator, and Datad
 
 ### Update and revoke indicators
 
-- To update an indicator, send it again with the same STIX `id`. Datadog keeps the most recent version of the indicator, so sending the same bundle more than once is safe.
+- To update an indicator's details, send the indicator again with the updated fields. Datadog overwrites the existing row for that indicator value.
 - To remove an indicator, send it with `"revoked": true`. Datadog deletes the indicator from the reference table.
+
+Sending the same bundle more than once does not create duplicate rows.
 
 ### Response
 
