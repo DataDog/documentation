@@ -345,7 +345,6 @@ Agent `v7.73+` is required.
         ## @param workers - integer - optional - default: 4
         ## @env DD_NETWORK_PATH_COLLECTOR_WORKERS - integer - optional - default: 4
         ## The number of concurrent workers available for network path execution.
-        ## Recommendation: leave at default.
         #
         # workers: <NUMBER OF WORKERS> # default 4
 
@@ -428,7 +427,6 @@ Agent `v7.73+` is required.
        ## @param workers - integer - optional - default: 4
        ## @env DD_NETWORK_PATH_COLLECTOR_WORKERS - integer - optional - default: 4
        ## The number of concurrent workers available for network path execution.
-       ## Recommendation: leave at default.
        #
        # workers: <NUMBER OF WORKERS> # default 4
 
