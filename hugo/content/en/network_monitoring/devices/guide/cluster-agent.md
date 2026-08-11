@@ -209,7 +209,6 @@ clusterAgent:
   #
   datadog_cluster_yaml:
 
-    # See here for all `network_devices.autodiscovery` configs: https://github.com/DataDog/datadog-agent/blob/master/pkg/config/config_template.yaml
     autodiscovery:
       workers: 2
       discovery_interval: 10

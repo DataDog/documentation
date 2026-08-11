@@ -1,7 +1,9 @@
 ---
-title: Set Up the OpenTelemetry Collector (OSS)
+title: Set Up the Community OpenTelemetry Collector
+aliases:
+- /opentelemetry/setup/collector_exporter/oss_setup/
 private: true
-description: 'Send OpenTelemetry data to Datadog using the OpenTelemetry Collector with standard OSS components'
+description: 'Send OpenTelemetry data to Datadog using the Community OpenTelemetry Collector'
 further_reading:
 - link: "https://opentelemetry.io/docs/collector/"
   tag: "External Site"
@@ -16,7 +18,7 @@ further_reading:
 
 ## Overview
 
-Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Contrib][1] distribution with standard OpenTelemetry components. This setup uses the following key components:
+Send traces, metrics, and logs to Datadog using the Community OpenTelemetry Collector, which is based on the [OpenTelemetry Collector Contrib][1] distribution and standard OpenTelemetry components. This setup uses the following key components:
 
 - **OTLP HTTP exporter**: Sends telemetry to Datadog's OTLP intake endpoints.
 - **Span metrics connector**: Generates RED (Rate, Error, Duration) metrics from trace data to power APM features such as the Service Catalog and Service Page.
@@ -28,7 +30,9 @@ Send traces, metrics, and logs to Datadog using the [OpenTelemetry Collector Con
 
 ## Prerequisites
 
-This setup supports bare metal, VMs, Docker, and Kubernetes, including the managed distributions Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic). This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. To see which Datadog features this setup supports, see the [feature compatibility table][7] under **OTel SDK + OSS Collector**.
+This setup supports bare metal, VMs, Docker, and Kubernetes. Supported managed Kubernetes distributions include Amazon EKS (including Auto Mode), Google GKE (Standard and Autopilot), and Azure AKS (including Automatic).
+
+This setup does not support serverless or task-based container runtimes such as ECS Fargate or AWS Lambda. For supported Datadog features, see the [feature compatibility table][7] under **OTel SDK + Community OTel Collector**.
 
 - [OpenTelemetry Collector Contrib][1] v0.154.0 or later
 - A [Datadog API key][2]
@@ -926,7 +930,7 @@ Example with instrumentation metrics enabled:
 }
 ```
 
-<div class="alert alert-info">The recommended OSS Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
+<div class="alert alert-info">The recommended Community OTel Collector configuration uses the <code>span_metrics</code> connector to generate the RED metrics that power APM views. The <code>trace_metrics.instrumentation_metrics_calc</code> and <code>raw_instrumentation_metrics_drop</code> fields support an alternative configuration for setups that derive APM trace metrics from HTTP instrumentation metrics instead. Do not enable <code>instrumentation_metrics_calc</code> alongside the <code>span_metrics</code> connector, as this computes trace metrics from both sources.</div>
 
 ### Datadog extension
 
