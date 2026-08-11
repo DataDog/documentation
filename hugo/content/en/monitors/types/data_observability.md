@@ -271,8 +271,8 @@ Source to target monitors are available in all regions except GovCloud.
 3. Under {{< ui >}}Choose target{{< /ui >}}, do the same for the destination. The source and the target can be in different data warehouses or in the same one.
 4. Under {{< ui >}}Select your metric type{{< /ui >}}, choose the metric to compare. Source to target monitors support the same metric types as other Data Observability monitors, including row count, freshness, nullness, uniqueness, cardinality, and {{< ui >}}Custom SQL{{< /ui >}}.
 5. Set {{< ui >}}Format{{< /ui >}} to control how the comparison is expressed:
-    - {{< ui >}}Difference{{< /ui >}}: the absolute difference between the source and target values.
-    - {{< ui >}}% Difference{{< /ui >}}: the difference expressed as a percentage.
+    - {{< ui >}}Difference{{< /ui >}}: the target value minus the source value. A negative value means the target has less than the source.
+    - {{< ui >}}% Difference{{< /ui >}}: the same difference as a percentage of the source value.
 6. Configure the detection method, schedule, and notifications as described in [Configure monitor](#configure-monitor).
 
 The {{< ui >}}Preview Monitor Evaluation{{< /ui >}} panel shows the identified source and target, along with a preview of the selected metric.
@@ -286,11 +286,6 @@ When the metric type is {{< ui >}}Custom SQL{{< /ui >}}, supply one query for th
 ### Evaluation
 
 The difference between the source and the target is recorded as its own metric, so a source to target monitor is evaluated by the same detection methods as any other Data Observability monitor, including anomaly detection. Both sides are measured on a synchronized schedule, so the two values are captured at the same time rather than following each warehouse's default collection cadence.
-
-The following conditions apply:
-
-- The comparison runs when both the source and the target measurements succeed. If either measurement fails, the monitor skips that evaluation.
-- The source and target measurements must be captured within 30 minutes of each other. If the gap between them is larger, the monitor skips that evaluation.
 
 ## Example monitors
 
