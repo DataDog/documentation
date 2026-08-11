@@ -15,4 +15,9 @@ describe('isSitemapPage', () => {
   it('excludes the root redirect stub', () => {
     expect(isSitemapPage('https://docs.datadoghq.com/')).toBe(false);
   });
+
+  it('excludes the build-time metadata sidecars', () => {
+    expect(isSitemapPage('https://docs.datadoghq.com/pages-index.json')).toBe(false);
+    expect(isSitemapPage('https://docs.datadoghq.com/llms-index.json')).toBe(false);
+  });
 });

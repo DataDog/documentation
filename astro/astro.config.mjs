@@ -9,6 +9,13 @@ import { realpathSync } from "node:fs";
 
 import { LOCALES } from "./src/lib/i18n/locale.ts";
 import { isSitemapPage } from "./src/lib/sitemap/sitemapFilter.ts";
+import {
+  deriveSiteUrl,
+  IS_PROXIED,
+  PROXY_PORT,
+} from "./src/lib/site/siteUrl.ts";
+import { pagesJson } from "./src/integrations/pagesJson.ts";
+import { llmsTxt } from "./src/integrations/llmsTxt.ts";
 
 const websitesModules = realpathSync(
   fileURLToPath(
@@ -18,19 +25,7 @@ const websitesModules = realpathSync(
 const hugoSite = fileURLToPath(new URL("../hugo", import.meta.url));
 const astroSite = fileURLToPath(new URL(".", import.meta.url));
 
-const proxied = process.env.PROXIED === "1";
-const proxyPort = 1314;
-
-function deriveSiteUrl() {
-  const env = process.env.CI_ENVIRONMENT_NAME;
-  if (env === "preview") {
-    return `https://docs-staging.datadoghq.com/${process.env.BRANCH}`;
-  }
-  if (env === "live") {
-    return "https://docs.datadoghq.com";
-  }
-  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:4321";
-}
+const hugoDevPort = 1313;
 
 // The Hugo docs site may be on a different origin than the Astro site in local
 // dev (Hugo: 1313, Astro: 4321). In CI and proxied dev they share an origin.
@@ -42,7 +37,9 @@ function deriveHugoDocsUrl() {
   if (env === "live") {
     return "https://docs.datadoghq.com";
   }
-  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:1313";
+  return IS_PROXIED
+    ? `http://localhost:${PROXY_PORT}`
+    : `http://localhost:${hugoDevPort}`;
 }
 
 export default defineConfig({
@@ -64,6 +61,13 @@ export default defineConfig({
       filenameBase: "api/sitemap",
       filter: isSitemapPage,
     }),
+    // Emits dist/client/pages.json after the build by hashing each emitted .md
+    // from disk (no page body is built twice). Must come after sitemap so the
+    // sidecar is deleted only once every build:done consumer has run.
+    pagesJson(),
+    // Emits dist/client/llms.txt and every section detail file after the build,
+    // from the llms-index.json sidecar. Same reasoning as pagesJson for ordering.
+    llmsTxt(),
   ],
   // The dev toolbar injects its own DOM (extra <h1>s, a fixed app-bar) into the
   // dev server, which pollutes browser-test selectors and screenshots. Disabled
@@ -87,9 +91,9 @@ export default defineConfig({
       fs: {
         allow: [astroSite, hugoSite, websitesModules],
       },
-      ...(proxied && {
-        origin: `http://localhost:${proxyPort}`,
-        hmr: { clientPort: proxyPort },
+      ...(IS_PROXIED && {
+        origin: `http://localhost:${PROXY_PORT}`,
+        hmr: { clientPort: PROXY_PORT },
       }),
     },
     define: {

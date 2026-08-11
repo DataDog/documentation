@@ -1,55 +1,104 @@
+/**
+ * The llms.txt build seam: the `llms-index.json` route emits the structure
+ * sidecar inside Vite, and the `llmsTxt` integration turns it into files after
+ * the build. This covers the route end of that seam — that what it serves is a
+ * valid, site-free sidecar the tree builder can consume. Writing the files is
+ * covered in `src/integrations/llmsTxt.test.ts`.
+ */
+
 import { describe, it, expect, vi } from 'vitest';
+import { LlmsIndexSchema } from '@lib/pagesListing/types';
+import type { PlaintextPage, PlaintextPageSource } from '@lib/pagesListing/types';
+import { buildLlmsTree } from '@lib/pagesListing/llmsTree';
 
-vi.mock('@lib/api/viewsBuilder', () => ({
-  getCategoriesView: vi.fn(async () => [
+function stubPage(
+  urlPath: string,
+  title: string,
+  extra: Partial<PlaintextPage['metadata']> = {},
+): PlaintextPage {
+  return {
+    urlPath,
+    metadata: { title, description: '', breadcrumbs: ['Docs'], isPrivate: false, ...extra },
+  };
+}
+
+const stubSource: PlaintextPageSource = {
+  title: 'API Reference',
+  listRootPages: async () => [
+    stubPage('/api/latest.md', 'API Reference', { description: 'Reference docs.' }),
+  ],
+  listSections: async () => [
     {
-      slug: 'action-connection',
-      name: 'Action Connection',
-      description: '',
-      operations: [
-        { operationId: 'GetConnection', summary: 'Get a connection', slug: 'get-a-connection', menuOrder: 1, version: 'v2', method: 'GET' },
+      title: 'Metrics',
+      llmsTxtPath: '/api/latest/metrics/llms.txt',
+      pages: [
+        stubPage('/api/latest/metrics.md', 'Metrics', { description: 'Metric endpoints.' }),
+        stubPage('/api/latest/metrics/get-a-metric.md', 'Get a metric', { description: 'Fetch a metric.' }),
+        stubPage('/api/latest/metrics/secret.md', 'Secret op', { isPrivate: true }),
       ],
-      deprecated: false,
     },
-    {
-      slug: 'aws-integration',
-      name: 'AWS Integration',
-      description: '',
-      operations: [
-        { operationId: 'CreateRole', summary: 'Create role', slug: 'create-role', menuOrder: 1, version: 'v1', method: 'POST' },
-      ],
-      deprecated: false,
-    },
-  ]),
-}));
+  ],
+};
 
-const { GET } = await import('../../src/pages/llms.txt.ts');
+vi.mock('@lib/pagesListing/pageSources', () => ({ pageSources: [stubSource] }));
 
-describe('GET /llms.txt', () => {
-  const ctx = { site: new URL('https://docs.datadoghq.com') } as Parameters<typeof GET>[0];
+const { GET: sidecarGET } = await import('../../src/pages/llms-index.json.ts');
 
-  it('returns text/plain with utf-8', async () => {
-    const res = (await GET(ctx)) as Response;
-    expect(res.headers.get('Content-Type')).toBe('text/plain; charset=utf-8');
+const SITE = 'https://docs.datadoghq.com';
+
+const call = () => sidecarGET({} as Parameters<typeof sidecarGET>[0]) as Promise<Response>;
+
+async function readSidecar() {
+  return LlmsIndexSchema.parse(JSON.parse(await (await call()).text()));
+}
+
+describe('GET /llms-index.json (structure sidecar)', () => {
+  it('returns application/json', async () => {
+    const res = await call();
+    expect(res.headers.get('Content-Type')).toBe('application/json; charset=utf-8');
   });
 
-  it('starts with the API Reference heading', async () => {
-    const res = (await GET(ctx)) as Response;
-    const body = await res.text();
-    expect(body.startsWith('## Datadog API Reference\n\n')).toBe(true);
+  it('serves a payload that validates against LlmsIndexSchema', async () => {
+    await expect(readSidecar()).resolves.toBeDefined();
   });
 
-  it('includes a heading per category and a bullet per operation', async () => {
-    const res = (await GET(ctx)) as Response;
-    const body = await res.text();
-    expect(body).toContain('### Action Connection');
-    expect(body).toMatch(/- \[Get a connection\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/action-connection\/get-a-connection\.md\)/);
-    expect(body).toContain('### AWS Integration');
-    expect(body).toMatch(/- \[Create role\]\(https:\/\/docs\.datadoghq\.com\/api\/latest\/aws-integration\/create-role\.md\)/);
+  it('needs no site: the sidecar holds url paths, not absolute URLs', async () => {
+    const body = await (await call()).text();
+    expect(body).not.toMatch(/https?:/);
   });
 
-  it('throws when site is not configured', async () => {
-    const noSite = {} as Parameters<typeof GET>[0];
-    await expect(async () => await GET(noSite)).rejects.toThrow(/site/);
+  it('carries each source heading, its root pages, and its sections', async () => {
+    const [source] = await readSidecar();
+    expect(source.title).toBe('API Reference');
+    expect(source.rootPages.map((page) => page.urlPath)).toEqual(['/api/latest.md']);
+    expect(source.sections.map((section) => section.llmsTxtPath)).toEqual([
+      '/api/latest/metrics/llms.txt',
+    ]);
+  });
+});
+
+describe('tree built from the served sidecar', () => {
+  it('produces the top-level index with root page and section links', async () => {
+    const { index } = buildLlmsTree(await readSidecar(), SITE);
+    expect(index.startsWith('# Datadog documentation\n')).toBe(true);
+    expect(index).toContain('## API Reference\n');
+    expect(index).toContain(`- [API Reference](${SITE}/api/latest.md): Reference docs.`);
+    expect(index).toContain(`- [Metrics](${SITE}/api/latest/metrics/llms.txt): Metric endpoints.`);
+  });
+
+  it('produces a detail file per section, listing its pages', async () => {
+    const { detailFiles } = buildLlmsTree(await readSidecar(), SITE);
+    const metrics = detailFiles.get('/api/latest/metrics/llms.txt');
+    expect(metrics).toBeDefined();
+    expect(metrics!.startsWith('# Metrics\n')).toBe(true);
+    expect(metrics).toContain(`- [Metrics](${SITE}/api/latest/metrics.md)`);
+    expect(metrics).toContain(`- [Get a metric](${SITE}/api/latest/metrics/get-a-metric.md): Fetch a metric.`);
+  });
+
+  it('excludes private pages from the detail file', async () => {
+    const { detailFiles } = buildLlmsTree(await readSidecar(), SITE);
+    const metrics = detailFiles.get('/api/latest/metrics/llms.txt');
+    expect(metrics).not.toContain('Secret op');
+    expect(metrics).not.toContain('secret.md');
   });
 });
