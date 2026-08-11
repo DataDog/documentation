@@ -3080,10 +3080,10 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
-    - name: Prefill Form Fields
-      url: actions/forms/prefill/
+    - name: Guides
+      url: actions/forms/guide/
       parent: forms
-      identifier: forms_prefill
+      identifier: forms_guides
       weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/

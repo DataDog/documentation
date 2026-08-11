@@ -1,6 +1,6 @@
 ---
-title: Prefill form fields
-description: Prefill form fields with default values or URL query parameters to reduce the work respondents have to do.
+title: Prefill Form Fields with URL Query Parameters
+description: Prefill form fields with URL query parameters so respondents skip questions the system already has answers to, including value formats, section-scoped fields, and precedence rules.
 further_reading:
   - link: /actions/forms/
     tag: Documentation
@@ -12,14 +12,11 @@ further_reading:
 
 ## Overview
 
-You can prefill a form's fields so respondents start with answers already filled in. Forms supports two approaches:
+Prefill a form's fields with URL query parameters passed in the form's link, so respondents don't have to answer questions the system, or the [workflow][2] that generated their link, already knows the answer to.
 
-- **Default values**: Set the same value for every respondent. Configured on the component in the form editor. See [Default values][1].
-- **URL query parameters**: Set values that vary by respondent or context, passed in the form's link. Useful when a [workflow][2] generates the link and already knows some of the answers.
+Forms also supports [default values][1], which set the same answer for every respondent instead of varying by link. When both are present, a query parameter takes precedence over a component's default value.
 
-When both are present, a query parameter takes precedence over a component's default value.
-
-## Prefill with URL query parameters
+## Query parameters
 
 Add a `field_` parameter to the form URL for each field you want to prefill:
 
@@ -61,34 +58,35 @@ Each field type accepts a specific value format:
 |-----------|--------------|
 | Short answer, Paragraph | Any string. |
 | Number input | A number, such as `42`. Fields restricted to whole numbers reject decimal values. |
-| Dropdown, Radio buttons, Rating | A single option value. Must match one of the component's options. |
 | Toggle | `true` or `false`, in lowercase. Any other value is treated as `false`. |
-| Checkboxes, Ranking | A comma-separated list of option values, such as `field_tags=a,b,c`. |
-| Date picker | An ISO 8601 timestamp. See [Date values][4]. |
+| Dropdown, Radio buttons, Rating | A single option value. See [Use option values, not labels](#use-option-values-not-labels). |
+| Checkboxes, Ranking | A comma-separated list of option values, such as `field_tags=a,b,c`. See [Use option values, not labels](#use-option-values-not-labels) and [Ranking order](#ranking-order). |
+| Date picker | An ISO 8601 timestamp. See [Date values](#date-values). |
 
 Image components cannot be prefilled.
 
-#### Use option values, not labels
-
+{{% collapse-content title="Use option values, not labels" level="h4" id="use-option-values-not-labels" %}}
 For Dropdown, Radio buttons, Rating, Checkboxes, and Ranking, the value in the URL must match the option's underlying **value**. It does not match the label shown to the respondent. To view or change option values, click the component, then click {{< ui >}}Advanced{{< /ui >}}.
 
 For Rating components, the value is the number of the option, such as `1` through `5`. Changing a rating's labels does not change its underlying values.
+{{% /collapse-content %}}
 
-#### Date values
-
+{{% collapse-content title="Date values" level="h4" id="date-values" %}}
 Date picker fields store a full ISO 8601 timestamp, not a plain date. URL-encode the colons as `%3A`:
 
 ```text
 ?field_due_date=2026-08-10T14%3A30%3A00.000Z
 ```
 
-#### Ranking order
+{{% /collapse-content %}}
 
+{{% collapse-content title="Ranking order" level="h4" id="ranking-order" %}}
 For Ranking components, the order of the comma-separated values sets the ranked order. In the following example, `latency` is ranked first:
 
 ```text
 ?field_priorities=latency,cost,reliability
 ```
+{{% /collapse-content %}}
 
 ### Values that are not applied
 
@@ -107,22 +105,10 @@ Forms saves a respondent's in-progress answers as a draft. If a respondent has a
 
 A draft is saved after the respondent edits a field. If you send a corrected link to someone who opened the earlier link but did not answer anything, the corrected values are applied. If they entered an answer, the corrected link has no visible effect until they click {{< ui >}}Clear form{{< /ui >}} and reload it.
 
-## Default values
-
-A default value prefills the same answer for every respondent. For example, you might default a rating field to `3` so respondents adjust it only when their answer differs.
-
-To set a default value:
-1. Click a component to open its editor panel.
-1. Click {{< ui >}}Advanced{{< /ui >}}.
-1. Enter a value in the {{< ui >}}Default Value{{< /ui >}} field.
-
-Default values are available on Short answer, Paragraph, Number input, Dropdown, Rating, and Toggle components. As with query parameters, the value must match the option's underlying value rather than its label.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: #default-values
+[1]: /actions/forms/components/#default-values
 [2]: /actions/workflows/
 [3]: /actions/forms/components/#sections
-[4]: #date-values
