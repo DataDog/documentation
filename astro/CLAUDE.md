@@ -8,6 +8,10 @@ The scope of this new Astro site is just the API docs. In Hugo, the HTML for the
 
 Prompts often refer to the "Hugo docs". This refers either to the general Hugo site setup (footer, header, etc.) or the API docs content specifically, depending on the context of the request.
 
+## Future site scope
+
+This site will eventually have tens of thousands of pages, with most of them rendered using SSR (the API docs are an unusual exception since they're rendered statically). When designing solutions, keep this in mind, since many solutions are not performant at the scale of 30K+ pages being rendered.
+
 ## Disallowed actions: Do not do these
 
 - Don't run the prod build. Instead, recommend running the prod build to the user as a next or final step.
