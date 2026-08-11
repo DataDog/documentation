@@ -262,7 +262,7 @@ Flatten an array of key-value objects into individual attributes, creating one a
 - {{< ui >}}Array path{{< /ui >}}: `httpRequest.headers`
 - {{< ui >}}Key attribute{{< /ui >}}: `name`
 - {{< ui >}}Value attribute{{< /ui >}}: `value`
-- {{< ui >}}Target attribute{{< /ui >}}: Leave blank to add the extracted attributes at the root level of the log.
+- {{< ui >}}Target attribute{{< /ui >}}: (optional) leave blank to add the extracted attributes at the root level of the log
 
 **Result:**
 
@@ -305,7 +305,7 @@ Use the [Datadog Log Pipeline API endpoint][100] with the following array proces
 | `operation.target`              | String  | No       | Attribute that receives the extracted key-value pairs. If not specified, the extracted attributes are added at the root level of the log. |
 | `operation.key_to_extract`      | String  | Yes      | Key of the attribute in each array element that holds the name to use for the extracted attribute. |
 | `operation.value_to_extract`    | String  | Yes      | Key of the attribute in each array element that holds the value to use for the extracted attribute. |
-| `operation.override_on_conflict`| Boolean | No       | Whether to override the target attribute if it's already set. Default: `false`.               |
+| `operation.override_on_conflict`| Boolean | No       | Whether to override the target attribute if it is already set. Default: `false`.              |
 
 [100]: /api/v1/logs-pipelines/
 {{% /tab %}}
