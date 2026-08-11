@@ -228,7 +228,7 @@ To stop enriching logs without deleting anything, disable the tables on the [Thr
 [2]: /security/cloud_siem/ingest_and_enrich/threat_intelligence/
 [3]: /security/cloud_siem/triage_and_investigate/ioc_explorer/
 [4]: /reference_tables/
-[5]: https://app.datadoghq.com/organization-settings/api-keys
-[6]: https://app.datadoghq.com/organization-settings/application-keys
+[5]: /account_management/api-app-keys/#api-keys
+[6]: /account_management/api-app-keys/#application-keys
 [7]: https://app.datadoghq.com/security/configuration/threat-intel
 [8]: https://app.datadoghq.com/reference-tables
