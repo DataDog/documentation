@@ -80,8 +80,15 @@ This guide walks you through making local changes and committing them for CI to 
    - Enable [Early Flake Detection][1].
    - Enable [Auto Test Retries][4].
    - Disable [Test Impact Analysis][13] so it does not skip the validation test.
-8. Enable [Flaky Test Policies][6], then create a quarantine policy and set its branch rule to `validate-test-optimization`.
-9. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
+8. Return to the repository settings. [Flaky Test Policies][6] apply to every test service in the repository, not to an individual test service. To limit the validation policy's impact, configure it only for the `validate-test-optimization` branch. Under {{< ui >}}Flaky Test Policies{{< /ui >}}, click {{< ui >}}Configure{{< /ui >}} for {{< ui >}}Quarantine{{< /ui >}}.
+
+   {{< img src="pr_gates/setup/flaky_test_policies_quarantine.png" alt="Repository settings showing the Configure button for the Quarantine flaky test policy" style="width:100%" >}}
+
+9. Expand {{< ui >}}Quarantine{{< /ui >}}, then enable the second auto-rule: **If an Active flaky test flakes in the `validate-test-optimization` branch, then move to Quarantined**. Click {{< ui >}}Save{{< /ui >}}.
+
+   {{< img src="pr_gates/setup/quarantine_branch_policy.png" alt="Quarantine policy configured for active flaky tests on the validate-test-optimization branch" style="width:100%" >}}
+
+10. Create a [New Flaky Test PR Gate][11] and scope it to the repository you are validating.
 
    {{< img src="pr_gates/setup/pr_gate_scope.png" alt="New flaky PR gate scope" style="width:100%" >}}
 
