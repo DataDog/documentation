@@ -56,10 +56,11 @@ This guide walks you through making local changes and committing them for CI to 
    git checkout -b validate-test-optimization
    ```
 
-3. Create and push an empty commit to trigger a test execution. Datadog detects the `validate-test-optimization` service when the tests report under that name:
+3. Commit the CI configuration change that sets `DD_SERVICE`, then push the validation branch to trigger a test execution. Datadog detects the `validate-test-optimization` service when the tests report under that name:
 
    ```bash
-   git commit --allow-empty -m "Detect Test Optimization validation service"
+   git add -A
+   git commit -m "Configure Test Optimization validation service"
    git push -u origin validate-test-optimization
    ```
 
