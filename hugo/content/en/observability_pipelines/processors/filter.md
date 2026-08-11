@@ -43,7 +43,7 @@ For [component metrics][3] and [processor buffer metrics][4] emitted by all proc
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-[6]: https://docs.datadoghq.com/tracing/trace_explorer/query_syntax/
+[6]: /tracing/trace_explorer/query_syntax/
 
 
 ## Further reading
