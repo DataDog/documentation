@@ -68,7 +68,6 @@ Agent `v7.59+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
@@ -115,7 +114,6 @@ Agent `v7.75+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
@@ -162,7 +160,6 @@ Agent `v7.72+` is required.
          - "tag_key2:tag_value2"
        min_collection_interval: 120 # set min_collection_interval at the instance level
      ## optional configs:
-     #
      # max_ttl: 30 # max traceroute TTL, default is 30
      # timeout: 1000 # timeout in milliseconds per hop, default is 1s
      # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack, syn_socket (Windows only)
@@ -208,7 +205,6 @@ To enable Network Path with Kubernetes using Helm, add the following to your `va
               - "tag_key2:tag_value2"
             min_collection_interval: 120 # set min_collection_interval at the instance level
           ## optional configs:
-          #
           # max_ttl: 30 # max traceroute TTL, default is 30
           # timeout: 1000 # timeout in milliseconds per hop, default is 1s
           # tcp_method: syn # TCP probing method, default is syn, options: syn, sack, prefer_sack
