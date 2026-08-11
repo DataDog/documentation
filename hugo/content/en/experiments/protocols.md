@@ -27,7 +27,7 @@ Use protocols to:
 
 ## Prerequisites
 
-<div class="alert alert-info">You must have the appropriate <a href="/account_management/rbac/permissions/#product-analytics">Product Analytics</a> permissions to work with protocols. The <code>product_analytics_experiments_read</code> permission grants read access. The <code>product_analytics_experiments_write</code> permission grants access to create, edit, publish, archive, and delete protocols.</div>
+**Note**: You must have the appropriate <a href="/account_management/rbac/permissions/#product-analytics">Product Analytics</a> permissions to work with protocols. The <code>product_analytics_experiments_read</code> permission grants read access. The <code>product_analytics_experiments_write</code> permission grants access to create, edit, publish, archive, and delete protocols.
 
 Before you begin, make sure you have:
 
@@ -249,4 +249,4 @@ You cannot delete a protocol that experiments reference. Archive it instead.
 [7]: /experiments/metric_property_breakouts
 [8]: https://app.datadoghq.com/product-analytics/experiments
 [9]: /experiments/plan_and_launch_experiments
-[10]: /experiments/protocols/#configure-the-protocol
+[10]: #configure-the-protocol
