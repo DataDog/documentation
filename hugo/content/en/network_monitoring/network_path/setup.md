@@ -336,28 +336,32 @@ Agent `v7.73+` is required.
     ```yaml
     network_path:
       connections_monitoring:
-        ## @param enabled - bool - required - default:false
-        ## Enable network path collection
+        ## @param enabled - boolean - optional - default: false
+        ## @env DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED - boolean - optional - default: false
+        ## Enables Network Path Dynamic Test for monitoring network connections via Network Path.
         #
         enabled: true
       collector:
-        ## @param workers - int - optional - default:4
-        ## Number of workers that can collect paths in parallel
-        ## Recommendation: leave at default
+        ## @param workers - integer - optional - default: 4
+        ## @env DD_NETWORK_PATH_COLLECTOR_WORKERS - integer - optional - default: 4
+        ## The number of concurrent workers available for network path execution.
+        ## Recommendation: leave at default.
         #
         # workers: <NUMBER OF WORKERS> # default 4
 
-        #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
-        # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+        ## @param pathtest_interval - string - optional - default: "30m"
+        ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
+        ## The traceroute run interval for monitored connections.
         #
-        # pathtest_interval: 10m
+        # pathtest_interval: "30m"
 
-        # @param pathtest_ttl - integer - optional - default: 35m
-        # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-        # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-        # The TTL is reset each time the connection is seen again.
+        ## @param pathtest_ttl - string - optional - default: "70m"
+        ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
+        ## The duration (time-to-live) a connection is monitored after it is last seen.
+        ## The TTL is reset each time the connection is seen again.
+        ## With a 30-minute interval, 70 minutes allows a test to run three times (t0, t30, t60).
         #
-        # pathtest_ttl: 35m
+        # pathtest_ttl: "70m"
 
         ## @param monitor_ip_without_domain - boolean - optional - default: false
         ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
@@ -365,9 +369,11 @@ Agent `v7.73+` is required.
         #
         # monitor_ip_without_domain: false
 
-        ## @param filters - list - optional
-        ## Include or exclude specific domains or IP ranges from dynamic monitoring.
-        ## Filters are applied sequentially, with later filters taking precedence.
+        ## @param filters - list of object - optional - default: []
+        ## @env DD_NETWORK_PATH_COLLECTOR_FILTERS - JSON list of object - optional - default: []
+        ## Custom filters to include or exclude specific destinations from network path collection.
+        ## Filters support matching by domain (with wildcard or regex) and by IP address (single IP or CIDR notation).
+        ## Filters are applied sequentially, the last matching filter takes precedence.
         ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
         #
         # filters:
@@ -413,28 +419,32 @@ Agent `v7.73+` is required.
    ```yaml
    network_path:
      connections_monitoring:
-       ## @param enabled - bool - required - default:false
-       ## Enable network path collection
+       ## @param enabled - boolean - optional - default: false
+       ## @env DD_NETWORK_PATH_CONNECTIONS_MONITORING_ENABLED - boolean - optional - default: false
+       ## Enables Network Path Dynamic Test for monitoring network connections via Network Path.
        #
        enabled: true
      collector:
-       ## @param workers - int - optional - default:4
-       ## Number of workers that can collect paths in parallel
-       ## Recommendation: leave at default
+       ## @param workers - integer - optional - default: 4
+       ## @env DD_NETWORK_PATH_COLLECTOR_WORKERS - integer - optional - default: 4
+       ## The number of concurrent workers available for network path execution.
+       ## Recommendation: leave at default.
        #
        # workers: <NUMBER OF WORKERS> # default 4
 
-       #@env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - integer - optional - default: 10m
-       # The `pathtest_interval` refers to the traceroute run interval for monitored connections.
+       ## @param pathtest_interval - string - optional - default: "30m"
+       ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_INTERVAL - string - optional - default: "30m"
+       ## The traceroute run interval for monitored connections.
        #
-       # pathtest_interval: 10m
+       # pathtest_interval: "30m"
 
-       # @param pathtest_ttl - integer - optional - default: 35m
-       # @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - integer - optional - default: 35m
-       # The `pathtest_ttl` refers to the duration (time-to-live) a connection will be monitored when it's not seen anymore.
-       # The TTL is reset each time the connection is seen again.
+       ## @param pathtest_ttl - string - optional - default: "70m"
+       ## @env DD_NETWORK_PATH_COLLECTOR_PATHTEST_TTL - string - optional - default: "70m"
+       ## The duration (time-to-live) a connection is monitored after it is last seen.
+       ## The TTL is reset each time the connection is seen again.
+       ## With a 30-minute interval, 70 minutes allows a test to run three times (t0, t30, t60).
        #
-       # pathtest_ttl: 35m
+       # pathtest_ttl: "70m"
 
        ## @param monitor_ip_without_domain - boolean - optional - default: false
        ## @env DD_NETWORK_PATH_COLLECTOR_MONITOR_IP_WITHOUT_DOMAIN - boolean - optional - default: false
@@ -442,9 +452,11 @@ Agent `v7.73+` is required.
        #
        # monitor_ip_without_domain: false
 
-       ## @param filters - list - optional
-       ## Include or exclude specific domains or IP ranges from dynamic monitoring.
-       ## Filters are applied sequentially, with later filters taking precedence.
+       ## @param filters - list of object - optional - default: []
+       ## @env DD_NETWORK_PATH_COLLECTOR_FILTERS - JSON list of object - optional - default: []
+       ## Custom filters to include or exclude specific destinations from network path collection.
+       ## Filters support matching by domain (with wildcard or regex) and by IP address (single IP or CIDR notation).
+       ## Filters are applied sequentially, the last matching filter takes precedence.
        ## See the "Filter syntax" section for details and examples: https://docs.datadoghq.com/network_monitoring/network_path/setup/#filter-syntax
        #
        # filters:
