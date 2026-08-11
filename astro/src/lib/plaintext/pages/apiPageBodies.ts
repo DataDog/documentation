@@ -1,10 +1,11 @@
 /**
- * Shared plaintext body builders for the API `.md` pages.
+ * Plaintext body builders for the API `.md` pages, one per route.
  *
- * Each `.md.ts` route and the pages.json API source both call these, so the
- * plaintext that is served and the plaintext that is hashed for `pages.json`
- * come from one place and cannot drift. Keep these byte-identical to what the
- * routes previously produced inline.
+ * Extracted from the routes so each route file is just its params plumbing plus
+ * a body call, and so the static special pages' source markdown sits together
+ * rather than inline in three separate routes. Each builder is the single
+ * producer of its page's bytes: `pages.json` hashes the emitted files from disk,
+ * so nothing else renders these bodies.
  */
 
 import type { Node as MarkdocNode } from "@markdoc/markdoc";

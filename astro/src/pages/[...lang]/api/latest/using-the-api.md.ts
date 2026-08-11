@@ -2,9 +2,8 @@ export const prerender = true;
 /**
  * AST-based plaintext rendering of the using-the-api page.
  *
- * The static source markdown is parsed into a Markdoc AST and re-emitted via
- * `format()`. The body is built by the shared `usingTheApiBody` so the served
- * plaintext and the pages.json hash come from one place.
+ * The static source markdown lives in `apiPageBodies`, where it is parsed into a
+ * Markdoc AST and re-emitted via `format()` as `usingTheApiBody`.
  */
 
 import type { APIRoute, GetStaticPaths } from 'astro';

@@ -1,8 +1,7 @@
-import type {
-  PlaintextPage,
-  PlaintextPageSource,
-  PlaintextSection,
-} from "./types";
+import type { LlmsIndex, PlaintextPage, PlaintextSection } from "./types";
+// Relative, not `@lib/...`: this module is imported by the `llmsTxt` integration,
+// which runs in Node during build orchestration where Vite aliases do not resolve.
+import { absoluteUrl } from "../site/siteUrl";
 
 /**
  * Firm ceiling on any single generated llms.txt file's length, mirroring
@@ -29,25 +28,29 @@ export interface LlmsTree {
  * (split into numbered parts when a section exceeds `hardCharLimit`). Private
  * pages are dropped everywhere, and sections left empty by that filter are
  * omitted from both the index and the detail files. This is the single place
- * llms.txt honors privacy, shared with `pages.json` through the same sources.
+ * llms.txt honors privacy.
+ *
+ * Takes the resolved `llms-index.json` sidecar rather than the page sources, so
+ * the whole tree — every file's path and its contents — is produced by one call
+ * in the `llmsTxt` integration after the build. There is no separate path
+ * enumeration step that has to agree with this one about where the size-driven
+ * split boundaries fall.
  */
-export async function buildLlmsTree(
-  sources: PlaintextPageSource[],
-  siteOrigin: string,
+export function buildLlmsTree(
+  llmsIndex: LlmsIndex,
+  site: string | URL,
   hardCharLimit: number = DEFAULT_HARD_CHAR_LIMIT,
-): Promise<LlmsTree> {
-  if (!siteOrigin) {
-    throw new Error(
-      "buildLlmsTree: siteOrigin is required to emit canonical links.",
-    );
+): LlmsTree {
+  if (!site) {
+    throw new Error("buildLlmsTree: site is required to emit canonical links.");
   }
 
   const detailFiles = new Map<string, string>();
   const indexLines: string[] = [INTRO, ""];
 
-  for (const source of sources) {
-    const rootPages = (await source.listRootPages()).filter(isVisible);
-    const sections = (await source.listSections())
+  for (const source of llmsIndex) {
+    const rootPages = source.rootPages.filter(isVisible);
+    const sections = source.sections
       .map((section) => ({
         ...section,
         pages: section.pages.filter(isVisible),
@@ -59,15 +62,15 @@ export async function buildLlmsTree(
 
     indexLines.push(`## ${source.title}`, "");
     for (const page of rootPages) {
-      indexLines.push(pageLine(page, siteOrigin));
+      indexLines.push(pageLine(page, site));
     }
     for (const section of sections) {
-      indexLines.push(sectionLink(section, siteOrigin));
+      indexLines.push(sectionLink(section, site));
     }
     indexLines.push("");
 
     for (const section of sections) {
-      addSectionDetailFiles(section, siteOrigin, hardCharLimit, detailFiles);
+      addSectionDetailFiles(section, site, hardCharLimit, detailFiles);
     }
   }
 
@@ -83,19 +86,19 @@ function linkLine(title: string, url: string, description: string): string {
   return desc ? `- [${title}](${url}): ${desc}` : `- [${title}](${url})`;
 }
 
-function pageLine(page: PlaintextPage, siteOrigin: string): string {
+function pageLine(page: PlaintextPage, site: string | URL): string {
   return linkLine(
     page.metadata.title || "Untitled",
-    `${siteOrigin}${page.urlPath}`,
+    absoluteUrl(page.urlPath, site),
     page.metadata.description || "",
   );
 }
 
 /** Index link for a section, labeled with its overview (first) page's description. */
-function sectionLink(section: PlaintextSection, siteOrigin: string): string {
+function sectionLink(section: PlaintextSection, site: string | URL): string {
   return linkLine(
     section.title,
-    `${siteOrigin}${section.llmsTxtPath}`,
+    absoluteUrl(section.llmsTxtPath, site),
     section.pages[0]?.metadata.description || "",
   );
 }
@@ -103,11 +106,11 @@ function sectionLink(section: PlaintextSection, siteOrigin: string): string {
 function detailContents(
   title: string,
   pages: PlaintextPage[],
-  siteOrigin: string,
+  site: string | URL,
 ): string {
   const lines = [`# ${title}`, ""];
   for (const page of pages) {
-    lines.push(pageLine(page, siteOrigin));
+    lines.push(pageLine(page, site));
   }
   return lines.join("\n") + "\n";
 }
@@ -118,11 +121,11 @@ function partPath(llmsTxtPath: string, partNumber: number): string {
 
 function addSectionDetailFiles(
   section: PlaintextSection,
-  siteOrigin: string,
+  site: string | URL,
   hardCharLimit: number,
   detailFiles: Map<string, string>,
 ): void {
-  const full = detailContents(section.title, section.pages, siteOrigin);
+  const full = detailContents(section.title, section.pages, site);
   if (full.length <= hardCharLimit) {
     detailFiles.set(section.llmsTxtPath, full);
     return;
@@ -133,15 +136,15 @@ function addSectionDetailFiles(
   const chunks = chunkPagesToFit(
     section.title,
     section.pages,
-    siteOrigin,
+    site,
     hardCharLimit,
   );
   const indexLines = [`# ${section.title}`, ""];
   chunks.forEach((chunk, i) => {
     const partNumber = i + 1;
     const path = partPath(section.llmsTxtPath, partNumber);
-    detailFiles.set(path, detailContents(section.title, chunk, siteOrigin));
-    indexLines.push(`- [Part ${partNumber}](${siteOrigin}${path})`);
+    detailFiles.set(path, detailContents(section.title, chunk, site));
+    indexLines.push(`- [Part ${partNumber}](${absoluteUrl(path, site)})`);
   });
   detailFiles.set(section.llmsTxtPath, indexLines.join("\n") + "\n");
 }
@@ -155,7 +158,7 @@ function addSectionDetailFiles(
 function chunkPagesToFit(
   title: string,
   pages: PlaintextPage[],
-  siteOrigin: string,
+  site: string | URL,
   limit: number,
 ): PlaintextPage[][] {
   const chunks: PlaintextPage[][] = [];
@@ -165,7 +168,7 @@ function chunkPagesToFit(
     const trial = [...current, page];
     if (
       current.length > 0 &&
-      detailContents(title, trial, siteOrigin).length > limit
+      detailContents(title, trial, site).length > limit
     ) {
       chunks.push(current);
       current = [page];

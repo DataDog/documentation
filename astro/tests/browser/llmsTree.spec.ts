@@ -1,10 +1,19 @@
 import { test, expect } from '@playwright/test';
 
-// Route-resolution coverage: proves the top-level /llms.txt and the
-// [...llmsSection]/llms.txt catch-all actually resolve through Astro's router
-// (and are not shadowed by [...slug].astro). Runs against the dev server, which
-// uses the live spec, so section slugs are discovered from the index itself.
+// Serving coverage for the post-build llms.txt tree: proves the files the
+// `llmsTxt` integration writes into dist/client are actually served as static
+// files at their URLs, and are not shadowed by [...slug].astro. Section slugs
+// are discovered from the index itself, so this tracks the live spec.
+//
+// llms.txt is a post-build artifact, so it does not exist under `astro dev` —
+// this needs the prod build (`playwright test` without USE_DEV_SERVER).
 test.describe('llms.txt tree routing', () => {
+  test.skip(
+    process.env.USE_DEV_SERVER === 'true',
+    'llms.txt is written by the post-build integration, which dev does not run',
+  );
+
+
   test('serves the index at /llms.txt', async ({ request }) => {
     const res = await request.get('/llms.txt');
     expect(res.status()).toBe(200);

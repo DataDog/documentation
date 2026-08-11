@@ -1,7 +1,7 @@
 import type { AstroConfig, AstroIntegration } from "astro";
 import { readFile, writeFile, rm } from "node:fs/promises";
 import { buildListingFromIndex } from "../lib/pagesListing/buildListingFromIndex";
-import type { PageIndexEntry } from "../lib/pagesListing/pageIndex";
+import type { PageIndexEntry } from "../lib/pagesListing/types";
 
 const SIDECAR = "pages-index.json";
 const OUTPUT = "pages.json";
@@ -49,7 +49,9 @@ export function pagesJson(): AstroIntegration {
           JSON.stringify(listing, null, 2),
           "utf8",
         );
-        await rm(sidecarUrl);
+        // `force` so a second build:done consumer removing it first, or a
+        // partially cleaned dist, cannot fail the build at its very last step.
+        await rm(sidecarUrl, { force: true });
 
         logger.info(
           `wrote ${OUTPUT} (${Object.keys(listing).length} pages) and removed ${SIDECAR}`,

@@ -64,6 +64,7 @@ export default getViteConfig({
       "src/components/**/tests/*.unit.test.ts",
       "src/lib/**/*.test.ts",
       "src/config/**/*.test.ts",
+      "src/integrations/**/*.test.ts",
     ],
   },
 });

@@ -3,10 +3,12 @@
  *
  * Root pages are the landing page and the three static special pages. Sections
  * are the API categories: each section holds its category overview page plus one
- * page per operation, and becomes its own detail `llms.txt`. Every `buildBody`
- * reuses the shared builders the `.md` routes serve. API docs carry no privacy
- * concept, so `isPrivate` is always `false`; content sources added later read
- * `private` from frontmatter.
+ * page per operation, and becomes its own detail `llms.txt`.
+ *
+ * Metadata only — no bodies. Each page's plaintext is produced by its own `.md`
+ * route during the build and hashed from disk afterwards, so this source cannot
+ * drift from what is served. API docs carry no privacy concept, so `isPrivate` is
+ * always `false`; content sources added later read `private` from frontmatter.
  */
 
 import type {
@@ -14,18 +16,14 @@ import type {
   PlaintextPageSource,
   PlaintextSection,
 } from "./types";
-import type { PageMetadata } from "./schema";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
-import {
-  apiLandingBody,
-  apiCategoryBody,
-  apiOperationBody,
-  usingTheApiBody,
-  scopesBody,
-  rateLimitsBody,
-} from "@lib/plaintext/pages/apiPageBodies";
 
+/**
+ * `pages.json` and `llms.txt` list the English pages only, even though the `.md`
+ * routes are emitted for every locale: the translations are the same pages, and
+ * machine consumers index one canonical copy.
+ */
 const LANG = "en" as const;
 
 const API_REFERENCE = "API Reference";
@@ -41,58 +39,42 @@ function firstLine(text: string): string {
   return "";
 }
 
-function landingPage(categories: ApiCategory[]): PlaintextPage {
-  return {
-    urlPath: "/api/latest.md",
-    metadata: {
-      title: API_REFERENCE,
-      description: "Reference documentation for the Datadog HTTP API.",
-      breadcrumbs: [...DOCS_CRUMB],
-      isPrivate: false,
-    },
-    buildBody: async () => apiLandingBody(categories, LANG),
-  };
-}
+const landingPage: PlaintextPage = {
+  urlPath: "/api/latest.md",
+  metadata: {
+    title: API_REFERENCE,
+    description: "Reference documentation for the Datadog HTTP API.",
+    breadcrumbs: [...DOCS_CRUMB],
+    isPrivate: false,
+  },
+};
 
-function staticSpecialPages(): PlaintextPage[] {
-  const specials: Array<{
-    slug: string;
-    title: string;
-    description: string;
-    body: string;
-  }> = [
-    {
-      slug: "using-the-api",
-      title: "Using the API",
-      description:
-        "How to use the Datadog HTTP API to access the platform programmatically.",
-      body: usingTheApiBody,
-    },
-    {
-      slug: "scopes",
-      title: "Authorization Scopes",
-      description: "Authorization scopes for OAuth clients.",
-      body: scopesBody,
-    },
-    {
-      slug: "rate-limits",
-      title: "Rate Limits",
-      description: "API rate limit policy, headers, and usage metrics.",
-      body: rateLimitsBody,
-    },
-  ];
-
-  return specials.map(({ slug, title, description, body }) => ({
-    urlPath: `/api/latest/${slug}.md`,
-    metadata: {
-      title,
-      description,
-      breadcrumbs: [...API_CRUMBS],
-      isPrivate: false,
-    },
-    buildBody: async () => body,
-  }));
-}
+const staticSpecialPages: PlaintextPage[] = [
+  {
+    slug: "using-the-api",
+    title: "Using the API",
+    description:
+      "How to use the Datadog HTTP API to access the platform programmatically.",
+  },
+  {
+    slug: "scopes",
+    title: "Authorization Scopes",
+    description: "Authorization scopes for OAuth clients.",
+  },
+  {
+    slug: "rate-limits",
+    title: "Rate Limits",
+    description: "API rate limit policy, headers, and usage metrics.",
+  },
+].map(({ slug, title, description }) => ({
+  urlPath: `/api/latest/${slug}.md`,
+  metadata: {
+    title,
+    description,
+    breadcrumbs: [...API_CRUMBS],
+    isPrivate: false,
+  },
+}));
 
 function categoryPage(category: ApiCategory): PlaintextPage {
   return {
@@ -103,10 +85,14 @@ function categoryPage(category: ApiCategory): PlaintextPage {
       breadcrumbs: [...API_CRUMBS],
       isPrivate: false,
     },
-    buildBody: async () => apiCategoryBody(category, LANG),
   };
 }
 
+/**
+ * The stub carries the operation's summary but not its description, so the full
+ * view is loaded for that. A missing view means there is no `.md` route to point
+ * at, so the page is skipped.
+ */
 async function operationPage(
   category: ApiCategory,
   operation: ApiOperationStub,
@@ -114,23 +100,19 @@ async function operationPage(
   const view = await getOperationView(category.slug, operation.slug, LANG);
   if (!view) return null;
 
-  const metadata: PageMetadata = {
-    title: view.summary,
-    description: firstLine(view.variants[0]?.description ?? ""),
-    breadcrumbs: [...API_CRUMBS, category.name],
-    isPrivate: false,
-  };
-
   return {
     urlPath: `/api/latest/${category.slug}/${operation.slug}.md`,
-    metadata,
-    buildBody: async () => apiOperationBody(view),
+    metadata: {
+      title: view.summary,
+      description: firstLine(view.variants[0]?.description ?? ""),
+      breadcrumbs: [...API_CRUMBS, category.name],
+      isPrivate: false,
+    },
   };
 }
 
 async function listRootPages(): Promise<PlaintextPage[]> {
-  const categories = await getCategoriesView(LANG);
-  return [landingPage(categories), ...staticSpecialPages()];
+  return [landingPage, ...staticSpecialPages];
 }
 
 async function listSections(): Promise<PlaintextSection[]> {

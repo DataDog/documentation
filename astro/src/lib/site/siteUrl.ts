@@ -1,13 +1,17 @@
 /**
- * Build-time site URL derivation, shared between `astro.config.mjs` (which sets
- * Astro's `site`) and routes that must know the same origin outside of request
- * context — notably the llms.txt tree's `getStaticPaths`, which enumerates
- * section/part file paths that depend on the rendered link lengths and so must
- * agree with what `GET` produces from `site.origin`.
+ * Build-time site URL derivation, plus the helpers that turn a site-root-relative
+ * path into a canonical URL.
+ *
+ * `deriveSiteUrl` has exactly one caller: `astro.config.mjs`, which hands its
+ * result to Astro as `site`. Everything downstream reads that one value — routes
+ * from their request context, and the `pagesJson`/`llmsTxt` integrations from
+ * `config.site` — so there is no second derivation to keep in agreement.
  */
 
-const proxied = process.env.PROXIED === "1";
-const proxyPort = 1314;
+/** The dev server is reached through a proxy fronting Hugo and Astro on one origin. */
+export const IS_PROXIED = process.env.PROXIED === "1";
+export const PROXY_PORT = 1314;
+export const ASTRO_DEV_PORT = 4321;
 
 export function deriveSiteUrl(): string {
   const env = process.env.CI_ENVIRONMENT_NAME;
@@ -17,14 +21,34 @@ export function deriveSiteUrl(): string {
   if (env === "live") {
     return "https://docs.datadoghq.com";
   }
-  return proxied ? `http://localhost:${proxyPort}` : "http://localhost:4321";
+  return IS_PROXIED
+    ? `http://localhost:${PROXY_PORT}`
+    : `http://localhost:${ASTRO_DEV_PORT}`;
 }
 
 /**
- * Origin (scheme + host + port) of the derived site URL. Matches Astro's
- * `context.site.origin`, so paths enumerated at build time line up with the
- * URLs rendered per request.
+ * Absolute URL for a site-root-relative path.
+ *
+ * Preserves any path on `site`: in preview, `site` is
+ * `https://docs-staging.datadoghq.com/{branch}`, so using `site.origin` alone
+ * would silently drop the branch segment from every canonical URL. The deploy
+ * serves the build under that prefix, so it belongs in pages.json keys and
+ * llms.txt links.
  */
-export function deriveSiteOrigin(): string {
-  return new URL(deriveSiteUrl()).origin;
+export function absoluteUrl(urlPath: string, site: string | URL): string {
+  return new URL(urlPath.replace(/^\//, ""), siteBase(site)).href;
+}
+
+/**
+ * `site` normalized to a directory URL (guaranteed trailing slash), so relative
+ * paths resolve against its full path rather than replacing its last segment.
+ */
+export function siteBase(site: string | URL): string {
+  const base = new URL(site);
+  base.hash = "";
+  base.search = "";
+  if (!base.pathname.endsWith("/")) {
+    base.pathname += "/";
+  }
+  return base.href;
 }

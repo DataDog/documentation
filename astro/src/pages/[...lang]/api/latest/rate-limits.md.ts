@@ -2,9 +2,8 @@ export const prerender = true;
 /**
  * AST-based plaintext rendering of the rate-limits page.
  *
- * The static source markdown is parsed into a Markdoc AST and re-emitted via
- * `format()`. The body is built by the shared `rateLimitsBody` so the served
- * plaintext and the pages.json hash come from one place.
+ * The static source markdown lives in `apiPageBodies`, where it is parsed into a
+ * Markdoc AST and re-emitted via `format()` as `rateLimitsBody`.
  */
 
 import type { APIRoute, GetStaticPaths } from 'astro';

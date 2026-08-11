@@ -10,23 +10,23 @@
 import { describe, it, expect } from "vitest";
 import { buildPageIndex } from "@lib/pagesListing/pageIndex";
 import { buildListingFromIndex } from "@lib/pagesListing/buildListingFromIndex";
-import { collectPages } from "@lib/pagesListing/collectPages";
 import { pageSources } from "@lib/pagesListing/pageSources";
-import { PagesListingSchema } from "@lib/pagesListing/schema";
+import { PagesListingSchema } from "@lib/pagesListing/types";
 import { buildLlmsTree, DEFAULT_HARD_CHAR_LIMIT } from "@lib/pagesListing/llmsTree";
+import { buildLlmsIndex } from "@lib/pagesListing/llmsIndex";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 
 const SITE = "https://docs.datadoghq.com";
 
-/** Builds the full pages.json the way the integration does, hashing bodies. */
+/**
+ * Builds the full pages.json the way the integration does. Bodies are stubbed:
+ * this file is about coverage (is every category and operation listed?), and the
+ * hashes are validated against the real route output in
+ * `tests/headless/pagesJson.test.ts`.
+ */
 async function buildFullListing() {
-  const pages = await collectPages(pageSources);
-  const bodyByFile = new Map<string, string>();
-  for (const page of pages) {
-    bodyByFile.set(page.urlPath.replace(/^\//, ""), await page.buildBody());
-  }
   const index = await buildPageIndex(pageSources, SITE);
-  return buildListingFromIndex(index, async (file) => bodyByFile.get(file)!);
+  return buildListingFromIndex(index, async (file) => `stub body for ${file}`);
 }
 
 describe("pages.json coverage against full spec", () => {
@@ -79,7 +79,7 @@ describe("pages.json coverage against full spec", () => {
 
 describe("llms.txt tree against full spec", () => {
   it("indexes every category and emits a detail file per category", { timeout: 60_000 }, async () => {
-    const { index, detailFiles } = await buildLlmsTree(pageSources, SITE);
+    const { index, detailFiles } = buildLlmsTree(await buildLlmsIndex(pageSources), SITE);
     const categories = await getCategoriesView("en");
 
     for (const cat of categories) {
@@ -92,7 +92,7 @@ describe("llms.txt tree against full spec", () => {
   });
 
   it("keeps every generated file within the hard character limit", { timeout: 60_000 }, async () => {
-    const { index, detailFiles } = await buildLlmsTree(pageSources, SITE);
+    const { index, detailFiles } = buildLlmsTree(await buildLlmsIndex(pageSources), SITE);
     expect(index.length).toBeLessThanOrEqual(DEFAULT_HARD_CHAR_LIMIT);
     for (const [path, contents] of detailFiles) {
       expect(contents.length, `${path} exceeds limit`).toBeLessThanOrEqual(

@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ site }) => {
       "astro.config.mjs `site` must be set for pages-index.json to render canonical URLs.",
     );
   }
-  const index = await buildPageIndex(pageSources, site.origin);
+  const index = await buildPageIndex(pageSources, site);
   return new Response(JSON.stringify(index), {
     headers: { "Content-Type": "application/json; charset=utf-8" },
   });

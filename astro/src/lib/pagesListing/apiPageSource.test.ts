@@ -1,13 +1,13 @@
 import { describe, it, expect } from "vitest";
 import { apiPageSource } from "./apiPageSource";
-import { collectPages } from "./collectPages";
-import { PageMetadataSchema } from "./schema";
+import { collectPages } from "./pageIndex";
+import { PageMetadataSchema } from "./types";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
 
 describe("apiPageSource", () => {
   it("exposes landing + special pages as root pages", async () => {
     const roots = await apiPageSource.listRootPages();
-    const paths = roots.map((p) => p.urlPath);
+    const paths = roots.map((page) => page.urlPath);
     expect(paths).toEqual([
       "/api/latest.md",
       "/api/latest/using-the-api.md",
@@ -23,25 +23,40 @@ describe("apiPageSource", () => {
     const sections = await apiPageSource.listSections();
     const categories = await getCategoriesView("en");
 
-    expect(sections.map((s) => s.title).sort()).toEqual(
-      categories.map((c) => c.name).sort(),
+    expect(sections.map((section) => section.title).sort()).toEqual(
+      categories.map((category) => category.name).sort(),
     );
-    for (const cat of categories) {
-      const section = sections.find((s) => s.title === cat.name)!;
-      expect(section.llmsTxtPath).toBe(`/api/latest/${cat.slug}/llms.txt`);
+    for (const category of categories) {
+      const section = sections.find((s) => s.title === category.name)!;
+      expect(section.llmsTxtPath).toBe(`/api/latest/${category.slug}/llms.txt`);
       // First page is the category overview, then one per operation.
-      expect(section.pages[0].urlPath).toBe(`/api/latest/${cat.slug}.md`);
-      expect(section.pages.length).toBe(1 + cat.operations.length);
+      expect(section.pages[0].urlPath).toBe(`/api/latest/${category.slug}.md`);
+      expect(section.pages.length).toBe(1 + category.operations.length);
     }
   });
 
   it("sets operation breadcrumbs to [Docs, API Reference, <Category>]", async () => {
     const sections = await apiPageSource.listSections();
     const categories = await getCategoriesView("en");
-    const cat = categories.find((c) => c.operations.length > 0)!;
-    const section = sections.find((s) => s.title === cat.name)!;
-    const opPage = section.pages[1];
-    expect(opPage.metadata.breadcrumbs).toEqual(["Docs", "API Reference", cat.name]);
+    const category = categories.find((c) => c.operations.length > 0)!;
+    const section = sections.find((s) => s.title === category.name)!;
+    expect(section.pages[1].metadata.breadcrumbs).toEqual([
+      "Docs",
+      "API Reference",
+      category.name,
+    ]);
+  });
+
+  it("titles each operation page with that operation's summary", async () => {
+    const sections = await apiPageSource.listSections();
+    const categories = await getCategoriesView("en");
+    const category = categories.find((c) => c.operations.length > 0)!;
+    const section = sections.find((s) => s.title === category.name)!;
+
+    const summaries = category.operations.map((operation) => operation.summary);
+    for (const page of section.pages.slice(1)) {
+      expect(summaries).toContain(page.metadata.title);
+    }
   });
 
   it("flattens to schema-valid, non-private metadata with .md paths", async () => {
@@ -52,15 +67,5 @@ describe("apiPageSource", () => {
       expect(() => PageMetadataSchema.parse(page.metadata)).not.toThrow();
       expect(page.metadata.isPrivate).toBe(false);
     }
-  });
-
-  it("operation buildBody renders the summary heading", async () => {
-    const sections = await apiPageSource.listSections();
-    const categories = await getCategoriesView("en");
-    const cat = categories.find((c) => c.operations.length > 0)!;
-    const section = sections.find((s) => s.title === cat.name)!;
-    const opPage = section.pages[1];
-    const body = await opPage.buildBody();
-    expect(body).toContain(`# ${opPage.metadata.title}`);
   });
 });
