@@ -150,7 +150,7 @@ class ValidationFlakyTest {
             "dd-validation-flaky"
         );
         if (Files.notExists(marker)) {
-            Files.writeString(marker, "1");
+            Files.write(marker, new byte[] { '1' });
             fail("first attempt fails so Datadog can retry it");
         }
     }
@@ -327,7 +327,7 @@ class ValidationFlakyTest {
             "dd-validation-flaky-mitigation"
         );
         if (Files.notExists(marker)) {
-            Files.writeString(marker, "1");
+            Files.write(marker, new byte[] { '1' });
             fail("first attempt fails so Datadog can retry it");
         }
     }
