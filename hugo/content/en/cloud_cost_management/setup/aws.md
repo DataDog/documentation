@@ -232,23 +232,13 @@ Attach the new S3 policy to the Datadog integration role.
 
 The **Set up with AI Agent** flow guides you through creating or importing a Cost and Usage Report and generates Terraform for you to review before applying. The AWS account must already be connected to Datadog through a role-based integration.
 
-### Choose a Cost and Usage Report format
-
-The flow asks you to choose a report format:
-
-* **CUR 2.0**: Recommended and selected by default for new reports.
-* **Legacy CUR**: Available for an existing legacy report or as a fallback.
-
-### Select the resources to create
-
-The flow checks for an existing Cost and Usage Report before creating a new one. You can:
-
-* Create a Cost and Usage Report and its S3 bucket
-* Use an existing report and S3 bucket
-
-### Review and apply the generated Terraform
-
-The flow generates Terraform for the format you selected. Review the configuration, then apply it to finish setting up the account.
+1. Choose a Cost and Usage Report format:
+    - **CUR 2.0**: Recommended and selected by default for new reports.
+    - **Legacy CUR**: Available for an existing legacy report or as a fallback.
+2. Select the resources to create. The flow checks for an existing Cost and Usage Report before creating a new one. You can:
+    - Create a Cost and Usage Report and its S3 bucket
+    - Use an existing report and S3 bucket
+3. Review the generated Terraform configuration, then apply it to finish setting up the account.
 
 {{% /tab %}}
 
