@@ -20,6 +20,8 @@ further_reading:
 
 You can configure Code Coverage behavior by creating a configuration file named `code-coverage.datadog.yml` or `code-coverage.datadog.yaml` in the root of your repository.
 
+<div class="alert alert-warning">Commit the configuration file and push it to your repository. Datadog reads the file from your repository, so a file that is uncommitted or that exists only on an unpushed commit has no effect. See <a href="#commit-the-configuration-file">Commit the configuration file</a>.</div>
+
 Example configuration file:
 
 ```yaml
@@ -46,6 +48,19 @@ gates:
 comments:
   enabled: true
 ```
+
+## Commit the configuration file
+
+Datadog reads `code-coverage.datadog.yml` from your repository, at the commit that your coverage reports are attached to. Coverage uploads do not contain the contents of the file. They report the file path and the Git hash of its contents, and Datadog reads the file from your repository.
+
+The configuration applies only when both of the following are true:
+
+- **The file is committed.** A file that is uncommitted, staged but not committed, or excluded by `.gitignore` is not part of the commit reported with your coverage data. Datadog finds no configuration and applies default behavior.
+- **The commit that contains the file is pushed.** Datadog cannot read a commit that exists only on a local machine or on a CI runner.
+
+The same requirement applies to every later change. Editing a gate threshold or an `ignore` pattern takes effect for a commit only after that edit is committed and pushed.
+
+If your configuration appears to have no effect, check that `git status` reports no uncommitted changes to the file. Then confirm that the commit that adds or modifies it is present on your remote.
 
 ## Services configuration
 
