@@ -179,4 +179,4 @@ By default, only the creator of a form can access it. To change the permissions 
 [12]: /mcp_server/setup/#toolsets
 [13]: /bits_ai/bits_chat/
 [14]: /mcp_server/tools/#forms
-[15]: /actions/forms/prefill/
+[15]: /actions/forms/guide/prefill/
