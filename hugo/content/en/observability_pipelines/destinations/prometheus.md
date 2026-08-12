@@ -21,7 +21,7 @@ Configure the Prometheus destination when you [set up a pipeline][1]. You can se
 
 After you select the Prometheus destination in the pipeline UI:
 
-1. Enter the identifier for your {{< ui >}}Remote Write Endpoint URL{{< /ui >}}, such as `http://localhost:9090/api/v1/write`. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your {{< ui >}}Remote Write Endpoint URL{{< /ui >}}. An example of an endpoint URL the identifier references: `http://localhost:9090/api/v1/write`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy ({{< ui >}}None{{< /ui >}}, {{< ui >}}Basic{{< /ui >}}, or {{< ui >}}Bearer{{< /ui >}}). If you selected:
     - {{< ui >}}Basic{{< /ui >}}: Enter the identifier for your username and password. If you leave it blank, the [default](#secret-defaults) is used.
     - {{< ui >}}Bearer{{< /ui >}}: Enter the identifier for your bearer token. If you leave it blank, the [default](#secret-defaults) is used.
@@ -77,7 +77,8 @@ See [Enable debug logs][7] for instruction on enabling full debug logs.
 {{< tabs >}}
 {{% tab "Secrets Management" %}}
 
-- Prometheus endpoint URL identifier:
+- Remote Write endpoint URL identifier:
+	- References the Remote Write endpoint URL. An example of an endpoint URL the identifier references: `http://localhost:9090/api/v1/write`.
 	- The default identifier is `DESTINATION_PROMETHEUS_ENDPOINT`.
 - Prometheus TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_PROMETHEUS_KEY_PASS`.
