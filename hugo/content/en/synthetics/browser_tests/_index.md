@@ -67,7 +67,7 @@ You may create a test using one of the following options:
 
      **Note**: You can also use the [Continuous Testing Tunnel][2] to trigger tests on your local development setup or in your CI/CD pipeline to test internal environments.
 
-  7. Set the {{< ui >}}test frequency{{< /ui >}}: The intervals vary from every five minutes to once per week. To request one-minute frequency, [contact Support][3].
+  7. Set the {{< ui >}}test frequency{{< /ui >}}: The intervals vary from every one minute to once per week.
   8. Click {{< ui >}}Save & Edit Recording{{< /ui >}} to submit your Browser Test.
 
 ### Locations

@@ -61,6 +61,145 @@ In Datadog, install the [AWS Lambda integration][5], which provides the out-of-t
 
 Create a [trace retention filter][6] with the retention query `operation_name:aws.durable.execute`.
 
+## Querying in Datadog
+
+The **Executions** tab on the Lambda function page lists durable executions. Use the log attributes, span tags, and metrics below to search for durable executions, or to build dashboards and monitors.
+
+### Logs
+
+To scope a log query to one function, filter on the function ARN:
+
+```text
+@lambda.arn:"<FUNCTION_ARN>"
+```
+
+The Datadog Lambda Extension adds these attributes to a durable function's logs:
+
+| Log attribute | Description |
+|---|---|
+| `@lambda.durable_function.execution_name` | The execution name. Groups all logs from one execution. |
+| `@lambda.durable_function.execution_id` | The execution ID. |
+| `@lambda.durable_function.first_invocation` | `true` on logs from the execution's first invocation, `false` otherwise. |
+| `@lambda.durable_function.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`, where `PENDING` means the execution suspended and resumes in a later invocation. On the `END` log, or on the `REPORT` log for executions on [Lambda Managed Instances][10]. |
+
+Example queries (add `@lambda.arn:"<FUNCTION_ARN>"` to scope to one function):
+
+- All logs for one durable execution:
+
+    ```text
+    @lambda.durable_function.execution_name:"<EXECUTION_NAME>"
+    ```
+
+- Each execution's `START` log, which marks when it began:
+
+    ```text
+    "START RequestId:" @lambda.durable_function.first_invocation:true
+    ```
+
+- Each execution's last log, which marks when it ended:
+
+    ```text
+    "END RequestId:" OR "REPORT RequestId:"
+    ```
+
+    Lambda Managed Instances emit no `END` log, so query both.
+
+### Status change events
+
+The events forwarded by the CloudFormation stack arrive as logs, matched by:
+
+```text
+@detail-type:"Durable Execution Status Change"
+```
+
+The AWS Lambda integration pipeline maps these events onto the following attributes:
+
+| Log attribute | Description |
+|---|---|
+| `@lambda.durable_function.execution_status` | One of `RUNNING`, `SUCCEEDED`, `FAILED`, `TIMED_OUT`, or `STOPPED`. |
+| `@lambda.durable_function.execution_start_time` | When the execution started, in UNIX milliseconds. |
+| `@lambda.durable_function.execution_end_time` | When the execution reached a terminal status, in UNIX milliseconds. |
+
+Treat these events as the source of truth for terminal status, as `END` and `REPORT` logs cannot report `TIMED_OUT` or `STOPPED`.
+
+Terminal events are timestamped when the execution finished, so a time range selects executions that finished within it.
+
+### Traces
+
+To scope a span query to one function, filter on the function ARN:
+
+```text
+@function_arn:"<FUNCTION_ARN>"
+```
+
+**The durable execution span**
+
+The tracer creates one `aws.durable.execute` span per invocation and stitches an execution's invocations into a single trace.
+
+| Span tag | Description |
+|---|---|
+| `@aws.durable.execution_arn` | The full durable execution ARN, which contains the execution name. This span does not carry the execution name as a separate tag. |
+| `@aws.durable.invocation_status` | The execution's state when this invocation ended: `succeeded`, `failed`, or `pending`. `pending` means the execution suspended and resumes in a later invocation. |
+| `@aws.durable.replayed` | `false` on the invocation that starts an execution, `true` on each later invocation that resumes it after a suspend. |
+
+**The Lambda invocation span**
+
+Each invocation also produces the standard `aws.lambda` span, tagged with the durable execution context:
+
+| Span tag | Description |
+|---|---|
+| `@aws.durable.execution_name` | The execution name. |
+| `@aws.durable.execution_id` | The execution ID. |
+| `@aws.durable.first_invocation` | `true` on the first invocation of an execution. |
+| `@aws.durable.execution_status` | The execution's state when the invocation ended: `SUCCEEDED`, `FAILED`, or `PENDING`. |
+
+**Operation spans**
+
+Each operation called on the durable context produces a child span:
+
+| Operation name | Node.js method | Python method |
+|---|---|---|
+| `aws.durable.step` | `step` | `step` |
+| `aws.durable.invoke` | `invoke` | `invoke` |
+| `aws.durable.wait` | `wait` | `wait` |
+| `aws.durable.wait_for_condition` | `waitForCondition` | `wait_for_condition` |
+| `aws.durable.wait_for_callback` | `waitForCallback` | `wait_for_callback` |
+| `aws.durable.create_callback` | `createCallback` | `create_callback` |
+| `aws.durable.map` | `map` | `map` |
+| `aws.durable.parallel` | `parallel` | `parallel` |
+| `aws.durable.child_context` | `runInChildContext` | `run_in_child_context` |
+
+| Span tag | Description |
+|---|---|
+| `@aws.durable.operation_name` | The operation's name. |
+| `@aws.durable.operation_id` | A hash of the operation's step ID. |
+| `@aws.durable.operation_attempt` | The attempt number, on the retryable operations `aws.durable.step` and `aws.durable.wait_for_condition`. `0` is the original attempt, `1` the first retry. |
+| `@aws.durable.replayed` | `true` when the operation's result was served from a checkpoint instead of executed, whether that stored result was a success or a failure. |
+| `@aws.durable.invoke.function_name` | The target function, on `aws.durable.invoke` spans. |
+
+### Metrics
+
+AWS publishes these durable execution metrics to CloudWatch. They reach Datadog through the [AWS Lambda integration][5] and are tagged with `functionname`.
+
+| Metric | Description | Aggregation |
+|---|---|---|
+| `aws.lambda.durable_execution_started` | Number of durable executions started. | `sum` as count |
+| `aws.lambda.durable_execution_succeeded` | Number of durable executions that completed successfully. | `sum` as count |
+| `aws.lambda.durable_execution_failed` | Number of durable executions that completed with failure. | `sum` as count |
+| `aws.lambda.durable_execution_timed_out` | Number of durable executions that exceeded their timeout. | `sum` as count |
+| `aws.lambda.durable_execution_stopped` | Number of durable executions stopped with the `StopDurableExecution` API. | `sum` as count |
+| `aws.lambda.durable_execution_duration` | Wall-clock time a durable execution spent in the `RUNNING` state, in milliseconds. | `avg` |
+| `aws.lambda.durable_execution_operations` | Cumulative number of operations performed by durable executions. | `sum` as count |
+| `aws.lambda.durable_execution_storage_written_bytes` | Cumulative amount of data persisted by durable executions, in bytes. | `sum` |
+| `aws.lambda.approximate_running_durable_executions` | Number of durable executions in the `RUNNING` state. | `avg` |
+| `aws.lambda.approximate_running_durable_executions_utilization` | Percentage of the durable execution quota in use. | `avg` |
+
+For example, to graph failed executions for one function:
+
+```text
+sum:aws.lambda.durable_execution_failed{functionname:<FUNCTION_NAME>}.as_count()
+```
+
 ## Limitations and feedback
 
 Runtimes other than Node.js and Python are not supported. If you encounter an issue with another runtime, open an issue in the [datadog-lambda-extension GitHub repository][7].
@@ -76,3 +215,4 @@ If you encounter an issue with the CloudFormation stack, open an issue in the [c
 [7]: https://github.com/DataDog/datadog-lambda-extension
 [8]: https://github.com/DataDog/cloudformation-template/tree/master/aws_durable_function_event_forwarder
 [9]: /serverless/aws_lambda/logs/#enable-log-collection
+[10]: /serverless/aws_lambda/managed_instances/
