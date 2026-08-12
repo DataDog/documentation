@@ -41,7 +41,7 @@ Each component has a set of configurable elements in the component editor:
 |-----|-------------|
 | {{< ui >}}Add a description{{< /ui >}} | An optional description displayed below the component question. |
 | {{< ui >}}Required{{< /ui >}} | Toggle to determine whether the question requires an answer. Required questions are marked with a red asterisk. |
-| {{< ui >}}Advanced{{< /ui >}} | Configure the field name, placeholder text, default value, and option values for the component. See [Prefill form fields](/actions/forms/guide/prefill/). |
+| {{< ui >}}Advanced{{< /ui >}} | Configure the field name, placeholder text, [default value](#default-values), and option values for the component. |
 | {{< ui >}}Rules{{< /ui >}} | Configure validation rules to restrict the values respondents can submit. See [Validation rules](#validation-rules). |
 | {{< ui >}}Conditions{{< /ui >}} | Configure conditional logic to show or hide the component based on a respondent's previous answers. See [Conditional fields](#conditional-fields). |
 | {{< ui >}}Style{{< /ui >}} | Change the component type while preserving its existing options. For example, switch a dropdown to checkboxes without removing and recreating the component. |
