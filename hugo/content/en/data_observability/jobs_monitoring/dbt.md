@@ -131,6 +131,8 @@ Follow the steps below to connect dbt Core to Datadog.
    export OPENLINEAGE__FACETS__SOURCE_CODE_LOCATION__PULL_REQUEST_NUMBER=<PR_NUMBER>
    ```
 
+   If your CI job runs inside a container that does not inherit the runner's git context (for example, a GitHub Actions workflow that launches a container), the repository URL, commit SHA, and pull request number are not detected automatically, so you must pass all three explicitly. See [Running your dbt Core CI job in a container](/data_observability/cicd/#running-your-dbt-core-ci-job-in-a-container).
+
 ## Update the dbt invocation
 
 1. Change your dbt invocations to use the OpenLineage wrapper (`dbt-ol`) instead of calling `dbt` directly. This applies to any dbt command you want to track in Datadog, such as `run`, `build`, and `test`. For the full list of available commands, see the [dbt documentation][7].

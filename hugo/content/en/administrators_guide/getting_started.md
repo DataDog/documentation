@@ -94,7 +94,6 @@ The [Datadog Agent][2] is open-source and published in GitHub. The Agent GitHub 
 
 Here are a few examples:
 
-* [Agent Config Template][3]   
 * [Integration Config Specs][4]   
 * [Fleet Automation][5]
 
@@ -109,7 +108,6 @@ To successfully create a new Datadog installation, review the [plan][11] page. Y
 
 [1]: https://learn.datadoghq.com/
 [2]: https://github.com/DataDog/datadog-agent
-[3]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
 [4]: https://github.com/DataDog/integrations-core
 [5]: https://app.datadoghq.com/fleet
 [6]: /getting_started/tagging/unified_service_tagging/
