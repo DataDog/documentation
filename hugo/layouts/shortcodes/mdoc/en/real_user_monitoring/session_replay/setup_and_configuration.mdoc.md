@@ -98,6 +98,10 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder([sampleRate])
 
 SessionReplay.enable(sessionReplayConfig)
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Android -->
 
@@ -136,6 +140,10 @@ SessionReplay.enable(
   )
 )
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 
 {% /if %}
 <!-- end iOS -->
@@ -188,14 +196,12 @@ If your app uses Material on Android, add:
 ```kotlin
 SessionReplayConfiguration.Builder.addExtensionSupport(MaterialExtensionSupport())
 ```
+
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
 {% /if %}
 <!-- end Kotlin Multiplatform -->
-
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -309,6 +315,10 @@ cd ios && pod install
 
 Rebuild your iOS and Android apps
 
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
+
 {% /if %}
 
 <!-- end React Native -->
@@ -396,6 +406,10 @@ Flutter Session Replay relies on FFI, and some symbols may be stripped when buil
 
 This setting is under the **Runner** target > **Build Settings** > **Deployment**.
 
+### Impact on app performance
+
+See [How Mobile Session Replay Impacts App Performance][34].
+
 {% /if %}
 <!-- end Flutter -->
 
@@ -436,12 +450,6 @@ To instrument your consolidated web and native Session Replay views for Kotlin M
 3. Enable Session Replay for your mobile application (see setup instructions above).
 {% /if %}
 <!-- end Kotlin Multiplatform -->
-
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -505,12 +513,6 @@ val sessionReplayConfig = SessionReplayConfiguration.Builder(<SAMPLE_RATE>)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
-
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -643,12 +645,6 @@ SessionReplay.stopRecording()
 {% /if %}
 <!-- end Kotlin Multiplatform -->
 
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
-
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
 ```typescript {% filename="App.tsx" %}
@@ -699,12 +695,6 @@ Datadog.setVerbosity(SdkLogVerbosity.DEBUG)
 ```
 {% /if %}
 <!-- end Kotlin Multiplatform -->
-
-<!-- .NET MAUI -->
-{% if equals($platform, "maui") %}
-Session Replay support for .NET MAUI is not yet available.
-{% /if %}
-<!-- end .NET MAUI -->
 
 <!-- React Native -->
 {% if equals($platform, "react_native") %}
@@ -759,7 +749,7 @@ See [Connect Session Replay to your third-party tools][30].
 [14]: /real_user_monitoring/application_monitoring/react_native/setup
 [15]: https://yarnpkg.com/package?q=datadog%20react%20native%20ses&name=%40datadog%2Fmobile-react-native-session-replay
 [16]: https://www.npmjs.com/package/@datadog/mobile-react-native-session-replay?activeTab=versions
-[17]: /session_replay/privacy_options/?tab=reactnative
+[17]: /session_replay/privacy_options/?platform=react_native
 [18]: https://github.com/DataDog/dd-sdk-reactnative
 [19]: https://github.com/DataDog/dd-sdk-android/releases/tag/2.8.0
 [20]: /real_user_monitoring/application_monitoring/android/web_view_tracking/?tab=android#instrument-your-web-views
@@ -777,3 +767,4 @@ See [Connect Session Replay to your third-party tools][30].
 [31]: /real_user_monitoring/guide/sampling-browser-plans/
 [32]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#startsessionreplayrecording
 [33]: https://datadoghq.dev/browser-sdk/interfaces/_datadog_browser-rum.DatadogRum.html#stopsessionreplayrecording
+[34]: /session_replay/app_performance/
