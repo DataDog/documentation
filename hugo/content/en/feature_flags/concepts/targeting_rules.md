@@ -52,7 +52,7 @@ For each targeting rule, configure the following:
 
 {{< img src="feature_flags/concepts/configure-targeting-rule-2.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
-After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules.
+After configuring your targeting rules, click **Save Changes**, then enable the flag in the environment so SDKs can evaluate targeting rules. You can also use the [evaluation tester][2] to simulate how the rule evaluates for a given targeting key and attributes, without affecting production data.
 
 <div class="alert alert-info">
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
@@ -148,3 +148,4 @@ Targeting rules are evaluated **in order** from top to bottom:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/saved_filters/
+[2]: /feature_flags/concepts/evaluation_tester/
