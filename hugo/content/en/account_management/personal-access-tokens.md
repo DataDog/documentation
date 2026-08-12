@@ -68,7 +68,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 
 ## Restrictions on PAT-authenticated API calls
 
-To limit how a PAT can escalate its own access, Datadog restricts what an API call authenticated with a PAT can do. These restrictions apply regardless of the API client making the call:
+To prevent privilege escalation, Datadog restricts what an API call authenticated with a PAT can do. These restrictions apply regardless of the API client making the call:
 
 - **Application keys**: A PAT cannot create or update application keys. Revoking application keys is still allowed.
 - **Scopes on new tokens**: A PAT can create or update a PAT or a SAT only if the new token's scopes are a subset of its own scopes.
