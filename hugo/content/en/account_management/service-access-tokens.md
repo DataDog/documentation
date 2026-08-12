@@ -91,7 +91,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 **Note:** When a valid SAT is provided in the `dd-application-key` header, Datadog authenticates
 with the SAT only. The `dd-api-key` header is optional and its value is not evaluated.
 
-## Restrictions
+## Restrictions on SAT-authenticated API calls
 
 To limit how a SAT can escalate its own access, Datadog restricts what an API call authenticated with a SAT can do. These restrictions apply regardless of the API client making the call:
 
