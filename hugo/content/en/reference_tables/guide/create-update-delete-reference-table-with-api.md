@@ -1,5 +1,6 @@
 ---
 title: Creating, updating, and deleting a Reference Table with the API
+description: Complete walkthrough for creating, updating, and deleting a Reference Table backed by a local CSV file using the Datadog API.
 further_reading:
 - link: "/reference_tables/"
   tag: "Documentation"
@@ -47,7 +48,9 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
    }
    ```
 
-2. Upload the CSV data (not the file itself) to each part URL with a `PUT` request. If your data spans multiple parts, split the CSV rows evenly and `PUT` each chunk to its corresponding URL from `part_urls`. For example, given a `products.csv` file with the following content:
+2. Upload the CSV data (not the file itself) to each part URL with a `PUT` request. For example, given a `products.csv` file with the following content:
+
+   **Note**: If your data spans multiple parts, split the CSV rows evenly and send a separate `PUT` request for each chunk to its corresponding URL in `part_urls`.
 
    ```csv
    product_id,product_name,price
@@ -82,7 +85,7 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
            "fields": [
              {"name": "product_id", "type": "STRING"},
              {"name": "product_name", "type": "STRING"},
-             {"name": "price", "type": "DOUBLE"}
+             {"name": "price", "type": "STRING"}
            ],
            "primary_keys": ["product_id"]
          },
@@ -94,7 +97,9 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
 
    The response contains the new table's `id`, which you use in the following steps.
 
-4. To update the table's data, repeat steps 1 and 2 to upload a new CSV file, then call the [Update Reference Table endpoint][2] with the new `upload_id`. The upserted CSV replaces matching rows, adds new rows, and removes rows no longer present in the file.
+4. To update the table's data, repeat steps 1 and 2 to upload a new CSV file, then call the [Update Reference Table endpoint][2] with the new `upload_id`.
+
+   **Note**: The upserted CSV replaces matching rows, adds new rows, and removes rows no longer present in the file.
 
    ```shell
    curl -X PATCH "https://api.{{< region-param key="dd_site" >}}/api/v2/reference-tables/tables/<TABLE_ID>" \
@@ -112,7 +117,7 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
            "fields": [
              {"name": "product_id", "type": "STRING"},
              {"name": "product_name", "type": "STRING"},
-             {"name": "price", "type": "DOUBLE"}
+             {"name": "price", "type": "STRING"}
            ],
            "primary_keys": ["product_id"]
          }
