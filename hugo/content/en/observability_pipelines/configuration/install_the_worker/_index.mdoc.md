@@ -1062,10 +1062,10 @@ If you are using a firewall, these domains must be added to the allowlist, repla
 - `api.<DD_SITE>:443`
 - `config.<DD_SITE>:443`
 - `http-intake.logs.<DD_SITE>:443`
-- `keys.datadoghq.com`
-- `install.datadoghq.com`
-- `yum.datadoghq.com`
-- `apt.datadoghq.com`
+- `keys.datadoghq.com:443`
+- `install.datadoghq.com:443`
+- `yum.datadoghq.com:443`
+- `apt.datadoghq.com:443`
 - `*.agent.<DD_SITE>:443`
 
 {% /if %}
