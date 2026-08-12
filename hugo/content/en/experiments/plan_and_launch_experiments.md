@@ -190,6 +190,14 @@ Launching the experiment opens the {{< ui >}}Flag & Exposures{{< /ui >}} page. V
 - Review the {{< ui >}}Exposure balance check{{< /ui >}} to confirm your variants are split at the percentages you configured.
 - Click {{< ui >}}View Exposures Log{{< /ui >}} to monitor real-time user enrollment.
 
+### Change experiment duration
+
+For an eligible end-to-end experiment with a valid start date, you can add a duration after it starts, including when it was launched as open-ended with no end date.
+
+1. Open the experiment details page.
+1. Click {{< ui >}}Experiment actions{{< /ui >}} > {{< ui >}}Edit duration{{< /ui >}}.
+1. Enter the new duration, then click {{< ui >}}Save{{< /ui >}}. Datadog displays the resulting end date on the experiment details page.
+
 See [Reading Experiment Results][5] to review your data.
 
 ## Further reading
