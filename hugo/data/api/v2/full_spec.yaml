@@ -24626,6 +24626,26 @@ components:
           description: The name of the feature flag.
           example: "Feature Flag ABC123"
           type: string
+        notification_rule_query:
+          description: |-
+            Query used to determine which change events on this feature flag trigger notifications
+            to `rule_targets`. Uses Datadog log search syntax (`AND`, `OR`, `NOT`, parentheses) to
+            match against the `notification_type` facet.
+
+            Supported `notification_type` values for a feature flag are: `flag_enabled_disabled`,
+            `flag_archived`, `flag_approval_required`, `rollout_started`, `rollout_scheduled`,
+            `rollout_step_started`, `rollout_paused_guardrail`, `rollout_paused_user`,
+            `rollout_aborted_guardrail`, `rollout_aborted_user`, `targeting_rule_created`,
+            `targeting_rule_updated`, `targeting_rule_updated_via_filter`, and
+            `targeting_rule_deleted`.
+          example: "notification_type:rollout_started OR notification_type:targeting_rule_updated"
+          nullable: true
+          type: string
+        rule_targets:
+          description: Targets to notify about changes to this feature flag that match `notification_rule_query`.
+          items:
+            $ref: "#/components/schemas/NotificationRuleTarget"
+          type: array
         value_type:
           $ref: "#/components/schemas/ValueType"
         variants:
@@ -70485,6 +70505,109 @@ components:
       type: string
       x-enum-varnames:
         - MANUAL
+    NotificationRuleTarget:
+      description: A notification target that receives change alerts for a feature flag.
+      properties:
+        configuration:
+          $ref: "#/components/schemas/NotificationRuleTargetConfiguration"
+        type:
+          $ref: "#/components/schemas/NotificationRuleTargetType"
+        version:
+          description: Schema version of `configuration`.
+          example: 1
+          format: int64
+          type: integer
+      required:
+        - type
+        - version
+        - configuration
+      type: object
+    NotificationRuleTargetConfiguration:
+      description: "Configuration for a notification target. Which fields apply depends on the target's `type`."
+      properties:
+        channel:
+          description: Slack channel name, for a `SLACK_CHANNEL` target.
+          example: "#feature-flags"
+          type: string
+        channel_id:
+          description: |-
+            Slack channel ID for a `SLACK_CHANNEL` target, or Microsoft Teams channel ID
+            for an `MS_TEAMS_CHANNEL` target.
+          example: "C0123456789"
+          type: string
+        channel_name:
+          description: Microsoft Teams channel name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Feature Flags"
+          type: string
+        connector_name:
+          description: Microsoft Teams connector name, for an `MS_TEAMS_CHANNEL` target.
+          example: "datadog-connector"
+          type: string
+        recipient:
+          $ref: "#/components/schemas/NotificationRuleTargetConfigurationRecipient"
+        service_name:
+          description: PagerDuty service name, for a `PAGERDUTY_SERVICE` target.
+          example: "feature-flags-oncall"
+          type: string
+        team_id:
+          description: Microsoft Teams team ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "19:abcdef0123456789@thread.tacv2"
+          type: string
+        team_name:
+          description: Microsoft Teams team name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Engineering"
+          type: string
+        tenant_id:
+          description: Microsoft Teams tenant ID, for an `MS_TEAMS_CHANNEL` target.
+          example: "72f988bf-86f1-41af-91ab-2d7cd011db47"
+          type: string
+        tenant_name:
+          description: Microsoft Teams tenant name, for an `MS_TEAMS_CHANNEL` target.
+          example: "Datadog"
+          type: string
+        username:
+          description: Slack username, for a `SLACK_USER` target.
+          example: "jane.doe"
+          type: string
+        webhook_name:
+          description: Name of the configured webhook, for a `WEBHOOK` target.
+          example: "feature-flags-webhook"
+          type: string
+        workspace:
+          description: Slack workspace name, for a `SLACK_CHANNEL` or `SLACK_USER` target.
+          example: "datadoghq"
+          type: string
+        workspace_id:
+          description: Slack workspace ID, for a `SLACK_CHANNEL` target.
+          example: "T0123456789"
+          type: string
+      type: object
+    NotificationRuleTargetConfigurationRecipient:
+      description: Recipient for an `EMAIL` target.
+      properties:
+        email:
+          description: Email address to notify.
+          example: "user@example.com"
+          type: string
+      type: object
+    NotificationRuleTargetType:
+      description: The type of notification target.
+      enum:
+        - "EMAIL"
+        - "SLACK_CHANNEL"
+        - "SLACK_USER"
+        - "WEBHOOK"
+        - "PAGERDUTY_SERVICE"
+        - "MS_TEAMS_CHANNEL"
+      example: "SLACK_CHANNEL"
+      type: string
+      x-enum-varnames:
+        - EMAIL
+        - SLACK_CHANNEL
+        - SLACK_USER
+        - WEBHOOK
+        - PAGERDUTY_SERVICE
+        - MS_TEAMS_CHANNEL
     NotificationRulesListResponse:
       description: The list of notification rules.
       properties:
