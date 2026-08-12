@@ -363,7 +363,7 @@ Use [granular access control][17] to limit who has access to your test based on 
 | Access level | View test configuration | Edit test configuration | View test results | Run test  | View recording | Edit recording |
 | ------------ | ----------------------- | ----------------------- | ------------------| --------- | -------------- | -------------- |
 | No access    |                         |                         |                   |           |                |                |
-| Viewer       | {{< X >}}               |                         | {{< X >}}         |           |                |                |
+| Viewer       | {{< X >}}               |                         | {{< X >}}         |           | {{< X >}}      |                |
 | Editor       | {{< X >}}               | {{< X >}}               | {{< X >}}         | {{< X >}} | {{< X >}}      | {{< X >}}      |
 
 ## Further Reading
