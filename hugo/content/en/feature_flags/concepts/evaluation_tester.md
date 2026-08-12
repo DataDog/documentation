@@ -22,17 +22,17 @@ Evaluations run through the evaluation tester are a dry run. They do not emit ex
 ## Open the evaluation tester
 
 1. Navigate to [{{< ui >}}Feature Flags{{< /ui >}}][1] and select a flag.
-1. Select the tab for the environment you want to test against, for example, {{< ui >}}Production{{< /ui >}} or {{< ui >}}Staging{{< /ui >}}.
+1. Select the tab for the [environment][4] you want to test against, for example, {{< ui >}}Production{{< /ui >}} or {{< ui >}}Staging{{< /ui >}}.
 1. On the {{< ui >}}Targeting rules{{< /ui >}} card, click {{< ui >}}Test Rule Evaluation{{< /ui >}} to open the {{< ui >}}Evaluation tester{{< /ui >}} side panel.
 
 {{< img src="feature_flags/concepts/evaluation-tester-canvas.png" alt="Test Rule Evaluation button on the targeting rules canvas for a flag." style="width:100%;" >}}
 
 ## Provide a targeting context
 
-The evaluation tester evaluates your flag's targeting rules against a targeting context: a targeting key and, optionally, a set of attributes.
+The evaluation tester evaluates your flag's [targeting rules][3] against a targeting context: a targeting key and, optionally, a set of [attributes][2].
 
 - Targeting key (required): The identifier used for deterministic bucketing (for example, a user ID). Changing the targeting key can change which variant is assigned when a rule uses percentage-based traffic splitting.
-- Attributes (optional): Values used to evaluate the filters on your targeting rules, such as `country`, `email`, or `tier`.
+- Attributes (optional): Values used to evaluate the filters on your targeting rules, such as `country`, `email`, or `tier`. Learn more on [Targeting Attributes][2].
 
 You can provide values for the targeting key and attributes in two ways:
 
@@ -66,3 +66,6 @@ If the flag is disabled in the selected environment, the evaluation tester shows
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/feature-flags
+[2]: /feature_flags/concepts/targeting_attributes/
+[3]: /feature_flags/concepts/targeting_rules/
+[4]: /feature_flags/concepts/environments/
