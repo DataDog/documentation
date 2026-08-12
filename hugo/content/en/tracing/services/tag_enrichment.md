@@ -45,7 +45,7 @@ Custom rules let you target a specific set of services and configure exactly how
    - Select the `team` tag, `system` tag, `custom` tag, or multiple.
    - For each tag, select whether the tag value comes from Entity Metadata, the value of a different tag, or a fixed value.
    - Choose whether the value is applied only when it doesn't already exist, or is appended to the current list of values for that tag.
-1. By default, tags are added to all telemetry.
+1. By default, tags are added only when the value is missing for a given telemetry item.
 1. Optionally, enter a descriptive name for the rule.
 1. Review and save your rule. After you save the rule, it can take up to an hour for enrichment to be fully applied to incoming telemetry.
 
