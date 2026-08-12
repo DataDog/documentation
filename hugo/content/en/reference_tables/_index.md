@@ -228,12 +228,18 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
    }
    ```
 
-2. Upload the CSV data (not the file itself) to each part URL with a `PUT` request. If your data spans multiple parts, split the CSV rows evenly and `PUT` each chunk to its corresponding URL from `part_urls`.
+2. Upload the CSV data (not the file itself) to each part URL with a `PUT` request. If your data spans multiple parts, split the CSV rows evenly and `PUT` each chunk to its corresponding URL from `part_urls`. For example, given a `products.csv` file with the following content:
+
+   ```csv
+   product_id,product_name,price
+   1,Widget,9.99
+   2,Gadget,19.99
+   ```
 
    ```shell
    curl -X PUT "https://example.com/upload-part-1" \
    -H "Content-Type: text/csv" \
-   --data-binary $'product_id,product_name,price\n1,Widget,9.99\n2,Gadget,19.99'
+   --data-binary @products.csv
    ```
 
 3. Create the Reference Table, referencing the upload `id` from step 1 in `file_metadata.upload_id`.
