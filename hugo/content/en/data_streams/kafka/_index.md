@@ -7,7 +7,7 @@ aliases:
   - /data_streams/kafka/messages
 ---
 
-With Kafka Console, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Console allows you to:
+With Data Streams Monitoring's Kafka Console, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Console allows you to:
 
 - **Monitor Kafka health**: See cluster, broker, topic, and partition health with throughput, lag, and replication metrics
 - **Pinpoint root cause**: Correlate configuration and schema changes with lag, throughput, and errors, and trace issues to the exact topic, schema version, or configuration change
