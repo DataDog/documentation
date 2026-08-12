@@ -96,7 +96,7 @@ Monitor notifications sent to Slack through [notification rules][24] can be thre
 
 To enable monitor threading, set up or edit a [notification rule][24] scoped to the monitor alerts you would like targeted. Select **Thread Notifications** and save.
 
-Note: An alert cycle is defined as starting from a non-recovered state to a recovered state. 
+**Note**: An alert cycle is defined as starting from a non-recovered state to a recovered state. 
 
 ### Bulk editing monitor @-handles
 Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
