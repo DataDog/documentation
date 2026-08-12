@@ -66,7 +66,7 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 
 **Note:** When a valid PAT is provided in the `dd-application-key` header, Datadog authenticates with the PAT only. The `dd-api-key` header is optional and its value is not evaluated.
 
-## Restrictions
+## Restrictions on PAT-authenticated API calls
 
 To limit how a PAT can escalate its own access, Datadog restricts what an API call authenticated with a PAT can do. These restrictions apply regardless of the API client making the call:
 
