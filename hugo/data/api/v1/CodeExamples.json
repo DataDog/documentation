@@ -938,6 +938,11 @@
       "group": "monitors",
       "suffix": "_440013737",
       "description": "Create an Error Tracking monitor returns \"OK\" response"
+    },
+    {
+      "group": "monitors",
+      "suffix": "_1348801712",
+      "description": "Create an LLM Observability monitor returns \"OK\" response"
     }
   ],
   "UpdateMonitor": [
