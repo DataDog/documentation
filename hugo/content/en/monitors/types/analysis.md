@@ -27,13 +27,13 @@ Analysis monitors offer full access to Notebook analysis and DDSQL features, all
 
 Analysis monitors support a subset of the data sources available in Notebook Analysis cells and DDSQL queries. Because monitors evaluate their queries frequently, each data source is enabled only after it's validated to handle monitor-level query load.
 
-The following data sources are supported:
+The following data sources are supported. Any data source not on this list is not supported for monitoring:
 
+- Agent Observability
 - Audit
 - CI Pipelines
 - CI Tests
 - Events
-- Agent Observability
 - Logs
 - Metrics
 - NetFlow
@@ -45,16 +45,17 @@ The following data sources are supported:
 
 Published analyses are supported only when every data source they depend on is also supported.
 
-The following data sources are not supported:
+Logs stored in Flex Logs are not supported for monitoring, even though Logs is a supported data source.
 
-- Dora Metrics
-- Flex Logs
-- Infrastructure Resources
-
+Unsupported data sources include Cloud Cost, Database Queries, Dora Metrics, Infrastructure Resources, Product Analytics, Security Findings, Security Signals, Snowflake Query, and Synthetics.
 
 If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source. For example:
 
-`Analysis is based on an unsupported datasource for monitoring: Infrastructure Resources`
+`Dataset is based on an unsupported datasource for monitoring: Infrastructure Resources`
+
+If the analysis is built on logs in Flex storage, Datadog displays this error instead:
+
+`Dataset is based on Flex logs which are not supported for monitoring`
 
 ## Monitor creation
 
