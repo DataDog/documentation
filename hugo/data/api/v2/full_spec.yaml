@@ -169096,9 +169096,12 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     put:
       description: |-
-        Partially update a tag indexing rule. Fields omitted from the request body are left unchanged.
-        Setting `rule_order` to a value already used by another rule returns 409; use the
-        reorder endpoint for atomic re-sequencing. Requires the `Manage Tags for Metrics` permission.
+        Partially update a tag indexing rule. Fields omitted from the request body are left unchanged,
+        except for fields inside the `options` object. When a request includes `options`, any field left
+        out of `options.data` resets instead of keeping its current value, so include the full
+        `options.data` object on any update that touches it. Setting `rule_order` to a value already used
+        by another rule returns 409; use the reorder endpoint for atomic re-sequencing. Requires the
+        `Manage Tags for Metrics` permission and the `metric_tags_write` permission.
       operationId: UpdateTagIndexingRule
       parameters:
         - $ref: "#/components/parameters/TagIndexingRuleId"
