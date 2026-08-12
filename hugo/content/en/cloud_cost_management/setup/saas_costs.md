@@ -158,6 +158,18 @@ Your OpenAI cost data for the past 15 months can be accessed in Cloud Cost Manag
 
 {{% /tab %}}
 
+{{% tab "OpenAI Codex" %}}
+
+1. Set up the [OpenAI Codex integration][101] in Datadog, entering your Codex API credential and workspace ID.
+2. Under the {{< ui >}}Resources{{< /ui >}} section, click the toggle for each account to enable `OpenAI Codex in Cloud Cost Management`.
+3. Click {{< ui >}}Save{{< /ui >}}.
+
+Datadog collects daily Codex spend, which becomes available in Cloud Cost Management after 24 hours. To access the available data collected by each SaaS Cost Integration, see the [Data Collected section](#data-collected).
+
+[101]: /integrations/openai_codex/
+
+{{% /tab %}}
+
 {{% tab "Anthropic" %}}
 
 ### 1. Generate an Admin API key
@@ -584,6 +596,19 @@ The following table contains a non-exhaustive list of out-of-the-box tags associ
 | `organization_name` | The name of the organization. |
 | `project_id` | The unique identifier of the project. |
 | `project_name` | The name of the project. |
+
+{{% /tab %}}
+
+{{% tab "OpenAI Codex" %}}
+
+**Note**: Datadog uses the provider's cost total when available and otherwise estimates Codex spend from token usage and public list prices. The `model` and `model_speed` tags are unavailable when the provider reports a single total that covers multiple models.
+
+| Tag Name | Tag Description |
+|---|---|
+| `workspace_id` | The identifier of the OpenAI Codex workspace. |
+| `user_email` | The email address of the user who incurred the cost. |
+| `model` | The Codex model used to generate the cost. |
+| `model_speed` | The speed tier of the Codex model. |
 
 {{% /tab %}}
 

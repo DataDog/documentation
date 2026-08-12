@@ -34,7 +34,7 @@ further_reading:
 
 ## Overview
 
-AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
+AI Costs in Cloud Cost Management gives FinOps and engineering teams a unified destination for analyzing AI spend across providers, including Amazon Bedrock, Anthropic, Google Gemini, OpenAI, OpenAI Codex, Vertex AI, GitHub Copilot, and Cursor. View total AI spend alongside your existing cloud infrastructure costs, analyze it with normalized tags, track cost anomalies, identify optimization opportunities, and attribute usage to the specific users and API keys driving it.
 
 ## Prerequisites
 
@@ -48,6 +48,7 @@ To use AI Costs, you must have at least one of the following supported providers
 | Azure Foundry Models   | [Azure integration][18] |
 | Google Gemini  | [Google Cloud integration][4] |
 | OpenAI     | [SaaS integration][5] |
+| OpenAI Codex | [OpenAI Codex][19] |
 | Vertex AI  | [Google Cloud integration][4] |
 | GitHub Copilot | [GitHub Copilot][15] |
 | Cursor | [Cursor][16] |
@@ -84,7 +85,7 @@ The following tags are available for all supported AI providers:
 
 ## Attribute AI spend to sources
 
-[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic and OpenAI. User-level allocation is also supported for Cursor.
+[Out-of-the-box (OOTB) allocation rules][12] use Datadog observability data to attribute AI costs to the users, API keys, and other sources that generated them. OOTB allocation rules require no configuration and are available for Anthropic, OpenAI, and OpenAI Codex. User-level allocation is also supported for Cursor.
 
 
 The following tags are available through OOTB allocation rules:
@@ -122,6 +123,14 @@ The following tags are available through OOTB allocation rules:
 - `user_id`
 
 {{% /tab %}}
+{{% tab "OpenAI Codex" %}}
+
+- `model`
+- `model_speed`
+- `user_email`
+- `workspace_id`
+
+{{% /tab %}}
 {{< /tabs >}}
 
 Configure [Tag Pipelines][13] to map OOTB tags (such as `user_email`) to teams, services, or business units for aggregate reporting:
@@ -154,3 +163,4 @@ After mapping, attributed spend appears in provider-specific dashboards and [Cos
 [16]: /cloud_cost_management/setup/saas_costs/?tab=cursor#configure-your-saas-accounts
 [17]: /cloud_cost_management/recommendations
 [18]: /cloud_cost_management/setup/azure/?tab=terraform
+[19]: /cloud_cost_management/setup/saas_costs/?tab=openaicodex#configure-your-saas-accounts
