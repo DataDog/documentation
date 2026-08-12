@@ -4,7 +4,7 @@ description: Learn how to define RUM operations that generate reliable availabil
 further_reading:
 - link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
   tag: 'Guide'
-  text: 'Best practices for creating SLOs on RUM operations'
+  text: 'Best practices for creating SLOs for RUM operations'
 - link: '/real_user_monitoring/operations_monitoring/?tab=browser'
   tag: 'Documentation'
   text: 'Learn about Operations Monitoring'
@@ -60,7 +60,7 @@ Link an operation to a journey when you create it so that the operation contribu
 
 ### Create SLOs for your journey
 
-For a full breakdown, see [Best practices for creating SLOs on RUM operations][7].
+For a full breakdown, see [Best practices for creating SLOs for RUM operations][7].
 
 ### Prioritize the final operation in a journey
 
