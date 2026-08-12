@@ -59,6 +59,10 @@
     "name": "Bits AI",
     "description": "Use the Bits AI endpoints to retrieve AI-powered investigations."
   },
+  "ci-visibility-github-accounts": {
+    "name": "CI Visibility GitHub Accounts",
+    "description": "Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the\n[CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)\nfor more information."
+  },
   "ci-visibility-pipelines": {
     "name": "CI Visibility Pipelines",
     "description": "Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information."

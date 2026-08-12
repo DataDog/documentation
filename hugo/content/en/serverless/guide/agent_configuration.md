@@ -101,7 +101,7 @@ Send custom metrics with [the StatsD protocol][5]:
 | `DD_STATSD_FORWARD_PORT`                          | Port to forward StatsD packets to.                                                                                                                                                                                                                                                                                                                                                                                          |
 | `DD_STATSD_METRIC_NAMESPACE`                      | Set a namespace for all StatsD metrics coming from this host. Each metric received is prefixed with the namespace before it is sent to Datadog.                                                                                                                                                                                                                                                                                                          |
 
-[1]: https://github.com/DataDog/datadog-agent/blob/main/pkg/config/config_template.yaml
+[1]: /agent/configuration/agent-configuration-files/
 
 [2]: https://docs.datadoghq.com/agent/logs/advanced_log_collection/#global-processing-rules
 
