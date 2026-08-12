@@ -1,5 +1,5 @@
 ---
-title: End Customer Cost Visibility
+title: Cost Visibility for Customers Who Purchase Through a Partner
 description: Reseller customers can view estimated Datadog costs in Bill Overview using the rates their partner provides, with a daily breakdown and product- and sub-org-level detail.
 further_reading:
 - link: "/account_management/plan_and_usage/bill_overview/"
@@ -10,7 +10,7 @@ further_reading:
   text: "Plan & Usage"
 ---
 
-If you purchase Datadog through a partner, End Customer Cost Visibility gives you greater visibility into your Datadog costs by enabling the [Bill Overview][1] page in your Datadog organization. Bill Overview provides a single view of your estimated month-to-date costs, a daily cost breakdown, and the ability to group costs by product and sub-organization, so you can understand your Datadog spending at any point during the billing period.
+If you purchase Datadog through a partner, you can get greater visibility into your Datadog costs through the [Bill Overview][1] page in your Datadog organization. Bill Overview provides a single view of your estimated month-to-date costs, a daily cost breakdown, and the ability to group costs by product and sub-organization, so you can understand your Datadog spending at any point during the billing period.
 
 {{< img src="account_management/plan_and_usage/bill-overview-main-light.png" alt="Bill Overview page showing the cost summary header and Daily Cost Breakdown stacked bar chart" >}}
 

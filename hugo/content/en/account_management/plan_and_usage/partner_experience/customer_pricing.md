@@ -2,9 +2,9 @@
 title: Customer Pricing
 description: Partners can set customer-specific pricing from the Customer Pricing page to enable cost visibility for their reseller customers in Datadog.
 further_reading:
-- link: "/account_management/plan_and_usage/end_customer_cost_visibility/"
+- link: "/account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/"
   tag: "Documentation"
-  text: "End Customer Cost Visibility"
+  text: "Cost Visibility for Customers Who Purchase Through a Partner"
 - link: "/account_management/plan_and_usage/partner_experience/"
   tag: "Documentation"
   text: "Plan and Usage Experience for Partners"
@@ -13,7 +13,7 @@ further_reading:
   text: "Bill Overview"
 ---
 
-Customer Pricing lets partners set customer-specific rates that enable End Customer Cost Visibility for their reseller customers. Setting rates is a one-time setup per customer, and you can update pricing at any time. To learn about the customer experience or to find a resource to share with your customers, see [End Customer Cost Visibility][1].
+Customer Pricing lets partners set customer-specific rates that enable cost visibility for their reseller customers. Setting rates is a one-time setup per customer, and you can update pricing at any time. To learn about the customer experience or to find a resource to share with your customers, see [Cost Visibility for Customers Who Purchase Through a Partner][1].
 
 ## Prerequisites
 
@@ -50,7 +50,7 @@ To change a customer's rates after publishing, return to the {{< ui >}}Customer 
 
 ## Limitations
 
-Legacy managed service provider (MSP) contracts (many customers under a single contract) are not supported. Customers under a legacy MSP contract do not appear in the customer dropdown. For the full list of limitations, see [End Customer Cost Visibility][1].
+Legacy managed service provider (MSP) contracts (many customers under a single contract) are not supported. Customers under a legacy MSP contract do not appear in the customer dropdown. For the full list of limitations, see [Cost Visibility for Customers Who Purchase Through a Partner][1].
 
 ## Get help
 
@@ -60,5 +60,5 @@ Contact your Datadog partner team contact for assistance.
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /account_management/plan_and_usage/end_customer_cost_visibility/
+[1]: /account_management/plan_and_usage/bill_overview/partner_purchased_cost_visibility/
 [2]: https://app.datadoghq.com/billing/customer-pricing
