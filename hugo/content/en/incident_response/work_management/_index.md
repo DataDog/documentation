@@ -27,7 +27,7 @@ algolia:
   tags: ['inbox', 'work management', 'case management']
 ---
 
-<div class="alert alert-info">Work Management was previously known as Case Management. The API endpoints, workflow actions, and permissions still use <code>case</code> terminology.</div>
+<div class="alert alert-info">Work Management was previously known as Case Management. The API endpoints and permissions still use <code>case</code> terminology.</div>
 
 ## Overview
 
