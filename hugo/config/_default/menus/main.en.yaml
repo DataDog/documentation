@@ -3090,6 +3090,11 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
+    - name: Guides
+      url: actions/forms/guide/
+      parent: forms
+      identifier: forms_guides
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -5291,11 +5296,6 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Business Transaction Tracking
-      url: data_streams/business_transaction_tracking
-      identifier: data_streams_business_transaction_tracking
-      parent: data_streams
-      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
@@ -6731,11 +6731,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
       weight: 108
+    - name: Network Traffic
+      url: observability_pipelines/configuration/network_traffic
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_network_traffic
+      weight: 109
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 109
+      weight: 110
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
