@@ -4577,6 +4577,22 @@ components:
         - id
         - base_severity
       type: object
+    AgentTrigger:
+      description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    AgentTriggerWrapper:
+      description: "Schema for an agent-based trigger."
+      properties:
+        agentTrigger:
+          $ref: "#/components/schemas/AgentTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - agentTrigger
+      type: object
     AggregatedHighFrozenFrameRate:
       description: Aggregated high frozen frame rate detection at view level.
       properties:
@@ -115671,6 +115687,7 @@ components:
     Trigger:
       description: "One of the triggers that can start the execution of a workflow."
       oneOf:
+        - $ref: "#/components/schemas/AgentTriggerWrapper"
         - $ref: "#/components/schemas/APITriggerWrapper"
         - $ref: "#/components/schemas/AppTriggerWrapper"
         - $ref: "#/components/schemas/CaseTriggerWrapper"
