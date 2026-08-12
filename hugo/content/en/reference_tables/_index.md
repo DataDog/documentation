@@ -190,7 +190,7 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 
 #### Example: create, update, and delete a Reference Table from a local file
 
-This example demonstrates the complete workflow for managing a Reference Table backed by a local CSV file with the API: create an upload, push the CSV data to the returned URLs, create the table, patch it with new data, and delete it.
+This example shows the complete workflow for managing a Reference Table backed by a local CSV file with the API. It creates an upload, pushes the CSV data to the returned URLs, creates the table, patches it with new data, and deletes it.
 
 Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and application keys, and `<DATADOG_SITE>` with your [Datadog site][11].
 
