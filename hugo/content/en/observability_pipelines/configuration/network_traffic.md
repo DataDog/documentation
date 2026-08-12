@@ -6,7 +6,7 @@ disable_toc: false
 
 ## Overview
 
-This document goes over the domains the Observability Pipelines Worker uses to send and receive data.
+The Observability Pipelines Worker communicates with Datadog over HTTPS on port 443 to validate credentials, receive pipeline configurations, and send Worker logs and metrics to Datadog. If your environment restricts outbound traffic, allowlist the domains listed on this page.
 
 ## Domains
 
@@ -27,7 +27,7 @@ The domains depend on the [Datadog Site][1] you use. Replace `<DD_SITE>` with `{
 : **Description**: Used to send the Observability Pipelines Worker's operational logs to Datadog.
 
 `*.agent.<DD_SITE>:443`
-: **Description**: Used to send Observability Pipelines Worker metrics (`pipelines.*`) to Datadog. A wildcard is required because the subdomain changes with each Worker version. For example for Worker version 2.15.1, the domain is `2-15-1-observability-pipelines.agent.datadoghq.com`. See [Pipeline Usage Metrics][1] for information about the metrics.
+: **Description**: Used to send Observability Pipelines Worker metrics (`pipelines.*`) to Datadog. A wildcard is required because the subdomain changes with each Worker version. For example, for Worker version 2.15.1, the domain is `2-15-1-observability-pipelines.agent.datadoghq.com`. See [Pipeline Usage Metrics][1] for information about the metrics.
 
 `obpipeline-intake.<DD_SITE>:443`
 : **Description**: Used for Live Capture. See [Live Capture permissions][2] for more information.
@@ -76,7 +76,7 @@ Most enterprise firewalls support wildcard rules. If you prefer to allowlist by 
 : **Description**: Used to send the Observability Pipelines Worker's operational logs to Datadog.
 
 `*.agent.<DD_SITE>:443`
-: **Description**: Used to send Observability Pipelines Worker metrics (`pipelines.*`) reported to your account. A wildcard is required because the subdomain changes with each Worker version. For example for Worker 2.15.1, the domains is `2-15-1-observability-pipelines.agent.datadoghq.com`. See [Pipeline Usage Metrics][1] for information about the metrics.
+: **Description**: Used to send Observability Pipelines Worker metrics (`pipelines.*`) reported to your account. A wildcard is required because the subdomain changes with each Worker version. For example for Worker 2.15.1, the domain is `2-15-1-observability-pipelines.agent.datadoghq.com`. See [Pipeline Usage Metrics][1] for information about the metrics.
 
 `obpipeline-intake.<DD_SITE>:443`
 : **Description**: Used for Live Capture. See [Live Capture permissions][2] for more information.
