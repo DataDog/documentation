@@ -214,20 +214,43 @@ Otherwise, turn on [debug mode][1] and [open a support ticket][2] with the debug
 
 ## Reduce overhead when using the profiler
 
-The [different profile types][3] have a fixed CPU and memory overhead, so *the more profiled applications, the higher the overhead.*
-
 ### Avoid enabling the profiler machine-wide
 
-Datadog does not recommend enabling the profiler at machine-level or for all IIS application pools. To reduce the amount of resources used by the profiler, you can:
-- Increase the allocated resources, such as increasing CPU cores.
-- Profile only specific applications by setting environment in batch files instead of directly running the application.
+The [different profile types][3] have a fixed CPU and memory overhead per application. Profiling every process on a host increases total resource use. To reduce overhead on all platforms, increase allocated resources (such as CPU cores) or set `DD_PROFILING_WALLTIME_ENABLED=0`.
+
+{{< tabs >}}
+
+{{% tab "Linux with Single Step APM Instrumentation" %}}
+
+To reduce overhead:
+
+- Use `DD_PROFILING_ENABLED=auto` instead of `true` when enabling profiling host-wide. With `auto`, profiling starts only when the application has run for more than 30 seconds **and** at least one trace was created.
+- Use [instrumentation rules][6] to limit which processes receive SSI.
+- Set `DD_PROFILING_ENABLED=false` in a specific process environment to opt that process out of profiling. Tracing is not affected.
+
+{{% /tab %}}
+{{% tab "Linux" %}}
+
+To reduce overhead:
+
+- Set profiler environment variables only in the startup script or systemd unit for the application you want to profile. Do not set them in shared host configuration such as `/etc/environment` or with `systemctl set-environment`.
+- In Docker, set profiler variables in the container definition for the specific application (Dockerfile or compose file). Avoid company-wide base images or shell profiles that export profiler variables to unrelated services.
+
+{{% /tab %}}
+{{% tab "Windows" %}}
+
+To reduce overhead:
+
+- Profile only specific applications by setting environment variables in batch files instead of at machine level.
 - Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
-- Disable wall time profiling with the setting `DD_PROFILING_WALLTIME_ENABLED=0`.
+
+{{% /tab %}}
+
+{{< /tabs >}}
 
 ### Linux Containers
 
-The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores.
-However, in that case, there will be a CPU consumption increase, even for idle services, because the profiler threads always scan the application's threads. The less available core, the more the CPU consumption increases. 
+The exact value can vary but the fixed overhead cost means that the relative overhead of the profiler can be significant in very small containers. To avoid this situation, the profiler is disabled in containers with less than one core. You can override the one core threshold by setting the `DD_PROFILING_MIN_CORES_THRESHOLD` environment variable to a value less than one. For example, a value of `0.5` allows the profiler to run in a container with at least 0.5 cores. However, in that case, there will be a CPU consumption increase, even for idle services, because the profiler threads always scan the application's threads. The less available core, the more the CPU consumption increases.
 
 Disabling the wall time profiler with the setting `DD_PROFILING_WALLTIME_ENABLED=0` decreases the CPU consumption by the profiler. If this is not enough, increase the CPU cores available for your containers.
 
@@ -268,3 +291,4 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet
+[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
