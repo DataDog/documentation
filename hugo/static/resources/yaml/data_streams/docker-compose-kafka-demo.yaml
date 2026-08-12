@@ -8,6 +8,7 @@
 #
 # This starts:
 #   - Kafka (KRaft mode, no ZooKeeper) + Schema Registry
+#   - Kafka Connect with an instrumented source and sink connector
 #   - Datadog Agent with Kafka Consumer integration
 #   - Producer app (sends orders every 2s, APM + Data Streams enabled)
 #   - Consumer app (processes orders, APM + Data Streams enabled)
@@ -67,8 +68,72 @@ services:
       timeout: 5s
       retries: 5
 
+  kafka-connect:
+    image: confluentinc/cp-kafka-connect:7.5.0
+    hostname: kafka-connect
+    depends_on:
+      kafka:
+        condition: service_healthy
+      datadog-agent:
+        condition: service_started
+    ports:
+      - "8083:8083"
+    environment:
+      CONNECT_BOOTSTRAP_SERVERS: 'kafka:19092'
+      CONNECT_REST_ADVERTISED_HOST_NAME: kafka-connect
+      CONNECT_GROUP_ID: kafka-connect-demo
+      CONNECT_CONFIG_STORAGE_TOPIC: _connect-configs
+      CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_OFFSET_STORAGE_TOPIC: _connect-offsets
+      CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_STATUS_STORAGE_TOPIC: _connect-status
+      CONNECT_STATUS_STORAGE_REPLICATION_FACTOR: 1
+      CONNECT_KEY_CONVERTER: org.apache.kafka.connect.converters.ByteArrayConverter
+      CONNECT_VALUE_CONVERTER: org.apache.kafka.connect.converters.ByteArrayConverter
+      CONNECT_PLUGIN_PATH: /tmp/connect-plugins,/usr/share/java,/usr/share/confluent-hub-components
+      DD_AGENT_HOST: datadog-agent
+      DD_TRACE_AGENT_PORT: 8126
+      DD_SERVICE: kafka-connect
+      DD_ENV: demo
+      DD_VERSION: "7.5.0"
+      DD_DATA_STREAMS_ENABLED: "true"
+      KAFKA_OPTS: -javaagent:/tmp/dd-java-agent.jar
+    command:
+      - bash
+      - -c
+      - |
+        set -e
+        curl -L --fail --silent --show-error -o /tmp/dd-java-agent.jar https://dtdg.co/latest-java-tracer
+        mkdir -p /tmp/connect-plugins
+        curl -L --fail --silent --show-error \
+          -o /tmp/connect-plugins/connect-file.jar \
+          https://repo1.maven.org/maven2/org/apache/kafka/connect-file/3.5.0/connect-file-3.5.0.jar
+        touch /tmp/source-records.txt
+        /etc/confluent/docker/run &
+        connect_pid=$$!
+        trap 'kill "$$connect_pid"; wait "$$connect_pid"' TERM INT
+        until curl --fail --silent http://localhost:8083/connectors > /dev/null; do sleep 2; done
+        curl --fail --silent --show-error -X PUT \
+          -H 'Content-Type: application/json' \
+          http://localhost:8083/connectors/demo-file-source/config \
+          -d '{"connector.class":"org.apache.kafka.connect.file.FileStreamSourceConnector","tasks.max":"1","file":"/tmp/source-records.txt","topic":"connector-source-events","value.converter":"org.apache.kafka.connect.storage.StringConverter"}'
+        curl --fail --silent --show-error -X PUT \
+          -H 'Content-Type: application/json' \
+          http://localhost:8083/connectors/demo-file-sink/config \
+          -d '{"connector.class":"org.apache.kafka.connect.file.FileStreamSinkConnector","tasks.max":"1","file":"/tmp/sink-records.txt","topics":"demo-orders"}'
+        while kill -0 "$$connect_pid" 2> /dev/null; do
+          echo "connector event $$(date +%s)" >> /tmp/source-records.txt
+          sleep 2
+        done
+        wait "$$connect_pid"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://localhost:8083/connectors"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
   datadog-agent:
-    image: gcr.io/datadoghq/agent:7.80.0
+    image: gcr.io/datadoghq/agent:7.82.0
     depends_on:
       kafka:
         condition: service_healthy
@@ -165,6 +230,7 @@ configs:
       instances:
         - kafka_connect_str: "kafka:19092"
           enable_cluster_monitoring: true
+          kafka_connect_url: http://kafka-connect:8083
           schema_registry_url: http://schema-registry:8081
           tags:
             - env:demo
