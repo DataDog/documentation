@@ -853,11 +853,15 @@ The following Langfuse-specific attributes are filtered from tags because they'r
 
 At ingestion, Agent Observability detects span mapping problems such as missing input messages or an unparsable token count. It flags affected spans instead of failing silently.
 
-Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute and a suggested fix. The panel also includes a link to the [attribute mapping reference](#attribute-mapping-reference).
+Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute, a suggested fix, and a link to the [attribute mapping reference](#attribute-mapping-reference).
 
-<div class="alert alert-info">Warnings are detected at ingestion. They don't affect billing or span retention.</div>
+Each warning also includes a short description of its downstream effect, such as skipped evaluations or unavailable cost estimation.
+
+Mapping warnings are detected at ingestion. They do not affect billing or span retention.
 
 ### Mapping warning reference
+
+A span can display warnings not listed in the following table if Datadog adds checks. These render with a generated title based on the check that triggered the warning.
 
 | Warning | Attribute | Fix |
 |---------|-----------|-----|
@@ -873,7 +877,7 @@ Flagged spans display a **Mapping warnings** indicator in the span detail panel.
 | Invalid token counts | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
 | Unreadable cost metrics | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
 | Invalid cost metrics | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
-| Malformed invocation parameters | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (`temperature`, `top_p`, `max_tokens`, and so on). |
+| Malformed invocation parameters | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
 | Malformed tool definitions | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
 | Malformed tool definition | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
 | Missing tool name | Expected `gen_ai.tool.name` | Set `gen_ai.tool.name` on tool spans. |
@@ -883,8 +887,6 @@ Flagged spans display a **Mapping warnings** indicator in the span detail panel.
 | Unreadable document score | On `output.documents` | Emit each document score as a number. |
 | Malformed document metadata | On `output.documents` | Emit each document's metadata as a JSON object. |
 | Unrecognized instrumentation | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` and `gen_ai.system` so Datadog can identify the instrumentation. |
-
-Each warning in the UI also includes a short description of its downstream effect, such as skipped evaluations or unavailable cost estimation. A span can display warnings not covered in this reference if Datadog adds checks. These render with a generated title based on the check that triggered the warning.
 
 ### Find raw span attributes for a flagged span
 
