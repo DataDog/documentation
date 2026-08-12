@@ -92,9 +92,9 @@ An @notification must have a space between it and the last line character:
 {{% /collapse-content %}}
 
 ### Threading notifications in Slack
-Monitor notifications sent to Slack through [notification rules][24] can be threaded. When threaded, all monitor alerts for a given alert cycle group under a single Slack thread with the top-level message reflecting the latest status of the monitor. 
+Monitor notifications sent to Slack through [notification rules][22] can be threaded. When threaded, all monitor alerts for a given alert cycle group under a single Slack thread with the top-level message reflecting the latest status of the monitor. 
 
-To enable monitor threading, set up or edit a [notification rule][24] scoped to the monitor alerts you would like targeted. Select **Thread Notifications** and save.
+To enable monitor threading, set up or edit a [notification rule][22] scoped to the monitor alerts you would like targeted. Select **Thread Notifications** and save.
 
 **Note**: An alert cycle is defined as starting from a non-recovered state to a recovered state. 
 
@@ -254,4 +254,3 @@ Message variables auto-populate with a randomly selected group based on the scop
 [21]: /monitors/guide/recovery-thresholds/
 [22]: /monitors/notify/notification_rules
 [23]: /synthetics/notifications/template_variables/
-[24]: /monitors/notify/notification_rules/
