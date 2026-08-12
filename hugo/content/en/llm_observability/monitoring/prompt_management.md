@@ -304,7 +304,7 @@ prompt = LLMObs.get_prompt("my-prompt", tag="unstable") # resolves to the unstab
 
 To configure this:
 
-1. On the prompt's version list, open the environment's details popover and select {{< ui >}}Targeting Rules{{< /ui >}}.
+1. On the prompt's version list, hover over an environment and click {{< ui >}}Targeting Rules{{< /ui >}}.
 
    {{< img src="llm_observability/monitoring/prompt-environment-targeting-rules-link.png" alt="An environment panel showing the environment currently serving one prompt version, with a link to Targeting Rules." style="width:60%;" >}}
 
