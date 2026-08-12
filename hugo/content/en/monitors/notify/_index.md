@@ -91,6 +91,11 @@ An @notification must have a space between it and the last line character:
 {{% notifications-email %}}
 {{% /collapse-content %}}
 
+### Threading notifications in Slack
+Datadog supports threading monitor notifications in slack. All monitor alerts for a given alert lifecycle will be grouped under a single Slack thread with the top-level message reflecting the latest status of the monitor. To enable this, select **Thread Notifications** when setting up your notification rule. For more information, reference notification threading.
+
+Note: An alert cycle is defined when a monitor is in a non-recovered state to when it is in a recovered state.
+
 ### Bulk editing monitor @-handles
 Datadog supports editing alert message recipients across multiple monitors at once. Use this feature to efficiently add, remove, or replace `@-handles` in the monitor message body. Use cases include:
 
