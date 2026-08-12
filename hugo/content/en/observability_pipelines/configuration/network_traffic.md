@@ -12,7 +12,6 @@ The Observability Pipelines Worker communicates with Datadog over HTTPS on port 
 
 The domains depend on the [Datadog Site][1] you use. Replace `<DD_SITE>` with `{{< region-param key="dd_site" >}}`.
 
-**Note**: If you are using a firewall, you must add the following domains to the allowlist. See also [Use wildcards in domains](#use-wildcards-in-domains).
 
 {{< tabs >}}
 {{% tab "Linux" %}}
