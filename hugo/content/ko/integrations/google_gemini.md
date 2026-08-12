@@ -3,7 +3,7 @@ app_id: google-gemini
 app_uuid: 93179a9e-98f8-48fe-843a-59f9c9bb84df
 assets:
   dashboards:
-    Agent Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
+    LLM Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
   integration:
     auto_install: false
     events:
@@ -64,14 +64,14 @@ tile:
 
 [Google Gemini][1]를 사용하여 챗봇이나 데이터 추출 도구와 같은 LLM 기반 애플리케이션을 모니터링하고 문제를 해결하며 평가합니다.
 
-LLM 애플리케이션을 구축하는 경우 Datadog의 Agent Observability를 사용하여 문제의 근본 원인을 조사하고, 운영 성능을 모니터링하며, LLM 애플리케이션의 품질, 개인 정보 보호 및 안전성을 평가하세요.
+LLM 애플리케이션을 구축하는 경우 Datadog의 LLM Observability를 사용하여 문제의 근본 원인을 조사하고, 운영 성능을 모니터링하며, LLM 애플리케이션의 품질, 개인 정보 보호 및 안전성을 평가하세요.
 
-트레이스 조사 방법 예시를 보려면 [Agent Observability 추적 뷰 동영상][2]을 확인하세요.
+트레이스 조사 방법 예시를 보려면 [LLM Observability 추적 뷰 동영상][2]을 확인하세요.
 
 ## 설정
 
-### Agent Observability: Google Gemini를 사용하여 LLM 애플리케이션에 대한 엔드투엔드 가시성 확보
-다양한 환경에서 Agent Observability를 활성화할 수 있습니다. 시나리오에 따라 적절한 설정을 따르세요.
+### LLM Observability: Google Gemini를 사용하여 LLM 애플리케이션에 대한 엔드투엔드 가시성 확보
+다양한 환경에서 LLM Observability를 활성화할 수 있습니다. 시나리오에 따라 적절한 설정을 따르세요.
 
 #### Python용 설치
 
@@ -120,9 +120,9 @@ LLM 애플리케이션을 구축하는 경우 Datadog의 Agent Observability를 
 
 **참고**: Agent가 사용자 지정 호스트 또는 포트에서 실행되는 경우 `DD_AGENT_HOST` 및 `DD_TRACE_AGENT_PORT`를 적절히 설정하세요.
 
-##### 서버리스 환경에서 Agent Observability를 실행하는 경우:
+##### 서버리스 환경에서 LLM Observability를 실행하는 경우:
 
-다음 환경 변수를 설정하여 Agent Observability를 활성화합니다.
+다음 환경 변수를 설정하여 LLM Observability를 활성화합니다.
 
   ```shell
      DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -141,7 +141,7 @@ Google Gemini 통합은 Google AI Python SDK의 콘텐츠 생성 호출에 대�
 이 메서드에는 추가 설정이 필요하지 않습니다.
 
 ##### 검증
-애플리케이션 로그에서 스팬 생성이 성공적으로 완료되었는지 확인하여 Agent Observability가 스팬을 제대로 캡처하고 있는지 확인하세요. 다음 명령을 실행하여 `ddtrace` 통합 상태를 확인할 수도 있습니다.
+애플리케이션 로그에서 스팬 생성이 성공적으로 완료되었는지 확인하여 LLM Observability가 스팬을 제대로 캡처하고 있는지 확인하세요. 다음 명령을 실행하여 `ddtrace` 통합 상태를 확인할 수도 있습니다.
 
   ```shell
   ddtrace-run --info

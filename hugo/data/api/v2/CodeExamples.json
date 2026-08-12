@@ -1104,28 +1104,28 @@
     {
       "group": "llm_observability",
       "suffix": "",
-      "description": "Create a new Agent Observability prompt version returns \"OK\" response"
+      "description": "Create a new LLM Observability prompt version returns \"OK\" response"
     }
   ],
   "CreateLLMObsPrompt": [
     {
       "group": "llm_observability",
       "suffix": "",
-      "description": "Create an Agent Observability prompt returns \"OK\" response"
+      "description": "Create an LLM Observability prompt returns \"OK\" response"
     }
   ],
   "UpdateLLMObsPromptVersion": [
     {
       "group": "llm_observability",
       "suffix": "",
-      "description": "Update a specific Agent Observability prompt version returns \"OK\" response"
+      "description": "Update a specific LLM Observability prompt version returns \"OK\" response"
     }
   ],
   "UpdateLLMObsPrompt": [
     {
       "group": "llm_observability",
       "suffix": "",
-      "description": "Update an Agent Observability prompt returns \"OK\" response"
+      "description": "Update an LLM Observability prompt returns \"OK\" response"
     }
   ],
   "AggregateLogs": [

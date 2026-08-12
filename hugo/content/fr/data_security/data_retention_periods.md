@@ -93,7 +93,7 @@ attributes:
   - product: Incident Management
     data_type: |
        - **Incidents** : conservés pendant toute la durée du compte
-  - product: Agent Observability
+  - product: LLM Observability
     data_type: |
        - **Traces et spans de production** : 15 jours
        - **Traces et spans d'expériences** : 90 jours

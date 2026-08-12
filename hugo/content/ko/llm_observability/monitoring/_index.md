@@ -57,7 +57,7 @@ Agent Observability 쿼리 인터페이스를 사용하여 LLM 애플리케이�
 
 ### APM과 Agent Observability 상관관계 분석 {#correlate-apm-and-agent-observability}
 
-{{< img src="llm_observability/index/llm_apm_example_light.png" alt="Datadog APM의 트레이스입니다. 개요 탭에 Agent Observability라는 섹션이 표시되어 있고, Agent Observability에 스팬을 볼 수 있는 링크와 입력 및 출력 텍스트가 포함되어 있습니다." style="width:100%">}}
+{{< img src="llm_observability/index/llm_apm_example_light.png" alt="Datadog APM의 트레이스입니다. 개요 탭에 LLM Observability라는 섹션이 표시되어 있고, Agent Observability에 스팬을 볼 수 있는 링크와 입력 및 출력 텍스트가 포함되어 있습니다." style="width:100%">}}
 
 Datadog APM으로 계측된 애플리케이션의 경우 SDK를 통해 [APM과 Agent Observability를 상호 연계][2]할 수 있습니다. APM과 Agent Observability를 상호 연계하면 애플리케이션 이슈부터 LLM 관련 근본 원인까지 전 과정을 파악하고 철저한 분석이 가능합니다.
 

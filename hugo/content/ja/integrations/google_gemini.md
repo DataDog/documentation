@@ -3,7 +3,7 @@ app_id: google-gemini
 app_uuid: 93179a9e-98f8-48fe-843a-59f9c9bb84df
 assets:
   dashboards:
-    Agent Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
+    LLM Observability Overview Dashboard: assets/dashboards/llm_observability_overview_dashboard.json
   integration:
     auto_install: false
     events:
@@ -64,14 +64,14 @@ tile:
 
 [Google Gemini][1] を使用して、チャット ボットやデータ抽出ツールなどの LLM を活用するアプリケーションを監視、トラブル シューティング、評価します。
 
-LLM アプリケーションを構築している場合は、Datadog の Agent Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
+LLM アプリケーションを構築している場合は、Datadog の LLM Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
 
-トレースの調査方法の例については、[Agent Observability のトレース ビューの動画][2] を参照してください。
+トレースの調査方法の例については、[LLM Observability のトレース ビューの動画][2] を参照してください。
 
 ## セットアップ
 
-### Agent Observability: Google Gemini を使用して LLM アプリケーションのエンド ツー エンドの可視性を実現
-Agent Observability はさまざまな環境で有効化できます。ご利用のシナリオに応じて適切なセットアップに従ってください。
+### LLM Observability: Google Gemini を使用して LLM アプリケーションのエンド ツー エンドの可視性を実現
+LLM Observability はさまざまな環境で有効化できます。ご利用のシナリオに応じて適切なセットアップに従ってください。
 
 #### Python 向けのインストール
 
@@ -120,9 +120,9 @@ Agent Observability はさまざまな環境で有効化できます。ご利用
 
 **注**: Agent がカスタム ホストまたはポートで実行されている場合は、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` を適切に設定してください。
 
-##### サーバーレス環境で Agent Observability を実行している場合:
+##### サーバーレス環境で LLM Observability を実行している場合:
 
-次の環境変数を設定して Agent Observability を有効化:
+次の環境変数を設定して LLM Observability を有効化:
 
   ```shell
      DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -141,7 +141,7 @@ Google Gemini インテグレーションは、Google AI Python SDK のコンテ
 これらのメソッドに追加のセットアップは不要です。
 
 ##### 検証
-アプリケーション ログでスパンが正常に作成されていることを確認し、Agent Observability がスパンを正しく取得していることを検証します。`ddtrace` インテグレーションの状態を確認するには、次のコマンドを実行します:
+アプリケーション ログでスパンが正常に作成されていることを確認し、LLM Observability がスパンを正しく取得していることを検証します。`ddtrace` インテグレーションの状態を確認するには、次のコマンドを実行します:
 
   ```shell
   ddtrace-run --info

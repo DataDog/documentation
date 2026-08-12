@@ -1,3 +1,3 @@
 ---
-title: List Agent Observability spans
+title: List LLM Observability spans
 ---

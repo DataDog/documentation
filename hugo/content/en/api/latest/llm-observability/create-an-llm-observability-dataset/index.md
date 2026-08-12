@@ -1,3 +1,3 @@
 ---
-title: Create an Agent Observability dataset
+title: Create an LLM Observability dataset
 ---

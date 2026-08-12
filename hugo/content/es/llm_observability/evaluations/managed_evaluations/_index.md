@@ -5,7 +5,7 @@ description: Aprende a configurar evaluaciones gestionadas para tus aplicaciones
 further_reading:
 - link: /llm_observability/terms/
   tag: Documentación
-  text: Conoce los términos y conceptos de Agent Observability
+  text: Conoce los términos y conceptos de LLM Observability
 - link: /llm_observability/setup
   tag: Documentación
   text: Aprende a configurar la observabilidad de LLM
@@ -19,9 +19,9 @@ title: Evaluaciones gestionadas
 
 Las evaluaciones gestionadas son herramientas integradas para evaluar tu aplicación de LLM en dimensiones como la calidad, la seguridad y la protección. Al crearlas, puedes evaluar la eficacia de las respuestas de tu aplicación, incluida la detección de sentimientos, relevancia temática, toxicidad, falta de respuesta y alucinación.
 
-Agent Observability asocia evaluaciones con tramos individuales para que puedas ver las entradas y salidas que condujeron a una evaluación específica.
+LLM Observability asocia evaluaciones con tramos individuales para que puedas ver las entradas y salidas que condujeron a una evaluación específica.
 
-Las evaluaciones gestionadas de Agent Observability aprovechan los LLMs. Para conectar tu proveedor de LLM a Datadog, necesitas una clave del proveedor.
+Las evaluaciones gestionadas de LLM Observability aprovechan los LLMs. Para conectar tu proveedor de LLM a Datadog, necesitas una clave del proveedor.
 
 Obtén más información sobre los [requisitos de compatibilidad][22].
 
@@ -34,15 +34,15 @@ Configura el proveedor de LLM que deseas utilizar para las evaluaciones "traer t
 
 <div class="alert alert-info">Si estás sujeto a la HIPAA, eres responsable de asegurarte de que te conectas únicamente a una cuenta de OpenAI que esté sujeta a un acuerdo de asociación empresarial (BAA) y que cumpla todos los requisitos de conformidad con la HIPAA.</div>
 
-Conecta tu cuenta de OpenAI a Agent Observability con tu clave de API de OpenAI. Agent Observability utiliza el modelo `GPT-4o mini` para las evaluaciones.
+Conecta tu cuenta de OpenAI a LLM Observability con tu clave de API de OpenAI. LLM Observability utiliza el modelo `GPT-4o mini` para las evaluaciones.
 
-1. En Datadog, navega a [**Agent Observability > Settings > Integrations**][1] (Agent Observability > Configuración > Integraciones)
+1. En Datadog, navega a [**LLM Observability > Settings > Integrations**][1] (LLM Observability > Configuración > Integraciones)
 1. Selecciona **Connect** (Conectar) en el cuadro de OpenAI.
 1. Sigue las instrucciones del cuadro.
    - Proporciona tu clave de API de OpenAI. Asegúrate de que esta clave tiene permiso de **escritura** para las **capacidades del modelo**.
 1. Habilita **Use this API key to evaluate your LLM applications** (Utilizar esta clave de API para evaluar tus aplicaciones LLM).
 
-{{< img src="llm_observability/configuration/openai-tile.png" alt="El cuadro de configuración de OpenAI en Agent Observability. Hace una lista de las instrucciones para configurar OpenAI y brindar tu clave de API de OpenAI." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/openai-tile.png" alt="El cuadro de configuración de OpenAI en LLM Observability. Hace una lista de las instrucciones para configurar OpenAI y brindar tu clave de API de OpenAI." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
@@ -50,15 +50,15 @@ Conecta tu cuenta de OpenAI a Agent Observability con tu clave de API de OpenAI.
 
 <div class="alert alert-info">Si estás sujeto a la HIPAA, es responsable de garantizar que te conectas únicamente a una cuenta de Azure OpenAI que esté sujeta a un acuerdo de asociación empresarial (BAA) y que cumpla todos los requisitos de conformidad con la HIPAA.</div>
 
-Conecta tu cuenta de Azure OpenAI a Agent Observability con tu clave de API de OpenAI. Datadog recomienda encarecidamente utilizar el modelo `GPT-4o mini` para las evaluaciones. La versión del modelo seleccionada debe admitir [salida estructurada][8].
+Conecta tu cuenta de Azure OpenAI a LLM Observability con tu clave de API de OpenAI. Datadog recomienda encarecidamente utilizar el modelo `GPT-4o mini` para las evaluaciones. La versión del modelo seleccionada debe admitir [salida estructurada][8].
 
-1. En Datadog, navega a [**Agent Observability > Settings > Integrations**][1] (Agent Observability > Configuración > Integraciones)
+1. En Datadog, navega a [**LLM Observability > Settings > Integrations**][1] (LLM Observability > Configuración > Integraciones)
 1. Selecciona **Connect** (Conectar) en el cuadro de Azure OpenAI.
 1. Sigue las instrucciones del cuadro.
    - Proporciona tu clave de API de Azure OpenAI. Asegúrate de que esta clave tiene permiso de **escritura** para las **capacidades del modelo**.
    - Indica el nombre del recurso, el ID de implementación y la versión de la API para completar la integración.
 
-{{< img src="llm_observability/configuration/azure-openai-tile.png" alt="El cuadro de configuración de Azure OpenAI en Agent Observability. Enumera las instrucciones para configurar Azure OpenAI y proporcionar la clave de API, el nombre de recurso, el ID de implementación y la versión de la API." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/azure-openai-tile.png" alt="El cuadro de configuración de Azure OpenAI en LLM Observability. Enumera las instrucciones para configurar Azure OpenAI y proporcionar la clave de API, el nombre de recurso, el ID de implementación y la versión de la API." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 [8]: https://learn.microsoft.com/en-us/azure/ai-foundry/openai/how-to/structured-outputs
@@ -67,14 +67,14 @@ Conecta tu cuenta de Azure OpenAI a Agent Observability con tu clave de API de O
 
 <div class="alert alert-info">Si estás sujeto a la HIPAA, es responsable de garantizar que te conectas únicamente a una cuenta de Anthropic que esté sujeta a un acuerdo de asociación empresarial (BAA) y que cumpla todos los requisitos de conformidad con la HIPAA.</div>
 
-Conecta tu cuenta de Anthropic a Agent Observability con tu clave de API de Anthropic. Agent Observability utiliza el modelo `Haiku` para las evaluaciones.
+Conecta tu cuenta de Anthropic a LLM Observability con tu clave de API de Anthropic. LLM Observability utiliza el modelo `Haiku` para las evaluaciones.
 
-1. En Datadog, navega a [**Agent Observability > Settings > Integrations**][1] (Agent Observability > Configuración > Integraciones)
+1. En Datadog, navega a [**LLM Observability > Settings > Integrations**][1] (LLM Observability > Configuración > Integraciones)
 1. Selecciona **Connect** (Conectar) en el cuadro de Anthropic.
 1. Sigue las instrucciones del cuadro.
    - Proporciona tu clave de la API de Anthropic. Asegúrate de que esta clave tiene permiso de **escritura** para las **capacidades del modelo**.
 
-{{< img src="llm_observability/configuration/anthropic-tile.png" alt="El cuadro de configuración de Anthropic en Agent Observability. Enumera las instrucciones para configurar Anthropic y proporcionar tu clave de API de Anthropic." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/anthropic-tile.png" alt="El cuadro de configuración de Anthropic en LLM Observability. Enumera las instrucciones para configurar Anthropic y proporcionar tu clave de API de Anthropic." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
@@ -82,13 +82,13 @@ Conecta tu cuenta de Anthropic a Agent Observability con tu clave de API de Anth
 
 <div class="alert alert-info">Si estás sujeto a la HIPAA, es responsable de garantizar que te conectas únicamente a una cuenta de Amazon Bedrock que esté sujeta a un acuerdo de asociación empresarial (BAA) y que cumpla todos los requisitos de conformidad con la HIPAA.</div>
 
-Conecta tu cuenta de Amazon Bedrock a Agent Observability con tu cuenta de AWS. Agent Observability utiliza el modelo `Haiku` para las evaluaciones.
+Conecta tu cuenta de Amazon Bedrock a LLM Observability con tu cuenta de AWS. LLM Observability utiliza el modelo `Haiku` para las evaluaciones.
 
-1. En Datadog, navega a [**Agent Observability > Settings > Integrations**][1] (Agent Observability > Configuración > Integraciones)
+1. En Datadog, navega a [**LLM Observability > Settings > Integrations**][1] (LLM Observability > Configuración > Integraciones)
 1. Selecciona **Connect** (Conectar) en el cuadro de Amazon Bedrock.
 1. Sigue las instrucciones del cuadro.
 
-{{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="El cuadro de configuración de Amazon Bedrock en Agent Observability. Enumera las instrucciones para configurar Amazon Bedrock." style="width:100%;" >}}
+{{< img src="llm_observability/configuration/amazon-bedrock-tile.png" alt="El cuadro de configuración de Amazon Bedrock en LLM Observability. Enumera las instrucciones para configurar Amazon Bedrock." style="width:100%;" >}}
 
 [1]: https://app.datadoghq.com/llm/settings/integrations
 {{% /tab %}}
@@ -109,7 +109,7 @@ Si tu proveedor de LLM restringe las direcciones IP, puedes obtener los rangos d
    - (Opcional) Selecciona en qué porcentaje de tramos deseas que se ejecute esta evaluación configurando el **porcentaje de muestreo**. Este número debe ser mayor que `0` y menor o igual que `100` (muestreo de todos los tramos).
 1. (Opcional) Configura las opciones de evaluación seleccionando qué subcategorías deben marcarse. Solo disponible en algunas evaluaciones.
 
-Después de hacer clic en **Save and Publish** (Guardar y publicar), Agent Observability utiliza la cuenta de LLM a la que te conectaste para activar la evaluación que habilitaste. Alternativamente, puedes **Save as Draft** (Guardar como borrador) y editarlas o habilitarlas más tarde.
+Después de hacer clic en **Save and Publish** (Guardar y publicar), LLM Observability utiliza la cuenta de LLM a la que te conectaste para activar la evaluación que habilitaste. Alternativamente, puedes **Save as Draft** (Guardar como borrador) y editarlas o habilitarlas más tarde.
 
 ## Editar evaluaciones existentes
 
@@ -143,7 +143,7 @@ Cada una de estas métricas tiene las etiquetas `ml_app`, `model_server`, `model
 
 Este check identifica y marca las entradas del usuario que se desvían de los temas de entrada aceptables configurados. Esto garantiza que las interacciones sigan siendo pertinentes al propósito y contexto designados del LLM.
 
-{{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="Una evaluación de relevancia del tema detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/topic_relevancy_3.png" alt="Una evaluación de relevancia del tema detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -151,7 +151,7 @@ Este check identifica y marca las entradas del usuario que se desvían de los te
 
 Puedes aportar temas para esta evaluación.
 
-1. Ve a [**Agent Observability > Applications**][3] (Agent Observability > Aplicaciones).
+1. Ve a [**LLM Observability > Applications**][3] (LLM Observability > Aplicaciones).
 1. Selecciona la aplicación para la que deseas añadir temas.
 1. En la esquina derecha del panel superior, selecciona **Settings** (Ajustes).
 1. Junto a **Topic Relevancy** (Relevancia temática), haz clic en **Configure Evaluation** (Configurar evaluación).
@@ -164,7 +164,7 @@ Los temas pueden contener varias palabras y deben ser lo más específicos y des
 
 Este check identifica los casos en los que el LLM hace una afirmación que no concuerda con el contexto de entrada proporcionado.
 
-{{< img src="llm_observability/evaluations/hallucination_5.png" alt="Una evaluación de alucinación detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/hallucination_5.png" alt="Una evaluación de alucinación detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -223,7 +223,7 @@ Las contradicciones se detectan siempre, mientras que las afirmaciones infundada
 
 Este check identifica instancias en las que el LLM no entrega una respuesta apropiada, lo que puede ocurrir debido a limitaciones en el conocimiento o la comprensión del LLM, ambigüedad en la consulta del usuario o la complejidad del tema.
 
-{{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="Una evaluación de Error de respuesta detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_5.png" alt="Una evaluación de Error de respuesta detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -251,7 +251,7 @@ La incompatibilidad de idioma solo se admite para los prompts en lenguaje natura
 Afrikaans, albanés, árabe, armenio, azerbaiyano, bielorruso, bengalí, noruego bokmal, bosnio, búlgaro, chino, croata, checo, danés, neerlandés, inglés, estonio, finés, francés, georgiano, alemán, griego, gujarati, hebreo, hindi, húngaro, islandés, indonesio, irlandés, italiano, japonés, kazajo, coreano, letón, lituano, macedonio, malayo, marathi, mongol, noruego nynorsk, persa, polaco, portugués, punjabi, rumano, ruso, serbio, eslovaco, esloveno, español, swahili, sueco, tamil, telugu, tailandés, turco, ucraniano, urdu, vietnamita, yoruba y zulú.
 {{% /collapse-content %}}
 
-{{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="Una evaluación de No coincidencia de idioma detectada por un modelo de fuente abierta en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_4.png" alt="Una evaluación de No coincidencia de idioma detectada por un modelo de fuente abierta en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -261,7 +261,7 @@ Afrikaans, albanés, árabe, armenio, azerbaiyano, bielorruso, bengalí, noruego
 
 Este check ayuda a comprender el estado de ánimo general de la conversación, medir la satisfacción del usuario, identificar tendencias de sentimientos e interpretar las respuestas emocionales. Este check clasifica con precisión el sentimiento del texto, lo que proporciona información para mejorar las experiencias del usuario y adaptar las respuestas para satisfacer mejor sus necesidades.
 
-{{< img src="llm_observability/evaluations/sentiment_5.png" alt="Una evaluación de Sentimiento detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_5.png" alt="Una evaluación de Sentimiento detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -273,7 +273,7 @@ Este check ayuda a comprender el estado de ánimo general de la conversación, m
 
 Este check evalúa cada instrucción de entrada del usuario y la respuesta de la aplicación de LLM en busca de contenido tóxico. Este check identifica y marca el contenido tóxico para garantizar que las interacciones sigan siendo respetuosas y seguras.
 
-{{< img src="llm_observability/evaluations/toxicity_4.png" alt="Una evaluación de Toxicidad detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_4.png" alt="Una evaluación de Toxicidad detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -302,7 +302,7 @@ Las categorías de toxicidad de esta tabla se basan en: [Banko et al. (2020)][14
 
 Este check identifica intentos de autores malintencionados o no autorizados de manipular las respuestas del LLM o redirigir la conversación de formas no previstas por el autor original. Este check mantiene la integridad y autenticidad de las interacciones entre los usuarios y el LLM.
 
-{{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="Una evaluación de Inyección de prompt detectada por un LLM en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_4.png" alt="Una evaluación de Inyección de prompt detectada por un LLM en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
@@ -323,11 +323,11 @@ Puedes configurar la evaluación de inyección de prompts para utilizar categor�
 
 Este check garantiza que la información confidencial se maneje de forma adecuada y segura, reduciendo el riesgo de violaciones de datos o acceso no autorizado.
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_4.png" alt="Una evaluación de Seguridad y salvaguardia detectada por el Sensitive Data Scanner en Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_4.png" alt="Una evaluación de Seguridad y salvaguardia detectada por el Sensitive Data Scanner en LLM Observability" style="width:100%;" >}}
 
 | Fase de evaluación | Método de evaluación | Definición de la evaluación | 
 |---|---|---|
-| Evaluación de entradas y salidas | Sensitive Data Scanner | Gracias a la tecnología de [Sensitive Data Scanner][4], Agent Observability escanea, identifica y elimina la información confidencial de los pares de respuesta-prompt de cada aplicación de LLM. Esto incluye información personal, datos financieros, historiales médicos o cualquier otro dato que requiera protección por motivos de privacidad o seguridad. |
+| Evaluación de entradas y salidas | Sensitive Data Scanner | Gracias a la tecnología de [Sensitive Data Scanner][4], LLM Observability escanea, identifica y elimina la información confidencial de los pares de respuesta-prompt de cada aplicación de LLM. Esto incluye información personal, datos financieros, historiales médicos o cualquier otro dato que requiera protección por motivos de privacidad o seguridad. |
 
 ## Referencias adicionales
 

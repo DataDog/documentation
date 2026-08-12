@@ -31,7 +31,7 @@ Claude(Claude Cowork 포함)를 Datadog MCP 서버에 연결하려면, 원격 MC
 1. URL을 입력하라는 메시지가 표시되면 [Datadog 사이트][2]의 Datadog MCP 서버 엔드포인트를 입력합니다({{< region-param key="dd_site_name" >}}). 올바른 지침을 사용하려면 이 설명서 페이지 오른쪽의 {{< ui >}}Datadog Site{{< /ui >}} 선택기를 사용하여 사이트를 선택하세요.
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+   [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -69,7 +69,7 @@ AI 에이전트가 지역 [Datadog 사이트][1]의 MCP 서버 엔드포인트�
        }
     }</code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -102,7 +102,7 @@ AI 에이전트가 지역 [Datadog 사이트][1]의 MCP 서버 엔드포인트�
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+   [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -190,7 +190,7 @@ AI 에이전트가 지역 [Datadog 사이트][1]의 MCP 서버 엔드포인트�
       }
     }</code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -219,7 +219,7 @@ AI 에이전트가 지역 [Datadog 사이트][3]의 MCP 서버 엔드포인트�
    - **원클릭 설치(권장):** Datadog MCP 서버 사용 {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}.
    - **수동 구성:** Goose의 [MCP 서버 추가][2] 지침을 따르되, 이 섹션에 나열된 엔드포인트를 스트림 가능한 HTTP 서버 URL로 사용합니다. 구성을 직접 편집하려면 `~/.config/goose/config.yaml`을 수정하세요.
 
-1. [제품별 도구][1]를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다.
+1. [제품별 도구][1]를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다.
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -262,7 +262,7 @@ JetBrains는 다양한 자사 IDE에서 사용할 수 있는 [Junie][1] 및 [AI 
     }
     </code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -288,7 +288,7 @@ JetBrains는 다양한 자사 IDE에서 사용할 수 있는 [Junie][1] 및 [AI 
     }
     </code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -311,7 +311,7 @@ JetBrains는 다양한 자사 IDE에서 사용할 수 있는 [Junie][1] 및 [AI 
     }
     </code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -363,7 +363,7 @@ AI 에이전트가 지역 [Datadog 사이트][3]의 MCP 서버 엔드포인트�
       }
     }</code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -422,7 +422,7 @@ AI 에이전트가 지역 [Datadog 사이트][3]의 MCP 서버 엔드포인트�
   }
 }</code></pre>
 
-[제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다.
+[제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다.
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -485,7 +485,7 @@ Datadog의 [Cursor 및 VS Code 확장][1]에 관리형 Datadog MCP 서버에 대
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -523,7 +523,7 @@ AI 에이전트가 지역 [Datadog 사이트][1]의 MCP 서버 엔드포인트�
       }
     }</code></pre>
 
-1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 Agent Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
+1. [제품별 도구](#toolsets)를 활성화하려면 엔드포인트 URL 끝에 `toolsets` 쿼리 파라미터를 포함합니다. 예를 들어 이 URL은 APM 및 LLM Observability 도구_만_ 활성화합니다(정식 출시된 도구 세트를 모두 활성화하려면 `toolsets=all` 사용 – 도구 필터링을 지원하는 클라이언트에 가장 적합).
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -577,7 +577,7 @@ Datadog MCP 서버는 _도구 세트_를 지원하므로, 필요한 [MCP 도구]
 - `error-tracking`: Datadog [Error Tracking][32]과의 상호작용을 위한 도구
 - `feature-flags`: 플래그 및 플래그 환경 생성, 나열, 업데이트 등 [기능 플래그][35] 관리 도구
 - `kubernetes`: 모든 클러스터에서 [Kubernetes][51] 리소스를 검색 및 설명하고 매니페스트를 검색하는 도구
-- `llmobs`: [Agent Observability][36] 스팬 및 실험을 검색 및 분석하는 도구
+- `llmobs`: [LLM Observability][36] 스팬 및 실험을 검색 및 분석하는 도구
 - `networks`: [Cloud Network Monitoring][37] 분석 및 [Network Device Monitoring][38]을 위한 도구
 - `onboarding`: 가이드가 있는 Datadog 설정 및 구성을 위한 에이전틱 온보딩 도구
 - `product-analytics`: [Product Analytics][41] 쿼리와의 상호작용을 위한 도구

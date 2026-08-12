@@ -1,3 +1,3 @@
 ---
-title: Create an Agent Observability prompt
+title: Create an LLM Observability prompt
 ---

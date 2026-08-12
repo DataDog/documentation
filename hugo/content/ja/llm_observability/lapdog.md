@@ -1,22 +1,22 @@
 ---
-description: Agent Observability ダッシュボードを Datadog アカウントなしでローカルで実行し、ブラウザでコーディングエージェントとアプリケーションのトレースを検査します。
+description: LLM Observability ダッシュボードを Datadog アカウントなしでローカルで実行し、ブラウザでコーディングエージェントとアプリケーションのトレースを検査します。
 further_reading:
 - link: https://github.com/DataDog/dd-apm-test-agent/blob/master/lapdog/README.md
   tag: GitHub
   text: GitHub の Lapdog README
 - link: /llm_observability/instrumentation/sdk
   tag: ドキュメント
-  text: Agent Observability SDK を使用したアプリケーションのインスツルメンテーション
+  text: LLM Observability SDK を使用したアプリケーションのインスツルメンテーション
 - link: /llm_observability/instrumentation/auto_instrumentation
   tag: ドキュメント
-  text: Agent Observability のための自動インスツルメンテーション
+  text: LLM Observability のための自動インスツルメンテーション
 title: Lapdog
 ---
 ## 概要 {#overview}
 
-Lapdog は Agent Observability のためのローカル開発ツールです。`localhost:8126` でエージェントを実行し、LLM アプリケーションまたはコーディングエージェント (Claude Code、Codex、Pi など) からすべてのスパン、プロンプト、ツールコール、コストをキャプチャして、[lapdog.datadoghq.com](https://lapdog.datadoghq.com) のブラウザダッシュボードにストリーミングします。Datadog アカウントは必要ありません。
+Lapdog は LLM Observability のためのローカル開発ツールです。`localhost:8126` でエージェントを実行し、LLM アプリケーションまたはコーディングエージェント (Claude Code、Codex、Pi など) からすべてのスパン、プロンプト、ツールコール、コストをキャプチャして、[lapdog.datadoghq.com](https://lapdog.datadoghq.com) のブラウザダッシュボードにストリーミングします。Datadog アカウントは必要ありません。
 
-Lapdog はオープンソースの [Datadog APM テストエージェント][1]に基づいています。キャプチャされたテレメトリを Datadog に転送することもでき、同じデータが Agent Observability に本番トラフィックと共に表示されます。
+Lapdog はオープンソースの [Datadog APM テストエージェント][1]に基づいています。キャプチャされたテレメトリを Datadog に転送することもでき、同じデータが LLM Observability に本番トラフィックと共に表示されます。
 
 ## 得られるもの {#what-you-get}
 
@@ -91,7 +91,7 @@ lapdog python my_app.py
 
 ## Datadog にイベントを転送する {#forward-events-to-datadog}
 
-キャプチャされたイベントを Datadog の Agent Observability にデュアルシップするには、API キーを設定して `--forward` を渡します。
+キャプチャされたイベントを Datadog の LLM Observability にデュアルシップするには、API キーを設定して `--forward` を渡します。
 
 ```shell
 DD_API_KEY=<YOUR_API_KEY> lapdog --forward claude

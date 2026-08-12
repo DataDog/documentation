@@ -1,3 +1,3 @@
 ---
-title: Export an Agent Observability dataset
+title: Export an LLM Observability dataset
 ---

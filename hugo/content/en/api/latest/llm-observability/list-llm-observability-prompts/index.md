@@ -1,3 +1,3 @@
 ---
-title: List Agent Observability prompts
+title: List LLM Observability prompts
 ---

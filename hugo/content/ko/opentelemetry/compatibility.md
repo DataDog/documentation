@@ -30,7 +30,7 @@ Datadog은 OpenTelemetry를 사용하기 위한 여러 가지 구성을 지원�
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [상호 연계된 트레이스, 메트릭, 로그][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [분산 트레이싱][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Agent Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [LLM Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [런타임 메트릭][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [스팬 링크][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [트레이스 메트릭][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
@@ -63,9 +63,9 @@ Datadog SDK는 다양한 언어로 OpenTelemetry 트레이스, 메트릭 및 로
 
 ## 더 많은 세부 정보 {#more-details}
 
-### Agent Observability {#llm-observability}
+### LLM Observability {#llm-observability}
 
-[생성형 AI 속성](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)이 있는 OpenTelemetry 트레이스는 자동으로 Agent Observability 트레이스로 변환됩니다. 이 변환을 비활성화하려면 [Agent Observability 변환 비활성화][38]를 참조하세요.
+[생성형 AI 속성](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)이 있는 OpenTelemetry 트레이스는 자동으로 LLM Observability 트레이스로 변환됩니다. 이 변환을 비활성화하려면 [LLM Observability 변환 비활성화][38]를 참조하세요.
 
 ### 런타임 메트릭 {#runtime-metrics}
 

@@ -1,3 +1,3 @@
 ---
-title: Delete Agent Observability data
+title: Delete LLM Observability data
 ---

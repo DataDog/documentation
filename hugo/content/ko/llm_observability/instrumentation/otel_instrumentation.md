@@ -1,12 +1,12 @@
 ---
 description: GenAI 시맨틱 규칙을 사용하여 OpenTelemetry를 사용하는 LLM 애플리케이션을 계측하고 Datadog SDK 없이
-  트레이스를 Datadog Agent Observability에 전송하세요.
+  트레이스를 Datadog LLM Observability에 전송하세요.
 title: OpenTelemetry 계측
 ---
 ## 개요 {#overview}
-생성형 AI 작업에 대한 OpenTelemetry의 표준화된 시맨틱 규칙을 사용하면 각종 OpenTelemetry 호환 라이브러리 또는 프레임워크를 사용하는 LLM 애플리케이션을 계측하고 트레이스를 Agent Observability에서 시각화할 수 있습니다.
+생성형 AI 작업에 대한 OpenTelemetry의 표준화된 시맨틱 규칙을 사용하면 각종 OpenTelemetry 호환 라이브러리 또는 프레임워크를 사용하는 LLM 애플리케이션을 계측하고 트레이스를 LLM Observability에서 시각화할 수 있습니다.
 
-Agent Observability는 [생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규칙][1]을 따르는 OpenTelemetry 트레이스 수집을 지원합니다. 이렇게 하면 OpenTelemetry로 계측한 애플리케이션에서 직접 LLM 트레이스를 Datadog으로 전송할 수 있고 Datadog Agent Observability SDK 또는 Datadog Agent가 필요하지 않습니다.
+LLM Observability는 [생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규칙][1]을 따르는 OpenTelemetry 트레이스 수집을 지원합니다. 이렇게 하면 OpenTelemetry로 계측한 애플리케이션에서 직접 LLM 트레이스를 Datadog으로 전송할 수 있고 Datadog LLM Observability SDK 또는 Datadog Agent가 필요하지 않습니다.
 
 ## 전제 조건 {#prerequisites}
 
@@ -17,11 +17,11 @@ OpenTelemetry 스팬에 대하여 <a href="/llm_observability/evaluations/extern
 
 OpenTelemetry 스팬과 함께 Prompt Tracking을 사용하는 방법에 관한 자세한 내용은 <a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry 계측</a>을 참조하세요.
 
-OpenTelemetry 스팬은 <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">Agent Observability Experiments</a> 내에서도 사용할 수 있습니다. 코드 <code>DD_TRACE_OTEL_ENABLED=1</code>를 설정하면 실험 작업 안에서 생성된 OTel 스팬이 해당 실험 스팬의 하위 항목으로 자동으로 표시됩니다.
+OpenTelemetry 스팬은 <a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a> 내에서도 사용할 수 있습니다. 코드 <code>DD_TRACE_OTEL_ENABLED=1</code>를 설정하면 실험 작업 안에서 생성된 OTel 스팬이 해당 실험 스팬의 하위 항목으로 자동으로 표시됩니다.
 
 ## 설정 {#setup}
 
-OpenTelemetry 트레이스를 Agent Observability로 전송하려면 다음 설정을 사용하여 OpenTelemetry Exporter를 구성하세요.
+OpenTelemetry 트레이스를 LLM Observability로 전송하려면 다음 설정을 사용하여 OpenTelemetry Exporter를 구성하세요.
 
 ### 구성 {#configuration}
 
@@ -45,7 +45,7 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 **참고**:
 * 기본 OpenTelemetry SDK 외의 OpenTelemetry 라이브러리를 사용 중인 경우, 라이브러리의 API에 따라 엔드포인트, 프로토콜 및 헤더를 다르게 구성해야 할 수 있습니다. 적절한 구성 방법은 라이브러리의 설명서를 참조하세요.
-* OpenTelemetry 계측을 사용할 때, Agent Observability로 전송되는 일부 데이터가 상응하는 APM 트레이스에도 기록될 수 있습니다. 민감한 데이터를 보호 중인 경우, APM에서 Agent Observability 액세스 제어에 일치하도록 Restricted Dataset를 구성하는 방안도 고려하세요. 자세한 내용은 [Data Access Control][8]을 참조하세요.
+* OpenTelemetry 계측을 사용할 때, LLM Observability로 전송되는 일부 데이터가 상응하는 APM 트레이스에도 기록될 수 있습니다. 민감한 데이터를 보호 중인 경우, APM에서 LLM Observability 액세스 제어에 일치하도록 Restricted Dataset를 구성하는 방안도 고려하세요. 자세한 내용은 [Data Access Control][8]을 참조하세요.
 
 #### strands-agents 사용 {#using-strands-agents}
 
@@ -55,28 +55,28 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-이 환경 변수를 사용하면 `strands-agents`가 Agent Observability에 필수인, 생성형 AI에 대한 OpenTelemetry v1.37+ 시맨틱 규칙을 따르는 트레이스를 발생시키도록 보장합니다.
+이 환경 변수를 사용하면 `strands-agents`가 LLM Observability에 필수인, 생성형 AI에 대한 OpenTelemetry v1.37+ 시맨틱 규칙을 따르는 트레이스를 발생시키도록 보장합니다.
 
 ### 계측 {#instrumentation}
 
-Agent Observability와 호환되는 트레이스를 생성하려면 다음 중 한 가지 작업을 수행합니다.
+LLM Observability와 호환되는 트레이스를 생성하려면 다음 중 한 가지 작업을 수행합니다.
 
 - [생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규칙][1]에 따라 스팬을 발생시키는 OpenTelemetry 라이브러리 또는 계측 패키지를 사용합니다.
 - 시맨틱 규칙에 정의된 대로 필요한 `gen_ai.*` 속성이 있는 스팬을 생성하는 사용자 지정 OpenTelemetry 계측을 생성합니다.
 
-애플리케이션이 데이터를 전송하기 시작하면 트레이스가 [**Agent Observability Traces** 페이지][3]에 자동으로 나타납니다. UI에서 트레이스를 검색하려면 `ml_app` 속성을 사용하세요. 이 속성은 OpenTelemetry 루트 스팬의 `service` 속성의 값으로 자동으로 설정됩니다.
+애플리케이션이 데이터를 전송하기 시작하면 트레이스가 [**LLM Observability Traces** 페이지][3]에 자동으로 나타납니다. UI에서 트레이스를 검색하려면 `ml_app` 속성을 사용하세요. 이 속성은 OpenTelemetry 루트 스팬의 `service` 속성의 값으로 자동으로 설정됩니다.
 
 <div class="alert alert-danger">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> 버전 0.47+가 지원됩니다. <a href="#using-openllmetry">OpenLLMetry 예시</a>를 참조하세요.
 <li/> OpenInference는 지원되지 않습니다.
-<li/> 트레이스를 전송하고 해당 트레이스가 Agent Observability Traces 페이지에 표시되기까지 3~5분의 지연 시간이 있을 수 있습니다. APM을 활성화한 경우, 트레이스가 즉시 APM Traces 페이지에 표시됩니다.
+<li/> 트레이스를 전송하고 해당 트레이스가 LLM Observability Traces 페이지에 표시되기까지 3~5분의 지연 시간이 있을 수 있습니다. APM을 활성화한 경우, 트레이스가 즉시 APM Traces 페이지에 표시됩니다.
 </ul>
 </div>
 
 ## 테스트된 프레임워크 및 라이브러리 {#tested-frameworks-and-libraries}
 
-이러한 프레임워크 및 라이브러리는 Datadog Agent Observability로 테스트되었습니다. [OpenTelemetry 1.37+ GenAI 시맨틱 규칙][1]과 호환되는 스팬을 발생시키는 모든 프레임워크가 지원됩니다.
+이러한 프레임워크 및 라이브러리는 Datadog LLM Observability로 테스트되었습니다. [OpenTelemetry 1.37+ GenAI 시맨틱 규칙][1]과 호환되는 스팬을 발생시키는 모든 프레임워크가 지원됩니다.
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -152,7 +152,7 @@ os.environ["AWS_DEFAULT_REGION"] = "<YOUR_AWS_REGION>"
 # Enable latest GenAI semantic conventions (1.37)
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
-# Configure OTLP endpoint to send traces to Datadog Agent Observability
+# Configure OTLP endpoint to send traces to Datadog LLM Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
@@ -264,7 +264,7 @@ with tracer.start_as_current_span(
 provider.force_flush()
 ```
 
-이 예시를 실행한 이후, Agent Observability UI에서 `ml_app:simple-llm-example`을 검색하여 생성된 트레이스를 찾으세요.
+이 예시를 실행한 이후, LLM Observability UI에서 `ml_app:simple-llm-example`을 검색하여 생성된 트레이스를 찾으세요.
 
 ### OpenLLMetry 사용 {#using-openllmetry}
 
@@ -309,11 +309,11 @@ client.chat.completions.create(
 provider.force_flush(timeout_millis=5000)
 ```
 
-이 예시를 실행한 이후, Agent Observability UI에서 `ml_app:simple-openllmetry-test`를 검색하여 생성된 트레이스를 찾으세요.
+이 예시를 실행한 이후, LLM Observability UI에서 `ml_app:simple-openllmetry-test`를 검색하여 생성된 트레이스를 찾으세요.
 
 ## 속성 매핑 참조 {#attribute-mapping-reference}
 
-이 섹션은 OpenTelemetry GenAI 시맨틱 규칙(v1.37+) 및 OpenLLMetry와 Datadog의 Agent Observability 스팬 스키마 간의 매핑을 제공합니다.
+이 섹션은 OpenTelemetry GenAI 시맨틱 규칙(v1.37+) 및 OpenLLMetry와 Datadog의 LLM Observability 스팬 스키마 간의 매핑을 제공합니다.
 
 <div class="alert alert-info">OpenLLMetry별 매핑은 <a href="#openllmetry-attribute-mappings">OpenLLMetry 속성 매핑</a> 섹션에 별도로 기록했습니다.</div>
 
@@ -321,7 +321,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### 기본 스팬 속성 {#base-span-attributes}
 
-| OTLP 필드 | Agent Observability 필드 | 참고 |
+| OTLP 필드 | LLM Observability 필드 | 참고 |
 |------------|--------------|-------|
 | `resource.attributes.service.name` | `ml_app`, `tags.service` | |
 | `name` | `name` | 있는 경우 `gen_ai.tool.name`으로 재정의됨 |
@@ -334,7 +334,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### 스팬 종류 판별 {#span-kind-resolution}
 
-| `gen_ai.operation.name` | Agent Observability `span.kind` |
+| `gen_ai.operation.name` | LLM Observability `span.kind` |
 |-------------------------|-------------------|
 | `generate_content`, `chat`, `text_completion`, `completion` | `llm` |
 | `embeddings`, `embedding` | `embedding` |
@@ -344,7 +344,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### 모델 정보 {#model-information}
 
-| OTel 속성 | Agent Observability 필드 | 참고 |
+| OTel 속성 | LLM Observability 필드 | 참고 |
 |----------------|--------------|-------|
 | `gen_ai.operation.name` | `meta.span.kind` | 위의 판별 표 참조 |
 | `gen_ai.provider.name` | `meta.model_provider` | `gen_ai.system`, 다음으로 `custom` |으로 폴백됨
@@ -353,7 +353,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### 토큰 사용량 메트릭 {#token-usage-metrics}
 
-| OTel 속성 | Agent Observability 필드 |
+| OTel 속성 | LLM Observability 필드 |
 |----------------|--------------|
 | `gen_ai.usage.input_tokens` | `metrics.input_tokens` |
 | `gen_ai.usage.output_tokens` | `metrics.output_tokens` |
@@ -365,7 +365,7 @@ provider.force_flush(timeout_millis=5000)
 
 모든 `gen_ai.request.*` 파라미터는 접두사가 제거된 `meta.metadata.*`로 매핑됩니다.
 
-| OTel 속성 | Agent Observability 필드 |
+| OTel 속성 | LLM Observability 필드 |
 |----------------|--------------|
 | `gen_ai.request.seed` | `metadata.seed` |
 | `gen_ai.request.frequency_penalty` | `metadata.frequency_penalty` |
@@ -378,7 +378,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### 도구 속성 {#tool-attributes}
 
-| OTel 속성 | Agent Observability 필드 | 참고 |
+| OTel 속성 | LLM Observability 필드 | 참고 |
 |----------------|--------------|-------|
 | `gen_ai.tool.name` | `name` | 스팬 이름을 재정의함 |
 | `gen_ai.tool.call.id` | `metadata.tool_id` | |
@@ -390,13 +390,13 @@ provider.force_flush(timeout_millis=5000)
 
 #### 세션 및 대화 {#session-and-conversation}
 
-| OTel 속성 | Agent Observability 필드 | 참고 |
+| OTel 속성 | LLM Observability 필드 | 참고 |
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | 또한 `metadata.conversation_id` 및 태그에 추가됨 |
 
 #### 응답 속성 {#response-attributes}
 
-| OTel 속성 | Agent Observability 필드 |
+| OTel 속성 | LLM Observability 필드 |
 |----------------|--------------|
 | `gen_ai.response.model` | `meta.model_name` |
 | `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
@@ -408,7 +408,7 @@ provider.force_flush(timeout_millis=5000)
 1. 직접 속성: `gen_ai.input.messages`, `gen_ai.output.messages`, `gen_ai.system_instructions`
 2. 이름이 `gen_ai.client.inference.operation.details`인 스팬 이벤트(`meta["events"]`)
 
-| OTel 소스 | Agent Observability 필드 | 참고 |
+| OTel 소스 | LLM Observability 필드 | 참고 |
 |-------------|--------------|-------|
 | `gen_ai.input.messages` | `meta.input.messages`(llm)/`meta.input.value`(기타) | |
 | `gen_ai.output.messages` | `meta.output.messages`(llm)/`meta.output.value`(기타) | |
@@ -416,7 +416,7 @@ provider.force_flush(timeout_millis=5000)
 
 ##### 임베딩 스팬 {#embedding-spans}
 
-| OTel 소스 | Agent Observability 필드 |
+| OTel 소스 | LLM Observability 필드 |
 |-------------|--------------|
 | `gen_ai.input.messages` | `meta.input.documents` |
 | N/A | `meta.output.value` = `[N embedding(s) returned]` |
@@ -429,7 +429,7 @@ provider.force_flush(timeout_millis=5000)
 - 알 수 없는 `gen_ai.*` 키가 접두사를 제거한 상태로 추가됨
 - 필터링하여 제외됨: `_dd.*`, `llm.*`, `ddtags`, `events`, 및 이미 매핑된 `gen_ai.*` 키
 
-<div class="alert alert-info">모든 <code>gen_ai.*</code> 속성이며 Agent Observability 스팬 필드에 명시적으로 매핑되지 않은 속성은 LLM 스팬의 태그에 배치되며, 여기에는 값당 256자의 한도가 적용됩니다. 이 한도를 초과하는 값은 잘립니다. 기타 모든<code>gen_ai</code> 가 아닌 속성은 삭제됩니다.</div>
+<div class="alert alert-info">모든 <code>gen_ai.*</code> 속성이며 LLM Observability 스팬 필드에 명시적으로 매핑되지 않은 속성은 LLM 스팬의 태그에 배치되며, 여기에는 값당 256자의 한도가 적용됩니다. 이 한도를 초과하는 값은 잘립니다. 기타 모든<code>gen_ai</code> 가 아닌 속성은 삭제됩니다.</div>
 
 ### OpenLLMetry 속성 매핑 {#openllmetry-attribute-mappings}
 
@@ -439,7 +439,7 @@ provider.force_flush(timeout_millis=5000)
 
 `gen_ai.operation.name`이 없을 때 `llm.request.type`이 폴백으로 사용됩니다.
 
-| `llm.request.type` | Agent Observability `span.kind` |
+| `llm.request.type` | LLM Observability `span.kind` |
 |--------------------|-------------------|
 | `chat` | `llm` |
 | `completion` | `llm` |
@@ -449,13 +449,13 @@ provider.force_flush(timeout_millis=5000)
 
 #### 모델 정보 {#model-information-1}
 
-| OpenLLMetry 속성 | Agent Observability 필드 | 참고 |
+| OpenLLMetry 속성 | LLM Observability 필드 | 참고 |
 |-----------------------|--------------|-------|
 | `gen_ai.system` | `meta.model_provider` | `gen_ai.provider.name`이 없는 경우 폴백 |
 
 #### 토큰 사용량 메트릭 {#token-usage-metrics-1}
 
-| OpenLLMetry 속성 | Agent Observability 필드 | 참고 |
+| OpenLLMetry 속성 | LLM Observability 필드 | 참고 |
 |-----------------------|--------------|-------|
 | `llm.usage.total_tokens` | `metrics.total_tokens` | `gen_ai.usage.total_tokens`가 없는 경우 폴백 |
 
@@ -511,7 +511,7 @@ OpenLLMetry는 JSON 배열 대신 인덱싱된 속성을 사용합니다. 이러
 
 임베딩 스팬의 경우 프롬프트 내용 속성에서 문서가 추출됩니다.
 
-| OpenLLMetry 소스 | Agent Observability 필드 |
+| OpenLLMetry 소스 | LLM Observability 필드 |
 |--------------------|--------------|
 | `gen_ai.prompt.<index>.content` | `meta.input.documents[].text` |
 
@@ -525,7 +525,7 @@ OpenLLMetry는 JSON 배열 대신 인덱싱된 속성을 사용합니다. 이러
 
 ## 지원되는 시맨틱 규칙 {#supported-semantic-conventions}
 
-Agent Observability는 생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규칙을 따르는 스팬을 지원하며, 예를 들면 다음과 같습니다.
+LLM Observability는 생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규칙을 따르는 스팬을 지원하며, 예를 들면 다음과 같습니다.
 
 - `gen_ai.provider.name`, `"gen_ai.operation.name"`, `gen_ai.request.model` 및 기타 gen_ai 속성이 있는 LLM 작업
 - 직접 스팬 속성에 있는, 또는 스팬 이벤트를 통한 작업 입력/출력
@@ -534,9 +534,9 @@ Agent Observability는 생성형 AI에 대한 OpenTelemetry 1.37+ 시맨틱 규�
 
 지원되는 속성 및 각각의 사양 전체 목록은 [생성형 AI에 대한 OpenTelemetry 시맨틱 규칙 설명서][1]를 참조하세요.
 
-## Agent Observability 변환 비활성화 {#disabling-llm-observability-conversion}
+## LLM Observability 변환 비활성화 {#disabling-llm-observability-conversion}
 
-생성형 AI 스팬을 APM에 유지하고 Agent Observability에 표시되지 않게 하려면 `dd_llmobs_enabled` 속성을 `false`로 설정하여 자동 변환을 비활성화하면 됩니다. 트레이스의 어느 스팬에서든 이 속성을 설정하면 트레이스 전체가 Agent Observability로 변환되지 않도록 방지됩니다.
+생성형 AI 스팬을 APM에 유지하고 LLM Observability에 표시되지 않게 하려면 `dd_llmobs_enabled` 속성을 `false`로 설정하여 자동 변환을 비활성화하면 됩니다. 트레이스의 어느 스팬에서든 이 속성을 설정하면 트레이스 전체가 LLM Observability로 변환되지 않도록 방지됩니다.
 
 ### 환경 변수 사용 {#using-environment-variables}
 
@@ -556,7 +556,7 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable Agent Observability conversion for this entire trace
+    # Disable LLM Observability conversion for this entire trace
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 

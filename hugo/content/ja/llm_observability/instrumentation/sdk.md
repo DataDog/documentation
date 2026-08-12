@@ -15,11 +15,11 @@ further_reading:
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: ブログ
   text: Datadog LLM Observability を使用して、LLM プロンプトを追跡、比較、最適化します。
-title: Agent Observability SDK リファレンス
+title: LLM Observability SDK リファレンス
 ---
 ## 概要 {#overview}
 
-Datadog の Agent Observability SDK は、自動インスツルメンテーションおよび手動インスツルメンテーション API を提供し、LLM アプリケーションの観測可能性とインサイトを提供します。
+Datadog の LLM Observability SDK は、自動インスツルメンテーションおよび手動インスツルメンテーション API を提供し、LLM アプリケーションの観測可能性とインサイトを提供します。
 
 ## セットアップ {#setup}
 
@@ -46,7 +46,7 @@ Datadog の Agent Observability SDK は、自動インスツルメンテーシ�
 {{% /tab %}}
 
 {{% tab "Java" %}}
-- 最新の [`dd-trace-java` JAR][1] がダウンロードされています。Agent Observability SDK は、`dd-trace-java` v1.51.0 以降でサポートされています (Java 8 以降が必要です)。
+- 最新の [`dd-trace-java` JAR][1] がダウンロードされています。LLM Observability SDK は、`dd-trace-java` v1.51.0 以降でサポートされています (Java 8 以降が必要です)。
 
 [1]: https://github.com/DataDog/dd-trace-java
 {{% /tab %}}
@@ -56,9 +56,9 @@ Datadog の Agent Observability SDK は、自動インスツルメンテーシ�
 
 {{< tabs >}}
 {{% tab "Python" %}}
-Agent Observability を有効にするには、`ddtrace-run` コマンドを使用してアプリケーションを実行し、必要な環境変数を指定します。
+LLM Observability を有効にするには、`ddtrace-run` コマンドを使用してアプリケーションを実行し、必要な環境変数を指定します。
 
-**注**: `ddtrace-run` は自動的にすべての Agent Observability インテグレーションを有効にします。
+**注**: `ddtrace-run` は自動的にすべての LLM Observability インテグレーションを有効にします。
 
 {{< code-block lang="shell">}}
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 \
@@ -73,7 +73,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 
 `DD_LLMOBS_ENABLED`
 : 必須 - _整数または文字列_
-<br />切り替えて、Agent Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
+<br />切り替えて、LLM Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
 
 `DD_LLMOBS_ML_APP`
 : オプション - _文字列_
@@ -92,7 +92,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> ddtrace-run <YOUR_APP_STARTUP_COMMAND>
 {{% /tab %}}
 
 {{% tab "Node.js" %}}
-Agent Observability を有効にするには、`NODE_OPTIONS="--import dd-trace/initialize.mjs"` を使用してアプリケーションを実行し、必要な環境変数を指定します。
+LLM Observability を有効にするには、`NODE_OPTIONS="--import dd-trace/initialize.mjs"` を使用してアプリケーションを実行し、必要な環境変数を指定します。
 
 **注**: `dd-trace/initialize.mjs` は自動的にすべての APM インテグレーションを有効にします。
 
@@ -109,7 +109,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 
 `DD_LLMOBS_ENABLED`
 : 必須 - _整数または文字列_
-<br />切り替えて、Agent Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
+<br />切り替えて、LLM Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
 
 `DD_LLMOBS_ML_APP`
 : オプション - _文字列_
@@ -128,7 +128,7 @@ DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME> NODE_OPTIONS="--import dd-trace/initialize.m
 {{% /tab %}}
 {{% tab "Java" %}}
 
-Agent Observability を有効にするには、`dd-trace-java` を使用してアプリケーションを実行し、必要なパラメーターを環境変数またはシステムプロパティとして指定します。
+LLM Observability を有効にするには、`dd-trace-java` を使用してアプリケーションを実行し、必要なパラメーターを環境変数またはシステムプロパティとして指定します。
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> \
@@ -146,7 +146,7 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 `DD_LLMOBS_ENABLED` または `dd.llmobs.enabled`
 : 必須 - _整数または文字列_
-<br />切り替えて、Agent Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
+<br />切り替えて、LLM Observability へのデータ送信を有効にします。`1` または `true` に設定する必要があります。
 
 `DD_LLMOBS_ML_APP`または `dd.llmobs.ml.app`
 : オプション - _文字列_
@@ -169,12 +169,12 @@ java -javaagent:path/to/your/dd-trace-java-jar/dd-java-agent-SNAPSHOT.jar \
 
 {{% collapse-content title="コード内のセットアップ" level="h3" expanded=false id="in-code-setup" %}}
 
-[コマンドラインのセットアップ](#command-line-setup)を使用する代わりに、プログラムにより Agent Observability を有効にすることもできます。
+[コマンドラインのセットアップ](#command-line-setup)を使用する代わりに、プログラムにより LLM Observability を有効にすることもできます。
 
 {{< tabs >}}
 {{% tab "Python" %}}
 
-`LLMObs.enable()` 関数を使用して Agent Observability を有効にします。
+`LLMObs.enable()` 関数を使用して LLM Observability を有効にします。
 
 <div class="alert alert-info">
 このセットアップ方法を <code>ddtrace-run</code> コマンドと一緒に使用しないでください。
@@ -229,7 +229,7 @@ LLMObs.enable(
 このセットアップ方法を <code>dd-trace/initialize.mjs</code> コマンドと一緒に使用しないでください。
 </div>
 
-`init()` 関数を使用して Agent Observability を有効にします。
+`init()` 関数を使用して LLM Observability を有効にします。
 
 {{< code-block lang="javascript" >}}
 const tracer = require('dd-trace').init({
@@ -283,7 +283,7 @@ const llmobs = tracer.llmobs;
 
 {{% collapse-content title="AWS Lambda のセットアップ" level="h3" expanded=false id="aws-lambda-setup" %}}
 
-既存の AWS Lambda 関数を Agent Observability でインスツルメントするには、Datadog 拡張機能と各言語レイヤーを使用します。
+既存の AWS Lambda 関数を LLM Observability でインスツルメントするには、Datadog 拡張機能と各言語レイヤーを使用します。
 
 1. AWS コンソールで Cloudshell を開きます。
 2. Datadog CLI クライアントをインストールします。
@@ -302,7 +302,7 @@ export DD_SITE=<YOUR_DATADOG_SITE>
 ```shell
 export DATADOG_API_KEY_SECRET_ARN=<DATADOG_API_KEY_SECRET_ARN>
 ```
-4. Agent Observability を使用して Lambda 関数をインストールします (これには Datadog 拡張機能レイヤーのバージョン 77 以降が必要です)。
+4. LLM Observability を使用して Lambda 関数をインストールします (これには Datadog 拡張機能レイヤーのバージョン 77 以降が必要です)。
 {{< tabs >}}
 {{% tab "Python" %}}
 
@@ -326,9 +326,9 @@ datadog-ci lambda instrument -f <YOUR_LAMBDA_FUNCTION_NAME> -r <AWS_REGION> -v {
 {{% /tab %}}
 {{< /tabs >}}
 
-4. Lambda 関数を呼び出し、Agent Observability のトレースが Datadog UI に表示されることを確認します。
+4. Lambda 関数を呼び出し、LLM Observability のトレースが Datadog UI に表示されることを確認します。
 
-Lambda 関数が返される前に `flush` メソッドを使用して、Agent Observability のトレースを手動でフラッシュします。
+Lambda 関数が返される前に `flush` メソッドを使用して、LLM Observability のトレースを手動でフラッシュします。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -358,7 +358,7 @@ export const handler = async (event) => {
 {{% /collapse-content %}}
 
 
-SDK をインストールし、アプリケーションを実行した後、自動インスツルメンテーションから Agent Observability にいくつかのデータが表示されなければなりません。手動インスツルメンテーションを使用して、まだサポートされていないライブラリからのカスタムビルドのフレームワークや操作をキャプチャできます。
+SDK をインストールし、アプリケーションを実行した後、自動インスツルメンテーションから LLM Observability にいくつかのデータが表示されなければなりません。手動インスツルメンテーションを使用して、まだサポートされていないライブラリからのカスタムビルドのフレームワークや操作をキャプチャできます。
 
 ## 手動インスツルメンテーション {#manual-instrumentation}
 
@@ -404,7 +404,7 @@ with LLMObs.llm(model="gpt-4o"):
 
 スパンの種類は必須であり、`llmobs` トレース関数 (`trace`、`wrap`、および `decorate`) に渡される `options` オブジェクトに指定します。サポートされているスパンの種類のリストについては、[スパンの種類のドキュメント][1] を参照してください。
 
-**注:** 無効なスパンの種類を持つスパンは、Agent Observability に送信されません。
+**注:** 無効なスパンの種類を持つスパンは、LLM Observability に送信されません。
 
 ### 自動関数引数/出力/名前キャプチャ {#automatic-function-argumentoutputname-capturing}
 
@@ -1808,7 +1808,7 @@ function ragWorkflow(userQuestion) {
 
 ## プロンプト追跡 {#prompt-tracking}
 
-構造化されたプロンプトメタデータを LLM スパンにアタッチすることにより、結果を再現し、変更を監査し、バージョン間でプロンプトのパフォーマンスを比較できるようにします。テンプレートを使用する際、Agent Observability は、テンプレートの内容の変更に基づいて[バージョン追跡](#version-tracking)も提供します。
+構造化されたプロンプトメタデータを LLM スパンにアタッチすることにより、結果を再現し、変更を監査し、バージョン間でプロンプトのパフォーマンスを比較できるようにします。テンプレートを使用する際、LLM Observability は、テンプレートの内容の変更に基づいて[バージョン追跡](#version-tracking)も提供します。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -1939,11 +1939,11 @@ function answerQuestion(text) {
 
 ### バージョン追跡 {#version-tracking}
 
-Agent Observability は、バージョンが明示的に指定されていない場合に、プロンプトの自動バージョニングを提供します。プロンプトメタデータに `version` タグなしで `template` または `chat_template` を指定すると、システムではテンプレートの内容のハッシュを計算して自動的にバージョンが生成されます。`version` タグを指定した場合、Agent Observability では自動生成したバージョンラベルの代わりに指定したバージョンラベルが使用されます。
+LLM Observability は、バージョンが明示的に指定されていない場合に、プロンプトの自動バージョニングを提供します。プロンプトメタデータに `version` タグなしで `template` または `chat_template` を指定すると、システムではテンプレートの内容のハッシュを計算して自動的にバージョンが生成されます。`version` タグを指定した場合、LLM Observability では自動生成したバージョンラベルの代わりに指定したバージョンラベルが使用されます。
 
 バージョニングシステムは次のように機能します。
-- **自動バージョニング**: `version` タグを指定していない場合、Agent Observability では `template` または `chat_template` の内容のハッシュを計算して自動的に数値のバージョン識別子が生成されます。
-- **手動バージョニング**: `version` タグを指定した場合、Agent Observability では指定したとおりにバージョンラベルが使用されます。
+- **自動バージョニング**: `version` タグを指定していない場合、LLM Observability では `template` または `chat_template` の内容のハッシュを計算して自動的に数値のバージョン識別子が生成されます。
+- **手動バージョニング**: `version` タグを指定した場合、LLM Observability では指定したとおりにバージョンラベルが使用されます。
 - **バージョン履歴**: プロンプトの進展を時系列で追跡するために、自動生成されたバージョンと手動バージョンの両方がバージョン履歴に保持されます。
 
 これにより、テンプレート内容の変更に基づく自動バージョン管理に依存するか、独自のバージョンラベルでバージョニングを完全に制御するかを柔軟に選択できます。
@@ -1953,7 +1953,7 @@ Agent Observability は、バージョンが明示的に指定されていない
 
 自動インスツルメンテーションを使用している場合、トークンとコストメトリクスは自動的にスパンに表示されます。手動でインスツルメントする場合は、次のガイダンスに従ってください。
 
-<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/monitoring/metrics/">Datadog プラットフォームの Agent Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>、<code>output_tokens</code>、<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
+<div class="alert alert-info">このコンテキストでは、「トークンメトリクス」と「コストメトリクス」は、 <code>metrics</code> パラメーター ( <code>LLMObs.annotate()</code> メソッドの) を介してスパンにアタッチする数値のキーと値のペアを指します。これらは、<a href="/llm_observability/monitoring/metrics/">Datadog プラットフォームの LLM Observability メトリクス</a>とは異なります。認識されたキー ( <code>input_tokens</code>、<code>output_tokens</code>、<code>input_cost</code>、および <code>output_cost</code>など) に対し、Datadog はこれらのスパン属性を使用して、対応するプラットフォームメトリクス ( <code>ml_obs.span.llm.input.cost</code>など) をダッシュボードやモニターで使用するために生成します。</div>
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -2012,7 +2012,7 @@ def llm_call(prompt):
 
 ## 評価 {#evaluations}
 
-Agent Observability SDK には、評価を Datadog にエクスポートおよび送信するためのメソッドが用意されています。
+LLM Observability SDK には、評価を Datadog にエクスポートおよび送信するためのメソッドが用意されています。
 
 <div class="alert alert-info">豊富な結果メタデータを使用して、再利用可能なクラスベースの評価機能 (<code>BaseEvaluator</code>、<code>BaseSummaryEvaluator</code>) を構築する方法については、<a href="/llm_observability/guide/evaluation_developer_guide/">評価開発者ガイド</a>を参照してください。</div>
 
@@ -2079,7 +2079,7 @@ llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', mod
 
 <div class="alert alert-info"><code>LLMObs.submit_evaluation_for</code> は非推奨であり、次のメジャーバージョンの ddtrace (4.0) で削除されます。移行するには、 <code>LLMObs.submit_evaluation_for</code> 呼び出しの名前を <code>LLMObs.submit_evaluation</code>に変更します。</div>
 
-**注**: カスタム評価は、自分で実装し、ホストする評価機能です。これらは、組み込みの評価機能を使用して Datadog により自動的に計算される、既成の評価機能とは異なります。ご使用のアプリケーション用にすぐに使用できる評価を構成するには、Datadog の [**Agent Observability** > **Settings** > **Evaluations**][1] ページを使用してください。
+**注**: カスタム評価は、自分で実装し、ホストする評価機能です。これらは、組み込みの評価機能を使用して Datadog により自動的に計算される、既成の評価機能とは異なります。ご使用のアプリケーション用にすぐに使用できる評価を構成するには、Datadog の [**LLM Observability** > **Settings** > **Evaluations**][1] ページを使用してください。
 
 `LLMObs.submit_evaluation()` メソッドは次の引数を受け付けます。
 
@@ -2659,7 +2659,7 @@ def separate_task(workflow_span):
 
 #### サーバーレス環境における強制フラッシュ {#force-flushing-in-serverless-environments}
 
-`LLMObs.flush()` は、バッファされたすべての Agent Observability データを Datadog バックエンドに送信するブロッキング関数です。これは、サーバーレス環境で、すべての Agent Observability トレースが送信されるまでアプリケーションが終了しないようにするのに役立ちます。
+`LLMObs.flush()` は、バッファされたすべての LLM Observability データを Datadog バックエンドに送信するブロッキング関数です。これは、サーバーレス環境で、すべての LLM Observability トレースが送信されるまでアプリケーションが終了しないようにするのに役立ちます。
 
 ### 複数のアプリケーションのトレース {#tracing-multiple-applications}
 
@@ -2729,7 +2729,7 @@ function processMessage () {
 
 ### TypeScript における関数デコレータ {#function-decorators-in-typescript}
 
-Node.js Agent Observability SDK には、TypeScript アプリケーション用の関数デコレータとして機能する `llmobs.decorate` 関数が用意されています。この関数のトレース動作は `llmobs.wrap` と同じです。
+Node.js LLM Observability SDK には、TypeScript アプリケーション用の関数デコレータとして機能する `llmobs.decorate` 関数が用意されています。この関数のトレース動作は `llmobs.wrap` と同じです。
 
 #### 例 {#example-34}
 
@@ -2756,7 +2756,7 @@ class MyAgent {
 
 ### サーバーレス環境における強制フラッシュ {#force-flushing-in-serverless-environments-1}
 
-`llmobs.flush()` は、バッファされたすべての Agent Observability データを Datadog バックエンドに送信するブロッキング関数です。これは、サーバーレス環境で、すべての Agent Observability トレースが送信されるまでアプリケーションが終了しないようにするのに役立ちます。
+`llmobs.flush()` は、バッファされたすべての LLM Observability データを Datadog バックエンドに送信するブロッキング関数です。これは、サーバーレス環境で、すべての LLM Observability トレースが送信されるまでアプリケーションが終了しないようにするのに役立ちます。
 
 ### 複数のアプリケーションのトレース {#tracing-multiple-applications-1}
 

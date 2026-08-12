@@ -283,7 +283,7 @@ created_version = LLMObs.create_prompt_version(
 
 ### API 사용 {#use-the-api}
 
-Prompt Management API를 사용하여 프롬프트 및 프롬프트 버전을 생성, 검색, 업데이트 및 삭제합니다. 엔드포인트 스키마, 요청 미디어 유형 및 예제는 [Agent Observability API 참조][8]를 참조하세요.
+Prompt Management API를 사용하여 프롬프트 및 프롬프트 버전을 생성, 검색, 업데이트 및 삭제합니다. 엔드포인트 스키마, 요청 미디어 유형 및 예제는 [LLM Observability API 참조][8]를 참조하세요.
 
 ## 추가 자료 {#further-reading}
 

@@ -1,3 +1,3 @@
 ---
-title: Get a specific Agent Observability prompt version
+title: Get a specific LLM Observability prompt version
 ---

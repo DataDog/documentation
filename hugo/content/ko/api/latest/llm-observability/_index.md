@@ -1,3 +1,3 @@
 ---
-title: Agent Observability
+title: LLM Observability
 ---

@@ -47,19 +47,19 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: Centro de Aprendizaje
   text: Rastreo de aplicaciones LLM
-title: Agent Observability
+title: LLM Observability
 ---
-{{< learning-center-callout header="Intenta comenzar con Agent Observability en el Centro de Aprendizaje" btn_title="Inscríbete Ahora" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+{{< learning-center-callout header="Intenta comenzar con LLM Observability en el Centro de Aprendizaje" btn_title="Inscríbete Ahora" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
   Aprende a monitorear el rendimiento, costos, trazas, uso de tokens y errores de tu aplicación LLM para identificar y resolver problemas.
 {{< /learning-center-callout >}}
 
 ## Resumen {#overview}
 
-Con Agent Observability, puedes monitorear, solucionar problemas y evaluar tus aplicaciones impulsadas por LLM, como chatbots. Puedes investigar la causa raíz de los problemas, monitorear el rendimiento operativo y evaluar la calidad, privacidad y seguridad de tus aplicaciones LLM.
+Con LLM Observability, puedes monitorear, solucionar problemas y evaluar tus aplicaciones impulsadas por LLM, como chatbots. Puedes investigar la causa raíz de los problemas, monitorear el rendimiento operativo y evaluar la calidad, privacidad y seguridad de tus aplicaciones LLM.
 
-Cada solicitud cumplida por tu aplicación se representa como una traza en la página de [**Agent Observability**][1] en Datadog.
+Cada solicitud cumplida por tu aplicación se representa como una traza en la página de [**LLM Observability**][1] en Datadog.
 
-{{< img src="llm_observability/traces.png" alt="Una lista de trazas de pares de solicitud-respuesta en la página de Agent Observability." style="width:100%;" >}}
+{{< img src="llm_observability/traces.png" alt="Una lista de trazas de pares de solicitud-respuesta en la página de LLM Observability." style="width:100%;" >}}
 
 Una traza puede representar:
 
@@ -79,7 +79,7 @@ Visualiza cada paso de las cadenas y llamadas de tu aplicación LLM para detecta
 
 Monitorea el costo, la latencia, el rendimiento y las tendencias de uso de todas tus aplicaciones LLM con [tableros listos para usar][7].
 
-{{< img src="llm_observability/dashboard_1.png" alt="El tablero de Insights Operacionales de Agent Observability listo para usar en Datadog." style="width:100%;" >}}
+{{< img src="llm_observability/dashboard_1.png" alt="El tablero de Insights Operacionales de LLM Observability listo para usar en Datadog." style="width:100%;" >}}
 
 ## Evalúa la calidad y efectividad de tus aplicaciones LLM {#evaluate-the-quality-and-effectiveness-of-your-llm-applications}
 
@@ -91,11 +91,11 @@ Entiende lo que los usuarios están preguntando a tu aplicación LLM, identifica
 
 Escanea y redacta automáticamente cualquier dato sensible en tus aplicaciones de IA e identifica inyecciones de prompts, entre otras evaluaciones.
 
-{{< img src="llm_observability/prompt_injection.png" alt="Un ejemplo de un intento de inyección de prompts detectado por Agent Observability" style="width:100%;" >}}
+{{< img src="llm_observability/prompt_injection.png" alt="Un ejemplo de un intento de inyección de prompts detectado por LLM Observability" style="width:100%;" >}}
 
 ## Ve las anomalías resaltadas como Insights {#see-anomalies-highlighted-as-insights}
 
-Agent Observability Insights proporciona una experiencia de monitoreo que ayuda a los usuarios a identificar anomalías en sus métricas operativas, como la duración y la tasa de errores, y sus [evaluaciones listas para usar (OOTB)][9].
+LLM Observability Insights proporciona una experiencia de monitoreo que ayuda a los usuarios a identificar anomalías en sus métricas operativas, como la duración y la tasa de errores, y sus [evaluaciones listas para usar (OOTB)][9].
 
 La detección de valores anómalos se realiza en dimensiones clave:
 - Nombre del tramo
@@ -104,13 +104,13 @@ La detección de valores anómalos se realiza en dimensiones clave:
 
 Estos valores anómalos se analizan durante la semana pasada y se muestran automáticamente en la ventana de tiempo correspondiente seleccionada por el usuario. Esto permite a los equipos detectar proactivamente regresiones, desviaciones de rendimiento o comportamientos inesperados en sus aplicaciones LLM.
 
-{{< img src="llm_observability/Overview_LLMO.png" alt="Un banner de 'Insights' en la parte superior de la página de Agent Observability Monitor. El banner muestra 8 Insights y tiene un botón de Ver Insights que conduce a un panel lateral con más detalles." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="Un banner de 'Insights' en la parte superior de la página de LLM Observability Monitor. El banner muestra 8 Insights y tiene un botón de Ver Insights que conduce a un panel lateral con más detalles." style="width:100%;" >}}
 
-## Utiliza integraciones con Agent Observability {#use-integrations-with-llm-observability}
+## Utiliza integraciones con LLM Observability {#use-integrations-with-llm-observability}
 
-El [SDK de Agent Observability para Python][3] se integra con marcos como OpenAI, LangChain, AWS Bedrock y Anthropic. Rastrea y anota automáticamente las llamadas a LLM, capturando latencia, errores y métricas de uso de tokens, sin cambios en el código.
+El [SDK de LLM Observability para Python][3] se integra con marcos como OpenAI, LangChain, AWS Bedrock y Anthropic. Rastrea y anota automáticamente las llamadas a LLM, capturando latencia, errores y métricas de uso de tokens, sin cambios en el código.
 
-<div class="alert alert-info">Datadog ofrece una variedad de capacidades de inteligencia artificial (IA) y aprendizaje automático (ML). Las <a href="/integrations/#cat-aiml">integraciones de IA/ML en la página de Integraciones y el Datadog Marketplace</a> son funcionalidades de Datadog a nivel de plataforma. <br><br> Por ejemplo, APM ofrece una integración nativa con OpenAI para monitorear tu uso de OpenAI, mientras que Infrastructure Monitoring ofrece una integración con NVIDIA DCGM Exporter para monitorear cargas de trabajo de IA intensivas en computación. Estas integraciones son diferentes de la oferta de Agent Observability.</div>
+<div class="alert alert-info">Datadog ofrece una variedad de capacidades de inteligencia artificial (IA) y aprendizaje automático (ML). Las <a href="/integrations/#cat-aiml">integraciones de IA/ML en la página de Integraciones y el Datadog Marketplace</a> son funcionalidades de Datadog a nivel de plataforma. <br><br> Por ejemplo, APM ofrece una integración nativa con OpenAI para monitorear tu uso de OpenAI, mientras que Infrastructure Monitoring ofrece una integración con NVIDIA DCGM Exporter para monitorear cargas de trabajo de IA intensivas en computación. Estas integraciones son diferentes de la oferta de LLM Observability.</div>
 
 Para más información, consulte la [documentación de auto instrumentación][8].
 

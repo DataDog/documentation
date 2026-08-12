@@ -64,9 +64,9 @@ tile:
 ## 概要
 Amazon Bedrock を使用して、チャット ボットやデータ抽出ツールなどの LLM を活用するアプリケーションを監視、トラブル シューティング、評価します。
 
-LLM アプリケーションを構築している場合は、Agent Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
+LLM アプリケーションを構築している場合は、LLM Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
 
-トレースの調査方法の例については、[Agent Observability のトレース ビューの動画][1] を参照してください。
+トレースの調査方法の例については、[LLM Observability のトレース ビューの動画][1] を参照してください。
 
 Amazon Bedrock は、Amazon および先進的な AI スタートアップの[基盤モデル][2] (FM) を API 経由で提供する完全マネージド型のサービスで、用途に最適なモデルを様々な FM から選べます。
 
@@ -74,8 +74,8 @@ Amazon Bedrock は、Amazon および先進的な AI スタートアップの[�
 
 ## セットアップ
 
-### Agent Observability: Amazon Bedrock を使用して LLM アプリケーションのエンド ツー エンドの可視性を実現
-You can enable Agent Observability in different environments. Follow the appropriate setup based on your scenario:
+### LLM Observability: Amazon Bedrock を使用して LLM アプリケーションのエンド ツー エンドの可視性を実現
+You can enable LLM Observability in different environments. Follow the appropriate setup based on your scenario:
 
 #### Installation for Python
 
@@ -124,9 +124,9 @@ You can enable Agent Observability in different environments. Follow the appropr
 
 **Note**: If the Agent is running on a custom host or port, set `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` accordingly.
 
-##### サーバーレス環境で Agent Observability を実行している場合 (AWS Lambda):
+##### サーバーレス環境で LLM Observability を実行している場合 (AWS Lambda):
 1. AWS Lambda セットアップの一部として、 **Datadog-Python** および **Datadog-Extension** の Lambda レイヤーをインストールします。
-2. Enable Agent Observability by setting the following environment variables:
+2. Enable LLM Observability by setting the following environment variables:
 
   ```shell
      DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -135,7 +135,7 @@ You can enable Agent Observability in different environments. Follow the appropr
 **注**: サーバーレス環境では、Lambda 関数の実行が終了すると Datadog が自動的にスパンをフラッシュします。
 
 ##### Amazon Bedrock の自動トレーシング
-Agent Observability が構成されている場合、 Amazon Bedrock インテグレーションは自動的に有効になります。これにより、 Amazon Bedrock 呼び出しのレイテンシ、エラー、入力メッセージと出力メッセージ、およびトークン使用量が記録されます。
+LLM Observability が構成されている場合、 Amazon Bedrock インテグレーションは自動的に有効になります。これにより、 Amazon Bedrock 呼び出しのレイテンシ、エラー、入力メッセージと出力メッセージ、およびトークン使用量が記録されます。
 
 同期およびストリーミングの Amazon Bedrock オペレーションについて、以下のメソッドがトレースされます:
 - `InvokeModel()`
@@ -144,7 +144,7 @@ Agent Observability が構成されている場合、 Amazon Bedrock インテ�
 No additional setup is required for these methods.
 
 ##### 検証
-Validate that Agent Observability is properly capturing spans by checking your application logs for successful span creation. You can also run the following command to check the status of the `ddtrace` integration:
+Validate that LLM Observability is properly capturing spans by checking your application logs for successful span creation. You can also run the following command to check the status of the `ddtrace` integration:
 
   ```shell
   ddtrace-run --info
@@ -212,8 +212,8 @@ If you encounter issues during setup, enable debug logging by passing the `--deb
 
 **Note**: If the Agent is running on a custom host or port, set `DD_AGENT_HOST` and `DD_TRACE_AGENT_PORT` accordingly.
 
-##### サーバーレス環境で Agent Observability を実行している場合 (AWS Lambda):
-1. Enable Agent Observability by setting the following environment variables:
+##### サーバーレス環境で LLM Observability を実行している場合 (AWS Lambda):
+1. Enable LLM Observability by setting the following environment variables:
 
    ```shell
    DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>

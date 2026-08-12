@@ -48,7 +48,7 @@ Evaluated Data グラフには、現在のクエリとしきい値を使用し�
 - (通知ルールからのものも含め) 誰に通知されるかをプレビューします。
 - 保存する前に、設定ミスを迅速に見つけます。
 
-この機能は、Metrics、Logs、APM、RUM、Events、Audit、Database、Agent Observability、Deployment モニターで利用できます。
+この機能は、Metrics、Logs、APM、RUM、Events、Audit、Database、LLM Observability、Deployment モニターで利用できます。
 
 {{% /tab %}}
 

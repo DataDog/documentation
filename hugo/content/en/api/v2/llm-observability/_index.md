@@ -1,4 +1,4 @@
 ---
-title: Agent Observability
+title: LLM Observability
 headless: true
 ---

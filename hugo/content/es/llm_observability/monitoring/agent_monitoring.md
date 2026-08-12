@@ -16,9 +16,9 @@ title: Monitorización del Agent
 
 ## Información general
 
-Agent Observability te permite monitorizar, solucionar problemas y mejorar tus aplicaciones con agent. Con el SDK de Agent Observability para Python, puedes monitorizar el estado y calidad de tus sistemas de uno o múltiples agents construidos sobre [el SDK de Agents de OpenAI][1], [LangGraph][2], o [CrewAI][3].
+LLM Observability te permite monitorizar, solucionar problemas y mejorar tus aplicaciones con agent. Con el SDK de LLM Observability para Python, puedes monitorizar el estado y calidad de tus sistemas de uno o múltiples agents construidos sobre [el SDK de Agents de OpenAI][1], [LangGraph][2], o [CrewAI][3].
 
-Para tus aplicaciones con agent, Agent Observability te permite:
+Para tus aplicaciones con agent, LLM Observability te permite:
 
 - Monitorizar la tasa de error, acumulación de latencia o coste 
 - Visualizar las decisiones de los agents, como las herramientas utilizadas o el agent al que se ha encomendado una tarea

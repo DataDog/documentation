@@ -1,3 +1,3 @@
 ---
-title: List Agent Observability dataset records
+title: List LLM Observability dataset records
 ---

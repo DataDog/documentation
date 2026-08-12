@@ -30,7 +30,7 @@ Datadog は、OpenTelemetry を使用するためのいくつかの構成をサ�
 | [Cloud SIEM][18] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Correlated Traces、Metrics、Logs][19] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Distributed Tracing][27] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
-| [Agent Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
+| [LLM Observability][38] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Runtime Metrics][23] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Span Links][25] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}} |
 | [Trace Metrics][26] | {{< X >}} | {{< X >}} | {{< X >}} | {{< X >}}<br>({{< tooltip text="Sampled" tooltip="Calculated from spans that reach Datadog; reflects any OTel-side sampling you configure." >}}) |
@@ -63,9 +63,9 @@ Datadog SDK は、さまざまな言語で OpenTelemetry のトレース、メ�
 
 ## 詳細情報 {#more-details}
 
-### Agent Observability {#llm-observability}
+### LLM Observability {#llm-observability}
 
-[生成 AI 属性](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)を持つOpenTelemetryトレースは、自動的に Agent Observability トレースに変換されます。この変換を無効にするには、[Agent Observability 変換の無効化][38]を参照してください。
+[生成 AI 属性](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/)を持つOpenTelemetryトレースは、自動的に LLM Observability トレースに変換されます。この変換を無効にするには、[LLM Observability 変換の無効化][38]を参照してください。
 
 ### ランタイムメトリクス {#runtime-metrics}
 

@@ -1,12 +1,12 @@
 ---
 description: OpenTelemetry を使用し、GenAI セマンティック規約に従って LLM アプリケーションをインスツルメンテーションし、Datadog
-  SDK を使用せずに Datadog Agent Observability にトレースを送信します。
+  SDK を使用せずに Datadog LLM Observability にトレースを送信します。
 title: OpenTelemetry インスツルメンテーション
 ---
 ## 概要 {#overview}
-OpenTelemetry の生成 AI 向け標準化セマンティック規約を使用することで、任意の OpenTelemetry 互換ライブラリまたはフレームワークを用いて LLM アプリケーションをインスツルメンテーションし、Agent Observability でトレースを可視化できます。
+OpenTelemetry の生成 AI 向け標準化セマンティック規約を使用することで、任意の OpenTelemetry 互換ライブラリまたはフレームワークを用いて LLM アプリケーションをインスツルメンテーションし、LLM Observability でトレースを可視化できます。
 
-Agent Observability は、[生成 AI 向け OpenTelemetry 1.37+ セマンティック規約][1]に従った OpenTelemetry トレースの取り込みをサポートしています。これにより、Datadog Agent Observability SDK や Datadog Agent を必要とせずに、OpenTelemetry でインスツルメンテーションされたアプリケーションから LLM トレースを Datadog に直接送信できます。
+LLM Observability は、[生成 AI 向け OpenTelemetry 1.37+ セマンティック規約][1]に従った OpenTelemetry トレースの取り込みをサポートしています。これにより、Datadog LLM Observability SDK や Datadog Agent を必要とせずに、OpenTelemetry でインスツルメンテーションされたアプリケーションから LLM トレースを Datadog に直接送信できます。
 
 ## 前提条件 {#prerequisites}
 
@@ -17,11 +17,11 @@ OpenTelemetry スパンの<a href="/llm_observability/evaluations/external_evalu
 
 OpenTelemetry スパンを使用した Prompt Tracking の詳細については、<a href="/llm_observability/monitoring/prompt_tracking#opentelemetry-instrumentation">Prompt Tracking - OpenTelemetry インスツルメンテーション</a>を参照してください。
 
-また、<a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">Agent Observability Experiments</a> 内で OpenTelemetry スパンを使用することもできます。  <code>DD_TRACE_OTEL_ENABLED=1</code>を設定することで、実験タスク内で作成された OTel スパンは自動的に実験スパンの子として表示されます。
+また、<a href="/llm_observability/experiments/setup#using-opentelemetry-spans-inside-experiments">LLM Observability Experiments</a> 内で OpenTelemetry スパンを使用することもできます。  <code>DD_TRACE_OTEL_ENABLED=1</code>を設定することで、実験タスク内で作成された OTel スパンは自動的に実験スパンの子として表示されます。
 
 ## セットアップ {#setup}
 
-OpenTelemetry トレースを Agent Observability に送信するには、次の設定で OpenTelemetry エクスポーターを構成してください。
+OpenTelemetry トレースを LLM Observability に送信するには、次の設定で OpenTelemetry エクスポーターを構成してください。
 
 ### 構成 {#configuration}
 
@@ -45,7 +45,7 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 
 **注**:
 * デフォルトの OpenTelemetry SDK 以外の OpenTelemetry ライブラリを使用している場合は、ライブラリの API に応じてエンドポイント、プロトコル、およびヘッダーを異なる方法で設定する必要がある場合があります。適切な設定方法については、ライブラリのドキュメントを参照してください。
-* OpenTelemetry インスツルメンテーションを使用する場合、Agent Observability に送信されるデータの一部は、対応する APM トレースにも書き込まれる場合があります。機密データを保護している場合は、Agent Observability のアクセス制御に一致するように APM で Restricted Dataset を構成することも検討してください。詳細については、[データアクセス制御][8]を参照してください。
+* OpenTelemetry インスツルメンテーションを使用する場合、LLM Observability に送信されるデータの一部は、対応する APM トレースにも書き込まれる場合があります。機密データを保護している場合は、LLM Observability のアクセス制御に一致するように APM で Restricted Dataset を構成することも検討してください。詳細については、[データアクセス制御][8]を参照してください。
 
 #### strands-agents を使用する {#using-strands-agents}
 
@@ -55,28 +55,28 @@ OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental
 ```
 
-この環境変数は、`strands-agents` が生成 AI 向けの OpenTelemetry v1.37+ セマンティック規約に従ったトレースを出力することを保証します。これは Agent Observability に必要です。
+この環境変数は、`strands-agents` が生成 AI 向けの OpenTelemetry v1.37+ セマンティック規約に従ったトレースを出力することを保証します。これは LLM Observability に必要です。
 
 ### インスツルメンテーション {#instrumentation}
 
-Agent Observability に互換性のあるトレースを生成するには、次のいずれかを実行してください。
+LLM Observability に互換性のあるトレースを生成するには、次のいずれかを実行してください。
 
 - OpenTelemetry ライブラリまたは[生成 AI 向け OpenTelemetry 1.37+ セマンティック規約][1]に従ってスパンを出力するインスツルメンテーションパッケージを使用してください。
 - セマンティック規約で定義された必要な `gen_ai.*` 属性を持つスパンを生成するカスタム OpenTelemetry インスツルメンテーションを作成してください。
 
-アプリケーションがデータの送信を開始すると、トレースは自動的に [**Agent Observability Traces** ページ][3]に表示されます。UI でトレースを検索するには、`ml_app` 属性を使用してください。これは自動的に OpenTelemetry ルートスパンの `service` 属性の値に設定されます。
+アプリケーションがデータの送信を開始すると、トレースは自動的に [**LLM Observability Traces** ページ][3]に表示されます。UI でトレースを検索するには、`ml_app` 属性を使用してください。これは自動的に OpenTelemetry ルートスパンの `service` 属性の値に設定されます。
 
 <div class="alert alert-danger">
 <ul>
 <li/> <a href="https://traceloop.com/docs/openllmetry/getting-started-python">OpenLLMetry</a> バージョン 0.47+ がサポートされています。<a href="#using-openllmetry">OpenLLMetry の例</a>をご覧ください。
 <li/>OpenInference はサポートされていません。
-<li/>トレースを送信してから、Agent Observability Traces page に表示されるまでに 3〜5 分の遅延が発生する場合があります。APM が有効になっている場合、トレースは APM Traces page にすぐに表示されます。
+<li/>トレースを送信してから、LLM Observability Traces page に表示されるまでに 3〜5 分の遅延が発生する場合があります。APM が有効になっている場合、トレースは APM Traces page にすぐに表示されます。
 </ul>
 </div>
 
 ## テスト済みのフレームワークとライブラリ {#tested-frameworks-and-libraries}
 
-これらのフレームワークとライブラリは、Datadog Agent Observability でテストされています。[生成 AI 向け OpenTelemetry 1.37+ セマンティック規約][1]に準拠したスパンを発行するフレームワークはすべてサポートされています。
+これらのフレームワークとライブラリは、Datadog LLM Observability でテストされています。[生成 AI 向け OpenTelemetry 1.37+ セマンティック規約][1]に準拠したスパンを発行するフレームワークはすべてサポートされています。
 
 {{< tabs >}}
 {{% tab "Python" %}}
@@ -152,7 +152,7 @@ os.environ["AWS_DEFAULT_REGION"] = "<YOUR_AWS_REGION>"
 # Enable latest GenAI semantic conventions (1.37)
 os.environ["OTEL_SEMCONV_STABILITY_OPT_IN"] = "gen_ai_latest_experimental"
 
-# Configure OTLP endpoint to send traces to Datadog Agent Observability
+# Configure OTLP endpoint to send traces to Datadog LLM Observability
 os.environ["OTEL_EXPORTER_OTLP_TRACES_PROTOCOL"] = "http/protobuf"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_ENDPOINT"] = "{{< region-param key="otlp_trace_endpoint" code="true" >}}"
 os.environ["OTEL_EXPORTER_OTLP_TRACES_HEADERS"] = f"dd-api-key={os.getenv('DD_API_KEY')},dd-otlp-source=llmobs"
@@ -264,7 +264,7 @@ with tracer.start_as_current_span(
 provider.force_flush()
 ```
 
-この例を実行した後、生成されたトレースを見つけるために Agent Observability UI で `ml_app:simple-llm-example` を検索してください。
+この例を実行した後、生成されたトレースを見つけるために LLM Observability UI で `ml_app:simple-llm-example` を検索してください。
 
 ### OpenLLMetry を使用する {#using-openllmetry}
 
@@ -309,11 +309,11 @@ client.chat.completions.create(
 provider.force_flush(timeout_millis=5000)
 ```
 
-この例を実行した後、生成されたトレースを見つけるために Agent Observability UI で `ml_app:simple-openllmetry-test` を検索してください。
+この例を実行した後、生成されたトレースを見つけるために LLM Observability UI で `ml_app:simple-openllmetry-test` を検索してください。
 
 ## 属性マッピングリファレンス {#attribute-mapping-reference}
 
-このセクションでは、OpenTelemetry GenAI セマンティック規約 (v1.37+) および OpenLLMetry から Datadog の Agent Observability スパンスキーマへのマッピングを提供します。
+このセクションでは、OpenTelemetry GenAI セマンティック規約 (v1.37+) および OpenLLMetry から Datadog の LLM Observability スパンスキーマへのマッピングを提供します。
 
 <div class="alert alert-info">OpenLLMetry 特有のマッピングは、<a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a> セクションに別途文書化されています。</div>
 
@@ -321,7 +321,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### ベーススパン属性 {#base-span-attributes}
 
-| OTLP フィールド | Agent Observability フィールド | メモ |
+| OTLP フィールド | LLM Observability フィールド | メモ |
 |------------|--------------|-------|
 | `resource.attributes.service.name` | `ml_app`、`tags.service` | |
 | `name` | `name` | 存在する場合は `gen_ai.tool.name` によって上書きされます |
@@ -334,7 +334,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### スパン種別の解決 {#span-kind-resolution}
 
-| `gen_ai.operation.name` | Agent Observability `span.kind` |
+| `gen_ai.operation.name` | LLM Observability `span.kind` |
 |-------------------------|-------------------|
 | `generate_content`、`chat`、`text_completion`、`completion` | `llm` |
 | `embeddings`、`embedding` | `embedding` |
@@ -344,7 +344,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### モデル情報 {#model-information}
 
-| OTel 属性 | Agent Observability フィールド | メモ |
+| OTel 属性 | LLM Observability フィールド | メモ |
 |----------------|--------------|-------|
 | `gen_ai.operation.name` | `meta.span.kind` | 上記の解決表を参照してください |
 | `gen_ai.provider.name` | `meta.model_provider` | `gen_ai.system` にフォールバックし、その後 `custom` | にフォールバックします
@@ -353,7 +353,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### トークン使用量メトリクス {#token-usage-metrics}
 
-| OTel 属性 | Agent Observability フィールド |
+| OTel 属性 | LLM Observability フィールド |
 |----------------|--------------|
 | `gen_ai.usage.input_tokens` | `metrics.input_tokens` |
 | `gen_ai.usage.output_tokens` | `metrics.output_tokens` |
@@ -365,7 +365,7 @@ provider.force_flush(timeout_millis=5000)
 
 すべての `gen_ai.request.*` パラメーターは、プレフィックスが削除された `meta.metadata.*` にマッピングされます。
 
-| OTel 属性 | Agent Observability フィールド |
+| OTel 属性 | LLM Observability フィールド |
 |----------------|--------------|
 | `gen_ai.request.seed` | `metadata.seed` |
 | `gen_ai.request.frequency_penalty` | `metadata.frequency_penalty` |
@@ -378,7 +378,7 @@ provider.force_flush(timeout_millis=5000)
 
 #### ツール属性 {#tool-attributes}
 
-| OTel 属性 | Agent Observability フィールド | メモ |
+| OTel 属性 | LLM Observability フィールド | メモ |
 |----------------|--------------|-------|
 | `gen_ai.tool.name` | `name` | スパン名を上書きします |
 | `gen_ai.tool.call.id` | `metadata.tool_id` | |
@@ -390,13 +390,13 @@ provider.force_flush(timeout_millis=5000)
 
 #### セッションと会話 {#session-and-conversation}
 
-| OTel 属性 | Agent Observability フィールド | メモ |
+| OTel 属性 | LLM Observability フィールド | メモ |
 |----------------|--------------|-------|
 | `gen_ai.conversation.id` | `session_id` | また、`metadata.conversation_id` とタグにも追加されます |
 
 #### レスポンス属性 {#response-attributes}
 
-| OTel 属性 | Agent Observability フィールド |
+| OTel 属性 | LLM Observability フィールド |
 |----------------|--------------|
 | `gen_ai.response.model` | `meta.model_name` |
 | `gen_ai.response.finish_reasons` | `metadata.finish_reasons` |
@@ -408,7 +408,7 @@ provider.force_flush(timeout_millis=5000)
 1. 直接属性: `gen_ai.input.messages`、`gen_ai.output.messages`、`gen_ai.system_instructions`
 2. 名前が `gen_ai.client.inference.operation.details` のスパンイベント (`meta["events"]`)
 
-| OTel ソース | Agent Observability フィールド | メモ |
+| OTel ソース | LLM Observability フィールド | メモ |
 |-------------|--------------|-------|
 | `gen_ai.input.messages` | `meta.input.messages` (llm) / `meta.input.value` (その他) | |
 | `gen_ai.output.messages` | `meta.output.messages` (llm) / `meta.output.value` (その他) | |
@@ -416,7 +416,7 @@ provider.force_flush(timeout_millis=5000)
 
 ##### 埋め込みスパン {#embedding-spans}
 
-| OTel ソース | Agent Observability フィールド |
+| OTel ソース | LLM Observability フィールド |
 |-------------|--------------|
 | `gen_ai.input.messages` | `meta.input.documents` |
 | N/A | `meta.output.value` = `[N embedding(s) returned]` |
@@ -429,7 +429,7 @@ provider.force_flush(timeout_millis=5000)
 - 不明な `gen_ai.*` キーは、プレフィックスを削除して追加されます
 - フィルタリング対象外: `_dd.*`、`llm.*`、`ddtags`、`events`、およびすでに特定的にマッピングされた `gen_ai.*` キー
 
-<div class="alert alert-info">Agent Observability のスパンフィールドに明示的にマッピングされていないすべての <code>gen_ai.*</code> 属性は、LLM スパンのタグに格納され、各値は 256 文字の制限があります。この制限を超える値は切り詰められます。すべてのその他の非<code>gen_ai</code> 属性は破棄されます。</div>
+<div class="alert alert-info">LLM Observability のスパンフィールドに明示的にマッピングされていないすべての <code>gen_ai.*</code> 属性は、LLM スパンのタグに格納され、各値は 256 文字の制限があります。この制限を超える値は切り詰められます。すべてのその他の非<code>gen_ai</code> 属性は破棄されます。</div>
 
 ### OpenLLMetry 属性マッピング {#openllmetry-attribute-mappings}
 
@@ -439,7 +439,7 @@ provider.force_flush(timeout_millis=5000)
 
 `llm.request.type` は `gen_ai.operation.name` が存在しない場合のフォールバックとして使用されます。
 
-| `llm.request.type` | Agent Observability `span.kind` |
+| `llm.request.type` | LLM Observability `span.kind` |
 |--------------------|-------------------|
 | `chat` | `llm` |
 | `completion` | `llm` |
@@ -449,13 +449,13 @@ provider.force_flush(timeout_millis=5000)
 
 #### モデル情報 {#model-information-1}
 
-| OpenLLMetry 属性 | Agent Observability フィールド | メモ |
+| OpenLLMetry 属性 | LLM Observability フィールド | メモ |
 |-----------------------|--------------|-------|
 | `gen_ai.system` | `meta.model_provider` | `gen_ai.provider.name` が存在しない場合のフォールバック |
 
 #### トークン使用量メトリクス {#token-usage-metrics-1}
 
-| OpenLLMetry 属性 | Agent Observability フィールド | メモ |
+| OpenLLMetry 属性 | LLM Observability フィールド | メモ |
 |-----------------------|--------------|-------|
 | `llm.usage.total_tokens` | `metrics.total_tokens` | `gen_ai.usage.total_tokens` が存在しない場合のフォールバック |
 
@@ -511,7 +511,7 @@ OpenLLMetry は、JSON 配列の代わりにインデックス付き属性を使
 
 埋め込みスパンの場合、ドキュメントはプロンプトコンテンツ属性から抽出されます。
 
-| OpenLLMetry ソース | Agent Observability フィールド |
+| OpenLLMetry ソース | LLM Observability フィールド |
 |--------------------|--------------|
 | `gen_ai.prompt.<index>.content` | `meta.input.documents[].text` |
 
@@ -525,7 +525,7 @@ OpenLLMetry は、JSON 配列の代わりにインデックス付き属性を使
 
 ## サポートされているセマンティック規約 {#supported-semantic-conventions}
 
-Agent Observability は、生成 AI 向け OpenTelemetry 1.37+ セマンティック規約に従うスパンをサポートしています。具体的には以下のとおりです。
+LLM Observability は、生成 AI 向け OpenTelemetry 1.37+ セマンティック規約に従うスパンをサポートしています。具体的には以下のとおりです。
 
 - LLM 操作は `gen_ai.provider.name`、`"gen_ai.operation.name"`、`gen_ai.request.model`、およびその他の gen_ai 属性を含みます。
 - 直接スパン属性またはスパンイベントを介した操作の入力および出力
@@ -534,9 +534,9 @@ Agent Observability は、生成 AI 向け OpenTelemetry 1.37+ セマンティ�
 
 サポートされている属性とその仕様の完全な一覧については、[生成 AI 向け OpenTelemetry セマンティック規約ドキュメント][1]を参照してください。
 
-## Agent Observability 変換の無効化 {#disabling-llm-observability-conversion}
+## LLM Observability 変換の無効化 {#disabling-llm-observability-conversion}
 
-生成 AI スパンを APM に残し、Agent Observability に表示させたくない場合は、`dd_llmobs_enabled` 属性を `false` に設定することで自動変換を無効にできます。トレース内の任意のスパンにこの属性を設定すると、トレース全体が Agent Observability に変換されるのを防ぎます。
+生成 AI スパンを APM に残し、LLM Observability に表示させたくない場合は、`dd_llmobs_enabled` 属性を `false` に設定することで自動変換を無効にできます。トレース内の任意のスパンにこの属性を設定すると、トレース全体が LLM Observability に変換されるのを防ぎます。
 
 ### 環境変数の使用 {#using-environment-variables}
 
@@ -556,7 +556,7 @@ from opentelemetry import trace
 tracer = trace.get_tracer(__name__)
 
 with tracer.start_as_current_span("my-span") as span:
-    # Disable Agent Observability conversion for this entire trace
+    # Disable LLM Observability conversion for this entire trace
     span.set_attribute("dd_llmobs_enabled", False)
 ```
 

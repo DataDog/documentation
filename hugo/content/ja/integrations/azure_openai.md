@@ -66,17 +66,17 @@ tile:
 
 Azure OpenAI を使用して、チャット ボットやデータ抽出ツールなどの LLM 駆動アプリケーションを監視、トラブルシュート、評価します。
 
-LLM アプリケーションを構築している場合は、Agent Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
+LLM アプリケーションを構築している場合は、LLM Observability を使用して問題の根本原因を調査し、運用パフォーマンスを監視し、LLM アプリケーションの品質、プライバシー、安全性を評価してください。
 
-トレースの調査方法の例については、[Agent Observability のトレース ビューの動画][1] を参照してください。
+トレースの調査方法の例については、[LLM Observability のトレース ビューの動画][1] を参照してください。
 
 Azure OpenAI は、OpenAI のモデル ライブラリを使用したコパイロットや生成 AI アプリケーションの開発を可能にします。Datadog インテグレーションを使用して、Azure OpenAI API とデプロイのパフォーマンスと使用状況を追跡します。
 
 ## セットアップ
 
-### Agent Observability: Azure OpenAI を使用した LLM アプリケーションのエンド ツー エンドの可視性
+### LLM Observability: Azure OpenAI を使用した LLM アプリケーションのエンド ツー エンドの可視性
 
-Agent Observability はさまざまな環境で有効化できます。ご利用のシナリオに応じて適切なセットアップに従ってください。
+LLM Observability はさまざまな環境で有効化できます。ご利用のシナリオに応じて適切なセットアップに従ってください。
 
 #### Python 向けのインストール
 
@@ -127,9 +127,9 @@ docker run -d \
 
 **注**: Agent がカスタム ホストまたはポートで実行されている場合は、`DD_AGENT_HOST` と `DD_TRACE_AGENT_PORT` を適切に設定してください。
 
-##### サーバーレス環境 (Azure Functions) で Agent Observability を実行している場合:
+##### サーバーレス環境 (Azure Functions) で LLM Observability を実行している場合:
 
-次の環境変数を設定して Agent Observability を有効化:
+次の環境変数を設定して LLM Observability を有効化:
 
 ```shell
 DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLMOBS_ML_APP=<YOUR_ML_APP_NAME>
@@ -139,7 +139,7 @@ DD_SITE=<YOUR_DATADOG_SITE> DD_API_KEY=<YOUR_API_KEY> DD_LLMOBS_ENABLED=1 DD_LLM
 
 ##### Azure OpenAI の自動トレーシング
 
-Agent Observability が構成されている場合、Azure OpenAI インテグレーションは自動的に有効化されます。これにより、レイテンシ、エラー、入力および出力メッセージに加えて、Azure OpenAI 呼び出しのトークン使用量が取得されます。
+LLM Observability が構成されている場合、Azure OpenAI インテグレーションは自動的に有効化されます。これにより、レイテンシ、エラー、入力および出力メッセージに加えて、Azure OpenAI 呼び出しのトークン使用量が取得されます。
 
 同期および非同期の Azure OpenAI 操作の両方で、次のメソッドがトレースされます:
 
@@ -152,7 +152,7 @@ Agent Observability が構成されている場合、Azure OpenAI インテグ�
 
 ##### 検証
 
-アプリケーション ログでスパンが正常に作成されていることを確認し、Agent Observability がスパンを正しく取得していることを検証します。`ddtrace` インテグレーションの状態を確認するには、次のコマンドを実行します:
+アプリケーション ログでスパンが正常に作成されていることを確認し、LLM Observability がスパンを正しく取得していることを検証します。`ddtrace` インテグレーションの状態を確認するには、次のコマンドを実行します:
 
 ```shell
 ddtrace-run --info
@@ -182,7 +182,7 @@ ddtrace-run --debug
 
 ## 概要
 
-Datadog の _Agent Observability_ は、Azure OpenAI のモデルを使用して LLM アプリケーションを評価できます。以下の手順に従って、Azure OpenAI リソースをセットアップし、評価用に構成します。
+Datadog の _LLM Observability_ は、Azure OpenAI のモデルを使用して LLM アプリケーションを評価できます。以下の手順に従って、Azure OpenAI リソースをセットアップし、評価用に構成します。
 
 ## 前提条件
 
@@ -193,7 +193,7 @@ Datadog の _Agent Observability_ は、Azure OpenAI のモデルを使用して
 
 ## セットアップ
 
-### Datadog の Agent Observability を構成する
+### Datadog の LLM Observability を構成する
 
 1. **Integrations > Azure OpenAI** に移動します。
 2. **Configure** タブで **Add New** をクリックします。
@@ -217,7 +217,7 @@ Datadog の _Agent Observability_ は、Azure OpenAI のモデルを使用して
 
 4. チェック マークをクリックして保存します。
 
-5. インスツルメント済み LLM アプリケーションの評価を作成して実行するには、**Agent Observability > Settings** に移動します。
+5. インスツルメント済み LLM アプリケーションの評価を作成して実行するには、**LLM Observability > Settings** に移動します。
 
 ## 追加リソース
 

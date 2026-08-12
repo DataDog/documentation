@@ -1,3 +1,3 @@
 ---
-title: Delete an Agent Observability prompt
+title: Delete an LLM Observability prompt
 ---

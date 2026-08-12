@@ -1,3 +1,3 @@
 ---
-title: Create an Agent Observability project
+title: Create an LLM Observability project
 ---

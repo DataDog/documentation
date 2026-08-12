@@ -31,7 +31,7 @@ Datadog MCP サーバーを設定および構成する方法を学びます。�
 1. URLの入力を求められたら、あなたの[Datadogサイト][2]のDatadog MCPサーバーエンドポイントを入力してください ({{< region-param key="dd_site_name" >}})。正しい手順については、このドキュメントページの右側にある{{< ui >}}Datadog Site{{< /ui >}}セレクターを使用して、サイトを選択してください。
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}</code></pre>
 
-   [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+   [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -69,7 +69,7 @@ AIエージェントを、地域の[Datadogサイト][1]のMCPサーバーエン
        }
     }</code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -102,7 +102,7 @@ AIエージェントを、地域の[Datadogサイト][1]のMCPサーバーエン
    url = "{{< region-param key="mcp_server_endpoint" >}}"
    </code></pre>
 
-   [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+   [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -190,7 +190,7 @@ AIエージェントを、地域の[Datadogサイト][1]のMCPサーバーエン
       }
     }</code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
    <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -219,7 +219,7 @@ AIエージェントを、地域の[Datadogサイト][3]のMCPサーバーエン
    - **ワンクリックインストール (推奨):**Datadog MCPサーバーを使用します {{< region-param key="goose_mcp_install_deeplink" link="true" text="install deeplink" >}}。
    - **手動設定:** このセクションに記載されているエンドポイントをストリーミング可能 HTTP サーバーURL として使用して、Goose で [MCP サーバーを追加する][2] ための手順に従ってください。設定を直接編集するには、`~/.config/goose/config.yaml` を修正します。
 
-1. [製品固有のツール][1] を有効にするには、エンドポイント URL の末尾に `toolsets` クエリパラメータを含めます。たとえば、この URL で有効になるのは、APM と Agent Observability のツール_だけ_です。
+1. [製品固有のツール][1] を有効にするには、エンドポイント URL の末尾に `toolsets` クエリパラメータを含めます。たとえば、この URL で有効になるのは、APM と LLM Observability のツール_だけ_です。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -262,7 +262,7 @@ JetBrains は、さまざまな IDE 向けに [Junie][1] および [AI Assistant
     }
     </code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -288,7 +288,7 @@ JetBrains は、さまざまな IDE 向けに [Junie][1] および [AI Assistant
     }
     </code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -311,7 +311,7 @@ JetBrains は、さまざまな IDE 向けに [Junie][1] および [AI Assistant
     }
     </code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -363,7 +363,7 @@ AIエージェントを、地域の[Datadogサイト][3]のMCPサーバーエン
       }
     }</code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -422,7 +422,7 @@ AIエージェントを、地域の[Datadogサイト][3]のMCPサーバーエン
   }
 }</code></pre>
 
-[製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、この URL で有効になるのは、APM と Agent Observability のツール_だけ_です。
+[製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、この URL で有効になるのは、APM と LLM Observability のツール_だけ_です。
 
 <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -485,7 +485,7 @@ Datadog の [カーソルと VS Code 拡張機能][1] には、管理された D
       }
     }</code></pre>
 
-    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and Agent Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
+    To enable [product-specific tools](#toolsets), include the `toolsets` query parameter at the end of the endpoint URL. For example, this URL enables _only_ APM and LLM Observability tools (use `toolsets=all` to enable all generally available toolsets, best for clients that support tool filtering):
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -523,7 +523,7 @@ AIエージェントを、地域の[Datadogサイト][1]のMCPサーバーエン
       }
     }</code></pre>
 
-1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびAgent Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
+1. [製品特有のツール](#toolsets)を有効にするには、エンドポイントURLの末尾に`toolsets`クエリパラメータを含めてください。たとえば、このURLは_のみ_APMおよびLLM Observabilityツールを有効にします (すべての一般に利用可能なツールセットを有効にするには`toolsets=all`を使用してください。これは、ツールフィルタリングをサポートするクライアントに最適です)。
 
     <pre><code>{{< region-param key="mcp_server_endpoint" >}}?toolsets=apm,llmobs</code></pre>
 
@@ -577,7 +577,7 @@ Datadog MCPサーバーは、_ツールセット_をサポートしており、�
 - `error-tracking`: Datadog [Error Tracking][32]と対話するためのツール
 - `feature-flags`: [feature flags][35]を管理するためのツール、フラグとその環境の作成、リスト表示、更新を含む
 - `kubernetes`: すべてのクラスターの中から [Kubernetes][51] リソースを検索し、説明し、マニフェストを取得するためのツール
-- `llmobs`: [Agent Observability][36]のスパンと実験を検索および分析するためのツール
+- `llmobs`: [LLM Observability][36]のスパンと実験を検索および分析するためのツール
 - `networks`: [Cloud Network Monitoring][37]分析および[Network Device Monitoring][38]のためのツール
 - `onboarding`: エージェント的なオンボーディングツールによるDatadogのセットアップと構成のガイド
 - `product-analytics`: [Product Analytics][41]クエリと対話するためのツール

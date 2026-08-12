@@ -1,3 +1,3 @@
 ---
-title: List Agent Observability projects
+title: List LLM Observability projects
 ---

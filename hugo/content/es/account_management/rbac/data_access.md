@@ -68,7 +68,7 @@ Si lo deseas, puedes solicitar una vista previa de lo siguiente:
 - Métricas personalizadas
     - **Nota:** No se admiten las métricas estándar y OpenTelemetry (OpenTelemetry)
 - Problemas de seguimiento de errores
-- Agent Observability
+- LLM Observability
 - Información sobre el repositorio de Software Delivery (en pipelines de CI Visibility)
 
 ## Restricciones de uso

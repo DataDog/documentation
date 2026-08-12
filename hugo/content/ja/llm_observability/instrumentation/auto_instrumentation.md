@@ -7,20 +7,20 @@ aliases:
 further_reading:
 - link: /llm_observability/instrumentation/sdk/
   tag: Documentation
-  text: Agent Observability SDK リファレンス
+  text: LLM Observability SDK リファレンス
 - link: https://www.datadoghq.com/blog/llm-prompt-tracking
   tag: Blog
   text: Datadog LLM Observability を使用して、LLM プロンプトを追跡、比較、最適化します
 - link: https://www.datadoghq.com/blog/mcp-client-monitoring
   tag: Blog
   text: Datadog LLM Observability を使用して、MCP クライアントのエンドツーエンドの可視性を取得します。
-title: Agent Observability のための自動インスツルメンテーション
+title: LLM Observability のための自動インスツルメンテーション
 ---
 ## 概要
 
-Datadog の Agent Observability は、さまざまな [LLM インテグレーション](#llmintegrations) を通じて、サポートされている LLM フレームワークやライブラリへの呼び出しを自動的にトレースし、注釈を付けることができます。[Agent Observability SDK][2] を使用して LLM アプリケーションを実行すると、これらの LLM インテグレーションはデフォルトで有効になり、コードを変更することなく、すぐにトレースと観測可能性を提供します。
+Datadog の LLM Observability は、さまざまな [LLM インテグレーション](#llmintegrations) を通じて、サポートされている LLM フレームワークやライブラリへの呼び出しを自動的にトレースし、注釈を付けることができます。[LLM Observability SDK][2] を使用して LLM アプリケーションを実行すると、これらの LLM インテグレーションはデフォルトで有効になり、コードを変更することなく、すぐにトレースと観測可能性を提供します。
 
-<div class="alert alert-info"> 自動インスツルメンテーションは、<a href="#supported-frameworks-and-libraries"> サポートされているフレームワークやライブラリ</a> への呼び出しに対して機能します。他の呼び出しをトレースするには (例: API 呼び出し、データベースクエリ、内部関数)、<a href="/llm_observability/instrumentation/sdk"> Agent Observability SDK リファレンス</a> を参照し、手動でインスツルメンテーションを追加する方法を確認してください。</div>
+<div class="alert alert-info"> 自動インスツルメンテーションは、<a href="#supported-frameworks-and-libraries"> サポートされているフレームワークやライブラリ</a> への呼び出しに対して機能します。他の呼び出しをトレースするには (例: API 呼び出し、データベースクエリ、内部関数)、<a href="/llm_observability/instrumentation/sdk"> LLM Observability SDK リファレンス</a> を参照し、手動でインスツルメンテーションを追加する方法を確認してください。</div>
 
 
 ###サポートされているフレームワークとライブラリ
@@ -100,7 +100,7 @@ register('import-in-the-middle/hook.mjs', import.meta.url, {
 {{% /collapse-content %}}
 
 {{% collapse-content title="バンドルされたアプリケーション (esbuild、Webpack) をサポートしています。" level="h4" expanded=false id="bundling-support" %}}
-バンドルされたアプリケーション (esbuild、Webpack) でAgent Observability インテグレーションを使用するには、これらのインテグレーションのモジュールをバンドルから除外する必要があります。
+バンドルされたアプリケーション (esbuild、Webpack) でLLM Observability インテグレーションを使用するには、これらのインテグレーションのモジュールをバンドルから除外する必要があります。
 
 #####esbuild
 esbuild を使用している場合は、[Node.js トレーサーによるバンドリング](/tracing/trace_collection/automatic_instrumentation/dd_libraries/nodejs/#bundling) を参照してください。
@@ -175,7 +175,7 @@ module.exports = {
 {{% /tab %}}
 {{< /tabs >}}
 
-<div class="alert alert-info">Datadog Agent Observability は、ネイティブに <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI セマンティック規約 v1.37+</a> に準拠したスパンを発行する任意のフレームワークもサポートしており、Datadog トレーサーを必要としません。詳細については、<a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry インスツルメンテーション</a>を参照してください。</div>
+<div class="alert alert-info">Datadog LLM Observability は、ネイティブに <a href="https://opentelemetry.io/docs/specs/semconv/gen-ai/">OpenTelemetry GenAI セマンティック規約 v1.37+</a> に準拠したスパンを発行する任意のフレームワークもサポートしており、Datadog トレーサーを必要としません。詳細については、<a href="/llm_observability/instrumentation/otel_instrumentation">OpenTelemetry インスツルメンテーション</a>を参照してください。</div>
 
 ##LLM インテグレーション
 
@@ -641,7 +641,7 @@ OpenAI インテグレーションは、ストリーミングされた呼び出�
 {{< tabs >}}
 {{% tab "Python " %}}
 OpenAI Agent インテグレーションは、[組み込みトレース][1] を [OpenAI Agents SDK][2] から変換します。
-Agent Observability フォーマットに変換し、Datadog の Agent Observability製品 に Datadog トレースプロセッサーを追加して送信します。
+LLM Observability フォーマットに変換し、Datadog の LLM Observability製品 に Datadog トレースプロセッサーを追加して送信します。
 
 次の操作がサポートされています。
  [`traces`][3]
@@ -689,7 +689,7 @@ Pydantic AI インテグレーションは、以下のメソッドをインス�
 {{% collapse-content title="Strands Agents" level="h3" expanded=false id="strands-agents" %}}
 {{< tabs >}}
 {{% tab "Python " %}}
-[v1.11.0][1] 以降、[Strands Agents][2] は、[OpenTelemetry GenAI セマンティック規約 v1.37][3] に準拠したスパンをネイティブに発行し、Datadog Agent Observability が Datadog トレーサーを必要とせずに自動的に取り込むことができます。
+[v1.11.0][1] 以降、[Strands Agents][2] は、[OpenTelemetry GenAI セマンティック規約 v1.37][3] に準拠したスパンをネイティブに発行し、Datadog LLM Observability が Datadog トレーサーを必要とせずに自動的に取り込むことができます。
 
 セットアップ手順と完全な例については、[Strands Agent を使用した OpenTelemetry インスツルメンテーション][4] を参照してください。
 
@@ -704,7 +704,7 @@ Pydantic AI インテグレーションは、以下のメソッドをインス�
 {{% collapse-content title="Vercel AI SDK" level="h3" expanded=false id="vercel-ai-sdk" %}}
 {{< tabs >}}
 {{% tab "Node.js" %}}
-[Vercel AI SDK][1] インテグレーションは、基盤となるコア [Vercel AI SDK][2] によって作成された OpenTelemetry スパンをインターセプトし、それを Datadog Agent Observability スパンに変換することによって、テキストおよびオブジェクト生成、埋め込み、ツール呼び出しを自動的にトレースします。
+[Vercel AI SDK][1] インテグレーションは、基盤となるコア [Vercel AI SDK][2] によって作成された OpenTelemetry スパンをインターセプトし、それを Datadog LLM Observability スパンに変換することによって、テキストおよびオブジェクト生成、埋め込み、ツール呼び出しを自動的にトレースします。
 
 ###トレース対象メソッド
  [テキスト生成][3]:
@@ -721,7 +721,7 @@ Pydantic AI インテグレーションは、以下のメソッドをインス�
 
 ### Vercel AI Core SDK テレメトリ
 
-このインテグレーションは、[`experimental_telemetry`オプション][7] の下で追跡された各メソッドに渡されたトレーサーを自動的にパッチします。`experimental_telemetry` 構成が渡されない場合、インテグレーションは Agent Observability のスパンを送信できるようにそれを有効にします。
+このインテグレーションは、[`experimental_telemetry`オプション][7] の下で追跡された各メソッドに渡されたトレーサーを自動的にパッチします。`experimental_telemetry` 構成が渡されない場合、インテグレーションは LLM Observability のスパンを送信できるようにそれを有効にします。
 
 ```javascript
 require('dd-trace').init({
@@ -739,18 +739,18 @@ async function main () {
     ...
     experimental_telemetry: {
       isEnabled: true,
-      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog Agent Observability
+      tracer: someTracerProvider.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
     }
   });
 
   result = await generateText({
     model: openai('gpt-4o'),
     ...
-  }); // since no tracer is passed in, the integration will enable it to still send Agent Observability spans
+  }); // since no tracer is passed in, the integration will enable it to still send LLM Observability spans
 }
 ```
 
-**注意**: `experimental_telemetry.isEnabled` が `false` に設定されている場合、インテグレーションはそれをオンにせず、Agent Observability にスパンを送信しません。
+**注意**: `experimental_telemetry.isEnabled` が `false` に設定されている場合、インテグレーションはそれをオンにせず、LLM Observability にスパンを送信しません。
 
 [1]: /ja/integrations/vercelaisdk
 [2]: https://aisdk.dev/docs/introduction

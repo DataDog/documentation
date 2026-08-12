@@ -1,3 +1,3 @@
 ---
-title: Create an Agent Observability experiment
+title: Create an LLM Observability experiment
 ---

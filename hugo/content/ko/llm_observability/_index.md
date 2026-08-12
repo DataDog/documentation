@@ -41,19 +41,19 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: 학습 센터
   text: LLM 애플리케이션 추적
-title: Agent Observability
+title: LLM Observability
 ---
-{{< learning-center-callout header="학습 센터에서 Agent Observability 시작해 보기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+{{< learning-center-callout header="학습 센터에서 LLM Observability 시작해 보기" btn_title="지금 등록" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
   LLM 애플리케이션의 성능, 비용, 트레이스, 토큰 사용량 및 오류를 모니터링하여 문제를 식별하고 해결하는 방법을 배웁니다.
 {{< /learning-center-callout >}}
 
 ## 개요 {#overview}
 
-Agent Observability를 사용하면 챗봇과 같은 LLM 기반 애플리케이션을 모니터링, 문제 해결 및 평가할 수 있습니다. 문제의 근본 원인을 조사하고 운영 성능을 모니터링하며 LLM 애플리케이션의 품질, 개인정보 보호 및 안전성을 평가할 수 있습니다.
+LLM Observability를 사용하면 챗봇과 같은 LLM 기반 애플리케이션을 모니터링, 문제 해결 및 평가할 수 있습니다. 문제의 근본 원인을 조사하고 운영 성능을 모니터링하며 LLM 애플리케이션의 품질, 개인정보 보호 및 안전성을 평가할 수 있습니다.
 
-애플리케이션이 처리하는 각 요청은 Datadog의 [**Agent Observability** 페이지][1]에서 하나의 트레이스로 표현됩니다.
+애플리케이션이 처리하는 각 요청은 Datadog의 [**LLM Observability** 페이지][1]에서 하나의 트레이스로 표현됩니다.
 
-{{< img src="llm_observability/traces.png" alt="Agent Observability 페이지의 프롬프트-응답 쌍 트레이스 목록" style="width:100%;" >}}
+{{< img src="llm_observability/traces.png" alt="LLM Observability 페이지의 프롬프트-응답 쌍 트레이스 목록" style="width:100%;" >}}
 
 트레이스는 다음 중 하나를 나타낼 수 있습니다.
 
@@ -73,7 +73,7 @@ Agent Observability를 사용하면 챗봇과 같은 LLM 기반 애플리케이�
 
 모든 LLM 애플리케이션의 비용, 지연 시간, 성능 및 사용량 추세를 [기본 제공 대시보드][7]로 모니터링하세요.
 
-{{< img src="llm_observability/dashboard_1.png" alt="Datadog의 기본 제공 Agent Observability 운영 인사이트 대시보드" style="width:100%;" >}}
+{{< img src="llm_observability/dashboard_1.png" alt="Datadog의 기본 제공 LLM Observability 운영 인사이트 대시보드" style="width:100%;" >}}
 
 ## LLM 애플리케이션의 품질 및 효과성 평가 {#evaluate-the-quality-and-effectiveness-of-your-llm-applications}
 
@@ -85,11 +85,11 @@ Agent Observability를 사용하면 챗봇과 같은 LLM 기반 애플리케이�
 
 AI 애플리케이션에서 민감한 데이터를 자동으로 스캔하고 삭제하며, 프롬프트 주입을 식별하는 등 다양한 평가 기능을 제공합니다.
 
-{{< img src="llm_observability/prompt_injection.png" alt="Agent Observability에 의해 감지된 프롬프트 주입 시도의 예" style="width:100%;" >}}
+{{< img src="llm_observability/prompt_injection.png" alt="LLM Observability에 의해 감지된 프롬프트 주입 시도의 예" style="width:100%;" >}}
 
 ## 인사이트로 강조 표시된 이상 징후 확인 {#see-anomalies-highlighted-as-insights}
 
-Agent Observability Insights는 실행 시간, 오류율과 같은 운영 메트릭과 [기본 제공(OOTB) 평가][9] 결과의 이상 징후를 사용자가 식별할 수 있도록 지원하는 모니터링 환경을 제공합니다.
+LLM Observability Insights는 실행 시간, 오류율과 같은 운영 메트릭과 [기본 제공(OOTB) 평가][9] 결과의 이상 징후를 사용자가 식별할 수 있도록 지원하는 모니터링 환경을 제공합니다.
 
 이상치는 다음과 같은 주요 차원에서 탐지됩니다.
 - 스팬 이름
@@ -98,19 +98,19 @@ Agent Observability Insights는 실행 시간, 오류율과 같은 운영 메트
 
 이러한 이상치는 지난 주 동안 분석되며 사용자가 선택한 해당 시간 범위에 자동으로 표시됩니다. 이를 통해 팀은 LLM 애플리케이션에서 성능 저하, 성능 변화 또는 예상치 못한 동작을 사전에 감지할 수 있습니다.
 
-{{< img src="llm_observability/Overview_LLMO.png" alt="Agent Observability Monitor 페이지 상단에 'Insights' 배너가 있습니다. 배너에는 8개의 인사이트가 표시되며, View Insights 버튼을 클릭하면 사이드 패널에서 상세 정보를 확인할 수 있습니다." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="LLM Observability Monitor 페이지 상단에 'Insights' 배너가 있습니다. 배너에는 8개의 인사이트가 표시되며, View Insights 버튼을 클릭하면 사이드 패널에서 상세 정보를 확인할 수 있습니다." style="width:100%;" >}}
 
-## Agent Observability와 통합 사용 {#use-integrations-with-llm-observability}
+## LLM Observability와 통합 사용 {#use-integrations-with-llm-observability}
 
-[Python용 Agent Observability SDK][3]는 OpenAI, LangChain, AWS Bedrock 및 Anthropic과 같은 프레임워크와 통합됩니다. 코드 변경 없이 LLM 호출을 자동으로 추적하고 주석을 달아 지연 시간, 오류 및 토큰 사용 메트릭을 수집합니다.
+[Python용 LLM Observability SDK][3]는 OpenAI, LangChain, AWS Bedrock 및 Anthropic과 같은 프레임워크와 통합됩니다. 코드 변경 없이 LLM 호출을 자동으로 추적하고 주석을 달아 지연 시간, 오류 및 토큰 사용 메트릭을 수집합니다.
 
-<div class="alert alert-info">Datadog은 다양한 인공지능(AI) 및 머신러닝(ML) 기능을 제공합니다. <a href="/integrations/#cat-aiml">Integrations 페이지와 Datadog Marketplace에 있는 AI/ML 통합</a>은 Datadog 플랫폼 전반에서 사용되는 기능입니다. <br><br> 예를 들어, APM은 OpenAI 사용량 모니터링을 위한 기본 통합을 제공하며, Infrastructure Monitoring은 컴퓨팅 집약적인 AI 워크로드 모니터링을 위한 NVIDIA DCGM Exporter와 통합됩니다. 이러한 통합은 Agent Observability 제품과는 별도로 제공됩니다.</div>
+<div class="alert alert-info">Datadog은 다양한 인공지능(AI) 및 머신러닝(ML) 기능을 제공합니다. <a href="/integrations/#cat-aiml">Integrations 페이지와 Datadog Marketplace에 있는 AI/ML 통합</a>은 Datadog 플랫폼 전반에서 사용되는 기능입니다. <br><br> 예를 들어, APM은 OpenAI 사용량 모니터링을 위한 기본 통합을 제공하며, Infrastructure Monitoring은 컴퓨팅 집약적인 AI 워크로드 모니터링을 위한 NVIDIA DCGM Exporter와 통합됩니다. 이러한 통합은 LLM Observability 제품과는 별도로 제공됩니다.</div>
 
 자세한 내용은 [자동 계측 문서][8]를 참조하세요.
 
 ## 시작할 준비가 되셨나요? {#ready-to-start}
 
-LLM 애플리케이션을 계측하는 방법에 대한 지침은 [설정 문서][5]를 참조하거나 [LLM 애플리케이션 트레이스 가이드][6]를 따라 [Python용 Agent Observability SDK][3]를 사용하여 트레이스를 생성하세요.
+LLM 애플리케이션을 계측하는 방법에 대한 지침은 [설정 문서][5]를 참조하거나 [LLM 애플리케이션 트레이스 가이드][6]를 따라 [Python용 LLM Observability SDK][3]를 사용하여 트레이스를 생성하세요.
 
 ## 추가 자료 {#further-reading}
 

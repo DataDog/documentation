@@ -1,3 +1,3 @@
 ---
-title: Create a new Agent Observability prompt version
+title: Create a new LLM Observability prompt version
 ---

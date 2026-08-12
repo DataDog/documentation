@@ -48,17 +48,17 @@ further_reading:
 - link: https://learn.datadoghq.com/courses/llm-obs-tracing-llm-applications
   tag: Centre d'apprentissage
   text: Traçage des applications LLM
-title: Agent Observability
+title: LLM Observability
 ---
-{{< learning-center-callout header="Essayez de commencer avec Agent Observability dans le Centre d'apprentissage" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
+{{< learning-center-callout header="Essayez de commencer avec LLM Observability dans le Centre d'apprentissage" btn_title="Inscrivez-vous maintenant" btn_url="https://learn.datadoghq.com/courses/llm-obs-getting-started">}}
   Apprenez à surveiller la performance, les coûts, les traces, l'utilisation des jetons et les erreurs de votre application LLM pour identifier et résoudre les problèmes.
 {{< /learning-center-callout >}}
 
 ## Aperçu {#overview}
 
-Avec Agent Observability, vous pouvez surveiller, dépanner et évaluer vos applications alimentées par LLM, telles que les chatbots. Vous pouvez enquêter sur la cause profonde des problèmes, surveiller la performance opérationnelle et évaluer la qualité, la confidentialité et la sécurité de vos applications LLM.
+Avec LLM Observability, vous pouvez surveiller, dépanner et évaluer vos applications alimentées par LLM, telles que les chatbots. Vous pouvez enquêter sur la cause profonde des problèmes, surveiller la performance opérationnelle et évaluer la qualité, la confidentialité et la sécurité de vos applications LLM.
 
-Chaque requête effectuée par votre application est représentée comme une trace sur la page [**Agent Observability**][1] dans Datadog.
+Chaque requête effectuée par votre application est représentée comme une trace sur la page [**LLM Observability**][1] dans Datadog.
 
 {{< img src="llm_observability/traces.png" alt="Une liste de traces de paires de requêtes-réponses sur la page d'observabilité LLM" style="width:100%;" >}}
 
@@ -80,7 +80,7 @@ Visualisez chaque étape des chaînes et des appels de vos applications LLM afin
 
 Surveillez le coût, la latence, la performance et les tendances d'utilisation de toutes vos applications LLM avec [tableaux de bord prêts à l'emploi][7].
 
-{{< img src="llm_observability/dashboard_1.png" alt="Le tableau de bord prêt à l'emploi Agent Observability Operational Insights dans Datadog." style="width:100%;" >}}
+{{< img src="llm_observability/dashboard_1.png" alt="Le tableau de bord prêt à l'emploi LLM Observability Operational Insights dans Datadog." style="width:100%;" >}}
 
 ## Évaluez la qualité et l'efficacité de vos applications LLM {#evaluate-the-quality-and-effectiveness-of-your-llm-applications}
 
@@ -96,7 +96,7 @@ Scannez automatiquement et masquez toute donnée sensible dans vos applications 
 
 ## Consultez les anomalies mises en évidence sous forme d'insights {#see-anomalies-highlighted-as-insights}
 
-Agent Observability Insights offre une expérience de surveillance qui aide les utilisateurs à identifier les anomalies dans leurs métriques opérationnelles, telles que la durée et le taux d'erreur, ainsi que leurs [évaluations prêtes à l'emploi (OOTB)][9].
+LLM Observability Insights offre une expérience de surveillance qui aide les utilisateurs à identifier les anomalies dans leurs métriques opérationnelles, telles que la durée et le taux d'erreur, ainsi que leurs [évaluations prêtes à l'emploi (OOTB)][9].
 
 La détection des valeurs aberrantes est effectuée sur des dimensions clés :
 - Nom du span
@@ -105,11 +105,11 @@ La détection des valeurs aberrantes est effectuée sur des dimensions clés :
 
 Ces valeurs aberrantes sont analysées au cours de la semaine passée et mises en évidence automatiquement dans la fenêtre temporelle correspondante sélectionnée par l'utilisateur. Cela permet aux équipes de détecter de manière proactive les régressions, les dérives de performance ou les comportements inattendus dans leurs applications LLM.
 
-{{< img src="llm_observability/Overview_LLMO.png" alt="Une bannière 'Insights' en haut de la page de surveillance Agent Observability. La bannière affiche 8 insights et dispose d'un bouton Voir les insights qui mène à un panneau latéral avec plus de détails." style="width:100%;" >}}
+{{< img src="llm_observability/Overview_LLMO.png" alt="Une bannière 'Insights' en haut de la page de surveillance LLM Observability. La bannière affiche 8 insights et dispose d'un bouton Voir les insights qui mène à un panneau latéral avec plus de détails." style="width:100%;" >}}
 
-## Utilisez les intégrations avec Agent Observability {#use-integrations-with-llm-observability}
+## Utilisez les intégrations avec LLM Observability {#use-integrations-with-llm-observability}
 
-Le [SDK Agent Observability pour Python][3] s'intègre avec des frameworks tels qu'OpenAI, LangChain, AWS Bedrock et Anthropic. Il trace et annote automatiquement les appels LLM, capturant la latence, les erreurs et les métriques d'utilisation des tokens, sans modifications de code.
+Le [SDK LLM Observability pour Python][3] s'intègre avec des frameworks tels qu'OpenAI, LangChain, AWS Bedrock et Anthropic. Il trace et annote automatiquement les appels LLM, capturant la latence, les erreurs et les métriques d'utilisation des tokens, sans modifications de code.
 
 <div class="alert alert-info">Datadog propose une variété de capacités d'intelligence artificielle (IA) et d'apprentissage automatique (ML). Les <a href="/integrations/#cat-aiml">intégrations IA/ML sur la page des intégrations et le marché Datadog</a> sont des fonctionnalités Datadog à l'échelle de la plateforme. <br><br> Par exemple, APM propose une intégration native avec OpenAI pour surveiller votre utilisation d'OpenAI, tandis que la surveillance de l'infrastructure propose une intégration avec NVIDIA DCGM Exporter pour surveiller les charges de travail IA intensives en calcul. Ces intégrations sont différentes de l'offre d'observabilité LLM.</div>
 
@@ -117,7 +117,7 @@ Pour plus d'informations, consultez la [documentation sur l'auto-instrumentation
 
 ## Prêt à commencer ? {#ready-to-start}
 
-Consultez la [documentation de configuration][5] pour des instructions sur l'instrumentation de votre application LLM ou suivez le [guide de traçage d'une application LLM][6] pour générer une trace à l'aide du [SDK Agent Observability pour Python][3].
+Consultez la [documentation de configuration][5] pour des instructions sur l'instrumentation de votre application LLM ou suivez le [guide de traçage d'une application LLM][6] pour générer une trace à l'aide du [SDK LLM Observability pour Python][3].
 
 ## Lectures complémentaires {#further-reading}
 

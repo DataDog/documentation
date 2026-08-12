@@ -199,7 +199,7 @@ Metrics without LimitsTM は、Agent やコードレベルの変更を必要と�
 | Datadog エクスポーター        | [OpenTelemetry Collector][17] または [Datadog Exporter][18] から送信された時系列データ。
 | Datadog Platform        | [メトリクス使用状況を報告する][11]ために用いられるメトリクスインテークによって送信された時系列データ。
 | イベント                  | Datadog Events プラットフォームから生成された時系列データ。
-| Agent Observability       | `lmobs_to_metrics` サービスを使用して Agent Observability 製品から出力された時系列データ。
+| LLM Observability       | `lmobs_to_metrics` サービスを使用して LLM Observability 製品から出力された時系列データ。
 | ログ                    | Datadog [Logs][28] プラットフォームから生成された時系列データ。
 | Metrics API             | Datadog の [OTLP Ingestion エンドポイント][21]および OTel レシーバーを使用して送信され、Datadog インテグレーションに対応するもの、推定使用量メトリクス、または Datadog API クライアント由来の時系列データ。
 | CNM                     | Datadog [Cloud Network Monitoring][19] 製品から送信された時系列データ。

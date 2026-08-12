@@ -7,16 +7,16 @@ aliases:
 further_reading:
 - link: /llm_observability/setup
   tag: ドキュメント
-  text: Agent Observability のセットアップ方法
+  text: LLM Observability のセットアップ方法
 - link: /llm_observability/submit_evaluations
   tag: ガイド
-  text: Agent Observability への評価の送信
-title: Agent Observability の用語と概念
+  text: LLM Observability への評価の送信
+title: LLM Observability の用語と概念
 ---
 
 ## 概要
 
-Agent Observability UI には、会話のパフォーマンスを診断し、製品全体でデータを相関させるための多くのツールが提供されています。これにより、大規模言語モデル (LLM) の問題を特定し、解決することができます。
+LLM Observability UI には、会話のパフォーマンスを診断し、製品全体でデータを相関させるための多くのツールが提供されています。これにより、大規模言語モデル (LLM) の問題を特定し、解決することができます。
 
 | コンセプト | 説明 |
 |---|---|
@@ -38,9 +38,9 @@ Agent Observability UI には、会話のパフォーマンスを診断し、製
 
 ### スパンの種類
 
-Agent Observability は、スパンが実行している作業の種類を定義する*スパン種別*によってスパンを分類します。これにより、LLM アプリケーションで実行されている操作について、より詳細な洞察を得ることができます。
+LLM Observability は、スパンが実行している作業の種類を定義する*スパン種別*によってスパンを分類します。これにより、LLM アプリケーションで実行されている操作について、より詳細な洞察を得ることができます。
 
-Agent Observability は、次のスパン種別をサポートしています。
+LLM Observability は、次のスパン種別をサポートしています。
 
 | 種別      | 表すもの   | ルートスパンかどうか   | 子スパンを持つことができるかどうか | 例 |
 |-----------|--------------|--------------|-------------|----|
@@ -52,7 +52,7 @@ Agent Observability は、次のスパン種別をサポートしています。
 | [埋め込み](#embedding-span) | 埋め込みを返すモデルや関数への呼び出し。 | いいえ  | はい | text-embedding-ada-002 への呼び出し。 |
 | [取得](#retrieval-span) | 外部の知識ベースからデータを取得する操作。 | いいえ | いいえ | ベクトルデータベースへの呼び出しで、ランク付けされた文書の配列を返します。 |
 
-アプリケーションからスパンを作成する手順については、コード例を含む詳細が記載された Agent Observability SDK for Python のドキュメント内の[スパンのトレース][2]を参照してください。
+アプリケーションからスパンを作成する手順については、コード例を含む詳細が記載された LLM Observability SDK for Python のドキュメント内の[スパンのトレース][2]を参照してください。
 
 #### LLM スパン
 
@@ -106,7 +106,7 @@ LLM スパンは通常、子スパンを持たず、LLM への直接呼び出し
 
 ## トレース
 
-Agent Observability は、さまざまな複雑性を持つ LLM アプリケーションに対する可観測性をサポートします。トレースの構造と複雑性に基づいて、Agent Observability の以下の機能を使用できます。
+LLM Observability は、さまざまな複雑性を持つ LLM アプリケーションに対する可観測性をサポートします。トレースの構造と複雑性に基づいて、LLM Observability の以下の機能を使用できます。
 
 ### LLM 推論のモニタリング
 
@@ -114,7 +114,7 @@ LLM 推論トレースは単一の LLM スパンで構成されます。
 
 {{< img src="llm_observability/llm-observability-llm-span.png" alt="単一の LLM スパン" style="width:100%;" >}}
 
-個々の LLM 推論をトレースすると、Agent Observability の基本機能が有効になり、以下のことが可能になります。
+個々の LLM 推論をトレースすると、LLM Observability の基本機能が有効になり、以下のことが可能になります。
 
 1. LLM 呼び出しへの入力と出力を追跡します。
 2. LLM 呼び出しのトークン使用状況、エラーレート、レイテンシーを追跡します。
@@ -151,15 +151,15 @@ LLM アプリケーションをインスツルメンテーションして、単�
 
 ## 評価
 
-Agent Observability は、LLM 会話の品質と有効性を評価するための品質チェックとすぐに使えるメトリクスを提供します。これには、感情、トピックの関連性、ユーザー満足度の判定が含まれます。評価により、会話のパフォーマンスを把握し、LLM アプリケーションの応答を強化することができます。これにより、ユーザーエクスペリエンスが向上し、価値のある正確な出力が保証されます。
+LLM Observability は、LLM 会話の品質と有効性を評価するための品質チェックとすぐに使えるメトリクスを提供します。これには、感情、トピックの関連性、ユーザー満足度の判定が含まれます。評価により、会話のパフォーマンスを把握し、LLM アプリケーションの応答を強化することができます。これにより、ユーザーエクスペリエンスが向上し、価値のある正確な出力が保証されます。
 
-{{< img src="llm_observability/evaluations/evaluations.png" alt="Agent Observability における品質評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/evaluations.png" alt="LLM Observability における品質評価" style="width:100%;" >}}
 
-会話の評価に加えて、Agent Observability は [Sensitive Data Scanner][5] とインテグレーションし、会話中に存在する可能性がある機密情報 (個人情報、財務情報、または企業秘密など) を識別し、フラグを立てることで、データ漏洩を防止します。
+会話の評価に加えて、LLM Observability は [Sensitive Data Scanner][5] とインテグレーションし、会話中に存在する可能性がある機密情報 (個人情報、財務情報、または企業秘密など) を識別し、フラグを立てることで、データ漏洩を防止します。
 
-Agent Observability は、機密データを積極的にスキャンすることで、会話が安全に保たれ、データ保護規制に準拠していることを保証します。この追加のセキュリティレイヤーにより、Datadog は LLM とのユーザーインタラクションの機密性とインテグレーションを維持するというコミットメントを強化します。
+LLM Observability は、機密データを積極的にスキャンすることで、会話が安全に保たれ、データ保護規制に準拠していることを保証します。この追加のセキュリティレイヤーにより、Datadog は LLM とのユーザーインタラクションの機密性とインテグレーションを維持するというコミットメントを強化します。
 
-Agent Observability は、評価を個々のスパンに関連付けるため、特定の評価につながった入力と出力を表示できます。Datadog はトレースにすぐに使える評価を提供していますが、Agent Observability に[独自の評価を送信][6]することもできます。
+LLM Observability は、評価を個々のスパンに関連付けるため、特定の評価につながった入力と出力を表示できます。Datadog はトレースにすぐに使える評価を提供していますが、LLM Observability に[独自の評価を送信][6]することもできます。
 
 ### 品質評価
 
@@ -167,7 +167,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックでは、構成された許容入力トピックから逸脱したユーザー入力を識別し、フラグを付けます。これにより、LLM の指定した目的と範囲に該当するやりとりが維持されます。
 
-{{< img src="llm_observability/evaluations/topic_relevancy_1.png" alt="Agent Observability における LLM によって検出されたトピック関連性評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/topic_relevancy_1.png" alt="LLM Observability における LLM によって検出されたトピック関連性評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -177,7 +177,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックでは、LLM が適切な応答を提供できなかった場合を特定します。これは、LLM の知識や理解の限界、ユーザーの問い合わせの曖昧さ、またはトピックの複雑さが原因で発生することがあります。
 
-{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="Agent Observability における LLM で検出された回答失敗評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/failure_to_answer_1.png" alt="LLM Observability における LLM で検出された回答失敗評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -187,7 +187,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックでは、LLM がユーザーが使用している言語や方言とは異なる言語で応答を生成する場合を特定します。これにより、混乱や誤解が生じる可能性があります。このチェックにより、LLM の応答がユーザーの言語的な好みやニーズに合致していることを確認します。
 
-{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="Agent Observability におけるオープンソースモデルで検出された言語の不一致評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/language_mismatch_1.png" alt="LLM Observability におけるオープンソースモデルで検出された言語の不一致評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -197,7 +197,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックは、会話の全体的な雰囲気を理解し、ユーザーの満足度を測定し、感情の傾向を特定し、感情的な反応を解釈するのに役立ちます。このチェックは、テキストの感情を正確に分類し、ユーザー体験を改善し、ユーザーのニーズにより良く応えるための応答を調整する洞察を提供します。
 
-{{< img src="llm_observability/evaluations/sentiment_1.png" alt="Agent Observability における LLM によって検出された感情評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sentiment_1.png" alt="LLM Observability における LLM によって検出された感情評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -209,7 +209,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックでは、ユーザーの入力プロンプトおよび LLM アプリケーションからの応答に有害なコンテンツが含まれているかを評価します。このチェックにより、有害な内容を識別し、フラグを立て、やりとりが常に安全で敬意を持って行われることを保証します。
 
-{{< img src="llm_observability/evaluations/toxicity_1.png" alt="Agent Observability における LLM によって検出された有害性評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/toxicity_1.png" alt="LLM Observability における LLM によって検出された有害性評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -219,7 +219,7 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックでは、認可されていない、または悪意のある作成者が、LLM の応答を操作したり、元の作成者が意図しない方向に会話を差し向けようとする試みを特定します。このチェックにより、ユーザーと LLM 間のやり取りの整合性と信頼性が維持されます。
 
-{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="Agent Observability における LLM によって検出されたプロンプト注入評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/prompt_injection_1.png" alt="LLM Observability における LLM によって検出されたプロンプト注入評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
@@ -229,11 +229,11 @@ Agent Observability は、評価を個々のスパンに関連付けるため、
 
 このチェックにより、機密情報が適切かつ安全に処理されていることを確認し、データ漏洩や不正アクセスのリスクを低減します。
 
-{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="Agent Observability における Sensitive Data Scanner によって検出されたセキュリティおよび安全性評価" style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/sensitive_data_scanning_1.png" alt="LLM Observability における Sensitive Data Scanner によって検出されたセキュリティおよび安全性評価" style="width:100%;" >}}
 
 | 評価段階 | 評価方法 | 評価定義 | 
 |---|---|---|
-| 入力と出力に基づいて評価 | Sensitive Data Scanner | [Sensitive Data Scanner][5] の機能により、Agent Observability は、LLM アプリケーションのすべてのプロンプトと応答のペアをスキャンし、機密情報を特定してマスキングします。これには、個人情報、財務データ、医療記録、その他プライバシーやセキュリティ上の理由で保護が必要なデータが含まれます。 |
+| 入力と出力に基づいて評価 | Sensitive Data Scanner | [Sensitive Data Scanner][5] の機能により、LLM Observability は、LLM アプリケーションのすべてのプロンプトと応答のペアをスキャンし、機密情報を特定してマスキングします。これには、個人情報、財務データ、医療記録、その他プライバシーやセキュリティ上の理由で保護が必要なデータが含まれます。 |
 
 ## その他の参考資料
 
