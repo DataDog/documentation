@@ -11,7 +11,7 @@ further_reading:
 ---
 
 ## Overview
-Create an automation to have Bits Code start a [session][1] when a trigger fires—such as a new Code Security finding or a recurring schedule. Bits Code delivers the results as a pull or merge request, or a Slack notification. These sessions consume [AI Credits][8], whether you create the automation from a custom prompt or a Datadog-provided template. Follow-up interactions in those sessions also consume AI Credits.
+Create an automation that has Bits Code start a [session][1] when a trigger fires - such as a new Code Security finding or a recurring schedule. Bits Code delivers the results as a pull or merge request or a Slack notification. These sessions consume [AI Credits][8], whether you create the automation from a custom prompt or a Datadog-provided template. Follow-up interactions in those sessions also consume AI Credits.
 
 {{< img src="bits_ai/dev_agent/automations/list.png" alt="Under an 'Automate with Bits' title, a table with columns like Name, Author, and Last Run has four rows." style="width:100%;" >}}
 
