@@ -12,13 +12,15 @@ further_reading:
 
 ## Overview
 
-The [GPU Monitoring Summary page][0] provides a snapshot summary of your entire GPU fleet under a specified time frame. This page answers key questions such as:
-- Am I using my existing GPU fleet effectively?
-- How can I better provision these devices to match workload demand?
-- How can I get more value from my existing GPU spend?
+The [GPU Monitoring Summary page][0] analyzes your entire GPU fleet and highlights unified insights across your on-premises and cloud devices for the selected time frame. This page answers key questions such as:
+- How much of your fleet is being used effectively or sitting completely idle?
+- Which teams, services, or clusters are the most wasteful based on idle hours?
+- How can you better provision these devices to match workload demand and quota usage efficiency?
+- What optimization actions can you take to get more value out of your existing GPU fleet?
 
 Click on the section titles below to access the corresponding section:
 - [Usage Across Fleet](#usage-across-fleet)
+- [Cost & Utilization](#cost--utilization)
 - [Allocation and Provisioning](#allocation-and-provisioning)
 - [Workload Optimization Opportunities](#workload-optimization-opportunities)
 
@@ -28,24 +30,30 @@ Operational efficiency is a key driver of overall cost. Understanding your GPU f
 
 ### GPU fleet funnel visualization
 
+Datadog GPU Monitoring provides observability for both on-premises and cloud devices within a single, unified view.
+
 This visualization provides a breakdown of your entire GPU fleet across any major cloud provider (AWS, GCP, Azure, Oracle Cloud), hosted on-premises, or GPUaaS provider like Coreweave and Lambda Labs -- showing all your Kubernetes clusters, hosts, and GPU devices.
 
 The funnel also highlights any performance issues or provisioning inefficiencies in your teams' resource utilization efforts such as idle devices, underutilized GPU cores, or resource starvation that requires rebalancing.
 
-{{< img src="gpu_monitoring/funnel-3-k8s.png" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
+{{< img src="gpu_monitoring/funnel-4.jpg" alt="Funnel visualization titled 'Your GPU fleet at a glance.' Displays total, allocated, active, and effective devices. Highlights underutilized GPU cores and idle devices." style="width:90%;" >}}
 
 The steps of the funnel are defined as follows:
-- {{< ui >}}Total{{< /ui >}}: Any GPU device that is sending data during the selected time frame
-- {{< ui >}}Active{{< /ui >}}: How many of your GPU devices are actively used for a workload
-- {{< ui >}}Effective{{< /ui >}}: How many GPU devices are used and working more than 50% of their lifespan
+- {{< ui >}}Total Devices{{< /ui >}}: Count of GPU devices with GPU Monitoring correctly configured and reporting metrics
+- {{< ui >}}Active Devices{{< /ui >}}: Count of GPU devices that are actively used for a workload and are providing value
+- {{< ui >}}Effective Devices{{< /ui >}}: Count of GPU devices that are working for more than 50% of the selected time frame
 
 If you use Kubernetes and have enabled the Kubernetes integration, you'll see additional information around Kubernetes Allocation which allows you to determine how many of your GPU devices are {{< ui >}}Allocated{{< /ui >}} to Kubernetes workloads.
 
-### Understand your GPU spend
+## Cost & Utilization
 
-See your total spend on GPU infrastructure, and identify the subset of those costs that are wasted on idle GPU devices.
+{{< img src="gpu_monitoring/cost-and-utilization.jpg" alt="Cost & Utilization page showing total GPU hours and estimated cost over time grouped by cluster, and an idle GPU breakdown with top clusters by idle hours and estimated idle cost." style="width:90%;" >}}
 
-**Note**: Total cloud costs from AWS and Google Cloud are calculated over the selected time frame. As this data is only available at a delay, the selected time frame must be greater than or equal to two days. Idle costs are the subset of the total cost attributed to idle GPUs.
+Use this section to track and attribute your total cloud GPU spend and utilization efficiency back to the most wasteful clusters, teams, or services.
+
+**Note**: To see total cloud GPU spend, you must enable the [AWS][3], [Google Cloud][4], [Azure][5], or [Oracle][6] cloud integrations in your Datadog UI.
+
+Click on either your total GPU hours or estimated GPU cloud spend to see how they trend over time. You can also break these down by key tags like service or cluster over 1-week, 1-month, or 3-month time frames. Under {{< ui >}}Idle GPU Breakdown{{< /ui >}}, you can pinpoint the most wasteful teams, services, or clusters that have devices sitting completely idle. Click on any entity to open it in the [Fleet Explorer][1] and make further optimizations. For example, if a particular cluster is expensive, you can view pod-level usage on the [Fleet Explorer][1] page to shut down pods or resize your cluster.
 
 ## Allocation and Provisioning
 
@@ -91,20 +99,6 @@ If you have Kubernetes clusters with a large number of unmet GPU requests, you c
 
 Cost optimization of your GPU workloads is crucial, as GPUs are often the most costly items in a team's infrastructure budget. This section uncovers workloads with inefficient GPU utilization, linking wasted costs to specific workloads and their resource usage.
 
-### Most expensive clusters (Kubernetes required)
-
-**Note**: This section is only available for Kubernetes users.
-
-This table is sorted by {{< ui >}}Total Cost{{< /ui >}}, helping you to identify your most expensive Kubernetes clusters and the amount spent on their idle resources. You can use this information to reach out to the teams responsible for those clusters, and find ways to decrease their costs, such as reducing the number of idle or inefficient GPU devices.
-
-{{< img src="gpu_monitoring/expensive_clusters.png" alt="Table of the most expensive Kubernetes clusters." style="width:90%;" >}}
-
-Click into any of these clusters to investigate the workloads contributing to its costs, by either pods or processes, on the [GPU Fleet page][1]. This opens a side panel with details of that specific cluster and its connected entities.
-
-For example, if you see a related pod with low core utilization, that pod is ineffectively using its associated GPU device. You can then contact the pod owner to terminate the pod or move it to a smaller GPU.
-
-{{< img src="gpu_monitoring/cluster_entities.png" alt="A details side panel for a particular cluster that displays the connected entities of that cluster such as pods and processes." style="width:90%;" >}}
-
 ### Ineffective pods (Kubernetes required)
 
 **Note**: This section is only available for Kubernetes users. 
@@ -134,3 +128,7 @@ Zombie processes are often the primary source of wasted GPU spend, as they inapp
 [0]: https://app.datadoghq.com/gpu-monitoring
 [1]: https://app.datadoghq.com/gpu-monitoring?mConfigure=false&mPage=fleet
 [2]: /infrastructure/process/?tab=linuxwindows
+[3]: /getting_started/integrations/aws/
+[4]: /getting_started/integrations/google_cloud/?tab=orglevel
+[5]: /getting_started/integrations/azure/?tab=createanappregistration
+[6]: /getting_started/integrations/oci/
