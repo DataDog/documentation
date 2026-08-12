@@ -1555,36 +1555,36 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
-    - name: Take Action
-      url: bits_ai/bits_investigation/take_action
-      identifier: bits_ai_sre_take_action
-      parent: bits_ai_sre
-      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 103
+      weight: 102
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 104
+      weight: 103
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 105
+      weight: 104
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 2
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai
-      weight: 2
+      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 3
+      weight: 4
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1599,22 +1599,22 @@ menu:
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
-      weight: 7
+      weight: 8
     - name: Dashboards
       url: dashboards/
       pre: dashboard
