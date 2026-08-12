@@ -39,7 +39,7 @@ Then, choose one of two paths to instrument your application with the `serverles
 
 ## Set up with agentic onboarding
 
-Two complementary paths use the same Datadog account:
+Two paths use the same Datadog account:
 
 - **AI Setup CLI**: A standalone terminal tool. Use it when you don't want to install an MCP server.
 - **MCP server**: Set up from your IDE through a coding assistant such as Claude Code or Cursor.
