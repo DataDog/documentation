@@ -47,7 +47,7 @@ Published analyses are supported only when every data source they depend on is a
 
 Logs stored in Flex Logs are not supported for monitoring, even though Logs is a supported data source.
 
-Unsupported data sources include Cloud Cost, Database Queries, Dora Metrics, Infrastructure Resources, Product Analytics, Security Findings, Security Signals, Snowflake Query, and Synthetics.
+Unsupported data sources include Cloud Cost, Database Queries, Dora Metrics, Infrastructure Resources, Monitor Groups, Monitors, Product Analytics, Security Findings, Security Signals, Snowflake Query, and Synthetics.
 
 If you select a published analysis built on an unsupported data source, Datadog displays an error that names the source. For example:
 
