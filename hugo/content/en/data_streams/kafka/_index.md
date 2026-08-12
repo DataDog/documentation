@@ -1,13 +1,13 @@
 ---
-title: Kafka Monitoring
-description: Monitor Kafka cluster health, connect services to topics, and inspect schemas and messages with Data Streams Monitoring's Kafka Monitoring.
+title: Kafka Console
+description: Monitor Kafka cluster health, connect services to topics, and inspect schemas and messages with Kafka Console.
 aliases:
   - /data_streams/live_messages
   - /data_streams/messages
   - /data_streams/kafka/messages
 ---
 
-With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Monitoring allows you to:
+With Kafka Console, a Datadog Agent check connects to your Kafka cluster and starts collecting health and performance metrics. Kafka Console allows you to:
 
 - **Monitor Kafka health**: See cluster, broker, topic, and partition health with throughput, lag, and replication metrics
 - **Pinpoint root cause**: Correlate configuration and schema changes with lag, throughput, and errors, and trace issues to the exact topic, schema version, or configuration change
@@ -15,7 +15,7 @@ With Data Streams Monitoring's Kafka Monitoring, a Datadog Agent check connects 
 - **Inspect topic schemas and messages**: View schemas, compare versions, and access messages to debug poison payloads or explore the topic
 - **Alert and automate responses**: Use [recommended monitor templates][4] and trigger Workflow Automation or webhooks when a Kafka condition fires
 
-To get started, see [Kafka Monitoring Setup][2].
+To get started, see [Kafka Console Setup][2].
 
 ## Workflows
 
@@ -23,7 +23,7 @@ To get started, see [Kafka Monitoring Setup][2].
 
 The {{< ui >}}Clusters{{< /ui >}}, {{< ui >}}Topics{{< /ui >}}, and {{< ui >}}Brokers{{< /ui >}} tabs display health status across your entire Kafka infrastructure. For each topic, you can see partition count, under-replicated and offline partitions, message throughput, and consumer lag.
 
-{{< img src="data_streams/kafka_clusters_overview-2.png" alt="The Kafka Monitoring clusters view showing cluster list with broker counts, topic names, replication status, and messages-in rate" >}}
+{{< img src="data_streams/kafka_clusters_overview-2.png" alt="The Kafka Console clusters view showing cluster list with broker counts, topic names, replication status, and messages-in rate" >}}
 
 Click into any topic to see a detailed summary, including incoming message rate, maximum lag across all partitions, and whether current lag is approaching the retention limit.
 
