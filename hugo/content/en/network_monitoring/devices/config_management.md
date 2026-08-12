@@ -169,6 +169,23 @@ NCM uses device profiles to collect configurations from network devices over SSH
 | Juniper | JunOS | `junos` | 7.74.0 | {{< X >}} | |
 | Palo Alto | PAN-OS | `pan-os` | 7.75.0 | {{< X >}} | |
 
+### Configuration retrieval commands
+
+Each profile uses the following commands to collect device configurations over SSH. For the full command definitions, see [default_profiles.go][9].
+
+| Vendor | OS | Running config command | Startup config command |
+|---|---|---|---|
+| Arista | EOS | `show running-config \| no-more \| exclude ! Time:` | `show startup-config \| no-more \| exclude ! Time:` |
+| Aruba | AOS-CX | `show running-config` | `show startup-config` |
+| Aruba | AOS-W | `show running-config` | |
+| Cisco | IOS | `show running-config` | `show startup-config` |
+| Cisco | NX-OS | `show running-config` | `show startup-config` |
+| Dell | DellOS10 | `show running-configuration` | `show startup-configuration` |
+| F5 | TMOS | `cat /config/partitions/*/bigip*.conf` | |
+| FortiGate | FortiOS | `show full-configuration` | |
+| Juniper | JunOS | `show configuration \| display omit` | |
+| Palo Alto | PAN-OS | `show config running` | |
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -181,3 +198,4 @@ NCM uses device profiles to collect configurations from network devices over SSH
 [6]: /network_monitoring/devices/supported_devices#vendor-profiles
 [7]: https://github.com/DataDog/datadog-agent/tree/main/cmd/agent/dist/conf.d/network_config_management.d/
 [8]: /network_monitoring/devices/config_management_rollback
+[9]: https://github.com/DataDog/datadog-agent/blob/main/pkg/networkconfigmanagement/profile/default_profiles.go
