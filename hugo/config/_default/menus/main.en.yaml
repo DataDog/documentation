@@ -3090,6 +3090,11 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
+    - name: Guides
+      url: actions/forms/guide/
+      parent: forms
+      identifier: forms_guides
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
