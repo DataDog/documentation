@@ -21,7 +21,7 @@ Use Observability Pipelines' OpenTelemetry Traces destination to send traces to 
 
 Configure the OpenTelemetry Traces destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
 
-After you select the OpenTelemetry Traces destination in the pipeline UI, enter the identifier for your HTTP/S Client URI Key. If you leave it blank, the [default](#secret-defaults) is used.
+After you select the OpenTelemetry Traces destination in the pipeline UI, enter the identifier for your HTTP/S Client URI Key. An example of the URI endpoint the identifier references: `http://localhost:4319/v1/traces`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
 
 {{% observability_pipelines/secrets_env_var_note %}}
 
@@ -66,7 +66,7 @@ See [Enable debug logs][6] for instruction on enabling full debug logs.
 {{% tab "Secrets Management" %}}
 
 - HTTP/S Client URI endpoint identifier:
-  - References the HTTP/S URI endpoint, such as `http://localhost:4319/v1/traces`, to which the Worker sends OpenTelemetry data.
+  - References the HTTP/S URI endpoint to which the Worker sends OpenTelemetry data. An example of the URI endpoint the identifier references: `http://localhost:4319/v1/traces`.
 	- The default identifier is `DESTINATION_OTEL_HTTP_CLIENT_URI`.
 - OpenTelemetry Traces TLS passphrase identifier (when TLS is enabled):
 	- The default identifier is `DESTINATION_OTEL_KEY_PASS`.
