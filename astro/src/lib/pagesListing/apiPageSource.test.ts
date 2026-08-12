@@ -10,9 +10,9 @@ describe("apiPageSource", () => {
     const paths = roots.map((page) => page.urlPath);
     expect(paths).toEqual([
       "/api/latest.md",
-      "/api/latest/using-the-api.md",
-      "/api/latest/scopes.md",
       "/api/latest/rate-limits.md",
+      "/api/latest/scopes.md",
+      "/api/latest/using-the-api.md",
     ]);
     const landing = roots[0];
     expect(landing.metadata.title).toBe("API Reference");

@@ -10,9 +10,7 @@ import { GET as pageIndexGET } from "../../src/pages/pages-index.json.ts";
 import { GET as landingGET } from "../../src/pages/[...lang]/api/latest.md.ts";
 import { GET as categoryGET } from "../../src/pages/[...lang]/api/latest/[category].md.ts";
 import { GET as operationGET } from "../../src/pages/[...lang]/api/latest/[category]/[operation].md.ts";
-import { GET as usingTheApiGET } from "../../src/pages/[...lang]/api/latest/using-the-api.md.ts";
-import { GET as scopesGET } from "../../src/pages/[...lang]/api/latest/scopes.md.ts";
-import { GET as rateLimitsGET } from "../../src/pages/[...lang]/api/latest/rate-limits.md.ts";
+import { GET as handWrittenGET } from "../../src/pages/[...lang]/api/latest/[...page].md.ts";
 
 const SITE = new URL("https://docs.datadoghq.com");
 
@@ -22,12 +20,6 @@ const ctx = (site?: URL) =>
 /** Invokes a route with `params`, bypassing Astro's typing of the context. */
 const routeCtx = (params: Record<string, string | undefined>) =>
   ({ params }) as unknown as Parameters<typeof categoryGET>[0];
-
-const SPECIAL_ROUTES: Record<string, typeof usingTheApiGET> = {
-  "using-the-api": usingTheApiGET,
-  scopes: scopesGET,
-  "rate-limits": rateLimitsGET,
-};
 
 /**
  * Serves the English plaintext for a page's disk-relative path by dispatching to
@@ -47,10 +39,14 @@ async function serveMarkdown(file: string): Promise<string> {
   const segments = path.replace(/^\//, "").split("/");
   if (segments.length === 1) {
     const [slug] = segments;
-    const specialGET = SPECIAL_ROUTES[slug];
-    const res = (await (specialGET
-      ? specialGET(routeCtx({ lang }))
-      : categoryGET(routeCtx({ lang, category: slug })))) as Response;
+    // A spec category route is more specific than the hand-written rest route,
+    // so it wins a slug collision here the same way it does in the build.
+    const categoryRes = (await categoryGET(
+      routeCtx({ lang, category: slug }),
+    )) as Response;
+    if (categoryRes.status === 200) return categoryRes.text();
+
+    const res = (await handWrittenGET(routeCtx({ lang, page: slug }))) as Response;
     if (res.status !== 200) throw new Error(`${file} returned ${res.status}`);
     return res.text();
   }
