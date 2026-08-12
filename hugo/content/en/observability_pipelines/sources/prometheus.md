@@ -21,7 +21,7 @@ Set up this source when you [set up a pipeline][1]. You can set up a pipeline in
 
 After you select the Prometheus source in the pipeline UI:
 
-1. Enter the identifier for your Prometheus address. If you leave it blank, the [default](#secret-defaults) is used.
+1. Enter the identifier for your Prometheus address. An example of the socket address that the identifier references: `0.0.0.0:9091`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
 1. Select your authorization strategy. If you selected {{< ui >}}Plain{{< /ui >}}:
     - Enter the identifiers for your Prometheus username and password. If you leave them blank, the [defaults](#secret-defaults) are used.
 
@@ -60,7 +60,7 @@ To configure keepalive settings for connections to the source, enable the {{< ui
 {{% tab "Secrets Management" %}}
 
 - Prometheus address identifier:
-	- References the socket address, such as `0.0.0.0:9091`, on which the Observability Pipelines Worker listens for Prometheus metrics.
+	- References the socket address on which the Observability Pipelines Worker listens for Prometheus metrics. An example of the socket address that the identifier references: `0.0.0.0:9091`.
 	- The default identifier is `SOURCE_PROMETHEUS_ADDRESS`.
 - If you are using plain authentication:
 	- Prometheus username identifier:
