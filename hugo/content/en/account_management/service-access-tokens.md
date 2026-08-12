@@ -99,7 +99,7 @@ To limit how a SAT can escalate its own access, Datadog restricts what an API ca
 - **Scopes on new tokens**: A SAT can create or update another SAT only if the new token's scopes are a subset of its own scopes.
 - **Time-to-live (TTL) on new tokens**: A SAT cannot create a SAT with a TTL that outlives itself.
 
-These restrictions apply only to API calls authenticated with a PAT or SAT. A call that violates one of these restrictions returns a `403 Forbidden` response.
+A call that violates one of these restrictions returns a `403 Forbidden` response.
 
 ## Manage Service Access Tokens
 
