@@ -72,7 +72,7 @@ To limit how a PAT can escalate its own access, Datadog restricts what an API ca
 
 - **Application keys**: A PAT cannot create or update application keys. Revoking application keys is still allowed.
 - **Scopes on new tokens**: A PAT can create or update a PAT or a SAT only if the new token's scopes are a subset of its own scopes.
-- **Time-to-live (TTL) on new tokens**: A PAT cannot create a PAT or a SAT with a TTL that outlives itself.
+- **Time-to-live (TTL) on new tokens**: A PAT cannot create a PAT or a SAT with a TTL that extends beyond its own expiration.
 
 A call that violates one of these restrictions returns a `403 Forbidden` response.
 
