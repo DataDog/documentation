@@ -4577,6 +4577,22 @@ components:
         - id
         - base_severity
       type: object
+    AgentTrigger:
+      description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    AgentTriggerWrapper:
+      description: "Schema for an agent-based trigger."
+      properties:
+        agentTrigger:
+          $ref: "#/components/schemas/AgentTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - agentTrigger
+      type: object
     AggregatedHighFrozenFrameRate:
       description: Aggregated high frozen frame rate detection at view level.
       properties:
@@ -14262,6 +14278,150 @@ components:
         test_level:
           $ref: "#/components/schemas/CIAppTestLevel"
       type: object
+    CIAppGitHubAccountAttributes:
+      description: Attributes describing a GitHub account's CI Visibility opt-in status.
+      properties:
+        account:
+          description: The GitHub account (organization or user) name.
+          example: datadog
+          type: string
+        enabled:
+          description: Whether CI Visibility is enabled at the account level.
+          example: true
+          type: boolean
+        host:
+          description: The GitHub host (`github.com` or a GitHub Enterprise Server (GHES) hostname) this account belongs to.
+          example: github.com
+          type: string
+        repo_count:
+          description: The number of repositories known for this account.
+          example: 12
+          format: int64
+          type: integer
+        repositories:
+          description: The repositories belonging to this account, with their individual opt-in status.
+          items:
+            $ref: "#/components/schemas/CIAppGitHubAccountRepository"
+          type: array
+      type: object
+    CIAppGitHubAccountData:
+      description: Data object for a GitHub account.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CIAppGitHubAccountAttributes"
+        id:
+          description: |-
+            The account's unique identifier, in the form `<host>/<account name>`
+            (for example `github.com/datadog`).
+          example: github.com/datadog
+          type: string
+        type:
+          $ref: "#/components/schemas/CIAppGitHubAccountType"
+      required:
+        - id
+        - type
+        - attributes
+      type: object
+    CIAppGitHubAccountRepository:
+      description: A GitHub repository within a GitHub account, and its CI Visibility opt-in status.
+      properties:
+        enabled:
+          description: Whether CI Visibility is enabled for this repository.
+          example: true
+          type: boolean
+        name:
+          description: The repository name.
+          example: shopist
+          type: string
+      type: object
+    CIAppGitHubAccountResponse:
+      description: Response object containing a single GitHub account's CI Visibility opt-in status.
+      properties:
+        data:
+          $ref: "#/components/schemas/CIAppGitHubAccountData"
+      required:
+        - data
+      type: object
+    CIAppGitHubAccountType:
+      description: |-
+        JSON:API type for the GitHub account resource.
+        The value must always be `ci_github_account`.
+      enum:
+        - ci_github_account
+      example: ci_github_account
+      type: string
+      x-enum-varnames:
+        - CI_GITHUB_ACCOUNT
+    CIAppGitHubAccountUpdateRequest:
+      description: Request object for updating a GitHub account's CI Visibility opt-in status.
+      properties:
+        data:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestData"
+      required:
+        - data
+      type: object
+    CIAppGitHubAccountUpdateRequestAttributes:
+      description: |-
+        Attributes for updating a GitHub account's CI Visibility opt-in status.
+        At least one of `enabled` or `repository.enabled` must be provided.
+      properties:
+        account:
+          description: The GitHub account (organization or user) name to update, identified by name.
+          example: datadog
+          minLength: 1
+          type: string
+        enabled:
+          description: Whether to enable or disable CI Visibility at the account level.
+          example: true
+          type: boolean
+        host:
+          description: |-
+            The GitHub host (`github.com` or a GHES hostname) the account belongs to. Required to disambiguate
+            when the same account name exists on more than one host.
+          example: github.com
+          type: string
+        repository:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestRepository"
+      required:
+        - account
+      type: object
+    CIAppGitHubAccountUpdateRequestData:
+      description: Data object for updating a GitHub account's CI Visibility opt-in status.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequestAttributes"
+        type:
+          $ref: "#/components/schemas/CIAppGitHubAccountType"
+      required:
+        - type
+        - attributes
+      type: object
+    CIAppGitHubAccountUpdateRequestRepository:
+      description: Repository-level opt-in change to apply, identified by name.
+      properties:
+        enabled:
+          description: Whether to enable or disable CI Visibility for this repository.
+          example: true
+          type: boolean
+        name:
+          description: The repository name to update.
+          example: shopist
+          minLength: 1
+          type: string
+      required:
+        - name
+        - enabled
+      type: object
+    CIAppGitHubAccountsResponse:
+      description: Response object containing a list of GitHub accounts and their CI Visibility opt-in status.
+      properties:
+        data:
+          items:
+            $ref: "#/components/schemas/CIAppGitHubAccountData"
+          type: array
+      required:
+        - data
+      type: object
     CIAppGitInfo:
       description: |-
         If pipelines are triggered due to actions to a Git repository, then all payloads must contain this.
@@ -20397,6 +20557,7 @@ components:
         - times
       type: object
     CompletionCondition:
+      additionalProperties: false
       description: The definition of `CompletionCondition` object.
       properties:
         operand1:
@@ -20440,6 +20601,7 @@ components:
         - OPERATOR_IS_EMPTY
         - OPERATOR_IS_NOT_EMPTY
     CompletionGate:
+      additionalProperties: false
       description: Used to create conditions before running subsequent actions.
       properties:
         completionCondition:
@@ -24122,6 +24284,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/CreateDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for creating a degradation.
       type: object
     CreateDegradationRequestData:
       description: The data object for creating a degradation.
@@ -25715,9 +25880,6 @@ components:
           description: Base64-encoded image data included in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
-        enabled:
-          description: Whether the status page is enabled.
-          type: boolean
         favicon:
           description: Base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
@@ -25989,9 +26151,11 @@ components:
       description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/CreateTableRequestDataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
@@ -26254,13 +26418,14 @@ components:
       description: Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file.
+          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
           example:
             - "field_1"
             - "field_2"
           items:
             description: A column header name from the CSV file.
             type: string
+          maxItems: 200
           type: array
         part_count:
           description: Number of parts to split the file into for multipart upload.
@@ -29590,15 +29755,109 @@ components:
         - service
         - started_at
       type: object
-    DORADeploymentPatchRemediation:
-      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time.
+    DORADeploymentPatchByVersionRemediation:
+      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time. Specify either `id` or `version` to identify the remediation deployment, but not both.
+      oneOf:
+        - $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediationByID"
+        - $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediationByVersion"
+    DORADeploymentPatchByVersionRemediationByID:
+      additionalProperties: false
+      description: Remediation details identified by the ID of the remediation deployment.
       properties:
         id:
-          description: The ID of the remediation deployment. Required when the failed deployment must be linked to a remediation deployment.
+          description: The ID of the remediation deployment.
           example: eG42zNIkVjM
           type: string
         type:
           $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+      required:
+        - id
+        - type
+      type: object
+    DORADeploymentPatchByVersionRemediationByVersion:
+      additionalProperties: false
+      description: Remediation details identified by the version of the remediation deployment, matched against the same service and environment as the failed deployment.
+      properties:
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+        version:
+          description: The version of the remediation deployment.
+          example: v1.2.4
+          type: string
+      required:
+        - version
+        - type
+      type: object
+    DORADeploymentPatchByVersionRequest:
+      description: Request to patch a DORA deployment event identified by service, environment, and version.
+      example:
+        data:
+          attributes:
+            change_failure: true
+            env: "production"
+            remediation:
+              type: "rollback"
+              version: "v1.2.2"
+            service: "my-service"
+            version: "v1.2.3"
+          type: "dora_deployment_patch_request"
+      properties:
+        data:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRequestData"
+      required:
+        - data
+      type: object
+    DORADeploymentPatchByVersionRequestAttributes:
+      description: Attributes for patching a DORA deployment event identified by service, environment, and version.
+      properties:
+        change_failure:
+          description: Indicates whether the deployment resulted in a change failure.
+          example: true
+          type: boolean
+        env:
+          description: The environment the deployment was performed in.
+          example: prod
+          type: string
+        remediation:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediation"
+        service:
+          description: The name of the service that was deployed.
+          example: my-service
+          type: string
+        version:
+          description: "The version deployed. This can be seen in the Service Catalog or in the APM Deployment Tracking."
+          example: v1.2.3
+          type: string
+      required:
+        - service
+        - env
+        - version
+        - change_failure
+      type: object
+    DORADeploymentPatchByVersionRequestData:
+      description: The JSON:API data for patching a deployment identified by service, environment, and version.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    DORADeploymentPatchRemediation:
+      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time. Specify either `id` or `version` to identify the remediation deployment, but not both.
+      properties:
+        id:
+          description: The ID of the remediation deployment. Use this or `version` to identify the remediation deployment, but not both.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+        version:
+          description: The version of the remediation deployment, matched against the same service and environment as the failed deployment. Use this or `id` to identify the remediation deployment, but not both.
+          example: v1.2.4
+          type: string
       type: object
     DORADeploymentPatchRemediationType:
       description: The type of remediation action taken. Required when the failed deployment must be linked to a remediation deployment.
@@ -31818,6 +32077,15 @@ components:
       oneOf:
         - $ref: "#/components/schemas/StatusPagesUser"
         - $ref: "#/components/schemas/StatusPageAsIncluded"
+    DegradationRequestMeta:
+      description: The supported metadata for a degradation request.
+      properties:
+        idempotency_key:
+          description: A unique key used to ensure idempotent requests.
+          example: 1e6a4b8e-4c2f-4a3d-8f1a-9c7d2e5b6f10
+          format: uuid
+          type: string
+      type: object
     DegradationTemplate:
       description: Response object for a single degradation template.
       properties:
@@ -32879,6 +33147,13 @@ components:
     DeploymentGatesFDDRuleOptions:
       description: Options for a `faulty_deployment_detection` rule.
       properties:
+        allowed_resources:
+          description: APM resource names to include in analysis. Mutually exclusive with `excluded_resources`.
+          example:
+            - "GET /healthcheck"
+          items:
+            type: string
+          type: array
         duration:
           description: Evaluation window in seconds. Maximum 7200 (2 hours).
           example: 900
@@ -33047,6 +33322,13 @@ components:
       additionalProperties: false
       description: Faulty deployment detection options for deployment rules.
       properties:
+        allowed_resources:
+          description: Resources to include in faulty deployment detection. Mutually exclusive with `excluded_resources`.
+          example: ["resource1", "resource2"]
+          items:
+            description: A resource name to include in faulty deployment detection.
+            type: string
+          type: array
         duration:
           description: The duration for faulty deployment detection.
           example: 3600
@@ -35895,6 +36177,7 @@ components:
           type: integer
       type: object
     ErrorHandler:
+      additionalProperties: false
       description: Used to handle errors in an action.
       properties:
         fallbackStepName:
@@ -52199,6 +52482,7 @@ components:
         name:
           description: The `InputSchemaParameters` `name`.
           example: ""
+          minLength: 1
           type: string
         type:
           $ref: "#/components/schemas/InputSchemaParametersType"
@@ -79463,11 +79747,13 @@ components:
       properties:
         branchName:
           description: The `OutboundEdge` `branchName`.
-          example: ""
+          example: main
+          minLength: 1
           type: string
         nextStepName:
           description: The `OutboundEdge` `nextStepName`.
-          example: ""
+          example: Step2
+          minLength: 1
           type: string
       required:
         - nextStepName
@@ -80687,6 +80973,7 @@ components:
         name:
           description: The `Parameter` `name`.
           example: ""
+          minLength: 1
           type: string
         value:
           description: The `Parameter` `value`.
@@ -80899,6 +81186,9 @@ components:
       properties:
         data:
           $ref: "#/components/schemas/PatchDegradationRequestData"
+        meta:
+          $ref: "#/components/schemas/DegradationRequestMeta"
+          description: The supported metadata for updating a degradation.
       type: object
     PatchDegradationRequestData:
       description: The data object for updating a degradation.
@@ -81446,7 +81736,6 @@ components:
             company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
             domain_prefix: status-page-us1-east
             email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-            enabled: false
             favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
             name: Status Page US1 East
             subscriptions_enabled: false
@@ -81490,10 +81779,6 @@ components:
           description: The base64-encoded image data displayed in email notifications sent to status page subscribers.
           example: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
           type: string
-        enabled:
-          description: Whether the status page is enabled.
-          example: true
-          type: boolean
         favicon:
           description: The base64-encoded image data displayed in the browser tab.
           example: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
@@ -81688,9 +81973,11 @@ components:
       description: Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/PatchTableRequestDataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
@@ -86050,6 +86337,7 @@ components:
         - attributes
       type: object
     ReadinessGate:
+      additionalProperties: false
       description: Used to merge multiple branches into a single branch.
       properties:
         thresholdType:
@@ -88590,6 +88878,7 @@ components:
         - data
       type: object
     RetryStrategy:
+      additionalProperties: false
       description: The definition of `RetryStrategy` object.
       properties:
         kind:
@@ -88598,6 +88887,7 @@ components:
           $ref: "#/components/schemas/RetryStrategyLinear"
       required:
         - kind
+        - linear
       type: object
     RetryStrategyKind:
       description: The definition of `RetryStrategyKind` object.
@@ -88608,17 +88898,21 @@ components:
       x-enum-varnames:
         - RETRY_STRATEGY_LINEAR
     RetryStrategyLinear:
+      additionalProperties: false
       description: The definition of `RetryStrategyLinear` object.
       properties:
         interval:
           description: The `RetryStrategyLinear` `interval`. The expected format is the number of seconds ending with an s. For example, 1 day is 86400s
           example: ""
+          pattern: ^[1-9][0-9]*s$
           type: string
         maxRetries:
           description: The `RetryStrategyLinear` `maxRetries`.
-          example: 0.0
-          format: double
-          type: number
+          example: 0
+          format: int32
+          maximum: 2147483647
+          minimum: 0
+          type: integer
       required:
         - interval
         - maxRetries
@@ -105379,7 +105673,7 @@ components:
           type: string
       type: object
     Spec:
-      description: The spec defines what the workflow does.
+      description: A complete Workflow Automation definition, including its triggers, steps, and connections.
       properties:
         annotations:
           description: "A list of annotations used in the workflow. These are like sticky notes for your workflow!"
@@ -105497,11 +105791,12 @@ components:
         - type
       type: object
     StartStepNames:
-      description: "A list of steps that run first after a trigger fires."
+      description: "Names of existing workflow steps that run first after a trigger fires."
       example:
         - ""
       items:
         description: The `StartStepNames` `items`.
+        minLength: 1
         type: string
       type: array
     State:
@@ -106777,6 +107072,7 @@ components:
         actionId:
           description: The unique identifier of an action.
           example: ""
+          minLength: 1
           type: string
         completionGate:
           $ref: "#/components/schemas/CompletionGate"
@@ -106793,9 +107089,10 @@ components:
         name:
           description: Name of the step.
           example: ""
+          minLength: 1
           type: string
         outboundEdges:
-          description: A list of subsequent actions to run.
+          description: A list of subsequent actions to run. This list is empty for a terminal step.
           items:
             $ref: "#/components/schemas/OutboundEdge"
           type: array
@@ -106811,7 +107108,9 @@ components:
         - actionId
       type: object
     StepDisplay:
-      description: The definition of `StepDisplay` object.
+      description: |-
+        The position of a step on the workflow canvas. Omit `display` from every step to use
+        automatic layout, or provide it for every step to preserve a manual layout.
       properties:
         bounds:
           $ref: "#/components/schemas/StepDisplayBounds"
@@ -111207,9 +111506,11 @@ components:
       description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/TableResultV2DataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
@@ -115386,6 +115687,7 @@ components:
     Trigger:
       description: "One of the triggers that can start the execution of a workflow."
       oneOf:
+        - $ref: "#/components/schemas/AgentTriggerWrapper"
         - $ref: "#/components/schemas/APITriggerWrapper"
         - $ref: "#/components/schemas/AppTriggerWrapper"
         - $ref: "#/components/schemas/CaseTriggerWrapper"
@@ -120431,7 +120733,7 @@ components:
         startStepNames:
           $ref: "#/components/schemas/StartStepNames"
         workflowTrigger:
-          description: "Trigger a workflow from the Datadog UI. Only required if no other trigger exists."
+          description: "Trigger a workflow from the Datadog UI. When present, this must be the workflow's only trigger."
           type: object
       required:
         - workflowTrigger
@@ -131672,6 +131974,129 @@ paths:
       x-unstable: |-
         **Note**: This endpoint is in preview and is subject to change.
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+  /api/v2/ci/github/accounts:
+    get:
+      description: |-
+        Retrieve the list of GitHub accounts (organizations or users) available to this Datadog organization
+        through its GitHub App installation, along with each account's and repository's CI Visibility opt-in status.
+      operationId: ListCIAppGitHubAccounts
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      - attributes:
+                          account: datadog
+                          enabled: true
+                          host: github.com
+                          repo_count: 2
+                          repositories:
+                            - enabled: true
+                              name: shopist
+                            - enabled: false
+                              name: dd-source
+                        id: github.com/datadog
+                        type: ci_github_account
+              schema:
+                $ref: "#/components/schemas/CIAppGitHubAccountsResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - integrations_read
+      summary: List GitHub CI Visibility status
+      tags: ["CI Visibility GitHub Accounts"]
+      x-menu-order: 1
+      x-permission:
+        operator: OR
+        permissions:
+          - integrations_read
+    patch:
+      description: |-
+        Enable or disable CI Visibility for a GitHub account, one of its repositories, or both in the same request.
+        The account (and, optionally, repository) are identified by name. Account-level and repository-level
+        changes are independent and may both be supplied in the same request. At least one of `enabled` or
+        `repository.enabled` must be provided. If the account name matches installations on more than one host,
+        `host` must be supplied to disambiguate, otherwise a 409 is returned. Returns a 404 if the CI Visibility
+        GitHub integration is not enabled for this organization, or if the given account or repository cannot be
+        found by name.
+      operationId: UpdateCIAppGitHubAccount
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      account: datadog
+                      enabled: true
+                      host: github.com
+                      repository:
+                        enabled: true
+                        name: shopist
+                    type: ci_github_account
+            schema:
+              $ref: "#/components/schemas/CIAppGitHubAccountUpdateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              examples:
+                default:
+                  value:
+                    data:
+                      attributes:
+                        account: datadog
+                        enabled: true
+                        host: github.com
+                        repo_count: 2
+                        repositories:
+                          - enabled: true
+                            name: shopist
+                          - enabled: false
+                            name: dd-source
+                      id: github.com/datadog
+                      type: ci_github_account
+              schema:
+                $ref: "#/components/schemas/CIAppGitHubAccountResponse"
+          description: OK
+        "400":
+          $ref: "#/components/responses/BadRequestResponse"
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "404":
+          $ref: "#/components/responses/NotFoundResponse"
+        "409":
+          $ref: "#/components/responses/ConflictResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+        - AuthZ:
+            - ci_provider_settings_write
+      summary: Update GitHub CI Visibility status
+      tags: ["CI Visibility GitHub Accounts"]
+      x-codegen-request-body-name: body
+      x-menu-order: 2
+      x-permission:
+        operator: OR
+        permissions:
+          - ci_provider_settings_write
   /api/v2/ci/pipeline:
     post:
       description: |-
@@ -141808,6 +142233,53 @@ paths:
         permissions:
           - dora_metrics_write
   /api/v2/dora/deployments:
+    patch:
+      description: |-
+        Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.
+      operationId: PatchDORADeploymentByVersion
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      change_failure: true
+                      env: production
+                      service: my-service
+                      version: v1.2.3
+                    type: dora_deployment_patch_request
+            schema:
+              $ref: "#/components/schemas/DORADeploymentPatchByVersionRequest"
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Patch a deployment event by version
+      tags: ["DORA Metrics"]
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - dora_metrics_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Use this API endpoint to get a list of deployment events.
@@ -188611,8 +189083,8 @@ paths:
       x-menu-order: 7
       x-sunset: "2026-04-01"
       x-unstable: |-
-        **Note**: This endpoint is in Preview.
-        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
+        **Note**: This endpoint is deprecated. To update outcomes, use the
+        [Update Scorecard outcomes](https://docs.datadoghq.com/api/latest/scorecards/update-scorecard-outcomes/) endpoint.
   /api/v2/scorecard/rules:
     get:
       description: Fetch all rules.
@@ -205391,7 +205863,7 @@ paths:
                       attributes:
                         components: []
                         domain_prefix: status-page-us1
-                        enabled: true
+                        enabled: false
                         name: Status Page US1
                         subscriptions_enabled: true
                         type: public
@@ -205657,7 +206129,7 @@ paths:
         permissions:
           - status_pages_settings_read
     patch:
-      description: "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead."
+      description: "Updates an existing status page's attributes. To publish and unpublish status pages, use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints."
       operationId: UpdateStatusPage
       parameters:
         - description: Whether to delete existing subscribers when updating a status page's type.
@@ -205690,7 +206162,6 @@ paths:
                       company_logo: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAIKMMMM
                       domain_prefix: status-page-us1-east
                       email_header_image: data:image/png;base64,pQSLAw0KGgoAAAANSUhEUgAAAQ4AASJKFF
-                      enabled: false
                       favicon: data:image/png;base64,kWMRNw0KGgoAAAANSUhEUgAAAEAAAABACA
                       name: Status Page US1 East
                       subscriptions_enabled: false
@@ -216403,6 +216874,11 @@ tags:
   - description: |-
       Use the Bits AI endpoints to retrieve AI-powered investigations.
     name: Bits AI
+  - description: |-
+      Manage CI Visibility opt-in status for your GitHub accounts and repositories. See the
+      [CI Visibility GitHub Actions setup page](https://docs.datadoghq.com/continuous_integration/pipelines/github/)
+      for more information.
+    name: CI Visibility GitHub Accounts
   - description: |-
       Search or aggregate your CI Visibility pipeline events and send them to your Datadog site over HTTP. See the [CI Pipeline Visibility in Datadog page](https://docs.datadoghq.com/continuous_integration/pipelines/) for more information.
     name: CI Visibility Pipelines
