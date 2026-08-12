@@ -744,6 +744,21 @@ If you want visibility into the browser process, consider using [RUM & Session R
 
 Cypress interactive mode (which you can enter by running `cypress open`) is not supported by Test Optimization because some cypress events, such as [`before:run`][11], are not fired. If you want to try it anyway, pass `experimentalInteractiveRunEvents: true` to the [cypress configuration file][12].
 
+### Cypress test isolation
+
+Cypress [test isolation][cypress-test-isolation] must be enabled (the default) for
+retry-based Test Optimization features to work. When `testIsolation` is set to
+`false` in your Cypress configuration, `dd-trace` disables all test
+retries—**Early Flake Detection**, **Auto Test Retries**, and **Attempt to
+Fix**—because these features re-run each test in place, which requires isolation.
+
+When isolation is disabled, the tracer logs the warning `Test isolation is
+disabled, retries will not be enabled`, and no test executions are tagged
+`@test.test_management.is_attempt_to_fix`. Because the tracer reads the global
+`testIsolation` value, per-suite `describe` overrides do not re-enable retries.
+
+[cypress-test-isolation]: https://docs.cypress.io/app/core-concepts/test-isolation
+
 ### Jest's `--forceExit`
 Jest's [--forceExit][15] option may cause data loss. Datadog tries to send data immediately after your tests finish, but shutting down the process abruptly can cause some requests to fail. Use `--forceExit` with caution.
 
