@@ -201,6 +201,17 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 
 This Reference Table can be used to add additional attributes to logs with the [Lookup Processor][1].
 
+## Supported column types
+
+Every column in a Reference Table schema has a type. Datadog supports the following column types:
+
+| Type     | Description             |
+| -------- | ----------------------- |
+| `STRING` | Text values.            |
+| `INT32`  | 32-bit signed integers. |
+
+When you create or update a table with the [Reference Tables API][8], set each column's type in the `schema.fields` array.
+
 ## Validation rules
 
 Reference Table names and column headers are validated using the following naming conventions and automatically updated or normalized, if necessary.
@@ -310,3 +321,4 @@ Restrict access to individual tables by specifying a list of teams, roles, or us
 [5]: /help/
 [6]: /account_management/rbac/permissions/#reference-tables
 [7]: /ddsql_editor/#save-and-share-queries
+[8]: /api/latest/reference-tables/
