@@ -1,0 +1,8 @@
+{
+  "data": {
+    "attributes": {
+      "description": "Give concise answers and cite relevant help-center articles."
+    },
+    "type": "prompt-template-versions"
+  }
+}

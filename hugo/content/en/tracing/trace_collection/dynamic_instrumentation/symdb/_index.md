@@ -1,0 +1,65 @@
+---
+title: Autocomplete and Search
+description: Enable IDE-like autocomplete and search functionality for Dynamic Instrumentation to improve developer experience.
+is_beta: true
+private: false
+aliases:
+    - /dynamic_instrumentation/symdb
+    - /tracing/dynamic_instrumentation/symdb
+further_reading:
+  - link: /dynamic_instrumentation/
+    tag: Documentation
+    text: Learn more about Dynamic Instrumentation
+site_support_id: autocomplete_search
+---
+
+{{< beta-callout url="#" btn_hidden="true" >}}
+Autocomplete and search are in Preview for Python, .NET, and Ruby.
+{{< /beta-callout >}}
+
+## Overview
+
+Autocomplete and search enhance the user experience of [Dynamic Instrumentation][1] by adding IDE-like features like class and method search and autocomplete for [Dynamic Instrumentation Expression Language][5].
+
+To provide autocomplete and search, nonsensitive symbols and metadata are uploaded from your application to Datadog. The uploaded data includes the names of classes, methods, arguments, fields, and local variables, along with related metadata, like line numbers.
+
+## Getting started
+
+### Prerequisites
+
+Autocomplete and search require the following:
+
+- [Dynamic Instrumentation][1] is enabled for your service.
+- [Datadog Agent][2] 7.49.0 or higher is installed alongside your service.
+- [Remote Configuration][3] is enabled in the Agent.
+- The [Unified Service Tagging][4] tags `service`, `env`, and `version` are applied to your deployment.
+
+### Enable autocomplete and search for your service
+
+Select your runtime below:
+
+{{< card-grid card_width="170px" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/java" src="integrations_logos/java.png" alt="Java" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/python" src="integrations_logos/python.png" alt="Python" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-core.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/dotnet" src="integrations_logos/dotnet-framework.png" alt="Dotnet" >}}
+  {{< image-card href="/dynamic_instrumentation/symdb/ruby" src="integrations_logos/ruby.png" alt="Ruby" >}}
+{{< /card-grid >}}
+
+## Explore autocomplete and search
+
+Autocomplete and search make Dynamic Instrumentation behave more like an IDE:
+
+- **Class and method search**: Find where to add instrumentation.
+- **Code display**: When you select a method in the Dynamic Instrumentation configuration, Datadog displays the code for that method.
+- **Expression autocomplete**: Get suggestions for expression templates that use the [Dynamic Instrumentation expression language][5].
+
+## Further Reading
+
+{{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /dynamic_instrumentation/
+[2]: /agent/
+[3]: /tracing/guide/remote_config
+[4]: /getting_started/tagging/unified_service_tagging/
+[5]: /dynamic_instrumentation/expression-language
