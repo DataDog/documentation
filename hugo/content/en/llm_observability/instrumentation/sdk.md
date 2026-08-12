@@ -2691,6 +2691,306 @@ public class MyJavaClass {
 {{% /tab %}}
 {{< /tabs >}}
 
+### Submitting end-user feedback
+
+End-user feedback captures input from the users of your LLM application, such as thumbs-up or thumbs-down ratings, whether a user accepted an agent's change, and free-text comments. Unlike an evaluation, feedback carries the identity of the submitter and can target a span, a trace, a session, or a customer-defined entity. For more information, see [End-User Feedback](/llm_observability/evaluations/end_user_feedback/).
+
+{{< tabs >}}
+{{% tab "Python" %}}
+Use `LLMObs.submit_feedback()` to submit end-user feedback associated with a span, trace, session, or customer-defined entity.
+
+The `LLMObs.submit_feedback()` method accepts the following arguments:
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="submit-feedback-arguments" %}}
+`label`
+: required - _string_
+<br />The name of the feedback metric. Must not contain a `.`.
+
+`metric_type`
+: required - _string_
+<br />The type of the feedback. Must be `categorical`, `score`, `boolean`, `json`, or `text`.
+
+`value`
+: required - _string, numeric type, boolean, or dict_
+<br />The value of the feedback. Must be a string (`metric_type==categorical` or `metric_type==text`), integer/float (`metric_type==score`), boolean (`metric_type==boolean`), or dict (`metric_type==json`).
+
+`submitter`
+: required - _dictionary_
+<br />A dictionary that identifies who submitted the feedback. Must contain a non-empty `id` (string), and can contain an optional `type` (string), such as `user`.
+
+`span`
+: optional - _dictionary_
+<br />A dictionary that identifies the span associated with this feedback. Use [`LLMObs.export_span()`](#exporting-a-span) to generate this dictionary.
+
+`span_id`
+: optional - _string_
+<br />The ID of the span associated with this feedback.
+
+`trace_id`
+: optional - _string_
+<br />The ID of the trace associated with this feedback.
+
+`session_id`
+: optional - _string_
+<br />The ID of the session associated with this feedback.
+
+`feedback_join_key`
+: optional - _string_
+<br />A customer-defined key associated with this feedback, such as an incident ID or a ticket ID. To connect the feedback to your spans, first annotate them with a `feedback_join_key` tag holding the same value. See [Enriching spans](#enriching-spans).
+
+   **Note**: Exactly one of `span`, `span_id`, `trace_id`, `session_id`, or `feedback_join_key` is required. Supplying more than one, or none, raises a ValueError.
+
+`ml_app`
+: optional - _string_
+<br />The name of the ML application. If not provided, this defaults to the ML application configured for the SDK.
+
+`timestamp_ms`
+: optional - _integer_
+<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+
+`tags`
+: optional - _dictionary_
+<br />A dictionary of string key-value pairs that users can add as tags regarding the feedback. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this feedback. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the feedback.
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="python" >}}
+from ddtrace.llmobs import LLMObs
+from ddtrace.llmobs.decorators import llm
+
+@llm(model_name="claude", name="invoke_llm", model_provider="anthropic")
+def llm_call():
+    completion = ... # user application logic to invoke LLM
+    span_context = LLMObs.export_span(span=None)
+
+    # submitting feedback for a trace
+    LLMObs.submit_feedback(
+        label="thumbs",
+        metric_type="categorical",
+        value="down",
+        submitter={"id": "user-123", "type": "user"},
+        trace_id=span_context["trace_id"],
+        assessment="fail",
+    )
+
+    # connecting the span to a customer-defined entity
+    LLMObs.annotate(tags={"feedback_join_key": "incident-123"})
+
+    # submitting feedback for that entity
+    LLMObs.submit_feedback(
+        label="user_comment",
+        metric_type="text",
+        value="The investigation missed the customer impact.",
+        submitter={"id": "user-123", "type": "user"},
+        feedback_join_key="incident-123",
+    )
+    return completion
+{{< /code-block >}}
+
+{{% /tab %}}
+
+{{% tab "Node.js" %}}
+Use `llmobs.submitFeedback()` to submit end-user feedback associated with a span, trace, session, or customer-defined entity.
+
+The `llmobs.submitFeedback()` method accepts an options object with the following properties:
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="submit-feedback-arguments" %}}
+`label`
+: required - _string_
+<br />The name of the feedback metric. Must not contain a `.`.
+
+`metricType`
+: required - _string_
+<br />The type of the feedback. Must be one of `categorical`, `score`, `boolean`, `json`, or `text`.
+
+`value`
+: required - _string, number, boolean, or object_
+<br />The value of the feedback. Must be a string (for `categorical` and `text` metric types), number (for `score`), boolean (for `boolean`), or a JSON object (for `json`).
+
+`submitter`
+: required - _object_
+<br />An object that identifies who submitted the feedback. Must contain a non-empty `id` (string), and can contain an optional `type` (string), such as `user`.
+
+`span`
+: optional - _object_
+<br />The span context of the span to attach the feedback to. This should be the output of [`llmobs.exportSpan()`](#exporting-a-span).
+
+`spanId`
+: optional - _string_
+<br />The ID of the span to attach the feedback to.
+
+`traceId`
+: optional - _string_
+<br />The ID of the trace to attach the feedback to.
+
+`sessionId`
+: optional - _string_
+<br />The ID of the session to attach the feedback to.
+
+`feedbackJoinKey`
+: optional - _string_
+<br />A customer-defined key to attach the feedback to, such as an incident ID or a ticket ID. Set the same key on your spans to connect the feedback to them.
+
+   **Note**: Exactly one of `span`, `spanId`, `traceId`, `sessionId`, or `feedbackJoinKey` is required.
+
+`mlApp`
+: optional - _string_
+<br />The name of the ML application. If not provided, this defaults to the ML application configured for the SDK.
+
+`timestampMs`
+: optional - _number_
+<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+
+`tags`
+: optional - _object_
+<br />An object of string key-value pairs that users can add as tags regarding the feedback. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment`
+: optional - _string_
+<br />An assessment of this feedback. Accepted values are `pass` and `fail`.
+
+`reasoning`
+: optional - _string_
+<br />A text explanation of the feedback.
+{{% /collapse-content %}}
+
+#### Example
+
+{{< code-block lang="javascript" >}}
+function llmCall () {
+  const completion = ... // user application logic to invoke LLM
+  const spanContext = llmobs.exportSpan()
+
+  // submitting feedback for a trace
+  llmobs.submitFeedback({
+    label: 'thumbs',
+    metricType: 'boolean',
+    value: true,
+    submitter: { id: 'user-123', type: 'user' },
+    traceId: spanContext.traceId,
+    assessment: 'pass'
+  })
+
+  // connecting the span to a customer-defined entity
+  llmobs.annotate({
+    tags: { feedback_join_key: 'incident-123' }
+  })
+
+  // submitting feedback for that entity
+  llmobs.submitFeedback({
+    label: 'user_comment',
+    metricType: 'text',
+    value: 'This answer was helpful.',
+    submitter: { id: 'user-123', type: 'user' },
+    feedbackJoinKey: 'incident-123'
+  })
+  return completion
+}
+llmCall = llmobs.wrap({ kind: 'llm', name: 'invokeLLM', modelName: 'claude', modelProvider: 'anthropic' }, llmCall)
+{{< /code-block >}}
+{{% /tab %}}
+
+{{% tab "Java" %}}
+Use `LLMObs.submitFeedback()` to submit end-user feedback associated with a span, trace, session, or customer-defined entity. Build the feedback with `LLMObs.Feedback.builder()`.
+
+The builder accepts the following methods:
+
+{{% collapse-content title="Arguments" level="h4" expanded=false id="submit-feedback-arguments" %}}
+`label(String label)`
+: required
+<br />The name of the feedback metric. Must not contain a `.`.
+
+`categoricalValue(String)`, `scoreValue(double)`, `booleanValue(boolean)`, `jsonValue(Map<String, Object>)`, or `textValue(String)`
+: required
+<br />The value of the feedback. Set exactly one of these methods, which also determines the metric type.
+
+`submitter(String id, String type)` or `submitter(Submitter submitter)`
+: required
+<br />Identifies who submitted the feedback. The `id` must be a non-empty string. The `type` is an optional qualifier, such as `end_user`.
+
+`span(LLMObsSpan span)`, `spanId(String)`, `traceId(String)`, `sessionId(String)`, or `feedbackJoinKey(String)`
+: required
+<br />The entity to attach the feedback to. Set exactly one of these methods. Use `feedbackJoinKey` for a customer-defined entity, such as an incident ID or a ticket ID, and set the same key on your spans to connect the feedback to them.
+
+`mlApp(String mlApp)`
+: optional
+<br />The name of the ML application. If not provided, this defaults to the ML application configured for the tracer.
+
+`timestampMs(long timestampMs)`
+: optional
+<br />The unix timestamp in milliseconds when the feedback was generated. If not provided, this defaults to the current time.
+
+`tags(Map<String, Object> tags)` or `tag(String key, Object value)`
+: optional
+<br />Key-value pairs used to tag the feedback. For more information about tags, see [Getting Started with Tags](/getting_started/tagging/).
+
+`assessment(Assessment assessment)`
+: optional
+<br />An assessment of this feedback. Accepted values are `LLMObs.Feedback.Assessment.PASS` and `LLMObs.Feedback.Assessment.FAIL`.
+
+`reasoning(String reasoning)`
+: optional
+<br />A text explanation of the feedback.
+{{% /collapse-content %}}
+
+**Note**: `LLMObs.submitFeedback()` validates the feedback and throws an `IllegalArgumentException` when Agent Observability is enabled and the feedback is invalid, such as when the target, value, or submitter is missing. When Agent Observability is disabled, or the Agent is not attached, the call is a no-op.
+
+#### Example
+
+{{< code-block lang="java" >}}
+import datadog.trace.api.llmobs.LLMObs;
+
+public class MyJavaClass {
+  public String invokeChat(String userInput) {
+    LLMObsSpan llmSpan = LLMObs.startLLMSpan("my-llm-span-name", "my-llm-model", "my-company", "maybe-ml-app-override", "session-141");
+    String chatResponse = "N/A";
+    try {
+      chatResponse = ... // user application logic to invoke LLM
+    } catch (Exception e) {
+      llmSpan.addThrowable(e);
+      throw new RuntimeException(e);
+    } finally {
+      // connecting the span to a customer-defined entity
+      llmSpan.setTag("feedback_join_key", "incident-123");
+      llmSpan.finish();
+
+      // submitting feedback for a trace
+      LLMObs.submitFeedback(
+          LLMObs.Feedback.builder()
+              .traceId(llmSpan.getTraceId().toString())
+              .label("thumbs")
+              .booleanValue(true)
+              .submitter("user-123", "end_user")
+              .assessment(LLMObs.Feedback.Assessment.PASS)
+              .reasoning("answered the question")
+              .build());
+
+      // submitting feedback for that entity
+      LLMObs.submitFeedback(
+          LLMObs.Feedback.builder()
+              .feedbackJoinKey("incident-123")
+              .label("user_comment")
+              .textValue("The answer missed the customer impact.")
+              .submitter("user-123", "end_user")
+              .assessment(LLMObs.Feedback.Assessment.FAIL)
+              .build());
+    }
+    return chatResponse;
+  }
+}
+{{< /code-block >}}
+{{% /tab %}}
+{{< /tabs >}}
+
 ## Span processing
 
 To modify input and output data on spans, you can configure a processor function. The processor function has access to span tags to enable conditional input/output modification. Processor functions can either return the modified span to emit it, or return `None`/`null` to prevent the span from being emitted entirely. This is useful for filtering out spans that contain sensitive data or meet certain criteria.
