@@ -8,8 +8,7 @@ disable_toc: false
 Agent events are the foundational telemetry signal used by the security platform to power both threat detection and runtime security posture evaluation. They capture low-level runtime activity from workloads and provide the raw, high-fidelity data needed to reason about what is actually happening on a system, rather than relying solely on static configuration or periodic scans.
 
 The overall design philosophy is to be selective by default. Only runtime events that are relevant for security monitoring are sent to the backend, while benign or low-risk activity is filtered out as early as possible within the agent itself. This early filtering is critical to reducing noise, limiting data volume, and minimizing the performance impact on the host where the agent is deployed.
-Workload protection has a custom expression language (called SecL) to define the rules used to apply this filtering. They are deployed using policies which can be managed in Datadog with Remote Configuration or manually by modifying the agent configuration files, or using Terraform.
-
+Workload protection has a custom expression language (called SecL) to define the rules used to apply this filtering. They are deployed using policies which can be managed in Datadog or using Terraform, and deployed to the Agent with Remote Configuration or by manually modifying the agent configuration files.
 The goal of this page is to guide you through the different steps needed to write and deploy an agent rule.
 
 ### OOTB rules {#ootb-rules}

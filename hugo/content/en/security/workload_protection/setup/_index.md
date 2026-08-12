@@ -25,7 +25,7 @@ Workload Protection relies on the Datadog Agent to monitor your workloads and co
 
 Workload Protection offers 3 different flavors depending on your environment and operating system:
 - On **Linux**, install **the eBPF agent**. It offers the best performance and feature support.
-- On **AWS Fargate**, install **the eBPF-less agent**. Fargate does not provide eBPF access, so this agent uses ptrace instead. It covers the major features of Workload Protection (File Integrity Monitoring, process execution monitoring).
+- On **AWS Fargate**, install the Datadog Agent as a sidecar and instrument workloads with the **the cws-instrumentation** tracer. Fargate does not provide eBPF access, so this tracer uses ptrace instead.
 - On **Windows**, the Workload Protection agent installs a Windows driver to collect events and telemetry.
 
 #### Supported Linux flavors
@@ -59,7 +59,7 @@ On Linux, you need to look at the Linux kernel version and distribution version,
 | Amazon Elastic Compute Cloud (EC2)      | ✅                    |
 | Amazon Elastic Kubernetes Service (EKS) | ✅                    |
 | Amazon Elastic Container Service (ECS)  | ✅                    |
-| AWS Fargate                             | ✅ (only using eBPF-less agent)                    |
+| AWS Fargate                             | ✅ (using the cws-instrumentation tracer)                    |
 | Azure Virtual Machines (Azure VMs)      | ✅                    |
 | Azure Kubernetes Service (AKS)          | ✅                    | 
 | Google Compute Engine (GCE)             | ✅                    |
@@ -82,10 +82,9 @@ Use the following instructions to enable the eBPF agent of Workload Protection i
 
 {{< partial name="workload-protection/wp-ebpf-tiles.html" >}}
 
-#### Workload Protection's eBPF-less agent (AWS Fargate)
+#### Workload Protection's cws-instrumentation tracer (AWS Fargate)
 
-Use the following instructions to enable the eBPF-less agent of Workload Protection in the Datadog Agent.
-
+Use the following instructions to setup the cws-instrumentation tracer of Workload Protection on AWS Fargate.
 {{< partial name="workload-protection/wp-ebpfless-tiles.html" >}}
 
 #### Workload Protection Windows agent

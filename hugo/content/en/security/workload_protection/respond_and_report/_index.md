@@ -26,15 +26,23 @@ further_reading:
 
 After Workload Protection surfaces runtime risk through Agent events, signals, and findings, **Respond and Report** is where you configure enforcement, drive response, and measure outcomes.
 
-## Enable enforcement
+## Enable the Response feature
 
-Both **Automated response** and **Response** rely on enforcement in the Agent to kill processes or containers when a matching rule or action is triggered.
+### Prerequisites
 
-### Turn on enforcement in `system-probe`
+- Datadog **Agent 7.78** or later on the hosts that should execute response actions.
+- [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
+- Enforcement is enabled in `system-probe` as described in [Turn on enforcement in `system-probe`](#turn-on-enforcement-in-system-probe).
 
-Both response features rely on `runtime_security_config.enforcement` in `/etc/datadog-agent/system-probe.yaml`. Default values are sufficient in most setups, and both features are enabled by default. For the full parameter reference, see [Workload Protection Agent configuration][4].
+### Turn on enforcement in `system-probe` for kill actions
 
-In addition to disabling enforcement, you can specify binaries to protect from response actions (none by default) or control which rule sources can trigger response actions (`file` rules and `remote-config`, both enabled by default).
+Both **Automated response** and **Response** rely on `runtime_security_config.enforcement` in `/etc/datadog-agent/system-probe.yaml` to kill processes or containers when a matching rule or action is triggered. Default values are sufficient in most setups, and both features are enabled by default. For the full parameter reference, see [Workload Protection Agent configuration][4].
+
+In addition to disable enforcement, you can specify binaries to protect from response actions (none by default) or control which rule sources can trigger response actions (`file` rules and `remote-config`, both enabled by default).
+
+### Enable network probes for network isolation
+
+Network isolation uses eBPF **Traffic Control** classifiers and raw packet programs. The required network probes are enabled by default in `event_monitoring_config.network` in `system-probe.yaml`.
 
 ### RBAC for response
 
@@ -107,20 +115,6 @@ If you do not want to automatically kill processes based on rules, you can respo
 You can take actions directly from the signal side panel to protect your infrastructure after a signal is generated.
 
 {{< img src="security/workload_protection/respond_and_report/response_actions.png" alt="Response section showing isolate container and kill container actions with ISOLATED and KILLED statuses" style="width:100%;" >}}
-
-### Enable the Response feature
-
-Complete the following once per environment (hosts or containers running the Workload Protection-enabled Agent).
-
-#### Prerequisites
-
-- Datadog **Agent 7.78** or later on the hosts that should execute response actions.
-- [**Remote Configuration**][3] is enabled so response policies can be delivered to the Agent.
-- Enforcement is enabled in `system-probe` as described in [Turn on enforcement in `system-probe`](#turn-on-enforcement-in-system-probe).
-
-#### Enable network probes for network isolation
-
-Network isolation uses eBPF **Traffic Control** classifiers and raw packet programs. The required network probes are enabled by default in `event_monitoring_config.network` in `system-probe.yaml`.
 
 ### Available actions
 

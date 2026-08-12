@@ -98,7 +98,7 @@ SECL expressions support several platforms. You can use the documentation below 
 
 ## Rule authoring tips
 
-- Always set the operating system (OS).
+- Always set the operating system (OS) with the `filters` field (for example, `os == "linux"` or `os == "windows"`).
 - Anchor on ancestry to reduce noise. Use `process.ancestors.file.name`.
 - Use durations (for example, `> 5s`, `10m`, `2h`) to target narrow execution windows.
 - Use exact match (`==`) whenever possible as it results in the lowest noise.
@@ -122,7 +122,7 @@ SECL expressions support several platforms. You can use the documentation below 
 
 <div class="alert alert-info">You can find more in depth examples in the default policy shipped OOTB with the agent. See <a href="https://github.com/DataDog/security-agent-policies/blob/master/runtime/default.policy">Workload Protection default policy.</a></div>
 
-In Agent policy files, each rule includes an `id` and an `expression`. You can also add optional `actions`. See [Variables and actions][3] for more.
+In Agent policy files, each rule includes an `id`, an `expression`, and a `filters` field that scopes the rule to an operating system. You can also add optional `actions`. See [Variables and actions][3] for more.
 
 ### Linux
 
@@ -134,6 +134,8 @@ rules:
     expression: >-
       open.file.path in ["/etc/shadow", "/etc/sudoers"] &&
       process.file.path not in ["/usr/sbin/vipw", "/usr/sbin/visudo"]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### NGINX or PHP spawning bash
@@ -147,6 +149,8 @@ rules:
         process.ancestors.file.name == "nginx" ||
         process.ancestors.file.name =~ "php*"
       )
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Suspicious IMDS access from container
@@ -158,6 +162,8 @@ rules:
       connect &&
       network.destination.ip in ["169.254.169.254"] &&
       container.id != ""
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Kernel module loads outside maintenance window
@@ -169,6 +175,8 @@ rules:
       load_module &&
       process.user != "root" &&
       process.ancestors.file.name not in ["modprobe", "insmod"]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Sensitive file read shortly after start
@@ -180,6 +188,8 @@ rules:
       open.file.path == "/etc/secret" &&
       process.file.name == "java" &&
       process.created_at > 5s
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 #### Outbound to non-corporate IPs (CIDR allowlist)
@@ -190,6 +200,8 @@ rules:
     expression: >-
       connect &&
       network.destination.ip not in [10.0.0.0/8, 192.168.0.0/16, 172.16.0.0/12]
+    filters:
+      - os == "linux"
 {{< /code-block >}}
 
 ### Windows
@@ -202,6 +214,8 @@ rules:
     expression: >-
       set_key_value &&
       open_key.registry.key_path =~ "*\\Software\\Microsoft\\Windows\\CurrentVersion\\Run*"
+    filters:
+      - os == "windows"
 {{< /code-block >}}
 
 #### Unsigned binary launching PowerShell
@@ -213,6 +227,8 @@ rules:
       exec.file.path =~ "*\\WindowsPowerShell\\v1.0\\powershell.exe" &&
       process.parent.file.path !~ "*\\Program Files*" &&
       process.user_sid != "S-1-5-18"
+    filters:
+      - os == "windows"
 {{< /code-block >}}
 
 ### Cross-platform

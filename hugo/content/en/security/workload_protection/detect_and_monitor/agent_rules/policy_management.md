@@ -114,8 +114,7 @@ Next, use the following instructions to upload the policy file to each host.
 {{< tabs >}}
 {{% tab "Host" %}}
 
-Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder (that will contains all your `.policy` files). The file must have `read` and `write` access for the `root` user on the host. This may require use of a utility such as SCP or FTP.
-
+Copy the `default.policy` file to the target host in the `/etc/datadog-agent/runtime-security.d` folder (that will contains all your `.policy` files). The file must have `read` and `write` access for the `root` user on the host.
 To apply the changes, do **one** of the following:
 
 -   Reload runtime policies (no full Agent restart):
