@@ -136,6 +136,9 @@ When you fix a flaky test, Test Optimization's remediation flow can confirm the 
     - If any retry fails, keeps the test's current state (`Active`, `Quarantined`, or `Disabled`).
       - Tags the last test retry with `@test.test_management.attempt_to_fix_passed:false` in test run events.
 
+**Note**: For Cypress, the remediation flow requires [test isolation](https://docs.cypress.io/app/core-concepts/test-isolation)
+to be enabled. With `testIsolation: false`, attempt-to-fix retries do not run. See also [Known Limitations](/tests/setup/javascript/?tab=cypress#known-limitations)
+
 ### Track fixes that are in progress
 
 After a successful remediation run, Flaky Tests Management tracks the branch containing the fix and displays a {{< ui >}}Fix in progress{{< /ui >}} indicator until the fix reaches the repository's default branch. When the associated pull request merges, the test automatically moves to `Fixed` and the indicator is removed. If the fix is pushed directly to the default branch, the test is marked `Fixed` immediately.
