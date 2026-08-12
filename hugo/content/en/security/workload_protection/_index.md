@@ -47,6 +47,18 @@ cascade:
 
 Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, helping you identify, investigate, and stop malicious behaviors before they impact your workloads.
 
+## Use cases
+
+Many organizations use Workload Protection across a range of security and operational use cases:
+
+- **Compliance Validation:** Workload Protection helps you validate compliance with regulatory frameworks such as PCI, FedRAMP, and SOC 2 by continuously monitoring runtime activity for policy violations, risky configurations, and unauthorized changes.
+
+- **Runtime Security Posture:** Workload Protection improves your security posture by identifying unsafe runtime practices and sensitive configuration drifts, helping you catch weaknesses before they can be exploited.
+
+- **Infrastructure Monitoring:** Workload Protection tracks any kind of runtime behavior, whether security-related or not. From debugging custom workloads to monitoring system-level processes and remote user sessions, it offers real-time visibility into how your environments operate.
+
+{{< img src="security/workload_protection/k8s_remote_access.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
+
 ## How it works
 
 Workload Protection evaluates the activity it collects in two places: on the Datadog Agent, and in Datadog.
@@ -100,18 +112,6 @@ You deploy a policy in one of two ways:
 - **Manual deployment**: you install the policy file on each Agent yourself, then reload the runtime policies or restart the Agent.
 
 You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider. The Terraform provider lets you define and version your rules as code outside the app.
-
-## Use cases
-
-Many organizations use Workload Protection across a range of security and operational use cases:
-
-- **Compliance Validation:** Workload Protection helps you validate compliance with regulatory frameworks such as PCI, FedRAMP, and SOC 2 by continuously monitoring runtime activity for policy violations, risky configurations, and unauthorized changes.
-
-- **Runtime Security Posture:** Workload Protection improves your security posture by identifying unsafe runtime practices and sensitive configuration drifts, helping you catch weaknesses before they can be exploited.
-
-- **Infrastructure Monitoring:** Workload Protection tracks any kind of runtime behavior, whether security-related or not. From debugging custom workloads to monitoring system-level processes and remote user sessions, it offers real-time visibility into how your environments operate.
-
-{{< img src="security/workload_protection/k8s_remote_access.png" alt="Breakdown of Kubernetes remote user sessions" width="100%">}}
 
 ## Next steps
 
