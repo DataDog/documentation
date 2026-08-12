@@ -93,7 +93,7 @@ with the SAT only. The `dd-api-key` header is optional and its value is not eval
 
 ## Restrictions on SAT-authenticated API calls
 
-To limit how a SAT can escalate its own access, Datadog restricts what an API call authenticated with a SAT can do. These restrictions apply regardless of the API client making the call:
+To prevent privilege escalation, Datadog restricts what an API call authenticated with a SAT can do. These restrictions apply regardless of the API client making the call:
 
 - **Application keys**: A SAT cannot create or update application keys. Revoking application keys is still allowed.
 - **Scopes on new tokens**: A SAT can create or update another SAT only if the new token's scopes are a subset of its own scopes.
