@@ -25,6 +25,8 @@ import {
   stepperNodes,
   type StepInput,
 } from "@components/Stepper/plaintext/Stepper";
+import { imgNode } from "@components/Img/plaintext/Img";
+import { IMAGES_URL } from "@config/images";
 
 /**
  * Adapts a parsed Markdoc tag node into its plaintext-twin equivalent. Most
@@ -51,6 +53,14 @@ const twinAdaptersByTag: Record<string, TwinAdapter> = {
     ),
 
   "agent-only": (node) => agentOnlyNode(transformNodes(node.children)),
+
+  img: (node) =>
+    imgNode({
+      src: `${IMAGES_URL}/${String(attr(node, "src") ?? "")}`,
+      alt: attr(node, "alt") as string | undefined,
+      caption: attr(node, "caption") as string | undefined,
+      video: attr(node, "video") as boolean | undefined,
+    }),
 
   stepper: (node) => {
     const steps: StepInput[] = [];

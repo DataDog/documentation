@@ -1,0 +1,138 @@
+---
+import styles from "./Img.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import {
+  IMAGES_URL,
+  resolveLocalContentImage,
+  resolveLocalContentVideo,
+} from "@config/images";
+
+const cl = classListFactory(styles);
+
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+  style?: string;
+  width?: string;
+  height?: string;
+  video?: boolean;
+  inline?: boolean;
+  popup?: boolean;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  style,
+  width,
+  height,
+  video = false,
+  inline = false,
+  popup = true,
+} = Astro.props;
+
+async function resolveVideoUrl(): Promise<string> {
+  if (import.meta.env.PROD) {
+    return `${IMAGES_URL}/${src}`;
+  }
+  const localVideoUrl = await resolveLocalContentVideo(src);
+  if (!localVideoUrl) {
+    throw new Error(`Img: no local video found at src/images/content/${src}`);
+  }
+  return localVideoUrl;
+}
+
+// TODO: I'm not confident about the prod implementation here. Do we
+// also need a staging URL? Probably revisit when the imgix CDN is configured.
+async function resolveImageUrls(): Promise<{
+  imageUrl: string;
+  srcset: string;
+  popupHref: string;
+}> {
+  if (import.meta.env.PROD) {
+    const imageUrl = `${IMAGES_URL}/${src}`;
+    const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
+    const popupHref = `${imageUrl}?fit=max&auto=format`;
+    return { imageUrl, srcset, popupHref };
+  }
+  const localImage = await resolveLocalContentImage(src);
+  if (!localImage) {
+    throw new Error(`Img: no local image found at src/images/content/${src}`);
+  }
+  return {
+    imageUrl: localImage.src,
+    srcset: localImage.src,
+    popupHref: localImage.src,
+  };
+}
+
+const media = video
+  ? { kind: "video" as const, videoUrl: await resolveVideoUrl() }
+  : { kind: "image" as const, ...(await resolveImageUrls()) };
+---
+
+{
+  media.kind === "video" ? (
+    <figure class={cl("img__figure")}>
+      <video
+        class={cl("img__video")}
+        style={style}
+        width={width}
+        height={height}
+        muted
+        playsinline
+        autoplay
+        loop
+        controls
+      >
+        <source src={media.videoUrl} type="video/mp4" />
+      </video>
+    </figure>
+  ) : inline ? (
+    <img
+      class={cl("img__image")}
+      srcset={media.srcset}
+      style={style}
+      width={width}
+      height={height}
+      alt={alt}
+    />
+  ) : (
+    <figure class={cl("img__figure")}>
+      {popup ? (
+        <a
+          href={media.popupHref}
+          class={cl("img__link", "img__link--popup")}
+          data-lightbox-src={media.popupHref}
+          data-lightbox-alt={alt}
+          data-astro-reload
+        >
+          <picture style={style}>
+            <img
+              class={cl("img__image")}
+              srcset={media.srcset}
+              style={style}
+              width={width}
+              height={height}
+              alt={alt}
+            />
+          </picture>
+        </a>
+      ) : (
+        <picture style={style}>
+          <img
+            class={cl("img__image")}
+            srcset={media.srcset}
+            style={style}
+            width={width}
+            height={height}
+            alt={alt}
+          />
+        </picture>
+      )}
+      {caption && <figcaption class={cl("img__caption")}>{caption}</figcaption>}
+    </figure>
+  )
+}

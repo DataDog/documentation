@@ -38,6 +38,10 @@ export default defineMarkdocConfig({
       render: component("./src/components/Alert/Alert.astro"),
       ...schema.tags.alert,
     },
+    img: {
+      render: component("./src/components/Img/Img.astro"),
+      ...schema.tags.img,
+    },
     tabs: {
       render: component("./src/components/Tabs/Tabs.astro"),
       ...schema.tags.tabs,

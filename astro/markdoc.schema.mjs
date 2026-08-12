@@ -21,6 +21,19 @@ export default {
         },
       },
     },
+    img: {
+      attributes: {
+        src: { type: String, required: true },
+        alt: { type: String },
+        caption: { type: String },
+        style: { type: String },
+        width: { type: String, default: false },
+        height: { type: String, default: false },
+        video: { type: Boolean, default: false },
+        inline: { type: Boolean, default: false },
+        popup: { type: Boolean, default: true },
+      },
+    },
     tabs: {
       attributes: {},
     },
