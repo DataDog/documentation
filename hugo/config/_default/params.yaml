@@ -319,6 +319,7 @@ unsupported_sites:
   bits_ai_sre: [gov,gov2]
   bits_data_analysis: [gov,gov2]
   bits_investigation: [gov,gov2]
+  bits_remediation: [gov,gov2]
   byoti: [gov, gov2]
   case_management: [gov2]
   ci_visibility: [gov,gov2]
@@ -347,6 +348,7 @@ unsupported_sites:
   dora_metrics: [gov,gov2]
   dynamic_instrumentation: [gov,gov2]
   dynamic_quotas: [gov,gov2]
+  email_delivery: [us3,us5,eu,ap1,ap2,gov,gov2,uk1] # US1 only
   events_from_sns_emails: [gov,gov2]
   exception_replay: [gov,gov2]
   experiments: [gov,gov2]

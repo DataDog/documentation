@@ -1555,36 +1555,36 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
-    - name: Take Action
-      url: bits_ai/bits_investigation/take_action
-      identifier: bits_ai_sre_take_action
-      parent: bits_ai_sre
-      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 103
+      weight: 102
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 104
+      weight: 103
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 105
+      weight: 104
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 2
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai
-      weight: 2
+      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 3
+      weight: 4
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1599,22 +1599,22 @@ menu:
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
-      weight: 7
+      weight: 8
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -2225,26 +2225,36 @@ menu:
       parent: internal_developer_portal
       identifier: idp_eng_reports
       weight: 4
+    - name: Teams Performance
+      url: internal_developer_portal/eng_reports/teams_performance
+      parent: idp_eng_reports
+      identifier: eng_reports_teams_performance
+      weight: 401
     - name: Reliability Overview
       url: internal_developer_portal/eng_reports/reliability_overview
       parent: idp_eng_reports
       identifier: eng_reports_reliability_overview
-      weight: 401
+      weight: 402
+    - name: Catalog Health
+      url: internal_developer_portal/eng_reports/catalog_health
+      parent: idp_eng_reports
+      identifier: eng_reports_catalog_health
+      weight: 403
     - name: Scorecards Performance
       url: internal_developer_portal/eng_reports/scorecards_performance
       parent: idp_eng_reports
       identifier: eng_reports_scorecards_perf
-      weight: 402
+      weight: 404
     - name: DORA Metrics
       url: internal_developer_portal/eng_reports/dora_metrics
       parent: idp_eng_reports
       identifier: eng_reports_dora_metrics
-      weight: 403
+      weight: 405
     - name: Custom Reports
       url: internal_developer_portal/eng_reports/custom_reports
       parent: idp_eng_reports
       identifier: eng_reports_custom
-      weight: 404
+      weight: 406
     - name: Homepage
       url: internal_developer_portal/homepage
       parent: internal_developer_portal
@@ -5477,6 +5487,12 @@ menu:
       identifier: openlineage_datadog_agent_for_openlineage
       parent: openlineage_integrations
       weight: 1000000
+    - name: Integration Overhead
+      url: data_observability/integration_overhead
+      pre: data-observability-wui
+      identifier: data_observability_integration_overhead
+      parent: data_observability_heading
+      weight: 90000
     - name: Agent Observability
       url: llm_observability/
       pre: llm-observability
@@ -6244,31 +6260,36 @@ menu:
       parent: code_coverage
       identifier: code_coverage_configuration
       weight: 2
+    - name: Coverage Calculation
+      url: code_coverage/coverage_calculation/
+      parent: code_coverage
+      identifier: code_coverage_coverage_calculation
+      weight: 3
     - name: Monorepo Support
       url: code_coverage/monorepo_support/
       parent: code_coverage
       identifier: code_coverage_monorepo_support
-      weight: 3
+      weight: 4
     - name: Flags
       url: code_coverage/flags/
       parent: code_coverage
       identifier: code_coverage_flags
-      weight: 4
+      weight: 5
     - name: Carryforward
       url: code_coverage/carryforward/
       parent: code_coverage
       identifier: code_coverage_carryforward
-      weight: 5
+      weight: 6
     - name: Data Collected
       url: code_coverage/data_collected/
       parent: code_coverage
       identifier: code_coverage_data_collected
-      weight: 5
+      weight: 7
     - name: Dashboards
       url: code_coverage/dashboards/
       parent: code_coverage
       identifier: code_coverage_dashboards
-      weight: 6
+      weight: 8
     - name: PR Gates
       url: pr_gates/
       pre: ci
@@ -6427,41 +6448,51 @@ menu:
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_targeting_rules
       weight: 303
+    - name: Targeting Attributes
+      url: feature_flags/concepts/targeting_attributes
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_targeting_attributes
+      weight: 304
+    - name: Scheduled Rollouts
+      url: feature_flags/concepts/scheduled_rollouts
+      parent: feature_flags_concepts
+      identifier: feature_flags_concepts_scheduled_rollouts
+      weight: 305
     - name: Saved Filters
       url: feature_flags/concepts/saved_filters
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_saved_filters
-      weight: 304
+      weight: 306
     - name: Traffic Splitting and Randomization
       url: feature_flags/concepts/traffic_splitting
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_traffic_splitting
-      weight: 305
+      weight: 307
     - name: Distribution Channels
       url: feature_flags/concepts/distribution_channels
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_distribution_channels
-      weight: 306
+      weight: 308
     - name: Configuration Sources
       url: feature_flags/concepts/configuration_sources
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_configuration_sources
-      weight: 307
+      weight: 309
     - name: Flag History
       url: feature_flags/concepts/flag_history
       parent: feature_flags_concepts
       identifier: feature_flags_history
-      weight: 308
+      weight: 310
     - name: Feature Flag Graphs
       url: feature_flags/concepts/flag_graphs
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_flag_graphs
-      weight: 309
+      weight: 311
     - name: Stale Flags
       url: feature_flags/concepts/stale_flags
       parent: feature_flags_concepts
       identifier: feature_flags_concepts_stale_flags
-      weight: 310
+      weight: 312
     - name: Permissions and Access Control
       url: feature_flags/concepts/permissions
       parent: feature_flags_concepts
@@ -10091,26 +10122,31 @@ menu:
       parent: pa_experiments_metrics
       identifier: pa_experiments_metric_sync
       weight: 1
+    - name: Standardize Experiments with Protocols
+      url: experiments/protocols
+      parent: pa_experiments
+      identifier: pa_experiments_protocols
+      weight: 2
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
       parent: pa_experiments
       identifier: pa_experiments_plan
-      weight: 2
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 4
+      weight: 5
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 5
+      weight: 6
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10135,7 +10171,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 6
+      weight: 7
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10165,7 +10201,7 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 6
+      weight: 8
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments
