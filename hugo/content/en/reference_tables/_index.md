@@ -192,12 +192,12 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 
 This example shows the complete workflow for managing a Reference Table backed by a local CSV file with the API. It creates an upload, pushes the CSV data to the returned URLs, creates the table, patches it with new data, and deletes it.
 
-Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and application keys, and `<DATADOG_SITE>` with your [Datadog site][11].
+Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and application keys.
 
 1. Create a reference table upload. Provide the CSV `headers`, the number of parts you plan to upload in `part_count`, and the maximum size of each part in bytes in `part_size`.
 
    ```shell
-   curl -X POST "https://api.<DATADOG_SITE>/api/v2/reference-tables/uploads" \
+   curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/reference-tables/uploads" \
    -H "Content-Type: application/json" \
    -H "DD-API-KEY: <DATADOG_API_KEY>" \
    -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
@@ -239,7 +239,7 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
 3. Create the Reference Table, referencing the upload `id` from step 1 in `file_metadata.upload_id`.
 
    ```shell
-   curl -X POST "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables" \
+   curl -X POST "https://api.{{< region-param key="dd_site" >}}/api/v2/reference-tables/tables" \
    -H "Content-Type: application/json" \
    -H "DD-API-KEY: <DATADOG_API_KEY>" \
    -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
@@ -272,7 +272,7 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
 4. To update the table's data, repeat steps 1 and 2 to upload a new CSV file, then call the [Update Reference Table endpoint][12] with the new `upload_id`. The upserted CSV replaces matching rows, adds new rows, and removes rows no longer present in the file.
 
    ```shell
-   curl -X PATCH "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables/<TABLE_ID>" \
+   curl -X PATCH "https://api.{{< region-param key="dd_site" >}}/api/v2/reference-tables/tables/<TABLE_ID>" \
    -H "Content-Type: application/json" \
    -H "DD-API-KEY: <DATADOG_API_KEY>" \
    -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>" \
@@ -299,14 +299,13 @@ Replace `<DATADOG_API_KEY>` and `<DATADOG_APP_KEY>` with your Datadog API and ap
 5. To delete the table, call the [Delete Reference Table endpoint][13] with the table's `id`.
 
    ```shell
-   curl -X DELETE "https://api.<DATADOG_SITE>/api/v2/reference-tables/tables/<TABLE_ID>" \
+   curl -X DELETE "https://api.{{< region-param key="dd_site" >}}/api/v2/reference-tables/tables/<TABLE_ID>" \
    -H "DD-API-KEY: <DATADOG_API_KEY>" \
    -H "DD-APPLICATION-KEY: <DATADOG_APP_KEY>"
    ```
 
 [8]: /api/latest/reference-tables/
 [10]: /api/latest/reference-tables/#create-reference-table
-[11]: /getting_started/site/
 [12]: /api/latest/reference-tables/#update-reference-table
 [13]: /api/latest/reference-tables/#delete-table
 
