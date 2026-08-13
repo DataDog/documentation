@@ -30,6 +30,8 @@ const {
 } = Astro.props;
 const cl = classListFactory(styles);
 
+// TODO: replace hardcoded English with i18n() once an authoritative translation
+// key exists for this string in the Hugo i18n bundle.
 const overviewLabel = "Overview";
 const overviewHref = localizedHref(lang, "/api/latest/");
 
