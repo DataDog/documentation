@@ -46,7 +46,7 @@ For RHEL and CentOS, the Observability Pipelines Worker supports versions 8.0 or
 
 {% /if %}
 
-The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs, metrics, and traces ({% tooltip contents="Traces for Observability Pipelines is in Preview. Contact your account manager to request access." %}in Preview{% /tooltip %}), and then route them to different destinations.
+The Observability Pipelines Worker is software that runs in your environment to centrally aggregate and process your logs, metrics, and {% tooltip contents="Contact your account manager to request access." %}traces{% /tooltip %}, and then route them to different destinations.
 
 <!-- Kubernetes - Overview -->
 {% if equals($platform, "kubernetes") %}
