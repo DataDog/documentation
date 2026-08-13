@@ -45,9 +45,11 @@ cascade:
 
 ## Overview
 
-Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, helping you identify, investigate, and stop malicious behaviors before they impact your workloads.
+Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, generating security signals and findings. Use them to identify, investigate, and stop malicious behaviors before they impact your workloads.
 
-## Beyond threat detection
+Workload Protection is part of the Datadog Security platform. Signals correlate with misconfiguration scans, vulnerability assessments, and code security findings, so you can link runtime attacks to preexisting weaknesses. Because it runs on the Datadog platform, it also connects with your infrastructure metrics, traces, and logs. That context helps you understand a threat's scope and reconstruct the attack story.
+
+## Beyond runtime threat detection
 
 Workload Protection is not limited to runtime threat detection. Many organizations use it across a range of security and operational use cases:
 
@@ -92,8 +94,6 @@ Agent rules perform lightweight filtering so they run efficiently on every host.
 7. Any [notification rules][12] matching the signal's severity, rule type, tags, and attributes are triggered.
 
 Workload Protection ships with over 350 agent rules and 200 detection rules, covering most MITRE ATT&CK tactics and techniques. You can also write your own, including in-agent state machines that alert only on complex indicators of compromise.
-
-Because Workload Protection runs on the Datadog platform, signals and findings correlate with misconfiguration scans, vulnerability assessments, code security findings, and your infrastructure telemetry. Features shared across Datadog Security apply too, including [notification rules][12] that route signals to your team.
 
 ### Responding to threats
 
