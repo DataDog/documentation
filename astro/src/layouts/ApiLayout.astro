@@ -1,69 +1,59 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { getCollection } from "astro:content";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
-import type { OverviewPage } from "@components/ApiSideNav/ApiSideNav.astro";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
 import LanguageSelectorIsland from "@components/LanguageSelector/LanguageSelectorIsland.astro";
 import CopyPageButtonIsland from "@components/CopyPageButton/CopyPageButtonIsland.astro";
-import { stripLocalePrefix } from "@lib/i18n/locale";
+import { stripLocalePrefix, type Locale } from "@lib/i18n/locale";
 import { buildHreflangAlternates } from "@lib/seo";
 import type { ApiCategory, ApiCategoryStub } from "@lib/api/schemas/views";
+import type { OverviewPage } from "@lib/api/overviewPages";
 
 interface Props {
   title: string;
   description?: string;
+  lang?: Locale;
   categories: ApiCategoryStub[];
   activeCategory?: ApiCategory;
   currentOperationSlug?: string;
+  overviewPages?: OverviewPage[];
+  isOverviewSection?: boolean;
+  activeOverviewPageSlug?: string;
   breadcrumbs?: BreadcrumbItem[];
+  /** Class applied to the content wrapper around the slot. Overview pages use
+      `prose`; reference pages can opt into a different wrapper. */
+  bodyClass?: string;
 }
 
 const {
   title,
   description,
+  lang: langProp,
   categories,
   activeCategory,
   currentOperationSlug,
+  overviewPages = [],
+  isOverviewSection = false,
+  activeOverviewPageSlug,
   breadcrumbs,
+  bodyClass = "prose",
 } = Astro.props;
-const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
+
+// The route knows its own locale and passes it in; `stripLocalePrefix` is only
+// needed here for the unprefixed path that feeds the hreflang alternates.
+const { lang: derivedLang, rest: unprefixedPath } = stripLocalePrefix(
   Astro.url.pathname,
 );
+const lang = langProp ?? derivedLang;
 const hreflang = buildHreflangAlternates(unprefixedPath);
-
-// Astro's glob loader strips a trailing `/index`, so the API root is the entry
-// with id exactly `api/latest` and its sub pages are the descendants.
-const API_CONTENT_DIR = "api/latest";
-const overviewEntries = await getCollection(
-  "en",
-  (entry) => entry.id.startsWith(`${API_CONTENT_DIR}/`),
-);
-const overviewPages: OverviewPage[] = overviewEntries
-  .map((entry) => ({
-    title: entry.data.title,
-    slug: entry.id.slice(`${API_CONTENT_DIR}/`.length),
-  }))
-  .sort((a, b) => a.title.localeCompare(b.title));
-
-const apiRootPath = `/${API_CONTENT_DIR}/`;
-const pathWithinApiRoot = unprefixedPath.startsWith(apiRootPath)
-  ? unprefixedPath.slice(apiRootPath.length).replace(/\/$/, "")
-  : undefined;
-const activeOverviewPageSlug = overviewPages.some(
-  (page) => page.slug === pathWithinApiRoot,
-)
-  ? pathWithinApiRoot
-  : undefined;
-const isOverviewSection = pathWithinApiRoot === "" || Boolean(activeOverviewPageSlug);
 ---
 
 <BaseLayout
   title={title}
   description={description}
-  lang={currentLang}
+  lang={lang}
   hreflang={hreflang}
 >
   <div class="api-shell">
@@ -74,25 +64,26 @@ const isOverviewSection = pathWithinApiRoot === "" || Boolean(activeOverviewPage
       overviewPages={overviewPages}
       isOverviewSection={isOverviewSection}
       activeOverviewPageSlug={activeOverviewPageSlug}
+      lang={lang}
     />
     <main class="api-main">
       <div class="api-toolbar">
         <div class="api-toolbar__left">
           {breadcrumbs && (
             <Breadcrumbs crumbs={breadcrumbs}>
-              <CopyPageButtonIsland slot="trailing" lang={currentLang} variant="icon" />
+              <CopyPageButtonIsland slot="trailing" lang={lang} variant="icon" />
             </Breadcrumbs>
           )}
         </div>
         <div class="api-toolbar__selectors">
           <LanguageSelectorIsland
-            currentLang={currentLang}
+            currentLang={lang}
             pathname={Astro.url.pathname}
           />
           <RegionSelectorIsland />
         </div>
       </div>
-      <div class="prose">
+      <div class={bodyClass}>
         <slot />
       </div>
     </main>

@@ -10,6 +10,7 @@ import {
   getCategoryViewBySlug,
   getOperationView,
 } from "@lib/api/viewsBuilder";
+import { getOverviewPagesView } from "@lib/api/overviewPages";
 import { renderMarkdown } from "@lib/api/markdownRenderer";
 import { highlightEndpoint } from "@lib/api/syntaxHighlighter";
 import { LOCALES, parseLangParam, localizedHref } from "@lib/i18n/locale";
@@ -76,6 +77,7 @@ if (
 const { redirectTo } = Astro.props as PageProps;
 
 const categories = await getCategoryStubsView(lang);
+const overviewPages = await getOverviewPagesView();
 const category = await getCategoryViewBySlug(catSlug, lang);
 if (!category) {
   return new Response(null, { status: 404 });
@@ -134,9 +136,11 @@ const tabDisabled = operation
           mdToMetaDescription(operation.variants[0].description) ||
           `${operation.summary} endpoint in the Datadog API.`
         }
+        lang={lang}
         categories={categories}
         activeCategory={category}
         currentOperationSlug={opSlug}
+        overviewPages={overviewPages}
         breadcrumbs={[
           { label: i18n("docs", lang), href: localizedHref(lang, "/") },
           {

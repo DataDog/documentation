@@ -7,11 +7,7 @@ import SearchBar, {
 } from "@components/SearchBar/SearchBar";
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
-
-export interface OverviewPage {
-  title: string;
-  slug: string;
-}
+import type { OverviewPage } from "@lib/api/overviewPages";
 
 interface Props {
   categories: ApiCategoryStub[];

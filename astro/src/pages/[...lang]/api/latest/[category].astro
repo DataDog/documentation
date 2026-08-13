@@ -5,6 +5,7 @@ import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import Alert from '@components/Alert/Alert.astro';
 import ApiEndpointSummary from '@components/ApiEndpointSummary/ApiEndpointSummary.astro';
 import { getCategoryStubsView, getCategoryViewBySlug } from '@lib/api/viewsBuilder';
+import { getOverviewPagesView } from '@lib/api/overviewPages';
 import { renderMarkdown } from '@lib/api/markdownRenderer';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { mdToMetaDescription } from '@lib/seo';
@@ -37,6 +38,7 @@ if (!slug || typeof slug !== 'string') {
 }
 
 const categories = await getCategoryStubsView(lang);
+const overviewPages = await getOverviewPagesView();
 const current = await getCategoryViewBySlug(slug, lang);
 if (!current) {
   return new Response(null, { status: 404 });
@@ -48,8 +50,10 @@ const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 <ApiLayout
   title={`${current.name} - Datadog API`}
   description={mdToMetaDescription(current.description) || `${current.name} endpoints in the Datadog API.`}
+  lang={lang}
   categories={categories}
   activeCategory={current}
+  overviewPages={overviewPages}
   breadcrumbs={[
     { label: i18n('docs', lang), href: localizedHref(lang, '/') },
     { label: i18n('api', lang), href: localizedHref(lang, '/api/latest/') },
