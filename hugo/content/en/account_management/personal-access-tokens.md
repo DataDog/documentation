@@ -66,6 +66,16 @@ curl -X GET "https://api.datadoghq.com/api/v2/users" \
 
 **Note:** When a valid PAT is provided in the `dd-application-key` header, Datadog authenticates with the PAT only. The `dd-api-key` header is optional and its value is not evaluated.
 
+## Restrictions on PAT-authenticated API calls
+
+To prevent privilege escalation, Datadog restricts what an API call authenticated with a PAT can do. These restrictions apply regardless of the API client making the call:
+
+- **Application keys**: A PAT cannot create or update application keys. Revoking application keys is still allowed.
+- **Scopes on new tokens**: A PAT can create or update a PAT or a SAT only if the new token's scopes are a subset of its own scopes.
+- **Time-to-live (TTL) on new tokens**: A PAT cannot create a PAT or a SAT with a TTL that extends beyond its own expiration.
+
+A call that violates one of these restrictions returns a `403 Forbidden` response.
+
 ## Manage Personal Access Tokens
 
 ### View your tokens
