@@ -2,6 +2,9 @@
 title: Targeting Rules and Filters
 description: Learn how targeting rules, filters, and rollout types control which variants your application serves.
 further_reading:
+- link: "/feature_flags/concepts/evaluation_tester"
+  tag: "Documentation"
+  text: "Evaluation Tester"
 - link: "/feature_flags/concepts/targeting_attributes"
   tag: "Documentation"
   text: "Targeting Attributes"
@@ -56,7 +59,7 @@ For each targeting rule, configure the following:
 
 {{< img src="feature_flags/concepts/configure-targeting-rule-3.png" alt="Targeting Rule editor side panel on a feature flag." style="width:70%;" >}}
 
-After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules.
+After configuring your targeting rules, click **Save**, then enable the flag in the environment so SDKs can evaluate targeting rules. You can also use the [evaluation tester][2] to simulate how the rule evaluates for a given targeting key and attributes, without affecting production data.
 
 <div class="alert alert-info">
 SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>overridden</b> in an environment. If the flag is overridden with a fixed variant, the SDK returns that variant instead. If the flag is disabled, the SDK returns the coded default variant.
@@ -66,7 +69,7 @@ SDKs do not evaluate targeting rules when the flag is <b>disabled</b> or <b>over
 
 Filters use attributes from your SDK's **evaluation context**. Define attributes when you set the evaluation context before evaluating flags. Attributes must be flat primitive values (strings, numbers, Booleans). Nested objects and arrays are not supported.
 
-When you build a filter, the attribute field suggests attributes your organization has already defined or that your SDKs have sent recently. See [Targeting Attributes][2] to define reusable attributes with a data type, which also determines the operators available for that attribute.
+When you build a filter, the attribute field suggests attributes your organization has already defined or that your SDKs have sent recently. See [Targeting Attributes][3] to define reusable attributes with a data type, which also determines the operators available for that attribute.
 
 ### Example evaluation contexts and filters
 
@@ -154,4 +157,5 @@ Targeting rules are evaluated **in order** from top to bottom:
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /feature_flags/concepts/saved_filters/
-[2]: /feature_flags/concepts/targeting_attributes/
+[2]: /feature_flags/concepts/evaluation_tester/
+[3]: /feature_flags/concepts/targeting_attributes/
