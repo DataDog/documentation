@@ -1,5 +1,5 @@
 ---
-title: Creating, updating, and deleting a Reference Table with the API
+title: Creating, Updating, and Deleting a Reference Table with the API
 description: Complete walkthrough for creating, updating, and deleting a Reference Table backed by a local CSV file using the Datadog API.
 further_reading:
 - link: "/reference_tables/"
