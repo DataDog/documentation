@@ -78,7 +78,7 @@ For a full list of options, see the `datadog-ci` [Unity Symbols documentation][5
 
 ### Upload symbol files manually
 
-You can also upload symbol files (dSYMs, `.so`, Android Proguard Mapping, and IL2CPP mapping files) manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][6] page or through the [API][7]. This is useful for one-off builds or environments without CI.
+You can also upload symbol files (dSYMs, `.so`, Android Proguard Mapping, and IL2CPP mapping files) manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][6] page or through the [RUM Debug Symbols API][7]. This is useful for one-off builds or environments without CI.
 
 ### List uploaded symbol files
 
