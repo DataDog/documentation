@@ -6,6 +6,9 @@ aliases:
   - /security/workload_protection/inventory/hosts_and_containers
   - /security/workload_protection/inventory/serverless
 further_reading:
+  - link: "security/workload_protection/inventory/review_improve_coverage"
+    tag: "Documentation"
+    text: "Review and improve coverage"
   - link: "security/detection_rules/#mitre-attck-map"
     tag: "Documentation"
     text: "MITRE ATT&CK map"
@@ -17,6 +20,8 @@ further_reading:
 Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and act on unprotected or misconfigured workloads.
 
 Coverage reflects whether the policies and agent rules on each resource loaded successfully. For how policies reach your Agents, see [Enable and deploy policies][5].
+
+For ways to use Coverage to improve your workload security, see [Review and improve coverage][2].
 
 {{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
 
@@ -93,69 +98,10 @@ To understand why a rule is failing, select the resource to open its side panel.
 
 {{< img src="security/workload_protection/coverage/coverage_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
 
-## Use cases
-
-Here are some ways to use Coverage to improve your workload security.
-
-### Detect and respond to policy deployment issues
-
-To find and fix resources with rule errors:
-
-1. In the Explorer, filter by severity **Error**, or in the Map, select an **Error** hexagon.
-2. Select a failing resource to open its side panel and review its policies. Policies with failing rules show a status of **Error**.
-3. Review a failing rule's verdict (for example, `syntax_error` or `unknown`) and error message to understand why it failed.
-4. [Edit the rule][4] as needed.
-5. Redeploy and confirm the fix in Coverage.
-
-### Review agent deployment coverage
-
-The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
-
-{{< img src="security/workload_protection/coverage/coverage_top_widgets.png" alt="Coverage page top widgets showing resource coverage, rule loading status, Workload Protection adoption, and Remote Config deployment" width="100%">}}
-
-- **View outdated**: Resources running an agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
-- **View incomplete**: Resources reporting incomplete or invalid data.
-- **View without WP**: Hosts running the Datadog Agent without Workload Protection enabled. This opens Fleet Automation, where you can [set up Workload Protection][3].
-- **View without Agents**: Hosts not running the Datadog Agent, which can't be evaluated by Workload Protection. This opens the Infrastructure Catalog.
-
-Update or deploy the Datadog Agent to help ensure complete coverage.
-
-### Search assets by MITRE ATT&CK techniques and tactics
-
-Use the Explorer facets (under the **Rule** and **Policy** groups) to filter resources by the detection content applied to them, including MITRE ATT&CK tactics and techniques. This shows which parts of the MITRE ATT&CK framework are covered across your infrastructure.
-
-For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
-
-### Experiment with new rules
-
-You can use Coverage to test and iterate on custom security rules:
-
-1. Write and deploy a [new custom rule][4].
-2. In Coverage, search for the rule by rule ID, policy ID, or hostname.
-3. Confirm that the agent has loaded the rule successfully.
-4. If errors appear, review the verdict, fix the rule, and redeploy.
-
-## Workload coverage triage and response cycle
-
-As an example of how to use Coverage to triage and respond to coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
-
-1. Do a full environment view to establish baseline coverage status.
-2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
-3. Identify all unprotected or partially protected workloads.
-4. Prioritize assets with the highest business impact and exposure.
-5. Verify policy deployment and enforcement on those assets.
-6. Check for outdated or unhealthy agents on all remaining workloads.
-7. Map current detection coverage to MITRE ATT&CK to find gaps in tactics and techniques.
-8. Deploy or update detection rules to close those gaps.
-9. Reassess coverage to confirm posture changes took effect.
-10. Log the final state for compliance and future comparison.
-
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: https://app.datadoghq.com/security/workload-protection/inventory/coverage
-[2]: /security/detection_rules/#mitre-attck-map
-[3]: /security/workload_protection/setup/
-[4]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+[2]: /security/workload_protection/inventory/review_improve_coverage
 [5]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management#enable-and-deploy-policies

@@ -8835,6 +8835,11 @@ menu:
       parent: workload_protection
       identifier: workload_protection_inventory
       weight: 205
+    - name: Review and improve coverage
+      url: security/workload_protection/inventory/review_improve_coverage
+      parent: workload_protection_inventory
+      identifier: workload_protection_inventory_review_improve_coverage
+      weight: 1
     - name: Guides
       url: security/workload_protection/guide
       parent: workload_protection
