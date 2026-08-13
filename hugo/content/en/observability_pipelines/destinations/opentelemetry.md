@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry destination to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
+Use Observability Pipelines' {{< tooltip text=" OpenTelemetry destination" tooltip="Contact your account manager to request access." case="title" >}} to send metrics over HTTP/S to an OpenTelemetry (OTel) Collector or another OpenTelemetry Protocol (OTLP)-compatible endpoint.
 
 ## Set up destination
 
