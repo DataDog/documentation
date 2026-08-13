@@ -239,7 +239,7 @@ To reduce overhead:
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-To reduce overhead:
+To reduce overhead when profiling multiple processes:
 
 - Profile only specific applications by setting environment variables in batch files instead of at machine level.
 - Reduce the number of IIS pools being profiled (only possible in IIS 10 or later).
