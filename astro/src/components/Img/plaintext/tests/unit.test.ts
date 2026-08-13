@@ -4,7 +4,10 @@ import { imgNode } from "../Img";
 
 describe("imgNode", () => {
   it("renders an img tag with src and alt", () => {
-    const node = imgNode({ src: "https://prod.img.url", alt: "Browse the integration pipeline library" });
+    const node = imgNode({
+      src: "https://prod.img.url",
+      alt: "Browse the integration pipeline library",
+    });
     const result = format(node);
 
     expect(result).toContain("{% img");

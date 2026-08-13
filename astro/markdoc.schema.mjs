@@ -26,12 +26,26 @@ export default {
         src: { type: String, required: true },
         alt: { type: String },
         caption: { type: String },
-        style: { type: String },
         width: { type: String, default: false },
         height: { type: String, default: false },
+        widthPercent: { type: Number },
         video: { type: Boolean, default: false },
         inline: { type: Boolean, default: false },
         popup: { type: Boolean, default: true },
+      },
+      validate(node) {
+        const { width, height, widthPercent } = node.attributes;
+        if (widthPercent !== undefined && (width !== undefined || height !== undefined)) {
+          return [
+            {
+              id: "img-width-percent-conflict",
+              level: "error",
+              message:
+                "img: widthPercent can't be combined with width or height. widthPercent overrides them silently in the rendered CSS, so use one sizing approach.",
+            },
+          ];
+        }
+        return [];
       },
     },
     tabs: {

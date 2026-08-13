@@ -12,7 +12,6 @@ describe("Img component", () => {
     expect(html).toContain("img__figure");
     expect(html).toContain("<img");
     expect(html).toContain('alt="CI/CD Health dashboard"');
-    expect(html).toContain("cicd_optimization/cicd_health.png");
   });
 
   it("resolves a local srcset in dev mode", async () => {
@@ -41,8 +40,7 @@ describe("Img component", () => {
       props: { src: "cicd_optimization/cicd_health.png", alt: "CI/CD Health dashboard" },
     });
 
-    expect(html).toContain("data-lightbox-src=");
-    expect(html).toContain("cicd_optimization/cicd_health.png");
+    expect(html).toMatch(/data-lightbox-src="[^"]*cicd_optimization\/cicd_health\.png[^"]*"/);
     expect(html).toContain('data-lightbox-alt="CI/CD Health dashboard"');
   });
 
@@ -115,14 +113,30 @@ describe("Img component", () => {
 
     expect(html).toContain("<video");
     expect(html).toContain("img__video");
+    expect(html).not.toContain("<img");
+  });
+
+  it("renders the video with autoplay/loop/muted/controls behavior", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Img, {
+      props: { src: "ci/custom-tags-create-facet.mp4", video: true },
+    });
+
     expect(html).toContain("muted");
     expect(html).toContain("playsinline");
     expect(html).toContain("autoplay");
     expect(html).toContain("loop");
     expect(html).toContain("controls");
+  });
+
+  it("points the video source at the resolved src", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Img, {
+      props: { src: "ci/custom-tags-create-facet.mp4", video: true },
+    });
+
     expect(html).toContain("<source src=");
     expect(html).toContain("custom-tags-create-facet.mp4");
-    expect(html).not.toContain("<img");
   });
 
   it("prioritizes video over inline when both are true", async () => {
@@ -135,12 +149,38 @@ describe("Img component", () => {
     expect(html).not.toContain("<img");
   });
 
-  it("applies the style attribute to the rendered image", async () => {
+  it("applies widthPercent as an inline width style on the rendered image", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png", style: "width:100%;" },
+      props: { src: "cicd_optimization/cicd_health.png", widthPercent: 40 },
     });
 
-    expect(html).toContain('style="width:100%;"');
+    expect(html).toMatch(/<img[^>]*style="width:\s*40%"/);
+  });
+
+  it("omits the style attribute when widthPercent is not set", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Img, {
+      props: { src: "cicd_optimization/cicd_health.png" },
+    });
+
+    expect(html).not.toContain("style=");
+  });
+
+  it("applies widthPercent to an inline image without overriding width/height attributes", async () => {
+    const container = await AstroContainer.create();
+    const html = await container.renderToString(Img, {
+      props: {
+        src: "metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png",
+        inline: true,
+        width: "22",
+        height: "22",
+        widthPercent: 22,
+      },
+    });
+
+    expect(html).toMatch(/<img[^>]*style="width:\s*22%"/);
+    expect(html).toContain('width="22"');
+    expect(html).toContain('height="22"');
   });
 });

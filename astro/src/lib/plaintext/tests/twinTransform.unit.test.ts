@@ -63,34 +63,50 @@ describe("renderMdocWithTwins", () => {
   });
 
   it("routes an img through its twin, resolving src to the CDN URL", () => {
-    const source = '{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" /%}';
+    const source =
+      '{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" /%}';
     const out = renderMdocWithTwins(source);
 
     expect(out).toContain("{% img");
-    expect(out).toContain('src="https://imgix.datadoghq.com/cicd_optimization/cicd_health.png"');
+    expect(out).toContain(
+      'src="https://imgix.datadoghq.com/cicd_optimization/cicd_health.png"',
+    );
     expect(out).toContain('alt="CI/CD Health dashboard"');
+  });
+
+  it("drops inline images from the output", () => {
+    const source =
+      '{% img src="icons/pencil.png" inline=true width="22" height="22" /%}';
+    const out = renderMdocWithTwins(source);
+
+    expect(out).not.toContain("{% img");
   });
 
   it("drops layout-only attributes from img but keeps caption as an attribute", () => {
     const source = [
-      '{% img',
+      "{% img",
       'src="synthetics/guide/otp-from-email-body/simple_otp.png"',
       'alt="Example of an OTP with a simple text field"',
-      'style="width:40%;"',
+      'widthPercent=40',
       'caption="Example of an OTP with a simple text field"',
-      '/%}',
+      "/%}",
     ].join(" ");
     const out = renderMdocWithTwins(source);
 
-    expect(out).not.toContain("style=");
-    expect(out).toContain('caption="Example of an OTP with a simple text field"');
+    expect(out).not.toContain("widthPercent=");
+    expect(out).toContain(
+      'caption="Example of an OTP with a simple text field"',
+    );
   });
 
   it("marks a video img with video=true", () => {
-    const source = '{% img src="ci/custom-tags-create-facet.mp4" alt="Facet creation" video=true /%}';
+    const source =
+      '{% img src="ci/custom-tags-create-facet.mp4" alt="Facet creation" video=true /%}';
     const out = renderMdocWithTwins(source);
 
-    expect(out).toContain('src="https://imgix.datadoghq.com/ci/custom-tags-create-facet.mp4"');
+    expect(out).toContain(
+      'src="https://imgix.datadoghq.com/ci/custom-tags-create-facet.mp4"',
+    );
     expect(out).toContain("video=true");
   });
 

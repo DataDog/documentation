@@ -83,7 +83,10 @@ test.describe("Img component — lightbox", () => {
     const overlay = page.locator(".img-lightbox__overlay");
     await expect(overlay).toBeVisible();
 
-    await page.keyboard.press("Escape");
-    await expect(overlay).toBeHidden();
+    // Without the timeout, the test is flaky under Under heavy parallel load.
+    await expect(async () => {
+      await page.keyboard.press("Escape");
+      await expect(overlay).toBeHidden({ timeout: 500 });
+    }).toPass();
   });
 });

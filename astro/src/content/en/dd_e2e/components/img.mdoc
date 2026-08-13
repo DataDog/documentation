@@ -4,70 +4,48 @@ description: "Places an image or video in the content, ported from Hugo's `{{< i
 type: static
 ---
 
-Places an image or video in the content, wrapped in a `<figure>` by default. Images are served from `docs.dd-static.net`, with automatic `srcset` generation for 1x/2x pixel density.
+## Basic image
 
-## Properties
+{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" widthPercent=100 /%}
 
-**Unused in Hugo:** The Hugo shortcode also supports `href`, `target`, `wide`, `img_param`, `pop_param`, `figure_class`, and `figure_style`, but none of these appear in any real usage across `hugo/content/en/`. They're omitted here as low-priority for porting; see the source templates linked above if they're ever needed.
-
-| Property | Type | Default | Description |
-|----------|------|---------|-------------|
-| `src` | `string` | — | Required. Path to the image, relative to the site's images directory. |
-| `alt` | `string` | — | Alt text for accessibility. |
-| `caption` | `string` | — | Text displayed below the image in a `<figcaption>`. |
-| `style` | `string` | — | Inline CSS applied to the image (and its wrapping `<picture>`). |
-| `width` | `string` | — | Width attribute on the rendered `<img>`. |
-| `height` | `string` | — | Height attribute on the rendered `<img>`. |
-| `inline` | `boolean` | `false` | Renders a bare inline `<img>` (no figure wrapper, no popup, no srcset). |
-| `video` | `boolean` | `false` | Renders `src` as an autoplaying, looping, muted `<video>` instead of an image. |
-| `popup` | `boolean` | `true` | Wraps the image in a link that opens it full-size in a modal. |
-
-**Note:** `video`, `inline`, and `popup` are evaluated in that priority order — for example, `video=true` takes precedence over `inline`.
-
-## Examples
-
-### Basic image
-
-{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" style="width:100%;" /%}
-
-### Image in a tab
+## Image in a tab
 
 {% tabs %}
 {% tab label="Result" %}
-{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" style="width:100%;" /%}
+{% img src="cicd_optimization/cicd_health.png" alt="CI/CD Health dashboard" widthPercent=100 /%}
 {% /tab %}
 {% tab label="Test" %}
 Test
 {% /tab %}
 {% /tabs %}
 
-### With a caption
+## With a caption
 
 {% img
   src="synthetics/guide/otp-from-email-body/simple_otp.png"
   alt="Example of an OTP with a simple text field"
-  style="width:40%;"
+  widthPercent=40
   caption="Example of an OTP with a simple text field"
 /%}
 
-### Popup disabled
+## Popup disabled
 
 {% img
   src="account_management/audit_logs/reference_tables.png"
   alt="The Datadog Audit Trail explorer with reference table search options highlighted"
   popup=false
-  style="width:100%;"
+  widthPercent=100
 /%}
 
-### Inline image
+## Inline image
 
-Click the {% img src="metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png" inline=true width="22" alt="sidebar icon" /%} icon to expand the sidebar.
+Hover over an app and click the edit {% img src="icons/pencil.png" inline=true width="22" height="22" /%} icon.
 
-### Video
+## Video
 
 {% img
   src="ci/custom-tags-create-facet.mp4"
   alt="Facet creation for custom tag"
-  style="width:100%;"
+  widthPercent=100
   video=true
 /%}

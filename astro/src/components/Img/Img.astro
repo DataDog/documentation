@@ -13,9 +13,9 @@ interface Props {
   src: string;
   alt?: string;
   caption?: string;
-  style?: string;
   width?: string;
   height?: string;
+  widthPercent?: number;
   video?: boolean;
   inline?: boolean;
   popup?: boolean;
@@ -25,13 +25,21 @@ const {
   src,
   alt,
   caption,
-  style,
   width,
   height,
+  widthPercent,
   video = false,
   inline = false,
   popup = true,
 } = Astro.props;
+
+const widthPercentStyle = widthPercent
+  ? `width: ${widthPercent}%`
+  : undefined;
+
+/** Not sure if staging will require an additional CDN URL or prefix.
+ * Revisit when the CDN is configured.
+ */
 
 async function resolveVideoUrl(): Promise<string> {
   if (import.meta.env.PROD) {
@@ -44,8 +52,6 @@ async function resolveVideoUrl(): Promise<string> {
   return localVideoUrl;
 }
 
-// TODO: I'm not confident about the prod implementation here. Do we
-// also need a staging URL? Probably revisit when the imgix CDN is configured.
 async function resolveImageUrls(): Promise<{
   imageUrl: string;
   srcset: string;
@@ -78,7 +84,7 @@ const media = video
     <figure class={cl("img__figure")}>
       <video
         class={cl("img__video")}
-        style={style}
+        style={widthPercentStyle}
         width={width}
         height={height}
         muted
@@ -94,7 +100,7 @@ const media = video
     <img
       class={cl("img__image")}
       srcset={media.srcset}
-      style={style}
+      style={widthPercentStyle}
       width={width}
       height={height}
       alt={alt}
@@ -109,11 +115,11 @@ const media = video
           data-lightbox-alt={alt}
           data-astro-reload
         >
-          <picture style={style}>
+          <picture>
             <img
               class={cl("img__image")}
               srcset={media.srcset}
-              style={style}
+              style={widthPercentStyle}
               width={width}
               height={height}
               alt={alt}
@@ -121,11 +127,11 @@ const media = video
           </picture>
         </a>
       ) : (
-        <picture style={style}>
+        <picture>
           <img
             class={cl("img__image")}
             srcset={media.srcset}
-            style={style}
+            style={widthPercentStyle}
             width={width}
             height={height}
             alt={alt}
