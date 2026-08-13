@@ -6,11 +6,13 @@
  * Reuses the docs accordion's BEM classes (`mobile-nav__section`,
  * `mobile-nav__section-toggle`, `mobile-nav__sublist`, `mobile-nav__link`) so
  * the two trees stay visually identical and share one set of styles — the only
- * API-specific tweak is the `--compact` operation density. Each category is a
- * collapsible <details> section; the active category starts expanded so users
- * can browse and navigate operations without leaving the current page.
+ * API-specific tweak is the `--compact` operation density. The Overview group
+ * of hand-written pages comes first, mirroring the desktop side nav, then each
+ * category; the section owning the current page starts expanded so users can
+ * browse and navigate without leaving the page.
  */
 import type { ApiCategory } from "@lib/api/schemas/views";
+import type { OverviewPage } from "@lib/api/overviewPages";
 import styles from "./MobileNav.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
 import { localizedHref, type Locale } from "@lib/i18n/locale";
@@ -21,14 +23,72 @@ interface Props {
   categories: ApiCategory[];
   activeCategorySlug?: string;
   currentOperationSlug?: string;
+  overviewPages?: OverviewPage[];
+  isOverviewSection?: boolean;
+  activeOverviewPageSlug?: string;
   lang: Locale;
 }
 
-const { categories, activeCategorySlug, currentOperationSlug, lang } = Astro.props;
+const {
+  categories,
+  activeCategorySlug,
+  currentOperationSlug,
+  overviewPages = [],
+  isOverviewSection = false,
+  activeOverviewPageSlug,
+  lang,
+} = Astro.props;
 const cl = classListFactory(styles);
+
+const overviewHref = localizedHref(lang, "/api/latest/");
+const isApiRootPage = isOverviewSection && !activeOverviewPageSlug;
 ---
 
 <ul class:list={[cl("mobile-nav__list"), cl("mobile-nav__list--api")]}>
+  {
+    overviewPages.length > 0 && (
+      <li>
+        <details
+          class={cl("mobile-nav__section")}
+          data-level="0"
+          style="--depth:0"
+          open={isOverviewSection || undefined}
+        >
+          <summary
+            class={cl("mobile-nav__section-toggle")}
+            aria-current={isApiRootPage ? "page" : undefined}
+          >
+            <span>Overview</span>
+            <span class={cl("mobile-nav__caret")} aria-hidden="true">
+              <SvgIcon src="caret-down.svg" />
+            </span>
+          </summary>
+          <ul class={cl("mobile-nav__sublist")}>
+            {overviewPages.map((page) => {
+              const isActivePage = page.slug === activeOverviewPageSlug;
+              return (
+                <li>
+                  <a
+                    href={`${overviewHref}${page.slug}/`}
+                    class:list={[
+                      cl("mobile-nav__link"),
+                      cl("mobile-nav__link--compact"),
+                      isActivePage && cl("mobile-nav__link--active"),
+                    ]}
+                    data-level="1"
+                    style="--depth:1"
+                    aria-current={isActivePage ? "page" : undefined}
+                  >
+                    {page.title}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      </li>
+    )
+  }
   {
     categories.map((category) => {
       const isActiveCategory = category.slug === activeCategorySlug;

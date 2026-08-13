@@ -1,6 +1,10 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import ApiSideNav from "@components/ApiSideNav/ApiSideNav.astro";
+import {
+  getOverviewPages,
+  resolveOverviewState,
+} from "@lib/api/overviewPages";
 import Breadcrumbs from "@components/Breadcrumbs/Breadcrumbs.astro";
 import type { BreadcrumbItem } from "@components/Breadcrumbs/Breadcrumbs.astro";
 import RegionSelectorIsland from "@components/RegionSelector/RegionSelectorIsland.astro";
@@ -31,6 +35,12 @@ const { lang: currentLang, rest: unprefixedPath } = stripLocalePrefix(
   Astro.url.pathname,
 );
 const hreflang = buildHreflangAlternates(unprefixedPath);
+
+const overviewPages = await getOverviewPages();
+const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
+  overviewPages,
+  unprefixedPath,
+);
 ---
 
 <BaseLayout
@@ -44,6 +54,9 @@ const hreflang = buildHreflangAlternates(unprefixedPath);
       categories={categories}
       activeCategory={activeCategory}
       currentOperationSlug={currentOperationSlug}
+      overviewPages={overviewPages}
+      isOverviewSection={isOverviewSection}
+      activeOverviewPageSlug={activeOverviewPageSlug}
     />
     <main class="api-main">
       <div class="api-toolbar">

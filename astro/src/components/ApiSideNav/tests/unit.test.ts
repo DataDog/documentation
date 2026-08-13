@@ -135,6 +135,80 @@ describe('ApiSideNav component', () => {
     expect(html).toContain('Create a dashboard');
   });
 
+  describe('Overview section', () => {
+    const overviewPages = [
+      { title: 'Authorization Scopes', slug: 'scopes' },
+      { title: 'Rate Limits', slug: 'rate-limits' },
+      { title: 'Using the API', slug: 'using-the-api' },
+    ];
+
+    it('renders an Overview link ahead of the spec categories', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, { props: { categories, overviewPages } });
+
+      expect(html).toContain('Overview');
+      expect(html).toContain('/api/latest/');
+      // Overview is pinned first, above every spec category.
+      expect(html.indexOf('Overview')).toBeLessThan(html.indexOf('Dashboards'));
+    });
+
+    it('collapses the sub pages when the current page is outside the section', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, activeCategory: dashboards },
+      });
+
+      expect(html).toContain('Overview');
+      expect(html).not.toContain('Rate Limits');
+      expect(html).not.toContain('Using the API');
+    });
+
+    it('lists the sub pages when the API root is the current page', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, isOverviewSection: true },
+      });
+
+      expect(html).toContain('Rate Limits');
+      expect(html).toContain('/api/latest/rate-limits/');
+      expect(html).toContain('Using the API');
+      expect(html).toContain('Authorization Scopes');
+    });
+
+    it('flags Overview as active on the API root, with no sub page active', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: { categories, overviewPages, isOverviewSection: true },
+      });
+
+      expect(html).toMatch(/api-side-nav__category--active/);
+      expect(html).not.toMatch(/api-side-nav__operation--active/);
+    });
+
+    it('flags the current sub page with the active modifier', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, {
+        props: {
+          categories,
+          overviewPages,
+          isOverviewSection: true,
+          activeOverviewPageSlug: 'rate-limits',
+        },
+      });
+
+      expect(html).toMatch(/api-side-nav__operation--active/);
+      // Sibling sub pages stay listed without the modifier.
+      expect(html).toContain('Using the API');
+    });
+
+    it('renders nothing extra when no overview pages are supplied', async () => {
+      const container = await createContainer();
+      const html = await container.renderToString(ApiSideNav, { props: { categories } });
+
+      expect(html).not.toContain('Overview');
+    });
+  });
+
   it('renders the SearchBar in the dedicated slot at the top of the nav', async () => {
     const container = await createContainer();
     const html = await container.renderToString(ApiSideNav, { props: { categories } });

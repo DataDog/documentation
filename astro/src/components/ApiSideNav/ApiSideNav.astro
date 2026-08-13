@@ -7,11 +7,15 @@ import SearchBar, {
 } from "@components/SearchBar/SearchBar";
 import { DEFAULT_LOCALE, localizedHref, type Locale } from "@lib/i18n/locale";
 import ScrollActiveIntoView from "@components/ScrollActiveIntoView/ScrollActiveIntoView.astro";
+import type { OverviewPage } from "@lib/api/overviewPages";
 
 interface Props {
   categories: ApiCategoryStub[];
   activeCategory?: ApiCategory;
   currentOperationSlug?: string;
+  overviewPages?: OverviewPage[];
+  isOverviewSection?: boolean;
+  activeOverviewPageSlug?: string;
   lang?: Locale;
 }
 
@@ -19,9 +23,15 @@ const {
   categories,
   activeCategory,
   currentOperationSlug,
+  overviewPages = [],
+  isOverviewSection = false,
+  activeOverviewPageSlug,
   lang = DEFAULT_LOCALE,
 } = Astro.props;
 const cl = classListFactory(styles);
+
+const overviewLabel = "Overview";
+const overviewHref = localizedHref(lang, "/api/latest/");
 
 // TODO: replace hardcoded English with i18n() once authoritative translation
 // keys exist for these strings in the Hugo i18n bundle.
@@ -43,6 +53,37 @@ const searchLabels: SearchBarLabels = {
     <SearchBar client:load labels={searchLabels} />
   </div>
   <ul class={cl("api-side-nav__list")}>
+    {overviewPages.length > 0 && (
+      <li>
+        <a
+          href={overviewHref}
+          class:list={[
+            cl("api-side-nav__category"),
+            isOverviewSection && cl("api-side-nav__category--active"),
+          ]}
+        >
+          {overviewLabel}
+        </a>
+        {isOverviewSection && (
+          <ul class={cl("api-side-nav__operations")}>
+            {overviewPages.map((page) => (
+              <li>
+                <a
+                  href={`${overviewHref}${page.slug}/`}
+                  class:list={[
+                    cl("api-side-nav__operation"),
+                    page.slug === activeOverviewPageSlug &&
+                      cl("api-side-nav__operation--active"),
+                  ]}
+                >
+                  {page.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </li>
+    )}
     {
       categories.map((cat) => {
         const isActive = cat.slug === activeCategory?.slug;
