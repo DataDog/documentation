@@ -102,12 +102,13 @@ Add a notification channel to your Team to route alerts to communication channel
 
 The team filter scopes your view to the teams you select. It appears on list pages across Datadog, and on dashboards and notebooks as a [template variable][40] on the `team` tag key.
 
-The filter combines two kinds of values in one control:
+The filter groups values into three sections:
 
-- **Teams**: Datadog Teams defined in your organization. The filter offers every team in your organization, not only the teams you belong to.
-- **Team tags**: `team` tag values found on your data that have no matching Datadog Team. These appear in a section below the teams.
+- **Your teams**: the Datadog Teams you belong to, shown as a hierarchy at the top of the filter.
+- {{< ui >}}All Teams{{< /ui >}}: every Datadog Team in your organization, including teams you do not belong to.
+- **Team tags**: `team` tag values on your data that have no matching Datadog Team. These appear in their own section.
 
-{{< img src="account_management/teams/team-filter.png" alt="Team filter showing a search box, a team hierarchy with a parent team expanded and two subteams selected, and an All Teams section below" style="width:35%;" >}}
+{{< img src="account_management/teams/team-filter.png" alt="Team filter with a search box, a parent team expanded to show two selected subteams, and an All Teams section below." style="width:35%;" >}}
 
 The team filter works by adding team-based search terms to the search query. After you make a selection, you can see the team-based search terms it adds in the search bar. To stop filtering by team, clear your selection.
 
@@ -115,10 +116,10 @@ Each section of the filter lists up to 50 items, sorted alphabetically. To reach
 
 ### Pin your selection
 
-Pin the team filter to carry your selection to the other pages you open. The pin sits at the top of the team filter and behaves like the time range pin.
+Pin the team filter to carry your selection to the other pages you open. The pin sits at the top of the team filter and carries the selection to other pages the same way the time range pin does.
 
 - Changing your selection while the filter is pinned changes what carries across pages.
-- Unpinning the filter means each page opens with no team selected.
+- When the filter is unpinned, each page opens with no team selected.
 
 Pinned selections are stored in your browser, on the device where you set them. They are not stored on your Datadog account, so opening Datadog in a different browser or on a different machine starts with no team selected.
 
@@ -128,22 +129,20 @@ Opening a link that carries team selections applies those selections to that vie
 
 Clicking a team selects that team and every team beneath it in the [team hierarchy][39].
 
-To select a team without cascading to the whole branch, shift+click the team. Two additional options appear:
+To select a team without cascading to the whole branch, Shift+click the team. Two additional options appear:
 
-- **The team on its own**: selects the team and excludes its subteams. Use this to see the data attributed to one team node without the aggregate of everything below it.
-- **The subteams without the team**: selects everything beneath the team and excludes the team itself. Teams added to that branch later are included automatically.
+- **The team on its own**: Selects the team and excludes its subteams. Use this to see the data attributed to one team node without the aggregate of everything below it.
+- **The subteams without the team**: Selects everything beneath the team and excludes the team itself. Teams added to that branch later are included automatically.
 
-After you shift+click, the team appears in its own branch with a `(self)` label. Select `(self)` to include the team itself, and clear it to include only the subteams.
+After you Shift+click, the team appears in its own branch with a {{< ui >}}(self){{< /ui >}} label. Select {{< ui >}}(self){{< /ui >}} to include the team itself, and clear it to include only the subteams.
 
-{{< img src="account_management/teams/team-filter-subteam-selection.png" alt="Team filter with a parent team expanded after a shift+click, showing a row labeled self that is cleared while two subteams below it are selected" style="width:35%;" >}}
-
-The first few times you open the team filter, a hint in the dropdown points out shift+click.
+{{< img src="account_management/teams/team-filter-subteam-selection.png" alt="Team filter with a parent team expanded after a Shift+click, showing a cleared self row above two selected subteams." style="width:35%;" >}}
 
 ### Search for a team
 
-Search matches your term as a substring anywhere in the value, and matching is case-insensitive. Both the team handle and the display name are searched, so a team named `Payments` with the handle `payments-platform` matches either term.
+Search matches your term as a substring anywhere in the value, and matching is case-insensitive. Both the team handle and the display name are searched, so searching for either `Payments` or `payments-platform` matches a team named `Payments` with the handle `payments-platform`.
 
-To match a value exactly, wrap the term in double quotes. With the teams `a`, `aa`, and `aaa`, searching for `a` returns all three, and searching for `"a"` returns only `a`.
+To match a value exactly, wrap the term in double quotes. With the teams `payments`, `payments-platform`, and `payments-fraud`, searching for `payments` returns all three, and searching for `"payments"` returns only `payments`.
 
 ### Supported products
 

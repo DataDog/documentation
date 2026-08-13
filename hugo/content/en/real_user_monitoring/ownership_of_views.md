@@ -16,7 +16,7 @@ Ownership of views lets you see only the RUM metrics and events for the parts of
 
 {{< img src="/real_user_monitoring/ownership_of_views/ownership-sessions-explorer-1.png" alt="View of Sessions Explorer, where you can filter user sessions based on the teams assigned in Team Ownership, making it easy to find replays relevant to your team." >}}
 
-Selecting teams filters the metrics and event data down to the views those teams own. If you belong to multiple teams, you can select any combination of them. To stop filtering by team, clear your selection. The teams that own a view are also listed in the top-right corner of all event side panels.
+Selecting teams filters the metrics and event data to the views those teams own. If you belong to multiple teams, you can select any combination of them. To stop filtering by team, clear your selection. The teams that own a view are also listed in the top-right corner of all event side panels.
 
 ## Ownership rules
 
