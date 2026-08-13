@@ -113,14 +113,14 @@ Build your custom Datadog Agent image and push it to a container registry.
    docker build . -t agent-ddot --no-cache \
      --build-arg AGENT_VERSION=$DD_AGENT_VERSION
    ```
-2. Tag and push the image:
+2. Tag and push the image. The image tag must match the Datadog Agent version your image is built from:
    ```shell
-   docker tag agent-ddot datadog/agent:<IMAGE-TAG>
-   docker push datadog/agent:<IMAGE-TAG>
+   docker tag agent-ddot datadog/agent:$DD_AGENT_VERSION
+   docker push datadog/agent:$DD_AGENT_VERSION
    ```
    Ensure your custom image name is `datadog/agent` to guarantee that all platform features work correctly. If the target repository is not Docker Hub, you need to include the repository name:
    ```shell
-   docker push <REPOSITORY-NAME>/datadog/agent:<IMAGE-TAG>
+   docker push <REPOSITORY-NAME>/datadog/agent:$DD_AGENT_VERSION
    ```
 
 3. For a Helm chart installation, set the image tag in your values file:
@@ -128,10 +128,16 @@ Build your custom Datadog Agent image and push it to a container registry.
 agents:
   image:
     repository: <YOUR-REPO>
-    tag: <IMAGE-TAG>
+    tag: {{< version key="agent_version" >}}
     doNotCheckTag: true
    {{< /code-block >}}
-   Replace `<YOUR-REPO>` and `<IMAGE-TAG>` with your repository name and desired image tag.
+   Replace `<YOUR-REPO>` with your repository name, and set `tag` to the Agent version your custom image is built from.
+
+<div class="alert alert-danger">
+The Datadog Helm chart reads <code>agents.image.tag</code> as an Agent version and uses it to enable or disable version-dependent behavior. A tag that is not a valid Agent version, such as <code>byoc-0.0.2</code>, causes the chart to fail or to misconfigure the Agent. Setting <code>doNotCheckTag: true</code> only skips the chart's minimum-version check; it does not exempt the tag from being parsed as a version.
+</div>
+
+To distinguish between builds of the same Agent version, append a [SemVer][10] prerelease identifier to the version, for example `{{< version key="agent_version" >}}-byoc.1`.
 
 ## Test and validate
 
@@ -262,3 +268,4 @@ docker system prune -a
 [7]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/processor/metricstransformprocessor/README.md
 [8]: https://github.com/open-telemetry/opentelemetry-collector-contrib/blob/main/receiver/jmxreceiver/README.md
 [9]: /opentelemetry/setup/ddot_collector/install/
+[10]: https://semver.org/
