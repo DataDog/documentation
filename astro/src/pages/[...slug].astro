@@ -3,10 +3,11 @@ export const prerender = true;
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '@layouts/BaseLayout.astro';
+import { isApiContentId } from '@lib/api/overviewPages';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // api/latest/* has its own route, which renders it with ApiLayout.
-  const docs = await getCollection('en', (entry) => !entry.id.startsWith('api/latest'));
+  // The hand-written API pages have their own route, which renders them with ApiLayout.
+  const docs = await getCollection('en', (entry) => !isApiContentId(entry.id));
   return docs.map((entry) => ({
     params: { slug: entry.id },
     props: { entry },

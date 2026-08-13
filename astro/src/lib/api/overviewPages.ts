@@ -15,6 +15,16 @@ export interface OverviewPage {
 export const API_CONTENT_DIR = 'api/latest';
 
 /**
+ * Whether a content-collection entry id belongs to the hand-written API
+ * section: the root (`api/latest`) or anything beneath `api/latest/`. The
+ * explicit root check avoids the trap where a bare `startsWith('api/latest')`
+ * would also match unrelated ids like `api/latest-guide`.
+ */
+export function isApiContentId(id: string): boolean {
+  return id === API_CONTENT_DIR || id.startsWith(`${API_CONTENT_DIR}/`);
+}
+
+/**
  * The hand-written overview sub pages, sorted by title. The API root
  * (`api/latest`) is excluded — it's the Overview section's landing page, not
  * a sub page. English-only for now; the collection has no localized entries.

@@ -4,13 +4,13 @@ import { getCollection, getEntry, render } from 'astro:content';
 import ApiLayout from '@layouts/ApiLayout.astro';
 import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
-import { API_CONTENT_DIR, getOverviewPagesView } from '@lib/api/overviewPages';
+import { API_CONTENT_DIR, isApiContentId, getOverviewPagesView } from '@lib/api/overviewPages';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
 import type { GetStaticPaths } from 'astro';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection('en', (entry) => entry.id.startsWith(API_CONTENT_DIR));
+  const entries = await getCollection('en', (entry) => isApiContentId(entry.id));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
     for (const entry of entries) {
