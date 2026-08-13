@@ -128,7 +128,7 @@ Opening a link that carries team selections applies those selections to that vie
 
 Clicking a team selects that team and every team beneath it in the [team hierarchy][39].
 
-To select a team without cascading to the whole branch, shift+click the team. Two additional options appear:
+To select a team without cascading to the whole branch, Shift+click the team. Two additional options appear:
 
 - **The team on its own**: selects the team and excludes its subteams. Use this to see the data attributed to one team node without the aggregate of everything below it.
 - **The subteams without the team**: selects everything beneath the team and excludes the team itself. Teams added to that branch later are included automatically.
