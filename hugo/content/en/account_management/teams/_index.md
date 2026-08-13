@@ -118,7 +118,7 @@ Each section of the filter lists up to 50 items, sorted alphabetically. To reach
 Pin the team filter to carry your selection to the other pages you open. The pin sits at the top of the team filter and behaves like the time range pin.
 
 - Changing your selection while the filter is pinned changes what carries across pages.
-- Unpinning the filter means each page opens with no team selected.
+- When the filter is unpinned, each page opens with no team selected.
 
 Pinned selections are stored in your browser, on the device where you set them. They are not stored on your Datadog account, so opening Datadog in a different browser or on a different machine starts with no team selected.
 
