@@ -51,14 +51,17 @@ test.describe("Img component — visual", () => {
 test.describe("Img component — lightbox", () => {
   test.beforeEach(async ({ page }) => {
     await page.goto("/dd_e2e/components/img");
-    // client:idle hydrates asynchronously; wait for the lightbox's click
-    // listener to attach so the trigger click doesn't fall through to a
-    // real navigation.
+    // client:idle hydrates asynchronously; wait for every ImgController
+    // island's click listener to attach so the trigger click doesn't fall
+    // through to a real navigation.
     await page.waitForFunction(() => {
-      const island = document.querySelector(
-        'astro-island[component-url*="ImgLightbox"]',
+      const islands = document.querySelectorAll(
+        'astro-island[component-url*="ImgController"]',
       );
-      return island?.getAttribute("ssr") === null;
+      return (
+        islands.length > 0 &&
+        Array.from(islands).every((island) => island.getAttribute("ssr") === null)
+      );
     });
   });
 
@@ -66,11 +69,11 @@ test.describe("Img component — lightbox", () => {
     page,
   }) => {
     const trigger = page.locator("main").locator(".img__link--popup").first();
-    const expectedSrc = await trigger.getAttribute("data-lightbox-src");
+    const expectedSrc = await trigger.getAttribute("href");
 
     await trigger.click();
 
-    const overlay = page.locator(".img-lightbox__overlay");
+    const overlay = page.locator(".img-lightbox__overlay:not([hidden])");
     await expect(overlay).toBeVisible();
     const lightboxImage = overlay.locator("img");
     await expect(lightboxImage).toHaveAttribute("src", expectedSrc ?? "");
@@ -80,7 +83,7 @@ test.describe("Img component — lightbox", () => {
     const trigger = page.locator("main").locator(".img__link--popup").first();
     await trigger.click();
 
-    const overlay = page.locator(".img-lightbox__overlay");
+    const overlay = page.locator(".img-lightbox__overlay:not([hidden])");
     await expect(overlay).toBeVisible();
 
     // Without the timeout, the test is flaky under Under heavy parallel load.

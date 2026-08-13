@@ -1,13 +1,10 @@
 ---
-import styles from "./Img.module.css";
-import { classListFactory } from "@lib/cssUtils/classListFactory";
+import ImgController from "@components/ImgController/ImgController";
 import {
   IMAGES_URL,
   resolveLocalContentImage,
   resolveLocalContentVideo,
 } from "@config/images";
-
-const cl = classListFactory(styles);
 
 interface Props {
   src: string;
@@ -32,10 +29,6 @@ const {
   inline = false,
   popup = true,
 } = Astro.props;
-
-const widthPercentStyle = widthPercent
-  ? `width: ${widthPercent}%`
-  : undefined;
 
 /** Not sure if staging will require an additional CDN URL or prefix.
  * Revisit when the CDN is configured.
@@ -77,68 +70,23 @@ async function resolveImageUrls(): Promise<{
 const media = video
   ? { kind: "video" as const, videoUrl: await resolveVideoUrl() }
   : { kind: "image" as const, ...(await resolveImageUrls()) };
+
+const imageUrl = media.kind === "video" ? media.videoUrl : media.imageUrl;
+const srcset = media.kind === "video" ? "" : media.srcset;
+const popupHref = media.kind === "video" ? "" : media.popupHref;
 ---
 
-{
-  media.kind === "video" ? (
-    <figure class={cl("img__figure")}>
-      <video
-        class={cl("img__video")}
-        style={widthPercentStyle}
-        width={width}
-        height={height}
-        muted
-        playsinline
-        autoplay
-        loop
-        controls
-      >
-        <source src={media.videoUrl} type="video/mp4" />
-      </video>
-    </figure>
-  ) : inline ? (
-    <img
-      class={cl("img__image")}
-      srcset={media.srcset}
-      style={widthPercentStyle}
-      width={width}
-      height={height}
-      alt={alt}
-    />
-  ) : (
-    <figure class={cl("img__figure")}>
-      {popup ? (
-        <a
-          href={media.popupHref}
-          class={cl("img__link", "img__link--popup")}
-          data-lightbox-src={media.popupHref}
-          data-lightbox-alt={alt}
-          data-astro-reload
-        >
-          <picture>
-            <img
-              class={cl("img__image")}
-              srcset={media.srcset}
-              style={widthPercentStyle}
-              width={width}
-              height={height}
-              alt={alt}
-            />
-          </picture>
-        </a>
-      ) : (
-        <picture>
-          <img
-            class={cl("img__image")}
-            srcset={media.srcset}
-            style={widthPercentStyle}
-            width={width}
-            height={height}
-            alt={alt}
-          />
-        </picture>
-      )}
-      {caption && <figcaption class={cl("img__caption")}>{caption}</figcaption>}
-    </figure>
-  )
-}
+<ImgController
+  client:idle
+  imageUrl={imageUrl}
+  srcset={srcset}
+  popupHref={popupHref}
+  alt={alt}
+  caption={caption}
+  width={width}
+  height={height}
+  widthPercent={widthPercent}
+  video={video}
+  inline={inline}
+  popup={popup}
+/>

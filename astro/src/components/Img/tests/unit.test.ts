@@ -1,15 +1,23 @@
 import { describe, it, expect } from "vitest";
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
+// @ts-ignore — Preact renderer is registered for SSR of the ImgController island.
+import preactRenderer from "@astrojs/preact/server.js";
 import Img from "../Img.astro";
+
+async function renderImg(props: Record<string, unknown>) {
+  const container = await AstroContainer.create();
+  container.addServerRenderer({
+    renderer: preactRenderer,
+    name: "@astrojs/preact",
+  });
+  return container.renderToString(Img as never, { props });
+}
 
 describe("Img component", () => {
   it("renders a figure-wrapped image by default", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "cicd_optimization/cicd_health.png",
-        alt: "CI/CD Health dashboard",
-      },
+    const html = await renderImg({
+      src: "cicd_optimization/cicd_health.png",
+      alt: "CI/CD Health dashboard",
     });
 
     expect(html).toContain("img__figure");
@@ -18,59 +26,26 @@ describe("Img component", () => {
   });
 
   it("resolves a local srcset in dev mode", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png" },
-    });
+    const html = await renderImg({ src: "cicd_optimization/cicd_health.png" });
 
     expect(html).toContain("srcset=");
     expect(html).toContain("cicd_optimization/cicd_health.png");
   });
 
   it("wraps the image in a popup link by default", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "cicd_optimization/cicd_health.png",
-        alt: "CI/CD Health dashboard",
-      },
+    const html = await renderImg({
+      src: "cicd_optimization/cicd_health.png",
+      alt: "CI/CD Health dashboard",
     });
 
     expect(html).toContain("img__link--popup");
     expect(html).toContain("<a href=");
   });
 
-  it("annotates the popup link with lightbox data attributes", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "cicd_optimization/cicd_health.png",
-        alt: "CI/CD Health dashboard",
-      },
-    });
-
-    expect(html).toMatch(
-      /data-lightbox-src="[^"]*cicd_optimization\/cicd_health\.png[^"]*"/,
-    );
-    expect(html).toContain('data-lightbox-alt="CI/CD Health dashboard"');
-  });
-
-  it("omits the lightbox alt attribute when alt is not set", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png" },
-    });
-
-    expect(html).not.toContain("data-lightbox-alt=");
-  });
-
   it("omits the popup link when popup is false", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "account_management/audit_logs/reference_tables.png",
-        popup: false,
-      },
+    const html = await renderImg({
+      src: "account_management/audit_logs/reference_tables.png",
+      popup: false,
     });
 
     expect(html).not.toContain("img__link--popup");
@@ -78,12 +53,9 @@ describe("Img component", () => {
   });
 
   it("renders a figcaption when caption is set", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "synthetics/guide/otp-from-email-body/simple_otp.png",
-        caption: "Example of an OTP with a simple text field",
-      },
+    const html = await renderImg({
+      src: "synthetics/guide/otp-from-email-body/simple_otp.png",
+      caption: "Example of an OTP with a simple text field",
     });
 
     expect(html).toContain("<figcaption");
@@ -91,22 +63,16 @@ describe("Img component", () => {
   });
 
   it("omits the figcaption when caption is not set", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png" },
-    });
+    const html = await renderImg({ src: "cicd_optimization/cicd_health.png" });
 
     expect(html).not.toContain("<figcaption");
   });
 
   it("renders a bare inline img with no figure or popup", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png",
-        inline: true,
-        width: "22",
-      },
+    const html = await renderImg({
+      src: "metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png",
+      inline: true,
+      width: "22",
     });
 
     expect(html).not.toContain("img__figure");
@@ -117,10 +83,7 @@ describe("Img component", () => {
   });
 
   it("renders a video instead of an image when video is true", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "ci/custom-tags-create-facet.mp4", video: true },
-    });
+    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
 
     expect(html).toContain("<video");
     expect(html).toContain("img__video");
@@ -128,10 +91,7 @@ describe("Img component", () => {
   });
 
   it("renders the video with autoplay/loop/muted/controls behavior", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "ci/custom-tags-create-facet.mp4", video: true },
-    });
+    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
 
     expect(html).toContain("muted");
     expect(html).toContain("playsinline");
@@ -141,23 +101,17 @@ describe("Img component", () => {
   });
 
   it("points the video source at the resolved src", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "ci/custom-tags-create-facet.mp4", video: true },
-    });
+    const html = await renderImg({ src: "ci/custom-tags-create-facet.mp4", video: true });
 
     expect(html).toContain("<source src=");
     expect(html).toContain("custom-tags-create-facet.mp4");
   });
 
   it("prioritizes video over inline when both are true", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "ci/custom-tags-create-facet.mp4",
-        video: true,
-        inline: true,
-      },
+    const html = await renderImg({
+      src: "ci/custom-tags-create-facet.mp4",
+      video: true,
+      inline: true,
     });
 
     expect(html).toContain("<video");
@@ -165,19 +119,16 @@ describe("Img component", () => {
   });
 
   it("applies widthPercent as an inline width style on the rendered image", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png", widthPercent: 40 },
+    const html = await renderImg({
+      src: "cicd_optimization/cicd_health.png",
+      widthPercent: 40,
     });
 
-    expect(html).toMatch(/<img[^>]*style="width:\s*40%"/);
+    expect(html).toMatch(/<img[^>]*style="width:\s*40%;?"/);
   });
 
   it("omits the style attribute when widthPercent is not set", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png" },
-    });
+    const html = await renderImg({ src: "cicd_optimization/cicd_health.png" });
 
     expect(html).not.toContain("style=");
   });

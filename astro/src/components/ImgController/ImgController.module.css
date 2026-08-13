@@ -1,6 +1,21 @@
+.img__figure {
+  margin: 0 0 1rem;
+}
+
+.img__image,
+.img__video {
+  max-width: 100%;
+  height: auto;
+  /* matches Hugo's $ddgray (#d6d6d6); no equivalent design token exists yet */
+  border: 1px solid #d6d6d6;
+}
+
+.img__link--popup {
+  cursor: zoom-in;
+}
+
 /* Ported from hugo/layouts/partials/global-modals/global-modals.html +
-   hugo/assets/scripts/components/global-modals.js (Bootstrap 5 Modal). No
-*/
+   hugo/assets/scripts/components/global-modals.js (Bootstrap 5 Modal). */
 
 .img-lightbox__overlay {
   position: fixed;
