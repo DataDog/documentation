@@ -80,9 +80,7 @@ To help you manage the quality and volume of your metrics, use the Metric Tag Go
 
 ### Trace Sampling
 
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
-
-Ingesting and storing every trace can be costly at scale. Use the Trace Sampling template to ingest, process, and route your traces telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
+Ingesting and storing every trace can be costly at scale. Use the Trace Sampling template to ingest, process, and route your {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
 
 {{% /tab %}}
 {{< /tabs >}}

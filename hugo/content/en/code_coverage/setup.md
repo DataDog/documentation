@@ -529,6 +529,8 @@ If you use an external tool (such as [ReportGenerator][16]) to merge coverage re
 ensure your merged reports do not contain duplicate source code file entries.
 Datadog deduplicates overlapping files across reports, which can result in differences between your original coverage values and the merged values displayed in the Datadog UI.
 
+For a description of how reports are merged and how each line status is counted, see [Code Coverage Calculation][20].
+
 ## Further reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -552,3 +554,4 @@ Datadog deduplicates overlapping files across reports, which can result in diffe
 [17]: /tests/setup/
 [18]: /code_coverage/setup/#integrate-with-source-code-provider
 [19]: https://app.datadoghq.com/organization-settings/data-access-controls
+[20]: /code_coverage/coverage_calculation
