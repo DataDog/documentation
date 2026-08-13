@@ -15,10 +15,6 @@ further_reading:
 
 ---
 
-{{< callout url="https://www.datadoghq.com/" btn_hidden="true">}}
-Prompt Management is in Preview.
-{{< /callout >}}
-
 ## Overview
 
 Prompt Management provides a centralized registry for the prompts used by your LLM applications. Instead of hardcoding prompt templates in application code or configuration files, create, version, and update prompts through Agent Observability, then retrieve them at runtime.
@@ -30,6 +26,7 @@ Prompt Management works alongside [Prompt Tracking][1]. When Agent Observability
 ## Prerequisites
 
 - Python 3.9 or later.
+- ddtrace>=4.13.0
 - Your [Datadog site][2] and a [Datadog API key][3]. The API key is required for prompt retrieval even if traces are sent through the Datadog Agent.
 - A [Datadog application key][4] with the `llm_observability_read`, `feature_flag_config_read`, and `feature_flag_environment_config_read` permissions to resolve prompts by environment. If you select an existing application key in Datadog, ensure that it has these permissions.
 - To manage prompts through the API or Python SDK, the application key also requires the `llm_observability_write` and `feature_flag_config_write` permissions.
