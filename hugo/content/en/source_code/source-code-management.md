@@ -11,6 +11,9 @@ further_reading:
 - link: "/integrations/azure-devops-source-code/"
   tag: "Documentation"
   text: "Learn about the Azure DevOps Source Code Integration"
+- link: "/integrations/bitbucket/"
+  tag: "Documentation"
+  text: "Learn about the Bitbucket Source Code Integration"  
 ---
 
 ## Overview
