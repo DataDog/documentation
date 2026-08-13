@@ -27,11 +27,11 @@ Datadog supports the following features for the SCM providers listed below. See 
 
 | Feature | GitHub | GitLab | Azure DevOps | Bitbucket |
 |---|---|---|---|---|
-| **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | No <br />(Bitbucket.org) |
+| **Connect SaaS Instance** | Yes <br />(GitHub.com and GitHub Enterprise Cloud) | Yes <br />(GitLab.com) | Yes <br />(Azure DevOps Services) | Yes <br />(Bitbucket Cloud Premium) |
 | **Connect On-Prem Instance** | Yes <br />(GitHub Enterprise Server) | Yes <br />(GitLab Self-Managed or Dedicated) | No <br />(Azure DevOps Server) | No <br />(Bitbucket Data Center or Server)|
 | **Context Links** | Yes | Yes | Yes | Yes |
-| **Code Snippets** | Yes | Yes | Yes | No |
-| **PR Comments** | Yes | Yes | Yes | No |
+| **Code Snippets** | Yes | Yes | Yes | Yes |
+| **PR Comments** | Yes | Yes | Yes | Yes |
 
 {{< tabs >}}
 {{% tab "GitHub (SaaS & On-Prem)" %}}
@@ -64,13 +64,32 @@ Install Datadog's [GitLab Source Code integration][101] using the [integration t
 {{% /tab %}}
 {{% tab "Azure DevOps (SaaS Only)" %}}
 
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The Azure DevOps Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+{{< /site-region >}}
+
 <div class="alert alert-warning">
-Repositories from Azure DevOps instances are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
+Repositories from Azure DevOps organizations are supported for Azure DevOps Services (SaaS). Azure DevOps Server (On-Prem) is <strong>not</strong> supported.
 </div>
 
 Install Datadog's Azure DevOps Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Azure DevOps repositories.
 
 [101]: https://app.datadoghq.com/integrations/azure-devops-source-code/
+
+{{% /tab %}}
+{{% tab "Bitbucket (SaaS Only)" %}}
+
+{{< site-region region="gov,gov2" >}}
+<div class="alert alert-danger">The Bitbucket Cloud Source Code integration is not supported on your selected site ({{< region-param key="dd_site_name" >}}). On GovCloud, use the <a href="/integrations/github/">GitHub integration</a> for source code connectivity.</div>
+{{< /site-region >}}
+
+<div class="alert alert-warning">
+Repositories from Bitbucket workspaces are supported for Bitbucket Cloud (SaaS). Bitbucket Server and Bitbucket Data Center (On-Prem) are <strong>not</strong> supported.
+</div>
+
+Install Datadog's Bitbucket Cloud Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Bitbucket Cloud repositories.
+
+[101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
