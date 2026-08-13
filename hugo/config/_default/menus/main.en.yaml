@@ -3090,6 +3090,11 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
+    - name: Guides
+      url: actions/forms/guide/
+      parent: forms
+      identifier: forms_guides
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3754,6 +3759,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
+    - name: Manual Instrumentation
+      url: serverless/azure_container_apps/manual_instrumentation
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_manual
+      weight: 1
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -5291,11 +5301,6 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Business Transaction Tracking
-      url: data_streams/business_transaction_tracking
-      identifier: data_streams_business_transaction_tracking
-      parent: data_streams
-      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
@@ -5354,6 +5359,16 @@ menu:
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
+      weight: 1000000
+    - name: Transactional Databases
+      url: data_observability/quality_monitoring/transactional_databases
+      identifier: transactional_databases
+      parent: quality_monitoring
+      weight: 260000
+    - name: PostgreSQL
+      url: data_observability/quality_monitoring/transactional_databases/postgres
+      identifier: data_obs_postgres
+      parent: transactional_databases
       weight: 1000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
@@ -6731,11 +6746,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
       weight: 108
+    - name: Network Traffic
+      url: observability_pipelines/configuration/network_traffic
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_network_traffic
+      weight: 109
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 109
+      weight: 110
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
