@@ -97,19 +97,12 @@ To get hierarchy-aware team selection for that data, define the template variabl
 1. Add a template variable with the tag key `team`. It renders as the team filter.
 1. In each widget query, filter on the tag key your data uses, and put `$team.value` where the value goes.
 
-For a widget querying cases on an `attributes.team` attribute:
+The same substitution works for any tag key. Write the query as you normally would, then replace the team handle with `$team.value`:
 
-| | Query |
-|---|---|
-| Before | `attributes.team:payments-platform` |
-| After | `attributes.team:$team.value` |
-
-For a Cloud Cost widget querying a `team_attribution` tag:
-
-| | Query |
-|---|---|
-| Before | `sum:all.cost{team_attribution:payments-platform} by {team_attribution}` |
-| After | `sum:all.cost{team_attribution:$team.value} by {team_attribution}` |
+| Widget | Query with a team handle | Query with `$team.value` |
+|---|---|---|
+| Case Management (`attributes.team`) | `attributes.team:payments-platform` | `attributes.team:$team.value` |
+| Cloud Cost (`team_attribution`) | `sum:all.cost{team_attribution:payments-platform}` | `sum:all.cost{team_attribution:$team.value}` |
 
 #### How selections resolve
 
