@@ -66,7 +66,7 @@ You can configure PR Gates rules for the following categories. Please note that 
 
 After creating PR Gates rules, Datadog automatically creates checks on your pull requests using the [GitHub integration][5] or [Azure DevOps Source Code integration][6]. Set those checks as required in GitHub or Azure DevOps when you are ready to enforce them.
 
-PR Gates also enable emoji reactions (similar to PR Comments). Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Gates is still waiting for results to arrive. After all results have arrived:
+PR Gates also enable emoji reactions (similar to [PR Comments][12]). Datadog posts a 👀 reaction on the description of the PR when a Datadog product that has PR Gates is still waiting for results to arrive. After all results have arrived:
   * If all results are positive, the reaction is changed to 👍.
   * If there is at least one finding, the 👀 reaction is removed because the Summary Comment includes details on the findings instead.
 
@@ -153,3 +153,4 @@ You can see all of the rules defined by the organization.
 [9]: /monitors/
 [10]: /security/code_security/secret_scanning/
 [11]: /tests/flaky_tests/
+[12]: /source_code/features/#pr-comments
