@@ -153,8 +153,6 @@ datadog:
 
 {{% tab "Traces" %}}
 
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
-
 Use the Agent configuration file or the Agent Helm chart values file to connect the Datadog Agent to the Observability Pipelines Worker.
 
 {{% collapse-content title="Agent configuration file" level="h4" expanded=false id="traces-agent-config-file" %}}
