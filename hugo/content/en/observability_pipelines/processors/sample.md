@@ -14,14 +14,14 @@ products:
 
 ## Overview
 
-This processor samples your logging traffic for a representative subset at the rate that you define, dropping the remaining events. As an example, you can use this processor to sample 20% of events from a noisy non-critical service.
+This processor samples your logs or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} for a representative subset at the rate that you define, dropping the remaining events. As an example, you can use this processor to sample 20% of events from a noisy non-critical service.
 
-The sampling only applies to events that match your filter query and does not impact other events. If an event is dropped at this processor, none of the processors below receives that event.
+The sampling only applies to events that match your filter query and does not impact other events. If an event is dropped at this processor, the event is not sent to subsequent processors.
 
 ## Setup
 
 To set up the sample processor:
-1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [APM Query Syntax][] for more information.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [APM Query Syntax][2] for more information.
     - Only events that match the specified filter query are sampled at the specified retention rate below.
     - The sampled events and the events that do not match the filter query are sent to the next step in the pipeline.
 1. Enter your desired sampling rate in the {{< ui >}}Retain{{< /ui >}} field. For example, entering `2` means 2% of events are retained out of all events that match the filter query.
