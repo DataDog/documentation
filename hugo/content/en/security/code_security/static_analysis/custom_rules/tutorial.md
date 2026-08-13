@@ -104,6 +104,8 @@ To use the rule, do one of the following:
 
 A valid configuration for using this ruleset (and no other ruleset) looks like the following:
 
+This configuration intentionally disables every default ruleset, including AI-native SAST rulesets.
+
 ```yaml
 schema-version: v1.0
 sast:

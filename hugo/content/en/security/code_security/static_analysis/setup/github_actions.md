@@ -83,6 +83,8 @@ sast:
 
 Refer to the [Datadog documentation][6] for a complete list of rulesets.
 
+The repository configuration is also used by Datadog-hosted scans. Setting `use-default-rulesets: false` disables default AI-native SAST rulesets as well as traditional SAST rulesets. If you use AI-native SAST, include the applicable `<language>-ai_sast` rulesets or retain the default rulesets. See [Configure AI-native SAST][9].
+
 ### Example for Python
 
 Here is an example for Python-based repositories:
@@ -118,3 +120,4 @@ Additional helpful documentation, links, and articles:
 [6]: /security/code_security/static_analysis/static_analysis_rules/
 [7]: https://github.com/DataDog/datadog-sca-github-action
 [8]: https://github.com/DataDog/datadog-static-analyzer
+[9]: /security/code_security/static_analysis/configuration/#configure-ai-native-sast

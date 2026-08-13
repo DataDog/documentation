@@ -88,6 +88,11 @@ AI-native SAST uses a two-phase approach:
 | C#         | Available   |
 | JavaScript | Available   |
 | TypeScript | Available   |
+| Kotlin     | Available   |
+| PHP        | Available   |
+| Ruby       | Available   |
+| Rust       | Available   |
+| Elixir     | Available   |
 
 ### Detected vulnerability types
 
@@ -95,10 +100,12 @@ AI-native SAST uses a two-phase approach:
 AI-native SAST detects the following vulnerability types:
 
 - [CWE-89: SQL Injection](https://cwe.mitre.org/data/definitions/89.html)
-- [CWE-77: Command Injection](https://cwe.mitre.org/data/definitions/77.html)
+- [CWE-78: Command Injection](https://cwe.mitre.org/data/definitions/78.html)
 - [CWE-79: Cross-Site Scripting (XSS)](https://cwe.mitre.org/data/definitions/79.html)
 - [CWE-643: XPath Injection](https://cwe.mitre.org/data/definitions/643.html)
 - [CWE-22: Path Traversal](https://cwe.mitre.org/data/definitions/22.html)
+- [CWE-73: Zip Slip](https://cwe.mitre.org/data/definitions/73.html)
+- [CWE-74: Improper Output Handling](https://cwe.mitre.org/data/definitions/74.html)
 - [CWE-502: Insecure Deserialization](https://cwe.mitre.org/data/definitions/502.html)
 - [CWE-327: Broken Cryptography](https://cwe.mitre.org/data/definitions/327.html)
 - [CWE-328: Weak Hashing](https://cwe.mitre.org/data/definitions/328.html)
@@ -106,10 +113,27 @@ AI-native SAST detects the following vulnerability types:
 - [CWE-614: Insecure Cookie](https://cwe.mitre.org/data/definitions/614.html)
 - [CWE-90: LDAP Injection](https://cwe.mitre.org/data/definitions/90.html)
 - [CWE-94: Code Injection](https://cwe.mitre.org/data/definitions/94.html)
+- [CWE-117: Log Injection](https://cwe.mitre.org/data/definitions/117.html)
+- [CWE-190: Integer Overflow or Wraparound](https://cwe.mitre.org/data/definitions/190.html)
+- [CWE-200: Sensitive Information Disclosure](https://cwe.mitre.org/data/definitions/200.html)
+- [CWE-209: Information Exposure Through an Error Message](https://cwe.mitre.org/data/definitions/209.html)
+- [CWE-250: Excessive Agency](https://cwe.mitre.org/data/definitions/250.html)
 - [CWE-501: Trust Boundary Violation](https://cwe.mitre.org/data/definitions/501.html)
 - [CWE-284: Broken Access Control (IDOR)](https://cwe.mitre.org/data/definitions/284.html)
+- [CWE-345: Data and Model Poisoning](https://cwe.mitre.org/data/definitions/345.html)
+- [CWE-349: Vector and Embedding Weaknesses](https://cwe.mitre.org/data/definitions/349.html)
+- [CWE-400: Unbounded Consumption](https://cwe.mitre.org/data/definitions/400.html)
+- [CWE-540: System Prompt Leakage](https://cwe.mitre.org/data/definitions/540.html)
+- [CWE-601: Open Redirect](https://cwe.mitre.org/data/definitions/601.html)
+- [CWE-829: Supply Chain Vulnerability](https://cwe.mitre.org/data/definitions/829.html)
+- [CWE-1321: Prototype Pollution](https://cwe.mitre.org/data/definitions/1321.html)
+- [CWE-1426: Misinformation](https://cwe.mitre.org/data/definitions/1426.html)
 - [CWE-1427: Prompt Injection](https://cwe.mitre.org/data/definitions/1427.html)
   {{% /collapse-content %}}
+
+### Configuration
+
+AI-native SAST uses language-specific rulesets in the Code Security `sast` configuration. To select or exclude AI-native SAST rulesets for Datadog-hosted scans, see [Static Code Analysis (SAST) Configuration][15].
 
 <!-- ## AI-powered detection
 
@@ -221,3 +245,4 @@ You can also view all remediation sessions on [**Sessions**][7].
 [11]: https://app.datadoghq.com/code/settings
 [13]: /bits_ai/bits_code/automations
 [14]: https://app.datadoghq.com/code/automations
+[15]: /security/code_security/static_analysis/configuration/#configure-ai-native-sast
