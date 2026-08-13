@@ -133,7 +133,7 @@ AI-native SAST detects the following vulnerability types:
 
 ### Configuration
 
-AI-native SAST uses language-specific rulesets in the Code Security `sast` configuration. To select or exclude AI-native SAST rulesets for Datadog-hosted scans, see [Static Code Analysis (SAST) Configuration][15].
+AI-native SAST uses language-specific rulesets (for example, `python-ai_sast`) in the Code Security `sast` configuration. For the full list of ruleset names and how to select or exclude them for Datadog-hosted scans, see [Static Code Analysis (SAST) Configuration][15].
 
 <!-- ## AI-powered detection
 

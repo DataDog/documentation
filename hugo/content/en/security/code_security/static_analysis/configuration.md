@@ -19,7 +19,7 @@ For the full list of default rulesets, see [Static Code Analysis (SAST) Rules][6
 
 ## Configure AI-native SAST
 
-AI-native SAST uses the same `sast` configuration as other Static Code Analysis rules and is available only for Datadog-hosted scans. Configuring an AI-native SAST ruleset controls which rules run; it does not enable Datadog-hosted scanning or grant access to AI-native SAST.
+AI-native SAST uses the same `sast` configuration as other Static Code Analysis rules and is available only for Datadog-hosted scans. The `sast` configuration controls which AI-native SAST rulesets run; it does not enable Datadog-hosted scanning or grant access to AI-native SAST.
 
 When AI-native SAST is enabled, its default rulesets run for the supported languages detected in the repository. AI-native SAST ruleset names use the format `<language>-ai_sast`:
 
@@ -197,7 +197,7 @@ The `global-config` object controls repository-wide settings:
 
 Example configuration:
 
-Because this example disables the default rulesets, it explicitly includes `python-ai_sast` to retain AI-native SAST for Python.
+Example configuration. Because this example disables the default rulesets, it explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
