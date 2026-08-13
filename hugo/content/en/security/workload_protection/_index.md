@@ -47,9 +47,9 @@ cascade:
 
 Datadog Workload Protection provides real-time visibility and defense for your infrastructure by continuously monitoring file, network, and process activity across your environments. It detects threats as they occur, helping you identify, investigate, and stop malicious behaviors before they impact your workloads.
 
-## Use cases
+## Beyond threat detection
 
-Many organizations use Workload Protection across a range of security and operational use cases:
+Workload Protection is not limited to runtime threat detection. Many organizations use it across a range of security and operational use cases:
 
 - **Compliance Validation:** Workload Protection helps you validate compliance with regulatory frameworks such as PCI, FedRAMP, and SOC 2 by continuously monitoring runtime activity for policy violations, risky configurations, and unauthorized changes.
 
@@ -64,6 +64,8 @@ Many organizations use Workload Protection across a range of security and operat
 Workload Protection evaluates the activity it collects in two places: on the Datadog Agent, and in Datadog.
 
 [Agent rules][6] decide which system activity the Agent sends to Datadog. Matching activity becomes an [agent event][7]. In Datadog, [detection rules][8] turn agent events into [signals][10], and [finding rules][9] turn them into [findings][11]. [Response actions][4], which run in the Agent, stop the activity.
+
+Agent rules are organized in [policies][14], which you deploy with {{< tooltip glossary="Remote Configuration" case="title" >}} or manually. You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider.
 
 {{< img src="security/workload_protection/workload_protection_detection_architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
@@ -100,18 +102,9 @@ Response actions run in the Agent. The Agent can terminate a process or containe
 - **Automated response** attaches an action to an agent rule, so the Agent acts as soon as the rule matches.
 - **Response** lets you act manually from a signal after it is generated.
 
-Both depend on enforcement being enabled in the Agent. See [Respond and Report][4].
+Both depend on enforcement being enabled in the Agent.
 
-### Managing rules and policies
-
-Agent rules are organized in [policies][14]. A policy is a set of rules that you deploy together and scope to specific infrastructure using tags.
-
-You deploy a policy in one of two ways:
-
-- **{{< tooltip glossary="Remote Configuration" case="title" >}}**: Datadog delivers the policy to the Agents that its tags target, so you can change which rules are active without touching the host. Datadog ships updates to its own managed policies through the same channel.
-- **Manual deployment**: you install the policy file on each Agent yourself, then reload the runtime policies or restart the Agent.
-
-You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider. The Terraform provider lets you define and version your rules as code outside the app.
+You can also respond from Datadog instead of the Agent. Trigger a [workflow][15] from a signal, or integrate signals with your existing response pipelines. See [Respond and Report][4].
 
 ## Next steps
 
@@ -155,3 +148,4 @@ Use [Coverage][5] to get a unified, real-time view of Workload Protection postur
 [12]: /security/notifications/rules
 [13]: /security/workload_protection/detect_and_monitor/threat_intelligence
 [14]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management
+[15]: /actions/workflows/
