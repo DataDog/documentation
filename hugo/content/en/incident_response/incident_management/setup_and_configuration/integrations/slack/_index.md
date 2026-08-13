@@ -105,7 +105,7 @@ Access all configuration options for Slack in Incident Management through the [*
 | **Send a Slack notification when a meeting starts**       | Notify the Slack channel when a meeting is started, with participants and a join link.<br><br>Provides convenient access to incident calls.     |
 | **Activate Bits AI in incident Slack channels**           | Enable AI features that use incident context from Datadog.<br><br>Applies to all incident types in the selected Slack workspace.                |
 | **Automatically archive Slack channels after resolution** | Archive incident Slack channels once the incident is resolved.<br><br>Helps reduce channel clutter.                                             |
-| **Customize incident action tray**                        | Customize which actions appear in the incident action tray.<br><br>Increases visibility of common actions.                                      |
+| **Customize incident Slack actions**                       | Customize which actions appear in the incident action tray for each status.<br><br>Increases visibility of common actions.                      |
 
 ## Global channel for incident updates
 
@@ -121,7 +121,7 @@ Under the hood, this feature is a built-in, hidden [incident notification rule][
 
 ## Slack commands
 
-You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog`.
+You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog shortcuts`.
 
 ### Global commands (run anywhere)
 
@@ -136,7 +136,8 @@ You can view the full list of available Slack commands at any time by typing `/d
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 | Command | Description |
 | ------- | ----------- |
-| `/datadog` | Open the incident action tray to perform common actions. |
+| `/datadog` | Open the search modal to view all available Slack commands. |
+| `/datadog shortcuts` | Open the incident action tray to perform common actions. |
 | `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
@@ -151,7 +152,8 @@ You can view the full list of available Slack commands at any time by typing `/d
 {{< site-region region="gov,gov2" >}}
 | Command | Description |
 | ------- | ----------- |
-| `/datadog` | Open the incident action tray to perform common actions. |
+| `/datadog` | Open the search modal to view all available Slack commands. |
+| `/datadog shortcuts` | Open the incident action tray to perform common actions. |
 | `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
@@ -163,6 +165,29 @@ You can view the full list of available Slack commands at any time by typing `/d
 | `/datadog followup list` | View and manage existing follow-ups for the incident. |
 {{< /site-region >}}
 
+### Action tray buttons
+
+In addition to typing `/datadog shortcuts` to open the action tray, Datadog can post the action tray as buttons directly in the incident Slack channel, so responders can perform common actions, such as updating severity or state, without typing a command.
+
+The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **[Incidents > Settings > Integrations > Slack Settings][3]** and configure **Incident Slack Actions**.
+
+| Button                       | Description                                                          | Active default | Stable default | Resolved default |
+|-------------------------------|------------------------------------------------------------------------|:---:|:---:|:---:|
+| ⚙️ Edit Incident              | Update status, severity, impacts, and all other attributes            | ✓ | ✓ |   |
+| 🧑‍🚒 Edit Responders           | Assign roles and add teammates to the incident                        | ✓ |   |   |
+| 🔍 View All Actions           | Open the full list of available Slack actions for this incident       | ✓ | ✓ | ✓ |
+| 🏠 View Web App               | Open the incident in Datadog Incident Management                      | ✓ | ✓ | ✓ |
+| ☎️ Page On-Call               | Page a team about the ongoing incident using your preferred service   | ✓ |   |   |
+| 🔔 Notify                     | Notify stakeholders about an incident through email, push, or services |   | ✓ | ✓ |
+| ▶️ Create/Join Zoom           | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
+| ▶️ Create/Join Google Meet    | Start a new meeting or quickly join if one already exists             | ✓ |   |   |
+| ▶️ Run Workflow               | Select and run pre-defined workflows for the incident                 | ✓ |   |   |
+| 🟨 Set to Stable              | Mark the incident as stable after impact is mitigated                 | ✓ |   |   |
+| ✅ Resolve Incident           | Mark the incident as resolved                                         |   | ✓ |   |
+| ✨ Investigate with Bits AI   | Use Bits AI to investigate the incident                               | ✓ |   |   |
+| 📋 Create Follow-Up           | Create follow-up tasks identified during the incident response        |   | ✓ | ✓ |
+| 📋 List Follow-Ups            | View and track follow-up tasks for the incident                       |   |   | ✓ |
+| 📝 Create/View Postmortem     | Create or view the postmortem for the incident                        |   |   | ✓ |
 
 ## Further reading
 
