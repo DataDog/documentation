@@ -116,7 +116,7 @@ attributes.team:(payments-platform OR payments-fraud)
 sum:all.cost{team_attribution:payments-platform OR team_attribution:payments-fraud} by {team_attribution}
 ```
 
-Selecting a parent team expands to the parent and every team beneath it, each as its own handle. A hierarchy selection therefore reaches your data the same way it reaches a `team`-tagged widget. Selecting a team without its subteams, or its subteams without the team, expands the same way. Only the handles in that selection are included.
+Selecting a parent team expands to the parent and every team beneath it, each as its own handle. A hierarchy selection therefore filters your data on the same set of handles it would filter a `team`-tagged widget on. Selecting a team without its subteams, or its subteams without the team, expands the same way. Only the handles in that selection are included.
 
 The expansion is a list of team handles. For a widget to return results, your data must be tagged with those handles.
 
