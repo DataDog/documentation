@@ -192,7 +192,7 @@ Launching the experiment opens the {{< ui >}}Flag & Exposures{{< /ui >}} page. V
 
 ### Change experiment duration
 
-For an eligible end-to-end experiment with a valid start date, you can add a duration after it starts, including when it was launched as open-ended with no end date.
+For an eligible end-to-end experiment with a valid start date, you can change its duration after it starts, even if it was launched as open-ended with no end date.
 
 1. Open the experiment details page.
 1. Click {{< ui >}}Experiment actions{{< /ui >}} > {{< ui >}}Edit duration{{< /ui >}}.
