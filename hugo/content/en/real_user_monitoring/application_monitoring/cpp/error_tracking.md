@@ -138,10 +138,7 @@ The C++ SDK supports the following debug symbol formats:
 - **Linux**: ELF symbol files
 - **Windows**: PE/PDB symbol files
 
-You can upload debug symbols in either of the following ways:
-
-- **Manually from the Datadog UI**: Upload your symbol files on the [RUM Debug Symbols][4] page.
-- **Programmatically through the API**: Use the [Debug Symbols Upload API][6] to automate uploads, for example from a CI/CD pipeline.
+Use the [Debug Symbols Upload API][6] to upload debug symbols, for example from a CI/CD pipeline.
 
 ## Test your implementation
 
@@ -175,6 +172,5 @@ RaiseException(EXCEPTION_ACCESS_VIOLATION, 0, 0, NULL);
 [1]: /real_user_monitoring/error_tracking/
 [2]: https://app.datadoghq.com/rum/application/create
 [3]: /real_user_monitoring/application_monitoring/cpp/setup
-[4]: https://app.datadoghq.com/source-code/setup/rum
 [5]: /real_user_monitoring/application_monitoring/cpp/advanced_build_configuration
 [6]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/
