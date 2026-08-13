@@ -6,6 +6,9 @@ aliases:
   - /logs/guide/reference-tables/
   - /integrations/guide/reference-tables
 further_reading:
+- link: "/reference_tables/guide/create-update-delete-reference-table-with-api/"
+  tag: "Guide"
+  text: "Creating, updating, and deleting a Reference Table with the API"
 - link: "/logs/log_configuration/processors"
   tag: "Documentation"
   text: "Use the lookup processor to enrich logs from a Reference Table"
@@ -188,8 +191,11 @@ Use the [Create Reference Table endpoint][10] to create reference tables from cl
 
 **Note**: The API supports the same file size limits as cloud storage uploads. See [Reference Table limits](#reference-table-limits) for details.
 
+See [Creating, updating, and deleting a Reference Table with the API][11] for a complete walkthrough of managing a Reference Table backed by a local CSV file with the API.
+
 [8]: /api/latest/reference-tables/
 [10]: /api/latest/reference-tables/#create-reference-table
+[11]: /reference_tables/guide/create-update-delete-reference-table-with-api/
 
 {{% /tab %}}
 {{% tab "Integrations" %}}

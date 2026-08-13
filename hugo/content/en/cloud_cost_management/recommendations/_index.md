@@ -50,22 +50,28 @@ multifiltersearch:
   data:
     - category: Configure
       cloud_provider: Anthropic
-      resource_type: Anthropic API Key
-      recommendation_type: Enable Anthropic Prompt Caching
+      resource_type: API Key
+      recommendation_type: Enable Prompt Caching
       recommendation_description: Identifies Anthropic API keys with no prompt caching usage and recommends enabling prompt caching to reduce input token costs.
-      recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
+      recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: Anthropic
-      resource_type: Anthropic API Key
-      recommendation_type: Optimize Anthropic Prompt Caching
+      resource_type: API Key
+      recommendation_type: Optimize Prompt Caching
       recommendation_description: Identifies Anthropic API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
-      recommendation_prerequisites: '[Anthropic integration](/integrations/anthropic/)'
+      recommendation_prerequisites: ""
     - category: Configure
-      cloud_provider: OpenAI
-      resource_type: OpenAI API Key
-      recommendation_type: Optimize OpenAI Prompt Caching
-      recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
-      recommendation_prerequisites: '[OpenAI integration](/integrations/openai/)'
+      cloud_provider: Anthropic
+      resource_type: Enterprise User
+      recommendation_type: Reduce Top-Tier Model Usage
+      recommendation_description: Identifies Enterprise Users where spend is concentrated on the most expensive models and recommends using a lower-cost model.
+      recommendation_prerequisites: ""
+    - category: Downsize
+      cloud_provider: AWS
+      resource_type: Auto Scaling Group
+      recommendation_type: Downsize Auto Scaling Group
+      recommendation_description: Auto Scaling groups with non-containerized workloads that have low CPU and memory usage and can be downsized by adjusting their scaling strategies.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Migrate
       cloud_provider: AWS
       resource_type: Auto Scaling Group
@@ -81,7 +87,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: CloudTrail Trail
-      recommendation_type: Delete Unnecessary CloudTrail trails
+      recommendation_type: Delete Unnecessary CloudTrail Trails
       recommendation_description: CloudTrail trails with paid events can be deleted to reduce costs.
       recommendation_prerequisites: ""
     - category: Terminate
@@ -93,14 +99,14 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: DynamoDB Table
-      recommendation_type: Delete DynamoDB Table
-      recommendation_description: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
+      recommendation_type: Delete Extra DynamoDB On-Demand Backups
+      recommendation_description: A DynamoDB table has charges for more than 2 on-demand backups.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
       resource_type: DynamoDB Table
-      recommendation_type: Delete Extra On-Demand Backups
-      recommendation_description: A DynamoDB table has charges for more than 2 on-demand backups.
+      recommendation_type: Delete Unused DynamoDB Table
+      recommendation_description: A DynamoDB table has 0 consumed reads and 0 consumed non-replica writes.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -183,7 +189,7 @@ multifiltersearch:
     - category: Terminate
       cloud_provider: AWS
       resource_type: Elastic IP
-      recommendation_type: Delete Idle Elastic IP
+      recommendation_type: Release Idle Elastic IP
       recommendation_description: Elastic IP addresses with idle charges in your AWS cost and usage report.
       recommendation_prerequisites: ""
     - category: Downsize
@@ -263,12 +269,6 @@ multifiltersearch:
       resource_type: Lambda
       recommendation_type: Downsize Lambda Provisioned Concurrency
       recommendation_description: AWS Lambda function with over-allocated provisioned concurrency.
-      recommendation_prerequisites: ""
-    - category: Terminate
-      cloud_provider: AWS
-      resource_type: CloudWatch Log Group
-      recommendation_type: Delete Lambda CloudWatch Logs and write permissions
-      recommendation_description: Remove write permissions for Lambda CloudWatch Logs to prevent further unnecessary logging.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: AWS
@@ -382,13 +382,13 @@ multifiltersearch:
       cloud_provider: AWS
       resource_type: SageMaker Endpoint
       recommendation_type: Downsize SageMaker Endpoint
-      recommendation_description: SageMaker real-time inference endpoints with CPU and memory utilization less than the available resources of the next smallest instance in the family. Endpoints using GPU/accelerator instances or managed scaling are excluded.
+      recommendation_description: SageMaker real-time inference endpoints with CPU and memory utilization that fits within the resources of the next smallest instance in the family. Endpoints using GPU or accelerator instances, or managed scaling, are excluded.
       recommendation_prerequisites: ""
     - category: Configure
       cloud_provider: AWS
       resource_type: SageMaker Training Job
       recommendation_type: Enable SageMaker Managed Spot Training
-      recommendation_description: Groups of SageMaker training jobs that share a common training image and can use managed spot training to reduce training costs when their training scripts support checkpointing.
+      recommendation_description: SageMaker training jobs that can use managed spot training to reduce costs when the training scripts support checkpointing.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: AWS
@@ -434,6 +434,18 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
+      resource_type: Container App
+      recommendation_type: Scale to Zero Azure Container App Replicas
+      recommendation_description: An Azure Container App has no requests in the configured lookback period.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
+      resource_type: Container Registry
+      recommendation_type: Delete Container Registry
+      recommendation_description: A Container Registry that has never received successful pulls.
+      recommendation_prerequisites: ""
+    - category: Terminate
+      cloud_provider: Azure
       resource_type: Data Explorer Cluster
       recommendation_type: Terminate Unused Stopped Data Explorer Cluster
       recommendation_description: A cluster is considered unused and stopped if it has been stopped for at least 60 days. The recommendation is to delete the cluster to reduce cost.
@@ -476,15 +488,15 @@ multifiltersearch:
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
-      resource_type: Azure Managed Redis
-      recommendation_type: Delete Azure Managed Redis
-      recommendation_description: Azure Managed Redis cache with no get or set operations.
+      resource_type: Database for PostgreSQL
+      recommendation_type: Delete Database for PostgreSQL
+      recommendation_description: Azure Database for PostgreSQL server with no connections, which can be terminated.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
-      resource_type: SQL Server
-      recommendation_type: Delete SQL Server
-      recommendation_description: SQL Server with no connections, which can be terminated.
+      resource_type: Azure Managed Redis
+      recommendation_type: Delete Azure Managed Redis
+      recommendation_description: Azure Managed Redis cache with no get or set operations.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
@@ -508,13 +520,13 @@ multifiltersearch:
       cloud_provider: Azure
       resource_type: Storage Account
       recommendation_type: Delete Storage Account
-      recommendation_description: Storage Account with no transactions and no used capacity over the last 14 days.
+      recommendation_description: Storage Account with no transactions and negligible used capacity over the last 14 days.
       recommendation_prerequisites: ""
     - category: Terminate
       cloud_provider: Azure
       resource_type: VM Instance
       recommendation_type: Delete Azure VM Instance
-      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory.
+      recommendation_description: VM instance with less than 5% user CPU and over 90% usable memory. Without the Datadog Agent, this recommendation is generated using Azure Monitor CPU metrics.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
     - category: Downsize
       cloud_provider: Azure
@@ -527,6 +539,12 @@ multifiltersearch:
       resource_type: VM Instance
       recommendation_type: Migrate Azure VM Instance to Arm
       recommendation_description: VM instance that can be migrated to an equivalent Arm instance type for a lower price.
+      recommendation_prerequisites: ""
+    - category: Migrate
+      cloud_provider: Azure
+      resource_type: VM Instance
+      recommendation_type: Upgrade Azure VM Instance
+      recommendation_description: VM instance running on a legacy generation series that has a recommended modern replacement.
       recommendation_prerequisites: ""
     - category: Downsize
       cloud_provider: Azure
@@ -615,6 +633,12 @@ multifiltersearch:
     - category: Downsize
       cloud_provider: GCP
       resource_type: Compute Instance Group
+      recommendation_type: Downsize Compute Instance Group
+      recommendation_description: Compute Instance Groups with non-containerized workloads that have low CPU and memory usage and can be downsized by adjusting their scaling strategies.
+      recommendation_prerequisites: '[Datadog Agent](/agent/)'
+    - category: Downsize
+      cloud_provider: GCP
+      resource_type: Compute Instance Group
       recommendation_type: Reduce Minimum Capacity
       recommendation_description: A Compute Instance Group Autoscaler with a minimum capacity of instances that can be reduced.
       recommendation_prerequisites: ""
@@ -678,7 +702,12 @@ multifiltersearch:
       recommendation_type: Downsize Deployment
       recommendation_description: Containers are using only a fraction of their requested CPU or memory.
       recommendation_prerequisites: '[Datadog Agent](/agent/)'
-
+    - category: Configure
+      cloud_provider: OpenAI
+      resource_type: API Key
+      recommendation_type: Optimize Prompt Caching
+      recommendation_description: Identifies OpenAI API keys already using prompt caching below the target hit rate and recommends improving cache configuration to reduce input token costs.
+      recommendation_prerequisites: ""
 ---
 
 
