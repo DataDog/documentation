@@ -6,23 +6,23 @@ import ApiPageHeader from '@components/ApiPageHeader/ApiPageHeader.astro';
 import { getCategoryStubsView } from '@lib/api/viewsBuilder';
 import { LOCALES, parseLangParam, localizedHref } from '@lib/i18n/locale';
 import { i18n } from '@lib/i18n/i18n';
+import { API_CONTENT_DIR, isApiContent } from '@lib/api/overviewPages';
 import type { GetStaticPaths } from 'astro';
 
-// Astro's glob loader strips a trailing `/index`, so `api/latest/index.mdoc` is
-// stored as `api/latest` and serves the API root, where `page` is empty.
-const CONTENT_DIR = 'api/latest';
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  // Redeclared because Astro extracts getStaticPaths into its own module scope.
-  const CONTENT_DIR = 'api/latest';
-  const entries = await getCollection('en', (entry) => entry.id.startsWith(CONTENT_DIR));
+  const entries = await getCollection('en', (entry) => isApiContent(entry.id));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
     for (const entry of entries) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
-          page: entry.id === CONTENT_DIR ? undefined : entry.id.slice(`${CONTENT_DIR}/`.length),
+          // Astro's glob loader strips a trailing `/index`, so the root entry is
+          // `api/latest` itself and serves the API root, where `page` is empty.
+          page:
+            entry.id === API_CONTENT_DIR
+              ? undefined
+              : entry.id.slice(`${API_CONTENT_DIR}/`.length),
         },
       });
     }
@@ -38,7 +38,10 @@ if (!lang) {
 const pageSlug = Astro.params.page;
 const isRootPage = !pageSlug;
 
-const entry = await getEntry('en', isRootPage ? CONTENT_DIR : `${CONTENT_DIR}/${pageSlug}`);
+const entry = await getEntry(
+  'en',
+  isRootPage ? API_CONTENT_DIR : `${API_CONTENT_DIR}/${pageSlug}`,
+);
 if (!entry) {
   return new Response(null, { status: 404 });
 }

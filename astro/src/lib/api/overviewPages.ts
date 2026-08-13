@@ -18,13 +18,24 @@ export interface OverviewState {
 
 // Astro's glob loader strips a trailing `/index`, so the API root is the entry
 // with id exactly `api/latest` and the hand-written pages are its descendants.
-const API_CONTENT_DIR = "api/latest";
+export const API_CONTENT_DIR = "api/latest";
 const API_ROOT_PATH = `/${API_CONTENT_DIR}/`;
 
+/**
+ * True for the API root entry and every entry beneath it — the pages served by
+ * the API route with `ApiLayout`, which every other content route excludes.
+ */
+export function isApiContent(id: string): boolean {
+  return id === API_CONTENT_DIR || id.startsWith(`${API_CONTENT_DIR}/`);
+}
+
+/** True for the hand-written pages under the API root, excluding the root. */
+export function isApiSubPage(id: string): boolean {
+  return id.startsWith(`${API_CONTENT_DIR}/`);
+}
+
 export async function getOverviewPages(): Promise<OverviewPage[]> {
-  const entries = await getCollection("en", (entry) =>
-    entry.id.startsWith(`${API_CONTENT_DIR}/`),
-  );
+  const entries = await getCollection("en", (entry) => isApiSubPage(entry.id));
 
   return entries
     .map((entry) => ({

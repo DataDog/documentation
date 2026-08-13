@@ -18,6 +18,7 @@ import type {
   PlaintextSection,
 } from "./types";
 import { getCollection } from "astro:content";
+import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
 
@@ -31,7 +32,6 @@ const LANG = "en" as const;
 const API_REFERENCE = "API Reference";
 const DOCS_CRUMB = ["Docs"];
 const API_CRUMBS = ["Docs", API_REFERENCE];
-const API_CONTENT_DIR = "api/latest";
 
 /** First non-empty line of a (possibly multi-line markdown) string, trimmed. */
 function firstLine(text: string): string {
@@ -78,11 +78,7 @@ async function operationPage(
 }
 
 async function listRootPages(): Promise<PlaintextPage[]> {
-  const entries = await getCollection(
-    "en",
-    (entry) =>
-      entry.id === API_CONTENT_DIR || entry.id.startsWith(`${API_CONTENT_DIR}/`),
-  );
+  const entries = await getCollection("en", (entry) => isApiContent(entry.id));
 
   return entries.map((entry) => {
     const isApiRoot = entry.id === API_CONTENT_DIR;

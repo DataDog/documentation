@@ -5,18 +5,17 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
 import { LOCALES, parseLangParam } from '@lib/i18n/locale';
 import { format, parse } from '@lib/plaintext/helpers';
-
-const CONTENT_DIR = 'api/latest';
+import { API_CONTENT_DIR, isApiSubPage } from '@lib/api/overviewPages';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection('en', (entry) => entry.id.startsWith(`${CONTENT_DIR}/`));
+  const entries = await getCollection('en', (entry) => isApiSubPage(entry.id));
   const paths: ReturnType<GetStaticPaths> = [];
   for (const lang of LOCALES) {
     for (const entry of entries) {
       paths.push({
         params: {
           lang: lang === 'en' ? undefined : lang,
-          page: entry.id.slice(`${CONTENT_DIR}/`.length),
+          page: entry.id.slice(`${API_CONTENT_DIR}/`.length),
         },
       });
     }
@@ -35,7 +34,7 @@ export const GET: APIRoute = async ({ params }) => {
     return new Response(null, { status: 404 });
   }
 
-  const entry = await getEntry('en', `${CONTENT_DIR}/${pageSlug}`);
+  const entry = await getEntry('en', `${API_CONTENT_DIR}/${pageSlug}`);
   if (!entry) {
     return new Response(null, { status: 404 });
   }
