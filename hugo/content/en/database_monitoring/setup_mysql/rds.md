@@ -332,6 +332,54 @@ Using the [Operator instructions in Kubernetes and Integrations][3] as a referen
     kubectl apply -f datadog-agent.yaml
     ```
 
+#### Connecting over SSL
+
+If your RDS or Aurora MySQL instance requires SSL (for example, `rds.force_ssl` is enabled), store the CA certificate in a Kubernetes `Secret` and mount it into the pod that runs the cluster check—the cluster check runner if you use one, otherwise the Cluster Agent—so the MySQL check can reference it:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: rds-ca-cert
+type: Opaque
+data:
+  ca-cert.pem: <BASE64_ENCODED_CA_CERT>
+```
+
+```yaml
+spec:
+  #(...)
+  override:
+    clusterChecksRunner:
+      volumes:
+        - name: rds-ca-cert
+          secret:
+            secretName: rds-ca-cert
+      containers:
+        agent:
+          volumeMounts:
+            - name: rds-ca-cert
+              mountPath: /etc/certs/rds-ca-cert
+              readOnly: true
+    clusterAgent:
+      extraConfd:
+        configDataMap:
+          mysql.yaml: |-
+            cluster_check: true
+            init_config:
+            instances:
+            - host: <AWS_INSTANCE_ENDPOINT>
+              port: <PORT>
+              username: datadog
+              password: 'ENC[datadog_user_database_password]'
+              dbm: true
+              ssl:
+                ca: /etc/certs/rds-ca-cert/ca-cert.pem
+              aws:
+                instance_endpoint: <AWS_INSTANCE_ENDPOINT>
+                region: <AWS_REGION>
+```
+
 ### Helm
 
 1. Complete the [Datadog Agent installation instructions][4] for Helm.
