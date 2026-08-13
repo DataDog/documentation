@@ -92,6 +92,9 @@ To get hierarchy-aware team selection for that data, define the template variabl
 The variable's tag key determines the selector you get. The tag key a widget query filters on is separate, and does not have to match.
 
 1. Add a template variable with the tag key `team`. It renders as the team filter.
+To get hierarchy-aware team selection for that data, define the template variable on the `team` tag key and reference the selected value with `$team.value` in each widget query. The variable's tag key determines the selector you get; the tag key a widget query filters on is separate and does not have to match.
+
+1. Add a template variable with the tag key `team`. It renders as the team filter.
 1. In each widget query, filter on the tag key your data uses, and put `$team.value` where the value goes.
 
 For a widget querying cases on an `attributes.team` attribute:
