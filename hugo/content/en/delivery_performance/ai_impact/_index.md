@@ -108,7 +108,7 @@ Two attribution modes are available, depending on the signal your tools provide.
     <tr>
       <td>What the metrics tell you</td>
       <td>How AI-assisted code performs compared to code written without AI, and how users of one tool compare to users of another</td>
-      <td>How developers perform on days they build with AI compared to days and developers that do not, and how users of one tool compare to users of another</td>
+      <td>How developers perform on days they build with AI compared to days they don't, and how users of one tool compare to users of another</td>
     </tr>
   </tbody>
 </table>
