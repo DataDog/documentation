@@ -1,6 +1,6 @@
 ---
 title: Profiling Flame Graph Widget
-description: "Graph a breakdown of top consuming lines of code (CPU, Memory, ...)"
+description: "Visualize resource consumption across profiled code paths."
 widget_type: "flame_graph"
 aliases:
 - /video-categories/flamegraph/
@@ -17,48 +17,46 @@ further_reading:
 
 {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph.png" alt="Profiling Flame Graph" >}}
 
-The [profiling flame graph visualization][1] represents a breakdown of top consuming lines of code such as CPU and Memory. Add this widget to visualize stack traces of your profiled applications and accurately identify frequent resource requests. 
+The [profiling flame graph][1] visualizes stack traces collected by Continuous Profiler. Each frame represents a unit of code, such as a method or line. The width of a frame represents its share of the selected profile metric, and the frames on the next row represent code called by the frame above. Use the widget to identify resource-intensive code paths across your profiled applications.
 
 ## Setup
  
  {{< img src="dashboards/widgets/profiling_flame_graph/profiling_flame_graph_config.png" alt="Graph your data section in the profiling flame graph widget configuration" style="width:100%;" >}}
 
-### Configuration
+### Graph your data
 
-1. Scope your profiling data with tags. For example, `host`, `container_name`, `service`, `env`, or `version`.
-2. To select the resource click the dropdown menu next to {{< ui >}}Show{{< /ui >}}. Options can include {{< ui >}}CPU Time{{< /ui >}}, {{< ui >}}Allocated Memory{{< /ui >}}, or {{< ui >}}Thrown Exceptions{{< /ui >}}.
-3. Click the dropdown menu next to {{< ui >}}by{{< /ui >}} and {{< ui >}}for{{< /ui >}} to select the frame granularity and code provenance, respectively.
-4. Give your graph a title or leave the box blank for the suggested title.
-5. Click {{< ui >}}Save{{< /ui >}}.
+1. In the search field, scope your profiling data with tags. For example, `host`, `container_name`, `service`, `env`, or `version`.
+2. In the {{< ui >}}Show{{< /ui >}} menu, select a profile type. The [available profile types][2] depend on the language.
+3. In the {{< ui >}}by{{< /ui >}} menu, select the frame granularity, such as method or line.
+4. Use the {{< ui >}}color by{{< /ui >}} and {{< ui >}}sort{{< /ui >}} menus to select how the frames are shaded and ordered.
+5. Use the scope sections to refine the flame graph:
+   - {{< ui >}}Scope to methods{{< /ui >}}: Select the methods to include. The name of this section changes based on the granularity selected in the {{< ui >}}by{{< /ui >}} menu.
+   - {{< ui >}}Scope to endpoints{{< /ui >}}: Filter to a specific endpoint. Select `per Minute by Endpoint` to view total resource consumption or `per Endpoint Call` to view resource consumption per request.
 
-### Options
+### Set time preferences
 
-#### Advanced options and filtering
+Select {{< ui >}}Global dashboard time{{< /ui >}} to use the dashboard's timeframe, or select {{< ui >}}Custom time{{< /ui >}} to set a timeframe for the widget.
 
-Click the three dot ellipsis to open Advanced options to specify coloring and resolution.
+**Note**: Notebooks retain flame graph data for one year when the widget uses a fixed {{< ui >}}Custom time{{< /ui >}} range. The range must be within the [8-day profiling data retention period][5] when you create the widget.
 
-Customize your flame graph. Add graphing actions or filters in the {{< ui >}}Filter flame graph{{< /ui >}} field.
+### Add a title and description
 
-#### Scope to endpoints
+Give your graph a title or leave the box blank for the suggested title. You can also add an optional description. Click {{< ui >}}Save{{< /ui >}}.
 
-Filter on a specific endpoint, for total consumption (`per Minute by Endpoint`) or per request (`per Endpoint Call`).
+## Interact with the widget
 
-#### Scope to functions
-
-Filter on other criteria such as `Method`, `Package`, `Thread name` or `Trace Operation`.
-
-#### Global time
-
-Choose whether your widget has a custom timeframe or the dashboard's global timeframe.
+Hover over a frame to view its profile values. Select a frame to focus on its code path. To investigate the profile in more detail, click the open in full page icon in the upper-right corner of the flame graph.
 
 ## API
 
-This widget can be used with the **[Dashboards API][2]**. See the [widget JSON schema definition][3].
+This widget can be used with the **[Dashboards API][3]**. See the [widget JSON schema definition][4].
 
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
 
 [1]: /profiler/profile_visualizations/#flame-graph
-[2]: /api/latest/dashboards/
-[3]: /dashboards/graphing_json/widget_json/
+[2]: /profiler/profile_types/
+[3]: /api/latest/dashboards/
+[4]: /dashboards/graphing_json/widget_json/
+[5]: /data_security/data_retention_periods/
