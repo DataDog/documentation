@@ -33,7 +33,7 @@ The widget at the top of the Coverage page shows the percentage of your resource
 - **View without WP**: Hosts running the Datadog Agent without Workload Protection enabled. This opens Fleet Automation, where you can [set up Workload Protection][3].
 - **View without Agents**: Hosts not running the Datadog Agent, which can't be evaluated by Workload Protection. This opens the Infrastructure Catalog.
 
-Update or deploy the Datadog Agent to help ensure complete coverage.
+Update or deploy the Datadog Agent to close these gaps.
 
 ## Search assets by MITRE ATT&CK techniques and tactics
 
@@ -52,18 +52,18 @@ You can use Coverage to test and iterate on custom security rules:
 
 ## Workload coverage triage and response cycle
 
-As an example of how to use Coverage to triage and respond to coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+The following is an example of how to use Coverage to triage and respond to coverage issues:
 
 1. Do a full environment view to establish baseline coverage status.
 2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
 3. Identify all unprotected or partially protected workloads.
 4. Prioritize assets with the highest business impact and exposure.
 5. Verify policy deployment and enforcement on those assets.
-6. Check for outdated or unhealthy agents on all remaining workloads.
-7. Map current detection coverage to MITRE ATT&CK to find gaps in tactics and techniques.
+6. Check for outdated or unhealthy agents on all remaining workloads, and update them.
+7. Map current detection coverage to MITRE ATT&CK to find gaps in the tactics and techniques used by known adversaries.
 8. Deploy or update detection rules to close those gaps.
 9. Reassess coverage to confirm posture changes took effect.
-10. Log the final state for compliance and future comparison.
+10. Log the final state for compliance, audit, and incident reference.
 
 ## Further reading
 
