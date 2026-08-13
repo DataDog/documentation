@@ -28,7 +28,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 ### Prerequisites
 
-- [DORA Metrics][1] set up with deployment, commit, and pull requests data.
+- [DORA Metrics][1] set up with deployment, commit, and pull request data.
 - An integration configured with a [supported AI coding tool provider](#supported-tools).
 
 ### Supported tools
