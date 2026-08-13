@@ -74,7 +74,7 @@ In general, use the following rules:
 
 - Component-specific environment variables not listed in [core_schema.yaml][4] may also be supported:
 
-  | Component              | Configuration source                        | Agent 7.51–7.83                                                | Agent 7.50 and earlier                              |
+  | Component              | Configuration source                        | Agent 7.51-7.83                                                | Agent 7.50 and earlier                              |
   | ----------------------- | -------------------------------------------- | --------------------------------------------------------------- | ----------------------------------------------------- |
   | APM Trace Agent          | [apm_config.yaml][6], [Docker APM Agent Environment Variables][5] | `apm_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `apm.go` in [pkg/config on the 7.50.x branch][14]    |
   | Live Process Agent       | [process_config.yaml][7]                     | `process_settings.go` in [pkg/config/setup on the 7.83.x branch][13] | `process.go` in [pkg/config on the 7.50.x branch][14] |
