@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' {{< tooltip text=" Prometheus source" tooltip="Contact your account manager to request access." case="title" >}} to receive metrics pushed by your Prometheus clients.
+Use Observability Pipelines' {{< tooltip text=" Prometheus source" tooltip="Contact your account manager to request access." >}} to receive metrics pushed by your Prometheus clients.
 
 ## Setup
 
