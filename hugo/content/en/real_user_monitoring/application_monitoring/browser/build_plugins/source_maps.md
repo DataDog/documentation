@@ -13,6 +13,9 @@ further_reading:
 - link: 'https://github.com/DataDog/build-plugins'
   tag: 'Source Code'
   text: 'Datadog Build Plugins GitHub Repository'
+- link: 'https://docs.datadoghq.com/api/latest/rum/upload-source-maps/'
+  tag: 'API'
+  text: 'Debug Symbols Upload API'
 ---
 
 ## Overview
@@ -20,6 +23,8 @@ further_reading:
 The Source Maps build plugin automatically uploads JavaScript source maps to Datadog during your build, enabling deobfuscated stack traces in [Error Tracking][1] and [RUM][2]. This replaces the need to manually run `datadog-ci sourcemaps upload` or configure CI/CD pipelines for source map uploads.
 
 The plugin hooks into the build process, discovers all `.js` files with corresponding `.map` source map files from the build output, and uploads them to Datadog with git metadata.
+
+If a build plugin does not fit your workflow, you can also upload source maps manually from the [Debug Symbols][6] page in Datadog, or with the [Debug Symbols Upload API][7].
 
 ## Prerequisites
 
@@ -82,3 +87,5 @@ To also display inline source code in Error Tracking stack traces, pair source m
 [3]: /real_user_monitoring/guide/upload-javascript-source-maps#instrument-your-code
 [4]: /real_user_monitoring/application_monitoring/browser/build_plugins/
 [5]: /real_user_monitoring/application_monitoring/browser/build_plugins/source_code_context
+[6]: https://app.datadoghq.com/source-code/setup/rum
+[7]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

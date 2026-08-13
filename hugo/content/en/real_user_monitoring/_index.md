@@ -233,6 +233,8 @@ View your [backend traces, logs, and infrastructure metrics][5] down to the exac
 
 Get automated alerts on outliers and groups of errors, timeouts, and crashes to significantly reduce your MTTR with [Error Tracking][6].
 
+To get readable stack traces, upload debug symbols and source maps automatically through CI/CD, manually from the [Debug Symbols][22] page in Datadog, or programmatically using the [Debug Symbols Upload API][23].
+
 {{< img src="real_user_monitoring/error_tracking/errors_rum.mp4" alt="RUM error tracking" video=true >}}
 
 ### Web and mobile vitals
@@ -304,3 +306,5 @@ You must have edit access to restore general access to a restricted application.
 [19]: /real_user_monitoring/correlate_with_other_telemetry/profiling
 [20]: /real_user_monitoring/guide/proxy-rum-data
 [21]: /integrations/content_security_policy_logs
+[22]: https://app.datadoghq.com/source-code/setup/rum
+[23]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

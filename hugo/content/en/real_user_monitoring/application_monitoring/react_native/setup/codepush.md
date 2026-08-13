@@ -138,6 +138,8 @@ To run it with Yarn:
 yarn datadog-ci react-native codepush --platform ios --service com.company.app --bundle ./build/CodePush/main.jsbundle --sourcemap ./build/CodePush/main.jsbundle.map --app MyOrganization/MyApplication --deployment MyDeployment
 ```
 
+You can also upload source maps manually from the [RUM Debug Symbols][7] page, or programmatically through the [Debug Symbols Upload API][8].
+
 ## Alternatives
 
 These steps ensure that the `version` matches the format `{commercialVersion}-codepush.{codePushLabel}`, such as `1.2.4-codepush.v3`.
@@ -176,3 +178,5 @@ This means that even if users open your application while offline, no data is lo
 [4]: https://github.com/microsoft/react-native-code-push/blob/master/docs/api-js.md#codepushgetupdatemetadata
 [5]: https://github.com/DataDog/datadog-ci/tree/master/packages/datadog-ci/src/commands/react-native#upload
 [6]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-codepush
+[7]: https://app.datadoghq.com/source-code/setup/rum
+[8]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

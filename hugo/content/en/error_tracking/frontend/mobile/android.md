@@ -575,6 +575,13 @@ After configuring the plugin, run the Gradle tasks to upload your Proguard/R8 ma
 ./gradlew uploadNdkSymbolFilesRelease
 ```
 
+#### Upload manually
+
+You can also upload ProGuard/R8 mapping files and NDK symbol files manually, without the Gradle plugin. This is useful for one-off uploads or pipelines that do not run the plugin:
+
+- From the Datadog UI, on the [RUM Debug Symbols][24] page.
+- Through the [Debug Symbols Upload API][26].
+
 For any given error, you can access the file path, line number, and a code snippet for each frame of the related stack trace.
 
 {{< tabs >}}
@@ -948,3 +955,4 @@ val inputStream = context.getRawResAsRumResource(id)
 [23]: https://app.datadoghq.com/organization-settings/api-keys
 [24]: https://app.datadoghq.com/source-code/setup/rum
 [25]: /real_user_monitoring/application_monitoring/android/setup/#track-background-events
+[26]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

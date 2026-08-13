@@ -370,6 +370,13 @@ Once your application crashes and you restart the application, the iOS SDK uploa
 
 **Note**: Re-uploading a source map does not override the existing one if the version has not changed.
 
+### Upload your .dSYM file manually
+
+You can also upload `.dSYM` files manually, without the `datadog-ci` CLI. This is useful for one-off uploads or for pipelines that don't run `datadog-ci`:
+
+- From the [RUM Debug Symbols][20] page in the Datadog UI.
+- Using the [Debug Symbols Upload API][21].
+
 ### Use Datadog CI to upload your .dSYM file
 
 You can use the command line tool [@datadog/datadog-ci][8] to upload your `.dSYM` file:
@@ -488,3 +495,4 @@ To verify your iOS Crash Reporting and Error Tracking configuration, issue a cra
 [18]: /dashboards/widgets/timeseries
 [19]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#add-crash-reporting
 [20]: https://app.datadoghq.com/source-code/setup/rum
+[21]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

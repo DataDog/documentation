@@ -124,6 +124,10 @@ When the SDK is initialized with a version suffix, you must manually override th
 
 See the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][16] page to view all uploaded symbols.
 
+### Upload source maps manually
+
+In addition to the build-tool flows described above, you can upload source maps manually from the [{{< ui >}}RUM Debug Symbols{{< /ui >}}][16] page, or programmatically through the [Debug Symbols Upload API][19].
+
 ## Limitations
 
 Source maps and mapping files are limited in size to **500 MB** each, while dSYM files can go up to **2 GB** each.
@@ -514,3 +518,4 @@ if (project.tasks.findByName("minify${variant.name.capitalize()}WithR8")) {
 [16]: https://app.datadoghq.com/source-code/setup/rum
 [17]: https://github.com/DataDog/datadog-ci/tree/master/packages/base/src/commands/react-native#inject-debug-id
 [18]: /error_tracking/frontend/mobile/expo/
+[19]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/

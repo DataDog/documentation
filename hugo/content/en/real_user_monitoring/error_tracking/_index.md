@@ -48,6 +48,10 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
     {{< nextlink href="real_user_monitoring/error_tracking/maui" >}}.NET MAUI{{< /nextlink >}}
 {{< /whatsnext >}}
 
+### Upload debug symbols
+
+Debug symbols and source maps are uploaded automatically through your CI/CD pipeline. You can also upload them manually from the [Debug Symbols][4] page in Datadog, or programmatically using the [Debug Symbols Upload API][5]. Manual and API-based uploads are useful for backfilling symbols or for pipelines that cannot run the `datadog-ci` CLI.
+
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
@@ -55,3 +59,5 @@ Take a tour of key Error Tracking features in the [Error Tracking Explorer][3] d
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: /real_user_monitoring/
 [3]: /error_tracking/explorer
+[4]: https://app.datadoghq.com/source-code/setup/rum
+[5]: https://docs.datadoghq.com/api/latest/rum/upload-source-maps/
