@@ -39061,15 +39061,6 @@ paths:
           schema:
             format: int64
             type: integer
-        - description: |-
-            Whether to return only deleted service level objective objects.
-          example: true
-          in: query
-          name: is_deleted
-          required: false
-          schema:
-            default: false
-            type: boolean
       responses:
         "200":
           content:
