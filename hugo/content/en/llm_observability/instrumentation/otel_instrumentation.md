@@ -404,6 +404,8 @@ After running this example, search for `ml_app:simple-openinference-test` in the
 
 This section provides the mappings from OpenTelemetry GenAI semantic conventions (v1.37+), OpenLLMetry, OpenInference, and Langfuse to Datadog's Agent Observability span schema.
 
+If a span is missing an expected attribute, or an attribute can't be parsed, Agent Observability flags the span with a **Mapping warnings** indicator. See [Troubleshooting mapping warnings](#troubleshooting-mapping-warnings) for descriptions and fixes.
+
 <div class="alert alert-info">Provider-specific mappings are documented separately in the <a href="#openllmetry-attribute-mappings">OpenLLMetry attribute mappings</a>, <a href="#openinference-attribute-mappings">OpenInference attribute mappings</a>, and <a href="#langfuse-attribute-mappings">Langfuse attribute mappings</a> sections.</div>
 
 ### OpenTelemetry 1.37+ attribute mappings
@@ -847,6 +849,54 @@ The following Langfuse-specific attributes are filtered from tags because they'r
 - `langfuse.trace.input`, `langfuse.trace.output`, `langfuse.trace.metadata`, `langfuse.trace.tags`
 - `langfuse.experiment.item.expected_output`, `langfuse.experiment.item.metadata`, `langfuse.experiment.metadata`
 
+## Troubleshooting mapping warnings
+
+At ingestion, Agent Observability detects span mapping problems such as missing input messages or an unparsable token count. It flags affected spans instead of failing silently.
+
+Flagged spans display a **Mapping warnings** indicator in the span detail panel. Select the indicator to open the span's mapping warnings. Each entry lists the affected attribute, a suggested fix, and a link to the [attribute mapping reference](#attribute-mapping-reference).
+
+Each warning also includes a short description of its downstream effect, such as skipped evaluations or unavailable cost estimation.
+
+Mapping warnings are detected at ingestion. They do not affect billing or span retention.
+
+### Mapping warning reference
+
+A span can display warnings not listed in the following table if Datadog adds checks. These render with a generated title based on the check that triggered the warning.
+
+| Warning | Attribute | Fix |
+|---------|-----------|-----|
+| Malformed model identifier | On `gen_ai.request.model` | Emit `gen_ai.response.model` directly, so the model name doesn't need to be parsed out of `gen_ai.request.model`. |
+| Missing input and output | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` and `gen_ai.output.messages`. |
+| Malformed input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
+| Malformed output | On `gen_ai.output.messages` | Emit `gen_ai.output.messages` as a valid JSON array of messages. |
+| Malformed message | On `gen_ai.input.messages` | Emit each message with a `role` and `content` field. |
+| Empty message content | On `gen_ai.output.messages` | Emit a `content` string, or `parts` entries with a recognized `type`, for example `text`, `tool_call`, `tool_call_response`. |
+| Missing embedding input | Expected `gen_ai.input.messages` | Set `gen_ai.input.messages` to the embedded text. |
+| Malformed embedding input | On `gen_ai.input.messages` | Emit `gen_ai.input.messages` as a valid JSON array of messages. |
+| Unreadable token counts | On `gen_ai.usage.input_tokens` | Emit token counts as integers, not strings or objects. |
+| Invalid token counts | On `gen_ai.usage.input_tokens` | Emit non-negative integer token counts. |
+| Unreadable cost metrics | On `gen_ai.cost.estimated_total` | Emit cost metrics as integers or floats, not strings or objects. |
+| Invalid cost metrics | On `gen_ai.cost.estimated_total` | Emit non-negative cost values. |
+| Malformed invocation parameters | On invocation parameters | Emit invocation parameters as a valid JSON object, or set them individually as `gen_ai.request.*` attributes (such as `temperature`, `top_p`, and `max_tokens`). |
+| Malformed tool definitions | On `gen_ai.tool.definitions` | Emit `gen_ai.tool.definitions` as a valid JSON array of tool definitions. |
+| Malformed tool definition | On `gen_ai.tool.definitions` | Give each tool definition a `name`, and make its `parameters` a JSON object. |
+| Missing tool name | Expected `gen_ai.tool.name` | Set `gen_ai.tool.name` on tool spans. |
+| Missing tool call name | On `gen_ai.output.messages` | Give each tool call a `name`. |
+| Missing operation name | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` to one of `chat`, `text_completion`, `embeddings`, `execute_tool`, `invoke_agent`, or `retriever`. |
+| Malformed span events | On `events` | Emit valid JSON in span events, or set `gen_ai.input.messages` and `gen_ai.output.messages` directly. |
+| Unreadable document score | On `output.documents` | Emit each document score as a number. |
+| Malformed document metadata | On `output.documents` | Emit each document's metadata as a JSON object. |
+| Unrecognized instrumentation | Expected `gen_ai.operation.name` | Set `gen_ai.operation.name` and `gen_ai.system` so Datadog can identify the instrumentation. |
+
+### Find raw span attributes for a flagged span
+
+To find the raw attributes Datadog received for a flagged span:
+
+- If APM is enabled, the same data is also written to the corresponding APM trace. Open the linked APM trace to inspect the raw span attributes.
+- Compare the raw attributes against the expected attribute from the [mapping warning reference](#mapping-warning-reference) or the full [attribute mapping reference](#attribute-mapping-reference). See [Correlating Agent Observability and APM][14] for how the two views relate.
+- For a malformed warning, check whether the attribute value is valid JSON. Common causes include double-encoding, truncation, and emitting a string or other non-object value where an object is expected.
+- For a missing attribute warning, check your instrumentation library version against the [Tested frameworks and libraries](#tested-frameworks-and-libraries) table, and confirm `OTEL_SEMCONV_STABILITY_OPT_IN=gen_ai_latest_experimental` is set if your library requires it.
+
 ## Supported semantic conventions
 
 Agent Observability supports spans that follow the OpenTelemetry 1.37+ semantic conventions for generative AI, including:
@@ -897,3 +947,4 @@ with tracer.start_as_current_span("my-span") as span:
 [11]: https://arize-ai.github.io/openinference/python/instrumentation/openinference-instrumentation-openai/
 [12]: https://arize-ai.github.io/openinference/spec/semantic_conventions.html
 [13]: https://langfuse.com/integrations/native/opentelemetry
+[14]: /llm_observability/monitoring/llm_observability_and_apm/
