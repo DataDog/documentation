@@ -1,0 +1,81 @@
+.img__figure {
+  margin: 0 0 1rem;
+}
+
+.img__image {
+  max-width: 100%;
+  height: auto;
+  /* matches Hugo's $ddgray (#d6d6d6); no equivalent design token exists yet */
+  border: 1px solid #d6d6d6;
+}
+
+.img__link--popup {
+  cursor: zoom-in;
+}
+
+/* Ported from hugo/layouts/partials/global-modals/global-modals.html +
+   hugo/assets/scripts/components/global-modals.js (Bootstrap 5 Modal). */
+
+.img-lightbox__overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--hugo-modal-overlay);
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-lightbox__overlay[hidden] {
+  display: none;
+}
+
+.img-lightbox__dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.img-lightbox__spinner,
+.img-lightbox__spinner::after {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+}
+
+.img-lightbox__spinner {
+  font-size: 10px;
+  position: relative;
+  text-indent: -9999em;
+  border-top: 0.55em solid rgba(234, 234, 234, 0.5);
+  border-right: 0.55em solid rgba(234, 234, 234, 0.5);
+  border-bottom: 0.55em solid rgba(234, 234, 234, 0.5);
+  border-left: 0.55em solid #ffffff;
+  transform: translateZ(0);
+  animation: img-lightbox-spin 1.1s infinite linear;
+}
+
+@keyframes img-lightbox-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.img-lightbox__image {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.img-lightbox__caption {
+  color: #ffffff;
+  text-align: center;
+  margin: 0.5rem 0 0;
+}

@@ -1,0 +1,59 @@
+---
+import ImgController from "./ImgController";
+import ImgVideo from "./ImgVideo";
+import { IMAGES_URL } from "@config/images";
+
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+  width?: string;
+  height?: string;
+  widthPercent?: number;
+  video?: boolean;
+  inline?: boolean;
+  popup?: boolean;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  width,
+  height,
+  widthPercent,
+  video = false,
+  inline = false,
+  popup = true,
+} = Astro.props;
+
+const imageUrl = `${IMAGES_URL}/images/${src}`;
+
+const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
+const popupHref = `${imageUrl}?fit=max&auto=format`;
+---
+
+{
+  video ? (
+    <ImgVideo
+      client:idle
+      imageUrl={imageUrl}
+      width={width}
+      height={height}
+      widthPercent={widthPercent}
+    />
+  ) : (
+    <ImgController
+      client:idle
+      srcset={srcset}
+      popupHref={popupHref}
+      alt={alt}
+      caption={caption}
+      width={width}
+      height={height}
+      widthPercent={widthPercent}
+      inline={inline}
+      popup={popup}
+    />
+  )
+}
