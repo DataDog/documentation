@@ -30,6 +30,7 @@ To get started:
 
 1. Click {{< ui >}}Save & Enable{{< /ui >}}.
 
+**Note**: Intelligent Correlation relies on relationships identified from your infrastructure and underlying telemetry. If there isn't enough telemetry to establish those relationships, you might not see correlated cases. By default, Intelligent Correlation only considers Monitor alerts that notify a paging integration (PagerDuty, Opsgenie, VictorOps, or on-call). If your organization has no monitors configured to page, Intelligent Correlation automatically considers high-priority (P1 or P2) alerts instead.
 
 ## Receiving your first case
 
