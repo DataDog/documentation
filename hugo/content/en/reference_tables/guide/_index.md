@@ -10,5 +10,5 @@ cascade:
 ---
 
 {{< whatsnext desc="General guides:" >}}
-    {{< nextlink href="reference_tables/guide/create-update-delete-reference-table-with-api" >}}Creating, Updating, and Deleting a Reference Table with the API{{< /nextlink >}}
+    {{< nextlink href="reference_tables/guide/create-update-delete-reference-table-with-api" >}}Creating, updating, and deleting a Reference Table with the API{{< /nextlink >}}
 {{< /whatsnext >}}
