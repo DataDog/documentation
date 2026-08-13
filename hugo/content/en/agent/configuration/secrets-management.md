@@ -1830,6 +1830,10 @@ Set a refresh interval:
 secret_refresh_interval: 3600  # refresh every hour
 ```
 
+<div class="alert alert-info">
+<code>secret_refresh_interval</code> defaults to <code>0</code>, which disables automatic refresh. If a secret fails to resolve at Agent startup—for example, because of a transient network or authentication error against your secrets backend, such as Azure Key Vault when using managed identity—it is not retried automatically and remains unresolved until the Agent is restarted. If calls to your secrets backend can be transiently unreliable, set <code>secret_refresh_interval</code> to a non-zero value (for example, <code>3600</code>) so failed resolutions are retried automatically.
+</div>
+
 Or, trigger a refresh manually:
 ```shell
 datadog-agent secret refresh
