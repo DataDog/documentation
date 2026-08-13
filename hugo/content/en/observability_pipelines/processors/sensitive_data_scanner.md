@@ -21,7 +21,7 @@ products:
 
 ## Overview
 
-The Sensitive Data Scanner processor scans logs to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
+The Sensitive Data Scanner processor scans logs or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to detect and redact or hash sensitive information such as PII, PCI, and custom sensitive data. You can pick from Datadog's library of predefined rules, or input custom Regex rules to scan for sensitive data.
 
 You can set up the pipeline and processor in the [UI](#set-up-the-processor-in-the-ui), [API][10], or [Terraform](#set-up-the-processor-using-terraform).
 
@@ -31,9 +31,9 @@ See [Best practices to optimize performance](#best-practices-to-optimize-perform
 
 To set up the processor:
 
-1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] for more information.
-    - Only logs matching the filter are scanned and processed.
-    - All logs, regardless of whether they match the filter query, are sent to the next step in the pipeline.
+1. Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [APM Query Syntax][17] for more information.
+    - Only events matching the filter are scanned and processed.
+    - All events, regardless of whether they match the filter query, are sent to the next step in the pipeline.
 1. Click {{< ui >}}Add Scanning Rule{{< /ui >}}.
 1. Select one of the following:
 
@@ -314,7 +314,7 @@ Use the following widgets to evaluate your Sensitive Data Scanner processors' sc
 
 After you identify rules with no matches over a representative time frame, confirm they are not needed and remove them. See [Delete a rule](#delete-a-rule).
 
-**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid. 
+**Note**: A rule with zero matches means the rule did not match in the selected time frame, not that the rule is invalid.
 
 ### Only enable rules you need
 
@@ -411,3 +411,4 @@ For [component metrics][13] and [processor buffer metrics][14] emitted by all pr
 [14]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [15]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
 [16]: https://app.datadoghq.com/dash/integration/32326/observability-pipelines-overview
+[17]: /tracing/trace_explorer/query_syntax/
