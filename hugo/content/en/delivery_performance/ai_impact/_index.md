@@ -75,7 +75,7 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
   </tbody>
 </table>
 
-### AI Attribution
+### AI attribution
 
 AI Impact classifies each pull request as AI-assisted or non-AI, and every metric is built on that classification. A PR is AI-assisted when at least one of its commits is AI-assisted.
 
