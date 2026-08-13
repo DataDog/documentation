@@ -15,7 +15,7 @@ interface DisplayedImage {
  * image's aspect ratio. Ported from Hugo's global-modals.js `resize()` so
  * the lightbox scales images identically to the Bootstrap modal it replaces.
  */
-function applyHugoResize(
+function applyLightboxResize(
   imageElement: HTMLImageElement,
   dialogElement: HTMLDivElement,
   naturalWidth: number,
@@ -103,7 +103,7 @@ export default function ImgLightbox() {
       const imageElement = imageRef.current;
       const dialogElement = dialogRef.current;
       if (!imageElement || !dialogElement) return;
-      applyHugoResize(
+      applyLightboxResize(
         imageElement,
         dialogElement,
         imageElement.naturalWidth,
@@ -122,7 +122,7 @@ export default function ImgLightbox() {
     const imageElement = imageRef.current;
     const dialogElement = dialogRef.current;
     if (imageElement && dialogElement) {
-      applyHugoResize(
+      applyLightboxResize(
         imageElement,
         dialogElement,
         imageElement.naturalWidth,

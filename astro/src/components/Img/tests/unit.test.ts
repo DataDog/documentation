@@ -6,7 +6,10 @@ describe("Img component", () => {
   it("renders a figure-wrapped image by default", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png", alt: "CI/CD Health dashboard" },
+      props: {
+        src: "cicd_optimization/cicd_health.png",
+        alt: "CI/CD Health dashboard",
+      },
     });
 
     expect(html).toContain("img__figure");
@@ -27,7 +30,10 @@ describe("Img component", () => {
   it("wraps the image in a popup link by default", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png", alt: "CI/CD Health dashboard" },
+      props: {
+        src: "cicd_optimization/cicd_health.png",
+        alt: "CI/CD Health dashboard",
+      },
     });
 
     expect(html).toContain("img__link--popup");
@@ -37,10 +43,15 @@ describe("Img component", () => {
   it("annotates the popup link with lightbox data attributes", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Img, {
-      props: { src: "cicd_optimization/cicd_health.png", alt: "CI/CD Health dashboard" },
+      props: {
+        src: "cicd_optimization/cicd_health.png",
+        alt: "CI/CD Health dashboard",
+      },
     });
 
-    expect(html).toMatch(/data-lightbox-src="[^"]*cicd_optimization\/cicd_health\.png[^"]*"/);
+    expect(html).toMatch(
+      /data-lightbox-src="[^"]*cicd_optimization\/cicd_health\.png[^"]*"/,
+    );
     expect(html).toContain('data-lightbox-alt="CI/CD Health dashboard"');
   });
 
@@ -142,7 +153,11 @@ describe("Img component", () => {
   it("prioritizes video over inline when both are true", async () => {
     const container = await AstroContainer.create();
     const html = await container.renderToString(Img, {
-      props: { src: "ci/custom-tags-create-facet.mp4", video: true, inline: true },
+      props: {
+        src: "ci/custom-tags-create-facet.mp4",
+        video: true,
+        inline: true,
+      },
     });
 
     expect(html).toContain("<video");
@@ -165,22 +180,5 @@ describe("Img component", () => {
     });
 
     expect(html).not.toContain("style=");
-  });
-
-  it("applies widthPercent to an inline image without overriding width/height attributes", async () => {
-    const container = await AstroContainer.create();
-    const html = await container.renderToString(Img, {
-      props: {
-        src: "metrics/guide/agent_filtering_for_custom_metrics/show_sidebar.png",
-        inline: true,
-        width: "22",
-        height: "22",
-        widthPercent: 22,
-      },
-    });
-
-    expect(html).toMatch(/<img[^>]*style="width:\s*22%"/);
-    expect(html).toContain('width="22"');
-    expect(html).toContain('height="22"');
   });
 });

@@ -1,6 +1,6 @@
 /* Ported from hugo/layouts/partials/global-modals/global-modals.html +
    hugo/assets/scripts/components/global-modals.js (Bootstrap 5 Modal). No
-   close button — matches Hugo exactly; only Escape/backdrop click dismiss. */
+*/
 
 .img-lightbox__overlay {
   position: fixed;
