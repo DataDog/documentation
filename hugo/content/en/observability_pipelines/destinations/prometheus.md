@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' Prometheus destination to send metrics to Prometheus.
+Use Observability Pipelines' {{< tooltip text="Prometheus destination" tooltip="Contact your account manager to request access." case="title" >}} to send metrics to Prometheus.
 
 ## Set up destination
 
