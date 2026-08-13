@@ -88,7 +88,7 @@ In organizations with seat-based Incident Management billing:
 
 ### Slack commands in the incident channel
 
-In an incident Slack channel, you can run Slack commands to modify the incident's states and severity, assign responder roles, page on-call teams, and more.
+In an incident Slack channel, you can run Slack commands to modify the incident's statuses and severity, assign responder roles, page on-call teams, and more.
 
 For a full list of Slack commands, see [Slack commands](#slack-commands).
 
@@ -101,7 +101,7 @@ Access all configuration options for Slack in Incident Management through the [*
 | **Push incident timeline messages to Slack**              | Automatically send incident timeline updates from Datadog to the Slack channel.<br><br>Keeps channel participants in-sync with Datadog updates. |
 | **Add important links to channel bookmarks**              | Post incident-related links in the Slack channel bookmarks.<br><br>Provides convenient access to resources.                                     |
 | **Add team members automatically**                        | When a Datadog team is added to the incident, its members are added to the Slack channel.                                                       |
-| **Send incident updates to the Slack channel**            | Update the channel topic with incident state, severity, and incident commander.                                                                 |
+| **Send incident updates to the Slack channel**            | Update the channel topic with incident status, severity, and incident commander.                                                                |
 | **Send a Slack notification when a meeting starts**       | Notify the Slack channel when a meeting is started, with participants and a join link.<br><br>Provides convenient access to incident calls.     |
 | **Activate Bits AI in incident Slack channels**           | Enable AI features that use incident context from Datadog.<br><br>Applies to all incident types in the selected Slack workspace.                |
 | **Automatically archive Slack channels after resolution** | Archive incident Slack channels once the incident is resolved.<br><br>Helps reduce channel clutter.                                             |
@@ -115,13 +115,13 @@ You can configure Incident Management to automatically post updates about incide
 1. In the Slack section, enable **Send all incident updates to a global channel**.
 1. Select the Slack workspace and Slack channel where you want the incident updates to be posted.
 
-Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident states, severities, and incident commanders.
+Datadog automatically notifies the selected channel about any newly declared incidents, as well as changes to incident statuses, severities, and incident commanders.
 
 Under the hood, this feature is a built-in, hidden [incident notification rule][5]. If you would like to customize the message or its triggers, disable it and define your own notification rule.
 
 ## Slack commands
 
-You can view the full list of available Slack commands at any time by typing `/dd help` or `/datadog help` in Slack. This will open the command reference directly in your Slack workspace. To open the action tray for common incident management actions, type `/datadog shortcuts`.
+You can view the full list of available Slack commands at any time by typing `/datadog` (or `/dd`) to open up the command modal to browse and execute any Datadog actions, or `/dd help` to view the same list. To open the action tray for common incident management actions, type `/dd shortcuts`.
 
 ### Global commands (run anywhere)
 
@@ -136,9 +136,9 @@ You can view the full list of available Slack commands at any time by typing `/d
 {{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
 | Command | Description |
 | ------- | ----------- |
-| `/datadog` | Open the search modal to view all available Slack commands. |
+| `/datadog` | Open the command modal to view all available Datadog actions. |
 | `/datadog shortcuts` | Open the incident action tray to perform common actions. |
-| `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
+| `/datadog incident update` | Update the incident status, severity, or other attribute of the incident. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
@@ -152,9 +152,9 @@ You can view the full list of available Slack commands at any time by typing `/d
 {{< site-region region="gov,gov2" >}}
 | Command | Description |
 | ------- | ----------- |
-| `/datadog` | Open the search modal to view all available Slack commands. |
+| `/datadog` | Open the command modal to view all available Datadog actions. |
 | `/datadog shortcuts` | Open the incident action tray to perform common actions. |
-| `/datadog incident update` | Update the incident state, severity, or other attribute of the incident. |
+| `/datadog incident update` | Update the incident status, severity, or other attribute of the incident. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
@@ -167,7 +167,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 
 ### Action tray buttons
 
-In addition to typing `/datadog shortcuts` to open the action tray, Datadog can post the action tray as buttons directly in the incident Slack channel, so responders can perform common actions, such as updating severity or state, without typing a command.
+In addition to typing `/dd shortcuts` to open the action tray, Datadog will post the action tray directly in the incident Slack channel on status changes, so responders can perform common actions, such as updating severity or status, without typing a command.
 
 The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **[Incidents > Settings > Integrations > Slack Settings][3]** and configure **Incident Slack Actions**.
 
