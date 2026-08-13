@@ -1555,36 +1555,36 @@ menu:
       identifier: bits_ai_sre_investigate_issues
       parent: bits_ai_sre
       weight: 101
-    - name: Take Action
-      url: bits_ai/bits_investigation/take_action
-      identifier: bits_ai_sre_take_action
-      parent: bits_ai_sre
-      weight: 102
     - name: Bits Investigation Integrations and Settings
       url: bits_ai/bits_investigation/configure
       identifier: bits_ai_sre_configure
       parent: bits_ai_sre
-      weight: 103
+      weight: 102
     - name: Knowledge Sources
       url: bits_ai/bits_investigation/knowledge_sources
       identifier: bits_ai_sre_knowledge_sources
       parent: bits_ai_sre
-      weight: 104
+      weight: 103
     - name: Chat with Bits Investigation
       url: bits_ai/bits_investigation/chat_bits_investigation
       identifier: bits_ai_sre_chat
       parent: bits_ai_sre
-      weight: 105
+      weight: 104
+    - name: Bits Remediation
+      url: bits_ai/bits_remediation
+      identifier: bits_remediation
+      parent: bits_ai
+      weight: 2
     - name: Bits Detection
       url: bits_ai/bits_detection
       identifier: bits_detection
       parent: bits_ai
-      weight: 2
+      weight: 3
     - name: Bits Code
       url: bits_ai/bits_code
       parent: bits_ai
       identifier: bits_ai_dev_agent
-      weight: 3
+      weight: 4
     - name: Setup
       url: bits_ai/bits_code/setup
       parent: bits_ai_dev_agent
@@ -1599,22 +1599,22 @@ menu:
       url: bits_ai/bits_security_analyst
       identifier: bits_ai_bits_security_analyst
       parent: bits_ai
-      weight: 4
+      weight: 5
     - name: Bits Chat
       url: bits_ai/bits_chat
       identifier: bits_ai_bits_chat
       parent: bits_ai
-      weight: 5
+      weight: 6
     - name: Bits Agent Builder
       url: actions/agents/
       identifier: bits_ai_agent_builder
       parent: bits_ai
-      weight: 6
+      weight: 7
     - name: Bits Data Analysis
       url: bits_ai/bits_data_analysis
       identifier: bits_data_analysis
       parent: bits_ai
-      weight: 7
+      weight: 8
     - name: Dashboards
       url: dashboards/
       pre: dashboard
@@ -3090,6 +3090,11 @@ menu:
       parent: forms
       identifier: forms_responses
       weight: 2
+    - name: Guides
+      url: actions/forms/guide/
+      parent: forms
+      identifier: forms_guides
+      weight: 3
     - name: Action Catalog
       url: actions/actions_catalog/
       pre: books
@@ -3754,6 +3759,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
+    - name: Manual Instrumentation
+      url: serverless/azure_container_apps/manual_instrumentation
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_manual
+      weight: 1
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -5291,11 +5301,6 @@ menu:
       identifier: data_streams_metrics_and_tags
       parent: data_streams
       weight: 5
-    - name: Business Transaction Tracking
-      url: data_streams/business_transaction_tracking
-      identifier: data_streams_business_transaction_tracking
-      parent: data_streams
-      weight: 6
     - name: Data Observability Overview
       url: data_observability/
       pre: data-observability-wui
@@ -5354,6 +5359,16 @@ menu:
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
+      weight: 1000000
+    - name: Transactional Databases
+      url: data_observability/quality_monitoring/transactional_databases
+      identifier: transactional_databases
+      parent: quality_monitoring
+      weight: 260000
+    - name: PostgreSQL
+      url: data_observability/quality_monitoring/transactional_databases/postgres
+      identifier: data_obs_postgres
+      parent: transactional_databases
       weight: 1000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
@@ -6731,11 +6746,16 @@ menu:
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_export_pipeline_configuration
       weight: 108
+    - name: Network Traffic
+      url: observability_pipelines/configuration/network_traffic
+      parent: observability_pipelines_configuration
+      identifier: observability_pipelines_network_traffic
+      weight: 109
     - name: Access Control
       url: observability_pipelines/configuration/access_control
       parent: observability_pipelines_configuration
       identifier: observability_pipelines_access_control
-      weight: 109
+      weight: 110
     - name: Sources
       url: observability_pipelines/sources/
       parent: observability_pipelines
@@ -10127,26 +10147,31 @@ menu:
       parent: pa_experiments_metrics
       identifier: pa_experiments_metric_sync
       weight: 1
+    - name: Standardize Experiments with Protocols
+      url: experiments/protocols
+      parent: pa_experiments
+      identifier: pa_experiments_protocols
+      weight: 2
     - name: Plan and Launch Experiments
       url: experiments/plan_and_launch_experiments
       parent: pa_experiments
       identifier: pa_experiments_plan
-      weight: 2
+      weight: 3
     - name: Read Experiment Results
       url: experiments/reading_results
       parent: pa_experiments
       identifier: pa_experiments_results
-      weight: 3
+      weight: 4
     - name: Experiment Diagnostics
       url: experiments/diagnostics
       parent: pa_experiments
       identifier: pa_experiments_diagnostics
-      weight: 4
+      weight: 5
     - name: Concepts
       url: experiments/concepts/
       parent: pa_experiments
       identifier: pa_experiments_concepts
-      weight: 5
+      weight: 6
     - name: Subject Types
       url: experiments/concepts/subject_types
       parent: pa_experiments_concepts
@@ -10171,7 +10196,7 @@ menu:
       url: experiments/statistics/
       parent: pa_experiments
       identifier: pa_experiments_statistics
-      weight: 6
+      weight: 7
     - name: Analysis Methods
       url: experiments/statistics/analysis_methods
       parent: pa_experiments_statistics
@@ -10201,7 +10226,7 @@ menu:
       url: experiments/metric_property_breakouts
       parent: pa_experiments
       identifier: pa_experiments_metric_property_breakouts
-      weight: 6
+      weight: 8
     - name: Troubleshooting
       url: experiments/troubleshooting
       parent: pa_experiments

@@ -88,8 +88,6 @@ These are the available sources:
 {{% /tab %}}
 {{% tab "Traces" %}}
 
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
-
 - [Datadog Agent][1]
 - [OpenTelemetry][2]
 
