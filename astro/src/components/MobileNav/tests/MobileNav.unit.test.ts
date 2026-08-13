@@ -6,6 +6,7 @@ import preactRenderer from "@astrojs/preact/server.js";
 import MobileNav from "../MobileNav.astro";
 import { getDocsNavTree } from "@lib/componentUtils/docsNavMenu";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
+import { getOverviewPages } from "@lib/api/overviewPages";
 import type { ApiCategory } from "@lib/api/schemas/views";
 import { HUGO_ORIGIN } from "@config/origins";
 
@@ -269,6 +270,70 @@ describe("MobileNav.astro", () => {
     );
     // Every category should have its operations in the DOM.
     expect(operationLists.length).toBeGreaterThan(1);
+  });
+
+  describe("Overview section", () => {
+    async function getOverviewPagesWithContent() {
+      const pages = await getOverviewPages();
+      expect(pages.length).toBeGreaterThan(0);
+      return pages;
+    }
+
+    it("renders an Overview section ahead of the spec categories", async () => {
+      const [category] = await getCategoriesWithOperations();
+      const pages = await getOverviewPagesWithContent();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+
+      const sections = [
+        ...doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section"),
+      ];
+      expect(
+        sections[0]?.querySelector("summary")?.textContent,
+      ).toContain("Overview");
+
+      const overviewLinks = [
+        ...(sections[0]?.querySelectorAll(".mobile-nav__link") ?? []),
+      ];
+      expect(overviewLinks.map((link) => link.getAttribute("href"))).toEqual(
+        pages.map((page) => `/api/latest/${page.slug}/`),
+      );
+    });
+
+    it("leaves Overview collapsed on a spec category page", async () => {
+      const [category] = await getCategoriesWithOperations();
+      const doc = await renderMobileNav(`/api/latest/${category.slug}/`);
+      expect(sectionByLabel(doc, "Overview")?.hasAttribute("open")).toBe(false);
+    });
+
+    it("expands Overview and marks it current on the API root", async () => {
+      const doc = await renderMobileNav("/api/latest/");
+      const overview = sectionByLabel(doc, "Overview");
+      expect(overview?.hasAttribute("open")).toBe(true);
+      expect(
+        overview?.querySelector('summary[aria-current="page"]'),
+      ).not.toBeNull();
+      // The root is the section itself, so no sub page is highlighted.
+      expect(doc.querySelector(".mobile-nav__link--active")).toBeNull();
+    });
+
+    it("expands Overview and highlights the current hand-written page", async () => {
+      const pages = await getOverviewPagesWithContent();
+      const [page] = pages;
+      const doc = await renderMobileNav(`/api/latest/${page.slug}/`);
+
+      const overview = sectionByLabel(doc, "Overview");
+      expect(overview?.hasAttribute("open")).toBe(true);
+      // Only the section owning the page is open — no spec category opens too.
+      expect(
+        doc.querySelectorAll(".mobile-nav__list--api .mobile-nav__section[open]")
+          .length,
+      ).toBe(1);
+
+      const active = doc.querySelector(".mobile-nav__link--active");
+      expect(active?.getAttribute("href")).toBe(`/api/latest/${page.slug}/`);
+      expect(active?.getAttribute("aria-current")).toBe("page");
+      expect(active?.textContent).toContain(page.title);
+    });
   });
 
   it("renders nested subsections with children as expandable <details> elements", async () => {
