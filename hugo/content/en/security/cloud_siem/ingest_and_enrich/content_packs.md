@@ -47,10 +47,10 @@ further_reading:
 - Configuration guides
 
 You can filter Content Packs by the following types:
-- **Content Packs**: Integrations bundled with security-relevant content such as detection rules, {{< tooltip text="SOAR" tooltip="Security Orchestration, Automation, and Response" >}} workflows, and custom tooling
+- **Content Packs**: Integrations bundled with security-relevant content such as detection rules, SOAR (Security Orchestration, Automation, and Response) workflows, and custom tooling
 - **Enrichment Packs**: Content to add valuable context to SIEM analysis, such as vulnerabilities or third-party insights, to improve investigations
 - **Integration Packs**: Content curated from Datadog's catalog to be relevant for use with Cloud SIEM
-- **Entity Packs**: Integrations and bundled content that power {{< tooltip text="UEBA" tooltip="User and Entity Behavior Analytics" >}} by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM
+- **Entity Packs**: Integrations and bundled content that power UEBA (User and Entity Behavior Analytics) by modeling normal activity for users and entities and surfacing risky anomalies in Cloud SIEM
 
 {{% cloud-siem-content-packs %}}
 
