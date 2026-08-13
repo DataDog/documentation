@@ -158,6 +158,18 @@ If you set streaming up through the [AWS Console](?tab=awsconsole#installation):
 
 Once the resources are deleted, wait for five minutes for Datadog to recognize the change. To validate completion, go to the **Metric Collection** tab in Datadog's [AWS integration page][5] and verify that the disabled regions are not displayed under **CloudWatch Metric Streams** for the specified AWS account.
 
+### Monitor stream health
+
+Datadog submits the `datadog.aws_metric_streams.data_received` metric each time it receives a payload from a CloudWatch metric stream. Use this metric to confirm that AWS is sending metrics and that Datadog is receiving them.
+
+`datadog.aws_metric_streams.data_received`
+: **Type**: Gauge<br>
+A value of `1` for each payload Datadog receives from a CloudWatch metric stream. Tagged with `stream_arn`, `stream_name`, `aws_account`, and `region`.
+
+To check whether a stream is delivering data, query this metric in the [Metrics Explorer][8] and group by `stream_name` or `stream_arn`.
+
+To be notified when a stream stops delivering data, create a [metric monitor][9] on `datadog.aws_metric_streams.data_received`. Group the monitor by `stream_arn` and configure it to notify on missing data.
+
 ## Troubleshooting
 
 To resolve any issues encountered while setting up Metric Streams or the associated resources, see [AWS Troubleshooting][6].
@@ -172,3 +184,5 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
 [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
+[8]: /metrics/explorer/
+[9]: /monitors/types/metric/
