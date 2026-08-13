@@ -25,7 +25,7 @@ To get started:
 
    {{< img src="events/correlation/intelligent/intelligent_correlator_define.png" alt="Define Intelligent Correlator form with fields to include and exclude events by tag, and a Save and Enable button" style="width:100%;" >}}
 
-Enabling the Intelligent Correlator applies to your entire organization. After it's enabled, Datadog evaluates incoming Monitor alerts and groups related ones into cases automatically. You can return to the same page at any time to adjust the tag filters or disable the correlator.
+Enabling the Intelligent Correlator applies to your entire organization. After it's enabled, it will evaluate incoming Monitor alerts and group related ones into cases automatically. You can return to the same page at any time to adjust the tag filters or disable the correlator.
 
 
 ## Receiving your first case
