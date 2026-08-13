@@ -58,20 +58,14 @@ interface PageProps {
   redirectTo?: string;
 }
 
+// getStaticPaths only emits valid params, so these are build-time invariants.
 const lang = parseLangParam(Astro.params.lang);
-if (!lang) {
-  return new Response(null, { status: 404 });
-}
+if (!lang) throw new Error(`Unexpected lang param: ${Astro.params.lang}`);
 
 const catSlug = Astro.params.category;
 const opSlug = Astro.params.operation;
-if (
-  !catSlug ||
-  typeof catSlug !== "string" ||
-  !opSlug ||
-  typeof opSlug !== "string"
-) {
-  return new Response(null, { status: 404 });
+if (!catSlug || !opSlug) {
+  throw new Error(`Missing category/operation param: ${catSlug}/${opSlug}`);
 }
 
 const { redirectTo } = Astro.props as PageProps;
@@ -79,15 +73,13 @@ const { redirectTo } = Astro.props as PageProps;
 const categories = await getCategoryStubsView(lang);
 const overviewPages = await getOverviewPagesView();
 const category = await getCategoryViewBySlug(catSlug, lang);
-if (!category) {
-  return new Response(null, { status: 404 });
-}
+if (!category) throw new Error(`Missing API category: ${catSlug}`);
 
 const operation = redirectTo
   ? undefined
   : await getOperationView(catSlug, opSlug, lang);
 if (!redirectTo && !operation) {
-  return new Response(null, { status: 404 });
+  throw new Error(`Missing API operation: ${catSlug}/${opSlug}`);
 }
 
 if (operation) {

@@ -25,18 +25,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
+// getStaticPaths only emits valid params, so these are build-time invariants:
+// if they ever fail, the params contract is broken and the build should too.
 const lang = parseLangParam(Astro.params.lang);
-if (!lang) {
-  return new Response(null, { status: 404 });
-}
+if (!lang) throw new Error(`Unexpected lang param: ${Astro.params.lang}`);
 
 const pageSlug = Astro.params.page;
 const isRootPage = !pageSlug;
 
-const entry = await getEntry('en', isRootPage ? API_CONTENT_DIR : `${API_CONTENT_DIR}/${pageSlug}`);
-if (!entry) {
-  return new Response(null, { status: 404 });
-}
+const entryId = isRootPage ? API_CONTENT_DIR : `${API_CONTENT_DIR}/${pageSlug}`;
+const entry = await getEntry('en', entryId);
+if (!entry) throw new Error(`Missing API content entry: ${entryId}`);
 
 const categories = await getCategoryStubsView(lang);
 const overviewPages = await getOverviewPagesView();

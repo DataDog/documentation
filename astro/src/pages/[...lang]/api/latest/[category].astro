@@ -27,22 +27,17 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return paths;
 };
 
+// getStaticPaths only emits valid params, so these are build-time invariants.
 const lang = parseLangParam(Astro.params.lang);
-if (!lang) {
-  return new Response(null, { status: 404 });
-}
+if (!lang) throw new Error(`Unexpected lang param: ${Astro.params.lang}`);
 
 const slug = Astro.params.category;
-if (!slug || typeof slug !== 'string') {
-  return new Response(null, { status: 404 });
-}
+if (!slug) throw new Error('Missing category param');
 
 const categories = await getCategoryStubsView(lang);
 const overviewPages = await getOverviewPagesView();
 const current = await getCategoryViewBySlug(slug, lang);
-if (!current) {
-  return new Response(null, { status: 404 });
-}
+if (!current) throw new Error(`Missing API category: ${slug}`);
 
 const categoryBaseHref = localizedHref(lang, `/api/latest/${slug}/`);
 ---

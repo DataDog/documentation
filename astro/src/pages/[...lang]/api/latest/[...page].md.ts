@@ -3,7 +3,7 @@ export const prerender = true;
 
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection, getEntry } from 'astro:content';
-import { LOCALES, parseLangParam } from '@lib/i18n/locale';
+import { LOCALES } from '@lib/i18n/locale';
 import { API_CONTENT_DIR } from '@lib/api/overviewPages';
 import { format, parse } from '@lib/plaintext/helpers';
 
@@ -24,20 +24,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const GET: APIRoute = async ({ params }) => {
-  const lang = parseLangParam(params.lang);
-  if (!lang) {
-    return new Response(null, { status: 404 });
-  }
-
+  // getStaticPaths only emits valid page slugs, so these are build-time
+  // invariants: a failure means the params contract is broken.
   const pageSlug = params.page;
-  if (!pageSlug) {
-    return new Response(null, { status: 404 });
-  }
+  if (!pageSlug) throw new Error('Missing page param for API plaintext route');
 
-  const entry = await getEntry('en', `${API_CONTENT_DIR}/${pageSlug}`);
-  if (!entry) {
-    return new Response(null, { status: 404 });
-  }
+  const entryId = `${API_CONTENT_DIR}/${pageSlug}`;
+  const entry = await getEntry('en', entryId);
+  if (!entry) throw new Error(`Missing API content entry: ${entryId}`);
 
   const body = format(parse(entry.body ?? '')).trim() + '\n';
 
