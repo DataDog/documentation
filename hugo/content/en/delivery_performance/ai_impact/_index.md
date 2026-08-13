@@ -113,7 +113,7 @@ Two attribution modes are available, depending on the signal your tools provide.
   </tbody>
 </table>
 
-Direct attribution is the more precise of the two, because the signal is attached to the change itself. Inferred from user activity mode covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
+Direct attribution is the more precise of the two, because the signal is attached to the change itself. The inferred from user activity mode covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
 
 By default, Datadog selects the most precise attribution mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
 
