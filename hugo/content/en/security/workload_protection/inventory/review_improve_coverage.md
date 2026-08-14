@@ -15,10 +15,10 @@ Use this order to review coverage across your environment:
 2. Identify unprotected or partially protected workloads, then prioritize resources with the highest business impact and exposure.
 3. Verify policy and rule deployment on prioritized resources, and check for outdated or unhealthy Agents on all remaining workloads.
 4. Map detection coverage to MITRE ATT&CK, then deploy or update detection rules to close gaps.
-5. Reassess Coverage to confirm that your changes took effect.
+5. Reassess coverage to confirm that your changes took effect.
 6. Record the final state for compliance, audits, incident reference, and future comparison.
 
-The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings.
+The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
 
 {{< img src="security/workload_protection/coverage/coverage_top_widgets.png" alt="Coverage page top widgets showing resource coverage, rule loading status, Workload Protection adoption, and Remote Config deployment" width="100%">}}
 
@@ -48,7 +48,7 @@ Update or deploy the Datadog Agent, then confirm that the affected resources rep
 
 Use the Explorer facets under the **Rule** and **Policy** groups to filter resources by applied detection content. Filter by MITRE ATT&CK tactics and techniques to see which parts of the framework are covered across your infrastructure.
 
-For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
+For information about the MITRE ATT&CK map available in Cloud SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
 ## Confirm that new rules are loaded
 
