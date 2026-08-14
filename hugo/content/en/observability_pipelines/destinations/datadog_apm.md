@@ -57,5 +57,5 @@ See [Component metrics][5] and [Destination buffer metrics][6] for more informat
 [3]: /api/latest/observability-pipelines/
 [4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
-[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=destinations#component-metrics
+[6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=destinations#buffer
 [7]: /agent/guide/private-link/?tab=crossregionprivatelinkendpoints
