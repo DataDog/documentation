@@ -83,7 +83,7 @@ sast:
 
 Refer to the [Datadog documentation][6] for a complete list of rulesets.
 
-The repository configuration is also used by Datadog-hosted scans. Setting `use-default-rulesets: false` disables default AI-native SAST rulesets as well as traditional SAST rulesets. To keep AI-native SAST enabled, either retain the default rulesets or include the applicable `<language>-ai_sast` rulesets under `use-rulesets`. For more information, see [Configure AI-native SAST][9].
+The repository configuration is also used by Datadog-hosted scans. Setting `use-default-rulesets: false` disables default AI-native SAST rulesets as well as traditional SAST rulesets. To keep AI-native SAST enabled, either retain the default rulesets or include the applicable `<language>-ai_sast` rulesets under `use-rulesets`. See [Configure AI-native SAST][9] for more information.
 
 ### Example for Python
 
