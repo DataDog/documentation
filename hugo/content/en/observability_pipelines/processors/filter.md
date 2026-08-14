@@ -15,21 +15,26 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
 
 ## Overview
 
-This processor sends all logs or metrics that match the filter query to the next step in the pipeline. Logs or metrics that do not match the filter query are dropped and are not sent to any subsequent processors or destinations. **Note**: For all other processor queries, logs or metrics that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
+This processor sends all logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} that match the filter query to the next step in the pipeline. Events that do not match the filter query are dropped and are not sent to any subsequent processors or destinations. 
+
+**Note**: For all other processor queries, events that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
 
 ## Setup
 
 To set up the filter processor:
 
-- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1] or [Metrics Search Syntax][2] for more information.
-  - Logs or metrics that match the query are sent to the next component.
-  - Logs or metrics that don't match the query are dropped.
+- Define a {{< ui >}}filter query{{< /ui >}}. See [Logs Search Syntax][1], [Metrics Search Syntax][2], or [APM Query Syntax][6] for more information.
+  - Events that match the query are sent to the next component.
+  - Events that don't match the query are dropped.
 
 ## Health metrics
 
@@ -40,6 +45,7 @@ For [component metrics][3] and [processor buffer metrics][4] emitted by all proc
 [3]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [4]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#processor-buffer-metrics
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
+[6]: /tracing/trace_explorer/query_syntax/
 
 
 ## Further reading
