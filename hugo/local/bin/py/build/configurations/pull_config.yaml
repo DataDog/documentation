@@ -359,19 +359,6 @@
               title: Datadog-Amazon CloudFormation
               aliases:
                 - /developers/amazon_cloudformation/
-                
-      - repo_name: datadog-agent
-        contents:
-        - action: pull-and-push-folder
-          branch: 7.78.x
-          globs:
-          - 'docs/cloud-workload-security/backend_linux.md'
-          - 'docs/cloud-workload-security/backend_windows.md'
-          - 'docs/cloud-workload-security/linux_expressions.md'
-          - 'docs/cloud-workload-security/windows_expressions.md'
-          options:
-            dest_dir: '/security/workload_protection/'
-            path_to_remove: 'docs/cloud-workload-security/'
 
       - repo_name: datadog-operator
         contents:
