@@ -53,6 +53,10 @@ After this is completed, data collection begins automatically. The app registrat
 
 {{< img src="integrations/guide/azure_architecture_and_configuration/app_registration_metric_collection.png" alt="Workflow diagram showing Azure metric collection process: the Datadog backend reads configuration, authenticates through service principal to Azure Active Directory, collects subscription and resource metadata using RBAC permissions, filters resources by tags, then retrieves metrics from Azure Monitor for ingestion into Datadog." >}}
 
+{{< site-region region="us,us3,us5,eu,ap1,ap2,uk1" >}}
+The metric and log collection diagrams above use authentication with a client secret. With **Secretless Auth**, the app registration trusts Datadog's identity through an Azure federated credential and OpenID Connect (OIDC) workload identity federation. This replaces the stored client secret. To move an existing app registration to Secretless Auth, see [Migrate an existing app registration to Secretless Auth](/getting_started/integrations/azure/#secretless-migration-setup).
+{{< /site-region >}}
+
 ## Log collection
 
 The diagram below provides a reference architecture for forwarding logs from Azure to Datadog using [automated log forwarding][29]. A control plane deployed in your chosen subscription discovers resources and configures their diagnostic settings. Log forwarders, consisting of an Azure Container Apps job and a storage account, are deployed in each region where your resources generate logs, and they scale up or down to match log volume.

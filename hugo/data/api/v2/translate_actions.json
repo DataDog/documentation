@@ -1694,6 +1694,12 @@
     "description": "Use this API endpoint to delete a deployment event.",
     "summary": "Delete a deployment event"
   },
+  "PatchDORADeploymentByVersion": {
+    "description": "Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.",
+    "summary": "Patch a deployment event by version",
+    "request_description": "",
+    "request_schema_description": "Request to patch a DORA deployment event identified by service, environment, and version."
+  },
   "ListDORADeployments": {
     "description": "Use this API endpoint to get a list of deployment events.",
     "summary": "Get a list of deployment events",
@@ -3872,7 +3878,7 @@
     "summary": "Delete a tag configuration"
   },
   "ListTagConfigurationByName": {
-    "description": "Returns the tag configuration for the given metric name.",
+    "description": "Returns the tag configuration for the given metric name.\n\nA metric may exist and submit data without having a tag configuration. If no tag configuration exists\nfor the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric\nitself is missing.",
     "summary": "List tag configuration by name"
   },
   "UpdateTagConfiguration": {
@@ -6519,7 +6525,7 @@
     "summary": "Get status page"
   },
   "UpdateStatusPage": {
-    "description": "Updates an existing status page's attributes. **Note**: Publishing and unpublishing via the `enabled` property will be deprecated on this endpoint. Use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints instead.",
+    "description": "Updates an existing status page's attributes. To publish and unpublish status pages, use the dedicated [publish](#publish-status-page) and [unpublish](#unpublish-status-page) status page endpoints.",
     "summary": "Update status page",
     "request_description": "",
     "request_schema_description": "Request object for updating a status page."
