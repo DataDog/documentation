@@ -80,7 +80,7 @@ To help you manage the quality and volume of your metrics, use the Metric Tag Go
 
 ### Trace Sampling
 
-Ingesting and storing every trace can be costly at scale. Use the Trace Sampling template to ingest, process, and route your {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
+Use the Trace Sampling template to ingest, process, and route your {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} telemetry data to control costs while retaining the traces you need for troubleshooting and analysis.
 
 {{% /tab %}}
 {{< /tabs >}}

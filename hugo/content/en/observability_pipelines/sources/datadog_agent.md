@@ -21,7 +21,7 @@ further_reading:
 
 ## Overview
 
-Use Observability Pipelines' Datadog Agent source to receive logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} from the Datadog Agent.
+Use Observability Pipelines' Datadog Agent source to receive {{< tooltip text="logs, metrics, or traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} from the Datadog Agent.
 
 **Note**: If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector to collect logs or metrics, you must [use the OpenTelemetry source to send that data to Observability Pipelines][4].
 

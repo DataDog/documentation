@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs, metrics, and {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
 
@@ -77,17 +77,19 @@ These are the available destinations:
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
+- [OpenTelemetry][5]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
 [2]: /observability_pipelines/destinations/elasticsearch/
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
+[5]: /observability_pipelines/destinations/opentelemetry/
+[6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{% tab "Traces" %}}
-
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
 - [Datadog APM][25]
 - [OpenTelemetry Traces][26]
@@ -115,7 +117,10 @@ The following table lists the destinations and fields that support template synt
 | Google Chronicle  | Log type                            | Defaults to `DATADOG` log type.                                                                                            |
 | Google Cloud      | Prefix                              | The Worker creates a folder named `OP_UNRESOLVED_TEMPLATE_LOGS/` and writes the logs there.                                |
 | Opensearch        | Index                               | The Worker writes logs to the `datadog-op` index.                                                                          |
+| Prometheus*        | Tenant ID                           | The Worker drops the metric.  |
 | Splunk HEC        | Index<br>Source type                | The Worker sends the logs to the default index configured in Splunk.<br>The Worker defaults to the `httpevent` sourcetype. |
+
+*The template must have a literal prefix, such as `prefix-{{ tenant_id }}` or `prefix/{{ tenant_id }}`. Templates without a literal prefix, such as `{{ tenant_id }}`, are rejected; the Worker logs an error, and the pipeline isn't started.
 
 #### Example
 
