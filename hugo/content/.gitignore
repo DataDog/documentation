@@ -121,3 +121,6 @@
 /*/observability_pipelines/configuration/install_the_worker/_index.md
 /*/serverless/azure_container_apps/_index.md
 /*/serverless/azure_container_apps/manual_instrumentation/_index.md
+/*/real_user_monitoring/setup/enable_rum.md
+/*/real_user_monitoring/setup/enable_rum/_index.md
+/*/real_user_monitoring/setup/enable_rum/manage_sessions.md

@@ -123,44 +123,10 @@ Rum.enable(rumConfig)
 
 {% step title="Enable RUM to start sending data" %}
 
-```kotlin
-// in a common source set
-fun initializeRum(applicationId: String) {
-    val rumConfiguration = RumConfiguration.Builder(applicationId)
-            .trackLongTasks(durationThreshold)
-            .apply {
-                // platform specific setup
-                rumPlatformSetup(this)
-            }
-            .build()
+See [Enable the DD RUM module](/real_user_monitoring/setup/enable_rum/?platform=kotlin_multiplatform) for instructions on how to enable RUM to start sending data.
+{% /step %}
 
-    Rum.enable(rumConfiguration)
-}
-
-internal expect fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.Builder)
-
-// in iOS source set
-internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.Builder) {
-    with(rumConfigurationBuilder) {
-        trackUiKitViews()
-        trackUiKitActions()
-        // check more iOS-specific methods
-    }
-}
-
-// in Android source set
-internal actual fun rumPlatformSetup(rumConfigurationBuilder: RumConfiguration.Builder) {
-    with(rumConfigurationBuilder) {
-        useViewTrackingStrategy(/** choose view tracking strategy **/)
-        trackUserInteractions()
-        // check more Android-specific methods
-    }
-}
-```
-
-See [Automatically track views][8] to enable automatic tracking of all your views.
-
-### Set tracking consent (GDPR compliance)
+{% step title="Set tracking consent (GDPR compliance)" %}
 
 To be compliant with GDPR, the SDK requires the tracking consent value at initialization.
 Tracking consent can be one of the following values:

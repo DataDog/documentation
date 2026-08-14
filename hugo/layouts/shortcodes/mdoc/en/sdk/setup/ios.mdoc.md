@@ -478,87 +478,10 @@ For example, if the current tracking consent is `.pending`:
 
 {% step title="Start sending data" %}
 
-#### Enable RUM
-
-Configure and start RUM. This should be done once and as early as possible, specifically in your `AppDelegate`:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-import DatadogRUM
-
-RUM.enable(
-  with: RUM.Configuration(
-    applicationID: "<rum application id>",
-    uiKitViewsPredicate: DefaultUIKitRUMViewsPredicate(),
-    uiKitActionsPredicate: DefaultUIKitRUMActionsPredicate(),
-    swiftUIViewsPredicate: DefaultSwiftUIRUMViewsPredicate(),
-    swiftUIActionsPredicate: DefaultSwiftUIRUMActionsPredicate(isLegacyDetectionEnabled: true),
-    urlSessionTracking: RUM.Configuration.URLSessionTracking()
-  )
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-@import DatadogRUM;
-
-DDRUMConfiguration *configuration = [[DDRUMConfiguration alloc] initWithApplicationID:@"<rum application id>"];
-configuration.uiKitViewsPredicate = [DDDefaultUIKitRUMViewsPredicate new];
-configuration.uiKitActionsPredicate = [DDDefaultUIKitRUMActionsPredicate new];
-configuration.swiftUIViewsPredicate = [DDDefaultSwiftUIRUMViewsPredicate new];
-configuration.swiftUIActionsPredicate = [[DDDefaultSwiftUIRUMActionsPredicate alloc] initWithIsLegacyDetectionEnabled:YES];
-[configuration setURLSessionTracking:[DDRUMURLSessionTracking new]];
-
-[DDRUM enableWith:configuration];
-```
-
-{% /tab %}
-{% /tabs %}
-
-#### Enable `URLSessionInstrumentation`
-
-To monitor requests sent from the `URLSession` instance as resources, enable `URLSessionInstrumentation` for your delegate type and pass the delegate instance to the `URLSession`:
-
-{% tabs %}
-{% tab label="Swift" %}
-
-```swift
-URLSessionInstrumentation.enable(
-    with: .init(
-        delegateClass: <YourSessionDelegate>.self
-    )
-)
-
-let session = URLSession(
-    configuration: .default,
-    delegate: <YourSessionDelegate>(),
-    delegateQueue: nil
-)
-```
-
-{% /tab %}
-{% tab label="Objective-C" %}
-
-```objective-c
-DDURLSessionInstrumentationConfiguration *config = [[DDURLSessionInstrumentationConfiguration alloc] initWithDelegateClass:[<YourSessionDelegate> class]];
-[DDURLSessionInstrumentation enableWithConfiguration:config];
-
-NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]
-                                                      delegate:[[<YourSessionDelegate> alloc] init]
-                                                 delegateQueue:nil];
-```
-
-{% /tab %}
-{% /tabs %}
+See [Enable the DD RUM module](/real_user_monitoring/setup/enable_rum/?platform=ios) for instructions on how to configure and start RUM.
 {% /step %}
 
 {% /stepper %}
-
-**Note**: `URLSessionInstrumentation` requires access to a `URLSession` delegate class. For third-party libraries that don't expose a session delegate, use the [Custom Resources API][10] to manually track those network calls.
 
 ### Instrument views
 
@@ -607,33 +530,6 @@ struct BarView: View {
     }
 }
 ```
-
-## Verify your setup
-
-After completing setup, verify that the iOS SDK is correctly sending data to Datadog.
-
-### Check the Xcode console
-
-Enable verbose SDK logging to confirm data is being sent. Add the following in the `DEBUG` build configuration only:
-
-```swift
-Datadog.verbosityLevel = .debug
-```
-
-After running your app, look for output similar to the following in the Xcode debugger console:
-
-```
-[DATADOG SDK] 🐶 → 17:23:09.849 [DEBUG] ⏳ (rum) Uploading batch...
-[DATADOG SDK] 🐶 → 17:23:10.972 [DEBUG]    → (rum) accepted, won't be retransmitted: success
-```
-
-**Note**: Remove `Datadog.verbosityLevel` before building for Release.
-
-### View your data in Datadog
-
-After running your app, navigate to the [RUM Explorer][12] to see sessions from your application. You should see session data within a few minutes.
-
-To view crash reports and iOS errors, navigate to [**Error Tracking**][3]. For more details on crash analysis with symbolicated stack traces, see [iOS Crash Reporting and Error Tracking][13].
 
 ## Track iOS errors
 
