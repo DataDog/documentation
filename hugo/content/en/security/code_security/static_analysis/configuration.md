@@ -197,7 +197,7 @@ The `global-config` object controls repository-wide settings:
 
 Example configuration:
 
-Example configuration. Because this example disables the default rulesets, it explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
+Because this example disables the default rulesets, the example explicitly includes `python-ai_sast` to retain AI-native SAST for Python:
 
 {{< code-block lang="yaml" >}}
 schema-version: v1.4
