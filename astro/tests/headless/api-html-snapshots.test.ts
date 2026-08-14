@@ -6,10 +6,6 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { format as prettierFormat } from 'prettier';
 
-import IndexPage from '../../src/pages/[...lang]/api/latest/index.astro';
-import UsingTheApiPage from '../../src/pages/[...lang]/api/latest/using-the-api.astro';
-import RateLimitsPage from '../../src/pages/[...lang]/api/latest/rate-limits.astro';
-import ScopesPage from '../../src/pages/[...lang]/api/latest/scopes.astro';
 import CategoryPage from '../../src/pages/[...lang]/api/latest/[category].astro';
 import OperationPage from '../../src/pages/[...lang]/api/latest/[category]/[operation].astro';
 
@@ -29,22 +25,18 @@ interface AuditPage {
 
 /**
  * Audit set. Each entry covers a meaningful rendering
- * variation. Static pages and category landing pages are sampled at
- * the page level; representative operation pages exercise the per-op
- * route added by the shorter-API-pages migration.
+ * variation of markup this project builds from the spec: category landing
+ * pages are sampled at the page level, and representative operation pages
+ * exercise the per-op route added by the shorter-API-pages migration. The
+ * hand-written `.mdoc` pages are absent by design — Astro renders their
+ * markup, so there is nothing here that a snapshot would protect.
  *
  * Pages render via AstroContainer against the frozen fixture in
  * tests/fixtures/api/ (wired by the frozen-api-spec plugin in
  * vitest.unit.config.ts), so snapshots are stable across live spec updates.
  */
 const AUDIT_PAGES: AuditPage[] = [
-  // 1-4: Static pages (no operations)
-  { name: '01-api-latest-index', component: IndexPage, params: {}, urlPath: '/api/latest/' },
-  { name: '02-using-the-api', component: UsingTheApiPage, params: {}, urlPath: '/api/latest/using-the-api/' },
-  { name: '03-rate-limits', component: RateLimitsPage, params: {}, urlPath: '/api/latest/rate-limits/' },
-  { name: '04-scopes', component: ScopesPage, params: {}, urlPath: '/api/latest/scopes/' },
-
-  // 5-12: One landing page + one representative operation per dynamic category.
+  // One landing page + one representative operation per dynamic category.
   { name: '05-authentication-landing', component: CategoryPage, params: { category: 'authentication' }, urlPath: '/api/latest/authentication/' },
   { name: '05-authentication-validate-api-key', component: OperationPage, params: { category: 'authentication', operation: 'validate-api-key' }, urlPath: '/api/latest/authentication/validate-api-key/' },
 
@@ -110,6 +102,11 @@ async function normalize(html: string): Promise<string> {
   // on astro-island elements (for dev tooling / HMR). Strip them so snapshots
   // are stable across machines.
   out = out.replace(/\s+component-url="[^"]*"/g, '');
+
+  // Each island also carries a counter over the module graph, so adding or
+  // removing an import anywhere renumbers every island in every snapshot. The
+  // uid above already identifies an island; this carries no page content.
+  out = out.replace(/\s+data-preact-island-id="[^"]*"/g, '');
 
   const tokenMap = new Map<string, string>();
   const canonicalize = (raw: string): string => {

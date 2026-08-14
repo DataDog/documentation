@@ -1,9 +1,10 @@
 /**
  * The API plaintext page source.
  *
- * Root pages are the landing page and the three static special pages. Sections
- * are the API categories: each section holds its category overview page plus one
- * page per operation, and becomes its own detail `llms.txt`.
+ * Root pages are the hand-written `.mdoc` pages under the API root, read from the
+ * content collection. Sections are the API categories: each section holds its
+ * category overview page plus one page per operation, and becomes its own detail
+ * `llms.txt`.
  *
  * Metadata only — no bodies. Each page's plaintext is produced by its own `.md`
  * route during the build and hashed from disk afterwards, so this source cannot
@@ -16,6 +17,8 @@ import type {
   PlaintextPageSource,
   PlaintextSection,
 } from "./types";
+import { getCollection } from "astro:content";
+import { API_CONTENT_DIR, isApiContent } from "@lib/api/overviewPages";
 import { getCategoriesView, getOperationView } from "@lib/api/viewsBuilder";
 import type { ApiCategory, ApiOperationStub } from "@lib/api/schemas/views";
 
@@ -38,43 +41,6 @@ function firstLine(text: string): string {
   }
   return "";
 }
-
-const landingPage: PlaintextPage = {
-  urlPath: "/api/latest.md",
-  metadata: {
-    title: API_REFERENCE,
-    description: "Reference documentation for the Datadog HTTP API.",
-    breadcrumbs: [...DOCS_CRUMB],
-    isPrivate: false,
-  },
-};
-
-const staticSpecialPages: PlaintextPage[] = [
-  {
-    slug: "using-the-api",
-    title: "Using the API",
-    description:
-      "How to use the Datadog HTTP API to access the platform programmatically.",
-  },
-  {
-    slug: "scopes",
-    title: "Authorization Scopes",
-    description: "Authorization scopes for OAuth clients.",
-  },
-  {
-    slug: "rate-limits",
-    title: "Rate Limits",
-    description: "API rate limit policy, headers, and usage metrics.",
-  },
-].map(({ slug, title, description }) => ({
-  urlPath: `/api/latest/${slug}.md`,
-  metadata: {
-    title,
-    description,
-    breadcrumbs: [...API_CRUMBS],
-    isPrivate: false,
-  },
-}));
 
 function categoryPage(category: ApiCategory): PlaintextPage {
   return {
@@ -112,7 +78,20 @@ async function operationPage(
 }
 
 async function listRootPages(): Promise<PlaintextPage[]> {
-  return [landingPage, ...staticSpecialPages];
+  const entries = await getCollection("en", (entry) => isApiContent(entry.id));
+
+  return entries.map((entry) => {
+    const isApiRoot = entry.id === API_CONTENT_DIR;
+    return {
+      urlPath: `/${entry.id}.md`,
+      metadata: {
+        title: entry.data.title,
+        description: entry.data.description ?? "",
+        breadcrumbs: isApiRoot ? [...DOCS_CRUMB] : [...API_CRUMBS],
+        isPrivate: false,
+      },
+    };
+  });
 }
 
 async function listSections(): Promise<PlaintextSection[]> {

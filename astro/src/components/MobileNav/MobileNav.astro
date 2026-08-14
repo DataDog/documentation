@@ -24,6 +24,10 @@ import {
   findActivePageIdentifier,
 } from "@lib/componentUtils/docsNavMenu";
 import { getCategoriesView } from "@lib/api/viewsBuilder";
+import {
+  getOverviewPages,
+  resolveOverviewState,
+} from "@lib/api/overviewPages";
 import { CORP_ORIGIN, HUGO_ORIGIN } from "@config/origins";
 import { localizedHref, stripLocalePrefix } from "@lib/i18n/locale";
 import { i18n } from "@lib/i18n/i18n";
@@ -48,6 +52,14 @@ const activeCategorySlug = apiPathSegments[2];
 const currentOperationSlug = apiPathSegments[3];
 
 const apiCategories = isApiContext ? await getCategoriesView(pageLang) : [];
+
+// The hand-written pages under the API root, listed above the spec categories
+// the same way the desktop side nav lists them.
+const overviewPages = isApiContext ? await getOverviewPages() : [];
+const { isOverviewSection, activeOverviewPageSlug } = resolveOverviewState(
+  overviewPages,
+  unprefixedPath,
+);
 
 // The docs accordion is only rendered on non-API pages, so skip building its
 // tree (and the active-page lookups) entirely in API context. Everything is
@@ -119,6 +131,9 @@ const searchLabels: SearchBarLabels = {
           categories={apiCategories}
           activeCategorySlug={activeCategorySlug}
           currentOperationSlug={currentOperationSlug}
+          overviewPages={overviewPages}
+          isOverviewSection={isOverviewSection}
+          activeOverviewPageSlug={activeOverviewPageSlug}
           lang={pageLang}
         />
       ) : (
