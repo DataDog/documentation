@@ -25,7 +25,7 @@ describe("Img component", () => {
     expect(html).toContain('alt="CI/CD Health dashboard"');
   });
 
-  it("resolves a local srcset in dev mode", async () => {
+  it("builds a srcset against the CDN images URL", async () => {
     const html = await renderImg({ src: "cicd_optimization/cicd_health.png" });
 
     expect(html).toContain("srcset=");

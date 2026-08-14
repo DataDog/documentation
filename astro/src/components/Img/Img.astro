@@ -1,10 +1,7 @@
 ---
 import ImgController from "./ImgController";
-import {
-  IMAGES_URL,
-  resolveLocalContentImage,
-  resolveLocalContentVideo,
-} from "@config/images";
+import ImgVideo from "./ImgVideo";
+import { IMAGES_URL } from "@config/images";
 
 interface Props {
   src: string;
@@ -30,63 +27,33 @@ const {
   popup = true,
 } = Astro.props;
 
-/** Not sure if staging will require an additional CDN URL or prefix.
- * Revisit when the CDN is configured.
- */
+const imageUrl = `${IMAGES_URL}/images/${src}`;
 
-async function resolveVideoUrl(): Promise<string> {
-  if (import.meta.env.PROD) {
-    return `${IMAGES_URL}/${src}`;
-  }
-  const localVideoUrl = await resolveLocalContentVideo(src);
-  if (!localVideoUrl) {
-    throw new Error(`Img: no local video found at src/images/content/${src}`);
-  }
-  return localVideoUrl;
-}
-
-async function resolveImageUrls(): Promise<{
-  imageUrl: string;
-  srcset: string;
-  popupHref: string;
-}> {
-  if (import.meta.env.PROD) {
-    const imageUrl = `${IMAGES_URL}/${src}`;
-    const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
-    const popupHref = `${imageUrl}?fit=max&auto=format`;
-    return { imageUrl, srcset, popupHref };
-  }
-  const localImage = await resolveLocalContentImage(src);
-  if (!localImage) {
-    throw new Error(`Img: no local image found at src/images/content/${src}`);
-  }
-  return {
-    imageUrl: localImage.src,
-    srcset: localImage.src,
-    popupHref: localImage.src,
-  };
-}
-
-const media = video
-  ? { kind: "video" as const, videoUrl: await resolveVideoUrl() }
-  : { kind: "image" as const, ...(await resolveImageUrls()) };
-
-const imageUrl = media.kind === "video" ? media.videoUrl : media.imageUrl;
-const srcset = media.kind === "video" ? "" : media.srcset;
-const popupHref = media.kind === "video" ? "" : media.popupHref;
+const srcset = `${imageUrl}?auto=format&fit=max&w=850 1x, ${imageUrl}?auto=format&fit=max&w=850&dpr=2 2x`;
+const popupHref = `${imageUrl}?fit=max&auto=format`;
 ---
 
-<ImgController
-  client:idle
-  imageUrl={imageUrl}
-  srcset={srcset}
-  popupHref={popupHref}
-  alt={alt}
-  caption={caption}
-  width={width}
-  height={height}
-  widthPercent={widthPercent}
-  video={video}
-  inline={inline}
-  popup={popup}
-/>
+{
+  video ? (
+    <ImgVideo
+      client:idle
+      imageUrl={imageUrl}
+      width={width}
+      height={height}
+      widthPercent={widthPercent}
+    />
+  ) : (
+    <ImgController
+      client:idle
+      srcset={srcset}
+      popupHref={popupHref}
+      alt={alt}
+      caption={caption}
+      width={width}
+      height={height}
+      widthPercent={widthPercent}
+      inline={inline}
+      popup={popup}
+    />
+  )
+}

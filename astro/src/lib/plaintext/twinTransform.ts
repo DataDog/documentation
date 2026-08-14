@@ -57,7 +57,7 @@ const twinAdaptersByTag: Record<string, TwinAdapter> = {
   img: (node) => {
     if (attr(node, "inline")) return []; // Drop inline images from plaintext
     return imgNode({
-      src: `${IMAGES_URL}/${String(attr(node, "src") ?? "")}`,
+      src: `${IMAGES_URL}/images/${String(attr(node, "src") ?? "")}`,
       alt: attr(node, "alt") as string | undefined,
       caption: attr(node, "caption") as string | undefined,
       video: attr(node, "video") as boolean | undefined,

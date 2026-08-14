@@ -6,7 +6,6 @@ import { classListFactory } from "@lib/cssUtils/classListFactory";
 const cl = classListFactory(styles);
 
 interface ImgControllerProps {
-  imageUrl: string;
   srcset: string;
   popupHref: string;
   alt?: string;
@@ -14,7 +13,6 @@ interface ImgControllerProps {
   width?: string;
   height?: string;
   widthPercent?: number;
-  video?: boolean;
   inline?: boolean;
   popup?: boolean;
 }
@@ -46,7 +44,10 @@ function applyLightboxResize(
   dialogElement.style.width = "";
   dialogElement.style.height = "";
 
-  let ratio = Math.max(naturalWidth / (parentWidth - 1), naturalHeight / (parentHeight - 1));
+  let ratio = Math.max(
+    naturalWidth / (parentWidth - 1),
+    naturalHeight / (parentHeight - 1),
+  );
 
   let width: number;
   let height: number;
@@ -89,31 +90,6 @@ function PictureImage({
         alt={alt}
       />
     </picture>
-  );
-}
-
-function VideoBlock({
-  videoUrl,
-  width,
-  height,
-  widthPercent,
-}: SizingProps & { videoUrl: string }) {
-  return (
-    <figure class={cl("img__figure")}>
-      <video
-        class={cl("img__video")}
-        style={widthPercent ? { width: `${widthPercent}%` } : undefined}
-        width={width}
-        height={height}
-        muted
-        playsinline
-        autoplay
-        loop
-        controls
-      >
-        <source src={videoUrl} type="video/mp4" />
-      </video>
-    </figure>
   );
 }
 
@@ -166,7 +142,6 @@ function FigureWithLightbox({
 }
 
 export default function ImgController({
-  imageUrl,
   srcset,
   popupHref,
   alt,
@@ -174,7 +149,6 @@ export default function ImgController({
   width,
   height,
   widthPercent,
-  video = false,
   inline = false,
   popup = true,
 }: ImgControllerProps) {
@@ -245,17 +219,8 @@ export default function ImgController({
   }
 
   let media: JSX.Element;
-  const showsLightbox = !video && !inline && popup;
-  if (video) {
-    media = (
-      <VideoBlock
-        videoUrl={imageUrl}
-        width={width}
-        height={height}
-        widthPercent={widthPercent}
-      />
-    );
-  } else if (inline) {
+  const showsLightbox = !inline && popup;
+  if (inline) {
     media = (
       <PictureImage
         srcset={srcset}

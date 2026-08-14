@@ -2,8 +2,7 @@
   margin: 0 0 1rem;
 }
 
-.img__image,
-.img__video {
+.img__image {
   max-width: 100%;
   height: auto;
   /* matches Hugo's $ddgray (#d6d6d6); no equivalent design token exists yet */

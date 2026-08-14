@@ -69,7 +69,7 @@ describe("renderMdocWithTwins", () => {
 
     expect(out).toContain("{% img");
     expect(out).toContain(
-      'src="https://imgix.datadoghq.com/cicd_optimization/cicd_health.png"',
+      'src="http://docs-staging.dd-static.net/images/cicd_optimization/cicd_health.png"',
     );
     expect(out).toContain('alt="CI/CD Health dashboard"');
   });
@@ -105,7 +105,7 @@ describe("renderMdocWithTwins", () => {
     const out = renderMdocWithTwins(source);
 
     expect(out).toContain(
-      'src="https://imgix.datadoghq.com/ci/custom-tags-create-facet.mp4"',
+      'src="http://docs-staging.dd-static.net/images/ci/custom-tags-create-facet.mp4"',
     );
     expect(out).toContain("video=true");
   });

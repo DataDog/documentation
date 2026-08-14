@@ -72,50 +72,6 @@ describe("ImgController — rendering", () => {
     expect(image?.getAttribute("width")).toBe("22");
   });
 
-  it("renders a video instead of an image when video is true", () => {
-    const { container } = renderImgController({
-      video: true,
-      imageUrl: "/videos/content/example.mp4",
-    });
-
-    expect(container.querySelector("video.img__video")).not.toBeNull();
-    expect(container.querySelector("img")).toBeNull();
-  });
-
-  it("renders the video with autoplay/loop/muted/controls behavior", () => {
-    const { container } = renderImgController({
-      video: true,
-      imageUrl: "/videos/content/example.mp4",
-    });
-
-    const video = container.querySelector("video")!;
-    expect(video.hasAttribute("muted")).toBe(true);
-    expect(video.hasAttribute("autoplay")).toBe(true);
-    expect(video.hasAttribute("loop")).toBe(true);
-    expect(video.hasAttribute("controls")).toBe(true);
-  });
-
-  it("points the video source at the resolved imageUrl", () => {
-    const { container } = renderImgController({
-      video: true,
-      imageUrl: "/videos/content/example.mp4",
-    });
-
-    const source = container.querySelector("source");
-    expect(source?.getAttribute("src")).toBe("/videos/content/example.mp4");
-  });
-
-  it("prioritizes video over inline when both are true", () => {
-    const { container } = renderImgController({
-      video: true,
-      inline: true,
-      imageUrl: "/videos/content/example.mp4",
-    });
-
-    expect(container.querySelector("video")).not.toBeNull();
-    expect(container.querySelector("img")).toBeNull();
-  });
-
   it("applies widthPercent as an inline width style on the rendered image", () => {
     const { container } = renderImgController({ widthPercent: 40 });
 
