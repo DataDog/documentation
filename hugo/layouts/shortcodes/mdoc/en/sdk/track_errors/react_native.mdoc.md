@@ -1,31 +1,27 @@
-### Manually track RUM errors
+### Automated error reporting
 
-You can manually track RUM errors:
+To report JavaScript crashes and errors, set `trackErrors` to `true` in your RUM configuration. To also report crashes that originate from native iOS or Android code, set `nativeCrashReportEnabled` to `true`:
 
 ```javascript
-DdRum.addError('<message>', ErrorSource.SOURCE, '<stacktrace>', {}, Date.now());
+const config = new DatadogProviderConfiguration(
+    '<CLIENT_TOKEN>',
+    '<ENVIRONMENT_NAME>',
+    {
+        rumConfiguration: {
+            applicationId: '<APPLICATION_ID>',
+            trackInteractions: true,
+            trackResources: true,
+            trackErrors: true, // Enable JavaScript Crash Reporting
+            nativeCrashReportEnabled: true, // Optional: Enable Native Crash Reporting
+        },
+        logsConfiguration: {},
+        traceConfiguration: {}
+    }
+);
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/react_native
-[3]: https://jestjs.io/
-[4]: /account_management/api-app-keys/#client-tokens
-[5]: /getting_started/tagging/#define-tags
-[6]: /getting_started/site/
-[7]: /real_user_monitoring/application_monitoring/browser/frustration_signals/
-[8]: /real_user_monitoring/correlate_with_other_telemetry/apm?tab=reactnativerum
-[9]: /real_user_monitoring/guide/proxy-mobile-rum-data/
-[10]: https://github.com/wix/react-native-navigation
-[11]: /real_user_monitoring/application_monitoring/react_native/integrated_libraries/
-[12]: https://github.com/react-navigation/react-navigation
-[13]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation
-[14]: https://github.com/DefinitelyTyped/DefinitelyTyped/blob/683ec4a2b420ff6bd3873a7338416ad3ec0b6595/types/react-native-side-menu/index.d.ts#L2
-[15]: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest
-[16]: https://reactnative.dev/docs/global-requestIdleCallback
-[17]: https://reactnative.dev/docs/interactionmanager#runafterinteractions
-[18]: https://github.com/DataDog/dd-sdk-reactnative-examples/tree/main/rum-react-navigation-async
-[19]: /real_user_monitoring/guide/monitor-hybrid-react-native-applications
-[20]: /real_user_monitoring/error_tracking/mobile/ios/?tab=cocoapods#configure-the-app-hang-threshold
-[21]: #rum-configuration
-[22]: #logs-configuration
-[23]: #trace-configuration
+### Get deobfuscated stack traces
+
+Upload your source maps and symbol files so Datadog can deobfuscate your crash reports. See [React Native Crash Reporting and Error Tracking][1] for the full setup, including Metro configuration and build-phase scripts for iOS and Android.
+
+[1]: /real_user_monitoring/application_monitoring/react_native/error_tracking/#get-deobfuscated-stack-traces
