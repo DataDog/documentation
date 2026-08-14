@@ -18,19 +18,19 @@ further_reading:
 
 ## Overview
 
-This is a guide for using integrations. If you are looking for information about building a new integration, see the [Create a new integration][1] page.
+This guide covers how to use Datadog integrations. If you want to build a new integration instead, see [Create a new integration][1].
 
-An integration, at the highest level, is when you assemble a unified system from units that are usually considered separately. At Datadog, you can use integrations to bring together all of the metrics and logs from your infrastructure and gain insight into the unified system as a whole—you can see pieces individually and also how individual pieces are impacting the whole.
-
-**Note**: It's best to start collecting metrics on your projects as early in the development process as possible, but you can start at any stage.
+An integration connects a data source to Datadog, so that metrics and logs from across your infrastructure arrive in one place. From there, you can examine each component on its own and see how it affects the system as a whole.
 
 Datadog provides three main types of integrations:
 
-- **Agent-based** integrations are installed with the Datadog Agent and use a Python class method called `check` to define the metrics to collect.
-- **Authentication (crawler) based** integrations are set up in [Datadog][2] where you provide credentials for obtaining metrics with the API. These include popular integrations like [Slack][3], [AWS][4], [Azure][5], and [PagerDuty][6].
-- **Library** integrations use the [Datadog API][7] to allow you to monitor applications based on the language they are written in, like [Node.js][8] or [Python][9].
+- **Agent-based**: Installed with the Datadog Agent. Each integration uses a Python class method called `check` to define the metrics to collect.
+- **Authentication (crawler) based**: Set up in [Datadog][2], where you provide credentials for collecting metrics with the API. Examples include [Slack][3], [AWS][4], [Azure][5], and [PagerDuty][6].
+- **Library**: Uses the [Datadog API][7] to monitor applications based on the language they are written in, such as [Node.js][8] or [Python][9].
 
-You can also build a [custom check][10] to define and send metrics to Datadog from your unique in-house system.
+If no integration covers your system, you can build a [custom check][10] to define and send metrics to Datadog from your in-house system.
+
+**Note**: Start collecting metrics on your projects as early in the development process as possible, though you can start at any stage.
 
 ## Setting up an integration
 
