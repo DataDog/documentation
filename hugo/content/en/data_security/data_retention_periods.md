@@ -78,9 +78,10 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: |
-       - **Individual profiles (not opened in the UI)**: 8 days
-       - **Individual profiles (opened in the UI at least once)**: 1 year
-       - **Profile metrics**: 90 days
+       - **Flame graphs, call graphs, and thread timelines**: 8 days
+       - **Flame graphs exported to a notebook**: 1 year
+       - **Individual profiles opened in the UI at least once**: 1 year
+       - **Profile metrics**: 30 days
   - product: Continuous Testing
     data_type: |
        - **Batch results**: 2 months
@@ -116,6 +117,7 @@ attributes:
   - product: Log Management
     data_type: |
        - **Logs**: Determined by customer plan
+       - **Sensitive Data Scanner example logs**: <span class="d-none site-region-container" data-region="us,us3,us5,eu,ap1,ap2,uk1">3 days</span><span class="d-none site-region-container" data-region="gov,gov2">7 days</span>
   - product: Metrics
     data_type: |
        - **Tags and values**: 15 months
