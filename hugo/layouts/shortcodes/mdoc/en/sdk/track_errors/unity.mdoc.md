@@ -1,6 +1,12 @@
-### Track custom errors
+### Automated error reporting
 
-To track specific errors, notify `DdRum` when an error occurs with the exception, the source, and any additional attributes.
+Native crash reporting is always on once RUM is enabled—no configuration required.
+
+To also forward uncaught exceptions from Unity's logs, select **Forward Unity Logs** when configuring the SDK. Datadog then reports exceptions logged with `Debug.LogException` as RUM errors.
+
+### Manual error reporting
+
+To report a caught exception manually, use `DdRum.AddError`:
 
 ```csharp
 try
@@ -13,6 +19,8 @@ catch(Exception e)
 }
 ```
 
-[1]: https://app.datadoghq.com/rum/application/create
-[2]: /real_user_monitoring/application_monitoring/unity/setup/
-[3]: /real_user_monitoring/application_monitoring/unity/data_collected/
+### Get deobfuscated and symbolicated stack traces
+
+Upload your dSYM, `.so`, Proguard, and IL2CPP symbol files with `datadog-ci unity-symbols upload`. See [Unity Crash Reporting and Error Tracking][1] for the full setup.
+
+[1]: /real_user_monitoring/application_monitoring/unity/error_tracking/

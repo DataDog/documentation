@@ -17,7 +17,7 @@ further_reading:
 
 ## Overview
 
-Error Tracking processes errors collected from the Android SDK. 
+Error Tracking processes errors collected from the Android SDK.
 
 Enable Android Crash Reporting and Error Tracking to get comprehensive crash reports and error trends. With this feature, you can access:
 
@@ -31,7 +31,7 @@ Your crash reports appear in [{{< ui >}}Error Tracking{{< /ui >}}][1].
 
 ## Setup
 
-If you have not set up the Android SDK yet, follow the [in-app setup instructions][2] or see the [Android Crash Reporting and Error Tracking setup documentation][3].
+To enable Android Crash Reporting and Error Tracking, see [Track errors and crashes][3].
 
 ## Further Reading
 
@@ -39,4 +39,4 @@ If you have not set up the Android SDK yet, follow the [in-app setup instruction
 
 [1]: https://app.datadoghq.com/rum/error-tracking
 [2]: https://app.datadoghq.com/rum/list
-[3]: /error_tracking/frontend/mobile/android
+[3]: /real_user_monitoring/setup/enable_rum/track_errors/?platform=android
