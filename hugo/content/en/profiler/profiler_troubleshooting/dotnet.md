@@ -225,7 +225,7 @@ The [different profile types][3] have a fixed CPU and memory overhead per applic
 To reduce overhead when profiling multiple processes:
 
 - Use `DD_PROFILING_ENABLED=auto` instead of `true` when enabling profiling host-wide. With `auto`, profiling starts only when the application has run for more than 30 seconds **and** at least one trace was created.
-- Use [instrumentation rules][6] to limit which processes receive SSI.
+- Use [instrumentation rules][101] to limit which processes receive SSI.
 - Set `DD_PROFILING_ENABLED=false` in a specific process environment to opt that process out of profiling. Tracing is not affected.
 [101]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
 {{% /tab %}}
