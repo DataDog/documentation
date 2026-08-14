@@ -66,6 +66,8 @@ The resulting coverage data for each flag is:
 
 This allows you to answer questions like "What is my unit test coverage?" (`unit-tests` flag) or "What is my coverage on JVM 11?" (`jvm-11` flag) from the same set of uploaded reports.
 
+For details on how line data from overlapping reports is combined, see [Code Coverage Calculation][7].
+
 ## Add flags to coverage reports
 
 ### Add flags with the CLI
@@ -206,3 +208,4 @@ datadog-ci coverage upload --flags python-3.12 coverage-py312.xml
 [4]: /code_coverage/setup/#upload-reports-automatically-with-test-optimization
 [5]: https://app.datadoghq.com/ci/code-coverage
 [6]: /code_coverage/configuration#pr-gates
+[7]: /code_coverage/coverage_calculation
