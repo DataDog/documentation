@@ -192,9 +192,9 @@ The **Optimization page** surfaces profiling data in several contexts:
 <!-- Android -->
 {% if equals($platform, "android") %}
 
-{% callout url="https://www.datadoghq.com/product-preview/android-profiler/" header="Join the Preview!" btn_hidden=false %}
+{{< callout header="Preview" btn_hidden="true" >}}
 Android Profiling is in Preview.
-{% /callout %}
+{{< /callout >}}
 
 {% img src="real_user_monitoring/android/android-profiling-ttid.png" alt="Android profiling data in a time to initial display vital event." style="width:90%;" /%}
 
@@ -209,6 +209,10 @@ Only devices running Android 15 (API level 35) or higher generate profiling data
 - Application launch profiling requires Android SDK version 3.6.0+.
 - Continuous profiling requires Android SDK version 3.12.0+.
 - [RUM without Limits][5] must be enabled in your organization.
+
+## Preview quota system
+
+During the Preview, the Datadog Android SDK profiles up to 100,000 sessions per day. After reaching this quota, the SDK pauses profiling until the quota resets at 2:00 a.m. EST the following day.
 
 ## Setup
 
@@ -301,9 +305,9 @@ Android profiling data is attached to operations events in a RUM session. You ca
 <!-- iOS -->
 {% if equals($platform, "ios") %}
 
-{% callout url="https://www.datadoghq.com/product-preview/ios-profiler/" header="Join the Preview!" btn_hidden=false %}
-iOS Profiling is in Preview.
-{% /callout %}
+{{< callout header="Preview" btn_hidden="true" >}}
+Android Profiling is in Preview.
+{{< /callout >}}
 
 {% img src="real_user_monitoring/ios/ios-profiling-ttid.png" alt="iOS profiling data in a time to initial display vital event." style="width:90%;" /%}
 
@@ -314,6 +318,10 @@ iOS profiling helps you identify and optimize slow methods during important mome
 - Application launch profiling requires iOS SDK version 3.6.0+.
 - Continuous profiling requires iOS SDK version 3.14.0+.
 - [RUM without Limits][10] must be enabled in your organization.
+
+## Preview quota system
+
+During the Preview, the Datadog iOS SDK profiles up to 100,000 sessions per day. After reaching this quota, the SDK pauses profiling until the quota resets at 2:00 a.m. EST the following day.
 
 ## Setup
 
