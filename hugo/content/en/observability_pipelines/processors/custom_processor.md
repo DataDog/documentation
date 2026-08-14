@@ -27,7 +27,7 @@ products:
 
 ## Overview
 
-Use this processor with Vector Remap Language (VRL) to modify and enrich your logs or metrics. VRL is an expression-oriented, domain specific language designed for transforming data. It features built-in functions for observability use cases. You can use custom functions in the following ways:
+Use this processor with Vector Remap Language (VRL) to modify and enrich your logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}}. VRL is an expression-oriented, domain specific language designed for transforming data. It features built-in functions for observability use cases. You can use custom functions in the following ways:
 
 - Manipulate [arrays](#array), [strings](#string), and other data types.
 - Encode and decode values using [Codec](#codec).
