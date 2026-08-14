@@ -47,7 +47,7 @@ Datadog recommends setting your OTLP receiver to allow out-of-order samples to p
 
 ### Debug error logs
 
-If you see `400` or `500` error logs from this destination, you can enable debug logs to see the response returned by the server. To enable logs for this HTTP-based destination only and not every Worker module, set `VECTOR_LOG` to `info,vector::sinks::util::http=debug`:Expand commentComment on line R62Resolved
+If you see `400` or `500` error logs from this destination, you can enable debug logs to see the response returned by the server. To enable logs for this HTTP-based destination only and not every Worker module, set `VECTOR_LOG` to `info,vector::sinks::util::http=debug`:
 
 ```
 docker run -i -e DD_API_KEY=<DATADOG_API_KEY> \
