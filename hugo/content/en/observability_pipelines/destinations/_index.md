@@ -85,16 +85,17 @@ These are the available destinations:
 [2]: /observability_pipelines/destinations/elasticsearch/
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
-[5]: /observability_pipelines/destinations/opentelemetry/
+[5]: /observability_pipelines/destinations/opentelemetry/metrics
 [6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{% tab "Traces" %}}
 
-- [Datadog APM][25]
-- OpenTelemetry Traces
+- [Datadog APM][1]
+- [OpenTelemetry Traces][2]
 
-[25]: /observability_pipelines/destinations/datadog_apm/
+[1]: /observability_pipelines/destinations/datadog_apm/
+[2]: /observability_pipelines/destinations/opentelemetry/traces
 
 {{% /tab %}}
 {{< /tabs >}}

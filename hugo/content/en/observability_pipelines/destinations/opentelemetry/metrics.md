@@ -1,13 +1,10 @@
 ---
 title: OpenTelemetry Destination
 disable_toc: false
-products:
-- name: Metrics
-  icon: metrics
-  url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+code_lang: metrics
+type: multi-code-lang
+weight: 1
 ---
-
-{{< product-availability >}}
 
 ## Overview
 
@@ -71,7 +68,7 @@ Datadog recommends setting your OTLP receiver to allow out-of-order samples to p
 
 {{% tab "Environment Variables" %}}
 
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
 
 {{% /tab %}}
 {{< /tabs >}}
