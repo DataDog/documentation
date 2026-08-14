@@ -173,7 +173,7 @@ The following buttons are available in the action tray. Incident types are initi
 
 | Button                       | Description                                                          | Active default | Stable default | Resolved default |
 |-------------------------------|------------------------------------------------------------------------|:---:|:---:|:---:|
-| ⚙️ Edit Incident              | Update status, severity, impacts, and all other attributes            | ✓ | ✓ |   |
+| ⚙️ Edit Incident              | Update status, severity, impact, and all other attributes            | ✓ | ✓ |   |
 | 🧑‍🚒 Edit Responders           | Assign roles and add teammates to the incident                        | ✓ |   |   |
 | 🔍 View All Actions           | Open the full list of available Slack actions for this incident       | ✓ | ✓ | ✓ |
 | 🏠 View Web App               | Open the incident in Datadog Incident Management                      | ✓ | ✓ | ✓ |
