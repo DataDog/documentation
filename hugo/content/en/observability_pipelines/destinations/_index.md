@@ -77,14 +77,16 @@ These are the available destinations:
 - [Datadog Metrics][1]
 - [Elasticsearch][2]
 - [HTTP/S Client][3]
-- [Prometheus][5]
+- [OpenTelemetry][5]
+- [Prometheus][6]
 - [Splunk HEC][4]
 
 [1]: /observability_pipelines/destinations/datadog_metrics/
 [2]: /observability_pipelines/destinations/elasticsearch/
 [3]: /observability_pipelines/destinations/http_client/
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
-[5]: /observability_pipelines/destinations/prometheus/
+[5]: /observability_pipelines/destinations/opentelemetry/
+[6]: /observability_pipelines/destinations/prometheus/
 
 {{% /tab %}}
 {{< /tabs >}}
