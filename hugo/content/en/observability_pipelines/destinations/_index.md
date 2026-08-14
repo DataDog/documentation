@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs, metrics, and traces ({{< tooltip text="in Preview" tooltip="Traces for Observability Pipelines is in Preview. Contact your account manager to request access." >}}) to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed logs, metrics, and {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
 
@@ -89,8 +89,10 @@ These are the available destinations:
 
 <div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
-- Datadog APM
+- [Datadog APM][25]
 - OpenTelemetry Traces
+
+[25]: /observability_pipelines/destinations/datadog_apm/
 
 {{% /tab %}}
 {{< /tabs >}}
