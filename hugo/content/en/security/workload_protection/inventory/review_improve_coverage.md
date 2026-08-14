@@ -18,7 +18,7 @@ The widget at the top of the Coverage page shows the percentage of your resource
 
 ## Find outdated or incomplete Agents
 
-- **View outdated**: Resources running an agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
+- **View outdated**: Resources running an Agent version older than the minimum supported version (`7.65.0`), which might not support the latest Workload Protection features.
 - **View incomplete**: Resources reporting incomplete or invalid data.
 
 Update or deploy the Datadog Agent to help ensure complete coverage.
@@ -33,13 +33,13 @@ To find and fix resources with rule errors:
 4. [Edit the rule][4] as needed.
 5. Redeploy and confirm the fix in Coverage.
 
-## Confirm that new rules loaded
+## Confirm that new rules are loaded
 
 You can use Coverage to test and iterate on custom security rules:
 
 1. Write and deploy a [new custom rule][4].
 2. In Coverage, search for the rule by rule ID, policy ID, or hostname.
-3. Confirm that the agent has loaded the rule successfully.
+3. Confirm that the Agent has loaded the rule successfully.
 4. If errors appear, review the verdict, fix the rule, and redeploy.
 
 ## Review detection coverage
