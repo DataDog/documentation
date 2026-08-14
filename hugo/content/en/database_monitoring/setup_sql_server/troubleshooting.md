@@ -372,9 +372,9 @@ On Azure SQL Database Basic, S0, and S1 service objectives, and on databases in 
 VIEW SERVER PERFORMANCE STATE permission was denied on object 'server', database 'master'.
 ```
 
-Collecting query metrics requires reading the sys.dm_exec_plan_attributes dynamic management view. On these service tiers, Azure restricts that view to a server-level principal — the server administrator or the Microsoft Entra administrator as documented in the Microsoftsys.dm_exec_plan_attributes [permissions] [15]. 
+Collecting query metrics requires reading the `sys.dm_exec_plan_attributes` dynamic management view. On these service tiers, Azure restricts that view to a server-level principal, which is the server administrator or the Microsoft Entra administrator, as documented in the [`sys.dm_exec_plan_attributes` permissions][15].
 
-To continue collecting query metrics on affected databases, enable query_metrics.disable_secondary_tags for those instances.
+To continue collecting query metrics on affected databases, enable `query_metrics.disable_secondary_tags` for those instances.
 
 [1]: /database_monitoring/setup_sql_server/
 [2]: https://learn.microsoft.com/en-us/sql/relational-databases/security/choose-an-authentication-mode?view=sql-server-ver16#connecting-through-windows-authentication
