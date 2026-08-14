@@ -1,13 +1,10 @@
 ---
 title: OpenTelemetry Traces Destination
 disable_toc: false
-products:
-- name: Traces
-  icon: apm
-  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
+code_lang: traces
+type: multi-code-lang
+weight: 2
 ---
-
-{{< product-availability >}}
 
 ## Overview
 

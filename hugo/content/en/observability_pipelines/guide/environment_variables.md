@@ -134,7 +134,7 @@ Some Observability Pipelines components require setting up environment variables
 ### OpenTelemetry
 
 **Metrics**
-{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry %}}
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_metrics %}}
 
 **Traces**
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/opentelemetry_traces %}}
