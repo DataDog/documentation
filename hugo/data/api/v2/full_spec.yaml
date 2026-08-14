@@ -55630,7 +55630,6 @@ components:
           type: string
       required:
         - name
-        - project_id
       type: object
     LLMObsAnnotationQueueDataAttributesResponse:
       description: Attributes of an LLM Observability annotation queue.
@@ -160385,7 +160384,8 @@ paths:
         If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
-        Create an annotation queue. The `name` and `project_id` fields are required.
+        Create an annotation queue. The `name` field is required.
+        Optionally associate the queue with a project by providing `project_id`.
         An optional `annotation_schema` can be provided to define the labels for the queue.
         Fields such as `created_by`, `owned_by`, `created_at`, `modified_by`,
         and `modified_at` are inferred by the backend.

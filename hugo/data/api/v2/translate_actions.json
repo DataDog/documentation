@@ -3242,7 +3242,7 @@
     "summary": "List LLM Observability annotation queues"
   },
   "CreateLLMObsAnnotationQueue": {
-    "description": "Create an annotation queue. The `name` and `project_id` fields are required.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
+    "description": "Create an annotation queue. The `name` field is required.\nOptionally associate the queue with a project by providing `project_id`.\nAn optional `annotation_schema` can be provided to define the labels for the queue.\nFields such as `created_by`, `owned_by`, `created_at`, `modified_by`,\nand `modified_at` are inferred by the backend.",
     "summary": "Create an LLM Observability annotation queue",
     "request_description": "Create annotation queue payload.",
     "request_schema_description": "Request to create an LLM Observability annotation queue."
