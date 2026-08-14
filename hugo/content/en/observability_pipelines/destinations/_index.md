@@ -87,10 +87,13 @@ These are the available destinations:
 {{% /tab %}}
 {{% tab "Traces" %}}
 
-- Datadog APM
-- [OpenTelemetry Traces][25]
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
-[25]: /observability_pipelines/destinations/opentelemetry_traces/
+- [Datadog APM][25]
+- [OpenTelemetry Traces][26]
+
+[25]: /observability_pipelines/destinations/datadog_apm/
+[26]: /observability_pipelines/destinations/opentelemetry_traces/
 
 {{% /tab %}}
 {{< /tabs >}}

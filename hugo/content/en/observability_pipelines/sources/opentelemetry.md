@@ -15,13 +15,16 @@ products:
 - name: Metrics
   icon: metrics
   url: /observability_pipelines/configuration/?tab=metrics#pipeline-types
+- name: Traces
+  icon: apm
+  url: /observability_pipelines/configuration/?tab=traces#pipeline-types
 ---
 
 {{< product-availability >}}
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs or metrics from your OTel Collector through HTTP or gRPC.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
@@ -161,6 +164,42 @@ Set the listener address environment variables to the following default values. 
 - gRPC listener address: `worker:4317`
 
 {{% /tab %}}
+{{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+### HTTP configuration example
+
+The Worker exposes the HTTP endpoint on port 4318, which is the default port. You can configure the port value in the Worker.
+
+For example, to configure an OTel trace exporter over HTTP in Python:
+
+```python
+    from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+    http_exporter = OTLPSpanExporter(
+        endpoint="http://worker:4318/v1/traces"
+    )
+```
+
+### gRPC configuration example
+
+The Worker exposes the gRPC endpoint on port 4317, which is the default port. You can configure the port value in the Worker.
+
+For example, to configure an OTel trace exporter over gRPC in Python:
+
+```python
+    from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+    grpc_exporter = OTLPSpanExporter(
+        endpoint="grpc://worker:4317"
+    )
+```
+
+Set the listener address environment variables to the following default values. If you configured different port values in the Worker, use those instead.
+
+- HTTP listener address: `worker:4318`
+- gRPC listener address: `worker:4317`
+
+{{% /tab %}}
 {{< /tabs >}}
 
 ## Send data from the Datadog Distribution of OpenTelemetry Collector to Observability Pipelines
@@ -242,6 +281,47 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_ENABLED`
     - `DD_OBSERVABILITY_PIPELINES_WORKER_METRICS_URL`
 - Metrics sent from DDOT might have nested objects that prevent Datadog from parsing the metrics correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
+- If the DDOT Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
+
+[5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
+[6]: /observability_pipelines/configuration/set_up_pipelines/
+[7]: /observability_pipelines/processors/edit_fields#add-field
+[8]: /observability_pipelines/processors/custom_processor
+[9]: https://docs.datadoghq.com/opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=helm#configure-the-opentelemetry-collector
+
+{{% /tab %}}
+{{% tab "Traces" %}}
+
+<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
+
+To send traces from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
+1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.
+1. [Set up a pipeline][6] on Observability Pipelines using the [OpenTelemetry source](#set-up-the-source-in-the-pipeline-ui).
+    1. (Optional) Datadog recommends adding an [Edit Fields processor][7] to the pipeline that appends the field `op_otel_ddot:true`.
+    1. When you install the Worker, for the OpenTelemetry source environment variables:
+        1. Set your HTTP listener to `0.0.0.0:4318`.
+        1. Set your gRPC listener to `0.0.0.0:4317`.
+    1. After you install the Worker and deployed the pipeline, update the OpenTelemetry Collector's [`otel-config.yaml`][9] to include an exporter that sends traces to Observability Pipelines. For example:
+        ```
+        exporters:
+            otlphttp:
+                endpoint: http://opw-observability-pipelines-worker.<NAMESPACE>.svc.cluster.local:4318
+        ...
+        service:
+            pipelines:
+                traces:
+                    exporters: [otlphttp]
+        ```
+        Replace `<NAMESPACE>` with the Kubernetes namespace where the Observability Pipelines Worker is deployed (for example, `default`).
+    1. Redeploy the Datadog Agent with the updated [`otel-config.yaml`][9]. For example, if the Agent is installed in Kubernetes:
+        ```
+        helm upgrade --install datadog-agent datadog/datadog \
+        --values ./agent.yaml \
+        --set-file datadog.otelCollector.config=./otel-config.yaml
+        ```
+
+**Notes**:
+- Traces sent from DDOT might have nested objects that prevent Datadog from parsing the traces correctly. To resolve this, Datadog recommends using the [Custom Processor][8] to flatten the nested `resource` object.
 - If the DDOT Collector and the Observability Pipelines Worker are running on the same host, their default OTLP receiver ports (4317/4318) may conflict. In a typical Kubernetes deployment, the Collector and the Worker run in separate pods, so this is not an issue.
 
 [5]: /opentelemetry/setup/ddot_collector/install/kubernetes_daemonset/?tab=datadogoperator
