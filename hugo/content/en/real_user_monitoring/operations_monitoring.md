@@ -5,6 +5,12 @@ further_reading:
 - link: '/monitors/create/types/real_user_monitoring/'
   tag: 'Documentation'
   text: 'Learn about RUM'
+- link: '/real_user_monitoring/guide/best-practices-for-operations-setup/'
+  tag: 'Guide'
+  text: 'Best practices for setting up Operations Monitoring'
+- link: '/real_user_monitoring/guide/best-practices-for-creating-slos-on-operations/'
+  tag: 'Guide'
+  text: 'Best practices for creating SLOs for RUM operations'  
 ---
 
 ## Overview
