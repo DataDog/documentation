@@ -50,6 +50,10 @@ test.describe('cdocs plaintext (.md)', () => {
   }) => {
     await context.grantPermissions(['clipboard-read', 'clipboard-write']);
     await page.goto(`${CDOC_URL}?prog_lang=python&api_type=dd_api`);
+    // Chromium rejects clipboard writes from an unfocused document, so make
+    // sure this page owns focus before clicking (parallel workers otherwise
+    // leave it in the background).
+    await page.bringToFront();
 
     const button = page.locator(MAIN_COPY_BUTTON);
     await expect(button).toHaveAttribute('data-hydrated', 'true', {
@@ -57,10 +61,15 @@ test.describe('cdocs plaintext (.md)', () => {
     });
     await button.click();
 
-    // Feedback flips to "Copied", and the clipboard holds the resolved plaintext.
-    await expect(button.locator('.copy-page-button__label')).toContainText(
-      'Copied',
-    );
+    // Feedback flips to "Copied", and the clipboard holds the resolved
+    // plaintext. Both labels are always in the DOM (the slot is width-locked to
+    // the longer string), so assert on the `--visible` one — checking the label
+    // container's text would pass no matter which is shown. The flip happens
+    // only after the clipboard write resolves, so this also fails loudly if the
+    // write is rejected.
+    await expect(
+      button.locator('.copy-page-button__label-text--visible'),
+    ).toHaveText('Copied');
     const clipboard = await page.evaluate(() => navigator.clipboard.readText());
     expect(clipboard).toContain('ddtrace');
     expect(clipboard).not.toContain('io.opentelemetry');

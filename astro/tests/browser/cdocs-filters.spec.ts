@@ -34,6 +34,11 @@ test.describe('cdocs filterable doc (SSR)', () => {
   test('clicking a pill swaps content via client-side navigation (no full reload)', async ({ page }) => {
     await page.goto(CDOC_URL);
 
+    // Wait for the filter bar island to hydrate; a click landing before its
+    // handlers are live is silently dropped (and Playwright still reports the
+    // click as successful).
+    await expect(page.locator('.cdocs-filter-bar[data-hydrated="true"]')).toBeAttached();
+
     // Mark the current document; a view-transition swap keeps the same document,
     // a full reload would clear this flag.
     await page.evaluate(() => ((window as unknown as { __noReload?: boolean }).__noReload = true));

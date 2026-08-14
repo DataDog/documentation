@@ -1,6 +1,8 @@
 import { navigate } from "astro:transitions/client";
+import { useEffect, useRef } from "preact/hooks";
 import styles from "./CdocsFilterBar.module.css";
 import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { markSelfAsHydrated } from "@lib/componentUtils/markSelfAsHydrated";
 import type { ResolvedFilter } from "@lib/cdocs/types";
 
 const cl = classListFactory(styles);
@@ -19,6 +21,14 @@ interface Props {
  * rather than a full-page reload.
  */
 export default function CdocsFilterBar({ filters }: Props) {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  // Signal hydration so tests (and any consumer) can wait for the pill click
+  // handlers to be live; a click landing before hydration is silently dropped.
+  useEffect(() => {
+    markSelfAsHydrated(rootRef);
+  }, []);
+
   if (filters.length === 0) return null;
 
   const selectOption = (traitId: string, optionId: string) => {
@@ -28,7 +38,7 @@ export default function CdocsFilterBar({ filters }: Props) {
   };
 
   return (
-    <div class={cl("cdocs-filter-bar")}>
+    <div class={cl("cdocs-filter-bar")} ref={rootRef}>
       {filters.map((filter) => (
         <FilterPillGroup
           key={filter.traitId}
