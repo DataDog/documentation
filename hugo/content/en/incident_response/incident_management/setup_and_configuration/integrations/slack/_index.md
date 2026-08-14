@@ -169,7 +169,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 
 In addition to typing `/dd shortcuts` to open the action tray, Datadog will post the action tray directly in the incident Slack channel on status changes, so responders can perform common actions, such as updating severity or status, without typing a command.
 
-The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **[Incidents > Settings > Integrations > Slack Settings][3]** and configure **Incident Slack Actions**.
+The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and configure **Incident Slack Actions**.
 
 | Button                       | Description                                                          | Active default | Stable default | Resolved default |
 |-------------------------------|------------------------------------------------------------------------|:---:|:---:|:---:|
