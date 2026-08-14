@@ -16,10 +16,10 @@ further_reading:
   text: "Metric monitors"
 - link: "/data_streams/kafka/setup/"
   tag: "Documentation"
-  text: "Kafka Monitoring setup"
+  text: "Kafka Console setup"
 ---
 
-After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Monitoring Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response.
+After your Kafka clusters are connected to Data Streams Monitoring (see [Kafka Console Setup][1]), the next step is to alert on the conditions that put your pipelines at risk and, where possible, automate the response.
 
 This page covers:
 

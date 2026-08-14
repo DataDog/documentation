@@ -34,21 +34,33 @@ You can enable APM on Windows in the following ways:
 
 To instrument only .NET applications running on IIS:
 
-1. In Datadog, go to [Install the Datadog Agent on Windows][1].
-1. In the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}.
-1. (Optional) Set your SDK version:
-   
-   By default, Single Step Instrumentation installs the latest supported version of the Datadog .NET SDK. If you need to pin a specific version:
+1. From an administrator PowerShell session on your Windows host, run one of the following commands. Replace `<YOUR_DD_API_KEY>` with your [Datadog API key][2].
 
-   1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
-   1. Under .NET, choose the version you want to use.
-   
-1. Copy and run the provided MSI install command on your Windows host.
+   Use the PowerShell installer:
+
+   ```powershell
+   [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:DD_API_KEY = '<YOUR_DD_API_KEY>'; $env:DD_SITE = '{{< region-param key="dd_site" >}}'; $env:DD_APM_INSTRUMENTATION_ENABLED = 'iis'; $env:DD_APM_INSTRUMENTATION_LIBRARIES = 'dotnet:3'; (New-Object System.Net.WebClient).DownloadFile('https://install.datadoghq.com/datadog-installer-x86_64.exe', 'C:\Windows\SystemTemp\datadog-installer-x86_64.exe'); C:\Windows\SystemTemp\datadog-installer-x86_64.exe
+   ```
+
+   Alternatively, install with the MSI:
+
+   ```powershell
+   $p = Start-Process -Wait -PassThru msiexec -ArgumentList '/qn /norestart /i "https://windows-agent.datadoghq.com/datadog-agent-7-latest.amd64.msi" /log C:\Windows\SystemTemp\install-datadog.log APIKEY="<YOUR_DD_API_KEY>" SITE="{{< region-param key="dd_site" >}}" DD_APM_INSTRUMENTATION_ENABLED="iis" DD_APM_INSTRUMENTATION_LIBRARIES="dotnet:3"'
+   if ($p.ExitCode -ne 0) { Write-Host "msiexec failed with exit code $($p.ExitCode) please check the logs at C:\Windows\SystemTemp\install-datadog.log" -ForegroundColor Red }
+   ```
+
+   To install a different .NET version, change `dotnet:3`, or omit `DD_APM_INSTRUMENTATION_LIBRARIES` to install the latest.
+
+   **Note**: The Chocolatey installation method does not preserve the SSI settings and cannot be used to enable SSI.
+
 1. Restart the IIS applications you want instrumented. (You do not need to restart the entire IIS server.)
 
-After installation, the Agent automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
+The Agent then automatically loads the Datadog .NET SDK into supported application processes to enable distributed tracing.
+
+**Generate the command from Datadog**: To get a command pre-filled with your API key and site, go to [Install the Datadog Agent on Windows][1] and, in the {{< ui >}}Customize your observability coverage{{< /ui >}} section, toggle {{< ui >}}Application Performance Monitoring (APM){{< /ui >}}. To pin the .NET SDK version, select {{< ui >}}Customize Library Versions{{< /ui >}} under {{< ui >}}Instrumentation Configuration{{< /ui >}}. Then copy and run the generated command.
 
 [1]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
+[2]: https://app.datadoghq.com/organization-settings/api-keys
 
 {{% /tab %}}
 
@@ -70,7 +82,7 @@ To instrument Java and .NET applications across your entire Windows host:
    1. Under {{< ui >}}Instrumentation Configuration{{< /ui >}}, select {{< ui >}}Customize Library Versions{{< /ui >}}.
    1. Under .NET, choose the version you want to use.
 
-1. Copy and run the provided MSI install command on your Windows host.
+1. Copy and run the provided installation command on your Windows host. Datadog generates this command in-app after you are enrolled in the Preview.
 1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
@@ -107,6 +119,18 @@ If you already have a Datadog Agent installed, use Fleet Automation to enable SS
 1. Configure instrumentation rules.
 
    Host-wide SSI automatically instruments all Java applications on the host and all .NET applications running in IIS. To instrument .NET applications running outside of IIS, you must [define an instrumentation rule](#define-instrumentation-rules) that allows them. You can also use instrumentation rules for granular control over which Java applications on the host or .NET applications in IIS are instrumented.
+
+## Verify the installation
+
+1. From an administrator PowerShell session, confirm the Agent is healthy and the APM Agent is running:
+
+   ```powershell
+   & "$env:ProgramFiles\Datadog\Datadog Agent\bin\agent.exe" status
+   ```
+
+   Check the **APM Agent** section of the output.
+
+1. After your instrumented applications receive traffic, confirm your services appear on the [APM Services page][7]. If they don't appear within a few minutes, follow the [SSI troubleshooting guide][4].
 
 ## Configure Unified Service Tags
 
@@ -216,3 +240,4 @@ If you encounter problems enabling APM with SSI, see the [SSI troubleshooting gu
 [4]: /tracing/trace_collection/automatic_instrumentation/single-step-apm/troubleshooting
 [5]: https://app.datadoghq.com/apm/service-setup/workload-selection
 [6]: https://app.datadoghq.com/fleet/agent-management
+[7]: https://app.datadoghq.com/apm/services
