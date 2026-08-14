@@ -14,7 +14,9 @@ further_reading:
     text: "Review your Workload Protection coverage with the Coverage map"
 ---
 
-Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and take action on unprotected or misconfigured workloads.
+Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and act on unprotected or misconfigured workloads.
+
+Coverage reflects whether the policies and agent rules on each resource loaded successfully. For how policies reach your Agents, see [Enable and deploy policies][5].
 
 {{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
 
@@ -156,3 +158,4 @@ As an example of how to use Coverage to triage and respond to coverage issues, h
 [2]: /security/detection_rules/#mitre-attck-map
 [3]: /security/workload_protection/setup/
 [4]: /security/workload_protection/detect_and_monitor/detection_and_finding_rules/detection_rules
+[5]: /security/workload_protection/detect_and_monitor/agent_rules/policy_management#enable-and-deploy-policies
