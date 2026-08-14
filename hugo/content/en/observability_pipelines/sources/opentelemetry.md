@@ -24,7 +24,7 @@ products:
 
 ## Overview
 
-Use Observability Pipelines' OpenTelemetry (OTel) source to collect logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} from your OTel Collector through HTTP or gRPC.
+Use Observability Pipelines' OpenTelemetry (OTel) source to collect {{< tooltip text="logs, metrics, or traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} from your OTel Collector through HTTP or gRPC.
 
 **Notes**:
 - If you are using the Datadog Distribution of OpenTelemetry (DDOT) Collector, use the OpenTelemetry source to [send data to Observability Pipelines](#send-data-from-the-datadog-distribution-of-opentelemetry-collector-to-observability-pipelines).
@@ -166,8 +166,6 @@ Set the listener address environment variables to the following default values. 
 {{% /tab %}}
 {{% tab "Traces" %}}
 
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
-
 ### HTTP configuration example
 
 The Worker exposes the HTTP endpoint on port 4318, which is the default port. You can configure the port value in the Worker.
@@ -291,8 +289,6 @@ To send metrics from the Datadog Distribution of the OpenTelemetry (DDOT) Collec
 
 {{% /tab %}}
 {{% tab "Traces" %}}
-
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
 To send traces from the Datadog Distribution of the OpenTelemetry (DDOT) Collector:
 1. Deploy the DDOT Collector using Helm. See [Install the DDOT Collector as a Kubernetes DaemonSet][5] for instructions.

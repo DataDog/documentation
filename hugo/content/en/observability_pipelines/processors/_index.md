@@ -14,7 +14,7 @@ further_reading:
 
 <div class="alert alert-info">The processors outlined in this documentation are specific to on-premises logging environments. To parse, structure, and enrich cloud-based logs, see the <a href="https://docs.datadoghq.com/logs/log_configuration/logs_to_metrics">Log Management</a> documentation.</div>
 
-Use Observability Pipelines' processors to parse, structure, and enrich your logs, metrics, and {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}}. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
+Use Observability Pipelines' processors to parse, structure, and enrich your {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}}. When you create a pipeline in the UI, pre-selected processors are added to your processor group based on the selected template. You can add additional processors and delete any existing ones based on your processing needs.
 
 Processor groups are executed from top to bottom. The order of the processors is important because events are checked by each processor, but only events that match the processor's filters are processed. To modify the order of the processors, use the drag handle on the top left corner of the processor you want to move.
 
@@ -86,8 +86,6 @@ These are the available processors:
 
 {{% /tab %}}
 {{% tab "Traces" %}}
-
-<div class="alert alert-info">Traces for Observability Pipelines is in Preview. Contact your account manager to request access.</div>
 
 - [Custom Processor][1]
 - [Filter][2]
