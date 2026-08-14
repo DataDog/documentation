@@ -1,0 +1,46 @@
+.api-method-badge {
+  display: inline-block;
+  padding: 3px var(--space-sm);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  font-family: var(--font-family-mono);
+  line-height: 1.4;
+  border-radius: var(--border-radius);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.api-method-badge--get {
+  color: var(--color-teal);
+  background: var(--color-teal-tint);
+}
+
+.api-method-badge--post {
+  color: var(--color-forest);
+  background: var(--color-forest-tint);
+}
+
+.api-method-badge--put {
+  color: var(--color-plum);
+  background: var(--color-plum-tint);
+}
+
+.api-method-badge--patch {
+  color: var(--color-amber);
+  background: var(--color-amber-tint);
+}
+
+.api-method-badge--delete {
+  color: var(--color-crimson);
+  background: var(--color-crimson-tint);
+}
+
+.api-method-badge--head {
+  color: var(--color-text-muted);
+  background: var(--color-bg-hover);
+}
+
+.api-method-badge--options {
+  color: var(--color-text-muted);
+  background: var(--color-bg-hover);
+}

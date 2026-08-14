@@ -1,0 +1,16 @@
+.api-response {
+  margin-bottom: var(--space-lg);
+}
+
+.api-response__heading {
+  margin: 0 0 var(--space-sm);
+}
+
+.api-response__description {
+  margin: 0 0 var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+.api-response__example {
+  margin-bottom: var(--space-sm);
+}

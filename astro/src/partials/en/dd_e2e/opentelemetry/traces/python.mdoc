@@ -1,0 +1,20 @@
+A partial begins here.
+
+## Setup {% #setup-otel-python %}
+
+{% alert level="info" %}
+OpenTelemetry is supported in the Python tracing library after version 1.12.0.
+{% /alert %}
+
+Set the `DD_TRACE_OTEL_ENABLED` environment variable to `true` to enable the OpenTelemetry API.
+
+### Add custom span tags
+
+```python
+from opentelemetry import trace
+
+span = trace.get_current_span()
+span.set_attribute("user.name", "Some User")
+```
+
+A partial ends here.

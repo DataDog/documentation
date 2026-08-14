@@ -1,0 +1,167 @@
+.code-block {
+  margin-bottom: var(--space-lg);
+  border: var(--border-width) solid var(--color-panel-border);
+  border-top: var(--border-width-highlight) solid var(--color-panel-accent);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Header (matches Hugo filename header bar) ── */
+
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color-panel-header);
+  padding: var(--space-sm);
+  min-height: var(--space-xs);
+}
+
+.code-block__language {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-panel-text);
+}
+
+/* ── Filename (shown in header when provided) ── */
+
+.code-block__filename {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-panel-text);
+}
+
+/* ── Header actions (right-aligned group: toggle + copy) ── */
+
+.code-block__header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-left: auto;
+}
+
+/* ── Copy button (hidden until hover, positioned top-right of code area) ── */
+
+.code-block__copy {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: var(--space-sm) var(--space-sm) 0 0;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-brand);
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+}
+
+.code-block__copy :global(span) {
+  display: inline-block;
+  background-color: var(--color-bg);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-sm);
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.code-block__copy:hover :global(span) {
+  box-shadow: var(--shadow-md-hover);
+}
+
+.code-block__content {
+  position: relative;
+}
+
+.code-block__content:hover .code-block__copy {
+  opacity: 1;
+}
+
+/* ── Collapsible toggle button ── */
+
+.code-block__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--space-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Chevron (pure CSS border-triangle, matching Hugo) ── */
+
+.code-block__chevron {
+  display: inline-block;
+  width: var(--space-sm);
+  height: var(--space-sm);
+  border-right: var(--border-width-thick) solid var(--color-brand);
+  border-bottom: var(--border-width-thick) solid var(--color-brand);
+  transition: transform 0.2s ease;
+}
+
+.code-block__chevron--up {
+  transform: rotate(-135deg);
+  margin-top: var(--space-xs);
+}
+
+.code-block__chevron--down {
+  transform: rotate(45deg);
+}
+
+/* ── Collapsible content area ── */
+
+.code-block__content--hidden {
+  display: none;
+}
+
+/* ── Wrap mode ── */
+
+.code-block--wrap .code-block__code {
+  white-space: normal !important;
+}
+
+.code-block--wrap :global(code) {
+  white-space: normal !important;
+}
+
+/* ── Pre / code (matches Hugo pre styling) ── */
+
+.code-block__pre {
+  margin: 0;
+  padding: var(--space-sm);
+  background-color: var(--color-panel-bg);
+  overflow-x: auto;
+  max-height: var(--code-max-height);
+}
+
+.code-block__code {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  color: var(--color-text-muted);
+  white-space: pre;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Highlighted code (Shiki output) ── */
+
+.code-block__highlighted :global(pre) {
+  margin: 0;
+  padding: var(--space-sm);
+  overflow-x: auto;
+  max-height: var(--code-max-height);
+  background-color: var(--color-panel-bg) !important;
+}
+
+.code-block__highlighted :global(code) {
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-code);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

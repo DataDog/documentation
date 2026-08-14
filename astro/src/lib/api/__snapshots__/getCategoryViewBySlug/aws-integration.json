@@ -1,0 +1,457 @@
+{
+  "name": "AWS Integration",
+  "slug": "aws-integration",
+  "description": "Configure your Datadog-AWS integration directly through the Datadog API.\nFor more information, see the [AWS integration page](https://docs.datadoghq.com/integrations/amazon_web_services).",
+  "operations": [
+    {
+      "operationId": "ListAWSTagFilters",
+      "summary": "Get all AWS tag filters",
+      "slug": "get-all-aws-tag-filters",
+      "menuOrder": 1,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
+    },
+    {
+      "operationId": "ListAWSNamespaces",
+      "summary": "List available namespaces",
+      "slug": "list-available-namespaces",
+      "menuOrder": 1,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/available_namespaces",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/available_namespaces",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/available_namespaces"
+      }
+    },
+    {
+      "operationId": "CreateNewAWSExternalID",
+      "summary": "Generate a new external ID",
+      "slug": "generate-a-new-external-id",
+      "menuOrder": 2,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/generate_new_external_id",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/generate_new_external_id",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/generate_new_external_id"
+      }
+    },
+    {
+      "operationId": "CreateAWSTagFilter",
+      "summary": "Set an AWS tag filter",
+      "slug": "set-an-aws-tag-filter",
+      "menuOrder": 2,
+      "versions": [
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
+    },
+    {
+      "operationId": "DeleteAWSTagFilter",
+      "summary": "Delete a tag filtering entry",
+      "slug": "delete-a-tag-filtering-entry",
+      "menuOrder": 3,
+      "versions": [
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/filtering",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/filtering",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/filtering",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/filtering",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/filtering",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/filtering",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/filtering"
+      }
+    },
+    {
+      "operationId": "GetAWSAccount",
+      "summary": "Get an AWS integration by config ID",
+      "slug": "get-an-aws-integration-by-config-id",
+      "menuOrder": 3,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
+    },
+    {
+      "operationId": "DeleteAWSAccount",
+      "summary": "Delete an AWS integration",
+      "slug": "delete-an-aws-integration",
+      "menuOrder": 4,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
+    },
+    {
+      "operationId": "ListAvailableAWSNamespaces",
+      "summary": "List namespace rules",
+      "slug": "list-namespace-rules",
+      "menuOrder": 5,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": true,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "us3": "https://api.us3.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "us5": "https://api.us5.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "eu": "https://api.datadoghq.eu/api/v1/integration/aws/available_namespace_rules",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/integration/aws/available_namespace_rules",
+        "gov": "https://api.ddog-gov.com/api/v1/integration/aws/available_namespace_rules"
+      }
+    },
+    {
+      "operationId": "UpdateAWSAccount",
+      "summary": "Update an AWS integration",
+      "slug": "update-an-aws-integration",
+      "menuOrder": 5,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}"
+      }
+    },
+    {
+      "operationId": "GetAWSIntegrationIAMPermissions",
+      "summary": "Get AWS integration IAM permissions",
+      "slug": "get-aws-integration-iam-permissions",
+      "menuOrder": 6,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions"
+      }
+    },
+    {
+      "operationId": "ListAWSAccounts",
+      "summary": "List all AWS integrations",
+      "slug": "list-all-aws-integrations",
+      "menuOrder": 6,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts"
+      }
+    },
+    {
+      "operationId": "GetAWSIntegrationIAMPermissionsStandard",
+      "summary": "Get AWS integration standard IAM permissions",
+      "slug": "get-aws-integration-standard-iam-permissions",
+      "menuOrder": 7,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions/standard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/standard",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/standard"
+      }
+    },
+    {
+      "operationId": "CreateAWSAccount",
+      "summary": "Create an AWS integration",
+      "slug": "create-an-aws-integration",
+      "menuOrder": 8,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts"
+      }
+    },
+    {
+      "operationId": "GetAWSIntegrationIAMPermissionsResourceCollection",
+      "summary": "Get resource collection IAM permissions",
+      "slug": "get-resource-collection-iam-permissions",
+      "menuOrder": 8,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/iam_permissions/resource_collection",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/iam_permissions/resource_collection",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/iam_permissions/resource_collection"
+      }
+    },
+    {
+      "operationId": "UpdateAWSAccountCCMConfig",
+      "summary": "Update AWS CCM config",
+      "slug": "update-aws-ccm-config",
+      "menuOrder": 9,
+      "versions": [
+        "v2"
+      ],
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
+    },
+    {
+      "operationId": "DeleteAWSAccountCCMConfig",
+      "summary": "Delete AWS CCM config",
+      "slug": "delete-aws-ccm-config",
+      "menuOrder": 10,
+      "versions": [
+        "v2"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
+    },
+    {
+      "operationId": "ListAWSEventBridgeSources",
+      "summary": "Get all Amazon EventBridge sources",
+      "slug": "get-all-amazon-eventbridge-sources",
+      "menuOrder": 10,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
+    },
+    {
+      "operationId": "CreateAWSEventBridgeSource",
+      "summary": "Create an Amazon EventBridge source",
+      "slug": "create-an-amazon-eventbridge-source",
+      "menuOrder": 11,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
+    },
+    {
+      "operationId": "DeleteAWSEventBridgeSource",
+      "summary": "Delete an Amazon EventBridge source",
+      "slug": "delete-an-amazon-eventbridge-source",
+      "menuOrder": 11,
+      "versions": [
+        "v2",
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/event_bridge",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/event_bridge",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/event_bridge"
+      }
+    },
+    {
+      "operationId": "GetAWSAccountCCMConfig",
+      "summary": "Get AWS CCM config",
+      "slug": "get-aws-ccm-config",
+      "menuOrder": 14,
+      "versions": [
+        "v2"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
+    },
+    {
+      "operationId": "CreateAWSAccountCCMConfig",
+      "summary": "Create AWS CCM config",
+      "slug": "create-aws-ccm-config",
+      "menuOrder": 15,
+      "versions": [
+        "v2"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": true,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us3": "https://api.us3.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "us5": "https://api.us5.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "eu": "https://api.datadoghq.eu/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap1": "https://api.ap1.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "ap2": "https://api.ap2.datadoghq.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config",
+        "gov": "https://api.ddog-gov.com/api/v2/integration/aws/accounts/{aws_account_config_id}/ccm_config"
+      }
+    }
+  ],
+  "deprecated": false
+}

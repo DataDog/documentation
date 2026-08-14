@@ -1,0 +1,83 @@
+:root {
+  /* Colors — Brand */
+  --color-brand: #632ca6;
+  --color-brand-hover: #7b3fc4;
+  --color-brand-active: #4d2281;
+  --color-brand-tint: rgba(99, 44, 166, 0.05);
+  --color-brand-border: #d4bdfb;
+  --color-brand-hover-bg: #eae2f8;
+  /* Text/icon color for content sitting on a brand-colored fill. The brand
+     purple stays dark enough for white in every theme, so this does not flip. */
+  --color-text-on-brand: #fff;
+
+  /* Colors — Text */
+  --color-text: #212529;
+  --color-text-muted: #666;
+  --color-text-inverse: #fff;
+
+  /* Colors — Surface */
+  --color-bg: #fff;
+  --color-border: #ddd;
+  --color-border-strong: #eee;
+  --color-border-dark: #c7c7c7;
+  --color-scrollbar: rgba(0, 0, 0, 0.2);
+
+  /* Colors — Status */
+  --color-status-text: #4a4a4a;
+  --color-info: #006bc2;
+  --color-info-emphasis: #004a8c;
+  --color-caution: #facc00;
+  --color-caution-emphasis: #7f4205;
+  --color-warning: #eb364b;
+  --color-warning-emphasis: #9b3908;
+  --color-accent: #9364cd;
+  --color-accent-emphasis: #4a2c6a;
+
+  /* Colors — Panel */
+  --color-panel-bg: #fff;
+  --color-panel-text: #000;
+  --color-panel-border: #ddd;
+  --color-panel-header: rgba(119, 0, 255, 0.15);
+  --color-panel-accent: rgba(119, 0, 255, 0.3);
+  --color-highlight-bg: #f2f2f2;
+  --color-highlight-text: #555;
+
+  /* Colors — Surface variants */
+  --color-surface-border: #ebebeb;
+  --color-surface-header: #f3edff;
+  --color-surface-header-text: #000;
+  --color-surface-alt: #fdfcff;
+  --color-surface-bg: #fdfcff;
+  --color-bg-hover: rgba(0, 0, 0, 0.02);
+
+  /* Colors — Named (badge/indicator pairs) */
+  --color-teal: #26759c;
+  --color-teal-tint: #ebf5fa;
+  --color-forest: #297a3f;
+  --color-forest-tint: #d9f3e0;
+  --color-plum: #5f3b83;
+  --color-plum-tint: #d6c9e3;
+  --color-amber: #906623;
+  --color-amber-tint: #fff0d4;
+  --color-crimson: #b72a3a;
+  --color-crimson-tint: #fbd6db;
+  --color-gray-lightest: #f6f6f6;
+
+  /* Colors — Semantic */
+  --color-blue: #1a73e8;
+  --color-blue-tint: rgba(26, 115, 232, 0.1);
+  --color-green: #2e7d32;
+  --color-green-tint: rgba(46, 125, 50, 0.1);
+  --color-orange: #e65100;
+  --color-orange-tint: rgba(230, 81, 0, 0.1);
+  --color-yellow: #f9a825;
+  --color-yellow-tint: rgba(249, 168, 37, 0.15);
+  --color-red: #c62828;
+  --color-red-tint: rgba(198, 40, 40, 0.1);
+
+  /* Colors — Placeholder (for work-in-progress layout slots) */
+  --color-placeholder-bg: #e9d8f4;
+  --color-placeholder-outline: #632ca6;
+  --color-placeholder-text: var(--color-placeholder-outline);
+}
+

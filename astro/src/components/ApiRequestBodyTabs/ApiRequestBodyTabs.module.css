@@ -1,0 +1,13 @@
+.request-body-tabs__examples {
+  margin-top: var(--space-sm);
+}
+
+.request-body-tabs__examples details {
+  margin-bottom: var(--space-sm);
+}
+
+.request-body-tabs__examples summary {
+  cursor: pointer;
+  color: var(--color-brand);
+  font-size: var(--font-size-sm);
+}

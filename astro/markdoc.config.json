@@ -1,0 +1,11 @@
+[
+  {
+    "id": "astro-docs",
+    "path": "astro/src/content/docs",
+    "schema": {
+      "path": "astro/markdoc.schema.mjs",
+      "type": "esm",
+      "watch": true
+    }
+  }
+]

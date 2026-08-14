@@ -1,0 +1,108 @@
+---
+import Tabs from "@components/Tabs/Tabs.astro";
+import TabPanel from "@components/Tab/TabPanel.astro";
+import CodeBlock from "@components/CodeBlock/CodeBlock.astro";
+import ExpandChevron from "@components/ExpandChevron/ExpandChevron.astro";
+import styles from "./ApiCodeExample.module.css";
+import { classListFactory } from "@lib/cssUtils/classListFactory";
+import { generateElementId } from "@lib/componentUtils/generateElementId";
+import { i18n } from "@lib/i18n/i18n";
+
+const cl = classListFactory(styles);
+
+export interface CodeExampleEntry {
+  description: string;
+  code: string;
+  syntax: string;
+  /** If present, render one code block per region. Only the variant matching the active region is visible. */
+  regionVariants?: Record<string, { code: string }>;
+}
+
+export interface CodeExampleSet {
+  language: string;
+  label: string;
+  entries: CodeExampleEntry[];
+}
+
+interface Props {
+  examples: CodeExampleSet[];
+}
+
+const { examples } = Astro.props;
+
+const groupId = generateElementId("api-code-example");
+const labels = examples.map((ex) => ex.label);
+const panelIds = examples.map((_, i) => `${groupId}-panel-${i}`);
+---
+
+{
+  examples.length > 0 && (
+    <div class={cl("api-code-example")}>
+      <h3 class={cl("api-code-example__heading")}>{i18n("code_example")}</h3>
+
+      <Tabs id={groupId} variant="pills" labels={labels} panelIds={panelIds}>
+        {examples.map((ex, tabIdx) => (
+          <TabPanel id={panelIds[tabIdx]} isActive={tabIdx === 0}>
+            {ex.entries.length === 1 ? (
+              ex.entries[0].regionVariants ? (
+                Object.entries(ex.entries[0].regionVariants).map(
+                  ([regionKey, variant]) => (
+                    <div
+                      data-region={regionKey}
+                      class={cl("api-code-example__code-block")}
+                    >
+                      <CodeBlock
+                        content={variant.code}
+                        language={ex.entries[0].syntax}
+                      />
+                    </div>
+                  ),
+                )
+              ) : (
+                <div class={cl("api-code-example__code-block")}>
+                  <CodeBlock
+                    content={ex.entries[0].code}
+                    language={ex.entries[0].syntax}
+                  />
+                </div>
+              )
+            ) : (
+              ex.entries.map((entry, i) => (
+                <details
+                  class={cl("api-code-example__accordion")}
+                  open={i === 0}
+                >
+                  <summary class={cl("api-code-example__accordion-header")}>
+                    <ExpandChevron
+                      class={cl("api-code-example__accordion-icon")}
+                    />
+                    <span>{entry.description}</span>
+                  </summary>
+                  {entry.regionVariants ? (
+                    Object.entries(entry.regionVariants).map(
+                      ([regionKey, variant]) => (
+                        <div
+                          data-region={regionKey}
+                          class={cl("api-code-example__code-block")}
+                        >
+                          <CodeBlock
+                            content={variant.code}
+                            language={entry.syntax}
+                          />
+                        </div>
+                      ),
+                    )
+                  ) : (
+                    <div class={cl("api-code-example__code-block")}>
+                      <CodeBlock content={entry.code} language={entry.syntax} />
+                    </div>
+                  )}
+                </details>
+              ))
+            )}
+          </TabPanel>
+        ))}
+      </Tabs>
+    </div>
+  )
+}

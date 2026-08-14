@@ -1,0 +1,48 @@
+---
+/**
+ * Scrolls the currently-active nav item into view inside its scroll container.
+ *
+ * Rendered AFTER the list so the active element is already parsed when the
+ * script runs. Kept inline (via `define:vars`, which forces an inline script)
+ * so the scroll lands before first paint — no visible jump from the top.
+ *
+ * Shared by the desktop API side nav and the mobile API nav, which scroll
+ * different containers with different offsets but the same formula.
+ */
+interface Props {
+  /** Selector for the scroll container. */
+  containerSelector: string;
+  /** Selector (within the container) for the active element to reveal. */
+  activeSelector?: string;
+  /** Optional selector (within the container) for a sticky header whose height
+   *  offsets the scroll so the active item lands below it, not behind it. */
+  headerSelector?: string;
+  /** Extra gap, in pixels, to leave above the active element. */
+  gap?: number;
+}
+
+const {
+  containerSelector,
+  activeSelector = '[aria-current="page"]',
+  headerSelector,
+  gap = 0,
+} = Astro.props;
+---
+
+<script is:inline define:vars={{ containerSelector, activeSelector, headerSelector, gap }}>
+  {
+    const container = document.querySelector(containerSelector);
+    const active = container?.querySelector(activeSelector);
+    if (container && active) {
+      const header = headerSelector
+        ? container.querySelector(headerSelector)
+        : null;
+      const headerHeight = header ? header.getBoundingClientRect().height : 0;
+      container.scrollTop +=
+        active.getBoundingClientRect().top -
+        container.getBoundingClientRect().top -
+        headerHeight -
+        gap;
+    }
+  }
+</script>

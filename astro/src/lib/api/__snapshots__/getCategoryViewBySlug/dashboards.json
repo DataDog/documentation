@@ -1,0 +1,302 @@
+{
+  "name": "Dashboards",
+  "slug": "dashboards",
+  "description": "Manage all your dashboards, as well as access to your shared dashboards, through the API. See the [Dashboards page](https://docs.datadoghq.com/dashboards/) for more information.",
+  "operations": [
+    {
+      "operationId": "CreateDashboard",
+      "summary": "Create a new dashboard",
+      "slug": "create-a-new-dashboard",
+      "menuOrder": 1,
+      "versions": [
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
+    },
+    {
+      "operationId": "GetDashboard",
+      "summary": "Get a dashboard",
+      "slug": "get-a-dashboard",
+      "menuOrder": 2,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
+    },
+    {
+      "operationId": "ListDashboards",
+      "summary": "Get all dashboards",
+      "slug": "get-all-dashboards",
+      "menuOrder": 3,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
+    },
+    {
+      "operationId": "UpdateDashboard",
+      "summary": "Update a dashboard",
+      "slug": "update-a-dashboard",
+      "menuOrder": 4,
+      "versions": [
+        "v1"
+      ],
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
+    },
+    {
+      "operationId": "DeleteDashboard",
+      "summary": "Delete a dashboard",
+      "slug": "delete-a-dashboard",
+      "menuOrder": 5,
+      "versions": [
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/{dashboard_id}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/{dashboard_id}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/{dashboard_id}"
+      }
+    },
+    {
+      "operationId": "DeleteDashboards",
+      "summary": "Delete dashboards",
+      "slug": "delete-dashboards",
+      "menuOrder": 6,
+      "versions": [
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
+    },
+    {
+      "operationId": "RestoreDashboards",
+      "summary": "Restore deleted dashboards",
+      "slug": "restore-deleted-dashboards",
+      "menuOrder": 7,
+      "versions": [
+        "v1"
+      ],
+      "method": "PATCH",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard"
+      }
+    },
+    {
+      "operationId": "CreatePublicDashboard",
+      "summary": "Create a shared dashboard",
+      "slug": "create-a-shared-dashboard",
+      "menuOrder": 8,
+      "versions": [
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public"
+      }
+    },
+    {
+      "operationId": "GetPublicDashboard",
+      "summary": "Get a shared dashboard",
+      "slug": "get-a-shared-dashboard",
+      "menuOrder": 9,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
+    },
+    {
+      "operationId": "UpdatePublicDashboard",
+      "summary": "Update a shared dashboard",
+      "slug": "update-a-shared-dashboard",
+      "menuOrder": 10,
+      "versions": [
+        "v1"
+      ],
+      "method": "PUT",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
+    },
+    {
+      "operationId": "SendPublicDashboardInvitation",
+      "summary": "Send shared dashboard invitation email",
+      "slug": "send-shared-dashboard-invitation-email",
+      "menuOrder": 11,
+      "versions": [
+        "v1"
+      ],
+      "method": "POST",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
+    },
+    {
+      "operationId": "GetPublicDashboardInvitations",
+      "summary": "Get all invitations for a shared dashboard",
+      "slug": "get-all-invitations-for-a-shared-dashboard",
+      "menuOrder": 12,
+      "versions": [
+        "v1"
+      ],
+      "method": "GET",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
+    },
+    {
+      "operationId": "DeletePublicDashboard",
+      "summary": "Revoke a shared dashboard URL",
+      "slug": "revoke-a-shared-dashboard-url",
+      "menuOrder": 13,
+      "versions": [
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}"
+      }
+    },
+    {
+      "operationId": "DeletePublicDashboardInvitation",
+      "summary": "Revoke shared dashboard invitations",
+      "slug": "revoke-shared-dashboard-invitations",
+      "menuOrder": 14,
+      "versions": [
+        "v1"
+      ],
+      "method": "DELETE",
+      "deprecated": false,
+      "unstable": false,
+      "regionUrls": {
+        "us": "https://api.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us3": "https://api.us3.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "us5": "https://api.us5.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "eu": "https://api.datadoghq.eu/api/v1/dashboard/public/{token}/invitation",
+        "ap1": "https://api.ap1.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "ap2": "https://api.ap2.datadoghq.com/api/v1/dashboard/public/{token}/invitation",
+        "gov": "https://api.ddog-gov.com/api/v1/dashboard/public/{token}/invitation"
+      }
+    }
+  ],
+  "deprecated": false
+}

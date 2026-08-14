@@ -1,0 +1,51 @@
+.region-selector {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--font-size-xs);
+}
+
+/* Keep the label and its help icon together on one line, even when the
+   container stacks into a column at narrow widths. */
+.region-selector__heading {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.region-selector__label {
+  color: var(--color-text);
+  font-weight: 600;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.region-selector__help {
+  display: inline-flex;
+  align-items: center;
+  color: var(--color-text-subtle);
+  flex-shrink: 0;
+}
+
+/* Hold the subtle color on hover so the icon doesn't pick up the global link hover color. */
+.region-selector__help:hover {
+  color: var(--color-text-subtle);
+}
+
+.region-selector__help svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+/* Below Hugo's `sm` breakpoint (576px), stack the label above the dropdown —
+   matching Hugo's `.language-region-select-container` (`display: block` at
+   `media-breakpoint-down(sm)`). This keeps the language + site selectors
+   narrow enough to sit side by side instead of overflowing the viewport. */
+@media (max-width: 575.98px) {
+  .region-selector {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+}

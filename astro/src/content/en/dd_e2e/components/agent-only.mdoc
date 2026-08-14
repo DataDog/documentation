@@ -1,0 +1,15 @@
+---
+title: "Agent-only"
+description: "Content hidden from humans but kept in the copy-for-AI plaintext."
+type: static
+---
+
+Hides content from human readers while keeping it in the plaintext that AI agents receive.
+
+## Example
+
+The paragraph below is wrapped in `{% agent-only %}` and does not appear on the rendered page.
+
+{% agent-only %}
+This paragraph is only for AI agents. It is hidden from the rendered page but preserved in the plaintext.
+{% /agent-only %}

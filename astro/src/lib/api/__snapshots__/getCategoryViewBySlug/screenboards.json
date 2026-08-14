@@ -1,0 +1,7 @@
+{
+  "name": "Screenboards",
+  "slug": "screenboards",
+  "description": "This endpoint is outdated. Use the [new Dashboard endpoint](https://docs.datadoghq.com/api/latest/dashboards/) instead.",
+  "operations": [],
+  "deprecated": true
+}

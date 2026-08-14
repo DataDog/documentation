@@ -1,0 +1,109 @@
+{
+  "results": [
+    {
+      "found": 4,
+      "found_docs": 16,
+      "grouped_hits": [
+        {
+          "group_key": ["/api/latest/dashboards/"],
+          "hits": [
+            {
+              "document": {
+                "title": "Get a dashboard",
+                "section_header": "",
+                "content": "Use the Datadog API to fetch a dashboard by ID.",
+                "type": "api",
+                "relpermalink": "/api/latest/dashboards/",
+                "language": "en",
+                "category": "API",
+                "subcategory": "Dashboards"
+              },
+              "highlights": [
+                { "field": "title", "snippet": "Get a <mark>dashboard</mark>" }
+              ]
+            }
+          ]
+        },
+        {
+          "group_key": ["/dashboards/"],
+          "hits": [
+            {
+              "document": {
+                "title": "Dashboards overview",
+                "section_header": "",
+                "content": "Dashboards display key metrics across services.",
+                "type": "doc",
+                "relpermalink": "/dashboards/",
+                "language": "en",
+                "category": "Documentation",
+                "subcategory": "Dashboards"
+              },
+              "highlights": [
+                { "field": "title", "snippet": "<mark>Dashboards</mark> overview" }
+              ]
+            }
+          ]
+        },
+        {
+          "group_key": ["/getting_started/dashboards/"],
+          "hits": [
+            {
+              "document": {
+                "title": "Set up dashboards",
+                "section_header": "",
+                "content": "Walkthrough for getting started with dashboards.",
+                "type": "guide",
+                "relpermalink": "/getting_started/dashboards/",
+                "language": "en",
+                "category": "Getting Started",
+                "subcategory": "Dashboards"
+              },
+              "highlights": [
+                { "field": "title", "snippet": "Set up <mark>dashboards</mark>" }
+              ]
+            }
+          ]
+        },
+        {
+          "group_key": ["/dashboards/guide/build/"],
+          "hits": [
+            {
+              "document": {
+                "title": "Build a custom dashboard",
+                "section_header": "Adding widgets",
+                "content": "After you create a dashboard, add widgets to it.",
+                "type": "guide",
+                "relpermalink": "/dashboards/guide/build/",
+                "language": "en",
+                "category": "Guide",
+                "subcategory": "Dashboards"
+              },
+              "highlights": [
+                { "field": "title", "snippet": "Build a custom <mark>dashboard</mark>" }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "found": 1,
+      "hits": [
+        {
+          "document": {
+            "title": "Acme Dashboards Integration",
+            "section_header": "",
+            "content": "Acme provides dashboard widgets that pair with Datadog.",
+            "type": "partners",
+            "relpermalink": "/partners/acme-dashboards/",
+            "language": "en",
+            "subcategory": "Acme"
+          },
+          "highlights": [
+            { "field": "title", "snippet": "Acme <mark>Dashboards</mark> Integration" }
+          ]
+        }
+      ]
+    }
+  ]
+}

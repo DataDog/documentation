@@ -1,0 +1,135 @@
+---
+// Catch-all on-demand route for every `en` collection entry. Whether or not a
+// doc is filterable, it renders here on the server. Filterable docs (those with
+// `content_filters`) additionally resolve their filters per request (URL param
+// > cookie > default) so non-matching content is dropped by vanilla Markdoc
+// before the HTML is sent; non-filterable docs simply render their content.
+//
+// This is the lowest-priority route, so more specific ones (`/`,
+// `/[...lang]/api/...`) still win; only otherwise-unmatched paths reach here.
+// A path with no matching `en` entry falls through to a 404.
+export const prerender = false;
+
+import { getEntry, render } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import CdocsFilterBar from '@components/CdocsFilterBar/CdocsFilterBar';
+import CopyPageButtonIsland from '@components/CopyPageButton/CopyPageButtonIsland.astro';
+import { resolveCdocRender } from '@lib/cdocs/resolveCdocRender';
+import { COOKIE_NAME } from '@lib/cdocs/cookiePrefs';
+import { DEFAULT_LOCALE } from '@lib/i18n/locale';
+
+// `[...slug]` yields the full path with no leading/trailing slash, which is
+// exactly an `en` entry id (path under content/en, without the extension).
+const slug = Astro.params.slug ?? '';
+
+// dd_e2e/* are test pages; hidden in the live build like every other dd_e2e
+// route (which each carry their own `__CI_ENV__ === 'live'` guard).
+if (slug.startsWith('dd_e2e/') && __CI_ENV__ === 'live') {
+  return new Response(null, { status: 404 });
+}
+
+const entry = await getEntry('en', slug);
+// Any en entry renders here; a path with no entry 404s.
+if (!entry) {
+  return new Response(null, { status: 404 });
+}
+
+const contentFilters = entry.data.content_filters;
+const isFilterable = contentFilters !== undefined;
+
+// Filterable docs resolve their filters (and persist the selection); plain docs
+// render with no filter state.
+let resolvedFilters: ReturnType<typeof resolveCdocRender>['resolvedFilters'] = [];
+let valsByTraitId: ReturnType<typeof resolveCdocRender>['valsByTraitId'] = {};
+if (isFilterable) {
+  const resolved = resolveCdocRender({
+    contentFilters,
+    searchParams: Astro.url.searchParams,
+    cookieRaw: Astro.cookies.get(COOKIE_NAME)?.value,
+    now: Date.now(),
+  });
+  resolvedFilters = resolved.resolvedFilters;
+  valsByTraitId = resolved.valsByTraitId;
+
+  // Persist the resolved values (trait-keyed, oldest evicted past the cap) so a
+  // selection survives navigation to other cdocs.
+  Astro.cookies.set(COOKIE_NAME, resolved.cookieValue, {
+    path: '/',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 365,
+  });
+}
+
+// The resolved values become Markdoc variables ($prog_lang, ...), which the
+// built-in `if` tags evaluate to drop non-matching content at render time.
+const { Content } = await render(entry);
+
+// Crawler metadata: a canonical URL that pins the resolved filter values, so
+// each filtered variant has a stable, indexable address.
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
+for (const [traitId, value] of Object.entries(valsByTraitId)) {
+  canonicalUrl.searchParams.set(traitId, value);
+}
+
+// Plaintext (`.md`) twin of this page, preserving the current filter query so
+// the plaintext reflects the same resolved state. Trailing slash is stripped so
+// the path matches an `en` entry id. Testing aid for now.
+const plaintextHref = `${Astro.url.pathname.replace(/\/$/, '')}.md${Astro.url.search}`;
+---
+
+<BaseLayout
+  title={entry.data.title}
+  description={entry.data.description}
+  canonical={canonicalUrl.href}
+  enableViewTransitions
+>
+  <div class="cdoc-layout">
+    <main class="cdoc">
+      <h1 transition:name="cdoc-title">{entry.data.title}</h1>
+      {isFilterable && <CdocsFilterBar client:load filters={resolvedFilters} />}
+      <div class="cdoc__content" transition:name="cdoc-content">
+        <Content {...valsByTraitId} />
+      </div>
+    </main>
+    <nav class="cdoc-rightnav">
+      <CopyPageButtonIsland lang={DEFAULT_LOCALE} />
+      {/* TODO: temporary testing link to the plaintext (.md) version. Only
+          filterable docs currently have a working `.md` twin. */}
+      {isFilterable && (
+        <a class="cdoc-rightnav__plaintext-link" href={plaintextHref}>View as plaintext</a>
+      )}
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  .cdoc-layout {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cdoc {
+    flex: 1;
+    min-width: 0;
+    padding: var(--space-lg);
+  }
+
+  .cdoc :global(h2) {
+    margin-top: var(--space-xl);
+  }
+
+  .cdoc-rightnav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: 80px var(--space-md) var(--space-lg);
+    width: 180px;
+    flex-shrink: 0;
+  }
+
+  .cdoc-rightnav__plaintext-link {
+    font-size: var(--font-size-sm);
+  }
+</style>

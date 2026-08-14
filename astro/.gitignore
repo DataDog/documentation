@@ -1,0 +1,16 @@
+node_modules/
+dist/
+.astro/
+.claude/*local*
+test-results/
+playwright-report/
+
+# yarn v2 or greater
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

@@ -1,0 +1,14 @@
+/**
+ * Injected into every `toHaveScreenshot` capture (via `stylePath` in
+ * playwright.config.ts). Hides dev-only chrome that isn't part of the site
+ * under test.
+ *
+ * Browser tests run against the dev server (USE_DEV_SERVER=true), where
+ * `MODE === 'development'` renders the DevBadge. The badge is `position: fixed`
+ * and overlaps whatever sits at the top-left (for example, the announcement
+ * banner), leaking hotpink pixels into element screenshots. Baselines are
+ * captured badge-free, so hide it here.
+ */
+.dev-badge {
+  display: none !important;
+}
