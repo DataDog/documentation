@@ -48,20 +48,16 @@ Use the Explorer facets (under the **Rule** and **Policy** groups) to filter res
 
 For information about the MITRE ATT&CK map available in SIEM or Workload Protection, see [MITRE ATT&CK map][2].
 
-## Workload coverage triage and response cycle
+## Recommended review order
 
-As an example of how to use Coverage to triage and respond to coverage issues, here is a sequence that starts by establishing a baseline, closing blind spots, and securing the most critical assets. It then verifies enforcement mechanisms, restores agent health, and aligns detection coverage with known adversary behaviors. Finally, it applies rule updates, confirms effectiveness, and records the state for audit and incident reference.
+Use this order to review coverage across your environment:
 
-1. Do a full environment view to establish baseline coverage status.
-2. Focus on assets that appear fully covered. Validate that their policies, rules, and agents are working as intended before addressing visible gaps. This uncovers silent failures in trusted systems that would otherwise be ignored.
-3. Identify all unprotected or partially protected workloads.
-4. Prioritize assets with the highest business impact and exposure.
-5. Verify policy deployment and enforcement on those assets.
-6. Check for outdated or unhealthy agents on all remaining workloads.
-7. Map current detection coverage to MITRE ATT&CK to find gaps in tactics and techniques.
-8. Deploy or update detection rules to close those gaps.
-9. Reassess coverage to confirm posture changes took effect.
-10. Log the final state for compliance and future comparison.
+1. Review the full environment to establish a baseline. Validate that resources appearing fully covered have working policies, rules, and Agents to uncover silent failures before addressing visible gaps.
+2. Identify unprotected or partially protected workloads, then prioritize resources with the highest business impact and exposure.
+3. Verify policy and rule deployment on prioritized resources, and check for outdated or unhealthy Agents on all remaining workloads.
+4. Map detection coverage to MITRE ATT&CK, then deploy or update detection rules to close gaps.
+5. Reassess Coverage to confirm that your changes took effect.
+6. Record the final state for compliance, audits, incident reference, and future comparison.
 
 [1]: /security/workload_protection/inventory/
 [2]: /security/detection_rules/#mitre-attck-map
