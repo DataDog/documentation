@@ -3759,6 +3759,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
+    - name: Manual Instrumentation
+      url: serverless/azure_container_apps/manual_instrumentation
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_manual
+      weight: 1
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
