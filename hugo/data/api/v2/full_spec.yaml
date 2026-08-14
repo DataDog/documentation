@@ -4577,6 +4577,22 @@ components:
         - id
         - base_severity
       type: object
+    AgentTrigger:
+      description: "Trigger a workflow from an agent via the MCP execute tool. Workflow can be executed from Bits Chat, Bits Agent Builder, Claude Code, Codex, Cursor, and any other coding agent using the Datadog MCP."
+      properties:
+        rateLimit:
+          $ref: "#/components/schemas/TriggerRateLimit"
+      type: object
+    AgentTriggerWrapper:
+      description: "Schema for an agent-based trigger."
+      properties:
+        agentTrigger:
+          $ref: "#/components/schemas/AgentTrigger"
+        startStepNames:
+          $ref: "#/components/schemas/StartStepNames"
+      required:
+        - agentTrigger
+      type: object
     AggregatedHighFrozenFrameRate:
       description: Aggregated high frozen frame rate detection at view level.
       properties:
@@ -26135,9 +26151,11 @@ components:
       description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/CreateTableRequestDataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
@@ -26400,13 +26418,14 @@ components:
       description: Upload configuration specifying how data is uploaded by the user, and properties of the table to associate the upload with.
       properties:
         headers:
-          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file.
+          description: The CSV file headers that define the schema fields, provided in the same order as the columns in the uploaded file. Maximum of 200 columns.
           example:
             - "field_1"
             - "field_2"
           items:
             description: A column header name from the CSV file.
             type: string
+          maxItems: 200
           type: array
         part_count:
           description: Number of parts to split the file into for multipart upload.
@@ -29736,15 +29755,109 @@ components:
         - service
         - started_at
       type: object
-    DORADeploymentPatchRemediation:
-      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time.
+    DORADeploymentPatchByVersionRemediation:
+      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time. Specify either `id` or `version` to identify the remediation deployment, but not both.
+      oneOf:
+        - $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediationByID"
+        - $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediationByVersion"
+    DORADeploymentPatchByVersionRemediationByID:
+      additionalProperties: false
+      description: Remediation details identified by the ID of the remediation deployment.
       properties:
         id:
-          description: The ID of the remediation deployment. Required when the failed deployment must be linked to a remediation deployment.
+          description: The ID of the remediation deployment.
           example: eG42zNIkVjM
           type: string
         type:
           $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+      required:
+        - id
+        - type
+      type: object
+    DORADeploymentPatchByVersionRemediationByVersion:
+      additionalProperties: false
+      description: Remediation details identified by the version of the remediation deployment, matched against the same service and environment as the failed deployment.
+      properties:
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+        version:
+          description: The version of the remediation deployment.
+          example: v1.2.4
+          type: string
+      required:
+        - version
+        - type
+      type: object
+    DORADeploymentPatchByVersionRequest:
+      description: Request to patch a DORA deployment event identified by service, environment, and version.
+      example:
+        data:
+          attributes:
+            change_failure: true
+            env: "production"
+            remediation:
+              type: "rollback"
+              version: "v1.2.2"
+            service: "my-service"
+            version: "v1.2.3"
+          type: "dora_deployment_patch_request"
+      properties:
+        data:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRequestData"
+      required:
+        - data
+      type: object
+    DORADeploymentPatchByVersionRequestAttributes:
+      description: Attributes for patching a DORA deployment event identified by service, environment, and version.
+      properties:
+        change_failure:
+          description: Indicates whether the deployment resulted in a change failure.
+          example: true
+          type: boolean
+        env:
+          description: The environment the deployment was performed in.
+          example: prod
+          type: string
+        remediation:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRemediation"
+        service:
+          description: The name of the service that was deployed.
+          example: my-service
+          type: string
+        version:
+          description: "The version deployed. This can be seen in the Service Catalog or in the APM Deployment Tracking."
+          example: v1.2.3
+          type: string
+      required:
+        - service
+        - env
+        - version
+        - change_failure
+      type: object
+    DORADeploymentPatchByVersionRequestData:
+      description: The JSON:API data for patching a deployment identified by service, environment, and version.
+      properties:
+        attributes:
+          $ref: "#/components/schemas/DORADeploymentPatchByVersionRequestAttributes"
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRequestDataType"
+      required:
+        - type
+        - attributes
+      type: object
+    DORADeploymentPatchRemediation:
+      description: Remediation details for the deployment. Optional, but required to calculate failed deployment recovery time. Specify either `id` or `version` to identify the remediation deployment, but not both.
+      properties:
+        id:
+          description: The ID of the remediation deployment. Use this or `version` to identify the remediation deployment, but not both.
+          example: eG42zNIkVjM
+          type: string
+        type:
+          $ref: "#/components/schemas/DORADeploymentPatchRemediationType"
+        version:
+          description: The version of the remediation deployment, matched against the same service and environment as the failed deployment. Use this or `id` to identify the remediation deployment, but not both.
+          example: v1.2.4
+          type: string
       type: object
     DORADeploymentPatchRemediationType:
       description: The type of remediation action taken. Required when the failed deployment must be linked to a remediation deployment.
@@ -33034,6 +33147,13 @@ components:
     DeploymentGatesFDDRuleOptions:
       description: Options for a `faulty_deployment_detection` rule.
       properties:
+        allowed_resources:
+          description: APM resource names to include in analysis. Mutually exclusive with `excluded_resources`.
+          example:
+            - "GET /healthcheck"
+          items:
+            type: string
+          type: array
         duration:
           description: Evaluation window in seconds. Maximum 7200 (2 hours).
           example: 900
@@ -33202,6 +33322,13 @@ components:
       additionalProperties: false
       description: Faulty deployment detection options for deployment rules.
       properties:
+        allowed_resources:
+          description: Resources to include in faulty deployment detection. Mutually exclusive with `excluded_resources`.
+          example: ["resource1", "resource2"]
+          items:
+            description: A resource name to include in faulty deployment detection.
+            type: string
+          type: array
         duration:
           description: The duration for faulty deployment detection.
           example: 3600
@@ -81846,9 +81973,11 @@ components:
       description: Schema defining the updates to the structure and columns of the reference table. Schema fields cannot be deleted or renamed.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/PatchTableRequestDataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows. Primary keys cannot be changed after table creation.
@@ -111377,9 +111506,11 @@ components:
       description: Schema defining the structure and columns of the reference table.
       properties:
         fields:
-          description: The schema fields.
+          description: The schema fields. Maximum of 200 columns.
           items:
             $ref: "#/components/schemas/TableResultV2DataAttributesSchemaFieldsItems"
+          maxItems: 200
+          minItems: 1
           type: array
         primary_keys:
           description: List of field names that serve as primary keys for the table. Only one primary key is supported, and it is used as an ID to retrieve rows.
@@ -115556,6 +115687,7 @@ components:
     Trigger:
       description: "One of the triggers that can start the execution of a workflow."
       oneOf:
+        - $ref: "#/components/schemas/AgentTriggerWrapper"
         - $ref: "#/components/schemas/APITriggerWrapper"
         - $ref: "#/components/schemas/AppTriggerWrapper"
         - $ref: "#/components/schemas/CaseTriggerWrapper"
@@ -142101,6 +142233,53 @@ paths:
         permissions:
           - dora_metrics_write
   /api/v2/dora/deployments:
+    patch:
+      description: |-
+        Update a deployment's change failure status, identifying the deployment by its service, environment, and version instead of its ID. Use this to mark a deployment as a change failure or back to stable. You can optionally include remediation details to enable failed deployment recovery time calculation. If multiple deployments match the given service, environment, and version, the most recently finished one is updated.
+      operationId: PatchDORADeploymentByVersion
+      requestBody:
+        content:
+          application/json:
+            examples:
+              default:
+                value:
+                  data:
+                    attributes:
+                      change_failure: true
+                      env: production
+                      service: my-service
+                      version: v1.2.3
+                    type: dora_deployment_patch_request
+            schema:
+              $ref: "#/components/schemas/DORADeploymentPatchByVersionRequest"
+        required: true
+      responses:
+        "202":
+          description: Accepted
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JSONAPIErrorResponse"
+          description: Bad Request
+        "403":
+          $ref: "#/components/responses/NotAuthorizedResponse"
+        "429":
+          $ref: "#/components/responses/TooManyRequestsResponse"
+      security:
+        - apiKeyAuth: []
+          appKeyAuth: []
+      summary: Patch a deployment event by version
+      tags: ["DORA Metrics"]
+      x-codegen-request-body-name: body
+      x-menu-order: 11
+      x-permission:
+        operator: OR
+        permissions:
+          - dora_metrics_write
+      x-unstable: |-
+        **Note**: This endpoint is in preview and is subject to change.
+        If you have any feedback, contact [Datadog support](https://docs.datadoghq.com/help/).
     post:
       description: |-
         Use this API endpoint to get a list of deployment events.
@@ -169709,7 +169888,12 @@ paths:
         permissions:
           - metric_tags_write
     get:
-      description: Returns the tag configuration for the given metric name.
+      description: |-
+        Returns the tag configuration for the given metric name.
+
+        A metric may exist and submit data without having a tag configuration. If no tag configuration exists
+        for the metric, this endpoint returns `404 Not Found`. This response does not indicate that the metric
+        itself is missing.
       operationId: ListTagConfigurationByName
       parameters:
         - $ref: "#/components/parameters/MetricName"
@@ -169742,7 +169926,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/APIErrorResponse"
-          description: Not Found
+          description: No tag configuration exists for the metric
         "429":
           content:
             application/json:
