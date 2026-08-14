@@ -65,9 +65,11 @@ Workload Protection is not limited to runtime threat detection. Many organizatio
 
 Workload Protection evaluates the activity it collects in two places: on the Datadog Agent, and in Datadog.
 
-[Agent rules][6] decide which system activity the Agent sends to Datadog. Matching activity becomes an [agent event][7]. In Datadog, [detection rules][8] turn agent events into [signals][10], and [finding rules][9] turn them into [findings][11]. [Response actions][4], which run in the Agent, stop the activity.
+### Saving resources by design
 
-Agent rules are organized in [policies][14], which you deploy with {{< tooltip glossary="Remote Configuration" case="title" >}} or manually. You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider.
+Workload Protection detection rules are complex, correlating several datapoints across time and processes. This complexity would result in considerable compute resource demands on the Agent host if all rules were evaluated there.
+
+Datadog solves this problem by keeping the Agent lightweight with efficient rules that filter out all non security relevant activity from your workloads, and processes the rest using the threat detection and finding rules on the Datadog backend. Agent rules are organized in [policies][14], which you deploy with {{< tooltip glossary="Remote Configuration" case="title" >}} or manually. You can manage rules and policies in the Datadog UI, in Agent configuration files, or with the Datadog Terraform provider.
 
 {{< img src="security/workload_protection/workload_protection_detection_architecture.png" alt="Workload Protection architecture overview" width="100%">}}
 
@@ -88,10 +90,9 @@ Agent rules perform lightweight filtering so they run efficiently on every host.
 1. The [agent rules][6] evaluate system activity on the Agent host.
 2. When activity matches an agent rule expression, the Agent generates an [agent event][7] and passes it to Datadog.
 3. Datadog evaluates the agent events against [detection rules][8] and [finding rules][9].
-4. If a detection rule matches, a signal is generated and displayed in [Signals][10].
+4. If a detection rule matches, a signal is generated and displayed in [Signals][10]. In addition, if an agent event attribute matches a [threat intelligence indicator][13], it will be displayed as well.
 5. If a finding rule matches, a finding is generated and displayed in [Findings][11].
-6. If an agent event attribute matches a [threat intelligence indicator][13], a signal is generated and displayed in [Signals][10].
-7. Any [notification rules][12] matching the signal's severity, rule type, tags, and attributes are triggered.
+6. Any [notification rules][12] matching the signal's severity, rule type, tags, and attributes are triggered.
 
 Workload Protection ships with over 350 agent rules and 200 detection rules, covering most MITRE ATT&CK tactics and techniques. You can also write your own, including in-agent state machines that alert only on complex indicators of compromise.
 
