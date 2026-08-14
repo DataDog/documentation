@@ -9,7 +9,7 @@ aliases:
 further_reading:
 - link: "actions/private_actions/"
   tag: "Documentation"
-  text: "Private Actions Overview"
+  text: "Private Actions"
 - link: "actions/private_actions/enroll_runner"
   tag: "Documentation"
   text: "Enrollment and ownership"
@@ -21,22 +21,22 @@ further_reading:
   text: "Set up a standalone private action runner"
 ---
 
-Running the private action runner in the Datadog Agent is the recommended path for new
-deployments. If you already run the Datadog Agent, you enable the runner with a single
-configuration flag and manage it through the Agent life cycle. To deploy the runner as a
-separate binary instead, see [Set up a standalone private action runner][6].
+## Overview
+
+Running the private action runner in the Datadog Agent is the recommended path for new deployments. If you already run the Datadog Agent, you enable the runner with a single configuration flag and manage it through the Agent life cycle.
 
 Setting up the runner takes three steps:
 
-1. **Install** the runner, using the deployment option that fits your environment.
-1. **Enroll** the runner, which sets its ownership and the authorization model it uses.
-1. **Update** the runner as part of your Agent upgrades.
+1. [**Install**](#install-the-runner) the runner, using the deployment option that fits your environment.
+1. [**Enroll**](#enroll-the-runner) the runner, which sets its ownership and the authorization model it uses.
+1. [**Update**](#update-the-runner) the runner as part of your Agent upgrades.
+
+To deploy the runner as a separate binary instead, see [Set up a standalone private action runner][1].
 
 ## Prerequisites
 
-- A Linux or Windows host with **Datadog Agent 7.81.0 or later**, or a Kubernetes cluster with
-  **Datadog Operator v1.28.0 or later** or the **Datadog Helm chart 3.231.6 or later**.
-- [Remote Configuration][5] enabled for your organization.
+- A Linux or Windows host with **Datadog Agent 7.81.0 or later**, or a Kubernetes cluster with **Datadog Operator v1.28.0 or later** or the **Datadog Helm chart 3.231.6 or later**.
+- [Remote Configuration][2] enabled for your organization.
 - Network access to Datadog at `https://{{< region-param key=dd_site >}}`.
 
 ## Install the runner
@@ -49,29 +49,22 @@ The runner in the Datadog Agent has three deployment options, based on where the
 | **Kubernetes node Agent** | A container in the node Agent, using the same runner binary as the host process. | Helm, Operator | Node-local actions in a Kubernetes cluster. |
 | **Kubernetes Cluster Agent** | In-process inside the Cluster Agent, with no separate binary. One runner serves the whole cluster. | Helm, Operator | Cluster-wide Kubernetes actions. |
 
-Choose the tab that matches your environment. Each tab covers two ways to install: **Fleet
-Automation**, a UI-driven flow that enrolls the runner as owned, or **Manual installation**, where
-you choose the enrollment type yourself.
-
-{{< tabs >}}
-{{% tab "Linux" %}}
+You have the option to install with **Fleet Automation**, a UI-driven flow that enrolls the runner as owned, or **Manual installation**, where you choose the enrollment type yourself.
 
 ### Using Fleet Automation (recommended)
 
-1. Go to the [Fleet Automation install page for Linux][100].
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable
-   **Enable Agent to take action**. This creates an application key with the `on_prem_runner_write`
-   scope and enrolls the runner as **owned**, authorized with [Connections][3]. To enroll an
-   ownerless runner instead, authorized with [Execution Policies][2], use Manual installation below.
-1. In **Install the Agent**, add an API key and follow the instructions to run the installation
-   command.
-1. After installation, go to [Private Action Runners][101] to verify your runner appears on the
-   list.
+The Fleet Automation install flow is the same across platforms.
+
+1. Go to the [Fleet Automation install page][3] and select your platform. For Kubernetes, also select **Helm Chart** or **Datadog Operator** as the install method, to match the [Manual installation](#manual-installation) tab you plan to follow.
+1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and turn on **Enable Agent to take action**. This creates an application key with the `on_prem_runner_write` scope and enrolls the runner as **owned**, authorized with [Connections][4]. To enroll an ownerless runner instead, authorized with [Execution Policies][5], use [Manual installation](#manual-installation).
+1. Follow the remaining instructions in the install panel to add an API key and complete the installation.
+1. After installation, go to [Private Action Runners][6] to verify your runner appears on the list.
 
 ### Manual installation
 
-Set the following environment variables when you install or run the Agent. On the host,
-private action runner settings use the `DD_PRIVATE_ACTION_RUNNER_*` prefix:
+{{< tabs >}}
+{{% tab "Linux" %}}
+Set the following environment variables when you install or run the Agent. On the host, private action runner settings use the `DD_PRIVATE_ACTION_RUNNER_*` prefix:
 
 ```bash
 DD_API_KEY=<API_KEY> \
@@ -82,37 +75,16 @@ DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST=com.datadoghq.kubernetes.*,com.datado
 bash -c "$(curl -L https://install.datadoghq.com/scripts/install_script_agent7.sh)"
 ```
 
-`DD_APP_KEY` enrolls the runner as owned, the same as Fleet Automation above; the application key
-needs the `on_prem_runner_write` scope. `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` takes a
-comma-separated list. Use bundle wildcards to allow the actions an in-Agent runner can run:
-`com.datadoghq.kubernetes.*` and `com.datadoghq.remoteaction.*`. To rely on the runner's built-in
-default actions instead (read-only Remote Action actions, plus a set of read-only Kubernetes
-actions on the Cluster Agent), leave the allowlist unset.
+`DD_APP_KEY` enrolls the runner as owned, the same as Fleet Automation. The application key needs the `on_prem_runner_write` scope. `DD_PRIVATE_ACTION_RUNNER_ACTIONS_ALLOWLIST` takes a comma-separated list. Use bundle wildcards to allow the actions an in-Agent runner can run: `com.datadoghq.kubernetes.*` and `com.datadoghq.remoteaction.*`. To rely on the runner's built-in default actions instead (read-only Remote Action actions, plus a set of read-only Kubernetes actions on the Cluster Agent), leave the allowlist unset.
 
-After installation, go to [Private Action Runners][101] to verify your runner appears on the list.
+After installation, go to [Private Action Runners][1] to verify your runner appears on the list.
 
-[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=linux
-[101]: https://app.datadoghq.com/actions/action-catalog
+[1]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-### Using Fleet Automation (recommended)
-
-1. Go to the [Fleet Automation install page for Windows][100].
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable
-   **Enable Agent to take action**. This creates an application key with the `on_prem_runner_write`
-   scope and enrolls the runner as **owned**, authorized with [Connections][3]. To enroll an
-   ownerless runner instead, authorized with [Execution Policies][2], use Manual installation below.
-1. In **Install the Agent**, add an API key and follow the instructions to run the installation
-   command.
-1. After installation, go to [Private Action Runners][101] to verify your runner appears on the
-   list.
-
-### Manual installation
-
-Install or upgrade to Datadog Agent 7.81.0 or later, then edit
-`C:\ProgramData\Datadog\datadog.yaml`:
+Install or upgrade to Datadog Agent 7.81.0 or later, then edit `C:\ProgramData\Datadog\datadog.yaml`:
 
 ```yaml
 app_key: <YOUR_APP_KEY>
@@ -125,8 +97,7 @@ private_action_runner:
     - "com.datadoghq.remoteaction.*"
 ```
 
-`app_key` enrolls the runner as owned, the same as Fleet Automation above; the application key
-needs the `on_prem_runner_write` scope.
+`app_key` enrolls the runner as owned, the same as Fleet Automation above; the application key needs the `on_prem_runner_write` scope.
 
 Restart the Agent to apply the configuration:
 
@@ -134,14 +105,11 @@ Restart the Agent to apply the configuration:
 Restart-Service -Force datadogagent
 ```
 
-After the Agent restarts, go to [Private Action Runners][101] to verify your runner appears on the
-list.
+After the Agent restarts, go to [Private Action Runners][1] to verify your runner appears on the list.
 
-The host process runs the **node Agent** runner. To run a runner in the Cluster Agent, use the
-Kubernetes (Helm) or Kubernetes (Operator) tab.
+The host process runs the **node Agent** runner. To run a runner in the Cluster Agent, use the Kubernetes (Helm) or Kubernetes (Operator) tab.
 
-[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=windows
-[101]: https://app.datadoghq.com/actions/action-catalog
+[1]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -149,35 +117,16 @@ Kubernetes (Helm) or Kubernetes (Operator) tab.
 The Datadog Helm chart can enable the runner in two places:
 
 - The **node Agent** runner, as a sidecar container. The node Agent runner is **Linux-only**.
-- The **Cluster Agent** runner, in-process. The Cluster Agent runner is available through Helm or
-  the Operator only (there is no standalone binary), and it requires leader election so that
-  identity is coordinated across Cluster Agent replicas.
+- The **Cluster Agent** runner, in-process. The Cluster Agent runner is available through Helm or the Operator only (there is no standalone binary), and it requires leader election so that identity is coordinated across Cluster Agent replicas.
 
-### Using Fleet Automation (recommended)
-
-1. Go to the [Fleet Automation install page][100].
-1. In **Select Agent install method**, choose **Helm Chart**, then choose the Kubernetes
-   distribution that matches your environment.
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable
-   **Enable Agent to take action**. This creates an application key with the `on_prem_runner_write`
-   scope and enrolls the runner as **owned**, authorized with [Connections][3]. To enroll an
-   ownerless runner instead, authorized with [Execution Policies][2], use Manual installation below.
-1. In **Add the Datadog Helm repository**, add an API key, then follow the remaining Fleet
-   instructions to complete the installation.
-
-### Manual installation
-
-Create an API key with the Private Action Runner capability in [Organization Settings][8], then
-store it in a Kubernetes secret that the chart reads through `apiKeyExistingSecret`:
+Create an API key with the Private Action Runner capability in [Organization Settings][1], then store it in a Kubernetes secret that the chart reads through `apiKeyExistingSecret`:
 
 ```bash
 kubectl create secret generic datadog-secret \
   --from-literal api-key=<DD_API_KEY>
 ```
 
-This example enrolls the runner as **ownerless** (`apiKeyOnlyEnrollment: true`, using the API key
-only), which authorizes it with Execution Policies. For other enrollment options and how ownership
-works, see [Enrollment and ownership][1].
+This example enrolls the runner as **ownerless** (`apiKeyOnlyEnrollment: true`, using the API key only), which authorizes it with Execution Policies. For other enrollment options and how ownership works, see [Enrollment and ownership][2].
 
 Helm settings use the `privateActionRunner.*` key in camelCase. Create a `values.yaml`:
 
@@ -204,8 +153,7 @@ clusterAgent:
       - "com.datadoghq.script.*"
 ```
 
-For all available runner configuration options, see [`datadog.privateActionRunner`][102] and
-[`clusterAgent.privateActionRunner`][103] in the Helm chart. Install the chart:
+For all available runner configuration options, see [`datadog.privateActionRunner`][3] and [`clusterAgent.privateActionRunner`][4] in the Helm chart. Install the chart:
 
 ```bash
 helm repo add datadog https://helm.datadoghq.com
@@ -213,46 +161,27 @@ helm repo update
 helm install datadog-agent datadog/datadog -f values.yaml
 ```
 
-After installation, go to [Private Action Runners][101] to verify your runner appears on the list.
+After installation, go to [Private Action Runners][5] to verify your runner appears on the list.
 
-[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[101]: https://app.datadoghq.com/actions/action-catalog
-[102]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L523
-[103]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1842
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /actions/private_actions/enroll_runner/
+[3]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L523
+[4]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/values.yaml#L1842
+[5]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{% tab "Kubernetes (Operator)" %}}
 
-The Datadog Operator enables the runner through annotations on the `DatadogAgent` resource. The
-runner configuration in the `-configdata` annotation uses the `private_action_runner.*` key in
-snake_case. The Operator can enable both the node Agent runner and the in-process Cluster Agent
-runner.
+The Datadog Operator enables the runner through annotations on the `DatadogAgent` resource. The runner configuration in the `-configdata` annotation uses the `private_action_runner.*` key in snake_case. The Operator can enable both the node Agent runner and the in-process Cluster Agent runner.
 
-### Using Fleet Automation (recommended)
-
-1. Go to the [Fleet Automation install page][100].
-1. In **Select Agent install method**, choose **Datadog Operator**, then choose the Kubernetes
-   distribution that matches your environment.
-1. In **Customize your Agent coverage**, go to the **Optimization & Remediation** section and enable
-   **Enable Agent to take action**. This creates an application key with the `on_prem_runner_write`
-   scope and enrolls the runner as **owned**, authorized with [Connections][3]. To enroll an
-   ownerless runner instead, authorized with [Execution Policies][2], use Manual installation below.
-1. In **Add the Datadog Helm repository**, add an API key, then follow the remaining Fleet
-   instructions to complete the installation.
-
-### Manual installation
-
-Create an API key with the Private Action Runner capability in [Organization Settings][8], then
-store it in a Kubernetes secret that the `DatadogAgent` resource reads through its `credentials`:
+Create an API key with the Private Action Runner capability in [Organization Settings][1], then store it in a Kubernetes secret that the `DatadogAgent` resource reads through its `credentials`:
 
 ```bash
 kubectl create secret generic datadog-secret \
   --from-literal api-key=<DD_API_KEY>
 ```
 
-This example enrolls the runner as **ownerless** (`api_key_only_enrollment: true`, using the API key
-only), which authorizes it with Execution Policies. For other enrollment options and how ownership
-works, see [Enrollment and ownership][1].
+This example enrolls the runner as **ownerless** (`api_key_only_enrollment: true`, using the API key only), which authorizes it with Execution Policies. For other enrollment options and how ownership works, see [Enrollment and ownership][2].
 
 ```yaml
 apiVersion: datadoghq.com/v2alpha1
@@ -292,12 +221,11 @@ Apply the manifest:
 kubectl apply -f datadog-agent.yaml
 ```
 
-As with Helm, the Cluster Agent runner requires leader election, and the node Agent runner is
-Linux-only. After you apply the manifest, go to [Private Action Runners][101] to verify your runner
-appears on the list.
+As with Helm, the Cluster Agent runner requires leader election, and the node Agent runner is Linux-only. After you apply the manifest, go to [Private Action Runners][3] to verify your runner appears on the list.
 
-[100]: https://app.datadoghq.com/fleet/install-agent/latest?platform=kubernetes
-[101]: https://app.datadoghq.com/actions/action-catalog
+[1]: https://app.datadoghq.com/organization-settings/api-keys
+[2]: /actions/private_actions/enroll_runner/
+[3]: https://app.datadoghq.com/actions/action-catalog
 
 {{% /tab %}}
 {{< /tabs >}}
@@ -305,18 +233,17 @@ appears on the list.
 ### Configuration field names
 
 Runner settings follow the standard Datadog Agent configuration conventions for each install method:
-environment variables on a host, camelCase keys under `privateActionRunner` in Helm, and snake_case
-keys under `private_action_runner` in the Operator. For the field-name crosswalk across all three
-install methods and the full list of configuration keys and defaults, see the
-[private action runner reference][4].
+- Environment variables on a host.
+- CamelCase keys under `privateActionRunner` in Helm.
+- Snake_case keys under `private_action_runner` in the Operator.
+
+For the field-name crosswalk across all three install methods and the full list of configuration keys and defaults, see the [private action runner reference][7].
 
 ## Enroll the runner
 
-Enrollment registers the runner with your Datadog organization and sets its **ownership**, which
-determines the authorization model. An ownerless runner, enrolled with an API key that has the
-Private Action Runner capability, uses [Execution Policies][2]. An owned runner, enrolled with an
-application key, uses [Connections][3]. Because the model is fixed at enrollment, decide which one
-you want before you deploy. For the full process, see [Enrollment and ownership][1].
+Enrollment registers the runner with your Datadog organization and sets its **ownership**, which determines the authorization model. An ownerless runner, enrolled with an API key that has the Private Action Runner capability, uses [Execution Policies][5]. An owned runner, enrolled with an application key, uses [Connections][4]. Because the model is fixed at enrollment, decide which one you want before you deploy.
+
+For more information on the process, see [Enrollment and ownership][8].
 
 ## Manage the runner
 
@@ -324,38 +251,32 @@ you want before you deploy. For the full process, see [Enrollment and ownership]
 
 To edit the allowlist for a runner in the Datadog Agent:
 
-**Linux:**
+{{< tabs >}}
+{{% tab "Linux" %}}
 1. Edit the `private_action_runner.actions_allowlist` section in `/etc/datadog-agent/datadog.yaml`.
 1. Restart the Agent: `sudo systemctl restart datadog-agent`.
-
-**Windows:**
-1. Edit the `private_action_runner.actions_allowlist` section in
-   `C:\ProgramData\Datadog\datadog.yaml`.
+{{% /tab %}}
+{{% tab "Windows" %}}
+1. Edit the `private_action_runner.actions_allowlist` section in `C:\ProgramData\Datadog\datadog.yaml`.
 1. Restart the Agent: `Restart-Service -Force datadogagent`.
-
-**Kubernetes (Operator):**
-1. Update `actions_allowlist` in both `DatadogAgent` manifest annotations:
-   `agent.datadoghq.com/private-action-runner-configdata` and
-   `cluster-agent.datadoghq.com/private-action-runner-configdata`.
+{{% /tab %}}
+{{% tab "Kubernetes (Operator)" %}}
+1. Update `actions_allowlist` in both `DatadogAgent` manifest annotations: `agent.datadoghq.com/private-action-runner-configdata` and `cluster-agent.datadoghq.com/private-action-runner-configdata`.
 1. Apply the updated manifest: `kubectl apply -f datadog-agent.yaml`.
-
-**Kubernetes (Helm):**
-1. Update `privateActionRunner.actionsAllowlist` (node Agent) or
-   `clusterAgent.privateActionRunner.actionsAllowlist` (Cluster Agent) in `values.yaml`.
+{{% /tab %}}
+{{% tab "Kubernetes (Helm)" %}}
+1. Update `privateActionRunner.actionsAllowlist` (node Agent) or `clusterAgent.privateActionRunner.actionsAllowlist` (Cluster Agent) in `values.yaml`.
 1. Apply the updated chart: `helm upgrade datadog-agent datadog/datadog -f values.yaml`.
+{{% /tab %}}
+{{< /tabs >}}
 
 ### Automatic deletion of inactive runners
 
-To free up unused resources, Datadog automatically deletes node Agent-based private action runners
-that use API-key-only (ownerless) configuration after an extended period of inactivity. This
-automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
+To free up unused resources, Datadog automatically deletes node Agent-based private action runners that use API-key-only (ownerless) configuration after an extended period of inactivity. This automatic cleanup does not apply to owned runners, or to the Cluster Agent runner.
 
-If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll
-the runner by repeating the installation steps.
+If your runner is deleted due to inactivity, restarting it results in an error. You must re-enroll the runner by repeating the installation steps.
 
-## Debugging
-
-### View logs
+## Debugging with logs
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -383,8 +304,7 @@ kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=1000 | grep pri
 
 ## Update the runner
 
-Updating the runner in the Datadog Agent is part of the standard Agent upgrade process. Choose the
-tab that matches your installation.
+Update the runner in the Datadog Agent to stay update to date with any Agent upgrades.
 
 {{< tabs >}}
 {{% tab "Linux" %}}
@@ -407,15 +327,14 @@ Restart the Agent after the upgrade:
 sudo systemctl restart datadog-agent
 ```
 
-For detailed upgrade instructions, see [Upgrade to Agent v7][101].
+For detailed upgrade instructions, see [Upgrade to Agent v7][1].
 
-[101]: /agent/versions/upgrade_to_agent_v7/
+[1]: /agent/versions/upgrade_to_agent_v7/
 
 {{% /tab %}}
 {{% tab "Windows" %}}
 
-Download the latest Agent MSI installer from the [Datadog Agent download page][101] and run the
-installer, or use PowerShell:
+Download the latest Agent MSI installer from the [Datadog Agent download page][1] and run the installer, or use PowerShell:
 
 ```powershell
 # Download the latest installer
@@ -431,7 +350,7 @@ Restart the Agent after the upgrade:
 Restart-Service -Force datadogagent
 ```
 
-[101]: https://app.datadoghq.com/account/settings#agent/windows
+[1]: https://app.datadoghq.com/account/settings#agent/windows
 
 {{% /tab %}}
 {{% tab "Kubernetes (Operator)" %}}
@@ -447,7 +366,7 @@ Update the Datadog Operator and Agent image versions in your `DatadogAgent` mani
        --set image.tag=latest
    ```
 
-   You can pin a specific version. To browse available tags, use [Docker Hub][102].
+   You can pin a specific version. To browse available tags, use [Docker Hub][1].
 
 1. Update the Agent image versions in your `datadog-agent.yaml` manifest:
 
@@ -469,13 +388,10 @@ Update the Datadog Operator and Agent image versions in your `DatadogAgent` mani
    kubectl logs -l app.kubernetes.io/component=cluster-agent --tail=100 | grep private
    ```
 
-The Cluster Agent runner keeps its identity across the update, since it stores it in a shared
-Kubernetes secret. The node Agent runner stores its identity in a file: if that path isn't backed by
-a persistent volume, an update can wipe the identity and force the runner to re-enroll. See
-[Identity storage on Kubernetes][103].
+The Cluster Agent runner keeps its identity across the update, since it stores it in a shared Kubernetes secret. The node Agent runner stores its identity in a file: if that path isn't backed by a persistent volume, an update can wipe the identity and force the runner to re-enroll. See [Identity storage on Kubernetes][2].
 
-[102]: https://hub.docker.com/r/datadog/operator/tags
-[103]: /actions/private_actions/enroll_runner/#identity-storage-on-kubernetes
+[1]: https://hub.docker.com/r/datadog/operator/tags
+[2]: /actions/private_actions/enroll_runner/#identity-storage-on-kubernetes
 
 {{% /tab %}}
 {{% tab "Kubernetes (Helm)" %}}
@@ -487,9 +403,9 @@ helm repo update
 helm upgrade datadog-agent datadog/datadog -f values.yaml
 ```
 
-For detailed upgrade instructions, see [Upgrading Datadog Helm][101].
+For detailed upgrade instructions, see [Upgrading Datadog Helm][1].
 
-[101]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
+[1]: https://github.com/DataDog/helm-charts/blob/main/charts/datadog/README.md#upgrading
 
 {{% /tab %}}
 {{% tab "Terraform (Operator)" %}}
@@ -518,10 +434,11 @@ terraform apply -var="datadog_api_key=<YOUR_API_KEY>" -var="datadog_app_key=<YOU
 
 {{< partial name="whats-next/whats-next.html" >}}
 
-[1]: /actions/private_actions/enroll_runner/
-[2]: /actions/private_actions/execution_policies/
-[3]: /actions/connections/
-[4]: /actions/private_actions/reference/
-[5]: /remote_configuration
-[6]: /actions/private_actions/set_up_standalone/
-[8]: https://app.datadoghq.com/organization-settings/api-keys
+[1]: /actions/private_actions/set_up_standalone/
+[2]: /remote_configuration
+[3]: https://app.datadoghq.com/fleet/install-agent/latest
+[4]: /actions/connections/
+[5]: /actions/private_actions/execution_policies/
+[6]: https://app.datadoghq.com/actions/action-catalog
+[7]: /actions/private_actions/reference/
+[8]: /actions/private_actions/enroll_runner/
