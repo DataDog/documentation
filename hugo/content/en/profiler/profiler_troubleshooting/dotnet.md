@@ -231,7 +231,7 @@ To reduce overhead:
 {{% /tab %}}
 {{% tab "Linux" %}}
 
-To reduce overhead:
+To reduce overhead when profiling multiple processes:
 
 - Set profiler environment variables only in the startup script or systemd unit for the application you want to profile. Do not set them in shared host configuration such as `/etc/environment` or with `systemctl set-environment`.
 - In Docker, set profiler variables in the container definition for the specific application (Dockerfile or compose file). Avoid company-wide base images or shell profiles that export profiler variables to unrelated services.
