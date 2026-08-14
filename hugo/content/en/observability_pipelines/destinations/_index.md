@@ -9,7 +9,7 @@ further_reading:
 
 ## Overview
 
-Use the Observability Pipelines Worker to send your processed logs and metrics to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
+Use the Observability Pipelines Worker to send your processed {{< tooltip text="logs, metrics, and traces" tooltip="Contact your account manager to discuss use cases and pricing." >}} to different destinations. Most Observability Pipelines destinations send events in batches to the downstream integration. See [Event batching](#event-batching) for more information. Some Observability Pipelines destinations also have fields that support template syntax, so you can set these fields based on specific fields. See [Template syntax](#template-syntax) for more information.
 
 Select a destination in the left navigation menu to see more information about it.
 
@@ -87,6 +87,14 @@ These are the available destinations:
 [4]: /observability_pipelines/destinations/splunk_hec/metrics
 [5]: /observability_pipelines/destinations/opentelemetry/
 [6]: /observability_pipelines/destinations/prometheus/
+
+{{% /tab %}}
+{{% tab "Traces" %}}
+
+- [Datadog APM][25]
+- OpenTelemetry Traces
+
+[25]: /observability_pipelines/destinations/datadog_apm/
 
 {{% /tab %}}
 {{< /tabs >}}

@@ -93,6 +93,9 @@ Some Observability Pipelines components require setting up environment variables
 ### Databricks (Zerobus)
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/databricks_zerobus %}}
 
+### Datadog APM
+{{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
+
 ### Datadog Logs
 {{% observability_pipelines/configure_existing_pipelines/destination_env_vars/datadog %}}
 
