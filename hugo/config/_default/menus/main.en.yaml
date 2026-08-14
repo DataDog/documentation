@@ -5395,6 +5395,11 @@ menu:
       identifier: business_intelligence_integrations
       parent: quality_monitoring
       weight: 300000
+    - name: Hex
+      url: data_observability/quality_monitoring/business_intelligence/hex
+      identifier: business_intelligence_integrations_hex
+      parent: business_intelligence_integrations
+      weight: 250000
     - name: Looker
       url: data_observability/quality_monitoring/business_intelligence/looker
       identifier: business_intelligence_integrations_looker
