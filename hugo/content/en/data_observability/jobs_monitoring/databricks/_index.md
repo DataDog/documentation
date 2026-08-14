@@ -460,16 +460,18 @@ DD_LOGS_CONFIG_PROCESSING_RULES=[{\"type\": \"exclude_at_match\",\"name\": \"dro
 ```
 
 ### Permissions
-Grant {{< ui >}}Workspace Admin{{< /ui >}} privileges to the user or service principal that connects to your Databricks workspace. This allows Datadog to manage init script installations and updates automatically, reducing the risk of misconfiguration.
+The user or service principal that connects to your Databricks workspace must have the following workspace entitlements enabled, in addition to the permissions described below:
 
-<div class="alert alert-info">Regardless of whether you grant <strong>Workspace Admin</strong> privileges or the granular permissions below, the user or service principal must have the following workspace entitlements enabled:
-<ul>
-<li>{{< ui >}}Databricks SQL access{{< /ui >}}</li>
-<li>{{< ui >}}Workspace access{{< /ui >}}</li>
-</ul>
-</div>
+- {{< ui >}}Databricks SQL access{{< /ui >}}
+- {{< ui >}}Workspace access{{< /ui >}}
 
-If you need more granular control, grant these minimal permissions to the following [workspace level objects][19] to still be able to monitor all jobs, clusters, and queries within a workspace:
+#### Workspace Admin privileges
+
+Grant {{< ui >}}Workspace Admin{{< /ui >}} privileges to the user or service principal. This allows Datadog to manage init script installations and updates automatically, reducing the risk of misconfiguration.
+
+#### Granular permissions
+
+If you need more granular control instead of Workspace Admin privileges, grant these minimal permissions to the following [workspace level objects][19] to still be able to monitor all jobs, clusters, and queries within a workspace:
 
 | Object                 | Permission                                                                                                                                                      |
 |--------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -478,6 +480,8 @@ If you need more granular control, grant these minimal permissions to the follow
 | Lakeflow Declarative Pipelines   | [CAN VIEW][22]
 | Query                            | [CAN VIEW][23]
 | SQL warehouse                    | [CAN MONITOR][24]
+
+#### Cost data permissions
 
 Additionally, for Datadog to access your Databricks cost data in Data Observability: Jobs Monitoring or [Cloud Cost Management][26], the user or service principal used to query [system tables][27] must have the following permissions:
    - `CAN USE` permission on the SQL Warehouse.
