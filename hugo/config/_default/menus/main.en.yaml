@@ -3759,6 +3759,11 @@ menu:
       parent: serverless_azure
       identifier: serverless_container_apps
       weight: 5
+    - name: Manual Instrumentation
+      url: serverless/azure_container_apps/manual_instrumentation
+      parent: serverless_container_apps
+      identifier: serverless_container_apps_manual
+      weight: 1
     - name: Azure Database & Messaging Services
       url: serverless/azure_database_messaging_services
       parent: serverless_azure
@@ -5359,6 +5364,16 @@ menu:
       url: data_observability/quality_monitoring/data_lakes/aws_glue
       identifier: aws_glue_iceberg
       parent: data_lakes
+      weight: 1000000
+    - name: Transactional Databases
+      url: data_observability/quality_monitoring/transactional_databases
+      identifier: transactional_databases
+      parent: quality_monitoring
+      weight: 260000
+    - name: PostgreSQL
+      url: data_observability/quality_monitoring/transactional_databases/postgres
+      identifier: data_obs_postgres
+      parent: transactional_databases
       weight: 1000000
     - name: ELT Integrations
       url: data_observability/quality_monitoring/elt
