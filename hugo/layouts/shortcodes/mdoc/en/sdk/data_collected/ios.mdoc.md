@@ -206,6 +206,7 @@ The following attributes are collected for each view after collection is enabled
 | `resource.duration`            | number         | Entire time spent loading the resource.                                                         |
 | `resource.first_byte.duration` | number (ns)    | Time spent waiting for the first byte of response to be received (responseStart - requestStart). |
 | `resource.id`              | string | Unique identifier of the resource.                                                       |
+| `resource.local_cache_hit` | boolean | Indicates the resource was served from the device's local cache. Only sent when `true`; absent otherwise.       |
 | `resource.method`          | string | The HTTP method (for example, `POST`, `GET`, `PATCH`, or `DELETE`).                       |
 | `resource.provider.name`   | string | The resource provider name. Default is `unknown`.                                        |
 | `resource.provider.domain` | string | The resource provider domain.                                                            |
