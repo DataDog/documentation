@@ -88,7 +88,7 @@ In organizations with seat-based Incident Management billing:
 
 ### Slack commands in the incident channel
 
-In an incident Slack channel, you can run Slack commands to modify the incident's statuses and severity, assign responder roles, page on-call teams, and more.
+In an incident Slack channel, you can run Slack commands to modify the incident's status and severity, assign responder roles, page on-call teams, and more.
 
 For a full list of Slack commands, see [Slack commands](#slack-commands).
 
@@ -138,7 +138,8 @@ You can view the full list of available Slack commands at any time by typing `/d
 | ------- | ----------- |
 | `/datadog` | Open the command modal to view all available Datadog actions. |
 | `/datadog shortcuts` | Open the incident action tray to perform common actions. |
-| `/datadog incident update` | Update the incident status, severity, or other attribute of the incident. |
+| `/datadog help` | Show an ephemeral message listing all available Slack commands. |
+| `/datadog incident update` | Update an attribute for the incident, such as status or severity. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
@@ -154,6 +155,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | ------- | ----------- |
 | `/datadog` | Open the command modal to view all available Datadog actions. |
 | `/datadog shortcuts` | Open the incident action tray to perform common actions. |
+| `/datadog help` | Show an ephemeral message listing all available Slack commands. |
 | `/datadog incident update` | Update an attribute for the incident, such as status or severity. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
@@ -171,23 +173,23 @@ Datadog posts the action tray directly in the incident Slack channel on status c
 
 The following buttons are available in the action tray. Incident types are initialized with these default buttons. To customize which buttons appear and their order for each incident status, go to **Incidents** > **Settings** > [**Integrations**][3] > **Slack Settings** and configure **Incident Slack Actions**.
 
-| Button                       | Description                                                          | Active default | Stable default | Resolved default |
-|-------------------------------|------------------------------------------------------------------------|:---:|:---:|:---:|
-| ⚙️ Edit Incident              | Update status, severity, impact, and all other attributes            | ✓ | ✓ |   |
-| 🧑‍🚒 Edit Responders           | Assign roles and add teammates to the incident                        | ✓ |   |   |
-| 🔍 View All Actions           | Open the full list of available Slack actions for this incident       | ✓ | ✓ | ✓ |
-| 🏠 View Web App               | Open the incident in Datadog Incident Management                      | ✓ | ✓ | ✓ |
-| ☎️ Page On-Call               | Page a team about the ongoing incident using your preferred service   | ✓ |   |   |
-| 🔔 Notify                     | Notify stakeholders about an incident through email, push, or services |   | ✓ | ✓ |
-| ▶️ Create/Join Zoom           | Start a new meeting, or join if one already exists             | ✓ |   |   |
-| ▶️ Create/Join Google Meet    | Start a new meeting, or join if one already exists             | ✓ |   |   |
-| ▶️ Run Workflow               | Select and run pre-defined workflows for the incident                 | ✓ |   |   |
-| 🟨 Set to Stable              | Mark the incident as stable after mitigating the impact                 | ✓ |   |   |
-| ✅ Resolve Incident           | Mark the incident as resolved                                         |   | ✓ |   |
-| ✨ Investigate with Bits AI   | Use Bits AI to investigate the incident                               | ✓ |   |   |
-| 📋 Create Follow-Up           | Create follow-up tasks identified during the incident response        |   | ✓ | ✓ |
-| 📋 List Follow-Ups            | View and track follow-up tasks for the incident                       |   |   | ✓ |
-| 📝 Create/View Postmortem     | Create or view the postmortem for the incident                        |   |   | ✓ |
+| Button                              | Description                                                             | Active default | Stable default | Resolved default |
+|--------------------------------------|---------------------------------------------------------------------------|:---:|:---:|:---:|
+| ⚙️ **Edit Incident**                | Update status, severity, impact, and all other attributes                 | {{< X >}} | {{< X >}} |   |
+| 🧑‍🚒 **Edit Responders**             | Assign roles and add teammates to the incident                            | {{< X >}} |   |   |
+| 🔍 **View All Actions**             | Open the full list of available Slack actions for this incident           | {{< X >}} | {{< X >}} | {{< X >}} |
+| 🏠 **View Web App**                 | Open the incident in Datadog Incident Management                          | {{< X >}} | {{< X >}} | {{< X >}} |
+| ☎️ **Page On-Call**                 | Page a team about the ongoing incident using your preferred service       | {{< X >}} |   |   |
+| 🔔 **Notify**                       | Notify stakeholders about an incident through email, push, or services    |   | {{< X >}} | {{< X >}} |
+| ▶️ **Create/Join Zoom**             | Start a new meeting, or join if one already exists                        | {{< X >}} |   |   |
+| ▶️ **Create/Join Google Meet**      | Start a new meeting, or join if one already exists                        | {{< X >}} |   |   |
+| ▶️ **Run Workflow**                 | Select and run pre-defined workflows for the incident                     | {{< X >}} |   |   |
+| 🟨 **Set to Stable**                | Mark the incident as stable after mitigating the impact                   | {{< X >}} |   |   |
+| ✅ **Resolve Incident**             | Mark the incident as resolved                                              |   | {{< X >}} |   |
+| ✨ **Investigate with Bits AI**     | Use Bits AI to investigate the incident                                   | {{< X >}} |   |   |
+| 📋 **Create Follow-Up**             | Create follow-up tasks identified during the incident response            |   | {{< X >}} | {{< X >}} |
+| 📋 **List Follow-Ups**              | View and track follow-up tasks for the incident                           |   |   | {{< X >}} |
+| 📝 **Create/View Postmortem**       | Create or view the postmortem for the incident                            |   |   | {{< X >}} |
 
 ## Further reading
 
@@ -195,7 +197,7 @@ The following buttons are available in the action tray. Incident types are initi
 
 [1]: https://app.datadoghq.com/integrations/slack/
 [2]: /integrations/slack/?tab=datadogforslack
-[3]: https://app.datadoghq.com/incidents/settings#Integrations
+[3]: https://app.datadoghq.com/incidents/settings?section=integrations
 [4]: /integrations/jira/
 [5]: /incident_response/incident_management/setup_and_configuration/notification_rules/
 [6]: /integrations/slack/?tab=datadogforslack#permissions
