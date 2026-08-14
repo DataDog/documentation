@@ -71,3 +71,36 @@ Create a RUM application in Datadog to generate the `applicationId` and `clientT
 {% if equals($platform, "unity") %}
 {% partial file="sdk/create_app/unity.mdoc.md" /%}
 {% /if %}
+
+## Next steps
+
+{% if equals($platform, "browser") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=browser) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "android") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=android) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "ios") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=ios) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "flutter") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=flutter) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "react_native") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=react_native) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "kotlin_multiplatform") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=kotlin_multiplatform) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "cpp") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=cpp) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "maui") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=maui) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "roku") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=roku) to start collecting RUM data.
+{% /if %}
+{% if equals($platform, "unity") %}
+[Install the Datadog SDK](/real_user_monitoring/setup/install/?platform=unity) to start collecting RUM data.
+{% /if %}

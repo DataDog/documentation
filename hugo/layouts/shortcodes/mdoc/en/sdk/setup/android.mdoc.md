@@ -469,37 +469,7 @@ To **update the tracking consent** after the SDK is initialized, call `Datadog.s
 
 {% step title="Enable the feature to start sending data" %}
 
-To enable the Android SDK to start sending data:
-
-{% tabs %}
-{% tab label="Kotlin" %}
-
-```kotlin
-val rumConfig = RumConfiguration.Builder(applicationId)
-    .trackInteractions()
-    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-    .useViewTrackingStrategy(strategy)
-    .build()
-Rum.enable(rumConfig)
-```
-
-{% /tab %}
-
-{% tab label="Java" %}
-
-```java
-RumConfiguration rumConfig = new RumConfiguration.Builder(applicationId)
-    .trackInteractions()
-    .trackLongTasks(durationThreshold) // Not applicable to Error Tracking
-    .useViewTrackingStrategy(strategy)
-    .build();
-Rum.enable(rumConfig);
-```
-
-{% /tab %}
-{% /tabs %}
-
-See [`ViewTrackingStrategy`][9] to enable automatic tracking of all your views (activities, fragments, and more).
+See [Enable the DD RUM module](/real_user_monitoring/setup/enable_rum/?platform=android) for instructions on how to enable the Android SDK to start sending data.
 {% /step %}
 
 {% step title="Initialize the interceptor to track network events" %}
@@ -750,12 +720,6 @@ Usage of the local resources can be tracked by using `getRawResAsRumResource` ex
 ```kotlin
 val inputStream = context.getRawResAsRumResource(id)
 ```
-
-## Start monitoring
-
-Visualize the [data collected][15] in [dashboards][16] or create a search query in the [RUM Explorer][17].
-
-Your application appears as pending on the Applications page until Datadog starts receiving data.
 
 ## Next steps
 

@@ -138,17 +138,10 @@ To control the data your application sends to Datadog RUM, you can specify a sam
 
 {% step title="Enable RUM to start sending data" %}
 
-By default, the SDK automatically tracks views, actions, and resources:
+See [Enable the DD RUM module](/real_user_monitoring/setup/enable_rum/?platform=maui) for instructions on how to enable RUM to start sending data.
+{% /step %}
 
-- **Views**: MAUI page navigations via `Application.PageAppearing` (one app-level event covering Shell route changes, `Navigation.PushAsync`, and modals).
-- **Actions**: User interactions with buttons, switches, checkboxes, pickers, and gesture recognizers.
-- **Resources**: HTTP requests via `DiagnosticListener` (all `HttpClient` requests, including third-party libraries).
-
-To customize or disable automatic tracking, see [Advanced Configuration][4].
-
-When RUM is enabled, C# error tracking is automatically started. Unhandled exceptions (`AppDomain.UnhandledException`) and unobserved task exceptions (`TaskScheduler.UnobservedTaskException`) are captured and reported as RUM errors. You can also manually report errors with `DdRum.AddError`.
-
-### Set tracking consent (GDPR compliance)
+{% step title="Set tracking consent (GDPR compliance)" %}
 
 To be compliant with GDPR, the SDK requires the tracking consent value at initialization. Tracking consent can be one of the following values:
 
