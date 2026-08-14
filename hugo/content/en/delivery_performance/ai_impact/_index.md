@@ -33,47 +33,13 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 ### Supported tools
 
-<table style="width:100%">
-  <colgroup>
-    <col style="width:33%">
-    <col style="width:33%">
-    <col style="width:34%">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Tool</th>
-      <th>Direct Attribution</th>
-      <th>Inferred from User Activity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="/integrations/cursor/?tab=cursorintegrationindatadog#overview">Cursor</a></td>
-      <td>&#x2714;</td>
-      <td>&#x2714;</td>
-    </tr>
-    <tr>
-      <td><a href="/integrations/anthropic-usage-and-costs/">Claude Code Platform (API)</a></td>
-      <td></td>
-      <td>&#x2714;</td>
-    </tr>
-    <tr>
-      <td><a href="https://app.datadoghq.com/integrations?search=claude&integrationId=claude-enterprise-user-analytics">Claude Code Enterprise</a></td>
-      <td></td>
-      <td>&#x2714;</td>
-    </tr>
-    <tr>
-      <td><a href="/integrations/github-copilot/">GitHub Copilot</a></td>
-      <td></td>
-      <td>&#x2714;</td>
-    </tr>
-    <tr>
-      <td><a href="/integrations/openai-codex/">Codex</a></td>
-      <td></td>
-      <td>&#x2714;</td>
-    </tr>
-  </tbody>
-</table>
+| Tool | Direct Attribution | Inferred from User Activity |
+|------|-------------------|----------------------------|
+| [Cursor](/integrations/cursor/?tab=cursorintegrationindatadog#overview) | ✔ | ✔ |
+| [Claude Code Platform (API)](/integrations/anthropic-usage-and-costs/) | | ✔ |
+| [Claude Code Enterprise](https://app.datadoghq.com/integrations?search=claude&integrationId=claude-enterprise-user-analytics) | | ✔ |
+| [GitHub Copilot](/integrations/github-copilot/) | | ✔ |
+| [Codex](/integrations/openai-codex/) | | ✔ |
 
 ### AI attribution
 
@@ -81,37 +47,11 @@ AI Impact classifies each pull request as AI-assisted or non-AI, and every metri
 
 Two attribution modes are available, depending on the signal your tools provide.
 
-<table style="width:100%">
-  <colgroup>
-    <col style="width:33%">
-    <col style="width:33%">
-    <col style="width:34%">
-  </colgroup>
-  <thead>
-    <tr>
-      <th></th>
-      <th>Direct attribution</th>
-      <th>Inferred from user activity</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>A commit is AI-assisted when</td>
-      <td>The tool reports AI contribution to that specific commit, for example Cursor integration reporting AI-generated lines</td>
-      <td>The commit author created lines of code with the AI tool on the day the commit was created</td>
-    </tr>
-    <tr>
-      <td>Evidence is tied to</td>
-      <td>The commit</td>
-      <td>The author and the calendar day</td>
-    </tr>
-    <tr>
-      <td>What the metrics tell you</td>
-      <td>How AI-assisted code performs compared to code written without AI, and how users of one tool compare to users of another</td>
-      <td>How developers working with AI perform against those working without it, and how users of one tool compare to users of another</td>
-    </tr>
-  </tbody>
-</table>
+| | Direct attribution | Inferred from user activity |
+|---|---|---|
+| A commit is AI-assisted when | The tool reports AI contribution to that specific commit, for example Cursor integration reporting AI-generated lines | The commit author created lines of code with the AI tool on the day the commit was created |
+| Evidence is tied to | The commit | The author and the calendar day |
+| What the metrics tell you | How AI-assisted code performs compared to code written without AI, and how users of one tool compare to users of another | How developers working with AI perform against those working without it, and how users of one tool compare to users of another |
 
 Direct attribution is the more precise of the two, because the signal is attached to the change itself. The inferred from user activity mode covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
 
@@ -126,40 +66,13 @@ By default, Datadog selects the most precise attribution mode that all integrate
 
 ## Impact metrics
 
-<table style="width:100%">
-  <colgroup>
-    <col style="width:33%">
-    <col style="width:67%">
-  </colgroup>
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Definition</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>AI-assisted PRs</td>
-      <td>PRs containing at least one AI-assisted commit, divided by total PRs.</td>
-    </tr>
-    <tr>
-      <td>PR Throughput</td>
-      <td>Number of PRs deployed per user per day for AI-assisted authors compared to non-assisted authors.</td>
-    </tr>
-    <tr>
-      <td>PR Cycle Time</td>
-      <td>Median time from a PR's first commit to merge for AI-assisted PRs compared to non-assisted PRs.</td>
-    </tr>
-    <tr>
-      <td>Change Failure Rate</td>
-      <td>Failure rate weighted by the proportion of AI-assisted commits in each deployment, compared to the weighted rate for non-assisted commits. For example, if a failed deployment has 3 out of 10 commits assisted by AI, only 30% of that failure is attributed to AI.</td>
-    </tr>
-    <tr>
-      <td>Recovery Time</td>
-      <td>Median recovery time of failed deployments containing AI-assisted commits compared to deployments without.</td>
-    </tr>
-  </tbody>
-</table>
+| Metric | Definition |
+|--------|------------|
+| AI-assisted PRs | PRs containing at least one AI-assisted commit, divided by total PRs. |
+| PR Throughput | Number of PRs deployed per user per day for AI-assisted authors compared to non-assisted authors. |
+| PR Cycle Time | Median time from a PR's first commit to merge for AI-assisted PRs compared to non-assisted PRs. |
+| Change Failure Rate | Failure rate weighted by the proportion of AI-assisted commits in each deployment, compared to the weighted rate for non-assisted commits. For example, if a failed deployment has 3 out of 10 commits assisted by AI, only 30% of that failure is attributed to AI. |
+| Recovery Time | Median recovery time of failed deployments containing AI-assisted commits compared to deployments without. |
 
 <div class="alert alert-info">Change Failure Rate only includes deployments linked to code changes. Configuration-only or infrastructure deployments are excluded to help the comparison reflect the impact of AI on code-related failures. This differs from standard DORA Change Failure Rate, which counts all deployment types.</div>
 
