@@ -35,7 +35,7 @@ From chat, you can trigger triage actions without leaving the investigation work
 Supported actions include:
 - Sending Slack and Microsoft Teams messages
 - Creating incidents in Datadog and PagerDuty
-- Paging engineers with Datadog On-Call
+- Paging engineers using Datadog On-Call
 - Creating cases in Datadog Case Management
 - Opening Jira tickets
 
