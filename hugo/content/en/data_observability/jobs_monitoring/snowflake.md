@@ -43,14 +43,14 @@ For each task run, Datadog creates a span with:
 
 Runs are grouped into a **task graph (DAG)** trace, so a root task and its dependent tasks appear together.
 
-{{< img src="data_jobs/snowflake_task_runs.png" alt="Task Runs on a Snowflake task's entity page in Data Observability" style="width:100%;" >}}
-
 ## View your task runs
 
 - In the Data Observability catalog, the same **Task Runs** view appears in two places:
     - the **Task Runs** tab on the task's entity page, and
     - the **side panel** that opens when you click a task in the Lineage map.
 - In **Trace Explorer**.
+
+{{< img src="data_jobs/snowflake_task_runs.png" alt="Task Runs on a Snowflake task's entity page in Data Observability" style="width:100%;" >}}
 
 {{< img src="data_jobs/snowflake_task_runs_lineage.png" alt="Task runs in the side panel of a Snowflake task in the Data Observability Lineage map" style="width:100%;" >}}
 

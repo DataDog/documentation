@@ -5492,6 +5492,11 @@ menu:
       identifier: jobs_monitoring_azure_data_factory
       parent: data_jobs
       weight: 660000
+    - name: Snowflake Task Monitoring
+      url: data_observability/jobs_monitoring/snowflake
+      identifier: jobs_monitoring_snowflake
+      parent: data_jobs
+      weight: 670000
     - name: Custom Jobs (OpenLineage)
       url: data_observability/jobs_monitoring/openlineage
       identifier: openlineage_integrations
