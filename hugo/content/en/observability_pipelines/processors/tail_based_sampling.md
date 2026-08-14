@@ -11,7 +11,7 @@ products:
 
 ## Overview
 
-The Tail-based Sampling processor determines whether the Worker keeps a completed trace based on sampling policies that you define. Because the decision is made after a trace finishes, this processor can sample based on the full context of a trace, such as its status code, latency, or associated events.
+The Tail-based Sampling processor determines whether the Worker keeps a completed trace based on sampling policies that you define. This processor can sample based on the full context of a trace, such as its status code, latency, or associated events.
 
 ## Setup
 
