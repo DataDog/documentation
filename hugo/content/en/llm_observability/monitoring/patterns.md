@@ -51,7 +51,7 @@ Each topic shows its interaction volume and share of total traffic. Interactions
 1. Click **+ New Pattern**.
 1. Enter a **Name**.
 1. Click **Select a model**. The Model configuration window opens, where you can add details that Agent Observability uses to generate topic names, summaries, topic hierarchy, and to attribute each interaction to a topic:
-   - **LLM Provider**: Supported providers are OpenAI, Amazon Bedrock, Azure OpenAI, and Vertex AI.
+   - **LLM Provider**: Supported providers are OpenAI, Anthropic, Amazon Bedrock, Azure OpenAI, and Vertex AI.
    - **Account**
    - **Model**
 1. Click **Confirm** to save your changes and close the window.
