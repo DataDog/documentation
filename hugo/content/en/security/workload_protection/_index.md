@@ -76,7 +76,7 @@ Agent rules are organized in [policies][14], which you deploy with {{< tooltip g
 The Datadog Agent collects runtime activity from your workloads. The collection mechanism depends on the platform:
 
 - **Linux**: the eBPF Agent, which offers the broadest feature support.
-- **AWS Fargate**: the eBPF-less Agent. Fargate does not provide eBPF access, so this Agent uses ptrace instead. It covers the major Workload Protection features, including File Integrity Monitoring and process execution monitoring.
+- **AWS Fargate**: the cws-instrumentation tracer. Fargate does not provide eBPF access, so this Agent uses ptrace instead. It covers the major Workload Protection features, including File Integrity Monitoring and process execution monitoring.
 - **Windows**: a Windows driver.
 
 Across Linux and Windows, Workload Protection covers over 40 event types, spanning process, file system, kernel, and network activity. For the distributions, versions, and cloud environments each Agent supports, see [Setup][1].
