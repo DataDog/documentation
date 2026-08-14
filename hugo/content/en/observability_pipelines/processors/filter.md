@@ -24,7 +24,9 @@ products:
 
 ## Overview
 
-This processor sends all logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager." >}} that match the filter query to the next step in the pipeline. Events that do not match the filter query are dropped and are not sent to any subsequent processors or destinations. **Note**: For all other processor queries, events that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
+This processor sends all logs, metrics, or {{< tooltip text="traces" tooltip="Contact your account manager to request access." >}} that match the filter query to the next step in the pipeline. Events that do not match the filter query are dropped and are not sent to any subsequent processors or destinations. 
+
+**Note**: For all other processor queries, events that don't match the query are sent to the subsequent step in the pipeline. They are not dropped.
 
 ## Setup
 
