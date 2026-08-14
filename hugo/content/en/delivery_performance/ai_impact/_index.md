@@ -33,13 +33,13 @@ AI Impact measures how AI coding assistants affect your software delivery perfor
 
 ### Supported tools
 
-| Tool | Direct Attribution | Inferred from User Activity |
+| Tool | Direct attribution | Inferred from user activity |
 |------|-------------------|----------------------------|
-| [Cursor](/integrations/cursor/?tab=cursorintegrationindatadog#overview) | ✔ | ✔ |
-| [Claude Code Platform (API)](/integrations/anthropic-usage-and-costs/) | | ✔ |
-| [Claude Code Enterprise](https://app.datadoghq.com/integrations?search=claude&integrationId=claude-enterprise-user-analytics) | | ✔ |
-| [GitHub Copilot](/integrations/github-copilot/) | | ✔ |
-| [Codex](/integrations/openai-codex/) | | ✔ |
+| [Cursor][2] | {{< X >}} | {{< X >}} |
+| [Claude Code Platform (API)][3] | | {{< X >}} |
+| [Claude Code Enterprise][6] | | {{< X >}} |
+| [GitHub Copilot][4] | | {{< X >}} |
+| [Codex][5] | | {{< X >}} |
 
 ### AI attribution
 
@@ -49,20 +49,13 @@ Two attribution modes are available, depending on the signal your tools provide.
 
 | | Direct attribution | Inferred from user activity |
 |---|---|---|
-| A commit is AI-assisted when | The tool reports AI contribution to that specific commit, for example Cursor integration reporting AI-generated lines | The commit author created lines of code with the AI tool on the day the commit was created |
+| A commit is AI-assisted when | The tool reports AI contribution to that specific commit, for example, Cursor integration reporting AI-generated lines | The commit author created lines of code with the AI tool on the day the commit was created |
 | Evidence is tied to | The commit | The author and the calendar day |
 | What the metrics tell you | How AI-assisted code performs compared to code written without AI, and how users of one tool compare to users of another | How developers working with AI perform against those working without it, and how users of one tool compare to users of another |
 
 Direct attribution is the more precise of the two, because the signal is attached to the change itself. The inferred from user activity mode covers tools that report usage without per-commit detail, and classifies every commit an active author made that day as AI-assisted. A user is active only on days the tool reports lines of code created by that user.
 
 By default, Datadog selects the most precise attribution mode that all integrated tools have in common, so that metrics are comparable across tools on an equal basis. For example, if you're using only Cursor, metrics use direct attribution because that's the most precise method available. If you're using both Cursor and Claude Code, metrics are inferred from user activity because direct attribution is not available for Claude Code.
-
-[1]: /delivery_performance/dora_metrics/setup/
-[2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
-[3]: /integrations/anthropic-usage-and-costs/
-[4]: /integrations/github-copilot/
-[5]: /integrations/openai-codex/
-[6]: https://app.datadoghq.com/integrations?search=claude&integrationId=claude-enterprise-user-analytics
 
 ## Impact metrics
 
@@ -81,3 +74,10 @@ By default, Datadog selects the most precise attribution mode that all integrate
 ## Further Reading
 
 {{< partial name="whats-next/whats-next.html" >}}
+
+[1]: /delivery_performance/dora_metrics/setup/
+[2]: /integrations/cursor/?tab=cursorintegrationindatadog#overview
+[3]: /integrations/anthropic-usage-and-costs/
+[4]: /integrations/github-copilot/
+[5]: /integrations/openai-codex/
+[6]: https://app.datadoghq.com/integrations?search=claude&integrationId=claude-enterprise-user-analytics
