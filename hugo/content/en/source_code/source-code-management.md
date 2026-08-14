@@ -90,9 +90,10 @@ Install Datadog's Azure DevOps Source Code integration using the [integration ti
 Repositories from Bitbucket workspaces are supported for Bitbucket Cloud (SaaS). Bitbucket Server and Bitbucket Data Center (On-Prem) are <strong>not</strong> supported.
 </div>
 
-Install Datadog's Bitbucket Cloud Source Code integration using the [integration tile][101] or while onboarding other Datadog products to connect to your Bitbucket Cloud repositories.
+Install Datadog's [Bitbucket Cloud Source Code integration][102] using the [integration tile][101] or while onboarding other Datadog products to connect to your Bitbucket Cloud repositories.
 
 [101]: https://app.datadoghq.com/integrations/bitbucket-source-code/
+[102]: /integrations/bitbucket/
 
 {{% /tab %}}
 {{% tab "Other SCM Providers" %}}
