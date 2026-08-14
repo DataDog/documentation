@@ -34,8 +34,4 @@ To set up the tail-based sampling processor:
 1. (Optional) Repeat these steps to add more policy groups.
 1. Click **Save**.
 
-## Further reading
-
-{{< partial name="whats-next/whats-next.html" >}}
-
 [1]: /tracing/trace_explorer/query_syntax/
