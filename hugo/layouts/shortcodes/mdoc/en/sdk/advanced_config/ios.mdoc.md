@@ -379,7 +379,7 @@ You can use the following properties in `RUM.Configuration` when enabling RUM:
 : Enables tracking `UIViewControllers` as RUM views. You can use default implementation of `predicate` by setting the `DefaultUIKitRUMViewsPredicate` or implement [your own `UIKitRUMViewsPredicate`](#automatically-track-views) customized for your app.
 
 `urlSessionTracking`
-: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached.
+: Enables tracking `URLSession` tasks (network requests) as RUM resources. The `firstPartyHostsTracing` parameter defines hosts that are categorized as `first-party` resources (if RUM is enabled) and have tracing information injected (if tracing feature is enabled). The `resourceAttributesProvider` parameter defines a closure to provide custom attributes for intercepted resources that is called for each resource collected by the RUM iOS SDK. This closure is called with task information and may return custom resource attributes or `nil` if no attributes should be attached. The `disallowList` parameter defines [URL patterns to exclude from tracking](#exclude-specific-urls-from-tracking).
 
 `viewEventMapper`
 : The data scrubbing callback for views. This can be used to modify view events before they are sent to Datadog. For more information, see [Modify or drop RUM events](#modify-or-drop-rum-events).
@@ -843,6 +843,40 @@ URLSessionInstrumentation.disable(delegateClass: <YourSessionDelegate>.self)
 
 {% /tab %}
 {% /tabs %}
+
+#### Exclude specific URLs from tracking
+
+When [tracking network requests automatically](#automatically-track-network-requests), you can exclude specific URLs from RUM Resource tracking by setting `disallowList` on `RUM.Configuration.URLSessionTracking`. This is useful for excluding noisy or low-value endpoints, such as health checks or polling requests.
+
+Patterns are plain strings matched against the full request URL. A pattern without `*` must match the URL exactly. A pattern can contain one or more `*` wildcards, each matching any sequence of characters:
+
+{% tabs %}
+{% tab label="Swift" %}
+
+```swift
+RUM.enable(
+  with: RUM.Configuration(
+    applicationID: "<rum application id>",
+    urlSessionTracking: RUM.Configuration.URLSessionTracking(
+        disallowList: ["https://api.example.com/health", "https://example.com/api/*/status"]
+    )
+  )
+)
+```
+
+{% /tab %}
+{% tab label="Objective-C" %}
+
+```objective-c
+DDRUMURLSessionTracking *urlSessionTracking = [DDRUMURLSessionTracking new];
+[urlSessionTracking setDisallowList:@[@"https://api.example.com/health", @"https://example.com/api/*/status"]];
+[configuration setURLSessionTracking:urlSessionTracking];
+```
+
+{% /tab %}
+{% /tabs %}
+
+**Note**: A URL matching `disallowList` produces no RUM Resource, and no APM span reconstructed from a RUM Resource. The disallow list takes priority over `firstPartyHostsTracing`.
 
 #### Apollo instrumentation
 
