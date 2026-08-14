@@ -252,7 +252,7 @@ If a key:value pair contains any commas, surround it with quotes. For example, t
 
 ### Set a pipeline name
 
-By default, Datadog uses your GitLab project's path as the pipeline name. This is particularly unhelpful for downstream (child) pipelines triggered with the [`trigger`][33] keyword, since every downstream pipeline from the same project shows up under the same name.
+By default, Datadog uses your GitLab project's path as the pipeline name. This is particularly unhelpful for downstream (child) pipelines triggered with the [`trigger`][33] keyword, since every downstream pipeline from the same project appears under the same name.
 
 To give a pipeline a more meaningful name, use GitLab's [`workflow:name`][34] keyword in your `.gitlab-ci.yml`. For example, to name a downstream pipeline after the job that triggered it:
 
@@ -265,13 +265,15 @@ trigger-job:
     CHILD_PIPELINE_NAME: $CI_JOB_NAME
 ```
 
+In the child pipeline's `.gitlab-ci.yml` (or a file it includes), use the forwarded variable to set the pipeline name:
+
 ```yaml
 # In path/to/child-pipeline.yml, or a file it includes
 workflow:
   name: '$CHILD_PIPELINE_NAME'
 ```
 
-**Note**: `workflow:name` requires GitLab 15.11 or later, and variable expansion in the name requires GitLab 16.3 or later. This name is only visible in Datadog starting with GitLab 16.1, when it was added to the pipeline webhook payload.
+**Note**: The example above uses variable expansion in the pipeline name, which requires GitLab 16.3 or later. `workflow:name` itself is available starting with GitLab 15.11 for plain string names. The pipeline name is only visible in Datadog starting with GitLab 16.1, when it was added to the pipeline webhook payload.
 
 ### Set custom tags
 
