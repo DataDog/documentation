@@ -186,6 +186,6 @@ To resolve any issues encountered while setting up Metric Streams or the associa
 [5]: https://app.datadoghq.com/integrations/amazon-web-services
 [6]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-metric-streams-troubleshoot.html
 [7]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html
-[8]: /metrics/explorer/
+[8]: https://app.datadoghq.com/metric/explorer
 [9]: /monitors/types/metric/
 [10]: /monitors/guide/set-up-an-alert-for-when-a-specific-tag-stops-reporting/
