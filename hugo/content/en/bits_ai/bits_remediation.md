@@ -1,9 +1,12 @@
 ---
-title: Take Action
+title: Bits Remediation
+description: "Learn how Bits provides actionable remediation next steps for root cause investigations."
 aliases:
 - /bits_ai/bits_ai_sre/remediate_issues/
 - /bits_ai/bits_investigation/remediate_issues/
 - /bits_ai/bits_ai_sre/take_action/
+- /bits_ai/bits_investigation/take_action/
+site_support_id: bits_remediation
 ---
 
 ## Suggested code fixes from Bits Code

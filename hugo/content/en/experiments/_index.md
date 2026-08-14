@@ -34,6 +34,7 @@ To get started, select a link from the table below. Otherwise, read on to learn 
 | [Create a warehouse-native metric][14] | Define Metric SQL Models and experiment metrics from warehouse data |
 | [Create a metric from Product Analytics or Real User Monitoring data][15] | Build experiment metrics from client-side RUM and Product Analytics events |
 | [Launch an experiment using Datadog Feature Flags][16] | Plan your hypothesis, configure randomization with Feature Flags, and start your experiment |
+| [Standardize experiments with protocols][21] | Define reusable defaults for metrics, randomization, duration, and statistical analysis |
 | [Analyze an experiment that's already been randomized][17] | Define exposure data in your warehouse when randomization runs outside Datadog Feature Flags |
 | [Understand experiment diagnostics][20] | Interpret automated checks for exposures, metrics, randomization, and analysis health |
 
@@ -98,3 +99,4 @@ Datadog applies statistical analysis to compare variants and estimate lift. When
 [18]: /experiments/concepts/subject_types/
 [19]: /experiments/statistics/global_lift
 [20]: /experiments/diagnostics/
+[21]: /experiments/protocols/

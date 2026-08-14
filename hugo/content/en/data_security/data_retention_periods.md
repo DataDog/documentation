@@ -78,9 +78,10 @@ attributes:
        - **YAML definitions**: 7 days
   - product: Continuous Profiler
     data_type: |
-       - **Individual profiles (not opened in the UI)**: 8 days
-       - **Individual profiles (opened in the UI at least once)**: 1 year
-       - **Profile metrics**: 90 days
+       - **Flame graphs, call graphs, and thread timelines**: 8 days
+       - **Flame graphs exported to a notebook**: 1 year
+       - **Individual profiles opened in the UI at least once**: 1 year
+       - **Profile metrics**: 30 days
   - product: Continuous Testing
     data_type: |
        - **Batch results**: 2 months
