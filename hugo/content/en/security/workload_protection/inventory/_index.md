@@ -1,5 +1,6 @@
 ---
 title: Coverage
+description: Assess Workload Protection coverage across hosts, ECS Fargate, and EKS Fargate workloads, including Agent, policy, and rule deployment status.
 disable_toc: false
 aliases:
   - /security/workload_protection/inventory/coverage_map
@@ -17,6 +18,8 @@ further_reading:
 Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and act on unprotected or misconfigured workloads.
 
 Coverage reflects whether the policies and Agent rules on each resource loaded successfully. For how policies reach your Agents, see [Enable and deploy policies][5].
+
+To identify and address coverage gaps, see [Review and Improve Coverage][6].
 
 {{< img src="security/workload_protection/coverage/coverage_map.png" alt="Use the Coverage page to get real-time visibility into Workload Protection status across all your resources and see which policies are applied" width="100%">}}
 
@@ -77,10 +80,6 @@ When a rule is filtered or in error, a **verdict** explains why:
 To understand why a rule is failing, select the resource to open its side panel. The side panel lists the resource's policies and rules. For each rule, it shows the expression, the status and verdict, and the error message reported by the Agent.
 
 {{< img src="security/workload_protection/coverage/coverage_side_panel.png" alt="Resource side panel showing policy and rule statuses with verdicts" width="100%">}}
-
-## Review and improve coverage
-
-For steps to identify and address coverage gaps, see [Review and Improve Coverage][6].
 
 ## Further reading
 

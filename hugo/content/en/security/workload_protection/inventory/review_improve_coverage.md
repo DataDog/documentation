@@ -1,5 +1,6 @@
 ---
 title: Review and Improve Coverage
+description: Identify and address Workload Protection coverage gaps, troubleshoot Agent and rule deployment issues, and review detection coverage across your environment.
 disable_toc: false
 ---
 
