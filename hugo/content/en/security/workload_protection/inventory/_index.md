@@ -17,7 +17,7 @@ further_reading:
     text: "Review your Workload Protection coverage with the Coverage map"
 ---
 
-Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, and act on unprotected or misconfigured workloads.
+Workload Protection [Coverage][1] provides a real-time view of security coverage across your hosts, ECS Fargate, and EKS Fargate workloads. Use Coverage to assess protection posture, identify gaps, act on unprotected or misconfigured workloads, and maintain compliance and policy alignment.
 
 Coverage reflects whether the policies and agent rules on each resource loaded successfully. For how policies reach your Agents, see [Enable and deploy policies][5].
 
@@ -40,21 +40,6 @@ In both views, you can:
 - Refresh the view on demand.
 
 A resource appears in Coverage as soon as its agent loads its ruleset. When a resource goes offline, it is removed from Coverage within 15 minutes.
-
-## Key functionality
-
-* **Real-time visibility**: Resources appear as soon as their agent loads a ruleset, and are removed within 15 minutes of going offline.
-* **Granular filtering**: Search and filter by agent, rule, policy, infrastructure, and container facets.
-* **Detailed inspection**: Navigate from a high-level map or table to a detailed resource, policy, or rule view.
-* **Actionable findings**: Highlight resources in a warning or error state so you can respond promptly.
-* **Coverage analytics**: Track rule deployment health, outdated agents, and incomplete data.
-
-## Key benefits
-
-* Reduce blind spots by monitoring for unprotected workloads.
-* Shorten detection and response times with direct response workflows.
-* Maintain continuous compliance and policy alignment.
-* Integrate posture checks into CI/CD and infrastructure reviews.
 
 ## Coverage statuses
 

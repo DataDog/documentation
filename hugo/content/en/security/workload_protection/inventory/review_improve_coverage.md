@@ -24,7 +24,7 @@ To find and fix resources with rule errors:
 
 ## Review agent deployment coverage
 
-The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use the widget's buttons to investigate:
+The widget at the top of the Coverage page shows the percentage of your resources secured with Workload Protection, along with any findings. Use it to track rule deployment health, outdated agents, and incomplete data, and use its buttons to investigate:
 
 {{< img src="security/workload_protection/coverage/coverage_top_widgets.png" alt="Coverage page top widgets showing resource coverage, rule loading status, Workload Protection adoption, and Remote Config deployment" width="100%">}}
 
