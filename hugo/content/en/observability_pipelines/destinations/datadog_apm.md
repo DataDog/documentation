@@ -41,7 +41,7 @@ There are no secret identifiers for this destination.
 
 ## AWS PrivateLink
 
-To send traces from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][8] for setup instructions. The two endpoints you need to set up are:
+To send traces from Observability Pipelines to Datadog using AWS PrivateLink, see [Connect to Datadog over AWS PrivateLink][7] for setup instructions. The two endpoints you need to set up are:
 
 - Traces: {{< region-param key=traces_endpoint_private_link code="true" >}}
 - Remote Configuration: {{< region-param key=remote_config_endpoint_private_link code="true" >}}
@@ -50,7 +50,7 @@ To send traces from Observability Pipelines to Datadog using AWS PrivateLink, se
 
 ## Health metrics
 
-For [component metrics][5] and [destination buffer metrics][6] emitted by all destinations, see the [Pipelines Usage Metrics][7] documentation.
+See [Component metrics][5] and [Destination buffer metrics][6] for more information on metrics emitted by all destinations.
 
 [1]: /observability_pipelines/configuration/set_up_pipelines/
 [2]: https://app.datadoghq.com/observability-pipelines
@@ -58,5 +58,4 @@ For [component metrics][5] and [destination buffer metrics][6] emitted by all de
 [4]: https://registry.terraform.io/providers/datadog/datadog/latest/docs/resources/observability_pipeline
 [5]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/#component-metrics
 [6]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/?tab=destinations#component-metrics
-[7]: /observability_pipelines/monitoring_and_troubleshooting/pipeline_usage_metrics/
-[8]: /agent/guide/private-link/?tab=crossregionprivatelinkendpoints
+[7]: /agent/guide/private-link/?tab=crossregionprivatelinkendpoints
