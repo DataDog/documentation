@@ -91,11 +91,11 @@ These are the available destinations:
 {{% /tab %}}
 {{% tab "Traces" %}}
 
-- [Datadog APM][25]
-- [OpenTelemetry Traces][26]
+- [Datadog APM][1]
+- [OpenTelemetry Traces][2]
 
-[25]: /observability_pipelines/destinations/datadog_apm/
-[26]: /observability_pipelines/destinations/opentelemetry/traces
+[1]: /observability_pipelines/destinations/datadog_apm/
+[2]: /observability_pipelines/destinations/opentelemetry/traces
 
 {{% /tab %}}
 {{< /tabs >}}
