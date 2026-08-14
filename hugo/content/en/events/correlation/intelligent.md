@@ -10,7 +10,7 @@ further_reading:
 
 ## Overview
 
-Intelligent Correlation automatically aggregates Monitor alerts into cases based on related infrastructure dependencies, underlying telemetry, and other heuristics.
+Intelligent Correlation automatically aggregates Monitor alerts into cases based on related infrastructure dependencies, underlying telemetry, and other heuristics. Intelligent Correlation relies on relationships identified within your infrastructure based on the underlying telemetry. It considers only alerts from monitors that notify a paging integration or are tagged high priority. If there isn't enough telemetry to establish these relationships, or if your monitors don't meet these criteria, you might not see any correlated cases.
 
 ## Enable Intelligent Correlation
 
@@ -18,7 +18,8 @@ Enabling the Intelligent Correlator applies to your entire Datadog organization.
 
 To get started:
 
-1. On the [{{< ui >}}Settings{{< /ui >}}][1] page, find {{< ui >}}Intelligent Correlation{{< /ui >}} under {{< ui >}}Projects{{< /ui >}}, then click [{{< ui >}}Edit{{< /ui >}}][2] on the {{< ui >}}Intelligent Correlator{{< /ui >}} card.
+1. On the [{{< ui >}}Settings{{< /ui >}}][1] page, under {{< ui >}}Projects{{< /ui >}}, click {{< ui >}}Intelligent Correlation{{< /ui >}}.
+1. On the {{< ui >}}Intelligent Correlator{{< /ui >}} card, click [{{< ui >}}Edit{{< /ui >}}][2].
 
    {{< img src="events/correlation/intelligent/intelligent_correlator_card.png" alt="Intelligent Correlation settings page showing the Intelligent Correlator card, currently off, with an Edit button" style="width:100%;" >}}
 
@@ -29,8 +30,6 @@ To get started:
    {{< img src="events/correlation/intelligent/intelligent_correlator_define.png" alt="Define Intelligent Correlator form with fields to include and exclude events by tag, and a Save and Enable button" style="width:100%;" >}}
 
 1. Click {{< ui >}}Save & Enable{{< /ui >}}.
-
-**Note**: Intelligent Correlation relies on relationships identified from your infrastructure and underlying telemetry. If there isn't enough telemetry to establish those relationships, you might not see correlated cases. By default, Intelligent Correlation only considers Monitor alerts that notify a paging integration. If your organization has no monitors configured to page, Intelligent Correlation automatically considers high-priority (P1 or P2) alerts instead.
 
 ## Receiving your first case
 
