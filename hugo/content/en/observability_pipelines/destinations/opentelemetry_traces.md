@@ -13,13 +13,13 @@ products:
 
 Use Observability Pipelines' {{< tooltip text="OpenTelemetry Traces destination" tooltip="Contact your account manager to request access." >}} to send traces to an OpenTelemetry (OTel) Collector.
 
-**Note**: You must use an OpenTelemetry source to use the OpenTelemetry Traces destination.
+<div class="alert alert-info">You must use an OpenTelemetry source to use the OpenTelemetry Traces destination.</div>
 
 ## Set up destination
 
 <div class="alert alert-danger">For Secrets Management: Only enter the identifier for the HTTP/S Client URI and, if applicable, the TLS key pass. Do <b>not</b> enter the actual values.</div>
 
-Configure the OpenTelemetry Traces destination when you [set up a pipeline][3]. You can set up a pipeline in the [UI][1], using the [API][4], or with [Terraform][5]. The steps in this section are configured in the UI.
+Configure the OpenTelemetry Traces destination when you [set up a pipeline][3]. This section covers how to do so in the [UI][1], but you can also set up a pipeline using the [API][4] or with [Terraform][5].
 
 After you select the OpenTelemetry Traces destination in the pipeline UI, enter the identifier for your HTTP/S Client URI Key. An example of the URI endpoint the identifier references: `http://localhost:4319/v1/traces`. If you leave the identifier field blank, the [default](#secret-defaults) is used.
 
