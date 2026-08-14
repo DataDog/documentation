@@ -107,9 +107,9 @@ Use `feedback_join_key` when feedback is not tied to a single span, trace, or se
 
 ## Analyze feedback
 
-To create a dashboard widget for feedback, create the widget as you would for an evaluation and add the filter `@event_kind:feedback`. To search and filter spans and traces by feedback in the Trace Explorer, see [Feedback queries][6].
+To create a dashboard widget for feedback, create the widget as you would for an evaluation and select the dedicated **Feedback** data source. To search and filter spans and traces by feedback in the Trace Explorer, see [Feedback queries][6].
 
-{{< img src="llm_observability/evaluations/feedback_widget_query.png" alt="The Datadog widget editor configured to count all evaluations filtered by @event_kind:feedback." style="width:100%;" >}}
+{{< img src="llm_observability/evaluations/feedback_widget_query.png" alt="The Datadog widget editor with the Feedback data source selected, showing a count of all feedback." style="width:100%;" >}}
 
 ## Further Reading
 
