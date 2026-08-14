@@ -3227,12 +3227,6 @@
     "request_description": "",
     "request_schema_description": "Update the IP allowlist."
   },
-  "DeleteLLMObsData": {
-    "description": "Submit a request to delete LLM Observability span data matching a trace ID filter within a specified time range.",
-    "summary": "Delete LLM Observability data",
-    "request_description": "Data deletion request payload.",
-    "request_schema_description": "Request to delete LLM Observability data."
-  },
   "GetLLMObsAnnotatedInteractionsByTraceIDs": {
     "description": "Returns annotated interactions across all annotation queues for the given content IDs.\nResults include queue metadata (ID and name) for each interaction.",
     "summary": "Get annotated interactions by content IDs"
