@@ -154,7 +154,7 @@ You can view the full list of available Slack commands at any time by typing `/d
 | ------- | ----------- |
 | `/datadog` | Open the command modal to view all available Datadog actions. |
 | `/datadog shortcuts` | Open the incident action tray to perform common actions. |
-| `/datadog incident update` | Update the incident status, severity, or other attribute of the incident. |
+| `/datadog incident update` | Update an attribute for the incident, such as status or severity. |
 | `/datadog incident notify` | Notify `@`-handles about the incident. |
 | `/datadog incident private` | Make the incident private (if private incidents are enabled). |
 | `/datadog incident public` | Make the incident public. |
