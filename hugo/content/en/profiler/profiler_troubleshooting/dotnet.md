@@ -291,4 +291,3 @@ If an application hangs, or otherwise becomes unresponsive on Linux, CPU and Wal
 [1]: /tracing/troubleshooting/#debugging-and-logging
 [2]: /help/
 [3]: /profiler/profile_types/?code-lang=dotnet
-[6]: /tracing/trace_collection/single-step-apm/linux/#define-instrumentation-rules
