@@ -8221,6 +8221,21 @@ menu:
       url: /security/code_security/iac_security/iac_rules/
       parent: code_security_iac_security
       weight: 100003
+    - name: IaC Custom Rules
+      identifier: code_security_iac_security_custom_rules
+      url: /security/code_security/iac_security/custom_rules/
+      parent: code_security_iac_security
+      weight: 100004
+    - name: IaC Custom Rule Tutorial
+      identifier: code_security_iac_security_custom_rules_tutorial
+      url: /security/code_security/iac_security/custom_rules/tutorial/
+      parent: code_security_iac_security
+      weight: 100005
+    - name: IaC Custom Rule Reference
+      identifier: code_security_iac_security_custom_rules_guide
+      url: /security/code_security/iac_security/custom_rules/guide/
+      parent: code_security_iac_security
+      weight: 100006
     - name: Developer Tool Integrations
       identifier: dev_tool_int
       url: /security/code_security/dev_tool_int/

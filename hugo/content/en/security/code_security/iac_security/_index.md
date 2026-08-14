@@ -12,6 +12,9 @@ further_reading:
   - link: "/security/code_security/iac_security/iac_rules/"
     tag: "Documentation"
     text: "IaC Security Rules"
+  - link: "/security/code_security/iac_security/custom_rules/"
+    tag: "Documentation"
+    text: "Create custom IaC rules"
   - link: "/pr_gates/"
     tag: "Documentation"
     text: "PR Gates"
@@ -100,6 +103,7 @@ Exclusions are managed through a configuration file or inline comments in your I
 1. [Set up IaC Security][1] in your environment.
 2. Configure [IaC Security][2] to reduce false positives or ignore expected results.
 3. Review and triage findings on the [Code Security Vulnerabilities][3] page.
+4. [Create custom rules][14] to enforce requirements specific to your organization.
 
 ## Further reading
 
@@ -118,3 +122,4 @@ Exclusions are managed through a configuration file or inline comments in your I
 [11]: /pr_gates/
 [12]: /pr_gates/setup
 [13]: /security/code_security/iac_security/iac_rules
+[14]: /security/code_security/iac_security/custom_rules
